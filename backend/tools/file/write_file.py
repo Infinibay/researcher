@@ -1,0 +1,112 @@
+"""Tool for writing file contents with audit trail."""
+
+import hashlib
+import os
+import sqlite3
+import tempfile
+from typing import Literal, Type
+
+from pydantic import BaseModel, Field
+
+from backend.config.settings import settings
+from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.db import execute_with_retry
+
+
+class WriteFileInput(BaseModel):
+    path: str = Field(..., description="Path to the file to write")
+    content: str = Field(..., description="Content to write to the file")
+    mode: Literal["w", "a"] = Field(
+        default="w", description="Write mode: 'w' to overwrite, 'a' to append"
+    )
+
+
+class WriteFileTool(PabadaBaseTool):
+    name: str = "write_file"
+    description: str = (
+        "Write content to a file. Creates parent directories if needed. "
+        "Use mode='w' to overwrite or mode='a' to append."
+    )
+    args_schema: Type[BaseModel] = WriteFileInput
+
+    def _run(self, path: str, content: str, mode: str = "w") -> str:
+        path = os.path.expanduser(path)
+        if not os.path.isabs(path):
+            path = os.path.abspath(path)
+
+        # Sandbox check (resolves symlinks, enforces directory boundaries)
+        sandbox_err = self._validate_sandbox_path(path)
+        if sandbox_err:
+            return self._error(sandbox_err)
+
+        # Check content size before writing
+        content_size = len(content.encode("utf-8"))
+        if content_size > settings.MAX_FILE_SIZE_BYTES:
+            return self._error(
+                f"Content too large: {content_size} bytes "
+                f"(max {settings.MAX_FILE_SIZE_BYTES} bytes)"
+            )
+
+        # Compute before-hash if file exists
+        before_hash = None
+        if os.path.exists(path):
+            try:
+                with open(path, "rb") as f:
+                    before_hash = hashlib.sha256(f.read()).hexdigest()[:16]
+            except Exception:
+                pass
+
+        # Create parent directories
+        parent = os.path.dirname(path)
+        if parent:
+            os.makedirs(parent, exist_ok=True)
+
+        # Atomic write: write to temp file then rename
+        try:
+            dir_name = os.path.dirname(path)
+            if mode == "w":
+                fd, tmp_path = tempfile.mkstemp(dir=dir_name, prefix=".pabada_")
+                try:
+                    with os.fdopen(fd, "w", encoding="utf-8") as f:
+                        f.write(content)
+                    os.replace(tmp_path, path)
+                except Exception:
+                    os.unlink(tmp_path)
+                    raise
+            else:
+                with open(path, "a", encoding="utf-8") as f:
+                    f.write(content)
+        except PermissionError:
+            return self._error(f"Permission denied: {path}")
+        except Exception as e:
+            return self._error(f"Error writing file: {e}")
+
+        # Compute after-hash
+        after_hash = hashlib.sha256(content.encode("utf-8")).hexdigest()[:16]
+        size_bytes = len(content.encode("utf-8"))
+
+        # Record in artifact_changes for audit
+        project_id = self.project_id
+        agent_run_id = self.agent_run_id
+        action = "modified" if before_hash else "created"
+
+        def _record_change(conn: sqlite3.Connection):
+            conn.execute(
+                """INSERT INTO artifact_changes
+                   (project_id, agent_run_id, file_path, action, before_hash, after_hash, size_bytes)
+                   VALUES (?, ?, ?, ?, ?, ?, ?)""",
+                (project_id, agent_run_id, path, action, before_hash, after_hash, size_bytes),
+            )
+            conn.commit()
+
+        try:
+            execute_with_retry(_record_change)
+        except Exception:
+            pass  # Don't fail the write if audit logging fails
+
+        self._log_tool_usage(f"Wrote {path} ({size_bytes} bytes, {action})")
+        return self._success({
+            "path": path,
+            "action": action,
+            "size_bytes": size_bytes,
+        })

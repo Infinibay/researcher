@@ -1,0 +1,47 @@
+# Containerfile.sandbox — lightweight image for agent command execution
+# Build:  podman build -t pabada-sandbox:latest -f Containerfile.sandbox .
+#         docker build -t pabada-sandbox:latest -f Containerfile.sandbox .
+
+FROM python:3.13-slim
+
+# ── System packages ──────────────────────────────────────────────────────
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        git curl wget tar unzip make ca-certificates \
+        texlive-latex-base texlive-latex-extra latexmk \
+    && rm -rf /var/lib/apt/lists/*
+
+# ── Node.js (LTS via fnm) ───────────────────────────────────────────────
+ENV FNM_DIR="/opt/fnm"
+ENV PATH="$FNM_DIR:$PATH"
+RUN curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir "$FNM_DIR" --skip-shell \
+    && eval "$(fnm env)" \
+    && fnm install --lts \
+    && fnm default lts-latest \
+    && ln -s "$(fnm exec --using=default which node)" /usr/local/bin/node \
+    && ln -s "$(fnm exec --using=default which npm)" /usr/local/bin/npm \
+    && ln -s "$(fnm exec --using=default which npx)" /usr/local/bin/npx \
+    && node --version && npm --version
+
+# ── Rust (via rustup, minimal profile) ───────────────────────────────────
+ENV RUSTUP_HOME="/opt/rust/rustup" \
+    CARGO_HOME="/opt/rust/cargo" \
+    PATH="/opt/rust/cargo/bin:$PATH"
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \
+    | sh -s -- -y --profile minimal --default-toolchain stable \
+    && rustc --version && cargo --version \
+    && chmod -R a+rX /opt/rust
+
+# ── Python packages for agent tasks ─────────────────────────────────────
+RUN pip install --no-cache-dir \
+        numpy pandas pytest ruff mypy \
+        fpdf2 openpyxl requests beautifulsoup4
+
+# ── Non-root user matching the UID used by SandboxExecutor ───────────────
+RUN groupadd -g 1000 agent && \
+    useradd -u 1000 -g agent -m agent
+
+WORKDIR /workspace
+
+USER agent
+
+# No CMD — the command is provided at runtime by SandboxExecutor

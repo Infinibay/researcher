@@ -1,0 +1,144 @@
+"""FastAPI application factory for the PABADA API."""
+
+from __future__ import annotations
+
+import logging
+import os
+import time
+from pathlib import Path
+
+from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
+
+from backend.api import config as api_config
+from backend.api.exceptions import register_exception_handlers
+from backend.api.websocket import manager
+from backend.config.settings import settings
+
+
+def _setup_llm_env() -> None:
+    """Ensure CrewAI env vars are set before any agent is created.
+
+    This runs at module-import time so that uvicorn reload picks it up too.
+    """
+    if settings.LLM_MODEL:
+        os.environ.setdefault("OPENAI_MODEL_NAME", settings.LLM_MODEL)
+        os.environ.setdefault("MODEL", settings.LLM_MODEL)
+    if settings.LLM_BASE_URL:
+        os.environ.setdefault("OPENAI_API_BASE", settings.LLM_BASE_URL)
+    if settings.LLM_API_KEY:
+        os.environ.setdefault("OPENAI_API_KEY", settings.LLM_API_KEY)
+
+
+_setup_llm_env()
+
+logger = logging.getLogger(__name__)
+
+
+def create_app() -> FastAPI:
+    """Create and configure the FastAPI application."""
+    app = FastAPI(
+        title="PABADA API",
+        description="REST API for the PABADA project management system",
+        version="1.0.0",
+        docs_url="/docs",
+        redoc_url="/redoc",
+    )
+
+    # CORS
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=api_config.CORS_ORIGINS,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+    # Request timing middleware
+    @app.middleware("http")
+    async def timing_middleware(request: Request, call_next):
+        start = time.perf_counter()
+        response = await call_next(request)
+        elapsed = time.perf_counter() - start
+        response.headers["X-Process-Time"] = f"{elapsed:.4f}"
+        if elapsed > 1.0:
+            logger.warning("Slow request: %s %s took %.2fs",
+                           request.method, request.url.path, elapsed)
+        return response
+
+    # Exception handlers
+    register_exception_handlers(app)
+
+    # Register routers
+    from backend.api.routes.health import router as health_router
+    from backend.api.routes.projects import router as projects_router
+    from backend.api.routes.epics import router as epics_router
+    from backend.api.routes.milestones import router as milestones_router
+    from backend.api.routes.tasks import router as tasks_router
+    from backend.api.routes.wiki import router as wiki_router
+    from backend.api.routes.chat import router as chat_router
+    from backend.api.routes.files import router as files_router
+    from backend.api.routes.git import router as git_router
+    from backend.api.routes.agents import router as agents_router
+    from backend.api.routes.user_requests import router as user_requests_router
+
+    app.include_router(health_router)
+    app.include_router(projects_router)
+    app.include_router(epics_router)
+    app.include_router(milestones_router)
+    app.include_router(tasks_router)
+    app.include_router(wiki_router)
+    app.include_router(chat_router)
+    app.include_router(files_router)
+    app.include_router(git_router)
+    app.include_router(agents_router)
+    app.include_router(user_requests_router)
+
+    # Start periodic cleanup of stale sandbox containers
+    from backend.security.cleanup import cleanup_manager
+    cleanup_manager.schedule_periodic_cleanup(settings.CLEANUP_INTERVAL_SECONDS)
+
+    # Start periodic cleanup of merged git branches
+    from backend.git import cleanup_service
+    cleanup_service.schedule_periodic_cleanup(settings.CLEANUP_INTERVAL_SECONDS)
+
+    # WebSocket endpoint
+    @app.websocket("/ws")
+    async def websocket_endpoint(websocket: WebSocket, project_id: int):
+        await manager.connect(websocket, project_id)
+        try:
+            while True:
+                # Keep connection alive; listen for client messages
+                data = await websocket.receive_text()
+                # Client can send ping/pong or commands
+                if data == "ping":
+                    await manager.send_personal_message({"type": "pong"}, websocket)
+        except WebSocketDisconnect:
+            manager.disconnect(websocket, project_id)
+
+    # Serve static frontend files if they exist
+    static_dir = Path(api_config.STATIC_DIR)
+    if static_dir.exists() and static_dir.is_dir():
+        # Serve static assets
+        assets_dir = static_dir / "assets"
+        if assets_dir.exists():
+            app.mount("/assets", StaticFiles(directory=str(assets_dir)), name="assets")
+
+        # Catch-all for client-side routing
+        @app.get("/{full_path:path}", include_in_schema=False)
+        async def serve_spa(full_path: str):
+            # Don't serve SPA for API routes
+            if full_path.startswith("api/") or full_path.startswith("docs") or full_path.startswith("redoc"):
+                return JSONResponse(status_code=404, content={"error": "Not found"})
+            index = static_dir / "index.html"
+            if index.exists():
+                return FileResponse(str(index))
+            return JSONResponse(status_code=404, content={"error": "Frontend not built"})
+
+    return app
+
+
+# Module-level instance required by uvicorn when using import string with reload=True
+app = create_app()

@@ -1,0 +1,98 @@
+"""Tool for reading file contents with optional line-range selection."""
+
+import os
+from typing import Type
+
+from pydantic import BaseModel, Field
+
+from backend.config.settings import settings
+from backend.tools.base.base_tool import PabadaBaseTool
+
+
+class ReadFileInput(BaseModel):
+    path: str = Field(..., description="Path to the file to read")
+    offset: int | None = Field(
+        default=None,
+        description=(
+            "Line number to start reading from (1-based). "
+            "If omitted, reads from the beginning of the file."
+        ),
+    )
+    limit: int | None = Field(
+        default=None,
+        description=(
+            "Maximum number of lines to read. "
+            "If omitted, reads until the end of the file."
+        ),
+    )
+
+
+class ReadFileTool(PabadaBaseTool):
+    name: str = "read_file"
+    description: str = (
+        "Read the contents of a file. Returns the file content as numbered "
+        "lines. Use `offset` and `limit` to read a specific range of lines "
+        "instead of the entire file — this is strongly recommended for large "
+        "files. Combine with code_search to find the relevant line numbers "
+        "first, then read only the region you need."
+    )
+    args_schema: Type[BaseModel] = ReadFileInput
+
+    def _run(
+        self,
+        path: str,
+        offset: int | None = None,
+        limit: int | None = None,
+    ) -> str:
+        path = os.path.expanduser(path)
+        if not os.path.isabs(path):
+            path = os.path.abspath(path)
+
+        # Sandbox check (resolves symlinks, enforces directory boundaries)
+        sandbox_err = self._validate_sandbox_path(path)
+        if sandbox_err:
+            return self._error(sandbox_err)
+
+        if not os.path.exists(path):
+            return self._error(f"File not found: {path}")
+        if not os.path.isfile(path):
+            return self._error(f"Not a file: {path}")
+
+        file_size = os.path.getsize(path)
+        if file_size > settings.MAX_FILE_SIZE_BYTES:
+            return self._error(
+                f"File too large: {file_size} bytes "
+                f"(max {settings.MAX_FILE_SIZE_BYTES} bytes)"
+            )
+
+        try:
+            with open(path, "r", encoding="utf-8", errors="replace") as f:
+                all_lines = f.readlines()
+        except PermissionError:
+            return self._error(f"Permission denied: {path}")
+        except Exception as e:
+            return self._error(f"Error reading file: {e}")
+
+        total_lines = len(all_lines)
+
+        # Apply offset/limit for partial reads
+        if offset is not None or limit is not None:
+            start = max((offset or 1) - 1, 0)  # convert 1-based to 0-based
+            end = start + limit if limit is not None else total_lines
+            selected = all_lines[start:end]
+            # Format with line numbers for easy reference
+            numbered = []
+            for i, line in enumerate(selected, start=start + 1):
+                numbered.append(f"{i:>6}\t{line.rstrip()}")
+            content = "\n".join(numbered)
+            desc = f"lines {start + 1}-{min(end, total_lines)} of {total_lines}"
+        else:
+            # Full read — still add line numbers for consistency
+            numbered = []
+            for i, line in enumerate(all_lines, start=1):
+                numbered.append(f"{i:>6}\t{line.rstrip()}")
+            content = "\n".join(numbered)
+            desc = f"{total_lines} lines"
+
+        self._log_tool_usage(f"Read {path} ({desc})")
+        return content
