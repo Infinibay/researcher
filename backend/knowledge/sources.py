@@ -107,17 +107,24 @@ class FindingsKnowledgeSource(BaseKnowledgeSource):
             })
         return content_chunks
 
+    def validate_content(self) -> list[dict[str, str]]:
+        """Load and return findings content."""
+        return self.load_content()
+
     def add(self) -> None:
         """Chunk and save findings content to the vector store."""
         content_chunks = self.load_content()
         if not content_chunks:
             return
+        self.chunks = []
         for chunk in content_chunks:
-            for text_chunk in _chunk_text(chunk["content"]):
-                self.save_documents(
-                    documents=[text_chunk],
-                    metadata=chunk["metadata"],
-                )
+            self.chunks.extend(_chunk_text(chunk["content"]))
+        if self.chunks and self.storage:
+            self._save_documents()
+
+    async def aadd(self) -> None:
+        """Async version — delegates to synchronous add."""
+        self.add()
 
 
 class WikiKnowledgeSource(BaseKnowledgeSource):
@@ -158,17 +165,24 @@ class WikiKnowledgeSource(BaseKnowledgeSource):
             })
         return content_chunks
 
+    def validate_content(self) -> list[dict[str, str]]:
+        """Load and return wiki content."""
+        return self.load_content()
+
     def add(self) -> None:
         """Chunk and save wiki content to the vector store."""
         content_chunks = self.load_content()
         if not content_chunks:
             return
+        self.chunks = []
         for chunk in content_chunks:
-            for text_chunk in _chunk_text(chunk["content"]):
-                self.save_documents(
-                    documents=[text_chunk],
-                    metadata=chunk["metadata"],
-                )
+            self.chunks.extend(_chunk_text(chunk["content"]))
+        if self.chunks and self.storage:
+            self._save_documents()
+
+    async def aadd(self) -> None:
+        """Async version — delegates to synchronous add."""
+        self.add()
 
 
 class ReferenceFilesKnowledgeSource(BaseKnowledgeSource):
@@ -238,17 +252,24 @@ class ReferenceFilesKnowledgeSource(BaseKnowledgeSource):
             })
         return content_chunks
 
+    def validate_content(self) -> list[dict[str, str]]:
+        """Load and return reference file content."""
+        return self.load_content()
+
     def add(self) -> None:
         """Chunk and save reference file content to the vector store."""
         content_chunks = self.load_content()
         if not content_chunks:
             return
+        self.chunks = []
         for chunk in content_chunks:
-            for text_chunk in _chunk_text(chunk["content"]):
-                self.save_documents(
-                    documents=[text_chunk],
-                    metadata=chunk["metadata"],
-                )
+            self.chunks.extend(_chunk_text(chunk["content"]))
+        if self.chunks and self.storage:
+            self._save_documents()
+
+    async def aadd(self) -> None:
+        """Async version — delegates to synchronous add."""
+        self.add()
 
 
 class ReportsKnowledgeSource(BaseKnowledgeSource):
@@ -300,14 +321,21 @@ class ReportsKnowledgeSource(BaseKnowledgeSource):
             })
         return content_chunks
 
+    def validate_content(self) -> list[dict[str, str]]:
+        """Load and return report content."""
+        return self.load_content()
+
     def add(self) -> None:
         """Chunk and save report content to the vector store."""
         content_chunks = self.load_content()
         if not content_chunks:
             return
+        self.chunks = []
         for chunk in content_chunks:
-            for text_chunk in _chunk_text(chunk["content"]):
-                self.save_documents(
-                    documents=[text_chunk],
-                    metadata=chunk["metadata"],
-                )
+            self.chunks.extend(_chunk_text(chunk["content"]))
+        if self.chunks and self.storage:
+            self._save_documents()
+
+    async def aadd(self) -> None:
+        """Async version — delegates to synchronous add."""
+        self.add()

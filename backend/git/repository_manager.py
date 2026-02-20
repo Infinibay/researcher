@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import os
 import sqlite3
 import subprocess
 from typing import Any
@@ -52,6 +53,8 @@ class RepositoryManager:
                 logger.info("Created Forgejo repo for '%s': %s", name, clone_url)
             except Exception:
                 logger.warning("Failed to create Forgejo repo for '%s'; continuing without remote", name, exc_info=True)
+
+        os.makedirs(local_path, exist_ok=True)
 
         subprocess.run(
             ["git", "init", "-b", default_branch, local_path],
