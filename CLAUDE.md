@@ -36,9 +36,10 @@ npm run build    # tsc + vite build
 
 ### Tests
 ```bash
-uv run pytest                         # all tests
-uv run pytest backend/tests/test_foo.py  # single file
-uv run pytest -k "test_name"          # single test by name
+source .venv/bin/activate
+python -m pytest                              # all tests
+python -m pytest backend/tests/test_foo.py    # single file
+python -m pytest -k "test_name"               # single test by name
 ```
 - `asyncio_mode = "auto"` — async tests need no decorator
 - Tests use isolated in-memory SQLite via autouse fixture (monkeypatches `PABADA_DB`)
@@ -60,6 +61,7 @@ Key directories:
 - `state/` — Task state machine, dependency validator, progress tracking.
 - `security/` — Container sandbox and workspace manager.
 - `config/settings.py` — All config via `pydantic_settings.BaseSettings` with `PABADA_` env prefix.
+- `config/llm.py` — Centralized LLM configuration. `get_llm()` returns a thread-safe `crewai.LLM` singleton; `get_litellm_params()` for direct litellm callers; `setup_provider_env_vars()` sets provider API key env vars.
 - `git/` — (planned) `RepositoryManager` will use `settings.FORGEJO_API_URL` and `settings.FORGEJO_TOKEN` to mirror local repos to Forgejo.
 
 **Event system**: SQLite triggers → `events_log` table → background listener threads poll and emit `FlowEvent` objects to a global `EventBus` singleton → WebSocket manager relays to frontend.
@@ -67,6 +69,8 @@ Key directories:
 **DB access pattern**: All database calls go through `execute_with_retry(fn, ...)` in `tools/base/db.py` — never raw sqlite3. Uses exponential backoff for SQLITE_BUSY. WAL mode always on.
 
 **Agent IDs**: Deterministic format — `{role}_p{project_id}` (single-instance) or `{role}_{n}_p{project_id}` (multi-instance, e.g., `developer_1_p1`).
+
+**Agent memory**: Handled by CrewAI's native Memory system. Enabled via `build_crew()` in `flows/helpers/reporting.py` which passes `memory=True` + embedder config to every `Crew`. Configurable via `PABADA_MEMORY_ENABLED`. Knowledge Sources (findings, wiki, reports, reference files) remain separate and unchanged.
 
 ### Frontend (`frontend/src/`)
 
@@ -89,15 +93,15 @@ User (browser) → React UI → fetchApi/WebSocket → FastAPI routes → FlowMa
 All backend config uses `PABADA_` prefix. Key vars:
 ```
 PABADA_DB              # SQLite path (default: .data/pabada.db)
-PABADA_SANDBOX_ENABLED # Container sandbox (false for local dev)
-PABADA_LLM_MODEL       # LLM model name
-PABADA_LLM_BASE_URL    # LLM endpoint
+PABADA_SANDBOX_ENABLED # Sandbox: persistent pod per agent (false for local dev)
+PABADA_LLM_MODEL       # LLM model name (LiteLLM format, e.g. "gemini/gemini-2.0-flash")
 PABADA_LLM_API_KEY     # LLM API key
+PABADA_LLM_BASE_URL    # Only for custom endpoints (Ollama, vLLM). Leave empty for native providers.
 PABADA_EMBEDDING_PROVIDER  # ollama | openai | azure | google
 PABADA_EMBEDDING_MODEL
 PABADA_EMBEDDING_BASE_URL
 ```
-CrewAI also reads `OPENAI_API_KEY`, `OPENAI_API_BASE`, `OPENAI_MODEL_NAME` directly.
+LLM config is centralized in `backend/config/llm.py`. Provider env vars (OPENAI_API_KEY, GEMINI_API_KEY, etc.) are set automatically from PABADA_LLM_API_KEY.
 
 Forgejo (no `PABADA_` prefix — exported directly by `start.sh`):
 ```

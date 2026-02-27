@@ -139,10 +139,22 @@ class PabadaAgent:
         if self._is_pod_mode():
             from backend.security.pod_manager import pod_manager  # lazy import
 
+            # For worktree agents, mount the main repo (parent of .worktrees/)
+            # so git's cross-directory references work inside the container.
+            mount_path = workspace_path
+            pod_workdir = "/workspace"
+
+            if "/.worktrees/" in workspace_path:
+                parts = workspace_path.rsplit("/.worktrees/", 1)
+                mount_path = parts[0]  # main repo path
+                agent_subdir = parts[1]  # e.g. "developer_1_p1"
+                pod_workdir = f"/workspace/.worktrees/{agent_subdir}"
+
             pod_manager.start_pod(
                 agent_id=self.agent_id,
                 role=self.role,
-                workspace_path=workspace_path,
+                workspace_path=mount_path,
+                workdir=pod_workdir,
             )
 
     def deactivate(self) -> None:
@@ -158,10 +170,10 @@ class PabadaAgent:
             pod_manager.stop_pod(self.agent_id)
 
     def _is_pod_mode(self) -> bool:
-        """Check if pod mode is active."""
-        from backend.config.settings import settings  # already imported at module level via tools
+        """Check if sandbox (pod) mode is active."""
+        from backend.config.settings import settings
 
-        return settings.SANDBOX_ENABLED and settings.SANDBOX_POD_MODE
+        return settings.SANDBOX_ENABLED
 
     # Roles that work on code and need isolated worktrees.
     _WORKTREE_ROLES = {"developer", "code_reviewer"}

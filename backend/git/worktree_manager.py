@@ -99,13 +99,16 @@ class WorktreeManager:
             text=True,
         )
 
-        # 4. Copy Forgejo auth config from main repo
+        # 4. Rewrite .git references to relative paths (container-compatible)
+        self._relativize_gitdir_refs(repo_local_path, worktree_path, agent_id)
+
+        # 6. Copy Forgejo auth config from main repo
         self._copy_auth_config(repo_local_path, worktree_path)
 
-        # 5. Copy git identity config from main repo
+        # 7. Copy git identity config from main repo
         self._copy_git_identity(repo_local_path, worktree_path)
 
-        # 6. Record in DB
+        # 8. Record in DB
         def _insert(conn: sqlite3.Connection) -> None:
             conn.execute(
                 """INSERT INTO agent_worktrees
@@ -261,6 +264,48 @@ class WorktreeManager:
         if len(parts) == 2:
             return parts[0]
         return None
+
+    @staticmethod
+    def _relativize_gitdir_refs(
+        repo_local_path: str, worktree_path: str, agent_id: str,
+    ) -> None:
+        """Rewrite absolute gitdir references to relative paths.
+
+        Git worktrees create two cross-references using absolute paths:
+        1. ``{worktree}/.git`` → ``gitdir: {repo}/.git/worktrees/{id}``
+        2. ``{repo}/.git/worktrees/{id}/gitdir`` → ``{worktree}/.git``
+
+        Absolute paths break when the worktree is bind-mounted inside a
+        container at a different path (e.g. ``/workspace``).  Relative
+        paths work in both contexts because the directory structure is
+        preserved.
+        """
+        # 1. Worktree .git file → relative path to main repo's gitdir
+        dot_git_file = os.path.join(worktree_path, ".git")
+        main_gitdir = os.path.join(
+            repo_local_path, ".git", "worktrees", agent_id,
+        )
+        try:
+            rel = os.path.relpath(main_gitdir, worktree_path)
+            with open(dot_git_file, "w") as f:
+                f.write(f"gitdir: {rel}\n")
+        except Exception:
+            logger.debug(
+                "Could not relativize .git file in %s", worktree_path,
+                exc_info=True,
+            )
+
+        # 2. Main repo gitdir file → relative path back to worktree .git
+        gitdir_file = os.path.join(main_gitdir, "gitdir")
+        try:
+            rel = os.path.relpath(dot_git_file, main_gitdir)
+            with open(gitdir_file, "w") as f:
+                f.write(f"{rel}\n")
+        except Exception:
+            logger.debug(
+                "Could not relativize gitdir in %s", gitdir_file,
+                exc_info=True,
+            )
 
     @staticmethod
     def _copy_auth_config(repo_local_path: str, worktree_path: str) -> None:
