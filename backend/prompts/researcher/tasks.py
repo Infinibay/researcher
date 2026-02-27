@@ -8,12 +8,14 @@ def assign_research(
     task_id: int,
     task_title: str,
     task_description: str,
+    project_id: int = 0,
+    project_name: str = "",
 ) -> tuple[str, str]:
     """Return (description, expected_output) for research task assignment."""
 
     state_block = build_state_context(
-        project_id=0,
-        project_name="",
+        project_id=project_id,
+        project_name=project_name,
         phase="task_assignment",
         summary=f"Research task {task_id} has been assigned to you.",
     )
@@ -27,79 +29,52 @@ You have been assigned research task {task_id}: {task_title}
 {task_description}
 
 ## Your Goal
-Understand the research task thoroughly and produce a clear research plan
-that demonstrates you understand what needs to be investigated, what sources
-are available, and what approach you will take.
+Produce a research plan that demonstrates you understand the question,
+have decomposed it into sub-questions, checked existing knowledge, and
+have a clear strategy for investigation.
 
-## Step-by-Step Process
+## What Good Looks Like
+- The research question restated in your own words (proving you
+  understand it).
+- 3-5 sub-questions derived using PICO decomposition.
+- Existing knowledge reviewed (SearchKnowledgeTool, ReadFindingsTool,
+  ReadWikiTool) — what does the team already know?
+- A search strategy per sub-question: what queries, what source types.
+- Any ambiguities identified and clarified (AskTeamLeadTool) or
+  documented as assumptions (AddCommentTool with ASSUMPTION: prefix).
 
-### Step 1: Understand the Research Question
-Read the task specifications above carefully. Identify:
-- **What** question needs to be answered.
-- **Scope** — the boundaries of the investigation (what is in scope, what
-  is explicitly out of scope).
-- **Acceptance criteria** — the specific conditions that must be true for
-  the research to be considered complete.
-- **Deliverables** — what outputs are expected (findings, report, wiki
-  articles, etc.).
-
-### Step 2: Check Existing Knowledge
-Use **SearchKnowledgeTool** and **ReadFindingsTool** to check what the team
-already knows about this topic. Identify:
-- Prior findings that are relevant to this task.
-- Gaps in existing knowledge that this task should fill.
-- Related research tasks and their outcomes.
-
-Use **ReadWikiTool** to check for existing wiki articles on the topic.
-
-### Step 3: Explore Available References
-Use **ListDirectoryTool** and **ReadFileTool** to check for reference files,
-datasets, or prior outputs in the project that may be relevant.
-
-Use **CodeSearchTool** to find mentions of the topic across the codebase
-and existing research artifacts.
-
-### Step 4: Identify Ambiguities
-If anything about the task is unclear after reading the specifications and
-existing knowledge:
-- Use **AskTeamLeadTool** to ask specific questions.
-- Do NOT guess at the research direction — clarify before starting.
-
-### Step 5: Produce Your Research Plan
-Write a structured research plan covering:
-1. **Research question restatement** — your understanding of what needs to
-   be answered.
-2. **Preliminary search strategy** — what search queries and sources you
-   plan to start with.
-3. **Methodology** — how you will conduct the investigation (literature
-   review, data analysis, comparison, etc.).
-4. **Expected deliverables** — what findings, reports, and wiki articles
-   you plan to produce.
-5. **Known risks** — potential challenges (limited sources, rapidly evolving
-   field, controversial topic).
+## Methodology Guidance
+Start by reading the task with GetTaskTool. Then check existing
+knowledge — do NOT duplicate prior work. Decompose the question before
+searching. If the scope is ambiguous, clarify with the Team Lead
+BEFORE starting. Document your plan with AddCommentTool.
 """
 
     expected_output = """\
 A structured research plan containing:
 
 1. **Research question**: Clear restatement of what needs to be investigated.
-2. **Existing knowledge**: Summary of what the team already knows about this
-   topic (from knowledge base and wiki).
-3. **Search strategy**: Planned search queries and source types.
-4. **Methodology**: How the investigation will be conducted.
-5. **Expected deliverables**: List of planned outputs.
-6. **Questions or concerns**: Any remaining ambiguities (or confirmation
-   that everything is clear).
+2. **Sub-questions**: 3-5 PICO-decomposed sub-questions.
+3. **Existing knowledge**: Summary of what the team already knows.
+4. **Search strategy**: Planned queries and source types per sub-question.
+5. **Methodology**: How the investigation will be conducted.
+6. **Questions or assumptions**: Any remaining ambiguities or documented
+   assumptions.
 """
     return description, expected_output
 
 
-def literature_review(task_id: int, task_title: str) -> tuple[str, str]:
+def literature_review(
+    task_id: int,
+    task_title: str,
+    project_id: int = 0,
+    project_name: str = "",
+) -> tuple[str, str]:
     """Return (description, expected_output) for literature review."""
 
     state_block = build_state_context(
-        project_id=0,
-        project_name="",
+        project_id=project_id,
+        project_name=project_name,
         phase="literature_review",
         summary=(
             f"Conducting literature review for task {task_id}. "
@@ -113,79 +88,67 @@ Conduct a literature review for research task {task_id}: {task_title}
 {state_block}
 
 ## Your Goal
-Find, read, and synthesize the most relevant and credible sources on this
-topic. Produce a structured literature review that maps the state of the art,
-identifies key contributions, and highlights gaps in existing knowledge.
+Map the state of the art for each sub-question. Find, evaluate, and
+record the most relevant sources. Produce a structured literature review
+that identifies key contributions, areas of consensus, disagreements,
+and gaps.
 
-## Step-by-Step Process
+## Methodology Guidance
+- Search each sub-question independently using multiple query
+  formulations per sub-question. Use DeepWebResearchTool for in-depth
+  multi-source investigation; use WebSearchTool only for quick
+  supplementary lookups.
+- Apply SIFT on every source you intend to cite: investigate the
+  source's reputation, find corroboration, trace claims to primary
+  sources.
+- Record findings as you discover them (RecordFindingTool) — do not
+  batch at the end. Each finding needs: specific title, evidence with
+  source, confidence score, finding type (observation).
+- Track coverage: which sub-questions have adequate sources? Which
+  remain under-covered? Direct additional searches at gaps.
+- Actively search for contradictory evidence and alternative
+  viewpoints — frame queries around limitations, criticisms, or
+  failure cases.
+- Write a state-of-the-art wiki article (WriteWikiTool) covering key
+  papers, consensus, debates, and gaps.
 
-### Step 1: Systematic Search
-Use **WebSearchTool** to conduct a systematic search. Execute multiple
-search queries to cover different angles:
-- The main topic using different phrasings and keywords.
-- Specific subtopics, techniques, or methods mentioned in the task.
-- Recent surveys, meta-analyses, or review papers.
-- Contradictory viewpoints and alternative approaches.
+## Artifact Checkpoint
+Before finishing, verify your work is persisted:
+1. ReadFindingsTool returns ≥3 findings you recorded.
+2. ReadWikiTool returns the wiki article you wrote.
 
-Record each search query you use — this is part of your methodology
-documentation.
-
-### Step 2: Source Selection and Evaluation
-From the search results, select the most relevant sources. For each:
-- Evaluate credibility: peer-reviewed > official docs > established blogs
-  > forums.
-- Check recency: prioritize recent sources in fast-moving fields.
-- Check relevance: does it directly address the research question?
-
-Use **WebFetchTool** to read full articles and documentation pages.
-Use **ReadPaperTool** to read academic papers in depth.
-
-Aim for at least 5-10 high-quality sources, but prioritize quality over
-quantity.
-
-### Step 3: Record Key Findings
-As you read each source, use **RecordFindingTool** to record significant
-findings immediately. For each finding:
-- Write a clear, specific title.
-- Include the source URL and a brief assessment of its credibility.
-- Assign a confidence score based on evidence strength.
-- Set finding type to `observation`.
-
-### Step 4: Synthesize and Document
-Use **WriteWikiTool** to write a state-of-the-art summary. This should:
-- Map the key papers and their contributions.
-- Identify areas of consensus and disagreement.
-- Highlight gaps that your investigation could address.
-- List the most important references.
-
-### Step 5: Check for Contradictions
-Actively search for evidence that contradicts the emerging consensus.
-Record contradictory findings with the same rigor as supporting ones.
+If either check fails, your work is lost and subsequent steps will
+have nothing to build on. Re-record immediately.
 """
 
     expected_output = """\
 A structured literature review containing:
 
-1. **Search methodology**: Queries used and sources consulted.
-2. **Key papers and contributions**: The most important sources found,
-   with brief summaries of their relevance.
-3. **State of the art**: What is currently known about this topic.
-4. **Areas of debate**: Where experts disagree or evidence is mixed.
+1. **Search methodology**: Queries used per sub-question and sources
+   consulted.
+2. **Key sources**: The most important sources found, with credibility
+   assessment.
+3. **State of the art**: What is currently known, per sub-question.
+4. **Areas of debate**: Where evidence is mixed or experts disagree.
 5. **Knowledge gaps**: What questions remain unanswered.
-6. **Recorded findings**: Confirmation that key findings were recorded
-   in the knowledge base with confidence scores.
-7. **Wiki updated**: Confirmation that the wiki was updated with the
-   state-of-the-art summary.
+6. **Recorded findings**: Exact count of findings recorded via
+   RecordFindingTool.
+7. **Wiki updated**: Article title written via WriteWikiTool.
 """
     return description, expected_output
 
 
-def formulate_hypothesis(task_id: int, task_title: str) -> tuple[str, str]:
+def formulate_hypothesis(
+    task_id: int,
+    task_title: str,
+    project_id: int = 0,
+    project_name: str = "",
+) -> tuple[str, str]:
     """Return (description, expected_output) for hypothesis formulation."""
 
     state_block = build_state_context(
-        project_id=0,
-        project_name="",
+        project_id=project_id,
+        project_name=project_name,
         phase="hypothesis_formulation",
         summary=(
             f"Formulating hypothesis for task {task_id} based on the "
@@ -194,67 +157,46 @@ def formulate_hypothesis(task_id: int, task_title: str) -> tuple[str, str]:
     )
 
     description = f"""\
-Formulate a research hypothesis for task {task_id}: {task_title}
+Formulate competing hypotheses for research task {task_id}: {task_title}
 
 {state_block}
 
 ## Your Goal
-Based on your literature review, formulate a clear, testable hypothesis
-that directly addresses the research question. Define specific predictions
-and outline the methodology you will use to investigate the hypothesis.
+Based on your literature review, generate 3-5 competing hypotheses
+that could answer the research question. Define what evidence would
+distinguish between them. Register the primary hypothesis formally
+and document all alternatives.
 
-## Step-by-Step Process
+## Methodology Guidance
+- Review your recorded findings (ReadFindingsTool) to identify the
+  strongest patterns, unresolved contradictions, and gaps.
+- Generate 3-5 competing hypotheses — not just one. Each must be
+  specific, testable, and falsifiable.
+- For each hypothesis, define: what evidence would support it, what
+  would refute it, and what would be inconclusive.
+- Identify **diagnostic evidence** — evidence that supports one
+  hypothesis but contradicts others. This is the most valuable
+  evidence to search for during investigation.
+- Register the primary hypothesis with CreateHypothesisTool (include
+  statement, predictions, methodology).
+- Document ALL competing hypotheses in a task comment (AddCommentTool)
+  so the full analysis is visible to the reviewer.
 
-### Step 1: Review Your Findings
-Use **ReadFindingsTool** to review all findings recorded during the
-literature review. Identify:
-- The strongest patterns in the evidence.
-- Gaps or unresolved questions that a hypothesis could address.
-- Contradictions that need to be resolved.
-
-### Step 2: Formulate the Hypothesis
-A good hypothesis must be:
-- **Specific**: Makes a clear, unambiguous claim.
-- **Testable**: Can be investigated with available tools and data.
-- **Falsifiable**: Can be proven wrong by evidence.
-- **Relevant**: Directly addresses the research question from the task.
-
-Bad: "LLMs are useful for code review."
-Good: "GPT-4 can identify security vulnerabilities in Python code with
-a precision of at least 70%, based on the CWE Top 25 categories."
-
-### Step 3: Define Testable Predictions
-For each hypothesis, define 2-4 specific, testable predictions:
-- What results would **support** the hypothesis?
-- What results would **refute** the hypothesis?
-- What results would be **inconclusive**?
-
-### Step 4: Outline the Investigation Methodology
-Describe how you will test each prediction:
-- What data or evidence will you search for?
-- What comparisons or analyses will you perform?
-- What sources will you consult?
-- What would constitute sufficient evidence?
-
-### Step 5: Register the Hypothesis
-Use **CreateHypothesisTool** to formally register your hypothesis with:
-- The hypothesis statement.
-- Testable predictions.
-- Investigation methodology.
-
-### Step 6: Document in Task
-Use **AddCommentTool** to post the hypothesis on the task for visibility.
+Bad hypothesis: "LLMs are useful for code review."
+Good hypothesis: "GPT-4 can identify security vulnerabilities in
+Python code with precision ≥70%, based on CWE Top 25 categories."
 """
 
     expected_output = """\
-A formal research hypothesis containing:
+A competing hypotheses analysis containing:
 
-1. **Hypothesis statement**: A clear, specific, testable claim.
-2. **Testable predictions**: 2-4 specific predictions with criteria for
-   support, refutation, and inconclusive outcomes.
-3. **Investigation methodology**: How each prediction will be tested.
-4. **Registration**: Confirmation that the hypothesis was registered via
-   CreateHypothesisTool.
+1. **Competing hypotheses**: 3-5 alternative hypotheses with rationale.
+2. **Diagnostic evidence**: What evidence would distinguish between them.
+3. **Primary hypothesis**: The most promising hypothesis, registered
+   via CreateHypothesisTool.
+4. **Investigation plan**: How each hypothesis will be tested.
+5. **Task comment**: Confirmation that all hypotheses were documented
+   via AddCommentTool.
 """
     return description, expected_output
 
@@ -263,12 +205,14 @@ def investigate(
     task_id: int,
     task_title: str,
     hypothesis: str,
+    project_id: int = 0,
+    project_name: str = "",
 ) -> tuple[str, str]:
     """Return (description, expected_output) for hypothesis investigation."""
 
     state_block = build_state_context(
-        project_id=0,
-        project_name="",
+        project_id=project_id,
+        project_name=project_name,
         phase="investigation",
         summary=(
             f"Investigating hypothesis for task {task_id}. "
@@ -285,81 +229,56 @@ Investigate the hypothesis for research task {task_id}: {task_title}
 {hypothesis}
 
 ## Your Goal
-Systematically investigate the hypothesis by gathering evidence for each
-testable prediction. Record every significant finding with appropriate
-confidence scores. Actively seek both supporting and contradicting evidence.
+Systematically investigate all competing hypotheses by gathering
+evidence for each testable prediction. The correct answer is the one
+with the LEAST contradicting evidence, not the most supporting
+evidence.
 
-## Step-by-Step Process
+## Methodology Guidance
+- For each testable prediction, search for BOTH supporting AND
+  contradicting evidence. Use DeepWebResearchTool with targeted queries
+  per prediction. Run separate queries for limitations and criticisms.
+- Cross-reference sources: for every important claim, find at least
+  one additional independent source.
+- Record findings immediately as you discover them (RecordFindingTool).
+  Apply GRADE-inspired confidence scoring:
+  - 0.85-1.0: Multiple independent credible sources, consistent.
+  - 0.6-0.8: Good evidence, limited scope or few sources.
+  - 0.35-0.55: Mixed evidence or single source.
+  - 0.1-0.3: Speculative, based on reasoning not direct evidence.
+- For each prediction, assess: supported, refuted, or inconclusive.
+- Evaluate the overall hypothesis by disconfirmation: count
+  inconsistencies, not confirmations.
 
-### Step 1: Plan Your Investigation
-Review the hypothesis and its testable predictions. For each prediction,
-identify:
-- What specific evidence would support or refute it.
-- Where to find that evidence (web search, papers, data, existing findings).
-- What analysis or comparison is needed.
-
-### Step 2: Gather Evidence Systematically
-For each testable prediction:
-
-**2a. Search for supporting evidence**
-Use **WebSearchTool** with targeted queries. Use **WebFetchTool** and
-**ReadPaperTool** to read sources in depth.
-
-**2b. Search for contradicting evidence**
-This is equally important. Actively search for evidence that would disprove
-the prediction. Queries like "<topic> limitations", "<topic> criticism",
-"<topic> fails" are valuable.
-
-**2c. Analyze data if available**
-If the investigation involves data analysis, use **ReadFileTool** to read
-datasets and **CodeSearchTool** to find relevant data across the project.
-
-**2d. Cross-reference sources**
-Do not rely on a single source. For every important claim, find at least
-one additional independent source that confirms or contradicts it.
-
-### Step 3: Record Findings Immediately
-Use **RecordFindingTool** for each significant finding as you discover it.
-For each finding:
-- **Title**: Specific and descriptive (not vague).
-- **Content**: What was found, from which source, with what evidence.
-- **Confidence score**: Apply the confidence scoring guidelines:
-  - 0.9-1.0: Multiple independent credible sources, sound methodology.
-  - 0.7-0.8: Good evidence, limited scope or minor concerns.
-  - 0.5-0.6: Mixed evidence or single source only.
-  - 0.3-0.4: Weak evidence, limited data, uncertain credibility.
-  - 0.1-0.2: Speculative, based on reasoning not direct evidence.
-- **Finding type**: `observation` (what was found), `experiment` (what was
-  tested), `proof` (what was demonstrated), or `conclusion` (what was
-  inferred).
-
-### Step 4: Evaluate Each Prediction
-For each testable prediction, summarize:
-- What evidence was found (supporting and contradicting).
-- Whether the prediction is supported, refuted, or inconclusive.
-- The overall confidence level.
-
-### Step 5: Assess the Hypothesis
-Based on the evidence across all predictions:
-- Is the hypothesis supported, partially supported, or refuted?
-- What caveats or limitations apply?
-- What follow-up questions emerge?
+## Devil's Advocate Check
+Before concluding:
+- What is the strongest counter-argument to your main conclusion?
+- Would the conclusion change if you removed the single strongest
+  piece of evidence?
+- Do all your sources come from the same perspective or ecosystem?
 
 Record your overall conclusion as a finding with type `conclusion`.
+
+## Artifact Checkpoint
+Use ReadFindingsTool to confirm your findings are saved. If it returns
+fewer than expected, some RecordFindingTool calls may have failed
+silently — re-record immediately.
 """
 
     expected_output = """\
 A structured investigation summary containing:
 
-1. **Evidence gathered**: For each testable prediction, a summary of
-   supporting and contradicting evidence found.
-2. **Prediction outcomes**: For each prediction, whether it is supported,
-   refuted, or inconclusive, with confidence assessment.
-3. **Overall hypothesis assessment**: Whether the hypothesis is supported,
-   partially supported, or refuted.
-4. **Recorded findings**: Confirmation that all significant findings were
-   recorded in the knowledge base with confidence scores.
-5. **Limitations and caveats**: Honest assessment of evidence gaps or
+1. **Evidence per prediction**: Supporting and contradicting evidence
+   found for each testable prediction.
+2. **Prediction outcomes**: Each prediction assessed as supported,
+   refuted, or inconclusive with confidence.
+3. **Hypothesis assessment**: Overall assessment via disconfirmation
+   analysis (which hypothesis has least inconsistent evidence).
+4. **Recorded findings**: Exact count of findings recorded via
+   RecordFindingTool.
+5. **Devil's advocate results**: Counter-arguments considered and
+   their impact on conclusions.
+6. **Limitations**: Honest assessment of evidence gaps or
    methodological limitations.
 """
     return description, expected_output
@@ -369,12 +288,14 @@ def write_report(
     task_id: int,
     task_title: str,
     hypothesis: str,
+    project_id: int = 0,
+    project_name: str = "",
 ) -> tuple[str, str]:
     """Return (description, expected_output) for research report writing."""
 
     state_block = build_state_context(
-        project_id=0,
-        project_name="",
+        project_id=project_id,
+        project_name=project_name,
         phase="report_writing",
         summary=(
             f"Writing formal research report for task {task_id}. "
@@ -391,122 +312,80 @@ Write a comprehensive research report for task {task_id}: {task_title}
 {hypothesis}
 
 ## Your Goal
-Synthesize all findings from your investigation into a formal, structured
-research report. The report must be clear enough for the Research Reviewer
-to evaluate your methodology, evidence, and conclusions.
+Synthesize all findings into a formal report organized by theme, not
+by source. The report must be clear enough for the Research Reviewer
+to evaluate your methodology, evidence, and conclusions on their own.
 
-## Step-by-Step Process
+## Methodology Guidance
+- Review all findings (ReadFindingsTool) and organize by topic or
+  sub-question, NOT chronologically.
+- Use **thematic synthesis**: group related findings together, put
+  sources in conversation (where they agree, disagree, complement),
+  highlight emergent insights.
+- Apply the report structure:
+  - **Executive Summary**: Research question, key findings, conclusions,
+    confidence levels, recommendations. Must be self-contained.
+  - **Methodology**: Search strategy, queries used, source evaluation
+    criteria, analysis approach, limitations.
+  - **Findings and Analysis**: Per theme — evidence, sources, confidence,
+    analysis. Sources in conversation, not listed sequentially.
+  - **Discussion**: How findings relate to hypotheses, contradictions
+    and resolution, limitations, alternative interpretations.
+  - **Conclusions**: Direct answers per sub-question. Clearly separate
+    well-supported from speculative. Overall confidence.
+  - **Recommendations**: Actionable next steps linked to specific
+    findings. Priority ranked.
+  - **References**: All sources cited with URLs.
 
-### Step 1: Review All Findings
-Use **ReadFindingsTool** to review all findings you recorded during the
-literature review and investigation. Organize them logically by topic
-or prediction, not chronologically.
+Write the report with WriteReportTool. Update wiki with key insights
+(WriteWikiTool). Post artifact inventory on task (AddCommentTool):
+finding count, report title, wiki articles. Set status to
+`review_ready` (UpdateTaskStatusTool).
 
-Use **SearchKnowledgeTool** to check for related findings from other
-tasks that should be referenced.
-
-### Step 2: Write the Report
-Use **WriteReportTool** to create the report with the following structure:
-
-**Executive Summary** (2-3 paragraphs)
-- The research question that was investigated.
-- The hypothesis and key findings.
-- The main conclusions and their confidence levels.
-- Key recommendations.
-
-**Methodology**
-- Research design: How the investigation was structured.
-- Search strategy: Queries used, databases consulted, time period covered.
-- Source evaluation criteria: How sources were assessed for credibility.
-- Analysis approach: How evidence was evaluated and synthesized.
-
-**Findings and Analysis**
-For each major finding or cluster of findings:
-- What was found (the evidence).
-- The source(s) and their credibility.
-- The confidence score and justification.
-- Analysis: what the finding means in context.
-
-Organize findings logically — group related findings together, present
-them in order of importance or by prediction.
-
-**Discussion**
-- How the findings relate to the hypothesis.
-- Contradictions and how they were resolved (or not).
-- Limitations of the research (scope, sources, methodology).
-- Alternative interpretations of the evidence.
-- Comparison with prior work (reference existing knowledge base findings).
-
-**Conclusions**
-- Direct answers to the research question.
-- Clearly distinguish between well-supported conclusions and speculative
-  interpretations.
-- Overall confidence assessment.
-
-**Recommendations**
-- Actionable next steps based on the findings.
-- Suggested areas for further research.
-- Practical implications for the project.
-
-**References**
-- All sources cited, with URLs where available.
-- Organize by type (papers, documentation, articles, etc.) if there are
-  many references.
-
-### Step 3: Update the Wiki
-Use **WriteWikiTool** to update wiki articles with key insights from your
-research. Focus on information that other team members may need:
-- State-of-the-art summaries.
-- Key definitions or concepts.
-- Important reference lists.
-- Methodology notes.
-
-### Step 4: Submit for Review
-Use **AddCommentTool** to post a summary of your report on the task.
-Use **UpdateTaskStatusTool** to set the status to `review_ready`.
-
-If you produced any code, notebooks, or scripts during this research,
-commit them to a branch and push to Forgejo:
-1. **GitBranchTool** — create branch `research-{task_id}-artifacts` from
-   main (`git fetch origin main && git checkout -b research-{task_id}-artifacts origin/main`).
-2. **GitCommitTool** — stage and commit the artifacts
-   (`git add -A && git commit -m "Add research artifacts for task {task_id}"`).
-3. **GitPushTool** — push the branch to origin on the Forgejo server
-   (`git push -u origin research-{task_id}-artifacts`).
-4. **CreatePRTool** — open a PR with base="main" via
-   `POST $FORGEJO_API_URL/repos/{{owner}}/{{repo}}/pulls`.
+If you produced code or notebooks, commit and push to Forgejo:
+1. GitBranchTool — `research-{task_id}-artifacts` from main.
+2. GitCommitTool — stage and commit artifacts.
+3. GitPushTool — push to origin.
+4. CreatePRTool — open PR against main.
 
 ## Quality Checklist
 Before submitting, verify:
-- [ ] Every claim in the report is traceable to a recorded finding.
-- [ ] Confidence scores are consistent and justified.
-- [ ] Contradictory evidence is acknowledged and discussed.
-- [ ] Methodology is documented clearly enough to reproduce.
+- [ ] Every claim traceable to a recorded finding.
+- [ ] Confidence scores consistent and justified.
+- [ ] Contradictory evidence acknowledged and discussed.
+- [ ] Methodology documented clearly enough to reproduce.
 - [ ] Executive summary accurately reflects the full report.
-- [ ] References are complete with URLs.
+- [ ] References complete with URLs.
+- [ ] ReadFindingsTool returns your findings.
+- [ ] ReadReportTool returns your report.
+- [ ] Submission comment lists all artifacts created.
 """
 
     expected_output = """\
 A confirmation of report completion containing:
 
-1. **Report title**: The title of the report created via WriteReportTool.
-2. **Report structure**: Confirmation that all required sections are present
-   (executive summary, methodology, findings, discussion, conclusions,
-   recommendations, references).
-3. **Findings referenced**: Number of recorded findings cited in the report.
-4. **Wiki updates**: Confirmation of which wiki articles were created or
-   updated.
-5. **Status**: Confirmation that the task was moved to `review_ready`.
+1. **Report title**: The title created via WriteReportTool.
+2. **Report structure**: Confirmation all sections are present.
+3. **Findings referenced**: Count of recorded findings cited.
+4. **Wiki updates**: Wiki articles created or updated.
+5. **Status**: Confirmation task moved to `review_ready`.
+6. **Artifact inventory**: Report title, finding count, wiki article
+   titles — so the Research Reviewer can locate them.
 """
     return description, expected_output
 
 
-def revise_research(task_id: int, reviewer_feedback: str = "") -> tuple[str, str]:
+def revise_research(
+    task_id: int,
+    reviewer_feedback: str = "",
+    project_id: int = 0,
+    project_name: str = "",
+) -> tuple[str, str]:
     """Return (description, expected_output) for research revision after rejection."""
 
     state_block = build_state_context(
-        project_id=0,
-        project_name="",
+        project_id=project_id,
+        project_name=project_name,
         phase="revision",
         summary=(
             f"Research for task {task_id} was rejected in peer review. "
@@ -519,119 +398,84 @@ Your research for task {task_id} has been rejected in peer review.
 
 {state_block}
 
-## Your Goal
-Address ALL issues identified by the Research Reviewer. Every concern about
-methodology, evidence, confidence scores, or conclusions must be resolved
-before resubmission.
-
-## Step-by-Step Process
-
-### Step 0: Read the Reviewer Feedback
-The reviewer has rejected your research. Their exact feedback is:
-
+## Reviewer Feedback
 ---
 {reviewer_feedback}
 ---
 
-Read every point carefully before proceeding. Do NOT skip this step.
-Identify each concern and write a mental checklist of what must change.
+## Your Goal
+Address ALL issues identified by the Research Reviewer. Every concern
+must be resolved before resubmission.
 
-### Step 1: Review Current State of Your Research
-Use **ReadFindingsTool** to review all your current findings.
-Use **ReadReportTool** to re-read your current report.
-Identify which specific sections and findings correspond to each concern
-in the reviewer's feedback.
-
-### Step 1.5: Classify the Rejection Type
-Based on the feedback above, determine the PRIMARY reason for rejection:
+## Classify the Rejection
+Determine the primary type to guide your revision strategy:
 
 **Type A — Insufficient or Missing Sources**
-Indicators: "not enough sources", "single source", "no evidence for",
-"needs more references", "unverified", "blog post only".
-→ Your priority is to find additional credible sources. Proceed to Step 2,
-  then go directly to Step 3 (Additional Research) before updating findings.
+Indicators: "not enough sources", "single source", "unverified".
+Priority: find additional credible sources first, then update findings
+and report.
 
 **Type B — Incorrect or Unsupported Conclusions**
-Indicators: "conclusion does not follow", "logical leap", "confidence too high",
-"contradicts", "not supported by evidence", "cherry-picking".
-→ Your priority is to re-analyze existing findings and adjust conclusions.
-  Proceed to Step 2, then go directly to Step 4 (Update Findings) to adjust
-  confidence scores and rewrite conclusions before adding new sources.
+Indicators: "conclusion does not follow", "confidence too high",
+"cherry-picking".
+Priority: re-analyze existing findings, adjust confidence scores, and
+rewrite conclusions before adding new sources.
 
-**Type C — Both (Mixed)**
-→ Address sources first (Step 3), then conclusions (Step 4).
+**Type C — Both**
+Address sources first, then conclusions.
 
-### Step 2: Map Feedback to Report Sections
-For each concern in the reviewer's feedback, identify:
-- **What** the issue is (methodology gap, insufficient evidence, confidence
-  too high, missing analysis, etc.).
-- **Where** in the report it manifests (which section, which finding).
-- **How** to fix it (add sources, adjust scores, rewrite conclusions, etc.).
+## Methodology Guidance
+- Read your current findings (ReadFindingsTool) and report
+  (ReadReportTool) to map each concern to specific sections.
+- For Type A: run targeted searches for evidence addressing each
+  concern. Apply SIFT. Record new findings.
+- For Type B: adjust confidence scores, rewrite conclusions to match
+  evidence. If the reviewer flagged confirmation bias, run a devil's
+  advocate pass.
+- Rewrite the report (WriteReportTool) incorporating all changes.
+  The revised report should mention what changed in response to review.
+- Self-review: go through the feedback point by point and confirm
+  each concern is addressed.
 
-### Step 3: Conduct Additional Research (if needed)
-If the rejection is Type A or Type C:
-- Use **WebSearchTool** and **ReadPaperTool** to find additional sources.
-- Search specifically for evidence addressing the reviewer's concerns.
-- Look for contradictory evidence if the reviewer flagged confirmation bias.
+## Artifact Checkpoint
+Before resubmitting:
+1. ReadFindingsTool returns your findings (old + new).
+2. ReadReportTool with task_id={task_id} returns the updated report.
 
-Use **CodeSearchTool** if the reviewer pointed to data or references you
-missed in the project.
+If either check fails, re-record immediately. Do NOT submit without
+verification.
 
-### Step 4: Update Findings
-Use **RecordFindingTool** to record new findings from additional research.
-
-For existing findings that need revision:
-- Adjust confidence scores if the reviewer identified they were too high
-  or too low.
-- Add additional supporting or contradicting evidence.
-- Clarify sources or methodology.
-
-### Step 5: Rewrite the Report
-Use **WriteReportTool** to create an updated report that addresses all
-reviewer concerns:
-- Strengthen methodology documentation if flagged.
-- Add missing analysis or discussion.
-- Adjust conclusions if evidence warrants it.
-- Ensure all new findings are incorporated.
-
-### Step 6: Self-Review Against Feedback
-Go through the reviewer's feedback from Step 0 point by point:
-- [ ] Each concern listed by the reviewer has been addressed.
-- [ ] For Type A rejections: at least 2 additional credible sources were found
-      for each flagged finding.
-- [ ] For Type B rejections: confidence scores were adjusted and conclusions
-      were rewritten to match the evidence.
-- [ ] The revised report explicitly mentions what changed in response to review.
-- [ ] No new unsupported claims were introduced during revision.
-
-### Step 7: Submit for Re-Review
-Use **AddCommentTool** to post a summary of revisions on the task,
-explicitly mapping each reviewer concern to the change made.
-Use **UpdateTaskStatusTool** to set the status to `review_ready`.
+Post a revision summary with AddCommentTool mapping each reviewer
+concern to the change made. Set status to `review_ready`
+(UpdateTaskStatusTool).
 """
 
-    expected_output = """\
+    expected_output = f"""\
 A summary of revisions containing:
 
-1. **Reviewer feedback addressed**: For EACH point in the reviewer's feedback,
-   state exactly what was changed (new sources found, confidence score adjusted,
-   conclusion rewritten, etc.).
-2. **Rejection type**: Whether this was Type A (sources), Type B (conclusions),
-   or Type C (both), and how that shaped the revision strategy.
-3. **Additional research** (Type A): New sources consulted and findings recorded.
-4. **Confidence adjustments** (Type B): Findings whose scores were changed and why.
-5. **Report updates**: Summary of report sections revised.
-6. **Status**: Confirmation that the task was moved to `review_ready`.
+1. **Feedback addressed**: For EACH reviewer concern, what was changed.
+2. **Rejection type**: Type A, B, or C, and how that shaped the
+   revision.
+3. **Additional research** (Type A): New sources and findings recorded.
+4. **Confidence adjustments** (Type B): Findings whose scores changed.
+5. **Report updates**: Sections revised.
+6. **Artifact verification**: ReadFindingsTool and ReadReportTool
+   (task_id={task_id}) both return data.
+7. **Status**: Task moved to `review_ready`.
 """
     return description, expected_output
 
 
-def update_knowledge_base(task_id: int) -> tuple[str, str]:
+def update_knowledge_base(
+    task_id: int,
+    project_id: int = 0,
+    project_name: str = "",
+) -> tuple[str, str]:
     """Return (description, expected_output) for knowledge base update after validation."""
 
     state_block = build_state_context(
-        project_id=0,
-        project_name="",
+        project_id=project_id,
+        project_name=project_name,
         phase="knowledge_update",
         summary=(
             f"Research for task {task_id} has been validated by peer review. "
@@ -670,14 +514,7 @@ Focus on information that will be useful to other team members:
 - Methodology notes and best practices.
 - Important reference lists.
 
-### Step 3: Save Research Patterns to Memory
-Use **KnowledgeManagerTool** (action=`save`) to persist valuable patterns for future sessions:
-- Effective search strategies for this topic area.
-- Key sources and their credibility assessments.
-- Methodological lessons learned.
-- Common pitfalls or challenges encountered.
-
-### Step 4: Finalize Task
+### Step 3: Finalize Task
 Use **UpdateTaskStatusTool** to move the task to `done`.
 Use **AddCommentTool** to post a final summary of the research
 contribution to the project.
@@ -701,12 +538,14 @@ def push_artifacts(
     task_id: int,
     task_title: str,
     artifact_paths: list[str],
+    project_id: int = 0,
+    project_name: str = "",
 ) -> tuple[str, str]:
     """Return (description, expected_output) for pushing research artifacts to Forgejo."""
 
     state_block = build_state_context(
-        project_id=0,
-        project_name="",
+        project_id=project_id,
+        project_name=project_name,
         phase="artifact_push",
         summary=(
             f"Pushing research artifacts for task {task_id} to the Forgejo "
@@ -761,5 +600,81 @@ A confirmation of artifact push containing:
    PR number from CreatePRTool.
 5. **PR body**: Confirmation that the body includes artifact descriptions,
    reproduction steps, and links to research findings.
+"""
+    return description, expected_output
+
+
+def rescue_missing_artifacts(
+    task_id: int,
+    task_title: str,
+    missing_findings: bool = True,
+    missing_report: bool = True,
+    project_id: int = 0,
+    project_name: str = "",
+) -> tuple[str, str]:
+    """Return (description, expected_output) for the rescue prompt.
+
+    This is invoked by the flow guardrail when the researcher completed
+    a step but failed to persist artifacts (findings/reports) in the DB.
+    The prompt is intentionally short and direct to maximise the chance
+    that weaker models actually call the tools.
+    """
+    state_block = build_state_context(
+        project_id=project_id,
+        project_name=project_name,
+        phase="artifact_rescue",
+        summary=(
+            f"URGENT: Research task {task_id} has missing artifacts that must "
+            "be created before peer review can proceed."
+        ),
+    )
+
+    missing_parts = []
+    if missing_findings:
+        missing_parts.append(
+            "- **FINDINGS**: You have ZERO findings recorded for this task. "
+            "Use **RecordFindingTool** RIGHT NOW to record at least 3 findings "
+            "from your research. Each finding needs: a clear title, content with "
+            "evidence, a confidence score, and finding_type (observation/conclusion)."
+        )
+    if missing_report:
+        missing_parts.append(
+            "- **REPORT**: You have ZERO reports for this task. "
+            "Use **WriteReportTool** RIGHT NOW to write a research report. "
+            "The report must cover: executive summary, methodology, findings, "
+            "conclusions, and references."
+        )
+    missing_block = "\n".join(missing_parts)
+
+    description = f"""\
+CRITICAL: Your research for task {task_id} ({task_title}) is about to go to
+peer review, but the system detected that you have NOT saved your work using
+the required tools. The following artifacts are MISSING from the database:
+
+{missing_block}
+
+{state_block}
+
+## What Happened
+You completed your research steps but did NOT call the required tools to
+persist your work. Without these artifacts in the database, the peer
+reviewer will reject your work immediately.
+
+## What You Must Do NOW
+1. Use **ReadFindingsTool** to check what findings exist for this task.
+2. If findings are missing: call **RecordFindingTool** for each key finding.
+3. Use **ReadReportTool** with task_id={task_id} to check if a report exists.
+4. If the report is missing: call **WriteReportTool** to create the report.
+5. Use **ReadFindingsTool** again to VERIFY your findings were saved.
+
+DO NOT explain what you plan to do. DO NOT summarize your research.
+CALL THE TOOLS IMMEDIATELY. Every response that is not a tool call is wasted.
+"""
+
+    expected_output = f"""\
+Confirmation that ALL missing artifacts were created:
+1. Number of findings recorded via RecordFindingTool (minimum 3).
+2. Report title created via WriteReportTool.
+3. Verification via ReadFindingsTool showing findings exist for task {task_id}.
 """
     return description, expected_output

@@ -6,7 +6,7 @@ from typing import Type
 from pydantic import BaseModel, Field
 
 from backend.tools.base.base_tool import PabadaBaseTool
-from backend.tools.base.db import execute_with_retry
+from backend.tools.base.db import execute_with_retry, sanitize_fts5_query
 
 
 class ReadReferenceFilesInput(BaseModel):
@@ -36,6 +36,7 @@ class ReadReferenceFilesTool(PabadaBaseTool):
 
         def _read(conn: sqlite3.Connection) -> list[dict]:
             if search:
+                safe_search = sanitize_fts5_query(search)
                 rows = conn.execute(
                     """SELECT rf.id, rf.file_name, rf.file_path, rf.file_type,
                               rf.file_size, rf.description, rf.uploaded_by,
@@ -46,7 +47,7 @@ class ReadReferenceFilesTool(PabadaBaseTool):
                          AND rf.project_id = ?
                        ORDER BY rank
                        LIMIT 50""",
-                    (search, project_id),
+                    (safe_search, project_id),
                 ).fetchall()
             else:
                 rows = conn.execute(

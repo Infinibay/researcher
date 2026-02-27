@@ -44,6 +44,14 @@ def _disable_persistence(monkeypatch):
     yield
 
 
+@pytest.fixture(autouse=True)
+def _disable_autonomy(monkeypatch):
+    """Disable autonomy layer so flow tests use the original centralized loop."""
+    monkeypatch.setattr(
+        "backend.config.settings.settings.AUTONOMY_ENABLED", False,
+    )
+
+
 @pytest.fixture()
 def db_conn(_isolated_db):
     """Return a connection to the test database."""
@@ -85,10 +93,15 @@ def executing_project(db_conn):
     db_conn.commit()
 
     # Create some tasks
+    # Task 1: pending (dev flow does pending → in_progress)
+    # Task 2: pending (research flow does pending → in_progress)
+    # Task 3: backlog (dependency tests)
+    # Task 4: in_progress (code review flow does in_progress → review_ready)
     for i, (title, task_type, status) in enumerate([
         ("Implement feature A", "code", "pending"),
-        ("Research algorithm B", "research", "backlog"),
+        ("Research algorithm B", "research", "pending"),
         ("Write tests for A", "test", "backlog"),
+        ("Review feature C", "code", "in_progress"),
     ], start=1):
         db_conn.execute(
             """INSERT INTO tasks

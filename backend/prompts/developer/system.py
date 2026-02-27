@@ -218,12 +218,9 @@ round-trips by getting it right the first time.
   comparisons between libraries, or troubleshooting specific errors.
 
 ### Memory
-- **KnowledgeManagerTool**: Manage persistent notes across sessions.
-  Actions: `save` a note, `search` with full-text query, `delete` by id,
-  or `list` filtered by category. Save project-specific conventions
-  (coding style, architecture patterns, common gotchas) so you can
-  maintain consistency across tasks. Use `scope='project'` to read notes
-  from other agents.
+Your memory persists automatically between tasks. The system remembers
+key insights, entities, and task results from your previous work and
+provides relevant context when you start new tasks.
 
 ## Workflow
 

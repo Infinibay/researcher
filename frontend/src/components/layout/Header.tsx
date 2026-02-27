@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useProjectStore } from '../../stores/project'
 import { useProjects, useProject, useStartProject, useStopProject } from '../../hooks/useProjects'
+import { useActivityFeedStore } from '../../stores/activityFeed'
 import { StatusDot } from '../common/StatusDot'
 
 export function Header() {
@@ -11,6 +12,9 @@ export function Header() {
   const stopProject = useStopProject()
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
+  const toggleFeed = useActivityFeedStore((s) => s.toggleFeed)
+  const feedOpen = useActivityFeedStore((s) => s.feedOpen)
+  const unreadCount = useActivityFeedStore((s) => s.unreadCount)
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -74,28 +78,45 @@ export function Header() {
         </div>
       </div>
 
-      {activeProject && (
-        <div className="flex items-center gap-3">
-          <span className="text-xs text-slate-500">{activeProject.status}</span>
-          {isRunning ? (
-            <button
-              onClick={() => stopProject.mutate(activeProject.id)}
-              disabled={stopProject.isPending}
-              className="rounded-md bg-red-600/80 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-600 disabled:opacity-50"
-            >
-              Stop
-            </button>
-          ) : (
-            <button
-              onClick={() => startProject.mutate(activeProject.id)}
-              disabled={startProject.isPending || activeProject.status === 'completed'}
-              className="rounded-md bg-emerald-600/80 px-3 py-1.5 text-xs font-medium text-white hover:bg-emerald-600 disabled:opacity-50"
-            >
-              Start
-            </button>
+      <div className="flex items-center gap-3">
+        {activeProject && (
+          <>
+            <span className="text-xs text-slate-500">{activeProject.status}</span>
+            {isRunning ? (
+              <button
+                onClick={() => stopProject.mutate(activeProject.id)}
+                disabled={stopProject.isPending}
+                className="rounded-md bg-red-600/80 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-600 disabled:opacity-50"
+              >
+                Stop
+              </button>
+            ) : (
+              <button
+                onClick={() => startProject.mutate(activeProject.id)}
+                disabled={startProject.isPending || activeProject.status === 'completed'}
+                className="rounded-md bg-emerald-600/80 px-3 py-1.5 text-xs font-medium text-white hover:bg-emerald-600 disabled:opacity-50"
+              >
+                Start
+              </button>
+            )}
+          </>
+        )}
+
+        <button
+          onClick={toggleFeed}
+          className={`relative rounded-md p-1.5 text-slate-400 hover:bg-surface-800 hover:text-slate-200 ${feedOpen ? 'bg-surface-800 text-sky-400' : ''}`}
+          title="Toggle activity feed"
+        >
+          <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+          </svg>
+          {unreadCount > 0 && (
+            <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-sky-500 px-1 text-[10px] font-bold text-white">
+              {unreadCount > 99 ? '99+' : unreadCount}
+            </span>
           )}
-        </div>
-      )}
+        </button>
+      </div>
     </header>
   )
 }

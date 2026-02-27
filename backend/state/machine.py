@@ -1,18 +1,15 @@
 """Canonical task state machine — single source of truth for valid transitions."""
 
+_ALL_STATUSES = {"backlog", "pending", "in_progress", "review_ready",
+                  "rejected", "done", "cancelled", "failed"}
+
 VALID_TRANSITIONS: dict[str, set[str]] = {
-    "backlog": {"pending", "cancelled"},
-    "pending": {"in_progress", "cancelled"},
-    "in_progress": {"review_ready", "cancelled"},
-    "review_ready": {"done", "rejected", "cancelled"},
-    "rejected": {"in_progress", "cancelled"},
-    "done": set(),
-    "cancelled": set(),
+    status: _ALL_STATUSES - {status} for status in _ALL_STATUSES
 }
 
 TASK_STATUSES = list(VALID_TRANSITIONS.keys())
 
-TERMINAL_STATUSES = frozenset({"done", "cancelled"})
+TERMINAL_STATUSES = frozenset({"done", "cancelled", "failed"})
 
 
 class TaskStateMachine:

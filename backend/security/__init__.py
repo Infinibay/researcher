@@ -5,6 +5,10 @@ from backend.security.sandbox import SandboxExecutor, SandboxResult, sandbox_exe
 from backend.security.workspace_manager import WorkspaceManager, workspace_manager
 from backend.security.cleanup import CleanupManager, cleanup_manager
 
+# PodManager is imported lazily to avoid circular imports
+# (cleanup → tools.base.db → tools.__init__ → agents → tools)
+# Use: from backend.security.pod_manager import PodManager, pod_manager
+
 __all__ = [
     "ContainerRuntime",
     "get_runtime",

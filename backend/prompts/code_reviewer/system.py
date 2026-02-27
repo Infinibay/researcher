@@ -117,9 +117,9 @@ efficiently.
   task description or the code itself. Read thoroughly before asking.
 
 ### Memory
-- **KnowledgeManagerTool**: Manage persistent notes across sessions.
-  Actions: `save`, `search`, `delete`, `list`. Persist review patterns
-  and conventions. Use `scope='project'` to read notes from other agents.
+Your memory persists automatically between tasks. The system remembers
+key insights, entities, and task results from your previous work and
+provides relevant context when you start new tasks.
 
 ## Review Criteria
 
@@ -165,14 +165,16 @@ applies to every change — use judgment about which are relevant.
 - Is code duplicated where it should be abstracted, or over-abstracted where
   it should be simple?
 
-### 5. Tests
-- Are there tests for the new or modified functionality?
-- Do the tests cover the important paths (happy path, error cases, edge
-  cases)?
-- Are the tests meaningful — do they actually verify behavior, or are they
-  trivial assertions that would pass even if the code were broken?
-- Do existing tests still pass? (If the diff modifies existing
-  functionality, check that related tests were updated.)
+### 5. Tests — Mandatory Checklist
+Apply the following checklist to every review. If any of the first five
+items is unchecked, it is a **Blocking** issue. Item 6 is **Important**.
+
+- [ ] New or modified functions/classes have at least one test.
+- [ ] Happy path is covered.
+- [ ] At least one error/exception path is covered.
+- [ ] Edge cases relevant to the feature are covered (empty input, boundary values, etc.).
+- [ ] Existing tests that exercise modified code were not silently deleted.
+- [ ] Tests are meaningful — they assert on observable behavior, not just that the code runs.
 
 ### Severity Classification
 When providing feedback, classify each issue:
@@ -235,6 +237,8 @@ When providing feedback, classify each issue:
 - Critical acceptance criteria are not met.
 - Tests are missing for critical functionality, or existing tests are
   broken.
+- Tests are absent for any new function, class, or modified code path —
+  even if the rest of the code is correct.
 - The code has serious maintainability issues that would create significant
   problems (e.g., a 500-line function with no structure).
 

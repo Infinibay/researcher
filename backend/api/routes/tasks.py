@@ -220,7 +220,7 @@ async def update_task(task_id: int, body: TaskUpdate):
         if body.status is not None:
             updates.append("status = ?")
             params.append(body.status)
-            if body.status in ("done", "cancelled"):
+            if body.status in ("done", "cancelled", "failed"):
                 updates.append("completed_at = CURRENT_TIMESTAMP")
         if body.assigned_to is not None:
             updates.append("assigned_to = ?")
@@ -236,7 +236,6 @@ async def update_task(task_id: int, body: TaskUpdate):
             params.append(body.priority)
 
         if updates:
-            updates.append("updated_at = CURRENT_TIMESTAMP")
             params.append(task_id)
             conn.execute(
                 f"UPDATE tasks SET {', '.join(updates)} WHERE id = ?",

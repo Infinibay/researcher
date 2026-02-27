@@ -84,6 +84,41 @@ async def send_message(project_id: int, body: ChatMessageCreate):
         return dict(row)
 
     message = execute_with_retry(_create)
+
+    # Create agent_events so the autonomy system dispatches the message
+    # to the target agent(s).  User messages get PRIORITY_URGENT.
+    try:
+        from backend.autonomy.events import create_message_event
+
+        create_message_event(
+            project_id=project_id,
+            from_agent="user",
+            to_agent=body.to_agent,
+            to_role=body.to_role,
+            message=body.message,
+            thread_id=message.get("thread_id"),
+            message_id=message.get("id"),
+            conversation_type="user_to_agent",
+        )
+    except Exception:
+        pass  # non-fatal — autonomy may not be active yet
+
+    # Emit EventBus event for WebSocket relay
+    event_bus.emit(
+        FlowEvent(
+            event_type="user_message_sent",
+            project_id=project_id,
+            entity_type="message",
+            entity_id=message.get("id"),
+            data={
+                "from": "user",
+                "to_agent": body.to_agent,
+                "to_role": body.to_role,
+                "message": body.message[:200],
+            },
+        )
+    )
+
     return ChatMessageResponse(**message)
 
 

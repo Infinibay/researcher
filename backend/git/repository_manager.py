@@ -7,10 +7,24 @@ import os
 import sqlite3
 import subprocess
 from typing import Any
+from urllib.parse import urlparse
 
 from backend.tools.base.db import execute_with_retry
 
 logger = logging.getLogger(__name__)
+
+
+def _forgejo_clone_url(api_url: str, owner: str, repo_name: str) -> str:
+    """Build a clone URL that uses the same host/port as FORGEJO_API_URL.
+
+    Forgejo's API returns ``clone_url`` relative to its own ``ROOT_URL``
+    (often ``localhost``), which may differ from the address the user
+    configured in ``FORGEJO_API_URL``.  This helper derives the correct
+    external URL from the API base.
+    """
+    parsed = urlparse(api_url)  # e.g. http://192.168.0.199:3000/api/v1
+    base = f"{parsed.scheme}://{parsed.netloc}"
+    return f"{base}/{owner}/{repo_name}.git"
 
 
 class RepositoryManager:
@@ -43,16 +57,26 @@ class RepositoryManager:
             try:
                 from backend.git.forgejo_client import forgejo_client
 
-                fg_repo = forgejo_client.create_repo(
+                forgejo_client.create_repo(
                     name=name,
                     description="",
                     private=False,
                     owner=settings.FORGEJO_OWNER or None,
                 )
-                clone_url = fg_repo.get("clone_url")
+                # Build clone URL from FORGEJO_API_URL (not from Forgejo's
+                # response which may use localhost).
+                owner = settings.FORGEJO_OWNER or "pabada"
+                clone_url = _forgejo_clone_url(settings.FORGEJO_API_URL, owner, name)
                 logger.info("Created Forgejo repo for '%s': %s", name, clone_url)
             except Exception:
-                logger.warning("Failed to create Forgejo repo for '%s'; continuing without remote", name, exc_info=True)
+                # Forgejo is configured but creation failed — this is fatal.
+                # Without a remote, all git tools (branch, push, PR) will fail.
+                logger.error(
+                    "Failed to create Forgejo repo for '%s' — aborting repo init. "
+                    "Forgejo is configured (FORGEJO_API_URL=%s) so a remote is required.",
+                    name, settings.FORGEJO_API_URL, exc_info=True,
+                )
+                raise
 
         os.makedirs(local_path, exist_ok=True)
 
@@ -63,6 +87,20 @@ class RepositoryManager:
             text=True,
         )
 
+        # Configure identity and create initial commit so the default branch exists
+        self.configure_git(local_path, "PABADA", "pabada@localhost")
+        gitkeep = os.path.join(local_path, ".gitkeep")
+        with open(gitkeep, "w") as f:
+            pass
+        subprocess.run(
+            ["git", "add", ".gitkeep"],
+            cwd=local_path, check=True, capture_output=True, text=True,
+        )
+        subprocess.run(
+            ["git", "commit", "-m", "Initial commit"],
+            cwd=local_path, check=True, capture_output=True, text=True,
+        )
+
         if clone_url:
             subprocess.run(
                 ["git", "remote", "add", "origin", clone_url],
@@ -71,6 +109,17 @@ class RepositoryManager:
                 capture_output=True,
                 text=True,
             )
+            # Configure token-based auth for push via extraHeader
+            self._configure_forgejo_auth(local_path, settings.FORGEJO_TOKEN)
+            # Push the initial commit so Forgejo has a main branch
+            subprocess.run(
+                ["git", "push", "-u", "origin", default_branch],
+                cwd=local_path,
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            logger.info("Pushed initial commit to origin/%s for '%s'", default_branch, name)
 
         def _insert(conn: sqlite3.Connection) -> dict[str, Any]:
             conn.execute(
@@ -87,7 +136,8 @@ class RepositoryManager:
             return dict(row)
 
         repo = execute_with_retry(_insert)
-        logger.info("Initialized repo '%s' at %s for project %d", name, local_path, project_id)
+        repo["has_remote"] = clone_url is not None
+        logger.info("Initialized repo '%s' at %s for project %d (has_remote=%s)", name, local_path, project_id, repo["has_remote"])
         return repo
 
     def clone_repo(
@@ -191,3 +241,25 @@ class RepositoryManager:
             text=True,
         )
         logger.info("Configured git identity in %s", local_path)
+
+    @staticmethod
+    def _configure_forgejo_auth(local_path: str, token: str) -> None:
+        """Store Forgejo token as an HTTP extra header in the repo's git config.
+
+        This allows ``git push`` / ``git fetch`` to authenticate without
+        embedding credentials in the remote URL.
+        """
+        if not token:
+            return
+        subprocess.run(
+            [
+                "git", "config", "--local",
+                "http.extraHeader",
+                f"Authorization: token {token}",
+            ],
+            cwd=local_path,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        logger.info("Configured Forgejo token auth in %s", local_path)

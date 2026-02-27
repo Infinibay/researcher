@@ -13,21 +13,29 @@ from __future__ import annotations
 import logging
 from typing import Any
 
-from crewai import Crew, Task
-from crewai.flow.flow import Flow, listen, or_, router, start
+from crewai.flow.flow import Flow, listen, router, start
 from crewai.flow.persistence import persist
 
 from backend.agents.registry import get_agent_by_role, get_available_agent_by_role
+from backend.flows.guardrails import (
+    MAX_RESCUE_ATTEMPTS,
+    check_research_artifacts,
+    validate_research_review_verdict,
+)
 from backend.flows.helpers import (
+    build_crew,
+    get_project_name,
     get_task_by_id,
+    kickoff_with_retry,
     log_flow_event,
     notify_team_lead,
     parse_review_result,
     update_task_status,
     update_task_status_safe,
 )
+from backend.flows.snapshot_service import update_subflow_step
 from backend.flows.state_models import ResearchState
-from backend.knowledge import AgentMemoryService, KnowledgeService
+from backend.knowledge import KnowledgeService
 from backend.prompts.research_reviewer import tasks as rr_tasks
 from backend.prompts.researcher import tasks as res_tasks
 
@@ -41,21 +49,19 @@ class ResearchFlow(Flow[ResearchState]):
     # ── Service helpers ───────────────────────────────────────────────────
 
     def _ensure_services(self) -> None:
-        """Ensure knowledge and memory services are initialised."""
+        """Ensure knowledge service is initialised."""
         if self.state.knowledge_service_enabled:
             if not getattr(self, "_knowledge_service", None):
                 self._knowledge_service = KnowledgeService()
-            if not getattr(self, "_memory_service", None):
-                self._memory_service = AgentMemoryService()
         else:
             self._knowledge_service = None
-            self._memory_service = None
 
     # ── Start ─────────────────────────────────────────────────────────────
 
     @start()
     def assign_research(self):
         """Load task and assign to researcher."""
+        update_subflow_step(self.state.project_id, "research_flow", "assign_research")
         logger.info("ResearchFlow: assign_research (task_id=%d)", self.state.task_id)
 
         self._ensure_services()
@@ -66,31 +72,27 @@ class ResearchFlow(Flow[ResearchState]):
             return
 
         self.state.task_title = task.get("title", "")
+        if not self.state.project_name:
+            self.state.project_name = get_project_name(self.state.project_id)
 
         researcher = get_available_agent_by_role(
             "researcher", self.state.project_id,
             knowledge_service=self._knowledge_service,
-            memory_service=self._memory_service,
         )
         self.state.researcher_id = researcher.agent_id
         researcher.activate_context(task_id=self.state.task_id)
 
-        desc, expected = res_tasks.assign_research(
+        # Move to in_progress BEFORE the crew runs — the agent may advance
+        # the task further (e.g. to review_ready) during kickoff.
+        update_task_status_safe(self.state.task_id, "in_progress")
+
+        task_prompt = res_tasks.assign_research(
             self.state.task_id, self.state.task_title,
             task.get("description", ""),
+            project_id=self.state.project_id,
+            project_name=self.state.project_name,
         )
-        crew = Crew(
-            agents=[researcher.crewai_agent],
-            tasks=[Task(
-                description=desc,
-                agent=researcher.crewai_agent,
-                expected_output=expected,
-            )],
-            verbose=True,
-        )
-        crew.kickoff()
-
-        update_task_status(self.state.task_id, "in_progress")
+        kickoff_with_retry(build_crew(researcher, task_prompt))
 
         log_flow_event(
             self.state.project_id, "research_assigned", "research_flow",
@@ -110,6 +112,7 @@ class ResearchFlow(Flow[ResearchState]):
     @listen("task_assigned")
     def literature_review(self):
         """Researcher searches for relevant papers and references."""
+        update_subflow_step(self.state.project_id, "research_flow", "literature_review")
         logger.info("ResearchFlow: literature_review for task %d", self.state.task_id)
 
         self._ensure_services()
@@ -117,24 +120,16 @@ class ResearchFlow(Flow[ResearchState]):
             "researcher", self.state.project_id,
             agent_id=self.state.researcher_id,
             knowledge_service=self._knowledge_service,
-            memory_service=self._memory_service,
         )
         researcher.activate_context(task_id=self.state.task_id)
         run_id = researcher.create_agent_run(self.state.task_id)
 
-        desc, expected = res_tasks.literature_review(
+        task_prompt = res_tasks.literature_review(
             self.state.task_id, self.state.task_title,
+            project_id=self.state.project_id,
+            project_name=self.state.project_name,
         )
-        crew = Crew(
-            agents=[researcher.crewai_agent],
-            tasks=[Task(
-                description=desc,
-                agent=researcher.crewai_agent,
-                expected_output=expected,
-            )],
-            verbose=True,
-        )
-        result = crew.kickoff()
+        result = kickoff_with_retry(build_crew(researcher, task_prompt))
 
         researcher.complete_agent_run(run_id, status="completed", output_summary=str(result)[:500])
 
@@ -148,6 +143,7 @@ class ResearchFlow(Flow[ResearchState]):
     @listen("literature_review")
     def formulate_hypothesis(self):
         """Researcher formulates a hypothesis based on literature review."""
+        update_subflow_step(self.state.project_id, "research_flow", "formulate_hypothesis")
         logger.info("ResearchFlow: formulate_hypothesis for task %d", self.state.task_id)
 
         self._ensure_services()
@@ -155,23 +151,15 @@ class ResearchFlow(Flow[ResearchState]):
             "researcher", self.state.project_id,
             agent_id=self.state.researcher_id,
             knowledge_service=self._knowledge_service,
-            memory_service=self._memory_service,
         )
         researcher.activate_context(task_id=self.state.task_id)
 
-        desc, expected = res_tasks.formulate_hypothesis(
+        task_prompt = res_tasks.formulate_hypothesis(
             self.state.task_id, self.state.task_title,
+            project_id=self.state.project_id,
+            project_name=self.state.project_name,
         )
-        crew = Crew(
-            agents=[researcher.crewai_agent],
-            tasks=[Task(
-                description=desc,
-                agent=researcher.crewai_agent,
-                expected_output=expected,
-            )],
-            verbose=True,
-        )
-        result = crew.kickoff()
+        result = kickoff_with_retry(build_crew(researcher, task_prompt))
         self.state.hypothesis = str(result)
 
         log_flow_event(
@@ -184,6 +172,7 @@ class ResearchFlow(Flow[ResearchState]):
     @listen("formulate_hypothesis")
     def investigate(self):
         """Researcher conducts in-depth investigation."""
+        update_subflow_step(self.state.project_id, "research_flow", "investigate")
         logger.info("ResearchFlow: investigate for task %d", self.state.task_id)
 
         self._ensure_services()
@@ -191,26 +180,19 @@ class ResearchFlow(Flow[ResearchState]):
             "researcher", self.state.project_id,
             agent_id=self.state.researcher_id,
             knowledge_service=self._knowledge_service,
-            memory_service=self._memory_service,
         )
         researcher.activate_context(task_id=self.state.task_id)
         run_id = researcher.create_agent_run(self.state.task_id)
 
-        desc, expected = res_tasks.investigate(
+        task_prompt = res_tasks.investigate(
             self.state.task_id, self.state.task_title,
             self.state.hypothesis,
+            project_id=self.state.project_id,
+            project_name=self.state.project_name,
         )
-        crew = Crew(
-            agents=[researcher.crewai_agent],
-            tasks=[Task(
-                description=desc,
-                agent=researcher.crewai_agent,
-                expected_output=expected,
-            )],
-            verbose=True,
-        )
+        crew = build_crew(researcher, task_prompt)
         try:
-            result = crew.kickoff()
+            result = kickoff_with_retry(crew)
         except Exception as exc:
             logger.exception("Crew execution failed in investigate for task %d", self.state.task_id)
             researcher.complete_agent_run(run_id, status="failed", error_class=type(exc).__name__)
@@ -232,11 +214,17 @@ class ResearchFlow(Flow[ResearchState]):
             "task", self.state.task_id,
         )
 
+    @router("investigate")
+    def route_after_investigation(self):
+        """Route to report writing after investigation completes."""
+        return "ready_for_report"
+
     # ── Report writing ────────────────────────────────────────────────────
 
-    @listen(or_("investigate", "revise_research"))
+    @listen("ready_for_report")
     def write_report(self):
         """Researcher writes a structured research report."""
+        update_subflow_step(self.state.project_id, "research_flow", "write_report")
         logger.info("ResearchFlow: write_report for task %d", self.state.task_id)
 
         self._ensure_services()
@@ -244,24 +232,16 @@ class ResearchFlow(Flow[ResearchState]):
             "researcher", self.state.project_id,
             agent_id=self.state.researcher_id,
             knowledge_service=self._knowledge_service,
-            memory_service=self._memory_service,
         )
         researcher.activate_context(task_id=self.state.task_id)
 
-        desc, expected = res_tasks.write_report(
+        task_prompt = res_tasks.write_report(
             self.state.task_id, self.state.task_title,
             self.state.hypothesis,
+            project_id=self.state.project_id,
+            project_name=self.state.project_name,
         )
-        crew = Crew(
-            agents=[researcher.crewai_agent],
-            tasks=[Task(
-                description=desc,
-                agent=researcher.crewai_agent,
-                expected_output=expected,
-            )],
-            verbose=True,
-        )
-        result = crew.kickoff()
+        result = kickoff_with_retry(build_crew(researcher, task_prompt))
         self.state.report_path = str(result)
 
         log_flow_event(
@@ -269,37 +249,143 @@ class ResearchFlow(Flow[ResearchState]):
             "task", self.state.task_id,
         )
 
+    # ── Artifact guardrail ─────────────────────────────────────────────────
+
+    @router("write_report")
+    def verify_artifacts(self):
+        """Check that findings and report exist in DB before peer review.
+
+        If artifacts are missing, invoke a rescue prompt that tells the
+        researcher to call RecordFindingTool/WriteReportTool immediately.
+        Routes to "peer_review_ready" on success or "rescue_artifacts" on
+        missing artifacts.  After MAX_RESCUE_ATTEMPTS failures, routes to
+        "artifacts_unrecoverable".
+        """
+        counts = check_research_artifacts(
+            self.state.project_id, self.state.task_id,
+        )
+        logger.info(
+            "ResearchFlow: verify_artifacts task=%d findings=%d reports=%d",
+            self.state.task_id, counts["findings"], counts["reports"],
+        )
+
+        if counts["findings"] > 0 and counts["reports"] > 0:
+            self.state.rescue_count = 0
+            return "peer_review_ready"
+
+        if self.state.rescue_count >= MAX_RESCUE_ATTEMPTS:
+            logger.warning(
+                "ResearchFlow: artifacts still missing after %d rescue attempts "
+                "for task %d — giving up",
+                self.state.rescue_count, self.state.task_id,
+            )
+            return "artifacts_unrecoverable"
+
+        return "rescue_artifacts"
+
+    @router("rescue_artifacts")
+    def rescue_missing_artifacts(self):
+        """Re-invoke the researcher with a direct rescue prompt."""
+        self.state.rescue_count += 1
+        logger.info(
+            "ResearchFlow: rescue attempt %d/%d for task %d",
+            self.state.rescue_count, MAX_RESCUE_ATTEMPTS, self.state.task_id,
+        )
+
+        counts = check_research_artifacts(
+            self.state.project_id, self.state.task_id,
+        )
+
+        self._ensure_services()
+        researcher = get_agent_by_role(
+            "researcher", self.state.project_id,
+            agent_id=self.state.researcher_id,
+            knowledge_service=self._knowledge_service,
+        )
+        researcher.activate_context(task_id=self.state.task_id)
+        run_id = researcher.create_agent_run(self.state.task_id)
+
+        task_prompt = res_tasks.rescue_missing_artifacts(
+            self.state.task_id, self.state.task_title,
+            missing_findings=counts["findings"] == 0,
+            missing_report=counts["reports"] == 0,
+            project_id=self.state.project_id,
+            project_name=self.state.project_name,
+        )
+        result = kickoff_with_retry(build_crew(researcher, task_prompt))
+        researcher.complete_agent_run(
+            run_id, status="completed", output_summary=str(result)[:500],
+        )
+
+        log_flow_event(
+            self.state.project_id, "artifact_rescue_attempted", "research_flow",
+            "task", self.state.task_id,
+            {"rescue_count": self.state.rescue_count,
+             "missing_findings": counts["findings"] == 0,
+             "missing_report": counts["reports"] == 0},
+        )
+
+        # Re-check — route back to verify_artifacts logic inline
+        new_counts = check_research_artifacts(
+            self.state.project_id, self.state.task_id,
+        )
+        if new_counts["findings"] > 0 and new_counts["reports"] > 0:
+            return "peer_review_ready"
+        if self.state.rescue_count >= MAX_RESCUE_ATTEMPTS:
+            return "artifacts_unrecoverable"
+        return "rescue_artifacts"
+
+    @listen("artifacts_unrecoverable")
+    def handle_unrecoverable_artifacts(self):
+        """Mark task as failed when researcher cannot produce artifacts."""
+        logger.error(
+            "ResearchFlow: task %d failed — researcher could not produce "
+            "artifacts after %d rescue attempts",
+            self.state.task_id, self.state.rescue_count,
+        )
+        update_task_status_safe(self.state.task_id, "failed")
+        log_flow_event(
+            self.state.project_id, "research_artifacts_missing", "research_flow",
+            "task", self.state.task_id,
+            {"rescue_attempts": self.state.rescue_count},
+        )
+        notify_team_lead(
+            self.state.project_id, "system",
+            f"Research task {self.state.task_id} failed: the researcher could "
+            f"not produce findings or a report after {self.state.rescue_count} "
+            f"rescue attempts. The model may not be calling tools reliably.",
+        )
+
     # ── Peer review ───────────────────────────────────────────────────────
 
-    @listen("write_report")
+    @listen("peer_review_ready")
     def request_peer_review(self):
         """Research Reviewer evaluates the findings and methodology."""
+        update_subflow_step(self.state.project_id, "research_flow", "request_peer_review")
         logger.info("ResearchFlow: request_peer_review for task %d", self.state.task_id)
+
+        # Ensure task is in review_ready before peer review — the researcher
+        # prompt tells the agent to call UpdateTaskStatusTool, but if the
+        # agent skipped it, the state machine would block the later done
+        # transition.
+        update_task_status_safe(self.state.task_id, "review_ready")
 
         self._ensure_services()
         reviewer = get_available_agent_by_role(
             "research_reviewer", self.state.project_id,
             knowledge_service=self._knowledge_service,
-            memory_service=self._memory_service,
         )
         reviewer.activate_context(task_id=self.state.task_id)
         run_id = reviewer.create_agent_run(self.state.task_id)
 
-        desc, expected = rr_tasks.peer_review(
+        task_prompt = rr_tasks.peer_review(
             self.state.task_id, self.state.task_title,
             project_id=self.state.project_id,
+            project_name=self.state.project_name,
         )
-        crew = Crew(
-            agents=[reviewer.crewai_agent],
-            tasks=[Task(
-                description=desc,
-                agent=reviewer.crewai_agent,
-                expected_output=expected,
-            )],
-            verbose=True,
-        )
+        crew = build_crew(reviewer, task_prompt, guardrail=validate_research_review_verdict)
         try:
-            result = str(crew.kickoff()).strip()
+            result = str(kickoff_with_retry(crew)).strip()
         except Exception as exc:
             logger.exception("Crew execution failed in peer_review for task %d", self.state.task_id)
             reviewer.complete_agent_run(run_id, status="failed", error_class=type(exc).__name__)
@@ -355,11 +441,11 @@ class ResearchFlow(Flow[ResearchState]):
 
     # ── Rejection handling ────────────────────────────────────────────────
 
-    @listen("rejected")
+    @router("rejected")
     def revise_research(self):
         """Researcher revises findings based on peer review feedback.
 
-        Triggers "revise_research" → write_report via or_().
+        Returns "ready_for_report" → write_report.
         """
         logger.info(
             "ResearchFlow: revise_research for task %d (revision %d/%d)",
@@ -371,25 +457,29 @@ class ResearchFlow(Flow[ResearchState]):
             "researcher", self.state.project_id,
             agent_id=self.state.researcher_id,
             knowledge_service=self._knowledge_service,
-            memory_service=self._memory_service,
         )
         researcher.activate_context(task_id=self.state.task_id)
         run_id = researcher.create_agent_run(self.state.task_id)
 
-        desc, expected = res_tasks.revise_research(
+        task_prompt = res_tasks.revise_research(
             self.state.task_id,
             reviewer_feedback=self.state.last_reviewer_feedback,
+            project_id=self.state.project_id,
+            project_name=self.state.project_name,
         )
-        crew = Crew(
-            agents=[researcher.crewai_agent],
-            tasks=[Task(
-                description=desc,
-                agent=researcher.crewai_agent,
-                expected_output=expected,
-            )],
-            verbose=True,
-        )
-        result = crew.kickoff()
+        try:
+            result = kickoff_with_retry(build_crew(researcher, task_prompt))
+        except Exception as exc:
+            logger.exception(
+                "Crew execution failed in revise_research for task %d", self.state.task_id,
+            )
+            researcher.complete_agent_run(run_id, status="failed", error_class=type(exc).__name__)
+            log_flow_event(
+                self.state.project_id, "rework_failed", "research_flow",
+                "task", self.state.task_id, {"error": str(exc)[:300]},
+            )
+            # Accept best-effort instead of crashing the entire flow
+            return "max_revisions_reached"
 
         researcher.complete_agent_run(run_id, status="completed", output_summary=str(result)[:500])
 
@@ -399,6 +489,8 @@ class ResearchFlow(Flow[ResearchState]):
             {"revision_count": self.state.revision_count},
         )
 
+        return "ready_for_report"
+
     @listen("max_revisions_reached")
     def handle_max_revisions(self):
         """Accept best-effort research after exhausting all revision attempts."""
@@ -407,27 +499,15 @@ class ResearchFlow(Flow[ResearchState]):
             self.state.task_id, self.state.revision_count,
         )
 
-        self._ensure_services()
-
-        if self._memory_service is not None:
-            researcher = get_agent_by_role(
-                "researcher", self.state.project_id,
-                knowledge_service=self._knowledge_service,
-                memory_service=self._memory_service,
-            )
-            self._memory_service.persist_agent_memory(
-                self.state.researcher_id,
-                f"Research for task {self.state.task_id} could not pass peer review "
-                f"after {self.state.revision_count} revisions. "
-                f"Last hypothesis: {self.state.hypothesis[:500]}",
-            )
-
         update_task_status(self.state.task_id, "done")
 
         log_flow_event(
             self.state.project_id, "research_max_revisions", "research_flow",
             "task", self.state.task_id,
-            {"revision_count": self.state.revision_count},
+            {
+                "revision_count": self.state.revision_count,
+                "hypothesis": self.state.hypothesis[:500],
+            },
         )
 
     # ── Validation and knowledge base update ──────────────────────────────
@@ -435,6 +515,7 @@ class ResearchFlow(Flow[ResearchState]):
     @listen("validated")
     def update_knowledge_base(self):
         """Index validated findings in the knowledge base."""
+        update_subflow_step(self.state.project_id, "research_flow", "update_knowledge_base")
         logger.info(
             "ResearchFlow: updating knowledge base for task %d", self.state.task_id,
         )
@@ -444,28 +525,19 @@ class ResearchFlow(Flow[ResearchState]):
             "researcher", self.state.project_id,
             agent_id=self.state.researcher_id,
             knowledge_service=self._knowledge_service,
-            memory_service=self._memory_service,
         )
         researcher.activate_context(task_id=self.state.task_id)
 
-        desc, expected = res_tasks.update_knowledge_base(self.state.task_id)
-        crew = Crew(
-            agents=[researcher.crewai_agent],
-            tasks=[Task(
-                description=desc,
-                agent=researcher.crewai_agent,
-                expected_output=expected,
-            )],
-            verbose=True,
+        task_prompt = res_tasks.update_knowledge_base(
+            self.state.task_id,
+            project_id=self.state.project_id,
+            project_name=self.state.project_name,
         )
-        result = crew.kickoff()
+        result = build_crew(researcher, task_prompt).kickoff()
 
-        if self._memory_service is not None:
-            self._memory_service.persist_agent_memory(
-                self.state.researcher_id,
-                str(result)[:2000],
-            )
-
+        # Ensure review_ready before done — the researcher agent may have
+        # already moved it, so use _safe to tolerate no-op transitions.
+        update_task_status_safe(self.state.task_id, "review_ready")
         update_task_status(self.state.task_id, "done")
 
         log_flow_event(

@@ -3,13 +3,13 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone, timedelta
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 import pytest
 
-from backend.flows.helpers import calculate_time_elapsed, parse_ideas
+from backend.flows.helpers import calculate_time_elapsed, format_ideas, parse_ideas
 from backend.flows.state_models import BrainstormPhase, BrainstormState
-from backend.tests.flows.conftest import make_mock_agent, make_mock_crew
+from backend.tests.flows.conftest import make_mock_agent
 
 
 class TestBrainstormState:
@@ -86,8 +86,11 @@ class TestCalculateTimeElapsed:
 class TestBrainstormingFlowStart:
     """Test session start."""
 
+    @patch("backend.communication.thread_manager.ThreadManager")
     @patch("backend.flows.brainstorming_flow.log_flow_event")
-    def test_start_session(self, mock_log):
+    def test_start_session(self, mock_log, mock_tm_cls):
+        mock_tm_cls.return_value.create_thread.return_value = "test-thread-id"
+
         from backend.flows.brainstorming_flow import BrainstormingFlow
 
         flow = BrainstormingFlow()
@@ -99,22 +102,26 @@ class TestBrainstormingFlowStart:
         assert len(flow.state.participants) == 3
         assert flow.state.start_time != ""
         assert flow.state.phase == BrainstormPhase.BRAINSTORM
+        assert flow.state.thread_id == "test-thread-id"
+        mock_tm_cls.return_value.create_thread.assert_called_once_with(
+            project_id=1,
+            thread_type="brainstorming",
+            participants=["team_lead", "developer", "researcher"],
+        )
 
 
 class TestBrainstormingFlowConsolidation:
     """Test idea consolidation."""
 
-    @patch("backend.flows.brainstorming_flow.Crew")
-    @patch("backend.flows.brainstorming_flow.Task")
+    @patch("backend.flows.brainstorming_flow.run_agent_task")
     @patch("backend.flows.brainstorming_flow.get_agent_by_role")
     @patch("backend.flows.brainstorming_flow.log_flow_event")
-    def test_consolidate_ideas(self, mock_log, mock_agent, MockTask, MockCrew):
+    def test_consolidate_ideas(self, mock_log, mock_agent, mock_run):
         mock_agent.return_value = make_mock_agent("team_lead")
-        MockCrew.return_value = make_mock_crew(
+        mock_run.return_value = (
             "1. Combined Feature: Merged auth and security features\n"
             "2. Analytics: Dashboard and reporting combined"
         )
-        MockTask.return_value = MagicMock()
 
         from backend.flows.brainstorming_flow import BrainstormingFlow
 
@@ -137,13 +144,11 @@ class TestBrainstormingFlowUserDecision:
     """Test user presentation and decision routing."""
 
     @patch("backend.flows.brainstorming_flow.log_flow_event")
-    @patch("backend.flows.brainstorming_flow.Crew")
-    @patch("backend.flows.brainstorming_flow.Task")
+    @patch("backend.flows.brainstorming_flow.run_agent_task")
     @patch("backend.flows.brainstorming_flow.get_agent_by_role")
-    def test_present_to_user_approved(self, mock_agent, MockTask, MockCrew, mock_log):
+    def test_present_to_user_approved(self, mock_agent, mock_run, mock_log):
         mock_agent.return_value = make_mock_agent("project_lead")
-        MockCrew.return_value = make_mock_crew("APPROVED")
-        MockTask.return_value = MagicMock()
+        mock_run.return_value = "APPROVED"
 
         from backend.flows.brainstorming_flow import BrainstormingFlow
 
@@ -156,13 +161,11 @@ class TestBrainstormingFlowUserDecision:
         assert flow.state.user_approved is True
 
     @patch("backend.flows.brainstorming_flow.log_flow_event")
-    @patch("backend.flows.brainstorming_flow.Crew")
-    @patch("backend.flows.brainstorming_flow.Task")
+    @patch("backend.flows.brainstorming_flow.run_agent_task")
     @patch("backend.flows.brainstorming_flow.get_agent_by_role")
-    def test_present_to_user_rejected(self, mock_agent, MockTask, MockCrew, mock_log):
+    def test_present_to_user_rejected(self, mock_agent, mock_run, mock_log):
         mock_agent.return_value = make_mock_agent("project_lead")
-        MockCrew.return_value = make_mock_crew("REJECTED: Need more innovative ideas")
-        MockTask.return_value = MagicMock()
+        mock_run.return_value = "REJECTED: Need more innovative ideas"
 
         from backend.flows.brainstorming_flow import BrainstormingFlow
 
@@ -199,3 +202,96 @@ class TestBrainstormingFlowRejection:
         assert flow.state.selected_ideas == []
         assert flow.state.round_count == 0
         assert flow.state.phase == BrainstormPhase.BRAINSTORM
+
+
+class TestFormatIdeas:
+    """Test format_ideas helper."""
+
+    def test_numbered(self):
+        ideas = [
+            {"title": "Auth", "description": "Add auth"},
+            {"title": "API", "description": "Build API"},
+        ]
+        result = format_ideas(ideas)
+        assert result == "1. Auth: Add auth\n2. API: Build API"
+
+    def test_unnumbered(self):
+        ideas = [{"title": "Cache", "description": "Add caching"}]
+        result = format_ideas(ideas, numbered=False)
+        assert result == "- Cache: Add caching"
+
+    def test_with_attribution(self):
+        ideas = [
+            {"title": "Idea", "description": "Desc", "proposed_by": "developer"},
+        ]
+        result = format_ideas(ideas, numbered=False, include_attribution=True)
+        assert result == "- [developer] Idea: Desc"
+
+    def test_missing_fields(self):
+        ideas = [{}]
+        result = format_ideas(ideas)
+        assert result == "1. Untitled: "
+
+    def test_empty_list(self):
+        assert format_ideas([]) == ""
+
+
+class TestRunAgentTask:
+    """Test run_agent_task helper."""
+
+    @patch("crewai.Crew")
+    @patch("crewai.Task")
+    def test_basic_invocation(self, MockTask, MockCrew):
+        from backend.flows.helpers import run_agent_task
+        from backend.tests.flows.conftest import make_mock_agent, make_mock_crew
+
+        agent = make_mock_agent("team_lead")
+        MockCrew.return_value = make_mock_crew("result text")
+
+        result = run_agent_task(agent, ("do the thing", "expected output"))
+
+        assert result == "result text"
+        agent.activate_context.assert_called_once_with(task_id=None)
+        MockCrew.assert_called_once()
+        agent.create_agent_run.assert_not_called()
+
+    @patch("crewai.Crew")
+    @patch("crewai.Task")
+    def test_with_run_tracking(self, MockTask, MockCrew):
+        from backend.flows.helpers import run_agent_task
+        from backend.tests.flows.conftest import make_mock_agent, make_mock_crew
+
+        agent = make_mock_agent("developer")
+        MockCrew.return_value = make_mock_crew("done")
+
+        result = run_agent_task(
+            agent, ("implement", "code"), task_id=42, track_run=True,
+        )
+
+        assert result == "done"
+        agent.activate_context.assert_called_once_with(task_id=42)
+        agent.create_agent_run.assert_called_once_with(42)
+        agent.complete_agent_run.assert_called_once()
+        call_args = agent.complete_agent_run.call_args
+        assert call_args[0][0] == "test-run-id"
+        assert call_args[1]["status"] == "completed"
+
+    @patch("crewai.Crew")
+    @patch("crewai.Task")
+    def test_failure_completes_run_as_failed(self, MockTask, MockCrew):
+        from backend.flows.helpers import run_agent_task
+        from backend.tests.flows.conftest import make_mock_agent
+
+        agent = make_mock_agent("developer")
+        mock_crew = MockCrew.return_value
+        mock_crew.kickoff.side_effect = RuntimeError("LLM down")
+
+        with pytest.raises(RuntimeError, match="LLM down"):
+            run_agent_task(
+                agent, ("implement", "code"), task_id=42, track_run=True,
+            )
+
+        agent.complete_agent_run.assert_called_once()
+        call_args = agent.complete_agent_run.call_args
+        assert call_args[1]["status"] == "failed"
+        assert call_args[1]["error_class"] == "RuntimeError"

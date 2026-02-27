@@ -7,6 +7,8 @@ from pydantic import BaseModel, Field
 
 from backend.config.settings import settings
 from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.web.rate_limiter import web_rate_limiter
+from backend.tools.web.robots_checker import robots_checker
 
 
 class WebFetchInput(BaseModel):
@@ -36,6 +38,13 @@ class WebFetchTool(PabadaBaseTool):
             return self._error(
                 "trafilatura not installed. Run: pip install trafilatura"
             )
+
+        # Check robots.txt
+        if not robots_checker.is_allowed(url, "PabadaBot/2.0"):
+            return self._error("robots.txt disallows fetching this URL")
+
+        # Rate limit
+        web_rate_limiter.acquire()
 
         # Fetch URL
         try:
@@ -80,6 +89,13 @@ class WebFetchTool(PabadaBaseTool):
             import trafilatura
         except ImportError as e:
             return self._error(f"Missing dependency: {e}")
+
+        # Check robots.txt
+        if not await robots_checker.is_allowed_async(url, "PabadaBot/2.0"):
+            return self._error("robots.txt disallows fetching this URL")
+
+        # Rate limit
+        await web_rate_limiter.acquire_async()
 
         try:
             async with httpx.AsyncClient(

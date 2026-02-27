@@ -25,6 +25,7 @@ _ROLE_FACTORIES: dict[str, tuple[str, str]] = {
 
 VALID_ROLES = frozenset(_ROLE_FACTORIES)
 
+
 # Default team composition: role -> number of instances.
 # Single-instance roles (project_lead, team_lead) get 1 agent.
 # Multi-instance roles get 2+ agents that can work concurrently.
@@ -188,11 +189,20 @@ def initialize_project_team(
         for instance in range(1, count + 1):
             agent_id = _make_agent_id(role, project_id, instance)
 
-            # Skip if already registered
+            # If already registered, ensure role is correct (may have
+            # been stored with the wrong role from a previous bug).
             if agent_id in existing_ids:
-                created.append(next(
+                existing_entry = next(
                     e for e in existing_roster if e["agent_id"] == agent_id
-                ))
+                )
+                if existing_entry["role"] != role:
+                    logger.warning(
+                        "Fixing role mismatch for %s: %s → %s",
+                        agent_id, existing_entry["role"], role,
+                    )
+                    register_agent(agent_id, existing_entry["name"], role)
+                    existing_entry = {**existing_entry, "role": role}
+                created.append(existing_entry)
                 continue
 
             name = generate_agent_name(used_names)
@@ -225,7 +235,6 @@ def get_agent_by_role(
     agent_id: str | None = None,
     llm: Any | None = None,
     knowledge_service: Any | None = None,
-    memory_service: Any | None = None,
     tech_hints: list[str] | None = None,
 ) -> PabadaAgent:
     """Return a ``PabadaAgent`` for *role*, creating and registering it if needed.
@@ -238,8 +247,8 @@ def get_agent_by_role(
     - A randomly generated name (persisted across re-creations).
     - The live team roster so it knows about its teammates.
 
-    Optional *knowledge_service* and *memory_service* are forwarded to the
-    agent factory for roles that support them (researcher, research_reviewer).
+    Optional *knowledge_service* is forwarded to the agent factory for roles
+    that support it (researcher, research_reviewer).
     """
     if role not in VALID_ROLES:
         raise ValueError(f"Unknown role '{role}'. Valid: {sorted(VALID_ROLES)}")
@@ -267,8 +276,6 @@ def get_agent_by_role(
     if role in _ROLES_WITH_KNOWLEDGE:
         if knowledge_service is not None:
             kwargs["knowledge_service"] = knowledge_service
-        if memory_service is not None:
-            kwargs["memory_service"] = memory_service
     if role in _ROLES_WITH_TECH and tech_hints is not None:
         kwargs["tech_hints"] = tech_hints
 
@@ -283,7 +290,6 @@ def get_available_agent_by_role(
     *,
     llm: Any | None = None,
     knowledge_service: Any | None = None,
-    memory_service: Any | None = None,
     tech_hints: list[str] | None = None,
 ) -> PabadaAgent:
     """Return an idle agent of the given *role*, or create a default one.
@@ -311,7 +317,6 @@ def get_available_agent_by_role(
         agent_id=chosen_id,
         llm=llm,
         knowledge_service=knowledge_service,
-        memory_service=memory_service,
         tech_hints=tech_hints,
     )
 

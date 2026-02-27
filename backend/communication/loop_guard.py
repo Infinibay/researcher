@@ -97,11 +97,17 @@ class LoopGuard:
         if from_agent == "system":
             return LoopGuardVerdict()
 
+        # Brainstorming threads bypass all loop checks — the flow has its
+        # own round/time limits so LoopGuard is redundant.
+        if thread_id and self._is_brainstorming_thread(thread_id):
+            return LoopGuardVerdict()
+
         checks = [
             self._check_circuit_breaker,
             self._check_rate_limit,
             self._check_dedup,
             self._check_ping_pong,
+            self._check_pair_exchange,
         ]
 
         for check_fn in checks:
@@ -181,6 +187,24 @@ class LoopGuard:
         )
         # Post system notice
         self._post_system_notice(project_id, reason)
+
+    # ── Brainstorming thread helper ─────────────────────────────────────
+
+    @staticmethod
+    def _is_brainstorming_thread(thread_id: str) -> bool:
+        """Check if thread_id belongs to a brainstorming thread."""
+
+        def _query(conn: sqlite3.Connection) -> bool:
+            row = conn.execute(
+                "SELECT thread_type FROM conversation_threads WHERE thread_id = ?",
+                (thread_id,),
+            ).fetchone()
+            return row is not None and row["thread_type"] == "brainstorming"
+
+        try:
+            return execute_with_retry(_query)
+        except Exception:
+            return False
 
     # ── Check: Circuit Breaker ───────────────────────────────────────────
 
@@ -389,6 +413,59 @@ class LoopGuard:
 
         return LoopGuardVerdict()
 
+    # ── Check: Pair Exchange Volume ──────────────────────────────────────
+
+    def _check_pair_exchange(
+        self, *, from_agent, to_agent, project_id, **_kw
+    ) -> LoopGuardVerdict:
+        """Detect excessive back-and-forth between a specific pair of agents.
+
+        Unlike ping-pong (which checks alternating pattern in a single thread),
+        this counts total messages exchanged between the same two agents across
+        ALL threads within a time window.  Catches topic-based loops where
+        content differs each time but the agents keep discussing the same issue.
+        """
+        if not to_agent or not project_id:
+            return LoopGuardVerdict()
+
+        window = settings.LOOP_PAIR_EXCHANGE_WINDOW
+        limit = settings.LOOP_PAIR_EXCHANGE_MAX
+
+        def _query(conn: sqlite3.Connection) -> int:
+            row = conn.execute(
+                """SELECT COUNT(*) as cnt FROM chat_messages
+                   WHERE ((from_agent = ? AND to_agent = ?)
+                       OR (from_agent = ? AND to_agent = ?))
+                     AND project_id = ?
+                     AND created_at > datetime('now', ?)""",
+                (
+                    from_agent, to_agent,
+                    to_agent, from_agent,
+                    project_id,
+                    f"-{window} seconds",
+                ),
+            ).fetchone()
+            return row["cnt"] if row else 0
+
+        try:
+            count = execute_with_retry(_query)
+        except Exception:
+            return LoopGuardVerdict()
+
+        if count >= limit:
+            return LoopGuardVerdict(
+                allowed=False,
+                reason=(
+                    f"pair_exchange: {count} messages exchanged between "
+                    f"{from_agent} and {to_agent} in {window}s (max {limit}). "
+                    "Stop messaging this agent — proceed with your best judgment "
+                    "or escalate to the user."
+                ),
+                action="escalate",
+            )
+
+        return LoopGuardVerdict()
+
     # ── Context Summary Builder ──────────────────────────────────────────
 
     def _build_context_summary(self, thread_id: str | None, from_agent: str) -> str:
@@ -488,7 +565,7 @@ class LoopGuard:
         details: str = "",
     ) -> None:
         # Normalise incident_type to valid enum values
-        valid_types = {"duplicate_message", "rate_limit", "ping_pong", "circuit_open", "question_budget"}
+        valid_types = {"duplicate_message", "rate_limit", "ping_pong", "circuit_open", "question_budget", "pair_exchange"}
         if incident_type not in valid_types:
             incident_type = "duplicate_message"  # default fallback
 

@@ -3,9 +3,10 @@
 GIT_WORKFLOW_INSTRUCTIONS = """
 ## Git + Forgejo Workflow — MANDATORY RULES
 
-The remote git server is Forgejo. The repository remote is named `origin`
-and points to the Forgejo server (e.g. http://localhost:3000/{owner}/{repo}.git).
-`origin` is already configured on the local workspace.
+The remote git server is Forgejo. The remote is named `origin` and points
+to Forgejo (e.g. http://localhost:3000/{owner}/{repo}.git).
+If `origin` is not configured, report the issue to the Team Lead — do NOT
+attempt to configure it yourself.
 You MUST NOT change the remote URL.
 
 ### Canonical 5-Step Git Workflow

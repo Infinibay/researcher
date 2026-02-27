@@ -178,7 +178,7 @@ class TestNewTaskCreatedListener:
     def test_detects_new_task(self, db_conn, executing_project):
         bus = EventBus()
         received = []
-        bus.subscribe("new_task_created", lambda e: received.append(e))
+        bus.subscribe("task_created", lambda e: received.append(e))
 
         # Initialize listener AFTER fixture inserts, so it skips existing events
         listener = NewTaskCreatedListener(executing_project, bus=bus)
@@ -308,7 +308,7 @@ class TestListenerManager:
         manager = ListenerManager(executing_project, bus=bus)
 
         manager.start_all()
-        assert len(manager.listeners) == 9
+        assert len(manager.listeners) == 7
         assert all(l.is_running for l in manager.listeners)
 
         manager.stop_all()

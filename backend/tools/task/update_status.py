@@ -23,7 +23,9 @@ class UpdateTaskStatusTool(PabadaBaseTool):
     name: str = "update_task_status"
     description: str = (
         "Update the status of a task. Validates state transitions "
-        "(e.g., can only go from in_progress to review_ready)."
+        "(e.g., can only go from in_progress to review_ready). "
+        "You must use a real task ID — call read_tasks first if you "
+        "don't know which IDs exist."
     )
     args_schema: Type[BaseModel] = UpdateTaskStatusInput
 
@@ -88,7 +90,7 @@ class UpdateTaskStatusTool(PabadaBaseTool):
                         )
 
             # Update task
-            if status in ("done", "cancelled"):
+            if status in ("done", "cancelled", "failed"):
                 conn.execute(
                     """UPDATE tasks SET status = ?, completed_at = CURRENT_TIMESTAMP
                        WHERE id = ?""",

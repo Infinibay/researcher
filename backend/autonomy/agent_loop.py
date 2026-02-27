@@ -1,0 +1,350 @@
+"""Core event-driven loop per agent — replaces AutonomyScheduler + AgentWorker.
+
+Each agent gets a single ``AgentLoop`` that:
+1. Polls ``agent_events`` for pending work
+2. Uses a role-specific evaluator to pick the best event
+3. Atomically claims the event
+4. Dispatches to the appropriate handler
+5. Marks the event completed or failed
+6. Recovers in-progress events on restart
+
+``AgentLoopManager`` manages the lifecycle of all loops for a project.
+
+Import safety: uses ``backend.autonomy.db`` to avoid circular imports.
+"""
+
+from __future__ import annotations
+
+import logging
+import sqlite3
+import threading
+import time
+from typing import Any
+
+from backend.autonomy.db import execute_with_retry
+from backend.autonomy.evaluators import EvalContext, get_evaluator_for_role
+from backend.autonomy.events import (
+    atomic_claim_event,
+    get_event_by_id,
+    load_loop_state,
+    poll_pending_events,
+    save_loop_state,
+    update_event_status,
+)
+from backend.autonomy.handlers import build_handler_map
+from backend.config.settings import settings
+
+logger = logging.getLogger(__name__)
+
+# Roles eligible for agent loops
+_LOOP_ELIGIBLE_ROLES = frozenset({
+    "developer", "researcher", "team_lead",
+    "code_reviewer", "research_reviewer",
+    "project_lead",
+})
+
+
+class AgentLoop:
+    """Single event-driven loop per agent."""
+
+    def __init__(self, agent_id: str, project_id: int, role: str) -> None:
+        self.agent_id = agent_id
+        self.project_id = project_id
+        self.role = role
+        self.evaluator = get_evaluator_for_role(role)
+        self.handlers = build_handler_map()
+        self._stop_event = threading.Event()
+        self._thread: threading.Thread | None = None
+
+        # Timing
+        self._base_interval = settings.AGENT_LOOP_POLL_INTERVAL
+        self._current_interval = self._base_interval
+        self._max_interval = settings.AGENT_LOOP_MAX_IDLE_INTERVAL
+
+        # Error tracking
+        self._consecutive_errors = 0
+        self._error_threshold = settings.AGENT_LOOP_ERROR_THRESHOLD
+
+        # Action budget
+        self._actions_this_hour = 0
+        self._hour_start = 0.0
+        self._max_actions_per_hour = settings.AGENT_LOOP_MAX_ACTIONS_PER_HOUR
+
+    def start(self) -> None:
+        """Start the agent loop in a daemon thread."""
+        if self._thread is not None and self._thread.is_alive():
+            logger.warning("AgentLoop already running for %s", self.agent_id)
+            return
+
+        self._stop_event.clear()
+        self._hour_start = time.monotonic()
+
+        self._thread = threading.Thread(
+            target=self._run,
+            name=f"AgentLoop-{self.agent_id}",
+            daemon=True,
+        )
+        self._thread.start()
+        logger.info(
+            "AgentLoop started for %s (role=%s, interval=%.0fs)",
+            self.agent_id, self.role, self._base_interval,
+        )
+
+    def stop(self) -> None:
+        """Signal the loop to stop and wait for it."""
+        self._stop_event.set()
+        if self._thread is not None:
+            self._thread.join(timeout=5.0)
+            if self._thread.is_alive():
+                logger.warning("AgentLoop thread for %s did not stop in time", self.agent_id)
+            self._thread = None
+
+        # Update loop state to stopped
+        try:
+            save_loop_state(self.agent_id, self.project_id, None, "stopped")
+        except Exception:
+            pass
+        logger.info("AgentLoop stopped for %s", self.agent_id)
+
+    @property
+    def is_running(self) -> bool:
+        return self._thread is not None and self._thread.is_alive()
+
+    def _run(self) -> None:
+        """Main entry point: recover then loop."""
+        try:
+            self._recover_in_progress()
+        except Exception:
+            logger.exception("AgentLoop: recovery failed for %s", self.agent_id)
+
+        self._loop()
+
+    def _recover_in_progress(self) -> None:
+        """On startup: check for an event that was in_progress when we crashed."""
+        state = load_loop_state(self.agent_id)
+        if not state or not state.get("current_event_id"):
+            return
+
+        event = get_event_by_id(state["current_event_id"])
+        if not event or event["status"] != "in_progress":
+            # Clear stale state
+            save_loop_state(self.agent_id, self.project_id, None, "idle")
+            return
+
+        logger.info(
+            "AgentLoop: recovering in-progress event %d for %s",
+            event["id"], self.agent_id,
+        )
+        self._execute_event(event)
+
+    def _loop(self) -> None:
+        """Main loop: poll → evaluate → claim → execute → complete."""
+        consecutive_idles = 0
+
+        while not self._stop_event.is_set():
+            # Interruptible sleep
+            self._stop_event.wait(timeout=self._current_interval)
+            if self._stop_event.is_set():
+                break
+
+            # Reset hourly counter
+            now = time.monotonic()
+            if now - self._hour_start >= 3600:
+                self._actions_this_hour = 0
+                self._hour_start = now
+
+            try:
+                events = poll_pending_events(self.agent_id)
+            except Exception:
+                logger.exception("AgentLoop: poll failed for %s", self.agent_id)
+                self._handle_error()
+                continue
+
+            if not events:
+                consecutive_idles += 1
+                self._current_interval = min(
+                    self._base_interval * (2 ** consecutive_idles),
+                    self._max_interval,
+                )
+                # Update poll timestamp
+                try:
+                    save_loop_state(self.agent_id, self.project_id, None, "idle")
+                except Exception:
+                    pass
+
+                # Scavenger: after N idle polls, look for orphan tasks
+                if consecutive_idles >= settings.AGENT_LOOP_SCAVENGE_AFTER_IDLES:
+                    try:
+                        from backend.autonomy.scavenger import Scavenger
+
+                        created = Scavenger(self.agent_id, self.project_id, self.role).scavenge()
+                        if created > 0:
+                            logger.info(
+                                "AgentLoop: scavenger created %d events for %s",
+                                created, self.agent_id,
+                            )
+                            consecutive_idles = 0
+                            self._current_interval = self._base_interval
+                    except Exception:
+                        logger.debug(
+                            "AgentLoop: scavenger failed for %s",
+                            self.agent_id, exc_info=True,
+                        )
+
+                continue
+
+            # Reset backoff
+            consecutive_idles = 0
+            self._current_interval = self._base_interval
+
+            # Build context for scoring
+            try:
+                context = EvalContext.build(self.project_id)
+            except Exception:
+                logger.exception("AgentLoop: context build failed for %s", self.agent_id)
+                self._handle_error()
+                continue
+
+            # Pick best event
+            best = self.evaluator.pick_best(events, context)
+            if not best:
+                continue
+
+            # Don't process events if project isn't executing — but always
+            # process user messages regardless of project status.
+            if context.project_status not in ("executing", "planning"):
+                if best.get("event_type") != "user_message_received":
+                    continue
+
+            # Check hourly budget
+            if self._actions_this_hour >= self._max_actions_per_hour:
+                logger.warning(
+                    "AgentLoop: action budget exhausted for %s (%d/%d this hour)",
+                    self.agent_id, self._actions_this_hour, self._max_actions_per_hour,
+                )
+                continue
+
+            # Atomic claim
+            if not atomic_claim_event(best["id"], self.agent_id):
+                logger.debug("AgentLoop: claim failed for event %d (race)", best["id"])
+                continue
+
+            self._actions_this_hour += 1
+            self._execute_event(best)
+
+        logger.info("AgentLoop: loop exited for %s", self.agent_id)
+
+    def _execute_event(self, event: dict[str, Any]) -> None:
+        """Mark in-progress, dispatch to handler, mark completed/failed."""
+        event_type = event.get("event_type", "unknown")
+
+        handler = self.handlers.get(event_type)
+        if handler is None:
+            logger.warning(
+                "AgentLoop: no handler for event type '%s' (event %d)",
+                event_type, event["id"],
+            )
+            update_event_status(event["id"], "failed", error="no handler for event type")
+            return
+
+        update_event_status(event["id"], "in_progress")
+        save_loop_state(self.agent_id, self.project_id, event["id"], "processing")
+
+        try:
+            handler.execute(event)
+            update_event_status(event["id"], "completed")
+            self._consecutive_errors = 0
+            logger.info(
+                "AgentLoop: event %d (%s) completed for %s",
+                event["id"], event_type, self.agent_id,
+            )
+        except Exception as exc:
+            logger.exception(
+                "AgentLoop: event %d (%s) failed for %s",
+                event["id"], event_type, self.agent_id,
+            )
+            update_event_status(event["id"], "failed", error=str(exc)[:500])
+            self._handle_error()
+        finally:
+            save_loop_state(self.agent_id, self.project_id, None, "idle")
+
+    def _handle_error(self) -> None:
+        """Track consecutive errors and stop if threshold exceeded."""
+        self._consecutive_errors += 1
+        if self._consecutive_errors >= self._error_threshold:
+            logger.error(
+                "AgentLoop: stopping %s after %d consecutive errors",
+                self.agent_id, self._consecutive_errors,
+            )
+            self._stop_event.set()
+
+
+class AgentLoopManager:
+    """Manages AgentLoop lifecycle for all agents in a project."""
+
+    def __init__(self, project_id: int) -> None:
+        self.project_id = project_id
+        self._loops: dict[str, AgentLoop] = {}
+
+    def start_all(self) -> None:
+        """Query the roster and start an AgentLoop for each eligible agent."""
+        roster = self._get_roster()
+
+        for entry in roster:
+            agent_id = entry["agent_id"]
+            role = entry["role"]
+
+            if role not in _LOOP_ELIGIBLE_ROLES:
+                continue
+
+            if not self._is_role_enabled(role):
+                logger.debug("AgentLoop: role %s disabled, skipping %s", role, agent_id)
+                continue
+
+            loop = AgentLoop(agent_id, self.project_id, role)
+            loop.start()
+            self._loops[agent_id] = loop
+
+        logger.info(
+            "AgentLoopManager started for project %d (%d loops)",
+            self.project_id, len(self._loops),
+        )
+
+    def stop(self) -> None:
+        """Stop all agent loops."""
+        for agent_id, loop in self._loops.items():
+            loop.stop()
+        self._loops.clear()
+        logger.info("AgentLoopManager stopped for project %d", self.project_id)
+
+    def _get_roster(self) -> list[dict[str, str]]:
+        """Query roster directly to avoid circular import through agents.registry."""
+
+        def _query(conn: sqlite3.Connection) -> list[dict[str, str]]:
+            rows = conn.execute(
+                "SELECT agent_id, name, role, status FROM roster "
+                "WHERE agent_id LIKE ? ESCAPE '\\' AND status != 'retired'",
+                (f"%\\_p{self.project_id}",),
+            ).fetchall()
+            return [
+                {"agent_id": r["agent_id"], "name": r["name"],
+                 "role": r["role"], "status": r["status"]}
+                for r in rows
+            ]
+
+        return execute_with_retry(_query)
+
+    def _is_role_enabled(self, role: str) -> bool:
+        """Check if autonomy is enabled for this role."""
+        role_toggle_map = {
+            "developer": "AUTONOMY_ENABLE_DEVELOPER",
+            "researcher": "AUTONOMY_ENABLE_RESEARCHER",
+            "team_lead": "AUTONOMY_ENABLE_TEAM_LEAD",
+            "project_lead": "AUTONOMY_ENABLE_PROJECT_LEAD",
+        }
+        attr = role_toggle_map.get(role)
+        if attr is None:
+            # Roles without explicit toggles (code_reviewer, research_reviewer)
+            # are enabled by default when autonomy is globally enabled
+            return True
+        return getattr(settings, attr, True)

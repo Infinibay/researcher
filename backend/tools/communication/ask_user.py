@@ -63,6 +63,29 @@ class AskUserTool(PabadaBaseTool):
         except Exception as e:
             return self._error(f"Failed to create user request: {e}")
 
+        # Mirror the question as a chat_message so it persists in chat history
+        def _mirror_question(conn: sqlite3.Connection) -> None:
+            thread_id = f"user-qa-p{project_id}"
+            conn.execute(
+                """INSERT OR IGNORE INTO conversation_threads
+                   (thread_id, project_id, thread_type, created_at)
+                   VALUES (?, ?, 'user_chat', CURRENT_TIMESTAMP)""",
+                (thread_id, project_id),
+            )
+            conn.execute(
+                """INSERT INTO chat_messages
+                   (project_id, thread_id, from_agent, to_agent, message,
+                    conversation_type, created_at)
+                   VALUES (?, ?, ?, 'user', ?, 'agent_to_user', CURRENT_TIMESTAMP)""",
+                (project_id, thread_id, agent_id, question),
+            )
+            conn.commit()
+
+        try:
+            execute_with_retry(_mirror_question)
+        except Exception:
+            pass  # Non-fatal — the user_request is the source of truth
+
         event_bus.emit(
             FlowEvent(
                 event_type="user_request_created",

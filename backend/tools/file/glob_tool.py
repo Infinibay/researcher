@@ -3,7 +3,6 @@
 import json
 import os
 import re
-import subprocess
 from pathlib import Path
 from typing import Type
 
@@ -70,9 +69,12 @@ class GlobTool(PabadaBaseTool):
         case_sensitive: bool = True,
         max_results: int = 100,
     ) -> str:
-        path = os.path.expanduser(path)
-        if not os.path.isabs(path):
-            path = os.path.abspath(path)
+        path = self._resolve_path(os.path.expanduser(path))
+
+        if self._is_pod_mode():
+            return self._run_in_pod(
+                pattern, path, content_pattern, case_sensitive, max_results,
+            )
 
         # Sandbox check
         sandbox_err = self._validate_sandbox_path(path)
@@ -151,4 +153,58 @@ class GlobTool(PabadaBaseTool):
             "match_count": len(matches),
             "truncated": truncated,
             "matches": matches,
+        })
+
+    def _run_in_pod(
+        self,
+        pattern: str,
+        path: str,
+        content_pattern: str | None,
+        case_sensitive: bool,
+        max_results: int,
+    ) -> str:
+        """Glob via pabada-file-helper inside the pod."""
+        req = {
+            "op": "glob",
+            "pattern": pattern,
+            "path": path,
+            "case_sensitive": case_sensitive,
+            "max_results": max_results,
+        }
+        if content_pattern:
+            req["content_pattern"] = content_pattern
+
+        try:
+            result = self._exec_in_pod(
+                ["pabada-file-helper"],
+                stdin_data=json.dumps(req),
+            )
+        except RuntimeError as e:
+            return self._error(f"Pod execution failed: {e}")
+
+        if result.exit_code != 0:
+            return self._error(f"File helper error: {result.stderr.strip()}")
+
+        try:
+            resp = json.loads(result.stdout)
+        except json.JSONDecodeError:
+            return self._error(f"Invalid response from file helper: {result.stdout[:200]}")
+
+        if not resp.get("ok"):
+            return self._error(resp.get("error", "Unknown error"))
+
+        data = resp["data"]
+        content_desc = f", content ~/{content_pattern}/" if content_pattern else ""
+        self._log_tool_usage(
+            f"Glob '{pattern}' in {path}{content_desc} (pod) — "
+            f"{data['match_count']} matches"
+        )
+
+        return json.dumps({
+            "pattern": pattern,
+            "path": path,
+            "content_pattern": content_pattern,
+            "match_count": data["match_count"],
+            "truncated": data["truncated"],
+            "matches": data["matches"],
         })

@@ -71,7 +71,15 @@ class ConnectionManager:
             await self.broadcast(message, project_id)
 
     def _subscribe_to_events(self) -> None:
-        """Subscribe to the global EventBus to relay events via WebSocket."""
+        """Subscribe to the global EventBus to relay events via WebSocket.
+
+        The EventBus emits from background threads (listener threads and
+        CrewAI flow threads), so we capture the asyncio event loop here
+        (called from an async context) and use ``call_soon_threadsafe``
+        to schedule the broadcast coroutine on the correct loop.
+        """
+        loop = asyncio.get_running_loop()
+
         def _on_event(event: FlowEvent) -> None:
             message = {
                 "type": event.event_type,
@@ -82,9 +90,12 @@ class ConnectionManager:
                 "timestamp": event.timestamp,
             }
             try:
-                loop = asyncio.get_running_loop()
-                loop.create_task(self.broadcast(message, event.project_id))
+                loop.call_soon_threadsafe(
+                    asyncio.ensure_future,
+                    self.broadcast(message, event.project_id),
+                )
             except RuntimeError:
+                # Event loop closed during shutdown — safe to ignore.
                 pass
 
         self._event_bus.subscribe("*", _on_event)

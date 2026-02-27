@@ -17,7 +17,10 @@ class TakeTaskTool(PabadaBaseTool):
     name: str = "take_task"
     description: str = (
         "Claim a task and set its status to in_progress. "
-        "Only tasks in 'backlog' or 'pending' status can be taken."
+        "Only tasks in 'backlog' or 'pending' status can be taken. "
+        "Before calling this tool, verify the task status with GetTaskTool "
+        "or ReadTasksTool — do NOT attempt to take tasks that are already "
+        "'in_progress', 'done', or assigned to another agent."
     )
     args_schema: Type[BaseModel] = TakeTaskInput
 
@@ -31,13 +34,38 @@ class TakeTaskTool(PabadaBaseTool):
             ).fetchone()
 
             if not row:
-                raise ValueError(f"Task {task_id} not found")
+                # Include available task IDs so the agent can self-correct
+                available = conn.execute(
+                    """SELECT id, title, status FROM tasks
+                       WHERE project_id = (SELECT project_id FROM tasks LIMIT 1)
+                       AND status IN ('backlog', 'pending')
+                       ORDER BY id LIMIT 20""",
+                ).fetchall()
+                if available:
+                    ids = ", ".join(f"#{r['id']} ({r['title'][:30]})" for r in available)
+                    raise ValueError(
+                        f"Task {task_id} not found. Available tasks to take: {ids}"
+                    )
+                raise ValueError(f"Task {task_id} not found (no available tasks)")
 
             status = row["status"]
             if status not in ("backlog", "pending"):
+                # Show other available tasks so the agent can pick one
+                available = conn.execute(
+                    """SELECT id, title FROM tasks
+                       WHERE project_id = (SELECT project_id FROM tasks WHERE id = ?)
+                       AND status IN ('backlog', 'pending')
+                       ORDER BY priority DESC, id
+                       LIMIT 10""",
+                    (task_id,),
+                ).fetchall()
+                alt = ""
+                if available:
+                    ids = ", ".join(f"#{r['id']}" for r in available)
+                    alt = f" Available tasks: {ids}."
                 raise ValueError(
                     f"Task {task_id} cannot be taken: current status is '{status}' "
-                    f"(must be 'backlog' or 'pending')"
+                    f"(must be 'backlog' or 'pending').{alt}"
                 )
 
             if row["assigned_to"] and row["assigned_to"] != agent_id:

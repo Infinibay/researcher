@@ -41,6 +41,7 @@ export function useSendMessage() {
       message: string
       to_agent?: string
       to_role?: string
+      thread_id?: string
     }) =>
       fetchApi<ChatMessage>(`/api/chat/${projectId}`, {
         method: 'POST',

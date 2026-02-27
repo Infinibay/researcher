@@ -35,6 +35,22 @@ class CleanupManager:
                 logger.info("Removed stale container %s (%s)", c["name"], c["id"])
         return removed
 
+    def cleanup_stale_pods(self) -> int:
+        """Stop pods for agents that are no longer active. Returns count stopped."""
+        from backend.security.pod_manager import pod_manager  # lazy import
+
+        pods = pod_manager.list_pods()
+        stopped = 0
+        for pod in pods:
+            if self._agent_is_inactive(pod.agent_id):
+                if pod_manager.stop_pod(pod.agent_id):
+                    stopped += 1
+                    logger.info(
+                        "Stopped stale pod %s for inactive agent %s",
+                        pod.container_name, pod.agent_id,
+                    )
+        return stopped
+
     # ── Workspace cleanup ───────────────────────────────────────────────
 
     def cleanup_agent_workspace(self, agent_id: str) -> None:
@@ -45,8 +61,9 @@ class CleanupManager:
         self._ws_manager.remove_workspace(agent_id)
 
     def cleanup_all_stale(self, project_id: int | None = None) -> None:
-        """Run full cleanup: stale containers + orphaned workspaces."""
+        """Run full cleanup: stale containers + pods + orphaned workspaces."""
         self.cleanup_stale_containers()
+        self.cleanup_stale_pods()
 
         inactive_agents = self._list_inactive_agents(project_id)
         for aid in inactive_agents:

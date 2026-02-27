@@ -22,8 +22,10 @@ class GetTaskInput(BaseModel):
 class GetTaskTool(PabadaBaseTool):
     name: str = "get_task"
     description: str = (
-        "Get detailed information about a specific task, "
-        "optionally including comments and dependencies."
+        "Get detailed information about a specific task by its ID, "
+        "optionally including comments and dependencies. "
+        "You must use a real task ID — call read_tasks first if you "
+        "don't know which IDs exist."
     )
     args_schema: Type[BaseModel] = GetTaskInput
 
@@ -46,7 +48,17 @@ class GetTaskTool(PabadaBaseTool):
             ).fetchone()
 
             if not row:
-                raise ValueError(f"Task {task_id} not found")
+                # Include available task IDs so the agent can self-correct
+                available = conn.execute(
+                    "SELECT id, title FROM tasks WHERE project_id = ? ORDER BY id LIMIT 20",
+                    (self.project_id or 0,),
+                ).fetchall()
+                if available:
+                    ids = ", ".join(f"#{r['id']}" for r in available)
+                    raise ValueError(
+                        f"Task {task_id} not found. Available tasks: {ids}"
+                    )
+                raise ValueError(f"Task {task_id} not found (no tasks exist in this project)")
 
             task = dict(row)
 

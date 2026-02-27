@@ -20,6 +20,7 @@ from backend.flows.state_models import (
 )
 
 from backend.flows.event_listeners import (
+    AgentResolver,
     EventBus,
     FlowEvent,
     ListenerManager,
@@ -31,6 +32,8 @@ from backend.flows.event_listeners import (
     EpicCreatedListener,
     event_bus,
 )
+
+from backend.flows import helpers
 
 __all__ = [
     # Flows
@@ -52,6 +55,7 @@ __all__ = [
     "BrainstormPhase",
     "TaskType",
     # Event system
+    "AgentResolver",
     "EventBus",
     "FlowEvent",
     "ListenerManager",
@@ -62,4 +66,6 @@ __all__ = [
     "AllTasksDoneListener",
     "EpicCreatedListener",
     "event_bus",
+    # Helpers sub-package
+    "helpers",
 ]

@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import logging
-import os
 import time
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
@@ -17,24 +17,30 @@ from backend.api.exceptions import register_exception_handlers
 from backend.api.websocket import manager
 from backend.config.settings import settings
 
-
-def _setup_llm_env() -> None:
-    """Ensure CrewAI env vars are set before any agent is created.
-
-    This runs at module-import time so that uvicorn reload picks it up too.
-    """
-    if settings.LLM_MODEL:
-        os.environ.setdefault("OPENAI_MODEL_NAME", settings.LLM_MODEL)
-        os.environ.setdefault("MODEL", settings.LLM_MODEL)
-    if settings.LLM_BASE_URL:
-        os.environ.setdefault("OPENAI_API_BASE", settings.LLM_BASE_URL)
-    if settings.LLM_API_KEY:
-        os.environ.setdefault("OPENAI_API_KEY", settings.LLM_API_KEY)
-
-
-_setup_llm_env()
+# Set provider env vars at import time so uvicorn reload picks them up.
+from backend.config.llm import setup_provider_env_vars as _setup_env
+_setup_env()
 
 logger = logging.getLogger(__name__)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """FastAPI lifespan: snapshot and stop all active flows on shutdown."""
+    yield
+    # --- Shutdown ---
+    logger.info("Shutdown signal received — stopping active flows")
+    from backend.api.flow_manager import flow_manager
+
+    active_ids = list(flow_manager._flows.keys())
+    for pid in active_ids:
+        try:
+            logger.info("Stopping project %d: snapshotting state, stopping agents & listeners…", pid)
+            flow_manager.stop_project_flow(pid)
+            logger.info("Project %d stopped successfully", pid)
+        except Exception:
+            logger.warning("Error stopping project %d during shutdown", pid, exc_info=True)
+    logger.info("Graceful shutdown complete: saved snapshots for %d active project(s)", len(active_ids))
 
 
 def create_app() -> FastAPI:
@@ -45,7 +51,12 @@ def create_app() -> FastAPI:
         version="1.0.0",
         docs_url="/docs",
         redoc_url="/redoc",
+        lifespan=lifespan,
     )
+
+    # Run pending DB migrations for existing databases
+    from backend.tools.base.db import ensure_migrations
+    ensure_migrations()
 
     # CORS
     app.add_middleware(
@@ -83,6 +94,8 @@ def create_app() -> FastAPI:
     from backend.api.routes.git import router as git_router
     from backend.api.routes.agents import router as agents_router
     from backend.api.routes.user_requests import router as user_requests_router
+    from backend.api.routes.events import router as events_router
+    from backend.api.routes.flow_state import router as flow_state_router
 
     app.include_router(health_router)
     app.include_router(projects_router)
@@ -95,6 +108,8 @@ def create_app() -> FastAPI:
     app.include_router(git_router)
     app.include_router(agents_router)
     app.include_router(user_requests_router)
+    app.include_router(events_router)
+    app.include_router(flow_state_router)
 
     # Start periodic cleanup of stale sandbox containers
     from backend.security.cleanup import cleanup_manager

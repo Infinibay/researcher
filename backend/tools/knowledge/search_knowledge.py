@@ -6,14 +6,14 @@ from typing import Type
 from pydantic import BaseModel, Field
 
 from backend.tools.base.base_tool import PabadaBaseTool
-from backend.tools.base.db import execute_with_retry
+from backend.tools.base.db import execute_with_retry, sanitize_fts5_query
 
 
 class SearchKnowledgeInput(BaseModel):
     query: str = Field(..., description="Full-text search query")
     sources: list[str] = Field(
-        default=["findings", "wiki", "reference_files"],
-        description="Sources to search: findings, wiki, reference_files",
+        default=["findings", "wiki", "reference_files", "reports"],
+        description="Sources to search: findings, wiki, reference_files, reports",
     )
     limit: int = Field(default=20, ge=1, le=100, description="Max results per source")
     min_confidence: float = Field(
@@ -38,13 +38,15 @@ class SearchKnowledgeTool(PabadaBaseTool):
         min_confidence: float = 0.0,
     ) -> str:
         if sources is None:
-            sources = ["findings", "wiki", "reference_files"]
+            sources = ["findings", "wiki", "reference_files", "reports"]
 
         project_id = self.project_id
         all_results: list[dict] = []
 
         def _search(conn: sqlite3.Connection) -> list[dict]:
             results = []
+
+            safe_query = sanitize_fts5_query(query)
 
             if "findings" in sources:
                 try:
@@ -60,7 +62,7 @@ class SearchKnowledgeTool(PabadaBaseTool):
                              AND f.status != 'rejected'
                            ORDER BY rank
                            LIMIT ?""",
-                        (query, project_id, min_confidence, limit),
+                        (safe_query, project_id, min_confidence, limit),
                     ).fetchall()
                     for r in rows:
                         results.append({
@@ -86,7 +88,7 @@ class SearchKnowledgeTool(PabadaBaseTool):
                              AND (wp.project_id = ? OR wp.project_id IS NULL)
                            ORDER BY rank
                            LIMIT ?""",
-                        (query, project_id, limit),
+                        (safe_query, project_id, limit),
                     ).fetchall()
                     for r in rows:
                         results.append({
@@ -118,6 +120,39 @@ class SearchKnowledgeTool(PabadaBaseTool):
                             "title": r["title"],
                             "snippet": r["snippet"] or "",
                             "file_type": r["file_type"],
+                        })
+                except sqlite3.OperationalError:
+                    pass
+
+            if "reports" in sources:
+                try:
+                    rows = conn.execute(
+                        """SELECT id, file_path AS title,
+                                  COALESCE(description, '') AS snippet,
+                                  content
+                           FROM artifacts
+                           WHERE type = 'report'
+                             AND project_id = ?
+                             AND (
+                               description LIKE ?
+                               OR file_path LIKE ?
+                               OR content LIKE ?
+                             )
+                           LIMIT ?""",
+                        (
+                            project_id,
+                            f"%{query}%",
+                            f"%{query}%",
+                            f"%{query}%",
+                            limit,
+                        ),
+                    ).fetchall()
+                    for r in rows:
+                        results.append({
+                            "source_type": "reports",
+                            "id": r["id"],
+                            "title": r["title"],
+                            "snippet": r["snippet"],
                         })
                 except sqlite3.OperationalError:
                     pass

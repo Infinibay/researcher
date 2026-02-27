@@ -10,8 +10,8 @@ def perform_review(
     branch_name: str,
     task_desc: str,
     project_id: int = 0,
+    project_name: str = "",
     rejection_count: int = 0,
-    max_rejections: int = 3,
 ) -> tuple[str, str]:
     """Return (description, expected_output) for performing a code review.
 
@@ -21,17 +21,15 @@ def perform_review(
         branch_name: Git branch containing the code changes.
         task_desc: Full task description with acceptance criteria.
         project_id: DB ID of the project (for state context).
+        project_name: Name of the project (for state context).
         rejection_count: How many times this code has been rejected so far.
-        max_rejections: Maximum rejections before escalation.
     """
     is_rereview = rejection_count > 0
 
     if is_rereview:
         phase_summary = (
             f"Re-review round {rejection_count} — the code was previously "
-            f"rejected and the Developer has submitted reworked changes. "
-            f"After {max_rejections} total rejections the task will be "
-            f"escalated to the Team Lead."
+            f"rejected and the Developer has submitted reworked changes."
         )
     else:
         phase_summary = (
@@ -41,10 +39,10 @@ def perform_review(
 
     state_block = build_state_context(
         project_id=project_id,
-        project_name="",
+        project_name=project_name,
         phase="code_review",
         summary=phase_summary,
-        extra={"Review attempt": f"{rejection_count + 1} of {max_rejections}"}
+        extra={"Review attempt": str(rejection_count + 1)}
         if is_rereview else None,
     )
 
@@ -65,11 +63,8 @@ code based on your previous feedback. You MUST:
    well, note it in your review comment. Constructive feedback includes
    recognizing good work.
 
-If this is rejection {rejection_count} of {max_rejections}, be aware that
-one more rejection will escalate the task to the Team Lead. This does NOT
-mean you should approve subpar code — it means your feedback must be
-especially clear and actionable so the Developer can resolve all remaining
-issues in the next iteration.
+Your feedback must be clear and actionable so the Developer can resolve all
+remaining issues in the next iteration.
 """
 
     description = f"""\
@@ -97,8 +92,19 @@ any code, make sure you understand:
   considered complete.
 - Any constraints or technical requirements mentioned.
 
+Also read the task comments — the Developer should have posted the branch
+name, a summary of changes, and testing instructions. This is your map to
+their work.
+
 ### Step 2: Survey the Changes
 Use **GitStatusTool** to see which files were modified, added, or deleted.
+
+**If GitStatusTool or GitDiffTool show no changes on the branch**: This is
+a blocking issue. The Developer was required to commit and push code to the
+branch before submitting for review. If the branch is empty or does not
+exist, REJECT immediately — use **RejectTaskTool** with feedback: "No code
+changes found on branch `{branch_name}`. You must commit and push your
+changes before submitting for review."
 This gives you a map of the change scope:
 - How many files were touched?
 - Are the changes concentrated in one area or spread across the codebase?
@@ -195,13 +201,18 @@ Do NOT read every file in the project — only those directly relevant to
 understanding the changes.
 
 ### Step 5: Verify Test Coverage
-Check whether the diff includes tests for new or modified functionality:
-- Are there test files in the diff?
-- Do the tests cover the happy path, error cases, and edge cases?
-- Are the tests meaningful — do they actually verify behavior?
-- If existing functionality was modified, were the related tests updated?
+Apply the mandatory test-coverage checklist below. For each unchecked item
+in the first five, create a `[BLOCKING]` PR comment (Step 3b) before
+calling `RejectTaskTool`.
 
-If critical functionality has no test coverage, this is a blocking issue.
+- [ ] New or modified functions/classes have at least one test.
+- [ ] Happy path is covered.
+- [ ] At least one error/exception path is covered.
+- [ ] Edge cases relevant to the feature are covered (empty input, boundary values, etc.).
+- [ ] Existing tests that exercise modified code were not silently deleted.
+- [ ] Tests are meaningful — they assert on observable behavior, not just that the code runs.
+
+Items 1-5 unchecked → **Blocking**. Item 6 unchecked → **Important**.
 
 ### Step 6: Compile Your Findings
 Organize your findings by severity:
@@ -262,7 +273,16 @@ A structured code review result containing:
    - "APPROVED: <summary of what was reviewed and why it passes>"
    - "REJECTED: <summary of blocking issues and required changes>"
 
-4. **Forgejo PR comments**: Confirmation that curl was used to post:
+4. **Test Coverage Checklist**: Mark each item `[x]` or `[ ]` and provide
+   a one-line justification for any unchecked item:
+   - [ ] New or modified functions/classes have at least one test.
+   - [ ] Happy path is covered.
+   - [ ] At least one error/exception path is covered.
+   - [ ] Edge cases relevant to the feature are covered.
+   - [ ] Existing tests that exercise modified code were not silently deleted.
+   - [ ] Tests are meaningful — they assert on observable behavior.
+
+5. **Forgejo PR comments**: Confirmation that curl was used to post:
    - One [BLOCKING] comment per blocking issue found (or none if approved).
    - One [VERDICT: APPROVED] or [VERDICT: CHANGE_REQUEST] comment.
    Include the HTTP response from each curl call to confirm success (look

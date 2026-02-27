@@ -34,8 +34,9 @@ class NotificationService:
         kind: str,
         target: str | None,
         extra: dict[str, Any] | None = None,
+        from_agent: str | None = None,
     ) -> None:
-        data: dict[str, Any] = {"kind": kind, "target": target, "message_id": msg_id}
+        data: dict[str, Any] = {"kind": kind, "target": target, "message_id": msg_id, "from_agent": from_agent}
         if extra:
             data.update(extra)
         self.bus.emit(
@@ -66,7 +67,7 @@ class NotificationService:
             to_agent=to_agent,
             priority=priority,
         )
-        self._emit_notification(project_id, msg_id, "agent", to_agent)
+        self._emit_notification(project_id, msg_id, "agent", to_agent, from_agent=from_agent)
         return msg_id
 
     # ── Role notification ─────────────────────────────────────────────────
@@ -87,7 +88,7 @@ class NotificationService:
             to_role=to_role,
             priority=priority,
         )
-        self._emit_notification(project_id, msg_id, "role", to_role)
+        self._emit_notification(project_id, msg_id, "role", to_role, from_agent=from_agent)
         return msg_id
 
     # ── Broadcast ─────────────────────────────────────────────────────────
@@ -104,7 +105,7 @@ class NotificationService:
             from_agent=from_agent,
             message=message,
         )
-        self._emit_notification(project_id, msg_id, "broadcast", None)
+        self._emit_notification(project_id, msg_id, "broadcast", None, from_agent=from_agent)
         return msg_id
 
     # ── User notification (fire-and-forget) ───────────────────────────────
@@ -140,7 +141,7 @@ class NotificationService:
 
         req_id = execute_with_retry(_insert)
         self._emit_notification(
-            project_id, req_id, "user", "user", extra={"request_id": req_id}
+            project_id, req_id, "user", "user", extra={"request_id": req_id}, from_agent=from_agent,
         )
         logger.info("User notification %d from %s", req_id, from_agent)
         return req_id
@@ -170,7 +171,7 @@ class NotificationService:
 
         notice_id = execute_with_retry(_insert)
         self._emit_notification(
-            project_id, notice_id, "notice", None, extra={"title": title}
+            project_id, notice_id, "notice", None, extra={"title": title}, from_agent="system",
         )
         logger.info("Notice %d created for project %d: %s", notice_id, project_id, title)
         return notice_id

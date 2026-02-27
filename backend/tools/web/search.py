@@ -1,8 +1,7 @@
-"""Web search tool using DuckDuckGo."""
+"""Web search tool using SerperDev (with DuckDuckGo fallback)."""
 
 import asyncio
 import hashlib
-import json
 import time
 from typing import Type
 
@@ -25,8 +24,8 @@ class WebSearchInput(BaseModel):
 class WebSearchTool(PabadaBaseTool):
     name: str = "web_search"
     description: str = (
-        "Search the web using DuckDuckGo. Returns a list of results "
-        "with title, URL, and snippet."
+        "Search the web using SerperDev (with DuckDuckGo fallback). "
+        "Returns a list of results with title, URL, and snippet."
     )
     args_schema: Type[BaseModel] = WebSearchInput
 
@@ -38,26 +37,12 @@ class WebSearchTool(PabadaBaseTool):
             if time.time() - cached_time < settings.WEB_CACHE_TTL_SECONDS:
                 return self._success({"results": cached_results, "cached": True})
 
-        try:
-            from duckduckgo_search import DDGS
-        except ImportError:
-            return self._error(
-                "duckduckgo_search not installed. Run: pip install duckduckgo-search"
-            )
+        from backend.tools.web._backends import unified_search
 
         try:
-            with DDGS() as ddgs:
-                raw_results = list(ddgs.text(query, max_results=num_results))
+            results = unified_search(query, num_results)
         except Exception as e:
             return self._error(f"Search failed: {e}")
-
-        results = []
-        for r in raw_results:
-            results.append({
-                "title": r.get("title", ""),
-                "url": r.get("href", r.get("link", "")),
-                "snippet": r.get("body", r.get("snippet", "")),
-            })
 
         # Cache results
         _search_cache[cache_key] = (time.time(), results)

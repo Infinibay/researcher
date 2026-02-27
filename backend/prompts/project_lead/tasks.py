@@ -132,10 +132,13 @@ Call `AskUserTool` with a single message structured as:
 
 **If `AskUserTool` returns an error** (e.g. the user did not respond within
 the timeout):
-- Do NOT block or retry. Treat the unresolved points as confirmed
-  assumptions.
+- Do NOT block or retry. Document the unresolved points in Section 10
+  (Open Questions). Proceed using ONLY the information already available
+  in the existing requirements. NEVER invent new project scope or features
+  to fill gaps.
 - Add a note to Section 10 (Open Questions) of the PRD: "User validation
-  timed out — the following points were assumed: [list them]."
+  timed out — proceeding with existing requirements as-is. The following
+  points remain unresolved: [list them]."
 - Proceed to Step 8.
 
 **If the user's reply is ambiguous** (neither a clear YES nor actionable
@@ -198,11 +201,34 @@ Unresolved items that may need additional input later.
     return description, expected_output
 
 
-def present_plan_for_approval(plan: str) -> tuple[str, str]:
+def present_plan_for_approval(
+    plan: str,
+    project_name: str = "",
+    project_id: int = 0,
+    requirements: str = "",
+    conversation_context: str = "",
+) -> tuple[str, str]:
     """Return (description, expected_output) for presenting the Team Lead's plan to the user for approval."""
+
+    state_block = build_state_context(
+        project_id=project_id,
+        project_name=project_name,
+        phase="plan_approval",
+        summary="The Team Lead has created a project plan based on the PRD. Present it to the user for approval.",
+    )
+    reqs_summary = requirements[:2000] if requirements else "No requirements available."
+    ctx_block = conversation_context or ""
+
     description = f"""\
 Present the following project plan — created by the Team Lead based on the
 PRD — to the user for approval.
+
+{state_block}
+
+## Project Requirements (Summary)
+{reqs_summary}
+
+{ctx_block}
 
 ## Team Lead's Plan to Present
 {plan}
@@ -260,11 +286,34 @@ the keyword:
     return description, expected_output
 
 
-def write_final_report(report: str) -> tuple[str, str]:
+def write_final_report(
+    report: str,
+    project_name: str = "",
+    project_id: int = 0,
+    requirements: str = "",
+    conversation_context: str = "",
+) -> tuple[str, str]:
     """Return (description, expected_output) for final report delivery."""
+
+    state_block = build_state_context(
+        project_id=project_id,
+        project_name=project_name,
+        phase="finalization",
+        summary="The project is complete. Write the final report and deliver it to the user.",
+    )
+    reqs_summary = requirements[:2000] if requirements else "No requirements available."
+    ctx_block = conversation_context or ""
+
     description = f"""\
 The project is complete. Your task is to write the final report and deliver
 it to the user.
+
+{state_block}
+
+## Project Requirements (Summary)
+{reqs_summary}
+
+{ctx_block}
 
 ## Raw Report Data
 {report}
@@ -320,12 +369,35 @@ Confirmation that:
     return description, expected_output
 
 
-def present_brainstorm_ideas(ideas_text: str) -> tuple[str, str]:
+def present_brainstorm_ideas(
+    ideas_text: str,
+    project_name: str = "",
+    project_id: int = 0,
+    requirements: str = "",
+    conversation_context: str = "",
+) -> tuple[str, str]:
     """Return (description, expected_output) for presenting brainstorm ideas."""
+
+    state_block = build_state_context(
+        project_id=project_id,
+        project_name=project_name,
+        phase="brainstorming_presentation",
+        summary="The team has completed a brainstorming session. Present the selected ideas to the user for approval.",
+    )
+    reqs_summary = requirements[:2000] if requirements else "No requirements available."
+    ctx_block = conversation_context or ""
+
     description = f"""\
 The team has completed a brainstorming session and selected the most
 promising ideas. Your task is to present these ideas to the user for
 approval before the team invests time implementing them.
+
+{state_block}
+
+## Project Requirements (Summary)
+{reqs_summary}
+
+{ctx_block}
 
 ## Selected Ideas
 {ideas_text}

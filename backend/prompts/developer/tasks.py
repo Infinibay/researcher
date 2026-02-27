@@ -4,167 +4,19 @@ from backend.prompts.shared import GIT_WORKFLOW_INSTRUCTIONS
 from backend.prompts.team import build_conversation_context, build_state_context
 
 
-def review_assigned_task(
-    task_id: int,
-    task_title: str,
-    task_description: str,
-    conversation_context: str = "",
-) -> tuple[str, str]:
-    """Return (description, expected_output) for reviewing an assigned task."""
-
-    state_block = build_state_context(
-        project_id=0,
-        project_name="",
-        phase="task_assignment",
-        summary=f"Task {task_id} has been assigned to you for implementation.",
-    )
-
-    ctx_block = conversation_context or ""
-
-    description = f"""\
-You have been assigned task {task_id}: {task_title}
-
-{state_block}
-
-## Task Specifications
-{task_description}
-
-{ctx_block}
-
-## Your Goal
-Understand the task requirements thoroughly before writing any code. Produce
-a clear implementation plan that demonstrates you understand what needs to
-be built, how it fits into the existing codebase, and what approach you will
-take. You MUST complete all 6 stages below and document each one explicitly.
-
-## Step-by-Step Process
-
-### Stage 1: Problem Analysis
-Read the task specifications above carefully and produce the following:
-- **What is being asked?** — Rewrite the objective of the ticket in your own
-  words. Do not copy-paste the task description.
-- **Alignment with the project** — Verify that the ticket fits the general
-  purpose of the system. If you detect a contradiction or scope ambiguity,
-  document it explicitly.
-- **Boundaries** — What is explicitly out of scope. What you must NOT change.
-- **Acceptance criteria** — List every condition that must be true for this
-  task to be considered complete.
-- **Dependencies** — References to other tasks, modules, or external systems.
-
-### Stage 2: Technologies Involved
-Before exploring the code, identify the technology stack relevant to this ticket:
-- Programming languages involved (Python, TypeScript, SQL, Bash, etc.).
-- Key frameworks, libraries, or tools that will be used or modified.
-- Relevant infrastructure (Docker, Redis, PostgreSQL, etc.).
-
-Use **ListDirectoryTool** to confirm the project structure and detect
-configuration files (`pyproject.toml`, `package.json`, `Containerfile`,
-`docker-compose.yml`) that reveal the actual stack.
-
-### Stage 3: Locating Changes
-Use **ListDirectoryTool** to understand the project structure. Identify where
-the relevant source code and tests live.
-
-Use **ReadFileTool** to read the files most relevant to this task. Understand
-the existing code you will modify or extend.
-
-Use **CodeSearchTool** to find related code:
-- Search for functions, classes, or modules mentioned in the task.
-- Find existing patterns you should follow.
-- Locate tests for related functionality.
-- **Find all callers** of the functions you plan to modify to evaluate the
-  impact of the change.
-
-Produce a concrete list of:
-- **Files to create or modify** — exact path and reason.
-- **Classes and functions affected** — name and file.
-- **External tools or services** the change touches (DB, git, APIs).
-- **Existing related tests** — where they are and what they currently cover.
-
-### Stage 4: Solution Evaluation
-Before choosing an approach, you must:
-1. Propose **at least 2 distinct approaches** to solve the problem.
-2. For each approach, briefly describe: advantages, disadvantages, complexity,
-   and risks.
-3. **Choose one** and justify your choice with concrete criteria (simplicity,
-   consistency with the codebase, performance, maintainability).
-4. Document your decision with **AddCommentTool** (prefix: `DECISION:`) so
-   it is recorded on the task.
-
-If only one reasonable approach exists, document why the alternatives were
-discarded.
-
-### Stage 5: Test Plan
-Before writing any code, define the test plan:
-- **Happy path**: What correct behavior must be verified.
-- **Error cases**: Invalid inputs, missing data, dependency failures.
-- **Edge cases**: Boundary conditions, empty inputs, extreme values.
-- **Regression cases**: Existing tests that could be affected by the change.
-
-For each test case specify: tentative test name, what it verifies, and which
-file it will go in.
-
-### Stage 6: Clarification
-If anything is unclear after completing the stages above:
-- **First**, use **ReadMessagesTool** to check if your question was already
-  answered in a previous conversation.
-- If not answered, use **AskTeamLeadTool** to ask **ONE specific question**
-  with 2-3 concrete options.
-- You may ask at most **2 clarification questions** for this task. After that,
-  proceed with your best judgment.
-- If AskTeamLeadTool times out, make a reasonable assumption and document it
-  with **AddCommentTool** (prefix: `ASSUMPTION:`). Then continue working.
-"""
-
-    expected_output = """\
-A structured implementation plan with the following mandatory sections:
-
-1. **Stage 1 — Problem Analysis**
-   - Restatement of the objective in your own words.
-   - Confirmation of alignment with the project (or description of any
-     contradiction detected).
-   - List of explicit boundaries (what is NOT being changed).
-   - Acceptance criteria enumerated.
-   - Dependencies identified.
-
-2. **Stage 2 — Technologies Involved**
-   - Technology stack relevant to this ticket.
-   - Configuration files that confirm it.
-
-3. **Stage 3 — Locating Changes**
-   - List of files to create/modify with reason.
-   - Classes and functions affected.
-   - External services touched.
-   - Existing related tests.
-
-4. **Stage 4 — Solution Evaluation**
-   - At least 2 proposed approaches with pros/cons.
-   - Chosen approach and justification.
-   - Confirmation that the decision was recorded with AddCommentTool
-     (DECISION:).
-
-5. **Stage 5 — Test Plan**
-   - List of test cases (happy path, errors, edge cases, regression).
-   - For each case: tentative name, what it verifies, target file.
-
-6. **Clarifications / Assumptions**
-   - Questions sent to the Team Lead (if any).
-   - Assumptions documented with AddCommentTool (ASSUMPTION:).
-"""
-    return description, expected_output
-
-
 def implement_code(
     task_id: int,
     task_title: str,
     task_description: str,
     conversation_context: str = "",
+    project_id: int = 0,
+    project_name: str = "",
 ) -> tuple[str, str]:
     """Return (description, expected_output) for code implementation."""
 
     state_block = build_state_context(
-        project_id=0,
-        project_name="",
+        project_id=project_id,
+        project_name=project_name,
         phase="implementation",
         summary=f"Implementing task {task_id}. Create branch, write code, test, commit, push.",
     )
@@ -182,6 +34,17 @@ Implement task {task_id}: {task_title}
 {task_description}
 
 {ctx_block}
+
+## Repository Requirement
+A git repository MUST exist before you start working. The repository should
+already be configured with `origin` pointing to Forgejo.
+
+If `git status` fails or `git remote -v` shows no remotes:
+1. Use **SendMessageTool** to inform the Team Lead that no repository is
+   configured for this project.
+2. The Team Lead will coordinate with the Project Lead to create one.
+3. Do NOT proceed with code changes until a repository is available.
+4. Do NOT attempt to create a repository yourself.
 
 {GIT_WORKFLOW_INSTRUCTIONS}
 
@@ -203,6 +66,14 @@ pushed to the remote.
 
 ## Step-by-Step Process
 
+### Step 0: Resume Check
+Call **LoadSessionNoteTool** with the current task_id. If a prior session
+exists, read `notes_json` and look for the `"step"` key to know exactly
+which step was last completed. Recover your branch name, files already
+modified, and last known state from the rest of `notes_json`. Resume from
+step **N+1** where N is the last completed step. If no session exists,
+start from Step 1.
+
 ### Step 1: Create a Branch
 Use **GitBranchTool** with branch_name=`task-{task_id}-<slug>`, create=true,
 base_branch="main". This runs:
@@ -210,6 +81,9 @@ base_branch="main". This runs:
   git checkout -b task-{task_id}-<slug> origin/main
 
 Post the branch name as a comment on the task using **AddCommentTool**.
+
+Save progress: call **SaveSessionNoteTool** with phase="implementing",
+notes_json={{"branch": "<branch_name>", "step": 1}}.
 
 ### Step 2: Read Existing Code
 Before writing anything, use **ReadFileTool** to read the files you plan
@@ -221,6 +95,10 @@ to modify. Understand:
 Use **CodeSearchTool** to find all usages of functions or classes you plan
 to modify. This helps you understand the impact of your changes and avoid
 breaking callers.
+
+Save progress: call **SaveSessionNoteTool** with phase="implementing",
+notes_json={{"branch": "...", "files_inspected": [...], "step": 2}},
+last_file=<last file you read>.
 
 ### Step 3: Implement the Changes
 For each change, follow existing codebase conventions, handle error conditions
@@ -243,6 +121,10 @@ refactor unrelated code.
 Overwriting destroys the change history and makes code review impossible.
 If the file already exists, always use **EditFileTool**.
 
+Save progress: call **SaveSessionNoteTool** with phase="implementing",
+notes_json={{"branch": "...", "files_changed": [...], "step": 3}},
+last_file=<last file edited>.
+
 ### Step 4: Write Tests
 Write tests for new or modified functionality:
 - Happy path: the feature works as specified.
@@ -251,16 +133,40 @@ Write tests for new or modified functionality:
 
 Place tests in the project's test directory following existing conventions.
 
+Save progress: call **SaveSessionNoteTool** with phase="testing",
+notes_json={{"branch": "...", "tests_written": [...], "step": 4}}.
+
 ### Step 5: Run Tests
-Use **ExecuteCommandTool** to run the full test suite. ALL tests must pass —
-both your new tests and existing ones. If tests fail:
+
+#### 5a. Estimate suite duration
+Before running the full suite, estimate its size:
+1. Run **ExecuteCommandTool** with `pytest --co -q` (collect-only) to count
+   the total number of tests.
+2. If the count exceeds **500 tests**, or if a previous CI run recorded a
+   duration > 600 seconds, switch to **relevant-only mode** (Step 5c).
+   Otherwise use **full suite mode** (Step 5b).
+
+#### 5b. Full suite mode (≤ threshold)
+Run **ExecuteCommandTool** with `pytest -x -q` — all tests, stop on first
+failure. ALL tests must pass — both your new tests and existing ones.
+
+#### 5c. Relevant-only mode (> threshold)
+Derive the list of test files directly related to the files you modified in
+this task and run only those:
+  `pytest <test_file_1> <test_file_2> ... -x -q`
+This keeps CI under the 10-minute budget while still validating your changes.
+
+#### 5d. Fix-and-rerun
+If tests fail:
 - Read the failure output carefully.
 - Fix the issue in your code (not the test, unless the test is wrong).
 - Re-run until all tests pass.
 
 **Clarification during implementation**: You may ask at most **1 clarification
 question** during implementation. If no response, proceed with assumptions
-and document with AddCommentTool (prefix: `ASSUMPTION:`).
+and document with AddCommentTool (prefix: `ASSUMPTION:`). Do NOT create new
+tasks, epics, or other resources as a workaround — only continue working on
+your assigned task.
 
 **Escalation — persistently failing tests**: If after **3 fix-and-rerun
 cycles** the tests still fail, STOP trying and escalate:
@@ -275,6 +181,14 @@ cycles** the tests still fail, STOP trying and escalate:
 3. Do NOT commit or push code with failing tests.
 4. Wait for the Team Lead's response before continuing.
 
+**⚠️ HARD GATE: Setting the task status to `review_ready` with failing tests
+is a protocol violation and will be treated as a blocking defect by the Code
+Reviewer. The CI gate will automatically reject the submission before the
+reviewer even sees it.**
+
+Save progress: call **SaveSessionNoteTool** with phase="testing",
+notes_json={{"branch": "...", "test_command": "...", "tests_passed": true/false, "step": 5}}.
+
 ### Step 6: Self-Review
 Use **GitDiffTool** to review your own changes before committing. Check for:
 - Unintended changes (debug prints, commented-out code, unrelated edits).
@@ -283,6 +197,9 @@ Use **GitDiffTool** to review your own changes before committing. Check for:
 - Code that does not match the surrounding style.
 
 Remove any debugging artifacts before committing.
+
+Save progress: call **SaveSessionNoteTool** with phase="implementing",
+notes_json={{"branch": "...", "self_review_clean": true/false, "step": 6}}.
 
 ### Step 7: Commit, Push, and Open PR
 Follow STEPS 3, 4, and 5 of the Git + Forgejo Workflow above. Concretely:
@@ -295,8 +212,36 @@ Follow STEPS 3, 4, and 5 of the Git + Forgejo Workflow above. Concretely:
    The PR body must list each acceptance criterion from the task and
    confirm it is satisfied.
 
+Save progress: call **SaveSessionNoteTool** with phase="implementing",
+notes_json={{"branch": "...", "commit_sha": "...", "pr_url": "...", "step": 7}}.
+
 ### Step 8: Submit for Review
 Use **UpdateTaskStatusTool** to set the status to `review_ready`.
+
+Save progress: call **SaveSessionNoteTool** with phase="implementing",
+notes_json={{"branch": "...", "status": "review_ready", "step": 8}}.
+
+## Handoff to Code Reviewer
+After you submit, a **Code Reviewer** will evaluate your work. The reviewer
+is a different agent — they do NOT have access to your memory, your terminal
+history, or anything you did not explicitly commit and push. If it is not
+on the branch, it does not exist for the reviewer.
+
+**The reviewer will use these tools to find your work:**
+- **GitDiffTool** — to read the diff on your branch vs main.
+- **GitStatusTool** — to see which files changed.
+- **ReadFileTool** — to read specific files for context.
+- **GetTaskTool** — to read the task description and your comments.
+
+**Your AddCommentTool submission comment must include:**
+1. The exact branch name (e.g., `task-7-auth-middleware`).
+2. A summary of what changed and why.
+3. How to test it (test command or manual steps).
+4. Any assumptions made (prefix: `ASSUMPTION:`).
+
+This is not optional — it is the reviewer's map to your work. A vague
+comment like "implementation done" forces the reviewer to guess, which
+slows down the entire review cycle.
 
 ## Important Reminders
 - Do NOT move to `review_ready` without running tests.
@@ -313,10 +258,14 @@ A summary of the implementation containing:
    description of each change.
 3. **Tests written**: What tests were added and what they verify.
 4. **Test results**: Confirmation that all tests pass.
-5. **Status**: Confirmation that the task was moved to `review_ready`.
-6. **Escalations** (if applicable): If tests failed persistently and
+5. **Test execution strategy**: State whether full suite or relevant-only
+   mode was used, and why (test count, estimated duration).
+6. **Status**: Confirmation that the task was moved to `review_ready`.
+7. **Escalations** (if applicable): If tests failed persistently and
    AskTeamLeadTool was used, document what was asked and what response
    was received.
+8. **Session State**: Whether a prior session was loaded and that progress
+   was saved at each step with the correct step number in notes_json.
 """
     return description, expected_output
 
@@ -325,12 +274,14 @@ def respond_to_clarification(
     task_id: int,
     task_title: str,
     clarification_message: str,
+    project_id: int = 0,
+    project_name: str = "",
 ) -> tuple[str, str]:
     """Return (description, expected_output) for responding to team lead clarification."""
 
     state_block = build_state_context(
-        project_id=0,
-        project_name="",
+        project_id=project_id,
+        project_name=project_name,
         phase="clarification",
         summary=(
             f"The Team Lead has requested clarification on task {task_id}. "
@@ -382,26 +333,26 @@ request.
 def rework_code(
     task_id: int,
     rejection_count: int,
-    max_rejections: int,
     latest_feedback: str,
     branch_name: str,
+    project_id: int = 0,
+    project_name: str = "",
 ) -> tuple[str, str]:
     """Return (description, expected_output) for reworking rejected code."""
 
     state_block = build_state_context(
-        project_id=0,
-        project_name="",
+        project_id=project_id,
+        project_name=project_name,
         phase="rework",
         summary=(
-            f"Code for task {task_id} was rejected (attempt {rejection_count}"
-            f"/{max_rejections}). You must address all reviewer feedback."
+            f"Code for task {task_id} was rejected (attempt {rejection_count})."
+            " You must address all reviewer feedback."
         ),
-        extra={"Rework attempt": f"{rejection_count} of {max_rejections}"},
+        extra={"Rework attempt": str(rejection_count)},
     )
 
     description = f"""\
-Your code for task {task_id} has been rejected (attempt \
-{rejection_count}/{max_rejections}).
+Your code for task {task_id} has been rejected (attempt {rejection_count}).
 
 {state_block}
 
@@ -412,9 +363,9 @@ Your code for task {task_id} has been rejected (attempt \
 `{branch_name}`
 
 ## Your Goal
-Address ALL issues identified by the Code Reviewer. After {max_rejections}
-total rejections the task will be escalated to the Team Lead, so it is
-critical that you resolve every blocking issue in this iteration.
+Address ALL issues identified by the Code Reviewer. The review cycle will
+continue until the reviewer approves your code, so it is critical that you
+resolve every blocking issue in this iteration.
 
 ## Step-by-Step Process
 
@@ -486,8 +437,8 @@ Use **UpdateTaskStatusTool** to set the status to `review_ready`.
 - Do NOT argue with feedback silently by ignoring it — if you disagree,
   add a comment explaining your reasoning via **AddCommentTool**.
 - Run tests BEFORE submitting. Broken tests are an automatic rejection.
-- This is attempt {rejection_count} of {max_rejections}. After
-  {max_rejections} rejections the task is escalated to the Team Lead.
+- This is rejection attempt {rejection_count}. The review will continue
+  until the reviewer approves, so resolve every issue now.
 """
 
     expected_output = f"""\

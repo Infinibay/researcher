@@ -10,6 +10,8 @@ from pydantic import BaseModel, Field
 
 from backend.config.settings import settings
 from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.web.rate_limiter import web_rate_limiter
+from backend.tools.web.robots_checker import robots_checker
 
 
 class ReadPaperInput(BaseModel):
@@ -39,6 +41,13 @@ class ReadPaperTool(PabadaBaseTool):
         pdf_url = self._resolve_url(url, doi, arxiv_id)
         if pdf_url.startswith('{"error"'):
             return pdf_url
+
+        # Check robots.txt
+        if not robots_checker.is_allowed(pdf_url, "PabadaBot/2.0"):
+            return self._error("robots.txt disallows fetching this URL")
+
+        # Rate limit
+        web_rate_limiter.acquire()
 
         try:
             import httpx

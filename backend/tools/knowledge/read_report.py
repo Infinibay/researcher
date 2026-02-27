@@ -14,49 +14,103 @@ class ReadReportInput(BaseModel):
     report_id: int | None = Field(
         default=None, description="Artifact ID of the report"
     )
+    task_id: int | None = Field(
+        default=None, description="Task ID to find associated report"
+    )
     file_path: str | None = Field(
-        default=None, description="Direct file path to the report"
+        default=None, description="Full or partial file path to match"
     )
 
 
 class ReadReportTool(PabadaBaseTool):
     name: str = "read_report"
     description: str = (
-        "Read a research report by artifact ID or file path."
+        "Read a research report. Looks up by artifact ID, task ID, or "
+        "file path (fuzzy basename match). Content is read from the "
+        "database first; falls back to filesystem only when needed."
     )
     args_schema: Type[BaseModel] = ReadReportInput
 
     def _run(
-        self, report_id: int | None = None, file_path: str | None = None
+        self,
+        report_id: int | None = None,
+        task_id: int | None = None,
+        file_path: str | None = None,
     ) -> str:
-        if report_id is None and file_path is None:
-            return self._error("Provide either report_id or file_path")
+        if report_id is None and task_id is None and file_path is None:
+            return self._error(
+                "Provide at least one of: report_id, task_id, or file_path"
+            )
 
-        # Resolve file path from report_id if needed
-        if file_path is None and report_id is not None:
-            def _get_path(conn: sqlite3.Connection) -> str | None:
+        project_id = self.project_id
+
+        def _lookup(conn: sqlite3.Connection) -> dict | None:
+            row = None
+
+            # Strategy 1: direct ID lookup
+            if report_id is not None:
                 row = conn.execute(
-                    "SELECT file_path FROM artifacts WHERE id = ? AND type = 'report'",
+                    """SELECT id, file_path, description, content
+                       FROM artifacts
+                       WHERE id = ? AND type = 'report'""",
                     (report_id,),
                 ).fetchone()
-                return row["file_path"] if row else None
 
-            try:
-                file_path = execute_with_retry(_get_path)
-            except Exception as e:
-                return self._error(f"Failed to lookup report: {e}")
+            # Strategy 2: find by task_id
+            if row is None and task_id is not None:
+                row = conn.execute(
+                    """SELECT id, file_path, description, content
+                       FROM artifacts
+                       WHERE task_id = ? AND type = 'report'
+                         AND project_id = ?
+                       ORDER BY created_at DESC
+                       LIMIT 1""",
+                    (task_id, project_id),
+                ).fetchone()
 
-            if file_path is None:
-                return self._error(f"Report with ID {report_id} not found")
+            # Strategy 3: fuzzy file_path match (basename LIKE)
+            if row is None and file_path is not None:
+                basename = os.path.basename(file_path)
+                row = conn.execute(
+                    """SELECT id, file_path, description, content
+                       FROM artifacts
+                       WHERE type = 'report'
+                         AND project_id = ?
+                         AND file_path LIKE ?
+                       ORDER BY created_at DESC
+                       LIMIT 1""",
+                    (project_id, f"%{basename}%"),
+                ).fetchone()
 
-        # Read file
-        if not os.path.exists(file_path):
-            return self._error(f"Report file not found: {file_path}")
+            return dict(row) if row else None
 
         try:
-            with open(file_path, "r", encoding="utf-8") as f:
-                content = f.read()
+            result = execute_with_retry(_lookup)
         except Exception as e:
-            return self._error(f"Failed to read report: {e}")
+            return self._error(f"Failed to lookup report: {e}")
 
-        return content
+        if result is None:
+            return self._error("Report not found")
+
+        # Prefer DB content; fall back to filesystem
+        content = result.get("content")
+        if not content:
+            fpath = result.get("file_path", "")
+            if fpath and os.path.exists(fpath):
+                try:
+                    with open(fpath, "r", encoding="utf-8") as f:
+                        content = f.read()
+                except Exception as e:
+                    return self._error(f"Failed to read report file: {e}")
+            else:
+                return self._error(
+                    f"Report found in DB (id={result['id']}) but content "
+                    f"is empty and file not accessible: {fpath}"
+                )
+
+        return self._success({
+            "artifact_id": result["id"],
+            "file_path": result.get("file_path", ""),
+            "description": result.get("description", ""),
+            "content": content,
+        })

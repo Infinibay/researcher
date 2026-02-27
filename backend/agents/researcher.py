@@ -16,7 +16,6 @@ def create_researcher_agent(
     teammates: list[dict[str, str]] | None = None,
     llm: Any | None = None,
     knowledge_service: Any | None = None,
-    memory_service: Any | None = None,
 ) -> PabadaAgent:
     """Instantiate a Researcher agent."""
     knowledge_sources = None
@@ -40,8 +39,7 @@ def create_researcher_agent(
         backstory=backstory,
         project_id=project_id,
         allow_delegation=False,
-        max_iter=25,
+        max_iter=40,
         llm=llm,
         knowledge_sources=knowledge_sources,
-        memory_service=memory_service,
     )

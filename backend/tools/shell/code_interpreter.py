@@ -50,6 +50,10 @@ class CodeInterpreterTool(PabadaBaseTool):
         timeout = min(timeout, settings.CODE_INTERPRETER_TIMEOUT)
         max_output = settings.CODE_INTERPRETER_MAX_OUTPUT
 
+        # ── Pod mode: pass code via stdin to python3 inside pod ──
+        if self._is_pod_mode():
+            return self._run_in_pod(code, timeout, max_output)
+
         # Write code to a temporary file
         tmp_path: str | None = None
         try:
@@ -93,6 +97,44 @@ class CodeInterpreterTool(PabadaBaseTool):
         finally:
             if tmp_path and os.path.exists(tmp_path):
                 os.unlink(tmp_path)
+
+    def _run_in_pod(self, code: str, timeout: int, max_output: int) -> str:
+        """Execute Python code inside the agent's pod via stdin."""
+        try:
+            result = self._exec_in_pod(
+                ["python3", "-"],
+                timeout=timeout,
+                stdin_data=code,
+            )
+        except RuntimeError as e:
+            return self._error(f"Pod execution failed: {e}")
+
+        stdout = result.stdout or ""
+        stderr = result.stderr or ""
+
+        if result.timed_out:
+            return self._success({
+                "exit_code": -1,
+                "stdout": "",
+                "stderr": f"Code execution timed out after {timeout}s",
+                "success": False,
+            })
+
+        if len(stdout) > max_output:
+            stdout = stdout[:max_output] + "\n... [output truncated]"
+        if len(stderr) > max_output:
+            stderr = stderr[:max_output] + "\n... [output truncated]"
+
+        self._log_tool_usage(
+            f"Code interpreter (pod): {len(code)} chars, exit={result.exit_code}"
+        )
+
+        return self._success({
+            "exit_code": result.exit_code,
+            "stdout": stdout,
+            "stderr": stderr,
+            "success": result.exit_code == 0,
+        })
 
     def _run_sandboxed(self, script_path: str, timeout: int) -> dict:
         """Execute via container sandbox."""

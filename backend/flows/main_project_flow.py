@@ -17,25 +17,31 @@ import logging
 import threading
 from typing import Any
 
-from crewai import Crew, Task
 from crewai.flow.flow import Flow, listen, or_, router, start
 from crewai.flow.persistence import persist
-from pydantic import BaseModel
 
 from backend.agents.registry import get_agent_by_role, initialize_project_team
+from backend.config.settings import settings
+from backend.flows.guardrails import (
+    validate_plan_output,
+    validate_requirements_output,
+)
 from backend.flows.helpers import (
-    all_objectives_met,
+    build_crew,
     classify_approval_response,
     create_project,
     generate_final_report,
     get_completed_task_count,
     get_pending_tasks,
+    get_project_progress_summary,
+    get_task_count,
     load_project_state,
     log_flow_event,
     notify_team_lead,
     send_agent_message,
     update_project_status,
 )
+from backend.flows.snapshot_service import save_snapshot
 from backend.flows.state_models import ProjectState, ProjectStatus, TaskType
 from backend.prompts.project_lead import tasks as pl_tasks
 from backend.prompts.team import build_conversation_context
@@ -75,6 +81,9 @@ class MainProjectFlow(Flow[ProjectState]):
                 )
                 if has_work:
                     self.state.status = ProjectStatus.EXECUTING
+                    # Ensure DB reflects executing so agent loops can process events
+                    if db_status != "executing":
+                        update_project_status(self.state.project_id, "executing")
                 else:
                     # Paused/executing but no work created yet → restart planning
                     logger.info(
@@ -124,18 +133,47 @@ class MainProjectFlow(Flow[ProjectState]):
         if self.state.status == ProjectStatus.COMPLETED:
             return "already_complete"
 
+        # Step-aware resume: if we have a saved current_step from a snapshot,
+        # jump directly to the interrupted step instead of restarting.
+        if (
+            self.state.status == ProjectStatus.PLANNING
+            and self.state.current_step
+        ):
+            step = self.state.current_step
+            logger.info(
+                "MainProjectFlow: resuming PLANNING from step '%s'", step,
+            )
+            step_to_event = {
+                "consult_project_lead": "start_planning",
+                "create_plan": "consult_project_lead",
+                "plan_approval_router": "resume_plan_approval",
+                "setup_repository": "approved",
+                "create_structure": "setup_repository",
+                "check_and_launch_tasks": "resume_execution",
+            }
+            resume_event = step_to_event.get(step)
+            if resume_event:
+                log_flow_event(
+                    self.state.project_id, "flow_resumed", "main_project_flow",
+                    "project", self.state.project_id,
+                    {"resumed_from_step": step},
+                )
+                return resume_event
+
         # NEW or PLANNING → start planning
-        return "new_project"
+        return "start_planning"
 
     # ── Requirements gathering ────────────────────────────────────────────
 
-    @listen(or_("new_project", "handle_rejection"))
+    @listen("start_planning")
     def consult_project_lead(self):
         """Project Lead gathers and clarifies requirements with the user."""
-        logger.info("MainProjectFlow: consult_project_lead")
-        self.state.requirements_attempts += 1
+        self.state.current_step = "consult_project_lead"
         self.state.status = ProjectStatus.PLANNING
         update_project_status(self.state.project_id, "planning")
+        save_snapshot(self.state.project_id, "main_project_flow", "consult_project_lead", self.state)
+        logger.info("MainProjectFlow: consult_project_lead")
+        self.state.requirements_attempts += 1
 
         # Cap requirements gathering iterations
         if self.state.requirements_attempts > self.state.max_requirements_attempts:
@@ -177,21 +215,17 @@ class MainProjectFlow(Flow[ProjectState]):
             project_id=self.state.project_id,
             agent_id=project_lead.agent_id,
         )
-        desc, expected = pl_tasks.gather_requirements(
+        task_prompt = pl_tasks.gather_requirements(
             self.state.project_name, self.state.project_id,
             existing_reqs, feedback_context,
             conversation_context=conv_ctx,
         )
-        crew = Crew(
-            agents=[project_lead.crewai_agent],
-            tasks=[Task(
-                description=desc,
-                agent=project_lead.crewai_agent,
-                expected_output=expected,
-            )],
-            verbose=True,
-        )
-        result = crew.kickoff()
+        from backend.tools import get_tools_for_task_type
+        result = build_crew(
+            project_lead, task_prompt,
+            guardrail=validate_requirements_output,
+            task_tools=get_tools_for_task_type("requirements"),
+        ).kickoff()
         self.state.requirements = str(result)
 
         log_flow_event(
@@ -205,6 +239,8 @@ class MainProjectFlow(Flow[ProjectState]):
     @listen("consult_project_lead")
     def create_plan(self):
         """Team Lead creates a detailed plan with epics, milestones, and tasks."""
+        self.state.current_step = "create_plan"
+        save_snapshot(self.state.project_id, "main_project_flow", "create_plan", self.state)
         logger.info("MainProjectFlow: create_plan")
 
         team_lead = get_agent_by_role("team_lead", self.state.project_id)
@@ -214,21 +250,18 @@ class MainProjectFlow(Flow[ProjectState]):
             project_id=self.state.project_id,
             agent_id=team_lead.agent_id,
         )
-        desc, expected = tl_tasks.create_plan(
+        task_prompt = tl_tasks.create_plan(
             self.state.project_name, self.state.project_id,
             self.state.requirements,
             conversation_context=conv_ctx,
+            planning_iteration=self.state.planning_iteration,
         )
-        crew = Crew(
-            agents=[team_lead.crewai_agent],
-            tasks=[Task(
-                description=desc,
-                agent=team_lead.crewai_agent,
-                expected_output=expected,
-            )],
-            verbose=True,
-        )
-        result = crew.kickoff()
+        from backend.tools import get_tools_for_task_type
+        result = build_crew(
+            team_lead, task_prompt,
+            guardrail=validate_plan_output,
+            task_tools=get_tools_for_task_type("plan"),
+        ).kickoff()
         self.state.plan = str(result)
 
         log_flow_event(
@@ -238,31 +271,35 @@ class MainProjectFlow(Flow[ProjectState]):
 
     # ── Plan approval ─────────────────────────────────────────────────────
 
-    @router("create_plan")
+    @router(or_("create_plan", "resume_plan_approval"))
     def plan_approval_router(self):
         """Project Lead presents the plan to the user for approval."""
+        self.state.current_step = "plan_approval_router"
+        save_snapshot(self.state.project_id, "main_project_flow", "plan_approval_router", self.state)
         logger.info("MainProjectFlow: plan_approval_router")
 
         project_lead = get_agent_by_role("project_lead", self.state.project_id)
         project_lead.activate_context()
 
-        desc, expected = pl_tasks.present_plan_for_approval(self.state.plan)
-        crew = Crew(
-            agents=[project_lead.crewai_agent],
-            tasks=[Task(
-                description=desc,
-                agent=project_lead.crewai_agent,
-                expected_output=expected,
-            )],
-            verbose=True,
+        conv_ctx = build_conversation_context(
+            project_id=self.state.project_id,
+            agent_id=project_lead.agent_id,
         )
-        result = str(crew.kickoff()).strip()
+        task_prompt = pl_tasks.present_plan_for_approval(
+            self.state.plan,
+            project_name=self.state.project_name,
+            project_id=self.state.project_id,
+            requirements=self.state.requirements,
+            conversation_context=conv_ctx,
+        )
+        result = str(build_crew(project_lead, task_prompt).kickoff()).strip()
 
         if classify_approval_response(result) == "approved":
             self.state.user_approved = True
             log_flow_event(
                 self.state.project_id, "plan_approved", "main_project_flow",
                 "project", self.state.project_id,
+                {"project_name": self.state.project_name},
             )
             return "approved"
         else:
@@ -278,12 +315,12 @@ class MainProjectFlow(Flow[ProjectState]):
             )
             return "rejected"
 
-    @listen("rejected")
+    @router("rejected")
     def handle_rejection(self):
         """Clear plan and loop back to requirements gathering with feedback.
 
-        Triggers "handle_rejection" → consult_project_lead via or_().
-        If max_requirements_attempts reached, force approval with latest feedback.
+        Returns "start_planning" → consult_project_lead.
+        Returns "approved" if max_requirements_attempts reached (force-proceed).
         """
         logger.info("MainProjectFlow: handle_rejection (feedback=%s)", self.state.feedback)
 
@@ -305,34 +342,131 @@ class MainProjectFlow(Flow[ProjectState]):
                 "main_project_flow", "project", self.state.project_id,
                 {"attempts": self.state.requirements_attempts},
             )
-            return
+            return "approved"
 
         self.state.plan = ""
+        return "start_planning"
+
+    # ── Repository setup ─────────────────────────────────────────────────
+
+    @listen("approved")
+    def setup_repository(self):
+        """Create a git repository for the project after plan approval.
+
+        This is a system-level step (no LLM call needed). The repo name is
+        derived from the project name by slugifying it.
+        """
+        self.state.current_step = "setup_repository"
+        save_snapshot(self.state.project_id, "main_project_flow", "setup_repository", self.state)
+
+        import re
+
+        from backend.config.settings import settings
+        from backend.git.repository_manager import RepositoryManager
+
+        logger.info("MainProjectFlow: setup_repository for project %d", self.state.project_id)
+
+        # Slugify project name → repo name
+        slug = self.state.project_name.lower().strip()
+        slug = re.sub(r"[^a-z0-9]+", "-", slug).strip("-")[:40]
+        if len(slug) < 2:
+            slug = f"project-{self.state.project_id}"
+        self.state.repo_name = slug
+
+        local_path = (
+            f"{settings.WORKSPACE_BASE_DIR}/projects/"
+            f"{self.state.project_id}/{slug}"
+        )
+
+        repo_manager = RepositoryManager()
+        try:
+            repo = repo_manager.init_repo(
+                project_id=self.state.project_id,
+                name=slug,
+                local_path=local_path,
+            )
+            log_flow_event(
+                self.state.project_id, "repo_created", "project_lead",
+                "project", self.state.project_id,
+                {"repo_name": slug, "local_path": local_path,
+                 "remote_url": repo.get("remote_url", "")},
+            )
+            logger.info(
+                "MainProjectFlow: repository '%s' created at %s",
+                slug, local_path,
+            )
+        except Exception:
+            logger.exception(
+                "MainProjectFlow: failed to create repository for project %d",
+                self.state.project_id,
+            )
+            # Non-fatal — project can still proceed without a repo
+            log_flow_event(
+                self.state.project_id, "repo_creation_failed", "main_project_flow",
+                "project", self.state.project_id,
+                {"repo_name": slug, "error": "see logs"},
+            )
 
     # ── Structure creation ────────────────────────────────────────────────
 
-    @listen("approved")
+    @listen("setup_repository")
     def create_structure(self):
-        """Team Lead creates epics/milestones/tasks in the DB from the plan."""
-        logger.info("MainProjectFlow: create_structure")
+        """Delegate to TicketCreationFlow for iterative ticket creation.
 
-        team_lead = get_agent_by_role("team_lead", self.state.project_id)
-        team_lead.activate_context()
+        Launches TicketCreationFlow in a background thread and waits only
+        for the first ticket to be created before returning, so
+        _launch_pending_tasks can start developers while tickets are still
+        being created.
+        """
+        self.state.current_step = "create_structure"
+        save_snapshot(self.state.project_id, "main_project_flow", "create_structure", self.state)
+        logger.info("MainProjectFlow: create_structure (delegating to TicketCreationFlow)")
 
-        desc, expected = tl_tasks.create_structure(
-            self.state.project_name, self.state.project_id,
-            self.state.plan,
+        from backend.flows.event_listeners import event_bus
+        from backend.flows.ticket_creation_flow import TicketCreationFlow
+
+        first_ticket_event = threading.Event()
+        no_tickets_event = threading.Event()
+
+        def _on_first_ticket(event):
+            if event.project_id == self.state.project_id:
+                first_ticket_event.set()
+
+        def _on_no_tickets(event):
+            if event.project_id == self.state.project_id:
+                no_tickets_event.set()
+
+        event_bus.subscribe("task_available", _on_first_ticket)
+        event_bus.subscribe("no_tickets_in_plan", _on_no_tickets)
+
+        flow = TicketCreationFlow()
+        ticket_thread = threading.Thread(
+            target=flow.kickoff,
+            kwargs={"inputs": {
+                "project_id": self.state.project_id,
+                "project_name": self.state.project_name,
+                "plan": self.state.plan,
+            }},
+            name=f"TicketCreation-p{self.state.project_id}",
+            daemon=True,
         )
-        crew = Crew(
-            agents=[team_lead.crewai_agent],
-            tasks=[Task(
-                description=desc,
-                agent=team_lead.crewai_agent,
-                expected_output=expected,
-            )],
-            verbose=True,
-        )
-        result = crew.kickoff()
+        ticket_thread.start()
+
+        try:
+            if not first_ticket_event.wait(timeout=600):
+                if no_tickets_event.is_set():
+                    logger.warning(
+                        "MainProjectFlow: TicketCreationFlow found 0 tasks in plan (project %d)",
+                        self.state.project_id,
+                    )
+                else:
+                    logger.warning(
+                        "MainProjectFlow: timed out waiting for first ticket (project %d)",
+                        self.state.project_id,
+                    )
+        finally:
+            event_bus.unsubscribe("task_available", _on_first_ticket)
+            event_bus.unsubscribe("no_tickets_in_plan", _on_no_tickets)
 
         self.state.status = ProjectStatus.EXECUTING
         update_project_status(self.state.project_id, "executing")
@@ -340,7 +474,7 @@ class MainProjectFlow(Flow[ProjectState]):
         log_flow_event(
             self.state.project_id, "structure_created", "main_project_flow",
             "project", self.state.project_id,
-            {"result": str(result)[:500]},
+            {"project_name": self.state.project_name},
         )
 
     # ── Task execution loop ───────────────────────────────────────────────
@@ -351,6 +485,7 @@ class MainProjectFlow(Flow[ProjectState]):
         "check_pending_after_task",
         "after_brainstorm",
         "handle_stagnation",
+        "create_additional_tickets",
     ))
     def check_and_launch_tasks(self):
         """Check for pending tasks and launch sub-flows.
@@ -361,7 +496,12 @@ class MainProjectFlow(Flow[ProjectState]):
         - check_pending_after_task: after a task completes (cycle)
         - after_brainstorm: after brainstorming creates new tasks
         - handle_stagnation: after stagnation intervention
+
+        When AUTONOMY_ENABLED, delegates to a passive wait while agents
+        autonomously pick up work. Otherwise falls back to centralized dispatch.
         """
+        if settings.AUTONOMY_ENABLED:
+            return self._wait_for_autonomous_completion()
         return self._launch_pending_tasks()
 
     @listen("task_completed")
@@ -372,12 +512,180 @@ class MainProjectFlow(Flow[ProjectState]):
         """
         self.state.completed_tasks = get_completed_task_count(self.state.project_id)
         self.state.brainstorm_attempts = 0
+        self.state.evaluate_progress_attempts = 0
+
+    def _wait_for_autonomous_completion(self) -> str:
+        """Wait passively while agents autonomously pick up work.
+
+        Agents driven by AutonomyScheduler heartbeats observe DB state, claim
+        tasks, and launch sub-flows.  This method simply waits for either
+        all_tasks_done or task_available events, rechecking each time.
+        """
+        self.state.current_step = "autonomous_execution"
+        save_snapshot(
+            self.state.project_id, "main_project_flow",
+            "autonomous_execution", self.state,
+        )
+
+        from backend.flows.event_listeners import event_bus
+
+        # Reset tasks stuck in in_progress from a previous crash
+        self._reset_stale_in_progress_tasks()
+
+        pending = get_pending_tasks(self.state.project_id)
+        if not pending:
+            # No pending tasks at all — might be done
+            logger.info("MainProjectFlow: no pending tasks, checking completion")
+            return "no_pending_tasks"
+
+        # Ensure agent_events exist for all pending tasks so agent loops
+        # can pick them up.  After a restart, ephemeral EventBus events are
+        # lost and the DB may have zero pending agent_events.
+        self._ensure_task_events(pending)
+
+        log_flow_event(
+            self.state.project_id, "autonomous_execution_started",
+            "main_project_flow", "project", self.state.project_id,
+            {"pending_count": len(pending)},
+        )
+
+        completion_event = threading.Event()
+
+        def _on_all_done(event):
+            if event.project_id == self.state.project_id:
+                completion_event.set()
+
+        def _on_task_available(event):
+            """New tasks created (e.g. by TicketCreationFlow) — re-check."""
+            if event.project_id == self.state.project_id:
+                completion_event.set()
+
+        event_bus.subscribe("all_tasks_done", _on_all_done)
+        event_bus.subscribe("task_available", _on_task_available)
+        try:
+            while True:
+                completion_event.wait(timeout=3600)  # 1h max between checks
+                completion_event.clear()
+
+                # Re-check: are there still pending/running tasks?
+                remaining = get_pending_tasks(self.state.project_id)
+                running = self._count_running_tasks()
+                if not remaining and running == 0:
+                    break
+
+                # If only new tasks appeared (task_available), agents will pick
+                # them up autonomously — just keep waiting
+        finally:
+            event_bus.unsubscribe("all_tasks_done", _on_all_done)
+            event_bus.unsubscribe("task_available", _on_task_available)
+
+        self.state.completed_tasks = get_completed_task_count(self.state.project_id)
+        return "no_pending_tasks"
+
+    def _reset_stale_in_progress_tasks(self) -> None:
+        """Reset tasks stuck in in_progress from a previous crash back to pending.
+
+        When the system is killed (Ctrl+C), tasks that were being worked on
+        remain in 'in_progress' with no agent actually processing them.
+        """
+        from backend.tools.base.db import execute_with_retry
+
+        def _reset(conn):
+            cursor = conn.execute(
+                """UPDATE tasks SET status = 'pending', assigned_to = NULL
+                   WHERE project_id = ? AND status = 'in_progress'""",
+                (self.state.project_id,),
+            )
+            conn.commit()
+            return cursor.rowcount
+
+        count = execute_with_retry(_reset)
+        if count:
+            logger.info(
+                "MainProjectFlow: reset %d stale in_progress tasks to pending "
+                "for project %d",
+                count, self.state.project_id,
+            )
+
+    def _ensure_task_events(self, pending_tasks: list[dict]) -> None:
+        """Create task_available agent_events for pending tasks that lack them.
+
+        After a restart, the persistent agent_events table may be empty even
+        though tasks exist in backlog/pending.  This method fills the gap so
+        agent loops can discover work.
+        """
+        from backend.autonomy.events import create_task_event
+        from backend.tools.base.db import execute_with_retry
+
+        def _tasks_with_pending_events(conn):
+            """Return set of task_ids that already have a pending task_available event."""
+            rows = conn.execute(
+                """SELECT DISTINCT
+                       json_extract(payload_json, '$.task_id') as task_id
+                   FROM agent_events
+                   WHERE project_id = ? AND event_type = 'task_available'
+                     AND status = 'pending'""",
+                (self.state.project_id,),
+            ).fetchall()
+            return {r["task_id"] for r in rows if r["task_id"] is not None}
+
+        existing = execute_with_retry(_tasks_with_pending_events)
+        created = 0
+
+        for task in pending_tasks:
+            task_id = task["id"]
+            if task_id in existing:
+                continue
+
+            task_type = task.get("type", "development")
+            if task_type == "research":
+                target_role = "researcher"
+            elif task_type == "review":
+                target_role = "code_reviewer"
+            else:
+                target_role = "developer"
+
+            ids = create_task_event(
+                self.state.project_id, task_id, "task_available",
+                target_role=target_role,
+                source="resume_recovery",
+                extra_payload={
+                    "task_type": task_type,
+                    "task_priority": task.get("priority", 2),
+                },
+            )
+            created += len(ids)
+
+        if created:
+            logger.info(
+                "MainProjectFlow: created %d task_available agent_events "
+                "for project %d on resume",
+                created, self.state.project_id,
+            )
+
+    def _count_running_tasks(self) -> int:
+        """Count tasks currently in_progress or review_ready for this project."""
+        from backend.tools.base.db import execute_with_retry
+
+        def _query(conn):
+            row = conn.execute(
+                """SELECT COUNT(*) as cnt FROM tasks
+                   WHERE project_id = ?
+                     AND status IN ('in_progress', 'review_ready')""",
+                (self.state.project_id,),
+            ).fetchone()
+            return row["cnt"] if row else 0
+
+        return execute_with_retry(_query)
 
     def _launch_pending_tasks(self) -> str:
         """Launch up to max_concurrent_tasks sub-flows and wait for any to finish.
 
         Returns "no_pending_tasks" or "task_completed" as routing signals.
         """
+        self.state.current_step = "check_and_launch_tasks"
+        save_snapshot(self.state.project_id, "main_project_flow", "check_and_launch_tasks", self.state)
+
         from backend.flows.event_listeners import event_bus
 
         # Clean running_task_ids — remove any tasks that are already done
@@ -426,16 +734,22 @@ class MainProjectFlow(Flow[ProjectState]):
         if not self.state.running_task_ids:
             return "no_pending_tasks"
 
-        # Wait for any sub-flow to finish
+        # Wait for any sub-flow to finish or new ticket to arrive
         def _on_task_done(event):
             if event.project_id == self.state.project_id:
                 completion_event.set()
 
+        def _on_task_available(event):
+            if event.project_id == self.state.project_id:
+                completion_event.set()
+
         event_bus.subscribe("task_done", _on_task_done)
+        event_bus.subscribe("task_available", _on_task_available)
         try:
             completion_event.wait(timeout=3600)
         finally:
             event_bus.unsubscribe("task_done", _on_task_done)
+            event_bus.unsubscribe("task_available", _on_task_available)
 
         # Remove finished tasks from running list
         self.state.running_task_ids = [
@@ -512,14 +826,179 @@ class MainProjectFlow(Flow[ProjectState]):
 
     @router("no_pending_tasks")
     def completion_router(self):
-        """Check if project objectives are met or if brainstorming is needed."""
-        if all_objectives_met(self.state.project_id):
-            return "project_complete"
+        """Check if project has tasks or needs evaluation.
+
+        Always routes to evaluate_progress so the TL reviews the state
+        and decides — including whether to declare the project complete
+        or plan more epics.
+        """
+        if get_task_count(self.state.project_id) == 0:
+            logger.warning(
+                "completion_router: project %d has 0 tasks — reverting to planning",
+                self.state.project_id,
+            )
+            return "no_structure"
+        # Always let the Team Lead evaluate — even if all epics look done,
+        # TL decides whether the project objectives are truly met or if
+        # more epics are needed.
         return "not_complete"
 
+    @listen("no_structure")
+    def handle_no_structure(self):
+        """No tasks created — revert to planning."""
+        logger.warning(
+            "MainProjectFlow: no tasks for project %d — reverting to planning",
+            self.state.project_id,
+        )
+        self.state.plan = ""
+        self.state.status = ProjectStatus.PLANNING
+        self.state.user_approved = False
+        update_project_status(self.state.project_id, "planning")
+        log_flow_event(
+            self.state.project_id, "no_structure_detected", "main_project_flow",
+            "project", self.state.project_id,
+        )
+
+    @router("handle_no_structure")
+    def route_no_structure(self):
+        """Route back to planning after no_structure detection."""
+        return "start_planning"
+
     @router("not_complete")
+    def evaluate_progress(self):
+        """Team Lead evaluates current project state and decides next steps.
+
+        Instead of jumping directly to brainstorming, the TL first reviews
+        completed work (especially research findings) and decides whether to
+        create new tickets or trigger brainstorming.
+        """
+        self.state.evaluate_progress_attempts += 1
+        if self.state.evaluate_progress_attempts > self.state.max_evaluate_progress_attempts:
+            logger.warning(
+                "MainProjectFlow: evaluation attempts exhausted (%d/%d) for project %d",
+                self.state.evaluate_progress_attempts,
+                self.state.max_evaluate_progress_attempts,
+                self.state.project_id,
+            )
+            return "evaluation_exhausted"
+
+        logger.info(
+            "MainProjectFlow: Team Lead evaluating progress (attempt %d/%d)",
+            self.state.evaluate_progress_attempts,
+            self.state.max_evaluate_progress_attempts,
+        )
+
+        team_lead = get_agent_by_role("team_lead", self.state.project_id)
+        team_lead.activate_context()
+
+        progress_summary = get_project_progress_summary(self.state.project_id)
+
+        conv_ctx = build_conversation_context(
+            project_id=self.state.project_id,
+            agent_id=team_lead.agent_id,
+        )
+        task_prompt = tl_tasks.evaluate_progress(
+            self.state.project_id, self.state.project_name,
+            progress_summary, self.state.plan,
+            conversation_context=conv_ctx,
+        )
+        result = str(build_crew(team_lead, task_prompt).kickoff()).strip()
+
+        log_flow_event(
+            self.state.project_id, "progress_evaluated", "main_project_flow",
+            "project", self.state.project_id,
+            {"attempt": self.state.evaluate_progress_attempts,
+             "decision": result[:100]},
+        )
+
+        # Parse TL decision
+        self.state.planning_iteration += 1
+
+        if result.upper().startswith("PROJECT_COMPLETE"):
+            log_flow_event(
+                self.state.project_id, "project_complete_by_tl",
+                "main_project_flow", "project", self.state.project_id,
+                {"planning_iteration": self.state.planning_iteration},
+            )
+            return "project_complete"
+        elif result.upper().startswith("NEW_TICKETS"):
+            self.state.plan = result
+            return "create_new_tickets"
+        elif result.upper().startswith("BRAINSTORM_NEEDED"):
+            return "needs_brainstorming"
+        else:
+            # Default: TL provided a plan without the prefix — treat as new tickets
+            self.state.plan = result
+            return "create_new_tickets"
+
+    @listen("create_new_tickets")
+    def create_additional_tickets(self):
+        """Create new tickets based on Team Lead's evaluation.
+
+        Launches TicketCreationFlow in a background thread and waits only
+        for the first ticket before returning, so the task loop can start
+        processing new work immediately.
+        Triggers "create_additional_tickets" → check_and_launch_tasks via or_().
+        """
+        logger.info(
+            "MainProjectFlow: creating additional tickets based on TL evaluation",
+        )
+
+        from backend.flows.event_listeners import event_bus
+        from backend.flows.ticket_creation_flow import TicketCreationFlow
+
+        first_ticket_event = threading.Event()
+
+        def _on_first_ticket(event):
+            if event.project_id == self.state.project_id:
+                first_ticket_event.set()
+
+        event_bus.subscribe("task_available", _on_first_ticket)
+
+        flow = TicketCreationFlow()
+        ticket_thread = threading.Thread(
+            target=flow.kickoff,
+            kwargs={"inputs": {
+                "project_id": self.state.project_id,
+                "project_name": self.state.project_name,
+                "plan": self.state.plan,
+            }},
+            name=f"TicketCreation-p{self.state.project_id}",
+            daemon=True,
+        )
+        ticket_thread.start()
+
+        try:
+            if not first_ticket_event.wait(timeout=600):
+                logger.warning(
+                    "MainProjectFlow: timed out waiting for first additional ticket (project %d)",
+                    self.state.project_id,
+                )
+        finally:
+            event_bus.unsubscribe("task_available", _on_first_ticket)
+
+        # Only reset evaluation counter if new tasks were actually created
+        pending = get_pending_tasks(self.state.project_id)
+        if pending:
+            self.state.evaluate_progress_attempts = 0
+            log_flow_event(
+                self.state.project_id, "additional_tickets_created",
+                "main_project_flow", "project", self.state.project_id,
+                {"new_tasks": len(pending)},
+            )
+        else:
+            logger.warning(
+                "MainProjectFlow: TicketCreationFlow produced no tasks for project %d",
+                self.state.project_id,
+            )
+            log_flow_event(
+                self.state.project_id, "additional_tickets_empty",
+                "main_project_flow", "project", self.state.project_id,
+            )
+
+    @router("needs_brainstorming")
     def trigger_brainstorming(self):
-        """Launch BrainstormingFlow to generate new ideas and tasks."""
+        """Launch BrainstormingFlow when TL decides brainstorming is needed."""
         from backend.flows.brainstorming_flow import BrainstormingFlow
 
         self.state.brainstorm_attempts += 1
@@ -584,9 +1063,40 @@ class MainProjectFlow(Flow[ProjectState]):
             {"attempts": self.state.brainstorm_attempts},
         )
 
+    @listen("evaluation_exhausted")
+    def handle_evaluation_exhausted(self):
+        """Escalate to user after exhausting evaluation attempts."""
+        logger.warning(
+            "MainProjectFlow: all evaluation attempts exhausted for project %d",
+            self.state.project_id,
+        )
+
+        project_lead = get_agent_by_role("project_lead", self.state.project_id)
+        project_lead.activate_context()
+
+        send_agent_message(
+            project_id=self.state.project_id,
+            from_agent="system",
+            to_agent=None,
+            to_role="project_lead",
+            message=(
+                f"Project {self.state.project_id} has exhausted all progress evaluation "
+                f"attempts ({self.state.max_evaluate_progress_attempts}) without being "
+                f"able to define next steps. Manual intervention is required."
+            ),
+        )
+
+        log_flow_event(
+            self.state.project_id, "evaluation_exhausted", "main_project_flow",
+            "project", self.state.project_id,
+            {"attempts": self.state.evaluate_progress_attempts},
+        )
+
     @listen("project_complete")
     def finalize(self):
         """Mark project as completed and generate final report."""
+        self.state.current_step = "finalize"
+        save_snapshot(self.state.project_id, "main_project_flow", "finalize", self.state)
         logger.info("MainProjectFlow: finalizing project %d", self.state.project_id)
 
         self.state.status = ProjectStatus.COMPLETED
@@ -597,17 +1107,18 @@ class MainProjectFlow(Flow[ProjectState]):
         project_lead = get_agent_by_role("project_lead", self.state.project_id)
         project_lead.activate_context()
 
-        desc, expected = pl_tasks.write_final_report(report)
-        crew = Crew(
-            agents=[project_lead.crewai_agent],
-            tasks=[Task(
-                description=desc,
-                agent=project_lead.crewai_agent,
-                expected_output=expected,
-            )],
-            verbose=True,
+        conv_ctx = build_conversation_context(
+            project_id=self.state.project_id,
+            agent_id=project_lead.agent_id,
         )
-        crew.kickoff()
+        task_prompt = pl_tasks.write_final_report(
+            report,
+            project_name=self.state.project_name,
+            project_id=self.state.project_id,
+            requirements=self.state.requirements,
+            conversation_context=conv_ctx,
+        )
+        build_crew(project_lead, task_prompt).kickoff()
 
         log_flow_event(
             self.state.project_id, "project_completed", "main_project_flow",
@@ -670,26 +1181,25 @@ class MainProjectFlow(Flow[ProjectState]):
         team_lead = get_agent_by_role("team_lead", self.state.project_id)
         team_lead.activate_context()
 
+        conv_ctx = build_conversation_context(
+            project_id=self.state.project_id,
+            agent_id=team_lead.agent_id,
+        )
+
         for task in stuck:
             task_id = task["id"]
             task_title = task.get("title", "")
             branch_name = task.get("branch_name", "")
             developer_id = task.get("assigned_to", "")
 
-            desc, expected = tl_tasks.handle_escalation(
+            task_prompt = tl_tasks.handle_escalation(
                 task_id, task_title, branch_name, developer_id,
-            )
-            crew = Crew(
-                agents=[team_lead.crewai_agent],
-                tasks=[Task(
-                    description=desc,
-                    agent=team_lead.crewai_agent,
-                    expected_output=expected,
-                )],
-                verbose=True,
+                project_id=self.state.project_id,
+                project_name=self.state.project_name,
+                conversation_context=conv_ctx,
             )
             try:
-                crew.kickoff()
+                build_crew(team_lead, task_prompt).kickoff()
             except Exception:
                 logger.exception(
                     "MainProjectFlow: Team Lead intervention failed for task %d",

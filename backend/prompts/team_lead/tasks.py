@@ -9,8 +9,14 @@ def create_plan(
     project_id: int,
     requirements: str,
     conversation_context: str = "",
+    planning_iteration: int = 0,
 ) -> tuple[str, str]:
     """Return (description, expected_output) for plan creation."""
+    from backend.config.settings import settings
+
+    max_epics = settings.MAX_ACTIVE_EPICS
+    max_milestones = settings.MAX_MILESTONES_PER_EPIC
+    max_tasks = settings.MAX_TASKS_PER_MILESTONE
 
     state_block = build_state_context(
         project_id=project_id,
@@ -25,7 +31,8 @@ def create_plan(
     ctx_block = conversation_context or ""
 
     description = f"""\
-Create a detailed project plan for project '{project_name}' (ID: {project_id}).
+Determine the highest-impact first batch of work for project \
+'{project_name}' (ID: {project_id}).
 
 {state_block}
 
@@ -35,90 +42,190 @@ Create a detailed project plan for project '{project_name}' (ID: {project_id}).
 {ctx_block}
 
 ## Your Goal
-Produce a complete, structured execution plan that decomposes the PRD into
-epics, milestones, and tasks with clear dependencies and priorities. The plan
-must be detailed enough that developers and researchers can work autonomously
-on individual tasks without needing additional context.
+Identify what work should start NOW to make the most progress toward the
+project goals. You are NOT creating a comprehensive plan for the entire
+project. You are determining the **minimum viable first batch** — the
+smallest set of tickets that will produce the most learning and progress.
+
+After this batch completes, you will be called again to evaluate results
+and decide what comes next. Do NOT try to plan everything now. Create
+only what you have enough information to define well.
+
+**Key question**: "What are the 3-8 most impactful things that should
+happen first, and do I have enough information to define them clearly?"
 
 ## Step-by-Step Process
 
 ### Step 1: Analyze the Requirements
 Read the PRD above thoroughly. Identify:
-- **Core objectives**: What are the 2-5 main goals of this project?
-- **Functional areas**: What distinct domains or features does the project
-  cover? (e.g., authentication, data pipeline, UI, API, research topics)
-- **Dependencies**: What must be built first for other parts to work?
-- **Technical risks**: What aspects are uncertain or complex?
-- **Non-functional requirements**: Performance, security, scalability
-  constraints that affect planning.
+- **Core objectives**: What are the main goals of this project?
+- **What must happen FIRST**: What foundational work enables everything else?
+- **What is uncertain**: What aspects need research before you can plan
+  implementation?
+- **What is clear**: What can be defined precisely right now?
 
 ### Step 2: Check Existing Context
-Use **ReadFindingsTool** to check if there is prior research relevant to
-this project. If research findings exist, factor them into your plan —
-you may not need to duplicate research that has already been done.
+Use **ReadFindingsTool** to check for prior research relevant to this
+project. If findings exist, factor them in.
 
-Use **ReadWikiTool** to check for existing documentation about the project
-domain or technology stack.
+Use **ReadWikiTool** to check for existing documentation.
 
-**If either tool returns empty or errors**: This is normal for new projects.
-Continue planning without that context — do NOT block or retry. An empty
-result simply means no prior research or documentation exists yet.
+Use **ReadMessagesTool** to read all unread messages before planning.
 
-### Step 3: Define Epics
-Group the requirements into 3-7 epics. Each epic should:
-- Represent a high-level objective or feature area.
-- Be as independent as possible from other epics (minimize cross-epic
-  dependencies).
-- Have a clear, measurable outcome — "Authentication system" not
-  "Various auth stuff".
-- Be ordered by priority and dependency (foundational epics first).
+Use **CodeSearchTool** to search the existing codebase for relevant patterns
+and architecture.
 
-### Step 4: Define Milestones
-For each epic, define 2-4 milestones. Each milestone should:
-- Be a verifiable checkpoint — you can objectively confirm it is done.
-- Deliver incremental value — even if the project stops at this milestone,
-  something useful has been produced.
-- Have a target cycle estimate (relative, not calendar dates).
-- Build on the previous milestone within the epic.
+**If any tool returns empty or errors**: Normal for new projects. Continue.
 
-Good milestone: "User registration and login functional with email/password"
-Bad milestone: "Backend work done"
+### Step 3: Decide WHAT to Create Now (CRITICAL STEP)
+This is the most important step. Ask yourself:
 
-### Step 5: Define Tasks
-For each milestone, create specific tasks. Each task should:
-- Be completable by a single agent (developer or researcher) in a
-  reasonable cycle.
-- Have a clear type:
-  - `development`: Code implementation.
-  - `research`: Investigation, analysis, literature review.
-  - `test`: Test writing, test infrastructure.
-  - `documentation`: User docs, API docs, technical docs.
-  - `design`: Architecture, API design, schema design.
-  - `integration`: Connecting components, end-to-end wiring.
-  - `bug_fix`: Fixing defects found during development.
-- Include detailed acceptance criteria — specific, verifiable conditions
-  that define "done". Not "implement X" but "X accepts input Y and returns
-  Z with status 200, validated by tests A, B, C".
-- Have a priority: 1 (critical/blocking) to 5 (nice-to-have).
-- Have an estimated complexity when possible (low/medium/high).
+1. **What work can start immediately** with the information I have?
+   - If the project needs research to clarify direction → create research
+     tickets ONLY. Do NOT create development tickets that depend on unknown
+     research results.
+   - If the direction is clear → create the foundational development tickets.
+
+2. **What would I be guessing about?**
+   - If defining a ticket requires assumptions about unknown results →
+     do NOT create that ticket. Wait for results to inform it.
+
+3. **How many tickets is the right number?**
+   - Fewer, well-defined tickets > many vague tickets.
+   - Typical first batch: 3-8 tickets total.
+   - If research-heavy: maybe 2-3 research tickets only.
+   - If well-defined: maybe 5-8 development tickets.
+
+This is planning iteration #{planning_iteration}. Create at most
+**{max_epics} epics** with ONLY the tickets needed NOW — not everything
+that could ever be needed.
+
+### Step 4: Define Structure
+For each epic (max {max_epics}):
+- Represent a high-level objective for THIS batch, not the whole project.
+- Have a clear, measurable outcome.
+
+For each milestone (max {max_milestones} per epic):
+- Be a verifiable checkpoint with incremental value.
+
+For each task (max {max_tasks} per milestone):
+- Be completable by a single agent in a reasonable cycle.
+- Type: `development`, `research`, `test`, `documentation`, `design`,
+  `integration`, `bug_fix`.
+
+### Step 5: Write Rich Task Descriptions
+Gather context with tools BEFORE writing each task. Do not invent
+context — gather it with ReadFindingsTool, ReadWikiTool, CodeSearchTool.
+
+Every task MUST include ALL of the following sections:
+
+| Section | What to include |
+|---|---|
+| **Context / Motivation** | Why this task exists. For a feature: what user need it addresses. For a bug: how it manifests, reproduction steps, impact. For research: what question needs answering and why it blocks other work. |
+| **Detailed Description** | Current state → desired state. What needs to be built/fixed/investigated. Inputs, outputs, constraints. Not just "implement X". |
+| **Acceptance Criteria** | Minimum **3** specific, verifiable conditions. Use Given/When/Then format OR a concrete checklist. Each criterion must be independently testable. |
+| **Technical Notes** | Relevant files, modules, libraries, APIs, performance/security constraints, links to related tasks or findings. |
+| **Definition of Done** | Final checklist: code complete, criteria met, no regressions, docs updated if applicable. |
+
+#### 5d. Bad vs. Good Examples
+
+**BAD — vague, no context, no criteria:**
+> Title: `RESTful API Specification and Implementation`
+> Description: `Create RESTful API with CRUD operations for virtual machines, versioning, and full OpenAPI/Swagger documentation.`
+
+This is bad because it has no context (why does this API exist? what is blocked
+without it?), no acceptance criteria (what does "done" look like?), no technical
+notes (what framework, what patterns, what constraints?), and no definition of
+done.
+
+**GOOD — context, description, criteria, notes, DoD:**
+> **Title**: `Implement CRUD REST API for Virtual Machines`
+>
+> **Context / Motivation**: The platform has no programmatic interface for VM
+> management. All client integrations (TypeScript SDK, CLI tool) are blocked
+> until this API exists. This is the foundational layer for the entire
+> integration epic.
+>
+> **Detailed Description**: Design and implement a RESTful API with full CRUD
+> for the VM resource under `/api/v1/vms`. Endpoints: `POST /api/v1/vms`
+> (create), `GET /api/v1/vms` (list with pagination), `GET /api/v1/vms/{id}`
+> (get), `PUT /api/v1/vms/{id}` (update), `DELETE /api/v1/vms/{id}` (delete).
+> Must follow REST conventions and be fully documented with OpenAPI 3.0.
+>
+> **Acceptance Criteria**:
+> - Given a `POST /api/v1/vms` with a valid JSON body and a valid JWT, When
+>   the request is processed, Then the response is `201` with the created VM
+>   object including its assigned UUID
+> - Given a `GET /api/v1/vms` with a valid token, Then the response is `200`
+>   with a paginated JSON array; `page` and `limit` query params are supported
+> - Given a `DELETE /api/v1/vms/{id}` for a non-existent ID, Then the response
+>   is `404` with a structured JSON error body
+> - Given any endpoint called without a token, Then the response is `401`
+> - The generated OpenAPI spec renders without errors in Swagger UI
+>
+> **Technical Notes**: Use the existing FastAPI router pattern in `api/routes/`.
+> VM schema: `id` (UUID), `name`, `status` (running/stopped/error), `cpu_count`,
+> `memory_mb`, `created_at`. JWT middleware is already in
+> `api/dependencies.py` — reuse it.
+>
+> **Definition of Done**: All 5 endpoints implemented and passing acceptance
+> criteria. OpenAPI spec auto-generated and valid. Integration tests cover all
+> AC. No existing tests broken.
+
+---
+
+**BAD — bug fix with no context:**
+> Title: `Fix monitoring bug`
+> Description: `Fix issue with metrics not showing correctly.`
+
+**GOOD — bug fix with full context:**
+> **Title**: `Fix: CPU metrics returning stale values after VM restart`
+>
+> **Context / Motivation**: After a VM is restarted, the monitoring module
+> continues to report the CPU usage from before the restart for up to 5
+> minutes. This was reported by the developer agent in thread
+> `monitor-bug-42`. Users see incorrect dashboards and alerts fire
+> incorrectly. Root cause appears to be a missing cache invalidation on VM
+> state change events.
+>
+> **Detailed Description**: The `MetricsCollector` class caches CPU readings
+> per VM ID. When a VM restarts, the cache is not invalidated because the
+> `vm.restarted` event is not subscribed to. The fix must subscribe to
+> `vm.restarted` and `vm.stopped` events and flush the cache entry for the
+> affected VM ID.
+>
+> **Acceptance Criteria**:
+> - Given a VM that has just restarted, When `GET /api/v1/vms/{id}/metrics`
+>   is called within 30 seconds of restart, Then the returned CPU value
+>   reflects post-restart state (not pre-restart cache)
+> - Given a VM that is stopped, When metrics are requested, Then the response
+>   returns `status: stopped` and `cpu_usage: null` rather than stale values
+> - Given the fix is applied, When the existing metrics test suite runs, Then
+>   all existing tests continue to pass
+>
+> **Technical Notes**: See `MetricsCollector` in `monitoring/collector.py`.
+> Event bus subscription pattern is in `events/bus.py`. Cache is a dict keyed
+> by VM ID in `_cache` attribute.
+>
+> **Definition of Done**: Cache invalidation implemented on `vm.restarted` and
+> `vm.stopped`. Unit test added for the invalidation path. No regression in
+> existing metrics tests.
+
+Priority: 1 (critical/blocking) to 5 (nice-to-have).
+Complexity: low / medium / high.
 
 ### Step 6: Define Dependencies
-Identify which tasks depend on others:
 - A task that requires the output of another task is a dependency.
-- Minimize dependency chains — look for opportunities to parallelize.
+- Minimize dependency chains — parallelize where possible.
 - Avoid circular dependencies.
-- Mark dependencies explicitly, not implicitly (don't rely on ordering).
 
-### Step 7: Validate the Plan
+### Step 7: Validate
 Before outputting, verify:
-- [ ] Every PRD requirement is covered by at least one task.
-- [ ] Every task has acceptance criteria.
+- [ ] Every task has clear acceptance criteria.
+- [ ] No task depends on unknown/speculative results.
 - [ ] Dependencies form a DAG (no cycles).
-- [ ] The critical path is identified (the longest dependency chain).
-- [ ] Research tasks that inform development are scheduled before the
-  development tasks that depend on them.
-- [ ] The plan can start immediately — the first tasks have no unresolved
-  dependencies.
+- [ ] Work can start immediately — first tasks have no blockers.
+- [ ] No duplicate or near-duplicate tasks.
 
 ### Step 8: If Anything Is Ambiguous
 If the PRD has gaps or ambiguities that affect planning:
@@ -129,44 +236,32 @@ If the PRD has gaps or ambiguities that affect planning:
   escalated.
 """
 
-    expected_output = """\
-A structured project plan in markdown containing:
+    expected_output = f"""\
+A focused plan for the minimum viable first batch of work (max {max_epics} epics):
 
-## Plan Summary
-Brief overview: number of epics, milestones, tasks. Critical path identified.
-Key technical decisions made during planning.
+## What I'm Creating and Why
+Brief explanation: why these specific tickets? Why not more? Why not fewer?
+What information am I waiting for before creating additional tickets?
 
 ## Epics
-For each epic:
-- Title and description
-- Priority and rationale
-- Expected outcome
-
-## Milestones
-For each milestone (grouped by epic):
-- Title and description
-- Target cycle
-- Verification criteria
-- Dependencies on other milestones (if any)
+For each epic: title, description, and why it belongs in the FIRST batch.
 
 ## Tasks
-For each task (grouped by milestone):
-- Title and detailed description
-- Type (development/research/test/documentation/design/integration/bug_fix)
-- Acceptance criteria (specific, verifiable)
-- Priority (1-5)
-- Estimated complexity (low/medium/high)
-- Dependencies (which tasks must complete first)
+For each task (grouped by milestone), include ALL sections:
+- **Title**: Action-oriented, specific
+- **Context / Motivation**: Why this task exists NOW
+- **Detailed Description**: Current state → desired state
+- **Type**: development / research / test / etc.
+- **Acceptance Criteria**: Minimum 3 verifiable conditions
+- **Technical Notes**: Relevant files, modules, libraries
+- **Priority**: 1-5
+- **Estimated Complexity**: low / medium / high
+- **Dependencies**: Which tasks must complete first
+- **Definition of Done**: Final checklist
 
-## Dependency Graph
-Summary of the task dependency structure, identifying:
-- The critical path
-- Parallelizable work streams
-- Potential bottlenecks
-
-## Assumptions and Decisions
-Technical decisions made during planning and their rationale.
-Any assumptions about the project that influenced the plan.
+## What Comes Next (NOT tickets — just direction)
+What will likely be needed after this batch completes, and what
+information you are waiting for to define those future tickets.
 """
     return description, expected_output
 
@@ -207,11 +302,15 @@ from the plan must be represented in the database.
 ### Step 1: Create Epics
 Use **CreateEpicTool** for each epic in the plan. For each:
 - Set a clear title matching the plan.
-- Include the full description from the plan.
 - Set appropriate priority.
 - Note the returned epic ID — you will need it for milestones.
 
 Create epics in dependency order (foundational epics first).
+
+The `description` passed to **CreateEpicTool** must follow this structure:
+- **Measurable Objective**: What does success look like in concrete, observable terms? (e.g., "All VM lifecycle operations are exposed via a versioned REST API with <200 ms p99 latency")
+- **Problem It Solves**: Why does this epic exist? What user pain, system gap, or business need does it address?
+- **Definition of Done**: The conditions under which this epic is considered fully complete (e.g., all child milestones closed, integration tests green, documentation published).
 
 **After each call**, check the returned result. If the returned ID is null
 or the tool returns an error, note the failure internally (epic title and
@@ -222,9 +321,12 @@ Step 6.
 ### Step 2: Create Milestones
 Use **CreateMilestoneTool** for each milestone. For each:
 - Associate it with the correct epic (using the epic ID from Step 1).
-- Set the title and description from the plan.
 - Set the target cycle if specified in the plan.
 - Note the returned milestone ID — you will need it for tasks.
+
+The `description` passed to **CreateMilestoneTool** must follow this structure:
+- **Objective Verification Criterion**: A single, concrete, testable condition that proves this milestone is done (e.g., "The `/vms` endpoint returns a 200 with a valid JSON body for all CRUD operations in the CI test suite").
+- **Incremental Value Delivered**: What does the team or user gain the moment this milestone closes? Why does it matter as a standalone checkpoint?
 
 **After each call**, check the returned result. If the returned ID is null
 or the tool returns an error, note the failure internally (milestone title,
@@ -233,13 +335,27 @@ Do NOT stop the entire process because one item failed — you will reconcile
 failures in Step 6.
 
 ### Step 3: Create Tasks
+
+**⚠️ Quality gate**: A task description that is only a sentence or two will be rejected. Every task must have all five sections below.
+
 Use **CreateTaskTool** for each task. For each:
 - Associate it with the correct milestone and epic (using IDs from above).
 - Set the type (development, research, test, etc.).
-- Include the full description with acceptance criteria.
 - Set priority (1-5).
 - Set estimated complexity if available.
 - Note the returned task ID — you will need it for dependencies.
+
+The `description` passed to **CreateTaskTool** must follow this mandatory structure. Do NOT use the plan's one-line title as the description — expand it fully:
+
+**Context / Motivation**: Why this task exists. Reference the parent milestone goal and any relevant findings or prior work.
+
+**Detailed Description**: Current state → desired state. What must be built, fixed, or investigated. Inputs, outputs, constraints. Be specific — name files, modules, APIs.
+
+**Acceptance Criteria** _(minimum 3, each independently verifiable)_: Use Given/When/Then format or a concrete checklist. Vague criteria like "works correctly" are not acceptable.
+
+**Technical Notes**: Relevant files, modules, libraries, or patterns from the plan. Include specific paths or code references where known.
+
+**Definition of Done**: Final checklist before the task can be marked complete (e.g., code reviewed, tests passing, docs updated).
 
 **After each call**, check the returned result. If the returned ID is null
 or the tool returns an error, note the failure internally (task title,
@@ -300,92 +416,514 @@ A structured summary of the created database structure containing:
     return description, expected_output
 
 
-def assign_task(
-    task_id: int,
-    task_title: str,
-    task_description: str,
+def create_epics_and_milestones(
+    project_name: str,
+    project_id: int,
+    plan: str,
 ) -> tuple[str, str]:
-    """Return (description, expected_output) for task assignment."""
+    """Return (description, expected_output) for creating only epics and milestones."""
 
     state_block = build_state_context(
-        project_id=0,
-        project_name="",
-        phase="task_assignment",
+        project_id=project_id,
+        project_name=project_name,
+        phase="structure_creation",
         summary=(
-            f"Task {task_id} is ready to be assigned. Evaluate the task "
-            "requirements and assign it to the appropriate agent."
+            "The plan has been approved. Create the epic and milestone "
+            "structure in the database. Tasks will be created separately."
         ),
     )
 
     description = f"""\
-Assign task {task_id} to the appropriate team member.
+Create the epic and milestone structure for project \
+'{project_name}' (ID: {project_id}).
 
 {state_block}
 
-## Task Details
-**Title**: {task_title}
-**Description**: {task_description}
+## Approved Plan
+{plan}
 
 ## Your Goal
-Assign this task to the right agent (developer or researcher) with
-sufficient context for them to work autonomously. Ensure the agent
-understands what is expected, what the acceptance criteria are, and
-any relevant context they might need.
+Create all epics and milestones from the plan in the database. Do NOT
+create tasks or dependencies — those will be handled in a separate step.
 
 ## Step-by-Step Process
 
-### Step 1: Analyze the Task
-Read the task description and acceptance criteria. Determine:
-- **Task type**: Is this development, research, testing, etc.?
-- **Complexity**: Is this straightforward or does it require significant
-  context?
-- **Dependencies**: Are all prerequisite tasks complete? Use **ReadTasksTool**
-  to verify.
-- **Context needed**: What additional context does the assignee need beyond
-  the task description?
+### Step 1: Create Epics
+Use **CreateEpicTool** for each epic in the plan. For each:
+- Set a clear title matching the plan.
+- Set appropriate priority.
+- Note the returned epic ID.
 
-### Step 2: Check for Blockers
-Use **ReadTasksTool** to verify that all tasks this one depends on are
-complete. If dependencies are not met:
-- Do NOT assign the task yet.
-- Document the blocker.
-- Check if the blocking task can be expedited.
+Create epics in dependency order (foundational epics first).
 
-### Step 3: Select the Agent
-Choose the appropriate agent based on the task type:
-- `development`, `test`, `bug_fix`, `integration` → Developer
-- `research` → Researcher
-- `documentation` → Developer or Researcher depending on content
-- `design` → Developer (for technical design)
+The `description` passed to **CreateEpicTool** must follow this structure:
+- **Measurable Objective**: What does success look like in concrete, observable terms? (e.g., "All VM lifecycle operations are exposed via a versioned REST API with <200 ms p99 latency")
+- **Problem It Solves**: Why does this epic exist? What user pain, system gap, or business need does it address?
+- **Definition of Done**: The conditions under which this epic is considered fully complete (e.g., all child milestones closed, integration tests green, documentation published).
 
-If multiple agents of the same role are available, consider workload
-balance — check which agents have fewer active tasks.
+**After each call**, check the returned result. If the tool returns an
+error, note the failure and continue with remaining epics.
 
-### Step 4: Provide Context
-Use **SendMessageTool** to send the assigned agent a message with:
-- A brief summary of what the task requires.
-- Any relevant context not in the task description (e.g., architectural
-  decisions, related tasks, reference material locations).
-- Specific guidance if the task is complex or has non-obvious requirements.
-- Pointers to related files, existing code, or prior research findings
-  that the agent should review.
+### Step 2: Create Milestones
+Use **CreateMilestoneTool** for each milestone. For each:
+- Associate it with the correct epic (using the epic ID from Step 1).
+- Set the target cycle if specified.
+- Note the returned milestone ID.
 
-### Step 5: Monitor Assignment
-Use **AddCommentTool** to document the assignment on the task:
-- Who was assigned.
-- Any context or guidance provided.
-- Expected approach or timeline considerations.
+The `description` passed to **CreateMilestoneTool** must follow this structure:
+- **Objective Verification Criterion**: A single, concrete, testable condition that proves this milestone is done (e.g., "The `/vms` endpoint returns a 200 with a valid JSON body for all CRUD operations in the CI test suite").
+- **Incremental Value Delivered**: What does the team or user gain the moment this milestone closes? Why does it matter as a standalone checkpoint?
+
+**After each call**, check the returned result. If the tool returns an
+error, note the failure and continue with remaining milestones.
+
+### Step 3: Output the Results
+You MUST output a JSON block at the very end of your response with ALL
+created IDs. This is critical — the system parses this block to proceed.
+
+Format your JSON output inside a code fence like this:
+
+```json
+{{"epics": [{{"title": "Epic Title Here", "id": 1}}, ...], "milestones": [{{"title": "Milestone Title Here", "id": 1, "epic_id": 1}}, ...]}}
+```
+
+Include every epic and milestone you created. If any failed, list them
+separately after the JSON block.
 """
 
     expected_output = """\
-A confirmation of task assignment containing:
+A response ending with a JSON code block containing all created epics
+and milestones with their database IDs:
 
-1. **Assigned to**: The agent name and role assigned to the task.
-2. **Context provided**: Summary of the additional context sent to the agent.
-3. **Dependencies verified**: Confirmation that all prerequisite tasks are
-   complete (or note of any pending blockers).
-4. **Task comment**: Confirmation that the assignment was documented on the
-   task via AddCommentTool.
+```json
+{"epics": [{"title": "...", "id": N}, ...], "milestones": [{"title": "...", "id": N, "epic_id": N}, ...]}
+```
+
+Before the JSON block, include a brief summary of what was created and
+any items that failed creation.
+"""
+    return description, expected_output
+
+
+def create_single_ticket(
+    project_name: str,
+    project_id: int,
+    plan: str,
+    ticket_title: str,
+    ticket_index: int,
+    total_tickets: int,
+    epics_created: dict[str, int],
+    milestones_created: dict[str, int],
+    tasks_already_created: dict[str, int] | None = None,
+) -> tuple[str, str]:
+    """Return (description, expected_output) for creating a single task with research."""
+
+    state_block = build_state_context(
+        project_id=project_id,
+        project_name=project_name,
+        phase="ticket_creation",
+        summary=(
+            f"Creating ticket {ticket_index + 1} of {total_tickets}: "
+            f"'{ticket_title}'."
+        ),
+    )
+
+    epics_map = "\n".join(
+        f"  - \"{title}\": epic_id={eid}" for title, eid in epics_created.items()
+    )
+    milestones_map = "\n".join(
+        f"  - \"{title}\": milestone_id={mid}" for title, mid in milestones_created.items()
+    )
+
+    already_created_section = ""
+    if tasks_already_created:
+        tasks_list = "\n".join(
+            f"  - \"{title}\": task_id={tid}" for title, tid in tasks_already_created.items()
+        )
+        already_created_section = f"""
+## Tasks Already Created in This Project
+The following tasks have already been created. Do NOT create duplicates or
+near-duplicates of these. If the ticket you are about to create covers the
+same scope as an existing task, SKIP it.
+{tasks_list}
+"""
+
+    description = f"""\
+Create a single task ticket for project '{project_name}' (ID: {project_id}).
+
+{state_block}
+
+## Ticket to Create
+**Title**: {ticket_title}
+**Progress**: Ticket {ticket_index + 1} of {total_tickets}
+
+## Available Epic IDs
+{epics_map}
+
+## Available Milestone IDs
+{milestones_map}
+{already_created_section}
+## Full Plan (for context)
+{plan}
+
+## Step-by-Step Process
+
+### Step 1 — Orient
+Read the plan section for "{ticket_title}". Identify:
+- Which epic this task belongs to (look up the epic_id from the map above)
+- Which milestone this task belongs to (look up the milestone_id from the map above)
+- The task type (development / research / test / documentation / design / integration / bug_fix)
+- Priority (1-5) and complexity (low / medium / high)
+
+### Step 1.5 — Project Awareness & Deduplication
+**Before doing anything else**, understand the current state of the project
+and check for duplicates:
+
+1. Use **ReadTasksTool** to read ALL existing tasks for this project.
+   For each task, note its title, type, status (backlog, pending, in_progress,
+   done, etc.), and description summary.
+2. Review the "Tasks Already Created" list above (if present).
+3. From this, build a mental picture of:
+   - **What has already been completed** — what work is done, what results
+     were achieved, what findings were produced.
+   - **What is currently in progress** — what is being worked on right now.
+   - **What is already planned** — what pending/backlog tasks already cover.
+   - **Where the project is heading** — the overall trajectory and remaining
+     gaps.
+4. Compare the title, scope, and intent of "{ticket_title}" against every
+   existing task. A duplicate is any task that covers substantially the same
+   work — even if the title uses different words.
+
+**If you find a duplicate or near-duplicate:**
+- Do NOT create a new task.
+- Output: `SKIPPED_DUPLICATE: <existing task_id> — <reason>`
+- Stop here. Do not proceed to Step 2.
+
+**If no duplicate exists**, continue to Step 2. Use the project awareness
+you built here to write a richer, more contextualized task description —
+reference completed work, leverage findings from finished research tasks,
+and position this ticket within the broader project trajectory.
+
+### Step 2 — Research
+Before writing the description, gather context using ALL of these tools:
+
+1. **ReadFindingsTool** — search for findings related to "{ticket_title}" or its topic area
+2. **ReadWikiTool** — search for wiki pages related to this task's domain
+3. **ReadMessagesTool** — check for bug reports, agent notes, or escalations about this area
+4. **CodeSearchTool** — search the codebase for relevant modules, functions, or patterns mentioned in the plan
+5. **WebSearchTool** — if the task involves an external library, API, or technology, look up current best practices or known issues
+6. **ExecuteCommandTool** — if needed, run a command to inspect the codebase (e.g., `find`, `cat`, `grep`) for additional context
+
+**If any tool returns empty or errors**: This is normal for new projects.
+Continue without that context — do NOT block or retry. An empty result
+simply means no prior data exists yet. Use whatever context you gathered
+from the tools that did return results.
+
+### Step 3 — Write the Description
+Write the full task description following this MANDATORY structure:
+
+**Context / Motivation**: Why this task exists. Ground this in what you
+found in Step 2 — reference specific findings, wiki pages, messages, or
+code patterns discovered.
+
+**Detailed Description**: Current state → desired state. What needs to be
+built/fixed/investigated. Inputs, outputs, constraints. Be specific.
+
+**Acceptance Criteria**: Minimum 3 specific, verifiable conditions. Use
+Given/When/Then format OR a concrete checklist. Each must be independently
+testable.
+
+**Technical Notes**: Relevant files, modules, libraries, APIs found during
+research. Include specific file paths or code patterns from CodeSearchTool
+results. Reference any findings from ReadFindingsTool.
+
+**Definition of Done**: Final checklist before marking complete.
+
+### Step 4 — Create the Task
+Call **CreateTaskTool** with:
+- `title`: {ticket_title}
+- `description`: the full description from Step 3
+- `type`: from the plan
+- `epic_id`: looked up from the epic IDs map above
+- `milestone_id`: looked up from the milestone IDs map above
+- `priority`: from the plan (1-5)
+- `complexity`: from the plan (low/medium/high)
+
+### Step 5 — Confirm
+Output the created task ID on its own line in this exact format:
+CREATED_TASK_ID: <the numeric ID returned by CreateTaskTool>
+"""
+
+    expected_output = f"""\
+One of two possible responses:
+
+**Option A — Task created:**
+1. Research results gathered from the available tools (brief summary of
+   what was found).
+2. The full task description written following the mandatory anatomy
+   (Context, Description, Acceptance Criteria, Technical Notes, DoD).
+3. Confirmation that CreateTaskTool was called successfully.
+4. A line in this exact format: CREATED_TASK_ID: N
+   Where N is the numeric task ID returned by CreateTaskTool for the task
+   titled "{ticket_title}".
+
+**Option B — Duplicate detected:**
+A line in this exact format: SKIPPED_DUPLICATE: <existing_task_id> — <reason>
+This means the task was not created because a near-duplicate already exists.
+"""
+    return description, expected_output
+
+
+def set_all_dependencies(
+    project_id: int,
+    plan: str,
+    tasks_created: dict[str, int],
+) -> tuple[str, str]:
+    """Return (description, expected_output) for setting all task dependencies."""
+
+    state_block = build_state_context(
+        project_id=project_id,
+        project_name="",
+        phase="dependency_setting",
+        summary=(
+            "All tasks have been created. Set dependencies between tasks "
+            "and announce the structure to the team."
+        ),
+    )
+
+    tasks_map = "\n".join(
+        f"  - \"{title}\": task_id={tid}" for title, tid in tasks_created.items()
+    )
+
+    description = f"""\
+Set all task dependencies and announce the project structure.
+
+{state_block}
+
+## Created Tasks (title → ID)
+{tasks_map}
+
+## Approved Plan (contains dependency information)
+{plan}
+
+## Step-by-Step Process
+
+### Step 1: Read the Dependency Graph
+Read the dependency graph section of the plan. For each dependency
+relationship, identify:
+- The task that is blocked (depends on another)
+- The task it depends on (must complete first)
+
+### Step 2: Set Dependencies
+For each dependency, look up both task IDs from the task map above.
+Call **SetTaskDependenciesTool** for each dependency relationship.
+
+If a task title from the plan does not appear in the created tasks map,
+skip that dependency and note it as a failed item.
+
+### Step 3: Verify the Structure
+Use **ReadTasksTool** to verify the final structure:
+- Check that dependencies are correctly set.
+- Confirm that initial tasks (no dependencies) are ready to be assigned.
+- Identify the critical path.
+
+### Step 4: Announce
+Use **SendMessageTool** to announce the structure is ready. Include:
+- Total epics, milestones, and tasks created ({len(tasks_created)} tasks).
+- The critical path.
+- Which tasks are ready to be assigned immediately (no dependencies).
+- Any failed dependency relationships (tasks not found in the map).
+"""
+
+    expected_output = """\
+A summary containing:
+
+1. **Dependencies set**: List of dependency relationships established
+   (task A depends on task B).
+2. **Verification**: Confirmation from ReadTasksTool that the structure
+   matches the plan.
+3. **Ready to assign**: List of tasks with no dependencies that can be
+   assigned immediately.
+4. **Critical path**: The longest dependency chain identified.
+5. **Failed items**: Any dependencies that could not be set (with reasons),
+   or explicit confirmation that all were set successfully.
+6. **Team notified**: Confirmation that SendMessageTool was used to
+   announce the structure.
+"""
+    return description, expected_output
+
+
+def evaluate_progress(
+    project_id: int,
+    project_name: str,
+    progress_summary: str,
+    plan: str = "",
+    conversation_context: str = "",
+) -> tuple[str, str]:
+    """Return (description, expected_output) for evaluating project progress.
+
+    Called when all current tasks are done but the project objectives are not
+    yet fully met. The Team Lead must evaluate the current state and decide
+    whether to create new tickets or trigger a brainstorming session.
+    """
+
+    state_block = build_state_context(
+        project_id=project_id,
+        project_name=project_name,
+        phase="progress_evaluation",
+        summary=(
+            "All current tasks have completed but the project objectives are "
+            "not yet fully met. You must evaluate the current state, review "
+            "research findings, and decide how to proceed."
+        ),
+    )
+
+    ctx_block = conversation_context or ""
+
+    plan_section = ""
+    if plan:
+        plan_section = f"""
+## Original Plan
+{plan}
+"""
+
+    description = f"""\
+Evaluate the current progress of project '{project_name}' (ID: {project_id}) \
+and decide the next steps.
+
+{state_block}
+
+{ctx_block}
+
+## Current Progress
+{progress_summary}
+{plan_section}
+## Your Goal
+All current tasks have been completed. Before creating ANY new tickets,
+you must evaluate what was accomplished and what was learned. Your job is
+NOT to immediately create more work — it is to decide the **smartest
+next move**, which might be creating tickets, brainstorming, or declaring
+the project complete.
+
+## Step-by-Step Process
+
+### Step 1: Review Completed Work
+Use **ReadTasksTool** to review all completed tasks in detail. For each:
+- What was accomplished?
+- Did it meet its acceptance criteria?
+- What outputs or artifacts were produced?
+
+### Step 2: Review Research Findings
+Use **ReadFindingsTool** to review all research findings gathered during the
+project. This is critical — research tasks often produce insights that inform
+what new development tasks are needed.
+
+Use **ReadWikiTool** to check the knowledge base for any reports or
+documentation produced by researchers.
+
+### Step 3: Assess Remaining Gaps
+Compare what has been accomplished against the project objectives:
+- Which epics are incomplete and why?
+- What specific work is missing to complete each remaining objective?
+- Are there new insights from research that change what needs to be done?
+
+### Step 4: Read Messages
+Use **ReadMessagesTool** to check for any messages from agents that may
+contain bug reports, blockers, or recommendations relevant to next steps.
+
+### Step 5: Decide on Next Steps
+Based on your analysis, choose ONE of these three paths:
+
+**Path A — NEW_TICKETS**: You have enough information to define the next
+batch of work. This is the correct choice when:
+- Research findings provide clear direction for new development tasks.
+- The remaining gaps are well-understood and can be broken into specific tasks.
+- You know what needs to be built/fixed/investigated to move toward completion.
+
+If choosing this path, produce a plan for ONLY the next batch of tickets.
+Apply the same principle as the initial plan: create the **minimum viable
+batch** — only tickets you have enough information to define clearly and
+that should start now. Do NOT create speculative tickets.
+
+**Path B — BRAINSTORM_NEEDED**: You do NOT have enough information to define
+specific next steps. This is the correct choice ONLY when:
+- Research findings were inconclusive and don't provide a clear path forward.
+- The remaining gaps are unclear or ambiguous.
+- You genuinely don't know what to do next and need the team to ideate.
+
+**Path C — PROJECT_COMPLETE**: The project objectives from the original
+requirements have been fully met. All required functionality is built,
+all research questions answered, and no significant gaps remain. This is
+the correct choice ONLY when you have verified (via ReadTasksTool,
+ReadFindingsTool, etc.) that the project can be considered done.
+
+**Important**: Prefer Path A whenever possible. Brainstorming is expensive
+(multiple agents, time-limited sessions). If you can define even a few
+concrete tasks based on what you know, that is better than brainstorming.
+Choose Path C only when the project is genuinely complete.
+
+### Step 6: Output Your Decision
+Your response MUST begin with exactly `NEW_TICKETS`, `BRAINSTORM_NEEDED`,
+or `PROJECT_COMPLETE` as the first word — the system parses this automatically.
+
+If NEW_TICKETS: Follow with a complete plan for new tasks. Include:
+- Which epic(s) the new tasks belong to (reference existing epic IDs).
+- Task titles, types, descriptions with acceptance criteria.
+- Dependencies between new tasks and any existing tasks.
+
+If BRAINSTORM_NEEDED: Follow with a clear explanation of:
+- What specific gaps or unknowns prevent you from defining tasks.
+- What questions the brainstorming session should focus on.
+- What constraints or context the brainstorming participants should know.
+
+If PROJECT_COMPLETE: Follow with a summary of:
+- Which original requirements were met and how.
+- Key deliverables produced.
+- Verification that no significant gaps remain.
+"""
+
+    expected_output = """\
+Your response MUST begin with one of these three verdicts:
+
+NEW_TICKETS
+(followed by a detailed plan for new tasks)
+
+— OR —
+
+BRAINSTORM_NEEDED
+(followed by an explanation of why brainstorming is necessary)
+
+— OR —
+
+PROJECT_COMPLETE
+(followed by a summary of completed objectives)
+
+If NEW_TICKETS, include:
+1. **Analysis**: Brief summary of what was accomplished and what gaps remain.
+2. **New Tasks Plan**: For each new task:
+   - Title and type (development/research/test/etc.)
+   - Parent epic (reference existing epic ID)
+   - Context/Motivation
+   - Detailed Description
+   - Acceptance Criteria (minimum 3)
+   - Technical Notes
+   - Definition of Done
+   - Priority and complexity
+   - Dependencies
+3. **Expected Outcome**: What completing these tasks will achieve.
+
+If BRAINSTORM_NEEDED, include:
+1. **Analysis**: What was accomplished and what is unclear.
+2. **Specific Unknowns**: What questions need to be answered.
+3. **Focus Areas**: What the brainstorming session should target.
+
+If PROJECT_COMPLETE, include:
+1. **Objectives Met**: Which original requirements were fulfilled.
+2. **Key Deliverables**: What was produced.
+3. **Verification**: Evidence that no significant gaps remain.
+
+Do not use any other word as the first word. The system parses your
+response automatically.
 """
     return description, expected_output
 
@@ -395,12 +933,15 @@ def handle_escalation(
     task_title: str,
     branch_name: str,
     developer_id: str,
+    project_id: int = 0,
+    project_name: str = "",
+    conversation_context: str = "",
 ) -> tuple[str, str]:
     """Return (description, expected_output) for escalation handling."""
 
     state_block = build_state_context(
-        project_id=0,
-        project_name="",
+        project_id=project_id,
+        project_name=project_name,
         phase="escalation",
         summary=(
             f"Task {task_id} ({task_title}) has been escalated after multiple "
@@ -409,11 +950,15 @@ def handle_escalation(
         ),
     )
 
+    ctx_block = conversation_context or ""
+
     description = f"""\
 Task {task_id} ({task_title}) has been escalated after multiple review \
 rejections.
 
 {state_block}
+
+{ctx_block}
 
 ## Escalation Details
 - **Task ID**: {task_id}
@@ -563,99 +1108,16 @@ response automatically.
     return description, expected_output
 
 
-def review_checkin(
-    task_id: int,
-    task_title: str,
-    developer_plan: str,
-    thread_id: str,
-    project_id: int,
+def consolidate_ideas(
+    ideas_text: str,
+    project_id: int = 0,
+    project_name: str = "",
 ) -> tuple[str, str]:
-    """Return (description, expected_output) for check-in review."""
-
-    state_block = build_state_context(
-        project_id=project_id,
-        project_name="",
-        phase="checkin_review",
-        summary=(
-            f"Task {task_id} check-in review. The developer has posted their "
-            f"implementation plan in thread {thread_id}. Review it before they "
-            "start writing code."
-        ),
-    )
-
-    description = f"""\
-Review the developer's check-in plan for task {task_id} ({task_title}).
-
-{state_block}
-
-## Context
-The developer has taken the task and published their implementation plan in \
-the check-in thread. Your job is to review that plan before they begin \
-writing code.
-
-## Developer's Plan
-```
-{developer_plan}
-```
-
-## Step-by-Step Process
-
-### Step 1 — Read the Plan
-Read the developer's plan above word by word. Identify:
-- Does the developer understand the requirements?
-- Does the plan mention the acceptance criteria?
-- Is the technical approach coherent with the task?
-
-### Step 2 — Verify Acceptance Criteria
-Use **GetTaskTool** with task_id={task_id} to read the official acceptance \
-criteria for the task. Compare them against the developer's plan point by point.
-
-### Step 3 — Decide
-You have two options:
-
-**If the plan is correct and complete**: Use **SendMessageTool** to send a \
-message to thread `{thread_id}` with the exact text: \
-`[Approved] El plan es correcto. Puedes comenzar la implementación.` \
-Then write `APPROVED` as the first word of your final response.
-
-**If there are doubts or the plan is incomplete**: Use **SendMessageTool** \
-to send a message to thread `{thread_id}` with the exact text: \
-`[Clarification Needed] <your specific question>`. \
-Then write `CLARIFICATION_NEEDED: <the same question>` as the first line \
-of your final response.
-
-## Strict Rules
-- Do NOT approve if the developer does not mention how they will verify \
-the acceptance criteria.
-- Do NOT request clarification about things already in the task description.
-- Only one question per clarification round.
-- Your response MUST begin with `APPROVED` or `CLARIFICATION_NEEDED:` — \
-no exceptions.
-"""
-
-    expected_output = """\
-Your response must begin OBLIGATORILY with one of these two options:
-
-APPROVED
-(followed by a 2-3 line summary of why the plan is acceptable)
-
-— OR —
-
-CLARIFICATION_NEEDED: <specific and concise question>
-(followed by the justification of why you need this information)
-
-Do not use any other word as the first word. The system parses your \
-response automatically.
-"""
-    return description, expected_output
-
-
-def consolidate_ideas(ideas_text: str) -> tuple[str, str]:
     """Return (description, expected_output) for idea consolidation."""
 
     state_block = build_state_context(
-        project_id=0,
-        project_name="",
+        project_id=project_id,
+        project_name=project_name,
         phase="brainstorming_consolidation",
         summary=(
             "The team has generated brainstorming ideas. Your task is to "
@@ -740,12 +1202,16 @@ on any ideas that were discarded as duplicates.
     return description, expected_output
 
 
-def select_ideas(consolidated_text: str) -> tuple[str, str]:
+def select_ideas(
+    consolidated_text: str,
+    project_id: int = 0,
+    project_name: str = "",
+) -> tuple[str, str]:
     """Return (description, expected_output) for idea selection."""
 
     state_block = build_state_context(
-        project_id=0,
-        project_name="",
+        project_id=project_id,
+        project_name=project_name,
         phase="brainstorming_selection",
         summary=(
             "Consolidated ideas are ready. Select the top ideas to present "
@@ -856,18 +1322,41 @@ For each approved idea, determine:
 - What dependencies exist between tasks (within and across ideas).
 - What task types are needed (development, research, test, etc.).
 
-### Step 2: Check Existing Structure
-Use **ReadTasksTool** to check what already exists in the project. Avoid
-creating duplicate epics or tasks that overlap with existing work. If an
-approved idea extends existing functionality, consider adding tasks to
+### Step 2: Understand Project State & Check for Duplicates
+Use **ReadTasksTool** to read ALL existing tasks for this project. For each
+task, note its title, type, status, and description. Build a mental picture of:
+- **What has been completed** — what results and findings were produced.
+- **What is in progress** — what is currently being worked on.
+- **What is already planned** — what pending/backlog tasks exist.
+- **Where the project is heading** — the overall trajectory.
+
+**Deduplication**: Compare each approved idea against existing tasks. If an
+idea's scope is already covered by existing work (even if worded differently),
+do NOT create a duplicate. Instead, note it in your output and skip it.
+
+If an approved idea extends existing functionality, consider adding tasks to
 existing milestones rather than creating new epics.
+
+### Step 2.5: Research Before Writing
+Before creating any epics, milestones, or tasks, gather context using these tools:
+1. **ReadFindingsTool** — search for findings related to each approved idea's topic area.
+2. **ReadWikiTool** — look for wiki pages covering the domain of each idea.
+3. **ReadMessagesTool** — check for bug reports, agent notes, or prior discussions about these topics.
+4. **CodeSearchTool** — search the codebase for modules, patterns, or files relevant to each idea.
+5. **WebSearchTool** — if an idea involves an external technology, look up current best practices.
+
+Empty results are normal for new projects — continue without blocking. Use whatever context you gathered to write richer descriptions.
 
 ### Step 3: Create Epics
 Use **CreateEpicTool** for each approved idea (unless it fits within an
 existing epic). Set:
 - Clear title matching the idea name.
-- Description that captures the full scope of the idea.
 - Appropriate priority based on the selection ranking.
+
+The `description` passed to **CreateEpicTool** must follow this structure:
+- **Measurable Objective**: What does success look like in concrete, observable terms? (e.g., "All VM lifecycle operations are exposed via a versioned REST API with <200 ms p99 latency")
+- **Problem It Solves**: Why does this epic exist? What user pain, system gap, or business need does it address?
+- **Definition of Done**: The conditions under which this epic is considered fully complete (e.g., all child milestones closed, integration tests green, documentation published).
 
 ### Step 4: Create Milestones
 Use **CreateMilestoneTool** for each milestone. Milestones should represent
@@ -876,13 +1365,31 @@ verifiable checkpoints:
 - Core functionality complete.
 - Integration and testing complete.
 
+The `description` passed to **CreateMilestoneTool** must follow this structure:
+- **Objective Verification Criterion**: A single, concrete, testable condition that proves this milestone is done (e.g., "The `/vms` endpoint returns a 200 with a valid JSON body for all CRUD operations in the CI test suite").
+- **Incremental Value Delivered**: What does the team or user gain the moment this milestone closes? Why does it matter as a standalone checkpoint?
+
 ### Step 5: Create Tasks
+
+**⚠️ Quality gate**: A task description that is only a sentence or two will be rejected. Every task must have all five sections below.
+
 Use **CreateTaskTool** for each task. For every task:
 - Set the correct type (development, research, test, etc.).
-- Write detailed acceptance criteria — specific, verifiable conditions.
 - Set priority (1-5) based on the idea's priority and the task's role
   within the milestone.
 - Set estimated complexity (low/medium/high).
+
+The `description` passed to **CreateTaskTool** must follow this mandatory structure. Do NOT use the plan's one-line title as the description — expand it fully:
+
+**Context / Motivation**: Why this task exists. Reference the parent milestone goal and any relevant findings or prior work.
+
+**Detailed Description**: Current state → desired state. What must be built, fixed, or investigated. Inputs, outputs, constraints. Be specific — name files, modules, APIs.
+
+**Acceptance Criteria** _(minimum 3, each independently verifiable)_: Use Given/When/Then format or a concrete checklist. Vague criteria like "works correctly" are not acceptable.
+
+**Technical Notes**: Relevant files, modules, libraries, or patterns from the plan. Include specific paths or code references where known.
+
+**Definition of Done**: Final checklist before the task can be marked complete (e.g., code reviewed, tests passing, docs updated).
 
 ### Step 6: Set Dependencies
 Use **SetTaskDependenciesTool** for all dependencies:

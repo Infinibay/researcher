@@ -33,16 +33,28 @@ class CreatePRTool(PabadaBaseTool):
         self, title: str, body: str, base: str = "main", draft: bool = False
     ) -> str:
         # Get current branch
-        try:
-            result = subprocess.run(
-                ["git", "rev-parse", "--abbrev-ref", "HEAD"],
-                capture_output=True, text=True, timeout=10,
-            )
-            if result.returncode != 0:
-                return self._error("Failed to determine current branch")
-            head_branch = result.stdout.strip()
-        except Exception as e:
-            return self._error(f"Git error: {e}")
+        if self._is_pod_mode():
+            try:
+                r = self._exec_in_pod(
+                    ["git", "rev-parse", "--abbrev-ref", "HEAD"], timeout=10,
+                )
+                if r.exit_code != 0:
+                    return self._error("Failed to determine current branch")
+                head_branch = r.stdout.strip()
+            except RuntimeError as e:
+                return self._error(f"Pod execution failed: {e}")
+        else:
+            try:
+                result = subprocess.run(
+                    ["git", "rev-parse", "--abbrev-ref", "HEAD"],
+                    capture_output=True, text=True, timeout=10,
+                    cwd=self._git_cwd,
+                )
+                if result.returncode != 0:
+                    return self._error("Failed to determine current branch")
+                head_branch = result.stdout.strip()
+            except Exception as e:
+                return self._error(f"Git error: {e}")
 
         if head_branch == base:
             return self._error(f"Cannot create PR: head branch '{head_branch}' is the same as base '{base}'")
@@ -51,6 +63,7 @@ class CreatePRTool(PabadaBaseTool):
         remote_result = subprocess.run(
             ["git", "remote", "get-url", "origin"],
             capture_output=True, text=True, timeout=10,
+            cwd=self._git_cwd,
         )
         remote_url = remote_result.stdout.strip() if remote_result.returncode == 0 else ""
 
@@ -117,6 +130,28 @@ class CreatePRTool(PabadaBaseTool):
         self._record_pr(head, repo_name, pr_url, forgejo_pr_index=pr_number)
 
         self._log_tool_usage(f"Created PR #{pr_number}: {title}")
+
+        try:
+            from backend.flows.event_listeners import FlowEvent, event_bus
+
+            event_bus.emit(FlowEvent(
+                event_type="pr_created",
+                project_id=self.project_id,
+                entity_type="task",
+                entity_id=self.task_id,
+                data={
+                    "pr_number": pr_number,
+                    "url": pr_url,
+                    "title": title,
+                    "head": head,
+                    "base": base,
+                    "agent_id": self.agent_id,
+                    "task_id": self.task_id,
+                },
+            ))
+        except Exception:
+            pass  # Non-critical
+
         return self._success({
             "pr_number": pr_number,
             "url": pr_url,
@@ -133,6 +168,28 @@ class CreatePRTool(PabadaBaseTool):
         self._record_pr(head, repo_name, "")
 
         self._log_tool_usage(f"PR record created: {title}")
+
+        try:
+            from backend.flows.event_listeners import FlowEvent, event_bus
+
+            event_bus.emit(FlowEvent(
+                event_type="pr_created",
+                project_id=self.project_id,
+                entity_type="task",
+                entity_id=self.task_id,
+                data={
+                    "pr_number": None,
+                    "url": None,
+                    "title": title,
+                    "head": head,
+                    "base": base,
+                    "agent_id": self.agent_id,
+                    "task_id": self.task_id,
+                },
+            ))
+        except Exception:
+            pass  # Non-critical
+
         return self._success({
             "pr_number": None,
             "url": None,

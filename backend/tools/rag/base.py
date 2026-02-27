@@ -105,14 +105,22 @@ class _OpenAIEmbeddingFunction(chromadb.EmbeddingFunction):
         return [item.embedding for item in response.data]
 
 
-_embedding_fn: _OpenAIEmbeddingFunction | None = None
+_embedding_fn: chromadb.EmbeddingFunction | None = None
 
 
-def get_embedding_function() -> _OpenAIEmbeddingFunction:
-    """Return a singleton embedding function instance."""
+def get_embedding_function() -> chromadb.EmbeddingFunction:
+    """Return a singleton embedding function instance.
+
+    When EMBEDDING_PROVIDER is "default", returns ChromaDB's built-in
+    default embedding function (all-MiniLM-L6-v2, runs locally).
+    Otherwise uses the OpenAI-compatible API wrapper.
+    """
     global _embedding_fn
     if _embedding_fn is None:
-        _embedding_fn = _OpenAIEmbeddingFunction()
+        if settings.EMBEDDING_PROVIDER == "default":
+            _embedding_fn = chromadb.utils.embedding_functions.DefaultEmbeddingFunction()
+        else:
+            _embedding_fn = _OpenAIEmbeddingFunction()
     return _embedding_fn
 
 

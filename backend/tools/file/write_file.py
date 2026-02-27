@@ -1,6 +1,7 @@
 """Tool for writing file contents with audit trail."""
 
 import hashlib
+import json
 import os
 import sqlite3
 import tempfile
@@ -30,9 +31,10 @@ class WriteFileTool(PabadaBaseTool):
     args_schema: Type[BaseModel] = WriteFileInput
 
     def _run(self, path: str, content: str, mode: str = "w") -> str:
-        path = os.path.expanduser(path)
-        if not os.path.isabs(path):
-            path = os.path.abspath(path)
+        path = self._resolve_path(os.path.expanduser(path))
+
+        if self._is_pod_mode():
+            return self._run_in_pod(path, content, mode)
 
         # Sandbox check (resolves symlinks, enforces directory boundaries)
         sandbox_err = self._validate_sandbox_path(path)
@@ -109,4 +111,55 @@ class WriteFileTool(PabadaBaseTool):
             "path": path,
             "action": action,
             "size_bytes": size_bytes,
+        })
+
+    def _run_in_pod(self, path: str, content: str, mode: str) -> str:
+        """Write file via pabada-file-helper inside the pod."""
+        req = {"op": "write", "path": path, "content": content, "mode": mode}
+
+        try:
+            result = self._exec_in_pod(
+                ["pabada-file-helper"],
+                stdin_data=json.dumps(req),
+            )
+        except RuntimeError as e:
+            return self._error(f"Pod execution failed: {e}")
+
+        if result.exit_code != 0:
+            return self._error(f"File helper error: {result.stderr.strip()}")
+
+        try:
+            resp = json.loads(result.stdout)
+        except json.JSONDecodeError:
+            return self._error(f"Invalid response from file helper: {result.stdout[:200]}")
+
+        if not resp.get("ok"):
+            return self._error(resp.get("error", "Unknown error"))
+
+        data = resp["data"]
+
+        # Record in artifact_changes for audit
+        project_id = self.project_id
+        agent_run_id = self.agent_run_id
+
+        def _record_change(conn: sqlite3.Connection):
+            conn.execute(
+                """INSERT INTO artifact_changes
+                   (project_id, agent_run_id, file_path, action, before_hash, after_hash, size_bytes)
+                   VALUES (?, ?, ?, ?, ?, ?, ?)""",
+                (project_id, agent_run_id, path, data["action"],
+                 data.get("before_hash"), data["after_hash"], data["size_bytes"]),
+            )
+            conn.commit()
+
+        try:
+            execute_with_retry(_record_change)
+        except Exception:
+            pass
+
+        self._log_tool_usage(f"Wrote {path} (pod, {data['size_bytes']} bytes, {data['action']})")
+        return self._success({
+            "path": path,
+            "action": data["action"],
+            "size_bytes": data["size_bytes"],
         })

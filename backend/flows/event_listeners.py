@@ -216,6 +216,13 @@ class TaskStatusChangedListener(BaseEventListener):
                     entity_type="task",
                     entity_id=ev.get("entity_id"),
                 ))
+            elif new_status == "rejected":
+                self.bus.emit(FlowEvent(
+                    event_type="task_rejected",
+                    project_id=self.project_id,
+                    entity_type="task",
+                    entity_id=ev.get("entity_id"),
+                ))
 
 
 class NewTaskCreatedListener(BaseEventListener):
@@ -256,7 +263,7 @@ class NewTaskCreatedListener(BaseEventListener):
             data = json.loads(ev.get("event_data_json", "{}")) if ev.get("event_data_json") else {}
 
             self.bus.emit(FlowEvent(
-                event_type="new_task_created",
+                event_type="task_created",
                 project_id=self.project_id,
                 entity_type="task",
                 entity_id=ev.get("entity_id"),
@@ -534,161 +541,13 @@ class EpicCreatedListener(BaseEventListener):
             ))
 
 
-# ── Listener manager ─────────────────────────────────────────────────────────
+# ── Agent resolver ────────────────────────────────────────────────────────────
 
 
-class ListenerManager:
-    """Manages all event listeners for a project."""
+class AgentResolver:
+    """Resolves agent identifiers and roles from the roster table."""
 
-    def __init__(self, project_id: int, bus: EventBus | None = None) -> None:
-        self.project_id = project_id
-        self.bus = bus or event_bus
-        self._listeners: list[BaseEventListener] = []
-
-    def start_all(self) -> None:
-        """Start all default listeners for the project."""
-        from backend.communication.listeners import (
-            AgentMessageListener,
-            CommunicationLoopListener,
-            TicketCheckinListener,
-        )
-
-        self._listeners = [
-            TaskStatusChangedListener(self.project_id, bus=self.bus),
-            NewTaskCreatedListener(self.project_id, bus=self.bus),
-            UserMessageListener(self.project_id, bus=self.bus),
-            StagnationDetectedListener(self.project_id, bus=self.bus),
-            AllTasksDoneListener(self.project_id, bus=self.bus),
-            EpicCreatedListener(self.project_id, bus=self.bus),
-            AgentMessageListener(self.project_id, bus=self.bus),
-            TicketCheckinListener(self.project_id, bus=self.bus),
-            CommunicationLoopListener(self.project_id, bus=self.bus),
-        ]
-        for listener in self._listeners:
-            listener.start()
-        logger.info(
-            "Started %d event listeners for project %d",
-            len(self._listeners), self.project_id,
-        )
-
-    def wire_flow_handlers(self) -> None:
-        """Subscribe event handlers that trigger flow invocations.
-
-        Maps:
-        - task_review_ready → start CodeReviewFlow
-        - task_status_changed (rejected) → notify developer via send_agent_message
-        - stagnation_detected → trigger BrainstormingFlow
-        - all_tasks_done → prompt completion checks via MainProjectFlow
-        """
-        self.bus.subscribe("task_review_ready", self._handle_task_review_ready)
-        self.bus.subscribe("task_status_changed", self._handle_task_rejected)
-        self.bus.subscribe("stagnation_detected", self._handle_stagnation)
-        self.bus.subscribe("all_tasks_done", self._handle_all_tasks_done)
-        self.bus.subscribe("waiting_for_research", self._handle_waiting_for_research)
-        self.bus.subscribe("agent_message_received", self._handle_agent_message_received)
-        self.bus.subscribe("ticket_checkin_approved", self._handle_ticket_checkin_approved)
-        self.bus.subscribe("communication_loop_detected", self._handle_communication_loop)
-        logger.info("Wired flow handlers for project %d", self.project_id)
-
-    def _handle_task_review_ready(self, event: FlowEvent) -> None:
-        """Start a CodeReviewFlow when a task is ready for review.
-
-        Guarded: skips if a code_reviewer agent_run is already active for this
-        task (prevents duplicate flows when DevelopmentFlow directly invokes
-        CodeReviewFlow).
-        """
-        from backend.flows.code_review_flow import CodeReviewFlow
-        from backend.flows.helpers import get_task_by_id, has_active_review_run
-
-        if event.entity_id is None:
-            logger.warning("Wiring: task_review_ready event with no entity_id, skipping")
-            return
-
-        if has_active_review_run(event.entity_id):
-            logger.info(
-                "Wiring: CodeReviewFlow already active for task %d, skipping",
-                event.entity_id,
-            )
-            return
-
-        task = get_task_by_id(event.entity_id)
-        branch_name = task.get("branch_name", "") if task else ""
-
-        logger.info(
-            "Wiring: starting CodeReviewFlow for task %d (project %d)",
-            event.entity_id, event.project_id,
-        )
-        flow = CodeReviewFlow()
-        flow.kickoff(inputs={
-            "project_id": event.project_id,
-            "task_id": event.entity_id,
-            "branch_name": branch_name,
-        })
-
-    def _handle_task_rejected(self, event: FlowEvent) -> None:
-        """Notify the developer when a task is rejected."""
-        from backend.flows.helpers import send_agent_message
-
-        new_status = event.data.get("new_status", "")
-        if new_status != "rejected":
-            return
-
-        logger.info(
-            "Wiring: notifying developer about rejected task %d (project %d)",
-            event.entity_id, event.project_id,
-        )
-        send_agent_message(
-            project_id=event.project_id,
-            from_agent="code_reviewer",
-            to_agent=None,
-            to_role="developer",
-            message=(
-                f"Task {event.entity_id} has been rejected. "
-                f"Please review the feedback and address the issues."
-            ),
-        )
-
-    def _handle_agent_message_received(self, event: FlowEvent) -> None:
-        """Route agent-to-agent messages to the target agent's active flow."""
-        data = event.data
-        target_type = data.get("target_type", "unknown")
-        target_id = data.get("target_id")
-        from_agent = data.get("from_agent", "unknown")
-        content = data.get("content", "")
-
-        logger.info(
-            "Wiring: agent message %d received (target_type=%s, target_id=%s)",
-            data.get("message_id", 0), target_type, target_id,
-        )
-
-        # Resolve agent IDs to notify
-        agent_ids: list[str] = []
-        if target_type == "agent" and target_id:
-            agent_ids = [target_id]
-        elif target_type == "role" and target_id:
-            # Look up all agents with this role from the roster
-            agent_ids = self._resolve_agents_for_role(event.project_id, target_id)
-        elif target_type == "broadcast":
-            agent_ids = self._resolve_all_agents(event.project_id)
-
-        if not agent_ids:
-            logger.debug(
-                "No agents resolved for target_type=%s target_id=%s",
-                target_type, target_id,
-            )
-            return
-
-        # Dispatch a Crew task for each target agent in a background thread
-        for agent_id in agent_ids:
-            t = threading.Thread(
-                target=self._dispatch_message_to_agent,
-                args=(event.project_id, agent_id, from_agent, content),
-                name=f"MsgDispatch-{data.get('message_id', 0)}-{agent_id}",
-                daemon=True,
-            )
-            t.start()
-
-    def _resolve_agents_for_role(self, project_id: int, role: str) -> list[str]:
+    def resolve_for_role(self, project_id: int, role: str) -> list[str]:
         """Look up agent IDs from the roster for a given role and project."""
         def _query(conn: sqlite3.Connection) -> list[str]:
             rows = conn.execute(
@@ -700,7 +559,7 @@ class ListenerManager:
 
         return execute_with_retry(_query)
 
-    def _resolve_all_agents(self, project_id: int) -> list[str]:
+    def resolve_all(self, project_id: int) -> list[str]:
         """Look up all active agent IDs from the roster for a project."""
         def _query(conn: sqlite3.Connection) -> list[str]:
             rows = conn.execute(
@@ -712,7 +571,7 @@ class ListenerManager:
 
         return execute_with_retry(_query)
 
-    def _resolve_agent_identity(
+    def resolve_identity(
         self, project_id: int, agent_id: str,
     ) -> tuple[str, str] | None:
         """Resolve an agent identifier (ID or display name) to *(canonical_id, role)*.
@@ -755,165 +614,213 @@ class ListenerManager:
 
         return execute_with_retry(_query)
 
-    def _dispatch_message_to_agent(
-        self,
-        project_id: int,
-        agent_id: str,
-        from_agent: str,
-        content: str,
-    ) -> None:
-        """Run a Crew task so the target agent processes the incoming message."""
-        from backend.agents.registry import get_agent_by_role
 
+# ── Listener manager ─────────────────────────────────────────────────────────
+# (FlowEventHandlersMixin removed — agent work routing now uses
+#  persistent agent_events via AgentLoop instead of ephemeral EventBus handlers)
+
+
+class ListenerManager:
+    """Manages event listeners for a project.
+
+    Listeners emit to the EventBus for WebSocket relay to the frontend.
+    Agent work scheduling is now handled by AgentLoop via persistent
+    agent_events in the DB — these handlers create agent_events for
+    aggregate conditions (stagnation, all-tasks-done) detected by listeners.
+    """
+
+    def __init__(self, project_id: int, bus: EventBus | None = None) -> None:
+        self.project_id = project_id
+        self.bus = bus or event_bus
+        self._listeners: list[BaseEventListener] = []
+
+    def start_all(self) -> None:
+        """Start all default listeners for the project."""
+        from backend.communication.listeners import CommunicationLoopListener
+
+        self._listeners = [
+            TaskStatusChangedListener(self.project_id, bus=self.bus),
+            NewTaskCreatedListener(self.project_id, bus=self.bus),
+            UserMessageListener(self.project_id, bus=self.bus),
+            StagnationDetectedListener(self.project_id, bus=self.bus),
+            AllTasksDoneListener(self.project_id, bus=self.bus),
+            EpicCreatedListener(self.project_id, bus=self.bus),
+            CommunicationLoopListener(self.project_id, bus=self.bus),
+        ]
+        for listener in self._listeners:
+            listener.start()
+        logger.info(
+            "Started %d event listeners for project %d",
+            len(self._listeners), self.project_id,
+        )
+
+    def wire_flow_handlers(self) -> None:
+        """Subscribe handlers for aggregate events → persistent agent_events.
+
+        Agent work routing is handled by AgentLoop via persistent DB events.
+        These handlers create agent_events for conditions detected by listeners.
+        """
+        self.bus.subscribe("task_created", self._create_task_available_events)
+        self.bus.subscribe("stagnation_detected", self._create_stagnation_events)
+        self.bus.subscribe("all_tasks_done", self._create_all_done_events)
+        self.bus.subscribe("waiting_for_research", self._create_waiting_events)
+        self.bus.subscribe("task_rejected", self._create_task_rejected_events)
+        self.bus.subscribe("communication_loop_detected", self._handle_communication_loop)
+        logger.info("Wired flow handlers for project %d", self.project_id)
+
+    def _create_task_available_events(self, event: FlowEvent) -> None:
+        """Create persistent agent_events when a new task is created.
+
+        This bridges the gap between the DB trigger (events_log) and the
+        agent loop system (agent_events).  Without this, agent loops never
+        learn about newly created tasks.
+        """
         try:
-            # Resolve agent_id (may be a display name or composite like "role_name")
-            resolved = self._resolve_agent_identity(project_id, agent_id)
-            if resolved is None:
-                logger.warning(
-                    "Cannot resolve agent '%s' in project %d — skipping dispatch.",
-                    agent_id, project_id,
-                )
+            from backend.autonomy.events import create_task_event
+
+            task_id = event.entity_id
+            if task_id is None:
                 return
-            canonical_id, role = resolved
 
-            agent = get_agent_by_role(role, project_id, agent_id=canonical_id)
-            agent.activate_context()
+            task_data = event.data or {}
+            task_type = task_data.get("type", "code")
 
-            from crewai import Crew, Task as CrewTask
-            crew = Crew(
-                agents=[agent.crewai_agent],
-                tasks=[CrewTask(
-                    description=(
-                        f"You have received a message from {from_agent}:\n\n"
-                        f"{content}\n\n"
-                        "Read and process this message. If it requires action, "
-                        "take the appropriate steps using your available tools. "
-                        "If it requires a response, use SendMessage to reply."
-                    ),
-                    agent=agent.crewai_agent,
-                    expected_output="Action taken or response sent.",
-                )],
-                verbose=True,
-            )
-            crew.kickoff()
-            logger.info(
-                "Message dispatched to agent %s (project %d) from %s",
-                agent_id, project_id, from_agent,
+            if task_type == "research":
+                target_role = "researcher"
+            elif task_type == "review":
+                target_role = "code_reviewer"
+            else:
+                target_role = "developer"
+
+            create_task_event(
+                event.project_id, task_id, "task_available",
+                target_role=target_role,
+                source="task_created_listener",
+                extra_payload={
+                    "task_type": task_type,
+                    "task_title": task_data.get("title", ""),
+                },
             )
         except Exception:
-            logger.exception(
-                "Failed to dispatch message to agent %s (project %d)",
-                agent_id, project_id,
+            logger.debug("Could not create task_available events for task %s", event.entity_id, exc_info=True)
+
+    def _create_stagnation_events(self, event: FlowEvent) -> None:
+        """Create agent_events for team leads when stagnation is detected."""
+        try:
+            from backend.autonomy.events import _resolve_agents_for_role, create_system_event
+
+            team_leads = _resolve_agents_for_role(event.project_id, "team_lead")
+            for agent_id in team_leads:
+                create_system_event(
+                    event.project_id, agent_id, "stagnation_detected",
+                    payload=event.data,
+                )
+        except Exception:
+            logger.debug("Could not create stagnation events", exc_info=True)
+
+    def _create_all_done_events(self, event: FlowEvent) -> None:
+        """Create agent_events when all tasks are done."""
+        try:
+            from backend.autonomy.events import _resolve_agents_for_role, create_system_event
+
+            for role in ("team_lead", "project_lead"):
+                agents = _resolve_agents_for_role(event.project_id, role)
+                for agent_id in agents:
+                    create_system_event(
+                        event.project_id, agent_id, "all_tasks_done",
+                        payload=event.data,
+                    )
+        except Exception:
+            logger.debug("Could not create all_done events", exc_info=True)
+
+    def _create_waiting_events(self, event: FlowEvent) -> None:
+        """Create agent_events when only research tasks remain."""
+        try:
+            from backend.autonomy.events import _resolve_agents_for_role, create_system_event
+
+            project_leads = _resolve_agents_for_role(event.project_id, "project_lead")
+            for agent_id in project_leads:
+                create_system_event(
+                    event.project_id, agent_id, "waiting_for_research",
+                    payload=event.data,
+                )
+        except Exception:
+            logger.debug("Could not create waiting_for_research events", exc_info=True)
+
+    def _create_task_rejected_events(self, event: FlowEvent) -> None:
+        """Create persistent agent_events when a task is rejected."""
+        try:
+            from backend.autonomy.events import create_task_event
+
+            task_id = event.entity_id
+            if task_id is None:
+                return
+
+            task_data = self._get_task_assignment(task_id)
+            if not task_data or not task_data.get("assigned_to"):
+                return
+
+            create_task_event(
+                event.project_id, task_id, "task_rejected",
+                target_agent_id=task_data["assigned_to"],
+                source="task_rejected_listener",
+                extra_payload={"task_type": task_data.get("type", "code")},
             )
+        except Exception:
+            logger.debug("Could not create task_rejected events", exc_info=True)
 
-    def _handle_ticket_checkin_approved(self, event: FlowEvent) -> None:
-        """Signal the DevelopmentFlow that the check-in gate has been passed."""
-        logger.info(
-            "Wiring: ticket check-in approved for task %d (project %d)",
-            event.entity_id or 0, event.project_id,
-        )
+    def _get_task_assignment(self, task_id: int) -> dict[str, Any] | None:
+        """Query tasks table for assigned_to and type."""
+        def _query(conn: sqlite3.Connection) -> dict[str, Any] | None:
+            row = conn.execute(
+                "SELECT assigned_to, type FROM tasks WHERE id = ?",
+                (task_id,),
+            ).fetchone()
+            return dict(row) if row else None
 
-    def _handle_stagnation(self, event: FlowEvent) -> None:
-        """Notify team lead about stagnation for analysis and intervention.
-
-        Previously this launched a BrainstormingFlow (which creates MORE tasks
-        instead of unblocking stuck ones).  Now we just emit the event so that
-        ``MainProjectFlow.handle_stagnation`` can have the Team Lead analyze
-        and intervene on each stuck task.
-        """
-        from backend.flows.helpers import send_agent_message
-
-        logger.info(
-            "Wiring: stagnation detected for project %d, notifying team lead",
-            event.project_id,
-        )
-        send_agent_message(
-            project_id=event.project_id,
-            from_agent="system",
-            to_agent=None,
-            to_role="team_lead",
-            message=(
-                f"Stagnation detected for project {event.project_id}: "
-                f"{event.data.get('stuck_tasks', '?')} tasks stuck with no "
-                f"recent completions. Please analyze and unblock."
-            ),
-        )
-
-    def _handle_waiting_for_research(self, event: FlowEvent) -> None:
-        """Notify when only research tasks remain in progress."""
-        from backend.flows.helpers import send_agent_message
-
-        logger.info(
-            "Wiring: only research tasks running for project %d",
-            event.project_id,
-        )
-        send_agent_message(
-            project_id=event.project_id,
-            from_agent="system",
-            to_agent=None,
-            to_role="project_lead",
-            message=(
-                f"Project {event.project_id} is waiting for research tasks to complete. "
-                f"Please review the findings once research is done and decide on next steps."
-            ),
-        )
-
-    def _handle_all_tasks_done(self, event: FlowEvent) -> None:
-        """Prompt completion checks when all tasks are done."""
-        from backend.flows.helpers import send_agent_message
-        from backend.state.completion import CompletionDetector, CompletionState
-
-        logger.info(
-            "Wiring: all tasks done for project %d, checking objectives",
-            event.project_id,
-        )
-        state = CompletionDetector.detect(event.project_id)
-
-        if state == CompletionState.IDLE_OBJECTIVES_MET:
-            send_agent_message(
-                project_id=event.project_id,
-                from_agent="system",
-                to_agent=None,
-                to_role="project_lead",
-                message=(
-                    f"All tasks for project {event.project_id} are complete "
-                    f"and all objectives have been met. "
-                    f"Please finalize the project."
-                ),
-            )
-        elif state == CompletionState.WAITING_FOR_RESEARCH:
-            send_agent_message(
-                project_id=event.project_id,
-                from_agent="system",
-                to_agent=None,
-                to_role="project_lead",
-                message=(
-                    f"Project {event.project_id} is waiting for research tasks to complete. "
-                    f"Please review the findings once research is done and decide on next steps."
-                ),
-            )
-        else:
-            # IDLE_OBJECTIVES_PENDING or ACTIVE (shouldn't happen here but handle gracefully)
-            send_agent_message(
-                project_id=event.project_id,
-                from_agent="system",
-                to_agent=None,
-                to_role="team_lead",
-                message=(
-                    f"All current tasks for project {event.project_id} are done, "
-                    f"but not all objectives are met. "
-                    f"Consider creating additional tasks or starting a brainstorming session."
-                ),
-            )
+        return execute_with_retry(_query)
 
     def _handle_communication_loop(self, event: FlowEvent) -> None:
-        """Handle communication loop detection — notify user via WebSocket."""
+        """Handle communication loop detection — notify user via WebSocket.
+
+        Sends the alert INTO the original thread (not a random UUID) and
+        deduplicates: if a system loop-detection message was already posted
+        in this thread within the last 5 minutes, skip.
+        """
+        import sqlite3 as _sqlite3
+
         from backend.flows.helpers import send_agent_message
+        from backend.tools.base.db import execute_with_retry as _exec
 
         agents = event.data.get("agents", [])
         thread_id = event.data.get("thread_id", "unknown")
+
+        # Deduplicate: check if we already posted a loop alert in this thread recently
+        def _has_recent_alert(conn: _sqlite3.Connection) -> bool:
+            row = conn.execute(
+                """SELECT COUNT(*) as cnt FROM chat_messages
+                   WHERE thread_id = ?
+                     AND from_agent = 'system'
+                     AND message LIKE '%Communication loop detected%'
+                     AND created_at > datetime('now', '-5 minutes')""",
+                (thread_id,),
+            ).fetchone()
+            return (row["cnt"] if row else 0) > 0
+
+        try:
+            already_alerted = _exec(_has_recent_alert)
+        except Exception:
+            already_alerted = False
+
+        if already_alerted:
+            logger.debug(
+                "Skipping duplicate loop alert for thread %s (project %d)",
+                thread_id, event.project_id,
+            )
+            return
+
         logger.warning(
-            "Wiring: communication loop detected in thread %s between %s (project %d)",
+            "Communication loop detected in thread %s between %s (project %d)",
             thread_id, agents, event.project_id,
         )
         send_agent_message(
@@ -921,6 +828,7 @@ class ListenerManager:
             from_agent="system",
             to_agent=None,
             to_role="team_lead",
+            thread_id=thread_id,
             message=(
                 f"Communication loop detected in thread {thread_id} "
                 f"between agents {', '.join(agents)}. "
@@ -944,3 +852,5 @@ class ListenerManager:
     @property
     def listeners(self) -> list[BaseEventListener]:
         return list(self._listeners)
+
+

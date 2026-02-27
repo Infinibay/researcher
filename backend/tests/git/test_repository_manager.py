@@ -14,29 +14,37 @@ def manager():
 
 class TestInitRepo:
     @patch("backend.git.repository_manager.subprocess.run")
-    def test_init_repo_runs_git_init(self, mock_run, seeded_project, manager, db_conn):
+    def test_init_repo_runs_git_init(self, mock_run, seeded_project, manager, db_conn, tmp_path):
         mock_run.return_value = MagicMock(returncode=0)
+        local_path = str(tmp_path / "my-repo")
 
         repo = manager.init_repo(
             project_id=1,
             name="my-repo",
-            local_path="/tmp/my-repo",
+            local_path=local_path,
             default_branch="main",
         )
 
-        mock_run.assert_called_once_with(
-            ["git", "init", "-b", "main", "/tmp/my-repo"],
+        # First call should be git init
+        assert mock_run.call_args_list[0] == call(
+            ["git", "init", "-b", "main", local_path],
             check=True,
             capture_output=True,
             text=True,
         )
+
+        # Should also have configure_git (2 calls) + git add + git commit
+        cmds = [c.args[0] if c.args else c.kwargs.get("args", []) for c in mock_run.call_args_list]
+        assert any("config" in str(c) and "user.name" in str(c) for c in cmds)
+        assert any("add" in str(c) for c in cmds)
+        assert any("commit" in str(c) for c in cmds)
 
         # Verify DB row
         row = db_conn.execute(
             "SELECT * FROM repositories WHERE project_id = 1 AND name = 'my-repo'"
         ).fetchone()
         assert row is not None
-        assert row["local_path"] == "/tmp/my-repo"
+        assert row["local_path"] == local_path
         assert row["default_branch"] == "main"
         assert row["status"] == "active"
 

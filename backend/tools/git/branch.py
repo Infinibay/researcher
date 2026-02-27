@@ -35,22 +35,37 @@ class GitBranchTool(PabadaBaseTool):
                 "Use only alphanumerics, dots, dashes, underscores, and slashes."
             )
 
+        if self._is_pod_mode():
+            return self._run_in_pod(branch_name, create, base_branch)
+
+        cwd = self._git_cwd
         try:
             if create:
+                # Verify origin remote exists before fetching
+                check = subprocess.run(
+                    ["git", "remote", "get-url", "origin"],
+                    capture_output=True, text=True, timeout=10, cwd=cwd,
+                )
+                if check.returncode != 0:
+                    return self._error(
+                        "No remote 'origin' configured. The repository has no "
+                        "connection to Forgejo. Report this issue to the Team Lead "
+                        "— do NOT attempt to configure it yourself."
+                    )
                 # Fetch latest from base branch first
                 subprocess.run(
                     ["git", "fetch", "origin", base_branch],
-                    capture_output=True, text=True, timeout=30,
+                    capture_output=True, text=True, timeout=30, cwd=cwd,
                 )
                 result = subprocess.run(
                     ["git", "checkout", "-b", branch_name, f"origin/{base_branch}"],
-                    capture_output=True, text=True, timeout=15,
+                    capture_output=True, text=True, timeout=15, cwd=cwd,
                 )
                 if result.returncode != 0:
                     # Maybe branch already exists, try checkout
                     result = subprocess.run(
                         ["git", "checkout", branch_name],
-                        capture_output=True, text=True, timeout=15,
+                        capture_output=True, text=True, timeout=15, cwd=cwd,
                     )
                     if result.returncode != 0:
                         return self._error(f"Git error: {result.stderr.strip()}")
@@ -60,7 +75,7 @@ class GitBranchTool(PabadaBaseTool):
             else:
                 result = subprocess.run(
                     ["git", "checkout", branch_name],
-                    capture_output=True, text=True, timeout=15,
+                    capture_output=True, text=True, timeout=15, cwd=cwd,
                 )
                 if result.returncode != 0:
                     return self._error(f"Git error: {result.stderr.strip()}")
@@ -90,6 +105,104 @@ class GitBranchTool(PabadaBaseTool):
                 pass  # Non-critical
 
         self._log_tool_usage(f"Branch {action}: {branch_name}")
+
+        if action == "created":
+            try:
+                from backend.flows.event_listeners import FlowEvent, event_bus
+
+                event_bus.emit(FlowEvent(
+                    event_type="branch_created",
+                    project_id=project_id,
+                    entity_type="task",
+                    entity_id=self.task_id,
+                    data={
+                        "branch_name": branch_name,
+                        "base_branch": base_branch,
+                        "agent_id": agent_id,
+                        "task_id": self.task_id,
+                    },
+                ))
+            except Exception:
+                pass  # Non-critical
+
+        return self._success({
+            "branch": branch_name,
+            "action": action,
+            "base": base_branch if action == "created" else None,
+        })
+
+    def _run_in_pod(
+        self, branch_name: str, create: bool, base_branch: str,
+    ) -> str:
+        """Execute git branch operations inside the agent's pod."""
+        try:
+            if create:
+                self._exec_in_pod(
+                    ["git", "fetch", "origin", base_branch], timeout=30,
+                )
+                r = self._exec_in_pod(
+                    ["git", "checkout", "-b", branch_name, f"origin/{base_branch}"],
+                    timeout=15,
+                )
+                if r.exit_code != 0:
+                    r = self._exec_in_pod(
+                        ["git", "checkout", branch_name], timeout=15,
+                    )
+                    if r.exit_code != 0:
+                        return self._error(f"Git error: {r.stderr.strip()}")
+                    action = "checked_out"
+                else:
+                    action = "created"
+            else:
+                r = self._exec_in_pod(
+                    ["git", "checkout", branch_name], timeout=15,
+                )
+                if r.exit_code != 0:
+                    return self._error(f"Git error: {r.stderr.strip()}")
+                action = "checked_out"
+        except RuntimeError as e:
+            return self._error(f"Pod execution failed: {e}")
+
+        # Register branch in DB
+        project_id = self.project_id
+        agent_id = self.agent_id or "unknown"
+
+        if action == "created":
+            def _register(conn):
+                conn.execute(
+                    """INSERT OR IGNORE INTO branches
+                       (project_id, task_id, repo_name, branch_name, base_branch, status, created_by)
+                       VALUES (?, ?, ?, ?, ?, 'active', ?)""",
+                    (project_id, self.task_id, ".", branch_name, base_branch, agent_id),
+                )
+                conn.commit()
+
+            try:
+                from backend.tools.base.db import execute_with_retry
+                execute_with_retry(_register)
+            except Exception:
+                pass
+
+        self._log_tool_usage(f"Branch {action}: {branch_name} (pod)")
+
+        if action == "created":
+            try:
+                from backend.flows.event_listeners import FlowEvent, event_bus
+                event_bus.emit(FlowEvent(
+                    event_type="branch_created",
+                    project_id=project_id,
+                    entity_type="task",
+                    entity_id=self.task_id,
+                    data={
+                        "branch_name": branch_name,
+                        "base_branch": base_branch,
+                        "agent_id": agent_id,
+                        "task_id": self.task_id,
+                    },
+                ))
+            except Exception:
+                pass
+
         return self._success({
             "branch": branch_name,
             "action": action,

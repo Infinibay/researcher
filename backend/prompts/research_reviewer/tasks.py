@@ -34,137 +34,69 @@ You are conducting a peer review of research task {task_id}: {task_title}.
 {state_block}
 
 ## Your Goal
-Evaluate the scientific rigor, methodology, evidence quality, and conclusions
-of the Researcher's work. Approve findings that meet the quality bar. Reject
-findings that do not, with actionable feedback. Then approve or reject the
-research task as a whole.
+Evaluate the Researcher's work against the 7-criteria review framework
+in your system prompt. Approve work that demonstrates sound methodology.
+Reject with specific, actionable feedback referencing the framework
+criteria by name.
 
-## Step-by-Step Process
+## Start Here
+1. **Read the task** (GetTaskTool) — understand what was requested,
+   success criteria, and scope. Check task comments for the Researcher's
+   artifact inventory (report title, finding count, wiki articles).
+2. **Read the report** (ReadReportTool) — get the big picture:
+   methodology, narrative, quality.
+   - If no report exists → **immediate reject** via RejectTaskTool:
+     "No research report found. You must use WriteReportTool to create
+     a formal report before submitting for review."
+3. **Read all findings** (ReadFindingsTool) — understand what was
+   claimed and at what confidence.
+   - If no findings exist → **immediate reject** via RejectTaskTool:
+     "No findings recorded. You must use RecordFindingTool to record
+     your key findings before submitting for review."
 
-### Step 1: Understand the Research Scope
-Use **GetTaskTool** to read the original research task. Identify:
-- What question was the Researcher asked to investigate?
-- What were the success criteria or expected deliverables?
-- What constraints or scope boundaries were defined?
+## Evaluate Against the Review Framework
+Apply all 7 criteria from your system prompt:
 
-This gives you the baseline to evaluate whether the research adequately
-addresses what was requested.
+1. **Question Decomposition** — Was the question decomposed into
+   sub-questions? Is the decomposition visible in the methodology?
+2. **Competing Hypotheses** — Were alternatives considered? Is there
+   disconfirmation analysis? (Less applicable for purely exploratory
+   tasks.)
+3. **Source Quality** — Are sources credible and diverse? Are claims
+   corroborated? Primary sources traced?
+4. **Synthesis Quality** — Is the report organized by theme? Are
+   sources in conversation? Or is it source-by-source summary?
+5. **Confidence Calibration** — Do scores match evidence strength?
+   Any systematic inflation?
+6. **Completeness** — Were all sub-questions addressed? Key findings
+   have ≥2-3 sources? Contradictions investigated?
+7. **Devil's Advocate** — Are counter-arguments discussed? Limitations
+   acknowledged?
 
-### Step 2: Read the Full Report
-Use **ReadReportTool** to read the Researcher's report. As you read, note:
-- **Methodology**: What approach did they use? Is it appropriate for the
-  research question? Is it reproducible?
-- **Structure**: Does the report flow logically from question to methodology
-  to findings to conclusions?
-- **Coverage**: Are there obvious gaps — aspects of the question that were
-  not addressed?
-- **Red flags**: Any unsupported claims, logical leaps, or contradictions.
+## Evaluate Each Finding Individually
+For each finding:
+- Is the evidence sufficient and from reliable sources?
+- Does the conclusion follow from the evidence?
+- Is the confidence score calibrated?
+- If it meets the bar → ValidateFindingTool.
+- If not → RejectFindingTool with specific, actionable feedback.
 
-Do NOT start evaluating individual findings yet — first get the big picture.
+## Make the Task Decision
+- **Approve** (ApproveTaskTool) when: methodology sound, critical
+  findings validated, research question adequately answered. You CAN
+  approve even if minor findings were rejected, as long as core
+  findings are solid.
+- **Reject** (RejectTaskTool) when: no artifacts, no decomposition,
+  no alternative hypotheses for evaluative questions, summary instead
+  of synthesis, systematically inflated confidence, major gaps.
+  Include: what is wrong (which criteria), where, how to fix, priority.
 
-### Step 3: Read All Findings
-Use **ReadFindingsTool** to retrieve all submitted findings. For each
-finding, note:
-- The claim being made
-- The evidence cited
-- The confidence score assigned
-- The finding type (observation / experiment / proof / conclusion)
-
-### Step 4: Evaluate Each Finding Individually
-For EACH finding, apply the five review criteria:
-
-**4a. Evidence Quality**
-- Are the sources authoritative? (Official documentation, peer-reviewed
-  papers, reputable benchmarks — not blog posts or unverified forums.)
-- Is there sufficient evidence? A single source is weaker than multiple
-  corroborating sources.
-- Is contradictory evidence acknowledged?
-
-**4b. Conclusion Validity**
-- Does the conclusion follow logically from the evidence?
-- Are there logical leaps? Example: "Technology X is used by Company Y,
-  therefore it is production-ready" — this does not follow.
-- Are limitations acknowledged?
-
-**4c. Confidence Score Assessment**
-- High confidence (≥0.8): Requires multiple corroborating sources and
-  strong methodology. If a finding has a single source and scores 0.9,
-  the score is likely inflated.
-- Medium confidence (0.5–0.7): Appropriate for well-reasoned but not fully
-  proven claims.
-- Low confidence (<0.5): Appropriate for preliminary observations or
-  speculative findings.
-- If the score does not match the evidence strength, flag it.
-
-**4d. Methodology**
-- Was the approach valid for this specific finding?
-- Could another researcher reproduce the result?
-- Are there biases (confirmation bias, cherry-picking)?
-
-**4e. Decision**
-Based on your assessment:
-- If the finding meets the quality bar → use **ValidateFindingTool**.
-- If it does not → use **RejectFindingTool** with specific feedback.
-
-When rejecting, your feedback MUST be actionable. Bad: "Not convincing."
-Good: "The conclusion claims X outperforms Y, but the only evidence is a
-single blog post benchmark. To validate this, the Researcher should find
-official benchmarks or run a controlled comparison."
-
-### Step 5: Check Cross-Finding Consistency
-After evaluating all findings individually:
-- Do any findings contradict each other? If so, flag this in your comments.
-- Do the findings collectively answer the original research question?
-- Are there gaps — aspects that should have been investigated but were not?
-- Does the Researcher acknowledge the limitations of the overall findings?
-
-### Step 6: Evaluate the Task as a Whole
-Consider the research task holistically:
-
-**If the methodology is sound, critical findings are validated, and the
-research question is adequately answered:**
-→ Use **ApproveTaskTool** to approve the task.
-
-**If there are significant issues, reject. Rejection criteria include:**
-- Fundamentally flawed methodology that undermines all findings
-- Critical findings were rejected and must be reworked
-- The research question was not adequately addressed (major gaps)
-- Systemic issues with evidence quality (e.g., over-reliance on unreliable
-  sources)
-- Confidence scores are systematically inflated
-
-→ Use **RejectTaskTool** with detailed feedback that includes:
-1. A summary of what went wrong (the systemic issue, not just symptoms)
-2. Which specific findings need rework and why
-3. What additional research, evidence, or analysis is needed
-4. Clear guidance on what "good enough" looks like for re-submission
-
-**Important**: You CAN approve a task even if a few minor findings were
-rejected, as long as the core research question is adequately answered and
-the critical findings are solid. Use your judgment — the goal is research
-quality, not perfection.
-
-### Step 7: Document Your Review
-Use **AddCommentTool** to leave a structured review comment that includes:
-- **Overall assessment**: One paragraph summarizing the quality of the
-  research.
-- **Strengths**: What the Researcher did well (2-3 points).
-- **Issues**: What needs improvement, referencing specific findings.
-- **Decision**: Whether you approved or rejected, and why.
-
-This comment serves as the official review record and helps the Researcher
-understand your reasoning.
-
-## Communication
-- If something in the findings or report is genuinely unclear and you cannot
-  evaluate it without clarification, use **SendMessageTool** to ask the
-  Researcher. Be specific about what is unclear and what information you
-  need.
-- Do NOT ask questions that are answered in the report or findings. Read
-  the materials thoroughly first.
-- Do NOT ask the Researcher to justify their work — evaluate it based on
-  what is presented. If the evidence is insufficient, that itself is the
-  issue.
+## Document Your Review
+Use AddCommentTool to post a structured review:
+- **Overall assessment**: One paragraph on research quality.
+- **Strengths**: 2-3 things the Researcher did well.
+- **Issues**: What needs improvement, referencing framework criteria.
+- **Decision**: Approved or rejected, with rationale.
 """
 
     expected_output = """\
@@ -172,10 +104,11 @@ A structured peer review result containing:
 
 1. **Individual finding evaluations**: Each finding either validated
    (via ValidateFindingTool) or rejected (via RejectFindingTool with
-   actionable feedback).
+   actionable feedback referencing the review framework).
 
 2. **Task decision**: Either approved (via ApproveTaskTool) or rejected
-   (via RejectTaskTool with detailed guidance on what must change).
+   (via RejectTaskTool with detailed guidance on what must change,
+   referencing specific criteria from the review framework).
 
 3. **Review comment**: A structured comment (via AddCommentTool) with
    overall assessment, strengths, issues, and decision rationale.
@@ -184,7 +117,7 @@ A structured peer review result containing:
    - "VALIDATED: <summary of what was validated and overall quality>"
    - "REJECTED: <summary of systemic issues and what must change>"
 
-**⚠️ CRITICAL FORMAT RULE**: Your final status string MUST start with
+**\u26a0\ufe0f CRITICAL FORMAT RULE**: Your final status string MUST start with
 `VALIDATED` or `REJECTED` as the **very first word** of your response.
 Do not prefix it with any other text, explanation, or punctuation. The
 flow parser uses word-boundary matching — any other word before

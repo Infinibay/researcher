@@ -137,29 +137,70 @@ async def delete_project(project_id: int):
         raise ProjectRunning(project_id)
 
     def _delete(conn: sqlite3.Connection) -> None:
-        # Delete in dependency order
-        conn.execute("DELETE FROM chat_messages WHERE project_id = ?", (project_id,))
-        conn.execute("DELETE FROM conversation_threads WHERE project_id = ?", (project_id,))
-        conn.execute("DELETE FROM status_updates WHERE project_id = ?", (project_id,))
-        conn.execute("DELETE FROM events_log WHERE project_id = ?", (project_id,))
+        # Delete in dependency order — explicit deletes for all referencing
+        # tables so the delete succeeds even if the DB lacks ON DELETE CASCADE
+        # (e.g. tables created before CASCADE was added to the schema).
+        p = (project_id,)
+
+        # Tables referencing tasks (must go before tasks)
         conn.execute(
-            """DELETE FROM task_dependencies WHERE task_id IN
-               (SELECT id FROM tasks WHERE project_id = ?)""",
-            (project_id,),
+            "DELETE FROM task_dependencies WHERE task_id IN "
+            "(SELECT id FROM tasks WHERE project_id = ?)", p,
         )
         conn.execute(
-            """DELETE FROM task_comments WHERE task_id IN
-               (SELECT id FROM tasks WHERE project_id = ?)""",
-            (project_id,),
+            "DELETE FROM task_comments WHERE task_id IN "
+            "(SELECT id FROM tasks WHERE project_id = ?)", p,
         )
-        conn.execute("DELETE FROM tasks WHERE project_id = ?", (project_id,))
-        conn.execute("DELETE FROM milestones WHERE project_id = ?", (project_id,))
-        conn.execute("DELETE FROM epics WHERE project_id = ?", (project_id,))
-        conn.execute("DELETE FROM wiki_pages WHERE project_id = ?", (project_id,))
-        conn.execute("DELETE FROM reference_files WHERE project_id = ?", (project_id,))
-        conn.execute("DELETE FROM agent_runs WHERE project_id = ?", (project_id,))
-        conn.execute("DELETE FROM code_reviews WHERE project_id = ?", (project_id,))
-        conn.execute("DELETE FROM projects WHERE id = ?", (project_id,))
+
+        # Tables referencing findings (must go before findings)
+        conn.execute(
+            "DELETE FROM finding_deps WHERE finding_id IN "
+            "(SELECT id FROM findings WHERE project_id = ?)", p,
+        )
+
+        # Tables referencing agent_runs (must go before agent_runs)
+        conn.execute(
+            "DELETE FROM agent_performance WHERE run_id IN "
+            "(SELECT id FROM agent_runs WHERE project_id = ?)", p,
+        )
+
+        # All tables directly referencing projects
+        conn.execute("DELETE FROM agent_events WHERE project_id = ?", p)
+        conn.execute(
+            "DELETE FROM agent_loop_state WHERE project_id = ?", p,
+        )
+        conn.execute("DELETE FROM autonomy_actions WHERE project_id = ?", p)
+        conn.execute("DELETE FROM flow_snapshots WHERE project_id = ?", p)
+        conn.execute("DELETE FROM clarification_questions WHERE project_id = ?", p)
+        conn.execute("DELETE FROM loop_incidents WHERE project_id = ?", p)
+        conn.execute("DELETE FROM message_fingerprints WHERE project_id = ?", p)
+        conn.execute("DELETE FROM convergence_log WHERE project_id = ?", p)
+        conn.execute("DELETE FROM brainstorm_sessions WHERE project_id = ?", p)
+        conn.execute("DELETE FROM notices WHERE project_id = ?", p)
+        conn.execute("DELETE FROM user_requests WHERE project_id = ?", p)
+        conn.execute("DELETE FROM processes WHERE project_id = ?", p)
+        conn.execute("DELETE FROM validation_results WHERE project_id = ?", p)
+        conn.execute("DELETE FROM code_quality WHERE project_id = ?", p)
+        conn.execute("DELETE FROM artifact_changes WHERE project_id = ?", p)
+        conn.execute("DELETE FROM artifacts WHERE project_id = ?", p)
+        conn.execute("DELETE FROM developer_session_notes WHERE project_id = ?", p)
+        conn.execute("DELETE FROM code_reviews WHERE project_id = ?", p)
+        conn.execute("DELETE FROM agent_runs WHERE project_id = ?", p)
+        conn.execute("DELETE FROM chat_messages WHERE project_id = ?", p)
+        conn.execute("DELETE FROM conversation_threads WHERE project_id = ?", p)
+        conn.execute("DELETE FROM status_updates WHERE project_id = ?", p)
+        conn.execute("DELETE FROM events_log WHERE project_id = ?", p)
+        conn.execute("DELETE FROM findings WHERE project_id = ?", p)
+        conn.execute("DELETE FROM knowledge WHERE project_id = ?", p)
+        conn.execute("DELETE FROM branches WHERE project_id = ?", p)
+        conn.execute("DELETE FROM repositories WHERE project_id = ?", p)
+        conn.execute("DELETE FROM wiki_pages WHERE project_id = ?", p)
+        conn.execute("DELETE FROM reference_files WHERE project_id = ?", p)
+        conn.execute("DELETE FROM tasks WHERE project_id = ?", p)
+        conn.execute("DELETE FROM milestones WHERE project_id = ?", p)
+        conn.execute("DELETE FROM epics WHERE project_id = ?", p)
+
+        conn.execute("DELETE FROM projects WHERE id = ?", p)
         conn.commit()
 
     execute_with_retry(_delete)

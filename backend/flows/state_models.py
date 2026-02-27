@@ -26,7 +26,6 @@ class ReviewStatus(str, Enum):
     REVIEWING = "reviewing"
     APPROVED = "approved"
     REJECTED = "rejected"
-    ESCALATED = "escalated"
 
 
 class ResearchStatus(str, Enum):
@@ -81,51 +80,55 @@ class ProjectState(BaseModel):
     brainstorm_attempts: int = 0
     max_brainstorm_attempts: int = 3
     max_concurrent_tasks: int = 3
+    evaluate_progress_attempts: int = 0
+    max_evaluate_progress_attempts: int = 3
     running_task_ids: list[int] = Field(default_factory=list)
+    repo_name: str = ""
     requirements_attempts: int = 0
     max_requirements_attempts: int = 3
+    planning_iteration: int = 0
+    current_step: str = ""
 
 
 class DevelopmentState(BaseModel):
     """State for DevelopmentFlow — handles task assignment, coding, and review."""
 
     project_id: int = 0
+    project_name: str = ""
     task_id: int = 0
     task_title: str = ""
     task_description: str = ""
     branch_name: str = ""
     developer_id: str = ""
     review_status: ReviewStatus = ReviewStatus.PENDING
-    escalated: bool = False
-    escalation_occurred: bool = False
-    tl_escalation_decision: str = ""
-    tl_escalation_guidance: str = ""
     dependencies_met: bool = False
     agent_run_id: str = ""
-    checkin_thread_id: str = ""
-    checkin_approved: bool = False
     tech_hints: list[str] = Field(default_factory=list)
 
 
 class CodeReviewState(BaseModel):
-    """State for CodeReviewFlow — manages the review cycle with retry/escalation."""
+    """State for CodeReviewFlow — manages the dev/reviewer review cycle."""
 
     project_id: int = 0
+    project_name: str = ""
     task_id: int = 0
+    task_title: str = ""
     branch_name: str = ""
     review_status: ReviewStatus = ReviewStatus.PENDING
     reviewer_comments: list[str] = Field(default_factory=list)
     rejection_count: int = 0
-    max_rejections: int = 7
     reviewer_id: str = ""
     developer_id: str = ""
     agent_run_id: str = ""
+    ci_passed: bool = False
+    ci_output: str = ""
 
 
 class ResearchState(BaseModel):
     """State for ResearchFlow — manages research lifecycle with peer review."""
 
     project_id: int = 0
+    project_name: str = ""
     task_id: int = 0
     task_title: str = ""
     researcher_id: str = ""
@@ -140,7 +143,23 @@ class ResearchState(BaseModel):
     agent_run_id: str = ""
     revision_count: int = 0
     max_revisions: int = 7
+    rescue_count: int = 0
     knowledge_service_enabled: bool = True
+
+
+class TicketCreationState(BaseModel):
+    """State for TicketCreationFlow — iterative ticket creation with research."""
+
+    project_id: int = 0
+    project_name: str = ""
+    plan: str = ""
+    ticket_index: int = 0
+    task_titles: list[str] = Field(default_factory=list)
+    total_tickets: int = 0
+    epics_created: dict[str, int] = Field(default_factory=dict)
+    milestones_created: dict[str, int] = Field(default_factory=dict)
+    tasks_created: dict[str, int] = Field(default_factory=dict)
+    failed_items: list[str] = Field(default_factory=list)
 
 
 class BrainstormState(BaseModel):
@@ -165,3 +184,4 @@ class BrainstormState(BaseModel):
     max_rounds: int = 5
     rejection_attempts: int = 0
     max_rejection_attempts: int = 3
+    thread_id: str = ""

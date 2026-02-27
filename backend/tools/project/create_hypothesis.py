@@ -30,6 +30,7 @@ class CreateHypothesisTool(PabadaBaseTool):
     ) -> str:
         # Delegate to RecordFindingTool with finding_type='hypothesis'
         finder = RecordFindingTool()
+        self._bind_delegate(finder)
         return finder._run(
             title=statement,
             content=f"**Hypothesis:** {statement}\n\n**Rationale:** {rationale}",

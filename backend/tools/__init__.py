@@ -12,24 +12,30 @@ from backend.tools.task import (
     CreateTaskTool, TakeTaskTool, UpdateTaskStatusTool,
     AddCommentTool, GetTaskTool, ReadTasksTool,
     SetTaskDependenciesTool, ApproveTaskTool, RejectTaskTool,
+    SaveSessionNoteTool, LoadSessionNoteTool,
 )
 from backend.tools.communication import (
     SendMessageTool, ReadMessagesTool, AskTeamLeadTool,
-    AskProjectLeadTool, AskUserTool,
+    AskProjectLeadTool, AskUserTool, ReplyToUserTool,
 )
-from backend.tools.web import WebSearchTool, WebFetchTool, ReadPaperTool
+from backend.tools.web import (
+    WebSearchTool, WebFetchTool, ReadPaperTool, DeepWebResearchTool,
+    ScrapeWebsitePabadaTool, SpiderScrapeTool, CodeDocsSearchPabadaTool,
+)
 from backend.tools.shell import ExecuteCommandTool, CodeInterpreterTool
 from backend.tools.data import NL2SQLTool
-from backend.tools.rag import PDFSearchTool, DirectorySearchTool, CSVSearchTool
-from backend.tools.memory import KnowledgeManagerTool
+from backend.tools.rag import (
+    PDFSearchTool, DirectorySearchTool, CSVSearchTool,
+    DOCXSearchPabadaTool, JSONSearchPabadaTool, XMLSearchPabadaTool,
+)
 from backend.tools.knowledge import (
     RecordFindingTool, ReadFindingsTool, ValidateFindingTool,
     RejectFindingTool, ReadWikiTool, WriteWikiTool,
     WriteReportTool, ReadReportTool, SearchKnowledgeTool,
 )
 from backend.tools.project import (
-    CreateEpicTool, CreateMilestoneTool, UpdateProjectTool,
-    ReadReferenceFilesTool, CreateHypothesisTool,
+    CreateEpicTool, CreateMilestoneTool, CreateRepositoryTool,
+    UpdateProjectTool, ReadReferenceFilesTool, CreateHypothesisTool,
 )
 from backend.tools.context7 import Context7SearchTool, Context7DocsTool
 
@@ -46,24 +52,29 @@ TASK_TOOLS = [
     CreateTaskTool, TakeTaskTool, UpdateTaskStatusTool,
     AddCommentTool, GetTaskTool, ReadTasksTool,
     SetTaskDependenciesTool, ApproveTaskTool, RejectTaskTool,
+    SaveSessionNoteTool, LoadSessionNoteTool,
 ]
 
 COMMUNICATION_TOOLS = [
     SendMessageTool, ReadMessagesTool, AskTeamLeadTool,
-    AskProjectLeadTool, AskUserTool,
+    AskProjectLeadTool, AskUserTool, ReplyToUserTool,
 ]
 
-WEB_TOOLS = [WebSearchTool, WebFetchTool, ReadPaperTool]
+WEB_TOOLS = [
+    WebSearchTool, WebFetchTool, ReadPaperTool, DeepWebResearchTool,
+    ScrapeWebsitePabadaTool, SpiderScrapeTool, CodeDocsSearchPabadaTool,
+]
 
 SHELL_TOOLS = [ExecuteCommandTool, CodeInterpreterTool]
 
 DATA_TOOLS = [NL2SQLTool]
 
-RAG_TOOLS = [PDFSearchTool, DirectorySearchTool, CSVSearchTool]
+RAG_TOOLS = [
+    PDFSearchTool, DirectorySearchTool, CSVSearchTool,
+    DOCXSearchPabadaTool, JSONSearchPabadaTool, XMLSearchPabadaTool,
+]
 
 CONTEXT7_TOOLS = [Context7SearchTool, Context7DocsTool]
-
-MEMORY_TOOLS = [KnowledgeManagerTool]
 
 KNOWLEDGE_TOOLS = [
     RecordFindingTool, ReadFindingsTool, ValidateFindingTool,
@@ -72,13 +83,13 @@ KNOWLEDGE_TOOLS = [
 ]
 
 PROJECT_TOOLS = [
-    CreateEpicTool, CreateMilestoneTool, UpdateProjectTool,
-    ReadReferenceFilesTool, CreateHypothesisTool,
+    CreateEpicTool, CreateMilestoneTool, CreateRepositoryTool,
+    UpdateProjectTool, ReadReferenceFilesTool, CreateHypothesisTool,
 ]
 
 ALL_TOOL_CLASSES = (
     FILE_TOOLS + GIT_TOOLS + TASK_TOOLS + COMMUNICATION_TOOLS +
-    WEB_TOOLS + SHELL_TOOLS + MEMORY_TOOLS + KNOWLEDGE_TOOLS + PROJECT_TOOLS +
+    WEB_TOOLS + SHELL_TOOLS + KNOWLEDGE_TOOLS + PROJECT_TOOLS +
     DATA_TOOLS + RAG_TOOLS + CONTEXT7_TOOLS
 )
 
@@ -86,39 +97,45 @@ ALL_TOOL_CLASSES = (
 
 _ROLE_TOOLS = {
     "project_lead": (
-        COMMUNICATION_TOOLS + MEMORY_TOOLS +
-        [UpdateProjectTool, ReadReferenceFilesTool] +
+        COMMUNICATION_TOOLS +
+        [UpdateProjectTool, ReadReferenceFilesTool, CreateRepositoryTool] +
         [ReadFindingsTool, ReadWikiTool, ReadReportTool] +
-        [WebSearchTool, WebFetchTool] +
+        [WebSearchTool, WebFetchTool, ScrapeWebsitePabadaTool] +
         [NL2SQLTool]
     ),
     "team_lead": (
-        TASK_TOOLS + COMMUNICATION_TOOLS + FILE_TOOLS + GIT_TOOLS +
-        MEMORY_TOOLS + [ReadFindingsTool, ReadWikiTool] +
+        # Team Lead gets task management tools EXCEPT TakeTaskTool —
+        # only developers/researchers claim tasks from the backlog.
+        [CreateTaskTool, UpdateTaskStatusTool,
+         AddCommentTool, GetTaskTool, ReadTasksTool,
+         SetTaskDependenciesTool, ApproveTaskTool, RejectTaskTool] +
+        COMMUNICATION_TOOLS + FILE_TOOLS + GIT_TOOLS +
+        [ReadFindingsTool, ReadWikiTool] +
         [CreateEpicTool, CreateMilestoneTool] +
+        [WebSearchTool, ScrapeWebsitePabadaTool, ExecuteCommandTool] +
         [NL2SQLTool]
     ),
     "developer": (
-        FILE_TOOLS + GIT_TOOLS + SHELL_TOOLS + MEMORY_TOOLS +
+        FILE_TOOLS + GIT_TOOLS + SHELL_TOOLS +
         [TakeTaskTool, UpdateTaskStatusTool, AddCommentTool, GetTaskTool, ReadTasksTool] +
-        [SendMessageTool, ReadMessagesTool, AskTeamLeadTool] +
+        [SaveSessionNoteTool, LoadSessionNoteTool] +
+        [SendMessageTool, ReadMessagesTool, AskTeamLeadTool, ReplyToUserTool] +
         [WebSearchTool, WebFetchTool] +
-        [DirectorySearchTool] +
+        [DirectorySearchTool, CodeDocsSearchPabadaTool] +
         CONTEXT7_TOOLS
     ),
     "code_reviewer": (
         FILE_TOOLS + [GitDiffTool, GitStatusTool] +
         [GetTaskTool, ReadTasksTool, ApproveTaskTool, RejectTaskTool, AddCommentTool] +
-        [SendMessageTool, ReadMessagesTool] +
-        MEMORY_TOOLS +
+        [SendMessageTool, ReadMessagesTool, ReplyToUserTool] +
         [DirectorySearchTool] +
         CONTEXT7_TOOLS
     ),
     "researcher": (
-        WEB_TOOLS + FILE_TOOLS + KNOWLEDGE_TOOLS + MEMORY_TOOLS +
+        WEB_TOOLS + FILE_TOOLS + KNOWLEDGE_TOOLS +
         [CreateHypothesisTool] +
         [TakeTaskTool, UpdateTaskStatusTool, AddCommentTool, GetTaskTool, ReadTasksTool] +
-        [SendMessageTool, ReadMessagesTool, AskTeamLeadTool] +
+        [SendMessageTool, ReadMessagesTool, AskTeamLeadTool, ReplyToUserTool] +
         [CodeInterpreterTool] + RAG_TOOLS +
         CONTEXT7_TOOLS
     ),
@@ -126,8 +143,7 @@ _ROLE_TOOLS = {
         [ValidateFindingTool, RejectFindingTool, ReadFindingsTool] +
         [ReadWikiTool, ReadReportTool, SearchKnowledgeTool] +
         [GetTaskTool, ReadTasksTool, ApproveTaskTool, RejectTaskTool, AddCommentTool] +
-        [SendMessageTool, ReadMessagesTool] +
-        MEMORY_TOOLS +
+        [SendMessageTool, ReadMessagesTool, ReplyToUserTool] +
         [PDFSearchTool] +
         CONTEXT7_TOOLS
     ),
@@ -163,3 +179,93 @@ def get_tools_for_role(role: str) -> list:
 def get_all_tools() -> list:
     """Return instantiated list of all available tools."""
     return [cls() for cls in ALL_TOOL_CLASSES]
+
+
+# ── Task-type-specific tool subsets ──────────────────────────────────────────
+#
+# Use with ``build_crew(agent, prompt, task_tools=get_tools_for_task_type("implement"))``
+# to narrow the tool set for a specific task, reducing confusion and improving
+# tool selection speed.
+
+_TASK_TYPE_TOOLS: dict[str, list] = {
+    # Developer implementing code — needs file, git, shell, docs, web
+    "implement": (
+        FILE_TOOLS + GIT_TOOLS + SHELL_TOOLS +
+        [UpdateTaskStatusTool, AddCommentTool, GetTaskTool] +
+        [SendMessageTool, AskTeamLeadTool] +
+        [WebSearchTool, WebFetchTool, DirectorySearchTool, CodeDocsSearchPabadaTool] +
+        CONTEXT7_TOOLS +
+        [SaveSessionNoteTool, LoadSessionNoteTool]
+    ),
+    # Developer reworking code after review — same as implement + session notes
+    "rework": (
+        FILE_TOOLS + GIT_TOOLS + SHELL_TOOLS +
+        [UpdateTaskStatusTool, AddCommentTool, GetTaskTool] +
+        [SendMessageTool, AskTeamLeadTool] +
+        [WebSearchTool, WebFetchTool, DirectorySearchTool, CodeDocsSearchPabadaTool] +
+        CONTEXT7_TOOLS +
+        [SaveSessionNoteTool, LoadSessionNoteTool]
+    ),
+    # Code reviewer — needs read access, diff, approve/reject
+    "review": (
+        [ReadFileTool, ListDirectoryTool, CodeSearchTool, GlobTool] +
+        [GitDiffTool, GitStatusTool] +
+        [GetTaskTool, ReadTasksTool, ApproveTaskTool, RejectTaskTool, AddCommentTool] +
+        [SendMessageTool, ReadMessagesTool] +
+        [DirectorySearchTool] + CONTEXT7_TOOLS
+    ),
+    # Researcher investigating — needs web, knowledge, file, code interpreter
+    "research": (
+        WEB_TOOLS + FILE_TOOLS + KNOWLEDGE_TOOLS +
+        [CreateHypothesisTool] +
+        [GetTaskTool, UpdateTaskStatusTool, AddCommentTool] +
+        [SendMessageTool, AskTeamLeadTool] +
+        [CodeInterpreterTool] + RAG_TOOLS + CONTEXT7_TOOLS
+    ),
+    # Team Lead creating plan — needs task mgmt, communication, knowledge
+    "plan": (
+        [GetTaskTool, ReadTasksTool] +
+        COMMUNICATION_TOOLS +
+        [ReadFindingsTool, ReadWikiTool] +
+        [WebSearchTool, ExecuteCommandTool, NL2SQLTool]
+    ),
+    # Team Lead creating tickets — needs project management tools
+    "create_tickets": (
+        [CreateTaskTool, UpdateTaskStatusTool, AddCommentTool,
+         GetTaskTool, ReadTasksTool, SetTaskDependenciesTool] +
+        COMMUNICATION_TOOLS +
+        [CreateEpicTool, CreateMilestoneTool] +
+        [ReadFindingsTool, ReadWikiTool, ReadReportTool] +
+        [WebSearchTool, NL2SQLTool]
+    ),
+    # Project Lead gathering requirements — needs communication, read access
+    "requirements": (
+        COMMUNICATION_TOOLS +
+        [ReadReferenceFilesTool, ReadFindingsTool, ReadWikiTool, ReadReportTool] +
+        [WebSearchTool, WebFetchTool, ScrapeWebsitePabadaTool, NL2SQLTool]
+    ),
+}
+
+
+def get_tools_for_task_type(task_type: str) -> list | None:
+    """Return instantiated tool list for a specific task type.
+
+    Args:
+        task_type: One of 'implement', 'rework', 'review', 'research',
+                   'plan', 'create_tickets', 'requirements'.
+
+    Returns:
+        List of tool instances, or None if task_type is unknown (caller
+        should fall back to role-based tools).
+    """
+    tool_classes = _TASK_TYPE_TOOLS.get(task_type)
+    if tool_classes is None:
+        return None
+    # Deduplicate while preserving order
+    seen: set[type] = set()
+    unique: list[type] = []
+    for cls in tool_classes:
+        if cls not in seen:
+            seen.add(cls)
+            unique.append(cls)
+    return [cls() for cls in unique]

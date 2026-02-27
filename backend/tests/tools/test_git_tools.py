@@ -63,6 +63,7 @@ class TestGitBranchTool:
     @patch("backend.tools.git.branch.execute_with_retry")
     def test_create_branch(self, mock_retry, mock_run, agent_context):
         mock_run.side_effect = [
+            MagicMock(returncode=0, stdout="http://localhost:3000/pabada/test.git", stderr=""),  # remote get-url
             MagicMock(returncode=0, stdout="", stderr=""),  # fetch
             MagicMock(returncode=0, stdout="", stderr=""),  # checkout -b
         ]

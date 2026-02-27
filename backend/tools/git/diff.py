@@ -44,9 +44,13 @@ class GitDiffTool(PabadaBaseTool):
         if file:
             cmd.extend(["--", file])
 
+        if self._is_pod_mode():
+            return self._run_in_pod(cmd)
+
         try:
             result = subprocess.run(
                 cmd, capture_output=True, text=True, timeout=30,
+                cwd=self._git_cwd,
             )
             if result.returncode != 0:
                 return self._error(f"Git diff failed: {result.stderr.strip()}")
@@ -60,3 +64,17 @@ class GitDiffTool(PabadaBaseTool):
             return "No differences found."
 
         return output
+
+    def _run_in_pod(self, cmd: list[str]) -> str:
+        """Execute git diff inside the agent's pod."""
+        try:
+            r = self._exec_in_pod(cmd, timeout=30)
+        except RuntimeError as e:
+            return self._error(f"Pod execution failed: {e}")
+
+        if r.exit_code != 0:
+            return self._error(f"Git diff failed: {r.stderr.strip()}")
+
+        if not r.stdout.strip():
+            return "No differences found."
+        return r.stdout

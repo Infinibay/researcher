@@ -16,7 +16,6 @@ def create_research_reviewer_agent(
     teammates: list[dict[str, str]] | None = None,
     llm: Any | None = None,
     knowledge_service: Any | None = None,
-    memory_service: Any | None = None,
 ) -> PabadaAgent:
     """Instantiate a Research Reviewer agent."""
     knowledge_sources = None
@@ -43,5 +42,4 @@ def create_research_reviewer_agent(
         max_iter=15,
         llm=llm,
         knowledge_sources=knowledge_sources,
-        memory_service=memory_service,
     )

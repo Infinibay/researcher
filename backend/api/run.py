@@ -29,38 +29,45 @@ def setup_file_logging():
     # Also ensure backend loggers are at DEBUG level
     logging.getLogger("backend").setLevel(logging.DEBUG)
 
+    # Suppress noisy third-party loggers that flood the log file
+    for _noisy in ("watchfiles", "httpcore", "httpx", "urllib3", "urllib3.connectionpool"):
+        logging.getLogger(_noisy).setLevel(logging.WARNING)
+
     logging.getLogger(__name__).info("File logging enabled → %s", log_file)
 
 
 def setup_llm_environment():
-    """Set environment variables for CrewAI's LLM resolution.
+    """Configure the centralized LLM singleton and provider env vars.
 
-    CrewAI reads OPENAI_MODEL_NAME, OPENAI_API_BASE, and OPENAI_API_KEY
-    to configure the default LLM for all agents.  We bridge from PABADA
-    settings so the user only needs to set PABADA_LLM_MODEL, etc.
+    Delegates to ``backend.config.llm`` — the single source of truth for
+    all LLM configuration.  Eager-inits the LLM object so errors surface
+    at startup rather than on first agent creation.
     """
-    from backend.config.settings import settings
+    from backend.config.llm import setup_provider_env_vars, validate_function_calling, get_llm
 
-    if settings.LLM_MODEL and not os.environ.get("OPENAI_MODEL_NAME"):
-        os.environ["OPENAI_MODEL_NAME"] = settings.LLM_MODEL
-        os.environ.setdefault("MODEL", settings.LLM_MODEL)
+    setup_provider_env_vars()
+    validate_function_calling()
 
-    if settings.LLM_BASE_URL and not os.environ.get("OPENAI_API_BASE"):
-        os.environ["OPENAI_API_BASE"] = settings.LLM_BASE_URL
-
-    if settings.LLM_API_KEY and not os.environ.get("OPENAI_API_KEY"):
-        os.environ["OPENAI_API_KEY"] = settings.LLM_API_KEY
-
-    logger = logging.getLogger(__name__)
-    model = os.environ.get("OPENAI_MODEL_NAME") or os.environ.get("MODEL") or "(default)"
-    base = os.environ.get("OPENAI_API_BASE") or "(default)"
-    has_key = bool(os.environ.get("OPENAI_API_KEY"))
-    logger.info("LLM config: model=%s, base_url=%s, api_key=%s", model, base, "set" if has_key else "NOT SET")
+    try:
+        get_llm()  # eager init — surface config errors early
+    except RuntimeError as exc:
+        logging.getLogger(__name__).warning("LLM init skipped: %s", exc)
 
 
 def main():
     setup_file_logging()
     setup_llm_environment()
+
+    # Bridge CrewAI internal events into PABADA's EventBus → WebSocket pipeline
+    from backend.flows.crewai_event_bridge import register_crewai_event_bridge
+    register_crewai_event_bridge()
+
+    # NOTE: No custom signal handlers here — with reload=True, uvicorn runs
+    # the ASGI server in a child process while this (parent) process is just
+    # the reloader.  The flow_manager lives in the child, so signal handlers
+    # here can't reach it.  Graceful shutdown is handled by the FastAPI
+    # lifespan handler in main.py (which runs inside the child process).
+
     uvicorn.run(
         "backend.api.main:app",
         host="0.0.0.0",

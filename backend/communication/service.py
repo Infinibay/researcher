@@ -138,6 +138,7 @@ class CommunicationService:
                     "thread_id": actual_thread,
                     "priority": priority,
                     "conversation_type": conv_type,
+                    "content": message,
                 },
             )
         )

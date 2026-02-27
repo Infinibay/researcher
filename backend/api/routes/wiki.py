@@ -13,7 +13,7 @@ from backend.api.models.wiki import (
     WikiPageUpdate,
     WikiSearchResult,
 )
-from backend.tools.base.db import execute_with_retry
+from backend.tools.base.db import execute_with_retry, sanitize_fts5_query
 
 router = APIRouter(prefix="/api", tags=["wiki"])
 
@@ -154,6 +154,7 @@ async def search_wiki(q: str = Query(..., min_length=1), project_id: int = Query
     def _search(conn: sqlite3.Connection) -> list[dict]:
         # Try FTS first
         try:
+            safe_q = sanitize_fts5_query(q)
             rows = conn.execute(
                 """SELECT wp.path, wp.title,
                           snippet(wiki_fts, 2, '<b>', '</b>', '...', 64) AS snippet,
@@ -164,7 +165,7 @@ async def search_wiki(q: str = Query(..., min_length=1), project_id: int = Query
                      AND (wp.project_id = ? OR wp.project_id IS NULL)
                    ORDER BY rank
                    LIMIT 20""",
-                (q, project_id),
+                (safe_q, project_id),
             ).fetchall()
             return [dict(r) for r in rows]
         except Exception:

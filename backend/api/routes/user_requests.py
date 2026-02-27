@@ -72,6 +72,30 @@ async def respond_to_request(request_id: int, body: UserRequestRespond):
             detail="Request not found or already responded to",
         )
 
+    # Mirror the user's response as a chat_message so it persists in chat history
+    def _mirror_response(conn: sqlite3.Connection) -> None:
+        pid = result["project_id"]
+        thread_id = f"user-qa-p{pid}"
+        conn.execute(
+            """INSERT OR IGNORE INTO conversation_threads
+               (thread_id, project_id, thread_type, created_at)
+               VALUES (?, ?, 'user_chat', CURRENT_TIMESTAMP)""",
+            (thread_id, pid),
+        )
+        conn.execute(
+            """INSERT INTO chat_messages
+               (project_id, thread_id, from_agent, to_agent, message,
+                conversation_type, created_at)
+               VALUES (?, ?, 'user', ?, ?, 'user_to_agent', CURRENT_TIMESTAMP)""",
+            (pid, thread_id, result["agent_id"], body.response),
+        )
+        conn.commit()
+
+    try:
+        execute_with_retry(_mirror_response)
+    except Exception:
+        pass  # Non-fatal — the user_request table is the source of truth
+
     event_bus.emit(
         FlowEvent(
             event_type="user_request_responded",

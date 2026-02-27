@@ -1,3 +1,1 @@
-from .knowledge_manager import KnowledgeManagerTool
-
-__all__ = ["KnowledgeManagerTool"]
+# Memory is now handled natively by CrewAI's Memory system via build_crew().

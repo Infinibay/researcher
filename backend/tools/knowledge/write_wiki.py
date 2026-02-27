@@ -73,6 +73,23 @@ class WriteWikiTool(PabadaBaseTool):
         except Exception as e:
             return self._error(f"Failed to write wiki page: {e}")
 
+        from backend.flows.event_listeners import FlowEvent, event_bus
+
+        event_bus.emit(
+            FlowEvent(
+                event_type="wiki_updated",
+                project_id=project_id,
+                entity_type="wiki_page",
+                entity_id=result["page_id"],
+                data={
+                    "path": page,
+                    "title": title,
+                    "action": result["action"],
+                    "agent_id": agent_id,
+                },
+            )
+        )
+
         self._log_tool_usage(
             f"Wiki page {result['action']}: {page}"
         )

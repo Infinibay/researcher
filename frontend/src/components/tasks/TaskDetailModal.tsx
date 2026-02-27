@@ -7,15 +7,6 @@ import { MarkdownRenderer } from '../common/MarkdownRenderer'
 import { STATUS_COLORS, PRIORITY_COLORS } from '../../utils/colors'
 import { formatRelative } from '../../utils/date'
 
-const statusVariant: Record<string, string> = {
-  backlog: 'neutral',
-  pending: 'neutral',
-  in_progress: 'warning',
-  review_ready: 'violet',
-  rejected: 'error',
-  done: 'success',
-}
-
 const taskStatuses = ['backlog', 'pending', 'in_progress', 'review_ready', 'rejected', 'done']
 
 export function TaskDetailModal({
@@ -39,6 +30,10 @@ export function TaskDetailModal({
   const [commentType, setCommentType] = useState<string>('comment')
   const [editingDeps, setEditingDeps] = useState(false)
   const [selectedDeps, setSelectedDeps] = useState<number[]>([])
+  const [editingTitle, setEditingTitle] = useState(false)
+  const [editingDesc, setEditingDesc] = useState(false)
+  const [draftTitle, setDraftTitle] = useState('')
+  const [draftDesc, setDraftDesc] = useState('')
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -75,10 +70,63 @@ export function TaskDetailModal({
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
                   <span className="font-mono text-xs text-slate-500">#{task.id}</span>
-                  <Badge variant={statusVariant[task.status] || 'neutral'}>{task.status}</Badge>
+                  <select
+                    value={task.status}
+                    onChange={(e) => handleStatusChange(e.target.value)}
+                    disabled={updateTask.isPending}
+                    className={`cursor-pointer rounded-full border-none px-2 py-0.5 text-xs font-medium focus:outline-none focus:ring-1 focus:ring-sky-500 ${STATUS_COLORS[task.status] || 'bg-surface-700 text-slate-300'}`}
+                  >
+                    {taskStatuses.map((s) => (
+                      <option key={s} value={s} className="bg-surface-800 text-slate-200">
+                        {s}
+                      </option>
+                    ))}
+                  </select>
                   <Badge variant="info">{task.type}</Badge>
                 </div>
-                <h2 className="mt-1 text-lg font-semibold text-slate-100">{task.title}</h2>
+                {editingTitle ? (
+                  <div className="mt-1 flex items-center gap-2">
+                    <input
+                      autoFocus
+                      value={draftTitle}
+                      onChange={(e) => setDraftTitle(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          updateTask.mutate({ id: taskId, title: draftTitle })
+                          setEditingTitle(false)
+                        }
+                        if (e.key === 'Escape') setEditingTitle(false)
+                      }}
+                      className="flex-1 rounded-md border border-surface-600 bg-surface-900 px-2 py-1 text-lg font-semibold text-slate-100 focus:border-sky-500/50 focus:outline-none"
+                    />
+                    <button
+                      onClick={() => {
+                        updateTask.mutate({ id: taskId, title: draftTitle })
+                        setEditingTitle(false)
+                      }}
+                      className="rounded bg-sky-600 px-2 py-1 text-xs text-white hover:bg-sky-500"
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={() => setEditingTitle(false)}
+                      className="rounded bg-surface-700 px-2 py-1 text-xs text-slate-400 hover:bg-surface-600"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                ) : (
+                  <h2
+                    className="mt-1 cursor-pointer text-lg font-semibold text-slate-100 hover:text-sky-300"
+                    onClick={() => {
+                      setDraftTitle(task.title)
+                      setEditingTitle(true)
+                    }}
+                    title="Click to edit title"
+                  >
+                    {task.title}
+                  </h2>
+                )}
               </div>
               <button onClick={onClose} className="ml-4 text-slate-500 hover:text-slate-300">
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -110,7 +158,55 @@ export function TaskDetailModal({
             <div className="flex-1 overflow-y-auto p-4">
               {tab === 'details' && (
                 <div className="space-y-4">
-                  {task.description && <MarkdownRenderer content={task.description} />}
+                  {editingDesc ? (
+                    <div className="space-y-2">
+                      <textarea
+                        autoFocus
+                        value={draftDesc}
+                        onChange={(e) => setDraftDesc(e.target.value)}
+                        rows={8}
+                        className="w-full rounded-md border border-surface-600 bg-surface-900 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:border-sky-500/50 focus:outline-none"
+                      />
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => {
+                            updateTask.mutate({ id: taskId, description: draftDesc })
+                            setEditingDesc(false)
+                          }}
+                          className="rounded bg-sky-600 px-3 py-1 text-xs font-medium text-white hover:bg-sky-500"
+                        >
+                          Save
+                        </button>
+                        <button
+                          onClick={() => setEditingDesc(false)}
+                          className="rounded bg-surface-700 px-3 py-1 text-xs text-slate-400 hover:bg-surface-600"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : task.description ? (
+                    <div
+                      className="cursor-pointer rounded p-1 hover:bg-surface-700/50"
+                      onClick={() => {
+                        setDraftDesc(task.description || '')
+                        setEditingDesc(true)
+                      }}
+                      title="Click to edit description"
+                    >
+                      <MarkdownRenderer content={task.description} />
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        setDraftDesc('')
+                        setEditingDesc(true)
+                      }}
+                      className="text-sm text-slate-500 hover:text-sky-400"
+                    >
+                      + Add description
+                    </button>
+                  )}
 
                   <div className="grid grid-cols-2 gap-3 text-sm">
                     {task.priority != null && (

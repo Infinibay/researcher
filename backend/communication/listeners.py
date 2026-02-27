@@ -64,6 +64,10 @@ class AgentMessageListener(BaseEventListener):
             else:
                 target_type, target_id = "broadcast", None
 
+            # Check if this message is a reply to a pending ask_team_lead / ask_project_lead
+            from backend.communication.response_event_registry import response_event_registry
+            is_question = response_event_registry.is_registered(msg.get("thread_id", ""))
+
             self.bus.emit(
                 FlowEvent(
                     event_type="agent_message_received",
@@ -77,6 +81,7 @@ class AgentMessageListener(BaseEventListener):
                         "message_id": msg["id"],
                         "thread_id": msg.get("thread_id"),
                         "content": msg.get("message", ""),
+                        "is_question": is_question,
                     },
                 )
             )
@@ -155,12 +160,27 @@ class CommunicationLoopListener(BaseEventListener):
     and escalates via LoopGuard if detected.
     """
 
+    # Cooldown period: once a thread is escalated, skip it for this many seconds.
+    ESCALATION_COOLDOWN = 600  # 10 minutes
+
     def __init__(self, project_id: int, **kwargs: Any) -> None:
         kwargs.setdefault("poll_interval", 30.0)
         super().__init__(project_id, **kwargs)
+        # {thread_id: timestamp_of_last_escalation}
+        self._escalated: dict[str, float] = {}
 
     def check(self) -> None:
-        from backend.communication.loop_guard import LoopGuard
+        import time as _time
+
+        now = _time.time()
+
+        # Purge stale cooldown entries (older than 2x cooldown)
+        stale = [
+            tid for tid, ts in self._escalated.items()
+            if now - ts > self.ESCALATION_COOLDOWN * 2
+        ]
+        for tid in stale:
+            del self._escalated[tid]
 
         def _query(conn: sqlite3.Connection) -> list[dict]:
             rows = conn.execute(
@@ -176,9 +196,17 @@ class CommunicationLoopListener(BaseEventListener):
 
         for thread_row in active_threads:
             thread_id = thread_row["thread_id"]
+
+            # Skip threads still in cooldown
+            last_escalated = self._escalated.get(thread_id)
+            if last_escalated and now - last_escalated < self.ESCALATION_COOLDOWN:
+                continue
+
             self._check_thread_for_loops(thread_id)
 
     def _check_thread_for_loops(self, thread_id: str) -> None:
+        import time as _time
+
         from backend.communication.loop_guard import LoopGuard
         from backend.config.settings import settings
 
@@ -227,8 +255,10 @@ class CommunicationLoopListener(BaseEventListener):
                         },
                     )
                 )
+                # Mark thread as escalated to avoid re-firing during cooldown
+                self._escalated[thread_id] = _time.time()
                 logger.warning(
                     "CommunicationLoopListener: loop detected in thread %s "
-                    "between %s (project %d)",
+                    "between %s (project %d) — cooldown started",
                     thread_id, agent_list, self.project_id,
                 )

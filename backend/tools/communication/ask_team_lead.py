@@ -2,12 +2,10 @@
 
 import json
 import sqlite3
-import time
 from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.config.settings import settings
 from backend.tools.base.base_tool import PabadaBaseTool
 from backend.tools.base.db import execute_with_retry
 from backend.tools.communication.send_message import SendMessageTool
@@ -17,6 +15,10 @@ _MAX_QUESTIONS_PER_TASK = 2
 
 class AskTeamLeadInput(BaseModel):
     question: str = Field(..., description="Question to ask the Team Lead")
+    thread_id: str | None = Field(
+        default=None,
+        description="Thread ID to continue an existing conversation. Pass the thread_id from a previous message in this conversation.",
+    )
     wait_for_response: bool = Field(
         default=True, description="Wait for a response (polling)"
     )
@@ -37,6 +39,7 @@ class AskTeamLeadTool(PabadaBaseTool):
     def _run(
         self,
         question: str,
+        thread_id: str | None = None,
         wait_for_response: bool = True,
         timeout: int = 300,
     ) -> str:
@@ -67,12 +70,25 @@ class AskTeamLeadTool(PabadaBaseTool):
                     "using AddCommentTool with prefix 'ASSUMPTION:'."
                 )
 
-        # Send the message
+        # Enrich the question with project state context
+        if project_id:
+            from backend.flows.helpers.messaging import build_enriched_message
+            enriched_question = build_enriched_message(
+                project_id, question,
+                sender_role="team_lead",
+                thread_id=thread_id,
+            )
+        else:
+            enriched_question = question
+
+        # Send the message — propagate agent binding to delegate
         sender = SendMessageTool()
+        self._bind_delegate(sender)
         send_result = sender._run(
-            message=question,
+            message=enriched_question,
             to_role="team_lead",
             priority=1,
+            thread_id=thread_id,
         )
 
         if not wait_for_response:
@@ -96,70 +112,76 @@ class AskTeamLeadTool(PabadaBaseTool):
                 project_id, task_id, agent_id, "team_lead", question,
             )
 
-        start = time.time()
-        poll_interval = settings.CHAT_POLL_INTERVAL
+        # Wait for reply via event-based notification (no polling)
+        from backend.communication.response_event_registry import response_event_registry
 
-        while time.time() - start < timeout:
-            time.sleep(poll_interval)
+        reply_event = response_event_registry.register(thread_id)
+        try:
+            replied = reply_event.wait(timeout=timeout)
 
-            def _check_reply(conn: sqlite3.Connection) -> dict | None:
-                row = conn.execute(
-                    """SELECT cm.id, cm.message, cm.created_at
-                       FROM chat_messages cm
-                       JOIN roster r ON cm.from_agent = r.agent_id
-                       WHERE cm.thread_id = ?
-                         AND r.role = 'team_lead'
-                         AND cm.from_agent != ?
-                         AND (
-                             cm.to_agent = ?
-                             OR cm.to_role IN (
-                                 SELECT role FROM roster WHERE agent_id = ?
+            if replied:
+                def _check_reply(conn: sqlite3.Connection) -> dict | None:
+                    row = conn.execute(
+                        """SELECT cm.id, cm.message, cm.created_at
+                           FROM chat_messages cm
+                           JOIN roster r ON cm.from_agent = r.agent_id
+                           WHERE cm.thread_id = ?
+                             AND r.role = 'team_lead'
+                             AND cm.from_agent != ?
+                             AND (
+                                 cm.to_agent = ?
+                                 OR cm.to_role IN (
+                                     SELECT role FROM roster WHERE agent_id = ?
+                                 )
+                                 OR (cm.to_agent IS NULL AND cm.to_role IS NULL)
                              )
-                             OR (cm.to_agent IS NULL AND cm.to_role IS NULL)
-                         )
-                         AND cm.id NOT IN (
-                             SELECT message_id FROM message_reads WHERE agent_id = ?
-                         )
-                       ORDER BY cm.created_at DESC
-                       LIMIT 1""",
-                    (thread_id, agent_id, agent_id, agent_id, agent_id),
-                ).fetchone()
-                if row:
-                    conn.execute(
-                        """INSERT OR IGNORE INTO message_reads (message_id, agent_id)
-                           VALUES (?, ?)""",
-                        (row["id"], agent_id),
-                    )
-                    conn.commit()
-                    return dict(row)
-                return None
-
-            try:
-                reply = execute_with_retry(_check_reply)
-                if reply:
-                    # Register answer and propagate
-                    if question_id and project_id:
-                        registry.register_answer(
-                            question_id, reply["message"], "team_lead",
+                             AND cm.id NOT IN (
+                                 SELECT message_id FROM message_reads WHERE agent_id = ?
+                             )
+                           ORDER BY cm.created_at DESC
+                           LIMIT 1""",
+                        (thread_id, agent_id, agent_id, agent_id, agent_id),
+                    ).fetchone()
+                    if row:
+                        conn.execute(
+                            """INSERT OR IGNORE INTO message_reads (message_id, agent_id)
+                               VALUES (?, ?)""",
+                            (row["id"], agent_id),
                         )
-                        registry.propagate_answer(question_id, project_id)
-                    self._log_tool_usage("Received response from Team Lead")
-                    return self._success({
-                        "response": reply["message"],
-                        "from": "team_lead",
-                        "thread_id": thread_id,
-                    })
-            except Exception:
-                pass
+                        conn.commit()
+                        return dict(row)
+                    return None
 
-        # Timeout — register assumption and instruct agent to proceed
-        if question_id:
-            registry.register_assumption(
-                question_id,
-                "No response — agent proceeding with assumptions",
+                try:
+                    reply = execute_with_retry(_check_reply)
+                    if reply:
+                        if question_id and project_id:
+                            registry.register_answer(
+                                question_id, reply["message"], "team_lead",
+                            )
+                            registry.propagate_answer(question_id, project_id)
+                        self._log_tool_usage("Received response from Team Lead")
+                        return self._success({
+                            "response": reply["message"],
+                            "from": "team_lead",
+                            "thread_id": thread_id,
+                        })
+                except Exception:
+                    pass
+
+            # Timeout — register assumption and instruct agent to proceed
+            if question_id:
+                registry.register_assumption(
+                    question_id,
+                    "No response — agent proceeding with assumptions",
+                )
+            return self._error(
+                f"No response from Team Lead within {timeout}s. "
+                "Proceed with your best judgment on the CURRENT task. "
+                "Document your assumption with AddCommentTool (prefix: ASSUMPTION:). "
+                "IMPORTANT: Do NOT create new tasks, epics, or other resources as a "
+                "workaround for the missing answer. Only continue working on your "
+                "assigned task using reasonable assumptions."
             )
-        return self._error(
-            f"No response from Team Lead within {timeout}s. "
-            "Proceed with your best judgment. Document your assumption "
-            "with AddCommentTool (prefix: ASSUMPTION:)."
-        )
+        finally:
+            response_event_registry.unregister(thread_id)

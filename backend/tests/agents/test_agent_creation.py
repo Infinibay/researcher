@@ -16,9 +16,16 @@ from backend.tools.base.context import set_context, get_context
 
 
 @pytest.fixture(autouse=True)
-def _fake_openai_key(monkeypatch):
-    """Provide a dummy OPENAI_API_KEY so CrewAI Agent() doesn't fail on init."""
+def _fake_llm_config(monkeypatch):
+    """Provide dummy LLM config so CrewAI Agent() doesn't fail on init."""
     monkeypatch.setenv("OPENAI_API_KEY", "sk-test-fake-key-for-unit-tests")
+    monkeypatch.setenv("PABADA_LLM_MODEL", "gpt-4.1-mini")
+    monkeypatch.setenv("PABADA_LLM_API_KEY", "sk-test-fake-key-for-unit-tests")
+
+    from backend.config.llm import _reset_llm_cache
+    _reset_llm_cache()
+    yield
+    _reset_llm_cache()
 
 
 @pytest.fixture

@@ -32,6 +32,8 @@ def create_developer_agent(
         backstory=backstory,
         project_id=project_id,
         allow_delegation=False,
-        max_iter=20,
+        max_iter=30,
+        reasoning=True,
+        max_reasoning_attempts=3,
         llm=llm,
     )

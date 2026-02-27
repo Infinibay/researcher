@@ -1,5 +1,6 @@
 """Tool for reading file contents with optional line-range selection."""
 
+import json
 import os
 from typing import Type
 
@@ -44,9 +45,10 @@ class ReadFileTool(PabadaBaseTool):
         offset: int | None = None,
         limit: int | None = None,
     ) -> str:
-        path = os.path.expanduser(path)
-        if not os.path.isabs(path):
-            path = os.path.abspath(path)
+        path = self._resolve_path(os.path.expanduser(path))
+
+        if self._is_pod_mode():
+            return self._run_in_pod(path, offset, limit)
 
         # Sandbox check (resolves symlinks, enforces directory boundaries)
         sandbox_err = self._validate_sandbox_path(path)
@@ -96,3 +98,36 @@ class ReadFileTool(PabadaBaseTool):
 
         self._log_tool_usage(f"Read {path} ({desc})")
         return content
+
+    def _run_in_pod(
+        self, path: str, offset: int | None, limit: int | None,
+    ) -> str:
+        """Read file via pabada-file-helper inside the pod."""
+        req = {"op": "read", "path": path}
+        if offset is not None:
+            req["offset"] = offset
+        if limit is not None:
+            req["limit"] = limit
+
+        try:
+            result = self._exec_in_pod(
+                ["pabada-file-helper"],
+                stdin_data=json.dumps(req),
+            )
+        except RuntimeError as e:
+            return self._error(f"Pod execution failed: {e}")
+
+        if result.exit_code != 0:
+            return self._error(f"File helper error: {result.stderr.strip()}")
+
+        try:
+            resp = json.loads(result.stdout)
+        except json.JSONDecodeError:
+            return self._error(f"Invalid response from file helper: {result.stdout[:200]}")
+
+        if not resp.get("ok"):
+            return self._error(resp.get("error", "Unknown error"))
+
+        data = resp["data"]
+        self._log_tool_usage(f"Read {path} (pod, {data.get('total_lines', '?')} lines)")
+        return data["content"]

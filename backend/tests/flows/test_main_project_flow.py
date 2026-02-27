@@ -30,9 +30,10 @@ class TestMainProjectFlowHelpers:
         state = load_project_state(executing_project)
         assert state is not None
         assert state["status"] == "executing"
-        assert state["total_tasks"] == 3
-        assert state["task_counts"]["pending"] == 1
-        assert state["task_counts"]["backlog"] == 2
+        assert state["total_tasks"] == 4
+        assert state["task_counts"]["pending"] == 2
+        assert state["task_counts"]["backlog"] == 1
+        assert state["task_counts"]["in_progress"] == 1
 
     def test_update_project_status(self, db_conn, sample_project):
         update_project_status(sample_project, "planning")
@@ -84,7 +85,7 @@ class TestMainProjectFlowInitialize:
 
         # Routing is now handled by the router method
         route = flow.route_initialization()
-        assert route == "new_project"
+        assert route == "start_planning"
 
     @patch("backend.flows.main_project_flow.log_flow_event")
     def test_initialize_resume_executing(self, mock_log, db_conn, executing_project):
@@ -152,14 +153,14 @@ class TestMainProjectFlowTaskRouting:
         assert result == "no_pending_tasks"
 
     def test_route_initialization_new(self, db_conn):
-        """route_initialization routes NEW status to new_project."""
+        """route_initialization routes NEW status to start_planning."""
         from backend.flows.main_project_flow import MainProjectFlow
 
         flow = MainProjectFlow()
         flow.state.status = ProjectStatus.NEW
 
         result = flow.route_initialization()
-        assert result == "new_project"
+        assert result == "start_planning"
 
     @patch("backend.flows.main_project_flow.log_flow_event")
     def test_route_initialization_executing(self, mock_log, db_conn):
@@ -185,6 +186,5 @@ class TestMainProjectFlowPlanRejection:
         flow.state.feedback = "Need more detail"
 
         result = flow.handle_rejection()
-        # @listen() methods no longer return routing strings
-        assert result is None
+        assert result == "start_planning"
         assert flow.state.plan == ""

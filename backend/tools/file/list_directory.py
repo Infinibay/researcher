@@ -1,6 +1,7 @@
 """Tool for listing directory contents."""
 
 import fnmatch
+import json
 import os
 from typing import Type
 
@@ -29,9 +30,14 @@ class ListDirectoryTool(PabadaBaseTool):
     def _run(
         self, path: str = ".", recursive: bool = False, pattern: str | None = None
     ) -> str:
-        path = os.path.expanduser(path)
-        if not os.path.isabs(path):
-            path = os.path.abspath(path)
+        # Normalise — LLMs sometimes pass "None" as a string instead of null
+        if pattern is not None and pattern.lower() in ("none", "null", ""):
+            pattern = None
+
+        path = self._resolve_path(os.path.expanduser(path))
+
+        if self._is_pod_mode():
+            return self._run_in_pod(path, recursive, pattern)
 
         # Sandbox check (resolves symlinks, enforces directory boundaries)
         sandbox_err = self._validate_sandbox_path(path)
@@ -111,4 +117,39 @@ class ListDirectoryTool(PabadaBaseTool):
             "entries": entries,
             "total": len(entries),
             "truncated": truncated,
+        })
+
+    def _run_in_pod(
+        self, path: str, recursive: bool, pattern: str | None,
+    ) -> str:
+        """List directory via pabada-file-helper inside the pod."""
+        req = {"op": "list", "path": path, "recursive": recursive}
+        if pattern:
+            req["pattern"] = pattern
+
+        try:
+            result = self._exec_in_pod(
+                ["pabada-file-helper"],
+                stdin_data=json.dumps(req),
+            )
+        except RuntimeError as e:
+            return self._error(f"Pod execution failed: {e}")
+
+        if result.exit_code != 0:
+            return self._error(f"File helper error: {result.stderr.strip()}")
+
+        try:
+            resp = json.loads(result.stdout)
+        except json.JSONDecodeError:
+            return self._error(f"Invalid response from file helper: {result.stdout[:200]}")
+
+        if not resp.get("ok"):
+            return self._error(resp.get("error", "Unknown error"))
+
+        data = resp["data"]
+        return self._success({
+            "path": path,
+            "entries": data["entries"],
+            "total": data["count"],
+            "truncated": data["truncated"],
         })

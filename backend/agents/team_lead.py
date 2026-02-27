@@ -32,6 +32,8 @@ def create_team_lead_agent(
         backstory=backstory,
         project_id=project_id,
         allow_delegation=True,
-        max_iter=25,
+        max_iter=30,
+        reasoning=True,
+        max_reasoning_attempts=3,
         llm=llm,
     )

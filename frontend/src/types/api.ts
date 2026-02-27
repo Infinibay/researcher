@@ -222,6 +222,8 @@ export interface AgentActivityEvent {
   content?: string
   kind?: string
   entity_id?: number
+  task_title?: string
+  branch_name?: string
 }
 
 export interface Repository {
@@ -279,4 +281,13 @@ export interface FileContent {
   sha: string
   size: number
   html_url?: string
+}
+
+export interface FlowState {
+  flow_name: string | null
+  current_step: string | null
+  subflow_name: string | null
+  subflow_step: string | null
+  state_summary: Record<string, unknown> | null
+  updated_at: string | null
 }

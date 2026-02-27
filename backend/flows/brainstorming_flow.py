@@ -14,21 +14,22 @@ from __future__ import annotations
 import json
 import logging
 from datetime import datetime, timezone
-from typing import Any
-
-from crewai import Crew, Task
 from crewai.flow.flow import Flow, listen, or_, router, start
 from crewai.flow.persistence import persist
 
 from backend.agents.registry import get_agent_by_role
+from backend.flows.guardrails import validate_brainstorm_task_creation
 from backend.flows.helpers import (
     calculate_time_elapsed,
     classify_approval_response,
+    format_ideas,
     load_project_state,
     log_flow_event,
     notify_team_lead,
     parse_ideas,
+    run_agent_task,
 )
+from backend.flows.snapshot_service import update_subflow_step
 from backend.flows.state_models import BrainstormPhase, BrainstormState
 from backend.prompts.project_lead import tasks as pl_tasks
 from backend.prompts.shared import brainstorm_round
@@ -46,6 +47,7 @@ class BrainstormingFlow(Flow[BrainstormState]):
     @start()
     def start_session(self):
         """Configure participants and start the brainstorming session."""
+        update_subflow_step(self.state.project_id, "brainstorming_flow", "start_session")
         logger.info(
             "BrainstormingFlow: start_session (project_id=%d)",
             self.state.project_id,
@@ -74,6 +76,15 @@ class BrainstormingFlow(Flow[BrainstormState]):
         self.state.phase = BrainstormPhase.BRAINSTORM
         self.state.round_count = 0
 
+        # Create a brainstorming thread for chat visibility
+        from backend.communication.thread_manager import ThreadManager
+        tm = ThreadManager()
+        self.state.thread_id = tm.create_thread(
+            project_id=self.state.project_id,
+            thread_type="brainstorming",
+            participants=self.state.participants,
+        )
+
         log_flow_event(
             self.state.project_id, "brainstorm_started", "brainstorming_flow",
             "project", self.state.project_id,
@@ -82,7 +93,7 @@ class BrainstormingFlow(Flow[BrainstormState]):
 
     # ── Brainstorm phase ──────────────────────────────────────────────────
 
-    @router(or_("start_session", "continue_brainstorm", "reset_for_new_round"))
+    @router(or_("start_session", "continue_brainstorm_bridge", "reset_for_new_round"))
     def brainstorm_phase(self):
         """Each agent proposes ideas within the time limit.
 
@@ -106,41 +117,12 @@ class BrainstormingFlow(Flow[BrainstormState]):
         # Collect existing ideas for context
         existing = ""
         if self.state.ideas:
-            idea_list = "\n".join(
-                f"- {idea.get('title', 'Untitled')}: {idea.get('description', '')}"
-                for idea in self.state.ideas
+            existing = (
+                f"\n\nPrevious ideas proposed:\n"
+                f"{format_ideas(self.state.ideas, numbered=False)}\n"
             )
-            existing = f"\n\nPrevious ideas proposed:\n{idea_list}\n"
 
-        # Each participant proposes ideas
-        for role in self.state.participants:
-            agent = get_agent_by_role(role, self.state.project_id)
-            agent.activate_context()
-
-            desc, expected = brainstorm_round(
-                round_count=self.state.round_count,
-                project_name=self.state.project_name,
-                project_description=self.state.project_description,
-                project_type=self.state.project_type,
-                existing_ideas=existing,
-                user_feedback=self.state.user_feedback,
-            )
-            crew = Crew(
-                agents=[agent.crewai_agent],
-                tasks=[Task(
-                    description=desc,
-                    agent=agent.crewai_agent,
-                    expected_output=expected,
-                )],
-                verbose=True,
-            )
-            result = str(crew.kickoff())
-
-            new_ideas = parse_ideas(result)
-            for idea in new_ideas:
-                idea["proposed_by"] = role
-                idea["round"] = self.state.round_count
-            self.state.ideas.extend(new_ideas)
+        self._collect_ideas_from_participants(existing)
 
         # Check time again
         elapsed = calculate_time_elapsed(self.state.start_time)
@@ -152,9 +134,45 @@ class BrainstormingFlow(Flow[BrainstormState]):
 
         return "brainstorm_time_up"
 
+    def _collect_ideas_from_participants(self, existing: str) -> None:
+        """Run one brainstorm round: each participant proposes ideas and appends them to state."""
+        for role in self.state.participants:
+            agent = get_agent_by_role(role, self.state.project_id)
+            result = run_agent_task(agent, brainstorm_round(
+                round_count=self.state.round_count,
+                project_name=self.state.project_name,
+                project_description=self.state.project_description,
+                project_type=self.state.project_type,
+                existing_ideas=existing,
+                user_feedback=self.state.user_feedback,
+            ))
+
+            new_ideas = parse_ideas(result)
+            for idea in new_ideas:
+                idea["proposed_by"] = role
+                idea["round"] = self.state.round_count
+            self.state.ideas.extend(new_ideas)
+
+            # Post ideas to the brainstorming thread for chat visibility
+            if self.state.thread_id and result:
+                from backend.flows.helpers.messaging import send_agent_message
+                send_agent_message(
+                    project_id=self.state.project_id,
+                    from_agent=agent.agent_id,
+                    to_agent=None,
+                    to_role=None,
+                    message=result,
+                    conversation_type="broadcast",
+                    thread_id=self.state.thread_id,
+                )
+
     @listen("continue_brainstorm")
-    def bridge_continue_brainstorm(self):
-        """Bridge to trigger brainstorm_phase again via or_()."""
+    def continue_brainstorm_bridge(self):
+        """No-op bridge required by CrewAI's ``or_()`` routing pattern.
+
+        ``brainstorm_phase`` is a ``@router`` and cannot listen to itself;
+        this listener re-triggers it after each ``'continue_brainstorm'`` signal.
+        """
         pass
 
     # ── Consolidation ─────────────────────────────────────────────────────
@@ -162,6 +180,7 @@ class BrainstormingFlow(Flow[BrainstormState]):
     @listen("brainstorm_time_up")
     def consolidate_ideas(self):
         """Team Lead consolidates, deduplicates, and ranks ideas."""
+        update_subflow_step(self.state.project_id, "brainstorming_flow", "consolidate_ideas")
         logger.info(
             "BrainstormingFlow: consolidate_ideas (%d ideas)",
             len(self.state.ideas),
@@ -170,27 +189,29 @@ class BrainstormingFlow(Flow[BrainstormState]):
         self.state.phase = BrainstormPhase.CONSOLIDATION
 
         team_lead = get_agent_by_role("team_lead", self.state.project_id)
-        team_lead.activate_context()
-
-        ideas_text = "\n".join(
-            f"- [{idea.get('proposed_by', '?')}] {idea.get('title', 'Untitled')}: "
-            f"{idea.get('description', '')}"
-            for idea in self.state.ideas
+        ideas_text = format_ideas(
+            self.state.ideas, numbered=False, include_attribution=True,
         )
-
-        desc, expected = tl_tasks.consolidate_ideas(ideas_text)
-        crew = Crew(
-            agents=[team_lead.crewai_agent],
-            tasks=[Task(
-                description=desc,
-                agent=team_lead.crewai_agent,
-                expected_output=expected,
-            )],
-            verbose=True,
-        )
-        result = str(crew.kickoff())
+        result = run_agent_task(team_lead, tl_tasks.consolidate_ideas(
+            ideas_text,
+            project_id=self.state.project_id,
+            project_name=self.state.project_name,
+        ))
 
         self.state.consolidated_ideas = parse_ideas(result)
+
+        # Post consolidation summary to the brainstorming thread
+        if self.state.thread_id and result:
+            from backend.flows.helpers.messaging import send_agent_message
+            send_agent_message(
+                project_id=self.state.project_id,
+                from_agent=team_lead.agent_id,
+                to_agent=None,
+                to_role=None,
+                message=result,
+                conversation_type="broadcast",
+                thread_id=self.state.thread_id,
+            )
 
         log_flow_event(
             self.state.project_id, "ideas_consolidated", "brainstorming_flow",
@@ -203,32 +224,35 @@ class BrainstormingFlow(Flow[BrainstormState]):
     @listen("consolidate_ideas")
     def decision_phase(self):
         """Agents discuss and vote on consolidated ideas within the time limit."""
+        update_subflow_step(self.state.project_id, "brainstorming_flow", "decision_phase")
         logger.info("BrainstormingFlow: decision_phase")
 
         self.state.phase = BrainstormPhase.DECISION
         self.state.decision_start_time = datetime.now(timezone.utc).isoformat()
 
-        consolidated_text = "\n".join(
-            f"{i+1}. {idea.get('title', 'Untitled')}: {idea.get('description', '')}"
-            for i, idea in enumerate(self.state.consolidated_ideas)
-        )
+        consolidated_text = format_ideas(self.state.consolidated_ideas)
 
         team_lead = get_agent_by_role("team_lead", self.state.project_id)
-        team_lead.activate_context()
-
-        desc, expected = tl_tasks.select_ideas(consolidated_text)
-        crew = Crew(
-            agents=[team_lead.crewai_agent],
-            tasks=[Task(
-                description=desc,
-                agent=team_lead.crewai_agent,
-                expected_output=expected,
-            )],
-            verbose=True,
-        )
-        result = str(crew.kickoff())
+        result = run_agent_task(team_lead, tl_tasks.select_ideas(
+            consolidated_text,
+            project_id=self.state.project_id,
+            project_name=self.state.project_name,
+        ))
 
         self.state.selected_ideas = parse_ideas(result)
+
+        # Post selected ideas to the brainstorming thread
+        if self.state.thread_id and result:
+            from backend.flows.helpers.messaging import send_agent_message
+            send_agent_message(
+                project_id=self.state.project_id,
+                from_agent=team_lead.agent_id,
+                to_agent=None,
+                to_role=None,
+                message=result,
+                conversation_type="broadcast",
+                thread_id=self.state.thread_id,
+            )
 
         # Check decision time limit
         elapsed = calculate_time_elapsed(self.state.decision_start_time)
@@ -256,25 +280,23 @@ class BrainstormingFlow(Flow[BrainstormState]):
 
         self.state.phase = BrainstormPhase.PRESENTATION
 
+        from backend.prompts.team import build_conversation_context
+
         project_lead = get_agent_by_role("project_lead", self.state.project_id)
-        project_lead.activate_context()
-
-        ideas_text = "\n".join(
-            f"{i+1}. {idea.get('title', 'Untitled')}: {idea.get('description', '')}"
-            for i, idea in enumerate(self.state.selected_ideas)
+        ideas_text = format_ideas(self.state.selected_ideas)
+        conv_ctx = build_conversation_context(
+            project_id=self.state.project_id,
+            agent_id=project_lead.agent_id,
         )
-
-        desc, expected = pl_tasks.present_brainstorm_ideas(ideas_text)
-        crew = Crew(
-            agents=[project_lead.crewai_agent],
-            tasks=[Task(
-                description=desc,
-                agent=project_lead.crewai_agent,
-                expected_output=expected,
-            )],
-            verbose=True,
-        )
-        result = str(crew.kickoff()).strip()
+        result = run_agent_task(
+            project_lead, pl_tasks.present_brainstorm_ideas(
+                ideas_text,
+                project_name=self.state.project_name,
+                project_id=self.state.project_id,
+                requirements=self.state.project_description,
+                conversation_context=conv_ctx,
+            ),
+        ).strip()
 
         if classify_approval_response(result) == "approved":
             self.state.user_approved = True
@@ -319,12 +341,7 @@ class BrainstormingFlow(Flow[BrainstormState]):
 
     @listen("restart_brainstorm")
     def reset_for_new_round(self):
-        """Reset state for a new brainstorming round after rejection.
-
-        Triggers "reset_for_new_round" → brainstorm_phase would need to pick up.
-        But brainstorm_phase is a router on or_(start_session, continue_brainstorm).
-        We need another bridge.
-        """
+        """Reset ideas, timers, and round counter for a new brainstorm cycle after user rejection."""
         logger.info(
             "BrainstormingFlow: ideas rejected (attempt %d/%d), restarting",
             self.state.rejection_attempts, self.state.max_rejection_attempts,
@@ -343,11 +360,6 @@ class BrainstormingFlow(Flow[BrainstormState]):
             {"feedback": self.state.user_feedback},
         )
 
-    # Bridge: reset_for_new_round → brainstorm_phase
-    # brainstorm_phase is a router on or_("start_session", "continue_brainstorm", "reset_for_new_round")
-    # We add "reset_for_new_round" to the or_() condition above — but we already defined it.
-    # Let me fix the or_() in brainstorm_phase to include "reset_for_new_round".
-
     @listen("rejections_exhausted")
     def handle_rejections_exhausted(self):
         """Flow ends — brainstorming produced no approved results."""
@@ -361,6 +373,7 @@ class BrainstormingFlow(Flow[BrainstormState]):
     @listen("approved")
     def create_tasks_from_ideas(self):
         """Team Lead creates epics/milestones/tasks from approved ideas."""
+        update_subflow_step(self.state.project_id, "brainstorming_flow", "create_tasks_from_ideas")
         logger.info(
             "BrainstormingFlow: create_tasks_from_ideas (%d ideas)",
             len(self.state.selected_ideas),
@@ -368,27 +381,17 @@ class BrainstormingFlow(Flow[BrainstormState]):
 
         self.state.phase = BrainstormPhase.COMPLETE
 
+        from backend.tools import get_tools_for_task_type
+
         team_lead = get_agent_by_role("team_lead", self.state.project_id)
-        team_lead.activate_context()
-
-        ideas_text = "\n".join(
-            f"{i+1}. {idea.get('title', 'Untitled')}: {idea.get('description', '')}"
-            for i, idea in enumerate(self.state.selected_ideas)
+        ideas_text = format_ideas(self.state.selected_ideas)
+        result = run_agent_task(
+            team_lead,
+            tl_tasks.create_tasks_from_ideas(self.state.project_id, ideas_text),
+            task_tools=get_tools_for_task_type("create_tickets"),
+            guardrail=validate_brainstorm_task_creation(self.state.project_id),
+            guardrail_max_retries=3,
         )
-
-        desc, expected = tl_tasks.create_tasks_from_ideas(
-            self.state.project_id, ideas_text,
-        )
-        crew = Crew(
-            agents=[team_lead.crewai_agent],
-            tasks=[Task(
-                description=desc,
-                agent=team_lead.crewai_agent,
-                expected_output=expected,
-            )],
-            verbose=True,
-        )
-        result = crew.kickoff()
 
         log_flow_event(
             self.state.project_id, "brainstorm_tasks_created", "brainstorming_flow",

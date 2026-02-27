@@ -29,13 +29,18 @@ class TestCanTransition:
             ("backlog", "done"),
             ("backlog", "in_progress"),
             ("backlog", "review_ready"),
+            ("backlog", "failed"),
             ("pending", "done"),
             ("pending", "backlog"),
             ("in_progress", "done"),
             ("in_progress", "pending"),
             ("done", "pending"),
             ("done", "backlog"),
+            ("done", "failed"),
             ("cancelled", "backlog"),
+            ("cancelled", "failed"),
+            ("failed", "in_progress"),
+            ("failed", "done"),
         ],
     )
     def test_can_transition_invalid(self, current, target):
@@ -57,7 +62,7 @@ class TestValidateTransition:
 
 
 class TestIsTerminal:
-    @pytest.mark.parametrize("status", ["done", "cancelled"])
+    @pytest.mark.parametrize("status", ["done", "cancelled", "failed"])
     def test_terminal_statuses(self, status):
         assert TaskStateMachine.is_terminal(status) is True
 
@@ -71,22 +76,25 @@ class TestGetAllowedTransitions:
         assert TaskStateMachine.get_allowed_transitions("backlog") == {"pending", "cancelled"}
 
     def test_pending_transitions(self):
-        assert TaskStateMachine.get_allowed_transitions("pending") == {"in_progress", "cancelled"}
+        assert TaskStateMachine.get_allowed_transitions("pending") == {"in_progress", "failed", "cancelled"}
 
     def test_in_progress_transitions(self):
-        assert TaskStateMachine.get_allowed_transitions("in_progress") == {"review_ready", "cancelled"}
+        assert TaskStateMachine.get_allowed_transitions("in_progress") == {"review_ready", "failed", "cancelled"}
 
     def test_review_ready_transitions(self):
-        assert TaskStateMachine.get_allowed_transitions("review_ready") == {"done", "rejected", "cancelled"}
+        assert TaskStateMachine.get_allowed_transitions("review_ready") == {"done", "rejected", "failed", "cancelled"}
 
     def test_rejected_transitions(self):
-        assert TaskStateMachine.get_allowed_transitions("rejected") == {"in_progress", "cancelled"}
+        assert TaskStateMachine.get_allowed_transitions("rejected") == {"in_progress", "failed", "cancelled"}
 
     def test_done_transitions(self):
         assert TaskStateMachine.get_allowed_transitions("done") == set()
 
     def test_cancelled_transitions(self):
         assert TaskStateMachine.get_allowed_transitions("cancelled") == set()
+
+    def test_failed_transitions(self):
+        assert TaskStateMachine.get_allowed_transitions("failed") == {"pending", "cancelled"}
 
     def test_unknown_status_returns_empty(self):
         assert TaskStateMachine.get_allowed_transitions("imaginary") == set()

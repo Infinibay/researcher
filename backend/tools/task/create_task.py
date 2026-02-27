@@ -49,6 +49,12 @@ class CreateTaskTool(PabadaBaseTool):
         if depends_on is None:
             depends_on = []
 
+        # Normalise — LLMs sometimes pass "None" as a string instead of null
+        if milestone_id is not None and str(milestone_id).lower() in ("none", "null", ""):
+            milestone_id = None
+        if epic_id is not None and str(epic_id).lower() in ("none", "null", ""):
+            epic_id = None
+
         if type not in TASK_TYPES:
             return self._error(f"Invalid task type '{type}'. Must be one of: {', '.join(TASK_TYPES)}")
         if complexity not in COMPLEXITY_LEVELS:
@@ -56,6 +62,51 @@ class CreateTaskTool(PabadaBaseTool):
 
         project_id = self._validate_project_context()
         created_by = self.agent_id or "unknown"
+
+        # --- Hard limit on tasks per milestone ---
+        if milestone_id is not None:
+            from backend.config.settings import settings
+
+            def _count_in_milestone(conn: sqlite3.Connection) -> int:
+                row = conn.execute(
+                    "SELECT COUNT(*) as cnt FROM tasks WHERE milestone_id = ?",
+                    (milestone_id,),
+                ).fetchone()
+                return row["cnt"]
+
+            task_count = execute_with_retry(_count_in_milestone)
+            if task_count >= settings.MAX_TASKS_PER_MILESTONE:
+                return self._error(
+                    f"Cannot create task: milestone {milestone_id} already has "
+                    f"{task_count} tasks (limit: {settings.MAX_TASKS_PER_MILESTONE})."
+                )
+
+        # --- Semantic dedup check ---
+        def _fetch_existing(conn: sqlite3.Connection) -> list[dict]:
+            rows = conn.execute(
+                "SELECT id, title FROM tasks WHERE project_id = ?",
+                (project_id,),
+            ).fetchall()
+            return [{"id": r["id"], "title": r["title"]} for r in rows]
+
+        try:
+            existing = execute_with_retry(_fetch_existing)
+            if existing:
+                from backend.config.settings import settings
+                from backend.tools.base.dedup import find_semantic_duplicate
+
+                match = find_semantic_duplicate(
+                    title, existing, settings.DEDUP_SIMILARITY_THRESHOLD,
+                )
+                if match:
+                    return self._error(
+                        f"Semantic duplicate detected: existing task "
+                        f"'{match['title']}' (ID: {match['id']}) is "
+                        f"{match['similarity']:.0%} similar to '{title}'. "
+                        f"Use the existing task instead of creating a new one."
+                    )
+        except Exception:
+            pass  # dedup is best-effort; don't block creation
 
         def _create(conn: sqlite3.Connection) -> dict:
             # Validate epic/milestone exist if provided

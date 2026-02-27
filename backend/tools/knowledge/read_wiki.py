@@ -6,7 +6,7 @@ from typing import Type
 from pydantic import BaseModel, Field
 
 from backend.tools.base.base_tool import PabadaBaseTool
-from backend.tools.base.db import execute_with_retry
+from backend.tools.base.db import execute_with_retry, sanitize_fts5_query
 
 
 class ReadWikiInput(BaseModel):
@@ -48,6 +48,7 @@ class ReadWikiTool(PabadaBaseTool):
 
             elif search:
                 # Full-text search
+                safe_search = sanitize_fts5_query(search)
                 rows = conn.execute(
                     """SELECT wp.id, wp.path, wp.title,
                               snippet(wiki_fts, 2, '<b>', '</b>', '...', 64) AS snippet,
@@ -58,7 +59,7 @@ class ReadWikiTool(PabadaBaseTool):
                          AND (wp.project_id = ? OR wp.project_id IS NULL)
                        ORDER BY rank
                        LIMIT 20""",
-                    (search, project_id),
+                    (safe_search, project_id),
                 ).fetchall()
                 return {"results": [dict(r) for r in rows], "count": len(rows)}
 

@@ -1,0 +1,35 @@
+# PABADA — Python dependencies
+# Install: pip install -r requirements.txt
+
+# Core framework
+crewai>=1.10.0a1
+fastapi>=0.129.0
+uvicorn[standard]>=0.41.0
+pydantic>=2.11.0
+pydantic-settings>=2.10.0
+
+# LLM providers (litellm routes to OpenAI, Anthropic, Gemini, DeepSeek, Ollama…)
+litellm>=1.81.0
+ollama>=0.6.0
+
+# Web tools
+httpx>=0.28.0
+duckduckgo-search>=8.1.0
+ddgs>=9.10.0
+trafilatura>=2.0.0
+
+# RAG / embeddings
+chromadb>=1.1.0
+numpy>=2.0.0
+
+# PDF processing
+pypdf>=5.0.0
+
+# CrewAI native tools (SerperDev, ScrapeWebsite, CodeDocsSearch, doc tools)
+crewai-tools>=1.9.0
+
+# Spider scraper (optional, for SpiderTool)
+spider-client>=0.1.0
+
+# Testing
+pytest>=9.0.0

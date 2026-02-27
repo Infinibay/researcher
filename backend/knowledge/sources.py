@@ -278,12 +278,12 @@ class ReportsKnowledgeSource(BaseKnowledgeSource):
     project_id: int
 
     def load_content(self) -> list[dict[str, str]]:
-        """Fetch report artifacts and read their content from disk."""
+        """Fetch report artifacts — prefer DB content, fall back to file."""
         pid = self.project_id
 
         def _query(conn: sqlite3.Connection) -> list[dict]:
             rows = conn.execute(
-                """SELECT id, file_path, description
+                """SELECT id, file_path, description, content
                    FROM artifacts
                    WHERE type = 'report' AND project_id = ?""",
                 (pid,),
@@ -298,17 +298,21 @@ class ReportsKnowledgeSource(BaseKnowledgeSource):
 
         content_chunks = []
         for report in reports:
-            fpath = report.get("file_path", "")
-            if not fpath or not os.path.exists(fpath):
-                logger.debug("Skipping missing report file: %s", fpath)
-                continue
+            # Prefer content stored in DB
+            file_content = report.get("content")
 
-            try:
-                with open(fpath, "r", encoding="utf-8", errors="replace") as f:
-                    file_content = f.read()
-            except Exception:
-                logger.debug("Failed to read report file: %s", fpath, exc_info=True)
-                continue
+            # Fall back to filesystem when DB content is empty
+            if not file_content:
+                fpath = report.get("file_path", "")
+                if not fpath or not os.path.exists(fpath):
+                    logger.debug("Skipping missing report file: %s", fpath)
+                    continue
+                try:
+                    with open(fpath, "r", encoding="utf-8", errors="replace") as f:
+                        file_content = f.read()
+                except Exception:
+                    logger.debug("Failed to read report file: %s", fpath, exc_info=True)
+                    continue
 
             description = report.get("description", "")
             content_chunks.append({

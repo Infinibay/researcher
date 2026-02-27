@@ -1,6 +1,7 @@
 """Tool for surgical file edits using search-and-replace."""
 
 import hashlib
+import json
 import os
 import sqlite3
 import tempfile
@@ -60,9 +61,10 @@ class EditFileTool(PabadaBaseTool):
         if old_string == new_string:
             return self._error("old_string and new_string are identical — nothing to change.")
 
-        path = os.path.expanduser(path)
-        if not os.path.isabs(path):
-            path = os.path.abspath(path)
+        path = self._resolve_path(os.path.expanduser(path))
+
+        if self._is_pod_mode():
+            return self._run_in_pod(path, old_string, new_string, replace_all)
 
         # Sandbox check
         sandbox_err = self._validate_sandbox_path(path)
@@ -170,4 +172,67 @@ class EditFileTool(PabadaBaseTool):
             "action": "modified",
             "replacements": replacements,
             "size_bytes": new_size,
+        })
+
+    def _run_in_pod(
+        self, path: str, old_string: str, new_string: str, replace_all: bool,
+    ) -> str:
+        """Edit file via pabada-file-helper inside the pod."""
+        req = {
+            "op": "edit",
+            "path": path,
+            "old_string": old_string,
+            "new_string": new_string,
+            "replace_all": replace_all,
+        }
+
+        try:
+            result = self._exec_in_pod(
+                ["pabada-file-helper"],
+                stdin_data=json.dumps(req),
+            )
+        except RuntimeError as e:
+            return self._error(f"Pod execution failed: {e}")
+
+        if result.exit_code != 0:
+            return self._error(f"File helper error: {result.stderr.strip()}")
+
+        try:
+            resp = json.loads(result.stdout)
+        except json.JSONDecodeError:
+            return self._error(f"Invalid response from file helper: {result.stdout[:200]}")
+
+        if not resp.get("ok"):
+            return self._error(resp.get("error", "Unknown error"))
+
+        data = resp["data"]
+
+        # Record in artifact_changes for audit
+        project_id = self.project_id
+        agent_run_id = self.agent_run_id
+
+        def _record_change(conn: sqlite3.Connection):
+            conn.execute(
+                """INSERT INTO artifact_changes
+                   (project_id, agent_run_id, file_path, action, before_hash, after_hash, size_bytes)
+                   VALUES (?, ?, ?, ?, ?, ?, ?)""",
+                (project_id, agent_run_id, path, "modified",
+                 data.get("before_hash"), data["after_hash"], data["size_bytes"]),
+            )
+            conn.commit()
+
+        try:
+            execute_with_retry(_record_change)
+        except Exception:
+            pass
+
+        replacements = data["replacements"]
+        self._log_tool_usage(
+            f"Edited {path} (pod, {replacements} replacement{'s' if replacements > 1 else ''}, {data['size_bytes']} bytes)"
+        )
+        return self._success({
+            "path": path,
+            "action": "modified",
+            "replacements": replacements,
+            "size_bytes": data["size_bytes"],
         })

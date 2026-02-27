@@ -3,9 +3,12 @@
 from __future__ import annotations
 
 import base64
+import hashlib
 import json
+import logging
 import re
 import sqlite3
+import subprocess
 
 from fastapi import APIRouter, HTTPException, Query
 
@@ -24,6 +27,8 @@ from backend.api.models.git import (
     RepoTreeEntry,
 )
 from backend.config.settings import settings
+
+logger = logging.getLogger(__name__)
 from backend.git import (
     branch_service,
     cleanup_service,
@@ -201,28 +206,26 @@ async def list_repo_branches(
     repo_name: str,
     project_id: int = Query(...),
 ):
-    """List branches for a repository via Forgejo, with commit metadata."""
-    if not settings.FORGEJO_API_URL or not _is_forgejo_remote(project_id, repo_name):
-        # Fallback to DB-only branches when Forgejo is not configured or
-        # the remote is not a Forgejo instance.
-        db_branches = branch_service.list_branches(project_id, repo_name=repo_name)
-        return [BranchDetail(name=b["branch_name"]) for b in db_branches]
+    """List branches for a repository via Forgejo or local git."""
+    if settings.FORGEJO_API_URL and _is_forgejo_remote(project_id, repo_name):
+        owner_repo = _require_forgejo_remote(project_id, repo_name)
+        branches = forgejo_client.get_branches(owner_repo)
+        return [
+            BranchDetail(
+                name=b["name"],
+                last_commit_sha=b.get("commit", {}).get("id"),
+                last_commit_message=b.get("commit", {}).get("message"),
+                last_commit_date=b.get("commit", {}).get("timestamp"),
+                committer_name=b.get("commit", {}).get("committer", {}).get("name")
+                if b.get("commit", {}).get("committer")
+                else None,
+            )
+            for b in branches
+        ]
 
-    owner_repo = _require_forgejo_remote(project_id, repo_name)
-
-    branches = forgejo_client.get_branches(owner_repo)
-    return [
-        BranchDetail(
-            name=b["name"],
-            last_commit_sha=b.get("commit", {}).get("id"),
-            last_commit_message=b.get("commit", {}).get("message"),
-            last_commit_date=b.get("commit", {}).get("timestamp"),
-            committer_name=b.get("commit", {}).get("committer", {}).get("name")
-            if b.get("commit", {}).get("committer")
-            else None,
-        )
-        for b in branches
-    ]
+    # Local git fallback
+    local_path = _resolve_repo_path(project_id, repo_name)
+    return _local_branches(local_path)
 
 
 @router.get("/repos/{repo_name}/tree", response_model=list[RepoTreeEntry])
@@ -234,40 +237,42 @@ async def get_repo_tree(
     """Get the file tree for a repository at a given ref.
 
     *ref* can be a branch name, tag, or commit SHA (7-40 hex chars).
+    Uses Forgejo when available, otherwise falls back to local git.
     """
-    owner_repo = _require_forgejo_remote(project_id, repo_name)
+    if settings.FORGEJO_API_URL and _is_forgejo_remote(project_id, repo_name):
+        owner_repo = _require_forgejo_remote(project_id, repo_name)
 
-    # Resolve ref to a tree SHA.  If the ref already looks like a commit SHA
-    # (7-40 hex characters), use it directly as a fallback when the branch
-    # lookup fails.
-    _SHA_RE = re.compile(r"^[0-9a-f]{7,40}$", re.IGNORECASE)
-    sha: str | None = None
-    try:
-        sha = forgejo_client.get_ref_sha(owner_repo, ref)
-    except (ValueError, KeyError):
-        if _SHA_RE.match(ref):
-            sha = ref
-        else:
-            raise HTTPException(
-                status_code=404,
-                detail=f"Ref '{ref}' not found and is not a valid commit SHA",
+        _SHA_RE = re.compile(r"^[0-9a-f]{7,40}$", re.IGNORECASE)
+        sha: str | None = None
+        try:
+            sha = forgejo_client.get_ref_sha(owner_repo, ref)
+        except (ValueError, KeyError):
+            if _SHA_RE.match(ref):
+                sha = ref
+            else:
+                raise HTTPException(
+                    status_code=404,
+                    detail=f"Ref '{ref}' not found and is not a valid commit SHA",
+                )
+
+        tree_resp = forgejo_client.get_tree(owner_repo, sha, recursive=True)
+        entries = tree_resp.get("tree", [])
+
+        result = [
+            RepoTreeEntry(
+                path=e["path"],
+                type=e["type"],
+                sha=e["sha"],
+                size=e.get("size"),
             )
+            for e in entries
+        ]
+        result.sort(key=lambda e: (0 if e.type == "tree" else 1, e.path))
+        return result
 
-    tree_resp = forgejo_client.get_tree(owner_repo, sha, recursive=True)
-    entries = tree_resp.get("tree", [])
-
-    result = [
-        RepoTreeEntry(
-            path=e["path"],
-            type=e["type"],
-            sha=e["sha"],
-            size=e.get("size"),
-        )
-        for e in entries
-    ]
-    # Sort: trees first, then blobs, alphabetical within each group
-    result.sort(key=lambda e: (0 if e.type == "tree" else 1, e.path))
-    return result
+    # Local git fallback
+    local_path = _resolve_repo_path(project_id, repo_name)
+    return _local_tree(local_path, ref)
 
 
 @router.get("/repos/{repo_name}/contents", response_model=FileContent)
@@ -277,25 +282,30 @@ async def get_file_contents(
     path: str = Query(...),
     ref: str = Query(default="main"),
 ):
-    """Get the decoded contents of a file from Forgejo."""
-    owner_repo = _require_forgejo_remote(project_id, repo_name)
+    """Get the decoded contents of a file from Forgejo or local git."""
+    if settings.FORGEJO_API_URL and _is_forgejo_remote(project_id, repo_name):
+        owner_repo = _require_forgejo_remote(project_id, repo_name)
 
-    resp = forgejo_client.get_contents(owner_repo, path, ref)
-    raw_b64 = resp.get("content", "")
-    # Forgejo base64 may contain newlines
-    raw_bytes = base64.b64decode(raw_b64.replace("\n", ""))
-    try:
-        decoded = raw_bytes.decode("utf-8")
-    except UnicodeDecodeError:
-        decoded = "[binary file]"
+        resp = forgejo_client.get_contents(owner_repo, path, ref)
+        raw_b64 = resp.get("content", "")
+        # Forgejo base64 may contain newlines
+        raw_bytes = base64.b64decode(raw_b64.replace("\n", ""))
+        try:
+            decoded = raw_bytes.decode("utf-8")
+        except UnicodeDecodeError:
+            decoded = "[binary file]"
 
-    return FileContent(
-        path=path,
-        content=decoded,
-        sha=resp["sha"],
-        size=resp.get("size", len(raw_bytes)),
-        html_url=resp.get("html_url"),
-    )
+        return FileContent(
+            path=path,
+            content=decoded,
+            sha=resp["sha"],
+            size=resp.get("size", len(raw_bytes)),
+            html_url=resp.get("html_url"),
+        )
+
+    # Local git fallback
+    local_path = _resolve_repo_path(project_id, repo_name)
+    return _local_file_content(local_path, path, ref)
 
 
 # ── PR Comments ──────────────────────────────────────────────────────────
@@ -363,6 +373,121 @@ async def create_pr_comment(pr_id: int, body: PRCommentCreate):
         body=c.get("body", ""),
         created_at=c.get("created_at", ""),
         html_url=c.get("html_url"),
+    )
+
+
+# ── Local Git Helpers ─────────────────────────────────────────────────────────
+
+
+def _local_branches(local_path: str) -> list[BranchDetail]:
+    """List branches from local git repo with commit metadata."""
+    result = subprocess.run(
+        [
+            "git", "branch", "--format",
+            "%(refname:short)|||%(objectname:short)|||%(subject)|||%(creatordate:iso-strict)|||%(authorname)",
+        ],
+        cwd=local_path,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        logger.warning("git branch failed in %s: %s", local_path, result.stderr)
+        return []
+
+    branches: list[BranchDetail] = []
+    for line in result.stdout.strip().splitlines():
+        parts = line.split("|||")
+        if not parts or not parts[0]:
+            continue
+        branches.append(BranchDetail(
+            name=parts[0],
+            last_commit_sha=parts[1] if len(parts) > 1 else None,
+            last_commit_message=parts[2] if len(parts) > 2 else None,
+            last_commit_date=parts[3] if len(parts) > 3 else None,
+            committer_name=parts[4] if len(parts) > 4 else None,
+        ))
+    return branches
+
+
+def _local_tree(local_path: str, ref: str) -> list[RepoTreeEntry]:
+    """Get file tree from local git repo at the given ref."""
+    # Validate ref exists
+    check = subprocess.run(
+        ["git", "rev-parse", "--verify", ref],
+        cwd=local_path,
+        capture_output=True,
+        text=True,
+    )
+    if check.returncode != 0:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Ref '{ref}' not found in local repository",
+        )
+
+    # Get tree entries (blobs and trees) recursively
+    result = subprocess.run(
+        ["git", "ls-tree", "-rt", "--long", ref],
+        cwd=local_path,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to read tree: {result.stderr.strip()}",
+        )
+
+    entries: list[RepoTreeEntry] = []
+    for line in result.stdout.strip().splitlines():
+        if not line:
+            continue
+        # Format: "<mode> <type> <sha>\t<path>"  (--long adds size before tab for blobs)
+        # With --long: "<mode> <type> <sha>    <size>\t<path>"
+        tab_idx = line.index("\t")
+        meta = line[:tab_idx].split()
+        path = line[tab_idx + 1:]
+        entry_type = meta[1]  # "blob" or "tree"
+        sha = meta[2]
+        size = None
+        if len(meta) > 3 and meta[3] != "-":
+            try:
+                size = int(meta[3])
+            except ValueError:
+                pass
+        entries.append(RepoTreeEntry(path=path, type=entry_type, sha=sha, size=size))
+
+    entries.sort(key=lambda e: (0 if e.type == "tree" else 1, e.path))
+    return entries
+
+
+def _local_file_content(local_path: str, path: str, ref: str) -> FileContent:
+    """Get file contents from local git repo at the given ref."""
+    result = subprocess.run(
+        ["git", "show", f"{ref}:{path}"],
+        cwd=local_path,
+        capture_output=True,
+    )
+    if result.returncode != 0:
+        raise HTTPException(
+            status_code=404,
+            detail=f"File '{path}' not found at ref '{ref}'",
+        )
+
+    raw_bytes = result.stdout
+    try:
+        decoded = raw_bytes.decode("utf-8")
+    except UnicodeDecodeError:
+        decoded = "[binary file]"
+
+    # Compute blob SHA the same way git does: "blob <size>\0<content>"
+    blob_header = f"blob {len(raw_bytes)}\0".encode()
+    sha = hashlib.sha1(blob_header + raw_bytes).hexdigest()  # noqa: S324
+
+    return FileContent(
+        path=path,
+        content=decoded,
+        sha=sha,
+        size=len(raw_bytes),
     )
 
 
