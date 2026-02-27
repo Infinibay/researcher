@@ -31,15 +31,16 @@ CREATE TABLE IF NOT EXISTS schema_migrations (
 -- 1. projects  (replaces PRD concept)
 -- ---------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS projects (
-    id            INTEGER PRIMARY KEY AUTOINCREMENT,
-    name          TEXT NOT NULL,
-    description   TEXT,
-    status        TEXT NOT NULL DEFAULT 'new'
-                    CHECK(status IN ('new', 'planning', 'executing', 'paused', 'completed', 'cancelled')),
-    created_by    TEXT DEFAULT 'user',
-    created_at    DATETIME DEFAULT CURRENT_TIMESTAMP,
-    completed_at  DATETIME,
-    metadata_json TEXT DEFAULT '{}'
+    id                    INTEGER PRIMARY KEY AUTOINCREMENT,
+    name                  TEXT NOT NULL,
+    description           TEXT,
+    original_description  TEXT,
+    status                TEXT NOT NULL DEFAULT 'new'
+                            CHECK(status IN ('new', 'planning', 'executing', 'paused', 'completed', 'cancelled')),
+    created_by            TEXT DEFAULT 'user',
+    created_at            DATETIME DEFAULT CURRENT_TIMESTAMP,
+    completed_at          DATETIME,
+    metadata_json         TEXT DEFAULT '{}'
 );
 
 CREATE INDEX IF NOT EXISTS idx_projects_status ON projects(status);
@@ -103,7 +104,8 @@ CREATE TABLE IF NOT EXISTS tasks (
     status               TEXT NOT NULL DEFAULT 'backlog'
                            CHECK(status IN (
                              'backlog', 'pending', 'in_progress',
-                             'review_ready', 'rejected', 'done', 'cancelled'
+                             'review_ready', 'rejected', 'done', 'cancelled',
+                             'failed'
                            )),
     title                TEXT NOT NULL,
     description          TEXT,
@@ -523,6 +525,7 @@ CREATE TABLE IF NOT EXISTS artifacts (
                   CHECK(type IN ('code', 'report', 'data', 'diagram')),
     file_path   TEXT NOT NULL,
     description TEXT,
+    content     TEXT,
     created_at  DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -789,7 +792,7 @@ CREATE TABLE IF NOT EXISTS loop_incidents (
     incident_type   TEXT NOT NULL
                       CHECK(incident_type IN (
                         'duplicate_message', 'rate_limit', 'ping_pong',
-                        'circuit_open', 'question_budget'
+                        'circuit_open', 'question_budget', 'pair_exchange'
                       )),
     thread_id       TEXT,
     agents_involved TEXT NOT NULL DEFAULT '[]',
@@ -829,6 +832,45 @@ CREATE INDEX IF NOT EXISTS idx_clarif_q_project ON clarification_questions(proje
 CREATE INDEX IF NOT EXISTS idx_clarif_q_hash    ON clarification_questions(question_hash);
 CREATE INDEX IF NOT EXISTS idx_clarif_q_status  ON clarification_questions(status);
 CREATE INDEX IF NOT EXISTS idx_clarif_q_task    ON clarification_questions(task_id);
+
+-- ========================= DEVELOPER SESSION NOTES =========================
+
+-- ---------------------------------------------------------------------------
+-- 37. developer_session_notes  (persist developer progress across interruptions)
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS developer_session_notes (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    task_id     INTEGER NOT NULL REFERENCES tasks(id) ON DELETE CASCADE,
+    agent_id    TEXT NOT NULL,
+    phase       TEXT NOT NULL
+                  CHECK(phase IN ('thinking', 'locating', 'implementing', 'testing')),
+    notes_json  TEXT NOT NULL DEFAULT '{}',
+    last_file   TEXT,
+    updated_at  DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(task_id, agent_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_session_notes_task  ON developer_session_notes(task_id);
+CREATE INDEX IF NOT EXISTS idx_session_notes_agent ON developer_session_notes(agent_id);
+
+-- ========================= FLOW PERSISTENCE =================================
+
+-- ---------------------------------------------------------------------------
+-- 38. flow_snapshots  (persist flow position for resume-on-restart)
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS flow_snapshots (
+    id           INTEGER PRIMARY KEY AUTOINCREMENT,
+    project_id   INTEGER NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+    flow_name    TEXT NOT NULL,
+    current_step TEXT NOT NULL,
+    state_json   TEXT NOT NULL DEFAULT '{}',
+    subflow_name TEXT,
+    subflow_step TEXT,
+    updated_at   DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(project_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_flow_snapshots_project ON flow_snapshots(project_id);
 
 -- ========================= FTS5 (Full-Text Search) =========================
 
@@ -1094,3 +1136,112 @@ VALUES (2, 'add_repositories_table');
 
 INSERT OR IGNORE INTO schema_migrations(version, name)
 VALUES (3, 'add_forgejo_pr_index_to_code_reviews');
+
+INSERT OR IGNORE INTO schema_migrations(version, name)
+VALUES (4, 'add_developer_session_notes');
+
+INSERT OR IGNORE INTO schema_migrations(version, name)
+VALUES (5, 'add_flow_snapshots');
+
+INSERT OR IGNORE INTO schema_migrations(version, name)
+VALUES (6, 'add_artifact_content_column');
+
+INSERT OR IGNORE INTO schema_migrations(version, name)
+VALUES (7, 'add_failed_task_status');
+
+INSERT OR IGNORE INTO schema_migrations(version, name)
+VALUES (8, 'add_original_description_to_projects');
+
+-- ========================= AGENT AUTONOMY ================================
+
+-- ---------------------------------------------------------------------------
+-- 39. autonomy_actions  (audit log for autonomous agent decisions)
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS autonomy_actions (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    project_id  INTEGER NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+    agent_id    TEXT NOT NULL,
+    action_type TEXT NOT NULL,
+    task_id     INTEGER REFERENCES tasks(id) ON DELETE SET NULL,
+    reason      TEXT DEFAULT '',
+    created_at  DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_autonomy_project ON autonomy_actions(project_id);
+CREATE INDEX IF NOT EXISTS idx_autonomy_agent ON autonomy_actions(agent_id);
+
+INSERT OR IGNORE INTO schema_migrations(version, name)
+VALUES (9, 'add_autonomy_actions_table');
+
+-- ========================= AGENT EVENT LOOP ================================
+
+-- ---------------------------------------------------------------------------
+-- 40. agent_events  (persistent work queue for agent loops)
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS agent_events (
+    id             INTEGER PRIMARY KEY AUTOINCREMENT,
+    agent_id       TEXT NOT NULL,
+    project_id     INTEGER NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+    event_type     TEXT NOT NULL,
+    source         TEXT NOT NULL DEFAULT '',
+    priority       INTEGER NOT NULL DEFAULT 50,
+    status         TEXT NOT NULL DEFAULT 'pending'
+                     CHECK(status IN ('pending', 'claimed', 'in_progress', 'completed', 'failed', 'cancelled')),
+    payload_json   TEXT NOT NULL DEFAULT '{}',
+    progress_json  TEXT NOT NULL DEFAULT '{}',
+    created_at     DATETIME DEFAULT CURRENT_TIMESTAMP,
+    claimed_at     DATETIME,
+    started_at     DATETIME,
+    completed_at   DATETIME,
+    error_message  TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_agent_events_poll
+    ON agent_events(agent_id, status, priority, created_at);
+CREATE INDEX IF NOT EXISTS idx_agent_events_project
+    ON agent_events(project_id);
+
+-- ---------------------------------------------------------------------------
+-- 41. agent_loop_state  (per-agent crash recovery checkpoint)
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS agent_loop_state (
+    agent_id          TEXT PRIMARY KEY,
+    project_id        INTEGER NOT NULL,
+    status            TEXT NOT NULL DEFAULT 'idle'
+                        CHECK(status IN ('idle', 'processing', 'stopped')),
+    current_event_id  INTEGER REFERENCES agent_events(id),
+    last_poll_at      DATETIME,
+    last_error        TEXT,
+    consecutive_errors INTEGER NOT NULL DEFAULT 0,
+    updated_at        DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT OR IGNORE INTO schema_migrations(version, name)
+VALUES (10, 'add_agent_events_and_loop_state');
+
+-- ========================= PER-AGENT GIT WORKTREES ========================
+
+-- ---------------------------------------------------------------------------
+-- 42. agent_worktrees  (per-agent isolated git working copies)
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS agent_worktrees (
+    id             INTEGER PRIMARY KEY AUTOINCREMENT,
+    project_id     INTEGER NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+    repo_id        INTEGER NOT NULL REFERENCES repositories(id) ON DELETE CASCADE,
+    agent_id       TEXT NOT NULL,
+    worktree_path  TEXT NOT NULL UNIQUE,
+    branch_name    TEXT,
+    status         TEXT DEFAULT 'active' CHECK(status IN ('active', 'removed')),
+    created_at     DATETIME DEFAULT CURRENT_TIMESTAMP,
+    cleaned_up_at  DATETIME
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_agent_worktrees_agent_project
+    ON agent_worktrees(agent_id, project_id);
+CREATE INDEX IF NOT EXISTS idx_agent_worktrees_project
+    ON agent_worktrees(project_id);
+CREATE INDEX IF NOT EXISTS idx_agent_worktrees_status
+    ON agent_worktrees(status);
+
+INSERT OR IGNORE INTO schema_migrations(version, name)
+VALUES (11, 'add_agent_worktrees');

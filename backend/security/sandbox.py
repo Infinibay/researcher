@@ -34,6 +34,7 @@ class SandboxExecutor:
         cwd: str | None = None,
         env: dict[str, str] | None = None,
         timeout: int | None = None,
+        workspace_path: str | None = None,
     ) -> SandboxResult:
         """Run *command* in an ephemeral sandbox container.
 
@@ -52,12 +53,17 @@ class SandboxExecutor:
             Extra environment variables passed into the container.
         timeout : int | None
             Hard timeout in seconds (capped by role limits).
+        workspace_path : str | None
+            Host path to mount as ``/workspace`` inside the container.
+            When provided, this overrides the default WorkspaceManager
+            lookup — use this to mount the agent's git worktree.
         """
         if not runtime_available():
             raise RuntimeError("No container runtime available for sandbox execution")
 
         runtime = get_runtime(settings.SANDBOX_CONTAINER_RUNTIME)
-        workspace_path = self._ws_manager.get_workspace(agent_id)
+        if workspace_path is None:
+            workspace_path = self._ws_manager.get_workspace(agent_id)
         limits = get_limits_for_role(role)
 
         effective_timeout = min(timeout, limits.timeout) if timeout else limits.timeout

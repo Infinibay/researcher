@@ -55,10 +55,8 @@ def execute_with_retry(
         conn = get_connection(db_path)
         try:
             result = fn(conn)
-            conn.close()
             return result
         except sqlite3.OperationalError as e:
-            conn.close()
             last_error = e
             err_msg = str(e).lower()
             if ("locked" in err_msg or "busy" in err_msg) and attempt < max_retries - 1:
@@ -70,6 +68,8 @@ def execute_with_retry(
                 time.sleep(delay)
                 continue
             raise
+        finally:
+            conn.close()
     raise sqlite3.OperationalError(
         f"Database busy after {max_retries} retries: {last_error}"
     )
@@ -112,3 +112,272 @@ def db_transaction(db_path: str | None = None):
     """Convenience context manager wrapping DBConnection."""
     with DBConnection(db_path) as conn:
         yield conn
+
+
+def ensure_migrations(db_path: str | None = None) -> None:
+    """Run pending schema migrations for existing databases.
+
+    Checks the ``schema_migrations`` table and applies any missing
+    migrations.  Safe to call multiple times (idempotent).
+    """
+    if db_path is None:
+        db_path = get_db_path()
+
+    conn = get_connection(db_path)
+    try:
+        applied = {
+            row[0]
+            for row in conn.execute(
+                "SELECT version FROM schema_migrations"
+            ).fetchall()
+        }
+
+        # Migration 6: add content column to artifacts
+        if 6 not in applied:
+            cols = {
+                row[1]
+                for row in conn.execute("PRAGMA table_info(artifacts)").fetchall()
+            }
+            if "content" not in cols:
+                conn.execute("ALTER TABLE artifacts ADD COLUMN content TEXT")
+                logger.info("Migration 6: added 'content' column to artifacts")
+            conn.execute(
+                "INSERT OR IGNORE INTO schema_migrations(version, name) "
+                "VALUES (6, 'add_artifact_content_column')"
+            )
+            conn.commit()
+
+        # Migration 7: add 'failed' to tasks.status CHECK constraint
+        if 7 not in applied:
+            _migrate_7_add_failed_status(conn)
+            conn.execute(
+                "INSERT OR IGNORE INTO schema_migrations(version, name) "
+                "VALUES (7, 'add_failed_task_status')"
+            )
+            conn.commit()
+            logger.info("Migration 7: added 'failed' to tasks.status CHECK")
+
+        # Migration 11: add agent_worktrees table
+        if 11 not in applied:
+            conn.executescript("""
+                CREATE TABLE IF NOT EXISTS agent_worktrees (
+                    id             INTEGER PRIMARY KEY AUTOINCREMENT,
+                    project_id     INTEGER NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+                    repo_id        INTEGER NOT NULL REFERENCES repositories(id) ON DELETE CASCADE,
+                    agent_id       TEXT NOT NULL,
+                    worktree_path  TEXT NOT NULL UNIQUE,
+                    branch_name    TEXT,
+                    status         TEXT DEFAULT 'active' CHECK(status IN ('active', 'removed')),
+                    created_at     DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    cleaned_up_at  DATETIME
+                );
+                CREATE UNIQUE INDEX IF NOT EXISTS idx_agent_worktrees_agent_project
+                    ON agent_worktrees(agent_id, project_id);
+                CREATE INDEX IF NOT EXISTS idx_agent_worktrees_project
+                    ON agent_worktrees(project_id);
+                CREATE INDEX IF NOT EXISTS idx_agent_worktrees_status
+                    ON agent_worktrees(status);
+            """)
+            conn.execute(
+                "INSERT OR IGNORE INTO schema_migrations(version, name) "
+                "VALUES (11, 'add_agent_worktrees')"
+            )
+            conn.commit()
+            logger.info("Migration 11: added agent_worktrees table")
+    except Exception:
+        logger.exception("ensure_migrations failed")
+        conn.rollback()
+    finally:
+        conn.close()
+
+
+def _migrate_7_add_failed_status(conn: sqlite3.Connection) -> None:
+    """Rebuild the tasks table with 'failed' added to the status CHECK.
+
+    SQLite enforces CHECK constraints defined at CREATE TABLE time, so
+    existing DBs need a table rebuild to allow ``status = 'failed'``.
+    """
+    # Check if already migrated (idempotent) — try a dummy check
+    try:
+        conn.execute(
+            "INSERT INTO tasks (project_id, type, title, status, created_by) "
+            "VALUES (-1, 'plan', '__migration_test__', 'failed', 'migration')"
+        )
+        # Worked — constraint already allows 'failed', clean up
+        conn.execute(
+            "DELETE FROM tasks WHERE title = '__migration_test__' AND project_id = -1"
+        )
+        return
+    except sqlite3.IntegrityError:
+        # CHECK failed — need to rebuild
+        pass
+
+    conn.execute("PRAGMA foreign_keys = OFF")
+
+    conn.execute("""
+        CREATE TABLE tasks_new (
+            id                   INTEGER PRIMARY KEY AUTOINCREMENT,
+            project_id           INTEGER NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+            epic_id              INTEGER REFERENCES epics(id) ON DELETE SET NULL,
+            milestone_id         INTEGER REFERENCES milestones(id) ON DELETE SET NULL,
+            parent_task_id       INTEGER REFERENCES tasks(id) ON DELETE SET NULL,
+            type                 TEXT NOT NULL
+                                   CHECK(type IN (
+                                     'plan', 'research', 'code', 'review', 'test',
+                                     'design', 'integrate', 'documentation', 'bug_fix'
+                                   )),
+            status               TEXT NOT NULL DEFAULT 'backlog'
+                                   CHECK(status IN (
+                                     'backlog', 'pending', 'in_progress',
+                                     'review_ready', 'rejected', 'done', 'cancelled',
+                                     'failed'
+                                   )),
+            title                TEXT NOT NULL,
+            description          TEXT,
+            acceptance_criteria  TEXT,
+            context_json         TEXT,
+            priority             INTEGER DEFAULT 2 CHECK(priority BETWEEN 1 AND 5),
+            estimated_complexity TEXT DEFAULT 'medium'
+                                   CHECK(estimated_complexity IN (
+                                     'trivial', 'low', 'medium', 'high', 'very_high'
+                                   )),
+            branch_name          TEXT,
+            assigned_to          TEXT,
+            reviewer             TEXT,
+            created_by           TEXT NOT NULL DEFAULT 'orchestrator',
+            retry_count          INTEGER DEFAULT 0,
+            created_at           DATETIME DEFAULT CURRENT_TIMESTAMP,
+            completed_at         DATETIME
+        )
+    """)
+
+    conn.execute("INSERT INTO tasks_new SELECT * FROM tasks")
+
+    # Drop old triggers that reference tasks
+    for trigger in (
+        "tasks_fts_ai", "tasks_fts_ad", "tasks_fts_au",
+        "trg_tasks_audit_insert", "trg_tasks_audit_status",
+        "trg_tasks_audit_update",
+    ):
+        conn.execute(f"DROP TRIGGER IF EXISTS {trigger}")
+
+    # Drop FTS virtual table before dropping tasks (content=tasks backing)
+    conn.execute("DROP TABLE IF EXISTS tasks_fts")
+
+    conn.execute("DROP TABLE tasks")
+    conn.execute("ALTER TABLE tasks_new RENAME TO tasks")
+
+    # Recreate indexes
+    for idx_sql in (
+        "CREATE INDEX IF NOT EXISTS idx_tasks_project    ON tasks(project_id)",
+        "CREATE INDEX IF NOT EXISTS idx_tasks_status     ON tasks(status)",
+        "CREATE INDEX IF NOT EXISTS idx_tasks_type       ON tasks(type)",
+        "CREATE INDEX IF NOT EXISTS idx_tasks_priority   ON tasks(priority DESC)",
+        "CREATE INDEX IF NOT EXISTS idx_tasks_epic       ON tasks(epic_id)",
+        "CREATE INDEX IF NOT EXISTS idx_tasks_milestone  ON tasks(milestone_id)",
+        "CREATE INDEX IF NOT EXISTS idx_tasks_assigned   ON tasks(assigned_to)",
+        "CREATE INDEX IF NOT EXISTS idx_tasks_reviewer   ON tasks(reviewer)",
+        "CREATE INDEX IF NOT EXISTS idx_tasks_branch     ON tasks(branch_name)",
+        "CREATE INDEX IF NOT EXISTS idx_tasks_created_by ON tasks(created_by)",
+    ):
+        conn.execute(idx_sql)
+
+    # Recreate FTS virtual table and rebuild index
+    conn.execute("""
+        CREATE VIRTUAL TABLE IF NOT EXISTS tasks_fts USING fts5(
+            title, description, acceptance_criteria,
+            content=tasks, content_rowid=id
+        )
+    """)
+    conn.execute("""
+        INSERT INTO tasks_fts(tasks_fts) VALUES('rebuild')
+    """)
+
+    # Recreate FTS triggers
+    conn.execute("""
+        CREATE TRIGGER IF NOT EXISTS tasks_fts_ai AFTER INSERT ON tasks BEGIN
+            INSERT INTO tasks_fts(rowid, title, description, acceptance_criteria)
+            VALUES (new.id, new.title, COALESCE(new.description, ''),
+                    COALESCE(new.acceptance_criteria, ''));
+        END
+    """)
+    conn.execute("""
+        CREATE TRIGGER IF NOT EXISTS tasks_fts_ad AFTER DELETE ON tasks BEGIN
+            INSERT INTO tasks_fts(tasks_fts, rowid, title, description, acceptance_criteria)
+            VALUES ('delete', old.id, COALESCE(old.title, ''),
+                    COALESCE(old.description, ''),
+                    COALESCE(old.acceptance_criteria, ''));
+        END
+    """)
+    conn.execute("""
+        CREATE TRIGGER IF NOT EXISTS tasks_fts_au AFTER UPDATE ON tasks BEGIN
+            INSERT INTO tasks_fts(tasks_fts, rowid, title, description, acceptance_criteria)
+            VALUES ('delete', old.id, COALESCE(old.title, ''),
+                    COALESCE(old.description, ''),
+                    COALESCE(old.acceptance_criteria, ''));
+            INSERT INTO tasks_fts(rowid, title, description, acceptance_criteria)
+            VALUES (new.id, new.title, COALESCE(new.description, ''),
+                    COALESCE(new.acceptance_criteria, ''));
+        END
+    """)
+
+    # Recreate audit triggers
+    conn.execute("""
+        CREATE TRIGGER IF NOT EXISTS trg_tasks_audit_insert AFTER INSERT ON tasks
+        BEGIN
+            INSERT INTO events_log(project_id, event_type, event_source,
+                                   entity_type, entity_id, event_data_json)
+            VALUES (
+                new.project_id, 'task_created',
+                COALESCE(new.created_by, 'system'), 'task', new.id,
+                json_object('title', new.title, 'type', new.type,
+                            'status', new.status, 'assigned_to', new.assigned_to)
+            );
+        END
+    """)
+    conn.execute("""
+        CREATE TRIGGER IF NOT EXISTS trg_tasks_audit_status
+        AFTER UPDATE OF status ON tasks
+        WHEN old.status != new.status
+        BEGIN
+            INSERT INTO events_log(project_id, event_type, event_source,
+                                   entity_type, entity_id, event_data_json)
+            VALUES (
+                new.project_id, 'task_status_changed', 'system', 'task', new.id,
+                json_object('old_status', old.status, 'new_status', new.status,
+                            'assigned_to', new.assigned_to)
+            );
+        END
+    """)
+    conn.execute("""
+        CREATE TRIGGER IF NOT EXISTS trg_tasks_audit_update AFTER UPDATE ON tasks
+        WHEN old.status = new.status
+         AND (old.title != new.title OR old.assigned_to IS NOT new.assigned_to
+              OR old.reviewer IS NOT new.reviewer
+              OR old.branch_name IS NOT new.branch_name)
+        BEGIN
+            INSERT INTO events_log(project_id, event_type, event_source,
+                                   entity_type, entity_id, event_data_json)
+            VALUES (
+                new.project_id, 'task_updated', 'system', 'task', new.id,
+                json_object('title', new.title, 'assigned_to', new.assigned_to,
+                            'reviewer', new.reviewer,
+                            'branch_name', new.branch_name)
+            );
+        END
+    """)
+
+    conn.execute("PRAGMA foreign_keys = ON")
+
+
+def sanitize_fts5_query(query: str) -> str:
+    """Sanitize a user query for safe use in FTS5 MATCH.
+
+    Wraps each token in double quotes so FTS5 treats them as literal
+    strings rather than column names or operators (e.g. ``RTL``
+    won't be interpreted as ``RTL:`` column prefix).
+    """
+    tokens = query.split()
+    if not tokens:
+        return '""'
+    return " ".join(f'"{t}"' for t in tokens)

@@ -37,8 +37,9 @@ class ExecuteCommandInput(BaseModel):
 class ExecuteCommandTool(PabadaBaseTool):
     name: str = "execute_command"
     description: str = (
-        "Execute a shell command with sandboxing. Only whitelisted commands "
-        "are allowed. Returns stdout, stderr, and exit code."
+        "Execute a shell command. When running inside a container pod, all "
+        "commands are allowed. In direct mode, only whitelisted commands "
+        "are permitted. Returns stdout, stderr, and exit code."
     )
     args_schema: Type[BaseModel] = ExecuteCommandInput
 
@@ -49,7 +50,15 @@ class ExecuteCommandTool(PabadaBaseTool):
         cwd: str | None = None,
         env: dict[str, str] | None = None,
     ) -> str:
-        # Parse command into parts (always needed for shell=False execution)
+        if not command or not command.strip():
+            return self._error("Empty command")
+
+        # ── Pod mode: execute inside persistent pod (no whitelist/guards) ──
+        # Skips shlex parsing — commands are wrapped in sh -c inside the pod.
+        if self._is_pod_mode():
+            return self._run_in_pod(command, timeout, cwd, env)
+
+        # Parse command into parts (needed for shell=False execution)
         try:
             parts = shlex.split(command)
         except ValueError as e:
@@ -59,48 +68,84 @@ class ExecuteCommandTool(PabadaBaseTool):
             return self._error("Empty command")
 
         if settings.SANDBOX_ENABLED:
-            # Reject dangerous characters in the raw command string FIRST.
-            # These enable shell injection (chaining, piping, subshells,
-            # redirections) and must never reach the subprocess layer.
-            found = [ch for ch in DANGEROUS_CHARS if ch in command]
-            if found:
-                return self._error(
-                    f"Command rejected: contains dangerous character(s) "
-                    f"{found}. Shell operators (;, |, &, `, <, >) "
-                    f"are not allowed."
-                )
-
-            # Check if command is in whitelist.
-            # For absolute paths, resolve and verify the real binary name
-            # to prevent bypasses like /tmp/evil/ls -> malicious binary.
-            cmd_path = parts[0]
-            if os.path.sep in cmd_path:
-                base_cmd = os.path.basename(os.path.realpath(cmd_path))
-            else:
-                base_cmd = cmd_path
-            if base_cmd not in settings.ALLOWED_COMMANDS:
-                return self._error(
-                    f"Command '{base_cmd}' is not allowed. "
-                    f"Allowed commands: {', '.join(sorted(settings.ALLOWED_COMMANDS))}"
-                )
-
-            # Validate cwd if provided
-            if cwd:
-                cwd_err = self._validate_sandbox_path(cwd)
-                if cwd_err:
-                    return self._error(cwd_err)
-
             # ── Container sandbox path ──────────────────────────────────
+            # When a container runtime is available the command runs inside
+            # an isolated container — all commands are allowed there.
             if runtime_available():
                 return self._run_sandboxed(parts, command, timeout, cwd, env)
-            else:
-                logger.warning(
-                    "SANDBOX_ENABLED=True but no container runtime found; "
-                    "falling back to direct subprocess execution"
-                )
+
+            logger.warning(
+                "SANDBOX_ENABLED=True but no container runtime found; "
+                "falling back to direct subprocess execution with allowlist"
+            )
 
         # ── Direct subprocess execution (fallback / dev mode) ───────────
+        # Allowlist and dangerous-char guards only apply when running
+        # directly on the host (no container isolation).
+        found = [ch for ch in DANGEROUS_CHARS if ch in command]
+        if found:
+            return self._error(
+                f"Command rejected: contains dangerous character(s) "
+                f"{found}. Shell operators (;, |, &, `, <, >) "
+                f"are not allowed."
+            )
+
+        cmd_path = parts[0]
+        if os.path.sep in cmd_path:
+            base_cmd = os.path.basename(os.path.realpath(cmd_path))
+        else:
+            base_cmd = cmd_path
+        if base_cmd not in settings.ALLOWED_COMMANDS:
+            return self._error(
+                f"Command '{base_cmd}' is not allowed. "
+                f"Allowed commands: {', '.join(sorted(settings.ALLOWED_COMMANDS))}"
+            )
+
+        # Default cwd to agent's workspace so commands run in the right directory
+        if not cwd:
+            cwd = self.workspace_path
+
+        if cwd:
+            cwd_err = self._validate_sandbox_path(cwd)
+            if cwd_err:
+                return self._error(cwd_err)
+
         return self._run_direct(parts, command, timeout, cwd, env)
+
+    def _run_in_pod(
+        self,
+        raw_command: str,
+        timeout: int,
+        cwd: str | None,
+        env: dict[str, str] | None,
+    ) -> str:
+        """Execute directly in the agent's persistent pod (no whitelist).
+
+        Always wraps commands in ``sh -c`` so that shell constructs
+        (``&&``, ``|``, ``>``, heredocs, etc.) work correctly.  The pod
+        is already sandboxed, so there is no security concern.
+        """
+        pod_cwd = cwd or "/workspace"
+        cmd = ["sh", "-c", raw_command]
+
+        try:
+            result = self._exec_in_pod(cmd, cwd=pod_cwd, timeout=timeout)
+        except RuntimeError as e:
+            return self._error(f"Pod execution failed: {e}")
+
+        if result.timed_out:
+            return self._error(f"Command timed out after {timeout}s (pod)")
+
+        self._log_tool_usage(
+            f"Executed (pod): {raw_command[:80]} (exit={result.exit_code})"
+        )
+
+        return self._success({
+            "exit_code": result.exit_code,
+            "stdout": result.stdout[-10000:] if result.stdout else "",
+            "stderr": result.stderr[-5000:] if result.stderr else "",
+            "success": result.exit_code == 0,
+        })
 
     def _run_sandboxed(
         self,
@@ -110,18 +155,23 @@ class ExecuteCommandTool(PabadaBaseTool):
         cwd: str | None,
         env: dict[str, str] | None,
     ) -> str:
-        """Delegate execution to SandboxExecutor (container-based)."""
+        """Delegate execution to SandboxExecutor (container-based).
+
+        Wraps in ``sh -c`` so shell constructs work inside the container.
+        """
         agent_id = self.agent_id or "unknown"
         role = self._get_agent_role(agent_id)
+        cmd = ["sh", "-c", raw_command]
 
         try:
             result = sandbox_executor.execute(
-                command=parts,
+                command=cmd,
                 agent_id=agent_id,
                 role=role,
                 cwd=cwd,
                 env=env,
                 timeout=timeout,
+                workspace_path=self.workspace_path,
             )
         except RuntimeError as e:
             return self._error(f"Sandbox execution failed: {e}")
