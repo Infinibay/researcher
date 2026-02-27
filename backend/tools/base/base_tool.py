@@ -124,7 +124,20 @@ class PabadaBaseTool(BaseTool, ABC):
             object.__setattr__(tool, "_bound_agent_id", bound_id)
 
     def _resolve_path(self, path: str) -> str:
-        """Resolve relative paths against workspace_path."""
+        """Resolve relative paths against workspace_path.
+
+        In pod mode, returns paths relative to the pod's working directory
+        so that the pod's CWD handles final resolution.  Absolute host
+        paths that fall under the workspace are converted to relative.
+        """
+        if self._is_pod_mode():
+            if os.path.isabs(path):
+                ws = self.workspace_path
+                if ws and (path == ws or path.startswith(ws + os.sep)):
+                    return os.path.relpath(path, ws)
+                return path
+            return os.path.normpath(path)
+
         if os.path.isabs(path):
             return path
         ws = self.workspace_path or os.getcwd()
