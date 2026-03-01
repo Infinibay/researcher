@@ -8,6 +8,7 @@ services:
       - ./.data/forgejo:/data
     restart: unless-stopped
     environment:
+      FORGEJO__RUN_AS_ROOT: "true"
       FORGEJO__security__INSTALL_LOCK: "true"
       FORGEJO__database__DB_TYPE: sqlite3
       FORGEJO__database__PATH: /data/gitea/gitea.db

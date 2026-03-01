@@ -88,11 +88,13 @@ class WorktreeManager:
             text=True,
         )
 
-        # Use --detach because the base branch is typically already checked
-        # out in the main repo (or another worktree).  Agents create their
-        # own feature branches from this starting point anyway.
+        # Create the worktree on a dedicated branch so the agent starts
+        # with a proper HEAD (not detached).  Using -B creates or resets
+        # the branch, which is safe for both fresh and re-created worktrees.
+        # The branch name is namespaced to avoid collisions with task branches.
+        wt_branch = f"worktree/{agent_id}"
         subprocess.run(
-            ["git", "worktree", "add", "--detach", worktree_path, base_branch],
+            ["git", "worktree", "add", "-B", wt_branch, worktree_path, base_branch],
             cwd=repo_local_path,
             check=True,
             capture_output=True,
@@ -108,7 +110,26 @@ class WorktreeManager:
         # 7. Copy git identity config from main repo
         self._copy_git_identity(repo_local_path, worktree_path)
 
-        # 8. Record in DB
+        # 8. Validate git works inside the new worktree
+        try:
+            check = subprocess.run(
+                ["git", "rev-parse", "--abbrev-ref", "HEAD"],
+                cwd=worktree_path,
+                capture_output=True,
+                text=True,
+                timeout=10,
+            )
+            if check.returncode != 0:
+                logger.error(
+                    "Worktree validation failed for %s: git rev-parse returned %d: %s",
+                    agent_id, check.returncode, check.stderr.strip(),
+                )
+        except Exception:
+            logger.warning(
+                "Could not validate worktree for %s", agent_id, exc_info=True,
+            )
+
+        # 9. Record in DB
         def _insert(conn: sqlite3.Connection) -> None:
             conn.execute(
                 """INSERT INTO agent_worktrees
@@ -119,14 +140,14 @@ class WorktreeManager:
                        branch_name = excluded.branch_name,
                        status = 'active',
                        cleaned_up_at = NULL""",
-                (project_id, repo_id, agent_id, worktree_path, base_branch),
+                (project_id, repo_id, agent_id, worktree_path, wt_branch),
             )
             conn.commit()
 
         execute_with_retry(_insert)
         logger.info(
-            "Created worktree for %s at %s (base: %s)",
-            agent_id, worktree_path, base_branch,
+            "Created worktree for %s at %s (branch: %s, base: %s)",
+            agent_id, worktree_path, wt_branch, base_branch,
         )
         return worktree_path
 

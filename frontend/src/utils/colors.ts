@@ -14,6 +14,7 @@ export const STATUS_COLORS: Record<string, string> = {
   review_ready: 'bg-violet-500/20 text-violet-300',
   rejected: 'bg-red-500/20 text-red-300',
   done: 'bg-emerald-500/20 text-emerald-300',
+  blocked: 'bg-orange-500/20 text-orange-300',
 
   // Epic / Milestone status
   open: 'bg-slate-500/20 text-slate-300',

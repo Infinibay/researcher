@@ -7,7 +7,7 @@ import { MarkdownRenderer } from '../common/MarkdownRenderer'
 import { STATUS_COLORS, PRIORITY_COLORS } from '../../utils/colors'
 import { formatRelative } from '../../utils/date'
 
-const taskStatuses = ['backlog', 'pending', 'in_progress', 'review_ready', 'rejected', 'done']
+const taskStatuses = ['backlog', 'pending', 'in_progress', 'review_ready', 'rejected', 'done', 'blocked']
 
 export function TaskDetailModal({
   taskId,

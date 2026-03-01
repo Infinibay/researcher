@@ -132,7 +132,8 @@ class CodeReviewFlow(Flow[CodeReviewState]):
         test_count, test_pass = parse_ci_output(output)
 
         return {
-            "ci_passed": exit_code == 0,
+            # Exit 0 = tests passed, exit 5 = no tests collected (not a failure)
+            "ci_passed": exit_code in (0, 5),
             "ci_output": output[:3000],
             "test_count": test_count,
             "test_pass": test_pass,

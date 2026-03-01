@@ -87,6 +87,7 @@ class SandboxExecutor:
             user="1000:1000",
             workdir=workdir,
             security_opts=["no-new-privileges", "seccomp=unconfined"],
+            gpu=settings.SANDBOX_GPU_ENABLED,
             timeout=effective_timeout,
         )
 

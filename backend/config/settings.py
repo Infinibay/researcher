@@ -34,12 +34,13 @@ class Settings(BaseSettings):
     # Container sandbox
     SANDBOX_IMAGE: str = "pabada-sandbox:latest"
     SANDBOX_CONTAINER_RUNTIME: str | None = None  # None = auto-detect
+    SANDBOX_GPU_ENABLED: bool = False  # Pass GPU devices into pods/containers
     WORKSPACE_BASE_DIR: str = os.environ.get(
         "PABADA_WORKSPACE_BASE_DIR",
         str(Path(__file__).resolve().parent.parent.parent / ".data" / "workspaces"),
     )
     CLEANUP_INTERVAL_SECONDS: int = 300
-    SANDBOX_NETWORK: str = "none"  # "none" | "host" | custom network name
+    SANDBOX_NETWORK: str = "slirp4netns"  # "none" | "slirp4netns" | "host" | custom network name
 
     # File limits
     MAX_FILE_SIZE_BYTES: int = 10 * 1024 * 1024  # 10MB

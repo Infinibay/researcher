@@ -91,7 +91,8 @@ class ReadTasksTool(PabadaBaseTool):
             rows = conn.execute(
                 f"""SELECT t.id, t.title, t.type, t.status, t.priority,
                            t.estimated_complexity, t.assigned_to, t.reviewer,
-                           t.branch_name, t.retry_count,
+                           t.branch_name, t.pr_number, t.pr_url,
+                           t.retry_count,
                            t.created_at, t.completed_at,
                            e.title AS epic_title,
                            m.title AS milestone_title

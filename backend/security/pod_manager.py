@@ -133,6 +133,7 @@ class PodManager:
             workdir="/workspace",
             security_opts=["no-new-privileges"],
             userns=userns,
+            gpu=settings.SANDBOX_GPU_ENABLED,
             command=["sleep", "infinity"],
         )
 

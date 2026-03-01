@@ -45,6 +45,12 @@ async def lifespan(app: FastAPI):
 
 def create_app() -> FastAPI:
     """Create and configure the FastAPI application."""
+    # With reload=True, uvicorn runs the app in a child process.
+    # setup_file_logging() in run.py only configures the parent (reloader),
+    # so we must also configure it here for the actual worker process.
+    from backend.api.run import setup_file_logging
+    setup_file_logging()
+
     app = FastAPI(
         title="PABADA API",
         description="REST API for the PABADA project management system",

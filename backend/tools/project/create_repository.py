@@ -63,6 +63,7 @@ class CreateRepositoryTool(PabadaBaseTool):
                 project_id=project_id,
                 name=repo_name,
                 local_path=local_path,
+                description=description,
             )
         except Exception as e:
             return self._error(f"Failed to create repository: {e}")

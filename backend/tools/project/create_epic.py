@@ -35,12 +35,37 @@ class CreateEpicTool(PabadaBaseTool):
         project_id = self._validate_project_context()
         created_by = self.agent_id or "orchestrator"
 
+        # --- Auto-complete epics whose tasks are all resolved ---
+        def _auto_complete_resolved(conn: sqlite3.Connection) -> None:
+            """Mark epics as completed if all their tasks are done/cancelled/failed."""
+            candidates = conn.execute(
+                """SELECT e.id
+                   FROM epics e
+                   WHERE e.project_id = ? AND e.status NOT IN ('completed', 'cancelled')
+                     AND EXISTS (SELECT 1 FROM tasks t WHERE t.epic_id = e.id)
+                     AND NOT EXISTS (
+                         SELECT 1 FROM tasks t
+                         WHERE t.epic_id = e.id
+                           AND t.status NOT IN ('done', 'cancelled', 'failed')
+                     )""",
+                (project_id,),
+            ).fetchall()
+            for row in candidates:
+                conn.execute(
+                    "UPDATE epics SET status = 'completed', completed_at = CURRENT_TIMESTAMP WHERE id = ?",
+                    (row["id"],),
+                )
+            if candidates:
+                conn.commit()
+
+        execute_with_retry(_auto_complete_resolved)
+
         # --- Hard limit on active epics ---
         from backend.config.settings import settings
 
         def _count_open(conn: sqlite3.Connection) -> int:
             row = conn.execute(
-                "SELECT COUNT(*) as cnt FROM epics WHERE project_id = ? AND status != 'completed'",
+                "SELECT COUNT(*) as cnt FROM epics WHERE project_id = ? AND status NOT IN ('completed', 'cancelled')",
                 (project_id,),
             ).fetchone()
             return row["cnt"]

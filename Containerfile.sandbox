@@ -36,12 +36,15 @@ RUN pip install --no-cache-dir \
         numpy pandas pytest ruff mypy \
         fpdf2 openpyxl requests beautifulsoup4
 
-# ── Non-root user matching the UID used by SandboxExecutor ───────────────
-RUN groupadd -g 1000 agent && \
-    useradd -u 1000 -g agent -m agent
+# ── File helper for pod mode ──────────────────────────────────────────────
+COPY scripts/pabada_file_helper.py /usr/local/bin/pabada-file-helper
+RUN chmod +x /usr/local/bin/pabada-file-helper
 
 WORKDIR /workspace
 
-USER agent
+# No USER directive — pods run as root inside the container.
+# Podman rootless (--userns=keep-id) maps UID 0 to the host user.
+# Ephemeral containers still pass --user 1000:1000 at runtime.
 
-# No CMD — the command is provided at runtime by SandboxExecutor
+# No CMD — the command is provided at runtime
+

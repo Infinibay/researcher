@@ -35,7 +35,7 @@ class ProgressService:
                    WHERE t.project_id = ?
                      AND t.status IN ('backlog', 'pending')
                      AND td.dependency_type = 'blocks'
-                     AND dep.status != 'done'""",
+                     AND dep.status NOT IN ('done', 'cancelled')""",
                 (project_id,),
             ).fetchone()
             blocked = blocked_row["cnt"] if blocked_row else 0
@@ -51,7 +51,7 @@ class ProgressService:
                    WHERE t.project_id = ?
                      AND t.status IN ('backlog', 'pending')
                      AND td.dependency_type = 'blocks'
-                     AND dep.status != 'done'
+                     AND dep.status NOT IN ('done', 'cancelled')
                    ORDER BY t.id""",
                 (project_id,),
             ).fetchall()
@@ -76,10 +76,10 @@ class ProgressService:
 
             completion_pct = round((done / total) * 100) if total > 0 else 0
 
-            # Epic progress
+            # Epic progress (cancelled tasks are excluded from scope)
             epic_rows = conn.execute(
                 """SELECT e.id, e.title,
-                          COUNT(t.id) as total,
+                          SUM(CASE WHEN t.status != 'cancelled' THEN 1 ELSE 0 END) as total,
                           SUM(CASE WHEN t.status = 'done' THEN 1 ELSE 0 END) as done
                    FROM epics e
                    LEFT JOIN tasks t ON t.epic_id = e.id
@@ -100,10 +100,10 @@ class ProgressService:
                     "pct": round((ep_done / ep_total) * 100) if ep_total > 0 else 0,
                 })
 
-            # Milestone progress
+            # Milestone progress (cancelled tasks are excluded from scope)
             ms_rows = conn.execute(
                 """SELECT m.id, m.title,
-                          COUNT(t.id) as total,
+                          SUM(CASE WHEN t.status != 'cancelled' THEN 1 ELSE 0 END) as total,
                           SUM(CASE WHEN t.status = 'done' THEN 1 ELSE 0 END) as done
                    FROM milestones m
                    LEFT JOIN tasks t ON t.milestone_id = m.id
@@ -152,7 +152,7 @@ class ProgressService:
                    WHERE t.project_id = ?
                      AND t.status IN ('backlog', 'pending')
                      AND td.dependency_type = 'blocks'
-                     AND dep.status != 'done'
+                     AND dep.status NOT IN ('done', 'cancelled')
                    ORDER BY t.id""",
                 (project_id,),
             ).fetchall()
@@ -167,7 +167,7 @@ class ProgressService:
         def _query(conn: sqlite3.Connection) -> list[dict]:
             rows = conn.execute(
                 """SELECT e.id, e.title,
-                          COUNT(t.id) as total,
+                          SUM(CASE WHEN t.status != 'cancelled' THEN 1 ELSE 0 END) as total,
                           SUM(CASE WHEN t.status = 'done' THEN 1 ELSE 0 END) as done
                    FROM epics e
                    LEFT JOIN tasks t ON t.epic_id = e.id
@@ -198,7 +198,7 @@ class ProgressService:
         def _query(conn: sqlite3.Connection) -> list[dict]:
             rows = conn.execute(
                 """SELECT m.id, m.title,
-                          COUNT(t.id) as total,
+                          SUM(CASE WHEN t.status != 'cancelled' THEN 1 ELSE 0 END) as total,
                           SUM(CASE WHEN t.status = 'done' THEN 1 ELSE 0 END) as done
                    FROM milestones m
                    LEFT JOIN tasks t ON t.milestone_id = m.id

@@ -80,6 +80,9 @@ base_branch="main". This runs:
   git fetch origin main
   git checkout -b task-{task_id}-<slug> origin/main
 
+GitBranchTool **automatically sets `branch_name`** on the task record — you
+do not need to update it manually.
+
 Post the branch name as a comment on the task using **AddCommentTool**.
 
 Save progress: call **SaveSessionNoteTool** with phase="implementing",
@@ -211,12 +214,17 @@ Follow STEPS 3, 4, and 5 of the Git + Forgejo Workflow above. Concretely:
    `POST $FORGEJO_API_URL/repos/{{owner}}/{{repo}}/pulls`.
    The PR body must list each acceptance criterion from the task and
    confirm it is satisfied.
+   CreatePRTool **automatically sets `pr_number` and `pr_url`** on the
+   task record when a Forgejo PR is created.
 
 Save progress: call **SaveSessionNoteTool** with phase="implementing",
 notes_json={{"branch": "...", "commit_sha": "...", "pr_url": "...", "step": 7}}.
 
 ### Step 8: Submit for Review
 Use **UpdateTaskStatusTool** to set the status to `review_ready`.
+If GitBranchTool or CreatePRTool failed to auto-set the branch/PR info,
+you can pass optional `branch_name` and/or `pr_url` parameters to
+UpdateTaskStatusTool as a fallback.
 
 Save progress: call **SaveSessionNoteTool** with phase="implementing",
 notes_json={{"branch": "...", "status": "review_ready", "step": 8}}.

@@ -13,7 +13,7 @@ import { DependencyGraph } from '../tasks/DependencyGraph'
 import { PRIORITY_COLORS } from '../../utils/colors'
 import type { TaskDependency } from '../../types/api'
 
-const statusOptions = ['', 'backlog', 'pending', 'in_progress', 'review_ready', 'rejected', 'done']
+const statusOptions = ['', 'backlog', 'pending', 'in_progress', 'review_ready', 'rejected', 'done', 'blocked']
 const typeOptions = ['code', 'research', 'review', 'documentation']
 const complexityOptions = ['low', 'medium', 'high']
 
@@ -24,6 +24,7 @@ const statusVariant: Record<string, string> = {
   review_ready: 'violet',
   rejected: 'error',
   done: 'success',
+  blocked: 'error',
 }
 
 const typeVariant: Record<string, string> = {

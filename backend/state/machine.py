@@ -1,7 +1,7 @@
 """Canonical task state machine — single source of truth for valid transitions."""
 
 _ALL_STATUSES = {"backlog", "pending", "in_progress", "review_ready",
-                  "rejected", "done", "cancelled", "failed"}
+                  "rejected", "done", "cancelled", "failed", "blocked"}
 
 VALID_TRANSITIONS: dict[str, set[str]] = {
     status: _ALL_STATUSES - {status} for status in _ALL_STATUSES

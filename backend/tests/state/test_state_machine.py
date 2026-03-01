@@ -66,7 +66,7 @@ class TestIsTerminal:
     def test_terminal_statuses(self, status):
         assert TaskStateMachine.is_terminal(status) is True
 
-    @pytest.mark.parametrize("status", ["backlog", "pending", "in_progress", "review_ready", "rejected"])
+    @pytest.mark.parametrize("status", ["backlog", "pending", "in_progress", "review_ready", "rejected", "blocked"])
     def test_non_terminal_statuses(self, status):
         assert TaskStateMachine.is_terminal(status) is False
 

@@ -398,15 +398,15 @@ def get_project_progress_summary(project_id: int) -> str:
                 lines.append(f"- [#{t['id']}] {t['title']}: {desc_preview}")
             lines.append("")
 
-        # Failed/cancelled tasks
+        # Failed/cancelled/blocked tasks
         problem_tasks = conn.execute(
             """SELECT id, title, status, type
-               FROM tasks WHERE project_id = ? AND status IN ('failed', 'cancelled')
+               FROM tasks WHERE project_id = ? AND status IN ('failed', 'cancelled', 'blocked')
                ORDER BY id""",
             (project_id,),
         ).fetchall()
         if problem_tasks:
-            lines.append("## Failed/Cancelled Tasks")
+            lines.append("## Failed/Cancelled/Blocked Tasks")
             for t in problem_tasks:
                 lines.append(f"- [#{t['id']}] ({t['status']}) ({t['type']}) {t['title']}")
             lines.append("")
@@ -459,6 +459,13 @@ def _create_events_for_status_change(task_id: int, new_status: str) -> None:
                     target_role="code_reviewer",
                     source="task_trigger",
                 )
+        elif new_status == "blocked":
+            # Notify the project lead to review the blocker
+            create_task_event(
+                project_id, task_id, "task_blocked",
+                target_role="project_lead",
+                source="task_trigger",
+            )
         elif new_status == "rejected":
             # Notify the assigned developer (or all developers)
             create_task_event(

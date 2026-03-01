@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS tasks (
                            CHECK(status IN (
                              'backlog', 'pending', 'in_progress',
                              'review_ready', 'rejected', 'done', 'cancelled',
-                             'failed'
+                             'failed', 'blocked'
                            )),
     title                TEXT NOT NULL,
     description          TEXT,
@@ -117,6 +117,8 @@ CREATE TABLE IF NOT EXISTS tasks (
                              'trivial', 'low', 'medium', 'high', 'very_high'
                            )),
     branch_name          TEXT,
+    pr_number            INTEGER,
+    pr_url               TEXT,
     assigned_to          TEXT,
     reviewer             TEXT,
     created_by           TEXT NOT NULL DEFAULT 'orchestrator',

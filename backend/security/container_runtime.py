@@ -41,6 +41,7 @@ class ContainerRuntime:
         user: str | None = None,
         workdir: str | None = None,
         security_opts: list[str] | None = None,
+        gpu: bool = False,
         timeout: int = 300,
     ) -> tuple[str, str, int]:
         """Run an ephemeral container with --rm and return (stdout, stderr, returncode)."""
@@ -72,6 +73,9 @@ class ContainerRuntime:
         if security_opts:
             for opt in security_opts:
                 args.extend(["--security-opt", opt])
+
+        if gpu:
+            args.extend(self._gpu_flags())
 
         if volumes:
             for v in volumes:
@@ -106,6 +110,16 @@ class ContainerRuntime:
                 except Exception:
                     pass
             return "", f"Container timed out after {timeout}s", -1
+
+    def _gpu_flags(self) -> list[str]:
+        """Return runtime-specific flags for GPU passthrough."""
+        if self.is_podman:
+            # Podman CDI (Container Device Interface) — requires
+            # nvidia-container-toolkit with CDI configured.
+            return ["--device", "nvidia.com/gpu=all"]
+        else:
+            # Docker — requires nvidia-container-toolkit.
+            return ["--gpus", "all"]
 
     def list_stale_containers(self, prefix: str) -> list[dict[str, str]]:
         """List exited containers whose names start with prefix."""
@@ -145,6 +159,7 @@ class ContainerRuntime:
         workdir: str | None = None,
         security_opts: list[str] | None = None,
         userns: str | None = None,
+        gpu: bool = False,
         command: list[str] | None = None,
     ) -> str:
         """Start a container in background (-d). Returns container ID."""
@@ -166,6 +181,8 @@ class ContainerRuntime:
                 args.extend(["--security-opt", opt])
         if userns:
             args.extend(["--userns", userns])
+        if gpu:
+            args.extend(self._gpu_flags())
         if volumes:
             for v in volumes:
                 args.extend(["-v", v])

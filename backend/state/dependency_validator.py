@@ -19,7 +19,7 @@ class DependencyValidator:
                    JOIN tasks dep ON dep.id = td.depends_on_task_id
                    WHERE td.task_id = ?
                      AND td.dependency_type = 'blocks'
-                     AND dep.status != 'done'""",
+                     AND dep.status NOT IN ('done', 'cancelled')""",
                 (task_id,),
             ).fetchone()
             return row["cnt"] == 0
@@ -37,7 +37,7 @@ class DependencyValidator:
                    JOIN tasks dep ON dep.id = td.depends_on_task_id
                    WHERE td.task_id = ?
                      AND td.dependency_type = 'blocks'
-                     AND dep.status != 'done'
+                     AND dep.status NOT IN ('done', 'cancelled')
                    ORDER BY dep.id""",
                 (task_id,),
             ).fetchall()

@@ -400,12 +400,12 @@ class MainProjectFlow(Flow[ProjectState]):
                 "MainProjectFlow: failed to create repository for project %d",
                 self.state.project_id,
             )
-            # Non-fatal — project can still proceed without a repo
             log_flow_event(
                 self.state.project_id, "repo_creation_failed", "main_project_flow",
                 "project", self.state.project_id,
                 {"repo_name": slug, "error": "see logs"},
             )
+            raise  # Fatal — developers cannot work without a repo
 
     # ── Structure creation ────────────────────────────────────────────────
 

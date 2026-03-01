@@ -129,6 +129,19 @@ class CreatePRTool(PabadaBaseTool):
         # Record in DB
         self._record_pr(head, repo_name, pr_url, forgejo_pr_index=pr_number)
 
+        # Auto-populate pr_number/pr_url on the task
+        if self.task_id and pr_number:
+            def _update_task_pr(conn: sqlite3.Connection):
+                conn.execute(
+                    "UPDATE tasks SET pr_number = ?, pr_url = ? WHERE id = ?",
+                    (pr_number, pr_url, self.task_id),
+                )
+                conn.commit()
+            try:
+                execute_with_retry(_update_task_pr)
+            except Exception:
+                pass  # Non-critical
+
         self._log_tool_usage(f"Created PR #{pr_number}: {title}")
 
         try:
@@ -166,6 +179,9 @@ class CreatePRTool(PabadaBaseTool):
     ) -> str:
         """When no API is configured, just record the PR intent in DB."""
         self._record_pr(head, repo_name, "")
+
+        # No Forgejo PR was created, so clear any stale pr_number/pr_url
+        # (leave them as NULL)
 
         self._log_tool_usage(f"PR record created: {title}")
 

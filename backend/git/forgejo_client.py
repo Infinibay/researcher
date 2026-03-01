@@ -58,20 +58,42 @@ class ForgejoClient:
                 f"curl failed (rc={result.returncode}): {result.stderr or result.stdout}"
             )
 
+        # DELETE returns 204 with empty body — that's a success
+        if not result.stdout.strip():
+            return {}
+
         try:
             body = json.loads(result.stdout)
         except json.JSONDecodeError:
             raise ValueError(f"Invalid JSON from Forgejo: {result.stdout[:500]}")
 
-        # Forgejo returns {"message": "..."} on errors
-        if isinstance(body, dict) and "message" in body and len(body) <= 2:
-            # Allow create_repo to return bodies that have "message" among other keys
-            if len(body) == 1 or (len(body) == 2 and "url" in body):
+        # Forgejo returns {"message": "...", "url": "...", "errors": [...]}
+        # on errors. Detect by checking for "message" key where the only
+        # other keys are the well-known error-envelope fields.
+        if isinstance(body, dict) and "message" in body:
+            other_keys = set(body.keys()) - {"message", "url", "errors"}
+            if not other_keys:
                 raise ValueError(f"Forgejo API error: {body['message']}")
 
         return body
 
     # ── Public API ─────────────────────────────────────────────────────
+
+    def get_repo(self, owner: str, name: str) -> dict[str, Any] | None:
+        """Get a repository by owner and name. Returns None if not found."""
+        try:
+            return self._curl("GET", f"/repos/{owner}/{name}")
+        except ValueError:
+            return None
+
+    def delete_repo(self, owner: str, name: str) -> bool:
+        """Delete a repository. Returns True if deleted, False if not found."""
+        try:
+            self._curl("DELETE", f"/repos/{owner}/{name}")
+            logger.info("Deleted Forgejo repo '%s/%s'", owner, name)
+            return True
+        except ValueError:
+            return False
 
     def create_repo(
         self,
@@ -80,25 +102,43 @@ class ForgejoClient:
         private: bool = False,
         owner: str | None = None,
     ) -> dict[str, Any]:
-        """Create a new repository.
+        """Create a new repository (idempotent).
 
-        When *owner* is provided (an organisation name), posts to
-        ``/orgs/{owner}/repos``; otherwise posts to ``/user/repos``
-        (the authenticated user's personal namespace).
+        When *owner* is provided, tries ``/orgs/{owner}/repos`` first.
+        If that fails because *owner* is a user account (not an org),
+        falls back to ``/user/repos`` (authenticated user's namespace).
+
+        If a repo with the same name already exists, returns the existing
+        repo instead of raising an error.
 
         Returns the full Forgejo repo object (includes ``clone_url``).
         """
-        if owner:
-            endpoint = f"/orgs/{owner}/repos"
-        else:
-            endpoint = "/user/repos"
+        # Check if repo already exists — return it directly
+        lookup_owner = owner or self._owner or "pabada"
+        existing = self.get_repo(lookup_owner, name)
+        if existing:
+            logger.info("Forgejo repo '%s/%s' already exists, reusing it", lookup_owner, name)
+            return existing
 
-        body = self._curl("POST", endpoint, {
+        payload = {
             "name": name,
             "description": description,
             "private": private,
             "auto_init": False,
-        })
+        }
+
+        if owner:
+            try:
+                body = self._curl("POST", f"/orgs/{owner}/repos", payload)
+                logger.info("Created Forgejo repo '%s' under org '%s' → %s", name, owner, body.get("clone_url"))
+                return body
+            except ValueError as exc:
+                if "GetOrgByName" in str(exc):
+                    logger.info("'%s' is not an org, falling back to user repos endpoint", owner)
+                else:
+                    raise
+
+        body = self._curl("POST", "/user/repos", payload)
         logger.info("Created Forgejo repo '%s' → %s", name, body.get("clone_url"))
         return body
 

@@ -18,13 +18,14 @@ logger = logging.getLogger(__name__)
 
 # Providers where LiteLLM already knows the API endpoint.
 # Do NOT pass base_url for these — it breaks tool parameter routing.
-_LITELLM_NATIVE_PROVIDERS = frozenset({"deepseek", "anthropic", "gemini", "openai"})
+_LITELLM_NATIVE_PROVIDERS = frozenset({"deepseek", "anthropic", "gemini", "openai", "zai"})
 
 # Map provider prefix → env var that LiteLLM expects for the API key.
 _PROVIDER_KEY_ENV: dict[str, str] = {
     "deepseek": "DEEPSEEK_API_KEY",
     "anthropic": "ANTHROPIC_API_KEY",
     "gemini": "GEMINI_API_KEY",
+    "zai": "ZAI_API_KEY",
 }
 
 _lock = threading.Lock()

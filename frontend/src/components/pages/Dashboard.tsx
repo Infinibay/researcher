@@ -16,6 +16,7 @@ const barColors: Record<string, string> = {
   review_ready: '#8b5cf6',
   rejected: '#ef4444',
   done: '#10b981',
+  blocked: '#f97316',
 }
 
 export function Dashboard() {
