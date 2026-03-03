@@ -18,8 +18,8 @@ from crewai.flow.persistence import persist
 
 from backend.agents.registry import get_agent_by_role, get_available_agent_by_role
 from backend.flows.guardrails import validate_implementation_output
+from backend.engine import get_engine
 from backend.flows.helpers import (
-    build_crew,
     check_task_dependencies,
     detect_tech_hints,
     get_project_name,
@@ -185,14 +185,18 @@ class DevelopmentFlow(Flow[DevelopmentState]):
             project_id=self.state.project_id,
             project_name=self.state.project_name,
         )
+        from backend.engine.base import AgentKilledError
         from backend.tools import get_tools_for_task_type
-        crew = build_crew(
-            developer, task_prompt,
-            guardrail=validate_implementation_output,
-            task_tools=get_tools_for_task_type("implement"),
-        )
         try:
-            result = crew.kickoff()
+            result = get_engine().execute(
+                developer, task_prompt,
+                guardrail=validate_implementation_output,
+                task_tools=get_tools_for_task_type("implement"),
+            )
+        except AgentKilledError:
+            logger.info("Agent killed during implement_code for task %d", self.state.task_id)
+            developer.complete_agent_run(run_id, status="interrupted")
+            raise
         except Exception as exc:
             logger.exception("Crew execution failed in implement_code for task %d", self.state.task_id)
             developer.complete_agent_run(run_id, status="failed", error_class=type(exc).__name__)

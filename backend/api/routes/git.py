@@ -104,9 +104,16 @@ async def create_branch(body: BranchCreate):
     Generates a branch name from the task title, runs ``git checkout -b``,
     registers the branch in the DB, and updates ``tasks.branch_name``.
     """
+    # Resolve repo_path from DB — never trust caller-supplied paths
+    # (they may be container or worktree paths that don't exist on the host).
+    task_row = branch_service._get_task_row(body.task_id)
+    if not task_row:
+        raise HTTPException(status_code=404, detail=f"Task {body.task_id} not found")
+    repo_path = _resolve_repo_path(task_row["project_id"], body.repo_name)
+
     branch_name = branch_service.create_branch_for_task(
         task_id=body.task_id,
-        repo_path=body.repo_path,
+        repo_path=repo_path,
         base_branch=body.base_branch,
         repo_name=body.repo_name,
     )

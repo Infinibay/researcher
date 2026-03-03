@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from backend.agents.base import PabadaAgent
+from backend.config.settings import settings
 from backend.prompts.research_reviewer.system import build_system_prompt
 
 
@@ -26,6 +27,7 @@ def create_research_reviewer_agent(
 
     backstory = build_system_prompt(
         agent_name=agent_name, teammates=teammates,
+        engine=settings.AGENT_ENGINE,
     )
 
     return PabadaAgent(

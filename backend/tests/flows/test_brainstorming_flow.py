@@ -239,30 +239,28 @@ class TestFormatIdeas:
 class TestRunAgentTask:
     """Test run_agent_task helper."""
 
-    @patch("crewai.Crew")
-    @patch("crewai.Task")
-    def test_basic_invocation(self, MockTask, MockCrew):
+    @patch("backend.engine.get_engine")
+    def test_basic_invocation(self, mock_get_engine):
         from backend.flows.helpers import run_agent_task
-        from backend.tests.flows.conftest import make_mock_agent, make_mock_crew
+        from backend.tests.flows.conftest import make_mock_agent, make_mock_engine
 
         agent = make_mock_agent("team_lead")
-        MockCrew.return_value = make_mock_crew("result text")
+        mock_get_engine.return_value = make_mock_engine("result text")
 
         result = run_agent_task(agent, ("do the thing", "expected output"))
 
         assert result == "result text"
         agent.activate_context.assert_called_once_with(task_id=None)
-        MockCrew.assert_called_once()
+        mock_get_engine.return_value.execute.assert_called_once()
         agent.create_agent_run.assert_not_called()
 
-    @patch("crewai.Crew")
-    @patch("crewai.Task")
-    def test_with_run_tracking(self, MockTask, MockCrew):
+    @patch("backend.engine.get_engine")
+    def test_with_run_tracking(self, mock_get_engine):
         from backend.flows.helpers import run_agent_task
-        from backend.tests.flows.conftest import make_mock_agent, make_mock_crew
+        from backend.tests.flows.conftest import make_mock_agent, make_mock_engine
 
         agent = make_mock_agent("developer")
-        MockCrew.return_value = make_mock_crew("done")
+        mock_get_engine.return_value = make_mock_engine("done")
 
         result = run_agent_task(
             agent, ("implement", "code"), task_id=42, track_run=True,
@@ -276,15 +274,13 @@ class TestRunAgentTask:
         assert call_args[0][0] == "test-run-id"
         assert call_args[1]["status"] == "completed"
 
-    @patch("crewai.Crew")
-    @patch("crewai.Task")
-    def test_failure_completes_run_as_failed(self, MockTask, MockCrew):
+    @patch("backend.engine.get_engine")
+    def test_failure_completes_run_as_failed(self, mock_get_engine):
         from backend.flows.helpers import run_agent_task
         from backend.tests.flows.conftest import make_mock_agent
 
         agent = make_mock_agent("developer")
-        mock_crew = MockCrew.return_value
-        mock_crew.kickoff.side_effect = RuntimeError("LLM down")
+        mock_get_engine.return_value.execute.side_effect = RuntimeError("LLM down")
 
         with pytest.raises(RuntimeError, match="LLM down"):
             run_agent_task(

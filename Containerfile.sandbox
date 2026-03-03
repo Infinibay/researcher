@@ -40,6 +40,25 @@ RUN pip install --no-cache-dir \
 COPY scripts/pabada_file_helper.py /usr/local/bin/pabada-file-helper
 RUN chmod +x /usr/local/bin/pabada-file-helper
 
+# ── PABADA CLI helper (for Claude Code engine) ──────────────────────────
+COPY scripts/pabada_cli.py /usr/local/bin/pabada
+RUN chmod +x /usr/local/bin/pabada
+
+# ── PABADA MCP server (for Claude Code engine) ──────────────────────────
+RUN pip install --no-cache-dir fastmcp
+COPY scripts/pabada_mcp_server.py /usr/local/bin/pabada-mcp
+RUN chmod +x /usr/local/bin/pabada-mcp
+
+# ── Claude Code CLI (used when AGENT_ENGINE=claude_code) ─────────────
+# Install globally as root, then symlink to /usr/local/bin so it's in PATH
+# for non-root users (podman --userns=keep-id maps root→host user).
+RUN npm install -g @anthropic-ai/claude-code \
+    && ln -sf "$(npm root -g)/@anthropic-ai/claude-code/cli.js" /usr/local/bin/claude \
+    && chmod -R a+rX "$(npm root -g)/@anthropic-ai" \
+    && claude --version
+# .claude dir must be writable by the mapped user (keep-id → non-root)
+RUN mkdir -p /root/.claude && chmod 777 /root/.claude
+
 WORKDIR /workspace
 
 # No USER directive — pods run as root inside the container.

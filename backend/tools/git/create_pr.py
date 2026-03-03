@@ -25,7 +25,8 @@ class CreatePRTool(PabadaBaseTool):
     name: str = "create_pr"
     description: str = (
         "Create a pull request on the remote repository. "
-        "Requires the current branch to be pushed to the remote."
+        "Requires the current branch to be pushed to the remote. "
+        "Auto-populates pr_number and pr_url on the associated task."
     )
     args_schema: Type[BaseModel] = CreatePRInput
 

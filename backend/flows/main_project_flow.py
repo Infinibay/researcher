@@ -26,8 +26,8 @@ from backend.flows.guardrails import (
     validate_plan_output,
     validate_requirements_output,
 )
+from backend.engine import get_engine
 from backend.flows.helpers import (
-    build_crew,
     classify_approval_response,
     create_project,
     generate_final_report,
@@ -48,6 +48,67 @@ from backend.prompts.team import build_conversation_context
 from backend.prompts.team_lead import tasks as tl_tasks
 
 logger = logging.getLogger(__name__)
+
+# ── ReAct trace detection ──────────────────────────────────────────────────
+# CrewAI's agent executor sometimes returns raw ReAct thinking traces
+# instead of a proper final answer.  This happens when the ReAct loop
+# is interrupted (max_iter reached, tool-not-found, Qwen3 stopword
+# conflict, etc.).  These helpers detect and clean such traces.
+
+import re as _re
+
+_REACT_ACTION_RE = _re.compile(
+    r'(?m)^Action\s*:\s*.+\nAction\s+Input\s*:\s*\{',
+)
+_REACT_THOUGHT_PREFIX_RE = _re.compile(
+    r'^Thought\s*:\s*',
+)
+
+
+def _is_incomplete_react_trace(text: str) -> bool:
+    """Return True if *text* looks like a raw ReAct trace, not a decision.
+
+    Indicators:
+    - Starts with ``Thought:`` AND contains an ``Action: ... Action Input:``
+      block (the agent was mid-loop, not giving a final answer).
+    - Does NOT contain any of the expected decision prefixes.
+    """
+    if not text:
+        return False
+    upper = text.upper()
+    # If it starts with a valid prefix, it's a real decision.
+    if any(upper.startswith(p) for p in (
+        "NEW_TICKETS", "BRAINSTORM_NEEDED", "PROJECT_COMPLETE",
+    )):
+        return False
+    return bool(
+        _REACT_THOUGHT_PREFIX_RE.match(text) and _REACT_ACTION_RE.search(text)
+    )
+
+
+def _strip_react_trace(text: str) -> str:
+    """Try to extract a usable decision from a potentially messy LLM response.
+
+    Some models wrap the answer in ``Thought: ...`` preamble or append
+    ``Action:`` blocks after the decision.  This function:
+    1. Looks for a known decision prefix anywhere in the text.
+    2. If found, returns from that prefix onward (trimming leading noise).
+    3. Otherwise returns the text unchanged.
+    """
+    if not text:
+        return text
+    upper = text.upper()
+    for prefix in ("NEW_TICKETS", "BRAINSTORM_NEEDED", "PROJECT_COMPLETE"):
+        idx = upper.find(prefix)
+        if idx != -1:
+            extracted = text[idx:].strip()
+            if extracted != text:
+                logger.info(
+                    "Stripped %d chars of preamble before '%s' prefix",
+                    idx, prefix,
+                )
+            return extracted
+    return text
 
 
 @persist()
@@ -221,12 +282,12 @@ class MainProjectFlow(Flow[ProjectState]):
             conversation_context=conv_ctx,
         )
         from backend.tools import get_tools_for_task_type
-        result = build_crew(
+        result = get_engine().execute(
             project_lead, task_prompt,
             guardrail=validate_requirements_output,
             task_tools=get_tools_for_task_type("requirements"),
-        ).kickoff()
-        self.state.requirements = str(result)
+        )
+        self.state.requirements = result
 
         log_flow_event(
             self.state.project_id, "requirements_gathered", "main_project_flow",
@@ -257,12 +318,12 @@ class MainProjectFlow(Flow[ProjectState]):
             planning_iteration=self.state.planning_iteration,
         )
         from backend.tools import get_tools_for_task_type
-        result = build_crew(
+        result = get_engine().execute(
             team_lead, task_prompt,
             guardrail=validate_plan_output,
             task_tools=get_tools_for_task_type("plan"),
-        ).kickoff()
-        self.state.plan = str(result)
+        )
+        self.state.plan = result
 
         log_flow_event(
             self.state.project_id, "plan_created", "main_project_flow",
@@ -292,7 +353,7 @@ class MainProjectFlow(Flow[ProjectState]):
             requirements=self.state.requirements,
             conversation_context=conv_ctx,
         )
-        result = str(build_crew(project_lead, task_prompt).kickoff()).strip()
+        result = get_engine().execute(project_lead, task_prompt).strip()
 
         if classify_approval_response(result) == "approved":
             self.state.user_approved = True
@@ -902,7 +963,12 @@ class MainProjectFlow(Flow[ProjectState]):
             progress_summary, self.state.plan,
             conversation_context=conv_ctx,
         )
-        result = str(build_crew(team_lead, task_prompt).kickoff()).strip()
+        result = get_engine().execute(team_lead, task_prompt).strip()
+
+        # Strip incomplete ReAct traces that CrewAI sometimes returns as the
+        # "final answer" when the agent executor fails mid-loop (e.g. tool not
+        # found, max iterations, stopword conflict with Qwen3-style models).
+        result = _strip_react_trace(result)
 
         log_flow_event(
             self.state.project_id, "progress_evaluated", "main_project_flow",
@@ -914,18 +980,35 @@ class MainProjectFlow(Flow[ProjectState]):
         # Parse TL decision
         self.state.planning_iteration += 1
 
-        if result.upper().startswith("PROJECT_COMPLETE"):
+        result_upper = result.upper()
+        if result_upper.startswith("PROJECT_COMPLETE"):
             log_flow_event(
                 self.state.project_id, "project_complete_by_tl",
                 "main_project_flow", "project", self.state.project_id,
                 {"planning_iteration": self.state.planning_iteration},
             )
             return "project_complete"
-        elif result.upper().startswith("NEW_TICKETS"):
+        elif result_upper.startswith("NEW_TICKETS"):
             self.state.plan = result
             return "create_new_tickets"
-        elif result.upper().startswith("BRAINSTORM_NEEDED"):
+        elif result_upper.startswith("BRAINSTORM_NEEDED"):
             return "needs_brainstorming"
+        elif _is_incomplete_react_trace(result):
+            # The agent executor returned a raw ReAct trace instead of a
+            # proper decision.  Don't waste an attempt creating empty tickets.
+            logger.warning(
+                "MainProjectFlow: evaluate_progress got incomplete ReAct trace "
+                "for project %d (attempt %d) — retrying",
+                self.state.project_id,
+                self.state.evaluate_progress_attempts,
+            )
+            log_flow_event(
+                self.state.project_id, "progress_eval_react_trace",
+                "main_project_flow", "project", self.state.project_id,
+                {"attempt": self.state.evaluate_progress_attempts,
+                 "snippet": result[:200]},
+            )
+            return "not_complete"  # retry evaluate_progress
         else:
             # Default: TL provided a plan without the prefix — treat as new tickets
             self.state.plan = result
@@ -940,8 +1023,29 @@ class MainProjectFlow(Flow[ProjectState]):
         processing new work immediately.
         Triggers "create_additional_tickets" → check_and_launch_tasks via or_().
         """
+        from backend.flows.helpers import parse_plan_tasks
+
+        # Pre-check: bail out early if the plan has no parseable task titles.
+        # This avoids spinning up a TicketCreationFlow that creates empty
+        # epics/milestones but zero actual tasks.
+        pretitles = parse_plan_tasks(self.state.plan)
+        if not pretitles:
+            logger.warning(
+                "MainProjectFlow: plan has 0 parseable task titles for "
+                "project %d — skipping TicketCreationFlow. plan[:200]=%s",
+                self.state.project_id, self.state.plan[:200],
+            )
+            log_flow_event(
+                self.state.project_id, "additional_tickets_empty",
+                "main_project_flow", "project", self.state.project_id,
+                {"reason": "no_parseable_tasks"},
+            )
+            return
+
         logger.info(
-            "MainProjectFlow: creating additional tickets based on TL evaluation",
+            "MainProjectFlow: creating additional tickets based on TL "
+            "evaluation (%d task titles found)",
+            len(pretitles),
         )
 
         from backend.flows.event_listeners import event_bus
@@ -1118,7 +1222,7 @@ class MainProjectFlow(Flow[ProjectState]):
             requirements=self.state.requirements,
             conversation_context=conv_ctx,
         )
-        build_crew(project_lead, task_prompt).kickoff()
+        get_engine().execute(project_lead, task_prompt)
 
         log_flow_event(
             self.state.project_id, "project_completed", "main_project_flow",
@@ -1199,7 +1303,7 @@ class MainProjectFlow(Flow[ProjectState]):
                 conversation_context=conv_ctx,
             )
             try:
-                build_crew(team_lead, task_prompt).kickoff()
+                get_engine().execute(team_lead, task_prompt)
             except Exception:
                 logger.exception(
                     "MainProjectFlow: Team Lead intervention failed for task %d",

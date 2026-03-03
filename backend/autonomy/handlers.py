@@ -16,6 +16,7 @@ from abc import ABC, abstractmethod
 from typing import Any
 
 from backend.autonomy.events import update_event_status
+from backend.engine.base import AgentKilledError as _AgentKilledError
 
 logger = logging.getLogger(__name__)
 
@@ -102,6 +103,11 @@ class TaskFlowHandler(EventHandler):
                     project_id, "development_flow_completed",
                     "agent_loop", "task", task_id,
                 )
+        except _AgentKilledError:
+            logger.info(
+                "TaskFlowHandler: task %d interrupted (agent %s killed)", task_id, agent_id,
+            )
+            raise
         except Exception:
             logger.exception(
                 "TaskFlowHandler: flow failed for task %d (agent=%s)", task_id, agent_id,
@@ -260,8 +266,8 @@ class ReviewHandler(EventHandler):
         reviewer_id = task.get("reviewer", "")
 
         logger.info(
-            "ReviewHandler: starting CodeReviewFlow for task %d (project %d)",
-            task_id, project_id,
+            "ReviewHandler: starting CodeReviewFlow for task %d (project %d, reviewer=%s)",
+            task_id, project_id, reviewer_id,
         )
         try:
             flow = CodeReviewFlow()
@@ -269,6 +275,7 @@ class ReviewHandler(EventHandler):
                 "project_id": project_id,
                 "task_id": task_id,
                 "branch_name": branch_name,
+                "reviewer_id": reviewer_id,
             })
         except Exception:
             self._release_review(task_id, reviewer_id)
@@ -279,9 +286,9 @@ class ReviewHandler(EventHandler):
     ) -> None:
         """Run standalone research peer review (mirrors ResearchFlow.request_peer_review)."""
         from backend.agents.registry import get_agent_by_role, get_available_agent_by_role
+        from backend.engine import get_engine
         from backend.flows.guardrails import validate_research_review_verdict
         from backend.flows.helpers import (
-            build_crew,
             get_project_name,
             log_flow_event,
             parse_review_result,
@@ -332,11 +339,16 @@ class ReviewHandler(EventHandler):
             project_id=project_id,
             project_name=project_name,
         )
-        crew = build_crew(reviewer, task_prompt, guardrail=validate_research_review_verdict)
-
         try:
-            from backend.flows.helpers.reporting import kickoff_with_retry
-            result = str(kickoff_with_retry(crew)).strip()
+            result = get_engine().execute(
+                reviewer, task_prompt,
+                guardrail=validate_research_review_verdict,
+            ).strip()
+        except _AgentKilledError:
+            logger.info("ReviewHandler: review for task %d interrupted (agent killed)", task_id)
+            reviewer.complete_agent_run(run_id, status="interrupted")
+            self._release_review(task_id, agent_id or "")
+            raise
         except Exception as exc:
             logger.exception(
                 "ReviewHandler: research peer review failed for task %d", task_id,
@@ -414,7 +426,7 @@ class HealthCheckHandler(EventHandler):
         for task in stuck[:3]:
             try:
                 from backend.agents.registry import get_agent_by_role
-                from backend.flows.helpers import build_crew
+                from backend.engine import get_engine
                 from backend.prompts.team import build_conversation_context
                 from backend.prompts.team_lead import tasks as tl_tasks
 
@@ -435,13 +447,18 @@ class HealthCheckHandler(EventHandler):
                     project_name="",
                     conversation_context=conv_ctx,
                 )
-                from backend.flows.helpers.reporting import kickoff_with_retry
-                kickoff_with_retry(build_crew(team_lead, task_prompt))
+                get_engine().execute(team_lead, task_prompt)
 
                 log_flow_event(
                     project_id, "agent_loop_health_intervention",
                     "agent_loop", "task", task["id"],
                 )
+            except _AgentKilledError:
+                logger.info(
+                    "HealthCheckHandler: intervention for task %d interrupted (agent killed)",
+                    task["id"],
+                )
+                raise
             except Exception:
                 logger.exception(
                     "HealthCheckHandler: intervention failed for task %d", task["id"],
@@ -551,7 +568,7 @@ class ProgressEvalHandler(EventHandler):
         from backend.agents.registry import get_agent_by_role
         from backend.flows.helpers import log_flow_event
         from backend.flows.helpers.db_helpers import get_project_progress_summary
-        from backend.flows.helpers.reporting import build_crew, kickoff_with_retry
+        from backend.engine import get_engine
         from backend.prompts.team_lead import tasks as tl_tasks
 
         try:
@@ -574,9 +591,7 @@ class ProgressEvalHandler(EventHandler):
                 progress_summary=progress,
             )
 
-            crew = build_crew(agent, (description, expected_output))
-            result = kickoff_with_retry(crew)
-            result_str = str(result).strip()
+            result_str = get_engine().execute(agent, (description, expected_output)).strip()
 
             logger.info(
                 "evaluate_progress completed for project %d: %s",
@@ -613,6 +628,9 @@ class ProgressEvalHandler(EventHandler):
             # NEW_TICKETS / default: TL already created tickets via tools
             # during the Crew task — no additional action needed.
 
+        except _AgentKilledError:
+            logger.info("evaluate_progress interrupted for project %d (agent killed)", project_id)
+            raise
         except Exception:
             logger.exception(
                 "Failed to run evaluate_progress for project %d", project_id,
@@ -624,8 +642,8 @@ class ReworkHandler(EventHandler):
 
     def execute(self, event: dict[str, Any]) -> None:
         from backend.agents.registry import get_agent_by_role
+        from backend.engine import get_engine
         from backend.flows.helpers import (
-            build_crew,
             get_project_name,
             get_task_by_id,
             increment_task_retry,
@@ -645,6 +663,18 @@ class ReworkHandler(EventHandler):
         task = get_task_by_id(task_id)
         if not task:
             logger.warning("ReworkHandler: task %d not found", task_id)
+            return
+
+        # Guard: only rework tasks that are still in 'rejected' status.
+        # Stale events from earlier rejection cascades may arrive after
+        # the developer has already reworked and moved the task forward.
+        current_status = task.get("status", "")
+        if current_status != "rejected":
+            logger.info(
+                "ReworkHandler: skipping stale task_rejected event %d for task %d "
+                "(current status=%s, expected rejected)",
+                event["id"], task_id, current_status,
+            )
             return
 
         task_type = task.get("type", "code")
@@ -686,15 +716,17 @@ class ReworkHandler(EventHandler):
                 feedback, branch_name, rejection_count,
                 project_id, project_name,
             )
-            crew = build_crew(agent, task_prompt)
-            from backend.flows.helpers.reporting import kickoff_with_retry
-            result = str(kickoff_with_retry(crew)).strip()
+            result = get_engine().execute(agent, task_prompt).strip()
 
             agent.complete_agent_run(run_id, status="completed", output_summary=result[:500])
             log_flow_event(
                 project_id, f"rework_{task_type}_completed",
                 "agent_loop", "task", task_id,
             )
+        except _AgentKilledError:
+            logger.info("ReworkHandler: rework for task %d interrupted (agent killed)", task_id)
+            agent.complete_agent_run(run_id, status="interrupted")
+            raise
         except Exception as exc:
             logger.exception(
                 "ReworkHandler: rework failed for task %d (agent=%s)", task_id, agent_id,

@@ -9,7 +9,7 @@ import pytest
 
 from backend.flows.helpers import get_task_by_id, increment_task_retry
 from backend.flows.state_models import CodeReviewState, ReviewStatus
-from backend.tests.flows.conftest import make_mock_agent, make_mock_crew
+from backend.tests.flows.conftest import make_mock_agent, make_mock_engine
 
 
 class TestCodeReviewState:
@@ -71,12 +71,12 @@ class TestCodeReviewFlowStart:
 class TestCodeReviewFlowReview:
     """Test the review execution and routing."""
 
-    @patch("backend.flows.code_review_flow.build_crew")
+    @patch("backend.flows.code_review_flow.get_engine")
     @patch("backend.flows.code_review_flow.get_available_agent_by_role")
     @patch("backend.flows.code_review_flow.log_flow_event")
-    def test_perform_review_approved(self, mock_log, mock_agent, mock_build_crew, db_conn, executing_project):
+    def test_perform_review_approved(self, mock_log, mock_agent, mock_get_engine, db_conn, executing_project):
         mock_agent.return_value = make_mock_agent("code_reviewer", executing_project)
-        mock_build_crew.return_value = make_mock_crew("APPROVED: Code looks good")
+        mock_get_engine.return_value = make_mock_engine("APPROVED: Code looks good")
 
         from backend.flows.code_review_flow import CodeReviewFlow
 
@@ -94,12 +94,12 @@ class TestCodeReviewFlowReview:
         route = flow.review_outcome_router()
         assert route == "review_approved"
 
-    @patch("backend.flows.code_review_flow.build_crew")
+    @patch("backend.flows.code_review_flow.get_engine")
     @patch("backend.flows.code_review_flow.get_available_agent_by_role")
     @patch("backend.flows.code_review_flow.log_flow_event")
-    def test_perform_review_rejected(self, mock_log, mock_agent, mock_build_crew, db_conn, executing_project):
+    def test_perform_review_rejected(self, mock_log, mock_agent, mock_get_engine, db_conn, executing_project):
         mock_agent.return_value = make_mock_agent("code_reviewer", executing_project)
-        mock_build_crew.return_value = make_mock_crew("REJECTED: Missing error handling")
+        mock_get_engine.return_value = make_mock_engine("REJECTED: Missing error handling")
 
         from backend.flows.code_review_flow import CodeReviewFlow
 

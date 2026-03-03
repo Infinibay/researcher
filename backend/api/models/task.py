@@ -2,7 +2,11 @@
 
 from __future__ import annotations
 
+from typing import Literal
+
 from pydantic import BaseModel, Field
+
+CommentType = Literal["comment", "change_request", "approval", "question", "answer"]
 
 
 class TaskCreate(BaseModel):
@@ -51,14 +55,14 @@ class TaskResponse(BaseModel):
 class TaskCommentCreate(BaseModel):
     author: str = Field(default="user")
     content: str = Field(..., min_length=1)
-    comment_type: str = Field(default="comment")
+    comment_type: CommentType = Field(default="comment")
 
 
 class TaskCommentResponse(BaseModel):
     id: int
     task_id: int
     author: str
-    comment_type: str
+    comment_type: CommentType
     content: str
     created_at: str | None = None
 

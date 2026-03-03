@@ -145,6 +145,17 @@ class Settings(BaseSettings):
     MAX_MILESTONES_PER_EPIC: int = 4    # Max milestones per epic
     MAX_TASKS_PER_MILESTONE: int = 8    # Max tasks per milestone
 
+    # Agent Engine
+    AGENT_ENGINE: str = "crewai"  # "crewai" | "claude_code"
+    CLAUDE_CODE_MODEL: str = "claude-opus-4-6"
+    CLAUDE_CODE_TIMEOUT_DEFAULT: int = 1800  # 30 min
+    CLAUDE_CODE_TIMEOUT_DEVELOPER: int = 3600  # 60 min
+    CLAUDE_CODE_TIMEOUT_CODE_REVIEWER: int = 900  # 15 min
+    CLAUDE_CODE_TIMEOUT_RESEARCHER: int = 2400  # 40 min
+    CLAUDE_CODE_TIMEOUT_TEAM_LEAD: int = 1800  # 30 min
+    CLAUDE_CODE_TIMEOUT_PROJECT_LEAD: int = 1800  # 30 min
+    CLAUDE_CODE_CREDENTIALS_PATH: str = "~/.claude/.credentials.json"
+
     # Agent Autonomy Layer
     AUTONOMY_ENABLED: bool = True
 

@@ -39,7 +39,8 @@ class ExecuteCommandTool(PabadaBaseTool):
     description: str = (
         "Execute a shell command. When running inside a container pod, all "
         "commands are allowed. In direct mode, only whitelisted commands "
-        "are permitted. Returns stdout, stderr, and exit code."
+        "are permitted and shell operators (;, |, &, `, <, >) are rejected. "
+        "Returns stdout, stderr, and exit code."
     )
     args_schema: Type[BaseModel] = ExecuteCommandInput
 

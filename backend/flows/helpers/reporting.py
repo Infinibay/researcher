@@ -244,24 +244,29 @@ def run_agent_task(
         guardrail_max_retries: Max retries when guardrail validation fails.
         task_tools: Override task-specific tools (subset of agent tools).
     """
+    from backend.engine import get_engine
+
     agent.activate_context(task_id=task_id)
 
     run_id: str | None = None
     if track_run and task_id is not None:
         run_id = agent.create_agent_run(task_id)
 
-    crew = build_crew(
-        agent, task_prompt,
-        verbose=verbose,
-        output_pydantic=output_pydantic,
-        guardrail=guardrail,
-        guardrail_max_retries=guardrail_max_retries,
-        task_tools=task_tools,
-    )
+    from backend.engine.base import AgentKilledError
 
     try:
-        result = kickoff_with_retry(crew)
-        result_str = str(result)
+        result_str = get_engine().execute(
+            agent, task_prompt,
+            verbose=verbose,
+            output_pydantic=output_pydantic,
+            guardrail=guardrail,
+            guardrail_max_retries=guardrail_max_retries,
+            task_tools=task_tools,
+        )
+    except AgentKilledError:
+        if run_id:
+            agent.complete_agent_run(run_id, status="interrupted")
+        raise
     except Exception as exc:
         if run_id:
             agent.complete_agent_run(

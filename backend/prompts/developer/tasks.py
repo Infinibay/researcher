@@ -99,10 +99,6 @@ Use **CodeSearchTool** to find all usages of functions or classes you plan
 to modify. This helps you understand the impact of your changes and avoid
 breaking callers.
 
-Save progress: call **SaveSessionNoteTool** with phase="implementing",
-notes_json={{"branch": "...", "files_inspected": [...], "step": 2}},
-last_file=<last file you read>.
-
 ### Step 3: Implement the Changes
 For each change, follow existing codebase conventions, handle error conditions
 appropriately, do NOT introduce security vulnerabilities (injection, XSS,
@@ -135,9 +131,6 @@ Write tests for new or modified functionality:
 - Edge cases: boundary conditions, empty inputs, large inputs.
 
 Place tests in the project's test directory following existing conventions.
-
-Save progress: call **SaveSessionNoteTool** with phase="testing",
-notes_json={{"branch": "...", "tests_written": [...], "step": 4}}.
 
 ### Step 5: Run Tests
 
@@ -189,9 +182,6 @@ is a protocol violation and will be treated as a blocking defect by the Code
 Reviewer. The CI gate will automatically reject the submission before the
 reviewer even sees it.**
 
-Save progress: call **SaveSessionNoteTool** with phase="testing",
-notes_json={{"branch": "...", "test_command": "...", "tests_passed": true/false, "step": 5}}.
-
 ### Step 6: Self-Review
 Use **GitDiffTool** to review your own changes before committing. Check for:
 - Unintended changes (debug prints, commented-out code, unrelated edits).
@@ -201,79 +191,56 @@ Use **GitDiffTool** to review your own changes before committing. Check for:
 
 Remove any debugging artifacts before committing.
 
-Save progress: call **SaveSessionNoteTool** with phase="implementing",
-notes_json={{"branch": "...", "self_review_clean": true/false, "step": 6}}.
-
 ### Step 7: Commit, Push, and Open PR
-Follow STEPS 3, 4, and 5 of the Git + Forgejo Workflow above. Concretely:
+Follow the COMMIT, PUSH, and OPEN PR steps from the Git Workflow above.
+Concretely:
 1. **GitCommitTool** — stages all changes (`git add -A`) and commits
    (`git commit -m "<message>"`).
 2. **GitPushTool** — pushes the branch to origin on the Forgejo server
    (`git push -u origin <branch>`).
-3. **CreatePRTool** — opens a pull request against base="main" via
-   `POST $FORGEJO_API_URL/repos/{{owner}}/{{repo}}/pulls`.
-   The PR body must list each acceptance criterion from the task and
-   confirm it is satisfied.
+3. **CreatePRTool** — opens a pull request against base="main".
+   Re-read the task with **GetTaskTool** to refresh acceptance criteria —
+   the PR body must list each criterion and confirm it is satisfied.
    CreatePRTool **automatically sets `pr_number` and `pr_url`** on the
    task record when a Forgejo PR is created.
 
-Save progress: call **SaveSessionNoteTool** with phase="implementing",
-notes_json={{"branch": "...", "commit_sha": "...", "pr_url": "...", "step": 7}}.
+### Step 8: Post Review Comment and Submit
+The Code Reviewer is a separate agent — they only see what is committed
+and pushed (via GitDiffTool, ReadFileTool, GetTaskTool, and your comments).
 
-### Step 8: Submit for Review
-Use **UpdateTaskStatusTool** to set the status to `review_ready`.
-If GitBranchTool or CreatePRTool failed to auto-set the branch/PR info,
-you can pass optional `branch_name` and/or `pr_url` parameters to
-UpdateTaskStatusTool as a fallback.
+1. Use **AddCommentTool** on the task with a submission comment containing:
+   - The exact branch name (e.g., `task-7-auth-middleware`).
+   - A summary of what changed and why.
+   - How to test it (test command or manual steps).
+   - Any assumptions made (prefix: `ASSUMPTION:`).
+   This is NOT optional — a vague "implementation done" forces the reviewer
+   to guess, which slows down the entire review cycle.
 
-Save progress: call **SaveSessionNoteTool** with phase="implementing",
+2. Use **UpdateTaskStatusTool** to set the status to `review_ready`.
+   If GitBranchTool or CreatePRTool failed to auto-set branch/PR info,
+   pass optional `branch_name` and/or `pr_url` parameters as a fallback.
+
+Save progress: call **SaveSessionNoteTool** with phase="complete",
 notes_json={{"branch": "...", "status": "review_ready", "step": 8}}.
-
-## Handoff to Code Reviewer
-After you submit, a **Code Reviewer** will evaluate your work. The reviewer
-is a different agent — they do NOT have access to your memory, your terminal
-history, or anything you did not explicitly commit and push. If it is not
-on the branch, it does not exist for the reviewer.
-
-**The reviewer will use these tools to find your work:**
-- **GitDiffTool** — to read the diff on your branch vs main.
-- **GitStatusTool** — to see which files changed.
-- **ReadFileTool** — to read specific files for context.
-- **GetTaskTool** — to read the task description and your comments.
-
-**Your AddCommentTool submission comment must include:**
-1. The exact branch name (e.g., `task-7-auth-middleware`).
-2. A summary of what changed and why.
-3. How to test it (test command or manual steps).
-4. Any assumptions made (prefix: `ASSUMPTION:`).
-
-This is not optional — it is the reviewer's map to your work. A vague
-comment like "implementation done" forces the reviewer to guess, which
-slows down the entire review cycle.
 
 ## Important Reminders
 - Do NOT move to `review_ready` without running tests.
 - Do NOT push code with failing tests.
 - Do NOT make changes outside the scope of the task.
-- Do NOT forget to post the branch name as a task comment.
+- Do NOT skip the AddCommentTool submission comment before `review_ready`.
 """
 
     expected_output = """\
 A summary of the implementation containing:
 
-1. **Branch name**: The exact branch name created (format: task-{id}-{slug}).
-2. **Files changed**: List of files created or modified with a brief
-   description of each change.
-3. **Tests written**: What tests were added and what they verify.
-4. **Test results**: Confirmation that all tests pass.
-5. **Test execution strategy**: State whether full suite or relevant-only
-   mode was used, and why (test count, estimated duration).
-6. **Status**: Confirmation that the task was moved to `review_ready`.
-7. **Escalations** (if applicable): If tests failed persistently and
-   AskTeamLeadTool was used, document what was asked and what response
-   was received.
-8. **Session State**: Whether a prior session was loaded and that progress
-   was saved at each step with the correct step number in notes_json.
+1. **Branch & files changed**: The branch name (format: task-{id}-{slug})
+   and list of files created or modified with a brief description of each.
+2. **Test results**: Tests added, strategy used (full suite or relevant-only
+   with reasoning), and confirmation that all tests pass.
+3. **PR & status**: The PR URL and confirmation that the task was moved
+   to `review_ready` with a proper submission comment.
+4. **Escalations** (if any): If tests failed persistently and
+   AskTeamLeadTool was used, what was asked and the response received.
 """
     return description, expected_output
 

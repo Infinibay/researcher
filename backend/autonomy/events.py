@@ -341,6 +341,30 @@ def get_event_by_id(event_id: int) -> dict[str, Any] | None:
     return execute_with_retry(_query)
 
 
+def get_active_event_for_agent(
+    agent_id: str, task_id: int, event_type: str,
+) -> dict[str, Any] | None:
+    """Check if an agent has an active (pending/claimed/in_progress) event for a task."""
+
+    def _query(conn: sqlite3.Connection) -> dict[str, Any] | None:
+        row = conn.execute(
+            """SELECT * FROM agent_events
+               WHERE agent_id = ?
+                 AND event_type = ?
+                 AND status IN ('pending', 'claimed', 'in_progress')
+                 AND payload_json LIKE ?
+               LIMIT 1""",
+            (agent_id, event_type, f'%"task_id": {task_id}%'),
+        ).fetchone()
+        return dict(row) if row else None
+
+    try:
+        return execute_with_retry(_query)
+    except Exception:
+        logger.debug("get_active_event_for_agent failed", exc_info=True)
+        return None
+
+
 def cancel_pending_events(agent_id: str, project_id: int) -> int:
     """Cancel all pending events for an agent. Returns count cancelled."""
 

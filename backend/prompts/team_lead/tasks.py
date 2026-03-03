@@ -807,29 +807,33 @@ the project complete.
 
 ## Step-by-Step Process
 
-### Step 1: Review Completed Work
-Use **ReadTasksTool** to review all completed tasks in detail. For each:
-- What was accomplished?
-- Did it meet its acceptance criteria?
-- What outputs or artifacts were produced?
+### Step 1: Review the Progress Summary Above
+The "Current Progress" section above already contains:
+- Epic status, task counts by status, in-progress work, pending queue,
+  recently completed tasks, research results, and any failed/blocked tasks.
 
-### Step 2: Review Research Findings
-Use **ReadFindingsTool** to review all research findings gathered during the
-project. This is critical — research tasks often produce insights that inform
-what new development tasks are needed.
+Read it carefully. This is your primary source of truth — do NOT waste
+time calling ReadTasksTool to re-read everything. You already have it.
 
-Use **ReadWikiTool** to check the knowledge base for any reports or
-documentation produced by researchers.
+Only use **GetTaskTool** (with a specific task ID) if you need the full
+description or acceptance criteria for a particular task.
 
-### Step 3: Assess Remaining Gaps
-Compare what has been accomplished against the project objectives:
-- Which epics are incomplete and why?
-- What specific work is missing to complete each remaining objective?
-- Are there new insights from research that change what needs to be done?
+### Step 2: Check Research Findings (if research tasks completed)
+If the progress summary shows completed research tasks, use
+**ReadFindingsTool** to get the detailed findings. Research insights
+often inform what development tasks come next.
 
-### Step 4: Read Messages
-Use **ReadMessagesTool** to check for any messages from agents that may
-contain bug reports, blockers, or recommendations relevant to next steps.
+Optionally use **ReadWikiTool** if researchers produced reports.
+
+### Step 3: Check Messages
+Use **ReadMessagesTool** to check for unread messages — bug reports,
+blockers, or agent recommendations relevant to next steps.
+
+### Step 4: Assess Remaining Gaps
+Compare accomplished work against project objectives:
+- Which epics are still open and what's missing?
+- Do research findings change the direction?
+- Are there blocked tasks that need unblocking?
 
 ### Step 5: Decide on Next Steps
 Based on your analysis, choose ONE of these three paths:

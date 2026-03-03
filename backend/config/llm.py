@@ -82,7 +82,9 @@ def get_llm() -> Any:
             kwargs["api_key"] = settings.LLM_API_KEY
 
         # Only pass base_url for non-native providers (e.g. Ollama, vLLM)
-        if settings.LLM_BASE_URL and not _is_native_provider(model):
+        # or when explicitly set for local providers (llama-server, etc.)
+        is_local = os.environ.get("PABADA_LLM_PROVIDER", "") == "local"
+        if settings.LLM_BASE_URL and (not _is_native_provider(model) or is_local):
             kwargs["base_url"] = settings.LLM_BASE_URL
 
         _cached_llm = LLM(**kwargs)
@@ -93,11 +95,16 @@ def get_llm() -> Any:
         # Thinking mode control (Qwen3, etc.)
         # CrewAI's OpenAICompletion only passes reasoning_effort for O1
         # models, so we inject it into additional_params directly.
-        # LiteLLM maps reasoning_effort to Ollama's `think` parameter:
-        #   "none" → think=False,  "low"/"medium"/"high" → think=True
+        # Ollama rejects "none" — it only accepts "high"/"medium"/"low"/true/false.
+        # For Ollama models we pass think=False via extra_body instead.
+        is_ollama = model.startswith("ollama")
         if not settings.LLM_THINKING:
-            _cached_llm.additional_params["reasoning_effort"] = "none"
-            logger.info("LLM thinking mode disabled (reasoning_effort=none)")
+            if is_ollama:
+                _cached_llm.additional_params["think"] = False
+            else:
+                _cached_llm.additional_params["reasoning_effort"] = "none"
+            logger.info("LLM thinking mode disabled (provider=%s)",
+                        "ollama" if is_ollama else "other")
         logger.info(
             "LLM configured: model=%s, base_url=%s, api_key=%s, thinking=%s",
             model,
@@ -164,12 +171,28 @@ def _install_llm_diagnostics() -> None:
         logger.debug("Could not install LLM diagnostics", exc_info=True)
 
 
-def get_litellm_params() -> dict[str, Any]:
+def get_litellm_params() -> dict[str, Any] | None:
     """Return kwargs suitable for ``litellm.completion(**params, messages=...)``.
 
-    Used by callers that invoke litellm directly (e.g. deep_research.py).
+    Used by callers that invoke litellm directly (e.g. chat summarization,
+    deep research synthesis).
+
+    When ``AGENT_ENGINE=claude_code``, returns ``None`` — agents already
+    have built-in summarization and synthesis capabilities via Claude Code,
+    so auxiliary LiteLLM calls are unnecessary.  Callers should fall back
+    to non-LLM logic (raw messages, simple truncation, etc.).
+
+    When ``AGENT_ENGINE=crewai``, uses ``LLM_MODEL`` / ``LLM_API_KEY``
+    as before.
     """
     from backend.config.settings import settings
+
+    if settings.AGENT_ENGINE == "claude_code":
+        logger.debug(
+            "AGENT_ENGINE=claude_code — skipping auxiliary LiteLLM call "
+            "(agents handle summarization natively)"
+        )
+        return None
 
     model = settings.LLM_MODEL
     if not model:
@@ -180,7 +203,8 @@ def get_litellm_params() -> dict[str, Any]:
     if settings.LLM_API_KEY:
         params["api_key"] = settings.LLM_API_KEY
 
-    if settings.LLM_BASE_URL and not _is_native_provider(model):
+    is_local = os.environ.get("PABADA_LLM_PROVIDER", "") == "local"
+    if settings.LLM_BASE_URL and (not _is_native_provider(model) or is_local):
         params["api_base"] = settings.LLM_BASE_URL
 
     return params

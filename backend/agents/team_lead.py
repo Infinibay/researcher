@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from backend.agents.base import PabadaAgent
+from backend.config.settings import settings
 from backend.prompts.team_lead.system import build_system_prompt
 
 
@@ -19,6 +20,7 @@ def create_team_lead_agent(
     """Instantiate a Team Lead agent."""
     backstory = build_system_prompt(
         agent_name=agent_name, teammates=teammates,
+        engine=settings.AGENT_ENGINE,
     )
 
     return PabadaAgent(

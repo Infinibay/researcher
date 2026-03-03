@@ -8,9 +8,6 @@ import uuid
 from datetime import datetime, timezone
 from typing import Any
 
-from crewai import Agent
-
-from backend.tools import get_tools_for_role
 from backend.tools.base.context import bind_tools_to_agent, set_context
 from backend.tools.base.db import execute_with_retry
 
@@ -62,9 +59,16 @@ class PabadaAgent:
         self.agent_id = agent_id
         self.role = role
         self.name = name
+        self.goal = goal
+        self.backstory = backstory
         self.project_id = project_id
 
+        from backend.config.settings import settings
+        self._engine_type = settings.AGENT_ENGINE
+
         # Resolve tools for the role, plus optional extras
+        from backend.tools import get_tools_for_role
+
         tools = get_tools_for_role(role)
         if extra_tools:
             tools = tools + list(extra_tools)
@@ -75,51 +79,62 @@ class PabadaAgent:
 
         # Resolve max_execution_time from settings if not explicitly provided
         if max_execution_time is None:
-            from backend.config.settings import settings
             setting_attr = self._ROLE_EXECUTION_TIMES.get(role)
             if setting_attr:
                 max_execution_time = getattr(settings, setting_attr)
             else:
                 max_execution_time = settings.AGENT_MAX_EXECUTION_TIME_DEFAULT
 
-        # Build the underlying CrewAI agent
-        agent_kwargs: dict[str, Any] = {
-            "role": name,
-            "goal": goal,
-            "backstory": backstory,
-            "tools": tools,
-            "allow_delegation": allow_delegation,
-            "verbose": verbose,
-            "max_iter": max_iter,
-            "max_execution_time": max_execution_time,
-            "max_retry_limit": max_retry_limit,
-        }
-        if reasoning:
-            agent_kwargs["reasoning"] = True
-            if max_reasoning_attempts is not None:
-                agent_kwargs["max_reasoning_attempts"] = max_reasoning_attempts
-        if llm is not None:
-            agent_kwargs["llm"] = llm
-        else:
-            from backend.config.llm import get_llm
-            try:
-                agent_kwargs["llm"] = get_llm()
-            except RuntimeError:
-                pass  # fall back to CrewAI's default env-var resolution
-        if knowledge_sources:
-            agent_kwargs["knowledge_sources"] = knowledge_sources
-            # Configure embedder so CrewAI's knowledge system uses the
-            # correct provider instead of defaulting to OpenAI's API.
-            from backend.knowledge.service import KnowledgeService
-            agent_kwargs["embedder"] = KnowledgeService.configure_embedder()
+        if self._engine_type == "crewai":
+            # Build the underlying CrewAI agent
+            from crewai import Agent
 
-        self._agent = Agent(**agent_kwargs)
+            agent_kwargs: dict[str, Any] = {
+                "role": name,
+                "goal": goal,
+                "backstory": backstory,
+                "tools": tools,
+                "allow_delegation": allow_delegation,
+                "verbose": verbose,
+                "max_iter": max_iter,
+                "max_execution_time": max_execution_time,
+                "max_retry_limit": max_retry_limit,
+            }
+            if reasoning:
+                agent_kwargs["reasoning"] = True
+                if max_reasoning_attempts is not None:
+                    agent_kwargs["max_reasoning_attempts"] = max_reasoning_attempts
+            if llm is not None:
+                agent_kwargs["llm"] = llm
+            else:
+                from backend.config.llm import get_llm
+                try:
+                    agent_kwargs["llm"] = get_llm()
+                except RuntimeError:
+                    pass  # fall back to CrewAI's default env-var resolution
+            if knowledge_sources:
+                agent_kwargs["knowledge_sources"] = knowledge_sources
+                from backend.knowledge.service import KnowledgeService
+                agent_kwargs["embedder"] = KnowledgeService.configure_embedder()
+
+            self._agent = Agent(**agent_kwargs)
+        else:
+            # Claude Code engine — no CrewAI Agent needed
+            self._agent = None
 
     # -- Public properties -----------------------------------------------------
 
     @property
-    def crewai_agent(self) -> Agent:
-        """Return the underlying ``crewai.Agent`` instance."""
+    def crewai_agent(self) -> Any:
+        """Return the underlying ``crewai.Agent`` instance.
+
+        Raises RuntimeError if the agent engine is not CrewAI.
+        """
+        if self._agent is None:
+            raise RuntimeError(
+                f"Agent '{self.agent_id}' was created with engine "
+                f"'{self._engine_type}' — no CrewAI Agent available."
+            )
         return self._agent
 
     # -- Context management ----------------------------------------------------
@@ -294,7 +309,7 @@ class PabadaAgent:
         )
         return agent_run_id
 
-    _VALID_RUN_STATUSES = {"completed", "failed", "timeout"}
+    _VALID_RUN_STATUSES = {"completed", "failed", "timeout", "interrupted"}
 
     def complete_agent_run(
         self,
@@ -310,6 +325,10 @@ class PabadaAgent:
             raise ValueError(
                 f"Invalid status '{status}'. Valid: {sorted(self._VALID_RUN_STATUSES)}"
             )
+        # Map "interrupted" to "failed" for DB CHECK constraint compatibility
+        db_status = "failed" if status == "interrupted" else status
+        if status == "interrupted" and not error_class:
+            error_class = "AgentKilledError"
 
         def _finish(conn: sqlite3.Connection) -> None:
             conn.execute(
@@ -318,7 +337,7 @@ class PabadaAgent:
                           tokens_used = ?, error_class = ?,
                           ended_at = CURRENT_TIMESTAMP
                     WHERE agent_run_id = ?""",
-                (status, output_summary, tokens_used, error_class, agent_run_id),
+                (db_status, output_summary, tokens_used, error_class, agent_run_id),
             )
             # Update agent_performance (upsert)
             if status == "completed":

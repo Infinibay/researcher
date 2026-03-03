@@ -20,8 +20,8 @@ from crewai.flow.persistence import persist
 from backend.agents.registry import get_agent_by_role, get_available_agent_by_role
 from backend.config.settings import settings
 from backend.flows.guardrails import validate_review_verdict
+from backend.engine import get_engine
 from backend.flows.helpers import (
-    build_crew,
     get_project_name,
     get_repo_path_for_task,
     get_task_by_id,
@@ -253,16 +253,15 @@ class CodeReviewFlow(Flow[CodeReviewState]):
             self.state.rejection_count + 1,
         )
 
-        reviewer = get_available_agent_by_role("code_reviewer", self.state.project_id)
-
-        # Double-check claim (flow may be called directly, not only via handler)
-        task_check = get_task_by_id(self.state.task_id)
-        if task_check and task_check.get("reviewer") and task_check["reviewer"] not in ("", reviewer.agent_id):
-            logger.info(
-                "CodeReviewFlow: task %d already claimed by %s, skipping",
-                self.state.task_id, task_check["reviewer"],
+        # Use the reviewer that was claimed by the handler (passed via state),
+        # falling back to any available code_reviewer if not set.
+        if self.state.reviewer_id:
+            reviewer = get_agent_by_role(
+                "code_reviewer", self.state.project_id,
+                agent_id=self.state.reviewer_id,
             )
-            return
+        else:
+            reviewer = get_available_agent_by_role("code_reviewer", self.state.project_id)
         self.state.reviewer_id = reviewer.agent_id
         reviewer.activate_context(task_id=self.state.task_id)
         run_id = reviewer.create_agent_run(self.state.task_id)
@@ -279,14 +278,18 @@ class CodeReviewFlow(Flow[CodeReviewState]):
             project_name=self.state.project_name,
             rejection_count=self.state.rejection_count,
         )
+        from backend.engine.base import AgentKilledError
         from backend.tools import get_tools_for_task_type
-        crew = build_crew(
-            reviewer, task_prompt,
-            guardrail=validate_review_verdict,
-            task_tools=get_tools_for_task_type("review"),
-        )
         try:
-            result = str(crew.kickoff()).strip()
+            result = get_engine().execute(
+                reviewer, task_prompt,
+                guardrail=validate_review_verdict,
+                task_tools=get_tools_for_task_type("review"),
+            ).strip()
+        except AgentKilledError:
+            logger.info("Agent killed during perform_review for task %d", self.state.task_id)
+            reviewer.complete_agent_run(run_id, status="interrupted")
+            raise
         except Exception as exc:
             logger.exception("Crew execution failed in perform_review for task %d", self.state.task_id)
             reviewer.complete_agent_run(run_id, status="failed", error_class=type(exc).__name__)
@@ -298,6 +301,21 @@ class CodeReviewFlow(Flow[CodeReviewState]):
             raise
 
         reviewer.complete_agent_run(run_id, status="completed", output_summary=result[:500])
+
+        # Re-check task status: another reviewer may have already approved/rejected
+        # while this review was running (reviews can take minutes).
+        # Only abort if the task has moved *past* review_ready (done, rejected,
+        # cancelled) — not if it's in an earlier state like in_progress.
+        fresh_task = get_task_by_id(self.state.task_id)
+        _terminal = ("done", "rejected", "cancelled", "failed")
+        if fresh_task and fresh_task.get("status") in _terminal:
+            logger.info(
+                "CodeReviewFlow: task %d already in terminal status '%s' during review, "
+                "discarding this review result from %s",
+                self.state.task_id, fresh_task.get("status"), self.state.reviewer_id,
+            )
+            self.state.review_status = ReviewStatus.PENDING  # → router aborts
+            return
 
         if parse_review_result(result) == "approved":
             self.state.review_status = ReviewStatus.APPROVED
@@ -326,9 +344,19 @@ class CodeReviewFlow(Flow[CodeReviewState]):
 
     @router("perform_review")
     def review_outcome_router(self):
-        """Route based on review outcome: approved or request rework."""
+        """Route based on review outcome: approved, rejected, or aborted."""
         if self.state.review_status == ReviewStatus.APPROVED:
             return "review_approved"
+
+        if self.state.review_status == ReviewStatus.PENDING:
+            # perform_review was skipped (duplicate review, stale claim, etc.)
+            # Do NOT trigger rework — end the flow without side-effects.
+            # "review_skipped" has no listener, so the flow terminates here.
+            logger.info(
+                "CodeReviewFlow: review skipped for task %d (another reviewer active)",
+                self.state.task_id,
+            )
+            return "review_skipped"
 
         # Rejected — always loop back for rework
         self.state.rejection_count += 1
@@ -367,14 +395,28 @@ class CodeReviewFlow(Flow[CodeReviewState]):
             project_id=self.state.project_id,
             project_name=self.state.project_name,
         )
+        from backend.engine.base import AgentKilledError
         from backend.tools import get_tools_for_task_type
-        crew = build_crew(
-            developer, task_prompt,
-            task_tools=get_tools_for_task_type("rework"),
-        )
-        result = crew.kickoff()
+        try:
+            result = get_engine().execute(
+                developer, task_prompt,
+                task_tools=get_tools_for_task_type("rework"),
+            )
+        except AgentKilledError:
+            logger.info("Agent killed during notify_developer_rework for task %d", self.state.task_id)
+            developer.complete_agent_run(run_id, status="interrupted")
+            raise
+        except Exception as exc:
+            logger.exception("Engine execution failed in notify_developer_rework for task %d", self.state.task_id)
+            developer.complete_agent_run(run_id, status="failed", error_class=type(exc).__name__)
+            log_flow_event(
+                self.state.project_id, "rework_failed", "code_review_flow",
+                "task", self.state.task_id, {"error": str(exc)[:300]},
+            )
+            update_task_status_safe(self.state.task_id, "failed")
+            raise
 
-        developer.complete_agent_run(run_id, status="completed", output_summary=str(result)[:500])
+        developer.complete_agent_run(run_id, status="completed", output_summary=result[:500])
 
         log_flow_event(
             self.state.project_id, "rework_completed", "code_review_flow",
@@ -394,6 +436,30 @@ class CodeReviewFlow(Flow[CodeReviewState]):
         logger.info("CodeReviewFlow: task %d approved", self.state.task_id)
         self.state.review_status = ReviewStatus.APPROVED
         update_task_status(self.state.task_id, "done")
+
+        # Auto-merge the PR if one exists for this task
+        try:
+            from backend.git.pr_service import PRService
+            pr_svc = PRService()
+            pr = pr_svc.get_pr_for_task(self.state.task_id)
+            if pr:
+                repo_path = get_repo_path_for_task(self.state.task_id)
+                if repo_path:
+                    pr_svc.merge_pr(pr["id"], repo_path)
+                    log_flow_event(
+                        self.state.project_id, "pr_auto_merged", "code_review_flow",
+                        "task", self.state.task_id,
+                        {"pr_id": pr["id"], "branch": pr.get("branch", "")},
+                    )
+                    logger.info(
+                        "CodeReviewFlow: auto-merged PR %d for task %d",
+                        pr["id"], self.state.task_id,
+                    )
+        except Exception:
+            logger.exception(
+                "CodeReviewFlow: failed to auto-merge PR for task %d",
+                self.state.task_id,
+            )
 
         # Stop the reviewer's pod if running
         self._deactivate_reviewer()

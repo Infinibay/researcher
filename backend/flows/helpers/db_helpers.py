@@ -370,29 +370,69 @@ def get_project_progress_summary(project_id: int) -> str:
             lines.append(f"- {row['status']}: {row['cnt']}")
         lines.append("")
 
-        # Completed tasks with details
+        # In-progress tasks (what agents are working on RIGHT NOW)
+        active_tasks = conn.execute(
+            """SELECT id, title, type, assigned_to
+               FROM tasks WHERE project_id = ? AND status = 'in_progress'
+               ORDER BY id""",
+            (project_id,),
+        ).fetchall()
+        if active_tasks:
+            lines.append("## In-Progress Tasks (currently being worked on)")
+            for t in active_tasks:
+                assignee = t["assigned_to"] or "unassigned"
+                lines.append(f"- [#{t['id']}] ({t['type']}) {t['title']} — assigned to: {assignee}")
+            lines.append("")
+
+        # Pending/backlog tasks (next up in the queue)
+        pending_tasks = conn.execute(
+            """SELECT id, title, type, priority, status
+               FROM tasks WHERE project_id = ? AND status IN ('pending', 'backlog')
+               ORDER BY priority ASC, id ASC LIMIT 15""",
+            (project_id,),
+        ).fetchall()
+        if pending_tasks:
+            lines.append("## Pending/Backlog Tasks (ready or waiting)")
+            for t in pending_tasks:
+                lines.append(f"- [#{t['id']}] ({t['status']}) ({t['type']}) P{t['priority'] or '?'}: {t['title']}")
+            lines.append("")
+
+        # Review-ready tasks
+        review_tasks = conn.execute(
+            """SELECT id, title, type, assigned_to
+               FROM tasks WHERE project_id = ? AND status = 'review_ready'
+               ORDER BY id""",
+            (project_id,),
+        ).fetchall()
+        if review_tasks:
+            lines.append("## Tasks Awaiting Review")
+            for t in review_tasks:
+                lines.append(f"- [#{t['id']}] ({t['type']}) {t['title']}")
+            lines.append("")
+
+        # Recently completed tasks (last 10, not all 20)
         done_tasks = conn.execute(
             """SELECT id, title, type, completed_at
                FROM tasks WHERE project_id = ? AND status = 'done'
-               ORDER BY completed_at DESC LIMIT 20""",
+               ORDER BY completed_at DESC LIMIT 10""",
             (project_id,),
         ).fetchall()
-        lines.append("## Completed Tasks (recent)")
+        lines.append("## Recently Completed Tasks")
         for t in done_tasks:
             lines.append(f"- [#{t['id']}] ({t['type']}) {t['title']}")
         if not done_tasks:
             lines.append("- No completed tasks yet.")
         lines.append("")
 
-        # Research tasks specifically (completed)
+        # Research findings summary (completed research tasks)
         research_tasks = conn.execute(
             """SELECT id, title, description
                FROM tasks WHERE project_id = ? AND type = 'research' AND status = 'done'
-               ORDER BY completed_at DESC LIMIT 10""",
+               ORDER BY completed_at DESC LIMIT 5""",
             (project_id,),
         ).fetchall()
         if research_tasks:
-            lines.append("## Completed Research Tasks")
+            lines.append("## Recent Research Completed")
             for t in research_tasks:
                 desc_preview = (t["description"] or "")[:200]
                 lines.append(f"- [#{t['id']}] {t['title']}: {desc_preview}")

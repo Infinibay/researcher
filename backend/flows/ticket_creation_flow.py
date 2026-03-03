@@ -23,8 +23,8 @@ from crewai.flow.persistence import persist
 from backend.agents.registry import get_agent_by_role
 from backend.flows.event_listeners import FlowEvent, event_bus
 from backend.flows.guardrails import validate_ticket_creation
+from backend.engine import get_engine
 from backend.flows.helpers import (
-    build_crew,
     log_flow_event,
     notify_team_lead,
     parse_created_task_id,
@@ -85,6 +85,12 @@ class TicketCreationFlow(Flow[TicketCreationState]):
     @listen("initialize")
     def create_epics_and_milestones(self):
         """Create all epics and milestones in one Crew run."""
+        if self.state.total_tickets == 0:
+            logger.info(
+                "TicketCreationFlow: skipping epics/milestones — 0 tasks to create",
+            )
+            return  # Will proceed to ticket_loop_router → all_tickets_done
+
         update_subflow_step(self.state.project_id, "ticket_creation_flow", "create_epics_and_milestones")
         logger.info("TicketCreationFlow: create_epics_and_milestones")
 
@@ -96,7 +102,7 @@ class TicketCreationFlow(Flow[TicketCreationState]):
             self.state.project_id,
             self.state.plan,
         )
-        result = str(build_crew(team_lead, task_prompt).kickoff())
+        result = get_engine().execute(team_lead, task_prompt)
 
         epics, milestones = parse_epics_milestones_from_result(result)
         self.state.epics_created = epics
@@ -153,10 +159,11 @@ class TicketCreationFlow(Flow[TicketCreationState]):
             milestones_created=self.state.milestones_created,
             tasks_already_created=self.state.tasks_created,
         )
-        crew = build_crew(team_lead, task_prompt, guardrail=validate_ticket_creation)
-
         try:
-            result = str(crew.kickoff())
+            result = get_engine().execute(
+                team_lead, task_prompt,
+                guardrail=validate_ticket_creation,
+            )
 
             # Check if agent detected a duplicate and skipped creation
             if "SKIPPED_DUPLICATE" in result:
@@ -238,7 +245,7 @@ class TicketCreationFlow(Flow[TicketCreationState]):
             plan=self.state.plan,
             tasks_created=self.state.tasks_created,
         )
-        build_crew(team_lead, task_prompt).kickoff()
+        get_engine().execute(team_lead, task_prompt)
 
         log_flow_event(
             self.state.project_id, "dependencies_set",

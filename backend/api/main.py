@@ -102,6 +102,7 @@ def create_app() -> FastAPI:
     from backend.api.routes.user_requests import router as user_requests_router
     from backend.api.routes.events import router as events_router
     from backend.api.routes.flow_state import router as flow_state_router
+    from backend.api.routes.internal import router as internal_router
 
     app.include_router(health_router)
     app.include_router(projects_router)
@@ -116,6 +117,7 @@ def create_app() -> FastAPI:
     app.include_router(user_requests_router)
     app.include_router(events_router)
     app.include_router(flow_state_router)
+    app.include_router(internal_router)
 
     # Start periodic cleanup of stale sandbox containers
     from backend.security.cleanup import cleanup_manager

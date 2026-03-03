@@ -52,6 +52,15 @@ def _disable_autonomy(monkeypatch):
     )
 
 
+@pytest.fixture(autouse=True)
+def _reset_engine():
+    """Reset the engine singleton between tests."""
+    from backend.engine import reset_engine
+    reset_engine()
+    yield
+    reset_engine()
+
+
 @pytest.fixture()
 def db_conn(_isolated_db):
     """Return a connection to the test database."""
@@ -130,3 +139,17 @@ def make_mock_agent(role="developer", project_id=1):
     agent.crewai_agent = MagicMock()
     agent.create_agent_run.return_value = "test-run-id"
     return agent
+
+
+def make_mock_engine(return_value="Mock engine result"):
+    """Create a mock AgentEngine whose execute() returns a given value.
+
+    Usage in tests::
+
+        @patch("backend.engine.get_engine")
+        def test_foo(self, mock_get_engine, ...):
+            mock_get_engine.return_value = make_mock_engine("result text")
+    """
+    mock_engine = MagicMock()
+    mock_engine.execute.return_value = return_value
+    return mock_engine

@@ -225,6 +225,11 @@ class DeepWebResearchTool(PabadaBaseTool):
             from backend.config.llm import get_litellm_params
 
             llm_params = get_litellm_params()
+            if llm_params is None:
+                return self._error(
+                    "No LLM configured for synthesis (AGENT_ENGINE=claude_code "
+                    "without ANTHROPIC_API_KEY). Use WebSearch + manual analysis."
+                )
             response = litellm.completion(
                 **llm_params,
                 messages=[{"role": "user", "content": prompt}],
@@ -281,6 +286,11 @@ class DeepWebResearchTool(PabadaBaseTool):
             from backend.config.llm import get_litellm_params
 
             llm_params = get_litellm_params()
+            if llm_params is None:
+                return self._error(
+                    "No LLM configured for synthesis (AGENT_ENGINE=claude_code "
+                    "without ANTHROPIC_API_KEY). Use WebSearch + manual analysis."
+                )
             response = await litellm.acompletion(
                 **llm_params,
                 messages=[{"role": "user", "content": prompt}],

@@ -32,6 +32,18 @@ class BranchService:
         slug = slug[:40].rstrip("-")
         return f"task-{task_id}-{slug}"
 
+    @staticmethod
+    def _get_task_row(task_id: int) -> dict[str, Any] | None:
+        """Look up task id, title, and project_id from DB."""
+
+        def _query(conn: sqlite3.Connection) -> dict[str, Any] | None:
+            row = conn.execute(
+                "SELECT id, title, project_id FROM tasks WHERE id = ?", (task_id,)
+            ).fetchone()
+            return dict(row) if row else None
+
+        return execute_with_retry(_query)
+
     def create_branch_for_task(
         self,
         task_id: int,
@@ -44,18 +56,11 @@ class BranchService:
         """Create a git branch for a task and register it in the DB.
 
         1. Looks up the task title to generate a branch name.
-        2. Runs ``git checkout -b <branch>`` from *base_branch*.
+        2. Runs ``git branch <name> <base>`` (does NOT checkout).
         3. Inserts into the ``branches`` table.
         4. Updates ``tasks.branch_name`` via :func:`set_task_branch`.
         """
-        # Resolve task title and project_id from DB
-        def _get_task(conn: sqlite3.Connection) -> dict[str, Any] | None:
-            row = conn.execute(
-                "SELECT id, title, project_id FROM tasks WHERE id = ?", (task_id,)
-            ).fetchone()
-            return dict(row) if row else None
-
-        task = execute_with_retry(_get_task)
+        task = self._get_task_row(task_id)
         if not task:
             raise ValueError(f"Task {task_id} not found")
 
@@ -64,15 +69,9 @@ class BranchService:
 
         branch_name = self.generate_branch_name(task_id, task["title"])
 
-        # Ensure we're on the base branch first, then create the new branch
+        # Create branch without switching HEAD (safe for concurrent use)
         subprocess.run(
-            ["git", "checkout", base_branch],
-            cwd=repo_path,
-            capture_output=True,
-            text=True,
-        )
-        subprocess.run(
-            ["git", "checkout", "-b", branch_name],
+            ["git", "branch", branch_name, base_branch],
             cwd=repo_path,
             check=True,
             capture_output=True,

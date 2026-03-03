@@ -259,12 +259,22 @@ class AgentLoop:
                 event["id"], event_type, self.agent_id,
             )
         except Exception as exc:
-            logger.exception(
-                "AgentLoop: event %d (%s) failed for %s",
-                event["id"], event_type, self.agent_id,
-            )
-            update_event_status(event["id"], "failed", error=str(exc)[:500])
-            self._handle_error()
+            # During shutdown, agent kills are expected — don't log as error
+            from backend.engine.base import AgentKilledError
+
+            if isinstance(exc, AgentKilledError) and self._stop_event.is_set():
+                logger.info(
+                    "AgentLoop: event %d (%s) interrupted by shutdown for %s",
+                    event["id"], event_type, self.agent_id,
+                )
+                update_event_status(event["id"], "failed", error="shutdown")
+            else:
+                logger.exception(
+                    "AgentLoop: event %d (%s) failed for %s",
+                    event["id"], event_type, self.agent_id,
+                )
+                update_event_status(event["id"], "failed", error=str(exc)[:500])
+                self._handle_error()
         finally:
             save_loop_state(self.agent_id, self.project_id, None, "idle")
 
@@ -311,7 +321,17 @@ class AgentLoopManager:
         )
 
     def stop(self) -> None:
-        """Stop all agent loops."""
+        """Stop all agent loops (signal + join)."""
+        self.stop_signal()
+        self.stop_join()
+
+    def stop_signal(self) -> None:
+        """Signal all loops to stop (non-blocking)."""
+        for loop in self._loops.values():
+            loop._stop_event.set()
+
+    def stop_join(self) -> None:
+        """Join all loop threads and clean up. Call after stop_signal()."""
         for agent_id, loop in self._loops.items():
             loop.stop()
         self._loops.clear()

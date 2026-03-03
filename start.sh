@@ -136,7 +136,9 @@ if [ "$OLLAMA_NEEDED" = true ]; then
     # Pull models if not present
     pull_if_missing() {
         local model="$1"
-        if ollama list 2>/dev/null | grep -q "^${model}"; then
+        # Use 'ollama show' which exits 0 if model exists locally,
+        # non-zero otherwise. More reliable than parsing 'ollama list'.
+        if ollama show "$model" &>/dev/null; then
             ok "Model ${model} already downloaded"
         else
             warn "Pulling ${model} (this may take a while)..."
@@ -206,6 +208,10 @@ if [ "$FORGEJO_SKIP" = false ]; then
         die "Forgejo failed to start after 60s"
     fi
     ok "Forgejo running at http://localhost:3000"
+
+    # 2b'. Fix data ownership — Forgejo web runs as 'git' (uid 1000 in container)
+    # but the entrypoint creates files as root. Ensure git owns everything.
+    $CONTAINER_RT exec forgejo chown -R git:git /data/git /data/gitea 2>/dev/null || true
 
     # 2c. Create admin user (idempotent)
     $CONTAINER_RT exec --user git forgejo forgejo admin user create \
@@ -403,8 +409,16 @@ case "$PABADA_LLM_PROVIDER" in
         export PABADA_LLM_BASE_URL=""
         LLM_DISPLAY="${PABADA_LLM_MODEL} (Zhipu AI API)"
         ;;
+    local)
+        # Local llama-server or other OpenAI-compatible endpoint.
+        # Start your server separately (e.g. ./qwen.sh llama) before running start.sh.
+        : "${PABADA_LLM_MODEL:?Set PABADA_LLM_MODEL in .env}"
+        : "${PABADA_LLM_BASE_URL:?Set PABADA_LLM_BASE_URL in .env}"
+        export PABADA_LLM_API_KEY="${PABADA_LLM_API_KEY:-not-needed}"
+        LLM_DISPLAY="${PABADA_LLM_MODEL} via ${PABADA_LLM_BASE_URL}"
+        ;;
     *)
-        die "Unknown LLM provider: $PABADA_LLM_PROVIDER (valid: ollama, gemini, openai, anthropic, deepseek, zai)"
+        die "Unknown LLM provider: $PABADA_LLM_PROVIDER (valid: ollama, gemini, openai, anthropic, deepseek, zai, local)"
         ;;
 esac
 

@@ -22,11 +22,11 @@ from backend.flows.guardrails import (
     check_research_artifacts,
     validate_research_review_verdict,
 )
+from backend.engine import get_engine
+from backend.engine.base import AgentKilledError
 from backend.flows.helpers import (
-    build_crew,
     get_project_name,
     get_task_by_id,
-    kickoff_with_retry,
     log_flow_event,
     notify_team_lead,
     parse_review_result,
@@ -92,7 +92,23 @@ class ResearchFlow(Flow[ResearchState]):
             project_id=self.state.project_id,
             project_name=self.state.project_name,
         )
-        kickoff_with_retry(build_crew(researcher, task_prompt))
+        try:
+            get_engine().execute(researcher, task_prompt)
+        except AgentKilledError:
+            logger.info("Agent killed during assign_research for task %d", self.state.task_id)
+            raise
+        except Exception as exc:
+            logger.exception("Engine execution failed in assign_research for task %d", self.state.task_id)
+            log_flow_event(
+                self.state.project_id, "research_assignment_failed", "research_flow",
+                "task", self.state.task_id, {"error": str(exc)[:300]},
+            )
+            update_task_status_safe(self.state.task_id, "failed")
+            notify_team_lead(
+                self.state.project_id, "system",
+                f"ResearchFlow error: task {self.state.task_id} assignment failed.",
+            )
+            raise
 
         log_flow_event(
             self.state.project_id, "research_assigned", "research_flow",
@@ -129,9 +145,27 @@ class ResearchFlow(Flow[ResearchState]):
             project_id=self.state.project_id,
             project_name=self.state.project_name,
         )
-        result = kickoff_with_retry(build_crew(researcher, task_prompt))
+        try:
+            result = get_engine().execute(researcher, task_prompt)
+        except AgentKilledError:
+            logger.info("Agent killed during literature_review for task %d", self.state.task_id)
+            researcher.complete_agent_run(run_id, status="interrupted")
+            raise
+        except Exception as exc:
+            logger.exception("Engine execution failed in literature_review for task %d", self.state.task_id)
+            researcher.complete_agent_run(run_id, status="failed", error_class=type(exc).__name__)
+            log_flow_event(
+                self.state.project_id, "literature_review_failed", "research_flow",
+                "task", self.state.task_id, {"error": str(exc)[:300]},
+            )
+            update_task_status_safe(self.state.task_id, "failed")
+            notify_team_lead(
+                self.state.project_id, "system",
+                f"ResearchFlow error: task {self.state.task_id} literature review failed.",
+            )
+            raise
 
-        researcher.complete_agent_run(run_id, status="completed", output_summary=str(result)[:500])
+        researcher.complete_agent_run(run_id, status="completed", output_summary=result[:500])
 
         log_flow_event(
             self.state.project_id, "literature_reviewed", "research_flow",
@@ -153,14 +187,35 @@ class ResearchFlow(Flow[ResearchState]):
             knowledge_service=self._knowledge_service,
         )
         researcher.activate_context(task_id=self.state.task_id)
+        run_id = researcher.create_agent_run(self.state.task_id)
 
         task_prompt = res_tasks.formulate_hypothesis(
             self.state.task_id, self.state.task_title,
             project_id=self.state.project_id,
             project_name=self.state.project_name,
         )
-        result = kickoff_with_retry(build_crew(researcher, task_prompt))
-        self.state.hypothesis = str(result)
+        try:
+            result = get_engine().execute(researcher, task_prompt)
+        except AgentKilledError:
+            logger.info("Agent killed during formulate_hypothesis for task %d", self.state.task_id)
+            researcher.complete_agent_run(run_id, status="interrupted")
+            raise
+        except Exception as exc:
+            logger.exception("Engine execution failed in formulate_hypothesis for task %d", self.state.task_id)
+            researcher.complete_agent_run(run_id, status="failed", error_class=type(exc).__name__)
+            log_flow_event(
+                self.state.project_id, "hypothesis_formulation_failed", "research_flow",
+                "task", self.state.task_id, {"error": str(exc)[:300]},
+            )
+            update_task_status_safe(self.state.task_id, "failed")
+            notify_team_lead(
+                self.state.project_id, "system",
+                f"ResearchFlow error: task {self.state.task_id} hypothesis formulation failed.",
+            )
+            raise
+
+        self.state.hypothesis = result
+        researcher.complete_agent_run(run_id, status="completed", output_summary=result[:500])
 
         log_flow_event(
             self.state.project_id, "hypothesis_created", "research_flow",
@@ -190,9 +245,12 @@ class ResearchFlow(Flow[ResearchState]):
             project_id=self.state.project_id,
             project_name=self.state.project_name,
         )
-        crew = build_crew(researcher, task_prompt)
         try:
-            result = kickoff_with_retry(crew)
+            result = get_engine().execute(researcher, task_prompt)
+        except AgentKilledError:
+            logger.info("Agent killed during investigate for task %d", self.state.task_id)
+            researcher.complete_agent_run(run_id, status="interrupted")
+            raise
         except Exception as exc:
             logger.exception("Crew execution failed in investigate for task %d", self.state.task_id)
             researcher.complete_agent_run(run_id, status="failed", error_class=type(exc).__name__)
@@ -234,6 +292,7 @@ class ResearchFlow(Flow[ResearchState]):
             knowledge_service=self._knowledge_service,
         )
         researcher.activate_context(task_id=self.state.task_id)
+        run_id = researcher.create_agent_run(self.state.task_id)
 
         task_prompt = res_tasks.write_report(
             self.state.task_id, self.state.task_title,
@@ -241,8 +300,28 @@ class ResearchFlow(Flow[ResearchState]):
             project_id=self.state.project_id,
             project_name=self.state.project_name,
         )
-        result = kickoff_with_retry(build_crew(researcher, task_prompt))
-        self.state.report_path = str(result)
+        try:
+            result = get_engine().execute(researcher, task_prompt)
+        except AgentKilledError:
+            logger.info("Agent killed during write_report for task %d", self.state.task_id)
+            researcher.complete_agent_run(run_id, status="interrupted")
+            raise
+        except Exception as exc:
+            logger.exception("Engine execution failed in write_report for task %d", self.state.task_id)
+            researcher.complete_agent_run(run_id, status="failed", error_class=type(exc).__name__)
+            log_flow_event(
+                self.state.project_id, "report_writing_failed", "research_flow",
+                "task", self.state.task_id, {"error": str(exc)[:300]},
+            )
+            update_task_status_safe(self.state.task_id, "failed")
+            notify_team_lead(
+                self.state.project_id, "system",
+                f"ResearchFlow error: task {self.state.task_id} report writing failed.",
+            )
+            raise
+
+        self.state.report_path = result
+        researcher.complete_agent_run(run_id, status="completed", output_summary=result[:500])
 
         log_flow_event(
             self.state.project_id, "report_written", "research_flow",
@@ -312,9 +391,19 @@ class ResearchFlow(Flow[ResearchState]):
             project_id=self.state.project_id,
             project_name=self.state.project_name,
         )
-        result = kickoff_with_retry(build_crew(researcher, task_prompt))
+        try:
+            result = get_engine().execute(researcher, task_prompt)
+        except AgentKilledError:
+            logger.info("Agent killed during rescue_missing_artifacts for task %d", self.state.task_id)
+            researcher.complete_agent_run(run_id, status="interrupted")
+            raise
+        except Exception as exc:
+            logger.exception("Engine execution failed in rescue_missing_artifacts for task %d", self.state.task_id)
+            researcher.complete_agent_run(run_id, status="failed", error_class=type(exc).__name__)
+            return "artifacts_unrecoverable"
+
         researcher.complete_agent_run(
-            run_id, status="completed", output_summary=str(result)[:500],
+            run_id, status="completed", output_summary=result[:500],
         )
 
         log_flow_event(
@@ -383,9 +472,15 @@ class ResearchFlow(Flow[ResearchState]):
             project_id=self.state.project_id,
             project_name=self.state.project_name,
         )
-        crew = build_crew(reviewer, task_prompt, guardrail=validate_research_review_verdict)
         try:
-            result = str(kickoff_with_retry(crew)).strip()
+            result = get_engine().execute(
+                reviewer, task_prompt,
+                guardrail=validate_research_review_verdict,
+            ).strip()
+        except AgentKilledError:
+            logger.info("Agent killed during peer_review for task %d", self.state.task_id)
+            reviewer.complete_agent_run(run_id, status="interrupted")
+            raise
         except Exception as exc:
             logger.exception("Crew execution failed in peer_review for task %d", self.state.task_id)
             reviewer.complete_agent_run(run_id, status="failed", error_class=type(exc).__name__)
@@ -468,7 +563,11 @@ class ResearchFlow(Flow[ResearchState]):
             project_name=self.state.project_name,
         )
         try:
-            result = kickoff_with_retry(build_crew(researcher, task_prompt))
+            result = get_engine().execute(researcher, task_prompt)
+        except AgentKilledError:
+            logger.info("Agent killed during revise_research for task %d", self.state.task_id)
+            researcher.complete_agent_run(run_id, status="interrupted")
+            raise
         except Exception as exc:
             logger.exception(
                 "Crew execution failed in revise_research for task %d", self.state.task_id,
@@ -481,7 +580,7 @@ class ResearchFlow(Flow[ResearchState]):
             # Accept best-effort instead of crashing the entire flow
             return "max_revisions_reached"
 
-        researcher.complete_agent_run(run_id, status="completed", output_summary=str(result)[:500])
+        researcher.complete_agent_run(run_id, status="completed", output_summary=result[:500])
 
         log_flow_event(
             self.state.project_id, "research_revised", "research_flow",
@@ -533,7 +632,17 @@ class ResearchFlow(Flow[ResearchState]):
             project_id=self.state.project_id,
             project_name=self.state.project_name,
         )
-        result = build_crew(researcher, task_prompt).kickoff()
+        try:
+            get_engine().execute(researcher, task_prompt)
+        except AgentKilledError:
+            logger.info("Agent killed during update_knowledge_base for task %d", self.state.task_id)
+            raise
+        except Exception as exc:
+            logger.warning(
+                "Engine execution failed in update_knowledge_base for task %d: %s",
+                self.state.task_id, exc,
+            )
+            # Non-fatal: the research is already validated, proceed to mark done
 
         # Ensure review_ready before done — the researcher agent may have
         # already moved it, so use _safe to tolerate no-op transitions.

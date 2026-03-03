@@ -126,10 +126,26 @@ class FlowManager:
                         exc_info=True,
                     )
 
-            # Stop agent loops
+            # Stop agent loops — signal all loops first, then join.
+            # Kill pods BEFORE joining so blocked exec_in_pod calls terminate.
             loop_mgr = self._autonomy.pop(project_id, None)
             if loop_mgr:
-                loop_mgr.stop()
+                loop_mgr.stop_signal()  # signal all stop events (non-blocking)
+
+            if settings.AGENT_ENGINE == "claude_code" and settings.SANDBOX_ENABLED:
+                try:
+                    from backend.security.pod_manager import pod_manager
+
+                    pods = pod_manager.list_pods()
+                    project_suffix = f"_p{project_id}"
+                    for pod in pods:
+                        if pod.agent_id.endswith(project_suffix):
+                            pod_manager.stop_pod(pod.agent_id)
+                except Exception:
+                    logger.debug("Error stopping pods for project %d", project_id, exc_info=True)
+
+            if loop_mgr:
+                loop_mgr.stop_join()  # now join threads (pods already dead)
 
             lm = self._listeners.pop(project_id, None)
             if lm:

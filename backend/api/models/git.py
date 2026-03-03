@@ -39,7 +39,7 @@ class BranchResponse(BaseModel):
 
 class BranchCreate(BaseModel):
     task_id: int
-    repo_path: str = Field(..., min_length=1)
+    repo_path: str | None = Field(default=None, description="Deprecated; resolved from DB")
     base_branch: str = Field(default="main")
     repo_name: str = Field(default="default")
 

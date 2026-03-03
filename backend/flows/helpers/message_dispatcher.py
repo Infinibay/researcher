@@ -5,6 +5,9 @@ from __future__ import annotations
 import logging
 import sqlite3
 
+from backend.config.settings import settings
+from backend.engine.base import AgentKilledError as _AgentKilledError
+
 logger = logging.getLogger(__name__)
 
 _THREAD_HISTORY_LIMIT = 10
@@ -126,23 +129,43 @@ def _build_enriched_description(
         logger.debug("Could not build conversation context", exc_info=True)
 
     # ── 4. Original instruction ──────────────────────────────────────────
+    # Adapt tool names for the active engine
+    is_claude_code = settings.AGENT_ENGINE == "claude_code"
+
     if from_agent == "user":
-        # User message — agent must reply via reply_to_user tool
-        reply_instruction = (
-            "You MUST reply using the `reply_to_user` tool with your response "
-            "as the `message` parameter"
-        )
-        if thread_id:
-            reply_instruction += f' and `thread_id="{thread_id}"`'
+        if is_claude_code:
+            tool_name = "mcp__pabada__chat-send"
+            reply_instruction = (
+                f"You MUST reply using the `{tool_name}` tool with "
+                f'`to_agent="user"` and your response as the `message` parameter'
+            )
+            if thread_id:
+                reply_instruction += f' (thread context: "{thread_id}")'
+        else:
+            tool_name = "reply_to_user"
+            reply_instruction = (
+                "You MUST reply using the `reply_to_user` tool with your response "
+                "as the `message` parameter"
+            )
+            if thread_id:
+                reply_instruction += f' and `thread_id="{thread_id}"`'
         reply_instruction += (
             ". Your reply must contain useful, actionable information — "
             "not just an acknowledgment. Do NOT write your answer as plain text."
         )
     else:
-        reply_instruction = (
-            f"You MUST reply using the `send_message` tool with "
-            f"`to_agent=\"{from_agent}\""
-        )
+        if is_claude_code:
+            tool_name = "mcp__pabada__chat-send"
+            reply_instruction = (
+                f"You MUST reply using the `{tool_name}` tool with "
+                f"`to_agent=\"{from_agent}\""
+            )
+        else:
+            tool_name = "send_message"
+            reply_instruction = (
+                f"You MUST reply using the `send_message` tool with "
+                f"`to_agent=\"{from_agent}\""
+            )
         if thread_id:
             reply_instruction += f", thread_id=\"{thread_id}\""
         reply_instruction += (
@@ -150,7 +173,6 @@ def _build_enriched_description(
             "do NOT write your answer as plain text."
         )
 
-    tool_name = "reply_to_user" if from_agent == "user" else "send_message"
     sections.append(
         f"## Incoming Message\n"
         f"**From:** {from_agent}\n"
@@ -195,18 +217,24 @@ def dispatch_message(
             project_id, canonical_id, from_agent, content, thread_id, role=role,
         )
 
-        from backend.flows.helpers.reporting import build_crew
+        from backend.engine import get_engine
+        reply_tool = (
+            "mcp__pabada__chat-send"
+            if settings.AGENT_ENGINE == "claude_code"
+            else "send_message"
+        )
         expected = (
-            "Confirmation that you called the `send_message` tool to reply. "
+            f"Confirmation that you called the `{reply_tool}` tool to reply. "
             "Do NOT write the response as plain text — you MUST use the tool."
         )
-        crew = build_crew(
-            agent, (description, expected),
-        )
-        crew.kickoff()
+        get_engine().execute(agent, (description, expected))
         logger.info(
             "Message dispatched to agent %s (project %d) from %s",
             agent_id, project_id, from_agent,
+        )
+    except _AgentKilledError:
+        logger.info(
+            "Message dispatch to agent %s interrupted (agent killed)", agent_id,
         )
     except Exception:
         logger.exception(

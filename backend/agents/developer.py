@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from backend.agents.base import PabadaAgent
+from backend.config.settings import settings
 from backend.prompts.developer.system import build_system_prompt
 
 
@@ -20,6 +21,7 @@ def create_developer_agent(
     """Instantiate a Developer agent."""
     backstory = build_system_prompt(
         agent_name=agent_name, teammates=teammates, tech_hints=tech_hints,
+        engine=settings.AGENT_ENGINE,
     )
 
     return PabadaAgent(

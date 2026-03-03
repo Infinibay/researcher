@@ -7,7 +7,7 @@ from unittest.mock import patch
 import pytest
 
 from backend.flows.state_models import ResearchState
-from backend.tests.flows.conftest import make_mock_agent, make_mock_crew
+from backend.tests.flows.conftest import make_mock_agent, make_mock_engine
 
 
 class TestResearchState:
@@ -35,12 +35,12 @@ class TestResearchState:
 class TestResearchFlowAssignment:
     """Test research task assignment."""
 
-    @patch("backend.flows.research_flow.build_crew")
+    @patch("backend.flows.research_flow.get_engine")
     @patch("backend.flows.research_flow.get_available_agent_by_role")
     @patch("backend.flows.research_flow.log_flow_event")
-    def test_assign_research_success(self, mock_log, mock_agent, mock_build_crew, db_conn, executing_project):
+    def test_assign_research_success(self, mock_log, mock_agent, mock_get_engine, db_conn, executing_project):
         mock_agent.return_value = make_mock_agent("researcher", executing_project)
-        mock_build_crew.return_value = make_mock_crew("Research plan outlined")
+        mock_get_engine.return_value = make_mock_engine("Research plan outlined")
 
         from backend.flows.research_flow import ResearchFlow
 
@@ -78,14 +78,14 @@ class TestResearchFlowAssignment:
 class TestResearchFlowPeerReview:
     """Test peer review routing."""
 
-    @patch("backend.flows.research_flow.build_crew")
+    @patch("backend.flows.research_flow.get_engine")
     @patch("backend.flows.research_flow.get_available_agent_by_role")
     @patch("backend.flows.research_flow.get_agent_by_role")
     @patch("backend.flows.research_flow.log_flow_event")
-    def test_peer_review_validated(self, mock_log, mock_get_agent, mock_avail_agent, mock_build_crew, db_conn, executing_project):
+    def test_peer_review_validated(self, mock_log, mock_get_agent, mock_avail_agent, mock_get_engine, db_conn, executing_project):
         mock_reviewer = make_mock_agent("research_reviewer", executing_project)
         mock_avail_agent.return_value = mock_reviewer
-        mock_build_crew.return_value = make_mock_crew("VALIDATED: Methodology is sound")
+        mock_get_engine.return_value = make_mock_engine("VALIDATED: Methodology is sound")
 
         from backend.flows.research_flow import ResearchFlow
 
@@ -101,14 +101,14 @@ class TestResearchFlowPeerReview:
         assert flow.state.validated is True
         assert flow.state.peer_review_status == "validated"
 
-    @patch("backend.flows.research_flow.build_crew")
+    @patch("backend.flows.research_flow.get_engine")
     @patch("backend.flows.research_flow.get_available_agent_by_role")
     @patch("backend.flows.research_flow.get_agent_by_role")
     @patch("backend.flows.research_flow.log_flow_event")
-    def test_peer_review_rejected(self, mock_log, mock_get_agent, mock_avail_agent, mock_build_crew, db_conn, executing_project):
+    def test_peer_review_rejected(self, mock_log, mock_get_agent, mock_avail_agent, mock_get_engine, db_conn, executing_project):
         mock_reviewer = make_mock_agent("research_reviewer", executing_project)
         mock_avail_agent.return_value = mock_reviewer
-        mock_build_crew.return_value = make_mock_crew("REJECTED: Insufficient evidence for conclusion")
+        mock_get_engine.return_value = make_mock_engine("REJECTED: Insufficient evidence for conclusion")
 
         from backend.flows.research_flow import ResearchFlow
 
@@ -128,14 +128,14 @@ class TestResearchFlowPeerReview:
 class TestReviewerFeedbackExtraction:
     """Test that reviewer feedback is extracted and stored in state."""
 
-    @patch("backend.flows.research_flow.build_crew")
+    @patch("backend.flows.research_flow.get_engine")
     @patch("backend.flows.research_flow.get_available_agent_by_role")
     @patch("backend.flows.research_flow.get_agent_by_role")
     @patch("backend.flows.research_flow.log_flow_event")
-    def test_rejected_extracts_feedback_after_prefix(self, mock_log, mock_get_agent, mock_avail_agent, mock_build_crew, db_conn, executing_project):
+    def test_rejected_extracts_feedback_after_prefix(self, mock_log, mock_get_agent, mock_avail_agent, mock_get_engine, db_conn, executing_project):
         mock_reviewer = make_mock_agent("research_reviewer", executing_project)
         mock_avail_agent.return_value = mock_reviewer
-        mock_build_crew.return_value = make_mock_crew("REJECTED: Insufficient evidence for conclusion")
+        mock_get_engine.return_value = make_mock_engine("REJECTED: Insufficient evidence for conclusion")
 
         from backend.flows.research_flow import ResearchFlow
 
@@ -148,15 +148,15 @@ class TestReviewerFeedbackExtraction:
         assert flow.state.validated is False
         assert flow.state.last_reviewer_feedback == "Insufficient evidence for conclusion"
 
-    @patch("backend.flows.research_flow.build_crew")
+    @patch("backend.flows.research_flow.get_engine")
     @patch("backend.flows.research_flow.get_available_agent_by_role")
     @patch("backend.flows.research_flow.get_agent_by_role")
     @patch("backend.flows.research_flow.log_flow_event")
-    def test_rejected_fallback_when_no_prefix(self, mock_log, mock_get_agent, mock_avail_agent, mock_build_crew, db_conn, executing_project):
+    def test_rejected_fallback_when_no_prefix(self, mock_log, mock_get_agent, mock_avail_agent, mock_get_engine, db_conn, executing_project):
         raw_result = "The research lacks credible sources and has logical gaps"
         mock_reviewer = make_mock_agent("research_reviewer", executing_project)
         mock_avail_agent.return_value = mock_reviewer
-        mock_build_crew.return_value = make_mock_crew(raw_result)
+        mock_get_engine.return_value = make_mock_engine(raw_result)
 
         from backend.flows.research_flow import ResearchFlow
 
@@ -169,14 +169,14 @@ class TestReviewerFeedbackExtraction:
         assert flow.state.validated is False
         assert flow.state.last_reviewer_feedback == raw_result
 
-    @patch("backend.flows.research_flow.build_crew")
+    @patch("backend.flows.research_flow.get_engine")
     @patch("backend.flows.research_flow.get_available_agent_by_role")
     @patch("backend.flows.research_flow.get_agent_by_role")
     @patch("backend.flows.research_flow.log_flow_event")
-    def test_validated_clears_feedback(self, mock_log, mock_get_agent, mock_avail_agent, mock_build_crew, db_conn, executing_project):
+    def test_validated_clears_feedback(self, mock_log, mock_get_agent, mock_avail_agent, mock_get_engine, db_conn, executing_project):
         mock_reviewer = make_mock_agent("research_reviewer", executing_project)
         mock_avail_agent.return_value = mock_reviewer
-        mock_build_crew.return_value = make_mock_crew("VALIDATED: Methodology is sound")
+        mock_get_engine.return_value = make_mock_engine("VALIDATED: Methodology is sound")
 
         from backend.flows.research_flow import ResearchFlow
 
@@ -190,14 +190,14 @@ class TestReviewerFeedbackExtraction:
         assert flow.state.validated is True
         assert flow.state.last_reviewer_feedback == ""
 
-    @patch("backend.flows.research_flow.build_crew")
+    @patch("backend.flows.research_flow.get_engine")
     @patch("backend.flows.research_flow.get_available_agent_by_role")
     @patch("backend.flows.research_flow.get_agent_by_role")
     @patch("backend.flows.research_flow.log_flow_event")
-    def test_rejected_case_insensitive_prefix(self, mock_log, mock_get_agent, mock_avail_agent, mock_build_crew, db_conn, executing_project):
+    def test_rejected_case_insensitive_prefix(self, mock_log, mock_get_agent, mock_avail_agent, mock_get_engine, db_conn, executing_project):
         mock_reviewer = make_mock_agent("research_reviewer", executing_project)
         mock_avail_agent.return_value = mock_reviewer
-        mock_build_crew.return_value = make_mock_crew("Rejected: Confidence scores are inflated")
+        mock_get_engine.return_value = make_mock_engine("Rejected: Confidence scores are inflated")
 
         from backend.flows.research_flow import ResearchFlow
 
@@ -214,14 +214,14 @@ class TestReviewerFeedbackExtraction:
 class TestReviseResearchFeedbackPropagation:
     """Test that reviewer feedback is passed to the revision prompt."""
 
-    @patch("backend.flows.research_flow.build_crew")
+    @patch("backend.flows.research_flow.get_engine")
     @patch("backend.flows.research_flow.get_agent_by_role")
     @patch("backend.flows.research_flow.log_flow_event")
     @patch("backend.flows.research_flow.res_tasks")
-    def test_revise_research_passes_feedback_to_prompt(self, mock_res_tasks, mock_log, mock_get_agent, mock_build_crew, db_conn, executing_project):
+    def test_revise_research_passes_feedback_to_prompt(self, mock_res_tasks, mock_log, mock_get_agent, mock_get_engine, db_conn, executing_project):
         mock_researcher = make_mock_agent("researcher", executing_project)
         mock_get_agent.return_value = mock_researcher
-        mock_build_crew.return_value = make_mock_crew("Revision complete")
+        mock_get_engine.return_value = make_mock_engine("Revision complete")
         mock_res_tasks.revise_research.return_value = ("mock desc", "mock expected")
 
         from backend.flows.research_flow import ResearchFlow

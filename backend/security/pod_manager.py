@@ -6,11 +6,14 @@ ephemeral container-per-command model with a persistent pod that
 starts once and stays alive for the agent's session.
 """
 
+import json
 import logging
 import os
+import subprocess
 import threading
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
+from pathlib import Path
 
 from backend.config.settings import settings
 from backend.security.container_runtime import get_runtime, runtime_available
@@ -116,7 +119,7 @@ class PodManager:
             f"{workspace_path}:/workspace:z",
             f"{artifacts_host_dir}:/artifacts:z",
         ]
-        userns = "keep-id" if runtime.is_podman else None
+        userns = None
 
         pod_env = env.copy() if env else {}
 
@@ -151,7 +154,116 @@ class PodManager:
             "Started pod %s for agent %s (role=%s, workspace=%s)",
             container_name, agent_id, role, workspace_path,
         )
+
+        # Set up Claude Code CLI if agent engine requires it
+        if settings.AGENT_ENGINE == "claude_code":
+            self._setup_claude_code(container_name, runtime)
+
         return info
+
+    def _setup_claude_code(
+        self, container_name: str, runtime: object,
+    ) -> None:
+        """Copy Claude Code credentials and settings into a pod.
+
+        Called automatically when ``AGENT_ENGINE=claude_code``.
+        """
+        # Resolve credentials path
+        creds_path = Path(settings.CLAUDE_CODE_CREDENTIALS_PATH).expanduser()
+        if not creds_path.exists():
+            logger.warning(
+                "Claude Code credentials not found at %s — "
+                "agent may fail to authenticate", creds_path,
+            )
+            return
+
+        # Copy credentials into the pod
+        try:
+            subprocess.run(
+                [runtime.cmd, "cp", str(creds_path),
+                 f"{container_name}:/root/.claude/.credentials.json"],
+                capture_output=True, text=True, timeout=15, check=True,
+            )
+        except Exception:
+            logger.warning("Failed to copy credentials to %s", container_name, exc_info=True)
+            return
+
+        # Also copy the parent .claude directory files if they exist
+        claude_dir = creds_path.parent
+        for fname in ("settings.json", "statsig.json"):
+            fpath = claude_dir / fname
+            if fpath.exists():
+                try:
+                    subprocess.run(
+                        [runtime.cmd, "cp", str(fpath),
+                         f"{container_name}:/root/.claude/{fname}"],
+                        capture_output=True, text=True, timeout=15, check=True,
+                    )
+                except Exception:
+                    pass
+
+        # Generate minimal settings.json with context7 + pabada MCP servers
+        claude_settings = {
+            "model": settings.CLAUDE_CODE_MODEL,
+            "permissions": {
+                "allow": [
+                    "Read", "Write", "Edit", "Bash", "Glob", "Grep",
+                    "WebSearch", "WebFetch",
+                    "mcp__plugin_context7_context7__resolve-library-id",
+                    "mcp__plugin_context7_context7__get-library-docs",
+                    "mcp__pabada__task-get",
+                    "mcp__pabada__task-list",
+                    "mcp__pabada__task-create",
+                    "mcp__pabada__task-update-status",
+                    "mcp__pabada__task-take",
+                    "mcp__pabada__task-add-comment",
+                    "mcp__pabada__task-set-dependencies",
+                    "mcp__pabada__task-approve",
+                    "mcp__pabada__task-reject",
+                    "mcp__pabada__epic-create",
+                    "mcp__pabada__milestone-create",
+                    "mcp__pabada__chat-send",
+                    "mcp__pabada__chat-read",
+                    "mcp__pabada__chat-ask-team-lead",
+                    "mcp__pabada__chat-ask-project-lead",
+                    "mcp__pabada__finding-record",
+                    "mcp__pabada__finding-read",
+                    "mcp__pabada__finding-validate",
+                    "mcp__pabada__finding-reject",
+                    "mcp__pabada__wiki-read",
+                    "mcp__pabada__wiki-write",
+                    "mcp__pabada__query-database",
+                    "mcp__pabada__create-pr",
+                    "mcp__pabada__session-save",
+                    "mcp__pabada__session-load",
+                ],
+                "deny": [],
+            },
+            "mcpServers": {
+                "context7": {
+                    "type": "stdio",
+                    "command": "npx",
+                    "args": ["-y", "@upstash/context7-mcp"],
+                },
+                "pabada": {
+                    "type": "stdio",
+                    "command": "python3",
+                    "args": ["/usr/local/bin/pabada-mcp"],
+                },
+            },
+        }
+        settings_json = json.dumps(claude_settings, indent=2)
+
+        # Write via exec (avoids temp file on host)
+        try:
+            runtime.exec_command(
+                container_name,
+                ["sh", "-c", f"cat > /root/.claude/settings.json << 'PABADA_EOF'\n{settings_json}\nPABADA_EOF"],
+                cwd="/root",
+                timeout=10,
+            )
+        except Exception:
+            logger.warning("Failed to write Claude settings to %s", container_name, exc_info=True)
 
     def exec_in_pod(
         self,

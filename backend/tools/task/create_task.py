@@ -31,7 +31,8 @@ class CreateTaskTool(PabadaBaseTool):
     name: str = "create_task"
     description: str = (
         "Create a new task in the project. "
-        "Specify type, priority, complexity, and optional dependencies."
+        "Specify type, priority, complexity, and optional dependencies. "
+        "Performs semantic dedup check and rejects near-duplicate titles."
     )
     args_schema: Type[BaseModel] = CreateTaskInput
 

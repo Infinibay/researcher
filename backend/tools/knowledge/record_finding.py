@@ -32,7 +32,8 @@ class RecordFindingTool(PabadaBaseTool):
     name: str = "record_finding"
     description: str = (
         "Record a research finding with confidence level and sources. "
-        "Findings start as 'provisional' until validated."
+        "Findings are created as 'provisional' and remain so until the "
+        "Research Reviewer validates or rejects them."
     )
     args_schema: Type[BaseModel] = RecordFindingInput
 

@@ -33,6 +33,19 @@ def setup_file_logging():
     for _noisy in ("watchfiles", "httpcore", "httpx", "urllib3", "urllib3.connectionpool"):
         logging.getLogger(_noisy).setLevel(logging.WARNING)
 
+    # Keep LiteLLM/OpenAI debug logs in the file but out of stdout.
+    # LiteLLM prints full prompts at DEBUG level which floods the console.
+    for _llm_logger_name in ("LiteLLM", "litellm", "openai", "openai._base_client"):
+        _llm_logger = logging.getLogger(_llm_logger_name)
+        _llm_logger.setLevel(logging.DEBUG)  # still goes to file handler
+        # Remove any inherited stream handlers; add one at WARNING only
+        for _h in _llm_logger.handlers[:]:
+            _llm_logger.removeHandler(_h)
+        _console = logging.StreamHandler()
+        _console.setLevel(logging.WARNING)
+        _llm_logger.addHandler(_console)
+        _llm_logger.propagate = False  # don't bubble to root (stdout)
+
     logging.getLogger(__name__).info("File logging enabled → %s", log_file)
 
 
@@ -73,6 +86,7 @@ def main():
         host="0.0.0.0",
         port=8000,
         reload=True,
+        reload_excludes=[".data/*"],
         log_level="info",
     )
 

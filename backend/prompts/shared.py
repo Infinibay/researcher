@@ -3,75 +3,37 @@
 GIT_WORKFLOW_INSTRUCTIONS = """
 ## Git + Forgejo Workflow — MANDATORY RULES
 
-The remote git server is Forgejo. The remote is named `origin` and points
-to Forgejo (e.g. http://localhost:3000/{owner}/{repo}.git).
-If `origin` is not configured, report the issue to the Team Lead — do NOT
-attempt to configure it yourself.
-You MUST NOT change the remote URL.
+Remote `origin` points to Forgejo (e.g. http://localhost:3000/{owner}/{repo}.git).
+If not configured, report to the Team Lead — do NOT configure it yourself.
+NEVER change the remote URL.
 
-### Canonical 5-Step Git Workflow
+### CREATE BRANCH
+**GitBranchTool**(branch_name=`task-{task_id}-<slug>`, create=true, base_branch="main")
+→ `git fetch origin main && git checkout -b task-{task_id}-<slug> origin/main`
+- Slug: lowercase, letters/digits/hyphens only. Example: `task-42-add-auth-endpoint`
+- Do NOT skip this step. Do NOT commit directly to main.
 
-STEP 1 — CREATE BRANCH
-  Tool: **GitBranchTool**
-  Parameters:
-    branch_name: "task-{task_id}-<short-slug>"
-    create: true
-    base_branch: "main"
-  What this executes:
-    git fetch origin main
-    git checkout -b task-{task_id}-<short-slug> origin/main
-  Rules:
-    - Replace {task_id} with the actual integer task ID.
-    - The slug must be lowercase, using only letters, digits, and hyphens.
-    - Example branch name: "task-42-add-auth-endpoint"
-    - Do NOT skip this step. Do NOT commit directly to main.
+### WRITE CODE
+**EditFileTool** for existing files, **WriteFileTool** for new files only.
+Never use WriteFileTool on a file that already exists.
 
-STEP 2 — WRITE CODE
-  Use **EditFileTool** for existing files, **WriteFileTool** for new files only.
-  Never use WriteFileTool on a file that already exists.
+### COMMIT
+**GitCommitTool**(message="<imperative verb> <what changed> — task {task_id}")
+→ `git add -A && git commit -m "..."`
+Example: "Add JWT validation middleware — task 42"
+- Run all tests BEFORE committing. Do NOT commit if any test fails.
 
-STEP 3 — COMMIT
-  Tool: **GitCommitTool**
-  Parameters:
-    message: "<imperative verb> <what changed> — task {task_id}"
-  What this executes:
-    git add -A
-    git commit -m "<your commit message>"
-  Example message: "Add JWT validation middleware — task 42"
-  Rules:
-    - Run all tests with **ExecuteCommandTool** BEFORE committing.
-    - Do NOT commit if any test fails.
+### PUSH
+**GitPushTool**(branch="<branch name>", force=false) → `git push -u origin <branch>`
+- If rejected ("remote has new commits"): run `git pull origin main --rebase`, then retry.
+- Do NOT use force=true unless the Team Lead explicitly instructs it.
 
-STEP 4 — PUSH TO FORGEJO
-  Tool: **GitPushTool**
-  Parameters:
-    branch: "<the branch name from Step 1>"
-    force: false
-  What this executes:
-    git push -u origin <branch-name>
-  The remote `origin` points to the Forgejo server. This command uploads
-  your branch to Forgejo so it is visible in the Forgejo web UI.
-  Rules:
-    - If the push is rejected with "remote has new commits", pull first:
-        ExecuteCommandTool → command: "git pull origin main --rebase"
-      Then retry GitPushTool.
-    - Do NOT use force=true unless the Team Lead explicitly instructs it.
-
-STEP 5 — OPEN PULL REQUEST
-  Tool: **CreatePRTool**
-  Parameters:
-    title: "<task title> (task-{task_id})"
-    body: "<description of what was changed and why, referencing acceptance criteria>"
-    base: "main"
-    draft: false
-  What this executes:
-    POST $FORGEJO_API_URL/repos/{owner}/{repo}/pulls
-    Payload: {{"title": "...", "body": "...", "head": "<branch>", "base": "main"}}
-  base MUST always be "main" — never another branch.
-  Rules:
-    - Only call CreatePRTool AFTER GitPushTool succeeds.
-    - The PR body MUST mention each acceptance criterion and confirm it is met.
-    - After CreatePRTool returns, note the pr_number from the response.
+### OPEN PULL REQUEST
+**CreatePRTool**(title="<task title> (task-{task_id})", body="<changes + acceptance criteria>", base="main", draft=false)
+→ `POST $FORGEJO_API_URL/repos/{owner}/{repo}/pulls`
+- Only call AFTER push succeeds. base MUST always be "main".
+- PR body MUST list each acceptance criterion and confirm it is met.
+- Note the pr_number from the response.
 """
 
 
