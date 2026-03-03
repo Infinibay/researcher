@@ -320,6 +320,20 @@ _ARTIFACT_MAP: dict[str, dict[str, str]] = {
 }
 
 
+TOOLS_INTRO = "Tool parameters are auto-documented — refer to each tool's schema for details."
+
+
+def build_memory_section() -> str:
+    """Return the shared <memory> block for agent system prompts."""
+    return (
+        "<memory>\n"
+        "Your memory persists automatically between tasks. The system remembers key\n"
+        "insights, entities, and task results from previous work and provides relevant\n"
+        "context when you start new tasks.\n"
+        "</memory>"
+    )
+
+
 def build_system_awareness(role: str) -> str:
     """Build the 'How This System Works' section for a system prompt.
 
@@ -440,6 +454,26 @@ def build_team_section(
     lines.append("")
     lines.append(build_clarification_protocol())
 
+    # Response format reminder — prevents open models from wrapping
+    # Thought/Action/Action Input in markdown code fences, which breaks
+    # CrewAI's ReAct parser and causes infinite retry loops.
+    lines.append("")
+    lines.append(
+        "## Response Format — CRITICAL\n"
+        "When using tools, write your Thought/Action/Action Input as **plain text**.\n"
+        "NEVER wrap them in markdown code blocks (```).\n\n"
+        "Correct:\n"
+        "Thought: I need to check the tasks\n"
+        "Action: read_tasks\n"
+        'Action Input: {"status": null}\n\n'
+        "Wrong (NEVER do this):\n"
+        "```\n"
+        "Thought: I need to check the tasks\n"
+        "Action: read_tasks\n"
+        'Action Input: {"status": null}\n'
+        "```"
+    )
+
     return "\n".join(lines)
 
 
@@ -542,6 +576,8 @@ def _summarize_messages_llm(
         from backend.config.llm import get_litellm_params
 
         params = get_litellm_params()
+        if params is None:
+            return None
         response = litellm.completion(
             **params,
             messages=[
