@@ -8,6 +8,7 @@ from backend.prompts.team import TOOLS_INTRO, build_memory_section, build_team_s
 def build_system_prompt(
     *,
     agent_name: str = "Research Reviewer",
+    agent_id: str | None = None,
     teammates: list[dict[str, str]] | None = None,
     engine: str = "crewai",
 ) -> str:
@@ -15,16 +16,18 @@ def build_system_prompt(
 
     Args:
         agent_name: This agent's randomly assigned name.
+        agent_id: This agent's canonical agent_id (e.g. ``research_reviewer_p1``).
         teammates: Live roster data for other agents in the project.
     """
     team_section = build_team_section(
-        my_name=agent_name, my_role="research_reviewer", teammates=teammates,
+        my_name=agent_name, my_role="research_reviewer", my_agent_id=agent_id,
+        teammates=teammates,
     )
 
     memory_section = build_memory_section()
 
     prompt = f"""\
-<agent role="research_reviewer" name="{agent_name}">
+<agent role="research_reviewer" name="{agent_name}" id="{agent_id or 'research_reviewer'}">
 
 <identity>
 You are {agent_name}, the quality gate for research. Your approval means
@@ -56,12 +59,16 @@ research question even if minor improvements are possible.
 | read_report | Read the formal report artifact |
 | validate_finding / reject_finding | Accept or reject individual findings with rationale |
 | get_task / read_tasks | Read task specs and acceptance criteria |
+| read_task_history | See full task timeline: prior rejections, feedback history |
+| summarize_findings | Compact overview of findings: counts, types, confidence stats |
 | approve_task | Approve ONLY after full review with no blocking issues |
 | reject_task | Reject with specific, actionable feedback per criterion |
+| read_comments | Read existing comments before posting review |
 | add_comment | Post structured review comments on the task |
 | send_message | Genuine clarifications only — read materials thoroughly first |
 | read_wiki | Project context when needed |
 | context7_search → context7_docs | Verify library/API claims against current docs |
+| execute_command | Run shell commands to verify technical claims (dig, curl, etc.) |
 
 {memory_section}
 </tools>

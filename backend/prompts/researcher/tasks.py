@@ -37,17 +37,30 @@ have a clear strategy for investigation.
 - The research question restated in your own words (proving you
   understand it).
 - 3-5 sub-questions derived using PICO decomposition.
-- Existing knowledge reviewed (SearchKnowledgeTool, ReadFindingsTool,
-  ReadWikiTool) — what does the team already know?
+- Existing knowledge reviewed (search_knowledge, read_findings,
+  read_wiki) — what does the team already know?
 - A search strategy per sub-question: what queries, what source types.
-- Any ambiguities identified and clarified (AskTeamLeadTool) or
-  documented as assumptions (AddCommentTool with ASSUMPTION: prefix).
+- Any ambiguities identified and clarified (ask_team_lead) or
+  documented as assumptions (add_comment with ASSUMPTION: prefix).
+
+## Step 0: Resume Check
+Call **load_session_note** with this task_id. If a previous session
+exists, resume from the saved phase instead of starting over. If no
+session exists, proceed with a fresh start.
 
 ## Methodology Guidance
-Start by reading the task with GetTaskTool. Then check existing
+Start by reading the task with get_task. Then check existing
 knowledge — do NOT duplicate prior work. Decompose the question before
 searching. If the scope is ambiguous, clarify with the Team Lead
-BEFORE starting. Document your plan with AddCommentTool.
+BEFORE starting.
+
+Call **save_session_note** with phase="decomposing" after posting your
+research plan.
+
+**Before posting anything**, call read_comments to see what has already
+been discussed on this task. If a research plan already exists in the
+comments, do NOT post another one — summarize what exists and finish.
+Only post a new plan via add_comment if no prior plan exists.
 """
 
     expected_output = """\
@@ -93,15 +106,22 @@ record the most relevant sources. Produce a structured literature review
 that identifies key contributions, areas of consensus, disagreements,
 and gaps.
 
+## Step 0: Resume Check
+Call **load_session_note** with this task_id. If a previous session
+exists, resume from the saved phase and skip already-completed work.
+
 ## Methodology Guidance
 - Search each sub-question independently using multiple query
-  formulations per sub-question. Use DeepWebResearchTool for in-depth
-  multi-source investigation; use WebSearchTool only for quick
+  formulations per sub-question. Use deep_web_research for in-depth
+  multi-source investigation; use web_search only for quick
   supplementary lookups.
 - Apply SIFT on every source you intend to cite: investigate the
   source's reputation, find corroboration, trace claims to primary
   sources.
-- Record findings as you discover them (RecordFindingTool) — do not
+- Before recording a finding, call search_findings with the topic to
+  check if a similar one already exists. Only call record_finding if
+  no match above 0.85 similarity is found.
+- Record findings as you discover them (record_finding) — do not
   batch at the end. Each finding needs: specific title, evidence with
   source, confidence score, finding type (observation).
 - Track coverage: which sub-questions have adequate sources? Which
@@ -109,13 +129,15 @@ and gaps.
 - Actively search for contradictory evidence and alternative
   viewpoints — frame queries around limitations, criticisms, or
   failure cases.
-- Write a state-of-the-art wiki article (WriteWikiTool) covering key
+- Write a state-of-the-art wiki article (write_wiki) covering key
   papers, consensus, debates, and gaps.
+- Call **save_session_note** with phase="searching" after completing
+  each sub-question, and phase="evaluating" when moving to synthesis.
 
 ## Artifact Checkpoint
 Before finishing, verify your work is persisted:
-1. ReadFindingsTool returns ≥3 findings you recorded.
-2. ReadWikiTool returns the wiki article you wrote.
+1. read_findings returns ≥3 findings you recorded.
+2. read_wiki returns the wiki article you wrote.
 
 If either check fails, your work is lost and subsequent steps will
 have nothing to build on. Re-record immediately.
@@ -132,8 +154,8 @@ A structured literature review containing:
 4. **Areas of debate**: Where evidence is mixed or experts disagree.
 5. **Knowledge gaps**: What questions remain unanswered.
 6. **Recorded findings**: Exact count of findings recorded via
-   RecordFindingTool.
-7. **Wiki updated**: Article title written via WriteWikiTool.
+   record_finding.
+7. **Wiki updated**: Article title written via write_wiki.
 """
     return description, expected_output
 
@@ -168,7 +190,7 @@ distinguish between them. Register the primary hypothesis formally
 and document all alternatives.
 
 ## Methodology Guidance
-- Review your recorded findings (ReadFindingsTool) to identify the
+- Review your recorded findings (read_findings) to identify the
   strongest patterns, unresolved contradictions, and gaps.
 - Generate 3-5 competing hypotheses — not just one. Each must be
   specific, testable, and falsifiable.
@@ -177,10 +199,13 @@ and document all alternatives.
 - Identify **diagnostic evidence** — evidence that supports one
   hypothesis but contradicts others. This is the most valuable
   evidence to search for during investigation.
-- Register the primary hypothesis with CreateHypothesisTool (include
-  statement, predictions, methodology).
-- Document ALL competing hypotheses in a task comment (AddCommentTool)
-  so the full analysis is visible to the reviewer.
+- Register the primary hypothesis with create_hypothesis (include
+  statement and rationale). If an existing hypothesis already covers
+  your primary hypothesis (check with read_findings), reference it
+  by ID instead of creating a duplicate.
+- Before posting, call read_comments to check if hypotheses were
+  already documented. Only add_comment if no hypothesis analysis
+  exists yet.
 
 Bad hypothesis: "LLMs are useful for code review."
 Good hypothesis: "GPT-4 can identify security vulnerabilities in
@@ -193,10 +218,10 @@ A competing hypotheses analysis containing:
 1. **Competing hypotheses**: 3-5 alternative hypotheses with rationale.
 2. **Diagnostic evidence**: What evidence would distinguish between them.
 3. **Primary hypothesis**: The most promising hypothesis, registered
-   via CreateHypothesisTool.
+   via create_hypothesis (or existing hypothesis ID if reusing one).
 4. **Investigation plan**: How each hypothesis will be tested.
 5. **Task comment**: Confirmation that all hypotheses were documented
-   via AddCommentTool.
+   via add_comment.
 """
     return description, expected_output
 
@@ -236,11 +261,12 @@ evidence.
 
 ## Methodology Guidance
 - For each testable prediction, search for BOTH supporting AND
-  contradicting evidence. Use DeepWebResearchTool with targeted queries
+  contradicting evidence. Use deep_web_research with targeted queries
   per prediction. Run separate queries for limitations and criticisms.
 - Cross-reference sources: for every important claim, find at least
   one additional independent source.
-- Record findings immediately as you discover them (RecordFindingTool).
+- Before recording, call search_findings to check for duplicates.
+  Record findings immediately as you discover them (record_finding).
   Apply GRADE-inspired confidence scoring:
   - 0.85-1.0: Multiple independent credible sources, consistent.
   - 0.6-0.8: Good evidence, limited scope or few sources.
@@ -258,10 +284,12 @@ Before concluding:
 - Do all your sources come from the same perspective or ecosystem?
 
 Record your overall conclusion as a finding with type `conclusion`.
+Call **save_session_note** with phase="synthesizing" after recording
+your conclusion.
 
 ## Artifact Checkpoint
-Use ReadFindingsTool to confirm your findings are saved. If it returns
-fewer than expected, some RecordFindingTool calls may have failed
+Use read_findings to confirm your findings are saved. If it returns
+fewer than expected, some record_finding calls may have failed
 silently — re-record immediately.
 """
 
@@ -275,7 +303,7 @@ A structured investigation summary containing:
 3. **Hypothesis assessment**: Overall assessment via disconfirmation
    analysis (which hypothesis has least inconsistent evidence).
 4. **Recorded findings**: Exact count of findings recorded via
-   RecordFindingTool.
+   record_finding.
 5. **Devil's advocate results**: Counter-arguments considered and
    their impact on conclusions.
 6. **Limitations**: Honest assessment of evidence gaps or
@@ -317,7 +345,7 @@ by source. The report must be clear enough for the Research Reviewer
 to evaluate your methodology, evidence, and conclusions on their own.
 
 ## Methodology Guidance
-- Review all findings (ReadFindingsTool) and organize by topic or
+- Review all findings (read_findings) and organize by topic or
   sub-question, NOT chronologically.
 - Use **thematic synthesis**: group related findings together, put
   sources in conversation (where they agree, disagree, complement),
@@ -337,16 +365,19 @@ to evaluate your methodology, evidence, and conclusions on their own.
     findings. Priority ranked.
   - **References**: All sources cited with URLs.
 
-Write the report with WriteReportTool. Update wiki with key insights
-(WriteWikiTool). Post artifact inventory on task (AddCommentTool):
+Before writing the report, call **summarize_findings** to get a
+compact overview of what you have — use it to plan report structure.
+
+Write the report with write_report. Update wiki with key insights
+(write_wiki). Post artifact inventory on task (add_comment):
 finding count, report title, wiki articles. Set status to
-`review_ready` (UpdateTaskStatusTool).
+`review_ready` (update_task_status).
 
 If you produced code or notebooks, commit and push to Forgejo:
-1. GitBranchTool — `research-{task_id}-artifacts` from main.
-2. GitCommitTool — stage and commit artifacts.
-3. GitPushTool — push to origin.
-4. CreatePRTool — open PR against main.
+1. git_branch — `research-{task_id}-artifacts` from main.
+2. git_commit — stage and commit artifacts.
+3. git_push — push to origin.
+4. create_pr — open PR against main.
 
 ## Quality Checklist
 Before submitting, verify:
@@ -356,15 +387,15 @@ Before submitting, verify:
 - [ ] Methodology documented clearly enough to reproduce.
 - [ ] Executive summary accurately reflects the full report.
 - [ ] References complete with URLs.
-- [ ] ReadFindingsTool returns your findings.
-- [ ] ReadReportTool returns your report.
+- [ ] read_findings returns your findings.
+- [ ] read_report returns your report.
 - [ ] Submission comment lists all artifacts created.
 """
 
     expected_output = """\
 A confirmation of report completion containing:
 
-1. **Report title**: The title created via WriteReportTool.
+1. **Report title**: The title created via write_report.
 2. **Report structure**: Confirmation all sections are present.
 3. **Findings referenced**: Count of recorded findings cited.
 4. **Wiki updates**: Wiki articles created or updated.
@@ -425,29 +456,29 @@ rewrite conclusions before adding new sources.
 Address sources first, then conclusions.
 
 ## Methodology Guidance
-- Read your current findings (ReadFindingsTool) and report
-  (ReadReportTool) to map each concern to specific sections.
+- Read your current findings (read_findings) and report
+  (read_report) to map each concern to specific sections.
 - For Type A: run targeted searches for evidence addressing each
   concern. Apply SIFT. Record new findings.
 - For Type B: adjust confidence scores, rewrite conclusions to match
   evidence. If the reviewer flagged confirmation bias, run a devil's
   advocate pass.
-- Rewrite the report (WriteReportTool) incorporating all changes.
+- Rewrite the report (write_report) incorporating all changes.
   The revised report should mention what changed in response to review.
 - Self-review: go through the feedback point by point and confirm
   each concern is addressed.
 
 ## Artifact Checkpoint
 Before resubmitting:
-1. ReadFindingsTool returns your findings (old + new).
-2. ReadReportTool with task_id={task_id} returns the updated report.
+1. read_findings returns your findings (old + new).
+2. read_report with task_id={task_id} returns the updated report.
 
 If either check fails, re-record immediately. Do NOT submit without
 verification.
 
-Post a revision summary with AddCommentTool mapping each reviewer
+Post a revision summary with add_comment mapping each reviewer
 concern to the change made. Set status to `review_ready`
-(UpdateTaskStatusTool).
+(update_task_status).
 """
 
     expected_output = f"""\
@@ -459,7 +490,7 @@ A summary of revisions containing:
 3. **Additional research** (Type A): New sources and findings recorded.
 4. **Confidence adjustments** (Type B): Findings whose scores changed.
 5. **Report updates**: Sections revised.
-6. **Artifact verification**: ReadFindingsTool and ReadReportTool
+6. **Artifact verification**: read_findings and read_report
    (task_id={task_id}) both return data.
 7. **Status**: Task moved to `review_ready`.
 """
@@ -496,14 +527,14 @@ future research sessions.
 ## Step-by-Step Process
 
 ### Step 1: Review Validated Findings
-Use **ReadFindingsTool** to read all findings from this task. Verify that:
+Use **read_findings** to read all findings from this task. Verify that:
 - All findings have appropriate confidence scores.
 - Finding titles and content are clear and useful for future reference.
 - No important findings were missed.
 
 ### Step 2: Update Wiki Articles
-Use **ReadWikiTool** to check existing wiki articles related to this task.
-Use **WriteWikiTool** to:
+Use **read_wiki** to check existing wiki articles related to this task.
+Use **write_wiki** to:
 - Update existing articles with validated insights.
 - Create new articles for key topics that are not yet documented.
 - Add cross-references between related articles.
@@ -515,8 +546,8 @@ Focus on information that will be useful to other team members:
 - Important reference lists.
 
 ### Step 3: Finalize Task
-Use **UpdateTaskStatusTool** to move the task to `done`.
-Use **AddCommentTool** to post a final summary of the research
+Use **update_task_status** to move the task to `done`.
+Use **add_comment** to post a final summary of the research
 contribution to the project.
 """
 
@@ -574,7 +605,7 @@ Use: `research-{task_id}-<slug>` (e.g. `research-{task_id}-llm-benchmark-noteboo
 
 ### What to Commit
 Only commit files listed below. Do NOT commit raw data files larger than
-50 MB — use **ExecuteCommandTool** to check file sizes with `du -sh <file>`
+50 MB — use **execute_command** to check file sizes with `du -sh <file>`
 first. If a file exceeds 50 MB, skip it and note the omission in the PR body.
 
 **Artifacts to commit:**
@@ -597,7 +628,7 @@ A confirmation of artifact push containing:
 2. **Files committed**: List of artifact files committed, with sizes.
 3. **Files skipped**: Any files exceeding the 50 MB limit (or "none").
 4. **PR created**: Confirmation that a PR was opened against main, with the
-   PR number from CreatePRTool.
+   PR number from create_pr.
 5. **PR body**: Confirmation that the body includes artifact descriptions,
    reproduction steps, and links to research findings.
 """
@@ -633,14 +664,14 @@ def rescue_missing_artifacts(
     if missing_findings:
         missing_parts.append(
             "- **FINDINGS**: You have ZERO findings recorded for this task. "
-            "Use **RecordFindingTool** RIGHT NOW to record at least 3 findings "
+            "Use **record_finding** RIGHT NOW to record at least 3 findings "
             "from your research. Each finding needs: a clear title, content with "
             "evidence, a confidence score, and finding_type (observation/conclusion)."
         )
     if missing_report:
         missing_parts.append(
             "- **REPORT**: You have ZERO reports for this task. "
-            "Use **WriteReportTool** RIGHT NOW to write a research report. "
+            "Use **write_report** RIGHT NOW to write a research report. "
             "The report must cover: executive summary, methodology, findings, "
             "conclusions, and references."
         )
@@ -661,11 +692,11 @@ persist your work. Without these artifacts in the database, the peer
 reviewer will reject your work immediately.
 
 ## What You Must Do NOW
-1. Use **ReadFindingsTool** to check what findings exist for this task.
-2. If findings are missing: call **RecordFindingTool** for each key finding.
-3. Use **ReadReportTool** with task_id={task_id} to check if a report exists.
-4. If the report is missing: call **WriteReportTool** to create the report.
-5. Use **ReadFindingsTool** again to VERIFY your findings were saved.
+1. Use **read_findings** to check what findings exist for this task.
+2. If findings are missing: call **record_finding** for each key finding.
+3. Use **read_report** with task_id={task_id} to check if a report exists.
+4. If the report is missing: call **write_report** to create the report.
+5. Use **read_findings** again to VERIFY your findings were saved.
 
 DO NOT explain what you plan to do. DO NOT summarize your research.
 CALL THE TOOLS IMMEDIATELY. Every response that is not a tool call is wasted.
@@ -673,8 +704,8 @@ CALL THE TOOLS IMMEDIATELY. Every response that is not a tool call is wasted.
 
     expected_output = f"""\
 Confirmation that ALL missing artifacts were created:
-1. Number of findings recorded via RecordFindingTool (minimum 3).
-2. Report title created via WriteReportTool.
-3. Verification via ReadFindingsTool showing findings exist for task {task_id}.
+1. Number of findings recorded via record_finding (minimum 3).
+2. Report title created via write_report.
+3. Verification via read_findings showing findings exist for task {task_id}.
 """
     return description, expected_output

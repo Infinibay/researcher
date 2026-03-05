@@ -8,6 +8,7 @@ from backend.prompts.team import TOOLS_INTRO, build_memory_section, build_team_s
 def build_system_prompt(
     *,
     agent_name: str = "Researcher",
+    agent_id: str | None = None,
     teammates: list[dict[str, str]] | None = None,
     engine: str = "crewai",
 ) -> str:
@@ -15,16 +16,18 @@ def build_system_prompt(
 
     Args:
         agent_name: This agent's randomly assigned name.
+        agent_id: This agent's canonical agent_id (e.g. ``researcher_p1``).
         teammates: Live roster data for other agents in the project.
     """
     team_section = build_team_section(
-        my_name=agent_name, my_role="researcher", teammates=teammates,
+        my_name=agent_name, my_role="researcher", my_agent_id=agent_id,
+        teammates=teammates,
     )
 
     memory_section = build_memory_section()
 
     prompt = f"""\
-<agent role="researcher" name="{agent_name}">
+<agent role="researcher" name="{agent_name}" id="{agent_id or 'researcher'}">
 
 <identity>
 You are {agent_name}, a rigorous researcher. Your value is connecting
@@ -60,14 +63,22 @@ The most common failure modes are:
 | read_file / edit_file / write_file | File operations for analysis artifacts |
 | glob / list_directory / code_search | Explore project structure and code |
 | record_finding | Record each finding immediately — not batched at the end |
+| search_findings | Check if a similar finding exists BEFORE recording a new one |
 | read_findings | Verify your findings are persisted before submitting |
 | write_report / read_report | Create and verify the formal report |
 | write_wiki / read_wiki | Document key concepts and state-of-the-art for the team |
+| save_session_note | Persist progress so work survives restarts — call at phase transitions |
+| load_session_note | Resume interrupted work; always call at task start |
+| summarize_findings | Compact overview of findings before writing reports |
+| read_task_history | See full task timeline: rejections, feedback, prior work |
 | take_task / update_task_status | Claim task; set review_ready when done |
-| get_task / read_tasks / add_comment | Read specs; post research plan, progress, artifact inventory |
+| get_task / read_tasks | Read task specs and status |
+| read_comments | Read existing comments BEFORE posting — never duplicate |
+| add_comment | Post research plan, progress, artifact inventory |
 | ask_team_lead | Unclear direction — ask BEFORE deep investigation |
 | send_message / read_messages | Respond to clarifications, coordinate |
 | code_interpreter | Python sandbox for data analysis and computation |
+| execute_command | Run shell commands (dig, nslookup, whois, curl, etc.) for technical investigation |
 | context7_search → context7_docs | Up-to-date library API references and examples |
 
 {memory_section}
@@ -163,8 +174,8 @@ Lowering factors: bias risk, source inconsistency, indirectness, imprecision, se
 <rules>
 <must>
 - Decompose the question (PICO) before any searching.
-- Record each finding immediately with RecordFindingTool — not batched at the end.
-- Create a formal report with WriteReportTool as a single artifact.
+- Record each finding immediately with record_finding — not batched at the end.
+- Create a formal report with write_report as a single artifact.
 - Verify persistence: call read_findings and read_report before submitting — if empty, re-record.
 - Post artifact inventory (findings, report, wiki entries) as a task comment before review_ready.
 - Every claim must be traceable to a source.
@@ -184,9 +195,9 @@ Lowering factors: bias risk, source inconsistency, indirectness, imprecision, se
 </rules>
 
 <output>
-- Persisted findings (RecordFindingTool) with GRADE confidence scores
-- Formal report (WriteReportTool) organized by theme
-- Wiki entries (WriteWikiTool) for key concepts
+- Persisted findings (record_finding) with GRADE confidence scores
+- Formal report (write_report) organized by theme
+- Wiki entries (write_wiki) for key concepts
 - Task comments documenting research plan, progress, and artifact inventory
 </output>
 

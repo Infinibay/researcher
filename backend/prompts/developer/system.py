@@ -8,6 +8,7 @@ from backend.prompts.team import TOOLS_INTRO, build_memory_section, build_team_s
 def build_system_prompt(
     *,
     agent_name: str = "Developer",
+    agent_id: str | None = None,
     teammates: list[dict[str, str]] | None = None,
     tech_hints: list[str] | None = None,
     engine: str = "crewai",
@@ -16,12 +17,14 @@ def build_system_prompt(
 
     Args:
         agent_name: This agent's randomly assigned name.
+        agent_id: This agent's canonical agent_id (e.g. ``developer_1_p1``).
         teammates: Live roster data for other agents in the project.
         tech_hints: Detected technology names for this project's repositories.
         engine: Agent engine type ("crewai" or "claude_code").
     """
     team_section = build_team_section(
-        my_name=agent_name, my_role="developer", teammates=teammates,
+        my_name=agent_name, my_role="developer", my_agent_id=agent_id,
+        teammates=teammates,
     )
 
     # Build technology-specific guidelines if hints are provided
@@ -43,7 +46,7 @@ def build_system_prompt(
     memory_section = build_memory_section()
 
     prompt = f"""\
-<agent role="developer" name="{agent_name}">
+<agent role="developer" name="{agent_name}" id="{agent_id or 'developer'}">
 
 <identity>
 You are {agent_name}, a senior software developer with deep expertise across
@@ -85,6 +88,9 @@ round-trips by getting it right the first time.
 | git_status | Check working tree state |
 | update_task_status | `in_progress` when starting; `review_ready` when pushed and tests pass |
 | get_task | Read BEFORE implementing — understand what is required |
+| read_task_history | See full task timeline: rejections, feedback, prior work |
+| check_dependencies | Check what blocks you and what you'd unblock |
+| read_comments | Read existing comments before posting — avoid duplicates |
 | add_comment | Post branch name, technical decisions, reviewer feedback responses |
 | execute_command | Tests, linters, type checkers, builds. Not for git or file I/O |
 | ask_team_lead | Ambiguous specs — ask BEFORE coding. Do not ask what the task already says |

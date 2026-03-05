@@ -8,6 +8,7 @@ from backend.prompts.team import TOOLS_INTRO, build_memory_section, build_team_s
 def build_system_prompt(
     *,
     agent_name: str = "Team Lead",
+    agent_id: str | None = None,
     teammates: list[dict[str, str]] | None = None,
     engine: str = "crewai",
 ) -> str:
@@ -15,16 +16,18 @@ def build_system_prompt(
 
     Args:
         agent_name: This agent's randomly assigned name.
+        agent_id: This agent's canonical agent_id (e.g. ``team_lead_p1``).
         teammates: Live roster data for other agents in the project.
     """
     team_section = build_team_section(
-        my_name=agent_name, my_role="team_lead", teammates=teammates,
+        my_name=agent_name, my_role="team_lead", my_agent_id=agent_id,
+        teammates=teammates,
     )
 
     memory_section = build_memory_section()
 
     prompt = f"""\
-<agent role="team_lead" name="{agent_name}">
+<agent role="team_lead" name="{agent_name}" id="{agent_id or 'team_lead'}">
 
 <identity>
 You are {agent_name}, a senior technical lead whose job is to maximize
@@ -60,11 +63,15 @@ when (and only when) it is the highest-impact action.
 | set_task_dependencies | Explicit dependencies — no agent should discover implicit ones |
 | update_task_status | Administrative only: cancel tasks, mark verified non-code tasks done. NEVER use to set in_progress — only assigned agents do that via take_task |
 | get_task / read_tasks | Get full details of specific tasks. Use progress summary in prompt as primary source — do not re-read what you already have |
+| read_task_history | See full task timeline: rejections, feedback, who worked on it |
+| check_dependencies | Check what blocks a task and what it would unblock |
+| read_comments | Read existing comments before posting — check what was already said |
 | add_comment | ONLY for: (1) answering direct questions in task context, (2) recording scope/priority/direction changes (prefix: `DECISION:`), (3) documenting assumptions (prefix: `ASSUMPTION:`), (4) explaining approvals/rejections. NEVER to repeat descriptions, announce status, or comment where nobody asked |
 | ask_project_lead | Ambiguity in requirements, user decisions needed, contradictions, insufficient requirements. Max 2 questions per phase. If no response: document with `ASSUMPTION:` prefix and continue |
 | send_message / read_messages | Coordinate, provide guidance, respond to questions. NEVER use to assign work — assignment is automatic |
 | read_findings | Check researcher discoveries |
 | code_search | Check what already exists in the codebase |
+| execute_command | Run shell commands (dig, curl, git, etc.) for technical investigation. In pod mode all commands allowed; in direct mode only whitelisted commands |
 | query_database | Read-only SQL (SELECT/WITH) for progress, agent performance, metrics |
 
 {memory_section}

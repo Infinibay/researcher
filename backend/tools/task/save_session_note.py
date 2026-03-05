@@ -8,7 +8,10 @@ from pydantic import BaseModel, Field
 from backend.tools.base.base_tool import PabadaBaseTool
 from backend.tools.base.db import execute_with_retry
 
-VALID_PHASES = ("thinking", "locating", "implementing", "testing")
+VALID_PHASES = (
+    "thinking", "locating", "implementing", "testing",          # developer
+    "decomposing", "searching", "evaluating", "synthesizing", "reporting",  # researcher
+)
 
 
 class SaveSessionNoteInput(BaseModel):

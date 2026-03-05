@@ -1,12 +1,14 @@
 """Web fetch tool for extracting readable content from URLs."""
 
 import asyncio
+import sqlite3
 from typing import Literal, Type
 
 from pydantic import BaseModel, Field
 
 from backend.config.settings import settings
 from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.db import execute_with_retry
 from backend.tools.web.rate_limiter import web_rate_limiter
 from backend.tools.web.robots_checker import robots_checker
 
@@ -15,6 +17,10 @@ class WebFetchInput(BaseModel):
     url: str = Field(..., description="URL to fetch content from")
     format: Literal["markdown", "text"] = Field(
         default="markdown", description="Output format: 'markdown' or 'text'"
+    )
+    bypass_cache: bool = Field(
+        default=False,
+        description="Set to true to skip the cache and fetch fresh content",
     )
 
 
@@ -26,7 +32,51 @@ class WebFetchTool(PabadaBaseTool):
     )
     args_schema: Type[BaseModel] = WebFetchInput
 
-    def _run(self, url: str, format: str = "markdown") -> str:
+    def _check_cache(self, url: str, format: str) -> str | None:
+        """Return cached content if fresh enough, else None."""
+        def _query(conn: sqlite3.Connection) -> str | None:
+            row = conn.execute(
+                """\
+                SELECT content, fetched_at
+                FROM web_cache
+                WHERE url = ? AND format = ?
+                  AND fetched_at > datetime('now', ?)
+                """,
+                (url, format, f"-{settings.WEB_CACHE_TTL_SECONDS} seconds"),
+            ).fetchone()
+            return row["content"] if row else None
+        try:
+            return execute_with_retry(_query)
+        except Exception:
+            return None
+
+    def _store_cache(self, url: str, format: str, content: str) -> None:
+        """Store fetched content in the cache."""
+        def _insert(conn: sqlite3.Connection) -> None:
+            conn.execute(
+                """\
+                INSERT INTO web_cache (url, format, content)
+                VALUES (?, ?, ?)
+                ON CONFLICT(url, format) DO UPDATE SET
+                    content    = excluded.content,
+                    fetched_at = CURRENT_TIMESTAMP
+                """,
+                (url, format, content),
+            )
+            conn.commit()
+        try:
+            execute_with_retry(_insert)
+        except Exception:
+            pass  # Cache write failure is non-fatal
+
+    def _run(self, url: str, format: str = "markdown", bypass_cache: bool = False) -> str:
+        # Check cache first
+        if not bypass_cache:
+            cached = self._check_cache(url, format)
+            if cached is not None:
+                self._log_tool_usage(f"Cache hit for {url} ({len(cached)} chars)")
+                return cached
+
         try:
             import httpx
         except ImportError:
@@ -79,11 +129,19 @@ class WebFetchTool(PabadaBaseTool):
         if not content:
             return self._error(f"No readable content extracted from {url}")
 
+        self._store_cache(url, format, content)
         self._log_tool_usage(f"Fetched {url} ({len(content)} chars)")
         return content
 
-    async def _arun(self, url: str, format: str = "markdown") -> str:
+    async def _arun(self, url: str, format: str = "markdown", bypass_cache: bool = False) -> str:
         """Async version using httpx async client."""
+        # Check cache first
+        if not bypass_cache:
+            cached = self._check_cache(url, format)
+            if cached is not None:
+                self._log_tool_usage(f"Cache hit for {url} ({len(cached)} chars)")
+                return cached
+
         try:
             import httpx
             import trafilatura
@@ -129,5 +187,6 @@ class WebFetchTool(PabadaBaseTool):
         if not content:
             return self._error(f"No readable content extracted from {url}")
 
+        self._store_cache(url, format, content)
         self._log_tool_usage(f"Fetched {url} ({len(content)} chars)")
         return content

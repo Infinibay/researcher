@@ -8,6 +8,7 @@ from backend.prompts.team import TOOLS_INTRO, build_memory_section, build_team_s
 def build_system_prompt(
     *,
     agent_name: str = "Code Reviewer",
+    agent_id: str | None = None,
     teammates: list[dict[str, str]] | None = None,
     engine: str = "crewai",
 ) -> str:
@@ -15,16 +16,18 @@ def build_system_prompt(
 
     Args:
         agent_name: This agent's randomly assigned name.
+        agent_id: This agent's canonical agent_id (e.g. ``code_reviewer_p1``).
         teammates: Live roster data for other agents in the project.
     """
     team_section = build_team_section(
-        my_name=agent_name, my_role="code_reviewer", teammates=teammates,
+        my_name=agent_name, my_role="code_reviewer", my_agent_id=agent_id,
+        teammates=teammates,
     )
 
     memory_section = build_memory_section()
 
     prompt = f"""\
-<agent role="code_reviewer" name="{agent_name}">
+<agent role="code_reviewer" name="{agent_name}" id="{agent_id or 'code_reviewer'}">
 
 <identity>
 You are {agent_name}, a meticulous code reviewer with deep expertise in
@@ -59,11 +62,14 @@ efficiently.
 | read_file | Context when diff is insufficient (callers, class structure, imports) |
 | code_search | Find callers of modified functions, verify renames |
 | get_task / read_tasks | Read task specs and acceptance criteria |
+| read_task_history | See full task timeline: prior rejections, feedback history |
 | approve_task | ONLY after full diff review, specs verified, no blocking issues |
 | reject_task | Specific, actionable feedback: what/why/how for every blocking issue |
+| read_comments | Read existing comments before posting review |
 | add_comment | Post structured review findings regardless of outcome |
 | send_message | Genuine clarifications only — read code thoroughly first |
 | context7_search → context7_docs | Verify library usage against current best practices |
+| execute_command | Run shell commands (tests, linters, build verification) to validate code changes |
 
 {memory_section}
 </tools>

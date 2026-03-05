@@ -6,13 +6,14 @@ from backend.tools.file import (
 )
 from backend.tools.git import (
     GitBranchTool, GitCommitTool, GitPushTool,
-    GitDiffTool, GitStatusTool, CreatePRTool,
+    GitDiffTool, GitStatusTool, CreatePRTool, MergePRTool,
 )
 from backend.tools.task import (
     CreateTaskTool, TakeTaskTool, UpdateTaskStatusTool,
-    AddCommentTool, GetTaskTool, ReadTasksTool,
+    AddCommentTool, ReadCommentsTool, GetTaskTool, ReadTasksTool,
     SetTaskDependenciesTool, ApproveTaskTool, RejectTaskTool,
     SaveSessionNoteTool, LoadSessionNoteTool,
+    ReadTaskHistoryTool, CheckDependenciesTool,
 )
 from backend.tools.communication import (
     SendMessageTool, ReadMessagesTool, AskTeamLeadTool,
@@ -29,13 +30,15 @@ from backend.tools.rag import (
     DOCXSearchPabadaTool, JSONSearchPabadaTool, XMLSearchPabadaTool,
 )
 from backend.tools.knowledge import (
-    RecordFindingTool, ReadFindingsTool, ValidateFindingTool,
-    RejectFindingTool, ReadWikiTool, WriteWikiTool,
+    RecordFindingTool, ReadFindingsTool, SearchFindingsTool,
+    ValidateFindingTool, RejectFindingTool, ReadWikiTool, WriteWikiTool,
     WriteReportTool, ReadReportTool, SearchKnowledgeTool,
+    SummarizeFindingsTool,
 )
 from backend.tools.project import (
     CreateEpicTool, CreateMilestoneTool, CreateRepositoryTool,
     UpdateProjectTool, ReadReferenceFilesTool, CreateHypothesisTool,
+    ReadEpicsTool, ReadMilestonesTool,
 )
 from backend.tools.context7 import Context7SearchTool, Context7DocsTool
 
@@ -45,14 +48,15 @@ FILE_TOOLS = [ReadFileTool, WriteFileTool, EditFileTool, ListDirectoryTool, Code
 
 GIT_TOOLS = [
     GitBranchTool, GitCommitTool, GitPushTool,
-    GitDiffTool, GitStatusTool, CreatePRTool,
+    GitDiffTool, GitStatusTool, CreatePRTool, MergePRTool,
 ]
 
 TASK_TOOLS = [
     CreateTaskTool, TakeTaskTool, UpdateTaskStatusTool,
-    AddCommentTool, GetTaskTool, ReadTasksTool,
+    AddCommentTool, ReadCommentsTool, GetTaskTool, ReadTasksTool,
     SetTaskDependenciesTool, ApproveTaskTool, RejectTaskTool,
     SaveSessionNoteTool, LoadSessionNoteTool,
+    ReadTaskHistoryTool, CheckDependenciesTool,
 ]
 
 COMMUNICATION_TOOLS = [
@@ -77,14 +81,16 @@ RAG_TOOLS = [
 CONTEXT7_TOOLS = [Context7SearchTool, Context7DocsTool]
 
 KNOWLEDGE_TOOLS = [
-    RecordFindingTool, ReadFindingsTool, ValidateFindingTool,
-    RejectFindingTool, ReadWikiTool, WriteWikiTool,
+    RecordFindingTool, ReadFindingsTool, SearchFindingsTool,
+    ValidateFindingTool, RejectFindingTool, ReadWikiTool, WriteWikiTool,
     WriteReportTool, ReadReportTool, SearchKnowledgeTool,
+    SummarizeFindingsTool,
 ]
 
 PROJECT_TOOLS = [
     CreateEpicTool, CreateMilestoneTool, CreateRepositoryTool,
     UpdateProjectTool, ReadReferenceFilesTool, CreateHypothesisTool,
+    ReadEpicsTool, ReadMilestonesTool,
 ]
 
 ALL_TOOL_CLASSES = (
@@ -99,26 +105,29 @@ _ROLE_TOOLS = {
     "project_lead": (
         COMMUNICATION_TOOLS +
         [UpdateProjectTool, ReadReferenceFilesTool, CreateRepositoryTool] +
-        [ReadFindingsTool, ReadWikiTool, ReadReportTool] +
+        [ReadFindingsTool, SearchFindingsTool, ReadWikiTool, ReadReportTool] +
         [WebSearchTool, WebFetchTool, ScrapeWebsitePabadaTool] +
-        [NL2SQLTool]
+        [MergePRTool] +
+        [NL2SQLTool] +
+        [ExecuteCommandTool]
     ),
     "team_lead": (
         # Team Lead gets task management tools EXCEPT TakeTaskTool —
         # only developers/researchers claim tasks from the backlog.
         [CreateTaskTool, UpdateTaskStatusTool,
-         AddCommentTool, GetTaskTool, ReadTasksTool,
-         SetTaskDependenciesTool, ApproveTaskTool, RejectTaskTool] +
+         AddCommentTool, ReadCommentsTool, GetTaskTool, ReadTasksTool,
+         SetTaskDependenciesTool, ApproveTaskTool, RejectTaskTool,
+         ReadTaskHistoryTool, CheckDependenciesTool] +
         COMMUNICATION_TOOLS + FILE_TOOLS + GIT_TOOLS +
-        [ReadFindingsTool, ReadWikiTool] +
-        [CreateEpicTool, CreateMilestoneTool] +
+        [ReadFindingsTool, SearchFindingsTool, ReadWikiTool] +
+        [CreateEpicTool, CreateMilestoneTool, ReadEpicsTool, ReadMilestonesTool] +
         [WebSearchTool, ScrapeWebsitePabadaTool, ExecuteCommandTool] +
         [NL2SQLTool]
     ),
     "developer": (
         FILE_TOOLS + GIT_TOOLS + SHELL_TOOLS +
-        [TakeTaskTool, UpdateTaskStatusTool, AddCommentTool, GetTaskTool, ReadTasksTool] +
-        [SaveSessionNoteTool, LoadSessionNoteTool] +
+        [TakeTaskTool, UpdateTaskStatusTool, AddCommentTool, ReadCommentsTool, GetTaskTool, ReadTasksTool] +
+        [SaveSessionNoteTool, LoadSessionNoteTool, ReadTaskHistoryTool, CheckDependenciesTool] +
         [SendMessageTool, ReadMessagesTool, AskTeamLeadTool, ReplyToUserTool] +
         [WebSearchTool, WebFetchTool] +
         [DirectorySearchTool, CodeDocsSearchPabadaTool] +
@@ -126,26 +135,31 @@ _ROLE_TOOLS = {
     ),
     "code_reviewer": (
         FILE_TOOLS + [GitDiffTool, GitStatusTool] +
-        [GetTaskTool, ReadTasksTool, ApproveTaskTool, RejectTaskTool, AddCommentTool] +
+        [GetTaskTool, ReadTasksTool, ApproveTaskTool, RejectTaskTool, AddCommentTool, ReadCommentsTool] +
+        [ReadTaskHistoryTool] +
         [SendMessageTool, ReadMessagesTool, ReplyToUserTool] +
         [DirectorySearchTool] +
-        CONTEXT7_TOOLS
+        CONTEXT7_TOOLS +
+        [ExecuteCommandTool]
     ),
     "researcher": (
         WEB_TOOLS + FILE_TOOLS + KNOWLEDGE_TOOLS +
         [CreateHypothesisTool] +
-        [TakeTaskTool, UpdateTaskStatusTool, AddCommentTool, GetTaskTool, ReadTasksTool] +
+        [TakeTaskTool, UpdateTaskStatusTool, AddCommentTool, ReadCommentsTool, GetTaskTool, ReadTasksTool] +
+        [SaveSessionNoteTool, LoadSessionNoteTool, ReadTaskHistoryTool] +
         [SendMessageTool, ReadMessagesTool, AskTeamLeadTool, ReplyToUserTool] +
-        [CodeInterpreterTool] + RAG_TOOLS +
+        [CodeInterpreterTool, ExecuteCommandTool] + RAG_TOOLS +
         CONTEXT7_TOOLS
     ),
     "research_reviewer": (
-        [ValidateFindingTool, RejectFindingTool, ReadFindingsTool] +
+        [ValidateFindingTool, RejectFindingTool, ReadFindingsTool, SearchFindingsTool, SummarizeFindingsTool] +
         [ReadWikiTool, ReadReportTool, SearchKnowledgeTool] +
-        [GetTaskTool, ReadTasksTool, ApproveTaskTool, RejectTaskTool, AddCommentTool] +
+        [GetTaskTool, ReadTasksTool, ApproveTaskTool, RejectTaskTool, AddCommentTool, ReadCommentsTool] +
+        [ReadTaskHistoryTool] +
         [SendMessageTool, ReadMessagesTool, ReplyToUserTool] +
         [PDFSearchTool] +
-        CONTEXT7_TOOLS
+        CONTEXT7_TOOLS +
+        [ExecuteCommandTool]
     ),
 }
 
@@ -191,7 +205,8 @@ _TASK_TYPE_TOOLS: dict[str, list] = {
     # Developer implementing code — needs file, git, shell, docs, web
     "implement": (
         FILE_TOOLS + GIT_TOOLS + SHELL_TOOLS +
-        [UpdateTaskStatusTool, AddCommentTool, GetTaskTool] +
+        [UpdateTaskStatusTool, AddCommentTool, ReadCommentsTool, GetTaskTool] +
+        [ReadTaskHistoryTool, CheckDependenciesTool] +
         [SendMessageTool, AskTeamLeadTool] +
         [WebSearchTool, WebFetchTool, DirectorySearchTool, CodeDocsSearchPabadaTool] +
         CONTEXT7_TOOLS +
@@ -200,7 +215,8 @@ _TASK_TYPE_TOOLS: dict[str, list] = {
     # Developer reworking code after review — same as implement + session notes
     "rework": (
         FILE_TOOLS + GIT_TOOLS + SHELL_TOOLS +
-        [UpdateTaskStatusTool, AddCommentTool, GetTaskTool] +
+        [UpdateTaskStatusTool, AddCommentTool, ReadCommentsTool, GetTaskTool] +
+        [ReadTaskHistoryTool, CheckDependenciesTool] +
         [SendMessageTool, AskTeamLeadTool] +
         [WebSearchTool, WebFetchTool, DirectorySearchTool, CodeDocsSearchPabadaTool] +
         CONTEXT7_TOOLS +
@@ -210,7 +226,8 @@ _TASK_TYPE_TOOLS: dict[str, list] = {
     "review": (
         [ReadFileTool, ListDirectoryTool, CodeSearchTool, GlobTool] +
         [GitDiffTool, GitStatusTool] +
-        [GetTaskTool, ReadTasksTool, ApproveTaskTool, RejectTaskTool, AddCommentTool] +
+        [GetTaskTool, ReadTasksTool, ApproveTaskTool, RejectTaskTool, AddCommentTool, ReadCommentsTool] +
+        [ReadTaskHistoryTool] +
         [SendMessageTool, ReadMessagesTool] +
         [DirectorySearchTool] + CONTEXT7_TOOLS
     ),
@@ -218,30 +235,34 @@ _TASK_TYPE_TOOLS: dict[str, list] = {
     "research": (
         WEB_TOOLS + FILE_TOOLS + KNOWLEDGE_TOOLS +
         [CreateHypothesisTool] +
-        [GetTaskTool, UpdateTaskStatusTool, AddCommentTool] +
+        [GetTaskTool, UpdateTaskStatusTool, AddCommentTool, ReadCommentsTool] +
+        [ReadTaskHistoryTool, SaveSessionNoteTool, LoadSessionNoteTool] +
         [SendMessageTool, AskTeamLeadTool] +
         [CodeInterpreterTool] + RAG_TOOLS + CONTEXT7_TOOLS
     ),
     # Team Lead creating plan — needs task mgmt, communication, knowledge
     "plan": (
         [GetTaskTool, ReadTasksTool] +
+        [ReadTaskHistoryTool, CheckDependenciesTool] +
         COMMUNICATION_TOOLS +
-        [ReadFindingsTool, ReadWikiTool] +
+        [ReadFindingsTool, SearchFindingsTool, ReadWikiTool] +
+        [ReadEpicsTool, ReadMilestonesTool] +
         [WebSearchTool, ExecuteCommandTool, NL2SQLTool]
     ),
     # Team Lead creating tickets — needs project management tools
     "create_tickets": (
-        [CreateTaskTool, UpdateTaskStatusTool, AddCommentTool,
+        [CreateTaskTool, UpdateTaskStatusTool, AddCommentTool, ReadCommentsTool,
          GetTaskTool, ReadTasksTool, SetTaskDependenciesTool] +
+        [ReadTaskHistoryTool, CheckDependenciesTool] +
         COMMUNICATION_TOOLS +
-        [CreateEpicTool, CreateMilestoneTool] +
-        [ReadFindingsTool, ReadWikiTool, ReadReportTool] +
+        [CreateEpicTool, CreateMilestoneTool, ReadEpicsTool, ReadMilestonesTool] +
+        [ReadFindingsTool, SearchFindingsTool, ReadWikiTool, ReadReportTool] +
         [WebSearchTool, NL2SQLTool]
     ),
     # Project Lead gathering requirements — needs communication, read access
     "requirements": (
         COMMUNICATION_TOOLS +
-        [ReadReferenceFilesTool, ReadFindingsTool, ReadWikiTool, ReadReportTool] +
+        [ReadReferenceFilesTool, ReadFindingsTool, SearchFindingsTool, ReadWikiTool, ReadReportTool] +
         [WebSearchTool, WebFetchTool, ScrapeWebsitePabadaTool, NL2SQLTool]
     ),
 }

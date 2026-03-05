@@ -845,7 +845,10 @@ CREATE TABLE IF NOT EXISTS developer_session_notes (
     task_id     INTEGER NOT NULL REFERENCES tasks(id) ON DELETE CASCADE,
     agent_id    TEXT NOT NULL,
     phase       TEXT NOT NULL
-                  CHECK(phase IN ('thinking', 'locating', 'implementing', 'testing')),
+                  CHECK(phase IN (
+                    'thinking', 'locating', 'implementing', 'testing',
+                    'decomposing', 'searching', 'evaluating', 'synthesizing', 'reporting'
+                  )),
     notes_json  TEXT NOT NULL DEFAULT '{}',
     last_file   TEXT,
     updated_at  DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -1247,3 +1250,25 @@ CREATE INDEX IF NOT EXISTS idx_agent_worktrees_status
 
 INSERT OR IGNORE INTO schema_migrations(version, name)
 VALUES (11, 'add_agent_worktrees');
+
+-- ========================= WEB CACHE ========================================
+
+-- ---------------------------------------------------------------------------
+-- 41. web_cache  (avoid re-fetching same URLs between LoopEngine iterations)
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS web_cache (
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    url        TEXT NOT NULL,
+    format     TEXT NOT NULL DEFAULT 'markdown',
+    content    TEXT NOT NULL,
+    fetched_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(url, format)
+);
+
+CREATE INDEX IF NOT EXISTS idx_web_cache_url ON web_cache(url);
+
+INSERT OR IGNORE INTO schema_migrations(version, name)
+VALUES (12, 'expand_session_note_phases');
+
+INSERT OR IGNORE INTO schema_migrations(version, name)
+VALUES (13, 'add_web_cache');
