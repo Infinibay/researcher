@@ -230,8 +230,17 @@ class TicketCreationFlow(Flow[TicketCreationState]):
 
     @listen("all_tickets_done")
     def set_dependencies(self):
-        """Set all task dependencies and announce the structure."""
+        """Set task dependencies between the newly created tickets."""
         update_subflow_step(self.state.project_id, "ticket_creation_flow", "set_dependencies")
+
+        if len(self.state.tasks_created) < 2:
+            logger.info(
+                "TicketCreationFlow: skipping dependency setting — "
+                "only %d task(s) created, nothing to link",
+                len(self.state.tasks_created),
+            )
+            return
+
         logger.info(
             "TicketCreationFlow: set_dependencies (%d tasks created, %d failed)",
             len(self.state.tasks_created), len(self.state.failed_items),

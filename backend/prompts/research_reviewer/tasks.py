@@ -40,18 +40,18 @@ Reject with specific, actionable feedback referencing the framework
 criteria by name.
 
 ## Start Here
-1. **Read the task** (GetTaskTool) — understand what was requested,
+1. **Read the task** (get_task) — understand what was requested,
    success criteria, and scope. Check task comments for the Researcher's
    artifact inventory (report title, finding count, wiki articles).
-2. **Read the report** (ReadReportTool) — get the big picture:
+2. **Read the report** (read_report) — get the big picture:
    methodology, narrative, quality.
-   - If no report exists → **immediate reject** via RejectTaskTool:
-     "No research report found. You must use WriteReportTool to create
+   - If no report exists → **immediate reject** via reject_task:
+     "No research report found. You must use write_report to create
      a formal report before submitting for review."
-3. **Read all findings** (ReadFindingsTool) — understand what was
+3. **Read all findings** (read_findings) — understand what was
    claimed and at what confidence.
-   - If no findings exist → **immediate reject** via RejectTaskTool:
-     "No findings recorded. You must use RecordFindingTool to record
+   - If no findings exist → **immediate reject** via reject_task:
+     "No findings recorded. You must use record_finding to record
      your key findings before submitting for review."
 
 ## Evaluate Against the Review Framework
@@ -78,21 +78,21 @@ For each finding:
 - Is the evidence sufficient and from reliable sources?
 - Does the conclusion follow from the evidence?
 - Is the confidence score calibrated?
-- If it meets the bar → ValidateFindingTool.
-- If not → RejectFindingTool with specific, actionable feedback.
+- If it meets the bar → validate_finding.
+- If not → reject_finding with specific, actionable feedback.
 
 ## Make the Task Decision
-- **Approve** (ApproveTaskTool) when: methodology sound, critical
+- **Approve** (approve_task) when: methodology sound, critical
   findings validated, research question adequately answered. You CAN
   approve even if minor findings were rejected, as long as core
   findings are solid.
-- **Reject** (RejectTaskTool) when: no artifacts, no decomposition,
+- **Reject** (reject_task) when: no artifacts, no decomposition,
   no alternative hypotheses for evaluative questions, summary instead
   of synthesis, systematically inflated confidence, major gaps.
   Include: what is wrong (which criteria), where, how to fix, priority.
 
 ## Document Your Review
-Use AddCommentTool to post a structured review:
+Use add_comment to post a structured review:
 - **Overall assessment**: One paragraph on research quality.
 - **Strengths**: 2-3 things the Researcher did well.
 - **Issues**: What needs improvement, referencing framework criteria.
@@ -103,14 +103,14 @@ Use AddCommentTool to post a structured review:
 A structured peer review result containing:
 
 1. **Individual finding evaluations**: Each finding either validated
-   (via ValidateFindingTool) or rejected (via RejectFindingTool with
+   (via validate_finding) or rejected (via reject_finding with
    actionable feedback referencing the review framework).
 
-2. **Task decision**: Either approved (via ApproveTaskTool) or rejected
-   (via RejectTaskTool with detailed guidance on what must change,
+2. **Task decision**: Either approved (via approve_task) or rejected
+   (via reject_task with detailed guidance on what must change,
    referencing specific criteria from the review framework).
 
-3. **Review comment**: A structured comment (via AddCommentTool) with
+3. **Review comment**: A structured comment (via add_comment) with
    overall assessment, strengths, issues, and decision rationale.
 
 4. **Final status string**: Either:

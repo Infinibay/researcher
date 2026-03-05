@@ -104,6 +104,11 @@ class DevelopmentState(BaseModel):
     dependencies_met: bool = False
     agent_run_id: str = ""
     tech_hints: list[str] = Field(default_factory=list)
+    # Pre-review CI gate
+    ci_passed: bool = False
+    ci_output: str = ""
+    ci_fix_attempts: int = 0
+    max_ci_fix_attempts: int = 10
 
 
 class CodeReviewState(BaseModel):
@@ -125,7 +130,7 @@ class CodeReviewState(BaseModel):
 
 
 class ResearchState(BaseModel):
-    """State for ResearchFlow — manages research lifecycle with peer review."""
+    """State for ResearchFlow — manages research lifecycle up to artifact verification."""
 
     project_id: int = 0
     project_name: str = ""
@@ -135,16 +140,27 @@ class ResearchState(BaseModel):
     hypothesis: str = ""
     findings: list[dict[str, Any]] = Field(default_factory=list)
     confidence_scores: list[float] = Field(default_factory=list)
-    peer_review_status: str = "pending"
-    last_reviewer_feedback: str = ""
-    validated: bool = False
     report_path: str = ""
     references: list[str] = Field(default_factory=list)
     agent_run_id: str = ""
-    revision_count: int = 0
-    max_revisions: int = 7
     rescue_count: int = 0
     knowledge_service_enabled: bool = True
+
+
+class ResearchReviewState(BaseModel):
+    """State for ResearchReviewFlow — independent peer review for research tasks."""
+
+    project_id: int = 0
+    project_name: str = ""
+    task_id: int = 0
+    task_title: str = ""
+    researcher_id: str = ""
+    reviewer_id: str = ""
+    hypothesis: str = ""
+    validated: bool = False
+    last_reviewer_feedback: str = ""
+    revision_count: int = 0
+    max_revisions: int = 7
 
 
 class TicketCreationState(BaseModel):

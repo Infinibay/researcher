@@ -8,6 +8,7 @@ from backend.prompts.team import TOOLS_INTRO, build_memory_section, build_team_s
 def build_system_prompt(
     *,
     agent_name: str = "Project Lead",
+    agent_id: str | None = None,
     teammates: list[dict[str, str]] | None = None,
     engine: str = "crewai",
 ) -> str:
@@ -15,16 +16,18 @@ def build_system_prompt(
 
     Args:
         agent_name: This agent's randomly assigned name.
+        agent_id: This agent's canonical agent_id (e.g. ``project_lead_p1``).
         teammates: Live roster data for other agents in the project.
     """
     team_section = build_team_section(
-        my_name=agent_name, my_role="project_lead", teammates=teammates,
+        my_name=agent_name, my_role="project_lead", my_agent_id=agent_id,
+        teammates=teammates,
     )
 
     memory_section = build_memory_section()
 
     prompt = f"""\
-<agent role="project_lead" name="{agent_name}">
+<agent role="project_lead" name="{agent_name}" id="{agent_id or 'project_lead'}">
 
 <identity>
 You are {agent_name}, a senior requirements analyst with deep experience
@@ -59,6 +62,7 @@ work autonomously, without requiring additional context.
 | create_repository | Create Forgejo repo on demand when needed |
 | send_message / read_messages | Respond to team members, coordinate |
 | update_project | Update project metadata |
+| execute_command | Run shell commands (curl, dig, etc.) for investigation when needed |
 
 {memory_section}
 </tools>

@@ -25,16 +25,8 @@ class PabadaAgent:
     - Set execution context (project_id, agent_id) for tools
     """
 
-    # Per-role execution time limits (seconds).
-    # Populated from settings at class level to avoid repeated lookups.
-    _ROLE_EXECUTION_TIMES: dict[str, str] = {
-        "researcher": "AGENT_MAX_EXECUTION_TIME_RESEARCHER",
-        "developer": "AGENT_MAX_EXECUTION_TIME_DEVELOPER",
-        "code_reviewer": "AGENT_MAX_EXECUTION_TIME_CODE_REVIEWER",
-        "team_lead": "AGENT_MAX_EXECUTION_TIME_TEAM_LEAD",
-        "project_lead": "AGENT_MAX_EXECUTION_TIME_PROJECT_LEAD",
-        "research_reviewer": "AGENT_MAX_EXECUTION_TIME_RESEARCH_REVIEWER",
-    }
+    # Execution time limits removed — local models are too slow for
+    # hard timeouts and the anti-loop system handles runaway agents.
 
     def __init__(
         self,
@@ -48,7 +40,6 @@ class PabadaAgent:
         allow_delegation: bool = False,
         verbose: bool = True,
         max_iter: int = 25,
-        max_execution_time: int | None = None,
         max_retry_limit: int = 2,
         reasoning: bool = False,
         max_reasoning_attempts: int | None = None,
@@ -76,14 +67,7 @@ class PabadaAgent:
         # Stamp each tool with this agent's ID so they can look up context
         # from the process-global dict even when running in a worker thread.
         bind_tools_to_agent(tools, agent_id)
-
-        # Resolve max_execution_time from settings if not explicitly provided
-        if max_execution_time is None:
-            setting_attr = self._ROLE_EXECUTION_TIMES.get(role)
-            if setting_attr:
-                max_execution_time = getattr(settings, setting_attr)
-            else:
-                max_execution_time = settings.AGENT_MAX_EXECUTION_TIME_DEFAULT
+        self._tools = tools
 
         if self._engine_type == "crewai":
             # Build the underlying CrewAI agent
@@ -97,7 +81,6 @@ class PabadaAgent:
                 "allow_delegation": allow_delegation,
                 "verbose": verbose,
                 "max_iter": max_iter,
-                "max_execution_time": max_execution_time,
                 "max_retry_limit": max_retry_limit,
             }
             if reasoning:
@@ -119,7 +102,7 @@ class PabadaAgent:
 
             self._agent = Agent(**agent_kwargs)
         else:
-            # Claude Code engine — no CrewAI Agent needed
+            # Loop / Claude Code engine — no CrewAI Agent needed
             self._agent = None
 
     # -- Public properties -----------------------------------------------------
@@ -136,6 +119,11 @@ class PabadaAgent:
                 f"'{self._engine_type}' — no CrewAI Agent available."
             )
         return self._agent
+
+    @property
+    def tools(self) -> list:
+        """Return tool instances for direct-access engines (LoopEngine)."""
+        return self._tools
 
     # -- Context management ----------------------------------------------------
 

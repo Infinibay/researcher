@@ -2,9 +2,15 @@
 
 import logging
 import os
+import warnings
 from pathlib import Path
 
 import uvicorn
+
+# Suppress ONNX Runtime warnings (chromadb dependency) that use warnings.warn
+warnings.filterwarnings("ignore", category=UserWarning, module="onnxruntime")
+warnings.filterwarnings("ignore", message=".*ONNX.*")
+warnings.filterwarnings("ignore", message=".*onnxruntime.*")
 
 
 def setup_file_logging():
@@ -30,7 +36,11 @@ def setup_file_logging():
     logging.getLogger("backend").setLevel(logging.DEBUG)
 
     # Suppress noisy third-party loggers that flood the log file
-    for _noisy in ("watchfiles", "httpcore", "httpx", "urllib3", "urllib3.connectionpool"):
+    for _noisy in (
+        "watchfiles", "httpcore", "httpx", "urllib3", "urllib3.connectionpool",
+        "chromadb", "chromadb.config", "chromadb.api",
+        "onnxruntime", "onnxruntime.transformers",
+    ):
         logging.getLogger(_noisy).setLevel(logging.WARNING)
 
     # Keep LiteLLM/OpenAI debug logs in the file but out of stdout.
@@ -56,15 +66,34 @@ def setup_llm_environment():
     all LLM configuration.  Eager-inits the LLM object so errors surface
     at startup rather than on first agent creation.
     """
-    from backend.config.llm import setup_provider_env_vars, validate_function_calling, get_llm
+    from backend.config.llm import setup_provider_env_vars, get_llm, get_litellm_params
 
     setup_provider_env_vars()
-    validate_function_calling()
 
     try:
         get_llm()  # eager init — surface config errors early
     except RuntimeError as exc:
         logging.getLogger(__name__).warning("LLM init skipped: %s", exc)
+        return
+
+    # Probe model capabilities (replaces static validate_function_calling)
+    try:
+        from backend.config.model_capabilities import probe_model
+
+        llm_params = get_litellm_params()
+        if llm_params:
+            caps = probe_model(llm_params)
+            if not caps.supports_function_calling:
+                logging.getLogger(__name__).warning(
+                    "Model does NOT support function calling — "
+                    "LoopEngine will use manual (prompt-based) tool calling."
+                )
+            # Install schema fix if probe detected the need
+            if caps.needs_schema_sanitization:
+                from backend.config.llm import _install_schema_fix
+                _install_schema_fix()
+    except Exception as exc:
+        logging.getLogger(__name__).warning("Model probe failed: %s", exc)
 
 
 def main():

@@ -15,6 +15,8 @@ from backend.tools.web.rate_limiter import web_rate_limiter
 
 logger = logging.getLogger(__name__)
 
+_crewai_tools_warned = False
+
 
 def search_serper(query: str, num_results: int = 10) -> list[dict] | None:
     """Search via SerperDev API.
@@ -28,7 +30,10 @@ def search_serper(query: str, num_results: int = 10) -> list[dict] | None:
     try:
         from crewai_tools import SerperDevTool
     except ImportError:
-        logger.debug("crewai_tools not installed, skipping Serper search")
+        global _crewai_tools_warned
+        if not _crewai_tools_warned:
+            logger.debug("crewai_tools not installed, skipping Serper/scrape features")
+            _crewai_tools_warned = True
         return None
 
     web_rate_limiter.acquire()
@@ -188,7 +193,10 @@ def scrape_with_crewai(url: str) -> str | None:
     try:
         from crewai_tools import ScrapeWebsiteTool
     except ImportError:
-        logger.debug("crewai_tools not installed, cannot scrape")
+        global _crewai_tools_warned
+        if not _crewai_tools_warned:
+            logger.debug("crewai_tools not installed, skipping Serper/scrape features")
+            _crewai_tools_warned = True
         return None
 
     try:

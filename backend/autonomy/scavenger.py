@@ -38,8 +38,7 @@ class Scavenger:
         if not self._is_project_executing():
             return 0
 
-        # Always reap orphaned agent_runs first (role-agnostic)
-        self._reap_orphaned_runs()
+        # Orphaned-run reaping removed — no execution time limits.
 
         # Clean up stale git worktrees (role-agnostic)
         self._cleanup_stale_worktrees()
@@ -275,70 +274,6 @@ class Scavenger:
                 break
             created += self._create_event(task["id"], "stagnation_detected")
         return created
-
-    # -- Orphaned run cleanup -------------------------------------------------
-
-    def _reap_orphaned_runs(self) -> int:
-        """Mark agent_runs as 'timeout' when they exceed the role's max execution time.
-
-        An orphaned run is one with status='running' whose started_at is older
-        than the configured timeout for the agent's role (plus a 5-minute
-        buffer).  This happens when a crew process dies without calling
-        complete_agent_run().
-
-        Returns the number of runs reaped.
-        """
-        # Role → max execution time in seconds (mirrors settings.AGENT_TIMEOUTS)
-        _DEFAULT_TIMEOUTS: dict[str, int] = {
-            "researcher": 2400,
-            "developer": 1200,
-            "code_reviewer": 300,
-            "research_reviewer": 300,
-            "team_lead": 1200,
-            "project_lead": 1800,
-        }
-        timeout_secs = _DEFAULT_TIMEOUTS.get(self.role, 1200)
-        buffer_secs = 300  # 5-minute buffer
-        threshold_minutes = (timeout_secs + buffer_secs) / 60.0
-
-        def _reap(conn: sqlite3.Connection) -> int:
-            rows = conn.execute(
-                """SELECT id, agent_id, task_id, started_at FROM agent_runs
-                   WHERE project_id = ?
-                     AND status = 'running'
-                     AND datetime(started_at, '+' || ? || ' minutes') < CURRENT_TIMESTAMP""",
-                (self.project_id, int(threshold_minutes)),
-            ).fetchall()
-            if not rows:
-                return 0
-
-            ids = [r["id"] for r in rows]
-            placeholders = ",".join("?" for _ in ids)
-            conn.execute(
-                f"""UPDATE agent_runs
-                    SET status = 'timeout',
-                        ended_at = CURRENT_TIMESTAMP,
-                        error_class = 'OrphanedRunReaped'
-                    WHERE id IN ({placeholders})""",
-                ids,
-            )
-            conn.commit()
-            for r in rows:
-                logger.warning(
-                    "Scavenger: reaped orphaned agent_run id=%d "
-                    "(agent=%s, task=%d, started=%s)",
-                    r["id"], r["agent_id"], r["task_id"], r["started_at"],
-                )
-            return len(ids)
-
-        try:
-            return execute_with_retry(_reap)
-        except Exception:
-            logger.debug(
-                "Scavenger: failed to reap orphaned runs for project %d",
-                self.project_id, exc_info=True,
-            )
-            return 0
 
     # -- Stale worktree cleanup ------------------------------------------------
 

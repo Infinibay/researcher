@@ -85,7 +85,7 @@ approve or reject with specific, actionable feedback.
 ## Step-by-Step Process
 
 ### Step 1: Understand the Requirements
-Use **GetTaskTool** to read the full task specifications. Before looking at
+Use **get_task** to read the full task specifications. Before looking at
 any code, make sure you understand:
 - What the code is supposed to accomplish (the "what").
 - The acceptance criteria — what conditions must be true for the task to be
@@ -97,12 +97,12 @@ name, a summary of changes, and testing instructions. This is your map to
 their work.
 
 ### Step 2: Survey the Changes
-Use **GitStatusTool** to see which files were modified, added, or deleted.
+Use **git_status** to see which files were modified, added, or deleted.
 
-**If GitStatusTool or GitDiffTool show no changes on the branch**: This is
+**If git_status or git_diff show no changes on the branch**: This is
 a blocking issue. The Developer was required to commit and push code to the
 branch before submitting for review. If the branch is empty or does not
-exist, REJECT immediately — use **RejectTaskTool** with feedback: "No code
+exist, REJECT immediately — use **reject_task** with feedback: "No code
 changes found on branch `{branch_name}`. You must commit and push your
 changes before submitting for review."
 This gives you a map of the change scope:
@@ -111,7 +111,7 @@ This gives you a map of the change scope:
 - Are there any unexpected files (generated files, unrelated changes)?
 
 ### Step 3: Review the Full Diff
-Use **GitDiffTool** to read the complete diff. Go through every change
+Use **git_diff** to read the complete diff. Go through every change
 line by line. For each change, assess:
 
 **3a. Relevance**: Does this change serve the task objective? Flag any
@@ -139,11 +139,11 @@ changes that seem unrelated to the task (scope creep).
 
 ### Step 3b: Post Forgejo PR Comments (REQUIRED)
 After reading the diff, post your findings as comments directly on the
-Forgejo Pull Request. This is SEPARATE from AddCommentTool (which posts
+Forgejo Pull Request. This is SEPARATE from add_comment (which posts
 on the task, not the PR).
 
 **3b-i. Fetch the PR diff** to confirm what is on the remote:
-Use **ExecuteCommandTool** with this exact curl command:
+Use **execute_command** with this exact curl command:
 
   curl -s -X GET \
     -H "Content-Type: application/json" \
@@ -154,7 +154,7 @@ Where {{pr_id}} is the internal PR ID (visible in the task comments as
 name, status, and repo information. Verify the branch matches `{branch_name}`.
 
 **3b-ii. Post review comments** on the PR:
-Use **ExecuteCommandTool** with this exact curl command:
+Use **execute_command** with this exact curl command:
 
   curl -s -X POST \
     -H "Content-Type: application/json" \
@@ -183,19 +183,19 @@ For the final verdict comment, post with the appropriate comment_type:
   body: **[VERDICT: CHANGE_REQUEST]** N blocking issues must be resolved before merge.
   <list of blocking issues>
 
-IMPORTANT: You MUST post the verdict comment BEFORE calling ApproveTaskTool
-or RejectTaskTool. The Forgejo PR comment is the official review record.
+IMPORTANT: You MUST post the verdict comment BEFORE calling approve_task
+or reject_task. The Forgejo PR comment is the official review record.
 
 ### Step 4: Read Full Files for Context
-Use **ReadFileTool** for files where the diff alone is insufficient:
+Use **read_file** for files where the diff alone is insufficient:
 - When you need to see how a modified function is called elsewhere.
 - When you need to understand the class or module structure.
 - When import changes affect code you cannot see in the diff.
 
-Use **DirectorySearchTool** when you need to find related code by meaning
+Use **directory_search** when you need to find related code by meaning
 rather than exact text — for example, to find similar patterns, related
 implementations, or code that handles the same concern but uses different
-naming. This complements **CodeSearchTool** (exact/regex match).
+naming. This complements **code_search** (exact/regex match).
 
 Do NOT read every file in the project — only those directly relevant to
 understanding the changes.
@@ -203,7 +203,7 @@ understanding the changes.
 ### Step 5: Verify Test Coverage
 Apply the mandatory test-coverage checklist below. For each unchecked item
 in the first five, create a `[BLOCKING]` PR comment (Step 3b) before
-calling `RejectTaskTool`.
+calling `reject_task`.
 
 - [ ] New or modified functions/classes have at least one test.
 - [ ] Happy path is covered.
@@ -225,8 +225,8 @@ Organize your findings by severity:
 ### Step 7: Make Your Decision
 
 **If there are NO blocking issues:**
-1. Use **ApproveTaskTool** to approve the task.
-2. Use **AddCommentTool** to leave a structured review comment that includes:
+1. Use **approve_task** to approve the task.
+2. Use **add_comment** to leave a structured review comment that includes:
    - A brief summary of what was reviewed and that it meets the quality bar.
    - Any "important" or "suggestion" level notes for the Developer to
      consider in future work (these do not block approval).
@@ -234,8 +234,8 @@ Organize your findings by severity:
 3. Return "APPROVED: <brief summary of what was reviewed and approved>".
 
 **If there are blocking issues:**
-1. Use **RejectTaskTool** to reject the task with your detailed feedback.
-2. Use **AddCommentTool** to leave a structured review comment that includes:
+1. Use **reject_task** to reject the task with your detailed feedback.
+2. Use **add_comment** to leave a structured review comment that includes:
    - A summary of the review outcome.
    - Each blocking issue with: file, line (if applicable), description of
      the problem, why it matters, and how to fix it.
@@ -243,14 +243,14 @@ Organize your findings by severity:
    - Any suggestions (clearly marked as non-blocking).
 3. Return "REJECTED: <summary of blocking issues and what must change>".
 
-After calling ApproveTaskTool or RejectTaskTool, verify the Forgejo PR
+After calling approve_task or reject_task, verify the Forgejo PR
 comment was posted (Step 3b). If the curl command failed, retry it once.
 The PR comment is required — it is the record visible to the team in the
 Forgejo UI.
 
 ### Communication
 - If something in the code is genuinely ambiguous and you cannot evaluate it
-  by reading the code and task specs, use **SendMessageTool** to ask the
+  by reading the code and task specs, use **send_message** to ask the
   Developer. Be specific about what you need to know.
 - Do NOT ask questions that are answered by the task description, the code,
   or the diff. Read thoroughly before asking.
@@ -259,10 +259,10 @@ Forgejo UI.
     expected_output = """\
 A structured code review result containing:
 
-1. **Review action**: Either approved (via ApproveTaskTool) or rejected
-   (via RejectTaskTool with actionable feedback).
+1. **Review action**: Either approved (via approve_task) or rejected
+   (via reject_task with actionable feedback).
 
-2. **Review comment**: A structured comment (via AddCommentTool) with:
+2. **Review comment**: A structured comment (via add_comment) with:
    - Summary of what was reviewed
    - Blocking issues (if any): file, line, problem, impact, fix
    - Important issues: file, line, problem, recommendation

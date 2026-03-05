@@ -20,8 +20,8 @@ def create_developer_agent(
 ) -> PabadaAgent:
     """Instantiate a Developer agent."""
     backstory = build_system_prompt(
-        agent_name=agent_name, teammates=teammates, tech_hints=tech_hints,
-        engine=settings.AGENT_ENGINE,
+        agent_name=agent_name, agent_id=agent_id, teammates=teammates,
+        tech_hints=tech_hints, engine=settings.AGENT_ENGINE,
     )
 
     return PabadaAgent(

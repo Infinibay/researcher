@@ -65,14 +65,14 @@ Read the PRD above thoroughly. Identify:
 - **What is clear**: What can be defined precisely right now?
 
 ### Step 2: Check Existing Context
-Use **ReadFindingsTool** to check for prior research relevant to this
+Use **read_findings** to check for prior research relevant to this
 project. If findings exist, factor them in.
 
-Use **ReadWikiTool** to check for existing documentation.
+Use **read_wiki** to check for existing documentation.
 
-Use **ReadMessagesTool** to read all unread messages before planning.
+Use **read_messages** to read all unread messages before planning.
 
-Use **CodeSearchTool** to search the existing codebase for relevant patterns
+Use **code_search** to search the existing codebase for relevant patterns
 and architecture.
 
 **If any tool returns empty or errors**: Normal for new projects. Continue.
@@ -115,7 +115,7 @@ For each task (max {max_tasks} per milestone):
 
 ### Step 5: Write Rich Task Descriptions
 Gather context with tools BEFORE writing each task. Do not invent
-context — gather it with ReadFindingsTool, ReadWikiTool, CodeSearchTool.
+context — gather it with read_findings, read_wiki, code_search.
 
 Every task MUST include ALL of the following sections:
 
@@ -229,7 +229,7 @@ Before outputting, verify:
 
 ### Step 8: If Anything Is Ambiguous
 If the PRD has gaps or ambiguities that affect planning:
-- Use **AskProjectLeadTool** to ask a specific question.
+- Use **ask_project_lead** to ask a specific question.
 - Do NOT guess at requirements — clarify before committing to a plan.
 - Only ask about things that genuinely block planning. Technical decisions
   that you can make yourself should be documented as decisions, not
@@ -300,14 +300,14 @@ from the plan must be represented in the database.
 ## Step-by-Step Process
 
 ### Step 1: Create Epics
-Use **CreateEpicTool** for each epic in the plan. For each:
+Use **create_epic** for each epic in the plan. For each:
 - Set a clear title matching the plan.
 - Set appropriate priority.
 - Note the returned epic ID — you will need it for milestones.
 
 Create epics in dependency order (foundational epics first).
 
-The `description` passed to **CreateEpicTool** must follow this structure:
+The `description` passed to **create_epic** must follow this structure:
 - **Measurable Objective**: What does success look like in concrete, observable terms? (e.g., "All VM lifecycle operations are exposed via a versioned REST API with <200 ms p99 latency")
 - **Problem It Solves**: Why does this epic exist? What user pain, system gap, or business need does it address?
 - **Definition of Done**: The conditions under which this epic is considered fully complete (e.g., all child milestones closed, integration tests green, documentation published).
@@ -319,12 +319,12 @@ entire process because one item failed — you will reconcile failures in
 Step 6.
 
 ### Step 2: Create Milestones
-Use **CreateMilestoneTool** for each milestone. For each:
+Use **create_milestone** for each milestone. For each:
 - Associate it with the correct epic (using the epic ID from Step 1).
 - Set the target cycle if specified in the plan.
 - Note the returned milestone ID — you will need it for tasks.
 
-The `description` passed to **CreateMilestoneTool** must follow this structure:
+The `description` passed to **create_milestone** must follow this structure:
 - **Objective Verification Criterion**: A single, concrete, testable condition that proves this milestone is done (e.g., "The `/vms` endpoint returns a 200 with a valid JSON body for all CRUD operations in the CI test suite").
 - **Incremental Value Delivered**: What does the team or user gain the moment this milestone closes? Why does it matter as a standalone checkpoint?
 
@@ -338,14 +338,14 @@ failures in Step 6.
 
 **⚠️ Quality gate**: A task description that is only a sentence or two will be rejected. Every task must have all five sections below.
 
-Use **CreateTaskTool** for each task. For each:
+Use **create_task** for each task. For each:
 - Associate it with the correct milestone and epic (using IDs from above).
 - Set the type (development, research, test, etc.).
 - Set priority (1-5).
 - Set estimated complexity if available.
 - Note the returned task ID — you will need it for dependencies.
 
-The `description` passed to **CreateTaskTool** must follow this mandatory structure. Do NOT use the plan's one-line title as the description — expand it fully:
+The `description` passed to **create_task** must follow this mandatory structure. Do NOT use the plan's one-line title as the description — expand it fully:
 
 **Context / Motivation**: Why this task exists. Reference the parent milestone goal and any relevant findings or prior work.
 
@@ -364,14 +364,14 @@ Do NOT stop the entire process because one item failed — you will reconcile
 failures in Step 6.
 
 ### Step 4: Set Dependencies
-Use **SetTaskDependenciesTool** to establish all task dependencies from the
+Use **set_task_dependencies** to establish all task dependencies from the
 plan. For each dependency:
 - Specify the task that is blocked (depends on another).
 - Specify the task it depends on.
 - Verify the dependency makes logical sense (no cycles).
 
 ### Step 5: Verify the Structure
-Use **ReadTasksTool** to verify that all tasks were created correctly:
+Use **read_tasks** to verify that all tasks were created correctly:
 - Check that the number of tasks matches the plan.
 - Verify dependencies are correctly set.
 - Confirm that initial tasks (no dependencies) are ready to be assigned.
@@ -387,7 +387,7 @@ Compare the items successfully created against the plan:
 - The final summary (Step 7) must list any items that could not be created.
 
 ### Step 7: Post Summary
-Use **SendMessageTool** to announce the plan structure is ready. Include:
+Use **send_message** to announce the plan structure is ready. Include:
 - Total epics, milestones, and tasks created.
 - The critical path.
 - Which tasks are ready to be assigned immediately.
@@ -407,7 +407,7 @@ A structured summary of the created database structure containing:
    on task B).
 5. **Ready to assign**: List of tasks with no dependencies that can be
    assigned immediately.
-6. **Verification**: Confirmation that ReadTasksTool was used to verify
+6. **Verification**: Confirmation that read_tasks was used to verify
    the structure matches the plan.
 7. **Failed items**: List of any epics, milestones, or tasks that could
    not be created (with error details), or explicit confirmation that all
@@ -449,14 +449,14 @@ create tasks or dependencies — those will be handled in a separate step.
 ## Step-by-Step Process
 
 ### Step 1: Create Epics
-Use **CreateEpicTool** for each epic in the plan. For each:
+Use **create_epic** for each epic in the plan. For each:
 - Set a clear title matching the plan.
 - Set appropriate priority.
 - Note the returned epic ID.
 
 Create epics in dependency order (foundational epics first).
 
-The `description` passed to **CreateEpicTool** must follow this structure:
+The `description` passed to **create_epic** must follow this structure:
 - **Measurable Objective**: What does success look like in concrete, observable terms? (e.g., "All VM lifecycle operations are exposed via a versioned REST API with <200 ms p99 latency")
 - **Problem It Solves**: Why does this epic exist? What user pain, system gap, or business need does it address?
 - **Definition of Done**: The conditions under which this epic is considered fully complete (e.g., all child milestones closed, integration tests green, documentation published).
@@ -465,12 +465,12 @@ The `description` passed to **CreateEpicTool** must follow this structure:
 error, note the failure and continue with remaining epics.
 
 ### Step 2: Create Milestones
-Use **CreateMilestoneTool** for each milestone. For each:
+Use **create_milestone** for each milestone. For each:
 - Associate it with the correct epic (using the epic ID from Step 1).
 - Set the target cycle if specified.
 - Note the returned milestone ID.
 
-The `description` passed to **CreateMilestoneTool** must follow this structure:
+The `description` passed to **create_milestone** must follow this structure:
 - **Objective Verification Criterion**: A single, concrete, testable condition that proves this milestone is done (e.g., "The `/vms` endpoint returns a 200 with a valid JSON body for all CRUD operations in the CI test suite").
 - **Incremental Value Delivered**: What does the team or user gain the moment this milestone closes? Why does it matter as a standalone checkpoint?
 
@@ -579,7 +579,7 @@ Read the plan section for "{ticket_title}". Identify:
 **Before doing anything else**, understand the current state of the project
 and check for duplicates:
 
-1. Use **ReadTasksTool** to read ALL existing tasks for this project.
+1. Use **read_tasks** to read ALL existing tasks for this project.
    For each task, note its title, type, status (backlog, pending, in_progress,
    done, etc.), and description summary.
 2. Review the "Tasks Already Created" list above (if present).
@@ -607,12 +607,12 @@ and position this ticket within the broader project trajectory.
 ### Step 2 — Research
 Before writing the description, gather context using ALL of these tools:
 
-1. **ReadFindingsTool** — search for findings related to "{ticket_title}" or its topic area
-2. **ReadWikiTool** — search for wiki pages related to this task's domain
-3. **ReadMessagesTool** — check for bug reports, agent notes, or escalations about this area
-4. **CodeSearchTool** — search the codebase for relevant modules, functions, or patterns mentioned in the plan
-5. **WebSearchTool** — if the task involves an external library, API, or technology, look up current best practices or known issues
-6. **ExecuteCommandTool** — if needed, run a command to inspect the codebase (e.g., `find`, `cat`, `grep`) for additional context
+1. **read_findings** — search for findings related to "{ticket_title}" or its topic area
+2. **read_wiki** — search for wiki pages related to this task's domain
+3. **read_messages** — check for bug reports, agent notes, or escalations about this area
+4. **code_search** — search the codebase for relevant modules, functions, or patterns mentioned in the plan
+5. **web_search** — if the task involves an external library, API, or technology, look up current best practices or known issues
+6. **execute_command** — if needed, run a command to inspect the codebase (e.g., `find`, `cat`, `grep`) for additional context
 
 **If any tool returns empty or errors**: This is normal for new projects.
 Continue without that context — do NOT block or retry. An empty result
@@ -634,13 +634,13 @@ Given/When/Then format OR a concrete checklist. Each must be independently
 testable.
 
 **Technical Notes**: Relevant files, modules, libraries, APIs found during
-research. Include specific file paths or code patterns from CodeSearchTool
-results. Reference any findings from ReadFindingsTool.
+research. Include specific file paths or code patterns from code_search
+results. Reference any findings from read_findings.
 
 **Definition of Done**: Final checklist before marking complete.
 
 ### Step 4 — Create the Task
-Call **CreateTaskTool** with:
+Call **create_task** with:
 - `title`: {ticket_title}
 - `description`: the full description from Step 3
 - `type`: from the plan
@@ -651,7 +651,7 @@ Call **CreateTaskTool** with:
 
 ### Step 5 — Confirm
 Output the created task ID on its own line in this exact format:
-CREATED_TASK_ID: <the numeric ID returned by CreateTaskTool>
+CREATED_TASK_ID: <the numeric ID returned by create_task>
 """
 
     expected_output = f"""\
@@ -662,9 +662,9 @@ One of two possible responses:
    what was found).
 2. The full task description written following the mandatory anatomy
    (Context, Description, Acceptance Criteria, Technical Notes, DoD).
-3. Confirmation that CreateTaskTool was called successfully.
+3. Confirmation that create_task was called successfully.
 4. A line in this exact format: CREATED_TASK_ID: N
-   Where N is the numeric task ID returned by CreateTaskTool for the task
+   Where N is the numeric task ID returned by create_task for the task
    titled "{ticket_title}".
 
 **Option B — Duplicate detected:**
@@ -686,8 +686,9 @@ def set_all_dependencies(
         project_name="",
         phase="dependency_setting",
         summary=(
-            "All tasks have been created. Set dependencies between tasks "
-            "and announce the structure to the team."
+            f"{len(tasks_created)} tasks were just created in this batch. "
+            "Set dependencies ONLY between these tasks and announce the "
+            "structure to the team."
         ),
     )
 
@@ -696,12 +697,18 @@ def set_all_dependencies(
     )
 
     description = f"""\
-Set all task dependencies and announce the project structure.
+Set dependencies between the newly created tasks and announce the structure.
 
 {state_block}
 
-## Created Tasks (title → ID)
+## Newly Created Tasks (title → ID)
 {tasks_map}
+
+## IMPORTANT CONSTRAINT
+You must ONLY set dependencies between the tasks listed above.
+These are the tasks created in this batch. Do NOT look for or reference
+tasks outside this list. If a dependency in the plan references a task
+that is NOT in the list above, skip it entirely.
 
 ## Approved Plan (contains dependency information)
 {plan}
@@ -709,30 +716,29 @@ Set all task dependencies and announce the project structure.
 ## Step-by-Step Process
 
 ### Step 1: Read the Dependency Graph
-Read the dependency graph section of the plan. For each dependency
-relationship, identify:
-- The task that is blocked (depends on another)
-- The task it depends on (must complete first)
+Read the dependency section of the plan. For each dependency relationship,
+check whether BOTH tasks exist in the "Newly Created Tasks" list above.
+Only consider dependencies where both the blocked task and the dependency
+are in that list.
 
 ### Step 2: Set Dependencies
-For each dependency, look up both task IDs from the task map above.
-Call **SetTaskDependenciesTool** for each dependency relationship.
+For each valid dependency (both tasks in the list above), look up both
+task IDs from the task map. Call **set_task_dependencies** for each.
 
-If a task title from the plan does not appear in the created tasks map,
-skip that dependency and note it as a failed item.
+Skip any dependency where either task is NOT in the created tasks map.
 
 ### Step 3: Verify the Structure
-Use **ReadTasksTool** to verify the final structure:
+Use **read_tasks** to verify the final structure:
 - Check that dependencies are correctly set.
 - Confirm that initial tasks (no dependencies) are ready to be assigned.
 - Identify the critical path.
 
 ### Step 4: Announce
-Use **SendMessageTool** to announce the structure is ready. Include:
-- Total epics, milestones, and tasks created ({len(tasks_created)} tasks).
-- The critical path.
+Use **send_message** to announce the structure is ready. Include:
+- Total tasks created in this batch: {len(tasks_created)}.
+- The critical path among these tasks.
 - Which tasks are ready to be assigned immediately (no dependencies).
-- Any failed dependency relationships (tasks not found in the map).
+- Any skipped dependency relationships (tasks not in this batch).
 """
 
     expected_output = """\
@@ -740,14 +746,14 @@ A summary containing:
 
 1. **Dependencies set**: List of dependency relationships established
    (task A depends on task B).
-2. **Verification**: Confirmation from ReadTasksTool that the structure
+2. **Verification**: Confirmation from read_tasks that the structure
    matches the plan.
 3. **Ready to assign**: List of tasks with no dependencies that can be
    assigned immediately.
 4. **Critical path**: The longest dependency chain identified.
 5. **Failed items**: Any dependencies that could not be set (with reasons),
    or explicit confirmation that all were set successfully.
-6. **Team notified**: Confirmation that SendMessageTool was used to
+6. **Team notified**: Confirmation that send_message was used to
    announce the structure.
 """
     return description, expected_output
@@ -758,6 +764,7 @@ def evaluate_progress(
     project_name: str,
     progress_summary: str,
     plan: str = "",
+    requirements: str = "",
     conversation_context: str = "",
 ) -> tuple[str, str]:
     """Return (description, expected_output) for evaluating project progress.
@@ -787,6 +794,13 @@ def evaluate_progress(
 {plan}
 """
 
+    requirements_section = ""
+    if requirements:
+        requirements_section = f"""
+## Requirements (PRD)
+{requirements}
+"""
+
     description = f"""\
 Evaluate the current progress of project '{project_name}' (ID: {project_id}) \
 and decide the next steps.
@@ -794,7 +808,7 @@ and decide the next steps.
 {state_block}
 
 {ctx_block}
-
+{requirements_section}
 ## Current Progress
 {progress_summary}
 {plan_section}
@@ -813,20 +827,20 @@ The "Current Progress" section above already contains:
   recently completed tasks, research results, and any failed/blocked tasks.
 
 Read it carefully. This is your primary source of truth — do NOT waste
-time calling ReadTasksTool to re-read everything. You already have it.
+time calling read_tasks to re-read everything. You already have it.
 
-Only use **GetTaskTool** (with a specific task ID) if you need the full
+Only use **get_task** (with a specific task ID) if you need the full
 description or acceptance criteria for a particular task.
 
 ### Step 2: Check Research Findings (if research tasks completed)
 If the progress summary shows completed research tasks, use
-**ReadFindingsTool** to get the detailed findings. Research insights
+**read_findings** to get the detailed findings. Research insights
 often inform what development tasks come next.
 
-Optionally use **ReadWikiTool** if researchers produced reports.
+Optionally use **read_wiki** if researchers produced reports.
 
 ### Step 3: Check Messages
-Use **ReadMessagesTool** to check for unread messages — bug reports,
+Use **read_messages** to check for unread messages — bug reports,
 blockers, or agent recommendations relevant to next steps.
 
 ### Step 4: Assess Remaining Gaps
@@ -858,8 +872,8 @@ specific next steps. This is the correct choice ONLY when:
 **Path C — PROJECT_COMPLETE**: The project objectives from the original
 requirements have been fully met. All required functionality is built,
 all research questions answered, and no significant gaps remain. This is
-the correct choice ONLY when you have verified (via ReadTasksTool,
-ReadFindingsTool, etc.) that the project can be considered done.
+the correct choice ONLY when you have verified (via read_tasks,
+read_findings, etc.) that the project can be considered done.
 
 **Important**: Prefer Path A whenever possible. Brainstorming is expensive
 (multiple agents, time-limited sessions). If you can define even a few
@@ -979,7 +993,7 @@ implementation, or there is a fundamental mismatch between expectations.
 ## Step-by-Step Process
 
 ### Step 1: Understand the History
-Use **GetTaskTool** to read the full task with all comments. Trace the
+Use **get_task** to read the full task with all comments. Trace the
 review history:
 - What were the original requirements and acceptance criteria?
 - What feedback did the Code Reviewer give in each rejection?
@@ -987,14 +1001,14 @@ review history:
 - Is the feedback consistent across rounds, or are new issues appearing?
 
 ### Step 2: Examine the Code
-Use **GitDiffTool** on branch `{branch_name}` to review the current state
+Use **git_diff** on branch `{branch_name}` to review the current state
 of the code. Assess:
 - Does the code demonstrate understanding of the requirements?
 - Are the reviewer's concerns valid? (Sometimes reviewers are overly strict
   or misunderstand the requirements.)
 - Is the developer making progress between iterations, or going in circles?
 
-Use **ReadFileTool** if you need more context about the codebase.
+Use **read_file** if you need more context about the codebase.
 
 ### Step 3: Diagnose the Root Cause
 The escalation is typically caused by one of these:
@@ -1002,7 +1016,7 @@ The escalation is typically caused by one of these:
 **A. Unclear requirements**: The task description or acceptance criteria are
 ambiguous, causing the developer and reviewer to interpret them differently.
 → Clarify the requirements. Update the task description with precise
-acceptance criteria. If user input is needed, use **AskProjectLeadTool**.
+acceptance criteria. If user input is needed, use **ask_project_lead**.
 
 **B. Developer skill mismatch**: The task requires expertise the developer
 lacks (unfamiliar technology, complex algorithm, etc.).
@@ -1012,7 +1026,7 @@ or reassign to a more experienced developer.
 **C. Over-scoped task**: The task tries to do too much and keeps failing on
 different aspects each round.
 → Split the task into smaller, focused tasks. Create new tasks with
-**CreateTaskTool** and close or simplify the original.
+**create_task** and close or simplify the original.
 
 **D. Reviewer-developer misalignment**: The reviewer expects something
 the developer cannot deliver given the constraints (time, technology, etc.).
@@ -1028,30 +1042,30 @@ agent who has relevant expertise.
 Based on your diagnosis, choose one or more of these actions:
 
 1. **Clarify requirements**: Update the task description with precise,
-   unambiguous acceptance criteria via **AddCommentTool** or by creating
+   unambiguous acceptance criteria via **add_comment** or by creating
    an updated task.
 2. **Provide technical guidance**: Send specific implementation guidance
-   to the developer via **SendMessageTool**. Be concrete — reference
+   to the developer via **send_message**. Be concrete — reference
    specific files, patterns, or approaches.
 3. **Simplify the task**: Reduce scope. Remove non-essential requirements.
    Focus on the core functionality.
-4. **Split the task**: Create 2-3 smaller tasks with **CreateTaskTool**,
+4. **Split the task**: Create 2-3 smaller tasks with **create_task**,
    each with clear, achievable acceptance criteria. Set dependencies with
-   **SetTaskDependenciesTool**.
+   **set_task_dependencies**.
 5. **Reassign**: If the developer is fundamentally stuck, assign to another
-   developer via **SendMessageTool**.
+   developer via **send_message**.
 6. **Escalate to Project Lead**: If the root cause is a requirements issue
-   that needs user input, use **AskProjectLeadTool**.
+   that needs user input, use **ask_project_lead**.
 
 ### Step 5: Document the Resolution
-Use **AddCommentTool** to document on the task:
+Use **add_comment** to document on the task:
 - Your diagnosis of the root cause.
 - The action taken and why.
 - Updated expectations for the next iteration.
 - Any changes to scope, requirements, or assignment.
 
 ### Step 6: Follow Up
-After taking action, use **ReadTasksTool** to monitor whether the
+After taking action, use **read_tasks** to monitor whether the
 resolution is effective. If the task continues to be rejected, consider
 more aggressive intervention (further scope reduction, reassignment, or
 escalation to the Project Lead).
@@ -1099,7 +1113,7 @@ Then include:
 2. **Action taken**: Specific steps taken to resolve the situation (guidance
    sent, task split, reassigned, requirements clarified, etc.).
 3. **Task updates**: Any changes to the task description, acceptance criteria,
-   or assignment documented via AddCommentTool.
+   or assignment documented via add_comment.
 4. **New tasks created** (if task was split): List of new task IDs with
    titles and descriptions.
 5. **Communication**: Messages sent to the developer, reviewer, or Project
@@ -1327,7 +1341,7 @@ For each approved idea, determine:
 - What task types are needed (development, research, test, etc.).
 
 ### Step 2: Understand Project State & Check for Duplicates
-Use **ReadTasksTool** to read ALL existing tasks for this project. For each
+Use **read_tasks** to read ALL existing tasks for this project. For each
 task, note its title, type, status, and description. Build a mental picture of:
 - **What has been completed** — what results and findings were produced.
 - **What is in progress** — what is currently being worked on.
@@ -1343,33 +1357,33 @@ existing milestones rather than creating new epics.
 
 ### Step 2.5: Research Before Writing
 Before creating any epics, milestones, or tasks, gather context using these tools:
-1. **ReadFindingsTool** — search for findings related to each approved idea's topic area.
-2. **ReadWikiTool** — look for wiki pages covering the domain of each idea.
-3. **ReadMessagesTool** — check for bug reports, agent notes, or prior discussions about these topics.
-4. **CodeSearchTool** — search the codebase for modules, patterns, or files relevant to each idea.
-5. **WebSearchTool** — if an idea involves an external technology, look up current best practices.
+1. **read_findings** — search for findings related to each approved idea's topic area.
+2. **read_wiki** — look for wiki pages covering the domain of each idea.
+3. **read_messages** — check for bug reports, agent notes, or prior discussions about these topics.
+4. **code_search** — search the codebase for modules, patterns, or files relevant to each idea.
+5. **web_search** — if an idea involves an external technology, look up current best practices.
 
 Empty results are normal for new projects — continue without blocking. Use whatever context you gathered to write richer descriptions.
 
 ### Step 3: Create Epics
-Use **CreateEpicTool** for each approved idea (unless it fits within an
+Use **create_epic** for each approved idea (unless it fits within an
 existing epic). Set:
 - Clear title matching the idea name.
 - Appropriate priority based on the selection ranking.
 
-The `description` passed to **CreateEpicTool** must follow this structure:
+The `description` passed to **create_epic** must follow this structure:
 - **Measurable Objective**: What does success look like in concrete, observable terms? (e.g., "All VM lifecycle operations are exposed via a versioned REST API with <200 ms p99 latency")
 - **Problem It Solves**: Why does this epic exist? What user pain, system gap, or business need does it address?
 - **Definition of Done**: The conditions under which this epic is considered fully complete (e.g., all child milestones closed, integration tests green, documentation published).
 
 ### Step 4: Create Milestones
-Use **CreateMilestoneTool** for each milestone. Milestones should represent
+Use **create_milestone** for each milestone. Milestones should represent
 verifiable checkpoints:
 - A working prototype or proof of concept.
 - Core functionality complete.
 - Integration and testing complete.
 
-The `description` passed to **CreateMilestoneTool** must follow this structure:
+The `description` passed to **create_milestone** must follow this structure:
 - **Objective Verification Criterion**: A single, concrete, testable condition that proves this milestone is done (e.g., "The `/vms` endpoint returns a 200 with a valid JSON body for all CRUD operations in the CI test suite").
 - **Incremental Value Delivered**: What does the team or user gain the moment this milestone closes? Why does it matter as a standalone checkpoint?
 
@@ -1377,13 +1391,13 @@ The `description` passed to **CreateMilestoneTool** must follow this structure:
 
 **⚠️ Quality gate**: A task description that is only a sentence or two will be rejected. Every task must have all five sections below.
 
-Use **CreateTaskTool** for each task. For every task:
+Use **create_task** for each task. For every task:
 - Set the correct type (development, research, test, etc.).
 - Set priority (1-5) based on the idea's priority and the task's role
   within the milestone.
 - Set estimated complexity (low/medium/high).
 
-The `description` passed to **CreateTaskTool** must follow this mandatory structure. Do NOT use the plan's one-line title as the description — expand it fully:
+The `description` passed to **create_task** must follow this mandatory structure. Do NOT use the plan's one-line title as the description — expand it fully:
 
 **Context / Motivation**: Why this task exists. Reference the parent milestone goal and any relevant findings or prior work.
 
@@ -1396,14 +1410,14 @@ The `description` passed to **CreateTaskTool** must follow this mandatory struct
 **Definition of Done**: Final checklist before the task can be marked complete (e.g., code reviewed, tests passing, docs updated).
 
 ### Step 6: Set Dependencies
-Use **SetTaskDependenciesTool** for all dependencies:
+Use **set_task_dependencies** for all dependencies:
 - Within each idea: tasks that depend on other tasks.
 - Across ideas: if one idea requires output from another.
 - With existing tasks: if new tasks depend on work already in progress.
 
 ### Step 7: Verify and Announce
-Use **ReadTasksTool** to verify the structure was created correctly.
-Use **SendMessageTool** to announce to the team that new tasks are
+Use **read_tasks** to verify the structure was created correctly.
+Use **send_message** to announce to the team that new tasks are
 available for assignment. Include a summary of what was created and
 which tasks are ready to start immediately.
 """
@@ -1468,11 +1482,11 @@ hyphens. It must match this pattern: `^[a-z0-9][a-z0-9-]{{0,38}}[a-z0-9]$`
 Requested name: `{repo_name}`
 
 If the name violates this pattern, reject the request and use
-**SendMessageTool** to ask `{requested_by}` to provide a valid name.
+**send_message** to ask `{requested_by}` to provide a valid name.
 Do NOT proceed to Step 2.
 
 ## Step 2 — Create the Repository via the Forgejo API
-Use **ExecuteCommandTool** with the following exact curl command:
+Use **execute_command** with the following exact curl command:
 
 ```
 curl -s -X POST \\
@@ -1486,10 +1500,10 @@ Parse the JSON response:
 - If the response contains `"id"`, the creation succeeded. The field
   `clone_url` contains the remote URL.
 - If the response contains `"message"` and no `"id"`, the creation failed.
-  Report the error to `{requested_by}` via **SendMessageTool** and stop.
+  Report the error to `{requested_by}` via **send_message** and stop.
 
 ## Step 3 — Communicate the Remote URL
-Use **SendMessageTool** to notify `{requested_by}` with:
+Use **send_message** to notify `{requested_by}` with:
 - The repo name: `{repo_name}`
 - The clone URL: `http://localhost:3000/{forgejo_owner}/{repo_name}.git`
 - The exact commands to configure the remote on their local workspace:
@@ -1499,7 +1513,7 @@ Use **SendMessageTool** to notify `{requested_by}` with:
   ```
 
 ## Step 4 — Document
-Use **AddCommentTool** on the originating task (if a task_id was provided)
+Use **add_comment** on the originating task (if a task_id was provided)
 to record the repo URL and creation timestamp.
 """
 
@@ -1509,7 +1523,7 @@ A confirmation of repository creation containing:
 1. **Repo name**: The validated repository name.
 2. **Clone URL**: The full clone URL on Forgejo.
 3. **Requester notified**: Confirmation that the requesting agent was sent
-   the clone URL and remote configuration commands via SendMessageTool.
+   the clone URL and remote configuration commands via send_message.
 4. **Error details**: If creation failed, the exact error message from the
    Forgejo API response.
 """

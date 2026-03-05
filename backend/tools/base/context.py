@@ -50,6 +50,8 @@ class ToolContext:
     agent_run_id: Optional[str] = None
     task_id: Optional[int] = None
     workspace_path: Optional[str] = None
+    event_id: Optional[int] = None
+    resume_state: Optional[dict] = None
 
 
 # ── Setting context ──────────────────────────────────────────────────────────
@@ -61,6 +63,8 @@ def set_context(
     agent_run_id: str | None = None,
     task_id: int | None = None,
     workspace_path: str | None = None,
+    event_id: int | None = None,
+    resume_state: dict | None = None,
 ) -> ToolContext:
     """Set context variables for the current execution scope.
 
@@ -99,13 +103,17 @@ def set_context(
                 agent_run_id=agent_run_id if agent_run_id is not None else existing.agent_run_id,
                 task_id=task_id if task_id is not None else existing.task_id,
                 workspace_path=workspace_path if workspace_path is not None else existing.workspace_path,
+                event_id=event_id if event_id is not None else existing.event_id,
+                resume_state=resume_state if resume_state is not None else existing.resume_state,
             )
 
-    _ctx_logger.debug(
-        "set_context: thread=%d(%s) agent_id=%s project_id=%s global_key=%s",
-        threading.get_ident(), threading.current_thread().name,
-        agent_id, project_id, key,
-    )
+    # Only log when meaningful fields are being set (avoid spam during tool init)
+    if agent_id or project_id or task_id:
+        _ctx_logger.debug(
+            "set_context: thread=%d(%s) agent_id=%s project_id=%s task_id=%s global_key=%s",
+            threading.get_ident(), threading.current_thread().name,
+            agent_id, project_id, task_id, key,
+        )
     return get_context()
 
 

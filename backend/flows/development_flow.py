@@ -1,6 +1,6 @@
 """DevelopmentFlow — handles task assignment, implementation, and review handoff.
 
-Lifecycle: assign → implement → code review (dev↔reviewer until approval).
+Lifecycle: assign → implement → pre-review CI → (fix loop) → code review (dev↔reviewer).
 
 CrewAI Flow routing rules (v1.9.3):
 - @listen("X") triggers when method "X" completes or a router returns "X"
@@ -19,13 +19,17 @@ from crewai.flow.persistence import persist
 from backend.agents.registry import get_agent_by_role, get_available_agent_by_role
 from backend.flows.guardrails import validate_implementation_output
 from backend.engine import get_engine
+from backend.config.settings import settings
 from backend.flows.helpers import (
     check_task_dependencies,
     detect_tech_hints,
     get_project_name,
+    get_repo_path_for_task,
     get_task_by_id,
     log_flow_event,
     notify_team_lead,
+    parse_ci_output,
+    record_ci_result,
     set_task_branch,
     update_task_status,
     update_task_status_safe,
@@ -186,12 +190,10 @@ class DevelopmentFlow(Flow[DevelopmentState]):
             project_name=self.state.project_name,
         )
         from backend.engine.base import AgentKilledError
-        from backend.tools import get_tools_for_task_type
         try:
             result = get_engine().execute(
                 developer, task_prompt,
                 guardrail=validate_implementation_output,
-                task_tools=get_tools_for_task_type("implement"),
             )
         except AgentKilledError:
             logger.info("Agent killed during implement_code for task %d", self.state.task_id)
@@ -232,9 +234,186 @@ class DevelopmentFlow(Flow[DevelopmentState]):
             {"branch_name": branch_name},
         )
 
+    # ── Pre-review CI gate ────────────────────────────────────────────────
+
+    @router("implement_code")
+    def route_after_implementation(self):
+        """Always route to pre-review CI after implementation."""
+        return "check_ci"
+
+    @listen("check_ci")
+    def run_pre_review_ci(self):
+        """Run CI before sending code to review — catch failures early."""
+        update_subflow_step(self.state.project_id, "development_flow", "run_pre_review_ci")
+        logger.info(
+            "DevelopmentFlow: run_pre_review_ci for task %d (branch=%s, attempt=%d)",
+            self.state.task_id, self.state.branch_name, self.state.ci_fix_attempts,
+        )
+
+        repo_path = get_repo_path_for_task(self.state.task_id)
+        if not repo_path:
+            logger.warning(
+                "DevelopmentFlow: no repo path for task %d, skipping pre-review CI",
+                self.state.task_id,
+            )
+            self.state.ci_passed = True
+            self.state.ci_output = "No repository path found — CI gate skipped."
+            return
+
+        outcome = self._execute_ci_command(repo_path, settings.CI_TEST_COMMAND)
+        self.state.ci_passed = outcome["ci_passed"]
+        self.state.ci_output = outcome["ci_output"]
+
+        record_ci_result(
+            project_id=self.state.project_id,
+            cycle=self.state.ci_fix_attempts,
+            test_output=outcome["ci_output"],
+            test_pass=outcome["test_pass"],
+            test_count=outcome["test_count"],
+            branch_name=self.state.branch_name,
+        )
+
+        event_type = "pre_ci_passed" if outcome["ci_passed"] else "pre_ci_failed"
+        log_flow_event(
+            self.state.project_id, event_type, "development_flow",
+            "task", self.state.task_id,
+            {"test_count": outcome["test_count"], "test_pass": outcome["test_pass"],
+             "exit_code": outcome["exit_code"], "attempt": self.state.ci_fix_attempts},
+        )
+
+    @router("run_pre_review_ci")
+    def route_pre_ci(self):
+        """Route based on CI result: pass → review, fail → developer fix."""
+        if self.state.ci_passed:
+            return "pre_ci_passed"
+        if self.state.ci_fix_attempts >= self.state.max_ci_fix_attempts:
+            logger.warning(
+                "DevelopmentFlow: max CI fix attempts (%d) reached for task %d, "
+                "proceeding to review anyway",
+                self.state.max_ci_fix_attempts, self.state.task_id,
+            )
+            return "pre_ci_passed"
+        return "pre_ci_fix_needed"
+
+    @listen("pre_ci_fix_needed")
+    def fix_ci_failures(self):
+        """Developer fixes CI failures before code goes to review."""
+        self.state.ci_fix_attempts += 1
+        update_subflow_step(self.state.project_id, "development_flow", "fix_ci_failures")
+        logger.info(
+            "DevelopmentFlow: fix_ci_failures for task %d (attempt %d/%d)",
+            self.state.task_id, self.state.ci_fix_attempts, self.state.max_ci_fix_attempts,
+        )
+
+        developer = get_agent_by_role(
+            "developer", self.state.project_id,
+            agent_id=self.state.developer_id,
+            tech_hints=self.state.tech_hints,
+        )
+        developer.activate_context(task_id=self.state.task_id)
+        run_id = developer.create_agent_run(self.state.task_id)
+
+        task_prompt = dev_tasks.fix_ci_failures(
+            self.state.task_id,
+            self.state.ci_output[:2000],
+            self.state.branch_name,
+            attempt=self.state.ci_fix_attempts,
+            max_attempts=self.state.max_ci_fix_attempts,
+            project_id=self.state.project_id,
+            project_name=self.state.project_name,
+        )
+        from backend.engine.base import AgentKilledError
+        try:
+            result = get_engine().execute(
+                developer, task_prompt,
+            )
+        except AgentKilledError:
+            logger.info("Agent killed during fix_ci_failures for task %d", self.state.task_id)
+            developer.complete_agent_run(run_id, status="interrupted")
+            raise
+        except Exception as exc:
+            logger.exception(
+                "Engine execution failed in fix_ci_failures for task %d", self.state.task_id,
+            )
+            developer.complete_agent_run(run_id, status="failed", error_class=type(exc).__name__)
+            log_flow_event(
+                self.state.project_id, "ci_fix_failed", "development_flow",
+                "task", self.state.task_id,
+                {"error": str(exc)[:300], "attempt": self.state.ci_fix_attempts},
+            )
+            update_task_status_safe(self.state.task_id, "failed")
+            raise
+
+        developer.complete_agent_run(run_id, status="completed", output_summary=str(result)[:500])
+
+        log_flow_event(
+            self.state.project_id, "ci_fix_completed", "development_flow",
+            "task", self.state.task_id,
+            {"attempt": self.state.ci_fix_attempts},
+        )
+
+    @router("fix_ci_failures")
+    def route_after_ci_fix(self):
+        """Loop back to CI check after developer fix."""
+        return "check_ci"
+
+    # ── CI helpers ──────────────────────────────────────────────────────
+
+    def _execute_ci_command(self, repo_path: str, test_cmd: str) -> dict:
+        """Run the test command via subprocess (same logic as CodeReviewFlow)."""
+        import shlex
+        import subprocess
+
+        try:
+            parts = shlex.split(test_cmd)
+            result = subprocess.run(
+                parts,
+                shell=False,
+                capture_output=True,
+                text=True,
+                timeout=600,
+                cwd=repo_path,
+            )
+            return self._handle_ci_result({
+                "stdout": result.stdout,
+                "stderr": result.stderr,
+                "exit_code": result.returncode,
+            })
+        except subprocess.TimeoutExpired:
+            return self._handle_ci_result({"error": "CI command timed out after 600s"})
+        except FileNotFoundError:
+            return self._handle_ci_result({"error": f"CI command not found: {test_cmd}"})
+        except Exception as e:
+            return self._handle_ci_result({"error": f"CI execution failed: {e}"})
+
+    def _handle_ci_result(self, result: dict) -> dict:
+        """Translate raw subprocess result into structured CI outcome."""
+        if "error" in result:
+            return {
+                "ci_passed": False,
+                "ci_output": result["error"],
+                "test_count": 0,
+                "test_pass": 0,
+                "exit_code": 1,
+            }
+
+        stdout = result.get("stdout", "")
+        stderr = result.get("stderr", "")
+        exit_code = result.get("exit_code", 1)
+        output = stdout + "\n" + stderr
+        test_count, test_pass = parse_ci_output(output)
+
+        return {
+            "ci_passed": exit_code in (0, 5),
+            "ci_output": output[:3000],
+            "test_count": test_count,
+            "test_pass": test_pass,
+            "exit_code": exit_code,
+        }
+
     # ── Code Review handoff ───────────────────────────────────────────────
 
-    @listen("implement_code")
+    @listen("pre_ci_passed")
     def request_review(self):
         """Invoke CodeReviewFlow — it runs the full dev↔reviewer cycle internally.
 

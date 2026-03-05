@@ -44,6 +44,8 @@ class CrewAIEngine(AgentEngine):
         guardrail_max_retries: int = 5,
         output_pydantic: type | None = None,
         task_tools: list | None = None,
+        event_id: int | None = None,
+        resume_state: dict | None = None,
     ) -> str:
         from crewai import Crew, Task
 

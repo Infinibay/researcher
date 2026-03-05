@@ -34,7 +34,9 @@ class ReplyToUserTool(PabadaBaseTool):
     description: str = (
         "Reply to a message from the human user. Use this ONLY to respond "
         "to a user message you received — never to initiate contact. "
-        "The message appears in the chat UI immediately."
+        "The message appears in the chat UI immediately. "
+        "You may only call this tool ONCE per task — after sending your "
+        "reply, call step_complete(status='done')."
     )
     args_schema: Type[BaseModel] = ReplyToUserInput
 
@@ -44,6 +46,29 @@ class ReplyToUserTool(PabadaBaseTool):
 
         if not message.strip():
             return self._error("Message cannot be empty.")
+
+        # Prevent multiple replies within a short window (stateless — checks DB)
+        def _recent_count(conn: sqlite3.Connection) -> int:
+            row = conn.execute(
+                """SELECT COUNT(*) as cnt FROM chat_messages
+                   WHERE from_agent = ? AND project_id = ?
+                     AND conversation_type = 'agent_to_user'
+                     AND created_at > datetime('now', '-120 seconds')""",
+                (agent_id, project_id),
+            ).fetchone()
+            return row["cnt"] if row else 0
+
+        try:
+            recent = execute_with_retry(_recent_count)
+        except Exception:
+            recent = 0
+
+        if recent >= 1:
+            return self._error(
+                "You already sent a reply to the user recently. "
+                "Do NOT send multiple messages. "
+                "Call step_complete(status='done') to finish."
+            )
 
         def _send(conn: sqlite3.Connection) -> dict:
             # Create or reuse thread

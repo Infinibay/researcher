@@ -26,7 +26,7 @@ class Settings(BaseSettings):
         "pytest", "make", "cargo", "rustc", "rustup", "go", "javac", "java",
         "ls", "cat", "head", "tail", "wc", "diff", "find", "grep", "pwd",
         "mkdir", "cp", "mv", "rm", "touch", "chmod",
-        "curl", "wget",
+        "curl", "wget", "dig", "nslookup", "host", "whois",
         "tar", "unzip", "gzip",
         "pdflatex", "bibtex", "latexmk",
     ]
@@ -76,6 +76,9 @@ class Settings(BaseSettings):
     LLM_API_KEY: str = ""
     LLM_THINKING: bool = False  # Enable/disable thinking mode (Qwen3, etc.)
 
+    # Model capability probing at startup
+    MODEL_PROBE_ENABLED: bool = True
+
     # Memory (CrewAI native memory system)
     MEMORY_ENABLED: bool = True
     MEMORY_SCORE_THRESHOLD: float = 0.35
@@ -124,14 +127,8 @@ class Settings(BaseSettings):
     LOOP_CIRCUIT_THRESHOLD: int = 3
     LOOP_CIRCUIT_COOLDOWN: int = 60
 
-    # Agent execution limits (per-role max_execution_time in seconds)
-    AGENT_MAX_EXECUTION_TIME_DEFAULT: int = 600  # 10 min fallback
-    AGENT_MAX_EXECUTION_TIME_RESEARCHER: int = 2400  # 40 min (investigation needs many deep-research calls)
-    AGENT_MAX_EXECUTION_TIME_DEVELOPER: int = 1200  # 20 min (code gen can be complex)
-    AGENT_MAX_EXECUTION_TIME_CODE_REVIEWER: int = 300  # 5 min (review is read-heavy)
-    AGENT_MAX_EXECUTION_TIME_TEAM_LEAD: int = 1200  # 20 min (planning is complex)
-    AGENT_MAX_EXECUTION_TIME_PROJECT_LEAD: int = 1800  # 30 min (waits for user responses)
-    AGENT_MAX_EXECUTION_TIME_RESEARCH_REVIEWER: int = 300  # 5 min
+    # Agent execution time limits removed — local models are too slow
+    # for hard timeouts; the anti-loop system handles runaway agents.
     CREW_MAX_RPM: int = 30  # LLM API requests per minute across all agents in a crew
 
     # Agent loop shutdown
@@ -145,15 +142,16 @@ class Settings(BaseSettings):
     MAX_MILESTONES_PER_EPIC: int = 4    # Max milestones per epic
     MAX_TASKS_PER_MILESTONE: int = 8    # Max tasks per milestone
 
+    # Loop Engine (plan-execute-summarize)
+    LOOP_MAX_ITERATIONS: int = 120
+    LOOP_MAX_TOOL_CALLS_PER_ACTION: int = 40
+    LOOP_MAX_TOTAL_TOOL_CALLS: int = 600
+    LOOP_HISTORY_WINDOW: int = 0  # 0 = keep all; N = last N summaries
+
     # Agent Engine
-    AGENT_ENGINE: str = "crewai"  # "crewai" | "claude_code"
+    AGENT_ENGINE: str = "crewai"  # "crewai" | "claude_code" | "loop"
     CLAUDE_CODE_MODEL: str = "claude-opus-4-6"
-    CLAUDE_CODE_TIMEOUT_DEFAULT: int = 1800  # 30 min
-    CLAUDE_CODE_TIMEOUT_DEVELOPER: int = 3600  # 60 min
-    CLAUDE_CODE_TIMEOUT_CODE_REVIEWER: int = 900  # 15 min
-    CLAUDE_CODE_TIMEOUT_RESEARCHER: int = 2400  # 40 min
-    CLAUDE_CODE_TIMEOUT_TEAM_LEAD: int = 1800  # 30 min
-    CLAUDE_CODE_TIMEOUT_PROJECT_LEAD: int = 1800  # 30 min
+    # Claude Code engine timeouts removed — local models need unlimited time.
     CLAUDE_CODE_CREDENTIALS_PATH: str = "~/.claude/.credentials.json"
 
     # Agent Autonomy Layer

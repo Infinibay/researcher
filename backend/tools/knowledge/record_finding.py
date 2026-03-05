@@ -65,6 +65,30 @@ class RecordFindingTool(PabadaBaseTool):
         if task_id is None:
             return self._error("No task_id in context. Findings must be associated with a task.")
 
+        # --- Semantic dedup check (same task + same finding_type) ---
+        def _fetch_existing(conn: sqlite3.Connection) -> list[dict]:
+            rows = conn.execute(
+                "SELECT id, topic AS title FROM findings"
+                " WHERE task_id = ? AND finding_type = ?",
+                (task_id, finding_type),
+            ).fetchall()
+            return [{"id": r["id"], "title": r["title"]} for r in rows]
+
+        try:
+            existing = execute_with_retry(_fetch_existing)
+            if existing:
+                from backend.tools.base.dedup import find_semantic_duplicate
+
+                match = find_semantic_duplicate(title, existing, threshold=0.85)
+                if match:
+                    return self._error(
+                        f"Duplicate finding: '{match['title']}' (ID: {match['id']}) "
+                        f"is {match['similarity']:.0%} similar to '{title}'. "
+                        f"Use the existing finding instead of recording a new one."
+                    )
+        except Exception:
+            pass  # dedup is best-effort; don't block recording
+
         def _record(conn: sqlite3.Connection) -> int:
             cursor = conn.execute(
                 """INSERT INTO findings

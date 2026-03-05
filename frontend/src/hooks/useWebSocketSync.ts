@@ -4,6 +4,7 @@ import { wsManager } from '../api/websocket'
 import { fetchApi } from '../api/client'
 import { useProjectStore } from '../stores/project'
 import { useActivityFeedStore } from '../stores/activityFeed'
+import { useLoopStateStore } from '../stores/loopState'
 import type { WSEvent, AgentActivityEvent } from '../types/api'
 
 const ACTIVITY_EVENT_TYPES = new Set([
@@ -134,6 +135,17 @@ function buildFlowEventContent(t: string, d: Record<string, any>, entityId?: num
   }
 }
 
+/** Ensure a value is a plain string (guards against backend sending objects). */
+function asString(v: unknown, fallback = ''): string {
+  if (v == null) return fallback
+  if (typeof v === 'string') return v
+  if (typeof v === 'object' && v !== null && 'text' in v) return String((v as any).text)
+  try { return JSON.stringify(v) } catch { return fallback }
+}
+
+/** Unique event counter to avoid duplicate React keys. */
+let _eventSeq = 0
+
 /** Convert a WSEvent into an AgentActivityEvent, or null if not an activity type. */
 function wsEventToActivity(event: WSEvent): AgentActivityEvent | null {
   const t = event.type
@@ -141,45 +153,46 @@ function wsEventToActivity(event: WSEvent): AgentActivityEvent | null {
 
   const ts = event.timestamp ?? new Date().toISOString()
   const d = event.data ?? {}
+  const seq = ++_eventSeq
 
   if (t === 'message_sent') {
     return {
-      id: `${t}-${event.entity_id ?? 0}-${ts}`,
+      id: `${t}-${event.entity_id ?? 0}-${ts}-${seq}`,
       type: t,
       timestamp: ts,
       from_agent: d.from_agent,
       to_agent: d.to_agent,
       to_role: d.to_role,
-      content: d.content ?? d.message ?? '(message sent)',
+      content: asString(d.content ?? d.message, '(message sent)'),
       entity_id: event.entity_id,
     }
   }
   if (t === 'agent_message_received') {
     return {
-      id: `${t}-${event.entity_id ?? 0}-${ts}`,
+      id: `${t}-${event.entity_id ?? 0}-${ts}-${seq}`,
       type: t,
       timestamp: ts,
       from_agent: d.from_agent,
       to_agent: d.to_agent ?? d.target_id,
       to_role: d.to_role,
-      content: d.content,
+      content: asString(d.content),
       entity_id: event.entity_id,
     }
   }
   if (t === 'notification_sent') {
     return {
-      id: `${t}-${event.entity_id ?? 0}-${ts}`,
+      id: `${t}-${event.entity_id ?? 0}-${ts}-${seq}`,
       type: t,
       timestamp: ts,
       from_agent: d.from_agent,
       kind: d.kind,
-      content: d.title ?? d.kind ?? 'Notification',
+      content: asString(d.title ?? d.kind, 'Notification'),
       entity_id: event.entity_id,
     }
   }
   if (t === 'user_request_created') {
     return {
-      id: `${t}-${event.entity_id ?? 0}-${ts}`,
+      id: `${t}-${event.entity_id ?? 0}-${ts}-${seq}`,
       type: t,
       timestamp: ts,
       content: 'User input requested',
@@ -188,7 +201,7 @@ function wsEventToActivity(event: WSEvent): AgentActivityEvent | null {
   }
   if (t === 'user_request_responded') {
     return {
-      id: `${t}-${event.entity_id ?? 0}-${ts}`,
+      id: `${t}-${event.entity_id ?? 0}-${ts}-${seq}`,
       type: t,
       timestamp: ts,
       content: 'User responded',
@@ -197,14 +210,14 @@ function wsEventToActivity(event: WSEvent): AgentActivityEvent | null {
   }
   // All other flow events
   return {
-    id: `${t}-${event.entity_id ?? 0}-${ts}`,
+    id: `${t}-${event.entity_id ?? 0}-${ts}-${seq}`,
     type: t,
     timestamp: ts,
     from_agent: d.agent_id ?? d.developer_id ?? d.reviewer_id,
     content: buildFlowEventContent(t, d, event.entity_id),
     entity_id: event.entity_id,
-    task_title: d.task_title,
-    branch_name: d.branch_name,
+    task_title: asString(d.task_title),
+    branch_name: asString(d.branch_name),
   }
 }
 
@@ -328,6 +341,28 @@ export function useWebSocketSync() {
 
       if (t === 'flow_step_changed') {
         queryClient.invalidateQueries({ queryKey: ['flow-state'] })
+      }
+
+      // Loop engine progress events
+      if (t === 'loop_step_update') {
+        const d = event.data
+        useLoopStateStore.getState().updateStep(d.agent_id, {
+          iteration: d.iteration,
+          stepDescription: d.step_description,
+          status: d.status,
+          summary: d.summary,
+          planSteps: d.plan_steps,
+          toolCallsStep: d.tool_calls_step,
+          toolCallsTotal: d.tool_calls_total,
+          tokensTotal: d.tokens_total,
+        })
+      }
+      if (t === 'loop_tool_call') {
+        const d = event.data
+        useLoopStateStore.getState().updateToolCall(d.agent_id, d.tool_name, d.tool_detail ?? '', d.call_num, d.total_calls)
+      }
+      if (t === 'loop_finished') {
+        useLoopStateStore.getState().clearAgent(event.data.agent_id)
       }
 
       // Push activity events into the feed store

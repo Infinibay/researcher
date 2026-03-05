@@ -85,6 +85,8 @@ def _load_prd_and_plan(project_id: int) -> tuple[str, str]:
         state = _json.loads(state_raw) if isinstance(state_raw, str) else state_raw
     except Exception:
         return "", ""
+    if not isinstance(state, dict):
+        return "", ""
     return state.get("requirements", ""), state.get("plan", "")
 
 

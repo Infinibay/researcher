@@ -49,6 +49,24 @@ from backend.prompts.team_lead import tasks as tl_tasks
 
 logger = logging.getLogger(__name__)
 
+
+def _pause_agent_loops(project_id: int) -> None:
+    """Pause all agent loops so the flow can drive agents without interference."""
+    from backend.autonomy.agent_loop import get_loop_manager
+
+    mgr = get_loop_manager(project_id)
+    if mgr:
+        mgr.pause_all()
+
+
+def _resume_agent_loops(project_id: int) -> None:
+    """Resume agent loops for autonomous execution."""
+    from backend.autonomy.agent_loop import get_loop_manager
+
+    mgr = get_loop_manager(project_id)
+    if mgr:
+        mgr.resume_all()
+
 # ── ReAct trace detection ──────────────────────────────────────────────────
 # CrewAI's agent executor sometimes returns raw ReAct thinking traces
 # instead of a proper final answer.  This happens when the ReAct loop
@@ -281,11 +299,9 @@ class MainProjectFlow(Flow[ProjectState]):
             existing_reqs, feedback_context,
             conversation_context=conv_ctx,
         )
-        from backend.tools import get_tools_for_task_type
         result = get_engine().execute(
             project_lead, task_prompt,
             guardrail=validate_requirements_output,
-            task_tools=get_tools_for_task_type("requirements"),
         )
         self.state.requirements = result
 
@@ -317,11 +333,9 @@ class MainProjectFlow(Flow[ProjectState]):
             conversation_context=conv_ctx,
             planning_iteration=self.state.planning_iteration,
         )
-        from backend.tools import get_tools_for_task_type
         result = get_engine().execute(
             team_lead, task_prompt,
             guardrail=validate_plan_output,
-            task_tools=get_tools_for_task_type("plan"),
         )
         self.state.plan = result
 
@@ -496,6 +510,7 @@ class MainProjectFlow(Flow[ProjectState]):
         def _on_no_tickets(event):
             if event.project_id == self.state.project_id:
                 no_tickets_event.set()
+                first_ticket_event.set()  # unblock the wait immediately
 
         event_bus.subscribe("task_available", _on_first_ticket)
         event_bus.subscribe("no_tickets_in_plan", _on_no_tickets)
@@ -561,6 +576,10 @@ class MainProjectFlow(Flow[ProjectState]):
         When AUTONOMY_ENABLED, delegates to a passive wait while agents
         autonomously pick up work. Otherwise falls back to centralized dispatch.
         """
+        # Ensure agent loops are running — they start paused and are
+        # resumed here when the flow enters the execution phase.
+        _resume_agent_loops(self.state.project_id)
+
         if settings.AUTONOMY_ENABLED:
             return self._wait_for_autonomous_completion()
         return self._launch_pending_tasks()
@@ -961,6 +980,7 @@ class MainProjectFlow(Flow[ProjectState]):
         task_prompt = tl_tasks.evaluate_progress(
             self.state.project_id, self.state.project_name,
             progress_summary, self.state.plan,
+            requirements=self.state.requirements,
             conversation_context=conv_ctx,
         )
         result = get_engine().execute(team_lead, task_prompt).strip()

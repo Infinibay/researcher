@@ -189,5 +189,26 @@ class ForgejoClient:
             {"body": body},
         )
 
+    def merge_pull_request(
+        self,
+        owner_repo: str,
+        pr_index: int,
+        merge_type: str = "merge",
+        merge_message: str | None = None,
+    ) -> dict[str, Any]:
+        """Merge a pull request via the Forgejo API.
+
+        *merge_type* is one of ``"merge"``, ``"rebase"``, ``"rebase-merge"``,
+        ``"squash"``, or ``"fast-forward-only"``.
+        """
+        payload: dict[str, Any] = {"Do": merge_type}
+        if merge_message:
+            payload["merge_message_field"] = merge_message
+        return self._curl(
+            "POST",
+            f"/repos/{owner_repo}/pulls/{pr_index}/merge",
+            payload,
+        )
+
 
 forgejo_client = ForgejoClient()

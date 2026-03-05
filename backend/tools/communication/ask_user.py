@@ -1,6 +1,7 @@
 """Tool for Project Lead to ask questions to the human user."""
 
 import json
+import logging
 import sqlite3
 import time
 from typing import Type
@@ -11,6 +12,8 @@ from backend.config.settings import settings
 from backend.flows.event_listeners import FlowEvent, event_bus
 from backend.tools.base.base_tool import PabadaBaseTool
 from backend.tools.base.db import execute_with_retry
+
+logger = logging.getLogger(__name__)
 
 
 class AskUserInput(BaseModel):
@@ -41,6 +44,14 @@ class AskUserTool(PabadaBaseTool):
         agent_id = self._validate_agent_context()
         project_id = self.project_id
         agent_run_id = self.agent_run_id
+
+        # ── Semantic dedup: reject questions similar to previously asked ones ──
+        try:
+            dup_result = self._check_duplicate_question(project_id, question)
+            if dup_result is not None:
+                return dup_result
+        except Exception:
+            logger.debug("Question dedup check failed, proceeding", exc_info=True)
 
         def _create_request(conn: sqlite3.Connection) -> int:
             cursor = conn.execute(
@@ -139,3 +150,73 @@ class AskUserTool(PabadaBaseTool):
             pass
 
         return self._error(f"User did not respond within {timeout}s")
+
+    def _check_duplicate_question(
+        self, project_id: int, question: str,
+    ) -> str | None:
+        """Return an early response if *question* is semantically similar to a previous one.
+
+        Uses the same vector-based dedup as task/epic creation (find_semantic_duplicate).
+        If the prior question already has a user response, returns that response directly.
+        If the prior question is still pending, returns an error telling the agent to wait.
+        Returns None when no duplicate is found (caller should proceed normally).
+        """
+        from backend.tools.base.dedup import find_semantic_duplicate
+
+        def _fetch_existing(conn: sqlite3.Connection) -> list[dict]:
+            rows = conn.execute(
+                """SELECT id, body, status, response
+                   FROM user_requests
+                   WHERE project_id = ? AND request_type = 'question'
+                   ORDER BY id""",
+                (project_id,),
+            ).fetchall()
+            return [
+                {
+                    "id": r["id"],
+                    "title": r["body"],
+                    "status": r["status"],
+                    "response": r["response"],
+                }
+                for r in rows
+            ]
+
+        existing = execute_with_retry(_fetch_existing)
+        if not existing:
+            return None
+
+        match = find_semantic_duplicate(
+            question, existing, settings.DEDUP_SIMILARITY_THRESHOLD,
+        )
+        if match is None:
+            return None
+
+        matched_item = next(
+            (e for e in existing if e["id"] == match["id"]), None,
+        )
+        if matched_item is None:
+            return None
+
+        logger.info(
+            "Duplicate user question detected (%.0f%% similar to request %d): %s",
+            match["similarity"] * 100, match["id"], question[:80],
+        )
+
+        if matched_item["status"] == "responded" and matched_item["response"]:
+            return self._success({
+                "response": matched_item["response"],
+                "request_id": match["id"],
+                "source": "duplicate_detected",
+                "note": (
+                    f"This question is {match['similarity']:.0%} similar to a "
+                    f"previous question (ID {match['id']}). Returning the "
+                    f"user's prior answer instead of asking again."
+                ),
+            })
+
+        return self._error(
+            f"Duplicate question detected: request {match['id']} "
+            f"({match['similarity']:.0%} similar) is already pending. "
+            f"Wait for the user to respond to the existing question instead "
+            f"of asking again."
+        )

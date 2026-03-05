@@ -15,6 +15,7 @@ Import safety: uses ``backend.autonomy.db`` to avoid circular imports.
 
 from __future__ import annotations
 
+import json
 import logging
 import sqlite3
 import threading
@@ -54,6 +55,8 @@ class AgentLoop:
         self.evaluator = get_evaluator_for_role(role)
         self.handlers = build_handler_map()
         self._stop_event = threading.Event()
+        self._pause_event = threading.Event()
+        self._pause_event.set()  # starts unpaused
         self._thread: threading.Thread | None = None
 
         # Timing
@@ -106,6 +109,20 @@ class AgentLoop:
             pass
         logger.info("AgentLoop stopped for %s", self.agent_id)
 
+    def pause(self) -> None:
+        """Pause the loop — it will idle until resumed."""
+        self._pause_event.clear()
+        logger.info("AgentLoop paused for %s", self.agent_id)
+
+    def resume(self) -> None:
+        """Resume a paused loop."""
+        self._pause_event.set()
+        logger.info("AgentLoop resumed for %s", self.agent_id)
+
+    @property
+    def is_paused(self) -> bool:
+        return not self._pause_event.is_set()
+
     @property
     def is_running(self) -> bool:
         return self._thread is not None and self._thread.is_alive()
@@ -131,9 +148,21 @@ class AgentLoop:
             save_loop_state(self.agent_id, self.project_id, None, "idle")
             return
 
+        # Extract LoopEngine checkpoint from progress_json for crash recovery
+        progress = event.get("progress_json")
+        if progress:
+            try:
+                progress_data = json.loads(progress) if isinstance(progress, str) else progress
+                loop_state = progress_data.get("loop_state")
+                if loop_state:
+                    event["_resume_state"] = loop_state
+            except (json.JSONDecodeError, TypeError):
+                pass
+
         logger.info(
-            "AgentLoop: recovering in-progress event %d for %s",
+            "AgentLoop: recovering in-progress event %d for %s%s",
             event["id"], self.agent_id,
+            " (with checkpoint)" if event.get("_resume_state") else "",
         )
         self._execute_event(event)
 
@@ -142,6 +171,14 @@ class AgentLoop:
         consecutive_idles = 0
 
         while not self._stop_event.is_set():
+            # Block while paused (interruptible by stop)
+            while not self._pause_event.is_set():
+                if self._stop_event.is_set():
+                    break
+                self._pause_event.wait(timeout=1.0)
+            if self._stop_event.is_set():
+                break
+
             # Interruptible sleep
             self._stop_event.wait(timeout=self._current_interval)
             if self._stop_event.is_set():
@@ -250,6 +287,19 @@ class AgentLoop:
         update_event_status(event["id"], "in_progress")
         save_loop_state(self.agent_id, self.project_id, event["id"], "processing")
 
+        # Set event_id (and resume_state if recovering) in tool context
+        # so the LoopEngine can checkpoint and resume.
+        from backend.tools.base.context import set_context
+
+        ctx_kwargs: dict[str, Any] = {
+            "agent_id": self.agent_id,
+            "event_id": event["id"],
+        }
+        resume = event.get("_resume_state")
+        if resume:
+            ctx_kwargs["resume_state"] = resume
+        set_context(**ctx_kwargs)
+
         try:
             handler.execute(event)
             update_event_status(event["id"], "completed")
@@ -289,6 +339,15 @@ class AgentLoop:
             self._stop_event.set()
 
 
+# Module-level registry so flows can access loop managers without circular imports.
+_loop_managers: dict[int, "AgentLoopManager"] = {}
+
+
+def get_loop_manager(project_id: int) -> AgentLoopManager | None:
+    """Get the AgentLoopManager for a project (if running)."""
+    return _loop_managers.get(project_id)
+
+
 class AgentLoopManager:
     """Manages AgentLoop lifecycle for all agents in a project."""
 
@@ -315,10 +374,23 @@ class AgentLoopManager:
             loop.start()
             self._loops[agent_id] = loop
 
+        _loop_managers[self.project_id] = self
         logger.info(
             "AgentLoopManager started for project %d (%d loops)",
             self.project_id, len(self._loops),
         )
+
+    def pause_all(self) -> None:
+        """Pause all agent loops (they idle until resumed)."""
+        for loop in self._loops.values():
+            loop.pause()
+        logger.info("AgentLoopManager: paused all loops for project %d", self.project_id)
+
+    def resume_all(self) -> None:
+        """Resume all paused agent loops."""
+        for loop in self._loops.values():
+            loop.resume()
+        logger.info("AgentLoopManager: resumed all loops for project %d", self.project_id)
 
     def stop(self) -> None:
         """Stop all agent loops (signal + join)."""
@@ -335,6 +407,7 @@ class AgentLoopManager:
         for agent_id, loop in self._loops.items():
             loop.stop()
         self._loops.clear()
+        _loop_managers.pop(self.project_id, None)
         logger.info("AgentLoopManager stopped for project %d", self.project_id)
 
     def _get_roster(self) -> list[dict[str, str]]:

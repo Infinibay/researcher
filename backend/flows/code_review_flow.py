@@ -224,6 +224,21 @@ class CodeReviewFlow(Flow[CodeReviewState]):
             message=ci_failure_message,
         )
 
+        # Write CI feedback as a change_request comment so ReworkHandler can find it
+        from backend.autonomy.db import execute_with_retry as _exec_retry
+        import sqlite3
+
+        def _write_ci_comment(conn: sqlite3.Connection) -> None:
+            conn.execute(
+                """INSERT INTO task_comments
+                   (task_id, author, comment_type, content)
+                   VALUES (?, 'ci_gate', 'change_request', ?)""",
+                (self.state.task_id, ci_failure_message),
+            )
+            conn.commit()
+
+        _exec_retry(_write_ci_comment)
+
         # Also notify Team Lead for visibility
         notify_team_lead(
             self.state.project_id,
@@ -279,12 +294,10 @@ class CodeReviewFlow(Flow[CodeReviewState]):
             rejection_count=self.state.rejection_count,
         )
         from backend.engine.base import AgentKilledError
-        from backend.tools import get_tools_for_task_type
         try:
             result = get_engine().execute(
                 reviewer, task_prompt,
                 guardrail=validate_review_verdict,
-                task_tools=get_tools_for_task_type("review"),
             ).strip()
         except AgentKilledError:
             logger.info("Agent killed during perform_review for task %d", self.state.task_id)
@@ -396,11 +409,9 @@ class CodeReviewFlow(Flow[CodeReviewState]):
             project_name=self.state.project_name,
         )
         from backend.engine.base import AgentKilledError
-        from backend.tools import get_tools_for_task_type
         try:
             result = get_engine().execute(
                 developer, task_prompt,
-                task_tools=get_tools_for_task_type("rework"),
             )
         except AgentKilledError:
             logger.info("Agent killed during notify_developer_rework for task %d", self.state.task_id)

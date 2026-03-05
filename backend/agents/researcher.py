@@ -26,7 +26,7 @@ def create_researcher_agent(
         )
 
     backstory = build_system_prompt(
-        agent_name=agent_name, teammates=teammates,
+        agent_name=agent_name, agent_id=agent_id, teammates=teammates,
         engine=settings.AGENT_ENGINE,
     )
 

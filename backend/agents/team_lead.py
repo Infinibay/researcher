@@ -19,7 +19,7 @@ def create_team_lead_agent(
 ) -> PabadaAgent:
     """Instantiate a Team Lead agent."""
     backstory = build_system_prompt(
-        agent_name=agent_name, teammates=teammates,
+        agent_name=agent_name, agent_id=agent_id, teammates=teammates,
         engine=settings.AGENT_ENGINE,
     )
 

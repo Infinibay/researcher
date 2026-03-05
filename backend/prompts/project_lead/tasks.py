@@ -37,8 +37,6 @@ You are gathering and refining requirements for this project.
 {existing_reqs}
 {feedback_context}
 
-{ctx_block}
-
 ## Your Goal
 Produce a complete, unambiguous, and prioritized PRD (Product Requirements
 Document) that Jordan Chen (Team Lead) can use directly to plan the project.
@@ -82,31 +80,54 @@ Flag these contradictions to the user and ask them to choose.
 
 ### Step 4: Research if Needed
 - If the user mentions or references something external (a news article, a
-  link, a technology, a standard), use WebSearchTool or WebFetchTool to get
+  link, a technology, a standard), use web_search or web_fetch to get
   context.
 - If there are reference files attached to the project, review them with
-  ReadReferenceFilesTool.
+  read_reference_files.
 - If the project wiki has documentation relevant to the context, consult it
-  with ReadWikiTool.
+  with read_wiki.
 Do NOT consult these sources "just in case." Only when there is evidence that
 they contain information you need.
 
-### Step 5: Ask the User Questions
-Use AskUserTool to resolve what you cannot deduce. Rules:
+### Step 5: Ask the User ONLY Blocking Questions
+
+{ctx_block}
+
+**IMPORTANT:** If the User Q&A History above already contains answers to your
+questions, DO NOT ask them again. Use the existing answers directly. Only ask
+NEW questions about information that is genuinely missing.
+
+Use ask_user ONLY for questions that are **blocking** — questions whose
+answer is essential to start the project. If you can make a reasonable
+assumption instead, do so and document it in the PRD.
+
+**The bar for asking a question:**
+A question is blocking ONLY if getting it wrong would lead to building the
+wrong thing entirely. Examples:
+- The project description says "build an app" but you cannot tell if it is
+  a web app, mobile app, or CLI tool → blocking.
+- The project mentions "users" but you cannot tell if it needs authentication
+  → NOT blocking (assume yes and document it).
+- The project says "integrate with X" but you do not know which X API
+  version → NOT blocking (assume latest, document it).
+
+**Rules:**
 - **ONE question at a time.** Never ask multiple questions in one message.
-- Each question must have a clear and specific purpose.
-- If you offer options, give 2-3 alternatives with a brief explanation of
-  each and their implications.
-- Do not ask things whose answer is already available.
-- For non-technical users: identify the technical points yourself and
-  document them as assumptions. Only ask about business or functionality
-  decisions.
-- For technical users: you can ask about technical preferences if they are
-  relevant and the user seems to have an opinion.
+- **Prefer assumptions over questions.** Every question delays the project.
+  When in doubt, make a reasonable assumption, document it in the PRD, and
+  move on. The user can correct assumptions during plan approval.
+- If you offer options, give 2-3 alternatives with a brief explanation.
+- For non-technical users: identify technical decisions yourself and document
+  them as assumptions. Only ask about business or functionality decisions.
+- For technical users: only ask about technical preferences if the choice
+  has major architectural consequences.
+- **Do NOT ask for confirmation of your understanding.** That is handled in
+  a separate step (plan approval). Your job is to produce the PRD — not to
+  get the user to validate it.
 
 ### Step 6: Verify Completeness
 Before producing the final PRD, check that you have an answer for each of
-these categories. You do NOT need to ask the user all of them — many you can
+these categories. You do NOT need to ask the user all of them — most you can
 deduce or document as assumptions:
 
 - [ ] Problem statement and context
@@ -120,43 +141,16 @@ deduce or document as assumptions:
 - [ ] Prioritization (P0: must-have / P1: important / P2: nice-to-have)
 - [ ] Measurable success criteria
 
-### Step 7: Validate with the User via AskUserTool
-Call `AskUserTool` with a single message structured as:
+**Do NOT call ask_user during this step.** If information is missing,
+write it as an assumption or an open question in the PRD. The user will
+review and correct the plan during the approval phase.
 
-1. A header: "Before I write the final document, I want to confirm my
-   understanding."
-2. A numbered list of **3–5 key points** that summarise the most important
-   decisions, assumptions, and scope boundaries you identified.
-3. A closing question: "Does this correctly reflect what you need? Reply
-   YES to confirm, or tell me what to change."
-
-**If `AskUserTool` returns an error** (e.g. the user did not respond within
-the timeout):
-- Do NOT block or retry. Document the unresolved points in Section 10
-  (Open Questions). Proceed using ONLY the information already available
-  in the existing requirements. NEVER invent new project scope or features
-  to fill gaps.
-- Add a note to Section 10 (Open Questions) of the PRD: "User validation
-  timed out — proceeding with existing requirements as-is. The following
-  points remain unresolved: [list them]."
-- Proceed to Step 8.
-
-**If the user's reply is ambiguous** (neither a clear YES nor actionable
-feedback):
-- Call `AskUserTool` exactly once more with a single, specific clarifying
-  question about the most critical ambiguity.
-- If the second reply is still ambiguous, document the point as an
-  assumption and proceed to Step 8.
-
-**If the user provides clear feedback**:
-- Acknowledge the changes, update your internal understanding, and proceed
-  to Step 8 incorporating the corrections.
-
-### Step 8: Produce the PRD as Task Output
+### Step 7: Produce the PRD as Task Output
 Generate the final PRD following the expected output structure below.
 **Do NOT present the PRD to the user here** — that is handled by a
-separate step in the flow. Your only job in this step is to return the
-complete PRD document as the output of this task.
+separate step in the flow (plan approval). Your only job here is to
+return the complete PRD document as the output of this task.
+**Do NOT call ask_user for confirmation.** Just produce the PRD.
 """
 
     expected_output = """\
@@ -332,12 +326,12 @@ Identify:
 - Notable successes or challenges
 
 ### Step 2: Write the Report
-Use the **WriteReportTool** to persist the final report. Structure it as
+Use the **write_report** to persist the final report. Structure it as
 a polished, human-readable document — not a raw data dump. The report
 should be understandable by someone who was not involved in the project.
 
 ### Step 3: Notify the User
-Use **AskUserTool** to inform the user that the project is complete.
+Use **ask_user** to inform the user that the project is complete.
 
 **How to structure the notification:**
 1. Start with a clear statement: the project is complete.
@@ -362,8 +356,8 @@ Use **AskUserTool** to inform the user that the project is complete.
 
     expected_output = """\
 Confirmation that:
-1. The final report was written using WriteReportTool
-2. The user was notified via AskUserTool with an executive summary
+1. The final report was written using write_report
+2. The user was notified via ask_user with an executive summary
    of outcomes and an offer to review the full report
 """
     return description, expected_output
@@ -421,7 +415,7 @@ Flag any ideas that seem to drift from the original objectives — the user
 should be aware of this when deciding.
 
 ### Step 3: Present to the User
-Use **AskUserTool** to present the ideas. Structure the presentation:
+Use **ask_user** to present the ideas. Structure the presentation:
 
 1. **Context first**: Briefly remind the user why brainstorming was needed
    (e.g., "The team explored new approaches to move the project forward").

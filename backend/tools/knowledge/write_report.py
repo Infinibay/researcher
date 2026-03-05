@@ -21,9 +21,8 @@ class WriteReportInput(BaseModel):
 class WriteReportTool(PabadaBaseTool):
     name: str = "write_report"
     description: str = (
-        "Write a research report. Saves as an artifact and stores the file "
-        "in /artifacts/reports/ (shared across all agents). Also stores "
-        "full content in the database for search and cross-agent access."
+        "Write a research report. Saves as a project-scoped artifact and "
+        "stores full content in the database for search and cross-agent access."
     )
     args_schema: Type[BaseModel] = WriteReportInput
 
@@ -39,14 +38,16 @@ class WriteReportTool(PabadaBaseTool):
             for c in title.lower().replace(" ", "_")
         )[:80]
 
-        # In-pod path (shared /artifacts volume)
-        pod_reports_dir = "/artifacts/reports"
+        # In-pod path (shared /artifacts volume, scoped by project)
+        pod_reports_dir = f"/artifacts/project_{project_id}/reports"
         pod_file_path = f"{pod_reports_dir}/{safe_title}.md"
 
         # Host path — used when sandbox is disabled (local dev)
         db_path = get_db_path()
         host_base = os.path.dirname(os.path.abspath(db_path))
-        host_reports_dir = os.path.join(host_base, "artifacts", "reports")
+        host_reports_dir = os.path.join(
+            host_base, "artifacts", f"project_{project_id}", "reports"
+        )
         os.makedirs(host_reports_dir, exist_ok=True)
 
         host_file_path = os.path.join(host_reports_dir, f"{safe_title}.md")

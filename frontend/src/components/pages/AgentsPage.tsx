@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useProjectStore } from '../../stores/project'
 import { useAgents } from '../../hooks/useAgents'
 import { useAgentActivity } from '../../hooks/useAgentActivity'
@@ -6,6 +7,7 @@ import { ErrorMessage } from '../common/ErrorMessage'
 import { EmptyState } from '../common/EmptyState'
 import { Badge } from '../common/Badge'
 import { StatusDot } from '../common/StatusDot'
+import { useLoopStateStore } from '../../stores/loopState'
 import type { Agent, AgentActivityEvent } from '../../types/api'
 
 const roleLabels: Record<string, string> = {
@@ -73,12 +75,63 @@ function ActivityFeedItem({ event }: { event: AgentActivityEvent }) {
           </span>
         </div>
         {event.content && (
-          <p className="text-xs text-slate-400 mt-0.5 truncate">{event.content}</p>
+          <p className="text-xs text-slate-400 mt-0.5 truncate">{typeof event.content === 'string' ? event.content : String(event.content)}</p>
         )}
         {event.kind && (
-          <p className="text-xs text-slate-500 mt-0.5">kind: {event.kind}</p>
+          <p className="text-xs text-slate-500 mt-0.5">kind: {typeof event.kind === 'string' ? event.kind : String(event.kind)}</p>
         )}
       </div>
+    </div>
+  )
+}
+
+function LoopProgress({ agentId }: { agentId: string }) {
+  const loopState = useLoopStateStore((s) => s.agents[agentId])
+  const [planOpen, setPlanOpen] = useState(false)
+  if (!loopState) return null
+
+  const doneCount = loopState.planSteps.filter(s => s.status === 'done').length
+
+  return (
+    <div className="rounded-md bg-blue-500/10 border border-blue-500/20 px-3 py-2 space-y-2">
+      <div className="flex items-center justify-between">
+        <span className="text-xs font-medium text-blue-300">
+          Step {loopState.iteration}: {loopState.stepDescription || 'Planning...'}
+        </span>
+        <span className="text-xs text-slate-500">
+          {loopState.toolCallsTotal} tools · {(loopState.tokensTotal / 1000).toFixed(1)}k tokens
+        </span>
+      </div>
+
+      {loopState.lastToolName && (
+        <div className="text-xs text-slate-400 truncate">
+          🔧 {loopState.lastToolName}
+          {loopState.lastToolDetail && (
+            <span className="text-slate-500 ml-1">{loopState.lastToolDetail}</span>
+          )}
+        </div>
+      )}
+
+      {loopState.planSteps.length > 0 && (
+        <div className="text-xs">
+          <button
+            type="button"
+            onClick={() => setPlanOpen(!planOpen)}
+            className="text-slate-400 hover:text-slate-300 cursor-pointer"
+          >
+            {planOpen ? '▾' : '▸'} Plan ({doneCount}/{loopState.planSteps.length} steps)
+          </button>
+          {planOpen && (
+            <div className="mt-1 space-y-0.5 pl-2">
+              {loopState.planSteps.map((step) => (
+                <div key={step.index} className={step.status === 'done' ? 'text-green-400' : step.status === 'active' ? 'text-blue-300' : 'text-slate-500'}>
+                  {step.status === 'done' ? '✓' : step.status === 'active' ? '▶' : '○'} {step.index}. {step.description}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }
@@ -119,6 +172,9 @@ function AgentCard({ agent }: { agent: Agent }) {
           )}
         </div>
       )}
+
+      {/* Loop engine progress */}
+      <LoopProgress agentId={agent.agent_id} />
 
       {/* Stats */}
       <div className="flex items-center gap-4 text-xs text-slate-400">

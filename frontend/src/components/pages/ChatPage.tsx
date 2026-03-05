@@ -39,7 +39,13 @@ export function ChatPage() {
     if (!pendingRequest) return []
     try {
       const parsed = JSON.parse(pendingRequest.options_json)
-      return Array.isArray(parsed) ? parsed : []
+      if (!Array.isArray(parsed)) return []
+      // Normalize: backend may store strings or {text, value} objects
+      return parsed.map((item: unknown) => {
+        if (typeof item === 'string') return item
+        if (item && typeof item === 'object' && 'text' in item) return String((item as any).text)
+        return String(item)
+      })
     } catch {
       return []
     }

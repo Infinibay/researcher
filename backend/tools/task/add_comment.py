@@ -28,6 +28,10 @@ class AddCommentTool(PabadaBaseTool):
     )
     args_schema: Type[BaseModel] = AddCommentInput
 
+    # Max comments an agent can post on the same task within a time window
+    _MAX_COMMENTS_PER_WINDOW: int = 3
+    _WINDOW_MINUTES: int = 30
+
     def _run(
         self, task_id: int, comment: str, comment_type: str = "comment"
     ) -> str:
@@ -46,6 +50,20 @@ class AddCommentTool(PabadaBaseTool):
             ).fetchone()
             if not row:
                 raise ValueError(f"Task {task_id} not found")
+
+            # Rate-limit: prevent comment spam from the same agent
+            recent = conn.execute(
+                """SELECT COUNT(*) FROM task_comments
+                   WHERE task_id = ? AND author = ?
+                   AND created_at > datetime('now', ?)""",
+                (task_id, agent_id, f"-{self._WINDOW_MINUTES} minutes"),
+            ).fetchone()[0]
+            if recent >= self._MAX_COMMENTS_PER_WINDOW:
+                raise ValueError(
+                    f"Rate limit: you already posted {recent} comments on "
+                    f"this task in the last {self._WINDOW_MINUTES} minutes. "
+                    f"Read existing comments with read_comments before posting more."
+                )
 
             cursor = conn.execute(
                 """INSERT INTO task_comments

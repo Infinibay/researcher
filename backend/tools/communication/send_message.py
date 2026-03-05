@@ -85,6 +85,7 @@ class SendMessageTool(PabadaBaseTool):
     )
     args_schema: Type[BaseModel] = SendMessageInput
 
+
     @staticmethod
     def _resolve_to_agent(to_agent: str, project_id: int) -> str:
         """Normalise *to_agent* to a canonical agent_id via the roster.
@@ -184,6 +185,31 @@ class SendMessageTool(PabadaBaseTool):
     ) -> str:
         from_agent = self._validate_agent_context()
         project_id = self.project_id
+
+        # Rate-limit user-facing messages — max 1 per 2-minute window
+        is_to_user = (to_agent or "").lower() == "user"
+        if is_to_user:
+            def _recent_user_msgs(conn: sqlite3.Connection) -> int:
+                row = conn.execute(
+                    """SELECT COUNT(*) as cnt FROM chat_messages
+                       WHERE from_agent = ? AND project_id = ?
+                         AND conversation_type = 'agent_to_user'
+                         AND created_at > datetime('now', '-120 seconds')""",
+                    (from_agent, project_id),
+                ).fetchone()
+                return row["cnt"] if row else 0
+
+            try:
+                recent = execute_with_retry(_recent_user_msgs)
+            except Exception:
+                recent = 0
+
+            if recent >= 1:
+                return self._error(
+                    "You already sent a message to the user recently. "
+                    "Do NOT send multiple messages. "
+                    "Call step_complete(status='done') to finish."
+                )
 
         # Block acknowledgment-only messages — they waste cycles and cause loops
         if _is_acknowledgment_only(message):

@@ -156,21 +156,26 @@ def _build_enriched_description(
     else:
         if is_claude_code:
             tool_name = "mcp__pabada__chat-send"
-            reply_instruction = (
-                f"You MUST reply using the `{tool_name}` tool with "
-                f"`to_agent=\"{from_agent}\""
-            )
         else:
             tool_name = "send_message"
-            reply_instruction = (
-                f"You MUST reply using the `send_message` tool with "
-                f"`to_agent=\"{from_agent}\""
-            )
+
+        reply_instruction = (
+            f"Decide whether this message requires a response.\n\n"
+            f"**Do NOT reply if:**\n"
+            f"- The message is a simple acknowledgment (\"OK\", \"got it\", \"proceeding\")\n"
+            f"- The message confirms something you already know\n"
+            f"- Replying would not add new information or advance the project\n"
+            f"- The conversation has already reached agreement\n\n"
+            f"**Reply ONLY if** the message asks a question, requests action, "
+            f"or contains information that requires your input.\n\n"
+            f"If you decide to reply, use the `{tool_name}` tool with "
+            f"`to_agent=\"{from_agent}\""
+        )
         if thread_id:
             reply_instruction += f", thread_id=\"{thread_id}\""
         reply_instruction += (
-            "`. Your reply must be the content of the `message` parameter — "
-            "do NOT write your answer as plain text."
+            "`. Your reply must add new, useful information — "
+            "never send acknowledgments like \"understood\" or \"will do\"."
         )
 
     sections.append(
@@ -178,9 +183,9 @@ def _build_enriched_description(
         f"**From:** {from_agent}\n"
         f"**Message:**\n{content}\n\n"
         f"## Required Action\n"
-        f"Read the message above and formulate your response.\n\n"
+        f"Read the message above carefully.\n\n"
         f"**CRITICAL:** {reply_instruction}\n\n"
-        f"Do NOT return a text answer. You MUST call the `{tool_name}` tool."
+        f"If no reply is needed, do NOT call any tool — simply move on."
     )
 
     return "\n\n".join(sections)
@@ -223,10 +228,16 @@ def dispatch_message(
             if settings.AGENT_ENGINE == "claude_code"
             else "send_message"
         )
-        expected = (
-            f"Confirmation that you called the `{reply_tool}` tool to reply. "
-            "Do NOT write the response as plain text — you MUST use the tool."
-        )
+        if from_agent == "user":
+            expected = (
+                f"Confirmation that you called the `{reply_tool}` tool to reply. "
+                "Do NOT write the response as plain text — you MUST use the tool."
+            )
+        else:
+            expected = (
+                f"Either a reply via the `{reply_tool}` tool (if the message "
+                "requires a response), or nothing if no reply is needed."
+            )
         get_engine().execute(agent, (description, expected))
         logger.info(
             "Message dispatched to agent %s (project %d) from %s",

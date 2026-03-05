@@ -100,7 +100,7 @@ const EVENT_VERBS: Record<string, string> = {
 // --- Label helper ---
 
 export function getActivityLabel(event: AgentActivityEvent): string {
-  if (event.content) return event.content
+  if (event.content) return typeof event.content === 'string' ? event.content : String(event.content)
 
   const verb = EVENT_VERBS[event.type]
   const agent = event.from_agent

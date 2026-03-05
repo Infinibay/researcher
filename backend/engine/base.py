@@ -32,6 +32,8 @@ class AgentEngine(ABC):
         guardrail_max_retries: int = 5,
         output_pydantic: type | None = None,
         task_tools: list | None = None,
+        event_id: int | None = None,
+        resume_state: dict | None = None,
     ) -> str:
         """Execute a task using the given agent and return the string result.
 
@@ -43,4 +45,6 @@ class AgentEngine(ABC):
             guardrail_max_retries: Max retries when guardrail fails.
             output_pydantic: Pydantic model for structured output.
             task_tools: Override task-specific tools.
+            event_id: Agent event row ID for crash recovery checkpointing.
+            resume_state: LoopState dict to resume from after crash.
         """

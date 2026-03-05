@@ -4,6 +4,8 @@ from .create_repository import CreateRepositoryTool
 from .update_project import UpdateProjectTool
 from .read_reference_files import ReadReferenceFilesTool
 from .create_hypothesis import CreateHypothesisTool
+from .read_epics import ReadEpicsTool
+from .read_milestones import ReadMilestonesTool
 
 __all__ = [
     "CreateEpicTool",
@@ -12,4 +14,6 @@ __all__ = [
     "UpdateProjectTool",
     "ReadReferenceFilesTool",
     "CreateHypothesisTool",
+    "ReadEpicsTool",
+    "ReadMilestonesTool",
 ]

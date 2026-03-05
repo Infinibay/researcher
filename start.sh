@@ -475,12 +475,22 @@ BACKEND_PID=$!
 echo $BACKEND_PID >> "$PID_FILE"
 
 # Wait for backend to be ready
-for i in $(seq 1 15); do
+echo -n "  Waiting for backend "
+BACKEND_READY=false
+for i in $(seq 1 30); do
     if curl -sf http://localhost:8000/api/health &>/dev/null; then
+        BACKEND_READY=true
         break
     fi
+    echo -n "."
     sleep 1
 done
+echo ""
+if [ "$BACKEND_READY" = true ]; then
+    ok "Backend ready"
+else
+    warn "Backend not responding yet — starting frontend anyway"
+fi
 
 # Frontend dev server (Vite on :5173)
 if [ -d "$FRONTEND_DIR" ]; then

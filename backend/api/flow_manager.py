@@ -42,6 +42,10 @@ class FlowManager:
             # Ensure all team workers exist (idempotent)
             initialize_project_team(project_id)
 
+            # Clear stale agent events from previous sessions to prevent
+            # loops from processing old messages when they resume.
+            self._clear_stale_events(project_id)
+
             # Load snapshot to restore state on resume
             snapshot_inputs: dict[str, Any] = {}
             snapshot = load_snapshot(project_id)
@@ -78,11 +82,14 @@ class FlowManager:
             )
             thread.start()
 
-            # Start agent loops (lazy import to avoid circular chain)
+            # Start agent loops paused — the flow resumes them when entering
+            # execution phase.  This prevents loops from processing stale events
+            # or interfering while the flow drives agents during planning.
             if settings.AUTONOMY_ENABLED:
                 from backend.autonomy.agent_loop import AgentLoopManager
                 loop_mgr = AgentLoopManager(project_id)
                 loop_mgr.start_all()
+                loop_mgr.pause_all()
                 self._autonomy[project_id] = loop_mgr
 
             logger.info("Started flow and listeners for project %d", project_id)
@@ -153,6 +160,42 @@ class FlowManager:
             self._flows.pop(project_id, None)
             update_project_status(project_id, "paused")
             logger.info("Stopped flow/listeners for project %d", project_id)
+
+    @staticmethod
+    def _clear_stale_events(project_id: int) -> None:
+        """Cancel pending/in-progress agent events left over from a previous session.
+
+        Without this, agent loops would process stale messages from before
+        the restart, causing duplicate work and ping-pong loops.
+        """
+        import sqlite3
+
+        def _cancel(conn: sqlite3.Connection) -> int:
+            cursor = conn.execute(
+                """UPDATE agent_events
+                   SET status = 'failed',
+                       error_message = 'cancelled: stale event from previous session'
+                   WHERE project_id = ?
+                     AND status IN ('pending', 'in_progress')""",
+                (project_id,),
+            )
+            conn.commit()
+            return cursor.rowcount
+
+        try:
+            from backend.tools.base.db import execute_with_retry as _db_retry
+
+            cancelled = _db_retry(_cancel)
+            if cancelled:
+                logger.info(
+                    "Cleared %d stale agent events for project %d",
+                    cancelled, project_id,
+                )
+        except Exception:
+            logger.debug(
+                "Could not clear stale events for project %d",
+                project_id, exc_info=True,
+            )
 
     def get_flow_status(self, project_id: int) -> str:
         """Get the running status of a project's flow."""

@@ -168,31 +168,31 @@ PIPELINE_AWARENESS: dict[str, str] = {
 COMMUNICATION_RULES: dict[str, str] = {
     "project_lead": (
         "You are the ONLY agent who can communicate with the human user "
-        "(via AskUserTool). Other agents contact you via AskProjectLeadTool "
+        "(via ask_user). Other agents contact you via ask_project_lead "
         "when they need user input or have questions about requirements."
     ),
     "team_lead": (
-        "You communicate with the Project Lead via AskProjectLeadTool when "
+        "You communicate with the Project Lead via ask_project_lead when "
         "you need clarification on requirements or user decisions. You "
         "coordinate with Developers, Researchers, and Reviewers via "
-        "SendMessageTool."
+        "send_message."
     ),
     "developer": (
-        "You communicate with the Team Lead via AskTeamLeadTool when you "
+        "You communicate with the Team Lead via ask_team_lead when you "
         "need guidance. You can message other team members via "
-        "SendMessageTool."
+        "send_message."
     ),
     "code_reviewer": (
-        "You communicate with the team via SendMessageTool. You provide "
+        "You communicate with the team via send_message. You provide "
         "feedback on pull requests through task comments."
     ),
     "researcher": (
-        "You communicate with the Team Lead via AskTeamLeadTool when you "
+        "You communicate with the Team Lead via ask_team_lead when you "
         "need guidance. You can message other team members via "
-        "SendMessageTool."
+        "send_message."
     ),
     "research_reviewer": (
-        "You communicate with the team via SendMessageTool. You provide "
+        "You communicate with the team via send_message. You provide "
         "feedback on research through task comments and finding validation."
     ),
 }
@@ -308,8 +308,8 @@ _ARTIFACT_MAP: dict[str, dict[str, str]] = {
     "research_reviewer": {
         "upstream": (
             "You receive a task marked review_ready. You can read the "
-            "report (ReadReportTool), findings (ReadFindingsTool), wiki "
-            "(ReadWikiTool), and task comments."
+            "report (read_report), findings (read_findings), wiki "
+            "(read_wiki), and task comments."
         ),
         "downstream": (
             "Your approval means findings enter the knowledge base as "
@@ -355,11 +355,17 @@ searches, your file reads, or your terminal output. Each agent knows
 only what was explicitly persisted through shared systems.
 
 ### What Crosses Agent Boundaries
-- **Task system**: task descriptions, status, comments (AddCommentTool)
+- **Task system**: task descriptions, status, comments (read_comments / add_comment)
 - **Git**: committed AND pushed code (not uncommitted changes)
-- **Knowledge base**: findings (RecordFindingTool), wiki (WriteWikiTool),
-  reports (WriteReportTool)
-- **Messages**: explicit agent-to-agent messages (SendMessageTool)
+- **Knowledge base**: findings (record_finding), wiki (write_wiki),
+  reports (write_report)
+- **Messages**: explicit agent-to-agent messages (send_message)
+
+### Comment Discipline
+Before calling add_comment, ALWAYS call read_comments first to see what
+was already posted. Never duplicate information that already exists in
+the comments. If your planned comment covers the same ground as an
+existing one, skip it.
 
 ### What Does NOT Cross
 - Your reasoning and chain of thought
@@ -395,6 +401,7 @@ def build_team_section(
     *,
     my_name: str,
     my_role: str,
+    my_agent_id: str | None = None,
     teammates: list[dict[str, str]] | None = None,
 ) -> str:
     """Build the '## Your Team' section for a system prompt.
@@ -405,29 +412,35 @@ def build_team_section(
     Args:
         my_name: This agent's assigned name.
         my_role: This agent's role key.
-        teammates: List of dicts with keys ``name``, ``role``, ``status``.
-            Comes from the ``roster`` table.  Can be empty or None if no
-            other agents are registered yet.
+        my_agent_id: This agent's canonical agent_id (e.g. ``team_lead_p1``).
+        teammates: List of dicts with keys ``agent_id``, ``name``, ``role``,
+            ``status``.  Comes from the ``roster`` table.  Can be empty or
+            None if no other agents are registered yet.
     """
     my_title = ROLE_DESCRIPTIONS[my_role]["title"]
     my_summary = ROLE_DESCRIPTIONS[my_role]["summary"]
 
+    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    id_tag = f" (`{my_agent_id}`)" if my_agent_id else ""
     lines = [
+        f"## Current Date & Time\n{now}\n",
         "## Your Team\n",
-        f"- **{my_name}** — {my_title} **(You)**\n  {my_summary}",
+        f"- **{my_name}**{id_tag} — {my_title} **(You)**\n  {my_summary}",
     ]
 
     if teammates:
         for mate in teammates:
             role = mate["role"]
             name = mate["name"]
+            mate_id = mate.get("agent_id", "")
             status = mate.get("status", "idle")
             desc = ROLE_DESCRIPTIONS.get(role, {})
             title = desc.get("title", role)
             summary = desc.get("summary", "")
             status_tag = f" [{status}]" if status != "idle" else ""
+            mate_id_tag = f" (`{mate_id}`)" if mate_id else ""
             lines.append(
-                f"- **{name}** — {title}{status_tag}\n  {summary}"
+                f"- **{name}**{mate_id_tag} — {title}{status_tag}\n  {summary}"
             )
     else:
         lines.append(
@@ -508,10 +521,10 @@ Messages that PASS this test (send these):
 
 ### Clarification Protocol
 
-1. **Check before asking**: Use ReadMessagesTool first to check if your
+1. **Check before asking**: Use read_messages first to check if your
    question was already answered in a previous message or thread.
 2. **Ask once, then proceed**: If you do not receive a response within the
-   timeout, make a reasonable assumption, document it with AddCommentTool
+   timeout, make a reasonable assumption, document it with add_comment
    (prefix: `ASSUMPTION:`), and continue working.
 3. **Max 2 clarification questions per task**: After asking 2 questions,
    proceed with your best judgment. Do NOT keep asking.
@@ -648,7 +661,7 @@ def build_conversation_context(
             (project_id,),
         ).fetchall()
 
-        # Get user Q&A pairs (Project Lead ↔ user via AskUserTool)
+        # Get user Q&A pairs (Project Lead ↔ user via ask_user)
         user_qa_rows = conn.execute(
             """SELECT agent_id, body, response, responded_at
                FROM user_requests

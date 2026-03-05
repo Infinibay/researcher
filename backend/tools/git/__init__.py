@@ -4,6 +4,7 @@ from .push import GitPushTool
 from .diff import GitDiffTool
 from .status import GitStatusTool
 from .create_pr import CreatePRTool
+from .merge_pr import MergePRTool
 
 __all__ = [
     "GitBranchTool",
@@ -12,4 +13,5 @@ __all__ = [
     "GitDiffTool",
     "GitStatusTool",
     "CreatePRTool",
+    "MergePRTool",
 ]

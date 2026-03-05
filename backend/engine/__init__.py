@@ -30,9 +30,12 @@ def get_engine() -> AgentEngine:
     elif engine_name == "claude_code":
         from backend.engine.claude_code_engine import ClaudeCodeEngine
         _engine_instance = ClaudeCodeEngine()
+    elif engine_name == "loop":
+        from backend.engine.loop_engine import LoopEngine
+        _engine_instance = LoopEngine()
     else:
         raise ValueError(
-            f"Unknown AGENT_ENGINE '{engine_name}'. Valid: crewai, claude_code"
+            f"Unknown AGENT_ENGINE '{engine_name}'. Valid: crewai, claude_code, loop"
         )
 
     return _engine_instance

@@ -381,14 +381,12 @@ class BrainstormingFlow(Flow[BrainstormState]):
 
         self.state.phase = BrainstormPhase.COMPLETE
 
-        from backend.tools import get_tools_for_task_type
-
         team_lead = get_agent_by_role("team_lead", self.state.project_id)
         ideas_text = format_ideas(self.state.selected_ideas)
         result = run_agent_task(
             team_lead,
             tl_tasks.create_tasks_from_ideas(self.state.project_id, ideas_text),
-            task_tools=get_tools_for_task_type("create_tickets"),
+
             guardrail=validate_brainstorm_task_creation(self.state.project_id),
             guardrail_max_retries=3,
         )

@@ -64,6 +64,24 @@ def create_app() -> FastAPI:
     from backend.tools.base.db import ensure_migrations
     ensure_migrations()
 
+    # Probe model capabilities in the worker process (uvicorn reload
+    # spawns a child — the probe in run.py only runs in the parent).
+    try:
+        from backend.config.model_capabilities import get_model_capabilities
+
+        if not get_model_capabilities().probed:
+            from backend.config.llm import get_litellm_params
+            from backend.config.model_capabilities import probe_model
+
+            llm_params = get_litellm_params()
+            if llm_params:
+                caps = probe_model(llm_params)
+                if caps.needs_schema_sanitization:
+                    from backend.config.llm import _install_schema_fix
+                    _install_schema_fix()
+    except Exception as exc:
+        logger.warning("Model probe in worker failed: %s", exc)
+
     # CORS
     app.add_middleware(
         CORSMiddleware,

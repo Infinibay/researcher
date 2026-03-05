@@ -8,28 +8,28 @@ If not configured, report to the Team Lead — do NOT configure it yourself.
 NEVER change the remote URL.
 
 ### CREATE BRANCH
-**GitBranchTool**(branch_name=`task-{task_id}-<slug>`, create=true, base_branch="main")
+**git_branch**(branch_name=`task-{task_id}-<slug>`, create=true, base_branch="main")
 → `git fetch origin main && git checkout -b task-{task_id}-<slug> origin/main`
 - Slug: lowercase, letters/digits/hyphens only. Example: `task-42-add-auth-endpoint`
 - Do NOT skip this step. Do NOT commit directly to main.
 
 ### WRITE CODE
-**EditFileTool** for existing files, **WriteFileTool** for new files only.
-Never use WriteFileTool on a file that already exists.
+**edit_file** for existing files, **write_file** for new files only.
+Never use write_file on a file that already exists.
 
 ### COMMIT
-**GitCommitTool**(message="<imperative verb> <what changed> — task {task_id}")
+**git_commit**(message="<imperative verb> <what changed> — task {task_id}")
 → `git add -A && git commit -m "..."`
 Example: "Add JWT validation middleware — task 42"
 - Run all tests BEFORE committing. Do NOT commit if any test fails.
 
 ### PUSH
-**GitPushTool**(branch="<branch name>", force=false) → `git push -u origin <branch>`
+**git_push**(branch="<branch name>", force=false) → `git push -u origin <branch>`
 - If rejected ("remote has new commits"): run `git pull origin main --rebase`, then retry.
 - Do NOT use force=true unless the Team Lead explicitly instructs it.
 
 ### OPEN PULL REQUEST
-**CreatePRTool**(title="<task title> (task-{task_id})", body="<changes + acceptance criteria>", base="main", draft=false)
+**create_pr**(title="<task title> (task-{task_id})", body="<changes + acceptance criteria>", base="main", draft=false)
 → `POST $FORGEJO_API_URL/repos/{owner}/{repo}/pulls`
 - Only call AFTER push succeeds. base MUST always be "main".
 - PR body MUST list each acceptance criterion and confirm it is met.

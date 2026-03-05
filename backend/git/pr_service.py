@@ -117,8 +117,9 @@ class PRService:
     ) -> bool:
         """Merge a pull request.
 
-        If ``FORGEJO_API_URL`` is set, calls the Forgejo merge API.
-        Otherwise performs a local ``git merge --no-ff``.
+        If ``FORGEJO_API_URL`` is set and the PR has a ``forgejo_pr_index``,
+        calls the Forgejo merge API.  Otherwise performs a local
+        ``git merge --no-ff``.
         Then marks the branch as merged and updates the PR status.
         """
         pr = self.get_pr(pr_id)
@@ -127,11 +128,12 @@ class PRService:
 
         branch = pr["branch"]
         repo_name = pr["repo_name"]
+        forgejo_index = pr.get("forgejo_pr_index")
 
         forgejo_url = os.environ.get("FORGEJO_API_URL")
-        if forgejo_url:
+        if forgejo_url and forgejo_index:
             owner_repo = self._resolve_owner_repo(pr.get("project_id"), repo_name)
-            self._forgejo_merge(forgejo_url, owner_repo, branch)
+            self._forgejo_merge(owner_repo, forgejo_index, merge_message)
         else:
             self._local_merge(repo_path, branch, merge_message)
 
@@ -231,23 +233,18 @@ class PRService:
         )
 
     @staticmethod
-    def _forgejo_merge(api_url: str, owner_repo: str, branch: str) -> None:
-        """Call the Forgejo merge API via subprocess curl.
+    def _forgejo_merge(
+        owner_repo: str,
+        pr_index: int,
+        merge_message: str | None = None,
+    ) -> None:
+        """Merge a PR via the Forgejo API.
 
-        *owner_repo* must be in ``{owner}/{repo}`` format.
+        Uses ``ForgejoClient.merge_pull_request`` which calls
+        ``POST /repos/{owner}/{repo}/pulls/{index}/merge``.
         """
-        token = os.environ.get("FORGEJO_TOKEN", "")
-        merge_url = f"{api_url}/repos/{owner_repo}/merge"
-        subprocess.run(
-            [
-                "curl", "-sf",
-                "-X", "POST",
-                "-H", f"Authorization: token {token}",
-                "-H", "Content-Type: application/json",
-                "-d", f'{{"head": "{branch}", "merge_message_field": "Merge {branch}"}}',
-                merge_url,
-            ],
-            check=True,
-            capture_output=True,
-            text=True,
+        from backend.git.forgejo_client import forgejo_client
+
+        forgejo_client.merge_pull_request(
+            owner_repo, pr_index, merge_message=merge_message,
         )

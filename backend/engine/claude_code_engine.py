@@ -20,14 +20,8 @@ from backend.engine.base import AgentEngine, AgentKilledError
 
 logger = logging.getLogger(__name__)
 
-# Per-role timeout settings attribute names
-_ROLE_TIMEOUT_SETTINGS: dict[str, str] = {
-    "developer": "CLAUDE_CODE_TIMEOUT_DEVELOPER",
-    "code_reviewer": "CLAUDE_CODE_TIMEOUT_CODE_REVIEWER",
-    "researcher": "CLAUDE_CODE_TIMEOUT_RESEARCHER",
-    "team_lead": "CLAUDE_CODE_TIMEOUT_TEAM_LEAD",
-    "project_lead": "CLAUDE_CODE_TIMEOUT_PROJECT_LEAD",
-}
+
+# No per-role timeouts — local models are too slow for hard limits.
 
 
 class ClaudeCodeEngine(AgentEngine):
@@ -43,6 +37,8 @@ class ClaudeCodeEngine(AgentEngine):
         guardrail_max_retries: int = 5,
         output_pydantic: type | None = None,
         task_tools: list | None = None,
+        event_id: int | None = None,
+        resume_state: dict | None = None,
     ) -> str:
         from backend.config.settings import settings
         from backend.security.pod_manager import pod_manager
@@ -54,9 +50,6 @@ class ClaudeCodeEngine(AgentEngine):
 
         # Build system prompt from the agent's backstory
         system_prompt = agent.backstory
-
-        # Resolve timeout for this agent's role
-        timeout = self._get_timeout(agent.role, settings)
 
         # Resolve pod environment variables
         pod_env = self._build_pod_env(agent, settings)
@@ -80,24 +73,17 @@ class ClaudeCodeEngine(AgentEngine):
         # Build the claude command
         claude_cmd = self._build_claude_command(user_prompt, settings)
 
-        # Execute Claude Code in the pod
+        # Execute Claude Code in the pod (no timeout — local models need time)
         logger.info(
-            "ClaudeCodeEngine: executing task for agent %s (role=%s, timeout=%ds)",
-            agent.agent_id, agent.role, timeout,
+            "ClaudeCodeEngine: executing task for agent %s (role=%s)",
+            agent.agent_id, agent.role,
         )
         result = pod_manager.exec_in_pod(
             agent.agent_id,
             claude_cmd,
             cwd=pod_manager.get_workdir(agent.agent_id),
             env=pod_env,
-            timeout=timeout,
         )
-
-        if result.timed_out:
-            raise TimeoutError(
-                f"Claude Code execution timed out after {timeout}s "
-                f"for agent {agent.agent_id}"
-            )
 
         if result.exit_code != 0:
             # Fatal exit codes — process was killed (shutdown or OOM)
@@ -123,7 +109,7 @@ class ClaudeCodeEngine(AgentEngine):
         if guardrail is not None:
             output = self._apply_guardrail(
                 agent, task_prompt, output, guardrail,
-                guardrail_max_retries, pod_env, timeout, settings,
+                guardrail_max_retries, pod_env, settings,
             )
 
         return output
@@ -131,13 +117,6 @@ class ClaudeCodeEngine(AgentEngine):
     def _build_user_prompt(self, description: str, expected_output: str) -> str:
         """Build the user prompt from task description and expected output."""
         return f"{description}\n\n## Expected Output\n{expected_output}"
-
-    def _get_timeout(self, role: str, settings: Any) -> int:
-        """Resolve the timeout for a given role."""
-        attr = _ROLE_TIMEOUT_SETTINGS.get(role)
-        if attr:
-            return getattr(settings, attr, settings.CLAUDE_CODE_TIMEOUT_DEFAULT)
-        return settings.CLAUDE_CODE_TIMEOUT_DEFAULT
 
     def _build_pod_env(self, agent: Any, settings: Any) -> dict[str, str]:
         """Build environment variables to inject into the pod."""
@@ -251,7 +230,6 @@ class ClaudeCodeEngine(AgentEngine):
         guardrail: Any,
         max_retries: int,
         pod_env: dict[str, str],
-        timeout: int,
         settings: Any,
     ) -> str:
         """Apply guardrail validation with retry loop."""
@@ -295,7 +273,7 @@ class ClaudeCodeEngine(AgentEngine):
                 result = pod_manager.exec_in_pod(
                     agent.agent_id, retry_cmd,
                     cwd=pod_manager.get_workdir(agent.agent_id),
-                    env=pod_env, timeout=timeout,
+                    env=pod_env,
                 )
             except RuntimeError as exc:
                 logger.warning(
