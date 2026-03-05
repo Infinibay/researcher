@@ -211,6 +211,16 @@ def ensure_migrations(db_path: str | None = None) -> None:
             )
             conn.commit()
             logger.info("Migration 13: added 'blocked' to tasks.status CHECK")
+
+        # Migration 14: expand developer_session_notes phase CHECK
+        if 14 not in applied:
+            _migrate_14_expand_session_note_phases(conn)
+            conn.execute(
+                "INSERT OR IGNORE INTO schema_migrations(version, name) "
+                "VALUES (14, 'expand_session_note_phases')"
+            )
+            conn.commit()
+            logger.info("Migration 14: expanded developer_session_notes phase CHECK")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()
@@ -595,6 +605,60 @@ def _migrate_13_add_blocked_status(conn: sqlite3.Connection) -> None:
             );
         END
     """)
+
+    conn.execute("PRAGMA foreign_keys = ON")
+
+
+def _migrate_14_expand_session_note_phases(conn: sqlite3.Connection) -> None:
+    """Rebuild developer_session_notes with expanded phase CHECK constraint.
+
+    Adds researcher phases: decomposing, searching, evaluating, synthesizing, reporting.
+    """
+    # Check if already migrated (idempotent)
+    try:
+        conn.execute(
+            "INSERT INTO developer_session_notes (task_id, agent_id, phase, notes_json) "
+            "VALUES (-1, '__migration_test__', 'searching', '{}')"
+        )
+        conn.execute(
+            "DELETE FROM developer_session_notes WHERE agent_id = '__migration_test__'"
+        )
+        return  # CHECK already allows researcher phases
+    except sqlite3.IntegrityError:
+        pass  # Need to rebuild
+
+    conn.commit()
+    conn.execute("PRAGMA foreign_keys = OFF")
+
+    conn.execute("""
+        CREATE TABLE developer_session_notes_new (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            task_id     INTEGER NOT NULL REFERENCES tasks(id) ON DELETE CASCADE,
+            agent_id    TEXT NOT NULL,
+            phase       TEXT NOT NULL
+                          CHECK(phase IN (
+                            'thinking', 'locating', 'implementing', 'testing',
+                            'decomposing', 'searching', 'evaluating', 'synthesizing', 'reporting'
+                          )),
+            notes_json  TEXT NOT NULL DEFAULT '{}',
+            last_file   TEXT,
+            updated_at  DATETIME DEFAULT CURRENT_TIMESTAMP,
+            UNIQUE(task_id, agent_id)
+        )
+    """)
+
+    conn.execute(
+        "INSERT INTO developer_session_notes_new "
+        "(id, task_id, agent_id, phase, notes_json, last_file, updated_at) "
+        "SELECT id, task_id, agent_id, phase, notes_json, last_file, updated_at "
+        "FROM developer_session_notes"
+    )
+
+    conn.execute("DROP TABLE developer_session_notes")
+    conn.execute("ALTER TABLE developer_session_notes_new RENAME TO developer_session_notes")
+
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_session_notes_task  ON developer_session_notes(task_id)")
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_session_notes_agent ON developer_session_notes(agent_id)")
 
     conn.execute("PRAGMA foreign_keys = ON")
 

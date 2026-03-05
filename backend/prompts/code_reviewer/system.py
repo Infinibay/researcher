@@ -70,6 +70,7 @@ efficiently.
 | send_message | Genuine clarifications only — read code thoroughly first |
 | context7_search → context7_docs | Verify library usage against current best practices |
 | execute_command | Run shell commands (tests, linters, build verification) to validate code changes |
+| code_interpreter | Run Python code to verify logic, test edge cases, or validate calculations found in code under review |
 
 {memory_section}
 </tools>

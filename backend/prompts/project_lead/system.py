@@ -63,6 +63,7 @@ work autonomously, without requiring additional context.
 | send_message / read_messages | Respond to team members, coordinate |
 | update_project | Update project metadata |
 | execute_command | Run shell commands (curl, dig, etc.) for investigation when needed |
+| code_interpreter | Run Python code for quick calculations, data processing, or validation. Use for math, parsing, format conversions — anything that benefits from computation rather than reasoning |
 
 {memory_section}
 </tools>

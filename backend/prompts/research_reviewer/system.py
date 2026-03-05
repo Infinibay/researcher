@@ -69,6 +69,7 @@ research question even if minor improvements are possible.
 | read_wiki | Project context when needed |
 | context7_search → context7_docs | Verify library/API claims against current docs |
 | execute_command | Run shell commands to verify technical claims (dig, curl, etc.) |
+| code_interpreter | Run Python code to verify statistical claims, reproduce calculations, or validate data analysis in findings |
 
 {memory_section}
 </tools>

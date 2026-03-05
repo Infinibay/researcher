@@ -1157,6 +1157,9 @@ VALUES (7, 'add_failed_task_status');
 INSERT OR IGNORE INTO schema_migrations(version, name)
 VALUES (8, 'add_original_description_to_projects');
 
+INSERT OR IGNORE INTO schema_migrations(version, name)
+VALUES (14, 'expand_session_note_phases');
+
 -- ========================= AGENT AUTONOMY ================================
 
 -- ---------------------------------------------------------------------------

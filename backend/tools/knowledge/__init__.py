@@ -8,6 +8,7 @@ from .write_wiki import WriteWikiTool
 from .write_report import WriteReportTool
 from .read_report import ReadReportTool
 from .search_knowledge import SearchKnowledgeTool
+from .search_wiki import SearchWikiTool
 from .summarize_findings import SummarizeFindingsTool
 
 __all__ = [
@@ -17,6 +18,7 @@ __all__ = [
     "ValidateFindingTool",
     "RejectFindingTool",
     "ReadWikiTool",
+    "SearchWikiTool",
     "WriteWikiTool",
     "WriteReportTool",
     "ReadReportTool",

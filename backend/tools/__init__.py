@@ -31,8 +31,8 @@ from backend.tools.rag import (
 )
 from backend.tools.knowledge import (
     RecordFindingTool, ReadFindingsTool, SearchFindingsTool,
-    ValidateFindingTool, RejectFindingTool, ReadWikiTool, WriteWikiTool,
-    WriteReportTool, ReadReportTool, SearchKnowledgeTool,
+    ValidateFindingTool, RejectFindingTool, ReadWikiTool, SearchWikiTool,
+    WriteWikiTool, WriteReportTool, ReadReportTool, SearchKnowledgeTool,
     SummarizeFindingsTool,
 )
 from backend.tools.project import (
@@ -82,8 +82,8 @@ CONTEXT7_TOOLS = [Context7SearchTool, Context7DocsTool]
 
 KNOWLEDGE_TOOLS = [
     RecordFindingTool, ReadFindingsTool, SearchFindingsTool,
-    ValidateFindingTool, RejectFindingTool, ReadWikiTool, WriteWikiTool,
-    WriteReportTool, ReadReportTool, SearchKnowledgeTool,
+    ValidateFindingTool, RejectFindingTool, ReadWikiTool, SearchWikiTool,
+    WriteWikiTool, WriteReportTool, ReadReportTool, SearchKnowledgeTool,
     SummarizeFindingsTool,
 ]
 
@@ -105,11 +105,11 @@ _ROLE_TOOLS = {
     "project_lead": (
         COMMUNICATION_TOOLS +
         [UpdateProjectTool, ReadReferenceFilesTool, CreateRepositoryTool] +
-        [ReadFindingsTool, SearchFindingsTool, ReadWikiTool, ReadReportTool] +
+        [ReadFindingsTool, SearchFindingsTool, ReadWikiTool, SearchWikiTool, ReadReportTool] +
         [WebSearchTool, WebFetchTool, ScrapeWebsitePabadaTool] +
         [MergePRTool] +
         [NL2SQLTool] +
-        [ExecuteCommandTool]
+        [ExecuteCommandTool, CodeInterpreterTool]
     ),
     "team_lead": (
         # Team Lead gets task management tools EXCEPT TakeTaskTool —
@@ -119,9 +119,9 @@ _ROLE_TOOLS = {
          SetTaskDependenciesTool, ApproveTaskTool, RejectTaskTool,
          ReadTaskHistoryTool, CheckDependenciesTool] +
         COMMUNICATION_TOOLS + FILE_TOOLS + GIT_TOOLS +
-        [ReadFindingsTool, SearchFindingsTool, ReadWikiTool] +
+        [ReadFindingsTool, SearchFindingsTool, ReadWikiTool, SearchWikiTool] +
         [CreateEpicTool, CreateMilestoneTool, ReadEpicsTool, ReadMilestonesTool] +
-        [WebSearchTool, ScrapeWebsitePabadaTool, ExecuteCommandTool] +
+        [WebSearchTool, ScrapeWebsitePabadaTool, ExecuteCommandTool, CodeInterpreterTool] +
         [NL2SQLTool]
     ),
     "developer": (
@@ -140,7 +140,7 @@ _ROLE_TOOLS = {
         [SendMessageTool, ReadMessagesTool, ReplyToUserTool] +
         [DirectorySearchTool] +
         CONTEXT7_TOOLS +
-        [ExecuteCommandTool]
+        [ExecuteCommandTool, CodeInterpreterTool]
     ),
     "researcher": (
         WEB_TOOLS + FILE_TOOLS + KNOWLEDGE_TOOLS +
@@ -153,13 +153,13 @@ _ROLE_TOOLS = {
     ),
     "research_reviewer": (
         [ValidateFindingTool, RejectFindingTool, ReadFindingsTool, SearchFindingsTool, SummarizeFindingsTool] +
-        [ReadWikiTool, ReadReportTool, SearchKnowledgeTool] +
+        [ReadWikiTool, SearchWikiTool, ReadReportTool, SearchKnowledgeTool] +
         [GetTaskTool, ReadTasksTool, ApproveTaskTool, RejectTaskTool, AddCommentTool, ReadCommentsTool] +
         [ReadTaskHistoryTool] +
         [SendMessageTool, ReadMessagesTool, ReplyToUserTool] +
         [PDFSearchTool] +
         CONTEXT7_TOOLS +
-        [ExecuteCommandTool]
+        [ExecuteCommandTool, CodeInterpreterTool]
     ),
 }
 
@@ -229,7 +229,8 @@ _TASK_TYPE_TOOLS: dict[str, list] = {
         [GetTaskTool, ReadTasksTool, ApproveTaskTool, RejectTaskTool, AddCommentTool, ReadCommentsTool] +
         [ReadTaskHistoryTool] +
         [SendMessageTool, ReadMessagesTool] +
-        [DirectorySearchTool] + CONTEXT7_TOOLS
+        [DirectorySearchTool] + CONTEXT7_TOOLS +
+        [CodeInterpreterTool]
     ),
     # Researcher investigating — needs web, knowledge, file, code interpreter
     "research": (
@@ -245,9 +246,9 @@ _TASK_TYPE_TOOLS: dict[str, list] = {
         [GetTaskTool, ReadTasksTool] +
         [ReadTaskHistoryTool, CheckDependenciesTool] +
         COMMUNICATION_TOOLS +
-        [ReadFindingsTool, SearchFindingsTool, ReadWikiTool] +
+        [ReadFindingsTool, SearchFindingsTool, ReadWikiTool, SearchWikiTool] +
         [ReadEpicsTool, ReadMilestonesTool] +
-        [WebSearchTool, ExecuteCommandTool, NL2SQLTool]
+        [WebSearchTool, ExecuteCommandTool, CodeInterpreterTool, NL2SQLTool]
     ),
     # Team Lead creating tickets — needs project management tools
     "create_tickets": (
@@ -256,14 +257,14 @@ _TASK_TYPE_TOOLS: dict[str, list] = {
         [ReadTaskHistoryTool, CheckDependenciesTool] +
         COMMUNICATION_TOOLS +
         [CreateEpicTool, CreateMilestoneTool, ReadEpicsTool, ReadMilestonesTool] +
-        [ReadFindingsTool, SearchFindingsTool, ReadWikiTool, ReadReportTool] +
-        [WebSearchTool, NL2SQLTool]
+        [ReadFindingsTool, SearchFindingsTool, ReadWikiTool, SearchWikiTool, ReadReportTool] +
+        [WebSearchTool, CodeInterpreterTool, NL2SQLTool]
     ),
     # Project Lead gathering requirements — needs communication, read access
     "requirements": (
         COMMUNICATION_TOOLS +
-        [ReadReferenceFilesTool, ReadFindingsTool, SearchFindingsTool, ReadWikiTool, ReadReportTool] +
-        [WebSearchTool, WebFetchTool, ScrapeWebsitePabadaTool, NL2SQLTool]
+        [ReadReferenceFilesTool, ReadFindingsTool, SearchFindingsTool, ReadWikiTool, SearchWikiTool, ReadReportTool] +
+        [WebSearchTool, WebFetchTool, ScrapeWebsitePabadaTool, CodeInterpreterTool, NL2SQLTool]
     ),
 }
 

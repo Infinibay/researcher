@@ -9,6 +9,7 @@ import { EmptyState } from '../common/EmptyState'
 import { Badge } from '../common/Badge'
 import { ConfirmDialog } from '../common/ConfirmDialog'
 import { STATUS_COLORS } from '../../utils/colors'
+import { MarkdownRenderer } from '../common/MarkdownRenderer'
 
 const statusVariant: Record<string, string> = {
   open: 'neutral',
@@ -160,6 +161,16 @@ export function EpicsPage() {
 
                 {isExpanded && (
                   <div className="border-t border-surface-700 p-4 space-y-4">
+                    {/* Description */}
+                    {epic.description && (
+                      <div>
+                        <h4 className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">Description</h4>
+                        <div className="text-sm text-slate-300">
+                          <MarkdownRenderer content={epic.description} />
+                        </div>
+                      </div>
+                    )}
+
                     {/* Milestones */}
                     <div>
                       <div className="flex items-center justify-between mb-2">

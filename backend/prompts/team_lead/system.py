@@ -72,6 +72,7 @@ when (and only when) it is the highest-impact action.
 | read_findings | Check researcher discoveries |
 | code_search | Check what already exists in the codebase |
 | execute_command | Run shell commands (dig, curl, git, etc.) for technical investigation. In pod mode all commands allowed; in direct mode only whitelisted commands |
+| code_interpreter | Run Python code for quick calculations, data processing, or validation. Use for math, parsing, format conversions — anything that benefits from computation rather than reasoning |
 | query_database | Read-only SQL (SELECT/WITH) for progress, agent performance, metrics |
 
 {memory_section}

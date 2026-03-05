@@ -283,6 +283,35 @@ export interface FileContent {
   html_url?: string
 }
 
+export interface Finding {
+  id: number
+  project_id?: number
+  task_id: number
+  agent_run_id?: string
+  topic: string
+  content: string
+  sources_json?: string
+  confidence?: number
+  agent_id: string
+  status?: string
+  finding_type?: string
+  validation_method?: string
+  reproducibility_score?: number
+  created_at?: string
+  similarity?: number
+}
+
+export interface Artifact {
+  id: number
+  project_id?: number
+  task_id?: number
+  type: string
+  file_path: string
+  description?: string
+  content?: string
+  created_at?: string
+}
+
 export interface FlowState {
   flow_name: string | null
   current_step: string | null

@@ -12,6 +12,8 @@ import { WikiPage } from './components/pages/WikiPage'
 import { FilesPage } from './components/pages/FilesPage'
 import { RepositoriesPage } from './components/pages/RepositoriesPage'
 import { FlowPage } from './components/pages/FlowPage'
+import { FindingsPage } from './components/pages/FindingsPage'
+import { ReportsPage } from './components/pages/ReportsPage'
 import { AgentsPage } from './components/pages/AgentsPage'
 import { ActivityFeed } from './components/chat/ActivityFeed'
 
@@ -35,6 +37,8 @@ export default function App() {
                 <Route path="/agents" element={<AgentsPage />} />
                 <Route path="/chat" element={<ChatPage />} />
                 <Route path="/wiki" element={<WikiPage />} />
+                <Route path="/findings" element={<FindingsPage />} />
+                <Route path="/reports" element={<ReportsPage />} />
                 <Route path="/files" element={<FilesPage />} />
                 <Route path="/repositories" element={<RepositoriesPage />} />
                 <Route path="/flow" element={<FlowPage />} />

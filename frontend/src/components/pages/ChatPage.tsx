@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useMemo } from 'react'
 import { useProjectStore } from '../../stores/project'
 import { useChatMessages, useSendMessage } from '../../hooks/useChat'
+import { useAgents } from '../../hooks/useAgents'
 import { usePendingUserRequests, useRespondToRequest } from '../../hooks/useUserRequests'
 import { LoadingSpinner } from '../common/LoadingSpinner'
 import { EmptyState } from '../common/EmptyState'
@@ -30,6 +31,16 @@ export function ChatPage() {
 
   const { data: allMessages, isLoading } = useChatMessages(projectId)
   const sendMessage = useSendMessage()
+  const { data: agentsData } = useAgents(projectId)
+
+  const agentDisplayName = useMemo(() => {
+    const map = new Map<string, string>()
+    for (const a of agentsData?.agents ?? []) {
+      const role = a.role.replace(/_/g, ' ')
+      map.set(a.agent_id, `${a.name} (${role})`)
+    }
+    return (agentId: string) => map.get(agentId) ?? agentId
+  }, [agentsData])
   const { data: pendingData } = usePendingUserRequests()
   const respondMutation = useRespondToRequest()
 
@@ -136,7 +147,7 @@ export function ChatPage() {
           }`}
         >
           {!isUser && (
-            <div className="mb-1 text-xs font-medium text-sky-400">{msg.from_agent}</div>
+            <div className="mb-1 text-xs font-medium text-sky-400">{agentDisplayName(msg.from_agent)}</div>
           )}
           <div className="text-sm">
             <MarkdownRenderer content={msg.message} />
@@ -209,7 +220,7 @@ export function ChatPage() {
               <div className="max-w-[75%] rounded-lg border border-amber-500/30 bg-amber-500/5 px-4 py-3">
                 <div className="mb-1 flex items-center gap-2">
                   <span className="text-xs font-medium text-amber-400">
-                    {pendingRequest.agent_id || 'Project Lead'}
+                    {pendingRequest.agent_id ? agentDisplayName(pendingRequest.agent_id) : 'Project Lead'}
                   </span>
                   <span className="rounded-full bg-amber-500/20 px-2 py-0.5 text-[10px] font-medium text-amber-300">
                     Waiting for your response
