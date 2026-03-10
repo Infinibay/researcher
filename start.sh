@@ -366,6 +366,27 @@ export INFINIBAY_DB="$DB_PATH"
 # Sandbox — defaults to false for local dev; override in .env
 export INFINIBAY_SANDBOX_ENABLED="${INFINIBAY_SANDBOX_ENABLED:-false}"
 
+# Auto-build sandbox image if sandbox is enabled and image doesn't exist
+if [ "$INFINIBAY_SANDBOX_ENABLED" = "true" ]; then
+    RUNTIME=""
+    if command -v podman &>/dev/null; then
+        RUNTIME="podman"
+    elif command -v docker &>/dev/null; then
+        RUNTIME="docker"
+    fi
+    if [ -n "$RUNTIME" ]; then
+        if ! $RUNTIME image exists infinibay-sandbox:latest 2>/dev/null; then
+            step "Building sandbox image (first time)"
+            $RUNTIME build -t infinibay-sandbox:latest -f Containerfile.sandbox . || die "Failed to build sandbox image"
+            ok "infinibay-sandbox:latest built"
+        else
+            ok "Sandbox image exists"
+        fi
+    else
+        warn "Sandbox enabled but no container runtime (podman/docker) found"
+    fi
+fi
+
 # RAG storage in local data dir
 export INFINIBAY_RAG_PERSIST_DIR="$DB_DIR/.chromadb"
 

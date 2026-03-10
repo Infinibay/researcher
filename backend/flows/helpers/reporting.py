@@ -181,7 +181,6 @@ def build_crew(
     """
     from crewai import Crew, Task
 
-    from backend.config.settings import settings
     from backend.knowledge.service import KnowledgeService
 
     memory_kwargs = KnowledgeService.build_crew_memory_kwargs()
@@ -210,7 +209,7 @@ def build_crew(
         agents=[agent.crewai_agent],
         tasks=[Task(**task_kwargs)],
         verbose=verbose,
-        max_rpm=settings.CREW_MAX_RPM,
+        max_rpm=30,
         **memory_kwargs,
     )
 

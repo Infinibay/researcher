@@ -5,7 +5,6 @@ from __future__ import annotations
 from typing import Any
 
 from backend.agents.base import InfinibayAgent
-from backend.config.settings import settings
 from backend.prompts.project_lead.system import build_system_prompt
 
 
@@ -31,7 +30,6 @@ def create_project_lead_agent(
             agent_name=agent_name,
             agent_id=agent_id,
             teammates=teammates,
-            engine=settings.AGENT_ENGINE,
         ),
         project_id=project_id,
         allow_delegation=False,

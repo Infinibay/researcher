@@ -1364,9 +1364,7 @@ class TestEngineFactory:
         from backend.engine import get_engine, reset_engine
 
         reset_engine()
-        with patch("backend.config.settings.settings") as mock_settings:
-            mock_settings.AGENT_ENGINE = "loop"
-            engine = get_engine()
+        engine = get_engine()
 
         from backend.engine.loop_engine import LoopEngine
         assert isinstance(engine, LoopEngine)

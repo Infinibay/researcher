@@ -101,12 +101,6 @@ def probe_model(llm_params: dict[str, Any]) -> ModelCapabilities:
     """
     global _capabilities
 
-    from backend.config.settings import settings
-
-    if not settings.MODEL_PROBE_ENABLED:
-        logger.info("Model probe disabled (INFINIBAY_MODEL_PROBE_ENABLED=false)")
-        return _capabilities
-
     caps = ModelCapabilities()
     start = time.monotonic()
 

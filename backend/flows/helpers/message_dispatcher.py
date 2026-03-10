@@ -5,7 +5,7 @@ from __future__ import annotations
 import logging
 import sqlite3
 
-from backend.config.settings import settings
+
 from backend.engine.base import AgentKilledError as _AgentKilledError
 
 logger = logging.getLogger(__name__)
@@ -129,36 +129,20 @@ def _build_enriched_description(
         logger.debug("Could not build conversation context", exc_info=True)
 
     # ── 4. Original instruction ──────────────────────────────────────────
-    # Adapt tool names for the active engine
-    is_claude_code = settings.AGENT_ENGINE == "claude_code"
-
     if from_agent == "user":
-        if is_claude_code:
-            tool_name = "mcp__infinibay__chat-send"
-            reply_instruction = (
-                f"You MUST reply using the `{tool_name}` tool with "
-                f'`to_agent="user"` and your response as the `message` parameter'
-            )
-            if thread_id:
-                reply_instruction += f' (thread context: "{thread_id}")'
-        else:
-            tool_name = "reply_to_user"
-            reply_instruction = (
-                "You MUST reply using the `reply_to_user` tool with your response "
-                "as the `message` parameter"
-            )
-            if thread_id:
-                reply_instruction += f' and `thread_id="{thread_id}"`'
+        tool_name = "reply_to_user"
+        reply_instruction = (
+            "You MUST reply using the `reply_to_user` tool with your response "
+            "as the `message` parameter"
+        )
+        if thread_id:
+            reply_instruction += f' and `thread_id="{thread_id}"`'
         reply_instruction += (
             ". Your reply must contain useful, actionable information — "
             "not just an acknowledgment. Do NOT write your answer as plain text."
         )
     else:
-        if is_claude_code:
-            tool_name = "mcp__infinibay__chat-send"
-        else:
-            tool_name = "send_message"
-
+        tool_name = "send_message"
         reply_instruction = (
             f"Decide whether this message requires a response.\n\n"
             f"**Do NOT reply if:**\n"
@@ -223,11 +207,7 @@ def dispatch_message(
         )
 
         from backend.engine import get_engine
-        reply_tool = (
-            "mcp__infinibay__chat-send"
-            if settings.AGENT_ENGINE == "claude_code"
-            else "send_message"
-        )
+        reply_tool = "send_message"
         if from_agent == "user":
             expected = (
                 f"Confirmation that you called the `{reply_tool}` tool to reply. "

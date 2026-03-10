@@ -71,9 +71,6 @@ class KnowledgeService:
 
         When disabled, returns ``{"memory": False}``.
         """
-        if not settings.MEMORY_ENABLED:
-            return {"memory": False}
-
         from crewai import Memory
         from backend.config.llm import get_llm
 
@@ -95,7 +92,7 @@ class KnowledgeService:
             recency_half_life_days=14,
             # Recall thresholds
             confidence_threshold_high=0.8,
-            confidence_threshold_low=settings.MEMORY_SCORE_THRESHOLD,
+            confidence_threshold_low=0.35,
         )
         return {"memory": memory}
 

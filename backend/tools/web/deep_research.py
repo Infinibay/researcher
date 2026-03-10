@@ -227,8 +227,8 @@ class DeepWebResearchTool(InfinibayBaseTool):
             llm_params = get_litellm_params()
             if llm_params is None:
                 return self._error(
-                    "No LLM configured for synthesis (AGENT_ENGINE=claude_code "
-                    "without ANTHROPIC_API_KEY). Use WebSearch + manual analysis."
+                    "No LLM configured for synthesis. "
+                    "Ensure INFINIBAY_LLM_MODEL is set. Use WebSearch + manual analysis."
                 )
             response = litellm.completion(
                 **llm_params,
@@ -288,8 +288,8 @@ class DeepWebResearchTool(InfinibayBaseTool):
             llm_params = get_litellm_params()
             if llm_params is None:
                 return self._error(
-                    "No LLM configured for synthesis (AGENT_ENGINE=claude_code "
-                    "without ANTHROPIC_API_KEY). Use WebSearch + manual analysis."
+                    "No LLM configured for synthesis. "
+                    "Ensure INFINIBAY_LLM_MODEL is set. Use WebSearch + manual analysis."
                 )
             response = await litellm.acompletion(
                 **llm_params,

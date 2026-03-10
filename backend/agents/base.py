@@ -54,8 +54,7 @@ class InfinibayAgent:
         self.backstory = backstory
         self.project_id = project_id
 
-        from backend.config.settings import settings
-        self._engine_type = settings.AGENT_ENGINE
+        self._engine_type = "loop"
 
         # Resolve tools for the role, plus optional extras
         from backend.tools import get_tools_for_role
