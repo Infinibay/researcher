@@ -8,7 +8,7 @@ from typing import Type
 from pydantic import BaseModel, Field
 
 from backend.config.settings import settings
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 
 logger = logging.getLogger(__name__)
 
@@ -73,10 +73,10 @@ class NL2SQLInput(BaseModel):
     )
 
 
-class NL2SQLTool(PabadaBaseTool):
+class NL2SQLTool(InfinibayBaseTool):
     name: str = "query_database"
     description: str = (
-        "Execute a read-only SQL query against the PABADA project database. "
+        "Execute a read-only SQL query against the INFINIBAY project database. "
         "Only SELECT and WITH (CTE) statements are allowed. Use this for "
         "analytics: task progress, agent performance, finding statistics, "
         "project health metrics, etc.\n\n" + _SCHEMA_DESCRIPTION

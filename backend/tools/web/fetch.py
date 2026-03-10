@@ -7,7 +7,7 @@ from typing import Literal, Type
 from pydantic import BaseModel, Field
 
 from backend.config.settings import settings
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 from backend.tools.web.rate_limiter import web_rate_limiter
 from backend.tools.web.robots_checker import robots_checker
@@ -24,7 +24,7 @@ class WebFetchInput(BaseModel):
     )
 
 
-class WebFetchTool(PabadaBaseTool):
+class WebFetchTool(InfinibayBaseTool):
     name: str = "web_fetch"
     description: str = (
         "Fetch and extract readable content from a URL. "
@@ -90,7 +90,7 @@ class WebFetchTool(PabadaBaseTool):
             )
 
         # Check robots.txt
-        if not robots_checker.is_allowed(url, "PabadaBot/2.0"):
+        if not robots_checker.is_allowed(url, "InfinibayBot/2.0"):
             return self._error("robots.txt disallows fetching this URL")
 
         # Rate limit
@@ -101,7 +101,7 @@ class WebFetchTool(PabadaBaseTool):
             with httpx.Client(
                 timeout=settings.WEB_TIMEOUT,
                 follow_redirects=True,
-                headers={"User-Agent": "Mozilla/5.0 (compatible; PabadaBot/2.0)"},
+                headers={"User-Agent": "Mozilla/5.0 (compatible; InfinibayBot/2.0)"},
             ) as client:
                 response = client.get(url)
                 response.raise_for_status()
@@ -149,7 +149,7 @@ class WebFetchTool(PabadaBaseTool):
             return self._error(f"Missing dependency: {e}")
 
         # Check robots.txt
-        if not await robots_checker.is_allowed_async(url, "PabadaBot/2.0"):
+        if not await robots_checker.is_allowed_async(url, "InfinibayBot/2.0"):
             return self._error("robots.txt disallows fetching this URL")
 
         # Rate limit
@@ -159,7 +159,7 @@ class WebFetchTool(PabadaBaseTool):
             async with httpx.AsyncClient(
                 timeout=settings.WEB_TIMEOUT,
                 follow_redirects=True,
-                headers={"User-Agent": "Mozilla/5.0 (compatible; PabadaBot/2.0)"},
+                headers={"User-Agent": "Mozilla/5.0 (compatible; InfinibayBot/2.0)"},
             ) as client:
                 response = await client.get(url)
                 response.raise_for_status()

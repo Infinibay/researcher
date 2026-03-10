@@ -1,4 +1,4 @@
-"""Inter-agent messaging helpers for PABADA flows."""
+"""Inter-agent messaging helpers for INFINIBAY flows."""
 
 from __future__ import annotations
 

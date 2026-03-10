@@ -8,7 +8,7 @@ from typing import Type
 from pydantic import BaseModel, Field
 
 from backend.config.settings import settings
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.rag.base import (
     _chunk_text,
     embed_and_store,
@@ -37,7 +37,7 @@ class DirectorySearchInput(BaseModel):
     )
 
 
-class DirectorySearchTool(PabadaBaseTool):
+class DirectorySearchTool(InfinibayBaseTool):
     name: str = "directory_search"
     description: str = (
         "Search across all files in a directory using semantic similarity. "

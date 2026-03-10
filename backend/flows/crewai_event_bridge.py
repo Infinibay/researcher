@@ -1,4 +1,4 @@
-"""Bridge between CrewAI's internal event system and PABADA's EventBus.
+"""Bridge between CrewAI's internal event system and INFINIBAY's EventBus.
 
 CrewAI emits fine-grained events for agent execution, tool usage, LLM calls,
 and flow lifecycle. This module registers a single ``BaseEventListener`` that
@@ -40,8 +40,8 @@ from crewai.events.event_types import (
 logger = logging.getLogger(__name__)
 
 
-class PabadaCrewAIEventBridge(CrewAIBaseEventListener):
-    """Bridges CrewAI events into PABADA's EventBus.
+class InfinibayCrewAIEventBridge(CrewAIBaseEventListener):
+    """Bridges CrewAI events into INFINIBAY's EventBus.
 
     Relays agent execution, tool usage, LLM calls, and flow lifecycle
     events so they appear in the WebSocket activity feed.
@@ -167,10 +167,10 @@ class PabadaCrewAIEventBridge(CrewAIBaseEventListener):
                 "flow": str(getattr(event, "flow_name", "unknown")),
             })
 
-        logger.info("PabadaCrewAIEventBridge: registered all CrewAI event handlers")
+        logger.info("InfinibayCrewAIEventBridge: registered all CrewAI event handlers")
 
     def _emit(self, event_type: str, data: dict[str, Any]) -> None:
-        """Emit a CrewAI event to the PABADA EventBus."""
+        """Emit a CrewAI event to the INFINIBAY EventBus."""
         try:
             from backend.flows.event_listeners import FlowEvent, event_bus
 
@@ -184,22 +184,22 @@ class PabadaCrewAIEventBridge(CrewAIBaseEventListener):
             ))
         except Exception:
             logger.debug(
-                "PabadaCrewAIEventBridge: could not emit %s", event_type,
+                "InfinibayCrewAIEventBridge: could not emit %s", event_type,
                 exc_info=True,
             )
 
 
 # Module-level instance — must stay alive to avoid GC of listeners
-_bridge_instance: PabadaCrewAIEventBridge | None = None
+_bridge_instance: InfinibayCrewAIEventBridge | None = None
 
 
 def register_crewai_event_bridge() -> None:
-    """Instantiate and register the CrewAI → PABADA event bridge.
+    """Instantiate and register the CrewAI → INFINIBAY event bridge.
 
     Safe to call multiple times; only the first call creates the bridge.
     """
     global _bridge_instance
     if _bridge_instance is not None:
         return
-    _bridge_instance = PabadaCrewAIEventBridge()
+    _bridge_instance = InfinibayCrewAIEventBridge()
     logger.info("CrewAI event bridge registered")

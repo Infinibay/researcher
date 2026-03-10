@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 
@@ -14,7 +14,7 @@ class RejectFindingInput(BaseModel):
     reason: str = Field(..., description="Reason for rejection")
 
 
-class RejectFindingTool(PabadaBaseTool):
+class RejectFindingTool(InfinibayBaseTool):
     name: str = "reject_finding"
     description: str = (
         "Reject a research finding, changing its status to 'superseded'. "

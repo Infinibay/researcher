@@ -1,6 +1,6 @@
 """Internal API endpoints for agent pods.
 
-These endpoints are called by the ``pabada`` CLI and the PABADA MCP server
+These endpoints are called by the ``infinibay`` CLI and the INFINIBAY MCP server
 running inside sandbox containers, providing access to host-side DB
 operations that agents need but cannot perform directly from their pod.
 """
@@ -485,7 +485,7 @@ async def create_pr(req: CreatePRRequest):
     if not repo_name:
         return {"error": f"No active repository found for project {req.project_id}"}
 
-    owner = settings.FORGEJO_OWNER or "pabada"
+    owner = settings.FORGEJO_OWNER or "infinibay"
 
     # Create PR via Forgejo API
     forgejo_url = f"{settings.FORGEJO_API_URL}/repos/{owner}/{repo_name}/pulls"

@@ -1,4 +1,4 @@
-"""Centralized LLM configuration for PABADA.
+"""Centralized LLM configuration for Infinibay.
 
 Single source of truth: reads from ``settings.LLM_MODEL``, ``settings.LLM_API_KEY``,
 and ``settings.LLM_BASE_URL``.  Creates a ``crewai.LLM`` singleton used by all agents,
@@ -72,7 +72,7 @@ def get_llm() -> Any:
         model = settings.LLM_MODEL
         if not model:
             raise RuntimeError(
-                "PABADA_LLM_MODEL is not set. "
+                "INFINIBAY_LLM_MODEL is not set. "
                 "Set it in .env or as an environment variable."
             )
 
@@ -83,7 +83,7 @@ def get_llm() -> Any:
 
         # Only pass base_url for non-native providers (e.g. Ollama, vLLM)
         # or when explicitly set for local providers (llama-server, etc.)
-        is_local = os.environ.get("PABADA_LLM_PROVIDER", "") == "local"
+        is_local = os.environ.get("INFINIBAY_LLM_PROVIDER", "") == "local"
         if settings.LLM_BASE_URL and (not _is_native_provider(model) or is_local):
             kwargs["base_url"] = settings.LLM_BASE_URL
 
@@ -177,33 +177,20 @@ def get_litellm_params() -> dict[str, Any] | None:
     Used by callers that invoke litellm directly (e.g. chat summarization,
     deep research synthesis).
 
-    When ``AGENT_ENGINE=claude_code``, returns ``None`` — agents already
-    have built-in summarization and synthesis capabilities via Claude Code,
-    so auxiliary LiteLLM calls are unnecessary.  Callers should fall back
-    to non-LLM logic (raw messages, simple truncation, etc.).
-
-    When ``AGENT_ENGINE=crewai``, uses ``LLM_MODEL`` / ``LLM_API_KEY``
-    as before.
+    Uses ``LLM_MODEL`` / ``LLM_API_KEY`` from settings.
     """
     from backend.config.settings import settings
 
-    if settings.AGENT_ENGINE == "claude_code":
-        logger.debug(
-            "AGENT_ENGINE=claude_code — skipping auxiliary LiteLLM call "
-            "(agents handle summarization natively)"
-        )
-        return None
-
     model = settings.LLM_MODEL
     if not model:
-        raise RuntimeError("PABADA_LLM_MODEL is not set.")
+        raise RuntimeError("INFINIBAY_LLM_MODEL is not set.")
 
     params: dict[str, Any] = {"model": model}
 
     if settings.LLM_API_KEY:
         params["api_key"] = settings.LLM_API_KEY
 
-    is_local = os.environ.get("PABADA_LLM_PROVIDER", "") == "local"
+    is_local = os.environ.get("INFINIBAY_LLM_PROVIDER", "") == "local"
     if settings.LLM_BASE_URL and (not _is_native_provider(model) or is_local):
         params["api_base"] = settings.LLM_BASE_URL
 
@@ -213,7 +200,7 @@ def get_litellm_params() -> dict[str, Any] | None:
 def validate_function_calling() -> None:
     """Check if the configured model supports function calling and warn if not.
 
-    PABADA agents require tool/function calling to operate — without it,
+    INFINIBAY agents require tool/function calling to operate — without it,
     agents respond with text but never invoke tools.
     """
     from backend.config.settings import settings
@@ -230,7 +217,7 @@ def validate_function_calling() -> None:
         else:
             logger.warning(
                 "LLM model '%s' does NOT support function calling! "
-                "PABADA agents will be unable to use tools (read files, "
+                "INFINIBAY agents will be unable to use tools (read files, "
                 "create tasks, search code, etc.). "
                 "Consider switching to a model that supports function calling "
                 "(e.g., deepseek/deepseek-chat, gemini/gemini-2.0-flash, "

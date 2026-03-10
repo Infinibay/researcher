@@ -6,7 +6,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.rag.base import validate_path_in_sandbox
 
 logger = logging.getLogger(__name__)
@@ -17,7 +17,7 @@ class JSONSearchInput(BaseModel):
     json_path: str = Field(..., description="Absolute path to the JSON file")
 
 
-class JSONSearchPabadaTool(PabadaBaseTool):
+class JSONSearchInfinibayTool(InfinibayBaseTool):
     name: str = "json_search"
     description: str = (
         "Search within JSON files using semantic RAG. "

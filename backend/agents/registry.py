@@ -7,7 +7,7 @@ import sqlite3
 import uuid
 from typing import Any
 
-from backend.agents.base import PabadaAgent
+from backend.agents.base import InfinibayAgent
 from backend.prompts.team import generate_agent_name
 from backend.tools.base.db import execute_with_retry
 
@@ -168,7 +168,7 @@ def initialize_project_team(
     """Create and register the full agent team for a project.
 
     Registers agents in the roster so they show up immediately in the UI.
-    Does NOT instantiate full PabadaAgent objects (which need an LLM) — only
+    Does NOT instantiate full InfinibayAgent objects (which need an LLM) — only
     creates roster entries with names, roles, and idle status.
 
     Returns the list of created roster entries.
@@ -236,8 +236,8 @@ def get_agent_by_role(
     llm: Any | None = None,
     knowledge_service: Any | None = None,
     tech_hints: list[str] | None = None,
-) -> PabadaAgent:
-    """Return a ``PabadaAgent`` for *role*, creating and registering it if needed.
+) -> InfinibayAgent:
+    """Return a ``InfinibayAgent`` for *role*, creating and registering it if needed.
 
     If *agent_id* is ``None`` a deterministic id is generated from the role
     and project.  For single-instance roles this is ``{role}_p{project_id}``.
@@ -279,7 +279,7 @@ def get_agent_by_role(
     if role in _ROLES_WITH_TECH and tech_hints is not None:
         kwargs["tech_hints"] = tech_hints
 
-    agent: PabadaAgent = factory(agent_id, project_id, **kwargs)
+    agent: InfinibayAgent = factory(agent_id, project_id, **kwargs)
     agent.register_in_roster()
     return agent
 
@@ -291,7 +291,7 @@ def get_available_agent_by_role(
     llm: Any | None = None,
     knowledge_service: Any | None = None,
     tech_hints: list[str] | None = None,
-) -> PabadaAgent:
+) -> InfinibayAgent:
     """Return an idle agent of the given *role*, or create a default one.
 
     For multi-instance roles (developer, researcher, etc.) picks the agent
@@ -325,8 +325,8 @@ def get_all_agents(
     project_id: int,
     *,
     llm: Any | None = None,
-) -> dict[str, PabadaAgent]:
-    """Return a dict ``{role: PabadaAgent}`` with one agent per role."""
+) -> dict[str, InfinibayAgent]:
+    """Return a dict ``{role: InfinibayAgent}`` with one agent per role."""
     return {
         role: get_agent_by_role(role, project_id, llm=llm)
         for role in VALID_ROLES

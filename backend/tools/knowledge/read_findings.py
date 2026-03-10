@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry, sanitize_fts5_query
 
 
@@ -35,7 +35,7 @@ class ReadFindingsInput(BaseModel):
     limit: int = Field(default=50, ge=1, le=200, description="Max results")
 
 
-class ReadFindingsTool(PabadaBaseTool):
+class ReadFindingsTool(InfinibayBaseTool):
     name: str = "read_findings"
     description: str = (
         "Read and search research findings. Supports full-text search "

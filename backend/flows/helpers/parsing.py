@@ -1,4 +1,4 @@
-"""Parsing helpers for PABADA flows — review results, plans, ideas."""
+"""Parsing helpers for INFINIBAY flows — review results, plans, ideas."""
 
 from __future__ import annotations
 

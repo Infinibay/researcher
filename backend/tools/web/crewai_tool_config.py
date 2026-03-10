@@ -1,6 +1,6 @@
 """Configuration helper for crewai_tools RAG-based tools.
 
-Maps PABADA settings (embedding provider/model, LLM model) to the config
+Maps INFINIBAY settings (embedding provider/model, LLM model) to the config
 dict format that crewai_tools' RAG-based tools expect (CodeDocsSearchTool,
 DOCXSearchTool, JSONSearchTool, XMLSearchTool, etc.).
 """
@@ -14,7 +14,7 @@ from backend.config.settings import settings
 
 logger = logging.getLogger(__name__)
 
-# Map PABADA embedding providers to crewai_tools provider names
+# Map INFINIBAY embedding providers to crewai_tools provider names
 _PROVIDER_MAP = {
     "openai": "openai",
     "ollama": "ollama",

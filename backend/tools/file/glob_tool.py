@@ -9,7 +9,7 @@ from typing import Type
 from pydantic import BaseModel, Field
 
 from backend.config.settings import settings
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 
 
 class GlobInput(BaseModel):
@@ -47,7 +47,7 @@ class GlobInput(BaseModel):
     )
 
 
-class GlobTool(PabadaBaseTool):
+class GlobTool(InfinibayBaseTool):
     name: str = "glob"
     description: str = (
         "Find files by name pattern (glob) with optional content filtering. "
@@ -163,7 +163,7 @@ class GlobTool(PabadaBaseTool):
         case_sensitive: bool,
         max_results: int,
     ) -> str:
-        """Glob via pabada-file-helper inside the pod."""
+        """Glob via infinibay-file-helper inside the pod."""
         req = {
             "op": "glob",
             "pattern": pattern,
@@ -176,7 +176,7 @@ class GlobTool(PabadaBaseTool):
 
         try:
             result = self._exec_in_pod(
-                ["pabada-file-helper"],
+                ["infinibay-file-helper"],
                 stdin_data=json.dumps(req),
             )
         except RuntimeError as e:

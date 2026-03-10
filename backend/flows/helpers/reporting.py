@@ -1,4 +1,4 @@
-"""Reporting and agent execution helpers for PABADA flows."""
+"""Reporting and agent execution helpers for INFINIBAY flows."""
 
 from __future__ import annotations
 
@@ -170,7 +170,7 @@ def build_crew(
     guardrail_max_retries: int = 5,
     task_tools: list | None = None,
 ) -> Any:
-    """Build a Crew with a single agent and task, applying PABADA defaults.
+    """Build a Crew with a single agent and task, applying INFINIBAY defaults.
 
     Centralizes Crew+Task construction so that ``max_rpm``, guardrails,
     ``output_pydantic``, and task-specific tools are configured consistently
@@ -234,7 +234,7 @@ def run_agent_task(
     (optionally) complete agent_run.
 
     Args:
-        agent: A ``PabadaAgent`` instance (caller is responsible for acquisition).
+        agent: A ``InfinibayAgent`` instance (caller is responsible for acquisition).
         task_prompt: ``(description, expected_output)`` tuple from a prompt function.
         task_id: Passed to ``activate_context`` for tool-level context.
         track_run: If True, calls ``create_agent_run`` / ``complete_agent_run``.

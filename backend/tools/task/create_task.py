@@ -6,7 +6,7 @@ from typing import Literal, Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 TASK_TYPES = (
@@ -27,7 +27,7 @@ class CreateTaskInput(BaseModel):
     depends_on: list[int] = Field(default_factory=list, description="List of task IDs this depends on")
 
 
-class CreateTaskTool(PabadaBaseTool):
+class CreateTaskTool(InfinibayBaseTool):
     name: str = "create_task"
     description: str = (
         "Create a new task in the project. "

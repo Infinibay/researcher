@@ -10,7 +10,7 @@ from typing import Type
 from pydantic import BaseModel, Field
 
 from backend.config.settings import settings
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 
@@ -38,7 +38,7 @@ class EditFileInput(BaseModel):
     )
 
 
-class EditFileTool(PabadaBaseTool):
+class EditFileTool(InfinibayBaseTool):
     name: str = "edit_file"
     description: str = (
         "Make a surgical edit to an existing file by replacing a specific "
@@ -130,7 +130,7 @@ class EditFileTool(PabadaBaseTool):
         # Atomic write
         try:
             dir_name = os.path.dirname(path)
-            fd, tmp_path = tempfile.mkstemp(dir=dir_name, prefix=".pabada_")
+            fd, tmp_path = tempfile.mkstemp(dir=dir_name, prefix=".infinibay_")
             try:
                 with os.fdopen(fd, "w", encoding="utf-8") as f:
                     f.write(new_content)
@@ -177,7 +177,7 @@ class EditFileTool(PabadaBaseTool):
     def _run_in_pod(
         self, path: str, old_string: str, new_string: str, replace_all: bool,
     ) -> str:
-        """Edit file via pabada-file-helper inside the pod."""
+        """Edit file via infinibay-file-helper inside the pod."""
         req = {
             "op": "edit",
             "path": path,
@@ -188,7 +188,7 @@ class EditFileTool(PabadaBaseTool):
 
         try:
             result = self._exec_in_pod(
-                ["pabada-file-helper"],
+                ["infinibay-file-helper"],
                 stdin_data=json.dumps(req),
             )
         except RuntimeError as e:

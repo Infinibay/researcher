@@ -1,4 +1,4 @@
-"""PABADA Tool Registry - exports all tools organized by category."""
+"""INFINIBAY Tool Registry - exports all tools organized by category."""
 
 from backend.tools.file import (
     ReadFileTool, WriteFileTool, EditFileTool,
@@ -21,13 +21,13 @@ from backend.tools.communication import (
 )
 from backend.tools.web import (
     WebSearchTool, WebFetchTool, ReadPaperTool, DeepWebResearchTool,
-    ScrapeWebsitePabadaTool, SpiderScrapeTool, CodeDocsSearchPabadaTool,
+    ScrapeWebsiteInfinibayTool, SpiderScrapeTool, CodeDocsSearchInfinibayTool,
 )
 from backend.tools.shell import ExecuteCommandTool, CodeInterpreterTool
 from backend.tools.data import NL2SQLTool
 from backend.tools.rag import (
     PDFSearchTool, DirectorySearchTool, CSVSearchTool,
-    DOCXSearchPabadaTool, JSONSearchPabadaTool, XMLSearchPabadaTool,
+    DOCXSearchInfinibayTool, JSONSearchInfinibayTool, XMLSearchInfinibayTool,
 )
 from backend.tools.knowledge import (
     RecordFindingTool, ReadFindingsTool, SearchFindingsTool,
@@ -66,7 +66,7 @@ COMMUNICATION_TOOLS = [
 
 WEB_TOOLS = [
     WebSearchTool, WebFetchTool, ReadPaperTool, DeepWebResearchTool,
-    ScrapeWebsitePabadaTool, SpiderScrapeTool, CodeDocsSearchPabadaTool,
+    ScrapeWebsiteInfinibayTool, SpiderScrapeTool, CodeDocsSearchInfinibayTool,
 ]
 
 SHELL_TOOLS = [ExecuteCommandTool, CodeInterpreterTool]
@@ -75,7 +75,7 @@ DATA_TOOLS = [NL2SQLTool]
 
 RAG_TOOLS = [
     PDFSearchTool, DirectorySearchTool, CSVSearchTool,
-    DOCXSearchPabadaTool, JSONSearchPabadaTool, XMLSearchPabadaTool,
+    DOCXSearchInfinibayTool, JSONSearchInfinibayTool, XMLSearchInfinibayTool,
 ]
 
 CONTEXT7_TOOLS = [Context7SearchTool, Context7DocsTool]
@@ -106,7 +106,7 @@ _ROLE_TOOLS = {
         COMMUNICATION_TOOLS +
         [UpdateProjectTool, ReadReferenceFilesTool, CreateRepositoryTool] +
         [ReadFindingsTool, SearchFindingsTool, ReadWikiTool, SearchWikiTool, ReadReportTool] +
-        [WebSearchTool, WebFetchTool, ScrapeWebsitePabadaTool] +
+        [WebSearchTool, WebFetchTool, ScrapeWebsiteInfinibayTool] +
         [MergePRTool] +
         [NL2SQLTool] +
         [ExecuteCommandTool, CodeInterpreterTool]
@@ -121,7 +121,7 @@ _ROLE_TOOLS = {
         COMMUNICATION_TOOLS + FILE_TOOLS + GIT_TOOLS +
         [ReadFindingsTool, SearchFindingsTool, ReadWikiTool, SearchWikiTool] +
         [CreateEpicTool, CreateMilestoneTool, ReadEpicsTool, ReadMilestonesTool] +
-        [WebSearchTool, ScrapeWebsitePabadaTool, ExecuteCommandTool, CodeInterpreterTool] +
+        [WebSearchTool, ScrapeWebsiteInfinibayTool, ExecuteCommandTool, CodeInterpreterTool] +
         [NL2SQLTool]
     ),
     "developer": (
@@ -130,7 +130,7 @@ _ROLE_TOOLS = {
         [SaveSessionNoteTool, LoadSessionNoteTool, ReadTaskHistoryTool, CheckDependenciesTool] +
         [SendMessageTool, ReadMessagesTool, AskTeamLeadTool, ReplyToUserTool] +
         [WebSearchTool, WebFetchTool] +
-        [DirectorySearchTool, CodeDocsSearchPabadaTool] +
+        [DirectorySearchTool, CodeDocsSearchInfinibayTool] +
         CONTEXT7_TOOLS
     ),
     "code_reviewer": (
@@ -208,7 +208,7 @@ _TASK_TYPE_TOOLS: dict[str, list] = {
         [UpdateTaskStatusTool, AddCommentTool, ReadCommentsTool, GetTaskTool] +
         [ReadTaskHistoryTool, CheckDependenciesTool] +
         [SendMessageTool, AskTeamLeadTool] +
-        [WebSearchTool, WebFetchTool, DirectorySearchTool, CodeDocsSearchPabadaTool] +
+        [WebSearchTool, WebFetchTool, DirectorySearchTool, CodeDocsSearchInfinibayTool] +
         CONTEXT7_TOOLS +
         [SaveSessionNoteTool, LoadSessionNoteTool]
     ),
@@ -218,7 +218,7 @@ _TASK_TYPE_TOOLS: dict[str, list] = {
         [UpdateTaskStatusTool, AddCommentTool, ReadCommentsTool, GetTaskTool] +
         [ReadTaskHistoryTool, CheckDependenciesTool] +
         [SendMessageTool, AskTeamLeadTool] +
-        [WebSearchTool, WebFetchTool, DirectorySearchTool, CodeDocsSearchPabadaTool] +
+        [WebSearchTool, WebFetchTool, DirectorySearchTool, CodeDocsSearchInfinibayTool] +
         CONTEXT7_TOOLS +
         [SaveSessionNoteTool, LoadSessionNoteTool]
     ),
@@ -264,7 +264,7 @@ _TASK_TYPE_TOOLS: dict[str, list] = {
     "requirements": (
         COMMUNICATION_TOOLS +
         [ReadReferenceFilesTool, ReadFindingsTool, SearchFindingsTool, ReadWikiTool, SearchWikiTool, ReadReportTool] +
-        [WebSearchTool, WebFetchTool, ScrapeWebsitePabadaTool, CodeInterpreterTool, NL2SQLTool]
+        [WebSearchTool, WebFetchTool, ScrapeWebsiteInfinibayTool, CodeInterpreterTool, NL2SQLTool]
     ),
 }
 

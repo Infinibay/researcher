@@ -104,7 +104,7 @@ def probe_model(llm_params: dict[str, Any]) -> ModelCapabilities:
     from backend.config.settings import settings
 
     if not settings.MODEL_PROBE_ENABLED:
-        logger.info("Model probe disabled (PABADA_MODEL_PROBE_ENABLED=false)")
+        logger.info("Model probe disabled (INFINIBAY_MODEL_PROBE_ENABLED=false)")
         return _capabilities
 
     caps = ModelCapabilities()

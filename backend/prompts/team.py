@@ -1,4 +1,4 @@
-"""Shared team definitions and context builders for all PABADA agents.
+"""Shared team definitions and context builders for all INFINIBAY agents.
 
 Provides:
 - ROLE_DESCRIPTIONS: static info about what each role does.

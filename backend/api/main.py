@@ -1,4 +1,4 @@
-"""FastAPI application factory for the PABADA API."""
+"""FastAPI application factory for the INFINIBAY API."""
 
 from __future__ import annotations
 
@@ -52,8 +52,8 @@ def create_app() -> FastAPI:
     setup_file_logging()
 
     app = FastAPI(
-        title="PABADA API",
-        description="REST API for the PABADA project management system",
+        title="INFINIBAY API",
+        description="REST API for the INFINIBAY project management system",
         version="1.0.0",
         docs_url="/docs",
         redoc_url="/redoc",

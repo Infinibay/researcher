@@ -6,15 +6,15 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from backend.tools.rag.docx_search import DOCXSearchPabadaTool
-from backend.tools.rag.json_search import JSONSearchPabadaTool
-from backend.tools.rag.xml_search import XMLSearchPabadaTool
+from backend.tools.rag.docx_search import DOCXSearchInfinibayTool
+from backend.tools.rag.json_search import JSONSearchInfinibayTool
+from backend.tools.rag.xml_search import XMLSearchInfinibayTool
 
 
 class TestDOCXSearchTool:
     def test_docx_search_sandbox_validation(self, agent_context):
         """Path outside sandbox should return error."""
-        tool = DOCXSearchPabadaTool()
+        tool = DOCXSearchInfinibayTool()
         result = json.loads(tool._run(
             query="test",
             docx_path="/etc/secret.docx",
@@ -23,7 +23,7 @@ class TestDOCXSearchTool:
         assert "Access denied" in result["error"]
 
     def test_docx_search_file_not_found(self, agent_context, sandbox_dir):
-        tool = DOCXSearchPabadaTool()
+        tool = DOCXSearchInfinibayTool()
         result = json.loads(tool._run(
             query="test",
             docx_path=os.path.join(sandbox_dir, "nonexistent.docx"),
@@ -37,7 +37,7 @@ class TestDOCXSearchTool:
         with open(txt_path, "w") as f:
             f.write("not a docx")
 
-        tool = DOCXSearchPabadaTool()
+        tool = DOCXSearchInfinibayTool()
         result = json.loads(tool._run(query="test", docx_path=txt_path))
         assert "error" in result
         assert "Not a DOCX" in result["error"]
@@ -54,7 +54,7 @@ class TestDOCXSearchTool:
         mock_tool.run.return_value = "Found relevant section about testing"
 
         with patch("backend.tools.rag.docx_search.DOCXSearchTool", return_value=mock_tool):
-            tool = DOCXSearchPabadaTool()
+            tool = DOCXSearchInfinibayTool()
             result = json.loads(tool._run(query="testing", docx_path=docx_path))
 
         assert result["query"] == "testing"
@@ -63,7 +63,7 @@ class TestDOCXSearchTool:
 
 class TestJSONSearchTool:
     def test_json_search_file_not_found(self, agent_context, sandbox_dir):
-        tool = JSONSearchPabadaTool()
+        tool = JSONSearchInfinibayTool()
         result = json.loads(tool._run(
             query="test",
             json_path=os.path.join(sandbox_dir, "nonexistent.json"),
@@ -75,7 +75,7 @@ class TestJSONSearchTool:
         with open(txt_path, "w") as f:
             f.write("not json")
 
-        tool = JSONSearchPabadaTool()
+        tool = JSONSearchInfinibayTool()
         result = json.loads(tool._run(query="test", json_path=txt_path))
         assert "error" in result
         assert "Not a JSON" in result["error"]
@@ -92,7 +92,7 @@ class TestJSONSearchTool:
         mock_tool.run.return_value = "Found key: value"
 
         with patch("backend.tools.rag.json_search.JSONSearchTool", return_value=mock_tool):
-            tool = JSONSearchPabadaTool()
+            tool = JSONSearchInfinibayTool()
             result = json.loads(tool._run(query="key", json_path=json_path))
 
         assert result["query"] == "key"
@@ -101,7 +101,7 @@ class TestJSONSearchTool:
 
 class TestXMLSearchTool:
     def test_xml_search_file_not_found(self, agent_context, sandbox_dir):
-        tool = XMLSearchPabadaTool()
+        tool = XMLSearchInfinibayTool()
         result = json.loads(tool._run(
             query="test",
             xml_path=os.path.join(sandbox_dir, "nonexistent.xml"),
@@ -113,7 +113,7 @@ class TestXMLSearchTool:
         with open(txt_path, "w") as f:
             f.write("not xml")
 
-        tool = XMLSearchPabadaTool()
+        tool = XMLSearchInfinibayTool()
         result = json.loads(tool._run(query="test", xml_path=txt_path))
         assert "error" in result
         assert "Not an XML" in result["error"]
@@ -130,7 +130,7 @@ class TestXMLSearchTool:
         mock_tool.run.return_value = "Found item: data"
 
         with patch("backend.tools.rag.xml_search.XMLSearchTool", return_value=mock_tool):
-            tool = XMLSearchPabadaTool()
+            tool = XMLSearchInfinibayTool()
             result = json.loads(tool._run(query="item", xml_path=xml_path))
 
         assert result["query"] == "item"

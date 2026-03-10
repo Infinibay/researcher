@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry, sanitize_fts5_query
 
 
@@ -30,7 +30,7 @@ class SearchKnowledgeInput(BaseModel):
     )
 
 
-class SearchKnowledgeTool(PabadaBaseTool):
+class SearchKnowledgeTool(InfinibayBaseTool):
     name: str = "search_knowledge"
     description: str = (
         "Unified search across knowledge sources (findings, wiki, reference files, reports). "

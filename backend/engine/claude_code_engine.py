@@ -5,7 +5,7 @@ system prompt is written to a temporary file inside the pod, then Claude
 Code is invoked with ``--append-system-prompt`` pointing at that file.
 
 Requires:
-- ``PABADA_SANDBOX_ENABLED=true``
+- ``INFINIBAY_SANDBOX_ENABLED=true``
 - Claude Code installed in the sandbox image
 - Valid credentials copied into the pod (handled by PodManager)
 """
@@ -57,7 +57,7 @@ class ClaudeCodeEngine(AgentEngine):
         # Write system prompt to a temp file inside the pod
         write_cmd = [
             "sh", "-c",
-            f"cat > /tmp/pabada_system.txt << 'PABADA_SYSTEM_EOF'\n{system_prompt}\nPABADA_SYSTEM_EOF",
+            f"cat > /tmp/infinibay_system.txt << 'INFINIBAY_SYSTEM_EOF'\n{system_prompt}\nINFINIBAY_SYSTEM_EOF",
         ]
         try:
             pod_manager.exec_in_pod(
@@ -125,16 +125,16 @@ class ClaudeCodeEngine(AgentEngine):
         runtime = get_runtime(settings.SANDBOX_CONTAINER_RUNTIME)
 
         env = {
-            "PABADA_API_URL": f"http://{runtime.host_dns}:8000",
-            "PABADA_PROJECT_ID": str(agent.project_id),
-            "PABADA_AGENT_ID": agent.agent_id,
+            "INFINIBAY_API_URL": f"http://{runtime.host_dns}:8000",
+            "INFINIBAY_PROJECT_ID": str(agent.project_id),
+            "INFINIBAY_AGENT_ID": agent.agent_id,
         }
 
         # Get task_id from context if available
         from backend.tools.base.context import get_context_for_agent
         ctx = get_context_for_agent(agent.agent_id)
         if ctx and ctx.task_id:
-            env["PABADA_TASK_ID"] = str(ctx.task_id)
+            env["INFINIBAY_TASK_ID"] = str(ctx.task_id)
 
         # Forgejo credentials for git operations (create-pr, push, etc.)
         if settings.FORGEJO_API_URL:
@@ -161,35 +161,35 @@ class ClaudeCodeEngine(AgentEngine):
             "WebSearch", "WebFetch",
             "mcp__plugin_context7_context7__resolve-library-id",
             "mcp__plugin_context7_context7__get-library-docs",
-            "mcp__pabada__task-get",
-            "mcp__pabada__task-list",
-            "mcp__pabada__task-create",
-            "mcp__pabada__task-update-status",
-            "mcp__pabada__task-take",
-            "mcp__pabada__task-add-comment",
-            "mcp__pabada__task-set-dependencies",
-            "mcp__pabada__task-approve",
-            "mcp__pabada__task-reject",
-            "mcp__pabada__epic-create",
-            "mcp__pabada__milestone-create",
-            "mcp__pabada__chat-send",
-            "mcp__pabada__chat-read",
-            "mcp__pabada__chat-ask-team-lead",
-            "mcp__pabada__chat-ask-project-lead",
-            "mcp__pabada__finding-record",
-            "mcp__pabada__finding-read",
-            "mcp__pabada__finding-validate",
-            "mcp__pabada__finding-reject",
-            "mcp__pabada__wiki-read",
-            "mcp__pabada__wiki-write",
-            "mcp__pabada__query-database",
-            "mcp__pabada__create-pr",
-            "mcp__pabada__session-save",
-            "mcp__pabada__session-load",
+            "mcp__infinibay__task-get",
+            "mcp__infinibay__task-list",
+            "mcp__infinibay__task-create",
+            "mcp__infinibay__task-update-status",
+            "mcp__infinibay__task-take",
+            "mcp__infinibay__task-add-comment",
+            "mcp__infinibay__task-set-dependencies",
+            "mcp__infinibay__task-approve",
+            "mcp__infinibay__task-reject",
+            "mcp__infinibay__epic-create",
+            "mcp__infinibay__milestone-create",
+            "mcp__infinibay__chat-send",
+            "mcp__infinibay__chat-read",
+            "mcp__infinibay__chat-ask-team-lead",
+            "mcp__infinibay__chat-ask-project-lead",
+            "mcp__infinibay__finding-record",
+            "mcp__infinibay__finding-read",
+            "mcp__infinibay__finding-validate",
+            "mcp__infinibay__finding-reject",
+            "mcp__infinibay__wiki-read",
+            "mcp__infinibay__wiki-write",
+            "mcp__infinibay__query-database",
+            "mcp__infinibay__create-pr",
+            "mcp__infinibay__session-save",
+            "mcp__infinibay__session-load",
         ])
         cmd = (
             f"claude -p '{escaped_prompt}' "
-            f"--append-system-prompt \"$(cat /tmp/pabada_system.txt)\" "
+            f"--append-system-prompt \"$(cat /tmp/infinibay_system.txt)\" "
             f"--allowedTools '{allowed_tools}' "
             f"--output-format json "
             f"--model {settings.CLAUDE_CODE_MODEL}"

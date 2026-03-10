@@ -72,7 +72,7 @@ class RepositoryManager:
                     private=False,
                     owner=settings.FORGEJO_OWNER or None,
                 )
-                owner = settings.FORGEJO_OWNER or "pabada"
+                owner = settings.FORGEJO_OWNER or "infinibay"
                 clone_url = _forgejo_clone_url(settings.FORGEJO_API_URL, owner, name)
                 logger.info("Forgejo repo ready for '%s': %s", name, clone_url)
             except Exception:
@@ -94,7 +94,7 @@ class RepositoryManager:
                 capture_output=True,
                 text=True,
             )
-            self.configure_git(local_path, "PABADA", "pabada@localhost")
+            self.configure_git(local_path, "INFINIBAY", "infinibay@localhost")
             gitkeep = os.path.join(local_path, ".gitkeep")
             with open(gitkeep, "w") as f:
                 pass
@@ -108,7 +108,7 @@ class RepositoryManager:
             )
         else:
             logger.info("Local git repo already exists at %s, reusing it", local_path)
-            self.configure_git(local_path, "PABADA", "pabada@localhost")
+            self.configure_git(local_path, "INFINIBAY", "infinibay@localhost")
 
         # ── Step 3: Configure remote and push ───────────────────────────
         if clone_url:

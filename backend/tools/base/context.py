@@ -133,7 +133,7 @@ def bind_tools_to_agent(tools: list, agent_id: str) -> None:
     """Stamp tool instances with their owning agent's ID.
 
     Call this after creating tools but before passing them to CrewAI Agent.
-    Each tool's ``_bound_agent_id`` attribute is used by PabadaBaseTool
+    Each tool's ``_bound_agent_id`` attribute is used by InfinibayBaseTool
     to look up context from the process-global dict.
     """
     for tool in tools:
@@ -164,7 +164,7 @@ def _get_project_id() -> int | None:
     return (
         getattr(_tls, "project_id", None)
         or _project_id_var.get()
-        or _env_int("PABADA_PROJECT_ID")
+        or _env_int("INFINIBAY_PROJECT_ID")
     )
 
 
@@ -172,7 +172,7 @@ def _get_agent_id() -> str | None:
     return (
         getattr(_tls, "agent_id", None)
         or _agent_id_var.get()
-        or os.environ.get("PABADA_AGENT_ID")
+        or os.environ.get("INFINIBAY_AGENT_ID")
     )
 
 
@@ -180,7 +180,7 @@ def _get_agent_run_id() -> str | None:
     return (
         getattr(_tls, "agent_run_id", None)
         or _agent_run_id_var.get()
-        or os.environ.get("PABADA_AGENT_RUN_ID")
+        or os.environ.get("INFINIBAY_AGENT_RUN_ID")
     )
 
 
@@ -188,7 +188,7 @@ def _get_task_id() -> int | None:
     return (
         getattr(_tls, "task_id", None)
         or _task_id_var.get()
-        or _env_int("PABADA_TASK_ID")
+        or _env_int("INFINIBAY_TASK_ID")
     )
 
 
@@ -196,11 +196,11 @@ def _get_workspace_path() -> str | None:
     return (
         getattr(_tls, "workspace_path", None)
         or _workspace_path_var.get()
-        or os.environ.get("PABADA_WORKSPACE_PATH")
+        or os.environ.get("INFINIBAY_WORKSPACE_PATH")
     )
 
 
-# ── Public convenience getters (used by PabadaBaseTool fallback) ─────────────
+# ── Public convenience getters (used by InfinibayBaseTool fallback) ─────────────
 
 
 def get_current_project_id() -> int | None:

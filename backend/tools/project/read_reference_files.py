@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry, sanitize_fts5_query
 
 
@@ -22,7 +22,7 @@ class ReadReferenceFilesInput(BaseModel):
     )
 
 
-class ReadReferenceFilesTool(PabadaBaseTool):
+class ReadReferenceFilesTool(InfinibayBaseTool):
     name: str = "read_reference_files"
     description: str = (
         "List and search project reference files (PDFs, papers, etc.). "

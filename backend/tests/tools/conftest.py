@@ -58,12 +58,12 @@ def test_db(tmp_dir):
     conn.close()
 
     # Set environment for tools to use this DB
-    os.environ["PABADA_DB"] = db_path
+    os.environ["INFINIBAY_DB"] = db_path
     yield db_path
 
     # Cleanup
-    if "PABADA_DB" in os.environ:
-        del os.environ["PABADA_DB"]
+    if "INFINIBAY_DB" in os.environ:
+        del os.environ["INFINIBAY_DB"]
 
 
 @pytest.fixture

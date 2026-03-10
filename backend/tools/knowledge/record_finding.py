@@ -6,7 +6,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 FINDING_TYPES = ("observation", "hypothesis", "experiment", "proof", "conclusion")
@@ -28,7 +28,7 @@ class RecordFindingInput(BaseModel):
     )
 
 
-class RecordFindingTool(PabadaBaseTool):
+class RecordFindingTool(InfinibayBaseTool):
     name: str = "record_finding"
     description: str = (
         "Record a research finding with confidence level and sources. "

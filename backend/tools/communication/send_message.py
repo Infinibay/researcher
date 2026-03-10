@@ -9,7 +9,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 
@@ -77,7 +77,7 @@ def _is_acknowledgment_only(message: str) -> bool:
     return False
 
 
-class SendMessageTool(PabadaBaseTool):
+class SendMessageTool(InfinibayBaseTool):
     name: str = "send_message"
     description: str = (
         "Send a message to a specific agent, role, or broadcast to all. "

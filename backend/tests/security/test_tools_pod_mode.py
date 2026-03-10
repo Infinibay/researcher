@@ -55,7 +55,7 @@ class TestReadFilePodMode:
 
         exec_mock.assert_called_once()
         args, kwargs = exec_mock.call_args
-        assert args[0] == ["pabada-file-helper"]
+        assert args[0] == ["infinibay-file-helper"]
         stdin = json.loads(kwargs["stdin_data"])
         assert stdin["op"] == "read"
         assert "hello world" in result

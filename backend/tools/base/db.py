@@ -14,12 +14,12 @@ logger = logging.getLogger(__name__)
 
 T = TypeVar("T")
 
-DEFAULT_DB_PATH = "/research/pabada.db"
+DEFAULT_DB_PATH = "/research/infinibay.db"
 
 
 def get_db_path() -> str:
     """Get database path from environment or default."""
-    return os.environ.get("PABADA_DB", DEFAULT_DB_PATH)
+    return os.environ.get("INFINIBAY_DB", DEFAULT_DB_PATH)
 
 
 def get_connection(db_path: str | None = None) -> sqlite3.Connection:

@@ -1,4 +1,4 @@
-"""Task guardrails and structured output models for PABADA flows.
+"""Task guardrails and structured output models for INFINIBAY flows.
 
 Guardrails validate and transform task outputs BEFORE accepting them.
 They integrate with CrewAI's ``Task(guardrail=...)`` parameter.

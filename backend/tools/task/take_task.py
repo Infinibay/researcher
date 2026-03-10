@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 
@@ -13,7 +13,7 @@ class TakeTaskInput(BaseModel):
     task_id: int = Field(..., description="ID of the task to take")
 
 
-class TakeTaskTool(PabadaBaseTool):
+class TakeTaskTool(InfinibayBaseTool):
     name: str = "take_task"
     description: str = (
         "Claim a task and set its status to in_progress. "

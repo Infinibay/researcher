@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""PABADA MCP Server — exposes project operations as MCP tools for Claude Code.
+"""INFINIBAY MCP Server — exposes project operations as MCP tools for Claude Code.
 
-Standalone script. Reads env vars and makes HTTP calls to the PABADA backend.
+Standalone script. Reads env vars and makes HTTP calls to the INFINIBAY backend.
 Does NOT import anything from the ``backend`` package.
 
 Env vars (set by PodManager):
-    PABADA_API_URL    — Backend base URL (e.g. http://host.containers.internal:8000)
-    PABADA_PROJECT_ID — Current project ID
-    PABADA_AGENT_ID   — Current agent ID
-    PABADA_TASK_ID    — Current task ID (optional)
+    INFINIBAY_API_URL    — Backend base URL (e.g. http://host.containers.internal:8000)
+    INFINIBAY_PROJECT_ID — Current project ID
+    INFINIBAY_AGENT_ID   — Current agent ID
+    INFINIBAY_TASK_ID    — Current task ID (optional)
 """
 
 from __future__ import annotations
@@ -24,15 +24,15 @@ from fastmcp import FastMCP
 
 # ── Configuration ────────────────────────────────────────────────────────
 
-API_URL = os.environ.get("PABADA_API_URL", "http://localhost:8000")
-PROJECT_ID = os.environ.get("PABADA_PROJECT_ID", "")
-AGENT_ID = os.environ.get("PABADA_AGENT_ID", "")
-TASK_ID = os.environ.get("PABADA_TASK_ID", "")
+API_URL = os.environ.get("INFINIBAY_API_URL", "http://localhost:8000")
+PROJECT_ID = os.environ.get("INFINIBAY_PROJECT_ID", "")
+AGENT_ID = os.environ.get("INFINIBAY_AGENT_ID", "")
+TASK_ID = os.environ.get("INFINIBAY_TASK_ID", "")
 
 mcp = FastMCP(
-    "pabada",
+    "infinibay",
     instructions=(
-        "PABADA project management tools. Use these to manage tasks, "
+        "INFINIBAY project management tools. Use these to manage tasks, "
         "communicate with teammates, record findings, query the database, "
         "and more."
     ),
@@ -47,7 +47,7 @@ def _api(
     data: dict[str, Any] | None = None,
     params: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Make an HTTP request to the PABADA backend API."""
+    """Make an HTTP request to the INFINIBAY backend API."""
     url = f"{API_URL}{path}"
     if params:
         filtered = {k: v for k, v in params.items() if v is not None}
@@ -415,7 +415,7 @@ def finding_record(
     """
     task_id = TASK_ID
     if not task_id:
-        return json.dumps({"error": "No PABADA_TASK_ID set. Findings must be associated with a task."})
+        return json.dumps({"error": "No INFINIBAY_TASK_ID set. Findings must be associated with a task."})
     return json.dumps(
         _api("POST", "/api/internal/findings", data={
             "project_id": int(PROJECT_ID),

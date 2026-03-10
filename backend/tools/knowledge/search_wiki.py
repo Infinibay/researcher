@@ -6,7 +6,7 @@ from typing import Type
 import numpy as np
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry, parse_query_or_terms
 
 
@@ -32,7 +32,7 @@ class SearchWikiInput(BaseModel):
     limit: int = Field(default=20, ge=1, le=100, description="Max results")
 
 
-class SearchWikiTool(PabadaBaseTool):
+class SearchWikiTool(InfinibayBaseTool):
     name: str = "search_wiki"
     description: str = (
         "Search wiki pages by semantic similarity. Returns pages whose "

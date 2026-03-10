@@ -1,4 +1,4 @@
-"""MainProjectFlow — root orchestrator for the PABADA project lifecycle.
+"""MainProjectFlow — root orchestrator for the INFINIBAY project lifecycle.
 
 Manages: project creation → requirements → planning → approval → execution → completion.
 Delegates work to DevelopmentFlow, ResearchFlow, and BrainstormingFlow.

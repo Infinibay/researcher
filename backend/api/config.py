@@ -1,4 +1,4 @@
-"""API-specific configuration extending the base PABADA settings."""
+"""API-specific configuration extending the base INFINIBAY settings."""
 
 from pathlib import Path
 

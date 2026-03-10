@@ -20,7 +20,7 @@ export function Sidebar() {
     <aside className="flex w-64 flex-col border-r border-surface-700 bg-surface-900">
       <div className="flex h-16 items-center gap-2 border-b border-surface-700 px-5">
         <div className="h-7 w-7 rounded-lg bg-sky-500 flex items-center justify-center text-xs font-bold text-white">P</div>
-        <span className="text-lg font-semibold text-slate-100">PABADA</span>
+        <span className="text-lg font-semibold text-slate-100">INFINIBAY</span>
       </div>
       <nav className="flex-1 space-y-1 px-3 py-4">
         {links.map((l) => (

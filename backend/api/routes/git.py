@@ -506,7 +506,7 @@ def _require_forgejo() -> None:
     if not settings.FORGEJO_API_URL:
         raise HTTPException(
             status_code=400,
-            detail="Forgejo is not configured (PABADA_FORGEJO_API_URL is unset)",
+            detail="Forgejo is not configured (INFINIBAY_FORGEJO_API_URL is unset)",
         )
 
 
@@ -519,7 +519,7 @@ def _is_forgejo_remote(project_id: int | None, repo_name: str) -> bool:
         return False
     # Compare the host portion of FORGEJO_API_URL against the remote_url.
     # FORGEJO_API_URL is e.g. "http://localhost:3000/api/v1"
-    # remote_url   is e.g. "http://localhost:3000/pabada/myrepo.git"
+    # remote_url   is e.g. "http://localhost:3000/infinibay/myrepo.git"
     from urllib.parse import urlparse
 
     api_host = urlparse(settings.FORGEJO_API_URL).netloc

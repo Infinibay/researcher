@@ -10,7 +10,7 @@ from typing import Type
 from pydantic import BaseModel, Field
 
 from backend.config.settings import settings
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.web.rate_limiter import web_rate_limiter
 from backend.tools.web.robots_checker import robots_checker
 
@@ -28,7 +28,7 @@ class DeepWebResearchInput(BaseModel):
     )
 
 
-class DeepWebResearchTool(PabadaBaseTool):
+class DeepWebResearchTool(InfinibayBaseTool):
     name: str = "deep_web_research"
     description: str = (
         "Conduct deep web research on a query. Searches the web, reads the best "
@@ -47,7 +47,7 @@ class DeepWebResearchTool(PabadaBaseTool):
 
     def _fetch_content(self, url: str, title: str) -> dict | None:
         """Fetch and extract readable text from a single URL (sync)."""
-        if not robots_checker.is_allowed(url, "PabadaBot/2.0"):
+        if not robots_checker.is_allowed(url, "InfinibayBot/2.0"):
             return None
 
         web_rate_limiter.acquire()
@@ -69,7 +69,7 @@ class DeepWebResearchTool(PabadaBaseTool):
         except ImportError:
             return None
 
-        if not await robots_checker.is_allowed_async(url, "PabadaBot/2.0"):
+        if not await robots_checker.is_allowed_async(url, "InfinibayBot/2.0"):
             return None
 
         await web_rate_limiter.acquire_async()
@@ -78,7 +78,7 @@ class DeepWebResearchTool(PabadaBaseTool):
             async with httpx.AsyncClient(
                 timeout=settings.WEB_TIMEOUT,
                 follow_redirects=True,
-                headers={"User-Agent": "Mozilla/5.0 (compatible; PabadaBot/2.0)"},
+                headers={"User-Agent": "Mozilla/5.0 (compatible; InfinibayBot/2.0)"},
             ) as client:
                 response = await client.get(url)
                 response.raise_for_status()

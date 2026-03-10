@@ -8,7 +8,7 @@ from typing import Type
 from pydantic import BaseModel, Field
 
 from backend.config.settings import settings
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 
 # Simple in-memory cache
 _search_cache: dict[str, tuple[float, list]] = {}
@@ -21,7 +21,7 @@ class WebSearchInput(BaseModel):
     )
 
 
-class WebSearchTool(PabadaBaseTool):
+class WebSearchTool(InfinibayBaseTool):
     name: str = "web_search"
     description: str = (
         "Search the web using SerperDev (with DuckDuckGo fallback). "

@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 
 
 class CreateRepositoryInput(BaseModel):
@@ -26,7 +26,7 @@ class CreateRepositoryInput(BaseModel):
 _REPO_NAME_RE = re.compile(r"^[a-z0-9][a-z0-9\-]{0,38}[a-z0-9]$")
 
 
-class CreateRepositoryTool(PabadaBaseTool):
+class CreateRepositoryTool(InfinibayBaseTool):
     name: str = "create_repository"
     description: str = (
         "Create a new git repository for the project. The repository is "

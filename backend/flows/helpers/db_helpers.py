@@ -1,4 +1,4 @@
-"""Database helpers for PABADA flows — project/task CRUD and queries."""
+"""Database helpers for INFINIBAY flows — project/task CRUD and queries."""
 
 from __future__ import annotations
 

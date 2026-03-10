@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""pabada-file-helper — file operations inside agent pods.
+"""infinibay-file-helper — file operations inside agent pods.
 
 Reads a JSON request from stdin, performs the operation, and writes
 a JSON response to stdout.  This avoids shell-escaping issues when
@@ -8,7 +8,7 @@ passing file content as command arguments.
 Operations: read, write, edit, list, search, glob
 
 Usage:
-    echo '{"op":"read","path":"main.py"}' | pabada-file-helper
+    echo '{"op":"read","path":"main.py"}' | infinibay-file-helper
 """
 
 import hashlib
@@ -90,7 +90,7 @@ def op_write(req):
 
     try:
         if mode == "w":
-            fd, tmp = tempfile.mkstemp(dir=os.path.dirname(path) or ".", prefix=".pabada_")
+            fd, tmp = tempfile.mkstemp(dir=os.path.dirname(path) or ".", prefix=".infinibay_")
             try:
                 with os.fdopen(fd, "w", encoding="utf-8") as f:
                     f.write(content)
@@ -155,7 +155,7 @@ def op_edit(req):
         return err(f"Resulting file too large: {len(new_bytes)} bytes")
 
     try:
-        fd, tmp = tempfile.mkstemp(dir=os.path.dirname(path) or ".", prefix=".pabada_")
+        fd, tmp = tempfile.mkstemp(dir=os.path.dirname(path) or ".", prefix=".infinibay_")
         try:
             with os.fdopen(fd, "w", encoding="utf-8") as f:
                 f.write(new_content)

@@ -68,7 +68,7 @@ class SandboxExecutor:
 
         effective_timeout = min(timeout, limits.timeout) if timeout else limits.timeout
 
-        container_name = f"pabada-sandbox-{agent_id}-{uuid4().hex[:8]}"
+        container_name = f"infinibay-sandbox-{agent_id}-{uuid4().hex[:8]}"
 
         workdir = cwd if cwd else "/workspace"
 

@@ -209,7 +209,7 @@ class BranchCleanupService:
                 event = threading.Event()
                 event.wait(timeout=interval_seconds)
 
-        t = threading.Thread(target=_loop, daemon=True, name="pabada-branch-cleanup")
+        t = threading.Thread(target=_loop, daemon=True, name="infinibay-branch-cleanup")
         t.start()
         logger.info("Periodic branch cleanup started (interval=%ds)", interval_seconds)
 

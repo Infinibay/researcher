@@ -11,7 +11,7 @@ from pydantic import BaseModel, Field
 from backend.config.settings import settings
 from backend.security.container_runtime import runtime_available
 from backend.security.sandbox import sandbox_executor
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +30,7 @@ class CodeInterpreterInput(BaseModel):
     )
 
 
-class CodeInterpreterTool(PabadaBaseTool):
+class CodeInterpreterTool(InfinibayBaseTool):
     name: str = "code_interpreter"
     description: str = (
         "Execute Python code for data analysis, computation, validation, "
@@ -60,7 +60,7 @@ class CodeInterpreterTool(PabadaBaseTool):
             with tempfile.NamedTemporaryFile(
                 mode="w",
                 suffix=".py",
-                prefix="pabada_code_",
+                prefix="infinibay_code_",
                 dir="/tmp",
                 delete=False,
             ) as tmp:

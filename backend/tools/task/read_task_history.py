@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 
@@ -17,7 +17,7 @@ class ReadTaskHistoryInput(BaseModel):
     )
 
 
-class ReadTaskHistoryTool(PabadaBaseTool):
+class ReadTaskHistoryTool(InfinibayBaseTool):
     name: str = "read_task_history"
     description: str = (
         "Read the full timeline of a task: status changes, events, and "

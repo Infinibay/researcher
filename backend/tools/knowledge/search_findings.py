@@ -6,7 +6,7 @@ from typing import Type
 import numpy as np
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry, parse_query_or_terms
 
 
@@ -39,7 +39,7 @@ class SearchFindingsInput(BaseModel):
     limit: int = Field(default=20, ge=1, le=100, description="Max results")
 
 
-class SearchFindingsTool(PabadaBaseTool):
+class SearchFindingsTool(InfinibayBaseTool):
     name: str = "search_findings"
     description: str = (
         "Search findings by semantic similarity. Returns findings whose "

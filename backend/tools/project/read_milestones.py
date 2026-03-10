@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 
@@ -27,7 +27,7 @@ class ReadMilestonesInput(BaseModel):
     )
 
 
-class ReadMilestonesTool(PabadaBaseTool):
+class ReadMilestonesTool(InfinibayBaseTool):
     name: str = "read_milestones"
     description: str = (
         "List milestones with optional filters for epic or status, including "

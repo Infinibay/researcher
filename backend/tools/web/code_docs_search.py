@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 
 
 class CodeDocsSearchInput(BaseModel):
@@ -19,7 +19,7 @@ class CodeDocsSearchInput(BaseModel):
     )
 
 
-class CodeDocsSearchPabadaTool(PabadaBaseTool):
+class CodeDocsSearchInfinibayTool(InfinibayBaseTool):
     name: str = "code_docs_search"
     description: str = (
         "Search code and library documentation using semantic RAG search. "

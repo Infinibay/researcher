@@ -51,7 +51,7 @@ If `git status` fails or `git remote -v` shows no remotes:
 ## Forgejo Remote Context
 The remote `origin` on this workspace points to the Forgejo server.
 FORGEJO_API_URL = {settings.FORGEJO_API_URL or "http://localhost:3000/api/v1"}
-FORGEJO_OWNER   = {settings.FORGEJO_OWNER or "pabada"}
+FORGEJO_OWNER   = {settings.FORGEJO_OWNER or "infinibay"}
 FORGEJO_REPO    = $FORGEJO_REPO   (set in environment — format: "owner/repo-name")
 
 If `git push` fails with "repository not found", the remote is not configured.

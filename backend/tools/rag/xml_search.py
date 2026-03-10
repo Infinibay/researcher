@@ -6,7 +6,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.rag.base import validate_path_in_sandbox
 
 logger = logging.getLogger(__name__)
@@ -17,7 +17,7 @@ class XMLSearchInput(BaseModel):
     xml_path: str = Field(..., description="Absolute path to the XML file")
 
 
-class XMLSearchPabadaTool(PabadaBaseTool):
+class XMLSearchInfinibayTool(InfinibayBaseTool):
     name: str = "xml_search"
     description: str = (
         "Search within XML files using semantic RAG. "

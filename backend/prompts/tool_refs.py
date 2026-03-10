@@ -1,14 +1,14 @@
 """Tool name mapping between CrewAI tools and Claude Code equivalents.
 
 When ``engine=claude_code``, system prompts reference Claude Code's built-in
-tools and the PABADA MCP server tools instead of PABADA's custom CrewAI tools.
+tools and the INFINIBAY MCP server tools instead of INFINIBAY's custom CrewAI tools.
 """
 
 from __future__ import annotations
 
 import re
 
-# Maps PABADA CrewAI tool names → Claude Code equivalents
+# Maps INFINIBAY CrewAI tool names → Claude Code equivalents
 _CLAUDE_CODE_REFS: dict[str, str] = {
     # Code inspection
     "ReadFileTool": "Read (built-in)",
@@ -25,34 +25,34 @@ _CLAUDE_CODE_REFS: dict[str, str] = {
     "GitDiffTool": "Bash: git diff",
     "GitStatusTool": "Bash: git status",
     # Task management
-    "TakeTaskTool": "mcp__pabada__task-take",
-    "UpdateTaskStatusTool": "mcp__pabada__task-update-status",
-    "GetTaskTool": "mcp__pabada__task-get",
-    "ReadTasksTool": "mcp__pabada__task-list",
-    "AddCommentTool": "mcp__pabada__task-add-comment",
-    "CreateTaskTool": "mcp__pabada__task-create",
-    "SetTaskDependenciesTool": "mcp__pabada__task-set-dependencies",
-    "ApproveTaskTool": "mcp__pabada__task-approve",
-    "RejectTaskTool": "mcp__pabada__task-reject",
+    "TakeTaskTool": "mcp__infinibay__task-take",
+    "UpdateTaskStatusTool": "mcp__infinibay__task-update-status",
+    "GetTaskTool": "mcp__infinibay__task-get",
+    "ReadTasksTool": "mcp__infinibay__task-list",
+    "AddCommentTool": "mcp__infinibay__task-add-comment",
+    "CreateTaskTool": "mcp__infinibay__task-create",
+    "SetTaskDependenciesTool": "mcp__infinibay__task-set-dependencies",
+    "ApproveTaskTool": "mcp__infinibay__task-approve",
+    "RejectTaskTool": "mcp__infinibay__task-reject",
     # Project structure
-    "CreateEpicTool": "mcp__pabada__epic-create",
-    "CreateMilestoneTool": "mcp__pabada__milestone-create",
+    "CreateEpicTool": "mcp__infinibay__epic-create",
+    "CreateMilestoneTool": "mcp__infinibay__milestone-create",
     # Execution
     "ExecuteCommandTool": "Bash (built-in)",
     "CodeInterpreterTool": "Bash: python3 -c '...'",
     # Communication
-    "AskTeamLeadTool": "mcp__pabada__chat-ask-team-lead",
-    "AskProjectLeadTool": "mcp__pabada__chat-ask-project-lead",
-    "SendMessageTool": "mcp__pabada__chat-send",
-    "ReplyToUserTool": "mcp__pabada__chat-send (with to_agent='user')",
-    "ReadMessagesTool": "mcp__pabada__chat-read",
+    "AskTeamLeadTool": "mcp__infinibay__chat-ask-team-lead",
+    "AskProjectLeadTool": "mcp__infinibay__chat-ask-project-lead",
+    "SendMessageTool": "mcp__infinibay__chat-send",
+    "ReplyToUserTool": "mcp__infinibay__chat-send (with to_agent='user')",
+    "ReadMessagesTool": "mcp__infinibay__chat-read",
     # Knowledge
-    "RecordFindingTool": "mcp__pabada__finding-record",
-    "ReadFindingsTool": "mcp__pabada__finding-read",
-    "ReadWikiTool": "mcp__pabada__wiki-read",
-    "WriteWikiTool": "mcp__pabada__wiki-write",
+    "RecordFindingTool": "mcp__infinibay__finding-record",
+    "ReadFindingsTool": "mcp__infinibay__finding-read",
+    "ReadWikiTool": "mcp__infinibay__wiki-read",
+    "WriteWikiTool": "mcp__infinibay__wiki-write",
     # Analytics
-    "NL2SQLTool": "mcp__pabada__query-database",
+    "NL2SQLTool": "mcp__infinibay__query-database",
     # Web
     "WebSearchTool": "WebSearch (built-in)",
     "WebFetchTool": "WebFetch (built-in)",
@@ -62,10 +62,10 @@ _CLAUDE_CODE_REFS: dict[str, str] = {
     # Semantic search
     "DirectorySearchTool": "Grep (built-in, with semantic keywords)",
     # Git PR
-    "CreatePRTool": "mcp__pabada__create-pr",
+    "CreatePRTool": "mcp__infinibay__create-pr",
     # Session
-    "SaveSessionNoteTool": "mcp__pabada__session-save",
-    "LoadSessionNoteTool": "mcp__pabada__session-load",
+    "SaveSessionNoteTool": "mcp__infinibay__session-save",
+    "LoadSessionNoteTool": "mcp__infinibay__session-load",
     # ── snake_case aliases (used in trimmed system prompts) ──
     "read_file": "Read (built-in)",
     "glob": "Glob (built-in)",
@@ -78,42 +78,42 @@ _CLAUDE_CODE_REFS: dict[str, str] = {
     "git_push": "Bash: git push",
     "git_diff": "Bash: git diff",
     "git_status": "Bash: git status",
-    "take_task": "mcp__pabada__task-take",
-    "update_task_status": "mcp__pabada__task-update-status",
-    "get_task": "mcp__pabada__task-get",
-    "read_tasks": "mcp__pabada__task-list",
-    "add_comment": "mcp__pabada__task-add-comment",
-    "create_task": "mcp__pabada__task-create",
-    "set_task_dependencies": "mcp__pabada__task-set-dependencies",
-    "approve_task": "mcp__pabada__task-approve",
-    "reject_task": "mcp__pabada__task-reject",
-    "create_epic": "mcp__pabada__epic-create",
-    "create_milestone": "mcp__pabada__milestone-create",
+    "take_task": "mcp__infinibay__task-take",
+    "update_task_status": "mcp__infinibay__task-update-status",
+    "get_task": "mcp__infinibay__task-get",
+    "read_tasks": "mcp__infinibay__task-list",
+    "add_comment": "mcp__infinibay__task-add-comment",
+    "create_task": "mcp__infinibay__task-create",
+    "set_task_dependencies": "mcp__infinibay__task-set-dependencies",
+    "approve_task": "mcp__infinibay__task-approve",
+    "reject_task": "mcp__infinibay__task-reject",
+    "create_epic": "mcp__infinibay__epic-create",
+    "create_milestone": "mcp__infinibay__milestone-create",
     "execute_command": "Bash (built-in)",
     "code_interpreter": "Bash: python3 -c '...'",
-    "ask_team_lead": "mcp__pabada__chat-ask-team-lead",
-    "ask_project_lead": "mcp__pabada__chat-ask-project-lead",
-    "send_message": "mcp__pabada__chat-send",
-    "reply_to_user": "mcp__pabada__chat-send (with to_agent='user')",
-    "read_messages": "mcp__pabada__chat-read",
-    "record_finding": "mcp__pabada__finding-record",
-    "read_findings": "mcp__pabada__finding-read",
-    "read_wiki": "mcp__pabada__wiki-read",
-    "write_wiki": "mcp__pabada__wiki-write",
-    "query_database": "mcp__pabada__query-database",
+    "ask_team_lead": "mcp__infinibay__chat-ask-team-lead",
+    "ask_project_lead": "mcp__infinibay__chat-ask-project-lead",
+    "send_message": "mcp__infinibay__chat-send",
+    "reply_to_user": "mcp__infinibay__chat-send (with to_agent='user')",
+    "read_messages": "mcp__infinibay__chat-read",
+    "record_finding": "mcp__infinibay__finding-record",
+    "read_findings": "mcp__infinibay__finding-read",
+    "read_wiki": "mcp__infinibay__wiki-read",
+    "write_wiki": "mcp__infinibay__wiki-write",
+    "query_database": "mcp__infinibay__query-database",
     "web_search": "WebSearch (built-in)",
     "web_fetch": "WebFetch (built-in)",
     "context7_search": "mcp__plugin_context7_context7__resolve-library-id",
     "context7_docs": "mcp__plugin_context7_context7__get-library-docs",
     "directory_search": "Grep (built-in, with semantic keywords)",
-    "create_pr": "mcp__pabada__create-pr",
-    "save_session_note": "mcp__pabada__session-save",
-    "load_session_note": "mcp__pabada__session-load",
-    "ask_user": "mcp__pabada__chat-send (with to_agent='user')",
-    "create_repository": "mcp__pabada__create-repository",
-    "read_reference_files": "mcp__pabada__reference-files-read",
-    "read_report": "mcp__pabada__report-read",
-    "update_project": "mcp__pabada__project-update",
+    "create_pr": "mcp__infinibay__create-pr",
+    "save_session_note": "mcp__infinibay__session-save",
+    "load_session_note": "mcp__infinibay__session-load",
+    "ask_user": "mcp__infinibay__chat-send (with to_agent='user')",
+    "create_repository": "mcp__infinibay__create-repository",
+    "read_reference_files": "mcp__infinibay__reference-files-read",
+    "read_report": "mcp__infinibay__report-read",
+    "update_project": "mcp__infinibay__project-update",
 }
 
 
@@ -151,7 +151,7 @@ def adapt_prompt_for_engine(text: str, engine: str) -> str:
 # the tool names grouped by category for quick reference.
 
 CLAUDE_CODE_TOOLS_SECTION = """\
-## PABADA MCP Tools
+## INFINIBAY MCP Tools
 
 Project operations are available as MCP tools (auto-documented with schemas).
 Use your standard built-in tools for files, git, and web operations.

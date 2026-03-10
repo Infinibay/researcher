@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 
 
 class GitDiffInput(BaseModel):
@@ -20,7 +20,7 @@ class GitDiffInput(BaseModel):
     )
 
 
-class GitDiffTool(PabadaBaseTool):
+class GitDiffTool(InfinibayBaseTool):
     name: str = "git_diff"
     description: str = (
         "Show Git diff of changes. Can diff against a branch, "

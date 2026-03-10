@@ -1,5 +1,5 @@
 -- =============================================================================
--- PABADA v2 - Database Schema
+-- INFINIBAY v2 - Database Schema
 -- Version: 2.0.0
 -- Description: Single source of truth for all CrewAI flows and agents.
 --              Project-centric architecture with granular task states,

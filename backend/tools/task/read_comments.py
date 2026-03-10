@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 
@@ -17,7 +17,7 @@ class ReadCommentsInput(BaseModel):
     )
 
 
-class ReadCommentsTool(PabadaBaseTool):
+class ReadCommentsTool(InfinibayBaseTool):
     name: str = "read_comments"
     description: str = (
         "Read comments on a task. Returns the most recent comments first. "

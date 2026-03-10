@@ -7,7 +7,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 logger = logging.getLogger(__name__)
@@ -22,7 +22,7 @@ class MergePRInput(BaseModel):
     )
 
 
-class MergePRTool(PabadaBaseTool):
+class MergePRTool(InfinibayBaseTool):
     name: str = "merge_pr"
     description: str = (
         "Merge an approved pull request. Looks up the PR by its Forgejo PR "

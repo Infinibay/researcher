@@ -1,4 +1,4 @@
-"""CI gate helpers for PABADA flows — test output parsing and recording."""
+"""CI gate helpers for INFINIBAY flows — test output parsing and recording."""
 
 from __future__ import annotations
 

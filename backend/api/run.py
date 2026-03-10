@@ -1,4 +1,4 @@
-"""Development server entry point for the PABADA API."""
+"""Development server entry point for the INFINIBAY API."""
 
 import logging
 import os
@@ -14,10 +14,10 @@ warnings.filterwarnings("ignore", message=".*onnxruntime.*")
 
 
 def setup_file_logging():
-    """Configure logging to write to .data/pabada.log for debugging."""
-    log_dir = Path(os.environ.get("PABADA_DATA", ".data"))
+    """Configure logging to write to .data/infinibay.log for debugging."""
+    log_dir = Path(os.environ.get("INFINIBAY_DATA", ".data"))
     log_dir.mkdir(parents=True, exist_ok=True)
-    log_file = log_dir / "pabada.log"
+    log_file = log_dir / "infinibay.log"
 
     # File handler with detailed formatting
     file_handler = logging.FileHandler(str(log_file), mode="a", encoding="utf-8")
@@ -100,7 +100,7 @@ def main():
     setup_file_logging()
     setup_llm_environment()
 
-    # Bridge CrewAI internal events into PABADA's EventBus → WebSocket pipeline
+    # Bridge CrewAI internal events into INFINIBAY's EventBus → WebSocket pipeline
     from backend.flows.crewai_event_bridge import register_crewai_event_bridge
     register_crewai_event_bridge()
 

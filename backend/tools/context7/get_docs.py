@@ -8,7 +8,7 @@ from typing import Literal, Type
 from pydantic import BaseModel, Field
 
 from backend.config.settings import settings
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 
 _API_BASE = "https://context7.com/api/v2"
 
@@ -39,7 +39,7 @@ class Context7DocsInput(BaseModel):
     )
 
 
-class Context7DocsTool(PabadaBaseTool):
+class Context7DocsTool(InfinibayBaseTool):
     name: str = "context7_get_docs"
     description: str = (
         "Fetch up-to-date documentation and code examples for a library from "
@@ -68,8 +68,8 @@ class Context7DocsTool(PabadaBaseTool):
         except ImportError:
             return self._error("httpx not installed. Run: pip install httpx")
 
-        api_key = os.environ.get("PABADA_CONTEXT7_API_KEY", "")
-        headers = {"User-Agent": "PabadaBot/2.0"}
+        api_key = os.environ.get("INFINIBAY_CONTEXT7_API_KEY", "")
+        headers = {"User-Agent": "InfinibayBot/2.0"}
         if api_key:
             headers["Authorization"] = f"Bearer {api_key}"
 
@@ -109,7 +109,7 @@ class Context7DocsTool(PabadaBaseTool):
         except httpx.HTTPStatusError as e:
             if e.response.status_code == 429:
                 return self._error(
-                    "Context7 rate limit exceeded. Set PABADA_CONTEXT7_API_KEY "
+                    "Context7 rate limit exceeded. Set INFINIBAY_CONTEXT7_API_KEY "
                     "for higher limits, or wait and retry."
                 )
             if e.response.status_code == 400:

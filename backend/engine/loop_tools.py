@@ -1,6 +1,6 @@
 """Tool schema conversion and execution for the loop engine.
 
-Converts PabadaBaseTool instances to OpenAI function-calling format
+Converts InfinibayBaseTool instances to OpenAI function-calling format
 and dispatches tool calls by name.
 """
 
@@ -27,7 +27,7 @@ def _clean_schema(schema: dict[str, Any]) -> dict[str, Any]:
 
 
 def tool_to_openai_schema(tool: Any) -> dict[str, Any]:
-    """Convert a PabadaBaseTool to an OpenAI function-calling tool schema."""
+    """Convert a InfinibayBaseTool to an OpenAI function-calling tool schema."""
     parameters: dict[str, Any] = {"type": "object", "properties": {}}
 
     if hasattr(tool, "args_schema") and tool.args_schema is not None:

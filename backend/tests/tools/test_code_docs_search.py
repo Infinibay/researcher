@@ -1,11 +1,11 @@
-"""Tests for CodeDocsSearchPabadaTool."""
+"""Tests for CodeDocsSearchInfinibayTool."""
 
 import json
 from unittest.mock import MagicMock, patch
 
 import pytest
 
-from backend.tools.web.code_docs_search import CodeDocsSearchPabadaTool
+from backend.tools.web.code_docs_search import CodeDocsSearchInfinibayTool
 
 
 class TestCodeDocsSearchTool:
@@ -17,7 +17,7 @@ class TestCodeDocsSearchTool:
         mock_tool.run.return_value = "React hooks documentation: useState allows..."
 
         with patch("backend.tools.web.code_docs_search.CodeDocsSearchTool", return_value=mock_tool):
-            tool = CodeDocsSearchPabadaTool()
+            tool = CodeDocsSearchInfinibayTool()
             result = json.loads(tool._run(
                 query="useState hook",
                 docs_url="https://react.dev/reference",
@@ -35,7 +35,7 @@ class TestCodeDocsSearchTool:
         mock_tool.run.return_value = "Some docs result"
 
         with patch("backend.tools.web.code_docs_search.CodeDocsSearchTool", return_value=mock_tool):
-            tool = CodeDocsSearchPabadaTool()
+            tool = CodeDocsSearchInfinibayTool()
             result = json.loads(tool._run(query="fastapi middleware"))
 
         assert result["query"] == "fastapi middleware"
@@ -43,7 +43,7 @@ class TestCodeDocsSearchTool:
 
     def test_code_docs_search_handles_import_error(self, agent_context):
         with patch.dict("sys.modules", {"crewai_tools": None}):
-            tool = CodeDocsSearchPabadaTool()
+            tool = CodeDocsSearchInfinibayTool()
             result = json.loads(tool._run(query="test"))
 
             assert "error" in result
@@ -57,7 +57,7 @@ class TestCodeDocsSearchTool:
         mock_tool.run.return_value = "result"
 
         with patch("backend.tools.web.code_docs_search.CodeDocsSearchTool", return_value=mock_tool) as mock_cls:
-            tool = CodeDocsSearchPabadaTool()
+            tool = CodeDocsSearchInfinibayTool()
             tool._run(query="test query", docs_url="https://docs.example.com")
 
         mock_config.assert_called_once()

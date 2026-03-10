@@ -18,19 +18,19 @@ from backend.tools.base.db import (
 
 class TestGetDbPath:
     def test_default_path(self):
-        original = os.environ.pop("PABADA_DB", None)
+        original = os.environ.pop("INFINIBAY_DB", None)
         try:
-            assert get_db_path() == "/research/pabada.db"
+            assert get_db_path() == "/research/infinibay.db"
         finally:
             if original:
-                os.environ["PABADA_DB"] = original
+                os.environ["INFINIBAY_DB"] = original
 
     def test_env_override(self):
-        os.environ["PABADA_DB"] = "/custom/path.db"
+        os.environ["INFINIBAY_DB"] = "/custom/path.db"
         try:
             assert get_db_path() == "/custom/path.db"
         finally:
-            del os.environ["PABADA_DB"]
+            del os.environ["INFINIBAY_DB"]
 
 
 class TestGetConnection:

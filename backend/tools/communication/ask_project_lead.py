@@ -6,7 +6,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 from backend.tools.communication.send_message import SendMessageTool
 
@@ -28,7 +28,7 @@ class AskProjectLeadInput(BaseModel):
     )
 
 
-class AskProjectLeadTool(PabadaBaseTool):
+class AskProjectLeadTool(InfinibayBaseTool):
     name: str = "ask_project_lead"
     description: str = (
         "Ask a question to the Project Lead agent. "

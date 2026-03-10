@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 
@@ -23,7 +23,7 @@ class CreateEpicInput(BaseModel):
     priority: int = Field(default=2, ge=1, le=5, description="Priority 1-5")
 
 
-class CreateEpicTool(PabadaBaseTool):
+class CreateEpicTool(InfinibayBaseTool):
     name: str = "create_epic"
     description: str = (
         "Create a new epic for organizing related tasks. "

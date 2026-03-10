@@ -8,7 +8,7 @@ from typing import Type
 from pydantic import BaseModel, Field
 
 from backend.config.settings import settings
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 
 
 class CodeSearchInput(BaseModel):
@@ -33,7 +33,7 @@ class CodeSearchInput(BaseModel):
     )
 
 
-class CodeSearchTool(PabadaBaseTool):
+class CodeSearchTool(InfinibayBaseTool):
     name: str = "code_search"
     description: str = (
         "Search source code files for a text pattern or regex. Returns matching "
@@ -170,7 +170,7 @@ class CodeSearchTool(PabadaBaseTool):
         max_results: int,
         context_lines: int,
     ) -> str:
-        """Search code via pabada-file-helper inside the pod."""
+        """Search code via infinibay-file-helper inside the pod."""
         req = {
             "op": "search",
             "pattern": pattern,
@@ -184,7 +184,7 @@ class CodeSearchTool(PabadaBaseTool):
 
         try:
             result = self._exec_in_pod(
-                ["pabada-file-helper"],
+                ["infinibay-file-helper"],
                 stdin_data=json.dumps(req),
                 timeout=30,
             )

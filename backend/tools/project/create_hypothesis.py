@@ -4,7 +4,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.knowledge.record_finding import RecordFindingTool
 
 
@@ -17,7 +17,7 @@ class CreateHypothesisInput(BaseModel):
     )
 
 
-class CreateHypothesisTool(PabadaBaseTool):
+class CreateHypothesisTool(InfinibayBaseTool):
     name: str = "create_hypothesis"
     description: str = (
         "Create a research hypothesis. This is a specialized finding "

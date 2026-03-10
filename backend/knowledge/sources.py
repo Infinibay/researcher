@@ -1,4 +1,4 @@
-"""Custom CrewAI knowledge sources backed by PABADA's SQLite database."""
+"""Custom CrewAI knowledge sources backed by INFINIBAY's SQLite database."""
 
 from __future__ import annotations
 

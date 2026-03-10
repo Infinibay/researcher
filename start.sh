@@ -21,23 +21,23 @@ if [ -f "$SCRIPT_DIR/.env" ]; then
 fi
 
 # ── Configuration ───────────────────────────────────────────────────────────
-PABADA_LLM_PROVIDER="${PABADA_LLM_PROVIDER:-ollama}"
+INFINIBAY_LLM_PROVIDER="${INFINIBAY_LLM_PROVIDER:-ollama}"
 
 # Ollama defaults (only used when provider=ollama)
-OLLAMA_MODEL="${PABADA_LLM_MODEL:-qwen3-coder:30b}"
+OLLAMA_MODEL="${INFINIBAY_LLM_MODEL:-qwen3-coder:30b}"
 OLLAMA_MODEL="${OLLAMA_MODEL#ollama_chat/}"  # strip LiteLLM provider prefix
 OLLAMA_MODEL="${OLLAMA_MODEL#ollama/}"       # also handle ollama/ prefix
-OLLAMA_EMBED_MODEL="${PABADA_EMBEDDING_MODEL:-nomic-embed-text}"
+OLLAMA_EMBED_MODEL="${INFINIBAY_EMBEDDING_MODEL:-nomic-embed-text}"
 OLLAMA_HOST="${OLLAMA_HOST:-http://localhost:11434}"
 DB_DIR="$SCRIPT_DIR/.data"
-DB_PATH="$DB_DIR/pabada.db"
+DB_PATH="$DB_DIR/infinibay.db"
 VENV_DIR="$SCRIPT_DIR/.venv"
 FRONTEND_DIR="$SCRIPT_DIR/frontend"
 
-FORGEJO_ADMIN_USER="pabada"
-FORGEJO_ADMIN_PASSWORD="${FORGEJO_ADMIN_PASSWORD:-pabada123}"
-FORGEJO_ADMIN_EMAIL="pabada@local.dev"
-FORGEJO_TOKEN_NAME="pabada-token"
+FORGEJO_ADMIN_USER="infinibay"
+FORGEJO_ADMIN_PASSWORD="${FORGEJO_ADMIN_PASSWORD:-infinibay123}"
+FORGEJO_ADMIN_EMAIL="infinibay@local.dev"
+FORGEJO_TOKEN_NAME="infinibay-token"
 FORGEJO_TOKEN_FILE="$DB_DIR/forgejo_token"
 
 # PID file for cleanup
@@ -93,28 +93,28 @@ cleanup() {
 trap cleanup EXIT INT TERM
 
 # ── 1. LLM Provider ────────────────────────────────────────────────────────
-step "LLM Provider ($PABADA_LLM_PROVIDER)"
+step "LLM Provider ($INFINIBAY_LLM_PROVIDER)"
 
 OLLAMA_NEEDED=false
-if [ "$PABADA_LLM_PROVIDER" = "ollama" ]; then
+if [ "$INFINIBAY_LLM_PROVIDER" = "ollama" ]; then
     OLLAMA_NEEDED=true
 fi
 # Embedding provider: defaults to "ollama" when LLM is ollama, "default" otherwise
-if [ -z "${PABADA_EMBEDDING_PROVIDER:-}" ]; then
-    if [ "$PABADA_LLM_PROVIDER" = "ollama" ]; then
+if [ -z "${INFINIBAY_EMBEDDING_PROVIDER:-}" ]; then
+    if [ "$INFINIBAY_LLM_PROVIDER" = "ollama" ]; then
         EMBED_PROVIDER="ollama"
     else
         EMBED_PROVIDER="default"
     fi
 else
-    EMBED_PROVIDER="$PABADA_EMBEDDING_PROVIDER"
+    EMBED_PROVIDER="$INFINIBAY_EMBEDDING_PROVIDER"
 fi
 if [ "$EMBED_PROVIDER" = "ollama" ]; then
     OLLAMA_NEEDED=true
 fi
 
 if [ "$OLLAMA_NEEDED" = true ]; then
-    command -v ollama &>/dev/null || die "ollama not found in PATH (needed for provider=$PABADA_LLM_PROVIDER). Install from https://ollama.ai"
+    command -v ollama &>/dev/null || die "ollama not found in PATH (needed for provider=$INFINIBAY_LLM_PROVIDER). Install from https://ollama.ai"
 
     # Start ollama serve if not already running
     if ! curl -sf "$OLLAMA_HOST/api/tags" &>/dev/null; then
@@ -147,14 +147,14 @@ if [ "$OLLAMA_NEEDED" = true ]; then
         fi
     }
 
-    if [ "$PABADA_LLM_PROVIDER" = "ollama" ]; then
+    if [ "$INFINIBAY_LLM_PROVIDER" = "ollama" ]; then
         pull_if_missing "$OLLAMA_MODEL"
     fi
     if [ "$EMBED_PROVIDER" = "ollama" ]; then
         pull_if_missing "$OLLAMA_EMBED_MODEL"
     fi
 else
-    ok "Using $PABADA_LLM_PROVIDER (no Ollama needed)"
+    ok "Using $INFINIBAY_LLM_PROVIDER (no Ollama needed)"
 fi
 
 # ── 2. Forgejo ──────────────────────────────────────────────────────────────
@@ -271,7 +271,7 @@ if ! python3 -c "import crewai" &>/dev/null; then
 fi
 
 # Install provider-specific deps
-case "$PABADA_LLM_PROVIDER" in
+case "$INFINIBAY_LLM_PROVIDER" in
     gemini)
         if ! python3 -c "import google.genai" &>/dev/null; then
             python3 -m pip install -q 'crewai[google-genai]'
@@ -361,91 +361,91 @@ fi
 step "Environment"
 
 # Database
-export PABADA_DB="$DB_PATH"
+export INFINIBAY_DB="$DB_PATH"
 
 # Sandbox — defaults to false for local dev; override in .env
-export PABADA_SANDBOX_ENABLED="${PABADA_SANDBOX_ENABLED:-false}"
+export INFINIBAY_SANDBOX_ENABLED="${INFINIBAY_SANDBOX_ENABLED:-false}"
 
 # RAG storage in local data dir
-export PABADA_RAG_PERSIST_DIR="$DB_DIR/.chromadb"
+export INFINIBAY_RAG_PERSIST_DIR="$DB_DIR/.chromadb"
 
 # ── LLM configuration (provider-dependent) ──
-# Only PABADA_* vars are exported — Python's backend/config/llm.py handles
+# Only INFINIBAY_* vars are exported — Python's backend/config/llm.py handles
 # provider env vars (OPENAI_API_KEY, GEMINI_API_KEY, etc.) internally.
-case "$PABADA_LLM_PROVIDER" in
+case "$INFINIBAY_LLM_PROVIDER" in
     ollama)
-        export PABADA_LLM_MODEL="${PABADA_LLM_MODEL:-$OLLAMA_MODEL}"
-        export PABADA_LLM_BASE_URL="${OLLAMA_HOST}"
-        export PABADA_LLM_API_KEY="${PABADA_LLM_API_KEY:-ollama}"
-        LLM_DISPLAY="${PABADA_LLM_MODEL} via ${OLLAMA_HOST}"
+        export INFINIBAY_LLM_MODEL="${INFINIBAY_LLM_MODEL:-$OLLAMA_MODEL}"
+        export INFINIBAY_LLM_BASE_URL="${OLLAMA_HOST}"
+        export INFINIBAY_LLM_API_KEY="${INFINIBAY_LLM_API_KEY:-ollama}"
+        LLM_DISPLAY="${INFINIBAY_LLM_MODEL} via ${OLLAMA_HOST}"
         ;;
     gemini)
-        : "${PABADA_LLM_API_KEY:?Set PABADA_LLM_API_KEY in .env}"
-        export PABADA_LLM_MODEL="${PABADA_LLM_MODEL:-gemini/gemini-2.0-flash}"
-        export PABADA_LLM_BASE_URL=""
-        LLM_DISPLAY="${PABADA_LLM_MODEL} (Gemini API)"
+        : "${INFINIBAY_LLM_API_KEY:?Set INFINIBAY_LLM_API_KEY in .env}"
+        export INFINIBAY_LLM_MODEL="${INFINIBAY_LLM_MODEL:-gemini/gemini-2.0-flash}"
+        export INFINIBAY_LLM_BASE_URL=""
+        LLM_DISPLAY="${INFINIBAY_LLM_MODEL} (Gemini API)"
         ;;
     openai)
-        : "${PABADA_LLM_API_KEY:?Set PABADA_LLM_API_KEY in .env}"
-        export PABADA_LLM_MODEL="${PABADA_LLM_MODEL:-gpt-4.1-mini}"
-        export PABADA_LLM_BASE_URL=""
-        LLM_DISPLAY="${PABADA_LLM_MODEL} (OpenAI API)"
+        : "${INFINIBAY_LLM_API_KEY:?Set INFINIBAY_LLM_API_KEY in .env}"
+        export INFINIBAY_LLM_MODEL="${INFINIBAY_LLM_MODEL:-gpt-4.1-mini}"
+        export INFINIBAY_LLM_BASE_URL=""
+        LLM_DISPLAY="${INFINIBAY_LLM_MODEL} (OpenAI API)"
         ;;
     anthropic)
-        : "${PABADA_LLM_API_KEY:?Set PABADA_LLM_API_KEY in .env}"
-        export PABADA_LLM_MODEL="${PABADA_LLM_MODEL:-anthropic/claude-sonnet-4-5-20250929}"
-        export PABADA_LLM_BASE_URL=""
-        LLM_DISPLAY="${PABADA_LLM_MODEL} (Anthropic API)"
+        : "${INFINIBAY_LLM_API_KEY:?Set INFINIBAY_LLM_API_KEY in .env}"
+        export INFINIBAY_LLM_MODEL="${INFINIBAY_LLM_MODEL:-anthropic/claude-sonnet-4-5-20250929}"
+        export INFINIBAY_LLM_BASE_URL=""
+        LLM_DISPLAY="${INFINIBAY_LLM_MODEL} (Anthropic API)"
         ;;
     deepseek)
-        : "${PABADA_LLM_API_KEY:?Set PABADA_LLM_API_KEY in .env}"
-        export PABADA_LLM_MODEL="${PABADA_LLM_MODEL:-deepseek/deepseek-chat}"
-        export PABADA_LLM_BASE_URL=""
-        LLM_DISPLAY="${PABADA_LLM_MODEL} (DeepSeek API)"
+        : "${INFINIBAY_LLM_API_KEY:?Set INFINIBAY_LLM_API_KEY in .env}"
+        export INFINIBAY_LLM_MODEL="${INFINIBAY_LLM_MODEL:-deepseek/deepseek-chat}"
+        export INFINIBAY_LLM_BASE_URL=""
+        LLM_DISPLAY="${INFINIBAY_LLM_MODEL} (DeepSeek API)"
         ;;
     zai)
-        : "${PABADA_LLM_API_KEY:?Set PABADA_LLM_API_KEY in .env}"
-        export PABADA_LLM_MODEL="${PABADA_LLM_MODEL:-zai/glm-4.7-flash}"
-        export PABADA_LLM_BASE_URL=""
-        LLM_DISPLAY="${PABADA_LLM_MODEL} (Zhipu AI API)"
+        : "${INFINIBAY_LLM_API_KEY:?Set INFINIBAY_LLM_API_KEY in .env}"
+        export INFINIBAY_LLM_MODEL="${INFINIBAY_LLM_MODEL:-zai/glm-4.7-flash}"
+        export INFINIBAY_LLM_BASE_URL=""
+        LLM_DISPLAY="${INFINIBAY_LLM_MODEL} (Zhipu AI API)"
         ;;
     local)
         # Local llama-server or other OpenAI-compatible endpoint.
         # Start your server separately (e.g. ./qwen.sh llama) before running start.sh.
-        : "${PABADA_LLM_MODEL:?Set PABADA_LLM_MODEL in .env}"
-        : "${PABADA_LLM_BASE_URL:?Set PABADA_LLM_BASE_URL in .env}"
-        export PABADA_LLM_API_KEY="${PABADA_LLM_API_KEY:-not-needed}"
-        LLM_DISPLAY="${PABADA_LLM_MODEL} via ${PABADA_LLM_BASE_URL}"
+        : "${INFINIBAY_LLM_MODEL:?Set INFINIBAY_LLM_MODEL in .env}"
+        : "${INFINIBAY_LLM_BASE_URL:?Set INFINIBAY_LLM_BASE_URL in .env}"
+        export INFINIBAY_LLM_API_KEY="${INFINIBAY_LLM_API_KEY:-not-needed}"
+        LLM_DISPLAY="${INFINIBAY_LLM_MODEL} via ${INFINIBAY_LLM_BASE_URL}"
         ;;
     *)
-        die "Unknown LLM provider: $PABADA_LLM_PROVIDER (valid: ollama, gemini, openai, anthropic, deepseek, zai, local)"
+        die "Unknown LLM provider: $INFINIBAY_LLM_PROVIDER (valid: ollama, gemini, openai, anthropic, deepseek, zai, local)"
         ;;
 esac
 
 # ── Embeddings configuration ──
 case "$EMBED_PROVIDER" in
     ollama)
-        export PABADA_EMBEDDING_PROVIDER="ollama"
-        export PABADA_EMBEDDING_MODEL="${PABADA_EMBEDDING_MODEL:-$OLLAMA_EMBED_MODEL}"
-        export PABADA_EMBEDDING_BASE_URL="$OLLAMA_HOST"
-        EMBED_DISPLAY="ollama/${PABADA_EMBEDDING_MODEL}"
+        export INFINIBAY_EMBEDDING_PROVIDER="ollama"
+        export INFINIBAY_EMBEDDING_MODEL="${INFINIBAY_EMBEDDING_MODEL:-$OLLAMA_EMBED_MODEL}"
+        export INFINIBAY_EMBEDDING_BASE_URL="$OLLAMA_HOST"
+        EMBED_DISPLAY="ollama/${INFINIBAY_EMBEDDING_MODEL}"
         ;;
     default)
-        export PABADA_EMBEDDING_PROVIDER="default"
+        export INFINIBAY_EMBEDDING_PROVIDER="default"
         EMBED_DISPLAY="chromadb built-in (no API)"
         ;;
     google)
-        export PABADA_EMBEDDING_PROVIDER="google"
-        export PABADA_EMBEDDING_MODEL="${PABADA_EMBEDDING_MODEL:-text-embedding-004}"
-        EMBED_DISPLAY="google/${PABADA_EMBEDDING_MODEL}"
+        export INFINIBAY_EMBEDDING_PROVIDER="google"
+        export INFINIBAY_EMBEDDING_MODEL="${INFINIBAY_EMBEDDING_MODEL:-text-embedding-004}"
+        EMBED_DISPLAY="google/${INFINIBAY_EMBEDDING_MODEL}"
         ;;
     openai)
-        export PABADA_EMBEDDING_PROVIDER="openai"
-        export PABADA_EMBEDDING_MODEL="${PABADA_EMBEDDING_MODEL:-text-embedding-3-small}"
-        EMBED_DISPLAY="openai/${PABADA_EMBEDDING_MODEL}"
+        export INFINIBAY_EMBEDDING_PROVIDER="openai"
+        export INFINIBAY_EMBEDDING_MODEL="${INFINIBAY_EMBEDDING_MODEL:-text-embedding-3-small}"
+        EMBED_DISPLAY="openai/${INFINIBAY_EMBEDDING_MODEL}"
         ;;
     *)
-        export PABADA_EMBEDDING_PROVIDER="default"
+        export INFINIBAY_EMBEDDING_PROVIDER="default"
         EMBED_DISPLAY="chromadb built-in (no API)"
         ;;
 esac
@@ -458,7 +458,7 @@ if [ "$FORGEJO_SKIP" = false ]; then
     export FORGEJO_REPO=""  # agents will set this per-project
 fi
 
-ok "PABADA_DB=$DB_PATH"
+ok "INFINIBAY_DB=$DB_PATH"
 ok "LLM=$LLM_DISPLAY"
 ok "Embeddings=$EMBED_DISPLAY"
 if [ "$FORGEJO_SKIP" = false ]; then
@@ -501,7 +501,7 @@ if [ -d "$FRONTEND_DIR" ]; then
 fi
 
 echo ""
-echo -e "${GREEN}${BOLD}=== PABADA Ready ===${NC}"
+echo -e "${GREEN}${BOLD}=== INFINIBAY Ready ===${NC}"
 echo -e "  Frontend:   ${BOLD}http://localhost:5173${NC}"
 echo -e "  Backend:    ${BOLD}http://localhost:8000${NC}"
 echo -e "  API docs:   ${BOLD}http://localhost:8000/docs${NC}"

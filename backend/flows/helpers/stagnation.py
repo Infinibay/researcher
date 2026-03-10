@@ -1,4 +1,4 @@
-"""Stagnation detection helpers for PABADA flows."""
+"""Stagnation detection helpers for INFINIBAY flows."""
 
 from __future__ import annotations
 

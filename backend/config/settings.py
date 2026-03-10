@@ -1,4 +1,4 @@
-"""Centralized configuration for PABADA tools."""
+"""Centralized configuration for Infinibay."""
 
 import os
 from pathlib import Path
@@ -6,9 +6,31 @@ from pathlib import Path
 from pydantic_settings import BaseSettings
 
 
+# ── Auto-derive embedding defaults from LLM provider ────────────────────────
+
+_EMBEDDING_DEFAULTS: dict[str, tuple[str, str]] = {
+    # provider: (embedding_provider, embedding_model)
+    "ollama": ("ollama", "nomic-embed-text"),
+    "openai": ("openai", "text-embedding-3-small"),
+    "gemini": ("google", "text-embedding-004"),
+    "anthropic": ("default", ""),
+    "deepseek": ("default", ""),
+    "zai": ("default", ""),
+}
+
+
+def _extract_provider(model: str) -> str:
+    """Extract provider prefix from LiteLLM model string."""
+    if "/" in model:
+        return model.split("/", 1)[0].lower()
+    if model.startswith(("gpt-", "o1-", "o3-", "o4-")):
+        return "openai"
+    return ""
+
+
 class Settings(BaseSettings):
     # Database
-    DB_PATH: str = os.environ.get("PABADA_DB", "/research/pabada.db")
+    DB_PATH: str = os.environ.get("INFINIBAY_DB", "/research/infinibay.db")
     MAX_RETRIES: int = 5
     RETRY_BASE_DELAY: float = 0.1  # 100ms
 
@@ -32,11 +54,11 @@ class Settings(BaseSettings):
     ]
 
     # Container sandbox
-    SANDBOX_IMAGE: str = "pabada-sandbox:latest"
+    SANDBOX_IMAGE: str = "infinibay-sandbox:latest"
     SANDBOX_CONTAINER_RUNTIME: str | None = None  # None = auto-detect
     SANDBOX_GPU_ENABLED: bool = False  # Pass GPU devices into pods/containers
     WORKSPACE_BASE_DIR: str = os.environ.get(
-        "PABADA_WORKSPACE_BASE_DIR",
+        "INFINIBAY_WORKSPACE_BASE_DIR",
         str(Path(__file__).resolve().parent.parent.parent / ".data" / "workspaces"),
     )
     CLEANUP_INTERVAL_SECONDS: int = 300
@@ -63,8 +85,8 @@ class Settings(BaseSettings):
     # Fallback web search
     WEB_SEARCH_FALLBACK_ENABLED: bool = True  # DDG as fallback when Serper fails
 
-    # LLM (used by CrewAI agents via LiteLLM)
-    # Model name — use LiteLLM format for non-OpenAI providers:
+    # LLM (via LiteLLM)
+    # Model name — use LiteLLM format:
     #   ollama:    "qwen3-coder:30b"
     #   gemini:    "gemini/gemini-2.0-flash"
     #   openai:    "gpt-4.1-mini"
@@ -76,16 +98,9 @@ class Settings(BaseSettings):
     LLM_API_KEY: str = ""
     LLM_THINKING: bool = False  # Enable/disable thinking mode (Qwen3, etc.)
 
-    # Model capability probing at startup
-    MODEL_PROBE_ENABLED: bool = True
-
-    # Memory (CrewAI native memory system)
-    MEMORY_ENABLED: bool = True
-    MEMORY_SCORE_THRESHOLD: float = 0.35
-
-    # Embedding / Knowledge
-    EMBEDDING_PROVIDER: str = "openai"  # openai, azure, google, ollama
-    EMBEDDING_MODEL: str = "text-embedding-3-small"
+    # Embedding / Knowledge (auto-derived from LLM provider if not set)
+    EMBEDDING_PROVIDER: str = ""  # empty = auto-derive from LLM_MODEL
+    EMBEDDING_MODEL: str = ""     # empty = auto-derive from provider
     EMBEDDING_BASE_URL: str | None = None  # Override for Ollama/local
     KNOWLEDGE_CHUNK_SIZE: int = 1000  # Characters per chunk
     KNOWLEDGE_CHUNK_OVERLAP: int = 200  # Overlap between chunks
@@ -107,7 +122,7 @@ class Settings(BaseSettings):
     # Forgejo (local git server)
     FORGEJO_API_URL: str = os.environ.get("FORGEJO_API_URL", "")
     FORGEJO_TOKEN: str = os.environ.get("FORGEJO_TOKEN", "")
-    FORGEJO_OWNER: str = os.environ.get("FORGEJO_OWNER", "pabada")
+    FORGEJO_OWNER: str = os.environ.get("FORGEJO_OWNER", "infinibay")
 
     # CI Gate
     CI_TEST_COMMAND: str = "pytest -x -q"
@@ -127,10 +142,6 @@ class Settings(BaseSettings):
     LOOP_CIRCUIT_THRESHOLD: int = 3
     LOOP_CIRCUIT_COOLDOWN: int = 60
 
-    # Agent execution time limits removed — local models are too slow
-    # for hard timeouts; the anti-loop system handles runaway agents.
-    CREW_MAX_RPM: int = 30  # LLM API requests per minute across all agents in a crew
-
     # Agent loop shutdown
     WORKER_SHUTDOWN_TIMEOUT: float = 10.0
 
@@ -147,12 +158,6 @@ class Settings(BaseSettings):
     LOOP_MAX_TOOL_CALLS_PER_ACTION: int = 40
     LOOP_MAX_TOTAL_TOOL_CALLS: int = 600
     LOOP_HISTORY_WINDOW: int = 0  # 0 = keep all; N = last N summaries
-
-    # Agent Engine
-    AGENT_ENGINE: str = "crewai"  # "crewai" | "claude_code" | "loop"
-    CLAUDE_CODE_MODEL: str = "claude-opus-4-6"
-    # Claude Code engine timeouts removed — local models need unlimited time.
-    CLAUDE_CODE_CREDENTIALS_PATH: str = "~/.claude/.credentials.json"
 
     # Agent Autonomy Layer
     AUTONOMY_ENABLED: bool = True
@@ -172,7 +177,21 @@ class Settings(BaseSettings):
     AGENT_LOOP_EVENT_TIMEOUT: float = 3600.0     # max seconds before an in_progress event is considered stuck
     AGENT_LOOP_DEAD_AGENT_TIMEOUT: float = 1200.0  # 20 min — agent is considered dead if no poll in this time
 
-    model_config = {"env_prefix": "PABADA_"}
+    model_config = {"env_prefix": "INFINIBAY_"}
+
+    def get_embedding_provider(self) -> str:
+        """Return embedding provider, auto-derived from LLM model if not set."""
+        if self.EMBEDDING_PROVIDER:
+            return self.EMBEDDING_PROVIDER
+        provider = _extract_provider(self.LLM_MODEL)
+        return _EMBEDDING_DEFAULTS.get(provider, ("default", ""))[0]
+
+    def get_embedding_model(self) -> str:
+        """Return embedding model, auto-derived from provider if not set."""
+        if self.EMBEDDING_MODEL:
+            return self.EMBEDDING_MODEL
+        provider = _extract_provider(self.LLM_MODEL)
+        return _EMBEDDING_DEFAULTS.get(provider, ("default", ""))[1]
 
 
 settings = Settings()

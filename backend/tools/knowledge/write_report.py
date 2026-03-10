@@ -6,7 +6,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry, get_db_path
 
 
@@ -18,7 +18,7 @@ class WriteReportInput(BaseModel):
     )
 
 
-class WriteReportTool(PabadaBaseTool):
+class WriteReportTool(InfinibayBaseTool):
     name: str = "write_report"
     description: str = (
         "Write a research report. Saves as a project-scoped artifact and "

@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 
@@ -20,7 +20,7 @@ class GitBranchInput(BaseModel):
     base_branch: str = Field(default="main", description="Base branch to create from")
 
 
-class GitBranchTool(PabadaBaseTool):
+class GitBranchTool(InfinibayBaseTool):
     name: str = "git_branch"
     description: str = (
         "Create or checkout a Git branch. "

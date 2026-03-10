@@ -1,4 +1,4 @@
-"""PABADA Agent definitions and registry."""
+"""INFINIBAY Agent definitions and registry."""
 
 from backend.agents.project_lead import create_project_lead_agent
 from backend.agents.team_lead import create_team_lead_agent

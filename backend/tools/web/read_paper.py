@@ -9,7 +9,7 @@ from typing import Type
 from pydantic import BaseModel, Field
 
 from backend.config.settings import settings
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.web.rate_limiter import web_rate_limiter
 from backend.tools.web.robots_checker import robots_checker
 
@@ -20,7 +20,7 @@ class ReadPaperInput(BaseModel):
     arxiv_id: str | None = Field(default=None, description="arXiv paper ID (e.g. '2301.07041')")
 
 
-class ReadPaperTool(PabadaBaseTool):
+class ReadPaperTool(InfinibayBaseTool):
     name: str = "read_paper"
     description: str = (
         "Read an academic paper from arXiv, DOI, or a PDF URL. "
@@ -43,7 +43,7 @@ class ReadPaperTool(PabadaBaseTool):
             return pdf_url
 
         # Check robots.txt
-        if not robots_checker.is_allowed(pdf_url, "PabadaBot/2.0"):
+        if not robots_checker.is_allowed(pdf_url, "InfinibayBot/2.0"):
             return self._error("robots.txt disallows fetching this URL")
 
         # Rate limit
@@ -59,7 +59,7 @@ class ReadPaperTool(PabadaBaseTool):
             with httpx.Client(
                 timeout=settings.WEB_TIMEOUT * 2,  # Papers can be large
                 follow_redirects=True,
-                headers={"User-Agent": "Mozilla/5.0 (compatible; PabadaBot/2.0)"},
+                headers={"User-Agent": "Mozilla/5.0 (compatible; InfinibayBot/2.0)"},
             ) as client:
                 response = client.get(pdf_url)
                 response.raise_for_status()

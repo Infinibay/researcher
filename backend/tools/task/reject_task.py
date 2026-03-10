@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 
@@ -14,7 +14,7 @@ class RejectTaskInput(BaseModel):
     reason: str = Field(..., description="Reason for rejection / change request")
 
 
-class RejectTaskTool(PabadaBaseTool):
+class RejectTaskTool(InfinibayBaseTool):
     name: str = "reject_task"
     description: str = (
         "Reject a task that is in review_ready status, sending it back "

@@ -10,7 +10,7 @@ from typing import Type
 from pydantic import BaseModel, Field
 
 from backend.config.settings import settings
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 
@@ -21,7 +21,7 @@ class CreatePRInput(BaseModel):
     draft: bool = Field(default=False, description="Create as draft PR")
 
 
-class CreatePRTool(PabadaBaseTool):
+class CreatePRTool(InfinibayBaseTool):
     name: str = "create_pr"
     description: str = (
         "Create a pull request on the remote repository. "

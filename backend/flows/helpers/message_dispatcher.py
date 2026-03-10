@@ -134,7 +134,7 @@ def _build_enriched_description(
 
     if from_agent == "user":
         if is_claude_code:
-            tool_name = "mcp__pabada__chat-send"
+            tool_name = "mcp__infinibay__chat-send"
             reply_instruction = (
                 f"You MUST reply using the `{tool_name}` tool with "
                 f'`to_agent="user"` and your response as the `message` parameter'
@@ -155,7 +155,7 @@ def _build_enriched_description(
         )
     else:
         if is_claude_code:
-            tool_name = "mcp__pabada__chat-send"
+            tool_name = "mcp__infinibay__chat-send"
         else:
             tool_name = "send_message"
 
@@ -224,7 +224,7 @@ def dispatch_message(
 
         from backend.engine import get_engine
         reply_tool = (
-            "mcp__pabada__chat-send"
+            "mcp__infinibay__chat-send"
             if settings.AGENT_ENGINE == "claude_code"
             else "send_message"
         )

@@ -6,7 +6,7 @@ from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
-    from backend.agents.base import PabadaAgent
+    from backend.agents.base import InfinibayAgent
 
 
 class AgentKilledError(RuntimeError):
@@ -24,7 +24,7 @@ class AgentEngine(ABC):
     @abstractmethod
     def execute(
         self,
-        agent: PabadaAgent,
+        agent: InfinibayAgent,
         task_prompt: tuple[str, str],
         *,
         verbose: bool = True,
@@ -38,7 +38,7 @@ class AgentEngine(ABC):
         """Execute a task using the given agent and return the string result.
 
         Args:
-            agent: A PabadaAgent instance with role, backstory, tools, etc.
+            agent: A InfinibayAgent instance with role, backstory, tools, etc.
             task_prompt: (description, expected_output) tuple.
             verbose: Whether to enable verbose logging.
             guardrail: Validation function for the output.

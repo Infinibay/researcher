@@ -25,7 +25,7 @@ def mock_runtime():
 @pytest.fixture()
 def pm(mock_runtime, monkeypatch):
     """Provide a PodManager with mocked runtime and settings."""
-    monkeypatch.setenv("PABADA_SANDBOX_ENABLED", "true")
+    monkeypatch.setenv("INFINIBAY_SANDBOX_ENABLED", "true")
 
     from backend.security.pod_manager import PodManager
     manager = PodManager()
@@ -40,7 +40,7 @@ class TestStartPod:
             info = pm.start_pod("dev_1_p1", "developer", "/tmp/ws")
 
         assert info.agent_id == "dev_1_p1"
-        assert info.container_name == "pabada-pod-dev_1_p1"
+        assert info.container_name == "infinibay-pod-dev_1_p1"
         assert info.container_id == "abc123"
         assert info.workspace_path == "/tmp/ws"
         assert info.role == "developer"
@@ -123,7 +123,7 @@ class TestStopPod:
             stopped = pm.stop_pod("dev_1_p1")
 
         assert stopped
-        mock_runtime.stop_container.assert_called_once_with("pabada-pod-dev_1_p1")
+        mock_runtime.stop_container.assert_called_once_with("infinibay-pod-dev_1_p1")
 
     def test_stop_nonexistent_returns_false(self, pm):
         assert not pm.stop_pod("nonexistent")

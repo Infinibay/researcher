@@ -1,4 +1,4 @@
-"""Event listeners for PABADA — poll DB for state changes and trigger flows.
+"""Event listeners for INFINIBAY — poll DB for state changes and trigger flows.
 
 Listeners run in background threads, polling at configurable intervals.
 Each listener checks specific DB conditions and emits events that flows can react to.

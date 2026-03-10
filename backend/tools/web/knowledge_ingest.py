@@ -1,4 +1,4 @@
-"""Helper for ingesting scraped web content into the PABADA knowledge system.
+"""Helper for ingesting scraped web content into the INFINIBAY knowledge system.
 
 Stores scraped content as findings (type='observation') so it flows through
 the existing FindingsKnowledgeSource → RAG pipeline without schema changes.

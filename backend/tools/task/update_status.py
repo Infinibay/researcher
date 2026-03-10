@@ -7,7 +7,7 @@ from pydantic import BaseModel, Field
 
 from backend.state.dependency_validator import DependencyValidator
 from backend.state.machine import TASK_STATUSES, VALID_TRANSITIONS
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 
@@ -55,7 +55,7 @@ class UpdateTaskStatusInput(BaseModel):
     )
 
 
-class UpdateTaskStatusTool(PabadaBaseTool):
+class UpdateTaskStatusTool(InfinibayBaseTool):
     name: str = "update_task_status"
     description: str = (
         "Update the status of a task. Validates state transitions "

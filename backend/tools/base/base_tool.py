@@ -1,4 +1,4 @@
-"""Base tool class for all PABADA tools."""
+"""Base tool class for all INFINIBAY tools."""
 
 import inspect
 import json
@@ -25,8 +25,8 @@ from backend.tools.base.db import DBConnection, execute_with_retry, get_db_path
 logger = logging.getLogger(__name__)
 
 
-class PabadaBaseTool(BaseTool, ABC):
-    """Abstract base class for all PABADA tools.
+class InfinibayBaseTool(BaseTool, ABC):
+    """Abstract base class for all INFINIBAY tools.
 
     Provides:
     - Database access with retry logic
@@ -109,7 +109,7 @@ class PabadaBaseTool(BaseTool, ABC):
             return ctx.workspace_path
         return get_current_workspace_path()
 
-    def _bind_delegate(self, tool: "PabadaBaseTool") -> None:
+    def _bind_delegate(self, tool: "InfinibayBaseTool") -> None:
         """Propagate agent binding to a tool created at runtime.
 
         Use this when one tool internally creates another tool instance

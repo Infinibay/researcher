@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 
@@ -13,7 +13,7 @@ class LoadSessionNoteInput(BaseModel):
     task_id: int = Field(..., description="ID of the task to load the session for")
 
 
-class LoadSessionNoteTool(PabadaBaseTool):
+class LoadSessionNoteTool(InfinibayBaseTool):
     name: str = "load_session_note"
     description: str = (
         "Retrieve previously saved session notes for a task so you can "

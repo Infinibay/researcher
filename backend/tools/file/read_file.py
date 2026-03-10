@@ -7,7 +7,7 @@ from typing import Type
 from pydantic import BaseModel, Field
 
 from backend.config.settings import settings
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 
 
 class ReadFileInput(BaseModel):
@@ -28,7 +28,7 @@ class ReadFileInput(BaseModel):
     )
 
 
-class ReadFileTool(PabadaBaseTool):
+class ReadFileTool(InfinibayBaseTool):
     name: str = "read_file"
     description: str = (
         "Read the contents of a file. Returns the file content as numbered "
@@ -102,7 +102,7 @@ class ReadFileTool(PabadaBaseTool):
     def _run_in_pod(
         self, path: str, offset: int | None, limit: int | None,
     ) -> str:
-        """Read file via pabada-file-helper inside the pod."""
+        """Read file via infinibay-file-helper inside the pod."""
         req = {"op": "read", "path": path}
         if offset is not None:
             req["offset"] = offset
@@ -111,7 +111,7 @@ class ReadFileTool(PabadaBaseTool):
 
         try:
             result = self._exec_in_pod(
-                ["pabada-file-helper"],
+                ["infinibay-file-helper"],
                 stdin_data=json.dumps(req),
             )
         except RuntimeError as e:

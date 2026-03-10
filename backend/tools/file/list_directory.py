@@ -8,7 +8,7 @@ from typing import Type
 from pydantic import BaseModel, Field
 
 from backend.config.settings import settings
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 
 
 class ListDirectoryInput(BaseModel):
@@ -19,7 +19,7 @@ class ListDirectoryInput(BaseModel):
     )
 
 
-class ListDirectoryTool(PabadaBaseTool):
+class ListDirectoryTool(InfinibayBaseTool):
     name: str = "list_directory"
     description: str = (
         "List files and directories in a given path. "
@@ -124,14 +124,14 @@ class ListDirectoryTool(PabadaBaseTool):
     def _run_in_pod(
         self, path: str, recursive: bool, pattern: str | None,
     ) -> str:
-        """List directory via pabada-file-helper inside the pod."""
+        """List directory via infinibay-file-helper inside the pod."""
         req = {"op": "list", "path": path, "recursive": recursive}
         if pattern:
             req["pattern"] = pattern
 
         try:
             result = self._exec_in_pod(
-                ["pabada-file-helper"],
+                ["infinibay-file-helper"],
                 stdin_data=json.dumps(req),
             )
         except RuntimeError as e:

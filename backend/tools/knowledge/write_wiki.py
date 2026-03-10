@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 
@@ -16,7 +16,7 @@ class WriteWikiInput(BaseModel):
     parent_path: str | None = Field(default=None, description="Parent page path for hierarchy")
 
 
-class WriteWikiTool(PabadaBaseTool):
+class WriteWikiTool(InfinibayBaseTool):
     name: str = "write_wiki"
     description: str = (
         "Create or update a wiki page. Pages are identified by their path "

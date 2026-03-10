@@ -8,7 +8,7 @@ from typing import Type
 from pydantic import BaseModel, Field
 
 from backend.config.settings import settings
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 
 _API_BASE = "https://context7.com/api/v2"
 
@@ -23,7 +23,7 @@ class Context7SearchInput(BaseModel):
     )
 
 
-class Context7SearchTool(PabadaBaseTool):
+class Context7SearchTool(InfinibayBaseTool):
     name: str = "context7_search_library"
     description: str = (
         "Search for a library or framework in Context7 to get its library ID. "
@@ -40,8 +40,8 @@ class Context7SearchTool(PabadaBaseTool):
         except ImportError:
             return self._error("httpx not installed. Run: pip install httpx")
 
-        api_key = os.environ.get("PABADA_CONTEXT7_API_KEY", "")
-        headers = {"User-Agent": "PabadaBot/2.0"}
+        api_key = os.environ.get("INFINIBAY_CONTEXT7_API_KEY", "")
+        headers = {"User-Agent": "InfinibayBot/2.0"}
         if api_key:
             headers["Authorization"] = f"Bearer {api_key}"
 
@@ -65,7 +65,7 @@ class Context7SearchTool(PabadaBaseTool):
         except httpx.HTTPStatusError as e:
             if e.response.status_code == 429:
                 return self._error(
-                    "Context7 rate limit exceeded. Set PABADA_CONTEXT7_API_KEY "
+                    "Context7 rate limit exceeded. Set INFINIBAY_CONTEXT7_API_KEY "
                     "for higher limits, or wait and retry."
                 )
             return self._error(f"Context7 API error {e.response.status_code}")

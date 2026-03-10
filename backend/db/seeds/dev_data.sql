@@ -1,5 +1,5 @@
 -- =============================================================================
--- PABADA v2 - Development Seed Data
+-- INFINIBAY v2 - Development Seed Data
 -- Inserts sample data for development and testing.
 -- Run after schema.sql has been applied.
 -- =============================================================================

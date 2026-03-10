@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 
@@ -19,7 +19,7 @@ class GetTaskInput(BaseModel):
     )
 
 
-class GetTaskTool(PabadaBaseTool):
+class GetTaskTool(InfinibayBaseTool):
     name: str = "get_task"
     description: str = (
         "Get detailed information about a specific task by its ID, "

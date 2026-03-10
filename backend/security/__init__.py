@@ -1,4 +1,4 @@
-"""Security module for PABADA — container sandboxing, workspace isolation, cleanup."""
+"""Security module for INFINIBAY — container sandboxing, workspace isolation, cleanup."""
 
 from backend.security.container_runtime import ContainerRuntime, get_runtime
 from backend.security.sandbox import SandboxExecutor, SandboxResult, sandbox_executor

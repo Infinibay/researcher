@@ -10,7 +10,7 @@ from pydantic import BaseModel, Field
 
 from backend.config.settings import settings
 from backend.flows.event_listeners import FlowEvent, event_bus
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 logger = logging.getLogger(__name__)
@@ -27,7 +27,7 @@ class AskUserInput(BaseModel):
     )
 
 
-class AskUserTool(PabadaBaseTool):
+class AskUserTool(InfinibayBaseTool):
     name: str = "ask_user"
     description: str = (
         "Ask a question to the human user. Only available to the Project Lead. "

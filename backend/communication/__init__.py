@@ -1,4 +1,4 @@
-"""Communication service layer for PABADA.
+"""Communication service layer for INFINIBAY.
 
 Centralizes inter-agent messaging, thread management, notification delivery,
 pre-ticket check-in protocol enforcement, and brainstorming coordination.

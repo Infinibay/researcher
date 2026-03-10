@@ -1,4 +1,4 @@
-"""PABADA Knowledge System — CrewAI knowledge source integration layer."""
+"""INFINIBAY Knowledge System — CrewAI knowledge source integration layer."""
 
 from backend.knowledge.service import KnowledgeService
 from backend.knowledge.sources import (

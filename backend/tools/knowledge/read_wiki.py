@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry, sanitize_fts5_query
 
 
@@ -23,7 +23,7 @@ class ReadWikiInput(BaseModel):
     )
 
 
-class ReadWikiTool(PabadaBaseTool):
+class ReadWikiTool(InfinibayBaseTool):
     name: str = "read_wiki"
     description: str = (
         "Read wiki pages. Specify a page path for a specific page, "

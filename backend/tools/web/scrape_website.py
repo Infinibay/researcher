@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.web.rate_limiter import web_rate_limiter
 from backend.tools.web.robots_checker import robots_checker
 
@@ -22,7 +22,7 @@ class ScrapeWebsiteInput(BaseModel):
     )
 
 
-class ScrapeWebsitePabadaTool(PabadaBaseTool):
+class ScrapeWebsiteInfinibayTool(InfinibayBaseTool):
     name: str = "scrape_website"
     description: str = (
         "Scrape and extract content from a website. Returns clean text/markdown. "
@@ -37,7 +37,7 @@ class ScrapeWebsitePabadaTool(PabadaBaseTool):
         topic: str = "",
     ) -> str:
         # Check robots.txt
-        if not robots_checker.is_allowed(url, "PabadaBot/2.0"):
+        if not robots_checker.is_allowed(url, "InfinibayBot/2.0"):
             return self._error("robots.txt disallows scraping this URL")
 
         # Rate limit

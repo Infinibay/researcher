@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 
@@ -13,7 +13,7 @@ class CheckDependenciesInput(BaseModel):
     task_id: int = Field(..., description="ID of the task to check dependencies for")
 
 
-class CheckDependenciesTool(PabadaBaseTool):
+class CheckDependenciesTool(InfinibayBaseTool):
     name: str = "check_dependencies"
     description: str = (
         "Check what blocks a task and what it would unblock. Shows "

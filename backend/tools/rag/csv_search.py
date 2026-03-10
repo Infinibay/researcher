@@ -7,7 +7,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.rag.base import (
     embed_and_store,
     file_content_hash,
@@ -29,7 +29,7 @@ class CSVSearchInput(BaseModel):
     )
 
 
-class CSVSearchTool(PabadaBaseTool):
+class CSVSearchTool(InfinibayBaseTool):
     name: str = "csv_search"
     description: str = (
         "Search within a CSV file using semantic similarity. "

@@ -11,7 +11,7 @@ from pydantic import BaseModel, Field
 from backend.config.settings import settings
 from backend.security.container_runtime import runtime_available
 from backend.security.sandbox import sandbox_executor
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 
 logger = logging.getLogger(__name__)
 
@@ -34,7 +34,7 @@ class ExecuteCommandInput(BaseModel):
     )
 
 
-class ExecuteCommandTool(PabadaBaseTool):
+class ExecuteCommandTool(InfinibayBaseTool):
     name: str = "execute_command"
     description: str = (
         "Execute a shell command. When running inside a container pod, all "

@@ -1,4 +1,4 @@
-"""Pydantic state models for all PABADA flows."""
+"""Pydantic state models for all INFINIBAY flows."""
 
 from __future__ import annotations
 

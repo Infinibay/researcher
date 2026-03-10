@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from backend.agents.base import PabadaAgent
+from backend.agents.base import InfinibayAgent
 from backend.config.settings import settings
 from backend.prompts.research_reviewer.system import build_system_prompt
 
@@ -17,7 +17,7 @@ def create_research_reviewer_agent(
     teammates: list[dict[str, str]] | None = None,
     llm: Any | None = None,
     knowledge_service: Any | None = None,
-) -> PabadaAgent:
+) -> InfinibayAgent:
     """Instantiate a Research Reviewer agent."""
     knowledge_sources = None
     if knowledge_service is not None:
@@ -30,7 +30,7 @@ def create_research_reviewer_agent(
         engine=settings.AGENT_ENGINE,
     )
 
-    return PabadaAgent(
+    return InfinibayAgent(
         agent_id=agent_id,
         role="research_reviewer",
         name=agent_name,

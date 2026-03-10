@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 
@@ -20,7 +20,7 @@ class SummarizeFindingsInput(BaseModel):
     )
 
 
-class SummarizeFindingsTool(PabadaBaseTool):
+class SummarizeFindingsTool(InfinibayBaseTool):
     name: str = "summarize_findings"
     description: str = (
         "Get a compact overview of findings: counts by type, confidence "

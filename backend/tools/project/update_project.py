@@ -6,7 +6,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 logger = logging.getLogger(__name__)
@@ -53,7 +53,7 @@ class UpdateProjectInput(BaseModel):
     )
 
 
-class UpdateProjectTool(PabadaBaseTool):
+class UpdateProjectTool(InfinibayBaseTool):
     name: str = "update_project"
     description: str = (
         "Update a project field (name, description, metadata_json, or status). "

@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 
@@ -33,7 +33,7 @@ class ReadTasksInput(BaseModel):
     limit: int = Field(default=50, ge=1, le=200, description="Max results to return")
 
 
-class ReadTasksTool(PabadaBaseTool):
+class ReadTasksTool(InfinibayBaseTool):
     name: str = "read_tasks"
     description: str = (
         "List tasks with optional filters for status, type, assignee, "

@@ -22,12 +22,12 @@ class CleanupManager:
     # ── Container cleanup ───────────────────────────────────────────────
 
     def cleanup_stale_containers(self) -> int:
-        """Remove all exited pabada-sandbox-* containers. Returns count removed."""
+        """Remove all exited infinibay-sandbox-* containers. Returns count removed."""
         if not runtime_available():
             return 0
 
         runtime = get_runtime()
-        stale = runtime.list_stale_containers("pabada-sandbox-")
+        stale = runtime.list_stale_containers("infinibay-sandbox-")
         removed = 0
         for c in stale:
             if runtime.remove_container(c["id"]):
@@ -93,7 +93,7 @@ class CleanupManager:
                 event = threading.Event()
                 event.wait(timeout=interval_seconds)
 
-        t = threading.Thread(target=_loop, daemon=True, name="pabada-cleanup")
+        t = threading.Thread(target=_loop, daemon=True, name="infinibay-cleanup")
         t.start()
         logger.info("Periodic cleanup started (interval=%ds)", interval_seconds)
 

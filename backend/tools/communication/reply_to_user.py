@@ -14,7 +14,7 @@ from typing import Type
 from pydantic import BaseModel, Field
 
 from backend.flows.event_listeners import FlowEvent, event_bus
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 
@@ -29,7 +29,7 @@ class ReplyToUserInput(BaseModel):
     )
 
 
-class ReplyToUserTool(PabadaBaseTool):
+class ReplyToUserTool(InfinibayBaseTool):
     name: str = "reply_to_user"
     description: str = (
         "Reply to a message from the human user. Use this ONLY to respond "

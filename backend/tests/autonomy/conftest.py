@@ -11,7 +11,7 @@ import pytest
 @pytest.fixture(autouse=True)
 def _isolated_db(tmp_path, monkeypatch):
     """Create an isolated SQLite DB per test from schema.sql."""
-    db_path = str(tmp_path / "test_pabada.db")
+    db_path = str(tmp_path / "test_infinibay.db")
 
     schema_file = Path(__file__).resolve().parents[2] / "db" / "schema.sql"
     schema_sql = schema_file.read_text()
@@ -20,7 +20,7 @@ def _isolated_db(tmp_path, monkeypatch):
     conn.executescript(schema_sql)
     conn.close()
 
-    monkeypatch.setenv("PABADA_DB", db_path)
+    monkeypatch.setenv("INFINIBAY_DB", db_path)
     yield db_path
 
 

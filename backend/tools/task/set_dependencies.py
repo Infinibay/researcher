@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 
@@ -19,7 +19,7 @@ class SetTaskDependenciesInput(BaseModel):
     )
 
 
-class SetTaskDependenciesTool(PabadaBaseTool):
+class SetTaskDependenciesTool(InfinibayBaseTool):
     name: str = "set_task_dependencies"
     description: str = (
         "Set dependencies for a task. Validates that no circular dependencies "

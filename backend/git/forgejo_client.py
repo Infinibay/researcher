@@ -114,7 +114,7 @@ class ForgejoClient:
         Returns the full Forgejo repo object (includes ``clone_url``).
         """
         # Check if repo already exists — return it directly
-        lookup_owner = owner or self._owner or "pabada"
+        lookup_owner = owner or self._owner or "infinibay"
         existing = self.get_repo(lookup_owner, name)
         if existing:
             logger.info("Forgejo repo '%s/%s' already exists, reusing it", lookup_owner, name)

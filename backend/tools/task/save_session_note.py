@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 VALID_PHASES = (
@@ -30,7 +30,7 @@ class SaveSessionNoteInput(BaseModel):
     )
 
 
-class SaveSessionNoteTool(PabadaBaseTool):
+class SaveSessionNoteTool(InfinibayBaseTool):
     name: str = "save_session_note"
     description: str = (
         "Persist your current progress on a task so work can be resumed "

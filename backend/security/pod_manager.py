@@ -101,7 +101,7 @@ class PodManager:
         runtime = get_runtime(settings.SANDBOX_CONTAINER_RUNTIME)
         limits = get_limits_for_role(role)
 
-        container_name = f"pabada-pod-{agent_id}"
+        container_name = f"infinibay-pod-{agent_id}"
 
         # Clean up any leftover container with the same name
         if runtime.is_container_running(container_name):
@@ -202,7 +202,7 @@ class PodManager:
                 except Exception:
                     pass
 
-        # Generate minimal settings.json with context7 + pabada MCP servers
+        # Generate minimal settings.json with context7 + infinibay MCP servers
         claude_settings = {
             "model": settings.CLAUDE_CODE_MODEL,
             "permissions": {
@@ -211,31 +211,31 @@ class PodManager:
                     "WebSearch", "WebFetch",
                     "mcp__plugin_context7_context7__resolve-library-id",
                     "mcp__plugin_context7_context7__get-library-docs",
-                    "mcp__pabada__task-get",
-                    "mcp__pabada__task-list",
-                    "mcp__pabada__task-create",
-                    "mcp__pabada__task-update-status",
-                    "mcp__pabada__task-take",
-                    "mcp__pabada__task-add-comment",
-                    "mcp__pabada__task-set-dependencies",
-                    "mcp__pabada__task-approve",
-                    "mcp__pabada__task-reject",
-                    "mcp__pabada__epic-create",
-                    "mcp__pabada__milestone-create",
-                    "mcp__pabada__chat-send",
-                    "mcp__pabada__chat-read",
-                    "mcp__pabada__chat-ask-team-lead",
-                    "mcp__pabada__chat-ask-project-lead",
-                    "mcp__pabada__finding-record",
-                    "mcp__pabada__finding-read",
-                    "mcp__pabada__finding-validate",
-                    "mcp__pabada__finding-reject",
-                    "mcp__pabada__wiki-read",
-                    "mcp__pabada__wiki-write",
-                    "mcp__pabada__query-database",
-                    "mcp__pabada__create-pr",
-                    "mcp__pabada__session-save",
-                    "mcp__pabada__session-load",
+                    "mcp__infinibay__task-get",
+                    "mcp__infinibay__task-list",
+                    "mcp__infinibay__task-create",
+                    "mcp__infinibay__task-update-status",
+                    "mcp__infinibay__task-take",
+                    "mcp__infinibay__task-add-comment",
+                    "mcp__infinibay__task-set-dependencies",
+                    "mcp__infinibay__task-approve",
+                    "mcp__infinibay__task-reject",
+                    "mcp__infinibay__epic-create",
+                    "mcp__infinibay__milestone-create",
+                    "mcp__infinibay__chat-send",
+                    "mcp__infinibay__chat-read",
+                    "mcp__infinibay__chat-ask-team-lead",
+                    "mcp__infinibay__chat-ask-project-lead",
+                    "mcp__infinibay__finding-record",
+                    "mcp__infinibay__finding-read",
+                    "mcp__infinibay__finding-validate",
+                    "mcp__infinibay__finding-reject",
+                    "mcp__infinibay__wiki-read",
+                    "mcp__infinibay__wiki-write",
+                    "mcp__infinibay__query-database",
+                    "mcp__infinibay__create-pr",
+                    "mcp__infinibay__session-save",
+                    "mcp__infinibay__session-load",
                 ],
                 "deny": [],
             },
@@ -245,10 +245,10 @@ class PodManager:
                     "command": "npx",
                     "args": ["-y", "@upstash/context7-mcp"],
                 },
-                "pabada": {
+                "infinibay": {
                     "type": "stdio",
                     "command": "python3",
-                    "args": ["/usr/local/bin/pabada-mcp"],
+                    "args": ["/usr/local/bin/infinibay-mcp"],
                 },
             },
         }
@@ -258,7 +258,7 @@ class PodManager:
         try:
             runtime.exec_command(
                 container_name,
-                ["sh", "-c", f"cat > /root/.claude/settings.json << 'PABADA_EOF'\n{settings_json}\nPABADA_EOF"],
+                ["sh", "-c", f"cat > /root/.claude/settings.json << 'INFINIBAY_EOF'\n{settings_json}\nINFINIBAY_EOF"],
                 cwd="/root",
                 timeout=10,
             )

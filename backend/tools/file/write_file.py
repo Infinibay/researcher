@@ -10,7 +10,7 @@ from typing import Literal, Type
 from pydantic import BaseModel, Field
 
 from backend.config.settings import settings
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 
@@ -22,7 +22,7 @@ class WriteFileInput(BaseModel):
     )
 
 
-class WriteFileTool(PabadaBaseTool):
+class WriteFileTool(InfinibayBaseTool):
     name: str = "write_file"
     description: str = (
         "Write content to a file. Creates parent directories if needed. "
@@ -67,7 +67,7 @@ class WriteFileTool(PabadaBaseTool):
         try:
             dir_name = os.path.dirname(path)
             if mode == "w":
-                fd, tmp_path = tempfile.mkstemp(dir=dir_name, prefix=".pabada_")
+                fd, tmp_path = tempfile.mkstemp(dir=dir_name, prefix=".infinibay_")
                 try:
                     with os.fdopen(fd, "w", encoding="utf-8") as f:
                         f.write(content)
@@ -114,12 +114,12 @@ class WriteFileTool(PabadaBaseTool):
         })
 
     def _run_in_pod(self, path: str, content: str, mode: str) -> str:
-        """Write file via pabada-file-helper inside the pod."""
+        """Write file via infinibay-file-helper inside the pod."""
         req = {"op": "write", "path": path, "content": content, "mode": mode}
 
         try:
             result = self._exec_in_pod(
-                ["pabada-file-helper"],
+                ["infinibay-file-helper"],
                 stdin_data=json.dumps(req),
             )
         except RuntimeError as e:

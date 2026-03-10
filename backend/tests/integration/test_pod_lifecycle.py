@@ -19,7 +19,7 @@ def _sandbox_image_available():
             return False
         # Also check that the sandbox image is built
         result = subprocess.run(
-            ["podman", "image", "exists", "pabada-sandbox:latest"],
+            ["podman", "image", "exists", "infinibay-sandbox:latest"],
             capture_output=True, timeout=5,
         )
         return result.returncode == 0
@@ -53,7 +53,7 @@ class TestPodLifecycle:
                 role="developer",
                 workspace_path=workspace,
             )
-            assert info.container_name == "pabada-pod-test_dev_1"
+            assert info.container_name == "infinibay-pod-test_dev_1"
 
             # Exec a command
             result = pm.exec_in_pod(

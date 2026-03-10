@@ -1,4 +1,4 @@
-"""Helper utilities for PABADA flows — re-export shim.
+"""Helper utilities for INFINIBAY flows — re-export shim.
 
 All functions have been split into focused modules:
 - db_helpers: project/task CRUD and queries

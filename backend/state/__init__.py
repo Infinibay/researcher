@@ -1,4 +1,4 @@
-"""Centralized state management for PABADA projects.
+"""Centralized state management for INFINIBAY projects.
 
 Provides the canonical task state machine, dependency validation,
 progress metrics, and project completion detection.

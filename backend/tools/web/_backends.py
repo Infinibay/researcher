@@ -1,6 +1,6 @@
-"""Shared web search and fetch backends for PABADA web tools.
+"""Shared web search and fetch backends for INFINIBAY web tools.
 
-Provides pure functions (no PabadaBaseTool dependency) that can be reused
+Provides pure functions (no InfinibayBaseTool dependency) that can be reused
 by WebSearchTool, DeepWebResearchTool, and any future tool that needs
 web search or content fetching.
 """
@@ -106,7 +106,7 @@ def search_ddg(query: str, num_results: int = 10) -> list[dict]:
     web_rate_limiter.acquire()
 
     try:
-        ua_headers = {"User-Agent": "Mozilla/5.0 (compatible; PabadaBot/2.0)"}
+        ua_headers = {"User-Agent": "Mozilla/5.0 (compatible; InfinibayBot/2.0)"}
         try:
             ddgs = DDGS(headers=ua_headers)
         except TypeError:
@@ -169,7 +169,7 @@ def fetch_with_trafilatura(url: str, timeout: int | None = None) -> str | None:
         with httpx.Client(
             timeout=timeout,
             follow_redirects=True,
-            headers={"User-Agent": "Mozilla/5.0 (compatible; PabadaBot/2.0)"},
+            headers={"User-Agent": "Mozilla/5.0 (compatible; InfinibayBot/2.0)"},
         ) as client:
             response = client.get(url)
             response.raise_for_status()

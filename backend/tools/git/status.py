@@ -5,14 +5,14 @@ from typing import Type
 
 from pydantic import BaseModel
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 
 
 class GitStatusInput(BaseModel):
     pass
 
 
-class GitStatusTool(PabadaBaseTool):
+class GitStatusTool(InfinibayBaseTool):
     name: str = "git_status"
     description: str = (
         "Show the current Git status including modified, staged, and untracked files."

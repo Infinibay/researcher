@@ -79,7 +79,7 @@ class KnowledgeService:
 
         _patch_telemetry_memory_attribute()
 
-        # Store LanceDB alongside the rest of PABADA data in .data/
+        # Store LanceDB alongside the rest of INFINIBAY data in .data/
         memory_path = str(
             Path(settings.DB_PATH).resolve().parent / "memory"
         )

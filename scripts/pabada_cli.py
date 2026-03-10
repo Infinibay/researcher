@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""pabada — CLI helper for PABADA agents running inside sandbox pods.
+"""infinibay — CLI helper for INFINIBAY agents running inside sandbox pods.
 
-Standalone script (stdlib only). Communicates with the PABADA backend
+Standalone script (stdlib only). Communicates with the INFINIBAY backend
 via its REST API to perform operations that require host-side DB access.
 
 Environment variables (injected by PodManager):
-    PABADA_API_URL    — Backend base URL (e.g. http://host.containers.internal:8000)
-    PABADA_PROJECT_ID — Current project ID
-    PABADA_AGENT_ID   — This agent's ID
-    PABADA_TASK_ID    — Current task ID (optional)
+    INFINIBAY_API_URL    — Backend base URL (e.g. http://host.containers.internal:8000)
+    INFINIBAY_PROJECT_ID — Current project ID
+    INFINIBAY_AGENT_ID   — This agent's ID
+    INFINIBAY_TASK_ID    — Current task ID (optional)
 """
 
 from __future__ import annotations
@@ -20,14 +20,14 @@ import sys
 import urllib.error
 import urllib.request
 
-API_URL = os.environ.get("PABADA_API_URL", "http://localhost:8000")
-PROJECT_ID = os.environ.get("PABADA_PROJECT_ID", "")
-AGENT_ID = os.environ.get("PABADA_AGENT_ID", "")
-TASK_ID = os.environ.get("PABADA_TASK_ID", "")
+API_URL = os.environ.get("INFINIBAY_API_URL", "http://localhost:8000")
+PROJECT_ID = os.environ.get("INFINIBAY_PROJECT_ID", "")
+AGENT_ID = os.environ.get("INFINIBAY_AGENT_ID", "")
+TASK_ID = os.environ.get("INFINIBAY_TASK_ID", "")
 
 
 def _api(method: str, path: str, data: dict | None = None) -> dict:
-    """Make an HTTP request to the PABADA API and return the JSON response."""
+    """Make an HTTP request to the INFINIBAY API and return the JSON response."""
     url = f"{API_URL}{path}"
     body = json.dumps(data).encode() if data else None
     headers = {"Content-Type": "application/json"} if body else {}
@@ -155,8 +155,8 @@ def cmd_session_load(args: argparse.Namespace) -> None:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="pabada",
-        description="CLI helper for PABADA agents inside sandbox pods",
+        prog="infinibay",
+        description="CLI helper for INFINIBAY agents inside sandbox pods",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 

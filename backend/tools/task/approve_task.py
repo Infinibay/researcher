@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 
@@ -16,7 +16,7 @@ class ApproveTaskInput(BaseModel):
     )
 
 
-class ApproveTaskTool(PabadaBaseTool):
+class ApproveTaskTool(InfinibayBaseTool):
     name: str = "approve_task"
     description: str = (
         "Approve a task that is in review_ready status, moving it to done. "

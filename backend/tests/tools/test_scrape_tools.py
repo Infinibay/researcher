@@ -1,11 +1,11 @@
-"""Tests for web scraping tools (ScrapeWebsitePabadaTool, SpiderScrapeTool)."""
+"""Tests for web scraping tools (ScrapeWebsiteInfinibayTool, SpiderScrapeTool)."""
 
 import json
 from unittest.mock import MagicMock, patch
 
 import pytest
 
-from backend.tools.web.scrape_website import ScrapeWebsitePabadaTool
+from backend.tools.web.scrape_website import ScrapeWebsiteInfinibayTool
 from backend.tools.web.spider_scrape import SpiderScrapeTool
 
 
@@ -17,7 +17,7 @@ class TestScrapeWebsiteTool:
         mock_robots.is_allowed.return_value = True
         mock_scrape.return_value = "Scraped page content here"
 
-        tool = ScrapeWebsitePabadaTool()
+        tool = ScrapeWebsiteInfinibayTool()
         result = json.loads(tool._run(url="https://example.com"))
 
         assert result["content"] == "Scraped page content here"
@@ -28,7 +28,7 @@ class TestScrapeWebsiteTool:
     def test_scrape_website_respects_robots(self, mock_robots, agent_context):
         mock_robots.is_allowed.return_value = False
 
-        tool = ScrapeWebsitePabadaTool()
+        tool = ScrapeWebsiteInfinibayTool()
         result = json.loads(tool._run(url="https://blocked.com"))
 
         assert "error" in result
@@ -45,7 +45,7 @@ class TestScrapeWebsiteTool:
         mock_scrape.return_value = "Content to store"
         mock_store.return_value = 42  # finding ID
 
-        tool = ScrapeWebsitePabadaTool()
+        tool = ScrapeWebsiteInfinibayTool()
         result = json.loads(tool._run(
             url="https://example.com",
             store_as_finding=True,
@@ -62,7 +62,7 @@ class TestScrapeWebsiteTool:
         mock_robots.is_allowed.return_value = True
         mock_scrape.return_value = None  # scrape failed
 
-        tool = ScrapeWebsitePabadaTool()
+        tool = ScrapeWebsiteInfinibayTool()
         result = json.loads(tool._run(url="https://example.com"))
 
         assert "error" in result

@@ -7,7 +7,7 @@ from typing import Type
 from pydantic import BaseModel, Field
 
 from backend.config.settings import settings
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 
 
 class GitPushInput(BaseModel):
@@ -17,7 +17,7 @@ class GitPushInput(BaseModel):
     force: bool = Field(default=False, description="Force push (use with caution)")
 
 
-class GitPushTool(PabadaBaseTool):
+class GitPushTool(InfinibayBaseTool):
     name: str = "git_push"
     description: str = (
         "Push commits to the remote repository. "

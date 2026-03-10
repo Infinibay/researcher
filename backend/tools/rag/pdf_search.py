@@ -6,7 +6,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.rag.base import (
     _chunk_text,
     embed_and_store,
@@ -26,7 +26,7 @@ class PDFSearchInput(BaseModel):
     )
 
 
-class PDFSearchTool(PabadaBaseTool):
+class PDFSearchTool(InfinibayBaseTool):
     name: str = "pdf_search"
     description: str = (
         "Search within a PDF document using semantic similarity. "

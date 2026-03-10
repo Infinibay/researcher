@@ -5,7 +5,7 @@ from typing import Type
 
 from pydantic import BaseModel, Field
 
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry
 
 COMMENT_TYPES = ("comment", "change_request", "approval", "question", "answer")
@@ -20,7 +20,7 @@ class AddCommentInput(BaseModel):
     )
 
 
-class AddCommentTool(PabadaBaseTool):
+class AddCommentTool(InfinibayBaseTool):
     name: str = "add_comment"
     description: str = (
         "Add a comment to a task. Use different comment types for "

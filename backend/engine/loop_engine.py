@@ -670,7 +670,7 @@ class LoopEngine(AgentEngine):
         if llm_params is None:
             raise RuntimeError(
                 "LoopEngine requires LiteLLM parameters. "
-                "Ensure PABADA_LLM_MODEL is set and AGENT_ENGINE is 'loop'."
+                "Ensure INFINIBAY_LLM_MODEL is set and AGENT_ENGINE is 'loop'."
             )
 
         max_iterations = settings.LOOP_MAX_ITERATIONS

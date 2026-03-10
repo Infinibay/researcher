@@ -267,7 +267,7 @@ class TestLoopState:
 
 class TestLoopTools:
     def _make_mock_tool(self, name="test_tool", description="A test tool", params=None):
-        """Create a mock tool that looks like a PabadaBaseTool."""
+        """Create a mock tool that looks like a InfinibayBaseTool."""
         tool = MagicMock()
         tool.name = name
         tool.description = description

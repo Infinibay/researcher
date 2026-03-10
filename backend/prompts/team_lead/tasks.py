@@ -1454,7 +1454,7 @@ def create_repository(
     """
     from backend.config.settings import settings
 
-    forgejo_owner = settings.FORGEJO_OWNER or "pabada"
+    forgejo_owner = settings.FORGEJO_OWNER or "infinibay"
 
     state_block = build_state_context(
         project_id=project_id,

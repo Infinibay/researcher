@@ -6,7 +6,7 @@ from typing import Type
 from pydantic import BaseModel, Field
 
 from backend.config.settings import settings
-from backend.tools.base.base_tool import PabadaBaseTool
+from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.web.rate_limiter import web_rate_limiter
 
 
@@ -22,7 +22,7 @@ class SpiderScrapeInput(BaseModel):
     )
 
 
-class SpiderScrapeTool(PabadaBaseTool):
+class SpiderScrapeTool(InfinibayBaseTool):
     name: str = "spider_scrape"
     description: str = (
         "Advanced web scraping for JS-heavy or anti-bot protected sites using "
@@ -40,7 +40,7 @@ class SpiderScrapeTool(PabadaBaseTool):
         if not settings.SPIDER_API_KEY:
             return self._error(
                 "SPIDER_API_KEY is not configured. "
-                "Set PABADA_SPIDER_API_KEY in your environment."
+                "Set INFINIBAY_SPIDER_API_KEY in your environment."
             )
 
         try:

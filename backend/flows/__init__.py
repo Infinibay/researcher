@@ -1,4 +1,4 @@
-"""PABADA Flow definitions — event-driven orchestration using CrewAI Flows."""
+"""INFINIBAY Flow definitions — event-driven orchestration using CrewAI Flows."""
 
 from backend.flows.main_project_flow import MainProjectFlow
 from backend.flows.development_flow import DevelopmentFlow

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from backend.agents.base import PabadaAgent
+from backend.agents.base import InfinibayAgent
 from backend.config.settings import settings
 from backend.prompts.project_lead.system import build_system_prompt
 
@@ -16,9 +16,9 @@ def create_project_lead_agent(
     agent_name: str = "Project Lead",
     teammates: list[dict[str, str]] | None = None,
     llm: Any | None = None,
-) -> PabadaAgent:
+) -> InfinibayAgent:
     """Instantiate a Project Lead agent."""
-    return PabadaAgent(
+    return InfinibayAgent(
         agent_id=agent_id,
         role="project_lead",
         name=agent_name,

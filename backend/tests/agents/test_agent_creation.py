@@ -19,8 +19,8 @@ from backend.tools.base.context import set_context, get_context
 def _fake_llm_config(monkeypatch):
     """Provide dummy LLM config so CrewAI Agent() doesn't fail on init."""
     monkeypatch.setenv("OPENAI_API_KEY", "sk-test-fake-key-for-unit-tests")
-    monkeypatch.setenv("PABADA_LLM_MODEL", "gpt-4.1-mini")
-    monkeypatch.setenv("PABADA_LLM_API_KEY", "sk-test-fake-key-for-unit-tests")
+    monkeypatch.setenv("INFINIBAY_LLM_MODEL", "gpt-4.1-mini")
+    monkeypatch.setenv("INFINIBAY_LLM_API_KEY", "sk-test-fake-key-for-unit-tests")
 
     from backend.config.llm import _reset_llm_cache
     _reset_llm_cache()
@@ -67,11 +67,11 @@ def test_db(tmp_dir):
     conn.commit()
     conn.close()
 
-    os.environ["PABADA_DB"] = db_path
+    os.environ["INFINIBAY_DB"] = db_path
     yield db_path
 
-    if "PABADA_DB" in os.environ:
-        del os.environ["PABADA_DB"]
+    if "INFINIBAY_DB" in os.environ:
+        del os.environ["INFINIBAY_DB"]
 
 
 @pytest.fixture
@@ -87,7 +87,7 @@ def agent_context(test_db):
 
 
 class TestAgentCreation:
-    """Each factory should produce a PabadaAgent with correct attributes."""
+    """Each factory should produce a InfinibayAgent with correct attributes."""
 
     @pytest.mark.parametrize(
         "role, factory_module, factory_name, expected_delegation",

@@ -1,4 +1,4 @@
-"""Base agent wrapper for PABADA CrewAI agents."""
+"""Base agent wrapper for INFINIBAY CrewAI agents."""
 
 from __future__ import annotations
 
@@ -14,8 +14,8 @@ from backend.tools.base.db import execute_with_retry
 logger = logging.getLogger(__name__)
 
 
-class PabadaAgent:
-    """Wrapper around crewai.Agent that adds PABADA-specific behaviour.
+class InfinibayAgent:
+    """Wrapper around crewai.Agent that adds INFINIBAY-specific behaviour.
 
     Responsibilities:
     - Build a ``crewai.Agent`` with the correct tools for *role*
