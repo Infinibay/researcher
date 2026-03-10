@@ -31,7 +31,7 @@ class CompletionDetector:
 
             if ip_rows:
                 types = {r["type"] for r in ip_rows}
-                dev_types = types - {"research"}
+                dev_types = types - {"research", "investigation"}
                 if not dev_types:
                     return CompletionState.WAITING_FOR_RESEARCH
                 return CompletionState.ACTIVE

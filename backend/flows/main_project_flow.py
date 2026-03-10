@@ -529,7 +529,26 @@ class MainProjectFlow(Flow[ProjectState]):
         ticket_thread.start()
 
         try:
-            if not first_ticket_event.wait(timeout=600):
+            # Wait with periodic DB checks — if tasks already exist (e.g.
+            # duplicates detected by TicketCreationFlow), proceed immediately
+            # instead of blocking for the full timeout.
+            elapsed = 0
+            poll_interval = 30
+            max_wait = 600
+            while elapsed < max_wait:
+                if first_ticket_event.wait(timeout=poll_interval):
+                    break
+                elapsed += poll_interval
+                # Safety net: check if tasks already exist in DB
+                pending = get_pending_tasks(self.state.project_id)
+                if pending:
+                    logger.info(
+                        "MainProjectFlow: found %d pending tasks in DB while "
+                        "waiting for TicketCreationFlow — proceeding (project %d)",
+                        len(pending), self.state.project_id,
+                    )
+                    break
+            else:
                 if no_tickets_event.is_set():
                     logger.warning(
                         "MainProjectFlow: TicketCreationFlow found 0 tasks in plan (project %d)",
@@ -718,7 +737,7 @@ class MainProjectFlow(Flow[ProjectState]):
                 continue
 
             task_type = task.get("type", "development")
-            if task_type == "research":
+            if task_type in ("research", "investigation"):
                 target_role = "researcher"
             elif task_type == "review":
                 target_role = "code_reviewer"
@@ -858,6 +877,17 @@ class MainProjectFlow(Flow[ProjectState]):
                 })
                 log_flow_event(
                     self.state.project_id, "research_flow_completed",
+                    "main_project_flow", "task", task_id,
+                )
+            elif task_type == "investigation":
+                from backend.flows.investigation_flow import InvestigationFlow
+                flow = InvestigationFlow()
+                flow.kickoff(inputs={
+                    "project_id": self.state.project_id,
+                    "task_id": task_id,
+                })
+                log_flow_event(
+                    self.state.project_id, "investigation_flow_completed",
                     "main_project_flow", "task", task_id,
                 )
             elif task_type in dev_types:

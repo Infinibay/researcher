@@ -50,6 +50,7 @@ class BrainstormPhase(str, Enum):
 class TaskType(str, Enum):
     DEVELOPMENT = "development"
     RESEARCH = "research"
+    INVESTIGATION = "investigation"
     DOCUMENTATION = "documentation"
     DESIGN = "design"
     BUG_FIX = "bug_fix"
@@ -147,6 +148,19 @@ class ResearchState(BaseModel):
     knowledge_service_enabled: bool = True
 
 
+class InvestigationState(BaseModel):
+    """State for InvestigationFlow — simplified research without hypothesis testing."""
+
+    project_id: int = 0
+    project_name: str = ""
+    task_id: int = 0
+    task_title: str = ""
+    researcher_id: str = ""
+    report_path: str = ""
+    rescue_count: int = 0
+    knowledge_service_enabled: bool = True
+
+
 class ResearchReviewState(BaseModel):
     """State for ResearchReviewFlow — independent peer review for research tasks."""
 
@@ -161,6 +175,7 @@ class ResearchReviewState(BaseModel):
     last_reviewer_feedback: str = ""
     revision_count: int = 0
     max_revisions: int = 7
+    investigation_mode: bool = False
 
 
 class TicketCreationState(BaseModel):

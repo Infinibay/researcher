@@ -354,6 +354,8 @@ class AgentLoopManager:
     def __init__(self, project_id: int) -> None:
         self.project_id = project_id
         self._loops: dict[str, AgentLoop] = {}
+        self._watchdog_thread: threading.Thread | None = None
+        self._watchdog_stop = threading.Event()
 
     def start_all(self) -> None:
         """Query the roster and start an AgentLoop for each eligible agent."""
@@ -375,6 +377,16 @@ class AgentLoopManager:
             self._loops[agent_id] = loop
 
         _loop_managers[self.project_id] = self
+
+        # Start watchdog to recover zombie events
+        self._watchdog_stop.clear()
+        self._watchdog_thread = threading.Thread(
+            target=self._watchdog_loop,
+            name=f"AgentLoopWatchdog-p{self.project_id}",
+            daemon=True,
+        )
+        self._watchdog_thread.start()
+
         logger.info(
             "AgentLoopManager started for project %d (%d loops)",
             self.project_id, len(self._loops),
@@ -399,16 +411,131 @@ class AgentLoopManager:
 
     def stop_signal(self) -> None:
         """Signal all loops to stop (non-blocking)."""
+        self._watchdog_stop.set()
         for loop in self._loops.values():
             loop._stop_event.set()
 
     def stop_join(self) -> None:
         """Join all loop threads and clean up. Call after stop_signal()."""
+        if self._watchdog_thread is not None:
+            self._watchdog_thread.join(timeout=5.0)
+            self._watchdog_thread = None
         for agent_id, loop in self._loops.items():
             loop.stop()
         self._loops.clear()
         _loop_managers.pop(self.project_id, None)
         logger.info("AgentLoopManager stopped for project %d", self.project_id)
+
+    def _watchdog_loop(self) -> None:
+        """Periodically recover zombie events and dead-agent tasks."""
+        try:
+            check_interval = max(float(settings.AGENT_LOOP_EVENT_TIMEOUT) / 4, 60.0)
+            dead_agent_interval = max(float(settings.AGENT_LOOP_DEAD_AGENT_TIMEOUT) / 2, 60.0)
+        except (TypeError, ValueError):
+            check_interval = 60.0
+            dead_agent_interval = 600.0
+        polls_since_dead_check = 0
+        dead_check_every_n = max(1, int(dead_agent_interval / check_interval))
+
+        while not self._watchdog_stop.is_set():
+            self._watchdog_stop.wait(timeout=check_interval)
+            if self._watchdog_stop.is_set():
+                break
+
+            try:
+                self._recover_zombie_events()
+            except Exception:
+                logger.debug(
+                    "AgentLoopWatchdog: recovery check failed for project %d",
+                    self.project_id, exc_info=True,
+                )
+
+            # Periodically check for dead agents and recover their tasks
+            polls_since_dead_check += 1
+            if polls_since_dead_check >= dead_check_every_n:
+                polls_since_dead_check = 0
+                try:
+                    self._recover_dead_agent_tasks()
+                except Exception:
+                    logger.debug(
+                        "AgentLoopWatchdog: dead agent check failed for project %d",
+                        self.project_id, exc_info=True,
+                    )
+
+    def _recover_zombie_events(self) -> None:
+        """Reset events stuck in in_progress beyond the timeout threshold."""
+        timeout_seconds = settings.AGENT_LOOP_EVENT_TIMEOUT
+
+        def _reset(conn: sqlite3.Connection) -> list[tuple[int, str]]:
+            rows = conn.execute(
+                """SELECT id, agent_id FROM agent_events
+                   WHERE project_id = ?
+                     AND status = 'in_progress'
+                     AND started_at < datetime('now', ? || ' seconds')""",
+                (self.project_id, f"-{int(timeout_seconds)}"),
+            ).fetchall()
+
+            recovered = []
+            for row in rows:
+                conn.execute(
+                    """UPDATE agent_events SET status = 'failed',
+                       error_message = 'watchdog: event exceeded timeout'
+                       WHERE id = ? AND status = 'in_progress'""",
+                    (row["id"],),
+                )
+                conn.execute(
+                    """UPDATE agent_loop_state SET status = 'idle', current_event_id = NULL
+                       WHERE agent_id = ? AND current_event_id = ?""",
+                    (row["agent_id"], row["id"]),
+                )
+                recovered.append((row["id"], row["agent_id"]))
+            if recovered:
+                conn.commit()
+            return recovered
+
+        recovered = execute_with_retry(_reset)
+        for event_id, agent_id in recovered:
+            logger.warning(
+                "AgentLoopWatchdog: recovered zombie event %d for %s (project %d)",
+                event_id, agent_id, self.project_id,
+            )
+
+    def _recover_dead_agent_tasks(self) -> None:
+        """Check for agents whose threads died and recover their tasks."""
+        from backend.autonomy.liveness import find_dead_agent_tasks, recover_dead_agent_task
+
+        dead_tasks = find_dead_agent_tasks(self.project_id)
+        for dt in dead_tasks:
+            agent_id = dt["agent_id"]
+            task_id = dt["task_id"]
+            seconds = dt.get("seconds_since_poll", 0)
+
+            # Double-check: is the loop thread actually dead?
+            loop = self._loops.get(agent_id)
+            if loop is not None and loop.is_running:
+                # Thread is alive — maybe last_poll_at is stale because
+                # the agent is in a long-running handler. Skip.
+                continue
+
+            logger.warning(
+                "AgentLoopWatchdog: agent %s is dead (no poll for %.0fs), "
+                "recovering task %d '%s'",
+                agent_id, seconds, task_id, dt.get("task_title", "?"),
+            )
+            recover_dead_agent_task(task_id, agent_id, reason="watchdog_dead_agent")
+
+            # Try to restart the dead loop
+            if loop is not None and not loop.is_running:
+                try:
+                    loop.start()
+                    logger.info(
+                        "AgentLoopWatchdog: restarted dead loop for %s", agent_id,
+                    )
+                except Exception:
+                    logger.debug(
+                        "AgentLoopWatchdog: could not restart loop for %s",
+                        agent_id, exc_info=True,
+                    )
 
     def _get_roster(self) -> list[dict[str, str]]:
         """Query roster directly to avoid circular import through agents.registry."""

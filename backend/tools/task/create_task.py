@@ -10,7 +10,7 @@ from backend.tools.base.base_tool import PabadaBaseTool
 from backend.tools.base.db import execute_with_retry
 
 TASK_TYPES = (
-    "plan", "research", "code", "review", "test",
+    "plan", "research", "investigation", "code", "review", "test",
     "design", "integrate", "documentation", "bug_fix",
 )
 COMPLEXITY_LEVELS = ("trivial", "low", "medium", "high", "very_high")

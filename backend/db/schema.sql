@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS tasks (
     parent_task_id       INTEGER REFERENCES tasks(id) ON DELETE SET NULL,
     type                 TEXT NOT NULL
                            CHECK(type IN (
-                             'plan', 'research', 'code', 'review', 'test',
+                             'plan', 'research', 'investigation', 'code', 'review', 'test',
                              'design', 'integrate', 'documentation', 'bug_fix'
                            )),
     status               TEXT NOT NULL DEFAULT 'backlog'
@@ -336,6 +336,7 @@ CREATE TABLE IF NOT EXISTS findings (
     reproducibility_score REAL
                             CHECK(reproducibility_score IS NULL
                               OR reproducibility_score BETWEEN 0.0 AND 1.0),
+    embedding             BLOB,
     created_at            DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -391,6 +392,7 @@ CREATE TABLE IF NOT EXISTS wiki_pages (
     parent_path TEXT,
     created_by  TEXT,
     updated_by  TEXT,
+    embedding   BLOB,
     created_at  DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at  DATETIME DEFAULT CURRENT_TIMESTAMP
 );
@@ -1009,6 +1011,28 @@ CREATE TRIGGER IF NOT EXISTS reference_files_fts_au AFTER UPDATE ON reference_fi
     VALUES ('delete', old.id, old.file_name, COALESCE(old.description, ''));
     INSERT INTO reference_files_fts(rowid, file_name, description)
     VALUES (new.id, new.file_name, COALESCE(new.description, ''));
+END;
+
+-- Artifacts (reports) full-text search
+CREATE VIRTUAL TABLE IF NOT EXISTS artifacts_fts USING fts5(
+    file_path, description, content, content=artifacts, content_rowid=id
+);
+
+CREATE TRIGGER IF NOT EXISTS artifacts_fts_ai AFTER INSERT ON artifacts BEGIN
+    INSERT INTO artifacts_fts(rowid, file_path, description, content)
+    VALUES (new.id, new.file_path, COALESCE(new.description, ''), COALESCE(new.content, ''));
+END;
+
+CREATE TRIGGER IF NOT EXISTS artifacts_fts_ad AFTER DELETE ON artifacts BEGIN
+    INSERT INTO artifacts_fts(artifacts_fts, rowid, file_path, description, content)
+    VALUES ('delete', old.id, old.file_path, COALESCE(old.description, ''), COALESCE(old.content, ''));
+END;
+
+CREATE TRIGGER IF NOT EXISTS artifacts_fts_au AFTER UPDATE ON artifacts BEGIN
+    INSERT INTO artifacts_fts(artifacts_fts, rowid, file_path, description, content)
+    VALUES ('delete', old.id, old.file_path, COALESCE(old.description, ''), COALESCE(old.content, ''));
+    INSERT INTO artifacts_fts(rowid, file_path, description, content)
+    VALUES (new.id, new.file_path, COALESCE(new.description, ''), COALESCE(new.content, ''));
 END;
 
 -- ========================= AUDIT TRIGGERS ==================================

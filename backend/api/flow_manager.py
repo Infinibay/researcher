@@ -154,12 +154,64 @@ class FlowManager:
             if loop_mgr:
                 loop_mgr.stop_join()  # now join threads (pods already dead)
 
+            # Reset in_progress tasks to pending so they can be picked up on restart.
+            # This runs AFTER agent loops are stopped, so no agent is actively working.
+            self._reset_in_progress_tasks(project_id)
+
             lm = self._listeners.pop(project_id, None)
             if lm:
                 lm.stop_all()
             self._flows.pop(project_id, None)
             update_project_status(project_id, "paused")
             logger.info("Stopped flow/listeners for project %d", project_id)
+
+    @staticmethod
+    def _reset_in_progress_tasks(project_id: int) -> None:
+        """Reset in_progress tasks to pending during graceful shutdown.
+
+        Since we just stopped all agent loops, any in_progress task has no
+        agent working on it. Reset to pending so it gets picked up on restart.
+        Also marks their in_progress events as failed with 'graceful_shutdown'.
+        """
+        import sqlite3
+
+        def _reset(conn: sqlite3.Connection) -> int:
+            # Reset tasks
+            cursor = conn.execute(
+                """UPDATE tasks SET status = 'pending', assigned_to = NULL
+                   WHERE project_id = ? AND status = 'in_progress'""",
+                (project_id,),
+            )
+            count = cursor.rowcount
+
+            # Mark in_progress/claimed events as failed
+            conn.execute(
+                """UPDATE agent_events
+                   SET status = 'failed',
+                       error_message = 'graceful_shutdown',
+                       completed_at = CURRENT_TIMESTAMP
+                   WHERE project_id = ?
+                     AND status IN ('in_progress', 'claimed')""",
+                (project_id,),
+            )
+
+            conn.commit()
+            return count
+
+        try:
+            from backend.tools.base.db import execute_with_retry as _db_retry
+
+            count = _db_retry(_reset)
+            if count:
+                logger.info(
+                    "Graceful shutdown: reset %d in_progress tasks to pending for project %d",
+                    count, project_id,
+                )
+        except Exception:
+            logger.warning(
+                "Could not reset in_progress tasks for project %d",
+                project_id, exc_info=True,
+            )
 
     @staticmethod
     def _clear_stale_events(project_id: int) -> None:

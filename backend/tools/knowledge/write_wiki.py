@@ -65,6 +65,13 @@ class WriteWikiTool(PabadaBaseTool):
                 action = "created"
                 page_id = cursor.lastrowid
 
+            # Pre-compute embedding for semantic search
+            try:
+                from backend.tools.base.embeddings import store_wiki_embedding
+                store_wiki_embedding(conn, page_id, f"{title} {content[:500]}")
+            except Exception:
+                pass  # embedding is optional
+
             conn.commit()
             return {"page_id": page_id, "action": action}
 

@@ -11,7 +11,12 @@ from backend.tools.base.db import execute_with_retry, sanitize_fts5_query
 
 class ReadFindingsInput(BaseModel):
     query: str | None = Field(
-        default=None, description="Full-text search query across findings"
+        default=None,
+        description=(
+            "Full-text search query across findings. "
+            "Supports: | for OR, & for AND, * for prefix, \"quotes\" for exact phrases. "
+            "Example: 'security | auth', 'API & design*'"
+        ),
     )
     task_id: int | None = Field(
         default=None,

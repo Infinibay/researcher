@@ -100,8 +100,17 @@ class RecordFindingTool(PabadaBaseTool):
                     json.dumps(sources), confidence, agent_id, finding_type,
                 ),
             )
+            finding_id = cursor.lastrowid
+
+            # Pre-compute embedding for semantic search
+            try:
+                from backend.tools.base.embeddings import store_finding_embedding
+                store_finding_embedding(conn, finding_id, f"{title} {content[:500]}")
+            except Exception:
+                pass  # embedding is optional, don't block recording
+
             conn.commit()
-            return cursor.lastrowid
+            return finding_id
 
         try:
             finding_id = execute_with_retry(_record)
@@ -113,9 +122,10 @@ class RecordFindingTool(PabadaBaseTool):
             f"(confidence={confidence})"
         )
         return self._success({
+            "status": "Finding recorded successfully",
             "finding_id": finding_id,
             "title": title,
             "finding_type": finding_type,
             "confidence": confidence,
-            "status": "provisional",
+            "finding_status": "provisional",
         })

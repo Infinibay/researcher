@@ -212,6 +212,16 @@ def ensure_migrations(db_path: str | None = None) -> None:
             conn.commit()
             logger.info("Migration 13: added 'blocked' to tasks.status CHECK")
 
+        # Migration 15: add embedding columns + artifacts_fts
+        if 15 not in applied:
+            _migrate_15_embeddings_and_artifacts_fts(conn)
+            conn.execute(
+                "INSERT OR IGNORE INTO schema_migrations(version, name) "
+                "VALUES (15, 'add_embeddings_and_artifacts_fts')"
+            )
+            conn.commit()
+            logger.info("Migration 15: added embedding columns and artifacts_fts")
+
         # Migration 14: expand developer_session_notes phase CHECK
         if 14 not in applied:
             _migrate_14_expand_session_note_phases(conn)
@@ -663,14 +673,178 @@ def _migrate_14_expand_session_note_phases(conn: sqlite3.Connection) -> None:
     conn.execute("PRAGMA foreign_keys = ON")
 
 
-def sanitize_fts5_query(query: str) -> str:
-    """Sanitize a user query for safe use in FTS5 MATCH.
+def _migrate_15_embeddings_and_artifacts_fts(conn: sqlite3.Connection) -> None:
+    """Add embedding BLOB columns to findings/wiki_pages and artifacts_fts table."""
+    # Add embedding column to findings
+    cols = {row[1] for row in conn.execute("PRAGMA table_info(findings)").fetchall()}
+    if "embedding" not in cols:
+        conn.execute("ALTER TABLE findings ADD COLUMN embedding BLOB")
+        logger.info("Migration 15: added 'embedding' column to findings")
 
-    Wraps each token in double quotes so FTS5 treats them as literal
-    strings rather than column names or operators (e.g. ``RTL``
-    won't be interpreted as ``RTL:`` column prefix).
+    # Add embedding column to wiki_pages
+    cols = {row[1] for row in conn.execute("PRAGMA table_info(wiki_pages)").fetchall()}
+    if "embedding" not in cols:
+        conn.execute("ALTER TABLE wiki_pages ADD COLUMN embedding BLOB")
+        logger.info("Migration 15: added 'embedding' column to wiki_pages")
+
+    # Create artifacts_fts virtual table
+    conn.execute("""
+        CREATE VIRTUAL TABLE IF NOT EXISTS artifacts_fts USING fts5(
+            file_path, description, content, content=artifacts, content_rowid=id
+        )
+    """)
+
+    # Rebuild index from existing data
+    conn.execute("INSERT INTO artifacts_fts(artifacts_fts) VALUES('rebuild')")
+
+    # Rebuild reference_files_fts in case it was created but never populated
+    try:
+        conn.execute("INSERT INTO reference_files_fts(reference_files_fts) VALUES('rebuild')")
+    except sqlite3.OperationalError:
+        pass  # Table may not exist in old DBs
+
+    # Create triggers for artifacts_fts
+    conn.execute("""
+        CREATE TRIGGER IF NOT EXISTS artifacts_fts_ai AFTER INSERT ON artifacts BEGIN
+            INSERT INTO artifacts_fts(rowid, file_path, description, content)
+            VALUES (new.id, new.file_path, COALESCE(new.description, ''), COALESCE(new.content, ''));
+        END
+    """)
+    conn.execute("""
+        CREATE TRIGGER IF NOT EXISTS artifacts_fts_ad AFTER DELETE ON artifacts BEGIN
+            INSERT INTO artifacts_fts(artifacts_fts, rowid, file_path, description, content)
+            VALUES ('delete', old.id, old.file_path, COALESCE(old.description, ''), COALESCE(old.content, ''));
+        END
+    """)
+    conn.execute("""
+        CREATE TRIGGER IF NOT EXISTS artifacts_fts_au AFTER UPDATE ON artifacts BEGIN
+            INSERT INTO artifacts_fts(artifacts_fts, rowid, file_path, description, content)
+            VALUES ('delete', old.id, old.file_path, COALESCE(old.description, ''), COALESCE(old.content, ''));
+            INSERT INTO artifacts_fts(rowid, file_path, description, content)
+            VALUES (new.id, new.file_path, COALESCE(new.description, ''), COALESCE(new.content, ''));
+        END
+    """)
+
+
+def sanitize_fts5_query(query: str) -> str:
+    """Parse a search query with operators into safe FTS5 MATCH syntax.
+
+    Supported operators:
+    - ``|`` or ``OR`` between terms → FTS5 ``OR``
+    - ``&`` or ``AND`` between terms → FTS5 implicit AND (adjacent quoted tokens)
+    - ``*`` suffix → FTS5 prefix match (e.g. ``arch*`` → ``"arch" *``)
+    - Quoted phrases preserved as-is (e.g. ``"exact phrase"``)
+    - Bare tokens are quoted to prevent FTS5 column-prefix misinterpretation
+
+    Examples::
+
+        "syntax|DSL|model"        → '"syntax" OR "DSL" OR "model"'
+        "react & hooks"           → '"react" "hooks"'
+        "arch*"                   → '"arch" *'
+        '"exact phrase" | other'  → '"exact phrase" OR "other"'
+        "plain search terms"      → '"plain" "search" "terms"'
     """
-    tokens = query.split()
-    if not tokens:
+    import re
+
+    query = query.strip()
+    if not query:
         return '""'
-    return " ".join(f'"{t}"' for t in tokens)
+
+    # Step 1: Extract quoted phrases first, replacing with placeholders
+    phrases: list[str] = []
+
+    def _capture_phrase(m: re.Match) -> str:
+        phrases.append(m.group(0))  # keep with quotes
+        return f"\x00PH{len(phrases) - 1}\x00"
+
+    normalized = re.sub(r'"[^"]*"', _capture_phrase, query)
+
+    # Step 2: Split into OR-groups (| or the word OR surrounded by spaces)
+    or_groups = re.split(r'\s*\|\s*|\s+OR\s+', normalized, flags=re.IGNORECASE)
+
+    fts_or_parts: list[str] = []
+    for group in or_groups:
+        group = group.strip()
+        if not group:
+            continue
+
+        # Split each OR-group into AND-tokens (& or the word AND, or whitespace)
+        and_tokens = re.split(r'\s*&\s*|\s+AND\s+|\s+', group, flags=re.IGNORECASE)
+
+        fts_and_parts: list[str] = []
+        for token in and_tokens:
+            token = token.strip()
+            if not token:
+                continue
+
+            # Restore placeholder → original quoted phrase
+            ph_match = re.match(r'\x00PH(\d+)\x00$', token)
+            if ph_match:
+                fts_and_parts.append(phrases[int(ph_match.group(1))])
+            # Prefix match: word*
+            elif token.endswith('*') and len(token) > 1:
+                fts_and_parts.append(f'"{token[:-1]}" *')
+            else:
+                # Strip any stray quotes and quote the token
+                clean = token.replace('"', '')
+                if clean:
+                    fts_and_parts.append(f'"{clean}"')
+
+        if fts_and_parts:
+            fts_or_parts.append(" ".join(fts_and_parts))
+
+    if not fts_or_parts:
+        return '""'
+
+    return " OR ".join(fts_or_parts)
+
+
+def parse_query_or_terms(query: str) -> list[str]:
+    """Split a query on ``|`` / ``OR`` into sub-queries for multi-embedding search.
+
+    Strips operator syntax (``&``, ``AND``, ``*``, quotes) so each returned
+    string is plain text suitable for embedding.  Returns ``[query]`` unchanged
+    when no OR operator is present.
+
+    Example::
+
+        "security | auth"            → ["security", "auth"]
+        "react | vue | angular"      → ["react", "vue", "angular"]
+        '"machine learning" | AI'    → ["machine learning", "AI"]
+        "plain search terms"         → ["plain search terms"]
+    """
+    import re
+
+    query = query.strip()
+    if not query:
+        return [query]
+
+    # Extract quoted phrases first
+    phrases: list[str] = []
+
+    def _capture(m: re.Match) -> str:
+        # Store without quotes
+        phrases.append(m.group(0)[1:-1])
+        return f"\x00PH{len(phrases) - 1}\x00"
+
+    normalized = re.sub(r'"[^"]*"', _capture, query)
+
+    # Split on OR / |
+    or_groups = re.split(r'\s*\|\s*|\s+OR\s+', normalized, flags=re.IGNORECASE)
+
+    terms: list[str] = []
+    for group in or_groups:
+        group = group.strip()
+        if not group:
+            continue
+        # Remove AND operators and &, strip * suffixes
+        group = re.sub(r'\s*&\s*|\s+AND\s+', ' ', group, flags=re.IGNORECASE)
+        # Restore placeholders
+        for i, ph in enumerate(phrases):
+            group = group.replace(f"\x00PH{i}\x00", ph)
+        # Strip remaining * and quotes
+        group = group.replace('*', '').replace('"', '').strip()
+        if group:
+            terms.append(group)
+
+    return terms if terms else [query]

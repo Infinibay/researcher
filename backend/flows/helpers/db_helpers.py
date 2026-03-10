@@ -427,7 +427,7 @@ def get_project_progress_summary(project_id: int) -> str:
         # Research findings summary (completed research tasks)
         research_tasks = conn.execute(
             """SELECT id, title, description
-               FROM tasks WHERE project_id = ? AND type = 'research' AND status = 'done'
+               FROM tasks WHERE project_id = ? AND type IN ('research', 'investigation') AND status = 'done'
                ORDER BY completed_at DESC LIMIT 5""",
             (project_id,),
         ).fetchall()
@@ -487,7 +487,7 @@ def _create_events_for_status_change(task_id: int, new_status: str) -> None:
                     "Skipping review_ready event for task %d — pending event exists",
                     task_id,
                 )
-            elif task_type == "research":
+            elif task_type in ("research", "investigation"):
                 create_task_event(
                     project_id, task_id, "review_ready",
                     target_role="research_reviewer",
@@ -516,7 +516,7 @@ def _create_events_for_status_change(task_id: int, new_status: str) -> None:
             )
         elif new_status == "pending":
             # Task became available — notify appropriate role
-            if task_type == "research":
+            if task_type in ("research", "investigation"):
                 create_task_event(
                     project_id, task_id, "task_available",
                     target_role="researcher",

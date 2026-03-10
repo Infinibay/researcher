@@ -635,6 +635,312 @@ A confirmation of artifact push containing:
     return description, expected_output
 
 
+def assign_investigation(
+    task_id: int,
+    task_title: str,
+    task_description: str,
+    project_id: int = 0,
+    project_name: str = "",
+) -> tuple[str, str]:
+    """Return (description, expected_output) for investigation task assignment."""
+
+    state_block = build_state_context(
+        project_id=project_id,
+        project_name=project_name,
+        phase="task_assignment",
+        summary=f"Investigation task {task_id} has been assigned to you.",
+    )
+
+    description = f"""\
+You have been assigned investigation task {task_id}: {task_title}
+
+{state_block}
+
+## Task Specifications
+{task_description}
+
+## Your Goal
+Define the scope of your investigation — what areas to explore, what
+you already know, and what the boundaries are.
+
+This is an **investigation** task, NOT a research task. You do NOT need
+to formulate hypotheses, run competing-hypothesis analysis (ACH), or
+apply PICO decomposition. Your job is to gather information, organize
+it clearly, and summarize what you find.
+
+## What Good Looks Like
+- The investigation question restated in your own words.
+- A scope map: what areas/topics to explore.
+- Existing knowledge reviewed (search_knowledge, read_findings,
+  read_wiki) — what does the team already know?
+- Boundaries identified: what is in scope vs. out of scope.
+- Any ambiguities clarified (ask_team_lead) or documented as
+  assumptions (add_comment with ASSUMPTION: prefix).
+
+## Step 0: Resume Check
+Call **load_session_note** with this task_id. If a previous session
+exists, resume from the saved phase instead of starting over.
+
+## Methodology Guidance
+Start by reading the task with get_task. Then check existing
+knowledge — do NOT duplicate prior work. If the scope is ambiguous,
+clarify with the Team Lead BEFORE starting.
+
+Call **save_session_note** with phase="scoping" after posting your
+investigation plan.
+
+**Before posting anything**, call read_comments to see what has already
+been discussed on this task. Only post a new plan via add_comment if
+no prior plan exists.
+"""
+
+    expected_output = """\
+A structured investigation plan containing:
+
+1. **Investigation question**: Clear restatement of what needs to be explored.
+2. **Scope map**: Areas and topics to explore.
+3. **Existing knowledge**: Summary of what the team already knows.
+4. **Boundaries**: What is in scope vs. out of scope.
+5. **Approach**: How information will be gathered and organized.
+6. **Questions or assumptions**: Any remaining ambiguities or documented
+   assumptions.
+"""
+    return description, expected_output
+
+
+def gather_information(
+    task_id: int,
+    task_title: str,
+    scope_notes: str = "",
+    project_id: int = 0,
+    project_name: str = "",
+) -> tuple[str, str]:
+    """Return (description, expected_output) for investigation information gathering."""
+
+    state_block = build_state_context(
+        project_id=project_id,
+        project_name=project_name,
+        phase="information_gathering",
+        summary=(
+            f"Gathering information for investigation task {task_id}. "
+            "Search, evaluate sources, and record findings."
+        ),
+    )
+
+    description = f"""\
+Gather information for investigation task {task_id}: {task_title}
+
+{state_block}
+
+## Scope Notes
+{scope_notes}
+
+## Your Goal
+Systematically gather information across all areas in your scope map.
+Record findings as you discover them. Apply SIFT for source verification
+but skip PICO decomposition, ACH, and GRADE scoring.
+
+## Methodology Guidance
+- Search each scope area independently using multiple query formulations.
+  Use deep_web_research for in-depth multi-source investigation; use
+  web_search for quick supplementary lookups.
+- Apply SIFT on every source you intend to cite: investigate the
+  source's reputation, find corroboration, trace claims to primary
+  sources.
+- Before recording a finding, call search_findings with the topic to
+  check if a similar one already exists.
+- Record findings immediately as you discover them (record_finding).
+  Each finding needs: specific title, evidence with source, finding
+  type = `observation`.
+- Use simple confidence levels instead of GRADE scores:
+  - 0.8-1.0: Well-documented — multiple credible sources agree.
+  - 0.5-0.7: Partially-documented — some evidence, limited sources.
+  - 0.1-0.4: Uncertain — single source, anecdotal, or conflicting.
+- Track coverage: which scope areas have adequate information? Direct
+  additional searches at gaps.
+- Write wiki articles (write_wiki) for key topics.
+- Call **save_session_note** with phase="gathering" after completing
+  each scope area.
+
+## Artifact Checkpoint
+Before finishing, verify your work is persisted:
+1. read_findings returns findings you recorded.
+2. read_wiki returns any wiki articles you wrote.
+
+If either check fails, re-record immediately.
+"""
+
+    expected_output = """\
+A summary of information gathering containing:
+
+1. **Search methodology**: Queries used per scope area and sources consulted.
+2. **Key sources**: The most important sources found, with credibility notes.
+3. **Coverage**: What was found per scope area.
+4. **Gaps**: Areas where information was thin or unavailable.
+5. **Recorded findings**: Exact count of findings recorded via record_finding.
+6. **Wiki updated**: Article titles written via write_wiki.
+"""
+    return description, expected_output
+
+
+def write_investigation_summary(
+    task_id: int,
+    task_title: str,
+    project_id: int = 0,
+    project_name: str = "",
+) -> tuple[str, str]:
+    """Return (description, expected_output) for investigation summary report."""
+
+    state_block = build_state_context(
+        project_id=project_id,
+        project_name=project_name,
+        phase="summary_writing",
+        summary=(
+            f"Writing investigation summary for task {task_id}. "
+            "Organize all findings into a clear report."
+        ),
+    )
+
+    description = f"""\
+Write a summary report for investigation task {task_id}: {task_title}
+
+{state_block}
+
+## Your Goal
+Organize all gathered information into a clear, actionable report.
+The report should help the team understand the current state of what
+was investigated.
+
+## Report Structure
+Use write_report with the following structure:
+
+- **Executive Summary**: What was investigated, key findings, and
+  recommendations. Must be self-contained.
+- **Scope & Approach**: What areas were explored, how information
+  was gathered, what sources were used.
+- **Findings by Topic**: Organize findings thematically. For each
+  topic: what was found, source quality, confidence level. Put
+  sources in conversation — where they agree, disagree, complement.
+- **Open Questions**: What remains unclear, what needs further
+  investigation, what was out of scope but relevant.
+- **Recommendations**: Actionable next steps based on findings.
+  Priority ranked.
+- **References**: All sources cited with URLs.
+
+Before writing the report, call **summarize_findings** to get a
+compact overview of what you have.
+
+Write the report with write_report. Update wiki with key insights
+(write_wiki). Post artifact inventory on task (add_comment):
+finding count, report title, wiki articles. Set status to
+`review_ready` (update_task_status).
+
+## Quality Checklist
+Before submitting, verify:
+- [ ] Every claim traceable to a recorded finding.
+- [ ] Organized by topic, not by source.
+- [ ] Open questions clearly identified.
+- [ ] Executive summary accurately reflects the full report.
+- [ ] References complete with URLs.
+- [ ] read_findings returns your findings.
+- [ ] read_report returns your report.
+- [ ] Submission comment lists all artifacts created.
+"""
+
+    expected_output = """\
+A confirmation of report completion containing:
+
+1. **Report title**: The title created via write_report.
+2. **Report structure**: Confirmation all sections are present.
+3. **Findings referenced**: Count of recorded findings cited.
+4. **Wiki updates**: Wiki articles created or updated.
+5. **Status**: Confirmation task moved to `review_ready`.
+6. **Artifact inventory**: Report title, finding count, wiki article
+   titles — so the reviewer can locate them.
+"""
+    return description, expected_output
+
+
+def revise_investigation(
+    task_id: int,
+    reviewer_feedback: str = "",
+    project_id: int = 0,
+    project_name: str = "",
+) -> tuple[str, str]:
+    """Return (description, expected_output) for investigation revision after rejection."""
+
+    state_block = build_state_context(
+        project_id=project_id,
+        project_name=project_name,
+        phase="revision",
+        summary=(
+            f"Investigation for task {task_id} was rejected in peer review. "
+            "You must address all reviewer feedback."
+        ),
+    )
+
+    description = f"""\
+Your investigation for task {task_id} has been rejected in peer review.
+
+{state_block}
+
+## Reviewer Feedback
+---
+{reviewer_feedback}
+---
+
+## Your Goal
+Address ALL issues identified by the reviewer. Every concern must be
+resolved before resubmission.
+
+## Classify the Rejection
+Determine the primary type to guide your revision:
+
+**Type A — Coverage Gaps**
+Indicators: "scope areas not covered", "missing information", "thin coverage".
+Priority: search for additional information in under-covered areas first.
+
+**Type B — Clarity or Organization Issues**
+Indicators: "unclear", "disorganized", "hard to follow", "missing context".
+Priority: reorganize and clarify existing content before adding new sources.
+
+**Type C — Both**
+Address coverage gaps first, then clarity.
+
+## Methodology Guidance
+- Read your current findings (read_findings) and report (read_report)
+  to map each concern to specific sections.
+- For Type A: run targeted searches for evidence addressing each gap.
+  Apply SIFT. Record new findings.
+- For Type B: reorganize report sections, improve clarity, add context.
+- Rewrite the report (write_report) incorporating all changes.
+- Self-review: go through the feedback point by point and confirm
+  each concern is addressed.
+
+## Artifact Checkpoint
+Before resubmitting:
+1. read_findings returns your findings (old + new).
+2. read_report with task_id={task_id} returns the updated report.
+
+Post a revision summary with add_comment mapping each reviewer
+concern to the change made. Set status to `review_ready`
+(update_task_status).
+"""
+
+    expected_output = f"""\
+A summary of revisions containing:
+
+1. **Feedback addressed**: For EACH reviewer concern, what was changed.
+2. **Rejection type**: Type A, B, or C, and how that shaped the revision.
+3. **Additional information** (Type A): New sources and findings recorded.
+4. **Report updates**: Sections revised or reorganized.
+5. **Artifact verification**: read_findings and read_report
+   (task_id={task_id}) both return data.
+6. **Status**: Task moved to `review_ready`.
+"""
+    return description, expected_output
+
+
 def rescue_missing_artifacts(
     task_id: int,
     task_title: str,

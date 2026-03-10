@@ -83,8 +83,10 @@ class AddCommentTool(PabadaBaseTool):
             f"Comment on task #{task_id} ({comment_type})"
         )
         return self._success({
+            "status": "Comment added successfully",
             "comment_id": result["comment_id"],
             "task_id": task_id,
             "comment_type": comment_type,
             "author": agent_id,
+            "comment_body": comment,
         })

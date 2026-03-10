@@ -70,11 +70,18 @@ class ResearchFlow(Flow[ResearchState]):
         if not self.state.project_name:
             self.state.project_name = get_project_name(self.state.project_id)
 
-        researcher = get_available_agent_by_role(
-            "researcher", self.state.project_id,
-            knowledge_service=self._knowledge_service,
-        )
-        self.state.researcher_id = researcher.agent_id
+        if self.state.researcher_id:
+            researcher = get_agent_by_role(
+                "researcher", self.state.project_id,
+                agent_id=self.state.researcher_id,
+                knowledge_service=self._knowledge_service,
+            )
+        else:
+            researcher = get_available_agent_by_role(
+                "researcher", self.state.project_id,
+                knowledge_service=self._knowledge_service,
+            )
+            self.state.researcher_id = researcher.agent_id
         researcher.activate_context(task_id=self.state.task_id)
 
         # Move to in_progress BEFORE the crew runs — the agent may advance

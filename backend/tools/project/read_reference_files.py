@@ -14,7 +14,11 @@ class ReadReferenceFilesInput(BaseModel):
         default=None, description="Project ID (uses current if None)"
     )
     search: str | None = Field(
-        default=None, description="Full-text search query"
+        default=None,
+        description=(
+            "Full-text search query. "
+            "Supports: | for OR, & for AND, * for prefix, \"quotes\" for exact phrases."
+        ),
     )
 
 

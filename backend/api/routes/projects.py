@@ -158,10 +158,11 @@ async def delete_project(project_id: int):
             "(SELECT id FROM findings WHERE project_id = ?)", p,
         )
 
-        # Tables referencing agent_runs (must go before agent_runs)
+        # agent_performance is global (keyed by agent_id, no project FK).
+        # Delete entries whose agent_id matches agents in this project.
         conn.execute(
-            "DELETE FROM agent_performance WHERE run_id IN "
-            "(SELECT id FROM agent_runs WHERE project_id = ?)", p,
+            "DELETE FROM agent_performance WHERE agent_id IN "
+            "(SELECT agent_id FROM agent_roster WHERE project_id = ?)", p,
         )
 
         # All tables directly referencing projects

@@ -169,6 +169,8 @@ class Settings(BaseSettings):
     AGENT_LOOP_MAX_ACTIONS_PER_HOUR: int = 20    # per-agent action budget
     AGENT_LOOP_ERROR_THRESHOLD: int = 5          # consecutive errors → stop loop
     AGENT_LOOP_SCAVENGE_AFTER_IDLES: int = 3    # idle polls before scavenging orphan tasks
+    AGENT_LOOP_EVENT_TIMEOUT: float = 3600.0     # max seconds before an in_progress event is considered stuck
+    AGENT_LOOP_DEAD_AGENT_TIMEOUT: float = 1200.0  # 20 min — agent is considered dead if no poll in this time
 
     model_config = {"env_prefix": "PABADA_"}
 

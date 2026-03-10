@@ -7,19 +7,20 @@ import numpy as np
 from pydantic import BaseModel, Field
 
 from backend.tools.base.base_tool import PabadaBaseTool
-from backend.tools.base.db import execute_with_retry
+from backend.tools.base.db import execute_with_retry, parse_query_or_terms
 
 
 class SearchFindingsInput(BaseModel):
     query: str = Field(
         ...,
         description=(
-            "Text to search for among finding topics. "
-            "Matches by semantic similarity, not exact keywords."
+            "Text to search for among findings. "
+            "Matches by semantic similarity against topic and content. "
+            "Supports | for OR: 'security | auth' matches findings similar to either term."
         ),
     )
     threshold: float = Field(
-        default=0.85,
+        default=0.65,
         ge=0.0,
         le=1.0,
         description="Minimum cosine similarity (0-1). Lower = broader matches.",
@@ -42,7 +43,7 @@ class SearchFindingsTool(PabadaBaseTool):
     name: str = "search_findings"
     description: str = (
         "Search findings by semantic similarity. Returns findings whose "
-        "topic is similar to the query, ranked by similarity score. "
+        "topic and content are similar to the query, ranked by similarity score. "
         "Use this to check if a finding already exists before recording "
         "a new one, or to find related findings across tasks."
     )
@@ -51,7 +52,7 @@ class SearchFindingsTool(PabadaBaseTool):
     def _run(
         self,
         query: str,
-        threshold: float = 0.85,
+        threshold: float = 0.65,
         task_id: int | None = None,
         include_content: bool = False,
         limit: int = 20,
@@ -80,7 +81,7 @@ class SearchFindingsTool(PabadaBaseTool):
 
             where = " AND ".join(conditions)
 
-            cols = "id, topic, task_id, confidence, finding_type, status, created_at"
+            cols = "id, topic, task_id, confidence, finding_type, status, created_at, embedding"
             if include_content:
                 cols += ", content, sources_json"
 
@@ -102,22 +103,46 @@ class SearchFindingsTool(PabadaBaseTool):
         # Compute semantic similarity
         try:
             from backend.tools.base.dedup import _get_embed_fn, _cosine_similarity
+            from backend.tools.base.embeddings import embedding_from_blob
 
             embed_fn = _get_embed_fn()
-            topics = [c["topic"] for c in candidates]
-            all_texts = [query] + topics
-            embeddings = embed_fn(all_texts)
 
-            query_vec = np.asarray(embeddings[0])
+            # Parse OR-terms: embed each sub-query, use max similarity
+            or_terms = parse_query_or_terms(query)
+            query_vecs = [np.asarray(v) for v in embed_fn(or_terms)]
+
+            # Split candidates into those with pre-computed embeddings and those without
+            with_emb = [(i, c) for i, c in enumerate(candidates) if c.get("embedding")]
+            without_emb = [(i, c) for i, c in enumerate(candidates) if not c.get("embedding")]
+
+            scores = [0.0] * len(candidates)
+
+            # Use stored embeddings (fast path)
+            for i, c in with_emb:
+                emb_vec = embedding_from_blob(c["embedding"])
+                scores[i] = max(_cosine_similarity(qv, emb_vec) for qv in query_vecs)
+
+            # Fallback: embed topic + content for candidates without stored embeddings
+            if without_emb:
+                texts = [
+                    f"{c['topic']} {c.get('content', '')[:500]}" if include_content or c.get("content")
+                    else c["topic"]
+                    for _, c in without_emb
+                ]
+                embeddings = embed_fn(texts)
+                for j, (i, _) in enumerate(without_emb):
+                    emb_vec = np.asarray(embeddings[j])
+                    scores[i] = max(_cosine_similarity(qv, emb_vec) for qv in query_vecs)
+
+            # Filter and rank
             scored = []
-            for i, emb in enumerate(embeddings[1:]):
-                sim = _cosine_similarity(query_vec, np.asarray(emb))
-                if sim >= threshold:
-                    match = dict(candidates[i])
-                    match["similarity"] = round(sim, 4)
+            for i, c in enumerate(candidates):
+                if scores[i] >= threshold:
+                    match = dict(c)
+                    match.pop("embedding", None)  # don't return raw blob
+                    match["similarity"] = round(scores[i], 4)
                     scored.append(match)
 
-            # Sort by similarity descending
             scored.sort(key=lambda x: x["similarity"], reverse=True)
             scored = scored[:limit]
 

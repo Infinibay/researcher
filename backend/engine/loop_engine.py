@@ -268,6 +268,7 @@ _PERMANENT_ERRORS = (
     "does not support function",
     "tool_choice is not supported",
     "tools is not supported",
+    "not found",        # Ollama: {"error":"tool 'X' not found"}
 )
 
 _LLM_RETRIES = 3
@@ -867,7 +868,23 @@ class LoopEngine(AgentEngine):
                                 status="continue",
                             )
                             break
-                        raise  # Non-malformed errors propagate normally
+                        # Check if this is a permanent tool/FC error from
+                        # the provider (e.g. Ollama "tool 'X' not found").
+                        # Fall back to manual tool calling instead of crashing.
+                        exc_msg = str(exc).lower()
+                        if any(p in exc_msg for p in _PERMANENT_ERRORS):
+                            _log(
+                                f"{_YELLOW}⚠ Provider rejected function calling: "
+                                f"{str(exc)[:120]} — switching to manual tool calling{_RESET}"
+                            )
+                            manual_tc = True
+                            # Rebuild system prompt with embedded tool descriptions
+                            tools_section = build_tools_prompt_section(tool_schemas)
+                            system_prompt = build_system_prompt(agent.backstory)
+                            system_prompt = f"{system_prompt}\n\n{tools_section}"
+                            messages[0] = {"role": "system", "content": system_prompt}
+                            continue  # Retry this iteration in manual mode
+                        raise  # Non-recoverable errors propagate normally
 
                     _malformed_retries = 0  # Reset on success
 
@@ -1248,7 +1265,11 @@ class LoopEngine(AgentEngine):
         return _synthesize_final(state)
 
     def _checkpoint(self, event_id: int, state: LoopState) -> None:
-        """Persist LoopState to agent_events.progress_json for crash recovery."""
+        """Persist LoopState to agent_events.progress_json for crash recovery.
+
+        Also updates the agent's heartbeat (last_poll_at) so the liveness
+        checker knows the agent is still alive during long executions.
+        """
         try:
             from backend.autonomy.events import update_event_status
 
@@ -1259,6 +1280,26 @@ class LoopEngine(AgentEngine):
             )
         except Exception:
             logger.debug("Checkpoint failed for event %d", event_id, exc_info=True)
+
+        # Heartbeat: update last_poll_at so liveness checker doesn't
+        # consider this agent dead while it's mid-execution.
+        try:
+            import sqlite3
+            from backend.autonomy.db import execute_with_retry as _db_exec
+
+            def _heartbeat(conn: sqlite3.Connection) -> None:
+                conn.execute(
+                    """UPDATE agent_loop_state
+                       SET last_poll_at = CURRENT_TIMESTAMP,
+                           updated_at = CURRENT_TIMESTAMP
+                       WHERE current_event_id = ?""",
+                    (event_id,),
+                )
+                conn.commit()
+
+            _db_exec(_heartbeat)
+        except Exception:
+            pass  # heartbeat is best-effort
 
     def _apply_guardrail(
         self,

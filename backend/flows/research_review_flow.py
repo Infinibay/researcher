@@ -98,11 +98,18 @@ class ResearchReviewFlow(Flow[ResearchReviewState]):
         reviewer.activate_context(task_id=self.state.task_id)
         run_id = reviewer.create_agent_run(self.state.task_id)
 
-        task_prompt = rr_tasks.peer_review(
-            self.state.task_id, self.state.task_title,
-            project_id=self.state.project_id,
-            project_name=self.state.project_name,
-        )
+        if self.state.investigation_mode:
+            task_prompt = rr_tasks.investigation_review(
+                self.state.task_id, self.state.task_title,
+                project_id=self.state.project_id,
+                project_name=self.state.project_name,
+            )
+        else:
+            task_prompt = rr_tasks.peer_review(
+                self.state.task_id, self.state.task_title,
+                project_id=self.state.project_id,
+                project_name=self.state.project_name,
+            )
         try:
             result = get_engine().execute(
                 reviewer, task_prompt,
@@ -198,12 +205,20 @@ class ResearchReviewFlow(Flow[ResearchReviewState]):
         researcher.activate_context(task_id=self.state.task_id)
         run_id = researcher.create_agent_run(self.state.task_id)
 
-        task_prompt = res_tasks.revise_research(
-            self.state.task_id,
-            reviewer_feedback=self.state.last_reviewer_feedback,
-            project_id=self.state.project_id,
-            project_name=self.state.project_name,
-        )
+        if self.state.investigation_mode:
+            task_prompt = res_tasks.revise_investigation(
+                self.state.task_id,
+                reviewer_feedback=self.state.last_reviewer_feedback,
+                project_id=self.state.project_id,
+                project_name=self.state.project_name,
+            )
+        else:
+            task_prompt = res_tasks.revise_research(
+                self.state.task_id,
+                reviewer_feedback=self.state.last_reviewer_feedback,
+                project_id=self.state.project_id,
+                project_name=self.state.project_name,
+            )
         try:
             result = get_engine().execute(researcher, task_prompt)
         except AgentKilledError:

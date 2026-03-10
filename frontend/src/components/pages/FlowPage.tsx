@@ -31,6 +31,11 @@ const SUBFLOWS = [
     steps: ['assign_research', 'literature_review', 'formulate_hypothesis', 'investigate', 'write_report', 'request_peer_review', 'update_knowledge_base'],
   },
   {
+    id: 'investigation_flow',
+    label: 'Investigation',
+    steps: ['assign_investigation', 'gather_information', 'write_summary', 'peer_review'],
+  },
+  {
     id: 'brainstorming_flow',
     label: 'Brainstorming',
     steps: ['start_session', 'consolidate_ideas', 'decision_phase', 'create_tasks_from_ideas'],

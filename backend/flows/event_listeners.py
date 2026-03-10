@@ -427,16 +427,16 @@ class AllTasksDoneListener(BaseEventListener):
                 """SELECT COUNT(*) as cnt FROM tasks
                    WHERE project_id = ?
                      AND status NOT IN ('done', 'cancelled')
-                     AND type != 'research'""",
+                     AND type NOT IN ('research', 'investigation')""",
                 (self.project_id,),
             ).fetchone()
 
-            # Count research tasks still in progress
+            # Count research/investigation tasks still in progress
             research_in_progress = conn.execute(
                 """SELECT COUNT(*) as cnt FROM tasks
                    WHERE project_id = ?
                      AND status = 'in_progress'
-                     AND type = 'research'""",
+                     AND type IN ('research', 'investigation')""",
                 (self.project_id,),
             ).fetchone()
 
@@ -685,7 +685,7 @@ class ListenerManager:
             task_data = event.data or {}
             task_type = task_data.get("type", "code")
 
-            if task_type == "research":
+            if task_type in ("research", "investigation"):
                 target_role = "researcher"
             elif task_type == "review":
                 target_role = "code_reviewer"

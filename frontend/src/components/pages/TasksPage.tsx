@@ -14,7 +14,7 @@ import { PRIORITY_COLORS } from '../../utils/colors'
 import type { TaskDependency } from '../../types/api'
 
 const statusOptions = ['', 'backlog', 'pending', 'in_progress', 'review_ready', 'rejected', 'done', 'blocked']
-const typeOptions = ['code', 'research', 'review', 'documentation']
+const typeOptions = ['code', 'research', 'investigation', 'review', 'test', 'design', 'integrate', 'documentation', 'bug_fix']
 const complexityOptions = ['low', 'medium', 'high']
 
 const statusVariant: Record<string, string> = {
@@ -30,8 +30,14 @@ const statusVariant: Record<string, string> = {
 const typeVariant: Record<string, string> = {
   code: 'info',
   research: 'warning',
+  investigation: 'warning',
   review: 'violet',
+  test: 'info',
+  design: 'violet',
+  integrate: 'info',
   documentation: 'neutral',
+  bug_fix: 'error',
+  plan: 'neutral',
 }
 
 export function TasksPage() {

@@ -239,6 +239,36 @@ class TicketCreationFlow(Flow[TicketCreationState]):
                 "only %d task(s) created, nothing to link",
                 len(self.state.tasks_created),
             )
+            # If no new tasks were created (all duplicates/failed), emit
+            # task_available anyway so create_structure unblocks.  The tasks
+            # already exist in the DB and agents can pick them up.
+            if len(self.state.tasks_created) == 0:
+                from backend.flows.helpers.db_helpers import get_pending_tasks
+                existing = get_pending_tasks(self.state.project_id)
+                if existing:
+                    logger.info(
+                        "TicketCreationFlow: 0 new tasks but %d pending tasks "
+                        "exist in DB — emitting task_available",
+                        len(existing),
+                    )
+                    event_bus.emit(FlowEvent(
+                        event_type="task_available",
+                        project_id=self.state.project_id,
+                        entity_type="task",
+                        entity_id=existing[0]["id"],
+                        data={"reason": "pre_existing_tasks"},
+                    ))
+                else:
+                    logger.warning(
+                        "TicketCreationFlow: 0 tasks created and 0 pending in DB "
+                        "— emitting no_tickets_in_plan",
+                    )
+                    event_bus.emit(FlowEvent(
+                        event_type="no_tickets_in_plan",
+                        project_id=self.state.project_id,
+                        entity_type="project",
+                        entity_id=self.state.project_id,
+                    ))
             return
 
         logger.info(

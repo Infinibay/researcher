@@ -10,7 +10,15 @@ from backend.tools.base.db import execute_with_retry, sanitize_fts5_query
 
 
 class SearchKnowledgeInput(BaseModel):
-    query: str = Field(..., description="Full-text search query")
+    query: str = Field(
+        ...,
+        description=(
+            "Full-text search query. Supports operators: "
+            "'term1 | term2' for OR, 'term1 & term2' for AND, "
+            "'arch*' for prefix matching, '\"exact phrase\"' for phrases. "
+            "Examples: 'react | vue | angular', 'auth & security', 'micros*'"
+        ),
+    )
     sources: list[str] = Field(
         default=["findings", "wiki", "reference_files", "reports"],
         description="Sources to search: findings, wiki, reference_files, reports",
@@ -25,8 +33,10 @@ class SearchKnowledgeInput(BaseModel):
 class SearchKnowledgeTool(PabadaBaseTool):
     name: str = "search_knowledge"
     description: str = (
-        "Unified search across knowledge sources (findings, wiki, reference files). "
-        "Uses full-text search for fast, relevant results."
+        "Unified search across knowledge sources (findings, wiki, reference files, reports). "
+        "Uses full-text search for fast, relevant results. "
+        "Query supports operators: | for OR, & for AND, * for prefix, \"quotes\" for exact phrases. "
+        "Example: 'react | vue', 'auth & token*', '\"machine learning\" | AI'."
     )
     args_schema: Type[BaseModel] = SearchKnowledgeInput
 
@@ -105,47 +115,40 @@ class SearchKnowledgeTool(PabadaBaseTool):
                 try:
                     rows = conn.execute(
                         """SELECT rf.id, rf.file_name AS title,
-                                  rf.description AS snippet,
+                                  snippet(reference_files_fts, 1, '<b>', '</b>', '...', 64) AS snippet,
                                   rf.file_type
                            FROM reference_files rf
-                           WHERE rf.project_id = ?
-                             AND (rf.file_name LIKE ? OR rf.description LIKE ?)
+                           JOIN reference_files_fts ON rf.id = reference_files_fts.rowid
+                           WHERE reference_files_fts MATCH ?
+                             AND rf.project_id = ?
+                           ORDER BY rank
                            LIMIT ?""",
-                        (project_id, f"%{query}%", f"%{query}%", limit),
+                        (safe_query, project_id, limit),
                     ).fetchall()
                     for r in rows:
                         results.append({
                             "source_type": "reference_files",
                             "id": r["id"],
                             "title": r["title"],
-                            "snippet": r["snippet"] or "",
+                            "snippet": r["snippet"],
                             "file_type": r["file_type"],
                         })
                 except sqlite3.OperationalError:
-                    pass
+                    pass  # FTS table may not exist in old DBs
 
             if "reports" in sources:
                 try:
                     rows = conn.execute(
-                        """SELECT id, file_path AS title,
-                                  COALESCE(description, '') AS snippet,
-                                  content
-                           FROM artifacts
-                           WHERE type = 'report'
-                             AND project_id = ?
-                             AND (
-                               description LIKE ?
-                               OR file_path LIKE ?
-                               OR content LIKE ?
-                             )
+                        """SELECT a.id, a.file_path AS title,
+                                  snippet(artifacts_fts, 1, '<b>', '</b>', '...', 64) AS snippet
+                           FROM artifacts a
+                           JOIN artifacts_fts ON a.id = artifacts_fts.rowid
+                           WHERE artifacts_fts MATCH ?
+                             AND a.type = 'report'
+                             AND a.project_id = ?
+                           ORDER BY rank
                            LIMIT ?""",
-                        (
-                            project_id,
-                            f"%{query}%",
-                            f"%{query}%",
-                            f"%{query}%",
-                            limit,
-                        ),
+                        (safe_query, project_id, limit),
                     ).fetchall()
                     for r in rows:
                         results.append({
@@ -155,7 +158,7 @@ class SearchKnowledgeTool(PabadaBaseTool):
                             "snippet": r["snippet"],
                         })
                 except sqlite3.OperationalError:
-                    pass
+                    pass  # FTS table may not exist in old DBs
 
             return results
 

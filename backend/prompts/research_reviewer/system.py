@@ -130,6 +130,28 @@ flowchart TD
 |----------|----------|--------|
 | Blocking | No artifacts, no decomposition, no alternatives (evaluative), summary-not-synthesis, inflated confidence, major gaps | Reject — must fix |
 | Minor | Small coverage gaps, minor calibration issues, limited devil's advocate | Approve with suggestions |
+
+## Investigation Review (task type = investigation)
+
+When reviewing **investigation** tasks (not research tasks), use these
+4 simplified criteria instead of the 7 above. Do NOT apply PICO, ACH,
+GRADE, or devil's advocate criteria to investigation tasks.
+
+### 1. Scope Coverage
+- **Check**: Was the scope clearly defined? Were all scope areas explored?
+- **Red flag**: Scope areas mentioned but not investigated, or scope never defined.
+
+### 2. Source Quality
+- **Check**: Sources credible and corroborated? (Same standard as criterion 3 above.)
+- **Red flag**: Single-source reliance, vendor marketing as evidence.
+
+### 3. Clarity & Organization
+- **Check**: Report organized by topic? Clear and actionable? Easy to follow?
+- **Red flag**: Disorganized, hard to find specific information, wall of text.
+
+### 4. Completeness
+- **Check**: Open questions identified? Findings recorded? Sufficient for decisions?
+- **Red flag**: Major scope areas missing, no findings recorded, no open questions listed.
 </standards>
 
 <rules>

@@ -120,12 +120,12 @@ class Scavenger:
         return created
 
     def _scavenge_researcher(self) -> int:
-        """Find pending/backlog research tasks + rejected tasks assigned to us."""
+        """Find pending/backlog research/investigation tasks + rejected tasks assigned to us."""
         available = self._find_orphan_tasks(
             """SELECT t.id, t.priority FROM tasks t
                WHERE t.project_id = ?
                  AND t.status IN ('backlog', 'pending')
-                 AND t.type = 'research'
+                 AND t.type IN ('research', 'investigation')
                  AND t.retry_count < ?
                  AND NOT EXISTS (
                      SELECT 1 FROM agent_events ae
@@ -151,7 +151,7 @@ class Scavenger:
                WHERE t.project_id = ?
                  AND t.status = 'rejected'
                  AND t.assigned_to = ?
-                 AND t.type = 'research'
+                 AND t.type IN ('research', 'investigation')
                  AND t.retry_count < ?
                  AND NOT EXISTS (
                      SELECT 1 FROM agent_events ae
@@ -184,7 +184,7 @@ class Scavenger:
             """SELECT t.id, t.priority FROM tasks t
                WHERE t.project_id = ?
                  AND t.status = 'review_ready'
-                 AND t.type != 'research'
+                 AND t.type NOT IN ('research', 'investigation')
                  AND (t.reviewer IS NULL OR t.reviewer = '')
                  AND NOT EXISTS (
                      SELECT 1 FROM agent_events ae
@@ -212,12 +212,12 @@ class Scavenger:
         return created
 
     def _scavenge_research_reviewer(self) -> int:
-        """Find review_ready research tasks without active review events."""
+        """Find review_ready research/investigation tasks without active review events."""
         tasks = self._find_orphan_tasks(
             """SELECT t.id, t.priority FROM tasks t
                WHERE t.project_id = ?
                  AND t.status = 'review_ready'
-                 AND t.type = 'research'
+                 AND t.type IN ('research', 'investigation')
                  AND (t.reviewer IS NULL OR t.reviewer = '')
                  AND NOT EXISTS (
                      SELECT 1 FROM agent_events ae

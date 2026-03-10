@@ -60,12 +60,18 @@ class DevelopmentFlow(Flow[DevelopmentState]):
         if task is None:
             return
 
-        # Find an available developer and assign directly
-        developer = get_available_agent_by_role(
-            "developer", self.state.project_id,
-            tech_hints=self.state.tech_hints,
-        )
-        self.state.developer_id = developer.agent_id
+        # Use pre-assigned developer (from agent loop) or find an available one
+        if self.state.developer_id:
+            developer = get_agent_by_role(
+                "developer", self.state.project_id,
+                agent_id=self.state.developer_id,
+            )
+        else:
+            developer = get_available_agent_by_role(
+                "developer", self.state.project_id,
+                tech_hints=self.state.tech_hints,
+            )
+            self.state.developer_id = developer.agent_id
         developer.activate_context(task_id=self.state.task_id)
 
         # Assign task in DB (backlog/pending → in_progress)

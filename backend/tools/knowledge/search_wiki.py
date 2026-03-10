@@ -7,7 +7,7 @@ import numpy as np
 from pydantic import BaseModel, Field
 
 from backend.tools.base.base_tool import PabadaBaseTool
-from backend.tools.base.db import execute_with_retry
+from backend.tools.base.db import execute_with_retry, parse_query_or_terms
 
 
 class SearchWikiInput(BaseModel):
@@ -15,11 +15,12 @@ class SearchWikiInput(BaseModel):
         ...,
         description=(
             "Text to search for among wiki pages. "
-            "Matches by semantic similarity, not exact keywords."
+            "Matches by semantic similarity, not exact keywords. "
+            "Supports | for OR: 'architecture | design' matches pages similar to either term."
         ),
     )
     threshold: float = Field(
-        default=0.75,
+        default=0.65,
         ge=0.0,
         le=1.0,
         description="Minimum cosine similarity (0-1). Lower = broader matches.",
@@ -43,14 +44,14 @@ class SearchWikiTool(PabadaBaseTool):
     def _run(
         self,
         query: str,
-        threshold: float = 0.75,
+        threshold: float = 0.65,
         include_content: bool = False,
         limit: int = 20,
     ) -> str:
         project_id = self.project_id
 
         def _fetch(conn: sqlite3.Connection) -> list[dict]:
-            cols = "id, path, title, parent_path, updated_at"
+            cols = "id, path, title, parent_path, updated_at, embedding"
             if include_content:
                 cols += ", content"
 
@@ -72,29 +73,46 @@ class SearchWikiTool(PabadaBaseTool):
 
         try:
             from backend.tools.base.dedup import _get_embed_fn, _cosine_similarity
+            from backend.tools.base.embeddings import embedding_from_blob
 
             embed_fn = _get_embed_fn()
-            # Embed title + first 200 chars of content for better matching
-            texts = []
-            for c in candidates:
-                text = c["title"] or c["path"]
-                if include_content and c.get("content"):
-                    text += " " + c["content"][:200]
-                texts.append(text)
 
-            all_texts = [query] + texts
-            embeddings = embed_fn(all_texts)
+            # Parse OR-terms: embed each sub-query, use max similarity
+            or_terms = parse_query_or_terms(query)
+            query_vecs = [np.asarray(v) for v in embed_fn(or_terms)]
 
-            query_vec = np.asarray(embeddings[0])
+            with_emb = [(i, c) for i, c in enumerate(candidates) if c.get("embedding")]
+            without_emb = [(i, c) for i, c in enumerate(candidates) if not c.get("embedding")]
+
+            scores = [0.0] * len(candidates)
+
+            # Use stored embeddings (fast path)
+            for i, c in with_emb:
+                emb_vec = embedding_from_blob(c["embedding"])
+                scores[i] = max(_cosine_similarity(qv, emb_vec) for qv in query_vecs)
+
+            # Fallback: embed title + content prefix for candidates without stored embeddings
+            if without_emb:
+                texts = []
+                for _, c in without_emb:
+                    text = c["title"] or c["path"]
+                    if c.get("content"):
+                        text += " " + c["content"][:500]
+                    texts.append(text)
+
+                embeddings = embed_fn(texts)
+                for j, (i, _) in enumerate(without_emb):
+                    emb_vec = np.asarray(embeddings[j])
+                    scores[i] = max(_cosine_similarity(qv, emb_vec) for qv in query_vecs)
+
             scored = []
-            for i, emb in enumerate(embeddings[1:]):
-                sim = _cosine_similarity(query_vec, np.asarray(emb))
-                if sim >= threshold:
-                    match = dict(candidates[i])
-                    match["similarity"] = round(sim, 4)
-                    # Truncate content in results for readability
-                    if not include_content and "content" in match:
-                        del match["content"]
+            for i, c in enumerate(candidates):
+                if scores[i] >= threshold:
+                    match = dict(c)
+                    match.pop("embedding", None)  # don't return raw blob
+                    match["similarity"] = round(scores[i], 4)
+                    if not include_content:
+                        match.pop("content", None)
                     scored.append(match)
 
             scored.sort(key=lambda x: x["similarity"], reverse=True)

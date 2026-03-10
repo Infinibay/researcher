@@ -87,9 +87,22 @@ class TaskFlowHandler(EventHandler):
                 flow.kickoff(inputs={
                     "project_id": project_id,
                     "task_id": task_id,
+                    "researcher_id": agent_id,
                 })
                 log_flow_event(
                     project_id, "research_flow_completed",
+                    "agent_loop", "task", task_id,
+                )
+            elif task_type == "investigation":
+                from backend.flows.investigation_flow import InvestigationFlow
+                flow = InvestigationFlow()
+                flow.kickoff(inputs={
+                    "project_id": project_id,
+                    "task_id": task_id,
+                    "researcher_id": agent_id,
+                })
+                log_flow_event(
+                    project_id, "investigation_flow_completed",
                     "agent_loop", "task", task_id,
                 )
             else:
@@ -98,6 +111,7 @@ class TaskFlowHandler(EventHandler):
                 flow.kickoff(inputs={
                     "project_id": project_id,
                     "task_id": task_id,
+                    "developer_id": agent_id,
                 })
                 log_flow_event(
                     project_id, "development_flow_completed",
@@ -195,7 +209,7 @@ class ReviewHandler(EventHandler):
 
         task_type = task.get("type", "code")
 
-        if task_type == "research":
+        if task_type in ("research", "investigation"):
             self._run_research_review(event, project_id, task_id, task)
         else:
             self._run_code_review(project_id, task_id, task)
@@ -334,11 +348,19 @@ class ReviewHandler(EventHandler):
         reviewer.activate_context(task_id=task_id)
         run_id = reviewer.create_agent_run(task_id)
 
-        task_prompt = rr_tasks.peer_review(
-            task_id, task_title,
-            project_id=project_id,
-            project_name=project_name,
-        )
+        task_type = task.get("type", "research")
+        if task_type == "investigation":
+            task_prompt = rr_tasks.investigation_review(
+                task_id, task_title,
+                project_id=project_id,
+                project_name=project_name,
+            )
+        else:
+            task_prompt = rr_tasks.peer_review(
+                task_id, task_title,
+                project_id=project_id,
+                project_name=project_name,
+            )
         try:
             result = get_engine().execute(
                 reviewer, task_prompt,
@@ -489,6 +511,18 @@ class ProgressEvalHandler(EventHandler):
                 ),
             )
         elif event_type == "stagnation_detected":
+            # First: check if the stuck task's agent is actually dead.
+            # If so, recover the task immediately instead of just sending messages.
+            task_id = payload.get("task_id")
+            if task_id:
+                try:
+                    self._try_recover_dead_task(project_id, task_id)
+                except Exception:
+                    logger.debug(
+                        "ProgressEvalHandler: dead agent recovery failed for task %d",
+                        task_id, exc_info=True,
+                    )
+
             # Dedup: skip if a stagnation message was sent recently (10 min)
             import sqlite3 as _sqlite3
             from backend.autonomy.db import execute_with_retry as _exec
@@ -520,6 +554,35 @@ class ProgressEvalHandler(EventHandler):
                         f"{payload.get('stuck_tasks', '?')} tasks stuck with no "
                         f"recent completions. Please analyze and unblock."
                     ),
+                )
+
+    @staticmethod
+    def _try_recover_dead_task(project_id: int, task_id: int) -> None:
+        """If the task's assigned agent is dead, recover it to pending."""
+        import sqlite3 as _sqlite3
+        from backend.autonomy.db import execute_with_retry as _exec
+
+        def _get_task(conn: _sqlite3.Connection) -> dict | None:
+            row = conn.execute(
+                "SELECT id, status, assigned_to FROM tasks WHERE id = ?",
+                (task_id,),
+            ).fetchone()
+            return dict(row) if row else None
+
+        task = _exec(_get_task)
+        if not task or task["status"] != "in_progress" or not task["assigned_to"]:
+            return
+
+        from backend.autonomy.liveness import is_agent_dead, recover_dead_agent_task
+
+        if is_agent_dead(task["assigned_to"]):
+            recovered = recover_dead_agent_task(
+                task_id, task["assigned_to"], reason="stagnation_dead_agent",
+            )
+            if recovered:
+                logger.info(
+                    "ProgressEvalHandler: recovered task %d from dead agent %s",
+                    task_id, task["assigned_to"],
                 )
 
     def _handle_all_tasks_done(self, project_id: int) -> None:
@@ -739,7 +802,7 @@ class ReworkHandler(EventHandler):
 
     @staticmethod
     def _role_for_type(task_type: str) -> str:
-        if task_type == "research":
+        if task_type in ("research", "investigation"):
             return "researcher"
         return "developer"
 
@@ -758,6 +821,14 @@ class ReworkHandler(EventHandler):
         if task_type == "research":
             from backend.prompts.researcher import tasks as res_tasks
             return res_tasks.revise_research(
+                task_id,
+                reviewer_feedback=feedback,
+                project_id=project_id,
+                project_name=project_name,
+            )
+        elif task_type == "investigation":
+            from backend.prompts.researcher import tasks as res_tasks
+            return res_tasks.revise_investigation(
                 task_id,
                 reviewer_feedback=feedback,
                 project_id=project_id,

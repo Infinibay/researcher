@@ -14,7 +14,12 @@ class ReadWikiInput(BaseModel):
         default=None, description="Wiki page path to read (e.g. 'architecture/overview')"
     )
     search: str | None = Field(
-        default=None, description="Full-text search query across wiki pages"
+        default=None,
+        description=(
+            "Full-text search query across wiki pages. "
+            "Supports: | for OR, & for AND, * for prefix, \"quotes\" for exact phrases. "
+            "Example: 'architecture | design', 'auth*'"
+        ),
     )
 
 

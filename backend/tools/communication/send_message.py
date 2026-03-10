@@ -387,10 +387,12 @@ class SendMessageTool(PabadaBaseTool):
         self._log_tool_usage(f"Sent message to {target}")
 
         response = {
+            "status": "Message sent successfully",
             "message_id": result["message_id"],
             "thread_id": result["thread_id"],
             "to": target,
             "priority": priority,
+            "message_body": message,
         }
         # Include thread context so agent sees prior conversation
         if verdict.context_summary:

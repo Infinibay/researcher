@@ -110,8 +110,10 @@ For each milestone (max {max_milestones} per epic):
 
 For each task (max {max_tasks} per milestone):
 - Be completable by a single agent in a reasonable cycle.
-- Type: `development`, `research`, `test`, `documentation`, `design`,
-  `integration`, `bug_fix`.
+- Type: `development`, `research`, `investigation`, `test`, `documentation`,
+  `design`, `integration`, `bug_fix`.
+  - Use `research` for hypothesis testing, comparing alternatives, rigorous evaluation.
+  - Use `investigation` for information gathering, exploring what's happening, mapping current state.
 
 ### Step 5: Write Rich Task Descriptions
 Gather context with tools BEFORE writing each task. Do not invent
@@ -572,7 +574,7 @@ Create a single task ticket for project '{project_name}' (ID: {project_id}).
 Read the plan section for "{ticket_title}". Identify:
 - Which epic this task belongs to (look up the epic_id from the map above)
 - Which milestone this task belongs to (look up the milestone_id from the map above)
-- The task type (development / research / test / documentation / design / integration / bug_fix)
+- The task type (development / research / investigation / test / documentation / design / integration / bug_fix)
 - Priority (1-5) and complexity (low / medium / high)
 
 ### Step 1.5 — Project Awareness & Deduplication
