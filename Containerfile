@@ -1,6 +1,6 @@
-# Containerfile — PABADA backend (FastAPI + CrewAI)
-# Build:  podman build -t pabada:latest -f Containerfile .
-#         docker build -t pabada:latest -f Containerfile .
+# Containerfile — INFINIBAY backend (FastAPI + CrewAI)
+# Build:  podman build -t infinibay:latest -f Containerfile .
+#         docker build -t infinibay:latest -f Containerfile .
 
 FROM python:3.13-slim
 
@@ -9,8 +9,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Non-root user for the backend process
-RUN groupadd -g 1000 pabada && \
-    useradd -u 1000 -g pabada -m pabada
+RUN groupadd -g 1000 infinibay && \
+    useradd -u 1000 -g infinibay -m infinibay
 
 WORKDIR /app
 
@@ -26,6 +26,6 @@ VOLUME /research
 
 EXPOSE 8000
 
-USER pabada
+USER infinibay
 
 CMD ["python", "-m", "backend.api.run"]

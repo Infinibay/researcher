@@ -1,6 +1,6 @@
 # Containerfile.sandbox — lightweight image for agent command execution
-# Build:  podman build -t pabada-sandbox:latest -f Containerfile.sandbox .
-#         docker build -t pabada-sandbox:latest -f Containerfile.sandbox .
+# Build:  podman build -t infinibay-sandbox:latest -f Containerfile.sandbox .
+#         docker build -t infinibay-sandbox:latest -f Containerfile.sandbox .
 
 FROM python:3.13-slim
 
@@ -37,17 +37,17 @@ RUN pip install --no-cache-dir \
         fpdf2 openpyxl requests beautifulsoup4
 
 # ── File helper for pod mode ──────────────────────────────────────────────
-COPY scripts/pabada_file_helper.py /usr/local/bin/pabada-file-helper
-RUN chmod +x /usr/local/bin/pabada-file-helper
+COPY scripts/infinibay_file_helper.py /usr/local/bin/infinibay-file-helper
+RUN chmod +x /usr/local/bin/infinibay-file-helper
 
-# ── PABADA CLI helper (for Claude Code engine) ──────────────────────────
-COPY scripts/pabada_cli.py /usr/local/bin/pabada
-RUN chmod +x /usr/local/bin/pabada
+# ── INFINIBAY CLI helper (for Claude Code engine) ──────────────────────────
+COPY scripts/infinibay_cli.py /usr/local/bin/infinibay
+RUN chmod +x /usr/local/bin/infinibay
 
-# ── PABADA MCP server (for Claude Code engine) ──────────────────────────
+# ── INFINIBAY MCP server (for Claude Code engine) ──────────────────────────
 RUN pip install --no-cache-dir fastmcp
-COPY scripts/pabada_mcp_server.py /usr/local/bin/pabada-mcp
-RUN chmod +x /usr/local/bin/pabada-mcp
+COPY scripts/infinibay_mcp_server.py /usr/local/bin/infinibay-mcp
+RUN chmod +x /usr/local/bin/infinibay-mcp
 
 # ── Claude Code CLI (used when AGENT_ENGINE=claude_code) ─────────────
 # Install globally as root, then symlink to /usr/local/bin so it's in PATH
