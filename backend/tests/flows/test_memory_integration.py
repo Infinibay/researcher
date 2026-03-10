@@ -29,7 +29,7 @@ class TestMemoryConfiguration:
             mock.EMBEDDING_PROVIDER = "default"
             mock.EMBEDDING_MODEL = "all-MiniLM-L6-v2"
             mock.EMBEDDING_BASE_URL = ""
-            mock.DB_PATH = ".data/pabada.db"
+            mock.DB_PATH = ".data/infinibay.db"
             result = KnowledgeService.build_crew_memory_kwargs()
             assert "memory" in result
             # Must be a Memory instance, not a boolean
@@ -45,7 +45,7 @@ class TestMemoryConfiguration:
             mock.EMBEDDING_PROVIDER = "openai"
             mock.EMBEDDING_MODEL = "text-embedding-3-small"
             mock.EMBEDDING_BASE_URL = None
-            mock.DB_PATH = ".data/pabada.db"
+            mock.DB_PATH = ".data/infinibay.db"
             result = KnowledgeService.build_crew_memory_kwargs()
 
             from crewai import Memory
@@ -57,7 +57,7 @@ class TestMemoryConfiguration:
             mock.EMBEDDING_PROVIDER = "ollama"
             mock.EMBEDDING_MODEL = "nomic-embed-text"
             mock.EMBEDDING_BASE_URL = "http://localhost:11434"
-            mock.DB_PATH = ".data/pabada.db"
+            mock.DB_PATH = ".data/infinibay.db"
             result = KnowledgeService.build_crew_memory_kwargs()
 
             from crewai import Memory
@@ -70,7 +70,7 @@ class TestMemoryConfiguration:
             mock.EMBEDDING_PROVIDER = "default"
             mock.EMBEDDING_MODEL = "all-MiniLM-L6-v2"
             mock.EMBEDDING_BASE_URL = ""
-            mock.DB_PATH = ".data/pabada.db"
+            mock.DB_PATH = ".data/infinibay.db"
             result = KnowledgeService.build_crew_memory_kwargs()
 
             from crewai import Memory
