@@ -35,6 +35,12 @@ Implement task {task_id}: {task_title}
 
 {ctx_block}
 
+## Workspace
+Your shell commands run in your **isolated git worktree** by default.
+Do NOT `cd` to other directories — just run commands directly (e.g.
+`cargo test`, `pytest -x`, `ls src/`). Paths like `/home/developer` or
+`/home/user` do NOT exist.
+
 ## Repository Requirement
 A git repository MUST exist before you start working. The repository should
 already be configured with `origin` pointing to Forgejo.
@@ -337,6 +343,10 @@ Your code for task {task_id} has been rejected (attempt {rejection_count}).
 ## Branch
 `{branch_name}`
 
+## Workspace
+Your shell commands run in your isolated git worktree by default.
+Do NOT `cd` to other directories — just run commands directly.
+
 ## Your Goal
 Address ALL issues identified by the Code Reviewer. The review cycle will
 continue until the reviewer approves your code, so it is critical that you
@@ -466,6 +476,10 @@ code will proceed to review automatically.
 
 ## Branch
 `{branch_name}`
+
+## Workspace
+Your shell commands run in your isolated git worktree by default.
+Do NOT `cd` to other directories — just run commands directly.
 
 ## Step-by-Step Process
 

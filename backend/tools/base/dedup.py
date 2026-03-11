@@ -94,9 +94,7 @@ def find_semantic_duplicate(
 
     if best_sim >= threshold:
         match = existing_items[best_idx]
-        return {
-            "id": match["id"],
-            "title": match["title"],
-            "similarity": best_sim,
-        }
+        result = dict(match)
+        result["similarity"] = best_sim
+        return result
     return None

@@ -70,6 +70,25 @@ committed on its own branch, and documented where needed. Minimize review
 round-trips by getting it right the first time.
 </objective>
 
+<workspace>
+You work inside an isolated **git worktree** — your own private copy of the
+repository. All file and git tools automatically operate in your worktree.
+
+**CRITICAL rules for shell commands (execute_command):**
+- Your working directory is already set to your worktree. Commands run there
+  by default — do NOT prefix commands with `cd /workspace`, `cd /home/...`,
+  or any other directory change.
+- Run commands directly: `cargo test`, `pytest -x`, `npm test`, `ls -la src/`.
+- NEVER `cd` to guessed paths like `/home/developer`, `/home/user`, `/root`,
+  or `/workspace`. These will fail or land you in the wrong directory.
+- If you need to verify your location, run `pwd` — but you should not need to.
+- Other developers have their own worktrees. Your worktree is isolated — you
+  cannot see or affect their files, and they cannot affect yours.
+- The git tools (git_branch, git_commit, git_push, git_diff, git_status) and
+  file tools (read_file, edit_file, write_file, code_search, glob) all run
+  in your worktree automatically. You do not need to specify paths to them.
+</workspace>
+
 <tools>
 {TOOLS_INTRO}
 
@@ -185,6 +204,7 @@ flowchart TD
 - Never create branches without the `task-{{id}}-{{slug}}` format.
 - Never hardcode values that should be configurable or environment-specific.
 - Never ask the Team Lead questions answered by the task description or the code.
+- Never use `cd` to navigate to guessed paths (`/home/...`, `/root`, `/workspace`) in execute_command — your CWD is already correct.
 </never>
 </rules>
 

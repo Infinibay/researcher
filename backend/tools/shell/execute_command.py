@@ -126,7 +126,7 @@ class ExecuteCommandTool(InfinibayBaseTool):
         (``&&``, ``|``, ``>``, heredocs, etc.) work correctly.  The pod
         is already sandboxed, so there is no security concern.
         """
-        pod_cwd = cwd or "/workspace"
+        pod_cwd = cwd  # None → _exec_in_pod will use pod_manager.get_workdir()
         cmd = ["sh", "-c", raw_command]
 
         try:

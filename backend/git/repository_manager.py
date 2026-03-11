@@ -134,9 +134,10 @@ class RepositoryManager:
 
             self._configure_forgejo_auth(local_path, settings.FORGEJO_TOKEN)
 
-            # Push initial commit (force to handle diverged empty repos)
+            # Push initial commit (force because auto_init creates a
+            # separate initial commit on Forgejo)
             push_result = subprocess.run(
-                ["git", "push", "-u", "origin", default_branch],
+                ["git", "push", "--force", "-u", "origin", default_branch],
                 cwd=local_path,
                 capture_output=True,
                 text=True,

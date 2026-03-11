@@ -68,11 +68,11 @@ class RecordFindingTool(InfinibayBaseTool):
         # --- Semantic dedup check (same task + same finding_type) ---
         def _fetch_existing(conn: sqlite3.Connection) -> list[dict]:
             rows = conn.execute(
-                "SELECT id, topic AS title FROM findings"
+                "SELECT id, topic AS title, content FROM findings"
                 " WHERE task_id = ? AND finding_type = ?",
                 (task_id, finding_type),
             ).fetchall()
-            return [{"id": r["id"], "title": r["title"]} for r in rows]
+            return [{"id": r["id"], "title": r["title"], "content": r["content"]} for r in rows]
 
         try:
             existing = execute_with_retry(_fetch_existing)
@@ -81,10 +81,17 @@ class RecordFindingTool(InfinibayBaseTool):
 
                 match = find_semantic_duplicate(title, existing, threshold=0.85)
                 if match:
+                    existing_content = match.get("content", "")
+                    preview = existing_content[:500]
+                    if len(existing_content) > 500:
+                        preview += "..."
                     return self._error(
                         f"Duplicate finding: '{match['title']}' (ID: {match['id']}) "
-                        f"is {match['similarity']:.0%} similar to '{title}'. "
-                        f"Use the existing finding instead of recording a new one."
+                        f"is {match['similarity']:.0%} similar to '{title}'.\n\n"
+                        f"Existing finding content:\n{preview}\n\n"
+                        f"If your new finding covers substantially different "
+                        f"information, rephrase the title to clearly distinguish "
+                        f"it and try again."
                     )
         except Exception:
             pass  # dedup is best-effort; don't block recording

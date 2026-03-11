@@ -186,6 +186,8 @@ if [ "$FORGEJO_SKIP" = false ]; then
     # Force-recreate if data dir is fresh (no app.ini yet)
     if [ ! -f "$DB_DIR/forgejo/gitea/conf/app.ini" ]; then
         warn "Fresh Forgejo data directory — recreating container"
+        # Purge stale token cache — old token won't work on a fresh instance
+        rm -f "$FORGEJO_TOKEN_FILE"
         $COMPOSE_CMD down forgejo 2>/dev/null || true
         $COMPOSE_CMD up -d --force-recreate forgejo
     else

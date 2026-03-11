@@ -20,9 +20,15 @@ class ForgejoClient:
     """
 
     def __init__(self) -> None:
-        self._api_url = settings.FORGEJO_API_URL.rstrip("/")
-        self._token = settings.FORGEJO_TOKEN
         self._owner = settings.FORGEJO_OWNER
+
+    @property
+    def _api_url(self) -> str:
+        return settings.FORGEJO_API_URL.rstrip("/")
+
+    @property
+    def _token(self) -> str:
+        return settings.FORGEJO_TOKEN
 
     # ── Helpers ────────────────────────────────────────────────────────
 
@@ -120,11 +126,23 @@ class ForgejoClient:
             logger.info("Forgejo repo '%s/%s' already exists, reusing it", lookup_owner, name)
             return existing
 
+        # Also check under the authenticated user (may differ from owner)
+        try:
+            user_info = self._curl("GET", "/user")
+            auth_user = user_info.get("login")
+            if auth_user and auth_user != lookup_owner:
+                existing = self.get_repo(auth_user, name)
+                if existing:
+                    logger.info("Forgejo repo '%s/%s' already exists, reusing it", auth_user, name)
+                    return existing
+        except ValueError:
+            pass
+
         payload = {
             "name": name,
             "description": description,
             "private": private,
-            "auto_init": False,
+            "auto_init": True,
         }
 
         if owner:
@@ -133,14 +151,29 @@ class ForgejoClient:
                 logger.info("Created Forgejo repo '%s' under org '%s' → %s", name, owner, body.get("clone_url"))
                 return body
             except ValueError as exc:
-                if "GetOrgByName" in str(exc):
-                    logger.info("'%s' is not an org, falling back to user repos endpoint", owner)
-                else:
-                    raise
+                logger.info(
+                    "Org repo creation failed for '%s/%s' (%s), "
+                    "falling back to user repos endpoint",
+                    owner, name, exc,
+                )
 
-        body = self._curl("POST", "/user/repos", payload)
-        logger.info("Created Forgejo repo '%s' → %s", name, body.get("clone_url"))
-        return body
+        try:
+            body = self._curl("POST", "/user/repos", payload)
+            logger.info("Created Forgejo repo '%s' → %s", name, body.get("clone_url"))
+            return body
+        except ValueError as exc:
+            if "already exists" in str(exc).lower():
+                # Repo exists under the authenticated user — fetch it
+                user_info = self._curl("GET", "/user")
+                username = user_info.get("login", lookup_owner)
+                existing = self.get_repo(username, name)
+                if existing:
+                    logger.info(
+                        "Forgejo repo '%s/%s' already exists, reusing it",
+                        username, name,
+                    )
+                    return existing
+            raise
 
     def get_branches(self, owner_repo: str) -> list[dict[str, Any]]:
         """List branches for a repo.
