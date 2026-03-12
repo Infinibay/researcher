@@ -47,8 +47,9 @@ The system is designed for small models. Here's what works:
 
 | Model | Speed | Tool Calling | Research | Notes |
 |---|---|---|---|---|
+| **nemotron-3-nano:30b** | Very fast | Excellent | Very good | Best throughput, follows tool calls reliably |
 | **qwen3.5:27b** | Medium | Excellent | Excellent | Best overall quality, very few hallucinations |
-| **gpt-oss:20b** | Fast | Good | Good | Some tool hallucinations |
+| **gpt-oss:20b** | Very fast | Very good | Good | Excellent throughput, some tool hallucinations |
 | **glm-4.7-flash:128k** | Medium | Very good | Good | Strong orchestration |
 | **ministral-3:14b** | Very fast | Good | Very good | Medium orchestration |
 
@@ -61,7 +62,7 @@ The system works with Gemini, OpenAI, and Anthropic APIs — and they perform we
 All config uses the `INFINIBAY_` prefix. The essential variables:
 
 ```bash
-INFINIBAY_LLM_MODEL=ollama_chat/qwen3.5:27b   # LiteLLM format
+INFINIBAY_LLM_MODEL=ollama_chat/nemotron-3-nano:30b   # LiteLLM format
 INFINIBAY_LLM_API_KEY=not-needed               # Only needed for cloud providers
 INFINIBAY_LLM_BASE_URL=http://localhost:11434/  # Only for Ollama/custom endpoints
 INFINIBAY_SANDBOX_ENABLED=true

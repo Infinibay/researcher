@@ -9,7 +9,7 @@ Agents execute tasks through a **plan-execute-summarize** cycle that replaces tr
 **How it works:**
 
 1. **Plan**: The agent creates 2-3 concrete steps based on the task. Plans grow dynamically — new steps are added as the agent discovers things.
-2. **Execute**: One step at a time, 1-4 tool calls per step. The agent reads files, searches code, creates tasks, sends messages, etc.
+2. **Execute**: One step at a time, a small amount of tool calls per step. The agent reads files, searches code, creates tasks, sends messages, etc.
 3. **Summarize**: After each step, the agent produces a ~50-token summary. Raw tool output is discarded.
 
 This separation means the context window never explodes. After 50 steps, the prompt contains 50 short summaries (~2500 tokens) instead of 50 full tool outputs (potentially hundreds of thousands of tokens).
