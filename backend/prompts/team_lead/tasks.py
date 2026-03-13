@@ -81,9 +81,10 @@ and architecture.
 This is the most important step. Ask yourself:
 
 1. **What work can start immediately** with the information I have?
-   - If the project needs research to clarify direction → create research
-     tickets ONLY. Do NOT create development tickets that depend on unknown
-     research results.
+   - If the project lacks facts or context → create `investigation` tickets to map the territory.
+   - If there is a clear observation-based hypothesis to test → create `research` tickets.
+   - If there is a metric to hit without a clear path → create `optimization` tickets.
+   - Do NOT create development tickets that depend on unknown results from investigation or research.
    - If the direction is clear → create the foundational development tickets.
 
 2. **What would I be guessing about?**
@@ -110,10 +111,11 @@ For each milestone (max {max_milestones} per epic):
 
 For each task (max {max_tasks} per milestone):
 - Be completable by a single agent in a reasonable cycle.
-- Type: `development`, `research`, `investigation`, `test`, `documentation`,
+- Type: `development`, `research`, `investigation`, `experimentation`, `optimization`, `test`, `documentation`,
   `design`, `integration`, `bug_fix`.
-  - Use `research` for hypothesis testing, comparing alternatives, rigorous evaluation.
-  - Use `investigation` for information gathering, exploring what's happening, mapping current state.
+  - Use `investigation` for mapping current state, gathering facts, logs, or codebase context WITHOUT proposing solutions.
+  - Use `research` (or `experimentation`) ONLY for scientific validation of a pre-existing hypothesis via experiments.
+  - Use `optimization` for goals defined by a success metric requiring a benchmark -> change -> measure cycle.
 
 ### Step 5: Write Rich Task Descriptions
 Gather context with tools BEFORE writing each task. Do not invent
@@ -212,6 +214,23 @@ done.
 > **Definition of Done**: Cache invalidation implemented on `vm.restarted` and
 > `vm.stopped`. Unit test added for the invalidation path. No regression in
 > existing metrics tests.
+
+**GOOD — optimization ticket with measurable goal:**
+> **Title**: `Optimize app data consumption by at least 25%`
+>
+> **Context / Motivation**: The current mobile app consumes 5MB per session on average. This is a significant cost and performance issue for users on limited data plans. No single solution is obvious, so we need to experiment with multiple approaches.
+>
+> **Detailed Description**: Reduce the data consumption of the main feed from ~5MB to <3.75MB per session. Follow an iterative cycle: (1) Benchmark current consumption, (2) Propose a hypothesis (e.g., image compression, lazy loading, payload pruning), (3) Experiment and Measure. If a change improves the metric, merge it and proceed to the next hypothesis until the goal is met or proven impossible.
+>
+> **Acceptance Criteria**:
+> - Baseline benchmark result recorded as an artifact.
+> - At least 3 different optimization hypotheses tested and documented with evidence.
+> - Final benchmark shows data consumption < 3.75MB per session OR a comprehensive report explains the technical limit reached.
+> - No regressions in image quality or load times.
+>
+> **Technical Notes**: Metrics are available via `NetworkProfiler` in `tools/net_bench.py`. Target endpoint for testing is `api/v1/feed`.
+>
+> **Definition of Done**: Goal reached or experimental limit documented. All evidence linked to findings.
 
 Priority: 1 (critical/blocking) to 5 (nice-to-have).
 Complexity: low / medium / high.
@@ -342,7 +361,7 @@ failures in Step 6.
 
 Use **create_task** for each task. For each:
 - Associate it with the correct milestone and epic (using IDs from above).
-- Set the type (development, research, test, etc.).
+- Set the type (development, investigation, research, optimization, test, etc.).
 - Set priority (1-5).
 - Set estimated complexity if available.
 - Note the returned task ID — you will need it for dependencies.
@@ -1340,7 +1359,7 @@ For each approved idea, determine:
 - How many milestones are needed (typically 2-3 per idea).
 - What specific tasks are required for each milestone.
 - What dependencies exist between tasks (within and across ideas).
-- What task types are needed (development, research, test, etc.).
+- What task types are needed (development, investigation, research, optimization, test, etc.).
 
 ### Step 2: Understand Project State & Check for Duplicates
 Use **read_tasks** to read ALL existing tasks for this project. For each
@@ -1394,7 +1413,7 @@ The `description` passed to **create_milestone** must follow this structure:
 **⚠️ Quality gate**: A task description that is only a sentence or two will be rejected. Every task must have all five sections below.
 
 Use **create_task** for each task. For every task:
-- Set the correct type (development, research, test, etc.).
+- Set the correct type (development, investigation, research, optimization, test, etc.).
 - Set priority (1-5) based on the idea's priority and the task's role
   within the milestone.
 - Set estimated complexity (low/medium/high).

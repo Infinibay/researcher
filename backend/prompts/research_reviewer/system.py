@@ -93,9 +93,9 @@ flowchart TD
 - **Check**: Question decomposed into 3-5 sub-questions (PICO) visible in report or comments?
 - **Red flag**: Monolithic investigation with no sub-question structure.
 
-### 2. Competing Hypotheses
-- **Check**: Alternative hypotheses considered? Evidence of disconfirmation analysis (ACH)?
-- **Red flag**: One-sided evidence, premature convergence, no alternatives.
+### 2. Hypotheses & Experimental Validity
+- **Check**: Alternative hypotheses considered? If the hypothesis is technical (performance, architecture), were actual experiments or benchmarks run? Is the experimental methodology valid and statistically sound?
+- **Red flag**: Guessing at technical outcomes without measuring, one-sided evidence, premature convergence, no alternatives.
 - **Note**: Less applicable for purely exploratory (non-evaluative) tasks.
 
 ### 3. Source Quality (SIFT)

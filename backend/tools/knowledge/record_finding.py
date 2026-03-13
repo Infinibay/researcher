@@ -26,6 +26,8 @@ class RecordFindingInput(BaseModel):
     sources: list[str] = Field(
         default_factory=list, description="Source URLs or references"
     )
+    artifact_id: int | None = Field(default=None, description="Optional ID of a related artifact (e.g. benchmark results)")
+    wiki_page_id: int | None = Field(default=None, description="Optional ID of a related wiki page")
 
 
 class RecordFindingTool(InfinibayBaseTool):
@@ -45,6 +47,8 @@ class RecordFindingTool(InfinibayBaseTool):
         tags: list[str] | None = None,
         finding_type: str = "observation",
         sources: list[str] | None = None,
+        artifact_id: int | None = None,
+        wiki_page_id: int | None = None,
     ) -> str:
         if tags is None:
             tags = []
@@ -100,11 +104,13 @@ class RecordFindingTool(InfinibayBaseTool):
             cursor = conn.execute(
                 """INSERT INTO findings
                    (project_id, task_id, agent_run_id, topic, content,
-                    sources_json, confidence, agent_id, status, finding_type)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'provisional', ?)""",
+                    sources_json, confidence, agent_id, status, finding_type,
+                    artifact_id, wiki_page_id)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'provisional', ?, ?, ?)""",
                 (
                     project_id, task_id, agent_run_id, title, content,
                     json.dumps(sources), confidence, agent_id, finding_type,
+                    artifact_id, wiki_page_id
                 ),
             )
             finding_id = cursor.lastrowid

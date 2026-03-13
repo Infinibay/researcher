@@ -261,8 +261,8 @@ evidence.
 
 ## Methodology Guidance
 - For each testable prediction, search for BOTH supporting AND
-  contradicting evidence. Use deep_web_research with targeted queries
-  per prediction. Run separate queries for limitations and criticisms.
+  contradicting evidence. If the hypothesis is technical (e.g., performance, architecture), **run actual experiments or benchmarks** using `execute_command` or `code_interpreter`. Do not rely solely on web searches when you can measure it yourself.
+- **Vincular Evidencia**: Al grabar un hallazgo derivado de un experimento (benchmark, logs, etc.), usa el campo `artifact_id` en `record_finding` para vincularlo al archivo resultante. Si te basas en una Wiki, usa `wiki_page_id`.
 - Cross-reference sources: for every important claim, find at least
   one additional independent source.
 - Before recording, call search_findings to check for duplicates.

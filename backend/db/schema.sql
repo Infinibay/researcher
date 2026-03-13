@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS tasks (
     parent_task_id       INTEGER REFERENCES tasks(id) ON DELETE SET NULL,
     type                 TEXT NOT NULL
                            CHECK(type IN (
-                             'plan', 'research', 'investigation', 'code', 'review', 'test',
+                             'plan', 'research', 'investigation', 'experimentation', 'optimization', 'code', 'review', 'test',
                              'design', 'integrate', 'documentation', 'bug_fix'
                            )),
     status               TEXT NOT NULL DEFAULT 'backlog'
@@ -336,6 +336,8 @@ CREATE TABLE IF NOT EXISTS findings (
     reproducibility_score REAL
                             CHECK(reproducibility_score IS NULL
                               OR reproducibility_score BETWEEN 0.0 AND 1.0),
+    artifact_id           INTEGER REFERENCES artifacts(id) ON DELETE SET NULL,
+    wiki_page_id          INTEGER REFERENCES wiki_pages(id) ON DELETE SET NULL,
     embedding             BLOB,
     created_at            DATETIME DEFAULT CURRENT_TIMESTAMP
 );
@@ -1183,6 +1185,9 @@ VALUES (8, 'add_original_description_to_projects');
 
 INSERT OR IGNORE INTO schema_migrations(version, name)
 VALUES (14, 'expand_session_note_phases');
+
+INSERT OR IGNORE INTO schema_migrations(version, name)
+VALUES (16, 'add_optimization_task_and_finding_links');
 
 -- ========================= AGENT AUTONOMY ================================
 

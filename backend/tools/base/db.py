@@ -222,6 +222,16 @@ def ensure_migrations(db_path: str | None = None) -> None:
             conn.commit()
             logger.info("Migration 15: added embedding columns and artifacts_fts")
 
+        # Migration 16: add optimization and experimentation to tasks.type, and links to findings
+        if 16 not in applied:
+            _migrate_16_add_optimization_task_and_finding_links(conn)
+            conn.execute(
+                "INSERT OR IGNORE INTO schema_migrations(version, name) "
+                "VALUES (16, 'add_optimization_task_and_finding_links')"
+            )
+            conn.commit()
+            logger.info("Migration 16: added optimization tasks and finding links")
+
         # Migration 14: expand developer_session_notes phase CHECK
         if 14 not in applied:
             _migrate_14_expand_session_note_phases(conn)
@@ -724,6 +734,202 @@ def _migrate_15_embeddings_and_artifacts_fts(conn: sqlite3.Connection) -> None:
             VALUES (new.id, new.file_path, COALESCE(new.description, ''), COALESCE(new.content, ''));
         END
     """)
+
+
+def _migrate_16_add_optimization_task_and_finding_links(conn: sqlite3.Connection) -> None:
+    """Add optimization and experimentation task types, and artifact/wiki links to findings."""
+    # 1. Findings table alterations
+    cols = {row[1] for row in conn.execute("PRAGMA table_info(findings)").fetchall()}
+    if "artifact_id" not in cols:
+        conn.execute("ALTER TABLE findings ADD COLUMN artifact_id INTEGER REFERENCES artifacts(id) ON DELETE SET NULL")
+    if "wiki_page_id" not in cols:
+        conn.execute("ALTER TABLE findings ADD COLUMN wiki_page_id INTEGER REFERENCES wiki_pages(id) ON DELETE SET NULL")
+
+    # 2. Tasks table rebuild for CHECK constraint
+    tasks_ok = False
+    try:
+        conn.execute(
+            "INSERT INTO tasks (project_id, type, title, status, created_by) "
+            "VALUES (-1, 'optimization', '__migration_test__', 'backlog', 'migration')"
+        )
+        conn.execute(
+            "DELETE FROM tasks WHERE title = '__migration_test__' AND project_id = -1"
+        )
+        tasks_ok = True
+    except sqlite3.IntegrityError:
+        pass
+
+    if not tasks_ok:
+        col_info = conn.execute("PRAGMA table_info(tasks)").fetchall()
+        col_names = [row[1] for row in col_info]
+
+        conn.commit()
+        conn.execute("PRAGMA foreign_keys = OFF")
+
+        conn.execute("""
+            CREATE TABLE tasks_new (
+                id                   INTEGER PRIMARY KEY AUTOINCREMENT,
+                project_id           INTEGER NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+                epic_id              INTEGER REFERENCES epics(id) ON DELETE SET NULL,
+                milestone_id         INTEGER REFERENCES milestones(id) ON DELETE SET NULL,
+                parent_task_id       INTEGER REFERENCES tasks(id) ON DELETE SET NULL,
+                type                 TEXT NOT NULL
+                                       CHECK(type IN (
+                                         'plan', 'research', 'investigation', 'experimentation', 'optimization', 'code', 'review', 'test',
+                                         'design', 'integrate', 'documentation', 'bug_fix'
+                                       )),
+                status               TEXT NOT NULL DEFAULT 'backlog'
+                                       CHECK(status IN (
+                                         'backlog', 'pending', 'in_progress',
+                                         'review_ready', 'rejected', 'done', 'cancelled',
+                                         'failed', 'blocked'
+                                       )),
+                title                TEXT NOT NULL,
+                description          TEXT,
+                acceptance_criteria  TEXT,
+                context_json         TEXT,
+                priority             INTEGER DEFAULT 2 CHECK(priority BETWEEN 1 AND 5),
+                estimated_complexity TEXT DEFAULT 'medium'
+                                       CHECK(estimated_complexity IN (
+                                         'trivial', 'low', 'medium', 'high', 'very_high'
+                                       )),
+                branch_name          TEXT,
+                pr_number            INTEGER,
+                pr_url               TEXT,
+                assigned_to          TEXT,
+                reviewer             TEXT,
+                created_by           TEXT NOT NULL DEFAULT 'orchestrator',
+                retry_count          INTEGER DEFAULT 0,
+                created_at           DATETIME DEFAULT CURRENT_TIMESTAMP,
+                completed_at         DATETIME
+            )
+        """)
+
+        new_cols = [
+            "id", "project_id", "epic_id", "milestone_id", "parent_task_id",
+            "type", "status", "title", "description", "acceptance_criteria",
+            "context_json", "priority", "estimated_complexity", "branch_name",
+            "pr_number", "pr_url", "assigned_to", "reviewer", "created_by",
+            "retry_count", "created_at", "completed_at",
+        ]
+        select_exprs = []
+        for c in new_cols:
+            if c in col_names:
+                select_exprs.append(c)
+            else:
+                select_exprs.append(f"NULL AS {c}")
+
+        conn.execute(
+            f"INSERT INTO tasks_new ({', '.join(new_cols)}) "
+            f"SELECT {', '.join(select_exprs)} FROM tasks"
+        )
+
+        for trigger in (
+            "tasks_fts_ai", "tasks_fts_ad", "tasks_fts_au",
+            "trg_tasks_audit_insert", "trg_tasks_audit_status",
+            "trg_tasks_audit_update",
+        ):
+            conn.execute(f"DROP TRIGGER IF EXISTS {trigger}")
+
+        conn.execute("DROP TABLE IF EXISTS tasks_fts")
+        conn.execute("DROP TABLE tasks")
+        conn.execute("ALTER TABLE tasks_new RENAME TO tasks")
+
+        for idx_sql in (
+            "CREATE INDEX IF NOT EXISTS idx_tasks_project    ON tasks(project_id)",
+            "CREATE INDEX IF NOT EXISTS idx_tasks_status     ON tasks(status)",
+            "CREATE INDEX IF NOT EXISTS idx_tasks_type       ON tasks(type)",
+            "CREATE INDEX IF NOT EXISTS idx_tasks_priority   ON tasks(priority DESC)",
+            "CREATE INDEX IF NOT EXISTS idx_tasks_epic       ON tasks(epic_id)",
+            "CREATE INDEX IF NOT EXISTS idx_tasks_milestone  ON tasks(milestone_id)",
+            "CREATE INDEX IF NOT EXISTS idx_tasks_assigned   ON tasks(assigned_to)",
+            "CREATE INDEX IF NOT EXISTS idx_tasks_reviewer   ON tasks(reviewer)",
+            "CREATE INDEX IF NOT EXISTS idx_tasks_branch     ON tasks(branch_name)",
+            "CREATE INDEX IF NOT EXISTS idx_tasks_created_by ON tasks(created_by)",
+        ):
+            conn.execute(idx_sql)
+
+        conn.execute("""
+            CREATE VIRTUAL TABLE IF NOT EXISTS tasks_fts USING fts5(
+                title, description, acceptance_criteria,
+                content=tasks, content_rowid=id
+            )
+        """)
+        conn.execute("INSERT INTO tasks_fts(tasks_fts) VALUES('rebuild')")
+
+        conn.execute("""
+            CREATE TRIGGER IF NOT EXISTS tasks_fts_ai AFTER INSERT ON tasks BEGIN
+                INSERT INTO tasks_fts(rowid, title, description, acceptance_criteria)
+                VALUES (new.id, new.title, COALESCE(new.description, ''),
+                        COALESCE(new.acceptance_criteria, ''));
+            END
+        """)
+        conn.execute("""
+            CREATE TRIGGER IF NOT EXISTS tasks_fts_ad AFTER DELETE ON tasks BEGIN
+                INSERT INTO tasks_fts(tasks_fts, rowid, title, description, acceptance_criteria)
+                VALUES ('delete', old.id, COALESCE(old.title, ''),
+                        COALESCE(old.description, ''),
+                        COALESCE(old.acceptance_criteria, ''));
+            END
+        """)
+        conn.execute("""
+            CREATE TRIGGER IF NOT EXISTS tasks_fts_au AFTER UPDATE ON tasks BEGIN
+                INSERT INTO tasks_fts(tasks_fts, rowid, title, description, acceptance_criteria)
+                VALUES ('delete', old.id, COALESCE(old.title, ''),
+                        COALESCE(old.description, ''),
+                        COALESCE(old.acceptance_criteria, ''));
+                INSERT INTO tasks_fts(rowid, title, description, acceptance_criteria)
+                VALUES (new.id, new.title, COALESCE(new.description, ''),
+                        COALESCE(new.acceptance_criteria, ''));
+            END
+        """)
+
+        conn.execute("""
+            CREATE TRIGGER IF NOT EXISTS trg_tasks_audit_insert AFTER INSERT ON tasks
+            BEGIN
+                INSERT INTO events_log(project_id, event_type, event_source,
+                                       entity_type, entity_id, event_data_json)
+                VALUES (
+                    new.project_id, 'task_created',
+                    COALESCE(new.created_by, 'system'), 'task', new.id,
+                    json_object('title', new.title, 'type', new.type,
+                                'status', new.status, 'assigned_to', new.assigned_to)
+                );
+            END
+        """)
+        conn.execute("""
+            CREATE TRIGGER IF NOT EXISTS trg_tasks_audit_status
+            AFTER UPDATE OF status ON tasks
+            WHEN old.status != new.status
+            BEGIN
+                INSERT INTO events_log(project_id, event_type, event_source,
+                                       entity_type, entity_id, event_data_json)
+                VALUES (
+                    new.project_id, 'task_status_changed', 'system', 'task', new.id,
+                    json_object('old_status', old.status, 'new_status', new.status,
+                                'assigned_to', new.assigned_to)
+                );
+            END
+        """)
+        conn.execute("""
+            CREATE TRIGGER IF NOT EXISTS trg_tasks_audit_update AFTER UPDATE ON tasks
+            WHEN old.status = new.status
+             AND (old.title != new.title OR old.assigned_to IS NOT new.assigned_to
+                  OR old.reviewer IS NOT new.reviewer
+                  OR old.branch_name IS NOT new.branch_name)
+            BEGIN
+                INSERT INTO events_log(project_id, event_type, event_source,
+                                       entity_type, entity_id, event_data_json)
+                VALUES (
+                    new.project_id, 'task_updated', 'system', 'task', new.id,
+                    json_object('title', new.title, 'assigned_to', new.assigned_to,
+                                'reviewer', new.reviewer,
+                                'branch_name', new.branch_name)
+                );
+            END
+        """)
+
+        conn.execute("PRAGMA foreign_keys = ON")
 
 
 def sanitize_fts5_query(query: str) -> str:

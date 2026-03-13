@@ -63,6 +63,8 @@ class RecordFindingRequest(BaseModel):
     confidence: float = Field(default=0.5, ge=0.0, le=1.0)
     finding_type: str = "observation"
     sources: list[str] = Field(default_factory=list)
+    artifact_id: int | None = None
+    wiki_page_id: int | None = None
 
 
 class ValidateFindingRequest(BaseModel):
@@ -256,12 +258,13 @@ async def record_finding(req: RecordFindingRequest):
         cursor = conn.execute(
             """INSERT INTO findings
                (project_id, task_id, agent_run_id, topic, content,
-                sources_json, confidence, agent_id, status, finding_type)
-               VALUES (?, ?, NULL, ?, ?, ?, ?, ?, 'provisional', ?)""",
+                sources_json, confidence, agent_id, status, finding_type,
+                artifact_id, wiki_page_id)
+               VALUES (?, ?, NULL, ?, ?, ?, ?, ?, 'provisional', ?, ?, ?)""",
             (
                 req.project_id, req.task_id, req.title, req.content,
                 json.dumps(req.sources), req.confidence, req.agent_id,
-                req.finding_type,
+                req.finding_type, req.artifact_id, req.wiki_page_id
             ),
         )
         conn.commit()
