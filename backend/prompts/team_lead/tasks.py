@@ -78,18 +78,22 @@ and architecture.
 **If any tool returns empty or errors**: Normal for new projects. Continue.
 
 ### Step 3: Decide WHAT to Create Now (CRITICAL STEP)
-This is the most important step. Ask yourself:
+This is the most important step. Apply **Zero-Assumption Planning**:
 
-1. **What work can start immediately** with the information I have?
+1. **What work can start immediately** with the facts I have NOW?
    - If the project lacks facts or context → create `investigation` tickets to map the territory.
    - If there is a clear observation-based hypothesis to test → create `research` tickets.
    - If there is a metric to hit without a clear path → create `optimization` tickets.
-   - Do NOT create development tickets that depend on unknown results from investigation or research.
-   - If the direction is clear → create the foundational development tickets.
+   - If the direction is clear (e.g. following a successful research finding) → create the foundational development tickets.
+
+**⚠️ STOP AND EVALUATE:** Are you creating a ticket whose description starts with "Assuming the investigation shows..." or "Once we have the results from..."? If yes, **DELETE** that ticket. You cannot create work that depends on unearned results. 
+
+**Wait for the findings.** It is better to have 2 active investigation tickets and zero pending code tickets in the same stream, than to have 10 code tickets based on a wrong assumption. You may still plan other unrelated and independent streams if you have clear information.
 
 2. **What would I be guessing about?**
    - If defining a ticket requires assumptions about unknown results →
      do NOT create that ticket. Wait for results to inform it.
+   - If you cannot write concrete acceptance criteria, you are guessing. Stop.
 
 3. **How many tickets is the right number?**
    - Fewer, well-defined tickets > many vague tickets.

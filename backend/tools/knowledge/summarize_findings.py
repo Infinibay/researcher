@@ -36,9 +36,16 @@ class SummarizeFindingsTool(InfinibayBaseTool):
         if task_id is None:
             task_id = self.task_id
 
+        # Ensure task_id is int for comparison (some contexts might pass strings)
+        if task_id is not None:
+            try:
+                task_id = int(task_id)
+            except (ValueError, TypeError):
+                pass
+
         def _query(conn: sqlite3.Connection) -> dict:
             # Build WHERE clause
-            if task_id and task_id > 0:
+            if task_id is not None and task_id > 0:
                 where = "WHERE f.task_id = ?"
                 params: tuple = (task_id,)
             elif project_id:
@@ -99,7 +106,7 @@ class SummarizeFindingsTool(InfinibayBaseTool):
             }
 
         result = execute_with_retry(_query)
-        scope = f"task #{task_id}" if task_id and task_id > 0 else "project"
+        scope = f"task #{task_id}" if task_id is not None and task_id > 0 else "project"
         self._log_tool_usage(
             f"Summarized {result['total_count']} findings for {scope}"
         )

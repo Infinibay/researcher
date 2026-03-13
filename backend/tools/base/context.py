@@ -73,6 +73,18 @@ def set_context(
     2. Thread-local storage — for callers in the same thread
     3. ContextVar — for asyncio-aware code
     """
+    # Robustly cast IDs to int if possible (helps when reading from JSON/ENV)
+    if project_id is not None:
+        try:
+            project_id = int(project_id)
+        except (ValueError, TypeError):
+            pass
+    if task_id is not None:
+        try:
+            task_id = int(task_id)
+        except (ValueError, TypeError):
+            pass
+
     # ── Write to thread-local + ContextVar (backwards compat) ────────────
     if project_id is not None:
         _tls.project_id = project_id

@@ -26,8 +26,9 @@ class RecordFindingInput(BaseModel):
     sources: list[str] = Field(
         default_factory=list, description="Source URLs or references"
     )
-    artifact_id: int | None = Field(default=None, description="Optional ID of a related artifact (e.g. benchmark results)")
+    artifact_id: int | None = Field(default=None, description="Optional ID of a related artifact")
     wiki_page_id: int | None = Field(default=None, description="Optional ID of a related wiki page")
+    task_id: int | None = Field(default=None, description="The ID of the task this finding belongs to. Required if context is missing.")
 
 
 class RecordFindingTool(InfinibayBaseTool):
@@ -49,6 +50,7 @@ class RecordFindingTool(InfinibayBaseTool):
         sources: list[str] | None = None,
         artifact_id: int | None = None,
         wiki_page_id: int | None = None,
+        task_id: int | None = None,
     ) -> str:
         if tags is None:
             tags = []
@@ -63,11 +65,11 @@ class RecordFindingTool(InfinibayBaseTool):
 
         agent_id = self._validate_agent_context()
         project_id = self.project_id
-        task_id = self.task_id
+        task_id = task_id or self.task_id
         agent_run_id = self.agent_run_id
 
         if task_id is None:
-            return self._error("No task_id in context. Findings must be associated with a task.")
+            return self._error("No task_id in context. Findings must be associated with a task. Please provide task_id manually.")
 
         # --- Semantic dedup check (same task + same finding_type) ---
         def _fetch_existing(conn: sqlite3.Connection) -> list[dict]:

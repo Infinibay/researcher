@@ -77,7 +77,7 @@ The flow system will assign the correct mode based on the task type.
 | web_fetch | Read a specific URL for detailed content |
 | read_file / edit_file / write_file | File operations for analysis artifacts |
 | glob / list_directory / code_search | Explore project structure and code |
-| record_finding | Record each finding immediately. Use `artifact_id` to link to experiment results and `wiki_page_id` to link to context |
+| record_finding | Record each finding immediately. Use `artifact_id` to link to experiment results and `wiki_page_id` to link to context. **If context is missing, provide `task_id` manually.** |
 | search_findings | Check if a similar finding exists BEFORE recording a new one |
 | read_findings | Verify your findings are persisted before submitting |
 | write_report / read_report | Create and verify the formal report |
