@@ -29,8 +29,11 @@ def _extract_provider(model: str) -> str:
 
 
 class Settings(BaseSettings):
-    # Database
-    DB_PATH: str = os.environ.get("INFINIBAY_DB", "/research/infinibay.db")
+    # Database — defaults to .researcher/researcher.db relative to cwd
+    DB_PATH: str = os.environ.get(
+        "INFINIBAY_DB",
+        str(Path(os.getcwd()) / ".researcher" / "researcher.db"),
+    )
     MAX_RETRIES: int = 5
     RETRY_BASE_DELAY: float = 0.1  # 100ms
 
@@ -59,7 +62,11 @@ class Settings(BaseSettings):
     SANDBOX_GPU_ENABLED: bool = False  # Pass GPU devices into pods/containers
     WORKSPACE_BASE_DIR: str = os.environ.get(
         "INFINIBAY_WORKSPACE_BASE_DIR",
-        str(Path(__file__).resolve().parent.parent.parent / ".data" / "workspaces"),
+        os.getcwd(),
+    )
+    UPLOAD_BASE_DIR: str = os.environ.get(
+        "INFINIBAY_UPLOAD_BASE_DIR",
+        str(Path(__file__).resolve().parent.parent.parent / ".data" / "uploads"),
     )
     CLEANUP_INTERVAL_SECONDS: int = 300
     SANDBOX_NETWORK: str = "slirp4netns"  # "none" | "slirp4netns" | "host" | custom network name
@@ -119,10 +126,10 @@ class Settings(BaseSettings):
     CODE_INTERPRETER_TIMEOUT: int = 120
     CODE_INTERPRETER_MAX_OUTPUT: int = 50000
 
-    # Forgejo (local git server)
-    FORGEJO_API_URL: str = os.environ.get("FORGEJO_API_URL", "")
-    FORGEJO_TOKEN: str = os.environ.get("FORGEJO_TOKEN", "")
-    FORGEJO_OWNER: str = os.environ.get("FORGEJO_OWNER", "infinibay")
+    # Forgejo (deprecated — kept for backward compat, will be removed)
+    FORGEJO_API_URL: str = ""
+    FORGEJO_TOKEN: str = ""
+    FORGEJO_OWNER: str = ""
 
     # CI Gate
     CI_TEST_COMMAND: str = "pytest -x -q"
@@ -158,6 +165,25 @@ class Settings(BaseSettings):
     LOOP_MAX_TOOL_CALLS_PER_ACTION: int = 40
     LOOP_MAX_TOTAL_TOOL_CALLS: int = 600
     LOOP_HISTORY_WINDOW: int = 0  # 0 = keep all; N = last N summaries
+    LOOP_STEP_NUDGE_THRESHOLD: int = 6  # nudge step_complete after N tool calls
+    LOOP_SUMMARIZER_ENABLED: bool = True  # dedicated LLM call for structured summaries
+    LOOP_SUMMARIZER_MAX_INPUT_TOKENS: int = 4000
+
+    # Analysis & Review phases
+    ANALYSIS_ENABLED: bool = True
+    REVIEW_ENABLED: bool = True
+
+    # Code Intelligence
+    CODE_INTEL_ENABLED: bool = True
+    CODE_INTEL_MAX_FILE_SIZE: int = 1_000_000
+    CODE_INTEL_AUTO_INDEX: bool = True
+
+    # Multi-dev worktrees
+    MULTI_DEV_ENABLED: bool = False
+    DEV_COUNT: int = 1  # Number of developer agents (when multi-dev)
+
+    # TUI
+    TUI_ENABLED: bool = True  # False = classic REPL mode
 
     # Agent Autonomy Layer
     AUTONOMY_ENABLED: bool = True
@@ -177,6 +203,7 @@ class Settings(BaseSettings):
     AGENT_LOOP_EVENT_TIMEOUT: float = 3600.0     # max seconds before an in_progress event is considered stuck
     AGENT_LOOP_DEAD_AGENT_TIMEOUT: float = 1200.0  # 20 min — agent is considered dead if no poll in this time
 
+    # env_prefix kept as INFINIBAY_ for backward compat; RESEARCHER_ support planned
     model_config = {"env_prefix": "INFINIBAY_"}
 
     def get_embedding_provider(self) -> str:

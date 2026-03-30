@@ -22,6 +22,7 @@ from backend.config.settings import settings
 from backend.flows.guardrails import validate_review_verdict
 from backend.engine import get_engine
 from backend.flows.helpers import (
+    execute_ci_command,
     get_project_name,
     get_repo_path_for_task,
     get_task_by_id,
@@ -80,65 +81,7 @@ class CodeReviewFlow(Flow[CodeReviewState]):
             return "error"
         return "review_requested"
 
-    # ── CI helpers ──────────────────────────────────────────────────────
-
-    def _execute_ci_command(self, repo_path: str, test_cmd: str) -> dict:
-        """Run the test command via direct subprocess — bypasses pod/sandbox.
-
-        The CI gate is a flow-level check, not an agent action.  Running it
-        through ExecuteCommandTool caused failures when pod mode was enabled
-        because "ci_gate" is not a real agent with a registered pod.
-        """
-        import shlex
-        import subprocess
-
-        try:
-            parts = shlex.split(test_cmd)
-            result = subprocess.run(
-                parts,
-                shell=False,
-                capture_output=True,
-                text=True,
-                timeout=600,
-                cwd=repo_path,
-            )
-            return self._handle_ci_result({
-                "stdout": result.stdout,
-                "stderr": result.stderr,
-                "exit_code": result.returncode,
-            })
-        except subprocess.TimeoutExpired:
-            return self._handle_ci_result({"error": f"CI command timed out after 600s"})
-        except FileNotFoundError:
-            return self._handle_ci_result({"error": f"CI command not found: {test_cmd}"})
-        except Exception as e:
-            return self._handle_ci_result({"error": f"CI execution failed: {e}"})
-
-    def _handle_ci_result(self, result: dict) -> dict:
-        """Translate a raw ExecuteCommandTool result into a structured CI outcome."""
-        if "error" in result:
-            return {
-                "ci_passed": False,
-                "ci_output": result["error"],
-                "test_count": 0,
-                "test_pass": 0,
-                "exit_code": 1,
-            }
-
-        stdout = result.get("stdout", "")
-        stderr = result.get("stderr", "")
-        exit_code = result.get("exit_code", 1)
-        output = stdout + "\n" + stderr
-        test_count, test_pass = parse_ci_output(output)
-
-        return {
-            # Exit 0 = tests passed, exit 5 = no tests collected (not a failure)
-            "ci_passed": exit_code in (0, 5),
-            "ci_output": output[:3000],
-            "test_count": test_count,
-            "test_pass": test_pass,
-            "exit_code": exit_code,
-        }
+    # CI execution delegated to flows.helpers.ci_helpers.execute_ci_command
 
     # ── CI gate ────────────────────────────────────────────────────────────
 
@@ -160,7 +103,7 @@ class CodeReviewFlow(Flow[CodeReviewState]):
             self.state.ci_output = "No repository path found — CI gate skipped."
             return
 
-        outcome = self._execute_ci_command(repo_path, settings.CI_TEST_COMMAND)
+        outcome = execute_ci_command(repo_path, settings.CI_TEST_COMMAND)
 
         self.state.ci_passed = outcome["ci_passed"]
         self.state.ci_output = outcome["ci_output"]

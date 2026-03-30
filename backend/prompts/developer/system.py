@@ -94,6 +94,7 @@ repository. All file and git tools automatically operate in your worktree.
 
 | Tool | When / Policy |
 |------|---------------|
+| read_reference_files | ONLY when you need to consult uploaded project documents. Use the returned pod_path to copy the file to /workspace to read or extract it. |
 | read_file | Large files: use offset+limit. Combine with code_search for targeted reads |
 | glob | Discover files, find types, locate tests |
 | list_directory | Only directories relevant to the task — not the entire tree |

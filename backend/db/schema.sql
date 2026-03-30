@@ -1304,3 +1304,115 @@ VALUES (12, 'expand_session_note_phases');
 
 INSERT OR IGNORE INTO schema_migrations(version, name)
 VALUES (13, 'add_web_cache');
+
+-- ========================= CODE INTELLIGENCE ================================
+
+-- ---------------------------------------------------------------------------
+-- 43. ci_files  (indexed source files)
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS ci_files (
+    project_id INTEGER NOT NULL,
+    file_path TEXT NOT NULL,
+    language TEXT DEFAULT '',
+    content_hash TEXT DEFAULT '',
+    symbol_count INTEGER DEFAULT 0,
+    indexed_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (project_id, file_path)
+);
+
+-- ---------------------------------------------------------------------------
+-- 44. ci_symbols  (functions, classes, methods, etc.)
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS ci_symbols (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    project_id INTEGER NOT NULL,
+    file_path TEXT NOT NULL,
+    name TEXT NOT NULL,
+    qualified_name TEXT DEFAULT '',
+    kind TEXT NOT NULL,
+    line_start INTEGER DEFAULT 0,
+    line_end INTEGER DEFAULT 0,
+    column_start INTEGER DEFAULT 0,
+    signature TEXT DEFAULT '',
+    type_annotation TEXT DEFAULT '',
+    docstring TEXT DEFAULT '',
+    parent_symbol TEXT DEFAULT '',
+    visibility TEXT DEFAULT 'public',
+    is_async INTEGER DEFAULT 0,
+    is_static INTEGER DEFAULT 0,
+    is_abstract INTEGER DEFAULT 0,
+    language TEXT DEFAULT ''
+);
+
+CREATE INDEX IF NOT EXISTS idx_ci_symbols_name ON ci_symbols(name);
+CREATE INDEX IF NOT EXISTS idx_ci_symbols_kind ON ci_symbols(kind);
+CREATE INDEX IF NOT EXISTS idx_ci_symbols_file ON ci_symbols(project_id, file_path);
+CREATE INDEX IF NOT EXISTS idx_ci_symbols_qualified ON ci_symbols(qualified_name);
+CREATE INDEX IF NOT EXISTS idx_ci_symbols_parent ON ci_symbols(parent_symbol);
+
+-- ---------------------------------------------------------------------------
+-- 45. ci_references  (usages of symbols)
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS ci_references (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    project_id INTEGER NOT NULL,
+    file_path TEXT NOT NULL,
+    name TEXT NOT NULL,
+    line INTEGER DEFAULT 0,
+    column_num INTEGER DEFAULT 0,
+    context TEXT DEFAULT '',
+    ref_kind TEXT DEFAULT 'usage',
+    resolved_file TEXT DEFAULT '',
+    resolved_line INTEGER DEFAULT 0,
+    language TEXT DEFAULT ''
+);
+
+CREATE INDEX IF NOT EXISTS idx_ci_refs_name ON ci_references(name);
+CREATE INDEX IF NOT EXISTS idx_ci_refs_file ON ci_references(project_id, file_path);
+
+-- ---------------------------------------------------------------------------
+-- 46. ci_imports  (import/require/use statements)
+-- ---------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS ci_imports (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    project_id INTEGER NOT NULL,
+    file_path TEXT NOT NULL,
+    source TEXT NOT NULL,
+    name TEXT DEFAULT '',
+    alias TEXT DEFAULT '',
+    line INTEGER DEFAULT 0,
+    is_wildcard INTEGER DEFAULT 0,
+    resolved_file TEXT DEFAULT '',
+    language TEXT DEFAULT ''
+);
+
+CREATE INDEX IF NOT EXISTS idx_ci_imports_file ON ci_imports(project_id, file_path);
+CREATE INDEX IF NOT EXISTS idx_ci_imports_name ON ci_imports(name);
+CREATE INDEX IF NOT EXISTS idx_ci_imports_source ON ci_imports(source);
+
+-- ---------------------------------------------------------------------------
+-- FTS5 for symbol search
+-- ---------------------------------------------------------------------------
+CREATE VIRTUAL TABLE IF NOT EXISTS ci_symbols_fts USING fts5(
+    name, qualified_name, signature, docstring,
+    content=ci_symbols,
+    content_rowid=id
+);
+
+CREATE TRIGGER IF NOT EXISTS ci_symbols_fts_insert AFTER INSERT ON ci_symbols BEGIN
+    INSERT INTO ci_symbols_fts(rowid, name, qualified_name, signature, docstring)
+    VALUES (new.id, new.name, new.qualified_name, new.signature, new.docstring);
+END;
+CREATE TRIGGER IF NOT EXISTS ci_symbols_fts_delete AFTER DELETE ON ci_symbols BEGIN
+    INSERT INTO ci_symbols_fts(ci_symbols_fts, rowid, name, qualified_name, signature, docstring)
+    VALUES ('delete', old.id, old.name, old.qualified_name, old.signature, old.docstring);
+END;
+CREATE TRIGGER IF NOT EXISTS ci_symbols_fts_update AFTER UPDATE ON ci_symbols BEGIN
+    INSERT INTO ci_symbols_fts(ci_symbols_fts, rowid, name, qualified_name, signature, docstring)
+    VALUES ('delete', old.id, old.name, old.qualified_name, old.signature, old.docstring);
+    INSERT INTO ci_symbols_fts(rowid, name, qualified_name, signature, docstring)
+    VALUES (new.id, new.name, new.qualified_name, new.signature, new.docstring);
+END;
+
+INSERT OR IGNORE INTO schema_migrations(version, name)
+VALUES (17, 'add_code_intel_tables');

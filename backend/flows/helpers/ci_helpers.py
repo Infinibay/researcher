@@ -1,14 +1,71 @@
-"""CI gate helpers for INFINIBAY flows — test output parsing and recording."""
+"""CI gate helpers for INFINIBAY flows — test output parsing, execution, and recording."""
 
 from __future__ import annotations
 
 import logging
 import re
+import shlex
 import sqlite3
+import subprocess
 
 from backend.tools.base.db import execute_with_retry
 
 logger = logging.getLogger(__name__)
+
+
+def execute_ci_command(repo_path: str, test_cmd: str) -> dict:
+    """Run a test command via subprocess and return a structured CI outcome.
+
+    Bypasses pod/sandbox — the CI gate is a flow-level check, not an agent action.
+    """
+    try:
+        parts = shlex.split(test_cmd)
+        result = subprocess.run(
+            parts,
+            shell=False,
+            capture_output=True,
+            text=True,
+            timeout=600,
+            cwd=repo_path,
+        )
+        return _handle_ci_result({
+            "stdout": result.stdout,
+            "stderr": result.stderr,
+            "exit_code": result.returncode,
+        })
+    except subprocess.TimeoutExpired:
+        return _handle_ci_result({"error": "CI command timed out after 600s"})
+    except FileNotFoundError:
+        return _handle_ci_result({"error": f"CI command not found: {test_cmd}"})
+    except Exception as e:
+        return _handle_ci_result({"error": f"CI execution failed: {e}"})
+
+
+def _handle_ci_result(result: dict) -> dict:
+    """Translate raw subprocess result into structured CI outcome."""
+    if "error" in result:
+        return {
+            "ci_passed": False,
+            "ci_output": result["error"],
+            "test_count": 0,
+            "test_pass": 0,
+            "exit_code": 1,
+        }
+
+    stdout = result.get("stdout", "")
+    stderr = result.get("stderr", "")
+    exit_code = result.get("exit_code", 1)
+    output = stdout + "\n" + stderr
+    test_count, test_pass = parse_ci_output(output)
+
+    return {
+        # Exit 0 = tests passed, exit 5 = no tests collected (not a failure)
+        "ci_passed": exit_code in (0, 5),
+        "ci_output": output[:3000],
+        "test_count": test_count,
+        "test_pass": test_pass,
+        "exit_code": exit_code,
+    }
 
 
 def parse_ci_output(output: str) -> tuple[int, int]:

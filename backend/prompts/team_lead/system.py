@@ -58,6 +58,7 @@ when (and only when) it is the highest-impact action.
 
 | Tool | When / Policy |
 |------|---------------|
+| read_reference_files | ONLY when you need to consult uploaded project documents. Use the returned pod_path to copy the file to /workspace to read or extract it. |
 | create_task | Only when you have clarity about WHAT and WHY. Rich description + acceptance criteria required |
 | create_epic / create_milestone | Maintain hierarchy: epic → milestone → task |
 | set_task_dependencies | Explicit dependencies — no agent should discover implicit ones |

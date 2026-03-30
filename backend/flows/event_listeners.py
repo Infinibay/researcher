@@ -9,139 +9,15 @@ from __future__ import annotations
 import json
 import logging
 import sqlite3
-import threading
-import time
-from abc import ABC, abstractmethod
-from dataclasses import dataclass, field
-from datetime import datetime, timezone
-from typing import Any, Callable
+from typing import Any
 
-from backend.tools.base.db import execute_with_retry, get_connection
+from backend.tools.base.db import execute_with_retry
+
+# Re-export for backward compatibility — 37+ modules import from here
+from backend.flows.event_bus import EventBus, FlowEvent, event_bus  # noqa: F401
+from backend.flows.listener_base import BaseEventListener  # noqa: F401
 
 logger = logging.getLogger(__name__)
-
-
-# ── Event types ───────────────────────────────────────────────────────────────
-
-
-@dataclass
-class FlowEvent:
-    """Represents an event that can trigger flow actions."""
-
-    event_type: str
-    project_id: int
-    entity_type: str
-    entity_id: int | None = None
-    data: dict[str, Any] = field(default_factory=dict)
-    timestamp: str = field(
-        default_factory=lambda: datetime.now(timezone.utc).isoformat()
-    )
-
-
-# ── Event bus ─────────────────────────────────────────────────────────────────
-
-
-class EventBus:
-    """Simple pub/sub event bus for flow events."""
-
-    def __init__(self) -> None:
-        self._handlers: dict[str, list[Callable[[FlowEvent], None]]] = {}
-        self._lock = threading.Lock()
-
-    def subscribe(self, event_type: str, handler: Callable[[FlowEvent], None]) -> None:
-        """Register a handler for an event type."""
-        with self._lock:
-            if event_type not in self._handlers:
-                self._handlers[event_type] = []
-            self._handlers[event_type].append(handler)
-
-    def unsubscribe(self, event_type: str, handler: Callable[[FlowEvent], None]) -> None:
-        """Remove a handler for an event type."""
-        with self._lock:
-            if event_type in self._handlers:
-                self._handlers[event_type] = [
-                    h for h in self._handlers[event_type] if h != handler
-                ]
-
-    def emit(self, event: FlowEvent) -> None:
-        """Emit an event to all registered handlers."""
-        with self._lock:
-            handlers = list(self._handlers.get(event.event_type, []))
-            # Also notify wildcard listeners
-            handlers.extend(self._handlers.get("*", []))
-
-        for handler in handlers:
-            try:
-                handler(event)
-            except Exception:
-                logger.exception("Error in event handler for %s", event.event_type)
-
-
-# Global event bus instance
-event_bus = EventBus()
-
-
-# ── Base listener ─────────────────────────────────────────────────────────────
-
-
-class BaseEventListener(ABC):
-    """Abstract base for DB-polling event listeners."""
-
-    def __init__(
-        self,
-        project_id: int,
-        poll_interval: float = 5.0,
-        bus: EventBus | None = None,
-    ) -> None:
-        self.project_id = project_id
-        self.poll_interval = poll_interval
-        self.bus = bus or event_bus
-        self._running = False
-        self._thread: threading.Thread | None = None
-        self._last_check: str = datetime.now(timezone.utc).isoformat()
-
-    def start(self) -> None:
-        """Start the listener in a background daemon thread."""
-        if self._running:
-            return
-        self._running = True
-        self._thread = threading.Thread(
-            target=self._poll_loop,
-            name=f"{self.__class__.__name__}-p{self.project_id}",
-            daemon=True,
-        )
-        self._thread.start()
-        logger.info(
-            "%s started for project %d (interval=%.1fs)",
-            self.__class__.__name__, self.project_id, self.poll_interval,
-        )
-
-    def stop(self) -> None:
-        """Signal the listener to stop."""
-        self._running = False
-        if self._thread:
-            self._thread.join(timeout=self.poll_interval * 2)
-            self._thread = None
-        logger.info("%s stopped for project %d", self.__class__.__name__, self.project_id)
-
-    @property
-    def is_running(self) -> bool:
-        return self._running
-
-    def _poll_loop(self) -> None:
-        """Main polling loop."""
-        while self._running:
-            try:
-                self.check()
-                self._last_check = datetime.now(timezone.utc).isoformat()
-            except Exception:
-                logger.exception("%s poll error", self.__class__.__name__)
-            time.sleep(self.poll_interval)
-
-    @abstractmethod
-    def check(self) -> None:
-        """Override: inspect DB and emit events if conditions are met."""
-        ...
 
 
 # ── Concrete listeners ────────────────────────────────────────────────────────
@@ -852,5 +728,3 @@ class ListenerManager:
     @property
     def listeners(self) -> list[BaseEventListener]:
         return list(self._listeners)
-
-

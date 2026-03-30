@@ -3,6 +3,10 @@
 These endpoints are called by the ``infinibay`` CLI and the INFINIBAY MCP server
 running inside sandbox containers, providing access to host-side DB
 operations that agents need but cannot perform directly from their pod.
+
+Route groups split into separate modules:
+- ``internal_findings`` — findings/knowledge CRUD
+- ``internal_tasks`` — task approval and rejection
 """
 
 from __future__ import annotations
@@ -12,7 +16,7 @@ import logging
 import re
 import sqlite3
 
-from fastapi import APIRouter, Query
+from fastapi import APIRouter
 from pydantic import BaseModel, Field
 
 from backend.tools.base.db import execute_with_retry
@@ -44,38 +48,6 @@ class ChatSendRequest(BaseModel):
     to_role: str | None = None
 
 
-class TaskApproveRequest(BaseModel):
-    agent_id: str
-    comment: str | None = None
-
-
-class TaskRejectRequest(BaseModel):
-    agent_id: str
-    reason: str
-
-
-class RecordFindingRequest(BaseModel):
-    project_id: int
-    agent_id: str
-    task_id: int
-    title: str
-    content: str
-    confidence: float = Field(default=0.5, ge=0.0, le=1.0)
-    finding_type: str = "observation"
-    sources: list[str] = Field(default_factory=list)
-    artifact_id: int | None = None
-    wiki_page_id: int | None = None
-
-
-class ValidateFindingRequest(BaseModel):
-    agent_id: str
-
-
-class RejectFindingRequest(BaseModel):
-    agent_id: str
-    reason: str = ""
-
-
 class QueryRequest(BaseModel):
     sql_query: str
     row_limit: int = Field(default=100, ge=1, le=500)
@@ -103,8 +75,6 @@ _FORBIDDEN_KEYWORDS = re.compile(
     re.IGNORECASE,
 )
 _ALLOWED_STARTERS = re.compile(r"^\s*(SELECT|WITH)\b", re.IGNORECASE)
-
-_FINDING_TYPES = ("observation", "hypothesis", "experiment", "proof", "conclusion")
 
 
 # ── Endpoints ────────────────────────────────────────────────────────────
@@ -155,257 +125,6 @@ async def chat_send(req: ChatSendRequest):
     if msg_id == -1:
         return {"error": "Message blocked by loop guard"}
     return {"status": "sent", "message_id": msg_id}
-
-
-@router.post("/tasks/{task_id}/approve")
-async def approve_task(task_id: int, req: TaskApproveRequest):
-    """Approve a task in review_ready status, moving it to done."""
-
-    def _approve(conn: sqlite3.Connection) -> dict:
-        row = conn.execute(
-            "SELECT id, status, title, assigned_to FROM tasks WHERE id = ?",
-            (task_id,),
-        ).fetchone()
-        if not row:
-            raise ValueError(f"Task {task_id} not found")
-        if row["status"] != "review_ready":
-            raise ValueError(
-                f"Task {task_id} is not in 'review_ready' status "
-                f"(current: '{row['status']}')"
-            )
-        conn.execute(
-            """UPDATE tasks
-               SET status = 'done', completed_at = CURRENT_TIMESTAMP, reviewer = ?
-               WHERE id = ?""",
-            (req.agent_id, task_id),
-        )
-        approval_text = req.comment or "Task approved."
-        conn.execute(
-            """INSERT INTO task_comments
-               (task_id, author, comment_type, content)
-               VALUES (?, ?, 'approval', ?)""",
-            (task_id, req.agent_id, approval_text),
-        )
-        conn.commit()
-        return {"title": row["title"], "assigned_to": row["assigned_to"]}
-
-    try:
-        result = execute_with_retry(_approve)
-    except ValueError as e:
-        return {"error": str(e)}
-
-    return {
-        "task_id": task_id,
-        "title": result["title"],
-        "status": "done",
-        "approved_by": req.agent_id,
-    }
-
-
-@router.post("/tasks/{task_id}/reject")
-async def reject_task(task_id: int, req: TaskRejectRequest):
-    """Reject a task in review_ready status, sending it back with feedback."""
-
-    def _reject(conn: sqlite3.Connection) -> dict:
-        row = conn.execute(
-            "SELECT id, status, title, retry_count FROM tasks WHERE id = ?",
-            (task_id,),
-        ).fetchone()
-        if not row:
-            raise ValueError(f"Task {task_id} not found")
-        if row["status"] != "review_ready":
-            raise ValueError(
-                f"Task {task_id} is not in 'review_ready' status "
-                f"(current: '{row['status']}')"
-            )
-        new_retry = row["retry_count"] + 1
-        conn.execute(
-            """UPDATE tasks
-               SET status = 'rejected', retry_count = ?, reviewer = ?
-               WHERE id = ?""",
-            (new_retry, req.agent_id, task_id),
-        )
-        conn.execute(
-            """INSERT INTO task_comments
-               (task_id, author, comment_type, content)
-               VALUES (?, ?, 'change_request', ?)""",
-            (task_id, req.agent_id, req.reason),
-        )
-        conn.commit()
-        return {"title": row["title"], "retry_count": new_retry}
-
-    try:
-        result = execute_with_retry(_reject)
-    except ValueError as e:
-        return {"error": str(e)}
-
-    return {
-        "task_id": task_id,
-        "title": result["title"],
-        "status": "rejected",
-        "rejected_by": req.agent_id,
-        "retry_count": result["retry_count"],
-    }
-
-
-@router.post("/findings")
-async def record_finding(req: RecordFindingRequest):
-    """Record a research finding."""
-    if req.finding_type not in _FINDING_TYPES:
-        return {"error": f"Invalid finding_type '{req.finding_type}'. Must be one of: {', '.join(_FINDING_TYPES)}"}
-
-    def _record(conn: sqlite3.Connection) -> int:
-        cursor = conn.execute(
-            """INSERT INTO findings
-               (project_id, task_id, agent_run_id, topic, content,
-                sources_json, confidence, agent_id, status, finding_type,
-                artifact_id, wiki_page_id)
-               VALUES (?, ?, NULL, ?, ?, ?, ?, ?, 'provisional', ?, ?, ?)""",
-            (
-                req.project_id, req.task_id, req.title, req.content,
-                json.dumps(req.sources), req.confidence, req.agent_id,
-                req.finding_type, req.artifact_id, req.wiki_page_id
-            ),
-        )
-        conn.commit()
-        return cursor.lastrowid
-
-    try:
-        finding_id = execute_with_retry(_record)
-    except Exception as e:
-        return {"error": f"Failed to record finding: {e}"}
-
-    return {
-        "finding_id": finding_id,
-        "title": req.title,
-        "finding_type": req.finding_type,
-        "confidence": req.confidence,
-        "status": "provisional",
-    }
-
-
-@router.get("/findings")
-async def read_findings(
-    project_id: int,
-    query: str | None = Query(default=None),
-    task_id: int | None = Query(default=None),
-    min_confidence: float | None = Query(default=None),
-    limit: int = Query(default=50, ge=1, le=200),
-):
-    """Search/list findings. Uses FTS5 if query is provided."""
-
-    def _query_findings(conn: sqlite3.Connection) -> list[dict]:
-        if query:
-            # FTS5 search
-            rows = conn.execute(
-                """SELECT f.* FROM findings f
-                   JOIN findings_fts fts ON f.id = fts.rowid
-                   WHERE fts.findings_fts MATCH ?
-                     AND f.project_id = ?
-                   ORDER BY rank
-                   LIMIT ?""",
-                (query, project_id, limit),
-            ).fetchall()
-        else:
-            clauses = ["project_id = ?"]
-            params: list = [project_id]
-            if task_id is not None:
-                clauses.append("task_id = ?")
-                params.append(task_id)
-            if min_confidence is not None:
-                clauses.append("confidence >= ?")
-                params.append(min_confidence)
-            params.append(limit)
-            where = " AND ".join(clauses)
-            rows = conn.execute(
-                f"SELECT * FROM findings WHERE {where} ORDER BY created_at DESC LIMIT ?",
-                params,
-            ).fetchall()
-        return [dict(r) for r in rows]
-
-    try:
-        results = execute_with_retry(_query_findings)
-    except Exception as e:
-        return {"error": str(e), "findings": []}
-
-    return {"findings": results, "count": len(results)}
-
-
-@router.post("/findings/{finding_id}/validate")
-async def validate_finding(finding_id: int, req: ValidateFindingRequest):
-    """Validate a provisional finding, changing status to active."""
-
-    def _validate(conn: sqlite3.Connection) -> dict:
-        row = conn.execute(
-            "SELECT id, status, topic FROM findings WHERE id = ?",
-            (finding_id,),
-        ).fetchone()
-        if not row:
-            raise ValueError(f"Finding {finding_id} not found")
-        if row["status"] != "provisional":
-            raise ValueError(
-                f"Finding {finding_id} is not provisional (current: '{row['status']}')"
-            )
-        conn.execute(
-            "UPDATE findings SET status = 'active' WHERE id = ?",
-            (finding_id,),
-        )
-        conn.commit()
-        return {"topic": row["topic"]}
-
-    try:
-        result = execute_with_retry(_validate)
-    except ValueError as e:
-        return {"error": str(e)}
-
-    return {
-        "finding_id": finding_id,
-        "topic": result["topic"],
-        "status": "active",
-        "validated_by": req.agent_id,
-    }
-
-
-@router.post("/findings/{finding_id}/reject")
-async def reject_finding(finding_id: int, req: RejectFindingRequest):
-    """Reject a finding, changing status to superseded."""
-
-    def _reject(conn: sqlite3.Connection) -> dict:
-        row = conn.execute(
-            "SELECT id, status, topic FROM findings WHERE id = ?",
-            (finding_id,),
-        ).fetchone()
-        if not row:
-            raise ValueError(f"Finding {finding_id} not found")
-        conn.execute(
-            "UPDATE findings SET status = 'superseded' WHERE id = ?",
-            (finding_id,),
-        )
-        if req.reason:
-            conn.execute(
-                """INSERT INTO task_comments
-                   (task_id, author, comment_type, content)
-                   VALUES (
-                       (SELECT task_id FROM findings WHERE id = ?),
-                       ?, 'note',
-                       ?
-                   )""",
-                (finding_id, req.agent_id, f"Finding #{finding_id} rejected: {req.reason}"),
-            )
-        conn.commit()
-        return {"topic": row["topic"]}
-
-    try:
-        result = execute_with_retry(_reject)
-    except ValueError as e:
-        return {"error": str(e)}
-
-    return {
-        "finding_id": finding_id,
-        "topic": result["topic"],
-        "status": "superseded",
-        "rejected_by": req.agent_id,
-    }
 
 
 @router.post("/query")

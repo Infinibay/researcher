@@ -115,9 +115,14 @@ class PodManager:
         )
         os.makedirs(artifacts_host_dir, exist_ok=True)
 
+        # Shared uploads volume
+        uploads_host_dir = settings.UPLOAD_BASE_DIR
+        os.makedirs(uploads_host_dir, exist_ok=True)
+
         volumes = [
             f"{workspace_path}:/workspace:z",
             f"{artifacts_host_dir}:/artifacts:z",
+            f"{uploads_host_dir}:/uploads:z",
         ]
         userns = None
 

@@ -303,18 +303,22 @@ class TestLoopTools:
 
         tools = [self._make_mock_tool(f"tool_{i}") for i in range(3)]
         schemas = build_tool_schemas(tools)
-        # 3 agent tools + step_complete
-        assert len(schemas) == 4
+        # 3 agent tools + step_complete + add_note + think
+        assert len(schemas) == 6
         assert all(s["type"] == "function" for s in schemas)
         names = [s["function"]["name"] for s in schemas]
         assert "step_complete" in names
+        assert "add_note" in names
+        assert "think" in names
 
     def test_build_tool_schemas_empty_tools(self):
         from backend.engine.loop_tools import build_tool_schemas
 
         schemas = build_tool_schemas([])
-        assert len(schemas) == 1
-        assert schemas[0]["function"]["name"] == "step_complete"
+        # step_complete + add_note + think
+        assert len(schemas) == 3
+        names = [s["function"]["name"] for s in schemas]
+        assert "step_complete" in names
 
     def test_build_tool_dispatch(self):
         from backend.engine.loop_tools import build_tool_dispatch
@@ -363,14 +367,15 @@ class TestLoopTools:
         tool._run = _run
         dispatch = {"test_tool": tool}
 
-        # Extra kwargs should return an error with valid param names
+        # Metadata params (project_id, agent_id) are stripped silently,
+        # but truly unknown params should return an error.
         result = execute_tool_call(
             dispatch, "test_tool",
-            '{"query": "hello", "project_id": 1, "agent_id": "x"}',
+            '{"query": "hello", "bogus_param": 1}',
         )
         parsed = json.loads(result)
         assert "error" in parsed
-        assert "project_id" in parsed["error"]
+        assert "bogus_param" in parsed["error"]
         assert "query" in parsed["error"]  # lists valid params
 
     def test_execute_tool_call_exception(self):
@@ -466,9 +471,9 @@ class TestBuildIterationPromptAllDone:
 
 class TestParseStepCompleteArgs:
     def test_basic_args(self):
-        from backend.engine.loop_engine import _parse_step_complete_args
+        from backend.engine.tool_call_parser import parse_step_complete_args
 
-        result = _parse_step_complete_args(json.dumps({
+        result = parse_step_complete_args(json.dumps({
             "summary": "Found the auth module.",
             "status": "continue",
         }))
@@ -478,9 +483,9 @@ class TestParseStepCompleteArgs:
         assert result.final_answer is None
 
     def test_done_with_final_answer(self):
-        from backend.engine.loop_engine import _parse_step_complete_args
+        from backend.engine.tool_call_parser import parse_step_complete_args
 
-        result = _parse_step_complete_args(json.dumps({
+        result = parse_step_complete_args(json.dumps({
             "summary": "Task complete.",
             "status": "done",
             "final_answer": "Here is the final implementation.",
@@ -489,9 +494,9 @@ class TestParseStepCompleteArgs:
         assert result.final_answer == "Here is the final implementation."
 
     def test_with_next_steps(self):
-        from backend.engine.loop_engine import _parse_step_complete_args
+        from backend.engine.tool_call_parser import parse_step_complete_args
 
-        result = _parse_step_complete_args(json.dumps({
+        result = parse_step_complete_args(json.dumps({
             "summary": "Found the issue.",
             "status": "continue",
             "next_steps": [
@@ -507,30 +512,30 @@ class TestParseStepCompleteArgs:
         assert result.next_steps[1].index == 2
 
     def test_dict_input(self):
-        from backend.engine.loop_engine import _parse_step_complete_args
+        from backend.engine.tool_call_parser import parse_step_complete_args
 
-        result = _parse_step_complete_args({
+        result = parse_step_complete_args({
             "summary": "Did something.",
             "status": "blocked",
         })
         assert result.status == "blocked"
 
     def test_bad_json(self):
-        from backend.engine.loop_engine import _parse_step_complete_args
+        from backend.engine.tool_call_parser import parse_step_complete_args
 
-        result = _parse_step_complete_args("not valid json{{{")
+        result = parse_step_complete_args("not valid json{{{")
         assert "no summary" in result.summary.lower() or result.summary
 
     def test_empty_string(self):
-        from backend.engine.loop_engine import _parse_step_complete_args
+        from backend.engine.tool_call_parser import parse_step_complete_args
 
-        result = _parse_step_complete_args("")
+        result = parse_step_complete_args("")
         assert result.status == "continue"
 
     def test_malformed_next_steps_ignored(self):
-        from backend.engine.loop_engine import _parse_step_complete_args
+        from backend.engine.tool_call_parser import parse_step_complete_args
 
-        result = _parse_step_complete_args(json.dumps({
+        result = parse_step_complete_args(json.dumps({
             "summary": "Did something.",
             "status": "continue",
             "next_steps": [
@@ -585,7 +590,7 @@ class TestLoopEngine:
         agent.tools = []
         return agent
 
-    @patch("backend.engine.loop_engine._call_llm")
+    @patch("backend.engine.loop_engine.call_llm")
     @patch("backend.config.settings.settings")
     def test_simple_done_in_one_step(self, mock_settings, mock_call_llm):
         from backend.engine.loop_engine import LoopEngine
@@ -594,6 +599,9 @@ class TestLoopEngine:
         mock_settings.LOOP_MAX_TOOL_CALLS_PER_ACTION = 10
         mock_settings.LOOP_MAX_TOTAL_TOOL_CALLS = 50
         mock_settings.LOOP_HISTORY_WINDOW = 0
+        mock_settings.LOOP_STEP_NUDGE_THRESHOLD = 6
+        mock_settings.LOOP_SUMMARIZER_ENABLED = False
+        mock_settings.LOOP_SUMMARIZER_MAX_INPUT_TOKENS = 4000
 
         # LLM responds with step_complete(done) in one shot
         mock_call_llm.return_value = _make_llm_response(
@@ -615,7 +623,7 @@ class TestLoopEngine:
 
         assert "result" in result.lower()
 
-    @patch("backend.engine.loop_engine._call_llm")
+    @patch("backend.engine.loop_engine.call_llm")
     @patch("backend.config.settings.settings")
     def test_multi_step_execution(self, mock_settings, mock_call_llm):
         from backend.engine.loop_engine import LoopEngine
@@ -624,6 +632,9 @@ class TestLoopEngine:
         mock_settings.LOOP_MAX_TOOL_CALLS_PER_ACTION = 10
         mock_settings.LOOP_MAX_TOTAL_TOOL_CALLS = 50
         mock_settings.LOOP_HISTORY_WINDOW = 0
+        mock_settings.LOOP_STEP_NUDGE_THRESHOLD = 6
+        mock_settings.LOOP_SUMMARIZER_ENABLED = False
+        mock_settings.LOOP_SUMMARIZER_MAX_INPUT_TOKENS = 4000
 
         responses = [
             # Step 1: planning — create initial plan
@@ -676,7 +687,7 @@ class TestLoopEngine:
 
         assert "tests pass" in result.lower() or "All tests" in result
 
-    @patch("backend.engine.loop_engine._call_llm")
+    @patch("backend.engine.loop_engine.call_llm")
     @patch("backend.config.settings.settings")
     def test_tool_calling(self, mock_settings, mock_call_llm):
         from backend.engine.loop_engine import LoopEngine
@@ -685,6 +696,9 @@ class TestLoopEngine:
         mock_settings.LOOP_MAX_TOOL_CALLS_PER_ACTION = 10
         mock_settings.LOOP_MAX_TOTAL_TOOL_CALLS = 50
         mock_settings.LOOP_HISTORY_WINDOW = 0
+        mock_settings.LOOP_STEP_NUDGE_THRESHOLD = 6
+        mock_settings.LOOP_SUMMARIZER_ENABLED = False
+        mock_settings.LOOP_SUMMARIZER_MAX_INPUT_TOKENS = 4000
 
         responses = [
             # Planning: create plan with step_complete
@@ -735,7 +749,7 @@ class TestLoopEngine:
 
         mock_tool._run.assert_called_once_with(path="main.py")
 
-    @patch("backend.engine.loop_engine._call_llm")
+    @patch("backend.engine.loop_engine.call_llm")
     @patch("backend.config.settings.settings")
     def test_tool_and_step_complete_in_same_response(self, mock_settings, mock_call_llm):
         """LLM can call a tool and step_complete in the same response."""
@@ -745,6 +759,9 @@ class TestLoopEngine:
         mock_settings.LOOP_MAX_TOOL_CALLS_PER_ACTION = 10
         mock_settings.LOOP_MAX_TOTAL_TOOL_CALLS = 50
         mock_settings.LOOP_HISTORY_WINDOW = 0
+        mock_settings.LOOP_STEP_NUDGE_THRESHOLD = 6
+        mock_settings.LOOP_SUMMARIZER_ENABLED = False
+        mock_settings.LOOP_SUMMARIZER_MAX_INPUT_TOKENS = 4000
 
         responses = [
             # Planning
@@ -793,7 +810,7 @@ class TestLoopEngine:
         mock_tool._run.assert_called_once()
         assert "Found it" in result
 
-    @patch("backend.engine.loop_engine._call_llm")
+    @patch("backend.engine.loop_engine.call_llm")
     @patch("backend.config.settings.settings")
     def test_blocked_status(self, mock_settings, mock_call_llm):
         from backend.engine.loop_engine import LoopEngine
@@ -802,6 +819,9 @@ class TestLoopEngine:
         mock_settings.LOOP_MAX_TOOL_CALLS_PER_ACTION = 10
         mock_settings.LOOP_MAX_TOTAL_TOOL_CALLS = 50
         mock_settings.LOOP_HISTORY_WINDOW = 0
+        mock_settings.LOOP_STEP_NUDGE_THRESHOLD = 6
+        mock_settings.LOOP_SUMMARIZER_ENABLED = False
+        mock_settings.LOOP_SUMMARIZER_MAX_INPUT_TOKENS = 4000
 
         mock_call_llm.return_value = _make_llm_response(
             content="",
@@ -821,7 +841,7 @@ class TestLoopEngine:
         assert "Blocked" in result
         assert "API key" in result
 
-    @patch("backend.engine.loop_engine._call_llm")
+    @patch("backend.engine.loop_engine.call_llm")
     @patch("backend.config.settings.settings")
     def test_iteration_limit(self, mock_settings, mock_call_llm):
         from backend.engine.loop_engine import LoopEngine
@@ -830,6 +850,9 @@ class TestLoopEngine:
         mock_settings.LOOP_MAX_TOOL_CALLS_PER_ACTION = 10
         mock_settings.LOOP_MAX_TOTAL_TOOL_CALLS = 50
         mock_settings.LOOP_HISTORY_WINDOW = 0
+        mock_settings.LOOP_STEP_NUDGE_THRESHOLD = 6
+        mock_settings.LOOP_SUMMARIZER_ENABLED = False
+        mock_settings.LOOP_SUMMARIZER_MAX_INPUT_TOKENS = 4000
 
         # Always returns continue with more steps
         mock_call_llm.return_value = _make_llm_response(
@@ -852,7 +875,7 @@ class TestLoopEngine:
 
         assert "summary" in result.lower() or "still working" in result.lower()
 
-    @patch("backend.engine.loop_engine._call_llm")
+    @patch("backend.engine.loop_engine.call_llm")
     @patch("backend.config.settings.settings")
     def test_history_window(self, mock_settings, mock_call_llm):
         """When LOOP_HISTORY_WINDOW > 0, only last N summaries are included."""
@@ -862,6 +885,9 @@ class TestLoopEngine:
         mock_settings.LOOP_MAX_TOOL_CALLS_PER_ACTION = 10
         mock_settings.LOOP_MAX_TOTAL_TOOL_CALLS = 50
         mock_settings.LOOP_HISTORY_WINDOW = 1
+        mock_settings.LOOP_STEP_NUDGE_THRESHOLD = 6
+        mock_settings.LOOP_SUMMARIZER_ENABLED = False
+        mock_settings.LOOP_SUMMARIZER_MAX_INPUT_TOKENS = 4000
 
         call_count = 0
         def _side_effect(*args, **kwargs):
@@ -900,7 +926,7 @@ class TestLoopEngine:
 
         assert "Final" in result
 
-    @patch("backend.engine.loop_engine._call_llm")
+    @patch("backend.engine.loop_engine.call_llm")
     @patch("backend.config.settings.settings")
     def test_all_done_allows_one_more_iteration(self, mock_settings, mock_call_llm):
         """When all steps done, allow one more iteration before terminating."""
@@ -910,6 +936,9 @@ class TestLoopEngine:
         mock_settings.LOOP_MAX_TOOL_CALLS_PER_ACTION = 10
         mock_settings.LOOP_MAX_TOTAL_TOOL_CALLS = 50
         mock_settings.LOOP_HISTORY_WINDOW = 0
+        mock_settings.LOOP_STEP_NUDGE_THRESHOLD = 6
+        mock_settings.LOOP_SUMMARIZER_ENABLED = False
+        mock_settings.LOOP_SUMMARIZER_MAX_INPUT_TOKENS = 4000
 
         call_count = 0
         def _side_effect(*args, **kwargs):
@@ -955,7 +984,7 @@ class TestLoopEngine:
         # Should have terminated after 2 consecutive all-done iterations
         assert call_count == 3  # planning + step + safety iteration
 
-    @patch("backend.engine.loop_engine._call_llm")
+    @patch("backend.engine.loop_engine.call_llm")
     @patch("backend.config.settings.settings")
     def test_next_steps_extend_plan(self, mock_settings, mock_call_llm):
         """LLM adds new steps via next_steps, plan grows incrementally."""
@@ -965,6 +994,9 @@ class TestLoopEngine:
         mock_settings.LOOP_MAX_TOOL_CALLS_PER_ACTION = 10
         mock_settings.LOOP_MAX_TOTAL_TOOL_CALLS = 50
         mock_settings.LOOP_HISTORY_WINDOW = 0
+        mock_settings.LOOP_STEP_NUDGE_THRESHOLD = 6
+        mock_settings.LOOP_SUMMARIZER_ENABLED = False
+        mock_settings.LOOP_SUMMARIZER_MAX_INPUT_TOKENS = 4000
 
         call_count = 0
         def _side_effect(*args, **kwargs):
@@ -1046,7 +1078,7 @@ class TestForcedToolChoice:
         agent.tools = []
         return agent
 
-    @patch("backend.engine.loop_engine._call_llm")
+    @patch("backend.engine.loop_engine.call_llm")
     @patch("backend.config.settings.settings")
     def test_text_response_becomes_fallback(self, mock_settings, mock_call_llm):
         """Text response despite tool_choice=required creates fallback StepResult."""
@@ -1056,6 +1088,9 @@ class TestForcedToolChoice:
         mock_settings.LOOP_MAX_TOOL_CALLS_PER_ACTION = 10
         mock_settings.LOOP_MAX_TOTAL_TOOL_CALLS = 50
         mock_settings.LOOP_HISTORY_WINDOW = 0
+        mock_settings.LOOP_STEP_NUDGE_THRESHOLD = 6
+        mock_settings.LOOP_SUMMARIZER_ENABLED = False
+        mock_settings.LOOP_SUMMARIZER_MAX_INPUT_TOKENS = 4000
 
         call_count = 0
         def _side_effect(*args, **kwargs):
@@ -1086,7 +1121,7 @@ class TestForcedToolChoice:
         # Should still produce a result (fallback summaries)
         assert result
 
-    @patch("backend.engine.loop_engine._call_llm")
+    @patch("backend.engine.loop_engine.call_llm")
     @patch("backend.config.settings.settings")
     def test_planning_uses_required_tool_choice(self, mock_settings, mock_call_llm):
         """Planning phase uses tool_choice=required to force step_complete."""
@@ -1096,6 +1131,9 @@ class TestForcedToolChoice:
         mock_settings.LOOP_MAX_TOOL_CALLS_PER_ACTION = 10
         mock_settings.LOOP_MAX_TOTAL_TOOL_CALLS = 50
         mock_settings.LOOP_HISTORY_WINDOW = 0
+        mock_settings.LOOP_STEP_NUDGE_THRESHOLD = 6
+        mock_settings.LOOP_SUMMARIZER_ENABLED = False
+        mock_settings.LOOP_SUMMARIZER_MAX_INPUT_TOKENS = 4000
 
         captured_tool_choices = []
 
@@ -1129,7 +1167,7 @@ class TestForcedToolChoice:
         # All calls should use "required" — every response must be a tool call
         assert all(tc == "required" for tc in captured_tool_choices)
 
-    @patch("backend.engine.loop_engine._call_llm")
+    @patch("backend.engine.loop_engine.call_llm")
     @patch("backend.config.settings.settings")
     def test_fallback_when_required_still_returns_text(self, mock_settings, mock_call_llm):
         """Last resort: if tool_choice=required still returns text, use it as summary."""
@@ -1139,6 +1177,9 @@ class TestForcedToolChoice:
         mock_settings.LOOP_MAX_TOOL_CALLS_PER_ACTION = 10
         mock_settings.LOOP_MAX_TOTAL_TOOL_CALLS = 50
         mock_settings.LOOP_HISTORY_WINDOW = 0
+        mock_settings.LOOP_STEP_NUDGE_THRESHOLD = 6
+        mock_settings.LOOP_SUMMARIZER_ENABLED = False
+        mock_settings.LOOP_SUMMARIZER_MAX_INPUT_TOKENS = 4000
 
         call_count = 0
         def _side_effect(*args, **kwargs):
@@ -1194,7 +1235,7 @@ class TestRepetitionDetection:
         tool._run = MagicMock(return_value='{"result": "ok"}')
         return tool
 
-    @patch("backend.engine.loop_engine._call_llm")
+    @patch("backend.engine.loop_engine.call_llm")
     @patch("backend.config.settings.settings")
     def test_same_tool_loop_gets_nudged(self, mock_settings, mock_call_llm):
         """Calling the same tool 3+ times triggers a nudge, then step_complete."""
@@ -1204,6 +1245,9 @@ class TestRepetitionDetection:
         mock_settings.LOOP_MAX_TOOL_CALLS_PER_ACTION = 20
         mock_settings.LOOP_MAX_TOTAL_TOOL_CALLS = 100
         mock_settings.LOOP_HISTORY_WINDOW = 0
+        mock_settings.LOOP_STEP_NUDGE_THRESHOLD = 6
+        mock_settings.LOOP_SUMMARIZER_ENABLED = False
+        mock_settings.LOOP_SUMMARIZER_MAX_INPUT_TOKENS = 4000
 
         call_count = 0
         def _side_effect(*args, **kwargs):
@@ -1253,7 +1297,7 @@ class TestRepetitionDetection:
         assert call_count == 5
         assert "Done reading" in result
 
-    @patch("backend.engine.loop_engine._call_llm")
+    @patch("backend.engine.loop_engine.call_llm")
     @patch("backend.config.settings.settings")
     def test_same_tool_force_break_after_nudge_fails(self, mock_settings, mock_call_llm):
         """If nudge fails and tool keeps repeating, force break."""
@@ -1263,6 +1307,9 @@ class TestRepetitionDetection:
         mock_settings.LOOP_MAX_TOOL_CALLS_PER_ACTION = 20
         mock_settings.LOOP_MAX_TOTAL_TOOL_CALLS = 100
         mock_settings.LOOP_HISTORY_WINDOW = 0
+        mock_settings.LOOP_STEP_NUDGE_THRESHOLD = 6
+        mock_settings.LOOP_SUMMARIZER_ENABLED = False
+        mock_settings.LOOP_SUMMARIZER_MAX_INPUT_TOKENS = 4000
 
         call_count = 0
         def _side_effect(*args, **kwargs):
@@ -1300,7 +1347,7 @@ class TestRepetitionDetection:
         # consecutive send_message calls
         assert "repeated send_message" in result.lower() or "interrupted" in result.lower()
 
-    @patch("backend.engine.loop_engine._call_llm")
+    @patch("backend.engine.loop_engine.call_llm")
     @patch("backend.config.settings.settings")
     def test_different_tools_no_repetition_trigger(self, mock_settings, mock_call_llm):
         """Alternating between different tools doesn't trigger repetition detection."""
@@ -1310,6 +1357,9 @@ class TestRepetitionDetection:
         mock_settings.LOOP_MAX_TOOL_CALLS_PER_ACTION = 20
         mock_settings.LOOP_MAX_TOTAL_TOOL_CALLS = 100
         mock_settings.LOOP_HISTORY_WINDOW = 0
+        mock_settings.LOOP_STEP_NUDGE_THRESHOLD = 6
+        mock_settings.LOOP_SUMMARIZER_ENABLED = False
+        mock_settings.LOOP_SUMMARIZER_MAX_INPUT_TOKENS = 4000
 
         call_count = 0
         def _side_effect(*args, **kwargs):

@@ -34,6 +34,13 @@ class AgentEngine(ABC):
         task_tools: list | None = None,
         event_id: int | None = None,
         resume_state: dict | None = None,
+        # Optional overrides (used by LoopEngine)
+        max_iterations: int | None = None,
+        max_total_tool_calls: int | None = None,
+        max_tool_calls_per_action: int | None = None,
+        nudge_threshold: int | None = None,
+        summarizer_enabled: bool | None = None,
+        identity_override: str | None = None,
     ) -> str:
         """Execute a task using the given agent and return the string result.
 

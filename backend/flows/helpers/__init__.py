@@ -13,7 +13,7 @@ This module re-exports every public symbol so that existing
 ``from backend.flows.helpers import X`` statements keep working.
 """
 
-from backend.flows.helpers.ci_helpers import parse_ci_output, record_ci_result
+from backend.flows.helpers.ci_helpers import execute_ci_command, parse_ci_output, record_ci_result
 from backend.flows.helpers.db_helpers import (
     all_objectives_met,
     atomic_claim_task,

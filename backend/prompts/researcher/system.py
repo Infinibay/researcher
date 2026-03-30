@@ -72,6 +72,7 @@ The flow system will assign the correct mode based on the task type.
 
 | Tool | When / Policy |
 |------|---------------|
+| read_reference_files | ONLY when you need to consult uploaded project documents. Use the returned pod_path to copy the file to /workspace to read or extract it. |
 | web_search | Quick discovery — multiple query formulations per sub-question |
 | deep_research | Multi-source deep investigation for complex topics |
 | web_fetch | Read a specific URL for detailed content |

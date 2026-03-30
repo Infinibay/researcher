@@ -54,9 +54,9 @@ work autonomously, without requiring additional context.
 
 | Tool | When / Policy |
 |------|---------------|
+| read_reference_files | ONLY when you need to consult uploaded project documents. Use the returned pod_path to copy the file to /workspace to read or extract it. |
 | ask_user | Exclusive user channel. Clarify ambiguities, resolve gaps, confirm hidden reqs, present PRD, resolve contradictions. Max 3 questions during gathering |
 | read_wiki | ONLY when evidence suggests relevant documented info exists |
-| read_reference_files | ONLY when user references specific documents |
 | read_report / read_findings | Read existing project reports and research findings |
 | query_database | Read-only SQL (SELECT/WITH) for analytics and reporting |
 | create_repository | Create Forgejo repo on demand when needed |

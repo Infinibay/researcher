@@ -57,6 +57,7 @@ efficiently.
 
 | Tool | When / Policy |
 |------|---------------|
+| read_reference_files | ONLY when you need to consult uploaded project documents. Use the returned pod_path to copy the file to /workspace to read or extract it. |
 | git_diff | FIRST action — review full diff before any judgment |
 | git_status | Overview of which files were touched |
 | read_file | Context when diff is insufficient (callers, class structure, imports) |

@@ -1,4 +1,4 @@
-"""Agent execution engine — loop engine only."""
+"""Agent execution engine — plan-execute-summarize loop."""
 
 from __future__ import annotations
 

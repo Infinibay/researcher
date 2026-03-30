@@ -121,6 +121,8 @@ def create_app() -> FastAPI:
     from backend.api.routes.events import router as events_router
     from backend.api.routes.flow_state import router as flow_state_router
     from backend.api.routes.internal import router as internal_router
+    from backend.api.routes.internal_findings import router as internal_findings_router
+    from backend.api.routes.internal_tasks import router as internal_tasks_router
     from backend.api.routes.findings import router as findings_router
     from backend.api.routes.artifacts import router as artifacts_router
 
@@ -138,6 +140,8 @@ def create_app() -> FastAPI:
     app.include_router(events_router)
     app.include_router(flow_state_router)
     app.include_router(internal_router)
+    app.include_router(internal_findings_router)
+    app.include_router(internal_tasks_router)
     app.include_router(findings_router)
     app.include_router(artifacts_router)
 

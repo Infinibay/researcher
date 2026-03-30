@@ -1,10 +1,12 @@
 """Tool for reading project reference files."""
 
+import os
 import sqlite3
 from typing import Type
 
 from pydantic import BaseModel, Field
 
+from backend.config.settings import settings
 from backend.tools.base.base_tool import InfinibayBaseTool
 from backend.tools.base.db import execute_with_retry, sanitize_fts5_query
 
@@ -26,7 +28,8 @@ class ReadReferenceFilesTool(InfinibayBaseTool):
     name: str = "read_reference_files"
     description: str = (
         "List and search project reference files (PDFs, papers, etc.). "
-        "Use search for full-text matching across file names and descriptions."
+        "Returns file information including 'pod_path' which is the absolute path "
+        "inside the agent's container."
     )
     args_schema: Type[BaseModel] = ReadReferenceFilesInput
 
@@ -64,7 +67,22 @@ class ReadReferenceFilesTool(InfinibayBaseTool):
                     (project_id,),
                 ).fetchall()
 
-            return [dict(r) for r in rows]
+            files = []
+            upload_base = os.path.abspath(settings.UPLOAD_BASE_DIR)
+
+            for r in rows:
+                d = dict(r)
+                host_path = d.get("file_path")
+                if host_path:
+                    host_path = os.path.abspath(host_path)
+                    if host_path.startswith(upload_base):
+                        # Convert to pod path
+                        rel_path = os.path.relpath(host_path, upload_base)
+                        d["pod_path"] = os.path.join("/uploads", rel_path)
+                    else:
+                        d["pod_path"] = host_path # Fallback
+                files.append(d)
+            return files
 
         try:
             files = execute_with_retry(_read)

@@ -104,6 +104,7 @@ ALL_TOOL_CLASSES = (
 _ROLE_TOOLS = {
     "project_lead": (
         COMMUNICATION_TOOLS +
+        [ReadFileTool, ListDirectoryTool] +
         [UpdateProjectTool, ReadReferenceFilesTool, CreateRepositoryTool] +
         [ReadFindingsTool, SearchFindingsTool, ReadWikiTool, SearchWikiTool, ReadReportTool] +
         [WebSearchTool, WebFetchTool, ScrapeWebsiteInfinibayTool] +
@@ -119,7 +120,7 @@ _ROLE_TOOLS = {
          SetTaskDependenciesTool, ApproveTaskTool, RejectTaskTool,
          ReadTaskHistoryTool, CheckDependenciesTool] +
         COMMUNICATION_TOOLS + FILE_TOOLS + GIT_TOOLS +
-        [ReadFindingsTool, SearchFindingsTool, ReadWikiTool, SearchWikiTool] +
+        [ReadReferenceFilesTool, ReadFindingsTool, SearchFindingsTool, ReadWikiTool, SearchWikiTool] +
         [CreateEpicTool, CreateMilestoneTool, ReadEpicsTool, ReadMilestonesTool] +
         [WebSearchTool, ScrapeWebsiteInfinibayTool, ExecuteCommandTool, CodeInterpreterTool] +
         [NL2SQLTool]
@@ -130,7 +131,7 @@ _ROLE_TOOLS = {
         [SaveSessionNoteTool, LoadSessionNoteTool, ReadTaskHistoryTool, CheckDependenciesTool] +
         [SendMessageTool, ReadMessagesTool, AskTeamLeadTool, ReplyToUserTool] +
         [WebSearchTool, WebFetchTool] +
-        [DirectorySearchTool, CodeDocsSearchInfinibayTool] +
+        [DirectorySearchTool, CodeDocsSearchInfinibayTool, ReadReferenceFilesTool] +
         CONTEXT7_TOOLS
     ),
     "code_reviewer": (
@@ -138,13 +139,13 @@ _ROLE_TOOLS = {
         [GetTaskTool, ReadTasksTool, ApproveTaskTool, RejectTaskTool, AddCommentTool, ReadCommentsTool] +
         [ReadTaskHistoryTool] +
         [SendMessageTool, ReadMessagesTool, ReplyToUserTool] +
-        [DirectorySearchTool] +
+        [DirectorySearchTool, ReadReferenceFilesTool] +
         CONTEXT7_TOOLS +
         [ExecuteCommandTool, CodeInterpreterTool]
     ),
     "researcher": (
         WEB_TOOLS + FILE_TOOLS + KNOWLEDGE_TOOLS +
-        [CreateHypothesisTool] +
+        [CreateHypothesisTool, ReadReferenceFilesTool] +
         [TakeTaskTool, UpdateTaskStatusTool, AddCommentTool, ReadCommentsTool, GetTaskTool, ReadTasksTool] +
         [SaveSessionNoteTool, LoadSessionNoteTool, ReadTaskHistoryTool] +
         [SendMessageTool, ReadMessagesTool, AskTeamLeadTool, ReplyToUserTool] +
@@ -153,7 +154,7 @@ _ROLE_TOOLS = {
     ),
     "research_reviewer": (
         [ValidateFindingTool, RejectFindingTool, ReadFindingsTool, SearchFindingsTool, SummarizeFindingsTool] +
-        [ReadWikiTool, SearchWikiTool, ReadReportTool, SearchKnowledgeTool] +
+        [ReadWikiTool, SearchWikiTool, ReadReportTool, SearchKnowledgeTool, ReadReferenceFilesTool] +
         [GetTaskTool, ReadTasksTool, ApproveTaskTool, RejectTaskTool, AddCommentTool, ReadCommentsTool] +
         [ReadTaskHistoryTool] +
         [SendMessageTool, ReadMessagesTool, ReplyToUserTool] +
@@ -208,7 +209,7 @@ _TASK_TYPE_TOOLS: dict[str, list] = {
         [UpdateTaskStatusTool, AddCommentTool, ReadCommentsTool, GetTaskTool] +
         [ReadTaskHistoryTool, CheckDependenciesTool] +
         [SendMessageTool, AskTeamLeadTool] +
-        [WebSearchTool, WebFetchTool, DirectorySearchTool, CodeDocsSearchInfinibayTool] +
+        [WebSearchTool, WebFetchTool, DirectorySearchTool, CodeDocsSearchInfinibayTool, ReadReferenceFilesTool] +
         CONTEXT7_TOOLS +
         [SaveSessionNoteTool, LoadSessionNoteTool]
     ),
@@ -218,13 +219,13 @@ _TASK_TYPE_TOOLS: dict[str, list] = {
         [UpdateTaskStatusTool, AddCommentTool, ReadCommentsTool, GetTaskTool] +
         [ReadTaskHistoryTool, CheckDependenciesTool] +
         [SendMessageTool, AskTeamLeadTool] +
-        [WebSearchTool, WebFetchTool, DirectorySearchTool, CodeDocsSearchInfinibayTool] +
+        [WebSearchTool, WebFetchTool, DirectorySearchTool, CodeDocsSearchInfinibayTool, ReadReferenceFilesTool] +
         CONTEXT7_TOOLS +
         [SaveSessionNoteTool, LoadSessionNoteTool]
     ),
     # Code reviewer — needs read access, diff, approve/reject
     "review": (
-        [ReadFileTool, ListDirectoryTool, CodeSearchTool, GlobTool] +
+        [ReadFileTool, ListDirectoryTool, CodeSearchTool, GlobTool, ReadReferenceFilesTool] +
         [GitDiffTool, GitStatusTool] +
         [GetTaskTool, ReadTasksTool, ApproveTaskTool, RejectTaskTool, AddCommentTool, ReadCommentsTool] +
         [ReadTaskHistoryTool] +
@@ -235,7 +236,7 @@ _TASK_TYPE_TOOLS: dict[str, list] = {
     # Researcher investigating — needs web, knowledge, file, code interpreter
     "research": (
         WEB_TOOLS + FILE_TOOLS + KNOWLEDGE_TOOLS +
-        [CreateHypothesisTool] +
+        [CreateHypothesisTool, ReadReferenceFilesTool] +
         [GetTaskTool, UpdateTaskStatusTool, AddCommentTool, ReadCommentsTool] +
         [ReadTaskHistoryTool, SaveSessionNoteTool, LoadSessionNoteTool] +
         [SendMessageTool, AskTeamLeadTool] +
@@ -246,7 +247,7 @@ _TASK_TYPE_TOOLS: dict[str, list] = {
         [GetTaskTool, ReadTasksTool] +
         [ReadTaskHistoryTool, CheckDependenciesTool] +
         COMMUNICATION_TOOLS +
-        [ReadFindingsTool, SearchFindingsTool, ReadWikiTool, SearchWikiTool] +
+        [ReadFindingsTool, SearchFindingsTool, ReadWikiTool, SearchWikiTool, ReadReferenceFilesTool] +
         [ReadEpicsTool, ReadMilestonesTool] +
         [WebSearchTool, ExecuteCommandTool, CodeInterpreterTool, NL2SQLTool]
     ),
@@ -257,7 +258,7 @@ _TASK_TYPE_TOOLS: dict[str, list] = {
         [ReadTaskHistoryTool, CheckDependenciesTool] +
         COMMUNICATION_TOOLS +
         [CreateEpicTool, CreateMilestoneTool, ReadEpicsTool, ReadMilestonesTool] +
-        [ReadFindingsTool, SearchFindingsTool, ReadWikiTool, SearchWikiTool, ReadReportTool] +
+        [ReadFindingsTool, SearchFindingsTool, ReadWikiTool, SearchWikiTool, ReadReportTool, ReadReferenceFilesTool] +
         [WebSearchTool, CodeInterpreterTool, NL2SQLTool]
     ),
     # Project Lead gathering requirements — needs communication, read access

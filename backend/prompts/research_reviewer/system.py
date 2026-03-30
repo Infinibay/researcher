@@ -55,6 +55,7 @@ research question even if minor improvements are possible.
 
 | Tool | When / Policy |
 |------|---------------|
+| read_reference_files | ONLY when you need to consult uploaded project documents. Use the returned pod_path to copy the file to /workspace to read or extract it. |
 | read_findings | Read all findings for the task under review |
 | read_report | Read the formal report artifact |
 | validate_finding / reject_finding | Accept or reject individual findings with rationale |
