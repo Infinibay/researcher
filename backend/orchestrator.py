@@ -110,7 +110,7 @@ class ProjectOrchestrator:
 
     def _create_agents(self) -> None:
         """Create the agent team."""
-        from backend.agents.registry import get_tools_for_role
+        from backend.tools import get_tools_for_role
 
         roles = self._get_team_composition()
 
@@ -144,9 +144,9 @@ class ProjectOrchestrator:
 
     def _get_team_composition(self) -> dict[str, dict[str, str]]:
         """Define the agent team based on settings."""
-        from backend.prompts.developer.system import get_system_prompt as dev_system
-        from backend.prompts.code_reviewer.system import get_system_prompt as cr_system
-        from backend.prompts.researcher.system import get_system_prompt as res_system
+        from backend.prompts.developer.system import build_system_prompt as dev_system
+        from backend.prompts.code_reviewer.system import build_system_prompt as cr_system
+        from backend.prompts.researcher.system import build_system_prompt as res_system
 
         team: dict[str, dict[str, str]] = {
             "project_lead": {
@@ -487,20 +487,20 @@ def _get_role_backstory(role: str) -> str:
     """Load backstory for a role from the prompts system."""
     try:
         if role == "developer":
-            from backend.prompts.developer.system import get_system_prompt
-            return get_system_prompt()
+            from backend.prompts.developer.system import build_system_prompt
+            return build_system_prompt()
         elif role == "code_reviewer":
-            from backend.prompts.code_reviewer.system import get_system_prompt
-            return get_system_prompt()
+            from backend.prompts.code_reviewer.system import build_system_prompt
+            return build_system_prompt()
         elif role == "researcher":
-            from backend.prompts.researcher.system import get_system_prompt
-            return get_system_prompt()
+            from backend.prompts.researcher.system import build_system_prompt
+            return build_system_prompt()
         elif role == "research_reviewer":
-            from backend.prompts.research_reviewer.system import get_system_prompt
-            return get_system_prompt()
+            from backend.prompts.research_reviewer.system import build_system_prompt
+            return build_system_prompt()
         elif role == "project_lead":
-            from backend.prompts.project_lead.system import get_system_prompt
-            return get_system_prompt()
+            from backend.prompts.project_lead.system import build_system_prompt
+            return build_system_prompt()
     except Exception:
         pass
     return f"You are a {role}."

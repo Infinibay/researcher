@@ -94,8 +94,45 @@ def _run_initial_index(project_id: int = 1) -> None:
         print(f"failed ({exc})")
 
 
+def _auto_detect_model() -> str | None:
+    """Auto-detect first available Ollama model if no model is configured."""
+    import subprocess
+
+    try:
+        result = subprocess.run(
+            ["ollama", "list"],
+            capture_output=True, text=True, timeout=5,
+        )
+        if result.returncode != 0:
+            return None
+        for line in result.stdout.strip().splitlines()[1:]:  # skip header
+            name = line.split()[0]
+            if name:
+                return f"ollama_chat/{name}"
+    except (FileNotFoundError, subprocess.TimeoutExpired):
+        pass
+    return None
+
+
 def _setup_llm() -> None:
     """Initialize LLM configuration and probe model capabilities."""
+    from backend.config.settings import settings
+
+    if not settings.LLM_MODEL:
+        detected = _auto_detect_model()
+        if detected:
+            settings.LLM_MODEL = detected
+            print(f"No model configured — auto-detected: {detected}")
+        else:
+            logger.warning("No LLM model configured and Ollama not available")
+            return
+
+    # Ensure ollama models use ollama_chat provider
+    if not "/" in settings.LLM_MODEL:
+        settings.LLM_MODEL = f"ollama_chat/{settings.LLM_MODEL}"
+    elif settings.LLM_MODEL.startswith("ollama/"):
+        settings.LLM_MODEL = settings.LLM_MODEL.replace("ollama/", "ollama_chat/", 1)
+
     from backend.config.llm import get_litellm_params, validate_function_calling
     from backend.config.model_capabilities import probe_model
 

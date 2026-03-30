@@ -101,7 +101,7 @@ class Settings(BaseSettings):
     #   deepseek:  "deepseek/deepseek-chat"  (reasoner does NOT support tools)
     # Centralized LLM object: see backend/config/llm.py
     LLM_MODEL: str = ""
-    LLM_BASE_URL: str = ""
+    LLM_BASE_URL: str = "http://localhost:11434"
     LLM_API_KEY: str = ""
     LLM_THINKING: bool = False  # Enable/disable thinking mode (Qwen3, etc.)
 
