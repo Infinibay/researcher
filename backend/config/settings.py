@@ -3,8 +3,10 @@
 import os
 from pathlib import Path
 
+from pydantic import AliasChoices, Field, field_validator
 from pydantic_settings import BaseSettings
 
+from backend.config.paths import resolve_database_path
 
 # ── Auto-derive embedding defaults from LLM provider ────────────────────────
 
@@ -29,11 +31,16 @@ def _extract_provider(model: str) -> str:
 
 
 class Settings(BaseSettings):
-    # Database — defaults to .researcher/researcher.db relative to cwd
-    DB_PATH: str = os.environ.get(
-        "INFINIBAY_DB",
-        str(Path(os.getcwd()) / ".researcher" / "researcher.db"),
+    DB_PATH: str = Field(
+        default_factory=resolve_database_path,
+        validation_alias=AliasChoices("INFINIBAY_DB", "INFINIBAY_DB_PATH", "DB_PATH"),
     )
+
+    @field_validator("DB_PATH", mode="before")
+    @classmethod
+    def normalize_database_path(cls, value: str) -> str:
+        return resolve_database_path(explicit_path=value)
+
     MAX_RETRIES: int = 5
     RETRY_BASE_DELAY: float = 0.1  # 100ms
 

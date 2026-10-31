@@ -17,13 +17,14 @@ from backend.tools.base.db import (
 
 
 class TestGetDbPath:
-    def test_default_path(self):
-        original = os.environ.pop("INFINIBAY_DB", None)
-        try:
-            assert get_db_path() == "/research/infinibay.db"
-        finally:
-            if original:
-                os.environ["INFINIBAY_DB"] = original
+    def test_settings_path_when_no_environment_override(self, monkeypatch):
+        from backend.config.settings import settings
+
+        monkeypatch.delenv("INFINIBAY_DB", raising=False)
+        monkeypatch.delenv("INFINIBAY_DB_PATH", raising=False)
+        monkeypatch.setattr(settings, "DB_PATH", "/configured/project.db")
+
+        assert get_db_path() == "/configured/project.db"
 
     def test_env_override(self):
         os.environ["INFINIBAY_DB"] = "/custom/path.db"

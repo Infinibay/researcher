@@ -6,11 +6,47 @@ Agents collaborate through an event-driven architecture: a team lead plans work,
 
 ## Requirements
 
-- **Python 3.12+**
-- **Node.js 20+** (for the frontend)
+- **Python 3.12 or 3.13** (the transitional CrewAI dependency does not support 3.14)
+- **uv** (locked Python installation)
+- **Node.js 24 LTS** (for the frontend; version in `frontend/.node-version`)
 - **Podman** or **Docker** (for sandbox and Forgejo)
 - **Ollama** (for local LLM inference)
 - A machine with at least 16GB RAM and a GPU with 12GB+ VRAM for 14B models
+
+## Reproducible development setup
+
+```bash
+uv sync --locked
+uv run --locked pytest
+cd frontend
+npm ci
+npm run build
+```
+
+The test command blocks external sockets and limits each test to 20 seconds.
+Real-provider tests must run separately with explicit limits; ordinary tests do
+not require provider credentials. The current baseline still contains known
+failures, listed in [the baseline report](docs/modernization/baseline.md).
+
+Declare Python dependencies in `pyproject.toml`, regenerate `uv.lock`, then
+export the compatibility file instead of editing it by hand:
+
+```bash
+uv export --locked --no-dev --no-emit-project --format requirements-txt --output-file requirements.txt
+```
+
+The standalone MCP server has its own locked script environment:
+
+```bash
+uv run --locked --script scripts/infinibay_mcp_server.py
+```
+
+Set `INFINIBAY_DB` to select a database explicitly. Without an override, an
+existing recognized database is reused; multiple databases require a choice.
+A new workspace uses `.data/infinibay.db`. Startup does not move existing data.
+
+Implementation status for the modernization is recorded in
+[the execution ledger](docs/modernization/progress.md).
 
 ## Quick Start
 

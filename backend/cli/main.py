@@ -45,27 +45,10 @@ def _ensure_researcher_home() -> Path:
 
 
 def _init_db() -> None:
-    """Initialize the SQLite database."""
-    from backend.tools.base.db import get_connection
+    """Initialize or migrate before continuing; startup must expose failures."""
+    from backend.tools.base.db import ensure_migrations
 
-    # Just opening a connection with WAL mode triggers table creation
-    # if the init_db function exists
-    try:
-        from backend.tools.base.db import execute_with_retry
-        import sqlite3
-
-        def _check(conn: sqlite3.Connection) -> bool:
-            # Check if the basic tables exist
-            row = conn.execute(
-                "SELECT name FROM sqlite_master WHERE type='table' AND name='projects'"
-            ).fetchone()
-            return row is not None
-
-        exists = execute_with_retry(_check)
-        if not exists:
-            logger.info("Database tables not found — running initialization")
-    except Exception:
-        pass
+    ensure_migrations()
 
 
 def _run_initial_index(project_id: int = 1) -> None:

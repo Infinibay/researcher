@@ -51,8 +51,13 @@
       "evidence": []
     },
     "E03": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "backend/tests/flows/test_listener_lifecycle.py"
+      ],
+      "remaining": [
+        "Full scenario requires runtime/startup integration beyond these tests"
+      ]
     },
     "E04": {
       "status": "pending",
@@ -91,8 +96,13 @@
       "evidence": []
     },
     "D01": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "backend/tests/tools/test_database_initialization.py"
+      ],
+      "remaining": [
+        "Full scenario requires runtime/startup integration beyond these tests"
+      ]
     },
     "D02": {
       "status": "pending",
@@ -177,16 +187,37 @@
   },
   "deliverables": {
     "baseline": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/modernization/baseline.md",
+        "docs/modernization/baseline-results.json",
+        "docs/modernization/data-inventory.json"
+      ],
+      "remaining": [
+        "Runtime Stop/duplicate-effect reproductions"
+      ]
     },
     "locked_install": {
-      "status": "pending",
-      "evidence": []
+      "status": "verified",
+      "evidence": [
+        "pyproject.toml",
+        "uv.lock",
+        "requirements.txt",
+        "scripts/infinibay_mcp_server.py.lock",
+        "docs/modernization/baseline.md"
+      ]
     },
     "database_config": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "backend/config/paths.py",
+        "backend/tests/config/test_database_paths.py",
+        "backend/tests/tools/test_database_initialization.py"
+      ],
+      "remaining": [
+        "Historical migration and restore validation",
+        "Safe bootstrap and inference-free startup"
+      ]
     },
     "runtime_comparison": {
       "status": "pending",

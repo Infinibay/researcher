@@ -11,8 +11,9 @@ build/
 # Virtual environment
 .venv/
 
-# uv
-.python-version
+# Local application data
+.researcher/
+.ken/
 
 # pytest
 .pytest_cache/

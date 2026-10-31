@@ -43,4 +43,20 @@ Files: `pyproject.toml`, `uv.lock`, generated `requirements.txt`, development to
 3. Declare actual direct dependencies and dev tools once, generate the lock and requirements export, and validate a clean locked install.
 4. Address configuration/startup failures with failing behavioral tests before implementation.
 
-Installed transitional dependencies include CrewAI 1.15.33, crewai-tools 1.15.33, FastAPI 0.162.0, Pydantic 2.12.5, LiteLLM 1.106.6, ChromaDB 1.5.9 and pytest 9.2.0. This is an observed baseline resolution, not the final retained stack. Baseline suite is in progress; no pass claim is made.
+Installed transitional dependencies include CrewAI 1.15.33, crewai-tools 1.15.33, FastAPI 0.162.0, Pydantic 2.12.5, LiteLLM 1.106.6, ChromaDB 1.5.9 and pytest 9.2.0. This is an observed baseline resolution, not the final retained stack.
+
+## Evidence and decisions from the first implementation pass
+
+- Baseline: 813 tests; 710 passed, 100 failed, 3 skipped. Frontend original build passed on Node 24.22.2. Reports: `baseline.md`, `baseline-results.json`. No model calls or real data migrations.
+- Data inventory checked six known locations in the original workspace/container default; none exists. `data-inventory.json` records exact scope. This is not proof that no database exists at an externally configured location.
+- Ten new database tests were observed failing, then passed: selection, aliases, ambiguity, clean initialization, repeatability, migration failure propagation and unknown-database preservation. Related database/config tests: 30 passed.
+- Ruling: replace the old test's `/research/infinibay.db` default expectation with the new settings/override contract — the old default contradicted the accepted data-path unification; existing paths are still detected and not moved.
+- Ruling: isolate the standalone MCP script rather than downgrading FastMCP — latest installed FastMCP 4 requires MCP 2 while transitional CrewAI requires MCP 1. Its script lock and JSON-RPC initialize/tools-list check passed with 25 tools; no backend operation or model was invoked. This does not satisfy the final capability matrix or Ken/runtime integration.
+- Ruling: add a 20-second offline test deadline; it exposed a listener shutdown waiting on a 30-second polling sleep. Fix the cause rather than extend the deadline. Two lifecycle tests were observed failing then passing; listener-related tests: 19 passed. Idle Stop now wakes polling; a live check retains ownership and reports timeout rather than pretending it stopped.
+- `uv sync --locked` passed both in the project environment and a fresh environment. The clean environment initialized a temporary database, reported SQLite integrity `ok` and used the same path through settings/connections. The built wheel contains `backend/db/schema.sql`.
+- Full post-change suite: 825 tests; 722 passed, 100 failed, 3 skipped. Its failing test identities match the 100 baseline failures; they are still unresolved. See `foundation-results.json` and the raw logs in this plan's scratch workspace. No whole-suite success claim is made.
+- Ruling: local commits identify the assistant as `Codex <codex@localhost>` via per-command Git options because this host has no author identity configured; no global identity or user configuration was changed.
+
+## Next work
+
+Phase 0 is not fully complete: Stop/duplicate-effects scenarios still need runtime-level reproduction. Phase 1 is partial: safe Forgejo bootstrap, import-time inference removal, historical migration/restore validation and remaining startup work remain. Continue with those safety contracts, then evaluate Codex/Infinidev with bounded real-subscription checks and Ken before selecting the runtime. Do not spend effort repairing every obsolete CrewAI mechanism that phase 4 will retire.

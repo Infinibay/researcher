@@ -29,8 +29,8 @@ OLLAMA_MODEL="${OLLAMA_MODEL#ollama_chat/}"  # strip LiteLLM provider prefix
 OLLAMA_MODEL="${OLLAMA_MODEL#ollama/}"       # also handle ollama/ prefix
 OLLAMA_EMBED_MODEL="${INFINIBAY_EMBEDDING_MODEL:-nomic-embed-text}"
 OLLAMA_HOST="${OLLAMA_HOST:-http://localhost:11434}"
-DB_DIR="$SCRIPT_DIR/.data"
-DB_PATH="$DB_DIR/infinibay.db"
+DB_PATH="$(python3 -c 'from backend.config.paths import resolve_database_path; print(resolve_database_path())')"
+DB_DIR="$(dirname "$DB_PATH")"
 VENV_DIR="$SCRIPT_DIR/.venv"
 FRONTEND_DIR="$SCRIPT_DIR/frontend"
 
@@ -258,36 +258,16 @@ fi
 # ── 3. Python venv ──────────────────────────────────────────────────────────
 step "Python environment"
 
-if [ ! -d "$VENV_DIR" ]; then
-    python3 -m venv "$VENV_DIR"
-    ok "Created .venv"
-fi
-source "$VENV_DIR/bin/activate"
-ok "Activated .venv ($(python3 --version))"
-
-# Install deps if crewai is missing (lightweight check)
-if ! python3 -c "import crewai" &>/dev/null; then
-    step "Installing Python dependencies"
-    python3 -m pip install -q crewai'[tools]' fastapi uvicorn pydantic-settings chromadb openai litellm
-    ok "Core dependencies installed"
-fi
-
-# Install provider-specific deps
+command -v uv >/dev/null 2>&1 || die "uv is required. Install it before running start.sh."
+sync_args=(--locked --no-dev)
 case "$INFINIBAY_LLM_PROVIDER" in
-    gemini)
-        if ! python3 -c "import google.genai" &>/dev/null; then
-            python3 -m pip install -q 'crewai[google-genai]'
-            ok "Installed crewai[google-genai] for Gemini provider"
-        fi
-        ;;
-    anthropic)
-        if ! python3 -c "import anthropic" &>/dev/null; then
-            python3 -m pip install -q anthropic
-            ok "Installed anthropic SDK"
-        fi
+    gemini|anthropic)
+        sync_args+=(--extra "$INFINIBAY_LLM_PROVIDER")
         ;;
 esac
-ok "Python dependencies present"
+UV_PROJECT_ENVIRONMENT="$VENV_DIR" uv sync "${sync_args[@]}"
+source "$VENV_DIR/bin/activate"
+ok "Activated locked Python environment ($(python3 --version))"
 
 # ── 4. Database ─────────────────────────────────────────────────────────────
 step "Database"

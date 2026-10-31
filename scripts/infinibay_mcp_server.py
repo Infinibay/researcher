@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""INFINIBAY MCP Server — exposes project operations as MCP tools for Claude Code.
+# /// script
+# requires-python = ">=3.12"
+# dependencies = ["fastmcp==4.1.4"]
+# ///
+"""INFINIBAY MCP Server — exposes project operations to MCP clients.
 
 Standalone script. Reads env vars and makes HTTP calls to the INFINIBAY backend.
 Does NOT import anything from the ``backend`` package.

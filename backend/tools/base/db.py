@@ -6,20 +6,20 @@ import random
 import sqlite3
 import time
 from contextlib import contextmanager
+from pathlib import Path
 from typing import Any, Callable, TypeVar
 
+from backend.config.paths import resolve_database_path
 from backend.config.settings import settings
 
 logger = logging.getLogger(__name__)
 
 T = TypeVar("T")
 
-DEFAULT_DB_PATH = "/research/infinibay.db"
-
-
 def get_db_path() -> str:
-    """Get database path from environment or default."""
-    return os.environ.get("INFINIBAY_DB", DEFAULT_DB_PATH)
+    """Use the same resolved database as settings and startup entry points."""
+    override = os.environ.get("INFINIBAY_DB") or os.environ.get("INFINIBAY_DB_PATH")
+    return resolve_database_path(explicit_path=override or settings.DB_PATH)
 
 
 def get_connection(db_path: str | None = None) -> sqlite3.Connection:
@@ -123,8 +123,28 @@ def ensure_migrations(db_path: str | None = None) -> None:
     if db_path is None:
         db_path = get_db_path()
 
+    Path(db_path).parent.mkdir(parents=True, exist_ok=True)
     conn = get_connection(db_path)
     try:
+        tables = {
+            row[0] for row in conn.execute(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'"
+            )
+        }
+        if not tables:
+            schema = (Path(__file__).resolve().parents[2] / "db" / "schema.sql").read_text()
+            # Connection pragmas are already configured; some cannot change
+            # inside the transaction that makes initial schema creation atomic.
+            schema = "\n".join(
+                line for line in schema.splitlines() if not line.lstrip().startswith("PRAGMA ")
+            )
+            conn.executescript("BEGIN IMMEDIATE;\n" + schema + "\nCOMMIT;")
+        elif "schema_migrations" not in tables:
+            raise RuntimeError(
+                "Database has existing tables but no schema_migrations history; "
+                "refusing to initialize or overwrite an unrecognized database."
+            )
+
         applied = {
             row[0]
             for row in conn.execute(
@@ -254,6 +274,7 @@ def ensure_migrations(db_path: str | None = None) -> None:
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()
+        raise
     finally:
         conn.close()
 

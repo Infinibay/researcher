@@ -1,0 +1,43 @@
+{
+  "source_workspace": "/home/andres/Proyects/researcher",
+  "contents_read": false,
+  "copies_or_migrations_performed": false,
+  "entries": [
+    {
+      "path": ".data/infinibay.db",
+      "exists": false,
+      "kind": null,
+      "bytes": null
+    },
+    {
+      "path": ".researcher/researcher.db",
+      "exists": false,
+      "kind": null,
+      "bytes": null
+    },
+    {
+      "path": ".data/artifacts",
+      "exists": false,
+      "kind": null,
+      "bytes": null
+    },
+    {
+      "path": ".data/uploads",
+      "exists": false,
+      "kind": null,
+      "bytes": null
+    },
+    {
+      "path": ".data/forgejo",
+      "exists": false,
+      "kind": null,
+      "bytes": null
+    },
+    {
+      "path": "/research/infinibay.db",
+      "exists": false,
+      "kind": null,
+      "bytes": null
+    }
+  ]
+}
