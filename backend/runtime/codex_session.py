@@ -74,13 +74,17 @@ class CodexSession:
 
     def __init__(self, rpc: StdioRpcClient, *, workspace: Path, model: str,
                  limits: ExecutionLimits, resume_thread_id: str | None = None,
-                 developer_instructions: str | None = None) -> None:
+                 developer_instructions: str | None = None,
+                 sandbox: str = "workspace-write") -> None:
         self.rpc = rpc
         self.workspace = workspace.resolve()
         self.model = model
         self.limits = limits
         self.resume_thread_id = resume_thread_id
         self.developer_instructions = developer_instructions
+        if sandbox not in ("read-only", "workspace-write"):
+            raise ValueError("Unsupported native filesystem scope")
+        self.sandbox = sandbox
         self.thread_id: str | None = None
         self.turn_id: str | None = None
         self.turns_sent = 0
@@ -102,7 +106,7 @@ class CodexSession:
                 raise SubscriptionRequired("Sign in using codex login with your ChatGPT subscription")
             params = {
                 "cwd": str(self.workspace), "model": self.model, "modelProvider": "openai",
-                "approvalPolicy": "on-request", "sandbox": "workspace-write",
+                "approvalPolicy": "on-request", "sandbox": self.sandbox,
             }
             if self.developer_instructions:
                 params["developerInstructions"] = self.developer_instructions

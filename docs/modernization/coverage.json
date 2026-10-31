@@ -90,7 +90,10 @@
       "status": "in_progress",
       "evidence": [
         "backend/runtime/codex_session.py",
-        "backend/tests/runtime/test_codex_session.py"
+        "backend/tests/runtime/test_codex_session.py",
+        "docs/architecture/capability-matrix.md",
+        "docs/architecture/inference-inventory.md",
+        "docs/modernization/research-runtime-evidence.json"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -100,15 +103,22 @@
       "status": "in_progress",
       "evidence": [
         "backend/runtime/codex_session.py",
-        "backend/tests/runtime/test_codex_session.py"
+        "backend/tests/runtime/test_codex_session.py",
+        "docs/architecture/capability-matrix.md",
+        "docs/architecture/inference-inventory.md",
+        "docs/modernization/research-runtime-evidence.json"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
       ]
     },
     "E09": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/capability-matrix.md",
+        "docs/architecture/inference-inventory.md",
+        "docs/modernization/research-runtime-evidence.json"
+      ]
     },
     "E10": {
       "status": "pending",
@@ -199,7 +209,10 @@
       "evidence": [
         "backend/tests/research",
         "docs/architecture/research-slice.md",
-        "docs/modernization/research-mcp-evidence.json"
+        "docs/modernization/research-mcp-evidence.json",
+        "docs/architecture/capability-matrix.md",
+        "docs/architecture/inference-inventory.md",
+        "docs/modernization/research-runtime-evidence.json"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
@@ -221,7 +234,10 @@
       "evidence": [
         "backend/tests/research",
         "docs/architecture/research-slice.md",
-        "docs/modernization/research-mcp-evidence.json"
+        "docs/modernization/research-mcp-evidence.json",
+        "docs/architecture/capability-matrix.md",
+        "docs/architecture/inference-inventory.md",
+        "docs/modernization/research-runtime-evidence.json"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
@@ -232,23 +248,34 @@
       "evidence": []
     },
     "U01": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/capability-matrix.md",
+        "docs/architecture/inference-inventory.md",
+        "docs/modernization/research-runtime-evidence.json"
+      ]
     },
     "U02": {
       "status": "in_progress",
       "evidence": [
         "backend/tests/research",
         "docs/architecture/research-slice.md",
-        "docs/modernization/research-mcp-evidence.json"
+        "docs/modernization/research-mcp-evidence.json",
+        "docs/architecture/capability-matrix.md",
+        "docs/architecture/inference-inventory.md",
+        "docs/modernization/research-runtime-evidence.json"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
       ]
     },
     "U03": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/capability-matrix.md",
+        "docs/architecture/inference-inventory.md",
+        "docs/modernization/research-runtime-evidence.json"
+      ]
     },
     "U04": {
       "status": "pending",

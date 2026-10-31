@@ -17,11 +17,54 @@ readiness before submitting the manifest's prompt. Disable unrelated MCP/apps,
 remove inherited API keys/base URL overrides, and enforce the manifest's bounds
 outside the model. Infinidev needs explicit MCP prewarm in its web harness.
 
-The current live harnesses are development probes retained in this plan's
-scratch workspace; a portable automated live-evaluation runner is still pending.
-Do not treat this directory as a completed benchmark or run its slow tool as part
-of the common test suite. Live tasks require explicit invocation, subscription
-access and the same external guards.
+The original code/control probes remain in the plan's scratch workspace. The
+attachment/web → finding → report scenario now has an explicit portable runner,
+`run_research.py`, with its separate `research_manifest.json` and the same prompt
+for both candidates. This is not a completed benchmark or a prompt experiment.
+Never run the slow tool or a model task as part of the common test suite.
+
+From the managed project environment, install published `ken-rank==0.18.0` into
+an isolated tool environment and pass its absolute executable path. Codex CLI
+0.166.0 must already have a managed ChatGPT login. Run one candidate at a time:
+
+```sh
+.venv/bin/python evals/runtime/run_research.py --live --candidate codex \
+  --ken-command /absolute/path/to/ken
+
+.venv/bin/python evals/runtime/run_research.py --live --candidate infinidev \
+  --ken-command /absolute/path/to/ken \
+  --infinidev-python /absolute/path/to/isolated-infinidev-env/bin/python
+```
+
+For Infinidev, the supplied environment must contain the evaluated 0.30.0
+release. Its test shim prewarms both MCPs, enforces the subscription completion
+route and supplies the business grant privately to the MCP child. It does not
+modify Infinidev source or inherit a paid provider key. Runtime-version checks
+occur before the model task; `--live` is mandatory. Output defaults to an ignored
+`.researcher/evaluations/<unique-trial>/` directory, with manifest, native
+events, temporary SQLite database, logs and result. Keep failed trials too.
+
+The runner creates synthetic projects and files, runs the real backend and
+locked business MCP, and serializes campaigns under an OS lock. Each trial has
+a 180-second task wall deadline, a 90-second no-tool-progress fuse, one native
+turn, 25 observed tool items and 350,000 observed tokens. Infinidev also has a
+32-completion-call fuse. These fuses do not imply equivalent internal request
+counts or known remaining quota. Unreported token usage stays unknown.
+
+The host independently checks persisted sources/citations, provisional finding,
+draft report, numeric markers and the actual artifact HTTP response. It also
+checks tracked file hashes, Git index/HEAD and unexpected output paths. Known
+runtime state (`.ken/`, `.infinidev/`, `.mcp.json`) is excluded from the output
+check. These checks prove final fixture state, not OS isolation or absence of
+transient effects. Human explanation quality, rendered `/reports`, full task
+acceptance and all product-level cancellation/recovery remain separate gates.
+
+Do not restart a live trial after an observation timeout. Re-poll its process
+handle, inspect the same unique trial and reconcile terminal state first. Reuse
+an operation key after an uncertain business-tool receipt rather than creating
+a fresh key. At teardown the runner revokes the business grant and reaps its
+owned server processes. Raw trial directories may contain native conversation
+data; durable excerpts belong in `docs/modernization/` after inspection.
 
 For code corrections, independently run `python -B -m unittest -v` and inspect
 Git diff against the baseline; model claims are not verification. For

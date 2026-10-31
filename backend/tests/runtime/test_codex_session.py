@@ -251,3 +251,14 @@ async def test_interrupted_turn_reaps_connection_before_returning_to_the_host(tm
             os.kill(pid,0)
         with pytest.raises(RpcDisconnected):
             await runtime.rpc.request('echo')
+
+
+async def test_readonly_research_request_does_not_start_a_writable_native_thread(tmp_path):
+    from backend.runtime.codex_session import CodexSession
+    prepared=session(tmp_path)
+    runtime=CodexSession(prepared.rpc,workspace=tmp_path,model='test-model',limits=prepared.limits,sandbox='read-only')
+    async with runtime:
+        assert (await runtime.run('answer')).status=='completed'
+    thread=next(r for r in requests(tmp_path) if r['method']=='thread/start')
+    assert thread['params']['sandbox']=='read-only'
+    assert thread['params']['approvalPolicy']=='on-request'

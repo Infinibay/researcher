@@ -1,0 +1,2969 @@
+{
+  "source": "backend.tools.ALL_TOOL_CLASSES declarations; not an MCP wire catalogue",
+  "runtime_selected": false,
+  "tools": [
+    {
+      "name": "read_file",
+      "class": "ReadFileTool",
+      "path": "backend/tools/file/read_file.py",
+      "category": "file",
+      "input_schema": {
+        "properties": {
+          "path": {
+            "description": "Path to the file to read",
+            "title": "Path",
+            "type": "string"
+          },
+          "offset": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Line number to start reading from (1-based). If omitted, reads from the beginning of the file.",
+            "title": "Offset"
+          },
+          "limit": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Maximum number of lines to read. If omitted, reads until the end of the file.",
+            "title": "Limit"
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "title": "ReadFileInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "write_file",
+      "class": "WriteFileTool",
+      "path": "backend/tools/file/write_file.py",
+      "category": "file",
+      "input_schema": {
+        "properties": {
+          "path": {
+            "description": "Path to the file to write",
+            "title": "Path",
+            "type": "string"
+          },
+          "content": {
+            "description": "Content to write to the file",
+            "title": "Content",
+            "type": "string"
+          },
+          "mode": {
+            "default": "w",
+            "description": "Write mode: 'w' to overwrite, 'a' to append",
+            "enum": [
+              "w",
+              "a"
+            ],
+            "title": "Mode",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "content"
+        ],
+        "title": "WriteFileInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "edit_file",
+      "class": "EditFileTool",
+      "path": "backend/tools/file/edit_file.py",
+      "category": "file",
+      "input_schema": {
+        "properties": {
+          "path": {
+            "description": "Path to the file to edit",
+            "title": "Path",
+            "type": "string"
+          },
+          "old_string": {
+            "description": "The exact text to find in the file. Must match exactly (including indentation and whitespace). Must be unique in the file — if it appears more than once, provide more surrounding context to make it unique, or use replace_all=true.",
+            "title": "Old String",
+            "type": "string"
+          },
+          "new_string": {
+            "description": "The text to replace old_string with. Must differ from old_string.",
+            "title": "New String",
+            "type": "string"
+          },
+          "replace_all": {
+            "default": false,
+            "description": "If true, replace ALL occurrences of old_string in the file. Useful for renaming variables or updating repeated patterns.",
+            "title": "Replace All",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "path",
+          "old_string",
+          "new_string"
+        ],
+        "title": "EditFileInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "list_directory",
+      "class": "ListDirectoryTool",
+      "path": "backend/tools/file/list_directory.py",
+      "category": "file",
+      "input_schema": {
+        "properties": {
+          "path": {
+            "default": ".",
+            "description": "Directory path to list",
+            "title": "Path",
+            "type": "string"
+          },
+          "recursive": {
+            "default": false,
+            "description": "Whether to list recursively",
+            "title": "Recursive",
+            "type": "boolean"
+          },
+          "pattern": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Glob pattern to filter files (e.g. '*.py')",
+            "title": "Pattern"
+          }
+        },
+        "title": "ListDirectoryInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "code_search",
+      "class": "CodeSearchTool",
+      "path": "backend/tools/file/code_search.py",
+      "category": "file",
+      "input_schema": {
+        "properties": {
+          "pattern": {
+            "description": "Search pattern (text or regex) to find in source files",
+            "title": "Pattern",
+            "type": "string"
+          },
+          "path": {
+            "default": ".",
+            "description": "Directory to search in (default: current directory)",
+            "title": "Path",
+            "type": "string"
+          },
+          "file_extensions": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Filter by file extensions, e.g. ['.py', '.js']. None searches all files.",
+            "title": "File Extensions"
+          },
+          "case_sensitive": {
+            "default": true,
+            "description": "Whether the search is case sensitive",
+            "title": "Case Sensitive",
+            "type": "boolean"
+          },
+          "max_results": {
+            "default": 50,
+            "description": "Maximum number of matches to return",
+            "maximum": 200,
+            "minimum": 1,
+            "title": "Max Results",
+            "type": "integer"
+          },
+          "context_lines": {
+            "default": 0,
+            "description": "Lines of context before and after each match",
+            "maximum": 5,
+            "minimum": 0,
+            "title": "Context Lines",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "pattern"
+        ],
+        "title": "CodeSearchInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "glob",
+      "class": "GlobTool",
+      "path": "backend/tools/file/glob_tool.py",
+      "category": "file",
+      "input_schema": {
+        "properties": {
+          "pattern": {
+            "description": "Glob pattern to match file paths. Supports ** for recursive matching. Examples: '**/*.py' (all Python files), 'src/**/*.test.ts' (all test files under src), '**/migrations/*.sql' (all SQL migrations), '*.md' (markdown files in current dir only).",
+            "title": "Pattern",
+            "type": "string"
+          },
+          "path": {
+            "default": ".",
+            "description": "Base directory to search from (default: current directory).",
+            "title": "Path",
+            "type": "string"
+          },
+          "content_pattern": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Optional regex pattern to filter files by content. Only files whose content matches this pattern will be returned. Example: 'class.*Tool', 'def test_', 'TODO|FIXME'.",
+            "title": "Content Pattern"
+          },
+          "case_sensitive": {
+            "default": true,
+            "description": "Whether the content_pattern match is case sensitive (default: true).",
+            "title": "Case Sensitive",
+            "type": "boolean"
+          },
+          "max_results": {
+            "default": 100,
+            "description": "Maximum number of matching files to return (default: 100).",
+            "maximum": 500,
+            "minimum": 1,
+            "title": "Max Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "pattern"
+        ],
+        "title": "GlobInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "git_branch",
+      "class": "GitBranchTool",
+      "path": "backend/tools/git/branch.py",
+      "category": "git",
+      "input_schema": {
+        "properties": {
+          "branch_name": {
+            "description": "Name of the branch",
+            "title": "Branch Name",
+            "type": "string"
+          },
+          "create": {
+            "default": true,
+            "description": "Create the branch if True, checkout if False",
+            "title": "Create",
+            "type": "boolean"
+          },
+          "base_branch": {
+            "default": "main",
+            "description": "Base branch to create from",
+            "title": "Base Branch",
+            "type": "string"
+          }
+        },
+        "required": [
+          "branch_name"
+        ],
+        "title": "GitBranchInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "git_commit",
+      "class": "GitCommitTool",
+      "path": "backend/tools/git/commit.py",
+      "category": "git",
+      "input_schema": {
+        "properties": {
+          "message": {
+            "description": "Commit message",
+            "title": "Message",
+            "type": "string"
+          },
+          "files": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Specific files to stage. If None, stages all changes (git add -A).",
+            "title": "Files"
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "title": "GitCommitInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "git_push",
+      "class": "GitPushTool",
+      "path": "backend/tools/git/push.py",
+      "category": "git",
+      "input_schema": {
+        "properties": {
+          "branch": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Branch to push. If None, pushes current branch.",
+            "title": "Branch"
+          },
+          "force": {
+            "default": false,
+            "description": "Force push (use with caution)",
+            "title": "Force",
+            "type": "boolean"
+          }
+        },
+        "title": "GitPushInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "git_diff",
+      "class": "GitDiffTool",
+      "path": "backend/tools/git/diff.py",
+      "category": "git",
+      "input_schema": {
+        "properties": {
+          "branch": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Branch to diff against (e.g. 'main')",
+            "title": "Branch"
+          },
+          "file": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Specific file to diff",
+            "title": "File"
+          },
+          "staged": {
+            "default": false,
+            "description": "Show only staged changes",
+            "title": "Staged",
+            "type": "boolean"
+          }
+        },
+        "title": "GitDiffInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "git_status",
+      "class": "GitStatusTool",
+      "path": "backend/tools/git/status.py",
+      "category": "git",
+      "input_schema": {
+        "properties": {},
+        "title": "GitStatusInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "create_pr",
+      "class": "CreatePRTool",
+      "path": "backend/tools/git/create_pr.py",
+      "category": "git",
+      "input_schema": {
+        "properties": {
+          "title": {
+            "description": "Pull request title",
+            "title": "Title",
+            "type": "string"
+          },
+          "body": {
+            "description": "Pull request description/body",
+            "title": "Body",
+            "type": "string"
+          },
+          "base": {
+            "default": "main",
+            "description": "Base branch to merge into",
+            "title": "Base",
+            "type": "string"
+          },
+          "draft": {
+            "default": false,
+            "description": "Create as draft PR",
+            "title": "Draft",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "title",
+          "body"
+        ],
+        "title": "CreatePRInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "merge_pr",
+      "class": "MergePRTool",
+      "path": "backend/tools/git/merge_pr.py",
+      "category": "git",
+      "input_schema": {
+        "properties": {
+          "pr_number": {
+            "description": "The PR number (Forgejo PR index) to merge",
+            "title": "Pr Number",
+            "type": "integer"
+          },
+          "merge_message": {
+            "default": "",
+            "description": "Optional merge commit message",
+            "title": "Merge Message",
+            "type": "string"
+          }
+        },
+        "required": [
+          "pr_number"
+        ],
+        "title": "MergePRInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "create_task",
+      "class": "CreateTaskTool",
+      "path": "backend/tools/task/create_task.py",
+      "category": "task",
+      "input_schema": {
+        "properties": {
+          "title": {
+            "description": "Task title",
+            "title": "Title",
+            "type": "string"
+          },
+          "description": {
+            "description": "Detailed task description",
+            "title": "Description",
+            "type": "string"
+          },
+          "type": {
+            "description": "Task type: plan, research, investigation, code, review, test, design, integrate, documentation, bug_fix",
+            "title": "Type",
+            "type": "string"
+          },
+          "milestone_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Associated milestone ID",
+            "title": "Milestone Id"
+          },
+          "epic_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Associated epic ID",
+            "title": "Epic Id"
+          },
+          "priority": {
+            "default": 2,
+            "description": "Priority 1 (lowest) to 5 (highest)",
+            "maximum": 5,
+            "minimum": 1,
+            "title": "Priority",
+            "type": "integer"
+          },
+          "complexity": {
+            "default": "medium",
+            "description": "Complexity: trivial, low, medium, high, very_high",
+            "title": "Complexity",
+            "type": "string"
+          },
+          "depends_on": {
+            "description": "List of task IDs this depends on",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Depends On",
+            "type": "array"
+          }
+        },
+        "required": [
+          "title",
+          "description",
+          "type"
+        ],
+        "title": "CreateTaskInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "take_task",
+      "class": "TakeTaskTool",
+      "path": "backend/tools/task/take_task.py",
+      "category": "task",
+      "input_schema": {
+        "properties": {
+          "task_id": {
+            "description": "ID of the task to take",
+            "title": "Task Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "task_id"
+        ],
+        "title": "TakeTaskInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "update_task_status",
+      "class": "UpdateTaskStatusTool",
+      "path": "backend/tools/task/update_status.py",
+      "category": "task",
+      "input_schema": {
+        "properties": {
+          "task_id": {
+            "description": "ID of the task to update",
+            "title": "Task Id",
+            "type": "integer"
+          },
+          "status": {
+            "description": "New status: cancelled, blocked, in_progress, failed, pending, backlog, rejected, review_ready, done",
+            "title": "Status",
+            "type": "string"
+          },
+          "comment": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Optional comment explaining the status change",
+            "title": "Comment"
+          },
+          "branch_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Optional branch name to set on the task (fallback if GitBranchTool didn't auto-set it)",
+            "title": "Branch Name"
+          },
+          "pr_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Optional PR URL to set on the task (fallback if CreatePRTool didn't auto-set it)",
+            "title": "Pr Url"
+          }
+        },
+        "required": [
+          "task_id",
+          "status"
+        ],
+        "title": "UpdateTaskStatusInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "add_comment",
+      "class": "AddCommentTool",
+      "path": "backend/tools/task/add_comment.py",
+      "category": "task",
+      "input_schema": {
+        "properties": {
+          "task_id": {
+            "description": "ID of the task to comment on",
+            "title": "Task Id",
+            "type": "integer"
+          },
+          "comment": {
+            "description": "Comment content",
+            "title": "Comment",
+            "type": "string"
+          },
+          "comment_type": {
+            "default": "comment",
+            "description": "Comment type: comment, change_request, approval, question, answer",
+            "title": "Comment Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "task_id",
+          "comment"
+        ],
+        "title": "AddCommentInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "read_comments",
+      "class": "ReadCommentsTool",
+      "path": "backend/tools/task/read_comments.py",
+      "category": "task",
+      "input_schema": {
+        "properties": {
+          "task_id": {
+            "description": "ID of the task to read comments from",
+            "title": "Task Id",
+            "type": "integer"
+          },
+          "limit": {
+            "default": 20,
+            "description": "Maximum number of comments to return (newest first)",
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "task_id"
+        ],
+        "title": "ReadCommentsInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_task",
+      "class": "GetTaskTool",
+      "path": "backend/tools/task/get_task.py",
+      "category": "task",
+      "input_schema": {
+        "properties": {
+          "task_id": {
+            "description": "ID of the task to retrieve",
+            "title": "Task Id",
+            "type": "integer"
+          },
+          "include_comments": {
+            "default": false,
+            "description": "Include task comments",
+            "title": "Include Comments",
+            "type": "boolean"
+          },
+          "include_dependencies": {
+            "default": false,
+            "description": "Include task dependencies",
+            "title": "Include Dependencies",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "task_id"
+        ],
+        "title": "GetTaskInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "read_tasks",
+      "class": "ReadTasksTool",
+      "path": "backend/tools/task/read_tasks.py",
+      "category": "task",
+      "input_schema": {
+        "properties": {
+          "status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Filter by status (backlog, pending, in_progress, review_ready, done, rejected, cancelled). Omit to show all statuses.",
+            "title": "Status"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Filter by task type (plan, research, code, review, test, design, integrate, documentation, bug_fix). Omit to show all types.",
+            "title": "Type"
+          },
+          "assignee": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Filter by assigned agent ID. Omit to show all assignees.",
+            "title": "Assignee"
+          },
+          "epic_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Filter by epic ID",
+            "title": "Epic Id"
+          },
+          "milestone_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Filter by milestone ID",
+            "title": "Milestone Id"
+          },
+          "limit": {
+            "default": 50,
+            "description": "Max results to return",
+            "maximum": 200,
+            "minimum": 1,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "title": "ReadTasksInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "set_task_dependencies",
+      "class": "SetTaskDependenciesTool",
+      "path": "backend/tools/task/set_dependencies.py",
+      "category": "task",
+      "input_schema": {
+        "properties": {
+          "task_id": {
+            "description": "ID of the dependent task",
+            "title": "Task Id",
+            "type": "integer"
+          },
+          "depends_on": {
+            "description": "List of task IDs this task depends on",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Depends On",
+            "type": "array"
+          },
+          "dependency_type": {
+            "default": "blocks",
+            "description": "Type: 'blocks', 'related_to', or 'parent_of'",
+            "title": "Dependency Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "task_id",
+          "depends_on"
+        ],
+        "title": "SetTaskDependenciesInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "approve_task",
+      "class": "ApproveTaskTool",
+      "path": "backend/tools/task/approve_task.py",
+      "category": "task",
+      "input_schema": {
+        "properties": {
+          "task_id": {
+            "description": "ID of the task to approve",
+            "title": "Task Id",
+            "type": "integer"
+          },
+          "comment": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Optional approval comment",
+            "title": "Comment"
+          }
+        },
+        "required": [
+          "task_id"
+        ],
+        "title": "ApproveTaskInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "reject_task",
+      "class": "RejectTaskTool",
+      "path": "backend/tools/task/reject_task.py",
+      "category": "task",
+      "input_schema": {
+        "properties": {
+          "task_id": {
+            "description": "ID of the task to reject",
+            "title": "Task Id",
+            "type": "integer"
+          },
+          "reason": {
+            "description": "Reason for rejection / change request",
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "task_id",
+          "reason"
+        ],
+        "title": "RejectTaskInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "save_session_note",
+      "class": "SaveSessionNoteTool",
+      "path": "backend/tools/task/save_session_note.py",
+      "category": "task",
+      "input_schema": {
+        "properties": {
+          "task_id": {
+            "description": "ID of the task being worked on",
+            "title": "Task Id",
+            "type": "integer"
+          },
+          "phase": {
+            "description": "Current work phase: thinking, locating, implementing, testing, decomposing, searching, evaluating, synthesizing, reporting",
+            "title": "Phase",
+            "type": "string"
+          },
+          "notes_json": {
+            "description": "JSON string with the agent's notes (decisions, plan, files reviewed, etc.)",
+            "title": "Notes Json",
+            "type": "string"
+          },
+          "last_file": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The file currently being edited, if any",
+            "title": "Last File"
+          }
+        },
+        "required": [
+          "task_id",
+          "phase",
+          "notes_json"
+        ],
+        "title": "SaveSessionNoteInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "load_session_note",
+      "class": "LoadSessionNoteTool",
+      "path": "backend/tools/task/load_session_note.py",
+      "category": "task",
+      "input_schema": {
+        "properties": {
+          "task_id": {
+            "description": "ID of the task to load the session for",
+            "title": "Task Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "task_id"
+        ],
+        "title": "LoadSessionNoteInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "read_task_history",
+      "class": "ReadTaskHistoryTool",
+      "path": "backend/tools/task/read_task_history.py",
+      "category": "task",
+      "input_schema": {
+        "properties": {
+          "task_id": {
+            "description": "ID of the task to read history for",
+            "title": "Task Id",
+            "type": "integer"
+          },
+          "limit": {
+            "default": 50,
+            "description": "Maximum number of timeline entries to return",
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "task_id"
+        ],
+        "title": "ReadTaskHistoryInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "check_dependencies",
+      "class": "CheckDependenciesTool",
+      "path": "backend/tools/task/check_dependencies.py",
+      "category": "task",
+      "input_schema": {
+        "properties": {
+          "task_id": {
+            "description": "ID of the task to check dependencies for",
+            "title": "Task Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "task_id"
+        ],
+        "title": "CheckDependenciesInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "send_message",
+      "class": "SendMessageTool",
+      "path": "backend/tools/communication/send_message.py",
+      "category": "communication",
+      "input_schema": {
+        "properties": {
+          "message": {
+            "description": "Message content to send",
+            "title": "Message",
+            "type": "string"
+          },
+          "to_agent": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Target agent ID for direct message",
+            "title": "To Agent"
+          },
+          "to_role": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Target role for role-based message",
+            "title": "To Role"
+          },
+          "thread_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Thread ID to reply to. Creates new thread if None.",
+            "title": "Thread Id"
+          },
+          "priority": {
+            "default": 0,
+            "description": "Message priority (0=normal, 3=urgent)",
+            "maximum": 3,
+            "minimum": 0,
+            "title": "Priority",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "title": "SendMessageInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "read_messages",
+      "class": "ReadMessagesTool",
+      "path": "backend/tools/communication/read_messages.py",
+      "category": "communication",
+      "input_schema": {
+        "properties": {
+          "from_agent": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Filter by sender agent ID",
+            "title": "From Agent"
+          },
+          "thread_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Filter by thread ID",
+            "title": "Thread Id"
+          },
+          "unread_only": {
+            "default": true,
+            "description": "Only return unread messages",
+            "title": "Unread Only",
+            "type": "boolean"
+          },
+          "limit": {
+            "default": 50,
+            "description": "Max messages to return",
+            "maximum": 200,
+            "minimum": 1,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "title": "ReadMessagesInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "ask_team_lead",
+      "class": "AskTeamLeadTool",
+      "path": "backend/tools/communication/ask_team_lead.py",
+      "category": "communication",
+      "input_schema": {
+        "properties": {
+          "question": {
+            "description": "Question to ask the Team Lead",
+            "title": "Question",
+            "type": "string"
+          },
+          "thread_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Thread ID to continue an existing conversation. Pass the thread_id from a previous message in this conversation.",
+            "title": "Thread Id"
+          },
+          "wait_for_response": {
+            "default": true,
+            "description": "Wait for a response (polling)",
+            "title": "Wait For Response",
+            "type": "boolean"
+          },
+          "timeout": {
+            "default": 300,
+            "description": "Max seconds to wait for response",
+            "maximum": 600,
+            "minimum": 10,
+            "title": "Timeout",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "question"
+        ],
+        "title": "AskTeamLeadInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "ask_project_lead",
+      "class": "AskProjectLeadTool",
+      "path": "backend/tools/communication/ask_project_lead.py",
+      "category": "communication",
+      "input_schema": {
+        "properties": {
+          "question": {
+            "description": "Question to ask the Project Lead",
+            "title": "Question",
+            "type": "string"
+          },
+          "thread_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Thread ID to continue an existing conversation. Pass the thread_id from a previous message in this conversation.",
+            "title": "Thread Id"
+          },
+          "wait_for_response": {
+            "default": true,
+            "description": "Wait for a response (polling)",
+            "title": "Wait For Response",
+            "type": "boolean"
+          },
+          "timeout": {
+            "default": 300,
+            "description": "Max seconds to wait for response",
+            "maximum": 600,
+            "minimum": 10,
+            "title": "Timeout",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "question"
+        ],
+        "title": "AskProjectLeadInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "ask_user",
+      "class": "AskUserTool",
+      "path": "backend/tools/communication/ask_user.py",
+      "category": "communication",
+      "input_schema": {
+        "properties": {
+          "question": {
+            "description": "Question to ask the user",
+            "title": "Question",
+            "type": "string"
+          },
+          "options": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Optional list of choices for the user",
+            "title": "Options"
+          },
+          "timeout": {
+            "default": 3600,
+            "description": "Max seconds to wait for user response",
+            "maximum": 7200,
+            "minimum": 60,
+            "title": "Timeout",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "question"
+        ],
+        "title": "AskUserInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "reply_to_user",
+      "class": "ReplyToUserTool",
+      "path": "backend/tools/communication/reply_to_user.py",
+      "category": "communication",
+      "input_schema": {
+        "properties": {
+          "message": {
+            "description": "Reply message to send to the user",
+            "title": "Message",
+            "type": "string"
+          },
+          "thread_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Thread ID of the user's message you are replying to. If not provided, creates a new thread.",
+            "title": "Thread Id"
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "title": "ReplyToUserInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "web_search",
+      "class": "WebSearchTool",
+      "path": "backend/tools/web/search.py",
+      "category": "web",
+      "input_schema": {
+        "properties": {
+          "query": {
+            "description": "Search query",
+            "title": "Query",
+            "type": "string"
+          },
+          "num_results": {
+            "default": 10,
+            "description": "Number of results to return",
+            "maximum": 20,
+            "minimum": 1,
+            "title": "Num Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "WebSearchInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "web_fetch",
+      "class": "WebFetchTool",
+      "path": "backend/tools/web/fetch.py",
+      "category": "web",
+      "input_schema": {
+        "properties": {
+          "url": {
+            "description": "URL to fetch content from",
+            "title": "Url",
+            "type": "string"
+          },
+          "format": {
+            "default": "markdown",
+            "description": "Output format: 'markdown' or 'text'",
+            "enum": [
+              "markdown",
+              "text"
+            ],
+            "title": "Format",
+            "type": "string"
+          },
+          "bypass_cache": {
+            "default": false,
+            "description": "Set to true to skip the cache and fetch fresh content",
+            "title": "Bypass Cache",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "title": "WebFetchInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "read_paper",
+      "class": "ReadPaperTool",
+      "path": "backend/tools/web/read_paper.py",
+      "category": "web",
+      "input_schema": {
+        "properties": {
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Direct URL to the paper (PDF or HTML)",
+            "title": "Url"
+          },
+          "doi": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "DOI identifier (e.g. '10.1234/example')",
+            "title": "Doi"
+          },
+          "arxiv_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "arXiv paper ID (e.g. '2301.07041')",
+            "title": "Arxiv Id"
+          }
+        },
+        "title": "ReadPaperInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "deep_web_research",
+      "class": "DeepWebResearchTool",
+      "path": "backend/tools/web/deep_research.py",
+      "category": "web",
+      "input_schema": {
+        "properties": {
+          "query": {
+            "description": "Research question",
+            "title": "Query",
+            "type": "string"
+          },
+          "num_search_results": {
+            "default": 10,
+            "description": "URLs to retrieve from search",
+            "maximum": 20,
+            "minimum": 3,
+            "title": "Num Search Results",
+            "type": "integer"
+          },
+          "max_sources": {
+            "default": 5,
+            "description": "Sources to read and synthesize",
+            "maximum": 10,
+            "minimum": 1,
+            "title": "Max Sources",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "DeepWebResearchInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "scrape_website",
+      "class": "ScrapeWebsiteInfinibayTool",
+      "path": "backend/tools/web/scrape_website.py",
+      "category": "web",
+      "input_schema": {
+        "properties": {
+          "url": {
+            "description": "URL to scrape content from",
+            "title": "Url",
+            "type": "string"
+          },
+          "store_as_finding": {
+            "default": false,
+            "description": "If True, stores the scraped content as a finding for RAG retrieval",
+            "title": "Store As Finding",
+            "type": "boolean"
+          },
+          "topic": {
+            "default": "",
+            "description": "Topic/title for the finding (used when store_as_finding=True)",
+            "title": "Topic",
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "title": "ScrapeWebsiteInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "spider_scrape",
+      "class": "SpiderScrapeTool",
+      "path": "backend/tools/web/spider_scrape.py",
+      "category": "web",
+      "input_schema": {
+        "properties": {
+          "url": {
+            "description": "URL to scrape",
+            "title": "Url",
+            "type": "string"
+          },
+          "store_as_finding": {
+            "default": false,
+            "description": "If True, stores the scraped content as a finding for RAG retrieval",
+            "title": "Store As Finding",
+            "type": "boolean"
+          },
+          "topic": {
+            "default": "",
+            "description": "Topic/title for the finding (used when store_as_finding=True)",
+            "title": "Topic",
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "title": "SpiderScrapeInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "code_docs_search",
+      "class": "CodeDocsSearchInfinibayTool",
+      "path": "backend/tools/web/code_docs_search.py",
+      "category": "web",
+      "input_schema": {
+        "properties": {
+          "query": {
+            "description": "Search query for the documentation",
+            "title": "Query",
+            "type": "string"
+          },
+          "docs_url": {
+            "default": "",
+            "description": "URL of the documentation site to search within. Leave empty to search across previously indexed docs.",
+            "title": "Docs Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "CodeDocsSearchInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "execute_command",
+      "class": "ExecuteCommandTool",
+      "path": "backend/tools/shell/execute_command.py",
+      "category": "shell",
+      "input_schema": {
+        "properties": {
+          "command": {
+            "description": "Command to execute",
+            "title": "Command",
+            "type": "string"
+          },
+          "timeout": {
+            "default": 60,
+            "description": "Max execution time in seconds",
+            "maximum": 600,
+            "minimum": 1,
+            "title": "Timeout",
+            "type": "integer"
+          },
+          "cwd": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Working directory for the command",
+            "title": "Cwd"
+          },
+          "env": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Additional environment variables",
+            "title": "Env"
+          }
+        },
+        "required": [
+          "command"
+        ],
+        "title": "ExecuteCommandInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "code_interpreter",
+      "class": "CodeInterpreterTool",
+      "path": "backend/tools/shell/code_interpreter.py",
+      "category": "shell",
+      "input_schema": {
+        "properties": {
+          "code": {
+            "description": "Python code to execute",
+            "title": "Code",
+            "type": "string"
+          },
+          "libraries_used": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "List of libraries the code uses (informational only)",
+            "title": "Libraries Used"
+          },
+          "timeout": {
+            "default": 120,
+            "description": "Max execution time in seconds",
+            "maximum": 600,
+            "minimum": 1,
+            "title": "Timeout",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "code"
+        ],
+        "title": "CodeInterpreterInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "record_finding",
+      "class": "RecordFindingTool",
+      "path": "backend/tools/knowledge/record_finding.py",
+      "category": "knowledge",
+      "input_schema": {
+        "properties": {
+          "title": {
+            "description": "Finding title/topic",
+            "title": "Title",
+            "type": "string"
+          },
+          "content": {
+            "description": "Detailed finding content",
+            "title": "Content",
+            "type": "string"
+          },
+          "confidence": {
+            "default": 0.5,
+            "description": "Confidence level (0.0 to 1.0)",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence",
+            "type": "number"
+          },
+          "tags": {
+            "description": "Tags for categorization",
+            "items": {
+              "type": "string"
+            },
+            "title": "Tags",
+            "type": "array"
+          },
+          "finding_type": {
+            "default": "observation",
+            "description": "Finding type: observation, hypothesis, experiment, proof, conclusion",
+            "title": "Finding Type",
+            "type": "string"
+          },
+          "sources": {
+            "description": "Source URLs or references",
+            "items": {
+              "type": "string"
+            },
+            "title": "Sources",
+            "type": "array"
+          },
+          "artifact_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Optional ID of a related artifact",
+            "title": "Artifact Id"
+          },
+          "wiki_page_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Optional ID of a related wiki page",
+            "title": "Wiki Page Id"
+          },
+          "task_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The ID of the task this finding belongs to. Required if context is missing.",
+            "title": "Task Id"
+          }
+        },
+        "required": [
+          "title",
+          "content"
+        ],
+        "title": "RecordFindingInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "read_findings",
+      "class": "ReadFindingsTool",
+      "path": "backend/tools/knowledge/read_findings.py",
+      "category": "knowledge",
+      "input_schema": {
+        "properties": {
+          "query": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Full-text search query across findings. Supports: | for OR, & for AND, * for prefix, \"quotes\" for exact phrases. Example: 'security | auth', 'API & design*'",
+            "title": "Query"
+          },
+          "task_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Filter findings by task ID. When omitted, defaults to the current task from agent context (if available). Pass 0 to explicitly disable task filtering and see all project findings.",
+            "title": "Task Id"
+          },
+          "min_confidence": {
+            "default": 0.0,
+            "description": "Minimum confidence filter",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Min Confidence",
+            "type": "number"
+          },
+          "finding_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Filter by finding type",
+            "title": "Finding Type"
+          },
+          "limit": {
+            "default": 50,
+            "description": "Max results",
+            "maximum": 200,
+            "minimum": 1,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "title": "ReadFindingsInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "search_findings",
+      "class": "SearchFindingsTool",
+      "path": "backend/tools/knowledge/search_findings.py",
+      "category": "knowledge",
+      "input_schema": {
+        "properties": {
+          "query": {
+            "description": "Text to search for among findings. Matches by semantic similarity against topic and content. Supports | for OR: 'security | auth' matches findings similar to either term.",
+            "title": "Query",
+            "type": "string"
+          },
+          "threshold": {
+            "default": 0.65,
+            "description": "Minimum cosine similarity (0-1). Lower = broader matches.",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Threshold",
+            "type": "number"
+          },
+          "task_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Filter to a specific task. Omit to use current task context. Pass 0 to search all project findings.",
+            "title": "Task Id"
+          },
+          "include_content": {
+            "default": false,
+            "description": "Include full finding content (default: topics only for speed).",
+            "title": "Include Content",
+            "type": "boolean"
+          },
+          "limit": {
+            "default": 20,
+            "description": "Max results",
+            "maximum": 100,
+            "minimum": 1,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "SearchFindingsInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "validate_finding",
+      "class": "ValidateFindingTool",
+      "path": "backend/tools/knowledge/validate_finding.py",
+      "category": "knowledge",
+      "input_schema": {
+        "properties": {
+          "finding_id": {
+            "description": "ID of the finding to validate",
+            "title": "Finding Id",
+            "type": "integer"
+          },
+          "validation_method": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Method used to validate the finding",
+            "title": "Validation Method"
+          },
+          "reproducibility_score": {
+            "anyOf": [
+              {
+                "maximum": 1.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Reproducibility score (0.0 to 1.0)",
+            "title": "Reproducibility Score"
+          }
+        },
+        "required": [
+          "finding_id"
+        ],
+        "title": "ValidateFindingInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "reject_finding",
+      "class": "RejectFindingTool",
+      "path": "backend/tools/knowledge/reject_finding.py",
+      "category": "knowledge",
+      "input_schema": {
+        "properties": {
+          "finding_id": {
+            "description": "ID of the finding to reject",
+            "title": "Finding Id",
+            "type": "integer"
+          },
+          "reason": {
+            "description": "Reason for rejection",
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "finding_id",
+          "reason"
+        ],
+        "title": "RejectFindingInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "read_wiki",
+      "class": "ReadWikiTool",
+      "path": "backend/tools/knowledge/read_wiki.py",
+      "category": "knowledge",
+      "input_schema": {
+        "properties": {
+          "page": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Wiki page path to read (e.g. 'architecture/overview')",
+            "title": "Page"
+          },
+          "search": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Full-text search query across wiki pages. Supports: | for OR, & for AND, * for prefix, \"quotes\" for exact phrases. Example: 'architecture | design', 'auth*'",
+            "title": "Search"
+          }
+        },
+        "title": "ReadWikiInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "search_wiki",
+      "class": "SearchWikiTool",
+      "path": "backend/tools/knowledge/search_wiki.py",
+      "category": "knowledge",
+      "input_schema": {
+        "properties": {
+          "query": {
+            "description": "Text to search for among wiki pages. Matches by semantic similarity, not exact keywords. Supports | for OR: 'architecture | design' matches pages similar to either term.",
+            "title": "Query",
+            "type": "string"
+          },
+          "threshold": {
+            "default": 0.65,
+            "description": "Minimum cosine similarity (0-1). Lower = broader matches.",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Threshold",
+            "type": "number"
+          },
+          "include_content": {
+            "default": false,
+            "description": "Include full page content (default: titles/snippets only for speed).",
+            "title": "Include Content",
+            "type": "boolean"
+          },
+          "limit": {
+            "default": 20,
+            "description": "Max results",
+            "maximum": 100,
+            "minimum": 1,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "SearchWikiInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "write_wiki",
+      "class": "WriteWikiTool",
+      "path": "backend/tools/knowledge/write_wiki.py",
+      "category": "knowledge",
+      "input_schema": {
+        "properties": {
+          "page": {
+            "description": "Wiki page path (e.g. 'architecture/overview')",
+            "title": "Page",
+            "type": "string"
+          },
+          "content": {
+            "description": "Page content in markdown",
+            "title": "Content",
+            "type": "string"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Page title (defaults to last path segment)",
+            "title": "Title"
+          },
+          "parent_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Parent page path for hierarchy",
+            "title": "Parent Path"
+          }
+        },
+        "required": [
+          "page",
+          "content"
+        ],
+        "title": "WriteWikiInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "write_report",
+      "class": "WriteReportTool",
+      "path": "backend/tools/knowledge/write_report.py",
+      "category": "knowledge",
+      "input_schema": {
+        "properties": {
+          "title": {
+            "description": "Report title",
+            "title": "Title",
+            "type": "string"
+          },
+          "content": {
+            "description": "Report content (markdown)",
+            "title": "Content",
+            "type": "string"
+          },
+          "report_type": {
+            "default": "research",
+            "description": "Report type: 'research', 'analysis', 'summary'",
+            "title": "Report Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "content"
+        ],
+        "title": "WriteReportInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "read_report",
+      "class": "ReadReportTool",
+      "path": "backend/tools/knowledge/read_report.py",
+      "category": "knowledge",
+      "input_schema": {
+        "properties": {
+          "report_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Artifact ID of the report",
+            "title": "Report Id"
+          },
+          "task_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Task ID to find associated report",
+            "title": "Task Id"
+          },
+          "file_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Full or partial file path to match",
+            "title": "File Path"
+          }
+        },
+        "title": "ReadReportInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "search_knowledge",
+      "class": "SearchKnowledgeTool",
+      "path": "backend/tools/knowledge/search_knowledge.py",
+      "category": "knowledge",
+      "input_schema": {
+        "properties": {
+          "query": {
+            "description": "Full-text search query. Supports operators: 'term1 | term2' for OR, 'term1 & term2' for AND, 'arch*' for prefix matching, '\"exact phrase\"' for phrases. Examples: 'react | vue | angular', 'auth & security', 'micros*'",
+            "title": "Query",
+            "type": "string"
+          },
+          "sources": {
+            "default": [
+              "findings",
+              "wiki",
+              "reference_files",
+              "reports"
+            ],
+            "description": "Sources to search: findings, wiki, reference_files, reports",
+            "items": {
+              "type": "string"
+            },
+            "title": "Sources",
+            "type": "array"
+          },
+          "limit": {
+            "default": 20,
+            "description": "Max results per source",
+            "maximum": 100,
+            "minimum": 1,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "min_confidence": {
+            "default": 0.0,
+            "description": "Minimum confidence filter (findings only)",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Min Confidence",
+            "type": "number"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "SearchKnowledgeInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "summarize_findings",
+      "class": "SummarizeFindingsTool",
+      "path": "backend/tools/knowledge/summarize_findings.py",
+      "category": "knowledge",
+      "input_schema": {
+        "properties": {
+          "task_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Task ID to summarize findings for. Omit or null to use the current task. Pass 0 to summarize all findings in the project.",
+            "title": "Task Id"
+          }
+        },
+        "title": "SummarizeFindingsInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "create_epic",
+      "class": "CreateEpicTool",
+      "path": "backend/tools/project/create_epic.py",
+      "category": "project",
+      "input_schema": {
+        "properties": {
+          "title": {
+            "description": "Epic title",
+            "title": "Title",
+            "type": "string"
+          },
+          "description": {
+            "description": "Epic description. Must contain three sections: (1) Measurable Objective — concrete success criteria; (2) Problem It Solves — the user/system pain this epic addresses; (3) Definition of Done — conditions for full epic completion.",
+            "title": "Description",
+            "type": "string"
+          },
+          "priority": {
+            "default": 2,
+            "description": "Priority 1-5",
+            "maximum": 5,
+            "minimum": 1,
+            "title": "Priority",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "title",
+          "description"
+        ],
+        "title": "CreateEpicInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "create_milestone",
+      "class": "CreateMilestoneTool",
+      "path": "backend/tools/project/create_milestone.py",
+      "category": "project",
+      "input_schema": {
+        "properties": {
+          "title": {
+            "description": "Milestone title",
+            "title": "Title",
+            "type": "string"
+          },
+          "description": {
+            "description": "Milestone description. Must contain two sections: (1) Objective Verification Criterion — a single, testable condition proving completion; (2) Incremental Value Delivered — what the team/user gains when this milestone closes.",
+            "title": "Description",
+            "type": "string"
+          },
+          "epic_id": {
+            "description": "Parent epic ID",
+            "title": "Epic Id",
+            "type": "integer"
+          },
+          "due_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Due date in YYYY-MM-DD format",
+            "title": "Due Date"
+          }
+        },
+        "required": [
+          "title",
+          "description",
+          "epic_id"
+        ],
+        "title": "CreateMilestoneInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "create_repository",
+      "class": "CreateRepositoryTool",
+      "path": "backend/tools/project/create_repository.py",
+      "category": "project",
+      "input_schema": {
+        "properties": {
+          "project_id": {
+            "description": "Project ID to create the repository for",
+            "title": "Project Id",
+            "type": "integer"
+          },
+          "repo_name": {
+            "description": "Repository name. Must be lowercase, alphanumeric with hyphens, between 2 and 40 characters. Example: 'my-cool-app'",
+            "title": "Repo Name",
+            "type": "string"
+          },
+          "description": {
+            "default": "",
+            "description": "Optional description for the Forgejo repository",
+            "title": "Description",
+            "type": "string"
+          }
+        },
+        "required": [
+          "project_id",
+          "repo_name"
+        ],
+        "title": "CreateRepositoryInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "update_project",
+      "class": "UpdateProjectTool",
+      "path": "backend/tools/project/update_project.py",
+      "category": "project",
+      "input_schema": {
+        "properties": {
+          "field": {
+            "description": "Field to update: description, metadata_json, name, status",
+            "title": "Field",
+            "type": "string"
+          },
+          "value": {
+            "description": "New value for the field",
+            "title": "Value",
+            "type": "string"
+          },
+          "force": {
+            "default": false,
+            "description": "Force the update even if it deviates significantly from the original project scope. Only use this if you are certain the change is correct.",
+            "title": "Force",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "field",
+          "value"
+        ],
+        "title": "UpdateProjectInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "read_reference_files",
+      "class": "ReadReferenceFilesTool",
+      "path": "backend/tools/project/read_reference_files.py",
+      "category": "project",
+      "input_schema": {
+        "properties": {
+          "project_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Project ID (uses current if None)",
+            "title": "Project Id"
+          },
+          "search": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Full-text search query. Supports: | for OR, & for AND, * for prefix, \"quotes\" for exact phrases.",
+            "title": "Search"
+          }
+        },
+        "title": "ReadReferenceFilesInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "create_hypothesis",
+      "class": "CreateHypothesisTool",
+      "path": "backend/tools/project/create_hypothesis.py",
+      "category": "project",
+      "input_schema": {
+        "properties": {
+          "statement": {
+            "description": "Hypothesis statement",
+            "title": "Statement",
+            "type": "string"
+          },
+          "rationale": {
+            "description": "Rationale/justification for the hypothesis",
+            "title": "Rationale",
+            "type": "string"
+          },
+          "confidence": {
+            "default": 0.5,
+            "description": "Initial confidence level (0.0 to 1.0)",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence",
+            "type": "number"
+          }
+        },
+        "required": [
+          "statement",
+          "rationale"
+        ],
+        "title": "CreateHypothesisInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "read_epics",
+      "class": "ReadEpicsTool",
+      "path": "backend/tools/project/read_epics.py",
+      "category": "project",
+      "input_schema": {
+        "properties": {
+          "status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Filter by status (open, in_progress, completed, cancelled). Omit to show all statuses.",
+            "title": "Status"
+          },
+          "epic_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Get a single epic by ID. Omit to list all epics.",
+            "title": "Epic Id"
+          }
+        },
+        "title": "ReadEpicsInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "read_milestones",
+      "class": "ReadMilestonesTool",
+      "path": "backend/tools/project/read_milestones.py",
+      "category": "project",
+      "input_schema": {
+        "properties": {
+          "epic_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Filter by parent epic ID. Omit to show all milestones.",
+            "title": "Epic Id"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Filter by status (open, in_progress, completed, cancelled). Omit to show all statuses.",
+            "title": "Status"
+          },
+          "milestone_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Get a single milestone by ID. Omit to list all milestones.",
+            "title": "Milestone Id"
+          }
+        },
+        "title": "ReadMilestonesInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "query_database",
+      "class": "NL2SQLTool",
+      "path": "backend/tools/data/nl2sql.py",
+      "category": "data",
+      "input_schema": {
+        "properties": {
+          "sql_query": {
+            "description": "A SELECT SQL query to run against the project database.",
+            "title": "Sql Query",
+            "type": "string"
+          },
+          "row_limit": {
+            "default": 100,
+            "description": "Maximum number of rows to return (default 100, max 500).",
+            "maximum": 500,
+            "minimum": 1,
+            "title": "Row Limit",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "sql_query"
+        ],
+        "title": "NL2SQLInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "pdf_search",
+      "class": "PDFSearchTool",
+      "path": "backend/tools/rag/pdf_search.py",
+      "category": "rag",
+      "input_schema": {
+        "properties": {
+          "query": {
+            "description": "Semantic search query",
+            "title": "Query",
+            "type": "string"
+          },
+          "pdf_path": {
+            "description": "Absolute path to the PDF file",
+            "title": "Pdf Path",
+            "type": "string"
+          },
+          "n_results": {
+            "default": 5,
+            "description": "Number of results to return",
+            "maximum": 20,
+            "minimum": 1,
+            "title": "N Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "query",
+          "pdf_path"
+        ],
+        "title": "PDFSearchInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "directory_search",
+      "class": "DirectorySearchTool",
+      "path": "backend/tools/rag/directory_search.py",
+      "category": "rag",
+      "input_schema": {
+        "properties": {
+          "query": {
+            "description": "Semantic search query",
+            "title": "Query",
+            "type": "string"
+          },
+          "directory": {
+            "description": "Absolute path to the directory to search",
+            "title": "Directory",
+            "type": "string"
+          },
+          "file_extensions": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Filter by file extensions (e.g. ['.py', '.md', '.txt'])",
+            "title": "File Extensions"
+          },
+          "n_results": {
+            "default": 5,
+            "description": "Number of results to return",
+            "maximum": 20,
+            "minimum": 1,
+            "title": "N Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "query",
+          "directory"
+        ],
+        "title": "DirectorySearchInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "csv_search",
+      "class": "CSVSearchTool",
+      "path": "backend/tools/rag/csv_search.py",
+      "category": "rag",
+      "input_schema": {
+        "properties": {
+          "query": {
+            "description": "Semantic search query",
+            "title": "Query",
+            "type": "string"
+          },
+          "csv_path": {
+            "description": "Absolute path to the CSV file",
+            "title": "Csv Path",
+            "type": "string"
+          },
+          "n_results": {
+            "default": 5,
+            "description": "Number of results to return",
+            "maximum": 20,
+            "minimum": 1,
+            "title": "N Results",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "query",
+          "csv_path"
+        ],
+        "title": "CSVSearchInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "docx_search",
+      "class": "DOCXSearchInfinibayTool",
+      "path": "backend/tools/rag/docx_search.py",
+      "category": "rag",
+      "input_schema": {
+        "properties": {
+          "query": {
+            "description": "Semantic search query",
+            "title": "Query",
+            "type": "string"
+          },
+          "docx_path": {
+            "description": "Absolute path to the .docx file",
+            "title": "Docx Path",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query",
+          "docx_path"
+        ],
+        "title": "DOCXSearchInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "json_search",
+      "class": "JSONSearchInfinibayTool",
+      "path": "backend/tools/rag/json_search.py",
+      "category": "rag",
+      "input_schema": {
+        "properties": {
+          "query": {
+            "description": "Semantic search query",
+            "title": "Query",
+            "type": "string"
+          },
+          "json_path": {
+            "description": "Absolute path to the JSON file",
+            "title": "Json Path",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query",
+          "json_path"
+        ],
+        "title": "JSONSearchInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "xml_search",
+      "class": "XMLSearchInfinibayTool",
+      "path": "backend/tools/rag/xml_search.py",
+      "category": "rag",
+      "input_schema": {
+        "properties": {
+          "query": {
+            "description": "Semantic search query",
+            "title": "Query",
+            "type": "string"
+          },
+          "xml_path": {
+            "description": "Absolute path to the XML file",
+            "title": "Xml Path",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query",
+          "xml_path"
+        ],
+        "title": "XMLSearchInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "context7_search_library",
+      "class": "Context7SearchTool",
+      "path": "backend/tools/context7/search_library.py",
+      "category": "context7",
+      "input_schema": {
+        "properties": {
+          "library_name": {
+            "description": "Library or framework name to search for (e.g. 'react', 'fastapi', 'langchain', 'next.js'). Be specific — 'react' not 'frontend framework'.",
+            "title": "Library Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "library_name"
+        ],
+        "title": "Context7SearchInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "context7_get_docs",
+      "class": "Context7DocsTool",
+      "path": "backend/tools/context7/get_docs.py",
+      "category": "context7",
+      "input_schema": {
+        "properties": {
+          "library_id": {
+            "description": "Context7-compatible library ID obtained from context7_search_library (e.g. '/vercel/next.js', '/facebook/react', '/tiangolo/fastapi'). Must start with '/'.",
+            "title": "Library Id",
+            "type": "string"
+          },
+          "topic": {
+            "description": "Specific topic or question to search for in the documentation. Be specific — 'how to configure middleware' is better than 'middleware'. 'authentication with JWT' is better than 'auth'.",
+            "title": "Topic",
+            "type": "string"
+          },
+          "format": {
+            "default": "txt",
+            "description": "Response format. 'txt' returns plain text optimized for LLM consumption (recommended). 'json' returns structured objects with title, content, and URL.",
+            "enum": [
+              "json",
+              "txt"
+            ],
+            "title": "Format",
+            "type": "string"
+          }
+        },
+        "required": [
+          "library_id",
+          "topic"
+        ],
+        "title": "Context7DocsInput",
+        "type": "object"
+      }
+    }
+  ],
+  "additional_source_declarations": [
+    {
+      "name": "add_symbol",
+      "class": "AddSymbolTool",
+      "path": "backend/tools/code_intel/add_method.py",
+      "registered": false,
+      "status": "consumer_and_destination_review_pending"
+    },
+    {
+      "name": "analyze_code",
+      "class": "AnalyzeCodeTool",
+      "path": "backend/tools/code_intel/analyze_code.py",
+      "registered": false,
+      "status": "consumer_and_destination_review_pending"
+    },
+    {
+      "name": "edit_symbol",
+      "class": "EditSymbolTool",
+      "path": "backend/tools/code_intel/edit_method.py",
+      "registered": false,
+      "status": "consumer_and_destination_review_pending"
+    },
+    {
+      "name": "find_definition",
+      "class": "FindDefinitionTool",
+      "path": "backend/tools/code_intel/find_definition.py",
+      "registered": false,
+      "status": "consumer_and_destination_review_pending"
+    },
+    {
+      "name": "find_references",
+      "class": "FindReferencesTool",
+      "path": "backend/tools/code_intel/find_references.py",
+      "registered": false,
+      "status": "consumer_and_destination_review_pending"
+    },
+    {
+      "name": "get_symbol_code",
+      "class": "GetSymbolCodeTool",
+      "path": "backend/tools/code_intel/get_symbol_code.py",
+      "registered": false,
+      "status": "consumer_and_destination_review_pending"
+    },
+    {
+      "name": "list_symbols",
+      "class": "ListSymbolsTool",
+      "path": "backend/tools/code_intel/list_symbols.py",
+      "registered": false,
+      "status": "consumer_and_destination_review_pending"
+    },
+    {
+      "name": "move_symbol",
+      "class": "MoveSymbolTool",
+      "path": "backend/tools/code_intel/move_symbol.py",
+      "registered": false,
+      "status": "consumer_and_destination_review_pending"
+    },
+    {
+      "name": "project_structure",
+      "class": "ProjectStructureTool",
+      "path": "backend/tools/code_intel/project_structure.py",
+      "registered": false,
+      "status": "consumer_and_destination_review_pending"
+    },
+    {
+      "name": "remove_symbol",
+      "class": "RemoveSymbolTool",
+      "path": "backend/tools/code_intel/remove_method.py",
+      "registered": false,
+      "status": "consumer_and_destination_review_pending"
+    },
+    {
+      "name": "rename_symbol",
+      "class": "RenameSymbolTool",
+      "path": "backend/tools/code_intel/rename_symbol.py",
+      "registered": false,
+      "status": "consumer_and_destination_review_pending"
+    },
+    {
+      "name": "search_symbols",
+      "class": "SearchSymbolsTool",
+      "path": "backend/tools/code_intel/search_symbols.py",
+      "registered": false,
+      "status": "consumer_and_destination_review_pending"
+    },
+    {
+      "name": "apply_patch",
+      "class": "ApplyPatchTool",
+      "path": "backend/tools/file/apply_patch.py",
+      "registered": false,
+      "status": "consumer_and_destination_review_pending"
+    },
+    {
+      "name": "add_content_after_line",
+      "class": "AddContentAfterLineTool",
+      "path": "backend/tools/file/insert_lines.py",
+      "registered": false,
+      "status": "consumer_and_destination_review_pending"
+    },
+    {
+      "name": "add_content_before_line",
+      "class": "AddContentBeforeLineTool",
+      "path": "backend/tools/file/insert_lines.py",
+      "registered": false,
+      "status": "consumer_and_destination_review_pending"
+    },
+    {
+      "name": "multi_edit_file",
+      "class": "MultiEditFileTool",
+      "path": "backend/tools/file/multi_edit_file.py",
+      "registered": false,
+      "status": "consumer_and_destination_review_pending"
+    },
+    {
+      "name": "partial_read",
+      "class": "PartialReadTool",
+      "path": "backend/tools/file/partial_read.py",
+      "registered": false,
+      "status": "consumer_and_destination_review_pending"
+    },
+    {
+      "name": "replace_lines",
+      "class": "ReplaceLinesTool",
+      "path": "backend/tools/file/replace_lines.py",
+      "registered": false,
+      "status": "consumer_and_destination_review_pending"
+    }
+  ],
+  "scope": "71 registered tools: original Pydantic input declarations, not proof of a safe MCP boundary or complete capability migration. Additional declarations require consumer review."
+}

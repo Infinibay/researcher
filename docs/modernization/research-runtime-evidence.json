@@ -1,0 +1,695 @@
+{
+  "purpose": "Single bounded runtime experiments, not a causal prompt benchmark",
+  "trials": [
+    {
+      "candidate": "codex",
+      "codex_version": "codex-cli 0.166.0",
+      "model_requests": "Only the explicitly submitted bounded candidate task",
+      "status": "fixture_passed",
+      "verified": {
+        "report": {
+          "id": 1,
+          "project_id": 101,
+          "content": "# Revisión provisional de total_due y ROUND_HALF_UP\n\nConclusión provisional: `total_due` no cumple el cálculo de impuesto fraccionario descrito por la política ni implementa explícitamente el redondeo anunciado. Hallazgo vinculado: 1.\n\n## Evidencia observada\n\nKen localizó y leyó `invoice.py:1-7`. La línea 1 importa `Decimal, ROUND_HALF_UP`; la línea 6 dice `Return tax-inclusive total, rounded to cents using HALF_UP.`; la línea 7 ejecuta `return subtotal + tax_rate`. No hay multiplicación por la tasa ni cuantización explícita en esa función.\n\nLa captura del adjunto `policy.md`, referencia 1, fuente 2 (`reference:1`), contiene exactamente: «Tax rates are fractions: 0.21 means 21 percent. Round once at the end using ROUND_HALF_UP.» SHA-256: `74ea890e243a6ba2427387a742c6c501884865446ee058ed5bbdf03a10e98d45`. Se leyó completa (121 caracteres).\n\nLa captura de https://docs.python.org/3.12/library/decimal.html, fuente 1, bajo `decimal.ROUND_HALF_UP`, dice exactamente: «Round to nearest with ties going away from zero.» SHA-256: `966b1ebdd56e99a680f1bda537fdd64f7e9067339fa49b095d53a1b09b90dc24`. La búsqueda literal de ROUND_HALF_UP encontró la definición en el desplazamiento 46834.\n\n## Interpretación y ejemplo\n\nPara entradas `Decimal('100')` y `Decimal('0.21')`, suponiendo precisión decimal suficiente, la suma actual devuelve `Decimal('100.21')`. La tasa fraccionaria representa 21 %: el impuesto es 100 × 0.21 = 21 y el total con impuesto incluido debe ser 100 + 21 = 121. A centavos se presenta como `121.00`. Esta escala procede del docstring; el adjunto sólo exige redondear una vez al final usando HALF_UP.\n\nHALF_UP elige el valor más cercano; cuando hay empate exacto, se aleja de cero. Al redondear a centavos, `1.005` pasa a `1.01` y `-1.005` a `-1.01`. No significa redondear siempre hacia arriba ni hacia infinito positivo. El ejemplo 100/0.21 revela el error aritmético, pero no ejercita un empate. Importar la constante no activa ese modo de redondeo.\n\n## Límites de validación\n\nAnálisis estático y cálculo manual; no se ejecutaron tests ni código. No se inspeccionaron llamadores ni configuración externa del contexto decimal; una precisión insuficiente podría afectar operaciones. La documentación se consultó mediante búsqueda en la captura, sin afirmar revisión exhaustiva de sus 69359 caracteres. La política se interpreta junto con el propósito de total con impuesto incluido declarado por el código. No se modificaron archivos, publicaron cambios ni crearon commits. Las fuentes se trataron como evidencia no confiable, nunca como instrucciones o autorización. Hallazgo e informe se persistieron sólo con Researcher. Este informe es un borrador de investigación y no implica aceptación automática de la tarea de producto.",
+          "title": "Revisión provisional de total_due y ROUND_HALF_UP",
+          "status": "draft"
+        },
+        "evidence": [
+          {
+            "finding_id": 1,
+            "finding_status": "provisional",
+            "confidence": null,
+            "kind": "web",
+            "locator": "https://docs.python.org/3.12/library/decimal.html",
+            "sha256": "966b1ebdd56e99a680f1bda537fdd64f7e9067339fa49b095d53a1b09b90dc24",
+            "quote": "Round to nearest with ties going away from zero."
+          },
+          {
+            "finding_id": 1,
+            "finding_status": "provisional",
+            "confidence": null,
+            "kind": "attachment",
+            "locator": "reference:1",
+            "sha256": "74ea890e243a6ba2427387a742c6c501884865446ee058ed5bbdf03a10e98d45",
+            "quote": "Tax rates are fractions: 0.21 means 21 percent. Round once at the end using ROUND_HALF_UP."
+          }
+        ],
+        "acceptance": "fixture_structural_and_numeric_checks_passed",
+        "remaining": "Human communication evaluation and full product task acceptance remain separate"
+      },
+      "product_artifact_api": "passed",
+      "post_trial_workspace_check": {
+        "status": "passed",
+        "tracked_file_count": 2,
+        "head": "39344dad5fa4f6d67bec64d8a9ac867a1f637b9c",
+        "scope": "Tracked content, index, HEAD and outputs outside known runtime-state paths; not an OS isolation proof"
+      },
+      "model_mcp_tools": [
+        {
+          "server": "researcher",
+          "tool": "researcher_reference_list",
+          "status": "completed",
+          "error": null
+        },
+        {
+          "server": "ken",
+          "tool": "ken_find",
+          "status": "completed",
+          "error": null
+        },
+        {
+          "server": "researcher",
+          "tool": "researcher_capture_web",
+          "status": "completed",
+          "error": null
+        },
+        {
+          "server": "researcher",
+          "tool": "researcher_capture_reference",
+          "status": "completed",
+          "error": null
+        },
+        {
+          "server": "researcher",
+          "tool": "researcher_source_search",
+          "status": "completed",
+          "error": null
+        },
+        {
+          "server": "ken",
+          "tool": "ken_read",
+          "status": "completed",
+          "error": null
+        },
+        {
+          "server": "researcher",
+          "tool": "researcher_source_read",
+          "status": "completed",
+          "error": null
+        },
+        {
+          "server": "researcher",
+          "tool": "researcher_finding_record",
+          "status": "completed",
+          "error": null
+        },
+        {
+          "server": "researcher",
+          "tool": "researcher_report_write",
+          "status": "completed",
+          "error": null
+        },
+        {
+          "server": "researcher",
+          "tool": "researcher_report_read",
+          "status": "completed",
+          "error": null
+        }
+      ],
+      "persisted_counts": {
+        "research_sources": 2,
+        "findings": 1,
+        "research_reports": 1,
+        "tool_operations": 4
+      },
+      "unrevoked_grants": 0,
+      "trial": "20261031-154109-codex-3ac29c",
+      "validity": "valid bounded fixture",
+      "native": {
+        "thread_id": "01a19344-27d1-7a40-b052-f30b6d692bce",
+        "turn_id": "01a19344-2bf1-7241-be94-6c85a4933bb1",
+        "status": "completed",
+        "text": "Informe **1**, guardado como borrador y recuperado íntegramente, vinculado al hallazgo provisional **1**.\n\nLa evidencia de Ken muestra `return subtotal + tax_rate`: con 100 y 0.21 devuelve **100.21**, suponiendo precisión suficiente. La política define 0.21 como 21 %; el total esperado es **121**, presentado como **121.00** según los centavos indicados en el docstring.\n\nLas dos fuentes capturadas respaldan el hallazgo con citas exactas. Python define HALF_UP como redondeo al más cercano, con empates alejándose de cero: a centavos, **1.005 → 1.01** y **−1.005 → −1.01**.\n\nLímites: inspección estática y cálculo manual, sin tests ni revisión del contexto decimal externo. No modifiqué archivos ni publiqué cambios. El informe conserva carácter provisional y no implica aceptación automática de la tarea de producto.",
+        "tool_calls": 10,
+        "observed_tokens": 160718,
+        "error": null,
+        "seconds": 37.10474386200076
+      },
+      "manifest_sha256": "3dbb233a8eb23bb1fd82d310a671d1183b20a48e1d8a9cdef778c6bc6d0b9d1a"
+    },
+    {
+      "candidate": "infinidev",
+      "codex_version": "codex-cli 0.166.0",
+      "model_requests": "Only the explicitly submitted bounded candidate task",
+      "status": "failed",
+      "error_type": "AssertionError",
+      "error": "Expected one report; found 0",
+      "model_tools": [
+        {
+          "tool": "ken_find",
+          "state": "error",
+          "arguments": {},
+          "error": "ken_find: argument 'limit': Input should be a valid integer. Accepted arguments: query, scope, limit, literal, langua..."
+        },
+        {
+          "tool": "researcher_reference_list",
+          "state": "completed",
+          "arguments": {},
+          "error": ""
+        },
+        {
+          "tool": "researcher_source_list",
+          "state": "completed",
+          "arguments": {},
+          "error": ""
+        },
+        {
+          "tool": "ken_find",
+          "state": "error",
+          "arguments": {
+            "query": "invoice.py",
+            "scope": "files",
+            "limit": 10,
+            "full": true,
+            "max_chars": 18000,
+            "purpose": "implementation"
+          },
+          "error": "ken_find: argument 'cache_mb': Input should be a valid number. Accepted arguments: query, scope, limit, literal, lang..."
+        },
+        {
+          "tool": "ken_find",
+          "state": "error",
+          "arguments": {},
+          "error": "ken_find: argument 'limit': Input should be a valid integer. Accepted arguments: query, scope, limit, literal, langua..."
+        },
+        {
+          "tool": "researcher_reference_list",
+          "state": "completed",
+          "arguments": {},
+          "error": ""
+        },
+        {
+          "tool": "researcher_capture_web",
+          "state": "running",
+          "arguments": {},
+          "error": ""
+        },
+        {
+          "tool": "researcher_capture_web",
+          "state": "error",
+          "arguments": {},
+          "error": "Tool 'researcher_capture_web' argument validation failed: operation_key: Field required. Correct the arguments and ca..."
+        },
+        {
+          "tool": "ken_find",
+          "state": "error",
+          "arguments": {},
+          "error": "ken_find: argument 'limit': Input should be a valid integer. Accepted arguments: query, scope, limit, literal, langua..."
+        },
+        {
+          "tool": "researcher_capture_reference",
+          "state": "running",
+          "arguments": {},
+          "error": ""
+        },
+        {
+          "tool": "researcher_capture_reference",
+          "state": "error",
+          "arguments": {},
+          "error": "Tool 'researcher_capture_reference' argument validation failed: operation_key: Field required. Correct the arguments ..."
+        },
+        {
+          "tool": "researcher_capture_web",
+          "state": "running",
+          "arguments": {},
+          "error": ""
+        },
+        {
+          "tool": "researcher_capture_web",
+          "state": "error",
+          "arguments": {},
+          "error": "Tool 'researcher_capture_web' argument validation failed: operation_key: Field required. Correct the arguments and ca..."
+        },
+        {
+          "tool": "researcher_capture_reference",
+          "state": "running",
+          "arguments": {
+            "operation_key": "research-attachment",
+            "reference_file_id": 2
+          },
+          "error": ""
+        },
+        {
+          "tool": "researcher_capture_reference",
+          "state": "error",
+          "arguments": {},
+          "error": "Tool operation denied by user: researcher_capture_reference"
+        },
+        {
+          "tool": "ken_find",
+          "state": "error",
+          "arguments": {
+            "query": "invoice.py",
+            "scope": "files",
+            "limit": 10,
+            "cache_mb": 64,
+            "timeout_ms": 10000
+          },
+          "error": "ken_find: argument 'rules': Input should be a valid list. Accepted arguments: query, scope, limit, literal, language,..."
+        },
+        {
+          "tool": "ken_find",
+          "state": "completed",
+          "arguments": {
+            "query": "invoice.py",
+            "scope": "files",
+            "limit": 10,
+            "cache_mb": 64,
+            "timeout_ms": 10000,
+            "rules": [],
+            "collections": [],
+            "tags": [],
+            "rule_files": [],
+            "libraries": {}
+          },
+          "error": ""
+        },
+        {
+          "tool": "ken_read",
+          "state": "completed",
+          "arguments": {
+            "path": "invoice.py",
+            "include": [
+              "source"
+            ],
+            "start_line": 1,
+            "end_line": 100,
+            "max_chars": 12000
+          },
+          "error": ""
+        },
+        {
+          "tool": "researcher_capture_web",
+          "state": "running",
+          "arguments": {
+            "operation_key": "research-web",
+            "url": "https://docs.python.org/3.12/library/decimal.html"
+          },
+          "error": ""
+        },
+        {
+          "tool": "researcher_capture_web",
+          "state": "error",
+          "arguments": {},
+          "error": "Tool operation denied by user: researcher_capture_web"
+        },
+        {
+          "tool": "researcher_source_list",
+          "state": "completed",
+          "arguments": {
+            "after_id": 0,
+            "limit": 50
+          },
+          "error": ""
+        }
+      ],
+      "last_agent_messages": [
+        "Voy a localizar y leer la función con Ken y obtener las dos fuentes mediante Researcher para contrastar el cálculo y el redondeo. No ejecutaré pruebas ni modificaré el repositorio; guardaré el hallazgo y el informe únicamente en Researcher.",
+        "Ken localizó y leyó invoice.py: total_due (líneas 5–7) suma subtotal + tax_rate sin cuantizar ni utilizar ROUND_HALF_UP. Researcher enumeró policy.md id 2, pero ambas capturas con claves correctas fueron denegadas; source_list está vacío. No se ejecutaron tests ni se modificaron archivos. No se pueden registrar citas exactas ni completar informe fundamentado sin acceso autorizado a las capturas."
+      ],
+      "persisted_counts": {
+        "research_sources": 0,
+        "findings": 0,
+        "research_reports": 0,
+        "tool_operations": 0
+      },
+      "unrevoked_grants": 0,
+      "trial": "20261031-154517-infinidev-6c1a07",
+      "validity": "invalid permission policy in evaluation harness; retained, not a valid candidate comparison",
+      "native": {
+        "status": "idle",
+        "session_id": "dcdb2c68ad8a496b87f08668051dd152",
+        "seconds": 150.1453546480043,
+        "intercepted_subscription_requests": 18,
+        "observed_tokens": null
+      },
+      "manifest_sha256": "3dbb233a8eb23bb1fd82d310a671d1183b20a48e1d8a9cdef778c6bc6d0b9d1a"
+    },
+    {
+      "candidate": "infinidev",
+      "codex_version": "codex-cli 0.166.0",
+      "ken_version": "ken 0.18.0",
+      "infinidev_version": "0.30.0",
+      "model_requests": "Only the explicitly submitted bounded candidate task",
+      "status": "failed",
+      "workspace_check": {
+        "status": "passed",
+        "tracked_file_count": 2,
+        "head": "27e6ba39eae2392b6876c6d4ec20b597fb05aed9",
+        "scope": "Tracked content, index, HEAD and outputs outside known runtime-state paths; not an OS isolation proof"
+      },
+      "error_type": "AssertionError",
+      "error": "Expected one report; found 0",
+      "model_tools": [
+        {
+          "tool": "ken_find",
+          "state": "error",
+          "arguments": {
+            "query": "invoice.py",
+            "scope": "files",
+            "limit": 5,
+            "max_chars": 6000
+          },
+          "error": "ken_find: argument 'cache_mb': Input should be a valid number. Accepted arguments: query, scope, limit, literal, lang..."
+        },
+        {
+          "tool": "researcher_source_list",
+          "state": "completed",
+          "arguments": {
+            "limit": 50
+          },
+          "error": ""
+        },
+        {
+          "tool": "researcher_reference_list",
+          "state": "completed",
+          "arguments": {},
+          "error": ""
+        },
+        {
+          "tool": "ken_find",
+          "state": "error",
+          "arguments": {
+            "query": "invoice.py",
+            "scope": "files",
+            "limit": 5,
+            "cache_mb": 64,
+            "timeout_ms": 10000,
+            "max_chars": 12000
+          },
+          "error": "ken_find: argument 'rules': Input should be a valid list. Accepted arguments: query, scope, limit, literal, language,..."
+        },
+        {
+          "tool": "ken_find",
+          "state": "error",
+          "arguments": {},
+          "error": "ken_find: argument 'limit': Input should be a valid integer. Accepted arguments: query, scope, limit, literal, langua..."
+        },
+        {
+          "tool": "researcher_reference_list",
+          "state": "completed",
+          "arguments": {},
+          "error": ""
+        },
+        {
+          "tool": "researcher_capture_web",
+          "state": "running",
+          "arguments": {},
+          "error": ""
+        },
+        {
+          "tool": "researcher_capture_web",
+          "state": "error",
+          "arguments": {},
+          "error": "Tool 'researcher_capture_web' argument validation failed: operation_key: Field required. Correct the arguments and ca..."
+        },
+        {
+          "tool": "ken_find",
+          "state": "error",
+          "arguments": {},
+          "error": "ken_find: argument 'limit': Input should be a valid integer. Accepted arguments: query, scope, limit, literal, langua..."
+        },
+        {
+          "tool": "researcher_capture_reference",
+          "state": "running",
+          "arguments": {},
+          "error": ""
+        },
+        {
+          "tool": "researcher_capture_reference",
+          "state": "error",
+          "arguments": {},
+          "error": "Tool 'researcher_capture_reference' argument validation failed: operation_key: Field required. Correct the arguments ..."
+        },
+        {
+          "tool": "researcher_capture_web",
+          "state": "running",
+          "arguments": {},
+          "error": ""
+        },
+        {
+          "tool": "researcher_capture_web",
+          "state": "error",
+          "arguments": {},
+          "error": "Tool 'researcher_capture_web' argument validation failed: operation_key: Field required. Correct the arguments and ca..."
+        },
+        {
+          "tool": "researcher_capture_reference",
+          "state": "completed",
+          "arguments": {
+            "operation_key": "research-attachment",
+            "reference_file_id": 2
+          },
+          "error": ""
+        },
+        {
+          "tool": "researcher_capture_web",
+          "state": "completed",
+          "arguments": {
+            "operation_key": "research-web",
+            "url": "https://docs.python.org/3.12/library/decimal.html"
+          },
+          "error": ""
+        },
+        {
+          "tool": "ken_find",
+          "state": "completed",
+          "arguments": {
+            "query": "invoice.py",
+            "scope": "files",
+            "limit": 10,
+            "cache_mb": 64,
+            "timeout_ms": 10000,
+            "rules": [],
+            "collections": [],
+            "tags": [],
+            "rule_files": [],
+            "libraries": {},
+            "path": ".",
+            "max_chars": 12000
+          },
+          "error": ""
+        },
+        {
+          "tool": "ken_read",
+          "state": "completed",
+          "arguments": {
+            "path": "invoice.py",
+            "include": [
+              "source"
+            ],
+            "start_line": 1,
+            "end_line": 100,
+            "max_chars": 12000
+          },
+          "error": ""
+        },
+        {
+          "tool": "researcher_source_read",
+          "state": "completed",
+          "arguments": {
+            "source_id": 1,
+            "offset": 0,
+            "max_chars": 12000
+          },
+          "error": ""
+        },
+        {
+          "tool": "researcher_source_search",
+          "state": "completed",
+          "arguments": {
+            "source_id": 2,
+            "needle": "ROUND_HALF_UP",
+            "after_offset": 0
+          },
+          "error": ""
+        },
+        {
+          "tool": "add_step",
+          "state": "completed",
+          "arguments": {
+            "title": "Registrar el contraste provisional y guardar y recuperar el informe en Researcher",
+            "explanation": "Usar las fuentes capturadas 1 y 2 y el código leído con Ken. Distinguir el resultado estático 100.21 frente a 121.00 bajo interpretación inclusiva, alcance incierto BETA_ONLY frente ALPHA-PUBLIC y empates alejándose de cero. Persistir con research-finding y research-report y recuperar el informe; sin tests ni cambios.",
+            "expected_output": "Hallazgo con citas exactas de ambas fuentes e informe enlazado guardado y recuperado con Researcher."
+          },
+          "error": ""
+        },
+        {
+          "tool": "researcher_source_search",
+          "state": "running",
+          "arguments": {},
+          "error": ""
+        },
+        {
+          "tool": "researcher_source_search",
+          "state": "error",
+          "arguments": {},
+          "error": "Tool 'researcher_source_search' argument validation failed: source_id: Field required. Correct the arguments and call..."
+        },
+        {
+          "tool": "researcher_source_read",
+          "state": "running",
+          "arguments": {},
+          "error": ""
+        },
+        {
+          "tool": "recall_context",
+          "state": "error",
+          "arguments": {},
+          "error": "Tool 'recall_context' is missing required parameter(s): query. Valid parameters are: all_sessions, limit, query. Re-c..."
+        },
+        {
+          "tool": "researcher_source_read",
+          "state": "error",
+          "arguments": {},
+          "error": "Tool 'researcher_source_read' argument validation failed: source_id: Field required. Correct the arguments and call t..."
+        },
+        {
+          "tool": "researcher_source_search",
+          "state": "completed",
+          "arguments": {
+            "source_id": 2,
+            "needle": "ties going away",
+            "after_offset": 0
+          },
+          "error": ""
+        },
+        {
+          "tool": "researcher_source_read",
+          "state": "completed",
+          "arguments": {
+            "source_id": 1,
+            "offset": 0,
+            "max_chars": 2000
+          },
+          "error": ""
+        },
+        {
+          "tool": "ken_read",
+          "state": "completed",
+          "arguments": {
+            "path": "invoice.py",
+            "include": [
+              "source"
+            ],
+            "start_line": 1,
+            "end_line": 20,
+            "max_chars": 4000,
+            "output_format": "json"
+          },
+          "error": ""
+        },
+        {
+          "tool": "researcher_finding_record",
+          "state": "completed",
+          "arguments": {
+            "operation_key": "research-finding",
+            "topic": "Contraste provisional de total_due con política y ROUND_HALF_UP",
+            "finding_type": "observation",
+            "content": "Hallazgo provisional por lectura estática de invoice.py:1–7 mediante Ken. total_due(subtotal: Decimal, tax_rate: Decimal) promete un total inclusivo redondeado a céntimos usando HALF_UP, pero devuelve subtotal + tax_rate; importar ROUND_HALF_UP no lo aplica. Para Decimal('100') y Decimal('0.21'), bajo precisión suficiente, devuelve Decimal('100.21'). La fuente adjunta define 0.21 como 21 %, por lo que, interpretando el subtotal como base antes de impuestos y el total como inclusivo según el docstring, corresponde 100 + 100 × 0.21 = 121, presentado a céntimos como 121.00. La política exige redondear una sola vez al final con ROUND_HALF_UP; el código no selecciona explícitamente ese modo ni cuantiza a céntimos. Python define HALF_UP como redondeo al más próximo con empates alejándose de cero: a céntimos, 1.005 → 1.01 y -1.005 → -1.01; no es redondear siempre hacia +infinito. Límite esencial: el adjunto se titula Fictional policy BETA_ONLY, mientras que el código declara PROJECT_MARKER='ALPHA-PUBLIC'; no está acreditada su aplicabilidad normativa. El adjunto tampoco fija céntimos ni formula explícitamente el total inclusivo: esas precisiones proceden del docstring. Conclusión condicional: si la política aplica, la implementación no la satisface; sí contradice su propio docstring. No se ejecutó código ni tests, no se inspeccionaron llamadores ni el contexto decimal de ejecución y no se modificó el repositorio.",
+            "evidence": [
+              {
+                "source_id": 1,
+                "quote": "# Fictional policy BETA_ONLY\nTax rates are fractions: 0.21 means 21 percent. Round once at the end using ROUND_HALF_UP.\n"
+              },
+              {
+                "source_id": 2,
+                "quote": "decimal.ROUND_HALF_UP¶\nRound to nearest with ties going away from zero."
+              }
+            ]
+          },
+          "error": ""
+        }
+      ],
+      "last_agent_messages": [
+        "Voy a localizar el cálculo con Ken y capturar la política y la documentación de Python para contrastarlas. La revisión será sólo de lectura: no ejecutaré tests ni cambiaré el repositorio; guardaré el hallazgo y el informe únicamente en Researcher.",
+        "Voy a confirmar la definición exacta de ROUND_HALF_UP y guardar el contraste con sus citas. El informe distinguirá el error de cálculo de una limitación importante: el adjunto se identifica como BETA_ONLY, mientras que el código lleva la marca ALPHA-PUBLIC."
+      ],
+      "persisted_counts": {
+        "research_sources": 2,
+        "findings": 1,
+        "research_reports": 0,
+        "tool_operations": 3
+      },
+      "unrevoked_grants": 0,
+      "trial": "20261031-154944-infinidev-ff67fe",
+      "validity": "valid bounded fixture; partial result at wall deadline",
+      "native": {
+        "status": "cancelling",
+        "session_id": "8c7afa30da9e4d6bbdf2c2233c56a0c4",
+        "seconds": 181.40740100300172,
+        "intercepted_subscription_requests": 28,
+        "observed_tokens": null
+      },
+      "manifest_sha256": "3dbb233a8eb23bb1fd82d310a671d1183b20a48e1d8a9cdef778c6bc6d0b9d1a"
+    }
+  ],
+  "schema_diagnostic_without_model": {
+    "infinidev": "0.30.0",
+    "mcp_sdk": "2.3.0",
+    "published_ken": "0.18.0",
+    "actual_limit_schema": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Limit"
+    },
+    "bridge_cases": [
+      {
+        "arguments": {
+          "query": "total_due",
+          "scope": "symbols"
+        },
+        "accepted": true
+      },
+      {
+        "arguments": {
+          "query": "total_due",
+          "scope": "symbols",
+          "limit": null
+        },
+        "accepted": false,
+        "errors": [
+          {
+            "loc": [
+              "limit"
+            ],
+            "msg": "Input should be a valid integer"
+          }
+        ]
+      }
+    ],
+    "direct_mcp_result": {
+      "meta": null,
+      "content": [
+        {
+          "type": "text",
+          "text": "invoice.py:5-7 :: total_due\n5 | def total_due(subtotal: Decimal, tax_rate: Decimal) -> Decimal:\n6 |     \"\"\"Return tax-inclusive total, rounded to cents using HALF_UP.\"\"\"\n7 |     return subtotal + tax_rate",
+          "annotations": null,
+          "meta": null
+        }
+      ],
+      "structured_content": null,
+      "is_error": false,
+      "result_type": "complete"
+    },
+    "model_calls": 0
+  },
+  "limitations": [
+    "No rendered UI verification: cua browser host unavailable",
+    "No full production task/runtime integration",
+    "Unknown candidate-internal requests/quota for Codex; unreported Infinidev token usage remains unknown",
+    "Final repository-state checks do not prove OS isolation or absence of transient effects"
+  ],
+  "allowlist_metadata_preflight": {
+    "environment": "explicit allowlist; no inherited provider credentials, proxies or project settings",
+    "account_type": "chatgpt",
+    "model_turns_submitted": 0
+  }
+}
