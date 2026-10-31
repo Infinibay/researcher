@@ -1,0 +1,12 @@
+{
+  "wheel": "researcher-0.1.0-py3-none-any.whl",
+  "wheel_sha256": "7007d016a8503864f38dd12e05c80c6f01b89e2a8500c2d7ba5396ef560c3276",
+  "resources_match_current_source": [
+    "backend/db/schema.sql",
+    "backend/db/research_schema.sql",
+    "backend/db/runtime_schema.sql",
+    "backend/runtime/contracts.py",
+    "backend/runtime/sqlite_runs.py",
+    "backend/db/migrations.py"
+  ]
+}

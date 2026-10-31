@@ -1,8 +1,9 @@
 # Rediseño del engine y de la coordinación
 
-Estado: contrato de destino para la implementación; el producto todavía ejecuta
-el orchestrator/LoopEngine antiguos. El spike tiene un adaptador candidato de
-Codex y un MCP propio de investigación, no un engine productivo ya migrado.
+Estado: contrato de destino con una primera persistencia de run/intento/contexto
+implementada en `run-coordination.md`; el producto todavía ejecuta el
+orchestrator/LoopEngine antiguos. El spike tiene un adaptador candidato de Codex
+y un MCP propio de investigación, no un engine productivo ya migrado.
 
 ## Un dueño por decisión
 
@@ -145,10 +146,11 @@ integración con Codex, pero no prueban esos requisitos por sí solos.
 
 ## Próxima entrega verificable
 
-Implementar primero contratos neutrales y persistencia de run/intento/contexto,
-con pruebas SQLite reales de doble claim, resultado obsoleto, cancelación contra
-finalización, corrección, reinicio y transición+evento atómicos. Conectar después
-un runtime a ese servicio y al MCP ya probado. Las pruebas deben demostrar
+Los contratos neutrales y la primera persistencia de run/intento/contexto ya
+tienen pruebas SQLite reales de doble claim, resultado obsoleto, cancelación
+contra finalización, corrección, reapertura y transición+evento atómicos. Falta
+componer el servicio, jobs, reconciliación y presupuestos durables, y conectar
+el runtime y el MCP ya probado con auth/aislamiento. Las pruebas deben demostrar
 propiedad y efectos, no sólo mocks que devuelvan el estado esperado. Cubrir los
 43 escenarios de la hoja de ruta por recorridos; ninguno queda aprobado por la
 existencia de este documento.

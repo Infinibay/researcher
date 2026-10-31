@@ -162,6 +162,38 @@ class SQLiteResearchStore:
             )
         if permission and permission not in json.loads(row["permissions_json"]):
             raise ResearchForbidden("Tool scope lacks the required permission")
+        if row["runtime_bound"]:
+            attempt = conn.execute(
+                """SELECT a.id,a.status AS attempt_status,a.lease_expires_at,a.fence,
+                    r.project_id,r.task_id,r.actor_id,r.context_version,r.status AS run_status,
+                    r.fence AS current_fence,r.current_attempt_id
+                    FROM runtime_attempts a JOIN runtime_runs r ON r.id=a.run_id
+                    WHERE a.id=?""",
+                (row["runtime_attempt_id"],),
+            ).fetchone()
+            if (
+                attempt is None
+                or attempt["attempt_status"] != "running"
+                or attempt["run_status"] != "running"
+                or attempt["lease_expires_at"] <= self.clock()
+                or attempt["fence"] != attempt["current_fence"]
+                or attempt["id"] != attempt["current_attempt_id"]
+                or (
+                    attempt["project_id"],
+                    attempt["task_id"],
+                    attempt["actor_id"],
+                    attempt["context_version"],
+                )
+                != (
+                    scope.project_id,
+                    scope.task_id,
+                    scope.agent_id,
+                    scope.context_version,
+                )
+            ):
+                raise ResearchForbidden(
+                    "Execution attempt no longer owns this tool scope"
+                )
         self._task(conn, scope.project_id, scope.task_id)
 
     @staticmethod

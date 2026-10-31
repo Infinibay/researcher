@@ -269,6 +269,12 @@ def ensure_migrations(db_path: str | None = None) -> None:
 
             apply_research_schema(conn)
             logger.info("Migration 18: research evidence, idempotent operations and scoped grants")
+        if 19 not in applied:
+            from backend.db.migrations import apply_sql_resource
+
+            resource = Path(__file__).resolve().parents[2] / "db/runtime_schema.sql"
+            apply_sql_resource(conn, resource)
+            logger.info("Migration 19: durable runs, attempts, context revisions and grant bindings")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()
