@@ -1,0 +1,40 @@
+{
+  "trial": "product-stop-1fe299eb",
+  "status": "passed",
+  "admission_requests": 1,
+  "stop_receipt_status": "cancelling",
+  "run": {
+    "run_id": "42b4c2c5-04b5-4b39-8521-6091a53c5019",
+    "project_id": 101,
+    "task_id": 1001,
+    "actor_id": "researcher",
+    "context_version": 1,
+    "status": "cancelled",
+    "fence": 3,
+    "attempt_id": "ecf0b816-3f90-48a1-86e9-51e28cdd0037",
+    "thread_id": "01a19425-994f-7502-a5db-682471e432d6",
+    "turn_id": "01a19425-9ded-7653-b128-0d052c523d20",
+    "prompt": "Usa Ken para leer invoice.py y las herramientas researcher para estudiar policy.md. Prepara una explicación detallada con ejemplos; no guardes informes ni aceptes la tarea. El propietario puede interrumpir esta prueba.",
+    "runtime": "codex",
+    "result": null,
+    "cancel_requested": true
+  },
+  "dispatch": {
+    "status": "unknown",
+    "observed_tokens": null
+  },
+  "peer_receipts": [
+    {
+      "native_and_business_closed": true,
+      "run_id": "42b4c2c5-04b5-4b39-8521-6091a53c5019",
+      "schema_version": 1,
+      "status": "cancelled"
+    }
+  ],
+  "grants_revoked": true,
+  "reports_created": 0,
+  "task_not_done": true,
+  "owned_backend_terminal": true,
+  "scope": "Stop during generation after native turn binding, with final peer receipts; not the slow business-tool product case",
+  "generative_turns_submitted": 1
+}

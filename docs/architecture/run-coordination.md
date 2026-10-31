@@ -1,11 +1,12 @@
 # Coordinación durable: primera implementación
 
 `backend/runtime/contracts.py` define datos y reglas neutrales;
-`backend/runtime/sqlite_runs.py` implementa persistencia y fencing. No importa
-CrewAI, FastAPI ni un proveedor de inferencia. El producto todavía no está
-conectado a este adaptador: faltan el servicio de ejecución, reconciliación de
-jobs, controles HTTP/WS y migración de consumidores. Ninguna operación de esta
-API interna inicia un modelo, acepta una tarea ni publica cambios.
+`backend/runtime/sqlite_runs.py` implementa persistencia y fencing. El servicio
+`RuntimeService` ya conecta el primer recorrido de investigación con la API
+autenticada y Codex. Ver `native-runtime-boundary.md` para migración 21,
+presupuestos, lifecycle, pruebas reales y límites. Las demás capacidades, flows,
+recuperación general y frontend aún requieren migración. Ninguna operación de
+persistencia por sí sola inicia un modelo, acepta una tarea ni publica cambios.
 
 ## Qué queda guardado
 
@@ -43,15 +44,17 @@ stateDiagram-v2
     needs_review --> superseded: corrección
 ```
 
-`failed` y `accepted` son estados reservados para decisiones posteriores del
-producto. Un fallo nativo no entra directamente en `failed`: podría haber jobs
+`accepted` sigue reservado para aceptación del producto. El coordinador de
+investigación puede finalizar en `failed` después de reconciliar cierre de peers
+y comprobar ausencia de jobs inciertos. Un fallo nativo no entra directamente en `failed`: podría haber jobs
 o efectos en curso y no habilita repetir el trabajo. Un turno completo queda
 en `needs_review`, conserva una propuesta y no cambia la tarea a `done`.
 
-Todavía no existe la salida productiva de `reconciling`. Antes de habilitarla,
-el servicio debe comprobar estado del thread, jobs propios y receipts de
-negocio; no bastará con recibir un booleano del modelo. No se debe desplegar
-este subconjunto como si ya fuera el motor completo.
+Para peers de investigación que el worker acaba de cerrar existe una salida
+controlada: conserva recibos y revocación y comprueba que no haya jobs inciertos.
+Los intentos perdidos tras crash o con teardown no confirmado siguen en
+reconciliación; todavía falta el procedimiento general de inspección y resolución.
+Un booleano del modelo no puede resolverlos.
 
 ## Permisos ligados al intento
 

@@ -13,7 +13,7 @@ Run in its locked script environment to avoid the legacy MCP dependency clash.
 import os
 import sys
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 from fastmcp import FastMCP
 from fastmcp.exceptions import ToolError
@@ -98,9 +98,11 @@ def researcher_finding_record(
     topic: str,
     content: str,
     evidence: list[dict[str, Any]],
-    finding_type: str = "observation",
+    finding_type: Literal[
+        "observation", "hypothesis", "experiment", "proof", "conclusion"
+    ] = "observation",
 ) -> dict:
-    """Persist a provisional finding. evidence contains objects {source_id: integer, quote: exact captured excerpt}. No invented confidence; preserve provenance and reuse operation_key on retry."""
+    """Persist a provisional finding. finding_type is its category; provisional is its validation status, not a category. evidence contains objects {source_id: integer, quote: exact captured excerpt}. No invented confidence; preserve provenance and reuse operation_key on retry."""
     return _call(
         "POST",
         "/findings",
@@ -126,7 +128,7 @@ def researcher_report_write(
     title: str,
     content: str,
     finding_ids: list[int],
-    report_type: str = "research",
+    report_type: Literal["research", "analysis", "summary"] = "research",
 ) -> dict:
     """Persist a canonical Markdown report draft linked to findings, visible in Researcher's /reports view. Do not add a title heading to content. A draft is not task acceptance. Reuse operation_key on retry."""
     return _call(

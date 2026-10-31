@@ -94,3 +94,31 @@ backend runner. Its random code lives in a private temporary control directory,
 never in candidate prompts/configuration or the business MCP environment.
 Business grants remain restricted to `research-tools`; do not solve legacy
 client authentication by passing the human cookie into a model process.
+
+## Primer recorrido por la API del producto
+
+`run_product.py --live --workspace ... --ken-command ... --model-cache ...`
+crea DB/uploads de ensayo, servidor propio y configuración del coordinador.
+Envía dos turnos limitados por la suscripción: fuente → cita → draft, luego
+corrección de ejemplo y nuevo draft. Comprueba DB/recibos independientemente
+de la respuesta del modelo. No verifica el navegador. Los casos reales,
+incluida la primera ejecución fallida, están en `product-runtime-evidence.json`.
+
+`run_product_stop.py --live --config /ruta/runtime.json --workspace ...`
+usa un único turno, solicita Stop después de vincular su identidad y espera
+cierre confirmado, grants revocados y estado cancelado. Usa datos nuevos y
+sobrescribe api_url/control_root para su servidor propio. No equivale a probar
+un tool de negocio lento ni a medir la cuota restante.
+
+`run_native_boundary.py --live ...` verifica configuración, Ken, negocio,
+restricciones y recibos de cierre sin inferir. `--verify-resume` es un diagnóstico
+separado: un thread sin turnos puede fallar como `thread not loaded`; no se cuenta
+como reanudación exitosa. `check_business_catalog.py` valida el catálogo real del
+MCP con su entorno uv bloqueado, sin HTTP ni modelos. `run_parent_loss.py --live`
+mata sólo su holder propio y comprueba peer y efecto demorado; usa pidfds de libc
+porque este Python no expone los wrappers Linux. Ninguno toca datos del usuario.
+
+Los ensayos de modelo dejan sus threads sintéticos en el historial administrado
+de Codex; se conservan sus IDs y no se borran sesiones ajenas. Las pruebas
+ordinarias no ejecutan estos runners. Requisitos/configuración del producto:
+`docs/architecture/native-runtime-boundary.md` y `docs/config/runtime.example.json`.

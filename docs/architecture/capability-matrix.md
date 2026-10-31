@@ -1,8 +1,9 @@
 # Matriz de capacidades y migración
 
-Estado: inventario verificado; migración parcial. Ningún runtime está integrado
-todavía al producto. Esta matriz fija destinos y pruebas antes de ampliar el
-adaptador; una fila pendiente no es una capacidad ya disponible.
+Estado: inventario verificado; migración parcial. Codex está integrado al primer
+recorrido de investigación por API autenticada; el resto del catálogo continúa
+pendiente. Ver `native-runtime-boundary.md`. Una fila pendiente no es una
+capacidad ya disponible.
 
 `legacy-tool-schemas.json` conserva los nombres, clases, archivos y **schemas
 Pydantic actuales de las 71 herramientas registradas** en

@@ -1,9 +1,9 @@
 # Rediseño del engine y de la coordinación
 
-Estado: contrato de destino con una primera persistencia de run/intento/contexto
-implementada en `run-coordination.md`; el producto todavía ejecuta el
-orchestrator/LoopEngine antiguos. El spike tiene un adaptador candidato de Codex
-y un MCP propio de investigación, no un engine productivo ya migrado.
+Estado: primer recorrido productivo de investigación conectado a la API autenticada
+mediante `RuntimeService`, Codex y Ken aislado. La migración del engine completo
+sigue pendiente: orchestrator/LoopEngine y los demás flows todavía existen.
+Ver `native-runtime-boundary.md` y `runtime-decision.md`.
 
 ## Un dueño por decisión
 
@@ -140,17 +140,17 @@ no conectarlos directamente como si ya cumplieran este contrato.
 
 No instalar simultáneamente dos adaptadores productivos por mantener la
 comparación. Los runners de evaluación pueden conservar ambos candidatos.
-La decisión productiva sigue abierta hasta cerrar los escenarios pendientes
-de aislamiento, fallos y control; los ensayos actuales favorecen empezar la
-integración con Codex, pero no prueban esos requisitos por sí solos.
+Se eligió Codex como destino de la migración por el control y la integración
+demostrados. Esta decisión no convierte los escenarios pendientes en aprobados
+ni justifica desplegar dos dueños del mismo trabajo.
 
 ## Próxima entrega verificable
 
-Los contratos neutrales y la primera persistencia de run/intento/contexto ya
-tienen pruebas SQLite reales de doble claim, resultado obsoleto, cancelación
-contra finalización, corrección, reapertura y transición+evento atómicos. Falta
-componer el servicio, jobs, reconciliación y presupuestos durables, y conectar
-el runtime y el MCP ya probado con auth/aislamiento. Las pruebas deben demostrar
-propiedad y efectos, no sólo mocks que devuelvan el estado esperado. Cubrir los
-43 escenarios de la hoja de ruta por recorridos; ninguno queda aprobado por la
-existencia de este documento.
+El primer recorrido conserva admisión, contexto, grants, reservas, eventos y
+propuestas; Stop y correcciones están conectados al propietario. Los fallos de
+teardown mantienen incertidumbre, y un turno completo no acepta la tarea.
+Ampliar ahora el servicio con recuperación operable, preguntas humanas,
+comunicación entre agentes, herramientas de desarrollo y aceptación versionada
+Git/review/CI. Migrar los consumidores antiguos y el control/historial del
+frontend; conservar todos los entregables visuales y de prompting del plan.
+Ninguno de los 43 escenarios queda aprobado por la existencia de este documento.

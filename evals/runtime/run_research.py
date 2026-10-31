@@ -122,7 +122,7 @@ async def ready(client, process, path):
 
 
 @asynccontextmanager
-async def backend(root, env):
+async def backend(root, env, *, runtime_settings=None):
     from backend.tools.base.db import ensure_migrations
 
     database = root / "research.db"
@@ -166,6 +166,10 @@ async def backend(root, env):
         "OTEL_SDK_DISABLED": "true",
         "DO_NOT_TRACK": "1",
     }
+    if runtime_settings is not None:
+        settings_path = root / "runtime-settings.json"
+        settings_path.write_text(json.dumps({**runtime_settings, "api_url": api}))
+        child_env["INFINIBAY_RUNTIME_CONFIG"] = str(settings_path)
     process = await asyncio.create_subprocess_exec(
         str(REPO / ".venv/bin/python"),
         "-c",

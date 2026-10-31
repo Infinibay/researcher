@@ -1,6 +1,7 @@
 # Inventario de inferencia y servicios auxiliares
 
-Estado: implementación parcial, sobre `aea1db0` más el runner de investigación.
+Estado: implementación parcial, con el primer recorrido de investigación conectado
+al coordinador y API del propietario. Ver `native-runtime-boundary.md`.
 No se afirma todavía que toda la aplicación use exclusivamente la suscripción.
 Las rutas antiguas siguen presentes hasta migrar sus consumidores. Los ensayos
 reales sí retiraron API keys y rechazaron proveedores alternativos.
@@ -19,7 +20,7 @@ reales sí retiraron API keys y rechazaron proveedores alternativos.
 | `backend/tools/base/dedup.py::_get_embed_fn`, `embeddings.py`, búsquedas de findings/wiki | Chroma `DefaultEmbeddingFunction`, MiniLM local; puede requerir descargar los pesos | Duplicados y embeddings al escribir/buscar; no hay identidad de modelo/dimensión persistida con cada BLOB | Fijar activo/modelo y bootstrap fuera de la solicitud. Separar similitud de validación. No mezclar vectores viejos y nuevos; reconstruir conservando fuentes y avisar si no hay cobertura |
 | `backend/config/model_capabilities.py::probe_model` | Hasta varias llamadas LiteLLM para probar opciones del proveedor | Antes se invocaba al arrancar; import/factory, servidor y CLI ya no lo llaman automáticamente | Retirar con el cliente antiguo. Metadata/auth/readiness no deben generar inferencia. Las pruebas de arranque lo caracterizan |
 | `backend/scripts/warmup_prefix_cache.py` | POST directo `/v1/chat/completions` a servidor indicado; un token de salida por rol | Sólo ejecución explícita de este script; timeout 120 segundos por llamada | Retirar de la distribución final del runtime nuevo; no ejecutar como instalación, health check o prueba ordinaria |
-| `backend/runtime/codex_session.py` | Proceso Codex nativo; exige cuenta `chatgpt` y proveedor `openai` | Ensayos explícitos; deadline, falta de progreso, turnos, herramientas y tokens observados. Cuota y llamadas internas desconocidas | Candidato aún no integrado al producto. Presupuesto durable y admisión sin fallback pendientes |
+| `backend/runtime/codex_session.py` | Proceso Codex nativo; exige cuenta `chatgpt` y proveedor `openai` | API autenticada y ensayos explícitos; deadline, falta de progreso, turnos, herramientas y tokens observados. Cuota y llamadas internas desconocidas | `RuntimeService` conserva reservas y uso máximo observado en SQLite. Grants por intento, Stop y corrección probados; falta migrar los demás consumidores y operar presupuestos desde UI |
 | `evals/runtime/serve_infinidev_research.py` | Infinidev `openai_subscription`; intercepta el punto central `litellm.completion` y rechaza otra ruta/modelo | Ensayo explícito, aislado; máximo 32 solicitudes y 350.000 tokens si se reportan, más límites externos de tiempo/trabajo | Shim de evaluación, no adaptador productivo. No demuestra cobertura de cada ruta auxiliar posible de Infinidev |
 
 `query_database` recibe SQL del llamador y `summarize_findings` construye una

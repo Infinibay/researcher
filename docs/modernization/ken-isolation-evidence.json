@@ -1,0 +1,119 @@
+{
+  "scope": "Published Ken 0.18.0 on two synthetic workspaces; not full retrieval/performance acceptance",
+  "local_neural_inference": true,
+  "generative_turns_submitted": 0,
+  "trials": [
+    {
+      "trial": "ken-isolation-a8e1c4b4",
+      "model_turns_submitted": 0,
+      "ken_version": "0.18.0",
+      "checks": [],
+      "status": "failed",
+      "error_type": "AssertionError"
+    },
+    {
+      "trial": "ken-isolation-c7e275c8",
+      "model_turns_submitted": 0,
+      "ken_version": "0.18.0",
+      "local_embeddings": true,
+      "checks": [
+        {
+          "check": "own-source-positive-control",
+          "status": "passed"
+        },
+        {
+          "tool": "ken_read",
+          "arguments": {
+            "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/ken-isolation-c7e275c8/beta/invoice.py",
+            "include": [
+              "source"
+            ],
+            "start_line": 1,
+            "end_line": 4
+          },
+          "is_error": true,
+          "foreign_secret_present": false
+        },
+        {
+          "tool": "ken_read",
+          "arguments": {
+            "path": "escape.py",
+            "include": [
+              "source"
+            ],
+            "start_line": 1,
+            "end_line": 4
+          },
+          "is_error": true,
+          "foreign_secret_present": false
+        },
+        {
+          "tool": "ken_read",
+          "arguments": {
+            "path": "owner.key",
+            "include": [
+              "source"
+            ],
+            "start_line": 1,
+            "end_line": 4
+          },
+          "is_error": true,
+          "foreign_secret_present": false
+        },
+        {
+          "tool": "ken_find",
+          "arguments": {
+            "scope": "text",
+            "query": "return",
+            "literal": true,
+            "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/ken-isolation-c7e275c8/beta"
+          },
+          "is_error": false,
+          "foreign_secret_present": false
+        },
+        {
+          "tool": "ken_find",
+          "arguments": {
+            "scope": "structure",
+            "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/ken-isolation-c7e275c8/beta",
+            "query": "",
+            "limit": 1,
+            "timeout_ms": 500
+          },
+          "is_error": true,
+          "foreign_secret_present": false
+        },
+        {
+          "tool": "ken_related",
+          "arguments": {
+            "relation": "imports",
+            "target": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/ken-isolation-c7e275c8/beta/invoice.py"
+          },
+          "is_error": true,
+          "foreign_secret_present": false
+        },
+        {
+          "tool": "ken_recall",
+          "arguments": {
+            "topic": "shared-topic"
+          },
+          "is_error": false,
+          "foreign_secret_present": false
+        },
+        {
+          "tool": "ken_recall",
+          "arguments": {
+            "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/ken-isolation-c7e275c8/beta/invoice.py"
+          },
+          "is_error": false,
+          "foreign_secret_present": false
+        }
+      ],
+      "status": "passed"
+    }
+  ],
+  "limits": [
+    "No cgroup memory cap",
+    "No full root semantic retrieval or crash-recovery claim"
+  ]
+}

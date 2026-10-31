@@ -3,8 +3,14 @@
   "status": "in_progress",
   "scenarios": {
     "C01": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/native-runtime-boundary.md",
+        "docs/modernization/product-runtime-evidence.json",
+        "docs/modernization/product-stop-evidence.json",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_inference_journal.py"
+      ]
     },
     "C02": {
       "status": "pending",
@@ -18,7 +24,12 @@
       "status": "in_progress",
       "evidence": [
         "backend/runtime/codex_session.py",
-        "backend/tests/runtime/test_codex_session.py"
+        "backend/tests/runtime/test_codex_session.py",
+        "docs/architecture/native-runtime-boundary.md",
+        "docs/modernization/product-runtime-evidence.json",
+        "docs/modernization/product-stop-evidence.json",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_inference_journal.py"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -39,8 +50,14 @@
       "evidence": []
     },
     "C07": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/native-runtime-boundary.md",
+        "docs/modernization/product-runtime-evidence.json",
+        "docs/modernization/product-stop-evidence.json",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_inference_journal.py"
+      ]
     },
     "C08": {
       "status": "pending",
@@ -81,7 +98,12 @@
         "docs/architecture/owned-commands.md",
         "backend/tests/runtime/test_command_executor.py",
         "backend/tests/runtime/test_command_journal.py",
-        "docs/modernization/owned-command-evidence.json"
+        "docs/modernization/owned-command-evidence.json",
+        "docs/architecture/native-runtime-boundary.md",
+        "docs/modernization/product-runtime-evidence.json",
+        "docs/modernization/product-stop-evidence.json",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_inference_journal.py"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -106,7 +128,12 @@
         "backend/tests/api/test_local_access.py",
         "backend/tests/api/test_websocket_lifecycle.py",
         "frontend/tests",
-        "docs/modernization/local-access-evidence.json"
+        "docs/modernization/local-access-evidence.json",
+        "docs/architecture/native-runtime-boundary.md",
+        "docs/modernization/product-runtime-evidence.json",
+        "docs/modernization/product-stop-evidence.json",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_inference_journal.py"
       ],
       "remaining": [
         "Durable product startup/shutdown and all tool lifecycle integration; old flows are not covered by owned command evidence",
@@ -124,7 +151,12 @@
         "docs/architecture/owned-commands.md",
         "backend/tests/runtime/test_command_executor.py",
         "backend/tests/runtime/test_command_journal.py",
-        "docs/modernization/owned-command-evidence.json"
+        "docs/modernization/owned-command-evidence.json",
+        "docs/architecture/native-runtime-boundary.md",
+        "docs/modernization/product-runtime-evidence.json",
+        "docs/modernization/product-stop-evidence.json",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_inference_journal.py"
       ]
     },
     "E05": {
@@ -138,7 +170,12 @@
         "docs/architecture/owned-commands.md",
         "backend/tests/runtime/test_command_executor.py",
         "backend/tests/runtime/test_command_journal.py",
-        "docs/modernization/owned-command-evidence.json"
+        "docs/modernization/owned-command-evidence.json",
+        "docs/architecture/native-runtime-boundary.md",
+        "docs/modernization/product-runtime-evidence.json",
+        "docs/modernization/product-stop-evidence.json",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_inference_journal.py"
       ]
     },
     "E06": {
@@ -152,7 +189,12 @@
         "docs/architecture/owned-commands.md",
         "backend/tests/runtime/test_command_executor.py",
         "backend/tests/runtime/test_command_journal.py",
-        "docs/modernization/owned-command-evidence.json"
+        "docs/modernization/owned-command-evidence.json",
+        "docs/architecture/native-runtime-boundary.md",
+        "docs/modernization/product-runtime-evidence.json",
+        "docs/modernization/product-stop-evidence.json",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_inference_journal.py"
       ]
     },
     "E07": {
@@ -162,7 +204,12 @@
         "backend/tests/runtime/test_codex_session.py",
         "docs/architecture/capability-matrix.md",
         "docs/architecture/inference-inventory.md",
-        "docs/modernization/research-runtime-evidence.json"
+        "docs/modernization/research-runtime-evidence.json",
+        "docs/architecture/native-runtime-boundary.md",
+        "docs/modernization/product-runtime-evidence.json",
+        "docs/modernization/product-stop-evidence.json",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_inference_journal.py"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -175,7 +222,12 @@
         "backend/tests/runtime/test_codex_session.py",
         "docs/architecture/capability-matrix.md",
         "docs/architecture/inference-inventory.md",
-        "docs/modernization/research-runtime-evidence.json"
+        "docs/modernization/research-runtime-evidence.json",
+        "docs/architecture/native-runtime-boundary.md",
+        "docs/modernization/product-runtime-evidence.json",
+        "docs/modernization/product-stop-evidence.json",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_inference_journal.py"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -326,7 +378,12 @@
         "backend/tests/api/test_local_access.py",
         "backend/tests/api/test_websocket_lifecycle.py",
         "frontend/tests",
-        "docs/modernization/local-access-evidence.json"
+        "docs/modernization/local-access-evidence.json",
+        "docs/architecture/native-runtime-boundary.md",
+        "docs/modernization/product-runtime-evidence.json",
+        "docs/modernization/product-stop-evidence.json",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_inference_journal.py"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable",
@@ -342,7 +399,12 @@
         "docs/architecture/owned-commands.md",
         "backend/tests/runtime/test_command_executor.py",
         "backend/tests/runtime/test_command_journal.py",
-        "docs/modernization/owned-command-evidence.json"
+        "docs/modernization/owned-command-evidence.json",
+        "docs/architecture/native-runtime-boundary.md",
+        "docs/modernization/product-runtime-evidence.json",
+        "docs/modernization/product-stop-evidence.json",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_inference_journal.py"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
@@ -365,7 +427,12 @@
         "backend/tests/api/test_local_access.py",
         "backend/tests/api/test_websocket_lifecycle.py",
         "frontend/tests",
-        "docs/modernization/local-access-evidence.json"
+        "docs/modernization/local-access-evidence.json",
+        "docs/architecture/native-runtime-boundary.md",
+        "docs/modernization/product-runtime-evidence.json",
+        "docs/modernization/product-stop-evidence.json",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_inference_journal.py"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable",
@@ -412,7 +479,12 @@
       "evidence": [
         "docs/architecture/capability-matrix.md",
         "docs/architecture/inference-inventory.md",
-        "docs/modernization/research-runtime-evidence.json"
+        "docs/modernization/research-runtime-evidence.json",
+        "docs/architecture/native-runtime-boundary.md",
+        "docs/modernization/product-runtime-evidence.json",
+        "docs/modernization/product-stop-evidence.json",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_inference_journal.py"
       ]
     },
     "U04": {
@@ -493,7 +565,12 @@
         "docs/modernization/infinidev-explain-evidence.json",
         "docs/modernization/codex-control-evidence.json",
         "docs/architecture/research-slice.md",
-        "docs/modernization/research-mcp-evidence.json"
+        "docs/modernization/research-mcp-evidence.json",
+        "docs/architecture/native-runtime-boundary.md",
+        "docs/modernization/product-runtime-evidence.json",
+        "docs/modernization/product-stop-evidence.json",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_inference_journal.py"
       ],
       "remaining": [
         "Bounded execution/control",
@@ -502,14 +579,26 @@
       ]
     },
     "runtime_decision": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/native-runtime-boundary.md",
+        "docs/modernization/product-runtime-evidence.json",
+        "docs/modernization/product-stop-evidence.json",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_inference_journal.py",
+        "docs/architecture/runtime-decision.md"
+      ]
     },
     "ken_mcp": {
       "status": "in_progress",
       "evidence": [
         "docs/modernization/runtime-evaluation.md",
-        "docs/modernization/codex-explain-evidence.json"
+        "docs/modernization/codex-explain-evidence.json",
+        "docs/architecture/native-runtime-boundary.md",
+        "docs/modernization/product-runtime-evidence.json",
+        "docs/modernization/product-stop-evidence.json",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_inference_journal.py"
       ],
       "remaining": [
         "Full comparative/product scenarios and failure acceptance"
@@ -519,7 +608,12 @@
       "status": "in_progress",
       "evidence": [
         "docs/modernization/runtime-evaluation.md",
-        "docs/modernization/codex-explain-evidence.json"
+        "docs/modernization/codex-explain-evidence.json",
+        "docs/architecture/native-runtime-boundary.md",
+        "docs/modernization/product-runtime-evidence.json",
+        "docs/modernization/product-stop-evidence.json",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_inference_journal.py"
       ],
       "remaining": [
         "Full comparative/product scenarios and failure acceptance"
@@ -530,7 +624,12 @@
       "evidence": [
         "docs/architecture/research-slice.md",
         "scripts/researcher_mcp_server.py",
-        "docs/modernization/research-mcp-evidence.json"
+        "docs/modernization/research-mcp-evidence.json",
+        "docs/architecture/native-runtime-boundary.md",
+        "docs/modernization/product-runtime-evidence.json",
+        "docs/modernization/product-stop-evidence.json",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_inference_journal.py"
       ],
       "remaining": [
         "Full current-tool inventory and disposition",
@@ -539,12 +638,29 @@
       ]
     },
     "inference_inventory": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/native-runtime-boundary.md",
+        "docs/modernization/product-runtime-evidence.json",
+        "docs/modernization/product-stop-evidence.json",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_inference_journal.py"
+      ]
     },
     "engine_redesign": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/native-runtime-boundary.md",
+        "docs/modernization/product-runtime-evidence.json",
+        "docs/modernization/product-stop-evidence.json",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_inference_journal.py"
+      ],
+      "remaining": [
+        "Migrate all legacy callers and capability families",
+        "Recover uncertain work with typed human controls",
+        "Versioned Git/review/CI acceptance and full frontend integration"
+      ]
     },
     "communication_guide": {
       "status": "in_progress",

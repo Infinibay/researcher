@@ -30,9 +30,21 @@ async def lifespan(app: FastAPI):
     setup_file_logging()
     await asyncio.to_thread(ensure_migrations)
     await asyncio.to_thread(app.state.local_access.start)
+    if app.state.runtime_service is None:
+        from backend.api.runtime_dependencies import configured_runtime
+
+        app.state.runtime_service = await asyncio.to_thread(
+            configured_runtime, app.state.live_grants
+        )
+    runtime = app.state.runtime_service
+    if runtime is not None:
+        await runtime.__aenter__()
     try:
         yield
     finally:
+        if runtime is not None:
+            await runtime.__aexit__(None, None, None)
+        app.state.live_grants.close()
         app.state.local_access.close()
         logger.info("Shutdown signal received — stopping active flows")
         from backend.api.flow_manager import flow_manager
@@ -55,7 +67,7 @@ async def lifespan(app: FastAPI):
         )
 
 
-def create_app(*, access: LocalAccess | None = None) -> FastAPI:
+def create_app(*, access: LocalAccess | None = None, runtime_service=None) -> FastAPI:
     """Construct routes without inference, database writes or maintenance jobs."""
     app = FastAPI(
         title="INFINIBAY API",
@@ -67,6 +79,12 @@ def create_app(*, access: LocalAccess | None = None) -> FastAPI:
     )
 
     app.state.local_access = access or LocalAccess()
+    from backend.runtime.live_grants import LiveGrants
+
+    app.state.live_grants = (
+        runtime_service.live_grants if runtime_service is not None else LiveGrants()
+    )
+    app.state.runtime_service = runtime_service
 
     from backend.api.request_limits import ToolRequestLimits
 
@@ -120,12 +138,16 @@ def create_app(*, access: LocalAccess | None = None) -> FastAPI:
     from backend.api.routes.projects import router as projects_router
     from backend.api.routes.research import install_research_errors
     from backend.api.routes.research import router as research_router
+    from backend.api.routes.runs import install_run_errors
+    from backend.api.routes.runs import router as runs_router
     from backend.api.routes.session import router as session_router
     from backend.api.routes.tasks import router as tasks_router
     from backend.api.routes.user_requests import router as user_requests_router
     from backend.api.routes.wiki import router as wiki_router
 
     app.include_router(session_router)
+    install_run_errors(app)
+    app.include_router(runs_router)
     install_research_errors(app)
     app.include_router(research_router)
     app.include_router(health_router)

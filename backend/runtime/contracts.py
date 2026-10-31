@@ -32,6 +32,30 @@ def command_key(value: str) -> None:
         raise ValueError("Invalid operation key")
 
 
+def validate_correction(
+    *,
+    project_id,
+    task_id,
+    expected_version,
+    operation_key,
+    statement,
+    source_kind,
+    source_reference,
+):
+    for value in (project_id, task_id, expected_version):
+        identity(value)
+    command_key(operation_key)
+    text(statement, "statement", 50000)
+    text(source_reference, "source_reference", 1200)
+    if source_kind not in (
+        "user_message",
+        "user_example",
+        "tool_evidence",
+        "assumption",
+    ):
+        raise ValueError("Unknown context source kind")
+
+
 @dataclass(frozen=True)
 class RunSpec:
     project_id: int

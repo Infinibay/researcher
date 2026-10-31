@@ -48,9 +48,16 @@ def _hash(value: str) -> str:
 
 
 class SQLiteResearchStore:
-    def __init__(self, database: str | Path, *, clock: Callable[[], float] = time.time):
+    def __init__(
+        self,
+        database: str | Path,
+        *,
+        clock: Callable[[], float] = time.time,
+        runtime_authority: Callable[[str], bool] | None = None,
+    ):
         self.database = str(database)
         self.clock = clock
+        self.runtime_authority = runtime_authority
 
     @contextmanager
     def _transaction(self, *, write=False):
@@ -163,6 +170,12 @@ class SQLiteResearchStore:
         if permission and permission not in json.loads(row["permissions_json"]):
             raise ResearchForbidden("Tool scope lacks the required permission")
         if row["runtime_bound"]:
+            if self.runtime_authority is not None and not self.runtime_authority(
+                scope.grant_id
+            ):
+                raise ResearchForbidden(
+                    "Execution authority was withdrawn by this host"
+                )
             attempt = conn.execute(
                 """SELECT a.id,a.status AS attempt_status,a.lease_expires_at,a.fence,
                     r.project_id,r.task_id,r.actor_id,r.context_version,r.status AS run_status,

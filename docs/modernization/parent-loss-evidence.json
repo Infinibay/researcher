@@ -1,0 +1,23 @@
+{
+  "scope": "Kill owned host holder during an actual native command. No model turn. Not a remote billing-cancellation guarantee.",
+  "trials": [
+    {
+      "trial": "parent-loss-4a46dbac",
+      "model_turns_submitted": 0,
+      "status": "failed",
+      "error_type": "AttributeError"
+    },
+    {
+      "trial": "parent-loss-fa168766",
+      "model_turns_submitted": 0,
+      "status": "passed",
+      "native_pid": 737644,
+      "job_id": "77798555-a9b4-4309-953b-4655b2007514",
+      "run_id": "2a142533-736f-4921-93fe-84e3d8c5f4b2",
+      "holder_terminal": true,
+      "native_terminal": true,
+      "delayed_effect_observed": false
+    }
+  ],
+  "setup_failure": "4a46dbac used a Python build lacking os.pidfd_open. Owned holder/peer were terminal and no delayed effect was observed, but this setup is not the successful trial. Corrected fa168766 uses libc pidfds."
+}

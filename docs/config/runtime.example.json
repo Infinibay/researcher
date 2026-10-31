@@ -1,0 +1,24 @@
+{
+  "codex_binary": "/tools/codex-0.166.0/bin/codex",
+  "managed_home": "/home/OWNER/.codex",
+  "control_root": "/state/researcher/native",
+  "ken_command": "/tools/ken-rank-0.18.0/bin/ken",
+  "model_cache": "/cache/public-models/huggingface/hub",
+  "business_script": "/app/researcher/scripts/researcher_mcp_server.py",
+  "uv_binary": "/tools/bin/uv",
+  "uv_cache": "/cache/uv",
+  "workspace_root": "/workspaces/researcher",
+  "api_url": "http://127.0.0.1:8000",
+  "model": "gpt-6.1-sol",
+  "limits": {
+    "wall_seconds": 180,
+    "no_progress_seconds": 90,
+    "max_turns": 1,
+    "max_tool_calls": 25,
+    "max_observed_tokens": 350000,
+    "max_answer_bytes": 200000
+  },
+  "max_concurrent": 2,
+  "project_turn_limit": 20,
+  "project_token_limit": 4000000
+}

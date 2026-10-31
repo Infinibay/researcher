@@ -33,6 +33,7 @@ from backend.runtime.contracts import (
     invalidated_outcome,
     native_outcome,
     text,
+    validate_correction,
 )
 
 
@@ -157,6 +158,322 @@ class SQLiteRunStore:
     def get(self, project_id: int, run_id: str) -> RunView:
         with self._transaction() as conn:
             return self._view(self._row(conn, project_id, run_id))
+
+    def context_snapshot(self, project_id, task_id):
+        with self._transaction() as conn:
+            self._task(conn, project_id, task_id)
+            task = conn.execute(
+                "SELECT title,description,type FROM tasks WHERE project_id=? AND id=?",
+                (project_id, task_id),
+            ).fetchone()
+            revisions = conn.execute(
+                "SELECT version,statement,source_kind,source_reference FROM runtime_context_revisions WHERE project_id=? AND task_id=? ORDER BY version",
+                (project_id, task_id),
+            ).fetchall()
+            return {
+                "task": dict(task),
+                "context_version": self._context(conn, task_id),
+                "corrections": [dict(row) for row in revisions],
+            }
+
+    def reserve_inference(
+        self,
+        lease,
+        *,
+        workspace,
+        catalog_hash,
+        limits,
+        project_turn_limit=20,
+        project_token_limit=4000000,
+    ):
+        """Reserve before turn/start. False means NEVER dispatch this intent again.
+
+        These are observed-work fuses, not a physical billing cap. Unknown usage
+        keeps the full token reservation. Project budgets are durable lifetime
+        limits; changing policy requires a separate trusted migration/decision.
+        """
+        import re
+
+        from backend.runtime.native_commands import VERSION
+
+        text(workspace, "workspace", 4096)
+        if not re.fullmatch(r"[a-f0-9]{64}", catalog_hash):
+            raise ValueError("Expected a tool catalog SHA256")
+        if limits.max_turns != 1:
+            raise ValueError("Each dispatch reserves exactly one native turn")
+        identity(project_turn_limit)
+        identity(project_token_limit)
+        intent = (workspace, catalog_hash, VERSION, _json(asdict(limits)))
+        with self._transaction(write=True) as conn:
+            row = self._authority(conn, lease)
+            if row["thread_id"] is None:
+                raise RunConflict("Bind native thread before reserving dispatch")
+            previous = conn.execute(
+                "SELECT * FROM runtime_inference_dispatches WHERE attempt_id=?",
+                (lease.attempt_id,),
+            ).fetchone()
+            if previous is not None:
+                if (
+                    tuple(
+                        previous[k]
+                        for k in (
+                            "workspace",
+                            "catalog_hash",
+                            "runtime_version",
+                            "limits_json",
+                        )
+                    )
+                    != intent
+                ):
+                    raise RunConflict(
+                        "Attempt already reserved another inference intent"
+                    )
+                return False
+            conn.execute(
+                "INSERT OR IGNORE INTO runtime_project_budgets VALUES(?,?,?)",
+                (lease.project_id, project_turn_limit, project_token_limit),
+            )
+            policy = conn.execute(
+                "SELECT * FROM runtime_project_budgets WHERE project_id=?",
+                (lease.project_id,),
+            ).fetchone()
+            if (policy["turn_limit"], policy["token_limit"]) != (
+                project_turn_limit,
+                project_token_limit,
+            ):
+                raise RunConflict(
+                    "Project budget policy changed; explicit reconciliation required"
+                )
+            used = conn.execute(
+                """SELECT COUNT(*), COALESCE(SUM(CASE WHEN status='settled' AND observed_tokens IS NOT NULL
+                THEN observed_tokens ELSE MAX(token_ceiling,COALESCE(observed_tokens,0)) END),0) FROM runtime_inference_dispatches WHERE project_id=?""",
+                (lease.project_id,),
+            ).fetchone()
+            if (
+                used[0] >= project_turn_limit
+                or used[1] + limits.max_observed_tokens > project_token_limit
+            ):
+                raise RunConflict(
+                    "Project work budget exhausted; no native turn was sent"
+                )
+            conn.execute(
+                """INSERT INTO runtime_inference_dispatches(attempt_id,project_id,workspace,catalog_hash,
+                runtime_version,limits_json,token_ceiling,status,created_at) VALUES(?,?,?,?,?,?,?,'reserved',?)""",
+                (
+                    lease.attempt_id,
+                    lease.project_id,
+                    *intent,
+                    limits.max_observed_tokens,
+                    self.clock(),
+                ),
+            )
+            self._event(
+                conn,
+                lease.project_id,
+                lease.task_id,
+                "run.dispatch_reserved",
+                {
+                    "run_id": lease.run_id,
+                    "attempt_id": lease.attempt_id,
+                    "catalog_hash": catalog_hash,
+                    "limits": asdict(limits),
+                    "runtime_version": VERSION,
+                },
+            )
+            return True
+
+    def note_inference_usage(self, lease, cumulative):
+        """Preserve reported high water even if the turn later loses its receipt."""
+        if type(cumulative) is not int or not 0 <= cumulative <= 9223372036854775807:
+            raise ValueError("Invalid native cumulative token observation")
+        with self._transaction(write=True) as conn:
+            self._original_attempt(conn, lease)
+            row = conn.execute(
+                "SELECT observed_tokens FROM runtime_inference_dispatches WHERE attempt_id=?",
+                (lease.attempt_id,),
+            ).fetchone()
+            if row is None:
+                raise RunConflict("No reserved native dispatch")
+            if row[0] is not None and row[0] >= cumulative:
+                return
+            conn.execute(
+                "UPDATE runtime_inference_dispatches SET observed_tokens=? WHERE attempt_id=?",
+                (cumulative, lease.attempt_id),
+            )
+            self._event(
+                conn,
+                lease.project_id,
+                lease.task_id,
+                "run.usage_high_water",
+                {
+                    "run_id": lease.run_id,
+                    "observed_tokens": cumulative,
+                    "billing_quota_known": False,
+                },
+            )
+
+    def settle_inference(self, lease, *, observed_tokens, native_status):
+        native_outcome(native_status)
+        if observed_tokens is not None and (
+            type(observed_tokens) is not int or observed_tokens < 0
+        ):
+            raise ValueError("Observed tokens must be a nonnegative integer or unknown")
+        with self._transaction(write=True) as conn:
+            self._original_attempt(conn, lease)
+            row = conn.execute(
+                "SELECT * FROM runtime_inference_dispatches WHERE attempt_id=?",
+                (lease.attempt_id,),
+            ).fetchone()
+            if row is None:
+                raise RunConflict("No reserved native dispatch")
+            if row["observed_tokens"] is not None:
+                observed_tokens = max(row["observed_tokens"], observed_tokens or 0)
+            if row["status"] == "settled":
+                if (row["observed_tokens"], row["native_status"]) != (
+                    observed_tokens,
+                    native_status,
+                ):
+                    raise RunConflict("Conflicting terminal usage receipt")
+                return
+            conn.execute(
+                """UPDATE runtime_inference_dispatches SET status='settled',observed_tokens=?,
+                         native_status=?,settled_at=? WHERE attempt_id=?""",
+                (observed_tokens, native_status, self.clock(), lease.attempt_id),
+            )
+            self._event(
+                conn,
+                lease.project_id,
+                lease.task_id,
+                "run.usage_observed",
+                {
+                    "run_id": lease.run_id,
+                    "observed_tokens": observed_tokens,
+                    "native_status": native_status,
+                    "usage_unknown": observed_tokens is None,
+                },
+            )
+
+    def recover_owners(self, owner_id):
+        """Call ONLY after acquiring the exclusive database owner OS lock.
+
+        No native prompt replay and no assertion that old jobs are terminal.
+        """
+        text(owner_id, "owner_id", 128)
+        with self._transaction(write=True) as conn:
+            rows = conn.execute(
+                """SELECT r.project_id,r.id FROM runtime_runs r JOIN runtime_attempts a
+                ON a.id=r.current_attempt_id WHERE a.owner_id<>? AND a.status IN ('running','reconciling')
+                AND r.status IN ('running','cancelling')""",
+                (owner_id,),
+            ).fetchall()
+            for item in rows:
+                row = self._row(conn, item["project_id"], item["id"])
+                self._withdraw(conn, row, "reconciling")
+                conn.execute(
+                    "UPDATE runtime_inference_dispatches SET status='unknown' WHERE attempt_id=? AND status='reserved'",
+                    (row["current_attempt_id"],),
+                )
+                self._event(
+                    conn,
+                    row["project_id"],
+                    row["task_id"],
+                    "run.owner_lost",
+                    {
+                        "run_id": row["id"],
+                        "attempt_id": row["current_attempt_id"],
+                        "replay": False,
+                    },
+                )
+            return len(rows)
+
+    def uncertain_inference(self, lease, *, reason, native_result=None):
+        """Retain uncertainty when a worker cannot prove its peer teardown."""
+        text(reason, "uncertainty reason", 128)
+        if native_result is not None:
+            native_outcome(native_result["native_status"])
+            text(native_result["summary"], "summary", 200000)
+        with self._transaction(write=True) as conn:
+            self._original_attempt(conn, lease)
+            row = self._row(conn, lease.project_id, lease.run_id)
+            if row["current_attempt_id"] != lease.attempt_id or row["status"] not in (
+                "running",
+                "cancelling",
+                "reconciling",
+            ):
+                raise StaleAttempt("Uncertainty cannot replace another result or owner")
+            self._withdraw(conn, row, "reconciling")
+            if native_result is not None:
+                conn.execute(
+                    "UPDATE runtime_attempts SET native_result_json=? WHERE id=?",
+                    (_json(native_result), lease.attempt_id),
+                )
+            conn.execute(
+                "UPDATE runtime_inference_dispatches SET status='unknown' WHERE attempt_id=?",
+                (lease.attempt_id,),
+            )
+            self._event(
+                conn,
+                lease.project_id,
+                lease.task_id,
+                "run.peer_state_unknown",
+                {"run_id": lease.run_id, "reason": reason, "replay": False},
+            )
+
+    def retire_inference(self, lease, *, outcome):
+        """Host-only: caller has closed its native AND business peers in one worker.
+
+        Cannot certify an owned command whose terminal receipt is missing. Native
+        completion/unknown usage remain independent of product task acceptance.
+        """
+        if outcome not in ("cancelled", "superseded", "failed"):
+            raise ValueError("Invalid retired inference outcome")
+        with self._transaction(write=True) as conn:
+            self._original_attempt(conn, lease)
+            row = self._row(conn, lease.project_id, lease.run_id)
+            if row["current_attempt_id"] != lease.attempt_id:
+                raise StaleAttempt("Another attempt owns this run")
+            if row["status"] in (
+                "accepted",
+                "needs_review",
+                "cancelled",
+                "superseded",
+                "failed",
+            ):
+                return self._view(row)
+            if outcome == "cancelled" and not row["cancel_requested"]:
+                raise RunConflict("No durable cancellation intent")
+            if (
+                outcome == "superseded"
+                and self._context(conn, lease.task_id) == lease.context_version
+            ):
+                raise RunConflict("No durable context correction")
+            unknown_job = conn.execute(
+                "SELECT id FROM runtime_jobs WHERE attempt_id=? AND status IN ('dispatching','cancelling','unknown')",
+                (lease.attempt_id,),
+            ).fetchone()
+            if unknown_job is not None:
+                raise RunConflict("Owned jobs require terminal reconciliation")
+            self._withdraw(conn, row, outcome)
+            conn.execute(
+                "UPDATE runtime_attempts SET status='finished',ended_at=? WHERE id=?",
+                (self.clock(), lease.attempt_id),
+            )
+            conn.execute(
+                "UPDATE runtime_inference_dispatches SET status='unknown' WHERE attempt_id=? AND status='reserved'",
+                (lease.attempt_id,),
+            )
+            self._event(
+                conn,
+                lease.project_id,
+                lease.task_id,
+                "run.peers_retired",
+                {
+                    "run_id": lease.run_id,
+                    "status": outcome,
+                    "native_and_business_closed": True,
+                },
+            )
+            return self._view(self._row(conn, lease.project_id, lease.run_id))
 
     def admit(self, spec: RunSpec) -> RunView:
         intent = {"kind": "admit", **asdict(spec)}
@@ -874,17 +1191,15 @@ class SQLiteRunStore:
         source_kind,
         source_reference,
     ):
-        identity(expected_version)
-        command_key(operation_key)
-        text(statement, "statement", 50000)
-        text(source_reference, "source_reference", 1200)
-        if source_kind not in (
-            "user_message",
-            "user_example",
-            "tool_evidence",
-            "assumption",
-        ):
-            raise ValueError("Unknown context source kind")
+        validate_correction(
+            project_id=project_id,
+            task_id=task_id,
+            expected_version=expected_version,
+            operation_key=operation_key,
+            statement=statement,
+            source_kind=source_kind,
+            source_reference=source_reference,
+        )
         intent = {
             "kind": "correct_context",
             "project_id": project_id,

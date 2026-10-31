@@ -281,6 +281,12 @@ def ensure_migrations(db_path: str | None = None) -> None:
             resource = Path(__file__).resolve().parents[2] / "db/job_schema.sql"
             apply_sql_resource(conn, resource)
             logger.info("Migration 20: owned command dispatch and terminal receipts")
+        if 21 not in applied:
+            from backend.db.migrations import apply_sql_resource
+
+            resource = Path(__file__).resolve().parents[2] / "db/inference_schema.sql"
+            apply_sql_resource(conn, resource)
+            logger.info("Migration 21: native dispatch intent and project work budgets")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()

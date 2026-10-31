@@ -1,0 +1,194 @@
+{
+  "scope": "Native configuration, real business MCP, isolated Ken, host diagnostic commands, and close receipts; no generative turns",
+  "trials": [
+    {
+      "trial": "native-boundary-0c7c06a4",
+      "model_turns_submitted": 0,
+      "status": "failed",
+      "error_type": "ExceptionGroup"
+    },
+    {
+      "trial": "native-boundary-12b5184d",
+      "model_turns_submitted": 0,
+      "status": "failed",
+      "thread_id": "01a1940c-1d60-7713-84ca-f98b22027bde",
+      "catalog_hash": "8138edf8ca61a1c4509165a2d48d3cc46f7964c56b5f53465c3098a85a22f14e",
+      "native_thread_ephemeral": false,
+      "profile": {
+        "id": "researcher_inference",
+        "extends": null
+      },
+      "model": "gpt-6.1-sol",
+      "native_turns_sent": 0,
+      "native_ken_read": "passed",
+      "host_business_read": "passed",
+      "business_grant_absent_from_native_launch": true,
+      "inference_profile_effect_checks": [
+        {
+          "case": "inside",
+          "exit_code": 0
+        },
+        {
+          "case": "outside",
+          "exit_code": 1
+        },
+        {
+          "case": "python-positive",
+          "exit_code": 0
+        },
+        {
+          "case": "read-only",
+          "exit_code": 23
+        },
+        {
+          "case": "network",
+          "exit_code": 23
+        }
+      ],
+      "error_type": "ExceptionGroup"
+    },
+    {
+      "trial": "native-boundary-56424629",
+      "model_turns_submitted": 0,
+      "status": "passed",
+      "thread_id": "01a193ed-8b67-7780-8b70-5db26526e0f9",
+      "profile": {
+        "id": "researcher_inference",
+        "extends": null
+      },
+      "model": "gpt-6.1-sol",
+      "native_turns_sent": 0,
+      "native_ken_read": "passed",
+      "host_business_read": "passed",
+      "inference_profile_effect_checks": [
+        {
+          "case": "inside",
+          "exit_code": 0
+        },
+        {
+          "case": "outside",
+          "exit_code": 1
+        },
+        {
+          "case": "network",
+          "exit_code": 1
+        }
+      ],
+      "owned_backend_terminal": true
+    },
+    {
+      "trial": "native-boundary-b722b3dc",
+      "model_turns_submitted": 0,
+      "status": "failed",
+      "error_type": "ExceptionGroup"
+    },
+    {
+      "trial": "native-boundary-c18a9ad9",
+      "model_turns_submitted": 0,
+      "status": "failed",
+      "thread_id": "01a193f2-58f5-7a10-9a96-198695d39c02",
+      "profile": {
+        "id": "researcher_inference",
+        "extends": null
+      },
+      "model": "gpt-6.1-sol",
+      "native_turns_sent": 0,
+      "native_ken_read": "passed",
+      "host_business_read": "passed",
+      "business_grant_absent_from_native_launch": true,
+      "error_type": "ExceptionGroup"
+    },
+    {
+      "trial": "native-boundary-cc15be5f",
+      "model_turns_submitted": 0,
+      "status": "passed",
+      "thread_id": "01a193f6-2b78-77c0-897b-f3ca062ff037",
+      "profile": {
+        "id": "researcher_inference",
+        "extends": null
+      },
+      "model": "gpt-6.1-sol",
+      "native_turns_sent": 0,
+      "native_ken_read": "passed",
+      "host_business_read": "passed",
+      "business_grant_absent_from_native_launch": true,
+      "inference_profile_effect_checks": [
+        {
+          "case": "inside",
+          "exit_code": 0
+        },
+        {
+          "case": "outside",
+          "exit_code": 1
+        },
+        {
+          "case": "python-positive",
+          "exit_code": 0
+        },
+        {
+          "case": "read-only",
+          "exit_code": 23
+        },
+        {
+          "case": "network",
+          "exit_code": 23
+        }
+      ],
+      "owned_backend_terminal": true
+    },
+    {
+      "trial": "native-boundary-d8ff8a9c",
+      "model_turns_submitted": 0,
+      "status": "failed",
+      "error_type": "ExceptionGroup"
+    },
+    {
+      "trial": "native-boundary-dfcaa835",
+      "model_turns_submitted": 0,
+      "status": "passed",
+      "thread_id": "01a19424-9a70-7592-b6fc-9812b5892270",
+      "catalog_hash": "ce8f7b0c042efe5eed7269cb6f9dd8b4210023c61b7c7fb2de1dab60f6216209",
+      "native_thread_ephemeral": false,
+      "profile": {
+        "id": "researcher_inference",
+        "extends": null
+      },
+      "model": "gpt-6.1-sol",
+      "native_turns_sent": 0,
+      "native_ken_read": "passed",
+      "host_business_read": "passed",
+      "business_grant_absent_from_native_launch": true,
+      "inference_profile_effect_checks": [
+        {
+          "case": "inside",
+          "exit_code": 0
+        },
+        {
+          "case": "outside",
+          "exit_code": 1
+        },
+        {
+          "case": "python-positive",
+          "exit_code": 0
+        },
+        {
+          "case": "read-only",
+          "exit_code": 23
+        },
+        {
+          "case": "network",
+          "exit_code": 23
+        }
+      ],
+      "owned_peers_closed": true,
+      "resume": "not_tested; zero-turn threads may have no persisted rollout",
+      "owned_backend_terminal": true
+    }
+  ],
+  "classification_notes": [
+    "Early failures exposed normalized auth endpoint and nullable env_vars defaults; policy refused before inference.",
+    "56424629 proved metadata and inside/outside, but its network nonzero exit alone was weaker evidence. cc15be5f and dfcaa835 verify positive Python execution and denied errno controls.",
+    "Zero-turn resume failed as thread not loaded. It is retained, not classified as successful resume.",
+    "dfcaa835 verifies the final Code Mode host policy and updated enum-bearing business catalog, with zero turns."
+  ]
+}
