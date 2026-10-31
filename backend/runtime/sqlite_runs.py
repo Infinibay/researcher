@@ -17,7 +17,10 @@ from uuid import uuid4
 from backend.db.connection import connect
 from backend.runtime.contracts import (
     AttemptLease,
+    CommandJob,
+    CommandSpec,
     EventPage,
+    JobReservation,
     RunConflict,
     RunEvent,
     RunNotFound,
@@ -264,7 +267,7 @@ class SQLiteRunStore:
                 expires,
             )
 
-    def _authority(self, conn, lease, *, allow_finished=False):
+    def _authority(self, conn, lease, *, allow_finished=False, now=None):
         row = self._row(conn, lease.project_id, lease.run_id)
         actual = (
             row["current_attempt_id"],
@@ -295,7 +298,7 @@ class SQLiteRunStore:
         if (
             row["status"] != "running"
             or row["attempt_status"] != "running"
-            or row["lease_expires_at"] <= self.clock()
+            or row["lease_expires_at"] <= (self.clock() if now is None else now)
         ):
             raise StaleAttempt("Attempt authority expired or was withdrawn")
         self._task(conn, lease.project_id, lease.task_id)
@@ -462,6 +465,34 @@ class SQLiteRunStore:
             )
             return self._view(self._row(conn, lease.project_id, lease.run_id))
 
+    @staticmethod
+    def _original_attempt(conn, lease):
+        attempt = conn.execute(
+            """SELECT a.*,r.project_id,r.task_id,r.actor_id,r.context_version
+                FROM runtime_attempts a JOIN runtime_runs r ON r.id=a.run_id
+                WHERE a.id=? AND r.project_id=?""",
+            (lease.attempt_id, lease.project_id),
+        ).fetchone()
+        if attempt is None or (
+            attempt["run_id"],
+            attempt["task_id"],
+            attempt["actor_id"],
+            attempt["context_version"],
+            attempt["owner_id"],
+            attempt["fence"],
+        ) != (
+            lease.run_id,
+            lease.task_id,
+            lease.actor_id,
+            lease.context_version,
+            lease.owner_id,
+            lease.fence,
+        ):
+            raise StaleAttempt(
+                "Observation does not identify this attempt's original owner"
+            )
+        return attempt
+
     def observe_native(self, lease, *, observation_key, native_kind, payload):
         """Retain even stale facts, without granting authority or accepting work."""
         command_key(observation_key)
@@ -478,30 +509,7 @@ class SQLiteRunStore:
         text(_json(payload), "native payload", 32000)
         fingerprint = _digest({"native_kind": native_kind, "payload": payload})
         with self._transaction(write=True) as conn:
-            attempt = conn.execute(
-                """SELECT a.*,r.project_id,r.task_id,r.actor_id,r.context_version
-                    FROM runtime_attempts a JOIN runtime_runs r ON r.id=a.run_id
-                    WHERE a.id=? AND r.project_id=?""",
-                (lease.attempt_id, lease.project_id),
-            ).fetchone()
-            if attempt is None or (
-                attempt["run_id"],
-                attempt["task_id"],
-                attempt["actor_id"],
-                attempt["context_version"],
-                attempt["owner_id"],
-                attempt["fence"],
-            ) != (
-                lease.run_id,
-                lease.task_id,
-                lease.actor_id,
-                lease.context_version,
-                lease.owner_id,
-                lease.fence,
-            ):
-                raise StaleAttempt(
-                    "Observation does not identify this attempt's original owner"
-                )
+            attempt = self._original_attempt(conn, lease)
             for field in ("thread_id", "turn_id"):
                 if (
                     attempt[field] is not None
@@ -545,6 +553,253 @@ class SQLiteRunStore:
             )
             return event_id
 
+    def attempt_active(self, lease) -> bool:
+        with self._transaction() as conn:
+            try:
+                self._authority(conn, lease)
+                return True
+            except (StaleAttempt, RunNotFound):
+                return False
+
+    def supervise_attempt(self, lease) -> bool:
+        """Fence an observed expiry atomically, so a clock correction cannot revive it."""
+        with self._transaction(write=True) as conn:
+            now = self.clock()
+            row = self._row(conn, lease.project_id, lease.run_id)
+            self._expire_current(conn, row, now)
+            try:
+                self._authority(conn, lease, now=now)
+                return True
+            except (RunConflict, RunNotFound):
+                return False
+
+    @staticmethod
+    def _job_view(row):
+        return CommandJob(
+            job_id=row["id"],
+            run_id=row["run_id"],
+            attempt_id=row["attempt_id"],
+            executor_id=row["executor_id"],
+            operation_key=row["operation_key"],
+            status=row["status"],
+            workspace=row["workspace"],
+            spec=CommandSpec(
+                tuple(json.loads(row["argv_json"])),
+                row["cwd"],
+                row["timeout_seconds"],
+                row["output_bytes"],
+            ),
+            exit_code=row["exit_code"],
+            stdout=bytes(row["stdout"]),
+            stderr=bytes(row["stderr"]),
+            output_limited=bool(row["output_limited"]),
+            cancel_requested=bool(row["cancel_requested"]),
+            error=row["error"],
+        )
+
+    @staticmethod
+    def _job_row(conn, project_id, job_id):
+        row = conn.execute(
+            "SELECT j.* FROM runtime_jobs j JOIN runtime_runs r ON r.id=j.run_id WHERE j.id=? AND r.project_id=?",
+            (job_id, project_id),
+        ).fetchone()
+        if row is None:
+            raise RunNotFound("Job not found in this project")
+        return row
+
+    def get_job(self, project_id, job_id) -> CommandJob:
+        identity(project_id)
+        text(job_id, "job_id", 128)
+        with self._transaction() as conn:
+            return self._job_view(self._job_row(conn, project_id, job_id))
+
+    def reserve_job(
+        self, lease, *, operation_key, spec: CommandSpec, workspace, executor_id
+    ) -> JobReservation:
+        command_key(operation_key)
+        command_key(executor_id)
+        text(workspace, "workspace", 4096)
+        fingerprint = _digest({"workspace": workspace, "spec": asdict(spec)})
+        with self._transaction(write=True) as conn:
+            self._original_attempt(conn, lease)
+            existing = conn.execute(
+                "SELECT * FROM runtime_jobs WHERE run_id=? AND operation_key=?",
+                (lease.run_id, operation_key),
+            ).fetchone()
+            if existing is not None:
+                if existing["request_hash"] != fingerprint:
+                    raise RunConflict(
+                        "Command operation key already identifies another intent"
+                    )
+                return JobReservation(self._job_view(existing), False)
+            self._authority(conn, lease)
+            if (
+                conn.execute(
+                    "SELECT id FROM runtime_jobs WHERE run_id=? AND status IN ('dispatching','cancelling','unknown')",
+                    (lease.run_id,),
+                ).fetchone()
+                is not None
+            ):
+                raise RunConflict(
+                    "An existing command must terminate or be reconciled first"
+                )
+            job_id = str(uuid4())
+            conn.execute(
+                """INSERT INTO runtime_jobs(id,run_id,attempt_id,executor_id,operation_key,request_hash,argv_json,cwd,workspace,timeout_seconds,output_bytes,status,created_at)
+                VALUES(?,?,?,?,?,?,?,?,?,?,?,'dispatching',?)""",
+                (
+                    job_id,
+                    lease.run_id,
+                    lease.attempt_id,
+                    executor_id,
+                    operation_key,
+                    fingerprint,
+                    _json(spec.argv),
+                    spec.cwd,
+                    workspace,
+                    spec.timeout_seconds,
+                    spec.output_bytes,
+                    self.clock(),
+                ),
+            )
+            self._event(
+                conn,
+                lease.project_id,
+                lease.task_id,
+                "job.dispatching",
+                {
+                    "run_id": lease.run_id,
+                    "attempt_id": lease.attempt_id,
+                    "job_id": job_id,
+                    "executor_id": executor_id,
+                },
+            )
+            return JobReservation(
+                self._job_view(self._job_row(conn, lease.project_id, job_id)), True
+            )
+
+    def _owned_job(self, conn, lease, job_id):
+        self._original_attempt(conn, lease)
+        row = self._job_row(conn, lease.project_id, job_id)
+        if row["run_id"] != lease.run_id or row["attempt_id"] != lease.attempt_id:
+            raise RunNotFound("Job does not belong to this attempt")
+        return row
+
+    def cancel_job(self, lease, job_id) -> CommandJob:
+        with self._transaction(write=True) as conn:
+            row = self._owned_job(conn, lease, job_id)
+            if row["status"] == "exited" or row["cancel_requested"]:
+                return self._job_view(row)
+            status = "unknown" if row["status"] == "unknown" else "cancelling"
+            conn.execute(
+                "UPDATE runtime_jobs SET cancel_requested=1,status=? WHERE id=?",
+                (status, job_id),
+            )
+            self._event(
+                conn,
+                lease.project_id,
+                lease.task_id,
+                "job.cancel_requested",
+                {
+                    "job_id": job_id,
+                    "run_id": lease.run_id,
+                    "attempt_id": lease.attempt_id,
+                },
+            )
+            return self._job_view(self._job_row(conn, lease.project_id, job_id))
+
+    def finish_job(
+        self,
+        lease,
+        job_id,
+        *,
+        executor_id,
+        exit_code,
+        stdout,
+        stderr,
+        output_limited,
+        error=None,
+    ) -> CommandJob:
+        if exit_code is not None and type(exit_code) is not int:
+            raise ValueError("Command exit code must be an integer or unknown")
+        if (
+            not isinstance(stdout, bytes)
+            or not isinstance(stderr, bytes)
+            or type(output_limited) is not bool
+        ):
+            raise ValueError("Expected bounded binary command output")
+        if error is not None:
+            text(error, "command error", 1000)
+        if exit_code is None and error is None:
+            raise ValueError("An uncertain command requires an explicit error")
+        with self._transaction(write=True) as conn:
+            row = self._owned_job(conn, lease, job_id)
+            if row["executor_id"] != executor_id:
+                raise RunConflict("Job belongs to another native connection")
+            if max(len(stdout), len(stderr)) > row["output_bytes"]:
+                raise ValueError("Command output exceeds its declared stream budget")
+            if row["status"] == "exited":
+                if (
+                    row["exit_code"],
+                    bytes(row["stdout"]),
+                    bytes(row["stderr"]),
+                    bool(row["output_limited"]),
+                    row["error"],
+                ) != (exit_code, stdout, stderr, output_limited, error):
+                    raise RunConflict("Job already has another terminal receipt")
+                return self._job_view(row)
+            if not stdout.startswith(bytes(row["stdout"])) or not stderr.startswith(
+                bytes(row["stderr"])
+            ):
+                raise RunConflict("Observed output cannot replace an earlier prefix")
+            status = "unknown" if exit_code is None else "exited"
+            conn.execute(
+                "UPDATE runtime_jobs SET status=?,exit_code=?,stdout=?,stderr=?,output_limited=?,error=?,ended_at=? WHERE id=?",
+                (
+                    status,
+                    exit_code,
+                    stdout,
+                    stderr,
+                    int(output_limited),
+                    error,
+                    self.clock() if exit_code is not None else None,
+                    job_id,
+                ),
+            )
+            self._event(
+                conn,
+                lease.project_id,
+                lease.task_id,
+                "job.observed",
+                {
+                    "run_id": lease.run_id,
+                    "attempt_id": lease.attempt_id,
+                    "job_id": job_id,
+                    "status": status,
+                    "exit_code": exit_code,
+                    "output_limited": output_limited,
+                },
+            )
+            if exit_code is None:
+                run = self._row(conn, lease.project_id, lease.run_id)
+                if run["current_attempt_id"] == lease.attempt_id and (
+                    (run["status"] == "running" and run["fence"] == lease.fence)
+                    or run["status"] == "cancelling"
+                ):
+                    self._withdraw(conn, run, "reconciling")
+                    self._event(
+                        conn,
+                        lease.project_id,
+                        lease.task_id,
+                        "run.effects_uncertain",
+                        {
+                            "run_id": lease.run_id,
+                            "attempt_id": lease.attempt_id,
+                            "job_id": job_id,
+                        },
+                    )
+            return self._job_view(self._job_row(conn, lease.project_id, job_id))
+
     def _withdraw(self, conn, row, status, *, cancel_requested=None):
         now = self.clock()
         conn.execute(
@@ -586,17 +841,27 @@ class SQLiteRunStore:
     def expire(self, project_id, run_id) -> bool:
         with self._transaction(write=True) as conn:
             row = self._row(conn, project_id, run_id)
-            if row["status"] != "running" or row["lease_expires_at"] > self.clock():
-                return False
-            self._withdraw(conn, row, "reconciling")
-            self._event(
-                conn,
-                project_id,
-                row["task_id"],
-                "run.authority_expired",
-                {"run_id": run_id, "attempt_id": row["current_attempt_id"]},
-            )
-            return True
+            return self._expire_current(conn, row, self.clock())
+
+    def _expire_current(self, conn, row, now):
+        if (
+            row["status"] != "running"
+            or row["lease_expires_at"] is None
+            or row["lease_expires_at"] > now
+        ):
+            return False
+        self._withdraw(conn, row, "reconciling")
+        self._event(
+            conn,
+            row["project_id"],
+            row["task_id"],
+            "run.authority_expired",
+            {
+                "run_id": row["id"],
+                "attempt_id": row["current_attempt_id"],
+            },
+        )
+        return True
 
     def correct_context(
         self,

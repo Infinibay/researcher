@@ -25,6 +25,17 @@ async def test_request_response_and_notification_have_independent_paths():
         assert await client.request("echo", {"value": 42}) == {"value": 42}
 
 
+async def test_response_barrier_identifies_preceding_events_before_they_are_consumed():
+    async with connection() as client:
+        first = await client.request_ordered("notification")
+        assert first.result == {"ok": True}
+        assert first.preceding_messages == 1
+        assert (await client.request_ordered("echo", {"value": 7})).preceding_messages == 1
+        assert (await client.next_message(timeout=1))["params"]["delta"] == "Working"
+        second = await client.request_ordered("notification")
+        assert second.preceding_messages == 2
+
+
 async def test_server_request_can_be_answered_while_client_request_is_pending():
     import asyncio
 

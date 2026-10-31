@@ -11,6 +11,7 @@ import json
 import os
 import signal
 from collections.abc import Mapping, Sequence
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Self
 
@@ -33,6 +34,12 @@ class RpcError(RuntimeError):
     def __init__(self, code: int, message: str) -> None:
         super().__init__(message)
         self.code = code
+
+
+@dataclass(frozen=True)
+class RpcReply:
+    result: Any
+    preceding_messages: int
 
 
 class StdioRpcClient:
@@ -62,6 +69,7 @@ class StdioRpcClient:
         self._messages: asyncio.Queue[dict[str, Any]] = asyncio.Queue(maxsize=max_messages)
         self._pending: dict[int, asyncio.Future[Any]] = {}
         self._next_id = 0
+        self._message_count = 0
         self._process: asyncio.subprocess.Process | None = None
         self._reader: asyncio.Task[None] | None = None
         self._stderr: asyncio.Task[None] | None = None
@@ -91,6 +99,14 @@ class StdioRpcClient:
         await self.aclose()
 
     async def request(self, method: str, params: dict | None = None, *, timeout: float | None = None) -> Any:
+        return (await self.request_ordered(method, params, timeout=timeout)).result
+
+    async def request_ordered(self, method: str, params: dict | None = None, *, timeout: float | None = None) -> RpcReply:
+        """Return a barrier for wire messages preceding this response.
+
+        A separate event consumer may still be processing those notifications;
+        streamed output must cross this barrier before its result is persisted.
+        """
         self._check_connection()
         if len(self._pending) >= self.max_pending_requests:
             raise RpcBackpressure("Too many pending requests; no request was sent")
@@ -188,6 +204,7 @@ class StdioRpcClient:
                         raise RpcProtocolError("Expected a method name")
                     try:
                         self._messages.put_nowait(message)
+                        self._message_count += 1
                     except asyncio.QueueFull as exc:
                         raise RpcBackpressure("Event buffer full; reconnect and reconcile state") from exc
                     continue
@@ -203,7 +220,7 @@ class StdioRpcClient:
                         raise RpcProtocolError("Expected an error object")
                     future.set_exception(RpcError(error.get("code", -1), str(error.get("message", "Runtime error"))))
                 elif "result" in message:
-                    future.set_result(message["result"])
+                    future.set_result(RpcReply(message["result"], self._message_count))
                 else:
                     raise RpcProtocolError("Response has neither result nor error")
         except RpcDisconnected as exc:

@@ -275,6 +275,12 @@ def ensure_migrations(db_path: str | None = None) -> None:
             resource = Path(__file__).resolve().parents[2] / "db/runtime_schema.sql"
             apply_sql_resource(conn, resource)
             logger.info("Migration 19: durable runs, attempts, context revisions and grant bindings")
+        if 20 not in applied:
+            from backend.db.migrations import apply_sql_resource
+
+            resource = Path(__file__).resolve().parents[2] / "db/job_schema.sql"
+            apply_sql_resource(conn, resource)
+            logger.info("Migration 20: owned command dispatch and terminal receipts")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()

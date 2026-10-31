@@ -2,6 +2,7 @@
 
 import re
 from dataclasses import dataclass
+from pathlib import PurePosixPath
 
 
 class RunConflict(RuntimeError):
@@ -98,6 +99,63 @@ class EventPage:
     events: tuple[RunEvent, ...]
     next_after_id: int
     has_more: bool
+
+
+@dataclass(frozen=True)
+class CommandSpec:
+    argv: tuple[str, ...]
+    cwd: str = "."
+    timeout_seconds: float = 30
+    output_bytes: int = 1048576
+
+    def __post_init__(self):
+        if not isinstance(self.argv, tuple) or not 1 <= len(self.argv) <= 128:
+            raise ValueError("Expected a nonempty bounded command argv tuple")
+        text(self.argv[0], "executable", 16384)
+        if any(not isinstance(arg, str) or "\0" in arg for arg in self.argv):
+            raise ValueError("Command arguments must be strings without NUL")
+        if sum(len(arg.encode()) for arg in self.argv) > 65536:
+            raise ValueError("Command arguments exceed the byte budget")
+        text(self.cwd, "cwd", 4096)
+        path = PurePosixPath(self.cwd)
+        if path.is_absolute() or ".." in path.parts or "\0" in self.cwd:
+            raise ValueError("Command cwd must stay relative to its workspace")
+        if (
+            isinstance(self.timeout_seconds, bool)
+            or not isinstance(self.timeout_seconds, (int, float))
+            or not 0 < self.timeout_seconds <= 300
+        ):
+            raise ValueError(
+                "Command deadline must be positive and at most 300 seconds"
+            )
+        if type(self.output_bytes) is not int or not 1 <= self.output_bytes <= 4194304:
+            raise ValueError(
+                "Command output budget must be between 1 byte and 4 MiB per stream"
+            )
+
+
+@dataclass(frozen=True)
+class CommandJob:
+    job_id: str
+    run_id: str
+    attempt_id: str
+    executor_id: str
+    operation_key: str
+    status: str
+    spec: CommandSpec
+    workspace: str
+    exit_code: int | None
+    stdout: bytes
+    stderr: bytes
+    output_limited: bool
+    cancel_requested: bool
+    error: str | None
+
+
+@dataclass(frozen=True)
+class JobReservation:
+    job: CommandJob
+    should_dispatch: bool
 
 
 def native_outcome(native_status: str) -> str:

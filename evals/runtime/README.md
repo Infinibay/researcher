@@ -74,3 +74,17 @@ a host PID. Correlate native identity and terminal status, retire the connection
 and reconcile before another attempt; never replay solely because observation
 expired. Researcher's product-level cancellation acceptance is broader than
 this fixture.
+
+The command-only lifecycle probe does not submit model turns or need an account:
+
+```sh
+.venv/bin/python evals/runtime/run_commands.py --live --peer-loss --db-contention
+```
+
+It uses the installed Codex CLI 0.166.0 command API in private account-free peers,
+real SQLite migrations and synthetic workspaces. The optional fault cases kill
+only its directly owned RPC process and hold its temporary DB writer. It checks
+physical Stop before DB unlock, detached-child readiness, other-owner survival,
+cross-project access denial, disabled sockets and uncertain-result fencing.
+Results remain under a unique ignored evaluation directory; do not replay a
+live or uncertain job. See `docs/architecture/owned-commands.md` for scope.

@@ -1,0 +1,102 @@
+{
+  "date": "2026-10-31",
+  "native_cli_version": "0.166.0",
+  "model_turns_submitted": 0,
+  "command_peer_account": null,
+  "result": {
+    "model_turns_submitted": 0,
+    "commands": [
+      {
+        "key": "inside",
+        "project_id": 101,
+        "job_id": "fb5c3595-e1fa-48cf-a733-03324ff9da48",
+        "status": "exited",
+        "exit_code": 0,
+        "stdout": "ALPHA_ONLY",
+        "stderr": ""
+      },
+      {
+        "key": "inside",
+        "project_id": 202,
+        "job_id": "9a3c71e1-76f3-4335-83e4-39da82bb8899",
+        "status": "exited",
+        "exit_code": 0,
+        "stdout": "BETA_ONLY",
+        "stderr": ""
+      },
+      {
+        "key": "outside",
+        "project_id": 101,
+        "job_id": "74903b11-fc4a-4696-b84f-d90e37036d58",
+        "status": "exited",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "cat: <fixture>/beta/private.txt: No such file or directory\n"
+      },
+      {
+        "key": "network",
+        "project_id": 101,
+        "job_id": "58d64b13-c005-4c2e-90af-c731e3def97a",
+        "status": "exited",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import socket; socket.socket()\n                   ~~~~~~~~~~~~~^^\n  File \"/usr/lib/python3.14/socket.py\", line 236, in __init__\n    _socket.socket.__init__(self, family, type, proto, fileno)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nPermissionError: [Errno 1] Operation not permitted\n"
+      }
+    ],
+    "database_contention": {
+      "physical_stop_preceded_database_unlock": true,
+      "exit_code": 137,
+      "cancellation_intent_persisted": true
+    },
+    "stop": {
+      "seconds": 0.1588248559855856,
+      "job_id": "488f3d1d-6a63-4ba4-a5ee-e7b8e8d19272",
+      "exit_code": 137,
+      "other_job_exit_code": 0
+    },
+    "peer_loss": {
+      "job_id": "24143800-4f71-4eef-9852-9f3ca880f4a4",
+      "status": "unknown",
+      "run_status": "reconciling",
+      "business_grant_revoked": true,
+      "detached_delayed_effect_present": false
+    },
+    "detached_child_confirmed_started": true,
+    "delayed_effect_present": false,
+    "other_owner_effect_preserved": true,
+    "status": "passed"
+  },
+  "limits": [
+    "These are native command API trials, not model turns or full product runtime acceptance.",
+    "An unknown command result fences the run; it does not prove every possible external effect was undone.",
+    "No user data or user database was used.",
+    "One explicit profile per host-selected workspace; shell-reported PIDs are not host process identities."
+  ],
+  "retained_prior_trials": [
+    {
+      "trial": "owned-commands-4bc077ff",
+      "classification": "invalid setup",
+      "reason": "Minimal filesystem did not mount the native executable; no slow command started."
+    },
+    {
+      "trial": "owned-commands-0b74c898",
+      "classification": "inconclusive detached-child check",
+      "reason": "Readiness marker preceded child creation; corrected trial waited for a marker written by the detached child."
+    },
+    {
+      "trial": "fresh-home configuration attempts",
+      "classification": "invalid setup",
+      "reason": "Inherited disabled MCP entries lacked transports; legacy tools.view_image alias was rejected by strict installed configuration. Fresh private configuration and features.view_image=false passed."
+    },
+    {
+      "trial": "command-integration-17cb0c8e",
+      "classification": "passed lifecycle; invalid latency measurement",
+      "reason": "Stop timer included waiting for the other project; corrected runner measures Stop before that wait."
+    }
+  ],
+  "regression_evidence": {
+    "tail_output": "Gated output consumer delays persistence until all messages preceding the native response are handled. Removing the barrier makes the strengthened regression fail.",
+    "sqlite_contention": "Owned process termination proceeds while another SQLite connection holds BEGIN IMMEDIATE; intent and terminal receipt persist after unlock.",
+    "clock_rollback": "Observed lease expiry durably fences authority before a backward wall-clock change can revive it."
+  }
+}

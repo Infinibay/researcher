@@ -1,0 +1,16 @@
+{
+  "wheel": "researcher-0.1.0-py3-none-any.whl",
+  "wheel_sha256": "96fa54210a1d480e3d3483b21ffcbe327915cda96e88f4710d4695dc1776bb39",
+  "resources_match_current_source": [
+    "backend/db/schema.sql",
+    "backend/db/research_schema.sql",
+    "backend/db/runtime_schema.sql",
+    "backend/db/job_schema.sql",
+    "backend/runtime/contracts.py",
+    "backend/runtime/sqlite_runs.py",
+    "backend/runtime/codex_rpc.py",
+    "backend/runtime/command_jobs.py",
+    "backend/runtime/native_commands.py",
+    "backend/db/migrations.py"
+  ]
+}

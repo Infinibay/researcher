@@ -137,3 +137,12 @@ El próximo entregable debe componer estas operaciones con el runtime, permisos,
 presupuestos durables y jobs verificables; cerrar auth/isolation antes de exponer
 la admisión; después migrar los recorridos y retirar los dueños antiguos. No
 tratar la aprobación de estas pruebas como aceptación de los 43 escenarios.
+
+## Extensión: jobs con conexión propia
+
+La migración 20 añade reserva de despacho, deduplicación y recibos canónicos de
+comandos a este mismo contrato. Ver [owned-commands.md](owned-commands.md).
+`supervise_attempt` persiste el vencimiento observado; `finish_job` con resultado
+incierto retira autoridad y revoca grants de forma atómica. Los hechos tardíos
+conservan procedencia y no autorizan nuevos efectos. La composición con el
+servicio del producto y su control HTTP/WS sigue pendiente.

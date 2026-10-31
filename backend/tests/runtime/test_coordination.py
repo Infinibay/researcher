@@ -5,7 +5,6 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import replace
 from pathlib import Path
 from threading import Barrier
-from types import SimpleNamespace
 
 import pytest
 
@@ -85,40 +84,6 @@ def test_runtime_migration_failure_rolls_back_ddl_and_marker(
             "SELECT version FROM schema_migrations WHERE version=19"
         ).fetchall()
         == []
-    )
-
-
-@pytest.fixture
-def coordination(_isolated_db, db_conn):
-    from backend.research.sqlite_store import SQLiteResearchStore
-    from backend.runtime import contracts
-    from backend.runtime.sqlite_runs import SQLiteRunStore
-
-    ensure_migrations(_isolated_db)
-    db_conn.execute("INSERT INTO projects(id,name) VALUES(101,'Alpha'),(202,'Beta')")
-    db_conn.execute(
-        "INSERT INTO tasks(id,project_id,type,title,status) VALUES(1001,101,'research','Policy','in_progress'),(1002,101,'research','Second','pending'),(2002,202,'research','Policy','in_progress')"
-    )
-    db_conn.commit()
-    now = [1000.0]
-    store = SQLiteRunStore(_isolated_db, clock=lambda: now[0])
-    spec = contracts.RunSpec(
-        project_id=101,
-        task_id=1001,
-        actor_id="researcher-a",
-        context_version=1,
-        operation_key="request-1",
-        prompt="Contrast source and code",
-        runtime="codex",
-    )
-    return SimpleNamespace(
-        store=store,
-        spec=spec,
-        now=now,
-        contracts=contracts,
-        conn=db_conn,
-        research=SQLiteResearchStore(_isolated_db, clock=lambda: now[0]),
-        database=_isolated_db,
     )
 
 
@@ -445,7 +410,9 @@ def test_thread_identity_can_be_saved_before_an_uncertain_turn_start(coordinatio
     pending = reopened.get(101, run.run_id)
     assert pending.thread_id == "thread-before-dispatch"
     assert pending.turn_id is None
-    reopened.bind_native(lease, thread_id="thread-before-dispatch", turn_id="turn-receipt")
+    reopened.bind_native(
+        lease, thread_id="thread-before-dispatch", turn_id="turn-receipt"
+    )
     assert reopened.get(101, run.run_id).turn_id == "turn-receipt"
     with pytest.raises(c.contracts.RunConflict):
         reopened.bind_thread(lease, thread_id="unrelated-thread")

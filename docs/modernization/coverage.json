@@ -61,7 +61,11 @@
         "backend/runtime/sqlite_runs.py",
         "backend/tests/runtime/test_coordination.py",
         "docs/architecture/run-coordination.md",
-        "docs/modernization/coordination-results.json"
+        "docs/modernization/coordination-results.json",
+        "docs/architecture/owned-commands.md",
+        "backend/tests/runtime/test_command_executor.py",
+        "backend/tests/runtime/test_command_journal.py",
+        "docs/modernization/owned-command-evidence.json"
       ]
     },
     "E02": {
@@ -73,7 +77,11 @@
         "backend/runtime/sqlite_runs.py",
         "backend/tests/runtime/test_coordination.py",
         "docs/architecture/run-coordination.md",
-        "docs/modernization/coordination-results.json"
+        "docs/modernization/coordination-results.json",
+        "docs/architecture/owned-commands.md",
+        "backend/tests/runtime/test_command_executor.py",
+        "backend/tests/runtime/test_command_journal.py",
+        "docs/modernization/owned-command-evidence.json"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -89,11 +97,14 @@
         "backend/runtime/sqlite_runs.py",
         "backend/tests/runtime/test_coordination.py",
         "docs/architecture/run-coordination.md",
-        "docs/modernization/coordination-results.json"
+        "docs/modernization/coordination-results.json",
+        "docs/architecture/owned-commands.md",
+        "backend/tests/runtime/test_command_executor.py",
+        "backend/tests/runtime/test_command_journal.py",
+        "docs/modernization/owned-command-evidence.json"
       ],
       "remaining": [
-        "Native shell tool termination/ownership remains unverified for explicit cancellation",
-        "Durable product startup/shutdown integration"
+        "Durable product startup/shutdown and all tool lifecycle integration; old flows are not covered by owned command evidence"
       ]
     },
     "E04": {
@@ -103,7 +114,11 @@
         "backend/runtime/sqlite_runs.py",
         "backend/tests/runtime/test_coordination.py",
         "docs/architecture/run-coordination.md",
-        "docs/modernization/coordination-results.json"
+        "docs/modernization/coordination-results.json",
+        "docs/architecture/owned-commands.md",
+        "backend/tests/runtime/test_command_executor.py",
+        "backend/tests/runtime/test_command_journal.py",
+        "docs/modernization/owned-command-evidence.json"
       ]
     },
     "E05": {
@@ -113,7 +128,11 @@
         "backend/runtime/sqlite_runs.py",
         "backend/tests/runtime/test_coordination.py",
         "docs/architecture/run-coordination.md",
-        "docs/modernization/coordination-results.json"
+        "docs/modernization/coordination-results.json",
+        "docs/architecture/owned-commands.md",
+        "backend/tests/runtime/test_command_executor.py",
+        "backend/tests/runtime/test_command_journal.py",
+        "docs/modernization/owned-command-evidence.json"
       ]
     },
     "E06": {
@@ -123,7 +142,11 @@
         "backend/runtime/sqlite_runs.py",
         "backend/tests/runtime/test_coordination.py",
         "docs/architecture/run-coordination.md",
-        "docs/modernization/coordination-results.json"
+        "docs/modernization/coordination-results.json",
+        "docs/architecture/owned-commands.md",
+        "backend/tests/runtime/test_command_executor.py",
+        "backend/tests/runtime/test_command_journal.py",
+        "docs/modernization/owned-command-evidence.json"
       ]
     },
     "E07": {
@@ -157,7 +180,11 @@
       "evidence": [
         "docs/architecture/capability-matrix.md",
         "docs/architecture/inference-inventory.md",
-        "docs/modernization/research-runtime-evidence.json"
+        "docs/modernization/research-runtime-evidence.json",
+        "docs/architecture/owned-commands.md",
+        "backend/tests/runtime/test_command_executor.py",
+        "backend/tests/runtime/test_command_journal.py",
+        "docs/modernization/owned-command-evidence.json"
       ]
     },
     "E10": {
@@ -183,15 +210,24 @@
         "backend/runtime/sqlite_runs.py",
         "backend/tests/runtime/test_coordination.py",
         "docs/architecture/run-coordination.md",
-        "docs/modernization/coordination-results.json"
+        "docs/modernization/coordination-results.json",
+        "docs/architecture/owned-commands.md",
+        "backend/tests/runtime/test_command_executor.py",
+        "backend/tests/runtime/test_command_journal.py",
+        "docs/modernization/owned-command-evidence.json"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
       ]
     },
     "D02": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/owned-commands.md",
+        "backend/tests/runtime/test_command_executor.py",
+        "backend/tests/runtime/test_command_journal.py",
+        "docs/modernization/owned-command-evidence.json"
+      ]
     },
     "D03": {
       "status": "in_progress",
@@ -203,7 +239,11 @@
         "backend/runtime/sqlite_runs.py",
         "backend/tests/runtime/test_coordination.py",
         "docs/architecture/run-coordination.md",
-        "docs/modernization/coordination-results.json"
+        "docs/modernization/coordination-results.json",
+        "docs/architecture/owned-commands.md",
+        "backend/tests/runtime/test_command_executor.py",
+        "backend/tests/runtime/test_command_journal.py",
+        "docs/modernization/owned-command-evidence.json"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
@@ -219,7 +259,11 @@
         "backend/runtime/sqlite_runs.py",
         "backend/tests/runtime/test_coordination.py",
         "docs/architecture/run-coordination.md",
-        "docs/modernization/coordination-results.json"
+        "docs/modernization/coordination-results.json",
+        "docs/architecture/owned-commands.md",
+        "backend/tests/runtime/test_command_executor.py",
+        "backend/tests/runtime/test_command_journal.py",
+        "docs/modernization/owned-command-evidence.json"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
@@ -267,7 +311,11 @@
         "docs/modernization/research-mcp-evidence.json",
         "docs/architecture/capability-matrix.md",
         "docs/architecture/inference-inventory.md",
-        "docs/modernization/research-runtime-evidence.json"
+        "docs/modernization/research-runtime-evidence.json",
+        "docs/architecture/owned-commands.md",
+        "backend/tests/runtime/test_command_executor.py",
+        "backend/tests/runtime/test_command_journal.py",
+        "docs/modernization/owned-command-evidence.json"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
@@ -278,7 +326,11 @@
       "evidence": [
         "backend/tests/research",
         "docs/architecture/research-slice.md",
-        "docs/modernization/research-mcp-evidence.json"
+        "docs/modernization/research-mcp-evidence.json",
+        "docs/architecture/owned-commands.md",
+        "backend/tests/runtime/test_command_executor.py",
+        "backend/tests/runtime/test_command_journal.py",
+        "docs/modernization/owned-command-evidence.json"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
@@ -292,7 +344,11 @@
         "docs/modernization/research-mcp-evidence.json",
         "docs/architecture/capability-matrix.md",
         "docs/architecture/inference-inventory.md",
-        "docs/modernization/research-runtime-evidence.json"
+        "docs/modernization/research-runtime-evidence.json",
+        "docs/architecture/owned-commands.md",
+        "backend/tests/runtime/test_command_executor.py",
+        "backend/tests/runtime/test_command_journal.py",
+        "docs/modernization/owned-command-evidence.json"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
