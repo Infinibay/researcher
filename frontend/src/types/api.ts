@@ -86,6 +86,11 @@ export interface ChatMessage {
   message: string
   conversation_type: string
   created_at?: string
+  runtime_run_id?: string | null
+  runtime_status?: string | null
+  context_version?: number | null
+  task_id?: number | null
+  delivery?: 'recorded' | 'instruction_admitted' | 'proposal'
 }
 
 export interface ChatThread {

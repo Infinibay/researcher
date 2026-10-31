@@ -72,7 +72,7 @@ class SQLiteRunStore:
             yield conn
 
     @staticmethod
-    def _task(conn, project_id, task_id):
+    def _existing_task(conn, project_id, task_id):
         identity(project_id)
         identity(task_id)
         row = conn.execute(
@@ -81,6 +81,11 @@ class SQLiteRunStore:
         ).fetchone()
         if row is None:
             raise RunNotFound("Task not found in this project")
+        return row
+
+    @staticmethod
+    def _task(conn, project_id, task_id):
+        row = SQLiteRunStore._existing_task(conn, project_id, task_id)
         if row["status"] in ("done", "cancelled", "failed"):
             raise RunConflict("Task no longer admits execution")
         return row
@@ -98,8 +103,11 @@ class SQLiteRunStore:
         text(run_id, "run_id", 128)
         row = conn.execute(
             """SELECT r.*,a.thread_id,a.turn_id,a.owner_id,a.status AS attempt_status,
-            a.lease_expires_at,a.native_result_json,a.fence AS attempt_fence
+            a.lease_expires_at,a.native_result_json,a.fence AS attempt_fence,
+            chat.thread_id AS conversation_thread_id,dispatch.model AS dispatch_model
             FROM runtime_runs r LEFT JOIN runtime_attempts a ON a.id=r.current_attempt_id
+            LEFT JOIN runtime_chat_links chat ON chat.run_id=r.id
+            LEFT JOIN runtime_inference_dispatches dispatch ON dispatch.attempt_id=a.id
             WHERE r.project_id=? AND r.id=?""",
             (project_id, run_id),
         ).fetchone()
@@ -126,6 +134,9 @@ class SQLiteRunStore:
             if row["native_result_json"] is not None
             else None,
             cancel_requested=bool(row["cancel_requested"]),
+            operation_key=row["operation_key"],
+            conversation_thread_id=row["conversation_thread_id"],
+            model=row["dispatch_model"],
         )
 
     @staticmethod
@@ -161,9 +172,9 @@ class SQLiteRunStore:
 
     def context_snapshot(self, project_id, task_id):
         with self._transaction() as conn:
-            self._task(conn, project_id, task_id)
+            self._existing_task(conn, project_id, task_id)
             task = conn.execute(
-                "SELECT title,description,type FROM tasks WHERE project_id=? AND id=?",
+                "SELECT title,description,type,status FROM tasks WHERE project_id=? AND id=?",
                 (project_id, task_id),
             ).fetchone()
             revisions = conn.execute(
@@ -176,6 +187,19 @@ class SQLiteRunStore:
                 "corrections": [dict(row) for row in revisions],
             }
 
+    def task_runs(self, project_id, task_id, *, limit=30):
+        if type(limit) is not int or not 1 <= limit <= 100:
+            raise ValueError("Invalid task execution history limit")
+        with self._transaction() as conn:
+            self._existing_task(conn, project_id, task_id)
+            rows = conn.execute(
+                "SELECT id FROM runtime_runs WHERE project_id=? AND task_id=? ORDER BY rowid DESC LIMIT ?",
+                (project_id, task_id, limit),
+            ).fetchall()
+            return tuple(
+                self._view(self._row(conn, project_id, row["id"])) for row in rows
+            )
+
     def reserve_inference(
         self,
         lease,
@@ -183,6 +207,7 @@ class SQLiteRunStore:
         workspace,
         catalog_hash,
         limits,
+        model=None,
         project_turn_limit=20,
         project_token_limit=4000000,
     ):
@@ -197,13 +222,15 @@ class SQLiteRunStore:
         from backend.runtime.native_commands import VERSION
 
         text(workspace, "workspace", 4096)
+        if model is not None:
+            text(model, "model", 256)
         if not re.fullmatch(r"[a-f0-9]{64}", catalog_hash):
             raise ValueError("Expected a tool catalog SHA256")
         if limits.max_turns != 1:
             raise ValueError("Each dispatch reserves exactly one native turn")
         identity(project_turn_limit)
         identity(project_token_limit)
-        intent = (workspace, catalog_hash, VERSION, _json(asdict(limits)))
+        intent = (workspace, catalog_hash, VERSION, _json(asdict(limits)), model)
         with self._transaction(write=True) as conn:
             row = self._authority(conn, lease)
             if row["thread_id"] is None:
@@ -221,6 +248,7 @@ class SQLiteRunStore:
                             "catalog_hash",
                             "runtime_version",
                             "limits_json",
+                            "model",
                         )
                     )
                     != intent
@@ -258,7 +286,7 @@ class SQLiteRunStore:
                 )
             conn.execute(
                 """INSERT INTO runtime_inference_dispatches(attempt_id,project_id,workspace,catalog_hash,
-                runtime_version,limits_json,token_ceiling,status,created_at) VALUES(?,?,?,?,?,?,?,'reserved',?)""",
+                runtime_version,limits_json,model,token_ceiling,status,created_at) VALUES(?,?,?,?,?,?,?,?,'reserved',?)""",
                 (
                     lease.attempt_id,
                     lease.project_id,
@@ -278,6 +306,7 @@ class SQLiteRunStore:
                     "catalog_hash": catalog_hash,
                     "limits": asdict(limits),
                     "runtime_version": VERSION,
+                    "model": model,
                 },
             )
             return True
@@ -475,8 +504,48 @@ class SQLiteRunStore:
             )
             return self._view(self._row(conn, lease.project_id, lease.run_id))
 
-    def admit(self, spec: RunSpec) -> RunView:
+    @staticmethod
+    def _admission_intent(spec, conversation_thread):
         intent = {"kind": "admit", **asdict(spec)}
+        if conversation_thread is not None:
+            command_key(conversation_thread)
+            intent["conversation_thread"] = conversation_thread
+        return intent
+
+    def admission_receipt(self, spec, *, conversation_thread=None):
+        intent = self._admission_intent(spec, conversation_thread)
+        with self._transaction() as conn:
+            receipt = self._receipt(
+                conn, spec.project_id, spec.task_id, spec.operation_key, intent
+            )
+            return (
+                self._view(self._row(conn, spec.project_id, receipt["run_id"]))
+                if receipt
+                else None
+            )
+
+    @staticmethod
+    def _correction_intent(command):
+        validate_correction(**command)
+        return {
+            "kind": "correct_context",
+            **{key: value for key, value in command.items() if key != "operation_key"},
+        }
+
+    def correction_receipt(self, **command):
+        intent = self._correction_intent(command)
+        with self._transaction() as conn:
+            receipt = self._receipt(
+                conn,
+                command["project_id"],
+                command["task_id"],
+                command["operation_key"],
+                intent,
+            )
+            return receipt["version"] if receipt else None
+
+    def admit(self, spec: RunSpec, *, conversation_thread=None) -> RunView:
+        intent = self._admission_intent(spec, conversation_thread)
         with self._transaction(write=True) as conn:
             receipt = self._receipt(
                 conn, spec.project_id, spec.task_id, spec.operation_key, intent
@@ -514,6 +583,8 @@ class SQLiteRunStore:
                     now,
                 ),
             )
+            if conversation_thread is not None:
+                self._attach_conversation(conn, spec, run_id, conversation_thread)
             self._save_receipt(
                 conn,
                 spec.project_id,
@@ -534,6 +605,90 @@ class SQLiteRunStore:
                 },
             )
             return self._view(self._row(conn, spec.project_id, run_id))
+
+    @staticmethod
+    def _attach_conversation(conn, spec, run_id, thread_id):
+        thread = conn.execute(
+            "SELECT * FROM conversation_threads WHERE thread_id=?", (thread_id,)
+        ).fetchone()
+        if thread is not None:
+            if thread["project_id"] != spec.project_id:
+                raise RunNotFound("Conversation not found in this project")
+            if (
+                thread["task_id"] not in (None, spec.task_id)
+                or thread["thread_type"] != "user_chat"
+                or thread["status"] != "active"
+            ):
+                raise RunConflict("Conversation belongs to another task or is closed")
+            conn.execute(
+                "UPDATE conversation_threads SET task_id=? WHERE thread_id=?",
+                (spec.task_id, thread_id),
+            )
+        else:
+            conn.execute(
+                "INSERT INTO conversation_threads(thread_id,project_id,task_id,thread_type) VALUES(?,?,?,'user_chat')",
+                (thread_id, spec.project_id, spec.task_id),
+            )
+        user_message = conn.execute(
+            """INSERT INTO chat_messages(project_id,thread_id,from_agent,to_agent,
+            conversation_type,message,metadata_json) VALUES(?,?,'user','researcher','user_to_agent',?,?)""",
+            (
+                spec.project_id,
+                thread_id,
+                spec.prompt,
+                _json(
+                    {
+                        "schema_version": 1,
+                        "runtime_run_id": run_id,
+                        "context_version": spec.context_version,
+                        "kind": "instruction",
+                    }
+                ),
+            ),
+        ).lastrowid
+        conn.execute(
+            "INSERT INTO runtime_chat_links(run_id,project_id,thread_id,user_message_id) VALUES(?,?,?,?)",
+            (run_id, spec.project_id, thread_id, user_message),
+        )
+        conn.execute(
+            "UPDATE conversation_threads SET last_message_at=CURRENT_TIMESTAMP WHERE thread_id=?",
+            (thread_id,),
+        )
+
+    @staticmethod
+    def _deliver_proposal(conn, lease, summary):
+        link = conn.execute(
+            "SELECT * FROM runtime_chat_links WHERE run_id=?", (lease.run_id,)
+        ).fetchone()
+        if link is None or link["proposal_message_id"] is not None:
+            return
+        message_id = conn.execute(
+            """INSERT INTO chat_messages(project_id,thread_id,parent_message_id,from_agent,to_agent,
+            conversation_type,message,metadata_json) VALUES(?,?,?,'researcher','user','agent_to_user',?,?)""",
+            (
+                lease.project_id,
+                link["thread_id"],
+                link["user_message_id"],
+                summary,
+                _json(
+                    {
+                        "schema_version": 1,
+                        "runtime_run_id": lease.run_id,
+                        "context_version": lease.context_version,
+                        "kind": "proposal",
+                        "accepted": False,
+                    }
+                ),
+            ),
+        ).lastrowid
+        conn.execute(
+            "UPDATE runtime_chat_links SET proposal_message_id=? WHERE run_id=?",
+            (message_id, lease.run_id),
+        )
+        conn.execute(
+            "UPDATE conversation_threads SET last_message_at=CURRENT_TIMESTAMP WHERE thread_id=?",
+            (link["thread_id"],),
+        )
 
     def claim(self, project_id, run_id, owner_id, *, lease_seconds=30) -> AttemptLease:
         text(owner_id, "owner_id", 128)
@@ -767,6 +922,8 @@ class SQLiteRunStore:
                 "UPDATE tool_grants SET revoked_at=COALESCE(revoked_at,?) WHERE runtime_attempt_id=?",
                 (now, lease.attempt_id),
             )
+            if native_status == "completed":
+                self._deliver_proposal(conn, lease, summary)
             self._event(
                 conn,
                 lease.project_id,
@@ -1200,15 +1357,17 @@ class SQLiteRunStore:
             source_kind=source_kind,
             source_reference=source_reference,
         )
-        intent = {
-            "kind": "correct_context",
-            "project_id": project_id,
-            "task_id": task_id,
-            "expected_version": expected_version,
-            "statement": statement,
-            "source_kind": source_kind,
-            "source_reference": source_reference,
-        }
+        intent = self._correction_intent(
+            {
+                "project_id": project_id,
+                "task_id": task_id,
+                "expected_version": expected_version,
+                "operation_key": operation_key,
+                "statement": statement,
+                "source_kind": source_kind,
+                "source_reference": source_reference,
+            }
+        )
         with self._transaction(write=True) as conn:
             receipt = self._receipt(conn, project_id, task_id, operation_key, intent)
             if receipt is not None:

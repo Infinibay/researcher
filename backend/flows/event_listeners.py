@@ -168,13 +168,16 @@ class UserMessageListener(BaseEventListener):
 
     def check(self) -> None:
         def _query(conn: sqlite3.Connection) -> list[dict]:
+            from backend.communication.ownership import LEGACY_THREAD_CLAUSE
+
             rows = conn.execute(
-                """SELECT id, to_agent, to_role, message
-                   FROM chat_messages
+                f"""SELECT cm.id, cm.to_agent, cm.to_role, cm.message,
+                          CASE WHEN {LEGACY_THREAD_CLAUSE} THEN 1 ELSE 0 END AS legacy_owned
+                   FROM chat_messages cm
                    WHERE project_id = ?
                      AND id > ?
                      AND conversation_type = 'user_to_agent'
-                   ORDER BY id ASC""",
+                   ORDER BY id ASC LIMIT 1000""",
                 (self.project_id, self._last_message_id),
             ).fetchall()
             return [dict(r) for r in rows]
@@ -183,6 +186,8 @@ class UserMessageListener(BaseEventListener):
 
         for msg in messages:
             self._last_message_id = msg["id"]
+            if not msg["legacy_owned"]:
+                continue
             self.bus.emit(FlowEvent(
                 event_type="user_message_received",
                 project_id=self.project_id,

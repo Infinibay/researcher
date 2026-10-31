@@ -91,6 +91,9 @@ class RunView:
     runtime: str
     result: dict | None
     cancel_requested: bool
+    operation_key: str = ""
+    conversation_thread_id: str | None = None
+    model: str | None = None
 
 
 @dataclass(frozen=True)

@@ -10,6 +10,7 @@ export function useChatMessages(projectId: number | null, limit = 50) {
         buildUrl(`/api/chat/${projectId}`, { limit }),
       ),
     enabled: projectId != null,
+    refetchInterval: 3000,
   })
 }
 
@@ -18,6 +19,7 @@ export function useChatThreads(projectId: number | null) {
     queryKey: ['chat-threads', projectId],
     queryFn: () => fetchApi<ChatThread[]>(`/api/chat/${projectId}/threads`),
     enabled: projectId != null,
+    refetchInterval: 3000,
   })
 }
 
@@ -25,7 +27,7 @@ export function useThreadMessages(projectId: number | null, threadId: string | n
   return useQuery({
     queryKey: ['thread-messages', projectId, threadId],
     queryFn: () =>
-      fetchApi<ChatMessage[]>(`/api/chat/${projectId}/threads/${threadId}`),
+      fetchApi<ChatMessage[]>(`/api/chat/${projectId}/threads/${encodeURIComponent(threadId!)}`),
     enabled: projectId != null && threadId != null,
   })
 }

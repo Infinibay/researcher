@@ -1,0 +1,68 @@
+{
+  "source_transport_tests": {
+    "passed": 7,
+    "failed": 0,
+    "command": "npm --prefix frontend test with Node 24.22.2"
+  },
+  "build": {
+    "status": "passed",
+    "command": "npm --prefix frontend run build",
+    "existing_warnings": [
+      "Chunk exceeds 500 kB",
+      "Outdated Browserslist database"
+    ]
+  },
+  "browser": {
+    "status": "unavailable",
+    "tool": "CUA inventory",
+    "message": "The browser access host is unavailable",
+    "visual_or_keyboard_acceptance": false
+  },
+  "concept_images_generated": 0,
+  "legacy_lint": [
+    {
+      "path": "backend/communication/service.py",
+      "unchanged_diagnostics": [
+        {
+          "code": "BLE001",
+          "message": "Do not catch blind exception: `Exception`",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "backend/flows/event_listeners.py",
+      "unchanged_diagnostics": [
+        {
+          "code": "BLE001",
+          "message": "Do not catch blind exception: `Exception`",
+          "count": 1
+        },
+        {
+          "code": "I001",
+          "message": "Import block is un-sorted or un-formatted",
+          "count": 4
+        },
+        {
+          "code": "RUF100",
+          "message": "Unused `noqa` directive (unused: `F401`)",
+          "count": 2
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "path": "frontend/dist/assets/index-BB0PfeG6.css",
+      "sha256": "42366f52de3e3bb1c3e26d2a6928a547b129087faa7c610df650db405a5f14de"
+    },
+    {
+      "path": "frontend/dist/assets/index-CRTLkxBk.js",
+      "sha256": "c5e557a44b80bc366cea3f48b28efdfe95e6aa66319e1a9bdf65061dd49f7748"
+    },
+    {
+      "path": "frontend/dist/index.html",
+      "sha256": "71f47fbb8b947290a05a867128dcbc8bafb466f1b6b7356f88039b181657a514"
+    }
+  ]
+}

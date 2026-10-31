@@ -159,6 +159,12 @@ def create_message_event(
     if from_agent == "system":
         return []
 
+    if thread_id:
+        from backend.communication.ownership import native_thread
+
+        if execute_with_retry(lambda conn: native_thread(conn, project_id, thread_id)):
+            return []
+
     agent_ids: list[str] = []
     if to_agent:
         agent_ids = [to_agent]

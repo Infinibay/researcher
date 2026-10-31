@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { useProjectStore } from '../../stores/project'
 import { useArtifacts, useArtifact } from '../../hooks/useArtifacts'
 import { LoadingSpinner } from '../common/LoadingSpinner'
@@ -18,8 +19,10 @@ const TYPE_VARIANTS: Record<string, string> = {
 export function ReportsPage() {
   const projectId = useProjectStore((s) => s.activeProjectId)
   const [typeFilter, setTypeFilter] = useState<string>('all')
-  const [selection, setSelection] = useState<{ projectId: number; artifactId: number } | null>(null)
-  const selectedId = selection && selection.projectId === projectId ? selection.artifactId : null
+  const [params, setParams] = useSearchParams()
+  const requestedProject = Number(params.get('project'))
+  const requestedArtifact = Number(params.get('artifact'))
+  const selectedId = requestedProject === projectId && Number.isSafeInteger(requestedArtifact) && requestedArtifact > 0 ? requestedArtifact : null
 
   const { data: artifacts, isLoading } = useArtifacts(
     projectId,
@@ -41,7 +44,7 @@ export function ReportsPage() {
             {TYPE_FILTERS.map((t) => (
               <button
                 key={t}
-                onClick={() => { setTypeFilter(t); setSelection(null) }}
+                onClick={() => { setTypeFilter(t); setParams({}) }}
                 className={`rounded-full px-2.5 py-0.5 text-xs font-medium transition-colors ${
                   typeFilter === t
                     ? 'bg-sky-500/20 text-sky-300'
@@ -62,7 +65,7 @@ export function ReportsPage() {
             artifacts.map((a) => (
               <button
                 key={a.id}
-                onClick={() => setSelection({ projectId, artifactId: a.id })}
+                onClick={() => setParams({ project: String(projectId), artifact: String(a.id) })}
                 className={`flex w-full flex-col items-start gap-1 border-b border-surface-700 px-3 py-2.5 text-left transition-colors ${
                   selectedId === a.id
                     ? 'bg-sky-500/10 border-l-2 border-l-sky-500'

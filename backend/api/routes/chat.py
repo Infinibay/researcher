@@ -2,24 +2,30 @@
 
 from __future__ import annotations
 
+import asyncio
+import logging
 import sqlite3
 import uuid
+from dataclasses import asdict
 
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, HTTPException, Query, Request
 
 from backend.api.models.chat import (
     ChatMessageCreate,
     ChatMessageResponse,
     ChatThreadResponse,
-    UnreadCountsResponse,
+    NativeInstruction,
     ThreadArchiveResponse,
+    UnreadCountsResponse,
 )
 from backend.communication.service import CommunicationService
 from backend.communication.thread_manager import ThreadManager
 from backend.flows.event_listeners import FlowEvent, event_bus
+from backend.runtime.views import MESSAGE_SELECT
 from backend.tools.base.db import execute_with_retry
 
 router = APIRouter(prefix="/api/chat", tags=["chat"])
+logger = logging.getLogger(__name__)
 
 
 @router.get("/{project_id}", response_model=list[ChatMessageResponse])
@@ -39,19 +45,41 @@ async def list_messages(
             params.append(after_id)
 
         params.append(limit)
+        direction = "ASC" if after_id is not None else "DESC"
         rows = conn.execute(
-            f"""SELECT cm.*
-                FROM chat_messages cm
-                WHERE {where}
-                ORDER BY cm.created_at DESC
-                LIMIT ?""",
+            MESSAGE_SELECT + f" WHERE {where} ORDER BY cm.id {direction} LIMIT ?",
             params,
         ).fetchall()
-        # Return in chronological order
-        return [dict(r) for r in reversed(rows)]
+        return [dict(r) for r in (rows if after_id is not None else reversed(rows))]
 
-    messages = execute_with_retry(_query)
+    messages = await asyncio.to_thread(execute_with_retry, _query)
     return [ChatMessageResponse(**m) for m in messages]
+
+
+@router.post("/{project_id}/instructions", status_code=202)
+async def send_instruction(project_id: int, body: NativeInstruction, request: Request):
+    from backend.api.routes.runs import owner_view, service
+    from backend.runtime.contracts import RunSpec
+
+    try:
+        spec = RunSpec(
+            project_id,
+            body.task_id,
+            "researcher",
+            body.context_version,
+            body.operation_key,
+            body.message,
+            "codex",
+        )
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
+    run = await service(request).submit(
+        spec, repository_id=body.repository_id, conversation_thread=body.thread_id
+    )
+    message = await asyncio.to_thread(
+        owner_view(request).instruction_message, project_id, run.run_id
+    )
+    return {"message": ChatMessageResponse(**message).model_dump(), "run": asdict(run)}
 
 
 @router.post("/{project_id}", response_model=ChatMessageResponse, status_code=201)
@@ -60,21 +88,36 @@ async def send_message(project_id: int, body: ChatMessageCreate):
 
     def _create(conn: sqlite3.Connection) -> dict:
         # Create or reuse a thread
-        thread_id = str(uuid.uuid4())
-        conn.execute(
-            """INSERT OR IGNORE INTO conversation_threads
+        thread_id = body.thread_id or str(uuid.uuid4())
+        if body.thread_id is not None:
+            existing = conn.execute(
+                "SELECT status FROM conversation_threads WHERE thread_id=? AND project_id=?",
+                (thread_id, project_id),
+            ).fetchone()
+            if existing is None:
+                raise HTTPException(404, "Conversation not found in this project")
+            if existing["status"] != "active":
+                raise HTTPException(
+                    409, "Conversation is closed; start a new conversation"
+                )
+        else:
+            conn.execute(
+                """INSERT OR IGNORE INTO conversation_threads
                (thread_id, project_id, thread_type, created_at)
                VALUES (?, ?, 'user_chat', CURRENT_TIMESTAMP)""",
-            (thread_id, project_id),
-        )
+                (thread_id, project_id),
+            )
 
         cursor = conn.execute(
             """INSERT INTO chat_messages
                (project_id, thread_id, from_agent, to_agent, to_role,
                 message, conversation_type, created_at)
                VALUES (?, ?, 'user', ?, ?, ?, 'user_to_agent', CURRENT_TIMESTAMP)""",
-            (project_id, thread_id, body.to_agent, body.to_role,
-             body.message),
+            (project_id, thread_id, body.to_agent, body.to_role, body.message),
+        )
+        conn.execute(
+            "UPDATE conversation_threads SET last_message_at=CURRENT_TIMESTAMP WHERE thread_id=?",
+            (thread_id,),
         )
         conn.commit()
 
@@ -83,7 +126,7 @@ async def send_message(project_id: int, body: ChatMessageCreate):
         ).fetchone()
         return dict(row)
 
-    message = execute_with_retry(_create)
+    message = await asyncio.to_thread(execute_with_retry, _create)
 
     # Create agent_events so the autonomy system dispatches the message
     # to the target agent(s).  User messages get PRIORITY_URGENT.
@@ -100,8 +143,8 @@ async def send_message(project_id: int, body: ChatMessageCreate):
             message_id=message.get("id"),
             conversation_type="user_to_agent",
         )
-    except Exception:
-        pass  # non-fatal — autonomy may not be active yet
+    except Exception as exc:  # noqa: BLE001 — legacy dispatch is separate from the stored-message receipt
+        logger.warning("Legacy message dispatch unavailable (%s)", type(exc).__name__)
 
     # Emit EventBus event for WebSocket relay
     event_bus.emit(
@@ -145,20 +188,21 @@ async def list_threads(project_id: int):
     return [ChatThreadResponse(**t) for t in threads]
 
 
-@router.get("/{project_id}/threads/{thread_id}", response_model=list[ChatMessageResponse])
+@router.get(
+    "/{project_id}/threads/{thread_id}", response_model=list[ChatMessageResponse]
+)
 async def get_thread_messages(project_id: int, thread_id: str):
     """Get all messages in a thread."""
 
     def _query(conn: sqlite3.Connection) -> list[dict]:
         rows = conn.execute(
-            """SELECT * FROM chat_messages
-               WHERE thread_id = ? AND project_id = ?
-               ORDER BY created_at ASC""",
+            MESSAGE_SELECT
+            + " WHERE cm.thread_id=? AND cm.project_id=? ORDER BY cm.id ASC",
             (thread_id, project_id),
         ).fetchall()
         return [dict(r) for r in rows]
 
-    messages = execute_with_retry(_query)
+    messages = await asyncio.to_thread(execute_with_retry, _query)
     return [ChatMessageResponse(**m) for m in messages]
 
 

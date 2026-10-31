@@ -1,8 +1,9 @@
 # Runtime nativo y coordinación del primer recorrido
 
 Estado: implementado para tareas de investigación mediante la API del propietario.
-El engine heredado y sus demás capacidades todavía requieren migración. No hay
-aceptación visual ni reemplazo completo de los flows antiguos.
+El engine heredado y sus demás capacidades todavía requieren migración. Tareas
+y Chat ya tienen entrega funcional sobre este coordinador; ver `human-workspace.md`.
+No hay aceptación visual ni reemplazo completo de los flows antiguos.
 
 ```mermaid
 flowchart LR
@@ -34,7 +35,9 @@ arranque drena la adquisición pendiente y libera su descriptor.
 El propietario selecciona un repositorio registrado del proyecto. Debe estar
 dentro de la raíz administrada, sin DB/control/credenciales dentro del código,
 y sin solapamiento con otro proyecto. Varios repositorios requieren selección
-explícita. El modelo no elige rutas, actor, proyecto ni grants. Este recorrido
+explícita. La configuración global permite elegir `model` y requiere reiniciar para
+cambiarlo; todavía no hay selector web ni elección por agente. El modelo no
+elige rutas, actor, proyecto ni grants. Este recorrido
 admite tareas `research`; no simula disponer todavía de herramientas de desarrollo.
 
 ## Antes del turno

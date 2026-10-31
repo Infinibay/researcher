@@ -100,6 +100,10 @@ class InferenceSession:
         return self.native.thread_id
 
     @property
+    def model(self):
+        return self.native.thread_configuration["model"]
+
+    @property
     def catalog_hash(self):
         return self.business.catalog_hash
 

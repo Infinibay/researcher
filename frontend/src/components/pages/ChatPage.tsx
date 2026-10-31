@@ -7,6 +7,8 @@ import { LoadingSpinner } from '../common/LoadingSpinner'
 import { EmptyState } from '../common/EmptyState'
 import { MarkdownRenderer } from '../common/MarkdownRenderer'
 import { formatRelative } from '../../utils/date'
+import { useTasks } from '../../hooks/useTasks'
+import { TaskRunWorkspace } from '../tasks/TaskRunWorkspace'
 
 interface ChatMessage {
   id: number
@@ -14,6 +16,8 @@ interface ChatMessage {
   from_agent: string
   message: string
   created_at?: string
+  runtime_run_id?: string | null
+  context_version?: number | null
 }
 
 interface ThreadGroup {
@@ -23,6 +27,36 @@ interface ThreadGroup {
 }
 
 export function ChatPage() {
+  const projectId = useProjectStore((s) => s.activeProjectId)
+  if (!projectId) return <EmptyState title="Ningún proyecto seleccionado" description="Selecciona un proyecto para abrir su conversación." />
+  return <ProjectConversation key={projectId} projectId={projectId} />
+}
+
+function ProjectConversation({ projectId }: { projectId: number }) {
+  const tasks = useTasks(projectId)
+  const [taskId, setTaskId] = useState<number | null>(null)
+  return <div className="space-y-5">
+    <header className="space-y-2">
+      <h1 className="text-xl font-semibold text-slate-100">Conversación y trabajo</h1>
+      <p className="text-sm text-slate-400">Elige la tarea para indicar qué quieres comprobar. Sus solicitudes, propuestas y correcciones conservarán su contexto.</p>
+      <label className="block space-y-1 text-sm text-slate-300">Tarea
+        <select className="w-full rounded-md border border-surface-600 bg-surface-900 px-3 py-2 text-slate-200" value={taskId ?? ''} onChange={event => setTaskId(event.target.value ? Number(event.target.value) : null)}>
+          <option value="">Elige una tarea</option>
+          {(tasks.data ?? []).map(task => <option key={task.id} value={task.id}>#{task.id} · {task.title}</option>)}
+        </select>
+      </label>
+      {tasks.error && <p role="alert" className="text-sm text-rose-300">No se pudieron recuperar las tareas. {tasks.error.message}</p>}
+      {tasks.data?.length === 0 && <p className="text-sm text-slate-400">Crea una tarea en la sección Tareas para empezar.</p>}
+    </header>
+    {taskId != null && <div className="rounded-lg border border-surface-700 bg-surface-800 p-4"><TaskRunWorkspace key={`${projectId}:${taskId}`} projectId={projectId} taskId={taskId} /></div>}
+    <details className="rounded-lg border border-surface-700 p-4">
+      <summary className="cursor-pointer text-sm font-medium text-slate-200">Historial de conversaciones del proyecto</summary>
+      <div className="mt-3 min-h-64"><ProjectHistory readOnly /></div>
+    </details>
+  </div>
+}
+
+function ProjectHistory({ readOnly = true }: { readOnly?: boolean }) {
   const projectId = useProjectStore((s) => s.activeProjectId)
   const [expandedThread, setExpandedThread] = useState<string | null>(null)
   const [message, setMessage] = useState('')
@@ -103,7 +137,7 @@ export function ChatPage() {
   }
 
   const handleSend = () => {
-    if (!message.trim() || !projectId) return
+    if (readOnly || !message.trim() || !projectId) return
     sendMessage.mutate(
       {
         projectId,
@@ -123,7 +157,7 @@ export function ChatPage() {
   }
 
   const handleRespond = (response: string) => {
-    if (!response.trim() || !pendingRequest) return
+    if (readOnly || !response.trim() || !pendingRequest) return
     respondMutation.mutate(
       { requestId: pendingRequest.id, response: response.trim() },
       { onSuccess: () => setRequestReply('') },
@@ -152,6 +186,7 @@ export function ChatPage() {
           <div className="text-sm">
             <MarkdownRenderer content={msg.message} />
           </div>
+          {msg.runtime_run_id && <p className="mt-2 text-xs text-slate-400">{isUser ? 'Solicitud registrada' : 'Propuesta conservada'} · contexto {msg.context_version}</p>}
           {msg.created_at && (
             <div className={`mt-1 text-[10px] ${isUser ? 'text-sky-300/50' : 'text-slate-600'}`}>
               {formatRelative(msg.created_at)}
@@ -176,7 +211,7 @@ export function ChatPage() {
             </button>
           )}
           <h3 className="text-sm font-semibold text-slate-200">
-            {expandedThread ? 'Thread' : 'Chat with Project Lead'}
+            {expandedThread ? 'Conversación conservada' : 'Historial del proyecto'}
           </h3>
         </div>
 
@@ -236,8 +271,8 @@ export function ChatPage() {
                 )}
 
                 {/* Response area */}
-                {options.length > 0 && (
-                  <div className="mt-3 flex flex-wrap gap-2">
+                {!readOnly && options.length > 0 && (
+                <div className="mt-3 flex flex-wrap gap-2">
                     {options.map((opt) => (
                       <button
                         key={opt}
@@ -250,7 +285,7 @@ export function ChatPage() {
                     ))}
                   </div>
                 )}
-                <div className={`${options.length > 0 ? 'mt-2' : 'mt-3'} flex gap-2`}>
+                {!readOnly && <div className={`${options.length > 0 ? 'mt-2' : 'mt-3'} flex gap-2`}>
                   <textarea
                     value={requestReply}
                     onChange={(e) => setRequestReply(e.target.value)}
@@ -266,7 +301,7 @@ export function ChatPage() {
                   >
                     {respondMutation.isPending ? 'Sending...' : 'Reply'}
                   </button>
-                </div>
+                </div>}
               </div>
             </div>
           )}
@@ -275,7 +310,7 @@ export function ChatPage() {
         </div>
 
         {/* Input */}
-        <div className="border-t border-surface-700 p-3">
+        {!readOnly && <div className="border-t border-surface-700 p-3">
           <div className="flex gap-2">
             <textarea
               value={message}
@@ -293,7 +328,7 @@ export function ChatPage() {
               Send
             </button>
           </div>
-        </div>
+        </div>}
       </div>
     </div>
   )

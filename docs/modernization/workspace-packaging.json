@@ -1,0 +1,120 @@
+{
+  "wheel": "researcher-0.1.0-py3-none-any.whl",
+  "sha256": "1b86948f7af518bbabdeeeeea85e0f5804c4c3e3509e0c4119ce41b6ad1f098f",
+  "source_bytes_match": true,
+  "files": [
+    {
+      "path": "backend/api/models/chat.py",
+      "sha256": "85d3ade59e4c2f05ae331bc27e843085ddbbcc8147eef844040e08d6080c2679"
+    },
+    {
+      "path": "backend/api/routes/chat.py",
+      "sha256": "406de71c04f85f36ab416eaa28a078828d801bab682643c2998fe7bb8228c24e"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "sha256": "3f7c5ee9f54df4aac94cfafe86e9f25e4154fd2e7a5e54b7a186592a6addd91e"
+    },
+    {
+      "path": "backend/autonomy/events.py",
+      "sha256": "98880717318f6ace464335421aa0df3701e201530e2f5fc69ba528baf04dcc4c"
+    },
+    {
+      "path": "backend/communication/ownership.py",
+      "sha256": "72bb624195447fd39133f5d491c0a7c33b03e6f4e7056abd2f8567542b4b21cb"
+    },
+    {
+      "path": "backend/communication/service.py",
+      "sha256": "a08a6662cbd4b7bc64927abfac328d9dda399435de99caeadfd1146b8eb20fd9"
+    },
+    {
+      "path": "backend/db/conversation_schema.sql",
+      "sha256": "b7e2759531edbac1cb8fead3bba956104096184d9c6c2fe43f7f4abb195d172b"
+    },
+    {
+      "path": "backend/db/inference_schema.sql",
+      "sha256": "1a4c551d01900afd2ee0537ba5002492a5a6acd7ae22783632a5cb92506599f5"
+    },
+    {
+      "path": "backend/db/job_schema.sql",
+      "sha256": "120886f9ec24419fbb53a7ca420c51fabad67126eb151a7d4560bd1d941088e5"
+    },
+    {
+      "path": "backend/db/model_schema.sql",
+      "sha256": "886ddbbcf87858affc032eca94fa283473cf63bef09caad81c6e81eb48a9936f"
+    },
+    {
+      "path": "backend/db/research_schema.sql",
+      "sha256": "d3c786c120fc4b552824d1226fdd1659bdfbfc1108c5f3e90a20faba85ecc687"
+    },
+    {
+      "path": "backend/db/runtime_schema.sql",
+      "sha256": "624fc1b71cf59f76d7945dc7494209f3b51af2c3fb8c7bb54ce0094b707b2736"
+    },
+    {
+      "path": "backend/db/schema.sql",
+      "sha256": "0e14f922b6df8ca55e0d4f1dc31ee59f34789dd5b0a5d70a87d0d0c3da6afa7e"
+    },
+    {
+      "path": "backend/flows/event_listeners.py",
+      "sha256": "dd4fd0fe022efd4c23bf544a20d77ab47fcb76af7b3a866aca822b58c9628930"
+    },
+    {
+      "path": "backend/runtime/__init__.py",
+      "sha256": "4cd821bf227b55f0037304a924016d3827baaa924797487a6392154d7ac3c19e"
+    },
+    {
+      "path": "backend/runtime/business_mediation.py",
+      "sha256": "29b8f09568103229259435b085a097caae5482a5a0b45481aae7ae075a99acdf"
+    },
+    {
+      "path": "backend/runtime/codex_rpc.py",
+      "sha256": "c58c40c7144a79c19197755e9234d07cfa9aa9c050df5ae10543f213491aa065"
+    },
+    {
+      "path": "backend/runtime/codex_session.py",
+      "sha256": "d5a3de220b4a8aa542b2ff13236dc437bda1c5ce312a4720d4c9d0392a61eba9"
+    },
+    {
+      "path": "backend/runtime/command_jobs.py",
+      "sha256": "ceb8c1125e624dd532779b8b0cb31e9212279686b6e5dc23e9255e859cf30d53"
+    },
+    {
+      "path": "backend/runtime/contracts.py",
+      "sha256": "52a199a837a2eaec32641d5b35696ed625f0f465d9dd135270e07e293a58360d"
+    },
+    {
+      "path": "backend/runtime/ken_worker.py",
+      "sha256": "142a7c5b39ad72b75e02ef68b040f1fd4b820fdd22975d9ed530d7cda64ec032"
+    },
+    {
+      "path": "backend/runtime/live_grants.py",
+      "sha256": "472a93ecaa6d645b49b2fba434e910bb193d3b1bb1beab1d72fbc51082e8edd3"
+    },
+    {
+      "path": "backend/runtime/native_commands.py",
+      "sha256": "cc2457579bc61be564ba4c283728e679c95ce8a7607046e27b576daee03f9758"
+    },
+    {
+      "path": "backend/runtime/native_inference.py",
+      "sha256": "763b48077ddc803c99172a06ee6500c37ad1f17fe8d4b5f4d7f6a66c75000fc6"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "sha256": "6116ca2bd73c31483364d99ecf98d1cbb3b4afed7a8d7714a7ccccd6d7b4575c"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "sha256": "870a4d79074bc00bae6fedc65c5a2af6e4a1617abbbad1ed0ebbf089ce608063"
+    },
+    {
+      "path": "backend/runtime/views.py",
+      "sha256": "9d807543e105abf7a4a06cd777a78ee0127a9d1efb34a941bddbd2a19e0c89c9"
+    },
+    {
+      "path": "backend/tools/base/db.py",
+      "sha256": "4f1cae4dfcd023efeed9ef1fa3fecb227ea1719a12ce1eed000715b7e851bf0e"
+    }
+  ],
+  "scope": "Backend modules and seven SQL resources; not a clean-machine install"
+}

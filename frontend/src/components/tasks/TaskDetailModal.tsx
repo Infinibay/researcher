@@ -6,6 +6,7 @@ import { LoadingSpinner } from '../common/LoadingSpinner'
 import { MarkdownRenderer } from '../common/MarkdownRenderer'
 import { STATUS_COLORS, PRIORITY_COLORS } from '../../utils/colors'
 import { formatRelative } from '../../utils/date'
+import { TaskRunWorkspace } from './TaskRunWorkspace'
 
 const taskStatuses = ['backlog', 'pending', 'in_progress', 'review_ready', 'rejected', 'done', 'blocked']
 
@@ -25,7 +26,7 @@ export function TaskDetailModal({
   const updateTask = useUpdateTask()
   const setDependencies = useSetTaskDependencies()
 
-  const [tab, setTab] = useState<'details' | 'comments' | 'dependencies'>('details')
+  const [tab, setTab] = useState<'details' | 'execution' | 'comments' | 'dependencies'>('details')
   const [commentText, setCommentText] = useState('')
   const [commentType, setCommentType] = useState<string>('comment')
   const [editingDeps, setEditingDeps] = useState(false)
@@ -137,7 +138,7 @@ export function TaskDetailModal({
 
             {/* Tabs */}
             <div className="flex border-b border-surface-700">
-              {(['details', 'comments', 'dependencies'] as const).map((t) => (
+              {(['details', 'execution', 'comments', 'dependencies'] as const).map((t) => (
                 <button
                   key={t}
                   onClick={() => setTab(t)}
@@ -147,7 +148,7 @@ export function TaskDetailModal({
                       : 'text-slate-500 hover:text-slate-300'
                   }`}
                 >
-                  {t}
+                  {t === 'execution' ? 'Trabajo' : t}
                   {t === 'comments' && comments && ` (${comments.length})`}
                   {t === 'dependencies' && dependencies && ` (${dependencies.length})`}
                 </button>
@@ -156,6 +157,7 @@ export function TaskDetailModal({
 
             {/* Content */}
             <div className="flex-1 overflow-y-auto p-4">
+              {tab === 'execution' && <TaskRunWorkspace key={`${task.project_id}:${task.id}`} projectId={task.project_id} taskId={task.id} />}
               {tab === 'details' && (
                 <div className="space-y-4">
                   {editingDesc ? (

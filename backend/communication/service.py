@@ -162,7 +162,9 @@ class CommunicationService:
         """Retrieve messages with optional filtering."""
 
         def _query(conn: sqlite3.Connection) -> list[dict[str, Any]]:
-            clauses = ["cm.project_id = ?"]
+            from backend.communication.ownership import LEGACY_THREAD_CLAUSE
+
+            clauses = ["cm.project_id = ?", LEGACY_THREAD_CLAUSE]
             params: list[Any] = [project_id]
 
             if thread_id:
@@ -220,9 +222,12 @@ class CommunicationService:
         """Count unread messages directed at *agent_id*."""
 
         def _query(conn: sqlite3.Connection) -> int:
+            from backend.communication.ownership import LEGACY_THREAD_CLAUSE
+
             row = conn.execute(
-                """SELECT COUNT(*) as cnt FROM chat_messages cm
+                f"""SELECT COUNT(*) as cnt FROM chat_messages cm
                    WHERE cm.project_id = ?
+                     AND {LEGACY_THREAD_CLAUSE}
                      AND (cm.to_agent = ? OR cm.to_role IN (
                          SELECT role FROM roster WHERE agent_id = ?
                      ) OR (cm.to_agent IS NULL AND cm.to_role IS NULL))

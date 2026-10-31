@@ -38,6 +38,7 @@ class ControlledInference:
         self.interrupted = asyncio.Event()
         self.closed = asyncio.Event()
         self.prompts = []
+        self.model = "fixture-model"
 
     @asynccontextmanager
     async def open(self, *, workspace, tool_token, active, limits):
@@ -60,15 +61,20 @@ class ControlledInference:
     async def run(self, prompt, *, on_started, on_event):
         self.prompts.append(prompt)
         c = self.setup.c
+        attempt_id = c.conn.execute(
+            "SELECT runtime_attempt_id FROM tool_grants WHERE id=?",
+            (self.scope.grant_id,),
+        ).fetchone()[0]
         dispatch = c.conn.execute(
-            "SELECT * FROM runtime_inference_dispatches ORDER BY created_at DESC LIMIT 1"
+            "SELECT * FROM runtime_inference_dispatches WHERE attempt_id=?",
+            (attempt_id,),
         ).fetchone()
         assert dispatch["status"] == "reserved", (
             "Native dispatch preceded durable reservation"
         )
         assert (
             c.conn.execute(
-                "SELECT thread_id FROM runtime_attempts ORDER BY started_at DESC LIMIT 1"
+                "SELECT thread_id FROM runtime_attempts WHERE id=?", (attempt_id,)
             ).fetchone()[0]
             == self.thread_id
         )
@@ -476,3 +482,114 @@ async def test_authenticated_api_owns_admission_stop_correction_and_ascending_hi
                 break
             after = page["next_after_id"]
         assert len(ids) >= 5 and ids == sorted(set(ids))
+
+
+async def test_native_chat_uses_the_selected_thread_and_never_legacy_autonomy(
+    service_setup, monkeypatch
+):
+    import httpx
+
+    from backend.api.local_access import LocalAccess
+    from backend.api.main import create_app
+
+    def legacy_dispatch(**kwargs):
+        raise AssertionError("Native conversation must not activate legacy autonomy")
+
+    monkeypatch.setattr("backend.autonomy.events.create_message_event", legacy_dispatch)
+    s = service_setup
+    native = ControlledInference(s)
+    service = coordinator(s, native)
+    app = create_app(
+        access=LocalAccess(pairing_key="native-chat-owner-key-at-least-32-characters"),
+        runtime_service=service,
+    )
+    async with (
+        app.router.lifespan_context(app),
+        httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://localhost"
+        ) as owner,
+    ):
+        paired = await owner.post(
+            "/api/session",
+            json={"code": "native-chat-owner-key-at-least-32-characters"},
+            headers={"X-Researcher-Client": "web"},
+        )
+        owner.headers["X-Researcher-CSRF"] = paired.json()["csrf_token"]
+        body = {
+            "operation_key": "native-chat",
+            "task_id": 1001,
+            "context_version": 1,
+            "thread_id": "owner-conversation",
+            "message": "Contrast the source and show a simple example.",
+        }
+        response = await owner.post("/api/chat/101/instructions", json=body)
+        assert response.status_code == 202, response.text
+        await asyncio.wait_for(native.started.wait(), 2)
+        duplicate = await owner.post("/api/chat/101/instructions", json=body)
+        assert duplicate.status_code == 202
+        assert duplicate.json()["message"]["id"] == response.json()["message"]["id"]
+        native.release.set()
+        run_id = response.json()["run"]["run_id"]
+        await service.wait(run_id)
+        messages = (await owner.get("/api/chat/101/threads/owner-conversation")).json()
+        assert len(messages) == 2 and messages[1]["runtime_run_id"] == run_id
+        assert messages[1]["runtime_status"] == "needs_review"
+        assert messages[1]["context_version"] == 1
+        assert messages[0]["task_id"] == 1001
+        workspace = (await owner.get("/api/projects/101/tasks/1001/workspace")).json()
+        assert workspace["runs"][0]["conversation_thread_id"] == "owner-conversation"
+        assert len(native.prompts) == 1
+
+
+async def test_instruction_receipt_survives_a_later_context_correction(service_setup):
+    s = service_setup
+    native = ControlledInference(s)
+    native.release.set()
+    service = coordinator(s, native)
+    async with service:
+        run = await service.submit(s.c.spec, conversation_thread="retry-thread")
+        await service.wait(run.run_id)
+        await service.correct(
+            project_id=101,
+            task_id=1001,
+            expected_version=1,
+            operation_key="updated",
+            statement="Use a different example.",
+            source_kind="user_example",
+            source_reference="user-message:2",
+        )
+        receipt = await service.submit(s.c.spec, conversation_thread="retry-thread")
+        assert receipt.run_id == run.run_id and receipt.status == "superseded"
+        assert len(native.prompts) == 1
+
+
+async def test_old_correction_receipt_does_not_interrupt_new_context_work(
+    service_setup,
+):
+    s = service_setup
+    first = ControlledInference(s)
+    service = coordinator(s, first)
+    command = {
+        "project_id": 101,
+        "task_id": 1001,
+        "expected_version": 1,
+        "operation_key": "example-correction",
+        "statement": "Use 200 in the example.",
+        "source_kind": "user_example",
+        "source_reference": "user-message:2",
+    }
+    async with service:
+        run = await service.submit(s.c.spec)
+        await asyncio.wait_for(first.started.wait(), 2)
+        assert await service.correct(**command) == 2
+        await service.wait(run.run_id)
+        second = ControlledInference(s)
+        service.runtime = second
+        revised = await service.submit(
+            replace(s.c.spec, context_version=2, operation_key="next")
+        )
+        await asyncio.wait_for(second.started.wait(), 2)
+        assert await service.correct(**command) == 2
+        assert second.active() and not second.interrupted.is_set()
+        await service.stop(101, revised.run_id)
+        await service.wait(revised.run_id)

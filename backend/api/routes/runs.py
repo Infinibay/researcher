@@ -33,6 +33,20 @@ def service(request: Request):
     return runtime
 
 
+def read_store(request):
+    from backend.runtime.sqlite_runs import SQLiteRunStore
+    from backend.tools.base.db import get_db_path
+
+    runtime = request.app.state.runtime_service
+    return runtime.store if runtime is not None else SQLiteRunStore(get_db_path())
+
+
+def owner_view(request):
+    from backend.runtime.views import OwnerRuntimeView
+
+    return OwnerRuntimeView(read_store(request).database)
+
+
 class StartRun(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
     operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
@@ -75,9 +89,7 @@ async def start_run(project_id: int, task_id: int, body: StartRun, request: Requ
 
 @router.get("/{project_id}/runs/{run_id}")
 async def read_run(project_id: int, run_id: str, request: Request):
-    return asdict(
-        await asyncio.to_thread(service(request).store.get, project_id, run_id)
-    )
+    return asdict(await asyncio.to_thread(read_store(request).get, project_id, run_id))
 
 
 @router.post("/{project_id}/runs/{run_id}/stop", status_code=202)
@@ -116,7 +128,7 @@ async def history(
 ):
     return asdict(
         await asyncio.to_thread(
-            service(request).store.events, project_id, after_id=after_id, limit=limit
+            read_store(request).events, project_id, after_id=after_id, limit=limit
         )
     )
 
@@ -124,5 +136,36 @@ async def history(
 @router.get("/{project_id}/tasks/{task_id}/runtime-context")
 async def current_context(project_id: int, task_id: int, request: Request):
     return await asyncio.to_thread(
-        service(request).store.context_snapshot, project_id, task_id
+        read_store(request).context_snapshot, project_id, task_id
     )
+
+
+@router.get("/{project_id}/tasks/{task_id}/workspace")
+async def workspace(project_id: int, task_id: int, request: Request):
+    data = await asyncio.to_thread(owner_view(request).workspace, project_id, task_id)
+    data["runtime"] = {
+        "configured": request.app.state.runtime_service is not None,
+        "supported_task_types": ["research"],
+        "model": getattr(
+            getattr(request.app.state.runtime_service, "runtime", None), "model", None
+        ),
+    }
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
+@router.get("/{project_id}/research-sources/{source_id}")
+async def owner_source(
+    project_id: int,
+    source_id: int,
+    request: Request,
+    offset: int = Query(0, ge=0),
+    max_chars: int = Query(12000, ge=1, le=20000),
+):
+    data = await asyncio.to_thread(
+        owner_view(request).source,
+        project_id,
+        source_id,
+        offset=offset,
+        max_chars=max_chars,
+    )
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})

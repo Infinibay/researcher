@@ -30,6 +30,21 @@ def test_unknown_dispatch_retains_overrun_without_summing_cumulative_usage(
         reserve(c, next_lease)
 
 
+def test_dispatch_records_its_model_and_cannot_relabel_a_reserved_turn(coordination):
+    c = coordination
+    run, lease = reservation(c)
+    options = {
+        "workspace": "/host/alpha",
+        "catalog_hash": "a" * 64,
+        "limits": ExecutionLimits(60, 30, 1, 10, 100),
+    }
+    assert c.store.reserve_inference(lease, model="chosen-model-a", **options)
+    assert c.store.get(101, run.run_id).model == "chosen-model-a"
+    assert not c.store.reserve_inference(lease, model="chosen-model-a", **options)
+    with pytest.raises(RunConflict):
+        c.store.reserve_inference(lease, model="different-model-b", **options)
+
+
 def reservation(c):
     run = c.store.admit(c.spec)
     lease = c.store.claim(101, run.run_id, "host-a")

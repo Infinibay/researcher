@@ -58,7 +58,8 @@ async def main(args):
                     )
                     config = session.native.thread_configuration
                     result["profile"] = config.get("activePermissionProfile")
-                    result["model"] = config.get("model")
+                    result["model"] = session.model
+                    assert session.model == config.get("model")
                     result["native_turns_sent"] = session.native.turns_sent
                     observed = await session.native.rpc.request(
                         "mcpServer/tool/call",

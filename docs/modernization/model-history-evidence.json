@@ -1,0 +1,42 @@
+{
+  "scope": "Upgrade a backup of the actual synthetic conversation trial, never user data",
+  "source_trial": "conversation-247bd3f1",
+  "previous_versions": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22
+  ],
+  "current_version": 23,
+  "tables_unchanged": [
+    "runtime_runs",
+    "runtime_attempts",
+    "chat_messages",
+    "runtime_chat_links",
+    "research_sources",
+    "findings",
+    "artifacts",
+    "runtime_commands"
+  ],
+  "old_dispatch_model": null,
+  "foreign_key_errors": 0,
+  "repeatable": true
+}

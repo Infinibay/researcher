@@ -9,12 +9,23 @@
         "docs/modernization/product-runtime-evidence.json",
         "docs/modernization/product-stop-evidence.json",
         "backend/tests/runtime/test_runtime_service.py",
-        "backend/tests/runtime/test_inference_journal.py"
+        "backend/tests/runtime/test_inference_journal.py",
+        "docs/architecture/human-workspace.md",
+        "docs/modernization/conversation-evidence.json",
+        "backend/tests/runtime/test_run_conversation.py",
+        "backend/tests/runtime/test_workspace_delivery.py",
+        "frontend/tests/runtime.test.ts"
       ]
     },
     "C02": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/human-workspace.md",
+        "docs/modernization/conversation-evidence.json",
+        "backend/tests/runtime/test_run_conversation.py",
+        "backend/tests/runtime/test_workspace_delivery.py",
+        "frontend/tests/runtime.test.ts"
+      ]
     },
     "C03": {
       "status": "pending",
@@ -29,7 +40,12 @@
         "docs/modernization/product-runtime-evidence.json",
         "docs/modernization/product-stop-evidence.json",
         "backend/tests/runtime/test_runtime_service.py",
-        "backend/tests/runtime/test_inference_journal.py"
+        "backend/tests/runtime/test_inference_journal.py",
+        "docs/architecture/human-workspace.md",
+        "docs/modernization/conversation-evidence.json",
+        "backend/tests/runtime/test_run_conversation.py",
+        "backend/tests/runtime/test_workspace_delivery.py",
+        "frontend/tests/runtime.test.ts"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -56,7 +72,12 @@
         "docs/modernization/product-runtime-evidence.json",
         "docs/modernization/product-stop-evidence.json",
         "backend/tests/runtime/test_runtime_service.py",
-        "backend/tests/runtime/test_inference_journal.py"
+        "backend/tests/runtime/test_inference_journal.py",
+        "docs/architecture/human-workspace.md",
+        "docs/modernization/conversation-evidence.json",
+        "backend/tests/runtime/test_run_conversation.py",
+        "backend/tests/runtime/test_workspace_delivery.py",
+        "frontend/tests/runtime.test.ts"
       ]
     },
     "C08": {
@@ -64,8 +85,14 @@
       "evidence": []
     },
     "C09": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/human-workspace.md",
+        "docs/modernization/conversation-evidence.json",
+        "backend/tests/runtime/test_run_conversation.py",
+        "backend/tests/runtime/test_workspace_delivery.py",
+        "frontend/tests/runtime.test.ts"
+      ]
     },
     "C10": {
       "status": "pending",
@@ -156,7 +183,12 @@
         "docs/modernization/product-runtime-evidence.json",
         "docs/modernization/product-stop-evidence.json",
         "backend/tests/runtime/test_runtime_service.py",
-        "backend/tests/runtime/test_inference_journal.py"
+        "backend/tests/runtime/test_inference_journal.py",
+        "docs/architecture/human-workspace.md",
+        "docs/modernization/conversation-evidence.json",
+        "backend/tests/runtime/test_run_conversation.py",
+        "backend/tests/runtime/test_workspace_delivery.py",
+        "frontend/tests/runtime.test.ts"
       ]
     },
     "E05": {
@@ -175,7 +207,12 @@
         "docs/modernization/product-runtime-evidence.json",
         "docs/modernization/product-stop-evidence.json",
         "backend/tests/runtime/test_runtime_service.py",
-        "backend/tests/runtime/test_inference_journal.py"
+        "backend/tests/runtime/test_inference_journal.py",
+        "docs/architecture/human-workspace.md",
+        "docs/modernization/conversation-evidence.json",
+        "backend/tests/runtime/test_run_conversation.py",
+        "backend/tests/runtime/test_workspace_delivery.py",
+        "frontend/tests/runtime.test.ts"
       ]
     },
     "E06": {
@@ -194,7 +231,12 @@
         "docs/modernization/product-runtime-evidence.json",
         "docs/modernization/product-stop-evidence.json",
         "backend/tests/runtime/test_runtime_service.py",
-        "backend/tests/runtime/test_inference_journal.py"
+        "backend/tests/runtime/test_inference_journal.py",
+        "docs/architecture/human-workspace.md",
+        "docs/modernization/conversation-evidence.json",
+        "backend/tests/runtime/test_run_conversation.py",
+        "backend/tests/runtime/test_workspace_delivery.py",
+        "frontend/tests/runtime.test.ts"
       ]
     },
     "E07": {
@@ -321,7 +363,12 @@
         "docs/architecture/owned-commands.md",
         "backend/tests/runtime/test_command_executor.py",
         "backend/tests/runtime/test_command_journal.py",
-        "docs/modernization/owned-command-evidence.json"
+        "docs/modernization/owned-command-evidence.json",
+        "docs/architecture/human-workspace.md",
+        "docs/modernization/conversation-evidence.json",
+        "backend/tests/runtime/test_run_conversation.py",
+        "backend/tests/runtime/test_workspace_delivery.py",
+        "frontend/tests/runtime.test.ts"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
@@ -343,7 +390,12 @@
       "evidence": [
         "backend/tests/research",
         "docs/architecture/research-slice.md",
-        "docs/modernization/research-mcp-evidence.json"
+        "docs/modernization/research-mcp-evidence.json",
+        "docs/architecture/human-workspace.md",
+        "docs/modernization/conversation-evidence.json",
+        "backend/tests/runtime/test_run_conversation.py",
+        "backend/tests/runtime/test_workspace_delivery.py",
+        "frontend/tests/runtime.test.ts"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
@@ -383,7 +435,12 @@
         "docs/modernization/product-runtime-evidence.json",
         "docs/modernization/product-stop-evidence.json",
         "backend/tests/runtime/test_runtime_service.py",
-        "backend/tests/runtime/test_inference_journal.py"
+        "backend/tests/runtime/test_inference_journal.py",
+        "docs/architecture/human-workspace.md",
+        "docs/modernization/conversation-evidence.json",
+        "backend/tests/runtime/test_run_conversation.py",
+        "backend/tests/runtime/test_workspace_delivery.py",
+        "frontend/tests/runtime.test.ts"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable",
@@ -494,7 +551,12 @@
         "backend/tests/api/test_local_access.py",
         "backend/tests/api/test_websocket_lifecycle.py",
         "frontend/tests",
-        "docs/modernization/local-access-evidence.json"
+        "docs/modernization/local-access-evidence.json",
+        "docs/architecture/human-workspace.md",
+        "docs/modernization/conversation-evidence.json",
+        "backend/tests/runtime/test_run_conversation.py",
+        "backend/tests/runtime/test_workspace_delivery.py",
+        "frontend/tests/runtime.test.ts"
       ],
       "remaining": [
         "Full product runtime/client integration and browser acceptance; HTTP owner guard does not complete the entire scenario"
@@ -654,7 +716,12 @@
         "docs/modernization/product-runtime-evidence.json",
         "docs/modernization/product-stop-evidence.json",
         "backend/tests/runtime/test_runtime_service.py",
-        "backend/tests/runtime/test_inference_journal.py"
+        "backend/tests/runtime/test_inference_journal.py",
+        "docs/architecture/human-workspace.md",
+        "docs/modernization/conversation-evidence.json",
+        "backend/tests/runtime/test_run_conversation.py",
+        "backend/tests/runtime/test_workspace_delivery.py",
+        "frontend/tests/runtime.test.ts"
       ],
       "remaining": [
         "Migrate all legacy callers and capability families",
@@ -665,7 +732,12 @@
     "communication_guide": {
       "status": "in_progress",
       "evidence": [
-        "docs/interaction/communication-guide.md"
+        "docs/interaction/communication-guide.md",
+        "docs/architecture/human-workspace.md",
+        "docs/modernization/conversation-evidence.json",
+        "backend/tests/runtime/test_run_conversation.py",
+        "backend/tests/runtime/test_workspace_delivery.py",
+        "frontend/tests/runtime.test.ts"
       ],
       "remaining": [
         "Apply to product prompts and first vertical workflow",
@@ -688,7 +760,12 @@
       "status": "in_progress",
       "evidence": [
         "backend/db/research_schema.sql",
-        "backend/tests/research/test_migration.py"
+        "backend/tests/research/test_migration.py",
+        "docs/architecture/human-workspace.md",
+        "docs/modernization/conversation-evidence.json",
+        "backend/tests/runtime/test_run_conversation.py",
+        "backend/tests/runtime/test_workspace_delivery.py",
+        "frontend/tests/runtime.test.ts"
       ],
       "remaining": [
         "Historical migration fixtures and backup/restore",
@@ -742,6 +819,23 @@
         "Rendered browser and keyboard verification",
         "Migrate legacy clients to scoped tools; no human cookie forwarding",
         "Recheck synthetic owner credential isolation when production native runtime is composed"
+      ]
+    },
+    "owner_workspace_delivery": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/human-workspace.md",
+        "docs/modernization/conversation-evidence.json",
+        "backend/tests/runtime/test_run_conversation.py",
+        "backend/tests/runtime/test_workspace_delivery.py",
+        "frontend/tests/runtime.test.ts",
+        "docs/modernization/workspace-frontend-evidence.json"
+      ],
+      "remaining": [
+        "Rendered browser and keyboard verification",
+        "Native pending human questions and general project/role conversation",
+        "Operable uncertain-run recovery and complete synchronization/pagination",
+        "Professional concept-driven redesign remains separately pending"
       ]
     }
   }

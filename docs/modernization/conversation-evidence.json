@@ -1,0 +1,188 @@
+{
+  "trial": "conversation-247bd3f1",
+  "scope": "Actual owner HTTP and native subscription, not browser or visual QA",
+  "native_turns_submitted": 1,
+  "status": "passed",
+  "instruction_posts": 3,
+  "run": {
+    "run_id": "80bb36d1-35c2-4f8a-b9bb-99ff48378489",
+    "project_id": 101,
+    "task_id": 1001,
+    "actor_id": "researcher",
+    "context_version": 1,
+    "status": "needs_review",
+    "fence": 1,
+    "attempt_id": "777fd06e-aa32-4cdd-bb4a-54dc0fc4ae15",
+    "thread_id": "01a19441-faca-7ac0-85f3-f137b0e48d9f",
+    "turn_id": "01a19441-ff7e-7fe0-a18c-0451b23a1deb",
+    "prompt": "En español: usa Ken MCP para leer invoice.py; usa herramientas researcher para capturar policy.md, registrar una observación provisional con cita literal y guardar un informe borrador. Explica con un ejemplo simple qué significa tasa 0.21 para base 100, distinguiendo impuesto y total. Aclara qué demuestra la fuente y qué demuestra el código. No ejecutes tests, publiques ni aceptes la tarea. Conserva claves de operación para reintentos y termina con el ID del informe.",
+    "runtime": "codex",
+    "result": {
+      "native_status": "completed",
+      "summary": "Guardé la observación provisional con cita literal y el informe borrador.\n\nPara base **100**, tasa **0.21** significa **21 %**: impuesto **21** y total **121** al sumarlo a la base.\n\n`policy.md` prescribe esa interpretación y redondear al final con `ROUND_HALF_UP`. El código leído con Ken solo contiene `marker()`, que devuelve `\"ALPHA_ONLY\"`; no demuestra cálculo de impuestos ni redondeo.\n\nConservé las claves de operación para reintentos. No ejecuté tests, publiqué ni acepté la tarea.\n\nID del informe: **1**"
+    },
+    "cancel_requested": false,
+    "operation_key": "conversation-instruction",
+    "conversation_thread_id": "human-conversation"
+  },
+  "messages_before_correction": [
+    {
+      "id": 1,
+      "project_id": 101,
+      "thread_id": "human-conversation",
+      "from_agent": "user",
+      "to_agent": "researcher",
+      "to_role": null,
+      "message": "En español: usa Ken MCP para leer invoice.py; usa herramientas researcher para capturar policy.md, registrar una observación provisional con cita literal y guardar un informe borrador. Explica con un ejemplo simple qué significa tasa 0.21 para base 100, distinguiendo impuesto y total. Aclara qué demuestra la fuente y qué demuestra el código. No ejecutes tests, publiques ni aceptes la tarea. Conserva claves de operación para reintentos y termina con el ID del informe.",
+      "conversation_type": "user_to_agent",
+      "created_at": "2026-10-31 23:18:32",
+      "runtime_run_id": "80bb36d1-35c2-4f8a-b9bb-99ff48378489",
+      "runtime_status": "needs_review",
+      "context_version": 1,
+      "task_id": 1001
+    },
+    {
+      "id": 2,
+      "project_id": 101,
+      "thread_id": "human-conversation",
+      "from_agent": "researcher",
+      "to_agent": "user",
+      "to_role": null,
+      "message": "Guardé la observación provisional con cita literal y el informe borrador.\n\nPara base **100**, tasa **0.21** significa **21 %**: impuesto **21** y total **121** al sumarlo a la base.\n\n`policy.md` prescribe esa interpretación y redondear al final con `ROUND_HALF_UP`. El código leído con Ken solo contiene `marker()`, que devuelve `\"ALPHA_ONLY\"`; no demuestra cálculo de impuestos ni redondeo.\n\nConservé las claves de operación para reintentos. No ejecuté tests, publiqué ni acepté la tarea.\n\nID del informe: **1**",
+      "conversation_type": "agent_to_user",
+      "created_at": "2026-10-31 23:18:59",
+      "runtime_run_id": "80bb36d1-35c2-4f8a-b9bb-99ff48378489",
+      "runtime_status": "needs_review",
+      "context_version": 1,
+      "task_id": 1001
+    }
+  ],
+  "owner_source": {
+    "source_id": 1,
+    "project_id": 101,
+    "title": "policy.md",
+    "kind": "attachment",
+    "sha256": "74ea890e243a6ba2427387a742c6c501884865446ee058ed5bbdf03a10e98d45",
+    "captured_at": 1793488721.4054267,
+    "provenance": {
+      "byte_sha256": "74ea890e243a6ba2427387a742c6c501884865446ee058ed5bbdf03a10e98d45",
+      "extraction": "utf8-v1",
+      "file_size_bytes": 121,
+      "mime_type": "text/markdown",
+      "reference_file_id": 1
+    },
+    "content": "# Fictional policy ALPHA_ONLY\nTax rates are fractions: 0.21 means 21 percent. Round once at the end using ROUND_HALF_UP.\n",
+    "offset": 0,
+    "total_chars": 121,
+    "next_offset": null
+  },
+  "owner_report": {
+    "id": 1,
+    "project_id": 101,
+    "task_id": 1001,
+    "type": "report",
+    "file_path": "reports/1.md",
+    "description": "research: Interpretación de policy.md y alcance de invoice.py",
+    "title": "Interpretación de policy.md y alcance de invoice.py",
+    "research_status": "draft",
+    "created_at": "2026-10-31 23:18:55",
+    "content": "# Interpretación de policy.md y alcance de invoice.py\n\nSe capturó íntegramente policy.md como fuente 1 (SHA-256: 74ea890e243a6ba2427387a742c6c501884865446ee058ed5bbdf03a10e98d45). La observación 1 permanece provisional.\n\nLa fuente afirma literalmente: «Tax rates are fractions: 0.21 means 21 percent. Round once at the end using ROUND_HALF_UP.» Esto demuestra lo que prescribe este documento ficticio: interpretar la tasa como fracción y redondear una vez al final. No acredita una norma fiscal real ni que el programa la aplique; tampoco especifica la precisión del redondeo.\n\nEjemplo aritmético: con base 100 y tasa 0.21, impuesto = 100 × 0.21 = 21. Si se añade ese impuesto a la base, total = 100 + 21 = 121. El impuesto es 21; el total es 121. Este ejemplo deriva de la regla documental y no es una ejecución del código.\n\nKen MCP permitió leer invoice.py: línea 1, `def marker():`; línea 2, `return \"ALPHA_ONLY\"`. El código leído demuestra únicamente que esa función devuelve ese texto. No contiene cálculo de impuesto o total ni redondeo, por lo que no demuestra cumplimiento de la política. Ken también devolvió una memoria sin seguimiento de revisión; no se usó como prueba del cálculo. La lectura no aportó un hash de revisión del código, de modo que esta conclusión queda limitada al contenido observado en esta sesión.\n\nNo se ejecutaron tests. Este informe se guarda como borrador, sin publicación ni aceptación de la tarea. Las claves de operación conservadas para reintentos son policy-v1-capture-ref1, policy-v1-observation-1 y policy-v1-report-1."
+  },
+  "native_dispatches": 1,
+  "correction": {
+    "context_version": 2,
+    "application": "recorded_for_next_run",
+    "inference_started": false
+  },
+  "messages_after_correction": [
+    {
+      "id": 1,
+      "project_id": 101,
+      "thread_id": "human-conversation",
+      "from_agent": "user",
+      "to_agent": "researcher",
+      "to_role": null,
+      "message": "En español: usa Ken MCP para leer invoice.py; usa herramientas researcher para capturar policy.md, registrar una observación provisional con cita literal y guardar un informe borrador. Explica con un ejemplo simple qué significa tasa 0.21 para base 100, distinguiendo impuesto y total. Aclara qué demuestra la fuente y qué demuestra el código. No ejecutes tests, publiques ni aceptes la tarea. Conserva claves de operación para reintentos y termina con el ID del informe.",
+      "conversation_type": "user_to_agent",
+      "created_at": "2026-10-31 23:18:32",
+      "runtime_run_id": "80bb36d1-35c2-4f8a-b9bb-99ff48378489",
+      "runtime_status": "superseded",
+      "context_version": 1,
+      "task_id": 1001
+    },
+    {
+      "id": 2,
+      "project_id": 101,
+      "thread_id": "human-conversation",
+      "from_agent": "researcher",
+      "to_agent": "user",
+      "to_role": null,
+      "message": "Guardé la observación provisional con cita literal y el informe borrador.\n\nPara base **100**, tasa **0.21** significa **21 %**: impuesto **21** y total **121** al sumarlo a la base.\n\n`policy.md` prescribe esa interpretación y redondear al final con `ROUND_HALF_UP`. El código leído con Ken solo contiene `marker()`, que devuelve `\"ALPHA_ONLY\"`; no demuestra cálculo de impuestos ni redondeo.\n\nConservé las claves de operación para reintentos. No ejecuté tests, publiqué ni acepté la tarea.\n\nID del informe: **1**",
+      "conversation_type": "agent_to_user",
+      "created_at": "2026-10-31 23:18:59",
+      "runtime_run_id": "80bb36d1-35c2-4f8a-b9bb-99ff48378489",
+      "runtime_status": "superseded",
+      "context_version": 1,
+      "task_id": 1001
+    }
+  ],
+  "legacy_events_created": 0,
+  "grants_revoked": true,
+  "task_not_done": true,
+  "owned_backend_terminal": true,
+  "independent_usage_receipts": [
+    {
+      "status": "settled",
+      "observed_tokens": 108355,
+      "native_status": "completed",
+      "catalog_hash": "ce8f7b0c042efe5eed7269cb6f9dd8b4210023c61b7c7fb2de1dab60f6216209"
+    }
+  ],
+  "exact_quote_and_source_hash_checks": true,
+  "source_quote_count": 1,
+  "later_changes": [
+    "Delivery kinds and generic-thread scope regression tested separately after the live trial.",
+    "Model column added in migration 23 after this trial; old records stay unknown. Native metadata probe d1f9f092 verifies the adapter model accessor without generation."
+  ],
+  "native_model_probe": {
+    "model_turns_submitted": 0,
+    "status": "passed",
+    "thread_id": "01a19448-c7d3-77b1-9716-4550c1d35aa6",
+    "catalog_hash": "ce8f7b0c042efe5eed7269cb6f9dd8b4210023c61b7c7fb2de1dab60f6216209",
+    "native_thread_ephemeral": false,
+    "profile": {
+      "id": "researcher_inference",
+      "extends": null
+    },
+    "model": "gpt-6.1-sol",
+    "native_turns_sent": 0,
+    "native_ken_read": "passed",
+    "host_business_read": "passed",
+    "business_grant_absent_from_native_launch": true,
+    "inference_profile_effect_checks": [
+      {
+        "case": "inside",
+        "exit_code": 0
+      },
+      {
+        "case": "outside",
+        "exit_code": 1
+      },
+      {
+        "case": "python-positive",
+        "exit_code": 0
+      },
+      {
+        "case": "read-only",
+        "exit_code": 23
+      },
+      {
+        "case": "network",
+        "exit_code": 23
+      }
+    ],
+    "owned_peers_closed": true,
+    "resume": "not_tested; zero-turn threads may have no persisted rollout",
+    "owned_backend_terminal": true
+  }
+}

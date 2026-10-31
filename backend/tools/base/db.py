@@ -287,6 +287,18 @@ def ensure_migrations(db_path: str | None = None) -> None:
             resource = Path(__file__).resolve().parents[2] / "db/inference_schema.sql"
             apply_sql_resource(conn, resource)
             logger.info("Migration 21: native dispatch intent and project work budgets")
+        if 22 not in applied:
+            from backend.db.migrations import apply_sql_resource
+
+            resource = Path(__file__).resolve().parents[2] / "db/conversation_schema.sql"
+            apply_sql_resource(conn, resource)
+            logger.info("Migration 22: atomic human conversation delivery")
+        if 23 not in applied:
+            from backend.db.migrations import apply_sql_resource
+
+            resource = Path(__file__).resolve().parents[2] / "db/model_schema.sql"
+            apply_sql_resource(conn, resource)
+            logger.info("Migration 23: model provenance per native dispatch")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()

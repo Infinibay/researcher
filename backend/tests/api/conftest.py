@@ -32,15 +32,15 @@ def test_app(_isolated_db):
 @pytest.fixture()
 def client(test_app):
     """Return a Starlette TestClient for the test app."""
-    client = TestClient(test_app, base_url="http://localhost")
-    response = client.post(
-        "/api/session",
-        json={"code": "api-fixture-owner-code-at-least-32-characters"},
-        headers={"X-Researcher-Client": "web"},
-    )
-    assert response.status_code == 200, response.text
-    client.headers["X-Researcher-CSRF"] = response.json()["csrf_token"]
-    return client
+    with TestClient(test_app, base_url="http://localhost") as client:
+        response = client.post(
+            "/api/session",
+            json={"code": "api-fixture-owner-code-at-least-32-characters"},
+            headers={"X-Researcher-Client": "web"},
+        )
+        assert response.status_code == 200, response.text
+        client.headers["X-Researcher-CSRF"] = response.json()["csrf_token"]
+        yield client
 
 
 @pytest.fixture()

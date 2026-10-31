@@ -122,3 +122,10 @@ Los ensayos de modelo dejan sus threads sintéticos en el historial administrado
 de Codex; se conservan sus IDs y no se borran sesiones ajenas. Las pruebas
 ordinarias no ejecutan estos runners. Requisitos/configuración del producto:
 `docs/architecture/native-runtime-boundary.md` y `docs/config/runtime.example.json`.
+
+`run_conversation.py --live --config /ruta/runtime.json --workspace ...` usa un
+único turno por suscripción y comprueba la ruta de instrucciones del chat,
+mensajes y run atómicos, reenvío sin duplicado, lectura humana de evidencia y
+recuperación del recibo original después de corregir contexto. Una captura de
+su DB de ensayo permitió comprobar la migración 23 sin inferir modelos históricos.
+Estos ensayos no comprueban el navegador ni reemplazan las 48 referencias visuales.

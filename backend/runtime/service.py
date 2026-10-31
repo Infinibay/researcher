@@ -180,13 +180,20 @@ class RuntimeService:
                 os.close(self._lock_fd)
                 self._lock_fd = None
 
-    async def submit(self, spec, *, repository_id=None):
+    async def submit(self, spec, *, repository_id=None, conversation_thread=None):
         if self._lock_fd is None or self._closing:
             raise RunConflict("Runtime owner is not accepting work")
         if spec.runtime != "codex":
             raise RunConflict(
                 "This deployment admits only the Codex subscription adapter"
             )
+        previous = await asyncio.to_thread(
+            self.store.admission_receipt, spec, conversation_thread=conversation_thread
+        )
+        if previous is not None and (
+            previous.status != "queued" or previous.run_id in self._workers
+        ):
+            return previous
         workspace = await asyncio.to_thread(
             self.workspaces.select, spec.project_id, repository_id
         )
@@ -201,7 +208,9 @@ class RuntimeService:
             )
         if context["context_version"] != spec.context_version:
             raise RunConflict("Request uses an obsolete context version")
-        run = await asyncio.to_thread(self.store.admit, spec)
+        run = await asyncio.to_thread(
+            self.store.admit, spec, conversation_thread=conversation_thread
+        )
         if run.status != "queued" or run.run_id in self._workers:
             return run
         if len(self._workers) >= self.max_concurrent or any(
@@ -255,6 +264,9 @@ class RuntimeService:
 
     async def correct(self, **command):
         validate_correction(**command)
+        receipt = await asyncio.to_thread(self.store.correction_receipt, **command)
+        if receipt is not None:
+            return receipt
         affected = [
             slot
             for slot in self._workers.values()
@@ -336,6 +348,7 @@ class RuntimeService:
                         lease,
                         workspace=str(slot.workspace),
                         catalog_hash=session.catalog_hash,
+                        model=session.model,
                         limits=self.limits,
                         project_turn_limit=self.project_turn_limit,
                         project_token_limit=self.project_token_limit,
