@@ -1,0 +1,276 @@
+{
+  "plan": "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+  "status": "in_progress",
+  "scenarios": {
+    "C01": {
+      "status": "pending",
+      "evidence": []
+    },
+    "C02": {
+      "status": "pending",
+      "evidence": []
+    },
+    "C03": {
+      "status": "pending",
+      "evidence": []
+    },
+    "C04": {
+      "status": "pending",
+      "evidence": []
+    },
+    "C05": {
+      "status": "pending",
+      "evidence": []
+    },
+    "C06": {
+      "status": "pending",
+      "evidence": []
+    },
+    "C07": {
+      "status": "pending",
+      "evidence": []
+    },
+    "C08": {
+      "status": "pending",
+      "evidence": []
+    },
+    "C09": {
+      "status": "pending",
+      "evidence": []
+    },
+    "C10": {
+      "status": "pending",
+      "evidence": []
+    },
+    "E01": {
+      "status": "pending",
+      "evidence": []
+    },
+    "E02": {
+      "status": "pending",
+      "evidence": []
+    },
+    "E03": {
+      "status": "pending",
+      "evidence": []
+    },
+    "E04": {
+      "status": "pending",
+      "evidence": []
+    },
+    "E05": {
+      "status": "pending",
+      "evidence": []
+    },
+    "E06": {
+      "status": "pending",
+      "evidence": []
+    },
+    "E07": {
+      "status": "pending",
+      "evidence": []
+    },
+    "E08": {
+      "status": "pending",
+      "evidence": []
+    },
+    "E09": {
+      "status": "pending",
+      "evidence": []
+    },
+    "E10": {
+      "status": "pending",
+      "evidence": []
+    },
+    "E11": {
+      "status": "pending",
+      "evidence": []
+    },
+    "E12": {
+      "status": "pending",
+      "evidence": []
+    },
+    "D01": {
+      "status": "pending",
+      "evidence": []
+    },
+    "D02": {
+      "status": "pending",
+      "evidence": []
+    },
+    "D03": {
+      "status": "pending",
+      "evidence": []
+    },
+    "D04": {
+      "status": "pending",
+      "evidence": []
+    },
+    "D05": {
+      "status": "pending",
+      "evidence": []
+    },
+    "D06": {
+      "status": "pending",
+      "evidence": []
+    },
+    "D07": {
+      "status": "pending",
+      "evidence": []
+    },
+    "D08": {
+      "status": "pending",
+      "evidence": []
+    },
+    "D09": {
+      "status": "pending",
+      "evidence": []
+    },
+    "D10": {
+      "status": "pending",
+      "evidence": []
+    },
+    "D11": {
+      "status": "pending",
+      "evidence": []
+    },
+    "D12": {
+      "status": "pending",
+      "evidence": []
+    },
+    "D13": {
+      "status": "pending",
+      "evidence": []
+    },
+    "U01": {
+      "status": "pending",
+      "evidence": []
+    },
+    "U02": {
+      "status": "pending",
+      "evidence": []
+    },
+    "U03": {
+      "status": "pending",
+      "evidence": []
+    },
+    "U04": {
+      "status": "pending",
+      "evidence": []
+    },
+    "U05": {
+      "status": "pending",
+      "evidence": []
+    },
+    "U06": {
+      "status": "pending",
+      "evidence": []
+    },
+    "U07": {
+      "status": "pending",
+      "evidence": []
+    },
+    "U08": {
+      "status": "pending",
+      "evidence": []
+    }
+  },
+  "deliverables": {
+    "baseline": {
+      "status": "pending",
+      "evidence": []
+    },
+    "locked_install": {
+      "status": "pending",
+      "evidence": []
+    },
+    "database_config": {
+      "status": "pending",
+      "evidence": []
+    },
+    "runtime_comparison": {
+      "status": "pending",
+      "evidence": []
+    },
+    "runtime_decision": {
+      "status": "pending",
+      "evidence": []
+    },
+    "ken_mcp": {
+      "status": "pending",
+      "evidence": []
+    },
+    "subscription_smoke": {
+      "status": "pending",
+      "evidence": []
+    },
+    "capability_matrix": {
+      "status": "pending",
+      "evidence": []
+    },
+    "inference_inventory": {
+      "status": "pending",
+      "evidence": []
+    },
+    "engine_redesign": {
+      "status": "pending",
+      "evidence": []
+    },
+    "communication_guide": {
+      "status": "pending",
+      "evidence": []
+    },
+    "prompt_inventory": {
+      "status": "pending",
+      "evidence": []
+    },
+    "context_evals": {
+      "status": "pending",
+      "evidence": []
+    },
+    "communication_evals": {
+      "status": "pending",
+      "evidence": []
+    },
+    "data_migrations": {
+      "status": "pending",
+      "evidence": []
+    },
+    "backup_restore": {
+      "status": "pending",
+      "evidence": []
+    },
+    "design_audit": {
+      "status": "pending",
+      "evidence": []
+    },
+    "36_desktop_concepts": {
+      "status": "pending",
+      "evidence": []
+    },
+    "12_mobile_adaptations": {
+      "status": "pending",
+      "evidence": []
+    },
+    "design_selection": {
+      "status": "pending",
+      "evidence": []
+    },
+    "all_screens_implemented": {
+      "status": "pending",
+      "evidence": []
+    },
+    "accessibility_e2e": {
+      "status": "pending",
+      "evidence": []
+    },
+    "legacy_removal": {
+      "status": "pending",
+      "evidence": []
+    },
+    "final_independent_review": {
+      "status": "pending",
+      "evidence": []
+    }
+  }
+}
