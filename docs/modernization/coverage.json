@@ -65,10 +65,13 @@
     "E03": {
       "status": "in_progress",
       "evidence": [
-        "backend/tests/flows/test_listener_lifecycle.py"
+        "backend/tests/flows/test_listener_lifecycle.py",
+        "backend/tests/runtime/test_codex_session.py",
+        "docs/modernization/codex-control-evidence.json"
       ],
       "remaining": [
-        "Full scenario requires runtime/startup integration beyond these tests"
+        "Native shell tool termination/ownership remains unverified for explicit cancellation",
+        "Durable product startup/shutdown integration"
       ]
     },
     "E04": {
@@ -251,7 +254,11 @@
         "backend/tests/runtime/test_codex_rpc.py",
         "docs/modernization/codex-inspection.json",
         "docs/modernization/runtime-evaluation.md",
-        "docs/modernization/session-results.json"
+        "docs/modernization/session-results.json",
+        "docs/modernization/codex-fix-evidence.json",
+        "docs/modernization/infinidev-fix-evidence.json",
+        "docs/modernization/infinidev-explain-evidence.json",
+        "docs/modernization/codex-control-evidence.json"
       ],
       "remaining": [
         "Bounded execution/control",
@@ -296,8 +303,14 @@
       "evidence": []
     },
     "communication_guide": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/interaction/communication-guide.md"
+      ],
+      "remaining": [
+        "Apply to product prompts and first vertical workflow",
+        "Communication/context datasets and human comprehension evaluation"
+      ]
     },
     "prompt_inventory": {
       "status": "pending",

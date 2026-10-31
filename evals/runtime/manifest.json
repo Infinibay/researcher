@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "status": "partial_manual_evaluation",
+  "versions": {
+    "codex": "0.166.0",
+    "ken_mcp": "0.18.0",
+    "infinidev": "0.30.0",
+    "infinidev_commit": "9045556ef7af2252b381ac9b1b9bd89479694487"
+  },
+  "fixture_sha256": {
+    "invoice.py": "7724defe91f93084f4db284b91aa26bcc9192d2d64e35fc2b69b02082e607625",
+    "test_invoice.py": "76482120c2dd0104c525493a03e733a7372c85e211e59faa8f7abf388aa79e16",
+    "attachment.md": "6daad8544be0fb934c3121546f682ef289005126cab1a242560ca2e86dbcc370",
+    "slow_tool.py": "9681e8e7d0d0f5f1ea139b769e81d4a3bc1a6a12024de095a25073ad86fed85a"
+  },
+  "model": "gpt-6.1-sol",
+  "authentication": "Existing ChatGPT/Codex subscription; API keys and base URL overrides removed; no metered fallback",
+  "limits": {
+    "wall_seconds": 150,
+    "no_observable_tool_progress_seconds": 75,
+    "observed_tool_items": 35,
+    "observed_total_tokens": 180000,
+    "infinidev_defensive_completion_call_fuse": 32
+  },
+  "infinidev_integration": "One process/workspace; explicit MCP prewarm; four selected Ken readers; exact fixture unittest command authorized",
+  "native_tools": [
+    "ken_find",
+    "ken_read",
+    "ken_recall",
+    "ken_related"
+  ],
+  "native_developer_instructions": "This is a bounded Researcher evaluation in a synthetic Git workspace. Work only inside this workspace. Use the ken MCP to locate relevant code before reading it. Distinguish evidence from assumptions. Do not use unrelated integrations, delegate work, publish, commit, or push. Reply in Spanish with concise explanations and concrete evidence. If a tool is unavailable, report it instead of inventing results.",
+  "prompts": {
+    "explain": "Explica cómo invoice.py calcula el total con impuestos y por qué fallan los dos tests. Usa ken_find para localizar la función, lee su código y ejecuta python -m unittest -v. No cambies ningún archivo. Da un ejemplo numérico sencillo, distingue lo comprobado de lo supuesto y cita archivo/línea.",
+    "fix": "Ahora corrige total_due en invoice.py usando la política de attachment.md. Localiza la función con ken_find, lee las fuentes, cambia sólo invoice.py y ejecuta python -m unittest -v. No cambies tests, no hagas commit ni push. Explica brevemente el cambio y los resultados comprobados. La tasa es fracción, el redondeo final debe ser a dos decimales con ROUND_HALF_UP.",
+    "resume": "Retoma la sesión anterior e indica brevemente qué archivo cambiaste, qué corrección aplicaste y qué tests ejecutaste. No vuelvas a ejecutar herramientas ni edites archivos: responde con el contexto ya disponible.",
+    "steer_initial": "Inspecciona invoice.py usando Ken y crea proposal.md con un ejemplo del cálculo, subtotal 100 y tasa 0.21. No cambies invoice.py ni los tests. Explica en español el ejemplo y el redondeo. Recibirás una corrección durante esta tarea; aplícala antes de escribir el archivo.",
+    "steer_correction": "Corrección explícita del usuario: el ejemplo debe usar subtotal 200 y tasa 0.10, con resultado 220.00. Descarta el ejemplo anterior de 100/0.21. Conserva ROUND_HALF_UP. Escribe proposal.md con la versión corregida y no cambies invoice.py.",
+    "cancel_command": "python -u slow_tool.py"
+  },
+  "separate_experiments": true,
+  "not_proven": [
+    "Full capability matrix",
+    "Researcher report persistence",
+    "Two-project live isolation",
+    "Infinidev live steering/cancellation/restart",
+    "Auth/quota/Ken-failure acceptance",
+    "Human comprehension",
+    "Repeatability/statistical superiority"
+  ]
+}

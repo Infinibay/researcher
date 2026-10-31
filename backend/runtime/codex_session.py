@@ -67,7 +67,8 @@ class CodexSession:
     """Own one native thread/connection; serialize turns and correlate control.
 
     The product service must persist context/attempt identity and aggregate
-    budgets across process restarts. This class deliberately does not decide
+    budgets across process restarts. Interrupted sessions retire their connection;
+    further work must reopen the durable native thread. This class does not decide
     whether a correction was applied, an artifact accepted, or a task done.
     """
 
@@ -186,6 +187,16 @@ class CodexSession:
                         answers[item["id"]] = item["text"]
                     if method == "turn/completed":
                         turn = params["turn"]
+                        if turn["status"] == "interrupted" or self._cancellation is not None:
+                            # Native turn interruption is not a tool-exit receipt.
+                            # Retire this connection before returning control; a
+                            # future attempt must reopen the durable native thread.
+                            if self._cancellation is not None:
+                                try:
+                                    await asyncio.shield(self._cancellation)
+                                except (TimeoutError, RpcDisconnected, RpcError):
+                                    pass  # Preserve the observed terminal result.
+                            await self.rpc.aclose()
                         return NativeTurnResult(
                             self.thread_id, self.turn_id, turn["status"], "\n\n".join(answers.values()),
                             len(self._tool_items), self.observed_tokens, turn.get("error"),

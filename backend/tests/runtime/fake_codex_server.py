@@ -45,6 +45,7 @@ while True:
         continue
     method=request['method']; params=request.get('params',{}); result={}
     if method=='initialize': result={'userAgent':'fake'}
+    elif method=='test/pid': result={'pid':os.getpid()}
     elif method=='account/read': result={'account':{'type': 'apiKey' if Path('api-key-account').exists() else 'chatgpt'}}
     elif method in ('thread/start','thread/resume'): result={'thread':{'id':thread_id},'modelProvider':'openai'}
     elif method=='turn/start':

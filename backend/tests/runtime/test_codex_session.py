@@ -205,3 +205,49 @@ async def test_duplicate_cancel_requests_share_one_native_interruption(tmp_path)
         await asyncio.gather(runtime.cancel(),runtime.cancel())
         assert (await run).status=='interrupted'
     assert sum(r['method']=='turn/interrupt' for r in requests(tmp_path))==1
+
+
+async def test_cancel_when_start_never_returns_reaps_its_process_without_a_native_id(tmp_path):
+    import os
+
+    from backend.runtime.codex_rpc import RpcDisconnected
+    async with session(tmp_path,wall_seconds=10,no_progress_seconds=10) as runtime:
+        pid=(await runtime.rpc.request('test/pid'))['pid']
+        run=asyncio.create_task(runtime.run('delayed-start'))
+        async with asyncio.timeout(1):
+            while not any(r['method']=='turn/start' for r in requests(tmp_path)):
+                await asyncio.sleep(0.005)
+        await asyncio.wait_for(runtime.cancel(),3)
+        with pytest.raises(RpcDisconnected):
+            await asyncio.wait_for(run,1)
+    with pytest.raises(ProcessLookupError):
+        os.kill(pid,0)
+
+
+async def test_two_workspaces_use_distinct_processes_and_native_threads(tmp_path):
+    alpha=tmp_path/'alpha';beta=tmp_path/'beta'
+    alpha.mkdir();beta.mkdir()
+    async with session(alpha) as a, session(beta) as b:
+        first,second=await asyncio.gather(a.run('answer'),b.run('answer'))
+        assert (first.text,second.text)==('alpha','beta')
+        assert first.thread_id!=second.thread_id
+        assert (await a.rpc.request('test/pid'))['pid']!=(await b.rpc.request('test/pid'))['pid']
+    assert all(r.get('params',{}).get('cwd',str(alpha))!=str(beta) for r in requests(alpha))
+
+
+async def test_interrupted_turn_reaps_connection_before_returning_to_the_host(tmp_path):
+    import os
+
+    from backend.runtime.codex_rpc import RpcDisconnected
+
+    started=asyncio.Event()
+    async with session(tmp_path,no_progress_seconds=1) as runtime:
+        pid=(await runtime.rpc.request('test/pid'))['pid']
+        run=asyncio.create_task(runtime.run('hang',on_event=lambda _:started.set()))
+        await asyncio.wait_for(started.wait(),1)
+        await runtime.cancel()
+        assert (await run).status=='interrupted'
+        with pytest.raises(ProcessLookupError):
+            os.kill(pid,0)
+        with pytest.raises(RpcDisconnected):
+            await runtime.rpc.request('echo')
