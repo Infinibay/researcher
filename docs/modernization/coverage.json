@@ -15,8 +15,14 @@
       "evidence": []
     },
     "C04": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "backend/runtime/codex_session.py",
+        "backend/tests/runtime/test_codex_session.py"
+      ],
+      "remaining": [
+        "Durable product ownership, API integration and full scenario acceptance"
+      ]
     },
     "C05": {
       "status": "pending",
@@ -47,8 +53,14 @@
       "evidence": []
     },
     "E02": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "backend/runtime/codex_session.py",
+        "backend/tests/runtime/test_codex_session.py"
+      ],
+      "remaining": [
+        "Durable product ownership, API integration and full scenario acceptance"
+      ]
     },
     "E03": {
       "status": "in_progress",
@@ -72,12 +84,24 @@
       "evidence": []
     },
     "E07": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "backend/runtime/codex_session.py",
+        "backend/tests/runtime/test_codex_session.py"
+      ],
+      "remaining": [
+        "Durable product ownership, API integration and full scenario acceptance"
+      ]
     },
     "E08": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "backend/runtime/codex_session.py",
+        "backend/tests/runtime/test_codex_session.py"
+      ],
+      "remaining": [
+        "Durable product ownership, API integration and full scenario acceptance"
+      ]
     },
     "E09": {
       "status": "pending",
@@ -225,7 +249,9 @@
       "evidence": [
         "backend/runtime/codex_rpc.py",
         "backend/tests/runtime/test_codex_rpc.py",
-        "docs/modernization/codex-inspection.json"
+        "docs/modernization/codex-inspection.json",
+        "docs/modernization/runtime-evaluation.md",
+        "docs/modernization/session-results.json"
       ],
       "remaining": [
         "Bounded execution/control",
@@ -238,12 +264,24 @@
       "evidence": []
     },
     "ken_mcp": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/modernization/runtime-evaluation.md",
+        "docs/modernization/codex-explain-evidence.json"
+      ],
+      "remaining": [
+        "Full comparative/product scenarios and failure acceptance"
+      ]
     },
     "subscription_smoke": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/modernization/runtime-evaluation.md",
+        "docs/modernization/codex-explain-evidence.json"
+      ],
+      "remaining": [
+        "Full comparative/product scenarios and failure acceptance"
+      ]
     },
     "capability_matrix": {
       "status": "pending",
