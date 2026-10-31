@@ -1,0 +1,308 @@
+{
+  "catalog": [
+    {
+      "name": "researcher_reference_list",
+      "properties": [],
+      "annotations": {
+        "title": null,
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": null,
+        "openWorldHint": null
+      }
+    },
+    {
+      "name": "researcher_capture_reference",
+      "properties": [
+        "operation_key",
+        "reference_file_id"
+      ],
+      "annotations": {
+        "title": null,
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": null
+      }
+    },
+    {
+      "name": "researcher_capture_web",
+      "properties": [
+        "operation_key",
+        "url"
+      ],
+      "annotations": {
+        "title": null,
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": null
+      }
+    },
+    {
+      "name": "researcher_source_list",
+      "properties": [
+        "after_id",
+        "limit"
+      ],
+      "annotations": {
+        "title": null,
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": null,
+        "openWorldHint": null
+      }
+    },
+    {
+      "name": "researcher_source_read",
+      "properties": [
+        "source_id",
+        "offset",
+        "max_chars"
+      ],
+      "annotations": {
+        "title": null,
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": null,
+        "openWorldHint": null
+      }
+    },
+    {
+      "name": "researcher_source_search",
+      "properties": [
+        "source_id",
+        "needle",
+        "after_offset"
+      ],
+      "annotations": {
+        "title": null,
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": null,
+        "openWorldHint": null
+      }
+    },
+    {
+      "name": "researcher_finding_record",
+      "properties": [
+        "operation_key",
+        "topic",
+        "content",
+        "evidence",
+        "finding_type"
+      ],
+      "annotations": {
+        "title": null,
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": null
+      }
+    },
+    {
+      "name": "researcher_finding_read",
+      "properties": [
+        "finding_id"
+      ],
+      "annotations": {
+        "title": null,
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": null,
+        "openWorldHint": null
+      }
+    },
+    {
+      "name": "researcher_report_write",
+      "properties": [
+        "operation_key",
+        "title",
+        "content",
+        "finding_ids",
+        "report_type"
+      ],
+      "annotations": {
+        "title": null,
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": null
+      }
+    },
+    {
+      "name": "researcher_report_read",
+      "properties": [
+        "artifact_id",
+        "offset",
+        "max_chars",
+        "evidence_offset"
+      ],
+      "annotations": {
+        "title": null,
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": null,
+        "openWorldHint": null
+      }
+    }
+  ],
+  "calls": [
+    {
+      "tool": "researcher_reference_list",
+      "result": {
+        "project_id": 101,
+        "references": [
+          {
+            "id": 7,
+            "filename": "policy.md",
+            "file_size": 94,
+            "mime_type": "text/markdown",
+            "description": null,
+            "uploaded_at": "2026-10-31 18:12:45"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "researcher_capture_reference",
+      "result": {
+        "source_id": 1,
+        "sha256": "b3b9d7c1cfb3852a2e7b134df6e09e896c0f1d27f2a7148c0d6e17a8d4577c60",
+        "kind": "attachment",
+        "locator": "reference:7",
+        "operation_key": "attachment"
+      }
+    },
+    {
+      "tool": "researcher_source_read",
+      "result": {
+        "content": "Fictional invoice policy. Tax rates are fractions. Round once at the end using ROUND_HALF_UP.\n",
+        "total_chars": 94,
+        "offset": 0,
+        "next_offset": null,
+        "source_id": 1,
+        "project_id": 101,
+        "captured_for_task_id": 1001,
+        "kind": "attachment",
+        "locator": "reference:7",
+        "title": "policy.md",
+        "sha256": "b3b9d7c1cfb3852a2e7b134df6e09e896c0f1d27f2a7148c0d6e17a8d4577c60",
+        "captured_at": 1793470371.0371504,
+        "provenance": {
+          "byte_sha256": "b3b9d7c1cfb3852a2e7b134df6e09e896c0f1d27f2a7148c0d6e17a8d4577c60",
+          "extraction": "utf8-v1",
+          "file_size_bytes": 94,
+          "mime_type": "text/markdown",
+          "reference_file_id": 7
+        }
+      }
+    },
+    {
+      "tool": "researcher_capture_web",
+      "result": {
+        "source_id": 2,
+        "sha256": "966b1ebdd56e99a680f1bda537fdd64f7e9067339fa49b095d53a1b09b90dc24",
+        "kind": "web",
+        "locator": "https://docs.python.org/3.12/library/decimal.html",
+        "operation_key": "decimal-web"
+      }
+    },
+    {
+      "tool": "researcher_source_search",
+      "result": {
+        "source_id": 2,
+        "sha256": "966b1ebdd56e99a680f1bda537fdd64f7e9067339fa49b095d53a1b09b90dc24",
+        "total_chars": 69359,
+        "matches": [
+          {
+            "match_offset": 46849,
+            "excerpt_offset": 46649,
+            "excerpt": "nd towards -Infinity.\ndecimal.ROUND_HALF_DOWN\u00b6\nRound to nearest with ties going towards zero.\ndecimal.ROUND_HALF_EVEN\u00b6\nRound to nearest with ties going to nearest even integer.\ndecimal.ROUND_HALF_UP\u00b6\nRound to nearest with ties going away from zero.\ndecimal.ROUND_UP\u00b6\nRound away from zero.\ndecimal.ROUND_05UP\u00b6\nRound away from zero if last digit after rounding towards zero would have\nbeen 0 or 5; otherwise round towards zero.\nSignals\u00b6\nSignals represent conditions that arise during computation. Each corresponds to\none context flag and one context trap enabler.\nThe context flag is set whenever the condition is encountered. After the\ncomputation, "
+          }
+        ],
+        "next_offset": null,
+        "search_kind": "exact_text"
+      }
+    },
+    {
+      "tool": "researcher_finding_record",
+      "result": {
+        "finding_id": 1,
+        "status": "provisional",
+        "confidence": null,
+        "operation_key": "rounding-finding"
+      }
+    },
+    {
+      "tool": "researcher_report_write",
+      "result": {
+        "artifact_id": 1,
+        "title": "Fictional invoice rounding",
+        "status": "draft",
+        "operation_key": "rounding-report"
+      }
+    },
+    {
+      "tool": "researcher_report_write",
+      "result": {
+        "artifact_id": 1,
+        "title": "Fictional invoice rounding",
+        "status": "draft",
+        "operation_key": "rounding-report"
+      }
+    },
+    {
+      "tool": "researcher_report_read",
+      "result": {
+        "content": "# Fictional invoice rounding\n\nThe policy uses fractional tax rates and ROUND_HALF_UP. Python defines ties as going away from zero. This finding is provisional and based on the captured attachment and documentation.",
+        "total_chars": 214,
+        "offset": 0,
+        "next_offset": null,
+        "artifact_id": 1,
+        "project_id": 101,
+        "title": "Fictional invoice rounding",
+        "status": "draft",
+        "report_type": "research",
+        "content_sha256": "03ec9de887ba3b352e7a6d14bdc503ffd763200a0653344074e1e932037982a8",
+        "finding_ids": [
+          1
+        ],
+        "evidence": [
+          {
+            "finding_id": 1,
+            "source_id": 1,
+            "quote": "Tax rates are fractions.",
+            "kind": "attachment",
+            "locator": "reference:7",
+            "title": "policy.md",
+            "sha256": "b3b9d7c1cfb3852a2e7b134df6e09e896c0f1d27f2a7148c0d6e17a8d4577c60",
+            "captured_at": 1793470371.0371504,
+            "finding_status": "provisional"
+          },
+          {
+            "finding_id": 1,
+            "source_id": 2,
+            "quote": "Round to nearest with ties going away from zero.",
+            "kind": "web",
+            "locator": "https://docs.python.org/3.12/library/decimal.html",
+            "title": "decimal \u2014 Decimal fixed-point and floating-point arithmetic \u2014 Python 3.12.16 documentation",
+            "sha256": "966b1ebdd56e99a680f1bda537fdd64f7e9067339fa49b095d53a1b09b90dc24",
+            "captured_at": 1793470371.2741299,
+            "finding_status": "provisional"
+          }
+        ],
+        "total_evidence": 2,
+        "evidence_offset": 0,
+        "next_evidence_offset": null
+      }
+    }
+  ],
+  "artifact_api": {
+    "id": 1,
+    "project_id": 101,
+    "content": "# Fictional invoice rounding\n\nThe policy uses fractional tax rates and ROUND_HALF_UP. Python defines ties as going away from zero. This finding is provisional and based on the captured attachment and documentation."
+  },
+  "revoked_scope_is_error": true,
+  "model_requests_sent": 0
+}

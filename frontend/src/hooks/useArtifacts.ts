@@ -16,10 +16,10 @@ export function useArtifacts(projectId: number | null, type?: string) {
   })
 }
 
-export function useArtifact(artifactId: number | null) {
+export function useArtifact(projectId: number | null, artifactId: number | null) {
   return useQuery({
-    queryKey: ['artifact', artifactId],
-    queryFn: () => fetchApi<Artifact>(`/api/artifacts/${artifactId}`),
-    enabled: artifactId != null,
+    queryKey: ['artifact', projectId, artifactId],
+    queryFn: () => fetchApi<Artifact>(buildUrl(`/api/artifacts/${artifactId}`, { project_id: projectId! })),
+    enabled: projectId != null && artifactId != null,
   })
 }

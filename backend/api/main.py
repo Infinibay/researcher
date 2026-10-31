@@ -56,6 +56,10 @@ def create_app() -> FastAPI:
         lifespan=lifespan,
     )
 
+    from backend.api.request_limits import ToolRequestLimits
+
+    app.add_middleware(ToolRequestLimits)
+
     # CORS
     app.add_middleware(
         CORSMiddleware,
@@ -96,10 +100,14 @@ def create_app() -> FastAPI:
     from backend.api.routes.internal_tasks import router as internal_tasks_router
     from backend.api.routes.milestones import router as milestones_router
     from backend.api.routes.projects import router as projects_router
+    from backend.api.routes.research import install_research_errors
+    from backend.api.routes.research import router as research_router
     from backend.api.routes.tasks import router as tasks_router
     from backend.api.routes.user_requests import router as user_requests_router
     from backend.api.routes.wiki import router as wiki_router
 
+    install_research_errors(app)
+    app.include_router(research_router)
     app.include_router(health_router)
     app.include_router(projects_router)
     app.include_router(epics_router)
@@ -145,7 +153,7 @@ def create_app() -> FastAPI:
         @app.get("/{full_path:path}", include_in_schema=False)
         async def serve_spa(full_path: str):
             # Don't serve SPA for API routes
-            if full_path.startswith("api/") or full_path.startswith("docs") or full_path.startswith("redoc"):
+            if full_path.startswith(("api/", "docs", "redoc")):
                 return JSONResponse(status_code=404, content={"error": "Not found"})
             index = static_dir / "index.html"
             if index.exists():

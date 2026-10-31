@@ -8,6 +8,7 @@ Agents collaborate through an event-driven architecture: a team lead plans work,
 
 - **Python 3.12 or 3.13** (the transitional CrewAI dependency does not support 3.14)
 - **uv** (locked Python installation)
+- **OpenSSL CLI** for ephemeral local TLS certificates in the test suite
 - **Node.js 24 LTS** (for the frontend; version in `frontend/.node-version`)
 - **Podman** or **Docker** (for sandbox and Forgejo)
 - **Ollama** (for local LLM inference)
@@ -40,6 +41,18 @@ The standalone MCP server has its own locked script environment:
 ```bash
 uv run --locked --script scripts/infinibay_mcp_server.py
 ```
+
+The new scoped research MCP has a separate locked script environment:
+
+```bash
+uv run --locked --script scripts/researcher_mcp_server.py
+```
+
+Its host supplies `RESEARCHER_API_URL` and a short-lived `RESEARCHER_TOOL_TOKEN`;
+project/task/actor are bound by that grant. It exposes research business tools,
+not SQL or grant issuance. See [the research slice](docs/architecture/research-slice.md)
+for tested behavior, limits and pending integration. The default product engine
+is still being migrated; the candidate runtime is not yet the default.
 
 Set `INFINIBAY_DB` to select a database explicitly. Without an override, an
 existing recognized database is reused; multiple databases require a choice.

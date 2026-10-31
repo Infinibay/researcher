@@ -1,0 +1,16 @@
+{
+  "url": "https://docs.python.org/3.12/library/decimal.html",
+  "title": "decimal \u2014 Decimal fixed-point and floating-point arithmetic \u2014 Python 3.12.16 documentation",
+  "characters": 69359,
+  "provenance": {
+    "requested_url": "https://docs.python.org/3.12/library/decimal.html",
+    "byte_sha256": "d279fa10396fcd013211cd49de5c00c05a92e369c488b6b419b91a4c8ecf3e09",
+    "byte_count": 288461,
+    "mime_type": "text/html",
+    "extraction": "html-text-v1",
+    "redirects": 0,
+    "resolved_public_address": "151.101.0.223"
+  },
+  "seconds": 0.6207520889875013,
+  "rounding_excerpt": "LOOR, ROUND_HALF_DOWN, ROUND_HALF_EVEN,\nROUND_HALF_UP, ROUND_UP, and ROUND_05UP.\nSignals are groups of exceptional conditions arising during the course of\ncomputation.  Depending on the needs of the a"
+}

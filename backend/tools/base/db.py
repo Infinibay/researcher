@@ -5,16 +5,16 @@ import os
 import random
 import sqlite3
 import time
+from collections.abc import Callable
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Any, Callable, TypeVar
 
 from backend.config.paths import resolve_database_path
 from backend.config.settings import settings
+from backend.db.connection import connect
 
 logger = logging.getLogger(__name__)
 
-T = TypeVar("T")
 
 def get_db_path() -> str:
     """Use the same resolved database as settings and startup entry points."""
@@ -26,17 +26,10 @@ def get_connection(db_path: str | None = None) -> sqlite3.Connection:
     """Open a connection with required pragmas. Caller must close it."""
     if db_path is None:
         db_path = get_db_path()
-    conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode = WAL")
-    conn.execute("PRAGMA foreign_keys = ON")
-    conn.execute("PRAGMA busy_timeout = 5000")
-    conn.execute("PRAGMA synchronous = NORMAL")
-    conn.execute("PRAGMA cache_size = -8000")
-    return conn
+    return connect(db_path)
 
 
-def execute_with_retry(
+def execute_with_retry[T](
     fn: Callable[[sqlite3.Connection], T],
     db_path: str | None = None,
     max_retries: int | None = None,
@@ -271,6 +264,11 @@ def ensure_migrations(db_path: str | None = None) -> None:
             )
             conn.commit()
             logger.info("Migration 17: added code intelligence tables")
+        if 18 not in applied:
+            from backend.db.research_migration import apply_research_schema
+
+            apply_research_schema(conn)
+            logger.info("Migration 18: research evidence, idempotent operations and scoped grants")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()

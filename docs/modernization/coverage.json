@@ -125,10 +125,13 @@
     "D01": {
       "status": "in_progress",
       "evidence": [
-        "backend/tests/tools/test_database_initialization.py"
+        "backend/tests/tools/test_database_initialization.py",
+        "backend/tests/research",
+        "docs/architecture/research-slice.md",
+        "docs/modernization/research-mcp-evidence.json"
       ],
       "remaining": [
-        "Full scenario requires runtime/startup integration beyond these tests"
+        "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
       ]
     },
     "D02": {
@@ -136,20 +139,48 @@
       "evidence": []
     },
     "D03": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "backend/tests/research",
+        "docs/architecture/research-slice.md",
+        "docs/modernization/research-mcp-evidence.json"
+      ],
+      "remaining": [
+        "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
+      ]
     },
     "D04": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "backend/tests/research",
+        "docs/architecture/research-slice.md",
+        "docs/modernization/research-mcp-evidence.json"
+      ],
+      "remaining": [
+        "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
+      ]
     },
     "D05": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "backend/tests/research",
+        "docs/architecture/research-slice.md",
+        "docs/modernization/research-mcp-evidence.json"
+      ],
+      "remaining": [
+        "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
+      ]
     },
     "D06": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "backend/tests/research",
+        "docs/architecture/research-slice.md",
+        "docs/modernization/research-mcp-evidence.json"
+      ],
+      "remaining": [
+        "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
+      ]
     },
     "D07": {
       "status": "pending",
@@ -164,16 +195,37 @@
       "evidence": []
     },
     "D10": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "backend/tests/research",
+        "docs/architecture/research-slice.md",
+        "docs/modernization/research-mcp-evidence.json"
+      ],
+      "remaining": [
+        "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
+      ]
     },
     "D11": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "backend/tests/research",
+        "docs/architecture/research-slice.md",
+        "docs/modernization/research-mcp-evidence.json"
+      ],
+      "remaining": [
+        "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
+      ]
     },
     "D12": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "backend/tests/research",
+        "docs/architecture/research-slice.md",
+        "docs/modernization/research-mcp-evidence.json"
+      ],
+      "remaining": [
+        "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
+      ]
     },
     "D13": {
       "status": "pending",
@@ -184,8 +236,15 @@
       "evidence": []
     },
     "U02": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "backend/tests/research",
+        "docs/architecture/research-slice.md",
+        "docs/modernization/research-mcp-evidence.json"
+      ],
+      "remaining": [
+        "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
+      ]
     },
     "U03": {
       "status": "pending",
@@ -258,7 +317,9 @@
         "docs/modernization/codex-fix-evidence.json",
         "docs/modernization/infinidev-fix-evidence.json",
         "docs/modernization/infinidev-explain-evidence.json",
-        "docs/modernization/codex-control-evidence.json"
+        "docs/modernization/codex-control-evidence.json",
+        "docs/architecture/research-slice.md",
+        "docs/modernization/research-mcp-evidence.json"
       ],
       "remaining": [
         "Bounded execution/control",
@@ -291,8 +352,17 @@
       ]
     },
     "capability_matrix": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/research-slice.md",
+        "scripts/researcher_mcp_server.py",
+        "docs/modernization/research-mcp-evidence.json"
+      ],
+      "remaining": [
+        "Full current-tool inventory and disposition",
+        "Candidate model research/control/isolation cases",
+        "Production runtime wiring"
+      ]
     },
     "inference_inventory": {
       "status": "pending",
@@ -325,8 +395,15 @@
       "evidence": []
     },
     "data_migrations": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "backend/db/research_schema.sql",
+        "backend/tests/research/test_migration.py"
+      ],
+      "remaining": [
+        "Historical migration fixtures and backup/restore",
+        "Legacy data/consumer translation and complete preservation validation"
+      ]
     },
     "backup_restore": {
       "status": "pending",

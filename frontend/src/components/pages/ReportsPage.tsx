@@ -18,13 +18,14 @@ const TYPE_VARIANTS: Record<string, string> = {
 export function ReportsPage() {
   const projectId = useProjectStore((s) => s.activeProjectId)
   const [typeFilter, setTypeFilter] = useState<string>('all')
-  const [selectedId, setSelectedId] = useState<number | null>(null)
+  const [selection, setSelection] = useState<{ projectId: number; artifactId: number } | null>(null)
+  const selectedId = selection && selection.projectId === projectId ? selection.artifactId : null
 
   const { data: artifacts, isLoading } = useArtifacts(
     projectId,
     typeFilter === 'all' ? undefined : typeFilter,
   )
-  const { data: detail } = useArtifact(selectedId)
+  const { data: detail } = useArtifact(projectId, selectedId)
 
   if (!projectId) {
     return <EmptyState title="No project selected" description="Select a project from the header." />
@@ -40,7 +41,7 @@ export function ReportsPage() {
             {TYPE_FILTERS.map((t) => (
               <button
                 key={t}
-                onClick={() => { setTypeFilter(t); setSelectedId(null) }}
+                onClick={() => { setTypeFilter(t); setSelection(null) }}
                 className={`rounded-full px-2.5 py-0.5 text-xs font-medium transition-colors ${
                   typeFilter === t
                     ? 'bg-sky-500/20 text-sky-300'
@@ -61,7 +62,7 @@ export function ReportsPage() {
             artifacts.map((a) => (
               <button
                 key={a.id}
-                onClick={() => setSelectedId(a.id)}
+                onClick={() => setSelection({ projectId, artifactId: a.id })}
                 className={`flex w-full flex-col items-start gap-1 border-b border-surface-700 px-3 py-2.5 text-left transition-colors ${
                   selectedId === a.id
                     ? 'bg-sky-500/10 border-l-2 border-l-sky-500'
@@ -70,9 +71,10 @@ export function ReportsPage() {
               >
                 <div className="flex items-center gap-2">
                   <Badge variant={TYPE_VARIANTS[a.type] || 'neutral'}>{a.type}</Badge>
+                  {a.research_status && <Badge variant={a.research_status === 'accepted' ? 'success' : 'warning'}>{a.research_status}</Badge>}
                   <span className="text-xs text-slate-500">{a.created_at ? formatRelative(a.created_at) : ''}</span>
                 </div>
-                <span className="text-sm font-medium text-slate-300 line-clamp-1">{a.file_path}</span>
+                <span className="text-sm font-medium text-slate-300 line-clamp-1">{a.title ?? a.file_path}</span>
                 {a.description && (
                   <span className="text-xs text-slate-500 line-clamp-1">{a.description}</span>
                 )}
@@ -95,9 +97,10 @@ export function ReportsPage() {
           <>
             <div className="flex items-center justify-between border-b border-surface-700 p-4">
               <div>
-                <h2 className="text-lg font-semibold text-slate-100">{detail.file_path}</h2>
+                <h2 className="text-lg font-semibold text-slate-100">{detail.title ?? detail.file_path}</h2>
                 <div className="flex items-center gap-2 text-xs text-slate-500">
                   <Badge variant={TYPE_VARIANTS[detail.type] || 'neutral'}>{detail.type}</Badge>
+                  {detail.research_status && <Badge variant={detail.research_status === 'accepted' ? 'success' : 'warning'}>{detail.research_status}</Badge>}
                   {detail.description && <span>{detail.description}</span>}
                   {detail.created_at && <span>{formatRelative(detail.created_at)}</span>}
                 </div>

@@ -12,6 +12,8 @@ class ArtifactListResponse(BaseModel):
     type: str
     file_path: str
     description: str | None = None
+    title: str | None = None
+    research_status: str | None = None
     created_at: str | None = None
 
 

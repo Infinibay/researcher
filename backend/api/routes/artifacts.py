@@ -21,18 +21,18 @@ async def list_artifacts(
     """List artifacts for a project (without content for performance)."""
 
     def _query(conn: sqlite3.Connection) -> list[dict]:
-        clauses = ["project_id = ?"]
+        clauses = ["a.project_id = ?"]
         params: list = [project_id]
         if type is not None:
-            clauses.append("type = ?")
+            clauses.append("a.type = ?")
             params.append(type)
         params.append(limit)
         where = " AND ".join(clauses)
         rows = conn.execute(
-            f"""SELECT id, project_id, task_id, type, file_path, description, created_at
-                FROM artifacts
+            f"""SELECT a.id, a.project_id, a.task_id, a.type, a.file_path, a.description, a.created_at, r.title, r.status AS research_status
+                FROM artifacts a LEFT JOIN research_reports r ON r.artifact_id=a.id
                 WHERE {where}
-                ORDER BY created_at DESC
+                ORDER BY a.created_at DESC, a.id DESC
                 LIMIT ?""",
             params,
         ).fetchall()
@@ -43,13 +43,13 @@ async def list_artifacts(
 
 
 @router.get("/artifacts/{artifact_id}", response_model=ArtifactDetailResponse)
-async def get_artifact(artifact_id: int):
+async def get_artifact(artifact_id: int, project_id: int = Query(..., gt=0)):
     """Get a single artifact with content."""
 
     def _query(conn: sqlite3.Connection) -> dict | None:
         row = conn.execute(
-            "SELECT * FROM artifacts WHERE id = ?",
-            (artifact_id,),
+            "SELECT a.*,r.title,r.status AS research_status FROM artifacts a LEFT JOIN research_reports r ON r.artifact_id=a.id WHERE a.id=? AND a.project_id=?",
+            (artifact_id, project_id),
         ).fetchone()
         return dict(row) if row else None
 

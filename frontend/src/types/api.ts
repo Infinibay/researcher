@@ -307,6 +307,8 @@ export interface Artifact {
   task_id?: number
   type: string
   file_path: string
+  title?: string | null
+  research_status?: 'draft' | 'accepted' | 'superseded' | null
   description?: string
   content?: string
   created_at?: string
