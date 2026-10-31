@@ -7,6 +7,8 @@ from pathlib import Path
 
 import uvicorn
 
+from backend.api.config import API_HOST, API_PORT
+
 # Suppress ONNX Runtime warnings (chromadb dependency) that use warnings.warn
 warnings.filterwarnings("ignore", category=UserWarning, module="onnxruntime")
 warnings.filterwarnings("ignore", message=".*ONNX.*")
@@ -59,51 +61,7 @@ def setup_file_logging():
     logging.getLogger(__name__).info("File logging enabled → %s", log_file)
 
 
-def setup_llm_environment():
-    """Configure the centralized LLM singleton and provider env vars.
-
-    Delegates to ``backend.config.llm`` — the single source of truth for
-    all LLM configuration.  Eager-inits the LLM object so errors surface
-    at startup rather than on first agent creation.
-    """
-    from backend.config.llm import setup_provider_env_vars, get_llm, get_litellm_params
-
-    setup_provider_env_vars()
-
-    try:
-        get_llm()  # eager init — surface config errors early
-    except RuntimeError as exc:
-        logging.getLogger(__name__).warning("LLM init skipped: %s", exc)
-        return
-
-    # Probe model capabilities (replaces static validate_function_calling)
-    try:
-        from backend.config.model_capabilities import probe_model
-
-        llm_params = get_litellm_params()
-        if llm_params:
-            caps = probe_model(llm_params)
-            if not caps.supports_function_calling:
-                logging.getLogger(__name__).warning(
-                    "Model does NOT support function calling — "
-                    "LoopEngine will use manual (prompt-based) tool calling."
-                )
-            # Install schema fix if probe detected the need
-            if caps.needs_schema_sanitization:
-                from backend.config.llm import _install_schema_fix
-                _install_schema_fix()
-    except Exception as exc:
-        logging.getLogger(__name__).warning("Model probe failed: %s", exc)
-
-
 def main():
-    setup_file_logging()
-    setup_llm_environment()
-
-    # Bridge CrewAI internal events into INFINIBAY's EventBus → WebSocket pipeline
-    from backend.flows.crewai_event_bridge import register_crewai_event_bridge
-    register_crewai_event_bridge()
-
     # NOTE: No custom signal handlers here — with reload=True, uvicorn runs
     # the ASGI server in a child process while this (parent) process is just
     # the reloader.  The flow_manager lives in the child, so signal handlers
@@ -111,9 +69,10 @@ def main():
     # lifespan handler in main.py (which runs inside the child process).
 
     uvicorn.run(
-        "backend.api.main:app",
-        host="0.0.0.0",
-        port=8000,
+        "backend.api.main:create_app",
+        factory=True,
+        host=API_HOST,
+        port=API_PORT,
         reload=False,
         reload_excludes=[
             "*.pyc", "*.pyo",

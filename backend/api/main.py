@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import time
 from contextlib import asynccontextmanager
@@ -15,42 +16,37 @@ from fastapi.staticfiles import StaticFiles
 from backend.api import config as api_config
 from backend.api.exceptions import register_exception_handlers
 from backend.api.websocket import manager
-from backend.config.settings import settings
-
-# Set provider env vars at import time so uvicorn reload picks them up.
-from backend.config.llm import setup_provider_env_vars as _setup_env
-_setup_env()
 
 logger = logging.getLogger(__name__)
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """FastAPI lifespan: snapshot and stop all active flows on shutdown."""
-    yield
-    # --- Shutdown ---
-    logger.info("Shutdown signal received — stopping active flows")
-    from backend.api.flow_manager import flow_manager
+    """Initialize before serving and reconcile active work on shutdown."""
+    from backend.api.run import setup_file_logging
+    from backend.tools.base.db import ensure_migrations
 
-    active_ids = list(flow_manager._flows.keys())
-    for pid in active_ids:
-        try:
-            logger.info("Stopping project %d: snapshotting state, stopping agents & listeners…", pid)
-            flow_manager.stop_project_flow(pid)
-            logger.info("Project %d stopped successfully", pid)
-        except Exception:
-            logger.warning("Error stopping project %d during shutdown", pid, exc_info=True)
-    logger.info("Graceful shutdown complete: saved snapshots for %d active project(s)", len(active_ids))
+    setup_file_logging()
+    await asyncio.to_thread(ensure_migrations)
+    try:
+        yield
+    finally:
+        logger.info("Shutdown signal received — stopping active flows")
+        from backend.api.flow_manager import flow_manager
+
+        active_ids = list(flow_manager._flows.keys())
+        for pid in active_ids:
+            try:
+                logger.info("Stopping project %d: snapshotting state, stopping agents & listeners…", pid)
+                await asyncio.to_thread(flow_manager.stop_project_flow, pid)
+                logger.info("Project %d stopped successfully", pid)
+            except Exception:
+                logger.warning("Error stopping project %d during shutdown", pid, exc_info=True)
+        logger.info("Shutdown reconciliation finished for %d active project(s)", len(active_ids))
 
 
 def create_app() -> FastAPI:
-    """Create and configure the FastAPI application."""
-    # With reload=True, uvicorn runs the app in a child process.
-    # setup_file_logging() in run.py only configures the parent (reloader),
-    # so we must also configure it here for the actual worker process.
-    from backend.api.run import setup_file_logging
-    setup_file_logging()
-
+    """Construct routes without inference, database writes or maintenance jobs."""
     app = FastAPI(
         title="INFINIBAY API",
         description="REST API for the INFINIBAY project management system",
@@ -59,28 +55,6 @@ def create_app() -> FastAPI:
         redoc_url="/redoc",
         lifespan=lifespan,
     )
-
-    # Run pending DB migrations for existing databases
-    from backend.tools.base.db import ensure_migrations
-    ensure_migrations()
-
-    # Probe model capabilities in the worker process (uvicorn reload
-    # spawns a child — the probe in run.py only runs in the parent).
-    try:
-        from backend.config.model_capabilities import get_model_capabilities
-
-        if not get_model_capabilities().probed:
-            from backend.config.llm import get_litellm_params
-            from backend.config.model_capabilities import probe_model
-
-            llm_params = get_litellm_params()
-            if llm_params:
-                caps = probe_model(llm_params)
-                if caps.needs_schema_sanitization:
-                    from backend.config.llm import _install_schema_fix
-                    _install_schema_fix()
-    except Exception as exc:
-        logger.warning("Model probe in worker failed: %s", exc)
 
     # CORS
     app.add_middleware(
@@ -107,24 +81,24 @@ def create_app() -> FastAPI:
     register_exception_handlers(app)
 
     # Register routers
-    from backend.api.routes.health import router as health_router
-    from backend.api.routes.projects import router as projects_router
-    from backend.api.routes.epics import router as epics_router
-    from backend.api.routes.milestones import router as milestones_router
-    from backend.api.routes.tasks import router as tasks_router
-    from backend.api.routes.wiki import router as wiki_router
-    from backend.api.routes.chat import router as chat_router
-    from backend.api.routes.files import router as files_router
-    from backend.api.routes.git import router as git_router
     from backend.api.routes.agents import router as agents_router
-    from backend.api.routes.user_requests import router as user_requests_router
+    from backend.api.routes.artifacts import router as artifacts_router
+    from backend.api.routes.chat import router as chat_router
+    from backend.api.routes.epics import router as epics_router
     from backend.api.routes.events import router as events_router
+    from backend.api.routes.files import router as files_router
+    from backend.api.routes.findings import router as findings_router
     from backend.api.routes.flow_state import router as flow_state_router
+    from backend.api.routes.git import router as git_router
+    from backend.api.routes.health import router as health_router
     from backend.api.routes.internal import router as internal_router
     from backend.api.routes.internal_findings import router as internal_findings_router
     from backend.api.routes.internal_tasks import router as internal_tasks_router
-    from backend.api.routes.findings import router as findings_router
-    from backend.api.routes.artifacts import router as artifacts_router
+    from backend.api.routes.milestones import router as milestones_router
+    from backend.api.routes.projects import router as projects_router
+    from backend.api.routes.tasks import router as tasks_router
+    from backend.api.routes.user_requests import router as user_requests_router
+    from backend.api.routes.wiki import router as wiki_router
 
     app.include_router(health_router)
     app.include_router(projects_router)
@@ -144,14 +118,6 @@ def create_app() -> FastAPI:
     app.include_router(internal_tasks_router)
     app.include_router(findings_router)
     app.include_router(artifacts_router)
-
-    # Start periodic cleanup of stale sandbox containers
-    from backend.security.cleanup import cleanup_manager
-    cleanup_manager.schedule_periodic_cleanup(settings.CLEANUP_INTERVAL_SECONDS)
-
-    # Start periodic cleanup of merged git branches
-    from backend.git import cleanup_service
-    cleanup_service.schedule_periodic_cleanup(settings.CLEANUP_INTERVAL_SECONDS)
 
     # WebSocket endpoint
     @app.websocket("/ws")
@@ -187,7 +153,3 @@ def create_app() -> FastAPI:
             return JSONResponse(status_code=404, content={"error": "Frontend not built"})
 
     return app
-
-
-# Module-level instance required by uvicorn when using import string with reload=True
-app = create_app()

@@ -2,12 +2,10 @@
 
 from pathlib import Path
 
-from backend.config.settings import Settings, settings
-
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 
 # API defaults
-API_HOST: str = "0.0.0.0"
+API_HOST: str = "127.0.0.1"
 API_PORT: int = 8000
 API_RELOAD: bool = True
 CORS_ORIGINS: list[str] = [

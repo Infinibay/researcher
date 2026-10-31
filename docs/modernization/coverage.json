@@ -216,12 +216,22 @@
       ],
       "remaining": [
         "Historical migration and restore validation",
-        "Safe bootstrap and inference-free startup"
+        "Safe bootstrap",
+        "Complete health/readiness and configured deployment startup"
       ]
     },
     "runtime_comparison": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "backend/runtime/codex_rpc.py",
+        "backend/tests/runtime/test_codex_rpc.py",
+        "docs/modernization/codex-inspection.json"
+      ],
+      "remaining": [
+        "Bounded execution/control",
+        "Same real scenarios for both candidates",
+        "Task artifact persistence and project isolation"
+      ]
     },
     "runtime_decision": {
       "status": "pending",

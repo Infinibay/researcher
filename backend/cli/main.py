@@ -7,8 +7,6 @@ Handles initialization: .researcher/ directory, DB, code indexing.
 from __future__ import annotations
 
 import logging
-import os
-import sys
 from pathlib import Path
 
 import click
@@ -75,61 +73,6 @@ def _run_initial_index(project_id: int = 1) -> None:
     except Exception as exc:
         logger.warning("Initial indexing failed: %s", exc)
         print(f"failed ({exc})")
-
-
-def _auto_detect_model() -> str | None:
-    """Auto-detect first available Ollama model if no model is configured."""
-    import subprocess
-
-    try:
-        result = subprocess.run(
-            ["ollama", "list"],
-            capture_output=True, text=True, timeout=5,
-        )
-        if result.returncode != 0:
-            return None
-        for line in result.stdout.strip().splitlines()[1:]:  # skip header
-            name = line.split()[0]
-            if name:
-                return f"ollama_chat/{name}"
-    except (FileNotFoundError, subprocess.TimeoutExpired):
-        pass
-    return None
-
-
-def _setup_llm() -> None:
-    """Initialize LLM configuration and probe model capabilities."""
-    from backend.config.settings import settings
-
-    if not settings.LLM_MODEL:
-        detected = _auto_detect_model()
-        if detected:
-            settings.LLM_MODEL = detected
-            print(f"No model configured — auto-detected: {detected}")
-        else:
-            logger.warning("No LLM model configured and Ollama not available")
-            return
-
-    # Ensure ollama models use ollama_chat provider
-    if not "/" in settings.LLM_MODEL:
-        settings.LLM_MODEL = f"ollama_chat/{settings.LLM_MODEL}"
-    elif settings.LLM_MODEL.startswith("ollama/"):
-        settings.LLM_MODEL = settings.LLM_MODEL.replace("ollama/", "ollama_chat/", 1)
-
-    from backend.config.llm import get_litellm_params, validate_function_calling
-    from backend.config.model_capabilities import probe_model
-
-    params = get_litellm_params()
-    if params:
-        try:
-            probe_model(params)
-        except Exception as exc:
-            logger.warning("Model capability probe failed: %s", exc)
-
-        try:
-            validate_function_calling()
-        except Exception:
-            pass
 
 
 def _handle_command(command: str) -> str | None:
@@ -313,16 +256,13 @@ def main(no_tui: bool, model: str | None, prompt: str | None) -> None:
     _setup_logging(home / "logs")
 
     # 2. Load user settings
-    from backend.config.user_settings import load_user_settings, reload_all
+    from backend.config.user_settings import reload_all
     reload_all()
 
     # 3. Apply model override (temporary, not saved)
     if model:
         from backend.config.settings import settings
         settings.LLM_MODEL = model
-
-    # 4. Setup LLM
-    _setup_llm()
 
     # 5. Init DB
     _init_db()

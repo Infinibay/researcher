@@ -1,0 +1,51 @@
+{
+  "codex_version": "0.166.0",
+  "transport": "stdio",
+  "initialization": "passed",
+  "account_type": "chatgpt",
+  "provider": "openai",
+  "models": [
+    {
+      "id": "gpt-6.1-sol",
+      "model": "gpt-6.1-sol",
+      "isDefault": true
+    },
+    {
+      "id": "gpt-6-astra",
+      "model": "gpt-6-astra",
+      "isDefault": false
+    },
+    {
+      "id": "gpt-6.1-terra",
+      "model": "gpt-6.1-terra",
+      "isDefault": false
+    },
+    {
+      "id": "gpt-6-sol",
+      "model": "gpt-6-sol",
+      "isDefault": false
+    },
+    {
+      "id": "gpt-6-luna",
+      "model": "gpt-6-luna",
+      "isDefault": false
+    },
+    {
+      "id": "gpt-5.6-sol",
+      "model": "gpt-5.6-sol",
+      "isDefault": false
+    },
+    {
+      "id": "gpt-5.6-terra",
+      "model": "gpt-5.6-terra",
+      "isDefault": false
+    },
+    {
+      "id": "gpt-5.6-luna",
+      "model": "gpt-5.6-luna",
+      "isDefault": false
+    }
+  ],
+  "model_requests_sent": 0,
+  "scenarios": "Not yet run; metadata inspection is not task acceptance"
+}

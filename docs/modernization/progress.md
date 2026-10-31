@@ -60,3 +60,20 @@ Installed transitional dependencies include CrewAI 1.15.33, crewai-tools 1.15.33
 ## Next work
 
 Phase 0 is not fully complete: Stop/duplicate-effects scenarios still need runtime-level reproduction. Phase 1 is partial: safe Forgejo bootstrap, import-time inference removal, historical migration/restore validation and remaining startup work remain. Continue with those safety contracts, then evaluate Codex/Infinidev with bounded real-subscription checks and Ken before selecting the runtime. Do not spend effort repairing every obsolete CrewAI mechanism that phase 4 will retire.
+
+## Inference-free startup and native transport foundation
+
+Brief: make API import/factory and ordinary server/CLI startup inference-free; initialize persistence only during serving; preserve shutdown on lifespan errors; introduce bounded native stdio transport before model evaluation. This is transport groundwork, not a selected runtime or migrated product engine.
+
+- API factory/import no longer initializes DB, starts maintenance or probes providers; serving runs migrations and propagates failure. CLI no longer performs a model-capability probe before dispatching its actual request. Native runtime replacement of the legacy CLI orchestrator is still pending.
+- Ruling: disable automatic destructive cleanup at API startup until D08 retention/lifecycle guards exist — the previous scheduling was not safe to preserve; maintenance must be reintroduced explicitly after those contracts are verified.
+- Local API defaults to loopback. Container/remote binding and access controls still require explicit configuration and verification.
+- StdioRpcClient owns one process group, bounds frames/pending requests/event queues, correlates responses separately from events and server requests, drains stderr without logging secrets, never replays uncertain actions, and reaps its owned process on close. Write deadlines include blocked stdin. Linux process-group behavior is tested; cross-platform support is not claimed.
+- Evidence: 18 focused startup/transport tests passed. New startup tests and 12 transport tests were observed RED→GREEN; a temporary lifespan mutation reproduced cleanup loss before restoring the verified implementation. Raw logs: startup-red.log, cli-startup-red.log, lifespan-red.log, rpc-red.log, rpc-write-red.log, native-startup-focused.log in the scratch workspace.
+- Full suite: 843 tests; 740 passed, 100 failed, 3 skipped. Failure identities exactly match the baseline (native-results.json); no new failures. The whole suite is still red. Ruff passes for new transport/tests; three pre-existing lint findings remain in the touched legacy API/CLI files (PIE810, BLE001). uv lock --check and git diff --check pass.
+- Real Codex metadata probe: 0.166.0 App Server initialized; native account/read returned chatgpt and model/list returned eight models. codex-inspection.json contains sanitized evidence. Zero model turns were sent; this does not prove task capabilities or runtime acceptance.
+- Published ken-rank 0.18.0 is installed in an isolated tool environment. Infinidev source is being installed into a separate scratch environment; sibling sources and global configuration remain unchanged.
+
+## Current task: bounded runtime comparison
+
+Implement and test execution limits/control before real subscription turns; prepare a synthetic Git workspace and Ken index; evaluate both candidates on the scenarios in section 4.2. Capture actual tool evidence and artifacts, then choose the runtime and create the capability matrix. Readiness/health, safe bootstrap, migrations/restore and the full product engine migration remain unfinished.
