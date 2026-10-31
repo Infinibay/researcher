@@ -1,3 +1,4 @@
+import { closeOwnerSession } from '../../api/session'
 import { useState, useRef, useEffect } from 'react'
 import { useProjectStore } from '../../stores/project'
 import { useProjects, useProject, useStartProject, useStopProject } from '../../hooks/useProjects'
@@ -10,6 +11,7 @@ export function Header() {
   const { data: activeProject } = useProject(activeProjectId)
   const startProject = useStartProject()
   const stopProject = useStopProject()
+  const [sessionError, setSessionError] = useState('')
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   const toggleFeed = useActivityFeedStore((s) => s.toggleFeed)
@@ -79,6 +81,8 @@ export function Header() {
       </div>
 
       <div className="flex items-center gap-3">
+        {sessionError && <span role="alert" className="text-xs text-red-300">{sessionError}</span>}
+        <button onClick={() => {setSessionError(''); closeOwnerSession().catch((error:Error) => setSessionError(error.message))}} className="rounded-md px-3 py-1.5 text-xs text-slate-300 hover:bg-surface-800 focus-visible:ring-2 focus-visible:ring-sky-400">Cerrar sesión</button>
         {activeProject && (
           <>
             <span className="text-xs text-slate-500">{activeProject.status}</span>

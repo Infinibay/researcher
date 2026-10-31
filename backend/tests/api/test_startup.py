@@ -53,7 +53,7 @@ def test_serving_initializes_database_without_probing_a_model(tmp_path, monkeypa
 
     app = create_app()
     assert not database.exists(), "App construction must not initialize persistence"
-    with TestClient(app) as client:
+    with TestClient(app, base_url="http://localhost") as client:
         assert client.get("/api/health/ready").json() == {"ready": True}
     with sqlite3.connect(database) as conn:
         assert conn.execute("SELECT COUNT(*) FROM projects").fetchone() == (0,)

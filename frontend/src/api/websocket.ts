@@ -1,3 +1,4 @@
+import { invalidateOwnerSession } from './session.ts'
 import type { WSEvent } from '../types/api'
 
 type Callback = (event: WSEvent) => void
@@ -54,12 +55,15 @@ class WebSocketManager {
 
     this.ws = new WebSocket(url)
 
+    const socket = this.ws
     this.ws.onopen = () => {
+      if (this.ws !== socket) return
       this.backoff = 1000
       this.startPing()
     }
 
     this.ws.onmessage = (e) => {
+      if (this.ws !== socket) return
       if (e.data === 'pong') return
       try {
         const event: WSEvent = JSON.parse(e.data)
@@ -67,15 +71,20 @@ class WebSocketManager {
       } catch {}
     }
 
-    this.ws.onclose = () => {
+    this.ws.onclose = (event) => {
+      if (this.ws !== socket) return
       this.clearTimers()
+      if (event.code === 1008) {
+        this.intentionalClose = true
+        invalidateOwnerSession()
+      }
       if (!this.intentionalClose) {
         this.scheduleReconnect()
       }
     }
 
     this.ws.onerror = () => {
-      this.ws?.close()
+      if (this.ws === socket) socket.close()
     }
   }
 

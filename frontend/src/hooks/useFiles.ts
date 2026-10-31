@@ -1,3 +1,4 @@
+import { ownerFetch } from '../api/session'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { fetchApi, buildUrl } from '../api/client'
 import type { ReferenceFile } from '../types/api'
@@ -37,7 +38,7 @@ export function useUploadFile() {
       form.append('file', file)
       if (description) form.append('description', description)
 
-      const res = await fetch(
+      const res = await ownerFetch(
         buildUrl('/api/files', { project_id: projectId }),
         { method: 'POST', body: form },
       )

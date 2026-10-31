@@ -3,11 +3,9 @@
 from __future__ import annotations
 
 import asyncio
-import json
 import logging
-from typing import Any
 
-from fastapi import WebSocket, WebSocketDisconnect
+from fastapi import WebSocket
 
 from backend.flows.event_listeners import EventBus, FlowEvent, event_bus
 
@@ -21,6 +19,7 @@ class ConnectionManager:
         self._connections: dict[int, list[WebSocket]] = {}
         self._event_bus: EventBus = event_bus
         self._subscribed = False
+        self._on_event = None
 
     async def connect(self, websocket: WebSocket, project_id: int) -> None:
         """Accept a WebSocket connection and register it."""
@@ -28,8 +27,11 @@ class ConnectionManager:
         if project_id not in self._connections:
             self._connections[project_id] = []
         self._connections[project_id].append(websocket)
-        logger.info("WebSocket connected for project %d (total: %d)",
-                     project_id, len(self._connections[project_id]))
+        logger.info(
+            "WebSocket connected for project %d (total: %d)",
+            project_id,
+            len(self._connections[project_id]),
+        )
 
         if not self._subscribed:
             self._subscribe_to_events()
@@ -43,6 +45,10 @@ class ConnectionManager:
             ]
             if not self._connections[project_id]:
                 del self._connections[project_id]
+        if not self._connections and self._on_event is not None:
+            self._event_bus.unsubscribe("*", self._on_event)
+            self._on_event = None
+            self._subscribed = False
         logger.info("WebSocket disconnected for project %d", project_id)
 
     async def send_personal_message(self, message: dict, websocket: WebSocket) -> None:
@@ -60,7 +66,7 @@ class ConnectionManager:
         for ws in self._connections[project_id]:
             try:
                 await ws.send_json(message)
-            except Exception:
+            except Exception:  # noqa: BLE001 — one failed client must not fail the others
                 disconnected.append(ws)
         for ws in disconnected:
             self.disconnect(ws, project_id)
@@ -89,15 +95,17 @@ class ConnectionManager:
                 "data": event.data,
                 "timestamp": event.timestamp,
             }
+
+            def deliver():
+                asyncio.create_task(self.broadcast(message, event.project_id))
+
             try:
-                loop.call_soon_threadsafe(
-                    asyncio.ensure_future,
-                    self.broadcast(message, event.project_id),
-                )
+                loop.call_soon_threadsafe(deliver)
             except RuntimeError:
                 # Event loop closed during shutdown — safe to ignore.
                 pass
 
+        self._on_event = _on_event
         self._event_bus.subscribe("*", _on_event)
         logger.info("WebSocket manager subscribed to EventBus")
 

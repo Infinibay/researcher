@@ -88,3 +88,9 @@ physical Stop before DB unlock, detached-child readiness, other-owner survival,
 cross-project access denial, disabled sockets and uncertain-result fencing.
 Results remain under a unique ignored evaluation directory; do not replay a
 live or uncertain job. See `docs/architecture/owned-commands.md` for scope.
+
+Product artifact read-back now uses a separate paired owner session in the
+backend runner. Its random code lives in a private temporary control directory,
+never in candidate prompts/configuration or the business MCP environment.
+Business grants remain restricted to `research-tools`; do not solve legacy
+client authentication by passing the human cookie into a model process.

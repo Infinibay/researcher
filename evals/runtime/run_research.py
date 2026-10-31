@@ -17,6 +17,7 @@ import tomllib
 from contextlib import asynccontextmanager, closing
 from dataclasses import asdict
 from pathlib import Path
+from tempfile import TemporaryDirectory
 from uuid import uuid4
 
 REPO = Path(__file__).resolve().parents[2]
@@ -153,8 +154,10 @@ async def backend(root, env):
     api = f"http://127.0.0.1:{sock.getsockname()[1]}"
     program = "import sys;sys.path.insert(0,sys.argv[1]);from backend.api import config;config.UPLOAD_DIR=sys.argv[2];config.STATIC_DIR=sys.argv[3];from backend.api.main import create_app;import uvicorn;uvicorn.run(create_app(),fd=int(sys.argv[4]),access_log=False,log_level='warning')"
     log = (root / "backend.log").open("w")
+    owner_control = TemporaryDirectory(prefix="researcher-eval-owner-")
     child_env = {
         **env,
+        "INFINIBAY_AUTH_DIR": owner_control.name,
         "INFINIBAY_DB": str(database),
         "INFINIBAY_DATA": str(root / "logs"),
         "INFINIBAY_LLM_MODEL": "",
@@ -184,10 +187,19 @@ async def backend(root, env):
             base_url=api, timeout=15, trust_env=False
         ) as client:
             await ready(client, process, "/api/health/ready")
+            owner_file = next(Path(owner_control.name).glob("owner-*.key"))
+            paired = await client.post(
+                "/api/session",
+                json={"code": owner_file.read_text().strip()},
+                headers={"X-Researcher-Client": "web"},
+            )
+            paired.raise_for_status()
+            client.headers["X-Researcher-CSRF"] = paired.json()["csrf_token"]
             yield SQLiteResearchStore(database), client, api, database
     finally:
         await terminate(process)
         log.close()
+        owner_control.cleanup()
 
 
 def prepare_workspace(root, ken):

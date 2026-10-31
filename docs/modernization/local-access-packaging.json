@@ -1,0 +1,16 @@
+{
+  "wheel": "researcher-0.1.0-py3-none-any.whl",
+  "wheel_sha256": "ce75a408e8a7f0f8fd018f00f45594b4662b997333e50f5a640556da4d037fd8",
+  "resources_match_current_source": [
+    "backend/api/local_access.py",
+    "backend/api/main.py",
+    "backend/api/websocket.py",
+    "backend/api/request_limits.py",
+    "backend/api/config.py",
+    "backend/api/routes/session.py",
+    "backend/db/schema.sql",
+    "backend/db/research_schema.sql",
+    "backend/db/runtime_schema.sql",
+    "backend/db/job_schema.sql"
+  ]
+}

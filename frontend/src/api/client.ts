@@ -1,3 +1,5 @@
+import { ownerFetch } from './session'
+
 export class ApiError extends Error {
   constructor(
     public status: number,
@@ -11,7 +13,7 @@ export async function fetchApi<T>(
   path: string,
   options?: RequestInit,
 ): Promise<T> {
-  const res = await fetch(path, {
+  const res = await ownerFetch(path, {
     ...options,
     headers: {
       'Content-Type': 'application/json',

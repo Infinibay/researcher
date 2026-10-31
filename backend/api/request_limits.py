@@ -1,4 +1,4 @@
-"""Bound research tool JSON ingress before FastAPI parses the body."""
+"""Bound business tool and owner pairing JSON before parsing the body."""
 
 import asyncio
 
@@ -20,10 +20,14 @@ class ToolRequestLimits:
         path = scope.get("path", "")
         if (
             scope["type"] != "http"
-            or not path.startswith("/api/research-tools/")
+            or not (path.startswith("/api/research-tools/") or path == "/api/session")
             or scope.get("method") not in ("POST", "PUT", "PATCH")
         ):
             return await self.app(scope, receive, send)
+
+        max_bytes = (
+            min(self.max_bytes, 4096) if path == "/api/session" else self.max_bytes
+        )
 
         async def reject(status, message):
             await JSONResponse(
@@ -38,7 +42,7 @@ class ToolRequestLimits:
         if lengths:
             if len(lengths) != 1 or not lengths[0].isdigit():
                 return await reject(400, "Invalid request content length")
-            if int(lengths[0]) > self.max_bytes:
+            if int(lengths[0]) > max_bytes:
                 return await reject(413, "Tool request exceeds the byte limit")
         body = bytearray()
         try:
@@ -48,7 +52,7 @@ class ToolRequestLimits:
                     if message["type"] == "http.disconnect":
                         return
                     body.extend(message.get("body", b""))
-                    if len(body) > self.max_bytes:
+                    if len(body) > max_bytes:
                         return await reject(413, "Tool request exceeds the byte limit")
                     if not message.get("more_body", False):
                         break

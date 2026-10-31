@@ -9,7 +9,6 @@ from pathlib import Path
 
 import pytest
 
-
 SCHEMA_FILE = Path(__file__).resolve().parents[1] / "db" / "schema.sql"
 
 
@@ -25,6 +24,7 @@ def _isolated_db(tmp_path, monkeypatch):
     conn.close()
 
     monkeypatch.setenv("INFINIBAY_DB", db_path)
+    monkeypatch.setenv("INFINIBAY_AUTH_DIR", str(tmp_path / "owner-auth"))
     yield db_path
 
 

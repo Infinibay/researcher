@@ -101,10 +101,16 @@
         "docs/architecture/owned-commands.md",
         "backend/tests/runtime/test_command_executor.py",
         "backend/tests/runtime/test_command_journal.py",
-        "docs/modernization/owned-command-evidence.json"
+        "docs/modernization/owned-command-evidence.json",
+        "docs/architecture/local-owner-access.md",
+        "backend/tests/api/test_local_access.py",
+        "backend/tests/api/test_websocket_lifecycle.py",
+        "frontend/tests",
+        "docs/modernization/local-access-evidence.json"
       ],
       "remaining": [
-        "Durable product startup/shutdown and all tool lifecycle integration; old flows are not covered by owned command evidence"
+        "Durable product startup/shutdown and all tool lifecycle integration; old flows are not covered by owned command evidence",
+        "Full product runtime/client integration and browser acceptance; HTTP owner guard does not complete the entire scenario"
       ]
     },
     "E04": {
@@ -315,10 +321,16 @@
         "docs/architecture/owned-commands.md",
         "backend/tests/runtime/test_command_executor.py",
         "backend/tests/runtime/test_command_journal.py",
-        "docs/modernization/owned-command-evidence.json"
+        "docs/modernization/owned-command-evidence.json",
+        "docs/architecture/local-owner-access.md",
+        "backend/tests/api/test_local_access.py",
+        "backend/tests/api/test_websocket_lifecycle.py",
+        "frontend/tests",
+        "docs/modernization/local-access-evidence.json"
       ],
       "remaining": [
-        "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
+        "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable",
+        "Full product runtime/client integration and browser acceptance; HTTP owner guard does not complete the entire scenario"
       ]
     },
     "D11": {
@@ -348,15 +360,30 @@
         "docs/architecture/owned-commands.md",
         "backend/tests/runtime/test_command_executor.py",
         "backend/tests/runtime/test_command_journal.py",
-        "docs/modernization/owned-command-evidence.json"
+        "docs/modernization/owned-command-evidence.json",
+        "docs/architecture/local-owner-access.md",
+        "backend/tests/api/test_local_access.py",
+        "backend/tests/api/test_websocket_lifecycle.py",
+        "frontend/tests",
+        "docs/modernization/local-access-evidence.json"
       ],
       "remaining": [
-        "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
+        "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable",
+        "Full product runtime/client integration and browser acceptance; HTTP owner guard does not complete the entire scenario"
       ]
     },
     "D13": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/local-owner-access.md",
+        "backend/tests/api/test_local_access.py",
+        "backend/tests/api/test_websocket_lifecycle.py",
+        "frontend/tests",
+        "docs/modernization/local-access-evidence.json"
+      ],
+      "remaining": [
+        "Full product runtime/client integration and browser acceptance; HTTP owner guard does not complete the entire scenario"
+      ]
     },
     "U01": {
       "status": "in_progress",
@@ -389,8 +416,17 @@
       ]
     },
     "U04": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/local-owner-access.md",
+        "backend/tests/api/test_local_access.py",
+        "backend/tests/api/test_websocket_lifecycle.py",
+        "frontend/tests",
+        "docs/modernization/local-access-evidence.json"
+      ],
+      "remaining": [
+        "Full product runtime/client integration and browser acceptance; HTTP owner guard does not complete the entire scenario"
+      ]
     },
     "U05": {
       "status": "pending",
@@ -578,6 +614,19 @@
     "final_independent_review": {
       "status": "pending",
       "evidence": []
+    },
+    "owner_access": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/local-owner-access.md",
+        "docs/modernization/local-access-evidence.json",
+        "docs/modernization/local-access-results.json"
+      ],
+      "remaining": [
+        "Rendered browser and keyboard verification",
+        "Migrate legacy clients to scoped tools; no human cookie forwarding",
+        "Recheck synthetic owner credential isolation when production native runtime is composed"
+      ]
     }
   }
 }

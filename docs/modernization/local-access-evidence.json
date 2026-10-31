@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-31",
+  "model_turns_submitted": 0,
+  "http_ws_protocol_probe": {
+    "model_turns_submitted": 0,
+    "anonymous_and_tool_owner_separation": "passed",
+    "owner_http_csrf_websocket_logout": "passed",
+    "owned_backend_terminal": true,
+    "status": "passed"
+  },
+  "backend_focused_tests_passed": 26,
+  "frontend_transport_tests_passed": 4,
+  "frontend_build_assets": {
+    "assets/index-BG_GSe8C.js": "a778a67457162039fd9bbe86a92862749cac26d4baf01043ed3c458e28329f37",
+    "assets/index-DJhV6KVM.css": "00dba922b1bbbeb065bbfbffc950e7019438a202a4ac5192919cdd823edbe2a7",
+    "index.html": "49f214471c67df2ca08adfe1ea55fb97b417dc5b3fec7af659b54f1431df9fe4"
+  },
+  "rendered_browser_acceptance": "not performed: CUA browser host unavailable",
+  "scope_limits": [
+    "Single local owner and server process; not multiuser or remote deployment.",
+    "Business bearer does not authorize legacy internal clients; their workflow migration remains pending.",
+    "New native run admission, full capability migration, prompt evaluations and all visual references remain pending.",
+    "No production data or user credentials were used in the protocol probe."
+  ],
+  "regressions_observed_red_then_green": [
+    "Anonymous HTTP/WS, hostile Host/Origin, separate human/tool credentials",
+    "Closed-loop event subscription loses delivery on reconnect",
+    "Raw non-ASCII CSRF comparison raises rather than denies",
+    "Late status and 401 cannot invalidate a new pairing",
+    "Owner transport rejects redirects and URL control-character outbound paths",
+    "Retired project socket cannot deliver events or close replacement",
+    "127.0.0.1 development origins can pair separately from localhost"
+  ]
+}

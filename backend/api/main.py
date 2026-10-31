@@ -15,6 +15,7 @@ from fastapi.staticfiles import StaticFiles
 
 from backend.api import config as api_config
 from backend.api.exceptions import register_exception_handlers
+from backend.api.local_access import LocalAccess, OwnerAccessMiddleware
 from backend.api.websocket import manager
 
 logger = logging.getLogger(__name__)
@@ -28,24 +29,33 @@ async def lifespan(app: FastAPI):
 
     setup_file_logging()
     await asyncio.to_thread(ensure_migrations)
+    await asyncio.to_thread(app.state.local_access.start)
     try:
         yield
     finally:
+        app.state.local_access.close()
         logger.info("Shutdown signal received — stopping active flows")
         from backend.api.flow_manager import flow_manager
 
         active_ids = list(flow_manager._flows.keys())
         for pid in active_ids:
             try:
-                logger.info("Stopping project %d: snapshotting state, stopping agents & listeners…", pid)
+                logger.info(
+                    "Stopping project %d: snapshotting state, stopping agents & listeners…",
+                    pid,
+                )
                 await asyncio.to_thread(flow_manager.stop_project_flow, pid)
                 logger.info("Project %d stopped successfully", pid)
             except Exception:
-                logger.warning("Error stopping project %d during shutdown", pid, exc_info=True)
-        logger.info("Shutdown reconciliation finished for %d active project(s)", len(active_ids))
+                logger.warning(
+                    "Error stopping project %d during shutdown", pid, exc_info=True
+                )
+        logger.info(
+            "Shutdown reconciliation finished for %d active project(s)", len(active_ids)
+        )
 
 
-def create_app() -> FastAPI:
+def create_app(*, access: LocalAccess | None = None) -> FastAPI:
     """Construct routes without inference, database writes or maintenance jobs."""
     app = FastAPI(
         title="INFINIBAY API",
@@ -56,6 +66,8 @@ def create_app() -> FastAPI:
         lifespan=lifespan,
     )
 
+    app.state.local_access = access or LocalAccess()
+
     from backend.api.request_limits import ToolRequestLimits
 
     app.add_middleware(ToolRequestLimits)
@@ -63,7 +75,7 @@ def create_app() -> FastAPI:
     # CORS
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=api_config.CORS_ORIGINS,
+        allow_origins=sorted(app.state.local_access.allowed_origins),
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
@@ -77,9 +89,15 @@ def create_app() -> FastAPI:
         elapsed = time.perf_counter() - start
         response.headers["X-Process-Time"] = f"{elapsed:.4f}"
         if elapsed > 1.0:
-            logger.warning("Slow request: %s %s took %.2fs",
-                           request.method, request.url.path, elapsed)
+            logger.warning(
+                "Slow request: %s %s took %.2fs",
+                request.method,
+                request.url.path,
+                elapsed,
+            )
         return response
+
+    app.add_middleware(OwnerAccessMiddleware, access=app.state.local_access)
 
     # Exception handlers
     register_exception_handlers(app)
@@ -102,10 +120,12 @@ def create_app() -> FastAPI:
     from backend.api.routes.projects import router as projects_router
     from backend.api.routes.research import install_research_errors
     from backend.api.routes.research import router as research_router
+    from backend.api.routes.session import router as session_router
     from backend.api.routes.tasks import router as tasks_router
     from backend.api.routes.user_requests import router as user_requests_router
     from backend.api.routes.wiki import router as wiki_router
 
+    app.include_router(session_router)
     install_research_errors(app)
     app.include_router(research_router)
     app.include_router(health_router)
@@ -139,6 +159,8 @@ def create_app() -> FastAPI:
                 if data == "ping":
                     await manager.send_personal_message({"type": "pong"}, websocket)
         except WebSocketDisconnect:
+            pass
+        finally:
             manager.disconnect(websocket, project_id)
 
     # Serve static frontend files if they exist
@@ -158,6 +180,8 @@ def create_app() -> FastAPI:
             index = static_dir / "index.html"
             if index.exists():
                 return FileResponse(str(index))
-            return JSONResponse(status_code=404, content={"error": "Frontend not built"})
+            return JSONResponse(
+                status_code=404, content={"error": "Frontend not built"}
+            )
 
     return app

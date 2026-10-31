@@ -14,17 +14,33 @@ from starlette.testclient import TestClient
 @pytest.fixture()
 def test_app(_isolated_db):
     """Create the FastAPI test app with periodic tasks disabled."""
-    with patch("backend.security.cleanup.cleanup_manager.schedule_periodic_cleanup"), \
-         patch("backend.git.cleanup_service.schedule_periodic_cleanup"):
+    with (
+        patch("backend.security.cleanup.cleanup_manager.schedule_periodic_cleanup"),
+        patch("backend.git.cleanup_service.schedule_periodic_cleanup"),
+    ):
+        from backend.api.local_access import LocalAccess
         from backend.api.main import create_app
-        app = create_app()
+
+        app = create_app(
+            access=LocalAccess(
+                pairing_key="api-fixture-owner-code-at-least-32-characters"
+            )
+        )
     return app
 
 
 @pytest.fixture()
 def client(test_app):
     """Return a Starlette TestClient for the test app."""
-    return TestClient(test_app)
+    client = TestClient(test_app, base_url="http://localhost")
+    response = client.post(
+        "/api/session",
+        json={"code": "api-fixture-owner-code-at-least-32-characters"},
+        headers={"X-Researcher-Client": "web"},
+    )
+    assert response.status_code == 200, response.text
+    client.headers["X-Researcher-CSRF"] = response.json()["csrf_token"]
+    return client
 
 
 @pytest.fixture()

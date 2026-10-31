@@ -12,7 +12,22 @@ def research_client(research_store, research_scope, monkeypatch, tmp_path):
     from backend.api.main import create_app
 
     monkeypatch.setattr(config, "UPLOAD_DIR", str(tmp_path / "uploads"))
-    return TestClient(create_app())
+    from backend.api.local_access import LocalAccess
+
+    app = create_app(
+        access=LocalAccess(
+            pairing_key="research-fixture-owner-code-at-least-32-characters"
+        )
+    )
+    client = TestClient(app, base_url="http://localhost")
+    response = client.post(
+        "/api/session",
+        json={"code": "research-fixture-owner-code-at-least-32-characters"},
+        headers={"X-Researcher-Client": "web"},
+    )
+    assert response.status_code == 200, response.text
+    client.headers["X-Researcher-CSRF"] = response.json()["csrf_token"]
+    return client
 
 
 def credentials(store, project_id=101, task_id=1001, permissions=None):

@@ -139,3 +139,18 @@ Open an issue or start a discussion.
 ## License
 
 See [LICENSE.md](LICENSE.md).
+
+## Local web access during modernization
+
+The backend now requires a local owner session for product HTTP/WS access.
+Start it with `uv run --locked python -m backend.api.run`. Startup prints the
+path of a private pairing-code file outside the workspace; enter that code in
+the web access form. It is independent from the managed OpenAI subscription.
+Restarting requires pairing again. See [local access](docs/architecture/local-owner-access.md)
+for permissions, development origins and the separation from business MCP grants.
+Legacy clients must migrate; do not give agents the owner's browser cookie.
+
+With the pinned Node 24 environment, `npm test --prefix frontend` checks the
+owner HTTP transport and retired WebSocket handling without a browser or model.
+`uv run --locked python evals/security/run_local_access.py --live` explicitly
+starts temporary local servers for a zero-model HTTP/WS protocol probe.
