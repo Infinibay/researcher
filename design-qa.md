@@ -26,7 +26,8 @@ diálogos, navegación íntegra sólo por teclado, zoom 200/400 %, lector de pan
 otros motores, evaluación de comprensión y tareas humanas. También falta reducir
 la densidad de contexto en móvil y migrar los controles del engine antiguo.
 
-Las otras diez rutas requieren todavía sus conceptos, selección, implementación
-y aceptación. El [inventario](docs/design/inventory.md) conserva 6/36 conceptos de
-escritorio y 2/12 adaptaciones móviles; las capturas de QA no cuentan como nuevos
+Las otras diez rutas requieren implementación y aceptación; nueve aún necesitan
+conceptos y selección. Informes ya tiene referencias elegidas y capturas iniciales,
+con el recorte móvil documentado, pero su rediseño está pendiente. El
+[inventario](docs/design/inventory.md) conserva 9/36 conceptos de escritorio y3/12 adaptaciones móviles; las capturas de QA no cuentan como nuevos
 conceptos generados. No hay un servidor de demo vivo declarado listo para entrega.

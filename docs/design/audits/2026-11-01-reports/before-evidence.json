@@ -1,0 +1,29 @@
+{
+  "origin": "http://127.0.0.1:43655",
+  "capture": "Actual current app, synthetic copy of retained product trial, real owner HTTP pairing",
+  "model_turns": 0,
+  "observed": [
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "errors": [],
+      "title": "Researcher",
+      "body_overflow": false,
+      "screenshot_sha256": "3a81d368ac9d474f8ed6fbffe920cfefc24d3e26d0c523bdfab28fb0aa8a665c"
+    },
+    {
+      "name": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "errors": [],
+      "title": "Researcher",
+      "body_overflow": false,
+      "screenshot_sha256": "6fba8aeb225b2a08bb22c3cce393cdc8f8aa1b37000e09eb28bf3dc9d5fedd16"
+    }
+  ]
+}

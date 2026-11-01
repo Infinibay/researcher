@@ -1520,10 +1520,12 @@
         "frontend/src/components/pages/ChatPage.tsx",
         "frontend/src/styles/conversation.css",
         "frontend/tests/chat-design.test.ts",
-        "design-qa.md"
+        "design-qa.md",
+        "docs/design/concepts/reports/manifest.json",
+        "docs/design/audits/2026-11-01-reports/report.md"
       ],
       "remaining": [
-        "Ten other routes need 30 desktop concepts, 10 mobile adaptations, selection and implementation.",
+        "Nine other routes need 27 desktop concepts/9 mobile adaptations and selection. Reports design selected but implementation pending; ten routes still need full implementation.",
         "All twelve routes and shared components still need browser/interaction/accessibility/human-comprehension acceptance."
       ]
     },
@@ -1537,10 +1539,12 @@
         "frontend/src/components/pages/ChatPage.tsx",
         "frontend/src/styles/conversation.css",
         "frontend/tests/chat-design.test.ts",
-        "design-qa.md"
+        "design-qa.md",
+        "docs/design/concepts/reports/manifest.json",
+        "docs/design/audits/2026-11-01-reports/report.md"
       ],
       "remaining": [
-        "Ten other routes need 30 desktop concepts, 10 mobile adaptations, selection and implementation.",
+        "Nine other routes need 27 desktop concepts/9 mobile adaptations and selection. Reports design selected but implementation pending; ten routes still need full implementation.",
         "All twelve routes and shared components still need browser/interaction/accessibility/human-comprehension acceptance."
       ]
     },
@@ -1554,10 +1558,12 @@
         "frontend/src/components/pages/ChatPage.tsx",
         "frontend/src/styles/conversation.css",
         "frontend/tests/chat-design.test.ts",
-        "design-qa.md"
+        "design-qa.md",
+        "docs/design/concepts/reports/manifest.json",
+        "docs/design/audits/2026-11-01-reports/report.md"
       ],
       "remaining": [
-        "Ten other routes need 30 desktop concepts, 10 mobile adaptations, selection and implementation.",
+        "Nine other routes need 27 desktop concepts/9 mobile adaptations and selection. Reports design selected but implementation pending; ten routes still need full implementation.",
         "All twelve routes and shared components still need browser/interaction/accessibility/human-comprehension acceptance."
       ]
     },

@@ -108,3 +108,45 @@ ya incluye conversación guardada y adaptación móvil. La aceptación visual co
 la navegación integral por teclado y la comprensión humana siguen pendientes.
 Después de este avance quedan diez rutas por generar/seleccionar/implementar y
 las doce por aceptar visualmente, además de los componentes compartidos.
+
+
+## Informes: lectura con trazabilidad — 2026-11-01
+
+Se capturó primero el producto actual sobre una copia de un ensayo sintético.
+Sus imágenes y la referencia de Tareas se adjuntaron a tres llamadas independientes
+de ImageGen. La adaptación móvil recibió la elegida; no es un recorte de escritorio.
+El usuario delegó la selección. La implementación de esta página sigue pendiente.
+
+| Concepto | Claridad30% | Lectura25% | Coherencia20% | Accesibilidad prevista15% | Móvil previsto10% | Total |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| [Lectura con trazabilidad](concepts/reports/reading-with-provenance.png) | 4,5 | 4,5 | 4,5 | 4 | 4,5 | **88,5** |
+| [Biblioteca con vista previa](concepts/reports/library-preview.png) | 4 | 3,5 | 4,5 | 4 | 3,5 | 78,5 |
+| [Cuaderno de evidencia](concepts/reports/evidence-notebook.png) | 3,5 | 4,5 | 4,5 | 4 | 4,5 | 82,5 |
+
+La elegida deja espacio para leer y mantiene las fuentes cerca del argumento. La
+biblioteca dedica más ancho al índice y estrecha el documento. El cuaderno lee
+bien, pero esconde la colección y afirma que el contexto sigue siendo el mismo,
+algo que la imagen no puede demostrar y los datos actuales podrían contradecir.
+Las puntuaciones juzgan conceptos; no acreditan accesibilidad ni uso humano.
+
+Correcciones obligatorias al llevar la referencia a código:
+- Las líneas18–24/7 de la primera imagen son inventadas por el generador. Mostrar
+  sólo citas, locator/hash/fecha guardados; no copiar números de línea ni fuentes
+  sintéticas como hechos. Tampoco copiar un agente o versión no registrados.
+- Conservar el Markdown original. La lectura puede evitar el encabezado inicial
+  duplicado cuando coincide con el título, sin reescribir el contenido persistido
+  ni insertar el ejemplo100×1,21 del mock en un informe que no lo contiene.
+- «Ver tarea y corregir contexto» necesita selección de tarea por URL y proyecto
+  correcta. TasksPage actualmente ignora ese enlace; probar el destino antes de
+  declarar el recorrido terminado. Abrir una tarea no inicia inferencia.
+- Las fuentes guardadas deben venir de relaciones del informe bajo el proyecto
+  autorizado, no de buscar números en el Markdown o de conceder al usuario un token
+  de herramientas. Mostrar paginación/ausencia y errores de lectura con claridad.
+- Móvil alterna índice/lector y sitúa las fuentes debajo del documento, con regreso
+  explícito y controles en flujo. Comprobar límites de los elementos, porque el
+  scrollWidth del documento no detectó el recorte observado en la captura inicial.
+- Mostrar fechas con una zona definida y comprensible; la referencia ilustrativa
+  no acredita «hace X» ni que el contexto esté actualizado.
+
+[Brief y procedencia](concepts/reports/brief.md), [manifest](concepts/reports/manifest.json),
+[audit inicial](audits/2026-11-01-reports/report.md).

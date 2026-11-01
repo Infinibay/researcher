@@ -143,8 +143,9 @@ y organiza las siguientes entregas por resultados observables, sin reducir el pl
    y superficies heredadas por migrar y aceptación completa en navegador.
 9. **Interfaz inicial:** Tareas y Conversación tienen pilotos implementados; navegación
    responsive compartida, bandeja de preguntas por proyecto, historial, fuentes,
-   correcciones y consulta de entrada. Existen 6/36 conceptos de escritorio y 2/12
+   correcciones y consulta de entrada. Existen 9/36 conceptos de escritorio y 3/12
    adaptaciones móviles, generados e inspeccionados, con selección razonada.
+   Informes ya tiene tres alternativas y móvil elegidos; falta implementarlo.
    **0/12 páginas tienen aceptación visual completa**. Playwright/Chromium ya ejecuta
    los pilotos: 8 estados de escritorio y 9 móviles pasan los controles automáticos;
    salto al contenido, foco y navegación se comprobaron. Falta aceptación integral.
@@ -192,7 +193,7 @@ y organiza las siguientes entregas por resultados observables, sin reducir el pl
 8. **Datos e infraestructura final:** backup/restore completo, históricos reales,
    parsers/índices y servicios conservados —incluido decidir sus upgrades—, bootstrap,
    instalación limpia, CLI/TUI y documentación final de operación.
-9. **Frontend restante:**30 conceptos de escritorio y 10 adaptaciones móviles; selección
+9. **Frontend restante:**27 conceptos de escritorio y 9 adaptaciones móviles; selección
    e implementación de las otras 10 rutas: inicio, proyectos, épicas, agentes, wiki,
    hallazgos, informes, archivos, repositorios y flujo. También paneles/diálogos compartidos.
 10. **Aceptación de toda la web:** capturas comparables, móvil, teclado/foco, lector de

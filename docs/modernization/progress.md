@@ -3313,3 +3313,38 @@ review only when entire implementation is ready. No phase or goal completion cla
   backup-domain limit and operational commands. Dashboard advances to visible and
   correctable reports. Whole-plan scope/43 scenarios remain open; no host install,
   real user DB migration, model turn, push/merge/deploy or final acceptance.
+
+
+## Active delivery: visible, traceable and correctable reports — base77ca403
+
+- Bootstrap committed77ca403; previous turn progress verified, all-plan goal active.
+- Product Design/ImageGen references inspected and captured fresh desktop/mobile
+  reports from an actual authenticated app over a copy of the retained synthetic
+  product trial; no new model dispatch. Browser Chromium sandbox enabled.
+- Screenshot shows mobile clipping despite document.scrollWidth check passing;
+  duplicate heading and ambiguous relative date also observed. Brief and accepted
+  captures in docs/design/concepts/reports/brief.md and audits/2026-11-01-reports.
+- Ruling: user already delegated concept selection and authorized browser QA; no
+  repeated selection/Playwright approval. Generate3independent concepts within
+  existing editorial direction, choose with criteria, then mobile adaptation/code.
+  No new runtime/factory work for this vertical.
+
+
+## Reports visual target generated; implementation remains active
+
+- Four actual independent ImageGen calls produced3desktop directions and1mobile;
+  saved source images unchanged under generated_images and copied all4into project.
+  Prompts/input-image hashes/native dimensions recorded in reports/manifest.json.
+- Selected reading-with-provenance88.5vs78.5/82.5. Correct fake line numbers and
+  unrecorded agent/context from reference before code; never rewrite saved Markdown
+  to import mock assertions. Current screenshot shows duplicate title/mobile clip.
+- Visual inventory now9/36desktop+3/12mobile,3selectedpages,2codepilots,0/12accepted.
+  Reports not yet implemented; original all-page/all-engine/prompt/data scope active.
+- Next concrete code: owner-authenticated project-scoped report evidence with
+  bounded pagination, reports reading/list mobile layout and proper Task URL
+  selection for its correction action. Existing TasksPage ignores queryselection.
+  Reuse original source/citation tables, no new loop, runtime factory or generation.
+- Browser helper reports-ui/serve.py opens a COPY of retained synthetic source,
+  configured runtime disabled; capture.mjs uses installed full Chromium channel
+  and sandbox. Auth is synthetic. No provider model turns. Current server will be
+  closed at checkpoint; restart helper only for continued UI work (not inference).

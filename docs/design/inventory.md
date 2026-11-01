@@ -15,11 +15,11 @@ archivos generados e inspeccionados, no pantallas aceptadas.
 | `/chat` | 3 | 1 | Conversación con evidencia | Piloto en código | Parcial: capturas reales; aceptación pendiente |
 | `/wiki` | 0 | 0 | Pendiente | Pendiente | Pendiente |
 | `/findings` | 0 | 0 | Pendiente | Pendiente | Pendiente |
-| `/reports` | 0 | 0 | Pendiente | Pendiente | Pendiente |
+| `/reports` | 3 | 1 | Lectura con trazabilidad | Pendiente | Pendiente |
 | `/files` | 0 | 0 | Pendiente | Pendiente | Pendiente |
 | `/repositories` | 0 | 0 | Pendiente | Pendiente | Pendiente |
 | `/flow` | 0 | 0 | Pendiente | Pendiente | Pendiente |
-| **Total** | **6 / 36** | **2 / 12** | **2 / 12** | **2 pilotos** | **0 / 12** |
+| **Total** | **9 / 36** | **3 / 12** | **3 / 12** | **2 pilotos** | **0 / 12** |
 
 Los prompts, archivos, hashes, tamaños y procedencia del piloto están en
 [concepts/tasks/manifest.json](concepts/tasks/manifest.json). Las tres alternativas
@@ -35,3 +35,6 @@ Hay capturas reales de ambos pilotos en escritorio y móvil: [recorrido y límit
 Diecisiete estados pasan axe y se probaron salto al contenido y navegación con foco.
 No cierra toda la aceptación: faltan estados de interacción, zoom, lector de pantalla
 y comprensión humana. Continuar con esas comprobaciones y las otras diez rutas.
+
+Los conceptos de Informes y su adaptación están en [el manifest](concepts/reports/manifest.json).
+La selección ya está documentada; el rediseño en código todavía está pendiente.

@@ -8,7 +8,7 @@ Motivos del ajuste: [diagnóstico del proceso](workflow-review.md).
 
 - Hay un primer recorrido de investigación con Codex, suscripción, Ken, análisis y reporte persistido. La prueba real de entrada de producto terminó; su monitor falló y se recuperó evidencia durable sin repetir inferencia. No se recuperaron las métricas de memoria perdidas.
 - Las 43 entradas de escenarios siguen abiertas en `coverage.json`: 33 en progreso y 10 pendientes. Son escenarios amplios; esto no significa que sus componentes no funcionen.
-- Interfaz: 2 pilotos, 6/36 conceptos de escritorio y 2/12 móviles; 0/12 páginas con aceptación completa.
+- Interfaz: 2 pilotos, 9/36 conceptos de escritorio y 3/12 móviles; 0/12 páginas con aceptación completa.
 - Última suite registrada: 1493 aprobadas, 100 fallos heredados y 3 omitidas. Falta resolver o retirar con justificación los casos del sistema reemplazado.
 - No hay porcentaje global defendible todavía. El 30% anterior era una impresión, no una medición de alcance ponderado.
 
@@ -27,6 +27,8 @@ Verificado: inicializadores explícitos, guardias de API/CLI/launcher y cleanup 
 **Resultado:** ver el informe real desde la web, entender sus fuentes y límites, corregir una premisa y comprobar el nuevo estado sin perder el informe anterior.
 
 **Salida:** página de informes con tres conceptos de escritorio, adaptación móvil, selección razonada e implementación; recorrido conectado a tarea/conversación, lectura y error reales, teclado y comprobaciones responsive. Incluir una explicación con ejemplo o diagrama cuando ayude y una evaluación de comprensión/corrección. Diferenciar prueba funcional de evaluación con una persona.
+
+**Diseño listo:** tres conceptos y móvil generados/inspeccionados; elegida Lectura con trazabilidad. [Selección y correcciones](../design/selection.md). Falta implementar la página, fuentes para propietario y destino de tarea por URL, y verificar el recorrido.
 
 **Dependencias:** reutilizar persistencia, fuentes y fixture de producto existentes. No desarrollar otra fábrica de inferencia para esta entrega.
 

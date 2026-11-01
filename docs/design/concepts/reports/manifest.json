@@ -1,0 +1,117 @@
+{
+  "date": "2026-11-01",
+  "base_commit": "77ca403",
+  "generator": "image_gen.imagegen (built-in), one independent call per image",
+  "model": null,
+  "model_note": "Exact image model not exposed; no API-key fallback used.",
+  "image_count": 4,
+  "selected_desktop": "reading-with-provenance",
+  "selection": "../../selection.md",
+  "implementation_status": "pending",
+  "assets": [
+    {
+      "id": "reading-with-provenance",
+      "surface": "desktop",
+      "image": "reading-with-provenance.png",
+      "sha256": "c6d3e84fb412965c31456a300458fb3ebc32431fb1fc40d80cf4befcf8814028",
+      "pixel_dimensions": [
+        1487,
+        1058
+      ],
+      "layout_target": [
+        1440,
+        1024
+      ],
+      "prompt": "reading-with-provenance.prompt.txt",
+      "prompt_sha256": "2cdcb74f9ecb41510fc4b2ef2e9137c8c8178d9a8a67d15d372cf61144a3a38f",
+      "input_images": [
+        {
+          "path": "../../audits/2026-11-01-reports/before-desktop.png",
+          "sha256": "3a81d368ac9d474f8ed6fbffe920cfefc24d3e26d0c523bdfab28fb0aa8a665c"
+        },
+        {
+          "path": "../tasks/editorial-inspector.png",
+          "sha256": "c1c2149142b2c6551487f96595e4f7040709f59f46bc4b1f289b81353d950036"
+        }
+      ],
+      "inspected": true
+    },
+    {
+      "id": "library-preview",
+      "surface": "desktop",
+      "image": "library-preview.png",
+      "sha256": "098c0a641bc3e4443544bd64f8cfe3b14e632f1f651575d359e8623a6830643a",
+      "pixel_dimensions": [
+        1487,
+        1058
+      ],
+      "layout_target": [
+        1440,
+        1024
+      ],
+      "prompt": "library-preview.prompt.txt",
+      "prompt_sha256": "1cd8ecc41169c82afd67640377bd5c7472fb89c9f790c429fa764ab8da3ad3e6",
+      "input_images": [
+        {
+          "path": "../../audits/2026-11-01-reports/before-desktop.png",
+          "sha256": "3a81d368ac9d474f8ed6fbffe920cfefc24d3e26d0c523bdfab28fb0aa8a665c"
+        },
+        {
+          "path": "../tasks/editorial-inspector.png",
+          "sha256": "c1c2149142b2c6551487f96595e4f7040709f59f46bc4b1f289b81353d950036"
+        }
+      ],
+      "inspected": true
+    },
+    {
+      "id": "evidence-notebook",
+      "surface": "desktop",
+      "image": "evidence-notebook.png",
+      "sha256": "b3facdcf639f19a1c865fc761ed2bb10c32123c8fc6893de303cdb7d1e0d6e89",
+      "pixel_dimensions": [
+        1487,
+        1058
+      ],
+      "layout_target": [
+        1440,
+        1024
+      ],
+      "prompt": "evidence-notebook.prompt.txt",
+      "prompt_sha256": "0334e46992f128b95ec6791a4592d546dfec744d7d01120385ffe1bef7702a3c",
+      "input_images": [
+        {
+          "path": "../../audits/2026-11-01-reports/before-desktop.png",
+          "sha256": "3a81d368ac9d474f8ed6fbffe920cfefc24d3e26d0c523bdfab28fb0aa8a665c"
+        },
+        {
+          "path": "../tasks/editorial-inspector.png",
+          "sha256": "c1c2149142b2c6551487f96595e4f7040709f59f46bc4b1f289b81353d950036"
+        }
+      ],
+      "inspected": true
+    },
+    {
+      "id": "reading-with-provenance-mobile",
+      "surface": "mobile",
+      "image": "reading-with-provenance-mobile.png",
+      "sha256": "00fe3c14179ee9e26c361d9b92b48ba6dbc2ed7b12629b8844be52ee9d6b0d63",
+      "pixel_dimensions": [
+        853,
+        1844
+      ],
+      "layout_target": [
+        390,
+        844
+      ],
+      "prompt": "reading-with-provenance-mobile.prompt.txt",
+      "prompt_sha256": "855f3a9f88f9a787f1563e840d0e7102b8bf728c7e9fb0b5cfc0426c8a5e7776",
+      "input_images": [
+        {
+          "path": "reading-with-provenance.png",
+          "sha256": "c6d3e84fb412965c31456a300458fb3ebc32431fb1fc40d80cf4befcf8814028"
+        }
+      ],
+      "inspected": true
+    }
+  ]
+}
