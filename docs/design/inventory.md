@@ -38,3 +38,8 @@ y comprensión humana. Continuar con esas comprobaciones y las otras nueve rutas
 
 Los conceptos de Informes y su adaptación están en [el manifest](concepts/reports/manifest.json).
 El rediseño está implementado y su [recorrido](audits/2026-11-01-reports/report.md) verifica 20 estados en escritorio/móvil, citas paginadas y corrección en la tarea. La aceptación completa sigue pendiente.
+
+
+Archivos (`/files`) ya tiene [capturas iniciales](audits/2026-11-01-files/report.md)
+y [brief](concepts/files/brief.md). No son conceptos generados ni implementación;
+los contadores de la tabla permanecen iguales.

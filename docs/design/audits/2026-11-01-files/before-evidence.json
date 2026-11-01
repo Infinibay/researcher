@@ -1,0 +1,34 @@
+{
+  "browser": "156.0.8078.4",
+  "route": "/files",
+  "data": "copy of retained synthetic product trial plus generated two-page PDF; no source captured or model dispatched",
+  "states": [
+    {
+      "label": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "scrollWidth": 1134,
+        "clientWidth": 1134,
+        "viewport": 1440
+      },
+      "sha256": "510409964bd0c5737d3b0e195cbbb6c25394126f206df59db99b1d32dcbe2187"
+    },
+    {
+      "label": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "scrollWidth": 631,
+        "clientWidth": 631,
+        "viewport": 390
+      },
+      "sha256": "ff955a9cd4623f0a03f8dc835626bed6fbdf01516a176ce41b9a606a9a12292f"
+    }
+  ],
+  "page_errors": []
+}
