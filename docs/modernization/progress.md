@@ -2429,3 +2429,92 @@ data/restore/bootstrap/CLI/TUI/install, aliases/transfer/budgets, dependency upg
 18 npm advisories and100 baseline failures remain. Independent frontend progress
 can proceed:6/36 desktop+2/12 mobile concepts,2 pilots,0/12 accepted;30+10 concepts/
 10 routes/all12 acceptance still required. Final fresh whole-branch review remains.
+
+## Current task: bounded host CONNECT gate — base5351c9f
+
+- Previous goal turn was progress:5351c9f native DNS/TLS implemented, actual SDK
+  local TLS and separate public DNS/TLS diagnostic, suite/build/package committed.
+- Host egress requires exact DNS-host allowlist/443, all resolved addresses public,
+  numeric pinned dial, no HTTP forwarding/redirect following, finite headers/wall/
+  idle/bytes/concurrency/total connections, redacted receipts and immediate socket
+  withdrawal before SQL. TLS remains end-to-end in the actual native SDK.
+- Reuse public IP/DNS validation currently embedded in research.web_fetcher by
+  extracting transport-only helpers with domain-error mapping in the research
+  adapter. Direct runtime import of a research adapter couples unrelated use cases.
+- Test real connected socket pairs at the network seam, strict CONNECT parsing,
+  mixed/private/transition DNS rejection, byte/idle/wall budgets, blocked writes,
+  late dial after Stop, saturation and safe failure without payload/secret logging.
+- This gate must next be fed only by an owned private-network helper; adding a
+  CONNECT proxy while leaving native host networking would not enforce egress.
+  No real credentials until private NET/no-bypass/Stop and actual SDK accepted.
+  Global managed enrollment/all-actor account ownership remain pending.
+
+## Bounded host CONNECT gate checkpoint — base5351c9f
+
+- Initial pytest reserved-name collection issue corrected before RED21 missing
+  proxy. RED4 missing channel. RED header-wall test proved intake exceeded total
+  wall budget; min(header,wall) now enforces admission's total deadline.
+- GREEN59 focused includes34 host gate/FD channel cases plus existing web/TLS.
+  Full1464:1361 pass,100 exact original baseline failures,3 skip,29 warnings;
+  531 runtime pass. Offline wheel34 runtime + shared helper/research adapter bytes
+  match; isolated -I -S real SCM_RIGHTS/CONNECT/byte/EOF smoke and prior native/
+  analysis/auth/recovery smokes pass. No new model or external provider calls.
+- pytest-socket classified socket(fileno=...) as INET despite transferred Unix FD;
+  channel tests allow loopback only and retain non-loopback connect blocking.
+- Ruling: share transport-only DNS/IP primitives without runtime importing research
+  adapter — same numeric pinning policy, acyclic dependencies — cost: DNS child
+  remains host-owned/bounded rather than enrolled in native cgroup, still pending.
+- Ruling: exact CONNECT/443, all resolved answers public, numeric dial and no
+  automatic retry/redirect — no re-resolving a vetted hostname — cost: unusual
+  proxies, ports/headers and mixed private DNS fail closed.
+- Ruling: check shared byte budget/withdrawal at nonblocking payload writes under
+  short lock; no lock over DNS/remote wait — Stop independent — cost: metadata-only
+  receipts describe bytes/outcome, not application success or unseen usage.
+- Ruling: inherited SEQPACKET, one SCM_RIGHTS stream, stable duplicated child FD —
+  no host TCP proxy listener — cost: launcher must close its copies and prevent
+  untrusted client access to the channel; that profile remains to be implemented.
+- Ruling: host gate is not egress enforcement until private NET removes bypass;
+  opaque TLS tunnel is not L7/domain-fronting firewall — cost: real subscription/
+  product migration stays incomplete, not enabled on proxy env alone.
+- Final RED global IPv6 + scope_id proved classification accepted a scoped global
+  address. Shared validator now rejects every IPv6 scope; final59 focused, full
+  suite/build/current wheel rerun and passed with exact100 original failures.
+- Ruling: globally routable IPv6 does not authorize interface scope identifiers —
+  DNS must supply ordinary numeric destinations — cost: scoped IPv6 configurations
+  are rejected in both host gate and source acquisition.
+- No actual credentials/model/image generation, user DB migration, host install,
+  parent cgroup change, push/merge/deploy. No full phase/scenario closed.
+
+## Next brief after host gate — full objective unchanged
+
+Implement actual private-NET native profile/broker composition next. Do not redo
+completed host gate/shared DNS/public TLS/auth/journal/domain. Proposed design:
+- New NativeProxyCapsule omits --share-net. Sealed trusted proxy_payload runs after
+  G, closes extra FDs, sets nondumpable, creates loopback listener, forks native.
+  Child closes listener/channel, installs strict native seccomp (also deny ptrace,
+  process_vm and pidfd_getfd), execs measured Codex. Trusted helper setup may allow
+  bind/listen/accept; untrusted/native child must not retain that setup authority.
+- Helper supplies accepted sockets as F + SCM_RIGHTS via inherited EgressChannel.
+  Pin channel.duplicate_child() in capsule through spawn, close parent child-end
+  after spawn. bwrap --preserve-fds contiguous range may be needed: close all extra
+  original source/control FDs in trusted helper before native exec; prove no leaks.
+- Fixed HTTP_PROXY/HTTPS_PROXY/ALL_PROXY loopback URL and empty NO_PROXY; preserve
+  sealed CA env, no user proxy credentials. Verify bwrap loopback is up. Helper
+  watches native exit/host EOF, closes accepted local copies and kills/reaps native
+  on host loss. All helper/native actors remain in original kernel domain.
+- Broker reserves before channel creation, registers under decision lock before G;
+  withdraw closes socket/channel before SQL. close_peer/revoke drain before receipt.
+  Record policy and helper/host gate/shared validator hashes, require NativeNetwork,
+  retain same-key conflict semantics. No model-selected policy or direct-net fallback.
+- Actual SDK local TLS/proxy test uses controlled DNS-host cert and dial seam mapping
+  a validated public numeric IP only to the test endpoint. Verify unknown CA/name,
+  redirected/new disallowed CONNECT, direct host/public/Unix/control bypass, helper/
+  owner loss, Stop under SQL/backpressure, FD cleanup. WebSocket needs its own trial.
+Default DNS subprocess/all trusted host actor origin still require managed enrollment;
+then account coexistence, persistent native state, subscription+Ken/business/code-mode
+and product factory adoption. All71 tools/11 categories, engine/autonomy/roles/flows/
+agent communication, exact Git/review/CI, prompts/books/evals/human comprehension,
+data/restore/bootstrap/CLI/TUI/install, aliases/transfer/budgets/dependencies/18 npm
+advisories and100 baseline failures remain. Independent UI work:6/36 desktop+2/12
+mobile concepts,2 pilots,0/12 accepted;30+10 concepts/10 routes/all12 acceptance.
+Final fresh whole-branch review still required. Full objective remains active.

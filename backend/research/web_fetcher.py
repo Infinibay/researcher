@@ -6,58 +6,39 @@ This is a text-source adapter; PDF/binary extraction uses a separate capability.
 
 import hashlib
 import ipaddress
-import json
-import os
 import re
 import socket
 import ssl
-import subprocess
-import sys
 import time
 from contextlib import closing
 from html.parser import HTMLParser
 from http.client import HTTPException, HTTPSConnection
 from urllib.parse import quote, urljoin, urlsplit, urlunsplit
 
+from backend.network_destinations import (
+    PublicNetworkError,
+    public_address,
+    resolve_addresses,
+)
 from backend.research.models import SourceDraft, SourceTooLarge, SourceUnavailable
 
 
 def _resolve(host: str, timeout: float) -> list[str]:
-    # Bound libc DNS in its own reaped child, rather than leave a blocked DNS
-    # thread behind when a tool deadline expires. No shell or provider env.
-    code = "import socket,sys,json; a=sorted({r[4][0] for r in socket.getaddrinfo(sys.argv[1],443,type=socket.SOCK_STREAM)}); assert 0<len(a)<=64; print(json.dumps(a))"
     try:
-        result = subprocess.run(
-            [sys.executable, "-I", "-c", code, host],
-            capture_output=True,
-            text=True,
-            timeout=min(timeout, 3),
-            env={"PATH": os.defpath},
-            check=True,
-        )
-        return json.loads(result.stdout)
-    except (subprocess.SubprocessError, ValueError) as exc:
+        return resolve_addresses(host, timeout)
+    except PublicNetworkError:
         raise SourceUnavailable(
             "Public source DNS resolution failed or exceeded its deadline"
-        ) from exc
+        ) from None
 
 
 def _public_address(value: str):
     try:
-        address = ipaddress.ip_address(value)
-    except ValueError as exc:
-        raise SourceUnavailable("Source DNS returned an invalid address") from exc
-    if (
-        not address.is_global
-        or address.is_multicast
-        or address.is_reserved
-        or isinstance(address, ipaddress.IPv6Address)
-        and (address.sixtofour is not None or address.teredo is not None)
-    ):
+        return public_address(value)
+    except PublicNetworkError:
         raise SourceUnavailable(
             "Source destination must resolve only to public Internet addresses"
-        )
-    return address
+        ) from None
 
 
 class _DeadlineSSLSocket(ssl.SSLSocket):

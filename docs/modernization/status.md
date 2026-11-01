@@ -74,7 +74,10 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    El perfil nativo ya admite DNS/CA públicos medidos y copias selladas. Codex real
    verifica TLS local y rechaza CA/nombre incorrectos. Un diagnóstico separado
    resolvió documentación pública y obtuvo HEAD200 por TLS1.3 sin credenciales.
-   Falta restricción de destinos, WebSocket y composición productiva completa.
+   El puente del host ya implementa CONNECT/443 a destinos exactos, DNS público,
+   límites compartidos y retirada de sockets; recibe streams por un canal privado
+   SCM_RIGHTS. Falta conectarlo al namespace privado nativo y al broker: todavía
+   no impide la ruta directa de red. WebSocket y composición productiva pendientes.
 7. **Contexto y procedencia:** versiones al corregir o cambiar trece entradas de tarea;
    retiro de autoridad antigua; respuesta asociada a pregunta/versión; repositorio
    admitido inmutable y comienzo de cola explícito. Registro exacto de la entrada
@@ -141,17 +144,19 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 
 ## Verificación más reciente
 
-- Suite completa:1430 casos;1327 pasan,100 fallan con las mismas identidades de la
+- Suite completa:1464 casos;1361 pasan,100 fallan con las mismas identidades de la
   línea base y 3 se omiten. La suite global sigue roja.
-- Runtime:497 pasan. Las45 pruebas dirigidas de este checkpoint incluyen15 casos
-  de red y3 ensayos TLS con el Codex0.166.0 real: emisor/nombre, inputs sellados
-  pese a cambios posteriores, rechazo antes de G y recibos sin relanzar.
-- Paquete actual:32 módulos runtime idénticos al código; ensayo aislado con Codex
-  sin cuenta, manifiestos DNS/CA, análisis hermano, cierre/recuperación y renovación
-  compartida entre dos clientes controlados. No demuestra OAuth ni inferencia real.
-- Conectividad pública: un diagnóstico ELF/Python separado resolvió y verificó
-  learn.chatgpt.com por TLS1.3, con HEAD200 y sin credenciales ni turnos de modelo.
-  El dominio se retiró. No es una prueba de restricción de destinos o de entitlement.
+- Runtime:531 pasan. Las59 pruebas dirigidas de este checkpoint incluyen34 casos
+  del puente/canal y los contratos existentes de ingesta web/TLS. Cubren política,
+  DNS mixto/privado, framing, budgets, half-close, retirada tardía y SCM_RIGHTS real.
+- Paquete actual:34 módulos runtime y el helper compartido/adaptador de investigación
+  coinciden con el código. El ensayo aislado transfiere un FD y bytes por el gate;
+  conserva también los smokes de Codex sin cuenta, análisis, autenticación y cierre.
+  No demuestra todavía que Codex use el puente ni que carezca de salida directa.
+- En el checkpoint anterior, Codex0.166.0 real verificó TLS local y rechazó emisor/
+  nombre incorrectos. Un diagnóstico separado resolvió y verificó learn.chatgpt.com
+  por TLS1.3 con HEAD200 sin credenciales ni turnos. El dominio se retiró; no es una
+  prueba de restricción de destinos ni de entitlement.
 - Los ensayos de autenticación/coordinador anteriores cubren saturación, errores
   redactados, retirada durante lectura/escritura y cancelación de consumidores/cierre.
   Las pruebas anteriores de dominio incluyen SIGKILL, pérdida de DB, contención,
@@ -178,9 +183,13 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
   siguen pendientes;0/12 rutas aceptadas. Dependencias:18 avisos npm preexistentes
   (5 bajos,3 moderados,10 altos), sin nuevos paquetes vulnerables por Playwright/axe.
 
-Evidencia actual: [DNS/TLS y límites](native-network-evidence.json),
-[resultados actuales](native-network-results.json),
-[paquete actual verificado](native-network-packaging.json),
+Evidencia actual: [puente del host y límites](egress-evidence.json),
+[resultados actuales](egress-results.json),
+[paquete actual verificado](egress-packaging.json),
+[contrato e integración pendiente](../architecture/native-egress.md),
+[DNS/TLS y límites](native-network-evidence.json),
+[resultados DNS/TLS](native-network-results.json),
+[paquete DNS/TLS](native-network-packaging.json),
 [diagnóstico público sin credenciales](native-network-live.json),
 [contrato DNS/TLS](../architecture/native-network.md),
 [coordinador administrado y límites](subscription-provider-evidence.json),

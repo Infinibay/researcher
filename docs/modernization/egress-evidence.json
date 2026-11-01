@@ -1,0 +1,59 @@
+{
+  "base_commit": "5351c9f",
+  "date": "2026-11-01",
+  "scope": "Host-side bounded CONNECT proxy and inherited SCM_RIGHTS descriptor channel. Shared public-IP/DNS helpers extracted from research adapter. Not yet connected to a private-network native capsule or production broker; no direct-egress prevention claim.",
+  "source_sha256": {
+    "backend/network_destinations.py": "3277110ea5739f838c32974550d31b6e5c1ecbdd96afd6f74c23d4f23179f13d",
+    "backend/research/web_fetcher.py": "c48df98e5576c45d5272715a2786baf2b30a1e3da9fc4f7fa864f40ab5998462",
+    "backend/runtime/egress_proxy.py": "91c99f86054c927d307886313913ebf8ac6b2f2ee42248782ae28dfc701a72b3",
+    "backend/runtime/egress_channel.py": "7a877d543cfec40545eb278c596ea39f785d2e0c857cef7d64feb7145a41eb68",
+    "backend/tests/runtime/test_egress_proxy.py": "578d0032233bc785db479871dabbdf29bf12a485c4895a0008fd091c239e724f",
+    "backend/tests/runtime/test_egress_channel.py": "7cfcd7c8a626c667744b50bc8dbcc2eae8fd1c7c04ae7ffd77a16d25bf394488"
+  },
+  "raw_artifacts_sha256": {
+    "egress-red.log": "0e312c8e298d603c0fa0b2974d1385a0968c9f4fc3e2d1a521958afd2a0f5a28",
+    "egress-interface-red.log": "57b0a4f66cc8298018b9213a7108ce332d4293cc97093dcd7ffecce1084b361f",
+    "egress-first.log": "43ff293b3c527b0e2fb331784e1d52d114bc942f9f280de8cc7b2d5585412f23",
+    "egress-header-wall-red.log": "6183b4f1e6a9ba80d1df74ccb4a5061c722ab8d4732792ec49578760db4225a7",
+    "egress-channel-red.log": "c1cdb0b6149c1d17e7134a25772848ff6d520041f034ef49e8b2bcde766ce598",
+    "egress-channel-first.log": "7605a318efb91c9e68f66317049e82ddac668c8342d592fab03f2a528accda55",
+    "egress-focused.log": "b3db94e295d467c8dd44c6a64f7465077116caa93eb467de4141a5be9fae1edc",
+    "egress-verified-focused.log": "6057391f9b69a0b5e9eb9960aded684064f6644c254efd148cba840b5533875a",
+    "egress-full.xml": "53fdb2bf15fcc4dba18935bbc95f007568d4293dc809d2027084dc719e3c4e55",
+    "egress-full.log": "1bf8315f60b7680071023fcd4a7f1be8c83e8c0854594a9ed352fc0b1baa8b78",
+    "egress-build.log": "fab5a7b1f2a16485944c40b5dabb23ec6aad994a2b5816f4fcb6969c9b1396da",
+    "egress-package.log": "4ecfb4054d0f82c6e8bd7505ab283e99ea3da1fd8511eef9b1179b884e4da1fb",
+    "verify-egress-package.py": "be115b901134bb02fb72331c5a80ff2698aec581a4c98ecfe1e325ffd3820cdc",
+    "egress-global-zone-red.log": "064da993b4e8cb04b7ab0c54e2c13d847fbb99728faa1125411878fdc012461c",
+    "egress-final-focused.log": "4d0ecda67934b0a2ce4ec50703ed43c7f40d5ba12668b5a7f6ce4e0e10a10d33",
+    "egress-final-full.xml": "591240020d7049ec68e87b9479b6a755377d434d7e2f16bd2795e8a6cafcf065",
+    "egress-final-full.log": "984fb1ef8ce41e48a7e1005c87d1e712903180ee933a9e3adc218e1e63dfe715",
+    "egress-final-build.log": "5195b20d6d8acbbca13b8d08d5cc60ba290de1803746fbf65d88c7758ca21bcb",
+    "egress-final-package.log": "4ecfb4054d0f82c6e8bd7505ab283e99ea3da1fd8511eef9b1179b884e4da1fb",
+    "verify-egress-final-package.py": "584bbebb7121e5e051deee1d31e91f710a8ae96a028c0d6940d907ab38a3a798"
+  },
+  "verified": [
+    "Strict CONNECT/443 to explicit DNS allowlist, matching single Host, no body framing or proxy credentials; invalid/disallowed requests return static403 without dialing or echoing input.",
+    "All DNS answers must be public; mixed private/public, transitions, local/zone, malformed/empty/oversized results reject before dial. Numeric validated address is selected and passed to connector; no redirect/retry inside gate.",
+    "Real socketpair streams preserve binary bytes and TCP-style half-close, per-tunnel/global byte limits, idle/total deadlines, active capacity and lifetime connection budget. Extra payload byte is not forwarded after budget exhaustion.",
+    "Stop retires admission and closes active known streams; delayed resolution does not dial, delayed returned socket closes before payload, saturation does not retire an existing tunnel and dependency diagnostics never enter receipts.",
+    "Real Unix SEQPACKET/SCM_RIGHTS transfers a connected stream to host gate. Helper endpoint EOF retires tunnels. Wrong marker, extra descriptors and non-socket descriptor retire channel and close received resources.",
+    "Shared transport-only public network primitives leave research adapter error translation and existing URL/TLS behaviors working; no runtime-to-research-adapter dependency was introduced.",
+    "Full1464:1361 pass,100 exact original baseline failures,3 skip,29 warnings;531 runtime pass. Focused59 pass including34 host egress/channel cases.",
+    "Offline wheel34 runtime bytes plus shared helper/research adapter bytes match source. Isolated -I -S process passes an FD over SCM_RIGHTS and exchanges bytes through actual host gate using a controlled connected-stream dial seam, then observes EOF withdrawal; prior account-free native/analysis/auth/recovery smoke still passes."
+  ],
+  "diagnosed": [
+    "Initial pytest parameter name request was reserved, causing collection error; corrected test input name before observing21 missing-interface failures.",
+    "Header intake initially used header timeout even when total wall budget was shorter. New test timed out waiting for receipt; min(header,total wall) now enforces the whole admission deadline.",
+    "pytest-socket misclassified socket(fileno=...) construction despite transferred Unix FD. Channel tests permit loopback only while keeping non-loopback connects blocked; no Internet or paid service is used.",
+    "Local Python3.12 constructor probe confirms ENOTSOCK leaves its input FD open, consistent with explicit cleanup of unconsumed received descriptors.",
+    "Final red case showed global IPv6 with a local scope identifier bypassed address classification; shared public-address validation now rejects every IPv6 scope_id, including globally routable address prefixes. Final suite/build/package reverified after that fix."
+  ],
+  "limits": [
+    "No private-network native helper/capsule, native proxy configuration, broker policy manifest registration, per-peer/Stop integration or no-bypass proof yet. Existing native host-network path is unchanged.",
+    "TLS stays opaque; this gate does not validate remote TLS identity, inspect SNI/ciphertext/HTTP paths, prove account ownership or prevent all CDN/domain-fronting behavior. Actual trusted SDK TLS and executable/tool restrictions remain required.",
+    "Default resolver owns a direct bounded/reaped DNS subprocess, outside currently proved native cgroup. Complete host-service origin/enrollment and all-actor account authority are still pending. Withdrawal does not claim that prior in-flight packets never happened.",
+    "No new vendor SDK proxy/WebSocket trial, real OAuth, subscription generation, real credentials, user DB migration, host install, parent cgroup change, push/merge/deploy.",
+    "Full engine/71-tool/prompts/human-agent communication/data/12-route UI plan and final fresh independent whole-branch review remain active."
+  ]
+}

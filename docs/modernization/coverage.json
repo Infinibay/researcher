@@ -938,7 +938,12 @@
         "docs/modernization/native-network-results.json",
         "docs/modernization/native-network-live.json",
         "backend/tests/runtime/test_native_network.py",
-        "backend/tests/runtime/test_native_network_rpc.py"
+        "backend/tests/runtime/test_native_network_rpc.py",
+        "docs/architecture/native-egress.md",
+        "docs/modernization/egress-evidence.json",
+        "docs/modernization/egress-results.json",
+        "backend/tests/runtime/test_egress_proxy.py",
+        "backend/tests/runtime/test_egress_channel.py"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable",
