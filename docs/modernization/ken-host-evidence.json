@@ -1,0 +1,37 @@
+{
+  "status": "host_composition_implemented_product_adoption_pending",
+  "contracts": {
+    "five_ken_tools_required_filtered_sorted_snapshotted": true,
+    "bounded_catalog_pagination_and_local_only_json_schema": true,
+    "invalid_non_json_oversized_arguments_not_dispatched": true,
+    "shared_mcp_result_authority_boundary": true,
+    "unambiguous_business_analysis_ken_dispatch": true,
+    "explicit_native_private_network_host_code_mode_profile": true,
+    "real_codex_configuration_without_generation": true,
+    "same_broker_successful_closed_prepare_before_mcp_native": true,
+    "ken_revalidated_before_thread_turn_and_tool_dispatch": true,
+    "detected_midturn_ken_failure_prevents_next_business_effect": true,
+    "sdk_scope_preserves_original_caller_error_after_closure": true,
+    "published_ken_catalog_and_mediated_read_real": true
+  },
+  "evidence": [
+    "backend/runtime/broker_inference.py",
+    "backend/runtime/ken_mediation.py",
+    "backend/tests/runtime/test_ken_mediation.py",
+    "backend/tests/runtime/test_broker_inference.py",
+    "backend/tests/runtime/test_broker_native.py",
+    "backend/tests/runtime/test_broker_mcp.py",
+    "docs/modernization/ken-host-results.json",
+    "docs/modernization/ken-host-live.json",
+    "docs/modernization/ken-host-packaging.json"
+  ],
+  "remaining": [
+    "Supplied business/analysis actor origin and lifecycle, direct host service binding or owned-worker composition",
+    "Actual joint native subscription/Ken/business turn, mixed-load sizing and vendor WebSocket",
+    "Managed state/credentials/OAuth/account coexistence, complete-domain enrollment and product factories",
+    "Resume with durable original thread/catalog and reconciliation",
+    "Full71 tools/11 categories and all engine/loops/autonomy/flows/agent communication",
+    "All prompts/books/evals/human comprehension, UI concepts/routes/acceptance, data/restore/bootstrap/CLI/TUI/dependencies",
+    "100 inherited failures and final fresh whole-branch review"
+  ]
+}

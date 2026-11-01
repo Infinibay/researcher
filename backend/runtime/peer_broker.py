@@ -318,8 +318,20 @@ class PeerBroker:
         )
 
     def run_native(
-        self, registry, peer_id, *, operation_key, asset, network=None, egress=None
+        self,
+        registry,
+        peer_id,
+        *,
+        operation_key,
+        asset,
+        network=None,
+        egress=None,
+        host_tools=False,
     ):
+        if type(host_tools) is not bool or (
+            host_tools and (network is None or egress is None)
+        ):
+            raise TypeError("Host tools require an explicit private-network policy")
         if not isinstance(asset, CodexAsset):
             raise TypeError("Native launch requires an inspected Codex asset")
         if network is not None and not isinstance(network, NativeNetwork):
@@ -337,6 +349,7 @@ class PeerBroker:
             asset=asset,
             network=network,
             egress=egress,
+            host_tools=host_tools,
         )
 
     def _run(
@@ -352,6 +365,7 @@ class PeerBroker:
         ken=None,
         model_cache=None,
         ken_mode="mcp",
+        host_tools=False,
     ):
         command_key(operation_key)
         if asset is None and ken is None:
@@ -370,9 +384,14 @@ class PeerBroker:
                 {"code": code, "profile": "readonly-stdlib-analysis-v1"}
                 if asset is None
                 else {
-                    "profile": "readonly-native-codex-connect-v1"
-                    if egress is not None
-                    else "readonly-native-codex-v1",
+                    "profile": "readonly-native-codex-connect-host-tools-v1"
+                    if host_tools
+                    else (
+                        "readonly-native-codex-connect-v1"
+                        if egress is not None
+                        else "readonly-native-codex-v1"
+                    ),
+                    "host_tools": host_tools,
                     "asset": asdict(asset),
                     "profile_sha256": hashlib.sha256(
                         Path(__file__).with_name("broker_profile.py").read_bytes()
@@ -500,6 +519,7 @@ class PeerBroker:
                     write_fd,
                     **({"network": network} if network is not None else {}),
                     **({"channel": channel} if channel is not None else {}),
+                    **({"host_tools": True} if host_tools else {}),
                     **(
                         {"model_cache": model_cache, "mode": ken_mode}
                         if ken is not None

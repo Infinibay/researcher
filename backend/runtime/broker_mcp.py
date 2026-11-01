@@ -173,6 +173,7 @@ async def broker_mcp(endpoint, *, request_timeout=15, max_message_bytes=1_000_00
     ):
         raise ValueError("Finite bounded MCP transport limits required")
     pipes = _Pipes(endpoint, max_message_bytes, request_timeout)
+    body_error = None
     try:
         await pipes.open()
         async with ClientSession(
@@ -185,9 +186,13 @@ async def broker_mcp(endpoint, *, request_timeout=15, max_message_bytes=1_000_00
             try:
                 await client._run(session.initialize)
                 yield client
+            except BaseException as error:  # noqa: BLE001 — preserve caller identity after SDK cancel scopes drain
+                body_error = error
             finally:
                 with anyio.CancelScope(shield=True):
                     await pipes.close()
+        if body_error is not None:
+            raise body_error
     finally:
         with anyio.CancelScope(shield=True):
             await pipes.close()

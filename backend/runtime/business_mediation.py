@@ -37,15 +37,18 @@ def catalog_digest(catalog):
 class ProjectTools:
     """One pre-admission catalog with explicit host/business dispatch ownership."""
 
-    def __init__(self, business, analysis):
+    def __init__(self, business, analysis, *host_tools):
         self.business, self.analysis = business, analysis
-        self.catalog = [*business.catalog, *analysis.catalog]
+        providers = (business, analysis, *host_tools)
+        self.catalog = [row for provider in providers for row in provider.catalog]
         names = [tool["name"] for tool in self.catalog]
         if len(names) != len(set(names)):
             raise ValueError(
                 "Project tool names must be unique before thread admission"
             )
-        self._host_names = frozenset(tool["name"] for tool in analysis.catalog)
+        self._dispatch = {
+            row["name"]: provider for provider in providers for row in provider.catalog
+        }
 
     @property
     def catalog_hash(self):
@@ -55,19 +58,59 @@ class ProjectTools:
         if (
             isinstance(params, dict)
             and isinstance(params.get("tool"), str)
-            and params["tool"] in self._host_names
+            and params["tool"] in self._dispatch
         ):
-            return await self.analysis.call(params)
+            return await self._dispatch[params["tool"]].call(params)
         return await self.business.call(params)
 
 
-class BusinessTools:
+class McpTools:
+    """Shared MCP result/authority boundary; subclasses admit their own catalog."""
+
     def __init__(self, peer, catalog, active):
         self._peer = peer
         self.catalog = catalog
         self._names = frozenset(tool["name"] for tool in catalog)
         self._active = active
 
+    @property
+    def catalog_hash(self):
+        return catalog_digest(self.catalog)
+
+    async def call(self, params):
+        if not self._active():
+            return _failure(
+                "Attempt authority ended. Do not dispatch or retry effects; reconcile existing receipts."
+            )
+        if (
+            not isinstance(params, dict)
+            or params.get("namespace") is not None
+            or not isinstance(params.get("tool"), str)
+            or params.get("tool") not in self._names
+            or not isinstance(params.get("arguments"), dict)
+        ):
+            return _failure("Unknown project tool or invalid argument envelope")
+        result = await self._peer.call_tool(params["tool"], params["arguments"])
+        content = []
+        for item in result.content:
+            if item.type != "text":
+                return _failure(
+                    "Tool returned an unsupported content type; reconcile its durable receipt before any retry."
+                )
+            content.append({"type": "inputText", "text": item.text})
+        response = {"success": not result.isError, "contentItems": content}
+        if len(json.dumps(response, separators=(",", ":")).encode()) > 1000000:
+            return _failure(
+                "Tool result exceeds the native wire budget. Recover the durable result with a smaller read window; do not repeat the mutation with a new operation key."
+            )
+        if not self._active():
+            return _failure(
+                "Attempt ended while the tool ran. A durable effect may already exist; reconcile its operation receipt."
+            )
+        return response
+
+
+class BusinessTools(McpTools):
     @classmethod
     async def connect(cls, peer, *, active=lambda: True):
         tools = (await peer.list_tools()).tools
@@ -90,42 +133,6 @@ class BusinessTools:
             for tool in tools
         ]
         return cls(peer, catalog, active)
-
-    @property
-    def catalog_hash(self):
-        return catalog_digest(self.catalog)
-
-    async def call(self, params):
-        if not self._active():
-            return _failure(
-                "Attempt authority ended. Do not dispatch or retry effects; reconcile existing receipts."
-            )
-        if (
-            not isinstance(params, dict)
-            or params.get("namespace") is not None
-            or not isinstance(params.get("tool"), str)
-            or params.get("tool") not in self._names
-            or not isinstance(params.get("arguments"), dict)
-        ):
-            return _failure("Unknown business tool or invalid argument envelope")
-        result = await self._peer.call_tool(params["tool"], params["arguments"])
-        content = []
-        for item in result.content:
-            if item.type != "text":
-                return _failure(
-                    "Tool returned an unsupported content type; reconcile its durable receipt before any retry."
-                )
-            content.append({"type": "inputText", "text": item.text})
-        response = {"success": not result.isError, "contentItems": content}
-        if len(json.dumps(response, separators=(",", ":")).encode()) > 1000000:
-            return _failure(
-                "Tool result exceeds the native wire budget. Recover the durable result with a smaller read window; do not repeat the mutation with a new operation key."
-            )
-        if not self._active():
-            return _failure(
-                "Attempt ended while the tool ran. A durable effect may already exist; reconcile its operation receipt."
-            )
-        return response
 
 
 class _BusinessPeer:

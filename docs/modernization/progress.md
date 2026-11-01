@@ -2691,3 +2691,97 @@ Git/review/CI, all prompts/books/evals/human comprehension, data/restore/bootstr
 CLI/TUI/install, dependencies/18 npm advisories and100 baseline failures remain.
 UI remains6/36desktop+2/12mobile concepts,2pilots,0/12accepted:30+10 concepts,
 10other routes and all12 acceptance pending. Fresh final whole-branch review later.
+
+## Current task: mandatory Ken catalog and host-tool composition — base138972b
+
+- Previous goal turn was progress: owned published Ken, migration31, MCP transport,
+  resource policy, actual source/wheel trials and full suite committed138972b.
+- Reuse BusinessTools' call/result/authority boundary as shared MCP mediation;
+  filter published Ken to required five, require complete unique checked schemas,
+  bounded pagination and local-only schema resolution. Reject invalid arguments
+  before peer dispatch. Extend existing ProjectTools dispatch to own all providers.
+- Inspect fixed local Codex0.166 schema/config and existing proven code_mode_host/
+  interrupt behavior before enabling a host-tools broker profile. Preserve default
+  metadata profile and disabled shell/plugins/agents; no nested MCP launch or
+  host-network fallback. Integrate pre-thread readiness with original peers/authority.
+- Product adoption, mixed-load sizing and generative subscription trial only after
+  the integrated path is ready. Entire plan and all remaining deliverables unchanged.
+
+## Mandatory Ken/host composition checkpoint
+
+- RED14 missing Ken mediation cases. Reused shared McpTools authority/result boundary
+  from BusinessTools, retaining public BusinessTools construction/call semantics.
+  ProjectTools now routes an arbitrary admitted provider by unique catalog name.
+  Ken filters extras, requires all five, snapshots/sorts schemas, bounds pagination/
+  catalog/arguments, validates local refs without network and rejects invalid/non-JSON
+  arguments before dispatch. Installed referencing API parameter is
+  default_specification; corrected after actual signature/failed tests, not guessed.
+- Declared already-locked jsonschema4.26.0/referencing0.37.0 directly. Offline lock,
+  sync/export succeeded:193 packages, only researcher metadata rebuilt, no dependency
+  version changed. No inference on import and no API key/provider fallback added.
+- RED3 explicit host-tools option cases, then RED3 false-value coercion cases.
+  Native profile enables code_mode_host/interrupt/skip_host_skill_discovery only
+  with explicit host selection/private NET CONNECT policy. Default profile retained;
+  manifest/intent carry selection. Real0.166 config/account-none query passed without
+  model turn. Shell/plugins/apps/multi-agent remain disabled; no native MCP servers.
+- Ruling: mandatory Ken remains a separately owned host dynamic tool, not nested
+  native MCP — existing code-mode host supports delegated dynamic calls and native
+  sandbox forbids nested bwrap — cost: native-owned MCP status/resume cannot be reused
+  unchanged; host catalog/receipt/state need explicit durable product integration.
+- RED4 missing composition cases, then RED midturn effect case. broker_inference
+  validates same owner/fresh readonly native/closed successful original preparation,
+  required Ken catalog before native/thread and refresh before turn/tool dispatch.
+  Reuses CodexSession's loop and InferenceSession facade; accepts only dynamic tool
+  requests, no implicit native MCP approval. Controlled native/kernel protocol reads
+  Ken then business; missing prepare/incomplete/withdrawn do not open native peer.
+- Midturn mutation originally allowed a later business call; refresh at dispatch
+  now rejects it. Added actual closed-Ken case and redacted Ken-unavailable mapping.
+  Non-JSON NaN initially passed JSON Schema; finite JSON encoding now rejects it.
+  These are observed RED→GREEN cases, not claimed continuous availability guarantees.
+- RED original consumer exception became SDK ExceptionGroup. broker_mcp now drains
+  SDK scope normally, closes original peer, then rethrows original exception identity,
+  following existing business_peer pattern. Cancellation/sibling tests remain green.
+- Ruling: supplied business/analysis facades retain caller-owned lifecycle/origin;
+  peers_closed is NOT promoted to whole-domain proof — this composition cannot
+  establish external actors it did not create — cost: product factories stay on prior
+  launch until business/analysis/global actor integration and actual joint trial.
+- Source published Ken0.18.0: five mediated names/hash validated, actual mediated
+  source read successful; direct find/read still passed, peak1394741248/no OOM,
+  two peers closed/domain retired/source unchanged. Zero new generative calls/images.
+- Final full suite1523:1420 passed,100 EXACT inherited failure IDs,3 skipped/29
+  warnings. Runtime590 passes;28 added cases pass. Whole suite stays red; inherited
+  failures are required work. Source targeted53 cases passed before final two
+  additional regression cases; the final full suite covers their fixes.
+- Final wheel/SDist offline build;38 runtime source modules plus6 changed fixtures
+  byte-match. Extracted -I -S dependency-explicit wheel passes38 directed tests.
+  Published Ken prepare/catalog/mediated read also passes from extracted wheel,
+  peak1393217536/no OOM, both peers closed/domain retired/source unchanged.
+- Ruff changed modern files passes. Evidence ken-host-{evidence,results,live,
+  packaging}.json; architecture/broker-inference.md, status and coverage updated.
+  No user DB migration, account credential access, OAuth renewal, paid generation,
+  host service install, push/merge/deploy. No phase/product migration marked complete.
+
+## Next brief after Ken/host admission — FULL goal unchanged
+
+Do not repeat existing broker/kernel/NET/auth/Ken primitives or account metadata for
+progress. Current broker_inference already gates closed successful original Ken
+prepare, required catalog and native host-tools config before thread; it refreshes
+before turns/tool dispatch. Business/analysis remain supplied host facades. Inspect
+the existing business MCP handlers/API client to reuse schemas/routing and grant
+checks, choosing a direct bounded host-service binding or an actually owned worker
+with explicit origin/lifecycle; avoid another inference loop or nested native MCP.
+Then compose admitted business/analysis with real native external subscription and
+published Ken for ONE bounded actual joint tool turn after deterministic gates;
+measure mixed memory and actual vendor transport, never infer success from metadata.
+Existing512MiB default fails Ken; explicit2GiB only passed isolated Ken, not mixed
+native+Ken generation. Keep host-selected shared policy/receipt identity fixed.
+Native state/resume, credential refresh/account coexistence and complete host actor
+enrollment/generation must be resolved before replacing RuntimeService/CodexRuntime/
+CommandJobs launchers. Decide from actual handlers/deployment contract; do not keep
+adding primitives without connecting the end-to-end product path.
+All71 tools/11 categories, engine/loop/autonomy/roles/flows/agent communication,
+exact Git/review/CI, all prompts/book skills/evals/human comprehension, data/restore/
+bootstrap/CLI/TUI/install/dependencies/18 npm advisories and100 inherited failures
+remain required. UI unchanged6/36 desktop+2/12mobile concepts,2pilots,0/12accepted:
+30+10 concepts,10 other routes and all12 acceptance pending. Final fresh full-branch
+review remains required when whole implementation, not a component, is complete.

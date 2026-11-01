@@ -1,0 +1,76 @@
+{
+  "source_trial": {
+    "published_version": "0.18.0",
+    "generative_model_turns": 0,
+    "image_calls": 0,
+    "models_bytes": 533070470,
+    "memory_limit_bytes": 2147483648,
+    "prepare_exit": 0,
+    "prepare_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "prepare_stdout_sha256": "56b1b800675242083ada31859bb672284ccf67df7d11647f0e8e372b60f17cab",
+    "prepare_memory_peak": 1394741248,
+    "prepare_memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+    "required_catalog_present": true,
+    "mediated_catalog_names": [
+      "ken_find",
+      "ken_read",
+      "ken_recall",
+      "ken_related",
+      "ken_remember"
+    ],
+    "mediated_catalog_hash": "38450070e5048e72ebbab623533ae57969d44548f23cf5afa41a8d4fbbabd91a",
+    "mediated_read_success": true,
+    "find_is_error": false,
+    "read_is_error": false,
+    "tool_result_sha256": {
+      "ken_find": "a14ce23218101ea62f1ced10d8a80c45529926efa72dbb65638ca4e2a92422ce",
+      "ken_read": "a78b3794e2202d1bf3b8fa56add3fa5ea074dadd97b0f6053248e133d417c034"
+    },
+    "memory_peak_bytes": 1394741248,
+    "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+    "stable_root": "/run/researcher-source",
+    "both_ken_peers_closed": true,
+    "manifest_profile": "readonly-published-ken-v1",
+    "status": "passed",
+    "domain_retired": true,
+    "source_unchanged": true
+  },
+  "isolated_wheel_trial": {
+    "published_version": "0.18.0",
+    "generative_model_turns": 0,
+    "image_calls": 0,
+    "models_bytes": 533070470,
+    "memory_limit_bytes": 2147483648,
+    "prepare_exit": 0,
+    "prepare_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "prepare_stdout_sha256": "56b1b800675242083ada31859bb672284ccf67df7d11647f0e8e372b60f17cab",
+    "prepare_memory_peak": 1393217536,
+    "prepare_memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+    "required_catalog_present": true,
+    "mediated_catalog_names": [
+      "ken_find",
+      "ken_read",
+      "ken_recall",
+      "ken_related",
+      "ken_remember"
+    ],
+    "mediated_catalog_hash": "38450070e5048e72ebbab623533ae57969d44548f23cf5afa41a8d4fbbabd91a",
+    "mediated_read_success": true,
+    "find_is_error": false,
+    "read_is_error": false,
+    "tool_result_sha256": {
+      "ken_find": "a14ce23218101ea62f1ced10d8a80c45529926efa72dbb65638ca4e2a92422ce",
+      "ken_read": "a78b3794e2202d1bf3b8fa56add3fa5ea074dadd97b0f6053248e133d417c034"
+    },
+    "memory_peak_bytes": 1393217536,
+    "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+    "stable_root": "/run/researcher-source",
+    "both_ken_peers_closed": true,
+    "manifest_profile": "readonly-published-ken-v1",
+    "status": "passed",
+    "domain_retired": true,
+    "source_unchanged": true
+  },
+  "native": "Real0.166 config/metadata only; composed model protocol controlled, no new generative turn or account credential use.",
+  "limits": "Synthetic source and provisioned authority/domain; business/analysis are supplied host facades, not complete host actor enrollment or product-factory adoption."
+}

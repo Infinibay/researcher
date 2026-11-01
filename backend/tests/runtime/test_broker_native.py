@@ -105,6 +105,113 @@ def test_native_launch_rejects_a_command_peer_before_reserving(
     assert storage.load().records.get("broker:active") is None
 
 
+async def test_owned_native_host_tools_profile_is_explicit_and_keeps_shell_disabled(
+    broker_setup, native_asset
+):
+    from backend.runtime.authority_journal import AuthorityConflict
+    from backend.runtime.broker_stdio import AsyncPeerBroker
+    from backend.runtime.codex_rpc import JsonRpcClient
+    from backend.runtime.egress_proxy import EgressPolicy
+    from backend.runtime.native_network import NativeNetwork
+
+    _s, registry, command, broker, storage, _path = broker_setup
+    peer = native_peer(registry, command)
+    network = NativeNetwork.inspect(
+        resolver="/etc/resolv.conf", ca_bundle="/etc/ssl/certs/ca-certificates.crt"
+    )
+    policy = EgressPolicy(("allowed.example",))
+    async with (
+        AsyncPeerBroker(broker) as owner,
+        JsonRpcClient(
+            owner.native(
+                registry,
+                peer,
+                operation_key="host-tools",
+                asset=native_asset,
+                network=network,
+                egress=policy,
+                host_tools=True,
+            ),
+            request_timeout=10,
+        ) as rpc,
+    ):
+        await rpc.request(
+            "initialize",
+            {"clientInfo": {"name": "researcher-host-tools-test", "version": "1"}},
+        )
+        await rpc.notify("initialized")
+        config = (await rpc.request("config/read", {"includeLayers": False}))["config"]
+        assert all(
+            config["features"][name] is True
+            for name in (
+                "code_mode_host",
+                "code_mode_interrupt",
+                "skip_host_skill_discovery",
+            )
+        )
+        assert all(
+            config["features"][name] is False
+            for name in ("code_mode", "shell_tool", "plugins", "apps", "multi_agent")
+        )
+        assert config.get("mcp_servers") in (None, {})
+        assert (await rpc.request("account/read", {"refreshToken": False}))[
+            "account"
+        ] is None
+        operation = next(
+            v for k, v in storage.load().records.items() if k.startswith("broker:op:")
+        )
+        assert operation["runtime_manifest"]["host_tools"] is True
+        assert (
+            operation["runtime_manifest"]["profile"]
+            == "readonly-native-codex-connect-host-tools-v1"
+        )
+        with pytest.raises(AuthorityConflict):
+            broker.run_native(
+                registry,
+                peer,
+                operation_key="host-tools",
+                asset=native_asset,
+                network=network,
+                egress=policy,
+            )
+
+
+@pytest.mark.parametrize("host_tools", [True, "true"])
+def test_host_tool_profile_requires_private_network_policy_before_reserving(
+    broker_setup, native_asset, host_tools
+):
+    _s, registry, command, broker, storage, _path = broker_setup
+    with pytest.raises(TypeError, match="Host tools"):
+        broker.run_native(
+            registry,
+            native_peer(registry, command),
+            operation_key="invalid-host-tools",
+            asset=native_asset,
+            host_tools=host_tools,
+        )
+    assert storage.load().records.get("broker:active") is None
+
+
+@pytest.mark.parametrize("host_tools", [0, "", None])
+async def test_async_host_tool_option_does_not_coerce_false_values(
+    broker_setup, native_asset, host_tools
+):
+    from backend.runtime.broker_stdio import AsyncPeerBroker
+
+    _s, registry, command, broker, storage, _path = broker_setup
+    async with AsyncPeerBroker(broker) as owner:
+        endpoint = owner.native(
+            registry,
+            native_peer(registry, command),
+            operation_key="invalid-false",
+            asset=native_asset,
+            host_tools=host_tools,
+        )
+        with pytest.raises(TypeError, match="Host tools"):
+            await endpoint.open(limit=4096)
+        assert storage.load().records.get("broker:active") is None
+
+
 def test_native_profile_allows_internet_client_sockets_without_host_controls(
     broker_setup, tmp_path, monkeypatch
 ):

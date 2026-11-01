@@ -106,3 +106,23 @@ async def test_cancelled_mcp_scope_closes_only_ken_peer(broker_setup, mcp_instal
             await task
         assert registry.inspect(peer)["state"] == "closed" and path.exists()
         assert await sibling.request("echo", {"value": 200}) == {"value": 200}
+
+
+async def test_mcp_scope_preserves_caller_exception_after_sdk_and_peer_close(
+    broker_setup, mcp_installation
+):
+    from backend.runtime.broker_mcp import broker_mcp
+    from backend.runtime.broker_stdio import AsyncPeerBroker
+
+    _s, registry, command, broker, _storage, _path = broker_setup
+    peer = ken_peer(registry, command)
+    error = RuntimeError("Original caller failure")
+    async with AsyncPeerBroker(broker) as owner:
+        endpoint = owner.ken(
+            registry, peer, operation_key="caller-error", installation=mcp_installation
+        )
+        with pytest.raises(RuntimeError) as caught:
+            async with broker_mcp(endpoint):
+                raise error
+        assert caught.value is error
+        assert registry.inspect(peer)["state"] == "closed"

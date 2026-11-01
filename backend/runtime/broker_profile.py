@@ -271,10 +271,11 @@ class NativeCapsule(AnalysisCapsule):
     remain denied. Ken/code-mode/full inference integration is not admitted here.
     """
 
-    def __init__(self, binding, asset, info_fd, *, network=None):
+    def __init__(self, binding, asset, info_fd, *, network=None, host_tools=False):
         super().__init__(binding, None, info_fd)
         self.asset = asset
         self.network_config = network
+        self.host_tools = host_tools
         self._network_fds = {}
         self._asset_fd = None
 
@@ -306,7 +307,16 @@ class NativeCapsule(AnalysisCapsule):
             "skill_search",
             "shell_snapshot",
         ):
+            if feature == "code_mode_host" and self.host_tools:
+                continue
             command += ["--disable", feature]
+        if self.host_tools:
+            for feature in (
+                "code_mode_host",
+                "code_mode_interrupt",
+                "skip_host_skill_discovery",
+            ):
+                command += ["--enable", feature]
         command += [
             "-c",
             'forced_login_method="chatgpt"',
@@ -376,8 +386,10 @@ class NativeCapsule(AnalysisCapsule):
 class NativeProxyCapsule(NativeCapsule):
     """Private NET with a trusted FD relay and a stricter native child filter."""
 
-    def __init__(self, binding, asset, info_fd, *, network, channel):
-        super().__init__(binding, asset, info_fd, network=network)
+    def __init__(self, binding, asset, info_fd, *, network, channel, host_tools=False):
+        super().__init__(
+            binding, asset, info_fd, network=network, host_tools=host_tools
+        )
         self.channel = channel
 
     def _network(self):

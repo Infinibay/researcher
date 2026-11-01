@@ -87,7 +87,14 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    desde fuente como desde wheel extraído. El primer límite de512MiB produjo OOM;
    con política explícita del host de2GiB pasó con pico aproximado1,3GiB. El default
    anterior se conserva y la política compartida queda registrada antes del nacimiento.
-   Esto todavía no compone Ken/negocio/code-mode con inferencia nativa productiva.
+   La composición interna ya exige las cinco herramientas de Ken, sus esquemas y
+   argumentos válidos, preparación cerrada del mismo intento y catálogo estable
+   antes de thread/turn/herramientas. Un perfil explícito habilita code-mode del
+   host y mantiene shell/plugins/agentes desactivados; se comprobó config real.
+   El protocolo compuesto controlado ejercita Ken y negocio y bloquea un efecto
+   posterior si detecta caída/cambio de Ken. Falta la prueba generativa conjunta y
+   la adopción productiva; el ciclo de vida de negocio/análisis aportados sigue
+   siendo responsabilidad del host. No prueba disponibilidad continua entre checks.
 7. **Contexto y procedencia:** versiones al corregir o cambiar trece entradas de tarea;
    retiro de autoridad antigua; respuesta asociada a pregunta/versión; repositorio
    admitido inmutable y comienzo de cola explícito. Registro exacto de la entrada
@@ -155,20 +162,21 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 
 ## Verificación más reciente
 
-- Suite completa:1495 casos;1392 pasan,100 fallan con las mismas identidades de la
+- Suite completa:1523 casos;1420 pasan,100 fallan con las mismas identidades de la
   línea base y 3 se omiten. La suite global sigue roja; no hay nuevas fallas.
-- Runtime:562 pasan. Los19 casos nuevos cubren perfil/transporte Ken, MCP sobre
-  tuberías, cancelación/errores, política de recursos y migración31. También pasan
-  nueve pruebas de migración histórica tras actualizar sus fixtures de versiones.
-  La cobertura previa incluye HTTPS con SDK real, red privada, cierre, recuperación
-  y carreras Stop/arranque; sus casos siguen incluidos en la suite completa.
-- Paquete actual:36 módulos runtime, migración/registro DB y fixtures cambiadas
-  coinciden con el código. El wheel extraído importa de forma aislada y ejecuta
-  Ken publicado offline: preparación/búsqueda/lectura, dos peers cerrados, dominio
-  retirado y fuente intacta. Pico observado1,30GiB dentro de límite explícito2GiB,
-  sin OOM. La evidencia conserva además el fallo inicial por OOM a512MiB.
-  El ensayo de empaquetado anterior comprobó Codex real en NET privado y análisis
-  hermano, sin inferencia ni cuenta; no se repitió acceso a la suscripción aquí.
+- Runtime:590 pasan. Los28 casos añadidos cubren mediación Ken, esquemas/argumentos,
+  perfil nativo host-tools y composición antes de admisión/efectos, incluido cierre
+  de Ken durante un turno y conservación del error original tras cerrar MCP.
+  Las pruebas anteriores de migraciones, HTTPS, red privada, Stop/recuperación y
+  carreras siguen incluidas en la suite completa.
+- Paquete actual:38 módulos runtime y seis fixtures/pruebas cambiadas coinciden con
+  el código. El wheel extraído pasa38 casos: protocolo compuesto controlado y
+  configuración nativa real, sin generación. Otro ensayo ejecuta Ken publicado
+  offline: preparación, catálogo obligatorio, lectura mediada y búsqueda/lectura
+  directa, dos peers cerrados, dominio retirado y fuente intacta. Pico aproximado
+  1,30GiB dentro de límite explícito2GiB, sin OOM. No es carga mixta de inferencia.
+  Se conserva el fallo anterior por OOM a512MiB. No hubo acceso nuevo a credenciales
+  de cuenta, generación ni imágenes. Lock/sync/export/build offline comprobados.
 - Ensayo real separado: account/read reconoce ChatGPT por el perfil privado, sin
   thread/start ni turn/start; auth.json ausente y dominio/peer/canales cerrados. No
   se guardaron tokens ni datos personales de cuenta. No prueba renovación OAuth,
@@ -201,7 +209,12 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
   siguen pendientes;0/12 rutas aceptadas. Dependencias:18 avisos npm preexistentes
   (5 bajos,3 moderados,10 altos), sin nuevos paquetes vulnerables por Playwright/axe.
 
-Evidencia actual: [resultados actuales](broker-ken-results.json),
+Evidencia actual: [resultados actuales](ken-host-results.json),
+[composición del host y límites](ken-host-evidence.json),
+[Ken publicado mediado](ken-host-live.json),
+[paquete actual](ken-host-packaging.json),
+[contrato de admisión y pendientes](../architecture/broker-inference.md),
+[resultados del perfil Ken anterior](broker-ken-results.json),
 [Ken bajo el broker](broker-ken-evidence.json),
 [Ken publicado y memoria](broker-ken-live.json),
 [paquete de Ken](broker-ken-packaging.json),

@@ -1198,7 +1198,12 @@
         "backend/tests/runtime/test_broker_ken.py",
         "backend/tests/runtime/test_broker_mcp.py",
         "backend/tests/runtime/test_broker_limits.py",
-        "backend/tests/runtime/test_ken_peer_migration.py"
+        "backend/tests/runtime/test_ken_peer_migration.py",
+        "docs/architecture/broker-inference.md",
+        "docs/modernization/ken-host-evidence.json",
+        "docs/modernization/ken-host-results.json",
+        "docs/modernization/ken-host-live.json",
+        "docs/modernization/ken-host-packaging.json"
       ],
       "remaining": [
         "Full comparative/product scenarios and failure acceptance"
@@ -2037,7 +2042,12 @@
         "backend/tests/runtime/test_broker_ken.py",
         "backend/tests/runtime/test_broker_mcp.py",
         "backend/tests/runtime/test_broker_limits.py",
-        "backend/tests/runtime/test_ken_peer_migration.py"
+        "backend/tests/runtime/test_ken_peer_migration.py",
+        "docs/architecture/broker-inference.md",
+        "docs/modernization/ken-host-evidence.json",
+        "docs/modernization/ken-host-results.json",
+        "docs/modernization/ken-host-live.json",
+        "docs/modernization/ken-host-packaging.json"
       ],
       "implemented": [
         "Actual real-journal global reserve, contained namespace birth, global identity publication, concrete source PeerRegistry bind and sole pre-start G decision in one host operation.",
@@ -2069,7 +2079,12 @@
         "backend/tests/runtime/test_broker_mcp.py",
         "backend/tests/runtime/test_broker_limits.py",
         "backend/tests/runtime/test_ken_peer_migration.py",
-        "docs/modernization/broker-ken-results.json"
+        "docs/modernization/broker-ken-results.json",
+        "docs/architecture/broker-inference.md",
+        "docs/modernization/ken-host-evidence.json",
+        "docs/modernization/ken-host-results.json",
+        "docs/modernization/ken-host-live.json",
+        "docs/modernization/ken-host-packaging.json"
       ],
       "implemented": [
         "Explicit Ken peer kind and atomic migration31 preserve rowids/history/custom objects/FK targets with rollback.",
@@ -2082,6 +2097,32 @@
         "Required catalog mediation and native code-mode/business/subscription composition before turn admission.",
         "Mixed native/Ken/tool resource sizing, product launcher adoption and complete host enrollment.",
         "Full scope remains engine/autonomy/flows/all71 tools/11 categories/prompts/books/evals/human/UI/data/operation/100 baseline failures/final branch review."
+      ]
+    },
+    "owned_host_inference": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/broker-inference.md",
+        "docs/modernization/ken-host-evidence.json",
+        "docs/modernization/ken-host-results.json",
+        "docs/modernization/ken-host-live.json",
+        "docs/modernization/ken-host-packaging.json"
+      ],
+      "implemented": [
+        "Required-five Ken catalog/JSON schema/argument mediation and shared result/authority boundaries.",
+        "Explicit private-NET native host-tools feature profile verified with actual0.166 config, no native-owned MCP.",
+        "Same-broker closed successful Ken preparation and readiness before native/thread/turn; refresh before dynamic tool dispatch.",
+        "Controlled composed protocol reads Ken then business; detected midturn failure prevents business dispatch; closed scopes preserve caller error.",
+        "Source and extracted-wheel published Ken catalog/mediated read succeeded;38 packaged tests passed."
+      ],
+      "remaining": [
+        "Supplied business/analysis actor origin and lifecycle, direct host service binding or owned-worker composition",
+        "Actual joint native subscription/Ken/business turn, mixed-load sizing and vendor WebSocket",
+        "Managed state/credentials/OAuth/account coexistence, complete-domain enrollment and product factories",
+        "Resume with durable original thread/catalog and reconciliation",
+        "Full71 tools/11 categories and all engine/loops/autonomy/flows/agent communication",
+        "All prompts/books/evals/human comprehension, UI concepts/routes/acceptance, data/restore/bootstrap/CLI/TUI/dependencies",
+        "100 inherited failures and final fresh whole-branch review"
       ]
     }
   }

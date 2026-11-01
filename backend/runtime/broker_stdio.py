@@ -86,7 +86,15 @@ class AsyncPeerBroker:
         return self._endpoint(registry, peer_id, operation_key, code=code)
 
     def native(
-        self, registry, peer_id, *, operation_key, asset, network=None, egress=None
+        self,
+        registry,
+        peer_id,
+        *,
+        operation_key,
+        asset,
+        network=None,
+        egress=None,
+        host_tools=False,
     ):
         return self._endpoint(
             registry,
@@ -95,6 +103,7 @@ class AsyncPeerBroker:
             asset=asset,
             network=network,
             egress=egress,
+            host_tools=host_tools,
         )
 
     def ken(
@@ -129,6 +138,7 @@ class AsyncPeerBroker:
         ken=None,
         model_cache=None,
         ken_mode="mcp",
+        host_tools=False,
     ):
         if not self._entered or self._closing is not None:
             raise AuthorityConflict("Async broker is not admitted")
@@ -146,6 +156,7 @@ class AsyncPeerBroker:
             ken=ken,
             model_cache=model_cache,
             ken_mode=ken_mode,
+            host_tools=host_tools,
         )
         self._endpoints.append(endpoint)
         return endpoint
@@ -173,6 +184,8 @@ class AsyncPeerBroker:
             payload["network"] = endpoint.network
         if endpoint.egress is not None:
             payload["egress"] = endpoint.egress
+        if endpoint.host_tools is not False:
+            payload["host_tools"] = endpoint.host_tools
         future = loop.run_in_executor(
             self._launch_pool,
             lambda: start(
@@ -298,6 +311,7 @@ class BrokerEndpoint:
         ken=None,
         model_cache=None,
         ken_mode="mcp",
+        host_tools=False,
     ):
         self.owner, self.registry, self.peer_id = owner, registry, peer_id
         self.operation_key, self.code = operation_key, code
@@ -305,6 +319,7 @@ class BrokerEndpoint:
         self.network = network
         self.egress = egress
         self.ken, self.model_cache, self.ken_mode = ken, model_cache, ken_mode
+        self.host_tools = host_tools
         self.stdin = self.stdout = self.stderr = None
         self._raw = None
         self._operation = None
