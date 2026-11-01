@@ -61,6 +61,50 @@ turn/start pendientes, una sola llamada de turno, cuenta equivocada, token sin
 cambios, presupuesto, retirada durante lectura, errores redactados, saturación y
 cancelación. Ese peer prueba el protocolo, no una suscripción real.
 
+## Coordinador de renovación del host
+
+`HostSubscription(source, managed_rpc)` posee una conexión administrada distinta
+de las conexiones de inferencia. El despliegue debe suministrar el endpoint de
+confianza, sin abrir, y su fuente privada existente. El coordinador inicializa ese
+RPC, comprueba modo ChatGPT y fija la cuenta de la fuente antes de admitir clientes.
+No crea el lanzador, no acredita su inscripción en el dominio y no vuelve seguro
+un endpoint arbitrario sólo por recibirlo como argumento.
+
+```python
+async with HostSubscription(source, enrolled_managed_rpc) as subscription:
+    auth = subscription.connection(active=attempt_is_active)
+    # Entregar auth al CodexSession del intento; nunca el RPC administrado.
+```
+
+Cada cliente conserva el hash de su última instantánea. Si al recibir unauthorized
+el fichero ya contiene otro token de la misma cuenta, lo reutiliza. Si sigue igual,
+un lock del propietario serializa `account/read` con `refreshToken=true`; el SDK en
+modo administrado realiza OAuth y actualiza su almacenamiento. Se vuelve a leer
+la fuente privada y se exige misma cuenta y access token distinto. No se implementa
+un cliente OAuth HTTP adicional ni se entrega el refresh token al ejecutor.
+
+La serialización abarca las conexiones que comparten **este propietario**; no
+coordina otras aplicaciones o procesos que escriban auth.json. Una adopción
+productiva debe garantizar un dueño real por cuenta y definir la convivencia con
+el CLI del usuario. Cambiar el fichero externamente se detecta al leer, pero no
+constituye una exclusión entre escritores.
+
+El máximo por defecto es ocho resoluciones pendientes y seis segundos por
+resolución, incluyendo espera del lock. Cancelar un consumidor no cancela una
+rotación ya admitida ni libera anticipadamente su lock; cancelar una petición en
+espera tampoco retira la cuenta compartida. El cliente retirado nunca recibe la
+credencial. Una renovación incierta, cuenta cambiada o token sin cambios retira al
+proveedor y cierra su RPC, sin reintento automático. El cierre pertenece al host y
+continúa si se cancela quien lo esperaba; primero termina el cierre físico y luego
+retira los callbacks. Los clientes reciben un fallo acotado, sin esperar su turno
+completo ni exponer errores de la fuente o del SDK.
+
+Las pruebas usan procesos JSON-RPC controlados y dos sesiones con credenciales
+ficticias: ambas completan un turno con una sola rotación. También cubren retirada
+del consumidor activo/en espera, saturación, cambio externo, cambio de cuenta,
+token sin cambios, error, deadline y cancelación del cierre. **No prueban una
+renovación OAuth real ni habilitan la fábrica productiva.**
+
 ## Evidencia del SDK real y límite actual
 
 El Codex **0.166.0 real**, dentro del broker y de un namespace de red privado,
@@ -76,9 +120,10 @@ por el binario instalado contiene esos campos, pero también una descripción
 «internal/unstable». La compatibilidad queda fijada a la versión probada; no se
 infiere que otras versiones o rutas OAuth admitan el mismo contrato.
 
-Siguen pendientes el proveedor de renovación real y compartido por cuenta, estado
-nativo persistente aislado, TLS/DNS/egress, Ken y negocio en el perfil nuevo,
-ensayo real por suscripción y adopción en CodexRuntime/RuntimeService. La composición
-administrada y la inscripción del dominio completo de actores también siguen
-pendientes. La aceptación de un login local, una cuenta leída y un turno completado
-son evidencias distintas; ninguna acepta por sí sola una tarea del producto.
+Siguen pendientes la composición del endpoint administrado real y su ensayo OAuth,
+autoridad única por cuenta entre procesos, estado nativo persistente aislado,
+TLS/DNS/egress, Ken y negocio en el perfil nuevo, ensayo real por suscripción y
+adopción en CodexRuntime/RuntimeService. La inscripción del dominio completo de
+actores también sigue pendiente. La aceptación de un login local, una cuenta leída
+y un turno completado son evidencias distintas; ninguna acepta por sí sola una
+tarea del producto.

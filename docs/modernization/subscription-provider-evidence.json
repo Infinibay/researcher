@@ -1,0 +1,48 @@
+{
+  "base_commit": "f0e258f",
+  "date": "2026-11-01",
+  "scope": "Single host owner coordinating managed-mode Codex account/read refreshToken=true and delivering per-connection access snapshots. Injected trusted unopened endpoint; no production enrolled launcher, cross-process account authority or real OAuth trial claimed.",
+  "source_sha256": {
+    "backend/runtime/subscription_provider.py": "f5c65595fd3b64aede88e3a4a27ce8629804b68796d9a4ca02466480ee1fa813",
+    "backend/tests/runtime/fake_managed_auth_server.py": "d28745ecda2702c06b090e1ce5616c09ea37b64038f8a8ed29a859d6a7768765",
+    "backend/tests/runtime/test_subscription_provider.py": "a1a077df91987524b6efec26631c90146288e3105f8a88bd7bb74c73b415452c"
+  },
+  "raw_artifacts_sha256": {
+    "subscription-provider-red.log": "14859778f631fe663c50b7513028373addcbcbb980e5c274171e904f99306af0",
+    "subscription-provider-first.log": "0096427cd719a25c667f4b9e9c66c5f0173971f38abe03cd9f766b61e01a2927",
+    "subscription-provider-waiter-red.log": "c062346d0d3ad056f81a74ba19ca95ab919bd4fd5b5ee3ae45406b682f984066",
+    "subscription-provider-close-red.log": "2759989aa8affd4e736116f600e18c89de0e7adf4e794ec37015c65019e116a2",
+    "subscription-provider-close-owner-red.log": "2c1acfb90e7f782e8a63bcc2aa614e4fa8f3fe5835355bfae45736f7b34df0d1",
+    "subscription-provider-final-focused.log": "333f2b265d5fb78bd02e7a40e9dc4ec0d7b7841a84a4b843b63271605091f89a",
+    "subscription-provider-full.xml": "44eaa1ec306b249aeced2e04312d44f3408f357ba22a71582a7aeb228ffa18ee",
+    "subscription-provider-full.log": "d4707afbf6cf4aa38be174035eb5765c9f8b916cd32fc002b87a8b9e331a01a9",
+    "subscription-provider-build.log": "6d14bcb95f174647ab62ea6361948ed551857846a2a3e380b500d04f3b2fb6d8",
+    "subscription-provider-package.log": "04ee39ae67d32b590f0dd106f3d9d371821c2bfdd9acba9d9a235e3e32725b30",
+    "verify-subscription-provider-package.py": "51dbc95c7956b9fd4871b3bcb5a54c469c6c12de56ae00869c0b593794701f6d"
+  },
+  "verified": [
+    "Two native CodexSession connections over real deterministic JSON-RPC complete one host turn each after a single managed credential rotation. No native turn replay.",
+    "A new same-account credential already present on disk is reused without another forced refresh. Account changes, unchanged token or unconfirmed SDK refresh retire the provider; source/SDK errors are redacted.",
+    "Cancelling a consumer leaves the host-owned in-flight rotation and lock intact. Withdrawing a queued consumer does not poison the account still used by other sessions.",
+    "Pending capacity and resolution deadlines are bounded. Overflow fails only the consumer; uncertain managed refresh physically closes the provider and requires explicit host reopening.",
+    "Provider shutdown fails waiting native connections promptly after physical close. Cancellation of the shutdown waiter does not drain callbacks before physical shutdown; the owned shutdown continues.",
+    "Missing managed source does not start a credential peer or create a source file.",
+    "Full suite1415:1312 pass,100 exact original baseline failures,3 skip,29 warnings;482 runtime. Focused43 pass including12 provider cases.",
+    "Wheel31 runtime Python files match source; isolated -I -S smoke executes the new two-client coordinator with deterministic peers, plus previous actual account-free native Codex/analysis broker sibling and recovery checks."
+  ],
+  "diagnosed": [
+    "Initial cancellation test waited for native abort reconciliation before releasing the controlled host refresh, causing the deliberately short host deadline to expire. Release now follows observed physical client close; terminal reconciliation is awaited afterward. No product timeout was weakened.",
+    "Queued consumer withdrawal originally entered the generic provider-failure branch and retired the shared account; dedicated consumer withdrawal preserves the owner. RED1 failed8 passed, then corresponding integration cases passed.",
+    "Host-owned resolution cancellation propagated as consumer cancellation and silently dropped the private callback; distinguish cancellation of the owned task from cancellation of its waiter, so native sees a prompt sanitized connection failure.",
+    "Cancellation of an aclose waiter originally drained callbacks before physical close; one shielded owned shutdown now preserves physical-before-drain ordering."
+  ],
+  "limits": [
+    "Delegates renewal to an injected managed-mode SDK RPC; no ad-hoc OAuth HTTP client. Real SDK OAuth rotation, entitlement and subscription inference are not demonstrated by these deterministic peers.",
+    "Coordinator serializes only clients of one HostSubscription instance. Other CLI/apps/processes can still mutate the managed file; single-account authority and coexistence must be established in product composition.",
+    "Trusted endpoint launch/enrollment, all actor origin, persistent private native state, TLS/DNS/destination policy and published Ken/business/code-mode integration remain pending; product factories unchanged.",
+    "No real credentials used, model/image generation, user DB migration, host service/account install, shared-parent cgroup changes, push/merge/deploy. All71 tools, engine, prompts, human communication and all12 UI routes remain in scope."
+  ],
+  "primary_references": [
+    "https://learn.chatgpt.com/docs/app-server"
+  ]
+}

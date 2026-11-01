@@ -86,7 +86,11 @@
         "docs/modernization/subscription-evidence.json",
         "docs/modernization/subscription-results.json",
         "backend/tests/runtime/test_subscription_session.py",
-        "backend/tests/runtime/test_private_rpc.py"
+        "backend/tests/runtime/test_private_rpc.py",
+        "backend/runtime/subscription_provider.py",
+        "backend/tests/runtime/test_subscription_provider.py",
+        "docs/modernization/subscription-provider-evidence.json",
+        "docs/modernization/subscription-provider-results.json"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -197,7 +201,11 @@
         "docs/modernization/subscription-evidence.json",
         "docs/modernization/subscription-results.json",
         "backend/tests/runtime/test_subscription_session.py",
-        "backend/tests/runtime/test_private_rpc.py"
+        "backend/tests/runtime/test_private_rpc.py",
+        "backend/runtime/subscription_provider.py",
+        "backend/tests/runtime/test_subscription_provider.py",
+        "docs/modernization/subscription-provider-evidence.json",
+        "docs/modernization/subscription-provider-results.json"
       ]
     },
     "C08": {
@@ -300,7 +308,11 @@
         "docs/modernization/subscription-evidence.json",
         "docs/modernization/subscription-results.json",
         "backend/tests/runtime/test_subscription_session.py",
-        "backend/tests/runtime/test_private_rpc.py"
+        "backend/tests/runtime/test_private_rpc.py",
+        "backend/runtime/subscription_provider.py",
+        "backend/tests/runtime/test_subscription_provider.py",
+        "docs/modernization/subscription-provider-evidence.json",
+        "docs/modernization/subscription-provider-results.json"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -382,7 +394,11 @@
         "docs/modernization/subscription-evidence.json",
         "docs/modernization/subscription-results.json",
         "backend/tests/runtime/test_subscription_session.py",
-        "backend/tests/runtime/test_private_rpc.py"
+        "backend/tests/runtime/test_private_rpc.py",
+        "backend/runtime/subscription_provider.py",
+        "backend/tests/runtime/test_subscription_provider.py",
+        "docs/modernization/subscription-provider-evidence.json",
+        "docs/modernization/subscription-provider-results.json"
       ],
       "remaining": [
         "Durable product startup/shutdown and all tool lifecycle integration; old flows are not covered by owned command evidence",
@@ -599,7 +615,11 @@
         "docs/modernization/subscription-evidence.json",
         "docs/modernization/subscription-results.json",
         "backend/tests/runtime/test_subscription_session.py",
-        "backend/tests/runtime/test_private_rpc.py"
+        "backend/tests/runtime/test_private_rpc.py",
+        "backend/runtime/subscription_provider.py",
+        "backend/tests/runtime/test_subscription_provider.py",
+        "docs/modernization/subscription-provider-evidence.json",
+        "docs/modernization/subscription-provider-results.json"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -845,7 +865,11 @@
         "docs/modernization/subscription-evidence.json",
         "docs/modernization/subscription-results.json",
         "backend/tests/runtime/test_subscription_session.py",
-        "backend/tests/runtime/test_private_rpc.py"
+        "backend/tests/runtime/test_private_rpc.py",
+        "backend/runtime/subscription_provider.py",
+        "backend/tests/runtime/test_subscription_provider.py",
+        "docs/modernization/subscription-provider-evidence.json",
+        "docs/modernization/subscription-provider-results.json"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable",
@@ -904,7 +928,11 @@
         "docs/modernization/subscription-evidence.json",
         "docs/modernization/subscription-results.json",
         "backend/tests/runtime/test_subscription_session.py",
-        "backend/tests/runtime/test_private_rpc.py"
+        "backend/tests/runtime/test_private_rpc.py",
+        "backend/runtime/subscription_provider.py",
+        "backend/tests/runtime/test_subscription_provider.py",
+        "docs/modernization/subscription-provider-evidence.json",
+        "docs/modernization/subscription-provider-results.json"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable",
@@ -1030,7 +1058,11 @@
         "docs/modernization/subscription-evidence.json",
         "docs/modernization/subscription-results.json",
         "backend/tests/runtime/test_subscription_session.py",
-        "backend/tests/runtime/test_private_rpc.py"
+        "backend/tests/runtime/test_private_rpc.py",
+        "backend/runtime/subscription_provider.py",
+        "backend/tests/runtime/test_subscription_provider.py",
+        "docs/modernization/subscription-provider-evidence.json",
+        "docs/modernization/subscription-provider-results.json"
       ]
     },
     "U07": {

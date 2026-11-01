@@ -2298,3 +2298,68 @@ engine/autonomy/roles/flows/agent communication, exact Git candidate/review/CI, 
 alias/transfer/budgets, dependencies/18 npm advisories and100 baseline failures stay
 in scope. UI6/36 desktop+2/12 mobile,2 pilots,0/12 accepted:30+10 concepts/10 routes
 and all12 acceptance remain. Final fresh independent whole-branch review required.
+
+## Current task: managed host subscription coordinator — basef0e258f
+
+- Add an owned managed-mode RPC coordinator using account/read refreshToken=true,
+  delegating actual OAuth to the SDK. The host supplies the trusted unopened RPC
+  endpoint and existing private managed source; no managed HOME/token is exposed
+  to the isolated inference peer. No new ad-hoc OAuth HTTP client or API fallback.
+- Serialize shared refreshes under one host owner; each native connection tracks
+  its last snapshot so a new on-disk token is reused without another forced refresh.
+  Cancellation of a consumer must not release the host rotation lock mid-flight.
+- Bound pending resolutions and deadlines; retire/physically close on uncertain
+  managed refresh, account change or unchanged token. Source and RPC exceptions
+  remain redacted. No product factory/enrollment claim from an injected endpoint.
+- Deterministic tests exercise real JSON-RPC and two native sessions, shared rotation,
+  consumer cancellation, stale/switch/error, external rotation, missing source and
+  timeout. Ordinary suite remains offline; real subscription proof remains separate.
+
+## Managed host subscription coordinator checkpoint — basef0e258f
+
+- RED8 missing provider cases confirmed. Initial integration7 pass1 failure was a
+  test orchestration error: waiting for the native abort's2s reconciliation before
+  releasing a1s host refresh. Release now follows observed physical client close,
+  then awaits reconciliation; no product timeout was weakened.
+- Queued-withdrawal RED1 failed8 pass exposed generic error poisoning the shared
+  account. Dedicated consumer withdrawal now leaves the host owner available.
+- Host-close RED proved callback cancellation silently dropped the native refresh
+  response. Distinguish cancellation of the owned resolution from cancellation of
+  its waiter; the former becomes prompt sanitized connection failure.
+- Cancelled-close RED proved callback drain ran before delayed physical closure.
+  Shield one host-owned shutdown and preserve physical-before-drain ordering.
+- GREEN43 focused includes12 provider cases. Full1415:1312 pass,100 exact original
+  baseline failure identities,3 skip,29 warnings;482 runtime pass. Offline build
+  succeeded; wheel31 runtime bytes match, isolated -I -S two-client managed RPC
+  coordination plus existing real account-free native/analysis broker smoke passed.
+- Ruling: reuse the official managed account/read refreshToken=true RPC — SDK owns
+  OAuth and storage — rather than invent HTTP refresh semantics — cost: requires
+  a trusted enrolled managed endpoint and real OAuth acceptance before adoption.
+- Ruling: coordinate per host owner and reuse a changed same-account snapshot —
+  avoids duplicate refresh races between its sessions — cost: does not serialize
+  external CLI/apps; cross-process account authority/coexistence remains required.
+- Ruling: host owns a rotation after admission even if its consumer disappears;
+  client credential delivery still requires active authority — cost: one bounded
+  account-maintenance operation can finish after its initiating session stops.
+- Ruling: uncertain refresh/unchanged token/account change retires this provider
+  without replay; queued withdrawal/capacity rejection retires only its consumer —
+  cost: real credential/provider failure needs explicit host reconciliation/reopen.
+- No actual credential use/model/image generation, user DB migration, host install,
+  parent cgroup change, push/merge/deploy. No full phase/scenario closed.
+
+## Next brief after managed subscription coordinator
+
+Continue FULL plan. HostSubscription coordinates managed RPC but does not launch
+its trusted enrolled endpoint or prove real OAuth. Compose account ownership across
+processes/coexistence with user CLI, persistent isolated native state, TLS/DNS and
+destination policy, then mandatory published Ken/business/code-mode through owned
+peers. Adopt RuntimeService/CodexRuntime/CommandJobs with actual deployment origin,
+enrollment/non-reused generation/all actor proof; do not claim these from a flag
+or injected RPC. Run bounded actual subscription+Ken through the integrated path
+before mutable tooling. Do not repeat completed source/broker/journal/domain/auth.
+All71 tools/11 categories, engine/autonomy/roles/flows/agent communication, exact
+Git/review/CI, prompts/books/evals/human comprehension, data/restore/bootstrap/CLI/
+TUI/install, aliases/transfer/budgets, dependency upgrades/18 npm advisories and100
+baseline failures remain. Independent UI work can proceed:6/36 desktop+2/12 mobile
+concepts,2 pilots,0/12 accepted;30+10 concepts/10 routes and all12 acceptance remain.
+Final fresh independent whole-branch review required. Full objective stays active.

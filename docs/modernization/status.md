@@ -67,7 +67,10 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    y atiende el control privado incluso con thread/start o turn/start pendientes.
    Retirar autoridad impide enviar respuestas encoladas. El SDK real aceptó un login
    ficticio local pero no pudo comprobar cuenta sin red; no es prueba de suscripción.
-   Faltan renovación OAuth real y adopción de la fábrica productiva.
+   Ya existe un coordinador del host: dos conexiones comparten una rotación por
+   RPC administrado y una cancelación no retira la cuenta de las demás. Se probó
+   con procesos controlados; faltan endpoint real inscrito, ensayo OAuth, autoridad
+   entre procesos y adopción de la fábrica productiva.
 7. **Contexto y procedencia:** versiones al corregir o cambiar trece entradas de tarea;
    retiro de autoridad antigua; respuesta asociada a pregunta/versión; repositorio
    admitido inmutable y comienzo de cola explícito. Registro exacto de la entrada
@@ -134,12 +137,15 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 
 ## Verificación más reciente
 
-- Suite completa:1403 casos;1300 pasan,100 fallan con las mismas identidades de la
+- Suite completa:1415 casos;1312 pasan,100 fallan con las mismas identidades de la
   línea base y 3 se omiten. La suite global sigue roja.
-- Runtime:470 pasan;84 pruebas dirigidas de autenticación/RPC/sesión/broker y recibos.
+- Runtime:482 pasan;43 pruebas dirigidas del coordinador/autenticación/RPC/sesión
+  y recibos, incluyendo12 casos del coordinador administrado. Dos sesiones usan
+  una sola renovación controlada; cancelar una conserva el servicio a la otra.
+  En el checkpoint anterior:84 de autenticación/RPC/sesión/broker y recibos.
   Incluyen un ensayo negativo del SDK real sin red y un peer determinista para
   renovaciones; no se enviaron credenciales reales ni turnos nuevos. La wheel actual
-  contiene30 módulos runtime idénticos y ejecutó el ensayo aislado correspondiente.
+  contiene31 módulos runtime idénticos y ejecutó el ensayo aislado correspondiente.
   En el checkpoint anterior:61 pruebas dirigidas de broker/nativo/proyección/dominio.
   Cuatro casos nativos incluyen Codex real sin cuenta, asset cambiado, kind
   incorrecto y un ELF de diagnóstico de la política del perfil. La wheel ejecutó
@@ -181,9 +187,12 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
   siguen pendientes;0/12 rutas aceptadas. Dependencias:18 avisos npm preexistentes
   (5 bajos,3 moderados,10 altos), sin nuevos paquetes vulnerables por Playwright/axe.
 
-Evidencia actual: [autenticación y límites](subscription-evidence.json),
-[resultados actuales](subscription-results.json),
-[paquete actual verificado](subscription-packaging.json),
+Evidencia actual: [coordinador administrado y límites](subscription-provider-evidence.json),
+[resultados actuales](subscription-provider-results.json),
+[paquete actual verificado](subscription-provider-packaging.json),
+[autenticación y límites](subscription-evidence.json),
+[resultados de autenticación](subscription-results.json),
+[paquete de autenticación](subscription-packaging.json),
 [contrato de autenticación](../architecture/subscription-auth.md),
 [transporte nativo y límites](broker-native-evidence.json),
 [resultados del transporte nativo](broker-native-results.json),
