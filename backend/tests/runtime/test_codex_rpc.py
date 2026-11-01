@@ -21,7 +21,10 @@ async def test_request_response_and_notification_have_independent_paths():
     async with connection() as client:
         assert await client.request("notification") == {"ok": True}
         event = await client.next_message(timeout=1)
-        assert event == {"method": "item/agentMessage/delta", "params": {"delta": "Working"}}
+        assert event == {
+            "method": "item/agentMessage/delta",
+            "params": {"delta": "Working"},
+        }
         assert await client.request("echo", {"value": 42}) == {"value": 42}
 
 
@@ -30,7 +33,9 @@ async def test_response_barrier_identifies_preceding_events_before_they_are_cons
         first = await client.request_ordered("notification")
         assert first.result == {"ok": True}
         assert first.preceding_messages == 1
-        assert (await client.request_ordered("echo", {"value": 7})).preceding_messages == 1
+        assert (
+            await client.request_ordered("echo", {"value": 7})
+        ).preceding_messages == 1
         assert (await client.next_message(timeout=1))["params"]["delta"] == "Working"
         second = await client.request_ordered("notification")
         assert second.preceding_messages == 2
@@ -120,7 +125,9 @@ async def test_request_deadline_also_bounds_a_blocked_stdin_write():
 
     async with connection(close_timeout=0.02) as client:
         await client.request("stubborn")
-        pending = asyncio.create_task(client.request("echo", {"text": "x" * 200000}, timeout=0.02))
+        pending = asyncio.create_task(
+            client.request("echo", {"text": "x" * 200000}, timeout=0.02)
+        )
         try:
             done, _ = await asyncio.wait((pending,), timeout=0.3)
             assert pending in done, "Request deadline did not cover writing to the peer"
@@ -129,3 +136,57 @@ async def test_request_deadline_also_bounds_a_blocked_stdin_write():
         finally:
             pending.cancel()
             await asyncio.gather(pending, return_exceptions=True)
+
+
+async def test_close_during_pending_birth_never_returns_a_live_connection(monkeypatch):
+    import asyncio
+
+    from backend.runtime.codex_rpc import RpcDisconnected
+
+    born = asyncio.Event()
+    release = asyncio.Event()
+    create = asyncio.create_subprocess_exec
+    children = []
+
+    async def delayed(*args, **kwargs):
+        process = await create(*args, **kwargs)
+        children.append(process)
+        born.set()
+        await release.wait()
+        return process
+
+    monkeypatch.setattr(asyncio, "create_subprocess_exec", delayed)
+    client = connection(close_timeout=0.02)
+    starting = asyncio.create_task(client.__aenter__())
+    closing = None
+    try:
+        await asyncio.wait_for(born.wait(), 1)
+        closing = asyncio.create_task(client.aclose())
+        await asyncio.sleep(0)
+        release.set()
+        await closing
+        with pytest.raises(RpcDisconnected):
+            await starting
+        assert children[0].returncode is not None
+    finally:
+        release.set()
+        await asyncio.gather(starting, return_exceptions=True)
+        await client.aclose()
+        if closing is not None:
+            await closing
+
+
+async def test_start_error_retains_cleanup_failure_as_evidence():
+    from backend.runtime.codex_rpc import JsonRpcClient
+
+    class FailedEndpoint:
+        async def open(self, **_):
+            raise ValueError("Start was not admitted")
+
+        async def aclose(self, **_):
+            raise RuntimeError("Closure cannot be proved")
+
+    with pytest.raises(ValueError, match="not admitted") as error:
+        await JsonRpcClient(FailedEndpoint()).__aenter__()
+    assert isinstance(error.value.__cause__, RuntimeError)
+    assert "cannot be proved" in str(error.value.__cause__)

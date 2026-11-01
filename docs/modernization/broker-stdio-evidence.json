@@ -1,0 +1,57 @@
+{
+  "base_commit": "a1e9289",
+  "date": "2026-11-01",
+  "scope": "Async lifecycle-owned JSON-RPC transport over actual in-process PeerBroker analysis peers. Product launchers, authenticated provisioning/enrollment and inference-capable profiles are not migrated by this checkpoint.",
+  "source_sha256": {
+    "backend/runtime/broker_stdio.py": "2b5fa719d36e1689abdf6f5ffacf1bbadc43991af72cc84db216ba20a73217be",
+    "backend/runtime/codex_rpc.py": "9bc9963fb8957a82f7381ad3d8823ccae00844349bc865c23f020beba300f035",
+    "backend/runtime/peer_broker.py": "d5d8f822fccb293ac0885ddfc31212bf67e380ee35a212688dfa18ebba914968",
+    "backend/tests/runtime/test_broker_rpc.py": "e69ae15354be151e3ef8a385e57f016bd5a1f0cf41f088c66f1bbc2bf0ab99ec",
+    "backend/tests/runtime/test_broker_peer_close.py": "d7a0720a55d32fc1af07c3ca80b2593c19498bfdf1294921ea7c34fa0d5fddfb",
+    "backend/tests/runtime/test_codex_rpc.py": "504332119580769461fd0d9a023080708a8ea160b605c7171734bf7eb5553037"
+  },
+  "raw_artifacts_sha256": {
+    "broker-stdio-peer-close-red.log": "a03fd495d5f7d5c8ebaa669dccd9c14d43aae6776e638215c95a7d9e74a2e0ee",
+    "broker-stdio-peer-close-green.log": "2f86d6e00fe040f161a2957fe1080a435069dbb1158c2975c3b86c577069cdf2",
+    "broker-stdio-red.log": "86e163008efdf7f36ff8ef0a87c38bb6b52528478dcf4a2d2bdc1bf7a4a991ef",
+    "broker-stdio-first.log": "f1651bf9a0b892a73fe3fd9b2a79807356cc08ec3759f384f56160fda360be4c",
+    "broker-stdio-close-red.log": "e48994d08911ef2e973c9ff20f159eba44220569c5b425f3095c9419e93e354c",
+    "broker-stdio-close-green.log": "28554117286e78a306255289b56bb6a165a775a336a2d13188c9986018dffbca",
+    "broker-rpc-lifetime-red.log": "47af3329cf6fe6b3980c5ca37752ae444103b4ea7f0bf483c2a97579fc31d9e3",
+    "broker-rpc-lifetime-green.log": "264439679941fb99aea8b3585123158e1a767db08c51138b9b5adf374920299f",
+    "broker-stop-worker-red.log": "2c3afa032a2828f0376402ae11705c065ddbcddb400e91a751f69085595c17cb",
+    "broker-cancel-receipt-red.log": "7b02c41d0ec309edef59648416fc9a24474d1d2a55c9819c99a908425f7f5d09",
+    "broker-stdio-final-focused.log": "e1088aa8c81e6e4efbddbaf5b6970204d84fae7cd90efca9e8760fecb79e5062",
+    "broker-stdio-suite.log": "be5545e9feb45c8a3f0f4f4a13ade09b68632e5ac6751e5209776f29fcc4313d",
+    "broker-stdio-suite.xml": "41c222816f72a26eeb06c4e6f30350ee0cbb680a2e80b3b502fd1e962c6474d4",
+    "broker-stdio-build.log": "dcadba1c38ae88787707b14564ec604ec1ad68727ab4bbc9160d901ed3db0947",
+    "broker-stdio-package-smoke.log": "101da13ed224d47e37a9b2f95f51583788a53900f7e2ee6c5efa42a826327c2e",
+    "broker-stdio-lock.log": "a60ded11f408272d5a4d1ee908161fb97e84b3aff2a11428499bd49536330a82"
+  },
+  "package_verifier_sha256": "88ba550de91656c405ac8815a70acbea63eb885e8a3490b932558c36718404ed",
+  "reports": [
+    "broker-stdio-results.json",
+    "broker-stdio-packaging.json"
+  ],
+  "verified": [
+    "Protocol separated from subprocess birth/closure; existing StdioRpcClient consumers and 15 real-subprocess protocol/lifecycle tests pass.",
+    "Two real broker RPC peers exchange frames; closing one original namespace leaves the sibling transport and participating concession live. Peer-close receipts are idempotent.",
+    "Actual global SQLite writer contention cannot prevent per-peer physical closure; receipt persistence can retry without releasing the attempt or replaying G.",
+    "Real pipes cover ordered notification barrier, server request/response, stderr draining, EOF, invalid/oversized frames, event backpressure and blocked-write deadline.",
+    "Whole-attempt Stop uses its reserved executor while a peer-close worker is blocked; physical domain removal precedes waiting, then owner cleanup drains the worker.",
+    "Cancellation during concrete source bind closes the domain before bind returns; cancellation exactly at a completed birth disposes otherwise undelivered data FDs.",
+    "Blocked-write shutdown reproduced a stale registered FD callback and SQLite corruption in synthetic fixtures; write abort removes selector registration before descriptor release.",
+    "Close racing a real CLI process birth cannot return a live connection; primary startup error retains cleanup failure as chained evidence.",
+    "Full offline suite1357:1254 pass,100 identical baseline failure identities,3 skip,29 warnings. Runtime424 pass; focused27 pass.",
+    "Wheel29 runtime Python bytes match; isolated -I -S native import exchanges actual broker JSON-RPC computing137+63=200, closes the peer while concession remains, retries receipt-only, retires the domain and rejects the old attempt in a fresh domain."
+  ],
+  "limits": [
+    "Adapter is trusted host composition only, not an authenticated IPC service, managed actor enrollment or completed product integration.",
+    "Concrete capsule is readonly standard-library Python; Codex subscription/Ken/business/development profiles still need implementation and validation.",
+    "Early startup cancellation withdraws the entire attempt; ordinary connected endpoint close is per-peer.",
+    "Source-local peer/attempt retirement, durable bounded product outputs and wall/CPU/lease controls remain to integrate. Source DB must not be recreated as a side effect of projection.",
+    "Existing RuntimeService/CommandJobs launchers and legacy engine/flows remain active on their old paths until migration.",
+    "Whole-host origin coverage, removal-before-durable-retirement proof, generation/alias/restore/handoff and uncertain external budgets remain pending.",
+    "No new model calls/images, user DB migration, host accounts/services, shared-parent cgroup changes, push/merge/deploy. Full plan remains in progress."
+  ]
+}

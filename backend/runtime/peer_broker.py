@@ -14,11 +14,20 @@ import time
 from dataclasses import asdict, dataclass
 from uuid import uuid4
 
-from backend.runtime.authority_journal import AuthorityConflict, AuthorityUncertain
+from backend.runtime.authority_journal import (
+    AuthorityBusy,
+    AuthorityConflict,
+    AuthorityUncertain,
+)
 from backend.runtime.broker_profile import AnalysisCapsule
 from backend.runtime.contracts import command_key, text
 from backend.runtime.execution_domain import DomainIdentity, ExecutionDomain
-from backend.runtime.peer_process import NamespaceIdentity, _pidfd, start_ticks
+from backend.runtime.peer_process import (
+    NamespaceIdentity,
+    _pidfd,
+    close_namespace,
+    start_ticks,
+)
 
 
 def _digest(value):
@@ -90,6 +99,12 @@ class PeerBroker:
         self._physical_closed = None
         self._children = {}
         self._gate_observed = {}
+        self._namespaces = {}
+
+    def withdraw(self):
+        """Withdraw new G decisions immediately; not a durable closure receipt."""
+        with self._decision_lock:
+            self._withdrawn.set()
 
     @property
     def _grant_key(self):
@@ -280,6 +295,7 @@ class PeerBroker:
                         if time.monotonic() >= deadline:
                             raise
                         time.sleep(0.01)
+                self._namespaces[operation_id] = identity
                 self._update(
                     operation_id, state="published", namespace=asdict(identity)
                 )
@@ -298,8 +314,7 @@ class PeerBroker:
                 return PeerStart(operation_id, "released", True, PeerTransport(child))
             except BaseException:
                 revoked = self._withdrawn.is_set()
-                with self._decision_lock:
-                    self._withdrawn.set()
+                self.withdraw()
                 try:
                     self._physical()
                 except (OSError, RuntimeError):
@@ -321,8 +336,7 @@ class PeerBroker:
             return self._physical_closed
 
     def revoke(self):
-        with self._decision_lock:
-            self._withdrawn.set()
+        self.withdraw()
         with self._retire_lock:
             # Physical closure cannot wait behind local/global SQL publication.
             try:
@@ -369,6 +383,8 @@ class PeerBroker:
                         puts[key] = {
                             **operation,
                             "state": "closed",
+                            "execution_closed": True,
+                            "closure_reason": "domain_retired",
                             "gate_sent": self._gate_observed.get(
                                 key.removeprefix("broker:op:"), operation["gate_sent"]
                             ),
@@ -382,6 +398,55 @@ class PeerBroker:
                 return puts[self._grant_key]
             finally:
                 self._gate_lock.release()
+
+    def close_peer(self, operation_id):
+        """Stop one original namespace before waiting for publication/SQL.
+
+        Concession remains active for siblings. This owner retains reaping even
+        after the data client closes. Global retirement still belongs to revoke.
+        """
+        child = self._children.get(operation_id)
+        identity = self._namespaces.get(operation_id)
+        if child is None or identity is None:
+            raise AuthorityConflict("Peer is not owned by this live broker")
+        reason = close_namespace(identity, timeout=3)
+        child.wait(timeout=3)
+        if not self._gate_lock.acquire(blocking=False):
+            raise AuthorityBusy(
+                "Peer physically closed; publication must drain before receipt"
+            )
+        try:
+            child.close_handles()
+            snapshot = self.journal.load()
+            key = "broker:op:" + operation_id
+            operation = snapshot.records[key]
+            if operation.get("execution_closed") is True:
+                return operation
+            grant = snapshot.records[self._grant_key]
+            if (
+                grant["owner"] != self._owner
+                or grant["state"] != "active"
+                or operation["grant_id"] != self.grant_id
+            ):
+                raise AuthorityUncertain("Peer retirement authority differs")
+            closed = {
+                **operation,
+                "state": "closed",
+                "execution_closed": True,
+                "closure_reason": reason,
+                "gate_sent": self._gate_observed.get(
+                    operation_id, operation["gate_sent"]
+                ),
+                "exit_code": child._status,
+            }
+            self.journal.commit(
+                snapshot,
+                transition_id="broker-close-peer:" + operation_id,
+                puts={key: closed},
+            )
+            return closed
+        finally:
+            self._gate_lock.release()
 
     @classmethod
     def recover(cls, journal, grant_id):
@@ -410,7 +475,12 @@ class PeerBroker:
         }
         for op_key, operation in snapshot.records.items():
             if op_key.startswith("broker:op:") and operation["grant_id"] == grant_id:
-                puts[op_key] = {**operation, "state": "closed"}
+                puts[op_key] = {
+                    **operation,
+                    "state": "closed",
+                    "execution_closed": True,
+                    "closure_reason": "domain_recovered",
+                }
         journal.commit(snapshot, transition_id="broker-recover:" + grant_id, puts=puts)
         return puts[key]
 

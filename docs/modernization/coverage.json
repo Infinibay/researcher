@@ -76,7 +76,10 @@
         "backend/tests/runtime/test_run_input.py",
         "backend/tests/runtime/test_run_input_migration.py",
         "evals/runtime/run_input_continuity.py",
-        "frontend/tests/task-design.test.ts"
+        "frontend/tests/task-design.test.ts",
+        "docs/modernization/broker-stdio-evidence.json",
+        "backend/tests/runtime/test_broker_rpc.py",
+        "backend/tests/runtime/test_broker_peer_close.py"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -273,7 +276,10 @@
         "backend/tests/runtime/test_peer_ownership.py",
         "backend/tests/runtime/test_run_recovery.py",
         "evals/runtime/run_crash_recovery.py",
-        "frontend/tests/runtime.test.ts"
+        "frontend/tests/runtime.test.ts",
+        "docs/modernization/broker-stdio-evidence.json",
+        "backend/tests/runtime/test_broker_rpc.py",
+        "backend/tests/runtime/test_broker_peer_close.py"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -343,7 +349,10 @@
         "docs/modernization/analysis-packaging.json",
         "backend/tests/runtime/test_analysis_tools.py",
         "evals/runtime/run_analysis_tools.py",
-        "evals/runtime/run_analysis_inference.py"
+        "evals/runtime/run_analysis_inference.py",
+        "docs/modernization/broker-stdio-evidence.json",
+        "backend/tests/runtime/test_broker_rpc.py",
+        "backend/tests/runtime/test_broker_peer_close.py"
       ],
       "remaining": [
         "Durable product startup/shutdown and all tool lifecycle integration; old flows are not covered by owned command evidence",
@@ -379,7 +388,10 @@
         "docs/modernization/task-inputs-packaging.json",
         "backend/tests/runtime/test_task_input_versioning.py",
         "backend/tests/runtime/test_task_inputs_migration.py",
-        "frontend/tests/task-design.test.ts"
+        "frontend/tests/task-design.test.ts",
+        "docs/modernization/broker-stdio-evidence.json",
+        "backend/tests/runtime/test_broker_rpc.py",
+        "backend/tests/runtime/test_broker_peer_close.py"
       ]
     },
     "E05": {
@@ -442,7 +454,10 @@
         "docs/modernization/run-input-packaging.json",
         "backend/tests/runtime/test_run_input.py",
         "backend/tests/runtime/test_run_input_migration.py",
-        "evals/runtime/run_input_continuity.py"
+        "evals/runtime/run_input_continuity.py",
+        "docs/modernization/broker-stdio-evidence.json",
+        "backend/tests/runtime/test_broker_rpc.py",
+        "backend/tests/runtime/test_broker_peer_close.py"
       ]
     },
     "E06": {
@@ -633,7 +648,10 @@
         "backend/tests/runtime/test_command_ownership.py",
         "backend/tests/runtime/test_command_peer_migration.py",
         "evals/runtime/run_commands.py",
-        "evals/runtime/run_parent_loss.py"
+        "evals/runtime/run_parent_loss.py",
+        "docs/modernization/broker-stdio-evidence.json",
+        "backend/tests/runtime/test_broker_rpc.py",
+        "backend/tests/runtime/test_broker_peer_close.py"
       ]
     },
     "D03": {
@@ -754,7 +772,10 @@
         "docs/modernization/conversation-evidence.json",
         "backend/tests/runtime/test_run_conversation.py",
         "backend/tests/runtime/test_workspace_delivery.py",
-        "frontend/tests/runtime.test.ts"
+        "frontend/tests/runtime.test.ts",
+        "docs/modernization/broker-stdio-evidence.json",
+        "backend/tests/runtime/test_broker_rpc.py",
+        "backend/tests/runtime/test_broker_peer_close.py"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable",
@@ -803,7 +824,10 @@
         "docs/modernization/product-runtime-evidence.json",
         "docs/modernization/product-stop-evidence.json",
         "backend/tests/runtime/test_runtime_service.py",
-        "backend/tests/runtime/test_inference_journal.py"
+        "backend/tests/runtime/test_inference_journal.py",
+        "docs/modernization/broker-stdio-evidence.json",
+        "backend/tests/runtime/test_broker_rpc.py",
+        "backend/tests/runtime/test_broker_peer_close.py"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable",

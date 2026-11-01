@@ -1888,3 +1888,79 @@ remain required. Visual inventory unchanged6/36 desktop+2/12 mobile,2 pilots,0/1
 remaining30+10 concepts/10 routes and all12 state/accessibility/human acceptance remain.
 Final fresh independent whole-branch review still required. Full goal active, no
 push/merge/deploy, no permanent blocker inferred while meaningful work remains.
+
+## Async broker transport and per-peer closure — base a1e9289
+
+- Previous goal turn was a status report, not implementation progress. Revalidated
+  worktree/HEAD and the live failing transport log; resumed the existing uncommitted
+  adapter instead of recreating prior milestones. Full modernization remains active.
+- Brief: separate JSON-RPC protocol from process ownership, connect actual broker
+  pipe endpoints asynchronously, preserve sibling peers on ordinary close and keep
+  whole-attempt Stop independent of occupied launch/peer-close workers. Do not enable
+  product launchers by pretending that a config flag proves managed enrollment.
+- `PeerBroker.close_peer` closes the original namespace before publication/SQL,
+  reaps its owned child and persists execution closure without releasing siblings.
+  Real two-peer and busy-SQL tests observed RED→GREEN. Whole-domain retirement and
+  recovery now explicitly record execution closure; that never accepts a task.
+- `JsonRpcClient` owns protocol/correlation/barriers/bounds only. Existing CLI
+  `StdioRpcClient` delegates birth/signals/reaping to its compatibility endpoint;
+  public command/cwd/env/process-group settings and existing consumers remain usable.
+- `AsyncPeerBroker` has separate launch, peer-close and Stop executors, eight pending
+  launch slots and128 endpoint history capacity. Real nonblocking event-loop pipes
+  connect the broker's post-G data copies. No duplicate inference loop or RPC parser.
+- RED blocked-write shutdown reproduced an event-loop callback on a released FD,
+  including malformed synthetic SQLite from descriptor reuse. CPython3.12 pipe
+  implementation confirmed graceful close leaves a registered pending writer.
+  Abort/unregister before releasing data FDs fixes the actual failing integration.
+- RED lifecycle tests proved close could race birth and return an already-closed
+  connection, and startup cleanup failures disappeared. Shared shutdown rejects
+  late startup success and chains the cleanup error to the primary failure.
+- RED control test proved owner cleanup returned while its peer-close worker still
+  ran. Stop now physically removes the domain first, then drains those raw futures;
+  endpoint tasks are not awaited from owner shutdown, avoiding an ownership cycle.
+- RED completion/cancellation test proved a future removed by its completion observer
+  could strand undelivered data FDs. Cancellation attaches disposal to that exact
+  birth future, including an already-completed result, without another dispatch.
+- Final focused27 pass. Full bare suite1357:1254 pass, identical100 original baseline
+  failure identities,3 skip,29 warnings;424 runtime pass. New/resolved failure sets
+  empty. Changed Python Ruff check/format, git diff check and offline lock check pass.
+- Offline wheel/sdist build passed. All29 runtime Python sources match the wheel;
+  native C source matches SDist. Isolated -I -S extracted-wheel process exchanged
+  actual broker JSON-RPC137+63=200, closed its peer while concession stayed active,
+  retried receipt-only, retired the domain and rejected the old attempt in a fresh
+  domain. Synthetic source preparation still uses legacy migration helpers and the
+  previously diagnosed blocked urllib3 IPv6 localhost probe; no inference occurred.
+- Ruling: startup cancellation before transport delivery withdraws the whole attempt
+  — ownership/identity may still be uncertain; ordinary connected endpoint close is
+  per-peer — cost: startup cancellation can interrupt siblings until a narrower safe
+  admission/cancellation contract is implemented and proved.
+- Ruling: leave source-local retirement projection for an open-existing-only source
+  transaction integration — current SQLiteRunStore can create a missing DB before
+  origin validation — cost: global closure is proved but local lifecycle projection
+  is still pending and must not be mistaken for finished product adoption.
+- Architecture/status/coverage/results/package evidence updated. No scenario or
+  phase marked complete, no new images/model turns/user DB migrations/host service
+  installation/shared-parent changes/push/merge/deploy. Core integration is concrete;
+  production launchers and inference-capable profiles are still to migrate.
+- Ken recall/blast-radius again report the new runtime file unindexed. Attempted
+  to save the non-obvious pipe-FD finding with actual worktree evidence; Ken refused
+  dependencies outside its original-checkout project. Kept the finding anchored in
+  this architecture/evidence/ledger instead of saving a misleading original path.
+
+## Next brief after async broker transport
+
+Continue the FULL plan. Connect the actual broker transport into managed host
+composition and RuntimeService/CommandJobs, with authenticated admission, external
+origin/complete actor-domain proof and non-reused provisioned generations. Implement
+Codex subscription/Ken/business/development profiles, bounded durable outputs,
+wall/CPU/lease controls and open-existing-only source retirement. Preserve startup
+cancel scope, per-peer close, sole G ownership and receipt-only retries; do not use
+the socket-denied analysis capsule as an inference profile. Validate published Ken
+and subscription through the final integrated launch path before mutable tooling.
+Removal-before-durable-retirement, alias/restore/handoff, budgets, all71 tools/11
+categories, engine/autonomy/roles/flows and agent communication, exact Git candidate/
+review/CI, complete prompts/book-skills/evals/human communication, data/backup/bootstrap/
+CLI/TUI/clean install, dependency upgrades/18 npm advisories and100 baseline failures
+remain. UI still6/36 desktop+2/12 mobile concepts,2 pilots,0/12 accepted pages;30+10
+concepts/10 routes and all12 acceptance remain. Final independent whole-branch review
+still required. Keep the complete objective active.

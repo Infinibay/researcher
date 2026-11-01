@@ -50,6 +50,9 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    local antigua. Hay recuperación real antes/después de G sin DB original y
    defensa del perfil frente a sockets/controles y forks. Falta adoptarlo en los
    lanzadores productivos, perfiles Codex/Ken/negocio/desarrollo y aprovisionamiento.
+   Ya tiene adaptador asíncrono JSON-RPC con tuberías reales: cierre independiente
+   de peers, Stop con trabajador reservado y recogida de arranques cancelados.
+   Esto permite adoptar su transporte; no sustituye aún los lanzadores del servicio.
 7. **Contexto y procedencia:** versiones al corregir o cambiar trece entradas de tarea;
    retiro de autoridad antigua; respuesta asociada a pregunta/versión; repositorio
    admitido inmutable y comienzo de cola explícito. Registro exacto de la entrada
@@ -116,9 +119,12 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 
 ## Verificación más reciente
 
-- Suite completa:1343 casos;1240 pasan,100 fallan con las mismas identidades de la
+- Suite completa:1357 casos;1254 pasan,100 fallan con las mismas identidades de la
   línea base y 3 se omiten. La suite global sigue roja.
-- Runtime:410 pasan;57 pruebas dirigidas en el checkpoint del broker,15 de broker
+- Runtime:424 pasan;27 pruebas dirigidas del transporte/cierre JSON-RPC. Se probaron
+  tuberías bloqueadas, errores de protocolo, cierres independientes y carreras de
+  arranque/cancelación; el paquete extraído ejecutó JSON-RPC real y cerró el dominio.
+  En el checkpoint anterior:57 pruebas dirigidas,15 de broker
   y17 de dominio/asset sellado. Recuperación en tres fronteras con SIGKILL y sin DB
   original, dos DBs sobre fuente idéntica y límite de forks comprobados.
   El checkpoint del dominio Linux añadió16 casos reales; incluye recuperación
@@ -148,8 +154,10 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
   siguen pendientes;0/12 rutas aceptadas. Dependencias:18 avisos npm preexistentes
   (5 bajos,3 moderados,10 altos), sin nuevos paquetes vulnerables por Playwright/axe.
 
-Evidencia actual: [broker/gate](peer-broker-evidence.json),
-[resultados actuales](peer-broker-results.json),
+Evidencia actual: [transporte/cierre](broker-stdio-evidence.json),
+[resultados actuales](broker-stdio-results.json),
+[paquete y JSON-RPC aislado](broker-stdio-packaging.json),
+[broker/gate anterior](peer-broker-evidence.json),
 [contrato implementado y pendientes](../architecture/peer-broker.md),
 [paquete y ensayo aislado](peer-broker-packaging.json),
 [dominio Linux](execution-domain-evidence.json),

@@ -42,57 +42,66 @@ class RpcReply:
     preceding_messages: int
 
 
-class StdioRpcClient:
-    """Own one child process and its connection, with explicit resource bounds."""
+class JsonRpcClient:
+    """Bounded JSON-RPC over a lifecycle-owned async endpoint.
+
+    The endpoint owns birth/closure. An open failure or cancellation must drain
+    its owned launch; the protocol never retries or invents an exit receipt.
+    """
 
     def __init__(
         self,
-        command: Sequence[str],
+        endpoint,
         *,
-        cwd: Path,
-        env: Mapping[str, str] | None = None,
-        request_timeout: float = 15,
-        close_timeout: float = 2,
-        max_messages: int = 256,
-        max_message_bytes: int = 1024 * 1024,
-        max_pending_requests: int = 32,
-        process_group_signals: bool = True,
-    ) -> None:
-        if not command or min(request_timeout, close_timeout, max_messages, max_message_bytes, max_pending_requests) <= 0:
-            raise ValueError("A command and positive transport limits are required")
-        self.command = tuple(command)
-        self.cwd = cwd
-        self.env = dict(env) if env is not None else None
+        request_timeout=15,
+        close_timeout=2,
+        max_messages=256,
+        max_message_bytes=1024 * 1024,
+        max_pending_requests=32,
+    ):
+        if (
+            min(
+                request_timeout,
+                close_timeout,
+                max_messages,
+                max_message_bytes,
+                max_pending_requests,
+            )
+            <= 0
+        ):
+            raise ValueError("Positive transport limits are required")
+        self._endpoint = endpoint
         self.request_timeout = request_timeout
         self.close_timeout = close_timeout
         self.max_message_bytes = max_message_bytes
         self.max_pending_requests = max_pending_requests
-        self.process_group_signals = process_group_signals
-        self._messages: asyncio.Queue[dict[str, Any]] = asyncio.Queue(maxsize=max_messages)
-        self._pending: dict[int, asyncio.Future[Any]] = {}
+        self._messages = asyncio.Queue(maxsize=max_messages)
+        self._pending = {}
         self._next_id = 0
         self._message_count = 0
-        self._process: asyncio.subprocess.Process | None = None
-        self._reader: asyncio.Task[None] | None = None
-        self._stderr: asyncio.Task[None] | None = None
-        self._closing: asyncio.Task[None] | None = None
-        self._failure: RpcDisconnected | None = None
+        self._process = None
+        self._reader = None
+        self._stderr = None
+        self._closing = None
+        self._failure = None
         self._failed = asyncio.Event()
         self._write_lock = asyncio.Lock()
+        self._started = False
 
     async def __aenter__(self) -> Self:
-        if self._process is not None:
+        if self._started:
             raise RuntimeError("A connection cannot be started twice")
-        self._process = await asyncio.create_subprocess_exec(
-            *self.command,
-            cwd=self.cwd,
-            env=self.env,
-            stdin=asyncio.subprocess.PIPE,
-            stdout=asyncio.subprocess.PIPE,
-            stderr=asyncio.subprocess.PIPE,
-            start_new_session=True,
-            limit=self.max_message_bytes + 1,
-        )
+        self._started = True
+        try:
+            self._process = await self._endpoint.open(limit=self.max_message_bytes + 1)
+            if self._closing is not None:
+                raise RpcDisconnected("Connection closed during startup")
+        except BaseException as error:
+            try:
+                await self.aclose()
+            except Exception as cleanup_error:
+                raise error from cleanup_error
+            raise
         self._reader = asyncio.create_task(self._read_messages())
         self._stderr = asyncio.create_task(self._drain_stderr())
         return self
@@ -100,10 +109,14 @@ class StdioRpcClient:
     async def __aexit__(self, exc_type, exc, traceback) -> None:
         await self.aclose()
 
-    async def request(self, method: str, params: dict | None = None, *, timeout: float | None = None) -> Any:
+    async def request(
+        self, method: str, params: dict | None = None, *, timeout: float | None = None
+    ) -> Any:
         return (await self.request_ordered(method, params, timeout=timeout)).result
 
-    async def request_ordered(self, method: str, params: dict | None = None, *, timeout: float | None = None) -> RpcReply:
+    async def request_ordered(
+        self, method: str, params: dict | None = None, *, timeout: float | None = None
+    ) -> RpcReply:
         """Return a barrier for wire messages preceding this response.
 
         A separate event consumer may still be processing those notifications;
@@ -117,8 +130,12 @@ class StdioRpcClient:
         future = asyncio.get_running_loop().create_future()
         self._pending[request_id] = future
         try:
-            async with asyncio.timeout(self.request_timeout if timeout is None else timeout):
-                await self._send({"id": request_id, "method": method, "params": params or {}})
+            async with asyncio.timeout(
+                self.request_timeout if timeout is None else timeout
+            ):
+                await self._send(
+                    {"id": request_id, "method": method, "params": params or {}}
+                )
                 return await future
         finally:
             self._pending.pop(request_id, None)
@@ -143,7 +160,9 @@ class StdioRpcClient:
         failure = asyncio.create_task(self._failed.wait())
         try:
             async with asyncio.timeout(timeout):
-                done, _ = await asyncio.wait((item, failure), return_when=asyncio.FIRST_COMPLETED)
+                done, _ = await asyncio.wait(
+                    (item, failure), return_when=asyncio.FIRST_COMPLETED
+                )
                 if failure in done:
                     raise self._failure or RpcDisconnected("Connection closed")
                 return item.result()
@@ -160,7 +179,9 @@ class StdioRpcClient:
 
     async def _send(self, message: dict[str, Any]) -> None:
         self._check_connection()
-        frame = json.dumps(message, allow_nan=False, separators=(",", ":")).encode() + b"\n"
+        frame = (
+            json.dumps(message, allow_nan=False, separators=(",", ":")).encode() + b"\n"
+        )
         if len(frame) > self.max_message_bytes:
             raise RpcProtocolError("Outgoing message exceeds the configured limit")
         async with asyncio.timeout(self.request_timeout), self._write_lock:
@@ -190,11 +211,17 @@ class StdioRpcClient:
                 try:
                     line = await self._process.stdout.readline()
                 except ValueError as exc:
-                    raise RpcProtocolError("Incoming message exceeds the configured limit") from exc
+                    raise RpcProtocolError(
+                        "Incoming message exceeds the configured limit"
+                    ) from exc
                 if not line:
-                    raise RpcDisconnected("Peer closed its output; reconcile before retrying an action")
+                    raise RpcDisconnected(
+                        "Peer closed its output; reconcile before retrying an action"
+                    )
                 if len(line) > self.max_message_bytes:
-                    raise RpcProtocolError("Incoming message exceeds the configured limit")
+                    raise RpcProtocolError(
+                        "Incoming message exceeds the configured limit"
+                    )
                 try:
                     message = json.loads(line)
                 except (ValueError, UnicodeDecodeError) as exc:
@@ -208,10 +235,14 @@ class StdioRpcClient:
                         self._messages.put_nowait(message)
                         self._message_count += 1
                     except asyncio.QueueFull as exc:
-                        raise RpcBackpressure("Event buffer full; reconnect and reconcile state") from exc
+                        raise RpcBackpressure(
+                            "Event buffer full; reconnect and reconcile state"
+                        ) from exc
                     continue
                 request_id = message.get("id")
-                if not isinstance(request_id, (str, int)) or isinstance(request_id, bool):
+                if not isinstance(request_id, (str, int)) or isinstance(
+                    request_id, bool
+                ):
                     raise RpcProtocolError("Expected a response id")
                 future = self._pending.get(request_id)
                 if future is None or future.done():
@@ -220,7 +251,12 @@ class StdioRpcClient:
                     error = message["error"]
                     if not isinstance(error, dict):
                         raise RpcProtocolError("Expected an error object")
-                    future.set_exception(RpcError(error.get("code", -1), str(error.get("message", "Runtime error"))))
+                    future.set_exception(
+                        RpcError(
+                            error.get("code", -1),
+                            str(error.get("message", "Runtime error")),
+                        )
+                    )
                 elif "result" in message:
                     future.set_result(RpcReply(message["result"], self._message_count))
                 else:
@@ -237,45 +273,140 @@ class StdioRpcClient:
         while await self._process.stderr.read(8192):
             pass
 
-    def _signal_process_group(self, sig: signal.Signals) -> None:
-        assert self._process is not None
-        try:
-            if self.process_group_signals:
-                os.killpg(self._process.pid, sig)
-            elif self._process.returncode is None:
-                # Contained peers use their pidfd/namespace closure barrier.
-                self._process.send_signal(sig)
-        except ProcessLookupError:
-            pass
-
     async def aclose(self) -> None:
         """Complete one owned shutdown even if an awaiting task is cancelled."""
-        if self._process is None:
+        if not self._started:
             return
         if self._closing is None:
             self._closing = asyncio.create_task(self._shutdown())
         await asyncio.shield(self._closing)
 
-    async def _shutdown(self) -> None:
-        """Reap the process and stop only descendants in this owned session."""
-        if self._process is None:
-            return
+    async def _shutdown(self):
         self._fail(RpcDisconnected("Connection closed"))
-        if self._process.stdin is not None:
-            self._process.stdin.close()
         try:
-            await asyncio.wait_for(self._process.wait(), timeout=self.close_timeout)
-        except TimeoutError:
-            self._signal_process_group(signal.SIGTERM)
-            try:
-                await asyncio.wait_for(self._process.wait(), timeout=self.close_timeout)
-            except TimeoutError:
-                self._signal_process_group(signal.SIGKILL)
-                await self._process.wait()
+            await self._endpoint.aclose(timeout=self.close_timeout)
         finally:
-            # The leader may exit while it still has live background descendants.
-            self._signal_process_group(signal.SIGKILL)
             tasks = [task for task in (self._reader, self._stderr) if task is not None]
             for task in tasks:
                 task.cancel()
             await asyncio.gather(*tasks, return_exceptions=True)
+
+
+class _SubprocessEndpoint:
+    """Compatibility adapter for the existing CLI/process-group lifetime."""
+
+    def __init__(self, command, cwd, env, process_group_signals):
+        self.command = tuple(command)
+        self.cwd = cwd
+        self.env = dict(env) if env is not None else None
+        self.process_group_signals = process_group_signals
+        self._process = None
+        self._starting = None
+
+    async def open(self, *, limit):
+        if self._starting is not None:
+            raise RuntimeError("Endpoint already started")
+        self._starting = asyncio.create_task(
+            asyncio.create_subprocess_exec(
+                *self.command,
+                cwd=self.cwd,
+                env=self.env,
+                stdin=asyncio.subprocess.PIPE,
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE,
+                start_new_session=True,
+                limit=limit,
+            )
+        )
+        self._process = await asyncio.shield(self._starting)
+        return self._process
+
+    def _signal(self, sig):
+        try:
+            if self.process_group_signals:
+                os.killpg(self._process.pid, sig)
+            elif self._process.returncode is None:
+                self._process.send_signal(sig)
+        except ProcessLookupError:
+            pass
+
+    async def aclose(self, *, timeout):
+        if self._starting is None:
+            return
+        if self._starting.done() and self._starting.exception() is not None:
+            return  # Process creation failed; no child was returned to this owner.
+        if self._process is None:
+            self._process = await asyncio.shield(self._starting)
+        if self._process.stdin is not None:
+            self._process.stdin.close()
+        try:
+            await asyncio.wait_for(self._process.wait(), timeout=timeout)
+        except TimeoutError:
+            self._signal(signal.SIGTERM)
+            try:
+                await asyncio.wait_for(self._process.wait(), timeout=timeout)
+            except TimeoutError:
+                self._signal(signal.SIGKILL)
+                await self._process.wait()
+        finally:
+            self._signal(signal.SIGKILL)
+
+
+class StdioRpcClient(JsonRpcClient):
+    """CLI compatibility entry point; broker clients use JsonRpcClient(endpoint)."""
+
+    def __init__(
+        self,
+        command: Sequence[str],
+        *,
+        cwd: Path,
+        env: Mapping[str, str] | None = None,
+        request_timeout=15,
+        close_timeout=2,
+        max_messages=256,
+        max_message_bytes=1024 * 1024,
+        max_pending_requests=32,
+        process_group_signals=True,
+    ):
+        if not command:
+            raise ValueError("A command is required")
+        super().__init__(
+            _SubprocessEndpoint(command, cwd, env, process_group_signals),
+            request_timeout=request_timeout,
+            close_timeout=close_timeout,
+            max_messages=max_messages,
+            max_message_bytes=max_message_bytes,
+            max_pending_requests=max_pending_requests,
+        )
+
+    @property
+    def command(self):
+        return self._endpoint.command
+
+    @command.setter
+    def command(self, value):
+        self._endpoint.command = tuple(value)
+
+    @property
+    def cwd(self):
+        return self._endpoint.cwd
+
+    @cwd.setter
+    def cwd(self, value):
+        self._endpoint.cwd = value
+
+    @property
+    def env(self):
+        return self._endpoint.env
+
+    @env.setter
+    def env(self, value):
+        self._endpoint.env = value
+
+    @property
+    def process_group_signals(self):
+        return self._endpoint.process_group_signals
+
+    @process_group_signals.setter
+    def process_group_signals(self, value):
+        self._endpoint.process_group_signals = value

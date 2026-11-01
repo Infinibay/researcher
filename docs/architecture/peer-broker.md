@@ -77,6 +77,55 @@ Un propietario vivo se rechaza; falta de visibilidad conserva incertidumbre. El
 recuperador abre el dominio por identidad desde el registro y no abre ni recrea la
 DB del proyecto. El cierre y la liberación se confirman sin aceptar una tarea.
 
+## Transporte asíncrono y alcance del cierre
+
+`JsonRpcClient` conserva correlación, streaming, límites y backpressure sin crear
+ni señalar procesos. Su endpoint tiene `open(limit=...)` y `aclose(timeout=...)`;
+es quien posee el ciclo de vida. `StdioRpcClient` mantiene el adaptador CLI actual
+y sus consumidores mientras se migra el lanzamiento productivo. No hay dos loops
+de inferencia ni otra implementación del protocolo.
+
+`AsyncPeerBroker` conecta ese cliente con `PeerBroker.run_peer` real. Usa tuberías
+no bloqueantes del event loop y tres ejecutores separados: lanzamiento, cierre
+de un peer y Stop de todo el intento. Admite ocho lanzamientos pendientes y un
+historial máximo de 128 endpoints. Cada endpoint se abre una sola vez; un recibo
+repetido sin transporte exige reconciliación y no provoca otro lanzamiento.
+
+```python
+async with AsyncPeerBroker(broker) as owner:
+    endpoint = owner.peer(registry, peer_id, operation_key=key, code=program)
+    async with JsonRpcClient(endpoint) as client:
+        result = await client.request(method, params)
+```
+
+Este ejemplo requiere objetos de host ya aprovisionados/admitidos. No crea un
+dominio a partir de una ruta vacía ni conecta por sí solo el servicio productivo.
+El perfil de análisis actual puede ejecutar un peer JSON-RPC de ensayo; no es un
+perfil autorizado para ejecutar Codex o Ken.
+
+Los cierres tienen alcances distintos:
+
+| Acción | Efecto demostrado |
+| --- | --- |
+| Cerrar un endpoint conectado | Cierra su namespace original y persiste `execution_closed`; conserva la concesión y los peers hermanos. |
+| Cancelar un arranque que aún no entregó transporte | Retira todo el intento, porque la identidad/entrega aún es incierta; recoge también los FDs que terminen de llegar. |
+| Cerrar el propietario asíncrono | Retira admisión y dominio completos antes de esperar publicación, SQL o trabajadores; después drena el trabajo de cierre pendiente. |
+
+`PeerBroker.close_peer` prueba cierre físico antes de intentar confirmar su recibo
+global. Si SQLite está ocupado devuelve contención, conserva la concesión y permite
+reintentar sólo ese cierre. No proyecta todavía la retirada en el SQL del proyecto:
+esa integración debe abrir el estado existente sin recrearlo si desapareció.
+
+Una escritura bloqueada tiene deadline y no retiene el event loop. Al cerrar se
+aborta la tubería de escritura antes de liberar sus FDs: un cierre graceful podría
+dejar un callback pendiente escribiendo sobre un número reutilizado por otro
+archivo. Las pruebas reprodujeron ese fallo y su interferencia con SQLite. El
+arranque tampoco devuelve una conexión si su cierre ya empezó; un error de limpieza
+queda encadenado al error original en lugar de desaparecer.
+
+El cierre físico, el recibo durable y la aceptación de la tarea siguen siendo
+hechos distintos. Ninguna de estas operaciones marca la tarea como completada.
+
 ## Perfil de análisis implementado
 
 El capsule parte de filesystem vacío: runtime Python/base y bibliotecas declaradas,
@@ -113,10 +162,16 @@ syscalls crudos, subproceso, symlink al controlador y escritura por path/FD de f
 - Propietario vivo no adoptable, dos DBs sobre fuente idéntica, presión de forks,
   límites de recursos y supervivencia de la supervisión al cerrar el transporte.
 - Rechazo de reactivación con dominio nuevo y lease local anterior después de Stop.
+- JSON-RPC real sobre peers del broker: dos conexiones, cierre independiente,
+  eventos, peticiones del servidor, stderr, EOF, frames inválidos/grandes,
+  backpressure y deadline durante escritura bloqueada.
+- Stop con trabajador de cierre bloqueado, cancelación durante bind y cancelación
+  justo después de un nacimiento completado sin dejar FDs sin entregar abiertos.
 - Wheel nativa extraída, importación aislada `-I -S`, mismo recorrido desde datos
   sintéticos migrados, retry y retirada real. El bootstrap sigue siendo de test.
 
 [Resultados y límites actuales](../modernization/peer-broker-evidence.json).
+[Transporte asíncrono y regresiones](../modernization/broker-stdio-evidence.json).
 
 ## Trabajo pendiente de la autoridad completa
 
