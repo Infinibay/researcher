@@ -65,6 +65,57 @@ def workspace_app(coordination):
     )
 
 
+async def test_questions_are_scoped_typed_and_cannot_use_legacy_response(
+    coordination, workspace_app
+):
+    from backend.tests.runtime.test_human_questions import setup_question
+
+    c = coordination
+    questions, run, lease, _scope, receipt = setup_question(c)
+    qid = receipt["request_id"]
+    path = f"/api/projects/101/tasks/1001/questions/{qid}/answers"
+    body = {
+        "operation_key": "answer",
+        "expected_version": 1,
+        "answers": {"base": "200"},
+    }
+    async with (
+        workspace_app.router.lifespan_context(workspace_app),
+        owner_client(workspace_app) as owner,
+    ):
+        data = (await owner.get("/api/projects/101/tasks/1001/workspace")).json()
+        assert data["questions"][0]["ready_for_answer"] is False
+        assert (await owner.post(path, json=body)).status_code == 409
+        assert (
+            await owner.post(
+                f"/api/user-requests/{qid}/respond", json={"response": "200"}
+            )
+        ).status_code == 409
+        questions.park(lease)
+        data = (await owner.get("/api/projects/101/tasks/1001/workspace")).json()
+        assert data["questions"][0]["ready_for_answer"] is True
+        assert data["questions"][0]["questions"][0]["id"] == "base"
+        assert (
+            await owner.post(path.replace("projects/101", "projects/202"), json=body)
+        ).status_code == 404
+        response = await owner.post(path, json=body)
+        assert response.status_code == 200, response.text
+        assert response.json() == {
+            "context_version": 2,
+            "application": "recorded_for_next_run",
+            "inference_started": False,
+        }
+        assert (await owner.post(path, json=body)).json() == response.json()
+        messages = await owner.get(
+            "/api/chat/101", params={"thread_id": "human-thread"}
+        )
+        assert messages.status_code == 200, messages.text
+        payload = messages.json()
+        assert [m["delivery"] for m in payload][-2:] == ["question", "answer"]
+        assert payload[-1]["context_version"] == 2
+        assert c.store.get(101, run.run_id).status == "superseded"
+
+
 async def test_owner_can_inspect_sources_and_closed_task_runs_without_runtime_config(
     coordination, workspace_app
 ):

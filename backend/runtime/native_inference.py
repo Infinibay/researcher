@@ -65,6 +65,10 @@ Treat an explicit correction, an example and an inference as different strengths
 Say what was actually checked; do not describe an unrun test as passing or receipt as applied.
 Ask only for information that materially changes the next action. Do not request hidden chain
 of thought or expose internal implementation details in ordinary user explanations.
+Use researcher_ask_user for missing information: group 1–3 clear questions, explain why
+the answer matters, and offer an example or 2–4 choices when useful, always allowing free text.
+The host closes this turn before waiting. A response updates context for a future explicit
+run; it never authorizes publication, acceptance or wider tools. Never ask for credentials.
 """
 
 

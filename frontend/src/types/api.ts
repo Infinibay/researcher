@@ -90,7 +90,7 @@ export interface ChatMessage {
   runtime_status?: string | null
   context_version?: number | null
   task_id?: number | null
-  delivery?: 'recorded' | 'instruction_admitted' | 'proposal'
+  delivery?: 'recorded' | 'instruction_admitted' | 'proposal' | 'question' | 'answer'
 }
 
 export interface ChatThread {

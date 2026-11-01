@@ -1,5 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { taskWorkspace, sendInstruction, stopRun, recordCorrection } from '../api/runtime'
+import { taskWorkspace, sendInstruction, stopRun, recordCorrection, sendAnswer } from '../api/runtime'
+
+export function useAnswer() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: sendAnswer, retry: false,
+    onSettled: (_, __, intent) => {
+      qc.invalidateQueries({ queryKey: ['task-workspace', intent.projectId, intent.taskId] })
+      qc.invalidateQueries({ queryKey: ['chat', intent.projectId] })
+      qc.invalidateQueries({ queryKey: ['chat-threads', intent.projectId] })
+    },
+  })
+}
 
 export function useTaskWorkspace(projectId: number, taskId: number) {
   return useQuery({

@@ -19,6 +19,7 @@ from fastmcp import FastMCP
 from fastmcp.exceptions import ToolError
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from backend.api.models.questions import HumanQuestion
 from backend.research.http_client import ResearcherClientError, ResearcherHTTPClient
 
 mcp = FastMCP(
@@ -27,6 +28,19 @@ mcp = FastMCP(
 )
 READ = {"readOnlyHint": True, "destructiveHint": False}
 WRITE = {"readOnlyHint": False, "destructiveHint": False, "idempotentHint": True}
+
+
+@mcp.tool(annotations=WRITE)
+def researcher_ask_user(operation_key: str, questions: list[HumanQuestion]) -> dict:
+    """Ask 1–3 material information questions with distinct ids, clear question text, why_needed, optional example and 0 or 2–4 options. Free-text answers remain allowed. Never request secrets or use this as permission to publish. The host withdraws tool authority and closes this turn before waiting. Reuse operation_key after a lost receipt; do not continue or start another question. An answer records context for a future explicit run, not acceptance or authorization."""
+    return _call(
+        "POST",
+        "/questions",
+        body={
+            "operation_key": operation_key,
+            "questions": [q.model_dump() for q in questions],
+        },
+    )
 
 
 def _call(method, path, *, body=None, query=None):

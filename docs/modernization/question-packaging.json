@@ -1,0 +1,137 @@
+{
+  "scope": "Wheel byte preservation, not clean-machine startup",
+  "checked_files": [
+    {
+      "path": "backend/api/models/chat.py",
+      "sha256": "9ee204ce6942d37dc6316f5a7a38fdd19ffe3b65a52373ff08918e71e01fd471"
+    },
+    {
+      "path": "backend/api/models/questions.py",
+      "sha256": "5f36357b9df68b91562f74b03f7575d53f807dbc3d32c9e249beceb9a81dfcbe"
+    },
+    {
+      "path": "backend/api/routes/research.py",
+      "sha256": "a5c609d6ba4f5ed0f954beee6ec19f5c6d7f148d8e8643a5aa3e0366afeb6a0b"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "sha256": "eeaf916db2a126ad94df16fbfda45b70a749d70e05d78ac9921370bfc0955c6f"
+    },
+    {
+      "path": "backend/api/routes/user_requests.py",
+      "sha256": "04b0fc5e127b8434fb3e5f036d584154efa64352b98d01130d391dc13f35dd9e"
+    },
+    {
+      "path": "backend/db/conversation_schema.sql",
+      "sha256": "b7e2759531edbac1cb8fead3bba956104096184d9c6c2fe43f7f4abb195d172b"
+    },
+    {
+      "path": "backend/db/inference_schema.sql",
+      "sha256": "1a4c551d01900afd2ee0537ba5002492a5a6acd7ae22783632a5cb92506599f5"
+    },
+    {
+      "path": "backend/db/job_schema.sql",
+      "sha256": "120886f9ec24419fbb53a7ca420c51fabad67126eb151a7d4560bd1d941088e5"
+    },
+    {
+      "path": "backend/db/migrations.py",
+      "sha256": "ef94b5f0e5b9d5203b95566b34f761bcfc089713be22fcaa53cd684ac44eba6d"
+    },
+    {
+      "path": "backend/db/model_schema.sql",
+      "sha256": "886ddbbcf87858affc032eca94fa283473cf63bef09caad81c6e81eb48a9936f"
+    },
+    {
+      "path": "backend/db/question_migration.py",
+      "sha256": "65838e422a587199f10697e5c588cc6fb9fb9c5b54ecbe0b420e2363a02f69dd"
+    },
+    {
+      "path": "backend/db/question_schema.sql",
+      "sha256": "43c267045a14cb7c17e499a55ecd195c80c0704a46d6442e17a894e7178b6043"
+    },
+    {
+      "path": "backend/db/research_schema.sql",
+      "sha256": "d3c786c120fc4b552824d1226fdd1659bdfbfc1108c5f3e90a20faba85ecc687"
+    },
+    {
+      "path": "backend/db/runtime_schema.sql",
+      "sha256": "624fc1b71cf59f76d7945dc7494209f3b51af2c3fb8c7bb54ce0094b707b2736"
+    },
+    {
+      "path": "backend/db/schema.sql",
+      "sha256": "0e14f922b6df8ca55e0d4f1dc31ee59f34789dd5b0a5d70a87d0d0c3da6afa7e"
+    },
+    {
+      "path": "backend/research/models.py",
+      "sha256": "981a2b8dc744ad9ffe40f2ed523ee0140a288e8403c5fe7f72d71d4805381443"
+    },
+    {
+      "path": "backend/research/sqlite_store.py",
+      "sha256": "f773332e29c68f923d6a123489edea9ef15102eae809f3999cbc0b54646fc2b0"
+    },
+    {
+      "path": "backend/runtime/__init__.py",
+      "sha256": "4cd821bf227b55f0037304a924016d3827baaa924797487a6392154d7ac3c19e"
+    },
+    {
+      "path": "backend/runtime/business_mediation.py",
+      "sha256": "efd76d259f4818598bb6f0da31785968b4b59e53e29b32016bb192446b85f95d"
+    },
+    {
+      "path": "backend/runtime/codex_rpc.py",
+      "sha256": "c58c40c7144a79c19197755e9234d07cfa9aa9c050df5ae10543f213491aa065"
+    },
+    {
+      "path": "backend/runtime/codex_session.py",
+      "sha256": "d5a3de220b4a8aa542b2ff13236dc437bda1c5ce312a4720d4c9d0392a61eba9"
+    },
+    {
+      "path": "backend/runtime/command_jobs.py",
+      "sha256": "ceb8c1125e624dd532779b8b0cb31e9212279686b6e5dc23e9255e859cf30d53"
+    },
+    {
+      "path": "backend/runtime/contracts.py",
+      "sha256": "8d032b693804c55203a82c7b37298800f1b3dd4d9d2e2f0ded4d574a06b738ad"
+    },
+    {
+      "path": "backend/runtime/ken_worker.py",
+      "sha256": "142a7c5b39ad72b75e02ef68b040f1fd4b820fdd22975d9ed530d7cda64ec032"
+    },
+    {
+      "path": "backend/runtime/live_grants.py",
+      "sha256": "472a93ecaa6d645b49b2fba434e910bb193d3b1bb1beab1d72fbc51082e8edd3"
+    },
+    {
+      "path": "backend/runtime/native_commands.py",
+      "sha256": "cc2457579bc61be564ba4c283728e679c95ce8a7607046e27b576daee03f9758"
+    },
+    {
+      "path": "backend/runtime/native_inference.py",
+      "sha256": "38dc3cd89c1c15d59ce03c094988b93e975667c5d233e74d3cee00533bd4bd28"
+    },
+    {
+      "path": "backend/runtime/questions.py",
+      "sha256": "e50da6896e2f2970d4a3a329a023654f502df093ce995e0c9c14749bc2e40691"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "sha256": "550e54c2be557cd917ad1bd8a4d3f4d2a8cfd88888428c12fa22e54e5262cffa"
+    },
+    {
+      "path": "backend/runtime/sqlite_questions.py",
+      "sha256": "463d03c9eff82d3c635a8349b51fff351b72cb90f1519124d50fc3254c028334"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "sha256": "3c4eccf02bd8eea3457f9fbade00821393fdd778ec0a16b82c770204e548ec6d"
+    },
+    {
+      "path": "backend/runtime/views.py",
+      "sha256": "42cd1a85cd14bd40276b59de12e8f6bc24d8ae62c6190ab51adddc22932f40f5"
+    },
+    {
+      "path": "backend/tools/base/db.py",
+      "sha256": "3ef364d46708ed533a01a2020f60a01a9c487bd90f7a7a632a42c7ee18f05daa"
+    }
+  ]
+}

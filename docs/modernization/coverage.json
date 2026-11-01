@@ -14,7 +14,11 @@
         "docs/modernization/conversation-evidence.json",
         "backend/tests/runtime/test_run_conversation.py",
         "backend/tests/runtime/test_workspace_delivery.py",
-        "frontend/tests/runtime.test.ts"
+        "frontend/tests/runtime.test.ts",
+        "docs/architecture/human-questions.md",
+        "docs/modernization/human-question-evidence.json",
+        "docs/modernization/human-question-results.json",
+        "backend/tests/runtime/test_human_questions.py"
       ]
     },
     "C02": {
@@ -24,7 +28,12 @@
         "docs/modernization/conversation-evidence.json",
         "backend/tests/runtime/test_run_conversation.py",
         "backend/tests/runtime/test_workspace_delivery.py",
-        "frontend/tests/runtime.test.ts"
+        "frontend/tests/runtime.test.ts",
+        "docs/architecture/human-questions.md",
+        "docs/modernization/human-question-evidence.json",
+        "docs/modernization/human-question-results.json",
+        "backend/tests/runtime/test_human_questions.py",
+        "backend/tests/runtime/test_runtime_service.py"
       ]
     },
     "C03": {
@@ -45,7 +54,11 @@
         "docs/modernization/conversation-evidence.json",
         "backend/tests/runtime/test_run_conversation.py",
         "backend/tests/runtime/test_workspace_delivery.py",
-        "frontend/tests/runtime.test.ts"
+        "frontend/tests/runtime.test.ts",
+        "docs/architecture/human-questions.md",
+        "docs/modernization/human-question-evidence.json",
+        "docs/modernization/human-question-results.json",
+        "backend/tests/runtime/test_human_questions.py"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -77,7 +90,11 @@
         "docs/modernization/conversation-evidence.json",
         "backend/tests/runtime/test_run_conversation.py",
         "backend/tests/runtime/test_workspace_delivery.py",
-        "frontend/tests/runtime.test.ts"
+        "frontend/tests/runtime.test.ts",
+        "docs/architecture/human-questions.md",
+        "docs/modernization/human-question-evidence.json",
+        "docs/modernization/human-question-results.json",
+        "backend/tests/runtime/test_human_questions.py"
       ]
     },
     "C08": {
@@ -91,7 +108,12 @@
         "docs/modernization/conversation-evidence.json",
         "backend/tests/runtime/test_run_conversation.py",
         "backend/tests/runtime/test_workspace_delivery.py",
-        "frontend/tests/runtime.test.ts"
+        "frontend/tests/runtime.test.ts",
+        "docs/architecture/human-questions.md",
+        "docs/modernization/human-question-evidence.json",
+        "docs/modernization/human-question-results.json",
+        "backend/tests/runtime/test_human_questions.py",
+        "backend/tests/runtime/test_runtime_service.py"
       ]
     },
     "C10": {
@@ -563,8 +585,20 @@
       ]
     },
     "U05": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/human-questions.md",
+        "docs/modernization/human-question-evidence.json",
+        "docs/modernization/human-question-results.json",
+        "backend/tests/runtime/test_human_questions.py",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_workspace_delivery.py",
+        "frontend/tests/runtime.test.ts"
+      ],
+      "remaining": [
+        "Global question inbox and full legacy caller migration",
+        "Rendered browser, keyboard/accessibility and human comprehension acceptance"
+      ]
     },
     "U06": {
       "status": "pending",
@@ -721,7 +755,11 @@
         "docs/modernization/conversation-evidence.json",
         "backend/tests/runtime/test_run_conversation.py",
         "backend/tests/runtime/test_workspace_delivery.py",
-        "frontend/tests/runtime.test.ts"
+        "frontend/tests/runtime.test.ts",
+        "docs/architecture/human-questions.md",
+        "docs/modernization/human-question-evidence.json",
+        "docs/modernization/human-question-results.json",
+        "backend/tests/runtime/test_human_questions.py"
       ],
       "remaining": [
         "Migrate all legacy callers and capability families",
@@ -737,7 +775,12 @@
         "docs/modernization/conversation-evidence.json",
         "backend/tests/runtime/test_run_conversation.py",
         "backend/tests/runtime/test_workspace_delivery.py",
-        "frontend/tests/runtime.test.ts"
+        "frontend/tests/runtime.test.ts",
+        "docs/architecture/human-questions.md",
+        "docs/modernization/human-question-evidence.json",
+        "docs/modernization/human-question-results.json",
+        "backend/tests/runtime/test_human_questions.py",
+        "backend/tests/runtime/test_runtime_service.py"
       ],
       "remaining": [
         "Apply to product prompts and first vertical workflow",
@@ -765,7 +808,12 @@
         "docs/modernization/conversation-evidence.json",
         "backend/tests/runtime/test_run_conversation.py",
         "backend/tests/runtime/test_workspace_delivery.py",
-        "frontend/tests/runtime.test.ts"
+        "frontend/tests/runtime.test.ts",
+        "docs/architecture/human-questions.md",
+        "docs/modernization/human-question-evidence.json",
+        "docs/modernization/human-question-results.json",
+        "backend/tests/runtime/test_human_questions.py",
+        "backend/tests/runtime/test_runtime_service.py"
       ],
       "remaining": [
         "Historical migration fixtures and backup/restore",
@@ -829,13 +877,37 @@
         "backend/tests/runtime/test_run_conversation.py",
         "backend/tests/runtime/test_workspace_delivery.py",
         "frontend/tests/runtime.test.ts",
-        "docs/modernization/workspace-frontend-evidence.json"
+        "docs/modernization/workspace-frontend-evidence.json",
+        "docs/architecture/human-questions.md",
+        "docs/modernization/human-question-evidence.json",
+        "docs/modernization/human-question-results.json",
+        "backend/tests/runtime/test_human_questions.py",
+        "backend/tests/runtime/test_runtime_service.py"
       ],
       "remaining": [
         "Rendered browser and keyboard verification",
-        "Native pending human questions and general project/role conversation",
+        "General project/role conversation and legacy question migration",
         "Operable uncertain-run recovery and complete synchronization/pagination",
         "Professional concept-driven redesign remains separately pending"
+      ]
+    },
+    "human_questions": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/human-questions.md",
+        "docs/modernization/human-question-evidence.json",
+        "docs/modernization/human-question-results.json",
+        "backend/tests/runtime/test_human_questions.py",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_workspace_delivery.py",
+        "frontend/tests/runtime.test.ts",
+        "docs/modernization/question-migration-evidence.json",
+        "docs/modernization/question-packaging.json"
+      ],
+      "remaining": [
+        "Migrate legacy question producers and other native input requests without widening authority",
+        "Global inbox and complete synchronization/pagination",
+        "Rendered/accessibility/human comprehension validation"
       ]
     }
   }

@@ -95,7 +95,7 @@ async def test_model_peer_keeps_managed_auth_but_never_business_or_api_key_env(
     assert "RESEARCHER_TOOL_TOKEN" not in keys
     started = next(row for row in records if row.get("method") == "thread/start")
     assert started["params"]["permissions"] == "researcher_inference"
-    assert len(started["params"]["dynamicTools"]) == 10
+    assert len(started["params"]["dynamicTools"]) == 11
     assert "HOST_ONLY_GRANT" not in json.dumps(records)
     assert not any(row.get("method") == "turn/start" for row in records)
     assert not list(c.control.glob("native-inference-*"))

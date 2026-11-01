@@ -299,6 +299,11 @@ def ensure_migrations(db_path: str | None = None) -> None:
             resource = Path(__file__).resolve().parents[2] / "db/model_schema.sql"
             apply_sql_resource(conn, resource)
             logger.info("Migration 23: model provenance per native dispatch")
+        if 24 not in applied:
+            from backend.db.question_migration import apply_question_schema
+
+            apply_question_schema(conn)
+            logger.info("Migration 24: durable human questions and waiting state")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()

@@ -25,6 +25,18 @@ async def main():
         ) as peer:
             tools = await BusinessTools.connect(peer)
             schemas = {tool["name"]: tool["inputSchema"] for tool in tools.catalog}
+            assert len(schemas) == 11
+            ask = schemas["researcher_ask_user"]
+            assert set(ask["properties"]) == {"operation_key", "questions"}
+            question = ask["properties"]["questions"]["items"]
+            assert question["additionalProperties"] is False
+            assert set(question["properties"]) == {
+                "id",
+                "question",
+                "why_needed",
+                "options",
+                "example",
+            }
             assert schemas["researcher_finding_record"]["properties"][
                 "finding_type"
             ].get("enum") == [

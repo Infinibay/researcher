@@ -86,7 +86,7 @@ client.env.update(
 classes = discover_mcp_tool_classes(force=True, block=True)
 names = {c.model_fields["name"].default for c in classes}
 assert (
-    "ken_find" in names and len([n for n in names if n.startswith("researcher_")]) == 10
+    "ken_find" in names and len([n for n in names if n.startswith("researcher_")]) == 11
 )
 import uvicorn
 from infinidev.server.app import create_app

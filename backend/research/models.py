@@ -12,6 +12,7 @@ PERMISSIONS = frozenset(
         "findings.write",
         "reports.read",
         "reports.write",
+        "questions.ask",
     }
 )
 

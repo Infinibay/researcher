@@ -15,7 +15,8 @@ propuesta nativa vigente se guarda en el mismo hilo y transacción que su result
 y evento. No acepta la tarea ni autoriza publicar. Un resultado obsoleto no se
 presenta como respuesta vigente.
 
-El DTO de mensajes distingue `recorded`, `instruction_admitted` y `proposal`.
+El DTO de mensajes distingue `recorded`, `instruction_admitted`, `proposal`,
+`question` y `answer`.
 Proyecto, tarea, contexto y run proceden de joins canónicos, no de metadatos
 inventados por el autor. El historial conserva el contexto original y refleja
 que su ejecución fue superseded cuando cambia. El texto histórico no se reescribe
@@ -32,8 +33,9 @@ solicitado; rechaza uno ajeno o cerrado. Su recibo significa mensaje guardado.
 Todavía existe entrega antigua para conversaciones heredadas: esa ruta no es
 el coordinador nativo ni representa el cierre de la migración de roles/flows.
 La nueva interfaz escribe instrucciones por la ruta tipada; el historial anterior
-se conserva en lectura. Las respuestas a preguntas antiguas y la conversación
-general de planificación requieren todavía su reemplazo nativo completo.
+se conserva en lectura. El recorrido nuevo incorpora
+[preguntas y respuestas versionadas](human-questions.md). Las preguntas antiguas
+y la conversación general de planificación requieren todavía su reemplazo completo.
 
 ## Un dueño de entrega
 
@@ -127,7 +129,8 @@ de autonomía antigua; las credenciales se revocaron y la tarea no quedó done.
 Las pruebas usan SQLite real para atomicidad, proyectos, versiones, recibos y
 lectores. La web tiene pruebas Node de transporte/intenciones/estados y pasa
 TypeScript/Vite. CUA sigue sin navegador disponible: no hay prueba visual,
-recorrido de teclado ni aceptación del diseño. El motor aún debe incorporar
-preguntas humanas pendientes, recuperación operable de incertidumbre, roles,
+recorrido de teclado ni aceptación del diseño. El recorrido de preguntas nuevo
+tiene prueba real por suscripción; véase `human-question-evidence.json`.
+El motor aún debe incorporar recuperación operable de incertidumbre, roles,
 desarrollo/Git/review/CI y demás capacidades del plan; los 100 fallos de la
 suite heredada permanecen identificados, no eliminados para simular migración.

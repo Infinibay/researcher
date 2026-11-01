@@ -1,8 +1,11 @@
 """Project-bound research tools; no arbitrary SQL, paths or model-side grants."""
 
+import asyncio
+
 from fastapi import APIRouter, FastAPI, Query, Request
 from fastapi.responses import JSONResponse
 
+from backend.api.models.questions import AskUser
 from backend.api.models.research import (
     CaptureReference,
     CaptureWeb,
@@ -30,6 +33,18 @@ from backend.research.models import (
 )
 
 router = APIRouter(prefix="/api/research-tools", tags=["research-tools"])
+
+
+@router.post("/questions", status_code=201)
+async def ask_user(command: AskUser, ctx: Context, request: Request):
+    from backend.api.routes.runs import service
+
+    runtime = service(request)
+    receipt = await asyncio.to_thread(
+        runtime.questions.ask, ctx.scope, command.operation_key, command.domain()
+    )
+    runtime.question_requested(receipt["run_id"], receipt["attempt_id"])
+    return receipt
 
 
 def install_research_errors(app: FastAPI):

@@ -28,11 +28,13 @@ class ChatMessageResponse(BaseModel):
     runtime_status: str | None = None
     context_version: int | None = None
     task_id: int | None = None
-    delivery: Literal["recorded", "instruction_admitted", "proposal"] = "recorded"
+    delivery: Literal[
+        "recorded", "instruction_admitted", "proposal", "question", "answer"
+    ] = "recorded"
 
     @model_validator(mode="after")
     def delivery_receipt(self):
-        if self.runtime_run_id is not None:
+        if self.runtime_run_id is not None and self.delivery == "recorded":
             self.delivery = (
                 "instruction_admitted"
                 if self.conversation_type == "user_to_agent"

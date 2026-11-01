@@ -9,9 +9,12 @@ from backend.runtime.contracts import RunNotFound
 from backend.runtime.sqlite_runs import SQLiteRunStore
 
 MESSAGE_SELECT = """SELECT cm.*,r.id AS runtime_run_id,r.status AS runtime_status,
-    r.context_version,r.task_id FROM chat_messages cm
+    CASE WHEN cm.id=q.answer_message_id THEN q.answer_context_version ELSE r.context_version END AS context_version,
+    r.task_id, CASE WHEN cm.id=q.question_message_id THEN 'question' WHEN cm.id=q.answer_message_id THEN 'answer'
+    ELSE 'recorded' END AS delivery FROM chat_messages cm
     LEFT JOIN runtime_chat_links link ON cm.id=link.user_message_id OR cm.id=link.proposal_message_id
-    LEFT JOIN runtime_runs r ON r.id=link.run_id"""
+    LEFT JOIN runtime_question_links q ON cm.id=q.question_message_id OR cm.id=q.answer_message_id
+    LEFT JOIN runtime_runs r ON r.id=COALESCE(link.run_id,q.run_id)"""
 
 
 class OwnerRuntimeView:
@@ -41,6 +44,13 @@ class OwnerRuntimeView:
                 "SELECT id,file_name,file_type FROM reference_files WHERE project_id=? ORDER BY id",
                 (project_id,),
             ).fetchall()
+            questions = conn.execute(
+                """SELECT q.request_id,q.run_id,q.context_version,q.question_set_json,q.answer_context_version,
+                u.status,u.response,r.status AS run_status FROM runtime_question_links q
+                JOIN user_requests u ON u.id=q.request_id JOIN runtime_runs r ON r.id=q.run_id
+                WHERE q.project_id=? AND r.task_id=? ORDER BY q.request_id""",
+                (project_id, task_id),
+            ).fetchall()
         return {
             "context": context,
             "runs": [asdict(run) for run in runs],
@@ -48,6 +58,20 @@ class OwnerRuntimeView:
             "reports": [dict(row) for row in reports],
             "repositories": [dict(row) for row in repositories],
             "references": [dict(row) for row in references],
+            "questions": [
+                {
+                    "request_id": q["request_id"],
+                    "run_id": q["run_id"],
+                    "context_version": q["context_version"],
+                    "questions": json.loads(q["question_set_json"]),
+                    "status": q["status"],
+                    "answers": json.loads(q["response"]) if q["response"] else None,
+                    "answer_context_version": q["answer_context_version"],
+                    "ready_for_answer": q["status"] == "pending"
+                    and q["run_status"] == "waiting_input",
+                }
+                for q in questions
+            ],
         }
 
     def source(self, project_id, source_id, *, offset=0, max_chars=12000):

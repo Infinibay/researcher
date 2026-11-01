@@ -281,3 +281,69 @@ restore/bootstrap, all prompt review/evals and human comprehension work. Then
 finish all concept/audit/implementation/accessibility requirements and the final
 whole-branch independent review. The full plan remains active; the 100 inherited
 failures and pending visual deliverables are not accepted final limitations.
+
+
+## Durable human questions checkpoint
+
+- Continued the active implementation plan; this is not plan completion. Started
+  from e8ca5db and preserved user main/instruction copies. The user's model-choice
+  question was checked against runtime_dependencies.py: host JSON `model` is
+  global and restart-loaded; no web selector or per-project/agent override exists.
+- Ruling: model a native information question as a durable pause, not a completed
+  proposal or implicit authorization. Persist question + chat + operation receipt
+  + authority withdrawal atomically; confirm waiting_input only after both owned
+  peers close and no owned job is unknown. If this is too strict, the cost is an
+  explicit new run after answering rather than a live waiting model turn.
+- Ruling: answer records the literal question/answer pair, increments context,
+  supersedes the prior run and does not submit inference. Unknown model usage keeps
+  its budget ceiling; local teardown does not prove remote final billing.
+- Migration 24 rebuilds the run status CHECK, preserving rowids/children/custom
+  objects and restoring SQLite connection settings. Three migration tests passed
+  after the initial FK-setting test fixture was corrected. Injected failure rolls
+  back DDL/data/marker. A read-only source fixture copy upgraded 22→24 twice:
+  all original rows/columns of 104 tables preserved, zero FK errors. User data was
+  not migrated (question-migration-evidence.json).
+- Domain tests observed RED→GREEN (7 missing-module failures before implementation).
+  Coordinator tests observed RED→GREEN (2 missing-question-service failures).
+  Owner API test observed RED→GREEN (missing question projection); MCP HTTP test
+  observed RED→GREEN (missing endpoint). Tests exercise Stop/context precedence,
+  unconfirmed closure, grant withdrawal, exact answer IDs, foreign scope, answer
+  atomicity, idempotent receipts and denial of the legacy answer bypass.
+- Real locked MCP catalog now has 11 business tools. Its schema check initially
+  assumed $defs and failed; the live catalog inlines nested models. Corrected the
+  checker to inspect the actual nested schema; it passes with zero model turns.
+  No permission/effect elicitation is automatically accepted as a user answer.
+- Web form renders every question group of the selected task, reasons/examples,
+  choices and free text; no default answer. Submission freezes a copy and retains
+  its key across an ambiguous receipt. New transport test observed RED→GREEN
+  (prepareAnswer absent → valid immutable retry). Eight Node tests and build pass.
+  No browser was available; no rendered/accessibility/comprehension claim.
+- Live subscription trial questions-709512e4 passed: exactly two native dispatches
+  with gpt-6.1-sol, first question → confirmed local closure → answer 200 (same
+  answer POST repeated with no generation) → separate explicit instruction →
+  quoted provisional finding and canonical draft with 200/42/242. Five same-thread
+  messages retain typed delivery and context. Both grants revoked, no legacy
+  agent events, task still in_progress, owned server terminal. No other model
+  turns were submitted in this checkpoint (human-question-evidence.json).
+- Final offline suite: 1,110 cases, 1,007 pass, same 100 baseline failure identities,
+  three skip; no new/resolved failures (human-question-results.json). The complete
+  suite remains red. Targeted new/changed code lint is checked separately; two
+  preexisting blind-catch diagnostics remain in the guarded legacy user_requests
+  endpoint. Packaged wheel bytes match 33 selected modules/resources, including
+  all eight schemas (question-packaging.json). Existing Vite chunk/Browserslist
+  warnings remain.
+
+## Next brief after human questions
+
+Continue the FULL implementation objective. Do not redo the working task research,
+conversation, model provenance or question path. Add conservative owner recovery
+for uncertain attempts (inspect native/job/tool receipts without prompt replay).
+Then migrate all remaining legacy project/role orchestration and old writers,
+all retained tool families, development/Git/review/CI acceptance, auxiliary
+inference, backup/restore/bootstrap, every prompt/book-skill review and communication
+comprehension evaluation. Native input requests outside researcher_ask_user still
+fail conservatively; any adapter must preserve secret/permission boundaries.
+Complete 36 desktop concepts plus 12 mobile references, selection, professional
+implementation, browser/accessibility acceptance and final independent whole-branch
+review. No final design claim, no accepted permanent baseline failures, no goal
+complete/blocked/paused status. Model selection is still global JSON only.

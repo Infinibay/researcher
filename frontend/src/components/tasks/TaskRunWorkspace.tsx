@@ -1,12 +1,46 @@
 import { useRef, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { prepareInstruction, presentRun, sourceWindow } from '../../api/runtime'
-import type { InstructionIntent } from '../../api/runtime'
-import { useCorrection, useInstruction, useStopRun, useTaskWorkspace } from '../../hooks/useRuntime'
+import { prepareAnswer, prepareInstruction, presentRun, sourceWindow } from '../../api/runtime'
+import type { AnswerIntent, InstructionIntent, RuntimeQuestion } from '../../api/runtime'
+import { useAnswer, useCorrection, useInstruction, useStopRun, useTaskWorkspace } from '../../hooks/useRuntime'
 import { MarkdownRenderer } from '../common/MarkdownRenderer'
 
 const inputClass = 'w-full rounded-md border border-surface-600 bg-surface-900 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500'
 const buttonClass = 'rounded-md border border-surface-600 px-3 py-2 text-sm text-slate-200 hover:bg-surface-700 disabled:opacity-50'
+
+function QuestionCard({ projectId, taskId, question }: { projectId: number; taskId: number; question: RuntimeQuestion }) {
+  const answer = useAnswer()
+  const [values, setValues] = useState<Record<string, string>>({})
+  const [error, setError] = useState('')
+  const intent = useRef<AnswerIntent | null>(null)
+  const pending = question.status === 'pending'
+  const submit = () => {
+    try {
+      if (!intent.current) intent.current = prepareAnswer(projectId, taskId, question.request_id, question.context_version, values)
+      setError('')
+      answer.mutate(intent.current)
+    } catch (failure) { setError(failure instanceof Error ? failure.message : 'Revisa las respuestas.') }
+  }
+  return <section className="space-y-3 rounded-md border border-surface-600 p-3" aria-label="Preguntas del agente">
+    <h4 className="font-medium text-slate-200">{pending ? 'El agente necesita una aclaración' : question.status === 'responded' ? 'Respuesta registrada' : 'Pregunta del contexto anterior'}</h4>
+    <p className="text-xs text-slate-400">Pregunta bajo contexto {question.context_version}{question.answer_context_version ? ` · respuesta guardada en contexto ${question.answer_context_version}` : ''}</p>
+    {pending && <p className="text-slate-400">{question.ready_for_answer ? 'La ejecución se cerró. Responde con tus palabras o elige una opción.' : 'Se está comprobando el cierre de la ejecución. La respuesta se habilitará cuando esté confirmado.'}</p>}
+    <form className="space-y-4" onSubmit={event => { event.preventDefault(); submit() }}>
+      {question.questions.map(item => <fieldset key={item.id} className="space-y-2" disabled={!pending || !question.ready_for_answer || answer.isPending || intent.current != null}>
+        <legend className="whitespace-pre-wrap text-slate-200">{item.question}</legend>
+        {item.why_needed && <p className="whitespace-pre-wrap text-slate-400">{item.why_needed}</p>}
+        {item.example && <p className="whitespace-pre-wrap text-slate-400">Ejemplo: {item.example}</p>}
+        {pending ? <>
+          {item.options.length > 0 && <div className="flex flex-wrap gap-2">{item.options.map(option => <button type="button" key={option} className={buttonClass} aria-pressed={values[item.id] === option} onClick={() => setValues(previous => ({ ...previous, [item.id]: option }))}>{option}</button>)}</div>}
+          <label className="block text-slate-300">Tu respuesta<textarea className={inputClass} rows={2} value={values[item.id] ?? ''} maxLength={12000} onChange={event => setValues(previous => ({ ...previous, [item.id]: event.target.value }))} /></label>
+        </> : <p className="whitespace-pre-wrap text-slate-300">{question.answers?.[item.id] ?? 'Esta pregunta perdió vigencia; no se envió una respuesta.'}</p>}
+      </fieldset>)}
+      {(error || answer.error) && <div role="alert" className="space-y-2 text-rose-300"><p>{error || `No se confirmó el guardado. Reenviar conserva las mismas respuestas. ${answer.error?.message}`}</p></div>}
+      {pending && <button className={buttonClass} disabled={answer.isPending || (!intent.current && (!question.ready_for_answer || question.questions.some(item => !values[item.id]?.trim())))}>{answer.isPending ? 'Guardando…' : intent.current ? 'Reenviar las mismas respuestas' : 'Guardar respuestas'}</button>}
+    </form>
+    {(answer.isSuccess || question.status === 'responded') && <p role="status" className="text-sky-300">Respuesta guardada. Inicia trabajo cuando quieras usar el nuevo contexto; responder no inicia otra ejecución.</p>}
+  </section>
+}
 
 function SourceReader({ projectId, sourceId }: { projectId: number; sourceId: number }) {
   const [offset, setOffset] = useState(0)
@@ -50,7 +84,7 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
     <button className={buttonClass} onClick={() => workspace.refetch()}>Volver a consultar</button>
   </div>
   const data = workspace.data
-  const active = data.runs.find(run => ['queued', 'running', 'cancelling', 'reconciling', 'needs_review'].includes(run.status))
+  const active = data.runs.find(run => ['queued', 'running', 'cancelling', 'reconciling', 'waiting_input', 'needs_review'].includes(run.status))
   const current = active ?? data.runs[0] ?? null
   const state = presentRun(current?.status ?? null)
   const supported = data.runtime.supported_task_types.includes(data.context.task.type)
@@ -92,10 +126,11 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
     </div>
     {notice && <p role="status" className="text-sky-300">{notice}</p>}
     {!available && <p className="rounded-md border border-amber-700/50 p-3 text-amber-200">{closed ? 'Esta tarea está cerrada. Su historial y sus fuentes siguen disponibles.' : !data.runtime.configured ? 'Configura el motor local para iniciar trabajo. El historial y las fuentes siguen disponibles.' : 'Este tipo de tarea aún no permite iniciar trabajo. Su historial se conserva.'}</p>}
-    {current && ['queued', 'running', 'cancelling', 'reconciling'].includes(current.status) && <div className="space-y-2">
+    {current && ['queued', 'running', 'cancelling', 'reconciling', 'waiting_input'].includes(current.status) && <div className="space-y-2">
       <button className={buttonClass} disabled={stop.isPending || current.status === 'cancelling'} onClick={() => stop.mutate(current.run_id)}>Detener ejecución</button>
       {stop.error && <p role="alert" className="text-rose-300">No se confirmó la detención. Consulta el estado antes de continuar. {stop.error.message}</p>}
     </div>}
+    {data.questions.map(question => <QuestionCard key={`${projectId}:${taskId}:${question.request_id}`} projectId={projectId} taskId={taskId} question={question} />)}
     {current?.result && <section className="space-y-2 rounded-md border border-surface-600 p-3" aria-label="Propuesta del agente">
       <h4 className="font-medium text-slate-200">{current.status === 'needs_review' ? 'Propuesta' : 'Resultado conservado'}</h4>
       <MarkdownRenderer content={current.result.summary} />

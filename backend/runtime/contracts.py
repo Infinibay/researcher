@@ -202,6 +202,7 @@ def cancel_outcome(status: str) -> str:
     return {
         "queued": "cancelled",
         "needs_review": "cancelled",
+        "waiting_input": "cancelled",
         "running": "cancelling",
     }.get(status, status)
 
@@ -210,6 +211,7 @@ def invalidated_outcome(status: str) -> str:
     return {
         "queued": "superseded",
         "needs_review": "superseded",
+        "waiting_input": "superseded",
         "running": "reconciling",
         "cancelling": "reconciling",
     }.get(status, status)

@@ -17,6 +17,7 @@ BUSINESS_NAMES = frozenset(
         "researcher_finding_read",
         "researcher_report_write",
         "researcher_report_read",
+        "researcher_ask_user",
     }
 )
 

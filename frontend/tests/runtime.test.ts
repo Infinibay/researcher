@@ -37,3 +37,25 @@ test('invalid scope and empty instructions never reach transport', async () => {
   assert.throws(() => prepareInstruction(101, { task_id: 1001, context_version: 1, thread_id: 'thread-a', message: '   ' }))
   assert.throws(() => prepareInstruction(0, { task_id: 1001, context_version: 1, thread_id: 'thread-a', message: 'Explain' }))
 })
+
+test('answer retries retain the question, original context and literal answers without starting work', async () => {
+  const { prepareAnswer, sendAnswer, presentRun } = await import('../src/api/runtime.ts')
+  const sent: { url: string; body: Record<string, unknown> }[] = []
+  globalThis.fetch = async (url, options) => {
+    sent.push({ url: String(url), body: JSON.parse(String(options?.body)) })
+    if (sent.length === 1) throw new TypeError('Lost answer receipt')
+    return Response.json({ context_version: 3, application: 'recorded_for_next_run', inference_started: false })
+  }
+  const answers = { base: '200' }
+  const intent = prepareAnswer(101, 1001, 7, 2, answers)
+  answers.base = '100'
+  await assert.rejects(sendAnswer(intent), /Lost answer receipt/)
+  assert.equal((await sendAnswer(intent)).inference_started, false)
+  assert.equal(sent[0].url, '/api/projects/101/tasks/1001/questions/7/answers')
+  assert.deepEqual(sent[0], sent[1])
+  assert.deepEqual(sent[1].body.answers, { base: '200' })
+  assert.equal(sent[1].body.expected_version, 2)
+  assert.equal(Object.isFrozen(intent.body.answers), true)
+  assert.equal(presentRun('waiting_input').canStart, false)
+  assert.match(presentRun('waiting_input').title, /respuesta/)
+})

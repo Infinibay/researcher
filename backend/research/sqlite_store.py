@@ -215,6 +215,7 @@ class SQLiteResearchStore:
             "source.capture": "sources.capture",
             "finding.record": "findings.write",
             "report.write": "reports.write",
+            "question.ask": "questions.ask",
         }[kind]
 
     @staticmethod

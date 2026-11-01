@@ -25,7 +25,45 @@ export interface TaskWorkspace {
   references: { id: number; file_name: string; file_type: string | null }[]
   sources: { id: number; title: string; kind: string; sha256: string; captured_at: number; captured_for_task_id: number }[]
   reports: { id: number; title: string; status: string; created_at: string }[]
+  questions: RuntimeQuestion[]
   runtime: { configured: boolean; supported_task_types: string[]; model: string | null }
+}
+
+export interface RuntimeQuestion {
+  request_id: number
+  run_id: string
+  context_version: number
+  questions: { id: string; question: string; why_needed: string; options: string[]; example: string }[]
+  status: 'pending' | 'responded' | 'expired'
+  answers: Record<string, string> | null
+  answer_context_version: number | null
+  ready_for_answer: boolean
+}
+
+export interface AnswerIntent {
+  readonly projectId: number
+  readonly taskId: number
+  readonly questionId: number
+  readonly body: Readonly<{ operation_key: string; expected_version: number; answers: Readonly<Record<string, string>> }>
+}
+
+export function prepareAnswer(projectId: number, taskId: number, questionId: number, expectedVersion: number, answers: Record<string, string>): AnswerIntent {
+  if (![projectId, taskId, questionId, expectedVersion].every(x => Number.isSafeInteger(x) && x > 0)
+    || Object.keys(answers).length < 1 || Object.keys(answers).length > 3
+    || Object.values(answers).some(value => !value.trim())
+    || new TextEncoder().encode(JSON.stringify(answers)).length > 12000) {
+    throw new Error('Responde las preguntas dentro del límite de 12.000 bytes.')
+  }
+  return Object.freeze({ projectId, taskId, questionId, body: Object.freeze({
+    operation_key: crypto.randomUUID(), expected_version: expectedVersion, answers: Object.freeze({ ...answers }),
+  }) })
+}
+
+export function sendAnswer(intent: AnswerIntent) {
+  return fetchApi<{ context_version: number; application: string; inference_started: false }>(
+    `/api/projects/${intent.projectId}/tasks/${intent.taskId}/questions/${intent.questionId}/answers`,
+    { method: 'POST', body: JSON.stringify(intent.body) },
+  )
 }
 
 export interface InstructionDraft {
@@ -86,6 +124,7 @@ export function presentRun(status: string | null) {
     case 'running': return { title: 'En curso', description: 'Puedes detener el trabajo o registrar una corrección.', canStart: false }
     case 'cancelling': return { title: 'Detención solicitada', description: 'Falta confirmar que terminó la ejecución.', canStart: false }
     case 'reconciling': return { title: 'Requiere comprobación', description: 'No se conocen todos los efectos. La ejecución no se repetirá automáticamente.', canStart: false }
+    case 'waiting_input': return { title: 'Esperando tu respuesta', description: 'El trabajo está pausado y el agente ya no puede actuar en el proyecto. Tu respuesta se guardará para la próxima ejecución.', canStart: false }
     case 'needs_review': return { title: 'Propuesta para revisar', description: 'El resultado está disponible; falta registrar su aceptación.', canStart: false }
     case 'cancelled': return { title: 'Ejecución detenida', description: 'La detención fue confirmada. Las fuentes y borradores guardados se conservan.', canStart: true }
     case 'superseded': return { title: 'Contexto anterior', description: 'Hay una corrección registrada para la próxima ejecución.', canStart: true }

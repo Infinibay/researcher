@@ -1,0 +1,187 @@
+{
+  "trial": "questions-709512e4",
+  "scope": "Real owner HTTP, durable coordinator, native subscription and isolated published Ken; no browser acceptance",
+  "model_turns_submitted": 2,
+  "status": "passed",
+  "admitted_requests": 2,
+  "question": {
+    "request_id": 1,
+    "run_id": "08c837f9-dcc1-4d6c-bc70-a022020d78ca",
+    "context_version": 1,
+    "questions": [
+      {
+        "example": "",
+        "id": "base",
+        "options": [
+          "100",
+          "200"
+        ],
+        "question": "¿Qué base querés usar para el ejemplo? Podés elegir 100 o 200, o escribir otro valor.",
+        "why_needed": "La base determina el importe del impuesto y el total del ejemplo; necesito tu elección antes de calcular."
+      }
+    ],
+    "status": "pending",
+    "answers": null,
+    "answer_context_version": null,
+    "ready_for_answer": true
+  },
+  "answer": {
+    "context_version": 2,
+    "application": "recorded_for_next_run",
+    "inference_started": false
+  },
+  "runs": [
+    {
+      "run_id": "08c837f9-dcc1-4d6c-bc70-a022020d78ca",
+      "project_id": 101,
+      "task_id": 1001,
+      "actor_id": "researcher",
+      "context_version": 1,
+      "status": "waiting_input",
+      "fence": 3,
+      "attempt_id": "fc680f79-c17e-4eaa-ba64-1bd0b8210ba1",
+      "thread_id": "01a19466-b300-7131-9335-055876e098c9",
+      "turn_id": "01a19466-b7b7-7112-b4d9-3f1e9e54c52b",
+      "prompt": "En español: revisa invoice.py con Ken MCP. Quiero un informe de impuesto y total según policy.md, pero todavía no elegí la base del ejemplo. Antes de calcular, usa researcher_ask_user con operation_key ask-base: una pregunta con id base, explicación de por qué importa y opciones 100 o 200, permitiendo texto libre. No supongas la base, no redactes el informe todavía y no publiques ni aceptes la tarea. El host cerrará el turno al preguntar.",
+      "runtime": "codex",
+      "result": null,
+      "cancel_requested": false,
+      "operation_key": "ask-base",
+      "conversation_thread_id": "human-questions",
+      "model": "gpt-6.1-sol"
+    },
+    {
+      "run_id": "f96e924b-1610-4dbc-89c0-93502cabd526",
+      "project_id": 101,
+      "task_id": 1001,
+      "actor_id": "researcher",
+      "context_version": 2,
+      "status": "needs_review",
+      "fence": 1,
+      "attempt_id": "dfee4eb5-56bc-4a72-89aa-c37f61ba6d22",
+      "thread_id": "01a19466-deb6-7880-b25e-05b29e9069dd",
+      "turn_id": "01a19466-e236-7b00-8f5e-2e5dc3355154",
+      "prompt": "Continúa en español usando la respuesta del usuario guardada en el contexto. Comprueba invoice.py con Ken; captura policy.md mediante researcher, registra una observación provisional con cita literal y guarda un informe borrador con el ejemplo elegido. Distingue impuesto y total, evidencia de la fuente y del código. Explica qué cambió tras la respuesta y los límites. No vuelvas a preguntar lo ya contestado, no ejecutes tests, publiques ni aceptes la tarea. Usa claves source-after-answer, finding-after-answer y report-after-answer; termina con el ID del informe.",
+      "runtime": "codex",
+      "result": {
+        "native_status": "completed",
+        "summary": "Guardé la observación provisional con cita literal y el informe borrador.\n\nLa respuesta guardada fijó la base en **200**: con la tasa ilustrativa del 21 %, el **impuesto es 42** y el **total es 242**.\n\nLa política respalda la interpretación y el redondeo; el fragmento de `invoice.py` leído con Ken solo contiene `marker()`, por lo que no valida ese cálculo. La lectura fue parcial. No ejecuté tests, publiqué ni acepté la tarea.\n\nID del informe: **1**"
+      },
+      "cancel_requested": false,
+      "operation_key": "use-recorded-answer",
+      "conversation_thread_id": "human-questions",
+      "model": "gpt-6.1-sol"
+    }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "project_id": 101,
+      "thread_id": "human-questions",
+      "from_agent": "user",
+      "to_agent": "researcher",
+      "to_role": null,
+      "message": "En español: revisa invoice.py con Ken MCP. Quiero un informe de impuesto y total según policy.md, pero todavía no elegí la base del ejemplo. Antes de calcular, usa researcher_ask_user con operation_key ask-base: una pregunta con id base, explicación de por qué importa y opciones 100 o 200, permitiendo texto libre. No supongas la base, no redactes el informe todavía y no publiques ni aceptes la tarea. El host cerrará el turno al preguntar.",
+      "conversation_type": "user_to_agent",
+      "created_at": "2026-10-31 23:58:39",
+      "runtime_run_id": "08c837f9-dcc1-4d6c-bc70-a022020d78ca",
+      "runtime_status": "superseded",
+      "context_version": 1,
+      "task_id": 1001,
+      "delivery": "instruction_admitted"
+    },
+    {
+      "id": 2,
+      "project_id": 101,
+      "thread_id": "human-questions",
+      "from_agent": "researcher",
+      "to_agent": "user",
+      "to_role": null,
+      "message": "¿Qué base querés usar para el ejemplo? Podés elegir 100 o 200, o escribir otro valor.\n\nLa base determina el importe del impuesto y el total del ejemplo; necesito tu elección antes de calcular.\n\n- 100\n- 200",
+      "conversation_type": "agent_to_user",
+      "created_at": "2026-10-31 23:58:49",
+      "runtime_run_id": "08c837f9-dcc1-4d6c-bc70-a022020d78ca",
+      "runtime_status": "superseded",
+      "context_version": 1,
+      "task_id": 1001,
+      "delivery": "question"
+    },
+    {
+      "id": 3,
+      "project_id": 101,
+      "thread_id": "human-questions",
+      "from_agent": "user",
+      "to_agent": "researcher",
+      "to_role": null,
+      "message": "¿Qué base querés usar para el ejemplo? Podés elegir 100 o 200, o escribir otro valor.\nRespuesta del usuario: 200",
+      "conversation_type": "user_to_agent",
+      "created_at": "2026-10-31 23:58:50",
+      "runtime_run_id": "08c837f9-dcc1-4d6c-bc70-a022020d78ca",
+      "runtime_status": "superseded",
+      "context_version": 2,
+      "task_id": 1001,
+      "delivery": "answer"
+    },
+    {
+      "id": 4,
+      "project_id": 101,
+      "thread_id": "human-questions",
+      "from_agent": "user",
+      "to_agent": "researcher",
+      "to_role": null,
+      "message": "Continúa en español usando la respuesta del usuario guardada en el contexto. Comprueba invoice.py con Ken; captura policy.md mediante researcher, registra una observación provisional con cita literal y guarda un informe borrador con el ejemplo elegido. Distingue impuesto y total, evidencia de la fuente y del código. Explica qué cambió tras la respuesta y los límites. No vuelvas a preguntar lo ya contestado, no ejecutes tests, publiques ni aceptes la tarea. Usa claves source-after-answer, finding-after-answer y report-after-answer; termina con el ID del informe.",
+      "conversation_type": "user_to_agent",
+      "created_at": "2026-10-31 23:58:50",
+      "runtime_run_id": "f96e924b-1610-4dbc-89c0-93502cabd526",
+      "runtime_status": "needs_review",
+      "context_version": 2,
+      "task_id": 1001,
+      "delivery": "instruction_admitted"
+    },
+    {
+      "id": 5,
+      "project_id": 101,
+      "thread_id": "human-questions",
+      "from_agent": "researcher",
+      "to_agent": "user",
+      "to_role": null,
+      "message": "Guardé la observación provisional con cita literal y el informe borrador.\n\nLa respuesta guardada fijó la base en **200**: con la tasa ilustrativa del 21 %, el **impuesto es 42** y el **total es 242**.\n\nLa política respalda la interpretación y el redondeo; el fragmento de `invoice.py` leído con Ken solo contiene `marker()`, por lo que no valida ese cálculo. La lectura fue parcial. No ejecuté tests, publiqué ni acepté la tarea.\n\nID del informe: **1**",
+      "conversation_type": "agent_to_user",
+      "created_at": "2026-10-31 23:59:15",
+      "runtime_run_id": "f96e924b-1610-4dbc-89c0-93502cabd526",
+      "runtime_status": "needs_review",
+      "context_version": 2,
+      "task_id": 1001,
+      "delivery": "proposal"
+    }
+  ],
+  "report": {
+    "id": 1,
+    "project_id": 101,
+    "task_id": 1001,
+    "type": "report",
+    "description": "research: Política: ejemplo con base 200",
+    "title": "Política: ejemplo con base 200",
+    "research_status": "draft",
+    "created_at": "2026-10-31 23:59:11",
+    "content": "# Política: ejemplo con base 200\n\nLa respuesta guardada en el contexto 2 fija la base en 200. Esto resuelve la elección pendiente y permite calcular el ejemplo; no modifica la política ni el código.\n\n**Evidencia documental.** Se capturó íntegramente policy.md (fuente 1, SHA-256 74ea890e243a6ba2427387a742c6c501884865446ee058ed5bbdf03a10e98d45). Cita literal: “Tax rates are fractions: 0.21 means 21 percent. Round once at the end using ROUND_HALF_UP.” La observación 1 queda provisional.\n\n**Ejemplo interpretado.** Usando la tasa ilustrativa 0.21 de la fuente, equivalente al 21 %, sobre la base elegida 200:\n\n- Impuesto: 200 × 0.21 = 42.\n- Total con impuesto: 200 + 42 = 242.\n\nNo hay fracción residual que redondear en este ejemplo. La fuente prescribe ROUND_HALF_UP al final, pero no especifica la cantidad de decimales ni la moneda. Tampoco establece que 21 % sea una tasa obligatoria.\n\n**Evidencia del código.** Ken leyó invoice.py, líneas 1–2: `def marker():` y `return \"ALPHA_ONLY\"`. La respuesta se marcó parcial para el rango solicitado 1–200; no permite afirmar cobertura completa del archivo. El fragmento observado no implementa impuestos ni totales. La memoria recuperada por Ken decía ALPHA_ONLY y figuraba untracked: no aporta validación independiente ni revisión verificable. No se obtuvo un hash del código en esta lectura.\n\n**Límites.** Los importes son una derivación aritmética del ejemplo, no una ejecución de invoice.py. No se ejecutaron tests. Este documento es un borrador guardado; no se publicó ni se aceptó la tarea."
+  },
+  "dispatches": [
+    {
+      "model": "gpt-6.1-sol",
+      "status": "unknown",
+      "native_status": null,
+      "observed_tokens": 32668
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "status": "settled",
+      "native_status": "completed",
+      "observed_tokens": 107479
+    }
+  ],
+  "grants_revoked": true,
+  "legacy_events_created": 0,
+  "task_not_done": true,
+  "owned_backend_terminal": true
+}

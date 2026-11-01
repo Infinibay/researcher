@@ -112,6 +112,130 @@ def coordinator(setup, runtime, **kwargs):
     )
 
 
+async def test_question_parks_only_after_peers_close_and_answer_never_dispatches(
+    service_setup,
+):
+    from backend.runtime.questions import Question, QuestionSet
+
+    s = service_setup
+    native = ControlledInference(s)
+    service = coordinator(s, native)
+    async with service:
+        run = await service.submit(s.c.spec)
+        await asyncio.wait_for(native.started.wait(), 2)
+        receipt = service.questions.ask(
+            native.scope,
+            "base-question",
+            QuestionSet((Question("base", "¿Base 100 o 200?"),)),
+        )
+        assert s.c.store.get(101, run.run_id).status == "cancelling"
+        service.question_requested(run.run_id, receipt["attempt_id"])
+        await service.wait(run.run_id)
+        assert native.closed.is_set() and native.interrupted.is_set()
+        assert s.c.store.get(101, run.run_id).status == "waiting_input"
+        version = service.questions.answer(
+            project_id=101,
+            task_id=1001,
+            request_id=receipt["request_id"],
+            expected_version=1,
+            operation_key="answer-base",
+            answers={"base": "200"},
+        )
+        assert version == 2 and len(native.prompts) == 1
+        assert s.c.store.get(101, run.run_id).status == "superseded"
+
+
+async def test_question_with_unconfirmed_peer_close_stays_uncertain(service_setup):
+    from backend.runtime.questions import Question, QuestionSet
+
+    class UncertainPeer(ControlledInference):
+        @asynccontextmanager
+        async def open(self, **kwargs):
+            async with super().open(**kwargs) as peer:
+                yield peer
+            self.peers_closed = False
+
+    s = service_setup
+    native = UncertainPeer(s)
+    service = coordinator(s, native)
+    async with service:
+        run = await service.submit(s.c.spec)
+        await asyncio.wait_for(native.started.wait(), 2)
+        receipt = service.questions.ask(
+            native.scope, "ask", QuestionSet((Question("base", "¿Qué base?"),))
+        )
+        service.question_requested(run.run_id, receipt["attempt_id"])
+        await service.wait(run.run_id)
+        assert s.c.store.get(101, run.run_id).status == "reconciling"
+        with pytest.raises(RunConflict):
+            service.questions.answer(
+                project_id=101,
+                task_id=1001,
+                request_id=receipt["request_id"],
+                expected_version=1,
+                operation_key="answer",
+                answers={"base": "200"},
+            )
+
+
+async def test_question_http_tool_stops_its_bound_peer_and_rejects_scope_arguments(
+    service_setup,
+):
+    import httpx
+
+    from backend.api.local_access import LocalAccess
+    from backend.api.main import create_app
+    from backend.api.research_dependencies import ResearchContext, get_research_context
+
+    s = service_setup
+    native = ControlledInference(s)
+    service = coordinator(s, native)
+    app = create_app(
+        access=LocalAccess(pairing_key="question-tool-owner-key-32-characters"),
+        runtime_service=service,
+    )
+    # This fixture's clock is deterministic; production dependency still verifies
+    # the bearer and grant against the same real DB and live authority gate.
+    app.dependency_overrides[get_research_context] = lambda: ResearchContext(
+        s.c.research, native.scope, None
+    )
+    async with (
+        app.router.lifespan_context(app),
+        httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://localhost"
+        ) as client,
+    ):
+        run = await service.submit(s.c.spec)
+        await asyncio.wait_for(native.started.wait(), 2)
+        body = {
+            "operation_key": "ask",
+            "questions": [
+                {
+                    "id": "base",
+                    "question": "¿Qué base?",
+                    "why_needed": "Cambia el importe calculado",
+                    "options": ["100", "200"],
+                }
+            ],
+        }
+        headers = {"Authorization": "Bearer fixture"}
+        assert (
+            await client.post(
+                "/api/research-tools/questions",
+                headers=headers,
+                json={**body, "project_id": 202},
+            )
+        ).status_code == 422
+        response = await client.post(
+            "/api/research-tools/questions", headers=headers, json=body
+        )
+        assert response.status_code == 201, response.text
+        await service.wait(run.run_id)
+        assert native.interrupted.is_set()
+        assert not service.live_grants.allows(native.scope.grant_id)
+        assert s.c.store.get(101, run.run_id).status == "waiting_input"
+
+
 async def test_product_admission_proposal_and_retry_never_mark_task_done(service_setup):
     s = service_setup
     native = ControlledInference(s)

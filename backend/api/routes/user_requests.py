@@ -47,6 +47,12 @@ async def respond_to_request(request_id: int, body: UserRequestRespond):
         ).fetchone()
         if not row:
             return None
+        if conn.execute(
+            "SELECT 1 FROM runtime_question_links WHERE request_id=?", (request_id,)
+        ).fetchone():
+            raise HTTPException(
+                409, "Answer this native question through its task and context version"
+            )
         if row["status"] != "pending":
             return None
 

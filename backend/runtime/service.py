@@ -26,6 +26,7 @@ from backend.runtime.contracts import (
     StaleAttempt,
     validate_correction,
 )
+from backend.runtime.sqlite_questions import SQLiteQuestionStore
 
 logger = logging.getLogger(__name__)
 
@@ -75,6 +76,7 @@ class _Worker:
     workspace: Path
     active: bool = True
     grant_id: str | None = None
+    attempt_id: str | None = None
     session: object = None
     task: asyncio.Task | None = None
     control: asyncio.Task | None = None
@@ -100,6 +102,7 @@ class RuntimeService:
     ):
         self.store = store
         self.research = research
+        self.questions = SQLiteQuestionStore(store, research)
         self.live_grants = live_grants
         self.runtime = runtime
         self.workspaces = workspaces
@@ -262,6 +265,16 @@ class RuntimeService:
             if slot is not None:
                 slot.intent_committed.set()
 
+    def question_requested(self, run_id, attempt_id):
+        """Retire the exact local peer after the question transaction commits.
+
+        The journal already denies tools. A missing/stale worker cannot be
+        declared paused; only its owning finalizer can confirm both closures.
+        """
+        slot = self._workers.get(run_id)
+        if slot is not None and slot.attempt_id == attempt_id:
+            self._withdraw(slot, slot.outcome)
+
     async def correct(self, **command):
         validate_correction(**command)
         receipt = await asyncio.to_thread(self.store.correction_receipt, **command)
@@ -307,6 +320,7 @@ class RuntimeService:
             lease = await asyncio.to_thread(
                 self.store.claim, slot.spec.project_id, run_id, self.owner_id
             )
+            slot.attempt_id = lease.attempt_id
             slot.lease_deadline = time.monotonic() + 30
             heartbeat = asyncio.create_task(self._heartbeat(slot, lease))
             token = await asyncio.to_thread(
@@ -454,6 +468,12 @@ class RuntimeService:
                             if result
                             else None,
                         )
+                    elif (
+                        await asyncio.to_thread(self.questions.park, lease) is not None
+                    ):
+                        # Question state derives from durable Stop/context intent
+                        # after actual peer closure, regardless of callback order.
+                        pass
                     elif slot.outcome is not None:
                         await asyncio.to_thread(
                             self.store.retire_inference, lease, outcome=slot.outcome

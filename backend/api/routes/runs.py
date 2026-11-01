@@ -8,6 +8,7 @@ from fastapi import APIRouter, FastAPI, HTTPException, Query, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
+from backend.api.models.questions import AnswerQuestions
 from backend.runtime.contracts import RunConflict, RunNotFound, RunSpec
 
 router = APIRouter(prefix="/api/projects", tags=["runtime"])
@@ -45,6 +46,41 @@ def owner_view(request):
     from backend.runtime.views import OwnerRuntimeView
 
     return OwnerRuntimeView(read_store(request).database)
+
+
+@router.post("/{project_id}/tasks/{task_id}/questions/{request_id}/answers")
+async def answer_questions(
+    project_id: int,
+    task_id: int,
+    request_id: int,
+    body: AnswerQuestions,
+    request: Request,
+):
+    from backend.runtime.sqlite_questions import SQLiteQuestionStore
+
+    runtime = request.app.state.runtime_service
+    questions = (
+        runtime.questions
+        if runtime is not None
+        else SQLiteQuestionStore(read_store(request), None)
+    )
+    try:
+        version = await asyncio.to_thread(
+            questions.answer,
+            project_id=project_id,
+            task_id=task_id,
+            request_id=request_id,
+            expected_version=body.expected_version,
+            operation_key=body.operation_key,
+            answers=body.answers,
+        )
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
+    return {
+        "context_version": version,
+        "application": "recorded_for_next_run",
+        "inference_started": False,
+    }
 
 
 class StartRun(BaseModel):

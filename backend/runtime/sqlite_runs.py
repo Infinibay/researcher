@@ -185,6 +185,21 @@ class SQLiteRunStore:
                 "task": dict(task),
                 "context_version": self._context(conn, task_id),
                 "corrections": [dict(row) for row in revisions],
+                "user_answers": [
+                    {
+                        "request_id": q["request_id"],
+                        "asked_under_context": q["context_version"],
+                        "answer_context_version": q["answer_context_version"],
+                        "questions": json.loads(q["question_set_json"]),
+                        "answers": json.loads(q["response"]),
+                    }
+                    for q in conn.execute(
+                        """SELECT q.*,u.response FROM runtime_question_links q JOIN user_requests u ON u.id=q.request_id
+                        JOIN runtime_runs r ON r.id=q.run_id WHERE q.project_id=? AND r.task_id=? AND u.status='responded'
+                        AND q.answer_context_version IS NOT NULL ORDER BY q.answer_context_version,q.request_id""",
+                        (project_id, task_id),
+                    )
+                ],
             }
 
     def task_runs(self, project_id, task_id, *, limit=30):
@@ -556,7 +571,7 @@ class SQLiteRunStore:
             if self._context(conn, spec.task_id) != spec.context_version:
                 raise RunConflict("Run context is already obsolete")
             active = conn.execute(
-                "SELECT id FROM runtime_runs WHERE project_id=? AND task_id=? AND status IN ('queued','running','cancelling','reconciling','needs_review')",
+                "SELECT id FROM runtime_runs WHERE project_id=? AND task_id=? AND status IN ('queued','running','cancelling','reconciling','waiting_input','needs_review')",
                 (spec.project_id, spec.task_id),
             ).fetchone()
             if active is not None:
@@ -1299,6 +1314,10 @@ class SQLiteRunStore:
             if row["status"] in ("failed", "cancelled", "superseded"):
                 return self._view(row)
             self._withdraw(conn, row, status, cancel_requested=1)
+            conn.execute(
+                "UPDATE user_requests SET status='expired' WHERE status='pending' AND id IN (SELECT request_id FROM runtime_question_links WHERE project_id=? AND run_id=?)",
+                (project_id, run_id),
+            )
             self._event(
                 conn,
                 project_id,
@@ -1337,6 +1356,70 @@ class SQLiteRunStore:
         )
         return True
 
+    def _advance_context(
+        self,
+        conn,
+        *,
+        project_id,
+        task_id,
+        expected_version,
+        statement,
+        source_kind,
+        source_reference,
+    ):
+        self._task(conn, project_id, task_id)
+        if self._context(conn, task_id) != expected_version:
+            raise RunConflict(
+                "Context changed; reconcile the correction against its current version"
+            )
+        version, now = expected_version + 1, self.clock()
+        conn.execute(
+            "INSERT INTO task_contexts(task_id,version) VALUES(?,?) ON CONFLICT(task_id) DO UPDATE SET version=excluded.version",
+            (task_id, version),
+        )
+        conn.execute(
+            "INSERT INTO runtime_context_revisions(project_id,task_id,version,statement,source_kind,source_reference,created_at) VALUES(?,?,?,?,?,?,?)",
+            (
+                project_id,
+                task_id,
+                version,
+                statement,
+                source_kind,
+                source_reference,
+                now,
+            ),
+        )
+        runs = conn.execute(
+            "SELECT id FROM runtime_runs WHERE project_id=? AND task_id=? AND status IN ('queued','running','cancelling','reconciling','waiting_input','needs_review')",
+            (project_id, task_id),
+        ).fetchall()
+        for run in runs:
+            row = self._row(conn, project_id, run["id"])
+            self._withdraw(conn, row, invalidated_outcome(row["status"]))
+        conn.execute(
+            "UPDATE tool_grants SET revoked_at=COALESCE(revoked_at,?) WHERE project_id=? AND task_id=?",
+            (now, project_id, task_id),
+        )
+        self._event(
+            conn,
+            project_id,
+            task_id,
+            "context.corrected",
+            {
+                "version": version,
+                "previous_version": expected_version,
+                "source_kind": source_kind,
+                "source_reference": source_reference,
+            },
+        )
+        conn.execute(
+            """UPDATE user_requests SET status='expired' WHERE status='pending' AND id IN
+            (SELECT q.request_id FROM runtime_question_links q JOIN runtime_runs r ON r.id=q.run_id
+             WHERE q.project_id=? AND r.task_id=? AND q.context_version<?)""",
+            (project_id, task_id, version),
+        )
+        return version
+
     def correct_context(
         self,
         *,
@@ -1372,53 +1455,17 @@ class SQLiteRunStore:
             receipt = self._receipt(conn, project_id, task_id, operation_key, intent)
             if receipt is not None:
                 return receipt["version"]
-            self._task(conn, project_id, task_id)
-            if self._context(conn, task_id) != expected_version:
-                raise RunConflict(
-                    "Context changed; reconcile the correction against its current version"
-                )
-            version, now = expected_version + 1, self.clock()
-            conn.execute(
-                "INSERT INTO task_contexts(task_id,version) VALUES(?,?) ON CONFLICT(task_id) DO UPDATE SET version=excluded.version",
-                (task_id, version),
-            )
-            conn.execute(
-                "INSERT INTO runtime_context_revisions(project_id,task_id,version,statement,source_kind,source_reference,created_at) VALUES(?,?,?,?,?,?,?)",
-                (
-                    project_id,
-                    task_id,
-                    version,
-                    statement,
-                    source_kind,
-                    source_reference,
-                    now,
-                ),
-            )
-            runs = conn.execute(
-                "SELECT id FROM runtime_runs WHERE project_id=? AND task_id=? AND status IN ('queued','running','cancelling','reconciling','needs_review')",
-                (project_id, task_id),
-            ).fetchall()
-            for run in runs:
-                row = self._row(conn, project_id, run["id"])
-                self._withdraw(conn, row, invalidated_outcome(row["status"]))
-            conn.execute(
-                "UPDATE tool_grants SET revoked_at=COALESCE(revoked_at,?) WHERE project_id=? AND task_id=?",
-                (now, project_id, task_id),
+            version = self._advance_context(
+                conn,
+                project_id=project_id,
+                task_id=task_id,
+                expected_version=expected_version,
+                statement=statement,
+                source_kind=source_kind,
+                source_reference=source_reference,
             )
             self._save_receipt(
                 conn, project_id, task_id, operation_key, intent, {"version": version}
-            )
-            self._event(
-                conn,
-                project_id,
-                task_id,
-                "context.corrected",
-                {
-                    "version": version,
-                    "previous_version": expected_version,
-                    "source_kind": source_kind,
-                    "source_reference": source_reference,
-                },
             )
             return version
 
