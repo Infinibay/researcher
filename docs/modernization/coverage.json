@@ -283,7 +283,9 @@
         "backend/tests/runtime/test_broker_rpc.py",
         "backend/tests/runtime/test_broker_peer_close.py",
         "docs/modernization/broker-projection-evidence.json",
-        "backend/tests/runtime/test_broker_projection.py"
+        "backend/tests/runtime/test_broker_projection.py",
+        "docs/modernization/broker-native-evidence.json",
+        "backend/tests/runtime/test_broker_native.py"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -358,7 +360,9 @@
         "backend/tests/runtime/test_broker_rpc.py",
         "backend/tests/runtime/test_broker_peer_close.py",
         "docs/modernization/broker-projection-evidence.json",
-        "backend/tests/runtime/test_broker_projection.py"
+        "backend/tests/runtime/test_broker_projection.py",
+        "docs/modernization/broker-native-evidence.json",
+        "backend/tests/runtime/test_broker_native.py"
       ],
       "remaining": [
         "Durable product startup/shutdown and all tool lifecycle integration; old flows are not covered by owned command evidence",
@@ -467,7 +471,9 @@
         "docs/modernization/existing-source-evidence.json",
         "backend/tests/runtime/test_existing_source.py",
         "docs/modernization/broker-projection-evidence.json",
-        "backend/tests/runtime/test_broker_projection.py"
+        "backend/tests/runtime/test_broker_projection.py",
+        "docs/modernization/broker-native-evidence.json",
+        "backend/tests/runtime/test_broker_native.py"
       ]
     },
     "E06": {
@@ -671,7 +677,9 @@
         "backend/tests/runtime/test_broker_rpc.py",
         "backend/tests/runtime/test_broker_peer_close.py",
         "docs/modernization/broker-projection-evidence.json",
-        "backend/tests/runtime/test_broker_projection.py"
+        "backend/tests/runtime/test_broker_projection.py",
+        "docs/modernization/broker-native-evidence.json",
+        "backend/tests/runtime/test_broker_native.py"
       ]
     },
     "D03": {
@@ -805,7 +813,9 @@
         "docs/modernization/existing-source-evidence.json",
         "backend/tests/runtime/test_existing_source.py",
         "docs/modernization/broker-projection-evidence.json",
-        "backend/tests/runtime/test_broker_projection.py"
+        "backend/tests/runtime/test_broker_projection.py",
+        "docs/modernization/broker-native-evidence.json",
+        "backend/tests/runtime/test_broker_native.py"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable",
@@ -857,7 +867,9 @@
         "backend/tests/runtime/test_inference_journal.py",
         "docs/modernization/broker-stdio-evidence.json",
         "backend/tests/runtime/test_broker_rpc.py",
-        "backend/tests/runtime/test_broker_peer_close.py"
+        "backend/tests/runtime/test_broker_peer_close.py",
+        "docs/modernization/broker-native-evidence.json",
+        "backend/tests/runtime/test_broker_native.py"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable",

@@ -20,7 +20,7 @@ from backend.runtime.authority_journal import (
     AuthorityConflict,
     AuthorityUncertain,
 )
-from backend.runtime.broker_profile import AnalysisCapsule
+from backend.runtime.broker_profile import AnalysisCapsule, CodexAsset, NativeCapsule
 from backend.runtime.contracts import command_key, text
 from backend.runtime.execution_domain import DomainIdentity, ExecutionDomain
 from backend.runtime.peer_process import (
@@ -112,7 +112,9 @@ class PeerBroker:
     def _grant_key(self):
         return "broker:grant:" + self.grant_id
 
-    def _reserve(self, admission, operation_id, intent, peer_id):
+    def _reserve(
+        self, admission, operation_id, intent, peer_id, *, runtime_manifest=None
+    ):
         snapshot = self.journal.load()
         active = snapshot.records.get("broker:active")
         grant = snapshot.records.get(self._grant_key)
@@ -177,11 +179,17 @@ class PeerBroker:
             "protocol": 1,
             "grant_id": self.grant_id,
             "peer_id": peer_id,
+            "kind": admission["kind"],
             "intent": intent,
             "state": "starting",
             "namespace": None,
             "gate_sent": False,
             "exit_code": None,
+            **(
+                {"runtime_manifest": runtime_manifest}
+                if runtime_manifest is not None
+                else {}
+            ),
         }
         self.journal.commit(
             snapshot,
@@ -237,8 +245,18 @@ class PeerBroker:
         raise AuthorityUncertain("Peer identity record too large")
 
     def run_peer(self, registry, peer_id, *, operation_key, code):
+        return self._run(registry, peer_id, operation_key=operation_key, code=code)
+
+    def run_native(self, registry, peer_id, *, operation_key, asset):
+        if not isinstance(asset, CodexAsset):
+            raise TypeError("Native launch requires an inspected Codex asset")
+        return self._run(registry, peer_id, operation_key=operation_key, asset=asset)
+
+    def _run(self, registry, peer_id, *, operation_key, code=None, asset=None):
         command_key(operation_key)
-        text(code, "analysis code", 64000)
+        if asset is None:
+            text(code, "analysis code", 64000)
+        kind = "command" if asset is None else "native"
         with self._gate_lock:
             original = registry.inspect(peer_id)
             operation_id = _digest(
@@ -248,7 +266,21 @@ class PeerBroker:
                     "key": operation_key,
                 }
             )
-            intent = _digest({"code": code, "profile": "readonly-stdlib-analysis-v1"})
+            manifest = (
+                {"code": code, "profile": "readonly-stdlib-analysis-v1"}
+                if asset is None
+                else {
+                    "profile": "readonly-native-codex-v1",
+                    "asset": asdict(asset),
+                    "profile_sha256": hashlib.sha256(
+                        Path(__file__).with_name("broker_profile.py").read_bytes()
+                    ).hexdigest(),
+                    "gate_sha256": hashlib.sha256(
+                        Path(__file__).with_name("peer_payload.py").read_bytes()
+                    ).hexdigest(),
+                }
+            )
+            intent = _digest(manifest)
             existing = self.journal.load().records.get("broker:op:" + operation_id)
             if existing is not None:
                 if existing["intent"] != intent:
@@ -259,11 +291,17 @@ class PeerBroker:
             if self._withdrawn.is_set():
                 raise AuthorityConflict("Broker admission withdrawn")
             admission = registry.admission(peer_id)
-            if admission["binding"] is None or admission["kind"] != "command":
+            if admission["binding"] is None or admission["kind"] != kind:
                 raise AuthorityConflict(
-                    "Analysis broker requires an admitted command peer"
+                    "Broker profile requires its original admitted peer kind"
                 )
-            self._reserve(admission, operation_id, intent, peer_id)
+            self._reserve(
+                admission,
+                operation_id,
+                intent,
+                peer_id,
+                runtime_manifest=manifest if asset is not None else None,
+            )
             self._projection_source = registry
             self._gate_observed[operation_id] = False
             read_fd = write_fd = None
@@ -271,7 +309,10 @@ class PeerBroker:
                 if not self._children:
                     self.domain.limit(pids=128, memory_bytes=512 * 1024**2)
                 read_fd, write_fd = os.pipe2(os.O_CLOEXEC)
-                with AnalysisCapsule(admission["binding"], code, write_fd) as profile:
+                capsule = AnalysisCapsule if asset is None else NativeCapsule
+                with capsule(
+                    admission["binding"], code if asset is None else asset, write_fd
+                ) as profile:
                     if self._withdrawn.is_set():
                         raise AuthorityConflict("Broker admission withdrawn")
                     child = self.domain.spawn(
@@ -530,7 +571,7 @@ class PeerBroker:
                     or peer["protocol_version"] != 1
                     or peer["attempt_id"] != grant["attempt_id"]
                     or peer["fence"] != grant["fence"]
-                    or peer["kind"] != "command"
+                    or peer["kind"] != operation.get("kind", "command")
                     or attempt is None
                     or tuple(attempt)
                     != (grant["project_id"], grant["task_id"], grant["fence"])

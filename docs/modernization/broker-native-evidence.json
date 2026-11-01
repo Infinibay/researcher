@@ -1,0 +1,66 @@
+{
+  "base_commit": "bb745b5",
+  "date": "2026-11-01",
+  "scope": "Concrete broker-contained native App Server transport with pinned host-selected asset and private credential-free home. Metadata/protocol only: not subscription inference, mandatory Ken in this profile, or production factory adoption.",
+  "source_sha256": {
+    "backend/runtime/broker_profile.py": "c1fca8b5067cb768b4cd0c481d2af59d7e3785356532ad43489f8e90e0cfd6c3",
+    "backend/runtime/peer_broker.py": "bb94d5b4384b973a2a9f0942e32e81dfa1eef33ffb86d73786fd15665fe8221d",
+    "backend/runtime/broker_stdio.py": "f1e2724ba0631c1958d7e8c5e7221318b2aa55e59e90422f24781ed3072ef447",
+    "backend/tests/runtime/test_broker_native.py": "cdd6425eb88ee56adac99c683f021f168421c3e91aec8bbd355fd8c0ebf0dc3c"
+  },
+  "raw_artifacts_sha256": {
+    "broker-native-red.log": "05dafe045612ccacda224790c0f7d7b50d50df37dda266c01f442ad73fd0f5d7",
+    "broker-native-first.log": "b8bffe1a807a9fcef3ea896c8ad3110c4e94d0b7096afe9fbd60041aed5008f0",
+    "broker-native-diagnostic.log": "f0c70d62c486d4b4519280be3027004fe5f57485a12915b0d69a34da2f06e735",
+    "broker-native-home-green.log": "323093b1d87135d3917cc3d45e9d410ae649c19f1b2cb18d7a212666c1ec2046",
+    "broker-native-policy-red.log": "2ebf143913537ad2c49b1cfc86a5e9b82b3a63092e29ac8aa6ec355e3806dfb7",
+    "broker-native-policy-green.log": "3eb09d4c3fa045f82ab1c1943ae50972ceaaacf969fcf0d554d8b715f8ab13d9",
+    "broker-native-project-key-diagnostic.log": "3f67ed7fd4d315824cc2343fa0290076163de354042bd8d4fefdfc6e673e0650",
+    "broker-native-verified-focused.log": "1e842a32cd5fd8bbd8f1062026dce0ede4d1310728f97fe13db8e441fa094a07",
+    "broker-native-manifest-red.log": "eaca75d3abc77559e51ea44929a2f510417e7fa9f305dadca5f0b6349827e32a",
+    "broker-native-manifest-focused.log": "3ef8ffd9d327eba786a618fb8d13c7d9473ccf72f764374227c5d7419bdbf0d8",
+    "broker-native-full.log": "3e21246248a1130ae59c874739ad9cb44070bf799c4cc0605f737456ac5df1c2",
+    "broker-native-full.xml": "48eef7fde2a4f1d368427addbdd21e950adbbb82170f7fff525f5199d20bced8",
+    "broker-native-build.log": "a1b5f34a98e9a2526cb6b4dd756427075dbf7552627e62c67d0fb134c4f5237b",
+    "broker-native-package-smoke.log": "34e40adea8f5acfdd7daafb03210170cb3c2433163129a0c522d1f2b6d5b3c1f"
+  },
+  "schema_sha256": {
+    "v2/LoginAccountParams.json": "48fb9bea54d7e0890052653ac06737efb3200ba2261515b2c4014027f36bea3d",
+    "ChatgptAuthTokensRefreshParams.json": "03b7a734b8b3180d9cb477b33564385d29b22a2528165a614891f13849060503",
+    "ChatgptAuthTokensRefreshResponse.json": "06d6b30436fc962d80b5d7920f8f323de12a052214d9148c5f0dfbaedd5eec6c",
+    "v1/InitializeResponse.json": "62ad689c2cb6379913c1d72749cfd8de5089d35760214123518eb92eef11acc9"
+  },
+  "native_binary_sha256": "b8a11fedf24b2dfb59a70c9e52b030f9a508dcd49cd2dd0d41956f4c785156b8",
+  "package_verifier_sha256": "7b26ac1d0bd19ef9ae02ffe8b0cc11cb5c3129b07aba94209af4eaf723bf2c50",
+  "reports": [
+    "broker-native-results.json",
+    "broker-native-packaging.json"
+  ],
+  "verified": [
+    "Explicit bounded regular executable asset identity/content inspected and rechecked on pinned FD before G; changed asset fails with gate_sent=false.",
+    "Separate native profile through the same real global reserve/birth/publication/local bind/G and async RPC; original native kind and readable runtime manifest persist before execution. Wrong command kind rejects before reserve.",
+    "Real Codex0.166.0 initializes and reads account/config inside the kernel domain. Account absent despite synthetic host auth.json/OPENAI_API_KEY canaries; private CODEX_HOME and untrusted source configuration verified.",
+    "Native same-key retry is receipt-only and leaves journal sequence unchanged; closing the native transport projects local native peer closure.",
+    "Controlled compiled ELF audit, explicitly separate from Codex: Internet socket creation succeeds; Unix socket, bind, source write, cgroupfs visibility and unshare reject; parent API-key canary absent. Analysis socket denial remains covered by existing real profile tests.",
+    "Generated experimental schema of the actual pinned binary declares chatgptAuthTokens and host refresh request/response fields; no actual tokens or login/model turn sent.",
+    "Full offline1380:1277 pass,100 exact original baseline failures,3 skip,29 warnings;447 runtime pass. Focused61 pass, including4 native cases.",
+    "Wheel29 runtime Python bytes match and SDist C source matches. Isolated -I -S packaged process starts actual Codex and analysis siblings; analysis computes200 while native account/read remains usable; closes/projects both, reprojects from journal, retries receipt-only, retires domain and rejects stale attempt."
+  ],
+  "diagnosed": [
+    "First real native startup failed because the private CODEX_HOME directory was absent; controlled no-auth stderr identified the cause before adding it inside the capsule.",
+    "Initial shared-native socket policy allowed addressed Unix sockets; compiled probe failed, then explicit Internet family restriction passed. Native listener syscalls are denied and bind is probed.",
+    "Dotted CLI override preserved quotes in the project path key. Actual effective config exposed the incorrect key; a whole inline TOML projects table now matches the intended logical path.",
+    "First runtime asset intent had only an opaque hash. Test failed on missing runtime_manifest; operation now retains actual native asset/profile/gate measurements."
+  ],
+  "limits": [
+    "Trusted host-selected asset measurement is not vendor signature verification or complete runtime/toolchain/assets catalog attestation. Host mutation races and complete deployment origin remain unproven.",
+    "Native capsule currently disables code-mode, shell, agents, plugins and hooks. No real inference, entitlement, refresh, model quota, mandatory Ken/business integration, TLS/DNS or destination egress acceptance was demonstrated here.",
+    "Host network is shared with Internet-client socket policy; it is not an OpenAI-only egress policy. Credentials are deliberately absent in these trials.",
+    "RuntimeService/CodexRuntime/CommandJobs remain on their prior launchers until real managed composition/authentication/all profiles are adopted; no config flag pretends enrollment.",
+    "No real user credentials/tokens sent, new model/image generation, user DB migration, host service/account installation, parent cgroup changes, push/merge/deploy. Full71-tool/engine/prompts/UI plan remains active."
+  ],
+  "primary_references": [
+    "https://learn.chatgpt.com/docs/app-server",
+    "https://developers.openai.com/siwc/token-sharing-open-source/codex-app-server"
+  ]
+}

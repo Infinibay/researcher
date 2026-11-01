@@ -83,11 +83,17 @@ class AsyncPeerBroker:
         await self.aclose()
 
     def peer(self, registry, peer_id, *, operation_key, code):
+        return self._endpoint(registry, peer_id, operation_key, code=code)
+
+    def native(self, registry, peer_id, *, operation_key, asset):
+        return self._endpoint(registry, peer_id, operation_key, asset=asset)
+
+    def _endpoint(self, registry, peer_id, operation_key, *, code=None, asset=None):
         if not self._entered or self._closing is not None:
             raise AuthorityConflict("Async broker is not admitted")
         if len(self._endpoints) >= 128:
             raise AuthorityBusy("Attempt transport history capacity reached")
-        endpoint = BrokerEndpoint(self, registry, peer_id, operation_key, code)
+        endpoint = BrokerEndpoint(self, registry, peer_id, operation_key, code, asset)
         self._endpoints.append(endpoint)
         return endpoint
 
@@ -97,13 +103,21 @@ class AsyncPeerBroker:
         if len(self._pending) >= 8:
             raise AuthorityBusy("Async broker launch queue full")
         loop = asyncio.get_running_loop()
+        start = (
+            self.broker.run_peer if endpoint.asset is None else self.broker.run_native
+        )
+        payload = (
+            {"code": endpoint.code}
+            if endpoint.asset is None
+            else {"asset": endpoint.asset}
+        )
         future = loop.run_in_executor(
             self._launch_pool,
-            lambda: self.broker.run_peer(
+            lambda: start(
                 endpoint.registry,
                 endpoint.peer_id,
                 operation_key=endpoint.operation_key,
-                code=endpoint.code,
+                **payload,
             ),
         )
         self._pending.add(future)
@@ -208,9 +222,10 @@ class AsyncPeerBroker:
 class BrokerEndpoint:
     """A single post-gate connection; cannot reopen or replay a start receipt."""
 
-    def __init__(self, owner, registry, peer_id, operation_key, code):
+    def __init__(self, owner, registry, peer_id, operation_key, code, asset=None):
         self.owner, self.registry, self.peer_id = owner, registry, peer_id
         self.operation_key, self.code = operation_key, code
+        self.asset = asset
         self.stdin = self.stdout = self.stderr = None
         self._raw = None
         self._operation = None

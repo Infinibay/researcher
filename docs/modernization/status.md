@@ -59,6 +59,10 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    Incluye arranques cancelados, pérdida de acuse de reserva y reconciliación en otro
    proceso desde el journal. SQL local ocupado o ausente no impide el cierre global.
    Falta conectarlo al estado de negocio y a los lanzadores productivos del intento.
+   Hay un perfil nativo separado: App Server Codex0.166.0 real bajo el broker,
+   manifiesto de ejecutable/perfil/gate, hogar privado sin credenciales heredadas
+   y lectura de metadatos comprobada. Aún no ejecuta inferencia/suscripción/Ken en
+   ese perfil; no sustituye los lanzadores productivos por este ensayo.
 7. **Contexto y procedencia:** versiones al corregir o cambiar trece entradas de tarea;
    retiro de autoridad antigua; respuesta asociada a pregunta/versión; repositorio
    admitido inmutable y comienzo de cola explícito. Registro exacto de la entrada
@@ -125,9 +129,13 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 
 ## Verificación más reciente
 
-- Suite completa:1376 casos;1273 pasan,100 fallan con las mismas identidades de la
+- Suite completa:1380 casos;1277 pasan,100 fallan con las mismas identidades de la
   línea base y 3 se omiten. La suite global sigue roja.
-- Runtime:443 pasan;61 pruebas dirigidas de broker/proyección/transporte/fuente.
+- Runtime:447 pasan;61 pruebas dirigidas de broker/nativo/proyección/dominio.
+  Cuatro casos nativos incluyen Codex real sin cuenta, asset cambiado, kind
+  incorrecto y un ELF de diagnóstico de la política del perfil. La wheel ejecutó
+  Codex y análisis como hermanos y confirmó ambos cierres locales. En el checkpoint
+  anterior se verificaron61 de broker/proyección/transporte/fuente.
   Incluyen cierre local idempotente, nueve comandos, SQL local ocupado durante
   Stop, fuente perdida/copiada, binding alterado, reserva con acuse perdido y
   reconciliación en otro proceso. En el checkpoint anterior:23 de fuente/arranque/
@@ -164,9 +172,10 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
   siguen pendientes;0/12 rutas aceptadas. Dependencias:18 avisos npm preexistentes
   (5 bajos,3 moderados,10 altos), sin nuevos paquetes vulnerables por Playwright/axe.
 
-Evidencia actual: [proyección del cierre](broker-projection-evidence.json),
-[resultados actuales](broker-projection-results.json),
-[paquete verificado](broker-projection-packaging.json),
+Evidencia actual: [transporte nativo y límites](broker-native-evidence.json),
+[resultados actuales](broker-native-results.json),
+[paquete verificado](broker-native-packaging.json),
+[proyección del cierre](broker-projection-evidence.json),
 [fuente existente](existing-source-evidence.json),
 [transporte/cierre](broker-stdio-evidence.json),
 [paquete y JSON-RPC aislado](broker-stdio-packaging.json),

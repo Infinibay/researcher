@@ -2122,3 +2122,112 @@ human comprehension, data/backup/bootstrap/CLI/TUI/clean install, dependency upd
 18 npm advisories and100 baseline failures remain. UI still6/36 desktop+2/12 mobile
 concepts,2 pilots,0/12 accepted pages;30+10 concepts/10 routes and all12 acceptance
 remain. Final fresh independent whole-branch review required; keep full goal active.
+
+## Current task: contained Codex native transport — base bb745b5
+
+- Previous goal turn was progress: actual source closure projection committed and
+  verified. Revalidated tracked-clean branch; preserve FULL plan and all remaining
+  capabilities/UI/prompts/legacy removal, not just this native launcher increment.
+- Read current NativeRuntime/command launchers and actual Codex0.166.0 CLI metadata.
+  Native inference still launches through registered old peer_guard. Analysis
+  capsule cannot be reused as inference: it denies every socket and only mounts
+  stdlib/source. New native launch must use a distinct concrete profile/asset.
+- Implement pinned explicit Codex asset, separate minimal native capsule, actual
+  PeerBroker native birth/publication/bind/G and shared AsyncPeerBroker/JsonRpcClient.
+  Verify real App Server initialize/account/config metadata without any model turn
+  or credential mounting, source writes, arbitrary host launcher or fake CLI command.
+- Native profile keeps source readonly, private HOME/CODEX_HOME, host controls and
+  credentials absent, bounded domain, namespace/control denial. Its networking is
+  a distinct policy; it must not weaken analysis socket denial. Record actual
+  binary/profile hashes in intent and preserve receipt-only retries/projection.
+- Official App Server docs describe experimental chatgptAuthTokens via RPC and
+  host-owned refresh. The pinned binary/protocol must verify support before auth
+  migration. Do not switch providers or use a metered key. Full subscription/Ken/
+  business/code-mode profile integration and managed complete actor enrollment are
+  still required before this is accepted as production inference.
+
+## Contained native transport checkpoint — base bb745b5
+
+- Previous turn was progress; tracked-clean bb745b5 revalidated. Inspected actual
+  product launcher/factory/command consumers and bootstrap design before editing.
+  Ken recall/related still lack these worktree modules; existing source-evidence
+  restriction prevents saving misleading memories against the original checkout.
+- Added CodexAsset bounded executable identity/content measurement and recheck on
+  an opened FD; source-owned/changed/untrusted-mode assets reject before G. No
+  host execution is used to identify an asset. Native manifest records selected
+  binary identity/hash and actual profile/gate source hashes in durable operation.
+- Added distinct NativeCapsule and run_native through the existing global/local/G
+  operation, not another launcher/LLM loop. Shared minimal mount/gate handling with
+  analysis while keeping its socket-denying filter unchanged. Native gets private
+  HOME/CODEX_HOME, RO source, pinned binary without its parent tree, fixed features/
+  ChatGPT/OpenAI settings, explicit untrusted logical source and bounded threads.
+- AsyncPeerBroker.native connects the same protocol client. Operations now record
+  kind; closure projection accepts the exact registered native/command kind, with
+  historical analysis fallback. Same-key native retry produces no transport/write.
+- Initial missing-feature tests RED. Real Codex0.166.0 initially exited at startup;
+  controlled fresh-home/no-auth stderr proved CODEX_HOME directory was absent.
+  Creating that directory only inside the capsule made real initialize/account/
+  config pass. Synthetic host auth.json/env key and invalid source configuration
+  are not inherited; account remains null, no model turn is sent.
+- Controlled ELF policy test, clearly separate from actual Codex, RED exposed
+  addressed Unix sockets under the first native filter. Restrict socket to AF_INET/
+  AF_INET6, deny bind/listen/accept and namespace/control calls. Probe now confirms
+  Internet socket availability but Unix socket/bind/source write/cgroup visibility/
+  unshare/key inheritance absent. Native socketpair remains private; no OpenAI-only
+  destination/egress or real inference-network claim is made.
+- Effective-config test RED exposed quoted project path preserved literally by
+  dotted CLI override. Controlled config diagnostic showed the exact bad key;
+  replacing it with a full inline TOML projects table preserves the required path.
+- Manifest test RED exposed opaque intent without audit data; new operations now
+  persist readable runtime_manifest with the native measurements before launch.
+- Generated experimental JSON schema from the actual pinned binary in an empty
+  host metadata home. It declares chatgptAuthTokens accessToken/account/plan and
+  refresh request/response fields, matching official App Server docs. No real token,
+  login or inference sent; current factory auth/provider was not silently changed.
+- Final focused61 pass. Full bare suite1380:1277 pass,100 exact original baseline
+  failure identities,3 skip,29 warnings;447 runtime pass,4 native cases. New/resolved
+  failures empty. Changed Python Ruff check/format and git diff check pass.
+- Offline wheel/SDist build passed; all29 runtime Python sources/native C match.
+  Extracted-wheel -I -S process starts actual Codex0.166.0 and analysis siblings
+  through one broker; analysis computes200, its close preserves native account/read,
+  both local peers project closed, retirement/recovered projection/receipt retry/
+  stale rejection/missing-source non-recreation pass. Synthetic source/bootstrap
+  only; known blocked urllib3 localhost capability probe is preparation, not inference.
+- Ruling: keep native transport separate from analysis and do not activate it as
+  productive inference yet — real subscription/auth refresh, TLS/DNS/egress, mandatory
+  Ken/business/code-mode and runtime/catalog/state manifests remain unproved — cost:
+  existing product launchers stay to migrate; no configuration flag can close that gap.
+- Ruling: native socket policy is Internet-client families, not blanket networking
+  and not OpenAI-only egress — actual Unix-socket probe demonstrated a control
+  channel to exclude — cost: future OAuth/browser/MCP/code-mode integrations must
+  use compatible host-mediated channels instead of reopening host control sockets.
+- Ruling: persist additive native kind/manifest while preserving analysis intent
+  hash and historical kind fallback — old receipts must not be replayed after an
+  upgrade — cost: native profile/asset changes conflict with prior intent and need
+  explicit reconciliation/new admission. Full toolchain/assets catalog still pending.
+- Status/architecture/coverage/evidence/package updated. No phase/scenario closed,
+  no new model/image generation, user DB migration, host account/service install,
+  shared-parent cgroup change, push/merge/deploy. Full goal remains active.
+
+## Next brief after contained native transport
+
+Continue FULL modernization. Existing real native metadata transport is done; do
+not reimplement broker/domain/journal/gate/source projection or the8 concept assets.
+Complete the actual product composition: isolated persistent native state with no
+managed credential directory mount; host-mediated subscription RPC/auth refresh
+verified against pinned schema; TLS/DNS and destination policy; actual mandatory
+published Ken and business adapters through broker-owned peers, compatible code-mode
+execution in its own profile, and runtime/toolchain/assets/catalog version binding.
+Test bounded real subscription+Ken turns through that integrated path before
+enabling mutable tooling. NativeCapsule currently disables code-mode/shell/plugins
+and has no credentials; metadata success does not prove inference or entitlement.
+Adopt actual RuntimeService/CodexRuntime/CommandJobs launchers with managed external
+origin/enrollment/authentication/non-reused generation proof and all actor control.
+Durable bounded outputs, wall/CPU/lease and run business-state reconciliation still
+required. Missing state is not genesis; no flags masquerade as enrollment.
+Keep all71 tools/11 categories, engine/autonomy/roles/flows/agent communication, exact
+Git candidate/review/CI, prompt/book-skills/evals/human comprehension, historical
+data/backup/restore/bootstrap/CLI/TUI/install, alias/transfer/handoff/budgets,
+dependency upgrades/18 npm advisories and100 baseline failures in scope. UI remains
+6/36 desktop+2/12 mobile concepts,2 pilots,0/12 accepted;30+10 concepts/10 routes and
+all12 acceptance remain. Final fresh independent whole-branch review required.

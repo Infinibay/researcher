@@ -8,6 +8,9 @@ es **análisis Python de biblioteca estándar con fuente de solo lectura**.
 Es un componente interno implementado y probado con procesos reales. Todavía
 no sustituye los lanzadores productivos de `RuntimeService`, no tiene endpoint
 IPC/HTTP y no aprovisiona el dominio completo de Researcher. No habilita edición.
+Existe además un perfil nativo separado para comprobar el transporte del App
+Server real sin credenciales. Su aceptación como inferencia productiva con
+suscripción y Ken todavía está pendiente.
 
 ## Qué ocurre antes de permitir el programa
 
@@ -179,6 +182,52 @@ cierran todos los descendientes. El perfil también se ensaya con socket directo
 syscalls crudos, subproceso, symlink al controlador y escritura por path/FD de fuente.
 [Opciones de Bubblewrap usadas](https://raw.githubusercontent.com/containers/bubblewrap/v0.13.1/bwrap.xml).
 
+## Transporte nativo de Codex verificado
+
+`CodexAsset` mide el ejecutable elegido por el host: ruta canónica, device/inode,
+tamaño, fechas de modificación/cambio y SHA-256. Rechaza ficheros no ejecutables,
+demasiado grandes o escribibles por grupo/otros. La lectura tiene límite y no
+confunde un cambio de atime con un cambio de contenido. El capsule vuelve a abrir
+y comprobar el asset antes de G y monta ese FD en una ruta privada; no monta el
+directorio padre del ejecutable. Esto fija el objeto y comprueba sus bytes, sin
+atribuirle una firma de proveedor ni una protección contra mutación hostil del host.
+
+`run_native` admite sólo un peer nativo original. Reutiliza la misma reserva,
+nacimiento contenido, publicación, bind y gate del análisis; no añade otro
+supervisor ni protocolo. La operación conserva su kind y el manifiesto nativo,
+incluidos hashes del launcher y del gate. Retry devuelve recibo sin nuevo proceso.
+`AsyncPeerBroker.native` conecta el mismo `JsonRpcClient` con ese transporte y
+proyecta el cierre al peer nativo correspondiente.
+
+El hogar y `CODEX_HOME` son privados y efímeros. No se montan el hogar administrado,
+auth.json, credenciales, SQL, cgroupfs ni sockets de control del host. Se desactivan
+shell, unified exec, code-mode, agentes hijos, plugins y hooks; la fuente sigue
+readonly y se declara no confiable. La prueba incluye configuración inválida en
+la fuente y claves ficticias en HOME/entorno del host: el App Server no las adopta.
+
+Este perfil comparte la red del host para el cliente nativo. El filtro permite
+socket IPv4/IPv6 y deniega otras familias, incluidos sockets Unix con dirección;
+permite socketpair privado y prohíbe bind/listen/accept, controles de namespaces y
+montajes. Un ELF de diagnóstico separado —no un reemplazo de Codex— comprobó socket
+de Internet disponible, socket Unix/bind/escritura de fuente/cgroupfs/unshare
+rechazados y ausencia de la clave del entorno. El perfil de análisis conserva su
+denegación completa de sockets.
+
+El Codex CLI **0.166.0 real** completó initialize, account/read y config/read dentro
+del dominio: versión reportada correcta, cuenta ausente, proveedor OpenAI y login
+ChatGPT, sin MCP ajeno y configuración de fuente no confiable. La wheel extraída
+ejecutó además native y análisis como hermanos: cerrar análisis conserva nativo;
+cerrar ambos deja sus proyecciones locales y retira el dominio.
+
+No se enviaron turnos ni tokens reales en estas comprobaciones. Esto todavía no
+prueba inferencia, TLS/DNS/egress, entitlement, renovación, Ken o code-mode en el
+nuevo perfil. El esquema experimental generado por el binario sí declara
+`chatgptAuthTokens` y su callback de renovación, coherente con el
+[protocolo oficial del App Server](https://learn.chatgpt.com/docs/app-server).
+La integración debe suministrar la autenticación por host y comprobar esos
+recorridos antes de adoptar los lanzadores productivos. No se eligió una API key
+ni se cambió el proveedor de suscripción.
+
 ## Comprobaciones realizadas
 
 - Orden global/local/G con `PeerRegistry` y namespaces reales, cálculo desde una
@@ -206,6 +255,7 @@ syscalls crudos, subproceso, symlink al controlador y escritura por path/FD de f
 [Resultados y límites actuales](../modernization/peer-broker-evidence.json).
 [Transporte asíncrono y regresiones](../modernization/broker-stdio-evidence.json).
 [Proyección del cierre](../modernization/broker-projection-evidence.json).
+[Transporte nativo y límites](../modernization/broker-native-evidence.json).
 
 ## Trabajo pendiente de la autoridad completa
 
