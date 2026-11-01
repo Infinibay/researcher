@@ -37,9 +37,11 @@ def get_research_context(
     # Kept at the composition edge until legacy DB/config consumers migrate.
     from backend.tools.base.db import get_db_path
 
-    store = SQLiteResearchStore(
-        get_db_path(), runtime_authority=request.app.state.live_grants.allows
-    )
+    store = getattr(request.app.state, "runtime_research_store", None)
+    if store is None:
+        store = SQLiteResearchStore(
+            get_db_path(), runtime_authority=request.app.state.live_grants.allows
+        )
     try:
         scope = store.authorize(credentials.credentials)
     except (ResearchForbidden, ResearchNotFound) as exc:

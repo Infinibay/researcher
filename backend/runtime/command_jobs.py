@@ -12,6 +12,7 @@ from pathlib import Path
 from uuid import uuid4
 
 from backend.runtime.codex_rpc import (
+    JsonRpcClient,
     RpcDisconnected,
     RpcError,
     RpcProtocolError,
@@ -63,7 +64,7 @@ class CommandHandle:
 class OwnedCommandExecutor:
     def __init__(
         self,
-        rpc: StdioRpcClient,
+        rpc: JsonRpcClient,
         *,
         journal: SQLiteRunStore,
         workspace: Path,
@@ -84,17 +85,35 @@ class OwnedCommandExecutor:
         self.peers = PeerRegistry(journal)
         self.peer_id = peer_id
         peer = self.peers.inspect(peer_id)
-        prefix = self.peers.command(peer_id, ["payload"])[:-1]
+        from backend.runtime.broker_stdio import BrokerEndpoint
+
+        endpoint = rpc._endpoint
+        self._broker_owned = isinstance(endpoint, BrokerEndpoint)
+        if self._broker_owned:
+            transport_matches = (
+                endpoint.command_only
+                and endpoint.peer_id == peer_id
+                and endpoint.registry._database_identity()
+                == self.peers._database_identity()
+                and not endpoint._opened
+            )
+        else:
+            prefix = self.peers.command(peer_id, ["payload"])[:-1]
+            transport_matches = (
+                isinstance(rpc, StdioRpcClient)
+                and tuple(rpc.command[: len(prefix)]) == tuple(prefix)
+                and rpc._process is None
+            )
         if (
             peer["kind"] != "command"
             or peer["attempt_id"] != lease.attempt_id
             or peer["fence"] != lease.fence
-            or tuple(rpc.command[: len(prefix)]) != tuple(prefix)
-            or rpc._process is not None
+            or not transport_matches
         ):
             raise RunConflict("Command transport must use its own registered peer gate")
         self.peers._check_origin(peer)
-        rpc.process_group_signals = False
+        if not self._broker_owned:
+            rpc.process_group_signals = False
         self.executor_id = str(uuid4())
         self.monitor_interval = monitor_interval
         self.cancel_grace = cancel_grace
@@ -278,7 +297,16 @@ class OwnedCommandExecutor:
                     "cwd": str(
                         self.execution_workspace / cwd.relative_to(self.workspace)
                     ),
-                    "permissionProfile": "researcher_jobs",
+                    **(
+                        {
+                            "sandboxPolicy": {
+                                "type": "externalSandbox",
+                                "networkAccess": "restricted",
+                            }
+                        }
+                        if self._broker_owned
+                        else {"permissionProfile": "researcher_jobs"}
+                    ),
                     "processId": state.job.job_id,
                     "streamStdoutStderr": True,
                     "timeoutMs": max(1, int(state.job.spec.timeout_seconds * 1000)),
@@ -417,6 +445,10 @@ class OwnedCommandExecutor:
         await asyncio.shield(self._peer_closing)
 
     async def _retire_peer(self):
+        if self._broker_owned:
+            # Endpoint closure owns physical Stop and original global→SQL proof.
+            await self.rpc.aclose()
+            return
         # Physical namespace retirement must not queue behind a writer before
         # stopping effects. PeerRegistry reads a WAL snapshot and kills first.
         results = await asyncio.gather(

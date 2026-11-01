@@ -619,9 +619,13 @@ class RuntimeService:
                                 "status": result.status,
                             },
                         )
-                    if not peers_closed or not getattr(
-                        slot.session, "peers_closed", False
-                    ):
+                    runtime_closed = getattr(slot.session, "peers_closed", False)
+                    consume_closure = getattr(self.runtime, "consume_closure", None)
+                    if consume_closure is not None:
+                        runtime_closed = (
+                            consume_closure(lease) is True or runtime_closed
+                        )
+                    if not peers_closed or not runtime_closed:
                         await asyncio.to_thread(
                             self.store.uncertain_inference,
                             lease,

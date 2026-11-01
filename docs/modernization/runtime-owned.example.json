@@ -1,0 +1,29 @@
+{
+  "runtime_profile": "owned-codex-v1",
+  "model": "gpt-6.1-sol",
+  "codex_binary": "/opt/codex-0.166.0/bin/codex",
+  "code_mode_host": "/opt/codex-0.166.0/bin/codex-code-mode-host",
+  "token_file": "/home/you/.codex/auth.json",
+  "ken_command": "/opt/researcher-tools/ken-rank/bin/ken",
+  "model_cache": "/var/cache/researcher/huggingface/hub",
+  "workspace_root": "/srv/researcher/projects",
+  "control_root": "/var/lib/researcher/control",
+  "cgroup_parent": "/sys/fs/cgroup/OPERATOR-DELEGATED-PARENT",
+  "authority": {
+    "database": "/var/lib/researcher/authority-db/authority.db",
+    "witness": "/var/lib/researcher/external-witness/authority.log",
+    "mutex": "/var/lib/researcher/external-witness/authority.lock",
+    "authority_id": "OPERATOR-PROVISIONED-ID"
+  },
+  "broker_limits": {"memory_bytes": 2147483648, "pids": 128},
+  "max_concurrent": 1,
+  "limits": {
+    "wall_seconds": 180,
+    "no_progress_seconds": 90,
+    "max_turns": 1,
+    "max_tool_calls": 25,
+    "max_observed_tokens": 350000
+  },
+  "project_turn_limit": 20,
+  "project_token_limit": 4000000
+}

@@ -9,13 +9,37 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from backend.runtime.codex_rpc import RpcProtocolError, StdioRpcClient
+from backend.runtime.codex_rpc import JsonRpcClient, RpcProtocolError, StdioRpcClient
 from backend.runtime.command_jobs import OwnedCommandExecutor
 from backend.runtime.contracts import WorkspaceChanged
 from backend.runtime.peer_registry import PeerRegistry
 from backend.runtime.workspaces import PEER_WORKSPACE
 
 VERSION = "codex-cli 0.166.0"
+
+
+@asynccontextmanager
+async def broker_command_executor(*, owner, registry, lease, workspace, asset):
+    """Keep job semantics while the original broker owns this dedicated RPC peer."""
+    peer_id = await asyncio.to_thread(registry.prepare, lease, "command")
+    rpc = JsonRpcClient(
+        owner.command(
+            registry, peer_id, operation_key="command-" + peer_id, asset=asset
+        ),
+        request_timeout=10,
+        max_messages=512,
+    )
+    async with OwnedCommandExecutor(
+        rpc,
+        journal=registry.runs,
+        workspace=workspace,
+        lease=lease,
+        peer_id=peer_id,
+        execution_workspace=PEER_WORKSPACE,
+    ) as worker:
+        yield worker
+
+
 DISABLED = (
     "plugins",
     "apps",

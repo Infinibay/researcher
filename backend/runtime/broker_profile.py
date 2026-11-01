@@ -428,6 +428,16 @@ class NativeCapsule(AnalysisCapsule):
         return self
 
 
+class NativeCommandCapsule(NativeCapsule):
+    """Account-free native command RPC under the original readonly kernel scope."""
+
+    def _network(self):
+        return []
+
+    def _filter(self):
+        return _syscall_filter(network=False, protected_peers=True, private_pairs=True)
+
+
 class NativeProxyCapsule(NativeCapsule):
     """Private NET with a trusted FD relay and a stricter native child filter."""
 

@@ -37,32 +37,32 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    El núcleo de almacenamiento de autoridad testificado ya está implementado:
    abre sólo estado previamente aprovisionado, detecta rewind y recupera commits
    interrumpidos. Sus pruebas incluyen SIGKILL, contención y cierre desde otro
-   proceso tras perder la DB del proyecto. No está conectado al broker/PeerRegistry
-   productivo ni demuestra el dominio completo de actores del host.
+   proceso tras perder la DB del proyecto. El perfil owned ya lo conecta al broker; aún no demuestra el dominio
+   completo de actores del host ni sustituye todos los consumidores.
    La primitiva Linux de dominio también existe: nacimiento con clone3 dentro de
    un cgroup real y retirada sin esperar al lock de un arranque congelado. Un
    recuperador separado cerró un hijo vivo tras SIGKILL antes de publicar PIDs y
    pérdida de la DB original. Es un ensayo de constructor de confianza; faltan
-   adopción productiva e inscripción de actores; el broker interno se describe abajo.
+   adopción predeterminada e inscripción completa de actores; el broker interno se describe abajo.
    Ese primer broker interno ya compone reserva global, publicación, bind local
    y G para análisis Python readonly. Conserva la supervisión al cerrar el cliente,
    revoca antes de esperar SQL y bloquea reactivar el intento retirado con una lease
    local antigua. Hay recuperación real antes/después de G sin DB original y
    defensa del perfil frente a sockets/controles y forks. Falta adoptarlo en los
-   lanzadores productivos, composición completa de perfiles y aprovisionamiento.
+   demás lanzadores, completar perfiles y aprovisionar el host; el perfil owned ya lo usa.
    Ya tiene adaptador asíncrono JSON-RPC con tuberías reales: cierre independiente
    de peers, Stop con trabajador reservado y recogida de arranques cancelados.
-   Esto permite adoptar su transporte; no sustituye aún los lanzadores del servicio.
+   El perfil owned ya adopta su transporte; no sustituye todos los lanzadores del servicio.
    Los adaptadores mantenidos de runtime, workspaces, vistas e investigación ya
    abren sólo la DB existente: perderla no crea otra vacía. El cierre del broker ya
    se proyecta sobre los peers originales, con eventos idempotentes, sin otra señal.
    Incluye arranques cancelados, pérdida de acuse de reserva y reconciliación en otro
    proceso desde el journal. SQL local ocupado o ausente no impide el cierre global.
-   Falta conectarlo al estado de negocio y a los lanzadores productivos del intento.
+   La conexión con negocio ya existe en el perfil owned; falta migrar los demás lanzadores.
    Hay un perfil nativo separado: App Server Codex0.166.0 real bajo el broker,
    manifiesto de ejecutable/perfil/gate, hogar privado sin credenciales heredadas
    y lectura de metadatos comprobada. La composición posterior ya ejecutó inferencia con la
-   suscripción y Ken; no sustituye todavía los lanzadores productivos.
+   suscripción y Ken; no sustituye todavía todos los lanzadores productivos.
    El componente opcional de autenticación externa ya fija cuenta, limita renovaciones
    y atiende el control privado incluso con thread/start o turn/start pendientes.
    Retirar autoridad impide enviar respuestas encoladas. El SDK real aceptó un login
@@ -80,7 +80,7 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    se bloquean acceso directo al host y redirecciones ajenas, y Stop cierra túneles
    antes de SQL. Una lectura real de cuenta ChatGPT funcionó sin thread/turn ni
    auth.json persistido. La generación conjunta con Ken ya se comprobó después; faltan WebSocket,
-   renovación OAuth real y adopción de la fábrica productiva.
+   renovación OAuth real y adopción como camino predeterminado.
    Ken publicado ya tiene perfil propio en ese broker, con identidad `ken`, fuente
    readonly, estado `.ken` writable, modelos offline verificados y MCP SDK sobre
    sus tuberías originales. Preparación/búsqueda/lectura reales funcionaron tanto
@@ -93,13 +93,14 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    host y mantiene shell/plugins/agentes desactivados; se comprobó config real.
    El protocolo compuesto controlado ejercita Ken y negocio y bloquea un efecto
    posterior si detecta caída/cambio de Ken. La prueba generativa conjunta ya pasó;
-   falta adopción productiva. El ciclo de vida de negocio/análisis aportados sigue
+   ya se usa en el perfil owned. El ciclo de vida de actores auxiliares fuera de ese perfil sigue
    siendo responsabilidad del host. No prueba disponibilidad continua entre checks.
    La conexión de negocio del host ya reutiliza las11 firmas/handlers del MCP y
    mantiene el token fuera de Codex, con HTTP asíncrono acotado y retirada de grant
    vivo antes del cierre. HTTP real y MCP aislado comparten recibos idempotentes;
    retirar autoridad desde el host bloqueó el otro transporte. Falta cablear esta
-   propiedad al API/broker productivo. La inferencia conjunta real ya pasó sobre
+   propiedad a los demás consumidores. El perfil owned ya enlaza el mismo controlador/API.
+   La inferencia conjunta real anterior pasó sobre
    un fixture sintético:10 llamadas, un finding provisional y un informe draft leído
    después de escribirlo; tarea sin aceptar y fuente intacta. Se midieron120894
    tokens nativos acumulados y pico1571897344bytes sin OOM a2GiB. El primer ensayo
@@ -111,7 +112,18 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    thread sólo con modelo/catálogo/instrucciones y metadatos coincidentes. Codex
    real lo comprobó sin modelo/cuenta; se usó historia fija inyectada sólo en el
    fixture para materializar el thread. No prueba reanudación generativa ni volver
-   a adoptar una concesión retirada. Falta integrarlo en la fábrica productiva.
+   a adoptar una concesión retirada. Ya está conectado a la fábrica del perfil owned.
+   **Entrada de producto nueva:** `owned-codex-v1` se selecciona por JSON desde el
+   lifespan real y las rutas que usa la web. Comparte aplicación, store y LiveGrants
+   mediante ASGI; un cambio de entorno no redirige negocio y una copia de la DB no
+   conserva los tokens vinculados al intento. Reutiliza el controlador de comandos
+   bajo el broker, con fuente readonly/red bloqueada/cuenta ausente. Stop y corrección
+   durante preparación y turno cierran el dominio original. La prueba por HTTP con
+   propietario/CSRF deja un finding provisional, un informe draft y cálculo200 con
+   recibo, estado needs_review y ninguna aceptación implícita. Generación y Ken de
+   ese fixture son protocolos controlados; falta el ensayo real por esta entrada.
+   El perfil predeterminado sigue siendo el heredado hasta completar la migración;
+   faltan bootstrap, OAuth, recovery completo, todos los consumidores y capacidades.
 7. **Contexto y procedencia:** versiones al corregir o cambiar trece entradas de tarea;
    retiro de autoridad antigua; respuesta asociada a pregunta/versión; repositorio
    admitido inmutable y comienzo de cola explícito. Registro exacto de la entrada
@@ -181,20 +193,18 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 
 ## Verificación más reciente
 
-- Suite completa:1563 casos;1460 pasan,100 fallan con EXACTAMENTE las mismas
-  identidades de la línea base y3 se omiten.29 advertencias. La suite sigue roja.
-- Runtime:616 pasan.17 casos nuevos cubren estado privado, origen/identidad,
-  ausencia/credenciales, un hogar por intento, migración32/rollback y reanudación
-  sin repetir un turno. Los24 casos de compatibilidad histórica pasan tras adaptar
-  sus fixtures a la nueva migración y al reemplazo de peers cerrados.
-- Codex real conserva y reabre un thread entre dos procesos, account:null, sin
-  turn/start. La composición de modelo controlado prueba catálogo conservado,
-  cambios de intención/metadatos rechazados y acuse de reserva perdido sin replay.
-  No demuestra recuperación del API entero ni un nuevo turno generativo reanudado.
-- Paquete:43 módulos runtime,11 fixtures/tests y2 fuentes DB coinciden con el wheel
-  construido:56 comparaciones.61 pruebas dirigidas/compatibilidad pasan desde el
-  wheel extraído con dependencias explícitas. Build offline y Ruff de archivos
-  modernos modificados pasan. No es instalación limpia del producto completo.
+- Suite completa:1573 casos;1470 pasan,100 fallan con EXACTAMENTE las mismas
+  identidades de la línea base y3 se omiten.30 advertencias. La suite sigue roja.
+- Runtime:626 pasan.10 casos nuevos cubren la entrada productiva configurada,
+  controlador/source fijos, DB copiada rechazada, Stop/corrección durante preparación
+  y turno, informe para revisión sin aceptación y comando nativo real sin cuenta.
+- La prueba HTTP atraviesa lifespan, sesión propietaria/CSRF, RuntimeService y la
+  fábrica nueva. Generación/Ken son controlados; API/SQLite/kernel/cierre son reales.
+  Otro caso ejecuta Codex0.166 real para cálculo200 y rechazo de red/escritura fuente.
+- Paquete:44 módulos runtime,9 fixtures/tests y3 fuentes API coinciden con el wheel:
+ 56 comparaciones.58 pruebas dirigidas pasan desde el wheel extraído con dependencias
+  explícitas. Build offline y Ruff/format de los14 archivos modernos pasan. No prueba
+  instalación limpia, OAuth administrado o inferencia real por la nueva entrada.
 - Ensayo conjunto real:un turno por suscripción con Codex0.166/helper y Ken0.18,
  10 llamadas dinámicas (Ken find/read y8 de negocio exitosas), un finding provisional,
   un informe draft persistido/leído, tarea in_progress, fuente intacta y todos los
@@ -245,7 +255,12 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
   siguen pendientes;0/12 rutas aceptadas. Dependencias:18 avisos npm preexistentes
   (5 bajos,3 moderados,10 altos), sin nuevos paquetes vulnerables por Playwright/axe.
 
-Evidencia actual: [resultados actuales](native-state-results.json),
+Evidencia actual: [resultados actuales](owned-factory-results.json),
+[contratos y límites del perfil](owned-factory-evidence.json),
+[paquete actual](owned-factory-packaging.json),
+[entrada de producto](../architecture/owned-product-runtime.md),
+[configuración de ejemplo](runtime-owned.example.json),
+[resultados de estado anteriores](native-state-results.json),
 [estado conservado y límites](native-state-evidence.json),
 [paquete actual](native-state-packaging.json),
 [contrato de estado y reanudación](../architecture/native-state.md),

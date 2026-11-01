@@ -34,7 +34,7 @@ async def lifespan(app: FastAPI):
         from backend.api.runtime_dependencies import configured_runtime
 
         app.state.runtime_service = await asyncio.to_thread(
-            configured_runtime, app.state.live_grants
+            configured_runtime, app.state.live_grants, app=app
         )
     runtime = app.state.runtime_service
     if runtime is not None:

@@ -85,6 +85,11 @@ class AsyncPeerBroker:
     def peer(self, registry, peer_id, *, operation_key, code):
         return self._endpoint(registry, peer_id, operation_key, code=code)
 
+    def command(self, registry, peer_id, *, operation_key, asset):
+        return self._endpoint(
+            registry, peer_id, operation_key, asset=asset, command_only=True
+        )
+
     def native(
         self,
         registry,
@@ -145,6 +150,7 @@ class AsyncPeerBroker:
         host_tools=False,
         code_host=None,
         native_state=None,
+        command_only=False,
     ):
         if not self._entered or self._closing is not None:
             raise AuthorityConflict("Async broker is not admitted")
@@ -165,6 +171,7 @@ class AsyncPeerBroker:
             host_tools=host_tools,
             code_host=code_host,
             native_state=native_state,
+            command_only=command_only,
         )
         self._endpoints.append(endpoint)
         return endpoint
@@ -183,7 +190,11 @@ class AsyncPeerBroker:
                 "mode": endpoint.ken_mode,
             }
         elif endpoint.asset is not None:
-            start = self.broker.run_native
+            start = (
+                self.broker.run_command
+                if endpoint.command_only
+                else self.broker.run_native
+            )
             payload = {"asset": endpoint.asset}
         else:
             start = self.broker.run_peer
@@ -326,6 +337,7 @@ class BrokerEndpoint:
         host_tools=False,
         code_host=None,
         native_state=None,
+        command_only=False,
     ):
         self.owner, self.registry, self.peer_id = owner, registry, peer_id
         self.operation_key, self.code = operation_key, code
@@ -336,6 +348,7 @@ class BrokerEndpoint:
         self.host_tools = host_tools
         self.code_host = code_host
         self.native_state = native_state
+        self.command_only = command_only
         self.stdin = self.stdout = self.stderr = None
         self._raw = None
         self._operation = None

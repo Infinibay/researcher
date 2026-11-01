@@ -3097,3 +3097,119 @@ dependencies/18npm advisories and100baselinefails remain required. UI unchanged
 6/36desktop+2/12mobileconcepts,2pilots,0/12accepted:30+10concepts,10other routes and
 all12acceptance pending. Final fresh whole-branch review is required after the whole
 implementation, not this component. No scope reduction or completion claim.
+
+## Current task: owned product runtime factory — base8d26937
+
+- Previous turn was progress: retained original native data/resume, migration32,
+  source/wheel/full-suite evidence committed8d26937. Goal scope unchanged.
+- Old product factory still uses managed CODEX_HOME/native-owned MCP/legacy child
+  launchers. New explicit owned profile must feed RuntimeService the existing
+  InferenceSession port while composing original broker/Ken/native state and tool
+  ownership. No second LLM loop or silent fallback to old/API-key provider.
+- Ruling: use same-app ASGITransport and a source-pinned research store for business
+  calls — why: concrete controller/source/live-grant identity and same route/store
+  validation, without a second loopback service — cost: ASGI cancellation cannot
+  undo a committed synchronous server mutation; retain transaction fences/receipts.
+- Ruling: preserve AnalysisTools/OwnedCommandExecutor job/control/output logic,
+  extend its dedicated RPC port to an original broker-owned command-only native
+  profile with no NET/credentials; externalSandbox reuses already-applied kernel
+  boundary, never model-selected permissions — cost: both transport variants and
+  original closure projection must remain tested during migration.
+- Product factory owns watcher/whole-broker cancellation during startup and active
+  work, published Ken prepare before thread, external subscription snapshot, state,
+  business and analysis scopes. Explicit external journal/cgroup/state/root policy;
+  source/global absence is not installation genesis. Template policy must be explicit.
+  Initial credential source may reread externally rotated CLI tokens but does not
+  claim managed OAuth renewal; retain that gap. Source/API binding must be tested.
+- New profile selected explicitly in config while old capabilities migrate; legacy
+  removal remains required. One active concession per supplied authority means
+  max_concurrent1 for this profile. No claim of all71tools or whole plan completion.
+- Tests: actual account-free broker command calculation/IO/closure; real API/SQLite
+  controlled-generation run via factory/RuntimeService, schema/config validation,
+  Stop/correction/startup teardown and frozen source. Then full-suite baseline and
+  isolated wheel. No paid model turn unless a new integration uncertainty requires it.
+
+## Owned product profile implemented and verified
+
+- RED actual broker-command case (missing adapter), then GREEN actual Codex0.166
+  command RPC under original command-only kernel profile:200, socket creation
+  denied, source writes denied, auth file absent and broker→source closure proved.
+  Existing OwnedCommandExecutor job/output/control semantics reused; legacy port
+  remains during migration. No nested sandbox fallback or second inference loop.
+- RED3 configured-factory cases, then explicit owned-codex-v1 now composes original
+  source/attempt, NativeState, closed Ken prepare, required MCP, external access
+  snapshot, measured native/helper, same-app ASGI business and owned analysis.
+  App lifespan passes its actual controller; RuntimeService/HTTP entry use existing
+  freeze/reservation/context/question/receipt paths. Constructor never opens a model.
+- Initial full product run persisted finding/draft/calculation but stayed reconciling:
+  new wrapper did not publish peers_closed. Fix observes actual scope exit/global
+  retirement, never samples peer.closed inside context. Normal run now needs_review,
+  one provisional finding/draft/analysis200 receipt, no task acceptance or source edit.
+- RED Stop prepare/turn exposed missing startup-exception closure port. Ruling:
+  RuntimeService consumes one host-private attempt closure acknowledgement only
+  after original domain retirement and tool scopes close, in addition to source
+  peer proof — why: no session may have been yielded when startup is stopped —
+  cost: losing acknowledgement preserves uncertainty; it is not new authority or
+  durable whole-service recovery. No fake closed flag or reset of execution intent.
+- RED copied-DB/token case: same-app store path alone accepted a replacement file.
+  Ruling: keep selected store and check original device/inode in live runtime-bound
+  authority callback — why: environment/path equality is weaker than observed
+  identity — cost: legitimate file replacement requires explicit restart/reconciliation;
+  this does not prove in-place restore, handoff or all legacy endpoint origin safety.
+  Environment drift stays on selected store and copied bound token now gets401.
+- Stop AND user-example correction during Ken preparation and during native turn
+  pass with real domains/processes, all peers closed, no report or automatic new
+  run. Correction records context2; old run superseded. Callback closes original
+  broker before SQL/native interrupt receipt can block. Prepared-only stop has no
+  inference dispatch; turn stop keeps the existing one rather than replaying it.
+- Actual app lifespan + owner session/CSRF HTTP admission/read traverse configured
+  factory and result needs_review. Model and Ken protocols are controlled in these
+  product fixtures; API/SQLite/kernel/scopes are real. Actual subscription/published
+  Ken composition V3 evidence is not relabeled as this product-entry acceptance.
+- Final full suite1573:1470 pass,100 EXACT inherited failure identities,3 skipped/
+ 30 warnings; runtime626pass.10 added cases pass. Global suite still red; no new
+  failures. First complete suite before two correction variants also passed1470-2;
+  rerun justified by those missing planned acceptance cases, no source churn.
+- Final offline wheel+SDist build passes;44 runtime modules+9 fixtures/tests+3 API
+  sources byte-match (56 comparisons). Extracted -I -S dependency-explicit wheel
+  passes58 directed cases. Ruff/format14 modern files and diff checks pass.
+- Evidence owned-factory-{evidence,results,packaging}.json, architecture/
+  owned-product-runtime.md and runtime-owned.example.json; status/coverage updated.
+  No user subscription/credential access, paid generation, image call, user DB
+  migration, host install, push/merge/deploy. Full scope remains active, not closed.
+
+## Next brief after owned product entry — full objective unchanged
+
+Do not redo broker/runtime/analysis/API wiring or account metadata. New explicit
+owned-codex-v1 is wired from real app lifespan and owner HTTP entry to RuntimeService
+and existing freeze/budgets/context/receipt/controller. Legacy remains default until
+remaining capabilities migrate; no fallback if owned profile fails. It uses same-app
+ASGI research routes with pinned store/bound source-file identity, original broker,
+NativeState, Ken prepare/MCP, measured native/helper/external snapshot and existing
+AnalysisTools/OwnedCommandExecutor through original account-free command profile.
+Actual command SDK/kernel case and controlled product success/Stop/correction/source
+cases pass; global source suite1470pass/100exactbaseline/3skip, wheel58cases56matches.
+NEXT one bounded real native subscription/published Ken/business/analysis turn via
+new owner/product HTTP entry on NEW synthetic attempt/keys, same-app controller and
+explicit2GiB, only after deterministic gates. Retain final artifacts AND statuses/
+source/broker receipts even on fuse/error; observe closures after scope exit. Do not
+replay prior composition trial or infer WebSocket/billing from opaque CONNECT/usage.
+The user's subscription authorizes this test; do not use API-key fallback or print
+raw credentials. Use actual external source already verified, one native turn.
+Then complete EXPLICIT operator bootstrap/provision/clean install and source-loss
+startup guard: current main lifespan calls legacy ensure_migrations BEFORE runtime
+configuration, so absent prior source must not silently become an empty DB on restart.
+Also cover lifespan startup-error LocalAccess/live-grant cleanup before yield (source
+control flow lead, not yet a reproduced resource incident). No automatic journal/
+origin genesis/adoption on missing state. Current factory requires externally
+provisioned journal/cgroup policy; synthetic provision fixtures are NOT managed host
+bootstrap evidence. Current token source only rereads CLI snapshots; managed OAuth,
+account coexistence and full host actor enrollment/cold recovery remain required.
+Do not confuse callbacks/ASGI request cancellation with undoing committed SQL or
+termination of every API thread/web fetch; complete origin/operation proof pending.
+Migrate ALL71tools/11categories, development/worktrees/Git/review/CI, old engine/
+loops/autonomy/roles/flows/agent protocol; allprompts/bookskills/evals/human; fullweb
+concepts/routes/acceptance; data/restore/CLI/TUI/install/dependencies/18npm advisories/
+100baselinefails. UI unchanged6/36desktop+2/12mobileconcepts,2pilots,0/12accepted:
+30+10concepts,10other routes and all12acceptance pending. Final fresh whole-branch
+review only when entire implementation is ready. No phase or goal completion claim.

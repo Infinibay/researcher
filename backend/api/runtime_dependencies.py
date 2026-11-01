@@ -12,7 +12,7 @@ from backend.runtime.service import RuntimeService, WorkspaceRegistry
 from backend.runtime.sqlite_runs import SQLiteRunStore
 
 
-def configured_runtime(live_grants):
+def configured_runtime(live_grants, *, app=None):
     """No environment setting => product reads remain available, admission is 503.
 
     Construction/import never opens a model or copies OAuth credentials. Paths
@@ -25,6 +25,11 @@ def configured_runtime(live_grants):
     if path.stat().st_size > 65536:
         raise ValueError("Runtime configuration is too large")
     config = json.loads(path.read_text())
+    profile = config.get("runtime_profile", "legacy-codex")
+    if profile == "owned-codex-v1":
+        return _configured_owned(config, path, live_grants, app)
+    if profile != "legacy-codex":
+        raise ValueError("Unknown runtime profile; no fallback is permitted")
     api = urlsplit(config["api_url"])
     if (
         api.scheme != "http"
@@ -88,6 +93,116 @@ def configured_runtime(live_grants):
             )
         ),
         max_concurrent=config.get("max_concurrent", 2),
+        project_turn_limit=config.get("project_turn_limit", 20),
+        project_token_limit=config.get("project_token_limit", 4000000),
+    )
+
+
+def _configured_owned(config, path, live_grants, app):
+    from backend.runtime.authority_journal import WitnessedAuthorityJournal
+    from backend.runtime.broker_profile import CodexAsset
+    from backend.runtime.contracts import text
+    from backend.runtime.ken_worker import KenInstallation
+    from backend.runtime.native_inference import _private_control
+    from backend.runtime.native_network import NativeNetwork
+    from backend.runtime.owned_runtime import OwnedCodexRuntime
+    from backend.runtime.peer_broker import BrokerLimits
+    from backend.runtime.subscription_auth import ManagedTokenFile
+    from backend.tools.base.db import get_db_path
+
+    if app is None or app.state.live_grants is not live_grants:
+        raise ValueError("Owned runtime needs its actual application controller")
+    if config.get("max_concurrent", 1) != 1:
+        raise ValueError("One active concession per configured authority is required")
+    text(config["model"], "native model", 128)
+    paths = {
+        key: Path(config[key]).resolve(strict=True)
+        for key in (
+            "codex_binary",
+            "code_mode_host",
+            "token_file",
+            "ken_command",
+            "model_cache",
+            "workspace_root",
+            "cgroup_parent",
+        )
+    }
+    source_root = paths["workspace_root"]
+    control = Path(config["control_root"]).absolute()
+    authority = dict(config["authority"])
+    database = Path(get_db_path()).resolve(strict=True)
+    for supplied in (
+        path,
+        database,
+        control.resolve(),
+        *[paths[key] for key in paths if key != "workspace_root"],
+        *[
+            Path(authority[key]).resolve(strict=True)
+            for key in ("database", "witness", "mutex")
+        ],
+    ):
+        if supplied.is_relative_to(source_root):
+            raise ValueError(
+                "Host state and runtime assets must stay outside managed sources"
+            )
+    if not paths["cgroup_parent"].is_relative_to("/sys/fs/cgroup"):
+        raise ValueError("Owned runtime requires an explicit delegated cgroup parent")
+    with WitnessedAuthorityJournal(**authority) as journal:
+        journal.load()
+    _private_control(control)
+    source_identity = (database.stat().st_dev, database.stat().st_ino)
+
+    def source_authority(grant_id):
+        try:
+            current = database.stat()
+            return (
+                live_grants.allows(grant_id)
+                and (current.st_dev, current.st_ino) == source_identity
+            )
+        except OSError:
+            return False
+
+    research = SQLiteResearchStore(database, runtime_authority=source_authority)
+    native = OwnedCodexRuntime(
+        app=app,
+        research=research,
+        live_grants=live_grants,
+        authority=authority,
+        cgroup_parent=paths["cgroup_parent"],
+        control_root=control,
+        asset=CodexAsset.inspect(paths["codex_binary"]),
+        code_host=CodexAsset.inspect(paths["code_mode_host"]),
+        installation=KenInstallation.inspect(paths["ken_command"]),
+        model_cache=paths["model_cache"],
+        network=NativeNetwork.inspect(
+            resolver=config.get("resolver", "/etc/resolv.conf"),
+            ca_bundle=config.get("ca_bundle", "/etc/ssl/certs/ca-certificates.crt"),
+        ),
+        token_source=ManagedTokenFile(paths["token_file"]),
+        broker_limits=BrokerLimits(**config["broker_limits"]),
+        model=config["model"],
+    )
+    app.state.runtime_research_store = research
+    return RuntimeService(
+        SQLiteRunStore(database),
+        research,
+        live_grants,
+        native,
+        workspaces=WorkspaceRegistry(database, source_root),
+        control_root=control,
+        max_concurrent=1,
+        limits=ExecutionLimits(
+            **config.get(
+                "limits",
+                {
+                    "wall_seconds": 180,
+                    "no_progress_seconds": 90,
+                    "max_turns": 1,
+                    "max_tool_calls": 25,
+                    "max_observed_tokens": 350000,
+                },
+            )
+        ),
         project_turn_limit=config.get("project_turn_limit", 20),
         project_token_limit=config.get("project_token_limit", 4000000),
     )

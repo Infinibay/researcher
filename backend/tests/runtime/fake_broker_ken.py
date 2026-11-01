@@ -7,6 +7,12 @@ from pathlib import Path
 
 root = Path(os.environ["KEN_PROJECT_ROOT"])
 if sys.argv[1] == "retrieval":
+    if (root / ".ken/hold-prepare").exists():
+        import time
+
+        (root / ".ken/prepare-entered").write_text("entered")
+        while (root / ".ken/hold-prepare").exists():
+            time.sleep(0.02)
     print('{"status":"ready"}')
     raise SystemExit(0)
 names = ("ken_find", "ken_read", "ken_recall", "ken_related", "ken_remember")

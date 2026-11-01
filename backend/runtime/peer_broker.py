@@ -25,6 +25,7 @@ from backend.runtime.broker_profile import (
     CodexAsset,
     KenCapsule,
     NativeCapsule,
+    NativeCommandCapsule,
     NativeProxyCapsule,
 )
 from backend.runtime.contracts import command_key, text
@@ -383,6 +384,17 @@ class PeerBroker:
             native_state=native_state,
         )
 
+    def run_command(self, registry, peer_id, *, operation_key, asset):
+        if not isinstance(asset, CodexAsset):
+            raise TypeError("Command launch requires an inspected Codex asset")
+        return self._run(
+            registry,
+            peer_id,
+            operation_key=operation_key,
+            asset=asset,
+            command_only=True,
+        )
+
     def _run(
         self,
         registry,
@@ -399,11 +411,16 @@ class PeerBroker:
         host_tools=False,
         code_host=None,
         native_state=None,
+        command_only=False,
     ):
         command_key(operation_key)
         if asset is None and ken is None:
             text(code, "analysis code", 64000)
-        kind = "ken" if ken is not None else ("command" if asset is None else "native")
+        kind = (
+            "ken"
+            if ken is not None
+            else ("command" if asset is None or command_only else "native")
+        )
         with self._gate_lock:
             original = registry.inspect(peer_id)
             operation_id = _digest(
@@ -519,6 +536,8 @@ class PeerBroker:
                         )
                     },
                 }
+            if command_only:
+                manifest["profile"] = "readonly-native-command-v1"
             manifest["limits"] = asdict(self._limits)
             intent = _digest(manifest)
             existing = self.journal.load().records.get("broker:op:" + operation_id)
@@ -565,12 +584,16 @@ class PeerBroker:
                             "Broker withdrew before channel admission"
                         )
                 capsule = (
-                    KenCapsule
-                    if ken is not None
+                    NativeCommandCapsule
+                    if command_only
                     else (
-                        NativeProxyCapsule
-                        if egress is not None
-                        else (AnalysisCapsule if asset is None else NativeCapsule)
+                        KenCapsule
+                        if ken is not None
+                        else (
+                            NativeProxyCapsule
+                            if egress is not None
+                            else (AnalysisCapsule if asset is None else NativeCapsule)
+                        )
                     )
                 )
                 with capsule(

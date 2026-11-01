@@ -1328,7 +1328,14 @@
         "docs/modernization/native-state-results.json",
         "docs/modernization/native-state-packaging.json",
         "backend/tests/runtime/test_native_state.py",
-        "backend/db/native_state_schema.sql"
+        "backend/db/native_state_schema.sql",
+        "docs/architecture/owned-product-runtime.md",
+        "docs/modernization/owned-factory-evidence.json",
+        "docs/modernization/owned-factory-results.json",
+        "docs/modernization/owned-factory-packaging.json",
+        "docs/modernization/runtime-owned.example.json",
+        "backend/tests/runtime/test_owned_factory.py",
+        "backend/tests/runtime/test_broker_commands.py"
       ],
       "remaining": [
         "Migrate all legacy callers and capability families",
@@ -1878,7 +1885,14 @@
         "docs/modernization/peer-workspace-evidence.json",
         "docs/modernization/peer-workspace-results.json",
         "docs/modernization/peer-workspace-native.json",
-        "backend/tests/runtime/test_peer_workspace_view.py"
+        "backend/tests/runtime/test_peer_workspace_view.py",
+        "docs/architecture/owned-product-runtime.md",
+        "docs/modernization/owned-factory-evidence.json",
+        "docs/modernization/owned-factory-results.json",
+        "docs/modernization/owned-factory-packaging.json",
+        "docs/modernization/runtime-owned.example.json",
+        "backend/tests/runtime/test_owned_factory.py",
+        "backend/tests/runtime/test_broker_commands.py"
       ],
       "remaining": [
         "Migrate retained legacy shell/flow consumers and full code-interpreter capabilities.",
@@ -2079,7 +2093,14 @@
         "docs/modernization/native-state-results.json",
         "docs/modernization/native-state-packaging.json",
         "backend/tests/runtime/test_native_state.py",
-        "backend/db/native_state_schema.sql"
+        "backend/db/native_state_schema.sql",
+        "docs/architecture/owned-product-runtime.md",
+        "docs/modernization/owned-factory-evidence.json",
+        "docs/modernization/owned-factory-results.json",
+        "docs/modernization/owned-factory-packaging.json",
+        "docs/modernization/runtime-owned.example.json",
+        "backend/tests/runtime/test_owned_factory.py",
+        "backend/tests/runtime/test_broker_commands.py"
       ],
       "implemented": [
         "Actual real-journal global reserve, contained namespace birth, global identity publication, concrete source PeerRegistry bind and sole pre-start G decision in one host operation.",
@@ -2165,7 +2186,14 @@
         "docs/modernization/native-state-results.json",
         "docs/modernization/native-state-packaging.json",
         "backend/tests/runtime/test_native_state.py",
-        "backend/db/native_state_schema.sql"
+        "backend/db/native_state_schema.sql",
+        "docs/architecture/owned-product-runtime.md",
+        "docs/modernization/owned-factory-evidence.json",
+        "docs/modernization/owned-factory-results.json",
+        "docs/modernization/owned-factory-packaging.json",
+        "docs/modernization/runtime-owned.example.json",
+        "backend/tests/runtime/test_owned_factory.py",
+        "backend/tests/runtime/test_broker_commands.py"
       ],
       "implemented": [
         "Required-five Ken catalog/JSON schema/argument mediation and shared result/authority boundaries.",
@@ -2180,7 +2208,7 @@
       "remaining": [
         "Complete product ownership of supplied business/analysis actors, API/source/origin/generation and lifecycle",
         "Broader mixed-load sizing, provider WebSocket/transport evidence and deployment acceptance; successful synthetic joint trial is not production readiness",
-        "Managed state/credentials/OAuth/account coexistence, complete-domain enrollment and product factories",
+        "Managed state/credentials/OAuth/account coexistence, complete-domain enrollment and default product migration (explicit owned factory is now connected)",
         "Whole-service restart reconciliation and explicit cross-attempt continuation; state-backed resume works only inside original live concession, no automatic replay",
         "Full71 tools/11 categories and all engine/loops/autonomy/flows/agent communication",
         "All prompts/books/evals/human comprehension, UI concepts/routes/acceptance, data/restore/bootstrap/CLI/TUI/dependencies",
@@ -2202,7 +2230,14 @@
         "docs/modernization/owned-joint-attempt.json",
         "docs/modernization/owned-joint-host-v2.json",
         "backend/tests/runtime/test_code_mode_host.py",
-        "docs/modernization/owned-joint-host-v3.json"
+        "docs/modernization/owned-joint-host-v3.json",
+        "docs/architecture/owned-product-runtime.md",
+        "docs/modernization/owned-factory-evidence.json",
+        "docs/modernization/owned-factory-results.json",
+        "docs/modernization/owned-factory-packaging.json",
+        "docs/modernization/runtime-owned.example.json",
+        "backend/tests/runtime/test_owned_factory.py",
+        "backend/tests/runtime/test_broker_commands.py"
       ],
       "implemented": [
         "Shared11 signatures/docs/routes without FastMCP dependency in main runtime.",
@@ -2210,11 +2245,12 @@
         "Real HTTP/API/SQLite and locked MCP share schema properties, source/report idempotency and live revocation.",
         "Actionable redacted validation details and compact schemas preserve real title field.",
         "40 runtime modules+HTTP/test sources match wheel;29 packaged tests and real loopback/MCP trial pass.",
-        "Actual joint native0.166/helper/published Ken0.18/subscription/API trial persisted/read one draft and kept product task unaccepted; see v3 limits."
+        "Actual joint native0.166/helper/published Ken0.18/subscription/API trial persisted/read one draft and kept product task unaccepted; see v3 limits.",
+        "Owned product profile now reuses same-app ASGI controller and source-bound authority, with original broker/analysis and startup/turn Stop/correction acceptance."
       ],
       "remaining": [
         "Broader mixed-load sizing and vendor transport acceptance beyond one synthetic successful joint turn",
-        "Wire API live-grant authority, source/origin/generation and broker into production factories with owned analysis/development",
+        "Migrate remaining API/source/origin/generation consumers; owned profile now connects its API, broker and analysis, development remains",
         "Durable native state/resume, credential renewal/account coexistence and complete host actor enrollment",
         "All71 tools/11 categories/engine/loops/autonomy/roles/flows/agent protocol",
         "All prompts/books/evals/human comprehension, UI concepts/routes/acceptance, data/restore/bootstrap/CLI/TUI/install/dependencies",
@@ -2229,7 +2265,14 @@
         "docs/modernization/native-state-results.json",
         "docs/modernization/native-state-packaging.json",
         "backend/tests/runtime/test_native_state.py",
-        "backend/db/native_state_schema.sql"
+        "backend/db/native_state_schema.sql",
+        "docs/architecture/owned-product-runtime.md",
+        "docs/modernization/owned-factory-evidence.json",
+        "docs/modernization/owned-factory-results.json",
+        "docs/modernization/owned-factory-packaging.json",
+        "docs/modernization/runtime-owned.example.json",
+        "backend/tests/runtime/test_owned_factory.py",
+        "backend/tests/runtime/test_broker_commands.py"
       ],
       "implemented": [
         "Explicit private data provision/identity, no implicit recreation/adoption/auth mounts and original witnessed DB/attempt/context/workspace binding.",
@@ -2243,6 +2286,35 @@
         "Cold whole-service recovery and explicit cross-attempt continuation, managed OAuth/account lifecycle.",
         "Real generative resumed-turn acceptance, disk/retention/restore and full deployment acceptance.",
         "All remaining engine/tools/prompts/human/UI/data/operation scope and final full-branch review."
+      ]
+    },
+    "owned_product_runtime": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/owned-product-runtime.md",
+        "docs/modernization/owned-factory-evidence.json",
+        "docs/modernization/owned-factory-results.json",
+        "docs/modernization/owned-factory-packaging.json",
+        "docs/modernization/runtime-owned.example.json",
+        "backend/tests/runtime/test_owned_factory.py",
+        "backend/tests/runtime/test_broker_commands.py"
+      ],
+      "implemented": [
+        "Explicit owned profile selected by real app lifespan and owner HTTP request; no fallback after profile failure.",
+        "Same-app ASGI business routes/store/live-grant controller; bound source-file identity rejects copied DB tokens.",
+        "Native state, published-shaped Ken prepare/catalog, external subscription snapshots and original broker workload lifecycle.",
+        "Existing analysis job/output/controller through account-free native command profile; actual SDK/kernel calculation and boundary proof.",
+        "Stop and user-example correction during startup/turn retire domain and consume observed closure after scopes exit.",
+        "Controlled generation produces one provisional finding/draft report/job receipt and needs_review, no automatic acceptance."
+      ],
+      "remaining": [
+        "One bounded actual native subscription/published Ken/business/analysis run through the new owner/product entry, not reusing prior composition-only acceptance",
+        "Explicit operator provisioning/bootstrap and clean host installation; source-loss startup guard before legacy ensure_migrations; full restore/handoff/origin/enrollment acceptance",
+        "Managed OAuth refresh/account coexistence/provider transport; current factory reads external CLI snapshots only",
+        "Cold-service recovery and cross-attempt continuation, capacity/concurrency policy, disk retention",
+        "Default legacy profile retirement, all71tools/11categories and fullengine/loops/autonomy/roles/flows/agent protocol/Git/review/CI",
+        "Allprompts/bookskills/evals/human comprehension, allUIconcepts/routes/acceptance, data/CLI/TUI/dependencies",
+        "100 inherited failures and final fresh whole-branch review"
       ]
     }
   }

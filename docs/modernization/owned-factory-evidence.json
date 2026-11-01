@@ -1,0 +1,60 @@
+{
+  "status": "owned_profile_connected_to_product_entry_default_legacy_and_full_migration_pending",
+  "contracts": {
+    "app_lifespan_selects_explicit_owned_profile_without_fallback": true,
+    "same_app_asgi_business_routes_and_source_pinned_store": true,
+    "original_live_grant_and_database_inode_for_bound_tool_authority": true,
+    "existing_runtime_service_input_budget_context_questions_and_receipts_reused": true,
+    "broker_owned_published_shaped_ken_prepare_before_thread": true,
+    "private_native_state_helper_and_external_subscription_snapshot": true,
+    "analysis_uses_existing_job_controller_through_original_command_broker": true,
+    "command_profile_no_account_no_external_sockets_and_readonly_source": true,
+    "startup_and_generation_stop_or_correction_retire_original_domain": true,
+    "closure_only_published_after_scopes_exit_including_startup_exception": true,
+    "one_proposal_for_review_no_implicit_product_acceptance": true
+  },
+  "evidence": [
+    "backend/runtime/owned_runtime.py",
+    "backend/api/runtime_dependencies.py",
+    "backend/api/main.py",
+    "backend/api/research_dependencies.py",
+    "backend/runtime/service.py",
+    "backend/runtime/native_commands.py",
+    "backend/runtime/command_jobs.py",
+    "backend/runtime/broker_profile.py",
+    "backend/runtime/peer_broker.py",
+    "backend/runtime/broker_stdio.py",
+    "backend/tests/runtime/test_owned_factory.py",
+    "backend/tests/runtime/test_broker_commands.py",
+    "docs/modernization/owned-factory-results.json",
+    "docs/modernization/owned-factory-packaging.json"
+  ],
+  "controlled_product_case": {
+    "app_lifespan_and_owner_http_post_read": true,
+    "business_api_sqlite_kernel_and_process_lifecycle": "real",
+    "generation_and_ken_protocol": "controlled; no user subscription access",
+    "finding": "one provisional",
+    "report": "one draft",
+    "run_outcome": "needs_review",
+    "task_automatically_accepted": false,
+    "analysis_receipt": "200, one exited job",
+    "stop_and_user_example_correction": "preparation and turn; no automatic replacement run"
+  },
+  "actual_account_free_command_case": {
+    "codex": "0.166.0",
+    "calculation": 200,
+    "external_socket_creation": "denied",
+    "source_write": "denied",
+    "auth_file": "absent",
+    "original_global_to_source_closure": "verified"
+  },
+  "remaining": [
+    "One bounded actual native subscription/published Ken/business/analysis run through the new owner/product entry, not reusing prior composition-only acceptance",
+    "Explicit operator provisioning/bootstrap and clean host installation; source-loss startup guard before legacy ensure_migrations; full restore/handoff/origin/enrollment acceptance",
+    "Managed OAuth refresh/account coexistence/provider transport; current factory reads external CLI snapshots only",
+    "Cold-service recovery and cross-attempt continuation, capacity/concurrency policy, disk retention",
+    "Default legacy profile retirement, all71tools/11categories and fullengine/loops/autonomy/roles/flows/agent protocol/Git/review/CI",
+    "Allprompts/bookskills/evals/human comprehension, allUIconcepts/routes/acceptance, data/CLI/TUI/dependencies",
+    "100 inherited failures and final fresh whole-branch review"
+  ]
+}
