@@ -11,6 +11,10 @@ from backend.runtime.contracts import (
     WorkspaceChanged,
 )
 
+# A private /run in each registered peer gives the admitted object a stable
+# mount destination independent of user-controlled source ancestor names.
+PEER_WORKSPACE = Path("/run/researcher-source")
+
 
 class WorkspaceRegistry:
     def __init__(self, database, root):

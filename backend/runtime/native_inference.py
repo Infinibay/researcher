@@ -213,6 +213,7 @@ class CodexRuntime:
                 "Native resume requires a recorded tool catalog and reconciliation"
             )
         root = workspace.resolve(strict=True)
+        peer_root = root
         info = root.stat()
         expected_identity = (info.st_dev, info.st_ino)
         if peer_owner is not None:
@@ -224,6 +225,8 @@ class CodexRuntime:
             # Product admissions have a durable binding. Older host diagnostics
             # without one still pin the directory chosen at factory entry.
             if binding is not None:
+                from backend.runtime.workspaces import PEER_WORKSPACE
+
                 if root != Path(binding.workspace) or expected_identity != (
                     binding.device,
                     binding.inode,
@@ -232,12 +235,20 @@ class CodexRuntime:
                         "Admitted directory changed before native startup"
                     )
                 expected_identity = (binding.device, binding.inode)
+                peer_root = PEER_WORKSPACE
         managed = self.managed_home.resolve(strict=True)
         control = self.control_root.absolute()
+        # Validate trusted assets against the physical source before switching
+        # the worker to its logical mount. Resolve once so a source-owned alias
+        # cannot retarget these arguments after that overlap check.
+        ken_command = self.ken_command.resolve()
+        model_cache = self.model_cache.resolve()
         if (
             managed.is_relative_to(root)
             or control.resolve().is_relative_to(root)
             or self.business_script.resolve().is_relative_to(root)
+            or ken_command.is_relative_to(root)
+            or model_cache.is_relative_to(root)
         ):
             raise ValueError(
                 "Native workspace must not contain host credentials or runtime code"
@@ -320,7 +331,7 @@ class CodexRuntime:
                     }
                     profile = {
                         "filesystem": filesystem,
-                        "workspace_roots": {str(root): True},
+                        "workspace_roots": {str(peer_root): True},
                         "network": {"enabled": False},
                     }
                     ken_args = [
@@ -328,11 +339,11 @@ class CodexRuntime:
                         "-m",
                         "backend.runtime.ken_worker",
                         "--ken-command",
-                        str(self.ken_command.resolve()),
+                        str(ken_command),
                         "--workspace",
-                        str(root),
+                        str(peer_root),
                         "--model-cache",
-                        str(self.model_cache.resolve()),
+                        str(model_cache),
                         "--expected-device",
                         str(expected_identity[0]),
                         "--expected-inode",
@@ -359,7 +370,7 @@ class CodexRuntime:
                         "project_doc_max_bytes": 0,
                         "default_permissions": "researcher_inference",
                         "permissions": {"researcher_inference": profile},
-                        "projects": {str(root): {"trust_level": "untrusted"}},
+                        "projects": {str(peer_root): {"trust_level": "untrusted"}},
                         "mcp_servers." + KEN_SERVER + ".command": sys.executable,
                         "mcp_servers." + KEN_SERVER + ".args": ken_args,
                         "mcp_servers." + KEN_SERVER + ".env": ken_env,
@@ -404,14 +415,14 @@ class CodexRuntime:
                                     },
                                 )
                             )["thread"]
-                            if previous.get("cwd") != str(root):
+                            if previous.get("cwd") != str(peer_root):
                                 raise RpcProtocolError(
                                     "Native thread belongs to another workspace"
                                 )
                         config = (
                             await rpc.request(
                                 "config/read",
-                                {"cwd": str(root), "includeLayers": False},
+                                {"cwd": str(peer_root), "includeLayers": False},
                             )
                         )["config"]
                         actual = (config.get("permissions") or {}).get(
@@ -449,7 +460,7 @@ class CodexRuntime:
                             == "researcher_inference",
                             "filesystem": fs == filesystem,
                             "workspace_roots": actual.get("workspace_roots")
-                            == {str(root): True},
+                            == {str(peer_root): True},
                             "network": actual.get("network", {}).get("enabled")
                             is False,
                             "web_search": config.get("web_search") == "disabled",
@@ -493,7 +504,7 @@ class CodexRuntime:
                             max_messages=512,
                             process_group_signals=peer_owner is None,
                         ),
-                        workspace=root,
+                        workspace=peer_root,
                         model=self.model,
                         limits=limits or ExecutionLimits(180, 90, 1, 25, 350000),
                         resume_thread_id=resume_thread_id,
@@ -509,7 +520,7 @@ class CodexRuntime:
                         if (
                             configured.get("activePermissionProfile", {}).get("id")
                             != "researcher_inference"
-                            or configured.get("cwd") != str(root)
+                            or configured.get("cwd") != str(peer_root)
                             or configured.get("model") != self.model
                         ):
                             raise RpcProtocolError(

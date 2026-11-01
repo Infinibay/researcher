@@ -11,7 +11,9 @@ from tempfile import TemporaryDirectory
 
 from backend.runtime.codex_rpc import RpcProtocolError, StdioRpcClient
 from backend.runtime.command_jobs import OwnedCommandExecutor
+from backend.runtime.contracts import WorkspaceChanged
 from backend.runtime.peer_registry import PeerRegistry
+from backend.runtime.workspaces import PEER_WORKSPACE
 
 VERSION = "codex-cli 0.166.0"
 DISABLED = (
@@ -65,6 +67,18 @@ async def command_executor(
     if workspace_access not in ("read", "write"):
         raise ValueError("Host must select read or write workspace access")
     workspace = workspace.resolve(strict=True)
+    peer_workspace = workspace
+    binding = await asyncio.to_thread(
+        journal.workspace_binding, lease.project_id, lease.run_id
+    )
+    if binding is not None:
+        info = workspace.stat()
+        if workspace != Path(binding.workspace) or (info.st_dev, info.st_ino) != (
+            binding.device,
+            binding.inode,
+        ):
+            raise WorkspaceChanged("Admitted directory changed before command startup")
+        peer_workspace = PEER_WORKSPACE
     control_root = control_root.resolve()
     if not workspace.is_dir() or control_root.is_relative_to(workspace):
         raise ValueError("Private command control must be outside the workspace")
@@ -109,7 +123,7 @@ async def command_executor(
             filesystem[str(path)] = "read"
         profile = {
             "filesystem": filesystem,
-            "workspace_roots": {str(workspace): True},
+            "workspace_roots": {str(peer_workspace): True},
             "network": {"enabled": False},
         }
         shell_environment = {
@@ -142,7 +156,12 @@ async def command_executor(
             process_group_signals=False,
         )
         async with OwnedCommandExecutor(
-            rpc, journal=journal, workspace=workspace, lease=lease, peer_id=peer_id
+            rpc,
+            journal=journal,
+            workspace=workspace,
+            lease=lease,
+            peer_id=peer_id,
+            execution_workspace=peer_workspace,
         ) as worker:
             config = (await rpc.request("config/read", {"includeLayers": False}))[
                 "config"
@@ -156,7 +175,7 @@ async def command_executor(
             if (
                 config.get("default_permissions") != "researcher_jobs"
                 or fs != filesystem
-                or actual.get("workspace_roots") != {str(workspace): True}
+                or actual.get("workspace_roots") != {str(peer_workspace): True}
                 or actual.get("network", {}).get("enabled") is not False
                 or config.get("shell_environment_policy", {}).get("inherit") != "none"
                 or config.get("shell_environment_policy", {}).get("set")

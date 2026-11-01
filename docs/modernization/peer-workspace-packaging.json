@@ -1,0 +1,31 @@
+{
+  "wheel": "researcher-0.1.0-py3-none-any.whl",
+  "sha256": "25417fa77fd03f67b717aed2e85ec3d04176dcc12dcad5fece92429e394be991",
+  "runtime_source_bytes_equal": {
+    "backend/runtime/__init__.py": true,
+    "backend/runtime/codex_rpc.py": true,
+    "backend/runtime/codex_session.py": true,
+    "backend/runtime/contracts.py": true,
+    "backend/runtime/sqlite_runs.py": true,
+    "backend/runtime/command_jobs.py": true,
+    "backend/runtime/native_commands.py": true,
+    "backend/runtime/ken_worker.py": true,
+    "backend/runtime/live_grants.py": true,
+    "backend/runtime/business_mediation.py": true,
+    "backend/runtime/native_inference.py": true,
+    "backend/runtime/service.py": true,
+    "backend/runtime/views.py": true,
+    "backend/runtime/questions.py": true,
+    "backend/runtime/sqlite_questions.py": true,
+    "backend/runtime/peer_process.py": true,
+    "backend/runtime/peer_registry.py": true,
+    "backend/runtime/peer_payload.py": true,
+    "backend/runtime/peer_guard.py": true,
+    "backend/runtime/recovery.py": true,
+    "backend/runtime/workspaces.py": true,
+    "backend/runtime/run_inputs.py": true,
+    "backend/runtime/analysis_tools.py": true,
+    "backend/runtime/command_output.py": true
+  },
+  "frontend_packaging": "Not changed; full product clean installation still pending"
+}

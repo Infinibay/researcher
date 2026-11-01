@@ -30,6 +30,8 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    La sesión productiva ya ofrece start/read/cancel y Python de biblioteca estándar
    para análisis, con fuente en lectura, sin red ni credenciales heredadas. No habilita
    todavía edición, paquetes científicos ni entrega de gráficos/archivos.
+   Peers nativos y de comandos con admisión durable usan una vista fijada: rename o
+   sustitución de la fuente/padre no redirigen sus acciones. No es exclusión global.
    El propietario puede paginar los comandos y leer sus salidas guardadas, también
    tras perder autoridad el agente. Hay API y visor en la tarea y su historial.
 7. **Contexto y procedencia:** versiones al corregir o cambiar trece entradas de tarea;
@@ -97,9 +99,9 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 
 ## Verificación más reciente
 
-- Suite completa:1252 casos;1149 pasan,100 fallan con las mismas identidades de la
+- Suite completa:1265 casos;1162 pasan,100 fallan con las mismas identidades de la
   línea base y 3 se omiten. La suite global sigue roja.
-- Runtime:319 pasan. Frontend:28 pruebas aprobadas y compilación TypeScript/Vite
+- Runtime:332 pasan. Frontend:28 pruebas aprobadas y compilación TypeScript/Vite
   tras los ajustes de contraste, cabecera móvil y navegación/foco.
 - Ensayo real de continuidad:2 turnos por suscripción, Ken real,4 peers cerrados,
   fuentes sin editar,2 informes draft y ninguna aceptación/publicación implícita.
@@ -110,6 +112,9 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 - Inspección del propietario:servidor HTTP real sobre copia del ensayo anterior,
   sin runtime configurado ni inferencia nueva;14 lecturas reconstruyeron los95 bytes
   de salida. Nueve tablas conservaron sus valores tanto en original como en copia.
+- Ensayos sin generación:Ken real buscó/leyó con la vista privada y admisión del
+  host conservada;Codex CLI real pasó7 casos con raíz lógica comprobada,fuente intacta
+  y peers cerrados.Se retiraron explícitamente los intentos diagnósticos cerrados.
 - QA visual:17 estados reales capturados e inspeccionados en Chromium con sandbox,
   sin infracciones detectadas por axe en esos estados. Se corrigieron carga same-origin,
   contraste, cabecera móvil, salto inicial y foco/desplazamiento entre secciones.
@@ -117,9 +122,11 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
   siguen pendientes;0/12 rutas aceptadas. Dependencias:18 avisos npm preexistentes
   (5 bajos,3 moderados,10 altos), sin nuevos paquetes vulnerables por Playwright/axe.
 
-Evidencia actual: [navegador](browser-evidence.json),
+Evidencia actual: [vista fijada](peer-workspace-evidence.json),
+[resultados actuales](peer-workspace-results.json), [bootstrap propuesto](../architecture/workspace-authority-bootstrap.md),
+[navegador](browser-evidence.json),
 [recorrido visual](../design/audits/2026-11-01-owner-workspace/report.md),
-[resultados actuales](browser-results.json), [entrada/continuidad](run-input-evidence.json),
+[resultados del checkpoint de navegador](browser-results.json), [entrada/continuidad](run-input-evidence.json),
 [resultados](ken-identity-results.json), [identidad de Ken](ken-identity-evidence.json), [consulta del propietario](owner-command-evidence.json),
 [análisis](analysis-evidence.json),
 [ensayo de análisis](analysis-live.json), [continuidad](run-input-live.json),

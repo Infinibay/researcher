@@ -1,0 +1,65 @@
+{
+  "base_commit": "7bbbd41",
+  "scope": "Pinned source views for registered native/command peers, host-to-peer cwd translation and pidfd exit metadata race; bootstrap review remains design only",
+  "new_model_turns": 0,
+  "image_calls": 0,
+  "bubblewrap": "0.13.1",
+  "focused_tests_passed": 68,
+  "source_sha256": {
+    "backend/runtime/peer_guard.py": "82fb8a472a96142d470db4a8af992f4d48faf3b04596be7dde4116f1dfa8b8be",
+    "backend/runtime/peer_registry.py": "5ea0e09d05e5dfcd48f716071cb5af2d30556fc8cb8d8873dbb17dbcb9d5d788",
+    "backend/runtime/workspaces.py": "d0043e82c7b4660275b015f403b7d137b1d71bfc2cafc82d13baf966fc7bd89c",
+    "backend/runtime/peer_process.py": "a661cd66be050a262ab10f7d9398876a9312cbf30e41b6be90d0ec11bd2fa4d7",
+    "backend/runtime/native_inference.py": "986c9d296ecbd8a2c22be7e68c4134104758a4d671ad7e0df678f45444481a97",
+    "backend/runtime/native_commands.py": "0cbcb292799a37b72782fb4428836a6eda16d49d00504a717b067d300fde3ad5",
+    "backend/runtime/command_jobs.py": "31185df6bea2ccbef53f6317122ad3f143897331ac0ffd934cfd7204a03f723a",
+    "backend/tests/runtime/test_peer_workspace_view.py": "c1dabb42f18fdaf7a381403ac9f09653213b910fac7bd95f9704b8d4f71111da",
+    "backend/tests/runtime/test_peer_ownership.py": "bbb68b61bffca8ae99d117e2859344cb79ba2d62fe72a1d341e89f797a686ecd",
+    "backend/tests/runtime/test_native_factory.py": "b53bdbe8b57e2bd5ab49882fd54d2379621cf7356b4f62240e12365b80739912",
+    "evals/runtime/run_analysis_tools.py": "11abec261e7e45b5aa23bc3ceb1b45ce46803cf8a1bac93213d30781279045a7",
+    "evals/runtime/run_ken_identity.py": "703f568f55460652507c904a1b7c1c2c2d2dcdf78ac534f6be767587108dcbd6"
+  },
+  "log_sha256": {
+    "peer-workspace-red.log": "3e9bdbd6e475bbbc73538ba44976358000788bc50271b88974cd9743c4bb13b2",
+    "peer-workspace-green.log": "05c3ea0c427a6c6fe880bf8828ad4677a6b04c1a2ee4880cd53d6477e9e44d87",
+    "peer-workspace-pinned-green.log": "29e14ca8307b7d1b6d596398e62143930eab2ad71e98a11acb8059094ff13e1d",
+    "peer-workspace-full.log": "2c727b54415b119355528eb4b46bf00c23a572627f18c506bcf6a1def473fe39",
+    "peer-workspace-full.xml": "265ec70eadc2efb42782f77776a2b348d57aedf1e26d55986438abd77fc30c72",
+    "peer-workspace-mapping-red.log": "2ed5a534209de8c23193daad058af15351536f33435f3d85d8d234787b6369bf",
+    "peer-workspace-analysis-view-red.log": "b648f69822e6036b0355a1efd36f963f748da716479b676dd8934ee87546046c",
+    "peer-workspace-close-diagnostic.log": "256e313485d310ce9af7f89e795af0b8525285b715cb859faf93709496dd4a40",
+    "peer-workspace-close-race-red.log": "ca0101329577d0b742ae2dcb9a5de413c97f050f190c54ee3edafb28658b2cc4",
+    "peer-workspace-closure-final-focused.log": "5153d60f1aa1aa3d6064c35c3b125fdd2385f0d9267607524a0d86f56fbdb438",
+    "peer-workspace-final-full.log": "6ddf316c8a647c709844829d5d9ea114fc62421e3e54d61cda57d573549f3226",
+    "peer-workspace-final-full.xml": "932892ce482f0202c9df9e1c8683056d2ec14088d64624c7cbd883bfdcd61e78",
+    "peer-workspace-native-ken-final.log": "180e391f349e863ec25bc785f7490d0250c1c88de1931b45ec4bb6c536785053",
+    "peer-workspace-analysis-final.log": "f33e4b51157368c18e458b7b678dfdb303810b7c6579ef80dff071d96dab75f9",
+    "peer-workspace-final-wheel.log": "b53c608efe82683f9b5a354a08ec1b7d0556dbd1a9a5e3afed5d055514f5adf0",
+    "peer-workspace-trusted-path-red.log": "c6f930d6517ab29e5322dc7bcd47f7c8a7f4f788852f4fc4cf2518c4f4afbb96",
+    "peer-workspace-trusted-final-focused.log": "7337cb6cc11ba8b8ed12a6b5df9b4444af8e802ee3e034c5df4d254e65568d01",
+    "peer-workspace-trusted-final-full.log": "ddc98ad6789276e396d78c48d5f86683013edddb056f9ca2e21e6d3d75f7a267",
+    "peer-workspace-trusted-final-full.xml": "35c133b53b664e5f106e388eaab80f92da9cab651d5c0122bddcd4d4ef8bf7e0",
+    "peer-workspace-trusted-native-ken.log": "6658bfd6755cfce7627c9620463f3db7726a2352cb64dc57241409d56108a01a",
+    "peer-workspace-trusted-final-wheel.log": "d020d0e5acae59dee371895dd2f0f104c64be31c5edad32a2c409b854835c224"
+  },
+  "native_raw_evidence_sha256": {
+    "analysis-tools-dfa7d70a": "d14cfbb7291e51b7543eb2b416b86f69ba6fb1efb590e93b2b7d06672ddf35a6",
+    "ken-identity-cf3fabfe": "31b26920034454c6d00fcb63ade212be0eeab799f06b0dbd8b794f98ec23fae8"
+  },
+  "reports": [
+    "peer-workspace-results.json",
+    "peer-workspace-native.json",
+    "peer-workspace-packaging.json",
+    "peer-workspace-cleanup.json"
+  ],
+  "limits": [
+    "Pinned source root is not frozen content or global workspace/DB exclusion.",
+    "The supervisor retains a broad host view. Native and Ken/command profiles, not this bind, enforce payload filesystem/network policy.",
+    "Only peers with durable admissions use the logical view; historical diagnostics and retained legacy engines do not inherit this guarantee.",
+    "Absolute host paths in argv are not rewritten or granted; historical native cwd must reconcile before resume.",
+    "Broker, complete actor-domain/bootstrap proof, witnessed authority journal, global publication before G and restore/handoff remain unimplemented.",
+    "All71 tools/11 categories, engine/coordination/prompts/human/design migrations,100 baseline failures and final independent branch review remain in the full goal.",
+    "No frontend changes; previous17 browser states are historical QA, not new visual acceptance.0/12 routes accepted.",
+    "Admission currently records device/inode, not a live reference continuously held until peer opening; pre-open identity reuse/restore continuity is not proven by these rename tests."
+  ]
+}

@@ -122,11 +122,13 @@ def close_namespace(identity, *, timeout=5):
         try:
             try:
                 ticks, namespace, is_init = _init_fields(identity.init_pid)
-            except FileNotFoundError:
-                # An exited init can lose its ns symlink while still a zombie.
+            except (FileNotFoundError, ProcessLookupError):
+                # Exit can remove stat/ns metadata before all procfs reads
+                # finish. Keep the pinned pidfd and wait for its kernel barrier;
+                # missing metadata alone never authorizes signaling or closure.
                 poller = select.poll()
                 poller.register(fd, select.POLLIN | select.POLLHUP)
-                if poller.poll(0):
+                if poller.poll(int(timeout * 1000)):
                     return "init_exited"
                 raise PeerUncertain(
                     "Process namespace temporarily unreadable"

@@ -6,7 +6,7 @@ import json
 import os
 import sqlite3
 import sys
-from functools import partial
+from contextlib import asynccontextmanager
 from pathlib import Path
 from uuid import uuid4
 
@@ -20,6 +20,7 @@ async def main(args):
     from backend.runtime.native_commands import command_executor
     from backend.runtime.peer_registry import AttemptPeers
     from backend.runtime.sqlite_runs import SQLiteRunStore
+    from backend.runtime.workspaces import PEER_WORKSPACE, WorkspaceRegistry
     from backend.tools.base.db import ensure_migrations
 
     root = REPO / ".researcher/evaluations" / ("analysis-tools-" + uuid4().hex[:8])
@@ -44,9 +45,15 @@ async def main(args):
         conn.execute(
             "INSERT INTO tasks(id,project_id,type,title,status) VALUES(1001,101,'research','Calculate','in_progress')"
         )
+        conn.execute(
+            "INSERT INTO repositories(id,project_id,name,local_path) VALUES(11,101,'source',?)",
+            (str(workspace),),
+        )
     journal = SQLiteRunStore(database)
+    binding = WorkspaceRegistry(database, root).bind(101, 11)
     run = journal.admit(
-        RunSpec(101, 1001, "worker", 1, "analysis-probe", "Probe", "codex")
+        RunSpec(101, 1001, "worker", 1, "analysis-probe", "Probe", "codex"),
+        binding=binding,
     )
     lease, peers = AttemptPeers.claim(
         journal, 101, run.run_id, "owner", lease_seconds=120
@@ -55,22 +62,33 @@ async def main(args):
     print("Analysis integration:", root, flush=True)
     os.environ["RESEARCHER_TOOL_TOKEN"] = "SYNTHETIC_MUST_NOT_BE_INHERITED"
     python = Path(sys.executable).resolve()
+
+    @asynccontextmanager
+    async def native_executor():
+        async with command_executor(
+            journal=journal,
+            lease=lease,
+            workspace=workspace,
+            control_root=root / "controls",
+            codex_binary=Path(args.codex_binary),
+            readable_toolchains=(Path(sys.base_prefix).resolve(),),
+            workspace_access="read",
+        ) as worker:
+            config = (
+                await worker.rpc.request("config/read", {"includeLayers": False})
+            )["config"]
+            roots = config["permissions"]["researcher_jobs"]["workspace_roots"]
+            assert roots == {str(PEER_WORKSPACE): True}, roots
+            results.setdefault("verified_peer_workspaces", []).append(roots)
+            yield worker
+
     try:
         async with AnalysisTools(
             journal=journal,
             lease=lease,
             workspace=workspace,
             python_executable=python,
-            executor_factory=partial(
-                command_executor,
-                journal=journal,
-                lease=lease,
-                workspace=workspace,
-                control_root=root / "controls",
-                codex_binary=Path(args.codex_binary),
-                readable_toolchains=(Path(sys.base_prefix).resolve(),),
-                workspace_access="read",
-            ),
+            executor_factory=native_executor,
         ) as tools:
             cases = [
                 ("calculate", "print(137 * .21)", 0, "28.77\n"),
@@ -148,6 +166,12 @@ async def main(args):
     finally:
         await peers.aclose()
         results["all_peers_closed"] = peers.closed()
+        if results["all_peers_closed"]:
+            # Diagnostics never reserve a model turn or produce an accepted
+            # proposal. Retire their closed attempt without replaying any job.
+            results["diagnostic_run_status"] = journal.retire_inference(
+                lease, outcome="failed"
+            ).status
         (root / "evidence.json").write_text(json.dumps(results, indent=2))
     assert results["all_peers_closed"]
     print(

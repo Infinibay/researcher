@@ -130,3 +130,16 @@ de sus hijos o cambios externos de topología. Esas fronteras deben ser explíci
 
 La implementación de la autoridad global, su bootstrap y estas pruebas siguen
 pendientes. Este análisis cambia el diseño requerido; no habilita herramientas de edición.
+
+## Avances posteriores a esta revisión
+
+Los peers nativos y de comandos con admisión durable ya tienen una
+[vista fijada de la fuente](pinned-peer-workspace.md), verificada ante sustitución
+y rename del directorio o de su padre. No resuelve arbitraje entre DBs, escritores
+heredados ni publicación global antes de G. La autoridad compartida sigue pendiente.
+
+El debate posterior concreta [bootstrap y testigo contra rewind](workspace-authority-bootstrap.md).
+No se fabrica una prueba de instalación nueva a partir de archivos ausentes ni
+se presenta un cgroup recién creado como inventario de los actores anteriores.
+Broker/provisionamiento, journal testificado y restore siguen siendo entregables
+de implementación y aceptación, no garantías adquiridas por esta documentación.

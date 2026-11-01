@@ -129,3 +129,17 @@ mensajes y run atómicos, reenvío sin duplicado, lectura humana de evidencia y
 recuperación del recibo original después de corregir contexto. Una captura de
 su DB de ensayo permitió comprobar la migración 23 sin inferir modelos históricos.
 Estos ensayos no comprueban el navegador ni reemplazan las 48 referencias visuales.
+
+
+### Vista de fuente admitida en el peer
+
+`run_analysis_tools.py --codex-binary /ruta/codex` crea una admisión durable,
+comprueba que los siete peers de comandos usan `/run/researcher-source` como raíz
+lógica, y prueba cálculo/lectura y denegación de escritura, escape, red y entorno.
+No envía turnos de modelo. Conserva la identidad del host en el journal.
+
+`run_ken_identity.py --config /ruta/runtime.json --codex-binary /ruta/codex`
+comprueba preparación CLI, búsqueda/lectura MCP reales, vista lógica de la fuente
+y admisión original conservada. No solicita generación. El config contiene paths
+privados de herramientas, caché y HOME administrado; no debe publicarse ni incluir
+credenciales inline. Ver [contrato y límites](../../docs/architecture/pinned-peer-workspace.md).

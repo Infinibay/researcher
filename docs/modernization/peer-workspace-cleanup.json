@@ -1,0 +1,37 @@
+[
+  {
+    "trial": "analysis-tools-b0cc7fac",
+    "diagnostic_run_status": "failed",
+    "all_peers_closed_before_retirement": true,
+    "inference_dispatches": 0,
+    "jobs_replayed": 0
+  },
+  {
+    "trial": "analysis-tools-1487232d",
+    "diagnostic_run_status": "failed",
+    "all_peers_closed_before_retirement": true,
+    "inference_dispatches": 0,
+    "jobs_replayed": 0
+  },
+  {
+    "trial": "analysis-tools-2900767f",
+    "diagnostic_run_status": "failed",
+    "all_peers_closed_before_retirement": true,
+    "inference_dispatches": 0,
+    "jobs_replayed": 0
+  },
+  {
+    "trial": "analysis-tools-68300a68",
+    "diagnostic_run_status": "failed",
+    "all_peers_closed_before_retirement": true,
+    "inference_dispatches": 0,
+    "jobs_replayed": 0
+  },
+  {
+    "trial": "peer-close-race-2e9fd863",
+    "diagnostic_run_status": "failed",
+    "all_peers_closed_before_retirement": true,
+    "inference_dispatches": 0,
+    "jobs_replayed": 0
+  }
+]

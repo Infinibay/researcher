@@ -179,6 +179,37 @@ def test_proc_permission_failure_is_unknown_not_absence(monkeypatch):
         close_namespace(identity)
 
 
+@pytest.mark.parametrize("unavailable", [FileNotFoundError, ProcessLookupError])
+def test_disappearing_proc_metadata_waits_for_the_pinned_terminal_barrier(
+    coordination, tmp_path, monkeypatch, unavailable
+):
+    from backend.runtime import peer_process
+
+    registry, _run, lease = registry_setup(coordination)
+    peer = registry.prepare(lease, "native")
+    ready = tmp_path / "ready"
+    process = launch(
+        registry,
+        peer,
+        "import sys,time;from pathlib import Path;Path(sys.argv[1]).touch();time.sleep(.4)",
+        ready,
+    )
+    try:
+        wait_until(ready.exists, process)
+        identity = peer_process.NamespaceIdentity.from_record(registry.inspect(peer))
+
+        def disappearing(_pid):
+            raise unavailable("metadata disappeared during exit")
+
+        with monkeypatch.context() as patch:
+            patch.setattr(peer_process, "_init_fields", disappearing)
+            assert peer_process.close_namespace(identity, timeout=2) == "init_exited"
+        process.communicate(timeout=5)
+        assert process.returncode == 0
+    finally:
+        cleanup(registry, peer, process)
+
+
 def test_namespace_is_killed_before_waiting_for_a_busy_sqlite_writer(
     coordination, tmp_path
 ):

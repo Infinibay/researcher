@@ -104,6 +104,25 @@ class PeerRegistry:
         with self.runs._transaction() as conn:
             return dict(self._row(conn, peer_id))
 
+    def workspace_binding(self, peer_id):
+        """Return the original source admission for filesystem-using peers.
+
+        Business transport does not consume the source tree. Historical host
+        diagnostics may lack an admission; product runs always persist one.
+        This reads the immutable run binding, never today's repository selection.
+        """
+        with self.runs._transaction() as conn:
+            peer = self._row(conn, peer_id)
+            self._check_origin(peer)
+            if peer["kind"] not in ("native", "command"):
+                return None
+            binding = conn.execute(
+                """SELECT b.* FROM runtime_workspace_bindings b
+                JOIN runtime_attempts a ON a.run_id=b.run_id WHERE a.id=?""",
+                (peer["attempt_id"],),
+            ).fetchone()
+            return self.runs._binding_view(binding) if binding is not None else None
+
     def bind(self, peer_id, identity):
         # The bootstrap is still gated; capture again immediately before commit.
         if NamespaceIdentity.capture(identity.init_pid) != identity:

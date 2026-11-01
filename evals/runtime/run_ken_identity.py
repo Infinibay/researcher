@@ -24,7 +24,7 @@ async def main(args):
     from backend.runtime.native_inference import KEN_SERVER, CodexRuntime
     from backend.runtime.peer_registry import AttemptPeers
     from backend.runtime.sqlite_runs import SQLiteRunStore
-    from backend.runtime.workspaces import WorkspaceRegistry
+    from backend.runtime.workspaces import PEER_WORKSPACE, WorkspaceRegistry
     from evals.runtime.run_research import backend, environment
 
     root = REPO / ".researcher/evaluations" / ("ken-identity-" + uuid4().hex[:8])
@@ -156,10 +156,17 @@ async def main(args):
                     config = (
                         await session.native.rpc.request(
                             "config/read",
-                            {"cwd": str(workspace), "includeLayers": False},
+                            {
+                                "cwd": str(session.native.workspace),
+                                "includeLayers": False,
+                            },
                         )
                     )["config"]
                     worker_args = config["mcp_servers"][KEN_SERVER]["args"]
+                    assert session.native.workspace == PEER_WORKSPACE
+                    assert worker_args[worker_args.index("--workspace") + 1] == str(
+                        PEER_WORKSPACE
+                    )
                     assert worker_args[
                         worker_args.index("--expected-device") + 1
                     ] == str(info.st_dev)
@@ -209,6 +216,11 @@ async def main(args):
                             "catalog_count": len(session.catalog),
                             "model": session.model,
                             "native_turns_sent": session.native.turns_sent,
+                            "peer_workspace": str(session.native.workspace),
+                            "host_admission_unchanged": runs.workspace_binding(
+                                101, run.run_id
+                            )
+                            == binding,
                         }
                     )
             finally:

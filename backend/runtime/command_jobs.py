@@ -69,6 +69,7 @@ class OwnedCommandExecutor:
         workspace: Path,
         lease: AttemptLease,
         peer_id: str,
+        execution_workspace: Path | None = None,
         monitor_interval=0.25,
         cancel_grace=1.0,
     ):
@@ -77,6 +78,9 @@ class OwnedCommandExecutor:
         self.rpc = rpc
         self.journal = journal
         self.workspace = workspace.resolve()
+        # Journal identity remains the host admission. Only the RPC execution
+        # path uses the stable mount inside its dedicated peer namespace.
+        self.execution_workspace = execution_workspace or self.workspace
         self.peers = PeerRegistry(journal)
         self.peer_id = peer_id
         peer = self.peers.inspect(peer_id)
@@ -271,7 +275,9 @@ class OwnedCommandExecutor:
                 "command/exec",
                 {
                     "command": list(state.job.spec.argv),
-                    "cwd": str(cwd),
+                    "cwd": str(
+                        self.execution_workspace / cwd.relative_to(self.workspace)
+                    ),
                     "permissionProfile": "researcher_jobs",
                     "processId": state.job.job_id,
                     "streamStdoutStderr": True,

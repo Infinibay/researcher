@@ -1534,7 +1534,13 @@
         "docs/modernization/admission-migration.json",
         "docs/modernization/admission-packaging.json",
         "backend/tests/runtime/test_admission_binding.py",
-        "backend/tests/runtime/test_admission_migration.py"
+        "backend/tests/runtime/test_admission_migration.py",
+        "docs/architecture/pinned-peer-workspace.md",
+        "docs/architecture/workspace-authority-bootstrap.md",
+        "docs/modernization/peer-workspace-evidence.json",
+        "docs/modernization/peer-workspace-results.json",
+        "docs/modernization/peer-workspace-native.json",
+        "backend/tests/runtime/test_peer_workspace_view.py"
       ],
       "remaining": [
         "Migrate retained command-tool/flow consumers; legacy transports do not inherit namespace proofs.",
@@ -1542,6 +1548,9 @@
         "Legacy owner histories and external effects reconciliation",
         "Typed project deletion and lifetime budget retention",
         "Rendered UI/accessibility and human comprehension acceptance"
+      ],
+      "notes": [
+        "Registered native/command source roots now remain pinned via a private logical mount. Global ownership/bootstrap/restore and legacy writer migration remain pending; see peer-workspace evidence."
       ]
     },
     "durable_admission": {
@@ -1571,12 +1580,21 @@
         "docs/modernization/run-input-packaging.json",
         "backend/tests/runtime/test_run_input.py",
         "backend/tests/runtime/test_run_input_migration.py",
-        "evals/runtime/run_input_continuity.py"
+        "evals/runtime/run_input_continuity.py",
+        "docs/architecture/pinned-peer-workspace.md",
+        "docs/architecture/workspace-authority-bootstrap.md",
+        "docs/modernization/peer-workspace-evidence.json",
+        "docs/modernization/peer-workspace-results.json",
+        "docs/modernization/peer-workspace-native.json",
+        "backend/tests/runtime/test_peer_workspace_view.py"
       ],
       "remaining": [
         "Version/fence related context dependencies beyond direct task input fields; migrate legacy writers to typed commands.",
         "Cross-database workspace ownership, filesystem use protection and verified deployment/restore handoff.",
         "Rendered owner controls and comprehension acceptance."
+      ],
+      "notes": [
+        "Registered native/command source roots now remain pinned via a private logical mount. Global ownership/bootstrap/restore and legacy writer migration remain pending; see peer-workspace evidence."
       ]
     },
     "task_input_versioning": {
@@ -1639,13 +1657,22 @@
         "docs/modernization/analysis-packaging.json",
         "backend/tests/runtime/test_analysis_tools.py",
         "evals/runtime/run_analysis_tools.py",
-        "evals/runtime/run_analysis_inference.py"
+        "evals/runtime/run_analysis_inference.py",
+        "docs/architecture/pinned-peer-workspace.md",
+        "docs/architecture/workspace-authority-bootstrap.md",
+        "docs/modernization/peer-workspace-evidence.json",
+        "docs/modernization/peer-workspace-results.json",
+        "docs/modernization/peer-workspace-native.json",
+        "backend/tests/runtime/test_peer_workspace_view.py"
       ],
       "remaining": [
         "Migrate retained legacy shell/flow consumers and full code-interpreter capabilities.",
         "Writable development requires global workspace ownership and exact candidate acceptance.",
         "Rendered owner output inspection, broader production Stop/correction scenarios and recovery.",
         "All71 tools/11 categories, legacy engine replacement and complete prompt/human/UI acceptance remain required."
+      ],
+      "notes": [
+        "Registered native/command source roots now remain pinned via a private logical mount. Global ownership/bootstrap/restore and legacy writer migration remain pending; see peer-workspace evidence."
       ]
     },
     "owner_command_inspection": {
@@ -1688,12 +1715,21 @@
         "docs/modernization/ken-identity-packaging.json",
         "backend/tests/runtime/test_ken_worker.py",
         "backend/tests/runtime/test_native_factory.py",
-        "evals/runtime/run_ken_identity.py"
+        "evals/runtime/run_ken_identity.py",
+        "docs/architecture/pinned-peer-workspace.md",
+        "docs/architecture/workspace-authority-bootstrap.md",
+        "docs/modernization/peer-workspace-evidence.json",
+        "docs/modernization/peer-workspace-results.json",
+        "docs/modernization/peer-workspace-native.json",
+        "backend/tests/runtime/test_peer_workspace_view.py"
       ],
       "remaining": [
         "Global authority/bootstrap/duplicate durable namespace identity before G and full lifecycle/restore handoff.",
         "Pinned filesystem views for all mutable actors, alias/topology policy and migration of retained consumers.",
         "Full prompt/human/UI/tool/engine modernization and final independent whole-branch review."
+      ],
+      "notes": [
+        "Registered native/command source roots now remain pinned via a private logical mount. Global ownership/bootstrap/restore and legacy writer migration remain pending; see peer-workspace evidence."
       ]
     },
     "owner_browser_capture": {
@@ -1713,6 +1749,26 @@
         "Remaining10 route redesigns,30 desktop+10 mobile concepts and shared control/lifecycle migration.",
         "Full E2E bootstrap/clean-install suite; current capture requires a prior synthetic analysis trial.",
         "Global engine/tool/prompt/ownership modernization and100 baseline failures remain in scope."
+      ]
+    },
+    "pinned_peer_workspace": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/pinned-peer-workspace.md",
+        "docs/architecture/workspace-authority-bootstrap.md",
+        "docs/modernization/peer-workspace-evidence.json",
+        "docs/modernization/peer-workspace-results.json",
+        "docs/modernization/peer-workspace-native.json",
+        "backend/tests/runtime/test_peer_workspace_view.py",
+        "backend/tests/runtime/test_native_factory.py",
+        "backend/tests/runtime/test_peer_ownership.py",
+        "docs/modernization/peer-workspace-packaging.json"
+      ],
+      "remaining": [
+        "Global authority and witnessed journal/bootstrap with managed complete actor domain.",
+        "Publication globally before G, cross-database/alias ownership and full restore/handoff.",
+        "Migrate retained legacy writers and complete writable development, acceptance/Git/CI.",
+        "Full modernization,100 baseline failures and all UI/prompt/human acceptance remain."
       ]
     }
   }

@@ -16,9 +16,11 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
+from backend.runtime.contracts import WorkspaceChanged
 from backend.runtime.peer_process import NamespaceIdentity, close_namespace, start_ticks
 from backend.runtime.peer_registry import PeerRegistry
 from backend.runtime.sqlite_runs import SQLiteRunStore
+from backend.runtime.workspaces import PEER_WORKSPACE
 
 
 async def _info(fd):
@@ -62,6 +64,25 @@ async def _forward(writer):
         transport.close()
 
 
+def _pinned_host_view(source_fd):
+    """Keep the supervisor's host view but own the source mount destination.
+
+    Rebinding /run's direct entries preserves runtime sockets/control paths.
+    The source lives beside those mounts in a private parent; no enumeration of
+    arbitrary workspace ancestors or thousands of temporary files is needed.
+    Inner native/worker sandboxes still own filesystem and network permissions.
+    """
+    command = ["--bind", "/", "/", "--tmpfs", "/run"]
+    for sibling in sorted(Path("/run").iterdir()):
+        if sibling == PEER_WORKSPACE:
+            continue
+        if sibling.is_symlink():
+            command += ["--symlink", os.readlink(sibling), str(sibling)]
+        else:
+            command += ["--bind", str(sibling), str(sibling)]
+    return [*command, "--bind-fd", str(source_fd), str(PEER_WORKSPACE)]
+
+
 async def run(args):
     registry = PeerRegistry(SQLiteRunStore(Path(args.database).resolve(strict=True)))
     peer = await asyncio.to_thread(registry.inspect, args.peer_id)
@@ -84,15 +105,28 @@ async def run(args):
     for sig in (signal.SIGTERM, signal.SIGINT):
         loop.add_signal_handler(sig, stopped.set)
     read_fd, write_fd = os.pipe()
-    process = identity = forwarding = exited = stopping = None
+    process = identity = forwarding = exited = stopping = source_fd = None
     try:
+        mounts = ["--bind", "/", "/"]
+        binding = await asyncio.to_thread(registry.workspace_binding, args.peer_id)
+        if binding is not None:
+            # Bind the admitted directory object, not a path that can select a
+            # replacement between validation, kernel mount and later commands.
+            # This owns source identity only; the inner native/worker policy
+            # still owns read/write, credentials and network confinement.
+            source_fd = os.open(
+                binding.workspace,
+                os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC,
+            )
+            opened = os.fstat(source_fd)
+            if (opened.st_dev, opened.st_ino) != (binding.device, binding.inode):
+                raise WorkspaceChanged("Admitted directory changed before peer startup")
+            mounts = _pinned_host_view(source_fd)
         process = await asyncio.create_subprocess_exec(
             binary,
             "--unshare-pid",
             "--die-with-parent",
-            "--bind",
-            "/",
-            "/",
+            *mounts,
             "--proc",
             "/proc",
             "--dev",
@@ -106,7 +140,7 @@ async def run(args):
             str(Path(__file__).with_name("peer_payload.py")),
             *args.command,
             stdin=asyncio.subprocess.PIPE,
-            pass_fds=(write_fd,),
+            pass_fds=(write_fd,) if source_fd is None else (write_fd, source_fd),
         )
         os.close(write_fd)
         write_fd = None
@@ -156,7 +190,7 @@ async def run(args):
             if process.returncode is None:
                 process.kill()
             await process.wait()
-        for fd in (read_fd, write_fd):
+        for fd in (read_fd, write_fd, source_fd):
             if fd is not None:
                 try:
                     os.close(fd)

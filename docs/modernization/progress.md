@@ -1530,3 +1530,91 @@ Remaining10 routes/30 desktop+10 mobile concepts, all prompts/book-skills/evals,
 subscription-only auxiliary inference, dependency upgrades/18 npm advisories,
 100 backend baseline failures, clean install/CLI/TUI/package frontend and final fresh
 independent whole-branch review remain. No push/merge/deploy. Full goal stays active.
+
+
+## Pinned peer source and ownership bootstrap debate — base 7bbbd41
+
+- Previous goal turn was progress:7bbbd41 implemented browser fixes/evidence.
+  Revalidated its clean tracked state; only instruction copies untracked. This turn
+  continues full engine/workspace modernization, not another status-only turn.
+- Reused untracked Ken global-workspace-authority-before-gate finding and re-read
+  current workspaces/peers/service sources. Connected Ken cannot index these new
+  worktree modules (find error/file not indexed); direct known-source reads supply
+  evidence rather than claiming source coverage from those tool failures.
+- Applied DDIA source-of-truth/durability/unknown-outcome rules and Ousterhout's
+  information-hiding rule:PeerRegistry owns original admission lookup, guard owns
+  Linux mounting/lifetime, native factories own effective profiles and RPC mapping.
+  Coordinator/business APIs do not receive FD orchestration or another LLM loop.
+- Continued architectural debate with existing clean-context ownership reviewer,
+  without per-task implementer/reviewer agents. Saved workspace-authority-bootstrap:
+  no auto genesis from absent paths; managed complete actor domain + closed spawn
+  gate for origin proof; witnessed PREPARE/SQL/COMMIT before effects; real state
+  hashes; missing/rewound state fails closed; jointly restored witness/SQL requires
+  reference outside that restore domain. Broker/cgroup/service account are proposals,
+  not installed/proven ownership. Host cgroup2/user subtree permissions observed
+  read-only; no cgroup writes/services/account changes. Global authority still pending.
+- Six real namespace tests initially RED:before-open replacement, rename between
+  open/mount, rename after G, in native and command peers. First bind-FD at original
+  host path passed4/6 but mountpoint followed its host dentry post-rename. Rebuilt
+  private ancestor tree passed6/6 and real CLI but full suite exposed bwrap9000 args
+  with thousands of /tmp/pytest siblings (106 failures, six new). Kept that evidence;
+  discarded enumeration, not tests. Overlay root probe returned EINVAL and reviewer
+  identified underlying-live-tree undefined behavior; no overlay adopted.
+- Ruling:use private /run/researcher-source per registered peer instead of source
+  host path — stable mount destination with preserved /run siblings; bounded by
+  system runtime entries rather than project/temp directory cardinality. Cost:
+  absolute host argv paths aren't rewritten/granted; historical cwd must reconcile.
+  Relative cwd/file names remain the intended tool contract. Host journal identity
+  remains original binding; source root/parent rename doesn't redirect the peer.
+- Factory wire and real CLI config assertions observed physical/logical mismatch
+  RED before native+command profile/thread/Ken/cwd mapping. Native factory's new
+  test initially omitted required cwd in its synthetic helper config/read; corrected
+  that harness error, not production protocol. The seven-case probe without a view
+  assertion could pass while still using the host path; added explicit real profile
+  assertion, observed RED, then GREEN. No inference/model dispatch for these probes.
+- Two closure races appeared with fast peers. A trusted local diagnostic wrapper
+  captured ProcessLookupError reading /proc/PID/stat after pidfd open, while stdout
+  already contained done. Added FileNotFound/ProcessLookup tests, both RED then
+  GREEN:wait bounded pinned pidfd barrier, never signal/claim closed by missing
+  metadata. Permission/observer failure stays unknown. Product errors remain redacted.
+- Added two RED→GREEN cases preserving host trusted-asset overlap checks after
+  logical mapping:Ken command/cache cannot hide inside physical source. Resolve
+  once and use canonical values in worker args; not a new source permission grant.
+- Final targeted68 pass. Full suite1265:1162 pass, identical100 baseline failure
+  identities,3 skip,29 warnings; all332 runtime cases pass. No new/resolved failures.
+  Source/parent rename cases, factory profile checks and actual CLI all exercise
+  admitted bindings. Real Ken cf3fabfe prepare/find/read passed isError=false, model
+  turns0, source unchanged, original admission retained, peers closed and attempt
+  retired. Analysis dfa7d70a:7 calculation/read/FS/symlink/network/env cases passed,
+  verified logical roots, no inherited credentials/account, source unchanged, peers
+  closed, diagnostic attempt explicitly retired failed because no native proposal.
+- Five earlier closed synthetic diagnostics explicitly retired using original lease
+  and peer proofs; zero inference dispatches/replayed jobs. Kept cleanup receipts.
+  Wheel rebuilt after final code; all24 runtime source bytes match. Frontend untouched;
+  previous28/build/17 browser-state evidence remains historical, not fresh acceptance.
+- Admission still records dev/inode rather than a live reference from admission
+  through opening; pre-open identity reuse/restore continuity is explicitly unproven
+  and retained in authority/lifecycle acceptance, not claimed from rename tests.
+- Full source/log/native/package hashes in peer-workspace-evidence/results/native/
+  packaging/cleanup. No new generation/images, user DB migration, push/merge/deploy.
+  Tracked status/coverage retain full goal. Workspace ledger is a symlink to this
+  file; appended once to avoid the duplicate discovered in prior checkpoint.
+
+## Next brief after pinned peer source
+
+Continue the FULL plan. Source object pinning now works for registered native and
+command actors with durable admission; do not redo it or mistake it for content
+snapshot/global ownership. Next authority work:bootstrap/provisioning adapter with
+complete managed actor domain, witnessed journal, global namespace publication
+before G and physical closure independent of lost project DB; verified restore/
+handoff/generations and legacy writer migration. Mutable development still gated.
+Retain all71 tools/11 categories, legacy engine/loop/roles/flows/autonomy and agent
+coordination, exact candidate Git/review/CI acceptance, context typed edits/dependencies/
+checkpoints, lifecycle/budgets/external effects, backup/bootstrap/CLI/TUI/clean install
+and frontend packaging. All prompts/book-skills/evals/human comprehension, subscription-
+only auxiliary inference and dependency upgrades/18 npm advisories remain. Visual
+inventory still6/36 desktop+2/12 mobile concepts,2 pilots,0/12 routes accepted;30 desktop
+and10 mobile concepts/10 routes and full12 state/keyboard/zoom/screen-reader/human
+acceptance remain.100 baseline backend failures and final fresh whole-branch review
+are required, not waived. No permanent blocker while other meaningful work remains;
+full goal stays active.

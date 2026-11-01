@@ -126,6 +126,66 @@ async def test_factory_rejects_replaced_admitted_workspace_before_starting_peers
         await peers.aclose()
 
 
+async def test_registered_factory_uses_the_stable_peer_source_view(
+    native_factory_setup, coordination
+):
+    import time
+
+    from backend.runtime.peer_registry import AttemptPeers
+    from backend.runtime.workspaces import PEER_WORKSPACE, WorkspaceRegistry
+
+    c = native_factory_setup
+    coordination.now[0] = time.time()
+    coordination.conn.execute(
+        "INSERT INTO repositories(id,project_id,name,local_path) VALUES(11,101,'source',?)",
+        (str(c.workspace),),
+    )
+    coordination.conn.commit()
+    binding = WorkspaceRegistry(coordination.database, c.tmp).bind(101, 11)
+    run = coordination.store.admit(coordination.spec, binding=binding)
+    _lease, peers = AttemptPeers.claim(
+        coordination.store, 101, run.run_id, "owner", lease_seconds=120
+    )
+    try:
+        async with factory(c).open(
+            workspace=c.workspace, tool_token="HOST_ONLY_GRANT", peer_owner=peers
+        ) as session:
+            assert session.native.workspace == PEER_WORKSPACE
+            config = (
+                await session.native.rpc.request(
+                    "config/read", {"cwd": str(PEER_WORKSPACE), "includeLayers": False}
+                )
+            )["config"]
+            assert config["permissions"]["researcher_inference"]["workspace_roots"] == {
+                str(PEER_WORKSPACE): True
+            }
+            args = config["mcp_servers"]["researcher_ken"]["args"]
+            assert args[args.index("--workspace") + 1] == str(PEER_WORKSPACE)
+        assert coordination.store.workspace_binding(101, run.run_id) == binding
+        records = [
+            json.loads(line)
+            for line in (c.managed / "requests.jsonl").read_text().splitlines()
+        ]
+        thread = next(row for row in records if row.get("method") == "thread/start")
+        assert thread["params"]["cwd"] == str(PEER_WORKSPACE)
+    finally:
+        await peers.aclose()
+
+
+@pytest.mark.parametrize("field", ["ken_command", "model_cache"])
+async def test_logical_view_cannot_hide_trusted_ken_assets_inside_host_source(
+    native_factory_setup, field
+):
+    from dataclasses import replace
+
+    c = native_factory_setup
+    runtime = replace(factory(c), **{field: c.workspace / field})
+    with pytest.raises(ValueError):
+        async with runtime.open(workspace=c.workspace, tool_token="HOST_ONLY_GRANT"):
+            pass
+    assert not (c.managed / "requests.jsonl").exists()
+
+
 async def test_model_peer_keeps_managed_auth_but_never_business_or_api_key_env(
     native_factory_setup, monkeypatch
 ):
