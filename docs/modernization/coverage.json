@@ -1234,7 +1234,12 @@
         "docs/modernization/product-runtime-evidence.json",
         "docs/modernization/product-stop-evidence.json",
         "backend/tests/runtime/test_runtime_service.py",
-        "backend/tests/runtime/test_inference_journal.py"
+        "backend/tests/runtime/test_inference_journal.py",
+        "docs/architecture/host-business.md",
+        "docs/modernization/host-business-evidence.json",
+        "docs/modernization/host-business-results.json",
+        "docs/modernization/host-business-live.json",
+        "docs/modernization/host-business-packaging.json"
       ],
       "remaining": [
         "Migrate/expose retained capabilities and their actual consumers (inventory of71 tools exists).",
@@ -1310,7 +1315,12 @@
         "docs/modernization/run-input-packaging.json",
         "backend/tests/runtime/test_run_input.py",
         "backend/tests/runtime/test_run_input_migration.py",
-        "evals/runtime/run_input_continuity.py"
+        "evals/runtime/run_input_continuity.py",
+        "docs/architecture/host-business.md",
+        "docs/modernization/host-business-evidence.json",
+        "docs/modernization/host-business-results.json",
+        "docs/modernization/host-business-live.json",
+        "docs/modernization/host-business-packaging.json"
       ],
       "remaining": [
         "Migrate all legacy callers and capability families",
@@ -2106,7 +2116,12 @@
         "docs/modernization/ken-host-evidence.json",
         "docs/modernization/ken-host-results.json",
         "docs/modernization/ken-host-live.json",
-        "docs/modernization/ken-host-packaging.json"
+        "docs/modernization/ken-host-packaging.json",
+        "docs/architecture/host-business.md",
+        "docs/modernization/host-business-evidence.json",
+        "docs/modernization/host-business-results.json",
+        "docs/modernization/host-business-live.json",
+        "docs/modernization/host-business-packaging.json"
       ],
       "implemented": [
         "Required-five Ken catalog/JSON schema/argument mediation and shared result/authority boundaries.",
@@ -2123,6 +2138,31 @@
         "Full71 tools/11 categories and all engine/loops/autonomy/flows/agent communication",
         "All prompts/books/evals/human comprehension, UI concepts/routes/acceptance, data/restore/bootstrap/CLI/TUI/dependencies",
         "100 inherited failures and final fresh whole-branch review"
+      ]
+    },
+    "host_business_binding": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/host-business.md",
+        "docs/modernization/host-business-evidence.json",
+        "docs/modernization/host-business-results.json",
+        "docs/modernization/host-business-live.json",
+        "docs/modernization/host-business-packaging.json"
+      ],
+      "implemented": [
+        "Shared11 signatures/docs/routes without FastMCP dependency in main runtime.",
+        "Bounded async numeric-loopback HTTP, no proxies/redirect/replay, explicit scope closure after server authority withdrawal.",
+        "Real HTTP/API/SQLite and locked MCP share schema properties, source/report idempotency and live revocation.",
+        "Actionable redacted validation details and compact schemas preserve real title field.",
+        "40 runtime modules+HTTP/test sources match wheel;29 packaged tests and real loopback/MCP trial pass."
+      ],
+      "remaining": [
+        "Real joint native external subscription/published Ken/host business turn and mixed memory/vendor transport acceptance",
+        "Wire API live-grant authority, source/origin/generation and broker into production factories with owned analysis/development",
+        "Durable native state/resume, credential renewal/account coexistence and complete host actor enrollment",
+        "All71 tools/11 categories/engine/loops/autonomy/roles/flows/agent protocol",
+        "All prompts/books/evals/human comprehension, UI concepts/routes/acceptance, data/restore/bootstrap/CLI/TUI/install/dependencies",
+        "100 inherited failures and fresh final whole-branch review"
       ]
     }
   }

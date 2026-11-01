@@ -1,0 +1,37 @@
+{
+  "status": "shared_business_binding_implemented_product_composition_pending",
+  "contracts": {
+    "eleven_shared_typed_handlers_no_business_rule_duplication": true,
+    "same_compact_mcp_host_properties_and_required": true,
+    "main_runtime_has_no_fastmcp4_dependency": true,
+    "fixed_loopback_origin_and_host_credential_only": true,
+    "no_environment_proxy_redirect_or_automatic_retry": true,
+    "finite_deadline_capacity_and_pending_request_closure": true,
+    "actionable_error_detail_without_input_or_bearer_echo": true,
+    "server_live_authority_withdrawal_precedes_http_cancellation": true,
+    "real_api_sqlite_capture_finding_draft_report_and_idempotent_receipts": true,
+    "cross_project_and_revoked_scope_denied": true,
+    "actual_locked_mcp_and_direct_host_share_receipts_and_withdrawal": true
+  },
+  "evidence": [
+    "backend/research/async_http_client.py",
+    "backend/research/http_client.py",
+    "backend/runtime/business_definitions.py",
+    "backend/runtime/host_business.py",
+    "scripts/researcher_mcp_server.py",
+    "scripts/researcher_mcp_server.py.lock",
+    "backend/tests/research/test_async_http_client.py",
+    "backend/tests/runtime/test_host_business.py",
+    "docs/modernization/host-business-results.json",
+    "docs/modernization/host-business-live.json",
+    "docs/modernization/host-business-packaging.json"
+  ],
+  "remaining": [
+    "Real joint native external subscription/published Ken/host business turn and mixed memory/vendor transport acceptance",
+    "Wire API live-grant authority, source/origin/generation and broker into production factories with owned analysis/development",
+    "Durable native state/resume, credential renewal/account coexistence and complete host actor enrollment",
+    "All71 tools/11 categories/engine/loops/autonomy/roles/flows/agent protocol",
+    "All prompts/books/evals/human comprehension, UI concepts/routes/acceptance, data/restore/bootstrap/CLI/TUI/install/dependencies",
+    "100 inherited failures and fresh final whole-branch review"
+  ]
+}

@@ -2785,3 +2785,86 @@ bootstrap/CLI/TUI/install/dependencies/18 npm advisories and100 inherited failur
 remain required. UI unchanged6/36 desktop+2/12mobile concepts,2pilots,0/12accepted:
 30+10 concepts,10 other routes and all12 acceptance pending. Final fresh full-branch
 review remains required when whole implementation, not a component, is complete.
+
+## Current task: shared business tools and owned host HTTP binding — basec5af44b
+
+- Prior goal turn was progress: mandatory Ken/native host-tool composition, actual
+  Ken mediation, source/package tests and full suite committed c5af44b.
+- Existing business MCP is only typed HTTP translation; SQL/grant checks already
+  live behind /api/research-tools and recheck authority in transactions. Ruling:
+  reuse these handlers in a shared async adapter and keep HTTP/credentials on host,
+  rather than adding a nested worker/process boundary — no business rule belongs
+  in the MCP transport — cost: API actor/control-plane enrollment still must be
+  explicit and HTTP cancellation cannot undo a server effect; preserve receipts.
+- Add bounded async HTTP with no environment proxy/redirect/retry, finite deadlines,
+  request/output limits and deterministic pending-call closure. Share current URL/
+  credential/route/JSON contracts with stdlib client. Share all11 tool signatures/
+  descriptions/routes between legacy FastMCP and host catalog, no FastMCP dependency
+  inside main runtime. Host close withdraws its supplied authority before draining IO.
+- Real business integration/owning service is required before actual joint paid
+  trial. Full plan scope remains unchanged; no phase closed by this adapter task.
+
+## Shared business/host HTTP checkpoint
+
+- RED16 missing async HTTP/host peer cases; shared ResearcherEndpoint preserves the
+  stdlib client's original origin/token/route/body contracts. Async client has8
+  owned requests/no queue,8 connections/4 keepalive, full finite wall deadline,
+  bounded identity-encoded response and body, no proxy env/redirect/retry. Close
+  cancels/drains original IO; pending callers receive uncertain receipt, not replay.
+- Extracted11 existing handlers/docs/signatures into outer business_definitions;
+  FastMCP script and host peer register the same methods. Pydantic validates host
+  input without credentials/authority fields. API retains source/evidence/grant/
+  transaction rules. Close requires supplied live-authority withdrawal before IO.
+- RED actionable-error test: opaque rejection hid useful corrections. Shared error
+  formatter now retains bounded location/message, omits validation input, redacts
+  known bearer; stdlib and async clients reuse it. No raw backend bodies logged.
+- Actual stdio trial exposed absent HTTPX in original script's locked environment;
+  added httpx0.28.1 and explicit pydantic2.14.2, retaining original FastMCP4.1.4/
+  Pydantic versions (main environment remains its own locked2.12.5). Final script
+  lock adds HTTPX/httpcore only; no main dependency version changes or network fetch.
+- Actual catalog parity exposed FastMCP title stripping/local-ref inlining. RED
+  compact-schema test, then small finite-local wire_schema adapter without FastMCP
+  runtime dependency. Preserve real report title field; external/recursive types
+  require explicit extension. All11 properties/required match actual MCP.
+- Source29 directed tests pass. Real API/SQLite attachment→finding→draft report
+  persists one artifact under repeated operation keys; other-project reference,
+  injected authority and revoked token fail; task not accepted. Real loopback
+  Uvicorn + locked stdio MCP + direct host binding share source/report receipts.
+  Host live withdrawal blocks MCP reads before durable SQL revocation; lifecycle
+  still owned by caller/controller. No separate business child in host path.
+- Ruling: do not claim HTTP cancellation undoes server work or API is covered by
+  workload cgroup — transactional grant checks/receipts and controller origin are
+  separate responsibilities — cost: source/origin/generation/API registration and
+  product runtime composition remain required before migration.
+- Final full suite1542:1439 passed,100 EXACT baseline failure IDs,3 skipped/29
+  warnings; runtime595 passed.19 new cases pass, global suite still red. Ruff changed
+  files/diff checks pass; offline wheel+SDist build succeeds.40 runtime+4 HTTP/test
+  sources match wheel. Extracted -I -S wheel passes29 directed tests and actual
+  loopback API/MCP trial, using explicitly supplied source legacy script/lock;
+  this is not proof of installed full-product CLI/script layout.
+- Evidence host-business-{evidence,results,live,packaging}.json and architecture/
+  host-business.md; status/coverage updated. Zero model/image/account credential
+  calls, no user DB migration, service install, push/merge/deploy, no phase closed.
+
+## Next brief after owned host business — FULL objective unchanged
+
+Do not redo Ken/broker/kernel/NET/auth/catalog or HTTP primitives. New host_business
+exposes the same11 business functions without a child or FastMCP dependency and
+requires actual live-grant withdrawal before IO closure. Shared handlers also keep
+legacy locked MCP working; actual cross-transport receipts and revocation passed.
+Next compose it with broker_inference: real original attempt/grant on the same
+API/controller, published Ken preparation/peer, private-NET native host-tools and
+external subscription source. Use existing scopes/lease heartbeat and explicit
+2GiB diagnostic limits to measure mixed memory. Run ONE bounded actual joint turn
+only after deterministic admission/control gates; API and broker should be owned
+by the same controller for this synthetic trial, no fake business/model protocol
+substituted for actual joint evidence. Reuse prior credential/token source safely;
+do not print/store secrets, refresh OAuth speculatively or repeat metadata alone.
+Then complete durable native state/resume, managed auth renewal/account coexistence,
+source/API/global origin/generation/enrollment and production factory adoption.
+Owned analysis/development and all71 tools/11 categories, engine/loops/autonomy/
+roles/flows/agent communication, exact Git/review/CI, all prompts/books/evals/human,
+data/restore/bootstrap/CLI/TUI/install/dependencies/18 npm advisories/100 inherited
+failures remain. UI unchanged6/36 desktop+2/12mobile concepts,2pilots,0/12accepted:
+30+10 concepts,10 remaining routes and all12 acceptance. Fresh final whole-branch
+review remains required after all planned implementation, not each adapter.

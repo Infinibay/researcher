@@ -95,6 +95,11 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    posterior si detecta caída/cambio de Ken. Falta la prueba generativa conjunta y
    la adopción productiva; el ciclo de vida de negocio/análisis aportados sigue
    siendo responsabilidad del host. No prueba disponibilidad continua entre checks.
+   La conexión de negocio del host ya reutiliza las11 firmas/handlers del MCP y
+   mantiene el token fuera de Codex, con HTTP asíncrono acotado y retirada de grant
+   vivo antes del cierre. HTTP real y MCP aislado comparten recibos idempotentes;
+   retirar autoridad desde el host bloqueó el otro transporte. Falta cablear esta
+   propiedad al API/broker productivo y probar inferencia conjunta real.
 7. **Contexto y procedencia:** versiones al corregir o cambiar trece entradas de tarea;
    retiro de autoridad antigua; respuesta asociada a pregunta/versión; repositorio
    admitido inmutable y comienzo de cola explícito. Registro exacto de la entrada
@@ -162,21 +167,22 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 
 ## Verificación más reciente
 
-- Suite completa:1523 casos;1420 pasan,100 fallan con las mismas identidades de la
+- Suite completa:1542 casos;1439 pasan,100 fallan con las mismas identidades de la
   línea base y 3 se omiten. La suite global sigue roja; no hay nuevas fallas.
-- Runtime:590 pasan. Los28 casos añadidos cubren mediación Ken, esquemas/argumentos,
-  perfil nativo host-tools y composición antes de admisión/efectos, incluido cierre
-  de Ken durante un turno y conservación del error original tras cerrar MCP.
-  Las pruebas anteriores de migraciones, HTTPS, red privada, Stop/recuperación y
-  carreras siguen incluidas en la suite completa.
-- Paquete actual:38 módulos runtime y seis fixtures/pruebas cambiadas coinciden con
-  el código. El wheel extraído pasa38 casos: protocolo compuesto controlado y
-  configuración nativa real, sin generación. Otro ensayo ejecuta Ken publicado
-  offline: preparación, catálogo obligatorio, lectura mediada y búsqueda/lectura
-  directa, dos peers cerrados, dominio retirado y fuente intacta. Pico aproximado
-  1,30GiB dentro de límite explícito2GiB, sin OOM. No es carga mixta de inferencia.
-  Se conserva el fallo anterior por OOM a512MiB. No hubo acceso nuevo a credenciales
-  de cuenta, generación ni imágenes. Lock/sync/export/build offline comprobados.
+- Runtime:595 pasan. Los19 casos añadidos cubren HTTP asíncrono, límites/cierre,
+  catálogos compartidos y negocio real vía API/SQLite, con validación y revocación.
+  Las pruebas anteriores de Ken/composición nativa, migraciones, HTTPS, Stop y
+  recuperación siguen incluidas en la suite completa.
+- Paquete actual:40 módulos runtime y cuatro fuentes HTTP/pruebas cambiadas
+  coinciden con el código. El wheel extraído pasa29 casos. Con bibliotecas de ese
+  wheel y el script/lock heredado aportados explícitamente al harness, el ensayo
+  real HTTP/MCP comparte11 esquemas y recibos, conserva un único informe draft y
+  aplica la retirada viva entre transportes. No prueba el layout CLI instalado.
+- El ensayo Ken anterior con wheel comprobó preparación/catálogo/lectura mediada,
+  dos peers cerrados, dominio retirado y fuente intacta. Su pico aproximado1,30GiB
+  con límite2GiB no es carga mixta de inferencia. El OOM a512MiB sigue documentado.
+  Aquí no hubo acceso a cuenta, generación ni imágenes. Build offline y lock del
+  script se comprobaron; se añadieron sus dependencias directas sin bajar versiones.
 - Ensayo real separado: account/read reconoce ChatGPT por el perfil privado, sin
   thread/start ni turn/start; auth.json ausente y dominio/peer/canales cerrados. No
   se guardaron tokens ni datos personales de cuenta. No prueba renovación OAuth,
@@ -209,7 +215,12 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
   siguen pendientes;0/12 rutas aceptadas. Dependencias:18 avisos npm preexistentes
   (5 bajos,3 moderados,10 altos), sin nuevos paquetes vulnerables por Playwright/axe.
 
-Evidencia actual: [resultados actuales](ken-host-results.json),
+Evidencia actual: [resultados actuales](host-business-results.json),
+[negocio compartido y límites](host-business-evidence.json),
+[HTTP y MCP reales](host-business-live.json),
+[paquete actual](host-business-packaging.json),
+[contrato de negocio del host](../architecture/host-business.md),
+[resultados de composición Ken anteriores](ken-host-results.json),
 [composición del host y límites](ken-host-evidence.json),
 [Ken publicado mediado](ken-host-live.json),
 [paquete actual](ken-host-packaging.json),

@@ -16,7 +16,37 @@ class _NoRedirect(request.HTTPRedirectHandler):
         return None
 
 
-class ResearcherHTTPClient:
+def response_error(status, raw, *, token=""):
+    """Keep actionable API details, discarding validation input and known secrets."""
+    try:
+        payload = json.loads(raw) if len(raw) <= 65536 else {}
+        detail = (
+            payload.get("error") or payload.get("detail")
+            if isinstance(payload, dict)
+            else None
+        )
+        if isinstance(detail, list):
+            detail = "; ".join(
+                ".".join(str(p) for p in item.get("loc", []))
+                + ": "
+                + str(item.get("msg", "Invalid input"))[:200]
+                for item in detail[:6]
+                if isinstance(item, dict)
+            )
+        if not isinstance(detail, str) or not detail:
+            detail = "Backend request failed"
+    except (ValueError, UnicodeError):
+        detail = "Backend request failed"
+    if token:
+        detail = detail.replace(token, "[redacted]")
+    return ResearcherClientError(
+        f"Researcher HTTP {status}: {detail[:1200]}", status=status
+    )
+
+
+class ResearcherEndpoint:
+    """Shared local origin, credential and wire bounds, without opening IO."""
+
     def __init__(
         self,
         api_url: str,
@@ -59,16 +89,15 @@ class ResearcherHTTPClient:
         self.token = token
         self.timeout = timeout
         self.response_limit = response_limit
-        self.opener = request.build_opener(request.ProxyHandler({}), _NoRedirect())
 
-    def request(
+    def prepare_request(
         self,
         method: str,
         path: str,
         *,
         body: dict | None = None,
         query: dict | None = None,
-    ) -> dict:
+    ):
         if (
             method not in ("GET", "POST")
             or not path.startswith("/")
@@ -100,6 +129,16 @@ class ResearcherHTTPClient:
         }
         if data is not None:
             headers["Content-Type"] = "application/json"
+        return url, data, headers
+
+
+class ResearcherHTTPClient(ResearcherEndpoint):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.opener = request.build_opener(request.ProxyHandler({}), _NoRedirect())
+
+    def request(self, method, path, *, body=None, query=None) -> dict:
+        url, data, headers = self.prepare_request(method, path, body=body, query=query)
         req = request.Request(url, data=data, headers=headers, method=method)
         try:
             with self.opener.open(req, timeout=self.timeout) as response:
@@ -111,30 +150,9 @@ class ResearcherHTTPClient:
         except error.HTTPError as exc:
             try:
                 raw = exc.read(65537)
-                payload = json.loads(raw) if len(raw) <= 65536 else {}
-                if not isinstance(payload, dict):
-                    payload = {}
-                detail = (
-                    payload.get("error")
-                    or payload.get("detail")
-                    or "Backend request failed"
-                )
-                if isinstance(detail, list):
-                    detail = "; ".join(
-                        ".".join(str(p) for p in item.get("loc", []))
-                        + ": "
-                        + str(item.get("msg", "Invalid input"))[:200]
-                        for item in detail[:6]
-                    )
-                if not isinstance(detail, str):
-                    detail = "Backend request failed"
-            except (ValueError, UnicodeError):
-                detail = "Backend request failed"
             finally:
                 exc.close()
-            raise ResearcherClientError(
-                f"Researcher HTTP {exc.code}: {detail[:1200]}", status=exc.code
-            ) from exc
+            raise response_error(exc.code, raw, token=self.token) from exc
         except (error.URLError, OSError, TimeoutError) as exc:
             raise ResearcherClientError(
                 "No confirmed backend receipt; reconcile or retry with the same operation_key"

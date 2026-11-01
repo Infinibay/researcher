@@ -1,0 +1,12 @@
+{
+  "generative_model_turns": 0,
+  "image_calls": 0,
+  "catalog_count": 11,
+  "same_tool_properties_and_required": true,
+  "host_and_mcp_idempotent_receipts": true,
+  "canonical_draft_recovered": true,
+  "live_withdrawal_fences_other_transport": true,
+  "one_artifact_no_task_acceptance": true,
+  "status": "passed",
+  "limits": "Synthetic source DB/attempt/grant/API actor. Real loopback HTTP and locked FastMCP process; no model/account calls, product factory migration or complete host actor enrollment."
+}
