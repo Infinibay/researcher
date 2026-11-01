@@ -47,6 +47,49 @@ export interface AnswerIntent {
   readonly body: Readonly<{ operation_key: string; expected_version: number; answers: Readonly<Record<string, string>> }>
 }
 
+export interface RecoveryInspection {
+  run_id: string
+  attempt_id: string | null
+  fence: number
+  status: string
+  supported: boolean
+  can_reconcile: boolean
+  blocked_reason: 'missing_proof' | 'different_database' | 'different_kernel' | 'unknown_job' | null
+  peers: { kind: string; state: string; reason: string | null }[]
+  unknown_jobs: number
+  dispatch: { model: string | null; status: string; observed_tokens: number | null; token_ceiling: number } | null
+  effects: { operation_key: string; kind: string; receipt: Record<string, unknown> }[]
+  effects_truncated: boolean
+}
+
+export interface RecoveryIntent {
+  readonly projectId: number
+  readonly taskId: number
+  readonly runId: string
+  readonly body: Readonly<{ operation_key: string; attempt_id: string; expected_fence: number }>
+}
+
+export function prepareRecovery(projectId: number, taskId: number, runId: string, attemptId: string, fence: number): RecoveryIntent {
+  if (![projectId, taskId, fence].every(x => Number.isSafeInteger(x) && x > 0)
+    || !/^[A-Za-z0-9_.:-]{1,128}$/.test(runId) || !attemptId || attemptId.length > 128) {
+    throw new Error('Consulta de nuevo la ejecución antes de comprobar su cierre.')
+  }
+  return Object.freeze({ projectId, taskId, runId, body: Object.freeze({
+    operation_key: crypto.randomUUID(), attempt_id: attemptId, expected_fence: fence,
+  }) })
+}
+
+export function recoveryInspection(projectId: number, runId: string) {
+  return fetchApi<RecoveryInspection>(`/api/projects/${projectId}/runs/${encodeURIComponent(runId)}/recovery`)
+}
+
+export function sendRecovery(intent: RecoveryIntent) {
+  return fetchApi<{ status: string; local_execution_closed: true; inference_started: false; task_accepted: false }>(
+    `/api/projects/${intent.projectId}/runs/${encodeURIComponent(intent.runId)}/recovery`,
+    { method: 'POST', body: JSON.stringify(intent.body) },
+  )
+}
+
 export function prepareAnswer(projectId: number, taskId: number, questionId: number, expectedVersion: number, answers: Record<string, string>): AnswerIntent {
   if (![projectId, taskId, questionId, expectedVersion].every(x => Number.isSafeInteger(x) && x > 0)
     || Object.keys(answers).length < 1 || Object.keys(answers).length > 3

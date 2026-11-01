@@ -1,12 +1,43 @@
 import { useRef, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { prepareAnswer, prepareInstruction, presentRun, sourceWindow } from '../../api/runtime'
-import type { AnswerIntent, InstructionIntent, RuntimeQuestion } from '../../api/runtime'
-import { useAnswer, useCorrection, useInstruction, useStopRun, useTaskWorkspace } from '../../hooks/useRuntime'
+import { prepareAnswer, prepareInstruction, prepareRecovery, presentRun, recoveryInspection, sourceWindow } from '../../api/runtime'
+import type { AnswerIntent, InstructionIntent, RecoveryIntent, RuntimeQuestion } from '../../api/runtime'
+import { useAnswer, useCorrection, useInstruction, useRecovery, useStopRun, useTaskWorkspace } from '../../hooks/useRuntime'
 import { MarkdownRenderer } from '../common/MarkdownRenderer'
 
 const inputClass = 'w-full rounded-md border border-surface-600 bg-surface-900 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500'
 const buttonClass = 'rounded-md border border-surface-600 px-3 py-2 text-sm text-slate-200 hover:bg-surface-700 disabled:opacity-50'
+
+function RecoveryCard({ projectId, taskId, runId }: { projectId: number; taskId: number; runId: string }) {
+  const details = useQuery({ queryKey: ['run-recovery', projectId, runId], queryFn: () => recoveryInspection(projectId, runId), retry: false, refetchInterval: 2000 })
+  const recover = useRecovery()
+  const intent = useRef<RecoveryIntent | null>(null)
+  const stateLabels: Record<string, string> = { prepared: 'Inicio pendiente', bound: 'Cierre por comprobar', closed: 'Cierre comprobado' }
+  const kindLabels: Record<string, string> = { native: 'Ejecución del agente', business: 'Herramientas del proyecto', command: 'Ejecución de comandos' }
+  const effectLabels: Record<string, string> = { 'source.capture': 'Fuente capturada', 'finding.record': 'Hallazgo guardado', 'report.write': 'Informe guardado', 'question.ask': 'Pregunta guardada' }
+  return <section className="space-y-2 rounded-md border border-amber-700/50 p-3" aria-label="Recuperar ejecución">
+    <h4 className="font-medium text-slate-200">Comprobar el cierre</h4>
+    <p className="text-slate-400">Revisaremos que esta ejecución ya no pueda actuar. Los borradores y recibos guardados se conservan. Este control no reinicia el trabajo.</p>
+    {details.isPending && <p role="status">Consultando las pruebas disponibles…</p>}
+    {details.error && <p role="alert">No se pudo consultar la ejecución. {details.error.message}</p>}
+    {details.data && <>
+      <ul className="space-y-1 text-slate-300">{details.data.peers.map((peer, index) => <li key={`${peer.kind}:${index}`}>{kindLabels[peer.kind] ?? 'Proceso de la ejecución'}: {stateLabels[peer.state] ?? 'Estado desconocido'}</li>)}</ul>
+      {!details.data.supported && <p className="text-amber-200">Esta ejecución es anterior al registro de pruebas de cierre. Necesita comprobar el despliegue anterior antes de habilitar nuevo trabajo.</p>}
+      {details.data.blocked_reason === 'different_database' && <p className="text-amber-200">Esta base se copió, trasladó o restauró. Hace falta una transferencia comprobada antes de controlar la ejecución de la instalación anterior.</p>}
+      {details.data.blocked_reason === 'different_kernel' && <p className="text-amber-200">Cambió el entorno del servidor. No podemos deducir que la ejecución anterior se haya cerrado; hace falta comprobar su instalación de origen.</p>}
+      {details.data.unknown_jobs > 0 && <p className="text-amber-200">Hay herramientas cuyo cierre o resultado todavía no se pudo comprobar. Sus efectos siguen pendientes de revisión.</p>}
+      {details.data.dispatch && (details.data.dispatch.status === 'unknown' || details.data.dispatch.observed_tokens == null) && <p className="text-slate-400">El consumo final no está confirmado; se conserva el presupuesto reservado.</p>}
+      {details.data.effects.length > 0 && <details><summary className="cursor-pointer text-slate-300">Lo que quedó guardado</summary><ul className="mt-2 space-y-1 text-slate-400">{details.data.effects.map(effect => <li key={effect.operation_key}>{effectLabels[effect.kind] ?? 'Operación registrada'}</li>)}</ul>{details.data.effects_truncated && <p className="text-slate-400">Esta vista muestra los primeros 100 recibos.</p>}</details>}
+      <button className={buttonClass} disabled={recover.isPending || (!intent.current && !details.data.can_reconcile)} onClick={() => {
+        if (!intent.current && details.data!.attempt_id) intent.current = prepareRecovery(projectId, taskId, runId, details.data!.attempt_id, details.data!.fence)
+        if (intent.current) recover.mutate(intent.current)
+      }}>{recover.isPending ? 'Comprobando y cerrando…' : intent.current ? 'Volver a consultar el mismo control' : 'Comprobar y cerrar ejecución'}</button>
+    </>}
+    <button className={buttonClass} onClick={() => details.refetch()}>Consultar estado</button>
+    {recover.error && <p role="alert" className="text-rose-300">No se confirmó el cierre. Volver a consultar conserva el mismo control. {recover.error.message}</p>}
+    {recover.isSuccess && <p role="status" className="text-sky-300">Cierre comprobado. No se inició otra ejecución ni se aceptó la tarea.</p>}
+  </section>
+}
 
 function QuestionCard({ projectId, taskId, question }: { projectId: number; taskId: number; question: RuntimeQuestion }) {
   const answer = useAnswer()
@@ -131,6 +162,7 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
       {stop.error && <p role="alert" className="text-rose-300">No se confirmó la detención. Consulta el estado antes de continuar. {stop.error.message}</p>}
     </div>}
     {data.questions.map(question => <QuestionCard key={`${projectId}:${taskId}:${question.request_id}`} projectId={projectId} taskId={taskId} question={question} />)}
+    {current && ['reconciling', 'cancelling'].includes(current.status) && <RecoveryCard key={`${projectId}:${current.run_id}`} projectId={projectId} taskId={taskId} runId={current.run_id} />}
     {current?.result && <section className="space-y-2 rounded-md border border-surface-600 p-3" aria-label="Propuesta del agente">
       <h4 className="font-medium text-slate-200">{current.status === 'needs_review' ? 'Propuesta' : 'Resultado conservado'}</h4>
       <MarkdownRenderer content={current.result.summary} />

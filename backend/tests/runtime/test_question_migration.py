@@ -7,12 +7,23 @@ import pytest
 
 
 def version23(database, conn, monkeypatch):
-    from backend.db import question_migration
+    from backend.db import migrations, question_migration
     from backend.tools.base.db import ensure_migrations
 
     conn.execute("PRAGMA foreign_keys=ON")
+    apply_resource = migrations.apply_sql_resource
     with monkeypatch.context() as patch:
         patch.setattr(question_migration, "apply_question_schema", lambda _conn: None)
+        # This fixture deliberately represents version 23, not the newest schema.
+        patch.setattr(
+            migrations,
+            "apply_sql_resource",
+            lambda conn, path: (
+                None
+                if path.name in ("peer_schema.sql", "peer_origin_schema.sql")
+                else apply_resource(conn, path)
+            ),
+        )
         ensure_migrations(database)
     assert (
         conn.execute("SELECT MAX(version) FROM schema_migrations").fetchone()[0] == 23

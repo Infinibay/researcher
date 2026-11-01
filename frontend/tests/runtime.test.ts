@@ -59,3 +59,21 @@ test('answer retries retain the question, original context and literal answers w
   assert.equal(presentRun('waiting_input').canStart, false)
   assert.match(presentRun('waiting_input').title, /respuesta/)
 })
+
+test('recovery retries keep the original attempt and fence without replaying a prompt', async () => {
+  const { prepareRecovery, sendRecovery } = await import('../src/api/runtime.ts')
+  const sent: { url: string; body: Record<string, unknown> }[] = []
+  globalThis.fetch = async (url, options) => {
+    sent.push({ url: String(url), body: JSON.parse(String(options?.body)) })
+    if (sent.length === 1) throw new TypeError('Recovery receipt lost')
+    return Response.json({ status: 'failed', local_execution_closed: true, inference_started: false, task_accepted: false })
+  }
+  const intent = prepareRecovery(101, 1001, 'run-original', 'attempt-original', 4)
+  await assert.rejects(sendRecovery(intent), /receipt lost/)
+  assert.equal((await sendRecovery(intent)).inference_started, false)
+  assert.deepEqual(sent[0], sent[1])
+  assert.equal(sent[1].url, '/api/projects/101/runs/run-original/recovery')
+  assert.equal(sent[1].body.expected_fence, 4)
+  assert.equal(sent[1].body.attempt_id, 'attempt-original')
+  assert.equal('request' in sent[1].body, false)
+})

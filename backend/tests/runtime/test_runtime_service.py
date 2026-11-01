@@ -4,28 +4,11 @@ import asyncio
 import json
 from contextlib import asynccontextmanager
 from dataclasses import replace
-from types import SimpleNamespace
 
 import pytest
 
 from backend.runtime.codex_session import ExecutionLimits, NativeTurnResult
 from backend.runtime.contracts import RunConflict
-
-
-@pytest.fixture
-def service_setup(coordination, tmp_path):
-    c = coordination
-    root = tmp_path / "workspaces"
-    workspace = root / "alpha"
-    workspace.mkdir(parents=True)
-    c.conn.execute(
-        "INSERT INTO repositories(id,project_id,name,local_path) VALUES(11,101,'alpha',?)",
-        (str(workspace),),
-    )
-    c.conn.commit()
-    return SimpleNamespace(
-        c=c, root=root, workspace=workspace, control=tmp_path / "host-control"
-    )
 
 
 class ControlledInference:
@@ -41,7 +24,7 @@ class ControlledInference:
         self.model = "fixture-model"
 
     @asynccontextmanager
-    async def open(self, *, workspace, tool_token, active, limits):
+    async def open(self, *, workspace, tool_token, active, limits, peer_owner=None):
         c = self.setup.c
         # Production mint/bind/live-registration has happened before delivery.
         scope = c.research.authorize(tool_token)
@@ -52,6 +35,7 @@ class ControlledInference:
         self.catalog_hash = "a" * 64
         self.active = active
         self.scope = scope
+        self.peer_owner = peer_owner
         try:
             yield peer
         finally:
@@ -243,6 +227,7 @@ async def test_product_admission_proposal_and_retry_never_mark_task_done(service
     async with service:
         run = await service.submit(s.c.spec)
         await asyncio.wait_for(native.started.wait(), 2)
+        assert native.peer_owner is not None
         assert (await service.submit(s.c.spec)).run_id == run.run_id
         native.release.set()
         await service.wait(run.run_id)
@@ -265,6 +250,86 @@ async def test_product_admission_proposal_and_retry_never_mark_task_done(service
             ).fetchone()[0]
             is None
         )
+
+
+async def test_native_error_withdraws_tool_authority_before_slow_peer_teardown(
+    service_setup,
+):
+    from backend.research.models import ResearchForbidden, SourceDraft
+
+    class SlowFailure(ControlledInference):
+        def __init__(self, setup):
+            super().__init__(setup)
+            self.tearing_down = asyncio.Event()
+            self.close_release = asyncio.Event()
+
+        @asynccontextmanager
+        async def open(self, **kwargs):
+            async with super().open(**kwargs) as peer:
+                try:
+                    yield peer
+                finally:
+                    self.tearing_down.set()
+                    await self.close_release.wait()
+
+        async def run(self, *args, **kwargs):
+            await super().run(*args, **kwargs)
+            raise RuntimeError("Simulated native failure")
+
+    setup = service_setup
+    native = SlowFailure(setup)
+    service = coordinator(setup, native)
+    setup.c.research.runtime_authority = service.live_grants.allows
+    async with service:
+        run = await service.submit(setup.c.spec)
+        await asyncio.wait_for(native.started.wait(), 2)
+        native.release.set()
+        await asyncio.wait_for(native.tearing_down.wait(), 2)
+        try:
+            assert not service.live_grants.allows(native.scope.grant_id)
+            with pytest.raises(ResearchForbidden):
+                setup.c.research.capture_source(
+                    native.scope,
+                    "late-during-teardown",
+                    SourceDraft("web", "https://example.org", "Late", "No late effect"),
+                    intent={},
+                )
+        finally:
+            native.close_release.set()
+        await service.wait(run.run_id)
+
+
+async def test_failed_peer_preparation_does_not_leave_an_unrecoverable_claim(
+    service_setup, monkeypatch
+):
+    from backend.runtime.peer_registry import PeerRegistry
+
+    setup = service_setup
+    native = ControlledInference(setup)
+    service = coordinator(setup, native)
+    original = PeerRegistry._prepare
+
+    def fail_second(registry, conn, lease, kind):
+        if kind == "native":
+            raise RuntimeError("Injected peer preparation failure")
+        return original(registry, conn, lease, kind)
+
+    monkeypatch.setattr(PeerRegistry, "_prepare", fail_second)
+    async with service:
+        run = await service.submit(setup.c.spec)
+        await service.wait(run.run_id)
+        row = setup.c.store.get(101, run.run_id)
+        assert row.status == "queued" and row.attempt_id is None
+        assert (
+            setup.c.conn.execute("SELECT COUNT(*) FROM runtime_attempts").fetchone()[0]
+            == 0
+        )
+        assert (
+            setup.c.conn.execute("SELECT COUNT(*) FROM runtime_peers").fetchone()[0]
+            == 0
+        )
+        assert native.prompts == []
+        assert (await service.stop(101, run.run_id)).status == "cancelled"
 
 
 async def test_native_failure_is_reconciled_after_peers_close_and_preserves_usage(

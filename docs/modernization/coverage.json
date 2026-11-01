@@ -131,7 +131,15 @@
         "docs/architecture/owned-commands.md",
         "backend/tests/runtime/test_command_executor.py",
         "backend/tests/runtime/test_command_journal.py",
-        "docs/modernization/owned-command-evidence.json"
+        "docs/modernization/owned-command-evidence.json",
+        "docs/architecture/peer-recovery.md",
+        "docs/modernization/recovery-evidence.json",
+        "docs/modernization/recovery-results.json",
+        "backend/tests/runtime/test_peer_ownership.py",
+        "backend/tests/runtime/test_run_recovery.py",
+        "backend/tests/runtime/test_runtime_service.py",
+        "evals/runtime/run_crash_recovery.py",
+        "frontend/tests/runtime.test.ts"
       ]
     },
     "E02": {
@@ -152,7 +160,14 @@
         "docs/modernization/product-runtime-evidence.json",
         "docs/modernization/product-stop-evidence.json",
         "backend/tests/runtime/test_runtime_service.py",
-        "backend/tests/runtime/test_inference_journal.py"
+        "backend/tests/runtime/test_inference_journal.py",
+        "docs/architecture/peer-recovery.md",
+        "docs/modernization/recovery-evidence.json",
+        "docs/modernization/recovery-results.json",
+        "backend/tests/runtime/test_peer_ownership.py",
+        "backend/tests/runtime/test_run_recovery.py",
+        "evals/runtime/run_crash_recovery.py",
+        "frontend/tests/runtime.test.ts"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -182,7 +197,14 @@
         "docs/modernization/product-runtime-evidence.json",
         "docs/modernization/product-stop-evidence.json",
         "backend/tests/runtime/test_runtime_service.py",
-        "backend/tests/runtime/test_inference_journal.py"
+        "backend/tests/runtime/test_inference_journal.py",
+        "docs/architecture/peer-recovery.md",
+        "docs/modernization/recovery-evidence.json",
+        "docs/modernization/recovery-results.json",
+        "backend/tests/runtime/test_peer_ownership.py",
+        "backend/tests/runtime/test_run_recovery.py",
+        "evals/runtime/run_crash_recovery.py",
+        "frontend/tests/runtime.test.ts"
       ],
       "remaining": [
         "Durable product startup/shutdown and all tool lifecycle integration; old flows are not covered by owned command evidence",
@@ -234,7 +256,13 @@
         "docs/modernization/conversation-evidence.json",
         "backend/tests/runtime/test_run_conversation.py",
         "backend/tests/runtime/test_workspace_delivery.py",
-        "frontend/tests/runtime.test.ts"
+        "frontend/tests/runtime.test.ts",
+        "docs/architecture/peer-recovery.md",
+        "docs/modernization/recovery-evidence.json",
+        "docs/modernization/recovery-results.json",
+        "backend/tests/runtime/test_peer_ownership.py",
+        "backend/tests/runtime/test_run_recovery.py",
+        "evals/runtime/run_crash_recovery.py"
       ]
     },
     "E06": {
@@ -258,7 +286,13 @@
         "docs/modernization/conversation-evidence.json",
         "backend/tests/runtime/test_run_conversation.py",
         "backend/tests/runtime/test_workspace_delivery.py",
-        "frontend/tests/runtime.test.ts"
+        "frontend/tests/runtime.test.ts",
+        "docs/architecture/peer-recovery.md",
+        "docs/modernization/recovery-evidence.json",
+        "docs/modernization/recovery-results.json",
+        "backend/tests/runtime/test_peer_ownership.py",
+        "backend/tests/runtime/test_run_recovery.py",
+        "evals/runtime/run_crash_recovery.py"
       ]
     },
     "E07": {
@@ -593,7 +627,13 @@
         "backend/tests/runtime/test_human_questions.py",
         "backend/tests/runtime/test_runtime_service.py",
         "backend/tests/runtime/test_workspace_delivery.py",
-        "frontend/tests/runtime.test.ts"
+        "frontend/tests/runtime.test.ts",
+        "docs/architecture/peer-recovery.md",
+        "docs/modernization/recovery-evidence.json",
+        "docs/modernization/recovery-results.json",
+        "backend/tests/runtime/test_peer_ownership.py",
+        "backend/tests/runtime/test_run_recovery.py",
+        "evals/runtime/run_crash_recovery.py"
       ],
       "remaining": [
         "Global question inbox and full legacy caller migration",
@@ -759,7 +799,13 @@
         "docs/architecture/human-questions.md",
         "docs/modernization/human-question-evidence.json",
         "docs/modernization/human-question-results.json",
-        "backend/tests/runtime/test_human_questions.py"
+        "backend/tests/runtime/test_human_questions.py",
+        "docs/architecture/peer-recovery.md",
+        "docs/modernization/recovery-evidence.json",
+        "docs/modernization/recovery-results.json",
+        "backend/tests/runtime/test_peer_ownership.py",
+        "backend/tests/runtime/test_run_recovery.py",
+        "evals/runtime/run_crash_recovery.py"
       ],
       "remaining": [
         "Migrate all legacy callers and capability families",
@@ -780,7 +826,13 @@
         "docs/modernization/human-question-evidence.json",
         "docs/modernization/human-question-results.json",
         "backend/tests/runtime/test_human_questions.py",
-        "backend/tests/runtime/test_runtime_service.py"
+        "backend/tests/runtime/test_runtime_service.py",
+        "docs/architecture/peer-recovery.md",
+        "docs/modernization/recovery-evidence.json",
+        "docs/modernization/recovery-results.json",
+        "backend/tests/runtime/test_peer_ownership.py",
+        "backend/tests/runtime/test_run_recovery.py",
+        "evals/runtime/run_crash_recovery.py"
       ],
       "remaining": [
         "Apply to product prompts and first vertical workflow",
@@ -813,7 +865,13 @@
         "docs/modernization/human-question-evidence.json",
         "docs/modernization/human-question-results.json",
         "backend/tests/runtime/test_human_questions.py",
-        "backend/tests/runtime/test_runtime_service.py"
+        "backend/tests/runtime/test_runtime_service.py",
+        "docs/architecture/peer-recovery.md",
+        "docs/modernization/recovery-evidence.json",
+        "docs/modernization/recovery-results.json",
+        "backend/tests/runtime/test_peer_ownership.py",
+        "backend/tests/runtime/test_run_recovery.py",
+        "evals/runtime/run_crash_recovery.py"
       ],
       "remaining": [
         "Historical migration fixtures and backup/restore",
@@ -861,7 +919,15 @@
       "evidence": [
         "docs/architecture/local-owner-access.md",
         "docs/modernization/local-access-evidence.json",
-        "docs/modernization/local-access-results.json"
+        "docs/modernization/local-access-results.json",
+        "docs/architecture/peer-recovery.md",
+        "docs/modernization/recovery-evidence.json",
+        "docs/modernization/recovery-results.json",
+        "backend/tests/runtime/test_peer_ownership.py",
+        "backend/tests/runtime/test_run_recovery.py",
+        "backend/tests/runtime/test_runtime_service.py",
+        "evals/runtime/run_crash_recovery.py",
+        "frontend/tests/runtime.test.ts"
       ],
       "remaining": [
         "Rendered browser and keyboard verification",
@@ -882,12 +948,18 @@
         "docs/modernization/human-question-evidence.json",
         "docs/modernization/human-question-results.json",
         "backend/tests/runtime/test_human_questions.py",
-        "backend/tests/runtime/test_runtime_service.py"
+        "backend/tests/runtime/test_runtime_service.py",
+        "docs/architecture/peer-recovery.md",
+        "docs/modernization/recovery-evidence.json",
+        "docs/modernization/recovery-results.json",
+        "backend/tests/runtime/test_peer_ownership.py",
+        "backend/tests/runtime/test_run_recovery.py",
+        "evals/runtime/run_crash_recovery.py"
       ],
       "remaining": [
         "Rendered browser and keyboard verification",
         "General project/role conversation and legacy question migration",
-        "Operable uncertain-run recovery and complete synchronization/pagination",
+        "Command/cross-deployment recovery and full synchronization/pagination",
         "Professional concept-driven redesign remains separately pending"
       ]
     },
@@ -908,6 +980,28 @@
         "Migrate legacy question producers and other native input requests without widening authority",
         "Global inbox and complete synchronization/pagination",
         "Rendered/accessibility/human comprehension validation"
+      ]
+    },
+    "research_run_recovery": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/peer-recovery.md",
+        "docs/modernization/recovery-evidence.json",
+        "docs/modernization/recovery-results.json",
+        "backend/tests/runtime/test_peer_ownership.py",
+        "backend/tests/runtime/test_run_recovery.py",
+        "backend/tests/runtime/test_runtime_service.py",
+        "evals/runtime/run_crash_recovery.py",
+        "frontend/tests/runtime.test.ts",
+        "docs/modernization/recovery-migration-evidence.json",
+        "docs/modernization/recovery-packaging.json"
+      ],
+      "remaining": [
+        "Migrate command peers and distinguish execution quiescence from unknown exit code",
+        "Verified deployment handoff/restore generation; cross-database workspace exclusion",
+        "Legacy owner histories and external effects reconciliation",
+        "Typed project deletion and lifetime budget retention",
+        "Rendered UI/accessibility and human comprehension acceptance"
       ]
     }
   }

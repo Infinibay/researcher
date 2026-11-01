@@ -122,34 +122,35 @@ async def ready(client, process, path):
 
 
 @asynccontextmanager
-async def backend(root, env, *, runtime_settings=None):
+async def backend(root, env, *, runtime_settings=None, seed_data=True):
     from backend.tools.base.db import ensure_migrations
 
     database = root / "research.db"
     ensure_migrations(str(database))
     uploads = root / "uploads"
-    with closing(connect(str(database))) as conn, conn:
-        for project, task, marker in [
-            (101, 1001, "ALPHA_ONLY"),
-            (202, 2002, "BETA_ONLY"),
-        ]:
-            conn.execute(
-                "INSERT INTO projects(id,name) VALUES(?,?)",
-                (project, "Research " + marker),
-            )
-            conn.execute(
-                "INSERT INTO tasks(id,project_id,type,title,status,created_by) VALUES(?,?,'research','Policy report','in_progress','user')",
-                (task, project),
-            )
-            directory = uploads / str(project) / "uploads"
-            directory.mkdir(parents=True)
-            attachment = directory / "policy.md"
-            text = f"# Fictional policy {marker}\nTax rates are fractions: 0.21 means 21 percent. Round once at the end using ROUND_HALF_UP.\n"
-            attachment.write_text(text)
-            conn.execute(
-                "INSERT INTO reference_files(project_id,file_name,file_path,file_size,file_type) VALUES(?,'policy.md',?,?,'text/markdown')",
-                (project, str(attachment), len(text.encode())),
-            )
+    if seed_data:
+        with closing(connect(str(database))) as conn, conn:
+            for project, task, marker in [
+                (101, 1001, "ALPHA_ONLY"),
+                (202, 2002, "BETA_ONLY"),
+            ]:
+                conn.execute(
+                    "INSERT INTO projects(id,name) VALUES(?,?)",
+                    (project, "Research " + marker),
+                )
+                conn.execute(
+                    "INSERT INTO tasks(id,project_id,type,title,status,created_by) VALUES(?,?,'research','Policy report','in_progress','user')",
+                    (task, project),
+                )
+                directory = uploads / str(project) / "uploads"
+                directory.mkdir(parents=True)
+                attachment = directory / "policy.md"
+                text = f"# Fictional policy {marker}\nTax rates are fractions: 0.21 means 21 percent. Round once at the end using ROUND_HALF_UP.\n"
+                attachment.write_text(text)
+                conn.execute(
+                    "INSERT INTO reference_files(project_id,file_name,file_path,file_size,file_type) VALUES(?,'policy.md',?,?,'text/markdown')",
+                    (project, str(attachment), len(text.encode())),
+                )
     sock = listener()
     api = f"http://127.0.0.1:{sock.getsockname()[1]}"
     program = "import sys;sys.path.insert(0,sys.argv[1]);from backend.api import config;config.UPLOAD_DIR=sys.argv[2];config.STATIC_DIR=sys.argv[3];from backend.api.main import create_app;import uvicorn;uvicorn.run(create_app(),fd=int(sys.argv[4]),access_log=False,log_level='warning')"

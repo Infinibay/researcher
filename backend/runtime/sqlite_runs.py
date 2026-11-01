@@ -491,33 +491,52 @@ class SQLiteRunStore:
                 and self._context(conn, lease.task_id) == lease.context_version
             ):
                 raise RunConflict("No durable context correction")
-            unknown_job = conn.execute(
-                "SELECT id FROM runtime_jobs WHERE attempt_id=? AND status IN ('dispatching','cancelling','unknown')",
-                (lease.attempt_id,),
-            ).fetchone()
-            if unknown_job is not None:
-                raise RunConflict("Owned jobs require terminal reconciliation")
-            self._withdraw(conn, row, outcome)
-            conn.execute(
-                "UPDATE runtime_attempts SET status='finished',ended_at=? WHERE id=?",
-                (self.clock(), lease.attempt_id),
-            )
-            conn.execute(
-                "UPDATE runtime_inference_dispatches SET status='unknown' WHERE attempt_id=? AND status='reserved'",
-                (lease.attempt_id,),
-            )
-            self._event(
-                conn,
-                lease.project_id,
-                lease.task_id,
-                "run.peers_retired",
-                {
-                    "run_id": lease.run_id,
-                    "status": outcome,
-                    "native_and_business_closed": True,
-                },
-            )
-            return self._view(self._row(conn, lease.project_id, lease.run_id))
+            return self._retire_closed(conn, row, outcome)
+
+    @staticmethod
+    def _closed_peer_proof(conn, attempt_id):
+        scope = conn.execute(
+            "SELECT 1 FROM runtime_peer_scopes WHERE attempt_id=?", (attempt_id,)
+        ).fetchone()
+        if scope is not None:
+            peers = conn.execute(
+                "SELECT kind,state FROM runtime_peers WHERE attempt_id=?", (attempt_id,)
+            ).fetchall()
+            if not {"native", "business"} <= {peer["kind"] for peer in peers} or any(
+                peer["state"] != "closed" for peer in peers
+            ):
+                raise RunConflict("Owned peer closure has not been proven")
+
+    def _retire_closed(self, conn, row, outcome):
+        attempt_id = row["current_attempt_id"]
+        self._closed_peer_proof(conn, attempt_id)
+        if conn.execute(
+            "SELECT 1 FROM runtime_jobs WHERE attempt_id=? AND status<>'exited'",
+            (attempt_id,),
+        ).fetchone():
+            raise RunConflict("Owned jobs require terminal reconciliation")
+        self._withdraw(conn, row, outcome)
+        conn.execute(
+            "UPDATE runtime_attempts SET status='finished',ended_at=? WHERE id=?",
+            (self.clock(), attempt_id),
+        )
+        conn.execute(
+            "UPDATE runtime_inference_dispatches SET status='unknown' WHERE attempt_id=? AND status='reserved'",
+            (attempt_id,),
+        )
+        self._event(
+            conn,
+            row["project_id"],
+            row["task_id"],
+            "run.peers_retired",
+            {
+                "run_id": row["id"],
+                "attempt_id": attempt_id,
+                "status": outcome,
+                "native_and_business_closed": True,
+            },
+        )
+        return self._view(self._row(conn, row["project_id"], row["id"]))
 
     @staticmethod
     def _admission_intent(spec, conversation_thread):
@@ -706,53 +725,58 @@ class SQLiteRunStore:
         )
 
     def claim(self, project_id, run_id, owner_id, *, lease_seconds=30) -> AttemptLease:
+        with self._transaction(write=True) as conn:
+            return self._claim(
+                conn, project_id, run_id, owner_id, lease_seconds=lease_seconds
+            )
+
+    def _claim(self, conn, project_id, run_id, owner_id, *, lease_seconds=30):
         text(owner_id, "owner_id", 128)
         _duration(lease_seconds)
-        with self._transaction(write=True) as conn:
-            row = self._row(conn, project_id, run_id)
-            self._task(conn, project_id, row["task_id"])
-            if row["status"] != "queued" or row["context_version"] != self._context(
-                conn, row["task_id"]
-            ):
-                raise RunConflict("Run is not claimable; reconcile existing work first")
-            attempt_id, fence = str(uuid4()), row["fence"] + 1
-            now = self.clock()
-            expires = now + lease_seconds
-            conn.execute(
-                "INSERT INTO runtime_attempts(id,run_id,owner_id,fence,status,lease_expires_at,started_at) VALUES(?,?,?,?,'running',?,?)",
-                (attempt_id, run_id, owner_id, fence, expires, now),
-            )
-            conn.execute(
-                "UPDATE runtime_runs SET status='running',fence=?,current_attempt_id=?,updated_at=? WHERE id=?",
-                (fence, attempt_id, now, run_id),
-            )
-            conn.execute(
-                "UPDATE tasks SET status='in_progress' WHERE project_id=? AND id=?",
-                (project_id, row["task_id"]),
-            )
-            self._event(
-                conn,
-                project_id,
-                row["task_id"],
-                "run.claimed",
-                {
-                    "run_id": run_id,
-                    "attempt_id": attempt_id,
-                    "fence": fence,
-                    "context_version": row["context_version"],
-                },
-            )
-            return AttemptLease(
-                run_id,
-                attempt_id,
-                project_id,
-                row["task_id"],
-                row["actor_id"],
-                row["context_version"],
-                owner_id,
-                fence,
-                expires,
-            )
+        row = self._row(conn, project_id, run_id)
+        self._task(conn, project_id, row["task_id"])
+        if row["status"] != "queued" or row["context_version"] != self._context(
+            conn, row["task_id"]
+        ):
+            raise RunConflict("Run is not claimable; reconcile existing work first")
+        attempt_id, fence = str(uuid4()), row["fence"] + 1
+        now = self.clock()
+        expires = now + lease_seconds
+        conn.execute(
+            "INSERT INTO runtime_attempts(id,run_id,owner_id,fence,status,lease_expires_at,started_at) VALUES(?,?,?,?,'running',?,?)",
+            (attempt_id, run_id, owner_id, fence, expires, now),
+        )
+        conn.execute(
+            "UPDATE runtime_runs SET status='running',fence=?,current_attempt_id=?,updated_at=? WHERE id=?",
+            (fence, attempt_id, now, run_id),
+        )
+        conn.execute(
+            "UPDATE tasks SET status='in_progress' WHERE project_id=? AND id=?",
+            (project_id, row["task_id"]),
+        )
+        self._event(
+            conn,
+            project_id,
+            row["task_id"],
+            "run.claimed",
+            {
+                "run_id": run_id,
+                "attempt_id": attempt_id,
+                "fence": fence,
+                "context_version": row["context_version"],
+            },
+        )
+        return AttemptLease(
+            run_id,
+            attempt_id,
+            project_id,
+            row["task_id"],
+            row["actor_id"],
+            row["context_version"],
+            owner_id,
+            fence,
+            expires,
+        )
 
     def _authority(self, conn, lease, *, allow_finished=False, now=None):
         row = self._row(conn, lease.project_id, lease.run_id)
@@ -918,6 +942,7 @@ class SQLiteRunStore:
         result = {"native_status": native_status, "summary": summary}
         with self._transaction(write=True) as conn:
             row = self._authority(conn, lease, allow_finished=True)
+            self._closed_peer_proof(conn, lease.attempt_id)
             if row["native_result_json"] is not None:
                 if json.loads(row["native_result_json"]) != result:
                     raise RunConflict(

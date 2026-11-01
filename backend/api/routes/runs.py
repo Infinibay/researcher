@@ -10,6 +10,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from backend.api.models.questions import AnswerQuestions
 from backend.runtime.contracts import RunConflict, RunNotFound, RunSpec
+from backend.runtime.peer_process import PeerUncertain
 
 router = APIRouter(prefix="/api/projects", tags=["runtime"])
 
@@ -23,6 +24,16 @@ def install_run_errors(app: FastAPI):
 
     app.add_exception_handler(RunNotFound, not_found)
     app.add_exception_handler(RunConflict, conflict)
+
+    async def uncertain(request, exc):
+        return JSONResponse(
+            status_code=503,
+            content={
+                "detail": "No se pudo comprobar el cierre local. La ejecución conserva su estado incierto; no se repetirá automáticamente."
+            },
+        )
+
+    app.add_exception_handler(PeerUncertain, uncertain)
 
 
 def service(request: Request):
@@ -104,6 +115,32 @@ class CorrectContext(BaseModel):
         if not value.strip():
             raise ValueError("A correction needs a nonempty statement")
         return value
+
+
+class RecoverRun(BaseModel):
+    model_config = ConfigDict(extra="forbid", strict=True)
+    operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
+    attempt_id: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
+    expected_fence: int = Field(ge=1)
+
+
+@router.get("/{project_id}/runs/{run_id}/recovery")
+async def inspect_recovery(project_id: int, run_id: str, request: Request):
+    from backend.runtime.recovery import RunRecovery
+
+    data = await asyncio.to_thread(
+        RunRecovery(read_store(request)).inspection, project_id, run_id
+    )
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
+@router.post("/{project_id}/runs/{run_id}/recovery")
+async def reconcile_run(
+    project_id: int, run_id: str, body: RecoverRun, request: Request
+):
+    return await service(request).reconcile(
+        project_id=project_id, run_id=run_id, **body.model_dump()
+    )
 
 
 @router.post("/{project_id}/tasks/{task_id}/runs", status_code=202)

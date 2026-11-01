@@ -304,6 +304,18 @@ def ensure_migrations(db_path: str | None = None) -> None:
 
             apply_question_schema(conn)
             logger.info("Migration 24: durable human questions and waiting state")
+        if 25 not in applied:
+            from backend.db.migrations import apply_sql_resource
+
+            resource = Path(__file__).resolve().parents[2] / "db/peer_schema.sql"
+            apply_sql_resource(conn, resource)
+            logger.info("Migration 25: gated PID namespace peer ownership")
+        if 26 not in applied:
+            from backend.db.migrations import apply_sql_resource
+
+            resource = Path(__file__).resolve().parents[2] / "db/peer_origin_schema.sql"
+            apply_sql_resource(conn, resource)
+            logger.info("Migration 26: registered peer database origin")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()

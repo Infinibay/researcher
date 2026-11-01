@@ -12,7 +12,7 @@ import logging
 import os
 import stat
 import time
-from contextlib import closing
+from contextlib import asynccontextmanager, closing
 from dataclasses import dataclass, field
 from pathlib import Path
 from uuid import uuid4
@@ -26,6 +26,8 @@ from backend.runtime.contracts import (
     StaleAttempt,
     validate_correction,
 )
+from backend.runtime.peer_registry import AttemptPeers
+from backend.runtime.recovery import RunRecovery
 from backend.runtime.sqlite_questions import SQLiteQuestionStore
 
 logger = logging.getLogger(__name__)
@@ -103,6 +105,7 @@ class RuntimeService:
         self.store = store
         self.research = research
         self.questions = SQLiteQuestionStore(store, research)
+        self.recovery = RunRecovery(store)
         self.live_grants = live_grants
         self.runtime = runtime
         self.workspaces = workspaces
@@ -116,6 +119,7 @@ class RuntimeService:
         self.owner_id = uuid4().hex
         self._lock_fd = None
         self._workers = {}
+        self._recovery_jobs = {}
         self._closing = False
 
     def _acquire(self):
@@ -178,6 +182,9 @@ class RuntimeService:
                 for task in pending:
                     task.cancel()
                 await asyncio.gather(*tasks, return_exceptions=True)
+            recovery_tasks = [entry[1] for entry in self._recovery_jobs.values()]
+            if recovery_tasks:
+                await asyncio.gather(*recovery_tasks, return_exceptions=True)
         finally:
             if self._lock_fd is not None:
                 os.close(self._lock_fd)
@@ -235,11 +242,23 @@ class RuntimeService:
         if slot is not None:
             await asyncio.shield(slot.task)
 
-    def _withdraw(self, slot, outcome):
+    def _end_tool_authority(self, slot):
         slot.active = False
-        slot.outcome = outcome
         if slot.grant_id:
             self.live_grants.withdraw(slot.grant_id)
+
+    @asynccontextmanager
+    async def _tool_authority(self, slot):
+        try:
+            yield
+        finally:
+            # End authority before native/MCP teardown can block, including
+            # errors and deadline fuses with an HTTP tool still in flight.
+            self._end_tool_authority(slot)
+
+    def _withdraw(self, slot, outcome):
+        self._end_tool_authority(slot)
+        slot.outcome = outcome
         if slot.session is not None and slot.control is None:
             slot.control = asyncio.create_task(self._interrupt(slot.session))
 
@@ -274,6 +293,52 @@ class RuntimeService:
         slot = self._workers.get(run_id)
         if slot is not None and slot.attempt_id == attempt_id:
             self._withdraw(slot, slot.outcome)
+
+    async def reconcile(self, **command):
+        if self._lock_fd is None or self._closing:
+            raise RunConflict("Runtime owner is not accepting recovery controls")
+        intent = self.recovery._intent(**command)
+        key = (command["project_id"], command["run_id"], command["operation_key"])
+        self._recovery_jobs = {
+            key: entry
+            for key, entry in self._recovery_jobs.items()
+            if not entry[1].done()
+        }
+        existing = self._recovery_jobs.get(key)
+        if existing is not None:
+            if existing[0] != intent:
+                raise RunConflict("Recovery key already identifies another intent")
+            return await asyncio.shield(existing[1])
+        if len(self._recovery_jobs) >= 128:
+            raise RunConflict(
+                "Recovery control capacity reached; inspect existing work"
+            )
+        task = asyncio.create_task(self._reconcile_once(command))
+        task.add_done_callback(
+            lambda done: None if done.cancelled() else done.exception()
+        )
+        self._recovery_jobs[key] = (intent, task)
+        return await asyncio.shield(task)
+
+    async def _reconcile_once(self, command):
+        work = await asyncio.to_thread(self.recovery.preflight, **command)
+        if work["completed"] is not None:
+            return work["completed"]
+        slot = self._workers.get(command["run_id"])
+        if slot is not None and slot.attempt_id == command["attempt_id"]:
+            self._withdraw(slot, slot.outcome)
+        results = await asyncio.gather(
+            asyncio.to_thread(self.recovery.begin, **command),
+            *(
+                asyncio.to_thread(self.recovery.peers.close, peer)
+                for peer in work["peers"]
+            ),
+            return_exceptions=True,
+        )
+        for result in results:
+            if isinstance(result, BaseException):
+                raise result
+        return await asyncio.to_thread(self.recovery.complete, **command)
 
     async def correct(self, **command):
         validate_correction(**command)
@@ -314,11 +379,15 @@ class RuntimeService:
                 return
 
     async def _execute(self, run_id, slot):
-        lease = heartbeat = token = result = None
+        lease = heartbeat = token = result = peers = None
         error_type = None
         try:
-            lease = await asyncio.to_thread(
-                self.store.claim, slot.spec.project_id, run_id, self.owner_id
+            lease, peers = await asyncio.to_thread(
+                AttemptPeers.claim,
+                self.store,
+                slot.spec.project_id,
+                run_id,
+                self.owner_id,
             )
             slot.attempt_id = lease.attempt_id
             slot.lease_deadline = time.monotonic() + 30
@@ -340,12 +409,16 @@ class RuntimeService:
             # Startup has its own deadline; it cannot consume an unbounded lease
             # while waiting for MCP assets/configuration before a native turn.
             async with asyncio.timeout(self.limits.wall_seconds + 120):
-                async with self.runtime.open(
-                    workspace=slot.workspace,
-                    tool_token=token,
-                    active=active,
-                    limits=self.limits,
-                ) as session:
+                async with (
+                    self.runtime.open(
+                        workspace=slot.workspace,
+                        tool_token=token,
+                        active=active,
+                        limits=self.limits,
+                        peer_owner=peers,
+                    ) as session,
+                    self._tool_authority(slot),
+                ):
                     slot.session = session
                     if not active():
                         return
@@ -424,9 +497,7 @@ class RuntimeService:
         finally:
             # Both peers have exited their owning worker scope before any final
             # retirement assertion. The grant gate closes even if SQL is busy.
-            slot.active = False
-            if slot.grant_id:
-                self.live_grants.withdraw(slot.grant_id)
+            self._end_tool_authority(slot)
             if heartbeat is not None:
                 heartbeat.cancel()
                 await asyncio.gather(heartbeat, return_exceptions=True)
@@ -436,6 +507,16 @@ class RuntimeService:
             try:
                 if slot.grant_id:
                     await asyncio.to_thread(self.research.revoke_grant, slot.grant_id)
+                peers_closed = False
+                if peers is not None:
+                    try:
+                        await peers.aclose()
+                        peers_closed = await asyncio.to_thread(peers.closed)
+                    except Exception as exc:  # noqa: BLE001 — retain uncertainty after kernel/DB failure
+                        error_type = type(exc).__name__
+                        logger.warning(
+                            "Peer closure needs reconciliation (%s)", error_type
+                        )
                 if lease is not None:
                     if result is not None:
                         await asyncio.to_thread(
@@ -455,7 +536,9 @@ class RuntimeService:
                                 "status": result.status,
                             },
                         )
-                    if not getattr(slot.session, "peers_closed", False):
+                    if not peers_closed or not getattr(
+                        slot.session, "peers_closed", False
+                    ):
                         await asyncio.to_thread(
                             self.store.uncertain_inference,
                             lease,

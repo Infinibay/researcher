@@ -101,6 +101,38 @@ async def test_model_peer_keeps_managed_auth_but_never_business_or_api_key_env(
     assert not list(c.control.glob("native-inference-*"))
 
 
+async def test_native_factory_registers_namespace_init_before_protocol_start(
+    native_factory_setup, coordination
+):
+    import time
+
+    from backend.runtime.peer_registry import AttemptPeers
+
+    c = native_factory_setup
+    coordination.now[0] = time.time()
+    run = coordination.store.admit(coordination.spec)
+    lease = coordination.store.claim(
+        101, run.run_id, "factory-owner", lease_seconds=120
+    )
+    peers = AttemptPeers.prepare(coordination.store, lease)
+    try:
+        async with factory(c).open(
+            workspace=c.workspace, tool_token="HOST_ONLY_GRANT", peer_owner=peers
+        ) as session:
+            assert session.thread_id == "factory-thread"
+            record = peers.registry.inspect(peers.ids["native"])
+            assert record["state"] == "bound"
+            assert record["init_namespace"] != record["observer_namespace"]
+        records = [
+            json.loads(line)
+            for line in (c.managed / "requests.jsonl").read_text().splitlines()
+        ]
+        assert not any(row.get("method") == "turn/start" for row in records)
+    finally:
+        await peers.aclose()
+    assert peers.closed()
+
+
 async def test_unsafe_effective_configuration_is_refused_before_thread_or_turn(
     native_factory_setup,
 ):

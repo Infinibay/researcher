@@ -166,6 +166,7 @@ class CodexRuntime:
         limits: ExecutionLimits | None = None,
         resume_thread_id: str | None = None,
         expected_catalog_hash: str | None = None,
+        peer_owner=None,
     ):
         if resume_thread_id and not expected_catalog_hash:
             raise RpcProtocolError(
@@ -210,6 +211,7 @@ class CodexRuntime:
                     uv=self.uv_binary,
                     cache=self.uv_cache,
                     home=home / "business",
+                    peer_owner=peer_owner,
                 ) as peer:
                     business = await BusinessTools.connect(peer, active=active)
                     if (
@@ -297,6 +299,8 @@ class CodexRuntime:
                         command.extend(["--disable", feature])
                     for key, value in overrides.items():
                         command.extend(["-c", key + "=" + _toml(value)])
+                    if peer_owner is not None:
+                        command = peer_owner.command("native", command)
 
                     async def preflight(rpc):
                         if resume_thread_id:

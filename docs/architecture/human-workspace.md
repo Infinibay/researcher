@@ -131,6 +131,7 @@ lectores. La web tiene pruebas Node de transporte/intenciones/estados y pasa
 TypeScript/Vite. CUA sigue sin navegador disponible: no hay prueba visual,
 recorrido de teclado ni aceptación del diseño. El recorrido de preguntas nuevo
 tiene prueba real por suscripción; véase `human-question-evidence.json`.
-El motor aún debe incorporar recuperación operable de incertidumbre, roles,
+La [recuperación de investigación](peer-recovery.md) ya tiene inspección y cierre
+sin replay. Falta recuperación general entre entornos, comandos, roles,
 desarrollo/Git/review/CI y demás capacidades del plan; los 100 fallos de la
 suite heredada permanecen identificados, no eliminados para simular migración.

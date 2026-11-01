@@ -110,7 +110,14 @@ class _BusinessPeer:
 
 @asynccontextmanager
 async def business_peer(
-    *, api_url: str, token: str, script: Path, uv: Path, cache: Path, home: Path
+    *,
+    api_url: str,
+    token: str,
+    script: Path,
+    uv: Path,
+    cache: Path,
+    home: Path,
+    peer_owner=None,
 ):
     """Own only the business MCP child; credentials never enter native config."""
     import asyncio
@@ -121,17 +128,21 @@ async def business_peer(
     from mcp.client.stdio import stdio_client
 
     await asyncio.to_thread(home.mkdir, mode=0o700, parents=True, exist_ok=True)
+    command = [
+        str(uv),
+        "run",
+        "--offline",
+        "--locked",
+        "--python",
+        sys.executable,
+        "--script",
+        str(script),
+    ]
+    if peer_owner is not None:
+        command = peer_owner.command("business", command)
     server = StdioServerParameters(
-        command=str(uv),
-        args=[
-            "run",
-            "--offline",
-            "--locked",
-            "--python",
-            sys.executable,
-            "--script",
-            str(script),
-        ],
+        command=command[0],
+        args=command[1:],
         cwd=home,
         env={
             "PATH": os.defpath,

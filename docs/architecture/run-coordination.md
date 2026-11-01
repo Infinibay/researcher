@@ -52,8 +52,10 @@ en `needs_review`, conserva una propuesta y no cambia la tarea a `done`.
 
 Para peers de investigación que el worker acaba de cerrar existe una salida
 controlada: conserva recibos y revocación y comprueba que no haya jobs inciertos.
-Los intentos perdidos tras crash o con teardown no confirmado siguen en
-reconciliación; todavía falta el procedimiento general de inspección y resolución.
+Los intentos perdidos conservan reconciliación hasta demostrar cierre.
+La [recuperación de investigación](peer-recovery.md) incorpora inspección y control
+mediante identidad durable de namespaces. Otros entornos, jobs y registros antiguos
+siguen pendientes.
 Un booleano del modelo no puede resolverlos.
 
 ## Permisos ligados al intento
@@ -61,8 +63,7 @@ Un booleano del modelo no puede resolverlos.
 El host emite un grant de negocio, lo liga con `bind_grant` y sólo después lo
 entrega al MCP del intento. La vinculación comprueba proyecto, tarea, actor,
 contexto y vigencia. Emitir el grant y fallar al vincularlo requiere revocarlo
-sin entregarlo; esta composición es responsabilidad del servicio todavía
-pendiente. El modelo no puede emitir ni vincular grants.
+sin entregarlo; el servicio productivo ya compone esta responsabilidad para investigación. El modelo no puede emitir ni vincular grants.
 
 La autorización del MCP vuelve a comprobar el intento dentro de cada lectura
 o escritura. Compara estado del run/intento, fence, lease y contexto, además de

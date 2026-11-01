@@ -1,0 +1,327 @@
+{
+  "scope": "Owned-process research recovery; not complete modernization or browser acceptance",
+  "generative_turns_this_checkpoint": 1,
+  "metadata_probe_v25": {
+    "trial": "native-boundary-7e6d4c9b",
+    "status": "passed",
+    "model_turns_submitted": 0,
+    "model": "gpt-6.1-sol",
+    "catalog_hash": "9862a89e590a5885d9a7943d862a9c0f3b8c4964ab8a1cdac1fc53e954a8c192",
+    "native_turns_sent": 0,
+    "native_ken_read": "passed",
+    "host_business_read": "passed",
+    "inference_profile_effect_checks": [
+      {
+        "case": "inside",
+        "exit_code": 0
+      },
+      {
+        "case": "outside",
+        "exit_code": 1
+      },
+      {
+        "case": "python-positive",
+        "exit_code": 0
+      },
+      {
+        "case": "read-only",
+        "exit_code": 23
+      },
+      {
+        "case": "network",
+        "exit_code": 23
+      }
+    ],
+    "namespace_peers": [
+      {
+        "kind": "business",
+        "state": "closed",
+        "reason": "init_absent"
+      },
+      {
+        "kind": "native",
+        "state": "closed",
+        "reason": "init_absent"
+      }
+    ],
+    "owned_peers_closed": true,
+    "owned_backend_terminal": true
+  },
+  "crash_recovery_v26": {
+    "trial": "crash-recovery-a01f39e9",
+    "status": "passed",
+    "model_turns_submitted": 0,
+    "before_crash": {
+      "run_id": "87418447-c7a8-498e-8965-b40e82372c13",
+      "attempt_id": "bceadcb7-22e2-4c5c-8b9c-90fada750a9e",
+      "model": "gpt-6.1-sol",
+      "native_turns_sent": 0
+    },
+    "holder_terminal": true,
+    "inspection": {
+      "run_id": "87418447-c7a8-498e-8965-b40e82372c13",
+      "attempt_id": "bceadcb7-22e2-4c5c-8b9c-90fada750a9e",
+      "fence": 2,
+      "status": "reconciling",
+      "supported": true,
+      "can_reconcile": true,
+      "blocked_reason": null,
+      "peers": [
+        {
+          "kind": "business",
+          "state": "bound",
+          "reason": null
+        },
+        {
+          "kind": "native",
+          "state": "bound",
+          "reason": null
+        }
+      ],
+      "jobs": [],
+      "unknown_jobs": 0,
+      "dispatch": null,
+      "effects": [],
+      "effects_truncated": false
+    },
+    "recovered": {
+      "run_id": "87418447-c7a8-498e-8965-b40e82372c13",
+      "attempt_id": "bceadcb7-22e2-4c5c-8b9c-90fada750a9e",
+      "status": "failed",
+      "local_execution_closed": true,
+      "inference_started": false,
+      "task_accepted": false
+    },
+    "namespace_peers": [
+      {
+        "kind": "business",
+        "state": "closed",
+        "reason": "init_absent"
+      },
+      {
+        "kind": "native",
+        "state": "closed",
+        "reason": "init_absent"
+      }
+    ],
+    "no_dispatch_replayed": true,
+    "grants_revoked": true,
+    "task_not_accepted": true,
+    "owned_backend_terminal": true
+  },
+  "earlier_crash_probe_v25": {
+    "trial": "crash-recovery-788bf64b",
+    "status": "passed",
+    "model_turns_submitted": 0,
+    "owned_backend_terminal": true
+  },
+  "conversation_v25": {
+    "trial": "conversation-9e79317a",
+    "status": "passed",
+    "instruction_posts": 3,
+    "native_dispatches": 1,
+    "run": {
+      "run_id": "c3f474e6-cccf-44a9-b98d-8bef227b6ccc",
+      "project_id": 101,
+      "task_id": 1001,
+      "actor_id": "researcher",
+      "context_version": 1,
+      "status": "needs_review",
+      "fence": 1,
+      "attempt_id": "c040025e-2baa-48f1-a437-c783e2c94202",
+      "thread_id": "01a19485-697d-7902-bd9e-a08049fb48f3",
+      "turn_id": "01a19485-6cae-7713-a5b3-c8afb6e2b941",
+      "prompt": "En español: usa Ken MCP para leer invoice.py; usa herramientas researcher para capturar policy.md, registrar una observación provisional con cita literal y guardar un informe borrador. Explica con un ejemplo simple qué significa tasa 0.21 para base 100, distinguiendo impuesto y total. Aclara qué demuestra la fuente y qué demuestra el código. No ejecutes tests, publiques ni aceptes la tarea. Conserva claves de operación para reintentos y termina con el ID del informe.",
+      "runtime": "codex",
+      "result": {
+        "native_status": "completed",
+        "summary": "Guardé la observación provisional con cita literal de `policy.md` y el informe borrador.\n\nLa tasa **0.21 equivale al 21 %**: para base 100, el **impuesto es 21** y el **total es 121**.\n\nLa política declara la tasa y el redondeo `ROUND_HALF_UP`. El código leído con Ken solo contiene `marker()`, que devuelve `\"ALPHA_ONLY\"`; no demuestra que implemente esas reglas.\n\nConservé las claves de operación para reintentos. No ejecuté tests, publiqué ni acepté la tarea.\n\nID del informe: **1**"
+      },
+      "cancel_requested": false,
+      "operation_key": "conversation-instruction",
+      "conversation_thread_id": "human-conversation",
+      "model": "gpt-6.1-sol"
+    },
+    "messages": [
+      {
+        "id": 1,
+        "project_id": 101,
+        "thread_id": "human-conversation",
+        "from_agent": "user",
+        "to_agent": "researcher",
+        "to_role": null,
+        "message": "En español: usa Ken MCP para leer invoice.py; usa herramientas researcher para capturar policy.md, registrar una observación provisional con cita literal y guardar un informe borrador. Explica con un ejemplo simple qué significa tasa 0.21 para base 100, distinguiendo impuesto y total. Aclara qué demuestra la fuente y qué demuestra el código. No ejecutes tests, publiques ni aceptes la tarea. Conserva claves de operación para reintentos y termina con el ID del informe.",
+        "conversation_type": "user_to_agent",
+        "created_at": "2026-11-01 00:32:11",
+        "runtime_run_id": "c3f474e6-cccf-44a9-b98d-8bef227b6ccc",
+        "runtime_status": "superseded",
+        "context_version": 1,
+        "task_id": 1001,
+        "delivery": "instruction_admitted"
+      },
+      {
+        "id": 2,
+        "project_id": 101,
+        "thread_id": "human-conversation",
+        "from_agent": "researcher",
+        "to_agent": "user",
+        "to_role": null,
+        "message": "Guardé la observación provisional con cita literal de `policy.md` y el informe borrador.\n\nLa tasa **0.21 equivale al 21 %**: para base 100, el **impuesto es 21** y el **total es 121**.\n\nLa política declara la tasa y el redondeo `ROUND_HALF_UP`. El código leído con Ken solo contiene `marker()`, que devuelve `\"ALPHA_ONLY\"`; no demuestra que implemente esas reglas.\n\nConservé las claves de operación para reintentos. No ejecuté tests, publiqué ni acepté la tarea.\n\nID del informe: **1**",
+        "conversation_type": "agent_to_user",
+        "created_at": "2026-11-01 00:32:40",
+        "runtime_run_id": "c3f474e6-cccf-44a9-b98d-8bef227b6ccc",
+        "runtime_status": "superseded",
+        "context_version": 1,
+        "task_id": 1001,
+        "delivery": "proposal"
+      }
+    ],
+    "report": {
+      "id": 1,
+      "project_id": 101,
+      "task_id": 1001,
+      "type": "report",
+      "description": "research: Policy report",
+      "title": "Policy report",
+      "research_status": "draft",
+      "created_at": "2026-11-01 00:32:37",
+      "content": "# Policy report\n\nLa fuente `policy.md` es una política ficticia y establece literalmente: “Tax rates are fractions: 0.21 means 21 percent. Round once at the end using ROUND_HALF_UP.” [Fuente capturada 1, reference:1, SHA-256 74ea890e243a6ba2427387a742c6c501884865446ee058ed5bbdf03a10e98d45]. La observación 1 queda provisional.\n\nEjemplo: con base 100 y tasa 0.21 (21 %), el impuesto es 100 × 0.21 = 21. El total, suponiendo que solo se suma ese impuesto a la base, es 100 + 21 = 121. El impuesto y el total son cantidades distintas. Este ejemplo no requiere resolver un empate de redondeo; la fuente no especifica aquí la cantidad de decimales.\n\nLa fuente demuestra qué regla declara esa política; no demuestra su cumplimiento en software ni su validez fiscal externa. Ken leyó `invoice.py`, líneas 1–2: `def marker():` y `return \"ALPHA_ONLY\"`. Esa lectura acredita únicamente la presencia de una función que devuelve el marcador; no acredita cálculo de impuestos, total ni redondeo. El esquema de Ken también enumera una sola función. No se recibió un hash de revisión del código; el alcance corresponde al contenido leído en esta sesión. La memoria recuperada indicaba ALPHA_ONLY y figuraba como untracked: no se usó como prueba de cumplimiento.\n\nSe capturó y leyó íntegramente la fuente de 121 caracteres. No se ejecutaron tests ni el programa. Este documento es un borrador; no se publicó ni se aceptó la tarea.\n\nClaves conservadas para reintentos: `policy-report-v1-capture-policy-1`, `policy-report-v1-observation-1` y `policy-report-v1-draft-1`."
+    },
+    "grants_revoked": true,
+    "task_not_done": true,
+    "owned_backend_terminal": true
+  },
+  "limits": [
+    "The v25 conversation preceded origin validation and the early authority-withdrawal adjustment; later offline tests cover those changes.",
+    "Local closure does not prove final remote generation usage; unknown usage retains its reservation.",
+    "No rendered, keyboard, accessibility or human comprehension acceptance.",
+    "Command peers, cross-kernel/DB transfer and old producers remain to migrate.",
+    "Final identity hardening rejects a candidate before retaining it for cleanup and verifies launcher parentage; the final v26 zero-turn crash trial exercises that version.",
+    "The final v26 holder also uses atomic claim plus peer-scope preparation; injected preparation failure rolls the claim back without executing a payload."
+  ],
+  "earlier_crash_probe_v26": {
+    "trial": "crash-recovery-d63a25b6",
+    "status": "passed",
+    "model_turns_submitted": 0,
+    "before_crash": {
+      "run_id": "4db4b1ec-816c-44f2-b0ec-2204776caa3a",
+      "attempt_id": "28ba417c-28aa-446f-836c-8d40515c151b",
+      "model": "gpt-6.1-sol",
+      "native_turns_sent": 0
+    },
+    "holder_terminal": true,
+    "inspection": {
+      "run_id": "4db4b1ec-816c-44f2-b0ec-2204776caa3a",
+      "attempt_id": "28ba417c-28aa-446f-836c-8d40515c151b",
+      "fence": 2,
+      "status": "reconciling",
+      "supported": true,
+      "can_reconcile": true,
+      "blocked_reason": null,
+      "peers": [
+        {
+          "kind": "business",
+          "state": "bound",
+          "reason": null
+        },
+        {
+          "kind": "native",
+          "state": "bound",
+          "reason": null
+        }
+      ],
+      "jobs": [],
+      "unknown_jobs": 0,
+      "dispatch": null,
+      "effects": [],
+      "effects_truncated": false
+    },
+    "recovered": {
+      "run_id": "4db4b1ec-816c-44f2-b0ec-2204776caa3a",
+      "attempt_id": "28ba417c-28aa-446f-836c-8d40515c151b",
+      "status": "failed",
+      "local_execution_closed": true,
+      "inference_started": false,
+      "task_accepted": false
+    },
+    "namespace_peers": [
+      {
+        "kind": "business",
+        "state": "closed",
+        "reason": "init_absent"
+      },
+      {
+        "kind": "native",
+        "state": "closed",
+        "reason": "init_absent"
+      }
+    ],
+    "no_dispatch_replayed": true,
+    "grants_revoked": true,
+    "task_not_accepted": true,
+    "owned_backend_terminal": true
+  },
+  "previous_final_crash_v26": {
+    "trial": "crash-recovery-fe2073f4",
+    "status": "passed",
+    "model_turns_submitted": 0,
+    "before_crash": {
+      "run_id": "17a98c30-088c-4f2c-87ec-b8803ae5505b",
+      "attempt_id": "023cbf37-0a6a-40d2-b0c6-b4137ce81ce6",
+      "model": "gpt-6.1-sol",
+      "native_turns_sent": 0
+    },
+    "holder_terminal": true,
+    "inspection": {
+      "run_id": "17a98c30-088c-4f2c-87ec-b8803ae5505b",
+      "attempt_id": "023cbf37-0a6a-40d2-b0c6-b4137ce81ce6",
+      "fence": 2,
+      "status": "reconciling",
+      "supported": true,
+      "can_reconcile": true,
+      "blocked_reason": null,
+      "peers": [
+        {
+          "kind": "business",
+          "state": "bound",
+          "reason": null
+        },
+        {
+          "kind": "native",
+          "state": "bound",
+          "reason": null
+        }
+      ],
+      "jobs": [],
+      "unknown_jobs": 0,
+      "dispatch": null,
+      "effects": [],
+      "effects_truncated": false
+    },
+    "recovered": {
+      "run_id": "17a98c30-088c-4f2c-87ec-b8803ae5505b",
+      "attempt_id": "023cbf37-0a6a-40d2-b0c6-b4137ce81ce6",
+      "status": "failed",
+      "local_execution_closed": true,
+      "inference_started": false,
+      "task_accepted": false
+    },
+    "namespace_peers": [
+      {
+        "kind": "business",
+        "state": "closed",
+        "reason": "init_absent"
+      },
+      {
+        "kind": "native",
+        "state": "closed",
+        "reason": "init_absent"
+      }
+    ],
+    "no_dispatch_replayed": true,
+    "grants_revoked": true,
+    "task_not_accepted": true,
+    "owned_backend_terminal": true
+  },
+  "turn_count_scope": "Explicit application-runtime evaluations only; excludes assistant/subagent usage and local Ken embeddings."
+}

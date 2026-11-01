@@ -118,7 +118,7 @@ def test_backend_origin_must_be_explicit_numeric_loopback(origin):
 def test_tool_response_limit_fails_instead_of_returning_partial_json(tool_http_server):
     from backend.research.http_client import ResearcherClientError, ResearcherHTTPClient
 
-    with pytest.raises(ResearcherClientError):
+    with pytest.raises(ResearcherClientError, match="response exceeds the byte limit"):
         ResearcherHTTPClient(
             tool_http_server, "test-secret-token", response_limit=128
         ).request("GET", "/large")

@@ -108,8 +108,9 @@ inciertos se permite el estado final `cancelled`.
 Un error de teardown conserva `reconciling`, la propuesta disponible, el contexto,
 las reservas y la prohibición de repetir. Un fallo nativo con peers cerrados
 conserva su recibo y puede terminar en `failed`. Los demás errores que no tienen
-prueba de cierre quedan pendientes de reconciliación. No existe aún una UI ni
-un procedimiento completo para resolver todos los intentos inciertos tras crash.
+prueba de cierre quedan pendientes de reconciliación. El recorrido nuevo dispone
+de [registro, inspección y control humano de cierre](peer-recovery.md), con namespaces
+por peer. Otros jobs, entornos y registros antiguos siguen pendientes.
 
 Una corrección valida contenido y versión antes de retirar actividad, registra
 procedencia y crea contexto nuevo. No afirma haberse aplicado dentro del turno
@@ -167,7 +168,8 @@ metadatos, Ken, negocio, restricciones y cierre sin turnos generativos;
 La reanudación no sustituye un catálogo dinámico: exige hash guardado y workspace
 coincidente. El intento de reabrir un thread sin turnos falló como `thread not loaded`;
 no prueba reanudación productiva. El coordinador crea un thread para cada solicitud
-explícita y no usa esa ruta para repetir trabajo incierto. Recuperación completa,
-preguntas humanas pendientes, capacidades restantes, migración de escritores
+explícita y no usa esa ruta para repetir trabajo incierto. Preguntas y recuperación
+de investigación tienen recorridos propios verificados. Recuperación entre entornos,
+capacidades restantes, migración de escritores
 antiguos, presupuestos operables desde UI, todas las evaluaciones de prompts y
 el rediseño de las doce páginas siguen abiertos.

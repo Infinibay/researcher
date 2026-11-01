@@ -176,28 +176,7 @@ class SQLiteQuestionStore:
                 status = "waiting_input"
             else:
                 raise RunConflict("Question is no longer pending under this context")
-            self.runs._withdraw(conn, row, status)
-            conn.execute(
-                "UPDATE runtime_attempts SET status='finished',ended_at=? WHERE id=?",
-                (self.runs.clock(), lease.attempt_id),
-            )
-            conn.execute(
-                "UPDATE runtime_inference_dispatches SET status='unknown' WHERE attempt_id=? AND status='reserved'",
-                (lease.attempt_id,),
-            )
-            self.runs._event(
-                conn,
-                lease.project_id,
-                lease.task_id,
-                "run.peers_retired",
-                {
-                    "run_id": lease.run_id,
-                    "attempt_id": lease.attempt_id,
-                    "status": status,
-                    "native_and_business_closed": True,
-                },
-            )
-            return self.runs._view(self.runs._row(conn, lease.project_id, lease.run_id))
+            return self.runs._retire_closed(conn, row, status)
 
     @staticmethod
     def _question(conn, project_id, task_id, request_id):

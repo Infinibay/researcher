@@ -347,3 +347,112 @@ Complete 36 desktop concepts plus 12 mobile references, selection, professional
 implementation, browser/accessibility acceptance and final independent whole-branch
 review. No final design claim, no accepted permanent baseline failures, no goal
 complete/blocked/paused status. Model selection is still global JSON only.
+
+
+## Peer ownership and research recovery checkpoint
+
+- Previous goal turn classified as progress: 0e75769 implemented and verified human
+  questions. Revalidated branch, status, ledger and plan constraints before work.
+  The full implementation objective remains active; this is another checkpoint.
+- Applied ken-plan-change and Release It! to separate authority, physical actor
+  lifetime and known effects. Clean-context design reviewer review_recovery_contract
+  verified that returncode/killpg does not prove setsid descendants closed, and
+  thread/read plus revocation cannot substitute for physical closure. No final
+  whole-branch implementation review has occurred.
+- Ruling: contain each production native/business peer in a fresh PID namespace,
+  with a trusted stdin gate and durable registration before G. No extra agent loop.
+  Cost: Linux procfs/pidfd and Bubblewrap become runtime prerequisites; bootstrap
+  and deployment readiness still need their full delivery. The namespace owns
+  lifetime and does not replace existing filesystem/network/credential policy.
+- A rejected-identity cleanup regression observed RED→GREEN: the launcher had
+  retained a candidate before validation and could retire another fixture peer.
+  It now verifies monitor parentage and only retains a fully accepted identity.
+  A forged metadata test proves the other real namespace remains alive.
+- Migration 25 adds peer scopes, records, recovery operations and protection against
+  deleting live ownership history. Scope plus both required peers are prepared
+  atomically. Kernel init identity is validated before bind; helper only consumes
+  one byte and preserves the first actual RPC frame. EOF/timeout never exec payload.
+  Parent-death linkage and namespace retirement cover detached descendants.
+- Ruling: do not equate another boot ID with the original host rebooting. It can
+  be a transferred DB. Differing kernel/observer remains unknown. Migration 26
+  binds new peers to canonical DB path/device/inode hash; historical NULL remains
+  unknown. A copied-DB test initially killed its original fixture peer (RED); the
+  fixed test verifies rejection with the original still alive (GREEN). Handoff,
+  in-place restore generation and cross-database workspace ownership remain open.
+- Ruling: withdraw live tool authority as soon as the native run exits, before
+  slow teardown. A real SQLite cached-scope regression observed RED→GREEN: native
+  error plus blocked peer exit no longer admits a late business write. Cost:
+  cleanup bookkeeping must remain host-only, outside the retired business grant.
+- Injected failure preparing the second peer initially left a claimed attempt
+  with no recoverable scope (RED). Production claim, scope and peer preparation
+  now share one transaction (GREEN); failure leaves the original request queued,
+  no attempt/grant/payload, and ordinary Stop can cancel it. The final actual
+  zero-turn holder also uses this atomic claim path.
+- Shared finalization/park now checks durable peer proof when the protocol is
+  registered. Owner inspection and POST recovery are authenticated/CSRF protected,
+  exact-attempt/fence scoped, idempotent and never issue turn/start. Read preflight
+  precedes concurrent physical closure and durable intent; each result is drained.
+  The API closure initially waited for a busy writer (RED) and now kills the init
+  before that writer releases (GREEN). Disconnect keeps the owned control alive.
+  A transient closure error initially stayed cached forever (RED); same-intent retry
+  now rechecks current evidence and completes (GREEN).
+- Ruling: local closure does not manufacture success, exit code, final remote usage
+  or task acceptance. Stop/correction/current pending question determine outcome;
+  otherwise retire failed with artifacts retained. Unknown usage keeps its ceiling.
+  Unit tests restore a pending question without reusing its stale native handle.
+- Added interim functional web inspection/recovery with frozen attempt/fence/key,
+  known effects, blocked-origin reasons and no automatic mutation retry or inference.
+  Nine Node tests and TypeScript/Vite build pass; existing chunk/Browserslist
+  warnings remain. No browser, rendered/accessibility or comprehension acceptance.
+- Native-boundary-7e6d4c9b passed actual Codex/Ken/business metadata and profile tests
+  with zero generation under the v25 namespace boundary. Conversation-9e79317a
+  passed through production HTTP/service with three POSTs/one subscription turn,
+  exact captured quote, draft report, same-thread reply, correction and no replay.
+  It preceded later origin/early-teardown hardening; those are not retroactively
+  claimed as that trial's setup. Generative application evaluation turns this checkpoint: one, subscription
+  only; no metered fallback. Ken's local embeddings are separate from model turns.
+- Real SIGKILL/reopen/owner-HTTP recovery passed four times without generation:
+  crash-recovery-788bf64b (v25), crash-recovery-d63a25b6 (v26 origin checks), and
+  crash-recovery-fe2073f4 (v26 launcher-parent/cleanup checks), and
+  crash-recovery-a01f39e9 (final v26 atomic claim/scope preparation).
+  Original native thread, two peers, no dispatch replay, grants revoked, task still
+  in_progress, duplicate recovery receipt stable and all owned servers terminal.
+  Portable opt-in runner: evals/runtime/run_crash_recovery.py. Evidence is sanitized
+  in recovery-evidence.json; private pairing/config/auth material is not committed.
+- A source version-25 trial copy upgraded repeatably to 26 with all original rows/
+  columns of 108 tables preserved, rowids intact, FK errors zero and old DB origins
+  NULL (recovery-migration-evidence.json). No user database was changed.
+- Final whole offline suite: 1137 tests, 1034 pass, same 100 baseline failures,
+  3 skip; new/resolved failure identities empty (recovery-results.json). Suite
+  remains red. An extra blocked external-connection warning is unassigned; the old
+  HTTP size-limit test was strengthened to assert its actual limit error and passes
+  alone without that warning. Do not infer an allowed network request or root cause.
+  New focused regressions were observed fail before fixes; the first
+  broad run was repeated only after additional origin and teardown changes. Selected
+  changed modules pass Ruff; lock/diff checks pass. Wheel bytes match 32 selected
+  files including all ten schemas (recovery-packaging.json). Generated tsbuildinfo
+  is restored, not source. Instruction-copy directories remain untracked.
+
+## Next brief: finish ownership, migrate remaining engine consumers, start design assets
+
+Continue the FULL modernization objective. The current research conversation,
+questions and same-DB/same-kernel recovery paths work; do not rebuild them or spend
+more generation rediscovering their protocol. Keep all old evidence and failures.
+Also persist repository/workspace selection in admission intent and add structured
+startup/failure explanations and an explicit queued-start retry. Current atomic
+preparation failures stay cancelable in queued; there is no auto-replay.
+Next integrate command_executor into the same peer registry, link job ownership
+and distinguish physically quiescent unknown results from live unknown jobs.
+Remove remaining transport-only tree assumptions. Add cross-database workspace
+exclusion and project start/stop/delete ownership; deletion currently has a SQL
+ownership guard, but needs typed API/UX and safe filesystem cleanup. Preserve
+lifetime budget history through deletion. Add verified deployment/restore generation
+and handoff before allowing copied/restored state to act; kernel change is not
+proof of original-host closure, and in-place rewind is not detected by inode alone.
+Then migrate every legacy loop/role/writer, all 71 retained tool families,
+development/Git/review/CI acceptance, auxiliary inference, bootstrap and historical
+restore. Complete all prompt/book-skill and human comprehension evaluations.
+Start the 36 desktop concepts plus 12 mobile references even if browser access
+remains absent; then select, implement and verify all screens/accessibility when
+available. Full synchronization and final independent whole-branch review remain.
+No goal complete/blocked/paused status; no accepted permanent baseline failures.

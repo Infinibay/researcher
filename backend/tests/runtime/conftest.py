@@ -39,3 +39,19 @@ def coordination(_isolated_db, db_conn):
         research=SQLiteResearchStore(_isolated_db, clock=lambda: now[0]),
         database=_isolated_db,
     )
+
+
+@pytest.fixture
+def service_setup(coordination, tmp_path):
+    c = coordination
+    root = tmp_path / "workspaces"
+    workspace = root / "alpha"
+    workspace.mkdir(parents=True)
+    c.conn.execute(
+        "INSERT INTO repositories(id,project_id,name,local_path) VALUES(11,101,'alpha',?)",
+        (str(workspace),),
+    )
+    c.conn.commit()
+    return SimpleNamespace(
+        c=c, root=root, workspace=workspace, control=tmp_path / "host-control"
+    )

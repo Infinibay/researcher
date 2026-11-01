@@ -14,7 +14,10 @@ sys.path.insert(0, str(REPO))
 
 
 async def main(args):
+    from backend.runtime.contracts import RunSpec
     from backend.runtime.native_inference import KEN_SERVER, CodexRuntime
+    from backend.runtime.peer_registry import AttemptPeers
+    from backend.runtime.sqlite_runs import SQLiteRunStore
     from evals.runtime.run_research import backend, environment
 
     root = REPO / ".researcher/evaluations" / ("native-boundary-" + uuid4().hex[:8])
@@ -24,6 +27,24 @@ async def main(args):
     print("Native boundary:", root, flush=True)
     try:
         async with backend(root, environment()) as (store, _owner, api, _database):
+            peers = None
+            if args.contained:
+                runs = SQLiteRunStore(_database)
+                admitted = runs.admit(
+                    RunSpec(
+                        101,
+                        1001,
+                        "native-researcher",
+                        1,
+                        "metadata-only",
+                        "Verify native metadata without generation",
+                        "codex",
+                    )
+                )
+                lease = runs.claim(
+                    101, admitted.run_id, "metadata-probe", lease_seconds=120
+                )
+                peers = AttemptPeers.prepare(runs, lease)
             token = store.issue_grant(
                 project_id=101,
                 task_id=1001,
@@ -49,7 +70,7 @@ async def main(args):
                     model="gpt-6.1-sol",
                 )
                 async with runtime.open(
-                    workspace=workspace, tool_token=token
+                    workspace=workspace, tool_token=token, peer_owner=peers
                 ) as session:
                     result["thread_id"] = session.thread_id
                     result["catalog_hash"] = session.catalog_hash
@@ -176,6 +197,14 @@ async def main(args):
                 result["status"] = "passed"
             finally:
                 store.revoke_grant(scope.grant_id)
+                if peers is not None:
+                    await peers.aclose()
+                    result["namespace_peers"] = [
+                        {key: row[key] for key in ("kind", "state", "reason")}
+                        for row in peers._rows()
+                    ]
+                    assert peers.closed()
+                    runs.retire_inference(lease, outcome="failed")
         result["owned_backend_terminal"] = True
     except BaseException as exc:
         result["status"] = "failed"
@@ -203,4 +232,12 @@ if __name__ == "__main__":
     parser.add_argument("--ken-command", required=True)
     parser.add_argument("--model-cache", required=True)
     parser.add_argument("--codex-binary", default=shutil.which("codex"))
-    asyncio.run(main(parser.parse_args()))
+    parser.add_argument(
+        "--contained",
+        action="store_true",
+        help="Verify the durable gated namespace boundary; no generation",
+    )
+    args = parser.parse_args()
+    if args.contained and args.verify_resume:
+        parser.error("Use separate peer scopes for the independent resume diagnostic")
+    asyncio.run(main(args))

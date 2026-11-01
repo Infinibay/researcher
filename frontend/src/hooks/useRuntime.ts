@@ -1,5 +1,16 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { taskWorkspace, sendInstruction, stopRun, recordCorrection, sendAnswer } from '../api/runtime'
+import { taskWorkspace, sendInstruction, stopRun, recordCorrection, sendAnswer, sendRecovery } from '../api/runtime'
+
+export function useRecovery() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: sendRecovery, retry: false,
+    onSettled: (_, __, intent) => {
+      qc.invalidateQueries({ queryKey: ['task-workspace', intent.projectId, intent.taskId] })
+      qc.invalidateQueries({ queryKey: ['run-recovery', intent.projectId, intent.runId] })
+    },
+  })
+}
 
 export function useAnswer() {
   const qc = useQueryClient()
