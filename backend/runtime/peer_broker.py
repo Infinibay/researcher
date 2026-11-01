@@ -23,6 +23,7 @@ from backend.runtime.authority_journal import (
 from backend.runtime.broker_profile import AnalysisCapsule, CodexAsset, NativeCapsule
 from backend.runtime.contracts import command_key, text
 from backend.runtime.execution_domain import DomainIdentity, ExecutionDomain
+from backend.runtime.native_network import NativeNetwork
 from backend.runtime.peer_process import (
     NamespaceIdentity,
     _pidfd,
@@ -247,12 +248,18 @@ class PeerBroker:
     def run_peer(self, registry, peer_id, *, operation_key, code):
         return self._run(registry, peer_id, operation_key=operation_key, code=code)
 
-    def run_native(self, registry, peer_id, *, operation_key, asset):
+    def run_native(self, registry, peer_id, *, operation_key, asset, network=None):
         if not isinstance(asset, CodexAsset):
             raise TypeError("Native launch requires an inspected Codex asset")
-        return self._run(registry, peer_id, operation_key=operation_key, asset=asset)
+        if network is not None and not isinstance(network, NativeNetwork):
+            raise TypeError("Native network requires inspected public inputs")
+        return self._run(
+            registry, peer_id, operation_key=operation_key, asset=asset, network=network
+        )
 
-    def _run(self, registry, peer_id, *, operation_key, code=None, asset=None):
+    def _run(
+        self, registry, peer_id, *, operation_key, code=None, asset=None, network=None
+    ):
         command_key(operation_key)
         if asset is None:
             text(code, "analysis code", 64000)
@@ -278,6 +285,18 @@ class PeerBroker:
                     "gate_sha256": hashlib.sha256(
                         Path(__file__).with_name("peer_payload.py").read_bytes()
                     ).hexdigest(),
+                    **(
+                        {
+                            "network": asdict(network),
+                            "network_policy_sha256": hashlib.sha256(
+                                Path(__file__)
+                                .with_name("native_network.py")
+                                .read_bytes()
+                            ).hexdigest(),
+                        }
+                        if network is not None
+                        else {}
+                    ),
                 }
             )
             intent = _digest(manifest)
@@ -311,7 +330,10 @@ class PeerBroker:
                 read_fd, write_fd = os.pipe2(os.O_CLOEXEC)
                 capsule = AnalysisCapsule if asset is None else NativeCapsule
                 with capsule(
-                    admission["binding"], code if asset is None else asset, write_fd
+                    admission["binding"],
+                    code if asset is None else asset,
+                    write_fd,
+                    **({"network": network} if network is not None else {}),
                 ) as profile:
                     if self._withdrawn.is_set():
                         raise AuthorityConflict("Broker admission withdrawn")

@@ -219,9 +219,13 @@ ChatGPT, sin MCP ajeno y configuración de fuente no confiable. La wheel extraí
 ejecutó además native y análisis como hermanos: cerrar análisis conserva nativo;
 cerrar ambos deja sus proyecciones locales y retira el dominio.
 
+Se pueden admitir ahora [inputs públicos de DNS/TLS](native-network.md), fijados
+en el manifiesto y montados como copias selladas. El SDK real verificó TLS local
+con CA/nombre correctos y rechazó emisor/nombre incorrectos. Un diagnóstico
+separado resolvió y consultó documentación pública por TLS, sin credenciales.
 No se enviaron turnos ni tokens reales en estas comprobaciones. Esto todavía no
-prueba inferencia, TLS/DNS/egress, entitlement, renovación, Ken o code-mode en el
-nuevo perfil. El esquema experimental generado por el binario sí declara
+prueba inferencia, egress restringido, entitlement, renovación OAuth, Ken o code-mode
+en el nuevo perfil. El esquema experimental generado por el binario sí declara
 `chatgptAuthTokens` y su callback de renovación, coherente con el
 [protocolo oficial del App Server](https://learn.chatgpt.com/docs/app-server).
 La integración debe suministrar la autenticación por host y comprobar esos
@@ -257,6 +261,7 @@ ni se cambió el proveedor de suscripción.
 [Proyección del cierre](../modernization/broker-projection-evidence.json).
 [Transporte nativo y límites](../modernization/broker-native-evidence.json).
 [Autenticación externa opcional y sus límites](subscription-auth.md).
+[DNS/TLS y sus límites](native-network.md).
 
 ## Trabajo pendiente de la autoridad completa
 

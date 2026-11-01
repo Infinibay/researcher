@@ -266,9 +266,11 @@ class NativeCapsule(AnalysisCapsule):
     remain denied. Ken/code-mode/full inference integration is not admitted here.
     """
 
-    def __init__(self, binding, asset, info_fd):
+    def __init__(self, binding, asset, info_fd, *, network=None):
         super().__init__(binding, None, info_fd)
         self.asset = asset
+        self.network_config = network
+        self._network_fds = {}
         self._asset_fd = None
 
     def _program(self):
@@ -315,7 +317,7 @@ class NativeCapsule(AnalysisCapsule):
         return command
 
     def _mounts(self):
-        return [
+        mounts = [
             "--dir",
             "/home/actor/.codex",
             "--dir",
@@ -324,6 +326,24 @@ class NativeCapsule(AnalysisCapsule):
             str(self._asset_fd),
             "/run/researcher-runtime/codex",
         ]
+        if self.network_config is not None:
+            for item in (self.network_config.resolver, self.network_config.ca_bundle):
+                if Path(item.path).is_relative_to(self.binding.workspace):
+                    raise ValueError(
+                        "Native network input cannot belong to the source workspace"
+                    )
+            self._network_fds = self._stack.enter_context(self.network_config.opened())
+            mounts += [
+                "--dir",
+                "/run/researcher-network",
+                "--ro-bind-data",
+                str(self._network_fds["resolver"]),
+                "/etc/resolv.conf",
+                "--ro-bind-data",
+                str(self._network_fds["ca_bundle"]),
+                "/run/researcher-network/ca.pem",
+            ]
+        return mounts
 
     def _network(self):
         return ["--share-net"]
@@ -339,4 +359,10 @@ class NativeCapsule(AnalysisCapsule):
             RAYON_NUM_THREADS="2",
         )
         self.pass_fds += (self._asset_fd,)
+        if self.network_config is not None:
+            self.env.update(
+                CODEX_CA_CERTIFICATE="/run/researcher-network/ca.pem",
+                SSL_CERT_FILE="/run/researcher-network/ca.pem",
+            )
+            self.pass_fds += tuple(self._network_fds.values())
         return self

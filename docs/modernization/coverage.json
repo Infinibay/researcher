@@ -932,7 +932,13 @@
         "backend/runtime/subscription_provider.py",
         "backend/tests/runtime/test_subscription_provider.py",
         "docs/modernization/subscription-provider-evidence.json",
-        "docs/modernization/subscription-provider-results.json"
+        "docs/modernization/subscription-provider-results.json",
+        "docs/architecture/native-network.md",
+        "docs/modernization/native-network-evidence.json",
+        "docs/modernization/native-network-results.json",
+        "docs/modernization/native-network-live.json",
+        "backend/tests/runtime/test_native_network.py",
+        "backend/tests/runtime/test_native_network_rpc.py"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable",
@@ -1062,7 +1068,13 @@
         "backend/runtime/subscription_provider.py",
         "backend/tests/runtime/test_subscription_provider.py",
         "docs/modernization/subscription-provider-evidence.json",
-        "docs/modernization/subscription-provider-results.json"
+        "docs/modernization/subscription-provider-results.json",
+        "docs/architecture/native-network.md",
+        "docs/modernization/native-network-evidence.json",
+        "docs/modernization/native-network-results.json",
+        "docs/modernization/native-network-live.json",
+        "backend/tests/runtime/test_native_network.py",
+        "backend/tests/runtime/test_native_network_rpc.py"
       ]
     },
     "U07": {

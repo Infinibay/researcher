@@ -71,6 +71,10 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    RPC administrado y una cancelación no retira la cuenta de las demás. Se probó
    con procesos controlados; faltan endpoint real inscrito, ensayo OAuth, autoridad
    entre procesos y adopción de la fábrica productiva.
+   El perfil nativo ya admite DNS/CA públicos medidos y copias selladas. Codex real
+   verifica TLS local y rechaza CA/nombre incorrectos. Un diagnóstico separado
+   resolvió documentación pública y obtuvo HEAD200 por TLS1.3 sin credenciales.
+   Falta restricción de destinos, WebSocket y composición productiva completa.
 7. **Contexto y procedencia:** versiones al corregir o cambiar trece entradas de tarea;
    retiro de autoridad antigua; respuesta asociada a pregunta/versión; repositorio
    admitido inmutable y comienzo de cola explícito. Registro exacto de la entrada
@@ -137,37 +141,24 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 
 ## Verificación más reciente
 
-- Suite completa:1415 casos;1312 pasan,100 fallan con las mismas identidades de la
+- Suite completa:1430 casos;1327 pasan,100 fallan con las mismas identidades de la
   línea base y 3 se omiten. La suite global sigue roja.
-- Runtime:482 pasan;43 pruebas dirigidas del coordinador/autenticación/RPC/sesión
-  y recibos, incluyendo12 casos del coordinador administrado. Dos sesiones usan
-  una sola renovación controlada; cancelar una conserva el servicio a la otra.
-  En el checkpoint anterior:84 de autenticación/RPC/sesión/broker y recibos.
-  Incluyen un ensayo negativo del SDK real sin red y un peer determinista para
-  renovaciones; no se enviaron credenciales reales ni turnos nuevos. La wheel actual
-  contiene31 módulos runtime idénticos y ejecutó el ensayo aislado correspondiente.
-  En el checkpoint anterior:61 pruebas dirigidas de broker/nativo/proyección/dominio.
-  Cuatro casos nativos incluyen Codex real sin cuenta, asset cambiado, kind
-  incorrecto y un ELF de diagnóstico de la política del perfil. La wheel ejecutó
-  Codex y análisis como hermanos y confirmó ambos cierres locales. En el checkpoint
-  anterior se verificaron61 de broker/proyección/transporte/fuente.
-  Incluyen cierre local idempotente, nueve comandos, SQL local ocupado durante
-  Stop, fuente perdida/copiada, binding alterado, reserva con acuse perdido y
-  reconciliación en otro proceso. En el checkpoint anterior:23 de fuente/arranque/
-  conexiones/revocación y27 del checkpoint de transporte/cierre JSON-RPC. Se probaron
-  tuberías bloqueadas, errores de protocolo, cierres independientes y carreras de
-  arranque/cancelación; el paquete extraído ejecutó JSON-RPC real y cerró el dominio.
-  En el checkpoint anterior:57 pruebas dirigidas,15 de broker
-  y17 de dominio/asset sellado. Recuperación en tres fronteras con SIGKILL y sin DB
-  original, dos DBs sobre fuente idéntica y límite de forks comprobados.
-  El checkpoint del dominio Linux añadió16 casos reales; incluye recuperación
-  antes de publicación, arranque congelado, FDs, señales y rechazo del propio cgroup.
-  El checkpoint previo verificó69 pruebas dirigidas y150 repeticiones de peers.
-  El registro de autoridad/recuperación añade44 casos. Se corrigieron metadatos
-  malformados, bloqueo de handles tras fork y una carrera EACCES al cerrar peers;
-  denegación sobre un init vivo conserva estado incierto y no lo señala.
-  Frontend sin cambios en este checkpoint:28 pruebas y compilación TypeScript/Vite
-  verificadas anteriormente tras los ajustes de contraste, cabecera móvil y foco.
+- Runtime:497 pasan. Las45 pruebas dirigidas de este checkpoint incluyen15 casos
+  de red y3 ensayos TLS con el Codex0.166.0 real: emisor/nombre, inputs sellados
+  pese a cambios posteriores, rechazo antes de G y recibos sin relanzar.
+- Paquete actual:32 módulos runtime idénticos al código; ensayo aislado con Codex
+  sin cuenta, manifiestos DNS/CA, análisis hermano, cierre/recuperación y renovación
+  compartida entre dos clientes controlados. No demuestra OAuth ni inferencia real.
+- Conectividad pública: un diagnóstico ELF/Python separado resolvió y verificó
+  learn.chatgpt.com por TLS1.3, con HEAD200 y sin credenciales ni turnos de modelo.
+  El dominio se retiró. No es una prueba de restricción de destinos o de entitlement.
+- Los ensayos de autenticación/coordinador anteriores cubren saturación, errores
+  redactados, retirada durante lectura/escritura y cancelación de consumidores/cierre.
+  Las pruebas anteriores de dominio incluyen SIGKILL, pérdida de DB, contención,
+  cierre independiente y reconciliación. Sus resultados detallados están enlazados
+  abajo y en el registro de avance; no cierran las fases de integración pendientes.
+- Frontend sin cambios en este checkpoint: última verificación de28 pruebas y
+  compilación TypeScript/Vite conservada en la evidencia de navegador.
 - Ensayo real de continuidad:2 turnos por suscripción, Ken real,4 peers cerrados,
   fuentes sin editar,2 informes draft y ninguna aceptación/publicación implícita.
 - Ensayo de análisis:1 turno adicional por suscripción, Ken real, catálogo de 15
@@ -187,9 +178,14 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
   siguen pendientes;0/12 rutas aceptadas. Dependencias:18 avisos npm preexistentes
   (5 bajos,3 moderados,10 altos), sin nuevos paquetes vulnerables por Playwright/axe.
 
-Evidencia actual: [coordinador administrado y límites](subscription-provider-evidence.json),
-[resultados actuales](subscription-provider-results.json),
-[paquete actual verificado](subscription-provider-packaging.json),
+Evidencia actual: [DNS/TLS y límites](native-network-evidence.json),
+[resultados actuales](native-network-results.json),
+[paquete actual verificado](native-network-packaging.json),
+[diagnóstico público sin credenciales](native-network-live.json),
+[contrato DNS/TLS](../architecture/native-network.md),
+[coordinador administrado y límites](subscription-provider-evidence.json),
+[resultados del coordinador](subscription-provider-results.json),
+[paquete del coordinador](subscription-provider-packaging.json),
 [autenticación y límites](subscription-evidence.json),
 [resultados de autenticación](subscription-results.json),
 [paquete de autenticación](subscription-packaging.json),

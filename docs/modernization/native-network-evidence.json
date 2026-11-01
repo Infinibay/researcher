@@ -1,0 +1,56 @@
+{
+  "base_commit": "a89c917",
+  "date": "2026-11-01",
+  "scope": "Explicit public DNS and CA inputs measured in native broker intent, validated/rechecked and mounted from sealed snapshots. Actual pinned SDK local HTTPS trust/hostname cases plus a separate credential-free public DNS/TLS diagnostic. No destination policy, OAuth entitlement or product launcher adoption claim.",
+  "source_sha256": {
+    "backend/runtime/native_network.py": "1bd3201968329f81df232a916b6252cf5f8f2ddae909ac826faa570a25de5778",
+    "backend/runtime/broker_profile.py": "98ff7c5e70a0311a72ae0943cca55e68985b4b2778afaaa3a8dfb227affc83ff",
+    "backend/runtime/peer_broker.py": "f88f4353c6fc0ba47096c8d84ea7e6123abe872613cd380eae216e3d062a23a7",
+    "backend/runtime/broker_stdio.py": "8963e67b04d82e1d7cee2c0e4e614ee7c03fe10e8bbed6a4013cf685145b889d",
+    "backend/tests/runtime/test_native_network.py": "83b1a828a0d5aca635c7c90cfc6bbcf132c0253e20d8d9b88e47ceb53adb0c09",
+    "backend/tests/runtime/test_native_network_rpc.py": "e822db30e595e91a99dd8910126c1d6d711091e3aa24159ec7705ff278be7f05"
+  },
+  "raw_artifacts_sha256": {
+    "native-network-red.log": "db7856dfab533c2c4749c5f3063ef3bddf044b196b8eda573e910658276fd884",
+    "native-network-source-green.log": "ad6a4c8083fe2387197bfe036d606de5c61c1307c6b006d53c2ea87eede21184",
+    "native-network-source-verified.log": "fe0bc1dbd26fba55350e40a62414d48cf9b29e10dca5dc6faca90ea283e3ddcc",
+    "native-network-broker-red.log": "b99897dff03c8d078ed7fedde11f89bfac6cacbb9e40c2f72eb5ecff3fddb416",
+    "native-network-first.log": "6fc2bab0ff31930048932a2edd0615bd01c8dd5697e1118d5f8e4143b9a94438",
+    "native-network-focused.log": "3daa23927ffdd37dff265999115e6dc803d99db2167abd1400c9baf89c8d6dd1",
+    "native-network-full.log": "1bb939dda7a78a51ccfcbc12ec8593c008ffd666257eec775c73fb7c4eb48f77",
+    "native-network-full.xml": "59b2b95c1396e5a983b7f2842cca36b7310d5759271af6ccacb780e565c8c7f1",
+    "native-network-build.log": "4d55982975b8e860d615a9ab9b72300aa3c550e25589b41dae033f9d1e029bc5",
+    "native-network-package.log": "e1366fb3768b5ceb297a0903859ca62928b40daf98cf984aed99da6a891520f6",
+    "native-network-live.log": "71257aca54a4ae99eef8a3c29df0bd32ba4f6f2a1f5bf047d64203fe853ea5ff",
+    "native-network-live-verified.log": "aedeca9ed232aa302d80dd2e48380e60491fd99339c795c4a87905e6763ab42b",
+    "native-network-live-final.log": "1971a7e71146edc0db9437247584a9f1578f4309daa8301129cc6f8039fc8681",
+    "probe-native-network.py": "091db9e182c6a39268c00741f316b70b60678460e89f7c269f7ac034738d4d30",
+    "verify-native-network-package.py": "88a97cfc0257cf7399db97ff7dc1dec2528f4d2dcde78e4e8cf9deb51c87885f"
+  },
+  "verified": [
+    "Existing bounded regular root/current-user files without group/other write are pinned by device/inode/size/mtime/ctime/SHA256. Numeric resolver directives and public certificate PEM are validated; private-key blocks, FIFO, malformed/missing/oversized inputs fail.",
+    "Before native preparation, inputs are rechecked and copied into sealed memfds. Only copied bytes are mounted; host source file descriptors are not inherited. Resolver/CA inputs within admitted source fail before exec gate.",
+    "Native operation records resolver/CA identities and content plus validation module hash. Changed network manifest cannot reuse an operation key; receipt-only retry neither reopens changed originals nor relaunches.",
+    "Actual Codex0.166.0 under broker performs HTTPS to a loopback routing fixture with synthetic access credentials. Trusted issuer and correct IP SAN reach HTTP; unknown issuer and wrong hostname reject before HTTP. Fixture retains no request headers.",
+    "Trusted local TLS still succeeds when originals are replaced after capsule preparation and before domain.spawn. Empty routing response is rejected as selected workspace missing from routing discovery, not accepted as an account.",
+    "Separate controlled diagnostic ELF/Python, explicitly not Codex, resolves learn.chatgpt.com and verifies public TLS1.3 hostname/certificate then receives HTTP200 HEAD /docs/app-server; no credentials/model turns; domain retired.",
+    "Full1430:1327 pass,100 exact original baseline failure identities,3 skip,29 warnings;497 runtime pass. Focused45 pass including15 network cases and3 actual SDK local TLS cases.",
+    "Offline build succeeded. Wheel32 runtime files match source; isolated -I -S actual account-free native uses public network input hashes in its operation manifest. Existing analysis sibling, managed two-client refresh and closure/recovery smoke still pass."
+  ],
+  "diagnosed": [
+    "System CA bundle comments contain Unicode; whole-file ASCII decoding incorrectly rejected a valid bundle. UTF8 comments and line-wise public PEM validation preserve strict block checks without ambiguous nested regex parsing.",
+    "Trusted SDK local routing succeeded at TLS and then failed because {} lacks the selected workspace. The test now distinguishes that routing error from TLS/discovery failure instead of expecting the offline error for all cases.",
+    "Initial separate diagnostic used argv0=python and CPython chose /usr/bin/python instead of its mounted standalone prefix. Full interpreter argv0 fixes the diagnostic; no product runtime change.",
+    "Second diagnostic construction materialized CR/LF inside a Python bytes literal. Raw embedded source plus compile-before-C catches that error before launch. Corrected bounded diagnostic succeeded; failed attempts were physically retired."
+  ],
+  "limits": [
+    "Host network is still shared; public resolver/CA inputs are connectivity configuration, not an allowed-destination policy. No real credential may be considered safely isolated from egress merely because TLS passed.",
+    "Actual SDK proof here is local HTTPS with synthetic credentials. WebSocket, remote account acceptance, subscription inference and OAuth refresh in this profile remain unproven.",
+    "External DNS/TLS HEAD used a separate controlled ELF/Python diagnostic and current system public inputs; it is not evidence of vendor SDK inference or future endpoint availability.",
+    "Production CodexRuntime still uses its previous launcher/managed HOME until enrolled host endpoint, account coexistence, persistent native state, destination policy and Ken/business/code-mode composition are ready.",
+    "No actual credentials read or sent, model/image generation, user DB migration, host service/account install, shared-parent cgroup change, push/merge/deploy. Full tools/engine/prompts/communication/UI/data goal remains active."
+  ],
+  "primary_references": [
+    "https://learn.chatgpt.com/docs/auth?surface=cli"
+  ]
+}

@@ -2363,3 +2363,69 @@ TUI/install, aliases/transfer/budgets, dependency upgrades/18 npm advisories and
 baseline failures remain. Independent UI work can proceed:6/36 desktop+2/12 mobile
 concepts,2 pilots,0/12 accepted;30+10 concepts/10 routes and all12 acceptance remain.
 Final fresh independent whole-branch review required. Full objective stays active.
+
+## Current task: pinned native DNS/TLS material — basea89c917
+
+- Previous goal turn was progress: f0e258f/a89c917 implementation, tests, wheel and
+  evidence committed. Full objective unchanged; source checkout untouched.
+- Product runtime still exposes managed HOME to its trusted native process; do
+  not pretend the credential-free broker transport already replaces that factory.
+- Before real credentials in the new capsule, admit explicit public resolver/CA
+  files outside the source, validate/bound/pin their identities and bytes, retain
+  their manifests in the broker operation and mount sealed snapshots read-only.
+  No host HOME/proxy/API-key environment inheritance. Keep analysis profile offline.
+- Test changed/unsafe/malformed inputs, gate-before-change rejection, immutable
+  mounts, local real TLS trust/hostname failures, actual account-free Codex and
+  receipt-only retry. Ordinary tests use local endpoints; any real DNS/TLS probe
+  is separate, credential-free and bounded. Destination restriction remains needed
+  before introducing real credentials; public CA assets alone do not enforce it.
+
+## Pinned native DNS/TLS checkpoint — basea89c917
+
+- RED8 missing public inputs and RED4 missing network broker port confirmed. Initial
+  validation rejected Unicode comments in real public CA bundle; line-wise UTF8
+  comments/public PEM validation now accepts it and rejects non-certificate blobs.
+- Actual SDK trusted local TLS reached HTTP then rejected {} for missing workspace;
+  expected error now distinguishes that result from TLS/discovery failure. Unknown
+  CA/wrong hostname reject before HTTP. No real credentials or external SDK routing.
+- Trusted TLS case mutates both original inputs after sealing/before spawn; actual
+  SDK still uses admitted copies. Source-controlled assets and changed inputs reject
+  before G; changed-manifest same-key conflicts and original retry stays receipt-only.
+- Separate bounded controlled diagnostic ELF/Python resolves learn.chatgpt.com and
+  validates TLS1.3 hostname/cert, HEAD /docs/app-server returns200, domain retired.
+  First attempts had diagnostic argv0/CPython-prefix and embedded newline errors;
+  fixed full argv0/raw source/compile-before-C. Failed domains retired; no paid calls.
+- GREEN45 focused,15 network cases,3 real SDK local TLS cases. Full1430:1327 pass,
+  100 exact baseline failures,3 skip,29 warnings;497 runtime pass. Current offline
+  wheel32 runtime bytes match and isolated account-free native public-network
+  manifest + prior broker/analysis/managed-refresh/recovery smoke passed.
+- Ruling: explicit inspected public inputs and sealed copies, no host /etc/HOME bind
+  or inherited proxy/CA settings — changes cannot alter an already admitted mount —
+  cost: host must choose valid assets again after their measured identity changes.
+- Ruling: preserve omitted-network native manifests/analysis behavior, attach network
+  and validator hashes only when explicitly admitted — no invented authority from
+  a DNS/TLS flag — cost: these inputs are an optional transport capability until
+  product composition supplies actual managed lifecycle and destination controls.
+- Ruling: distinguish local SDK TLS, public diagnostic connectivity and actual OAuth/
+  entitlement/inference — different observables — cost: none substitutes the pending
+  integrated subscription+Ken/code-mode acceptance trial.
+- No real credentials read/sent, new model/image generation, user DB migration, host
+  install, parent cgroup changes, push/merge/deploy. No full phase/scenario closed.
+
+## Next brief after pinned native DNS/TLS
+
+Continue FULL modernization. Network inputs now make DNS/TLS usable in the new
+profile; do not repeat this or completed broker/journal/domain/projection/auth.
+Implement actual destination policy (including DNS/rebinding/loopback/redirects/
+WebSocket/proxy interaction) before real credentials. Compose enrolled managed
+credential endpoint and account ownership/coexistence across processes, persistent
+isolated native state, mandatory published Ken/business/code-mode, then adopt
+RuntimeService/CodexRuntime/CommandJobs with real origin/generation/all-actor proof.
+Product factory currently still uses its old managed HOME launcher; new transport
+metadata/TLS success is not migration. Test bounded actual subscription+Ken only
+through the integrated path. All71 tools/11 categories, engine/autonomy/roles/flows/
+agent communication, exact Git/review/CI, prompts/books/evals/human comprehension,
+data/restore/bootstrap/CLI/TUI/install, aliases/transfer/budgets, dependency upgrades/
+18 npm advisories and100 baseline failures remain. Independent frontend progress
+can proceed:6/36 desktop+2/12 mobile concepts,2 pilots,0/12 accepted;30+10 concepts/
+10 routes/all12 acceptance still required. Final fresh whole-branch review remains.

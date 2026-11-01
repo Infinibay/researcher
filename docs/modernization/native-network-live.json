@@ -1,0 +1,32 @@
+{
+  "dns_and_tls": true,
+  "hostname_verified": "learn.chatgpt.com",
+  "tls_version": "TLSv1.3",
+  "http_status": 200,
+  "credentials_sent": false,
+  "model_turns": 0,
+  "scope": "Controlled diagnostic ELF/Python using native capsule. Not Codex inference, OAuth, entitlement or destination restriction.",
+  "network_manifest": {
+    "ca_bundle": {
+      "changed": 1792863115762462688,
+      "device": 35,
+      "inode": 410450,
+      "kind": "ca_bundle",
+      "modified": 1792863115761462688,
+      "path": "/etc/ca-certificates/extracted/tls-ca-bundle.pem",
+      "sha256": "9a9c1b798f6ae057ecb84545704e38c89e10f3db5519b24cd4647a1bb2dbf299",
+      "size": 182304
+    },
+    "resolver": {
+      "changed": 1793534779710010614,
+      "device": 35,
+      "inode": 492124,
+      "kind": "resolver",
+      "modified": 1793534779708010614,
+      "path": "/etc/resolv.conf",
+      "sha256": "0a36d8d04b4e9fe6b1ef216be90fd7861a4382b481c1024ca496fc2c4a26d72c",
+      "size": 75
+    }
+  },
+  "domain_retired": true
+}

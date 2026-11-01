@@ -85,15 +85,21 @@ class AsyncPeerBroker:
     def peer(self, registry, peer_id, *, operation_key, code):
         return self._endpoint(registry, peer_id, operation_key, code=code)
 
-    def native(self, registry, peer_id, *, operation_key, asset):
-        return self._endpoint(registry, peer_id, operation_key, asset=asset)
+    def native(self, registry, peer_id, *, operation_key, asset, network=None):
+        return self._endpoint(
+            registry, peer_id, operation_key, asset=asset, network=network
+        )
 
-    def _endpoint(self, registry, peer_id, operation_key, *, code=None, asset=None):
+    def _endpoint(
+        self, registry, peer_id, operation_key, *, code=None, asset=None, network=None
+    ):
         if not self._entered or self._closing is not None:
             raise AuthorityConflict("Async broker is not admitted")
         if len(self._endpoints) >= 128:
             raise AuthorityBusy("Attempt transport history capacity reached")
-        endpoint = BrokerEndpoint(self, registry, peer_id, operation_key, code, asset)
+        endpoint = BrokerEndpoint(
+            self, registry, peer_id, operation_key, code, asset, network
+        )
         self._endpoints.append(endpoint)
         return endpoint
 
@@ -111,6 +117,8 @@ class AsyncPeerBroker:
             if endpoint.asset is None
             else {"asset": endpoint.asset}
         )
+        if endpoint.network is not None:
+            payload["network"] = endpoint.network
         future = loop.run_in_executor(
             self._launch_pool,
             lambda: start(
@@ -222,10 +230,13 @@ class AsyncPeerBroker:
 class BrokerEndpoint:
     """A single post-gate connection; cannot reopen or replay a start receipt."""
 
-    def __init__(self, owner, registry, peer_id, operation_key, code, asset=None):
+    def __init__(
+        self, owner, registry, peer_id, operation_key, code, asset=None, network=None
+    ):
         self.owner, self.registry, self.peer_id = owner, registry, peer_id
         self.operation_key, self.code = operation_key, code
         self.asset = asset
+        self.network = network
         self.stdin = self.stdout = self.stderr = None
         self._raw = None
         self._operation = None
