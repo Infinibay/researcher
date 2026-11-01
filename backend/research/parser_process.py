@@ -68,23 +68,40 @@ class PDFParser:
         self.owner, self.grant_id = owner, grant_id
         self.limits = limits or ParserLimits()
 
-    def read(self, data: bytes) -> tuple[str, dict]:
-        """Extract one complete PDF or fail, reaping the owned child before returning."""
+    def read(
+        self, data: bytes, *, max_wall_seconds: float | None = None
+    ) -> tuple[str, dict]:
+        """Extract one complete PDF or fail, reaping the child before returning.
+
+        Callers may reduce the remaining wall budget (for example after a URL
+        download); they cannot extend the host's configured processing deadline.
+        """
         if not isinstance(data, bytes) or len(data) > self.limits.max_input_bytes:
             raise SourceTooLarge("PDF input exceeds the parser byte budget")
         if sys.platform != "linux":
             raise SourceUnavailable(
                 "PDF parsing requires the supported Linux pidfd worker; no in-process fallback"
             )
+        wall_seconds = self.limits.wall_seconds
+        if max_wall_seconds is not None:
+            if (
+                type(max_wall_seconds) not in (int, float)
+                or not math.isfinite(max_wall_seconds)
+                or max_wall_seconds <= 0
+            ):
+                raise ValueError(
+                    "Remaining PDF wall budget must be finite and positive"
+                )
+            wall_seconds = min(wall_seconds, max_wall_seconds)
         operation = (
             self.owner.operation(self.grant_id) if self.owner else nullcontext(Event())
         )
         with operation as cancelled:
             if cancelled.is_set():
                 raise ResearchForbidden("PDF operation authority was withdrawn")
-            return self._run(data, cancelled)
+            return self._run(data, cancelled, wall_seconds)
 
-    def _run(self, data, cancelled):
+    def _run(self, data, cancelled, wall_seconds):
         """Exchange bounded byte streams with one child; signal only its pinned pidfd."""
         # -I -S embedding can supply dependencies explicitly while sysconfig
         # still describes base Python. Resolve the actual installed parser root.
@@ -101,10 +118,11 @@ class PDFParser:
             ) from exc
         options = asdict(self.limits) | {
             "parent": os.getpid(),
+            "wall_seconds": wall_seconds,
             "package_root": str(Path(__file__).resolve().parents[2]),
             "dependencies": dependencies,
         }
-        deadline = time.monotonic() + self.limits.wall_seconds
+        deadline = time.monotonic() + wall_seconds
         try:
             process = subprocess.Popen(
                 [sys.executable, "-I", "-S", str(WORKER), json.dumps(options)],
@@ -183,6 +201,9 @@ class PDFParser:
                     and isinstance(result["provenance"], dict)
                 ):
                     result["provenance"]["execution"]["worker_closed"] = True
+                    result["provenance"]["execution"]["wall_limit_seconds"] = (
+                        wall_seconds
+                    )
                     return result["content"], result["provenance"]
                 if result["code"] == "too_large":
                     raise SourceTooLarge(result["message"])

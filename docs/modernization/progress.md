@@ -3506,3 +3506,72 @@ review only when entire implementation is ready. No phase or goal completion cla
   Existing table631pxwide at390px viewport hides actions; English UI and wrong-zone
   relative dates observed. This is initial audit only, not generated concept/pilot.
   Server46831 received validated SIGINT; poll original handle to confirm terminal.
+
+## Active delivery: public PDF URL research — basefc7a913
+
+- Prior goal turn progress:7a72fe9 worker/resource/closure integration and fc7a913
+  Files audit/brief committed. Rechecked source/status; only instruction files
+  untracked. No prior server/test process claimed live.
+- Exit: vetted public HTTPS→bounded downloaded PDF→same owned parser→page source→
+  exact finding/report; preserve redirect/DNS/byte identity, retry, no partial capture
+  and Stop. Overall fetch deadline must include parsing time already consumed.
+- Reuse PublicWebFetcher/PDFParser/ResearchService/API/facade. No new generic RAG or
+  inference loop. Accept declared PDF; octet-stream only with PDF signature; reject
+  other binaries. Preserve public-address/HTTPS/redirect/encoding/size policy.
+- Connected Ken index lacks managed web_fetcher.py; recall/related checked and real
+  managed callers/tests read. English focused search gave legacy code only.
+- PDF URL initial RED3: declared PDF/octet-stream rejected and parser lacked a
+  remaining-wall budget. New page/provenance and CPU-worker use now pass with the
+  same public HTTPS policy. Declared PDF or signed octet-stream only; text/PDF MIME
+  mismatch rejected instead of recording binary bytes as decoded text.
+- Whole HTTP acquisition now registers host tool ownership, not only its parser.
+  A controlled blocked-body mutation test rejects omitted ownership (DID NOT RAISE
+  closure timeout); restored implementation keeps it registered until I/O closes.
+  A current network read can wait for the existing bounded I/O deadline: Stop
+  remains pending/reconciling, not falsely terminal. No new process/executor.
+- Real HTTP and native business-facade PDF URL cases capture/read/search/cite/report;
+  repeated capture returns the original receipt after response transport is gone.
+  Source directed124 research+business cases pass, no model or external network.
+- Three independent Files concept jobs launched with attached actual before-state
+  and selected Reports visual reference, from saved prompts. No Promise.all or
+  request-order option numbering. Live exec cells: g127:2373 archive-inspector,
+  g127:2374 inline-library, g127:2375 reference-register. Each stores its result under
+  files_archive_inspector/files_inline_library/files_reference_register. Inspect
+  actual returned images before selection; user already delegated that selection.
+- All four Files images actually returned, inspected and copied unchanged into
+  docs/design/concepts/files; prompts/input hashes/dimensions in manifest. Chosen
+  archive-inspector87.25vs83.25/75.5; mobile generated from that image. Fix its claim
+  of no task having read the file: metadata does not establish that. Mobile uses
+  honest 'lectura no comprobada en esta vista', detail/back pattern; no invented PDF
+  preview. Remove duplicated description and lower destructive action prominence.
+- Inventory12of36desktop/4of12mobile/4selected/3codepilots/0fullyaccepted. Files code
+  still pending. Builtin ImageGen only; exact model not exposed; no API-key fallback.
+- Added actual body completeness RED1: valid PDF prefix was accepted despite100
+  missing declared HTTP bytes. Guard now refuses it. Added default-owner RED1:
+  PublicWebFetcher(owner=...) default parser omitted its owner and outlived Stop;
+  default now propagates owner/grant. Source126 research+business tests pass.
+- Rebuilt isolated wheel after both fixes:170directed cases,297wheel-only backend
+  imports/12source comparisons. No sources changed after that build. Final full
+  regression live on exec60529, pdf-web-final.log/xml; reuse handle if interrupted.
+- Ruling: web ownership tracks DNS/I/O until physical cleanup, but blocked read can
+  last until its I/O deadline. Do not claim instant cancellation or parent-death
+  for the separate legacy DNS helper. Full host enrollment remains required.
+- Process review: preliminary global run started before completing fault review
+  (1640=1537pass100baseline3skip). New EOF/default-owner failures justified a final
+  post-fix run. Future batches finish fault review + packaged directed checks before
+  global regression, rather than adding cases while that run is underway.
+- FINAL exec60529 terminal1 (inherited failures only):1642total1539pass100EXACT
+  baselinefailures3skip,633runtimepass,29warnings,245.19s.12new cases pass, including
+  actual EOF/default-owner regressions. pdf-web-results.json/JUnit bind final source;
+  package12hashes/297imports/170tests match. No sources changed after that proof.
+- Artwork saved/validated in files manifest; subjective scores are design judgment,
+  not implementation percentages. Existing images untouched. No browser/server or
+  imagegen job remains live; no new model inference, user data or external publish.
+- Next delivery: Files upload/metadata/download/delete safety, bounded owner text/PDF
+  preview and selected responsive implementation, with project/context/keyboard/error
+  checks. Preserve registered-file versus extracted-preview versus persisted-source
+  distinction. Do not invent task attachment/read/capture history from metadata.
+- Full objective remains all71tools/11categories, engine/loops/autonomy/flows/roles,
+  prompts/books/evals/human interaction, all12routes/36desktop+12mobile/acceptance,
+  data/restore/bootstrap/CLI/TUI/Git/CI/dependencies,100baselinefailures and final
+  independent whole-branch review. No global percentage, phase completion or goal close.

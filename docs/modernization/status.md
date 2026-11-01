@@ -14,6 +14,8 @@ PDF: captura de adjunto con páginas/hash y lectura→búsqueda→cita→borrado
 
 Último corte de parser:1527 aprobadas,100 fallos heredados exactos,3 omitidas;158 pruebas dirigidas desde fuente y paquete.15 casos nuevos; sin inferencia adicional. [Evidencia y límites](parser-results.json).
 
+Último corte:PDF por URL pública ya conecta descarga→parser limitado→fuente/páginas→cita→borrador.126 pruebas dirigidas y170 desde wheel. Suite1642:1539 aprobadas,100 fallos heredados exactos,3 omitidas. [Resultados y límites](pdf-web-results.json). Archivos tiene tres alternativas y móvil seleccionados; falta su código.
+
 ## Realizado, con el alcance indicado
 
 1. **Inventario y línea base:** dependencias, datos, arquitectura, inferencias,

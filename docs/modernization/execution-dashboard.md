@@ -8,8 +8,8 @@ Motivos del ajuste: [diagnóstico del proceso](workflow-review.md).
 
 - Hay un primer recorrido de investigación con Codex, suscripción, Ken, análisis y reporte persistido. La prueba real de entrada de producto terminó; su monitor falló y se recuperó evidencia durable sin repetir inferencia. No se recuperaron las métricas de memoria perdidas.
 - Las 43 entradas de escenarios siguen abiertas en `coverage.json`: 33 en progreso y 10 pendientes. Son escenarios amplios; esto no significa que sus componentes no funcionen.
-- Interfaz: 3 pilotos, 9/36 conceptos de escritorio y 3/12 móviles; 0/12 páginas con aceptación completa.
-- Última suite registrada: 1527 aprobadas, 100 fallos heredados y 3 omitidas. Falta resolver o retirar con justificación los casos del sistema reemplazado.
+- Interfaz: 3 pilotos, 12/36 conceptos de escritorio y 4/12 móviles; 0/12 páginas con aceptación completa.
+- Última suite registrada: 1539 aprobadas, 100 fallos heredados y 3 omitidas. Falta resolver o retirar con justificación los casos del sistema reemplazado.
 - No hay porcentaje global defendible todavía. El 30% anterior era una impresión, no una medición de alcance ponderado.
 
 ## Última entrega verificada: arranque del recorrido existente
@@ -44,9 +44,11 @@ Verificado: inicializadores explícitos, guardias de API/CLI/launcher y cleanup 
 
 **Paso de parser verificado:** [resultados](parser-results.json), [paquete](parser-packaging.json). Worker fijo con CPU/AS/plazo/IPC, sin credenciales o FD heredados, retirada por HTTP y cierre al morir el padre. Finalización y recuperación esperan el cierre real; cierre incierto mantiene reconciliación.
 
-**Falta para cerrar la capacidad:** PDF por URL, consumidores antiguos e interfaz Archivos (`/files`) con conceptos/selección/implementación y previsualización de páginas. Documentos (`/wiki`) es otra ruta y conserva su propia migración/rediseño. La extracción actual no hace OCR ni certifica orden visual/tablas/imágenes. Sin aceptación humana ni nuevo ensayo con modelo.
+**PDF por URL implementado:** [resultados](pdf-web-results.json), [paquete](pdf-web-packaging.json). Usa el mismo parser, conserva URL/hash/páginas y respeta el plazo restante; las operaciones siguen registradas hasta cerrar I/O y parser.
 
-**Siguiente acción:** completar PDF por URL y conectar Archivos de referencia al recorrido de investigación, sin otra fábrica de inferencia ni retirar aún `read_paper/pdf_search`. DOCX/recuperación CSV/JSON/XML, web/wiki y revisión científica mantienen su alcance.
+**Falta para cerrar la capacidad:** consumidores antiguos e interfaz Archivos (`/files`): conceptos/selección/móvil ya preparados; implementación y previsualización pendientes. Documentos (`/wiki`) es otra ruta y conserva su propia migración/rediseño. La extracción actual no hace OCR ni certifica orden visual/tablas/imágenes. Sin aceptación humana ni nuevo ensayo con modelo.
+
+**Siguiente acción:** implementar Archivos de referencia a partir de las imágenes elegidas y conectar subida/previa/tarea, sin otra fábrica de inferencia ni retirar aún `read_paper/pdf_search`. DOCX/recuperación CSV/JSON/XML, web/wiki y revisión científica mantienen su alcance.
 
 ## Cola posterior, manteniendo el alcance
 

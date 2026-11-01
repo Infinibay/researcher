@@ -1,0 +1,58 @@
+{
+  "base_commit": "fc7a913",
+  "total": 1642,
+  "passed": 1539,
+  "failed": 100,
+  "skipped": 3,
+  "runtime_passed": 633,
+  "new_cases_passed": 12,
+  "new_cases": [
+    "backend.tests.research.test_http::test_public_pdf_http_capture_retries_and_cites_the_original_download",
+    "backend.tests.research.test_parser_process::test_callers_remaining_deadline_restricts_the_worker_budget",
+    "backend.tests.research.test_pdf_web::test_public_pdf_redirect_keeps_original_bytes_final_url_and_page_offsets",
+    "backend.tests.research.test_pdf_web::test_octet_stream_requires_a_pdf_signature_instead_of_decoding_arbitrary_binary",
+    "backend.tests.research.test_pdf_web::test_unreadable_web_pdf_is_rejected_before_a_source_can_be_returned[data0]",
+    "backend.tests.research.test_pdf_web::test_unreadable_web_pdf_is_rejected_before_a_source_can_be_returned[data1]",
+    "backend.tests.research.test_pdf_web::test_unreadable_web_pdf_is_rejected_before_a_source_can_be_returned[%PDF-broken]",
+    "backend.tests.research.test_pdf_web::test_withdrawn_web_fetch_retains_ownership_until_blocked_io_closes",
+    "backend.tests.research.test_pdf_web::test_pdf_served_as_plain_text_is_not_misrepresented_as_decoded_text",
+    "backend.tests.research.test_pdf_web::test_complete_pdf_bytes_do_not_hide_an_incomplete_http_response",
+    "backend.tests.research.test_pdf_web::test_default_pdf_parser_inherits_the_web_fetch_owners_cancellation",
+    "backend.tests.runtime.test_host_business::test_host_business_uses_real_api_scope_and_persists_one_report[application/pdf-url]"
+  ],
+  "directed_research_and_business_passed": 126,
+  "packaged_directed_passed": 170,
+  "new_failures": [],
+  "resolved_failures": [],
+  "inherited_failure_identities": {
+    "path": "docs/modernization/baseline-results.json",
+    "sha256": "cd91994b488a4ff0aee3a00087803e2b03cd72593a8bd8675d4aee5fb5265203",
+    "comparison": "all100 EXACT failure identities match"
+  },
+  "raw_junit": {
+    "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/pdf-web-final.xml",
+    "sha256": "24e77e5c67347f45ed1918dd49bdd5b811f69ae14e2f1e711eb860a366bfab81"
+  },
+  "validation": {
+    "wheel_source_comparisons": 12,
+    "backend_imports_only_from_wheel": true,
+    "ruff_changed_python": "pass",
+    "model_turns": 0,
+    "global_suite_green": false
+  },
+  "observed": [
+    "Vetted public HTTPS PDF capture preserves requested/final URLs, original bytes and page provenance",
+    "Octet-stream accepted only for PDF signature; mismatched/other binaries rejected",
+    "Native business facade and real API persist one source/finding/draft with exact quote; retry does not redownload",
+    "Shared acquisition deadline reduces the parser budget",
+    "Ownership includes blocked I/O; Stop cannot falsely acknowledge closure before cleanup",
+    "Default parser inherits web ownership and cancels its real child",
+    "Valid PDF prefix with missing advertised HTTP body bytes rejected"
+  ],
+  "limits": [
+    "External DNS/socket transport controlled in tests; no new live Internet/model comprehension claim",
+    "A blocked read may take its I/O deadline; closure remains pending/reconciling rather than instantly cancelled",
+    "Existing DNS subprocess global enrollment/parent-death not certified by PDF worker test",
+    "PDF legacy consumers, remaining formats/web search/wiki/review, Files code, complete UI/human acceptance and all other modernization scope remain pending"
+  ]
+}

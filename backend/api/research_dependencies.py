@@ -59,6 +59,7 @@ def get_research_context(
             422,
             "Project, task and actor are bound to tool credentials; do not supply them in a query",
         )
+    parser = PDFParser(owner=request.app.state.live_grants, grant_id=scope.grant_id)
     return ResearchContext(
         store,
         scope,
@@ -66,11 +67,13 @@ def get_research_context(
             store,
             reference_reader=BoundedReferenceReader(
                 Path(config.UPLOAD_DIR),
-                pdf_parser=PDFParser(
-                    owner=request.app.state.live_grants, grant_id=scope.grant_id
-                ),
+                pdf_parser=parser,
             ),
-            web_fetcher=PublicWebFetcher(),
+            web_fetcher=PublicWebFetcher(
+                pdf_parser=parser,
+                owner=request.app.state.live_grants,
+                grant_id=scope.grant_id,
+            ),
         ),
     )
 

@@ -399,3 +399,81 @@ def test_live_withdrawal_cancels_the_actual_http_pdf_worker(
         response = pending.result(timeout=2)
     assert response.status_code == 403, response.text
     assert db_conn.execute("SELECT count(*) FROM research_sources").fetchone()[0] == 0
+
+
+def test_public_pdf_http_capture_retries_and_cites_the_original_download(
+    research_client,
+    research_store,
+    db_conn,
+    monkeypatch,
+):
+    """Exercise URL capture→page window→exact finding→owner-visible draft without a model."""
+    from backend.api import research_dependencies
+    from backend.tests.research.pdf_fixtures import pdf_bytes
+    from backend.tests.research.test_pdf_web import pdf_response
+    from backend.tests.research.test_web_fetcher import fetcher
+
+    responses = [pdf_response(pdf_bytes("Tax rates are fractions.", "Rate: 0.21."))]
+
+    def configured(**options):
+        """Keep policy, owned parser and persistence real; replace only DNS/socket transport."""
+        return fetcher(responses, **options)[0]
+
+    monkeypatch.setattr(research_dependencies, "PublicWebFetcher", configured)
+    headers = credentials(research_store)
+    command = {"operation_key": "pdf-url", "url": "https://docs.example.org/policy.pdf"}
+    first = research_client.post(
+        "/api/research-tools/sources/web", headers=headers, json=command
+    )
+    assert first.status_code == 200, first.text
+    assert (
+        research_client.post(
+            "/api/research-tools/sources/web", headers=headers, json=command
+        ).json()
+        == first.json()
+    )
+    source = first.json()["source_id"]
+    window = research_client.get(
+        f"/api/research-tools/sources/{source}", headers=headers
+    ).json()
+    assert window["provenance"]["page_count"] == 2
+    assert window["provenance"]["execution"]["worker_closed"] is True
+    assert (
+        window["content"]
+        == "[Page 1]\nTax rates are fractions.\n\n[Page 2]\nRate: 0.21."
+    )
+    finding = research_client.post(
+        "/api/research-tools/findings",
+        headers=headers,
+        json={
+            "operation_key": "pdf-url-finding",
+            "topic": "Rate",
+            "content": "Observed rate in the captured PDF",
+            "evidence": [{"source_id": source, "quote": "Rate: 0.21."}],
+        },
+    ).json()
+    report = research_client.post(
+        "/api/research-tools/reports",
+        headers=headers,
+        json={
+            "operation_key": "pdf-url-report",
+            "title": "PDF policy",
+            "content": "Observed rate, pending review.",
+            "finding_ids": [finding["finding_id"]],
+        },
+    ).json()
+    result = research_client.get(
+        f"/api/artifacts/{report['artifact_id']}/evidence?project_id=101"
+    )
+    assert result.status_code == 200, result.text
+    assert result.json()["evidence"][0]["quote"] == "Rate: 0.21."
+    assert (
+        result.json()["evidence"][0]["locator"] == "https://docs.example.org/policy.pdf"
+    )
+    assert (
+        db_conn.execute(
+            "SELECT status FROM research_reports WHERE artifact_id=?",
+            (report["artifact_id"],),
+        ).fetchone()[0]
+        == "draft"
+    )

@@ -1268,7 +1268,10 @@
         "docs/modernization/parser-packaging.json",
         "backend/tests/research/test_parser_process.py",
         "backend/tests/runtime/test_live_grants.py",
-        "backend/tests/runtime/test_run_recovery.py"
+        "backend/tests/runtime/test_run_recovery.py",
+        "docs/modernization/pdf-web-results.json",
+        "docs/modernization/pdf-web-packaging.json",
+        "backend/tests/research/test_pdf_web.py"
       ],
       "remaining": [
         "Migrate/expose retained capabilities and their actual consumers (inventory of71 tools exists).",
@@ -1551,7 +1554,8 @@
         "frontend/tests/chat-design.test.ts",
         "design-qa.md",
         "docs/design/concepts/reports/manifest.json",
-        "docs/design/audits/2026-11-01-reports/report.md"
+        "docs/design/audits/2026-11-01-reports/report.md",
+        "docs/design/concepts/files/manifest.json"
       ],
       "remaining": [
         "Nine other routes need 27 desktop concepts/9 mobile adaptations and selection. Reports design selected but implementation pending; ten routes still need full implementation.",
@@ -1570,7 +1574,8 @@
         "frontend/tests/chat-design.test.ts",
         "design-qa.md",
         "docs/design/concepts/reports/manifest.json",
-        "docs/design/audits/2026-11-01-reports/report.md"
+        "docs/design/audits/2026-11-01-reports/report.md",
+        "docs/design/concepts/files/manifest.json"
       ],
       "remaining": [
         "Nine other routes need 27 desktop concepts/9 mobile adaptations and selection. Reports design selected but implementation pending; ten routes still need full implementation.",
@@ -1596,11 +1601,13 @@
         "frontend/src/components/pages/ReportsPage.tsx",
         "frontend/src/styles/reports.css",
         "frontend/tests/report-design.test.ts",
-        "backend/tests/api/test_owner_report_evidence.py"
+        "backend/tests/api/test_owner_report_evidence.py",
+        "docs/design/concepts/files/manifest.json",
+        "docs/design/audits/2026-11-01-files/report.md"
       ],
       "remaining": [
-        "Nine other routes need 27 desktop concepts/9 mobile adaptations, selection and implementation.",
-        "All twelve routes and shared components still need complete interaction/accessibility/human-comprehension acceptance; Reports has scoped functional/visual verification only."
+        "Nine routes still need implementation; Files has selected desktop/mobile targets, eight others need24 desktop concepts/8 mobile adaptations and selection.",
+        "All twelve routes and shared components still need complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
       ]
     },
     "all_screens_implemented": {
@@ -1625,11 +1632,13 @@
         "frontend/src/components/pages/ReportsPage.tsx",
         "frontend/src/styles/reports.css",
         "frontend/tests/report-design.test.ts",
-        "backend/tests/api/test_owner_report_evidence.py"
+        "backend/tests/api/test_owner_report_evidence.py",
+        "docs/design/concepts/files/manifest.json",
+        "docs/design/audits/2026-11-01-files/report.md"
       ],
       "remaining": [
-        "Nine other routes need 27 desktop concepts/9 mobile adaptations, selection and implementation.",
-        "All twelve routes and shared components still need complete interaction/accessibility/human-comprehension acceptance; Reports has scoped functional/visual verification only."
+        "Nine routes still need implementation; Files has selected desktop/mobile targets, eight others need24 desktop concepts/8 mobile adaptations and selection.",
+        "All twelve routes and shared components still need complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
       ]
     },
     "accessibility_e2e": {
@@ -1750,7 +1759,10 @@
         "docs/modernization/parser-results.json",
         "docs/modernization/parser-packaging.json",
         "backend/tests/research/test_parser_process.py",
-        "backend/tests/runtime/test_live_grants.py"
+        "backend/tests/runtime/test_live_grants.py",
+        "docs/modernization/pdf-web-results.json",
+        "docs/modernization/pdf-web-packaging.json",
+        "backend/tests/research/test_pdf_web.py"
       ],
       "remaining": [
         "Rendered browser and keyboard verification",

@@ -1,0 +1,26 @@
+{
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "7d54e83131c627f7a2e60a2fe9e14fbdf65d64ff017b7feda1b536581599173c",
+  "source_comparisons": {
+    "backend/research/web_fetcher.py": "1d8d91f0a2d6736a36f093baacb4eb772c2989d115953315cbe7446959ffa3f9",
+    "backend/research/parser_process.py": "1de8aa50e3139624241e854233e915f092aef95977997d607a9fad3020b725cf",
+    "backend/research/parser_worker.py": "c60690671c09a88f74844f5eddb9a2bea3d287d98d57ea1c9bf1e5ec77ed848a",
+    "backend/research/pdf_text.py": "1810f7b7e73610e7fa72aef31255a883bc2a875c65e0dde2b86e007b58443a0a",
+    "backend/api/research_dependencies.py": "0acfdd6822b46d973f04e4de5869cedc08dc2e0563095b50ad2b7dcf2df0c49b",
+    "backend/runtime/business_definitions.py": "7d0b5eb2df824c7f4aff5dc4befd9fff00d5717a1b3487e8eb7f797df12bbcd2",
+    "backend/tests/research/test_pdf_web.py": "729769fae9727e48659e9d07d8cc2e2e9b501f4511079ed118616a7cf4592ace",
+    "backend/tests/research/test_web_fetcher.py": "4f1abd81ea9d8b6bdb56a22cad57ddab3403e6e73480662bd9e927a1fa734410",
+    "backend/tests/research/test_https_transport.py": "0351344299aa9c1b546dfd003a2fe94230dde88d2a273b12c0fa382359010e3b",
+    "backend/tests/research/test_http.py": "931269f5e30cf1e2e321098eba8f723d47070e24ccc17f8dec5e8b5b9ca79f91",
+    "backend/tests/research/test_parser_process.py": "76b8cc2891c9362ab989766a646023b123c268519beda2e60d6035a3f4ea3cf1",
+    "backend/tests/runtime/test_host_business.py": "eb64a45e223c77c46eb06b919d2da627148efbd8833e2836500aabc413b507cd"
+  },
+  "observed": {
+    "directed_tests_passed": 170,
+    "backend_modules_loaded": 297,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "network": "disabled; Unix sockets allowed"
+  },
+  "limits": "Backend wheel plus explicit installed dependencies; frontend is separately built/run from repository. Not a complete packaged product install, real model generation, or host enrollment proof."
+}

@@ -115,7 +115,9 @@ async def test_business_wire_schema_is_compact_but_keeps_real_title_field():
         assert report["properties"]["title"] == {"type": "string"}
 
 
-@pytest.mark.parametrize("media_type", ["text/plain", "application/pdf"])
+@pytest.mark.parametrize(
+    "media_type", ["text/plain", "application/pdf", "application/pdf-url"]
+)
 async def test_host_business_uses_real_api_scope_and_persists_one_report(
     coordination, tmp_path, monkeypatch, media_type
 ):
@@ -134,7 +136,7 @@ async def test_host_business_uses_real_api_scope_and_persists_one_report(
     directory = uploads / "101/uploads"
     directory.mkdir(parents=True)
     source = directory / "policy.txt"
-    if media_type == "application/pdf":
+    if media_type.startswith("application/pdf"):
         from backend.tests.research.pdf_fixtures import pdf_bytes
 
         source.write_bytes(pdf_bytes("Tax rates are fractions."))
@@ -142,7 +144,13 @@ async def test_host_business_uses_real_api_scope_and_persists_one_report(
         source.write_text("Tax rates are fractions.")
     c.conn.execute(
         "INSERT INTO reference_files(id,project_id,file_name,file_path,file_size,file_type) VALUES(7,101,'policy.txt',?,?,?)",
-        (str(source), source.stat().st_size, media_type),
+        (
+            str(source),
+            source.stat().st_size,
+            "application/pdf"
+            if media_type.startswith("application/pdf")
+            else media_type,
+        ),
     )
     c.conn.execute(
         "INSERT INTO reference_files(id,project_id,file_name,file_path,file_size,file_type) VALUES(8,202,'policy.txt',?,?,'text/plain')",
@@ -150,6 +158,22 @@ async def test_host_business_uses_real_api_scope_and_persists_one_report(
     )
     c.conn.commit()
     monkeypatch.setattr(config, "UPLOAD_DIR", str(uploads))
+    capture_tool = "researcher_capture_reference"
+    capture_arguments = {"reference_file_id": 7}
+    if media_type == "application/pdf-url":
+        from backend.api import research_dependencies
+        from backend.tests.research.test_pdf_web import pdf_response
+        from backend.tests.research.test_web_fetcher import fetcher
+
+        responses = [pdf_response(source.read_bytes())]
+
+        def configured(**options):
+            """Use real URL policy and owned parser, replacing only DNS/socket I/O."""
+            return fetcher(responses, **options)[0]
+
+        monkeypatch.setattr(research_dependencies, "PublicWebFetcher", configured)
+        capture_tool = "researcher_capture_web"
+        capture_arguments = {"url": "https://docs.example.org/policy.pdf"}
     app = create_app()
     token = c.research.issue_grant(
         project_id=101, task_id=1001, agent_id="fixture", permissions=set(PERMISSIONS)
@@ -170,18 +194,18 @@ async def test_host_business_uses_real_api_scope_and_persists_one_report(
             return json.loads(response["contentItems"][0]["text"])
 
         captured = await call(
-            "researcher_capture_reference",
+            capture_tool,
             operation_key="attachment",
-            reference_file_id=7,
+            **capture_arguments,
         )
         assert captured == await call(
-            "researcher_capture_reference",
+            capture_tool,
             operation_key="attachment",
-            reference_file_id=7,
+            **capture_arguments,
         )
         snapshot = await call("researcher_source_read", source_id=captured["source_id"])
         assert "Tax rates are fractions." in snapshot["content"]
-        if media_type == "application/pdf":
+        if media_type.startswith("application/pdf"):
             assert snapshot["provenance"]["pages"][0]["page_number"] == 1
             assert snapshot["provenance"]["ocr_performed"] is False
         matches = await call(
@@ -193,9 +217,9 @@ async def test_host_business_uses_real_api_scope_and_persists_one_report(
         assert "Tax rates are fractions." in matches["matches"][0]["excerpt"]
         source.unlink()
         assert captured == await call(
-            "researcher_capture_reference",
+            capture_tool,
             operation_key="attachment",
-            reference_file_id=7,
+            **capture_arguments,
         )
         finding = await call(
             "researcher_finding_record",

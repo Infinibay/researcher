@@ -60,7 +60,7 @@ externa. No son una evaluación de comprensión con un modelo o una persona.
 **La configuración interna de pypdf no es un límite duro de CPU/RSS.** El host ya
 la ejecuta dentro del worker limitado/cancelable descrito debajo; esto no cierra
 por completo `read_paper/pdf_search` ni retira herramientas heredadas. Todavía faltan
-adquisición de PDF por URL, OCR si se decide admitirlo,
+los consumidores heredados y OCR si se decide admitirlo,
 DOCX y recuperación estructurada CSV/JSON/XML, interfaz Documentos rediseñada,
 previsualización de páginas/citas en producto y migración de consumidores antiguos.
 El límite de captura no demuestra que el endpoint heredado de upload limite el
@@ -110,8 +110,7 @@ secreto/FD heredables, retirada por HTTP, muerte del padre y barreras de cierre 
 finalización y recuperación. Los fallos del parser se inyectan después de aplicar
 los límites reales; no se afirma aislamiento sólo por leer su configuración.
 
-Esto cierra el paso de límites/cancelación del parser local. Siguen pendientes PDF
-por URL, los consumidores heredados, rediseño de Archivos de referencia (`/files`),
+Esto cierra el paso de límites/cancelación del parser local. Siguen pendientes los consumidores heredados y el rediseño de Archivos de referencia (`/files`),
 previsualización de páginas/citas y comprensión con personas. Documentos (`/wiki`)
 es la wiki del producto y requiere su propia identidad/migración y rediseño; no es
 la pantalla de uploads. La inscripción global de todos los actores del host y las
@@ -121,3 +120,40 @@ a partir de este worker fijo.
 Referencias primarias de la semántica de límites:
 [resource de Python3.12](https://docs.python.org/3.12/library/resource.html),
 [señales y pidfd](https://docs.python.org/3.12/library/signal.html#signal.pidfd_send_signal).
+
+## PDF por URL pública
+
+`researcher_capture_web` ya admite texto y PDF público por la misma frontera de
+fuentes. Conserva HTTPS/puerto443, certificado/hostname, direcciones públicas
+fijadas, redirecciones revalidadas, ausencia de cookies/proxy/credenciales heredadas,
+bytes y un único plazo de adquisición. Acepta `application/pdf`; un endpoint
+`application/octet-stream` necesita además la firma PDF. Un PDF servido como texto
+se rechaza, sin registrar sus bytes como si fueran texto ordinario.
+
+La descarga exige el cuerpo completo anunciado por `Content-Length`: un PDF válido
+como prefijo no oculta que faltaba una revisión adicional prometida por HTTP.
+Se mantienen los rechazos de encoding de transporte y tamaño; la compresión interna
+del PDF la procesa el parser con sus límites. El worker recibe sólo el tiempo
+restante de la adquisición, limitado a su máximo propio, y hereda la autoridad del
+fetcher incluso cuando se usa su parser predeterminado.
+
+La fuente es de tipo `web`, con URL solicitada/final, redirects, IP pública observada,
+SHA del binario, MIME, versión de extracción y páginas/offsets. No se inventa un
+título bibliográfico a partir de la URL. Leer/buscar/citar sigue usando el snapshot
+persistido; repetir la clave recupera ese snapshot sin volver a descargar.
+
+La operación registrada abarca DNS, conexión, cuerpo y parser. Tras Stop se rechazan
+pasos siguientes; una lectura de red ya bloqueada puede necesitar su plazo de I/O
+para cerrar. El host conserva la operación mientras tanto y no declara cierre:
+puede quedar en reconciliación al superar su espera de cierre. No se afirma una
+interrupción instantánea de toda syscall. El helper DNS existente tiene su propio
+hijo limitado/reapeado hasta3s; su inscripción global y muerte del padre siguen
+incluidas en el trabajo de actores del host, sin extender a DNS la prueba de
+parent-death realizada para el worker PDF.
+
+Pruebas usan HTTP real sobre transporte controlado, PDF binario real, redirección,
+MIME genérico/mal declarado, documentos ilegibles, EOF prematuro, plazo restante,
+retiro durante I/O/parser, retry y recorridos de API/fachada hasta borrador con
+citas. No hubo inferencia ni prueba nueva de comprensión del modelo. Siguen
+pendientes la migración de consumidores `read_paper/pdf_search`, formatos restantes,
+Archivos/Documentos y la aceptación completa de producto.

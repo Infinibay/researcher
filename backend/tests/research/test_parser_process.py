@@ -210,3 +210,14 @@ def test_worker_exits_when_its_api_owner_process_is_killed(monkeypatch, tmp_path
         if pidfd is not None:
             _signal(pidfd)
             os.close(pidfd)
+
+
+def test_callers_remaining_deadline_restricts_the_worker_budget(monkeypatch, tmp_path):
+    """Catch a PDF parser ignoring time already spent downloading its input."""
+    from backend.research.parser_process import PDFParser
+
+    worker_fault(monkeypatch, tmp_path, "import time; time.sleep(30)")
+    started = time.monotonic()
+    with pytest.raises(SourceTooLarge):
+        PDFParser().read(pdf_bytes("Input"), max_wall_seconds=0.25)
+    assert time.monotonic() - started < 2

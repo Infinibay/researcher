@@ -141,7 +141,7 @@ class ResearchTools:
         )
 
     async def researcher_capture_web(self, operation_key: str, url: str) -> dict:
-        """Capture a public HTTPS text source with hash/provenance. Private targets, unsafe redirects and excess size/time are rejected. Reuse operation_key on retry."""
+        """Capture public HTTPS text or a text-bearing PDF with hash/provenance. PDF pages and extraction limits are recorded; no OCR or scientific validation is implied. Private targets, unsafe redirects, unreadable PDFs and excess size/time fail explicitly. Reuse operation_key on retry; read the saved source before citing."""
         return await self._client.request(
             "POST", "/sources/web", body={"operation_key": operation_key, "url": url}
         )
