@@ -16,10 +16,10 @@ archivos generados e inspeccionados, no pantallas aceptadas.
 | `/wiki` | 0 | 0 | Pendiente | Pendiente | Pendiente |
 | `/findings` | 0 | 0 | Pendiente | Pendiente | Pendiente |
 | `/reports` | 3 | 1 | Lectura con trazabilidad | Piloto en código | Parcial: recorrido y capturas; aceptación humana pendiente |
-| `/files` | 0 | 0 | Pendiente | Pendiente | Pendiente |
+| `/files` | 3 | 1 | Archivo con inspector | Pendiente | Pendiente |
 | `/repositories` | 0 | 0 | Pendiente | Pendiente | Pendiente |
 | `/flow` | 0 | 0 | Pendiente | Pendiente | Pendiente |
-| **Total** | **9 / 36** | **3 / 12** | **3 / 12** | **3 pilotos** | **0 / 12** |
+| **Total** | **12 / 36** | **4 / 12** | **4 / 12** | **3 pilotos** | **0 / 12** |
 
 Los prompts, archivos, hashes, tamaños y procedencia del piloto están en
 [concepts/tasks/manifest.json](concepts/tasks/manifest.json). Las tres alternativas
@@ -42,4 +42,4 @@ El rediseño está implementado y su [recorrido](audits/2026-11-01-reports/repor
 
 Archivos (`/files`) ya tiene [capturas iniciales](audits/2026-11-01-files/report.md)
 y [brief](concepts/files/brief.md). No son conceptos generados ni implementación;
-los contadores de la tabla permanecen iguales.
+Las cuatro referencias de [su manifest](concepts/files/manifest.json) ya están generadas e inspeccionadas; el código y la aceptación siguen pendientes.

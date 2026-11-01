@@ -157,3 +157,22 @@ Correcciones obligatorias al llevar la referencia a código:
 El piloto reproduce la jerarquía editorial, papel cálido, índice lateral, documento y fuentes de Lectura con trazabilidad; en móvil el índice y lector alternan, las fuentes y la acción de corregir siguen al cuerpo. Se compararon juntas referencias y capturas finales a1440×1024/390×844. Se corrigieron foco con borde negro en el título, márgenes oscuros móviles y aviso de proyecto oculto.
 
 Se conserva el contenido real del informe: la maqueta contiene un ejemplo numérico, líneas y actor ilustrativos que no están registrados en el resultado original. No se inventaron para imitar la imagen. Se mantiene la navegación compartida de doce rutas del producto; fuentes/tamaños del shell siguen sujetos al trabajo global. El enlace abre la tarea exacta y una corrección queda registrada para el próximo intento, sin iniciar inferencia ni aceptar/reemplazar el borrador. [Resultado y límites](audits/2026-11-01-reports/report.md).
+
+
+## Archivos: Archivo con inspector
+
+Las tres imágenes se generaron de forma independiente y se inspeccionaron antes de elegir. Se adjuntaron la captura real de Archivos y la referencia editorial de Informes. El usuario delegó la selección; no se repite una aprobación. Las puntuaciones son juicio de diseño sobre estas imágenes, no avance del proyecto ni pruebas de usabilidad.
+
+| Dirección | Claridad /10 (25) | Continuidad /10 (15) | Densidad /10 (20) | Honestidad del estado /10 (25) | Móvil previsto /10 (15) | Total /100 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Archivo con inspector | 9 | 9.5 | 8.5 | 8 | 9 | **87.25** |
+| Biblioteca de fuentes | 8.5 | 9.5 | 7.5 | 8 | 8.5 | 83.25 |
+| Registro de adjuntos | 7.5 | 9 | 7 | 7.5 | 7 | 75.5 |
+
+Se elige **Archivo con inspector**: permite comparar nombres/tipos en la lista y mantener acciones/contexto del archivo elegido a la vista. Continúa la jerarquía de Tareas e Informes. Biblioteca repite varios datos y su banda explicativa consume mucho espacio; Registro duplica acciones y texto, con una tabla más frágil en móvil.
+
+La adaptación móvil generada usa detalle del archivo y regreso a la lista, sin encoger una tabla de escritorio. Se inspeccionó su imagen, incluidos nombre, estado y acciones. Reducir duplicación de descripción al implementar; no adoptar el peso excesivo de Eliminar ni un logo PDF como nuevo sistema de iconos. Mantener el shell real compartido, foco/teclado y tamaños responsive.
+
+**Correcciones de contrato antes de código:** «texto no consultado en ninguna tarea» no se deduce de esta pantalla. Usar «lectura no comprobada en esta vista» o un estado sustentado por registros concretos; una captura no prueba lectura completa ni validez. Un adjunto registrado tampoco prueba que el archivo físico siga intacto. La futura previa debe diferenciar extracción puntual de fuente persistida y no inventar páginas/texto. Las fechas/Atlas del mock son ilustrativas y se sustituyen por datos reales. Subir/abrir no inicia inferencia; Eliminar necesita confirmación concreta. Si se muestra un límite de subida, debe estar aplicado por la API.
+
+[Brief](concepts/files/brief.md), [manifest con hashes](concepts/files/manifest.json), [estado anterior](audits/2026-11-01-files/report.md). Implementación y aceptación siguen pendientes; tres pilotos de código, doce conceptos de escritorio y cuatro móviles, cero rutas completamente aceptadas.

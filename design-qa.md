@@ -26,8 +26,8 @@ diálogos, navegación íntegra sólo por teclado, zoom 200/400 %, lector de pan
 otros motores, evaluación de comprensión y tareas humanas. También falta reducir
 la densidad de contexto en móvil y migrar los controles del engine antiguo.
 
-Las otras nueve rutas requieren conceptos, selección, implementación y aceptación.
-El [inventario](docs/design/inventory.md) conserva9/36 conceptos de escritorio y3/12
+De las nueve rutas pendientes de código, ocho todavía requieren conceptos y selección; todas necesitan implementación y aceptación.
+El [inventario](docs/design/inventory.md) conserva12/36 conceptos de escritorio y4/12
 adaptaciones móviles; las capturas de QA no son nuevos conceptos.
 
 ## Informes: resultado de este alcance visual y funcional — aprobado
@@ -46,3 +46,10 @@ paginación y aislamiento. Una corrección registrada en la tarea conserva el in
 y no inicia inferencia. Falta evaluación humana, lector de pantalla, zoom y otros
 navegadores; **la aceptación global sigue parcial, 0/12**. No se declara una demo
 viva lista para entrega.
+
+
+Archivos ya tiene tres alternativas de escritorio y adaptación móvil generadas e
+inspeccionadas; se eligió Archivo con inspector. Su [selección](docs/design/selection.md)
+registra las correcciones de estados no demostrados. Las [capturas iniciales](docs/design/audits/2026-11-01-files/report.md)
+muestran la tabla móvil de631px; no son aceptación del rediseño. La implementación
+y evaluación de Archivos siguen pendientes.

@@ -62,6 +62,6 @@ un máximo en la imagen. El parser limita1MB de archivo y200KB de texto extraíd
 subida y extracción son operaciones diferentes. Los reportes siguen siendo
 borradores y el usuario puede corregir contexto en su tarea.
 
-Estado: referencias iniciales inspeccionadas; alternativas, selección, móvil,
-implementación y aceptación **pendientes**. Este brief no reduce el alcance de las
+Estado: alternativas, selección y adaptación móvil generadas e inspeccionadas;
+implementación y aceptación **pendientes**. Véase [manifest](manifest.json). Este brief no reduce el alcance de las
 otras rutas, formatos, engine, prompts, migración ni evaluación humana.
