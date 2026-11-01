@@ -2518,3 +2518,80 @@ data/restore/bootstrap/CLI/TUI/install, aliases/transfer/budgets/dependencies/18
 advisories and100 baseline failures remain. Independent UI work:6/36 desktop+2/12
 mobile concepts,2 pilots,0/12 accepted;30+10 concepts/10 routes/all12 acceptance.
 Final fresh whole-branch review still required. Full objective remains active.
+
+## Current task: private-NET native egress composition — basec5ce577
+
+- Previous turn progress:c5ce577 host gate/channel/shared network helpers committed
+  with final59 focused/1464 suite/wheel; whole goal remains unchanged.
+- Implement NativeProxyCapsule + sealed trusted helper after G: loopback listener,
+  SCM_RIGHTS to host, native fork/strict filter/no bridge FD/extra FD leaks, fixed
+  proxy env and no direct network route. Broker owns channels before G, withdraws
+  sockets before SQL, drains before peer/domain closure receipts; persist policy/code.
+- Verify actual Codex local HTTPS through this path with fictitious tokens and
+  controlled numeric dial boundary; private NET/direct host bypass, parent FD
+  access, filter controls, owner/helper loss and Stop races. Real credentials,
+  WebSocket/OAuth, persistent state/Ken/business/code-mode/product remain pending.
+
+## Native private-NET composition checkpoint — basec5ce577
+
+- RED4 missing egress ports confirmed; actual SDK local TLS/proxy path then passed.
+  Controlled filter-removal mutation fails bind-denial assertion; strict filter
+  restored. HTTPS redirect follows to another CONNECT, denied before target DNS/dial.
+- Initial descendant test read populated1 immediately after supervisor waitpid.
+  Bounded kernel-event polling observed populated0; no process kill logic weakened.
+- RED post-birth close failure exposed loss of host-side child reaping. Retain child
+  immediately after spawn inside profile context, before fallible descriptor cleanup.
+- GREEN88 focused includes12 private-NET cases,4 actual SDK proxy/TLS/redirect cases.
+  Full1476:1373 pass,100 exact baseline failures,3 skip,29 warnings;543 runtime pass.
+  Wheel35 runtime + shared helper/research adapter bytes match; isolated -I -S
+  actual account-free Codex private-profile policy/metadata with analysis sibling,
+  closure/projection/recovery and previous host-gate/auth smokes passed.
+- After local TLS/no-bypass/Stop gates, used user's existing authorized subscription
+  credentials for ONE bounded real account metadata trial. External-token RPC to
+  measured native, ChatGPT account/read accepted, no native auth.json, no thread/
+  turn/model generation/OAuth rotation. Native peer, channels and domain closed.
+  Report stores only booleans/static scope, no token/account personal data. This
+  is not proof of model entitlement, renewal, WebSocket or product migration.
+- Ruling: helper may create a listener only during trusted setup; native child closes
+  bridge/listener, installs strict BPF and runs in private NET — environment proxy
+  alone would permit bypass — cost: cannot launch nested sandbox/MCP workers there
+  without separately owned host adapters and compatible profiles.
+- Ruling: installed bwrap passes selected inherited FD by default; there is no
+  preserve-fds option — verified with controlled pipe — cost: helper must explicitly
+  close every extra inherited FD before native, proved by diagnostic FD0/1/2 check.
+- Ruling: register channel under decision lock before G; withdraw before SQL, drain
+  on per-peer/domain close — Stop/new-channel races cannot escape retirement — cost:
+  actual DNS worker drain can delay final receipt, while sockets already withdrawn.
+- Ruling: retain born child before any cleanup — domain emptiness and host waitpid
+  reaping are separate — cost: failed startups retain an owned record until cleanup.
+- Ruling: distinguish native resolver snapshot from host's live DNS configuration;
+  validate/pin each response, do not claim frozen host DNS — cost: host DNS child/
+  complete host-service origin still need enrollment, outside current native cgroup.
+- No model/image generation, user DB migration, host service/account install, parent
+  cgroup changes, push/merge/deploy. Real access credential used only for metadata;
+  no refresh token forwarded or auth file mounted/copied to native. No phase closed.
+
+## Next brief after private-NET native transport — FULL goal unchanged
+
+Do not repeat broker/journal/domain/gates/source projection/host CONNECT/private NET/
+TLS/auth/account metadata. Next compose mandatory published Ken and business/code-mode
+with broker-owned peers and compatible profiles, plus isolated persistent native
+state and managed credential lifecycle/account coexistence. Native capsule currently
+blocks nested unshare/mount and disables code-mode/shell/plugins/agents: mounting or
+configuring old ken_worker inside it is not equivalent to an owned Ken profile.
+Measure actual Ken toolchain/model asset memory/CPU before assuming the current
+512MiB domain budget suffices. Host-side MCP/dynamic-tool mediation may reuse existing
+business boundaries; no model-selected grants/paths or unsafe host-network fallback.
+Actual SDK WebSocket needs its own trial; opaque CONNECT/HTTP success is insufficient.
+Real account metadata already works with exact public host policy; no need to repeat
+that paid-account access just to claim progress. Run bounded actual subscription+
+mandatory Ken only after the integrated catalog/ownership path is ready. Preserve
+secrets and account binding; no API-key fallback or automatic host turn replay.
+Then adopt RuntimeService/CodexRuntime/CommandJobs with actual managed origin/
+enrollment/generation/all actor control and account-source coexistence. Product
+factory remains on its prior launcher/managed HOME until composition is complete.
+Full71 tools/11 categories, engine/autonomy/roles/flows/agent communication, exact
+Git/review/CI, prompts/books/evals/human comprehension, data/restore/bootstrap/CLI/TUI/
+install, aliases/transfer/budgets/dependencies/18 npm advisories and100 baseline
+failures remain. Independent UI:6/36 desktop+2/12 mobile concepts,2 pilots,0/12
+accepted;30+10 concepts/10 routes/all12 acceptance. Final fresh whole-branch review.

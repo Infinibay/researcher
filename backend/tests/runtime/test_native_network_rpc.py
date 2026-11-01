@@ -16,7 +16,7 @@ pytestmark = pytest.mark.allow_hosts(["127.0.0.1"])
 
 
 @contextmanager
-def routing_server(tmp_path, *, hostname_matches=True):
+def routing_server(tmp_path, *, hostname_matches=True, dns_name=None, redirect=None):
     """An ephemeral CA signs a server leaf; private keys never enter the capsule."""
     root_key, root_cert = tmp_path / "root.key", tmp_path / "root.pem"
     leaf_key, csr, leaf_cert = (
@@ -63,7 +63,11 @@ def routing_server(tmp_path, *, hostname_matches=True):
     extensions = tmp_path / "extensions"
     extensions.write_text(
         "basicConstraints=critical,CA:FALSE\nextendedKeyUsage=serverAuth\nsubjectAltName="
-        + ("IP:127.0.0.1" if hostname_matches else "DNS:other.example.invalid")
+        + (
+            ("DNS:" + dns_name if dns_name else "IP:127.0.0.1")
+            if hostname_matches
+            else "DNS:other.example.invalid"
+        )
         + "\n"
     )
     subprocess.run(
@@ -107,6 +111,7 @@ def routing_server(tmp_path, *, hostname_matches=True):
             except OSError:
                 return
             try:
+                raw.settimeout(1)
                 with raw, context.wrap_socket(raw, server_side=True) as conn:
                     conn.settimeout(1)
                     data = b""
@@ -119,7 +124,11 @@ def routing_server(tmp_path, *, hostname_matches=True):
                         # Never retain request headers (even synthetic tokens).
                         state["requests"] += 1
                         conn.sendall(
-                            b"HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nContent-Length: 2\r\nConnection: close\r\n\r\n{}"
+                            b"HTTP/1.1 302 Found\r\nLocation: "
+                            + redirect.encode("ascii")
+                            + b"\r\nContent-Length: 0\r\nConnection: close\r\n\r\n"
+                            if redirect
+                            else b"HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nContent-Length: 2\r\nConnection: close\r\n\r\n{}"
                         )
             except OSError:
                 state["tls_rejections"] += 1

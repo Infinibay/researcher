@@ -21,7 +21,7 @@ def _no_sockets():
     return _syscall_filter(network=False)
 
 
-def _syscall_filter(*, network):
+def _syscall_filter(*, network, listener_setup=False, protected_peers=False):
     if platform.machine() != "x86_64":
         raise RuntimeError("Analysis seccomp profile requires verified x86_64 ABI")
     deny = 0x00050000 | errno.EPERM
@@ -64,7 +64,9 @@ def _syscall_filter(*, network):
         433,
         442,
     )
-    if network:
+    if protected_peers:
+        denied += (310, 311, 438)  # process_vm_readv/writev and pidfd_getfd
+    if network and not listener_setup:
         denied += (43, 49, 50, 288)  # accept/bind/listen/accept4, not client connect
     for number in (() if network else (41, 53)) + denied:
         instructions += [(0x15, 0, 1, number), (0x06, 0, 0, deny)]
@@ -365,4 +367,56 @@ class NativeCapsule(AnalysisCapsule):
                 SSL_CERT_FILE="/run/researcher-network/ca.pem",
             )
             self.pass_fds += tuple(self._network_fds.values())
+        return self
+
+
+class NativeProxyCapsule(NativeCapsule):
+    """Private NET with a trusted FD relay and a stricter native child filter."""
+
+    def __init__(self, binding, asset, info_fd, *, network, channel):
+        super().__init__(binding, asset, info_fd, network=network)
+        self.channel = channel
+
+    def _network(self):
+        return []
+
+    def _filter(self):
+        return _syscall_filter(network=True, listener_setup=True, protected_peers=True)
+
+    def _program(self):
+        command = super()._program()
+        self._bridge_fd = self.channel.duplicate_child()
+        self._stack.callback(os.close, self._bridge_fd)
+        return [
+            str(Path(sys.executable).resolve(strict=True)),
+            "-I",
+            "-S",
+            "/run/researcher-host/proxy.py",
+            str(self._bridge_fd),
+            *command,
+        ]
+
+    def _mounts(self):
+        mounts = super()._mounts()
+        self._proxy_fd = _domain_spawn.sealed(
+            Path(__file__).with_name("proxy_payload.py").read_bytes()
+        )
+        self._stack.callback(os.close, self._proxy_fd)
+        self._client_filter_fd = _domain_spawn.sealed(
+            _syscall_filter(network=True, protected_peers=True)
+        )
+        self._stack.callback(os.close, self._client_filter_fd)
+        return [
+            *mounts,
+            "--ro-bind-data",
+            str(self._proxy_fd),
+            "/run/researcher-host/proxy.py",
+            "--ro-bind-data",
+            str(self._client_filter_fd),
+            "/run/researcher-host/native-filter",
+        ]
+
+    def __enter__(self):
+        super().__enter__()
+        self.pass_fds += (self._bridge_fd, self._proxy_fd, self._client_filter_fd)
         return self

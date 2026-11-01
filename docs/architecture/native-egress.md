@@ -1,10 +1,9 @@
 # Puente de salida del host
 
-`TunnelProxy` y `EgressChannel` implementan la parte del host de un futuro perfil
-nativo con red privada. El puente sólo recibe sockets ya conectados por un canal
-Unix heredado; no abre un proxy TCP público en el host. **Todavía no se conectó al
-proceso nativo ni se retiró su ruta directa de red.** No constituye aún una
-restricción de egress del runtime productivo.
+`TunnelProxy` y `EgressChannel` implementan la parte del host del nuevo perfil
+nativo privado. Sólo reciben sockets por un canal Unix heredado; no abren un proxy
+TCP público. Ya están conectados al [perfil del broker](native-proxy.md), retirando
+allí la ruta directa. La fábrica productiva todavía usa su lanzador anterior.
 
 ## Contrato implementado
 
@@ -85,20 +84,15 @@ recibidos. El número total de entregas también está acotado, incluyendo recha
 por saturación. EOF retira todos los túneles; el propietario debe llamar `close()`
 para drenar también el reader y el pool.
 
-## Integración que falta
+## Integración del perfil y trabajo restante
 
-La próxima composición debe usar un namespace de red privado, con un helper de
-confianza que acepte sólo en su loopback y entregue sus sockets por este canal.
-Debe cerrar FDs extra antes de ejecutar código nativo, mantener el canal fuera del
-cliente y aplicar al cliente el filtro estricto de sockets/controles. El helper
-debe arrancar después del G autorizado y permanecer en el dominio original.
-
-El broker debe fijar política/código en el manifiesto, registrar el canal antes
-de permitir G, retirar túneles inmediatamente en Stop/cierre de peer y drenar
-recursos antes de confirmar el recibo. La prueba requiere Codex real por el proxy,
-HTTPS/WebSocket, redirecciones hacia destinos rechazados, ausencia de salida
-directa, pérdida del helper/propietario y recuperación. Configurar HTTPS_PROXY
-conservando la red del host no cumple ese contrato.
+El [perfil privado](native-proxy.md) ya compone helper, canal y broker. G precede
+al helper; éste cierra FDs y el nativo instala su filtro estricto. Stop/cierre de
+peer retira túneles y drena recursos antes del recibo. La política/código figuran
+en el manifiesto. Las pruebas incluyen SDK real, TLS, redirección denegada, ausencia
+de ruta al host, pérdida de canal, descendientes y carreras de arranque/cierre.
+Falta WebSocket real del SDK y la composición productiva; no se deducen del éxito
+HTTPS. Configurar proxy conservando host networking tampoco ofrece ese aislamiento.
 
 Después siguen endpoint administrado inscrito, convivencia por cuenta, estado
 nativo persistente, OAuth real, Ken/negocio/code-mode y fábrica productiva. El plan

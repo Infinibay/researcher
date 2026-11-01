@@ -262,6 +262,7 @@ ni se cambió el proveedor de suscripción.
 [Transporte nativo y límites](../modernization/broker-native-evidence.json).
 [Autenticación externa opcional y sus límites](subscription-auth.md).
 [DNS/TLS y sus límites](native-network.md).
+[Perfil nativo privado con CONNECT](native-proxy.md).
 
 ## Trabajo pendiente de la autoridad completa
 

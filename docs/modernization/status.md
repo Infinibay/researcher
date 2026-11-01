@@ -76,8 +76,11 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    resolvió documentación pública y obtuvo HEAD200 por TLS1.3 sin credenciales.
    El puente del host ya implementa CONNECT/443 a destinos exactos, DNS público,
    límites compartidos y retirada de sockets; recibe streams por un canal privado
-   SCM_RIGHTS. Falta conectarlo al namespace privado nativo y al broker: todavía
-   no impide la ruta directa de red. WebSocket y composición productiva pendientes.
+   SCM_RIGHTS. Ya se conectó al perfil privado del broker: Codex real usa el proxy,
+   se bloquean acceso directo al host y redirecciones ajenas, y Stop cierra túneles
+   antes de SQL. Una lectura real de cuenta ChatGPT funcionó sin thread/turn ni
+   auth.json persistido. Faltan generación con Ken, WebSocket, renovación OAuth
+   real y adopción de la fábrica productiva.
 7. **Contexto y procedencia:** versiones al corregir o cambiar trece entradas de tarea;
    retiro de autoridad antigua; respuesta asociada a pregunta/versión; repositorio
    admitido inmutable y comienzo de cola explícito. Registro exacto de la entrada
@@ -144,19 +147,20 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 
 ## Verificación más reciente
 
-- Suite completa:1464 casos;1361 pasan,100 fallan con las mismas identidades de la
+- Suite completa:1476 casos;1373 pasan,100 fallan con las mismas identidades de la
   línea base y 3 se omiten. La suite global sigue roja.
-- Runtime:531 pasan. Las59 pruebas dirigidas de este checkpoint incluyen34 casos
-  del puente/canal y los contratos existentes de ingesta web/TLS. Cubren política,
-  DNS mixto/privado, framing, budgets, half-close, retirada tardía y SCM_RIGHTS real.
-- Paquete actual:34 módulos runtime y el helper compartido/adaptador de investigación
-  coinciden con el código. El ensayo aislado transfiere un FD y bytes por el gate;
-  conserva también los smokes de Codex sin cuenta, análisis, autenticación y cierre.
-  No demuestra todavía que Codex use el puente ni que carezca de salida directa.
-- En el checkpoint anterior, Codex0.166.0 real verificó TLS local y rechazó emisor/
-  nombre incorrectos. Un diagnóstico separado resolvió y verificó learn.chatgpt.com
-  por TLS1.3 con HEAD200 sin credenciales ni turnos. El dominio se retiró; no es una
-  prueba de restricción de destinos ni de entitlement.
+- Runtime:543 pasan. Las88 pruebas dirigidas incluyen12 casos del perfil privado,
+  cuatro de HTTPS/redirect con SDK real, pérdida de canal/descendientes, SQL ocupado,
+  carreras Stop/arranque, política/recibos y recogida tras fallo posterior a spawn.
+- Paquete actual:35 módulos runtime y helpers compartidos coinciden con el código.
+  El ensayo aislado inicia Codex real en NET privado, consulta metadatos sin cuenta,
+  comprueba política/manifiestos y conserva análisis hermano y cierre/recuperación.
+- Ensayo real separado: account/read reconoce ChatGPT por el perfil privado, sin
+  thread/start ni turn/start; auth.json ausente y dominio/peer/canales cerrados. No
+  se guardaron tokens ni datos personales de cuenta. No prueba renovación OAuth,
+  generación por suscripción, permisos de modelo ni integración de Ken en el perfil.
+- El diagnóstico público anterior resolvió y verificó learn.chatgpt.com con TLS1.3
+  y HEAD200 sin credenciales. Es conectividad observada, no entitlement.
 - Los ensayos de autenticación/coordinador anteriores cubren saturación, errores
   redactados, retirada durante lectura/escritura y cancelación de consumidores/cierre.
   Las pruebas anteriores de dominio incluyen SIGKILL, pérdida de DB, contención,
@@ -183,9 +187,14 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
   siguen pendientes;0/12 rutas aceptadas. Dependencias:18 avisos npm preexistentes
   (5 bajos,3 moderados,10 altos), sin nuevos paquetes vulnerables por Playwright/axe.
 
-Evidencia actual: [puente del host y límites](egress-evidence.json),
-[resultados actuales](egress-results.json),
-[paquete actual verificado](egress-packaging.json),
+Evidencia actual: [perfil privado y límites](native-proxy-evidence.json),
+[resultados actuales](native-proxy-results.json),
+[paquete actual](native-proxy-packaging.json),
+[metadatos autenticados](native-proxy-account-metadata.json),
+[contrato del perfil](../architecture/native-proxy.md),
+[puente del host y límites](egress-evidence.json),
+[resultados del puente](egress-results.json),
+[paquete del puente](egress-packaging.json),
 [contrato e integración pendiente](../architecture/native-egress.md),
 [DNS/TLS y límites](native-network-evidence.json),
 [resultados DNS/TLS](native-network-results.json),

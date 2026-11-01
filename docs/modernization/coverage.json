@@ -312,7 +312,12 @@
         "backend/runtime/subscription_provider.py",
         "backend/tests/runtime/test_subscription_provider.py",
         "docs/modernization/subscription-provider-evidence.json",
-        "docs/modernization/subscription-provider-results.json"
+        "docs/modernization/subscription-provider-results.json",
+        "docs/architecture/native-proxy.md",
+        "docs/modernization/native-proxy-evidence.json",
+        "docs/modernization/native-proxy-results.json",
+        "backend/tests/runtime/test_native_proxy.py",
+        "backend/tests/runtime/test_native_proxy_lifecycle.py"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -398,7 +403,12 @@
         "backend/runtime/subscription_provider.py",
         "backend/tests/runtime/test_subscription_provider.py",
         "docs/modernization/subscription-provider-evidence.json",
-        "docs/modernization/subscription-provider-results.json"
+        "docs/modernization/subscription-provider-results.json",
+        "docs/architecture/native-proxy.md",
+        "docs/modernization/native-proxy-evidence.json",
+        "docs/modernization/native-proxy-results.json",
+        "backend/tests/runtime/test_native_proxy.py",
+        "backend/tests/runtime/test_native_proxy_lifecycle.py"
       ],
       "remaining": [
         "Durable product startup/shutdown and all tool lifecycle integration; old flows are not covered by owned command evidence",
@@ -943,7 +953,12 @@
         "docs/modernization/egress-evidence.json",
         "docs/modernization/egress-results.json",
         "backend/tests/runtime/test_egress_proxy.py",
-        "backend/tests/runtime/test_egress_channel.py"
+        "backend/tests/runtime/test_egress_channel.py",
+        "docs/architecture/native-proxy.md",
+        "docs/modernization/native-proxy-evidence.json",
+        "docs/modernization/native-proxy-results.json",
+        "backend/tests/runtime/test_native_proxy.py",
+        "backend/tests/runtime/test_native_proxy_lifecycle.py"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable",
@@ -1079,7 +1094,12 @@
         "docs/modernization/native-network-results.json",
         "docs/modernization/native-network-live.json",
         "backend/tests/runtime/test_native_network.py",
-        "backend/tests/runtime/test_native_network_rpc.py"
+        "backend/tests/runtime/test_native_network_rpc.py",
+        "docs/architecture/native-proxy.md",
+        "docs/modernization/native-proxy-evidence.json",
+        "docs/modernization/native-proxy-results.json",
+        "backend/tests/runtime/test_native_proxy.py",
+        "backend/tests/runtime/test_native_proxy_lifecycle.py"
       ]
     },
     "U07": {

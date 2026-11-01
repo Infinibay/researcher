@@ -1,0 +1,59 @@
+{
+  "base_commit": "c5ce577",
+  "date": "2026-11-01",
+  "scope": "Broker-composed native private NET with post-G trusted FD relay, strict native child filter, fixed loopback CONNECT, policy/code intent and owned channel withdrawal/closure. Actual SDK local TLS/redirect plus separate real account metadata trial. No product factory, actual model turn, OAuth renewal, Ken/code-mode or WebSocket acceptance claim.",
+  "source_sha256": {
+    "backend/runtime/proxy_payload.py": "81ea2e1aa9e872bbb5b5f06b84ca01f35feaa1de9d551c83d250d7db274cbf0d",
+    "backend/runtime/broker_profile.py": "232f8dad8403e97e8b739c34e91b1e3bc37fe372687e56e02a7eafcb46b6df8b",
+    "backend/runtime/peer_broker.py": "1d171edd041575cbea91ac07241060b7fcc4281594b7425cae68b4e5376cf7bd",
+    "backend/runtime/broker_stdio.py": "6e24c2444b43c6733d56a2eda5d456afc77e270a8d2450ad4a3e54037ab1f7ac",
+    "backend/tests/runtime/test_native_proxy.py": "81a42989084d1f7baa060644f2481f6642c17a79b2453ff7f3a66e61452202ea",
+    "backend/tests/runtime/test_native_proxy_lifecycle.py": "6ffb9e1d38ea36f0cd275e0b80931122d00b7d7ac515b52cd5a0aed6779298cb",
+    "backend/tests/runtime/test_native_network_rpc.py": "e57ec8caeeb56f042a5953e6f98925dd2daf69a0d3aa506411967ea61e145bd7"
+  },
+  "raw_artifacts_sha256": {
+    "native-proxy-red.log": "f5ef4b7786b2ca9c21faa6d4fa856743867d8a6ee8c888fbdfb5082c3e94dfed",
+    "native-proxy-first.log": "0d4904e535d53c4cdc5d0774ccff84fa7a6a476ebb6fea3ff880abbf3365c49a",
+    "native-proxy-filter-red.log": "0cc76f35cff01a0bfe1a467856bf0c5ae898d5860d86bee62041fbdbadc04236",
+    "native-proxy-filter-green.log": "d2c0a96d4958b1fb56d492bd233c79713ef47b133d669e2d2a57b42bcc0ba35b",
+    "native-proxy-lifecycle-first.log": "eee43c022ea0aaa2e2e85c09e89633fe174cb5dbf2d86f0c6fedf652b07dda2e",
+    "native-proxy-descendant-diagnostic.log": "fc4efa05ec8ff7ed11c8f5fb2578bb82b5de5a8d34ed02c3e116981f5db95c2e",
+    "native-proxy-races-first.log": "56399f4b8b9531579ad3376f21e5d05afa05b0e7254135d3e30cd44dc5de73f0",
+    "native-proxy-redirect-first.log": "d76644d35284ec0fe148afec5f799d8c63eeec3ba2399425188a71f4b250d71f",
+    "native-proxy-birth-red.log": "b33b0f444497852e81d4477f6631ea3e1ad97838d6577239ce8bea7fdbaa3583",
+    "native-proxy-focused.log": "e194e0ca08e0877b2273d86b391af2354291c0828da977f6cb118496b17c0862",
+    "native-proxy-full.xml": "f494945936ec8f7bee2e34d535e1bff941b4039b1a202581224b1945ff452041",
+    "native-proxy-full.log": "55e15d1b7523fb7f456925a37ab3169894f91d44e3475eec91f119bc8f97b9df",
+    "native-proxy-build.log": "7df397f6680eca9348a55b26880a3caa099229598b3fdbde18d7b99a2bce4061",
+    "native-proxy-package.log": "1580ff3d2d7072208827442cae06b5ca48b91b8078ec53c48ec9e9a3f932570c",
+    "verify-native-proxy-package.py": "1caf2d0d7ae21c44c15f094d7f0e0dd1573b3cd9cf3a2eca3498dcf7668541d1",
+    "probe-native-subscription-metadata.py": "4048b2218dd8874ee845283e0992ec707b8e94d79e08df39903e103ffd2329bc",
+    "native-proxy-account-metadata.log": "4fec9e8b82ffb27910845496bc512b588bb3bfc634e5ae3e2a75936661eabac8"
+  },
+  "verified": [
+    "Actual Codex0.166.0 performs local HTTPS through private NET/loopback relay/SCM_RIGHTS/host CONNECT. Trusted CA/name reaches HTTP then rejects missing workspace; unknown issuer/name rejects TLS. Native SDK redirect produces another CONNECT rejected before disallowed-name DNS/dial. Only synthetic credentials in deterministic tests.",
+    "Controlled ELF/Python probe sees different NET, cannot reach host listener, bind, create addressed Unix sockets, use pidfd_getfd, inspect helper FDs or write source. Native receives only descriptors0/1/2 and fixed proxy, not inherited proxy canary. Removing strict filter reproduces failure; restored green.",
+    "Broker owns channel under decision lock before G, policy and helper/host/validator hashes in operation manifest. Identical retry returns receipt with no new channel/process; changed policy same-key conflicts without journal change.",
+    "Live host tunnel closes despite global SQL writer contention. Host channel EOF kills native and descendants without whole-attempt withdrawal; kernel cgroup empty is polled with deadline. Closing native leaves analysis sibling usable.",
+    "Stop during channel construction/bind physically retires domain before stalled startup drains, leaves no reader and records gate_sent=false.",
+    "Child is retained immediately after spawn before fallible context/descriptor cleanup; injected post-birth close failure now leaves actual child reaped during broker retirement.",
+    "Separate real credential metadata probe: measured native RPC external login, account/read accepts ChatGPT, no thread/start or turn/start, native auth.json absent, domain retired, all channels drained, original peer closed. Only booleans/static scope/failure fields recorded; no tokens/account personal data.",
+    "Full1476:1373 pass,100 exact original baseline failures,3 skip,29 warnings;543 runtime pass. Focused88 pass including12 private-NET cases and4 actual SDK proxy HTTPS/redirect cases.",
+    "Offline wheel35 runtime Python bytes and shared helper/research adapter match. Isolated -I -S real Codex uses private profile/policy manifest/account-free metadata with analysis sibling, closure/projection/retry/recovery plus previous host auth/FD gate smoke."
+  ],
+  "diagnosed": [
+    "Installed bubblewrap does not provide preserve-fds; controlled inherited pipe probe confirms the selected FD already passes. Trusted relay explicitly closes extras before native exec.",
+    "Immediate cgroup.events read after supervisor waitpid saw populated1 transiently; bounded condition polling observes actual populated0. No production kill behavior weakened.",
+    "Post-birth cleanup failure reproduced lost host reaping despite physical domain retirement. Child registration moved inside spawn context immediately after successful birth."
+  ],
+  "limits": [
+    "Production CodexRuntime/RuntimeService/CommandJobs still use prior launchers until managed endpoint/account coexistence/persistent native/Ken/business/code-mode/all-actor enrollment are composed. Metadata/private NET is not whole product migration.",
+    "Real account metadata does not prove a model turn, entitlement, OAuth renewal, subscription billing/quotas or WebSocket compatibility. No model/image generation was run here.",
+    "Native resolver snapshot is not the host DNS resolver configuration. Host resolves each allowed name anew and pins validated numeric answer; default bounded DNS subprocess is outside currently proved native cgroup. Complete trusted host-service actor origin remains pending.",
+    "TLS is opaque, not L7 authorization/SNI inspection or a domain-fronting firewall. Native trusted executable/tool restrictions and actual TLS validation remain part of boundary.",
+    "No user DB migration, host service/account install, parent cgroup changes, push/merge/deploy. Full engine/71-tool/prompts/communication/data/12-page UI plan and final fresh whole-branch review remain active."
+  ],
+  "primary_references": [
+    "https://learn.chatgpt.com/docs/app-server"
+  ]
+}

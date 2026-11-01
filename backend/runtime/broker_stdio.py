@@ -85,20 +85,35 @@ class AsyncPeerBroker:
     def peer(self, registry, peer_id, *, operation_key, code):
         return self._endpoint(registry, peer_id, operation_key, code=code)
 
-    def native(self, registry, peer_id, *, operation_key, asset, network=None):
+    def native(
+        self, registry, peer_id, *, operation_key, asset, network=None, egress=None
+    ):
         return self._endpoint(
-            registry, peer_id, operation_key, asset=asset, network=network
+            registry,
+            peer_id,
+            operation_key,
+            asset=asset,
+            network=network,
+            egress=egress,
         )
 
     def _endpoint(
-        self, registry, peer_id, operation_key, *, code=None, asset=None, network=None
+        self,
+        registry,
+        peer_id,
+        operation_key,
+        *,
+        code=None,
+        asset=None,
+        network=None,
+        egress=None,
     ):
         if not self._entered or self._closing is not None:
             raise AuthorityConflict("Async broker is not admitted")
         if len(self._endpoints) >= 128:
             raise AuthorityBusy("Attempt transport history capacity reached")
         endpoint = BrokerEndpoint(
-            self, registry, peer_id, operation_key, code, asset, network
+            self, registry, peer_id, operation_key, code, asset, network, egress
         )
         self._endpoints.append(endpoint)
         return endpoint
@@ -119,6 +134,8 @@ class AsyncPeerBroker:
         )
         if endpoint.network is not None:
             payload["network"] = endpoint.network
+        if endpoint.egress is not None:
+            payload["egress"] = endpoint.egress
         future = loop.run_in_executor(
             self._launch_pool,
             lambda: start(
@@ -231,12 +248,21 @@ class BrokerEndpoint:
     """A single post-gate connection; cannot reopen or replay a start receipt."""
 
     def __init__(
-        self, owner, registry, peer_id, operation_key, code, asset=None, network=None
+        self,
+        owner,
+        registry,
+        peer_id,
+        operation_key,
+        code,
+        asset=None,
+        network=None,
+        egress=None,
     ):
         self.owner, self.registry, self.peer_id = owner, registry, peer_id
         self.operation_key, self.code = operation_key, code
         self.asset = asset
         self.network = network
+        self.egress = egress
         self.stdin = self.stdout = self.stderr = None
         self._raw = None
         self._operation = None

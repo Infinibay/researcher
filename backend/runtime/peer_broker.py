@@ -20,8 +20,15 @@ from backend.runtime.authority_journal import (
     AuthorityConflict,
     AuthorityUncertain,
 )
-from backend.runtime.broker_profile import AnalysisCapsule, CodexAsset, NativeCapsule
+from backend.runtime.broker_profile import (
+    AnalysisCapsule,
+    CodexAsset,
+    NativeCapsule,
+    NativeProxyCapsule,
+)
 from backend.runtime.contracts import command_key, text
+from backend.runtime.egress_channel import EgressChannel
+from backend.runtime.egress_proxy import EgressPolicy, TunnelProxy
 from backend.runtime.execution_domain import DomainIdentity, ExecutionDomain
 from backend.runtime.native_network import NativeNetwork
 from backend.runtime.peer_process import (
@@ -103,11 +110,15 @@ class PeerBroker:
         self._gate_observed = {}
         self._namespaces = {}
         self._projection_source = None
+        self._egress = {}
 
     def withdraw(self):
         """Withdraw new G decisions immediately; not a durable closure receipt."""
         with self._decision_lock:
             self._withdrawn.set()
+            channels = tuple(self._egress.values())
+        for channel in channels:
+            channel.withdraw()
 
     @property
     def _grant_key(self):
@@ -248,17 +259,38 @@ class PeerBroker:
     def run_peer(self, registry, peer_id, *, operation_key, code):
         return self._run(registry, peer_id, operation_key=operation_key, code=code)
 
-    def run_native(self, registry, peer_id, *, operation_key, asset, network=None):
+    def run_native(
+        self, registry, peer_id, *, operation_key, asset, network=None, egress=None
+    ):
         if not isinstance(asset, CodexAsset):
             raise TypeError("Native launch requires an inspected Codex asset")
         if network is not None and not isinstance(network, NativeNetwork):
             raise TypeError("Native network requires inspected public inputs")
+        if egress is not None and (
+            not isinstance(egress, EgressPolicy) or network is None
+        ):
+            raise TypeError(
+                "Private native egress requires a policy and public network inputs"
+            )
         return self._run(
-            registry, peer_id, operation_key=operation_key, asset=asset, network=network
+            registry,
+            peer_id,
+            operation_key=operation_key,
+            asset=asset,
+            network=network,
+            egress=egress,
         )
 
     def _run(
-        self, registry, peer_id, *, operation_key, code=None, asset=None, network=None
+        self,
+        registry,
+        peer_id,
+        *,
+        operation_key,
+        code=None,
+        asset=None,
+        network=None,
+        egress=None,
     ):
         command_key(operation_key)
         if asset is None:
@@ -277,7 +309,9 @@ class PeerBroker:
                 {"code": code, "profile": "readonly-stdlib-analysis-v1"}
                 if asset is None
                 else {
-                    "profile": "readonly-native-codex-v1",
+                    "profile": "readonly-native-codex-connect-v1"
+                    if egress is not None
+                    else "readonly-native-codex-v1",
                     "asset": asdict(asset),
                     "profile_sha256": hashlib.sha256(
                         Path(__file__).with_name("broker_profile.py").read_bytes()
@@ -295,6 +329,29 @@ class PeerBroker:
                             ).hexdigest(),
                         }
                         if network is not None
+                        else {}
+                    ),
+                    **(
+                        {
+                            "egress": asdict(egress),
+                            "egress_code_sha256": {
+                                name: hashlib.sha256(
+                                    Path(__file__).with_name(name).read_bytes()
+                                ).hexdigest()
+                                for name in (
+                                    "proxy_payload.py",
+                                    "egress_proxy.py",
+                                    "egress_channel.py",
+                                )
+                            },
+                            "destination_code_sha256": hashlib.sha256(
+                                Path(__file__)
+                                .parents[1]
+                                .joinpath("network_destinations.py")
+                                .read_bytes()
+                            ).hexdigest(),
+                        }
+                        if egress is not None
                         else {}
                     ),
                 }
@@ -328,19 +385,40 @@ class PeerBroker:
                 if not self._children:
                     self.domain.limit(pids=128, memory_bytes=512 * 1024**2)
                 read_fd, write_fd = os.pipe2(os.O_CLOEXEC)
-                capsule = AnalysisCapsule if asset is None else NativeCapsule
+                channel = None
+                if egress is not None:
+                    channel = EgressChannel(TunnelProxy(egress))
+                    with self._decision_lock:
+                        admitted = not self._withdrawn.is_set()
+                        if admitted:
+                            self._egress[operation_id] = channel
+                    if not admitted:
+                        channel.close()
+                        raise AuthorityConflict(
+                            "Broker withdrew before channel admission"
+                        )
+                capsule = (
+                    NativeProxyCapsule
+                    if egress is not None
+                    else (AnalysisCapsule if asset is None else NativeCapsule)
+                )
                 with capsule(
                     admission["binding"],
                     code if asset is None else asset,
                     write_fd,
                     **({"network": network} if network is not None else {}),
+                    **({"channel": channel} if channel is not None else {}),
                 ) as profile:
                     if self._withdrawn.is_set():
                         raise AuthorityConflict("Broker admission withdrawn")
                     child = self.domain.spawn(
                         profile.argv, env=profile.env, pass_fds=profile.pass_fds
                     )
-                self._children[operation_id] = child
+                    # Retain the born child before any descriptor/context cleanup
+                    # can fail. Domain retirement alone is not host-side reaping.
+                    self._children[operation_id] = child
+                if channel is not None:
+                    channel.close_child_end()
                 os.close(write_fd)
                 write_fd = None
                 info = self._info(read_fd)
@@ -420,6 +498,8 @@ class PeerBroker:
                     "Broker constructors/local binds did not drain"
                 )
             try:
+                for channel in self._egress.values():
+                    channel.close()
                 for child in self._children.values():
                     try:
                         child.wait(timeout=3)
@@ -476,8 +556,13 @@ class PeerBroker:
         identity = self._namespaces.get(operation_id)
         if child is None or identity is None:
             raise AuthorityConflict("Peer is not owned by this live broker")
+        channel = self._egress.get(operation_id)
+        if channel is not None:
+            channel.withdraw()
         reason = close_namespace(identity, timeout=3)
         child.wait(timeout=3)
+        if channel is not None:
+            channel.close()
         if not self._gate_lock.acquire(blocking=False):
             raise AuthorityBusy(
                 "Peer physically closed; publication must drain before receipt"

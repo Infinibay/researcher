@@ -1,0 +1,11 @@
+{
+  "scope": "Actual private-network Codex account metadata only. No thread/turn, OAuth renewal, model entitlement, mandatory Ken, product adoption or deployment proof.",
+  "model_turns": 0,
+  "real_credentials_forwarded_only_to_measured_native_rpc": true,
+  "account_metadata_accepted": true,
+  "requires_openai_auth": true,
+  "native_auth_json_absent": true,
+  "domain_retired": true,
+  "all_channels_drained": true,
+  "native_peer_closed": true
+}
