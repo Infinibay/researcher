@@ -53,3 +53,18 @@ capacidad retenida sin keys de pago, observar/restringir el tráfico a la ruta
 elegida y verificar un fallo explícito al intentar otro proveedor. Los tokens
 estimados, los reportados y los desconocidos deben conservar su significado;
 no presentar un contador ausente como cero ni como cuota disponible.
+
+
+## Captura de artículos en el catálogo nativo
+
+`researcher_capture_paper` resuelve un único URL/DOI/arXiv y reutiliza el fetcher y
+parser PDF locales existentes. No llama al modelo ni crea embeddings. Su recorrido
+nativo/HTTP/SQLite se verifica sin generación; el prompt y la descripción de herramienta
+explican versión capturada, posible página de resumen y búsqueda literal. No equivalen
+a una evaluación de comprensión/síntesis del modelo.
+
+`read_paper` y `pdf_search` siguen en los catálogos CrewAI de researcher/reviewer.
+El segundo todavía depende del embedding remoto anterior y NO se ha presentado la
+búsqueda literal como reemplazo semántico. La retirada del proveedor/roles antiguos
+requiere completar la recuperación documental y migrar sus consumidores.
+[Contrato, consumers y límites](paper-capture.md).

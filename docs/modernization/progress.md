@@ -3659,3 +3659,95 @@ review only when entire implementation is ready. No phase or goal completion cla
   autonomy/roles/flows/agent communication, all prompts/evals/books, remaining8routes,
   acceptance of all12, migration/restore/bootstrap/CLI/TUI/dependencies,100baseline
   failures and final fresh whole-branch review remain in the full active objective.
+
+## Paper locator migration brief — base3acfa09
+
+- Previous goal turn: progress, commit3acfa09 Files pilot and verified source/wheel/browser.
+  Revalidated clean tracked worktree; instruction files remain untracked and untouched.
+- Consumer inspection: read_paper is in WEB_TOOLS; pdf_search in RAG_TOOLS and explicit
+  research_reviewer role. backend.agents.base.get_tools_for_role still instantiates
+  those legacy role catalogs. No direct Python consumers outside registries/exports
+  were found by literal scan of backend/scripts. That does not prove external disuse.
+- Ruling: do not bind legacy tools to ambient grants or mutate the old role factory
+  to look migrated. Port the missing DOI/arXiv paper locator workflow into the actual
+  owned native business catalog first, then migrate remaining role/retrieval paths.
+  This preserves the whole scope while avoiding an authority bypass disguised as an
+  adapter. Existing old catalogs stay until their consumers have behavioral replacement.
+- Discovered gap: new source search is exact substring; legacy PDFSearch uses embeddings.
+  They are not equivalent. Preserve semantic retrieval as an explicit remaining capability,
+  not a renaming or silent fallback. No hidden embedding API/paid provider is introduced.
+- Exit: exactly one URL/DOI/arXiv input, safe identifier encoding and requested-version
+  provenance; same vetted public fetcher/parser, capture receipt/retry and exact citations;
+  actual native/MCP facade can create/read one draft using this entry point. DOI HTML
+  landing pages remain identified as captured HTML, not full paper/scientific validation.
+- Validate synthetic redirect/PDF/HTML, malformed input, private redirect, revocation,
+  operation conflict, same-key no-refetch and scoped source access, then source/wheel/global.
+  No model replay needed to exercise this deterministic tool addition.
+
+## Paper locator implementation and directed proof
+
+- Added pure PaperLocator/resolve_paper (no I/O), CapturePaper HTTP DTO/route and
+  researcher_capture_paper in the actual native business catalog. Exactly one locator,
+  DOI reserved/Unicode/slash/dot-segment encoding, modern/archival arXiv versions and
+  application limits. Given identifiers are recorded, not verified metadata.
+- Read arXiv's official identifier page and DOI's official resolver/handbook. DOI has
+  no universal length cap; product caps are labelled application policy. Use direct
+  arxiv.org/pdf/{id} preserving explicit version; an unversioned id is latest_at_capture.
+- Reused one private remote-capture path for web/paper: lookup before I/O, same public
+  fetcher/owned PDF parser, scope revalidation at commit. No nested LLM, embedding API,
+  dependency or account request added. URL/DOI/arXiv capture retains source/citation/draft.
+-21 initial HTTP cases observed RED404→GREEN. Expanded to29 locator/API cases, including
+  unreadable PDF, post-download revocation, private redirect, read-only grant, same-key
+  no-refetch, conflicts, foreign source lookup, HTML landing page and URI-boundary cases.
+- Added2 actual native-facade→ASGI→SQLite PDF→exact-quote→report paths, DOI and arXiv.
+  Existing two catalog-count assertions correctly failed at12/16 vs11/15; updated them
+  to check the named business set and explicit four analysis commands, preserving no
+  duplicate tools. Native factory/mediation20pass; API/facade34pass before4final locator
+  cases; combined source241pass plus4additional cases. No model generation involved.
+- Updated native instructions and tool descriptions to distinguish supplied identifier,
+  captured revision, abstract/HTML versus full text, extraction versus validation,
+  literal versus semantic search, and unread coverage. Prompt behavior/comprehension
+  with a model/person remains unevaluated; tool success is not evidence of understanding.
+- Current wheel245directed tests pass,325backend imports exclusively from extracted
+  wheel;598Python/SQL files all match current source, aggregated tree hash recorded.
+ 19 selected source comparisons also retained (check receipt for exact count). This is
+  not a complete clean install, release or old-thread catalog migration trial.
+- Added semantic module/class/method docstrings to resolver/service and all relevant
+  research DTO/route functions; scoped AST check passes. Whole-branch audit still open.
+- Prior Files preview deliberately stopped after PID/cmdline/cwd verification because
+  it retained old backend imports. exec43379 terminal143; no replacement launched.
+- Global regression executing on exec15172, paper-global.log/xml/exit. Reuse that handle
+  if interrupted; do not restart on timeout. Backend sources frozen after package proof.
+  Remaining work includes semantic recovery, roles/flows, all other full-plan obligations.
+- Global exec15172 terminal1, inherited failures only:1688total1585pass100EXACTbaseline
+  3skip,635runtimepass,27warnings,253.74s.31 new cases pass (29locator/API,2native DOI/
+  arXiv facade). finalize-paper.py confirms all598Python/SQL files still match wheel,
+  selected source hashes and raw JUnit bound in paper-results.json. No backend edits
+  after package proof; no repeated global run for documentation changes.
+- Catalog and instructions are frozen session inputs. Code comparisons prevent silently
+  extending old session contracts; no previous-version thread-upgrade test was run in
+  this delivery. No scientific-quality, prompt-comprehension or complete capability claim.
+- Timing: first paper RED22:03UTC through package proof around22:12UTC; global253.74s
+  overlapped documentation/consumer review. Compared with the prior delivery, commands
+  stayed rooted in the managed worktree; no CWD reruns. Ruff fixture-export warning was
+  resolved by explicit __all__, and catalog expectation failures were intended contract
+  updates, not runtime capability failures. No inference/subscription calls or new assets.
+
+## Next brief: useful document recovery without hidden remote embeddings
+
+- Keep the already ported paper URL/DOI/arXiv entry and provenance; next address actual
+  retrieval fidelity and remaining formatted documents rather than alias old tool names.
+- Legacy PDFSearch currently calls get_embedding_function: explicit default selects
+  local Chroma MiniLM, otherwise an OpenAI-compatible API wrapper with ambient config.
+  It has a global singleton, collection keyed only by file hash and no scoped canonical
+  source receipt. Do not reuse that global authority/index or silently charge a provider.
+- Inspect reusable local embedding assets/model identity and bounded extraction/chunk
+  helpers, define explicit backend availability/coverage/rebuild policy, and test exact
+  recoverable evidence including relevant content at the end and query paraphrases.
+  Deterministic literal/ranked lexical retrieval must remain labelled by its actual
+  method; it does not close semantic equivalence. Keep sources canonical in the DB.
+- Then port remaining document formats and knowledge/reviewer paths, migrating legacy
+  role/flow consumers as capabilities become complete. Whole goal still includes all
+  engine/loop/autonomy/communication, prompts/books/evals,8unimplemented routes and all
+  acceptance gates, migrations/restore/CLI/TUI/Git/CI/dependencies,100baseline failures
+  and final fresh whole-branch review. No phase/scenario or goal marked complete.

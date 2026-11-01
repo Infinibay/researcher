@@ -1,0 +1,80 @@
+{
+  "base_commit": "3acfa09",
+  "total": 1688,
+  "passed": 1585,
+  "failed": 100,
+  "skipped": 3,
+  "runtime_passed": 635,
+  "new_cases_passed": 31,
+  "new_cases": [
+    "backend.tests.research.test_paper_capture::test_paper_capture_redirects_to_saved_pdf_with_requested_identity_and_no_refetch[locator0-https://papers.example.org/article.pdf-url-https://papers.example.org/article.pdf-None]",
+    "backend.tests.research.test_paper_capture::test_paper_capture_redirects_to_saved_pdf_with_requested_identity_and_no_refetch[locator1-https://arxiv.org/pdf/2301.07041v2-arxiv-2301.07041v2-explicit]",
+    "backend.tests.research.test_paper_capture::test_paper_capture_redirects_to_saved_pdf_with_requested_identity_and_no_refetch[locator2-https://arxiv.org/pdf/hep-th/9901001-arxiv-hep-th/9901001-latest_at_capture]",
+    "backend.tests.research.test_paper_capture::test_paper_capture_redirects_to_saved_pdf_with_requested_identity_and_no_refetch[locator3-https://doi.org/10.1000/%C3%89vidence%3Fx%23y%25z-doi-10.1000/\\xc9vidence?x#y%z-None]",
+    "backend.tests.research.test_paper_capture::test_invalid_or_ambiguous_paper_input_never_fetches_or_persists[locator0]",
+    "backend.tests.research.test_paper_capture::test_invalid_or_ambiguous_paper_input_never_fetches_or_persists[locator1]",
+    "backend.tests.research.test_paper_capture::test_invalid_or_ambiguous_paper_input_never_fetches_or_persists[locator2]",
+    "backend.tests.research.test_paper_capture::test_invalid_or_ambiguous_paper_input_never_fetches_or_persists[locator3]",
+    "backend.tests.research.test_paper_capture::test_invalid_or_ambiguous_paper_input_never_fetches_or_persists[locator4]",
+    "backend.tests.research.test_paper_capture::test_invalid_or_ambiguous_paper_input_never_fetches_or_persists[locator5]",
+    "backend.tests.research.test_paper_capture::test_invalid_or_ambiguous_paper_input_never_fetches_or_persists[locator6]",
+    "backend.tests.research.test_paper_capture::test_invalid_or_ambiguous_paper_input_never_fetches_or_persists[locator7]",
+    "backend.tests.research.test_paper_capture::test_invalid_or_ambiguous_paper_input_never_fetches_or_persists[locator8]",
+    "backend.tests.research.test_paper_capture::test_invalid_or_ambiguous_paper_input_never_fetches_or_persists[locator9]",
+    "backend.tests.research.test_paper_capture::test_invalid_or_ambiguous_paper_input_never_fetches_or_persists[locator10]",
+    "backend.tests.research.test_paper_capture::test_invalid_or_ambiguous_paper_input_never_fetches_or_persists[locator11]",
+    "backend.tests.research.test_paper_capture::test_invalid_or_ambiguous_paper_input_never_fetches_or_persists[locator12]",
+    "backend.tests.research.test_paper_capture::test_invalid_or_ambiguous_paper_input_never_fetches_or_persists[locator13]",
+    "backend.tests.research.test_paper_capture::test_doi_html_landing_page_is_preserved_as_html_evidence_not_a_pdf_claim",
+    "backend.tests.research.test_paper_capture::test_paper_resolution_cannot_bypass_private_redirect_policy",
+    "backend.tests.research.test_paper_capture::test_read_only_grant_cannot_capture_a_paper",
+    "backend.tests.research.test_paper_capture::test_failed_paper_pdf_does_not_create_a_successful_source[%PDF-broken]",
+    "backend.tests.research.test_paper_capture::test_failed_paper_pdf_does_not_create_a_successful_source[data1]",
+    "backend.tests.research.test_paper_capture::test_failed_paper_pdf_does_not_create_a_successful_source[data2]",
+    "backend.tests.research.test_paper_capture::test_authority_revoked_after_paper_download_cannot_commit",
+    "backend.tests.research.test_paper_capture::test_doi_suffix_cannot_become_a_query_fragment_or_dot_segment[10.1000/a/b-https://doi.org/10.1000/a%2Fb]",
+    "backend.tests.research.test_paper_capture::test_doi_suffix_cannot_become_a_query_fragment_or_dot_segment[10.1000/..-https://doi.org/10.1000/%2E%2E]",
+    "backend.tests.research.test_paper_capture::test_doi_suffix_cannot_become_a_query_fragment_or_dot_segment[10.1000/\\xe9?x#y-https://doi.org/10.1000/%C3%A9%3Fx%23y]",
+    "backend.tests.research.test_paper_capture::test_identifier_length_caps_are_application_limits_not_registry_validity",
+    "backend.tests.runtime.test_host_business::test_host_business_uses_real_api_scope_and_persists_one_report[application/pdf-paper-arxiv]",
+    "backend.tests.runtime.test_host_business::test_host_business_uses_real_api_scope_and_persists_one_report[application/pdf-paper-doi]"
+  ],
+  "source_directed_passed": 245,
+  "source_directed_scope": "241 combined cases plus four final locator-boundary cases also included in the 29-case source paper suite",
+  "packaged_directed_passed": 245,
+  "backend_source_files_matching_wheel": 598,
+  "new_failures": [],
+  "resolved_failures": [],
+  "inherited_failure_identities": {
+    "path": "docs/modernization/baseline-results.json",
+    "sha256": "cd91994b488a4ff0aee3a00087803e2b03cd72593a8bd8675d4aee5fb5265203",
+    "comparison": "all100 EXACT failure identities match"
+  },
+  "raw_junit": {
+    "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/paper-global.xml",
+    "sha256": "d431372c3469ad89773c76a3ed65072a0a5dc8c09fb945d3b861b3426179aaf7"
+  },
+  "validation": {
+    "business_catalog_tools": 12,
+    "model_turns": 0,
+    "new_dependencies": 0,
+    "global_suite_green": false,
+    "frontend_changed": false
+  },
+  "observed": [
+    "Exactly one supplied URL/DOI/arXiv enters the existing bounded public fetcher/PDF parser",
+    "Captured requested identity/version, final URL, original binary hash and exact PDF page text",
+    "Same-key receipt replay performs no network fetch; conflicting intent rejected",
+    "Native facade reaches real API/SQLite exact finding and draft report for DOI and arXiv",
+    "HTML landing page preserves HTML MIME and never claims verified identifier or full text",
+    "Private redirect, read-only grant, malformed/encrypted/textless PDF and revoked-before-commit capture rejected"
+  ],
+  "limits": [
+    "Legacy role catalogs, flows and external Python consumers not migrated",
+    "Literal source search is not semantic PDF retrieval",
+    "No live DOI/arXiv Internet fetch or new model comprehension evaluation",
+    "No previous-version native-thread upgrade trial",
+    "No new UI implementation/acceptance; four pilots and zero fully accepted routes",
+    "Full original modernization plan remains active"
+  ]
+}

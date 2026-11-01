@@ -210,7 +210,12 @@ async def test_model_peer_keeps_managed_auth_but_never_business_or_api_key_env(
     assert started["params"]["permissions"] == "researcher_inference"
     assert started["params"]["developerInstructions"] == sent_instructions
     assert started["params"]["dynamicTools"] == sent_catalog
-    assert len(started["params"]["dynamicTools"]) == 11
+    from backend.runtime.business_mediation import BUSINESS_NAMES
+
+    assert {
+        tool["name"] for tool in started["params"]["dynamicTools"]
+    } == BUSINESS_NAMES
+    assert len(started["params"]["dynamicTools"]) == len(BUSINESS_NAMES)
     assert "HOST_ONLY_GRANT" not in json.dumps(records)
     assert not any(row.get("method") == "turn/start" for row in records)
     assert not list(c.control.glob("native-inference-*"))
@@ -279,7 +284,14 @@ async def test_registered_session_dispatches_python_with_combined_frozen_catalog
         ) as session:
             names = {tool["name"] for tool in session.catalog}
             assert "researcher_python" in names and "researcher_command_cancel" in names
-            assert len(names) == 15
+            from backend.runtime.business_mediation import BUSINESS_NAMES
+
+            assert names == BUSINESS_NAMES | {
+                "researcher_python",
+                "researcher_command_start",
+                "researcher_command_read",
+                "researcher_command_cancel",
+            }
             first_hash = session.catalog_hash
             started = content(
                 await session._request(

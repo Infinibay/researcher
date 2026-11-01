@@ -7,6 +7,7 @@ from fastapi.responses import JSONResponse
 
 from backend.api.models.questions import AskUser
 from backend.api.models.research import (
+    CapturePaper,
     CaptureReference,
     CaptureWeb,
     FindingDetail,
@@ -37,6 +38,7 @@ router = APIRouter(prefix="/api/research-tools", tags=["research-tools"])
 
 @router.post("/questions", status_code=201)
 async def ask_user(command: AskUser, ctx: Context, request: Request):
+    """Record material questions and close the current turn before waiting for owner input."""
     from backend.api.routes.runs import service
 
     runtime = service(request)
@@ -48,6 +50,7 @@ async def ask_user(command: AskUser, ctx: Context, request: Request):
 
 
 def install_research_errors(app: FastAPI):
+    """Map scoped domain failures to explicit HTTP errors without retrying effects."""
     for error, status, code in [
         (ResearchForbidden, 403, "scope_forbidden"),
         (ResearchNotFound, 404, "research_not_found"),
@@ -59,6 +62,7 @@ def install_research_errors(app: FastAPI):
     ]:
 
         async def handle(request: Request, exc: Exception, _status=status, _code=code):
+            """Keep the registered exception's status/code bound to its own handler."""
             return JSONResponse(
                 status_code=_status,
                 content={"error": str(exc), "code": _code, "detail": str(exc)},
@@ -68,6 +72,7 @@ def install_research_errors(app: FastAPI):
 
 
 def _window(text, offset, max_chars):
+    """Return a character window with an explicit continuation offset, never silent truncation."""
     content = text[offset : offset + max_chars]
     end = offset + len(content)
     return {
@@ -80,6 +85,7 @@ def _window(text, offset, max_chars):
 
 @router.get("/references")
 def references(ctx: Context):
+    """List this grant's project attachments without exposing their filesystem paths."""
     return {
         "project_id": ctx.scope.project_id,
         "references": ctx.store.list_references(ctx.scope),
@@ -88,6 +94,7 @@ def references(ctx: Context):
 
 @router.post("/sources/reference", response_model=SourceReceipt)
 def capture_reference(command: CaptureReference, ctx: Context):
+    """Acquire an attachment under the current grant and reuse its committed receipt."""
     return ctx.service.capture_reference(
         ctx.scope, command.operation_key, command.reference_file_id
     )
@@ -95,13 +102,27 @@ def capture_reference(command: CaptureReference, ctx: Context):
 
 @router.post("/sources/web", response_model=SourceReceipt)
 def capture_web(command: CaptureWeb, ctx: Context):
+    """Capture a public source with scoped authority and retry-safe intent identity."""
     return ctx.service.capture_web(ctx.scope, command.operation_key, command.url)
+
+
+@router.post("/sources/paper", response_model=SourceReceipt)
+def capture_paper(command: CapturePaper, ctx: Context):
+    """Capture a supplied paper identifier with existing grant, retry and PDF limits."""
+    return ctx.service.capture_paper(
+        ctx.scope,
+        command.operation_key,
+        url=command.url,
+        doi=command.doi,
+        arxiv_id=command.arxiv_id,
+    )
 
 
 @router.get("/sources")
 def sources(
     ctx: Context, after_id: int = Query(0, ge=0), limit: int = Query(50, ge=1, le=100)
 ):
+    """Page saved source metadata inside the credential-bound project."""
     result = ctx.store.list_sources(ctx.scope, after_id=after_id, limit=limit)
     return {
         "sources": result,
@@ -116,6 +137,7 @@ def source_read(
     offset: int = Query(0, ge=0),
     max_chars: int = Query(12000, ge=1, le=20000),
 ):
+    """Return one captured revision, provenance and an explicit unread text tail."""
     source = ctx.store.read_source(ctx.scope, source_id)
     return {
         "source_id": source["id"],
@@ -138,6 +160,7 @@ def source_search(
     needle: str = Query(min_length=1, max_length=200),
     after_offset: int = Query(0, ge=0),
 ):
+    """Find exact case-sensitive text in a snapshot; missing matches are not semantic absence."""
     source = ctx.store.read_source(ctx.scope, source_id)
     text = source["content"]
     matches = []
@@ -165,6 +188,7 @@ def source_search(
 
 @router.post("/findings", response_model=FindingReceipt)
 def finding_record(command: RecordFinding, ctx: Context):
+    """Persist a provisional finding only after checking its exact saved-source quotations."""
     draft = FindingDraft(
         topic=command.topic,
         content=command.content,
@@ -178,6 +202,7 @@ def finding_record(command: RecordFinding, ctx: Context):
 
 @router.get("/findings/{finding_id}", response_model=FindingDetail)
 def finding_read(finding_id: int, ctx: Context):
+    """Read one project-scoped finding with retained evidence and validation state."""
     row = ctx.store.read_finding(ctx.scope, finding_id)
     return {
         "finding_id": row["id"],
@@ -199,6 +224,7 @@ def finding_read(finding_id: int, ctx: Context):
 
 @router.post("/reports", response_model=ReportReceipt)
 def report_write(command: WriteReport, ctx: Context):
+    """Persist a canonical draft linked to findings without accepting or publishing it."""
     draft = ReportDraft(
         title=command.title,
         content=command.content,
@@ -216,6 +242,7 @@ def report_read(
     max_chars: int = Query(12000, ge=1, le=20000),
     evidence_offset: int = Query(0, ge=0),
 ):
+    """Read report text and citations using independent bounded continuation offsets."""
     row = ctx.store.read_report(ctx.scope, artifact_id)
     evidence = row["evidence"][evidence_offset : evidence_offset + 20]
     end = evidence_offset + len(evidence)

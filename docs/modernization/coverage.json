@@ -613,7 +613,12 @@
         "docs/modernization/product-runtime-evidence.json",
         "docs/modernization/product-stop-evidence.json",
         "backend/tests/runtime/test_runtime_service.py",
-        "backend/tests/runtime/test_inference_journal.py"
+        "backend/tests/runtime/test_inference_journal.py",
+        "docs/architecture/paper-capture.md",
+        "docs/architecture/paper-tool-schema.json",
+        "docs/modernization/paper-results.json",
+        "docs/modernization/paper-packaging.json",
+        "backend/tests/research/test_paper_capture.py"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -640,7 +645,12 @@
         "backend/runtime/subscription_provider.py",
         "backend/tests/runtime/test_subscription_provider.py",
         "docs/modernization/subscription-provider-evidence.json",
-        "docs/modernization/subscription-provider-results.json"
+        "docs/modernization/subscription-provider-results.json",
+        "docs/architecture/paper-capture.md",
+        "docs/architecture/paper-tool-schema.json",
+        "docs/modernization/paper-results.json",
+        "docs/modernization/paper-packaging.json",
+        "backend/tests/research/test_paper_capture.py"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -682,7 +692,12 @@
         "docs/modernization/owner-command-packaging.json",
         "backend/tests/runtime/test_owner_command_output.py",
         "frontend/tests/command-output.test.ts",
-        "evals/runtime/run_owner_command_inspection.py"
+        "evals/runtime/run_owner_command_inspection.py",
+        "docs/architecture/paper-capture.md",
+        "docs/architecture/paper-tool-schema.json",
+        "docs/modernization/paper-results.json",
+        "docs/modernization/paper-packaging.json",
+        "backend/tests/research/test_paper_capture.py"
       ]
     },
     "E10": {

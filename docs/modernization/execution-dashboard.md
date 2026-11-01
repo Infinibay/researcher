@@ -9,7 +9,7 @@ Motivos del ajuste: [diagnóstico del proceso](workflow-review.md).
 - Hay un primer recorrido de investigación con Codex, suscripción, Ken, análisis y reporte persistido. La prueba real de entrada de producto terminó; su monitor falló y se recuperó evidencia durable sin repetir inferencia. No se recuperaron las métricas de memoria perdidas.
 - Las 43 entradas de escenarios siguen abiertas en `coverage.json`: 33 en progreso y 10 pendientes. Son escenarios amplios; esto no significa que sus componentes no funcionen.
 - Interfaz: 4 pilotos, 12/36 conceptos de escritorio y 4/12 móviles; 0/12 páginas con aceptación completa.
-- Última suite registrada: 1554 aprobadas, 100 fallos heredados y 3 omitidas. Falta resolver o retirar con justificación los casos del sistema reemplazado.
+- Última suite registrada: 1585 aprobadas, 100 fallos heredados y 3 omitidas. Falta resolver o retirar con justificación los casos del sistema reemplazado.
 - No hay porcentaje global defendible todavía. El 30% anterior era una impresión, no una medición de alcance ponderado.
 
 ## Última entrega verificada: arranque del recorrido existente
@@ -55,8 +55,17 @@ previa sin crear fuente, descarga exacta, borrado que conserva capturas/informes
 paginación, teclado y errores. Incluye docstrings/JSDoc semánticos de las piezas
 nuevas/modificadas; la revisión documental global sigue pendiente.
 
+**Captura de artículos añadida al recorrido nativo:** `researcher_capture_paper`
+acepta exactamente un URL/DOI/arXiv y conserva petición/versión, URL final, hashes y
+páginas. DOI que devuelve HTML no se presenta como texto completo. Catálogo de negocio
+12 herramientas, sin embeddings ni generación nueva.245 comprobaciones dirigidas
+pasan desde fuente/wheel;31 casos nuevos. Suite1688:1585 aprobadas,los100 fallos
+heredados exactos y3 omitidas. [Contrato y consumidores](../architecture/paper-capture.md),
+[resultados](paper-results.json), [paquete](paper-packaging.json).
+
 **Siguiente acción:** migrar consumidores heredados de documentos/PDF sobre el
-contrato de captura existente, con sus prompts y errores; después DOCX/recuperación
+contrato de captura existente, con sus prompts y errores. El soporte de localizadores `read_paper` ya está portado
+al catálogo nativo; siguen pendientes roles/flows y recuperación semántica de PDF. Después DOCX/recuperación
 CSV/JSON/XML, web/wiki y revisión científica. No añadir otra fábrica de inferencia
 ni retirar `read_paper/pdf_search` sin revisar sus consumidores y pruebas.
 

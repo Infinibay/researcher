@@ -373,3 +373,18 @@ Evidencia actual: [resultados actuales](owned-factory-results.json),
 [ensayo de análisis](analysis-live.json), [continuidad](run-input-live.json),
 [migración](run-input-migration.json), [cobertura](coverage.json),
 [inventario visual](../design/inventory.md) y [registro de avance](progress.md).
+
+## Ampliación posterior: artículos identificados
+
+El catálogo nativo añade `researcher_capture_paper` para URL/DOI/arXiv. Se conserva la
+petición/versión y se usa el mismo parser/captura con hashes, permisos y recibos. DOI
+puede devolver HTML de presentación; no se presenta como acceso al artículo completo.
+La fachada nativa llega a cita exacta e informe draft sin inferencia adicional.
+Verificación actual:245 casos dirigidos desde fuente/wheel;31 casos nuevos. Suite1688:
+1585 aprobadas,100 fallos heredados exactos,3 omitidas.
+[Contrato y consumidores pendientes](../architecture/paper-capture.md),
+[resultados](paper-results.json), [paquete](paper-packaging.json).
+
+Los roles CrewAI, flows y recuperación semántica de `pdf_search` aún requieren migración.
+El nuevo buscador literal no se declara equivalente a embeddings. No hay cambios de UI
+ni más páginas aceptadas en esta ampliación:4 pilotos y0/12 aceptadas completamente.

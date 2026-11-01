@@ -1,0 +1,69 @@
+{
+  "tool": "researcher_capture_paper",
+  "description": "Capture exactly one URL, bare DOI (10.1000/example) or arXiv id (2301.07041v2). Identifiers select a public HTTPS target, not verified authorship or quality. Versioned arXiv requests preserve that version; unversioned ids mean latest at capture. A DOI may return only an HTML landing page, not full paper text. The same URL/redirect/PDF limits apply; no OCR or paywall bypass. Reuse operation_key with the same locator after a lost receipt, then read the saved source/provenance before citing.",
+  "input_schema": {
+    "additionalProperties": false,
+    "properties": {
+      "operation_key": {
+        "type": "string"
+      },
+      "url": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "doi": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "arxiv_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      }
+    },
+    "required": [
+      "operation_key"
+    ],
+    "type": "object"
+  },
+  "annotations": {
+    "readOnlyHint": false,
+    "destructiveHint": false,
+    "idempotentHint": true
+  },
+  "business_catalog_names": [
+    "researcher_ask_user",
+    "researcher_capture_paper",
+    "researcher_capture_reference",
+    "researcher_capture_web",
+    "researcher_finding_read",
+    "researcher_finding_record",
+    "researcher_reference_list",
+    "researcher_report_read",
+    "researcher_report_write",
+    "researcher_source_list",
+    "researcher_source_read",
+    "researcher_source_search"
+  ],
+  "validation": "The server validates exactly one non-null locator; the signature schema alone does not enforce mutual exclusion."
+}

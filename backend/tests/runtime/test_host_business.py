@@ -116,7 +116,14 @@ async def test_business_wire_schema_is_compact_but_keeps_real_title_field():
 
 
 @pytest.mark.parametrize(
-    "media_type", ["text/plain", "application/pdf", "application/pdf-url"]
+    "media_type",
+    [
+        "text/plain",
+        "application/pdf",
+        "application/pdf-url",
+        "application/pdf-paper-arxiv",
+        "application/pdf-paper-doi",
+    ],
 )
 async def test_host_business_uses_real_api_scope_and_persists_one_report(
     coordination, tmp_path, monkeypatch, media_type
@@ -160,7 +167,11 @@ async def test_host_business_uses_real_api_scope_and_persists_one_report(
     monkeypatch.setattr(config, "UPLOAD_DIR", str(uploads))
     capture_tool = "researcher_capture_reference"
     capture_arguments = {"reference_file_id": 7}
-    if media_type == "application/pdf-url":
+    if media_type in (
+        "application/pdf-url",
+        "application/pdf-paper-arxiv",
+        "application/pdf-paper-doi",
+    ):
         from backend.api import research_dependencies
         from backend.tests.research.test_pdf_web import pdf_response
         from backend.tests.research.test_web_fetcher import fetcher
@@ -174,6 +185,13 @@ async def test_host_business_uses_real_api_scope_and_persists_one_report(
         monkeypatch.setattr(research_dependencies, "PublicWebFetcher", configured)
         capture_tool = "researcher_capture_web"
         capture_arguments = {"url": "https://docs.example.org/policy.pdf"}
+        if media_type.startswith("application/pdf-paper"):
+            capture_tool = "researcher_capture_paper"
+            capture_arguments = (
+                {"arxiv_id": "2301.07041v2"}
+                if media_type.endswith("arxiv")
+                else {"doi": "10.1000/policy"}
+            )
     app = create_app()
     token = c.research.issue_grant(
         project_id=101, task_id=1001, agent_id="fixture", permissions=set(PERMISSIONS)
