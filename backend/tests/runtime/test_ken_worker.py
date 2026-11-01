@@ -4,12 +4,171 @@ Published Ken itself is checked separately by the explicit security probe.
 """
 
 import json
+import os
 import socket
 import subprocess
 import sys
 import venv
 
 import pytest
+
+
+def test_cli_mounts_the_explicit_pinned_model_cache(ken_installation, tmp_path):
+    import hashlib
+
+    package = next(ken_installation.parent.parent.glob("lib/python*/site-packages/ken"))
+    (package / "model_assets.py").write_text(
+        "class ModelAssets:\n"
+        "    def __init__(self, value): self.value=value\n"
+        "    @classmethod\n"
+        "    def from_dict(cls, value): return cls(value)\n"
+        "    def to_dict(self): return self.value\n"
+    )
+    folder = package / "embedder/data"
+    folder.mkdir(parents=True)
+    revision = "1" * 40
+    content = b"REGISTERED_PUBLIC_BYTES"
+    (folder / "potion-code-16M-v2.json").write_text(
+        json.dumps(
+            {
+                "source": {
+                    "model_id": "owner/public",
+                    "revision": revision,
+                    "artifacts": {
+                        "model.bin": {
+                            "bytes": len(content),
+                            "sha256": hashlib.sha256(content).hexdigest(),
+                        }
+                    },
+                }
+            }
+        )
+    )
+    cache = tmp_path / "cache"
+    model = cache / "models--owner--public/snapshots" / revision / "model.bin"
+    model.parent.mkdir(parents=True)
+    model.write_bytes(content)
+    (cache / "token").write_text("PRIVATE_TOKEN_MUST_NOT_BE_MOUNTED")
+    ken_installation.write_text(
+        "#!"
+        + str(ken_installation.parent / "python")
+        + "\nfrom pathlib import Path\n"
+        + "print(Path('/opt/researcher-ken-models/hub/models--owner--public/snapshots/"
+        + revision
+        + "/model.bin').read_text())\n"
+        + "assert not Path('/opt/researcher-ken-models/hub/token').exists()\n"
+    )
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-I",
+            "-m",
+            "backend.runtime.ken_worker",
+            "--ken-command",
+            str(ken_installation),
+            "--workspace",
+            str(workspace),
+            "--model-cache",
+            str(cache),
+        ],
+        capture_output=True,
+        text=True,
+        timeout=10,
+        check=False,
+        env={"PATH": os.defpath, "LANG": "C.UTF-8"},
+    )
+    assert result.returncode == 0, result.stderr
+    assert result.stdout == "REGISTERED_PUBLIC_BYTES\n"
+    assert "PRIVATE_TOKEN" not in result.stdout
+
+
+def test_replaced_workspace_is_rejected_before_ken_state_is_created(
+    ken_installation, tmp_path
+):
+    from backend.runtime.ken_worker import KenInstallation, worker_process
+
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    original = workspace.stat()
+    workspace.rename(tmp_path / "old-workspace")
+    workspace.mkdir()
+    (workspace / "sentinel").write_text("OTHER_PROJECT")
+    with (
+        pytest.raises(ValueError, match="identity"),
+        worker_process(
+            KenInstallation.inspect(ken_installation),
+            workspace=workspace,
+            expected_identity=(original.st_dev, original.st_ino),
+        ),
+    ):
+        pass
+    assert [path.name for path in workspace.iterdir()] == ["sentinel"]
+
+
+def test_workspace_fd_pins_the_admitted_source_after_a_path_swap(
+    ken_installation, tmp_path
+):
+    from backend.runtime.ken_worker import KenInstallation, worker_process
+
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    (workspace / "source.py").write_text("ADMITTED_SOURCE")
+    identity = workspace.stat()
+    with worker_process(
+        KenInstallation.inspect(ken_installation),
+        workspace=workspace,
+        expected_identity=(identity.st_dev, identity.st_ino),
+    ) as launch:
+        (workspace / ".ken/fixture-port").write_text("1")
+        workspace.rename(tmp_path / "admitted-before-swap")
+        workspace.mkdir()
+        (workspace / "source.py").write_text("OTHER_PROJECT")
+        result = subprocess.run(
+            launch.command,
+            env=launch.env,
+            pass_fds=launch.pass_fds,
+            capture_output=True,
+            text=True,
+            timeout=10,
+            check=False,
+        )
+    assert result.returncode == 0, result.stderr
+    assert json.loads(result.stdout)["inside"] == "ADMITTED_SOURCE"
+    assert (workspace / "source.py").read_text() == "OTHER_PROJECT"
+    assert not (workspace / ".ken").exists()
+
+
+def test_cli_rejects_incomplete_identity_before_creating_state(
+    ken_installation, tmp_path
+):
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-I",
+            "-m",
+            "backend.runtime.ken_worker",
+            "--ken-command",
+            str(ken_installation),
+            "--workspace",
+            str(workspace),
+            "--model-cache",
+            str(tmp_path / "cache"),
+            "--expected-inode",
+            "1",
+        ],
+        capture_output=True,
+        text=True,
+        timeout=10,
+        check=False,
+        env={"PATH": os.defpath, "LANG": "C.UTF-8"},
+    )
+    assert result.returncode == 2
+    assert "provided together" in result.stderr
+    assert not (workspace / ".ken").exists()
 
 
 @pytest.fixture

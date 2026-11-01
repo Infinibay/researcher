@@ -1,0 +1,31 @@
+{
+  "wheel_sha256": "63ee5da5d6a1621bceb56ef72e628b36c6bb793f89cbb4e9d29f0c04316187b5",
+  "source_count": 24,
+  "all_source_bytes_equal": true,
+  "sources": [
+    "backend/runtime/__init__.py",
+    "backend/runtime/analysis_tools.py",
+    "backend/runtime/business_mediation.py",
+    "backend/runtime/codex_rpc.py",
+    "backend/runtime/codex_session.py",
+    "backend/runtime/command_jobs.py",
+    "backend/runtime/command_output.py",
+    "backend/runtime/contracts.py",
+    "backend/runtime/ken_worker.py",
+    "backend/runtime/live_grants.py",
+    "backend/runtime/native_commands.py",
+    "backend/runtime/native_inference.py",
+    "backend/runtime/peer_guard.py",
+    "backend/runtime/peer_payload.py",
+    "backend/runtime/peer_process.py",
+    "backend/runtime/peer_registry.py",
+    "backend/runtime/questions.py",
+    "backend/runtime/recovery.py",
+    "backend/runtime/run_inputs.py",
+    "backend/runtime/service.py",
+    "backend/runtime/sqlite_questions.py",
+    "backend/runtime/sqlite_runs.py",
+    "backend/runtime/views.py",
+    "backend/runtime/workspaces.py"
+  ]
+}

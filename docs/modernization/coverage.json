@@ -1630,6 +1630,25 @@
         "Broader production Stop/correction/unknown-receipt cases and migration of legacy tool consumers.",
         "Full modernization scope is unchanged; writable workspaces/acceptance and other tools/engine/prompts/UI remain."
       ]
+    },
+    "ken_admitted_identity": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/ken-admitted-identity.md",
+        "docs/architecture/workspace-authority-design.md",
+        "docs/modernization/ken-identity-evidence.json",
+        "docs/modernization/ken-identity-results.json",
+        "docs/modernization/ken-identity-native.json",
+        "docs/modernization/ken-identity-packaging.json",
+        "backend/tests/runtime/test_ken_worker.py",
+        "backend/tests/runtime/test_native_factory.py",
+        "evals/runtime/run_ken_identity.py"
+      ],
+      "remaining": [
+        "Global authority/bootstrap/duplicate durable namespace identity before G and full lifecycle/restore handoff.",
+        "Pinned filesystem views for all mutable actors, alias/topology policy and migration of retained consumers.",
+        "Full prompt/human/UI/tool/engine modernization and final independent whole-branch review."
+      ]
     }
   }
 }

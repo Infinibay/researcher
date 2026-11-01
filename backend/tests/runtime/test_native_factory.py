@@ -75,6 +75,57 @@ def factory(setup):
     )
 
 
+async def test_factory_passes_current_directory_identity_to_required_ken_worker(
+    native_factory_setup,
+):
+    c = native_factory_setup
+    info = c.workspace.stat()
+    async with factory(c).open(
+        workspace=c.workspace, tool_token="HOST_ONLY_GRANT"
+    ) as session:
+        config = await session.native.rpc.request(
+            "config/read", {"cwd": str(c.workspace), "includeLayers": False}
+        )
+        args = config["config"]["mcp_servers"]["researcher_ken"]["args"]
+        assert args[args.index("--expected-device") + 1] == str(info.st_dev)
+        assert args[args.index("--expected-inode") + 1] == str(info.st_ino)
+
+
+async def test_factory_rejects_replaced_admitted_workspace_before_starting_peers(
+    native_factory_setup, coordination
+):
+    import time
+
+    from backend.runtime.contracts import WorkspaceChanged
+    from backend.runtime.peer_registry import AttemptPeers
+    from backend.runtime.workspaces import WorkspaceRegistry
+
+    c = native_factory_setup
+    coordination.now[0] = time.time()
+    coordination.conn.execute(
+        "INSERT INTO repositories(id,project_id,name,local_path) VALUES(11,101,'source',?)",
+        (str(c.workspace),),
+    )
+    coordination.conn.commit()
+    binding = WorkspaceRegistry(coordination.database, c.tmp).bind(101, 11)
+    run = coordination.store.admit(coordination.spec, binding=binding)
+    _lease, peers = AttemptPeers.claim(
+        coordination.store, 101, run.run_id, "owner", lease_seconds=120
+    )
+    c.workspace.rename(c.tmp / "old-admitted-source")
+    c.workspace.mkdir()
+    try:
+        with pytest.raises(WorkspaceChanged):
+            async with factory(c).open(
+                workspace=c.workspace, tool_token="HOST_ONLY_GRANT", peer_owner=peers
+            ):
+                pass
+        assert not (c.managed / "requests.jsonl").exists()
+        assert not (c.workspace / ".ken").exists()
+    finally:
+        await peers.aclose()
+
+
 async def test_model_peer_keeps_managed_auth_but_never_business_or_api_key_env(
     native_factory_setup, monkeypatch
 ):

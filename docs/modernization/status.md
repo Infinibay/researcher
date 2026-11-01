@@ -18,6 +18,8 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 4. **Ken y suscripción:** Ken publicado ken-rank 0.18.0 obligatorio en el camino nuevo,
    integrado en procesos aislados y probado realmente. Pruebas de inferencia por la
    suscripción, sin fallback silencioso a una API por uso. Falta migrar rutas auxiliares.
+   Ken comprueba la identidad admitida al abrir su fuente y el CLI monta el caché
+   público verificado. Búsqueda y lectura reales se comprobaron sin generación nueva.
 5. **Primer recorrido de investigación:** tarea → lectura de código con Ken/adjunto o
    web → fuente capturada → hallazgo provisional/cita → informe draft persistido y
    consultable por API. No equivale a disponer de todas las capacidades de desarrollo.
@@ -93,9 +95,10 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 
 ## Verificación más reciente
 
-- Suite completa:1241 casos;1138 pasan,100 fallan con las mismas identidades de la
+- Suite completa:1247 casos;1144 pasan,100 fallan con las mismas identidades de la
   línea base y 3 se omiten. La suite global sigue roja.
-- Runtime:313 pasan. Frontend:28 pruebas aprobadas y compilación TypeScript/Vite.
+- Runtime:319 pasan. Frontend sin cambios:su última verificación registró28 pruebas
+  aprobadas y compilación TypeScript/Vite.
 - Ensayo real de continuidad:2 turnos por suscripción, Ken real,4 peers cerrados,
   fuentes sin editar,2 informes draft y ninguna aceptación/publicación implícita.
 - Ensayo de análisis:1 turno adicional por suscripción, Ken real, catálogo de 15
@@ -108,7 +111,7 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 - QA visual:pendiente por navegador no disponible; sin resultado de comprensión humana.
 
 Evidencia actual: [entrada/continuidad](run-input-evidence.json),
-[resultados](owner-command-results.json), [consulta del propietario](owner-command-evidence.json),
+[resultados](ken-identity-results.json), [identidad de Ken](ken-identity-evidence.json), [consulta del propietario](owner-command-evidence.json),
 [análisis](analysis-evidence.json),
 [ensayo de análisis](analysis-live.json), [continuidad](run-input-live.json),
 [migración](run-input-migration.json), [cobertura](coverage.json),

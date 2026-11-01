@@ -26,6 +26,7 @@ from backend.runtime.codex_session import (
     ExecutionLimits,
     NativeInputRequired,
 )
+from backend.runtime.contracts import WorkspaceChanged
 from backend.runtime.native_commands import (
     DISABLED,
     VERSION,
@@ -212,6 +213,25 @@ class CodexRuntime:
                 "Native resume requires a recorded tool catalog and reconciliation"
             )
         root = workspace.resolve(strict=True)
+        info = root.stat()
+        expected_identity = (info.st_dev, info.st_ino)
+        if peer_owner is not None:
+            binding = await asyncio.to_thread(
+                peer_owner.registry.runs.workspace_binding,
+                peer_owner.lease.project_id,
+                peer_owner.lease.run_id,
+            )
+            # Product admissions have a durable binding. Older host diagnostics
+            # without one still pin the directory chosen at factory entry.
+            if binding is not None:
+                if root != Path(binding.workspace) or expected_identity != (
+                    binding.device,
+                    binding.inode,
+                ):
+                    raise WorkspaceChanged(
+                        "Admitted directory changed before native startup"
+                    )
+                expected_identity = (binding.device, binding.inode)
         managed = self.managed_home.resolve(strict=True)
         control = self.control_root.absolute()
         if (
@@ -313,6 +333,10 @@ class CodexRuntime:
                         str(root),
                         "--model-cache",
                         str(self.model_cache.resolve()),
+                        "--expected-device",
+                        str(expected_identity[0]),
+                        "--expected-inode",
+                        str(expected_identity[1]),
                     ]
                     shell_environment = {
                         "PATH": os.defpath,

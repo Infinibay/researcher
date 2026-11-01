@@ -95,6 +95,7 @@ def worker_process(
     workspace: Path,
     mode: str = "mcp",
     model_cache: Path | None = None,
+    expected_identity: tuple[int, int] | None = None,
 ):
     """Pin source/state directories before mounting; only .ken is writable.
 
@@ -105,6 +106,14 @@ def worker_process(
     """
     if mode not in {"mcp", "prepare"}:
         raise ValueError("Unknown Ken worker operation")
+    if expected_identity is not None and (
+        not isinstance(expected_identity, tuple)
+        or len(expected_identity) != 2
+        or any(type(value) is not int for value in expected_identity)
+        or expected_identity[0] < 0
+        or expected_identity[1] <= 0
+    ):
+        raise ValueError("Expected a valid workspace device/inode identity")
     root = workspace.resolve(strict=True)
     for tool in (installation.tool_root, installation.python_root):
         if tool.is_relative_to(root):
@@ -119,6 +128,12 @@ def worker_process(
     state_fd = None
     asset_handles = ExitStack()
     try:
+        opened = os.fstat(root_fd)
+        if (
+            expected_identity is not None
+            and (opened.st_dev, opened.st_ino) != expected_identity
+        ):
+            raise ValueError("Workspace identity changed before opening Ken source")
         try:
             os.mkdir(".ken", mode=0o700, dir_fd=root_fd)
         except FileExistsError:
@@ -263,12 +278,23 @@ def main():
     parser.add_argument("--workspace", type=Path, required=True)
     parser.add_argument("--prepare", action="store_true")
     parser.add_argument("--model-cache", type=Path, required=True)
+    parser.add_argument("--expected-device", type=int)
+    parser.add_argument("--expected-inode", type=int)
     args = parser.parse_args()
+    if (args.expected_device is None) != (args.expected_inode is None):
+        parser.error("Expected device and inode must be provided together")
+    expected_identity = (
+        (args.expected_device, args.expected_inode)
+        if args.expected_device is not None
+        else None
+    )
     installation = KenInstallation.inspect(args.ken_command)
     with worker_process(
         installation,
         workspace=args.workspace,
         mode="prepare" if args.prepare else "mcp",
+        model_cache=args.model_cache,
+        expected_identity=expected_identity,
     ) as launch:
         for descriptor in launch.pass_fds:
             os.set_inheritable(descriptor, True)

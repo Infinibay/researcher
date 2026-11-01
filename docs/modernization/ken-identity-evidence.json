@@ -1,0 +1,36 @@
+{
+  "base_commit": "ae749ae",
+  "scope": "Admitted source identity at Ken FD boundary and actual CLI cache forwarding; global workspace authority still pending",
+  "generation_calls": 0,
+  "image_calls": 0,
+  "source_sha256": {
+    "backend/runtime/ken_worker.py": "13955e09aa7b0318c1144ae56c695624f74b92f491c9b23972807df52ec72bff",
+    "backend/runtime/native_inference.py": "2a656194cc7f062a3f604559077414594e8fcd41edc0d2e9a6fd60ff30b9a08b",
+    "backend/tests/runtime/test_ken_worker.py": "ab2dd4228261a75fc64e95e1cb84472f4eb4ae6de208f36c9df4ca10cc651a4c",
+    "backend/tests/runtime/test_native_factory.py": "630af3b7f41ef007b04f1b79f3f3fb671f4b325cd7946967ab4fb347d520631b",
+    "evals/runtime/run_ken_identity.py": "53803d954f214efc1b881dfdd423e9db5e341238f31d84bef10466f3954b146d"
+  },
+  "log_sha256": {
+    "ken-identity-red.log": "b57c4fb41a04632c3fa4f1d3cb33312ecefc7f9a1b3b067a0a18b2c0b95ef815",
+    "ken-factory-identity-red.log": "1bae3eadf39036b009ffac8ced56f90d9afca3dee4bcc8c0a89c48e9c07f681e",
+    "ken-identity-green.log": "44725e52c6e9a5f53fc82fb3d9ce903c11fc1580e2f57db1d1e193b50cdb8cda",
+    "ken-identity-full.log": "9049d6d0d15cc7a762662bd8a14ef2d92b19e76ee4c0f13c0dec50d25ca8975e",
+    "ken-identity-full.xml": "43b9681d8351539a2723d4898cd266ea471343dcb74e83230257e6fc7b0a6f77",
+    "ken-identity-native.log": "8452a7e5843eb13cc2cab8193ee2cd28755264525a7c9e4eed17cb55b920ddee",
+    "ken-identity-native-final.log": "9dfdd8755135154e7c0af94d4d18ca321ec330c5c7dc9c1956fca7f63a928978",
+    "ken-identity-lint-verified.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "ken-identity-wheel.log": "3f47fc639a7bcdb18d08eaad8fcb0be6e463cb9418e434d82ae565c4fd81dc06"
+  },
+  "reports": [
+    "ken-identity-results.json",
+    "ken-identity-native.json",
+    "ken-identity-packaging.json"
+  ],
+  "limits": [
+    "A pinned directory is not frozen file content; global workspace/DB ownership, mutable views, aliases and restore/handoff remain unimplemented.",
+    "Fresh independent architectural review is source-based, not a tested global authority.",
+    "Playwright/axe are explicitly required by the user-authorized plan section3 line81. An unnecessary confirmation request was corrected; browser setup/acceptance had not run at this Ken checkpoint.",
+    "CUA visual acceptance remains unavailable; all12 routes remain unaccepted.",
+    "All legacy consumers/tools/engine/prompts/UI and100 baseline failures remain within the full goal."
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "model_turns_submitted": 0,
+  "image_calls": 0,
+  "cli_prepare": "passed",
+  "ken_find": "passed",
+  "ken_read": "passed",
+  "catalog_count": 15,
+  "model": "gpt-6.1-sol",
+  "native_turns_sent": 0,
+  "all_registered_peers_closed": true,
+  "source_files_unchanged": true,
+  "source_sha256": {
+    "invoice.py": "7724defe91f93084f4db284b91aa26bcc9192d2d64e35fc2b69b02082e607625",
+    "test_invoice.py": "76482120c2dd0104c525493a03e733a7372c85e211e59faa8f7abf388aa79e16"
+  },
+  "trial": "ken-identity-cc7e897d",
+  "raw_evidence_sha256": "4b0021747b336e2a76c666b0fbbcf0d034ac58246553d8a18445974a2764431c",
+  "tool_result_sha256": {
+    "ken_find": "a9294350707f55419ec37e23e382e8637a1d11841ae403884bfd21281523047f",
+    "ken_read": "1e64dfa76101701cb853073d2cf0e6259a4665e1184e6b1f05d972dd56cc5e1a"
+  },
+  "is_error_false_verified": true,
+  "fixture_tests_executed": false,
+  "first_probe": {
+    "trial": "ken-identity-d80bc1d2",
+    "outcome": "preflight rejected unrelated ancestor MCP",
+    "new_model_turns": 0,
+    "cleanup_sha256": "59124c2bcf2b9e78eda9fa1ed39c1c0f497ab55e23c2e167e2485fab90e60975"
+  }
+}

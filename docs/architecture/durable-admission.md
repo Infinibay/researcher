@@ -24,6 +24,10 @@ detecta cambios observables de identidad bajo el mismo path; no mantiene abierto
 un descriptor del directorio ni demuestra una generación global del filesystem.
 No congela su contenido ni elimina todas las carreras entre comprobarlo y usarlo.
 
+El [worker de Ken](ken-admitted-identity.md) comprueba además esa identidad sobre
+su FD antes de crear estado y monta la fuente por descriptor. Es una frontera
+concreta; no sustituye la propiedad/vista global de todos los actores.
+
 ## Releer y comenzar son acciones distintas
 
 | Acción del propietario | Comportamiento |

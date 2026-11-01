@@ -1325,3 +1325,137 @@ controls and verify all12. Final fresh independent whole-branch review before
 integration. Model remains global host JSON/restart, with no per-agent/project/web
 selector. No push, merge or deployment. Do not mark goal complete/blocked while
 meaningful authorized work remains.
+
+
+## Ken admitted identity and CLI cache — base ae749ae
+
+- Previous goal turn was implementation progress (ae749ae). Fresh independent
+  architectural review read current ownership/workspace/gate sources with clean
+  context. Saved workspace-authority-design.md: global publication before G,
+  recovery independent of a lost source DB, durable generation/bootstrap/restore
+  and actors outside namespaces remain obligations, not implemented guarantees.
+  A single global mutable concession is a proposed throughput tradeoff, not a
+  silently substituted concurrency requirement. No editable capability enabled.
+- Immediate source-boundary work follows a demonstrated gap: Ken main accepted
+  --model-cache but dropped it when calling worker_process. Direct helper tests
+  and file reads missed this; new actual CLI test observed missing mounted bytes.
+  main now forwards the cache, preserving pinned public asset hashes/no-token mount.
+- Four new worker/CLI and two factory cases were RED, then GREEN. Native factory
+  uses durable source identity when available; diagnostics without binding pin the
+  current source at entry. Worker fstat must match before mkdir/open .ken. Rename
+  after opening keeps the admitted FD view; replacement beforehand is rejected
+  without state in the substitute. This is not global ownership/content freezing
+  or a pinned view for all command/development actors.
+- Full suite1247:1144 passed, identical100 baseline failure identities,3 skipped,
+  29 warnings. All319 runtime cases pass. Frontend unchanged; previous28/build
+  verification remains in owner-command evidence. All24 runtime wheel sources
+  match current bytes. Five source/test/eval files and nine logs bound by hashes.
+- Real CLI/native probe ken-identity-cc7e897d passes prepare, actual semantic
+  ken_find and ken_read with isError=false via Codex0.166.0/published Ken0.18.0.
+  Fifteen project tools, two registered peers closed, grant revoked, sources
+  unchanged, no inference dispatch/model turn/image call. Fixture tests were read,
+  not run. The diagnostic run retires failed deliberately; it is not a proposal.
+- First probe d80bc1d2 lacked its own Git root and inherited an unrelated ancestor
+  MCP from the managed worktree. Production preflight refused before thread/turn.
+  Retained the guard, isolated the fixture Git repo and reran the no-generation
+  diagnostic. Original failure evidence kept; its closed attempt was explicitly
+  reconciled through RunRecovery, no replay. Direct metadata probes also confirmed
+  config-table replacement must not be assumed to disable inherited servers.
+- Product Design audit skill requires asking before Playwright CLI if unchosen.
+  An async question was initially asked, then inspection of the actual authorized
+  plan found section3 line81 explicitly requires Playwright and axe. User's full
+  implementation authorization already covers this. Corrected the extra question
+  in commentary; no answer is needed to proceed. No browser/package was installed
+  at this checkpoint. npm metadata verified @playwright/test1.64.1 requires Node>=20;
+  existing pinned Node24 is compatible. CUA host unavailable is an observation,
+  not a permanent blocker on testing through the authorized test framework.
+- All observed metadata/test/build/probe handles are terminal. No new inference,
+  browser or server intentionally left. Original user checkout/instruction copies
+  untouched. No push, merge or deployment.
+
+## Next brief after Ken CLI identity
+
+Continue FULL modernization. Proceed with Playwright+axe/browser installation under
+plan section3 (already authorized; do not ask again merely because CUA is down).
+Use actual current screenshots/interactions and compare with selected Tasks/Chat
+concepts before asserting visual acceptance. No test browser installed yet; CUA is
+unavailable. Eight visual assets/2 pilots exist,0/12 routes accepted. Still need
+30 desktop+10 mobile concepts,10 other routes/shared controls and all12 acceptance.
+Do not redo frozen input/continuity, owner output windows or Ken CLI fixes. New
+CLI always forwards cache and checks admitted FD identity; it does not pin all
+native filesystem views. Implement global workspace authority/bootstrap/generations,
+duplicated namespace publication before G and physical closure/restore handoff
+before mutable tools; read clean-context review in workspace-authority-design.md.
+All71 tools/11 categories, legacy engine/roles/flows/autonomy/coordination, exact Git
+candidate review/CI acceptance, typed edits/context dependencies/checkpoints,
+external effects, lifecycle/budgets, historical backup/restore/bootstrap, subscription-
+only auxiliary calls, complete prompt/book-skill/held-out/human communication work,
+100 baseline failures and final independent whole-branch review remain. Model is
+host-global JSON/restart, no per-agent/project/web selector. Full goal stays active.
+
+
+## Ken admitted identity and CLI cache — base ae749ae
+
+- Previous goal turn was implementation progress (ae749ae). Fresh independent
+  architectural review read current ownership/workspace/gate sources with clean
+  context. Saved workspace-authority-design.md: global publication before G,
+  recovery independent of a lost source DB, durable generation/bootstrap/restore
+  and actors outside namespaces remain obligations, not implemented guarantees.
+  A single global mutable concession is a proposed throughput tradeoff, not a
+  silently substituted concurrency requirement. No editable capability enabled.
+- Immediate source-boundary work follows a demonstrated gap: Ken main accepted
+  --model-cache but dropped it when calling worker_process. Direct helper tests
+  and file reads missed this; new actual CLI test observed missing mounted bytes.
+  main now forwards the cache, preserving pinned public asset hashes/no-token mount.
+- Four new worker/CLI and two factory cases were RED, then GREEN. Native factory
+  uses durable source identity when available; diagnostics without binding pin the
+  current source at entry. Worker fstat must match before mkdir/open .ken. Rename
+  after opening keeps the admitted FD view; replacement beforehand is rejected
+  without state in the substitute. This is not global ownership/content freezing
+  or a pinned view for all command/development actors.
+- Full suite1247:1144 passed, identical100 baseline failure identities,3 skipped,
+  29 warnings. All319 runtime cases pass. Frontend unchanged; previous28/build
+  verification remains in owner-command evidence. All24 runtime wheel sources
+  match current bytes. Five source/test/eval files and nine logs bound by hashes.
+- Real CLI/native probe ken-identity-cc7e897d passes prepare, actual semantic
+  ken_find and ken_read with isError=false via Codex0.166.0/published Ken0.18.0.
+  Fifteen project tools, two registered peers closed, grant revoked, sources
+  unchanged, no inference dispatch/model turn/image call. Fixture tests were read,
+  not run. The diagnostic run retires failed deliberately; it is not a proposal.
+- First probe d80bc1d2 lacked its own Git root and inherited an unrelated ancestor
+  MCP from the managed worktree. Production preflight refused before thread/turn.
+  Retained the guard, isolated the fixture Git repo and reran the no-generation
+  diagnostic. Original failure evidence kept; its closed attempt was explicitly
+  reconciled through RunRecovery, no replay. Direct metadata probes also confirmed
+  config-table replacement must not be assumed to disable inherited servers.
+- Product Design audit skill requires asking before Playwright CLI if unchosen.
+  An async question was initially asked, then inspection of the actual authorized
+  plan found section3 line81 explicitly requires Playwright and axe. User's full
+  implementation authorization already covers this. Corrected the extra question
+  in commentary; no answer is needed to proceed. No browser/package was installed
+  at this checkpoint. npm metadata verified @playwright/test1.64.1 requires Node>=20;
+  existing pinned Node24 is compatible. CUA host unavailable is an observation,
+  not a permanent blocker on testing through the authorized test framework.
+- All observed metadata/test/build/probe handles are terminal. No new inference,
+  browser or server intentionally left. Original user checkout/instruction copies
+  untouched. No push, merge or deployment.
+
+## Next brief after Ken CLI identity
+
+Continue FULL modernization. Proceed with Playwright+axe/browser installation under
+plan section3 (already authorized; do not ask again merely because CUA is down).
+Use actual current screenshots/interactions and compare with selected Tasks/Chat
+concepts before asserting visual acceptance. No test browser installed yet; CUA is
+unavailable. Eight visual assets/2 pilots exist,0/12 routes accepted. Still need
+30 desktop+10 mobile concepts,10 other routes/shared controls and all12 acceptance.
+Do not redo frozen input/continuity, owner output windows or Ken CLI fixes. New
+CLI always forwards cache and checks admitted FD identity; it does not pin all
+native filesystem views. Implement global workspace authority/bootstrap/generations,
+duplicated namespace publication before G and physical closure/restore handoff
+before mutable tools; read clean-context review in workspace-authority-design.md.
+All71 tools/11 categories, legacy engine/roles/flows/autonomy/coordination, exact Git
+candidate review/CI acceptance, typed edits/context dependencies/checkpoints,
+external effects, lifecycle/budgets, historical backup/restore/bootstrap, subscription-
+only auxiliary calls, complete prompt/book-skill/held-out/human communication work,
+100 baseline failures and final independent whole-branch review remain. Model is
+host-global JSON/restart, no per-agent/project/web selector. Full goal stays active.
