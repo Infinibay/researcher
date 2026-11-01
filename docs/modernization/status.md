@@ -44,6 +44,12 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    recuperador separado cerró un hijo vivo tras SIGKILL antes de publicar PIDs y
    pérdida de la DB original. Es un ensayo de constructor de confianza; faltan
    broker dueño de G y perfil que impida migración fuera del dominio.
+   Ese primer broker interno ya compone reserva global, publicación, bind local
+   y G para análisis Python readonly. Conserva la supervisión al cerrar el cliente,
+   revoca antes de esperar SQL y bloquea reactivar el intento retirado con una lease
+   local antigua. Hay recuperación real antes/después de G sin DB original y
+   defensa del perfil frente a sockets/controles y forks. Falta adoptarlo en los
+   lanzadores productivos, perfiles Codex/Ken/negocio/desarrollo y aprovisionamiento.
 7. **Contexto y procedencia:** versiones al corregir o cambiar trece entradas de tarea;
    retiro de autoridad antigua; respuesta asociada a pregunta/versión; repositorio
    admitido inmutable y comienzo de cola explícito. Registro exacto de la entrada
@@ -110,9 +116,12 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 
 ## Verificación más reciente
 
-- Suite completa:1327 casos;1224 pasan,100 fallan con las mismas identidades de la
+- Suite completa:1343 casos;1240 pasan,100 fallan con las mismas identidades de la
   línea base y 3 se omiten. La suite global sigue roja.
-- Runtime:394 pasan. El dominio Linux añade16 casos reales; incluye recuperación
+- Runtime:410 pasan;57 pruebas dirigidas en el checkpoint del broker,15 de broker
+  y17 de dominio/asset sellado. Recuperación en tres fronteras con SIGKILL y sin DB
+  original, dos DBs sobre fuente idéntica y límite de forks comprobados.
+  El checkpoint del dominio Linux añadió16 casos reales; incluye recuperación
   antes de publicación, arranque congelado, FDs, señales y rechazo del propio cgroup.
   El checkpoint previo verificó69 pruebas dirigidas y150 repeticiones de peers.
   El registro de autoridad/recuperación añade44 casos. Se corrigieron metadatos
@@ -139,8 +148,12 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
   siguen pendientes;0/12 rutas aceptadas. Dependencias:18 avisos npm preexistentes
   (5 bajos,3 moderados,10 altos), sin nuevos paquetes vulnerables por Playwright/axe.
 
-Evidencia actual: [dominio Linux](execution-domain-evidence.json),
-[resultados actuales](execution-domain-results.json),
+Evidencia actual: [broker/gate](peer-broker-evidence.json),
+[resultados actuales](peer-broker-results.json),
+[contrato implementado y pendientes](../architecture/peer-broker.md),
+[paquete y ensayo aislado](peer-broker-packaging.json),
+[dominio Linux](execution-domain-evidence.json),
+[resultados del dominio](execution-domain-results.json),
 [contrato y límites](../architecture/execution-domain.md),
 [paquete nativo](execution-domain-packaging.json),
 [registro de autoridad](authority-journal-evidence.json),

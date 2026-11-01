@@ -9,6 +9,7 @@
 #include <limits.h>
 #include <linux/close_range.h>
 #include <linux/magic.h>
+#include <linux/memfd.h>
 #include <linux/sched.h>
 #include <pthread.h>
 #include <signal.h>
@@ -340,10 +341,57 @@ static PyObject *validate(PyObject *self, PyObject *arg) {
   Py_RETURN_NONE;
 }
 
+static PyObject *sealed(PyObject *self, PyObject *arg) {
+  (void)self;
+  Py_buffer data;
+  if (PyObject_GetBuffer(arg, &data, PyBUF_CONTIG_RO) < 0)
+    return NULL;
+  if (data.len > 1024 * 1024) {
+    PyBuffer_Release(&data);
+    PyErr_SetString(PyExc_ValueError, "Trusted asset exceeds bounded format");
+    return NULL;
+  }
+  int fd = (int)syscall(SYS_memfd_create, "researcher-readonly-asset",
+                        MFD_CLOEXEC | MFD_ALLOW_SEALING);
+  int saved = errno;
+  if (fd < 0)
+    goto fail;
+  Py_ssize_t offset = 0;
+  while (offset < data.len) {
+    ssize_t n =
+        write(fd, (const char *)data.buf + offset, (size_t)(data.len - offset));
+    if (n < 0 && errno == EINTR)
+      continue;
+    if (n <= 0) {
+      saved = n < 0 ? errno : EIO;
+      goto fail;
+    }
+    offset += n;
+  }
+  if (lseek(fd, 0, SEEK_SET) < 0 ||
+      fcntl(fd, F_ADD_SEALS,
+            F_SEAL_WRITE | F_SEAL_GROW | F_SEAL_SHRINK | F_SEAL_SEAL) < 0) {
+    saved = errno;
+    goto fail;
+  }
+  PyBuffer_Release(&data);
+  PyObject *result = PyLong_FromLong(fd);
+  if (!result)
+    close(fd);
+  return result;
+fail:
+  PyBuffer_Release(&data);
+  if (fd >= 0)
+    close(fd);
+  errno = saved;
+  return PyErr_SetFromErrno(PyExc_OSError);
+}
+
 static PyMethodDef methods[] = {
     {"spawn", spawn, METH_VARARGS,
      "Create directly in a cgroup; explicit argv/env/FD map."},
     {"validate", validate, METH_O, "Reject non-cgroup2 descriptors."},
+    {"sealed", sealed, METH_O, "Copy and seal a bounded trusted asset."},
     {NULL, NULL, 0, NULL}};
 static struct PyModuleDef module = {PyModuleDef_HEAD_INIT,
                                     "_domain_spawn",

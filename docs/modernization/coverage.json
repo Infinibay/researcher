@@ -1823,6 +1823,40 @@
         "Cross-database ownership/aliases, restore/handoff and budget conservation; full engine/tool/prompt/human/design acceptance.",
         "Platform/ABI/CI and clean full-product installation/packaging;100 baseline failures and final independent whole-branch review."
       ]
+    },
+    "peer_broker_gate": {
+      "status": "in_progress",
+      "evidence": [
+        "backend/runtime/peer_broker.py",
+        "backend/runtime/broker_profile.py",
+        "backend/runtime/execution_domain.py",
+        "backend/runtime/peer_registry.py",
+        "backend/tests/runtime/test_peer_broker.py",
+        "backend/tests/runtime/test_peer_broker_boundaries.py",
+        "backend/tests/runtime/fake_peer_broker.py",
+        "docs/architecture/peer-broker.md",
+        "docs/modernization/peer-broker-evidence.json",
+        "docs/modernization/peer-broker-results.json",
+        "docs/modernization/peer-broker-packaging.json"
+      ],
+      "implemented": [
+        "Actual real-journal global reserve, contained namespace birth, global identity publication, concrete source PeerRegistry bind and sole pre-start G decision in one host operation.",
+        "Source origin/attempt/fence/context/workspace binding, one global participating concession, persistent attempt reference that survives retirement and rejects old local lease in a fresh domain.",
+        "Same-key retry returns receipt only; changed code conflicts; post-G client transport copies cannot close broker pidfd/reaping ownership.",
+        "Physical revocation precedes blocked local bind or global SQL; lost post-G seal preserves observed send, crash dispatching preserves null and never replays.",
+        "Three real SIGKILL boundaries before global publication, before local bind and after G/before seal; separate process recovers using global journal only after original project DB loss. Live broker cannot be adopted.",
+        "Concrete sealed readonly stdlib capsule: cgroupfs/host PID roots/D-Bus paths hidden, source path/FD writes rejected, sockets/raw namespace/x32 controls denied and seccomp inherited by subprocesses.",
+        "Two independent real project DBs over the same physical source cannot hold concurrent participating concessions; original peer remains usable.",
+        "Private128 PID/512MiB/no-swap limits applied and actual fork pressure rejected below limit; all descendants closed.",
+        "Native sealed assets resist writes/truncation; this interpreter lacks os.memfd_create, so C provides sealed memfd instead of editable fallback.",
+        "Final wheel isolated -I -S import uses28 runtime Python sources/native bytes, real calculation137+63=200, receipt retry, domain retirement and stale-attempt rejection."
+      ],
+      "remaining": [
+        "External complete-domain origin/enrollment, authenticated deployment and producer migration; no genesis from absent state.",
+        "RuntimeService/native/Ken/business/development profile adoption, durable outputs and time/lease/control acceptance.",
+        "Managed parent/generation/removal-crash reconciliation, restore/handoff/alias and external budget acceptance.",
+        "All retained71 tools/11 categories, old engine/loop/autonomy/flows, prompt/human/design acceptance,100 baseline failures and final independent review."
+      ]
     }
   }
 }

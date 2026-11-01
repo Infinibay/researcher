@@ -417,3 +417,17 @@ def test_invalid_retirement_deadline_rejected_before_kernel_writes(
         with pytest.raises(ValueError):
             domain.retire(timeout=timeout)
         assert private_cgroup.exists()
+
+
+def test_native_assets_are_sealed_against_rewrite_and_resize():
+    from backend.runtime import _domain_spawn
+
+    fd = _domain_spawn.sealed(b"trusted capsule asset")
+    try:
+        with pytest.raises(PermissionError):
+            os.write(fd, b"changed")
+        with pytest.raises(PermissionError):
+            os.ftruncate(fd, 0)
+        assert os.read(fd, 100) == b"trusted capsule asset"
+    finally:
+        os.close(fd)

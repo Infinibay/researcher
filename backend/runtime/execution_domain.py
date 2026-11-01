@@ -194,7 +194,52 @@ class ExecutionDomain:
         finally:
             os.close(fd)
 
-    def spawn(self, argv, *, env=None):
+    def limit(self, *, pids, memory_bytes):
+        """Bound an empty delegated domain; missing controllers never fall back."""
+        if (
+            type(pids) is not int
+            or not 1 <= pids <= 1024
+            or type(memory_bytes) is not int
+            or not 64 * 1024**2 <= memory_bytes <= 8 * 1024**3
+        ):
+            raise ValueError("Invalid execution domain resource limits")
+        if self._pid != os.getpid():
+            raise DomainUncertain("Reopen execution domain after fork")
+        with self._lock:
+            self._check()
+            if (
+                self._retiring.is_set()
+                or "populated 0" not in self._read("cgroup.events").splitlines()
+            ):
+                raise DomainUncertain(
+                    "Only an empty admitted domain can configure limits"
+                )
+            for name, value in (
+                ("pids.max", pids),
+                ("memory.max", memory_bytes),
+                ("memory.swap.max", 0),
+            ):
+                fd = os.open(
+                    name, os.O_WRONLY | os.O_CLOEXEC | os.O_NOFOLLOW, dir_fd=self._fd
+                )
+                try:
+                    data = str(value).encode()
+                    if os.write(fd, data) != len(data) or self._read(
+                        name
+                    ).strip() != str(value):
+                        raise DomainUncertain(
+                            "Required execution limit was not applied"
+                        )
+                finally:
+                    os.close(fd)
+
+    def spawn(self, argv, *, env=None, pass_fds=()):
+        if not isinstance(pass_fds, tuple) or any(
+            type(fd) is not int or fd < 3 for fd in pass_fds
+        ):
+            raise ValueError(
+                "Explicit inherited descriptors must be a tuple of nonstandard FDs"
+            )
         if self._pid != os.getpid():
             raise DomainUncertain("Reopen execution domain after fork")
         with self._lock:
@@ -216,7 +261,12 @@ class ExecutionDomain:
                     self._fd,
                     argv,
                     environment,
-                    {0: input_read, 1: output_write, 2: error_write},
+                    {
+                        0: input_read,
+                        1: output_write,
+                        2: error_write,
+                        **{fd: fd for fd in pass_fds},
+                    },
                 )
                 child = ContainedChild(pid, pidfd, input_write, output_read, error_read)
             except BaseException:

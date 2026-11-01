@@ -123,6 +123,47 @@ class PeerRegistry:
             ).fetchone()
             return self.runs._binding_view(binding) if binding is not None else None
 
+    def admission(self, peer_id):
+        """Revalidate an original prepared peer; data alone never opens its gate."""
+        with self.runs._transaction() as conn:
+            peer = self._row(conn, peer_id)
+            self._check_origin(peer)
+            if peer["state"] != "prepared":
+                raise RunConflict("Peer is no longer prepared")
+            row, lease = self._lease(conn, peer)
+            self.runs._authority(conn, lease)
+            result = {
+                key: peer[key]
+                for key in ("database_identity", "attempt_id", "fence", "kind")
+            }
+            result.update(
+                project_id=row["project_id"],
+                task_id=row["task_id"],
+                context_version=lease.context_version,
+            )
+        result["binding"] = self.workspace_binding(peer_id)
+        return result
+
+    @staticmethod
+    def _lease(conn, peer):
+        row = conn.execute(
+            """SELECT r.*,a.id AS attempt_id,a.owner_id,a.lease_expires_at FROM runtime_runs r
+            JOIN runtime_attempts a ON a.run_id=r.id WHERE a.id=?""",
+            (peer["attempt_id"],),
+        ).fetchone()
+        lease = AttemptLease(
+            row["id"],
+            row["attempt_id"],
+            row["project_id"],
+            row["task_id"],
+            row["actor_id"],
+            row["context_version"],
+            row["owner_id"],
+            peer["fence"],
+            row["lease_expires_at"],
+        )
+        return row, lease
+
     def bind(self, peer_id, identity):
         # The bootstrap is still gated; capture again immediately before commit.
         if NamespaceIdentity.capture(identity.init_pid) != identity:
@@ -132,22 +173,7 @@ class PeerRegistry:
             self._check_origin(peer)
             if peer["state"] != "prepared":
                 raise RunConflict("Peer gate is no longer releasable")
-            row = conn.execute(
-                """SELECT r.*,a.id AS attempt_id,a.owner_id,a.lease_expires_at FROM runtime_runs r
-                JOIN runtime_attempts a ON a.run_id=r.id WHERE a.id=?""",
-                (peer["attempt_id"],),
-            ).fetchone()
-            lease = AttemptLease(
-                row["id"],
-                row["attempt_id"],
-                row["project_id"],
-                row["task_id"],
-                row["actor_id"],
-                row["context_version"],
-                row["owner_id"],
-                peer["fence"],
-                row["lease_expires_at"],
-            )
+            row, lease = self._lease(conn, peer)
             self.runs._authority(conn, lease)
             if (identity.boot_id, identity.observer_namespace) != (
                 peer["boot_id"],

@@ -1785,3 +1785,106 @@ dependency upgrades/18 npm advisories and100 baseline failures still required.
 Visual inventory unchanged6/36 desktop+2/12 mobile,2 pilots,0/12 accepted; remaining
 30+10 concepts/10 routes and all12 state/accessibility/human acceptance remain.
 Final fresh independent whole-branch review required; full goal active, no push/merge/deploy.
+
+
+## Participating peer broker and concrete analysis gate — base 9b352c8
+
+- Previous turn was progress:9b352c8 implemented contained kernel birth/retirement.
+  Revalidated tracked clean state and next brief; retained complete plan. This turn
+  implements the first actual host run_peer composition, not more enum-only states.
+- PeerBroker owns witnessed reserve→contained birth→global namespace publication→
+  concrete PeerRegistry bind→dispatch intent→G decision. Sources bind original
+  physical DB/attempt/fence/context/workspace; global active concession and monotonic
+  fence serialize participating brokers. One externally supplied domain per attempt;
+  no origin/enrollment, genesis or root creation inferred from an empty path.
+- Extracted PeerRegistry lease lookup shared by admission/bind, retaining actual
+  origin/authority checks. Local receipt booleans are not accepted as bind proof.
+  ExecutionDomain now supports explicit auxiliary FDs and required resource limits.
+- Concrete readonly stdlib AnalysisCapsule: minimal mounted runtime, pinned RO source,
+  private PID/cgroup/network namespaces, no host HOME/control/sysfs/session bus,
+  sealed gate/BPF assets. This interpreter lacks os.memfd_create (four real cases RED);
+  C helper now provides bounded sealed memfd, verified rewrite/resize rejection RED→GREEN.
+  Native/compiled source remains host infrastructure, never an LLM tool/grant issuer.
+- Real global/local/G order, same-key receipt-only retry and changed-intent conflict
+  pass. Actual revocation during blocked local bind closes/removes domain before bind
+  resumes. G shares only a short decision lock with withdrawal; no long SQL wait in
+  that lock. Client only receives post-G data copies; broker retains original pidfd/
+  reaping. Client-close test RED exposed closing owner pidfd; transport separation GREEN.
+- Global SQL contention test RED exposed journal.load before physical Stop. Move
+  physical closure first; busy durable write leaves live withdrawal + cached physical
+  proof and no global release, then persistence retries without replay. Post-G seal
+  test RED exposed false gate_sent=False. Dispatch intent now stores null; live write
+  observation may later persist true, crash unknown stays null. Never resend G to learn.
+- Live-owner recovery test RED: new recovery requires original owner pidfd/ticks to
+  prove terminal/replaced; insufficient visibility stays unknown. Three actual broker
+  SIGKILL phases now pass: before global PID publication, before local bind, after G
+  before seal (payload printed before crash). Separate process recovers from global
+  journal after deleting original source DB; false vs null retained, no new process/G.
+- Raw syscall test RED proved initial socket-only filter allowed unshare(0) and clone3.
+  Deny namespace/mount/control calls and alternate x32 ABI. Payload clone3 returns
+  ENOSYS for libc ordinary clone fallback; legacy clone flags cannot create namespaces.
+  Child subprocess inherits socket denial. This does not weaken host clone3 birth.
+- Private128 PID/512MiB/swap0 required, no missing-controller fallback. Actual fork
+  pressure hits private cap then all descendants close. Actual two independent DBs
+  register identical physical source; second concession rejected while first remains
+  usable. Source writes through normal path and inherited directory FDs are denied;
+  controller symlink, /proc/1/root and D-Bus paths unavailable in the real capsule.
+- Retired-attempt test RED found reactivation in fresh domain using still-valid local
+  lease (source Stop projection not yet durable). Persist original DB/attempt/fence
+  reference beyond retirement; new domain now rejects it before birth. Old receipts
+  remain readable; explicit new source attempt required. This is a global fence,
+  not a claim that source-local lifecycle projection is already integrated.
+- Final targeted57 pass;15 broker +17 domain cases pass. First full1342:1239 pass,
+  same100 failures/3 skip; retained raw evidence. Final after tombstone1343:1240 pass,
+  identical100 baseline failure identities,3 skip,29 warnings;410 runtime pass. New/
+  resolved failure sets empty. All changed Python passes Ruff check/format and C
+  clang-format/GCC Werror; locked offline sync/check succeeds.
+- Final wheel28 runtime Python source bytes match, C source included in SDist. Fresh
+  -I -S process imports only extracted wheel runtime/native, uses prepared synthetic
+  migrated source/global journal/private domain, computes137+63=200, retries without
+  dispatch, retires and rejects old attempt in another fresh domain. Package verifier
+  saved locally with hash. Source preparation imports legacy migration helpers and a
+  guarded socket attempt was traced to urllib3 IPv6 localhost capability detection;
+  not inference/provider traffic. Original socket diagnostic retained, not guessed.
+- Ruling: keep this first concrete profile model-free/readonly until full enrollment,
+  native/Ken/business/development profiles and all writers migrate — socket denial is
+  correct for stdlib analysis but not a generic inference networking policy. Cost:
+  existing RuntimeService launchers remain to be replaced; this is not product-wide
+  authority merely because an actual broker path now works.
+- Ruling: missing domain after removal-before-durable-retirement still fails uncertain
+  without a managed parent/generation/no-rename proof — do not fabricate closure or
+  initialize another authority. Same-owner in-memory closure can retry persistence;
+  cross-process missing-domain restore/handoff acceptance remains explicit work.
+- Ken recall/related could not index these new managed modules; peer_registry
+  blast-radius reports file not indexed. Read direct known registry/guard/service/
+  kernel/test consumers instead, preserving old-test protection; no unrelated memory
+  anchors used. Release It stability and Clean Architecture ownership guide the host
+  composition without a new scheduler, bus or LLM loop.
+- Technical contract/status/coverage/evidence updated. Broker is trusted in-process,
+  has no exposed HTTP/IPC/auth endpoint and is not yet installed/wired into product.
+  Durable output capture, wall/CPU/lease fuses, local projection, catalog/asset runtime
+  manifests, complete origin/generations/restore/external budget proofs remain pending.
+  No new model turns/images, user DB migrations, account/service install, parent
+  cgroup migration, push/merge/deploy. Only exact private test cgroups used/removed.
+
+## Next brief after participating peer broker
+
+Continue FULL modernization. Adopt broker via a real managed enrollment/composition
+adapter: external origin/complete actor-domain proof, durable non-reused domain creation,
+authenticated host control, sole G ownership and migration/rejection of every retained
+launcher. Integrate RuntimeService/CommandJobs and async stdio transport, durable bounded
+outputs, wall/CPU/lease controls and source-local attempt retirement. Add concrete
+Codex subscription/Ken/business/development profiles (do not reuse socket-denied analysis
+as generic inference), bind runtime/assets manifests/catalog versions and test real
+published Ken+subscription through the integrated path before enabling mutable tools.
+Solve removal-before-durable-retirement/parent-generation proof, cross-deployment alias,
+restore/handoff and external uncertain budget acceptance. Missing state never means new
+installation. Preserve all71 tools/11 categories, engine/loop/autonomy/roles/flows/agent
+communication, exact Git candidate/review/CI, typed contexts/dependencies/checkpoints,
+external effects/lifecycle, historical backup/bootstrap/CLI/TUI/clean install/frontend
+packaging. All prompts/book-skills/evals/human comprehension and subscription-only
+auxiliary inference, dependency upgrades/18 npm advisories and100 baseline failures
+remain required. Visual inventory unchanged6/36 desktop+2/12 mobile,2 pilots,0/12 accepted;
+remaining30+10 concepts/10 routes and all12 state/accessibility/human acceptance remain.
+Final fresh independent whole-branch review still required. Full goal active, no
+push/merge/deploy, no permanent blocker inferred while meaningful work remains.

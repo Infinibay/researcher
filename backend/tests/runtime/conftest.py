@@ -55,3 +55,54 @@ def service_setup(coordination, tmp_path):
     return SimpleNamespace(
         c=c, root=root, workspace=workspace, control=tmp_path / "host-control"
     )
+
+
+@pytest.fixture
+def broker_setup(service_setup, tmp_path):
+    import os
+    import time
+    from pathlib import Path
+    from uuid import uuid4
+
+    from backend.runtime.execution_domain import ExecutionDomain
+    from backend.runtime.peer_broker import PeerBroker
+    from backend.tests.runtime.authority_fixture import journal, provisioned
+    from backend.tests.runtime.test_peer_workspace_view import bound_peer
+
+    relative = Path("/proc/self/cgroup").read_text().strip().split(":", 2)[2]
+    parent = (Path("/sys/fs/cgroup") / relative.lstrip("/")).parent
+    if (
+        not os.access(parent, os.W_OK)
+        or not (parent / "cgroup.subtree_control").exists()
+        or not {"memory", "pids"}
+        <= set((parent / "cgroup.subtree_control").read_text().split())
+    ):
+        pytest.skip("Requires delegated cgroup memory/pids controllers")
+    domain_path = parent / ("researcher-broker-test-" + uuid4().hex)
+    domain_path.mkdir(mode=0o700)
+    root = tmp_path / "global-authority"
+    root.mkdir(mode=0o700)
+    c = provisioned(root)
+    registry, peer = bound_peer(service_setup, "command")
+    domain = storage = broker = None
+    try:
+        domain = ExecutionDomain.open(domain_path)
+        storage = journal(c)
+        broker = PeerBroker(storage, domain)
+        yield service_setup, registry, peer, broker, storage, domain_path
+    finally:
+        try:
+            if broker is not None:
+                broker.revoke()
+        finally:
+            if domain is not None:
+                domain.close()
+            if storage is not None:
+                storage.close()
+            if domain_path.exists():
+                (domain_path / "cgroup.kill").write_text("1")
+                deadline = time.monotonic() + 3
+                while "populated 1" in (domain_path / "cgroup.events").read_text():
+                    assert time.monotonic() < deadline
+                    time.sleep(0.01)
+                domain_path.rmdir()

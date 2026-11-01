@@ -112,3 +112,8 @@ nacimiento contenido y retirada ante una caída anterior a publicar el PID. Son
 ensayos con dominios privados temporales, no inscripción del dominio completo del
 host. Confinamiento contra migración, broker único dueño de G, autoridad semántica
 y migración de todos los escritores siguen pendientes.
+
+El [broker interno de análisis](peer-broker.md) ya compone reserva/publicación/
+bind/G y retirada con el dominio real. No sustituye todavía los lanzadores
+productivos ni acredita el origen completo. Su tombstone del intento impide que
+una lease local anterior reactive otro dominio tras la retirada global.
