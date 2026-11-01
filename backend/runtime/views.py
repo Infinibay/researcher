@@ -6,15 +6,8 @@ from dataclasses import asdict
 
 from backend.db.connection import connect
 from backend.runtime.contracts import RunNotFound, identity
+from backend.runtime.run_inputs import MESSAGE_SELECT
 from backend.runtime.sqlite_runs import SQLiteRunStore
-
-MESSAGE_SELECT = """SELECT cm.*,r.id AS runtime_run_id,r.status AS runtime_status,
-    CASE WHEN cm.id=q.answer_message_id THEN q.answer_context_version ELSE r.context_version END AS context_version,
-    r.task_id, CASE WHEN cm.id=q.question_message_id THEN 'question' WHEN cm.id=q.answer_message_id THEN 'answer'
-    ELSE 'recorded' END AS delivery FROM chat_messages cm
-    LEFT JOIN runtime_chat_links link ON cm.id=link.user_message_id OR cm.id=link.proposal_message_id
-    LEFT JOIN runtime_question_links q ON cm.id=q.question_message_id OR cm.id=q.answer_message_id
-    LEFT JOIN runtime_runs r ON r.id=COALESCE(link.run_id,q.run_id)"""
 
 
 class OwnerRuntimeView:

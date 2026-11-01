@@ -6,6 +6,7 @@ import type { AnswerIntent, InstructionIntent, RecoveryIntent, RuntimeQuestion, 
 import { useAnswer, useCorrection, useInstruction, useRecovery, useStartRetry, useStopRun, useTaskWorkspace } from '../../hooks/useRuntime'
 import { MarkdownRenderer } from '../common/MarkdownRenderer'
 import { TaskInputHistory } from './TaskInputHistory'
+import { RunInputRecord } from './RunInputRecord'
 
 const inputClass = 'w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] focus:outline-none focus:ring-2 focus:ring-[var(--work-accent)]'
 const buttonClass = 'rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50'
@@ -125,6 +126,7 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
   const [kind, setKind] = useState<'user_message' | 'user_example'>('user_message')
   const [sourceId, setSourceId] = useState<number | null>(null)
   const [notice, setNotice] = useState('')
+  const [newConversation, setNewConversation] = useState(false)
   const thread = useRef(crypto.randomUUID())
   const intent = useRef<InstructionIntent | null>(null)
   const correction = useRef<Parameters<typeof correct.mutate>[0] | null>(null)
@@ -147,11 +149,13 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
   const submit = () => {
     if (!intent.current) intent.current = prepareInstruction(projectId, {
       task_id: taskId, context_version: data.context.context_version,
-      thread_id: conversationThreadId ?? current?.conversation_thread_id ?? thread.current,
+      thread_id: newConversation ? thread.current : conversationThreadId ?? current?.conversation_thread_id ?? thread.current,
       message: message.trim(), ...(repositoryId != null ? { repository_id: repositoryId } : {}),
     })
     send.mutate(intent.current, { onSuccess: result => {
       intent.current = null
+      thread.current = crypto.randomUUID()
+      setNewConversation(false)
       setMessage('')
       setNotice('Solicitud registrada. Consulta su estado para ver cuándo comienza.')
       onConversation?.(result.message.thread_id)
@@ -195,6 +199,8 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
     <form className="space-y-2" onSubmit={event => { event.preventDefault(); submit() }}>
       <label className="block text-[var(--work-ink)]" htmlFor={`request-${taskId}`}>Solicitud para esta tarea</label>
       <textarea id={`request-${taskId}`} className={inputClass} rows={3} value={message} maxLength={50000} readOnly={intent.current != null} onChange={event => setMessage(event.target.value)} placeholder="Explica qué quieres comprobar y qué resultado necesitas. Puedes incluir un ejemplo." />
+      <label className="flex items-start gap-2 text-[var(--work-ink)]"><input type="checkbox" checked={newConversation} disabled={intent.current != null || send.isPending} onChange={event => setNewConversation(event.target.checked)} />Iniciar sin los mensajes anteriores</label>
+      {newConversation && <p className="text-[var(--work-muted)]">Se conservan la tarea, las correcciones y las respuestas registradas. Incluye en la nueva solicitud las condiciones del historial que quieras mantener.</p>}
       {data.repositories.length > 1 && <label className="block space-y-1 text-[var(--work-ink)]">Repositorio
         <select className={inputClass} value={repositoryId ?? ''} disabled={intent.current != null} onChange={event => setRepositoryId(event.target.value ? Number(event.target.value) : undefined)}>
           <option value="">Elige el repositorio</option>
@@ -214,6 +220,7 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
     </div>
     <aside className="task-execution-context" aria-label="Fuentes y contexto">
     <h4>Fuentes y contexto</h4>
+    {current && <RunInputRecord key={`${projectId}:${current.run_id}`} projectId={projectId} runId={current.run_id} />}
     <TaskInputHistory changes={data.context.task_changes ?? []} />
     <details open={data.context.corrections.length > 0} className="space-y-2 rounded-md border border-[var(--work-line)] p-3">
       <summary className="cursor-pointer font-medium text-[var(--work-ink)]">Corregir el contexto</summary>

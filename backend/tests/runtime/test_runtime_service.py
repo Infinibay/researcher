@@ -1,6 +1,7 @@
 """Product coordinator with real persistence; only generative inference is doubled."""
 
 import asyncio
+import hashlib
 import json
 from contextlib import asynccontextmanager
 from dataclasses import replace
@@ -22,6 +23,10 @@ class ControlledInference:
         self.closed = asyncio.Event()
         self.prompts = []
         self.model = "fixture-model"
+        self.catalog = []
+        self.developer_instructions = (
+            "Controlled host instructions, not a model response."
+        )
 
     @asynccontextmanager
     async def open(self, *, workspace, tool_token, active, limits, peer_owner=None):
@@ -32,7 +37,11 @@ class ControlledInference:
         assert workspace == self.setup.workspace
         peer = self
         self.thread_id = "controlled-" + str(len(self.prompts))
-        self.catalog_hash = "a" * 64
+        self.catalog_hash = hashlib.sha256(
+            json.dumps(
+                self.catalog, sort_keys=True, ensure_ascii=False, separators=(",", ":")
+            ).encode()
+        ).hexdigest()
         self.active = active
         self.scope = scope
         self.peer_owner = peer_owner

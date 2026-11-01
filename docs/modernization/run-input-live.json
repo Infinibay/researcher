@@ -1,0 +1,74 @@
+{
+  "trial": "input-continuity-1fff674c",
+  "date": "2026-11-01",
+  "status": "passed",
+  "evidence_sha256": "d5b8c5ee7d7e990a9991896579520c0b332fb7621d0d07a23c820d2b69808da2",
+  "application_generation_turns": 2,
+  "codex_version": "0.166.0",
+  "ken_rank_version": "0.18.0",
+  "model": "gpt-6.1-sol",
+  "dispatches": [
+    {
+      "model": "gpt-6.1-sol",
+      "status": "settled",
+      "observed_tokens": 117774,
+      "native_status": "completed"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "status": "settled",
+      "observed_tokens": 95739,
+      "native_status": "completed"
+    }
+  ],
+  "source_files_unchanged": true,
+  "report_states": [
+    "draft",
+    "draft"
+  ],
+  "peer_states": [
+    {
+      "kind": "business",
+      "state": "closed"
+    },
+    {
+      "kind": "native",
+      "state": "closed"
+    },
+    {
+      "kind": "business",
+      "state": "closed"
+    },
+    {
+      "kind": "native",
+      "state": "closed"
+    }
+  ],
+  "input_records": [
+    {
+      "sha256": "9b8f257d206bd2a96fafc15cf2c0cf2be17eefde0f0a24f282599d64e3299af6",
+      "instructions_sha256": "16083bcf4de3a06c5a1edcea603aac8949059d226c4efbc277a8837fbc17e6c7",
+      "context_version": 1,
+      "history_messages": 0,
+      "history_kinds": [],
+      "native_start_observed": true
+    },
+    {
+      "sha256": "1cfdd71ff24a5c738bc99753abd14254cdca8fb8246eaa1d7c0ce43410ae9310",
+      "instructions_sha256": "16083bcf4de3a06c5a1edcea603aac8949059d226c4efbc277a8837fbc17e6c7",
+      "context_version": 2,
+      "history_messages": 2,
+      "history_kinds": [
+        "owner_instruction",
+        "agent_proposal"
+      ],
+      "native_start_observed": true
+    }
+  ],
+  "second_explanation": "Con la tasa ilustrativa 0,21 de la política capturada:\n\n| Ejemplo | Base | Impuesto | Total |\n|---|---:|---:|---:|\n| Original | 137,00 | 28,77 | 165,77 |\n| Corregido | 200,00 | 42,00 | 242,00 |\n\nLa fuente explica esa tasa, pero no la impone. Ken confirmó que el código suma base y tasa directamente; por inspección daría 137,21 y 200,21.\n\nGuardé otro borrador con evidencia, interpretación y límites, sin tomar la propuesta anterior como prueba. No ejecuté tests, edité archivos, publiqué ni acepté la tarea.\n\nID del informe: **2**",
+  "limits": [
+    "Only two turns in one synthetic scenario; no universal quality or human comprehension result.",
+    "Correct response does not isolate history causally: business tools also had access to the recorded report/source.",
+    "Observed native tokens are not billing/quota accounting."
+  ]
+}

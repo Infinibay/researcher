@@ -334,6 +334,12 @@ def ensure_migrations(db_path: str | None = None) -> None:
             resource = Path(__file__).resolve().parents[2] / "db/task_inputs_schema.sql"
             apply_sql_resource(conn, resource)
             logger.info("Migration 29: task input versioning and authority withdrawal")
+        if 30 not in applied:
+            from backend.db.migrations import apply_sql_resource
+
+            resource = Path(__file__).resolve().parents[2] / "db/run_input_schema.sql"
+            apply_sql_resource(conn, resource)
+            logger.info("Migration 30: frozen host input and scoped conversation")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()

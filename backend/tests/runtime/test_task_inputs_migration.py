@@ -19,7 +19,9 @@ def test_version28_migration_preserves_rows_and_only_records_future_edits(
             migrations,
             "apply_sql_resource",
             lambda conn, path: (
-                None if path.name == "task_inputs_schema.sql" else apply(conn, path)
+                None
+                if path.name in ("task_inputs_schema.sql", "run_input_schema.sql")
+                else apply(conn, path)
             ),
         )
         ensure_migrations(_isolated_db)
@@ -84,6 +86,8 @@ def test_task_input_migration_failure_rolls_back_trigger_and_marker(
     )
     ensure_migrations(_isolated_db)
     assert (
-        db_conn.execute("SELECT MAX(version) FROM schema_migrations").fetchone()[0]
-        == 29
+        db_conn.execute(
+            "SELECT COUNT(*) FROM schema_migrations WHERE version=29"
+        ).fetchone()[0]
+        == 1
     )

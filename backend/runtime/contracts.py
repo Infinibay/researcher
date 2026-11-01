@@ -21,6 +21,16 @@ class WorkspaceChanged(RunConflict):
     """The admitted repository or physical directory cannot be revalidated."""
 
 
+class InputTooLarge(RunConflict):
+    """The complete input exceeds a declared bound; nothing is silently omitted."""
+
+
+@dataclass(frozen=True)
+class FrozenRunInput:
+    input_text: str
+    input_sha256: str
+
+
 def text(value: str, name: str, maximum: int) -> None:
     if not isinstance(value, str) or not value.strip() or len(value.encode()) > maximum:
         raise ValueError(f"{name} must be nonempty and at most {maximum} UTF-8 bytes")

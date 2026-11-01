@@ -1,0 +1,115 @@
+"""Exact host input composition, historical scope and explicit size boundaries.
+
+This records what Researcher prepares, not hidden provider instructions, future
+outputs or evidence that a model understood a message. No truncation/LLM summary.
+"""
+
+import hashlib
+import json
+
+from backend.runtime.contracts import FrozenRunInput, InputTooLarge
+
+MAX_INPUT_BYTES = 1048576
+MAX_HISTORY_MESSAGES = 200
+
+MESSAGE_SELECT = """SELECT cm.*,r.id AS runtime_run_id,r.status AS runtime_status,
+    CASE WHEN cm.id=q.answer_message_id THEN q.answer_context_version ELSE r.context_version END AS context_version,
+    r.task_id, CASE WHEN cm.id=q.question_message_id THEN 'question' WHEN cm.id=q.answer_message_id THEN 'answer'
+    ELSE 'recorded' END AS delivery FROM chat_messages cm
+    LEFT JOIN runtime_chat_links link ON cm.id=link.user_message_id OR cm.id=link.proposal_message_id
+    LEFT JOIN runtime_question_links q ON cm.id=q.question_message_id OR cm.id=q.answer_message_id
+    LEFT JOIN runtime_runs r ON r.id=COALESCE(link.run_id,q.run_id)"""
+
+
+def conversation_history(conn, row):
+    link = conn.execute(
+        "SELECT * FROM runtime_chat_links WHERE project_id=? AND run_id=?",
+        (row["project_id"], row["id"]),
+    ).fetchone()
+    if link is None:
+        return {
+            "thread_id": None,
+            "cutoff_message_id": None,
+            "messages": [],
+            "other_task_messages_excluded": 0,
+        }
+    condition = " WHERE cm.project_id=? AND cm.thread_id=? AND cm.id<?"
+    args = (row["project_id"], link["thread_id"], link["user_message_id"])
+    excluded = conn.execute(
+        "SELECT COUNT(*) FROM (" + MESSAGE_SELECT + condition + " AND r.task_id<>?)",
+        (*args, row["task_id"]),
+    ).fetchone()[0]
+    history = conn.execute(
+        MESSAGE_SELECT
+        + condition
+        + " AND (r.task_id IS NULL OR r.task_id=?) ORDER BY cm.id LIMIT ?",
+        (*args, row["task_id"], MAX_HISTORY_MESSAGES + 1),
+    ).fetchall()
+    if len(history) > MAX_HISTORY_MESSAGES:
+        raise InputTooLarge("Conversation history exceeds the input message limit")
+    if sum(len(m["message"].encode()) for m in history) > MAX_INPUT_BYTES:
+        raise InputTooLarge("Conversation history exceeds the input byte limit")
+    messages = []
+    for m in history:
+        kind = (
+            "owner_answer"
+            if m["delivery"] == "answer"
+            else "agent_question"
+            if m["delivery"] == "question"
+            else "owner_instruction"
+            if m["runtime_run_id"] is not None
+            and m["conversation_type"] == "user_to_agent"
+            else "agent_proposal"
+            if m["runtime_run_id"] is not None
+            else "unattributed_record"
+        )
+        messages.append(
+            {
+                "message_id": m["id"],
+                "kind": kind,
+                "recorded_sender": m["from_agent"],
+                "source_context_version": m["context_version"],
+                "same_context_version": m["context_version"] == row["context_version"]
+                if m["context_version"] is not None
+                else None,
+                "run_id": m["runtime_run_id"],
+                "run_status_at_snapshot": m["runtime_status"],
+                "content": m["message"],
+                "content_sha256": hashlib.sha256(m["message"].encode()).hexdigest(),
+            }
+        )
+    return {
+        "thread_id": link["thread_id"],
+        "cutoff_message_id": link["user_message_id"],
+        "messages": messages,
+        "other_task_messages_excluded": excluded,
+    }
+
+
+def freeze_input(conn, row, context):
+    payload = {
+        "schema_version": 1,
+        **context,
+        "scope": {
+            "project_id": row["project_id"],
+            "task_id": row["task_id"],
+            "run_id": row["id"],
+            "attempt_id": row["current_attempt_id"],
+        },
+        "request": row["prompt"],
+        "repository": {
+            "id": row["bound_repository_id"],
+            "name": row["bound_repository_name"],
+        },
+        "conversation": conversation_history(conn, row),
+    }
+    encoded = json.dumps(
+        payload,
+        sort_keys=True,
+        ensure_ascii=False,
+        separators=(",", ":"),
+        allow_nan=False,
+    )
+    if len(encoded.encode()) > MAX_INPUT_BYTES:
+        raise InputTooLarge("Task context exceeds the input byte limit")
+    return FrozenRunInput(encoded, hashlib.sha256(encoded.encode()).hexdigest())

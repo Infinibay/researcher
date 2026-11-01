@@ -229,6 +229,12 @@ async def current_context(project_id: int, task_id: int, request: Request):
     )
 
 
+@router.get("/{project_id}/runs/{run_id}/input")
+async def run_input(project_id: int, run_id: str, request: Request):
+    data = await asyncio.to_thread(read_store(request).input_record, project_id, run_id)
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
 @router.get("/{project_id}/questions")
 async def question_inbox(
     project_id: int,

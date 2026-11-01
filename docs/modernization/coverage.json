@@ -66,7 +66,17 @@
         "docs/architecture/human-questions.md",
         "docs/modernization/human-question-evidence.json",
         "docs/modernization/human-question-results.json",
-        "backend/tests/runtime/test_human_questions.py"
+        "backend/tests/runtime/test_human_questions.py",
+        "docs/architecture/frozen-run-input.md",
+        "docs/modernization/run-input-evidence.json",
+        "docs/modernization/run-input-results.json",
+        "docs/modernization/run-input-live.json",
+        "docs/modernization/run-input-migration.json",
+        "docs/modernization/run-input-packaging.json",
+        "backend/tests/runtime/test_run_input.py",
+        "backend/tests/runtime/test_run_input_migration.py",
+        "evals/runtime/run_input_continuity.py",
+        "frontend/tests/task-design.test.ts"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -86,7 +96,17 @@
         "docs/modernization/chat-packaging.json",
         "docs/design/concepts/chat/manifest.json",
         "backend/tests/runtime/test_question_inbox.py",
-        "frontend/tests/chat-design.test.ts"
+        "frontend/tests/chat-design.test.ts",
+        "docs/architecture/frozen-run-input.md",
+        "docs/modernization/run-input-evidence.json",
+        "docs/modernization/run-input-results.json",
+        "docs/modernization/run-input-live.json",
+        "docs/modernization/run-input-migration.json",
+        "docs/modernization/run-input-packaging.json",
+        "backend/tests/runtime/test_run_input.py",
+        "backend/tests/runtime/test_run_input_migration.py",
+        "evals/runtime/run_input_continuity.py",
+        "frontend/tests/task-design.test.ts"
       ]
     },
     "C06": {
@@ -106,7 +126,16 @@
         "docs/modernization/chat-packaging.json",
         "docs/design/concepts/chat/manifest.json",
         "backend/tests/runtime/test_question_inbox.py",
-        "frontend/tests/chat-design.test.ts"
+        "frontend/tests/chat-design.test.ts",
+        "docs/architecture/frozen-run-input.md",
+        "docs/modernization/run-input-evidence.json",
+        "docs/modernization/run-input-results.json",
+        "docs/modernization/run-input-live.json",
+        "docs/modernization/run-input-migration.json",
+        "docs/modernization/run-input-packaging.json",
+        "backend/tests/runtime/test_run_input.py",
+        "backend/tests/runtime/test_run_input_migration.py",
+        "evals/runtime/run_input_continuity.py"
       ],
       "remaining": [
         "Migrate legacy question similarity reuse and all callers.",
@@ -144,7 +173,16 @@
         "docs/modernization/chat-packaging.json",
         "docs/design/concepts/chat/manifest.json",
         "backend/tests/runtime/test_question_inbox.py",
-        "frontend/tests/chat-design.test.ts"
+        "frontend/tests/chat-design.test.ts",
+        "docs/architecture/frozen-run-input.md",
+        "docs/modernization/run-input-evidence.json",
+        "docs/modernization/run-input-results.json",
+        "docs/modernization/run-input-live.json",
+        "docs/modernization/run-input-migration.json",
+        "docs/modernization/run-input-packaging.json",
+        "backend/tests/runtime/test_run_input.py",
+        "backend/tests/runtime/test_run_input_migration.py",
+        "evals/runtime/run_input_continuity.py"
       ]
     },
     "C08": {
@@ -175,7 +213,17 @@
         "docs/modernization/chat-packaging.json",
         "docs/design/concepts/chat/manifest.json",
         "backend/tests/runtime/test_question_inbox.py",
-        "frontend/tests/chat-design.test.ts"
+        "frontend/tests/chat-design.test.ts",
+        "docs/architecture/frozen-run-input.md",
+        "docs/modernization/run-input-evidence.json",
+        "docs/modernization/run-input-results.json",
+        "docs/modernization/run-input-live.json",
+        "docs/modernization/run-input-migration.json",
+        "docs/modernization/run-input-packaging.json",
+        "backend/tests/runtime/test_run_input.py",
+        "backend/tests/runtime/test_run_input_migration.py",
+        "evals/runtime/run_input_continuity.py",
+        "frontend/tests/task-design.test.ts"
       ]
     },
     "E01": {
@@ -376,7 +424,16 @@
         "docs/modernization/task-inputs-packaging.json",
         "backend/tests/runtime/test_task_input_versioning.py",
         "backend/tests/runtime/test_task_inputs_migration.py",
-        "frontend/tests/task-design.test.ts"
+        "frontend/tests/task-design.test.ts",
+        "docs/architecture/frozen-run-input.md",
+        "docs/modernization/run-input-evidence.json",
+        "docs/modernization/run-input-results.json",
+        "docs/modernization/run-input-live.json",
+        "docs/modernization/run-input-migration.json",
+        "docs/modernization/run-input-packaging.json",
+        "backend/tests/runtime/test_run_input.py",
+        "backend/tests/runtime/test_run_input_migration.py",
+        "evals/runtime/run_input_continuity.py"
       ]
     },
     "E06": {
@@ -422,7 +479,17 @@
         "docs/modernization/admission-migration.json",
         "docs/modernization/admission-packaging.json",
         "backend/tests/runtime/test_admission_binding.py",
-        "backend/tests/runtime/test_admission_migration.py"
+        "backend/tests/runtime/test_admission_migration.py",
+        "docs/architecture/frozen-run-input.md",
+        "docs/modernization/run-input-evidence.json",
+        "docs/modernization/run-input-results.json",
+        "docs/modernization/run-input-live.json",
+        "docs/modernization/run-input-migration.json",
+        "docs/modernization/run-input-packaging.json",
+        "backend/tests/runtime/test_run_input.py",
+        "backend/tests/runtime/test_run_input_migration.py",
+        "evals/runtime/run_input_continuity.py",
+        "frontend/tests/task-design.test.ts"
       ]
     },
     "E07": {
@@ -470,7 +537,17 @@
         "docs/architecture/owned-commands.md",
         "backend/tests/runtime/test_command_executor.py",
         "backend/tests/runtime/test_command_journal.py",
-        "docs/modernization/owned-command-evidence.json"
+        "docs/modernization/owned-command-evidence.json",
+        "docs/architecture/frozen-run-input.md",
+        "docs/modernization/run-input-evidence.json",
+        "docs/modernization/run-input-results.json",
+        "docs/modernization/run-input-live.json",
+        "docs/modernization/run-input-migration.json",
+        "docs/modernization/run-input-packaging.json",
+        "backend/tests/runtime/test_run_input.py",
+        "backend/tests/runtime/test_run_input_migration.py",
+        "evals/runtime/run_input_continuity.py",
+        "frontend/tests/task-design.test.ts"
       ]
     },
     "E10": {
@@ -794,7 +871,16 @@
         "docs/modernization/chat-packaging.json",
         "docs/design/concepts/chat/manifest.json",
         "backend/tests/runtime/test_question_inbox.py",
-        "frontend/tests/chat-design.test.ts"
+        "frontend/tests/chat-design.test.ts",
+        "docs/architecture/frozen-run-input.md",
+        "docs/modernization/run-input-evidence.json",
+        "docs/modernization/run-input-results.json",
+        "docs/modernization/run-input-live.json",
+        "docs/modernization/run-input-migration.json",
+        "docs/modernization/run-input-packaging.json",
+        "backend/tests/runtime/test_run_input.py",
+        "backend/tests/runtime/test_run_input_migration.py",
+        "evals/runtime/run_input_continuity.py"
       ],
       "remaining": [
         "Migrate legacy input producers/consumers and complete event catch-up/history pagination.",
@@ -870,13 +956,11 @@
         "backend/tests/runtime/test_inference_journal.py"
       ],
       "remaining": [
-        "Bounded execution/control",
-        "Same real scenarios for both candidates",
-        "Task artifact persistence and project isolation"
+        "Complete the comparison matrix for unexercised/rejected-candidate gates with explicit limitations; no requirement that a rejected candidate pass."
       ]
     },
     "runtime_decision": {
-      "status": "in_progress",
+      "status": "verified",
       "evidence": [
         "docs/architecture/native-runtime-boundary.md",
         "docs/modernization/product-runtime-evidence.json",
@@ -929,9 +1013,8 @@
         "backend/tests/runtime/test_inference_journal.py"
       ],
       "remaining": [
-        "Full current-tool inventory and disposition",
-        "Candidate model research/control/isolation cases",
-        "Production runtime wiring"
+        "Migrate/expose retained capabilities and their actual consumers (inventory of71 tools exists).",
+        "Exact-candidate development/review/CI and remote effect reconciliation."
       ]
     },
     "inference_inventory": {
@@ -942,6 +1025,9 @@
         "docs/modernization/product-stop-evidence.json",
         "backend/tests/runtime/test_runtime_service.py",
         "backend/tests/runtime/test_inference_journal.py"
+      ],
+      "remaining": [
+        "Recheck transitive/dynamic consumers as they migrate; route/remove every retained inference path."
       ]
     },
     "engine_redesign": {
@@ -991,7 +1077,16 @@
         "docs/modernization/task-inputs-packaging.json",
         "backend/tests/runtime/test_task_input_versioning.py",
         "backend/tests/runtime/test_task_inputs_migration.py",
-        "frontend/tests/task-design.test.ts"
+        "frontend/tests/task-design.test.ts",
+        "docs/architecture/frozen-run-input.md",
+        "docs/modernization/run-input-evidence.json",
+        "docs/modernization/run-input-results.json",
+        "docs/modernization/run-input-live.json",
+        "docs/modernization/run-input-migration.json",
+        "docs/modernization/run-input-packaging.json",
+        "backend/tests/runtime/test_run_input.py",
+        "backend/tests/runtime/test_run_input_migration.py",
+        "evals/runtime/run_input_continuity.py"
       ],
       "remaining": [
         "Migrate all legacy callers and capability families",
@@ -1025,7 +1120,17 @@
         "docs/modernization/chat-packaging.json",
         "docs/design/concepts/chat/manifest.json",
         "backend/tests/runtime/test_question_inbox.py",
-        "frontend/tests/chat-design.test.ts"
+        "frontend/tests/chat-design.test.ts",
+        "docs/architecture/frozen-run-input.md",
+        "docs/modernization/run-input-evidence.json",
+        "docs/modernization/run-input-results.json",
+        "docs/modernization/run-input-live.json",
+        "docs/modernization/run-input-migration.json",
+        "docs/modernization/run-input-packaging.json",
+        "backend/tests/runtime/test_run_input.py",
+        "backend/tests/runtime/test_run_input_migration.py",
+        "evals/runtime/run_input_continuity.py",
+        "frontend/tests/task-design.test.ts"
       ],
       "remaining": [
         "Apply to product prompts and first vertical workflow",
@@ -1037,8 +1142,23 @@
       "evidence": []
     },
     "context_evals": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/frozen-run-input.md",
+        "docs/modernization/run-input-evidence.json",
+        "docs/modernization/run-input-results.json",
+        "docs/modernization/run-input-live.json",
+        "docs/modernization/run-input-migration.json",
+        "docs/modernization/run-input-packaging.json",
+        "backend/tests/runtime/test_run_input.py",
+        "backend/tests/runtime/test_run_input_migration.py",
+        "evals/runtime/run_input_continuity.py",
+        "frontend/tests/task-design.test.ts"
+      ],
+      "remaining": [
+        "Reserved datasets and before/after comparisons across all prompts and held-out cases.",
+        "Observed human comprehension; one two-turn numerical case does not establish a general improvement."
+      ]
     },
     "communication_evals": {
       "status": "pending",
@@ -1088,7 +1208,16 @@
         "docs/modernization/task-inputs-packaging.json",
         "backend/tests/runtime/test_task_input_versioning.py",
         "backend/tests/runtime/test_task_inputs_migration.py",
-        "frontend/tests/task-design.test.ts"
+        "frontend/tests/task-design.test.ts",
+        "docs/architecture/frozen-run-input.md",
+        "docs/modernization/run-input-evidence.json",
+        "docs/modernization/run-input-results.json",
+        "docs/modernization/run-input-live.json",
+        "docs/modernization/run-input-migration.json",
+        "docs/modernization/run-input-packaging.json",
+        "backend/tests/runtime/test_run_input.py",
+        "backend/tests/runtime/test_run_input_migration.py",
+        "evals/runtime/run_input_continuity.py"
       ],
       "remaining": [
         "Historical migration fixtures and backup/restore",
@@ -1251,7 +1380,16 @@
         "docs/modernization/chat-packaging.json",
         "docs/design/concepts/chat/manifest.json",
         "backend/tests/runtime/test_question_inbox.py",
-        "frontend/tests/chat-design.test.ts"
+        "frontend/tests/chat-design.test.ts",
+        "docs/architecture/frozen-run-input.md",
+        "docs/modernization/run-input-evidence.json",
+        "docs/modernization/run-input-results.json",
+        "docs/modernization/run-input-live.json",
+        "docs/modernization/run-input-migration.json",
+        "docs/modernization/run-input-packaging.json",
+        "backend/tests/runtime/test_run_input.py",
+        "backend/tests/runtime/test_run_input_migration.py",
+        "evals/runtime/run_input_continuity.py"
       ],
       "remaining": [
         "Rendered browser and keyboard verification",
@@ -1278,11 +1416,21 @@
         "docs/modernization/chat-packaging.json",
         "docs/design/concepts/chat/manifest.json",
         "backend/tests/runtime/test_question_inbox.py",
-        "frontend/tests/chat-design.test.ts"
+        "frontend/tests/chat-design.test.ts",
+        "docs/architecture/frozen-run-input.md",
+        "docs/modernization/run-input-evidence.json",
+        "docs/modernization/run-input-results.json",
+        "docs/modernization/run-input-live.json",
+        "docs/modernization/run-input-migration.json",
+        "docs/modernization/run-input-packaging.json",
+        "backend/tests/runtime/test_run_input.py",
+        "backend/tests/runtime/test_run_input_migration.py",
+        "evals/runtime/run_input_continuity.py",
+        "frontend/tests/task-design.test.ts"
       ],
       "remaining": [
         "Migrate legacy producers/typed replies without widened authority.",
-        "Complete event synchronization, history pagination/retention and effective conversation context delivery.",
+        "Complete event synchronization/history retention and long conversation checkpoints.",
         "Rendered/accessibility/human comprehension acceptance."
       ]
     },
@@ -1342,7 +1490,16 @@
         "docs/modernization/task-inputs-packaging.json",
         "backend/tests/runtime/test_task_input_versioning.py",
         "backend/tests/runtime/test_task_inputs_migration.py",
-        "frontend/tests/task-design.test.ts"
+        "frontend/tests/task-design.test.ts",
+        "docs/architecture/frozen-run-input.md",
+        "docs/modernization/run-input-evidence.json",
+        "docs/modernization/run-input-results.json",
+        "docs/modernization/run-input-live.json",
+        "docs/modernization/run-input-migration.json",
+        "docs/modernization/run-input-packaging.json",
+        "backend/tests/runtime/test_run_input.py",
+        "backend/tests/runtime/test_run_input_migration.py",
+        "evals/runtime/run_input_continuity.py"
       ],
       "remaining": [
         "Version/fence related context dependencies beyond direct task input fields; migrate legacy writers to typed commands.",
@@ -1360,13 +1517,43 @@
         "docs/modernization/task-inputs-packaging.json",
         "backend/tests/runtime/test_task_input_versioning.py",
         "backend/tests/runtime/test_task_inputs_migration.py",
+        "frontend/tests/task-design.test.ts",
+        "docs/architecture/frozen-run-input.md",
+        "docs/modernization/run-input-evidence.json",
+        "docs/modernization/run-input-results.json",
+        "docs/modernization/run-input-live.json",
+        "docs/modernization/run-input-migration.json",
+        "docs/modernization/run-input-packaging.json",
+        "backend/tests/runtime/test_run_input.py",
+        "backend/tests/runtime/test_run_input_migration.py",
+        "evals/runtime/run_input_continuity.py"
+      ],
+      "remaining": [
+        "Typed editing with concurrency/receipts and verified author provenance.",
+        "Related project/epic/dependency/source/file/Git/permission revisions and invalidation.",
+        "Long-context checkpoints/compaction, later tool-output coverage and verified restore.",
+        "Rendered keyboard/accessibility and human comprehension acceptance."
+      ]
+    },
+    "frozen_run_input": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/frozen-run-input.md",
+        "docs/modernization/run-input-evidence.json",
+        "docs/modernization/run-input-results.json",
+        "docs/modernization/run-input-live.json",
+        "docs/modernization/run-input-migration.json",
+        "docs/modernization/run-input-packaging.json",
+        "backend/tests/runtime/test_run_input.py",
+        "backend/tests/runtime/test_run_input_migration.py",
+        "evals/runtime/run_input_continuity.py",
         "frontend/tests/task-design.test.ts"
       ],
       "remaining": [
-        "Typed editing commands with concurrency preconditions, original receipts and verified actor provenance.",
-        "Related project/epic/dependency/source/file/Git/permission revisions and invalidation.",
-        "Full effective context snapshot, history pagination/retention and verified restore.",
-        "Rendered keyboard/accessibility and human comprehension acceptance."
+        "Long-history checkpoints/compaction without losing constraints.",
+        "Broader context-dependency invalidation and later-input/output provenance.",
+        "Native internal system instructions/Ken schemas are outside the exact host initial-input record.",
+        "Full prompt/held-out/human and rendered UI acceptance."
       ]
     }
   }

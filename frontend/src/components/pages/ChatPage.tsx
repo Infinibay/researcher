@@ -79,7 +79,7 @@ function TaskConversation({ projectId, task, questionId, onBack }: { projectId: 
     <header className="conversation-task-title"><p className="conversation-meta">Conversación · tarea #{task.id}</p><h2 id={`conversation-title-${task.id}`} ref={title} tabIndex={-1}>{task.title}</h2>{task.description && <p>{task.description}</p>}</header>
     <TaskRunWorkspace projectId={projectId} taskId={task.id} conversationThreadId={threadId ?? undefined} onConversation={setThread} showProposal={!proposalVisible} conversation={<section aria-label="Conversación de la tarea" className="conversation-exchange">
       <h3>Conversación guardada</h3>
-      <p className="conversation-history-note">El historial conserva los intercambios. El próximo trabajo recibe la tarea actual, sus correcciones y respuestas. Para cambiar sus instrucciones, guarda una corrección de contexto.</p>
+      <p className="conversation-history-note">El próximo trabajo recibe la tarea, sus correcciones y respuestas, y los mensajes anteriores de esta conversación hasta registrar la solicitud. Las propuestas antiguas conservan su versión; verlas no las convierte en hechos comprobados. Puedes consultar la entrada de cada ejecución.</p>
       {threadId == null && <p>Todavía no hay una solicitud registrada para esta tarea.</p>}
       {threadId != null && history.isPending && <p role="status">Recuperando la conversación…</p>}
       {history.error && <div role="alert"><p>No se pudo recuperar la conversación.</p><button onClick={() => history.refetch()}>Volver a consultar</button></div>}

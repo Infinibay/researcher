@@ -42,9 +42,10 @@ lectura, el resultado durable conserva su presentación independiente.
 
 La web explica el contrato actual: el siguiente inicio recibe tarea actual,
 correcciones y respuestas, más los cambios de entrada registrados. Mostrar un mensaje
-antiguo no equivale a comprobar que se entregó o aplicó al modelo. Queda pendiente
-el snapshot integral de contexto efectivo y una política explícita de continuidad
-conversacional; no se fabricó esa capacidad cambiando el diseño del chat.
+antiguo no equivale a comprobar que se entregó o aplicó al modelo. La [migración 30](frozen-run-input.md) agrega historia anterior de la tarea y un
+registro exacto de la entrada inicial del host. Mantiene versiones/procedencia,
+excluye otras tareas y detiene el inicio si el contenido completo no cabe. No
+captura instrucciones internas del proveedor ni prueba comprensión del modelo.
 
 Fuentes, correcciones, diferencias de metadata y recuperación reutilizan sus controles
 existentes. No se infieren hipótesis/fuentes verificadas a partir del estilo de una
@@ -65,7 +66,7 @@ están en [el manifiesto](../design/concepts/chat/manifest.json).
 El cliente consulta periódicamente el hilo elegido y la bandeja; invalida consultas
 tras respuestas/corrección/Stop. Cada página tiene su snapshot, sin prometer uno
 común entre varias páginas mientras cambia el proyecto. Faltan catch-up por eventos,
-paginación/retención integral de hilos y workspaces, continuidad efectiva al modelo,
+paginación/retención integral de hilos y workspaces, continuidad/compactación de historial largo,
 migración de preguntas heredadas, interacción/teclado/foco/zoom/lector de pantalla
 y comprensión observada. CUA sigue sin navegador; design-qa.md conserva resultado
 blocked. No se presenta este piloto como una interfaz aceptada visualmente.

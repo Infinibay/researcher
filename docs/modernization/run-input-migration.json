@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-01",
+  "source_version": 29,
+  "target_version": 30,
+  "synthetic_source": "task-inputs-migration29/research.db (copy of command-integration-7b135d2a)",
+  "repeatable": true,
+  "original_data_tables_preserved": 110,
+  "without_rowid_tables": 16,
+  "original_values_and_available_rowids_preserved": true,
+  "original_migration_records_preserved": true,
+  "historical_input_snapshots_inferred": 0,
+  "foreign_key_errors": 0,
+  "source_file_unchanged": true,
+  "user_database_touched": false
+}

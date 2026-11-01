@@ -921,3 +921,103 @@ replace100 baseline failures with correct behavior. Final fresh independent whol
 branch review before integration. Model remains global host JSON/restart, no selector
 web/per-agent/project added. Full goal stays active; no complete/paused/blocked status
 while meaningful authorized work remains. No push/merge/deploy performed.
+
+
+## Frozen input and continuity checkpoint — 2026-11-01
+
+- Previous goal turn classified as progress: 3d37ca3 saved Chat concepts/pilot and
+  scoped project inbox. Revalidated HEAD/ledger/source before addressing the explicit
+  missing effective-input/continuity contract. Full goal remains unchanged and active.
+- Applied inline test-first, Ken change planning (index still original main; no indexed
+  match for new store), A Philosophy of Software Design mini and current OpenAI Docs
+  prompt guidance fetched from its official page. No alternate model/API-key route.
+- Ruling: record the exact Researcher initial text, developer instructions and business
+  catalog, not a claim about hidden native system content, every Ken schema, future
+  tool results, understanding or acceptance. Cost: broader provenance still needs
+  separate records; the inspection UI explains this boundary instead of overclaiming.
+- Migration30 adds immutable input snapshots tied to dispatch. reserve_input owns
+  authority/scope, one-turn budget, context/history composition, snapshot and event
+  in one SQL transaction. Event/oversize failure leaves no partial reservation or
+  budget. The coordinator sends the returned text verbatim, with no reconstruction
+  after reservation. Diagnostic reserve_inference remains non-generative compatibility;
+  production uses the complete operation. Exact native instructions/catalog exposure
+  was verified against the real stdio thread/start request (RED→GREEN).
+- run_inputs.py owns shared message projection and continuity/format/limit policy;
+  views preserves MESSAGE_SELECT import compatibility. Source revisions/examples/
+  assumptions keep classification. The new native prompt explains how current request,
+  corrections and historical constraints relate, without another LLM summary/loop.
+- Ruling: conversation cutoff is the current admission message ID. Include earlier
+  same-task native exchanges and unattributed records; exclude/count other tasks and
+  never infer a product conversation from a native thread. Cost: later notes are not
+  delivered as steering; use the correction controls. A mixed-task legacy fixture
+  resets its old unbound marker deliberately; normal admission still forbids retargeting
+  a native conversation to another task. No production scope was widened for the test.
+- Ruling: preserve complete included messages or refuse before generation. Up to200
+  previous messages/1MiB combined host input; no silent suffix loss or hidden LLM
+  summary. Cost: long history needs explicit separation/new task or future checkpoint/
+  compaction. UI can start without prior conversation while retaining task/corrections/
+  answers, and explains carrying forward important conditions. These local byte fuses
+  do not establish model-specific token-window fit or physical billing limits.
+- Seven initial input tests failed before new API/format/persistence. Controls tests
+  exposed an initially false no-start claim for an existing reservation; dispatch
+  existence now preserves unknown and never replays. Owner read route returns no_record
+  for old rows without inventing input. Input content/hashes survive message edits and
+  context correction; snapshot UPDATE is rejected. Owner API is authenticated/no-store.
+- Initial focused suite40 passed; eight historical migration cases pass. Old fixture
+  constructors exclude future30 explicitly, while migration29 asserts its own marker
+  rather than assuming it will forever be the maximum version.
+- Actual input-continuity-1fff674c passed via owned HTTP/server, Codex0.166.0,
+  gpt-6.1-sol, published Ken0.18.0 and existing subscription. Two native turns, no replay
+  or metered fallback. First uses base137; second current request omits137 and receives
+  two earlier records plus a user_example correction to200. It correctly explains
+  policy28.77/165.77 vs42/242 and code's direct addition137.21/200.21. Both reports
+  remain draft; task not done, four peers closed, all grants revoked, source files
+  unchanged. Original frozen input remains identical after correcting context.
+- Real native reported total tokens117774 and95739 are observed usage, not billing/
+  quota accounting. Correct output does not isolate the history's causal influence
+  because business tools could also read the recorded source/report. No universal
+  prompt-quality or human-comprehension result is inferred from this single scenario.
+- Live handle30827 was terminal exit0. A concurrent DB read had sampled running just
+  before that exit; after completion the DB was reread sequentially and confirmed
+  superseded/needs_review plus four closed peers. No stale sample was treated as a
+  live job or reason to restart. All observed test/build/trial handles are terminal.
+- Final complete suite1198:1095 passed, identical100 baseline failure identities,
+  three skipped,30 warnings; all270 runtime cases pass. Frontend20 passed plus TS/Vite
+  build; existing Browserslist/chunk warnings remain. New input-inspection/explicit
+  conversation-choice SSR tests observed RED then GREEN. No browser interaction,
+  keyboard/accessibility or human acceptance is claimed.
+- Rehearsal v29→30 twice on a new copy preserves110 original data tables, values and
+  available rowids (16 WITHOUT ROWID tables checked by PK), old markers and FK
+  integrity. No inferred historical input and no user DB changed. All39 selected
+  runtime/SQL/loader/owner-route wheel bytes match current source. Source/log hashes
+  bind25 changed source/test files and11 complete logs. No image calls this checkpoint.
+- User requested planned/done/missing list. Saved docs/modernization/status.md against
+  the actual plan/evidence, distinguishing implemented components from complete phases.
+  Updated coverage's stale pending items for the now-recorded runtime choice and
+  initial input/context evaluation; no blanket completion of engine/tools/prompts/UI.
+- Design inventory remains6/36 desktop,2/12 mobile,2 pilots in code and0/12 accepted
+  routes. No push, merge or deployment; original user checkout/data were preserved.
+
+## Next brief after frozen input
+
+Continue the FULL modernization plan. Do not redo native research/questions/recovery,
+repository admission, schema29 task-input versions, schema30 input/continuity or the
+8 saved visual assets. Read status.md and coverage for real scope; many phases remain
+partial. Current host input is exact, not hidden provider context or future outputs.
+Long history needs explicit evidence-preserving checkpoints/compaction, broader
+project/dependency/source/file/Git/permission invalidation and verified author receipts.
+Complete typed editing and legacy question/role/project communication migration plus
+full event catch-up/history pagination/retention. Connect retained command/tool consumers
+through a host facade, cross-database workspace exclusion and task capability policy
+before mutable production tools. Finish owner aliases/handoff/restore generation,
+project lifecycle/deletion/lifetime budgets, all legacy loops/roles/writers and71
+individual tools/11 categories, exact-candidate Git/review/CI acceptance, subscription-
+only auxiliary inference, full prompt/book-skill inventory/rewrite/held-out evals and
+human comprehension/structured accessible diagram rendering, backup/restore/bootstrap.
+Resolve or replace100 baseline failures with correct behavior. UI still needs30 desktop
+concepts and10 mobile adaptations for ten other routes, all shared panels and actual
+rendered/mobile/keyboard/accessibility/human acceptance of all12 routes. Final fresh
+independent whole-branch review before integration. Model remains global host JSON/
+restart with no web/per-agent/project selector. Goal active; no complete/paused/blocked
+status while meaningful authorized work remains. Do not infer native delivery from
+prepared input, observed start from missing receipt, or understanding from good output.

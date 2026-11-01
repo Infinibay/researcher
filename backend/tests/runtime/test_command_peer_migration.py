@@ -23,6 +23,7 @@ def test_migration_preserves_unowned_history_and_refuses_retrospective_binding(
                     "command_peer_schema.sql",
                     "admission_schema.sql",
                     "task_inputs_schema.sql",
+                    "run_input_schema.sql",
                 )
                 else apply(conn, path)
             ),

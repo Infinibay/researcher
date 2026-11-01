@@ -73,6 +73,21 @@ export interface QuestionInboxPage {
   next_after_id: number | null
 }
 
+export type RunInputRecord = { available: false; reason: string; attempt_id: string | null } | {
+  available: true
+  input_text: string
+  input_sha256: string
+  developer_instructions: string
+  instructions_sha256: string
+  business_catalog: unknown[]
+  native_start_observed: boolean
+  model: string | null
+}
+
+export function runInput(projectId: number, runId: string) {
+  return fetchApi<RunInputRecord>(`/api/projects/${projectId}/runs/${encodeURIComponent(runId)}/input`)
+}
+
 export function questionInbox(projectId: number, afterId = 0) {
   return fetchApi<QuestionInboxPage>(`/api/projects/${projectId}/questions?after_id=${afterId}&limit=50`)
 }

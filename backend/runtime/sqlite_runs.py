@@ -179,60 +179,63 @@ class SQLiteRunStore:
 
     def context_snapshot(self, project_id, task_id):
         with self._transaction() as conn:
-            self._existing_task(conn, project_id, task_id)
-            task = conn.execute(
-                """SELECT title,description,type,status,acceptance_criteria,context_json,
-                priority,estimated_complexity,branch_name,assigned_to,reviewer,
-                epic_id,milestone_id,parent_task_id FROM tasks WHERE project_id=? AND id=?""",
-                (project_id, task_id),
-            ).fetchone()
-            revisions = conn.execute(
-                "SELECT version,statement,source_kind,source_reference FROM runtime_context_revisions WHERE project_id=? AND task_id=? ORDER BY version",
-                (project_id, task_id),
-            ).fetchall()
-            return {
-                "task": dict(task),
-                "context_version": self._context(conn, task_id),
-                "corrections": [dict(row) for row in revisions],
-                "task_changes": [
-                    {
-                        "version": change["version"],
-                        "source_kind": "task_metadata",
-                        "actor": None,
-                        "recorded_at": change["recorded_at"],
-                        "changes": {
-                            field: {"before": before[field], "after": value}
-                            for field, value in after.items()
-                            if before[field] != value
-                        },
-                    }
-                    for change in conn.execute(
-                        "SELECT * FROM runtime_task_input_changes WHERE project_id=? AND task_id=? ORDER BY version",
-                        (project_id, task_id),
+            return self._context_snapshot(conn, project_id, task_id)
+
+    def _context_snapshot(self, conn, project_id, task_id):
+        self._existing_task(conn, project_id, task_id)
+        task = conn.execute(
+            """SELECT title,description,type,status,acceptance_criteria,context_json,
+            priority,estimated_complexity,branch_name,assigned_to,reviewer,
+            epic_id,milestone_id,parent_task_id FROM tasks WHERE project_id=? AND id=?""",
+            (project_id, task_id),
+        ).fetchone()
+        revisions = conn.execute(
+            "SELECT version,statement,source_kind,source_reference FROM runtime_context_revisions WHERE project_id=? AND task_id=? ORDER BY version",
+            (project_id, task_id),
+        ).fetchall()
+        return {
+            "task": dict(task),
+            "context_version": self._context(conn, task_id),
+            "corrections": [dict(row) for row in revisions],
+            "task_changes": [
+                {
+                    "version": change["version"],
+                    "source_kind": "task_metadata",
+                    "actor": None,
+                    "recorded_at": change["recorded_at"],
+                    "changes": {
+                        field: {"before": before[field], "after": value}
+                        for field, value in after.items()
+                        if before[field] != value
+                    },
+                }
+                for change in conn.execute(
+                    "SELECT * FROM runtime_task_input_changes WHERE project_id=? AND task_id=? ORDER BY version",
+                    (project_id, task_id),
+                )
+                for before, after in [
+                    (
+                        json.loads(change["before_json"]),
+                        json.loads(change["after_json"]),
                     )
-                    for before, after in [
-                        (
-                            json.loads(change["before_json"]),
-                            json.loads(change["after_json"]),
-                        )
-                    ]
-                ],
-                "user_answers": [
-                    {
-                        "request_id": q["request_id"],
-                        "asked_under_context": q["context_version"],
-                        "answer_context_version": q["answer_context_version"],
-                        "questions": json.loads(q["question_set_json"]),
-                        "answers": json.loads(q["response"]),
-                    }
-                    for q in conn.execute(
-                        """SELECT q.*,u.response FROM runtime_question_links q JOIN user_requests u ON u.id=q.request_id
-                        JOIN runtime_runs r ON r.id=q.run_id WHERE q.project_id=? AND r.task_id=? AND u.status='responded'
-                        AND q.answer_context_version IS NOT NULL ORDER BY q.answer_context_version,q.request_id""",
-                        (project_id, task_id),
-                    )
-                ],
-            }
+                ]
+            ],
+            "user_answers": [
+                {
+                    "request_id": q["request_id"],
+                    "asked_under_context": q["context_version"],
+                    "answer_context_version": q["answer_context_version"],
+                    "questions": json.loads(q["question_set_json"]),
+                    "answers": json.loads(q["response"]),
+                }
+                for q in conn.execute(
+                    """SELECT q.*,u.response FROM runtime_question_links q JOIN user_requests u ON u.id=q.request_id
+                    JOIN runtime_runs r ON r.id=q.run_id WHERE q.project_id=? AND r.task_id=? AND u.status='responded'
+                    AND q.answer_context_version IS NOT NULL ORDER BY q.answer_context_version,q.request_id""",
+                    (project_id, task_id),
+                )
+            ],
+        }
 
     def task_runs(self, project_id, task_id, *, limit=30):
         if type(limit) is not int or not 1 <= limit <= 100:
@@ -264,6 +267,153 @@ class SQLiteRunStore:
         keeps the full token reservation. Project budgets are durable lifetime
         limits; changing policy requires a separate trusted migration/decision.
         """
+        with self._transaction(write=True) as conn:
+            return self._reserve_inference(
+                conn,
+                lease,
+                workspace=workspace,
+                catalog_hash=catalog_hash,
+                limits=limits,
+                model=model,
+                project_turn_limit=project_turn_limit,
+                project_token_limit=project_token_limit,
+            )
+
+    def reserve_input(
+        self,
+        lease,
+        *,
+        workspace,
+        catalog_hash,
+        model,
+        limits,
+        developer_instructions,
+        catalog,
+        project_turn_limit=20,
+        project_token_limit=4000000,
+    ):
+        """Atomically freeze host input and reserve its one non-replayable turn."""
+        from backend.runtime.contracts import InputTooLarge
+        from backend.runtime.run_inputs import MAX_INPUT_BYTES, freeze_input
+
+        text(developer_instructions, "developer instructions", MAX_INPUT_BYTES)
+        catalog_json = _json(catalog)
+        if hashlib.sha256(catalog_json.encode()).hexdigest() != catalog_hash:
+            raise RunConflict("Native tool catalog differs from its recorded hash")
+        with self._transaction(write=True) as conn:
+            if not self._reserve_inference(
+                conn,
+                lease,
+                workspace=workspace,
+                catalog_hash=catalog_hash,
+                model=model,
+                limits=limits,
+                project_turn_limit=project_turn_limit,
+                project_token_limit=project_token_limit,
+            ):
+                previous = conn.execute(
+                    "SELECT developer_instructions,business_catalog_json FROM runtime_input_snapshots WHERE attempt_id=?",
+                    (lease.attempt_id,),
+                ).fetchone()
+                if previous is not None and tuple(previous) != (
+                    developer_instructions,
+                    catalog_json,
+                ):
+                    raise RunConflict(
+                        "Attempt already reserved other host instructions"
+                    )
+                return (
+                    None  # Includes historical dispatches: no invented input or replay.
+                )
+            row = self._row(conn, lease.project_id, lease.run_id)
+            context = self._context_snapshot(conn, lease.project_id, lease.task_id)
+            if context["task"]["type"] != "research":
+                raise RunConflict("Task type changed before input reservation")
+            frozen = freeze_input(conn, row, context)
+            if (
+                len(frozen.input_text.encode())
+                + len(developer_instructions.encode())
+                + len(catalog_json.encode())
+                > MAX_INPUT_BYTES
+            ):
+                raise InputTooLarge("Complete host input exceeds its byte limit")
+            instructions_sha = hashlib.sha256(
+                developer_instructions.encode()
+            ).hexdigest()
+            conn.execute(
+                "INSERT INTO runtime_input_snapshots VALUES(?,1,?,?,?,?,?,?)",
+                (
+                    lease.attempt_id,
+                    frozen.input_text,
+                    frozen.input_sha256,
+                    developer_instructions,
+                    instructions_sha,
+                    catalog_json,
+                    self.clock(),
+                ),
+            )
+            self._event(
+                conn,
+                lease.project_id,
+                lease.task_id,
+                "run.input_frozen",
+                {
+                    "run_id": lease.run_id,
+                    "attempt_id": lease.attempt_id,
+                    "input_sha256": frozen.input_sha256,
+                    "instructions_sha256": instructions_sha,
+                    "context_version": lease.context_version,
+                    "native_start_observed": False,
+                },
+            )
+            return frozen
+
+    def input_record(self, project_id, run_id):
+        """Read exact host-owned initial input; no reconstruction for old runs."""
+        with self._transaction() as conn:
+            run = self._row(conn, project_id, run_id)
+            row = conn.execute(
+                "SELECT * FROM runtime_input_snapshots WHERE attempt_id=?",
+                (run["current_attempt_id"],),
+            ).fetchone()
+            if row is None:
+                return {
+                    "available": False,
+                    "attempt_id": run["current_attempt_id"],
+                    "reason": "no_record",
+                }
+            return {
+                "available": True,
+                "attempt_id": row["attempt_id"],
+                "schema_version": row["schema_version"],
+                "input_text": row["input_text"],
+                "input_sha256": row["input_sha256"],
+                "developer_instructions": row["developer_instructions"],
+                "instructions_sha256": row["instructions_sha256"],
+                "business_catalog": json.loads(row["business_catalog_json"]),
+                "model": run["dispatch_model"],
+                "created_at": row["created_at"],
+                "native_start_observed": run["turn_id"] is not None,
+                "coverage": {
+                    "researcher_input": "exact",
+                    "native_system_instructions": "not_exposed",
+                    "subsequent_tool_results": "not_in_initial_snapshot",
+                    "understanding": "not_proven",
+                },
+            }
+
+    def _reserve_inference(
+        self,
+        conn,
+        lease,
+        *,
+        workspace,
+        catalog_hash,
+        limits,
+        model=None,
+        project_turn_limit=20,
+        project_token_limit=4000000,
+    ):
         import re
 
         from backend.runtime.native_commands import VERSION
@@ -278,86 +428,81 @@ class SQLiteRunStore:
         identity(project_turn_limit)
         identity(project_token_limit)
         intent = (workspace, catalog_hash, VERSION, _json(asdict(limits)), model)
-        with self._transaction(write=True) as conn:
-            row = self._authority(conn, lease)
-            self._bound_workspace(conn, row, workspace)
-            if row["thread_id"] is None:
-                raise RunConflict("Bind native thread before reserving dispatch")
-            previous = conn.execute(
-                "SELECT * FROM runtime_inference_dispatches WHERE attempt_id=?",
-                (lease.attempt_id,),
-            ).fetchone()
-            if previous is not None:
-                if (
-                    tuple(
-                        previous[k]
-                        for k in (
-                            "workspace",
-                            "catalog_hash",
-                            "runtime_version",
-                            "limits_json",
-                            "model",
-                        )
-                    )
-                    != intent
-                ):
-                    raise RunConflict(
-                        "Attempt already reserved another inference intent"
-                    )
-                return False
-            conn.execute(
-                "INSERT OR IGNORE INTO runtime_project_budgets VALUES(?,?,?)",
-                (lease.project_id, project_turn_limit, project_token_limit),
-            )
-            policy = conn.execute(
-                "SELECT * FROM runtime_project_budgets WHERE project_id=?",
-                (lease.project_id,),
-            ).fetchone()
-            if (policy["turn_limit"], policy["token_limit"]) != (
-                project_turn_limit,
-                project_token_limit,
-            ):
-                raise RunConflict(
-                    "Project budget policy changed; explicit reconciliation required"
-                )
-            used = conn.execute(
-                """SELECT COUNT(*), COALESCE(SUM(CASE WHEN status='settled' AND observed_tokens IS NOT NULL
-                THEN observed_tokens ELSE MAX(token_ceiling,COALESCE(observed_tokens,0)) END),0) FROM runtime_inference_dispatches WHERE project_id=?""",
-                (lease.project_id,),
-            ).fetchone()
+        row = self._authority(conn, lease)
+        self._bound_workspace(conn, row, workspace)
+        if row["thread_id"] is None:
+            raise RunConflict("Bind native thread before reserving dispatch")
+        previous = conn.execute(
+            "SELECT * FROM runtime_inference_dispatches WHERE attempt_id=?",
+            (lease.attempt_id,),
+        ).fetchone()
+        if previous is not None:
             if (
-                used[0] >= project_turn_limit
-                or used[1] + limits.max_observed_tokens > project_token_limit
-            ):
-                raise RunConflict(
-                    "Project work budget exhausted; no native turn was sent"
+                tuple(
+                    previous[k]
+                    for k in (
+                        "workspace",
+                        "catalog_hash",
+                        "runtime_version",
+                        "limits_json",
+                        "model",
+                    )
                 )
-            conn.execute(
-                """INSERT INTO runtime_inference_dispatches(attempt_id,project_id,workspace,catalog_hash,
-                runtime_version,limits_json,model,token_ceiling,status,created_at) VALUES(?,?,?,?,?,?,?,?,'reserved',?)""",
-                (
-                    lease.attempt_id,
-                    lease.project_id,
-                    *intent,
-                    limits.max_observed_tokens,
-                    self.clock(),
-                ),
+                != intent
+            ):
+                raise RunConflict("Attempt already reserved another inference intent")
+            return False
+        conn.execute(
+            "INSERT OR IGNORE INTO runtime_project_budgets VALUES(?,?,?)",
+            (lease.project_id, project_turn_limit, project_token_limit),
+        )
+        policy = conn.execute(
+            "SELECT * FROM runtime_project_budgets WHERE project_id=?",
+            (lease.project_id,),
+        ).fetchone()
+        if (policy["turn_limit"], policy["token_limit"]) != (
+            project_turn_limit,
+            project_token_limit,
+        ):
+            raise RunConflict(
+                "Project budget policy changed; explicit reconciliation required"
             )
-            self._event(
-                conn,
+        used = conn.execute(
+            """SELECT COUNT(*), COALESCE(SUM(CASE WHEN status='settled' AND observed_tokens IS NOT NULL
+            THEN observed_tokens ELSE MAX(token_ceiling,COALESCE(observed_tokens,0)) END),0) FROM runtime_inference_dispatches WHERE project_id=?""",
+            (lease.project_id,),
+        ).fetchone()
+        if (
+            used[0] >= project_turn_limit
+            or used[1] + limits.max_observed_tokens > project_token_limit
+        ):
+            raise RunConflict("Project work budget exhausted; no native turn was sent")
+        conn.execute(
+            """INSERT INTO runtime_inference_dispatches(attempt_id,project_id,workspace,catalog_hash,
+            runtime_version,limits_json,model,token_ceiling,status,created_at) VALUES(?,?,?,?,?,?,?,?,'reserved',?)""",
+            (
+                lease.attempt_id,
                 lease.project_id,
-                lease.task_id,
-                "run.dispatch_reserved",
-                {
-                    "run_id": lease.run_id,
-                    "attempt_id": lease.attempt_id,
-                    "catalog_hash": catalog_hash,
-                    "limits": asdict(limits),
-                    "runtime_version": VERSION,
-                    "model": model,
-                },
-            )
-            return True
+                *intent,
+                limits.max_observed_tokens,
+                self.clock(),
+            ),
+        )
+        self._event(
+            conn,
+            lease.project_id,
+            lease.task_id,
+            "run.dispatch_reserved",
+            {
+                "run_id": lease.run_id,
+                "attempt_id": lease.attempt_id,
+                "catalog_hash": catalog_hash,
+                "limits": asdict(limits),
+                "runtime_version": VERSION,
+                "model": model,
+            },
+        )
+        return True
 
     def note_inference_usage(self, lease, cumulative):
         """Preserve reported high water even if the turn later loses its receipt."""

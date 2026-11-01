@@ -85,6 +85,8 @@ async def test_model_peer_keeps_managed_auth_but_never_business_or_api_key_env(
         workspace=c.workspace, tool_token="HOST_ONLY_GRANT"
     ) as session:
         assert session.thread_id == "factory-thread"
+        sent_instructions = session.developer_instructions
+        sent_catalog = session.catalog
     records = [
         json.loads(line)
         for line in (c.managed / "requests.jsonl").read_text().splitlines()
@@ -95,6 +97,8 @@ async def test_model_peer_keeps_managed_auth_but_never_business_or_api_key_env(
     assert "RESEARCHER_TOOL_TOKEN" not in keys
     started = next(row for row in records if row.get("method") == "thread/start")
     assert started["params"]["permissions"] == "researcher_inference"
+    assert started["params"]["developerInstructions"] == sent_instructions
+    assert started["params"]["dynamicTools"] == sent_catalog
     assert len(started["params"]["dynamicTools"]) == 11
     assert "HOST_ONLY_GRANT" not in json.dumps(records)
     assert not any(row.get("method") == "turn/start" for row in records)

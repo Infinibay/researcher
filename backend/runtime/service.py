@@ -7,7 +7,6 @@ control withdraws live tool authority before waiting for SQLite or native I/O.
 
 import asyncio
 import fcntl
-import json
 import logging
 import os
 import stat
@@ -279,6 +278,10 @@ class RuntimeService:
                 "La tarea cambió a un tipo que este motor todavía no puede ejecutar. La solicitud sigue guardada; revisa la tarea antes de continuar.",
                 "inspect_saved_work",
             ),
+            "input_too_large": (
+                "La tarea o su conversación superan el límite de entrada. No se recortaron instrucciones ni se inició inferencia. Revisa el tamaño del contexto o crea otra tarea/conversación con las condiciones que quieras conservar.",
+                "review_context_or_new_conversation",
+            ),
         }
         message, action = messages[code]
         return await asyncio.to_thread(
@@ -507,18 +510,20 @@ class RuntimeService:
                     await asyncio.to_thread(
                         self.workspaces.validate, slot.spec.project_id, slot.binding
                     )
-                    should_send = await asyncio.to_thread(
-                        self.store.reserve_inference,
+                    frozen = await asyncio.to_thread(
+                        self.store.reserve_input,
                         lease,
                         workspace=str(slot.workspace),
                         catalog_hash=session.catalog_hash,
                         model=session.model,
+                        developer_instructions=session.developer_instructions,
+                        catalog=session.catalog,
                         limits=self.limits,
                         project_turn_limit=self.project_turn_limit,
                         project_token_limit=self.project_token_limit,
                     )
                     dispatch_reserved = True
-                    if not should_send:
+                    if frozen is None:
                         raise RunConflict(
                             "Native dispatch was already reserved; reconcile without replay"
                         )
@@ -563,9 +568,7 @@ class RuntimeService:
                         )
 
                     result = await session.run(
-                        json.dumps(
-                            {**context, "request": slot.spec.prompt}, ensure_ascii=False
-                        ),
+                        frozen.input_text,
                         on_started=on_started,
                         on_event=on_event,
                     )
@@ -682,7 +685,9 @@ class RuntimeService:
                     )
                     if result is None and error_type is not None:
                         code = (
-                            "workspace_changed"
+                            "input_too_large"
+                            if error_type == "InputTooLarge"
+                            else "workspace_changed"
                             if error_type == "WorkspaceChanged"
                             else "preparation_failed"
                             if lease is None
