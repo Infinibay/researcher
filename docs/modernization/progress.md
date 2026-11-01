@@ -3575,3 +3575,87 @@ review only when entire implementation is ready. No phase or goal completion cla
   prompts/books/evals/human interaction, all12routes/36desktop+12mobile/acceptance,
   data/restore/bootstrap/CLI/TUI/Git/CI/dependencies,100baselinefailures and final
   independent whole-branch review. No global percentage, phase completion or goal close.
+
+## Active delivery: Files reference upload and selected responsive UI — base6930d79
+
+- Previous goal turn progress:6930d79 PDF URL and a62a482 four Files concepts/selection.
+  Rechecked actual HEAD/status; only instruction files untracked. Whole goal active.
+- Exit: selected archive/inspector desktop + mobile detail/back, upload with enforced
+  bytes/body bounds and project existence, scoped metadata/download/delete, owner
+  text/PDF preview explicitly NOT a persisted source, real project/keyboard/error/
+  upload/preview/download/delete workflow. No inference on open/upload/preview.
+- Reuse PDFParser/LiveGrants and confinement from BoundedReferenceReader. Share raw
+  file traversal instead of duplicating path checks; large legacy downloads remain
+  available even though extraction is limited. Source snapshots/reports survive deletion.
+- No schema or generalized owner-upload journal added: this owner action has no
+  automatic model retry; explicit failed upload must not be called success. Keep
+  source missing semantics existing-only, and preserve bytes on uncertain commit.
+- TDD: owner HTTP tests written before storage/API changes; include oversize total
+  body/file, unknown project, symlinks/outside paths, wrong project and DB disappearance.
+
+## Files pilot delivered — source base6930d79
+
+- Previous goal turn was a status-only response: no implementation progress. Revalidated
+  HEAD, dirty work and terminal logs before continuing; no process was restarted on
+  an observation timeout. The earlier10 API RED cases became28 directed passes.
+- Added ReferenceStorage shared by acquisition and owner routes: project/uploads
+  confinement, pinned regular FDs, private unique writes, bounded stable snapshots,
+  large legacy download support. Owner catalog/detail/download/delete scope is checked
+  before content/effects; owner previews never persist a research source or invoke a model.
+- Fifteen new API cases now pass, including actual capture/finding/report surviving
+  delete, malformed/scanned/encrypted preview rejection and missing-file download.
+  Ten initial API cases observed RED→GREEN; the additional invariant cases characterize
+  retained behavior. A test fixture initially called nonexistent service methods;
+  corrected it to the existing store API rather than changing product contracts.
+- Implemented selected Files archive/inspector and mobile detail/back: explicit upload,
+  enforced limits, literal search/pagination, scoped URL/cache, timestamped/hash/page
+  preview, exact download, modal confirmation, task link and distinct errors. The
+  explanation uses a page2 citation example without assuming shared understanding or
+  equating extraction with validity. New/modified relevant code has semantic docstrings/
+  JSDoc; scoped Python AST check passes. Whole-branch documentation audit remains open.
+- Frontend RED4 observed against original Files UI; now41 frontend tests pass. Browser
+  exposed actual accessible-name mismatch, backward Tab at native browser boundary,
+  hidden mobile H1 and dark mobile gutters; all corrected and captured. A synchronous
+  focus assertion was a harness race, fixed by awaiting React's effect. One build
+  rejected Array.at under the retained target; used existing-target-compatible indexing.
+-185 directed tests pass from source and isolated wheel;299 backend imports resolve
+  exclusively inside extracted wheel,9 current source hashes match. Full regression
+  run once after backend fault review/package:1657total1554pass100EXACTbaselinefailures
+  3skip,633runtimepass,27warnings,244.30s. No newly failing identities. Frontend build
+  passes with existing bundle-size warning. No new provider dependency or model turn.
+- Final browser:11 primary states+3 supplementary checks (focused PDF text/provenance
+  desktop/mobile and320px detail).14 layout/axe states pass, no page errors. Exact PDF
+  bytes/name,58-reference pagination, upload/escaped text/delete, project-link rejection,
+  metadata/preview/download errors and keyboard tested. Original trial report/dispatch
+  values and copy's report remain unchanged; dispatch count1,source count23 (original2
+  plus21 seeded citations), temporary uploaded reference gone. Not a whole-DB equality
+  claim. Final captures compared with both selected references in the same image input.
+- Inventory now4codepilots/12of36desktop/4of12mobile/0fullyaccepted. Comparison passed
+  within its scope; human comprehension, screen reader, true zoom, other error/race states
+  and legacy consumers still open. Fourteen screenshots/states are validation, not a
+  percentage of product completion. No stage/phase/goal completion claim.
+- Process timing: API RED log21:36UTC, UI RED21:41UTC, final primary browser21:53UTC;
+  checkpoint verification21:57UTC. Roughly17minutes from UI RED through checkpoint,
+  not an estimate of the entire Files work or whole goal. Global244s ran in parallel
+  with browser/visual work; package-directed check~26s. Multiple cheap builds/browser
+  passes followed concrete defects. Several invocations used a wrong relative CWD;
+  use root as command CWD and `npm --prefix frontend` to avoid that repeatable waste.
+- Retained live preview: isolated synthetic Files fixture, exec43379; origin/pid under
+  files-current/origin.txt and pid.txt. Validate live PID/cmdline/cwd before stopping.
+  Browser harnesses are terminal, global exec16597 terminal1 inherited failures only.
+- Ken memory saved under reference-owner-preview-is-not-a-captured-research-source.
+  Connected Ken index remains original checkout; managed source/receipts are authoritative.
+
+## Next brief: retire or migrate legacy document/PDF consumers
+
+- Outcome: retained document/PDF calls use the new capture/provenance/error contract;
+  do not leave a second unrelated reader producing unverifiable quotations.
+- Inspect each consumer of read_paper/pdf_search and configured agent roles/prompts;
+  inventory supported formats and missing behavior before changing public tools.
+- Reuse the existing business capture/search/source/finding/report contracts. Test a
+  concrete legacy entry path with a PDF and unreadable input before implementation;
+  preserve source identity, permissions, cancellation and no automatic uncertain retry.
+- DOCX/CSV/JSON/XML, web/wiki, scientific review, development/Git/CI, engine/loops/
+  autonomy/roles/flows/agent communication, all prompts/evals/books, remaining8routes,
+  acceptance of all12, migration/restore/bootstrap/CLI/TUI/dependencies,100baseline
+  failures and final fresh whole-branch review remain in the full active objective.

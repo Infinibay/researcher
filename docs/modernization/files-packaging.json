@@ -1,0 +1,23 @@
+{
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "76f8859194fb144bc2948bed55a4ce330688a0cac393cd3a4ce6f9bbd3e43e66",
+  "source_comparisons": {
+    "backend/api/routes/files.py": "5c79d6c884644e70c7637735bf7cbae7bd5f2de46fd3189ac0c91da01307912a",
+    "backend/api/models/file.py": "21b92ef10b2427aff3f7e16ef94a037012c8804bf50ad463506401f3e77ab2eb",
+    "backend/api/request_limits.py": "00008d5f7984e56c5a4501a907ee7561cce63f32addafe4a7c9c110596755735",
+    "backend/research/acquisition.py": "f59f82e4ed3f2ad0db72dcd7b316f8ec5367ecda3e97a0e38057364041d0fca0",
+    "backend/research/reference_storage.py": "c8eba0cf9040f0748a3a8715a35aaf69d7f3f3a24daea4c2ca9dd8568c67c580",
+    "backend/research/parser_process.py": "1de8aa50e3139624241e854233e915f092aef95977997d607a9fad3020b725cf",
+    "backend/research/parser_worker.py": "c60690671c09a88f74844f5eddb9a2bea3d287d98d57ea1c9bf1e5ec77ed848a",
+    "backend/research/pdf_text.py": "1810f7b7e73610e7fa72aef31255a883bc2a875c65e0dde2b86e007b58443a0a",
+    "backend/tests/api/test_reference_files.py": "116f23424f7abdb6dbaaef07caa566e6616036ed0b8ca74687f2fa3da5941d1b"
+  },
+  "observed": {
+    "directed_tests_passed": 185,
+    "backend_modules_loaded": 299,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "network": "disabled; Unix sockets allowed"
+  },
+  "limits": "Backend wheel plus explicit installed dependencies; frontend separately built/run from repository. Not a clean full product installation or real model generation proof."
+}

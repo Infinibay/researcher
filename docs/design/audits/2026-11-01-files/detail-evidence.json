@@ -1,0 +1,48 @@
+{
+  "result": "passed",
+  "states": [
+    {
+      "name": "desktop-preview-region",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "workbenchLeft": 192
+      },
+      "violations": [],
+      "sha256": "2575757d3826bb07b738a06c64e47576e1188e06691bc6d2ed8664366956270c"
+    },
+    {
+      "name": "mobile-preview-region",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "workbenchLeft": 0
+      },
+      "violations": [],
+      "sha256": "3c959e0fb637d74ee4a3bfa00dd3dffc62582be136af12f09981b7f5fa8cdfbb"
+    },
+    {
+      "name": "narrow-detail",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 320,
+        "scroll": 320,
+        "workbenchLeft": 0
+      },
+      "violations": [],
+      "sha256": "9aba57b2e24ab9e21c5bea24c96ddb689142bdaeca1baf417041b92be1cd28c3"
+    }
+  ],
+  "scope": "focused text/provenance inspection and 320px reflow; not browser zoom or screen-reader comprehension"
+}

@@ -8,8 +8,8 @@ Motivos del ajuste: [diagnóstico del proceso](workflow-review.md).
 
 - Hay un primer recorrido de investigación con Codex, suscripción, Ken, análisis y reporte persistido. La prueba real de entrada de producto terminó; su monitor falló y se recuperó evidencia durable sin repetir inferencia. No se recuperaron las métricas de memoria perdidas.
 - Las 43 entradas de escenarios siguen abiertas en `coverage.json`: 33 en progreso y 10 pendientes. Son escenarios amplios; esto no significa que sus componentes no funcionen.
-- Interfaz: 3 pilotos, 12/36 conceptos de escritorio y 4/12 móviles; 0/12 páginas con aceptación completa.
-- Última suite registrada: 1539 aprobadas, 100 fallos heredados y 3 omitidas. Falta resolver o retirar con justificación los casos del sistema reemplazado.
+- Interfaz: 4 pilotos, 12/36 conceptos de escritorio y 4/12 móviles; 0/12 páginas con aceptación completa.
+- Última suite registrada: 1554 aprobadas, 100 fallos heredados y 3 omitidas. Falta resolver o retirar con justificación los casos del sistema reemplazado.
 - No hay porcentaje global defendible todavía. El 30% anterior era una impresión, no una medición de alcance ponderado.
 
 ## Última entrega verificada: arranque del recorrido existente
@@ -46,9 +46,19 @@ Verificado: inicializadores explícitos, guardias de API/CLI/launcher y cleanup 
 
 **PDF por URL implementado:** [resultados](pdf-web-results.json), [paquete](pdf-web-packaging.json). Usa el mismo parser, conserva URL/hash/páginas y respeta el plazo restante; las operaciones siguen registradas hasta cerrar I/O y parser.
 
-**Falta para cerrar la capacidad:** consumidores antiguos e interfaz Archivos (`/files`): conceptos/selección/móvil ya preparados; implementación y previsualización pendientes. Documentos (`/wiki`) es otra ruta y conserva su propia migración/rediseño. La extracción actual no hace OCR ni certifica orden visual/tablas/imágenes. Sin aceptación humana ni nuevo ensayo con modelo.
+**Falta para cerrar la capacidad:** consumidores antiguos e interfaz Archivos (`/files`): conceptos/selección/móvil ya preparados; piloto de subida/previa/descarga/borrado implementado y comprobado. Documentos (`/wiki`) es otra ruta y conserva su propia migración/rediseño. La extracción actual no hace OCR ni certifica orden visual/tablas/imágenes. Sin aceptación humana ni nuevo ensayo con modelo.
 
-**Siguiente acción:** implementar Archivos de referencia a partir de las imágenes elegidas y conectar subida/previa/tarea, sin otra fábrica de inferencia ni retirar aún `read_paper/pdf_search`. DOCX/recuperación CSV/JSON/XML, web/wiki y revisión científica mantienen su alcance.
+**Archivos verificado:** [resultados](files-results.json), [paquete](files-packaging.json)
+y [navegador](../design/audits/2026-11-01-files/report.md).185 pruebas dirigidas
+pasan desde fuente y wheel;15 casos nuevos,41 frontend. Subida explícita y limitada,
+previa sin crear fuente, descarga exacta, borrado que conserva capturas/informes,
+paginación, teclado y errores. Incluye docstrings/JSDoc semánticos de las piezas
+nuevas/modificadas; la revisión documental global sigue pendiente.
+
+**Siguiente acción:** migrar consumidores heredados de documentos/PDF sobre el
+contrato de captura existente, con sus prompts y errores; después DOCX/recuperación
+CSV/JSON/XML, web/wiki y revisión científica. No añadir otra fábrica de inferencia
+ni retirar `read_paper/pdf_search` sin revisar sus consumidores y pruebas.
 
 ## Cola posterior, manteniendo el alcance
 

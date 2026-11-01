@@ -1,4 +1,4 @@
-"""Bound business tool and owner pairing JSON before parsing the body."""
+"""Bound business JSON, owner pairing and multipart uploads before body parsing."""
 
 import asyncio
 
@@ -7,9 +7,12 @@ from starlette.types import ASGIApp, Receive, Scope, Send
 
 
 class ToolRequestLimits:
+    """Enforce complete-body byte and wall limits before downstream parsers allocate."""
+
     def __init__(
         self, app: ASGIApp, *, max_bytes: int = 1048576, body_timeout: float = 10
     ):
+        """Bind positive request limits; pairing and upload paths have tighter byte caps."""
         if max_bytes <= 0 or body_timeout <= 0:
             raise ValueError("Request limits must be positive")
         self.app = app
@@ -17,10 +20,14 @@ class ToolRequestLimits:
         self.body_timeout = body_timeout
 
     async def __call__(self, scope: Scope, receive: Receive, send: Send):
+        """Buffer one bounded mutating request, then replay it without automatic retry."""
         path = scope.get("path", "")
         if (
             scope["type"] != "http"
-            or not (path.startswith("/api/research-tools/") or path == "/api/session")
+            or not (
+                path.startswith("/api/research-tools/")
+                or path in ("/api/session", "/api/files")
+            )
             or scope.get("method") not in ("POST", "PUT", "PATCH")
         ):
             return await self.app(scope, receive, send)
@@ -29,7 +36,13 @@ class ToolRequestLimits:
             min(self.max_bytes, 4096) if path == "/api/session" else self.max_bytes
         )
 
+        if path == "/api/files":
+            max_bytes = min(
+                max_bytes, 1016384
+            )  # file bytes plus bounded multipart metadata
+
         async def reject(status, message):
+            """Return a structured limit failure without reaching the route."""
             await JSONResponse(
                 {"error": message, "code": "tool_request_limit"}, status_code=status
             )(scope, receive, send)
@@ -61,6 +74,7 @@ class ToolRequestLimits:
         delivered = False
 
         async def replay():
+            """Deliver the validated body once, preserving later disconnect messages."""
             nonlocal delivered
             if not delivered:
                 delivered = True

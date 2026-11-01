@@ -7,7 +7,7 @@
   "image_count": 4,
   "selected_desktop": "archive-inspector",
   "selection": "../../selection.md",
-  "implementation_status": "pending; generated target is not route acceptance",
+  "implementation_status": "code pilot; owner upload/preview/download/delete and scoped keyboard/browser checks; complete route acceptance pending",
   "assets": [
     {
       "id": "archive-inspector",
@@ -113,5 +113,6 @@
       ],
       "inspected": true
     }
-  ]
+  ],
+  "implementation_evidence": "../../audits/2026-11-01-files/report.md"
 }

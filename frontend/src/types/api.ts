@@ -122,6 +122,7 @@ export interface WikiSearchResult {
   updated_at?: string
 }
 
+/** Stored attachment metadata; existence alone does not prove reading or source capture. */
 export interface ReferenceFile {
   id: number
   project_id: number

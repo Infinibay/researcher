@@ -8,13 +8,20 @@ Continuación: [tablero de ejecución](execution-dashboard.md).
 La [revisión del proceso](workflow-review.md) retira el porcentaje subjetivo anterior
 y organiza las siguientes entregas por resultados observables, sin reducir el plan.
 
-Última entrega: **Informes implementado y verificado**, tercer piloto visual; 20 estados de escritorio/móvil, lectura de citas y corrección sin reescribir el informe. En ese corte: 1498 aprobadas, los mismos 100 fallos heredados y 3 omitidas; frontend 36/36. [Evidencia y límites](reports-results.json). Siguen pendientes nueve rediseños y la aceptación completa de las doce rutas.
+Entrega previa: **Informes implementado y verificado**, tercer piloto visual; 20 estados de escritorio/móvil, lectura de citas y corrección sin reescribir el informe. En ese corte: 1498 aprobadas, los mismos 100 fallos heredados y 3 omitidas; frontend 36/36. [Evidencia y límites](reports-results.json). Tras Archivos quedan ocho rediseños y la aceptación completa de las doce rutas.
 
 PDF: captura de adjunto con páginas/hash y lectura→búsqueda→cita→borrador conectadas;104 pruebas dirigidas también desde wheel. Suite actual:1512 aprobadas,100 fallos heredados exactos,3 omitidas. El worker ya tiene CPU/AS/plazo/IPC y cancelación/cierre; siguen pendientes URL/consumidores/Archivos. [Resultados](pdf-results.json).
 
 Último corte de parser:1527 aprobadas,100 fallos heredados exactos,3 omitidas;158 pruebas dirigidas desde fuente y paquete.15 casos nuevos; sin inferencia adicional. [Evidencia y límites](parser-results.json).
 
 Último corte:PDF por URL pública ya conecta descarga→parser limitado→fuente/páginas→cita→borrador.126 pruebas dirigidas y170 desde wheel. Suite1642:1539 aprobadas,100 fallos heredados exactos,3 omitidas. [Resultados y límites](pdf-web-results.json). Archivos tiene tres alternativas y móvil seleccionados; falta su código.
+
+Última entrega: **Archivos implementado como cuarto piloto**. Subida con límites,
+previa texto/PDF sin fuente implícita, descarga exacta y borrado conservando capturas
+e informes.185 casos dirigidos desde fuente/wheel,41 frontend; suite1657:
+1554 aprobadas,100 fallos heredados exactos,3 omitidas.
+[Resultados y límites](files-results.json), [recorrido visual](../design/audits/2026-11-01-files/report.md).
+La aceptación humana y la migración de consumidores antiguos siguen pendientes.
 
 ## Realizado, con el alcance indicado
 

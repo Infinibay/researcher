@@ -1,3 +1,4 @@
+/** Shared owner session controls and visible project selection for all product routes. @module */
 import { closeOwnerSession } from '../../api/session'
 import { useState, useRef, useEffect } from 'react'
 import { useProjectStore } from '../../stores/project'
@@ -5,6 +6,7 @@ import { useProjects, useProject, useStartProject, useStopProject } from '../../
 import { useActivityFeedStore } from '../../stores/activityFeed'
 import { StatusDot } from '../common/StatusDot'
 
+/** Identify the visible project in both button text and its accessible name. */
 export function Header() {
   const { activeProjectId, setActiveProject } = useProjectStore()
   const { data } = useProjects()
@@ -42,7 +44,7 @@ export function Header() {
       <div className="workspace-project-select flex min-w-0 items-center gap-4" ref={ref}>
         <div className="relative">
           <button
-            aria-expanded={dropdownOpen} aria-controls="project-options" aria-label="Seleccionar proyecto"
+            aria-expanded={dropdownOpen} aria-controls="project-options" aria-label={`Seleccionar proyecto: ${activeProject?.name ?? 'Elegir proyecto…'}`}
             onClick={() => setDropdownOpen(!dropdownOpen)}
             className="flex items-center gap-2 rounded-md border border-surface-700 px-3 py-1.5 text-sm text-slate-200 hover:bg-surface-800"
           >

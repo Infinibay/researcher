@@ -1,0 +1,73 @@
+{
+  "base_commit": "6930d79",
+  "total": 1657,
+  "passed": 1554,
+  "failed": 100,
+  "skipped": 3,
+  "runtime_passed": 633,
+  "new_cases_passed": 15,
+  "new_cases": [
+    "backend.tests.api.test_reference_files::test_pdf_upload_preview_and_download_do_not_create_a_captured_source",
+    "backend.tests.api.test_reference_files::test_foreign_project_metadata_preview_download_and_delete_are_rejected",
+    "backend.tests.api.test_reference_files::test_upload_size_is_rejected_without_a_reference_or_file[1000001]",
+    "backend.tests.api.test_reference_files::test_upload_size_is_rejected_without_a_reference_or_file[1100000]",
+    "backend.tests.api.test_reference_files::test_missing_project_is_rejected_before_creating_storage",
+    "backend.tests.api.test_reference_files::test_upload_never_follows_a_project_upload_directory_symlink",
+    "backend.tests.api.test_reference_files::test_download_and_delete_refuse_legacy_paths_outside_project_uploads",
+    "backend.tests.api.test_reference_files::test_large_legacy_files_remain_downloadable_but_not_silently_truncated_for_preview",
+    "backend.tests.api.test_reference_files::test_catalog_filter_and_paging_are_project_scoped",
+    "backend.tests.api.test_reference_files::test_missing_runtime_database_is_not_recreated_by_catalog",
+    "backend.tests.api.test_reference_files::test_deleting_a_reference_preserves_its_captured_source_and_report",
+    "backend.tests.api.test_reference_files::test_unreadable_preview_fails_without_registering_a_source[%PDF-broken]",
+    "backend.tests.api.test_reference_files::test_unreadable_preview_fails_without_registering_a_source[data1]",
+    "backend.tests.api.test_reference_files::test_unreadable_preview_fails_without_registering_a_source[data2]",
+    "backend.tests.api.test_reference_files::test_missing_upload_is_not_reported_as_a_successful_download"
+  ],
+  "directed_source_passed": 185,
+  "packaged_directed_passed": 185,
+  "frontend_passed": 41,
+  "frontend_build": "passed; retained bundle-size warning",
+  "new_failures": [],
+  "resolved_failures": [],
+  "inherited_failure_identities": {
+    "path": "docs/modernization/baseline-results.json",
+    "sha256": "cd91994b488a4ff0aee3a00087803e2b03cd72593a8bd8675d4aee5fb5265203",
+    "comparison": "all100 EXACT failure identities match"
+  },
+  "raw_junit": {
+    "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/files-global.xml",
+    "sha256": "b501cfb44fd37d9506a98fb84fcc3e83913ea0a68be8dcd3df07279b25816fe2"
+  },
+  "validation": {
+    "wheel_source_comparisons": 9,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "global_suite_green": false
+  },
+  "limits": [
+    "Four route pilots; zero fully accepted routes",
+    "Human comprehension, screen reader and true browser zoom remain unverified",
+    "Legacy consumers and further formats not migrated by this delivery",
+    "Owner upload/delete span filesystem and SQLite; no distributed transaction or orphan reconciler",
+    "Browser download uses a Blob and requires memory for large legacy files"
+  ],
+  "browser": {
+    "primary_states": 11,
+    "supplementary_states": 3,
+    "page_errors": 0,
+    "axe_violations_in_tested_states": 0,
+    "evidence": "docs/design/audits/2026-11-01-files/after-evidence.json",
+    "supplementary": "docs/design/audits/2026-11-01-files/detail-evidence.json",
+    "complete_route_acceptance": false
+  },
+  "ui_source_sha256": {
+    "frontend/src/components/pages/FilesPage.tsx": "7888b4e31e808342c796aca1978d1f4b15f9115c2d290f942ead6698eec5a8f0",
+    "frontend/src/hooks/useFiles.ts": "63278f8b5d337e3ecfa49fba9ee0d2b93b85a77a6001fcec04089457e2c16acb",
+    "frontend/src/styles/files.css": "eb107dea53cf2aa9a0445820b4bc9de5f41d9c28d0a138b4f87627ce07cdee4a",
+    "frontend/src/components/layout/Header.tsx": "80a42bba48a83ab12c1576ddae6e3d6f2e8b2892dcdcb3ed76d6570162236bc7",
+    "frontend/src/utils/projectSelection.ts": "796709191615e01ea0a1ab0faa421bee9eef1190f3f532b7a192adc3e4f05696",
+    "frontend/src/types/api.ts": "4e6f515c07642adefd5e4fb9ffc3b6a927c7603cce2413d3e199de0df5683484",
+    "frontend/tests/files-design.test.ts": "6f17292e8a6441989b7a82c633c876e031d053846706b6218a91ac2d52dc9179",
+    "frontend/tests/files-design-fixture.tsx": "f7ab96ed4990672bee8443921a328c01d62067e426857d5bd8e8a77424e2db48"
+  }
+}

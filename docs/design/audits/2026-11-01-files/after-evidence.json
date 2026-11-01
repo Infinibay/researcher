@@ -1,0 +1,162 @@
+{
+  "browser": "156.0.8078.4",
+  "data": "isolated synthetic copy; API/SQLite/PDF parser real; inference forbidden",
+  "states": [
+    {
+      "name": "desktop-detail",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "sha256": "cd756d3b5c7d4a7a22bfacb882e23bc628f8620b98cd3c3560d6e4ab8bd44f16"
+    },
+    {
+      "name": "desktop-pdf-preview",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "sha256": "16630bca6916a69dde3edf6b331c41aa3fcd5b76ebbe39571dc7610f2f42772d"
+    },
+    {
+      "name": "mobile-detail",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390
+      },
+      "violations": [],
+      "sha256": "b84b3b0b499714a58505bc534a62b89eb6b20df1362bb6b0ff82f4df41b5bf80"
+    },
+    {
+      "name": "mobile-list",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390
+      },
+      "violations": [],
+      "sha256": "bb206efbd6d1d372f0f0939f47d5fae0c3e18f673647c4b9bf4f7328eff44869"
+    },
+    {
+      "name": "mobile-text-preview",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390
+      },
+      "violations": [],
+      "sha256": "bcf3a4c06ee710dc78438f7e8456e5b1b8c1294a054f7381ba4095a8383b89e8"
+    },
+    {
+      "name": "mobile-delete-dialog",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390
+      },
+      "violations": [],
+      "sha256": "5df55a8a21a193169de45d5f182b30c2c8883681f19a687695ad63164fa6f92c"
+    },
+    {
+      "name": "mobile-size-error",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390
+      },
+      "violations": [],
+      "sha256": "1b8903242b3c5112fe92c56a42342c1d6256dd1f0e7cd52fc71cd2e544fba83c"
+    },
+    {
+      "name": "mobile-foreign-link",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390
+      },
+      "violations": [],
+      "sha256": "bb27df0efe35e44987546605c181b96cabde72bd5148dcbef9738de5aa850813"
+    },
+    {
+      "name": "desktop-detail-error",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "sha256": "47116d64e09288a075a521a2bd03d9a164f7253da1fea636487cbf442da3c078"
+    },
+    {
+      "name": "desktop-preview-error",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "sha256": "bd39e170bba2cfa939a5401ff3201594ad99efe735fb175340f89a043a38fba8"
+    },
+    {
+      "name": "desktop-download-error",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "sha256": "a076d4c943b89294498aef7bf39f69e5b83500d92865e116ff1033c9e148c4aa"
+    }
+  ],
+  "actions": [
+    "PDF preview preserves page markers; exact downloaded bytes and filename",
+    "Native delete dialog focuses safe action, traps backward Tab, Escape restores trigger",
+    "Catalog page 2 shows all 58 synthetic references without clipped actions",
+    "Explicit upload, scoped selection and escaped UTF-8 preview; no HTML execution",
+    "Confirmed delete removes only the uploaded reference and returns to the catalog",
+    "Metadata error is recoverable and never enables preview/delete for missing detail",
+    "Preview and binary download failures remain visible with retry/original access",
+    "Task navigation retains selected project; no automatic task execution"
+  ],
+  "page_errors": [],
+  "uploaded_id": 1056,
+  "result": "passed"
+}

@@ -1,4 +1,4 @@
-# QA visual de los pilotos Tareas, Conversación e Informes
+# QA visual de los pilotos Tareas, Conversación, Informes y Archivos
 
 Resultado actual: **parcial; 0/12 rutas aceptadas completamente**.
 
@@ -53,3 +53,27 @@ inspeccionadas; se eligió Archivo con inspector. Su [selección](docs/design/se
 registra las correcciones de estados no demostrados. Las [capturas iniciales](docs/design/audits/2026-11-01-files/report.md)
 muestran la tabla móvil de631px; no son aceptación del rediseño. La implementación
 y evaluación de Archivos siguen pendientes.
+
+## Archivos: comparación del cuarto piloto
+
+final result: passed — comparación visual/funcional acotada de Archivos, no aceptación
+completa de la ruta o el producto. [Informe y referencias](docs/design/audits/2026-11-01-files/report.md).
+
+Referencias1487×1058/853×1844, objetivos1440×1024/390×844; capturas reales a esos
+viewports con deviceScaleFactor1. Se compararon juntas las dos parejas de imágenes
+por regiones/proporciones; además se inspeccionaron regiones legibles de extracción
+y procedencia y detalle a320px. La referencia no contiene activos raster de contenido.
+Georgia en títulos/sans en controles, papel cálido/verde, catálogo ancho e inspector,
+y detalle móvil conservan la dirección elegida. Se utiliza el shell real; no se
+inventan Atlas, fechas, lectura por agentes, miniaturas o validación científica.
+
+Se corrigieron márgenes móviles oscuros, foco de título con apariencia de campo,
+encabezado principal inaccesible, selector con nombre accesible distinto del texto
+y ciclo de foco del diálogo. Catorce estados pasan controles de layout/axe y el
+recorrido confirma bytes originales, texto escapado, subida y borrado con proyecto.
+No se observan P0/P1/P2 pendientes dentro de este alcance. P3: densidad del shell y
+escala de título móvil respecto al concepto; conservar para coherencia global.
+
+La aceptación global sigue **parcial,0/12**: comprensión humana, lector de pantalla,
+zoom real y estados restantes no se dan por verificados. Archivos es el cuarto
+piloto; no cierra formatos adicionales, consumidores antiguos ni el motor completo.

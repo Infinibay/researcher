@@ -175,4 +175,26 @@ La adaptación móvil generada usa detalle del archivo y regreso a la lista, sin
 
 **Correcciones de contrato antes de código:** «texto no consultado en ninguna tarea» no se deduce de esta pantalla. Usar «lectura no comprobada en esta vista» o un estado sustentado por registros concretos; una captura no prueba lectura completa ni validez. Un adjunto registrado tampoco prueba que el archivo físico siga intacto. La futura previa debe diferenciar extracción puntual de fuente persistida y no inventar páginas/texto. Las fechas/Atlas del mock son ilustrativas y se sustituyen por datos reales. Subir/abrir no inicia inferencia; Eliminar necesita confirmación concreta. Si se muestra un límite de subida, debe estar aplicado por la API.
 
-[Brief](concepts/files/brief.md), [manifest con hashes](concepts/files/manifest.json), [estado anterior](audits/2026-11-01-files/report.md). Implementación y aceptación siguen pendientes; tres pilotos de código, doce conceptos de escritorio y cuatro móviles, cero rutas completamente aceptadas.
+[Brief](concepts/files/brief.md), [manifest con hashes](concepts/files/manifest.json), [recorrido y límites](audits/2026-11-01-files/report.md). Implementado como cuarto piloto; doce conceptos de escritorio y cuatro móviles, cero rutas completamente aceptadas.
+
+
+### Archivos: implementación y comparación
+
+Se conserva el catálogo ancho con inspector lateral, fondo papel, títulos Georgia,
+acciones verdes y selección discreta. En móvil se alternan lista y detalle con
+regreso y restauración de foco. Las referencias y capturas se inspeccionaron juntas;
+se corrigieron márgenes oscuros, foco de título con apariencia de campo, encabezado
+móvil inaccesible y nombre accesible del selector de proyecto.
+
+El shell compartido conserva sus controles reales y nombre de proyecto; el ejemplo
+Atlas y las fechas del mock no son datos del producto. El orden real es por fecha e
+identidad, sin copiar una flecha de orden alfabético sin funcionalidad. La descripción
+aparece una vez en el inspector. El borrado tiene menor peso visual y confirmación
+concreta. En lugar de un supuesto estado de lectura se ofrece una extracción explícita
+con fecha/hash/páginas y distinción entre previa y fuente capturada. No se dibujaron
+miniaturas de páginas o datos de lectura inexistentes. No hay nuevos activos raster
+necesarios: los elementos del concepto son texto/controles, sin imágenes de contenido.
+
+La tipografía del título móvil y densidad del shell difieren del mock; quedan como
+ajustes P3 de coherencia global. No impiden el recorrido probado ni cierran la
+aceptación humana/lector de pantalla/zoom de esta ruta.

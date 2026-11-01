@@ -413,7 +413,13 @@
         "docs/modernization/parser-results.json",
         "docs/modernization/parser-packaging.json",
         "backend/tests/research/test_parser_process.py",
-        "backend/tests/runtime/test_live_grants.py"
+        "backend/tests/runtime/test_live_grants.py",
+        "docs/architecture/reference-files.md",
+        "docs/modernization/files-results.json",
+        "docs/modernization/files-packaging.json",
+        "docs/design/audits/2026-11-01-files/report.md",
+        "frontend/tests/files-design.test.ts",
+        "backend/tests/api/test_reference_files.py"
       ],
       "remaining": [
         "Durable product startup/shutdown and all tool lifecycle integration; old flows are not covered by owned command evidence",

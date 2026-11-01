@@ -16,10 +16,10 @@ archivos generados e inspeccionados, no pantallas aceptadas.
 | `/wiki` | 0 | 0 | Pendiente | Pendiente | Pendiente |
 | `/findings` | 0 | 0 | Pendiente | Pendiente | Pendiente |
 | `/reports` | 3 | 1 | Lectura con trazabilidad | Piloto en código | Parcial: recorrido y capturas; aceptación humana pendiente |
-| `/files` | 3 | 1 | Archivo con inspector | Pendiente | Pendiente |
+| `/files` | 3 | 1 | Archivo con inspector | Piloto en código | Parcial: recorrido/teclado; aceptación humana pendiente |
 | `/repositories` | 0 | 0 | Pendiente | Pendiente | Pendiente |
 | `/flow` | 0 | 0 | Pendiente | Pendiente | Pendiente |
-| **Total** | **12 / 36** | **4 / 12** | **4 / 12** | **3 pilotos** | **0 / 12** |
+| **Total** | **12 / 36** | **4 / 12** | **4 / 12** | **4 pilotos** | **0 / 12** |
 
 Los prompts, archivos, hashes, tamaños y procedencia del piloto están en
 [concepts/tasks/manifest.json](concepts/tasks/manifest.json). Las tres alternativas
@@ -40,6 +40,8 @@ Los conceptos de Informes y su adaptación están en [el manifest](concepts/repo
 El rediseño está implementado y su [recorrido](audits/2026-11-01-reports/report.md) verifica 20 estados en escritorio/móvil, citas paginadas y corrección en la tarea. La aceptación completa sigue pendiente.
 
 
-Archivos (`/files`) ya tiene [capturas iniciales](audits/2026-11-01-files/report.md)
-y [brief](concepts/files/brief.md). No son conceptos generados ni implementación;
-Las cuatro referencias de [su manifest](concepts/files/manifest.json) ya están generadas e inspeccionadas; el código y la aceptación siguen pendientes.
+Archivos (`/files`) implementa el archivo con inspector y el detalle móvil, con
+subida explícita, previa de texto/PDF, descarga original y borrado confirmado.
+[Conceptos y hashes](concepts/files/manifest.json),
+[recorrido y límites](audits/2026-11-01-files/report.md). Cuatro pilotos en código,
+ocho rutas pendientes de implementar y cero rutas con aceptación completa.
