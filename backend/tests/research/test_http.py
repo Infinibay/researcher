@@ -65,10 +65,27 @@ def test_tool_routes_require_a_valid_host_issued_scope(research_client, research
     )
 
 
+@pytest.mark.parametrize("media_type", ["text/plain", "application/pdf"])
 def test_attachment_to_finding_to_report_is_visible_through_the_product_artifact_api(
-    research_client, research_store, db_conn, tmp_path
+    research_client, research_store, db_conn, tmp_path, media_type
 ):
-    _, _, ref = reference(research_store, db_conn, tmp_path)
+    """Read text/PDF through HTTP and preserve its exact citation in an owner-visible draft."""
+    if media_type == "application/pdf":
+        from backend.tests.research.pdf_fixtures import pdf_bytes
+
+        _, _, ref = reference(
+            research_store,
+            db_conn,
+            tmp_path,
+            content=pdf_bytes("Tax rates are fractions."),
+        )
+        db_conn.execute(
+            "UPDATE reference_files SET file_type='application/pdf' WHERE id=?",
+            (ref.id,),
+        )
+        db_conn.commit()
+    else:
+        _, _, ref = reference(research_store, db_conn, tmp_path)
     headers = credentials(research_store)
     response = research_client.post(
         "/api/research-tools/sources/reference",
@@ -299,3 +316,42 @@ def test_product_artifact_detail_requires_its_current_project(
     detail = research_client.get(f"/api/artifacts/{artifact}?project_id=101").json()
     assert detail["title"] == "Alpha report"
     assert detail["research_status"] == "draft"
+
+
+@pytest.mark.parametrize(
+    "case,expected_status",
+    [("scanned", 422), ("encrypted", 422), ("decoded-too-large", 413)],
+)
+def test_pdf_capture_http_failure_does_not_persist_partial_evidence(
+    research_client,
+    research_store,
+    db_conn,
+    tmp_path,
+    case,
+    expected_status,
+):
+    """Translate failed extraction to actionable HTTP errors without creating a source."""
+    from backend.tests.research.pdf_fixtures import pdf_bytes
+
+    data = (
+        pdf_bytes(None)
+        if case == "scanned"
+        else pdf_bytes("Private", encrypted=True)
+        if case == "encrypted"
+        else pdf_bytes("A" * 1000100, compress=True)
+    )
+    _, _, ref = reference(research_store, db_conn, tmp_path, content=data)
+    db_conn.execute(
+        "UPDATE reference_files SET file_type='application/pdf' WHERE id=?", (ref.id,)
+    )
+    db_conn.commit()
+    response = research_client.post(
+        "/api/research-tools/sources/reference",
+        headers=credentials(research_store),
+        json={"operation_key": "pdf-error", "reference_file_id": ref.id},
+    )
+    assert response.status_code == expected_status, response.text
+    assert response.json()["code"] == (
+        "source_too_large" if expected_status == 413 else "source_unavailable"
+    )
+    assert db_conn.execute("SELECT count(*) FROM research_sources").fetchone()[0] == 0

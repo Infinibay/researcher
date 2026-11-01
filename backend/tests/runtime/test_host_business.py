@@ -4,6 +4,7 @@ import asyncio
 import json
 
 import httpx
+import pytest
 
 
 async def test_host_catalog_keeps_credentials_and_authority_out_of_tool_arguments():
@@ -114,9 +115,11 @@ async def test_business_wire_schema_is_compact_but_keeps_real_title_field():
         assert report["properties"]["title"] == {"type": "string"}
 
 
+@pytest.mark.parametrize("media_type", ["text/plain", "application/pdf"])
 async def test_host_business_uses_real_api_scope_and_persists_one_report(
-    coordination, tmp_path, monkeypatch
+    coordination, tmp_path, monkeypatch, media_type
 ):
+    """Exercise native tool dispatch through real HTTP, source capture and draft reports."""
     import time
 
     from backend.api import config
@@ -131,10 +134,15 @@ async def test_host_business_uses_real_api_scope_and_persists_one_report(
     directory = uploads / "101/uploads"
     directory.mkdir(parents=True)
     source = directory / "policy.txt"
-    source.write_text("Tax rates are fractions.")
+    if media_type == "application/pdf":
+        from backend.tests.research.pdf_fixtures import pdf_bytes
+
+        source.write_bytes(pdf_bytes("Tax rates are fractions."))
+    else:
+        source.write_text("Tax rates are fractions.")
     c.conn.execute(
-        "INSERT INTO reference_files(id,project_id,file_name,file_path,file_size,file_type) VALUES(7,101,'policy.txt',?,?,'text/plain')",
-        (str(source), source.stat().st_size),
+        "INSERT INTO reference_files(id,project_id,file_name,file_path,file_size,file_type) VALUES(7,101,'policy.txt',?,?,?)",
+        (str(source), source.stat().st_size, media_type),
     )
     c.conn.execute(
         "INSERT INTO reference_files(id,project_id,file_name,file_path,file_size,file_type) VALUES(8,202,'policy.txt',?,?,'text/plain')",
@@ -166,6 +174,24 @@ async def test_host_business_uses_real_api_scope_and_persists_one_report(
             operation_key="attachment",
             reference_file_id=7,
         )
+        assert captured == await call(
+            "researcher_capture_reference",
+            operation_key="attachment",
+            reference_file_id=7,
+        )
+        snapshot = await call("researcher_source_read", source_id=captured["source_id"])
+        assert "Tax rates are fractions." in snapshot["content"]
+        if media_type == "application/pdf":
+            assert snapshot["provenance"]["pages"][0]["page_number"] == 1
+            assert snapshot["provenance"]["ocr_performed"] is False
+        matches = await call(
+            "researcher_source_search",
+            source_id=captured["source_id"],
+            needle="Tax rates",
+        )
+        assert matches["search_kind"] == "exact_text"
+        assert "Tax rates are fractions." in matches["matches"][0]["excerpt"]
+        source.unlink()
         assert captured == await call(
             "researcher_capture_reference",
             operation_key="attachment",

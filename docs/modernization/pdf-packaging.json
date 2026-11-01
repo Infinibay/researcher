@@ -1,0 +1,26 @@
+{
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "48fb5ff196cba95a96cb2eef91ae57ae9976e058ab68d5cb6679a14878c36069",
+  "source_comparisons": {
+    "backend/research/pdf_text.py": "b6680d2862889cbf84cfbd16846c94caa8ebff5c7780199aa761a50285d64aad",
+    "backend/research/acquisition.py": "3e4edf4639a14504a56742a223a675e2c5511ae3dc93fbb55fea38a367419903",
+    "backend/research/service.py": "9c3864504c35ea0cd0894b7e7851b878060d60aaf35594481e531bbc378eef0c",
+    "backend/research/models.py": "981a2b8dc744ad9ffe40f2ed523ee0140a288e8403c5fe7f72d71d4805381443",
+    "backend/api/research_dependencies.py": "6716cf18c468eb1b1c913a73d1df2d5ce26d26338da567609602b2c551a095c8",
+    "backend/api/routes/research.py": "a5c609d6ba4f5ed0f954beee6ec19f5c6d7f148d8e8643a5aa3e0366afeb6a0b",
+    "backend/runtime/business_definitions.py": "cc8b16a9746c85af8cda37107957558ea4dcb706988fd5b7aec68cdd50323b97",
+    "backend/runtime/host_business.py": "4a060b7c7f6d8a400029b5a351c555d0c3fa9169447e0a1a856009a937301245",
+    "backend/tests/research/test_pdf_acquisition.py": "15e995efdb197c6d31abc86980f5f58e2db6f956ef47763d6c349b7670cad749",
+    "backend/tests/research/pdf_fixtures.py": "5bcb60ae4b3064905f12e0b7445cb4b1b57ab2889b9412d575a2f1f1b7d5d34a",
+    "backend/tests/research/test_http.py": "cf148a4ca7280d7285942a6b7f8ebe6e352a4a026f688b2a45b2443d49355201",
+    "backend/tests/runtime/test_host_business.py": "be7008f712c59a6ee26b4969a1d0992322dc7c660a670c9eef528f9cf2544505"
+  },
+  "observed": {
+    "research_and_business_tests_passed": 104,
+    "backend_modules_loaded": 270,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "network": "disabled; Unix sockets allowed"
+  },
+  "limits": "Backend wheel plus explicit installed dependencies; frontend is separately built/run from repository. Not a complete packaged product install, real model generation, or host enrollment proof."
+}

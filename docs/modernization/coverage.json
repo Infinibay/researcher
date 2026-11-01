@@ -1252,7 +1252,13 @@
         "docs/modernization/host-business-evidence.json",
         "docs/modernization/host-business-results.json",
         "docs/modernization/host-business-live.json",
-        "docs/modernization/host-business-packaging.json"
+        "docs/modernization/host-business-packaging.json",
+        "docs/architecture/pdf-sources.md",
+        "docs/modernization/pdf-results.json",
+        "docs/modernization/pdf-packaging.json",
+        "backend/tests/research/test_pdf_acquisition.py",
+        "backend/tests/research/test_http.py",
+        "backend/tests/runtime/test_host_business.py"
       ],
       "remaining": [
         "Migrate/expose retained capabilities and their actual consumers (inventory of71 tools exists).",
@@ -1719,7 +1725,13 @@
         "docs/modernization/browser-evidence.json",
         "docs/modernization/browser-results.json",
         "evals/ui/run_owner_capture.py",
-        "evals/ui/capture_owner.mjs"
+        "evals/ui/capture_owner.mjs",
+        "docs/architecture/pdf-sources.md",
+        "docs/modernization/pdf-results.json",
+        "docs/modernization/pdf-packaging.json",
+        "backend/tests/research/test_pdf_acquisition.py",
+        "backend/tests/research/test_http.py",
+        "backend/tests/runtime/test_host_business.py"
       ],
       "remaining": [
         "Rendered browser and keyboard verification",
@@ -2382,7 +2394,11 @@
         "backend/api/models/artifact.py",
         "backend/api/routes/artifacts.py",
         "frontend/src/hooks/useArtifacts.ts",
-        "frontend/src/components/reports/presentation.ts"
+        "frontend/src/components/reports/presentation.ts",
+        "backend/research/pdf_text.py",
+        "backend/research/acquisition.py",
+        "backend/tests/research/test_pdf_acquisition.py",
+        "backend/tests/research/pdf_fixtures.py"
       ],
       "remaining": [
         "Audit modules/classes/methods and relevant functions added earlier in this branch; add meaningful searchable docstrings/JSDoc where missing or stale.",

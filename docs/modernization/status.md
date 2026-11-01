@@ -8,7 +8,9 @@ Continuación: [tablero de ejecución](execution-dashboard.md).
 La [revisión del proceso](workflow-review.md) retira el porcentaje subjetivo anterior
 y organiza las siguientes entregas por resultados observables, sin reducir el plan.
 
-Última entrega: **Informes implementado y verificado**, tercer piloto visual; 20 estados de escritorio/móvil, lectura de citas y corrección sin reescribir el informe. Suite: 1498 aprobadas, los mismos 100 fallos heredados y 3 omitidas; frontend 36/36. [Evidencia y límites](reports-results.json). Siguen pendientes nueve rediseños y la aceptación completa de las doce rutas.
+Última entrega: **Informes implementado y verificado**, tercer piloto visual; 20 estados de escritorio/móvil, lectura de citas y corrección sin reescribir el informe. En ese corte: 1498 aprobadas, los mismos 100 fallos heredados y 3 omitidas; frontend 36/36. [Evidencia y límites](reports-results.json). Siguen pendientes nueve rediseños y la aceptación completa de las doce rutas.
+
+PDF: captura de adjunto con páginas/hash y lectura→búsqueda→cita→borrador conectadas;104 pruebas dirigidas también desde wheel. Suite actual:1512 aprobadas,100 fallos heredados exactos,3 omitidas. Capacidad parcial: CPU/RSS/cancelación del parser, PDF por URL y Documentos pendientes. [Resultados](pdf-results.json).
 
 ## Realizado, con el alcance indicado
 

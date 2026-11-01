@@ -9,7 +9,7 @@ Motivos del ajuste: [diagnóstico del proceso](workflow-review.md).
 - Hay un primer recorrido de investigación con Codex, suscripción, Ken, análisis y reporte persistido. La prueba real de entrada de producto terminó; su monitor falló y se recuperó evidencia durable sin repetir inferencia. No se recuperaron las métricas de memoria perdidas.
 - Las 43 entradas de escenarios siguen abiertas en `coverage.json`: 33 en progreso y 10 pendientes. Son escenarios amplios; esto no significa que sus componentes no funcionen.
 - Interfaz: 3 pilotos, 9/36 conceptos de escritorio y 3/12 móviles; 0/12 páginas con aceptación completa.
-- Última suite registrada: 1498 aprobadas, 100 fallos heredados y 3 omitidas. Falta resolver o retirar con justificación los casos del sistema reemplazado.
+- Última suite registrada: 1512 aprobadas, 100 fallos heredados y 3 omitidas. Falta resolver o retirar con justificación los casos del sistema reemplazado.
 - No hay porcentaje global defendible todavía. El 30% anterior era una impresión, no una medición de alcance ponderado.
 
 ## Última entrega verificada: arranque del recorrido existente
@@ -22,7 +22,7 @@ Motivos del ajuste: [diagnóstico del proceso](workflow-review.md).
 
 Verificado: inicializadores explícitos, guardias de API/CLI/launcher y cleanup ante fallos/cancelación; 23 casos nuevos pasan. Fuente: [guía y límites](bootstrap.md), [resultados](bootstrap-results.json) y [paquete](bootstrap-packaging.json). El host completo y restore siguen pendientes.
 
-## Bloque activo: informe visible y corregible
+## Última entrega funcional: informe visible y corregible
 
 **Resultado:** ver el informe real desde la web, entender sus fuentes y límites, corregir una premisa y comprobar el nuevo estado sin perder el informe anterior.
 
@@ -36,12 +36,22 @@ Verificado: inicializadores explícitos, guardias de API/CLI/launcher y cleanup 
 
 **Dependencias:** reutilizar persistencia, fuentes y fixture de producto existentes. No desarrollar otra fábrica de inferencia para esta entrega.
 
+## Bloque activo: investigación sobre documentos/PDF
+
+**Resultado:** referencia PDF del proyecto → texto capturado con identidad y páginas → lectura/búsqueda → cita exacta → borrador consultable. Mantener autoridad, retry y explicación honesta de lo que no se pudo leer.
+
+**Ya verificado en este bloque:** extracción de PDF con texto, hash binario, offsets de página, páginas sin texto, rechazo de cifrado/formato/tamaño, sin truncar; repetición tras borrar el original y revocación antes del commit. Recorridos HTTP y fachada nativa sobre API/SQLite reales;104 pruebas dirigidas aprobadas también desde wheel aislado. [Contrato y límites](../architecture/pdf-sources.md), [resultados](pdf-results.json), [paquete](pdf-packaging.json).
+
+**Falta para cerrar la capacidad:** parser con límites duros de CPU/RSS y cancelación bajo el host, PDF por URL, consumidores antiguos y la interfaz Documentos con sus conceptos/selección/implementación. La extracción actual no hace OCR ni certifica orden visual/tablas/imágenes. Sin aceptación humana ni nuevo ensayo con modelo.
+
+**Siguiente acción:** completar la ejecución limitada/cancelable del parser usando las fronteras existentes; después conectar Documentos, sin otra fábrica de inferencia ni retirar aún `read_paper/pdf_search`. DOCX/recuperación CSV/JSON/XML, web/wiki y revisión científica mantienen su alcance.
+
 ## Cola posterior, manteniendo el alcance
 
 1. Completar investigación útil: búsqueda web, documentos/PDF, conocimiento/wiki y revisión científica; migrar herramientas por capacidades, con sus prompts y contratos.
 2. Desarrollo completo: edición/candidato, pruebas, revisión, Git/CI y efectos externos reconciliables. Resolver requisitos de aislamiento antes de habilitar cada efecto.
 3. Migrar autonomía, roles, flows y comunicación entre agentes al mismo dueño durable; no añadir otro loop LLM. La comunicación humano–agente se verifica en cada recorrido.
-4. Extender diseño a las demás páginas, con conceptos y selección por página; completar aceptación de los dos pilotos existentes.
+4. Extender diseño a las demás páginas, con conceptos y selección por página; completar aceptación de los tres pilotos existentes.
 5. Completar inventario/evaluaciones de todos los prompts y llamadas auxiliares, migraciones/restauración, dependencias, instalación, CLI/TUI y retirada del motor anterior. Trabajar estas obligaciones dentro de las entregas que las toquen; este orden no las aplaza todas al final.
 6. Verificación global, revisión independiente de toda la rama y entrega. No cerrar el objetivo con un subconjunto.
 

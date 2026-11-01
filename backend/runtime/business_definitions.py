@@ -130,7 +130,7 @@ class ResearchTools:
     async def researcher_capture_reference(
         self, operation_key: str, reference_file_id: int
     ) -> dict:
-        """Capture a bounded attachment snapshot once. Reuse operation_key on retry."""
+        """Capture a project attachment once: UTF-8 text or text-bearing PDF. Reuse operation_key on retry. PDF text preserves page offsets and original byte hash in source provenance; no OCR is performed. Empty-text, encrypted, malformed or over-limit PDFs fail explicitly. Read the captured source before citing; extraction does not verify visual reading order or images."""
         return await self._client.request(
             "POST",
             "/sources/reference",
@@ -155,7 +155,7 @@ class ResearchTools:
     async def researcher_source_read(
         self, source_id: int, offset: int = 0, max_chars: int = 12000
     ) -> dict:
-        """Read an untrusted source snapshot window and its provenance. Follow next_offset; an unread tail is not absent evidence."""
+        """Read an untrusted source snapshot window and its provenance. Follow next_offset; an unread tail is not absent evidence. PDF provenance records page character offsets, extraction limits and pages without text; do not infer their contents or visual layout. Cite exact saved text, not guessed OCR."""
         return await self._client.request(
             "GET",
             f"/sources/{source_id}",

@@ -3395,3 +3395,54 @@ review only when entire implementation is ready. No phase or goal completion cla
   task Ruff findings compared against HEAD. Synthetic QA server PID/cmdline/cwd
   validated, SIGINT sent and original terminal session18910 exited0. No demo left
   declared live. Untracked instruction folders/files remain untouched.
+
+## Active delivery: PDF document research — base312dd7b
+
+- Prior goal turn classified progress:312dd7b implemented/verified report flow and
+  searchable docs; full goal remains active. Worktree rechecked: only user-owned
+  instruction files untracked, no active prior QA process.
+- Result/exit: existing uploaded PDF→captured text with original byte hash and page
+  offsets→exact citation/provisional finding through existing research APIs and
+  native business catalog. Retry must return original source after upload deletion;
+  malformed/encrypted/empty-text/over-limit input must never become success or
+  silently truncated evidence. Keep project/path/grant guards and parser context.
+- Reuse ResearchService/BoundedReferenceReader/source_read/source_search/finding/report;
+  no new inference factory, generic RAG loop or paid generation. Other document
+  formats/web search/wiki and complete UI/engine/tool scope remain required.
+- Local pypdf6.21.4 and primary extraction/robustness docs checked; extraction is not
+  OCR and reading order can differ from visual content. Configuration is a public
+  contextvar-scoped apply_configuration, not PdfReader keyword or global mutation.
+  Bounded parser work/stream/page/text limits are not a hard OS CPU/RSS sandbox.
+- Ken recall/related checked acquisition; connected original index does not contain
+  this module. Actual managed sources and existing acquisition tests read directly.
+- PDF RED7: previous reader rejected all PDFs; parser module missing. GREEN16 with
+  existing acquisition cases after explicit SourceTooLarge pass-through (its
+  ValueError ancestry had wrongly translated limits to SourceUnavailable).
+- Directed104 research+host-business cases pass.14new cases cover PDF source/page
+  identity/citations, mixed textless pages, encrypted/malformed/wholly textless input,
+  text/page/decompression limits, context reset, revocation and later-page failure;
+  HTTP422/413 no partial persistence and native facade capture/read/search/report.
+  Text and PDF native/HTTP variants also verify retry after deleting the file.
+- Full backend1615:1512pass100EXACTbaselinefailures3skip,627runtimepass,30warnings,
+  246.13s. No new/resolved failure IDs. Raw JUnit/baseline SHA and14cases recorded
+  in pdf-results.json. Global suite remains red; no baseline failures hidden.
+- Wheel+SDist offline build pass;12source comparisons, fresh-I-S wheel-only270backend
+  imports,104tests pass. Initial verifier omitted repository's asyncio_mode=auto
+  config:21async tests failed as unmarked coroutines. Fixed verifier options only,
+  reran same wheel,104pass; no repeated model trial or product changes for harness.
+- Changed Python Ruff and docstrings at all new PDF/acquisition/test-fixture boundaries
+  pass. Tool descriptions explain no OCR, page provenance and exact citations;
+  source_read exposes parser limits and unread-page status. No freeform SQL/new LLM.
+- Ruling: pypdf parser budgets are not hard CPU/RSS or owned cancellation — preserve
+  PDF capability partial status and make this the next required step, not silently
+  relax capability matrix or retire legacy read_paper/pdf_search. Cost: capability
+  remains incomplete until host execution is limited/cancelable. No URL PDF/OCR or
+  DOCX/CSV/JSON/XML/UI acceptance claimed; full engine/tool/prompt/data scope persists.
+- Reused existing product report flow; no new frontend assets or frontend changes,
+  so no repeated ImageGen/build/browser run. Source/widget human comprehension is
+  still unverified. New PDFs exist only in isolated test uploads, not user projects.
+- User progress question answered with scoped UI2→3pilots/12 (17→25%initialcode),
+  explicitly not overall completion. Withdrawn30%global remains withdrawn.
+- Elapsed proof anchors: source directed104in8.22s; full regression246.13s; fresh
+  package rerun104tests. No extra paid model turn; main retrabajo was verifier async
+  config and exception translation, not new broker/factory work.

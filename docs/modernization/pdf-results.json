@@ -1,0 +1,62 @@
+{
+  "base_commit": "312dd7b",
+  "total": 1615,
+  "passed": 1512,
+  "failed": 100,
+  "skipped": 3,
+  "runtime_passed": 627,
+  "new_cases_passed": 14,
+  "new_cases": [
+    "backend.tests.research.test_http::test_attachment_to_finding_to_report_is_visible_through_the_product_artifact_api[application/pdf]",
+    "backend.tests.research.test_http::test_pdf_capture_http_failure_does_not_persist_partial_evidence[scanned-422]",
+    "backend.tests.research.test_http::test_pdf_capture_http_failure_does_not_persist_partial_evidence[encrypted-422]",
+    "backend.tests.research.test_http::test_pdf_capture_http_failure_does_not_persist_partial_evidence[decoded-too-large-413]",
+    "backend.tests.research.test_pdf_acquisition::test_pdf_capture_keeps_original_byte_identity_pages_and_exact_citations",
+    "backend.tests.research.test_pdf_acquisition::test_mixed_pdf_marks_pages_without_text_instead_of_claiming_ocr",
+    "backend.tests.research.test_pdf_acquisition::test_unreadable_pdf_is_a_failed_capture_not_an_empty_or_partial_source[data0-extractable text]",
+    "backend.tests.research.test_pdf_acquisition::test_unreadable_pdf_is_a_failed_capture_not_an_empty_or_partial_source[data1-encrypted]",
+    "backend.tests.research.test_pdf_acquisition::test_unreadable_pdf_is_a_failed_capture_not_an_empty_or_partial_source[%PDF-not-a-real-document-malformed]",
+    "backend.tests.research.test_pdf_acquisition::test_pdf_extraction_refuses_text_page_and_decoding_limits_without_truncation",
+    "backend.tests.research.test_pdf_acquisition::test_pdf_configuration_does_not_leak_between_captures",
+    "backend.tests.research.test_pdf_acquisition::test_pdf_capture_revalidates_scope_after_extraction",
+    "backend.tests.research.test_pdf_acquisition::test_valid_first_page_does_not_hide_a_later_pdf_extraction_limit",
+    "backend.tests.runtime.test_host_business::test_host_business_uses_real_api_scope_and_persists_one_report[application/pdf]"
+  ],
+  "directed_research_and_business_passed": 104,
+  "new_failures": [],
+  "resolved_failures": [],
+  "inherited_failure_identities": {
+    "path": "docs/modernization/baseline-results.json",
+    "sha256": "cd91994b488a4ff0aee3a00087803e2b03cd72593a8bd8675d4aee5fb5265203",
+    "comparison": "all 100 EXACT identities match"
+  },
+  "raw_junit": {
+    "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/pdf-full.xml",
+    "sha256": "6a64056b3742ac385e31ffee5cc45c8d0c64ccb4bdfeb5dabd13e9731d1f6506"
+  },
+  "validation": {
+    "offline_wheel_and_sdist_build": true,
+    "wheel_source_comparisons": 12,
+    "wheel_tests_passed": 104,
+    "wheel_backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "external_network_tests": "disabled; Unix sockets/local controlled fixtures only",
+    "ruff_changed_python": "pass",
+    "docstrings_new_pdf_boundaries": "present",
+    "global_suite_green": false
+  },
+  "implemented": [
+    "PDF upload reference byte snapshot with page offsets/text and original-file hash",
+    "Exact source reading/search/citation through HTTP and native business facade",
+    "Mixed empty-page disclosure without OCR claims",
+    "Encrypted/malformed/no-text/oversized extraction rejected without partial persistence",
+    "Operation retry after upload deletion and authority revalidation after extraction"
+  ],
+  "not_achieved": [
+    "Hard OS CPU/RSS limits and host-owned parser cancellation",
+    "PDF acquisition by URL, old tool consumers migration and complete PDF capability retirement gate",
+    "DOCX and structured CSV/JSON/XML recovery, web/wiki/scientific review",
+    "Documents route redesign, page-level owner preview, human/model comprehension acceptance",
+    "Complete engine/tool/prompt/data/operation modernization,100 baseline failures and final independent branch review"
+  ]
+}

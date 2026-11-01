@@ -1,4 +1,8 @@
-"""Bounded attachment acquisition anchored to the project's upload directory."""
+"""Capture confined UTF-8/PDF uploads as immutable research-source snapshots.
+
+File traversal rejects symlinks and cross-project paths before format extraction.
+Original byte identity and parser provenance accompany the saved text.
+"""
 
 import hashlib
 import os
@@ -14,13 +18,17 @@ from backend.research.models import (
 
 
 class BoundedReferenceReader:
+    """Read bounded, stable files under one project upload root; never arbitrary paths."""
+
     def __init__(self, upload_root: Path, *, max_bytes: int = 1000000):
+        """Bind the trusted upload root and maximum bytes before opening a reference."""
         if max_bytes <= 0:
             raise ValueError("Attachment byte limit must be positive")
         self.upload_root = upload_root.absolute()
         self.max_bytes = max_bytes
 
     def read(self, reference: ReferenceRecord) -> SourceDraft:
+        """Acquire one stable byte snapshot, then extract supported text with provenance."""
         path = Path(reference.path)
         try:
             parts = path.relative_to(self.upload_root).parts
@@ -38,10 +46,11 @@ class BoundedReferenceReader:
             )
         if not (
             reference.mime_type.startswith("text/")
-            or reference.mime_type in ("application/json", "application/xml")
+            or reference.mime_type
+            in ("application/json", "application/xml", "application/pdf")
         ):
             raise SourceUnavailable(
-                "This acquisition route currently supports UTF-8 text attachments; this format requires a dedicated parser"
+                "This acquisition route supports UTF-8 text and PDF attachments; this format requires a dedicated parser"
             )
         handles = []
         try:
@@ -88,10 +97,20 @@ class BoundedReferenceReader:
         finally:
             for handle in reversed(handles):
                 os.close(handle)
-        try:
-            content = bytes(data).decode("utf-8-sig")
-        except UnicodeDecodeError as exc:
-            raise SourceUnavailable("Attachment is not valid UTF-8 text") from exc
+        if reference.mime_type == "application/pdf":
+            from backend.research.pdf_text import extract_pdf
+
+            content, extraction = extract_pdf(bytes(data))
+        else:
+            if data.startswith(b"%PDF-"):
+                raise SourceUnavailable(
+                    "PDF attachment has a non-PDF media type; upload it as application/pdf"
+                )
+            try:
+                content = bytes(data).decode("utf-8-sig")
+            except UnicodeDecodeError as exc:
+                raise SourceUnavailable("Attachment is not valid UTF-8 text") from exc
+            extraction = {"extraction": "utf8-v1"}
         return SourceDraft(
             kind="attachment",
             locator=f"reference:{reference.id}",
@@ -102,6 +121,6 @@ class BoundedReferenceReader:
                 "byte_sha256": hashlib.sha256(data).hexdigest(),
                 "file_size_bytes": len(data),
                 "mime_type": reference.mime_type,
-                "extraction": "utf8-v1",
+                **extraction,
             },
         )
