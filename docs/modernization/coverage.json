@@ -334,7 +334,16 @@
         "docs/modernization/task-inputs-packaging.json",
         "backend/tests/runtime/test_task_input_versioning.py",
         "backend/tests/runtime/test_task_inputs_migration.py",
-        "frontend/tests/task-design.test.ts"
+        "frontend/tests/task-design.test.ts",
+        "docs/architecture/host-analysis-tools.md",
+        "docs/modernization/analysis-evidence.json",
+        "docs/modernization/analysis-results.json",
+        "docs/modernization/analysis-native.json",
+        "docs/modernization/analysis-live.json",
+        "docs/modernization/analysis-packaging.json",
+        "backend/tests/runtime/test_analysis_tools.py",
+        "evals/runtime/run_analysis_tools.py",
+        "evals/runtime/run_analysis_inference.py"
       ],
       "remaining": [
         "Durable product startup/shutdown and all tool lifecycle integration; old flows are not covered by owned command evidence",
@@ -489,7 +498,16 @@
         "backend/tests/runtime/test_run_input.py",
         "backend/tests/runtime/test_run_input_migration.py",
         "evals/runtime/run_input_continuity.py",
-        "frontend/tests/task-design.test.ts"
+        "frontend/tests/task-design.test.ts",
+        "docs/architecture/host-analysis-tools.md",
+        "docs/modernization/analysis-evidence.json",
+        "docs/modernization/analysis-results.json",
+        "docs/modernization/analysis-native.json",
+        "docs/modernization/analysis-live.json",
+        "docs/modernization/analysis-packaging.json",
+        "backend/tests/runtime/test_analysis_tools.py",
+        "evals/runtime/run_analysis_tools.py",
+        "evals/runtime/run_analysis_inference.py"
       ]
     },
     "E07": {
@@ -547,7 +565,16 @@
         "backend/tests/runtime/test_run_input.py",
         "backend/tests/runtime/test_run_input_migration.py",
         "evals/runtime/run_input_continuity.py",
-        "frontend/tests/task-design.test.ts"
+        "frontend/tests/task-design.test.ts",
+        "docs/architecture/host-analysis-tools.md",
+        "docs/modernization/analysis-evidence.json",
+        "docs/modernization/analysis-results.json",
+        "docs/modernization/analysis-native.json",
+        "docs/modernization/analysis-live.json",
+        "docs/modernization/analysis-packaging.json",
+        "backend/tests/runtime/test_analysis_tools.py",
+        "evals/runtime/run_analysis_tools.py",
+        "evals/runtime/run_analysis_inference.py"
       ]
     },
     "E10": {
@@ -1554,6 +1581,26 @@
         "Broader context-dependency invalidation and later-input/output provenance.",
         "Native internal system instructions/Ken schemas are outside the exact host initial-input record.",
         "Full prompt/held-out/human and rendered UI acceptance."
+      ]
+    },
+    "host_analysis_tools": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/host-analysis-tools.md",
+        "docs/modernization/analysis-evidence.json",
+        "docs/modernization/analysis-results.json",
+        "docs/modernization/analysis-native.json",
+        "docs/modernization/analysis-live.json",
+        "docs/modernization/analysis-packaging.json",
+        "backend/tests/runtime/test_analysis_tools.py",
+        "evals/runtime/run_analysis_tools.py",
+        "evals/runtime/run_analysis_inference.py"
+      ],
+      "remaining": [
+        "Migrate retained legacy shell/flow consumers and full code-interpreter capabilities.",
+        "Writable development requires global workspace ownership and exact candidate acceptance.",
+        "Owner output read windows/UI, broader production Stop/correction scenarios and recovery.",
+        "All71 tools/11 categories, legacy engine replacement and complete prompt/human/UI acceptance remain required."
       ]
     }
   }

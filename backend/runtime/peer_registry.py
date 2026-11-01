@@ -62,13 +62,13 @@ class PeerRegistry:
             is None
         ):
             raise RunConflict("Command peers require a registered attempt scope")
-        if (
-            conn.execute(
-                "SELECT COUNT(*) FROM runtime_peers WHERE attempt_id=?",
-                (lease.attempt_id,),
-            ).fetchone()[0]
-            >= 8
-        ):
+        counts = conn.execute(
+            "SELECT COUNT(*),SUM(state!='closed') FROM runtime_peers WHERE attempt_id=?",
+            (lease.attempt_id,),
+        ).fetchone()
+        # Closing a per-job peer releases physical capacity; keep its immutable
+        # receipt for recovery. Also bound total history within one attempt.
+        if counts[0] >= 128 or (counts[1] or 0) >= 8:
             raise RunConflict("Attempt peer capacity reached")
         try:
             conn.execute(

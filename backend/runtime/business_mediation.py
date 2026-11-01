@@ -26,6 +26,41 @@ def _failure(message):
     return {"success": False, "contentItems": [{"type": "inputText", "text": message}]}
 
 
+def catalog_digest(catalog):
+    return hashlib.sha256(
+        json.dumps(
+            catalog, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+        ).encode()
+    ).hexdigest()
+
+
+class ProjectTools:
+    """One pre-admission catalog with explicit host/business dispatch ownership."""
+
+    def __init__(self, business, analysis):
+        self.business, self.analysis = business, analysis
+        self.catalog = [*business.catalog, *analysis.catalog]
+        names = [tool["name"] for tool in self.catalog]
+        if len(names) != len(set(names)):
+            raise ValueError(
+                "Project tool names must be unique before thread admission"
+            )
+        self._host_names = frozenset(tool["name"] for tool in analysis.catalog)
+
+    @property
+    def catalog_hash(self):
+        return catalog_digest(self.catalog)
+
+    async def call(self, params):
+        if (
+            isinstance(params, dict)
+            and isinstance(params.get("tool"), str)
+            and params["tool"] in self._host_names
+        ):
+            return await self.analysis.call(params)
+        return await self.business.call(params)
+
+
 class BusinessTools:
     def __init__(self, peer, catalog, active):
         self._peer = peer
@@ -58,11 +93,7 @@ class BusinessTools:
 
     @property
     def catalog_hash(self):
-        return hashlib.sha256(
-            json.dumps(
-                self.catalog, sort_keys=True, separators=(",", ":"), ensure_ascii=False
-            ).encode()
-        ).hexdigest()
+        return catalog_digest(self.catalog)
 
     async def call(self, params):
         if not self._active():
@@ -72,6 +103,7 @@ class BusinessTools:
         if (
             not isinstance(params, dict)
             or params.get("namespace") is not None
+            or not isinstance(params.get("tool"), str)
             or params.get("tool") not in self._names
             or not isinstance(params.get("arguments"), dict)
         ):

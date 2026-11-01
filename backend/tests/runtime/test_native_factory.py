@@ -138,6 +138,75 @@ async def test_native_factory_registers_namespace_init_before_protocol_start(
     assert peers.closed()
 
 
+async def test_registered_session_dispatches_python_with_combined_frozen_catalog(
+    native_factory_setup, coordination, monkeypatch
+):
+    import time
+
+    from backend.runtime.peer_registry import AttemptPeers
+    from backend.tests.runtime.test_analysis_tools import content, envelope, terminal
+    from backend.tests.runtime.test_command_executor import executor
+
+    c = native_factory_setup
+    coordination.now[0] = time.time()
+    run = coordination.store.admit(coordination.spec)
+    lease, peers = AttemptPeers.claim(
+        coordination.store, 101, run.run_id, "owner", lease_seconds=120
+    )
+
+    def command_factory(**kwargs):
+        # Replace only the native executable boundary; retain actual guards,
+        # SQLite admission/receipts and real subprocess output/cancellation.
+        assert kwargs["workspace_access"] == "read"
+        assert kwargs["lease"] == lease and kwargs["workspace"] == c.workspace
+        return executor(coordination, c.workspace, lease)
+
+    monkeypatch.setattr(c.module, "command_executor", command_factory, raising=False)
+    try:
+        async with factory(c).open(
+            workspace=c.workspace, tool_token="HOST_ONLY_GRANT", peer_owner=peers
+        ) as session:
+            names = {tool["name"] for tool in session.catalog}
+            assert "researcher_python" in names and "researcher_command_cancel" in names
+            assert len(names) == 15
+            first_hash = session.catalog_hash
+            started = content(
+                await session._request(
+                    {
+                        "method": "item/tool/call",
+                        "params": envelope(
+                            "researcher_python",
+                            operation_key="through-session",
+                            code="print(6 * 7)",
+                        ),
+                    }
+                )
+            )
+            result = await terminal(session.business, started["job_id"])
+            assert (
+                result["stdout"]["text"] == "42\n" and result["local_execution_closed"]
+            )
+            assert session.catalog_hash == first_hash
+            invalid = await session._request(
+                {"method": "item/tool/call", "params": {"tool": []}}
+            )
+            assert not invalid["success"]
+        rows = [
+            json.loads(line)
+            for line in (c.managed / "requests.jsonl").read_text().splitlines()
+        ]
+        sent = next(
+            row["params"]["dynamicTools"]
+            for row in rows
+            if row.get("method") == "thread/start"
+        )
+        assert {tool["name"] for tool in sent} == names
+        assert "HOST_ONLY_GRANT" not in json.dumps(sent)
+    finally:
+        await peers.aclose()
+    assert peers.closed()
+
+
 async def test_unsafe_effective_configuration_is_refused_before_thread_or_turn(
     native_factory_setup,
 ):

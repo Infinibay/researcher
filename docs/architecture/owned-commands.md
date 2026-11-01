@@ -1,9 +1,10 @@
 # Jobs nativos con dueño y recibos durables
 
 La migración 20 incorpora `runtime_jobs`. `OwnedCommandExecutor` usa una conexión
-nativa dedicada por intento; `command_executor` compone el proceso privado y su
-perfil de permisos. Todavía no hay endpoint de admisión ni integración con el
-servicio del producto. Los flows antiguos siguen activos en sus rutas.
+nativa dedicada a un intento; `command_executor` compone el proceso privado y su
+perfil de permisos. La integración productiva de análisis utiliza un peer por job,
+descrito en [host-analysis-tools.md](host-analysis-tools.md). Los flows antiguos
+siguen activos en sus rutas; no heredan estos controles sin migrar sus consumidores.
 
 ## Autoridad y efectos
 

@@ -1543,6 +1543,31 @@ class SQLiteRunStore:
         with self._transaction() as conn:
             return self._job_view(self._job_row(conn, project_id, job_id))
 
+    def command_receipt(self, lease, *, operation_key, spec: CommandSpec, workspace):
+        """Read an identical intent before opening a peer; never grant stale readers.
+
+        Owner recovery deliberately uses get_job instead. A missing receipt is
+        not a reservation: reserve_job must still enforce authority atomically.
+        """
+        command_key(operation_key)
+        fingerprint = _digest({"workspace": workspace, "spec": asdict(spec)})
+        with self._transaction() as conn:
+            self._authority(conn, lease)
+            row = conn.execute(
+                "SELECT id,request_hash FROM runtime_jobs WHERE run_id=? AND operation_key=?",
+                (lease.run_id, operation_key),
+            ).fetchone()
+            if row is None:
+                return None
+            if row["request_hash"] != fingerprint:
+                raise RunConflict(
+                    "Command operation key already identifies another intent"
+                )
+            job = self._job_view(self._job_row(conn, lease.project_id, row["id"]))
+            if job.attempt_id != lease.attempt_id:
+                raise RunConflict("Command receipt belongs to an earlier attempt")
+            return job
+
     def reserve_job(
         self,
         lease,

@@ -1,8 +1,10 @@
 # Entrada inicial registrada y continuidad de conversación
 
 La migración 30 conserva lo que Researcher prepara para un intento: texto inicial
-literal, hash, instrucciones de developer, su hash y catálogo de herramientas de
-negocio. No reconstruye entradas antiguas a partir de respuestas. Tampoco captura
+literal, hash, instrucciones de developer, su hash y catálogo dinámico del proyecto
+(negocio y, en sesiones productivas nuevas, análisis del host). El nombre histórico
+`business_catalog` se conserva en API/SQL por compatibilidad. No reconstruye entradas
+antiguas a partir de respuestas. Tampoco captura
 las instrucciones internas del proveedor, el catálogo MCP completo de Ken ni los
 resultados posteriores de herramientas. Es un registro del host, no una prueba de
 comprensión, aceptación, coste facturado o posibilidad de repetir el intento.

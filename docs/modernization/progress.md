@@ -1021,3 +1021,151 @@ independent whole-branch review before integration. Model remains global host JS
 restart with no web/per-agent/project selector. Goal active; no complete/paused/blocked
 status while meaningful authorized work remains. Do not infer native delivery from
 prepared input, observed start from missing receipt, or understanding from good output.
+
+
+## Host-owned analysis tools — base4d9127b
+
+- Previous user turn was a requested status report, not implementation progress.
+  This goal turn adds the actual host tool consumer rather than re-planning it.
+- AnalysisTools exposes strict start/read/cancel/Python schemas. ProjectTools joins
+  them with eleven business schemas before thread/start, checks unique names and
+  hashes the combined catalog. Diagnostic sessions without AttemptPeers retain the
+  old eleven-tool catalog; production scopes have fifteen. Resume checks the exact
+  combined hash. The historical business_catalog API/SQL name is retained.
+- Ruling: research calculations/diagnostics use an explicitly read-only workspace,
+  no network/inherited credentials, host-selected isolated standard-library Python
+  and explicit public toolchain read mount. This is a retained analysis capability,
+  not a substitute for writable development, scientific packages or output artifacts.
+  Those still require global workspace ownership/capability policy and acceptance.
+- Each job owns one native peer. Identical receipt lookup happens before opening
+  another peer; changed intents conflict, unknown/previous connections never replay.
+  Model reads require current authority before/after; owner recovery remains separate.
+  Canonical output persists at termination, not live incremental streaming. Windows
+  preserve exact bytes/base64 and mark lossy UTF-8; closed/exit/result/acceptance differ.
+- Terminal reads and scope exit close all descendants, even detached children after
+  exit0. Cancellation of a reader keeps a shielded, joinable cleanup task. Unknown
+  command results revoke authority; zero exit still does not accept the task.
+- Nineteen initial facade cases failed because the implementation was missing;
+  wiring failed for absent schemas. Extra RED cases caught malformed envelopes,
+  missing cwd and cancelled cleanup. Fixed and included in the full suite. Source-
+  level lineage search reached ExecuteCommandTool but the new runtime is not indexed
+  by connected Ken; manual callers/source verified, no broad reindex was attempted.
+- Real no-inference CLI probe first completed six cases then hit peer capacity.
+  Initial public hypothesis of lease expiry was wrong: timestamps showed3sec and
+  source showed the eight-row historical cap. Ruling: eight peers without closure,
+  up to128 retained receipt rows per attempt. Nine sequential jobs verify reuse of
+  physical capacity without deleting evidence. Fresh real CLI probe64c1776c passed
+  all7 calculation/read/write-denial/external/symlink/network/environment cases,
+  including poisoned local permissions. No model calls in these probes.
+- Full suite1227:1124 passed, same100 baseline identities,3 skipped,29 warnings.
+  All299 runtime tests pass. No new or resolved baseline failures; all100 names are
+  in analysis-results.json. Lint passes for changed Python; wheel contains identical
+  bytes for all23 runtime modules. No schema migration/new user database changes.
+- Actual analysis-inference-7792402f submitted one subscription turn (gpt-6.1-sol),
+  mandatory published Ken0.18.0 and pinned Codex0.166.0. Native code-mode trace confirms
+  actual Ken read/recall and returned invoice source. One host Python job printed
+  tax28.77/total165.77/code137.21; one report remains draft, task not done, sources
+  unchanged, grants revoked, all3 peers closed. Reported180751 tokens are observed
+  native usage, not billing/quota accounting. No hidden/internal trace content copied.
+- The generative harness failed after successful completion by querying reports.id
+  instead of artifact_id. Fixed the harness; verified the existing terminal DB and
+  exact native thread trace with --verify-root, zero extra generation. Original
+  failure evidence preserved and hashed. Its repeated HTTP receipt check was not
+  reached; receipt tests are separate evidence. No second run was used to hide it.
+- Bound11 changed source/test/eval files and16 logs, with separate native/live/suite/
+  packaging reports. No image calls, frontend edits, visual or human acceptance.
+  All observed test/build/trial handles are terminal; no server intentionally left.
+
+## Next brief after host analysis
+
+Continue the FULL modernization plan. New production research sessions have15
+project tools plus mandatory Ken; old sessions cannot silently resume with changed
+catalog. The analysis profile is read-only/standard-library and jobs have terminal
+output persistence. Do not redo input/context/chat/tasks work or the8 saved concepts.
+Next connect owner output windows and UI/read-only recovery, broaden real Stop/
+correction/unknown-receipt scenarios and migrate actual retained command consumers.
+Before mutable tools, finish cross-database workspace ownership and capability policy;
+then exact-candidate edits/tests/review/Git/CI acceptance. All71 tools/11 categories,
+legacy engine/roles/flows/autonomy, coordination, typed edits and related-context
+invalidation, long-history checkpoints, external effects, lifecycle/deletion/budgets,
+backup/restore/bootstrap, subscription-only auxiliary calls and full prompt/book-skill/
+held-out/human communication acceptance still remain. Resolve/replace100 original
+failures correctly. Visual scope remains6/36 desktop+2/12 mobile,2 pilots and0/12
+accepted pages; produce30 desktop+10 mobile, implement10 other routes/shared controls
+and verify all12 pages with browser/mobile/keyboard/accessibility/human acceptance.
+Final fresh whole-branch review remains required. Model is host-global JSON/restart,
+not per-agent/project or web-selected. No push, merge or deployment. Keep goal active.
+
+
+## Host-owned analysis tools — base4d9127b
+
+- Previous user turn was a requested status report, not implementation progress.
+  This goal turn adds the actual host tool consumer rather than re-planning it.
+- AnalysisTools exposes strict start/read/cancel/Python schemas. ProjectTools joins
+  them with eleven business schemas before thread/start, checks unique names and
+  hashes the combined catalog. Diagnostic sessions without AttemptPeers retain the
+  old eleven-tool catalog; production scopes have fifteen. Resume checks the exact
+  combined hash. The historical business_catalog API/SQL name is retained.
+- Ruling: research calculations/diagnostics use an explicitly read-only workspace,
+  no network/inherited credentials, host-selected isolated standard-library Python
+  and explicit public toolchain read mount. This is a retained analysis capability,
+  not a substitute for writable development, scientific packages or output artifacts.
+  Those still require global workspace ownership/capability policy and acceptance.
+- Each job owns one native peer. Identical receipt lookup happens before opening
+  another peer; changed intents conflict, unknown/previous connections never replay.
+  Model reads require current authority before/after; owner recovery remains separate.
+  Canonical output persists at termination, not live incremental streaming. Windows
+  preserve exact bytes/base64 and mark lossy UTF-8; closed/exit/result/acceptance differ.
+- Terminal reads and scope exit close all descendants, even detached children after
+  exit0. Cancellation of a reader keeps a shielded, joinable cleanup task. Unknown
+  command results revoke authority; zero exit still does not accept the task.
+- Nineteen initial facade cases failed because the implementation was missing;
+  wiring failed for absent schemas. Extra RED cases caught malformed envelopes,
+  missing cwd and cancelled cleanup. Fixed and included in the full suite. Source-
+  level lineage search reached ExecuteCommandTool but the new runtime is not indexed
+  by connected Ken; manual callers/source verified, no broad reindex was attempted.
+- Real no-inference CLI probe first completed six cases then hit peer capacity.
+  Initial public hypothesis of lease expiry was wrong: timestamps showed3sec and
+  source showed the eight-row historical cap. Ruling: eight peers without closure,
+  up to128 retained receipt rows per attempt. Nine sequential jobs verify reuse of
+  physical capacity without deleting evidence. Fresh real CLI probe64c1776c passed
+  all7 calculation/read/write-denial/external/symlink/network/environment cases,
+  including poisoned local permissions. No model calls in these probes.
+- Full suite1227:1124 passed, same100 baseline identities,3 skipped,29 warnings.
+  All299 runtime tests pass. No new or resolved baseline failures; all100 names are
+  in analysis-results.json. Lint passes for changed Python; wheel contains identical
+  bytes for all23 runtime modules. No schema migration/new user database changes.
+- Actual analysis-inference-7792402f submitted one subscription turn (gpt-6.1-sol),
+  mandatory published Ken0.18.0 and pinned Codex0.166.0. Native code-mode trace confirms
+  actual Ken read/recall and returned invoice source. One host Python job printed
+  tax28.77/total165.77/code137.21; one report remains draft, task not done, sources
+  unchanged, grants revoked, all3 peers closed. Reported180751 tokens are observed
+  native usage, not billing/quota accounting. No hidden/internal trace content copied.
+- The generative harness failed after successful completion by querying reports.id
+  instead of artifact_id. Fixed the harness; verified the existing terminal DB and
+  exact native thread trace with --verify-root, zero extra generation. Original
+  failure evidence preserved and hashed. Its repeated HTTP receipt check was not
+  reached; receipt tests are separate evidence. No second run was used to hide it.
+- Bound11 changed source/test/eval files and16 logs, with separate native/live/suite/
+  packaging reports. No image calls, frontend edits, visual or human acceptance.
+  All observed test/build/trial handles are terminal; no server intentionally left.
+
+## Next brief after host analysis
+
+Continue the FULL modernization plan. New production research sessions have15
+project tools plus mandatory Ken; old sessions cannot silently resume with changed
+catalog. The analysis profile is read-only/standard-library and jobs have terminal
+output persistence. Do not redo input/context/chat/tasks work or the8 saved concepts.
+Next connect owner output windows and UI/read-only recovery, broaden real Stop/
+correction/unknown-receipt scenarios and migrate actual retained command consumers.
+Before mutable tools, finish cross-database workspace ownership and capability policy;
+then exact-candidate edits/tests/review/Git/CI acceptance. All71 tools/11 categories,
+legacy engine/roles/flows/autonomy, coordination, typed edits and related-context
+invalidation, long-history checkpoints, external effects, lifecycle/deletion/budgets,
+backup/restore/bootstrap, subscription-only auxiliary calls and full prompt/book-skill/
+held-out/human communication acceptance still remain. Resolve/replace100 original
+failures correctly. Visual scope remains6/36 desktop+2/12 mobile,2 pilots and0/12
+accepted pages; produce30 desktop+10 mobile, implement10 other routes/shared controls
+and verify all12 pages with browser/mobile/keyboard/accessibility/human acceptance.
+Final fresh whole-branch review remains required. Model is host-global JSON/restart,
+not per-agent/project or web-selected. No push, merge or deployment. Keep goal active.

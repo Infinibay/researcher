@@ -7,14 +7,17 @@ import stat
 import sys
 import time
 import tomllib
-from contextlib import asynccontextmanager
+from contextlib import AsyncExitStack, asynccontextmanager
 from dataclasses import dataclass
+from functools import partial
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from backend.runtime.analysis_tools import AnalysisTools
 from backend.runtime.business_mediation import (
     BUSINESS_NAMES,
     BusinessTools,
+    ProjectTools,
     business_peer,
 )
 from backend.runtime.codex_rpc import RpcProtocolError, StdioRpcClient
@@ -23,7 +26,13 @@ from backend.runtime.codex_session import (
     ExecutionLimits,
     NativeInputRequired,
 )
-from backend.runtime.native_commands import DISABLED, VERSION, _toml, _version
+from backend.runtime.native_commands import (
+    DISABLED,
+    VERSION,
+    _toml,
+    _version,
+    command_executor,
+)
 
 KEN_SERVER = "researcher_ken"
 KEN_TOOLS = frozenset(
@@ -69,6 +78,16 @@ Use researcher_ask_user for missing information: group 1–3 clear questions, ex
 the answer matters, and offer an example or 2–4 choices when useful, always allowing free text.
 The host closes this turn before waiting. A response updates context for a future explicit
 run; it never authorizes publication, acceptance or wider tools. Never ask for credentials.
+
+## Host analysis commands, when included in this session's tool catalog
+Use researcher_python for standard-library calculations and researcher_command_start
+for bounded diagnostics. Read the returned job using researcher_command_read; submission
+is not completion. These commands have read-only source access, no network or inherited
+credentials, and temporary files are discarded when their dedicated peer closes. No package
+installation is available. Preserve operation_key and arguments to recover an existing intent.
+Read byte windows until has_more is false before claiming to have inspected all output.
+Use researcher_command_cancel to stop a job. Unknown exit, physical closure, a zero exit
+code, a scientifically correct result and acceptance by the user are different facts.
 
 ## Current task and recorded conversation
 The JSON user input separates the current request, versioned task/corrections/answers,
@@ -222,28 +241,56 @@ class CodexRuntime:
                 raise RpcProtocolError(
                     "Unsupported native runtime version; no model turn was sent"
                 )
-            facade = peer = native = None
+            facade = peer = native = analysis = None
             try:
-                async with business_peer(
-                    api_url=self.api_url,
-                    token=tool_token,
-                    script=self.business_script,
-                    uv=self.uv_binary,
-                    cache=self.uv_cache,
-                    home=home / "business",
-                    peer_owner=peer_owner,
-                ) as peer:
+                async with (
+                    business_peer(
+                        api_url=self.api_url,
+                        token=tool_token,
+                        script=self.business_script,
+                        uv=self.uv_binary,
+                        cache=self.uv_cache,
+                        home=home / "business",
+                        peer_owner=peer_owner,
+                    ) as peer,
+                    AsyncExitStack() as tool_scopes,
+                ):
                     business = await BusinessTools.connect(peer, active=active)
+                    if {tool["name"] for tool in business.catalog} != BUSINESS_NAMES:
+                        raise RpcProtocolError(
+                            "Required business capabilities are unavailable"
+                        )
+                    if peer_owner is not None:
+                        analysis = await tool_scopes.enter_async_context(
+                            AnalysisTools(
+                                journal=peer_owner.registry.runs,
+                                lease=peer_owner.lease,
+                                workspace=root,
+                                python_executable=Path(sys.executable).resolve(
+                                    strict=True
+                                ),
+                                active=active,
+                                executor_factory=partial(
+                                    command_executor,
+                                    journal=peer_owner.registry.runs,
+                                    lease=peer_owner.lease,
+                                    workspace=root,
+                                    control_root=control,
+                                    codex_binary=binary,
+                                    readable_toolchains=(
+                                        Path(sys.base_prefix).resolve(strict=True),
+                                    ),
+                                    workspace_access="read",
+                                ),
+                            )
+                        )
+                        business = ProjectTools(business, analysis)
                     if (
                         resume_thread_id
                         and expected_catalog_hash != business.catalog_hash
                     ):
                         raise RpcProtocolError(
                             "Native tool catalog changed; reconcile before resuming"
-                        )
-                    if {tool["name"] for tool in business.catalog} != BUSINESS_NAMES:
-                        raise RpcProtocolError(
-                            "Required business capabilities are unavailable"
                         )
                     filesystem = {
                         ":minimal": "read",
@@ -481,6 +528,7 @@ class CodexRuntime:
                 if facade is not None:
                     facade.peers_closed = bool(
                         getattr(peer, "closed", False)
+                        and (analysis is None or analysis.closed)
                         and native.rpc._process is not None
                         and native.rpc._process.returncode is not None
                     )

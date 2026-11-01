@@ -1,0 +1,77 @@
+{
+  "status": "passed",
+  "generations_started_by_verification": 0,
+  "original_evidence_sha256": "aba82e5c52760e279c2d698cb6e2be286a052e11803cce7a84035dbe6555654c",
+  "original_harness_status": "failed",
+  "original_harness_error": "OperationalError",
+  "repeated_http_receipt_check": "not_executed_in_original_harness",
+  "dispatches": [
+    {
+      "model": "gpt-6.1-sol",
+      "status": "settled",
+      "observed_tokens": 180751,
+      "native_status": "completed"
+    }
+  ],
+  "peers": [
+    {
+      "kind": "business",
+      "state": "closed"
+    },
+    {
+      "kind": "native",
+      "state": "closed"
+    },
+    {
+      "kind": "command",
+      "state": "closed"
+    }
+  ],
+  "jobs": [
+    {
+      "operation_key": "calculate-policy",
+      "status": "exited",
+      "exit_code": 0,
+      "stdout": "base=137; rate=0.21; tax_exact=28.77; policy_total=165.77; code_total=137.21; difference=28.56\n",
+      "stderr": ""
+    }
+  ],
+  "reports": [
+    {
+      "artifact_id": 1,
+      "status": "draft"
+    }
+  ],
+  "catalog_names": [
+    "researcher_ask_user",
+    "researcher_reference_list",
+    "researcher_capture_reference",
+    "researcher_capture_web",
+    "researcher_source_list",
+    "researcher_source_read",
+    "researcher_source_search",
+    "researcher_finding_record",
+    "researcher_finding_read",
+    "researcher_report_write",
+    "researcher_report_read",
+    "researcher_command_start",
+    "researcher_python",
+    "researcher_command_read",
+    "researcher_command_cancel"
+  ],
+  "source_sha256": {
+    "invoice.py": "7724defe91f93084f4db284b91aa26bcc9192d2d64e35fc2b69b02082e607625",
+    "test_invoice.py": "76482120c2dd0104c525493a03e733a7372c85e211e59faa8f7abf388aa79e16"
+  },
+  "ken_call_names": [
+    "mcp__researcher_ken__ken_read",
+    "mcp__researcher_ken__ken_recall"
+  ],
+  "native_thread_trace_sha256": "b9e3c998ea8c3805916bdfee7196023a8c0136105e8e698cc030cb92c076c1c1",
+  "trial": "analysis-inference-7792402f",
+  "original_evidence_path": ".researcher/evaluations/analysis-inference-7792402f/evidence.json",
+  "verification_sha256": "667c5d3b994123d13147aa11c2b131fe331718fa8dcf0fbf94649c234b4ab006",
+  "generations_observed": 1,
+  "token_usage_scope": "observed native usage, not billing or quota accounting",
+  "inference_fixture_limited": true
+}

@@ -1,0 +1,51 @@
+{
+  "trial": "analysis-tools-64c1776c",
+  "model_turns": 0,
+  "all_peers_closed": true,
+  "source_unchanged": true,
+  "evidence_sha256": "e727f0140da24f910c57c076a96fd4729fdb17f6060a9cafb200190a651246bc",
+  "cases": [
+    {
+      "key": "calculate",
+      "status": "exited",
+      "exit_code": 0,
+      "local_execution_closed": true
+    },
+    {
+      "key": "read",
+      "status": "exited",
+      "exit_code": 0,
+      "local_execution_closed": true
+    },
+    {
+      "key": "write",
+      "status": "exited",
+      "exit_code": 1,
+      "local_execution_closed": true
+    },
+    {
+      "key": "outside",
+      "status": "exited",
+      "exit_code": 1,
+      "local_execution_closed": true
+    },
+    {
+      "key": "symlink",
+      "status": "exited",
+      "exit_code": 1,
+      "local_execution_closed": true
+    },
+    {
+      "key": "network",
+      "status": "exited",
+      "exit_code": 1,
+      "local_execution_closed": true
+    },
+    {
+      "key": "environment",
+      "status": "exited",
+      "exit_code": 0,
+      "local_execution_closed": true
+    }
+  ]
+}

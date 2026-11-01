@@ -661,9 +661,9 @@ class RuntimeService:
                             or "El runtime terminó sin una explicación; falta revisar el resultado.",
                         )
                         if result.status != "completed":
-                            # The research adapter has no native shell effects;
-                            # both peers are now closed and grants revoked. The
-                            # journal still refuses retirement for unknown jobs.
+                            # All registered peers, including host analysis jobs,
+                            # are closed and grants revoked. Missing command exit
+                            # receipts remain unknown; closure never invents them.
                             await asyncio.to_thread(
                                 self.store.retire_inference, lease, outcome="failed"
                             )

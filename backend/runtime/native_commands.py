@@ -55,12 +55,15 @@ async def command_executor(
     control_root: Path,
     codex_binary: Path | None = None,
     readable_toolchains: tuple[Path, ...] = (),
+    workspace_access: str = "write",
 ):
     """Scope commands to a host-selected workspace and explicit toolchain roots.
 
     The model cannot choose control paths or filesystem grants. Persisted jobs
     always select this named profile, never the user's configured defaults.
     """
+    if workspace_access not in ("read", "write"):
+        raise ValueError("Host must select read or write workspace access")
     workspace = workspace.resolve(strict=True)
     control_root = control_root.resolve()
     if not workspace.is_dir() or control_root.is_relative_to(workspace):
@@ -89,7 +92,7 @@ async def command_executor(
             )
         filesystem = {
             ":minimal": "read",
-            ":workspace_roots": "write",
+            ":workspace_roots": workspace_access,
             str(binary): "read",
             str(temporary): "write",
         }
@@ -109,17 +112,18 @@ async def command_executor(
             "workspace_roots": {str(workspace): True},
             "network": {"enabled": False},
         }
+        shell_environment = {
+            "PATH": os.defpath,
+            "HOME": str(temporary),
+            "TMPDIR": str(temporary),
+            "LANG": "C.UTF-8",
+        }
         overrides = {
             "default_permissions": "researcher_jobs",
             "permissions": {"researcher_jobs": profile},
             "web_search": "disabled",
             "shell_environment_policy.inherit": "none",
-            "shell_environment_policy.set": {
-                "PATH": os.defpath,
-                "HOME": str(temporary),
-                "TMPDIR": str(temporary),
-                "LANG": "C.UTF-8",
-            },
+            "shell_environment_policy.set": shell_environment,
         }
         command = [str(binary), "app-server", "--stdio", "--strict-config"]
         for feature in DISABLED:
@@ -154,6 +158,9 @@ async def command_executor(
                 or fs != filesystem
                 or actual.get("workspace_roots") != {str(workspace): True}
                 or actual.get("network", {}).get("enabled") is not False
+                or config.get("shell_environment_policy", {}).get("inherit") != "none"
+                or config.get("shell_environment_policy", {}).get("set")
+                != shell_environment
                 or any(
                     config.get("features", {}).get(flag) is not False
                     for flag in DISABLED

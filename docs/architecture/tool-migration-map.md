@@ -15,22 +15,22 @@ herencia como autoridad del nuevo intento. Los productores de claim y DONE de
 autonomía/flows deben migrar al mismo dueño durable.
 
 El recorrido nuevo es `RuntimeService` → `AttemptPeers` → `CodexRuntime.open`.
-Hoy sus herramientas dinámicas se despachan a `BusinessTools`, con once schemas de
-investigación/preguntas, token en el MCP y validación en la API. La inferencia usa
+Sus herramientas dinámicas se despachan a `ProjectTools`, que une once schemas de
+investigación/preguntas en `BusinessTools` y cuatro de análisis en `AnalysisTools`.
+El token permanece en el MCP de negocio, con validación en la API. La inferencia usa
 filesystem de lectura y shell/unified_exec deshabilitados. La edición nativa de la
 matriz describe un destino; no es una capacidad productiva conectada.
 
-`native_commands.py` y `command_jobs.py` ya entregan comandos durables, pero no
-tienen un consumidor en la sesión de inferencia. El revisor propuso conectarlos
-con una fachada del host ligada al lease/workspace admitidos. Coincido: agregar
-execute_command al MCP síncrono con token de negocio separaría el proceso del
+`native_commands.py` y `command_jobs.py` entregan comandos durables, ahora conectados
+a la sesión de inferencia para análisis con fuente en lectura. El revisor propuso
+una fachada del host ligada al lease/workspace admitidos. Se implementó ese destino:
+agregar execute_command al MCP síncrono con token de negocio separaría el proceso del
 dueño asíncrono que debe pararlo. Tampoco basta un wrapper de InfinibayBaseTool.
 
-La siguiente vertical debe declarar schemas estrictos de start/read/cancel, unir
-catálogos con detección de nombres duplicados, fijar hash/versiones antes de thread
-y despachar explícitamente al host o a negocio. Los nombres son todavía propuesta,
-no herramientas disponibles. El host conserva los context managers dentro del
-worker y el modelo no recibe lease, fence, control paths o tokens. Si otro runtime
+La fachada declara schemas estrictos de start/read/cancel/Python, une
+catálogos con detección de nombres duplicados, fija hash/versiones antes de thread
+y despacha explícitamente al host o a negocio. El host conserva los context managers
+dentro del worker y el modelo no recibe lease, fence, control paths o tokens. Si otro runtime
 requiere MCP, será un proxy hacia el host; no otro propietario de procesos.
 
 Antes de habilitar escritura productiva hay que cerrar la propiedad global de
@@ -88,9 +88,10 @@ documentos; coordinación/planificación; desarrollo/revisión/Git/CLI/TUI; reti
 motor y dependencias cuando no queden entradas ni inferencia auxiliar. Hay que
 comprobar todos los consumidores, no limitar la eliminación a get_engine().execute.
 
-Faltan pruebas del recorrido productivo dinámico completo: llamada → executor →
-SQLite, pérdida de recibo, Stop/corrección, reapertura sin replay, ventanas de output
-del propietario, scope/catálogo/resume y FS/red/symlinks reales. Los tests con
+Hay pruebas del recorrido dinámico llamada → executor → SQLite, pérdida de recibo,
+scope/catálogo, reapertura sin replay y FS/red/symlinks reales. Faltan ventanas de output
+del propietario, escenarios productivos ampliados de Stop/corrección y migrar todos
+los consumidores. Véase [contrato de análisis](host-analysis-tools.md). Los tests con
 fake_command_server no demuestran por sí solos el sandbox del CLI. Los fallos
 heredados sirven para conservar resultados de producto; no obligan a conservar
 CrewAI, whitelist, contexto global, pseudoherramientas o rework ilimitado.

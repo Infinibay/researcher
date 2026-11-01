@@ -1,0 +1,51 @@
+{
+  "base_commit": "4d9127b",
+  "scope": "Read-only host analysis capability and owned dynamic dispatch; full modernization still in progress",
+  "generation_calls": 1,
+  "image_calls": 0,
+  "source_sha256": {
+    "backend/runtime/analysis_tools.py": "01bdeb1d5f9a8835308aa12a3286c128ddf44f24fabfc015a8a08149294d32aa",
+    "backend/runtime/business_mediation.py": "20ab852aed7d001ea49570fa56d44fa510a09660410c7f92c8c38e358dfb1c08",
+    "backend/runtime/native_commands.py": "dce820c57c8747c056f9b45277b151b871deae6c178dd3bd40185c9486e1eaf6",
+    "backend/runtime/native_inference.py": "0f3b29f53781794f1c81e2be37d33b9e19bef8a16f66f207ccddddb71ad50520",
+    "backend/runtime/peer_registry.py": "a71a81b0c666cc9d1ba27ceae6006de6ded25b08300287a0d0a0887984842da0",
+    "backend/runtime/service.py": "844815860b13ddfffef6c661184cd7d5ea214c021ff9582b96575adae32236a3",
+    "backend/runtime/sqlite_runs.py": "52c7f5bb42e99f7680ad767f35b32787209e0aba61f4a542428766cd854f93c9",
+    "backend/tests/runtime/test_analysis_tools.py": "e81a1fdf708bc25ca9cae1b914cbbdc341c5372f48977c6f27aa0dcaab228c3f",
+    "backend/tests/runtime/test_native_factory.py": "373f46a46cbf2cc2a671bf169cebd68efabeb3529cc3c049f9648412cc1cc549",
+    "evals/runtime/run_analysis_tools.py": "7b417812cb8ea3bfcde416aefc630ef952c0ef91040cb8272029c902c6b3824b",
+    "evals/runtime/run_analysis_inference.py": "fd2f2fd4c9077c86a0ff542a99212ef8a77c024ca14a6a9cf8847d49693d7b35"
+  },
+  "log_sha256": {
+    "analysis-red.log": "7d6d858b474f0a9afa96ef523d2c6041b185089a35865e73db5f4dd2e5fd253f",
+    "analysis-wiring-red.log": "516497f73e02dcc1746018663511984b9e8c229529fa4243fbfa1e69f831aed4",
+    "analysis-native-red.log": "330b56c3daf154a1a2ae288ae610be784989cd0310a8956a0a7c01a7c76389f0",
+    "analysis-capacity-red.log": "11acbe10ea5a52892e28d5bfc0345bdc6335201b4229b579f3643b675d5fcd9f",
+    "analysis-envelope-red.log": "50d6cc510dc9ce3110135e6eee6d62167674d0bc5e5ba977a6bfdce0b9650134",
+    "analysis-dispatch-red.log": "9f0dfa1ef3d312746312c3fc2d06fc39ce996d9d1d940cc91808e8731faf9a7d",
+    "analysis-cleanup-red.log": "7e22a0fc729da611b373307b5f6d86087026c531a9a87ce274bc9381fb8d5c80",
+    "analysis-tools-final.log": "30e7a3342b2b56851a0f17d1d3c18fdf552f350196cdca5068df40bd843d7030",
+    "analysis-capacity-final.log": "e5fd8b5cdcfe12b8ba36b0ddf31aac54ec8374aed8282086b84ce7f7b9aac747",
+    "analysis-full.log": "269a7daaa8192ff0c101d1a563fa38da96a90845a9a0d0d0f0338cb403d57ea8",
+    "analysis-full.xml": "9e4334ae59df428bd26f5ff82bb4e058dbba569dc284a0351198e872a76dc854",
+    "analysis-native-verified.log": "e7ef8a898416b9add099fb629b1f18c6ed5c45b39acc072efb998c4b3a1ec3a9",
+    "analysis-live.log": "d26369d5dabb1d90dfeac33c74f583a0498455b54f16a04dc75ee97ba7904fea",
+    "analysis-live-verify.log": "dd0d66c59704cead9868c26df31771b1d79acbdd689a340bd8da27adf601b871",
+    "analysis-lint-verified.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "analysis-wheel.log": "099cc6bd7aa1a03bf2e54cc0e91f65974f763a7407def0cf164c078f901e97c8"
+  },
+  "reports": [
+    "analysis-results.json",
+    "analysis-native.json",
+    "analysis-live.json",
+    "analysis-packaging.json"
+  ],
+  "limits": [
+    "Legacy shell/flow consumers remain unmigrated; writable capability/workspace ownership pending.",
+    "No packages/scientific libraries, persistent output artifacts or owner output-window UI yet.",
+    "One live scenario does not establish general prompting or human comprehension quality.",
+    "Original generative harness failed at a wrong report-column query; existing artifacts independently verified without new inference.",
+    "The post-generation repeated HTTP receipt check was not executed in that original harness; dedicated receipt tests remain separate evidence.",
+    "Full suite retains 100 identical baseline failures; no global green or visual acceptance."
+  ]
+}
