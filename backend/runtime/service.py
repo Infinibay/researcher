@@ -12,70 +12,37 @@ import logging
 import os
 import stat
 import time
-from contextlib import asynccontextmanager, closing
+from contextlib import asynccontextmanager
 from dataclasses import dataclass, field
 from pathlib import Path
 from uuid import uuid4
 
-from backend.db.connection import connect
 from backend.research.models import PERMISSIONS
 from backend.runtime.codex_session import ExecutionLimits
 from backend.runtime.contracts import (
     RunConflict,
     RunNotFound,
+    RunSpec,
     StaleAttempt,
+    WorkspaceBinding,
+    WorkspaceChanged,
     validate_correction,
 )
 from backend.runtime.peer_registry import AttemptPeers
 from backend.runtime.recovery import RunRecovery
 from backend.runtime.sqlite_questions import SQLiteQuestionStore
+from backend.runtime.workspaces import WorkspaceRegistry
+
+__all__ = ["RuntimeService", "WorkspaceRegistry"]
 
 logger = logging.getLogger(__name__)
-
-
-class WorkspaceRegistry:
-    """Select a registered repository inside the host-managed source root."""
-
-    def __init__(self, database, root):
-        self.database = str(database)
-        self.root = Path(root).resolve(strict=True)
-
-    def select(self, project_id, repository_id=None):
-        with closing(connect(self.database)) as conn:
-            rows = conn.execute(
-                "SELECT * FROM repositories WHERE project_id=? AND status='active'",
-                (project_id,),
-            ).fetchall()
-            if repository_id is not None:
-                rows = [row for row in rows if row["id"] == repository_id]
-            if not rows:
-                raise RunNotFound("No active repository in this project")
-            if len(rows) != 1:
-                raise RunConflict("Select a repository for this request")
-            root = Path(rows[0]["local_path"]).resolve(strict=True)
-            if (
-                not root.is_dir()
-                or root == self.root
-                or not root.is_relative_to(self.root)
-            ):
-                raise RunConflict("Repository is outside the managed workspace root")
-            if Path(self.database).resolve().is_relative_to(root):
-                raise RunConflict("Repository contains the host database")
-            others = conn.execute(
-                "SELECT local_path FROM repositories WHERE project_id<>? AND status='active'",
-                (project_id,),
-            ).fetchall()
-            for other in others:
-                path = Path(other[0]).resolve()
-                if root.is_relative_to(path) or path.is_relative_to(root):
-                    raise RunConflict("Workspace is shared with another project")
-            return root
 
 
 @dataclass
 class _Worker:
     spec: object
     workspace: Path
+    binding: WorkspaceBinding
     active: bool = True
     grant_id: str | None = None
     attempt_id: str | None = None
@@ -121,6 +88,7 @@ class RuntimeService:
         self._workers = {}
         self._recovery_jobs = {}
         self._closing = False
+        self._admission_lock = asyncio.Lock()
 
     def _acquire(self):
         # The canonical DB path, rather than a configurable control path, owns
@@ -191,23 +159,23 @@ class RuntimeService:
                 self._lock_fd = None
 
     async def submit(self, spec, *, repository_id=None, conversation_thread=None):
-        if self._lock_fd is None or self._closing:
-            raise RunConflict("Runtime owner is not accepting work")
+        self._accepting()
         if spec.runtime != "codex":
             raise RunConflict(
                 "This deployment admits only the Codex subscription adapter"
             )
         previous = await asyncio.to_thread(
-            self.store.admission_receipt, spec, conversation_thread=conversation_thread
+            self.store.admission_receipt,
+            spec,
+            conversation_thread=conversation_thread,
+            repository_id=repository_id,
         )
-        if previous is not None and (
-            previous.status != "queued" or previous.run_id in self._workers
-        ):
-            return previous
-        workspace = await asyncio.to_thread(
-            self.workspaces.select, spec.project_id, repository_id
+        if previous is not None:
+            return previous  # Receipt lookup never retries a queued start.
+        binding = await asyncio.to_thread(
+            self.workspaces.bind, spec.project_id, repository_id
         )
-        if self.control_root.resolve().is_relative_to(workspace):
+        if self.control_root.resolve().is_relative_to(Path(binding.workspace)):
             raise RunConflict("Repository contains runtime control state")
         context = await asyncio.to_thread(
             self.store.context_snapshot, spec.project_id, spec.task_id
@@ -218,24 +186,113 @@ class RuntimeService:
             )
         if context["context_version"] != spec.context_version:
             raise RunConflict("Request uses an obsolete context version")
-        run = await asyncio.to_thread(
-            self.store.admit, spec, conversation_thread=conversation_thread
+        run, admitted = await asyncio.to_thread(
+            self.store.admit_once,
+            spec,
+            conversation_thread=conversation_thread,
+            binding=binding,
         )
-        if run.status != "queued" or run.run_id in self._workers:
-            return run
-        if len(self._workers) >= self.max_concurrent or any(
-            w.spec.project_id == spec.project_id for w in self._workers.values()
-        ):
-            raise RunConflict(
-                "Native concurrency is full; admitted request remains queued"
+        return await self._schedule(run) if admitted else run
+
+    def _accepting(self):
+        if self._lock_fd is None or self._closing:
+            raise RunConflict("Runtime owner is not accepting work")
+
+    async def retry_start(self, **command):
+        self._accepting()
+        run, requested = await asyncio.to_thread(self.store.request_start, **command)
+        return await self._schedule(run) if requested else run
+
+    async def _schedule(self, run):
+        async with self._admission_lock:
+            self._accepting()
+            run = await asyncio.to_thread(self.store.get, run.project_id, run.run_id)
+            if run.status != "queued" or run.run_id in self._workers:
+                return run
+            binding = await asyncio.to_thread(
+                self.store.workspace_binding, run.project_id, run.run_id
             )
-        slot = _Worker(spec, workspace)
-        slot.intent_committed.set()
-        self._workers[run.run_id] = slot
-        slot.task = asyncio.create_task(
-            self._execute(run.run_id, slot), name="researcher-run-" + run.run_id
+            if binding is None:
+                return await self._note_issue(
+                    run, "binding_missing", inference_started=None
+                )
+            context = await asyncio.to_thread(
+                self.store.context_snapshot, run.project_id, run.task_id
+            )
+            if context["task"]["type"] != "research":
+                return await self._note_issue(run, "task_changed")
+            try:
+                workspace = await asyncio.to_thread(
+                    self.workspaces.validate, run.project_id, binding
+                )
+                if self.control_root.resolve().is_relative_to(workspace):
+                    raise WorkspaceChanged("Repository contains runtime control state")
+            except WorkspaceChanged:
+                return await self._note_issue(run, "workspace_changed")
+            if len(self._workers) >= self.max_concurrent or any(
+                w.spec.project_id == run.project_id for w in self._workers.values()
+            ):
+                return await self._note_issue(run, "capacity")
+            spec = RunSpec(
+                run.project_id,
+                run.task_id,
+                run.actor_id,
+                run.context_version,
+                run.operation_key,
+                run.prompt,
+                run.runtime,
+            )
+            # No await between this ownership check and publishing the worker.
+            # Shutdown may have completed while validation ran in its thread.
+            self._accepting()
+            slot = _Worker(spec, workspace, binding)
+            slot.intent_committed.set()
+            self._workers[run.run_id] = slot
+            slot.task = asyncio.create_task(
+                self._execute(run.run_id, slot), name="researcher-run-" + run.run_id
+            )
+            return run
+
+    async def _note_issue(self, run, code, *, attempt_id=None, inference_started=False):
+        messages = {
+            "binding_missing": (
+                "Esta solicitud antigua no registró su repositorio. Cancélala y crea otra con una selección comprobable.",
+                "new_request",
+            ),
+            "workspace_changed": (
+                "El repositorio o la carpeta admitidos cambiaron o no están disponibles. No elegiremos otra carpeta por nuestra cuenta. Restaura la selección original o cancela y crea otra solicitud.",
+                "restore_or_new_request",
+            ),
+            "capacity": (
+                "La solicitud está guardada, pero otra ejecución ocupa la capacidad disponible. Puedes volver a intentar su inicio cuando termine.",
+                "retry_start",
+            ),
+            "preparation_failed": (
+                "No se pudo preparar el intento. La solicitud sigue guardada y no se inició inferencia. Puedes volver a intentar el inicio o detenerla.",
+                "retry_start",
+            ),
+            "runtime_failed": (
+                "La ejecución no dejó una propuesta verificable. Conservamos los datos y recibos guardados; no se repetirá por su cuenta.",
+                "inspect_saved_work",
+            ),
+            "task_changed": (
+                "La tarea cambió a un tipo que este motor todavía no puede ejecutar. La solicitud sigue guardada; revisa la tarea antes de continuar.",
+                "inspect_saved_work",
+            ),
+        }
+        message, action = messages[code]
+        return await asyncio.to_thread(
+            self.store.record_issue,
+            run.project_id,
+            run.run_id,
+            {
+                "code": code,
+                "message": message,
+                "next_action": action,
+                "inference_started": inference_started,
+            },
+            attempt_id=attempt_id,
         )
-        return run
 
     async def wait(self, run_id):
         slot = self._workers.get(run_id)
@@ -381,7 +438,16 @@ class RuntimeService:
     async def _execute(self, run_id, slot):
         lease = heartbeat = token = result = peers = None
         error_type = None
+        dispatch_reserved = native_started = False
         try:
+            context = await asyncio.to_thread(
+                self.store.context_snapshot, slot.spec.project_id, slot.spec.task_id
+            )
+            if context["task"]["type"] != "research":
+                raise RunConflict("Task type changed before native startup")
+            await asyncio.to_thread(
+                self.workspaces.validate, slot.spec.project_id, slot.binding
+            )
             lease, peers = await asyncio.to_thread(
                 AttemptPeers.claim,
                 self.store,
@@ -430,6 +496,11 @@ class RuntimeService:
                     )
                     if context["context_version"] != lease.context_version:
                         raise StaleAttempt("Context changed before native dispatch")
+                    if context["task"]["type"] != "research":
+                        raise RunConflict("Task type changed before native dispatch")
+                    await asyncio.to_thread(
+                        self.workspaces.validate, slot.spec.project_id, slot.binding
+                    )
                     should_send = await asyncio.to_thread(
                         self.store.reserve_inference,
                         lease,
@@ -440,6 +511,7 @@ class RuntimeService:
                         project_turn_limit=self.project_turn_limit,
                         project_token_limit=self.project_token_limit,
                     )
+                    dispatch_reserved = True
                     if not should_send:
                         raise RunConflict(
                             "Native dispatch was already reserved; reconcile without replay"
@@ -448,6 +520,8 @@ class RuntimeService:
                         return
 
                     async def on_started(thread_id, turn_id):
+                        nonlocal native_started
+                        native_started = True
                         await asyncio.to_thread(
                             self.store.bind_native,
                             lease,
@@ -588,4 +662,30 @@ class RuntimeService:
                 # Keep durable uncertainty; never replay to repair an error.
                 logger.error("Run requires reconciliation (%s)", type(exc).__name__)
             finally:
+                try:
+                    current = await asyncio.to_thread(
+                        self.store.get, slot.spec.project_id, run_id
+                    )
+                    if result is None and error_type is not None:
+                        code = (
+                            "workspace_changed"
+                            if error_type == "WorkspaceChanged"
+                            else "preparation_failed"
+                            if lease is None
+                            else "runtime_failed"
+                        )
+                        await self._note_issue(
+                            current,
+                            code,
+                            attempt_id=lease.attempt_id if lease else None,
+                            inference_started=True
+                            if native_started
+                            else None
+                            if dispatch_reserved
+                            else False,
+                        )
+                except Exception as exc:  # noqa: BLE001 -- keep the original failure if its observation cannot commit
+                    logger.error(
+                        "Run issue could not be recorded (%s)", type(exc).__name__
+                    )
                 self._workers.pop(run_id, None)

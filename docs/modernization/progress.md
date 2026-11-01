@@ -646,3 +646,78 @@ routes/shared panels and browser/accessibility/human acceptance of every route,
 including the existing pilot. Finish with fresh whole-branch independent review.
 No complete/paused/blocked goal status while meaningful work remains; model choice
 remains the verified global JSON setting, without a web/per-project selector.
+
+
+## Durable admission checkpoint — 2026-11-01
+
+- Previous implementation goal turn classified as progress: a644164 established
+  command peer ownership. The intervening model-selection answer was read-only;
+  it did not advance implementation. This continuation recovered pending admission
+  changes and verified their authoritative source/log hashes rather than repeating
+  completed trials. Full objective remains unchanged and active.
+- Migration 28 atomically records original repository choice, registration path,
+  canonical directory identity, historical name, request, conversation, receipt and
+  event. Binding updates are forbidden; historical rows acquire no invented binding.
+  WorkspaceRegistry now owns selection/validation and keeps its service import.
+- Ruling: duplicate admission reads its receipt even while queued; starting queued
+  work requires an explicit owner retry-start control. Cost: capacity becoming free
+  does not drain a queue automatically. Same control identity never schedules twice;
+  a confirmed unsuccessful control permits a new explicit decision with a new key.
+- Ruling: an original automatic selection stays bound after catalog changes. Explicit
+  repository identity is part of intent, and retries cannot substitute request/repo.
+  Cost: changed or unprovable selection requires resolving the issue or a new request.
+  Legacy receipts remain readable but cannot acquire an inferred historical binding.
+- Revalidate original registration/directory at scheduling, claim and inference.
+  SQL claim/inference/command reservation checks binding too. These checks do not
+  pin an open directory, freeze content, prevent inode reuse or prove global ownership.
+  Cross-database exclusion and deployment/restore generation remain required.
+- Startup issues carry stable code, safe message, next action and observed inference
+  state. Ruling: false only before dispatch, NULL for unknown history/unacknowledged
+  dispatch, true only after observed native start. Cost: uncertainty remains visible;
+  absence of a response is never zero consumption or permission to replay.
+- RED→GREEN covered immutable repo intent, duplicate queued read, original selection
+  after restart, changed registration/replaced directory, capacity, legacy unknown
+  history, atomic binding/issue events, owner HTTP controls, immutable client retry,
+  unsupported task type and three startup observation states. A shutdown test exposed
+  a late worker published after threaded validation; owner is now rechecked immediately
+  before publication. No await separates that check and publication.
+- Task workspace shows original repository/request/context version, safe issue and
+  explicit start retry. It does not claim all metadata is frozen: legacy task writers
+  still need versioning/fencing. No selector web/per-project was added for model choice;
+  the verified model setting remains global JSON loaded at serving startup.
+- Independent clean-context read-only analysis mapped actual consumers and all 71
+  individual tool classes in 11 categories, recorded in tool-migration-map.md. Earlier
+  ledger wording “71 tool families” was imprecise. Host-owned command primitives are
+  not yet connected to production model tools; next facade must preserve attempt
+  ownership and avoid a second LLM loop. This is not the final whole-branch review.
+- Final full-suite evidence: 1160 total, 1057 passed, identical 100 baseline failure
+  identities, 3 skipped, 29 warnings; all 232 runtime cases passed. Thirteen frontend
+  tests and TypeScript/Vite passed. Full suite remains red. Source hashes (15), log
+  hashes (8) and all 35 selected packaged wheel file bytes were reverified here.
+- Read-only synthetic v27 trial copied to a separate rehearsal then migrated twice
+  to 28: all 108 original data tables preserve values/rowids; FK errors zero; no
+  historical bindings/issues invented. No user DB changed. No application generative
+  turn or image call this checkpoint; inference is doubled in DB/filesystem/ASGI tests.
+- Browser was not exercised; no rendered, keyboard, accessibility or comprehension
+  acceptance. Visual scope remains 3/36 desktop concepts, 1/12 mobile, zero accepted
+  routes. Existing image manifest is historical evidence for its own source version.
+
+## Next brief after durable admission
+
+Continue the FULL modernization plan. First characterize/version/fence task metadata
+writers: original request plus context_version is not a frozen task snapshot. Then
+connect retained commands/tools through a host facade, with cross-database workspace
+ownership and task capability policy before enabling mutable production capabilities.
+Do not put execution in the credentialed business MCP, reuse legacy ambient context,
+replay unknown jobs, or add a second model loop. Preserve original receipt identities.
+Complete workspace/lock alias ownership, verified deployment/restore handoff, typed
+project lifecycle/deletion and lifetime budget history; migrate all legacy loops,
+roles/writers and 71 individual tools/11 categories. Implement exact-candidate
+Git/review/CI acceptance, subscription-only auxiliary inference, full prompt/book-skill
+inventory/evals, human communication/context comprehension, accessible structured
+explanations/diagrams, backup/restore/bootstrap and complete event synchronization.
+Resolve or replace the 100 baseline failures with correct behavior and evidence.
+UI still requires 33 desktop concepts and 11 mobile adaptations, eleven remaining
+route implementations/shared panels and rendered/mobile/keyboard/accessibility/human
+acceptance of every route, including Tasks. Finish with a fresh independent whole-
+branch review. No goal complete/paused/blocked status while meaningful work remains.

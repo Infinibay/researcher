@@ -102,6 +102,13 @@ class StartRun(BaseModel):
     repository_id: int | None = Field(None, ge=1)
 
 
+class RetryStart(BaseModel):
+    model_config = ConfigDict(extra="forbid", strict=True)
+    operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
+    context_version: int = Field(ge=1)
+    expected_fence: int = Field(ge=0)
+
+
 class CorrectContext(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
     operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
@@ -163,6 +170,15 @@ async def start_run(project_id: int, task_id: int, body: StartRun, request: Requ
 @router.get("/{project_id}/runs/{run_id}")
 async def read_run(project_id: int, run_id: str, request: Request):
     return asdict(await asyncio.to_thread(read_store(request).get, project_id, run_id))
+
+
+@router.post("/{project_id}/runs/{run_id}/retry-start", status_code=202)
+async def retry_start(project_id: int, run_id: str, body: RetryStart, request: Request):
+    return asdict(
+        await service(request).retry_start(
+            project_id=project_id, run_id=run_id, **body.model_dump()
+        )
+    )
 
 
 @router.post("/{project_id}/runs/{run_id}/stop", status_code=202)

@@ -17,7 +17,9 @@ def test_migration_preserves_unowned_history_and_refuses_retrospective_binding(
             migrations,
             "apply_sql_resource",
             lambda conn, path: (
-                None if path.name == "command_peer_schema.sql" else apply(conn, path)
+                None
+                if path.name in ("command_peer_schema.sql", "admission_schema.sql")
+                else apply(conn, path)
             ),
         )
         ensure_migrations(_isolated_db)

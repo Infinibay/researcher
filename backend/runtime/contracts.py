@@ -17,6 +17,10 @@ class StaleAttempt(RunConflict):
     """The attempt no longer has authority to mutate current work."""
 
 
+class WorkspaceChanged(RunConflict):
+    """The admitted repository or physical directory cannot be revalidated."""
+
+
 def text(value: str, name: str, maximum: int) -> None:
     if not isinstance(value, str) or not value.strip() or len(value.encode()) > maximum:
         raise ValueError(f"{name} must be nonempty and at most {maximum} UTF-8 bytes")
@@ -76,6 +80,31 @@ class RunSpec:
 
 
 @dataclass(frozen=True)
+class WorkspaceBinding:
+    repository_id: int
+    repository_name: str
+    registration_path: str
+    workspace: str
+    device: int
+    inode: int
+    requested_repository_id: int | None = None
+
+    def __post_init__(self):
+        identity(self.repository_id)
+        identity(self.inode)
+        if type(self.device) is not int or self.device < 0:
+            raise ValueError("Invalid workspace device identity")
+        if self.requested_repository_id is not None:
+            identity(self.requested_repository_id)
+            if self.requested_repository_id != self.repository_id:
+                raise ValueError("Resolved repository differs from requested selection")
+        for name in ("repository_name", "registration_path", "workspace"):
+            text(getattr(self, name), name, 4096)
+        if not PurePosixPath(self.workspace).is_absolute() or "\0" in self.workspace:
+            raise ValueError("Workspace binding requires an absolute host path")
+
+
+@dataclass(frozen=True)
 class RunView:
     run_id: str
     project_id: int
@@ -94,6 +123,9 @@ class RunView:
     operation_key: str = ""
     conversation_thread_id: str | None = None
     model: str | None = None
+    repository_id: int | None = None
+    repository_name: str | None = None
+    issue: dict | None = None
 
 
 @dataclass(frozen=True)

@@ -1,12 +1,28 @@
 import { useRef, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { prepareAnswer, prepareInstruction, prepareRecovery, presentRun, recoveryInspection, sourceWindow } from '../../api/runtime'
-import type { AnswerIntent, InstructionIntent, RecoveryIntent, RuntimeQuestion } from '../../api/runtime'
-import { useAnswer, useCorrection, useInstruction, useRecovery, useStopRun, useTaskWorkspace } from '../../hooks/useRuntime'
+import { prepareAnswer, prepareInstruction, prepareRecovery, prepareStartRetry, presentRun, recoveryInspection, sourceWindow } from '../../api/runtime'
+import type { AnswerIntent, InstructionIntent, RecoveryIntent, RuntimeQuestion, RuntimeRun, StartRetryIntent } from '../../api/runtime'
+import { useAnswer, useCorrection, useInstruction, useRecovery, useStartRetry, useStopRun, useTaskWorkspace } from '../../hooks/useRuntime'
 import { MarkdownRenderer } from '../common/MarkdownRenderer'
 
 const inputClass = 'w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] focus:outline-none focus:ring-2 focus:ring-[var(--work-accent)]'
 const buttonClass = 'rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50'
+
+function QueuedStart({ projectId, taskId, run }: { projectId: number; taskId: number; run: RuntimeRun }) {
+  const retry = useStartRetry()
+  const intent = useRef<StartRetryIntent | null>(null)
+  if (run.repository_id == null) return <p className="text-[var(--work-caution)]">Esta solicitud no guardó su repositorio. Detén la solicitud y crea otra con una selección comprobable.</p>
+  return <section className="space-y-2" aria-label="Iniciar solicitud guardada">
+    <details open><summary className="cursor-pointer text-[var(--work-ink)]">Solicitud guardada · contexto {run.context_version}</summary><p tabIndex={0} aria-label="Texto de la solicitud original" className="mt-2 max-h-48 overflow-auto whitespace-pre-wrap text-[var(--work-ink)]">{run.prompt}</p></details>
+    <p className="text-[var(--work-muted)]">Este control intenta iniciar la solicitud guardada en {run.repository_name ?? `repositorio ${run.repository_id}`}. Conserva el texto de la solicitud, su versión de contexto y el repositorio admitido.</p>
+    <button className={buttonClass} disabled={retry.isPending} onClick={() => {
+      if (!intent.current) intent.current = prepareStartRetry(projectId, taskId, run.run_id, run.fence, run.context_version)
+      retry.mutate(intent.current, {onSuccess: () => { intent.current = null }})
+    }}>{retry.isPending ? 'Comprobando inicio…' : intent.current ? 'Consultar el mismo intento de inicio' : 'Reintentar inicio guardado'}</button>
+    {retry.error && <p role="alert" className="text-[var(--work-error)]">No se confirmó el inicio. Consultar de nuevo conserva el mismo control. {retry.error.message}</p>}
+    {retry.isSuccess && <p role="status" className="text-[var(--work-muted)]">Control registrado. Consulta el estado para saber si el trabajo pudo comenzar.</p>}
+  </section>
+}
 
 function RecoveryCard({ projectId, taskId, runId }: { projectId: number; taskId: number; runId: string }) {
   const details = useQuery({ queryKey: ['run-recovery', projectId, runId], queryFn: () => recoveryInspection(projectId, runId), retry: false, refetchInterval: 2000 })
@@ -157,8 +173,11 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
       <p className="text-xs text-[var(--work-muted)]">Contexto vigente: {data.context.context_version}{current ? ` · resultado bajo contexto ${current.context_version}` : ''}</p>
       {data.runtime.model && <p className="text-xs text-[var(--work-muted)]">Modelo configurado: {data.runtime.model}</p>}
       {current && <p className="text-xs text-[var(--work-muted)]">Modelo de esta ejecución: {current.model ?? 'sin registrar'}</p>}
+      {current && <p className="text-xs text-[var(--work-muted)]">Repositorio admitido: {current.repository_name ?? current.repository_id ?? 'sin registrar en este historial'}</p>}
     </div>
     {notice && <p role="status" className="text-[var(--work-accent)]">{notice}</p>}
+    {current?.issue && <section className="space-y-1" aria-label="Lo que ocurrió"><p className="text-[var(--work-caution)]">{current.issue.message}</p>{current.issue.inference_started === null && <p className="text-[var(--work-muted)]">No quedó confirmado si la inferencia comenzó. No la repetiremos automáticamente.</p>}</section>}
+    {current?.status === 'queued' && available && <QueuedStart key={`${projectId}:${current.run_id}`} projectId={projectId} taskId={taskId} run={current} />}
     {!available && <p className="rounded-md border border-amber-700/50 p-3 text-[var(--work-caution)]">{closed ? 'Esta tarea está cerrada. Su historial y sus fuentes siguen disponibles.' : !data.runtime.configured ? 'Configura el motor local para iniciar trabajo. El historial y las fuentes siguen disponibles.' : 'Este tipo de tarea aún no permite iniciar trabajo. Su historial se conserva.'}</p>}
     {current && ['queued', 'running', 'cancelling', 'reconciling', 'waiting_input'].includes(current.status) && <div className="space-y-2">
       <button className={buttonClass} disabled={stop.isPending || current.status === 'cancelling'} onClick={() => stop.mutate(current.run_id)}>Detener ejecución</button>

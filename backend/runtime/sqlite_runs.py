@@ -27,6 +27,8 @@ from backend.runtime.contracts import (
     RunSpec,
     RunView,
     StaleAttempt,
+    WorkspaceBinding,
+    WorkspaceChanged,
     cancel_outcome,
     command_key,
     identity,
@@ -104,10 +106,12 @@ class SQLiteRunStore:
         row = conn.execute(
             """SELECT r.*,a.thread_id,a.turn_id,a.owner_id,a.status AS attempt_status,
             a.lease_expires_at,a.native_result_json,a.fence AS attempt_fence,
-            chat.thread_id AS conversation_thread_id,dispatch.model AS dispatch_model
+            chat.thread_id AS conversation_thread_id,dispatch.model AS dispatch_model,
+            binding.repository_id AS bound_repository_id,binding.repository_name AS bound_repository_name
             FROM runtime_runs r LEFT JOIN runtime_attempts a ON a.id=r.current_attempt_id
             LEFT JOIN runtime_chat_links chat ON chat.run_id=r.id
             LEFT JOIN runtime_inference_dispatches dispatch ON dispatch.attempt_id=a.id
+            LEFT JOIN runtime_workspace_bindings binding ON binding.run_id=r.id
             WHERE r.project_id=? AND r.id=?""",
             (project_id, run_id),
         ).fetchone()
@@ -137,6 +141,9 @@ class SQLiteRunStore:
             operation_key=row["operation_key"],
             conversation_thread_id=row["conversation_thread_id"],
             model=row["dispatch_model"],
+            repository_id=row["bound_repository_id"],
+            repository_name=row["bound_repository_name"],
+            issue=json.loads(row["issue_json"]) if row["issue_json"] else None,
         )
 
     @staticmethod
@@ -248,6 +255,7 @@ class SQLiteRunStore:
         intent = (workspace, catalog_hash, VERSION, _json(asdict(limits)), model)
         with self._transaction(write=True) as conn:
             row = self._authority(conn, lease)
+            self._bound_workspace(conn, row, workspace)
             if row["thread_id"] is None:
                 raise RunConflict("Bind native thread before reserving dispatch")
             previous = conn.execute(
@@ -563,18 +571,48 @@ class SQLiteRunStore:
         return self._view(self._row(conn, row["project_id"], row["id"]))
 
     @staticmethod
-    def _admission_intent(spec, conversation_thread):
+    def _admission_intent(spec, conversation_thread, repository_id=None):
         intent = {"kind": "admit", **asdict(spec)}
         if conversation_thread is not None:
             command_key(conversation_thread)
             intent["conversation_thread"] = conversation_thread
+        if repository_id is not None:
+            identity(repository_id)
+            intent["repository_id"] = repository_id
         return intent
 
-    def admission_receipt(self, spec, *, conversation_thread=None):
-        intent = self._admission_intent(spec, conversation_thread)
-        with self._transaction() as conn:
-            receipt = self._receipt(
+    def _admission_receipt(self, conn, spec, conversation_thread, repository_id):
+        intent = self._admission_intent(spec, conversation_thread, repository_id)
+        try:
+            return self._receipt(
                 conn, spec.project_id, spec.task_id, spec.operation_key, intent
+            )
+        except RunConflict:
+            if repository_id is None:
+                raise
+            # Historical receipts did not record selection. They may be read,
+            # never used to infer a workspace or restart a queued request.
+            old = self._receipt(
+                conn,
+                spec.project_id,
+                spec.task_id,
+                spec.operation_key,
+                self._admission_intent(spec, conversation_thread),
+            )
+            if (
+                old is None
+                or self._row(conn, spec.project_id, old["run_id"])[
+                    "bound_repository_id"
+                ]
+                is not None
+            ):
+                raise RunConflict("Operation key already identifies another intent")
+            return old
+
+    def admission_receipt(self, spec, *, conversation_thread=None, repository_id=None):
+        with self._transaction() as conn:
+            receipt = self._admission_receipt(
+                conn, spec, conversation_thread, repository_id
             )
             return (
                 self._view(self._row(conn, spec.project_id, receipt["run_id"]))
@@ -602,14 +640,24 @@ class SQLiteRunStore:
             )
             return receipt["version"] if receipt else None
 
-    def admit(self, spec: RunSpec, *, conversation_thread=None) -> RunView:
-        intent = self._admission_intent(spec, conversation_thread)
+    def admit(
+        self, spec: RunSpec, *, conversation_thread=None, binding=None
+    ) -> RunView:
+        return self.admit_once(
+            spec, conversation_thread=conversation_thread, binding=binding
+        )[0]
+
+    def admit_once(self, spec: RunSpec, *, conversation_thread=None, binding=None):
+        repository_id = binding.requested_repository_id if binding else None
+        intent = self._admission_intent(spec, conversation_thread, repository_id)
         with self._transaction(write=True) as conn:
-            receipt = self._receipt(
-                conn, spec.project_id, spec.task_id, spec.operation_key, intent
+            receipt = self._admission_receipt(
+                conn, spec, conversation_thread, repository_id
             )
             if receipt is not None:
-                return self._view(self._row(conn, spec.project_id, receipt["run_id"]))
+                return self._view(
+                    self._row(conn, spec.project_id, receipt["run_id"])
+                ), False
             self._task(conn, spec.project_id, spec.task_id)
             if self._context(conn, spec.task_id) != spec.context_version:
                 raise RunConflict("Run context is already obsolete")
@@ -643,6 +691,24 @@ class SQLiteRunStore:
             )
             if conversation_thread is not None:
                 self._attach_conversation(conn, spec, run_id, conversation_thread)
+            if binding is not None:
+                self._check_registration(conn, spec.project_id, binding)
+                conn.execute(
+                    """INSERT INTO runtime_workspace_bindings(run_id,repository_id,repository_name,
+                    requested_repository_id,registration_path,workspace,device,inode,created_at)
+                    VALUES(?,?,?,?,?,?,?,?,?)""",
+                    (
+                        run_id,
+                        binding.repository_id,
+                        binding.repository_name,
+                        binding.requested_repository_id,
+                        binding.registration_path,
+                        binding.workspace,
+                        binding.device,
+                        binding.inode,
+                        now,
+                    ),
+                )
             self._save_receipt(
                 conn,
                 spec.project_id,
@@ -662,7 +728,136 @@ class SQLiteRunStore:
                     "context_version": spec.context_version,
                 },
             )
-            return self._view(self._row(conn, spec.project_id, run_id))
+            return self._view(self._row(conn, spec.project_id, run_id)), True
+
+    @staticmethod
+    def _check_registration(conn, project_id, binding):
+        repository = conn.execute(
+            "SELECT local_path FROM repositories WHERE id=? AND project_id=? AND status='active'",
+            (binding.repository_id, project_id),
+        ).fetchone()
+        if repository is None or repository["local_path"] != binding.registration_path:
+            raise WorkspaceChanged("Admitted repository registration changed")
+
+    def workspace_binding(self, project_id, run_id):
+        with self._transaction() as conn:
+            self._row(conn, project_id, run_id)
+            row = conn.execute(
+                "SELECT * FROM runtime_workspace_bindings WHERE run_id=?", (run_id,)
+            ).fetchone()
+            return self._binding_view(row) if row is not None else None
+
+    @staticmethod
+    def _binding_view(row):
+        return WorkspaceBinding(
+            **{
+                name: row[name]
+                for name in (
+                    "repository_id",
+                    "repository_name",
+                    "registration_path",
+                    "workspace",
+                    "device",
+                    "inode",
+                    "requested_repository_id",
+                )
+            }
+        )
+
+    def _bound_workspace(self, conn, row, workspace=None):
+        binding = conn.execute(
+            "SELECT * FROM runtime_workspace_bindings WHERE run_id=?", (row["id"],)
+        ).fetchone()
+        if binding is not None:
+            self._check_registration(
+                conn, row["project_id"], self._binding_view(binding)
+            )
+            if workspace is not None and workspace != binding["workspace"]:
+                raise WorkspaceChanged("Dispatch differs from the admitted workspace")
+
+    def request_start(
+        self, *, project_id, run_id, expected_fence, context_version, operation_key
+    ):
+        identity(context_version)
+        command_key(operation_key)
+        if type(expected_fence) is not int or expected_fence < 0:
+            raise ValueError("Invalid expected fence")
+        intent = {
+            "kind": "retry_start",
+            "run_id": run_id,
+            "expected_fence": expected_fence,
+            "context_version": context_version,
+        }
+        with self._transaction(write=True) as conn:
+            row = self._row(conn, project_id, run_id)
+            previous = self._receipt(
+                conn, project_id, row["task_id"], operation_key, intent
+            )
+            if previous is not None:
+                return self._view(row), False
+            if (
+                row["status"] != "queued"
+                or row["current_attempt_id"] is not None
+                or row["fence"] != expected_fence
+                or row["context_version"] != context_version
+                or self._context(conn, row["task_id"]) != context_version
+            ):
+                raise RunConflict(
+                    "Refresh the queued request before retrying its start"
+                )
+            self._task(conn, project_id, row["task_id"])
+            self._save_receipt(
+                conn,
+                project_id,
+                row["task_id"],
+                operation_key,
+                intent,
+                {"run_id": run_id},
+            )
+            self._event(
+                conn,
+                project_id,
+                row["task_id"],
+                "run.start_requested",
+                {
+                    "run_id": run_id,
+                    "operation_key": operation_key,
+                    "original_request": True,
+                },
+            )
+            return self._view(row), True
+
+    def record_issue(self, project_id, run_id, issue, *, attempt_id=None):
+        command_key(issue["code"])
+        text(issue["message"], "issue message", 4096)
+        if (
+            issue["inference_started"] is not None
+            and type(issue["inference_started"]) is not bool
+        ):
+            raise ValueError("Inference observation must be true, false or unknown")
+        with self._transaction(write=True) as conn:
+            row = self._row(conn, project_id, run_id)
+            if attempt_id is None:
+                if row["status"] != "queued" or row["current_attempt_id"] is not None:
+                    return self._view(row)
+            elif row["current_attempt_id"] != attempt_id or row["status"] not in (
+                "failed",
+                "reconciling",
+            ):
+                return self._view(row)
+            if row["issue_json"] != _json(issue):
+                conn.execute(
+                    "UPDATE runtime_runs SET issue_json=?,updated_at=? WHERE id=?",
+                    (_json(issue), self.clock(), run_id),
+                )
+                self._event(
+                    conn,
+                    project_id,
+                    row["task_id"],
+                    "run.issue",
+                    {"run_id": run_id, **issue},
+                )
+            return self._view(self._row(conn, project_id, run_id))
 
     @staticmethod
     def _attach_conversation(conn, spec, run_id, thread_id):
@@ -763,6 +958,7 @@ class SQLiteRunStore:
             conn, row["task_id"]
         ):
             raise RunConflict("Run is not claimable; reconcile existing work first")
+        self._bound_workspace(conn, row)
         attempt_id, fence = str(uuid4()), row["fence"] + 1
         now = self.clock()
         expires = now + lease_seconds
@@ -771,7 +967,7 @@ class SQLiteRunStore:
             (attempt_id, run_id, owner_id, fence, expires, now),
         )
         conn.execute(
-            "UPDATE runtime_runs SET status='running',fence=?,current_attempt_id=?,updated_at=? WHERE id=?",
+            "UPDATE runtime_runs SET status='running',fence=?,current_attempt_id=?,updated_at=?,issue_json=NULL WHERE id=?",
             (fence, attempt_id, now, run_id),
         )
         conn.execute(
@@ -1187,7 +1383,8 @@ class SQLiteRunStore:
                     ),
                     False,
                 )
-            self._authority(conn, lease)
+            active_run = self._authority(conn, lease)
+            self._bound_workspace(conn, active_run, workspace)
             scope = conn.execute(
                 "SELECT 1 FROM runtime_peer_scopes WHERE attempt_id=?",
                 (lease.attempt_id,),

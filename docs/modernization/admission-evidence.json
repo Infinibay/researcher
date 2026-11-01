@@ -1,0 +1,69 @@
+{
+  "date": "2026-11-01",
+  "base_commit": "a644164",
+  "schema_version": 28,
+  "application_generation_turns_this_checkpoint": 0,
+  "test_scope": "Real SQLite/filesystem/ASGI/owner middleware, with generative inference explicitly doubled; no new real-provider inference claim.",
+  "behaviors": [
+    "Explicit repository is part of modern admission identity; an operation key cannot retarget it.",
+    "Duplicate admission only reads its receipt, including when still queued and after catalog changes.",
+    "Original automatic selection survives owner restart and explicit retry.",
+    "Changed registration or replaced observed directory identity prevents a start.",
+    "Historical queued receipt stays unbound and its inference history unknown.",
+    "Capacity returns the admitted queued request without a worker.",
+    "Shutdown during threaded validation cannot publish a late worker.",
+    "Owner start retry rejects repository/request additions, cross-project scope and changed retry intent.",
+    "Admission/conversation/binding and issue/event remain transactional.",
+    "Retry rechecks supported task type and does not expand capabilities.",
+    "No dispatch, unknown start and acknowledged start remain distinct; private diagnostics are redacted."
+  ],
+  "independent_analysis": {
+    "agent": "map_legacy_tool_consumers",
+    "base_commit": "a644164",
+    "mode": "read-only source inspection; no model inference or tests",
+    "verified_registry_tools": 71,
+    "verified_categories": 11,
+    "document": "docs/architecture/tool-migration-map.md"
+  },
+  "verification": {
+    "runtime_passed": 232,
+    "frontend_passed": 13,
+    "typescript_vite": "passed",
+    "new_failures": 0,
+    "full_suite_green": false,
+    "browser": "not exercised; no visual/accessibility/comprehension acceptance",
+    "limits": [
+      "Binding is not cross-database workspace ownership or verified deployment/restore generation.",
+      "Directory identity checks do not freeze content or eliminate filesystem check/use races.",
+      "Legacy task metadata writers still need versioning/fencing; a context version alone does not freeze all task fields.",
+      "Command/tool legacy consumers and other eleven UI routes remain pending."
+    ]
+  },
+  "source_sha256": {
+    "backend/runtime/contracts.py": "466dae82d21e2e71c9e2dcf59dc11f191bfb2ae4b153bae26611adf25f90e05e",
+    "backend/runtime/service.py": "5fa03f15cd2de52b4a240c4e24153448ac206bb2f5026733e0df5b52c883a46a",
+    "backend/runtime/workspaces.py": "ad9d13bbb730f21e431103d134ceac76904bbd9aae21886274fe01fde91a3f41",
+    "backend/runtime/sqlite_runs.py": "60f3eba8649687d64d658c42ba9e9bcf78bca00b92d2c8591cd27fd65b8dde89",
+    "backend/api/routes/runs.py": "137084847d9cb6f8b5cf1e07110676834491cbe3d71e4a52ebdeb1c49ec6c643",
+    "backend/db/admission_schema.sql": "8349a17a65bce709cf5a70dc67308113b637884194bbffbeaa78d18e6508fce6",
+    "backend/tools/base/db.py": "ab4f6cd16e560ae0942a7462f0e6dbcf163a09d02a0aca5602e472788726db58",
+    "backend/tests/runtime/test_admission_binding.py": "ec975b48425bd0801c2f7e9884ca460af46e8f880b4d5da7b8011fabbf7fee8e",
+    "backend/tests/runtime/test_admission_migration.py": "ae2760f8e4bcdc083846d60640b2f96d3f9320fe360643047aaed0b1470866dc",
+    "backend/tests/runtime/test_command_peer_migration.py": "eeee92978496b4054703154cbd23a2c66bbefcdda3ccd34847430ab2b58e1ad7",
+    "backend/tests/runtime/test_question_migration.py": "ea3a192971fe91b8642b5a1959043a678f28da41a05282bbeeb2b2de8cbf1f0d",
+    "frontend/src/api/runtime.ts": "239f9e29b123aa324850590d293897191b9fe00c22197bba79ade30057ac9a43",
+    "frontend/src/hooks/useRuntime.ts": "cba9ac46caf71365c411e74908a292592f3551603fac999108d1a7842afdcf01",
+    "frontend/src/components/tasks/TaskRunWorkspace.tsx": "29eda1d061876512773df339c2d8ed9b25076c26452cdde507c02a8207a15c5f",
+    "frontend/tests/runtime.test.ts": "2959e789a8ec71a4012714092d3a1a8b2c42bbd9c203f23446e8f5256d169401"
+  },
+  "log_sha256": {
+    "admission-binding-red.log": "be8ebcf025da6313702e09fdd44a4e5ea5fb305c60250faea1ef84eb4f6050e4",
+    "admission-shutdown-red.log": "d219fc7cccfcb351a8dccc8d344851a8cf261dadc84e395dd9cd3b97fc9e7719",
+    "admission-task-type-red.log": "86e1d60aa40c284eb5365d8157e6a76a19318d94c1db143f104c55daa22af574",
+    "admission-legacy-uncertainty-red.log": "45d63941b6a5d8d1bd35b6cd339a6b9f4c49343945047aff4e6678561fd56d51",
+    "admission-frontend-red.log": "bce7a33dcb43d4c588ff6d4762beb3a8fc2dad18e6ae8594f5bad2e263bd1de8",
+    "admission-suite-final.log": "8f211748e40ea3292d389312b12af6395052a19fcd9e89414b89f6d724770b3a",
+    "admission-frontend.log": "718dd86e47a36d848716d77670e37f417265aa6baf523d74b75d6127ca25cd70",
+    "admission-build.log": "5ec9b592063c01784f41f546f3658d674d20599c2da751e8b23d16b5ae3d078e"
+  }
+}

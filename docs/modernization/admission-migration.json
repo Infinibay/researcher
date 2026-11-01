@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-01",
+  "synthetic_source_trial": "command-integration-7b135d2a",
+  "source_version": 27,
+  "target_version": 28,
+  "repeatable": true,
+  "original_data_tables_preserved": 108,
+  "original_values_and_rowids_preserved": true,
+  "foreign_key_errors": 0,
+  "historical_bindings_inferred": 0,
+  "historical_issues_inferred": 0,
+  "user_database_touched": false,
+  "receipt_compatibility_test": "test_version27_receipt_survives_without_an_inferred_binding"
+}

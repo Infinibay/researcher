@@ -1,6 +1,26 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 
+test('queued-start retry preserves its original run, fence and context after a lost response', async () => {
+  const { prepareStartRetry, sendStartRetry } = await import('../src/api/runtime.ts')
+  const sent: {url: string; body: Record<string, unknown>}[] = []
+  globalThis.fetch = async (url, options) => {
+    sent.push({url: String(url), body: JSON.parse(String(options?.body))})
+    if (sent.length === 1) throw new TypeError('Receipt lost')
+    return Response.json({run_id: 'original-run', status: 'queued'})
+  }
+  const intent = prepareStartRetry(101, 1001, 'original-run', 0, 1)
+  await assert.rejects(sendStartRetry(intent), /Receipt lost/)
+  await sendStartRetry(intent)
+  assert.deepEqual(sent[0], sent[1])
+  assert.equal(sent[0].url, '/api/projects/101/runs/original-run/retry-start')
+  assert.equal(sent[0].body.expected_fence, 0)
+  assert.equal(sent[0].body.context_version, 1)
+  assert.equal('repository_id' in sent[0].body, false)
+  assert.equal('request' in sent[0].body, false)
+  assert.equal(Object.isFrozen(intent.body), true)
+})
+
 test('an ambiguous instruction retry keeps its original identity, scope and context', async () => {
   const { prepareInstruction, sendInstruction } = await import('../src/api/runtime.ts')
   const sent: { url: string; body: Record<string, unknown> }[] = []

@@ -12,6 +12,10 @@ export interface RuntimeRun {
   result: { native_status: string; summary: string } | null
   cancel_requested: boolean
   model: string | null
+  fence: number
+  repository_id: number | null
+  repository_name: string | null
+  issue: { code: string; message: string; next_action: string; inference_started: boolean | null } | null
 }
 
 export interface TaskWorkspace {
@@ -145,6 +149,23 @@ export function taskWorkspace(projectId: number, taskId: number) {
 
 export function stopRun(projectId: number, runId: string) {
   return fetchApi<RuntimeRun>(`/api/projects/${projectId}/runs/${encodeURIComponent(runId)}/stop`, { method: 'POST' })
+}
+
+export interface StartRetryIntent {
+  readonly projectId: number
+  readonly taskId: number
+  readonly runId: string
+  readonly body: Readonly<{ operation_key: string; expected_fence: number; context_version: number }>
+}
+
+export function prepareStartRetry(projectId: number, taskId: number, runId: string, fence: number, contextVersion: number): StartRetryIntent {
+  if (![projectId, taskId, contextVersion].every(value => Number.isSafeInteger(value) && value > 0)
+    || !Number.isSafeInteger(fence) || fence < 0 || !/^[A-Za-z0-9_.:-]{1,128}$/.test(runId)) throw new Error('Consulta la solicitud guardada antes de intentar iniciarla.')
+  return Object.freeze({projectId, taskId, runId, body: Object.freeze({operation_key: crypto.randomUUID(), expected_fence: fence, context_version: contextVersion})})
+}
+
+export function sendStartRetry(intent: StartRetryIntent) {
+  return fetchApi<RuntimeRun>(`/api/projects/${intent.projectId}/runs/${encodeURIComponent(intent.runId)}/retry-start`, {method: 'POST', body: JSON.stringify(intent.body)})
 }
 
 export function recordCorrection(projectId: number, taskId: number, body: {
