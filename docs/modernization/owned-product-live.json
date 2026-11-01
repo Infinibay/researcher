@@ -1,0 +1,257 @@
+{
+  "trial": "owned-product-db39481557",
+  "base_commit": "9c27f82",
+  "status": "retained_runtime_evidence_verified",
+  "runtime_acceptance": "passed",
+  "harness_status": "failed_in_cleanup_monitor",
+  "harness_error": "Memory observer called journal.load during a normal concurrent mutation; AuthorityBusy aborted its final report/cleanup. Read-only recovery performed after original exec44750 terminal exit1; no admission or model replay.",
+  "model": "gpt-6.1-sol",
+  "native_version": "0.166.0",
+  "ken_version": "0.18.0",
+  "memory_limit_bytes": 2147483648,
+  "memory_peak_bytes_sampled": null,
+  "pids_peak_sampled": null,
+  "memory_note": "In-memory telemetry was lost with monitor error. No peak/OOM/capacity claim reconstructed from another trial.",
+  "vendor_websocket_proven": false,
+  "automatic_admission_or_turn_replay": false,
+  "image_calls": 0,
+  "scope": "Actual owner admission/lifespan/configured factory/subscription/published Ken/business/analysis. Retained DB, native rollout and original journal checked; owner HTTP inspection repeated without configured runtime. Not clean managed-host bootstrap, complete enrollment, OAuth, cold resume or all-tool migration.",
+  "runs": [
+    {
+      "id": "b7cc180d-ea49-42af-81e6-0fca663d5951",
+      "status": "needs_review",
+      "current_attempt_id": "a72f8010-cbfd-4106-b41f-30e507a33a57",
+      "fence": 1,
+      "context_version": 1,
+      "issue_json": null
+    }
+  ],
+  "attempts": [
+    {
+      "id": "a72f8010-cbfd-4106-b41f-30e507a33a57",
+      "status": "finished",
+      "thread_id": "01a19831-a4bf-7752-ba73-e8074274c79e",
+      "turn_id": "01a19831-a64f-7310-9659-c38a175f1cc1",
+      "native_result_json": "{\"native_status\":\"completed\",\"summary\":\"Informe **1** guardado como **draft** y leído íntegramente, vinculado al único hallazgo provisional **1**, con citas exactas de ambas fuentes.\\n\\n- Inspeccionados: `invoice.py`, `policy.txt` e `invoice.txt`.\\n- Por inspección: `0.21` representa 21 %; `Decimal.quantize(Decimal(\\\"0.01\\\"))` ajusta a dos decimales según el redondeo del contexto.\\n- Cálculo ejecutado: `137 + 63` → **200**, con **exit_code 0** y salida íntegra confirmada.\\n- Límites: no ejecuté `invoice_total` ni pruebas, ni instalé paquetes o edité archivos. La suma no valida la facturación.\\n\\nNo se publicó ni se marcó la tarea como aceptada o completada.\"}"
+    }
+  ],
+  "dispatches": [
+    {
+      "model": "gpt-6.1-sol",
+      "status": "settled",
+      "native_status": "completed",
+      "observed_tokens": 129344,
+      "token_ceiling": 350000,
+      "catalog_hash": "13e26e188763c486a6a0aabba81559a074062b0e491ec9db5a6c195e34542f2c"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 1,
+      "project_id": 101,
+      "title": "Inspección sintética de invoice_total",
+      "content": "# Inspección sintética de invoice_total\n\nSe localizó invoice_total con una consulta natural en inglés mediante ken_find y se leyó invoice.py con ken_read. Se listaron los adjuntos policy.txt (referencia 7) e invoice.txt (referencia 8), se capturaron y se leyeron íntegramente sus fuentes 2 y 1.\n\nLa política dice «Tax rates are fractions.» (fuente 2). El código usa `rate=Decimal(\"0.21\")` y `return (base * (1 + rate)).quantize(Decimal(\"0.01\"))` (fuente 1). Por inspección, 0.21 representa 21 %; multiplicar por 1 + rate incorpora el impuesto. Decimal.quantize con 0.01 ajusta a dos decimales, con el redondeo del contexto decimal vigente. La función no fija un modo de redondeo explícito.\n\nEl único cálculo ejecutado fue `print(137 + 63)` mediante Python estándar: salida `200`, exit_code `0`, ejecución cerrada y salida íntegra leída (job 67971e6d-d88b-4303-9956-e6ad497d9119). No se ejecutaron invoice_total ni sus pruebas, no se instalaron paquetes y no se editaron archivos. El cálculo de la suma no valida la función de facturación.\n\nHallazgo 1: provisional, con citas exactas de ambas fuentes. Alcance limitado al código inspeccionado y los adjuntos sintéticos. Este informe es un borrador; no implica aceptación de la tarea ni publicación.",
+      "status": "draft"
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "status": "provisional",
+      "content": "La inspección de invoice.py mediante Ken coincide con el adjunto invoice.txt: invoice_total usa base Decimal(\"137\") y tasa Decimal(\"0.21\"). La política indica que las tasas son fracciones: 0.21 representa 21 %, por lo que base * (1 + rate) incorpora el impuesto. Decimal.quantize(Decimal(\"0.01\")) ajusta el resultado a dos decimales usando el redondeo del contexto decimal vigente; no se especifica otro modo en la función. Esto es interpretación por inspección, no ejecución de invoice_total. Sólo se ejecutó Python estándar con print(137 + 63): salida 200, exit_code 0, job 67971e6d-d88b-4303-9956-e6ad497d9119, salida íntegra leída y ejecución cerrada. No se ejecutaron pruebas ni se editaron archivos. Evidencia limitada al repositorio y a los dos adjuntos sintéticos capturados."
+    }
+  ],
+  "citations": [
+    {
+      "finding_id": 1,
+      "source_id": 1,
+      "quote": "def invoice_total(base=Decimal(\"137\"), rate=Decimal(\"0.21\")):\n    \"\"\"Compute the invoice total using a fractional tax rate.\"\"\"\n    return (base * (1 + rate)).quantize(Decimal(\"0.01\"))"
+    },
+    {
+      "finding_id": 1,
+      "source_id": 2,
+      "quote": "Fixture invoice base: 137 units. Tax rates are fractions. Synthetic test data."
+    }
+  ],
+  "sources": [
+    {
+      "id": 1,
+      "kind": "attachment",
+      "title": "invoice.txt",
+      "sha256": "920062fbfafa5c9ce34ec9ef8e8a34322059a2a427f5167e9045a93444d62c0a"
+    },
+    {
+      "id": 2,
+      "kind": "attachment",
+      "title": "policy.txt",
+      "sha256": "4de0b79442a2e0d9fa6484ce7b59c452b91cc0e40c305dfa6887e76c70913218"
+    }
+  ],
+  "peers": [
+    {
+      "kind": "business",
+      "state": "closed",
+      "reason": "never_released"
+    },
+    {
+      "kind": "native",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "ken",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "ken",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    }
+  ],
+  "jobs": [
+    {
+      "id": "67971e6d-d88b-4303-9956-e6ad497d9119",
+      "status": "exited",
+      "exit_code": 0,
+      "error": null,
+      "stdout": "200\n",
+      "stderr": ""
+    }
+  ],
+  "operations": [
+    {
+      "operation_key": "owned-product-db39481557-code",
+      "kind": "source.capture",
+      "result_json": "{\"kind\":\"attachment\",\"locator\":\"reference:8\",\"operation_key\":\"owned-product-db39481557-code\",\"sha256\":\"920062fbfafa5c9ce34ec9ef8e8a34322059a2a427f5167e9045a93444d62c0a\",\"source_id\":1}"
+    },
+    {
+      "operation_key": "owned-product-db39481557-policy",
+      "kind": "source.capture",
+      "result_json": "{\"kind\":\"attachment\",\"locator\":\"reference:7\",\"operation_key\":\"owned-product-db39481557-policy\",\"sha256\":\"4de0b79442a2e0d9fa6484ce7b59c452b91cc0e40c305dfa6887e76c70913218\",\"source_id\":2}"
+    },
+    {
+      "operation_key": "owned-product-db39481557-finding",
+      "kind": "finding.record",
+      "result_json": "{\"confidence\":null,\"finding_id\":1,\"operation_key\":\"owned-product-db39481557-finding\",\"status\":\"provisional\"}"
+    },
+    {
+      "operation_key": "owned-product-db39481557-report",
+      "kind": "report.write",
+      "result_json": "{\"artifact_id\":1,\"operation_key\":\"owned-product-db39481557-report\",\"status\":\"draft\",\"title\":\"Inspección sintética de invoice_total\"}"
+    }
+  ],
+  "task_status": "in_progress",
+  "generative_native_turns": 1,
+  "model_tools": [
+    {
+      "name": "ken_find",
+      "success": true,
+      "status": "completed"
+    },
+    {
+      "name": "researcher_python",
+      "success": true,
+      "status": "completed"
+    },
+    {
+      "name": "researcher_reference_list",
+      "success": true,
+      "status": "completed"
+    },
+    {
+      "name": "ken_read",
+      "success": true,
+      "status": "completed"
+    },
+    {
+      "name": "researcher_capture_reference",
+      "success": true,
+      "status": "completed"
+    },
+    {
+      "name": "researcher_capture_reference",
+      "success": true,
+      "status": "completed"
+    },
+    {
+      "name": "researcher_command_read",
+      "success": true,
+      "status": "completed"
+    },
+    {
+      "name": "researcher_source_read",
+      "success": true,
+      "status": "completed"
+    },
+    {
+      "name": "researcher_source_read",
+      "success": true,
+      "status": "completed"
+    },
+    {
+      "name": "researcher_finding_record",
+      "success": true,
+      "status": "completed"
+    },
+    {
+      "name": "researcher_report_write",
+      "success": true,
+      "status": "completed"
+    },
+    {
+      "name": "researcher_report_read",
+      "success": true,
+      "status": "completed"
+    }
+  ],
+  "persisted_report_readback_exact_and_complete": true,
+  "observed_tokens": 129344,
+  "usage_note": "Provider-reported cumulative native tokens include cached input; not billing or unique context size.",
+  "global_concession_inactive": true,
+  "all_original_grants_retired": true,
+  "all_original_execution_closed": true,
+  "operation_profiles": [
+    {
+      "kind": "command",
+      "profile": "readonly-native-command-v1",
+      "gate_sent": true,
+      "execution_closed": true
+    },
+    {
+      "kind": "ken",
+      "profile": "readonly-published-ken-v1",
+      "gate_sent": true,
+      "execution_closed": true
+    },
+    {
+      "kind": "ken",
+      "profile": "readonly-published-ken-v1",
+      "gate_sent": true,
+      "execution_closed": true
+    },
+    {
+      "kind": "native",
+      "profile": "readonly-native-codex-connect-host-tools-v1",
+      "gate_sent": true,
+      "execution_closed": true
+    }
+  ],
+  "all_tool_grants_revoked": true,
+  "catalog_count": 20,
+  "source_unchanged": true,
+  "credential_file_change_precedes_run": true,
+  "native_auth_files_absent": true,
+  "native_credential_scan_complete": true,
+  "native_current_access_token_bytes_absent": true,
+  "native_jwt_pattern_bytes_absent": true,
+  "owner_inspection_http_status": 200,
+  "owner_inspection_without_runtime": true,
+  "harness_sha256": "f0a86856868edb155222dd166d06fc0f7216b1c0ee2a449a123c746af2bb18f2",
+  "recovery_harness_sha256": "d70e0c76adf4be852630bb099364cb10cbc11949e5226d57dd2f4eee806668ab"
+}

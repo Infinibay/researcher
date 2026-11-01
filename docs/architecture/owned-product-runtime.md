@@ -117,7 +117,14 @@ DB copiada/token conservado y configuración sin autoridad también están cubie
 El ensayo generativo conjunto anterior sigue siendo evidencia de la composición,
 no se vuelve a etiquetar como prueba de este entry point.
 
-Faltan el ensayo generativo por la ruta productiva, bootstrap/operación y restore,
+El [ensayo posterior por la entrada productiva](../modernization/owned-product-live.json)
+usó la suscripción, Codex y Ken publicados reales: un turno, 12 llamadas exitosas,
+cálculo200 e informe persistido leído íntegramente. El monitor abortó por contención
+de autoridad; los datos y recibos conservados demostraron el resultado y cierre,
+y una inspección HTTP posterior, sin runtime configurado, devolvió200/needs_review.
+No se repitió inferencia ni se reconstruyeron los picos de memoria/PIDs perdidos.
+
+Faltan bootstrap/operación y restore,
 OAuth administrado, recuperación de todo el servicio, migración de71 herramientas,
 engine/loops/roles/flows, prompts y comunicación humana, web completa y cierre final.
 

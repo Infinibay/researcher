@@ -3213,3 +3213,53 @@ concepts/routes/acceptance; data/restore/CLI/TUI/install/dependencies/18npm advi
 100baselinefails. UI unchanged6/36desktop+2/12mobileconcepts,2pilots,0/12accepted:
 30+10concepts,10other routes and all12acceptance pending. Final fresh whole-branch
 review only when entire implementation is ready. No phase or goal completion claim.
+
+## Current task: actual product entry and explicit startup/bootstrap — base9c27f82
+
+- Previous goal turn was progress: owned profile selected by real lifespan/owner
+  HTTP entry, same-app/source business and original broker analysis; source/wheel/
+  full-suite evidence committed9c27f82. Full objective unchanged.
+- Fresh preflight10 passed. One authorized real subscription/published Ken/analysis
+  product trial ran via exec44750, now terminal exit1. No admission/turn replay.
+- Trial owned-product-db39481557 DID complete: retained source has needs_review,
+  native completed/dispatch settled129344 tokens, exactly one provisional finding/
+  draft report/two-source citations and one real Python job200/exit0. Native rollout
+  proves ONE task_started,12 successful dynamic tools, full exact report readback.
+- Harness memory observer incorrectly polled WitnessedAuthorityJournal.load, which
+  takes the mutation lock and may reconcile writes. AuthorityBusy was normal
+  contention but its awaited error masked final report/cleanup. Ruling: metrics
+  observe known original cgroup files, never mutate/reconcile authority to measure
+  it; gather observer failure independently of cleanup — cost: failed trial's in-
+  memory peak/PID/OOM/transport metrics remain unavailable, not invented from V3.
+- Read-only recovery exec58607 is terminal exit0: original journal inactive/grant
+  retired/all operations closed and domain absent; all source peers closed/grants
+  revoked, source unchanged; native auth file/JWT/current-token bytes absent.
+  Repeated owner HTTP inspection with runtime configuration DISABLED returns200/
+  needs_review without another dispatch. Original source fixture retained privately.
+- Artifact owned-product-live.json preserves runtime acceptance and failed-harness
+  limit separately. Original driver hash preserved in scratch copy; future monitor
+  corrected without running another model. No claim that lost HTTP/transport metrics
+  were observed. Real integration goal verified from retained durable evidence.
+- Next code work: explicit DB/authority initialization and startup existing-only
+  source guard, with lifecycle cleanup even before yield. Preserve explicit legacy
+  migration paths, never treat absent restored source/witness as new installation.
+
+
+## Process diagnosis requested by the user — continuation protocol
+
+- Reviewed the original session snapshot1–23950, Git/coverage/ledger and retained
+  test artifacts; seven dimensions were analyzed by three agents. Diagnosis:
+  workflow-review.md; reproducible counts/limits:workflow-audit-evidence.json.
+- Concentration on infrastructure and late product integration are demonstrated;
+  safety work is in scope and real defects exist. No claim that all of it was
+  unnecessary, no causal waste percentage, monetary estimate or promised speedup.
+- Withdraw the subjective30% scope estimate as a planning metric.43 scenarios
+  remain open;2 pilots/0of12 accepted pages are distinct from verified components.
+- Adopt execution-dashboard.md as short current entry: finish explicit startup
+  and bootstrap using existing primitives, then deliver visible/correctable reports
+  with concepts and communication evaluation. Keep whole-plan scope and final review.
+- During implementation use directed checks, broaden on shared-contract/risk
+  changes and delivery closure, reuse still-valid evidence, preflight paid probes,
+  and require a concrete blocked mandatory scenario before infrastructure expansion.
+- This checkpoint changes documentation/process only. No new model turn, code
+  implementation, host deployment or user-data migration; no whole-plan completion.

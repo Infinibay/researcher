@@ -1,0 +1,50 @@
+# Tablero de ejecución de la actualización
+
+Actualizado: 2026-11-01. Objetivo: implementar **todo** el [plan](../superpowers/plans/2026-10-31-actualizacion-proyecto.md).
+Este tablero organiza el trabajo; no reemplaza requisitos ni declara fases terminadas.
+Motivos del ajuste: [diagnóstico del proceso](workflow-review.md).
+
+## Estado comprobado
+
+- Hay un primer recorrido de investigación con Codex, suscripción, Ken, análisis y reporte persistido. La prueba real de entrada de producto terminó; su monitor falló y se recuperó evidencia durable sin repetir inferencia. No se recuperaron las métricas de memoria perdidas.
+- Las 43 entradas de escenarios siguen abiertas en `coverage.json`: 33 en progreso y 10 pendientes. Son escenarios amplios; esto no significa que sus componentes no funcionen.
+- Interfaz: 2 pilotos, 6/36 conceptos de escritorio y 2/12 móviles; 0/12 páginas con aceptación completa.
+- Última suite registrada: 1470 aprobadas, 100 fallos heredados y 3 omitidas. Falta resolver o retirar con justificación los casos del sistema reemplazado.
+- No hay porcentaje global defendible todavía. El 30% anterior era una impresión, no una medición de alcance ponderado.
+
+## Bloque activo: cerrar el arranque del recorrido existente
+
+**Resultado:** una instalación nueva se inicializa explícitamente; servir con base ausente/vacía o autoridad perdida no recrea estado; un fallo de arranque limpia los recursos que alcanzó a abrir.
+
+**Salida:** CLI de inicialización probado sobre datos sintéticos, arranque y segundo arranque verificados, rechazos sin modificación de datos, cleanup probado antes de `yield`, guía operativa y comprobación del recorrido existente. Abrir estado de autoridad existente sigue siendo distinto de inicializarlo.
+
+**Límite:** reutilizar journal, broker y fábrica actuales. Un defecto nuevo amplía este bloque sólo si impide esa salida o demuestra un riesgo obligatorio del plan; dejar evidencia y coste de la ampliación.
+
+## Siguiente entrega visible
+
+**Resultado:** ver el informe real desde la web, entender sus fuentes y límites, corregir una premisa y comprobar el nuevo estado sin perder el informe anterior.
+
+**Salida:** página de informes con tres conceptos de escritorio, adaptación móvil, selección razonada e implementación; recorrido conectado a tarea/conversación, lectura y error reales, teclado y comprobaciones responsive. Incluir una explicación con ejemplo o diagrama cuando ayude y una evaluación de comprensión/corrección. Diferenciar prueba funcional de evaluación con una persona.
+
+**Dependencias:** reutilizar persistencia, fuentes y fixture de producto existentes. No desarrollar otra fábrica de inferencia para esta entrega.
+
+## Cola posterior, manteniendo el alcance
+
+1. Completar investigación útil: búsqueda web, documentos/PDF, conocimiento/wiki y revisión científica; migrar herramientas por capacidades, con sus prompts y contratos.
+2. Desarrollo completo: edición/candidato, pruebas, revisión, Git/CI y efectos externos reconciliables. Resolver requisitos de aislamiento antes de habilitar cada efecto.
+3. Migrar autonomía, roles, flows y comunicación entre agentes al mismo dueño durable; no añadir otro loop LLM. La comunicación humano–agente se verifica en cada recorrido.
+4. Extender diseño a las demás páginas, con conceptos y selección por página; completar aceptación de los dos pilotos existentes.
+5. Completar inventario/evaluaciones de todos los prompts y llamadas auxiliares, migraciones/restauración, dependencias, instalación, CLI/TUI y retirada del motor anterior. Trabajar estas obligaciones dentro de las entregas que las toquen; este orden no las aplaza todas al final.
+6. Verificación global, revisión independiente de toda la rama y entrega. No cerrar el objetivo con un subconjunto.
+
+## Reglas de ejecución desde este diagnóstico
+
+- Un recorrido activo. Como máximo, otro frente independiente con archivos y contrato separados; delegar investigación o trabajo definido, evitando revisiones genéricas recurrentes.
+- Cada bloque declara resultado observable, criterio de salida, dependencias y pruebas necesarias **antes** de editar. Un experimento de 45–60 minutos sin resolver una incertidumbre exige reconsiderar la alternativa y registrar qué falta; no autoriza ignorar un requisito.
+- Antes de ampliar infraestructura, identificar el escenario obligatorio y el fallo reproducido que bloquea el recorrido. Si no lo bloquea, asignarle una entrega posterior y una prueba, conservándolo en el plan.
+- Ejecutar pruebas dirigidas durante el desarrollo. Ampliar al cambiar contratos compartidos, persistencia o fronteras de aislamiento; ejecutar la suite global al cerrar entregas y antes de la aceptación final. No repetirla sobre los mismos bytes por redactar documentación.
+- Repetir un ensayo real sólo por un cambio relevante o una pregunta sin resolver. Conservar resultados parciales y comprobar el verificador sin inferencia antes de usar la suscripción.
+- Reusar evidencia válida para la misma revisión/configuración. Un cambio de esos inputs invalida únicamente las conclusiones afectadas.
+- Mantener aquí sólo estado actual y próximos resultados; detalles y logs en el ledger/evidencias. Al retomar: leer este tablero, el último bloque relevante y los archivos necesarios, sin reconstruir toda la historia.
+- Reportar: resultado utilizable nuevo, criterio cumplido, bloqueo concreto y siguiente entrega. Contar commits/tests como validación o actividad, no como porcentaje del producto.
+- Registrar por entrega tiempo transcurrido, esperas identificables, retrabajo y criterio aceptado. Recalibrar previsiones con las próximas dos entregas; no prometer una aceleración ni fecha sin esos datos.

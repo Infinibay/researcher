@@ -4,6 +4,10 @@ Fecha: 2026-11-01. Plan: [2026-10-31-actualizacion-proyecto.md](../superpowers/p
 El objetivo completo sigue activo. Esta lista distingue componentes implementados
 de fases cerradas; los pilotos y pruebas acotadas no completan la migración global.
 
+Continuación: [tablero de ejecución](execution-dashboard.md).
+La [revisión del proceso](workflow-review.md) retira el porcentaje subjetivo anterior
+y organiza las siguientes entregas por resultados observables, sin reducir el plan.
+
 ## Realizado, con el alcance indicado
 
 1. **Inventario y línea base:** dependencias, datos, arquitectura, inferencias,
@@ -121,7 +125,11 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    durante preparación y turno cierran el dominio original. La prueba por HTTP con
    propietario/CSRF deja un finding provisional, un informe draft y cálculo200 con
    recibo, estado needs_review y ninguna aceptación implícita. Generación y Ken de
-   ese fixture son protocolos controlados; falta el ensayo real por esta entrada.
+   ese fixture son protocolos controlados. El ensayo posterior por esta entrada
+   usó la suscripción, Codex y Ken reales: un turno, 12 llamadas exitosas, cálculo200
+   e informe persistido y leído íntegramente. El monitor falló por contención;
+   se recuperaron recibos de cierre y HTTP200 sin otro turno. La telemetría de memoria
+   perdida sigue desconocida: [evidencia acotada](owned-product-live.json).
    El perfil predeterminado sigue siendo el heredado hasta completar la migración;
    faltan bootstrap, OAuth, recovery completo, todos los consumidores y capacidades.
 7. **Contexto y procedencia:** versiones al corregir o cambiar trece entradas de tarea;
