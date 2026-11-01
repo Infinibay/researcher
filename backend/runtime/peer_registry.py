@@ -54,6 +54,15 @@ class PeerRegistry:
         peer_id = uuid4().hex
         self.runs._authority(conn, lease)
         if (
+            kind == "command"
+            and conn.execute(
+                "SELECT 1 FROM runtime_peer_scopes WHERE attempt_id=? AND protocol_version=1",
+                (lease.attempt_id,),
+            ).fetchone()
+            is None
+        ):
+            raise RunConflict("Command peers require a registered attempt scope")
+        if (
             conn.execute(
                 "SELECT COUNT(*) FROM runtime_peers WHERE attempt_id=?",
                 (lease.attempt_id,),

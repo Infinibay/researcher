@@ -74,7 +74,7 @@ físico e intención durable en paralelo. SQLite ocupado no mantiene vivo al pee
 El servicio conserva el control si se pierde el cliente, espera todos los resultados
 y permite reconsultar la misma intención. Un fallo transitorio se vuelve a comprobar.
 
-Sólo tras demostrar cierre de todos los peers y ausencia de jobs inciertos se
+Sólo tras demostrar cierre de todos los peers y cierre comprobable de los jobs se
 confirman estado, evento y recibo. Stop prevalece como `cancelled`; una corrección,
 como `superseded`; una pregunta vigente vuelve a `waiting_input`; el resto queda
 `failed`, conservando datos y propuestas. No se inventan éxito, exit code, consumo
@@ -106,10 +106,13 @@ sin inferir orígenes históricos. No se migró una base del usuario.
 
 El formulario funcional conserva intenciones y no reintenta mutaciones por su cuenta.
 Tests Node y TypeScript/Vite no sustituyen presentación, teclado, accesibilidad ni
-comprensión humana: no hubo navegador. El rediseño mediante conceptos sigue pendiente.
+comprensión humana: no hubo navegador. El piloto de Tareas tiene conceptos y código;
+su aceptación visual sigue pendiente.
 
-Falta incorporar comandos al protocolo, separando quiescencia de exit code para
-jobs `unknown`, que todavía bloquean. También faltan borrado tipado, retención de
+Los comandos nuevos ya usan el protocolo: [resultado y cierre físico](command-peer-lifetime.md)
+son hechos separados y los jobs `unknown` con cierre comprobado no bloquean el
+retiro del intento. Los jobs históricos sin vínculo siguen bloqueando. Faltan migrar
+sus consumidores heredados, además de borrado tipado, retención de
 presupuesto ante eliminación, reconciliación externa y transferencia de registros
 antiguos/snapshots. Los flows y herramientas heredados no reciben estas garantías
 por analogía.

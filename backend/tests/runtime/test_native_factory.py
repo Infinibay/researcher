@@ -120,6 +120,7 @@ async def test_native_factory_registers_namespace_init_before_protocol_start(
             workspace=c.workspace, tool_token="HOST_ONLY_GRANT", peer_owner=peers
         ) as session:
             assert session.thread_id == "factory-thread"
+            assert session.native.rpc.process_group_signals is False
             record = peers.registry.inspect(peers.ids["native"])
             assert record["state"] == "bound"
             assert record["init_namespace"] != record["observer_namespace"]

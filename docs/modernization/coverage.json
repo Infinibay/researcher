@@ -204,7 +204,16 @@
         "backend/tests/runtime/test_peer_ownership.py",
         "backend/tests/runtime/test_run_recovery.py",
         "evals/runtime/run_crash_recovery.py",
-        "frontend/tests/runtime.test.ts"
+        "frontend/tests/runtime.test.ts",
+        "docs/architecture/command-peer-lifetime.md",
+        "docs/modernization/command-ownership-evidence.json",
+        "docs/modernization/command-ownership-results.json",
+        "docs/modernization/command-ownership-migration.json",
+        "docs/modernization/command-ownership-packaging.json",
+        "backend/tests/runtime/test_command_ownership.py",
+        "backend/tests/runtime/test_command_peer_migration.py",
+        "evals/runtime/run_commands.py",
+        "evals/runtime/run_parent_loss.py"
       ],
       "remaining": [
         "Durable product startup/shutdown and all tool lifecycle integration; old flows are not covered by owned command evidence",
@@ -262,7 +271,16 @@
         "docs/modernization/recovery-results.json",
         "backend/tests/runtime/test_peer_ownership.py",
         "backend/tests/runtime/test_run_recovery.py",
-        "evals/runtime/run_crash_recovery.py"
+        "evals/runtime/run_crash_recovery.py",
+        "docs/architecture/command-peer-lifetime.md",
+        "docs/modernization/command-ownership-evidence.json",
+        "docs/modernization/command-ownership-results.json",
+        "docs/modernization/command-ownership-migration.json",
+        "docs/modernization/command-ownership-packaging.json",
+        "backend/tests/runtime/test_command_ownership.py",
+        "backend/tests/runtime/test_command_peer_migration.py",
+        "evals/runtime/run_commands.py",
+        "evals/runtime/run_parent_loss.py"
       ]
     },
     "E06": {
@@ -292,7 +310,16 @@
         "docs/modernization/recovery-results.json",
         "backend/tests/runtime/test_peer_ownership.py",
         "backend/tests/runtime/test_run_recovery.py",
-        "evals/runtime/run_crash_recovery.py"
+        "evals/runtime/run_crash_recovery.py",
+        "docs/architecture/command-peer-lifetime.md",
+        "docs/modernization/command-ownership-evidence.json",
+        "docs/modernization/command-ownership-results.json",
+        "docs/modernization/command-ownership-migration.json",
+        "docs/modernization/command-ownership-packaging.json",
+        "backend/tests/runtime/test_command_ownership.py",
+        "backend/tests/runtime/test_command_peer_migration.py",
+        "evals/runtime/run_commands.py",
+        "evals/runtime/run_parent_loss.py"
       ]
     },
     "E07": {
@@ -382,7 +409,16 @@
         "docs/architecture/owned-commands.md",
         "backend/tests/runtime/test_command_executor.py",
         "backend/tests/runtime/test_command_journal.py",
-        "docs/modernization/owned-command-evidence.json"
+        "docs/modernization/owned-command-evidence.json",
+        "docs/architecture/command-peer-lifetime.md",
+        "docs/modernization/command-ownership-evidence.json",
+        "docs/modernization/command-ownership-results.json",
+        "docs/modernization/command-ownership-migration.json",
+        "docs/modernization/command-ownership-packaging.json",
+        "backend/tests/runtime/test_command_ownership.py",
+        "backend/tests/runtime/test_command_peer_migration.py",
+        "evals/runtime/run_commands.py",
+        "evals/runtime/run_parent_loss.py"
       ]
     },
     "D03": {
@@ -805,7 +841,16 @@
         "docs/modernization/recovery-results.json",
         "backend/tests/runtime/test_peer_ownership.py",
         "backend/tests/runtime/test_run_recovery.py",
-        "evals/runtime/run_crash_recovery.py"
+        "evals/runtime/run_crash_recovery.py",
+        "docs/architecture/command-peer-lifetime.md",
+        "docs/modernization/command-ownership-evidence.json",
+        "docs/modernization/command-ownership-results.json",
+        "docs/modernization/command-ownership-migration.json",
+        "docs/modernization/command-ownership-packaging.json",
+        "backend/tests/runtime/test_command_ownership.py",
+        "backend/tests/runtime/test_command_peer_migration.py",
+        "evals/runtime/run_commands.py",
+        "evals/runtime/run_parent_loss.py"
       ],
       "remaining": [
         "Migrate all legacy callers and capability families",
@@ -871,7 +916,16 @@
         "docs/modernization/recovery-results.json",
         "backend/tests/runtime/test_peer_ownership.py",
         "backend/tests/runtime/test_run_recovery.py",
-        "evals/runtime/run_crash_recovery.py"
+        "evals/runtime/run_crash_recovery.py",
+        "docs/architecture/command-peer-lifetime.md",
+        "docs/modernization/command-ownership-evidence.json",
+        "docs/modernization/command-ownership-results.json",
+        "docs/modernization/command-ownership-migration.json",
+        "docs/modernization/command-ownership-packaging.json",
+        "backend/tests/runtime/test_command_ownership.py",
+        "backend/tests/runtime/test_command_peer_migration.py",
+        "evals/runtime/run_commands.py",
+        "evals/runtime/run_parent_loss.py"
       ],
       "remaining": [
         "Historical migration fixtures and backup/restore",
@@ -1027,10 +1081,19 @@
         "evals/runtime/run_crash_recovery.py",
         "frontend/tests/runtime.test.ts",
         "docs/modernization/recovery-migration-evidence.json",
-        "docs/modernization/recovery-packaging.json"
+        "docs/modernization/recovery-packaging.json",
+        "docs/architecture/command-peer-lifetime.md",
+        "docs/modernization/command-ownership-evidence.json",
+        "docs/modernization/command-ownership-results.json",
+        "docs/modernization/command-ownership-migration.json",
+        "docs/modernization/command-ownership-packaging.json",
+        "backend/tests/runtime/test_command_ownership.py",
+        "backend/tests/runtime/test_command_peer_migration.py",
+        "evals/runtime/run_commands.py",
+        "evals/runtime/run_parent_loss.py"
       ],
       "remaining": [
-        "Migrate command peers and distinguish execution quiescence from unknown exit code",
+        "Migrate retained command-tool/flow consumers; legacy transports do not inherit namespace proofs.",
         "Verified deployment handoff/restore generation; cross-database workspace exclusion",
         "Legacy owner histories and external effects reconciliation",
         "Typed project deletion and lifetime budget retention",

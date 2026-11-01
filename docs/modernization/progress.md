@@ -547,3 +547,102 @@ backup/restore/bootstrap, full synchronization and final fresh whole-branch revi
 Resolve or replace the 100 baseline failures with evidence; they are not permanently
 accepted. Model selection remains global JSON only. No goal complete/paused/blocked
 status while meaningful work remains.
+
+
+## Command peer ownership and quiescence checkpoint
+
+- Previous goal turn classified as progress: commit 1032e0e saved four design assets
+  and the task workbench pilot. Revalidated that commit, tracked status and the full
+  next brief. This checkpoint advances command lifetime; it does not replace or
+  narrow the modernization objective. No generative application turn was submitted.
+- Applied ken-plan-change, Release It! and inline test-first verification. Connected
+  Ken still indexes original main rather than the managed worktree; its search and
+  blast-radius miss were followed by source reads and a manual caller inventory.
+  All command_executor and OwnedCommandExecutor callers were migrated together.
+- Ruling: command peers require an existing registered attempt scope, original lease,
+  a bound namespace and an immutable job/peer link. Do not launch an uncontained peer
+  while waiting to learn its owner from the first command. Cost: host callers must
+  supply the lease up front; historical unlinked jobs are not silently upgraded.
+  Registered unowned reservation and unscoped peer creation both demonstrated RED
+  before the new guards passed. Tests/evals now use the same actual gate protocol.
+- Migration 27 adds nullable peer_id and validation/immutability triggers. New scoped
+  reservations check bound kind, attempt, fence and DB origin before commit. A retry
+  resolves its original receipt without rebinding to another connection. Historical
+  NULL stays NULL, including when a later caller tries to attach invented proof.
+- Ruling: code of the command principal and actor closure are separate observations.
+  CommandJob and owner inspection derive local_execution_closed from the durable
+  namespace record. Closed unknown jobs can retire an uncertain attempt, preserving
+  output and NULL exit code. Dispatching/cancelling without a receipt becomes unknown
+  in the retirement transaction and emits job.quiescent. No success or task acceptance
+  is manufactured; unlinked unknown jobs still block. Cost: callers must interpret
+  both fields, and effects can still need human reconciliation after physical closure.
+- The executor checks the trusted launcher prefix and original peer identity before
+  initialization. It supervises the peer even after all command responses arrived,
+  with a bounded authority query. A completed parent with a detached child is tested
+  under both lease expiry and a busy DB writer; the delayed child effect is absent.
+  A foreign attempt cannot borrow a bound peer and the original still executes.
+- Ruling: cancelling a command closes its whole dedicated peer, including detached
+  children, and forbids further dispatch there. Cost: a host needing a different
+  operation must open a new peer with live authority; the cancelled/unknown operation
+  is never replayed. Command integration explicitly opens a new peer after its known
+  cancellation rather than pretending the cancelled connection is reusable.
+- Physical namespace closure and transport teardown proceed concurrently. A DB write
+  does not precede killing an already-bound actor. Control tasks remain owned/shielded
+  when their supervisor is cancelled. Completed command responses retain their true
+  code; failures remain unknown. Cancellation, output barriers and binary receipts
+  preserve the earlier contracts.
+- Registered native/command stdio transports no longer signal numeric process groups
+  after reaping; the contained launcher is a direct child, and pidfd/namespace provides
+  descendant proof. Native factory's controlled real-stdio test first failed the new
+  flag assertion, then passed. The generic diagnostic transport keeps its historical
+  fallback and the MCP SDK retains its own teardown; no universal closure claim.
+- Actual pinned native command trial command-integration-7b135d2a passed: eight jobs,
+  seven registered peers closed, project source separation, network denied, busy-writer
+  physical Stop preceding unlock, detached child suppressed, other owner preserved,
+  and connection loss revoking its business grant. Generation/dispatch count zero.
+- Actual parent-loss-f4240efa killed only the directly owned host holder. The original
+  command had started; its delayed effect was absent, its guard was terminal, and
+  same-DB host RunRecovery retired the attempt failed with unknown/NULL plus physical
+  closure. No replay or task acceptance; three registered peers closed. This trial's
+  recovery driver is direct host control, not an owner HTTP smoke. Existing API tests
+  cover authenticated common recovery controls; command-tool product wiring remains.
+- All seven new tests pass in the final full suite: 1144 total, 1041 passed, identical
+  100 baseline failure identities, three skipped, 29 warnings. All 216 runtime cases
+  pass. The complete suite remains red; baseline failures are not accepted permanently.
+  Failure-set comparison uses the same JUnit classname::name representation as the
+  old evidence; a first analysis attempt incorrectly mixed pytest path IDs and was
+  corrected before recording any comparison claim. Results preserve every failure.
+- Frontend displays closure separately from unknown result and preserves original
+  recovery intent; up to 25 jobs with explicit truncation. Twelve Node tests and
+  TypeScript/Vite pass, with existing Browserslist/chunk warnings. No browser, keyboard,
+  accessibility or comprehension acceptance. The earlier visual manifest remains
+  historical evidence for its own checkpoint; no new image/visual approval is inferred.
+- A read-only synthetic version-26 trial was backed up to a new rehearsal file and
+  migrated repeatably to 27. Original values/rowids of all 108 data tables and FK
+  integrity survive. The separate old-job fixture preserves binary bytes and NULL
+  ownership. No user DB changed. Wheel bytes match 32 selected runtime/migration files,
+  including all eleven SQL resources. Selected lint, offline lock and diff checks pass.
+- Evidence: command-ownership-{evidence,results,migration,packaging}.json plus
+  docs/architecture/command-peer-lifetime.md. All owned eval/test/build handles are
+  terminal; all actual trial namespace records are closed. Generation turns this
+  checkpoint zero, no API-key fallback. Four prior visual assets remain unchanged.
+
+## Next brief after command ownership
+
+Continue the FULL plan. Do not rebuild the verified native research conversation,
+question/recovery paths or regenerate the saved task concepts. The new command
+primitive now has registered ownership and separate quiescence/result facts; migrate
+actual retained shell/tool and flow consumers onto it. Persist repository/workspace
+selection in admission intent; add structured startup/failure explanations and an
+explicit queued-start retry. Complete cross-database workspace exclusion, project
+start/stop/delete ownership, lifetime budget retention and verified deployment/restore
+handoff. Migrate remaining legacy loops/roles/writers, all 71 tool families, versioned
+Git/review/CI candidate acceptance and subscription-only auxiliary inference. Complete
+prompt/book-skill inventory and evaluations, communication/context comprehension,
+backup/restore/bootstrap and full event synchronization. The 100 baseline failures
+still need resolution or replacement with correct behavior. The UI still needs the
+other 33 desktop concepts and 11 mobile adaptations, implementation of eleven other
+routes/shared panels and browser/accessibility/human acceptance of every route,
+including the existing pilot. Finish with fresh whole-branch independent review.
+No complete/paused/blocked goal status while meaningful work remains; model choice
+remains the verified global JSON setting, without a web/per-project selector.

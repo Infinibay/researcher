@@ -24,6 +24,7 @@ from backend.runtime.contracts import (
     RunConflict,
     RunNotFound,
 )
+from backend.runtime.peer_registry import PeerRegistry
 from backend.runtime.sqlite_runs import SQLiteRunStore
 
 
@@ -39,7 +40,6 @@ class _Command:
     stderr: bytearray = field(default_factory=bytearray)
     output_limited: bool = False
     task: asyncio.Task | None = None
-    monitor: asyncio.Task | None = None
     cancellation: asyncio.Task | None = None
     cancel_intent: asyncio.Task | None = None
     response_settled: asyncio.Event = field(default_factory=asyncio.Event)
@@ -67,6 +67,8 @@ class OwnedCommandExecutor:
         *,
         journal: SQLiteRunStore,
         workspace: Path,
+        lease: AttemptLease,
+        peer_id: str,
         monitor_interval=0.25,
         cancel_grace=1.0,
     ):
@@ -75,21 +77,37 @@ class OwnedCommandExecutor:
         self.rpc = rpc
         self.journal = journal
         self.workspace = workspace.resolve()
+        self.peers = PeerRegistry(journal)
+        self.peer_id = peer_id
+        peer = self.peers.inspect(peer_id)
+        prefix = self.peers.command(peer_id, ["payload"])[:-1]
+        if (
+            peer["kind"] != "command"
+            or peer["attempt_id"] != lease.attempt_id
+            or peer["fence"] != lease.fence
+            or tuple(rpc.command[: len(prefix)]) != tuple(prefix)
+            or rpc._process is not None
+        ):
+            raise RunConflict("Command transport must use its own registered peer gate")
+        self.peers._check_origin(peer)
+        rpc.process_group_signals = False
         self.executor_id = str(uuid4())
         self.monitor_interval = monitor_interval
         self.cancel_grace = cancel_grace
         self._commands: dict[str, _Command] = {}
-        self._owner: AttemptLease | None = None
+        self._owner: AttemptLease | None = lease
         self._reader = None
         self._reader_error = None
         self._handled_messages = 0
         self._changed = asyncio.Event()
         self._admission = asyncio.Lock()
         self._closing = None
+        self._peer_closing = None
+        self._supervisor = None
 
     async def __aenter__(self):
-        await self.rpc.__aenter__()
         try:
+            await self.rpc.__aenter__()
             await self.rpc.request(
                 "initialize",
                 {
@@ -107,9 +125,16 @@ class OwnedCommandExecutor:
                     "Command peer must use its own account-free control directory"
                 )
             self._reader = asyncio.create_task(self._read_events())
+            if (await asyncio.to_thread(self.peers.inspect, self.peer_id))[
+                "state"
+            ] != "bound":
+                raise RpcProtocolError(
+                    "Command peer did not bind before initialization"
+                )
+            self._supervisor = asyncio.create_task(self._watch_owner())
             return self
         except BaseException:
-            await self.rpc.aclose()
+            await self._close_peer()
             raise
 
     async def __aexit__(self, exc_type, exc, traceback):
@@ -122,6 +147,7 @@ class OwnedCommandExecutor:
             self._reader is None
             or self._closing is not None
             or self._reader_error is not None
+            or self._peer_closing is not None
         ):
             raise RpcDisconnected("Command executor is not available")
         cwd = (self.workspace / spec.cwd).resolve()
@@ -154,6 +180,7 @@ class OwnedCommandExecutor:
                 spec=spec,
                 workspace=str(self.workspace),
                 executor_id=self.executor_id,
+                peer_id=self.peer_id,
             )
             job = reservation.job
             if not reservation.should_dispatch:
@@ -175,7 +202,6 @@ class OwnedCommandExecutor:
             state = _Command(lease, job)
             self._commands[job.job_id] = state
             state.task = asyncio.create_task(self._execute(state, cwd))
-            state.monitor = asyncio.create_task(self._monitor(state))
             return CommandHandle(self, job.job_id)
 
     async def _get(self, job_id):
@@ -203,7 +229,7 @@ class OwnedCommandExecutor:
         except (RpcDisconnected, ValueError, KeyError, TypeError) as exc:
             self._reader_error = exc
             self._changed.set()
-            await self.rpc.aclose()
+            await self._close_peer()
 
     def _output(self, params):
         if not isinstance(params, dict):
@@ -264,12 +290,9 @@ class OwnedCommandExecutor:
             exit_code = reply.result["exitCode"]
         except (RpcDisconnected, RpcError, TimeoutError) as exc:
             error = type(exc).__name__
-            await self.rpc.aclose()
+            await self._close_peer()
         finally:
             state.response_settled.set()
-            if state.monitor is not None:
-                state.monitor.cancel()
-                await asyncio.gather(state.monitor, return_exceptions=True)
         if state.cancel_intent is not None:
             await asyncio.shield(state.cancel_intent)
         await asyncio.to_thread(
@@ -286,17 +309,29 @@ class OwnedCommandExecutor:
         state.stdout.clear()
         state.stderr.clear()
 
-    async def _monitor(self, state):
+    async def _watch_owner(self):
         while True:
             await asyncio.sleep(self.monitor_interval)
             try:
-                active = await asyncio.to_thread(
-                    self.journal.supervise_attempt, state.lease
+                active = await asyncio.wait_for(
+                    asyncio.to_thread(self.journal.supervise_attempt, self._owner),
+                    timeout=max(1.0, self.monitor_interval * 4),
                 )
             except Exception:  # noqa: BLE001 -- loss of authority must stop effects.
                 active = False  # Cannot establish authority: stop effects, not retry.
             if not active:
-                self._ensure_cancel(state)
+                active_jobs = [
+                    self._ensure_cancel(state)
+                    for state in self._commands.values()
+                    if state.task is not None and not state.task.done()
+                ]
+                try:
+                    await asyncio.gather(
+                        *(asyncio.shield(job) for job in active_jobs),
+                        return_exceptions=True,
+                    )
+                finally:
+                    await self._close_peer()
                 return
 
     def _ensure_cancel(self, state):
@@ -315,6 +350,7 @@ class OwnedCommandExecutor:
         if state.task.done():
             return
         if state.response_settled.is_set():
+            await self._close_peer()
             await asyncio.shield(state.task)
             return
         state.cancel_intent = asyncio.create_task(
@@ -338,7 +374,9 @@ class OwnedCommandExecutor:
                         # Termination may race registration; retry control, never execution.
                         await asyncio.sleep(0.02)
         except (RpcDisconnected, TimeoutError):
-            await self.rpc.aclose()
+            pass  # A receipt is optional; the physical closure barrier is not.
+        finally:
+            await self._close_peer()
         await asyncio.shield(state.cancel_intent)
         await asyncio.shield(state.task)
 
@@ -348,6 +386,9 @@ class OwnedCommandExecutor:
         await asyncio.shield(self._closing)
 
     async def _shutdown(self):
+        if self._supervisor is not None:
+            self._supervisor.cancel()
+            await asyncio.gather(self._supervisor, return_exceptions=True)
         active = [
             self._ensure_cancel(state)
             for state in self._commands.values()
@@ -357,7 +398,26 @@ class OwnedCommandExecutor:
             if active:
                 await asyncio.gather(*active, return_exceptions=True)
         finally:
-            await self.rpc.aclose()
-            if self._reader is not None:
-                self._reader.cancel()
-                await asyncio.gather(self._reader, return_exceptions=True)
+            try:
+                await self._close_peer()
+            finally:
+                if self._reader is not None:
+                    self._reader.cancel()
+                    await asyncio.gather(self._reader, return_exceptions=True)
+
+    async def _close_peer(self):
+        if self._peer_closing is None:
+            self._peer_closing = asyncio.create_task(self._retire_peer())
+        await asyncio.shield(self._peer_closing)
+
+    async def _retire_peer(self):
+        # Physical namespace retirement must not queue behind a writer before
+        # stopping effects. PeerRegistry reads a WAL snapshot and kills first.
+        results = await asyncio.gather(
+            self.rpc.aclose(),
+            asyncio.to_thread(self.peers.close, self.peer_id),
+            return_exceptions=True,
+        )
+        for result in results:
+            if isinstance(result, BaseException):
+                raise result

@@ -1,0 +1,11 @@
+{
+  "synthetic_source_trial": "crash-recovery-a01f39e9",
+  "source_version": 26,
+  "target_version": 27,
+  "repeatable": true,
+  "original_table_data_preserved": 108,
+  "original_column_values_and_rowids_preserved": true,
+  "foreign_key_errors": 0,
+  "user_database_touched": false,
+  "legacy_job_preservation": "Additionally tested with a historical unknown job, binary output prefix, NULL peer identity and a refused retrospective binding."
+}

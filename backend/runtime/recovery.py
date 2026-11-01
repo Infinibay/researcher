@@ -25,11 +25,24 @@ class RunRecovery:
                 (row["current_attempt_id"],),
             ).fetchall()
             jobs = conn.execute(
-                "SELECT id,status,exit_code,output_limited FROM runtime_jobs WHERE attempt_id=? ORDER BY rowid LIMIT 25",
+                """SELECT j.id,j.status,j.exit_code,j.output_limited,
+                EXISTS(SELECT 1 FROM runtime_peers p WHERE p.id=j.peer_id AND p.kind='command'
+                AND p.attempt_id=j.attempt_id AND p.state='closed' AND p.database_identity IS NOT NULL)
+                AS local_execution_closed FROM runtime_jobs j WHERE attempt_id=? ORDER BY rowid LIMIT 25""",
                 (row["current_attempt_id"],),
             ).fetchall()
             unknown_jobs = conn.execute(
                 "SELECT COUNT(*) FROM runtime_jobs WHERE attempt_id=? AND status<>'exited'",
+                (row["current_attempt_id"],),
+            ).fetchone()[0]
+            unmanaged_jobs = conn.execute(
+                """SELECT COUNT(*) FROM runtime_jobs j WHERE attempt_id=? AND status<>'exited'
+                AND NOT EXISTS(SELECT 1 FROM runtime_peers p WHERE p.id=j.peer_id
+                AND p.kind='command' AND p.attempt_id=j.attempt_id AND p.database_identity IS NOT NULL)""",
+                (row["current_attempt_id"],),
+            ).fetchone()[0]
+            job_count = conn.execute(
+                "SELECT COUNT(*) FROM runtime_jobs WHERE attempt_id=?",
                 (row["current_attempt_id"],),
             ).fetchone()[0]
             dispatch = conn.execute(
@@ -62,7 +75,7 @@ class RunRecovery:
                 for p in peers
             ):
                 blocked = "different_kernel"
-            elif unknown_jobs:
+            elif unmanaged_jobs:
                 blocked = "unknown_job"
             return {
                 "run_id": run_id,
@@ -79,6 +92,7 @@ class RunRecovery:
                 ],
                 "jobs": [dict(j) for j in jobs],
                 "unknown_jobs": unknown_jobs,
+                "jobs_truncated": job_count > 25,
                 "dispatch": dict(dispatch) if dispatch else None,
                 "effects": [
                     {

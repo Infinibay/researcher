@@ -35,18 +35,25 @@ def pidfd_kill(fd):
         raise OSError(ctypes.get_errno(), "Owned native process is no longer available")
 
 
-async def holder(root):
+async def holder(root, codex_binary):
     from backend.runtime.contracts import CommandSpec, RunSpec
     from backend.runtime.native_commands import command_executor
+    from backend.runtime.peer_registry import AttemptPeers
     from backend.runtime.sqlite_runs import SQLiteRunStore
 
     store = SQLiteRunStore(root / "data.db")
     run = store.admit(
         RunSpec(101, 1001, "worker", 1, "parent-loss", "Parent loss", "codex")
     )
-    lease = store.claim(101, run.run_id, "owned-holder", lease_seconds=120)
+    lease, _peers = AttemptPeers.claim(
+        store, 101, run.run_id, "owned-holder", lease_seconds=120
+    )
     async with command_executor(
-        journal=store, workspace=root / "workspace", control_root=root / "control"
+        journal=store,
+        lease=lease,
+        workspace=root / "workspace",
+        control_root=root / "control",
+        codex_binary=Path(codex_binary),
     ) as worker:
         handle = await worker.start(
             lease,
@@ -64,6 +71,7 @@ async def holder(root):
                 {
                     "native_pid": worker.rpc._process.pid,
                     "job_id": handle.job_id,
+                    "peer_id": worker.peer_id,
                     "run_id": run.run_id,
                 }
             )
@@ -71,7 +79,7 @@ async def holder(root):
         await handle.wait()
 
 
-async def main():
+async def main(codex_binary):
     from backend.db.connection import connect
     from backend.tools.base.db import ensure_migrations
 
@@ -89,6 +97,8 @@ async def main():
         str(Path(__file__).resolve()),
         "--holder",
         str(root),
+        "--codex-binary",
+        codex_binary,
         start_new_session=True,
     )
     pidfd = None
@@ -116,6 +126,36 @@ async def main():
             delayed_effect_observed=delayed,
         )
         assert terminal and not delayed, result
+        from backend.runtime.recovery import RunRecovery
+        from backend.runtime.sqlite_runs import SQLiteRunStore
+
+        store = SQLiteRunStore(root / "data.db")
+        store.recover_owners("replacement-owner")
+        run = store.get(101, identity["run_id"])
+        recovered = RunRecovery(store).reconcile(
+            project_id=101,
+            run_id=run.run_id,
+            attempt_id=run.attempt_id,
+            expected_fence=run.fence,
+            operation_key="recover-command-owner",
+        )
+        job = store.get_job(101, identity["job_id"])
+        assert (
+            job.local_execution_closed
+            and job.exit_code is None
+            and job.status == "unknown"
+        )
+        assert (
+            recovered["status"] == "failed"
+            and not recovered["task_accepted"]
+            and not recovered["inference_started"]
+        )
+        result["recovery"] = recovered
+        result["job"] = {
+            "status": job.status,
+            "exit_code": job.exit_code,
+            "local_execution_closed": job.local_execution_closed,
+        }
         result["status"] = "passed"
     except BaseException as exc:
         result.update(status="failed", error_type=type(exc).__name__)
@@ -139,10 +179,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--live", action="store_true")
     parser.add_argument("--holder")
+    parser.add_argument("--codex-binary", required=True)
     args = parser.parse_args()
     if args.holder:
-        asyncio.run(holder(Path(args.holder)))
+        asyncio.run(holder(Path(args.holder), args.codex_binary))
     elif args.live:
-        asyncio.run(main())
+        asyncio.run(main(args.codex_binary))
     else:
         parser.error("Use --live for this owned process-loss trial")

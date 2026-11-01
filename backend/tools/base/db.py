@@ -316,6 +316,12 @@ def ensure_migrations(db_path: str | None = None) -> None:
             resource = Path(__file__).resolve().parents[2] / "db/peer_origin_schema.sql"
             apply_sql_resource(conn, resource)
             logger.info("Migration 26: registered peer database origin")
+        if 27 not in applied:
+            from backend.db.migrations import apply_sql_resource
+
+            resource = Path(__file__).resolve().parents[2] / "db/command_peer_schema.sql"
+            apply_sql_resource(conn, resource)
+            logger.info("Migration 27: command peer ownership and independent closure proof")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()

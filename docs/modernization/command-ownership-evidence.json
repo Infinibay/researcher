@@ -1,0 +1,239 @@
+{
+  "date": "2026-10-31",
+  "base_commit": "1032e0e",
+  "native_version": "codex-cli 0.166.0",
+  "application_generation_turns_this_checkpoint": 0,
+  "trials": [
+    {
+      "trial": "command-integration-7b135d2a",
+      "schema_version": 27,
+      "peers": [
+        {
+          "kind": "business",
+          "state": "closed",
+          "count": 2
+        },
+        {
+          "kind": "command",
+          "state": "closed",
+          "count": 3
+        },
+        {
+          "kind": "native",
+          "state": "closed",
+          "count": 2
+        }
+      ],
+      "jobs": [
+        {
+          "status": "exited",
+          "exit_code": 0,
+          "peer_linked": true
+        },
+        {
+          "status": "exited",
+          "exit_code": 0,
+          "peer_linked": true
+        },
+        {
+          "status": "exited",
+          "exit_code": 1,
+          "peer_linked": true
+        },
+        {
+          "status": "exited",
+          "exit_code": 1,
+          "peer_linked": true
+        },
+        {
+          "status": "exited",
+          "exit_code": 137,
+          "peer_linked": true
+        },
+        {
+          "status": "exited",
+          "exit_code": 137,
+          "peer_linked": true
+        },
+        {
+          "status": "exited",
+          "exit_code": 0,
+          "peer_linked": true
+        },
+        {
+          "status": "unknown",
+          "exit_code": null,
+          "peer_linked": true
+        }
+      ],
+      "inference_dispatches": 0,
+      "foreign_key_errors": 0,
+      "result": {
+        "model_turns_submitted": 0,
+        "commands": [
+          {
+            "key": "inside",
+            "project_id": 101,
+            "job_id": "92ec76c3-7140-4b50-8d91-bb7a3b2b10f6",
+            "status": "exited",
+            "exit_code": 0,
+            "stdout": "ALPHA_ONLY",
+            "stderr": ""
+          },
+          {
+            "key": "inside",
+            "project_id": 202,
+            "job_id": "9a6b4ea6-3940-4d2e-a163-a10703b7354e",
+            "status": "exited",
+            "exit_code": 0,
+            "stdout": "BETA_ONLY",
+            "stderr": ""
+          },
+          {
+            "key": "outside",
+            "project_id": 101,
+            "job_id": "baddd62e-fc5f-4b62-b8fc-3c68c537e1d5",
+            "status": "exited",
+            "exit_code": 1,
+            "stdout": "",
+            "stderr": "cat: <owned-trial>/beta/private.txt: No such file or directory\n"
+          },
+          {
+            "key": "network",
+            "project_id": 101,
+            "job_id": "e18adabd-570e-4561-a95f-25fb5f2e14b1",
+            "status": "exited",
+            "exit_code": 1,
+            "stdout": "",
+            "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import socket; socket.socket()\n                   ~~~~~~~~~~~~~^^\n  File \"/usr/lib/python3.14/socket.py\", line 236, in __init__\n    _socket.socket.__init__(self, family, type, proto, fileno)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nPermissionError: [Errno 1] Operation not permitted\n"
+          }
+        ],
+        "database_contention": {
+          "physical_stop_preceded_database_unlock": true,
+          "exit_code": 137,
+          "cancellation_intent_persisted": true
+        },
+        "stop": {
+          "seconds": 0.1504240760114044,
+          "job_id": "c2d9eac5-45f7-47ab-8ab8-796a48ad28f7",
+          "exit_code": 137,
+          "other_job_exit_code": 0
+        },
+        "peer_loss": {
+          "job_id": "8108d536-c661-4016-9394-4d1ed11db16a",
+          "status": "unknown",
+          "run_status": "reconciling",
+          "business_grant_revoked": true,
+          "detached_delayed_effect_present": false
+        },
+        "all_registered_peers_closed": true,
+        "detached_child_confirmed_started": true,
+        "delayed_effect_present": false,
+        "other_owner_effect_preserved": true,
+        "status": "passed"
+      },
+      "recovery_driver": "OwnedCommandExecutor with real pinned native command peers"
+    },
+    {
+      "trial": "parent-loss-f4240efa",
+      "schema_version": 27,
+      "peers": [
+        {
+          "kind": "business",
+          "state": "closed",
+          "count": 1
+        },
+        {
+          "kind": "command",
+          "state": "closed",
+          "count": 1
+        },
+        {
+          "kind": "native",
+          "state": "closed",
+          "count": 1
+        }
+      ],
+      "jobs": [
+        {
+          "status": "unknown",
+          "exit_code": null,
+          "peer_linked": true
+        }
+      ],
+      "inference_dispatches": 0,
+      "foreign_key_errors": 0,
+      "result": {
+        "model_turns_submitted": 0,
+        "status": "passed",
+        "job_id": "7d9306fc-a7bf-4edf-b227-81c1d789d83d",
+        "peer_id": "3b3a54deba294df8807e4e396d121d45",
+        "run_id": "cffd9d5c-f27c-4f06-9a97-52aa391654ab",
+        "holder_terminal": true,
+        "native_terminal": true,
+        "delayed_effect_observed": false,
+        "recovery": {
+          "run_id": "cffd9d5c-f27c-4f06-9a97-52aa391654ab",
+          "attempt_id": "7e3b1dea-d060-4dbc-a9ad-155f09eef6ca",
+          "status": "failed",
+          "local_execution_closed": true,
+          "inference_started": false,
+          "task_accepted": false
+        },
+        "job": {
+          "status": "unknown",
+          "exit_code": null,
+          "local_execution_closed": true
+        }
+      },
+      "recovery_driver": "RunRecovery.reconcile (host control, not an HTTP smoke)"
+    }
+  ],
+  "verification": {
+    "runtime_tests": 216,
+    "frontend_tests": 12,
+    "typescript_vite_build": "passed",
+    "full_suite": "1144 total; 1041 passed, same 100 failures, 3 skipped",
+    "new_failures": 0,
+    "resolved_failures": 0,
+    "lint": "selected changed/new modules passed",
+    "lock": "uv lock --check --offline passed, 193 packages",
+    "browser": "not exercised; no visual or accessibility acceptance claimed",
+    "limits": [
+      "Legacy tool and flow consumers are not yet migrated to this factory.",
+      "This does not prove deployment handoff, restored DB ownership, global workspace exclusion or external effects reconciliation.",
+      "Native-inference group signaling change is covered by real-stdio controlled protocol tests; no new generative model trial was run."
+    ]
+  },
+  "source_sha256": {
+    "backend/db/command_peer_schema.sql": "0d3db0ce436f41a86a18b7eb6bee52975443115719e2839f67f2d017441631a7",
+    "backend/runtime/command_jobs.py": "b1f2f8bd74dff29a36a5e35ac55b2a4ec2f1a30ce6c958238d070c764c9dab3a",
+    "backend/runtime/codex_rpc.py": "a22c4d4afd11e3dde00c9ce9641194453b665ce44890755b34cbe23084a9b7c8",
+    "backend/runtime/contracts.py": "bd4c3ef91bb0f508b94909b2704cd4afdce64ea16af6581e1c04c0aaa29034e0",
+    "backend/runtime/native_commands.py": "e8167042a716b84c069c2a270543f9accdabb1ded0182387658b2b0ec63ac84d",
+    "backend/runtime/native_inference.py": "4967b2b19037557105451466eecaca65ca78ee6bf7d3c922931794eef01d7c64",
+    "backend/runtime/peer_registry.py": "2c1741f461596c57e480e4b94e10eb01d4111556b62aafdd19624ac0d965bd4b",
+    "backend/runtime/recovery.py": "932ce519ebc68a798fd4905ef5ecd59ee3f113c2386654ff1b164b941e112824",
+    "backend/runtime/sqlite_runs.py": "78c9e636a1b1f4d367afb6ab047fad793603856de402be265f29c4dde4a6c406",
+    "backend/tools/base/db.py": "324b6e4fc228c573a4b16e776e95ea89776ea071105234b50f990db6b6c2de68",
+    "backend/tests/runtime/test_command_executor.py": "441cd699ccf2196dcfb8effb9beefdf1ba58e5401eda46d9f14aef89acfbe96d",
+    "backend/tests/runtime/test_command_ownership.py": "fc816331bde34a9159380e03003b8291527fc3a4cd3212eebe5320ead5ffc30f",
+    "backend/tests/runtime/test_command_peer_migration.py": "27d007b5651cff4f8407edf712b633a9d43bbe09646313bd8696ff5faf36699c",
+    "backend/tests/runtime/test_native_factory.py": "5a30b7fcdf0ab837ce4fb84da4a3089ab30ebb8cc2992d9fc8048296e8de047a",
+    "backend/tests/runtime/test_question_migration.py": "442334a25a184f9faa6c7587a02eec36687a952f1fc57c6c5ef3be3d33cb1a53",
+    "evals/runtime/run_commands.py": "8e82212c8125e77507a89e52fe2950f6de93b99db80b15c395cd8e4370528077",
+    "evals/runtime/run_parent_loss.py": "38ed09761621cc323943fa60499554e4aa41384315294d0c2c9ea9653136f4cf",
+    "frontend/src/api/runtime.ts": "1fb7a1a78e4043ce02b9417d248b6de7cb28e2cdf2ee614ab108c156d11e7bd8",
+    "frontend/src/components/tasks/TaskRunWorkspace.tsx": "fb64c47a1a3163246bc413c248cf12debc8d04db69796899082df5fef165642d"
+  },
+  "log_sha256": {
+    "command-ownership-red.log": "44e7bdc5acf7b5f09fcdae0997729db9df7c781738eea38981db55535148a267",
+    "contained-native-signals-red.log": "621e679e18ea522644582f9119d034cdeaae195d2ca72f9b63f4020a8330b70c",
+    "command-scope-red.log": "29d105922d6d1d35f158ee2fe709b2b54c92f7cea0402fd7090833962597f419",
+    "command-peer-suite.log": "12d94b89ec269b22137501072d530c6fbfdbce40d82a99db9cfcae49ac42077d",
+    "command-peer-frontend.log": "8a7a5ccf26c66f1583067e27542604bbcd308e74a921d75f365370387c16b9cf",
+    "command-peer-build.log": "c9310cbe19d29e7a5b8662029365365d622e7eee0176ad8189f6e000119525e0",
+    "command-peer-live.log": "1272a9517eb8adae59733541743460f78dcfeeceebcc9396b722166cdb3571b0",
+    "command-parent-live.log": "54bf49469345ee6922c4a1d6e6fdda332d2bb60abca248ab702a4e8ea41c6223"
+  }
+}

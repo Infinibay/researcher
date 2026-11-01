@@ -3,6 +3,7 @@
 import asyncio
 import os
 import sys
+import time
 from dataclasses import replace
 from pathlib import Path
 
@@ -11,21 +12,37 @@ import pytest
 from backend.runtime.codex_rpc import StdioRpcClient
 
 
-def executor(c, workspace):
-    from backend.runtime.command_jobs import OwnedCommandExecutor
+def command_peer(c, workspace, lease, *, client=StdioRpcClient, **kwargs):
+    from backend.runtime.peer_registry import PeerRegistry
 
-    return OwnedCommandExecutor(
-        StdioRpcClient(
+    peers = PeerRegistry(c.store)
+    peer_id = peers.prepare(lease, "command")
+    return client(
+        peers.command(
+            peer_id,
             (
                 sys.executable,
                 "-u",
                 str(Path(__file__).with_name("fake_command_server.py")),
             ),
-            cwd=workspace,
-            env={"PATH": os.defpath, "HOME": str(workspace)},
-            request_timeout=2,
-            close_timeout=0.1,
         ),
+        cwd=workspace,
+        env={"PATH": os.defpath, "HOME": str(workspace)},
+        request_timeout=2,
+        close_timeout=0.1,
+        process_group_signals=False,
+        **kwargs,
+    ), peer_id
+
+
+def executor(c, workspace, lease):
+    from backend.runtime.command_jobs import OwnedCommandExecutor
+
+    rpc, peer_id = command_peer(c, workspace, lease)
+    return OwnedCommandExecutor(
+        rpc,
+        lease=lease,
+        peer_id=peer_id,
         journal=c.store,
         workspace=workspace,
         monitor_interval=0.02,
@@ -34,8 +51,11 @@ def executor(c, workspace):
 
 
 def claim(c):
+    from backend.runtime.peer_registry import AttemptPeers
+
+    c.now[0] = time.time()
     run = c.store.admit(c.spec)
-    return c.store.claim(101, run.run_id, "worker", lease_seconds=30)
+    return AttemptPeers.claim(c.store, 101, run.run_id, "worker", lease_seconds=120)[0]
 
 
 def command(c, code, **kwargs):
@@ -59,16 +79,20 @@ async def test_stream_tail_is_persisted_before_the_terminal_receipt(
     )
 
     gate, received = asyncio.Event(), asyncio.Event()
-    rpc = ReplyObservedClient(
-        (sys.executable, "-u", str(Path(__file__).with_name("fake_command_server.py"))),
-        cwd=tmp_path,
-        env={"PATH": os.defpath, "HOME": str(tmp_path)},
-        request_timeout=2,
-        close_timeout=0.1,
+    rpc, peer_id = command_peer(
+        c,
+        tmp_path,
+        lease,
+        client=ReplyObservedClient,
         reply_received=received,
     )
     async with PausedOutputExecutor(
-        rpc, journal=c.store, workspace=tmp_path, output_gate=gate
+        rpc,
+        journal=c.store,
+        workspace=tmp_path,
+        lease=lease,
+        peer_id=peer_id,
+        output_gate=gate,
     ) as worker:
         handle = await worker.start(
             lease,
@@ -101,7 +125,7 @@ async def test_retry_on_the_same_peer_never_executes_the_command_twice(
         c,
         "from pathlib import Path; p=Path('effects'); p.write_text((p.read_text() if p.exists() else '')+'x')",
     )
-    async with executor(c, tmp_path) as worker:
+    async with executor(c, tmp_path, lease) as worker:
         first = await worker.start(lease, "write-once", spec)
         await first.wait()
         again = await worker.start(lease, "write-once", spec)
@@ -117,7 +141,7 @@ async def test_an_executor_cannot_be_shared_by_another_run_or_attempt(
     first = claim(c)
     other = c.store.admit(replace(c.spec, task_id=1002, operation_key="other-request"))
     second = c.store.claim(101, other.run_id, "other-owner", lease_seconds=30)
-    async with executor(c, tmp_path) as worker:
+    async with executor(c, tmp_path, first) as worker:
         handle = await worker.start(
             first, "first-command", command(c, "print('first')")
         )
@@ -131,7 +155,7 @@ async def test_durable_stop_cancels_actual_owned_command_and_keeps_attempt_unacc
 ):
     c = coordination
     lease = claim(c)
-    async with executor(c, tmp_path) as worker:
+    async with executor(c, tmp_path, lease) as worker:
         handle = await worker.start(
             lease,
             "slow",
@@ -156,7 +180,7 @@ async def test_expired_lease_stops_owned_command_without_waiting_for_expiry_swee
 ):
     c = coordination
     lease = claim(c)
-    async with executor(c, tmp_path) as worker:
+    async with executor(c, tmp_path, lease) as worker:
         handle = await worker.start(
             lease,
             "expired",
@@ -166,11 +190,13 @@ async def test_expired_lease_stops_owned_command_without_waiting_for_expiry_swee
             ),
         )
         await wait_file(tmp_path / "started")
-        c.now[0] = 1031
+        c.now[0] = lease.expires_at + 1
         result = await asyncio.wait_for(handle.wait(), 2)
         assert result.cancel_requested and result.exit_code != 0
         assert c.store.get(101, lease.run_id).status == "reconciling"
-        c.now[0] = 1005  # A clock correction must not restore observed lost authority.
+        c.now[0] = (
+            lease.expires_at - 1
+        )  # A clock correction must not restore observed lost authority.
         assert c.store.attempt_active(lease) is False
 
 
@@ -179,7 +205,7 @@ async def test_output_limit_is_explicit_and_never_discards_tail_while_claiming_c
 ):
     c = coordination
     lease = claim(c)
-    async with executor(c, tmp_path) as worker:
+    async with executor(c, tmp_path, lease) as worker:
         handle = await worker.start(
             lease,
             "too-much",
@@ -198,22 +224,20 @@ async def test_output_limit_is_explicit_and_never_discards_tail_while_claiming_c
 async def test_peer_loss_preserves_uncertainty_and_does_not_replay_on_reopen(
     coordination, tmp_path
 ):
-    from backend.runtime.command_jobs import CommandNeedsReconciliation
-
     c = coordination
     lease = claim(c)
     spec = command(
         c,
         "from pathlib import Path; import time; p=Path('effects'); p.write_text('once'); time.sleep(10)",
     )
-    async with executor(c, tmp_path) as worker:
+    async with executor(c, tmp_path, lease) as worker:
         handle = await worker.start(lease, "lost-peer", spec)
         await wait_file(tmp_path / "effects")
         worker.rpc._process.kill()
         result = await asyncio.wait_for(handle.wait(), 2)
         assert result.status == "unknown" and result.exit_code is None
-    async with executor(c, tmp_path) as replacement:
-        with pytest.raises(CommandNeedsReconciliation):
+    with pytest.raises(c.contracts.StaleAttempt):
+        async with executor(c, tmp_path, lease) as replacement:
             await replacement.start(lease, "lost-peer", spec)
     assert (tmp_path / "effects").read_text() == "once"
 
@@ -223,7 +247,7 @@ async def test_executor_close_reaps_active_commands_before_returning(
 ):
     c = coordination
     lease = claim(c)
-    async with executor(c, tmp_path) as worker:
+    async with executor(c, tmp_path, lease) as worker:
         handle = await worker.start(
             lease,
             "closing",
@@ -245,7 +269,7 @@ async def test_native_stop_does_not_wait_for_a_busy_sqlite_writer(
 ):
     c = coordination
     lease = claim(c)
-    async with executor(c, tmp_path) as worker:
+    async with executor(c, tmp_path, lease) as worker:
         handle = await worker.start(
             lease,
             "sqlite-contention",

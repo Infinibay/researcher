@@ -57,6 +57,8 @@ export interface RecoveryInspection {
   blocked_reason: 'missing_proof' | 'different_database' | 'different_kernel' | 'unknown_job' | null
   peers: { kind: string; state: string; reason: string | null }[]
   unknown_jobs: number
+  jobs: { id: string; status: string; exit_code: number | null; output_limited: number; local_execution_closed: number }[]
+  jobs_truncated: boolean
   dispatch: { model: string | null; status: string; observed_tokens: number | null; token_ceiling: number } | null
   effects: { operation_key: string; kind: string; receipt: Record<string, unknown> }[]
   effects_truncated: boolean

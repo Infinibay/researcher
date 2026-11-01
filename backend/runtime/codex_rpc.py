@@ -56,6 +56,7 @@ class StdioRpcClient:
         max_messages: int = 256,
         max_message_bytes: int = 1024 * 1024,
         max_pending_requests: int = 32,
+        process_group_signals: bool = True,
     ) -> None:
         if not command or min(request_timeout, close_timeout, max_messages, max_message_bytes, max_pending_requests) <= 0:
             raise ValueError("A command and positive transport limits are required")
@@ -66,6 +67,7 @@ class StdioRpcClient:
         self.close_timeout = close_timeout
         self.max_message_bytes = max_message_bytes
         self.max_pending_requests = max_pending_requests
+        self.process_group_signals = process_group_signals
         self._messages: asyncio.Queue[dict[str, Any]] = asyncio.Queue(maxsize=max_messages)
         self._pending: dict[int, asyncio.Future[Any]] = {}
         self._next_id = 0
@@ -238,7 +240,11 @@ class StdioRpcClient:
     def _signal_process_group(self, sig: signal.Signals) -> None:
         assert self._process is not None
         try:
-            os.killpg(self._process.pid, sig)
+            if self.process_group_signals:
+                os.killpg(self._process.pid, sig)
+            elif self._process.returncode is None:
+                # Contained peers use their pidfd/namespace closure barrier.
+                self._process.send_signal(sig)
         except ProcessLookupError:
             pass
 

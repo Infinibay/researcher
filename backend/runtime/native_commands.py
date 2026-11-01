@@ -11,6 +11,7 @@ from tempfile import TemporaryDirectory
 
 from backend.runtime.codex_rpc import RpcProtocolError, StdioRpcClient
 from backend.runtime.command_jobs import OwnedCommandExecutor
+from backend.runtime.peer_registry import PeerRegistry
 
 VERSION = "codex-cli 0.166.0"
 DISABLED = (
@@ -49,6 +50,7 @@ def _version(binary, env):
 async def command_executor(
     *,
     journal,
+    lease,
     workspace: Path,
     control_root: Path,
     codex_binary: Path | None = None,
@@ -124,16 +126,19 @@ async def command_executor(
             command += ["--disable", feature]
         for key, value in overrides.items():
             command += ["-c", key + "=" + _toml(value)]
+        peers = PeerRegistry(journal)
+        peer_id = await asyncio.to_thread(peers.prepare, lease, "command")
         rpc = StdioRpcClient(
-            command,
+            peers.command(peer_id, command),
             cwd=home,
             env=env,
             request_timeout=10,
             close_timeout=1,
             max_messages=512,
+            process_group_signals=False,
         )
         async with OwnedCommandExecutor(
-            rpc, journal=journal, workspace=workspace
+            rpc, journal=journal, workspace=workspace, lease=lease, peer_id=peer_id
         ) as worker:
             config = (await rpc.request("config/read", {"includeLayers": False}))[
                 "config"

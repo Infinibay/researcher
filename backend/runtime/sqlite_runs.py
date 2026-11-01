@@ -511,10 +511,34 @@ class SQLiteRunStore:
         attempt_id = row["current_attempt_id"]
         self._closed_peer_proof(conn, attempt_id)
         if conn.execute(
-            "SELECT 1 FROM runtime_jobs WHERE attempt_id=? AND status<>'exited'",
+            """SELECT 1 FROM runtime_jobs j WHERE attempt_id=? AND status<>'exited'
+            AND NOT EXISTS(SELECT 1 FROM runtime_peers p WHERE p.id=j.peer_id
+                AND p.attempt_id=j.attempt_id AND p.kind='command' AND p.state='closed'
+                AND p.database_identity IS NOT NULL)""",
             (attempt_id,),
         ).fetchone():
             raise RunConflict("Owned jobs require terminal reconciliation")
+        # A closed actor cannot keep acting, but no terminal result is invented.
+        for job in conn.execute(
+            "SELECT id FROM runtime_jobs WHERE attempt_id=? AND status IN ('dispatching','cancelling')",
+            (attempt_id,),
+        ).fetchall():
+            conn.execute(
+                "UPDATE runtime_jobs SET status='unknown',error=COALESCE(error,'PeerClosedWithoutTerminalReceipt') WHERE id=?",
+                (job["id"],),
+            )
+            self._event(
+                conn,
+                row["project_id"],
+                row["task_id"],
+                "job.quiescent",
+                {
+                    "job_id": job["id"],
+                    "attempt_id": attempt_id,
+                    "local_execution_closed": True,
+                    "exit_code": None,
+                },
+            )
         self._withdraw(conn, row, outcome)
         conn.execute(
             "UPDATE runtime_attempts SET status='finished',ended_at=? WHERE id=?",
@@ -1109,12 +1133,17 @@ class SQLiteRunStore:
             output_limited=bool(row["output_limited"]),
             cancel_requested=bool(row["cancel_requested"]),
             error=row["error"],
+            peer_id=row["peer_id"],
+            local_execution_closed=bool(row["local_execution_closed"]),
         )
 
     @staticmethod
     def _job_row(conn, project_id, job_id):
         row = conn.execute(
-            "SELECT j.* FROM runtime_jobs j JOIN runtime_runs r ON r.id=j.run_id WHERE j.id=? AND r.project_id=?",
+            """SELECT j.*,EXISTS(SELECT 1 FROM runtime_peers p WHERE p.id=j.peer_id
+            AND p.attempt_id=j.attempt_id AND p.kind='command' AND p.state='closed'
+            AND p.database_identity IS NOT NULL) AS local_execution_closed
+            FROM runtime_jobs j JOIN runtime_runs r ON r.id=j.run_id WHERE j.id=? AND r.project_id=?""",
             (job_id, project_id),
         ).fetchone()
         if row is None:
@@ -1128,7 +1157,14 @@ class SQLiteRunStore:
             return self._job_view(self._job_row(conn, project_id, job_id))
 
     def reserve_job(
-        self, lease, *, operation_key, spec: CommandSpec, workspace, executor_id
+        self,
+        lease,
+        *,
+        operation_key,
+        spec: CommandSpec,
+        workspace,
+        executor_id,
+        peer_id=None,
     ) -> JobReservation:
         command_key(operation_key)
         command_key(executor_id)
@@ -1145,8 +1181,34 @@ class SQLiteRunStore:
                     raise RunConflict(
                         "Command operation key already identifies another intent"
                     )
-                return JobReservation(self._job_view(existing), False)
+                return JobReservation(
+                    self._job_view(
+                        self._job_row(conn, lease.project_id, existing["id"])
+                    ),
+                    False,
+                )
             self._authority(conn, lease)
+            scope = conn.execute(
+                "SELECT 1 FROM runtime_peer_scopes WHERE attempt_id=?",
+                (lease.attempt_id,),
+            ).fetchone()
+            if peer_id is None and scope is not None:
+                raise RunConflict("Command requires a registered peer")
+            if peer_id is not None:
+                from backend.runtime.peer_registry import PeerRegistry
+
+                peer = conn.execute(
+                    "SELECT * FROM runtime_peers WHERE id=?", (peer_id,)
+                ).fetchone()
+                if (
+                    peer is None
+                    or peer["kind"] != "command"
+                    or peer["state"] != "bound"
+                    or peer["attempt_id"] != lease.attempt_id
+                    or peer["fence"] != lease.fence
+                ):
+                    raise RunConflict("Command requires its own bound peer")
+                PeerRegistry(self)._check_origin(peer)
             if (
                 conn.execute(
                     "SELECT id FROM runtime_jobs WHERE run_id=? AND status IN ('dispatching','cancelling','unknown')",
@@ -1159,8 +1221,8 @@ class SQLiteRunStore:
                 )
             job_id = str(uuid4())
             conn.execute(
-                """INSERT INTO runtime_jobs(id,run_id,attempt_id,executor_id,operation_key,request_hash,argv_json,cwd,workspace,timeout_seconds,output_bytes,status,created_at)
-                VALUES(?,?,?,?,?,?,?,?,?,?,?,'dispatching',?)""",
+                """INSERT INTO runtime_jobs(id,run_id,attempt_id,executor_id,operation_key,request_hash,argv_json,cwd,workspace,timeout_seconds,output_bytes,status,created_at,peer_id)
+                VALUES(?,?,?,?,?,?,?,?,?,?,?,'dispatching',?,?)""",
                 (
                     job_id,
                     lease.run_id,
@@ -1174,6 +1236,7 @@ class SQLiteRunStore:
                     spec.timeout_seconds,
                     spec.output_bytes,
                     self.clock(),
+                    peer_id,
                 ),
             )
             self._event(

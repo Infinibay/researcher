@@ -177,6 +177,8 @@ class CommandJob:
     output_limited: bool
     cancel_requested: bool
     error: str | None
+    peer_id: str | None = None
+    local_execution_closed: bool = False
 
 
 @dataclass(frozen=True)

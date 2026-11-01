@@ -20,7 +20,12 @@ def version23(database, conn, monkeypatch):
             "apply_sql_resource",
             lambda conn, path: (
                 None
-                if path.name in ("peer_schema.sql", "peer_origin_schema.sql")
+                if path.name
+                in (
+                    "peer_schema.sql",
+                    "peer_origin_schema.sql",
+                    "command_peer_schema.sql",
+                )
                 else apply_resource(conn, path)
             ),
         )

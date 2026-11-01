@@ -400,6 +400,7 @@ class CodexRuntime:
                             env=env,
                             request_timeout=35,
                             max_messages=512,
+                            process_group_signals=peer_owner is None,
                         ),
                         workspace=root,
                         model=self.model,

@@ -7,6 +7,7 @@ import shutil
 import sqlite3
 import sys
 import time
+from contextlib import AsyncExitStack
 from pathlib import Path
 from uuid import uuid4
 
@@ -17,6 +18,7 @@ sys.path.insert(0, str(REPO))
 async def main(args):
     from backend.runtime.contracts import CommandSpec, RunSpec
     from backend.runtime.native_commands import command_executor
+    from backend.runtime.peer_registry import AttemptPeers
     from backend.runtime.sqlite_runs import SQLiteRunStore
     from backend.tools.base.db import ensure_migrations
 
@@ -49,20 +51,27 @@ async def main(args):
     run_b = store.admit(
         RunSpec(202, 2002, "worker-b", 1, "request-b", "Command integration", "codex")
     )
-    lease_a = store.claim(101, run_a.run_id, "owner-a", lease_seconds=120)
-    lease_b = store.claim(202, run_b.run_id, "owner-b", lease_seconds=120)
+    lease_a, peers_a = AttemptPeers.claim(
+        store, 101, run_a.run_id, "owner-a", lease_seconds=120
+    )
+    lease_b, peers_b = AttemptPeers.claim(
+        store, 202, run_b.run_id, "owner-b", lease_seconds=120
+    )
     results = {"model_turns_submitted": 0, "root": str(root), "commands": []}
     print("Command integration:", root, flush=True)
     try:
         async with (
+            AsyncExitStack() as replacements,
             command_executor(
                 journal=store,
+                lease=lease_a,
                 workspace=alpha,
                 control_root=root / "controls",
                 codex_binary=Path(args.codex_binary),
             ) as worker_a,
             command_executor(
                 journal=store,
+                lease=lease_b,
                 workspace=beta,
                 control_root=root / "controls",
                 codex_binary=Path(args.codex_binary),
@@ -134,6 +143,15 @@ async def main(args):
                     "exit_code": persisted.exit_code,
                     "cancellation_intent_persisted": True,
                 }
+                worker_a = await replacements.enter_async_context(
+                    command_executor(
+                        journal=store,
+                        lease=lease_a,
+                        workspace=alpha,
+                        control_root=root / "controls",
+                        codex_binary=Path(args.codex_binary),
+                    )
+                )
             child = "from pathlib import Path; import time; Path('child-started').write_text('yes'); time.sleep(2); Path('delayed').write_text('must not happen')"
             parent = (
                 "import subprocess,sys,time; subprocess.Popen([sys.executable,'-c',"
@@ -225,6 +243,10 @@ async def main(args):
                     "run_status": "reconciling",
                     "business_grant_revoked": True,
                 }
+        await peers_a.aclose()
+        await peers_b.aclose()
+        results["all_registered_peers_closed"] = peers_a.closed() and peers_b.closed()
+        assert results["all_registered_peers_closed"]
         await asyncio.sleep(2.1)
         assert not (alpha / "delayed").exists()
         assert (beta / "other-complete").read_text() == "yes"
