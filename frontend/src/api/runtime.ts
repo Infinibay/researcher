@@ -52,6 +52,31 @@ export interface RuntimeQuestion {
   ready_for_answer: boolean
 }
 
+export interface QuestionInboxItem {
+  request_id: number
+  kind: 'native' | 'legacy'
+  title: string
+  body: string | null
+  task_id: number | null
+  task_title: string | null
+  run_id: string | null
+  thread_id: string | null
+  context_version: number | null
+  current_context_version: number | null
+  ready_for_answer: boolean
+  questions: RuntimeQuestion['questions'] | null
+}
+
+export interface QuestionInboxPage {
+  items: QuestionInboxItem[]
+  total_pending: number
+  next_after_id: number | null
+}
+
+export function questionInbox(projectId: number, afterId = 0) {
+  return fetchApi<QuestionInboxPage>(`/api/projects/${projectId}/questions?after_id=${afterId}&limit=50`)
+}
+
 export interface AnswerIntent {
   readonly projectId: number
   readonly taskId: number

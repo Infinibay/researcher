@@ -37,8 +37,16 @@
       ]
     },
     "C03": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/question-inbox.md",
+        "docs/modernization/chat-evidence.json",
+        "docs/modernization/chat-results.json",
+        "docs/modernization/chat-packaging.json",
+        "docs/design/concepts/chat/manifest.json",
+        "backend/tests/runtime/test_question_inbox.py",
+        "frontend/tests/chat-design.test.ts"
+      ]
     },
     "C04": {
       "status": "in_progress",
@@ -71,7 +79,14 @@
         "backend/runtime/sqlite_runs.py",
         "backend/tests/runtime/test_coordination.py",
         "docs/architecture/run-coordination.md",
-        "docs/modernization/coordination-results.json"
+        "docs/modernization/coordination-results.json",
+        "docs/architecture/question-inbox.md",
+        "docs/modernization/chat-evidence.json",
+        "docs/modernization/chat-results.json",
+        "docs/modernization/chat-packaging.json",
+        "docs/design/concepts/chat/manifest.json",
+        "backend/tests/runtime/test_question_inbox.py",
+        "frontend/tests/chat-design.test.ts"
       ]
     },
     "C06": {
@@ -84,7 +99,14 @@
         "docs/modernization/task-inputs-packaging.json",
         "backend/tests/runtime/test_task_input_versioning.py",
         "backend/tests/runtime/test_task_inputs_migration.py",
-        "frontend/tests/task-design.test.ts"
+        "frontend/tests/task-design.test.ts",
+        "docs/architecture/question-inbox.md",
+        "docs/modernization/chat-evidence.json",
+        "docs/modernization/chat-results.json",
+        "docs/modernization/chat-packaging.json",
+        "docs/design/concepts/chat/manifest.json",
+        "backend/tests/runtime/test_question_inbox.py",
+        "frontend/tests/chat-design.test.ts"
       ],
       "remaining": [
         "Migrate legacy question similarity reuse and all callers.",
@@ -115,7 +137,14 @@
         "docs/modernization/task-inputs-packaging.json",
         "backend/tests/runtime/test_task_input_versioning.py",
         "backend/tests/runtime/test_task_inputs_migration.py",
-        "frontend/tests/task-design.test.ts"
+        "frontend/tests/task-design.test.ts",
+        "docs/architecture/question-inbox.md",
+        "docs/modernization/chat-evidence.json",
+        "docs/modernization/chat-results.json",
+        "docs/modernization/chat-packaging.json",
+        "docs/design/concepts/chat/manifest.json",
+        "backend/tests/runtime/test_question_inbox.py",
+        "frontend/tests/chat-design.test.ts"
       ]
     },
     "C08": {
@@ -138,8 +167,16 @@
       ]
     },
     "C10": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/question-inbox.md",
+        "docs/modernization/chat-evidence.json",
+        "docs/modernization/chat-results.json",
+        "docs/modernization/chat-packaging.json",
+        "docs/design/concepts/chat/manifest.json",
+        "backend/tests/runtime/test_question_inbox.py",
+        "frontend/tests/chat-design.test.ts"
+      ]
     },
     "E01": {
       "status": "in_progress",
@@ -750,11 +787,18 @@
         "docs/modernization/task-inputs-packaging.json",
         "backend/tests/runtime/test_task_input_versioning.py",
         "backend/tests/runtime/test_task_inputs_migration.py",
-        "frontend/tests/task-design.test.ts"
+        "frontend/tests/task-design.test.ts",
+        "docs/architecture/question-inbox.md",
+        "docs/modernization/chat-evidence.json",
+        "docs/modernization/chat-results.json",
+        "docs/modernization/chat-packaging.json",
+        "docs/design/concepts/chat/manifest.json",
+        "backend/tests/runtime/test_question_inbox.py",
+        "frontend/tests/chat-design.test.ts"
       ],
       "remaining": [
-        "Global question inbox and full legacy caller migration",
-        "Rendered browser, keyboard/accessibility and human comprehension acceptance"
+        "Migrate legacy input producers/consumers and complete event catch-up/history pagination.",
+        "Browser keyboard/accessibility and observed human comprehension; two pilots remain unaccepted."
       ]
     },
     "U06": {
@@ -974,7 +1018,14 @@
         "docs/modernization/recovery-results.json",
         "backend/tests/runtime/test_peer_ownership.py",
         "backend/tests/runtime/test_run_recovery.py",
-        "evals/runtime/run_crash_recovery.py"
+        "evals/runtime/run_crash_recovery.py",
+        "docs/architecture/question-inbox.md",
+        "docs/modernization/chat-evidence.json",
+        "docs/modernization/chat-results.json",
+        "docs/modernization/chat-packaging.json",
+        "docs/design/concepts/chat/manifest.json",
+        "backend/tests/runtime/test_question_inbox.py",
+        "frontend/tests/chat-design.test.ts"
       ],
       "remaining": [
         "Apply to product prompts and first vertical workflow",
@@ -1057,10 +1108,16 @@
       "evidence": [
         "docs/design/inventory.md",
         "docs/design/selection.md",
-        "docs/design/concepts/tasks/manifest.json"
+        "docs/design/concepts/tasks/manifest.json",
+        "docs/design/concepts/chat/manifest.json",
+        "frontend/src/components/pages/ChatPage.tsx",
+        "frontend/src/styles/conversation.css",
+        "frontend/tests/chat-design.test.ts",
+        "design-qa.md"
       ],
       "remaining": [
-        "Complete the other eleven routes and shared components; pilot browser/interaction/human-comprehension acceptance remains pending."
+        "Ten other routes need 30 desktop concepts, 10 mobile adaptations, selection and implementation.",
+        "All twelve routes and shared components still need browser/interaction/accessibility/human-comprehension acceptance."
       ]
     },
     "12_mobile_adaptations": {
@@ -1068,10 +1125,16 @@
       "evidence": [
         "docs/design/inventory.md",
         "docs/design/selection.md",
-        "docs/design/concepts/tasks/manifest.json"
+        "docs/design/concepts/tasks/manifest.json",
+        "docs/design/concepts/chat/manifest.json",
+        "frontend/src/components/pages/ChatPage.tsx",
+        "frontend/src/styles/conversation.css",
+        "frontend/tests/chat-design.test.ts",
+        "design-qa.md"
       ],
       "remaining": [
-        "Complete the other eleven routes and shared components; pilot browser/interaction/human-comprehension acceptance remains pending."
+        "Ten other routes need 30 desktop concepts, 10 mobile adaptations, selection and implementation.",
+        "All twelve routes and shared components still need browser/interaction/accessibility/human-comprehension acceptance."
       ]
     },
     "design_selection": {
@@ -1079,10 +1142,16 @@
       "evidence": [
         "docs/design/inventory.md",
         "docs/design/selection.md",
-        "docs/design/concepts/tasks/manifest.json"
+        "docs/design/concepts/tasks/manifest.json",
+        "docs/design/concepts/chat/manifest.json",
+        "frontend/src/components/pages/ChatPage.tsx",
+        "frontend/src/styles/conversation.css",
+        "frontend/tests/chat-design.test.ts",
+        "design-qa.md"
       ],
       "remaining": [
-        "Complete the other eleven routes and shared components; pilot browser/interaction/human-comprehension acceptance remains pending."
+        "Ten other routes need 30 desktop concepts, 10 mobile adaptations, selection and implementation.",
+        "All twelve routes and shared components still need browser/interaction/accessibility/human-comprehension acceptance."
       ]
     },
     "all_screens_implemented": {
@@ -1095,15 +1164,22 @@
         "frontend/src/components/tasks/TaskInspector.tsx",
         "frontend/src/components/tasks/TaskQueue.tsx",
         "frontend/src/styles/tasks.css",
-        "design-qa.md"
+        "design-qa.md",
+        "docs/design/concepts/chat/manifest.json",
+        "frontend/src/components/pages/ChatPage.tsx",
+        "frontend/src/styles/conversation.css",
+        "frontend/tests/chat-design.test.ts"
       ],
       "remaining": [
-        "Complete the other eleven routes and shared components; pilot browser/interaction/human-comprehension acceptance remains pending."
+        "Ten other routes need 30 desktop concepts, 10 mobile adaptations, selection and implementation.",
+        "All twelve routes and shared components still need browser/interaction/accessibility/human-comprehension acceptance."
       ]
     },
     "accessibility_e2e": {
       "status": "pending",
-      "evidence": []
+      "evidence": [
+        "design-qa.md"
+      ]
     },
     "legacy_removal": {
       "status": "pending",
@@ -1168,7 +1244,14 @@
         "docs/modernization/task-inputs-packaging.json",
         "backend/tests/runtime/test_task_input_versioning.py",
         "backend/tests/runtime/test_task_inputs_migration.py",
-        "frontend/tests/task-design.test.ts"
+        "frontend/tests/task-design.test.ts",
+        "docs/architecture/question-inbox.md",
+        "docs/modernization/chat-evidence.json",
+        "docs/modernization/chat-results.json",
+        "docs/modernization/chat-packaging.json",
+        "docs/design/concepts/chat/manifest.json",
+        "backend/tests/runtime/test_question_inbox.py",
+        "frontend/tests/chat-design.test.ts"
       ],
       "remaining": [
         "Rendered browser and keyboard verification",
@@ -1188,12 +1271,19 @@
         "backend/tests/runtime/test_workspace_delivery.py",
         "frontend/tests/runtime.test.ts",
         "docs/modernization/question-migration-evidence.json",
-        "docs/modernization/question-packaging.json"
+        "docs/modernization/question-packaging.json",
+        "docs/architecture/question-inbox.md",
+        "docs/modernization/chat-evidence.json",
+        "docs/modernization/chat-results.json",
+        "docs/modernization/chat-packaging.json",
+        "docs/design/concepts/chat/manifest.json",
+        "backend/tests/runtime/test_question_inbox.py",
+        "frontend/tests/chat-design.test.ts"
       ],
       "remaining": [
-        "Migrate legacy question producers and other native input requests without widening authority",
-        "Global inbox and complete synchronization/pagination",
-        "Rendered/accessibility/human comprehension validation"
+        "Migrate legacy producers/typed replies without widened authority.",
+        "Complete event synchronization, history pagination/retention and effective conversation context delivery.",
+        "Rendered/accessibility/human comprehension acceptance."
       ]
     },
     "research_run_recovery": {

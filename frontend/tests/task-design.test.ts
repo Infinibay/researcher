@@ -5,7 +5,7 @@ import { createServer, type ViteDevServer } from 'vite'
 let server: ViteDevServer
 let renderTask: (options?: { failure?: boolean; taskType?: string; inputChange?: boolean }) => string
 before(async () => {
-  server = await createServer({ configFile: false, server: { middlewareMode: true, hmr: false, watch: null }, esbuild: { jsx: 'automatic' }, optimizeDeps: { noDiscovery: true } })
+  server = await createServer({ configFile: false, server: { middlewareMode: true, hmr: false, ws: false, watch: null }, esbuild: { jsx: 'automatic' }, optimizeDeps: { noDiscovery: true } })
   ;({ renderTask } = await server.ssrLoadModule('/tests/task-design-fixture.tsx'))
 })
 after(async () => { await server?.close() })

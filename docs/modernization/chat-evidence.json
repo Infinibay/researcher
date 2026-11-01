@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-01",
+  "base_commit": "d0f1161",
+  "schema_version": 29,
+  "application_generation_turns_this_checkpoint": 0,
+  "image_generation_calls_this_checkpoint": 4,
+  "test_scope": "Real SQLite and authenticated owner ASGI for inbox; actual React SSR/query-cache composition and existing transport tests; inference not invoked.",
+  "verification": {
+    "runtime_passed": 259,
+    "frontend_passed": 18,
+    "full_suite_green": false,
+    "new_failures": 0,
+    "typescript_vite": "passed",
+    "selected_lint": "passed",
+    "packaged_files_verified": 37,
+    "browser": "unavailable; no rendered/accessibility/human comprehension acceptance",
+    "source_schema_changed": false,
+    "user_database_touched": false
+  },
+  "limitations": [
+    "Legacy requests are visible without inferred native task authority; legacy reply migration remains pending.",
+    "The visible historical conversation is not proof that every message reached a future model; effective context snapshot and continuation policy remain pending.",
+    "Polling is not full event catch-up, pagination/retention or cross-page snapshot consistency.",
+    "Native mutable tools/legacy loops/Git acceptance/prompts/other ten page implementations and all visual acceptance remain pending."
+  ],
+  "source_sha256": {
+    "backend/runtime/views.py": "1143d758f26f149f7e41a392bd9d5859510547c58854b9bfc995f6b1d10dd390",
+    "backend/api/routes/runs.py": "58c88fdfba2cac39fe337988f2680f8dfce0bcd3730d8e5653504641249350cb",
+    "backend/tests/runtime/test_question_inbox.py": "9b9cd87672c27a1baf4ba4b9dd219855931f7e5083e0139f0a5150cb75d6731b",
+    "frontend/src/components/pages/ChatPage.tsx": "b5ff58624cf0596712f6c72c64ba38e4226ab2205b23dc36a0fb4a6531938b05",
+    "frontend/src/components/chat/ConversationTimeline.tsx": "3d06708768d65abc820e56489b9f4c980b814e931b062ceb1cc86f89683b7c70",
+    "frontend/src/components/chat/QuestionInbox.tsx": "21bb7b8aaf8c7cef392325c8686f72de6a3877bce489b0b55c6b4c555f4c22d4",
+    "frontend/src/components/tasks/TaskRunWorkspace.tsx": "3beed192609f40de11c155370c0b5e1dfe43f0304cb0715327d2e10fac79f068",
+    "frontend/src/api/runtime.ts": "5696508f1cdef42e1372bad0def459cdf6e5629138642edae7ae6e8adbe165a5",
+    "frontend/src/hooks/useChat.ts": "37a54e4a58060eca38270bf192f210b750d9c76221dfe1d3ae61573bef6a0200",
+    "frontend/src/hooks/useRuntime.ts": "c8e496f81f90e0aaf04480a08186aee9492bb4bdb5e0a8bcdefcb92c9bb1f4e2",
+    "frontend/src/styles/conversation.css": "8d53d700f37488dfd119927017c51165c1bb16309f22b273c99cbd95fdd8057d",
+    "frontend/tests/chat-design-fixture.tsx": "1972dc1710396ef7c6cbb17fb751c9eb015d47723f8c184a4b231cf0eb93378c",
+    "frontend/tests/chat-design.test.ts": "373f9360eed3dc684556e62b39592467cf733e811fd199b265fce73d7ae0d22f",
+    "frontend/tests/task-design.test.ts": "7528297d921b4a3e67771034904f78c7b5b82c93e226ffff1dd492991336bc59"
+  },
+  "log_sha256": {
+    "chat-inbox-red.log": "aa476812cfdaa5b8127ae848d13aac0b5b3e0526fae811c3fe6f97f126d7cf83",
+    "chat-inbox-green.log": "d9d33fa6f0d3d2f665211b4daaca7a420ee8c9812a7e07084fcabe20033c38be",
+    "chat-inbox-focused.log": "28c9157400275bf3dc22b5ef8d435a7c6ce9718f291cfbaad2d76ed7d244d09d",
+    "chat-design-red.log": "00df3a57513500c7ccfd6dc39a80eca26ebbe5d92c2738530a489c02658d3f7d",
+    "chat-design-tests-final.log": "35162402b9828037fe11be4082f9624d63f953bc50c5c5f28e71110a0c0385e2",
+    "chat-design-build-final.log": "a2c3de1a0e6e608a18ca162831f348a945211e7532e8ead83997116fc51ac32f",
+    "chat-suite.log": "dce044fa43b88abb652b2f380e831279cb5f710fa5d4d2c9e2d0e468055ad325"
+  },
+  "concept_manifest": "docs/design/concepts/chat/manifest.json"
+}

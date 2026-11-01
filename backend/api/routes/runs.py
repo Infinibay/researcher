@@ -229,6 +229,19 @@ async def current_context(project_id: int, task_id: int, request: Request):
     )
 
 
+@router.get("/{project_id}/questions")
+async def question_inbox(
+    project_id: int,
+    request: Request,
+    after_id: int = Query(default=0, ge=0, le=9223372036854775807),
+    limit: int = Query(default=100, ge=1, le=100),
+):
+    data = await asyncio.to_thread(
+        owner_view(request).question_inbox, project_id, after_id=after_id, limit=limit
+    )
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
 @router.get("/{project_id}/tasks/{task_id}/workspace")
 async def workspace(project_id: int, task_id: int, request: Request):
     data = await asyncio.to_thread(owner_view(request).workspace, project_id, task_id)

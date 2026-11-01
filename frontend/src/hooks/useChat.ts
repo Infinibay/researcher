@@ -29,6 +29,8 @@ export function useThreadMessages(projectId: number | null, threadId: string | n
     queryFn: () =>
       fetchApi<ChatMessage[]>(`/api/chat/${projectId}/threads/${encodeURIComponent(threadId!)}`),
     enabled: projectId != null && threadId != null,
+    refetchInterval: 3000,
+    retry: false,
   })
 }
 

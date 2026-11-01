@@ -5,7 +5,7 @@ from contextlib import closing
 from dataclasses import asdict
 
 from backend.db.connection import connect
-from backend.runtime.contracts import RunNotFound
+from backend.runtime.contracts import RunNotFound, identity
 from backend.runtime.sqlite_runs import SQLiteRunStore
 
 MESSAGE_SELECT = """SELECT cm.*,r.id AS runtime_run_id,r.status AS runtime_status,
@@ -21,6 +21,70 @@ class OwnerRuntimeView:
     def __init__(self, database):
         self.database = str(database)
         self.runs = SQLiteRunStore(database)
+
+    def question_inbox(self, project_id, *, after_id=0, limit=100):
+        identity(project_id)
+        if type(after_id) is not int or not 0 <= after_id <= 9223372036854775807:
+            raise ValueError("Invalid question cursor")
+        if type(limit) is not int or not 1 <= limit <= 100:
+            raise ValueError("Invalid question page size")
+        with closing(connect(self.database)) as conn, conn:
+            conn.execute("BEGIN")
+            if (
+                conn.execute(
+                    "SELECT 1 FROM projects WHERE id=?", (project_id,)
+                ).fetchone()
+                is None
+            ):
+                raise RunNotFound("Project not found")
+            total = conn.execute(
+                "SELECT COUNT(*) FROM user_requests WHERE project_id=? AND status='pending'",
+                (project_id,),
+            ).fetchone()[0]
+            rows = conn.execute(
+                """SELECT u.id AS request_id,u.title,u.body,u.created_at,u.request_type,
+                q.run_id,q.context_version,q.question_set_json,q.thread_id,
+                r.task_id,r.status AS run_status,t.title AS task_title,
+                COALESCE(c.version,1) AS current_context_version
+                FROM user_requests u
+                LEFT JOIN runtime_question_links q ON q.request_id=u.id AND q.project_id=u.project_id
+                LEFT JOIN runtime_runs r ON r.id=q.run_id AND r.project_id=u.project_id
+                LEFT JOIN tasks t ON t.id=r.task_id AND t.project_id=u.project_id
+                LEFT JOIN task_contexts c ON c.task_id=t.id
+                WHERE u.project_id=? AND u.status='pending' AND u.id>?
+                ORDER BY u.id LIMIT ?""",
+                (project_id, after_id, limit + 1),
+            ).fetchall()
+        return {
+            "items": [
+                {
+                    "request_id": row["request_id"],
+                    "kind": "native" if row["run_id"] is not None else "legacy",
+                    "title": row["title"],
+                    "body": row["body"],
+                    "request_type": row["request_type"],
+                    "created_at": row["created_at"],
+                    "task_id": row["task_id"],
+                    "task_title": row["task_title"],
+                    "run_id": row["run_id"],
+                    "thread_id": row["thread_id"],
+                    "context_version": row["context_version"],
+                    "current_context_version": row["current_context_version"]
+                    if row["task_id"] is not None
+                    else None,
+                    "questions": json.loads(row["question_set_json"])
+                    if row["question_set_json"]
+                    else None,
+                    "ready_for_answer": row["run_status"] == "waiting_input"
+                    and row["context_version"] == row["current_context_version"],
+                }
+                for row in rows[:limit]
+            ],
+            "total_pending": total,
+            "next_after_id": rows[limit - 1]["request_id"]
+            if len(rows) > limit
+            else None,
+        }
 
     def workspace(self, project_id, task_id):
         context = self.runs.context_snapshot(project_id, task_id)

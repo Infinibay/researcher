@@ -1,5 +1,16 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { taskWorkspace, sendInstruction, stopRun, recordCorrection, sendAnswer, sendRecovery, sendStartRetry } from '../api/runtime'
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { taskWorkspace, sendInstruction, stopRun, recordCorrection, sendAnswer, sendRecovery, sendStartRetry, questionInbox } from '../api/runtime'
+
+export function useQuestionInbox(projectId: number) {
+  return useInfiniteQuery({
+    queryKey: ['question-inbox', projectId],
+    initialPageParam: 0,
+    queryFn: ({pageParam}) => questionInbox(projectId, pageParam),
+    getNextPageParam: page => page.next_after_id ?? undefined,
+    refetchInterval: 5000,
+    retry: false,
+  })
+}
 
 export function useStartRetry() {
   const qc = useQueryClient()
@@ -27,6 +38,8 @@ export function useAnswer() {
       qc.invalidateQueries({ queryKey: ['task-workspace', intent.projectId, intent.taskId] })
       qc.invalidateQueries({ queryKey: ['chat', intent.projectId] })
       qc.invalidateQueries({ queryKey: ['chat-threads', intent.projectId] })
+      qc.invalidateQueries({ queryKey: ['thread-messages', intent.projectId] })
+      qc.invalidateQueries({ queryKey: ['question-inbox', intent.projectId] })
     },
   })
 }
@@ -58,7 +71,10 @@ export function useStopRun(projectId: number, taskId: number) {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: (runId: string) => stopRun(projectId, runId), retry: false,
-    onSettled: () => qc.invalidateQueries({ queryKey: ['task-workspace', projectId, taskId] }),
+    onSettled: () => {
+      qc.invalidateQueries({ queryKey: ['task-workspace', projectId, taskId] })
+      qc.invalidateQueries({ queryKey: ['question-inbox', projectId] })
+    },
   })
 }
 
@@ -67,6 +83,9 @@ export function useCorrection(projectId: number, taskId: number) {
   return useMutation({
     mutationFn: (body: Parameters<typeof recordCorrection>[2]) => recordCorrection(projectId, taskId, body),
     retry: false,
-    onSettled: () => qc.invalidateQueries({ queryKey: ['task-workspace', projectId, taskId] }),
+    onSettled: () => {
+      qc.invalidateQueries({ queryKey: ['task-workspace', projectId, taskId] })
+      qc.invalidateQueries({ queryKey: ['question-inbox', projectId] })
+    },
   })
 }

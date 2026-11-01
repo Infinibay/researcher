@@ -812,3 +812,112 @@ including Tasks. Final fresh independent whole-branch review before integration.
 Model selection is verified global host JSON, restart required, with no web/per-agent/
 project selector. Keep full goal active; no complete/paused/blocked status while
 meaningful work remains. Do not push, merge or deploy without the appropriate scope.
+
+
+## Conversation design and question inbox checkpoint — 2026-11-01
+
+- Previous goal turn classified as progress: b8f861e and d0f1161 committed durable
+  admission and atomic direct task-input versioning. Verified HEAD/tracked status,
+  ledger and existing implementation before moving to the explicit full web-redesign
+  requirement. No active process was inferred from an old log; new test/build handles
+  were polled to terminal. Full objective remains active, not redefined as a pilot.
+- Used Product Design/get-context/ideate/image-to-code and built-in ImageGen. Saved
+  context preflight reports no user-context.md. Fresh CUA inventory again returns
+  apps=[], browsers=[], browser access host unavailable. No app screenshot exists.
+  Existing Tasks concept was opened directly and attached as style reference to
+  each independent desktop generation, not misrepresented as a running UI capture.
+- Ruling: user explicitly delegated choosing the best generated concept; do not
+  ask again for a numbered selection. Continue the authorized existing-repo build
+  without a new starter or deployment, while visual verification stays blocked.
+  Cost: rendered fidelity/accessibility/comprehension cannot be accepted until a
+  real browser comparison exists. design-qa.md records this limit and exact skill gate.
+- Generated, displayed, inspected and copied four independent images to the project:
+  conversation-with-evidence, case-notebook, intervention-desk and a mobile adaptation
+  of the selected first concept. Three desktop1487×1058 native rasters target1440×1024;
+  mobile853×1844 targets390×844. Full prompts, attached references, file hashes and
+  actual sizes preserved in concepts/chat/manifest.json. Exact image model/billing
+  metadata were not exposed and are not inferred; no API-key/metered fallback.
+- Selected conversation-with-evidence (88.5 weighted concept expectation vs81.5/68).
+  Ruling: no verified hypothesis, confidence or source is invented to fill the gutter.
+  Intervention-desk incorrectly calls absence of a stable key proven; its assumption
+  inflation was a reason to reject it. Cost: production uses only actual captured
+  provenance and may have fewer sections than an attractive but false mock.
+- Replaced old dark task selector plus collapsed project history/dead reply handlers
+  with task index, project-wide paginated pending requests, visible chronological
+  current exchange, real source/context gutter and read-only archive. Paper/ink/green
+  tokens, editorial headings, separators, natural reading measure, container-based
+  context stacking and mobile return preserve the selected direction. No synthetic
+  Atlas data or generated mock text is inserted into production.
+- New owner-only GET /api/projects/{p}/questions is available without inference config.
+  One page is a read transaction with count, stable ID cursor and bounded results.
+  Every native item keeps original request/task/run/thread/current and asked context,
+  typed question IDs/options and readiness. Waiting for physical closure is distinct
+  from ready to answer. No reread starts/answers/replays work; tools bearer is denied.
+  Legacy requests remain visible with no inferred task/context; option objects are
+  not reduced to display labels. Their typed reply/producer migration remains pending.
+- Ruling: an inbox row is a navigation pointer, not an authorization receipt. Answer
+  still uses the exact existing project/task/question/version mutation contract.
+  Cost: workspace/controller must revalidate after navigation; stale page data can
+  never authorize a response. Choosing project/task remounts drafts and a foreign
+  task URL cannot mount its workspace. Current question controls retain stable IDs.
+- Current messages distinguish sender, receipt, task and context. Old results are
+  conserved, never declared current/accepted. Other tasks in the same thread are
+  labelled explicitly. Pending question text is shown by its typed controls rather
+  than twice. Current proposal is not duplicated when its exact receipt is visible;
+  durable proposal remains available if history fails. No automatic scroll-to-bottom
+  on every poll. Programmatic question/title focus is coded but not browser-verified.
+- Ruling: visible history is not proof of delivered/applied shared model context.
+  UI states what the next work currently receives (task, revisions/corrections and
+  answers); effective-context snapshot and full conversation continuation are still
+  pending. Cost: general notes/proposals in the archive must not be implicitly treated
+  as instructions or approvals. No second inference loop was added to implement chat.
+- Four backend tests observed RED for missing inbox/route after correcting fixture
+  native bindings and required legacy fields, then GREEN. They cover multiple tasks,
+  readiness, project scope, cursor, legacy values, expiry/answers, owner/bearer guards,
+  invalid limits and no inference reservation. Eight focused API/workspace cases pass.
+- Three actual SSR failures drove visible exchange, all pending tasks and explicit
+  history errors; foreign-task guard also stays covered. Four new frontend cases
+  pass alongside all previous14. React Router's installed node export needed test-
+  only ESM aliases; Zustand SSR initial state is restored after each render. Both
+  fixture Vite servers now disable WS explicitly; an initial parallel port collision
+  is absent from the final logs. No testing adaptation changes production routing.
+- Final full suite1187 total:1084 passed, identical100 baseline failure identities,
+  three skipped,29 warnings; all259 runtime cases pass. Final frontend18 passed,
+  zero failed; TypeScript/Vite1250 modules passes with existing Browserslist/chunk
+  warnings. Selected Ruff/diff checks pass. Full suite remains red; task creation/
+  legacy inference/tool failures still require real resolution, not permanent waiver.
+- All37 selected packaged runtime/SQL/loader/owner-route files match current source
+  bytes. Schema stays29; this read projection adds no migration or historical rewrite.
+  No user DB changed. Application inference turns0, built-in image calls4. Hashes bind
+  fourteen changed source/test files and seven final/RED logs to this checkpoint.
+- Visual inventory now6/36 desktop concepts,2/12 mobile adaptations,2 selected pilots
+  in code and0/12 accepted routes. CUA absence blocks visual comparison, focus/keyboard/
+  zoom/screen reader and human comprehension acceptance. No preview server is left
+  live or handed off as verified. All observed test/build handles are terminal.
+
+## Next brief after Conversation
+
+Continue the FULL original modernization goal. Do not regenerate the eight saved
+Task/Conversation concept assets or rebuild existing schema28/29/native research/
+question/recovery contracts. The remaining ten routes require30 independent desktop
+concepts,10 mobile adaptations, reasoned selection and real implementation, plus
+all shared panels and rendered/mobile/keyboard/accessibility/human acceptance of
+all twelve routes. Recheck browser availability before visual claims; source/SSR/
+build cannot substitute capture and comparison. No design completion from pixels alone.
+
+Close effective input snapshot and explicit conversation continuity: current visible
+archive is not automatically all sent to the next model. Complete related context
+revisions (dependencies, project/epic, sources/files/Git/permissions), typed editing
+with concurrency/receipts and verified author provenance. Migrate legacy questions,
+role/project conversations and full event synchronization/history pagination/retention.
+Connect actual retained commands/tools through the host facade with cross-database
+workspace exclusion and task capability policy before mutable production capabilities.
+Finish lock aliases, deployment/restore generation, typed project lifecycle/deletion,
+lifetime budgets, all legacy engine/role/writer consumers and71 individual tools/11
+categories; exact-candidate Git/review/CI acceptance; subscription-only auxiliary
+inference; every prompt/book-skill inventory/rewrite/eval; human communication and
+accessible structured explanations/diagrams; backup/restore/bootstrap. Resolve or
+replace100 baseline failures with correct behavior. Final fresh independent whole-
+branch review before integration. Model remains global host JSON/restart, no selector
+web/per-agent/project added. Full goal stays active; no complete/paused/blocked status
+while meaningful authorized work remains. No push/merge/deploy performed.

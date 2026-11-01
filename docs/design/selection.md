@@ -58,3 +58,50 @@ La cabecera aún conserva controles del engine anterior. Las once páginas resta
 todavía necesitan conceptos, selección y rediseño. Faltan los bloques de
 explicación/diagrama estructurados y su aceptación humana. Consultar
 [inventario](inventory.md) y [estado de QA](../../design-qa.md).
+
+## Conversación: conversación con evidencia — 2026-11-01
+
+Se generaron tres alternativas independientes y una adaptación móvil de la elegida,
+con el concepto editorial de Tareas adjunto como referencia de estilo. No fue una
+captura de la aplicación. El usuario delegó la selección; no se repitió una solicitud
+de aprobación. Las puntuaciones son evaluación del concepto, no resultados de uso.
+
+| Concepto | Claridad 30% | Lectura 25% | Coherencia 20% | Accesibilidad prevista 15% | Responsive previsto 10% | Total |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| [Conversación con evidencia](concepts/chat/conversation-with-evidence.png) | 4,5 | 4,5 | 4,5 | 4 | 4,5 | **88,5** |
+| [Cuaderno del caso](concepts/chat/case-notebook.png) | 4 | 4,5 | 4 | 4 | 3,5 | 81,5 |
+| [Mesa de intervención](concepts/chat/intervention-desk.png) | 2,5 | 4 | 3,5 | 4 | 3,5 | 68 |
+
+La primera conserva contexto y continuidad del intercambio, con separación clara
+entre tareas, conversación y fuentes. El cuaderno lee bien, pero pierde el índice
+de otras preguntas y su margen de anotaciones complica la adaptación móvil. La mesa
+hace evidente la próxima acción, pero la imagen inventa como comprobado que no hay
+una clave estable: confunde hipótesis con evidencia, por lo que se descarta esa
+jerarquía. Una imagen no prueba hechos del proyecto.
+
+La [adaptación móvil](concepts/chat/conversation-with-evidence-mobile.png) recompone
+las columnas como lectura, fuentes desplegables y respuesta, con regreso explícito
+a tareas. El producto usa contexto y fuentes reales, no el ejemplo Atlas.
+
+Correcciones de contrato respecto al mock:
+
+- No se añade una hipótesis verificada, confianza o fuente inventada para rellenar
+  la columna lateral. Se muestran sólo capturas y procedencias guardadas.
+- Responder conserva pregunta/opciones/versiones y no inicia otra ejecución. Las
+  preguntas durante cierre aparecen en la bandeja, pero su formulario espera el
+  cierre confirmado. El diseño no habilita un inicio incompatible con ese estado.
+- La UI explica qué contexto recibe actualmente el próximo trabajo: tarea,
+  correcciones y respuestas. Ver el historial no equivale a que todo se entregue
+  automáticamente al modelo. Esa continuidad y su snapshot siguen pendientes.
+- Se conservan cabecera, sesión y controles reales del producto; no se inventan los
+  destinos reducidos del menú generado. Índice más compacto, contenido en flujo y
+  columna de contexto apilada cuando no cabe, con medidas por contenedor.
+- No se extraen fotos, texturas ni avatares: los conceptos contienen controles,
+  tipografía y separadores. La implementación usa HTML/CSS y el sistema existente.
+
+El código integra la bandeja de todas las solicitudes del proyecto, selección
+validada de tarea, conversación corriente visible y archivo de hilos de sólo
+lectura. Hay pruebas SSR, transporte/API y build. No hay captura ni aceptación
+visual/teclado/comprensión; el estado de QA permanece bloqueado por el navegador.
+Después de este avance quedan diez rutas por generar/seleccionar/implementar y
+las doce por aceptar visualmente, además de los componentes compartidos.

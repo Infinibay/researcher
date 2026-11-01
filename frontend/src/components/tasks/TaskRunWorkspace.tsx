@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import type { ReactNode } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { prepareAnswer, prepareInstruction, prepareRecovery, prepareStartRetry, presentRun, recoveryInspection, sourceWindow } from '../../api/runtime'
 import type { AnswerIntent, InstructionIntent, RecoveryIntent, RuntimeQuestion, RuntimeRun, StartRetryIntent } from '../../api/runtime'
@@ -71,7 +72,7 @@ function QuestionCard({ projectId, taskId, question }: { projectId: number; task
       answer.mutate(intent.current)
     } catch (failure) { setError(failure instanceof Error ? failure.message : 'Revisa las respuestas.') }
   }
-  return <section className="space-y-3 rounded-md border border-[var(--work-line)] p-3" aria-label="Preguntas del agente">
+  return <section id={`runtime-question-${question.request_id}`} tabIndex={-1} className="space-y-3 rounded-md border border-[var(--work-line)] p-3" aria-label="Preguntas del agente">
     <h4 className="font-medium text-[var(--work-ink)]">{pending ? 'El agente necesita una aclaración' : question.status === 'responded' ? 'Respuesta registrada' : 'Pregunta del contexto anterior'}</h4>
     <p className="text-xs text-[var(--work-muted)]">Pregunta bajo contexto {question.context_version}{question.answer_context_version ? ` · respuesta guardada en contexto ${question.answer_context_version}` : ''}</p>
     {pending && <p className="text-[var(--work-muted)]">{question.ready_for_answer ? 'La ejecución se cerró. Responde con tus palabras o elige una opción.' : 'Se está comprobando el cierre de la ejecución. La respuesta se habilitará cuando esté confirmado.'}</p>}
@@ -111,8 +112,8 @@ function SourceReader({ projectId, sourceId }: { projectId: number; sourceId: nu
   </section>
 }
 
-export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onConversation }: {
-  projectId: number; taskId: number; conversationThreadId?: string; onConversation?: (threadId: string) => void
+export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onConversation, conversation, showProposal = true }: {
+  projectId: number; taskId: number; conversationThreadId?: string; onConversation?: (threadId: string) => void; conversation?: ReactNode; showProposal?: boolean
 }) {
   const workspace = useTaskWorkspace(projectId, taskId)
   const send = useInstruction()
@@ -177,6 +178,7 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
       {current && <p className="text-xs text-[var(--work-muted)]">Repositorio admitido: {current.repository_name ?? current.repository_id ?? 'sin registrar en este historial'}</p>}
     </div>
     {notice && <p role="status" className="text-[var(--work-accent)]">{notice}</p>}
+    {conversation}
     {current?.issue && <section className="space-y-1" aria-label="Lo que ocurrió"><p className="text-[var(--work-caution)]">{current.issue.message}</p>{current.issue.inference_started === null && <p className="text-[var(--work-muted)]">No quedó confirmado si la inferencia comenzó. No la repetiremos automáticamente.</p>}</section>}
     {current?.status === 'queued' && available && <QueuedStart key={`${projectId}:${current.run_id}`} projectId={projectId} taskId={taskId} run={current} />}
     {!available && <p className="rounded-md border border-amber-700/50 p-3 text-[var(--work-caution)]">{closed ? 'Esta tarea está cerrada. Su historial y sus fuentes siguen disponibles.' : !data.runtime.configured ? 'Configura el motor local para iniciar trabajo. El historial y las fuentes siguen disponibles.' : 'Este tipo de tarea aún no permite iniciar trabajo. Su historial se conserva.'}</p>}
@@ -186,7 +188,7 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
     </div>}
     {data.questions.map(question => <QuestionCard key={`${projectId}:${taskId}:${question.request_id}`} projectId={projectId} taskId={taskId} question={question} />)}
     {current && ['reconciling', 'cancelling'].includes(current.status) && <RecoveryCard key={`${projectId}:${current.run_id}`} projectId={projectId} taskId={taskId} runId={current.run_id} />}
-    {current?.result && <section className="task-proposal space-y-2 rounded-md border border-[var(--work-line)] p-3" aria-label="Propuesta del agente">
+    {showProposal && current?.result && <section className="task-proposal space-y-2 rounded-md border border-[var(--work-line)] p-3" aria-label="Propuesta del agente">
       <h4 className="font-medium text-[var(--work-ink)]">{current.status === 'needs_review' ? 'Propuesta' : 'Resultado conservado'}</h4>
       <MarkdownRenderer content={current.result.summary} />
     </section>}
