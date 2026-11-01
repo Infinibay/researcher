@@ -1,6 +1,7 @@
 """Controlled native protocol for host composition; never contacts a model."""
 
 import json
+import subprocess
 import sys
 import tomllib
 
@@ -75,6 +76,15 @@ for line in sys.stdin:
     result = {}
     if method == "account/read":
         result = {"account": {"type": "chatgpt"}}
+    elif method == "command/exec":
+        process = subprocess.run(
+            params["command"], capture_output=True, text=True, timeout=8, check=False
+        )
+        result = {
+            "exitCode": process.returncode,
+            "stdout": process.stdout,
+            "stderr": process.stderr,
+        }
     elif method == "config/read":
         result = {
             "config": {

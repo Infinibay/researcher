@@ -1,0 +1,268 @@
+{
+  "trial": "owned-joint-host-v3-36eeddb2ed",
+  "status": "passed",
+  "stage": "verify_artifacts",
+  "native_model": "gpt-6.1-sol",
+  "native_version": "0.166.0",
+  "ken_version": "0.18.0",
+  "generative_model_turns": 1,
+  "image_calls": 0,
+  "memory_limit_bytes": 2147483648,
+  "same_controller_api_and_broker": true,
+  "observed_token_limit": 350000,
+  "automatic_turn_replay": false,
+  "vendor_websocket_proven": false,
+  "scope": "Synthetic attempt/API/authority/domain. Actual native subscription, published Ken and business HTTP. Not production factory migration, complete host enrollment, OAuth renewal or durable native resume.",
+  "memory_peak_bytes": 1571897344,
+  "pids_peak_observed": 64,
+  "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+  "prepare_exit": 0,
+  "catalog_count": 16,
+  "catalog_hash": "3cea7b07d5e19a888ba6ea8fc4361806ab3638ec27b10571d1f443f28272ed57",
+  "native_thread_created": true,
+  "native_auth_json_absent": true,
+  "token_usage_observations": [
+    {
+      "total": {
+        "totalTokens": 16049,
+        "inputTokens": 15950,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 99,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 16049,
+        "inputTokens": 15950,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 99,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 475000
+    },
+    {
+      "total": {
+        "totalTokens": 32398,
+        "inputTokens": 32200,
+        "cachedInputTokens": 15872,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 198,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 16349,
+        "inputTokens": 16250,
+        "cachedInputTokens": 15872,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 99,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 475000
+    },
+    {
+      "total": {
+        "totalTokens": 49086,
+        "inputTokens": 48820,
+        "cachedInputTokens": 32000,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 266,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 16688,
+        "inputTokens": 16620,
+        "cachedInputTokens": 16128,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 68,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 475000
+    },
+    {
+      "total": {
+        "totalTokens": 66622,
+        "inputTokens": 66096,
+        "cachedInputTokens": 48512,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 526,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 17536,
+        "inputTokens": 17276,
+        "cachedInputTokens": 16512,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 260,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 475000
+    },
+    {
+      "total": {
+        "totalTokens": 84418,
+        "inputTokens": 83694,
+        "cachedInputTokens": 65920,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 724,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 17796,
+        "inputTokens": 17598,
+        "cachedInputTokens": 17408,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 198,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 475000
+    },
+    {
+      "total": {
+        "totalTokens": 102305,
+        "inputTokens": 101557,
+        "cachedInputTokens": 83584,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 748,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 17887,
+        "inputTokens": 17863,
+        "cachedInputTokens": 17664,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 24,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 475000
+    },
+    {
+      "total": {
+        "totalTokens": 120894,
+        "inputTokens": 120051,
+        "cachedInputTokens": 83584,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 843,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 18589,
+        "inputTokens": 18494,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 95,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 475000
+    }
+  ],
+  "native_status": "completed",
+  "observed_tokens": 120894,
+  "tool_calls_observed_by_native": 10,
+  "final_text": "Borrador guardado y leído: **artefacto 1**, vinculado a la observación provisional 1 con citas de ambas fuentes.\n\nArchivos inspeccionados: `invoice.py` (líneas 1–5), `policy.txt` e `invoice.txt`. Las tasas son fraccionarias y `Decimal.quantize` redondea el resultado mostrado a dos decimales.\n\nNo se ejecutó código ni se realizaron pruebas.",
+  "artifacts": [
+    {
+      "id": 1,
+      "project_id": 101,
+      "title": "Inspección del cálculo de factura",
+      "content": "# Inspección del cálculo de factura\n\nSe inspeccionó invoice.py (líneas 1–5) y se leyeron íntegramente las fuentes capturadas policy.txt (referencia 7) e invoice.txt (referencia 8).\n\nLa observación provisional 1 recoge que las tasas son fraccionarias: 0.21 equivale al 21 %. El código calcula base × (1 + tasa), y Decimal.quantize con Decimal(\"0.01\") redondea el resultado mostrado a dos decimales según el contexto decimal vigente.\n\nNo se ejecutó el código ni se realizaron pruebas. Este informe es un borrador basado en inspección, sin validación por ejecución.",
+      "status": "draft"
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "status": "provisional",
+      "content": "Observación provisional basada en la inspección de invoice.py (líneas 1–5) y en la lectura completa de policy.txt e invoice.txt capturados. Las tasas son fraccionarias: 0.21 representa el 21 %. invoice_total multiplica la base por (1 + rate); Decimal.quantize con Decimal(\"0.01\") redondea el resultado mostrado a dos decimales según el contexto decimal vigente. No se ejecutó el código ni se realizaron pruebas."
+    }
+  ],
+  "task_status": "in_progress",
+  "artifact": {
+    "id": 1,
+    "project_id": 101,
+    "title": "Inspección del cálculo de factura",
+    "content": "# Inspección del cálculo de factura\n\nSe inspeccionó invoice.py (líneas 1–5) y se leyeron íntegramente las fuentes capturadas policy.txt (referencia 7) e invoice.txt (referencia 8).\n\nLa observación provisional 1 recoge que las tasas son fraccionarias: 0.21 equivale al 21 %. El código calcula base × (1 + tasa), y Decimal.quantize con Decimal(\"0.01\") redondea el resultado mostrado a dos decimales según el contexto decimal vigente.\n\nNo se ejecutó el código ni se realizaron pruebas. Este informe es un borrador basado en inspección, sin validación por ejecución.",
+    "status": "draft"
+  },
+  "finding": {
+    "id": 1,
+    "status": "provisional",
+    "content": "Observación provisional basada en la inspección de invoice.py (líneas 1–5) y en la lectura completa de policy.txt e invoice.txt capturados. Las tasas son fraccionarias: 0.21 representa el 21 %. invoice_total multiplica la base por (1 + rate); Decimal.quantize con Decimal(\"0.01\") redondea el resultado mostrado a dos decimales según el contexto decimal vigente. No se ejecutó el código ni se realizaron pruebas."
+  },
+  "host_business_closed": false,
+  "auth_failure_code": null,
+  "domain_retired": true,
+  "tunnels_drained": true,
+  "egress_observations": [
+    {
+      "connections": 11,
+      "total_payload_bytes": 1139659
+    }
+  ],
+  "all_registered_peers_closed": true,
+  "source_unchanged": true,
+  "native_requests": {
+    "warning": 1,
+    "thread/settings/updated": 1,
+    "thread/status/changed": 2,
+    "turn/started": 1,
+    "item/started": 13,
+    "item/completed": 13,
+    "item/agentMessage/delta": 133,
+    "item/tool/call": 10,
+    "turn/moderationMetadata": 7,
+    "thread/tokenUsage/updated": 7,
+    "thread/readState/changed": 1,
+    "turn/completed": 1
+  },
+  "model_tool_names": [
+    "ken_find",
+    "researcher_reference_list",
+    "ken_read",
+    "researcher_capture_reference",
+    "researcher_capture_reference",
+    "researcher_source_read",
+    "researcher_source_read",
+    "researcher_finding_record",
+    "researcher_report_write",
+    "researcher_report_read"
+  ],
+  "business_results": [
+    {
+      "name": "researcher_reference_list",
+      "success": true
+    },
+    {
+      "name": "researcher_capture_reference",
+      "success": true
+    },
+    {
+      "name": "researcher_capture_reference",
+      "success": true
+    },
+    {
+      "name": "researcher_source_read",
+      "success": true
+    },
+    {
+      "name": "researcher_source_read",
+      "success": true
+    },
+    {
+      "name": "researcher_finding_record",
+      "success": true
+    },
+    {
+      "name": "researcher_report_write",
+      "success": true
+    },
+    {
+      "name": "researcher_report_read",
+      "success": true
+    }
+  ],
+  "host_business_closed_observation_note": "The harness sampled peer.closed inside its context, before __aexit__, so false is a premature observation, not evidence of a leak. The context later exited without exception; direct post-exit peer.closed was not recorded. No model replay was performed to replace this metric.",
+  "observed_tokens_note": "Native cumulative provider-reported tokens include cached input; not billing, output length or distinct context size. CodexSession assigns this total directly, without summing repeated notifications.",
+  "harness_sha256": "397257ee373bb5c3c6c52bf41cdd608be9c0ffb7472d355803bb08783c7b035d",
+  "verification_limits": "Synthetic fixture only; no product factory adoption, durable native resume, full host enrollment, real OAuth renewal or provider WebSocket proof. Business scope closed via context; post-exit closed flag was not sampled."
+}

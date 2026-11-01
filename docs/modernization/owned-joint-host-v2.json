@@ -1,0 +1,95 @@
+{
+  "trial": "owned-joint-host-v2-6b9d4d00f6",
+  "status": "failed",
+  "stage": "native_turn",
+  "native_model": "gpt-6.1-sol",
+  "native_version": "0.166.0",
+  "ken_version": "0.18.0",
+  "generative_model_turns": 1,
+  "image_calls": 0,
+  "memory_limit_bytes": 2147483648,
+  "same_controller_api_and_broker": true,
+  "automatic_turn_replay": false,
+  "vendor_websocket_proven": false,
+  "scope": "Synthetic attempt/API/authority/domain. Actual native subscription, published Ken and business HTTP. Not production factory migration, complete host enrollment, OAuth renewal or durable native resume.",
+  "memory_peak_bytes": 1611472896,
+  "pids_peak_observed": 66,
+  "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+  "prepare_exit": 0,
+  "catalog_count": 16,
+  "catalog_hash": "3cea7b07d5e19a888ba6ea8fc4361806ab3638ec27b10571d1f443f28272ed57",
+  "native_thread_created": true,
+  "native_auth_json_absent": true,
+  "auth_failure_code": null,
+  "domain_retired": true,
+  "tunnels_drained": true,
+  "egress_observations": [
+    {
+      "connections": 10,
+      "total_payload_bytes": 1078153
+    }
+  ],
+  "failure_type": "ExecutionLimitExceeded",
+  "failure_redacted": "Observed token budget exceeded",
+  "all_registered_peers_closed": true,
+  "source_unchanged": true,
+  "native_requests": {
+    "warning": 1,
+    "thread/settings/updated": 1,
+    "thread/status/changed": 1,
+    "turn/started": 1,
+    "item/started": 12,
+    "item/completed": 12,
+    "item/agentMessage/delta": 31,
+    "item/tool/call": 10,
+    "turn/moderationMetadata": 6,
+    "thread/tokenUsage/updated": 6
+  },
+  "model_tool_names": [
+    "ken_find",
+    "researcher_reference_list",
+    "ken_read",
+    "researcher_capture_reference",
+    "researcher_capture_reference",
+    "researcher_source_read",
+    "researcher_source_read",
+    "researcher_finding_record",
+    "researcher_report_write",
+    "researcher_report_read"
+  ],
+  "business_results": [
+    {
+      "name": "researcher_reference_list",
+      "success": true
+    },
+    {
+      "name": "researcher_capture_reference",
+      "success": true
+    },
+    {
+      "name": "researcher_capture_reference",
+      "success": true
+    },
+    {
+      "name": "researcher_source_read",
+      "success": true
+    },
+    {
+      "name": "researcher_source_read",
+      "success": true
+    },
+    {
+      "name": "researcher_finding_record",
+      "success": true
+    },
+    {
+      "name": "researcher_report_write",
+      "success": true
+    },
+    {
+      "name": "researcher_report_read",
+      "success": true
+    }
+  ],
+  "artifact_verification": "Missing: harness skipped SQL snapshot after budget exception and removed synthetic temporary DB. Tool success is evidence, not retained artifact acceptance."
+}

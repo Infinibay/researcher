@@ -61,8 +61,8 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    Falta conectarlo al estado de negocio y a los lanzadores productivos del intento.
    Hay un perfil nativo separado: App Server Codex0.166.0 real bajo el broker,
    manifiesto de ejecutable/perfil/gate, hogar privado sin credenciales heredadas
-   y lectura de metadatos comprobada. Aún no ejecuta inferencia/suscripción/Ken en
-   ese perfil; no sustituye los lanzadores productivos por este ensayo.
+   y lectura de metadatos comprobada. La composición posterior ya ejecutó inferencia con la
+   suscripción y Ken; no sustituye todavía los lanzadores productivos.
    El componente opcional de autenticación externa ya fija cuenta, limita renovaciones
    y atiende el control privado incluso con thread/start o turn/start pendientes.
    Retirar autoridad impide enviar respuestas encoladas. El SDK real aceptó un login
@@ -79,8 +79,8 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    SCM_RIGHTS. Ya se conectó al perfil privado del broker: Codex real usa el proxy,
    se bloquean acceso directo al host y redirecciones ajenas, y Stop cierra túneles
    antes de SQL. Una lectura real de cuenta ChatGPT funcionó sin thread/turn ni
-   auth.json persistido. Faltan generación con Ken, WebSocket, renovación OAuth
-   real y adopción de la fábrica productiva.
+   auth.json persistido. La generación conjunta con Ken ya se comprobó después; faltan WebSocket,
+   renovación OAuth real y adopción de la fábrica productiva.
    Ken publicado ya tiene perfil propio en ese broker, con identidad `ken`, fuente
    readonly, estado `.ken` writable, modelos offline verificados y MCP SDK sobre
    sus tuberías originales. Preparación/búsqueda/lectura reales funcionaron tanto
@@ -92,14 +92,19 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    antes de thread/turn/herramientas. Un perfil explícito habilita code-mode del
    host y mantiene shell/plugins/agentes desactivados; se comprobó config real.
    El protocolo compuesto controlado ejercita Ken y negocio y bloquea un efecto
-   posterior si detecta caída/cambio de Ken. Falta la prueba generativa conjunta y
-   la adopción productiva; el ciclo de vida de negocio/análisis aportados sigue
+   posterior si detecta caída/cambio de Ken. La prueba generativa conjunta ya pasó;
+   falta adopción productiva. El ciclo de vida de negocio/análisis aportados sigue
    siendo responsabilidad del host. No prueba disponibilidad continua entre checks.
    La conexión de negocio del host ya reutiliza las11 firmas/handlers del MCP y
    mantiene el token fuera de Codex, con HTTP asíncrono acotado y retirada de grant
    vivo antes del cierre. HTTP real y MCP aislado comparten recibos idempotentes;
    retirar autoridad desde el host bloqueó el otro transporte. Falta cablear esta
-   propiedad al API/broker productivo y probar inferencia conjunta real.
+   propiedad al API/broker productivo. La inferencia conjunta real ya pasó sobre
+   un fixture sintético:10 llamadas, un finding provisional y un informe draft leído
+   después de escribirlo; tarea sin aceptar y fuente intacta. Se midieron120894
+   tokens nativos acumulados y pico1571897344bytes sin OOM a2GiB. El primer ensayo
+   falló por helper ausente y el segundo por límite diagnóstico de tokens; quedan
+   documentados. El helper medido y su prueba local preceden ahora al thread.
 7. **Contexto y procedencia:** versiones al corregir o cambiar trece entradas de tarea;
    retiro de autoridad antigua; respuesta asociada a pregunta/versión; repositorio
    admitido inmutable y comienzo de cola explícito. Registro exacto de la entrada
@@ -167,22 +172,33 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 
 ## Verificación más reciente
 
-- Suite completa:1542 casos;1439 pasan,100 fallan con las mismas identidades de la
-  línea base y 3 se omiten. La suite global sigue roja; no hay nuevas fallas.
-- Runtime:595 pasan. Los19 casos añadidos cubren HTTP asíncrono, límites/cierre,
-  catálogos compartidos y negocio real vía API/SQLite, con validación y revocación.
-  Las pruebas anteriores de Ken/composición nativa, migraciones, HTTPS, Stop y
-  recuperación siguen incluidas en la suite completa.
-- Paquete actual:40 módulos runtime y cuatro fuentes HTTP/pruebas cambiadas
-  coinciden con el código. El wheel extraído pasa29 casos. Con bibliotecas de ese
-  wheel y el script/lock heredado aportados explícitamente al harness, el ensayo
-  real HTTP/MCP comparte11 esquemas y recibos, conserva un único informe draft y
-  aplica la retirada viva entre transportes. No prueba el layout CLI instalado.
+- Suite completa:1546 casos;1443 pasan,100 fallan con EXACTAMENTE las mismas
+  identidades de la línea base y3 se omiten.30 advertencias. La suite sigue roja.
+- Runtime:599 pasan. Los cuatro casos nuevos cubren asset auxiliar ausente/cambiado,
+  readiness con Codex/helper reales y fallo antes de thread/turn. El readiness prueba
+  handshake V1, JS aislado y delegación137+63=200 con cierre, sin modelo/cuenta.
+- Paquete:42 módulos runtime y5 fixtures/pruebas coinciden con el wheel construido;
+ 20 pruebas dirigidas pasan desde el wheel extraído con dependencias explícitas.
+  Build offline y Ruff de archivos modernos modificados pasan. No es instalación
+  limpia del producto completo ni aceptación de todas sus superficies.
+- Ensayo conjunto real:un turno por suscripción con Codex0.166/helper y Ken0.18,
+ 10 llamadas dinámicas (Ken find/read y8 de negocio exitosas), un finding provisional,
+  un informe draft persistido/leído, tarea in_progress, fuente intacta y todos los
+  peers registrados/dominio/túneles cerrados. Pico1571897344bytes/no OOM a2GiB;
+ 120894 tokens acumulados incluyen entrada cacheada, no son facturación.
+  El campo de cierre de negocio se muestreó antes de salir del contexto; se conserva
+  false con esa limitación, sin afirmar cierre observado de todos los actores host.
+  No prueba producción, estado/resume, renovación OAuth ni WebSocket. No se hizo
+  generación adicional para reemplazar ese campo del verificador.
+- Se conservan dos ensayos previos:helper ausente (cero herramientas) y corte por
+  presupuesto diagnóstico100000 tras llamadas exitosas (sin snapshot SQL retenido).
+  El último usa el límite350000 ya configurado en el servicio y snapshot también
+  tras fallo, verificado offline. No se alteró la política productiva por el ensayo.
 - El ensayo Ken anterior con wheel comprobó preparación/catálogo/lectura mediada,
   dos peers cerrados, dominio retirado y fuente intacta. Su pico aproximado1,30GiB
   con límite2GiB no es carga mixta de inferencia. El OOM a512MiB sigue documentado.
-  Aquí no hubo acceso a cuenta, generación ni imágenes. Build offline y lock del
-  script se comprobaron; se añadieron sus dependencias directas sin bajar versiones.
+  En ese ensayo Ken anterior no hubo acceso a cuenta ni generación. Su build
+  offline y lock del script se comprobaron; se añadieron sus dependencias directas sin bajar versiones.
 - Ensayo real separado: account/read reconoce ChatGPT por el perfil privado, sin
   thread/start ni turn/start; auth.json ausente y dominio/peer/canales cerrados. No
   se guardaron tokens ni datos personales de cuenta. No prueba renovación OAuth,
@@ -215,7 +231,14 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
   siguen pendientes;0/12 rutas aceptadas. Dependencias:18 avisos npm preexistentes
   (5 bajos,3 moderados,10 altos), sin nuevos paquetes vulnerables por Playwright/axe.
 
-Evidencia actual: [resultados actuales](host-business-results.json),
+Evidencia actual: [resultados actuales](code-host-results.json),
+[helper y readiness](code-host-evidence.json),
+[paquete actual](code-host-packaging.json),
+[ensayo conjunto exitoso y límites](owned-joint-host-v3.json),
+[intento previo cortado por presupuesto](owned-joint-host-v2.json),
+[intento previo sin helper](owned-joint-attempt.json),
+[contrato del helper](../architecture/native-code-host.md),
+[resultados de negocio anteriores](host-business-results.json),
 [negocio compartido y límites](host-business-evidence.json),
 [HTTP y MCP reales](host-business-live.json),
 [paquete actual](host-business-packaging.json),

@@ -8,6 +8,7 @@ from pathlib import Path
 from backend.runtime.broker_mcp import McpTransportError, broker_mcp
 from backend.runtime.broker_stdio import BrokerEndpoint
 from backend.runtime.business_mediation import ProjectTools
+from backend.runtime.code_mode_probe import probe_code_mode
 from backend.runtime.codex_rpc import RpcProtocolError
 from backend.runtime.codex_session import NativeInputRequired
 from backend.runtime.ken_mediation import KenNotReady, KenTools
@@ -82,6 +83,7 @@ async def broker_inference(
         or not isinstance(ken_endpoint, BrokerEndpoint)
         or endpoint.owner is not ken_endpoint.owner
         or endpoint.host_tools is not True
+        or endpoint.code_host is None
         or ken_endpoint.ken is None
         or ken_endpoint.ken_mode != "mcp"
         or native.workspace != PEER_WORKSPACE
@@ -173,6 +175,7 @@ async def broker_inference(
             ):
                 raise RpcProtocolError("Owned native host-tool configuration mismatch")
             await refresh()
+            await probe_code_mode(rpc)
 
         native.before_thread = preflight
         native.dynamic_tools = tools.catalog

@@ -1203,7 +1203,8 @@
         "docs/modernization/ken-host-evidence.json",
         "docs/modernization/ken-host-results.json",
         "docs/modernization/ken-host-live.json",
-        "docs/modernization/ken-host-packaging.json"
+        "docs/modernization/ken-host-packaging.json",
+        "docs/modernization/owned-joint-host-v3.json"
       ],
       "remaining": [
         "Full comparative/product scenarios and failure acceptance"
@@ -1218,7 +1219,8 @@
         "docs/modernization/product-runtime-evidence.json",
         "docs/modernization/product-stop-evidence.json",
         "backend/tests/runtime/test_runtime_service.py",
-        "backend/tests/runtime/test_inference_journal.py"
+        "backend/tests/runtime/test_inference_journal.py",
+        "docs/modernization/owned-joint-host-v3.json"
       ],
       "remaining": [
         "Full comparative/product scenarios and failure acceptance"
@@ -2057,7 +2059,15 @@
         "docs/modernization/ken-host-evidence.json",
         "docs/modernization/ken-host-results.json",
         "docs/modernization/ken-host-live.json",
-        "docs/modernization/ken-host-packaging.json"
+        "docs/modernization/ken-host-packaging.json",
+        "docs/architecture/native-code-host.md",
+        "docs/modernization/code-host-evidence.json",
+        "docs/modernization/code-host-results.json",
+        "docs/modernization/code-host-packaging.json",
+        "docs/modernization/owned-joint-attempt.json",
+        "docs/modernization/owned-joint-host-v2.json",
+        "backend/tests/runtime/test_code_mode_host.py",
+        "docs/modernization/owned-joint-host-v3.json"
       ],
       "implemented": [
         "Actual real-journal global reserve, contained namespace birth, global identity publication, concrete source PeerRegistry bind and sole pre-start G decision in one host operation.",
@@ -2094,7 +2104,15 @@
         "docs/modernization/ken-host-evidence.json",
         "docs/modernization/ken-host-results.json",
         "docs/modernization/ken-host-live.json",
-        "docs/modernization/ken-host-packaging.json"
+        "docs/modernization/ken-host-packaging.json",
+        "docs/architecture/native-code-host.md",
+        "docs/modernization/code-host-evidence.json",
+        "docs/modernization/code-host-results.json",
+        "docs/modernization/code-host-packaging.json",
+        "docs/modernization/owned-joint-attempt.json",
+        "docs/modernization/owned-joint-host-v2.json",
+        "backend/tests/runtime/test_code_mode_host.py",
+        "docs/modernization/owned-joint-host-v3.json"
       ],
       "implemented": [
         "Explicit Ken peer kind and atomic migration31 preserve rowids/history/custom objects/FK targets with rollback.",
@@ -2104,7 +2122,7 @@
         "Actual source and extracted-wheel trials close both Ken peers/domain and preserve source with zero generative turns."
       ],
       "remaining": [
-        "Required catalog mediation and native code-mode/business/subscription composition before turn admission.",
+        "Production adoption of the now-tested required-catalog/native/code-mode/business/subscription composition",
         "Mixed native/Ken/tool resource sizing, product launcher adoption and complete host enrollment.",
         "Full scope remains engine/autonomy/flows/all71 tools/11 categories/prompts/books/evals/human/UI/data/operation/100 baseline failures/final branch review."
       ]
@@ -2121,18 +2139,28 @@
         "docs/modernization/host-business-evidence.json",
         "docs/modernization/host-business-results.json",
         "docs/modernization/host-business-live.json",
-        "docs/modernization/host-business-packaging.json"
+        "docs/modernization/host-business-packaging.json",
+        "docs/architecture/native-code-host.md",
+        "docs/modernization/code-host-evidence.json",
+        "docs/modernization/code-host-results.json",
+        "docs/modernization/code-host-packaging.json",
+        "docs/modernization/owned-joint-attempt.json",
+        "docs/modernization/owned-joint-host-v2.json",
+        "backend/tests/runtime/test_code_mode_host.py",
+        "docs/modernization/owned-joint-host-v3.json"
       ],
       "implemented": [
         "Required-five Ken catalog/JSON schema/argument mediation and shared result/authority boundaries.",
         "Explicit private-NET native host-tools feature profile verified with actual0.166 config, no native-owned MCP.",
         "Same-broker closed successful Ken preparation and readiness before native/thread/turn; refresh before dynamic tool dispatch.",
         "Controlled composed protocol reads Ken then business; detected midturn failure prevents business dispatch; closed scopes preserve caller error.",
-        "Source and extracted-wheel published Ken catalog/mediated read succeeded;38 packaged tests passed."
+        "Source and extracted-wheel published Ken catalog/mediated read succeeded;38 packaged tests passed.",
+        "Separate inspected code-mode helper, readonly FD mount and fixed bounded V1/JS/delegate readiness before thread/start.",
+        "Actual corrected-profile subscription turn: Ken find/read and8 successful business calls, one provisional finding/one draft report/readback, task remains in_progress, source unchanged and registered peers/domain/tunnels closed. Observed120894 cumulative tokens and peak1571897344bytes at2GiB; post-exit business.closed not directly sampled."
       ],
       "remaining": [
-        "Supplied business/analysis actor origin and lifecycle, direct host service binding or owned-worker composition",
-        "Actual joint native subscription/Ken/business turn, mixed-load sizing and vendor WebSocket",
+        "Complete product ownership of supplied business/analysis actors, API/source/origin/generation and lifecycle",
+        "Broader mixed-load sizing, provider WebSocket/transport evidence and deployment acceptance; successful synthetic joint trial is not production readiness",
         "Managed state/credentials/OAuth/account coexistence, complete-domain enrollment and product factories",
         "Resume with durable original thread/catalog and reconciliation",
         "Full71 tools/11 categories and all engine/loops/autonomy/flows/agent communication",
@@ -2147,17 +2175,26 @@
         "docs/modernization/host-business-evidence.json",
         "docs/modernization/host-business-results.json",
         "docs/modernization/host-business-live.json",
-        "docs/modernization/host-business-packaging.json"
+        "docs/modernization/host-business-packaging.json",
+        "docs/architecture/native-code-host.md",
+        "docs/modernization/code-host-evidence.json",
+        "docs/modernization/code-host-results.json",
+        "docs/modernization/code-host-packaging.json",
+        "docs/modernization/owned-joint-attempt.json",
+        "docs/modernization/owned-joint-host-v2.json",
+        "backend/tests/runtime/test_code_mode_host.py",
+        "docs/modernization/owned-joint-host-v3.json"
       ],
       "implemented": [
         "Shared11 signatures/docs/routes without FastMCP dependency in main runtime.",
         "Bounded async numeric-loopback HTTP, no proxies/redirect/replay, explicit scope closure after server authority withdrawal.",
         "Real HTTP/API/SQLite and locked MCP share schema properties, source/report idempotency and live revocation.",
         "Actionable redacted validation details and compact schemas preserve real title field.",
-        "40 runtime modules+HTTP/test sources match wheel;29 packaged tests and real loopback/MCP trial pass."
+        "40 runtime modules+HTTP/test sources match wheel;29 packaged tests and real loopback/MCP trial pass.",
+        "Actual joint native0.166/helper/published Ken0.18/subscription/API trial persisted/read one draft and kept product task unaccepted; see v3 limits."
       ],
       "remaining": [
-        "Real joint native external subscription/published Ken/host business turn and mixed memory/vendor transport acceptance",
+        "Broader mixed-load sizing and vendor transport acceptance beyond one synthetic successful joint turn",
         "Wire API live-grant authority, source/origin/generation and broker into production factories with owned analysis/development",
         "Durable native state/resume, credential renewal/account coexistence and complete host actor enrollment",
         "All71 tools/11 categories/engine/loops/autonomy/roles/flows/agent protocol",

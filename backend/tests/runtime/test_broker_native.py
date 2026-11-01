@@ -106,7 +106,7 @@ def test_native_launch_rejects_a_command_peer_before_reserving(
 
 
 async def test_owned_native_host_tools_profile_is_explicit_and_keeps_shell_disabled(
-    broker_setup, native_asset
+    broker_setup, native_asset, code_host_asset
 ):
     from backend.runtime.authority_journal import AuthorityConflict
     from backend.runtime.broker_stdio import AsyncPeerBroker
@@ -131,6 +131,7 @@ async def test_owned_native_host_tools_profile_is_explicit_and_keeps_shell_disab
                 network=network,
                 egress=policy,
                 host_tools=True,
+                code_host=code_host_asset,
             ),
             request_timeout=10,
         ) as rpc,

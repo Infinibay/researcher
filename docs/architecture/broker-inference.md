@@ -30,7 +30,9 @@ coincidencias parciales ni selección de permisos o credenciales por el modelo.
 ## Perfil nativo y secuencia
 
 La opción de host `host_tools=True` exige el perfil de NET privado con política
-CONNECT explícita. Queda registrada en el manifiesto y la intención; cambiarla
+CONNECT explícita y un `code_host` inspeccionado por separado. El helper se monta
+en lectura por descriptor y se registra junto al hash del readiness. La política
+queda registrada en el manifiesto y la intención; cambiarla
 con una clave existente se rechaza. El perfil predeterminado conserva su conducta.
 
 El perfil nuevo habilita `code_mode_host`, `code_mode_interrupt` y
@@ -50,6 +52,7 @@ sequenceDiagram
     H->>K: Inicializar MCP y validar las cinco herramientas
     H->>N: Abrir RPC y comprobar suscripción/configuración
     H->>K: Revalidar catálogo antes de thread/start
+    H->>N: Probar helper real, JS y delegación sin modelo
     H->>N: Thread con catálogo compuesto y fuente readonly
     H->>K: Revalidar antes de turn/start
     H->>N: Turn solicitado explícitamente
@@ -84,9 +87,15 @@ de vida siguen siendo responsabilidad del host que compone la sesión. No se
 afirma que todos sus actores estén dentro del nuevo dominio. `peers_closed` no
 certifica el cierre del conjunto de actores aportados por el llamador.
 
-Faltan el perfil de negocio/desarrollo, adopción de las fábricas productivas,
+El [contrato del host de Code Mode](native-code-host.md) documenta el asset,
+la prueba previa y los ensayos reales posteriores; la configuración por sí sola
+no demuestra ejecución de herramientas.
+
+Faltan el perfil de desarrollo, adopción de las fábricas productivas,
 estado nativo durable/resume reconciliado, inscripción completa de actores y
-carga conjunta real por suscripción. Tampoco se probaron aquí OAuth/WebSocket,
+aceptación de despliegue con carga mixta representativa. El ensayo conjunto real
+por suscripción ya pasó con datos sintéticos, como detalla el contrato del helper.
+No prueba OAuth/WebSocket,
 conservación de presupuesto remoto ni las71 herramientas. El trabajo global de
 engine/loops, prompts, comunicación humana, web, datos y operación sigue abierto.
 

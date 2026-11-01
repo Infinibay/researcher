@@ -22,6 +22,20 @@ def native_asset():
 
 
 @pytest.fixture
+def code_host_asset():
+    from pathlib import Path
+
+    from backend.runtime.broker_profile import CodexAsset
+
+    binary = Path(
+        "/home/andres/.codex/packages/standalone/releases/0.166.0-x86_64-unknown-linux-musl/bin/codex-code-mode-host"
+    )
+    if not binary.is_file():
+        pytest.skip("Requires the pinned0.166.0 code-mode host; no model call")
+    return CodexAsset.inspect(binary)
+
+
+@pytest.fixture
 def coordination(_isolated_db, db_conn):
     from backend.research.sqlite_store import SQLiteResearchStore
     from backend.runtime import contracts

@@ -271,11 +271,15 @@ class NativeCapsule(AnalysisCapsule):
     remain denied. Ken/code-mode/full inference integration is not admitted here.
     """
 
-    def __init__(self, binding, asset, info_fd, *, network=None, host_tools=False):
+    def __init__(
+        self, binding, asset, info_fd, *, network=None, host_tools=False, code_host=None
+    ):
         super().__init__(binding, None, info_fd)
         self.asset = asset
         self.network_config = network
         self.host_tools = host_tools
+        self.code_host = code_host
+        self._code_host_fd = None
         self._network_fds = {}
         self._asset_fd = None
 
@@ -287,6 +291,18 @@ class NativeCapsule(AnalysisCapsule):
         self._stack.callback(os.close, self._asset_fd)
         if CodexAsset._read(self._asset_fd, path) != self.asset:
             raise ValueError("Native asset no longer matches its manifest")
+        if self.code_host is not None:
+            host_path = Path(self.code_host.path)
+            if host_path.is_relative_to(self.binding.workspace):
+                raise ValueError(
+                    "Code-mode host asset cannot belong to the source workspace"
+                )
+            self._code_host_fd = os.open(
+                host_path, os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC
+            )
+            self._stack.callback(os.close, self._code_host_fd)
+            if CodexAsset._read(self._code_host_fd, host_path) != self.code_host:
+                raise ValueError("Code-mode host asset no longer matches its manifest")
         command = [
             "/run/researcher-runtime/codex",
             "app-server",
@@ -341,6 +357,12 @@ class NativeCapsule(AnalysisCapsule):
             str(self._asset_fd),
             "/run/researcher-runtime/codex",
         ]
+        if self._code_host_fd is not None:
+            mounts += [
+                "--ro-bind-fd",
+                str(self._code_host_fd),
+                "/run/researcher-runtime/codex-code-mode-host",
+            ]
         if self.network_config is not None:
             for item in (self.network_config.resolver, self.network_config.ca_bundle):
                 if Path(item.path).is_relative_to(self.binding.workspace):
@@ -374,6 +396,9 @@ class NativeCapsule(AnalysisCapsule):
             RAYON_NUM_THREADS="2",
         )
         self.pass_fds += (self._asset_fd,)
+        if self._code_host_fd is not None:
+            self.pass_fds += (self._code_host_fd,)
+            self.env["PATH"] = "/run/researcher-runtime:" + self.env["PATH"]
         if self.network_config is not None:
             self.env.update(
                 CODEX_CA_CERTIFICATE="/run/researcher-network/ca.pem",
@@ -386,9 +411,24 @@ class NativeCapsule(AnalysisCapsule):
 class NativeProxyCapsule(NativeCapsule):
     """Private NET with a trusted FD relay and a stricter native child filter."""
 
-    def __init__(self, binding, asset, info_fd, *, network, channel, host_tools=False):
+    def __init__(
+        self,
+        binding,
+        asset,
+        info_fd,
+        *,
+        network,
+        channel,
+        host_tools=False,
+        code_host=None,
+    ):
         super().__init__(
-            binding, asset, info_fd, network=network, host_tools=host_tools
+            binding,
+            asset,
+            info_fd,
+            network=network,
+            host_tools=host_tools,
+            code_host=code_host,
         )
         self.channel = channel
 

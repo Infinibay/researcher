@@ -2868,3 +2868,114 @@ data/restore/bootstrap/CLI/TUI/install/dependencies/18 npm advisories/100 inheri
 failures remain. UI unchanged6/36 desktop+2/12mobile concepts,2pilots,0/12accepted:
 30+10 concepts,10 remaining routes and all12 acceptance. Fresh final whole-branch
 review remains required after all planned implementation, not each adapter.
+
+## Current task: first actual owned joint subscription/Ken/business trial — base742aeec
+
+- Previous goal turn was progress: shared11 handlers, host HTTP lifecycle, actual
+  cross-transport receipts/revocation, source/wheel evidence and full suite committed.
+- Revalidate deterministic broker/host/auth/native gates, then ONE bounded native
+  model turn using existing authorized subscription, same-controller API/live grant,
+  actual published Ken and original broker domain. Synthetic source/attachment/DB
+  only, readonly source, no API-key fallback, no raw credential/event logging.
+- Measure explicit2GiB mixed memory/oom, tool dispatch and durable artifacts. Account
+  metadata by itself is not progress; no speculative refresh or repeat turn after
+  a possibly dispatched request. Failure must retain its actual stage/uncertainty.
+- Actual generation through opaque CONNECT does not by itself prove WebSocket;
+  record only directly observed transport evidence. Entire plan scope unchanged.
+
+## Code-mode host capability checkpoint — actual evidence
+
+- Previous user-facing status turn was no progress (read-only report); revalidated
+  worktree742aeec and finished the already-running full-suite/build handles rather
+  than starting replacements. Full suite1546:1443 passed,100 EXACT baseline failure
+  identities,3 skipped/30 warnings; runtime599 passed. No new failures.
+- Ruling: correct flags/catalog cannot establish executable capability — the first
+  actual joint turn completed text-only because the separate code-mode host asset
+  was absent; require its inspected identity/readonly FD mount and a fixed offline
+  readiness before any thread/turn — cost: explicit additional host asset and probe
+  per new session, existing metadata-only fixtures now need the actual helper.
+- RED3 asset/readiness cases and pre-thread failure gate, then GREEN20 directed
+  tests. Real Codex0.166/helper run V1 handshake, bounded isolated JS and delegate
+  roundtrip137+63=200, session/child close inside original broker kernel profile.
+  Missing helper rejects before reservation, changed helper never opens gate and
+  failing helper admits neither thread nor turn. Probe/hash are in the manifest.
+- Ruling: readiness uses trusted fixed command/exec with externalSandbox because
+  the original kernel sandbox is already applied and cannot be removed by RPC;
+  no model-supplied code/argv or nested-bwrap fallback — cost: a host-only command
+  RPC capability must remain inaccessible to model dispatch; shell stays disabled.
+- A protocol-only no-account/no-model diagnostic outside the profile isolated a
+  V8 API mistake (text(), not console.log); it was not a production fallback.
+- First joint trial owned-joint-7dbae8a124 is preserved as FAILED:1 native turn,
+  zero dynamic calls, no business results, source unchanged, original peers/domain/
+  tunnels closed; peak1456132096/no OOM at2GiB is not working mixed workload proof.
+  Its harness additionally referenced nonexistent proxy.receipts in cleanup and
+  masked the acceptance failure. Preserve both; fix future telemetry and SQL report
+  join before any next trial, never replay the prior turn.
+- Offline wheel+SDist build passed;42 runtime modules+5 changed fixtures byte-match
+  wheel. Extracted -I -S dependency-explicit wheel passes20 directed tests, including
+  actual native/helper offline. Ruff changed modern files passes. No whole-product
+  clean install, managed OAuth renewal, WebSocket or production adoption proved.
+- Corrected harness initially failed at Python module invocation before imports or
+  model dispatch; corrected to run_path. One fresh v2 attempt is now observed via
+  exec session58243. Await its authoritative result; never infer success from liveness.
+
+## Actual corrected-profile joint subscription/Ken/business acceptance
+
+- Session58243 is terminal exit0. V2 owned-joint-host-v2-6b9d4d00f6 FAILED at
+  observed-token fuse after10 actual dynamic calls (Ken find/read +8 successful
+  business operations). Peak1611472896bytes/no OOM at2GiB. The temporary harness
+  failed to snapshot SQL on that exception, so persisted report acceptance could
+  not be retained. Preserve both success responses and missing-evidence limit.
+- Investigation: CodexSession directly assigns tokenUsage.total.totalTokens; it
+  does not add cumulative notifications. Harness100000 cap was below existing
+  RuntimeService/CodexRuntime350000 default. No product budget code was changed.
+- Ruling: use existing350000 default for a NEW synthetic trial and snapshot SQL in
+  finally even if a fuse interrupts — not a replay or a silent budget fallback —
+  cost: a separate authorized subscription turn; aggregate reported tokens include
+  cached input and cannot be interpreted as billing or output size. Offline harness
+  check proves draft snapshot survives failed status and missing DB is not recreated.
+- Session24509 is terminal exit0. V3 owned-joint-host-v3-36eeddb2ed PASSED: exactly
+  one native turn,10 dynamic calls (Ken find/read +8 successful business calls),
+  one provisional finding/one report draft persisted/read back, task in_progress,
+  no source edit or implicit acceptance. Real Codex0.166/helper/published Ken0.18,
+  external user subscription and same-controller synthetic API/grant. Native
+  auth.json absent;120894 observed cumulative tokens, including83584 cached inputs.
+- Mixed peak1571897344bytes,64 PIDs observed/no OOM at explicit2GiB. All registered
+  peers closed, domain retired and tunnels drained. Opaque CONNECT observations11
+  connections/1139659payload bytes do not prove provider WebSocket or capacity.
+- Harness host_business_closed:false was sampled inside context BEFORE exit. Keep
+  the original observation and annotate it; subsequent context exit returned with
+  no exception, but direct post-exit closed flag was not observed. Do not fabricate
+  true or send another model turn to replace a verifier metric. Tests separately
+  establish the scope close/withdraw contract; complete host enrollment remains open.
+- Negative original/v2 results, actual V3 artifacts/token observations and limits
+  retained in owned-joint-{attempt,host-v2,host-v3}.json. code-host-{evidence,results,
+  packaging}.json, architecture/native-code-host.md, status/coverage updated.
+- No image call, user DB migration, host service install, merge/push/deploy. Full
+  scope unchanged and no phase/product factory migration marked complete.
+
+## Next brief after actual owned joint turn — full objective unchanged
+
+Do not rerun account metadata or the same joint fixture to claim progress. Missing
+separate host asset is fixed, measured, mounted readonly and checked via real
+V1/JS/delegate before thread; actual subscription/Ken/business tool turn works in
+one original broker domain with synthetic API controller. Source/wheel offline
+checks pass and100 baseline failures remain. Actual default512MiB still cannot
+run Ken;2GiB is explicit diagnostic policy, not unreviewed capacity planning.
+The product still calls backend/api/runtime_dependencies.py -> CodexRuntime.open
+in native_inference.py through old StdioRpcClient/peer_owner, native-owned MCP and
+managed CODEX_HOME; broker_inference is not installed there. Do NOT call that
+migration done. Next resolve retained native state/resume and the concrete owned
+runtime factory/controller: no ephemeral-home loss on resume, preserve original
+thread/catalog/attempt/generation and reconcile uncertain dispatched turns; reuse
+RuntimeService durable request/lease/control rather than adding another LLM loop.
+Bind same-controller business grant withdrawal and original source/API authority,
+owned analysis/development, actual managed external subscription lifecycle and
+provisioned global authority/cgroup policy into that factory. Read existing exact
+interfaces before choosing implementation. No automatic genesis from missing state.
+All71tools/11categories, fullengine/loop/autonomy/roles/flows/agent protocol and
+Git/review/CI; allprompts/bookskills/evals/human comprehension; data/restore/bootstrap/
+CLI/TUI/install/dependencies/18npm advisories and100baselinefails remain required.
+UI unchanged6/36desktop+2/12mobileconcepts,2pilots,0/12accepted:30+10concepts,
+10other routes and all12acceptance pending. Final fresh whole-branch review is
+required when the whole implementation is ready, not after each adapter.

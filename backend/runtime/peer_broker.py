@@ -327,11 +327,16 @@ class PeerBroker:
         network=None,
         egress=None,
         host_tools=False,
+        code_host=None,
     ):
         if type(host_tools) is not bool or (
             host_tools and (network is None or egress is None)
         ):
             raise TypeError("Host tools require an explicit private-network policy")
+        if host_tools and not isinstance(code_host, CodexAsset):
+            raise TypeError("Host tools require an inspected code-mode host asset")
+        if not host_tools and code_host is not None:
+            raise TypeError("Code-mode host asset requires the host-tools profile")
         if not isinstance(asset, CodexAsset):
             raise TypeError("Native launch requires an inspected Codex asset")
         if network is not None and not isinstance(network, NativeNetwork):
@@ -350,6 +355,7 @@ class PeerBroker:
             network=network,
             egress=egress,
             host_tools=host_tools,
+            code_host=code_host,
         )
 
     def _run(
@@ -366,6 +372,7 @@ class PeerBroker:
         model_cache=None,
         ken_mode="mcp",
         host_tools=False,
+        code_host=None,
     ):
         command_key(operation_key)
         if asset is None and ken is None:
@@ -392,6 +399,22 @@ class PeerBroker:
                         else "readonly-native-codex-v1"
                     ),
                     "host_tools": host_tools,
+                    **(
+                        {
+                            "code_host": asdict(code_host),
+                            "code_host_probe_sha256": {
+                                name: hashlib.sha256(
+                                    Path(__file__).with_name(name).read_bytes()
+                                ).hexdigest()
+                                for name in (
+                                    "code_mode_probe.py",
+                                    "code_mode_payload.py",
+                                )
+                            },
+                        }
+                        if code_host is not None
+                        else {}
+                    ),
                     "asset": asdict(asset),
                     "profile_sha256": hashlib.sha256(
                         Path(__file__).with_name("broker_profile.py").read_bytes()
@@ -520,6 +543,7 @@ class PeerBroker:
                     **({"network": network} if network is not None else {}),
                     **({"channel": channel} if channel is not None else {}),
                     **({"host_tools": True} if host_tools else {}),
+                    **({"code_host": code_host} if code_host is not None else {}),
                     **(
                         {"model_cache": model_cache, "mode": ken_mode}
                         if ken is not None

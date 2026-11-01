@@ -11,7 +11,7 @@ from backend.tests.runtime.test_ken_mediation import Peer, tool
 
 
 @pytest.fixture
-def composed_setup(broker_setup, ken_installation, tmp_path):
+def composed_setup(broker_setup, ken_installation, tmp_path, code_host_asset):
     from backend.runtime.broker_profile import CodexAsset
     from backend.runtime.ken_worker import KenInstallation
 
@@ -53,6 +53,7 @@ def composed_setup(broker_setup, ken_installation, tmp_path):
         installation=installation,
         asset=CodexAsset.inspect(binary),
         prepared=prepared.operation_id,
+        code_host=code_host_asset,
     )
 
 
@@ -73,6 +74,7 @@ def native(owner, setup):
         ),
         egress=EgressPolicy(("allowed.example",)),
         host_tools=True,
+        code_host=setup.code_host,
     )
     return CodexSession(
         JsonRpcClient(endpoint),
@@ -212,3 +214,45 @@ async def test_ken_failure_during_turn_prevents_business_effect(
                     on_event=fail_ken_before_effect,
                 )
             assert not peer.calls
+
+
+async def test_code_host_startup_failure_never_admits_thread_or_turn(composed_setup):
+    from backend.runtime.broker_inference import broker_inference
+    from backend.runtime.broker_profile import CodexAsset
+    from backend.runtime.broker_stdio import AsyncPeerBroker
+    from backend.runtime.business_mediation import BusinessTools
+
+    s = composed_setup
+    s.code_host = CodexAsset.inspect("/usr/bin/false")
+    business = await BusinessTools.connect(Peer([tool("researcher_source_read")]))
+    async with AsyncPeerBroker(s.broker) as owner:
+        session = native(owner, s)
+        methods = []
+        request = session.rpc.request
+
+        async def record(method, *args, **kwargs):
+            methods.append(method)
+            return await request(method, *args, **kwargs)
+
+        session.rpc.request = record
+        endpoint = owner.ken(
+            s.registry,
+            ken_peer(s.registry, s.command),
+            operation_key="ken",
+            installation=s.installation,
+        )
+        with pytest.raises(RuntimeError, match="Code-mode host readiness failed"):
+            async with broker_inference(
+                session,
+                endpoint,
+                prepared_operation=s.prepared,
+                business=business,
+                analysis=SimpleNamespace(catalog=[]),
+            ):
+                pytest.fail("Failed executable admitted inference")
+        assert (
+            "command/exec" in methods
+            and "thread/start" not in methods
+            and "turn/start" not in methods
+        )
+        assert session.turns_sent == 0 and session.thread_id is None

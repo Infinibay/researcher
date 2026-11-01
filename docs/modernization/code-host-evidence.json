@@ -1,0 +1,45 @@
+{
+  "status": "measured_code_host_and_actual_joint_turn_verified_product_adoption_pending",
+  "contracts": {
+    "host_tools_requires_separately_inspected_helper_before_global_reservation": true,
+    "helper_readonly_fd_mount_and_identity_recheck": true,
+    "helper_and_probe_hashes_in_runtime_manifest": true,
+    "fixed_offline_probe_precedes_thread_and_turn": true,
+    "real_v1_handshake_javascript_and_host_delegate_roundtrip": true,
+    "probe_reuses_original_kernel_profile_no_model_selected_command": true,
+    "failed_probe_never_admits_native_thread_or_turn": true,
+    "actual_subscription_ken_business_draft_and_readback": true,
+    "actual_task_not_implicitly_accepted": true
+  },
+  "helper": {
+    "version": "0.166.0",
+    "bytes": 77997328,
+    "sha256": "657f4e902726e05867c937b583049d5997e057f8cd0ab40450633c9c9ef8d630"
+  },
+  "probe_source_sha256": {
+    "code_mode_probe.py": "15514d1f7587d40391da1c33c92323aa7ecf5d609ecb7be851f1a824bc06ae3e",
+    "code_mode_payload.py": "3bd1d09e2488cfd790764c4d6201457efaa1af1f74e38b6f2f2b4c7d4d3d6fbf"
+  },
+  "evidence": [
+    "backend/runtime/code_mode_probe.py",
+    "backend/runtime/code_mode_payload.py",
+    "backend/runtime/broker_profile.py",
+    "backend/runtime/peer_broker.py",
+    "backend/runtime/broker_inference.py",
+    "backend/tests/runtime/test_code_mode_host.py",
+    "backend/tests/runtime/test_broker_inference.py",
+    "docs/modernization/owned-joint-attempt.json",
+    "docs/modernization/code-host-results.json",
+    "docs/modernization/code-host-packaging.json",
+    "docs/modernization/owned-joint-host-v2.json",
+    "docs/modernization/owned-joint-host-v3.json"
+  ],
+  "remaining": [
+    "Broaden mixed resource/performance sizing and vendor transport acceptance; one successful synthetic joint trial at2GiB is not capacity planning",
+    "Production factory adoption, durable native resume and managed auth renewal/account coexistence",
+    "Original source/API/global origin/generation and complete host enrollment",
+    "All71 tools/11 categories, engine/loops/flows/agent communication and exact Git/review/CI",
+    "All prompts/books/evals/human comprehension, all UI concepts/routes/acceptance, data/restore/bootstrap/CLI/TUI/install/dependencies",
+    "100 inherited failures and final fresh whole-branch review"
+  ]
+}
