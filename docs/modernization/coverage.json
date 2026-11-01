@@ -1796,6 +1796,33 @@
         "Provisioned checkpoint/retention/capacity protocol and production performance acceptance; jointly rewound SQL+witness needs an external monotonic reference.",
         "All engine/tool/prompt/human/frontend acceptance and baseline failures remain in the full goal."
       ]
+    },
+    "execution_domain_kernel": {
+      "status": "in_progress",
+      "evidence": [
+        "backend/runtime/_domain_spawn.c",
+        "backend/runtime/execution_domain.py",
+        "backend/tests/runtime/test_execution_domain.py",
+        "backend/tests/runtime/fake_domain_broker.py",
+        "docs/architecture/execution-domain.md",
+        "docs/modernization/execution-domain-results.json",
+        "docs/modernization/execution-domain-evidence.json",
+        "docs/modernization/execution-domain-packaging.json"
+      ],
+      "implemented": [
+        "Native clone3 direct birth into real cgroup, no spawn/migrate fallback; SIGCHLD+pidfd, explicit FD map/env, C-only child path and released GIL.",
+        "Independent process closes live detached writer after broker SIGKILL before any PID/namespace peer publication; source DB removed, domain record retained, no late effect.",
+        "Retirement withdraws admissions, kills before waiting for frozen exec startup, drains constructors, waits populated0 and removes the domain; old FD cannot birth late.",
+        "Actual remap cycles, parent FD preservation, inherited secret-FD exclusion, signal normalization, exec failure and partial-pipe allocation cleanup.",
+        "Own-controller cgroup/ancestors rejected before control writes; normal FS cannot spoof cgroup2; invalid finite deadlines rejected before mutation.",
+        "Locked offline sync, platform wheel/SDist including C source, source rebuild from archive and isolated extracted-wheel native birth/retirement smoke."
+      ],
+      "remaining": [
+        "Authenticated semantic authority/broker owning G, no-migration sandbox enforcement and adversarial migration acceptance.",
+        "External enrollment proving complete actor-domain origin, generations, global publication before local bind/G and legacy writer migration.",
+        "Cross-database ownership/aliases, restore/handoff and budget conservation; full engine/tool/prompt/human/design acceptance.",
+        "Platform/ABI/CI and clean full-product installation/packaging;100 baseline failures and final independent whole-branch review."
+      ]
     }
   }
 }

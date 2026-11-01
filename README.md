@@ -8,6 +8,10 @@ Agents collaborate through an event-driven architecture: a team lead plans work,
 
 - **Python 3.12 or 3.13** (the transitional CrewAI dependency does not support 3.14)
 - **uv** (locked Python installation)
+- **Linux C compiler and Python development headers** for the native execution-domain
+  extension; source installs now build a platform-specific wheel. Its kernel path
+  requires cgroup v2, `clone3(CLONE_INTO_CGROUP)`, `close_range(CLOEXEC)` and
+  `cgroup.kill` (Linux 5.14 or newer). No spawn-then-migrate fallback is provided.
 - **OpenSSL CLI** for ephemeral local TLS certificates in the test suite
 - **Node.js 24 LTS** (for the frontend; version in `frontend/.node-version`)
 - **Podman** or **Docker** (for sandbox and Forgejo)
@@ -25,6 +29,10 @@ npm run build
 ```
 
 The test command blocks external sockets and limits each test to 20 seconds.
+Real execution-domain tests create and remove unique children under the test
+runner's delegated cgroup; they skip when that delegation is unavailable. Those
+tests do not provision a production actor domain or enable mutable tools. See
+[the execution-domain contract](docs/architecture/execution-domain.md).
 Real-provider tests must run separately with explicit limits; ordinary tests do
 not require provider credentials. The current baseline still contains known
 failures, listed in [the baseline report](docs/modernization/baseline.md).

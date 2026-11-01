@@ -1696,3 +1696,92 @@ upgrades/18 npm advisories and100 baseline failures. Visual inventory remains6/3
 2/12 mobile,2 pilots and0/12 accepted routes; remaining30+10 concepts/10 routes and all12
 state/accessibility/human acceptance required. Final fresh independent whole-branch review
 still required. Full goal active; no push/merge/deploy and no permanent blocker inferred.
+
+
+## Contained kernel birth and pre-publication recovery — base 45d560d
+
+- Previous goal turn was progress:45d560d implemented witnessed storage. Revalidated
+  clean tracked state, plan/contracts and active next brief. Full goal remains active.
+- Continued the user-authorized architectural debate with the existing ownership
+  reviewer (not an implementation/review agent per task). Decision: more spawn states
+  cannot recover an unknown child; require concrete domain, atomic contained birth
+  and broker ownership of G. Reviewer supports clone3 with explicit FD handling and
+  identifies cgroupfs/D-Bus escape as a remaining decisive deployment boundary.
+- Read-only host evidence corrected a stale generalized availability assumption:
+  cgroup2 is rw, UID1000 user service/current scope are writable; current scope
+  Delegate=no is NOT a complete actor-domain or no-migration proof. Linux6.18.55,
+  glibc2.44, GCC16.2.1, systemd262 observed. No accounts/services/parent processes changed.
+- Added Linux native _domain_spawn extension and ExecutionDomain kernel primitive.
+  clone3(CLONE_INTO_CGROUP|CLONE_PIDFD), SIGCHLD, explicit copied argv/env and FD
+  mapping; all sources duplicated above destinations, CLOEXEC remainder, exec-error
+  pipe, signal dispositions/mask normalized. Child executes only native safe ops;
+  parent exec acknowledgment releases GIL. No fork/migrate or unsupported fallback.
+- Open-only cgroup2 identity pins device/inode+boot+PID/cgroup observers. A regular
+  directory cannot impersonate it. Two RED self/ancestor cases now reject controller
+  domains before control writes. These are kernel objects, not durable genesis.
+- Actual direct birth and a setsid descendant close from another handle; stale
+  removed cgroup FD cannot create a late actor. Real subprocess crash test first
+  commits domain intent, then kills broker before publishing any PID; original
+  synthetic project DB is deleted. Detached writer heartbeat remains live after
+  broker death. Separate process reads global journal, retires/removes domain and
+  persists tombstone; no late effect/source DB recreation. Constructor fixture
+  has no product G/bind: it proves unknown-identity domain recovery, not final broker.
+- Tests initially RED for missing implementation. Two harness issues corrected:
+  raw native spec must explicitly map all std FDs, and Python itself opens a THP
+  FD after exec (not inherited leakage). Test now verifies fake-secret exclusion,
+  actual environment/signals, remap cycles and parent descriptor preservation.
+  Partial pipe allocation leaked owned FDs RED; allocation now occurs under cleanup.
+- Frozen-before-exec real cgroup test RED exposed retirement blocked on spawn lock.
+  Retirement now withdraws admission and repeatedly kills before waiting for/draining
+  constructors; canceled birth returns no transport. Then populated0+rmdir. NaN,
+  infinity, negative and bool deadline cases RED; reject before kernel writes GREEN.
+  No domain release by timeout or a momentarily empty observation.
+- Final16 domain cases pass in1.41s. Bare full suite1327:1224 pass,100 identical
+  baseline failure identities,3 skip,29 warnings;394 runtime pass, no new/resolved
+  failures. Prior11-case full run also retained; no regression count hidden.
+- Ruff check/format, clang-format and GCC -Wall/-Wextra/-Werror pass. Locked offline
+  uv sync/check passes. Build now needs Linux compiler/Python+Linux headers and
+  setuptools ext-modules support; wheel is cp312/Linux x86_64 rather than universal.
+  README documents changed source-install requirements and conditional real CG tests.
+- Built wheel+sdist, checked26 runtime Python source bytes and C source in archive.
+  Separate -I -S process imports native module from extracted wheel, creates child
+  in an exact private test domain, reaps and retires/removes it. Source archive builds
+  another native wheel offline. This is not clean full-product/frontend packaging,
+  other ABI/architecture acceptance or production deployment.
+- Ruling: implement/test this kernel primitive before semantic grant states — a
+  grant protocol without recoverable pre-publication actors could release while an
+  unknown child still runs. Cost: native build/platform requirement; hide it in the
+  domain module and validate packaging, rather than give callers a spawn/move recipe.
+- Ruling: no mutable capability enabled from cgroup membership/empty alone — no-migration
+  profile and complete origin/enrollment, broker gate/authentication and all legacy
+  writer migration remain obligations. Escaped actors invalidate domain-only closure.
+- Connected Ken recalled the global-before-gate finding; pyproject blast-radius
+  reports only a lower bound (6/919 unresolved internal imports). Read actual launch,
+  registry, service, build/startup and tests; do not claim graph completeness or save
+  memory on unrelated legacy source anchors. Book design rules keep kernel mechanics
+  separate from semantic grants and a future single run_peer entry point.
+- Source/log/results/package hashes saved in execution-domain evidence. Only unique
+  temporary child cgroups created/killed/removed; no parent cgroup migration, secrets,
+  model turns/images, user DB migrations, system services/accounts, push/merge/deploy.
+
+## Next brief after native execution domain
+
+Continue the FULL plan. Next integrate a trusted broker's semantic run_peer using
+this primitive: non-reused durable domain intent/generation, contained constructors,
+global namespace publication, concrete local PeerRegistry validation and sole broker
+ownership of G. Close all cgroupfs/service-manager migration channels in the actual
+payload profile and test adversarial escape before mutable capability. Revocation
+must withdraw G immediately, drain constructors/controls, close known namespaces plus
+unknown domain actors, retire the domain and persist release; lost receipts never
+spawn or send G again. External root enrollment/complete actor-origin proof and
+historical writer migration remain required, not inferred from empty test cgroups.
+The primitive does not authenticate users or authorize tools. Retain two DB/alias,
+restore/handoff/generation and budget acceptance. All71 tools/11 categories, whole
+engine/loop/autonomy/roles/flows/agent communication, exact Git candidate/review/CI,
+typed contexts/dependencies/checkpoints, external effects/lifecycle, historical
+backup/bootstrap/CLI/TUI/clean install and frontend packaging remain. All prompts,
+book-skills/evals/human comprehension and subscription-only auxiliary inference,
+dependency upgrades/18 npm advisories and100 baseline failures still required.
+Visual inventory unchanged6/36 desktop+2/12 mobile,2 pilots,0/12 accepted; remaining
+30+10 concepts/10 routes and all12 state/accessibility/human acceptance remain.
+Final fresh independent whole-branch review required; full goal active, no push/merge/deploy.

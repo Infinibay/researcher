@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=68.0"]
+requires = ["setuptools>=74.1,<85"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -60,6 +60,11 @@ include = ["backend*"]
 
 [tool.setuptools.package-data]
 backend = ["db/*.sql"]
+
+[[tool.setuptools.ext-modules]]
+name = "backend.runtime._domain_spawn"
+sources = ["backend/runtime/_domain_spawn.c"]
+extra-compile-args = ["-Wall", "-Wextra", "-Werror", "-std=c11"]
 
 [tool.ruff]
 target-version = "py312"

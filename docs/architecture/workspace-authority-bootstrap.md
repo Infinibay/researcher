@@ -106,3 +106,9 @@ crash/rewind y recuperación de namespaces independientes de la DB del proyecto.
 No está integrado en el broker/PeerRegistry productivo. Aprovisionamiento, dominio
 completo de actores, migración de escritores, restore y aceptación siguen pendientes.
 Las herramientas mutables no se habilitan por este núcleo de almacenamiento.
+
+El siguiente incremento incorpora la [primitiva de dominio Linux](execution-domain.md):
+nacimiento contenido y retirada ante una caída anterior a publicar el PID. Son
+ensayos con dominios privados temporales, no inscripción del dominio completo del
+host. Confinamiento contra migración, broker único dueño de G, autoridad semántica
+y migración de todos los escritores siguen pendientes.

@@ -39,6 +39,11 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    interrumpidos. Sus pruebas incluyen SIGKILL, contención y cierre desde otro
    proceso tras perder la DB del proyecto. No está conectado al broker/PeerRegistry
    productivo ni demuestra el dominio completo de actores del host.
+   La primitiva Linux de dominio también existe: nacimiento con clone3 dentro de
+   un cgroup real y retirada sin esperar al lock de un arranque congelado. Un
+   recuperador separado cerró un hijo vivo tras SIGKILL antes de publicar PIDs y
+   pérdida de la DB original. Es un ensayo de constructor de confianza; faltan
+   broker dueño de G y perfil que impida migración fuera del dominio.
 7. **Contexto y procedencia:** versiones al corregir o cambiar trece entradas de tarea;
    retiro de autoridad antigua; respuesta asociada a pregunta/versión; repositorio
    admitido inmutable y comienzo de cola explícito. Registro exacto de la entrada
@@ -105,9 +110,11 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 
 ## Verificación más reciente
 
-- Suite completa:1311 casos;1208 pasan,100 fallan con las mismas identidades de la
+- Suite completa:1327 casos;1224 pasan,100 fallan con las mismas identidades de la
   línea base y 3 se omiten. La suite global sigue roja.
-- Runtime:378 pasan;69 pruebas dirigidas y150 repeticiones de los casos de peers.
+- Runtime:394 pasan. El dominio Linux añade16 casos reales; incluye recuperación
+  antes de publicación, arranque congelado, FDs, señales y rechazo del propio cgroup.
+  El checkpoint previo verificó69 pruebas dirigidas y150 repeticiones de peers.
   El registro de autoridad/recuperación añade44 casos. Se corrigieron metadatos
   malformados, bloqueo de handles tras fork y una carrera EACCES al cerrar peers;
   denegación sobre un init vivo conserva estado incierto y no lo señala.
@@ -132,8 +139,12 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
   siguen pendientes;0/12 rutas aceptadas. Dependencias:18 avisos npm preexistentes
   (5 bajos,3 moderados,10 altos), sin nuevos paquetes vulnerables por Playwright/axe.
 
-Evidencia actual: [registro de autoridad](authority-journal-evidence.json),
-[resultados actuales](authority-journal-results.json),
+Evidencia actual: [dominio Linux](execution-domain-evidence.json),
+[resultados actuales](execution-domain-results.json),
+[contrato y límites](../architecture/execution-domain.md),
+[paquete nativo](execution-domain-packaging.json),
+[registro de autoridad](authority-journal-evidence.json),
+[resultados del registro](authority-journal-results.json),
 [contrato implementado y límites](../architecture/witnessed-authority-journal.md),
 [paquete](authority-journal-packaging.json), [medición local histórica](authority-journal-benchmark.json),
 [vista fijada](peer-workspace-evidence.json),

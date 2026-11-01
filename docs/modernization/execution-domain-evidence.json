@@ -1,0 +1,67 @@
+{
+  "base_commit": "45d560d",
+  "date": "2026-11-01",
+  "scope": "Real delegated private cgroups, model-free constructor crash before PID publication, independent recovery without project DB. Not production broker/bootstrap or sandbox acceptance.",
+  "source_sha256": {
+    "backend/runtime/_domain_spawn.c": "db4384d8a7b7d23484a93caaa760e54facb593e00d69c73f0d4b7398f197af2a",
+    "backend/runtime/execution_domain.py": "5853d3bfcf7ffb5beab62ed3a6cd1ea48e2e74251dac38b25fb876e4714565aa",
+    "backend/tests/runtime/test_execution_domain.py": "b5e23e2ceb80323a0fa10b9ada7019f387ca03935768eac066edbc3f2cef4cae",
+    "backend/tests/runtime/fake_domain_broker.py": "e9dec49fc3c662989ea93f08f44ed08171371a434b15955401688c288db60d35",
+    "pyproject.toml": "f83847385c0f2931f84a56599af6cdb557ed8f16190e4c1e86c2877b3fece13b",
+    ".gitignore": "dd311d1290d2149e9c00e5e8813440ca11d80a71c887d464184ddd1869a274eb",
+    "README.md": "94ecf3af903ae3a125b3832d0dfd833d79583a23f32ce7e323a45a1fa153a3a5"
+  },
+  "raw_artifacts_sha256": {
+    "execution-domain-build.log": "fa2000c01f7117b65ddac4b771fccf2e9b11e4b3a56f746300afe62d91b0217c",
+    "execution-domain-control-green.log": "493960c4feb942300dcd8e4a48c02313055bd33c04121534335259be3cc8cd30",
+    "execution-domain-core-green.log": "fae80b478dca97227d363165f03b8afbe7cf5ea384c636a0e4483c311d2e64df",
+    "execution-domain-deadline-red.log": "65681b8dfea70229cc2af8b5b217d32cff8edd2984aa9dba514dbd3a32415992",
+    "execution-domain-fd-diagnostic.log": "998cde1a5eb77ee788e6e580ee9c62b87b26fcaba1de7bb76747dfcf7dea6403",
+    "execution-domain-final-build.log": "2c2fa95c02236f5f4839f5196bec758baa13ae2bec6e6be847d51003e3613f26",
+    "execution-domain-final-focused.log": "37645ba98e29b08be2e245ab6cc01eab018dda9937c4db1d3c762c37cf83ff1a",
+    "execution-domain-final-focused2.log": "adba2b54b3e90da62a5aa29838975b5cfe5203c857cc76b9d0f467736e780184",
+    "execution-domain-final-full.log": "89e0e4ca6b12e397299f78f1721a98183c8b5a28099f186ef47f7ff06d91e6d5",
+    "execution-domain-final-package.log": "7abd57735abe68c182ecc7685dc440862e6b8891ddf347bc451dac74a983a502",
+    "execution-domain-first-green.log": "4afb3c2019f083ff1be5c7c8fd8a2625448a18d7541e405d1ff423631c7205df",
+    "execution-domain-frozen-red.log": "eccefddeaa51e4700c19ba696d01fef64ad6ebabd9596e8feb326d3e2af03d10",
+    "execution-domain-full.log": "895dc6a04abc7a51e53718707488c8420b9b0b668260559f4b7b420140eda948",
+    "execution-domain-gil-build.log": "b3d495908b52a0565f8e52250aaef7bb496a6cbb72ecbd5136e0df372885f070",
+    "execution-domain-package-build.log": "ea348d32e9eb294c8dfe87404e029622db5bd63a25a961afec49075975730992",
+    "execution-domain-parent-red.log": "f2a5e2fd5d39cb8f65f6e65d6c068c19f555aa6523eb22868d4159dc4c789e56",
+    "execution-domain-pipe-red.log": "cf7a1a13cdf3c4912d08a8e77165f5ddad7b01a094c7fdabf363b9ec07da5040",
+    "execution-domain-red.log": "ea93307dae9f12d8b7b234ce4e94c81d2a277b9f4b33be4e0253e69f14650b20",
+    "execution-domain-roundtrip.log": "d5ada62091c5f11f53ceae0c6c8e447c712355d30180eddac0208d30f5cdb407",
+    "execution-domain-sync.log": "c31aa84452ac5c82c023f0e2f465e8d9ab46c086a55b318dda616857d1baae73",
+    "execution-domain-final-full.xml": "8c5bb463d51bb5411b6ac3c8591413b30ee2d52075f23482d171cc1f6308a05c",
+    "execution-domain-full.xml": "9efd5e0234f44ce419acca2a75350e627fbdfe98168f31bf1e213bd6038ff958"
+  },
+  "reports": [
+    "execution-domain-results.json",
+    "execution-domain-packaging.json"
+  ],
+  "host_observed": {
+    "kernel": "6.18.55-2-cachyos-lts",
+    "glibc": "2.44",
+    "compiler": "GCC16.2.1",
+    "systemd": "262",
+    "delegation": "Existing current UID1000 scope writable; not complete Researcher actor-domain enrollment."
+  },
+  "verified": [
+    "Native clone3 direct birth into real cgroup, no spawn/migrate fallback; SIGCHLD+pidfd, explicit FD map/env, C-only child path and released GIL.",
+    "Independent process closes live detached writer after broker SIGKILL before any PID/namespace peer publication; source DB removed, domain record retained, no late effect.",
+    "Retirement withdraws admissions, kills before waiting for frozen exec startup, drains constructors, waits populated0 and removes the domain; old FD cannot birth late.",
+    "Actual remap cycles, parent FD preservation, inherited secret-FD exclusion, signal normalization, exec failure and partial-pipe allocation cleanup.",
+    "Own-controller cgroup/ancestors rejected before control writes; normal FS cannot spoof cgroup2; invalid finite deadlines rejected before mutation.",
+    "Locked offline sync, platform wheel/SDist including C source, source rebuild from archive and isolated extracted-wheel native birth/retirement smoke."
+  ],
+  "limits": [
+    "ExecutionDomain is a trusted host kernel primitive, not a sandbox or permission to launch an agent.",
+    "No production WorkspaceAuthority semantic grants/broker, root enrollment, global-before-G/local bind integration or full actor-domain coverage implemented yet.",
+    "Payload access to cgroupfs, D-Bus or another controller can permit escape; adversarial no-migration profile is still required before mutable capabilities.",
+    "Crash fixture constructor deliberately has no product G/local bind; it proves contained pre-publication birth/recovery, not the final gate protocol.",
+    "Cgroup creation is test-owned and temporary; external provisioning must durably register domain intent before creation/birth and retain non-reused generations/tombstones.",
+    "New native build targets verified Linux x86_64/CPython3.12. Compiler/dev headers required for source install; other targets and production performance/CI remain pending.",
+    "No model turns/images, user DB migrations, host account/service installation, cgroup parent migration, push/merge/deployment.",
+    "All71 tools/11 categories, whole engine/loop/prompts/human/UI migration,100 baseline failures and final independent branch review remain in full scope."
+  ]
+}

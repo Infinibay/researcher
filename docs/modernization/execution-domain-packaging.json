@@ -1,0 +1,49 @@
+{
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "sha256": "f31bb356543e4f610671abc89eb675dffc8371f4ad363cd7e160d367b3e245a7",
+  "sdist": "researcher-0.1.0.tar.gz",
+  "sdist_sha256": "1a40672000040ca17a6521f027122e854e3fe817e81a27a7515904c1570edb01",
+  "sdist_c_source_matches": true,
+  "native_extension": "backend/runtime/_domain_spawn.cpython-312-x86_64-linux-gnu.so",
+  "native_extension_sha256": "505f700192e672c7bd6af889fecbe3943829ab7b8b002f8353533719aa365507",
+  "runtime_source_bytes_equal": {
+    "backend/runtime/__init__.py": true,
+    "backend/runtime/analysis_tools.py": true,
+    "backend/runtime/authority_journal.py": true,
+    "backend/runtime/business_mediation.py": true,
+    "backend/runtime/codex_rpc.py": true,
+    "backend/runtime/codex_session.py": true,
+    "backend/runtime/command_jobs.py": true,
+    "backend/runtime/command_output.py": true,
+    "backend/runtime/contracts.py": true,
+    "backend/runtime/execution_domain.py": true,
+    "backend/runtime/ken_worker.py": true,
+    "backend/runtime/live_grants.py": true,
+    "backend/runtime/native_commands.py": true,
+    "backend/runtime/native_inference.py": true,
+    "backend/runtime/peer_guard.py": true,
+    "backend/runtime/peer_payload.py": true,
+    "backend/runtime/peer_process.py": true,
+    "backend/runtime/peer_registry.py": true,
+    "backend/runtime/questions.py": true,
+    "backend/runtime/recovery.py": true,
+    "backend/runtime/run_inputs.py": true,
+    "backend/runtime/service.py": true,
+    "backend/runtime/sqlite_questions.py": true,
+    "backend/runtime/sqlite_runs.py": true,
+    "backend/runtime/views.py": true,
+    "backend/runtime/workspaces.py": true
+  },
+  "isolated_packaged_smoke": {
+    "native_import_from_wheel": true,
+    "child_born_in_domain": true,
+    "retired_and_removed": true
+  },
+  "scope": "Linux x86_64 CPython3.12 only, synthetic private cgroup; not full product installation or actor-domain enrollment.",
+  "frontend_packaging": "Unchanged and still pending.",
+  "sdist_roundtrip_build": {
+    "success": true,
+    "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+    "sha256": "fbb050c834cfc3005f9aea0fbff795848e710167b380c39ed8d638f6a1e3688e"
+  }
+}
