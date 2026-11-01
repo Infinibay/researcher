@@ -1,47 +1,27 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useProjectStore } from '../../stores/project'
 import { useTasks, useCreateTask, useDeleteTask } from '../../hooks/useTasks'
 import { useEpics } from '../../hooks/useEpics'
 import { useMilestones } from '../../hooks/useMilestones'
 import { LoadingSpinner } from '../common/LoadingSpinner'
-import { ErrorMessage } from '../common/ErrorMessage'
-import { EmptyState } from '../common/EmptyState'
-import { Badge } from '../common/Badge'
 import { ConfirmDialog } from '../common/ConfirmDialog'
-import { TaskDetailModal } from '../tasks/TaskDetailModal'
+import { TaskInspector } from '../tasks/TaskInspector'
+import { TaskQueue, taskStatusLabels } from '../tasks/TaskQueue'
+import '../../styles/tasks.css'
 import { DependencyGraph } from '../tasks/DependencyGraph'
-import { PRIORITY_COLORS } from '../../utils/colors'
 import type { TaskDependency } from '../../types/api'
 
 const statusOptions = ['', 'backlog', 'pending', 'in_progress', 'review_ready', 'rejected', 'done', 'blocked']
 const typeOptions = ['code', 'research', 'investigation', 'review', 'test', 'design', 'integrate', 'documentation', 'bug_fix']
 const complexityOptions = ['low', 'medium', 'high']
 
-const statusVariant: Record<string, string> = {
-  backlog: 'neutral',
-  pending: 'neutral',
-  in_progress: 'warning',
-  review_ready: 'violet',
-  rejected: 'error',
-  done: 'success',
-  blocked: 'error',
-}
-
-const typeVariant: Record<string, string> = {
-  code: 'info',
-  research: 'warning',
-  investigation: 'warning',
-  review: 'violet',
-  test: 'info',
-  design: 'violet',
-  integrate: 'info',
-  documentation: 'neutral',
-  bug_fix: 'error',
-  plan: 'neutral',
-}
-
 export function TasksPage() {
   const projectId = useProjectStore((s) => s.activeProjectId)
+  if (!projectId) return <div className="task-workbench"><section className="task-idle"><p className="task-eyebrow">TAREAS</p><h1>Elige un proyecto para trabajar</h1><p>Selecciona el proyecto en la cabecera. Aquí podrás consultar sus tareas, contrastar evidencia y corregir el contexto.</p></section></div>
+  return <ProjectTaskWorkbench key={projectId} projectId={projectId} />
+}
+
+function ProjectTaskWorkbench({ projectId }: { projectId: number }) {
   const [filterStatus, setFilterStatus] = useState('')
   const [filterEpic, setFilterEpic] = useState<number | undefined>()
   const [filterMilestone, setFilterMilestone] = useState<number | undefined>()
@@ -65,19 +45,20 @@ export function TasksPage() {
   // Form state
   const [fTitle, setFTitle] = useState('')
   const [fDesc, setFDesc] = useState('')
-  const [fType, setFType] = useState('code')
+  const [fType, setFType] = useState('research')
   const [fEpic, setFEpic] = useState<number | undefined>()
   const [fMilestone, setFMilestone] = useState<number | undefined>()
   const [fPriority, setFPriority] = useState(3)
   const [fComplexity, setFComplexity] = useState('medium')
   const [fDependsOn, setFDependsOn] = useState<number[]>([])
 
-  if (!projectId) {
-    return <EmptyState title="No project selected" description="Select a project from the header." />
-  }
-
-  if (isLoading) return <div className="flex justify-center py-12"><LoadingSpinner size="lg" /></div>
-  if (error) return <ErrorMessage message={(error as Error).message} retry={() => refetch()} />
+  const [search, setSearch] = useState('')
+  const lastSelection = useRef<number | null>(null)
+  useEffect(() => {
+    if (selectedTaskId == null && lastSelection.current != null) document.getElementById(`task-select-${lastSelection.current}`)?.focus()
+  }, [selectedTaskId])
+  const visibleTasks = (tasks ?? []).filter(task => `${task.id} ${task.title}`.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
+  const selectTask = (id: number) => { lastSelection.current = id; setShowForm(false); setShowDepGraph(false); setSelectedTaskId(id) }
 
   const handleCreate = () => {
     if (!fTitle.trim()) return
@@ -97,7 +78,7 @@ export function TasksPage() {
         onSuccess: () => {
           setFTitle('')
           setFDesc('')
-          setFType('code')
+          setFType('research')
           setFEpic(undefined)
           setFMilestone(undefined)
           setFPriority(3)
@@ -133,57 +114,61 @@ export function TasksPage() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-slate-100">Tasks</h1>
+    <div className="task-workbench" data-has-selection={selectedTaskId != null}>
+      <div className="task-page-heading">
+        <div><p className="task-eyebrow">ESPACIO DE TRABAJO</p><h1>Tareas</h1><p className="task-page-description">Selecciona una tarea para revisar la evidencia, corregir el contexto o iniciar trabajo.</p></div>
         <div className="flex gap-2">
           <button
             onClick={handleToggleDepGraph}
             className={`rounded-md px-4 py-2 text-sm font-medium ${
               showDepGraph
-                ? 'bg-sky-500/20 text-sky-300'
-                : 'border border-surface-700 text-slate-300 hover:bg-surface-800'
+                ? 'bg-[var(--work-wash)] text-[var(--work-accent)]'
+                : 'border border-[var(--work-line)] text-[var(--work-ink)] hover:bg-[var(--work-paper)]'
             }`}
           >
-            Dependencies
+            Dependencias
           </button>
           <button
             onClick={() => setShowForm(!showForm)}
-            className="rounded-md bg-sky-600 px-4 py-2 text-sm font-medium text-white hover:bg-sky-500"
+            className="rounded-md bg-[var(--work-accent-fill)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--work-accent-strong)]"
           >
-            {showForm ? 'Cancel' : 'New Task'}
+            {showForm ? 'Cerrar formulario' : 'Nueva tarea'}
           </button>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="flex flex-wrap gap-3">
+      <div className="task-filters" aria-label="Filtros de tareas">
+        <label className="task-search">Buscar tarea<input type="search" value={search} onChange={event => setSearch(event.target.value)} placeholder="Título o número" /></label>
         <select
+          aria-label="Filtrar por estado"
           value={filterStatus}
           onChange={(e) => setFilterStatus(e.target.value)}
-          className="rounded-md border border-surface-700 bg-surface-900 px-3 py-1.5 text-sm text-slate-300"
+          className="rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-1.5 text-sm text-[var(--work-ink)]"
         >
-          <option value="">All statuses</option>
+          <option value="">Todos los estados</option>
           {statusOptions.filter(Boolean).map((s) => (
-            <option key={s} value={s}>{s}</option>
+            <option key={s} value={s}>{taskStatusLabels[s] ?? s}</option>
           ))}
         </select>
         <select
+          aria-label="Filtrar por épica"
           value={filterEpic ?? ''}
           onChange={(e) => setFilterEpic(e.target.value ? Number(e.target.value) : undefined)}
-          className="rounded-md border border-surface-700 bg-surface-900 px-3 py-1.5 text-sm text-slate-300"
+          className="rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-1.5 text-sm text-[var(--work-ink)]"
         >
-          <option value="">All epics</option>
+          <option value="">Todas las épicas</option>
           {(epics ?? []).map((ep) => (
             <option key={ep.id} value={ep.id}>{ep.title}</option>
           ))}
         </select>
         <select
+          aria-label="Filtrar por hito"
           value={filterMilestone ?? ''}
           onChange={(e) => setFilterMilestone(e.target.value ? Number(e.target.value) : undefined)}
-          className="rounded-md border border-surface-700 bg-surface-900 px-3 py-1.5 text-sm text-slate-300"
+          className="rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-1.5 text-sm text-[var(--work-ink)]"
         >
-          <option value="">All milestones</option>
+          <option value="">Todos los hitos</option>
           {(milestones ?? []).map((ms) => (
             <option key={ms.id} value={ms.id}>{ms.title}</option>
           ))}
@@ -192,45 +177,47 @@ export function TasksPage() {
 
       {/* Create form */}
       {showForm && (
-        <div className="rounded-lg border border-surface-700 bg-surface-800 p-4 space-y-3">
+        <div className="rounded-lg border border-[var(--work-line)] bg-[var(--work-paper)] p-4 space-y-3">
+          <label htmlFor="task-new-title" className="block text-sm">Título</label>
           <input
             type="text"
             value={fTitle}
             onChange={(e) => setFTitle(e.target.value)}
-            placeholder="Task title"
-            className="w-full rounded-md border border-surface-700 bg-surface-900 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:border-sky-500/50 focus:outline-none"
+            id="task-new-title" placeholder="Qué necesitas comprobar o construir"
+            className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] placeholder-slate-600 focus:border-sky-500/50 focus:outline-none"
             autoFocus
           />
+          <label htmlFor="task-new-description" className="block text-sm">Descripción</label>
           <textarea
             value={fDesc}
             onChange={(e) => setFDesc(e.target.value)}
-            placeholder="Description (optional)"
+            id="task-new-description" placeholder="Contexto, ejemplo y resultado esperado"
             rows={3}
-            className="w-full rounded-md border border-surface-700 bg-surface-900 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:border-sky-500/50 focus:outline-none"
+            className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] placeholder-slate-600 focus:border-sky-500/50 focus:outline-none"
           />
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
             <div>
-              <label className="mb-1 block text-xs text-slate-500">Type</label>
-              <select value={fType} onChange={(e) => setFType(e.target.value)} className="w-full rounded-md border border-surface-700 bg-surface-900 px-2 py-1.5 text-sm text-slate-300">
+              <label htmlFor="task-new-type" className="mb-1 block text-xs text-[var(--work-muted)]">Tipo</label>
+              <select id="task-new-type" value={fType} onChange={(e) => setFType(e.target.value)} className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-2 py-1.5 text-sm text-[var(--work-ink)]">
                 {typeOptions.map((t) => <option key={t} value={t}>{t}</option>)}
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-xs text-slate-500">Priority</label>
-              <select value={fPriority} onChange={(e) => setFPriority(Number(e.target.value))} className="w-full rounded-md border border-surface-700 bg-surface-900 px-2 py-1.5 text-sm text-slate-300">
+              <label htmlFor="task-new-priority" className="mb-1 block text-xs text-[var(--work-muted)]">Prioridad</label>
+              <select id="task-new-priority" value={fPriority} onChange={(e) => setFPriority(Number(e.target.value))} className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-2 py-1.5 text-sm text-[var(--work-ink)]">
                 {[1, 2, 3, 4, 5].map((v) => <option key={v} value={v}>{v}</option>)}
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-xs text-slate-500">Complexity</label>
-              <select value={fComplexity} onChange={(e) => setFComplexity(e.target.value)} className="w-full rounded-md border border-surface-700 bg-surface-900 px-2 py-1.5 text-sm text-slate-300">
+              <label htmlFor="task-new-complexity" className="mb-1 block text-xs text-[var(--work-muted)]">Complejidad</label>
+              <select id="task-new-complexity" value={fComplexity} onChange={(e) => setFComplexity(e.target.value)} className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-2 py-1.5 text-sm text-[var(--work-ink)]">
                 {complexityOptions.map((c) => <option key={c} value={c}>{c}</option>)}
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-xs text-slate-500">Epic</label>
-              <select value={fEpic ?? ''} onChange={(e) => setFEpic(e.target.value ? Number(e.target.value) : undefined)} className="w-full rounded-md border border-surface-700 bg-surface-900 px-2 py-1.5 text-sm text-slate-300">
-                <option value="">None</option>
+              <label htmlFor="task-new-epic" className="mb-1 block text-xs text-[var(--work-muted)]">Épica</label>
+              <select id="task-new-epic" value={fEpic ?? ''} onChange={(e) => setFEpic(e.target.value ? Number(e.target.value) : undefined)} className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-2 py-1.5 text-sm text-[var(--work-ink)]">
+                <option value="">Sin épica</option>
                 {(epics ?? []).map((ep) => <option key={ep.id} value={ep.id}>{ep.title}</option>)}
               </select>
             </div>
@@ -238,14 +225,14 @@ export function TasksPage() {
           {/* Depends on multi-select */}
           {(tasks ?? []).length > 0 && (
             <div>
-              <label className="mb-1 block text-xs text-slate-500">Depends on (select tasks this blocks on)</label>
-              <div className="flex flex-wrap gap-1.5 rounded-md border border-surface-700 bg-surface-900 p-2 max-h-32 overflow-y-auto">
+              <label className="mb-1 block text-xs text-[var(--work-muted)]">Tareas que deben resolverse antes</label>
+              <div className="flex flex-wrap gap-1.5 rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] p-2 max-h-32 overflow-y-auto">
                 {(tasks ?? []).map((t) => {
                   const selected = fDependsOn.includes(t.id)
                   return (
                     <button
                       key={t.id}
-                      type="button"
+                      type="button" aria-pressed={selected}
                       onClick={() =>
                         setFDependsOn((prev) =>
                           selected ? prev.filter((id) => id !== t.id) : [...prev, t.id],
@@ -253,8 +240,8 @@ export function TasksPage() {
                       }
                       className={`rounded-full px-2 py-0.5 text-xs font-medium transition-colors ${
                         selected
-                          ? 'bg-sky-500/30 text-sky-300'
-                          : 'bg-surface-700 text-slate-400 hover:bg-surface-700/80'
+                          ? 'bg-[var(--work-wash)] text-[var(--work-accent)]'
+                          : 'bg-[var(--work-wash)] text-[var(--work-muted)] hover:bg-[var(--work-wash)]'
                       }`}
                     >
                       #{t.id} {t.title.length > 30 ? t.title.slice(0, 30) + '...' : t.title}
@@ -263,8 +250,8 @@ export function TasksPage() {
                 })}
               </div>
               {fDependsOn.length > 0 && (
-                <div className="mt-1 text-xs text-slate-500">
-                  Selected: {fDependsOn.map((id) => `#${id}`).join(', ')}
+                <div className="mt-1 text-xs text-[var(--work-muted)]">
+                  Seleccionadas: {fDependsOn.map((id) => `#${id}`).join(', ')}
                 </div>
               )}
             </div>
@@ -272,72 +259,45 @@ export function TasksPage() {
           <button
             onClick={handleCreate}
             disabled={!fTitle.trim() || createTask.isPending}
-            className="rounded-md bg-sky-600 px-4 py-2 text-sm font-medium text-white hover:bg-sky-500 disabled:opacity-50"
+            className="rounded-md bg-[var(--work-accent-fill)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--work-accent-strong)] disabled:opacity-50"
           >
-            {createTask.isPending ? 'Creating...' : 'Create Task'}
+            {createTask.isPending ? 'Creando…' : 'Crear tarea'}
           </button>
+          {createTask.error && <p role="alert" className="task-error">No se confirmó la creación. {createTask.error.message}</p>}
         </div>
       )}
 
       {/* Dependency Graph */}
       {showDepGraph && tasks && tasks.length > 0 && (
-        <div className="rounded-lg border border-surface-700 bg-surface-800 p-4">
+        <div className="rounded-lg border border-[var(--work-line)] bg-[var(--work-paper)] p-4">
           <DependencyGraph
             tasks={tasks}
             dependencies={allDeps}
             selectedTaskId={selectedTaskId ?? undefined}
-            onSelectTask={(id) => setSelectedTaskId(id)}
+            onSelectTask={selectTask}
           />
         </div>
       )}
 
-      {/* Task list */}
-      {(!tasks || tasks.length === 0) ? (
-        <EmptyState title="No tasks" description="Create a task or adjust your filters." />
-      ) : (
-        <div className="space-y-2">
-          {tasks.map((task) => (
-            <button
-              key={task.id}
-              onClick={() => setSelectedTaskId(task.id)}
-              className="flex w-full items-center gap-3 rounded-lg border border-surface-700 bg-surface-800 p-3 text-left transition-colors hover:border-surface-700/80 hover:bg-surface-700/50"
-            >
-              <span className="shrink-0 font-mono text-xs text-slate-500">#{task.id}</span>
-              <Badge variant={statusVariant[task.status] || 'neutral'}>{task.status}</Badge>
-              <Badge variant={typeVariant[task.type] || 'neutral'}>{task.type}</Badge>
-              <span className="min-w-0 flex-1 truncate text-sm text-slate-200">{task.title}</span>
-              {task.priority != null && (
-                <span className={`text-xs font-medium ${PRIORITY_COLORS[task.priority] || ''}`}>P{task.priority}</span>
-              )}
-              {task.assigned_to && (
-                <span className="text-xs text-slate-500">{task.assigned_to}</span>
-              )}
-              {['backlog', 'pending'].includes(task.status) && (
-                <span
-                  role="button"
-                  onClick={(e) => { e.stopPropagation(); setDeleteId(task.id) }}
-                  className="text-xs text-red-400 hover:text-red-300"
-                >
-                  Del
-                </span>
-              )}
-            </button>
-          ))}
-        </div>
-      )}
-
-      {selectedTaskId != null && (
-        <TaskDetailModal taskId={selectedTaskId} onClose={() => setSelectedTaskId(null)} />
-      )}
+      <div className="task-split">
+        <section className="task-index" aria-label="Elegir tarea">
+          <div className="task-index-heading"><h2>Cola de trabajo</h2><span>{isLoading ? 'Consultando…' : error ? 'Sin confirmar' : `${visibleTasks.length} visibles`}</span></div>
+          {!isLoading && !error && selectedTaskId != null && !visibleTasks.some(task => task.id === selectedTaskId) && <p className="task-empty">La tarea abierta queda fuera de estos filtros.</p>}
+          {isLoading ? <div className="task-empty" role="status"><LoadingSpinner />Cargando la lista…</div> : error ? <div role="alert" className="task-error"><p>No se pudo consultar la lista. {error.message}</p><button className="task-secondary" onClick={() => refetch()}>Volver a consultar</button></div> : visibleTasks.length === 0 ? <p className="task-empty">{tasks?.length ? 'No hay tareas que coincidan con esta búsqueda.' : 'No hay tareas con estos filtros. Puedes crear una o cambiar los filtros.'}</p> : <TaskQueue tasks={visibleTasks} selectedTaskId={selectedTaskId} onSelect={selectTask} onDelete={setDeleteId} />}
+          {deleteTask.error && <p role="alert" className="task-error">No se pudo eliminar la tarea. {deleteTask.error.message}</p>}
+        </section>
+        {selectedTaskId != null ? <TaskInspector key={selectedTaskId} taskId={selectedTaskId} onClose={() => setSelectedTaskId(null)} /> : <section id="task-detail" className="task-idle" aria-label="Trabajo de la tarea"><p className="task-eyebrow">EMPIEZA POR UNA PREGUNTA</p><h2>Elige una tarea para trabajar</h2><p>Aquí podrás leer la propuesta, contrastar las fuentes y corregir el contexto. Elegir una tarea no inicia una ejecución.</p></section>}
+      </div>
 
       <ConfirmDialog
         open={deleteId != null}
-        title="Delete Task"
-        message="Are you sure you want to delete this task?"
-        confirmLabel="Delete"
+        title="Eliminar tarea"
+        message={deleteTask.error ? `No se pudo eliminar la tarea. ${deleteTask.error.message}` : 'Se eliminará esta tarea. Si tiene una ejecución pendiente de cierre, primero debe resolverse.'}
+        confirmLabel="Eliminar"
+        cancelLabel="Conservar tarea"
         danger
         onConfirm={() => {
-          if (deleteId) deleteTask.mutate(deleteId, { onSettled: () => setDeleteId(null) })
+          if (deleteId) deleteTask.mutate(deleteId, { onSuccess: () => { if (selectedTaskId === deleteId) setSelectedTaskId(null); setDeleteId(null) } })
         }}
         onCancel={() => setDeleteId(null)}
       />

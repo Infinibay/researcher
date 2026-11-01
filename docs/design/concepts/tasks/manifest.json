@@ -1,0 +1,174 @@
+{
+  "date": "2026-10-31",
+  "base_commit": "1daf8f6",
+  "generator": "image_gen.imagegen (built-in)",
+  "model": null,
+  "model_note": "The built-in tool did not expose its exact image model; no model identifier is inferred.",
+  "image_count": 4,
+  "selected_desktop": "editorial-inspector",
+  "selection": "../../selection.md",
+  "assets": [
+    {
+      "id": "editorial-inspector",
+      "surface": "desktop",
+      "image": "editorial-inspector.png",
+      "sha256": "c1c2149142b2c6551487f96595e4f7040709f59f46bc4b1f289b81353d950036",
+      "pixel_dimensions": [
+        1487,
+        1058
+      ],
+      "layout_target": [
+        1440,
+        1024
+      ],
+      "prompt": "editorial-inspector.prompt.txt",
+      "prompt_sha256": "220f12713f35791bf359142c82332e3d07dd232e3066a1fd77ed2dcda4826ac8",
+      "input_images": [],
+      "inspected": true
+    },
+    {
+      "id": "operational-board",
+      "surface": "desktop",
+      "image": "operational-board.png",
+      "sha256": "65b9661e8ae98cc763ec4c2908ed8f57d1d62fb8caca6ad748d13fbbd19aa36d",
+      "pixel_dimensions": [
+        1487,
+        1058
+      ],
+      "layout_target": [
+        1440,
+        1024
+      ],
+      "prompt": "operational-board.prompt.txt",
+      "prompt_sha256": "31ce52800e1c07868d1b59ea4e4b3f7f3f825f20b81f3a2288448c60fda418a2",
+      "input_images": [],
+      "inspected": true
+    },
+    {
+      "id": "research-notebook",
+      "surface": "desktop",
+      "image": "research-notebook.png",
+      "sha256": "c0b51cbd8fc8c0c60a5fc68f2283f44ede50993b2055f4d35ef3d65948817ceb",
+      "pixel_dimensions": [
+        1487,
+        1058
+      ],
+      "layout_target": [
+        1440,
+        1024
+      ],
+      "prompt": "research-notebook.prompt.txt",
+      "prompt_sha256": "6a960e2a25d65788a2001d8bb57ef9197c7a77c48aff14a69c38dbbadae5b4e4",
+      "input_images": [],
+      "inspected": true
+    },
+    {
+      "id": "editorial-inspector-mobile",
+      "surface": "mobile",
+      "image": "editorial-inspector-mobile.png",
+      "sha256": "d66ca433efd2caee5d26ead626e774165ba88d866c1293761a484c940cdbb5cb",
+      "pixel_dimensions": [
+        853,
+        1844
+      ],
+      "layout_target": [
+        390,
+        844
+      ],
+      "prompt": "editorial-inspector-mobile.prompt.txt",
+      "prompt_sha256": "a7018b24baa2bc1652720100b8270e0462338b52fa8dc6ff39a73997d2cdb8fd",
+      "input_images": [
+        "editorial-inspector.png"
+      ],
+      "inspected": true
+    }
+  ],
+  "verification": {
+    "concepts_visually_inspected": true,
+    "product_browser_capture": false,
+    "browser_error": "The browser access host is unavailable",
+    "server_render_tests": {
+      "command": "cd frontend && npm test",
+      "result": "12 passed, 0 failed; includes 3 server-rendered task inspector tests",
+      "scope": "Server-rendered HTML and existing transport/state tests, no browser interaction or screenshot acceptance."
+    },
+    "build": {
+      "command": "cd frontend && npm run build",
+      "result": "TypeScript and Vite passed",
+      "warnings": [
+        "Existing outdated Browserslist data",
+        "Existing bundle chunk above 500 kB"
+      ]
+    },
+    "contrast_scope": "Only the listed static palette pairs; not a WCAG conformance claim.",
+    "contrast": [
+      {
+        "pair": "ink / paper",
+        "foreground": "#242d2a",
+        "background": "#fffefa",
+        "ratio": 14.02
+      },
+      {
+        "pair": "muted / paper",
+        "foreground": "#59655f",
+        "background": "#fffefa",
+        "ratio": 6.03
+      },
+      {
+        "pair": "accent / paper",
+        "foreground": "#24533e",
+        "background": "#fffefa",
+        "ratio": 8.74
+      },
+      {
+        "pair": "white / primary button",
+        "foreground": "#ffffff",
+        "background": "#24533e",
+        "ratio": 8.82
+      },
+      {
+        "pair": "caution / paper",
+        "foreground": "#805115",
+        "background": "#fffefa",
+        "ratio": 6.7
+      },
+      {
+        "pair": "error / paper",
+        "foreground": "#9f2937",
+        "background": "#fffefa",
+        "ratio": 7.31
+      },
+      {
+        "pair": "review status",
+        "foreground": "#754b12",
+        "background": "#f9eacb",
+        "ratio": 6.37
+      }
+    ],
+    "application_generation_turns_this_checkpoint": 0,
+    "image_generation_calls_this_checkpoint": 4,
+    "metered_api_fallback_used": false,
+    "node_version": "v24.22.2",
+    "log_sha256": {
+      "task-design-tests.log": "12c1bb0da1835f6b5b248a6a6ee2f6e82e0d04162bda8ba990348f80a26114e0",
+      "task-design-build.log": "bc60b3c836548cb188ee1fc01d0b63f445fca591e7521451f9be80e35c2b5b38",
+      "task-design-red.log": "aa8ecdbb1632b1ddefeb126bace17bf43885045b0c3dcca6c82c346a52f75b8f",
+      "task-design-error-confirmed-red.log": "e5493fb367857b707f56c5e6ae49c689c39a450032f2d0bc52e0a89a82863721",
+      "task-design-error-green.log": "394a1369322f3b111ed630c75710398f3d02f2ca18910f2c2b90af85049f940c"
+    },
+    "source_sha256": {
+      "frontend/src/App.tsx": "22475dfa01eb13c28a4aa4f8eb695d66f581ebbd219d97acc7ee43ef66e82076",
+      "frontend/src/components/layout/Header.tsx": "82f1ccc43ec170ff3702f2b95e0af24b7790d148931de426a8c5bcb2602af50b",
+      "frontend/src/components/layout/Sidebar.tsx": "357653a2a5b9222e7f847608f931002d92a07f79fde11d5b9e5dde4c774085c6",
+      "frontend/src/components/pages/TasksPage.tsx": "6b0e69baf5e76ef5787ffd0bcbd2cd256cb2fc5dfa4ce44e4564ab83af1cfb57",
+      "frontend/src/components/tasks/TaskInspector.tsx": "d7ff14f4544b7bacf4b7753d5eeb6e6fc04bdeb09be0ef8da5d743626f1e75d7",
+      "frontend/src/components/tasks/TaskQueue.tsx": "8ead3da22961bff84c6c5e702c5ac37567ebd56c6de7ed79d9ff6d5438c596fd",
+      "frontend/src/components/tasks/TaskRunWorkspace.tsx": "1a11f0ac9fafdf7bde3311419a72cb9febda00cb13fec6bca56617d52fe517a2",
+      "frontend/src/styles/tasks.css": "da5b52805e3eaac215a70339f489e5da4815c9285eff8cc2104187498f9152b8",
+      "frontend/src/styles/workspace.css": "4e58537badbdd7c6fd103ef20e401a5f2a8d7cb9d64d76e589ccca80e057829c",
+      "frontend/tests/task-design-fixture.tsx": "e958a4545945281e38cd647f78e7627c0643a8f2d6cda956c2127c48fd40f448",
+      "frontend/tests/task-design.test.ts": "28ff53ae9c2ae32b1d4dddf4a80b72d52ce03e4913f4e10c7a592a4eb75ca854",
+      "frontend/src/index.css": "34dca18bbd2b43df40b5c3c43c6feefebb11c18f1ef9c0c1a9a36f17b65c29e8"
+    }
+  }
+}

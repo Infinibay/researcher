@@ -456,3 +456,94 @@ Start the 36 desktop concepts plus 12 mobile references even if browser access
 remains absent; then select, implement and verify all screens/accessibility when
 available. Full synchronization and final independent whole-branch review remain.
 No goal complete/blocked/paused status; no accepted permanent baseline failures.
+
+
+## Visual task pilot checkpoint
+
+- Previous goal turn was an informational model-configuration answer, with no
+  authoritative implementation change. Revalidated the 1daf8f6 recovery commit,
+  clean tracked worktree and full plan, then took the next safe design action.
+  The full objective is unchanged; this checkpoint is progress, not completion.
+- Applied imagegen, Product Design ideate/image-to-code and inline executing-plans.
+  Product Design preflight has no saved visual context. CUA freshly returned no
+  apps/browsers and “The browser access host is unavailable”. No Playwright or
+  alternate UI automation was used; product screenshot audit remains pending.
+- Ruling: defer unavailable source capture and prepare the explicitly requested
+  new design from the code inventory and plan. Cost: rendered density, behavior
+  and visual regressions must be checked and corrected once a browser is available.
+  No concept is represented as a screenshot of the current product.
+- Generated and inspected three independent desktop concepts for /tasks: editorial
+  list/inspector, operational board and research notebook. Selected the editorial
+  list/inspector using the plan's weighted criteria; selection.md records scores,
+  tradeoffs and corrections. Ruling: select without asking for approval per screen,
+  as explicitly delegated by the user. Cost: a taste mismatch remains correctable
+  against concrete images and implementation.
+- Generated and inspected one mobile adaptation with the selected image attached
+  as reference. Four original PNGs, exact prompt texts, intrinsic dimensions and
+  SHA-256 hashes are stored in docs/design/concepts/tasks. Built-in Image Gen does
+  not return the exact image model; manifest model is NULL, with that limitation
+  explicit. No CLI/API-key fallback or inferred image-model identifier.
+- Ruling: preserve runtime truth over an incorrect mock control. The desktop image
+  enabled Start while a proposal awaited review; production keeps its existing
+  canStart guard. Context correction and a fresh instruction are separate actions.
+  The mobile concept reflects that correction. Synthetic design data stays out of
+  production. Cost: fidelity comparisons must distinguish intentional contract
+  corrections from accidental layout drift.
+- Replaced the task modal with an embedded labelled TaskInspector, a selectable
+  task index, search and filters, a readable paper/ink/green theme and responsive
+  task/list views. Sources and context become a secondary reading area that stacks
+  when space is limited. Existing instruction/answer/correction/recovery identities
+  and mutation paths remain intact. New tasks default to research, the currently
+  supported native task type; the other types remain explicitly available.
+- Project-keyed workspace remount prevents carrying the selected task or drafts to
+  another project. List loading/error/filter changes keep the selected inspector
+  mounted. Delete is a separate labelled button instead of a nested interactive
+  span. Mutation errors remain visible; title/description edits close on success.
+- Added a shared responsive navigation shell with a native popover menu, skip link,
+  explicit project/activity labels and mobile activity overlay. Legacy project
+  Start/Stop and other eleven page bodies still need their full migrations/redesign.
+  Semantic structure is not a claim that the menu/focus/zoom is browser-verified.
+- Two inspector regressions were observed RED then GREEN (embedded region and
+  proposal/context admission guard). A failed task read previously rendered an
+  endless spinner. Its SSR fixture initially exercised optimistic remount loading;
+  after correcting retryOnMount, the prior 1daf8f6 component was rechecked and
+  demonstrably failed the error test. Current inspector passes and provides retry
+  plus return-to-list. Tests use actual React/query components via Vite SSR, not
+  screenshot or browser emulation.
+- Final frontend suite: 12 passed, 0 failed. TypeScript/Vite build passed, with
+  existing Browserslist and chunk-size warnings. Seven listed static color pairs
+  exceed 4.5:1 (minimum 6.03); this is not full WCAG acceptance. Exact source/log
+  hashes and scope are recorded in the concept manifest. No backend code changed;
+  the earlier backend suite remains red with its 100 recorded baseline failures,
+  not reclassified as accepted or fixed by this frontend run.
+- Application generative evaluation turns this checkpoint: zero. Four independent
+  built-in image-generation calls; billing/model details not exposed by that tool
+  are not inferred. No user database was migrated or populated. No model/test/server
+  process is intentionally left running for a nonexistent browser handoff.
+- Visual inventory now has 3/36 desktop concepts and 1/12 mobile adaptations, one
+  selected pilot in code and 0/12 visually accepted routes. design-qa.md explicitly
+  says final result: blocked for visual verification. Coverage remains in_progress;
+  the full goal remains active.
+
+## Next brief after the visual task pilot
+
+Continue the FULL modernization objective. Do not regenerate the four saved task
+concepts or rebuild the completed research conversation/questions/same-origin
+recovery protocol. When browser access exists, capture the old/pilot flow with
+synthetic data, compare against the selected desktop/mobile references, fix layout,
+focus, keyboard, long/empty/error/correction/recovery states and perform human
+comprehension checks. All eleven other routes still need three concepts each,
+one mobile adaptation, reasoned selection, implementation and acceptance; shared
+panels/dialogs need additional coverage. Structured explanation/diagram blocks and
+accessible rendering remain pending. No complete-design or full-WCAG claim.
+Meanwhile finish command-peer ownership and quiescence distinct from unknown exit
+code, remaining transport lifetime assumptions, persisted repository admission,
+explicit queued retry and structured failure explanations. Implement cross-database
+workspace exclusion, project lifecycle/delete ownership, retained lifetime budgets,
+verified deployment handoff/restore generation, and all legacy engine/role/tool
+migrations. Complete all 71 tool families, Git/review/CI candidate acceptance,
+subscription-only auxiliary inference, prompt/book-skill inventory and evals,
+backup/restore/bootstrap, full synchronization and final fresh whole-branch review.
+Resolve or replace the 100 baseline failures with evidence; they are not permanently
+accepted. Model selection remains global JSON only. No goal complete/paused/blocked
+status while meaningful work remains.

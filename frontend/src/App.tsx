@@ -1,3 +1,4 @@
+import './styles/workspace.css'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useWebSocketSync } from './hooks/useWebSocketSync'
 import { useActivityFeedStore } from './stores/activityFeed'
@@ -23,12 +24,16 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className="flex h-screen overflow-hidden">
-        <Sidebar />
-        <div className="flex flex-1 flex-col overflow-hidden">
+      <div className="app-shell flex h-dvh overflow-hidden">
+        <div className="workspace-sidebar"><Sidebar /></div>
+        <div id="workspace-menu" popover="auto" className="workspace-mobile-nav">
+          <button className="workspace-menu-close" popoverTarget="workspace-menu" popoverTargetAction="hide">Cerrar menú</button>
+          <Sidebar onNavigate={() => document.getElementById('workspace-menu')?.hidePopover()} />
+        </div>
+        <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
           <Header />
-          <div className="flex flex-1 overflow-hidden">
-            <main className="flex-1 overflow-auto p-6">
+          <div className="workspace-body relative flex flex-1 overflow-hidden">
+            <main id="main-content" tabIndex={-1} className="workspace-content min-w-0 flex-1 overflow-auto p-6">
               <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/projects" element={<ProjectsPage />} />
@@ -46,7 +51,7 @@ export default function App() {
               </Routes>
             </main>
             {feedOpen && (
-              <aside className="w-80 shrink-0 border-l border-surface-700 overflow-hidden">
+              <aside aria-label="Actividad del proyecto" className="workspace-feed w-80 shrink-0 border-l border-surface-700 overflow-hidden">
                 <ActivityFeed />
               </aside>
             )}

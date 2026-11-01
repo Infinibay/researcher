@@ -37,10 +37,13 @@ export function Header() {
     : 'inactive'
 
   return (
-    <header className="flex h-16 items-center justify-between border-b border-surface-700 bg-surface-900 px-6">
-      <div className="flex items-center gap-4" ref={ref}>
+    <header className="workspace-header flex h-16 shrink-0 items-center justify-between border-b border-surface-700 bg-surface-900 px-6">
+      <a href="#main-content" className="workspace-skip">Ir al contenido</a>
+      <button className="workspace-menu-toggle" popoverTarget="workspace-menu">Menú</button>
+      <div className="workspace-project-select flex min-w-0 items-center gap-4" ref={ref}>
         <div className="relative">
           <button
+            aria-expanded={dropdownOpen} aria-controls="project-options" aria-label="Seleccionar proyecto"
             onClick={() => setDropdownOpen(!dropdownOpen)}
             className="flex items-center gap-2 rounded-md border border-surface-700 px-3 py-1.5 text-sm text-slate-200 hover:bg-surface-800"
           >
@@ -50,14 +53,14 @@ export function Header() {
                 {activeProject.name}
               </>
             ) : (
-              <span className="text-slate-500">Select project...</span>
+              <span className="text-slate-500">Elegir proyecto…</span>
             )}
             <svg className="ml-1 h-4 w-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
             </svg>
           </button>
           {dropdownOpen && (
-            <div className="absolute left-0 top-full z-30 mt-1 w-64 rounded-md border border-surface-700 bg-surface-800 py-1 shadow-xl">
+            <div id="project-options" className="absolute left-0 top-full z-30 mt-1 w-64 rounded-md border border-surface-700 bg-surface-800 py-1 shadow-xl">
               {projects.length === 0 && (
                 <div className="px-3 py-2 text-sm text-slate-500">No projects</div>
               )}
@@ -92,7 +95,7 @@ export function Header() {
                 disabled={stopProject.isPending}
                 className="rounded-md bg-red-600/80 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-600 disabled:opacity-50"
               >
-                Stop
+                  Detener proyecto
               </button>
             ) : (
               <button
@@ -100,7 +103,7 @@ export function Header() {
                 disabled={startProject.isPending || activeProject.status === 'completed'}
                 className="rounded-md bg-emerald-600/80 px-3 py-1.5 text-xs font-medium text-white hover:bg-emerald-600 disabled:opacity-50"
               >
-                Start
+                  Iniciar proyecto
               </button>
             )}
           </>
@@ -108,6 +111,7 @@ export function Header() {
 
         <button
           onClick={toggleFeed}
+          aria-label="Actividad del proyecto" aria-pressed={feedOpen}
           className={`relative rounded-md p-1.5 text-slate-400 hover:bg-surface-800 hover:text-slate-200 ${feedOpen ? 'bg-surface-800 text-sky-400' : ''}`}
           title="Toggle activity feed"
         >

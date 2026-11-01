@@ -887,20 +887,53 @@
       "evidence": []
     },
     "36_desktop_concepts": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/design/inventory.md",
+        "docs/design/selection.md",
+        "docs/design/concepts/tasks/manifest.json"
+      ],
+      "remaining": [
+        "Complete the other eleven routes and shared components; pilot browser/interaction/human-comprehension acceptance remains pending."
+      ]
     },
     "12_mobile_adaptations": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/design/inventory.md",
+        "docs/design/selection.md",
+        "docs/design/concepts/tasks/manifest.json"
+      ],
+      "remaining": [
+        "Complete the other eleven routes and shared components; pilot browser/interaction/human-comprehension acceptance remains pending."
+      ]
     },
     "design_selection": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/design/inventory.md",
+        "docs/design/selection.md",
+        "docs/design/concepts/tasks/manifest.json"
+      ],
+      "remaining": [
+        "Complete the other eleven routes and shared components; pilot browser/interaction/human-comprehension acceptance remains pending."
+      ]
     },
     "all_screens_implemented": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/design/inventory.md",
+        "docs/design/selection.md",
+        "docs/design/concepts/tasks/manifest.json",
+        "frontend/src/components/pages/TasksPage.tsx",
+        "frontend/src/components/tasks/TaskInspector.tsx",
+        "frontend/src/components/tasks/TaskQueue.tsx",
+        "frontend/src/styles/tasks.css",
+        "design-qa.md"
+      ],
+      "remaining": [
+        "Complete the other eleven routes and shared components; pilot browser/interaction/human-comprehension acceptance remains pending."
+      ]
     },
     "accessibility_e2e": {
       "status": "pending",

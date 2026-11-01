@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Shared semantic defaults; feature themes can override them locally. */
+:root {
+  --work-ink: #e2e8f0;
+  --work-muted: #94a3b8;
+  --work-paper: #0f172a;
+  --work-wash: #1e293b;
+  --work-line: #475569;
+  --work-accent: #7dd3fc;
+  --work-accent-fill: #0369a1;
+  --work-accent-strong: #075985;
+  --work-error: #fda4af;
+  --work-caution: #fde68a;
+}
+
 body {
   @apply bg-surface-900 text-slate-200 font-sans antialiased;
   margin: 0;

@@ -1,16 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useTask, useTaskComments, useAddTaskComment, useUpdateTask, useTaskDependencies, useSetTaskDependencies, useTasks } from '../../hooks/useTasks'
 import { useProjectStore } from '../../stores/project'
-import { Badge } from '../common/Badge'
+import { taskStatusLabels } from './TaskQueue'
 import { LoadingSpinner } from '../common/LoadingSpinner'
 import { MarkdownRenderer } from '../common/MarkdownRenderer'
-import { STATUS_COLORS, PRIORITY_COLORS } from '../../utils/colors'
 import { formatRelative } from '../../utils/date'
 import { TaskRunWorkspace } from './TaskRunWorkspace'
 
 const taskStatuses = ['backlog', 'pending', 'in_progress', 'review_ready', 'rejected', 'done', 'blocked']
 
-export function TaskDetailModal({
+export function TaskInspector({
   taskId,
   onClose,
 }: {
@@ -18,7 +17,7 @@ export function TaskDetailModal({
   onClose: () => void
 }) {
   const projectId = useProjectStore((s) => s.activeProjectId)
-  const { data: task, isLoading } = useTask(taskId)
+  const { data: task, isLoading, error, refetch } = useTask(taskId)
   const { data: comments } = useTaskComments(taskId)
   const { data: dependencies } = useTaskDependencies(taskId)
   const { data: allTasks } = useTasks(projectId)
@@ -26,7 +25,9 @@ export function TaskDetailModal({
   const updateTask = useUpdateTask()
   const setDependencies = useSetTaskDependencies()
 
-  const [tab, setTab] = useState<'details' | 'execution' | 'comments' | 'dependencies'>('details')
+  const [tab, setTab] = useState<'details' | 'execution' | 'comments' | 'dependencies'>('execution')
+  const heading = useRef<HTMLHeadingElement>(null)
+  const panel = useRef<HTMLElement>(null)
   const [commentText, setCommentText] = useState('')
   const [commentType, setCommentType] = useState<string>('comment')
   const [editingDeps, setEditingDeps] = useState(false)
@@ -36,13 +37,7 @@ export function TaskDetailModal({
   const [draftTitle, setDraftTitle] = useState('')
   const [draftDesc, setDraftDesc] = useState('')
 
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
-    }
-    window.addEventListener('keydown', handler)
-    return () => window.removeEventListener('keydown', handler)
-  }, [onClose])
+  useEffect(() => { (heading.current ?? panel.current)?.focus({ preventScroll: true }) }, [taskId, task?.id])
 
   const handleAddComment = () => {
     if (!commentText.trim()) return
@@ -56,99 +51,100 @@ export function TaskDetailModal({
     updateTask.mutate({ id: taskId, status })
   }
 
+  const saveTitle = () => {
+    if (draftTitle.trim()) updateTask.mutate({ id: taskId, title: draftTitle.trim() }, { onSuccess: () => setEditingTitle(false) })
+  }
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div className="fixed inset-0 bg-black/60" onClick={onClose} />
-      <div className="relative z-10 flex max-h-[80vh] w-full max-w-2xl flex-col rounded-lg border border-surface-700 bg-surface-800 shadow-xl">
-        {isLoading || !task ? (
-          <div className="flex items-center justify-center p-12">
-            <LoadingSpinner />
+    <section id="task-detail" ref={panel} tabIndex={-1} role="region" aria-labelledby={`task-title-${taskId}`} className="task-inspector">
+      <div className="task-inspector-inner">
+        {error && !task ? <div className="task-inspector-content" role="alert">
+          <h2 id={`task-title-${taskId}`}>No se pudo cargar la tarea</h2>
+          <p>{error.message}</p>
+          <button className="task-secondary" onClick={() => refetch()}>Volver a consultar</button>{' · '}
+          <button className="task-back" onClick={onClose}>Volver a tareas</button>
+        </div> : isLoading || !task ? (
+          <div className="task-inspector-content">
+            <p id={`task-title-${taskId}`} role="status">Cargando la tarea…</p><LoadingSpinner />
+            <button className="task-back" onClick={onClose}>Volver a tareas</button>
           </div>
         ) : (
           <>
             {/* Header */}
-            <div className="flex items-start justify-between border-b border-surface-700 p-4">
+            <div className="task-inspector-heading">
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs text-slate-500">#{task.id}</span>
+                  <span className="font-mono text-xs text-[var(--work-muted)]">#{task.id}</span>
                   <select
+                    aria-label="Estado de la tarea"
                     value={task.status}
                     onChange={(e) => handleStatusChange(e.target.value)}
                     disabled={updateTask.isPending}
-                    className={`cursor-pointer rounded-full border-none px-2 py-0.5 text-xs font-medium focus:outline-none focus:ring-1 focus:ring-sky-500 ${STATUS_COLORS[task.status] || 'bg-surface-700 text-slate-300'}`}
+                    className={`cursor-pointer rounded-full border-none px-2 py-0.5 text-xs font-medium focus:outline-none focus:ring-1 focus:ring-[var(--work-accent)] task-status`}
                   >
                     {taskStatuses.map((s) => (
-                      <option key={s} value={s} className="bg-surface-800 text-slate-200">
-                        {s}
+                      <option key={s} value={s} className="bg-[var(--work-paper)] text-[var(--work-ink)]">
+                        {taskStatusLabels[s] ?? s}
                       </option>
                     ))}
                   </select>
-                  <Badge variant="info">{task.type}</Badge>
+                  <span className="task-status">{task.type === 'research' ? 'Investigación' : task.type}</span>
                 </div>
                 {editingTitle ? (
                   <div className="mt-1 flex items-center gap-2">
+                    <h2 id={`task-title-${taskId}`} className="sr-only">Editar tarea: {task.title}</h2>
                     <input
                       autoFocus
+                      aria-label="Título de la tarea"
                       value={draftTitle}
                       onChange={(e) => setDraftTitle(e.target.value)}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter') {
-                          updateTask.mutate({ id: taskId, title: draftTitle })
-                          setEditingTitle(false)
+                          saveTitle()
                         }
                         if (e.key === 'Escape') setEditingTitle(false)
                       }}
-                      className="flex-1 rounded-md border border-surface-600 bg-surface-900 px-2 py-1 text-lg font-semibold text-slate-100 focus:border-sky-500/50 focus:outline-none"
+                      className="flex-1 rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-2 py-1 text-lg font-semibold text-[var(--work-ink)] focus:border-sky-500/50 focus:outline-none"
                     />
                     <button
-                      onClick={() => {
-                        updateTask.mutate({ id: taskId, title: draftTitle })
-                        setEditingTitle(false)
-                      }}
-                      className="rounded bg-sky-600 px-2 py-1 text-xs text-white hover:bg-sky-500"
+                      onClick={saveTitle} disabled={!draftTitle.trim() || updateTask.isPending}
+                      className="rounded bg-[var(--work-accent-fill)] px-2 py-1 text-xs text-white hover:bg-[var(--work-accent-strong)]"
                     >
-                      Save
+                      Guardar
                     </button>
                     <button
                       onClick={() => setEditingTitle(false)}
-                      className="rounded bg-surface-700 px-2 py-1 text-xs text-slate-400 hover:bg-surface-600"
+                      className="rounded bg-[var(--work-wash)] px-2 py-1 text-xs text-[var(--work-muted)] hover:bg-[var(--work-wash)]"
                     >
-                      Cancel
+                      Cancelar
                     </button>
                   </div>
                 ) : (
                   <h2
-                    className="mt-1 cursor-pointer text-lg font-semibold text-slate-100 hover:text-sky-300"
-                    onClick={() => {
-                      setDraftTitle(task.title)
-                      setEditingTitle(true)
-                    }}
-                    title="Click to edit title"
+                    id={`task-title-${taskId}`} ref={heading} tabIndex={-1}
+                    className="task-inspector-title"
                   >
                     {task.title}
                   </h2>
                 )}
               </div>
-              <button onClick={onClose} className="ml-4 text-slate-500 hover:text-slate-300">
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
+              <button type="button" onClick={onClose} className="task-back">Volver a tareas</button>
             </div>
 
             {/* Tabs */}
-            <div className="flex border-b border-surface-700">
+            <div className="task-tabs" aria-label="Secciones de la tarea">
               {(['details', 'execution', 'comments', 'dependencies'] as const).map((t) => (
                 <button
                   key={t}
+                  type="button" aria-pressed={tab === t} aria-controls={`task-section-${taskId}`}
                   onClick={() => setTab(t)}
                   className={`px-4 py-2 text-sm font-medium capitalize ${
                     tab === t
-                      ? 'border-b-2 border-sky-400 text-sky-300'
-                      : 'text-slate-500 hover:text-slate-300'
+                      ? 'border-b-2 border-sky-400 text-[var(--work-accent)]'
+                      : 'text-[var(--work-muted)] hover:text-[var(--work-ink)]'
                   }`}
                 >
-                  {t === 'execution' ? 'Trabajo' : t}
+                  {{ execution: 'Trabajo', details: 'Detalles', comments: 'Comentarios', dependencies: 'Dependencias' }[t]}
                   {t === 'comments' && comments && ` (${comments.length})`}
                   {t === 'dependencies' && dependencies && ` (${dependencies.length})`}
                 </button>
@@ -156,47 +152,43 @@ export function TaskDetailModal({
             </div>
 
             {/* Content */}
-            <div className="flex-1 overflow-y-auto p-4">
+            <div id={`task-section-${taskId}`} className="task-inspector-content">
+              {updateTask.error && <p role="alert" className="task-error">No se confirmó el cambio. {updateTask.error.message}</p>}
               {tab === 'execution' && <TaskRunWorkspace key={`${task.project_id}:${task.id}`} projectId={task.project_id} taskId={task.id} />}
               {tab === 'details' && (
                 <div className="space-y-4">
+                  <button type="button" className="task-secondary" onClick={() => { setDraftTitle(task.title); setEditingTitle(true) }}>Editar título</button>
                   {editingDesc ? (
                     <div className="space-y-2">
                       <textarea
                         autoFocus
+                        aria-label="Descripción de la tarea"
                         value={draftDesc}
                         onChange={(e) => setDraftDesc(e.target.value)}
                         rows={8}
-                        className="w-full rounded-md border border-surface-600 bg-surface-900 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:border-sky-500/50 focus:outline-none"
+                        className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] placeholder-slate-600 focus:border-sky-500/50 focus:outline-none"
                       />
                       <div className="flex gap-2">
                         <button
                           onClick={() => {
-                            updateTask.mutate({ id: taskId, description: draftDesc })
-                            setEditingDesc(false)
+                            updateTask.mutate({ id: taskId, description: draftDesc }, { onSuccess: () => setEditingDesc(false) })
                           }}
-                          className="rounded bg-sky-600 px-3 py-1 text-xs font-medium text-white hover:bg-sky-500"
+                          className="rounded bg-[var(--work-accent-fill)] px-3 py-1 text-xs font-medium text-white hover:bg-[var(--work-accent-strong)]"
                         >
-                          Save
+                          Guardar
                         </button>
                         <button
                           onClick={() => setEditingDesc(false)}
-                          className="rounded bg-surface-700 px-3 py-1 text-xs text-slate-400 hover:bg-surface-600"
+                          className="rounded bg-[var(--work-wash)] px-3 py-1 text-xs text-[var(--work-muted)] hover:bg-[var(--work-wash)]"
                         >
-                          Cancel
+                          Cancelar
                         </button>
                       </div>
                     </div>
                   ) : task.description ? (
-                    <div
-                      className="cursor-pointer rounded p-1 hover:bg-surface-700/50"
-                      onClick={() => {
-                        setDraftDesc(task.description || '')
-                        setEditingDesc(true)
-                      }}
-                      title="Click to edit description"
-                    >
+                    <div>
                       <MarkdownRenderer content={task.description} />
+                      <button type="button" className="task-secondary" onClick={() => { setDraftDesc(task.description || ''); setEditingDesc(true) }}>Editar descripción</button>
                     </div>
                   ) : (
                     <button
@@ -204,77 +196,77 @@ export function TaskDetailModal({
                         setDraftDesc('')
                         setEditingDesc(true)
                       }}
-                      className="text-sm text-slate-500 hover:text-sky-400"
+                      className="text-sm text-[var(--work-muted)] hover:text-[var(--work-accent)]"
                     >
-                      + Add description
+                      Añadir descripción
                     </button>
                   )}
 
                   <div className="grid grid-cols-2 gap-3 text-sm">
                     {task.priority != null && (
                       <div>
-                        <span className="text-slate-500">Priority: </span>
-                        <span className={PRIORITY_COLORS[task.priority] || 'text-slate-300'}>
+                        <span className="text-[var(--work-muted)]">Prioridad: </span>
+                        <span className="font-medium text-[var(--work-ink)]">
                           {task.priority}
                         </span>
                       </div>
                     )}
                     {task.estimated_complexity && (
                       <div>
-                        <span className="text-slate-500">Complexity: </span>
-                        <span className="text-slate-300">{task.estimated_complexity}</span>
+                        <span className="text-[var(--work-muted)]">Complejidad: </span>
+                        <span className="text-[var(--work-ink)]">{task.estimated_complexity}</span>
                       </div>
                     )}
                     {task.assigned_to && (
                       <div>
-                        <span className="text-slate-500">Assigned to: </span>
-                        <span className="text-slate-300">{task.assigned_to}</span>
+                        <span className="text-[var(--work-muted)]">Responsable: </span>
+                        <span className="text-[var(--work-ink)]">{task.assigned_to}</span>
                       </div>
                     )}
                     {task.reviewer && (
                       <div>
-                        <span className="text-slate-500">Reviewer: </span>
-                        <span className="text-slate-300">{task.reviewer}</span>
+                        <span className="text-[var(--work-muted)]">Revisor: </span>
+                        <span className="text-[var(--work-ink)]">{task.reviewer}</span>
                       </div>
                     )}
                     {task.branch_name && (
                       <div className="col-span-2">
-                        <span className="text-slate-500">Branch: </span>
-                        <code className="text-sky-300">{task.branch_name}</code>
+                        <span className="text-[var(--work-muted)]">Rama: </span>
+                        <code className="text-[var(--work-accent)]">{task.branch_name}</code>
                       </div>
                     )}
                     {task.epic_id && (
                       <div>
-                        <span className="text-slate-500">Epic: </span>
-                        <span className="text-slate-300">#{task.epic_id}</span>
+                        <span className="text-[var(--work-muted)]">Épica: </span>
+                        <span className="text-[var(--work-ink)]">#{task.epic_id}</span>
                       </div>
                     )}
                     {task.milestone_id && (
                       <div>
-                        <span className="text-slate-500">Milestone: </span>
-                        <span className="text-slate-300">#{task.milestone_id}</span>
+                        <span className="text-[var(--work-muted)]">Hito: </span>
+                        <span className="text-[var(--work-ink)]">#{task.milestone_id}</span>
                       </div>
                     )}
                     {(task.retry_count ?? 0) > 0 && (
                       <div>
-                        <span className="text-slate-500">Retries: </span>
-                        <span className="text-amber-300">{task.retry_count}</span>
+                        <span className="text-[var(--work-muted)]">Reintentos: </span>
+                        <span className="text-[var(--work-caution)]">{task.retry_count}</span>
                       </div>
                     )}
                   </div>
 
                   {/* Status changer */}
                   <div>
-                    <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">Change status</span>
+                    <span className="text-xs font-medium text-[var(--work-muted)] uppercase tracking-wider">Cambiar estado</span>
                     <div className="mt-1 flex flex-wrap gap-1">
                       {taskStatuses.map((s) => (
                         <button
                           key={s}
                           disabled={s === task.status || updateTask.isPending}
                           onClick={() => handleStatusChange(s)}
-                          className={`rounded-full px-2 py-0.5 text-xs font-medium disabled:opacity-30 ${STATUS_COLORS[s] || ''}`}
+                          className={`rounded-full px-2 py-0.5 text-xs font-medium disabled:opacity-30 task-status`}
                         >
-                          {s}
+                          {taskStatusLabels[s] ?? s}
                         </button>
                       ))}
                     </div>
@@ -287,18 +279,18 @@ export function TaskDetailModal({
                   {/* Comments list */}
                   <div className="space-y-3">
                     {comments?.length === 0 && (
-                      <p className="text-sm text-slate-500">No comments yet</p>
+                      <p className="text-sm text-[var(--work-muted)]">No hay comentarios.</p>
                     )}
                     {comments?.map((c) => (
-                      <div key={c.id} className="rounded-md border border-surface-700 bg-surface-900 p-3">
-                        <div className="flex items-center gap-2 text-xs text-slate-500">
-                          <span className="font-medium text-slate-300">{c.author}</span>
-                          <Badge variant={c.comment_type === 'approval' ? 'success' : c.comment_type === 'change_request' ? 'warning' : 'neutral'}>
+                      <div key={c.id} className="rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] p-3">
+                        <div className="flex items-center gap-2 text-xs text-[var(--work-muted)]">
+                          <span className="font-medium text-[var(--work-ink)]">{c.author}</span>
+                          <span className="task-status">
                             {c.comment_type}
-                          </Badge>
+                          </span>
                           {c.created_at && <span>{formatRelative(c.created_at)}</span>}
                         </div>
-                        <div className="mt-2 text-sm text-slate-300">
+                        <div className="mt-2 text-sm text-[var(--work-ink)]">
                           <MarkdownRenderer content={c.content} />
                         </div>
                       </div>
@@ -306,31 +298,33 @@ export function TaskDetailModal({
                   </div>
 
                   {/* Add comment */}
-                  <div className="space-y-2 border-t border-surface-700 pt-4">
+                  <div className="space-y-2 border-t border-[var(--work-line)] pt-4">
                     <div className="flex gap-2">
                       <select
+                        aria-label="Tipo de comentario"
                         value={commentType}
                         onChange={(e) => setCommentType(e.target.value)}
-                        className="rounded-md border border-surface-700 bg-surface-900 px-2 py-1 text-sm text-slate-300"
+                        className="rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-2 py-1 text-sm text-[var(--work-ink)]"
                       >
-                        <option value="comment">Comment</option>
-                        <option value="change_request">Change Request</option>
-                        <option value="approval">Approval</option>
+                        <option value="comment">Comentario</option>
+                        <option value="change_request">Solicitud de cambios</option>
+                        <option value="approval">Aprobación</option>
                       </select>
                     </div>
-                    <textarea
+                    <label htmlFor="task-new-comment" className="block text-sm">Tu comentario</label>
+                    <textarea id="task-new-comment"
                       value={commentText}
                       onChange={(e) => setCommentText(e.target.value)}
-                      placeholder="Add a comment..."
+                      placeholder="Añade un comentario…"
                       rows={3}
-                      className="w-full rounded-md border border-surface-700 bg-surface-900 px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:border-sky-500/50 focus:outline-none"
+                      className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] placeholder-slate-600 focus:border-sky-500/50 focus:outline-none"
                     />
                     <button
                       onClick={handleAddComment}
                       disabled={!commentText.trim() || addComment.isPending}
-                      className="rounded-md bg-sky-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-sky-500 disabled:opacity-50"
+                      className="rounded-md bg-[var(--work-accent-fill)] px-3 py-1.5 text-sm font-medium text-white hover:bg-[var(--work-accent-strong)] disabled:opacity-50"
                     >
-                      Add Comment
+                      Guardar comentario
                     </button>
                   </div>
                 </div>
@@ -341,8 +335,8 @@ export function TaskDetailModal({
                   {/* Current dependencies */}
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">
-                        This task depends on
+                      <span className="text-xs font-medium text-[var(--work-muted)] uppercase tracking-wider">
+                        Esta tarea depende de
                       </span>
                       <button
                         onClick={() => {
@@ -355,31 +349,31 @@ export function TaskDetailModal({
                           }
                           setEditingDeps(!editingDeps)
                         }}
-                        className="text-xs text-sky-400 hover:text-sky-300"
+                        className="text-xs text-[var(--work-accent)] hover:text-[var(--work-accent)]"
                       >
-                        {editingDeps ? 'Cancel' : 'Edit'}
+                        {editingDeps ? 'Cancelar' : 'Editar'}
                       </button>
                     </div>
 
                     {!editingDeps ? (
                       <div className="space-y-1">
                         {(dependencies ?? []).filter((d) => d.task_id === taskId).length === 0 ? (
-                          <p className="text-sm text-slate-500">No dependencies</p>
+                          <p className="text-sm text-[var(--work-muted)]">No hay dependencias.</p>
                         ) : (
                           (dependencies ?? [])
                             .filter((d) => d.task_id === taskId)
                             .map((dep) => {
                               const depTask = (allTasks ?? []).find((t) => t.id === dep.depends_on_task_id)
                               return (
-                                <div key={dep.depends_on_task_id} className="flex items-center gap-2 rounded bg-surface-900 px-3 py-2 text-sm">
-                                  <span className="font-mono text-xs text-slate-500">#{dep.depends_on_task_id}</span>
-                                  <span className="text-slate-300">
+                                <div key={dep.depends_on_task_id} className="flex items-center gap-2 rounded bg-[var(--work-paper)] px-3 py-2 text-sm">
+                                  <span className="font-mono text-xs text-[var(--work-muted)]">#{dep.depends_on_task_id}</span>
+                                  <span className="text-[var(--work-ink)]">
                                     {depTask?.title || 'Unknown task'}
                                   </span>
                                   {depTask && (
-                                    <Badge variant={depTask.status === 'done' ? 'success' : 'neutral'}>
+                                    <span className="task-status" data-status={depTask.status}>
                                       {depTask.status}
-                                    </Badge>
+                                    </span>
                                   )}
                                 </div>
                               )
@@ -388,7 +382,7 @@ export function TaskDetailModal({
                       </div>
                     ) : (
                       <div className="space-y-2">
-                        <div className="flex flex-wrap gap-1.5 rounded-md border border-surface-700 bg-surface-900 p-2 max-h-48 overflow-y-auto">
+                        <div className="flex flex-wrap gap-1.5 rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] p-2 max-h-48 overflow-y-auto">
                           {(allTasks ?? [])
                             .filter((t) => t.id !== taskId)
                             .map((t) => {
@@ -404,8 +398,8 @@ export function TaskDetailModal({
                                   }
                                   className={`rounded-full px-2 py-0.5 text-xs font-medium transition-colors ${
                                     isSelected
-                                      ? 'bg-sky-500/30 text-sky-300'
-                                      : 'bg-surface-700 text-slate-400 hover:bg-surface-700/80'
+                                      ? 'bg-[var(--work-accent-strong)]/30 text-[var(--work-accent)]'
+                                      : 'bg-[var(--work-wash)] text-[var(--work-muted)] hover:bg-[var(--work-wash)]'
                                   }`}
                                 >
                                   #{t.id} {t.title.length > 25 ? t.title.slice(0, 25) + '...' : t.title}
@@ -421,9 +415,9 @@ export function TaskDetailModal({
                             )
                           }}
                           disabled={setDependencies.isPending}
-                          className="rounded-md bg-sky-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-sky-500 disabled:opacity-50"
+                          className="rounded-md bg-[var(--work-accent-fill)] px-3 py-1.5 text-sm font-medium text-white hover:bg-[var(--work-accent-strong)] disabled:opacity-50"
                         >
-                          {setDependencies.isPending ? 'Saving...' : 'Save Dependencies'}
+                          {setDependencies.isPending ? 'Guardando…' : 'Guardar dependencias'}
                         </button>
                       </div>
                     )}
@@ -431,27 +425,27 @@ export function TaskDetailModal({
 
                   {/* Tasks blocked by this one */}
                   <div>
-                    <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">
-                      Tasks blocked by this task
+                    <span className="text-xs font-medium text-[var(--work-muted)] uppercase tracking-wider">
+                      Tareas bloqueadas por esta tarea
                     </span>
                     <div className="mt-2 space-y-1">
                       {(dependencies ?? []).filter((d) => d.depends_on_task_id === taskId).length === 0 ? (
-                        <p className="text-sm text-slate-500">No tasks are blocked by this task</p>
+                        <p className="text-sm text-[var(--work-muted)]">No hay tareas bloqueadas por esta tarea</p>
                       ) : (
                         (dependencies ?? [])
                           .filter((d) => d.depends_on_task_id === taskId)
                           .map((dep) => {
                             const blockedTask = (allTasks ?? []).find((t) => t.id === dep.task_id)
                             return (
-                              <div key={dep.task_id} className="flex items-center gap-2 rounded bg-surface-900 px-3 py-2 text-sm">
-                                <span className="font-mono text-xs text-slate-500">#{dep.task_id}</span>
-                                <span className="text-slate-300">
+                              <div key={dep.task_id} className="flex items-center gap-2 rounded bg-[var(--work-paper)] px-3 py-2 text-sm">
+                                <span className="font-mono text-xs text-[var(--work-muted)]">#{dep.task_id}</span>
+                                <span className="text-[var(--work-ink)]">
                                   {blockedTask?.title || 'Unknown task'}
                                 </span>
                                 {blockedTask && (
-                                  <Badge variant={blockedTask.status === 'done' ? 'success' : 'neutral'}>
+                                  <span className="task-status" data-status={blockedTask.status}>
                                     {blockedTask.status}
-                                  </Badge>
+                                  </span>
                                 )}
                               </div>
                             )
@@ -465,6 +459,6 @@ export function TaskDetailModal({
           </>
         )}
       </div>
-    </div>
+    </section>
   )
 }
