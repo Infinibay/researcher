@@ -43,13 +43,13 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    un cgroup real y retirada sin esperar al lock de un arranque congelado. Un
    recuperador separado cerró un hijo vivo tras SIGKILL antes de publicar PIDs y
    pérdida de la DB original. Es un ensayo de constructor de confianza; faltan
-   broker dueño de G y perfil que impida migración fuera del dominio.
+   adopción productiva e inscripción de actores; el broker interno se describe abajo.
    Ese primer broker interno ya compone reserva global, publicación, bind local
    y G para análisis Python readonly. Conserva la supervisión al cerrar el cliente,
    revoca antes de esperar SQL y bloquea reactivar el intento retirado con una lease
    local antigua. Hay recuperación real antes/después de G sin DB original y
    defensa del perfil frente a sockets/controles y forks. Falta adoptarlo en los
-   lanzadores productivos, perfiles Codex/Ken/negocio/desarrollo y aprovisionamiento.
+   lanzadores productivos, composición completa de perfiles y aprovisionamiento.
    Ya tiene adaptador asíncrono JSON-RPC con tuberías reales: cierre independiente
    de peers, Stop con trabajador reservado y recogida de arranques cancelados.
    Esto permite adoptar su transporte; no sustituye aún los lanzadores del servicio.
@@ -81,6 +81,13 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    antes de SQL. Una lectura real de cuenta ChatGPT funcionó sin thread/turn ni
    auth.json persistido. Faltan generación con Ken, WebSocket, renovación OAuth
    real y adopción de la fábrica productiva.
+   Ken publicado ya tiene perfil propio en ese broker, con identidad `ken`, fuente
+   readonly, estado `.ken` writable, modelos offline verificados y MCP SDK sobre
+   sus tuberías originales. Preparación/búsqueda/lectura reales funcionaron tanto
+   desde fuente como desde wheel extraído. El primer límite de512MiB produjo OOM;
+   con política explícita del host de2GiB pasó con pico aproximado1,3GiB. El default
+   anterior se conserva y la política compartida queda registrada antes del nacimiento.
+   Esto todavía no compone Ken/negocio/code-mode con inferencia nativa productiva.
 7. **Contexto y procedencia:** versiones al corregir o cambiar trece entradas de tarea;
    retiro de autoridad antigua; respuesta asociada a pregunta/versión; repositorio
    admitido inmutable y comienzo de cola explícito. Registro exacto de la entrada
@@ -97,9 +104,10 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    **0/12 páginas tienen aceptación visual completa**. Playwright/Chromium ya ejecuta
    los pilotos: 8 estados de escritorio y 9 móviles pasan los controles automáticos;
    salto al contenido, foco y navegación se comprobaron. Falta aceptación integral.
-10. **Migraciones/evidencia:** migraciones nuevas hasta versión 30, casos históricos,
+10. **Migraciones/evidencia:** migraciones nuevas hasta versión 31, casos históricos,
     ensayos sobre copias sintéticas y comprobación de empaquetado. El último ensayo
-    preservó 110 tablas, sus valores y rowids disponibles. No se migró una base del usuario.
+    preservó 110 tablas, sus valores y rowids disponibles. La31 conserva peers/rowids,
+    referencias y objetos personalizados y revierte fallos. No se migró una base del usuario.
 11. **Revisión independiente inicial:** plan, escenarios y mapa de consumidores fueron
     analizados con contexto limpio. Hay 71 herramientas individuales en 11 categorías.
     Esa revisión no sustituye la revisión final de toda la rama implementada.
@@ -147,14 +155,20 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 
 ## Verificación más reciente
 
-- Suite completa:1476 casos;1373 pasan,100 fallan con las mismas identidades de la
-  línea base y 3 se omiten. La suite global sigue roja.
-- Runtime:543 pasan. Las88 pruebas dirigidas incluyen12 casos del perfil privado,
-  cuatro de HTTPS/redirect con SDK real, pérdida de canal/descendientes, SQL ocupado,
-  carreras Stop/arranque, política/recibos y recogida tras fallo posterior a spawn.
-- Paquete actual:35 módulos runtime y helpers compartidos coinciden con el código.
-  El ensayo aislado inicia Codex real en NET privado, consulta metadatos sin cuenta,
-  comprueba política/manifiestos y conserva análisis hermano y cierre/recuperación.
+- Suite completa:1495 casos;1392 pasan,100 fallan con las mismas identidades de la
+  línea base y 3 se omiten. La suite global sigue roja; no hay nuevas fallas.
+- Runtime:562 pasan. Los19 casos nuevos cubren perfil/transporte Ken, MCP sobre
+  tuberías, cancelación/errores, política de recursos y migración31. También pasan
+  nueve pruebas de migración histórica tras actualizar sus fixtures de versiones.
+  La cobertura previa incluye HTTPS con SDK real, red privada, cierre, recuperación
+  y carreras Stop/arranque; sus casos siguen incluidos en la suite completa.
+- Paquete actual:36 módulos runtime, migración/registro DB y fixtures cambiadas
+  coinciden con el código. El wheel extraído importa de forma aislada y ejecuta
+  Ken publicado offline: preparación/búsqueda/lectura, dos peers cerrados, dominio
+  retirado y fuente intacta. Pico observado1,30GiB dentro de límite explícito2GiB,
+  sin OOM. La evidencia conserva además el fallo inicial por OOM a512MiB.
+  El ensayo de empaquetado anterior comprobó Codex real en NET privado y análisis
+  hermano, sin inferencia ni cuenta; no se repitió acceso a la suscripción aquí.
 - Ensayo real separado: account/read reconoce ChatGPT por el perfil privado, sin
   thread/start ni turn/start; auth.json ausente y dominio/peer/canales cerrados. No
   se guardaron tokens ni datos personales de cuenta. No prueba renovación OAuth,
@@ -187,7 +201,12 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
   siguen pendientes;0/12 rutas aceptadas. Dependencias:18 avisos npm preexistentes
   (5 bajos,3 moderados,10 altos), sin nuevos paquetes vulnerables por Playwright/axe.
 
-Evidencia actual: [perfil privado y límites](native-proxy-evidence.json),
+Evidencia actual: [resultados actuales](broker-ken-results.json),
+[Ken bajo el broker](broker-ken-evidence.json),
+[Ken publicado y memoria](broker-ken-live.json),
+[paquete de Ken](broker-ken-packaging.json),
+[contrato de Ken e integración pendiente](../architecture/broker-ken.md),
+[perfil privado y límites](native-proxy-evidence.json),
 [resultados actuales](native-proxy-results.json),
 [paquete actual](native-proxy-packaging.json),
 [metadatos autenticados](native-proxy-account-metadata.json),

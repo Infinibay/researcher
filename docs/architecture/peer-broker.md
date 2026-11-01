@@ -103,6 +103,13 @@ async with AsyncPeerBroker(broker) as owner:
 
 Este ejemplo requiere objetos de host ya aprovisionados/admitidos. No crea un
 dominio a partir de una ruta vacía ni conecta por sí solo el servicio productivo.
+
+`AsyncPeerBroker.ken` ya compone el Ken publicado con este mismo propietario.
+`broker_mcp` conecta sus tuberías al SDK MCP sin lanzar otro proceso. La política
+`BrokerLimits` queda fijada antes de la primera reserva y registrada para todos
+los hermanos; conserva 512 MiB/128 procesos por defecto. Ken real necesita más
+memoria en el ensayo observado. Véanse el [contrato de Ken](broker-ken.md) y sus
+límites de integración; todavía no reemplaza la fábrica productiva.
 El perfil de análisis actual puede ejecutar un peer JSON-RPC de ensayo; no es un
 perfil autorizado para ejecutar Codex o Ken.
 

@@ -49,12 +49,12 @@ class PeerRegistry:
             return self._prepare(conn, lease, kind)
 
     def _prepare(self, conn, lease, kind):
-        if kind not in ("native", "business", "command"):
+        if kind not in ("native", "business", "command", "ken"):
             raise ValueError("Unknown owned peer kind")
         peer_id = uuid4().hex
         self.runs._authority(conn, lease)
         if (
-            kind == "command"
+            kind in ("command", "ken")
             and conn.execute(
                 "SELECT 1 FROM runtime_peer_scopes WHERE attempt_id=? AND protocol_version=1",
                 (lease.attempt_id,),
@@ -114,7 +114,7 @@ class PeerRegistry:
         with self.runs._transaction() as conn:
             peer = self._row(conn, peer_id)
             self._check_origin(peer)
-            if peer["kind"] not in ("native", "command"):
+            if peer["kind"] not in ("native", "command", "ken"):
                 return None
             binding = conn.execute(
                 """SELECT b.* FROM runtime_workspace_bindings b

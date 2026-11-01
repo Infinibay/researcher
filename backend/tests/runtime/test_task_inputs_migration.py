@@ -9,12 +9,13 @@ import pytest
 def test_version28_migration_preserves_rows_and_only_records_future_edits(
     _isolated_db, db_conn, monkeypatch
 ):
-    from backend.db import migrations
+    from backend.db import migrations, peer_kind_migration
     from backend.runtime.sqlite_runs import SQLiteRunStore
     from backend.tools.base.db import ensure_migrations
 
     apply = migrations.apply_sql_resource
     with monkeypatch.context() as patch:
+        patch.setattr(peer_kind_migration, "migrate_ken_peers", lambda _conn: None)
         patch.setattr(
             migrations,
             "apply_sql_resource",

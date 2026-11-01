@@ -96,6 +96,8 @@ def worker_process(
     mode: str = "mcp",
     model_cache: Path | None = None,
     expected_identity: tuple[int, int] | None = None,
+    stable_view: bool = False,
+    payload_prefix: tuple[str, ...] = (),
 ):
     """Pin source/state directories before mounting; only .ken is writable.
 
@@ -115,6 +117,11 @@ def worker_process(
     ):
         raise ValueError("Expected a valid workspace device/inode identity")
     root = workspace.resolve(strict=True)
+    from backend.runtime.workspaces import PEER_WORKSPACE
+
+    if type(stable_view) is not bool or not isinstance(payload_prefix, tuple):
+        raise ValueError("Host-selected worker launch options required")
+    view = PEER_WORKSPACE if stable_view else root
     for tool in (installation.tool_root, installation.python_root):
         if tool.is_relative_to(root):
             raise ValueError("Workspace cannot contain the trusted tool installation")
@@ -202,10 +209,10 @@ def worker_process(
             "/tmp/cache",
             "--ro-bind-fd",
             str(root_fd),
-            str(root),
+            str(view),
             "--bind-fd",
             str(state_fd),
-            str(root / ".ken"),
+            str(view / ".ken"),
             "--setenv",
             "PATH",
             os.defpath,
@@ -247,15 +254,16 @@ def worker_process(
             "false",
             "--setenv",
             "KEN_PROJECT_ROOT",
-            str(root),
+            str(view),
             "--chdir",
             "/tmp",
+            *payload_prefix,
             str(installation.executable),
         ]
         command += (
-            ["mcp", str(root)]
+            ["mcp", str(view)]
             if mode == "mcp"
-            else ["retrieval", "prepare", "--path", str(root), "--json"]
+            else ["retrieval", "prepare", "--path", str(view), "--json"]
         )
         yield WorkerLaunch(
             tuple(command),

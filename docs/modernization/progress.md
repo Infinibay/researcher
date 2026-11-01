@@ -2595,3 +2595,99 @@ Git/review/CI, prompts/books/evals/human comprehension, data/restore/bootstrap/C
 install, aliases/transfer/budgets/dependencies/18 npm advisories and100 baseline
 failures remain. Independent UI:6/36 desktop+2/12 mobile concepts,2 pilots,0/12
 accepted;30+10 concepts/10 routes/all12 acceptance. Final fresh whole-branch review.
+
+## Current task: broker-owned published Ken profile — basecaa7dd1
+
+- Prior turn progress:caa7dd1 actual private-NET Codex/CONNECT, real account metadata,
+  suite/build/package committed; no model turns. Full objective unchanged.
+- Reuse worker_process's source/state FD pinning, public model hashes and isolated
+  toolchain mounts. Add host-only fixed logical source view and payload prefix;
+  wrap same bwrap launch with original G/info/seccomp, never nested bwrap.
+- Ken profile denies addressed/network sockets and namespace/control operations but
+  permits private socketpair for asyncio. Same kernel domain/concession and original
+  ken peer identity. Persist installation/assets/mode/validator/gate intent; retry
+  is receipt-only. Measure actual public Ken memory before changing resource bounds.
+- Next host MCP session/tool mediation must require published Ken readiness/catalog
+  before native thread/turn, keeping business and source grants scoped. This profile
+  alone does not migrate product factories or enable code-mode/actual model turns.
+- Evidence changed the persistence plan: registry/schema only allow native/business/
+  command and do not prepare a Ken peer. Do not reinterpret Ken as an arbitrary
+  command. Add migration31 expanding kind CHECK while preserving rows/rowids,
+  FK targets, custom columns/indexes/triggers and rollback; prepare explicit Ken
+  peers only in registered attempt scopes, include immutable workspace binding.
+
+## Broker-owned Ken implementation and observed resource correction
+
+- Prior goal turn was a user-requested status report, no implementation progress.
+  Revalidated actual dirty branch and17 passing profile/migration/worker cases.
+- Added AsyncPeerBroker.ken using original launch/peer/Stop executors and real pipes.
+  RED missing endpoint, GREEN31 cases with previous RPC/worker/migration coverage.
+- Added broker_mcp: pinned SDK ClientSession over owned pipes, no stdio launcher,
+  queues8/inflight8, finite whole-request deadline, bounded frames, stderr discard,
+  pre-SDK typed input validation, redacted failures and physical peer closure before
+  task cancellation. RED6 missing-module cases, GREEN6 real-kernel MCP cases: init/
+  read/stderr, invalid/oversized/EOF/timeout and cancelled scope preserving sibling.
+- Actual published Ken0.18.0, four pinned model manifests533070470 bytes: initial
+  512MiB preparation exited137, memory.peak536870912/oom_kill1. No source change;
+  failed peer/domain closed. Do not hide this resource failure behind a fake tool.
+- Ruling: configurable host-only BrokerLimits before reservation, immutable policy
+  in shared grant and each operation intent — measured Ken needs more RAM than
+  the previous fixed limit — cost: production must size ALL siblings together;
+  the2GiB diagnostic choice is not mixed-load acceptance. Defaults512MiB/128pids/
+  swap0 retained; allowed64MiB..8GiB/1..1024pids; changed active policy/retry rejected.
+  RED6 policy cases, GREEN32 selected policy/kernel/profile/MCP cases.
+- Source trial: published retrieval prepare + actual ken_find/read passed, required
+  five catalog names present, memory peak1387253760 bytes/no OOM. Both Ken peers
+  closed and domain retired, source unchanged. Zero generative turns/image calls.
+- Extracted-wheel -I -S with explicit installed dependencies also ran actual Ken
+  prepare/find/read, imports asserted from wheel, source/migration/native source
+  checked. First packaged peak1395290112 bytes/no OOM; final package check follows.
+- Full first suite exposed6 historical fixture setup regressions: they skip later
+  SQL migrations but inadvertently executed new Python migration31. Ruling: skip31
+  only within the explicit historical construction contexts — keep asserted23/27/
+  28/29 schema and later real upgrades — cost: each future Python migration needs
+  this historical-fixture maintenance until fixtures are packaged independently.
+  Existing failed cases reproduced; all9 historical/migration tests now pass.
+- No production-factory adoption, native generation/Ken composition, OAuth renewal,
+  WebSocket, user data migration, service/account installation, push/merge/deploy.
+  Full objective unchanged; final suite comparison, package/checkpoint follow.
+
+## Ken broker checkpoint verification
+
+- Final full suite1495:1392 passed,100 failures with EXACT original baseline IDs,
+  3 skipped/29 warnings. Runtime562 passed;19 new cases across Ken/MCP/limits/
+  migration all pass. Historical fixture/migration selection9 passed. Global suite
+  remains red; the100 inherited failures are still required work, not waived.
+- Ruff all changed modern source/tests passed; legacy base DB only gained migration
+  registration, no wholesale formatting. git diff --check passed. Offline wheel+
+  SDist rebuilt after historical fixture fixes. Final package compares36 runtime
+  modules, new migration/DB registration and changed fixtures; native C source matches.
+- Final isolated-wheel -I -S actual published Ken prepare/find/read passed again,
+  peak1390542848 bytes, no OOM, both original Ken peers closed, domain retired,
+  source unchanged. Zero generative model turns/images/account metadata requests.
+- Evidence: broker-ken-{evidence,results,live,packaging}.json and architecture/
+  broker-ken.md; status/coverage updated without closing product integration/phases.
+
+## Next brief after owned Ken — FULL objective unchanged
+
+Do not rebuild broker/journal/kernel/NET/auth primitives or re-run account metadata
+to claim progress. Compose Ken readiness and native/host tools next: broker_mcp
+already exposes scoped list_tools/call_tool over original peers. Published server
+advertises more tools than the mandatory five; filter to ken_find/read/recall/
+related/remember, require their unique valid schemas and readiness before a native
+thread/turn. Reuse business_mediation's catalog hashing, active-authority/result
+boundaries and project tool dispatch rather than inventing a second inference loop.
+Enable compatible host code-mode only after inspecting pinned local0.166 SDK schema;
+the prior gpt-6.1-sol trial required code-mode, while NativeCapsule disables it.
+Native dynamic-tool business/Ken calls must route through separately owned host
+peers; no nested bwrap, model-selected credentials/grants/paths or host-net fallback.
+2GiB passed isolated Ken only: measure mixed-load memory before production policy.
+Actual vendor WebSocket/OAuth renewal/managed account coexistence remain unproven.
+Then migrate RuntimeService/CodexRuntime/CommandJobs with complete managed origin/
+enrollment/generation/all-actor controls and durable native state. No user DB
+schema migration, account install, push/merge/deploy has been done by this checkpoint.
+Full71 tools/11 categories, engine/loops/autonomy/roles/flows/agent protocol, exact
+Git/review/CI, all prompts/books/evals/human comprehension, data/restore/bootstrap/
+CLI/TUI/install, dependencies/18 npm advisories and100 baseline failures remain.
+UI remains6/36desktop+2/12mobile concepts,2pilots,0/12accepted:30+10 concepts,
+10other routes and all12 acceptance pending. Fresh final whole-branch review later.

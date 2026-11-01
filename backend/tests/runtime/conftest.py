@@ -120,3 +120,49 @@ def broker_setup(service_setup, tmp_path):
                     assert time.monotonic() < deadline
                     time.sleep(0.01)
                 domain_path.rmdir()
+
+
+@pytest.fixture
+def ken_installation(tmp_path):
+    import sys
+    import venv
+
+    tool = tmp_path / "tool"
+    venv.EnvBuilder(with_pip=False, symlinks=True).create(tool)
+    version = f"python{sys.version_info.major}.{sys.version_info.minor}"
+    packages = tool / "lib" / version / "site-packages"
+    metadata = packages / "ken_rank-0.18.0.dist-info"
+    metadata.mkdir(parents=True)
+    (metadata / "METADATA").write_text(
+        "Metadata-Version: 2.1\nName: ken-rank\nVersion: 0.18.0\n"
+    )
+    package = packages / "ken"
+    package.mkdir()
+    (package / "__init__.py").write_text("")
+    executable = tool / "bin/ken"
+    executable.write_text(
+        "#!"
+        + str(tool / "bin/python")
+        + "\n"
+        + """
+import json, os, socket, sys
+from pathlib import Path
+root=Path(sys.argv[2])
+result={"inside":(root/"source.py").read_text(),"credentials_present":[key for key in os.environ if key in {"OPENAI_API_KEY","RESEARCHER_TOOL_TOKEN","HF_TOKEN","CODEX_HOME"}]}
+try: result["outside"]=(root/"escape.py").read_text()
+except OSError: result["outside"]="denied"
+try: (root/"source.py").write_text("unwanted")
+except OSError: result["source_write"]="denied"
+(root/".ken/worker-note").write_text("retained")
+try: socket.create_connection(("127.0.0.1",int((root/".ken/fixture-port").read_text())),timeout=.1); result["network"]="available"
+except OSError: result["network"]="unavailable"
+result["leaked_handle_reads"]=[]
+for fd in range(3,128):
+    try: result["leaked_handle_reads"].append(Path(f"/proc/self/fd/{fd}/../owner.key").read_text())
+    except OSError: pass
+result["home"]=os.environ["HOME"]
+print(json.dumps(result))
+"""
+    )
+    executable.chmod(0o755)
+    return executable

@@ -1190,7 +1190,15 @@
         "docs/modernization/product-runtime-evidence.json",
         "docs/modernization/product-stop-evidence.json",
         "backend/tests/runtime/test_runtime_service.py",
-        "backend/tests/runtime/test_inference_journal.py"
+        "backend/tests/runtime/test_inference_journal.py",
+        "docs/architecture/broker-ken.md",
+        "docs/modernization/broker-ken-evidence.json",
+        "docs/modernization/broker-ken-live.json",
+        "docs/modernization/broker-ken-packaging.json",
+        "backend/tests/runtime/test_broker_ken.py",
+        "backend/tests/runtime/test_broker_mcp.py",
+        "backend/tests/runtime/test_broker_limits.py",
+        "backend/tests/runtime/test_ken_peer_migration.py"
       ],
       "remaining": [
         "Full comparative/product scenarios and failure acceptance"
@@ -1428,7 +1436,15 @@
         "docs/modernization/run-input-packaging.json",
         "backend/tests/runtime/test_run_input.py",
         "backend/tests/runtime/test_run_input_migration.py",
-        "evals/runtime/run_input_continuity.py"
+        "evals/runtime/run_input_continuity.py",
+        "docs/architecture/broker-ken.md",
+        "docs/modernization/broker-ken-evidence.json",
+        "docs/modernization/broker-ken-live.json",
+        "docs/modernization/broker-ken-packaging.json",
+        "backend/tests/runtime/test_broker_ken.py",
+        "backend/tests/runtime/test_broker_mcp.py",
+        "backend/tests/runtime/test_broker_limits.py",
+        "backend/tests/runtime/test_ken_peer_migration.py"
       ],
       "remaining": [
         "Historical migration fixtures and backup/restore",
@@ -2013,7 +2029,15 @@
         "docs/architecture/peer-broker.md",
         "docs/modernization/peer-broker-evidence.json",
         "docs/modernization/peer-broker-results.json",
-        "docs/modernization/peer-broker-packaging.json"
+        "docs/modernization/peer-broker-packaging.json",
+        "docs/architecture/broker-ken.md",
+        "docs/modernization/broker-ken-evidence.json",
+        "docs/modernization/broker-ken-live.json",
+        "docs/modernization/broker-ken-packaging.json",
+        "backend/tests/runtime/test_broker_ken.py",
+        "backend/tests/runtime/test_broker_mcp.py",
+        "backend/tests/runtime/test_broker_limits.py",
+        "backend/tests/runtime/test_ken_peer_migration.py"
       ],
       "implemented": [
         "Actual real-journal global reserve, contained namespace birth, global identity publication, concrete source PeerRegistry bind and sole pre-start G decision in one host operation.",
@@ -2032,6 +2056,32 @@
         "RuntimeService/native/Ken/business/development profile adoption, durable outputs and time/lease/control acceptance.",
         "Managed parent/generation/removal-crash reconciliation, restore/handoff/alias and external budget acceptance.",
         "All retained71 tools/11 categories, old engine/loop/autonomy/flows, prompt/human/design acceptance,100 baseline failures and final independent review."
+      ]
+    },
+    "broker_owned_ken": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/broker-ken.md",
+        "docs/modernization/broker-ken-evidence.json",
+        "docs/modernization/broker-ken-live.json",
+        "docs/modernization/broker-ken-packaging.json",
+        "backend/tests/runtime/test_broker_ken.py",
+        "backend/tests/runtime/test_broker_mcp.py",
+        "backend/tests/runtime/test_broker_limits.py",
+        "backend/tests/runtime/test_ken_peer_migration.py",
+        "docs/modernization/broker-ken-results.json"
+      ],
+      "implemented": [
+        "Explicit Ken peer kind and atomic migration31 preserve rowids/history/custom objects/FK targets with rollback.",
+        "Published Ken profile reuses pinned source/state/assets under original global reservation/local bind/G/kernel domain.",
+        "Async endpoint and pinned MCP SDK without a second launcher; bounded IO/deadlines, redacted failures, cancellation/peer close preserve siblings.",
+        "Host limits fixed and durable before birth;512MiB default retained; actual Ken512MiB OOM measured, explicit2GiB prepare/find/read succeeds offline.",
+        "Actual source and extracted-wheel trials close both Ken peers/domain and preserve source with zero generative turns."
+      ],
+      "remaining": [
+        "Required catalog mediation and native code-mode/business/subscription composition before turn admission.",
+        "Mixed native/Ken/tool resource sizing, product launcher adoption and complete host enrollment.",
+        "Full scope remains engine/autonomy/flows/all71 tools/11 categories/prompts/books/evals/human/UI/data/operation/100 baseline failures/final branch review."
       ]
     }
   }

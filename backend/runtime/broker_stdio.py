@@ -97,6 +97,25 @@ class AsyncPeerBroker:
             egress=egress,
         )
 
+    def ken(
+        self,
+        registry,
+        peer_id,
+        *,
+        operation_key,
+        installation,
+        model_cache=None,
+        mode="mcp",
+    ):
+        return self._endpoint(
+            registry,
+            peer_id,
+            operation_key,
+            ken=installation,
+            model_cache=model_cache,
+            ken_mode=mode,
+        )
+
     def _endpoint(
         self,
         registry,
@@ -107,13 +126,26 @@ class AsyncPeerBroker:
         asset=None,
         network=None,
         egress=None,
+        ken=None,
+        model_cache=None,
+        ken_mode="mcp",
     ):
         if not self._entered or self._closing is not None:
             raise AuthorityConflict("Async broker is not admitted")
         if len(self._endpoints) >= 128:
             raise AuthorityBusy("Attempt transport history capacity reached")
         endpoint = BrokerEndpoint(
-            self, registry, peer_id, operation_key, code, asset, network, egress
+            self,
+            registry,
+            peer_id,
+            operation_key,
+            code,
+            asset,
+            network,
+            egress,
+            ken=ken,
+            model_cache=model_cache,
+            ken_mode=ken_mode,
         )
         self._endpoints.append(endpoint)
         return endpoint
@@ -124,14 +156,19 @@ class AsyncPeerBroker:
         if len(self._pending) >= 8:
             raise AuthorityBusy("Async broker launch queue full")
         loop = asyncio.get_running_loop()
-        start = (
-            self.broker.run_peer if endpoint.asset is None else self.broker.run_native
-        )
-        payload = (
-            {"code": endpoint.code}
-            if endpoint.asset is None
-            else {"asset": endpoint.asset}
-        )
+        if endpoint.ken is not None:
+            start = self.broker.run_ken
+            payload = {
+                "installation": endpoint.ken,
+                "model_cache": endpoint.model_cache,
+                "mode": endpoint.ken_mode,
+            }
+        elif endpoint.asset is not None:
+            start = self.broker.run_native
+            payload = {"asset": endpoint.asset}
+        else:
+            start = self.broker.run_peer
+            payload = {"code": endpoint.code}
         if endpoint.network is not None:
             payload["network"] = endpoint.network
         if endpoint.egress is not None:
@@ -257,12 +294,17 @@ class BrokerEndpoint:
         asset=None,
         network=None,
         egress=None,
+        *,
+        ken=None,
+        model_cache=None,
+        ken_mode="mcp",
     ):
         self.owner, self.registry, self.peer_id = owner, registry, peer_id
         self.operation_key, self.code = operation_key, code
         self.asset = asset
         self.network = network
         self.egress = egress
+        self.ken, self.model_cache, self.ken_mode = ken, model_cache, ken_mode
         self.stdin = self.stdout = self.stderr = None
         self._raw = None
         self._operation = None

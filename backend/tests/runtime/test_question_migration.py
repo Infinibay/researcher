@@ -7,13 +7,14 @@ import pytest
 
 
 def version23(database, conn, monkeypatch):
-    from backend.db import migrations, question_migration
+    from backend.db import migrations, peer_kind_migration, question_migration
     from backend.tools.base.db import ensure_migrations
 
     conn.execute("PRAGMA foreign_keys=ON")
     apply_resource = migrations.apply_sql_resource
     with monkeypatch.context() as patch:
         patch.setattr(question_migration, "apply_question_schema", lambda _conn: None)
+        patch.setattr(peer_kind_migration, "migrate_ken_peers", lambda _conn: None)
         # This fixture deliberately represents version 23, not the newest schema.
         patch.setattr(
             migrations,

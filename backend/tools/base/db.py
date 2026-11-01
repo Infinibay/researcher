@@ -340,6 +340,11 @@ def ensure_migrations(db_path: str | None = None) -> None:
             resource = Path(__file__).resolve().parents[2] / "db/run_input_schema.sql"
             apply_sql_resource(conn, resource)
             logger.info("Migration 30: frozen host input and scoped conversation")
+        if 31 not in applied:
+            from backend.db.peer_kind_migration import migrate_ken_peers
+
+            migrate_ken_peers(conn)
+            logger.info("Migration 31: explicit owned Ken peer kind")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()

@@ -1,0 +1,37 @@
+{
+  "status": "component_implemented_product_integration_pending",
+  "published_ken": "ken-rank==0.18.0",
+  "migration": 31,
+  "contracts": {
+    "same_original_global_gate_and_domain": true,
+    "explicit_ken_peer_kind": true,
+    "readonly_pinned_source_writable_ken_state": true,
+    "offline_public_models_verified": true,
+    "addressed_sockets_denied_private_socketpair_permitted": true,
+    "mcp_sdk_over_original_pipes_no_spawn": true,
+    "bounded_frames_queues_requests_deadlines": true,
+    "redacted_wire_errors_and_stderr_discard": true,
+    "cancel_close_preserves_siblings": true,
+    "host_limits_fixed_durable_before_birth": true,
+    "default_512m_128pids_swap0_preserved": true,
+    "migration_rows_rowids_custom_objects_external_refs_and_rollback": true
+  },
+  "evidence": [
+    "backend/tests/runtime/test_broker_ken.py",
+    "backend/tests/runtime/test_broker_mcp.py",
+    "backend/tests/runtime/test_broker_limits.py",
+    "backend/tests/runtime/test_ken_peer_migration.py",
+    "docs/modernization/broker-ken-live.json",
+    "docs/modernization/broker-ken-packaging.json"
+  ],
+  "remaining": [
+    "Mandatory Ken catalog mediation and pre-thread readiness",
+    "Compose native code-mode, business tools and actual subscription turn in new broker",
+    "Real vendor WebSocket/OAuth renewal and managed account lifecycle",
+    "RuntimeService/CodexRuntime/CommandJobs adoption and complete host enrollment",
+    "Mixed native/Ken/tool memory and concurrency sizing",
+    "All71 tools/11 categories, engine/autonomy/flows/agent protocol, prompts/books/evals/human comprehension",
+    "Remaining UI30 desktop+10 mobile concepts/10 routes/all12 acceptance",
+    "Data restore/bootstrap/CLI/TUI/dependencies,100 baseline failures,final independent branch review"
+  ]
+}

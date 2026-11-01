@@ -21,7 +21,9 @@ def _no_sockets():
     return _syscall_filter(network=False)
 
 
-def _syscall_filter(*, network, listener_setup=False, protected_peers=False):
+def _syscall_filter(
+    *, network, listener_setup=False, protected_peers=False, private_pairs=False
+):
     if platform.machine() != "x86_64":
         raise RuntimeError("Analysis seccomp profile requires verified x86_64 ABI")
     deny = 0x00050000 | errno.EPERM
@@ -68,7 +70,8 @@ def _syscall_filter(*, network, listener_setup=False, protected_peers=False):
         denied += (310, 311, 438)  # process_vm_readv/writev and pidfd_getfd
     if network and not listener_setup:
         denied += (43, 49, 50, 288)  # accept/bind/listen/accept4, not client connect
-    for number in (() if network else (41, 53)) + denied:
+    socket_denials = () if network else ((41,) if private_pairs else (41, 53))
+    for number in socket_denials + denied:
         instructions += [(0x15, 0, 1, number), (0x06, 0, 0, deny)]
     # libc may fall back to ordinary fork/clone after ENOSYS. Every descendant
     # still inherits this filter and its cgroup; it cannot request new namespaces.
@@ -420,3 +423,63 @@ class NativeProxyCapsule(NativeCapsule):
         super().__enter__()
         self.pass_fds += (self._bridge_fd, self._proxy_fd, self._client_filter_fd)
         return self
+
+
+class KenCapsule:
+    """Reuse public Ken mounts in one owned birth, behind the same exec gate."""
+
+    def __init__(self, binding, installation, info_fd, *, model_cache=None, mode="mcp"):
+        self.binding, self.installation, self.info_fd = binding, installation, info_fd
+        self.model_cache, self.mode = model_cache, mode
+        self._stack = ExitStack()
+
+    def __enter__(self):
+        from backend.runtime.ken_worker import worker_process
+
+        try:
+            gate = _domain_spawn.sealed(
+                Path(__file__).with_name("peer_payload.py").read_bytes()
+            )
+            self._stack.callback(os.close, gate)
+            seccomp = _domain_spawn.sealed(
+                _syscall_filter(network=False, private_pairs=True, protected_peers=True)
+            )
+            self._stack.callback(os.close, seccomp)
+            launch = self._stack.enter_context(
+                worker_process(
+                    self.installation,
+                    workspace=Path(self.binding.workspace),
+                    mode=self.mode,
+                    model_cache=self.model_cache,
+                    expected_identity=(self.binding.device, self.binding.inode),
+                    stable_view=True,
+                    payload_prefix=(
+                        str(self.installation.tool_root / "bin/python"),
+                        "-I",
+                        "-S",
+                        "/run/researcher-host/gate.py",
+                    ),
+                )
+            )
+            self.argv = [
+                launch.command[0],
+                "--dir",
+                "/run/researcher-host",
+                "--ro-bind-data",
+                str(gate),
+                "/run/researcher-host/gate.py",
+                "--info-fd",
+                str(self.info_fd),
+                "--seccomp",
+                str(seccomp),
+                *launch.command[1:],
+            ]
+            self.env = launch.env
+            self.pass_fds = (*launch.pass_fds, gate, seccomp, self.info_fd)
+            return self
+        except BaseException:
+            self._stack.close()
+            raise
+
+    def __exit__(self, *_):
+        self._stack.close()

@@ -23,6 +23,7 @@ from backend.runtime.authority_journal import (
 from backend.runtime.broker_profile import (
     AnalysisCapsule,
     CodexAsset,
+    KenCapsule,
     NativeCapsule,
     NativeProxyCapsule,
 )
@@ -30,6 +31,7 @@ from backend.runtime.contracts import command_key, text
 from backend.runtime.egress_channel import EgressChannel
 from backend.runtime.egress_proxy import EgressPolicy, TunnelProxy
 from backend.runtime.execution_domain import DomainIdentity, ExecutionDomain
+from backend.runtime.ken_worker import KenInstallation
 from backend.runtime.native_network import NativeNetwork
 from backend.runtime.peer_process import (
     NamespaceIdentity,
@@ -49,6 +51,23 @@ def _digest(value):
             allow_nan=False,
         ).encode()
     ).hexdigest()
+
+
+@dataclass(frozen=True)
+class BrokerLimits:
+    """Trusted host policy for all siblings, selected before any reservation."""
+
+    pids: int = 128
+    memory_bytes: int = 512 * 1024**2
+
+    def __post_init__(self):
+        if (
+            type(self.pids) is not int
+            or not 1 <= self.pids <= 1024
+            or type(self.memory_bytes) is not int
+            or not 64 * 1024**2 <= self.memory_bytes <= 8 * 1024**3
+        ):
+            raise ValueError("Finite bounded broker limits required")
 
 
 @dataclass(frozen=True)
@@ -96,7 +115,12 @@ class PeerBroker:
     Complete actor-origin and endpoint authentication remain deployment work.
     """
 
-    def __init__(self, journal, domain):
+    def __init__(self, journal, domain, *, limits=None):
+        if limits is None:
+            limits = BrokerLimits()
+        if not isinstance(limits, BrokerLimits):
+            raise TypeError("Host-selected BrokerLimits required")
+        self._limits = limits
         self.journal, self.domain = journal, domain
         self.grant_id = _digest(asdict(domain.identity))
         self._owner = uuid4().hex
@@ -158,6 +182,8 @@ class PeerBroker:
                 raise AuthorityConflict("Global domain belongs to another attempt")
             if grant["workspace_binding"] != asdict(admission["binding"]):
                 raise AuthorityConflict("Global source admission differs")
+            if grant.get("limits") != asdict(self._limits):
+                raise AuthorityConflict("Shared broker resource policy changed")
         else:
             if active is not None:
                 raise AuthorityConflict("Another global domain concession is active")
@@ -175,6 +201,7 @@ class PeerBroker:
                 "domain_path": str(self.domain.path),
                 "domain_identity": asdict(self.domain.identity),
                 "workspace_binding": asdict(admission["binding"]),
+                "limits": asdict(self._limits),
                 **{
                     key: admission[key]
                     for key in (
@@ -259,6 +286,37 @@ class PeerBroker:
     def run_peer(self, registry, peer_id, *, operation_key, code):
         return self._run(registry, peer_id, operation_key=operation_key, code=code)
 
+    def run_ken(
+        self,
+        registry,
+        peer_id,
+        *,
+        operation_key,
+        installation,
+        model_cache=None,
+        mode="mcp",
+    ):
+        if not isinstance(installation, KenInstallation) or mode not in (
+            "mcp",
+            "prepare",
+        ):
+            raise TypeError(
+                "Inspected Ken installation and fixed operation mode required"
+            )
+        if installation.assets and model_cache is None:
+            raise ValueError("Pinned public Ken model cache required")
+        cache = (
+            Path(model_cache).resolve(strict=True) if model_cache is not None else None
+        )
+        return self._run(
+            registry,
+            peer_id,
+            operation_key=operation_key,
+            ken=installation,
+            model_cache=cache,
+            ken_mode=mode,
+        )
+
     def run_native(
         self, registry, peer_id, *, operation_key, asset, network=None, egress=None
     ):
@@ -291,11 +349,14 @@ class PeerBroker:
         asset=None,
         network=None,
         egress=None,
+        ken=None,
+        model_cache=None,
+        ken_mode="mcp",
     ):
         command_key(operation_key)
-        if asset is None:
+        if asset is None and ken is None:
             text(code, "analysis code", 64000)
-        kind = "command" if asset is None else "native"
+        kind = "ken" if ken is not None else ("command" if asset is None else "native")
         with self._gate_lock:
             original = registry.inspect(peer_id)
             operation_id = _digest(
@@ -356,6 +417,31 @@ class PeerBroker:
                     ),
                 }
             )
+            if ken is not None:
+                manifest = {
+                    "profile": "readonly-published-ken-v1",
+                    "mode": ken_mode,
+                    "installation": {
+                        "executable": str(ken.executable),
+                        "tool_root": str(ken.tool_root),
+                        "python_root": str(ken.python_root),
+                        "assets": ken.assets,
+                    },
+                    "model_cache": str(model_cache)
+                    if model_cache is not None
+                    else None,
+                    "code_sha256": {
+                        name: hashlib.sha256(
+                            Path(__file__).with_name(name).read_bytes()
+                        ).hexdigest()
+                        for name in (
+                            "ken_worker.py",
+                            "broker_profile.py",
+                            "peer_payload.py",
+                        )
+                    },
+                }
+            manifest["limits"] = asdict(self._limits)
             intent = _digest(manifest)
             existing = self.journal.load().records.get("broker:op:" + operation_id)
             if existing is not None:
@@ -376,14 +462,16 @@ class PeerBroker:
                 operation_id,
                 intent,
                 peer_id,
-                runtime_manifest=manifest if asset is not None else None,
+                runtime_manifest=manifest
+                if asset is not None or ken is not None
+                else None,
             )
             self._projection_source = registry
             self._gate_observed[operation_id] = False
             read_fd = write_fd = None
             try:
                 if not self._children:
-                    self.domain.limit(pids=128, memory_bytes=512 * 1024**2)
+                    self.domain.limit(**asdict(self._limits))
                 read_fd, write_fd = os.pipe2(os.O_CLOEXEC)
                 channel = None
                 if egress is not None:
@@ -398,16 +486,25 @@ class PeerBroker:
                             "Broker withdrew before channel admission"
                         )
                 capsule = (
-                    NativeProxyCapsule
-                    if egress is not None
-                    else (AnalysisCapsule if asset is None else NativeCapsule)
+                    KenCapsule
+                    if ken is not None
+                    else (
+                        NativeProxyCapsule
+                        if egress is not None
+                        else (AnalysisCapsule if asset is None else NativeCapsule)
+                    )
                 )
                 with capsule(
                     admission["binding"],
-                    code if asset is None else asset,
+                    ken if ken is not None else (code if asset is None else asset),
                     write_fd,
                     **({"network": network} if network is not None else {}),
                     **({"channel": channel} if channel is not None else {}),
+                    **(
+                        {"model_cache": model_cache, "mode": ken_mode}
+                        if ken is not None
+                        else {}
+                    ),
                 ) as profile:
                     if self._withdrawn.is_set():
                         raise AuthorityConflict("Broker admission withdrawn")
