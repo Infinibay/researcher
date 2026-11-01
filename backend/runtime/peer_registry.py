@@ -137,6 +137,7 @@ class PeerRegistry:
                 for key in ("database_identity", "attempt_id", "fence", "kind")
             }
             result.update(
+                database_path=str(Path(self.runs.database).resolve(strict=True)),
                 project_id=row["project_id"],
                 task_id=row["task_id"],
                 context_version=lease.context_version,

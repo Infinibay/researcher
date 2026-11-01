@@ -12,6 +12,7 @@ import select
 import threading
 import time
 from dataclasses import asdict, dataclass
+from pathlib import Path
 from uuid import uuid4
 
 from backend.runtime.authority_journal import (
@@ -100,6 +101,7 @@ class PeerBroker:
         self._children = {}
         self._gate_observed = {}
         self._namespaces = {}
+        self._projection_source = None
 
     def withdraw(self):
         """Withdraw new G decisions immediately; not a durable closure receipt."""
@@ -150,6 +152,7 @@ class PeerBroker:
                 raise AuthorityUncertain("Invalid global authority generation")
             grant = {
                 "protocol": 1,
+                "source_database": admission["database_path"],
                 "owner": self._owner,
                 "owner_pid": os.getpid(),
                 "owner_start_ticks": start_ticks(os.getpid()),
@@ -261,6 +264,7 @@ class PeerBroker:
                     "Analysis broker requires an admitted command peer"
                 )
             self._reserve(admission, operation_id, intent, peer_id)
+            self._projection_source = registry
             self._gate_observed[operation_id] = False
             read_fd = write_fd = None
             try:
@@ -447,6 +451,106 @@ class PeerBroker:
             return closed
         finally:
             self._gate_lock.release()
+
+    def project_closed(self, *, operation_id=None):
+        """Record proved closure in the original source, without another signal.
+
+        A cached registry or durable locator supplies only the source location.
+        Read proof from the verified journal, never a caller-supplied closed flag. All
+        matched local rows/events commit together or remain visibly incomplete.
+        """
+        snapshot = self.journal.load()
+        grant = snapshot.records.get(self._grant_key)
+        if grant is None and operation_id is None:
+            return ()
+        if grant is None or grant["owner"] != self._owner:
+            raise AuthorityConflict("No original broker grant to project")
+        return self._project_snapshot(
+            snapshot, self.grant_id, self._projection_source, operation_id
+        )
+
+    @classmethod
+    def project_recovered(cls, journal, grant_id):
+        """Project an already-proved global retirement; never recover or signal.
+
+        Separate from recover so losing the source cannot prevent global Stop.
+        A locator does not authorize another source or initialize missing state.
+        """
+        snapshot = journal.load()
+        grant = snapshot.records.get("broker:grant:" + grant_id)
+        if (
+            grant is None
+            or grant["state"] != "retired"
+            or grant.get("domain_removed") is not True
+        ):
+            raise AuthorityConflict("Global retirement is not proved")
+        return cls._project_snapshot(snapshot, grant_id, None, None)
+
+    @staticmethod
+    def _project_snapshot(snapshot, grant_id, source, operation_id):
+        grant = snapshot.records["broker:grant:" + grant_id]
+        operations = [
+            operation
+            for key, operation in snapshot.records.items()
+            if key.startswith("broker:op:")
+            and operation["grant_id"] == grant_id
+            and (operation_id is None or key == "broker:op:" + operation_id)
+        ]
+        if operation_id is not None and (
+            len(operations) != 1 or operations[0].get("execution_closed") is not True
+        ):
+            raise AuthorityConflict("Original operation has no verified closure")
+        closed = [op for op in operations if op.get("execution_closed") is True]
+        if not closed:
+            return ()
+        if source is None:
+            from backend.runtime.peer_registry import PeerRegistry
+            from backend.runtime.sqlite_runs import SQLiteRunStore
+
+            locator = grant.get("source_database")
+            if not isinstance(locator, str) or not Path(locator).is_absolute():
+                raise AuthorityUncertain("Original source locator is unavailable")
+            source = PeerRegistry(SQLiteRunStore(locator))
+        results = []
+        with source.runs._transaction(write=True) as conn:
+            if source._database_identity() != grant["database_identity"]:
+                raise AuthorityUncertain("Closure source origin differs")
+            for operation in closed:
+                peer = source._row(conn, operation["peer_id"])
+                source._check_origin(peer)
+                attempt = conn.execute(
+                    """SELECT r.project_id,r.task_id,a.fence FROM runtime_attempts a
+                    JOIN runtime_runs r ON r.id=a.run_id WHERE a.id=?""",
+                    (peer["attempt_id"],),
+                ).fetchone()
+                if (
+                    grant["protocol"] != 1
+                    or operation["protocol"] != 1
+                    or operation["state"] != "closed"
+                    or peer["protocol_version"] != 1
+                    or peer["attempt_id"] != grant["attempt_id"]
+                    or peer["fence"] != grant["fence"]
+                    or peer["kind"] != "command"
+                    or attempt is None
+                    or tuple(attempt)
+                    != (grant["project_id"], grant["task_id"], grant["fence"])
+                ):
+                    raise AuthorityUncertain("Closure source attempt differs")
+                if peer["init_pid"] is None and (
+                    peer["state"] == "bound" or operation["gate_sent"] is not False
+                ):
+                    raise AuthorityUncertain("Closure source lost its binding")
+                if peer["init_pid"] is not None and (
+                    operation["namespace"] is None
+                    or asdict(NamespaceIdentity.from_record(peer))
+                    != operation["namespace"]
+                ):
+                    raise AuthorityUncertain("Closure source namespace differs")
+                if peer["state"] == "closed":
+                    results.append(dict(peer))
+                else:
+                    results.append(source._closed(conn, peer, "broker_verified"))
+        return tuple(results)
 
     @classmethod
     def recover(cls, journal, grant_id):

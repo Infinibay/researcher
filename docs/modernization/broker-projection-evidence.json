@@ -1,0 +1,54 @@
+{
+  "base_commit": "a45d047",
+  "date": "2026-11-01",
+  "scope": "Verified global broker closure projects to original source peer rows/events; integrated async peer/owner cleanup and separate-process retired-grant projection. Not complete actor enrollment or product launcher/attempt business-state migration.",
+  "source_sha256": {
+    "backend/runtime/peer_broker.py": "010334a06a9e819ae7b07182afc85d9a4408af179bf2d497da6e1215d40dd523",
+    "backend/runtime/peer_registry.py": "855bd7181fb071ed3263db2e34d23533c317807b86f63677892782062a59687a",
+    "backend/runtime/broker_stdio.py": "569fc5e6b42c476214e3527735d54152bde4dc33b289a46e90f2aeba468dd4f9",
+    "backend/tests/runtime/test_broker_projection.py": "f820360b415416680febc2736fe1067e82857bc684b6d8a25360b599f499ca3c",
+    "backend/tests/runtime/test_broker_rpc.py": "36d60868421c89eb3b70181147e57c9f9f9626165ae6265c449605738fc6b305"
+  },
+  "raw_artifacts_sha256": {
+    "broker-projection-red.log": "c11ba901dd5bce5326ffafe6482608875f4a8e9281142dae7dbaddd27204a5b3",
+    "broker-projection-green.log": "48daef777344d2970ccdd5b657bfbe01f3175f10d2fe12b4ae493526190eaf22",
+    "broker-projection-binding-red.log": "6ab7c21747ce621d911cdd4392d8bd6c914168af079931683096a3e84ed3edab",
+    "broker-projection-integration-first.log": "c8f2dd761b411a46924ab6cd55ba907f7cbf9137eb2dc894001cc417683d61a5",
+    "broker-projection-integration-expanded.log": "cf41547d1e7291ddf16c07c4e81927087a3c84cca6057ce5a33a528e34c41646",
+    "broker-projection-missing-binding-red.log": "3dc19fd5f7ccd80e0486392244282f37d4e5768f40a03da9cec5459bdc86d34a",
+    "broker-projection-recovery-red.log": "a882dae5aaf74ff8609fb186c1174e023928cc998eaeb0f04e98a29514ee1372",
+    "broker-projection-focused.log": "fa66b2af4a0cd541d8bb8cb3fd37e8aa240cca806f106b18b977635fac9e8275",
+    "broker-projection-final-focused.log": "38fb9edefe00866af6ce2f4801ea87b069a30a6d8a811e866ed2585bd76f31e8",
+    "broker-projection-full.log": "48255055b834bf46d5b5e11dc8fbea36f64bb16b1c74f31767e0cb9e531387c1",
+    "broker-projection-full.xml": "bd406b88f768fe4e40e144a2c5068ad8b432347c73fa7856142106bea0b1f014",
+    "broker-projection-build.log": "c958413d2e4d5b22030ef1cb9c1b9c08e1e7eb88c673e13650b64a5373ed6375",
+    "broker-projection-package-smoke.log": "0f40da98fb7e69a9e7fd20c62fd8e338e18b36237ce11270d1660a10f2f860c3"
+  },
+  "package_verifier_sha256": "36f14aa3435aac9fba58240cd62a5aa5bc55eae5d253f9cd5f689594c14393f6",
+  "reports": [
+    "broker-projection-results.json",
+    "broker-projection-packaging.json"
+  ],
+  "verified": [
+    "Projection derives closed operations from the verified broker grant, checks source identity/peer/attempt/fence/project/task/protocol/original namespace and records rows/events together without a second signal.",
+    "Explicit live operation and active-grant recovered projection are rejected; matching local closure is event-idempotent. One mismatched row rolls back all local closure updates/events.",
+    "Altered namespace/fence or erased post-G binding is rejected while a real sibling namespace remains usable; an existing copied DB is not accepted as the original source.",
+    "Async connected peer close projects only that peer, leaves sibling/concession live and releases local capacity for nine consecutive real RPC jobs.",
+    "Owner shutdown derives original globally reserved operations even when cancellation during bind prevented endpoint delivery; completed-birth cancellation keeps no undelivered FDs.",
+    "Real source SQLite writer contention does not delay domain retirement; source receipts wait off the event loop and on a worker separate from Stop.",
+    "Deleting the source yields visible projection error without recreating it; global retirement, removed domain and active-concession release remain proved.",
+    "Reservation committed with lost acknowledgement is reconciled via the persisted source locator; no new birth/G required.",
+    "A real separate -I process opens the verified journal and projects a retired grant without live broker cache. Historical metadata without locator stays uncertain for recovery; the live original registry remains usable.",
+    "Final full offline1376:1273 pass,100 exact original baseline failures,3 skip,29 warnings. Runtime443 pass, focused61 pass.",
+    "Wheel29 runtime Python bytes match plus DB/research/probe sources; isolated -I -S actual broker RPC137+63=200, source peer closure, recovered projection without cache, receipt-only retry, domain retirement, stale-attempt rejection and missing-source non-recreation pass."
+  ],
+  "limits": [
+    "Only readonly standard-library analysis profile is composed. RuntimeService/CommandJobs, Codex subscription/Ken/business/development profiles and complete origin/enrollment still need adoption.",
+    "Projection updates participating peer closure only; it does not finalize a run/task, accept work, reconcile outputs/external effects or reset budgets.",
+    "Source locator is not authority. Path/inode/record checks are revalidated; pinned SQLite-connection identity, hostile-host rename races, alias/transfer/restore/generation/handoff proofs remain unproven.",
+    "Historical source locator absence is not guessed; unavailable or contradictory source leaves local projection incomplete while global closure remains separate.",
+    "Global physical closure and local SQL are not an atomic transaction. Local errors surface and can be reconciled after source repair using the existing verified journal; no automatic tool replay.",
+    "No new model calls/images, real user DB migration, host account/service installation, parent cgroup changes, push/merge/deploy. Full modernization remains active."
+  ],
+  "test_correction": "Initial erased-binding test attempted a schema-forbidden bound/null state and failed at setup. Corrected to a valid restored prepared row; removing the missing-binding guard then produced DID NOT RAISE, and restoring it passes. Earlier setup-failure logs are retained, not counted as proof of the guard."
+}

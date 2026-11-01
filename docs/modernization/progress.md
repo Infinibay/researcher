@@ -2024,3 +2024,101 @@ still required. Keep the complete objective active.
   next implementation is the ownership-validated source closure projection above,
   followed by real managed enrollment, product launchers and all full-plan items
   already listed in the next brief. No user data/model/image/host service/deploy work.
+
+## Current task: broker closure projection — base a45d047
+
+- Previous goal turn was progress: f3c5d5b async transport and a45d047 existing-source
+  opens committed. Revalidated tracked clean HEAD and full objective/next brief.
+- Implement source-local closure from the broker's verified durable operations,
+  using the concrete source registry cached only after actual global reservation.
+  Derive all owned operations for owner shutdown, including births whose endpoint
+  was never returned. No generic caller-provided closure boolean or second signal.
+- Match DB origin, peer, attempt/fence, project/task and original namespace within
+  the existing-source transaction. Preserve source events/idempotency. Refuse a
+  changed namespace or copied/replaced source; global physical closure stays true.
+- Integrate connected-peer and whole-attempt async cleanup. Physical/global Stop
+  precedes local SQL, which uses the peer worker and cannot occupy the Stop worker.
+  Missing/locked source is a visible incomplete projection, never state genesis.
+- Validate real two-peer/capacity release, cancellation before/after delivery, local
+  SQL contention, source loss and changed binding. Whole-host enrollment, product
+  launchers/inference profiles and the remaining full plan stay in scope/pending.
+
+## Broker closure projection checkpoint — base a45d047
+
+- Implemented PeerBroker.project_closed using the verified global grant and actual
+  source registry. Checks original physical origin/peer/attempt/fence/project/task/
+  protocol/namespace; source peer rows and peer.closed events commit together.
+  Repeat projection is event-idempotent; no call to close_namespace/registry.close
+  in projection, no new G or task acceptance.
+- Connected-peer cleanup now closes globally then projects its source receipt on
+  the peer worker. Owner cleanup physically retires globally before waiting for
+  source SQL, drains constructors/workers and derives every reserved operation,
+  including a cancelled bind whose endpoint never returned. Nine sequential real
+  RPC jobs prove local capacity is released; a sibling remains usable on peer close.
+- Real source writer contention leaves Stop able to remove its domain first.
+  Missing source yields visible projection error with global retirement/release
+  preserved and no new DB. Existing copied source and altered fence/namespace are
+  rejected; one invalid row rolls back all local rows/events.
+- Initial four projection cases observed RED→GREEN. Async integration assertions
+  failed on local bound/prepared state before wiring, then passed. Erased-binding
+  test initially violated the schema bound/non-null constraint; corrected to a
+  valid prepared state as an old restore could leave. A controlled removal of
+  the binding guard then produced DID NOT RAISE; restored guard passes. Retained
+  the setup-failure logs rather than describing them as proof of the guard.
+- Lost committed reservation acknowledgement test RED exposed dependence on live
+  source cache. Added absolute source_database locator to new grant metadata via
+  concrete PeerRegistry.admission. It only locates: projection rechecks original
+  DB identity and rows. The lost-ack case now closes the original prepared peer
+  without a birth/G. No new source is inferred from a missing filename.
+- Separate-process projection test RED exposed missing recovery API. Added
+  project_recovered only for verified retired grants with removed domain; actual
+  -I subprocess projects from the journal/locator, no live broker cache. Active
+  grant is rejected. Historical grant without locator stays uncertain in recovery;
+  current owner can still use its retained original registry.
+- Final focused61 pass. Whole bare suite1376:1273 pass,100 exact original baseline
+  failure identities,3 skip,29 warnings;443 runtime pass. New/resolved failure sets
+  empty. All5 changed Python files pass Ruff check/format; git diff check passes.
+- Offline wheel/SDist build passed. All29 runtime Python bytes match extracted
+  wheel; isolated -I -S process computes137+63=200 via broker JSON-RPC, verifies
+  source peer closure, reprojects retired grant without cache, retries receipt-only,
+  retires/rejects stale attempt and does not recreate missing source. Only synthetic
+  migrated source and provisioned exact private cgroup/journal were used. The known
+  blocked urllib3 IPv6 probe occurs in legacy migration-helper preparation, not inference.
+- Ruling: project local closure directly after verified global proof, without
+  signalling from source DB rows — a changed binding must not kill a sibling —
+  cost: temporary host-infrastructure coupling to concrete PeerRegistry storage
+  helpers remains until the larger product adapter boundary is migrated.
+- Ruling: persist a source locator as additive optional grant metadata — lost-ack/
+  recovery tests demonstrated that a live cache is insufficient — cost: historical
+  grants without locator need the retained verified source or explicit reconciled
+  enrollment; no guessed path or automatic alias/restore adoption.
+- Ruling: keep global retirement separate from the atomic local projection — source
+  loss/SQL cannot delay physical Stop — cost: local projection may need explicit
+  reconciliation after repair; a closed peer is not a completed run/task.
+- Ken recall/blast-radius again have no indexed worktree runtime files; direct
+  known callers/tests were read. Prior Ken remember rejection for evidence outside
+  its original-checkout root still applies; findings remain anchored in this
+  architecture/evidence/ledger rather than an unrelated original path.
+- Status/coverage/evidence/package reports updated; no phase/scenario marked done.
+  No new model/image turns, user DB migration, account/service install, shared-parent
+  cgroup changes, push/merge/deploy. Whole modernization objective remains active.
+
+## Next brief after broker closure projection
+
+Continue FULL plan. Do not redo the existing-source guard, async transport/closure,
+source projection, journal/kernel/gate primitives, input/chat/tasks pilots or the8
+concept assets. Adopt these actual components into managed host composition and
+RuntimeService/CommandJobs with authenticated admission, external origin/complete
+actor-domain proof and non-reused provisioned generations. Implement real Codex
+subscription/Ken/business/development profiles and runtime/assets manifests; the
+current socket-denied analysis capsule is not an inference profile. Bind durable
+bounded outputs, wall/CPU/lease controls and run business-state reconciliation to
+actual broker receipts. Published Ken and subscription must pass through that final
+product path before mutable capabilities are enabled.
+Removal-before-durable-retirement/parent-generation proof, alias/transfer/restore/
+handoff, uncertain budgets, all71 tools/11 categories, engine/autonomy/roles/flows/
+agent communication, exact Git candidate/review/CI, full prompts/book-skills/evals/
+human comprehension, data/backup/bootstrap/CLI/TUI/clean install, dependency updates/
+18 npm advisories and100 baseline failures remain. UI still6/36 desktop+2/12 mobile
+concepts,2 pilots,0/12 accepted pages;30+10 concepts/10 routes and all12 acceptance
+remain. Final fresh independent whole-branch review required; keep full goal active.

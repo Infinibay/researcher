@@ -1,6 +1,7 @@
 """Actual RPC frames through broker-owned kernel peers, without model calls."""
 
 import asyncio
+import sqlite3
 from pathlib import Path
 from threading import Event
 
@@ -37,6 +38,8 @@ async def test_rpc_uses_broker_transport_and_closes_only_its_original_peer(
         assert (
             path.exists() and storage.load().records["broker:active"] == broker.grant_id
         )
+        assert registry.inspect(peer)["state"] == "closed"
+        assert registry.inspect(another)["state"] == "bound"
         assert await second.request("echo", {"value": 200}) == {"value": 200}
     assert not path.exists() and storage.load().records["broker:active"] is None
 
@@ -104,6 +107,7 @@ async def test_cancellation_during_start_withdraws_before_slow_bind_returns(
             v for k, v in storage.load().records.items() if k.startswith("broker:op:")
         ]
         assert len(operations) == 1 and operations[0]["gate_sent"] is False
+        assert registry.inspect(peer)["state"] == "closed"
     finally:
         release.set()
         await owner.aclose()
@@ -246,3 +250,87 @@ async def test_cancel_at_completed_birth_disposes_undelivered_data_fds(
         for result in results:
             if result.child is not None:
                 result.child.close_handles()
+
+
+async def test_closed_command_peers_release_source_capacity_for_later_jobs(
+    broker_setup,
+):
+    from backend.runtime.broker_stdio import AsyncPeerBroker
+    from backend.runtime.codex_rpc import JsonRpcClient
+
+    _s, registry, peer, broker, _storage, _path = broker_setup
+    async with AsyncPeerBroker(broker) as owner:
+        current = peer
+        for number in range(9):
+            if number:
+                current = next_peer(registry, peer)
+            async with JsonRpcClient(
+                owner.peer(
+                    registry, current, operation_key=f"job-{number}", code=code()
+                )
+            ) as client:
+                assert await client.request("echo", {"job": number}) == {"job": number}
+            assert registry.inspect(current)["state"] == "closed"
+
+
+async def test_local_sql_contention_cannot_delay_domain_stop(broker_setup, monkeypatch):
+    from backend.runtime.broker_stdio import AsyncPeerBroker
+    from backend.runtime.codex_rpc import JsonRpcClient
+
+    s, registry, peer, broker, storage, path = broker_setup
+    owner = await AsyncPeerBroker(broker).__aenter__()
+    client = await JsonRpcClient(
+        owner.peer(registry, peer, operation_key="local-busy", code=code())
+    ).__aenter__()
+    entered = Event()
+    original = broker.project_closed
+
+    def observe(**kwargs):
+        entered.set()
+        return original(**kwargs)
+
+    monkeypatch.setattr(broker, "project_closed", observe)
+    s.c.conn.execute("BEGIN IMMEDIATE")
+    closing = asyncio.create_task(client.aclose())
+    stopping = None
+    try:
+        async with asyncio.timeout(2):
+            while not entered.is_set():
+                await asyncio.sleep(0.01)
+        assert not closing.done()
+        stopping = asyncio.create_task(owner.aclose())
+        async with asyncio.timeout(2):
+            while path.exists():
+                await asyncio.sleep(0.01)
+        assert not stopping.done(), "Source writer should still hold the receipt"
+    finally:
+        s.c.conn.rollback()
+        await closing
+        await owner.aclose()
+        if stopping is not None:
+            await stopping
+    assert registry.inspect(peer)["state"] == "closed"
+    assert storage.load().records["broker:active"] is None
+
+
+async def test_async_stop_preserves_global_receipt_if_source_disappears(broker_setup):
+    from backend.runtime.broker_stdio import AsyncPeerBroker
+    from backend.runtime.codex_rpc import JsonRpcClient
+
+    s, registry, peer, broker, storage, path = broker_setup
+    owner = await AsyncPeerBroker(broker).__aenter__()
+    client = await JsonRpcClient(
+        owner.peer(registry, peer, operation_key="source-lost", code=code())
+    ).__aenter__()
+    database = Path(s.c.database)
+    try:
+        assert await client.request("echo", {"value": 137}) == {"value": 137}
+        database.unlink()
+        with pytest.raises(sqlite3.OperationalError):
+            await client.aclose()
+        with pytest.raises(sqlite3.OperationalError):
+            await owner.aclose()
+        assert not database.exists() and not path.exists()
+        assert storage.load().records["broker:active"] is None
+    finally:
+        await asyncio.gather(client.aclose(), owner.aclose(), return_exceptions=True)

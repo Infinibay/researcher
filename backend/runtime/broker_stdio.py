@@ -144,9 +144,13 @@ class AsyncPeerBroker:
             # retired executor or wait on endpoint tasks from owner shutdown.
             await asyncio.shield(self._closing)
             return
-        future = asyncio.get_running_loop().run_in_executor(
-            self._peer_pool, self.broker.close_peer, operation_id
-        )
+
+        def close():
+            receipt = self.broker.close_peer(operation_id)
+            self.broker.project_closed(operation_id=operation_id)
+            return receipt
+
+        future = asyncio.get_running_loop().run_in_executor(self._peer_pool, close)
         self._peer_pending.add(future)
 
         def observed(done):
@@ -188,6 +192,11 @@ class AsyncPeerBroker:
                 await asyncio.get_running_loop().run_in_executor(
                     self._stop_pool, self.broker.revoke
                 )
+            # Source-local SQL is never on the physical Stop path. Derive all
+            # reserved operations, including cancelled/undelivered endpoints.
+            await asyncio.get_running_loop().run_in_executor(
+                self._peer_pool, self.broker.project_closed
+            )
         finally:
             for endpoint in self._endpoints:
                 endpoint._close_io()

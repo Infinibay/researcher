@@ -113,14 +113,38 @@ Los cierres tienen alcances distintos:
 
 `PeerBroker.close_peer` prueba cierre físico antes de intentar confirmar su recibo
 global. Si SQLite está ocupado devuelve contención, conserva la concesión y permite
-reintentar sólo ese cierre. No proyecta todavía la retirada en el SQL del proyecto:
-esa integración queda pendiente. Ya se corrigió el prerrequisito de apertura: las
+reintentar sólo ese cierre. El adaptador asíncrono confirma después su proyección
+local mediante `project_closed`: registra el cierre original sin otra señal ni
+otro gate. Al cerrar el propietario proyecta las operaciones de la concesión,
+también si su arranque se canceló antes de devolver un endpoint. Las
 transacciones de `SQLiteRunStore`, el registro de workspaces, las vistas del dueño
 y el store de investigación usan `mode=rw`. Si la DB desaparece, falla la apertura
 sin crear un fichero vacío; el bootstrap explícito mantiene su creación normal.
 La codificación de la URI conserva nombres con `?`, `#`, `%` y espacios. Este modo
 no demuestra identidad física, no sustituye los checks de origen y no protege por
 sí solo una sustitución de un fichero existente.
+
+La proyección vuelve a leer el journal verificado. En una transacción local exige
+DB física original, peer, intento/fence, proyecto/tarea, protocolo y namespace
+originales. Una fila que perdió el binding no se convierte en cerrada si el journal
+indica envío confirmado o incierto. Filas y eventos se confirman juntos; repetir
+una proyección no duplica eventos. Si una fila contradice la evidencia, toda esa
+transacción local se revierte sin señalar el namespace que ahora diga la DB.
+
+Las concesiones nuevas guardan `source_database` como localizador absoluto, además
+de la identidad física. El localizador permite encontrar la fuente después de una
+respuesta perdida o un reinicio; no prueba propiedad ni autoriza una copia. Con
+una concesión global ya retirada y dominio eliminado, `project_recovered` puede
+proyectar desde otro proceso sin caché del propietario. Un registro histórico sin
+localizador requiere la fuente original aún conservada por el propietario vivo;
+el recuperador declara incertidumbre en vez de adivinar una ruta.
+
+Stop retira el dominio global antes de esperar al SQL local. La proyección usa el
+trabajador de peers, separado del de Stop. Si la fuente está ocupada o desapareció,
+su confirmación local queda pendiente y el error es visible; no se pierde el recibo
+global ni se recrea la DB. La reconciliación se puede repetir desde el journal tras
+resolver la fuente, sin ejecutar herramientas. Esto actualiza peers participantes;
+no finaliza por sí solo el estado de negocio del intento o de la tarea.
 
 Una escritura bloqueada tiene deadline y no retiene el event loop. Al cerrar se
 aborta la tubería de escritura antes de liberar sus FDs: un cierre graceful podría
@@ -173,11 +197,15 @@ syscalls crudos, subproceso, symlink al controlador y escritura por path/FD de f
   backpressure y deadline durante escritura bloqueada.
 - Stop con trabajador de cierre bloqueado, cancelación durante bind y cancelación
   justo después de un nacimiento completado sin dejar FDs sin entregar abiertos.
+- Proyección local idempotente, nueve comandos consecutivos liberando capacidad,
+  SQL local ocupado durante Stop, fuente ausente/copiada, fence/namespace alterados,
+  pérdida de acuse de reserva confirmada y proyección en un proceso independiente.
 - Wheel nativa extraída, importación aislada `-I -S`, mismo recorrido desde datos
   sintéticos migrados, retry y retirada real. El bootstrap sigue siendo de test.
 
 [Resultados y límites actuales](../modernization/peer-broker-evidence.json).
 [Transporte asíncrono y regresiones](../modernization/broker-stdio-evidence.json).
+[Proyección del cierre](../modernization/broker-projection-evidence.json).
 
 ## Trabajo pendiente de la autoridad completa
 
@@ -185,8 +213,9 @@ syscalls crudos, subproceso, symlink al controlador y escritura por path/FD de f
    intención durable, generaciones no reutilizables y migración de escritores
    anteriores. Un cgroup temporal vacío no acredita esos hechos.
 2. Composición productiva/autenticación del broker, RuntimeService/CommandJobs,
-   captura durable y acotada de salidas, wall/CPU/lease fuses y retiro del intento
-   local. Este componente no añade un scheduler ni un loop de inferencia paralelo.
+   captura durable y acotada de salidas, wall/CPU/lease fuses y reconciliación del
+   estado de negocio del intento. La proyección de peers ya existe; falta integrar
+   los casos de uso productivos. No añade scheduler ni loop de inferencia paralelo.
 3. Perfiles de Codex/Ken/negocio y desarrollo, manifiestos de runtime/assets unidos
    al catálogo durable, compatibilidad durante upgrades y pruebas adversarias de
    cada perfil. El perfil actual no permite inferencia, red ni edición.
