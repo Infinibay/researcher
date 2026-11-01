@@ -272,13 +272,23 @@ class NativeCapsule(AnalysisCapsule):
     """
 
     def __init__(
-        self, binding, asset, info_fd, *, network=None, host_tools=False, code_host=None
+        self,
+        binding,
+        asset,
+        info_fd,
+        *,
+        network=None,
+        host_tools=False,
+        code_host=None,
+        native_state=None,
     ):
         super().__init__(binding, None, info_fd)
         self.asset = asset
         self.network_config = network
         self.host_tools = host_tools
         self.code_host = code_host
+        self.native_state = native_state
+        self._state_fd = None
         self._code_host_fd = None
         self._network_fds = {}
         self._asset_fd = None
@@ -357,6 +367,14 @@ class NativeCapsule(AnalysisCapsule):
             str(self._asset_fd),
             "/run/researcher-runtime/codex",
         ]
+        if self.native_state is not None:
+            state_path = Path(self.native_state.path)
+            if state_path.is_relative_to(self.binding.workspace) or Path(
+                self.binding.workspace
+            ).is_relative_to(state_path):
+                raise ValueError("Native state must stay outside source")
+            self._state_fd = self._stack.enter_context(self.native_state.opened())
+            mounts += ["--bind-fd", str(self._state_fd), "/home/actor/.codex"]
         if self._code_host_fd is not None:
             mounts += [
                 "--ro-bind-fd",
@@ -396,6 +414,8 @@ class NativeCapsule(AnalysisCapsule):
             RAYON_NUM_THREADS="2",
         )
         self.pass_fds += (self._asset_fd,)
+        if self._state_fd is not None:
+            self.pass_fds += (self._state_fd,)
         if self._code_host_fd is not None:
             self.pass_fds += (self._code_host_fd,)
             self.env["PATH"] = "/run/researcher-runtime:" + self.env["PATH"]
@@ -421,6 +441,7 @@ class NativeProxyCapsule(NativeCapsule):
         channel,
         host_tools=False,
         code_host=None,
+        native_state=None,
     ):
         super().__init__(
             binding,
@@ -429,6 +450,7 @@ class NativeProxyCapsule(NativeCapsule):
             network=network,
             host_tools=host_tools,
             code_host=code_host,
+            native_state=native_state,
         )
         self.channel = channel
 

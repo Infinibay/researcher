@@ -64,6 +64,10 @@ def test_prepared_peer_closure_prevents_late_binding_and_payload(coordination):
     assert process.returncode != 0 and b"UNEXPECTED PAYLOAD" not in out
     assert registry.inspect(peer)["state"] == "closed"
     assert coordination.store.get(101, run.run_id).status == "running"
+    replacement = registry.prepare(lease, "native")
+    assert replacement != peer
+    assert registry.inspect(replacement)["state"] == "prepared"
+    assert registry.inspect(peer)["state"] == "closed"
     with pytest.raises(RunConflict):
         registry.prepare(lease, "native")
 

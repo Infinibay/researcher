@@ -2979,3 +2979,121 @@ CLI/TUI/install/dependencies/18npm advisories and100baselinefails remain require
 UI unchanged6/36desktop+2/12mobileconcepts,2pilots,0/12accepted:30+10concepts,
 10other routes and all12acceptance pending. Final fresh whole-branch review is
 required when the whole implementation is ready, not after each adapter.
+
+## Current task: retained native state and explicit non-replaying resume — basee11acb4
+
+- Previous goal turn was progress: measured helper/offline capability gate and
+  actual one-turn subscription/Ken/business draft acceptance committed e11acb4.
+- Old contract: broker NativeCapsule discards CODEX_HOME; broker_inference accepts
+  fresh threads only; source unique index disallows another native peer even after
+  verified close. Thus recording thread_id alone cannot enable cold inspection.
+- New contract: explicitly provision private native DATA outside source, bind its
+  original DB/attempt/fence/context/workspace to witnessed journal, mount only its
+  home via pinned FD, and retain it after physical close. State is not authority;
+  missing/replaced/credential-containing home rejects, never recreates on reopen.
+- Ruling: permit a replacement native peer only after prior source peer is closed;
+  preserve closed history and business uniqueness via migration32, not row reset —
+  why: a resumed RPC must have original lifetime/namespace ownership — cost: consumers
+  must tolerate multiple historical native peers; inspect recovery/AttemptPeers.
+- Before thread/start persist session intent (model/catalog/instructions hash), then
+  bind returned ID before exposing session. Lost thread receipt blocks blind start.
+  Resume same thread only with identical recorded intent and metadata; omit new
+  dynamicTools. Before any state-backed turn reserve its one-attempt dispatch in
+  global journal; a lost or completed dispatch is never replayed after reopening.
+  Resume opens/inspects state, not automatic continuation or new authority. Retired
+  attempt/grant is not revived; cross-attempt continuation remains explicit product
+  context/admission work. No unstable history/path restoration fallback.
+- Affected shared files: broker_profile/peer_broker/broker_stdio/broker_inference,
+  source native-peer index migration and tests. Keep default ephemeral call shapes.
+  Tests: historical index data/rollback, state identity/origin/absence, actual Codex
+  thread persistence/read/resume without model/account, controlled composed restart
+  with recorded catalog, no turn replay/changed intent. Reuse existing RPC/LLM loop.
+- Ken original-checkout search/recall/related cannot index these newer runtime files;
+  inspected managed worktree call sites/SQL directly. Apply Ken plan-change, DDIA
+  source-of-truth/crash semantics and legacy characterization; full scope unchanged.
+
+## Retained native state observations and compatibility
+
+- RED8 new state/migration cases failed (missing implementation/resource). New
+  NativeState explicitly provisions private data outside source, fsyncs directory
+  entries and registers immutable original source/attempt/context and inode identity
+  in witnessed journal. It never bootstraps authority or adopts existing folders.
+  Absence/replacement/auth.json rejects reopening; no silent recreation.
+- Native state mount/reservation are part of original broker manifest and atomic
+  global operation reservation. Only home is RW by pinned FD; journal/host credentials
+  stay unmounted. Previous writer requires published execution_closed before reuse.
+- Actual offline Codex first failed read after restart: fresh thread rollout is
+  intentionally unmaterialized before first user input (verified pinned official
+ 0.166 thread_start test/source). Ruling: seed a fixed USER message with injection
+  only in the offline fixture, no turn/model/account; production never reconstructs
+  a missing thread with injected history or path fallback — cost: test demonstrates
+  persistence after materialization, not a durable empty thread or generative resume.
+  Actual two native processes then read/resume same thread, account null, no auth.json.
+- RED5 composed state/resume cases, then shared broker_inference now records model/
+  catalog/instructions intent before thread/start and ID before exposure. Resume
+  checks identical intent and thread metadata, restores catalog without dynamicTools
+  replacement, refreshes Ken and probes actual helper before opening. Changed intent,
+  wrong native workspace or lost ID prevents thread/resume/start/turn.
+- One state-backed attempt dispatch is reserved before native turn. Completed and
+  lost-reservation-ack cases cannot send it again after reopening, including when
+  native turns_sent was0. Native state is not authorization and a retired grant/
+  attempt cannot reactivate. No second inference loop was added.
+- RED duplicate-home test exposed possible reservation reset through another state;
+  added atomic original-origin→state reference, rejecting a second provision before
+  creating directories. GREEN37 directed tests. No paid generation in this task.
+- Initial complete suite exposed7 new failures:6 historical fixture cases omitted
+  new migration32 from their explicit stop-at-version lists;1 old ownership test
+  expected permanent native uniqueness. Corrected fixtures without changing their
+  asserted history, and old peer test still rejects its late payload while allowing
+  a DISTINCT replacement and rejecting a second live native. GREEN24 compatibility
+  tests; second complete suite is running via specific session49241, not assumed green.
+- Final offline wheel+SDist build after fixture fixes passed;43 runtime modules,
+ 11 fixtures/tests and2 DB sources byte-match (56 comparisons). Extracted -I -S
+  dependency-explicit wheel passes61 directed/compatibility tests. No complete clean
+  product install, native model turn/account access, user DB migration or deployment.
+
+## Retained-state checkpoint verified
+
+- Second full suite session49241 is terminal exit1 for baseline only:1563 total,
+ 1460 pass,100 EXACT inherited failure identities,3 skipped/29 warnings; runtime616
+  pass.17 added cases pass. No baseline failures were hidden or accepted as new.
+- Extracted-wheel61 tests/56 byte comparisons and offline build passed. Final
+  changed-modern-file Ruff/format/diff checks pass. Evidence native-state-{evidence,
+  results,packaging}.json, architecture/native-state.md, coverage/status updated.
+- Source schema32 is exercised on synthetic/history fixtures only; no user DB
+  migration. No model/image/account credential call, host service install, push,
+  merge or deployment. Whole plan remains active; no product migration marked done.
+
+## Next brief after retained state — full objective unchanged
+
+Do not repeat capability/account/joint generation fixtures as progress. Current
+broker/native/Ken/business composition works; retained native state and explicit
+same-concession read/resume are connected to broker_inference, with one original
+state/turn reservation per attempt and no lost-ack replay. Empty Codex threads do
+not materialize before user input; missing disk thread must remain uncertainty,
+not injected-history restoration. Retired attempt/broker cannot be reactivated.
+The product still chooses native_inference.CodexRuntime via configured_runtime;
+RuntimeService.open already supplies peer_owner/active/limits and consumes common
+InferenceSession fields. NEXT IMPLEMENT THE OWNED PRODUCT FACTORY, rather than
+another disconnected primitive. Inspect RuntimeService/AttemptPeers/configured_runtime
+and lifecycle requirements; reuse durable request/context/budget/control/receipts.
+The existing host_business supports injected HTTPX transport. Consider same-app
+ASGITransport supplied by app lifespan to keep business/API/grant controller and
+source identity concrete without introducing a spoofable second loopback service;
+retain server route/store checks and withdrawal-before-drain. Decide after reading
+actual interfaces, do not duplicate business rules or another inference loop.
+The factory needs explicit externally provisioned journal/domain/root policy,
+NativeState, published Ken prepare/MCP, measured Codex/helper/public network inputs,
+external subscription coordinator and owned analysis/development. If installation
+lacks authority provision, supply an EXPLICIT operator init/bootstrap command for
+NEW private storage, not automatic creation/adoption on start or missing-state
+recovery. No silent fallback to old launcher or API-key billing. Template2GiB is
+explicit policy based on observed Ken needs, not proof of general capacity.
+Keep cold-service recovery/cross-attempt continuation, managed OAuth/account lifecycle,
+complete origin/enrollment and producer migration visible and validated. All71tools/
+11categories, fullengine/loop/autonomy/roles/flows/agent protocol and Git/review/CI;
+allprompts/bookskills/evals/human comprehension; data/restore/bootstrap/CLI/TUI/install/
+dependencies/18npm advisories and100baselinefails remain required. UI unchanged
+6/36desktop+2/12mobileconcepts,2pilots,0/12accepted:30+10concepts,10other routes and
+all12acceptance pending. Final fresh whole-branch review is required after the whole
+implementation, not this component. No scope reduction or completion claim.

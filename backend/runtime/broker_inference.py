@@ -50,9 +50,10 @@ def _prepared(endpoint, operation_id):
 
 
 class BrokerInferenceSession(InferenceSession):
-    def __init__(self, native, tools, active, refresh):
+    def __init__(self, native, tools, active, refresh, endpoint):
         super().__init__(native, tools, active)
         self._refresh = refresh
+        self._endpoint = endpoint
 
     async def _request(self, request):
         if self.active() and request["method"] == "item/tool/call":
@@ -63,6 +64,16 @@ class BrokerInferenceSession(InferenceSession):
 
     async def run(self, text, *, on_event=None, on_started=None):
         await self._refresh()
+        endpoint = self._endpoint
+        if endpoint.native_state is not None:
+            if not self.active():
+                raise RpcProtocolError("Native attempt authority ended")
+            await asyncio.to_thread(
+                endpoint.native_state.reserve_turn,
+                endpoint.owner.broker.journal,
+                endpoint._operation,
+                text,
+            )
         return await super().run(text, on_event=on_event, on_started=on_started)
 
 
@@ -89,13 +100,13 @@ async def broker_inference(
         or native.workspace != PEER_WORKSPACE
         or native.sandbox != "read-only"
         or native.permission_profile is not None
-        or native.resume_thread_id is not None
+        or (native.resume_thread_id is not None and endpoint.native_state is None)
         or native.thread_id is not None
         or native.dynamic_tools is not None
         or not isinstance(prepared_operation, str)
     ):
         raise RpcProtocolError(
-            "Owned native/Ken profiles and a fresh readonly session required"
+            "Owned native/Ken profiles and an original readonly session required"
         )
 
     def admitted():
@@ -176,9 +187,40 @@ async def broker_inference(
                 raise RpcProtocolError("Owned native host-tool configuration mismatch")
             await refresh()
             await probe_code_mode(rpc)
+            if endpoint.native_state is not None:
+                await asyncio.to_thread(
+                    endpoint.native_state.prepare_thread,
+                    endpoint.owner.broker.journal,
+                    endpoint._operation,
+                    model=native.model,
+                    catalog_hash=tools.catalog_hash,
+                    developer_instructions=native.developer_instructions,
+                    resume_thread_id=native.resume_thread_id,
+                )
+                if native.resume_thread_id is not None:
+                    thread = (
+                        await rpc.request(
+                            "thread/read",
+                            {
+                                "threadId": native.resume_thread_id,
+                                "includeTurns": False,
+                            },
+                        )
+                    )["thread"]
+                    if (
+                        thread.get("id") != native.resume_thread_id
+                        or thread.get("cwd") != str(PEER_WORKSPACE)
+                        or thread.get("model") != native.model
+                        or thread.get("modelProvider") != "openai"
+                    ):
+                        raise RpcProtocolError(
+                            "Native stored thread metadata differs from original intent"
+                        )
 
         native.before_thread = preflight
-        native.dynamic_tools = tools.catalog
+        native.dynamic_tools = (
+            None if native.resume_thread_id is not None else tools.catalog
+        )
         try:
             async with native:
                 configured = native.thread_configuration
@@ -189,7 +231,14 @@ async def broker_inference(
                     raise RpcProtocolError(
                         "Native thread did not retain its admitted workspace/model"
                     )
-                yield BrokerInferenceSession(native, tools, admitted, refresh)
+                if endpoint.native_state is not None:
+                    await asyncio.to_thread(
+                        endpoint.native_state.bind_thread,
+                        endpoint.owner.broker.journal,
+                        endpoint._operation,
+                        native.thread_id,
+                    )
+                yield BrokerInferenceSession(native, tools, admitted, refresh, endpoint)
         finally:
             # A closed connection is never reusable. Retain its admitted catalog
             # for receipts, but do not leave a callback to a retired MCP scope.

@@ -29,6 +29,7 @@ def version23(database, conn, monkeypatch):
                     "admission_schema.sql",
                     "task_inputs_schema.sql",
                     "run_input_schema.sql",
+                    "native_state_schema.sql",
                 )
                 else apply_resource(conn, path)
             ),

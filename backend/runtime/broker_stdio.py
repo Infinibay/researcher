@@ -96,6 +96,7 @@ class AsyncPeerBroker:
         egress=None,
         host_tools=False,
         code_host=None,
+        native_state=None,
     ):
         return self._endpoint(
             registry,
@@ -106,6 +107,7 @@ class AsyncPeerBroker:
             egress=egress,
             host_tools=host_tools,
             code_host=code_host,
+            native_state=native_state,
         )
 
     def ken(
@@ -142,6 +144,7 @@ class AsyncPeerBroker:
         ken_mode="mcp",
         host_tools=False,
         code_host=None,
+        native_state=None,
     ):
         if not self._entered or self._closing is not None:
             raise AuthorityConflict("Async broker is not admitted")
@@ -161,6 +164,7 @@ class AsyncPeerBroker:
             ken_mode=ken_mode,
             host_tools=host_tools,
             code_host=code_host,
+            native_state=native_state,
         )
         self._endpoints.append(endpoint)
         return endpoint
@@ -192,6 +196,8 @@ class AsyncPeerBroker:
             payload["host_tools"] = endpoint.host_tools
         if endpoint.code_host is not None:
             payload["code_host"] = endpoint.code_host
+        if endpoint.native_state is not None:
+            payload["native_state"] = endpoint.native_state
         future = loop.run_in_executor(
             self._launch_pool,
             lambda: start(
@@ -319,6 +325,7 @@ class BrokerEndpoint:
         ken_mode="mcp",
         host_tools=False,
         code_host=None,
+        native_state=None,
     ):
         self.owner, self.registry, self.peer_id = owner, registry, peer_id
         self.operation_key, self.code = operation_key, code
@@ -328,6 +335,7 @@ class BrokerEndpoint:
         self.ken, self.model_cache, self.ken_mode = ken, model_cache, ken_mode
         self.host_tools = host_tools
         self.code_host = code_host
+        self.native_state = native_state
         self.stdin = self.stdout = self.stderr = None
         self._raw = None
         self._operation = None

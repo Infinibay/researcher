@@ -33,6 +33,7 @@ from backend.runtime.egress_proxy import EgressPolicy, TunnelProxy
 from backend.runtime.execution_domain import DomainIdentity, ExecutionDomain
 from backend.runtime.ken_worker import KenInstallation
 from backend.runtime.native_network import NativeNetwork
+from backend.runtime.native_state import NativeState
 from backend.runtime.peer_process import (
     NamespaceIdentity,
     _pidfd,
@@ -149,7 +150,14 @@ class PeerBroker:
         return "broker:grant:" + self.grant_id
 
     def _reserve(
-        self, admission, operation_id, intent, peer_id, *, runtime_manifest=None
+        self,
+        admission,
+        operation_id,
+        intent,
+        peer_id,
+        *,
+        runtime_manifest=None,
+        native_state=None,
     ):
         snapshot = self.journal.load()
         active = snapshot.records.get("broker:active")
@@ -239,6 +247,19 @@ class PeerBroker:
                 "broker:fence": grant["global_fence"],
                 attempt_key: self.grant_id,
                 "broker:op:" + operation_id: operation,
+                **(
+                    {
+                        native_state.key: native_state.reservation(
+                            self.journal,
+                            snapshot,
+                            admission,
+                            self.grant_id,
+                            operation_id,
+                        )
+                    }
+                    if native_state is not None
+                    else {}
+                ),
             },
         )
         return operation
@@ -328,6 +349,7 @@ class PeerBroker:
         egress=None,
         host_tools=False,
         code_host=None,
+        native_state=None,
     ):
         if type(host_tools) is not bool or (
             host_tools and (network is None or egress is None)
@@ -339,6 +361,8 @@ class PeerBroker:
             raise TypeError("Code-mode host asset requires the host-tools profile")
         if not isinstance(asset, CodexAsset):
             raise TypeError("Native launch requires an inspected Codex asset")
+        if native_state is not None and not isinstance(native_state, NativeState):
+            raise TypeError("Native state requires an original witnessed identity")
         if network is not None and not isinstance(network, NativeNetwork):
             raise TypeError("Native network requires inspected public inputs")
         if egress is not None and (
@@ -356,6 +380,7 @@ class PeerBroker:
             egress=egress,
             host_tools=host_tools,
             code_host=code_host,
+            native_state=native_state,
         )
 
     def _run(
@@ -373,6 +398,7 @@ class PeerBroker:
         ken_mode="mcp",
         host_tools=False,
         code_host=None,
+        native_state=None,
     ):
         command_key(operation_key)
         if asset is None and ken is None:
@@ -399,6 +425,16 @@ class PeerBroker:
                         else "readonly-native-codex-v1"
                     ),
                     "host_tools": host_tools,
+                    **(
+                        {
+                            "native_state": asdict(native_state),
+                            "native_state_code_sha256": hashlib.sha256(
+                                Path(__file__).with_name("native_state.py").read_bytes()
+                            ).hexdigest(),
+                        }
+                        if native_state is not None
+                        else {}
+                    ),
                     **(
                         {
                             "code_host": asdict(code_host),
@@ -507,6 +543,7 @@ class PeerBroker:
                 runtime_manifest=manifest
                 if asset is not None or ken is not None
                 else None,
+                native_state=native_state,
             )
             self._projection_source = registry
             self._gate_observed[operation_id] = False
@@ -544,6 +581,11 @@ class PeerBroker:
                     **({"channel": channel} if channel is not None else {}),
                     **({"host_tools": True} if host_tools else {}),
                     **({"code_host": code_host} if code_host is not None else {}),
+                    **(
+                        {"native_state": native_state}
+                        if native_state is not None
+                        else {}
+                    ),
                     **(
                         {"model_cache": model_cache, "mode": ken_mode}
                         if ken is not None

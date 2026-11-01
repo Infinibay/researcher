@@ -1322,7 +1322,13 @@
         "docs/modernization/host-business-evidence.json",
         "docs/modernization/host-business-results.json",
         "docs/modernization/host-business-live.json",
-        "docs/modernization/host-business-packaging.json"
+        "docs/modernization/host-business-packaging.json",
+        "docs/architecture/native-state.md",
+        "docs/modernization/native-state-evidence.json",
+        "docs/modernization/native-state-results.json",
+        "docs/modernization/native-state-packaging.json",
+        "backend/tests/runtime/test_native_state.py",
+        "backend/db/native_state_schema.sql"
       ],
       "remaining": [
         "Migrate all legacy callers and capability families",
@@ -2067,7 +2073,13 @@
         "docs/modernization/owned-joint-attempt.json",
         "docs/modernization/owned-joint-host-v2.json",
         "backend/tests/runtime/test_code_mode_host.py",
-        "docs/modernization/owned-joint-host-v3.json"
+        "docs/modernization/owned-joint-host-v3.json",
+        "docs/architecture/native-state.md",
+        "docs/modernization/native-state-evidence.json",
+        "docs/modernization/native-state-results.json",
+        "docs/modernization/native-state-packaging.json",
+        "backend/tests/runtime/test_native_state.py",
+        "backend/db/native_state_schema.sql"
       ],
       "implemented": [
         "Actual real-journal global reserve, contained namespace birth, global identity publication, concrete source PeerRegistry bind and sole pre-start G decision in one host operation.",
@@ -2147,7 +2159,13 @@
         "docs/modernization/owned-joint-attempt.json",
         "docs/modernization/owned-joint-host-v2.json",
         "backend/tests/runtime/test_code_mode_host.py",
-        "docs/modernization/owned-joint-host-v3.json"
+        "docs/modernization/owned-joint-host-v3.json",
+        "docs/architecture/native-state.md",
+        "docs/modernization/native-state-evidence.json",
+        "docs/modernization/native-state-results.json",
+        "docs/modernization/native-state-packaging.json",
+        "backend/tests/runtime/test_native_state.py",
+        "backend/db/native_state_schema.sql"
       ],
       "implemented": [
         "Required-five Ken catalog/JSON schema/argument mediation and shared result/authority boundaries.",
@@ -2156,13 +2174,14 @@
         "Controlled composed protocol reads Ken then business; detected midturn failure prevents business dispatch; closed scopes preserve caller error.",
         "Source and extracted-wheel published Ken catalog/mediated read succeeded;38 packaged tests passed.",
         "Separate inspected code-mode helper, readonly FD mount and fixed bounded V1/JS/delegate readiness before thread/start.",
-        "Actual corrected-profile subscription turn: Ken find/read and8 successful business calls, one provisional finding/one draft report/readback, task remains in_progress, source unchanged and registered peers/domain/tunnels closed. Observed120894 cumulative tokens and peak1571897344bytes at2GiB; post-exit business.closed not directly sampled."
+        "Actual corrected-profile subscription turn: Ken find/read and8 successful business calls, one provisional finding/one draft report/readback, task remains in_progress, source unchanged and registered peers/domain/tunnels closed. Observed120894 cumulative tokens and peak1571897344bytes at2GiB; post-exit business.closed not directly sampled.",
+        "Retained private native data with original witnessed origin, pinned RW home only, one state per attempt, session/turn intent before dispatch; same-concession native replacement/resume with unchanged catalog/model/instructions and no replay. Actual Codex thread persistence/read/resume uses fixed test history and zero generation."
       ],
       "remaining": [
         "Complete product ownership of supplied business/analysis actors, API/source/origin/generation and lifecycle",
         "Broader mixed-load sizing, provider WebSocket/transport evidence and deployment acceptance; successful synthetic joint trial is not production readiness",
         "Managed state/credentials/OAuth/account coexistence, complete-domain enrollment and product factories",
-        "Resume with durable original thread/catalog and reconciliation",
+        "Whole-service restart reconciliation and explicit cross-attempt continuation; state-backed resume works only inside original live concession, no automatic replay",
         "Full71 tools/11 categories and all engine/loops/autonomy/flows/agent communication",
         "All prompts/books/evals/human comprehension, UI concepts/routes/acceptance, data/restore/bootstrap/CLI/TUI/dependencies",
         "100 inherited failures and final fresh whole-branch review"
@@ -2200,6 +2219,30 @@
         "All71 tools/11 categories/engine/loops/autonomy/roles/flows/agent protocol",
         "All prompts/books/evals/human comprehension, UI concepts/routes/acceptance, data/restore/bootstrap/CLI/TUI/install/dependencies",
         "100 inherited failures and fresh final whole-branch review"
+      ]
+    },
+    "retained_native_state": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/native-state.md",
+        "docs/modernization/native-state-evidence.json",
+        "docs/modernization/native-state-results.json",
+        "docs/modernization/native-state-packaging.json",
+        "backend/tests/runtime/test_native_state.py",
+        "backend/db/native_state_schema.sql"
+      ],
+      "implemented": [
+        "Explicit private data provision/identity, no implicit recreation/adoption/auth mounts and original witnessed DB/attempt/context/workspace binding.",
+        "Migration32 keeps closed native history and permits exactly one prepared/bound replacement; business uniqueness retained.",
+        "Original session intent/ID bound before exposure, unchanged model/catalog/instructions/native metadata before explicit resume.",
+        "Durable one-turn reservation including lost acknowledgement; creating another state cannot reset the original attempt.",
+        "Actual0.166 native process restart, thread read/resume without account/model; controlled composition and historical migration compatibility."
+      ],
+      "remaining": [
+        "Install into configured_runtime/RuntimeService and original source/API/global authority/lifecycle.",
+        "Cold whole-service recovery and explicit cross-attempt continuation, managed OAuth/account lifecycle.",
+        "Real generative resumed-turn acceptance, disk/retention/restore and full deployment acceptance.",
+        "All remaining engine/tools/prompts/human/UI/data/operation scope and final full-branch review."
       ]
     }
   }

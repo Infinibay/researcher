@@ -345,6 +345,12 @@ def ensure_migrations(db_path: str | None = None) -> None:
 
             migrate_ken_peers(conn)
             logger.info("Migration 31: explicit owned Ken peer kind")
+        if 32 not in applied:
+            from backend.db.migrations import apply_sql_resource
+
+            resource = Path(__file__).resolve().parents[2] / "db/native_state_schema.sql"
+            apply_sql_resource(conn, resource)
+            logger.info("Migration 32: retain closed native peers for explicit resume")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()

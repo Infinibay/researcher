@@ -61,7 +61,10 @@ sequenceDiagram
     H->>B: Despachar sólo si sigue vigente
 ```
 
-La sesión exige la raíz lógica readonly y un thread nuevo. Comprueba modelo y
+La sesión exige la raíz lógica readonly. Por defecto abre un thread nuevo; con
+[estado conservado](native-state.md) puede reanudar sólo el thread registrado
+dentro de la concesión original todavía viva, sin reenviar su catálogo ni repetir
+un turno ya reservado. Comprueba modelo y
 workspace devueltos. Antes de cada turno y cada herramienta vuelve a comprobar
 Ken y el hash. Si esa comprobación detecta una caída o cambio, impide otro turno/
 dispatch y cierra el turno activo por el mecanismo nativo existente. Esto no prueba
@@ -92,7 +95,7 @@ la prueba previa y los ensayos reales posteriores; la configuración por sí sol
 no demuestra ejecución de herramientas.
 
 Faltan el perfil de desarrollo, adopción de las fábricas productivas,
-estado nativo durable/resume reconciliado, inscripción completa de actores y
+reconciliación tras reiniciar todo el servicio, inscripción completa de actores y
 aceptación de despliegue con carga mixta representativa. El ensayo conjunto real
 por suscripción ya pasó con datos sintéticos, como detalla el contrato del helper.
 No prueba OAuth/WebSocket,

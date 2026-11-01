@@ -4,6 +4,7 @@ import json
 import subprocess
 import sys
 import tomllib
+from pathlib import Path
 
 features = {}
 args = iter(sys.argv[1:])
@@ -13,6 +14,7 @@ for arg in args:
     elif arg == "-c":
         tomllib.loads("value=" + next(args).split("=", 1)[1])
 methods, catalog, results = [], [], []
+stored_thread = Path("/home/actor/.codex/controlled-thread.json")
 
 
 def send(message):
@@ -97,11 +99,31 @@ for line in sys.stdin:
         }
     elif method == "thread/start":
         catalog = params["dynamicTools"]
+        stored_thread.write_text(
+            json.dumps(
+                {"catalog": catalog, "model": params["model"], "cwd": params["cwd"]}
+            )
+        )
         result = {
             "thread": {"id": "owned-thread"},
             "modelProvider": "openai",
             "model": params["model"],
             "cwd": params["cwd"],
+        }
+    elif method in ("thread/read", "thread/resume"):
+        stored = json.loads(stored_thread.read_text())
+        catalog = stored["catalog"]
+        thread = {
+            "id": "owned-thread",
+            "cwd": stored["cwd"],
+            "model": stored["model"],
+            "modelProvider": "openai",
+        }
+        result = {
+            "thread": thread,
+            "modelProvider": "openai",
+            "model": stored["model"],
+            "cwd": stored["cwd"],
         }
     elif method == "turn/start":
         result = {"turn": {"id": "owned-turn"}}

@@ -57,7 +57,15 @@ def composed_setup(broker_setup, ken_installation, tmp_path, code_host_asset):
     )
 
 
-def native(owner, setup):
+def native(
+    owner,
+    setup,
+    *,
+    state=None,
+    resume_thread_id=None,
+    operation_key="inference",
+    peer_id=None,
+):
     from backend.runtime.codex_rpc import JsonRpcClient
     from backend.runtime.codex_session import CodexSession, ExecutionLimits
     from backend.runtime.egress_proxy import EgressPolicy
@@ -66,8 +74,8 @@ def native(owner, setup):
 
     endpoint = owner.native(
         setup.registry,
-        native_peer(setup.registry, setup.command),
-        operation_key="inference",
+        peer_id or native_peer(setup.registry, setup.command),
+        operation_key=operation_key,
         asset=setup.asset,
         network=NativeNetwork.inspect(
             resolver="/etc/resolv.conf", ca_bundle="/etc/ssl/certs/ca-certificates.crt"
@@ -75,6 +83,7 @@ def native(owner, setup):
         egress=EgressPolicy(("allowed.example",)),
         host_tools=True,
         code_host=setup.code_host,
+        native_state=state,
     )
     return CodexSession(
         JsonRpcClient(endpoint),
@@ -82,6 +91,7 @@ def native(owner, setup):
         model="controlled-only",
         limits=ExecutionLimits(5, 2, 2, 10, 1000),
         sandbox="read-only",
+        resume_thread_id=resume_thread_id,
     )
 
 
@@ -256,3 +266,182 @@ async def test_code_host_startup_failure_never_admits_thread_or_turn(composed_se
             and "turn/start" not in methods
         )
         assert session.turns_sent == 0 and session.thread_id is None
+
+
+@pytest.mark.parametrize("dispatch", ["completed", "lost_reservation_ack"])
+async def test_retained_composition_resumes_same_thread_and_never_replays_turn(
+    composed_setup, tmp_path, monkeypatch, dispatch
+):
+    from backend.runtime.broker_inference import broker_inference
+    from backend.runtime.broker_stdio import AsyncPeerBroker
+    from backend.runtime.business_mediation import BusinessTools
+    from backend.runtime.native_state import NativeState
+    from backend.tests.runtime.test_native_state import replacement
+
+    s = composed_setup
+    original_peer = native_peer(s.registry, s.command)
+    state = NativeState.provision(
+        s.storage, s.registry, original_peer, tmp_path / "state"
+    )
+    business = await BusinessTools.connect(Peer([tool("researcher_source_read")]))
+    analysis = SimpleNamespace(catalog=[])
+
+    def ken(owner, key):
+        return owner.ken(
+            s.registry,
+            ken_peer(s.registry, s.command),
+            operation_key=key,
+            installation=s.installation,
+        )
+
+    async with AsyncPeerBroker(s.broker) as owner:
+        first = native(owner, s, state=state)
+        async with broker_inference(
+            first,
+            ken(owner, "ken-first"),
+            prepared_operation=s.prepared,
+            business=business,
+            analysis=analysis,
+        ) as session:
+            if dispatch == "lost_reservation_ack":
+                from backend.runtime.authority_journal import AuthorityUncertain
+
+                commit = s.storage.commit
+
+                def uncertain(snapshot, **kwargs):
+                    receipt = commit(snapshot, **kwargs)
+                    if kwargs["transition_id"].startswith("native-turn-reserve:"):
+                        raise AuthorityUncertain("Lost dispatch reservation receipt")
+                    return receipt
+
+                monkeypatch.setattr(s.storage, "commit", uncertain)
+                with pytest.raises(AuthorityUncertain, match="Lost dispatch"):
+                    await session.run("inspect fact")
+                assert first.turns_sent == 0
+                assert (
+                    "turn/start"
+                    not in (await first.rpc.request("test/summary", {}))["methods"]
+                )
+            else:
+                assert (await session.run("inspect fact")).status == "completed"
+            thread_id = session.thread_id
+        second = native(
+            owner,
+            s,
+            state=state,
+            resume_thread_id=thread_id,
+            operation_key="resume",
+            peer_id=replacement(s.registry, original_peer),
+        )
+        async with broker_inference(
+            second,
+            ken(owner, "ken-second"),
+            prepared_operation=s.prepared,
+            business=business,
+            analysis=analysis,
+        ) as restored:
+            assert restored.thread_id == thread_id
+            with pytest.raises(RuntimeError, match="replay"):
+                await restored.run("inspect fact")
+            summary = await second.rpc.request("test/summary", {})
+            assert (
+                "thread/resume" in summary["methods"]
+                and "thread/start" not in summary["methods"]
+            )
+            assert "turn/start" not in summary["methods"]
+            assert set(summary["catalog_names"]) == {
+                t["name"] for t in restored.catalog
+            }
+
+
+@pytest.mark.parametrize(
+    "change",
+    ["catalog", "model", "instructions", "lost_thread_receipt", "stored_metadata"],
+)
+async def test_retained_composition_rejects_changed_or_unknown_session_before_resume(
+    composed_setup, tmp_path, change
+):
+    from backend.runtime.broker_inference import broker_inference
+    from backend.runtime.broker_stdio import AsyncPeerBroker
+    from backend.runtime.business_mediation import BusinessTools
+    from backend.runtime.native_state import NativeState
+    from backend.tests.runtime.test_native_state import replacement
+
+    s = composed_setup
+    original_peer = native_peer(s.registry, s.command)
+    state = NativeState.provision(
+        s.storage, s.registry, original_peer, tmp_path / "state"
+    )
+    business = await BusinessTools.connect(Peer([tool("researcher_source_read")]))
+    async with AsyncPeerBroker(s.broker) as owner:
+        first = native(owner, s, state=state)
+        async with broker_inference(
+            first,
+            owner.ken(
+                s.registry,
+                ken_peer(s.registry, s.command),
+                operation_key="k1",
+                installation=s.installation,
+            ),
+            prepared_operation=s.prepared,
+            business=business,
+            analysis=SimpleNamespace(catalog=[]),
+        ):
+            pass
+        thread = first.thread_id
+        if change == "catalog":
+            business.catalog[0]["description"] = "changed"
+        if change == "lost_thread_receipt":
+            snapshot = s.storage.load()
+            row = snapshot.records[state.key]
+            s.storage.commit(
+                snapshot,
+                transition_id="fixture-lost-thread",
+                puts={state.key: {**row, "thread_id": None}},
+            )
+        if change == "stored_metadata":
+            import json
+
+            file = Path(state.path) / "home/controlled-thread.json"
+            file.write_text(
+                json.dumps({**json.loads(file.read_text()), "cwd": "/other-project"})
+            )
+        second = native(
+            owner,
+            s,
+            state=state,
+            resume_thread_id=thread,
+            operation_key="resume",
+            peer_id=replacement(s.registry, original_peer),
+        )
+        if change == "model":
+            second.model = "another-model"
+        if change == "instructions":
+            second.developer_instructions = "another instruction"
+        methods = []
+        request = second.rpc.request
+
+        async def observed(method, *args, **kwargs):
+            methods.append(method)
+            return await request(method, *args, **kwargs)
+
+        second.rpc.request = observed
+        with pytest.raises(RuntimeError, match="intent|receipt"):
+            async with broker_inference(
+                second,
+                owner.ken(
+                    s.registry,
+                    ken_peer(s.registry, s.command),
+                    operation_key="k2",
+                    installation=s.installation,
+                ),
+                prepared_operation=s.prepared,
+                business=business,
+                analysis=SimpleNamespace(catalog=[]),
+            ):
+                pytest.fail("Changed or unknown native state resumed")
+        assert (
+            "thread/resume" not in methods
+            and "thread/start" not in methods
+            and "turn/start" not in methods
+        )

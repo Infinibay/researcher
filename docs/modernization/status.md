@@ -105,6 +105,13 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    tokens nativos acumulados y pico1571897344bytes sin OOM a2GiB. El primer ensayo
    falló por helper ausente y el segundo por límite diagnóstico de tokens; quedan
    documentados. El helper medido y su prueba local preceden ahora al thread.
+   Ahora hay estado nativo privado conservado: identidad vinculada al journal, un
+   hogar por intento y reserva de turno antes del envío. Dentro de la concesión
+   original aún viva puede reemplazarse un peer cerrado y reanudarse el mismo
+   thread sólo con modelo/catálogo/instrucciones y metadatos coincidentes. Codex
+   real lo comprobó sin modelo/cuenta; se usó historia fija inyectada sólo en el
+   fixture para materializar el thread. No prueba reanudación generativa ni volver
+   a adoptar una concesión retirada. Falta integrarlo en la fábrica productiva.
 7. **Contexto y procedencia:** versiones al corregir o cambiar trece entradas de tarea;
    retiro de autoridad antigua; respuesta asociada a pregunta/versión; repositorio
    admitido inmutable y comienzo de cola explícito. Registro exacto de la entrada
@@ -121,10 +128,12 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    **0/12 páginas tienen aceptación visual completa**. Playwright/Chromium ya ejecuta
    los pilotos: 8 estados de escritorio y 9 móviles pasan los controles automáticos;
    salto al contenido, foco y navegación se comprobaron. Falta aceptación integral.
-10. **Migraciones/evidencia:** migraciones nuevas hasta versión 31, casos históricos,
+10. **Migraciones/evidencia:** migraciones nuevas hasta versión 32, casos históricos,
     ensayos sobre copias sintéticas y comprobación de empaquetado. El último ensayo
     preservó 110 tablas, sus valores y rowids disponibles. La31 conserva peers/rowids,
-    referencias y objetos personalizados y revierte fallos. No se migró una base del usuario.
+    referencias y objetos personalizados y revierte fallos. La32 conserva el historial
+    nativo cerrado y permite un único reemplazo vivo; conserva unicidad de negocio
+    y revierte fallos del índice. No se migró una base del usuario.
 11. **Revisión independiente inicial:** plan, escenarios y mapa de consumidores fueron
     analizados con contexto limpio. Hay 71 herramientas individuales en 11 categorías.
     Esa revisión no sustituye la revisión final de toda la rama implementada.
@@ -172,15 +181,20 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 
 ## Verificación más reciente
 
-- Suite completa:1546 casos;1443 pasan,100 fallan con EXACTAMENTE las mismas
-  identidades de la línea base y3 se omiten.30 advertencias. La suite sigue roja.
-- Runtime:599 pasan. Los cuatro casos nuevos cubren asset auxiliar ausente/cambiado,
-  readiness con Codex/helper reales y fallo antes de thread/turn. El readiness prueba
-  handshake V1, JS aislado y delegación137+63=200 con cierre, sin modelo/cuenta.
-- Paquete:42 módulos runtime y5 fixtures/pruebas coinciden con el wheel construido;
- 20 pruebas dirigidas pasan desde el wheel extraído con dependencias explícitas.
-  Build offline y Ruff de archivos modernos modificados pasan. No es instalación
-  limpia del producto completo ni aceptación de todas sus superficies.
+- Suite completa:1563 casos;1460 pasan,100 fallan con EXACTAMENTE las mismas
+  identidades de la línea base y3 se omiten.29 advertencias. La suite sigue roja.
+- Runtime:616 pasan.17 casos nuevos cubren estado privado, origen/identidad,
+  ausencia/credenciales, un hogar por intento, migración32/rollback y reanudación
+  sin repetir un turno. Los24 casos de compatibilidad histórica pasan tras adaptar
+  sus fixtures a la nueva migración y al reemplazo de peers cerrados.
+- Codex real conserva y reabre un thread entre dos procesos, account:null, sin
+  turn/start. La composición de modelo controlado prueba catálogo conservado,
+  cambios de intención/metadatos rechazados y acuse de reserva perdido sin replay.
+  No demuestra recuperación del API entero ni un nuevo turno generativo reanudado.
+- Paquete:43 módulos runtime,11 fixtures/tests y2 fuentes DB coinciden con el wheel
+  construido:56 comparaciones.61 pruebas dirigidas/compatibilidad pasan desde el
+  wheel extraído con dependencias explícitas. Build offline y Ruff de archivos
+  modernos modificados pasan. No es instalación limpia del producto completo.
 - Ensayo conjunto real:un turno por suscripción con Codex0.166/helper y Ken0.18,
  10 llamadas dinámicas (Ken find/read y8 de negocio exitosas), un finding provisional,
   un informe draft persistido/leído, tarea in_progress, fuente intacta y todos los
@@ -231,7 +245,11 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
   siguen pendientes;0/12 rutas aceptadas. Dependencias:18 avisos npm preexistentes
   (5 bajos,3 moderados,10 altos), sin nuevos paquetes vulnerables por Playwright/axe.
 
-Evidencia actual: [resultados actuales](code-host-results.json),
+Evidencia actual: [resultados actuales](native-state-results.json),
+[estado conservado y límites](native-state-evidence.json),
+[paquete actual](native-state-packaging.json),
+[contrato de estado y reanudación](../architecture/native-state.md),
+[resultados del helper anteriores](code-host-results.json),
 [helper y readiness](code-host-evidence.json),
 [paquete actual](code-host-packaging.json),
 [ensayo conjunto exitoso y límites](owned-joint-host-v3.json),

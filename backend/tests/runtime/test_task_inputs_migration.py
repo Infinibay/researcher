@@ -21,7 +21,12 @@ def test_version28_migration_preserves_rows_and_only_records_future_edits(
             "apply_sql_resource",
             lambda conn, path: (
                 None
-                if path.name in ("task_inputs_schema.sql", "run_input_schema.sql")
+                if path.name
+                in (
+                    "task_inputs_schema.sql",
+                    "run_input_schema.sql",
+                    "native_state_schema.sql",
+                )
                 else apply(conn, path)
             ),
         )

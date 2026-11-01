@@ -1,0 +1,46 @@
+{
+  "status": "retained_state_and_explicit_same_concession_resume_implemented_product_adoption_pending",
+  "contracts": {
+    "explicit_private_data_provision_outside_source_not_authority_bootstrap": true,
+    "original_journal_origin_and_one_state_per_attempt": true,
+    "data_absence_replacement_or_auth_file_rejected_without_recreation": true,
+    "original_native_writer_closure_required_before_rw_fd_remount": true,
+    "migration32_preserves_closed_history_and_one_live_native": true,
+    "session_intent_before_start_thread_receipt_before_exposure": true,
+    "same_model_catalog_instructions_and_native_metadata_before_resume": true,
+    "resume_omits_new_dynamic_tools_and_never_automatically_generates": true,
+    "one_native_turn_reservation_before_dispatch_no_replay_after_lost_ack": true
+  },
+  "evidence": [
+    "backend/runtime/native_state.py",
+    "backend/runtime/broker_profile.py",
+    "backend/runtime/peer_broker.py",
+    "backend/runtime/broker_stdio.py",
+    "backend/runtime/broker_inference.py",
+    "backend/db/native_state_schema.sql",
+    "backend/tools/base/db.py",
+    "backend/tests/runtime/test_native_state.py",
+    "backend/tests/runtime/test_broker_inference.py",
+    "backend/tests/runtime/test_peer_ownership.py",
+    "docs/modernization/native-state-results.json",
+    "docs/modernization/native-state-packaging.json"
+  ],
+  "observed_without_model": {
+    "real_codex_version": "0.166.0",
+    "same_stored_thread_read_and_resume": true,
+    "account": null,
+    "generation_turns": 0,
+    "fixture_history_injected_for_materialization": true,
+    "product_inject_or_history_restore_fallback": false,
+    "native_processes_per_restart_case": 2
+  },
+  "remaining": [
+    "Adopt retained state and broker into configured_runtime/RuntimeService with source/API/global origin and full host enrollment",
+    "Cold whole-service restart inspection/reconciliation and explicit cross-attempt continuation; retired original concession is never revived",
+    "Real generative resumed-turn scenario, durable aggregate budgets and actual managed OAuth/account lifecycle",
+    "Disk/retention/backup/restore acceptance; mutable native history is data, not a certified source of authority",
+    "All71 tools/11 categories, fullengine/loops/autonomy/roles/flows/agent protocol and Git/review/CI",
+    "Allprompts/bookskills/evals/human comprehension, UI concepts/routes/acceptance, data/bootstrap/CLI/TUI/install/dependencies",
+    "100 inherited failures and fresh final whole-branch review"
+  ]
+}
