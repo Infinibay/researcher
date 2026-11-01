@@ -1,0 +1,65 @@
+{
+  "kind": "local_storage_microbenchmark",
+  "format": 1,
+  "provisioning": "synthetic test fixture, not host-domain enrollment",
+  "samples_per_load": 5,
+  "commits_per_case": 30,
+  "limits": "One host/filesystem; no production workload or latency target acceptance; no checkpoint/rotation implemented. Each operation verifies actual SQL and full witness history.",
+  "cases": [
+    {
+      "initial_records": 0,
+      "final_sequence": 30,
+      "database_bytes": 16384,
+      "witness_bytes": 23407,
+      "initial_load_ms": {
+        "median": 0.5761889915447682,
+        "maximum": 1.472118980018422
+      },
+      "commit_ms": {
+        "median": 7.846060500014573,
+        "maximum": 11.114942986750975
+      },
+      "after_30_commits_load_ms": {
+        "median": 2.443039003992453,
+        "maximum": 2.7179890021216124
+      }
+    },
+    {
+      "initial_records": 1000,
+      "final_sequence": 30,
+      "database_bytes": 90112,
+      "witness_bytes": 23407,
+      "initial_load_ms": {
+        "median": 9.823233995120972,
+        "maximum": 10.762802994577214
+      },
+      "commit_ms": {
+        "median": 33.64831999351736,
+        "maximum": 37.44198699132539
+      },
+      "after_30_commits_load_ms": {
+        "median": 13.681552023626864,
+        "maximum": 15.837160986848176
+      }
+    },
+    {
+      "initial_records": 10000,
+      "final_sequence": 30,
+      "database_bytes": 778240,
+      "witness_bytes": 23407,
+      "initial_load_ms": {
+        "median": 117.28455999400467,
+        "maximum": 121.4885669760406
+      },
+      "commit_ms": {
+        "median": 214.34456350107212,
+        "maximum": 270.9069999982603
+      },
+      "after_30_commits_load_ms": {
+        "median": 105.0410780007951,
+        "maximum": 115.8777620003093
+      }
+    }
+  ],
+  "source_scope": "Historical storage implementation measurement before fork-handle hardening; not final-source performance acceptance."
+}

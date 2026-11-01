@@ -1,0 +1,38 @@
+{
+  "wheel": "researcher-0.1.0-py3-none-any.whl",
+  "sha256": "4d1e508588bec5766ae7a596744019a92e0d74315f22a570ddbcd724e2dc557b",
+  "runtime_source_bytes_equal": {
+    "backend/runtime/__init__.py": true,
+    "backend/runtime/analysis_tools.py": true,
+    "backend/runtime/authority_journal.py": true,
+    "backend/runtime/business_mediation.py": true,
+    "backend/runtime/codex_rpc.py": true,
+    "backend/runtime/codex_session.py": true,
+    "backend/runtime/command_jobs.py": true,
+    "backend/runtime/command_output.py": true,
+    "backend/runtime/contracts.py": true,
+    "backend/runtime/ken_worker.py": true,
+    "backend/runtime/live_grants.py": true,
+    "backend/runtime/native_commands.py": true,
+    "backend/runtime/native_inference.py": true,
+    "backend/runtime/peer_guard.py": true,
+    "backend/runtime/peer_payload.py": true,
+    "backend/runtime/peer_process.py": true,
+    "backend/runtime/peer_registry.py": true,
+    "backend/runtime/questions.py": true,
+    "backend/runtime/recovery.py": true,
+    "backend/runtime/run_inputs.py": true,
+    "backend/runtime/service.py": true,
+    "backend/runtime/sqlite_questions.py": true,
+    "backend/runtime/sqlite_runs.py": true,
+    "backend/runtime/views.py": true,
+    "backend/runtime/workspaces.py": true
+  },
+  "packaged_storage_smoke": {
+    "imported_from_wheel": true,
+    "reopened_sequence": 1,
+    "retry_fresh": false
+  },
+  "provisioning": "Test fixture only; no host actor-domain/bootstrap claim.",
+  "frontend_packaging": "Unchanged; full product clean installation remains pending."
+}

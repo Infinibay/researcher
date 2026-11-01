@@ -99,6 +99,10 @@ representar explícitamente commit, efecto y conocimiento incierto, y mantener e
 protocolo dentro de una operación semántica de autoridad. El coordinador no debería
 conocer ni reconstruir una transacción distribuida entre dos SQLite y un testigo.
 
-Este contrato conserva el objetivo completo. Su almacenamiento testificado,
-aprovisionamiento, broker, migración de escritores, restore y aceptación siguen
-pendientes. Las herramientas mutables no se habilitan por escribir este diseño.
+Este contrato conserva el objetivo completo. El primer
+[almacenamiento testificado](witnessed-authority-journal.md) ya está implementado
+como núcleo de apertura de estado previamente aprovisionado, con pruebas de
+crash/rewind y recuperación de namespaces independientes de la DB del proyecto.
+No está integrado en el broker/PeerRegistry productivo. Aprovisionamiento, dominio
+completo de actores, migración de escritores, restore y aceptación siguen pendientes.
+Las herramientas mutables no se habilitan por este núcleo de almacenamiento.

@@ -141,5 +141,8 @@ heredados ni publicación global antes de G. La autoridad compartida sigue pendi
 El debate posterior concreta [bootstrap y testigo contra rewind](workspace-authority-bootstrap.md).
 No se fabrica una prueba de instalación nueva a partir de archivos ausentes ni
 se presenta un cgroup recién creado como inventario de los actores anteriores.
-Broker/provisionamiento, journal testificado y restore siguen siendo entregables
-de implementación y aceptación, no garantías adquiridas por esta documentación.
+El [núcleo de almacenamiento testificado](witnessed-authority-journal.md) ya existe
+con pruebas de crash/rewind y recuperación de namespaces desde un registro separado.
+Su uso de apertura únicamente no provisiona una instalación. Broker/provisionamiento,
+integración productiva antes de G, dominio completo de actores y restore siguen
+siendo entregables de implementación y aceptación.

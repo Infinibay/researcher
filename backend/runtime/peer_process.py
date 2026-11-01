@@ -122,10 +122,12 @@ def close_namespace(identity, *, timeout=5):
         try:
             try:
                 ticks, namespace, is_init = _init_fields(identity.init_pid)
-            except (FileNotFoundError, ProcessLookupError):
+            except (FileNotFoundError, ProcessLookupError, PermissionError):
                 # Exit can remove stat/ns metadata before all procfs reads
                 # finish. Keep the pinned pidfd and wait for its kernel barrier;
-                # missing metadata alone never authorizes signaling or closure.
+                # Exit was also observed returning EACCES for ns/pid. Denial
+                # alone never authorizes signaling or closure: a live pidfd
+                # remains unknown when this bounded terminal wait expires.
                 poller = select.poll()
                 poller.register(fd, select.POLLIN | select.POLLHUP)
                 if poller.poll(int(timeout * 1000)):

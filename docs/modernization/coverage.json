@@ -1765,10 +1765,36 @@
         "docs/modernization/peer-workspace-packaging.json"
       ],
       "remaining": [
-        "Global authority and witnessed journal/bootstrap with managed complete actor domain.",
+        "Integrate witnessed storage into global authority, with bootstrap and managed complete actor domain.",
         "Publication globally before G, cross-database/alias ownership and full restore/handoff.",
         "Migrate retained legacy writers and complete writable development, acceptance/Git/CI.",
         "Full modernization,100 baseline failures and all UI/prompt/human acceptance remain."
+      ]
+    },
+    "witnessed_authority_storage": {
+      "status": "in_progress",
+      "evidence": [
+        "backend/runtime/authority_journal.py",
+        "backend/tests/runtime/test_authority_journal.py",
+        "backend/tests/runtime/test_authority_journal_crash.py",
+        "backend/tests/runtime/test_authority_peer_recovery.py",
+        "docs/architecture/witnessed-authority-journal.md",
+        "docs/modernization/authority-journal-results.json",
+        "docs/modernization/authority-journal-evidence.json",
+        "docs/modernization/authority-journal-packaging.json",
+        "docs/modernization/authority-journal-benchmark.json"
+      ],
+      "implemented": [
+        "Open-only witnessed SQL state with canonical actual-row hashing, CAS, original-intent receipts and PREPARE/SQL/COMMIT forward storage recovery.",
+        "Real SIGKILL boundaries, independent writers, lost fsync receipt, forked-handle rejection and restore/rewind detection.",
+        "Protocol integration tests publish a gated namespace identity before local bind/G, lose the original project DB and recover from another process; live detached writer checked before closure. This order is test-orchestrated, not integrated into the production broker/PeerRegistry."
+      ],
+      "remaining": [
+        "Managed complete actor-domain/bootstrap and durable genesis provisioning, not inference from absent files.",
+        "Semantic grants/revocation/generations, authenticated broker, global-before-G integration and physical closure/release policy.",
+        "Legacy writer migration, global cross-database/alias exclusion and verified deployment/restore/handoff.",
+        "Provisioned checkpoint/retention/capacity protocol and production performance acceptance; jointly rewound SQL+witness needs an external monotonic reference.",
+        "All engine/tool/prompt/human/frontend acceptance and baseline failures remain in the full goal."
       ]
     }
   }

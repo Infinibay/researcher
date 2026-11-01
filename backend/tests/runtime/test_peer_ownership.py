@@ -179,7 +179,9 @@ def test_proc_permission_failure_is_unknown_not_absence(monkeypatch):
         close_namespace(identity)
 
 
-@pytest.mark.parametrize("unavailable", [FileNotFoundError, ProcessLookupError])
+@pytest.mark.parametrize(
+    "unavailable", [FileNotFoundError, ProcessLookupError, PermissionError]
+)
 def test_disappearing_proc_metadata_waits_for_the_pinned_terminal_barrier(
     coordination, tmp_path, monkeypatch, unavailable
 ):
@@ -206,6 +208,38 @@ def test_disappearing_proc_metadata_waits_for_the_pinned_terminal_barrier(
             assert peer_process.close_namespace(identity, timeout=2) == "init_exited"
         process.communicate(timeout=5)
         assert process.returncode == 0
+    finally:
+        cleanup(registry, peer, process)
+
+
+def test_denied_metadata_of_live_init_is_unknown_and_never_signaled(
+    coordination, tmp_path, monkeypatch
+):
+    from backend.runtime import peer_process
+
+    registry, _run, lease = registry_setup(coordination)
+    peer = registry.prepare(lease, "native")
+    ready = tmp_path / "ready"
+    process = launch(
+        registry,
+        peer,
+        "import sys;from pathlib import Path;Path(sys.argv[1]).touch();input();print('STILL ALIVE',flush=True)",
+        ready,
+    )
+    try:
+        wait_until(ready.exists, process)
+        identity = peer_process.NamespaceIdentity.from_record(registry.inspect(peer))
+
+        def denied(_pid):
+            raise PermissionError("proc namespace not observable")
+
+        with monkeypatch.context() as patch:
+            patch.setattr(peer_process, "_init_fields", denied)
+            with pytest.raises(peer_process.PeerUncertain):
+                peer_process.close_namespace(identity, timeout=0.02)
+        out, err = process.communicate(b"continue\n", timeout=5)
+        assert process.returncode == 0, err.decode()
+        assert out == b"STILL ALIVE\n", "Unverified live init was signaled"
     finally:
         cleanup(registry, peer, process)
 

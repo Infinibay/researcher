@@ -1618,3 +1618,81 @@ and10 mobile concepts/10 routes and full12 state/keyboard/zoom/screen-reader/hum
 acceptance remain.100 baseline backend failures and final fresh whole-branch review
 are required, not waived. No permanent blocker while other meaningful work remains;
 full goal stays active.
+
+
+## Witnessed authority storage and independent closure — base 2afeb37
+
+- Previous turn answered a status request (no implementation progress). Revalidated
+  the actual worktree, untracked journal/tests and terminal logs; resumed the full
+  goal instead of repeating status. Original checkout and instruction copies untouched.
+- Implemented open-only WitnessedAuthorityJournal: existing private/inode-bound
+  SQLite/witness/mutex, actual canonical-row hash, CAS/original-intent receipts,
+  fsynced PREPARE/DELETE-EXTRA SQL/COMMIT and forward storage-only recovery. No
+  auto genesis, launch authorization, effect replay or product broker integration.
+- Malformed HEADER shapes had three recorded RED cases (AttributeError); explicit
+  dict/identity validation now classifies them AuthorityUncertain and preserves
+  bytes. Earlier eight sequence/type/zero-write RED cases remain in raw evidence.
+  Lost COMMIT fsync receipt refuses verification until sync works; retry returns
+  original fresh=False after later state. Both witness records reserved before write.
+- Actual SIGKILL at six boundaries, actual SQL rollback, two competing processes,
+  independent file loss/replacement/rewind and busy SQL/mutex are exercised. A
+  real fork with another thread owning RLock exposed inherited-handle deadlock RED;
+  reject before that lock and close only child FD copies GREEN, parent still works.
+- Test host globally publishes real private namespace identity before local bind/G,
+  deletes its synthetic project DB, then another process closes namespace from only
+  the separate journal; includes setsid child and lost monitor. This is test-orchestrated
+  protocol integration, not a managed complete host actor domain or productive global
+  publication. The first test version could wait for inherited pipe EOF and let the
+  child expire. Strengthened live-heartbeat/30s child fixture reproduced timeout RED;
+  poll exact monitor returncode instead, prove child active immediately pre-closure,
+  then prove late effect absent. Final44 storage/recovery cases pass in2.33s.
+- First full suite1308:1205 pass,100 baseline failures,3 skip. After fork correction,
+  next1309 suite exposed two intermittent old source-view peers (102 failures).
+  Private diagnostic launcher reproduced EACCES at /proc/PID/ns/pid during fast exit;
+  do not dismiss this as environment or rerun for a green count. New EACCES terminal
+  test RED; extend pinned-pidfd terminal wait to PermissionError, without signaling
+  unreadable identity. Separate live-init denial stays unknown and still answers
+  input. Permission/boot/observer failures without terminal proof remain unknown.
+- Final targeted69 pass;25 diagnostic iterations x6 actual peer cases =150 pass.
+  Final bare suite with JUnit1311:1208 pass,100 identical baseline failure identities,
+  3 skip,29 warnings;378 runtime pass. New/resolved failure identity sets both empty.
+  All intermediate failures/logs retained and hashed, including the102-failure run.
+- All8 changed/new Python sources pass Ruff check/format. Offline wheel rebuilt;
+  all25 runtime sources match. A separate -I -S process outside the repository imports
+  storage from the wheel, commits/reopens/retries synthetic state with fresh=False.
+  This does not bundle frontend or establish clean full-product installation.
+- Local microbenchmark0/1000/10000 initial records and30 commits:~214ms median commit
+  at10000, with full actual-state/history verification. Historical measurement before
+  fork hardening, no production latency acceptance. Checkpoint/rotation/retention
+  remain required rather than silently pruning authority history.
+- Connected Ken recall has no finding for these new worktree files; blast_radius
+  says file not indexed. Earlier focused search hit legacy classes, not this core.
+  Read known runtime/registry/guard/test sources directly; no memory fabricated on
+  unrelated indexed files. DDIA durability/unknown-success and module ownership rules
+  guide separation of storage receipt from semantic grant/physical actor closure.
+- Ruling: commit the verified storage core without enabling mutable tools — it is a
+  required part of authority, not proof of genesis, a complete actor domain, broker,
+  source lifetime, global exclusion or verified restore/handoff. Losing this distinction
+  could authorize an actor from a storage-only receipt; production integration remains gated.
+- Current contract/status/coverage distinguish implemented storage from future
+  bootstrap/authority. Source/log/results/package hashes in authority-journal evidence.
+  No model turns/images, user DB migrations, host accounts/services, push/merge/deploy.
+
+## Next brief after witnessed storage
+
+Continue the FULL plan. Do not redo journal crash/rewind, source pinning or browser
+fixes. Implement the semantic authority and managed-domain/provisioning adapter:
+complete spawn gate/domain, durable genesis/generation, global publication before
+local bind/G, revocation and recovery/release independent of project DB. Integrate
+PeerRegistry/host actors; migrate retained legacy writers before mutable development.
+Test two DBs/aliases, spawn-revoke and missing-state races, restore/handoff and budgets;
+local SQL+witness rollback together still requires an external monotonic reference.
+Storage receipts do not permit launches or effects. Retain all71 tools/11 categories,
+full engine/loop/autonomy/roles/flows/agent communication, exact Git candidate/review/CI,
+typed context/dependencies/history checkpoints, external effects/lifecycle, historical
+backup/restore/bootstrap/CLI/TUI/clean install/frontend packaging. Complete all prompts,
+book-skills/evals/human comprehension, subscription-only auxiliary inference, dependency
+upgrades/18 npm advisories and100 baseline failures. Visual inventory remains6/36 desktop,
+2/12 mobile,2 pilots and0/12 accepted routes; remaining30+10 concepts/10 routes and all12
+state/accessibility/human acceptance required. Final fresh independent whole-branch review
+still required. Full goal active; no push/merge/deploy and no permanent blocker inferred.

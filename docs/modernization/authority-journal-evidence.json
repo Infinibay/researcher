@@ -1,0 +1,71 @@
+{
+  "base_commit": "2afeb37",
+  "date": "2026-11-01",
+  "scope": "Open-only witnessed storage core; test-orchestrated global namespace publication/recovery; existing peer terminal-barrier correction. No product broker/bootstrap or mutable capability enabled.",
+  "source_sha256": {
+    "backend/runtime/authority_journal.py": "2d31f1c0c0dc1d54b27c904af493b4632418c150dea017b3fec4a59d1d918eb0",
+    "backend/runtime/peer_process.py": "6f6bba2b29098b3960814e3bd40a9badbda86e8d508b999935b9e0441097cd34",
+    "backend/tests/runtime/authority_fixture.py": "745a6ac2b7ef181ed93cd0c9396a787e141906d9e9f84b02de83db8bf37285ca",
+    "backend/tests/runtime/fake_authority_writer.py": "e4f95b64232a215f4d26af44e63066c8c9bcb7c429d87516d2f0dd2857fd20a5",
+    "backend/tests/runtime/test_authority_journal.py": "ae528cd2b6da20a44760533d6189fe64c737056cfcc5866a147654c9b38e3371",
+    "backend/tests/runtime/test_authority_journal_crash.py": "eb4d3d793a270422dab5a73fbf9c8724afe20b0895ad8e7e19fec63b61b9262f",
+    "backend/tests/runtime/test_authority_peer_recovery.py": "4e9ee1de71a1c62c2058296334d306dd551581e4cf7bf0b7cd8ffed783129de7",
+    "backend/tests/runtime/test_peer_ownership.py": "b7d04bbdbc7bde3676d9a0ad471a6828776f8d1e1621af6b91f692e03f37e697"
+  },
+  "raw_artifacts_sha256": {
+    "authority-final-build.log": "4042817771357e44966be4cccee57276816150f0cfdb01e17c3cf23f86c37def",
+    "authority-final-focused.log": "afa6ab7e917f2decfc723b45c8643c4c66e581957960aa884356b92046986189",
+    "authority-final-full.log": "6fe832a39542bb52373d2a279716d9f577c2f2e6d7e98125169336c929fa2138",
+    "authority-final-full.xml": "8607274736a6e793e1173b7d0d46c58e34de1ba4e09708f79b5e3dc58d16abe4",
+    "authority-journal-boundaries.log": "3a4dc4332d0b1756c5d1d5ebda396c29ef71517997e0f52d2ee8d4a0620e9536",
+    "authority-journal-build.log": "638bd7eb69e4ef551ca811a37ce083d44122e491506b47369f917871024c3329",
+    "authority-journal-crash.log": "4079aee5f85613431b15dcf5d20dbf58106c2df47e5797accbb570b06f2ffed9",
+    "authority-journal-final-build.log": "61241bf583e43be78f6cf4561c7f558f14381de93e4b68bdf465eb4a3f0972e0",
+    "authority-journal-final-focused.log": "e77be3c5bca433f408bc72246d8cbd70817fe846083b61c97f7270a0ff12e4fe",
+    "authority-journal-final-full.log": "9a5d512198e1886c32ae9bf9b565ab3282542344d4019a38760c939fe8406bff",
+    "authority-journal-final-full.xml": "93c02479b8506c6254366f27d0af4f4f89a35760a7c012b5fe8413b36f64afed",
+    "authority-journal-fork-red.log": "7adfc4c66e854546cfc4b92bb8100eb6427e2ed59759edb145af04f4455ef54d",
+    "authority-journal-full.log": "5dfa3b81f1a423756adb4b8e385b93e5e411b809469354ca89e7664dc5f1396f",
+    "authority-journal-full.xml": "27fd50010be4b1b72665ea55f836f1e6127932df6090fc0e25c6ec9e2e4ff566",
+    "authority-journal-green.log": "f50f962653321f684c49f249c545159ca6df87a30d44256b091467fa485833d9",
+    "authority-journal-lint.log": "73e83b7fee62c70051554e220925a3f93bf38aef38d449a99c1e991b6e35b02f",
+    "authority-journal-lint2.log": "aac3a0503d8b95052cc85fb9f1717dc82b74aa55853a5aa9749b41e30275d472",
+    "authority-journal-live-child-green.log": "7b2a55b264355121a6d86c6b99a6d0e3b51f9ec87871a09379a8dde633fe0551",
+    "authority-journal-live-child-red.log": "e1c18e7059eaabc3140583ba083960bd951f2a6516979d41a03e780f7682fac6",
+    "authority-journal-malformed-red.log": "cfe948bcac120686a91f8f7f567167b96cd17ae5d4a0d7ce41481127f70bc839",
+    "authority-journal-peer-recovery.log": "0181049c44634b9b60d8b009fe49a9e14f13830a57fcc32ee28ce2066874250c",
+    "authority-journal-red.log": "5066978e403d2d891b2d9a0b6f17adbf992bd3b8bcae3c37c088a56ec30b11a1",
+    "authority-journal-shape-green.log": "74ad1a3bd3fa830c547a0af5785c458e21e34f1656c0008ec8c358f8047c9194",
+    "authority-journal-test-lint.log": "f0fc98ad4e443b5d112bb1d4e3e49bf48e49437a01dd0b61d2b54aed09dbb973",
+    "authority-journal-validation-green.log": "3642c09fb0aa5d5cc87cbcd527fffd0f7788d1f592d80a28bbd3bdd3b6c4988f",
+    "authority-journal-validation-red.log": "8c03d712398dbc56e76fed49c10a5712eaca0e74899167dad1f1a245f531e0f9",
+    "authority-peer-close-diagnostic-green.log": "cd4fdeca1e32b53363ae6b1ce9714607eb99717ba56f58437166a54cd2d4d84c",
+    "authority-peer-close-diagnostic-long.log": "c53c60f6bced0184832094805907dd107e3cfa5ad9e9f37dba27948fbb0e41df",
+    "authority-peer-close-diagnostic.log": "0183fa180b5f39558d8f89f432484fccb6d84bb34405cebac6ec7ce9a61515ba",
+    "authority-peer-permission-red.log": "e16393608a0d69f36a8d8a4d8043fc2795bcfaf86e62bedb549d56f70d230907"
+  },
+  "reports": [
+    "authority-journal-results.json",
+    "authority-journal-packaging.json",
+    "authority-journal-benchmark.json"
+  ],
+  "verified": [
+    "Actual canonical SQL state hashing, original-intent idempotency after later writes, CAS conflict without mutation.",
+    "SIGKILL at six storage boundaries, real competing processes, zero write, lost COMMIT fsync acknowledgment and reserved witness capacity.",
+    "Same-inode SQL rewind, independently rewound witness, absent/substituted/symlink/hardlink authority files and malformed persisted enrollment fail without reset.",
+    "A forked handle rejects before an inherited RLock and can close its copies without closing the parent handles.",
+    "Two real private namespaces, detached live-writer heartbeat before recovery, original synthetic project DB deletion, separate-process closure and no late effect; monitor-loss variant included.",
+    "EACCES after pidfd acquisition waits only for terminal barrier, never signals unverified identity; live denial remains unknown and payload still responds.",
+    "Wheel imports under -I -S outside repository path, confirms/reopens/retries synthetic state, with all25 runtime source bytes equal."
+  ],
+  "limits": [
+    "Fixture seeds storage format only; it is not production genesis or proof of a complete managed actor domain.",
+    "PeerRegistry production has no global publication integration; test host manually commits before local bind/G.",
+    "Storage receipt is never a grant, launch permit, acceptance or permission to replay effects.",
+    "Broker/authentication, semantic grants/generations/revocation, legacy writers, cross-database exclusion, restore/handoff and provisioning remain pending.",
+    "Joint rollback of SQL+witness to one valid prefix requires an external monotonic reference to detect; local checks cannot establish it.",
+    "No checkpoint/rotation/receipt retention implemented; capacities bounded, microbenchmark historical and not production performance acceptance.",
+    "All engine/tool/prompt/communication/UI upgrades,100 baseline failures and final independent whole-branch review remain required.",
+    "No model turns, image generation, user database migration, host service/account changes, push, merge or deployment in this checkpoint."
+  ]
+}

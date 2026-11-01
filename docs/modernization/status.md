@@ -34,6 +34,11 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    sustitución de la fuente/padre no redirigen sus acciones. No es exclusión global.
    El propietario puede paginar los comandos y leer sus salidas guardadas, también
    tras perder autoridad el agente. Hay API y visor en la tarea y su historial.
+   El núcleo de almacenamiento de autoridad testificado ya está implementado:
+   abre sólo estado previamente aprovisionado, detecta rewind y recupera commits
+   interrumpidos. Sus pruebas incluyen SIGKILL, contención y cierre desde otro
+   proceso tras perder la DB del proyecto. No está conectado al broker/PeerRegistry
+   productivo ni demuestra el dominio completo de actores del host.
 7. **Contexto y procedencia:** versiones al corregir o cambiar trece entradas de tarea;
    retiro de autoridad antigua; respuesta asociada a pregunta/versión; repositorio
    admitido inmutable y comienzo de cola explícito. Registro exacto de la entrada
@@ -78,7 +83,8 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    permisos, comandos tipados de edición con concurrencia/recibos y autoría verificada.
    Faltan checkpoints/compactación del historial largo; la entrada inicial registrada
    no incluye toda instrucción interna del proveedor ni resultados posteriores.
-7. **Operación y aislamiento completos:** exclusión del workspace entre bases,
+7. **Operación y aislamiento completos:** integrar el nuevo registro de autoridad
+   con aprovisionamiento/broker y publicación global antes del gate; exclusión entre bases,
    alias/transferencia de propietario, restauración/despliegue con generación comprobada,
    lifecycle y borrado seguro de proyectos, presupuestos conservados y observabilidad.
 8. **Datos e infraestructura final:** backup/restore completo, históricos reales,
@@ -99,10 +105,14 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 
 ## Verificación más reciente
 
-- Suite completa:1265 casos;1162 pasan,100 fallan con las mismas identidades de la
+- Suite completa:1311 casos;1208 pasan,100 fallan con las mismas identidades de la
   línea base y 3 se omiten. La suite global sigue roja.
-- Runtime:332 pasan. Frontend:28 pruebas aprobadas y compilación TypeScript/Vite
-  tras los ajustes de contraste, cabecera móvil y navegación/foco.
+- Runtime:378 pasan;69 pruebas dirigidas y150 repeticiones de los casos de peers.
+  El registro de autoridad/recuperación añade44 casos. Se corrigieron metadatos
+  malformados, bloqueo de handles tras fork y una carrera EACCES al cerrar peers;
+  denegación sobre un init vivo conserva estado incierto y no lo señala.
+  Frontend sin cambios en este checkpoint:28 pruebas y compilación TypeScript/Vite
+  verificadas anteriormente tras los ajustes de contraste, cabecera móvil y foco.
 - Ensayo real de continuidad:2 turnos por suscripción, Ken real,4 peers cerrados,
   fuentes sin editar,2 informes draft y ninguna aceptación/publicación implícita.
 - Ensayo de análisis:1 turno adicional por suscripción, Ken real, catálogo de 15
@@ -122,8 +132,12 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
   siguen pendientes;0/12 rutas aceptadas. Dependencias:18 avisos npm preexistentes
   (5 bajos,3 moderados,10 altos), sin nuevos paquetes vulnerables por Playwright/axe.
 
-Evidencia actual: [vista fijada](peer-workspace-evidence.json),
-[resultados actuales](peer-workspace-results.json), [bootstrap propuesto](../architecture/workspace-authority-bootstrap.md),
+Evidencia actual: [registro de autoridad](authority-journal-evidence.json),
+[resultados actuales](authority-journal-results.json),
+[contrato implementado y límites](../architecture/witnessed-authority-journal.md),
+[paquete](authority-journal-packaging.json), [medición local histórica](authority-journal-benchmark.json),
+[vista fijada](peer-workspace-evidence.json),
+[resultados del checkpoint anterior](peer-workspace-results.json), [bootstrap propuesto](../architecture/workspace-authority-bootstrap.md),
 [navegador](browser-evidence.json),
 [recorrido visual](../design/audits/2026-11-01-owner-workspace/report.md),
 [resultados del checkpoint de navegador](browser-results.json), [entrada/continuidad](run-input-evidence.json),
