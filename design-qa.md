@@ -1,4 +1,4 @@
-# QA visual de los pilotos Tareas y Conversación
+# QA visual de los pilotos Tareas, Conversación e Informes
 
 Resultado actual: **parcial; 0/12 rutas aceptadas completamente**.
 
@@ -26,8 +26,23 @@ diálogos, navegación íntegra sólo por teclado, zoom 200/400 %, lector de pan
 otros motores, evaluación de comprensión y tareas humanas. También falta reducir
 la densidad de contexto en móvil y migrar los controles del engine antiguo.
 
-Las otras diez rutas requieren implementación y aceptación; nueve aún necesitan
-conceptos y selección. Informes ya tiene referencias elegidas y capturas iniciales,
-con el recorte móvil documentado, pero su rediseño está pendiente. El
-[inventario](docs/design/inventory.md) conserva 9/36 conceptos de escritorio y3/12 adaptaciones móviles; las capturas de QA no cuentan como nuevos
-conceptos generados. No hay un servidor de demo vivo declarado listo para entrega.
+Las otras nueve rutas requieren conceptos, selección, implementación y aceptación.
+El [inventario](docs/design/inventory.md) conserva9/36 conceptos de escritorio y3/12
+adaptaciones móviles; las capturas de QA no son nuevos conceptos.
+
+## Informes: resultado de este alcance visual y funcional — aprobado
+
+Se compararon las referencias seleccionadas y las capturas finales en una misma
+inspección. El piloto conserva composición editorial, índice/documento/fuentes,
+paleta y adaptación móvil; usa el informe persistido real, sin copiar actor, líneas
+ni ejemplo numérico ilustrativos. Los defectos de título, recorte/gutters móviles y
+aviso oculto se corrigieron y recapturaron. No quedan P0/P1/P2 observados en este
+recorrido; el shell y la tipografía compartida siguen dentro del rediseño global.
+
+[Veinte estados y límites](docs/design/audits/2026-11-01-reports/report.md),
+[evidencia](docs/design/audits/2026-11-01-reports/evidence.json): escritorio1440×1024,
+móvil390×844, cero infracciones axe seleccionadas, regreso/selección/foco por teclado,
+paginación y aislamiento. Una corrección registrada en la tarea conserva el informe
+y no inicia inferencia. Falta evaluación humana, lector de pantalla, zoom y otros
+navegadores; **la aceptación global sigue parcial, 0/12**. No se declara una demo
+viva lista para entrega.

@@ -3348,3 +3348,50 @@ review only when entire implementation is ready. No phase or goal completion cla
   configured runtime disabled; capture.mjs uses installed full Chromium channel
   and sandbox. Auth is synthetic. No provider model turns. Current server will be
   closed at checkpoint; restart helper only for continued UI work (not inference).
+
+## Reports pilot implemented and verified — base fdec569
+
+- Owner API now reads exact project-scoped report citations,20/page, from one SQLite
+  snapshot; catalog supports bounded paging and literal title/status filters. Task
+  read accepts project identity for report links, preserving old callers.
+- RED5→GREEN5 backend tests: quotes/hash/body/draft,20+1 paging, uncited exclusion,
+  legacy cross-project associations,401/404 and catalog/task scopes. New frontend
+  presentation/SSR cases observed RED then GREEN; full frontend36pass/buildpass.
+- Reports follows selected generated references; index/document/sources responsive,
+  explicit UTC dates, draft labels, no fabricated actor/line/context. Task URL and
+  return link reach the right project/task. Corrections do not overwrite reports.
+- Actual authenticated Chromium QA:20states desktop/mobile, zero selected axe
+  violations, keyboard back/select/focus,54catalog entries,21citations, controlled
+  404/503/XSS text, cross-project rejection. Correction through real coordinator
+  recorded_for_next_run/inference_startedfalse; report body/draft/dispatchcount1
+  unchanged. No new paid model turn. Evidence/captures retained in report audit.
+- Visual reference+current desktop/mobile inspected together. Fixed black title
+  focus rectangle,8px dark mobile gutters, hidden foreign-project notice; mobile
+  correction action follows document/sources. Earlier QA reruns fixed harness
+  accordion toggling and project/list setup, not new runtime infrastructure.
+- Full backend1601=1498pass100EXACTbaselinefails3skip,626runtimepass; no new or resolved
+  failures. Then user requested searchable docstrings: executable AST of four Python
+  files matches full-suite-tested wheel after removing docstrings. Directed5pass,
+  frontend36pass/build and rebuilt wheel7sourcecomparisons/265imports/5tests pass.
+  Reused full-suite evidence rather than repeat235s for documentation-only changes.
+- User requirement added to plan/dashboard: modules/classes/methods and relevant
+  functions new/modified must have meaningful docstrings/JSDoc (purpose, contract,
+  side effects, assumptions and limits), including audit of earlier branch additions.
+  Implemented in this delivery's model/route/test/helper/hook/component boundaries;
+  whole-branch documentation audit remains pending. Ken memory explicitly distinguishes
+  connected original index from managed worktree evidence.
+- Ruling: retain actual report body instead of importing illustrative example, actor
+  and line numbers from concept — invented provenance would violate shared-context
+  requirement. Cost: reference and content are not pixel-identical; layout retained.
+- Ruling: functional and scoped visual delivery verified, human acceptance remains
+  open — browser assertions/axe do not demonstrate comprehension with a person.
+  Inventory3codepilots/9of36desktop/3of12mobile/0of12fullyaccepted.43scenarios unchanged.
+- Next delivery: useful research capability (web/documents/PDF/wiki/scientific review)
+  as one complete user flow. All71tools/11categories, engine/loop/autonomy/flows,
+  prompts/books/evals/human/UI/data/operations/100baselinefailures and final whole-branch
+  review remain required; no merge/push/deploy or complete-product claim.
+- Final housekeeping: packaged source hashes and local doc links/JSON verified;
+  three Python report files have module/class/function docstrings; unchanged5legacy
+  task Ruff findings compared against HEAD. Synthetic QA server PID/cmdline/cwd
+  validated, SIGINT sent and original terminal session18910 exited0. No demo left
+  declared live. Untracked instruction folders/files remain untouched.

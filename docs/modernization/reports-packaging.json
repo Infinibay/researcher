@@ -1,0 +1,21 @@
+{
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "9768ade9a12e70281290e15131decd98cf36beda8b8e22e8a09d4c32f2ac89ad",
+  "source_comparisons": {
+    "backend/api/models/artifact.py": "ff6be607902eb0db2f5009ef2ab014fe23cfd09e9f68a43f5fcae1f03f36b357",
+    "backend/api/models/research.py": "7d56c3562f49faa22fd72b1ae0e6e2f9e90e07515624d5cb877b56c8135383ea",
+    "backend/api/routes/artifacts.py": "39f1c7a9ef32ce6c54285d8dffc46c6b7e82cf2ef26b783be0ddcdda1034a765",
+    "backend/api/routes/tasks.py": "0d1ccbf12e19918f01fd21ba678c2ef017df9280d5944ff7588678d3638dba0d",
+    "backend/tests/api/test_owner_report_evidence.py": "ad24b390c8f7f2e499d46e4a1884761a9f95c15e722d1b3390b5730efa57eaca",
+    "backend/db/schema.sql": "0e14f922b6df8ca55e0d4f1dc31ee59f34789dd5b0a5d70a87d0d0c3da6afa7e",
+    "backend/db/research_schema.sql": "d3c786c120fc4b552824d1226fdd1659bdfbfc1108c5f3e90a20faba85ecc687"
+  },
+  "observed": {
+    "owner_evidence_tests_passed": 5,
+    "backend_modules_loaded": 265,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "network": "disabled; Unix sockets allowed"
+  },
+  "limits": "Backend wheel plus explicit installed dependencies; frontend is separately built/run from repository. Not a complete packaged product install, real model generation, or host enrollment proof."
+}

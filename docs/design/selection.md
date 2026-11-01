@@ -150,3 +150,10 @@ Correcciones obligatorias al llevar la referencia a código:
 
 [Brief y procedencia](concepts/reports/brief.md), [manifest](concepts/reports/manifest.json),
 [audit inicial](audits/2026-11-01-reports/report.md).
+
+
+### Informes: implementación y comparación verificadas
+
+El piloto reproduce la jerarquía editorial, papel cálido, índice lateral, documento y fuentes de Lectura con trazabilidad; en móvil el índice y lector alternan, las fuentes y la acción de corregir siguen al cuerpo. Se compararon juntas referencias y capturas finales a1440×1024/390×844. Se corrigieron foco con borde negro en el título, márgenes oscuros móviles y aviso de proyecto oculto.
+
+Se conserva el contenido real del informe: la maqueta contiene un ejemplo numérico, líneas y actor ilustrativos que no están registrados en el resultado original. No se inventaron para imitar la imagen. Se mantiene la navegación compartida de doce rutas del producto; fuentes/tamaños del shell siguen sujetos al trabajo global. El enlace abre la tarea exacta y una corrección queda registrada para el próximo intento, sin iniciar inferencia ni aceptar/reemplazar el borrador. [Resultado y límites](audits/2026-11-01-reports/report.md).

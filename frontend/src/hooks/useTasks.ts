@@ -1,3 +1,5 @@
+/** Task queries and mutations, with optional project-scoped detail lookup. @module */
+
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { fetchApi, buildUrl } from '../api/client'
 import type { Task, TaskComment, TaskDependency } from '../types/api'
@@ -20,10 +22,11 @@ export function useTasks(projectId: number | null, filters?: TaskFilters) {
   })
 }
 
-export function useTask(taskId: number | null) {
+/** Read a task with a project-isolated cache for scoped links; retain legacy unscoped callers. */
+export function useTask(taskId: number | null, projectId?: number | null) {
   return useQuery({
-    queryKey: ['task', taskId],
-    queryFn: () => fetchApi<Task>(`/api/tasks/${taskId}`),
+    queryKey: projectId == null ? ['task', taskId] : ['task', taskId, projectId],
+    queryFn: () => fetchApi<Task>(buildUrl(`/api/tasks/${taskId}`, { project_id: projectId ?? undefined })),
     enabled: taskId != null,
   })
 }

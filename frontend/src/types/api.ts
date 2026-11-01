@@ -319,6 +319,30 @@ export interface Artifact {
   created_at?: string
 }
 
+/** Exact citation plus captured-source identity; capture time is not a freshness check. */
+export interface ArtifactEvidence {
+  finding_id: number
+  source_id: number
+  quote: string
+  kind: string
+  locator: string
+  title: string
+  sha256: string
+  captured_at: number
+  finding_status: string
+}
+
+/** One project-scoped citation page; a null next_offset means the final page. */
+export interface ArtifactEvidencePage {
+  artifact_id: number
+  project_id: number
+  content_sha256: string | null
+  evidence: ArtifactEvidence[]
+  total_evidence: number
+  offset: number
+  next_offset: number | null
+}
+
 export interface FlowState {
   flow_name: string | null
   current_step: string | null

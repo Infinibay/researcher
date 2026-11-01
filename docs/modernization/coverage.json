@@ -1504,7 +1504,15 @@
         "docs/modernization/browser-evidence.json",
         "docs/modernization/browser-results.json",
         "evals/ui/run_owner_capture.py",
-        "evals/ui/capture_owner.mjs"
+        "evals/ui/capture_owner.mjs",
+        "docs/modernization/reports-results.json",
+        "docs/modernization/reports-packaging.json",
+        "docs/design/audits/2026-11-01-reports/evidence.json",
+        "docs/design/audits/2026-11-01-reports/report.md",
+        "frontend/src/components/pages/ReportsPage.tsx",
+        "frontend/src/styles/reports.css",
+        "frontend/tests/report-design.test.ts",
+        "backend/tests/api/test_owner_report_evidence.py"
       ],
       "notes": [
         "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json."
@@ -1560,11 +1568,18 @@
         "frontend/tests/chat-design.test.ts",
         "design-qa.md",
         "docs/design/concepts/reports/manifest.json",
-        "docs/design/audits/2026-11-01-reports/report.md"
+        "docs/design/audits/2026-11-01-reports/report.md",
+        "docs/modernization/reports-results.json",
+        "docs/modernization/reports-packaging.json",
+        "docs/design/audits/2026-11-01-reports/evidence.json",
+        "frontend/src/components/pages/ReportsPage.tsx",
+        "frontend/src/styles/reports.css",
+        "frontend/tests/report-design.test.ts",
+        "backend/tests/api/test_owner_report_evidence.py"
       ],
       "remaining": [
-        "Nine other routes need 27 desktop concepts/9 mobile adaptations and selection. Reports design selected but implementation pending; ten routes still need full implementation.",
-        "All twelve routes and shared components still need browser/interaction/accessibility/human-comprehension acceptance."
+        "Nine other routes need 27 desktop concepts/9 mobile adaptations, selection and implementation.",
+        "All twelve routes and shared components still need complete interaction/accessibility/human-comprehension acceptance; Reports has scoped functional/visual verification only."
       ]
     },
     "all_screens_implemented": {
@@ -1581,11 +1596,19 @@
         "docs/design/concepts/chat/manifest.json",
         "frontend/src/components/pages/ChatPage.tsx",
         "frontend/src/styles/conversation.css",
-        "frontend/tests/chat-design.test.ts"
+        "frontend/tests/chat-design.test.ts",
+        "docs/modernization/reports-results.json",
+        "docs/modernization/reports-packaging.json",
+        "docs/design/audits/2026-11-01-reports/evidence.json",
+        "docs/design/audits/2026-11-01-reports/report.md",
+        "frontend/src/components/pages/ReportsPage.tsx",
+        "frontend/src/styles/reports.css",
+        "frontend/tests/report-design.test.ts",
+        "backend/tests/api/test_owner_report_evidence.py"
       ],
       "remaining": [
-        "Ten other routes need 30 desktop concepts, 10 mobile adaptations, selection and implementation.",
-        "All twelve routes and shared components still need browser/interaction/accessibility/human-comprehension acceptance."
+        "Nine other routes need 27 desktop concepts/9 mobile adaptations, selection and implementation.",
+        "All twelve routes and shared components still need complete interaction/accessibility/human-comprehension acceptance; Reports has scoped functional/visual verification only."
       ]
     },
     "accessibility_e2e": {
@@ -1597,7 +1620,15 @@
         "docs/modernization/browser-evidence.json",
         "docs/modernization/browser-results.json",
         "evals/ui/run_owner_capture.py",
-        "evals/ui/capture_owner.mjs"
+        "evals/ui/capture_owner.mjs",
+        "docs/modernization/reports-results.json",
+        "docs/modernization/reports-packaging.json",
+        "docs/design/audits/2026-11-01-reports/evidence.json",
+        "docs/design/audits/2026-11-01-reports/report.md",
+        "frontend/src/components/pages/ReportsPage.tsx",
+        "frontend/src/styles/reports.css",
+        "frontend/tests/report-design.test.ts",
+        "backend/tests/api/test_owner_report_evidence.py"
       ],
       "notes": [
         "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json."
@@ -2342,6 +2373,20 @@
         "Default legacy profile retirement, all71tools/11categories and fullengine/loops/autonomy/roles/flows/agent protocol/Git/review/CI",
         "Allprompts/bookskills/evals/human comprehension, allUIconcepts/routes/acceptance, data/CLI/TUI/dependencies",
         "100 inherited failures and final fresh whole-branch review"
+      ]
+    },
+    "code_documentation": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "backend/api/models/artifact.py",
+        "backend/api/routes/artifacts.py",
+        "frontend/src/hooks/useArtifacts.ts",
+        "frontend/src/components/reports/presentation.ts"
+      ],
+      "remaining": [
+        "Audit modules/classes/methods and relevant functions added earlier in this branch; add meaningful searchable docstrings/JSDoc where missing or stale.",
+        "Maintain purpose, contracts, failure modes and side-effect boundaries alongside future implementation."
       ]
     }
   }

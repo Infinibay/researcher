@@ -1,3 +1,5 @@
+/** Project-scoped task details, context correction and execution controls. @module */
+
 import { useState, useEffect, useRef } from 'react'
 import { useTask, useTaskComments, useAddTaskComment, useUpdateTask, useTaskDependencies, useSetTaskDependencies, useTasks } from '../../hooks/useTasks'
 import { useProjectStore } from '../../stores/project'
@@ -9,6 +11,7 @@ import { TaskRunWorkspace } from './TaskRunWorkspace'
 
 const taskStatuses = ['backlog', 'pending', 'in_progress', 'review_ready', 'rejected', 'done', 'blocked']
 
+/** Show task controls only after the fetched task matches the current project. */
 export function TaskInspector({
   taskId,
   onClose,
@@ -17,7 +20,7 @@ export function TaskInspector({
   onClose: () => void
 }) {
   const projectId = useProjectStore((s) => s.activeProjectId)
-  const { data: task, isLoading, error, refetch } = useTask(taskId)
+  const { data: task, isLoading, error, refetch } = useTask(taskId, projectId)
   const { data: comments } = useTaskComments(taskId)
   const { data: dependencies } = useTaskDependencies(taskId)
   const { data: allTasks } = useTasks(projectId)
@@ -58,7 +61,7 @@ export function TaskInspector({
   return (
     <section id="task-detail" ref={panel} tabIndex={-1} role="region" aria-labelledby={`task-title-${taskId}`} className="task-inspector">
       <div className="task-inspector-inner">
-        {error && !task ? <div className="task-inspector-content" role="alert">
+        {task && projectId != null && task.project_id !== projectId ? <div className="task-inspector-content" role="alert"><h2 id={`task-title-${taskId}`}>Esta tarea no pertenece al proyecto seleccionado</h2><button className="task-back" onClick={onClose}>Volver a tareas</button></div> : error && !task ? <div className="task-inspector-content" role="alert">
           <h2 id={`task-title-${taskId}`}>No se pudo cargar la tarea</h2>
           <p>{error.message}</p>
           <button className="task-secondary" onClick={() => refetch()}>Volver a consultar</button>{' · '}

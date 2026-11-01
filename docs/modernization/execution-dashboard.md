@@ -8,8 +8,8 @@ Motivos del ajuste: [diagnóstico del proceso](workflow-review.md).
 
 - Hay un primer recorrido de investigación con Codex, suscripción, Ken, análisis y reporte persistido. La prueba real de entrada de producto terminó; su monitor falló y se recuperó evidencia durable sin repetir inferencia. No se recuperaron las métricas de memoria perdidas.
 - Las 43 entradas de escenarios siguen abiertas en `coverage.json`: 33 en progreso y 10 pendientes. Son escenarios amplios; esto no significa que sus componentes no funcionen.
-- Interfaz: 2 pilotos, 9/36 conceptos de escritorio y 3/12 móviles; 0/12 páginas con aceptación completa.
-- Última suite registrada: 1493 aprobadas, 100 fallos heredados y 3 omitidas. Falta resolver o retirar con justificación los casos del sistema reemplazado.
+- Interfaz: 3 pilotos, 9/36 conceptos de escritorio y 3/12 móviles; 0/12 páginas con aceptación completa.
+- Última suite registrada: 1498 aprobadas, 100 fallos heredados y 3 omitidas. Falta resolver o retirar con justificación los casos del sistema reemplazado.
 - No hay porcentaje global defendible todavía. El 30% anterior era una impresión, no una medición de alcance ponderado.
 
 ## Última entrega verificada: arranque del recorrido existente
@@ -28,7 +28,11 @@ Verificado: inicializadores explícitos, guardias de API/CLI/launcher y cleanup 
 
 **Salida:** página de informes con tres conceptos de escritorio, adaptación móvil, selección razonada e implementación; recorrido conectado a tarea/conversación, lectura y error reales, teclado y comprobaciones responsive. Incluir una explicación con ejemplo o diagrama cuando ayude y una evaluación de comprensión/corrección. Diferenciar prueba funcional de evaluación con una persona.
 
-**Diseño listo:** tres conceptos y móvil generados/inspeccionados; elegida Lectura con trazabilidad. [Selección y correcciones](../design/selection.md). Falta implementar la página, fuentes para propietario y destino de tarea por URL, y verificar el recorrido.
+**Entrega funcional y visual verificada:** tres conceptos y móvil; implementada Lectura con trazabilidad, lector de citas del propietario y navegación a la tarea por URL. Veinte estados de escritorio/móvil pasan controles de layout/axe; teclado, paginación, aislamiento por proyecto y corrección conservando el informe anterior comprobados. [Recorrido y límites](../design/audits/2026-11-01-reports/report.md), [resultados](reports-results.json).
+
+**Pendiente de aceptación:** comprensión con una persona, lector de pantalla, zoom y cobertura íntegra de estados; no equivale a una página aceptada. La comprobación funcional distingue corrección registrada de nueva ejecución. Próxima entrega funcional: investigación útil de la cola posterior.
+
+**Criterio añadido por el usuario:** cada módulo, clase, método y pieza relevante nueva o modificada llevará docstring/JSDoc semántico: propósito, contrato, límites y términos buscables por Ken. Revisar también los módulos ya añadidos en esta rama; no dar por cubierta esa revisión global con la entrega de Informes.
 
 **Dependencias:** reutilizar persistencia, fuentes y fixture de producto existentes. No desarrollar otra fábrica de inferencia para esta entrega.
 

@@ -1,0 +1,521 @@
+{
+  "browser": "156.0.8078.4",
+  "generation": "forbidden native adapter; real API/coordinator/SQLite",
+  "states": [
+    {
+      "label": "desktop-01-reading",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": [
+        {
+          "class": "report-index",
+          "x": 192,
+          "right": 448,
+          "width": 256
+        },
+        {
+          "class": "report-heading",
+          "x": 448,
+          "right": 1440,
+          "width": 992
+        },
+        {
+          "class": "report-document",
+          "x": 448,
+          "right": 1200,
+          "width": 752
+        },
+        {
+          "class": "report-evidence",
+          "x": 1200,
+          "right": 1440,
+          "width": 240
+        }
+      ],
+      "violations": [],
+      "sha256": "98baaa5a5bd20c3c43141be352026beef4c9520666ab95ba080da62bcea20ac4"
+    },
+    {
+      "label": "desktop-02-source",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": [
+        {
+          "class": "report-index",
+          "x": 192,
+          "right": 448,
+          "width": 256
+        },
+        {
+          "class": "report-heading",
+          "x": 448,
+          "right": 1440,
+          "width": 992
+        },
+        {
+          "class": "report-document",
+          "x": 448,
+          "right": 1200,
+          "width": 752
+        },
+        {
+          "class": "report-evidence",
+          "x": 1200,
+          "right": 1440,
+          "width": 240
+        }
+      ],
+      "violations": [],
+      "sha256": "71900bcf46a1e265f8023dcdda55de7ee4795f1582933014d20911a1e2bf98c6"
+    },
+    {
+      "label": "desktop-03-correction",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": [],
+      "violations": [],
+      "sha256": "a9bb52458ee0a706307f5a8e89f50f45020c1d5f6fb49a946787a4bc91b9a1b7"
+    },
+    {
+      "label": "desktop-04-retained-report",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": [
+        {
+          "class": "report-index",
+          "x": 192,
+          "right": 448,
+          "width": 256
+        },
+        {
+          "class": "report-heading",
+          "x": 448,
+          "right": 1440,
+          "width": 992
+        },
+        {
+          "class": "report-document",
+          "x": 448,
+          "right": 1200,
+          "width": 752
+        },
+        {
+          "class": "report-evidence",
+          "x": 1200,
+          "right": 1440,
+          "width": 240
+        }
+      ],
+      "violations": [],
+      "sha256": "98baaa5a5bd20c3c43141be352026beef4c9520666ab95ba080da62bcea20ac4"
+    },
+    {
+      "label": "desktop-05-pagination",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": [
+        {
+          "class": "report-index",
+          "x": 192,
+          "right": 448,
+          "width": 256
+        },
+        {
+          "class": "report-heading",
+          "x": 448,
+          "right": 1440,
+          "width": 992
+        },
+        {
+          "class": "report-document",
+          "x": 448,
+          "right": 1200,
+          "width": 752
+        },
+        {
+          "class": "report-evidence",
+          "x": 1200,
+          "right": 1440,
+          "width": 240
+        }
+      ],
+      "violations": [],
+      "sha256": "b44ee48cad1ad57e24cee8f81fa81d0149257397bd7da62f20bba97eedae990a"
+    },
+    {
+      "label": "desktop-06-empty",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": [
+        {
+          "class": "report-index",
+          "x": 192,
+          "right": 448,
+          "width": 256
+        }
+      ],
+      "violations": [],
+      "sha256": "0317b70f008fb425436c220765310be809d32b73d72cd0dc38d5c0285142a87a"
+    },
+    {
+      "label": "desktop-07-missing",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": [
+        {
+          "class": "report-index",
+          "x": 192,
+          "right": 448,
+          "width": 256
+        }
+      ],
+      "violations": [],
+      "sha256": "91cfe7b3cdcffcdcbf4c56c652697e741300080bf86c4df6b1071664fb08bd30"
+    },
+    {
+      "label": "desktop-08-other-project",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": [
+        {
+          "class": "report-index",
+          "x": 192,
+          "right": 448,
+          "width": 256
+        }
+      ],
+      "violations": [],
+      "sha256": "468857545db372b96a64e4a5370d920a2824f032aadde5b4e9f3e99cd426a905"
+    },
+    {
+      "label": "desktop-09-source-error",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": [
+        {
+          "class": "report-index",
+          "x": 192,
+          "right": 448,
+          "width": 256
+        },
+        {
+          "class": "report-heading",
+          "x": 448,
+          "right": 1440,
+          "width": 992
+        },
+        {
+          "class": "report-document",
+          "x": 448,
+          "right": 1200,
+          "width": 752
+        },
+        {
+          "class": "report-evidence",
+          "x": 1200,
+          "right": 1440,
+          "width": 240
+        }
+      ],
+      "violations": [],
+      "sha256": "5efe2298bedb64f5002bce5759f14751e175a20e0096eba35a501c4b8ed84917"
+    },
+    {
+      "label": "desktop-10-catalog-error",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": [
+        {
+          "class": "report-index",
+          "x": 192,
+          "right": 448,
+          "width": 256
+        }
+      ],
+      "violations": [],
+      "sha256": "381442a4df3084b4ebc52744d3475bbe9654241d5ee2fb00d8a5a67b8e15066f"
+    },
+    {
+      "label": "mobile-01-reading",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": [
+        {
+          "class": "report-heading",
+          "x": 0,
+          "right": 390,
+          "width": 390
+        },
+        {
+          "class": "report-document",
+          "x": 0,
+          "right": 390,
+          "width": 390
+        },
+        {
+          "class": "report-evidence",
+          "x": 0,
+          "right": 390,
+          "width": 390
+        }
+      ],
+      "violations": [],
+      "sha256": "a5db30c5e29f64952ddde28e357e74470b422c81ac186f87c73aea2ffe31459e"
+    },
+    {
+      "label": "mobile-02-source",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": [
+        {
+          "class": "report-heading",
+          "x": 0,
+          "right": 390,
+          "width": 390
+        },
+        {
+          "class": "report-document",
+          "x": 0,
+          "right": 390,
+          "width": 390
+        },
+        {
+          "class": "report-evidence",
+          "x": 0,
+          "right": 390,
+          "width": 390
+        }
+      ],
+      "violations": [],
+      "sha256": "cc4ab21cd6c6c89530438eeba804bfc462c3416445e77c5f871505d73fda406a"
+    },
+    {
+      "label": "mobile-03-correction",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": [],
+      "violations": [],
+      "sha256": "f8f4bc830e7ab71b88fad9ae54a71434dc2ac78713d6cba805feca9226b4718a"
+    },
+    {
+      "label": "mobile-04-retained-report",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": [
+        {
+          "class": "report-heading",
+          "x": 0,
+          "right": 390,
+          "width": 390
+        },
+        {
+          "class": "report-document",
+          "x": 0,
+          "right": 390,
+          "width": 390
+        },
+        {
+          "class": "report-evidence",
+          "x": 0,
+          "right": 390,
+          "width": 390
+        }
+      ],
+      "violations": [],
+      "sha256": "63df2753ea6159e2e84b456b683c7478368d867e99ee8837d87372a68bdab7a7"
+    },
+    {
+      "label": "mobile-05-pagination",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": [
+        {
+          "class": "report-heading",
+          "x": 0,
+          "right": 390,
+          "width": 390
+        },
+        {
+          "class": "report-document",
+          "x": 0,
+          "right": 390,
+          "width": 390
+        },
+        {
+          "class": "report-evidence",
+          "x": 0,
+          "right": 390,
+          "width": 390
+        }
+      ],
+      "violations": [],
+      "sha256": "02d84d4b68d76f44fb4550c77ebba0f1441f98b881ecd8f8d2784f47f5ccdd03"
+    },
+    {
+      "label": "mobile-06-empty",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": [
+        {
+          "class": "report-index",
+          "x": 0,
+          "right": 390,
+          "width": 390
+        }
+      ],
+      "violations": [],
+      "sha256": "ee82ae1c439b11a12a45fc3f2ece288331f17331c26209c76bedaddc5041d64d"
+    },
+    {
+      "label": "mobile-07-missing",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": [],
+      "violations": [],
+      "sha256": "d5f6cd8bdc4b2da0e86a678dddbd626a2d6cdad550bd9b288caf876c669c62fd"
+    },
+    {
+      "label": "mobile-08-other-project",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": [
+        {
+          "class": "report-index",
+          "x": 0,
+          "right": 390,
+          "width": 390
+        }
+      ],
+      "violations": [],
+      "sha256": "cd7e18963a0cb623a357ddd670e54c25ee224fd6dd5f0c71dd7afa2fc83411fc"
+    },
+    {
+      "label": "mobile-09-source-error",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": [
+        {
+          "class": "report-heading",
+          "x": 0,
+          "right": 390,
+          "width": 390
+        },
+        {
+          "class": "report-document",
+          "x": 0,
+          "right": 390,
+          "width": 390
+        },
+        {
+          "class": "report-evidence",
+          "x": 0,
+          "right": 390,
+          "width": 390
+        }
+      ],
+      "violations": [],
+      "sha256": "59801b8e5365566f9a37c81ad0267035302eed81bc2fb2aa7a3f849fbca2cf02"
+    },
+    {
+      "label": "mobile-10-catalog-error",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": [
+        {
+          "class": "report-index",
+          "x": 0,
+          "right": 390,
+          "width": 390
+        }
+      ],
+      "violations": [],
+      "sha256": "672030985652886b4253829703d544161171c07efef21c75678f05239dd5a633"
+    }
+  ],
+  "checks": [
+    {
+      "surface": "desktop",
+      "keyboard_back_select_focus": true
+    },
+    {
+      "surface": "desktop",
+      "correction": {
+        "context_version": 8,
+        "application": "recorded_for_next_run",
+        "inference_started": false
+      },
+      "report_content_unchanged": true
+    },
+    {
+      "surface": "desktop",
+      "catalog_pagination": 54,
+      "citation_pagination": 21,
+      "safe_quoted_text": true,
+      "wrong_task_project_rejected": true,
+      "page_errors": []
+    },
+    {
+      "surface": "mobile",
+      "keyboard_back_select_focus": true
+    },
+    {
+      "surface": "mobile",
+      "correction": {
+        "context_version": 9,
+        "application": "recorded_for_next_run",
+        "inference_started": false
+      },
+      "report_content_unchanged": true
+    },
+    {
+      "surface": "mobile",
+      "catalog_pagination": 54,
+      "citation_pagination": 21,
+      "safe_quoted_text": true,
+      "wrong_task_project_rejected": true,
+      "page_errors": []
+    }
+  ],
+  "status": "passed",
+  "run_id": "d10c47"
+}

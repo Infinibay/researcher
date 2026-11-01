@@ -109,3 +109,6 @@
   .task-workbench * { scroll-behavior: auto; transition: none; }
 }
 .task-workbench input[type='checkbox'] { min-height: 1.25rem; width: 1.25rem; flex-shrink: 0; margin-block: .2rem; accent-color: var(--work-accent); }
+
+.task-report-return { padding-block: .65rem; border-bottom: 1px solid var(--work-line); }
+.task-report-return a { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--work-accent); text-decoration: underline; text-underline-offset: .2rem; }

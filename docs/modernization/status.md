@@ -8,6 +8,8 @@ Continuación: [tablero de ejecución](execution-dashboard.md).
 La [revisión del proceso](workflow-review.md) retira el porcentaje subjetivo anterior
 y organiza las siguientes entregas por resultados observables, sin reducir el plan.
 
+Última entrega: **Informes implementado y verificado**, tercer piloto visual; 20 estados de escritorio/móvil, lectura de citas y corrección sin reescribir el informe. Suite: 1498 aprobadas, los mismos 100 fallos heredados y 3 omitidas; frontend 36/36. [Evidencia y límites](reports-results.json). Siguen pendientes nueve rediseños y la aceptación completa de las doce rutas.
+
 ## Realizado, con el alcance indicado
 
 1. **Inventario y línea base:** dependencias, datos, arquitectura, inferencias,

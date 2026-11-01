@@ -1,0 +1,66 @@
+{
+  "base_commit": "fdec569",
+  "total": 1601,
+  "passed": 1498,
+  "failed": 100,
+  "skipped": 3,
+  "runtime_passed": 626,
+  "new_owner_api_cases_passed": 5,
+  "frontend_tests_passed": 36,
+  "new_frontend_tests": 8,
+  "new_failures": [],
+  "resolved_failures": [],
+  "inherited_failure_identities": {
+    "path": "docs/modernization/baseline-results.json",
+    "sha256": "cd91994b488a4ff0aee3a00087803e2b03cd72593a8bd8675d4aee5fb5265203",
+    "comparison": "all 100 EXACT identities match"
+  },
+  "raw_junit": {
+    "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/reports-backend-full.xml",
+    "sha256": "6f7bbd859a7b3a5b28316ccb8b1601023c875db6f56ce02399971923a85f0553"
+  },
+  "documentation_followup": {
+    "python_executable_ast_unchanged_from_full_suite_wheel": true,
+    "directed_tests_rerun_passed": 5,
+    "frontend_tests_rerun_passed": 36,
+    "wheel_rebuilt_and_rechecked": true
+  },
+  "browser": {
+    "path": "docs/design/audits/2026-11-01-reports/evidence.json",
+    "status": "passed",
+    "states": 20,
+    "viewports": [
+      [
+        1440,
+        1024
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "selected_axe_violations": 0,
+    "keyboard_back_select_focus": true,
+    "correction_recorded_for_next_run": true,
+    "report_body_and_draft_preserved": true,
+    "initial_and_final_dispatch_count": 1,
+    "new_model_turns": 0,
+    "fixture": "copy of retained synthetic owned-product trial; additional synthetic pagination and isolation records"
+  },
+  "validation": {
+    "frontend_build": true,
+    "build_warnings": [
+      "existing Browserslist data age",
+      "bundle over 500 kB"
+    ],
+    "global_suite_green": false,
+    "modern_changed_python_ruff": "pass",
+    "legacy_tasks_ruff": "5 pre-existing findings unchanged"
+  },
+  "limits": [
+    "No human comprehension study, screen-reader evaluation, zoom/other-browser coverage or full twelve-route acceptance.",
+    "Legacy artifact DB helper remains; not a proof of all runtime source-loss guards.",
+    "Backend wheel verified separately from source-built frontend; not a complete product installation.",
+    "No paid model replay; original synthetic report and its two sources retained."
+  ]
+}

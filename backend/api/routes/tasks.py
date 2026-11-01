@@ -153,11 +153,18 @@ async def create_task(body: TaskCreate):
 
 
 @router.get("/{task_id}", response_model=TaskResponse)
-async def get_task(task_id: int):
-    """Get task details."""
+async def get_task(task_id: int, project_id: int | None = Query(default=None, gt=0)):
+    """Read a task, rejecting mismatched project-scoped report/deep links.
+
+    Omitting project_id preserves compatibility with existing task consumers.
+    """
 
     def _query(conn: sqlite3.Connection) -> dict | None:
-        row = conn.execute("SELECT * FROM tasks WHERE id = ?", (task_id,)).fetchone()
+        """Return the task only when its optional project constraint matches."""
+        row = conn.execute(
+            "SELECT * FROM tasks WHERE id = ? AND (? IS NULL OR project_id = ?)",
+            (task_id, project_id, project_id),
+        ).fetchone()
         return dict(row) if row else None
 
     task = execute_with_retry(_query)

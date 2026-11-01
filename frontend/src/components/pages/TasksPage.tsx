@@ -1,4 +1,8 @@
+/** Project task selection and report-to-task navigation for the owner. @module */
+
 import { useState, useEffect, useRef } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
+import { scopedEntityId } from '../../utils/projectSelection'
 import { useProjectStore } from '../../stores/project'
 import { useTasks, useCreateTask, useDeleteTask } from '../../hooks/useTasks'
 import { useEpics } from '../../hooks/useEpics'
@@ -15,12 +19,14 @@ const statusOptions = ['', 'backlog', 'pending', 'in_progress', 'review_ready', 
 const typeOptions = ['code', 'research', 'investigation', 'review', 'test', 'design', 'integrate', 'documentation', 'bug_fix']
 const complexityOptions = ['low', 'medium', 'high']
 
+/** Open the selected project's task workbench without inferring a project from a URL. */
 export function TasksPage() {
   const projectId = useProjectStore((s) => s.activeProjectId)
   if (!projectId) return <div className="task-workbench"><section className="task-idle"><p className="task-eyebrow">TAREAS</p><h1>Elige un proyecto para trabajar</h1><p>Selecciona el proyecto en la cabecera. Aquí podrás consultar sus tareas, contrastar evidencia y corregir el contexto.</p></section></div>
   return <ProjectTaskWorkbench key={projectId} projectId={projectId} />
 }
 
+/** Keep task selection and return-to-report links scoped to the visibly active project. */
 function ProjectTaskWorkbench({ projectId }: { projectId: number }) {
   const [filterStatus, setFilterStatus] = useState('')
   const [filterEpic, setFilterEpic] = useState<number | undefined>()
@@ -37,7 +43,11 @@ function ProjectTaskWorkbench({ projectId }: { projectId: number }) {
   const deleteTask = useDeleteTask()
 
   const [showForm, setShowForm] = useState(false)
-  const [selectedTaskId, setSelectedTaskId] = useState<number | null>(null)
+  const [params, setParams] = useSearchParams()
+  const selectedTaskId = scopedEntityId(params, projectId, 'task')
+  const returnArtifactId = scopedEntityId(params, projectId, 'fromArtifact')
+  const foreignLink = params.has('task') && Number(params.get('project')) !== projectId
+  const setSelectedTaskId = (id: number | null) => setParams(id == null ? {} : { project: String(projectId), task: String(id) })
   const [deleteId, setDeleteId] = useState<number | null>(null)
   const [showDepGraph, setShowDepGraph] = useState(false)
   const [allDeps, setAllDeps] = useState<TaskDependency[]>([])
@@ -115,6 +125,8 @@ function ProjectTaskWorkbench({ projectId }: { projectId: number }) {
 
   return (
     <div className="task-workbench" data-has-selection={selectedTaskId != null}>
+      {returnArtifactId && <nav className="task-report-return" aria-label="Regreso al informe"><Link to={`/reports?project=${projectId}&artifact=${returnArtifactId}`}>Volver al informe</Link></nav>}
+      {foreignLink && <p className="task-error" role="status">Este enlace corresponde a otro proyecto. Elige ese proyecto o una tarea de la lista actual.</p>}
       <div className="task-page-heading">
         <div><p className="task-eyebrow">ESPACIO DE TRABAJO</p><h1>Tareas</h1><p className="task-page-description">Selecciona una tarea para revisar la evidencia, corregir el contexto o iniciar trabajo.</p></div>
         <div className="flex gap-2">

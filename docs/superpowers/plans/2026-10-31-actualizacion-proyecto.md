@@ -12,6 +12,8 @@
 
 **Guía de lectura:** las secciones 3–6 plantean la actualización técnica; 7 define la interacción humano–agente; 8 el rediseño visual; 10 ordena la ejecución. La sección 13 reúne el análisis por subsistema, 43 escenarios «¿qué pasaría si…?», las soluciones debatidas y cómo comprobarlas.
 
+**Criterio de documentación añadido por el usuario (1 de noviembre de 2026):** escribir y mantener docstrings en módulos, clases, métodos y funciones relevantes nuevos o modificados; usar JSDoc en TypeScript. Explicar responsabilidad, contrato, efectos y límites con vocabulario del dominio e identificadores buscables por Ken; evitar repetir el nombre o describir sólo la sintaxis. Documentar también supuestos y fallos relevantes. Revisar el código ya incorporado durante esta modernización: no basta con documentar únicamente las siguientes entregas. Verificar la correspondencia entre documentación y comportamiento al revisar cada cambio.
+
 ## 1. Alcance y criterios de éxito
 
 El trabajo solicitado ahora es este documento. La generación de imágenes, la elección de conceptos y su implementación forman parte de las fases de ejecución descritas aquí. No se generaron conceptos visuales ni se cambió el producto durante esta revisión.
