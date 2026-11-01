@@ -22,7 +22,7 @@ class WorkspaceRegistry:
         self.root = Path(root).resolve(strict=True)
 
     def bind(self, project_id, repository_id=None):
-        with closing(connect(self.database)) as conn:
+        with closing(connect(self.database, existing_only=True)) as conn:
             rows = conn.execute(
                 "SELECT * FROM repositories WHERE project_id=? AND status='active'",
                 (project_id,),

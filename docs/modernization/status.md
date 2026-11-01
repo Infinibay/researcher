@@ -53,6 +53,9 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    Ya tiene adaptador asíncrono JSON-RPC con tuberías reales: cierre independiente
    de peers, Stop con trabajador reservado y recogida de arranques cancelados.
    Esto permite adoptar su transporte; no sustituye aún los lanzadores del servicio.
+   Los adaptadores mantenidos de runtime, workspaces, vistas e investigación ya
+   abren sólo la DB existente: perderla no crea otra vacía. Sigue pendiente conectar
+   el recibo de cierre del broker con la retirada local del intento.
 7. **Contexto y procedencia:** versiones al corregir o cambiar trece entradas de tarea;
    retiro de autoridad antigua; respuesta asociada a pregunta/versión; repositorio
    admitido inmutable y comienzo de cola explícito. Registro exacto de la entrada
@@ -119,9 +122,10 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 
 ## Verificación más reciente
 
-- Suite completa:1357 casos;1254 pasan,100 fallan con las mismas identidades de la
+- Suite completa:1363 casos;1260 pasan,100 fallan con las mismas identidades de la
   línea base y 3 se omiten. La suite global sigue roja.
-- Runtime:424 pasan;27 pruebas dirigidas del transporte/cierre JSON-RPC. Se probaron
+- Runtime:430 pasan;23 pruebas dirigidas del contrato de fuente existente/arranque/
+  conexiones/revocación y27 del checkpoint de transporte/cierre JSON-RPC. Se probaron
   tuberías bloqueadas, errores de protocolo, cierres independientes y carreras de
   arranque/cancelación; el paquete extraído ejecutó JSON-RPC real y cerró el dominio.
   En el checkpoint anterior:57 pruebas dirigidas,15 de broker
@@ -154,8 +158,10 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
   siguen pendientes;0/12 rutas aceptadas. Dependencias:18 avisos npm preexistentes
   (5 bajos,3 moderados,10 altos), sin nuevos paquetes vulnerables por Playwright/axe.
 
-Evidencia actual: [transporte/cierre](broker-stdio-evidence.json),
-[resultados actuales](broker-stdio-results.json),
+Evidencia actual: [fuente existente](existing-source-evidence.json),
+[resultados actuales](existing-source-results.json),
+[paquete verificado](existing-source-packaging.json),
+[transporte/cierre](broker-stdio-evidence.json),
 [paquete y JSON-RPC aislado](broker-stdio-packaging.json),
 [broker/gate anterior](peer-broker-evidence.json),
 [contrato implementado y pendientes](../architecture/peer-broker.md),

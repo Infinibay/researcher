@@ -114,7 +114,13 @@ Los cierres tienen alcances distintos:
 `PeerBroker.close_peer` prueba cierre físico antes de intentar confirmar su recibo
 global. Si SQLite está ocupado devuelve contención, conserva la concesión y permite
 reintentar sólo ese cierre. No proyecta todavía la retirada en el SQL del proyecto:
-esa integración debe abrir el estado existente sin recrearlo si desapareció.
+esa integración queda pendiente. Ya se corrigió el prerrequisito de apertura: las
+transacciones de `SQLiteRunStore`, el registro de workspaces, las vistas del dueño
+y el store de investigación usan `mode=rw`. Si la DB desaparece, falla la apertura
+sin crear un fichero vacío; el bootstrap explícito mantiene su creación normal.
+La codificación de la URI conserva nombres con `?`, `#`, `%` y espacios. Este modo
+no demuestra identidad física, no sustituye los checks de origen y no protege por
+sí solo una sustitución de un fichero existente.
 
 Una escritura bloqueada tiene deadline y no retiene el event loop. Al cerrar se
 aborta la tubería de escritura antes de liberar sus FDs: un cierre graceful podría

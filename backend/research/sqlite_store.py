@@ -61,7 +61,7 @@ class SQLiteResearchStore:
 
     @contextmanager
     def _transaction(self, *, write=False):
-        with closing(connect(self.database)) as conn, conn:
+        with closing(connect(self.database, existing_only=True)) as conn, conn:
             conn.execute("BEGIN IMMEDIATE" if write else "BEGIN")
             yield conn
 

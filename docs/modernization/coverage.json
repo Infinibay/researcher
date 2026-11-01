@@ -457,7 +457,9 @@
         "evals/runtime/run_input_continuity.py",
         "docs/modernization/broker-stdio-evidence.json",
         "backend/tests/runtime/test_broker_rpc.py",
-        "backend/tests/runtime/test_broker_peer_close.py"
+        "backend/tests/runtime/test_broker_peer_close.py",
+        "docs/modernization/existing-source-evidence.json",
+        "backend/tests/runtime/test_existing_source.py"
       ]
     },
     "E06": {
@@ -627,7 +629,9 @@
         "docs/architecture/owned-commands.md",
         "backend/tests/runtime/test_command_executor.py",
         "backend/tests/runtime/test_command_journal.py",
-        "docs/modernization/owned-command-evidence.json"
+        "docs/modernization/owned-command-evidence.json",
+        "docs/modernization/existing-source-evidence.json",
+        "backend/tests/runtime/test_existing_source.py"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
@@ -775,7 +779,9 @@
         "frontend/tests/runtime.test.ts",
         "docs/modernization/broker-stdio-evidence.json",
         "backend/tests/runtime/test_broker_rpc.py",
-        "backend/tests/runtime/test_broker_peer_close.py"
+        "backend/tests/runtime/test_broker_peer_close.py",
+        "docs/modernization/existing-source-evidence.json",
+        "backend/tests/runtime/test_existing_source.py"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable",

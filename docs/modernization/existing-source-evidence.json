@@ -1,0 +1,50 @@
+{
+  "base_commit": "f3c5d5b",
+  "date": "2026-11-01",
+  "scope": "Existing-only source SQLite opens in retained runtime/research/workspace/owner adapters; prerequisite for broker local closure projection, which is still pending.",
+  "source_sha256": {
+    "backend/db/connection.py": "1439101f51745e81ff34780a4f6ee477c7b4ac7fbda0cb27dcf76bc177c08888",
+    "backend/runtime/sqlite_runs.py": "6ae87b9902a9ed3ef24d02c746ff88199f9077dceb3963078d5ab84d0406aa66",
+    "backend/runtime/workspaces.py": "d397b16334f879b14fcb8eaea062d5fbb09bff05db3e84e504d366c6bb24b7b1",
+    "backend/runtime/views.py": "e38815eeb07d02728b83f2591304b77156182435c079538130c746fdf3f7c1b0",
+    "backend/research/sqlite_store.py": "8ed98c9dd9bbb39bbd911ee9580fe1cb011cc5f171d844d4f28a1075f6a60287",
+    "backend/tests/runtime/test_existing_source.py": "ad111ae17ed2ff1bacb67ddb1a00eca5eb9d134f8798f319bce207193e7b3cc3",
+    "backend/tests/runtime/test_live_grants.py": "da9cb6cbad165c1f3ed1db74abd3720672da98785c68f62ee17b140a3fe7c5fd"
+  },
+  "raw_artifacts_sha256": {
+    "source-projection-existing-red.log": "cd26bf4bc0a1fb9ad3f27ec56da6d53ddcd3887f0b1e8d654f20df4fe329786a",
+    "source-projection-existing-green.log": "b4d9a82285b98483e0a9f1484ed3640f594fc0da81222fd353adfbf2599c815c",
+    "source-projection-consumers-red.log": "13d7236764bf96fdde01a60336dc80609564325a1d897957666c81c44a0b51e8",
+    "source-projection-consumers-green.log": "269f4ecbf45c533b896e3df21f10ccbc2b96592dfc9fb7d9d3a1cc183c114489",
+    "existing-source-suite.log": "56cf6c4ab08849c7b0fb7f6f9604c7b01c650f3319cfefeab5da081f71344035",
+    "existing-source-suite.xml": "68ce0d6d5baa63180a76a2e5f2b03d70476caf1e7c4c66c462cc3cbfa3b3960e",
+    "existing-source-complete-suite.log": "61167b2a7e17e4f5bcf226c7563e90336420803fc1fc549080458000e2e9cb76",
+    "existing-source-complete-suite.xml": "01e066341ea75ed466e70f19235245565825ad2237301f7d370e84d49933682c",
+    "existing-source-final-focused.log": "1ae77f37a5de5b306a337dc24bb5325b2ed84741cc60cfdb2eec950fa830ca87",
+    "existing-source-final-suite.log": "9733bb807bb36a47ba9f5f54bc40658e0d3e5d347d187ec3f29fe28a4a23efdb",
+    "existing-source-final-suite.xml": "c0f56d0b10308f8f0d431f4c1d242e6980cf119885d5cbca414f23e746693950",
+    "existing-source-verified-build.log": "b89adc96f4cfa6f9c78432b026e7adf057578989b2e58752c491f426c454b0d7",
+    "existing-source-verified-smoke.log": "d269c16469c8a860d64df69d1fe74669d992ad7ddd73fd9f1d6c8b2c29141259"
+  },
+  "package_verifier_sha256": "61b7334108a8879b227e4d39b568e523903b44f55d13fb6ab4e06efc2e846511",
+  "reports": [
+    "existing-source-results.json",
+    "existing-source-packaging.json"
+  ],
+  "verified": [
+    "Missing source before a first runtime read raises without creating DB/sidecars.",
+    "Removing the admitted source DB before PeerRegistry.close does not create a replacement.",
+    "Literal URI punctuation and spaces remain part of the database filename; shared WAL/foreign-key/busy-timeout policy is preserved.",
+    "WorkspaceRegistry, OwnerRuntimeView and SQLiteResearchStore separately reproduced source recreation; all retained direct callsites now opt into existing-only opening.",
+    "Explicit default connector/migration bootstrap creation remains compatible; real SQLite live-withdrawal writer contention test still prevents the write.",
+    "First expanded full suite exposed a test probe with an obsolete connector signature. Forwarded all keyword options, kept real SQLite trace/locking and original authority assertions, then reran full suite.",
+    "Final full offline1363:1260 pass,100 exact original baseline failure identities,3 skip,29 warnings;430 runtime pass. Focused23 pass.",
+    "Final wheel/sdist built offline. Runtime29 Python source bytes plus shared DB/research/probe bytes match current sources. Isolated packaged JSON-RPC137+63=200, domain retirement/stale rejection and missing-source non-recreation pass."
+  ],
+  "limits": [
+    "Existing-only mode prevents creation on absence; it is not a physical DB identity pin, managed actor enrollment, source replacement defense or restore/alias proof.",
+    "Legacy tools and explicit bootstrap retain default creation until their consumers migrate.",
+    "Broker global-to-source-local closure projection and RuntimeService/CommandJobs adoption are still required; no new mutable capability enabled.",
+    "No new model calls/images, real user DB migration, host service installation, push/merge/deploy. Full modernization remains active."
+  ]
+}

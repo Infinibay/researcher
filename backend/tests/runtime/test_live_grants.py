@@ -64,8 +64,8 @@ async def test_cached_scope_waiting_for_sqlite_cannot_write_after_live_withdrawa
     reached = threading.Event()
     connect = sqlite_store.connect
 
-    def observe(database):
-        connection = connect(database)
+    def observe(database, **options):
+        connection = connect(database, **options)
         connection.set_trace_callback(
             lambda sql: reached.set() if sql == "BEGIN IMMEDIATE" else None
         )

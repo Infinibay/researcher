@@ -135,7 +135,7 @@ class OwnerRuntimeView:
             raise ValueError("Invalid question cursor")
         if type(limit) is not int or not 1 <= limit <= 100:
             raise ValueError("Invalid question page size")
-        with closing(connect(self.database)) as conn, conn:
+        with closing(connect(self.database, existing_only=True)) as conn, conn:
             conn.execute("BEGIN")
             if (
                 conn.execute(
@@ -196,7 +196,7 @@ class OwnerRuntimeView:
     def workspace(self, project_id, task_id):
         context = self.runs.context_snapshot(project_id, task_id)
         runs = self.runs.task_runs(project_id, task_id)
-        with closing(connect(self.database)) as conn:
+        with closing(connect(self.database, existing_only=True)) as conn:
             sources = conn.execute(
                 """SELECT id,title,kind,sha256,captured_at,task_id AS captured_for_task_id
                 FROM research_sources WHERE project_id=? ORDER BY id DESC LIMIT 100""",
@@ -246,7 +246,7 @@ class OwnerRuntimeView:
         }
 
     def source(self, project_id, source_id, *, offset=0, max_chars=12000):
-        with closing(connect(self.database)) as conn:
+        with closing(connect(self.database, existing_only=True)) as conn:
             row = conn.execute(
                 "SELECT * FROM research_sources WHERE project_id=? AND id=?",
                 (project_id, source_id),
@@ -270,7 +270,7 @@ class OwnerRuntimeView:
             }
 
     def instruction_message(self, project_id, run_id):
-        with closing(connect(self.database)) as conn:
+        with closing(connect(self.database, existing_only=True)) as conn:
             row = conn.execute(
                 MESSAGE_SELECT
                 + " WHERE cm.project_id=? AND r.id=? AND cm.id=link.user_message_id",

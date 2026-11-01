@@ -1964,3 +1964,63 @@ CLI/TUI/clean install, dependency upgrades/18 npm advisories and100 baseline fai
 remain. UI still6/36 desktop+2/12 mobile concepts,2 pilots,0/12 accepted pages;30+10
 concepts/10 routes and all12 acceptance remain. Final independent whole-branch review
 still required. Keep the complete objective active.
+
+## Current brief: existing source DB and broker closure projection — base f3c5d5b
+
+- Close the demonstrated source-recreation gap before product adoption: runtime
+  transactions must open an existing DB and never create a replacement when state
+  disappears. Keep explicit legacy/bootstrap creation available. Preserve shared
+  SQLite pragmas and filenames containing URI punctuation.
+- After actual global peer closure, project the receipt through concrete
+  PeerRegistry.close outside the event loop. Physical/global closure must precede
+  local SQL; a missing/locked source reports incomplete projection, never replay.
+- Tests: absent DB before first access, DB removed after runtime admission, URI
+  punctuation, sibling/local closure/capacity and original DB loss during shutdown.
+- Ken recall/related have no indexed connection/runtime modules in the original
+  checkout; direct source/callers/tests are read in this worktree. No assumption
+  of whole-host enrollment or physical DB pinning is added by mode=rw.
+
+### Existing-source stage: implementation and next projection contract
+
+- The first three actual missing-source/URI-name tests failed as intended, then
+  passed with the opt-in shared connector and runtime existing-only transactions.
+  Expanded direct consumer audit found the same defect in WorkspaceRegistry,
+  OwnerRuntimeView and SQLiteResearchStore. Three more real missing-state tests
+  failed before applying existing-only open to all their maintained callsites.
+- Targeted existing-source/bootstrap/connection tests21 pass. Default creation
+  remains available to explicit migrations/bootstrap and transitional legacy callers.
+  mode=rw is not an identity pin, actor enrollment, restore proof or alias policy.
+- Ruling: commit the demonstrated shared source-open contract before implementing
+  closure projection — all retained new adapters must agree on absence semantics;
+  cost: broker closure and source-local projection remain separate in this checkpoint.
+- Projection still required: derive owned operations from the broker's global grant,
+  not only endpoints that successfully returned. Validate original source physical
+  identity, attempt/fence, peer and immutable namespace before recording local closure.
+  A changed local binding must not cause a second signal against another namespace.
+  Use concrete host ownership, never an external closed=True callback as evidence.
+- Global physical retirement must precede local SQL. Busy/missing/replaced source
+  must leave a visible incomplete local projection without recreating state, replay
+  or release of a foreign grant. Drain known workers while reserving Stop capacity.
+  Tests must cover connected-close capacity release, early bind/birth cancellation,
+  source loss, local writer contention and mismatched namespace/source records.
+
+- The first complete consumer suite1363 exposed101 failures:100 baseline plus
+  test_live_grants::test_cached_scope_waiting_for_sqlite_cannot_write_after_live_withdrawal.
+  Its real-SQL instrumentation wrapper accepted only the old positional signature;
+  existing_only caused TypeError before BEGIN IMMEDIATE, so the trace event never
+  fired. Forwarding keyword options preserves the actual connection policy and
+  the original no-write-after-withdrawal assertion. Final focused23 pass.
+- Retained the failed full log/XML as intermediate evidence; final suite and
+  package revalidation run after the probe fix, not inferred from the focused pass.
+
+- Final whole-suite1363:1260 pass,100 exact original baseline failure identities,
+  3 skip,29 warnings;430 runtime pass. Focused23 pass. No new/resolved failures.
+  All7 changed Python files pass Ruff check/format; git diff check passes.
+- Final offline wheel/SDist source bytes checked:29 runtime modules, shared DB,
+  research store and updated test probe. Isolated packaged broker JSON-RPC computes
+  200, preserves concession on peer close, retires/rejects stale attempt and opens
+  missing source without creating a replacement. Source DB/bootstrap remain synthetic.
+- Status/coverage/evidence/package results updated; no phase/scenario closed. The
+  next implementation is the ownership-validated source closure projection above,
+  followed by real managed enrollment, product launchers and all full-plan items
+  already listed in the next brief. No user data/model/image/host service/deploy work.
