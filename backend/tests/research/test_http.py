@@ -355,3 +355,47 @@ def test_pdf_capture_http_failure_does_not_persist_partial_evidence(
         "source_too_large" if expected_status == 413 else "source_unavailable"
     )
     assert db_conn.execute("SELECT count(*) FROM research_sources").fetchone()[0] == 0
+
+
+def test_live_withdrawal_cancels_the_actual_http_pdf_worker(
+    research_client,
+    research_store,
+    db_conn,
+    tmp_path,
+    monkeypatch,
+):
+    """Prove HTTP composition binds parser ownership to the credential's actual grant."""
+    import time
+    from concurrent.futures import ThreadPoolExecutor
+
+    from backend.tests.research.pdf_fixtures import pdf_bytes
+    from backend.tests.research.test_parser_process import worker_fault
+
+    marker = worker_fault(monkeypatch, tmp_path, "while True: pass")
+    _, _, record = reference(
+        research_store, db_conn, tmp_path, content=pdf_bytes("Input")
+    )
+    db_conn.execute(
+        "UPDATE reference_files SET file_type='application/pdf' WHERE id=?",
+        (record.id,),
+    )
+    db_conn.commit()
+    headers = credentials(research_store)
+    scope = research_store.authorize(headers["Authorization"].removeprefix("Bearer "))
+    gate = research_client.app.state.live_grants
+    with ThreadPoolExecutor() as executor:
+        pending = executor.submit(
+            research_client.post,
+            "/api/research-tools/sources/reference",
+            headers=headers,
+            json={"operation_key": "cancel-pdf", "reference_file_id": record.id},
+        )
+        deadline = time.monotonic() + 3
+        while not marker.exists() and time.monotonic() < deadline:
+            time.sleep(0.01)
+        assert marker.exists()
+        gate.withdraw(scope.grant_id)
+        gate.wait_closed(scope.grant_id, timeout=2)
+        response = pending.result(timeout=2)
+    assert response.status_code == 403, response.text
+    assert db_conn.execute("SELECT count(*) FROM research_sources").fetchone()[0] == 0

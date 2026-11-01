@@ -93,3 +93,34 @@ async def test_cached_scope_waiting_for_sqlite_cannot_write_after_live_withdrawa
     with pytest.raises(ResearchForbidden):
         await pending
     assert c.conn.execute("SELECT COUNT(*) FROM research_sources").fetchone()[0] == 0
+
+
+def test_withdrawal_signals_registered_tools_and_does_not_claim_unclosed_work():
+    """A revocation is immediate, but closure waits for the registered worker's exit."""
+    from backend.research.models import ResearchForbidden
+    from backend.runtime.live_grants import LiveGrants
+
+    gate = LiveGrants()
+    with gate.operation("attempt-a") as cancelled:
+        assert not cancelled.is_set()
+        gate.withdraw("attempt-a")
+        assert cancelled.is_set()
+        with pytest.raises(TimeoutError):
+            gate.wait_closed("attempt-a", timeout=0.01)
+        with pytest.raises(ResearchForbidden), gate.operation("attempt-a"):
+            pytest.fail("withdrawn operation admitted")
+    gate.wait_closed("attempt-a", timeout=0.01)
+
+
+def test_shutdown_signals_all_registered_tools_and_closes_admission():
+    """App shutdown cancels all workers and rejects new parser registrations."""
+    from backend.research.models import ResearchForbidden
+    from backend.runtime.live_grants import LiveGrants
+
+    gate = LiveGrants()
+    with gate.operation("attempt-a") as first, gate.operation("attempt-b") as second:
+        gate.close()
+        assert first.is_set() and second.is_set()
+        with pytest.raises(ResearchForbidden), gate.operation("new"):
+            pytest.fail("operation admitted after shutdown")
+    gate.wait_closed(timeout=0.01)

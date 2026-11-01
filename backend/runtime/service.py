@@ -54,6 +54,8 @@ class _Worker:
 
 
 class RuntimeService:
+    """Own native attempts and grant-bound tool closure before durable terminal states."""
+
     def __init__(
         self,
         store,
@@ -387,14 +389,21 @@ class RuntimeService:
         return await asyncio.shield(task)
 
     async def _reconcile_once(self, command):
+        """Close original peers and grant-bound tools before completing recovery without replay."""
         work = await asyncio.to_thread(self.recovery.preflight, **command)
         if work["completed"] is not None:
             return work["completed"]
         slot = self._workers.get(command["run_id"])
         if slot is not None and slot.attempt_id == command["attempt_id"]:
             self._withdraw(slot, slot.outcome)
+        for grant_id in work["tool_grant_ids"]:
+            self.live_grants.withdraw(grant_id)
         results = await asyncio.gather(
             asyncio.to_thread(self.recovery.begin, **command),
+            *(
+                asyncio.to_thread(self.live_grants.wait_closed, grant_id)
+                for grant_id in work["tool_grant_ids"]
+            ),
             *(
                 asyncio.to_thread(self.recovery.peers.close, peer)
                 for peer in work["peers"]
@@ -402,6 +411,10 @@ class RuntimeService:
             return_exceptions=True,
         )
         for result in results:
+            if isinstance(result, TimeoutError):
+                raise RunConflict(
+                    "Host tool closure is unconfirmed; reconcile the original operation again"
+                ) from result
             if isinstance(result, BaseException):
                 raise result
         return await asyncio.to_thread(self.recovery.complete, **command)
@@ -445,6 +458,7 @@ class RuntimeService:
                 return
 
     async def _execute(self, run_id, slot):
+        """Own one admitted native turn, then prove peer/tool closure before finalizing it."""
         lease = heartbeat = token = result = peers = None
         error_type = None
         dispatch_reserved = native_started = False
@@ -581,6 +595,14 @@ class RuntimeService:
             # Both peers have exited their owning worker scope before any final
             # retirement assertion. The grant gate closes even if SQL is busy.
             self._end_tool_authority(slot)
+            tools_closed = True
+            if slot.grant_id:
+                try:
+                    await asyncio.to_thread(self.live_grants.wait_closed, slot.grant_id)
+                except TimeoutError:
+                    tools_closed = False
+                    error_type = "ToolWorkerClosureUnconfirmed"
+                    logger.warning("Host tool worker closure needs reconciliation")
             if heartbeat is not None:
                 heartbeat.cancel()
                 await asyncio.gather(heartbeat, return_exceptions=True)
@@ -625,7 +647,7 @@ class RuntimeService:
                         runtime_closed = (
                             consume_closure(lease) is True or runtime_closed
                         )
-                    if not peers_closed or not runtime_closed:
+                    if not peers_closed or not runtime_closed or not tools_closed:
                         await asyncio.to_thread(
                             self.store.uncertain_inference,
                             lease,

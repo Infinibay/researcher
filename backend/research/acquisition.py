@@ -20,12 +20,13 @@ from backend.research.models import (
 class BoundedReferenceReader:
     """Read bounded, stable files under one project upload root; never arbitrary paths."""
 
-    def __init__(self, upload_root: Path, *, max_bytes: int = 1000000):
+    def __init__(self, upload_root: Path, *, max_bytes: int = 1000000, pdf_parser=None):
         """Bind the trusted upload root and maximum bytes before opening a reference."""
         if max_bytes <= 0:
             raise ValueError("Attachment byte limit must be positive")
         self.upload_root = upload_root.absolute()
         self.max_bytes = max_bytes
+        self.pdf_parser = pdf_parser
 
     def read(self, reference: ReferenceRecord) -> SourceDraft:
         """Acquire one stable byte snapshot, then extract supported text with provenance."""
@@ -98,9 +99,9 @@ class BoundedReferenceReader:
             for handle in reversed(handles):
                 os.close(handle)
         if reference.mime_type == "application/pdf":
-            from backend.research.pdf_text import extract_pdf
+            from backend.research.parser_process import PDFParser
 
-            content, extraction = extract_pdf(bytes(data))
+            content, extraction = (self.pdf_parser or PDFParser()).read(bytes(data))
         else:
             if data.startswith(b"%PDF-"):
                 raise SourceUnavailable(

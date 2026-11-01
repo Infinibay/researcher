@@ -9,7 +9,7 @@ Motivos del ajuste: [diagnóstico del proceso](workflow-review.md).
 - Hay un primer recorrido de investigación con Codex, suscripción, Ken, análisis y reporte persistido. La prueba real de entrada de producto terminó; su monitor falló y se recuperó evidencia durable sin repetir inferencia. No se recuperaron las métricas de memoria perdidas.
 - Las 43 entradas de escenarios siguen abiertas en `coverage.json`: 33 en progreso y 10 pendientes. Son escenarios amplios; esto no significa que sus componentes no funcionen.
 - Interfaz: 3 pilotos, 9/36 conceptos de escritorio y 3/12 móviles; 0/12 páginas con aceptación completa.
-- Última suite registrada: 1512 aprobadas, 100 fallos heredados y 3 omitidas. Falta resolver o retirar con justificación los casos del sistema reemplazado.
+- Última suite registrada: 1527 aprobadas, 100 fallos heredados y 3 omitidas. Falta resolver o retirar con justificación los casos del sistema reemplazado.
 - No hay porcentaje global defendible todavía. El 30% anterior era una impresión, no una medición de alcance ponderado.
 
 ## Última entrega verificada: arranque del recorrido existente
@@ -42,9 +42,11 @@ Verificado: inicializadores explícitos, guardias de API/CLI/launcher y cleanup 
 
 **Ya verificado en este bloque:** extracción de PDF con texto, hash binario, offsets de página, páginas sin texto, rechazo de cifrado/formato/tamaño, sin truncar; repetición tras borrar el original y revocación antes del commit. Recorridos HTTP y fachada nativa sobre API/SQLite reales;104 pruebas dirigidas aprobadas también desde wheel aislado. [Contrato y límites](../architecture/pdf-sources.md), [resultados](pdf-results.json), [paquete](pdf-packaging.json).
 
-**Falta para cerrar la capacidad:** parser con límites duros de CPU/RSS y cancelación bajo el host, PDF por URL, consumidores antiguos y la interfaz Documentos con sus conceptos/selección/implementación. La extracción actual no hace OCR ni certifica orden visual/tablas/imágenes. Sin aceptación humana ni nuevo ensayo con modelo.
+**Paso de parser verificado:** [resultados](parser-results.json), [paquete](parser-packaging.json). Worker fijo con CPU/AS/plazo/IPC, sin credenciales o FD heredados, retirada por HTTP y cierre al morir el padre. Finalización y recuperación esperan el cierre real; cierre incierto mantiene reconciliación.
 
-**Siguiente acción:** completar la ejecución limitada/cancelable del parser usando las fronteras existentes; después conectar Documentos, sin otra fábrica de inferencia ni retirar aún `read_paper/pdf_search`. DOCX/recuperación CSV/JSON/XML, web/wiki y revisión científica mantienen su alcance.
+**Falta para cerrar la capacidad:** PDF por URL, consumidores antiguos e interfaz Archivos (`/files`) con conceptos/selección/implementación y previsualización de páginas. Documentos (`/wiki`) es otra ruta y conserva su propia migración/rediseño. La extracción actual no hace OCR ni certifica orden visual/tablas/imágenes. Sin aceptación humana ni nuevo ensayo con modelo.
+
+**Siguiente acción:** completar PDF por URL y conectar Archivos de referencia al recorrido de investigación, sin otra fábrica de inferencia ni retirar aún `read_paper/pdf_search`. DOCX/recuperación CSV/JSON/XML, web/wiki y revisión científica mantienen su alcance.
 
 ## Cola posterior, manteniendo el alcance
 
@@ -60,7 +62,7 @@ Verificado: inicializadores explícitos, guardias de API/CLI/launcher y cleanup 
 - Un recorrido activo. Como máximo, otro frente independiente con archivos y contrato separados; delegar investigación o trabajo definido, evitando revisiones genéricas recurrentes.
 - Cada bloque declara resultado observable, criterio de salida, dependencias y pruebas necesarias **antes** de editar. Un experimento de 45–60 minutos sin resolver una incertidumbre exige reconsiderar la alternativa y registrar qué falta; no autoriza ignorar un requisito.
 - Antes de ampliar infraestructura, identificar el escenario obligatorio y el fallo reproducido que bloquea el recorrido. Si no lo bloquea, asignarle una entrega posterior y una prueba, conservándolo en el plan.
-- Ejecutar pruebas dirigidas durante el desarrollo. Ampliar al cambiar contratos compartidos, persistencia o fronteras de aislamiento; ejecutar la suite global al cerrar entregas y antes de la aceptación final. No repetirla sobre los mismos bytes por redactar documentación.
+- Ejecutar pruebas dirigidas durante el desarrollo. Si cambia bootstrap/importación de procesos, probar primero el wheel con el recorrido dirigido antes de lanzar la suite global. Ampliar al cambiar contratos compartidos, persistencia o fronteras de aislamiento; ejecutar la suite global al cerrar entregas y antes de la aceptación final. No repetirla sobre los mismos bytes por redactar documentación.
 - Repetir un ensayo real sólo por un cambio relevante o una pregunta sin resolver. Conservar resultados parciales y comprobar el verificador sin inferencia antes de usar la suscripción.
 - Reusar evidencia válida para la misma revisión/configuración. Un cambio de esos inputs invalida únicamente las conclusiones afectadas.
 - Mantener aquí sólo estado actual y próximos resultados; detalles y logs en el ledger/evidencias. Al retomar: leer este tablero, el último bloque relevante y los archivos necesarios, sin reconstruir toda la historia.

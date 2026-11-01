@@ -9,6 +9,8 @@ from backend.runtime.sqlite_runs import _digest
 
 
 class RunRecovery:
+    """Plan and record recovery from original peer/grant identities, preserving receipts."""
+
     def __init__(self, runs):
         self.runs = runs
         self.peers = PeerRegistry(runs)
@@ -141,12 +143,14 @@ class RunRecovery:
         return peers
 
     def preflight(self, **command):
+        """Inspect original peers and bound grants before closing an attempt without replay."""
         return self._prepare_command(command, write=False)
 
     def begin(self, **command):
         return self._prepare_command(command, write=True)
 
     def _prepare_command(self, command, *, write):
+        """Resolve scoped original actors and optionally persist their retirement intent."""
         intent = self._intent(**command)
         with self.runs._transaction(write=write) as conn:
             row = self.runs._row(conn, command["project_id"], command["run_id"])
@@ -199,7 +203,15 @@ class RunRecovery:
                         "replay": False,
                     },
                 )
-            return {"completed": None, "peers": [peer["id"] for peer in peers]}
+            grants = conn.execute(
+                "SELECT id FROM tool_grants WHERE runtime_attempt_id=? AND project_id=? AND task_id=?",
+                (command["attempt_id"], command["project_id"], row["task_id"]),
+            ).fetchall()
+            return {
+                "completed": None,
+                "peers": [peer["id"] for peer in peers],
+                "tool_grant_ids": [grant[0] for grant in grants],
+            }
 
     def complete(self, **command):
         intent = self._intent(**command)

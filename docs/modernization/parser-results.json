@@ -1,0 +1,64 @@
+{
+  "base_commit": "ae938da",
+  "total": 1630,
+  "passed": 1527,
+  "failed": 100,
+  "skipped": 3,
+  "runtime_passed": 632,
+  "new_cases_passed": 15,
+  "new_cases": [
+    "backend.tests.research.test_http::test_live_withdrawal_cancels_the_actual_http_pdf_worker",
+    "backend.tests.research.test_parser_process::test_pdf_worker_returns_text_and_observed_hard_limits",
+    "backend.tests.research.test_parser_process::test_worker_cpu_and_memory_exhaustion_are_bounded_failures[while True: pass]",
+    "backend.tests.research.test_parser_process::test_worker_cpu_and_memory_exhaustion_are_bounded_failures[return bytearray(1024 * 1024 * 1024)]",
+    "backend.tests.research.test_parser_process::test_withdrawal_stops_the_live_worker_and_waits_for_physical_exit",
+    "backend.tests.research.test_parser_process::test_wall_deadline_closes_a_parser_that_consumes_no_cpu",
+    "backend.tests.research.test_parser_process::test_worker_does_not_inherit_credentials_or_open_host_descriptors",
+    "backend.tests.research.test_parser_process::test_excess_output_is_killed_without_buffering_an_unbounded_receipt",
+    "backend.tests.research.test_parser_process::test_worker_launch_failure_is_a_source_error",
+    "backend.tests.research.test_parser_process::test_worker_exits_when_its_api_owner_process_is_killed",
+    "backend.tests.runtime.test_live_grants::test_withdrawal_signals_registered_tools_and_does_not_claim_unclosed_work",
+    "backend.tests.runtime.test_live_grants::test_shutdown_signals_all_registered_tools_and_closes_admission",
+    "backend.tests.runtime.test_run_recovery::test_recovery_waits_for_original_attempt_tool_workers",
+    "backend.tests.runtime.test_runtime_service::test_native_completion_waits_for_registered_tool_worker_closure",
+    "backend.tests.runtime.test_runtime_service::test_unconfirmed_tool_worker_closure_keeps_run_uncertain"
+  ],
+  "directed_tests_passed": 158,
+  "new_failures": [],
+  "resolved_failures": [],
+  "inherited_failure_identities": {
+    "path": "docs/modernization/baseline-results.json",
+    "sha256": "cd91994b488a4ff0aee3a00087803e2b03cd72593a8bd8675d4aee5fb5265203",
+    "comparison": "all 100 EXACT failure identities match"
+  },
+  "raw_junit": {
+    "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/parser-final.xml",
+    "sha256": "0c89d8c79ee8ad510ecf5a17637f38c93681763641d10c0cc11502c4eca9eb6f"
+  },
+  "validation": {
+    "isolated_wheel_directed_passed": 158,
+    "wheel_source_comparisons": 16,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "user_data_used": false,
+    "ruff_changed_python": "pass",
+    "global_suite_green": false
+  },
+  "observed": [
+    "Real PDF extraction occurs in a fixed child with observed CPU and address-space limits",
+    "CPU exhaustion, MemoryError, sleeping deadline and excess output fail without partial source",
+    "Credential environment and inheritable host FD absent in actual worker",
+    "HTTP withdrawal closes/reaps worker and prevents source commit",
+    "Killed parent causes pinned worker pidfd to become terminal",
+    "Native completion and recovery wait for registered workers; unconfirmed closure stays reconciling",
+    "Shutdown seals worker admission; withdrawal closes authorize-to-register race",
+    "Isolated -I-S package dependencies resolved from installed pypdf rather than base sysconfig"
+  ],
+  "limits": [
+    "Address space is not an aggregate RSS/cgroup quota or general FS/network sandbox",
+    "Fixed worker is not arbitrary model execution; complete host actor enrollment/quotas remain pending",
+    "SQL-only revocation of legacy standalone grants does not provide live managed withdrawal",
+    "PDF URL, old consumer migration, other document formats and Files UI still pending",
+    "No new model/human comprehension evaluation; all43 scenarios and whole modernization remain open"
+  ]
+}

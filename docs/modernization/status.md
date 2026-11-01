@@ -10,7 +10,9 @@ y organiza las siguientes entregas por resultados observables, sin reducir el pl
 
 Última entrega: **Informes implementado y verificado**, tercer piloto visual; 20 estados de escritorio/móvil, lectura de citas y corrección sin reescribir el informe. En ese corte: 1498 aprobadas, los mismos 100 fallos heredados y 3 omitidas; frontend 36/36. [Evidencia y límites](reports-results.json). Siguen pendientes nueve rediseños y la aceptación completa de las doce rutas.
 
-PDF: captura de adjunto con páginas/hash y lectura→búsqueda→cita→borrador conectadas;104 pruebas dirigidas también desde wheel. Suite actual:1512 aprobadas,100 fallos heredados exactos,3 omitidas. Capacidad parcial: CPU/RSS/cancelación del parser, PDF por URL y Documentos pendientes. [Resultados](pdf-results.json).
+PDF: captura de adjunto con páginas/hash y lectura→búsqueda→cita→borrador conectadas;104 pruebas dirigidas también desde wheel. Suite actual:1512 aprobadas,100 fallos heredados exactos,3 omitidas. El worker ya tiene CPU/AS/plazo/IPC y cancelación/cierre; siguen pendientes URL/consumidores/Archivos. [Resultados](pdf-results.json).
+
+Último corte de parser:1527 aprobadas,100 fallos heredados exactos,3 omitidas;158 pruebas dirigidas desde fuente y paquete.15 casos nuevos; sin inferencia adicional. [Evidencia y límites](parser-results.json).
 
 ## Realizado, con el alcance indicado
 

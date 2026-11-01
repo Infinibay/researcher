@@ -10,6 +10,7 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from backend.api import config
 from backend.research.acquisition import BoundedReferenceReader
 from backend.research.models import ResearchForbidden, ResearchNotFound, ResearchScope
+from backend.research.parser_process import PDFParser
 from backend.research.service import ResearchService
 from backend.research.sqlite_store import SQLiteResearchStore
 from backend.research.web_fetcher import PublicWebFetcher
@@ -19,6 +20,8 @@ bearer = HTTPBearer(auto_error=False)
 
 @dataclass(frozen=True)
 class ResearchContext:
+    """Authenticated scope and its repository/acquisition services for one HTTP call."""
+
     store: SQLiteResearchStore
     scope: ResearchScope
     service: ResearchService
@@ -28,6 +31,7 @@ def get_research_context(
     request: Request,
     credentials: Annotated[HTTPAuthorizationCredentials | None, Depends(bearer)],
 ) -> ResearchContext:
+    """Bind tool credentials to data and cancellable workers without model-chosen scope."""
     if credentials is None:
         raise HTTPException(
             401,
@@ -60,7 +64,12 @@ def get_research_context(
         scope,
         ResearchService(
             store,
-            reference_reader=BoundedReferenceReader(Path(config.UPLOAD_DIR)),
+            reference_reader=BoundedReferenceReader(
+                Path(config.UPLOAD_DIR),
+                pdf_parser=PDFParser(
+                    owner=request.app.state.live_grants, grant_id=scope.grant_id
+                ),
+            ),
             web_fetcher=PublicWebFetcher(),
         ),
     )

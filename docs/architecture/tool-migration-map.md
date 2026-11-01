@@ -46,7 +46,7 @@ mantenerse; no montar el repo principal completo para resolver Git de un worktre
 | Git | 7 | Repo/worktree reales, recibos por operación y publicación sujeta a aceptación del SHA exacto |
 | Tareas | 14 | Un claim durable; propuesta/revisión/done separados; comentarios y cambios versionados |
 | Comunicación | 6 | Chat explicativo durable, comandos tipados para activar/asignar/corregir/preguntar |
-| Web | 7 | Captura existente; PDF de adjunto con páginas/citas implementado parcialmente. Faltan límites CPU/RSS/cancelación del parser, PDF por URL, búsqueda/Spider; deep_research sin LLM anidado |
+| Web | 7 | Captura existente; PDF de adjunto con páginas/citas implementado parcialmente. Parser local ya tiene límites CPU/AS/plazo y cancelación/cierre. Faltan PDF por URL, búsqueda/Spider; deep_research sin LLM anidado |
 | Shell | 2 | Fachada del host sobre OwnedCommandExecutor; intérprete elegido por host, sin instalación implícita |
 | Conocimiento | 12 | Findings/reportes nuevos, búsqueda, revisión científica y wiki con identidad por proyecto/global |
 | Proyecto | 8 | Planificación tipada, hipótesis versionadas, referencia y repositorios con reconciliación |

@@ -68,6 +68,7 @@ async def lifespan(app: FastAPI):
             finally:
                 try:
                     app.state.live_grants.close()
+                    await asyncio.to_thread(app.state.live_grants.wait_closed)
                 finally:
                     try:
                         app.state.local_access.close()

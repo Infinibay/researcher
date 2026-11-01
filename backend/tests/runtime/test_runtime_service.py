@@ -791,3 +791,45 @@ async def test_old_correction_receipt_does_not_interrupt_new_context_work(
         assert second.active() and not second.interrupted.is_set()
         await service.stop(101, revised.run_id)
         await service.wait(revised.run_id)
+
+
+async def test_native_completion_waits_for_registered_tool_worker_closure(
+    service_setup,
+):
+    """A native completion cannot make a proposal ready while its parser still owns work."""
+    setup = service_setup
+    native = ControlledInference(setup)
+    service = coordinator(setup, native)
+    async with service:
+        run = await service.submit(setup.c.spec)
+        await asyncio.wait_for(native.started.wait(), 2)
+        with service.live_grants.operation(native.scope.grant_id) as cancelled:
+            native.release.set()
+            assert await asyncio.to_thread(cancelled.wait, 2)
+            waiting = asyncio.create_task(service.wait(run.run_id))
+            with pytest.raises(TimeoutError):
+                await asyncio.wait_for(asyncio.shield(waiting), 0.2)
+            assert setup.c.store.get(101, run.run_id).status != "needs_review"
+        await asyncio.wait_for(waiting, 2)
+        assert setup.c.store.get(101, run.run_id).status == "needs_review"
+
+
+async def test_unconfirmed_tool_worker_closure_keeps_run_uncertain(
+    service_setup, monkeypatch
+):
+    """Failed closure proof must not be converted into successful native task completion."""
+    setup = service_setup
+    native = ControlledInference(setup)
+    service = coordinator(setup, native)
+
+    def closure_unknown(*args, **kwargs):
+        """Represent an uninterruptible or unreaped host worker without leaking a process."""
+        raise TimeoutError("tool process closure is unknown")
+
+    monkeypatch.setattr(service.live_grants, "wait_closed", closure_unknown)
+    async with service:
+        run = await service.submit(setup.c.spec)
+        await asyncio.wait_for(native.started.wait(), 2)
+        native.release.set()
+        await service.wait(run.run_id)
+        assert setup.c.store.get(101, run.run_id).status == "reconciling"

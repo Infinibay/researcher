@@ -408,7 +408,12 @@
         "docs/modernization/native-proxy-evidence.json",
         "docs/modernization/native-proxy-results.json",
         "backend/tests/runtime/test_native_proxy.py",
-        "backend/tests/runtime/test_native_proxy_lifecycle.py"
+        "backend/tests/runtime/test_native_proxy_lifecycle.py",
+        "docs/architecture/pdf-sources.md",
+        "docs/modernization/parser-results.json",
+        "docs/modernization/parser-packaging.json",
+        "backend/tests/research/test_parser_process.py",
+        "backend/tests/runtime/test_live_grants.py"
       ],
       "remaining": [
         "Durable product startup/shutdown and all tool lifecycle integration; old flows are not covered by owned command evidence",
@@ -1258,7 +1263,12 @@
         "docs/modernization/pdf-packaging.json",
         "backend/tests/research/test_pdf_acquisition.py",
         "backend/tests/research/test_http.py",
-        "backend/tests/runtime/test_host_business.py"
+        "backend/tests/runtime/test_host_business.py",
+        "docs/modernization/parser-results.json",
+        "docs/modernization/parser-packaging.json",
+        "backend/tests/research/test_parser_process.py",
+        "backend/tests/runtime/test_live_grants.py",
+        "backend/tests/runtime/test_run_recovery.py"
       ],
       "remaining": [
         "Migrate/expose retained capabilities and their actual consumers (inventory of71 tools exists).",
@@ -1352,7 +1362,12 @@
         "docs/modernization/owned-factory-packaging.json",
         "docs/modernization/runtime-owned.example.json",
         "backend/tests/runtime/test_owned_factory.py",
-        "backend/tests/runtime/test_broker_commands.py"
+        "backend/tests/runtime/test_broker_commands.py",
+        "docs/architecture/pdf-sources.md",
+        "docs/modernization/parser-results.json",
+        "docs/modernization/parser-packaging.json",
+        "backend/tests/research/test_parser_process.py",
+        "backend/tests/runtime/test_live_grants.py"
       ],
       "remaining": [
         "Migrate all legacy callers and capability families",
@@ -1731,7 +1746,11 @@
         "docs/modernization/pdf-packaging.json",
         "backend/tests/research/test_pdf_acquisition.py",
         "backend/tests/research/test_http.py",
-        "backend/tests/runtime/test_host_business.py"
+        "backend/tests/runtime/test_host_business.py",
+        "docs/modernization/parser-results.json",
+        "docs/modernization/parser-packaging.json",
+        "backend/tests/research/test_parser_process.py",
+        "backend/tests/runtime/test_live_grants.py"
       ],
       "remaining": [
         "Rendered browser and keyboard verification",
@@ -2398,7 +2417,10 @@
         "backend/research/pdf_text.py",
         "backend/research/acquisition.py",
         "backend/tests/research/test_pdf_acquisition.py",
-        "backend/tests/research/pdf_fixtures.py"
+        "backend/tests/research/pdf_fixtures.py",
+        "backend/research/parser_process.py",
+        "backend/research/parser_worker.py",
+        "backend/runtime/live_grants.py"
       ],
       "remaining": [
         "Audit modules/classes/methods and relevant functions added earlier in this branch; add meaningful searchable docstrings/JSDoc where missing or stale.",

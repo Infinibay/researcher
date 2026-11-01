@@ -3446,3 +3446,63 @@ review only when entire implementation is ready. No phase or goal completion cla
 - Elapsed proof anchors: source directed104in8.22s; full regression246.13s; fresh
   package rerun104tests. No extra paid model turn; main retrabajo was verifier async
   config and exception translation, not new broker/factory work.
+
+## Active delivery: PDF parser OS limits and owned cancellation — baseae938da
+
+- Prior turn progress:ae938da captured/cited PDFs; current worktree confirms commit
+  and only instruction files untracked. Full objective preserved.
+- Exit: fixed trusted worker applies CPU/address-space/wall/output/input budgets
+  before parsing; environment/FDs exclude credentials. Withdrawal/shutdown signals
+  registered parsing, physical closure required before runtime terminal assertion.
+  Keep original capture retry/commit guards; no new model loop or execution factory.
+- Existing role container limits do not own this fixed API utility. Reuse grant
+  withdrawal/terminal gate; deep PDFParser interface hides process/IPC/limits. The
+  private native process namespace helper is not a generic subprocess selector.
+- Test first: actual PDF, CPU/AS dependency faults under real worker limits, sleeping
+  worker deadline, live withdrawal and /proc exit proof, admission after withdrawal,
+  registry closure/shutdown. No paid inference or user data required.
+- RED7 missing worker/registry APIs; GREEN18 worker+grant+PDF checks after reuse of
+  peer_process libc pidfds (this Python lacks os.pidfd_open). Fixed cancellation
+  ResearchForbidden being caught as OSError. No numeric-PID kill fallback.
+- RED2 native completion/unknown-closure cases originally returned needs_review;
+  now wait for registered tools and retain reconciling on uncertainty. RED1 recovery
+  likewise finished before tool closure; original-attempt scoped grant planning
+  and service gate now wait. API shutdown also seals/cancels/drains workers.
+- Directed158 pass in21.18s. Real CPU/AS faults, sleeping wall deadline, output cap,
+  inherited secret/FD exclusion, HTTP cancellation, parent SIGKILL/pidfd terminal,
+  authorize/register race, shutdown, native and recovery closure barriers included.
+- First full1630:1527pass100EXACTbaselinefails3skip,244.51s. Package then found real
+  bootstrap bug under-I-S:sysconfig pointed at base Python, not supplied venv deps;
+ 17of158failed. Resolved actual pypdf installation with find_spec, rebuilt wheel;
+ 16source comparisons/296wheel-only backend imports/158tests pass in21.94s.
+- A final full run after that executable fix is live on original exec handle58675:
+  parser-final.log/xml. Do not replay it if observation expires. Final package
+  evidence already in parser-packaging.json; source hashes must remain unchanged.
+- Runtime _execute method docstring added after initial build, executable AST
+  equivalence to tested wheel verified before rebuilding. All new parser/worker/
+  registry/test boundaries have meaningful docstrings; whole-branch audit pending.
+- Workflow ruling: for process/bootstrap changes, directed source + isolated wheel
+  BEFORE global regression avoids the unnecessary first full run seen here. No
+  model replay, frontend build or image generation was needed for this step.
+- Next source capability: PDF URL, then Files reference-upload UI. Sidebar evidence
+  shows /files=Archivos, /wiki=Documentos/wiki; corrected ambiguous dashboard naming.
+  Concept generation/selection/code for these routes remain required, not accepted.
+- FINAL original handle58675 exited1 as expected for inherited failures:1630total,
+  1527pass100EXACTbaselinefailures3skip,632runtimepass,29warnings,243.22s. Final
+  JUnit/parser-results.json bind the executable dependency-discovery fix; no new
+  or resolved failures. Package158pass/296imports/16source comparisons rechecked.
+- Ruling: parser CPU/memory is enforced as CPU soft2/hard3 and AS256MiB, not a fake
+  RLIMIT_RSS/cgroup claim. It is a trusted fixed utility, not model-supplied code or
+  a general filesystem/network sandbox. Complete global host enrollment remains.
+- Recovery expansion was justified by reproduced RED1: old path returned terminal
+  before an original-attempt registered tool closed. Scoped grant query and live
+  closure barrier fix this without replay or affecting another attempt's workers.
+- Required docstrings now cover worker/process, limits, LiveGrants methods, relevant
+  runtime execution/recovery and HTTP context. Whole-branch documentation audit,
+  all71tools/11categories, engine/loops/flows, prompts/books/evals/human/UI/data/ops,
+ 100baselinefailures and independent final review remain in full objective.
+- While final regression ran, captured before-state of /files in desktop/mobile
+  over separate synthetic copy (including generated PDF, no extraction/model turn).
+  Existing table631pxwide at390px viewport hides actions; English UI and wrong-zone
+  relative dates observed. This is initial audit only, not generated concept/pilot.
+  Server46831 received validated SIGINT; poll original handle to confirm terminal.

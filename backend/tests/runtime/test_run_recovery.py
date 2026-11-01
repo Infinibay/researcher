@@ -362,3 +362,37 @@ async def test_same_recovery_intent_rechecks_a_transient_failed_closure(
         assert setup.c.store.get(101, command["run_id"]).status == "reconciling"
         assert (await service.reconcile(**command))["status"] == "failed"
         assert peers.closed()
+
+
+async def test_recovery_waits_for_original_attempt_tool_workers(service_setup):
+    """Recovery may close native peers but cannot finish while that attempt's parser lives."""
+    import asyncio
+
+    from backend.tests.runtime.test_runtime_service import (
+        ControlledInference,
+        coordinator,
+    )
+
+    setup = service_setup
+    _recovery, _peers, lease, command = lost_attempt(setup.c)
+    token = setup.c.research.issue_grant(
+        project_id=101,
+        task_id=1001,
+        agent_id="researcher-a",
+        permissions={"sources.read", "sources.capture"},
+    )
+    grant = setup.c.research.authorize(token).grant_id
+    setup.c.conn.execute(
+        "UPDATE tool_grants SET runtime_bound=1,runtime_attempt_id=? WHERE id=?",
+        (lease.attempt_id, grant),
+    )
+    setup.c.conn.commit()
+    service = coordinator(setup, ControlledInference(setup))
+    async with service:
+        with service.live_grants.operation(grant) as cancelled:
+            pending = asyncio.create_task(service.reconcile(**command))
+            with pytest.raises(TimeoutError):
+                await asyncio.wait_for(asyncio.shield(pending), 0.2)
+            assert cancelled.is_set()
+            assert setup.c.store.get(101, command["run_id"]).status == "reconciling"
+        assert (await asyncio.wait_for(pending, 2))["status"] == "failed"

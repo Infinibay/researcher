@@ -2,7 +2,8 @@
 
 The caller supplies a byte snapshot already confined to project uploads. Parser
 budgets bound pages, decoded streams, object work and resulting UTF-8 text; they
-are not an OS CPU/RSS sandbox. Captured text may differ from visual reading order.
+are not an OS CPU/RSS sandbox. Production acquisition calls this inside PDFParser's
+OS-limited worker. Captured text may differ from visual reading order.
 """
 
 from io import BytesIO

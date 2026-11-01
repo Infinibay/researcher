@@ -1,0 +1,30 @@
+{
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "7bae2c032dc02286b05f862abde5b95d8c1ab0d99c9f9bc0d6bd6cf6afb750b8",
+  "source_comparisons": {
+    "backend/research/pdf_text.py": "1810f7b7e73610e7fa72aef31255a883bc2a875c65e0dde2b86e007b58443a0a",
+    "backend/research/parser_process.py": "2b65c73c6643768eb170b1223cfe16d8cd354147d7924adc67aa1bb388322c13",
+    "backend/research/parser_worker.py": "c60690671c09a88f74844f5eddb9a2bea3d287d98d57ea1c9bf1e5ec77ed848a",
+    "backend/research/acquisition.py": "07f891c8311976c8ce425ced1be6e9b2009de93e84b51fbf23cc996171b7755f",
+    "backend/api/research_dependencies.py": "b4d821455242786d446399cf0d06482af6fb2155f334a0daa6cc6e67fe465aec",
+    "backend/api/main.py": "de75fc2013df1e674865ea531f9289c0371c00c7a3e8e0e9018225e71e2206ec",
+    "backend/runtime/live_grants.py": "9765288f781df83c6e8d3c9e390ae941f49a9fa4c1df161295b64cfd5f41808d",
+    "backend/runtime/service.py": "7315716f5ce4bfe942a51393317209537546612223afcd58a87559bdb66578b5",
+    "backend/runtime/recovery.py": "a39e319268b2285d3237216de481cca50954ad23440ce490d1e13dfb16444ee4",
+    "backend/runtime/peer_process.py": "6f6bba2b29098b3960814e3bd40a9badbda86e8d508b999935b9e0441097cd34",
+    "backend/tests/research/test_parser_process.py": "7f1ebc1605bfc205e4e56cda5688d807702c69c44425c4557165977c9a93ca5a",
+    "backend/tests/research/test_http.py": "300e66cfc0a925eadcd46168a364424567e0c20bdc745f700cb4f64ea215228d",
+    "backend/tests/runtime/test_live_grants.py": "f76740a64e792fb245674fb13ecb8db359a722601357156dad65d9a1cbd9ca57",
+    "backend/tests/runtime/test_runtime_service.py": "a0665c24e30484932543748403e42734c22e283ec9d831c875b472586139f759",
+    "backend/tests/runtime/test_run_recovery.py": "e232f28d5a03414d7987f272248bd9ed1ce3f0526ce1a3021c097b90bc8876fe",
+    "backend/tests/api/test_bootstrap_startup.py": "8b899c953d119e099b7d5d320c134b4b266282a1d1e8f7c879527f433d65f60b"
+  },
+  "observed": {
+    "directed_tests_passed": 158,
+    "backend_modules_loaded": 296,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "network": "disabled; Unix sockets allowed"
+  },
+  "limits": "Backend wheel plus explicit installed dependencies; frontend is separately built/run from repository. Not a complete packaged product install, real model generation, or host enrollment proof."
+}

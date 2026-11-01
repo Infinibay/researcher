@@ -57,10 +57,10 @@ original y revocación entre extracción y commit. Los recorridos HTTP y fachada
 nativa ejercitan lectura, búsqueda exacta, cita y borrador sin inferencia ni red
 externa. No son una evaluación de comprensión con un modelo o una persona.
 
-**La configuración del parser no es un límite duro de CPU/RSS del sistema operativo.**
-Falta la ejecución del parser con recursos y cancelación bajo el dueño del host
-para cerrar por completo `read_paper/pdf_search`. No se retiran aún las herramientas
-heredadas. También faltan adquisición de PDF por URL, OCR si se decide admitirlo,
+**La configuración interna de pypdf no es un límite duro de CPU/RSS.** El host ya
+la ejecuta dentro del worker limitado/cancelable descrito debajo; esto no cierra
+por completo `read_paper/pdf_search` ni retira herramientas heredadas. Todavía faltan
+adquisición de PDF por URL, OCR si se decide admitirlo,
 DOCX y recuperación estructurada CSV/JSON/XML, interfaz Documentos rediseñada,
 previsualización de páginas/citas en producto y migración de consumidores antiguos.
 El límite de captura no demuestra que el endpoint heredado de upload limite el
@@ -71,3 +71,53 @@ Fuentes primarias consultadas para el contrato de pypdf:
 [modo estricto](https://pypdf.readthedocs.io/en/6.21.4/user/robustness.html).
 La firma/configuración se contrastaron con la distribución instalada; no se pasó
 una opción `configuration=` inexistente a `PdfReader` ni se mutaron constantes globales.
+
+## Ejecución del parser bajo el host
+
+La adquisición productiva ya llama a `PDFParser`, que envía únicamente el snapshot
+binario a un programa fijo en otro proceso. No acepta comandos, rutas de documentos
+ni código del modelo. Arranca con Python aislado, sin `site`, entorno mínimo,
+`close_fds=True` y sin shell. La dependencia se localiza en la instalación efectiva
+de `pypdf`, incluso si el host arrancó con dependencias explícitas y `-I -S`.
+
+Antes de importar el parser o leer el PDF, el worker aplica `RLIMIT_CPU` (señal a2s,
+límite duro3s), `RLIMIT_AS`256MiB, core/tamaño de archivo cero,32 descriptores y
+límite de creación de procesos. El host impone5s de plazo de pared,1MB de entrada
+y2MB de salida acumulada, leyendo/escribiendo ventanas de pipe sin buffer ilimitado.
+Estos valores son configuración del host. **AS limita espacio virtual; no es una
+cuota cgroup de RSS agregado ni un sandbox general de filesystem/red.** El programa
+fijo no ejecuta scripts del PDF ni conversores. No se amplía con ello el catálogo
+de comandos que puede ejecutar un agente.
+
+El host fija un pidfd antes de enviar datos y conserva la responsabilidad de matar
+y reapear ese hijo. Esta distribución de Python no expone `os.pidfd_open`; se
+reutilizan los helpers libc existentes de `peer_process`, sin fallback de parser
+en el proceso de la API. Una señal/exit desconocidos no se convierten en éxito.
+La procedencia guarda límites observados y `worker_closed=true` después del cierre
+comprobado. El proceso también tiene fusible de pared y muerte con el padre Linux.
+
+`LiveGrants.operation` registra el trabajo antes del spawn. Stop/corrección retira
+autoridad y señala cancelación sin esperar SQLite; el intercambio comprueba esa
+señal cada50ms. El contexto permanece registrado hasta que el hijo se haya reapeado.
+El runtime espera esos trabajos antes de finalizar; si el cierre no se confirma,
+el intento queda en reconciliación. La recuperación usa los grants de ese intento,
+proyecto y tarea, y también espera su cierre. La API hace lo mismo al apagarse.
+Una revocación SQL aislada de un grant heredado conserva la validación de commit;
+no equivale a la retirada viva de un intento administrado.
+
+Pruebas ejercitan agotamiento real de CPU/AS, proceso dormido, exceso de salida,
+secreto/FD heredables, retirada por HTTP, muerte del padre y barreras de cierre en
+finalización y recuperación. Los fallos del parser se inyectan después de aplicar
+los límites reales; no se afirma aislamiento sólo por leer su configuración.
+
+Esto cierra el paso de límites/cancelación del parser local. Siguen pendientes PDF
+por URL, los consumidores heredados, rediseño de Archivos de referencia (`/files`),
+previsualización de páginas/citas y comprensión con personas. Documentos (`/wiki`)
+es la wiki del producto y requiere su propia identidad/migración y rediseño; no es
+la pantalla de uploads. La inscripción global de todos los actores del host y las
+cuotas completas por instalación siguen dentro del plan, sin darse por verificadas
+a partir de este worker fijo.
+
+Referencias primarias de la semántica de límites:
+[resource de Python3.12](https://docs.python.org/3.12/library/resource.html),
+[señales y pidfd](https://docs.python.org/3.12/library/signal.html#signal.pidfd_send_signal).
