@@ -26,6 +26,7 @@ def version23(database, conn, monkeypatch):
                     "peer_origin_schema.sql",
                     "command_peer_schema.sql",
                     "admission_schema.sql",
+                    "task_inputs_schema.sql",
                 )
                 else apply_resource(conn, path)
             ),

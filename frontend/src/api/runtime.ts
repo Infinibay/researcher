@@ -18,11 +18,19 @@ export interface RuntimeRun {
   issue: { code: string; message: string; next_action: string; inference_started: boolean | null } | null
 }
 
+export interface TaskInputChange {
+  version: number
+  source_kind: 'task_metadata'
+  actor: null
+  changes: Record<string, { before: string | number | null; after: string | number | null }>
+}
+
 export interface TaskWorkspace {
   context: {
     task: { title: string; description: string | null; type: string; status: string }
     context_version: number
     corrections: { version: number; statement: string; source_kind: string; source_reference: string }[]
+    task_changes: TaskInputChange[]
   }
   runs: RuntimeRun[]
   repositories: { id: number; name: string; default_branch: string | null }[]

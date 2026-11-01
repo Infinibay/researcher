@@ -77,6 +77,7 @@ export function useUpdateTask() {
     onSuccess: (_, vars) => {
       qc.invalidateQueries({ queryKey: ['tasks'] })
       qc.invalidateQueries({ queryKey: ['task', vars.id] })
+      qc.invalidateQueries({ queryKey: ['task-workspace'] })
       qc.invalidateQueries({ queryKey: ['epics'] })
       qc.invalidateQueries({ queryKey: ['milestones'] })
     },

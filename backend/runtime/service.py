@@ -351,6 +351,12 @@ class RuntimeService:
         if slot is not None and slot.attempt_id == attempt_id:
             self._withdraw(slot, slot.outcome)
 
+    def task_inputs_changed(self, project_id, task_id):
+        """Post-commit local notice; durable fencing also covers other writers."""
+        for slot in self._workers.values():
+            if (slot.spec.project_id, slot.spec.task_id) == (project_id, task_id):
+                self._withdraw(slot, "superseded")
+
     async def reconcile(self, **command):
         if self._lock_fd is None or self._closing:
             raise RunConflict("Runtime owner is not accepting recovery controls")
@@ -630,6 +636,14 @@ class RuntimeService:
                     ):
                         # Question state derives from durable Stop/context intent
                         # after actual peer closure, regardless of callback order.
+                        pass
+                    elif (
+                        await asyncio.to_thread(self.store.retire_withdrawn, lease)
+                        is not None
+                    ):
+                        # Direct SQL/legacy edits can invalidate inputs without a
+                        # local callback. Derive outcome after closure, even when
+                        # native completion wins the race with heartbeat polling.
                         pass
                     elif slot.outcome is not None:
                         await asyncio.to_thread(

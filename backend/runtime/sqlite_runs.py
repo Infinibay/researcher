@@ -181,7 +181,9 @@ class SQLiteRunStore:
         with self._transaction() as conn:
             self._existing_task(conn, project_id, task_id)
             task = conn.execute(
-                "SELECT title,description,type,status FROM tasks WHERE project_id=? AND id=?",
+                """SELECT title,description,type,status,acceptance_criteria,context_json,
+                priority,estimated_complexity,branch_name,assigned_to,reviewer,
+                epic_id,milestone_id,parent_task_id FROM tasks WHERE project_id=? AND id=?""",
                 (project_id, task_id),
             ).fetchone()
             revisions = conn.execute(
@@ -192,6 +194,29 @@ class SQLiteRunStore:
                 "task": dict(task),
                 "context_version": self._context(conn, task_id),
                 "corrections": [dict(row) for row in revisions],
+                "task_changes": [
+                    {
+                        "version": change["version"],
+                        "source_kind": "task_metadata",
+                        "actor": None,
+                        "recorded_at": change["recorded_at"],
+                        "changes": {
+                            field: {"before": before[field], "after": value}
+                            for field, value in after.items()
+                            if before[field] != value
+                        },
+                    }
+                    for change in conn.execute(
+                        "SELECT * FROM runtime_task_input_changes WHERE project_id=? AND task_id=? ORDER BY version",
+                        (project_id, task_id),
+                    )
+                    for before, after in [
+                        (
+                            json.loads(change["before_json"]),
+                            json.loads(change["after_json"]),
+                        )
+                    ]
+                ],
                 "user_answers": [
                     {
                         "request_id": q["request_id"],
@@ -470,6 +495,27 @@ class SQLiteRunStore:
                 "run.peer_state_unknown",
                 {"run_id": lease.run_id, "reason": reason, "replay": False},
             )
+
+    def retire_withdrawn(self, lease):
+        """Host-only after physical closure: derive Stop/context from durable state.
+
+        A metadata writer need not share the coordinator's callback or heartbeat.
+        This records retirement, never acceptance, replay or a physical kill.
+        """
+        with self._transaction(write=True) as conn:
+            self._original_attempt(conn, lease)
+            row = self._row(conn, lease.project_id, lease.run_id)
+            if row["current_attempt_id"] != lease.attempt_id:
+                raise StaleAttempt("Another attempt owns this run")
+            if row["cancel_requested"]:
+                outcome = "cancelled"
+            elif self._context(conn, lease.task_id) != lease.context_version:
+                outcome = "superseded"
+            else:
+                return None
+            if row["status"] in ("cancelled", "superseded", "failed", "accepted"):
+                return self._view(row)
+            return self._retire_closed(conn, row, outcome)
 
     def retire_inference(self, lease, *, outcome):
         """Host-only: caller has closed its native AND business peers in one worker.

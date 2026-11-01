@@ -721,3 +721,94 @@ UI still requires 33 desktop concepts and 11 mobile adaptations, eleven remainin
 route implementations/shared panels and rendered/mobile/keyboard/accessibility/human
 acceptance of every route, including Tasks. Finish with a fresh independent whole-
 branch review. No goal complete/paused/blocked status while meaningful work remains.
+
+
+## Task input versioning checkpoint — 2026-11-01
+
+- Continuing the full objective after b8f861e, which committed durable repository
+  admission. Fresh verification of that checkpoint ran all 232 runtime cases with
+  zero failures. The subsequent implementation below adds 23 cases; it does not
+  complete the broader engine/context migration or narrow the original plan.
+- Reproduced a concrete stale-context defect: changing task inputs during native
+  work left context version unchanged and allowed the original result into
+  needs_review. Initial new tests demonstrated 16 failures before the new boundary.
+- Ruling: all UPDATE writers cross one SQLite task-input boundary, including legacy
+  SQL. Thirteen fields (documented explicitly) advance context exactly once per
+  changed row/statement; no-op/operational progress writes do not. Cost: changes to
+  scheduling/assignment fields conservatively invalidate work too. Related objects
+  and external files still require their own contracts; this is not a full frozen
+  context claim. Legacy writers still must migrate to typed product commands.
+- Migration 29 atomically preserves before/after, version and event; revokes grants,
+  fences affected runs, supersedes queued/proposal/waiting work, leaves active work
+  reconciling and expires pending questions. Event failure rolls back all those
+  changes and the task edit. History rejects UPDATE. No historical edits are inferred.
+- Ruling: task metadata proves a database write and its values, not user testimony.
+  Actor remains NULL, source_kind task_metadata, while explicit examples/corrections
+  retain their verified submission source classifications and references. Cost:
+  author attribution awaits typed, authenticated editing receipts. Shared version
+  order interleaves changes and explicit corrections without relabelling either.
+- context_snapshot now sends all thirteen tracked fields plus status, metadata
+  before/after and the original correction history. Owner API notices a committed
+  input change and interrupts its local worker. Direct/legacy writers still revoke
+  authority immediately in SQL; physical interruption is separately detected by
+  existing heartbeat/command supervision. No universal immediate-preemption claim.
+- Fencing alone initially left a late native completion in reconciling. Its RED test
+  drove host-only retire_withdrawn: after actual peer closure it derives Stop/context
+  precedence from durable state before processing a native result or local callback
+  outcome. No closure proof means no retirement. No replay, new turn, task done or
+  acceptance is manufactured. Next explicit request receives current input/history.
+- Owner-edit interruption and frontend concrete before/after/unknown-author display
+  each failed before implementation, then passed. React SSR checks actual inspector
+  integration and escaping; frontend invalidates workspace data after task edits.
+  History text distinguishes invalidation from confirmed physical stop.
+- Old migration fixtures now explicitly exclude the future v29 resource while
+  constructing v23/v26/v27 fixtures. The old queued-type test intentionally changes
+  expectation: a type edit now supersedes the old request before explicit start,
+  rather than leaving it queued with an unsupported-type issue. New guard remains
+  research-only. These were five initial compatibility failures, all addressed.
+- Final full suite: 1183 total, 1080 passed, identical 100 baseline failure identities,
+  3 skipped, 30 warnings; all 255 runtime cases passed. Exact comparison and all
+  failing names are in task-inputs-results.json. Existing socket-denial warnings,
+  deprecated Starlette/httpx integration and unknown integration mark remain visible.
+  The full suite is red; its 100 failures remain required work, not accepted defects.
+- Frontend: 14 passed, zero failed; TypeScript/Vite build passed with existing
+  Browserslist/chunk warnings. Selected runtime/test/loader Ruff passed. The changed
+  legacy task route retains five lint findings, compared against b8f861e with identical
+  codes/messages (F401 x1, S110 x2, BLE001 x2); no global lint-green claim.
+- Rehearsed v28→29 twice on a separate copy of the prior synthetic trial. All 109
+  original data tables preserve values and available rowids, including 16 WITHOUT
+  ROWID tables checked by ordered primary keys; old migration rows preserved, FK
+  errors zero, no historical task changes invented. First analysis incorrectly
+  queried rowid universally; it failed before applying migration, then used the
+  proper table metadata and verified the copy against the read-only source.
+- Wheel bytes match all 37 selected runtime/SQL/loader/owner-route files, including
+  the new packaged resource. Evidence hashes 18 source files and ten complete logs.
+  No user DB or original checkout changed; no new application inference or images.
+  All observed test/build handles are terminal; no server is intentionally left live.
+- Browser/human verification remains unperformed. Design inventory remains 3/36
+  desktop concepts, 1/12 mobile, zero visually accepted routes. The final fresh
+  independent whole-branch review is still pending after the complete implementation.
+
+## Next brief after task input versioning
+
+Continue the FULL plan. Do not redo schema28 admission, schema29 direct task-input
+versioning, native research conversation/question/recovery or the four saved Task
+concepts. Complete related context dependencies (task dependencies, project/epic
+content, source/files/Git/permissions), typed editing commands with concurrency and
+receipts, verified actor provenance and the effective-context snapshot. A number
+alone is not proof that all inputs are frozen. Then wire actual retained command
+consumers through a host-owned facade without a new LLM loop; enforce cross-database
+workspace ownership and task capability policy before production mutable tools.
+Complete owner-lock aliases, verified deployment/restore generation, project lifecycle
+and safe deletion, retained lifetime budgets, all legacy engine/role/writer consumers
+and 71 individual tools in 11 categories. Implement exact-candidate Git/review/CI
+acceptance, subscription-only auxiliary inference, full prompt/book-skill inventory
+and evals, communication/comprehension and accessible structured diagram rendering,
+backup/restore/bootstrap, complete event synchronization/pagination/retention, and
+resolve/replace the 100 baseline failures with correct behavior. UI still requires
+33 desktop concepts plus 11 mobile adaptations, all eleven other route bodies/shared
+panels and rendered/mobile/keyboard/accessibility/human acceptance of every route
+including Tasks. Final fresh independent whole-branch review before integration.
+Model selection is verified global host JSON, restart required, with no web/per-agent/
+project selector. Keep full goal active; no complete/paused/blocked status while
+meaningful work remains. Do not push, merge or deploy without the appropriate scope.

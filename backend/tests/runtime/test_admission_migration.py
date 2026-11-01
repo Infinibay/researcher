@@ -18,7 +18,9 @@ def test_version27_receipt_survives_without_an_inferred_binding(
             migrations,
             "apply_sql_resource",
             lambda conn, path: (
-                None if path.name == "admission_schema.sql" else apply(conn, path)
+                None
+                if path.name in ("admission_schema.sql", "task_inputs_schema.sql")
+                else apply(conn, path)
             ),
         )
         ensure_migrations(_isolated_db)

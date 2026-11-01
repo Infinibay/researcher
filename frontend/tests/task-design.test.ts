@@ -3,7 +3,7 @@ import { after, before, test } from 'node:test'
 import { createServer, type ViteDevServer } from 'vite'
 
 let server: ViteDevServer
-let renderTask: (options?: { failure?: boolean; taskType?: string }) => string
+let renderTask: (options?: { failure?: boolean; taskType?: string; inputChange?: boolean }) => string
 before(async () => {
   server = await createServer({ configFile: false, server: { middlewareMode: true, hmr: false, watch: null }, esbuild: { jsx: 'automatic' }, optimizeDeps: { noDiscovery: true } })
   ;({ renderTask } = await server.ssrLoadModule('/tests/task-design-fixture.tsx'))
@@ -32,4 +32,15 @@ test('a failed task read explains the failure and retains a route back instead o
   assert.match(output, /No se pudo cargar la tarea/)
   assert.match(output, /Volver a consultar/)
   assert.match(output, /Volver a tareas/)
+})
+
+
+test('task input history shows the concrete before/after and unknown authorship', () => {
+  const output = renderTask({ inputChange: true })
+  assert.match(output, /Cambios de la tarea/)
+  assert.match(output, /Autor no registrado/)
+  assert.match(output, /Descripción/)
+  assert.match(output, /Base 100/)
+  assert.match(output, /Base &lt;200&gt;/)
+  assert.doesNotMatch(output, /Base <200>/)
 })

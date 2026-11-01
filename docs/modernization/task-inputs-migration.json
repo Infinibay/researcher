@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-01",
+  "synthetic_source": "admission-migration28/research.db (copy of command-integration-7b135d2a)",
+  "source_version": 28,
+  "target_version": 29,
+  "repeatable": true,
+  "original_data_tables_preserved": 109,
+  "without_rowid_tables": 16,
+  "original_values_and_available_rowids_preserved": true,
+  "original_migration_records_preserved": true,
+  "foreign_key_errors": 0,
+  "historical_task_changes_inferred": 0,
+  "source_file_unchanged": true,
+  "user_database_touched": false
+}

@@ -328,6 +328,12 @@ def ensure_migrations(db_path: str | None = None) -> None:
             resource = Path(__file__).resolve().parents[2] / "db/admission_schema.sql"
             apply_sql_resource(conn, resource)
             logger.info("Migration 28: durable repository/workspace admission")
+        if 29 not in applied:
+            from backend.db.migrations import apply_sql_resource
+
+            resource = Path(__file__).resolve().parents[2] / "db/task_inputs_schema.sql"
+            apply_sql_resource(conn, resource)
+            logger.info("Migration 29: task input versioning and authority withdrawal")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()

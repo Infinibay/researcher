@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-01",
+  "base_commit": "b8f861e",
+  "schema_version": 29,
+  "application_generation_turns_this_checkpoint": 0,
+  "image_generation_calls": 0,
+  "test_scope": "Real SQLite/filesystem/owner ASGI/coordinator with doubled inference; React SSR presentation plus frontend transport tests. No browser/human acceptance.",
+  "behaviors": [
+    "Thirteen task input fields advance context once per changed row/statement, with exact before/after and unknown actor.",
+    "Atomic fencing, grant revocation, obsolete queued/proposal invalidation, live reconciliation, pending-question expiry and event.",
+    "No-op/progress-only writes retain authority.",
+    "Native completion before heartbeat cannot publish obsolete proposal; retirement still requires physical peer closure.",
+    "Owner API post-commit notice interrupts local worker; legacy/direct SQL covered by DB authority and existing polling.",
+    "Explicit examples/corrections retain their own provenance and interleave versions.",
+    "Next explicit request receives current versioned fields and metadata changes; no implicit restart."
+  ],
+  "verification": {
+    "runtime_passed": 255,
+    "frontend_passed": 14,
+    "typescript_vite": "passed",
+    "new_failures": 0,
+    "full_suite_green": false,
+    "warnings": 30,
+    "selected_runtime_test_loader_lint": "passed",
+    "task_route_lint": "Five pre-existing findings unchanged from b8f861e: F401 x1, S110 x2, BLE001 x2. No global lint-green claim.",
+    "browser": "not exercised",
+    "migration": "109 original tables including 16 WITHOUT ROWID; values and available rowids preserved, no historical task edits inferred.",
+    "limitations": [
+      "Not every context dependency is covered: related project/epic content, dependencies, files/Git, sources and permissions still need version/policy contracts.",
+      "Task API still needs typed editing commands with concurrency preconditions and receipts; legacy writers remain to migrate.",
+      "Unknown metadata writer is not attributed to the user.",
+      "No full effective-context snapshot, history pagination/retention or cross-deployment restore proof.",
+      "Remaining tools/flows/design/100 baseline failures/final review are not completed."
+    ]
+  },
+  "source_sha256": {
+    "backend/db/task_inputs_schema.sql": "adf82fb9ff2623ac58b0398a267c045eead5249266c56ff66071b4d2924a665a",
+    "backend/tools/base/db.py": "8a0aa81c306841321eef3c7f85e2a1e56f24dbd5db50d3e63dc4f1a9e2faa65a",
+    "backend/runtime/sqlite_runs.py": "281c1c0bf26ee8ea2a90724995b4142a9642b9d5e81f2af9dadcb7e0e2295a92",
+    "backend/runtime/service.py": "cb13f9330bda7be118ee106898b2852822ce5fc3375f4b59baba3f60ed5d5af3",
+    "backend/api/routes/tasks.py": "ed002f8d5243bf95a8e1cd7c1539dfde605d6eae92ebafc596e65eb4bba1431f",
+    "backend/tests/runtime/test_task_input_versioning.py": "e62473bbe261f37de7378beafd8e2cad7d0ab979b2897f0feb3046490259c6e1",
+    "backend/tests/runtime/test_task_inputs_migration.py": "5ab788354dddaf95737f065fe1da3024348c787543be5e88b4976563c1bbe2e2",
+    "backend/tests/runtime/test_admission_binding.py": "bd4e6ffa87ced1a0ed17b26de0e97e93daa1f3217624d230737ba3b5147e5f65",
+    "backend/tests/runtime/test_admission_migration.py": "bf38b669c57cce6fc89cd64d63f5625a926abede51a31026a9e3d9a1acec4e15",
+    "backend/tests/runtime/test_command_peer_migration.py": "1c69ce9d3da779414e4ebf6b0ef635b9cf42bc47720463a336a2a765c65336ac",
+    "backend/tests/runtime/test_question_migration.py": "ea1b6febdc7393fe5073bd7140c4bf67cbb33cbac888e24a58bbab7bfb92d018",
+    "frontend/src/api/runtime.ts": "b3dffd64ef85996618ee7ebad15aa17b93c9316576c53b4bdd592c4267a3146b",
+    "frontend/src/components/tasks/TaskInputHistory.tsx": "06d9a8404aa2fbb9dfe21a35b8ef4006d3fd5d4492375a4fe6d5e48db8e80fae",
+    "frontend/src/components/tasks/TaskRunWorkspace.tsx": "2b9e42d661b7413abe5a254306cb5031830f281a46ea830468c082c8c332921e",
+    "frontend/src/hooks/useTasks.ts": "3e0f451b08252234eface382bad4f6a61f881984412aa4a770328b9e42e79b6c",
+    "frontend/tests/task-design-fixture.tsx": "60070bc22e3d69440fa8b32686ebd8e81b2604fb2b4fc7fcde17744fe37a8f59",
+    "frontend/tests/task-design.test.ts": "b2e05704020acbb7b322656e714654669769f4912d53562a6a28edbbcbf2f665",
+    "docs/architecture/task-input-versioning.md": "f028a7bc5da686d13b021d8b47ecbb5034607511f308bb9fb3317edafd00e62e"
+  },
+  "log_sha256": {
+    "task-inputs-red.log": "c90d3a252786c8cec404f612b6c868ede43942825134744b957e9787d6735b44",
+    "task-inputs-fencing.log": "c730c54fa9982f4dffdd301b5b6c2f0e49298f9121a8dca636fd3cd54d1965f6",
+    "task-inputs-owner-red.log": "6dbdf261ab87089d9c7c48cc4bfb2877f863325ec14c14bb198112e70c6a3510",
+    "task-inputs-green-initial.log": "0340ecc06f7dcabd6f9766dc0cd5ab68b427b66a83905e973ef37fd50059f81e",
+    "task-inputs-focused-final.log": "e0943f4c4d4b1fc40ad98679d85a6ff1d3e6a3302daf54205e492d9596306080",
+    "task-inputs-frontend-red.log": "890525ac6e97df85a1e4e1fa9882355f56d8e797c47d8c52b8a8cf127d481f10",
+    "task-inputs-suite.log": "b74b47f2468e073b9d6143647e379e6b41cff276a4fdbe26e2a8a4bd621bed36",
+    "task-inputs-frontend-final.log": "2cfb34e4ee6e5534a05609c87fd2299dc81093944e43058b7dc4c65cb442b27b",
+    "task-inputs-build-final.log": "7ab8f6b0d34362a66acd2a38551158228088d30ca0d984eb2ad94acd353cb258",
+    "task-inputs-wheel.log": "d9670705fbc0e69b8af5708b12169f0b6529c58f9d0895e57ac15d12e92309e0"
+  }
+}

@@ -4,6 +4,7 @@ import { prepareAnswer, prepareInstruction, prepareRecovery, prepareStartRetry, 
 import type { AnswerIntent, InstructionIntent, RecoveryIntent, RuntimeQuestion, RuntimeRun, StartRetryIntent } from '../../api/runtime'
 import { useAnswer, useCorrection, useInstruction, useRecovery, useStartRetry, useStopRun, useTaskWorkspace } from '../../hooks/useRuntime'
 import { MarkdownRenderer } from '../common/MarkdownRenderer'
+import { TaskInputHistory } from './TaskInputHistory'
 
 const inputClass = 'w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] focus:outline-none focus:ring-2 focus:ring-[var(--work-accent)]'
 const buttonClass = 'rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50'
@@ -211,6 +212,7 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
     </div>
     <aside className="task-execution-context" aria-label="Fuentes y contexto">
     <h4>Fuentes y contexto</h4>
+    <TaskInputHistory changes={data.context.task_changes ?? []} />
     <details open={data.context.corrections.length > 0} className="space-y-2 rounded-md border border-[var(--work-line)] p-3">
       <summary className="cursor-pointer font-medium text-[var(--work-ink)]">Corregir el contexto</summary>
       <p className="mt-2 text-[var(--work-muted)]">Una corrección retira el trabajo basado en el contexto anterior. Queda registrada para la próxima ejecución; no inicia otra por su cuenta.</p>

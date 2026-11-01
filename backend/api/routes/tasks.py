@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import sqlite3
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query, Request
 
 from backend.api.exceptions import TaskNotFound
 from backend.api.models.task import (
@@ -167,7 +167,7 @@ async def get_task(task_id: int):
 
 
 @router.put("/{task_id}", response_model=TaskResponse)
-async def update_task(task_id: int, body: TaskUpdate):
+async def update_task(task_id: int, body: TaskUpdate, request: Request):
     """Update a task. Emits status_changed events when status changes."""
 
     # ── Pre-DB validation (Comments 1 & 3) ────────────────────────────
@@ -203,10 +203,18 @@ async def update_task(task_id: int, body: TaskUpdate):
             )
 
     # ── Apply update ──────────────────────────────────────────────────
-    def _update(conn: sqlite3.Connection) -> dict | None:
+    def _update(conn: sqlite3.Connection) -> tuple[dict, bool] | None:
         row = conn.execute("SELECT * FROM tasks WHERE id = ?", (task_id,)).fetchone()
         if not row:
             return None
+
+        def context_version():
+            context = conn.execute(
+                "SELECT version FROM task_contexts WHERE task_id=?", (task_id,)
+            ).fetchone()
+            return context[0] if context is not None else 1
+
+        previous_version = context_version()
 
         updates = []
         params = []
@@ -260,11 +268,15 @@ async def update_task(task_id: int, body: TaskUpdate):
                 pass
 
         row = conn.execute("SELECT * FROM tasks WHERE id = ?", (task_id,)).fetchone()
-        return dict(row)
+        return dict(row), context_version() != previous_version
 
     task = execute_with_retry(_update)
     if not task:
         raise TaskNotFound(task_id)
+    task, inputs_changed = task
+    runtime = request.app.state.runtime_service
+    if inputs_changed and runtime is not None:
+        runtime.task_inputs_changed(task["project_id"], task_id)
     return _row_to_response(task)
 
 

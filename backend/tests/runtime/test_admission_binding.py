@@ -306,7 +306,7 @@ def test_an_issue_without_its_event_does_not_commit(coordination):
     assert c.store.get(101, run.run_id).issue is None
 
 
-async def test_queued_retry_does_not_bypass_the_supported_task_type(
+async def test_a_changed_task_type_supersedes_queued_work_before_retry(
     service_setup, monkeypatch
 ):
     s = service_setup
@@ -316,16 +316,18 @@ async def test_queued_retry_does_not_bypass_the_supported_task_type(
     native = ControlledInference(s)
     native.release.set()
     async with coordinator(s, native) as service:
-        await service.retry_start(
-            project_id=101,
-            run_id=run.run_id,
-            expected_fence=0,
-            context_version=1,
-            operation_key="changed-type",
-        )
-        await service.wait(run.run_id)
+        from backend.runtime.contracts import RunConflict
+
+        with pytest.raises(RunConflict):
+            await service.retry_start(
+                project_id=101,
+                run_id=run.run_id,
+                expected_fence=0,
+                context_version=1,
+                operation_key="changed-type",
+            )
         result = s.c.store.get(101, run.run_id)
-        assert result.status == "queued" and result.issue["code"] == "task_changed"
+        assert result.status == "superseded"
         assert not native.prompts
 
 

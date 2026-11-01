@@ -81,7 +81,8 @@ la presentación, teclado y comprensión siguen pendientes de navegador/personas
 Quedan exclusión de workspaces entre bases, alias del lock de propietario,
 transferencia/restauración verificadas y protección durante el uso del filesystem.
 También quedan escritores heredados de tareas/contexto y la migración de herramientas.
-Los escritores heredados que modifican metadata de tarea sin versionar aún deben
-migrar: guardar context_version no congela por sí solo todos esos campos.
+La [migración 29](task-input-versioning.md) agrega una frontera transaccional para
+los trece campos de entrada de tarea, incluso ante UPDATE heredados. No cubre
+todas sus dependencias ni congela por sí sola todo el contexto del proyecto.
 El vínculo persistido no es una prueba de quiescencia de otro despliegue ni una
 versión de Git; esos contratos conservan sus obligaciones en el plan completo.
