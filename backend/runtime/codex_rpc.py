@@ -87,6 +87,46 @@ class JsonRpcClient:
         self._failed = asyncio.Event()
         self._write_lock = asyncio.Lock()
         self._started = False
+        self._private_handlers = {}
+        self._private_tasks = set()
+
+    def register_private_request(self, method, handler, *, allowed=None):
+        """Host-only connection control, installed before any peer can speak.
+
+        These requests never enter the model/user event queue or its barrier.
+        Handlers run independently of pending client requests, at most four.
+        """
+        if self._started:
+            raise RuntimeError("Private handlers must be registered before startup")
+        if (
+            not isinstance(method, str)
+            or not 1 <= len(method) <= 128
+            or not callable(handler)
+            or allowed is not None
+            and not callable(allowed)
+            or method in self._private_handlers
+            or len(self._private_handlers) >= 4
+        ):
+            raise ValueError("Invalid or duplicate private control registration")
+        self._private_handlers[method] = (handler, allowed)
+
+    async def _serve_private(self, message, registration):
+        if self._failure is not None:
+            return
+        try:
+            handler, allowed = registration
+            if allowed is not None and not allowed():
+                raise RpcDisconnected("Private control authority withdrawn")
+            async with asyncio.timeout(self.request_timeout):
+                result = await handler(message.get("params", {}))
+                await self.respond(message["id"], result, _guard=allowed)
+        except asyncio.CancelledError:
+            raise
+        except Exception:  # noqa: BLE001 — sanitize secret-bearing host callback failures
+            # A credential provider's exception may contain secrets. Never retain
+            # it as a public error cause or log it, and never keep using old auth.
+            self._fail(RpcDisconnected("Private connection control failed"))
+            self._begin_close()
 
     async def __aenter__(self) -> Self:
         if self._started:
@@ -110,12 +150,26 @@ class JsonRpcClient:
         await self.aclose()
 
     async def request(
-        self, method: str, params: dict | None = None, *, timeout: float | None = None
+        self,
+        method: str,
+        params: dict | None = None,
+        *,
+        timeout: float | None = None,
+        _guard=None,
     ) -> Any:
-        return (await self.request_ordered(method, params, timeout=timeout)).result
+        if _guard is None:
+            return (await self.request_ordered(method, params, timeout=timeout)).result
+        return (
+            await self.request_ordered(method, params, timeout=timeout, _guard=_guard)
+        ).result
 
     async def request_ordered(
-        self, method: str, params: dict | None = None, *, timeout: float | None = None
+        self,
+        method: str,
+        params: dict | None = None,
+        *,
+        timeout: float | None = None,
+        _guard=None,
     ) -> RpcReply:
         """Return a barrier for wire messages preceding this response.
 
@@ -133,9 +187,11 @@ class JsonRpcClient:
             async with asyncio.timeout(
                 self.request_timeout if timeout is None else timeout
             ):
-                await self._send(
-                    {"id": request_id, "method": method, "params": params or {}}
-                )
+                message = {"id": request_id, "method": method, "params": params or {}}
+                if _guard is None:
+                    await self._send(message)
+                else:
+                    await self._send(message, _guard=_guard)
                 return await future
         finally:
             self._pending.pop(request_id, None)
@@ -150,8 +206,11 @@ class JsonRpcClient:
             message["params"] = params
         await self._send(message)
 
-    async def respond(self, request_id: int | str, result: Any) -> None:
-        await self._send({"id": request_id, "result": result})
+    async def respond(self, request_id: int | str, result: Any, *, _guard=None) -> None:
+        if _guard is None:
+            await self._send({"id": request_id, "result": result})
+        else:
+            await self._send({"id": request_id, "result": result}, _guard=_guard)
 
     async def next_message(self, *, timeout: float | None = None) -> dict[str, Any]:
         """Read a notification/server request, or expose connection loss promptly."""
@@ -177,7 +236,7 @@ class JsonRpcClient:
         if self._process is None:
             raise RpcDisconnected("Connection has not started")
 
-    async def _send(self, message: dict[str, Any]) -> None:
+    async def _send(self, message: dict[str, Any], *, _guard=None) -> None:
         self._check_connection()
         frame = (
             json.dumps(message, allow_nan=False, separators=(",", ":")).encode() + b"\n"
@@ -186,6 +245,10 @@ class JsonRpcClient:
             raise RpcProtocolError("Outgoing message exceeds the configured limit")
         async with asyncio.timeout(self.request_timeout), self._write_lock:
             self._check_connection()
+            if _guard is not None and not _guard():
+                raise RpcDisconnected(
+                    "Private control authority withdrawn before write"
+                )
             assert self._process is not None and self._process.stdin is not None
             try:
                 self._process.stdin.write(frame)
@@ -231,6 +294,29 @@ class JsonRpcClient:
                 if "method" in message:
                     if not isinstance(message["method"], str):
                         raise RpcProtocolError("Expected a method name")
+                    private = self._private_handlers.get(message["method"])
+                    if private is not None:
+                        request_id = message.get("id")
+                        if (
+                            not isinstance(request_id, (str, int))
+                            or isinstance(request_id, bool)
+                            or not isinstance(message.get("params", {}), dict)
+                        ):
+                            raise RpcProtocolError("Invalid private control request")
+                        if self._failure is not None:
+                            continue
+                        if len(self._private_tasks) >= min(
+                            4, self.max_pending_requests
+                        ):
+                            raise RpcBackpressure(
+                                "Private control request capacity reached"
+                            )
+                        task = asyncio.create_task(
+                            self._serve_private(message, private)
+                        )
+                        self._private_tasks.add(task)
+                        task.add_done_callback(self._private_tasks.discard)
+                        continue
                     try:
                         self._messages.put_nowait(message)
                         self._message_count += 1
@@ -277,19 +363,30 @@ class JsonRpcClient:
         """Complete one owned shutdown even if an awaiting task is cancelled."""
         if not self._started:
             return
+        await asyncio.shield(self._begin_close())
+
+    def _begin_close(self):
         if self._closing is None:
             self._closing = asyncio.create_task(self._shutdown())
-        await asyncio.shield(self._closing)
+            self._closing.add_done_callback(
+                lambda done: None if done.cancelled() else done.exception()
+            )
+        return self._closing
 
     async def _shutdown(self):
         self._fail(RpcDisconnected("Connection closed"))
         try:
             await self._endpoint.aclose(timeout=self.close_timeout)
         finally:
-            tasks = [task for task in (self._reader, self._stderr) if task is not None]
+            tasks = [
+                task
+                for task in (self._reader, self._stderr, *self._private_tasks)
+                if task is not None
+            ]
             for task in tasks:
                 task.cancel()
             await asyncio.gather(*tasks, return_exceptions=True)
+            self._private_handlers.clear()
 
 
 class _SubprocessEndpoint:

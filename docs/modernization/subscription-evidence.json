@@ -1,0 +1,58 @@
+{
+  "base_commit": "53f1384",
+  "date": "2026-11-01",
+  "scope": "Host-owned subscription snapshot and account-bound external RPC authentication, private connection refresh dispatch and withdrawal at actual write. Optional session integration; real SDK offline negative only, no production factory or real OAuth lifecycle adoption.",
+  "source_sha256": {
+    "backend/runtime/subscription_auth.py": "a8405d2833bf5712532ff00163b2b86a21b38aa06051e0fae4e9ae3529d5668b",
+    "backend/runtime/codex_rpc.py": "8ec057ae7e55e056c475d5f59651064c112bbfec5aed65ffa6ede1583c4e2767",
+    "backend/runtime/codex_session.py": "13cc7db77039502b3180d73e92fff83bf0ed3b35ec2344e37822a0d0e9e4b3ea",
+    "backend/tests/runtime/conftest.py": "f4fe33e8de2c171759f9dafb66cb7542d4fdc93c3c61103b7c9a430b5b7728a1",
+    "backend/tests/runtime/test_broker_native.py": "87a85671a61c698686eb43ae6354c34bc7370b38baca6e0b60a1ee6ba8a37bcc",
+    "backend/tests/runtime/test_subscription_auth.py": "ac52972d7ea0a3f91caf0181d78a0017cba3a51b8887048e142fc2cbc15732d8",
+    "backend/tests/runtime/fake_private_server.py": "6a230fa101143bb3536ffff7cfa597fc1c8364cba0fe7672bf4b7e62f32946be",
+    "backend/tests/runtime/test_private_rpc.py": "5b89a40844b88085b4fc672e29c418c770b3c47f227c79000720d90c658cab3b",
+    "backend/tests/runtime/fake_subscription_server.py": "6329cb4da7f9ac1e6e7570f48f5f3c94eac7f9c0ef10cb58d5ce03c9cdc959eb",
+    "backend/tests/runtime/test_subscription_session.py": "78718319a5603fc350cb63b393550aacbe014a115c9af8162b78bc214eea428c",
+    "backend/tests/runtime/test_native_subscription_rpc.py": "171bb35ff3ca94a055e5f40a8ac9c7f660b27a801541a04f6e8f970da3d2c365"
+  },
+  "raw_artifacts_sha256": {
+    "subscription-source-red.log": "29e4dc29f61830c3c17d6945d5a3ed5c7f095d1f4b935c6dffb000efe6b2e58a",
+    "subscription-private-red.log": "3b0837d800c0f80b8caddc44c3bb17148663744bbd0a0717f11dea949690ba6d",
+    "subscription-session-red.log": "e2de45e18d6ad322f3b5a74201dbb8b9931581e47da50f16bae2494ea4a67e56",
+    "subscription-native-first.log": "9f0b2c835c659b44f4a521939129931327bc3d6699965466c6d16117b274b3b7",
+    "subscription-private-notice-red.log": "58223502a75598953eac22b971c9611987a642a7d00c8ef6e0a4a9b47d3fe8ca",
+    "subscription-private-write-red.log": "0b6ff7d49991a55cffdf62ea96bc06e24e260ea09007925f8c2df1da7a7a9fd7",
+    "subscription-cancel-red.log": "890577fd529d47e010fc2692a660aeee50d3979130ed95faf2d425d1903c1e0e",
+    "subscription-guard-full.log": "98bb8c09d6f776edbb7a926262901503bf2b8baf319849cd90ce78ca67e02d4c",
+    "subscription-final-compatible-focused.log": "b88e66c17e9dede383c0157fbda3822834081133054c0b6f5368c4e96f3b695e",
+    "subscription-compatible-full.xml": "30caa4c57c2618895e7a442b0fcce5e92a6df8c0e6f74ee384017ab7d80728c8",
+    "subscription-compatible-full.log": "696635c484c7ac2b23a824153c006fd4b4bca8bcc404e9eb7ce74b70008c18c0",
+    "subscription-compatible-build.log": "6af8858238581402f2934b45c0da3f5316f2d20fb4ce7d4cb960785ee7238d40",
+    "subscription-compatible-package.log": "093278765b7f7ebdae40ea76db4fa1e332323507f9bab661d11d1860e0c6a95e",
+    "verify-subscription-compatible-package.py": "7241818cac0a99d56b1eb95fdf863759f96ded86b4e4d576feabf4f04545d8b4"
+  },
+  "verified": [
+    "Existing private bounded credential file read without creation or final symlink; redacted snapshot forwards only access token/account/optional plan. API key and refresh token are never forwarded.",
+    "Account is fixed per connection. Refresh must change the token, preserve account and active authority, and obey time/count limits. Rereading a stale token is rejected.",
+    "Bounded explicitly registered private callbacks run independently of pending RPC responses and never enter model/human event queues or progress barriers.",
+    "Tests cover pending thread/start and turn/start refresh, malformed private notification, flood, secret exception redaction, withdrawal during read and queued write, Stop cancellation before turn receipt, and single host turn dispatch.",
+    "Actual Codex0.166.0 in network-private broker capsule acknowledges synthetic external login without persisting auth.json, then account/read fails workspace routing discovery failed. Negative offline routing evidence only; not remote entitlement or real account acceptance.",
+    "Full suite1403:1300 pass,100 exact original baseline failures,3 skip,29 warnings;470 runtime pass. Focused84 pass.",
+    "Current wheel30 runtime Python files equal source. Isolated -I -S packaged smoke starts real account-free native Codex and analysis siblings plus a separate deterministic authentication peer; verifies synthetic host refresh and no replay."
+  ],
+  "diagnosed": [
+    "Default forwarding of _guard=None broke an existing request_ordered subclass; compatibility fix preserves the original call shape when no guard is requested. The existing command-output receipt ordering test passes again.",
+    "Write guard must be checked after obtaining the writer lock, immediately before write; removing Session.cancel auth withdrawal reproduces late credential delivery.",
+    "Initial real native test incorrectly expected remote account/read to work offline; actual SDK requires routing discovery. The negative case remains explicit instead of weakening it into an entitlement assertion."
+  ],
+  "limits": [
+    "ManagedTokenFile is a read-only snapshot adapter and optional host renewal hook; actual OAuth renewal/shared per-account lifecycle provider is still absent.",
+    "Optional CodexSession integration does not migrate CodexRuntime/RuntimeService factories. Persistent private native state, TLS/DNS/destination policy, published Ken and business/code-mode broker composition remain pending.",
+    "No real credentials sent, model/image generation, user DB migration, host service/account installation, parent cgroup changes, push/merge/deploy in this checkpoint.",
+    "Experimental public documentation and pinned schema internal/unstable description differ; version-pinned tests do not prove future compatibility.",
+    "Full71-tool/engine/prompts/communication/12-route frontend and final fresh independent whole-branch review remain in scope."
+  ],
+  "primary_references": [
+    "https://learn.chatgpt.com/docs/app-server"
+  ]
+}

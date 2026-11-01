@@ -3,21 +3,8 @@
 import json
 import shutil
 import subprocess
-from pathlib import Path
 
 import pytest
-
-
-@pytest.fixture
-def native_asset():
-    from backend.runtime.broker_profile import CodexAsset
-
-    binary = Path(
-        "/home/andres/.codex/packages/standalone/releases/0.166.0-x86_64-unknown-linux-musl/bin/codex"
-    )
-    if not binary.is_file():
-        pytest.skip("Requires the pinned Codex0.166.0 binary; no model call")
-    return CodexAsset.inspect(binary)
 
 
 def native_peer(registry, command_peer):

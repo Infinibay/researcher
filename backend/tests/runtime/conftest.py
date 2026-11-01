@@ -8,6 +8,20 @@ from backend.tools.base.db import ensure_migrations
 
 
 @pytest.fixture
+def native_asset():
+    from pathlib import Path
+
+    from backend.runtime.broker_profile import CodexAsset
+
+    binary = Path(
+        "/home/andres/.codex/packages/standalone/releases/0.166.0-x86_64-unknown-linux-musl/bin/codex"
+    )
+    if not binary.is_file():
+        pytest.skip("Requires the pinned Codex0.166.0 binary; no model call")
+    return CodexAsset.inspect(binary)
+
+
+@pytest.fixture
 def coordination(_isolated_db, db_conn):
     from backend.research.sqlite_store import SQLiteResearchStore
     from backend.runtime import contracts

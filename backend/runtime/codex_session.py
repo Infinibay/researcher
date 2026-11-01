@@ -16,7 +16,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Self
 
-from backend.runtime.codex_rpc import RpcDisconnected, RpcError, StdioRpcClient
+from backend.runtime.codex_rpc import JsonRpcClient, RpcDisconnected, RpcError
 
 
 class SubscriptionRequired(RuntimeError):
@@ -106,7 +106,7 @@ class CodexSession:
 
     def __init__(
         self,
-        rpc: StdioRpcClient,
+        rpc: JsonRpcClient,
         *,
         workspace: Path,
         model: str,
@@ -115,7 +115,8 @@ class CodexSession:
         developer_instructions: str | None = None,
         sandbox: str = "workspace-write",
         permission_profile: str | None = None,
-        before_thread: Callable[[StdioRpcClient], Awaitable[None]] | None = None,
+        before_thread: Callable[[JsonRpcClient], Awaitable[None]] | None = None,
+        subscription_auth=None,
     ) -> None:
         self.rpc = rpc
         self.workspace = workspace.resolve()
@@ -128,6 +129,7 @@ class CodexSession:
         self.sandbox = sandbox
         self.permission_profile = permission_profile
         self.before_thread = before_thread
+        self.subscription_auth = subscription_auth
         self.dynamic_tools = None
         self.thread_configuration = None
         self.thread_id: str | None = None
@@ -145,8 +147,10 @@ class CodexSession:
             raise ValueError(
                 "Native resume restores its catalog; dynamic tools cannot replace it"
             )
-        await self.rpc.__aenter__()
         try:
+            if self.subscription_auth is not None:
+                self.subscription_auth.bind(self.rpc)
+            await self.rpc.__aenter__()
             initialization = {
                 "clientInfo": {
                     "name": "researcher",
@@ -154,10 +158,16 @@ class CodexSession:
                     "title": "Researcher",
                 }
             }
-            if self.permission_profile is not None or self.dynamic_tools is not None:
+            if (
+                self.permission_profile is not None
+                or self.dynamic_tools is not None
+                or self.subscription_auth is not None
+            ):
                 initialization["capabilities"] = {"experimentalApi": True}
             await self.rpc.request("initialize", initialization)
             await self.rpc.notify("initialized")
+            if self.subscription_auth is not None:
+                await self.subscription_auth.login()
             account = await self.rpc.request("account/read", {"refreshToken": False})
             if (account.get("account") or {}).get("type") != "chatgpt":
                 raise SubscriptionRequired(
@@ -197,11 +207,19 @@ class CodexSession:
                 )
             return self
         except BaseException:
-            await self.rpc.aclose()
+            try:
+                await self.rpc.aclose()
+            finally:
+                if self.subscription_auth is not None:
+                    self.subscription_auth.close()
             raise
 
     async def __aexit__(self, exc_type, exc, traceback) -> None:
-        await self.rpc.aclose()
+        try:
+            await self.rpc.aclose()
+        finally:
+            if self.subscription_auth is not None:
+                self.subscription_auth.close()
 
     async def run(
         self,
@@ -381,6 +399,8 @@ class CodexSession:
         if not self._active:
             return
         self._cancel_requested.set()
+        if self.subscription_auth is not None:
+            self.subscription_auth.withdraw()
         if self._cancellation is None:
             self._cancellation = asyncio.create_task(self._cancel_active())
         await asyncio.shield(self._cancellation)

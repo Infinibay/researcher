@@ -256,6 +256,7 @@ ni se cambió el proveedor de suscripción.
 [Transporte asíncrono y regresiones](../modernization/broker-stdio-evidence.json).
 [Proyección del cierre](../modernization/broker-projection-evidence.json).
 [Transporte nativo y límites](../modernization/broker-native-evidence.json).
+[Autenticación externa opcional y sus límites](subscription-auth.md).
 
 ## Trabajo pendiente de la autoridad completa
 

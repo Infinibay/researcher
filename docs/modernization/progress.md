@@ -2231,3 +2231,70 @@ data/backup/restore/bootstrap/CLI/TUI/install, alias/transfer/handoff/budgets,
 dependency upgrades/18 npm advisories and100 baseline failures in scope. UI remains
 6/36 desktop+2/12 mobile concepts,2 pilots,0/12 accepted;30+10 concepts/10 routes and
 all12 acceptance remain. Final fresh independent whole-branch review required.
+
+## Current task: host subscription RPC authentication — base53f1384
+
+- Previous turn was progress:53f1384 real native transport committed and verified.
+  Tracked-clean branch and full next brief revalidated; whole objective unchanged.
+- Official docs describe experimental externally managed ChatGPT RPC tokens and
+  host refresh. Pinned generated schema includes the fields but retains an
+  internal/unstable description; record compatibility discrepancy, verify actual
+  pinned behavior with synthetic credentials/offline network before real use.
+- Implement redacted access-token/account snapshot, secure bounded read-only managed
+  auth-file adapter, connection-scoped external authentication and refresh handling,
+  and CodexSession integration before account/thread admission. No refresh token or
+  API key is forwarded; no credential HOME is mounted into native.
+- Refresh requests have no guaranteed threadId and can precede a pending RPC receipt.
+  Add explicitly registered bounded private connection request handlers so they
+  cannot deadlock turn/login/thread admission or enter model/human event callbacks.
+  Stop physically closes before draining/cancelling private work; failures redact
+  sensitive details and never switch account/provider or replay a host turn.
+- Test missing/unsafe/malformed files, account change, unchanged refreshed token,
+  startup/turn refresh without receipt, private backpressure/cancellation/redaction,
+  and actual native RPC with synthetic tokens in a private network namespace.
+- Managed file adapter reads tokens; successful real OAuth rotation needs a host
+  lifecycle provider. Do not pretend rereading the same stale token renews it.
+  Full product auth lifecycle, persistent native state, TLS/DNS/egress, mandatory
+  published Ken/business/code-mode and managed host enrollment remain in scope.
+
+## Host subscription RPC authentication checkpoint — base53f1384
+
+- Prior continuation: progress (implementation plus source/native/compatibility tests);
+  intervening user status request was read-only evidence, not implementation progress.
+- RED→GREEN sources/private RPC/session/write guard/cancel confirmed in saved logs.
+  Full-suite extra regression in ReplyObservedClient.request_ordered was diagnosed:
+  _guard=None must not be forwarded to legacy subclasses. Production default-call
+  compatibility fixed; command output receipt ordering test now passes unchanged.
+- Full suite1403:1300 pass,100 exact baseline failures,3 skip,29 warnings;470 runtime.
+  Focused84 pass. Current build succeeded; wheel30 runtime byte matches and isolated
+  actual account-free Codex+analysis sibling / deterministic-auth smoke passed.
+  Raw logs/hashes and limitations recorded in subscription-evidence/results/package.
+- Ruling: managed read-only snapshot is not OAuth renewal or entitlement — actual
+  host lifecycle provider remains required — cost: expired tokens currently fail
+  rather than silently using a different account/provider or pretending renewal.
+- Ruling: private connection control is bounded and excluded from model/user queues;
+  authority is checked at actual write, including after the writer lock — queued
+  credentials must not leave after withdrawal — cost: failure retires the connection.
+- Ruling: preserve unguarded RPC subclass call signatures — only guarded calls pass
+  the internal argument — cost: guarded adapters must explicitly support that port.
+- Ruling: retain actual SDK offline routing failure as a negative test, not a remote
+  entitlement success — local login ACK and remote account acceptance differ — cost:
+  real isolated subscription/inference integration is still unproven.
+- No new actual model/image generation or real token use; no user DB migration, host
+  service/account install, shared-parent cgroup changes, push/merge/deploy. No full
+  phase/scenario closed. Whole modernization objective remains active.
+
+## Next brief after host subscription RPC checkpoint
+
+Continue FULL plan. Do not repeat completed broker/journal/domain/projection/auth
+components or8 concept assets. Next integrate a host-owned credential lifecycle
+with per-account renewal coordination, isolated persistent native state and actual
+TLS/DNS/destination policy. Compose mandatory published Ken/business/code-mode and
+move product factories to broker-owned peers only once enrollment/all-actor origin
+contracts are real. Test bounded actual subscription+Ken through that integrated
+path; no API key fallback. Snapshot reread is not renewal. All71 tools/11 categories,
+engine/autonomy/roles/flows/agent communication, exact Git candidate/review/CI, prompts
+/book-skills/evals/human comprehension, data/restore/bootstrap/CLI/TUI/install,
+alias/transfer/budgets, dependencies/18 npm advisories and100 baseline failures stay
+in scope. UI6/36 desktop+2/12 mobile,2 pilots,0/12 accepted:30+10 concepts/10 routes
+and all12 acceptance remain. Final fresh independent whole-branch review required.
