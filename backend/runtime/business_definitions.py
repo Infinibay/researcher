@@ -134,7 +134,7 @@ class ResearchTools:
     async def researcher_capture_reference(
         self, operation_key: str, reference_file_id: int
     ) -> dict:
-        """Capture a project attachment once: UTF-8 text or text-bearing PDF. Reuse operation_key on retry. PDF text preserves page offsets and original byte hash in source provenance; no OCR is performed. Empty-text, encrypted, malformed or over-limit PDFs fail explicitly. Read the captured source before citing; extraction does not verify visual reading order or images."""
+        """Capture a project attachment once: UTF-8 text, text-bearing PDF, DOCX main body, CSV, JSON or XML. Structured sources normalize values and preserve original byte hash; quote the saved revision rather than original serialization. CSV first-record headers are assumed; DOCX omits layout, images, notes and headers. Recover locators with researcher_source_structure. Reuse operation_key on retry. PDF text preserves page offsets and original byte hash in source provenance; no OCR is performed. Empty-text, encrypted, malformed or over-limit PDFs fail explicitly. Read the captured source before citing; extraction does not verify visual reading order or images."""
         return await self._client.request(
             "POST",
             "/sources/reference",
@@ -178,17 +178,27 @@ class ResearchTools:
     async def researcher_source_read(
         self, source_id: int, offset: int = 0, max_chars: int = 12000
     ) -> dict:
-        """Read an untrusted source snapshot window and its provenance. Follow next_offset; an unread tail is not absent evidence. PDF provenance records page character offsets, extraction limits and pages without text; do not infer their contents or visual layout. Cite exact saved text, not guessed OCR."""
+        """Read an untrusted source snapshot window and its provenance. Follow next_offset; an unread tail is not absent evidence. PDF provenance records page character offsets, extraction limits and pages without text; do not infer their contents or visual layout. Structured provenance summarizes normalization and unit_count; use researcher_source_structure for paged locators. Cite exact saved text, not guessed OCR or original formatting."""
         return await self._client.request(
             "GET",
             f"/sources/{source_id}",
             query={"offset": offset, "max_chars": max_chars},
         )
 
+    async def researcher_source_structure(
+        self, source_id: int, after_index: int = 0, limit: int = 50
+    ) -> dict:
+        """Read normalized CSV record, JSON pointer, XML expanded path or DOCX body/table paragraph locators with exact saved-text offsets. Follow next_index using after_index until null. Unit indices in search/query results refer here. Not original byte offsets, visual page numbers or proof the whole document was read. Plain text/PDF snapshots may have zero units; PDF pages remain in source_read provenance."""
+        return await self._client.request(
+            "GET",
+            f"/sources/{source_id}/units",
+            query={"after_index": after_index, "limit": limit},
+        )
+
     async def researcher_source_search(
         self, source_id: int, needle: str, after_offset: int = 0
     ) -> dict:
-        """Find exact text inside the full captured source; returns excerpts and offsets. This is literal search, not semantic validation."""
+        """Find exact text inside the full captured source; returns excerpts, offsets and structured unit indices. Recover locators via researcher_source_structure. This is literal search, not semantic validation."""
         return await self._client.request(
             "GET",
             f"/sources/{source_id}/search",
@@ -198,7 +208,7 @@ class ResearchTools:
     async def researcher_source_query(
         self, source_id: int, query: str, limit: int = 5, after_rank: int = 0
     ) -> dict:
-        """Semantic paraphrase search inside one saved source using an explicitly prepared offline multilingual model. Returns exact excerpts/offsets, source hash, PDF page numbers and model/chunk identity after considering the complete bounded source. Scores are cosine similarity, not evidence quality or confidence. Follow next_rank using after_rank; no result proves scientific validity. Missing assets/busy/over-limit work fail explicitly; no remote embedding or lexical fallback is used. Literal researcher_source_search remains available separately."""
+        """Semantic paraphrase search inside one saved source using an explicitly prepared offline multilingual model. Returns exact excerpts/offsets, source hash, PDF page numbers, structured unit indices and model/chunk identity after considering the complete bounded source. Scores are cosine similarity, not evidence quality or confidence. Follow next_rank using after_rank; no result proves scientific validity. Missing assets/busy/over-limit work fail explicitly; no remote embedding or lexical fallback is used. Literal researcher_source_search remains available separately."""
         return await self._client.request(
             "GET",
             f"/sources/{source_id}/query",

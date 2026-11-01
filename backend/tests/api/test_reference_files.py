@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 
 from backend.tests.research.pdf_fixtures import pdf_bytes
+from backend.tests.research.structured_fixtures import formats
 
 
 @pytest.fixture
@@ -270,3 +271,26 @@ def test_missing_upload_is_not_reported_as_a_successful_download(uploads):
     next(p for p in root.rglob("*") if p.is_file()).unlink()
     assert client.get(f"/api/files/{file_id}/download?project_id=1").status_code == 404
     assert client.delete(f"/api/files/{file_id}?project_id=1").status_code == 204
+
+
+@pytest.mark.parametrize("kind,mime,data", formats())
+def test_structured_owner_preview_keeps_original_download_without_a_research_source(
+    uploads, db_conn, kind, mime, data
+):
+    """Owner preview uses the same normalization yet cannot masquerade as captured research."""
+    client, _ = uploads
+    response = upload(client, data, "evidence." + kind, mime)
+    assert response.status_code == 201, response.text
+    file_id = response.json()["id"]
+    response = client.get(f"/api/files/{file_id}/preview?project_id=1")
+    assert response.status_code == 200, response.text
+    preview = response.json()
+    assert preview["persisted_source"] is False and "source_id" not in preview
+    assert preview["provenance"]["format"] == kind
+    assert preview["provenance"]["byte_sha256"] == hashlib.sha256(data).hexdigest()
+    assert (
+        "units" not in preview["provenance"] and preview["provenance"]["unit_count"] > 0
+    )
+    assert "No improvement" in preview["content"]
+    assert client.get(f"/api/files/{file_id}/download?project_id=1").content == data
+    assert db_conn.execute("SELECT count(*) FROM research_sources").fetchone()[0] == 0

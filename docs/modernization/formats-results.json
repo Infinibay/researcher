@@ -1,0 +1,106 @@
+{
+  "base_commit": "defc933",
+  "total": 1748,
+  "passed": 1645,
+  "failed": 100,
+  "skipped": 3,
+  "runtime_passed": 641,
+  "new_cases_passed": 34,
+  "new_cases": [
+    "backend.tests.api.test_reference_files::test_structured_owner_preview_keeps_original_download_without_a_research_source[csv-text/csv-name,result\\ncontrol,\"No improvement\"\\n]",
+    "backend.tests.api.test_reference_files::test_structured_owner_preview_keeps_original_download_without_a_research_source[json-application/json-{\"trials\":[{\"result\":\"No improvement\",\"rate\":0.10000000000000001}]}]",
+    "backend.tests.api.test_reference_files::test_structured_owner_preview_keeps_original_download_without_a_research_source[xml-application/xml-<trials><trial id=\"control\"><result>No improvement</result></trial></trials>]",
+    "backend.tests.api.test_reference_files::test_structured_owner_preview_keeps_original_download_without_a_research_source[docx-application/vnd.openxmlformats-officedocument.wordprocessingml.document-data3]",
+    "backend.tests.research.test_source_structure::test_structure_pages_recover_all_units_and_exact_saved_ranges",
+    "backend.tests.research.test_source_structure::test_structure_page_has_a_byte_budget_even_for_long_locators",
+    "backend.tests.research.test_source_structure::test_nonstructured_source_returns_an_explicit_empty_structure_page",
+    "backend.tests.research.test_structured_capture::test_structured_capture_keeps_units_original_hash_and_retry_snapshot[csv-text/csv-name,result\\ncontrol,\"No improvement\"\\n]",
+    "backend.tests.research.test_structured_capture::test_structured_capture_keeps_units_original_hash_and_retry_snapshot[json-application/json-{\"trials\":[{\"result\":\"No improvement\",\"rate\":0.10000000000000001}]}]",
+    "backend.tests.research.test_structured_capture::test_structured_capture_keeps_units_original_hash_and_retry_snapshot[xml-application/xml-<trials><trial id=\"control\"><result>No improvement</result></trial></trials>]",
+    "backend.tests.research.test_structured_capture::test_structured_capture_keeps_units_original_hash_and_retry_snapshot[docx-application/vnd.openxmlformats-officedocument.wordprocessingml.document-data3]",
+    "backend.tests.research.test_structured_capture::test_invalid_structured_documents_do_not_commit_partial_sources[application/json-{\"x\":1,\"x\":2}]",
+    "backend.tests.research.test_structured_capture::test_invalid_structured_documents_do_not_commit_partial_sources[application/json-{\"x\":NaN}]",
+    "backend.tests.research.test_structured_capture::test_invalid_structured_documents_do_not_commit_partial_sources[application/json-{]",
+    "backend.tests.research.test_structured_capture::test_invalid_structured_documents_do_not_commit_partial_sources[application/xml-<!DOCTYPE root [<!ENTITY x \"replaced\">]><root>&x;</root>]",
+    "backend.tests.research.test_structured_capture::test_invalid_structured_documents_do_not_commit_partial_sources[application/xml-data4]",
+    "backend.tests.research.test_structured_capture::test_invalid_structured_documents_do_not_commit_partial_sources[application/xml-<root>]",
+    "backend.tests.research.test_structured_capture::test_invalid_structured_documents_do_not_commit_partial_sources[application/vnd.openxmlformats-officedocument.wordprocessingml.document-not a ZIP]",
+    "backend.tests.research.test_structured_capture::test_invalid_structured_documents_do_not_commit_partial_sources[application/vnd.openxmlformats-officedocument.wordprocessingml.document-data7]",
+    "backend.tests.research.test_structured_capture::test_invalid_structured_documents_do_not_commit_partial_sources[text/csv-name,result\\ncontrol,\"unclosed]",
+    "backend.tests.research.test_structured_capture::test_csv_preserves_duplicate_header_context_extra_and_missing_cells",
+    "backend.tests.research.test_structured_capture::test_structured_depth_and_expansion_are_limits_not_truncation",
+    "backend.tests.research.test_structured_capture::test_docx_keeps_late_table_counterevidence_and_labels_extraction_scope",
+    "backend.tests.research.test_structured_capture::test_format_selection_keeps_host_withdrawal_and_cpu_authority[csv-text/csv-name,result\\ncontrol,\"No improvement\"\\n]",
+    "backend.tests.research.test_structured_capture::test_format_selection_keeps_host_withdrawal_and_cpu_authority[json-application/json-{\"trials\":[{\"result\":\"No improvement\",\"rate\":0.10000000000000001}]}]",
+    "backend.tests.research.test_structured_capture::test_format_selection_keeps_host_withdrawal_and_cpu_authority[xml-application/xml-<trials><trial id=\"control\"><result>No improvement</result></trial></trials>]",
+    "backend.tests.research.test_structured_capture::test_format_selection_keeps_host_withdrawal_and_cpu_authority[docx-application/vnd.openxmlformats-officedocument.wordprocessingml.document-data3]",
+    "backend.tests.research.test_structured_capture::test_json_pointer_namespace_xml_and_csv_multiline_identity_are_not_flattened_away",
+    "backend.tests.research.test_structured_capture::test_csv_field_budget_is_reported_as_a_limit_without_a_partial_capture",
+    "backend.tests.runtime.test_host_business::test_host_business_uses_real_api_scope_and_persists_one_report[text/csv]",
+    "backend.tests.runtime.test_host_business::test_host_business_uses_real_api_scope_and_persists_one_report[application/json]",
+    "backend.tests.runtime.test_host_business::test_host_business_uses_real_api_scope_and_persists_one_report[application/xml]",
+    "backend.tests.runtime.test_host_business::test_host_business_uses_real_api_scope_and_persists_one_report[application/vnd.openxmlformats-officedocument.wordprocessingml.document]",
+    "backend.tests.runtime.test_host_business::test_host_business_uses_real_api_scope_and_persists_one_report[application/json-semantic]"
+  ],
+  "source_directed_passed": 305,
+  "source_directed_scope": "298 combined before six edge cases; 21 structured cases incl those six, final CSV field RED/GREEN; final full suite and wheel cover all305",
+  "packaged_directed_passed": 305,
+  "backend_source_files_matching_wheel": 611,
+  "new_failures": [],
+  "resolved_failures": [],
+  "inherited_failure_identities": {
+    "path": "docs/modernization/baseline-results.json",
+    "sha256": "cd91994b488a4ff0aee3a00087803e2b03cd72593a8bd8675d4aee5fb5265203",
+    "comparison": "all100 EXACT failure identities match"
+  },
+  "raw_junit": {
+    "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/formats-global.xml",
+    "sha256": "c517ba891dff2807ba5dc7d76aa494ce4f3e2bc275a783e78de469c19495d514"
+  },
+  "validation": {
+    "business_catalog_tools": 14,
+    "model_turns": 0,
+    "new_remote_embedding_calls": 0,
+    "real_local_embedding_queries": true,
+    "promoted_existing_dependencies": [
+      "defusedxml0.7.1"
+    ],
+    "package_versions_changed": false,
+    "global_suite_green": false,
+    "frontend_tests_passed": 41,
+    "frontend_build_passed": true,
+    "browser_states_passed": 8,
+    "browser_axe_violations": 0,
+    "ui_pilots": 4,
+    "fully_accepted_pages": 0
+  },
+  "observed": [
+    "Four structured formats through native facade/real scoped API/SQLite to exact citation, provisional finding and fixed report draft",
+    "JSON real offline multilingual retrieval links normalized structure units",
+    "CSV retains first/header record, duplicate column names, multiline records, extra/missing/empty values",
+    "JSON pointers and exact numeric lexemes; XML expanded namespace paths/attributes/mixed text/UTF16",
+    "DOCX late table counterevidence past12000chars with deleted text excluded and body-only scope explicit",
+    "Malformed/duplicate-key/nonfinite/DTD/entity/external/unsafeZIP/depth/expansion/field limits fail without partial sources",
+    "Fixed parser worker reused with host authority, CPU/AS/wall/IPC limits and closure; PDF API retained",
+    "Structure read pages bounded by count and byte budget; ordinary reads/previews summarize metadata",
+    "Owner upload/preview/download/delete preserves exact binary and existing research/report state"
+  ],
+  "limits": [
+    "Normalized snapshots are not original serialization or visual layout; DOCX main-body scope has explicit omissions",
+    "CSV delimiter detection and first-record header interpretation are assumptions, not verified author intent",
+    "Not an LLM synthesis/comprehension or scientific validity evaluation",
+    "No new whole-host sandbox, actor enrollment or aggregate project memory budgets",
+    "Legacy role registries/flows/external consumers still require cutover and old providers still retained",
+    "Eight browser states are a scoped preview check, not full route acceptance",
+    "Full modernization goal remains active"
+  ],
+  "browser_evidence": {
+    "path": "docs/design/audits/2026-11-01-structured-files/evidence.json",
+    "sha256": "95f735f9ce1be66e0d79f33641fcb33d3a110ef191dce70a2509900a69eb5ed5"
+  },
+  "lock_inputs": {
+    "pyproject.toml": "7c5b51bdfba8179713dd7885aa8d5ccf7f56e428c93c3cb308ced078edb061dd",
+    "uv.lock": "4236ad559ddc50fbb376212a67fc71e367b866437e9f13f1af980bbc327661a0",
+    "requirements.txt": "3b685730e3852b8985b746f72ea87480a4734fcb06d8c17f6d499db4e7e3f857"
+  }
+}

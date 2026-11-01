@@ -1,0 +1,120 @@
+{
+  "result": "passed",
+  "states": [
+    {
+      "format": "csv",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-structured-files/csv-desktop.png",
+      "sha256": "91dc396777600e06282aadcd420cd1a1625545584ceaf202e914e6adcf988a64"
+    },
+    {
+      "format": "csv",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-structured-files/csv-mobile.png",
+      "sha256": "d870a3634425a428f73041e239a08e79cf64cb1f66a8c39c437f9bdb4941684f"
+    },
+    {
+      "format": "json",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-structured-files/json-desktop.png",
+      "sha256": "4c27e4346079aa09f4217e04729862dad9325371136d898008453ce5bdec1ed9"
+    },
+    {
+      "format": "json",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-structured-files/json-mobile.png",
+      "sha256": "869781225f7dc98306aa727becef3fd9014e9c3fdfb865f78f152f51896ecf81"
+    },
+    {
+      "format": "xml",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-structured-files/xml-desktop.png",
+      "sha256": "7c2b4696c3983f535438097ad74e242785892d6bcbf8e354afd3cab6280449df"
+    },
+    {
+      "format": "xml",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-structured-files/xml-mobile.png",
+      "sha256": "24a660942e5f093b1094a0854625b06a71f2ab1d72745401f5e752b632b0e782"
+    },
+    {
+      "format": "docx",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-structured-files/docx-desktop.png",
+      "sha256": "ac49a0bb3c504a8d99ef8b71d9a3e24ea74685202cffa6b65198e7984397cbea"
+    },
+    {
+      "format": "docx",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-structured-files/docx-mobile.png",
+      "sha256": "0d723e31191770aadebd01f61e75f990c634869ed437ea82a47d27d4c8aae041"
+    }
+  ],
+  "errors": [],
+  "model_turns": 0,
+  "scope": "Real owner upload, normalized preview, exact binary download and confirmed delete; four formats, two sizes, axe/layout. No LLM synthesis, screen-reader comprehension or full page acceptance."
+}

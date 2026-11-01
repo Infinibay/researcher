@@ -124,6 +124,11 @@ async def test_business_wire_schema_is_compact_but_keeps_real_title_field():
         "application/pdf-paper-arxiv",
         "application/pdf-paper-doi",
         "application/pdf-semantic",
+        "text/csv",
+        "application/json",
+        "application/xml",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/json-semantic",
     ],
 )
 async def test_host_business_uses_real_api_scope_and_persists_one_report(
@@ -148,6 +153,26 @@ async def test_host_business_uses_real_api_scope_and_persists_one_report(
         from backend.tests.research.pdf_fixtures import pdf_bytes
 
         source.write_bytes(pdf_bytes("Tax rates are fractions."))
+    elif media_type in (
+        "text/csv",
+        "application/json",
+        "application/xml",
+        "application/json-semantic",
+    ):
+        source.write_bytes(
+            {
+                "text/csv": b"topic,result\npolicy,Tax rates are fractions.\n",
+                "application/json": b'{"result":"Tax rates are fractions."}',
+                "application/json-semantic": b'{"result":"Tax rates are fractions."}',
+                "application/xml": b"<policy><result>Tax rates are fractions.</result></policy>",
+            }[media_type]
+        )
+    elif media_type.endswith("wordprocessingml.document"):
+        from backend.tests.research.structured_fixtures import docx_bytes
+
+        source.write_bytes(
+            docx_bytes("<w:p><w:r><w:t>Tax rates are fractions.</w:t></w:r></w:p>")
+        )
     else:
         source.write_text("Tax rates are fractions.")
     c.conn.execute(
@@ -157,7 +182,7 @@ async def test_host_business_uses_real_api_scope_and_persists_one_report(
             source.stat().st_size,
             "application/pdf"
             if media_type.startswith("application/pdf")
-            else media_type,
+            else media_type.removesuffix("-semantic"),
         ),
     )
     c.conn.execute(
@@ -195,7 +220,7 @@ async def test_host_business_uses_real_api_scope_and_persists_one_report(
                 else {"doi": "10.1000/policy"}
             )
     app = create_app()
-    if media_type == "application/pdf-semantic":
+    if media_type.endswith("-semantic"):
         from backend.research.semantic import SemanticRetriever
         from backend.tests.research.test_semantic_retrieval import assets
 
@@ -233,12 +258,38 @@ async def test_host_business_uses_real_api_scope_and_persists_one_report(
         if media_type.startswith("application/pdf"):
             assert snapshot["provenance"]["pages"][0]["page_number"] == 1
             assert snapshot["provenance"]["ocr_performed"] is False
+        structured = media_type in (
+            "text/csv",
+            "application/json",
+            "application/xml",
+            "application/json-semantic",
+        ) or media_type.endswith("wordprocessingml.document")
+        if structured:
+            assert "units" not in snapshot["provenance"]
+            page = await call(
+                "researcher_source_structure", source_id=captured["source_id"], limit=1
+            )
+            units = page["units"]
+            while page["next_index"] is not None:
+                page = await call(
+                    "researcher_source_structure",
+                    source_id=captured["source_id"],
+                    after_index=page["next_index"],
+                    limit=1,
+                )
+                units.extend(page["units"])
+            assert len(units) == snapshot["provenance"]["unit_count"]
+            assert any(
+                "Tax rates are fractions."
+                in snapshot["content"][u["start_offset"] : u["end_offset"]]
+                for u in units
+            )
         matches = await call(
             "researcher_source_search",
             source_id=captured["source_id"],
             needle="Tax rates",
         )
-        if media_type == "application/pdf-semantic":
+        if media_type.endswith("-semantic"):
             ranked = await call(
                 "researcher_source_query",
                 source_id=captured["source_id"],
@@ -250,7 +301,10 @@ async def test_host_business_uses_real_api_scope_and_persists_one_report(
                 ranked["full_coverage"] is True
                 and ranked["execution"]["worker_closed"] is True
             )
-            assert ranked["matches"][0]["page_numbers"] == [1]
+            if structured:
+                assert ranked["matches"][0]["unit_indices"]
+            else:
+                assert ranked["matches"][0]["page_numbers"] == [1]
             assert "Tax rates are fractions." in ranked["matches"][0]["excerpt"]
         assert matches["search_kind"] == "exact_text"
         assert "Tax rates are fractions." in matches["matches"][0]["excerpt"]

@@ -1,0 +1,143 @@
+[
+  {
+    "name": "researcher_capture_reference",
+    "description": "Capture a project attachment once: UTF-8 text, text-bearing PDF, DOCX main body, CSV, JSON or XML. Structured sources normalize values and preserve original byte hash; quote the saved revision rather than original serialization. CSV first-record headers are assumed; DOCX omits layout, images, notes and headers. Recover locators with researcher_source_structure. Reuse operation_key on retry. PDF text preserves page offsets and original byte hash in source provenance; no OCR is performed. Empty-text, encrypted, malformed or over-limit PDFs fail explicitly. Read the captured source before citing; extraction does not verify visual reading order or images.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "operation_key": {
+          "type": "string"
+        },
+        "reference_file_id": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "operation_key",
+        "reference_file_id"
+      ],
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": false,
+      "idempotentHint": true
+    }
+  },
+  {
+    "name": "researcher_source_query",
+    "description": "Semantic paraphrase search inside one saved source using an explicitly prepared offline multilingual model. Returns exact excerpts/offsets, source hash, PDF page numbers, structured unit indices and model/chunk identity after considering the complete bounded source. Scores are cosine similarity, not evidence quality or confidence. Follow next_rank using after_rank; no result proves scientific validity. Missing assets/busy/over-limit work fail explicitly; no remote embedding or lexical fallback is used. Literal researcher_source_search remains available separately.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "type": "integer"
+        },
+        "query": {
+          "type": "string"
+        },
+        "limit": {
+          "default": 5,
+          "type": "integer"
+        },
+        "after_rank": {
+          "default": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "source_id",
+        "query"
+      ],
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false
+    }
+  },
+  {
+    "name": "researcher_source_read",
+    "description": "Read an untrusted source snapshot window and its provenance. Follow next_offset; an unread tail is not absent evidence. PDF provenance records page character offsets, extraction limits and pages without text; do not infer their contents or visual layout. Structured provenance summarizes normalization and unit_count; use researcher_source_structure for paged locators. Cite exact saved text, not guessed OCR or original formatting.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "type": "integer"
+        },
+        "offset": {
+          "default": 0,
+          "type": "integer"
+        },
+        "max_chars": {
+          "default": 12000,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "source_id"
+      ],
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false
+    }
+  },
+  {
+    "name": "researcher_source_search",
+    "description": "Find exact text inside the full captured source; returns excerpts, offsets and structured unit indices. Recover locators via researcher_source_structure. This is literal search, not semantic validation.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "type": "integer"
+        },
+        "needle": {
+          "type": "string"
+        },
+        "after_offset": {
+          "default": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "source_id",
+        "needle"
+      ],
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false
+    }
+  },
+  {
+    "name": "researcher_source_structure",
+    "description": "Read normalized CSV record, JSON pointer, XML expanded path or DOCX body/table paragraph locators with exact saved-text offsets. Follow next_index using after_index until null. Unit indices in search/query results refer here. Not original byte offsets, visual page numbers or proof the whole document was read. Plain text/PDF snapshots may have zero units; PDF pages remain in source_read provenance.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "type": "integer"
+        },
+        "after_index": {
+          "default": 0,
+          "type": "integer"
+        },
+        "limit": {
+          "default": 50,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "source_id"
+      ],
+      "type": "object"
+    },
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false
+    }
+  }
+]

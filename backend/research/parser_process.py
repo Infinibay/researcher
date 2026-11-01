@@ -1,4 +1,4 @@
-"""Host-owned bounded PDF parsing with pidfd closure and credential-free IPC.
+"""Host-owned bounded document parsing with pidfd closure and credential-free IPC.
 
 No executable/program/path is selected by a model. Linux resource limits apply to
 one fixed child; this is not the native code-execution broker or a general sandbox.
@@ -52,31 +52,40 @@ class ParserLimits:
             raise ValueError("Parser IPC budgets must be 1–10000000 bytes")
 
 
-class PDFParser:
-    """Keep parser processes inside a cancellable host operation until actual exit."""
+class DocumentParser:
+    """Own bounded PDF/DOCX/CSV/JSON/XML workers until actual exit under host cancellation."""
 
-    def __init__(self, *, owner=None, grant_id=None, limits=None):
+    def __init__(self, *, format="pdf", owner=None, grant_id=None, limits=None):
         """Bind host authority and limits; direct library callers still receive OS limits."""
         if (owner is None) != (grant_id is None):
             raise ValueError(
                 "Parser owner and grant identity must be supplied together"
             )
+        if format not in ("pdf", "csv", "json", "xml", "docx"):
+            raise ValueError("Unsupported host document parser format")
+        self.format = format
         self.owner, self.grant_id = owner, grant_id
         self.limits = limits or ParserLimits()
+
+    def for_format(self, kind):
+        """Reuse host authority and limits for another fixed, supported format."""
+        return DocumentParser(
+            format=kind, owner=self.owner, grant_id=self.grant_id, limits=self.limits
+        )
 
     def read(
         self, data: bytes, *, max_wall_seconds: float | None = None
     ) -> tuple[str, dict]:
-        """Extract one complete PDF or fail, reaping the child before returning.
+        """Extract one complete document or fail, reaping the child before returning.
 
         Callers may reduce the remaining wall budget (for example after a URL
         download); they cannot extend the host's configured processing deadline.
         """
         if not isinstance(data, bytes) or len(data) > self.limits.max_input_bytes:
-            raise SourceTooLarge("PDF input exceeds the parser byte budget")
+            raise SourceTooLarge("Document input exceeds the parser byte budget")
         if sys.platform != "linux":
             raise SourceUnavailable(
-                "PDF parsing requires the supported Linux pidfd worker; no in-process fallback"
+                "Document parsing requires the supported Linux pidfd worker; no in-process fallback"
             )
         wall_seconds = self.limits.wall_seconds
         if max_wall_seconds is not None:
@@ -86,7 +95,7 @@ class PDFParser:
                 or max_wall_seconds <= 0
             ):
                 raise ValueError(
-                    "Remaining PDF wall budget must be finite and positive"
+                    "Remaining document wall budget must be finite and positive"
                 )
             wall_seconds = min(wall_seconds, max_wall_seconds)
         operation = (
@@ -94,7 +103,7 @@ class PDFParser:
         )
         with operation as cancelled:
             if cancelled.is_set():
-                raise ResearchForbidden("PDF operation authority was withdrawn")
+                raise ResearchForbidden("Document operation authority was withdrawn")
             return self._run(data, cancelled, wall_seconds)
 
     def _run(self, data, cancelled, wall_seconds):
@@ -113,6 +122,7 @@ class PDFParser:
                 "The required PDF parser dependency is unavailable"
             ) from exc
         options = asdict(self.limits) | {
+            "format": self.format,
             "parent": os.getpid(),
             "wall_seconds": wall_seconds,
             "package_root": str(Path(__file__).resolve().parents[2]),
@@ -124,6 +134,7 @@ class PDFParser:
             options=options,
             limits=self.limits,
             cancelled=cancelled,
+            label=self.format.upper(),
         )
         try:
             result = json.loads(output)
@@ -141,4 +152,14 @@ class PDFParser:
         except (ValueError, KeyError, TypeError) as exc:
             if isinstance(exc, SourceTooLarge):
                 raise
-            raise SourceUnavailable("PDF worker returned an invalid receipt") from exc
+            raise SourceUnavailable(
+                "Document worker returned an invalid receipt"
+            ) from exc
+
+
+class PDFParser(DocumentParser):
+    """Preserve the PDF-only host API while sharing bounded document process ownership."""
+
+    def __init__(self, *, owner=None, grant_id=None, limits=None):
+        """Fix PDF extraction, preserving existing authority and remaining-wall semantics."""
+        super().__init__(format="pdf", owner=owner, grant_id=grant_id, limits=limits)

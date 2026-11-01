@@ -1324,7 +1324,9 @@
         "backend/tests/runtime/test_run_recovery.py",
         "docs/modernization/pdf-web-results.json",
         "docs/modernization/pdf-web-packaging.json",
-        "backend/tests/research/test_pdf_web.py"
+        "backend/tests/research/test_pdf_web.py",
+        "docs/architecture/structured-sources.md",
+        "docs/modernization/formats-results.json"
       ],
       "remaining": [
         "Migrate/expose retained capabilities and their actual consumers (inventory of71 tools exists).",
@@ -2485,11 +2487,33 @@
         "backend/tests/research/pdf_fixtures.py",
         "backend/research/parser_process.py",
         "backend/research/parser_worker.py",
-        "backend/runtime/live_grants.py"
+        "backend/runtime/live_grants.py",
+        "backend/research/structured_text.py",
+        "backend/research/provenance.py",
+        "backend/research/parser_process.py"
       ],
       "remaining": [
         "Audit modules/classes/methods and relevant functions added earlier in this branch; add meaningful searchable docstrings/JSDoc where missing or stale.",
         "Maintain purpose, contracts, failure modes and side-effect boundaries alongside future implementation."
+      ]
+    },
+    "structured_sources": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/structured-sources.md",
+        "docs/architecture/structured-tool-schema.json",
+        "docs/modernization/formats-results.json",
+        "docs/modernization/formats-packaging.json",
+        "docs/design/audits/2026-11-01-structured-files/evidence.json",
+        "backend/research/structured_text.py",
+        "backend/research/provenance.py",
+        "backend/tests/research/test_structured_capture.py",
+        "backend/tests/research/test_source_structure.py",
+        "backend/tests/runtime/test_host_business.py"
+      ],
+      "remaining": [
+        "Migrate legacy registries/roles/flows and remove old RAG/CrewAI providers once their consumers are replaced.",
+        "Representative complex-document retrieval and human comprehension evaluation; normalized body scope is not full document review."
       ]
     }
   }

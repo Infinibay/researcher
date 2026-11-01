@@ -32,6 +32,11 @@ from backend.research.models import (
     SourceTooLarge,
     SourceUnavailable,
 )
+from backend.research.provenance import (
+    intersecting_units,
+    provenance_summary,
+    structure_page,
+)
 from backend.research.retrieval_assets import RetrievalBusy, RetrievalUnavailable
 
 router = APIRouter(prefix="/api/research-tools", tags=["research-tools"])
@@ -158,8 +163,24 @@ def source_read(
         "title": source["title"],
         "sha256": source["sha256"],
         "captured_at": source["captured_at"],
-        "provenance": source["provenance"],
+        "provenance": provenance_summary(source["provenance"]),
         **_window(source["content"], offset, max_chars),
+    }
+
+
+@router.get("/sources/{source_id}/units")
+def source_structure(
+    source_id: int,
+    ctx: Context,
+    after_index: int = Query(0, ge=0),
+    limit: int = Query(50, ge=1, le=100),
+):
+    """Recover bounded normalized CSV/JSON/XML/DOCX locators under the same source grant."""
+    source = ctx.store.read_source(ctx.scope, source_id)
+    return {
+        "source_id": source_id,
+        "sha256": source["sha256"],
+        **structure_page(source["provenance"], after_index=after_index, limit=limit),
     }
 
 
@@ -183,6 +204,7 @@ def source_search(
                 "match_offset": position,
                 "excerpt_offset": start,
                 "excerpt": text[start:end],
+                "unit_indices": intersecting_units(source["provenance"], start, end),
             }
         )
         position = text.find(needle, position + len(needle))

@@ -13,6 +13,7 @@ BUSINESS_NAMES = frozenset(
         "researcher_capture_paper",
         "researcher_source_list",
         "researcher_source_read",
+        "researcher_source_structure",
         "researcher_source_search",
         "researcher_source_query",
         "researcher_finding_record",

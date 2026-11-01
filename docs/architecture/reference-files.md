@@ -33,7 +33,7 @@ la previa rechaza el exceso, sin truncarlo. El navegador prepara la descarga en 
 Blob: archivos históricos muy grandes requieren memoria en el cliente. La raíz de
 configuración sigue siendo de confianza; no se promete un sandbox general del host.
 
-La previa obtiene texto UTF-8 o el PDF mediante el worker limitado existente. Guarda
+La previa obtiene texto UTF-8, PDF con texto o [DOCX/CSV/JSON/XML](structured-sources.md) mediante el worker limitado existente. Las fuentes estructuradas explican normalización y alcance; no reproducen el formato original. Guarda
 fecha, hashes de texto/bytes y procedencia en la respuesta, sin crear un registro de
 `research_sources` ni un permiso de agente. En PDF conserva marcas y offsets de página,
 señala páginas sin texto y declara que no hace OCR. No valida conclusiones, tablas,

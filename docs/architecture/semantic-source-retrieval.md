@@ -139,7 +139,9 @@ de assets, saturación, cancelación, CPU/salida/IPC y revocación antes de resp
 No hubo llamadas adicionales a la suscripción ni a un servicio de embeddings.
 
 La capacidad semántica queda disponible en el backend nativo para fuentes capturadas.
-Esto todavía no retira `PDFSearchTool`: faltan roles/flows heredados, otros formatos,
+Esto todavía no retira `PDFSearchTool`: faltan roles/flows heredados, consumidores externos,
 recuperación/knowledge a mayor escala, evaluación representativa y revisión científica.
 No hay cambios de interfaz o nuevas rutas aceptadas:4 pilotos,0/12 aceptadas completamente.
 El objetivo completo de modernización sigue activo.
+
+Las [fuentes estructuradas](structured-sources.md) ya reutilizan esta recuperación; los matches incluyen `unit_indices` para consultar locators sin duplicar metadata masiva.

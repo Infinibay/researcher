@@ -3855,3 +3855,64 @@ review only when entire implementation is ready. No phase or goal completion cla
   success alone does not retire global role catalogs. CLI/TUI/Git/CI/engine/autonomy/
   communication/prompts/evals/books, remaining8UI routes/all12acceptance, restore/data/
   dependencies/100baseline failures and final fresh whole-branch review remain active.
+
+## Active brief: bounded structured document capture — basedefc933
+
+- Previous goal turn progress:defc933 semantic source retrieval; revalidated clean tracked
+  source. Ken located old format adapters; direct source verified that DOCX/JSON/XML
+  delegate to CrewAI Tools and CSV uses global Chroma/remote-or-local embeddings.
+- Retain legacy role catalogs until cutover; implement formats in actual canonical
+  capture/read/search/query/finding/report path. No new LLM, vector store or parser loop.
+- Ruling: normalized source text includes explicit structural locators: CSV records/
+  column context, JSON pointers and exact numeric lexemes, XML expanded-name paths,
+  DOCX main-body paragraphs/table cells. Original binary hash and parser scope retained.
+  Quotes address this saved normalized revision, not byte-for-byte original formatting.
+- CSV first-record header interpretation is labelled assumed; preserve that first
+  record and every later/extra/missing/empty cell. JSON duplicate keys/nonfinite values
+  fail instead of losing evidence. XML DTD/entities/external references forbidden.
+  DOCX reads only bounded known ZIP parts without extraction/network/macro execution;
+  scope/omissions visible, no invented pagination or full-layout claim.
+- Extend current fixed parser worker via a host-selected format enum and preserve
+  PDFParser compatibility. API and owner preview reuse the same owned limits. Add
+  bounded structural-unit paging rather than injecting thousands of units into every
+  text-window tool response. Semantic/literal results link unit indices for recovery.
+- Exit: four formats capture -> exact text/structure -> finding/draft via real facade;
+  retry after original deletion, late evidence, limits/malformed/ZIP/entity/depth cases,
+  same scope/cancel behavior. No roles retired, page acceptance or full goal completion.
+
+
+## Structured source implementation and scoped proof — basedefc933
+
+- Added fixed-format DocumentParser, preserving PDFParser's API and reusing worker
+  transport/limits/ownership. No second model loop, retrieval backend or process runner.
+  CSV/JSON/XML/DOCX capture preserves original byte identity, normalized quote scope,
+  locators and exact text ranges; snapshots already committed are not rewritten.
+- Canonical read-only researcher_source_structure is tool14; bounded unit pages and
+  compact search/query links avoid injecting thousands of locators into every read.
+  Normal source windows and owner previews summarize structural provenance. Native
+  instructions explain assumptions, normalization and Word omissions.
+- RED:12capture cases failed/3already passed; structure contract3failed. GREEN initial
+  capture15. Follow-on HTTP test expected403 but shared not-found scope deliberately
+  returns404; corrected the assertion to preserve existing non-disclosure semantics.
+- Scoped combined298passed; six further edge cases pass (late Word table evidence,
+  all-format authority withdrawal, pointers/namespaces/multilineCSV). Additional CSV
+  oversized-field test failed first: parser classified a valid over-budget field as
+  malformed. Fixed classification, RED→GREEN. No partial source is committed.
+- Final isolated wheel305passed;337backend modules imported only from extracted wheel.
+  The first package run also passed304 before the final field regression; it needed
+  replacement after a test-fixture import/format correction and the substantive CSV
+  classification fix. Avoidable process cost: an earlier shell continued to build after
+  formatting failed. Final pipeline uses check=True gates; only final receipt is current.
+- Frontend41passed and build passed (existing chunk-size warning retained). Real browser
+  upload/preview/download/delete for4formats×2sizes:8states,0axeviolations/no horizontal
+  overflow/no page errors; inspected CSV desktop and DOCX mobile screenshots. Existing
+  report/native dispatch count preserved, synthetic reference count restored58. No
+  paid fallback/new model turns, no new remote embeddings; local JSON embeddings real.
+- defusedxml0.7.1 promoted from transitive to direct;193lockedpackages unchanged versions.
+  Initial export accidentally omitted hashes; immediately regenerated using the exact
+  existing hashed export command. Final diff changes only dependency provenance.
+- Docstrings include purpose/contracts, normalization, bounds and authority. Whole-branch
+  documentation audit still pending. This is a capability extension of Files, not a
+  fifth pilot or any page acceptance. Legacy registries/roles/flows still require cutover.
+
+- Final full regression: 1748 total, 1645 passed, 100 EXACT baseline failures, 3 skipped; 641 runtime passes. No new/resolved failure identities. Final wheel matches 611 Python/SQL files. Raw logs/JUnit and current artifact hashes retained; whole suite remains red.

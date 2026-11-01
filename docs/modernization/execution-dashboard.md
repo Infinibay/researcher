@@ -9,7 +9,7 @@ Motivos del ajuste: [diagnóstico del proceso](workflow-review.md).
 - Hay un primer recorrido de investigación con Codex, suscripción, Ken, análisis y reporte persistido. La prueba real de entrada de producto terminó; su monitor falló y se recuperó evidencia durable sin repetir inferencia. No se recuperaron las métricas de memoria perdidas.
 - Las 43 entradas de escenarios siguen abiertas en `coverage.json`: 33 en progreso y 10 pendientes. Son escenarios amplios; esto no significa que sus componentes no funcionen.
 - Interfaz: 4 pilotos, 12/36 conceptos de escritorio y 4/12 móviles; 0/12 páginas con aceptación completa.
-- Última suite registrada: 1611 aprobadas, 100 fallos heredados y 3 omitidas. Falta resolver o retirar con justificación los casos del sistema reemplazado.
+- Última suite registrada: 1645 aprobadas, 100 fallos heredados y 3 omitidas. Falta resolver o retirar con justificación los casos del sistema reemplazado.
 - No hay porcentaje global defendible todavía. El 30% anterior era una impresión, no una medición de alcance ponderado.
 
 ## Última entrega verificada: arranque del recorrido existente
@@ -73,19 +73,26 @@ con informe draft y tarea aún en progreso. No es una evaluación de comprensió
 [Contrato](../architecture/semantic-source-retrieval.md), [ensayo](semantic-product-evidence.json),
 [resultados](semantic-results.json), [paquete](semantic-packaging.json).
 
-**Siguiente acción:** migrar consumidores heredados de documentos/PDF sobre el
-contrato de captura existente, con sus prompts y errores. El soporte de localizadores `read_paper` ya está portado
-al catálogo nativo; la recuperación semántica local también existe ya. Siguen pendientes roles/flows,
-otros formatos y evaluación representativa. Después DOCX/recuperación
-CSV/JSON/XML, web/wiki y revisión científica. No añadir otra fábrica de inferencia
-ni retirar `read_paper/pdf_search` sin revisar sus consumidores y pruebas.
+**Formatos estructurados implementados:** DOCX/CSV/JSON/XML reutilizan la captura,
+worker, búsqueda y citas existentes. Estructura paginada; Word declara omisiones y CSV
+su interpretación de encabezados.305 casos dirigidos desde wheel;41 frontend y8 estados
+de navegador. Suite1748:1645 aprobadas,100 fallos
+heredados exactos y3 omitidas. No hubo turnos LLM nuevos ni más páginas aceptadas.
+[Contrato](../architecture/structured-sources.md), [resultados](formats-results.json),
+[paquete](formats-packaging.json), [previas](../design/audits/2026-11-01-structured-files/report.md).
+
+**Siguiente acción:** cortar los consumidores heredados por recorridos completos.
+Los roles/flows de investigación todavía requieren capacidades de conocimiento/wiki,
+búsqueda y revisión; no basta con cambiar imports de sus lectores documentales.
+Completar esas operaciones nativas y sus prompts antes de retirar el registro RAG
+viejo. Reutilizar captura/recuperación actuales, sin otra fábrica de inferencia.
 
 ## Cola posterior, manteniendo el alcance
 
 1. Completar investigación útil: búsqueda web, documentos/PDF, conocimiento/wiki y revisión científica; migrar herramientas por capacidades, con sus prompts y contratos.
 2. Desarrollo completo: edición/candidato, pruebas, revisión, Git/CI y efectos externos reconciliables. Resolver requisitos de aislamiento antes de habilitar cada efecto.
 3. Migrar autonomía, roles, flows y comunicación entre agentes al mismo dueño durable; no añadir otro loop LLM. La comunicación humano–agente se verifica en cada recorrido.
-4. Extender diseño a las demás páginas, con conceptos y selección por página; completar aceptación de los tres pilotos existentes.
+4. Extender diseño a las demás páginas, con conceptos y selección por página; completar aceptación de los cuatro pilotos existentes.
 5. Completar inventario/evaluaciones de todos los prompts y llamadas auxiliares, migraciones/restauración, dependencias, instalación, CLI/TUI y retirada del motor anterior. Trabajar estas obligaciones dentro de las entregas que las toquen; este orden no las aplaza todas al final.
 6. Verificación global, revisión independiente de toda la rama y entrega. No cerrar el objetivo con un subconjunto.
 

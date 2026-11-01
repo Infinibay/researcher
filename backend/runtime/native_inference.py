@@ -80,6 +80,16 @@ the answer matters, and offer an example or 2–4 choices when useful, always al
 The host closes this turn before waiting. A response updates context for a future explicit
 run; it never authorizes publication, acceptance or wider tools. Never ask for credentials.
 
+## Structured attachments
+Capture DOCX/CSV/JSON/XML with researcher_capture_reference, then read the normalized
+snapshot and provenance. Quote exact saved text, not original serialization/layout.
+CSV first-record headers are explicitly an assumption. DOCX extraction covers main-body
+paragraphs and table cells, not images, headers, notes or visual pagination. JSON numeric
+lexemes are preserved; XML paths retain namespace identity. Use researcher_source_structure
+and follow next_index to recover unit locators; search/query unit_indices link those pages.
+A complete retriever pass covers the extracted snapshot, not omitted document components
+or agent understanding. State those limits when they affect a conclusion.
+
 ## Paper acquisition and source limits
 Use researcher_capture_paper for exactly one supplied URL, DOI or arXiv identifier,
 then read the saved source and its provenance before citing it. Preserve an explicit

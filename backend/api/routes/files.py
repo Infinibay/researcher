@@ -30,6 +30,7 @@ from backend.db.connection import connect
 from backend.research.acquisition import BoundedReferenceReader
 from backend.research.models import ReferenceRecord, SourceTooLarge
 from backend.research.parser_process import PDFParser
+from backend.research.provenance import provenance_summary
 from backend.research.reference_storage import ReferenceStorage
 
 router = APIRouter(prefix="/api/files", tags=["files"])
@@ -175,7 +176,7 @@ def preview_file(file_id: int, request: Request, project_id: int = Query(..., gt
         title=draft.title,
         content=draft.content,
         content_sha256=hashlib.sha256(draft.content.encode("utf-8")).hexdigest(),
-        provenance=draft.provenance,
+        provenance=provenance_summary(draft.provenance),
         previewed_at=time.time(),
     )
 

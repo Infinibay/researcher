@@ -21,6 +21,7 @@ from backend.research.models import (
     SourceTooLarge,
     SourceUnavailable,
 )
+from backend.research.provenance import intersecting_units
 from backend.research.retrieval_assets import (
     FINGERPRINT,
     MODEL,
@@ -190,6 +191,9 @@ class SemanticRetriever:
                     "end_offset": row["end"],
                     "excerpt": source["content"][row["start"] : row["end"]],
                     "score": row["score"],
+                    "unit_indices": intersecting_units(
+                        source.get("provenance", {}), row["start"], row["end"]
+                    ),
                     "page_numbers": [
                         p["page_number"]
                         for p in pages

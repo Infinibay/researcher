@@ -51,7 +51,7 @@ mantenerse; no montar el repo principal completo para resolver Git de un worktre
 | Conocimiento | 12 | Findings/reportes nuevos, búsqueda, revisión científica y wiki con identidad por proyecto/global |
 | Proyecto | 8 | Planificación tipada, hipótesis versionadas, referencia y repositorios con reconciliación |
 | Datos | 1 | Retirar SQL genérico después de sustituir sus consumidores por consultas/analytics tipadas |
-| RAG | 6 | Parsers acotados y recuperación PDF/CSV/DOCX/JSON/XML; Ken no sustituye esa cobertura |
+| RAG | 6 | Captura canónica y recuperación PDF/CSV/DOCX/JSON/XML implementadas con límites, estructura y citas. Ken no sustituye esa cobertura; pendiente migrar registries/roles/flows y retirar RAG antiguo |
 | Context7 | 2 | Adapter opcional con proveedor, credencial y procedencia declarados |
 
 No retirar una categoría tras migrar su primer nombre. Las clases fuera del registro

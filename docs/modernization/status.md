@@ -408,3 +408,24 @@ cambiar sus versiones. Interfaz sin cambios:4 pilotos,0/12 aceptadas completamen
 
 Siguen pendientes formatos/roles/flows/consumidores heredados, evaluación representativa,
 inscripción de todos los actores/presupuestos globales y el resto del plan completo.
+
+
+## Última ampliación: documentos estructurados
+
+CSV/JSON/XML/DOCX ya se capturan con estructura y hash original. Lectura, búsqueda
+literal/semántica local y citas usan el mismo snapshot normalizado; los locators se
+recuperan con paginación. Word conserva párrafos/tablas del cuerpo con omisiones
+explícitas, y CSV declara la suposición de encabezados. La previa del propietario
+explica esos límites y no crea una fuente de investigación.
+
+Verificación:305 casos dirigidos desde paquete;34 nuevos en la suite completa.
+Suite1748:1645 aprobadas,100 fallos heredados
+exactos,3 omitidas.41 frontend/build y8 estados reales de navegador; no hubo turnos
+LLM adicionales. [Contrato](../architecture/structured-sources.md),
+[resultados](formats-results.json), [paquete](formats-packaging.json),
+[recorrido](../design/audits/2026-11-01-structured-files/report.md).
+
+Los roles/flows/registries heredados siguen activos hasta completar sus capacidades
+de conocimiento, búsqueda y revisión. No se anuncia retirada del RAG anterior ni
+aceptación adicional de UI:4 pilotos y0/12 páginas completamente aceptadas. El plan
+completo, auditoría de docstrings incluida, permanece activo.
