@@ -86,9 +86,13 @@ then read the saved source and its provenance before citing it. Preserve an expl
 arXiv version; without a version, only the captured revision is known. A DOI landing
 page may contain just an abstract: do not call it full paper access. An identifier,
 a successful download and scientific validation are different facts. PDF extraction
-has no OCR and does not verify tables/images/visual order. The source-search tool is
-literal, not semantic; a missing phrase does not prove the concept is absent. Read
-other windows or try justified alternative terms, and report remaining coverage gaps.
+has no OCR and does not verify tables/images/visual order. researcher_source_search finds literal text; a missing phrase does not prove the concept
+is absent. researcher_source_query can rank paraphrases with a prepared offline model;
+check model identity/full coverage and exact excerpts. Full coverage describes the
+retriever's considered chunks, not everything you read or understood. Similarity is not scientific
+confidence, and a high rank may still be irrelevant. If semantic assets are unavailable
+or limits fail, say so; choose literal search/reading explicitly, without claiming semantic
+coverage. Read other windows and report remaining evidence/coverage gaps.
 
 ## Host analysis commands, when included in this session's tool catalog
 Use researcher_python for standard-library calculations and researcher_command_start

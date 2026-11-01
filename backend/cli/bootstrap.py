@@ -1,4 +1,4 @@
-"""Inference-free explicit initialization for a NEW installation only."""
+"""Explicit inference-free storage initialization and pinned local retrieval preparation."""
 
 import argparse
 import json
@@ -7,6 +7,7 @@ import sys
 
 
 def main(argv=None):
+    """Run one explicit setup action; help never reads assets, initializes data or downloads."""
     parser = argparse.ArgumentParser(
         description="Initialize NEW installation storage. Never repair/adopt a lost or existing deployment."
     )
@@ -20,12 +21,25 @@ def main(argv=None):
     )
     authority.add_argument("--database-dir", required=True)
     authority.add_argument("--witness-dir", required=True)
+    retrieval = commands.add_parser(
+        "prepare-retrieval",
+        help="Prepare fixed public semantic weights; never download during serving",
+    )
+    retrieval.add_argument("--directory", required=True)
+    retrieval.add_argument("--cache-dir", required=True)
+    retrieval.add_argument("--offline", action="store_true")
     options = parser.parse_args(argv)
     # Lazy import: even --help has no database/runtime/credential side effects.
     from backend.runtime.bootstrap import initialize_authority, initialize_database
 
     try:
-        if options.command == "init-db":
+        if options.command == "prepare-retrieval":
+            from backend.research.retrieval_assets import prepare
+
+            result = prepare(
+                options.directory, cache_dir=options.cache_dir, offline=options.offline
+            )
+        elif options.command == "init-db":
             result = {"database": str(initialize_database(options.database))}
         else:
             result = initialize_authority(

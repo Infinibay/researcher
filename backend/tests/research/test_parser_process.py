@@ -162,7 +162,9 @@ def test_worker_launch_failure_is_a_source_error(monkeypatch):
         """Represent a failed OS process launch, before there is any child to own."""
         raise FileNotFoundError("injected unavailable interpreter")
 
-    monkeypatch.setattr(module.subprocess, "Popen", unavailable)
+    import backend.research.worker_transport as transport
+
+    monkeypatch.setattr(transport.subprocess, "Popen", unavailable)
     with pytest.raises(SourceUnavailable):
         module.PDFParser().read(pdf_bytes("Input"))
 

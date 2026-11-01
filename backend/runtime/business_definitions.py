@@ -170,7 +170,7 @@ class ResearchTools:
         )
 
     async def researcher_source_list(self, after_id: int = 0, limit: int = 50) -> dict:
-        """List captured sources in the bound project. Follow next_after_id."""
+        """List captured sources in the bound project and retrieval setup status. Follow next_after_id. Semantic verification_required means configured, not yet verified/loaded; not_configured means no prepared model is enabled. Literal search is separate."""
         return await self._client.request(
             "GET", "/sources", query={"after_id": after_id, "limit": limit}
         )
@@ -193,6 +193,16 @@ class ResearchTools:
             "GET",
             f"/sources/{source_id}/search",
             query={"needle": needle, "after_offset": after_offset},
+        )
+
+    async def researcher_source_query(
+        self, source_id: int, query: str, limit: int = 5, after_rank: int = 0
+    ) -> dict:
+        """Semantic paraphrase search inside one saved source using an explicitly prepared offline multilingual model. Returns exact excerpts/offsets, source hash, PDF page numbers and model/chunk identity after considering the complete bounded source. Scores are cosine similarity, not evidence quality or confidence. Follow next_rank using after_rank; no result proves scientific validity. Missing assets/busy/over-limit work fail explicitly; no remote embedding or lexical fallback is used. Literal researcher_source_search remains available separately."""
+        return await self._client.request(
+            "GET",
+            f"/sources/{source_id}/query",
+            query={"query": query, "limit": limit, "after_rank": after_rank},
         )
 
     async def researcher_finding_record(

@@ -86,3 +86,14 @@ rate-limit y formatos adicionales no quedan terminados por esta entrega.
 [Resultados y límites](../modernization/paper-results.json),
 [paquete](../modernization/paper-packaging.json),
 [matriz completa](capability-matrix.md).
+
+
+### Ampliación posterior: semántica local
+
+El corte anterior de esta página y su snapshot de schema tienen doce herramientas.
+El catálogo actual añade una decimotercera, `researcher_source_query`, con embeddings
+locales multilingües y assets preparados explícitamente. La búsqueda literal conserva
+su significado; el nuevo camino semántico registra su modelo, cobertura y pasajes
+exactos. [Contrato y límites actuales](semantic-source-retrieval.md). Los roles/flows
+antiguos y la evaluación científica siguen pendientes; no se retira `PDFSearchTool`
+por haber implementado el recuperador.

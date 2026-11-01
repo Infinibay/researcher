@@ -7,11 +7,7 @@ one fixed child; this is not the native code-execution broker or a general sandb
 import json
 import math
 import os
-import selectors
-import signal
-import subprocess
 import sys
-import time
 from contextlib import nullcontext
 from dataclasses import asdict, dataclass
 from importlib.util import find_spec
@@ -19,7 +15,7 @@ from pathlib import Path
 from threading import Event
 
 from backend.research.models import ResearchForbidden, SourceTooLarge, SourceUnavailable
-from backend.runtime.peer_process import _pidfd, _signal
+from backend.research.worker_transport import exchange
 
 WORKER = Path(__file__).with_name("parser_worker.py")
 
@@ -122,116 +118,27 @@ class PDFParser:
             "package_root": str(Path(__file__).resolve().parents[2]),
             "dependencies": dependencies,
         }
-        deadline = time.monotonic() + wall_seconds
+        output = exchange(
+            data,
+            worker=WORKER,
+            options=options,
+            limits=self.limits,
+            cancelled=cancelled,
+        )
         try:
-            process = subprocess.Popen(
-                [sys.executable, "-I", "-S", str(WORKER), json.dumps(options)],
-                stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.DEVNULL,
-                cwd="/",
-                env={"LANG": "C.UTF-8"},
-                close_fds=True,
-                bufsize=0,
-            )
-        except OSError as exc:
-            raise SourceUnavailable("PDF worker could not be started") from exc
-        pidfd = None
-        output = bytearray()
-        try:
-            pidfd = _pidfd(process.pid)
-            with selectors.DefaultSelector() as selector:
-                for stream, event in (
-                    (process.stdin, selectors.EVENT_WRITE),
-                    (process.stdout, selectors.EVENT_READ),
-                ):
-                    os.set_blocking(stream.fileno(), False)
-                    selector.register(stream, event)
-                sent, eof = 0, False
-                while True:
-                    if cancelled.is_set():
-                        raise ResearchForbidden(
-                            "PDF operation authority was withdrawn during extraction"
-                        )
-                    remaining = deadline - time.monotonic()
-                    if remaining <= 0:
-                        raise SourceTooLarge(
-                            "PDF parser exceeded its wall-clock budget; no partial source was saved"
-                        )
-                    for key, _ in selector.select(min(0.05, remaining)):
-                        stream = key.fileobj
-                        if stream is process.stdin:
-                            try:
-                                sent += os.write(
-                                    stream.fileno(), data[sent : sent + 65536]
-                                )
-                            except BrokenPipeError:
-                                sent = len(data)
-                            if sent == len(data):
-                                selector.unregister(stream)
-                                stream.close()
-                        else:
-                            chunk = os.read(stream.fileno(), 65536)
-                            if chunk:
-                                if (
-                                    len(output) + len(chunk)
-                                    > self.limits.max_output_bytes
-                                ):
-                                    raise SourceTooLarge(
-                                        "PDF worker exceeded its output byte budget"
-                                    )
-                                output.extend(chunk)
-                            else:
-                                selector.unregister(stream)
-                                stream.close()
-                                eof = True
-                    if process.poll() is not None and eof:
-                        break
-            if process.returncode in (-signal.SIGXCPU, -signal.SIGALRM):
-                raise SourceTooLarge("PDF parser exceeded its OS execution budget")
-            if process.returncode != 0:
-                raise SourceUnavailable(
-                    "PDF worker terminated without a valid result; no partial source was saved"
-                )
-            try:
-                result = json.loads(output)
-                if (
-                    result["ok"] is True
-                    and isinstance(result["content"], str)
-                    and isinstance(result["provenance"], dict)
-                ):
-                    result["provenance"]["execution"]["worker_closed"] = True
-                    result["provenance"]["execution"]["wall_limit_seconds"] = (
-                        wall_seconds
-                    )
-                    return result["content"], result["provenance"]
-                if result["code"] == "too_large":
-                    raise SourceTooLarge(result["message"])
-                raise SourceUnavailable(result["message"])
-            except (ValueError, KeyError, TypeError) as exc:
-                if isinstance(exc, SourceTooLarge):
-                    raise
-                raise SourceUnavailable(
-                    "PDF worker returned an invalid receipt"
-                ) from exc
-        except (ResearchForbidden, SourceTooLarge):
-            raise
-        except OSError as exc:
-            raise SourceUnavailable(
-                "PDF worker could not start or exchange its bounded snapshot"
-            ) from exc
-        finally:
-            # Do not finish the registered operation until the original child is
-            # actually reaped. A stalled kernel wait remains pending, never closed.
-            try:
-                if process.poll() is None and pidfd is not None:
-                    _signal(pidfd)
-            finally:
-                # If pidfd admission failed, no input was released. EOF plus
-                # the worker's own CPU/alarm fuse ends that trusted bootstrap.
-                process.stdin.close()
-                process.wait()
-            for stream in (process.stdin, process.stdout):
-                stream.close()
-            if pidfd is not None:
-                os.close(pidfd)
+            result = json.loads(output)
+            if (
+                result["ok"] is True
+                and isinstance(result["content"], str)
+                and isinstance(result["provenance"], dict)
+            ):
+                result["provenance"]["execution"]["worker_closed"] = True
+                result["provenance"]["execution"]["wall_limit_seconds"] = wall_seconds
+                return result["content"], result["provenance"]
+            if result["code"] == "too_large":
+                raise SourceTooLarge(result["message"])
+            raise SourceUnavailable(result["message"])
+        except (ValueError, KeyError, TypeError) as exc:
+            if isinstance(exc, SourceTooLarge):
+                raise
+            raise SourceUnavailable("PDF worker returned an invalid receipt") from exc

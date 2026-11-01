@@ -1,0 +1,98 @@
+{
+  "base_commit": "b650c5d",
+  "total": 1714,
+  "passed": 1611,
+  "failed": 100,
+  "skipped": 3,
+  "runtime_passed": 636,
+  "new_cases_passed": 26,
+  "new_cases": [
+    "backend.tests.research.test_retrieval_assets::test_bootstrap_help_exposes_explicit_model_preparation_without_loading_models",
+    "backend.tests.research.test_retrieval_assets::test_preparation_refuses_an_existing_unverified_directory_without_modifying_it",
+    "backend.tests.research.test_retrieval_assets::test_runtime_refuses_a_symlink_even_when_target_has_expected_bytes",
+    "backend.tests.research.test_retrieval_assets::test_asset_growing_during_verification_cannot_exceed_declared_read_budget",
+    "backend.tests.research.test_semantic_retrieval::test_semantic_unavailable_is_explicit_and_does_not_fall_back_to_literal_or_remote",
+    "backend.tests.research.test_semantic_retrieval::test_invalid_semantic_query_is_rejected_before_model_work[]",
+    "backend.tests.research.test_semantic_retrieval::test_invalid_semantic_query_is_rejected_before_model_work[   ]",
+    "backend.tests.research.test_semantic_retrieval::test_invalid_semantic_query_is_rejected_before_model_work[query2]",
+    "backend.tests.research.test_semantic_retrieval::test_foreign_project_source_is_rejected_before_model_availability",
+    "backend.tests.research.test_semantic_retrieval::test_real_multilingual_query_recovers_tail_evidence_with_exact_offsets",
+    "backend.tests.research.test_semantic_retrieval::test_changed_or_missing_model_asset_fails_without_a_partial_semantic_result",
+    "backend.tests.research.test_semantic_retrieval::test_real_pdf_semantic_result_maps_the_exact_excerpt_to_captured_pages",
+    "backend.tests.research.test_semantic_retrieval::test_semantic_host_budgets_cannot_disable_the_worker_fuses[options0]",
+    "backend.tests.research.test_semantic_retrieval::test_semantic_host_budgets_cannot_disable_the_worker_fuses[options1]",
+    "backend.tests.research.test_semantic_retrieval::test_semantic_host_budgets_cannot_disable_the_worker_fuses[options2]",
+    "backend.tests.research.test_semantic_retrieval::test_semantic_host_budgets_cannot_disable_the_worker_fuses[options3]",
+    "backend.tests.research.test_semantic_retrieval::test_invalid_semantic_worker_receipts_are_explicit_unavailable_errors[[]]",
+    "backend.tests.research.test_semantic_retrieval::test_invalid_semantic_worker_receipts_are_explicit_unavailable_errors[null]",
+    "backend.tests.research.test_semantic_retrieval::test_invalid_semantic_worker_receipts_are_explicit_unavailable_errors[not-json]",
+    "backend.tests.research.test_semantic_retrieval::test_semantic_api_revalidates_grant_before_disclosing_results",
+    "backend.tests.research.test_semantic_retrieval::test_source_catalog_reports_unconfigured_semantics_without_loading_a_model",
+    "backend.tests.research.test_semantic_worker::test_semantic_withdrawal_reaps_worker_before_releasing_capacity",
+    "backend.tests.research.test_semantic_worker::test_semantic_cpu_or_output_exhaustion_never_returns_partial_results[while True: pass-limits0]",
+    "backend.tests.research.test_semantic_worker::test_semantic_cpu_or_output_exhaustion_never_returns_partial_results[os.write(1,b'X'*4096)-limits1]",
+    "backend.tests.research.test_semantic_worker::test_semantic_missing_interpreter_is_an_explicit_availability_failure",
+    "backend.tests.runtime.test_host_business::test_host_business_uses_real_api_scope_and_persists_one_report[application/pdf-semantic]"
+  ],
+  "source_directed_passed": 271,
+  "source_directed_scope": "269 combined cases plus two final asset invariants; all271 covered by current full regression and isolated wheel",
+  "packaged_directed_passed": 271,
+  "backend_source_files_matching_wheel": 606,
+  "new_failures": [],
+  "resolved_failures": [],
+  "inherited_failure_identities": {
+    "path": "docs/modernization/baseline-results.json",
+    "sha256": "cd91994b488a4ff0aee3a00087803e2b03cd72593a8bd8675d4aee5fb5265203",
+    "comparison": "all100 EXACT failure identities match"
+  },
+  "raw_junit": {
+    "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/semantic-global.xml",
+    "sha256": "1df8b5f3ee120d2d1e014cf30a24f780b55b204fc85d5e59b46d04eb7c05452c"
+  },
+  "validation": {
+    "business_catalog_tools": 13,
+    "model_turns": 0,
+    "promoted_existing_dependencies": [
+      "onnxruntime1.31.1",
+      "tokenizers0.23.3",
+      "huggingface-hub1.33.0"
+    ],
+    "package_versions_changed": false,
+    "global_suite_green": false,
+    "frontend_changed": false
+  },
+  "observed": [
+    "Prepared pinned public multilingual ONNX assets used offline without provider fallback",
+    "Spanish paraphrase retrieves exact English-source tail evidence beyond initial12000char window",
+    "Every bounded chunk considered or explicit failure; deterministic rank pagination and PDF page mapping",
+    "Native facade -> real API/SQLite/PDF -> real embeddings -> exact quotation -> provisional finding -> fixed draft report",
+    "CPU/output/cancellation faults reap original worker before releasing capacity; grant revalidated before response",
+    "PDF and semantic workers share the existing transport and Linux resource bootstrap",
+    "Missing/corrupt/symlink/growing assets, invalid IPC, unavailable model and busy capacity are explicit errors"
+  ],
+  "limits": [
+    "Retrieval scores and complete-chunk coverage do not prove relevance, agent reading, comprehension or scientific validation",
+    "Assets prepared explicitly; no runtime download; only one pinned multilingual model supported",
+    "No persistent vector cache; every query rebuilds all chunks within caps",
+    "Per-worker CPU/AS/wall/IPC and per-application concurrency are not aggregate project memory/billing budgets or full actor enrollment",
+    "Legacy role catalogs/flows, remaining formats and external consumers not migrated",
+    "No new LLM synthesis/comprehension evaluation; fixed synthetic report only",
+    "No UI change or acceptance progress: four pilots, zero fully accepted routes",
+    "Full original modernization plan remains active"
+  ],
+  "product_proof": {
+    "path": "docs/modernization/semantic-product-evidence.json",
+    "sha256": "87839c626e75865f181d2ba8769d295413da9e9f9577e232d443a8da1ab0d547"
+  },
+  "model_assets": {
+    "id": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+    "fingerprint": "7435645f6c1421f5cba914aae07054ba47c3f7796ad71e9fee748b28303d9241",
+    "runtime_prepared_outside_wheel": true
+  },
+  "lock_inputs": {
+    "pyproject.toml": "eb142d874d40f11ac65dd2d94d90139cf1ee4b90e6b3106668051e9a1df2dc90",
+    "uv.lock": "01a3610edc8bc5496eda5ffb5aa54500bff1a19ea661b3810f1c172e28716468",
+    "requirements.txt": "580adad02ee84842e9df0435ed51085f77d0db37ad8604f6b87b6f49b424e551"
+  }
+}

@@ -3751,3 +3751,107 @@ review only when entire implementation is ready. No phase or goal completion cla
   engine/loop/autonomy/communication, prompts/books/evals,8unimplemented routes and all
   acceptance gates, migrations/restore/CLI/TUI/Git/CI/dependencies,100baseline failures
   and final fresh whole-branch review. No phase/scenario or goal marked complete.
+
+## Active brief: scoped local semantic source retrieval — baseb650c5d
+
+- Previous goal turn: progress, paper locator commitb650c5d; tracked source clean.
+  Ken recall/search and actual legacy rag/base source confirm remote default/singleton
+  cannot be adopted as scoped source authority. Original Ken has a useful pinned-public-
+  ModelAssets pattern; its code models/embedders are not generic document retrieval.
+- Evidence: Chroma's MiniLM cache directory is empty. Existing HuggingFace models are
+  code/reranker/translation assets, not a prepared document embedding backend. Current
+  installed libraries are onnxruntime1.31.1,tokenizers0.23.3,huggingface-hub1.33.0.
+- Ruling: test pinned multilingual MiniLM-L12 ONNX quantized CPU, Apache2.0, instead of
+  silently treating English/code embeddings or literal search as semantic equivalence.
+  Selected official revisione8f8c211226b894fcb81acc59f3b34ba3efd5f42; model118453870B
+  SHA98a01d88b7de996cdea58c32ca71208c09968d143798814b2ea09d3439dc334f,tokenizer9081518B
+  SHA2c3387be76557bd40970cec13153b3bbf80407865484b209e655e5e4729076b8. Preparation
+  is explicit/token=False; runtime is offline and refuses missing/mismatched assets.
+- Exit: real multilingual paraphrase retrieval over a captured source, exact recoverable
+  offsets/hash/page mapping, full considered-chunk coverage including the tail; model/
+  revision/dimension/token/chunk policy recorded. Similarity is not scientific confidence.
+  Empty/missing/failed/over-limit model work is explicit, without lexical/remote fallback.
+- Keep authority and closure: grant read at start and revalidate before returning,
+  registration covers preparation/CPU/cleanup; fixed worker owns pidfd/reaping and hard
+  CPU/AS/wall/IPC limits. Reuse PDF process transport rather than cloning another loop.
+- Initial strategy: no persistent vector DB/global singleton; deterministic full-source
+  query in a bounded worker. Restart/failure rebuilds explicitly from canonical snapshot;
+  model identity remains in every response. A future scoped cache requires its own
+  identity/coverage tests. This avoids silently inheriting old Chroma collections.
+- Validate a bounded model probe first; then HTTP/MCP and cancellation/failure tests,
+  package and one final full regression. Old roles/flows/formats and all other full-plan
+  requirements remain active; passing a retrieval fixture does not retire PDFSearch yet.
+
+## Semantic implementation and directed evidence — baseb650c5d
+
+- Pure constructor/status do no model I/O. Explicit bootstrap prepare-retrieval downloads
+  only pinned public files (token=False, fixed endpoint/revision); runtime regular FDs
+  reject missing/changed/symlink/growing assets. Query worker rechecks the actual bytes
+  loaded, closing the inode-change race. Existing unknown directories never overwritten.
+- Promoted already-installed onnxruntime/tokenizers/huggingface-hub to direct locked
+  dependencies; uv lock/sync/export offline pass with no package-version upgrades.
+- Factored existing PDF IPC into worker_transport.exchange and worker_limits bootstrap.
+  PDF retains its parser-specific receipt and bounds; prior launch-failure fixture now
+  patches the moved process boundary. Existing CPU/memory/output/death/Stop tests pass.
+- Added SemanticRetriever with one application capacity slot, whole-query deadline,
+  fixed CPU worker, complete-chunk coverage checks, exact excerpts/offsets, page mapping,
+  model/encoder/chunk identity, local vector/batch/CPU/RSS counters. No vector DB/cache
+  reused or written; missing/busy/over-limit work is explicit, with no fallback.
+- Real local probe: pinned multilingual model selected relevant passage for Spanish/
+  English paraphrases;0.85s/562628KiB once. Not a benchmark. Full retained native-facade
+  proof later used38chunks/39vectors,3.23s HTTP,736316KiB child peak and2.90CPU seconds:
+  actual PDF tail beyond12000chars -> Spanish query -> pages1/2 -> exact quote read ->
+  provisional finding -> fixed draft report, task in_progress. No LLM synthesis/turn
+  or subscription/embedding API call. Artifact semantic-product-evidence.json.
+- New HTTP source-query tool available in the actual13-tool catalog. Source list states
+  not_configured vs verification_required without pretending a path is ready. Permission
+  and source content/hash are revalidated after CPU work. SourceQuery is a read capability.
+  Native instructions distinguish retriever coverage from agent reading/understanding,
+  similarity from confidence and literal search from semantic retrieval.
+- Observed real REDs: endpoint/setup absent;4disabled limits;invalid null/list receipts;
+  PDF page lookup used start_offset instead of actual text_start_offset; cancellation
+  PermissionError was masked by the asset OSError wrapper;ever-growing asset read.
+  Corrected each cause and verified GREEN. Initial HTTP fixture omitted capture intent
+  and was corrected before treating route404 as behavior RED. No product API was bent
+  to satisfy that setup mistake. Bad-byte/unavailable results never become empty success.
+- Source269 combined directed cases plus2final asset invariants pass; current isolated
+  wheel271pass,333backend imports exclusively inside wheel; all current Python/SQL
+  sources match. Verifier initially compared a deduplicated dict with a list containing
+  duplicate parser paths: inspected archive differences (none), deduplicated the verifier
+  and reused the same wheel, without rebuilding/restarting a live test on timeout.
+- All relevant new modules/classes/methods have semantic docstrings, scoped AST check
+  passes. No UI source changed:4pilots/0fullyaccepted unchanged; no imagegen/LLM rerun.
+- Global regression live on exec93132, semantic-global.log/xml/exit; source frozen after
+  package. Reuse that exact handle if interrupted. Full plan, legacy consumers/roles/
+  flows/formats, representative retrieval/human/prompt evals, actor/global budgets,
+  other8routes and all acceptance, restore/migrations/Git/CI/CLI/TUI/dependencies,
+  100baseline failures and final fresh whole-branch review all remain in scope.
+- FINAL global exec93132 terminal1:1714total1611pass100EXACTbaselinefailures3skip,
+  636runtimepass,27warnings,265.13s.26 new cases pass. All606Python/SQL backend files
+  and30selected hashes still match the built wheel; locked versions unchanged. No new
+  source change after package proof and no repeated global run for docs. Finalizer binds
+  source/wheel/JUnit/lock and retained product proof in semantic-results.json.
+- Raw metadata/model preparation/probe logs remain in scratch; 127.5MB public assets
+  are NOT committed. Models were downloaded once explicitly, verified and used offline.
+  Tests used the explicit prepared asset fixture; no silent asset-dependent skip in the
+  recorded final run. No live worker/server/test process retained by this delivery.
+- Timing: asset preparation completed22:26:29UTC; first model probe22:31:04;
+  HTTP RED22:34:01; package proof22:58:54 (56.21s after verifier-only dedup fix);
+  final full suite completed23:10:06 (265.13s). The package was not rebuilt for that verifier mistake. About
+  50minutes elapsed to current checkpoint; most cost was implementation/fault review,
+  not paid generation or a blocked process. These are local observations, not a forecast.
+
+## Next brief: remaining document formats and legacy consumer cutover
+
+- Outcome: DOCX/CSV/JSON/XML references become bounded canonical source text with binary
+  identity and recoverable structure/provenance, usable by existing literal/semantic
+  retrieval and exact findings/reports. Do not add a second inference/retrieval engine.
+- Inspect each old format tool and current MIME handling/consumers before choosing the
+  extraction contract. Preserve useful table/field/paragraph context, reject expansion,
+  entity/ZIP/depth/size hazards explicitly, and retain late counterevidence. Reuse shared
+  worker transport/limits, source persistence and the native business facade.
+- Then migrate legacy role/flow/reviewer consumers to the implemented capabilities and
+  retire old RAG/remote embedding paths with behavioral replacements. Semantic backend
+  success alone does not retire global role catalogs. CLI/TUI/Git/CI/engine/autonomy/
+  communication/prompts/evals/books, remaining8UI routes/all12acceptance, restore/data/
+  dependencies/100baseline failures and final fresh whole-branch review remain active.

@@ -32,6 +32,7 @@ from backend.research.models import (
     SourceTooLarge,
     SourceUnavailable,
 )
+from backend.research.retrieval_assets import RetrievalBusy, RetrievalUnavailable
 
 router = APIRouter(prefix="/api/research-tools", tags=["research-tools"])
 
@@ -52,6 +53,8 @@ async def ask_user(command: AskUser, ctx: Context, request: Request):
 def install_research_errors(app: FastAPI):
     """Map scoped domain failures to explicit HTTP errors without retrying effects."""
     for error, status, code in [
+        (RetrievalUnavailable, 503, "retrieval_unavailable"),
+        (RetrievalBusy, 429, "retrieval_busy"),
         (ResearchForbidden, 403, "scope_forbidden"),
         (ResearchNotFound, 404, "research_not_found"),
         (OperationConflict, 409, "operation_conflict"),
@@ -120,12 +123,19 @@ def capture_paper(command: CapturePaper, ctx: Context):
 
 @router.get("/sources")
 def sources(
-    ctx: Context, after_id: int = Query(0, ge=0), limit: int = Query(50, ge=1, le=100)
+    ctx: Context,
+    request: Request,
+    after_id: int = Query(0, ge=0),
+    limit: int = Query(50, ge=1, le=100),
 ):
     """Page saved source metadata inside the credential-bound project."""
     result = ctx.store.list_sources(ctx.scope, after_id=after_id, limit=limit)
     return {
         "sources": result,
+        "retrieval": {
+            "literal": {"method": "exact_text"},
+            "semantic": request.app.state.retrieval.status(),
+        },
         "next_after_id": result[-1]["id"] if len(result) == limit else None,
     }
 
@@ -184,6 +194,32 @@ def source_search(
         "next_offset": position if position >= 0 else None,
         "search_kind": "exact_text",
     }
+
+
+@router.get("/sources/{source_id}/query")
+def source_query(
+    source_id: int,
+    ctx: Context,
+    request: Request,
+    query: str = Query(min_length=1, max_length=1000),
+    limit: int = Query(5, ge=1, le=20),
+    after_rank: int = Query(0, ge=0, le=2048),
+):
+    """Rank every source chunk with local embeddings, revalidating authority before disclosure."""
+    source = ctx.store.read_source(ctx.scope, source_id)
+    with request.app.state.live_grants.operation(ctx.scope.grant_id) as cancelled:
+        result = request.app.state.retrieval.query(
+            source, query, limit=limit, after_rank=after_rank, cancelled=cancelled
+        )
+        current = ctx.store.read_source(ctx.scope, source_id)
+        if (
+            current["sha256"] != source["sha256"]
+            or current["content"] != source["content"]
+        ):
+            raise RetrievalUnavailable("Saved source changed during semantic retrieval")
+        if cancelled.is_set():
+            raise ResearchForbidden("Semantic query authority was withdrawn")
+        return result
 
 
 @router.post("/findings", response_model=FindingReceipt)

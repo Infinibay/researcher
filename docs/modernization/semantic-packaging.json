@@ -1,0 +1,50 @@
+{
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "be6885b148425d40a989077cfe106d5888ac257a4c9503f57ec3de2cca37ee8f",
+  "source_comparisons": {
+    "backend/research/semantic.py": "c54ee6a140830926161b2ca22a17a268d8ef3a76f6b96d85a85c620b9c9d2399",
+    "backend/research/semantic_worker.py": "84fb3bde2e2cf33200637a539a807f5a38e907a64511aca29d205d98f288e412",
+    "backend/research/retrieval_assets.py": "b471a1166b58b80e31f54c215749bed294cb3805bf9ebd4a72e5087298462c79",
+    "backend/research/worker_transport.py": "f8ec45d7cb2cf12d2dec30049b34c9025ebbf86fafd9a43f9a2bac526c673083",
+    "backend/research/worker_limits.py": "7c633a5ba1db3b45948330ad4e85c0993f05b760587cc249261ce3810b83cb0d",
+    "backend/research/parser_process.py": "a766fda55a471ccd40057b1cfac5a39f08d4f4782fb22481ca4838e4e4cf8aea",
+    "backend/research/parser_worker.py": "0fa6051db57b8a48355f561a935c8619c4b3f9aa13a6798233f527be4004eb3c",
+    "backend/cli/bootstrap.py": "91b7f4e12e2ac76bd901bde52cfd5ec3955dd7ace5252cca1ca8a3e40fbcb2ff",
+    "backend/api/main.py": "2607d368a4a5ab52b51fed4dc91a98ff6e196ac79f8a25f5b9e64fbf4f9cf855",
+    "backend/config/settings.py": "e78ec9ccc31abc896183938aab79c757626baed3972559f6365ede710bfe7949",
+    "backend/tests/research/test_semantic_retrieval.py": "df872b28da527c589eefd6ed2ed2ebd8c4374bf11b8804742e240c52be5f3df4",
+    "backend/tests/research/test_semantic_worker.py": "6db75bc7096c5bf036032a3e29f8064a6685c8b68ed3bbb9d5e33fa84f50ca0b",
+    "backend/tests/research/test_retrieval_assets.py": "59fe688929f0ead158e7c55ead0094ae4019d120e69de1afb377b0ab7dd98476",
+    "backend/research/papers.py": "6f3cb7134bfda309c591537e6173e0d33a46154fe59a862a084d333d84cb90ca",
+    "backend/research/service.py": "9fa7b4a77edb69b13796d7238bddce39366d5fe2613fd0ef5e7bb187da19932d",
+    "backend/api/models/research.py": "5f30cad2ea070dc9abcf54c95509e6b1b43713968d4428a5ea5a15d926cd41f8",
+    "backend/api/routes/research.py": "79afc94fa85384d427bcb13097f0669b4a66bd73ee445a901c05971607c01a41",
+    "backend/runtime/business_definitions.py": "8f4bebd69a7ee5360471e88a6f19be4afb69a1f61d9678ab66c96a298b1ef6b9",
+    "backend/runtime/business_mediation.py": "58aff129d49e7614031f004228e1bb468d5fb34bc617edf2803da7526dc1f1b9",
+    "backend/runtime/native_inference.py": "332b0833b6d84f4f5f4af4d1c0b0f00c09582dd5ec5974f61be69782bea3eaff",
+    "backend/tests/research/test_paper_capture.py": "7f128f1cfa44be78aac4395098ee1e6e153eef9935da6a51aef0d23e7352a3d7",
+    "backend/tests/runtime/test_host_business.py": "6410ea1c708d3233a0f058da68faad9d9460ef9be245b976c14fd06709b53b9c",
+    "backend/tests/runtime/test_native_factory.py": "ec47ae6b02e92ad89ac508a7c0413541f3457dd78121def175de151d5f9cb4c0",
+    "backend/api/routes/files.py": "5c79d6c884644e70c7637735bf7cbae7bd5f2de46fd3189ac0c91da01307912a",
+    "backend/api/models/file.py": "21b92ef10b2427aff3f7e16ef94a037012c8804bf50ad463506401f3e77ab2eb",
+    "backend/api/request_limits.py": "00008d5f7984e56c5a4501a907ee7561cce63f32addafe4a7c9c110596755735",
+    "backend/research/acquisition.py": "f59f82e4ed3f2ad0db72dcd7b316f8ec5367ecda3e97a0e38057364041d0fca0",
+    "backend/research/reference_storage.py": "c8eba0cf9040f0748a3a8715a35aaf69d7f3f3a24daea4c2ca9dd8568c67c580",
+    "backend/research/pdf_text.py": "1810f7b7e73610e7fa72aef31255a883bc2a875c65e0dde2b86e007b58443a0a",
+    "backend/tests/api/test_reference_files.py": "116f23424f7abdb6dbaaef07caa566e6616036ed0b8ca74687f2fa3da5941d1b"
+  },
+  "observed": {
+    "directed_tests_passed": 271,
+    "backend_modules_loaded": 333,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "embedding_fixture": "explicit pinned public local weights outside wheel; real offline ONNX workers",
+    "network": "disabled; Unix sockets allowed"
+  },
+  "prepared_model_asset_root_is_external_to_wheel": true,
+  "backend_tree": {
+    "matching_source_files": 606,
+    "sha256": "348d8d482c8b6d82b9fd89ccdb83df37b0f5306f1c0d9681b6e0f03cc7be5f7c"
+  },
+  "limits": "Backend wheel plus explicit installed dependencies; frontend separately built/run from repository. Not a clean full product installation or real model generation proof."
+}

@@ -68,3 +68,18 @@ El segundo todavía depende del embedding remoto anterior y NO se ha presentado 
 búsqueda literal como reemplazo semántico. La retirada del proveedor/roles antiguos
 requiere completar la recuperación documental y migrar sus consumidores.
 [Contrato, consumers y límites](paper-capture.md).
+
+
+## Encoder semántico local explícito
+
+`researcher_source_query` procesa fuentes canónicas en un worker CPU offline, con
+pesos/tokenizer fijados y sin proveedor remoto. La preparación es un comando de
+bootstrap separado; importar/servir/listar no carga ni descarga el modelo. Se miden
+vectores/batches locales y CPU/RSS del hijo, sin equipararlos a tokens LLM o facturación.
+Es trabajo de embeddings real, aunque no genere texto ni use una API externa.
+
+PDF y semántica comparten transporte/límites/proceso con propietario. Por aplicación
+hay una plaza semántica; saturación/fallo/modelo ausente son explícitos. El presupuesto
+global de todos los actores y su inscripción completa en cgroups/journal todavía
+requiere integración: los límites por worker no prueban ese cierre.
+[Contrato](semantic-source-retrieval.md), [ensayo retenido](../modernization/semantic-product-evidence.json).

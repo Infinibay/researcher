@@ -640,6 +640,7 @@ huggingface-hub==1.33.0 \
     --hash=sha256:367be21a201db9523eddf8aeac7048f2602c1b308691c97640d5e72ed188007e
     # via
     #   litellm
+    #   researcher
     #   tokenizers
 hyperframe==6.1.0 \
     --hash=sha256:b03380493a519fce58ea5af42e4a42317bf9bd425596f7a0835ffce80f1a42e5 \
@@ -1038,7 +1039,9 @@ onnxruntime==1.31.1 \
     --hash=sha256:dcaedc50333876f3829ab966b242147f0e548229e29c36fe44622ecf748c25ee \
     --hash=sha256:e4ad067d36e2220218e085d7223283b2ee1bc73d887e811fd14d21cf901a11ee \
     --hash=sha256:fe8b9ac1ae8e894e12c47ee82e4f6dfc1835768133687257866469fda80d0bf1
-    # via chromadb
+    # via
+    #   chromadb
+    #   researcher
 openai==2.54.0 \
     --hash=sha256:89089789197ccdb87f173a03145ed1598d00795220c93e96cf712b1cbf5e5f2b \
     --hash=sha256:e3e6f8bc1ba30ddf381ace1a14340eed381cb984a1a59bd0f34b5be3b5d49cfa
@@ -1797,6 +1800,7 @@ tokenizers==0.23.3 \
     #   chromadb
     #   crewai
     #   litellm
+    #   researcher
 tomli==2.0.2 \
     --hash=sha256:2ebe24485c53d303f690b0ec092806a085f07af5a5aa1464f3931eec36caaa38 \
     --hash=sha256:d46d457a85337051c36524bc5349dd91b1877838e2979ac5ced3e710ed8a60ed

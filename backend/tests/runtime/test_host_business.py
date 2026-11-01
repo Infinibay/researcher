@@ -123,6 +123,7 @@ async def test_business_wire_schema_is_compact_but_keeps_real_title_field():
         "application/pdf-url",
         "application/pdf-paper-arxiv",
         "application/pdf-paper-doi",
+        "application/pdf-semantic",
     ],
 )
 async def test_host_business_uses_real_api_scope_and_persists_one_report(
@@ -171,6 +172,7 @@ async def test_host_business_uses_real_api_scope_and_persists_one_report(
         "application/pdf-url",
         "application/pdf-paper-arxiv",
         "application/pdf-paper-doi",
+        "application/pdf-semantic",
     ):
         from backend.api import research_dependencies
         from backend.tests.research.test_pdf_web import pdf_response
@@ -193,6 +195,11 @@ async def test_host_business_uses_real_api_scope_and_persists_one_report(
                 else {"doi": "10.1000/policy"}
             )
     app = create_app()
+    if media_type == "application/pdf-semantic":
+        from backend.research.semantic import SemanticRetriever
+        from backend.tests.research.test_semantic_retrieval import assets
+
+        app.state.retrieval = SemanticRetriever(assets())
     token = c.research.issue_grant(
         project_id=101, task_id=1001, agent_id="fixture", permissions=set(PERMISSIONS)
     )
@@ -231,6 +238,20 @@ async def test_host_business_uses_real_api_scope_and_persists_one_report(
             source_id=captured["source_id"],
             needle="Tax rates",
         )
+        if media_type == "application/pdf-semantic":
+            ranked = await call(
+                "researcher_source_query",
+                source_id=captured["source_id"],
+                query="¿Cómo se expresan las tasas de impuestos?",
+                limit=1,
+            )
+            assert ranked["search_kind"] == "semantic_cosine"
+            assert (
+                ranked["full_coverage"] is True
+                and ranked["execution"]["worker_closed"] is True
+            )
+            assert ranked["matches"][0]["page_numbers"] == [1]
+            assert "Tax rates are fractions." in ranked["matches"][0]["excerpt"]
         assert matches["search_kind"] == "exact_text"
         assert "Tax rates are fractions." in matches["matches"][0]["excerpt"]
         source.unlink()

@@ -118,6 +118,10 @@ def create_app(*, access: LocalAccess | None = None, runtime_service=None) -> Fa
         runtime_service.live_grants if runtime_service is not None else LiveGrants()
     )
     app.state.runtime_service = runtime_service
+    from backend.config.settings import settings
+    from backend.research.semantic import SemanticRetriever
+
+    app.state.retrieval = SemanticRetriever(settings.RETRIEVAL_ASSET_DIR)
 
     from backend.api.request_limits import ToolRequestLimits
 

@@ -116,6 +116,7 @@ class Settings(BaseSettings):
     EMBEDDING_PROVIDER: str = ""  # empty = auto-derive from LLM_MODEL
     EMBEDDING_MODEL: str = ""     # empty = auto-derive from provider
     EMBEDDING_BASE_URL: str | None = None  # Override for Ollama/local
+    RETRIEVAL_ASSET_DIR: str | None = None  # Explicit pinned local assets; never auto-download
     KNOWLEDGE_CHUNK_SIZE: int = 1000  # Characters per chunk
     KNOWLEDGE_CHUNK_OVERLAP: int = 200  # Overlap between chunks
 

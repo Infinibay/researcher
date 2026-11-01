@@ -419,7 +419,15 @@
         "docs/modernization/files-packaging.json",
         "docs/design/audits/2026-11-01-files/report.md",
         "frontend/tests/files-design.test.ts",
-        "backend/tests/api/test_reference_files.py"
+        "backend/tests/api/test_reference_files.py",
+        "docs/architecture/semantic-source-retrieval.md",
+        "docs/architecture/semantic-tool-schema.json",
+        "docs/modernization/semantic-results.json",
+        "docs/modernization/semantic-packaging.json",
+        "docs/modernization/semantic-product-evidence.json",
+        "backend/tests/research/test_semantic_retrieval.py",
+        "backend/tests/research/test_semantic_worker.py",
+        "backend/tests/research/test_retrieval_assets.py"
       ],
       "remaining": [
         "Durable product startup/shutdown and all tool lifecycle integration; old flows are not covered by owned command evidence",
@@ -618,7 +626,15 @@
         "docs/architecture/paper-tool-schema.json",
         "docs/modernization/paper-results.json",
         "docs/modernization/paper-packaging.json",
-        "backend/tests/research/test_paper_capture.py"
+        "backend/tests/research/test_paper_capture.py",
+        "docs/architecture/semantic-source-retrieval.md",
+        "docs/architecture/semantic-tool-schema.json",
+        "docs/modernization/semantic-results.json",
+        "docs/modernization/semantic-packaging.json",
+        "docs/modernization/semantic-product-evidence.json",
+        "backend/tests/research/test_semantic_retrieval.py",
+        "backend/tests/research/test_semantic_worker.py",
+        "backend/tests/research/test_retrieval_assets.py"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -650,7 +666,15 @@
         "docs/architecture/paper-tool-schema.json",
         "docs/modernization/paper-results.json",
         "docs/modernization/paper-packaging.json",
-        "backend/tests/research/test_paper_capture.py"
+        "backend/tests/research/test_paper_capture.py",
+        "docs/architecture/semantic-source-retrieval.md",
+        "docs/architecture/semantic-tool-schema.json",
+        "docs/modernization/semantic-results.json",
+        "docs/modernization/semantic-packaging.json",
+        "docs/modernization/semantic-product-evidence.json",
+        "backend/tests/research/test_semantic_retrieval.py",
+        "backend/tests/research/test_semantic_worker.py",
+        "backend/tests/research/test_retrieval_assets.py"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -697,7 +721,15 @@
         "docs/architecture/paper-tool-schema.json",
         "docs/modernization/paper-results.json",
         "docs/modernization/paper-packaging.json",
-        "backend/tests/research/test_paper_capture.py"
+        "backend/tests/research/test_paper_capture.py",
+        "docs/architecture/semantic-source-retrieval.md",
+        "docs/architecture/semantic-tool-schema.json",
+        "docs/modernization/semantic-results.json",
+        "docs/modernization/semantic-packaging.json",
+        "docs/modernization/semantic-product-evidence.json",
+        "backend/tests/research/test_semantic_retrieval.py",
+        "backend/tests/research/test_semantic_worker.py",
+        "backend/tests/research/test_retrieval_assets.py"
       ]
     },
     "E10": {

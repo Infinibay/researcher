@@ -9,7 +9,7 @@ Motivos del ajuste: [diagnóstico del proceso](workflow-review.md).
 - Hay un primer recorrido de investigación con Codex, suscripción, Ken, análisis y reporte persistido. La prueba real de entrada de producto terminó; su monitor falló y se recuperó evidencia durable sin repetir inferencia. No se recuperaron las métricas de memoria perdidas.
 - Las 43 entradas de escenarios siguen abiertas en `coverage.json`: 33 en progreso y 10 pendientes. Son escenarios amplios; esto no significa que sus componentes no funcionen.
 - Interfaz: 4 pilotos, 12/36 conceptos de escritorio y 4/12 móviles; 0/12 páginas con aceptación completa.
-- Última suite registrada: 1585 aprobadas, 100 fallos heredados y 3 omitidas. Falta resolver o retirar con justificación los casos del sistema reemplazado.
+- Última suite registrada: 1611 aprobadas, 100 fallos heredados y 3 omitidas. Falta resolver o retirar con justificación los casos del sistema reemplazado.
 - No hay porcentaje global defendible todavía. El 30% anterior era una impresión, no una medición de alcance ponderado.
 
 ## Última entrega verificada: arranque del recorrido existente
@@ -63,9 +63,20 @@ pasan desde fuente/wheel;31 casos nuevos. Suite1688:1585 aprobadas,los100 fallos
 heredados exactos y3 omitidas. [Contrato y consumidores](../architecture/paper-capture.md),
 [resultados](paper-results.json), [paquete](paper-packaging.json).
 
+**Recuperación semántica implementada en el backend nativo:** `researcher_source_query`
+usa un modelo multilingüe local preparado explícitamente. Devuelve pasajes exactos,
+modelo/hash/páginas y cobertura computacional. Límite CPU/AS/plazo/IPC, una plaza por
+aplicación, cancelación/reap y revalidación de permisos.271 comprobaciones dirigidas
+desde fuente/wheel. Suite1714:1611 aprobadas,los100 fallos heredados exactos y3
+omitidas;26 casos nuevos. Ensayo real de la fachada sobre contraevidencia al final del PDF,
+con informe draft y tarea aún en progreso. No es una evaluación de comprensión LLM.
+[Contrato](../architecture/semantic-source-retrieval.md), [ensayo](semantic-product-evidence.json),
+[resultados](semantic-results.json), [paquete](semantic-packaging.json).
+
 **Siguiente acción:** migrar consumidores heredados de documentos/PDF sobre el
 contrato de captura existente, con sus prompts y errores. El soporte de localizadores `read_paper` ya está portado
-al catálogo nativo; siguen pendientes roles/flows y recuperación semántica de PDF. Después DOCX/recuperación
+al catálogo nativo; la recuperación semántica local también existe ya. Siguen pendientes roles/flows,
+otros formatos y evaluación representativa. Después DOCX/recuperación
 CSV/JSON/XML, web/wiki y revisión científica. No añadir otra fábrica de inferencia
 ni retirar `read_paper/pdf_search` sin revisar sus consumidores y pruebas.
 

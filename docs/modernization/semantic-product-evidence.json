@@ -1,0 +1,107 @@
+{
+  "scope": "synthetic native facade -> real HTTP/SQLite/PDF parser -> real offline embeddings -> exact quote -> fixed draft report",
+  "query": "¿El tratamiento produjo mejoras en los síntomas?",
+  "retrieval": {
+    "source_id": 1,
+    "sha256": "0bbf50c3f3f647f6b9f60f1c4885e95ed0783f18a94e28f4476b317e14e597e4",
+    "query": "¿El tratamiento produjo mejoras en los síntomas?",
+    "search_kind": "semantic_cosine",
+    "model": {
+      "id": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+      "dimension": 384,
+      "max_tokens": 128,
+      "license": "Apache-2.0",
+      "artifacts": {
+        "model.onnx": {
+          "bytes": 118453870,
+          "sha256": "98a01d88b7de996cdea58c32ca71208c09968d143798814b2ea09d3439dc334f"
+        },
+        "tokenizer.json": {
+          "bytes": 9081518,
+          "sha256": "2c3387be76557bd40970cec13153b3bbf80407865484b209e655e5e4729076b8"
+        }
+      },
+      "fingerprint": "7435645f6c1421f5cba914aae07054ba47c3f7796ad71e9fee748b28303d9241",
+      "encoder_policy": "masked-mean-l2-v1",
+      "onnxruntime": "1.31.1",
+      "provider": "CPUExecutionProvider"
+    },
+    "chunk_policy": {
+      "version": "chars1200-tokens96-overlap96-v1",
+      "max_chars": 1200,
+      "max_model_tokens": 128,
+      "truncation": false,
+      "cache": "none; rebuild each query"
+    },
+    "usage": {
+      "query_tokens": 13,
+      "local_embedding_batches": 6,
+      "local_embedded_vectors": 39
+    },
+    "total_chunks": 38,
+    "considered_chunks": 38,
+    "full_coverage": true,
+    "matches": [
+      {
+        "rank": 0,
+        "start_offset": 16825,
+        "end_offset": 17227,
+        "excerpt": "he museum collection includes paintings and sculptures.\nThe museum collection includes paintings and sculptures.\nThe museum collection includes paintings and sculptures.\nThe museum collection includes paintings and sculptures.\nThe museum collection includes paintings and sculptures.\n\n[Page 2]\nThe controlled trial found no improvement in patient symptoms with the new medication compared with placebo.",
+        "score": 0.41761390417300176,
+        "page_numbers": [
+          1,
+          2
+        ]
+      },
+      {
+        "rank": 1,
+        "start_offset": 1325,
+        "end_offset": 1873,
+        "excerpt": "useum collection includes paintings and sculptures.\nThe museum collection includes paintings and sculptures.\nThe museum collection includes paintings and sculptures.\nThe museum collection includes paintings and sculptures.\nThe museum collection includes paintings and sculptures.\nThe museum collection includes paintings and sculptures.\nThe museum collection includes paintings and sculptures.\nThe museum collection includes paintings and sculptures.\nThe museum collection includes paintings and sculptures.\nThe museum collection includes paintings",
+        "score": -0.006329192580042547,
+        "page_numbers": [
+          1
+        ]
+      },
+      {
+        "rank": 2,
+        "start_offset": 16369,
+        "end_offset": 16921,
+        "excerpt": "he museum collection includes paintings and sculptures.\nThe museum collection includes paintings and sculptures.\nThe museum collection includes paintings and sculptures.\nThe museum collection includes paintings and sculptures.\nThe museum collection includes paintings and sculptures.\nThe museum collection includes paintings and sculptures.\nThe museum collection includes paintings and sculptures.\nThe museum collection includes paintings and sculptures.\nThe museum collection includes paintings and sculptures.\nThe museum collection includes paintings",
+        "score": -0.051338500703681865,
+        "page_numbers": [
+          1
+        ]
+      }
+    ],
+    "next_rank": 3,
+    "execution": {
+      "peak_rss_kib": 736316,
+      "cpu_used_seconds": 2.8976679999999995,
+      "cpu_limit_seconds": 15,
+      "cpu_hard_limit_seconds": 16,
+      "address_space_limit_bytes": 2147483648,
+      "worker_closed": true,
+      "wall_limit_seconds": 30
+    }
+  },
+  "source_hash_matches_saved_text": true,
+  "binary_hash": "f17822e0deed610eb61b83302aba0f528dd99c735e6dcae7a0152c16ed1a6b1d",
+  "decisive_quote_offset": 17119,
+  "tail_beyond_initial_12000_char_window": true,
+  "selected_pdf_pages": [
+    1,
+    2
+  ],
+  "recovered_window_contains_quote": true,
+  "finding_status": "provisional",
+  "report_status": "draft",
+  "task_status": "in_progress",
+  "llm_turns": 0,
+  "llm_synthesis": "not exercised; report content is a fixed fixture",
+  "openai_subscription_calls": 0,
+  "external_embedding_api_calls": 0,
+  "assets_downloaded_during_request": false,
+  "limits": "One fixture is not a relevance benchmark, scientific validation, full actor/cgroup enrollment or human comprehension test."
+}

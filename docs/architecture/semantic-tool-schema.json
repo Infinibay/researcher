@@ -1,0 +1,47 @@
+{
+  "tool": "researcher_source_query",
+  "description": "Semantic paraphrase search inside one saved source using an explicitly prepared offline multilingual model. Returns exact excerpts/offsets, source hash, PDF page numbers and model/chunk identity after considering the complete bounded source. Scores are cosine similarity, not evidence quality or confidence. Follow next_rank using after_rank; no result proves scientific validity. Missing assets/busy/over-limit work fail explicitly; no remote embedding or lexical fallback is used. Literal researcher_source_search remains available separately.",
+  "input_schema": {
+    "additionalProperties": false,
+    "properties": {
+      "source_id": {
+        "type": "integer"
+      },
+      "query": {
+        "type": "string"
+      },
+      "limit": {
+        "default": 5,
+        "type": "integer"
+      },
+      "after_rank": {
+        "default": 0,
+        "type": "integer"
+      }
+    },
+    "required": [
+      "source_id",
+      "query"
+    ],
+    "type": "object"
+  },
+  "annotations": {
+    "readOnlyHint": true,
+    "destructiveHint": false
+  },
+  "business_catalog_names": [
+    "researcher_ask_user",
+    "researcher_capture_paper",
+    "researcher_capture_reference",
+    "researcher_capture_web",
+    "researcher_finding_read",
+    "researcher_finding_record",
+    "researcher_reference_list",
+    "researcher_report_read",
+    "researcher_report_write",
+    "researcher_source_list",
+    "researcher_source_query",
+    "researcher_source_read",
+    "researcher_source_search"
+  ]
+}

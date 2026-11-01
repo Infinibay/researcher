@@ -388,3 +388,23 @@ Verificación actual:245 casos dirigidos desde fuente/wheel;31 casos nuevos. Sui
 Los roles CrewAI, flows y recuperación semántica de `pdf_search` aún requieren migración.
 El nuevo buscador literal no se declara equivalente a embeddings. No hay cambios de UI
 ni más páginas aceptadas en esta ampliación:4 pilotos y0/12 aceptadas completamente.
+
+
+## Última ampliación: recuperación semántica local
+
+`researcher_source_query` recupera paráfrasis con un modelo multilingüe fijado, completo
+por chunks y con pasajes/offsets/páginas exactos. Preparación explícita, worker limitado,
+cancelación/reap y permisos revalidados; no utiliza el backend remoto de embeddings.
+En el ensayo nativo de PDF recuperó contraevidencia más allá de los12.000 caracteres,
+guardó un finding provisional y un draft de texto fijo; la tarea sigue in_progress.
+No es una evaluación de comprensión/síntesis LLM ni de validez científica.
+
+Verificación actual:271 pruebas dirigidas desde fuente/wheel;26 casos nuevos. Suite1714:
+1611 aprobadas,100 fallos heredados exactos,3 omitidas.606 fuentes Python/SQL coinciden
+con el paquete. [Contrato y límites](../architecture/semantic-source-retrieval.md),
+[resultados](semantic-results.json), [ensayo](semantic-product-evidence.json),
+[paquete](semantic-packaging.json). Se promovieron tres dependencias ya instaladas sin
+cambiar sus versiones. Interfaz sin cambios:4 pilotos,0/12 aceptadas completamente.
+
+Siguen pendientes formatos/roles/flows/consumidores heredados, evaluación representativa,
+inscripción de todos los actores/presupuestos globales y el resto del plan completo.
