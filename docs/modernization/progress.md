@@ -1169,3 +1169,159 @@ accepted pages; produce30 desktop+10 mobile, implement10 other routes/shared con
 and verify all12 pages with browser/mobile/keyboard/accessibility/human acceptance.
 Final fresh whole-branch review remains required. Model is host-global JSON/restart,
 not per-agent/project or web-selected. No push, merge or deployment. Keep goal active.
+
+
+## Owner command inspection — base b243ce3
+
+- The preceding goal turn made implementation progress (b243ce3). This turn adds
+  the actual owner reader rather than another status-only continuation. Full scope
+  remains the original modernization plan.
+- OwnerRuntimeView now provides paginated job metadata and bounded stdout/stderr
+  windows, scoped jointly by project/run/job. New GET routes require owner session,
+  reject agent bearer access and return no-store. Reads work after Stop/lease loss,
+  unknown result and with the runtime unconfigured; no control or replay is exposed.
+- SQL reads only BLOB substr windows, not full output. Shared command_output encoding
+  preserves model reader compatibility, base64 bytes and lossy UTF-8 flags. Focused
+  investigation proved substr(X'',1,8) is NULL in installed SQLite; COALESCE restores
+  legitimate empty windows. The large-output/unknown tests caught this actual failure.
+- Ruling: public sequence cursors are decimal strings. A RED case with rowid
+  9007199254740993 caught the original JSON-number design; IDs beyond JS safe integer
+  precision now paginate exactly. Server accepts bounded SQLite integer cursor strings;
+  frontend preserves them literally. This does not claim all legacy entity IDs in
+  the web app have undergone a general64-bit identity migration.
+- Fourteen owner HTTP cases cover binary/multibyte output, partial unknown receipts,
+  no authority revival,27-job pagination, scope/session/bearer separation, limits and
+  4MiB tail counterevidence. Initial negative scope/auth cases already passed through
+  existing middleware; positive reader cases were RED before routes existed. Explicit
+  path annotations now reject malformed IDs with422 instead of generic ValueError400.
+- RunCommands/CommandReceipt integrate into current and historical task work. Reads
+  are lazy; windows can go forward/back/to tail. Original args/base64 expand separately.
+  Capture loss, partial read, exit code, closure and acceptance remain distinct. Raw
+  HTML stays text; terminal/bidi controls are visible escapes. Changing scope resets
+  selection/offsets/placeholders. Same-job transitions label old bytes while loading;
+  closing the inspector stops its receipt polling. User selection can move focus;
+  polling never moves focus/scroll. Errors offer GET again, not command execution.
+- Final complete suite1241:1138 passed, identical100 baseline identities,3 skipped,
+  29 warnings; all313 runtime tests pass. Frontend28 passed plus TypeScript/Vite build.
+  Existing Browserslist/chunk-size warnings remain. All25 selected wheel sources
+  (24 runtime modules and owner route) equal current source bytes. No new migration.
+- Actual HTTP probe owner-command-inspection-352bc3ed uses a new copy of prior real
+  native trial7792402f and an owned local server with runtime unconfigured. Fourteen
+  requests of7-byte windows reconstruct all95 bytes. Recorded closure/exit0 survive;
+  anonymous/bearer401 and cross-project404 are real HTTP responses. Fingerprints of
+  nine tables in original/copy stay unchanged, no new inference/image call, source
+  fixture/user DB unchanged. The first probe f5109066 also passed before cursor types
+  changed; the final recheck verifies the changed wire contract, not a replay of work.
+- Fresh CUA inventory: apps=[],browsers=[], browser host unavailable. CLI discovery
+  found no Chromium/Chrome/Playwright on PATH or project dependency. No rendered,
+  keyboard/mobile/accessibility/human acceptance. Official Playwright browser-install
+  docs were consulted: https://playwright.dev/docs/browsers . Investigate an isolated
+  container test browser as fallback; unavailable CUA is not a reason to stop backend
+  work or call the complete modernization blocked.
+- Bound12 source/test/eval files and13 final/relevant logs; separate suite/HTTP/wheel/
+  QA reports preserve evidence limits. Source/log hashes verified before commit. All
+  observed test/build/probe handles terminal; no server intentionally left running.
+  Generated tsbuildinfo restored to its recorded version; instruction copies untouched.
+
+## Next brief after owner command inspection
+
+Keep the FULL modernization objective active. The read-only analysis facade, frozen
+input/continuity, owner receipt API/UI, source/context/chat/tasks pilots and all8
+concept assets exist; do not redo them. New job cursors are strings, not JS numbers.
+Owner read is independent of agent authority and copied proof does not grant control.
+Try an isolated Playwright/Chromium test tool using official installation docs to
+unblock actual UI captures/interaction checks; CUA host is unavailable and no test
+browser was detected, but no installation/launch was attempted this turn. Retain
+zero accepted routes until actual visual/interaction/accessibility/human criteria
+are met. Next backend priority is global workspace exclusion/ownership/capability
+policy before mutable development tools, plus production Stop/correction/unknown
+jobs and actual migration of retained consumers. All71 tools/11 categories and
+legacy engine/roles/flows/autonomy/coordination still need completion; exact Git
+candidate/base/head/context review/CI acceptance, typed edits and related-context
+invalidation, long-history checkpoints, external effects, lifecycle/deletion/budgets,
+backup/restore/bootstrap and subscription-only auxiliary inference remain. Full
+prompt/book-skill inventory/rewrite/held-out/human communication acceptance and
+100 baseline failures remain. Visual scope:6/36 desktop+2/12 mobile,2 pilots,0/12
+accepted pages; still produce30 desktop+10 mobile, implement10 other routes/shared
+controls and verify all12. Final fresh independent whole-branch review before
+integration. Model remains global host JSON/restart, with no per-agent/project/web
+selector. No push, merge or deployment. Do not mark goal complete/blocked while
+meaningful authorized work remains.
+
+
+## Owner command inspection — base b243ce3
+
+- The preceding goal turn made implementation progress (b243ce3). This turn adds
+  the actual owner reader rather than another status-only continuation. Full scope
+  remains the original modernization plan.
+- OwnerRuntimeView now provides paginated job metadata and bounded stdout/stderr
+  windows, scoped jointly by project/run/job. New GET routes require owner session,
+  reject agent bearer access and return no-store. Reads work after Stop/lease loss,
+  unknown result and with the runtime unconfigured; no control or replay is exposed.
+- SQL reads only BLOB substr windows, not full output. Shared command_output encoding
+  preserves model reader compatibility, base64 bytes and lossy UTF-8 flags. Focused
+  investigation proved substr(X'',1,8) is NULL in installed SQLite; COALESCE restores
+  legitimate empty windows. The large-output/unknown tests caught this actual failure.
+- Ruling: public sequence cursors are decimal strings. A RED case with rowid
+  9007199254740993 caught the original JSON-number design; IDs beyond JS safe integer
+  precision now paginate exactly. Server accepts bounded SQLite integer cursor strings;
+  frontend preserves them literally. This does not claim all legacy entity IDs in
+  the web app have undergone a general64-bit identity migration.
+- Fourteen owner HTTP cases cover binary/multibyte output, partial unknown receipts,
+  no authority revival,27-job pagination, scope/session/bearer separation, limits and
+  4MiB tail counterevidence. Initial negative scope/auth cases already passed through
+  existing middleware; positive reader cases were RED before routes existed. Explicit
+  path annotations now reject malformed IDs with422 instead of generic ValueError400.
+- RunCommands/CommandReceipt integrate into current and historical task work. Reads
+  are lazy; windows can go forward/back/to tail. Original args/base64 expand separately.
+  Capture loss, partial read, exit code, closure and acceptance remain distinct. Raw
+  HTML stays text; terminal/bidi controls are visible escapes. Changing scope resets
+  selection/offsets/placeholders. Same-job transitions label old bytes while loading;
+  closing the inspector stops its receipt polling. User selection can move focus;
+  polling never moves focus/scroll. Errors offer GET again, not command execution.
+- Final complete suite1241:1138 passed, identical100 baseline identities,3 skipped,
+  29 warnings; all313 runtime tests pass. Frontend28 passed plus TypeScript/Vite build.
+  Existing Browserslist/chunk-size warnings remain. All25 selected wheel sources
+  (24 runtime modules and owner route) equal current source bytes. No new migration.
+- Actual HTTP probe owner-command-inspection-352bc3ed uses a new copy of prior real
+  native trial7792402f and an owned local server with runtime unconfigured. Fourteen
+  requests of7-byte windows reconstruct all95 bytes. Recorded closure/exit0 survive;
+  anonymous/bearer401 and cross-project404 are real HTTP responses. Fingerprints of
+  nine tables in original/copy stay unchanged, no new inference/image call, source
+  fixture/user DB unchanged. The first probe f5109066 also passed before cursor types
+  changed; the final recheck verifies the changed wire contract, not a replay of work.
+- Fresh CUA inventory: apps=[],browsers=[], browser host unavailable. CLI discovery
+  found no Chromium/Chrome/Playwright on PATH or project dependency. No rendered,
+  keyboard/mobile/accessibility/human acceptance. Official Playwright browser-install
+  docs were consulted: https://playwright.dev/docs/browsers . Investigate an isolated
+  container test browser as fallback; unavailable CUA is not a reason to stop backend
+  work or call the complete modernization blocked.
+- Bound12 source/test/eval files and13 final/relevant logs; separate suite/HTTP/wheel/
+  QA reports preserve evidence limits. Source/log hashes verified before commit. All
+  observed test/build/probe handles terminal; no server intentionally left running.
+  Generated tsbuildinfo restored to its recorded version; instruction copies untouched.
+
+## Next brief after owner command inspection
+
+Keep the FULL modernization objective active. The read-only analysis facade, frozen
+input/continuity, owner receipt API/UI, source/context/chat/tasks pilots and all8
+concept assets exist; do not redo them. New job cursors are strings, not JS numbers.
+Owner read is independent of agent authority and copied proof does not grant control.
+Try an isolated Playwright/Chromium test tool using official installation docs to
+unblock actual UI captures/interaction checks; CUA host is unavailable and no test
+browser was detected, but no installation/launch was attempted this turn. Retain
+zero accepted routes until actual visual/interaction/accessibility/human criteria
+are met. Next backend priority is global workspace exclusion/ownership/capability
+policy before mutable development tools, plus production Stop/correction/unknown
+jobs and actual migration of retained consumers. All71 tools/11 categories and
+legacy engine/roles/flows/autonomy/coordination still need completion; exact Git
+candidate/base/head/context review/CI acceptance, typed edits and related-context
+invalidation, long-history checkpoints, external effects, lifecycle/deletion/budgets,
+backup/restore/bootstrap and subscription-only auxiliary inference remain. Full
+prompt/book-skill inventory/rewrite/held-out/human communication acceptance and
+100 baseline failures remain. Visual scope:6/36 desktop+2/12 mobile,2 pilots,0/12
+accepted pages; still produce30 desktop+10 mobile, implement10 other routes/shared
+controls and verify all12. Final fresh independent whole-branch review before
+integration. Model remains global host JSON/restart, with no per-agent/project/web
+selector. No push, merge or deployment. Do not mark goal complete/blocked while
+meaningful authorized work remains.

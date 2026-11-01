@@ -2,9 +2,9 @@
 
 import asyncio
 from dataclasses import asdict
-from typing import Literal
+from typing import Annotated, Literal
 
-from fastapi import APIRouter, FastAPI, HTTPException, Query, Request
+from fastapi import APIRouter, FastAPI, HTTPException, Path, Query, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
@@ -232,6 +232,46 @@ async def current_context(project_id: int, task_id: int, request: Request):
 @router.get("/{project_id}/runs/{run_id}/input")
 async def run_input(project_id: int, run_id: str, request: Request):
     data = await asyncio.to_thread(read_store(request).input_record, project_id, run_id)
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
+@router.get("/{project_id}/runs/{run_id}/jobs")
+async def command_list(
+    project_id: Annotated[int, Path(ge=1)],
+    run_id: Annotated[str, Path(min_length=1, max_length=128, pattern=r"\S")],
+    request: Request,
+    after_seq: int = Query(0, ge=0, le=9223372036854775807),
+    limit: int = Query(25, ge=1, le=100),
+):
+    data = await asyncio.to_thread(
+        owner_view(request).command_list,
+        project_id,
+        run_id,
+        after_seq=after_seq,
+        limit=limit,
+    )
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
+@router.get("/{project_id}/runs/{run_id}/jobs/{job_id}")
+async def command_output(
+    project_id: Annotated[int, Path(ge=1)],
+    run_id: Annotated[str, Path(min_length=1, max_length=128, pattern=r"\S")],
+    job_id: Annotated[str, Path(min_length=1, max_length=128, pattern=r"\S")],
+    request: Request,
+    stdout_offset: int = Query(0, ge=0, le=2147483647),
+    stderr_offset: int = Query(0, ge=0, le=2147483647),
+    max_bytes: int = Query(8192, ge=1, le=16384),
+):
+    data = await asyncio.to_thread(
+        owner_view(request).command_output,
+        project_id,
+        run_id,
+        job_id,
+        stdout_offset=stdout_offset,
+        stderr_offset=stderr_offset,
+        max_bytes=max_bytes,
+    )
     return JSONResponse(data, headers={"Cache-Control": "no-store"})
 
 

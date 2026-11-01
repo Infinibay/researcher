@@ -1,0 +1,57 @@
+{
+  "status": "passed",
+  "root": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/owner-command-inspection-352bc3ed",
+  "source_trial": "analysis-inference-7792402f",
+  "new_inference_turns": 0,
+  "image_calls": 0,
+  "window_reads": 14,
+  "stdout_bytes": 95,
+  "stdout_sha256": "ed73eb97a1a26036d90285a4a39264d0b2878d9bacdcf8d4592ddfc00ba90797",
+  "anonymous_and_bearer_status": 401,
+  "foreign_project_status": 404,
+  "runtime_configured": false,
+  "original_unchanged": true,
+  "copy_runtime_tables_unchanged": true,
+  "table_fingerprints": {
+    "runtime_runs": {
+      "rows": 1,
+      "sha256": "12293f813d1601799dbc1e1f8d3e97042d5fcb038f24676f3d98b87d93a56732"
+    },
+    "runtime_attempts": {
+      "rows": 1,
+      "sha256": "dc4e2d9ee7cfcea5ccdc08e0764b9e67e854e88bfa391f4fc167d5ccc9991c78"
+    },
+    "runtime_jobs": {
+      "rows": 1,
+      "sha256": "a0f6e60e7095549b46ff1d8171e8a29729474648d15e68832b53fd8d199d38bf"
+    },
+    "runtime_peers": {
+      "rows": 3,
+      "sha256": "ac7cbc12206b5e9e321f71cbf39c645295c50a6dce61f2fbecc947d1f48cdb12"
+    },
+    "runtime_inference_dispatches": {
+      "rows": 1,
+      "sha256": "247bedc4c2dea0b2b90808eef262757c9e954c77a41484e79160cba17544ce80"
+    },
+    "runtime_input_snapshots": {
+      "rows": 1,
+      "sha256": "0fd091771cf46698806e3c6c6d53007c1d146153ba20d4b30f56cee72d82cbeb"
+    },
+    "tool_grants": {
+      "rows": 1,
+      "sha256": "1dcb53e56dd941a070a34b1c0467cd9e148cb1238bd785c065d256aaa8fdbc8f"
+    },
+    "research_reports": {
+      "rows": 1,
+      "sha256": "323c91034c4e46a9696f36063fda19d68bfd5251a43c6908f40d920912b19ac1"
+    },
+    "tasks": {
+      "rows": 2,
+      "sha256": "172d7dd53b04a2676e8beb24e826a4099239a85cac794d6b9ee9e2453ce4982e"
+    }
+  },
+  "browser_acceptance": "unavailable",
+  "trial": "owner-command-inspection-352bc3ed",
+  "raw_evidence_sha256": "2df5bf1a3ccc6bd843baa12a862d32c7d3a47ae6e1d60d5e8c0e73bfcda27d2f",
+  "scope": "Local HTTP on a copy of a prior synthetic native trial; no new generation or control transfer"
+}

@@ -28,6 +28,8 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    La sesión productiva ya ofrece start/read/cancel y Python de biblioteca estándar
    para análisis, con fuente en lectura, sin red ni credenciales heredadas. No habilita
    todavía edición, paquetes científicos ni entrega de gráficos/archivos.
+   El propietario puede paginar los comandos y leer sus salidas guardadas, también
+   tras perder autoridad el agente. Hay API y visor en la tarea y su historial.
 7. **Contexto y procedencia:** versiones al corregir o cambiar trece entradas de tarea;
    retiro de autoridad antigua; respuesta asociada a pregunta/versión; repositorio
    admitido inmutable y comienzo de cola explícito. Registro exacto de la entrada
@@ -91,20 +93,23 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 
 ## Verificación más reciente
 
-- Suite completa:1227 casos;1124 pasan,100 fallan con las mismas identidades de la
+- Suite completa:1241 casos;1138 pasan,100 fallan con las mismas identidades de la
   línea base y 3 se omiten. La suite global sigue roja.
-- Runtime:299 pasan. La última verificación de frontend, sin cambios en esta entrega,
-  registró 20 pruebas aprobadas y compilación TypeScript/Vite.
+- Runtime:313 pasan. Frontend:28 pruebas aprobadas y compilación TypeScript/Vite.
 - Ensayo real de continuidad:2 turnos por suscripción, Ken real,4 peers cerrados,
   fuentes sin editar,2 informes draft y ninguna aceptación/publicación implícita.
 - Ensayo de análisis:1 turno adicional por suscripción, Ken real, catálogo de 15
   herramientas, cálculo ejecutado,1 informe draft y3 peers cerrados. El verificador
   inicial usó una columna incorrecta; se comprobaron los artefactos existentes sin
   repetir generación. CLI real sin inferencia:7 casos de cálculo/lectura/aislamiento.
+- Inspección del propietario:servidor HTTP real sobre copia del ensayo anterior,
+  sin runtime configurado ni inferencia nueva;14 lecturas reconstruyeron los95 bytes
+  de salida. Nueve tablas conservaron sus valores tanto en original como en copia.
 - QA visual:pendiente por navegador no disponible; sin resultado de comprensión humana.
 
 Evidencia actual: [entrada/continuidad](run-input-evidence.json),
-[resultados](analysis-results.json), [análisis](analysis-evidence.json),
+[resultados](owner-command-results.json), [consulta del propietario](owner-command-evidence.json),
+[análisis](analysis-evidence.json),
 [ensayo de análisis](analysis-live.json), [continuidad](run-input-live.json),
 [migración](run-input-migration.json), [cobertura](coverage.json),
 [inventario visual](../design/inventory.md) y [registro de avance](progress.md).

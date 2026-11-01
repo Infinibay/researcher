@@ -7,6 +7,7 @@ import { useAnswer, useCorrection, useInstruction, useRecovery, useStartRetry, u
 import { MarkdownRenderer } from '../common/MarkdownRenderer'
 import { TaskInputHistory } from './TaskInputHistory'
 import { RunInputRecord } from './RunInputRecord'
+import { RunCommands } from './RunCommands'
 
 const inputClass = 'w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] focus:outline-none focus:ring-2 focus:ring-[var(--work-accent)]'
 const buttonClass = 'rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50'
@@ -46,7 +47,7 @@ function RecoveryCard({ projectId, taskId, runId }: { projectId: number; taskId:
       {details.data.blocked_reason === 'different_kernel' && <p className="text-[var(--work-caution)]">Cambió el entorno del servidor. No podemos deducir que la ejecución anterior se haya cerrado; hace falta comprobar su instalación de origen.</p>}
       {details.data.unknown_jobs > 0 && <p className="text-[var(--work-caution)]">Hay comandos sin un resultado final confirmado. Comprobar su cierre no indica si terminaron bien ni revierte sus efectos.</p>}
       {details.data.jobs.length > 0 && <ul className="space-y-1 text-[var(--work-muted)]">{details.data.jobs.map((job, index) => <li key={job.id}>Comando {index + 1}: {job.local_execution_closed ? 'cierre comprobado' : 'cierre por comprobar'} · {job.exit_code == null ? 'resultado desconocido' : `código de salida ${job.exit_code}`}</li>)}</ul>}
-      {details.data.jobs_truncated && <p className="text-[var(--work-muted)]">Esta vista muestra los primeros 25 comandos.</p>}
+      {details.data.jobs_truncated && <p className="text-[var(--work-muted)]">Esta vista muestra los primeros 25 comandos. Para recorrerlos todos y leer sus salidas, abre «Comandos y resultados guardados».</p>}
       {details.data.dispatch && (details.data.dispatch.status === 'unknown' || details.data.dispatch.observed_tokens == null) && <p className="text-[var(--work-muted)]">El consumo final no está confirmado; se conserva el presupuesto reservado.</p>}
       {details.data.effects.length > 0 && <details><summary className="cursor-pointer text-[var(--work-ink)]">Lo que quedó guardado</summary><ul className="mt-2 space-y-1 text-[var(--work-muted)]">{details.data.effects.map(effect => <li key={effect.operation_key}>{effectLabels[effect.kind] ?? 'Operación registrada'}</li>)}</ul>{details.data.effects_truncated && <p className="text-[var(--work-muted)]">Esta vista muestra los primeros 100 recibos.</p>}</details>}
       <button className={buttonClass} disabled={recover.isPending || (!intent.current && !details.data.can_reconcile)} onClick={() => {
@@ -192,6 +193,7 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
     </div>}
     {data.questions.map(question => <QuestionCard key={`${projectId}:${taskId}:${question.request_id}`} projectId={projectId} taskId={taskId} question={question} />)}
     {current && ['reconciling', 'cancelling'].includes(current.status) && <RecoveryCard key={`${projectId}:${current.run_id}`} projectId={projectId} taskId={taskId} runId={current.run_id} />}
+    {current && <RunCommands projectId={projectId} runId={current.run_id} />}
     {showProposal && current?.result && <section className="task-proposal space-y-2 rounded-md border border-[var(--work-line)] p-3" aria-label="Propuesta del agente">
       <h4 className="font-medium text-[var(--work-ink)]">{current.status === 'needs_review' ? 'Propuesta' : 'Resultado conservado'}</h4>
       <MarkdownRenderer content={current.result.summary} />
@@ -241,7 +243,7 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
       <ul className="mt-3 space-y-1">{data.reports.map(report => <li key={report.id}><a href={`/reports?project=${projectId}&artifact=${report.id}`} className="text-[var(--work-accent)] underline">{report.title}</a> <span className="text-xs text-[var(--work-muted)]">· {report.status === 'draft' ? 'borrador' : report.status}</span></li>)}</ul>
       {!data.sources.length && !data.reports.length && <p className="mt-2 text-[var(--work-muted)]">Todavía no hay fuentes capturadas ni borradores para mostrar.</p>}
     </details>
-    {data.runs.length > 0 && <details className="rounded-md border border-[var(--work-line)] p-3"><summary className="cursor-pointer text-[var(--work-ink)]">Ejecuciones anteriores</summary><ul className="mt-2 space-y-2">{data.runs.map(run => <li key={run.run_id} className="border-t border-[var(--work-line)] pt-2"><p className="text-[var(--work-ink)]">{presentRun(run.status).title} · contexto {run.context_version}</p><p className="whitespace-pre-wrap text-[var(--work-muted)]">{run.prompt}</p></li>)}</ul></details>}
+    {data.runs.length > 0 && <details className="rounded-md border border-[var(--work-line)] p-3"><summary className="cursor-pointer text-[var(--work-ink)]">Historial de ejecuciones</summary><ul className="mt-2 space-y-2">{data.runs.map(run => <li key={run.run_id} className="border-t border-[var(--work-line)] pt-2"><p className="text-[var(--work-ink)]">{presentRun(run.status).title} · contexto {run.context_version}</p><p className="whitespace-pre-wrap text-[var(--work-muted)]">{run.prompt}</p>{run.run_id !== current?.run_id && <RunCommands projectId={projectId} runId={run.run_id} />}</li>)}</ul></details>}
     </aside>
   </section>
 }

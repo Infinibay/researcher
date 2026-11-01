@@ -5,7 +5,6 @@ filesystem grants, interpreter selection or process ownership come from the mode
 """
 
 import asyncio
-import base64
 import json
 from dataclasses import dataclass
 from pathlib import Path
@@ -15,6 +14,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from backend.runtime.business_mediation import _failure
 from backend.runtime.codex_rpc import RpcDisconnected, RpcError
 from backend.runtime.command_jobs import CommandNeedsReconciliation
+from backend.runtime.command_output import output_window
 from backend.runtime.contracts import CommandSpec, RunConflict, RunNotFound
 
 
@@ -94,21 +94,9 @@ class _Owned:
 
 
 def _window(data, offset, count):
-    chunk = data[offset : offset + count]
-    try:
-        preview = chunk.decode("utf-8")
-        lossy = False
-    except UnicodeDecodeError:
-        preview, lossy = chunk.decode("utf-8", errors="replace"), True
-    return {
-        "offset": offset,
-        "next_offset": offset + len(chunk),
-        "total_bytes": len(data),
-        "has_more": offset + len(chunk) < len(data),
-        "base64": base64.b64encode(chunk).decode("ascii"),
-        "text": preview,
-        "utf8_lossy": lossy,
-    }
+    return output_window(
+        data[offset : offset + count], offset=offset, total_bytes=len(data)
+    )
 
 
 def _receipt(job, *, stdout_offset=0, stderr_offset=0, max_bytes=8192, **_):

@@ -88,6 +88,61 @@ export function runInput(projectId: number, runId: string) {
   return fetchApi<RunInputRecord>(`/api/projects/${projectId}/runs/${encodeURIComponent(runId)}/input`)
 }
 
+export interface CommandSummary {
+  job_id: string
+  seq: string
+  run_id: string
+  attempt_id: string
+  context_version: number
+  is_current_attempt: boolean
+  operation_key: string
+  status: string
+  exit_code: number | null
+  local_execution_closed: boolean
+  cancel_requested: boolean
+  output_limited: boolean
+  error: string | null
+  executable: string
+  cwd: string
+  timeout_seconds: number
+  output_bytes: number
+  stdout_bytes: number
+  stderr_bytes: number
+  output_persistence: 'terminal_receipt'
+}
+
+export interface CommandWindow {
+  offset: number
+  next_offset: number
+  total_bytes: number
+  has_more: boolean
+  base64: string
+  text: string
+  utf8_lossy: boolean
+}
+
+export interface CommandOutput extends CommandSummary {
+  argv: string[]
+  stdout: CommandWindow
+  stderr: CommandWindow
+}
+
+export interface CommandPage {
+  run_id: string
+  total: number
+  next_after_seq: string | null
+  items: CommandSummary[]
+}
+
+export function commandList(projectId: number, runId: string, afterSeq = '0') {
+  return fetchApi<CommandPage>(`/api/projects/${projectId}/runs/${encodeURIComponent(runId)}/jobs?after_seq=${encodeURIComponent(afterSeq)}&limit=25`)
+}
+
+export function commandOutput(projectId: number, runId: string, jobId: string, {stdoutOffset = 0, stderrOffset = 0, maxBytes = 8192} = {}) {
+  const params = new URLSearchParams({stdout_offset:String(stdoutOffset),stderr_offset:String(stderrOffset),max_bytes:String(maxBytes)})
+  return fetchApi<CommandOutput>(`/api/projects/${projectId}/runs/${encodeURIComponent(runId)}/jobs/${encodeURIComponent(jobId)}?${params}`)
+}
+
 export function questionInbox(projectId: number, afterId = 0) {
   return fetchApi<QuestionInboxPage>(`/api/projects/${projectId}/questions?after_id=${afterId}&limit=50`)
 }

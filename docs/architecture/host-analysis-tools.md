@@ -85,5 +85,6 @@ symlink, red y entorno, incluso con configuración local que intenta ampliar per
 Ken obligatorio, catálogo combinado, cálculo ejecutado, informe borrador y cierre
 de peers. Sus resultados se registran por separado; un ensayo no demuestra calidad
 general de prompts, comprensión humana ni migración de todas las herramientas.
-La UI de salida del propietario y la integración de los consumidores heredados
-siguen pendientes. No se declara aceptación visual por estas pruebas.
+La [consulta del propietario](owner-command-inspection.md) incorpora API/visor de
+ventanas, con aceptación visual todavía pendiente. La integración de los consumidores
+heredados sigue pendiente. No se declara aceptación visual por estas pruebas.

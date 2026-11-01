@@ -1,6 +1,23 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 
+test('owner command readers preserve run scope and byte offsets using GET only', async () => {
+  const { commandList, commandOutput } = await import('../src/api/runtime.ts')
+  const sent: { url: string; method: string; body: unknown; credentials: RequestCredentials | undefined }[] = []
+  const original = globalThis.fetch
+  try {
+    globalThis.fetch = async (url, options) => {
+      sent.push({url:String(url),method:options?.method ?? 'GET',body:options?.body,credentials:options?.credentials})
+      return Response.json({items:[],total:0,next_after_seq:null})
+    }
+    await commandList(101, 'run:a', '9007199254740993')
+    await commandOutput(101, 'run:a', 'job/b', {stdoutOffset:8192,stderrOffset:4,maxBytes:2})
+    assert.equal(sent[0].url, '/api/projects/101/runs/run%3Aa/jobs?after_seq=9007199254740993&limit=25')
+    assert.equal(sent[1].url, '/api/projects/101/runs/run%3Aa/jobs/job%2Fb?stdout_offset=8192&stderr_offset=4&max_bytes=2')
+    assert.deepEqual(sent.map(request => [request.method,request.body,request.credentials]), [['GET',undefined,'same-origin'],['GET',undefined,'same-origin']])
+  } finally { globalThis.fetch = original }
+})
+
 test('queued-start retry preserves its original run, fence and context after a lost response', async () => {
   const { prepareStartRetry, sendStartRetry } = await import('../src/api/runtime.ts')
   const sent: {url: string; body: Record<string, unknown>}[] = []

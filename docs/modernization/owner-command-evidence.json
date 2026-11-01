@@ -1,0 +1,55 @@
+{
+  "base_commit": "b243ce3",
+  "scope": "Owner command metadata pagination and byte-window API/UI; full modernization remains in progress",
+  "generation_calls": 0,
+  "image_calls": 0,
+  "source_sha256": {
+    "backend/runtime/command_output.py": "581b6f609e59adeeed2688c10c3b94f7a7351e7abb4580c783e987e2f1b0593e",
+    "backend/runtime/analysis_tools.py": "e48019f8cac4ff56da778ebf725e718844c1ac8d03b63ac0517e5b865c68123a",
+    "backend/runtime/views.py": "0ee53b417981c015a50f0ffca5d873d51cb11b00bf1e167bb1fba755e3ed161a",
+    "backend/api/routes/runs.py": "931e9eec7770516e53ccfd8c367d3c2ceffe025fe59727dd58e7a249a498bb17",
+    "backend/tests/runtime/test_owner_command_output.py": "7cec42f99c2803624df7aedad3fbc029f7aa31db106fbf0d9c030fca591575ee",
+    "evals/runtime/run_owner_command_inspection.py": "6ba95a5b4db5a0192a9396b517e6a2e1e651407c69201eccdd1defb7bc73bbef",
+    "frontend/src/api/runtime.ts": "df06c47514c67a1f4391968f3f667ed3fdebb64225bc03117ac8a98b30a02561",
+    "frontend/src/components/tasks/RunCommands.tsx": "66640655c07a1b237bebd027250f8f7c1f1cdde6a2c20c6362cafd44f2d0fabe",
+    "frontend/src/components/tasks/TaskRunWorkspace.tsx": "1d00e1b567b5d5bf887c1866921883e6f3a3877974e678f341350919bbac8bd6",
+    "frontend/tests/command-output-fixture.tsx": "85c51e3955fbf697d247f2ded64f74f047e386cbfd7c2263e7f7c0c8733efeac",
+    "frontend/tests/command-output.test.ts": "bff43baa8d97a4fd25cdd13fde59152afbb082e32615d083f029c00a778b4c9c",
+    "frontend/tests/runtime.test.ts": "cfdc5659dc5fe80ce51beaac05a2265dffcc2a3ea049aabe4e53ee1f31879421"
+  },
+  "log_sha256": {
+    "owner-command-red.log": "12eee695a2a5dbb2f6e606ab488585012bc58a92de9f6ec2706c62fe36d95a31",
+    "owner-command-tail-red.log": "9f1d183aa6997881ebefef10176491adb596cbfae73562f04c2a72cda3822410",
+    "owner-command-identity-red.log": "2cd6bc2a48310fdde8b596b42c50456d65601a4a546ba1370cc65ce3415b8a87",
+    "owner-command-cursor-red.log": "f3882789331731e765e8172080e98890d313b210d7ebc5e9bf1a714240a28d85",
+    "owner-command-cursor-green.log": "3b4a7d403665dbad5a7c4a06125590849a61a84062b6328463121d477043c447",
+    "owner-command-frontend-red.log": "955daf4e6eb52a4fd83d9825caa6592c2ec97e56245e8f0035c5903529522b13",
+    "owner-command-verified.log": "9463b9b061af7b22d67b3c3f32be41605102b13694b4dab4d10d2d0f94210965",
+    "owner-command-verified.xml": "5719560516e3e161f767a1a6474aeb7dea4a38aee4501b27db2e8e3bfc2a0fd3",
+    "owner-command-ui-verified.log": "d802d708441324486ef6ecf01d332359af851bb0fdb0d9885440fdbb8cbc5ec0",
+    "owner-command-build-final.log": "06f24bd2443ca3519a35ec9e90f6eee8b23b2092072fa3cb112d0c5a8cf074e8",
+    "owner-command-http-final.log": "565fef4a4a23b4c0ac4a7ff472bb14fb89f793d64065ef1ebd2c9fd4d6e2eee3",
+    "owner-command-lint-verified.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "owner-command-wheel-final.log": "fac5db1d69a83bc662056a14a12fcc2303ad0a0492ccc47f67b102d14d6ffbce"
+  },
+  "reports": [
+    "owner-command-results.json",
+    "owner-command-http.json",
+    "owner-command-packaging.json",
+    "owner-command-qa.json"
+  ],
+  "verification": {
+    "owner_http_cases": 14,
+    "frontend_cases": 28,
+    "runtime_cases": 313,
+    "full_suite_green": false,
+    "same_100_baseline_failure_identities": true
+  },
+  "limits": [
+    "No rendered/keyboard/mobile/screen-reader/human acceptance; CUA browser host unavailable.",
+    "General run-history pagination/event catch-up/retention are not complete.",
+    "Read inspection does not transfer process control to a copied database or reauthorize a retired agent.",
+    "Writable workspace ownership, all retained tool consumers, legacy engine replacement, prompts and full UI redesign remain required.",
+    "Broader product Stop/correction/unknown-output scenarios and final independent whole-branch review remain."
+  ]
+}

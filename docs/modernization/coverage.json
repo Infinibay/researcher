@@ -574,7 +574,15 @@
         "docs/modernization/analysis-packaging.json",
         "backend/tests/runtime/test_analysis_tools.py",
         "evals/runtime/run_analysis_tools.py",
-        "evals/runtime/run_analysis_inference.py"
+        "evals/runtime/run_analysis_inference.py",
+        "docs/architecture/owner-command-inspection.md",
+        "docs/modernization/owner-command-evidence.json",
+        "docs/modernization/owner-command-results.json",
+        "docs/modernization/owner-command-http.json",
+        "docs/modernization/owner-command-packaging.json",
+        "backend/tests/runtime/test_owner_command_output.py",
+        "frontend/tests/command-output.test.ts",
+        "evals/runtime/run_owner_command_inspection.py"
       ]
     },
     "E10": {
@@ -1599,8 +1607,28 @@
       "remaining": [
         "Migrate retained legacy shell/flow consumers and full code-interpreter capabilities.",
         "Writable development requires global workspace ownership and exact candidate acceptance.",
-        "Owner output read windows/UI, broader production Stop/correction scenarios and recovery.",
+        "Rendered owner output inspection, broader production Stop/correction scenarios and recovery.",
         "All71 tools/11 categories, legacy engine replacement and complete prompt/human/UI acceptance remain required."
+      ]
+    },
+    "owner_command_inspection": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/owner-command-inspection.md",
+        "docs/modernization/owner-command-evidence.json",
+        "docs/modernization/owner-command-results.json",
+        "docs/modernization/owner-command-http.json",
+        "docs/modernization/owner-command-packaging.json",
+        "backend/tests/runtime/test_owner_command_output.py",
+        "frontend/tests/command-output.test.ts",
+        "evals/runtime/run_owner_command_inspection.py",
+        "docs/modernization/owner-command-qa.json"
+      ],
+      "remaining": [
+        "Browser/mobile/keyboard/focus/screen-reader/zoom and human acceptance of the owner inspector.",
+        "General execution-history pagination, event catch-up and retention.",
+        "Broader production Stop/correction/unknown-receipt cases and migration of legacy tool consumers.",
+        "Full modernization scope is unchanged; writable workspaces/acceptance and other tools/engine/prompts/UI remain."
       ]
     }
   }

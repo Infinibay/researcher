@@ -3,17 +3,131 @@
 import json
 from contextlib import closing
 from dataclasses import asdict
+from pathlib import PurePosixPath
 
 from backend.db.connection import connect
-from backend.runtime.contracts import RunNotFound, identity
+from backend.runtime.command_output import output_window
+from backend.runtime.contracts import RunNotFound, identity, text
 from backend.runtime.run_inputs import MESSAGE_SELECT
 from backend.runtime.sqlite_runs import SQLiteRunStore
+
+_JOB_COLUMNS = """j.rowid AS seq,j.id AS job_id,j.attempt_id,j.operation_key,
+    j.status,j.exit_code,j.output_limited,j.cancel_requested,j.error,
+    j.cwd,j.timeout_seconds,j.output_bytes,
+    json_extract(j.argv_json,'$[0]') AS executable,
+    length(j.stdout) AS stdout_bytes,length(j.stderr) AS stderr_bytes,
+    EXISTS(SELECT 1 FROM runtime_peers p WHERE p.id=j.peer_id AND p.kind='command'
+    AND p.attempt_id=j.attempt_id AND p.state='closed' AND p.database_identity IS NOT NULL)
+    AS local_execution_closed"""
+
+
+def _job_summary(row, run):
+    return {
+        "job_id": row["job_id"],
+        "seq": str(row["seq"]),
+        "run_id": run["id"],
+        "attempt_id": row["attempt_id"],
+        "context_version": run["context_version"],
+        "is_current_attempt": row["attempt_id"] == run["current_attempt_id"],
+        "operation_key": row["operation_key"],
+        "status": row["status"],
+        "exit_code": row["exit_code"],
+        "error": row["error"],
+        "output_limited": bool(row["output_limited"]),
+        "cancel_requested": bool(row["cancel_requested"]),
+        "local_execution_closed": bool(row["local_execution_closed"]),
+        "executable": PurePosixPath(row["executable"]).name,
+        "cwd": row["cwd"],
+        "timeout_seconds": row["timeout_seconds"],
+        "output_bytes": row["output_bytes"],
+        "stdout_bytes": row["stdout_bytes"],
+        "stderr_bytes": row["stderr_bytes"],
+        "output_persistence": "terminal_receipt",
+    }
 
 
 class OwnerRuntimeView:
     def __init__(self, database):
         self.database = str(database)
         self.runs = SQLiteRunStore(database)
+
+    def command_list(self, project_id, run_id, *, after_seq=0, limit=25):
+        if type(after_seq) is not int or not 0 <= after_seq <= 9223372036854775807:
+            raise ValueError("Invalid command cursor")
+        if type(limit) is not int or not 1 <= limit <= 100:
+            raise ValueError("Invalid command page size")
+        with self.runs._transaction() as conn:
+            run = self.runs._row(conn, project_id, run_id)
+            total = conn.execute(
+                "SELECT COUNT(*) FROM runtime_jobs WHERE run_id=?", (run_id,)
+            ).fetchone()[0]
+            rows = conn.execute(
+                "SELECT "
+                + _JOB_COLUMNS
+                + " FROM runtime_jobs j WHERE j.run_id=? AND j.rowid>? ORDER BY j.rowid LIMIT ?",
+                (run_id, after_seq, limit + 1),
+            ).fetchall()
+            return {
+                "run_id": run_id,
+                "total": total,
+                "items": [_job_summary(row, run) for row in rows[:limit]],
+                "next_after_seq": str(rows[limit - 1]["seq"])
+                if len(rows) > limit
+                else None,
+            }
+
+    def command_output(
+        self,
+        project_id,
+        run_id,
+        job_id,
+        *,
+        stdout_offset=0,
+        stderr_offset=0,
+        max_bytes=8192,
+    ):
+        text(job_id, "job_id", 128)
+        if any(
+            type(offset) is not int or not 0 <= offset <= 2147483647
+            for offset in (stdout_offset, stderr_offset)
+        ):
+            raise ValueError("Invalid command output offset")
+        if type(max_bytes) is not int or not 1 <= max_bytes <= 16384:
+            raise ValueError("Invalid command output window size")
+        with self.runs._transaction() as conn:
+            run = self.runs._row(conn, project_id, run_id)
+            # BLOB substr uses byte offsets and keeps complete multi-MiB output
+            # out of the read projection. Both windows share one DB snapshot.
+            row = conn.execute(
+                "SELECT "
+                + _JOB_COLUMNS
+                + ",j.argv_json,COALESCE(substr(j.stdout,?,?),X'') AS stdout_chunk,COALESCE(substr(j.stderr,?,?),X'') AS stderr_chunk "
+                "FROM runtime_jobs j WHERE j.id=? AND j.run_id=?",
+                (
+                    stdout_offset + 1,
+                    max_bytes,
+                    stderr_offset + 1,
+                    max_bytes,
+                    job_id,
+                    run_id,
+                ),
+            ).fetchone()
+            if row is None:
+                raise RunNotFound("Command not found in this run")
+            return {
+                **_job_summary(row, run),
+                "argv": json.loads(row["argv_json"]),
+                "stdout": output_window(
+                    bytes(row["stdout_chunk"]),
+                    offset=stdout_offset,
+                    total_bytes=row["stdout_bytes"],
+                ),
+                "stderr": output_window(
+                    bytes(row["stderr_chunk"]),
+                    offset=stderr_offset,
+                    total_bytes=row["stderr_bytes"],
+                ),
+            }
 
     def question_inbox(self, project_id, *, after_id=0, limit=100):
         identity(project_id)
