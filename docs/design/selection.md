@@ -50,11 +50,12 @@ no inicia una ejecución. Las operaciones de runtime conservan sus contratos.
 
 Hay comprobaciones de HTML renderizado en servidor y compilación. No equivalen
 a una captura, a una interacción de navegador ni a una prueba de comprensión.
-El navegador CUA no está disponible. El contraste numérico cubre sólo los pares
-de tokens listados en el manifiesto; faltan foco efectivo, zoom, lector de
-pantalla, comparación visual, diálogos y todos los estados de interacción.
+El registro inicial sólo tenía SSR/build. Ahora hay un [recorrido real en Chromium](audits/2026-11-01-owner-workspace/report.md)
+con capturas de escritorio/móvil comparadas con las referencias, axe y comprobaciones
+de salto inicial y navegación con foco. Faltan zoom, lector de pantalla, diálogos,
+todos los estados de interacción y comprensión humana.
 
-La cabecera aún conserva controles del engine anterior. Las once páginas restantes
+La cabecera aún conserva controles del engine anterior. Las diez páginas sin piloto
 todavía necesitan conceptos, selección y rediseño. Faltan los bloques de
 explicación/diagrama estructurados y su aceptación humana. Consultar
 [inventario](inventory.md) y [estado de QA](../../design-qa.md).
@@ -92,7 +93,8 @@ Correcciones de contrato respecto al mock:
   cierre confirmado. El diseño no habilita un inicio incompatible con ese estado.
 - La UI explica qué contexto recibe actualmente el próximo trabajo: tarea,
   correcciones y respuestas. Ver el historial no equivale a que todo se entregue
-  automáticamente al modelo. Esa continuidad y su snapshot siguen pendientes.
+  automáticamente al modelo. La entrada inicial y su continuidad acotada ya se
+  registran; siguen pendientes compactación larga y procedencia de entradas posteriores.
 - Se conservan cabecera, sesión y controles reales del producto; no se inventan los
   destinos reducidos del menú generado. Índice más compacto, contenido en flujo y
   columna de contexto apilada cuando no cabe, con medidas por contenedor.
@@ -101,7 +103,8 @@ Correcciones de contrato respecto al mock:
 
 El código integra la bandeja de todas las solicitudes del proyecto, selección
 validada de tarea, conversación corriente visible y archivo de hilos de sólo
-lectura. Hay pruebas SSR, transporte/API y build. No hay captura ni aceptación
-visual/teclado/comprensión; el estado de QA permanece bloqueado por el navegador.
+lectura. Hay pruebas SSR, transporte/API y build. El [recorrido en navegador](audits/2026-11-01-owner-workspace/report.md)
+ya incluye conversación guardada y adaptación móvil. La aceptación visual completa,
+la navegación integral por teclado y la comprensión humana siguen pendientes.
 Después de este avance quedan diez rutas por generar/seleccionar/implementar y
 las doce por aceptar visualmente, además de los componentes compartidos.

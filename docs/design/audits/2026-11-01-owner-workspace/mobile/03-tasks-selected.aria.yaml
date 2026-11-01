@@ -1,0 +1,39 @@
+- link "Ir al contenido":
+  - /url: "#main-content"
+- banner:
+  - button "Menú"
+  - button "Seleccionar proyecto":
+    - text: Research ALPHA_ONLY
+    - img
+  - button "Cerrar sesión"
+  - text: new
+  - button "Iniciar proyecto"
+  - button "Actividad del proyecto":
+    - img
+- main:
+  - paragraph: ESPACIO DE TRABAJO
+  - heading "Tareas" [level=1]
+  - paragraph: Selecciona una tarea para revisar la evidencia, corregir el contexto o iniciar trabajo.
+  - button "Dependencias"
+  - button "Nueva tarea"
+  - text: Buscar tarea
+  - searchbox "Buscar tarea"
+  - combobox "Filtrar por estado":
+    - option "Todos los estados" [selected]
+    - option "Por planificar"
+    - option "Pendiente"
+    - option "En curso"
+    - option "Para revisar"
+    - option "Requiere cambios"
+    - option "Completada"
+    - option "Bloqueada"
+  - combobox "Filtrar por épica":
+    - option "Todas las épicas" [selected]
+  - combobox "Filtrar por hito":
+    - option "Todos los hitos" [selected]
+  - region "Elegir tarea":
+    - heading "Cola de trabajo" [level=2]
+    - text: 1 visibles
+    - list "Lista de tareas":
+      - listitem:
+        - button "#1001 En curso Policy report Investigación Prioridad 2"

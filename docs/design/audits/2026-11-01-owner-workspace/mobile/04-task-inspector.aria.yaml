@@ -1,0 +1,103 @@
+- link "Ir al contenido":
+  - /url: "#main-content"
+- banner:
+  - button "Menú"
+  - button "Seleccionar proyecto":
+    - text: Research ALPHA_ONLY
+    - img
+  - button "Cerrar sesión"
+  - text: new
+  - button "Iniciar proyecto"
+  - button "Actividad del proyecto":
+    - img
+- main:
+  - region "Policy report":
+    - text: "#1001"
+    - combobox "Estado de la tarea":
+      - option "Por planificar"
+      - option "Pendiente"
+      - option "En curso" [selected]
+      - option "Para revisar"
+      - option "Requiere cambios"
+      - option "Completada"
+      - option "Bloqueada"
+    - text: Investigación
+    - heading "Policy report" [level=2]
+    - button "Volver a tareas"
+    - button "Detalles"
+    - button "Trabajo" [pressed]
+    - button "Comentarios (0)"
+    - button "Dependencias (0)"
+    - region "Trabajo de la tarea":
+      - status:
+        - heading "Propuesta para revisar" [level=3]
+        - paragraph: El resultado está disponible; falta registrar su aceptación.
+        - paragraph: "Contexto vigente: 1 · resultado bajo contexto 1"
+        - paragraph: "Modelo de esta ejecución: gpt-6.1-sol"
+        - paragraph: "Repositorio admitido: alpha"
+      - paragraph: Configura el motor local para iniciar trabajo. El historial y las fuentes siguen disponibles.
+      - group: Comandos y resultados guardados
+      - region "Propuesta del agente":
+        - heading "Propuesta" [level=4]
+        - paragraph:
+          - strong: "Fuente:"
+          - text: capturé
+          - code: "`policy.md`"
+          - text: como fuente 1. Indica tasas fraccionarias y redondeo final
+          - code: "`ROUND_HALF_UP`"
+          - text: . Usé su ejemplo de tasa
+          - strong: 0,21
+          - text: ; el documento no establece una tasa obligatoria.
+        - paragraph:
+          - strong: "Resultado ejecutado:"
+          - code: "`researcher_python`"
+          - text: ", con clave"
+          - code: "`calculate-policy`"
+          - text: ", calculó para base 137: impuesto"
+          - strong: 28,77
+          - text: y total
+          - strong: 165,77
+          - text: ". Leí el job hasta su recibo terminal: código 0, ejecución cerrada y salida completa."
+        - paragraph:
+          - strong: "Interpretación:"
+          - text: Ken leyó
+          - code: "`invoice.py`"
+          - text: ": devuelve"
+          - code: "`subtotal + tax_rate`"
+          - text: . Evaluar esa expresión da
+          - strong: 137,21
+          - text: ", es decir,"
+          - strong: 28,56 menos
+          - text: ": suma la tasa directamente y no aplica el redondeo anunciado."
+        - paragraph:
+          - text: No edité archivos, ejecuté tests, publiqué ni acepté la tarea. Guardé el informe draft con cita de la fuente, clave
+          - code: "`analysis-report`"
+          - text: .
+        - paragraph:
+          - strong: "ID del informe: 1"
+          - text: .
+      - text: Solicitud para esta tarea
+      - textbox "Solicitud para esta tarea":
+        - /placeholder: Explica qué quieres comprobar y qué resultado necesitas. Puedes incluir un ejemplo.
+      - checkbox "Iniciar sin los mensajes anteriores"
+      - text: Iniciar sin los mensajes anteriores
+      - button "Iniciar trabajo" [disabled]
+      - button "Consultar estado"
+      - button "Usar solicitud anterior"
+      - complementary "Fuentes y contexto":
+        - heading "Fuentes y contexto" [level=4]
+        - group: Entrada de esta ejecución
+        - group: Corregir el contexto
+        - group:
+          - text: Fuentes y borradores
+          - paragraph: "Adjuntos disponibles: policy.md"
+          - list:
+            - listitem:
+              - button "policy.md"
+              - text: · fuente del proyecto · adjunto capturado
+          - list:
+            - listitem:
+              - link "Comparación de política ficticia e invoice.py":
+                - /url: /reports?project=101&artifact=1
+              - text: · borrador
+        - group: Historial de ejecuciones

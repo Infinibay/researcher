@@ -1,5 +1,6 @@
 import './styles/workspace.css'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { useEffect, useRef } from 'react'
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useWebSocketSync } from './hooks/useWebSocketSync'
 import { useActivityFeedStore } from './stores/activityFeed'
 import { Sidebar } from './components/layout/Sidebar'
@@ -18,13 +19,28 @@ import { ReportsPage } from './components/pages/ReportsPage'
 import { AgentsPage } from './components/pages/AgentsPage'
 import { ActivityFeed } from './components/chat/ActivityFeed'
 
+function RouteFocus() {
+  const { pathname } = useLocation()
+  const previousPath = useRef(pathname)
+  useEffect(() => {
+    if (previousPath.current === pathname) return
+    previousPath.current = pathname
+    const main = document.getElementById('main-content')
+    main?.scrollTo(0, 0)
+    main?.focus({ preventScroll: true })
+  }, [pathname])
+  return null
+}
+
 export default function App() {
   useWebSocketSync()
   const feedOpen = useActivityFeedStore((s) => s.feedOpen)
 
   return (
     <BrowserRouter>
+      <RouteFocus />
       <div className="app-shell flex h-dvh overflow-hidden">
+        <a href="#main-content" className="workspace-skip">Ir al contenido</a>
         <div className="workspace-sidebar"><Sidebar /></div>
         <div id="workspace-menu" popover="auto" className="workspace-mobile-nav">
           <button className="workspace-menu-close" popoverTarget="workspace-menu" popoverTargetAction="hide">Cerrar menú</button>

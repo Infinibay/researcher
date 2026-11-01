@@ -72,6 +72,86 @@ def pair(client):
     return response
 
 
+@pytest.mark.parametrize(
+    "origin",
+    [
+        "http://127.0.0.1:53123",
+        "http://localhost:53123",
+        "https://localhost:53123",
+        "http://[::1]:53123",
+    ],
+)
+def test_same_origin_on_custom_port_serves_assets_but_still_requires_owner_and_csrf(
+    _isolated_db, tmp_path, monkeypatch, origin
+):
+    from backend.api import config
+    from backend.api.local_access import LocalAccess
+    from backend.api.main import create_app
+
+    assets = tmp_path / "public/assets"
+    assets.mkdir(parents=True)
+    (assets / "fixture.js").write_text("console.log('fixture')")
+    monkeypatch.setattr(config, "STATIC_DIR", str(assets.parent))
+    access = LocalAccess(pairing_key="fixture-owner-code-that-is-not-a-real-secret")
+    assert origin not in access.allowed_origins
+    with TestClient(create_app(access=access), base_url=origin) as client:
+        client.headers.update({"Origin": origin, "Sec-Fetch-Site": "same-origin"})
+        asset = client.get("/assets/fixture.js")
+        assert asset.status_code == 200, asset.text
+        assert asset.text == "console.log('fixture')"
+        assert client.get("/api/projects").status_code == 401
+        csrf = pair(client).json()["csrf_token"]
+        assert client.get("/api/projects").status_code == 200
+        assert (
+            client.post("/api/projects", json={"name": "Missing CSRF"}).status_code
+            == 403
+        )
+        assert (
+            client.post(
+                "/api/projects",
+                json={"name": "Owned"},
+                headers={"X-Researcher-CSRF": csrf},
+            ).status_code
+            == 201
+        )
+        assert (
+            client.get(
+                "/assets/fixture.js", headers={"Origin": "http://localhost:53124"}
+            ).status_code
+            == 403
+        )
+        assert (
+            client.get(
+                "/assets/fixture.js",
+                headers={"Origin": origin, "Sec-Fetch-Site": "cross-site"},
+            ).status_code
+            == 403
+        )
+        assert (
+            client.get(
+                "/assets/fixture.js",
+                headers={
+                    "Host": "untrusted.example",
+                    "Origin": "http://untrusted.example",
+                },
+            ).status_code
+            == 400
+        )
+
+
+def test_same_origin_custom_port_websocket_uses_the_existing_owner_session(owner_app):
+    app, _, _ = owner_app
+    with TestClient(app, base_url="http://localhost:53123") as client:
+        client.headers["Origin"] = "http://localhost:53123"
+        pair(client)
+        with client.websocket_connect(
+            "ws://localhost:53123/ws?project_id=1",
+            headers={"Origin": "http://localhost:53123"},
+        ) as ws:
+            ws.send_text("ping")
+            assert ws.receive_json() == {"type": "pong"}
+
+
 def test_pairing_sets_private_cookie_and_csrf_allows_owner_work(
     owner_app, seeded_project
 ):

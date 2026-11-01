@@ -177,9 +177,18 @@ class OwnerAccessMiddleware:
             c in host for c in "/@\\, "
         ):
             return await deny(400, "Untrusted request host")
+        # The built UI is served by this same validated loopback endpoint.
+        # Its port may be chosen dynamically; configured origins additionally
+        # permit explicitly trusted cross-origin development clients.
+        protocol = "https" if scope.get("scheme") in {"https", "wss"} else "http"
+        own_origin = protocol + "://" + host
         if (
             len(origins) > 1
-            or (origins and origins[0] not in self.access.allowed_origins)
+            or (
+                origins
+                and origins[0] != own_origin
+                and origins[0] not in self.access.allowed_origins
+            )
             or headers.get("sec-fetch-site") == "cross-site"
         ):
             return await deny(403, "Untrusted browser origin")

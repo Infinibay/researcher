@@ -10,9 +10,9 @@ archivos generados e inspeccionados, no pantallas aceptadas.
 | `/` | 0 | 0 | Pendiente | Pendiente | Pendiente |
 | `/projects` | 0 | 0 | Pendiente | Pendiente | Pendiente |
 | `/epics` | 0 | 0 | Pendiente | Pendiente | Pendiente |
-| `/tasks` | 3 | 1 | Lista editorial con inspector | Piloto en código | Pendiente: navegador |
+| `/tasks` | 3 | 1 | Lista editorial con inspector | Piloto en código | Parcial: capturas reales; aceptación pendiente |
 | `/agents` | 0 | 0 | Pendiente | Pendiente | Pendiente |
-| `/chat` | 3 | 1 | Conversación con evidencia | Piloto en código | Pendiente: navegador |
+| `/chat` | 3 | 1 | Conversación con evidencia | Piloto en código | Parcial: capturas reales; aceptación pendiente |
 | `/wiki` | 0 | 0 | Pendiente | Pendiente | Pendiente |
 | `/findings` | 0 | 0 | Pendiente | Pendiente | Pendiente |
 | `/reports` | 0 | 0 | Pendiente | Pendiente | Pendiente |
@@ -31,7 +31,7 @@ Los cuatro conceptos de Conversación están en
 [concepts/chat/manifest.json](concepts/chat/manifest.json), con referencia de estilo
 adjunta, selección y correcciones de contrato documentadas.
 
-Orden siguiente: comprobar ambos pilotos y corregir densidad/navegación cuando exista
-navegador; continuar con las otras diez rutas. Sin acceso
-visual pueden prepararse otros briefs, prompts y trabajo del backend, pero no
-se declarará la interfaz aprobada por build o por imágenes de concepto.
+Hay capturas reales de ambos pilotos en escritorio y móvil: [recorrido y límites](audits/2026-11-01-owner-workspace/report.md).
+Diecisiete estados pasan axe y se probaron salto al contenido y navegación con foco.
+No cierra toda la aceptación: faltan estados de interacción, zoom, lector de pantalla
+y comprensión humana. Continuar con esas comprobaciones y las otras diez rutas.

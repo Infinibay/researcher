@@ -1,0 +1,217 @@
+- link "Ir al contenido":
+  - /url: "#main-content"
+- complementary:
+  - text: Researcher
+  - navigation "Navegación principal":
+    - link "Resumen":
+      - /url: /
+      - img
+      - text: Resumen
+    - link "Proyectos":
+      - /url: /projects
+      - img
+      - text: Proyectos
+    - link "Planificación":
+      - /url: /epics
+      - img
+      - text: Planificación
+    - link "Tareas":
+      - /url: /tasks
+      - img
+      - text: Tareas
+    - link "Agentes":
+      - /url: /agents
+      - img
+      - text: Agentes
+    - link "Conversación":
+      - /url: /chat
+      - img
+      - text: Conversación
+    - link "Documentos":
+      - /url: /wiki
+      - img
+      - text: Documentos
+    - link "Hallazgos":
+      - /url: /findings
+      - img
+      - text: Hallazgos
+    - link "Informes":
+      - /url: /reports
+      - img
+      - text: Informes
+    - link "Archivos":
+      - /url: /files
+      - img
+      - text: Archivos
+    - link "Repositorios":
+      - /url: /repositories
+      - img
+      - text: Repositorios
+    - link "Ejecución":
+      - /url: /flow
+      - img
+      - text: Ejecución
+- banner:
+  - button "Seleccionar proyecto":
+    - text: Research ALPHA_ONLY
+    - img
+  - button "Cerrar sesión"
+  - text: new
+  - button "Iniciar proyecto"
+  - button "Actividad del proyecto":
+    - img
+- main:
+  - paragraph: ESPACIO DE TRABAJO
+  - heading "Tareas" [level=1]
+  - paragraph: Selecciona una tarea para revisar la evidencia, corregir el contexto o iniciar trabajo.
+  - button "Dependencias"
+  - button "Nueva tarea"
+  - text: Buscar tarea
+  - searchbox "Buscar tarea"
+  - combobox "Filtrar por estado":
+    - option "Todos los estados" [selected]
+    - option "Por planificar"
+    - option "Pendiente"
+    - option "En curso"
+    - option "Para revisar"
+    - option "Requiere cambios"
+    - option "Completada"
+    - option "Bloqueada"
+  - combobox "Filtrar por épica":
+    - option "Todas las épicas" [selected]
+  - combobox "Filtrar por hito":
+    - option "Todos los hitos" [selected]
+  - region "Elegir tarea":
+    - heading "Cola de trabajo" [level=2]
+    - text: 1 visibles
+    - list "Lista de tareas":
+      - listitem:
+        - button "#1001 En curso Policy report Investigación Prioridad 2"
+  - region "Policy report":
+    - text: "#1001"
+    - combobox "Estado de la tarea":
+      - option "Por planificar"
+      - option "Pendiente"
+      - option "En curso" [selected]
+      - option "Para revisar"
+      - option "Requiere cambios"
+      - option "Completada"
+      - option "Bloqueada"
+    - text: Investigación
+    - heading "Policy report" [level=2]
+    - button "Volver a tareas"
+    - button "Detalles"
+    - button "Trabajo" [pressed]
+    - button "Comentarios (0)"
+    - button "Dependencias (0)"
+    - region "Trabajo de la tarea":
+      - status:
+        - heading "Propuesta para revisar" [level=3]
+        - paragraph: El resultado está disponible; falta registrar su aceptación.
+        - paragraph: "Contexto vigente: 1 · resultado bajo contexto 1"
+        - paragraph: "Modelo de esta ejecución: gpt-6.1-sol"
+        - paragraph: "Repositorio admitido: alpha"
+      - paragraph: Configura el motor local para iniciar trabajo. El historial y las fuentes siguen disponibles.
+      - group:
+        - text: Comandos y resultados guardados
+        - paragraph: Esta consulta conserva los recibos y no repite comandos. Está disponible aunque la ejecución se haya detenido.
+        - paragraph: 1 comandos registrados
+        - list:
+          - listitem:
+            - paragraph: python3.12 · contexto 1
+            - paragraph: Código de salida 0
+            - paragraph: Cierre local registrado
+            - paragraph: 95 bytes de salida · 0 de errores
+            - button "Cerrar salida" [expanded]
+        - button "Comandos anteriores" [disabled]
+        - button "Siguientes comandos" [disabled]
+        - button "Consultar lista"
+        - region "Salida del comando seleccionado":
+          - region "Recibo del comando":
+            - heading "python3.12 · contexto 1" [level=4]
+            - paragraph: Código de salida 0
+            - paragraph: Cierre local registrado
+            - paragraph: El código de salida y el cierre registrado son hechos distintos. No confirman la validez del análisis ni la aceptación de la tarea.
+            - paragraph: La salida se guarda al terminar o perder seguimiento del comando. Mientras trabaja puede estar vacía. Consultarla no repite el comando.
+            - group: Argumentos y límites registrados
+            - region "Salida estándar":
+              - heading "Salida estándar" [level=5]
+              - paragraph: Bytes 1–95 de 95 guardados
+              - text: base=137; rate=0.21; tax_exact=28.77; policy_total=165.77; code_total=137.21; difference=28.56
+              - group: Bytes originales de esta ventana (base64)
+              - button "Inicio de salida estándar" [disabled]: Inicio
+              - button "Bytes anteriores de salida estándar" [disabled]: Anterior
+              - button "Bytes siguientes de salida estándar" [disabled]: Siguiente
+              - button "Últimos bytes de salida estándar" [disabled]: Últimos bytes
+            - region "Salida de errores":
+              - heading "Salida de errores" [level=5]
+              - paragraph: Sin bytes en esta ventana · 0 guardados
+              - button "Inicio de salida de errores" [disabled]: Inicio
+              - button "Bytes anteriores de salida de errores" [disabled]: Anterior
+              - button "Bytes siguientes de salida de errores" [disabled]: Siguiente
+              - button "Últimos bytes de salida de errores" [disabled]: Últimos bytes
+            - button "Consultar recibo"
+      - region "Propuesta del agente":
+        - heading "Propuesta" [level=4]
+        - paragraph:
+          - strong: "Fuente:"
+          - text: capturé
+          - code: "`policy.md`"
+          - text: como fuente 1. Indica tasas fraccionarias y redondeo final
+          - code: "`ROUND_HALF_UP`"
+          - text: . Usé su ejemplo de tasa
+          - strong: 0,21
+          - text: ; el documento no establece una tasa obligatoria.
+        - paragraph:
+          - strong: "Resultado ejecutado:"
+          - code: "`researcher_python`"
+          - text: ", con clave"
+          - code: "`calculate-policy`"
+          - text: ", calculó para base 137: impuesto"
+          - strong: 28,77
+          - text: y total
+          - strong: 165,77
+          - text: ". Leí el job hasta su recibo terminal: código 0, ejecución cerrada y salida completa."
+        - paragraph:
+          - strong: "Interpretación:"
+          - text: Ken leyó
+          - code: "`invoice.py`"
+          - text: ": devuelve"
+          - code: "`subtotal + tax_rate`"
+          - text: . Evaluar esa expresión da
+          - strong: 137,21
+          - text: ", es decir,"
+          - strong: 28,56 menos
+          - text: ": suma la tasa directamente y no aplica el redondeo anunciado."
+        - paragraph:
+          - text: No edité archivos, ejecuté tests, publiqué ni acepté la tarea. Guardé el informe draft con cita de la fuente, clave
+          - code: "`analysis-report`"
+          - text: .
+        - paragraph:
+          - strong: "ID del informe: 1"
+          - text: .
+      - text: Solicitud para esta tarea
+      - textbox "Solicitud para esta tarea":
+        - /placeholder: Explica qué quieres comprobar y qué resultado necesitas. Puedes incluir un ejemplo.
+      - checkbox "Iniciar sin los mensajes anteriores"
+      - text: Iniciar sin los mensajes anteriores
+      - button "Iniciar trabajo" [disabled]
+      - button "Consultar estado"
+      - button "Usar solicitud anterior"
+      - complementary "Fuentes y contexto":
+        - heading "Fuentes y contexto" [level=4]
+        - group: Entrada de esta ejecución
+        - group: Corregir el contexto
+        - group:
+          - text: Fuentes y borradores
+          - paragraph: "Adjuntos disponibles: policy.md"
+          - list:
+            - listitem:
+              - button "policy.md"
+              - text: · fuente del proyecto · adjunto capturado
+          - list:
+            - listitem:
+              - link "Comparación de política ficticia e invoice.py":
+                - /url: /reports?project=101&artifact=1
+              - text: · borrador
+        - group: Historial de ejecuciones

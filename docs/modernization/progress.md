@@ -1459,3 +1459,74 @@ external effects, lifecycle/budgets, historical backup/restore/bootstrap, subscr
 only auxiliary calls, complete prompt/book-skill/held-out/human communication work,
 100 baseline failures and final independent whole-branch review remain. Model is
 host-global JSON/restart, no per-agent/project/web selector. Full goal stays active.
+
+
+## Owner browser capture and real UI fixes — base 7ae7d98
+
+- Revalidated HEAD, dirty files and terminal captures after a status-only response;
+  resumed implementation rather than repeating status. Playwright/axe are already
+  authorized by the plan. The CUA host limitation no longer blocks local browser QA.
+- Installed exact dev-only Playwright1.64.1 and axe4.14.0; Chromium156 launched with
+  chromiumSandbox=true. Host uses the Ubuntu24.04 fallback build, explicitly noted.
+  npm audit before/after has the same18 advisories (5 low/3 moderate/10 high), no new
+  vulnerable packages. Dependency remediation remains required, no force audit fix.
+- Real browser initially displayed a blank root: same-origin script/style requests
+  on a dynamic local port received403. Five API cases were RED then GREEN; allow
+  only the exact validated loopback endpoint plus explicit configured dev origins.
+  Session/CSRF, other-port, cross-site and untrusted Host checks remain enforced.
+  Local access30 pass; full backend1252:1149 pass,100 identical baseline failures,
+  3 skip,29 warnings. Runtime319 pass. Failure identities compared, not just counts.
+- Real axe contrast RED (2.89:1 on start) then GREEN; darkened start/stop controls.
+  KaTeX CSS/fonts moved from CDN to the existing local dependency, lang=es/title
+  Researcher. No new concept image or model generation in this checkpoint.
+- Mobile RED showed a64px header clipping its second row. Increased selector
+  specificity, anchored project options below the entire header; bounds and axe
+  target-size checks now pass. Keyboard RED showed skip after navigation; moved
+  link first. Navigation RED showed main focus missing and mobile heading outside
+  viewport; route changes now reset content scroll/focus without stealing initial
+  focus or query-only task-selection behavior. Actual final browser checks pass.
+- Driver waits for actual task/workspace/receipt/history completion, rejects blank
+  roots, records ARIA/PNG/header geometry/axe and failure diagnostics, refuses external
+  dependencies and product mutations. One transient capture, one missing heading
+  assumption and one overly broad header selector were diagnosed and corrected;
+  transient/failed captures are not final acceptance evidence.
+- Final synthetic copies owner-ui-a91436fe (8desktop) and owner-ui-07d210fa (9mobile)
+  pass. Saved screenshots inspected directly or byte-identical to files inspected
+  in the same audit, compared with selected Tasks/Chat references and exported to
+  docs/design/audits/2026-11-01-owner-workspace. Read all95 output bytes in the UI.
+  Zero model turns, external origins, JS errors, failed assets or browser product
+  mutations. Real HTTP pairing before browser; login UI untested. Nine runtime
+  tables unchanged in source/copies; no claim all110 tables compared in this audit.
+- Connected Ken memory rejected the new local-access dependency as unavailable
+  in its original-checkout index. This report/ledger preserves branch evidence;
+  no memory saved against an unrelated old source as a substitute.
+- Latest frontend28 pass and TypeScript/Vite build; existing chunk/Browserslist
+  warnings. Restored generated tsbuildinfo to HEAD bytes. Ruff check/format and
+  git diff checks required before commit. Wheel contains25 checked API/runtime
+  files with matching bytes; it does not bundle frontend assets, so clean full
+  product installation remains unfinished. No browser/server intentionally left.
+- QA/status/inventory now distinguish actual browser progress from route acceptance:
+  0/12 formally accepted,6/36 desktop concepts,2/12 mobile adaptations,2 pilots.
+  Remaining interactive/login/error/recovery/zoom/screen-reader/human checks remain.
+  Header still exposes legacy project start/stop; no click or hidden migration claim.
+- Ruling: retain the current real prior-trial fixture as bounded reproducible audit
+  evidence — it exercises the actual persisted native command receipt; clean-install
+  deterministic E2E fixture/bootstrap remains required, not silently declared done.
+
+## Next brief after browser checkpoint
+
+Continue the FULL authorized plan. Browser access now works through Playwright;
+never repeat a CUA-only blocker or ask again for already authorized browser tests.
+Do not redo Ken CLI/input/command features or these demonstrated UI fixes. The
+owner command inspector and saved conversation have actual desktop/mobile evidence;
+finish all state/keyboard/zoom/screen-reader/human acceptance, not just these17 states.
+Next critical backend work: global workspace authority/bootstrap/generation,
+publication before G, pinned views and physical closure acrossDBs/deployments before
+mutable development; use workspace-authority-design.md and migrate legacy host
+writers/control paths. Keep all71 tools/11 categories, full engine/loop/roles/flows/
+autonomy/agent communication, exact candidate Git/review/CI acceptance, typed context
+edits/dependencies/checkpoints, lifecycle/budgets/external effects and restore in scope.
+Remaining10 routes/30 desktop+10 mobile concepts, all prompts/book-skills/evals,
+subscription-only auxiliary inference, dependency upgrades/18 npm advisories,
+100 backend baseline failures, clean install/CLI/TUI/package frontend and final fresh
+independent whole-branch review remain. No push/merge/deploy. Full goal stays active.

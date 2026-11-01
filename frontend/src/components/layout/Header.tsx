@@ -38,7 +38,6 @@ export function Header() {
 
   return (
     <header className="workspace-header flex h-16 shrink-0 items-center justify-between border-b border-surface-700 bg-surface-900 px-6">
-      <a href="#main-content" className="workspace-skip">Ir al contenido</a>
       <button className="workspace-menu-toggle" popoverTarget="workspace-menu">Menú</button>
       <div className="workspace-project-select flex min-w-0 items-center gap-4" ref={ref}>
         <div className="relative">
@@ -93,7 +92,7 @@ export function Header() {
               <button
                 onClick={() => stopProject.mutate(activeProject.id)}
                 disabled={stopProject.isPending}
-                className="rounded-md bg-red-600/80 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-600 disabled:opacity-50"
+                className="rounded-md bg-red-800 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-900 disabled:opacity-50"
               >
                   Detener proyecto
               </button>
@@ -101,7 +100,7 @@ export function Header() {
               <button
                 onClick={() => startProject.mutate(activeProject.id)}
                 disabled={startProject.isPending || activeProject.status === 'completed'}
-                className="rounded-md bg-emerald-600/80 px-3 py-1.5 text-xs font-medium text-white hover:bg-emerald-600 disabled:opacity-50"
+                className="rounded-md bg-emerald-800 px-3 py-1.5 text-xs font-medium text-white hover:bg-emerald-900 disabled:opacity-50"
               >
                   Iniciar proyecto
               </button>

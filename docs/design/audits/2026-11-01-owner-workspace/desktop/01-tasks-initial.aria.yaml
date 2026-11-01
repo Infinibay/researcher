@@ -1,0 +1,64 @@
+- link "Ir al contenido":
+  - /url: "#main-content"
+- complementary:
+  - text: Researcher
+  - navigation "Navegación principal":
+    - link "Resumen":
+      - /url: /
+      - img
+      - text: Resumen
+    - link "Proyectos":
+      - /url: /projects
+      - img
+      - text: Proyectos
+    - link "Planificación":
+      - /url: /epics
+      - img
+      - text: Planificación
+    - link "Tareas":
+      - /url: /tasks
+      - img
+      - text: Tareas
+    - link "Agentes":
+      - /url: /agents
+      - img
+      - text: Agentes
+    - link "Conversación":
+      - /url: /chat
+      - img
+      - text: Conversación
+    - link "Documentos":
+      - /url: /wiki
+      - img
+      - text: Documentos
+    - link "Hallazgos":
+      - /url: /findings
+      - img
+      - text: Hallazgos
+    - link "Informes":
+      - /url: /reports
+      - img
+      - text: Informes
+    - link "Archivos":
+      - /url: /files
+      - img
+      - text: Archivos
+    - link "Repositorios":
+      - /url: /repositories
+      - img
+      - text: Repositorios
+    - link "Ejecución":
+      - /url: /flow
+      - img
+      - text: Ejecución
+- banner:
+  - button "Seleccionar proyecto":
+    - text: Elegir proyecto…
+    - img
+  - button "Cerrar sesión"
+  - button "Actividad del proyecto":
+    - img
+- main:
+  - paragraph: TAREAS
+  - heading "Elige un proyecto para trabajar" [level=1]
+  - paragraph: Selecciona el proyecto en la cabecera. Aquí podrás consultar sus tareas, contrastar evidencia y corregir el contexto.

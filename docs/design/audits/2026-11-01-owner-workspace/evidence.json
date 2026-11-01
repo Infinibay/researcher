@@ -1,0 +1,272 @@
+{
+  "desktop": {
+    "trial": "owner-ui-a91436fe",
+    "fixture": {
+      "status": "captured_unreviewed",
+      "source_trial": "analysis-inference-7792402f",
+      "model_turns_submitted": 0,
+      "image_generation_calls": 0,
+      "login_flow": "preauthenticated via real owner HTTP; login UI not tested",
+      "source_runtime_tables_unchanged": true,
+      "copy_runtime_tables_unchanged": true,
+      "visual_acceptance": false,
+      "build_index_sha256": "901f80f225b7eee47feb5993306fd6db7dd3e051e17e49754782fd78c6c7bbc0"
+    },
+    "capture": {
+      "browser": "156.0.8078.4",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "captures": [
+        {
+          "step": 1,
+          "route": "/tasks",
+          "label": "01-tasks-initial",
+          "violations": []
+        },
+        {
+          "step": 2,
+          "route": "/tasks",
+          "label": "02-project-menu",
+          "violations": []
+        },
+        {
+          "step": 3,
+          "route": "/tasks",
+          "label": "03-tasks-selected",
+          "violations": []
+        },
+        {
+          "step": 4,
+          "route": "/tasks",
+          "label": "04-task-inspector",
+          "violations": []
+        },
+        {
+          "step": 5,
+          "route": "/tasks",
+          "label": "05-commands-open",
+          "violations": []
+        },
+        {
+          "step": 6,
+          "route": "/tasks",
+          "label": "06-command-output",
+          "violations": []
+        },
+        {
+          "step": 7,
+          "route": "/chat",
+          "label": "07-chat-selected",
+          "violations": []
+        },
+        {
+          "step": 8,
+          "route": "/chat",
+          "label": "08-chat-task",
+          "violations": []
+        }
+      ],
+      "blocked_external_origins": [],
+      "page_errors": [],
+      "assets": [
+        {
+          "path": "/assets/index-CUJrkn4w.css",
+          "status": 200,
+          "content_type": "text/css; charset=utf-8"
+        },
+        {
+          "path": "/assets/index-7K2BXMEP.js",
+          "status": 200,
+          "content_type": "text/javascript; charset=utf-8"
+        }
+      ],
+      "mutating_requests": [],
+      "keyboard": {
+        "skip_link_first": true,
+        "skip_moves_focus_to_main": true
+      },
+      "navigation": {
+        "main_focused": true,
+        "heading_in_viewport": true
+      }
+    },
+    "artifact_sha256": {
+      "01-tasks-initial.png": "5c3dd561aadb794ca8427d234425b5f57e454b552219d9daab45d641d7e7e733",
+      "01-tasks-initial.aria.yaml": "01154d889f4673ac5a717ccd6d4dc804a03f58119b3d34645903bd5f00ab1825",
+      "01-tasks-initial.layout.json": "d43a1a0717b3b9322d873f94aa3dfcd207e4697f9ece97fbb9d2a080b71add50",
+      "01-tasks-initial.axe.json": "5cd6fdf5627ac58aa29d439dea40d3b5f9da63ab2b66fcdb92ee3a9e7e08ab47",
+      "02-project-menu.png": "4b57fb3a0e9d0ac529d6f03908f116903bca970fc4a494bd15ae80f3ab781196",
+      "02-project-menu.aria.yaml": "3e0a428c2a6c2bb0021bba207cc5a275a0699f5d5455b5198a4147049f5b1338",
+      "02-project-menu.layout.json": "a6f5d3d52a68d85f1f6acd806aa46f919dab88100dae433ac6766e4b7b411e64",
+      "02-project-menu.axe.json": "d71046e7eb3d38b3cffb48e1282fdc92c120d3cf4812893a2f3745cd1f2f0553",
+      "03-tasks-selected.png": "75d4173eab990c6656c77a85a337f03961c801f522aef43ccc4cff62de5e39f9",
+      "03-tasks-selected.aria.yaml": "c719e4d753fbf0badd697b524d7cc7135003700210def025f21ad2ce54b3d5ef",
+      "03-tasks-selected.layout.json": "a8c4d0ccb859dd1bb55c7558052f5f92349a907fbd397ca5d3f98f21b7335730",
+      "03-tasks-selected.axe.json": "8fa8c8055b6be97e9ddcb46b732be98ec38efc9628a2094b5b20e02291be8f97",
+      "04-task-inspector.png": "98f85888fda75a19460beb1ae155c6b731256bd50c2dd05006c4a23d3f807b81",
+      "04-task-inspector.aria.yaml": "c9b6ceb2ab66f89a492ef00eb3fcc81be8d11d7adcf53e0be671c02c46837a7d",
+      "04-task-inspector.layout.json": "a8c4d0ccb859dd1bb55c7558052f5f92349a907fbd397ca5d3f98f21b7335730",
+      "04-task-inspector.axe.json": "31f5cb82a1ac0e563f445a0dcb1b7ba630b9d1fbffdea68cb9c1886ebbbe143a",
+      "05-commands-open.png": "39230aeaed9bae69da639043776929d599bfe8a420539eb74892006110a4881a",
+      "05-commands-open.aria.yaml": "92b010131ba61c35309a54141f7f81f6444b113b9d74b523cfed192e54d31045",
+      "05-commands-open.layout.json": "a8c4d0ccb859dd1bb55c7558052f5f92349a907fbd397ca5d3f98f21b7335730",
+      "05-commands-open.axe.json": "d8d3ef0531d92863598178c5b2c59722ea87415ba00de6ed199c9bdb779bb4cc",
+      "06-command-output.png": "2c01331e8917592929c18497e4c3601a55eef02fc0b47fed11478f5f5c978782",
+      "06-command-output.aria.yaml": "7388c07bfe5808a4e783a0fab55d2e518b8c5965090d8e73f2dad66abd11bc60",
+      "06-command-output.layout.json": "a8c4d0ccb859dd1bb55c7558052f5f92349a907fbd397ca5d3f98f21b7335730",
+      "06-command-output.axe.json": "8f4956a2ceca239724509dd18399d3e822c7f600433a93cfb111f3429397cd2b",
+      "07-chat-selected.png": "0af3ae7a7f05c9e9bb1e2303eba4f42e074607bb2c7d9c987b77b60e825cff27",
+      "07-chat-selected.aria.yaml": "f407352618eaa6918e9b2afdad26985830d41a5e4d46e9bc4bb54248c0919ced",
+      "07-chat-selected.layout.json": "a8c4d0ccb859dd1bb55c7558052f5f92349a907fbd397ca5d3f98f21b7335730",
+      "07-chat-selected.axe.json": "7b177b2fc230ec0d81fdb1fae13cb74608736080535639d3ef40cf4faa2e906b",
+      "08-chat-task.png": "985f1bb40d187a77726022ab4a39e0f5e6b5b8cfc87b934a03147efaa1627a7b",
+      "08-chat-task.aria.yaml": "13733a6da215ee833507adbe9e9210e32cb005e73751f73cf4a1b9c71948d0b7",
+      "08-chat-task.layout.json": "a8c4d0ccb859dd1bb55c7558052f5f92349a907fbd397ca5d3f98f21b7335730",
+      "08-chat-task.axe.json": "e6b9dcb88ea49a08c631cabb9ed9729c11a3cb4b3fe31c80ff0eb10494604272"
+    },
+    "screenshots_inspected": true,
+    "scope": "Saved viewport pixels; internal main scroll position differs by step. Full route acceptance remains pending."
+  },
+  "mobile": {
+    "trial": "owner-ui-07d210fa",
+    "fixture": {
+      "status": "captured_unreviewed",
+      "source_trial": "analysis-inference-7792402f",
+      "model_turns_submitted": 0,
+      "image_generation_calls": 0,
+      "login_flow": "preauthenticated via real owner HTTP; login UI not tested",
+      "source_runtime_tables_unchanged": true,
+      "copy_runtime_tables_unchanged": true,
+      "visual_acceptance": false,
+      "build_index_sha256": "901f80f225b7eee47feb5993306fd6db7dd3e051e17e49754782fd78c6c7bbc0"
+    },
+    "capture": {
+      "browser": "156.0.8078.4",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "captures": [
+        {
+          "step": 1,
+          "route": "/tasks",
+          "label": "01-tasks-initial",
+          "violations": []
+        },
+        {
+          "step": 2,
+          "route": "/tasks",
+          "label": "02-project-menu",
+          "violations": []
+        },
+        {
+          "step": 3,
+          "route": "/tasks",
+          "label": "03-tasks-selected",
+          "violations": []
+        },
+        {
+          "step": 4,
+          "route": "/tasks",
+          "label": "04-task-inspector",
+          "violations": []
+        },
+        {
+          "step": 5,
+          "route": "/tasks",
+          "label": "05-commands-open",
+          "violations": []
+        },
+        {
+          "step": 6,
+          "route": "/tasks",
+          "label": "06-command-output",
+          "violations": []
+        },
+        {
+          "step": 7,
+          "route": "/tasks",
+          "label": "07-mobile-navigation",
+          "violations": []
+        },
+        {
+          "step": 8,
+          "route": "/chat",
+          "label": "08-chat-selected",
+          "violations": []
+        },
+        {
+          "step": 9,
+          "route": "/chat",
+          "label": "09-chat-task",
+          "violations": []
+        }
+      ],
+      "blocked_external_origins": [],
+      "page_errors": [],
+      "assets": [
+        {
+          "path": "/assets/index-CUJrkn4w.css",
+          "status": 200,
+          "content_type": "text/css; charset=utf-8"
+        },
+        {
+          "path": "/assets/index-7K2BXMEP.js",
+          "status": 200,
+          "content_type": "text/javascript; charset=utf-8"
+        }
+      ],
+      "mutating_requests": [],
+      "keyboard": {
+        "skip_link_first": true,
+        "skip_moves_focus_to_main": true
+      },
+      "navigation": {
+        "main_focused": true,
+        "heading_in_viewport": true
+      }
+    },
+    "artifact_sha256": {
+      "01-tasks-initial.png": "02537b7fb44e04ac2e7ce86f535f04a12c622fbdef48d305a16ff9a0b6f94400",
+      "01-tasks-initial.aria.yaml": "26bed892a5a5e5a7e6b53b726f7eec8198f76720b677bd24800beece14081317",
+      "01-tasks-initial.layout.json": "74cfa7716fbf3c4ae2536f59a976360ac17e8d73dc69fb074b335e7325157b89",
+      "01-tasks-initial.axe.json": "bcc8ca65c477c2e2e1b917c61e878afc4da726845d8bd964ba819c058e304bd3",
+      "02-project-menu.png": "2ba2c6d49c92a151cc498a02c7fd7a8dba462dc2409fc2568c2cb4d624c9a5c6",
+      "02-project-menu.aria.yaml": "20671ffdba03bfe0f7744edf7cc679471bd17b982bae42a468ac47daa1ce7e6b",
+      "02-project-menu.layout.json": "dab789a6466ff0572331c3581ffac3e483ef2ecfc39d9e377f4420d12cde8109",
+      "02-project-menu.axe.json": "d6826a5d5b502bb4b140e851eeb879e44ded450780db7f82fff2b26b57688588",
+      "03-tasks-selected.png": "b2b1537840601c71ab01481538d7d4901b65fe9a5e3e70b760430fb8a7fc261d",
+      "03-tasks-selected.aria.yaml": "87ab132ad49039a4db6cff42993a6dcac5432661c70bfc66fa1f383d14d7fa84",
+      "03-tasks-selected.layout.json": "97da1154b3324525e8f9e86fa5596d2d50ee5a2e6faaa50726c706a985bc1108",
+      "03-tasks-selected.axe.json": "a4bec1ee9a9c90cff7c29cc0344518f02dcc0075f918f888fa2d323edf9407d2",
+      "04-task-inspector.png": "bc775134c5836328836ec479958eb15b63413aa2a6f8d7ca73bd2194150fdd79",
+      "04-task-inspector.aria.yaml": "6dd612a6498d05cac26bfaad4e139c36915bc2a70813c419f412627a741a842d",
+      "04-task-inspector.layout.json": "97da1154b3324525e8f9e86fa5596d2d50ee5a2e6faaa50726c706a985bc1108",
+      "04-task-inspector.axe.json": "62458a76c91f4a2c63c143cedf10eefb29ae2421d23f1a610abca4914dcdc426",
+      "05-commands-open.png": "c4d3390ddff8dfe95bcd3752609a21dca039a92829d7cea08832d4e79e9ebf42",
+      "05-commands-open.aria.yaml": "be3de1ec5071b54f410f58ec2ca348808423338b2e1ca67ac882ff537d647da9",
+      "05-commands-open.layout.json": "97da1154b3324525e8f9e86fa5596d2d50ee5a2e6faaa50726c706a985bc1108",
+      "05-commands-open.axe.json": "2c19f9a753761e473c6441c35de18aec26260e2918bd36dcd5f490aff90a9abf",
+      "06-command-output.png": "c63223774a0e8cdd7333d8db039092bfa03b3dd6467ea6734c6c83421179f431",
+      "06-command-output.aria.yaml": "049c1c9335943aaac71119152e4e2dc5f7e0927978bd06c8a6028e1f864eb86d",
+      "06-command-output.layout.json": "97da1154b3324525e8f9e86fa5596d2d50ee5a2e6faaa50726c706a985bc1108",
+      "06-command-output.axe.json": "92cf7c0d761a118b25fcf16ce25b2495e01a88ff6055b1b2c25ddafa0c7962a5",
+      "07-mobile-navigation.png": "1e2ac2667fd037001ce78fd2c748552ed10d8c95043ba0002e9eaff09768df85",
+      "07-mobile-navigation.aria.yaml": "a5070bdbc2150884865071da2ed04e1d0a95091f4f3b798d2dd040a089041a68",
+      "07-mobile-navigation.layout.json": "97da1154b3324525e8f9e86fa5596d2d50ee5a2e6faaa50726c706a985bc1108",
+      "07-mobile-navigation.axe.json": "6ae998f1fa8a185489ae050f9dd381457b01032cd01d5793b9525249f535ab71",
+      "08-chat-selected.png": "41dc3cd45b6502c2955ca65c5d0284d595a13ca592d4457b7cf2ec70ae3397a5",
+      "08-chat-selected.aria.yaml": "41962112c846b3e42b728232b58bb500bdd79f3e94c7a1be59df893b8770c3b4",
+      "08-chat-selected.layout.json": "97da1154b3324525e8f9e86fa5596d2d50ee5a2e6faaa50726c706a985bc1108",
+      "08-chat-selected.axe.json": "cac4150af2bc964481dc0d18f8a4182830d7a34607e99db5b22d1cc00b07ce67",
+      "09-chat-task.png": "60951946d72bf342bbe41d330e32f9b808102e3e8e74779d65e3762a90e57c68",
+      "09-chat-task.aria.yaml": "8a1578db6a8da40f1a9413eba24151fb71a9d43b0ce464d2d0214426bb32f574",
+      "09-chat-task.layout.json": "97da1154b3324525e8f9e86fa5596d2d50ee5a2e6faaa50726c706a985bc1108",
+      "09-chat-task.axe.json": "c02be06a673e31739592a9dc1dd81a50699d116452a6128642989bfe8e317982"
+    },
+    "screenshots_inspected": true,
+    "scope": "Saved viewport pixels; internal main scroll position differs by step. Full route acceptance remains pending."
+  }
+}

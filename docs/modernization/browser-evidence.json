@@ -1,0 +1,80 @@
+{
+  "base_commit": "7ae7d98",
+  "scope": "Real preauthenticated owner Tasks/Conversation/command-output capture and browser-found origin/contrast/mobile/focus fixes",
+  "model_turns_submitted": 0,
+  "image_calls": 0,
+  "tools": {
+    "playwright": "1.64.1",
+    "axe_core_playwright": "4.14.0",
+    "chromium": "156.0.8078.4",
+    "node": "24.22.2",
+    "sandbox": true,
+    "platform_limit": "Playwright used the Ubuntu24.04 fallback browser build; actual sandboxed launch and both flows passed on this host."
+  },
+  "browser_report": "../design/audits/2026-11-01-owner-workspace/report.md",
+  "browser_artifacts": "../design/audits/2026-11-01-owner-workspace/evidence.json",
+  "source_sha256": {
+    "backend/api/local_access.py": "4c3ea801b2bba49ff474c9c829966e87be30636478b193600bd83ee4ec10fad4",
+    "backend/tests/api/test_local_access.py": "d81b671644bca2ce8087822c941e7fb18333a111017478c0fdc129fe19083c4e",
+    "frontend/index.html": "087899d7a7cf76c595b27226bdb9167bb074a0a0ac9c0e198b390e7a2da79e3a",
+    "frontend/package.json": "16dcbf6abe8eb5185a85b20bf2df1ddae94232d5e6a46b95fe0d9c69f31902d0",
+    "frontend/package-lock.json": "300b10fc3359b492ed01a2527c1462d3315cf7bed77798bb5720948b549fb858",
+    "frontend/src/App.tsx": "282aa94cdc2edf8e163094a39eea1e6bda191c96a1529bffd38a94edb8557a4a",
+    "frontend/src/components/layout/Header.tsx": "819782e60a2092596c79a3e51314543aaddb0375108a43a280d92b5f8603e7bd",
+    "frontend/src/main.tsx": "0c244e3331fcfb90041eb6069322b2a2a2e32aea9726ed0f5f388471e1668a08",
+    "frontend/src/styles/workspace.css": "99f79dc2cf9e18c1c440e5f64f9afed7f7e093990fa52c4b394ae9023bf4fe7b",
+    "evals/ui/capture_owner.mjs": "635aac1107bfb7d85f0f899508cc8abfc3d0717fb45e1d7e58d4442c233c533a",
+    "evals/ui/run_owner_capture.py": "fb61b5a1ed5af5f1361e43b6108f864172efdeb5d41d068cb8887a46e1eb7aa7"
+  },
+  "log_sha256": {
+    "browser-origin-red.log": "61f796aa1282e7df53499f91a18bd8d68df56146ff1b04c35314e7009a49284e",
+    "browser-origin-green.log": "18d05b7117f0ad6c57a76442476fc3664a14f255d1b00c6f4aa389b089de5cfc",
+    "browser-origin-full.log": "d189ed88656f22fb07009ccd5bfc67cfcc6ecfd89fcc73cba86bfcfa13ad77e0",
+    "browser-origin-full.xml": "ae20bee58028b4c7065f8fe9ed9e66a4b45b94f1b8364afcfe4d64a7226485e5",
+    "browser-contrast-red.log": "6d504e257b4666865fa20ffc7286708f233e9801aa218196fa84c619b83d1353",
+    "browser-contrast-green.log": "99bfc6ba1ded366ddc9607c5ee92a3144a0a3df544e8824d1845edc6cf891579",
+    "browser-mobile-bounds-red.log": "144a0a7368cb006bcdbfc086553e2c6205be3dc26e568dccbfa0c0302c371007",
+    "browser-mobile-height-green-menu-red.log": "26df4f544d39897e91d6c1159a4bfb41a5a364ff4f430a12e945c1d3209e1500",
+    "browser-keyboard-red.log": "aa8ecbc39a8ffd0ecf749c55ac1a10a25283daca8b4cf5dd413d215f0de25e57",
+    "browser-route-focus-red.log": "18d808b6fcb1832816080584f783b513d79d2b65f52bee9be4106b15480886b6",
+    "browser-route-scroll-red.log": "97cc9233ba625b48a782a945c55f471309950543d7b322affc92a90374f7bf80",
+    "browser-route-desktop-green.log": "4bb7c7b16e7c71369cf59bdcb565e078e1e1baa1b7997b07f2319e29d8cd772c",
+    "browser-route-mobile-green.log": "dc219d981c628f4c61de9f7a1500fa13675c18749b643a87f71da8225959da23",
+    "browser-route-final-build.log": "983644c30ccfc28256a242c56ebf075a2bbf3535e76bd2df1730de5845ae324f",
+    "browser-route-final-tests.log": "4e5358b13434e3228c72171246745559703726634c2a4f782bdc134629655f53",
+    "browser-wheel.log": "8a2ee9625b69013daac75dd21367e8d85776cdae6e6863228e69230d198d1576",
+    "browser-baseline-audit.json": "a269f90c2fc4be761f46895f593db3857a527c800b9c68871721b1caaca187ab",
+    "browser-tooling-audit.json": "f59c4011a386ad2083e39476fe6a18994226f34b5a45138c8dd022be30ffc4b7"
+  },
+  "dependency_audit": {
+    "baseline": {
+      "info": 0,
+      "low": 5,
+      "moderate": 3,
+      "high": 10,
+      "critical": 0,
+      "total": 18
+    },
+    "current": {
+      "info": 0,
+      "low": 5,
+      "moderate": 3,
+      "high": 10,
+      "critical": 0,
+      "total": 18
+    },
+    "new_vulnerable_packages": []
+  },
+  "reports": [
+    "browser-results.json",
+    "browser-packaging.json"
+  ],
+  "visual_routes_accepted": 0,
+  "limits": [
+    "Owner login UI was bypassed by real HTTP pairing; synthetic database copies only.",
+    "Fingerprint checks cover nine runtime tables, not every database table. Browser product requests made no mutations.",
+    "Eight desktop and nine mobile states; no claim of whole-web accessibility, screen-reader/zoom/human comprehension acceptance.",
+    "Wheel contains checked backend sources but does not bundle frontend assets; clean full-product installation remains unfinished.",
+    "All71 tools/11 categories, engine migration, global workspace ownership, full prompts, remaining10 routes/30 desktop+10 mobile concepts, baseline100 failures and final independent review remain in scope."
+  ]
+}

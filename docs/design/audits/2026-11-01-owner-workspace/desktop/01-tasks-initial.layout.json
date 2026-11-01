@@ -1,0 +1,43 @@
+{
+  "height": 64,
+  "cssHeight": "64px",
+  "scrollHeight": 63,
+  "controls": [
+    {
+      "name": "Menú",
+      "dropdown": false,
+      "insideHeader": true,
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    {
+      "name": "Seleccionar proyecto",
+      "dropdown": false,
+      "insideHeader": true,
+      "x": 216,
+      "y": 14.5,
+      "width": 163.59375,
+      "height": 34
+    },
+    {
+      "name": "Cerrar sesión",
+      "dropdown": false,
+      "insideHeader": true,
+      "x": 1273.125,
+      "y": 17.5,
+      "width": 98.875,
+      "height": 28
+    },
+    {
+      "name": "Actividad del proyecto",
+      "dropdown": false,
+      "insideHeader": true,
+      "x": 1384,
+      "y": 15.5,
+      "width": 32,
+      "height": 32
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+- link "Ir al contenido":
+  - /url: "#main-content"
+- banner:
+  - button "Menú"
+  - button "Seleccionar proyecto":
+    - text: Research ALPHA_ONLY
+    - img
+  - button "Cerrar sesión"
+  - text: new
+  - button "Iniciar proyecto"
+  - button "Actividad del proyecto":
+    - img
+- main:
+  - heading "Conversación" [level=1]
+  - paragraph: Una tarea, su conversación y el contexto de cada intervención.
+  - link "Gestionar tareas":
+    - /url: /tasks
+  - complementary "Tareas y preguntas del proyecto":
+    - region "Preguntas pendientes":
+      - heading "Preguntas pendientes" [level=2]
+      - paragraph: 0 solicitudes pendientes
+      - paragraph: No hay preguntas pendientes en este proyecto.
+      - list
+    - heading "Tareas" [level=2]
+    - text: Buscar tarea
+    - searchbox "Buscar tarea"
+    - list:
+      - listitem:
+        - 'button "Tarea #1001 Policy report Investigación"':
+          - text: "Tarea #1001"
+          - strong: Policy report
+          - text: Investigación
+  - heading "Elige una tarea" [level=2]
+  - paragraph: Abre una tarea para leer su conversación, responder sus preguntas o indicar qué quieres comprobar. Seleccionarla no inicia trabajo.
+  - group: Archivo de conversaciones del proyecto

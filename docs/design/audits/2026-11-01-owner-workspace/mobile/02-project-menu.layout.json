@@ -1,0 +1,61 @@
+{
+  "height": 113,
+  "cssHeight": "113px",
+  "scrollHeight": 214,
+  "controls": [
+    {
+      "name": "Menú",
+      "dropdown": false,
+      "insideHeader": true,
+      "x": 24,
+      "y": 8,
+      "width": 63.90625,
+      "height": 44
+    },
+    {
+      "name": "Seleccionar proyecto",
+      "dropdown": false,
+      "insideHeader": true,
+      "x": 95.90625,
+      "y": 8,
+      "width": 163.59375,
+      "height": 44
+    },
+    {
+      "name": "Research ALPHA_ONLY",
+      "dropdown": true,
+      "insideHeader": false,
+      "x": 17,
+      "y": 121,
+      "width": 254,
+      "height": 44
+    },
+    {
+      "name": "Research BETA_ONLY",
+      "dropdown": true,
+      "insideHeader": false,
+      "x": 17,
+      "y": 165,
+      "width": 254,
+      "height": 44
+    },
+    {
+      "name": "Cerrar sesión",
+      "dropdown": false,
+      "insideHeader": true,
+      "x": 223.125,
+      "y": 60,
+      "width": 98.875,
+      "height": 44
+    },
+    {
+      "name": "Actividad del proyecto",
+      "dropdown": false,
+      "insideHeader": true,
+      "x": 334,
+      "y": 60,
+      "width": 32,
+      "height": 44
+    }
+  ]
+}

@@ -45,7 +45,9 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
    responsive compartida, bandeja de preguntas por proyecto, historial, fuentes,
    correcciones y consulta de entrada. Existen 6/36 conceptos de escritorio y 2/12
    adaptaciones móviles, generados e inspeccionados, con selección razonada.
-   **0/12 páginas tienen aceptación visual**: CUA no dispone de navegador.
+   **0/12 páginas tienen aceptación visual completa**. Playwright/Chromium ya ejecuta
+   los pilotos: 8 estados de escritorio y 9 móviles pasan los controles automáticos;
+   salto al contenido, foco y navegación se comprobaron. Falta aceptación integral.
 10. **Migraciones/evidencia:** migraciones nuevas hasta versión 30, casos históricos,
     ensayos sobre copias sintéticas y comprobación de empaquetado. El último ensayo
     preservó 110 tablas, sus valores y rowids disponibles. No se migró una base del usuario.
@@ -95,10 +97,10 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 
 ## Verificación más reciente
 
-- Suite completa:1247 casos;1144 pasan,100 fallan con las mismas identidades de la
+- Suite completa:1252 casos;1149 pasan,100 fallan con las mismas identidades de la
   línea base y 3 se omiten. La suite global sigue roja.
-- Runtime:319 pasan. Frontend sin cambios:su última verificación registró28 pruebas
-  aprobadas y compilación TypeScript/Vite.
+- Runtime:319 pasan. Frontend:28 pruebas aprobadas y compilación TypeScript/Vite
+  tras los ajustes de contraste, cabecera móvil y navegación/foco.
 - Ensayo real de continuidad:2 turnos por suscripción, Ken real,4 peers cerrados,
   fuentes sin editar,2 informes draft y ninguna aceptación/publicación implícita.
 - Ensayo de análisis:1 turno adicional por suscripción, Ken real, catálogo de 15
@@ -108,9 +110,16 @@ de fases cerradas; los pilotos y pruebas acotadas no completan la migración glo
 - Inspección del propietario:servidor HTTP real sobre copia del ensayo anterior,
   sin runtime configurado ni inferencia nueva;14 lecturas reconstruyeron los95 bytes
   de salida. Nueve tablas conservaron sus valores tanto en original como en copia.
-- QA visual:pendiente por navegador no disponible; sin resultado de comprensión humana.
+- QA visual:17 estados reales capturados e inspeccionados en Chromium con sandbox,
+  sin infracciones detectadas por axe en esos estados. Se corrigieron carga same-origin,
+  contraste, cabecera móvil, salto inicial y foco/desplazamiento entre secciones.
+  Login, estados interactivos completos, lector de pantalla, zoom y comprensión humana
+  siguen pendientes;0/12 rutas aceptadas. Dependencias:18 avisos npm preexistentes
+  (5 bajos,3 moderados,10 altos), sin nuevos paquetes vulnerables por Playwright/axe.
 
-Evidencia actual: [entrada/continuidad](run-input-evidence.json),
+Evidencia actual: [navegador](browser-evidence.json),
+[recorrido visual](../design/audits/2026-11-01-owner-workspace/report.md),
+[resultados actuales](browser-results.json), [entrada/continuidad](run-input-evidence.json),
 [resultados](ken-identity-results.json), [identidad de Ken](ken-identity-evidence.json), [consulta del propietario](owner-command-evidence.json),
 [análisis](analysis-evidence.json),
 [ensayo de análisis](analysis-live.json), [continuidad](run-input-live.json),

@@ -1265,7 +1265,17 @@
     },
     "design_audit": {
       "status": "pending",
-      "evidence": []
+      "evidence": [
+        "docs/design/audits/2026-11-01-owner-workspace/report.md",
+        "docs/design/audits/2026-11-01-owner-workspace/evidence.json",
+        "docs/modernization/browser-evidence.json",
+        "docs/modernization/browser-results.json",
+        "evals/ui/run_owner_capture.py",
+        "evals/ui/capture_owner.mjs"
+      ],
+      "notes": [
+        "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json."
+      ]
     },
     "36_desktop_concepts": {
       "status": "in_progress",
@@ -1342,7 +1352,16 @@
     "accessibility_e2e": {
       "status": "pending",
       "evidence": [
-        "design-qa.md"
+        "design-qa.md",
+        "docs/design/audits/2026-11-01-owner-workspace/report.md",
+        "docs/design/audits/2026-11-01-owner-workspace/evidence.json",
+        "docs/modernization/browser-evidence.json",
+        "docs/modernization/browser-results.json",
+        "evals/ui/run_owner_capture.py",
+        "evals/ui/capture_owner.mjs"
+      ],
+      "notes": [
+        "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json."
       ]
     },
     "legacy_removal": {
@@ -1424,13 +1443,22 @@
         "docs/modernization/run-input-packaging.json",
         "backend/tests/runtime/test_run_input.py",
         "backend/tests/runtime/test_run_input_migration.py",
-        "evals/runtime/run_input_continuity.py"
+        "evals/runtime/run_input_continuity.py",
+        "docs/design/audits/2026-11-01-owner-workspace/report.md",
+        "docs/design/audits/2026-11-01-owner-workspace/evidence.json",
+        "docs/modernization/browser-evidence.json",
+        "docs/modernization/browser-results.json",
+        "evals/ui/run_owner_capture.py",
+        "evals/ui/capture_owner.mjs"
       ],
       "remaining": [
         "Rendered browser and keyboard verification",
         "General project/role conversation and legacy question migration",
         "Command/cross-deployment recovery and full synchronization/pagination",
         "Professional concept-driven redesign remains separately pending"
+      ],
+      "notes": [
+        "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json."
       ]
     },
     "human_questions": {
@@ -1461,12 +1489,21 @@
         "backend/tests/runtime/test_run_input.py",
         "backend/tests/runtime/test_run_input_migration.py",
         "evals/runtime/run_input_continuity.py",
-        "frontend/tests/task-design.test.ts"
+        "frontend/tests/task-design.test.ts",
+        "docs/design/audits/2026-11-01-owner-workspace/report.md",
+        "docs/design/audits/2026-11-01-owner-workspace/evidence.json",
+        "docs/modernization/browser-evidence.json",
+        "docs/modernization/browser-results.json",
+        "evals/ui/run_owner_capture.py",
+        "evals/ui/capture_owner.mjs"
       ],
       "remaining": [
         "Migrate legacy producers/typed replies without widened authority.",
         "Complete event synchronization/history retention and long conversation checkpoints.",
         "Rendered/accessibility/human comprehension acceptance."
+      ],
+      "notes": [
+        "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json."
       ]
     },
     "research_run_recovery": {
@@ -1622,13 +1659,22 @@
         "backend/tests/runtime/test_owner_command_output.py",
         "frontend/tests/command-output.test.ts",
         "evals/runtime/run_owner_command_inspection.py",
-        "docs/modernization/owner-command-qa.json"
+        "docs/modernization/owner-command-qa.json",
+        "docs/design/audits/2026-11-01-owner-workspace/report.md",
+        "docs/design/audits/2026-11-01-owner-workspace/evidence.json",
+        "docs/modernization/browser-evidence.json",
+        "docs/modernization/browser-results.json",
+        "evals/ui/run_owner_capture.py",
+        "evals/ui/capture_owner.mjs"
       ],
       "remaining": [
         "Browser/mobile/keyboard/focus/screen-reader/zoom and human acceptance of the owner inspector.",
         "General execution-history pagination, event catch-up and retention.",
         "Broader production Stop/correction/unknown-receipt cases and migration of legacy tool consumers.",
         "Full modernization scope is unchanged; writable workspaces/acceptance and other tools/engine/prompts/UI remain."
+      ],
+      "notes": [
+        "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json."
       ]
     },
     "ken_admitted_identity": {
@@ -1648,6 +1694,25 @@
         "Global authority/bootstrap/duplicate durable namespace identity before G and full lifecycle/restore handoff.",
         "Pinned filesystem views for all mutable actors, alias/topology policy and migration of retained consumers.",
         "Full prompt/human/UI/tool/engine modernization and final independent whole-branch review."
+      ]
+    },
+    "owner_browser_capture": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/design/audits/2026-11-01-owner-workspace/report.md",
+        "docs/design/audits/2026-11-01-owner-workspace/evidence.json",
+        "docs/modernization/browser-evidence.json",
+        "docs/modernization/browser-results.json",
+        "evals/ui/run_owner_capture.py",
+        "evals/ui/capture_owner.mjs",
+        "backend/tests/api/test_local_access.py",
+        "docs/modernization/browser-packaging.json"
+      ],
+      "remaining": [
+        "All interactive/error/recovery/login states and full keyboard/screen-reader/zoom/human acceptance; 0/12 routes accepted.",
+        "Remaining10 route redesigns,30 desktop+10 mobile concepts and shared control/lifecycle migration.",
+        "Full E2E bootstrap/clean-install suite; current capture requires a prior synthetic analysis trial.",
+        "Global engine/tool/prompt/ownership modernization and100 baseline failures remain in scope."
       ]
     }
   }

@@ -1,0 +1,32 @@
+{
+  "wheel": "researcher-0.1.0-py3-none-any.whl",
+  "sha256": "647b6e5fe9eb2853151cfa982401bf1b3a510e19e2536f1243faf5f76ed37b1b",
+  "source_files_equal": {
+    "backend/api/local_access.py": true,
+    "backend/runtime/__init__.py": true,
+    "backend/runtime/codex_rpc.py": true,
+    "backend/runtime/codex_session.py": true,
+    "backend/runtime/contracts.py": true,
+    "backend/runtime/sqlite_runs.py": true,
+    "backend/runtime/command_jobs.py": true,
+    "backend/runtime/native_commands.py": true,
+    "backend/runtime/ken_worker.py": true,
+    "backend/runtime/live_grants.py": true,
+    "backend/runtime/business_mediation.py": true,
+    "backend/runtime/native_inference.py": true,
+    "backend/runtime/service.py": true,
+    "backend/runtime/views.py": true,
+    "backend/runtime/questions.py": true,
+    "backend/runtime/sqlite_questions.py": true,
+    "backend/runtime/peer_process.py": true,
+    "backend/runtime/peer_registry.py": true,
+    "backend/runtime/peer_payload.py": true,
+    "backend/runtime/peer_guard.py": true,
+    "backend/runtime/recovery.py": true,
+    "backend/runtime/workspaces.py": true,
+    "backend/runtime/run_inputs.py": true,
+    "backend/runtime/analysis_tools.py": true,
+    "backend/runtime/command_output.py": true
+  },
+  "frontend_assets_packaged": false
+}
