@@ -54,3 +54,28 @@ def test_unknown_database_is_not_overwritten_or_marked_initialized(tmp_path):
     with sqlite3.connect(path) as conn:
         assert conn.execute("SELECT value FROM customer_data").fetchone() == ("retain",)
         assert conn.execute("SELECT name FROM sqlite_master WHERE name='projects'").fetchone() is None
+
+
+@pytest.mark.parametrize("kind", ["missing", "empty"])
+def test_serving_requires_initialized_database_without_creating_or_changing_it(tmp_path, kind):
+    path = tmp_path / "absent-parent" / "source.db"
+    if kind == "empty":
+        path.parent.mkdir()
+        path.touch()
+    with pytest.raises((RuntimeError, sqlite3.OperationalError)):
+        db.ensure_migrations(str(path), existing_only=True)
+    if kind == "missing":
+        assert not path.parent.exists()
+    else:
+        assert path.read_bytes() == b""
+        assert sorted(p.name for p in path.parent.iterdir()) == ["source.db"]
+
+
+def test_existing_only_migration_preserves_recognized_data(tmp_path):
+    path = tmp_path / "source.db"
+    db.ensure_migrations(str(path))
+    with sqlite3.connect(path) as conn:
+        conn.execute("INSERT INTO projects (name) VALUES ('kept')")
+    db.ensure_migrations(str(path), existing_only=True)
+    with sqlite3.connect(path) as conn:
+        assert conn.execute("SELECT name FROM projects").fetchall() == [("kept",)]

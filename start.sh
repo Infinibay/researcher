@@ -31,6 +31,25 @@ OLLAMA_EMBED_MODEL="${INFINIBAY_EMBEDDING_MODEL:-nomic-embed-text}"
 OLLAMA_HOST="${OLLAMA_HOST:-http://localhost:11434}"
 DB_PATH="$(python3 -c 'from backend.config.paths import resolve_database_path; print(resolve_database_path())')"
 DB_DIR="$(dirname "$DB_PATH")"
+
+# Refuse missing/empty/unrecognized state BEFORE model/container setup or PID files.
+# Use only stdlib here: the locked Python environment is prepared later.
+python3 - "$DB_PATH" <<'PY_PREFLIGHT'
+import sqlite3
+import sys
+from contextlib import closing
+from pathlib import Path
+from urllib.parse import quote
+
+uri = "file:" + quote(str(Path(sys.argv[1]).absolute()), safe="/") + "?mode=ro"
+try:
+    with closing(sqlite3.connect(uri, uri=True)) as conn:
+        if conn.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='schema_migrations'").fetchone() is None:
+            raise ValueError("No initialized schema_migrations history")
+except (OSError, ValueError, sqlite3.DatabaseError) as exc:
+    print(f"Database startup refused: {exc}. For a NEW installation run researcher-bootstrap init-db --database PATH; otherwise verify/restore existing data.", file=sys.stderr)
+    raise SystemExit(1)
+PY_PREFLIGHT
 VENV_DIR="$SCRIPT_DIR/.venv"
 FRONTEND_DIR="$SCRIPT_DIR/frontend"
 
@@ -272,57 +291,13 @@ ok "Activated locked Python environment ($(python3 --version))"
 # ── 4. Database ─────────────────────────────────────────────────────────────
 step "Database"
 
-mkdir -p "$DB_DIR"
+python3 - "$DB_PATH" <<'PY_MIGRATE'
+import sys
+from backend.tools.base.db import ensure_migrations
 
-SCHEMA_FILE="$SCRIPT_DIR/backend/db/schema.sql"
-if [ ! -f "$SCHEMA_FILE" ]; then
-    die "Schema file not found: $SCHEMA_FILE"
-fi
-
-if [ ! -f "$DB_PATH" ]; then
-    python3 -c "
-import sqlite3
-conn = sqlite3.connect('$DB_PATH')
-conn.executescript(open('$SCHEMA_FILE').read())
-conn.execute('PRAGMA journal_mode = WAL')
-conn.close()
-print('Database initialized')
-"
-    ok "Created database at $DB_PATH"
-else
-    # DB file exists — ensure schema is initialized (handles empty DB files)
-    python3 -c "
-import sqlite3
-conn = sqlite3.connect('$DB_PATH')
-tables = [r[0] for r in conn.execute(\"SELECT name FROM sqlite_master WHERE type='table'\").fetchall()]
-if 'projects' not in tables:
-    print('Database file exists but schema is missing — initializing...')
-    conn.executescript(open('$SCHEMA_FILE').read())
-    conn.execute('PRAGMA journal_mode = WAL')
-    conn.close()
-    print('Schema initialized')
-else:
-    conn.close()
-    print('Database exists with schema')
-"
-    ok "Database exists at $DB_PATH"
-fi
-
-# Run migrations on existing databases
-python3 -c "
-import sqlite3
-conn = sqlite3.connect('$DB_PATH')
-conn.row_factory = sqlite3.Row
-# Migration 8: add original_description column to projects
-cols = [r[1] for r in conn.execute('PRAGMA table_info(projects)').fetchall()]
-if 'original_description' not in cols:
-    conn.execute('ALTER TABLE projects ADD COLUMN original_description TEXT')
-    conn.execute('UPDATE projects SET original_description = description WHERE original_description IS NULL')
-    conn.execute(\"INSERT OR IGNORE INTO schema_migrations(version, name) VALUES (8, 'add_original_description_to_projects')\")
-    conn.commit()
-    print('Migration 8: added original_description column')
-conn.close()
-"
+ensure_migrations(sys.argv[1], existing_only=True)
+PY_MIGRATE
+ok "Existing database migrated at $DB_PATH"
 
 # ── 5. Frontend ─────────────────────────────────────────────────────────────
 step "Frontend"

@@ -6,8 +6,9 @@ import random
 import sqlite3
 import time
 from collections.abc import Callable
-from contextlib import contextmanager
+from contextlib import closing, contextmanager
 from pathlib import Path
+from urllib.parse import quote
 
 from backend.config.paths import resolve_database_path
 from backend.config.settings import settings
@@ -107,17 +108,34 @@ def db_transaction(db_path: str | None = None):
         yield conn
 
 
-def ensure_migrations(db_path: str | None = None) -> None:
+def ensure_migrations(db_path: str | None = None, *, existing_only: bool = False) -> None:
     """Run pending schema migrations for existing databases.
 
     Checks the ``schema_migrations`` table and applies any missing
-    migrations.  Safe to call multiple times (idempotent).
+    migrations. Safe to call multiple times. Serving requires an already
+    initialized file; explicit installation/legacy callers may create one.
     """
     if db_path is None:
         db_path = get_db_path()
 
-    Path(db_path).parent.mkdir(parents=True, exist_ok=True)
-    conn = get_connection(db_path)
+    if existing_only:
+        # Check without setting WAL or modifying an empty/unrecognized file.
+        # The actual writer also uses mode=rw: disappearance cannot create a DB.
+        uri = "file:" + quote(str(Path(db_path).absolute()), safe="/") + "?mode=ro"
+        with closing(sqlite3.connect(uri, uri=True)) as inspection:
+            known = inspection.execute(
+                "SELECT 1 FROM sqlite_master WHERE type='table' AND name='schema_migrations'"
+            ).fetchone()
+            if known is None:
+                raise RuntimeError(
+                    "Database has no schema_migrations history; serving will not initialize it. "
+                    "For a NEW installation use researcher-bootstrap init-db --database PATH; "
+                    "for an existing installation restore/verify its database."
+                )
+        conn = connect(db_path, existing_only=True)
+    else:
+        Path(db_path).parent.mkdir(parents=True, exist_ok=True)
+        conn = get_connection(db_path)
     try:
         tables = {
             row[0] for row in conn.execute(
@@ -125,6 +143,8 @@ def ensure_migrations(db_path: str | None = None) -> None:
             )
         }
         if not tables:
+            if existing_only:
+                raise RuntimeError("Initialized database disappeared; refusing bootstrap while serving")
             schema = (Path(__file__).resolve().parents[2] / "db" / "schema.sql").read_text()
             # Connection pragmas are already configured; some cannot change
             # inside the transaction that makes initial schema creation atomic.

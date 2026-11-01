@@ -9,10 +9,10 @@ Motivos del ajuste: [diagnóstico del proceso](workflow-review.md).
 - Hay un primer recorrido de investigación con Codex, suscripción, Ken, análisis y reporte persistido. La prueba real de entrada de producto terminó; su monitor falló y se recuperó evidencia durable sin repetir inferencia. No se recuperaron las métricas de memoria perdidas.
 - Las 43 entradas de escenarios siguen abiertas en `coverage.json`: 33 en progreso y 10 pendientes. Son escenarios amplios; esto no significa que sus componentes no funcionen.
 - Interfaz: 2 pilotos, 6/36 conceptos de escritorio y 2/12 móviles; 0/12 páginas con aceptación completa.
-- Última suite registrada: 1470 aprobadas, 100 fallos heredados y 3 omitidas. Falta resolver o retirar con justificación los casos del sistema reemplazado.
+- Última suite registrada: 1493 aprobadas, 100 fallos heredados y 3 omitidas. Falta resolver o retirar con justificación los casos del sistema reemplazado.
 - No hay porcentaje global defendible todavía. El 30% anterior era una impresión, no una medición de alcance ponderado.
 
-## Bloque activo: cerrar el arranque del recorrido existente
+## Última entrega verificada: arranque del recorrido existente
 
 **Resultado:** una instalación nueva se inicializa explícitamente; servir con base ausente/vacía o autoridad perdida no recrea estado; un fallo de arranque limpia los recursos que alcanzó a abrir.
 
@@ -20,7 +20,9 @@ Motivos del ajuste: [diagnóstico del proceso](workflow-review.md).
 
 **Límite:** reutilizar journal, broker y fábrica actuales. Un defecto nuevo amplía este bloque sólo si impide esa salida o demuestra un riesgo obligatorio del plan; dejar evidencia y coste de la ampliación.
 
-## Siguiente entrega visible
+Verificado: inicializadores explícitos, guardias de API/CLI/launcher y cleanup ante fallos/cancelación; 23 casos nuevos pasan. Fuente: [guía y límites](bootstrap.md), [resultados](bootstrap-results.json) y [paquete](bootstrap-packaging.json). El host completo y restore siguen pendientes.
+
+## Bloque activo: informe visible y corregible
 
 **Resultado:** ver el informe real desde la web, entender sus fuentes y límites, corregir una premisa y comprobar el nuevo estado sin perder el informe anterior.
 

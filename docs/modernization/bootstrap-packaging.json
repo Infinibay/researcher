@@ -1,0 +1,32 @@
+{
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "0d1027f4a1b7c27c91fad8cf9486b48e85b55aec52d27dac2b178a3ef2e64d3a",
+  "source_comparisons": {
+    "backend/runtime/bootstrap.py": "36a8fcc73d247b3a2c15ef2659a38dfd9bebcdce2b447b7b5e8d97b20138e7d5",
+    "backend/cli/bootstrap.py": "353b8011b9990440a093954b99b8d4595863ba92cf4c497cb1a8fd1ae7051ae5",
+    "backend/cli/main.py": "5bf0d14fe1c6ac037bd31c99e2020ad58c7e0f84ebff97eeb37818fff175f00f",
+    "backend/api/main.py": "3a56c792b1e9501c056beb10d632160f0615fd57b5d6d9fa1eb56baa941b6181",
+    "backend/api/run.py": "431c3f13bd938ec7026f2428b5e198e05ef3d51bc474b38cf21c8ea14e00e9c9",
+    "backend/tools/base/db.py": "882ef9a23b5689c9388e3c9499e9bab34965984f97f1de0044b1ac2f7bd07812",
+    "backend/tests/api/test_bootstrap_startup.py": "8b899c953d119e099b7d5d320c134b4b266282a1d1e8f7c879527f433d65f60b",
+    "backend/tests/api/test_startup.py": "03bfe4265b507ec4dadec35ed742f6c63c4bf66aa43cf31a750a690031cd91b8",
+    "backend/tests/cli/test_bootstrap.py": "103ad322f54e1ff434d68fe408f29e534234ff799a86574778682f1259ea5ac3",
+    "backend/tests/cli/test_startup.py": "79e4082f9fca566d42a2b51a9a074c497a705ec4e3b49eadbc14c1f42300c844",
+    "backend/tests/cli/test_launcher_startup.py": "5200a41050132d7bfe534185367aae83719b210db90ae5691c213dc93c31bf6e",
+    "backend/tests/tools/test_database_initialization.py": "f7b73c7426f4fc530f4a90fddecd3b88825909b544f5bd290afa8b038b93edcc",
+    "backend/tests/runtime/test_owned_factory.py": "b31964c72178bce021f3767bff84d337b050b187735c0c54fc38d0db3b206124",
+    "backend/db/schema.sql": "0e14f922b6df8ca55e0d4f1dc31ee59f34789dd5b0a5d70a87d0d0c3da6afa7e"
+  },
+  "observed": {
+    "entry_point_loaded_from_wheel": true,
+    "source_init_and_repeat_refusal": true,
+    "authority_commit_reopen": true,
+    "two_api_starts_preserve_data": true,
+    "missing_witness_not_recreated": true,
+    "backend_imports_from_extracted_wheel_only": true,
+    "backend_modules_loaded": 264,
+    "model_turns": 0,
+    "network": "disabled; Unix sockets allowed"
+  },
+  "limits": "Wheel plus explicitly supplied installed dependencies; no complete product/host install, frontend assets, real provider inference, or restore acceptance."
+}

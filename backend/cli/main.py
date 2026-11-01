@@ -43,10 +43,10 @@ def _ensure_researcher_home() -> Path:
 
 
 def _init_db() -> None:
-    """Initialize or migrate before continuing; startup must expose failures."""
+    """Migrate an initialized database; installation is an explicit command."""
     from backend.tools.base.db import ensure_migrations
 
-    ensure_migrations()
+    ensure_migrations(existing_only=True)
 
 
 def _run_initial_index(project_id: int = 1) -> None:

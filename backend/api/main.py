@@ -5,7 +5,7 @@ from __future__ import annotations
 import asyncio
 import logging
 import time
-from contextlib import asynccontextmanager
+from contextlib import ExitStack, asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
@@ -27,44 +27,76 @@ async def lifespan(app: FastAPI):
     from backend.api.run import setup_file_logging
     from backend.tools.base.db import ensure_migrations
 
-    setup_file_logging()
-    await asyncio.to_thread(ensure_migrations)
-    await asyncio.to_thread(app.state.local_access.start)
-    if app.state.runtime_service is None:
-        from backend.api.runtime_dependencies import configured_runtime
-
-        app.state.runtime_service = await asyncio.to_thread(
-            configured_runtime, app.state.live_grants, app=app
-        )
-    runtime = app.state.runtime_service
-    if runtime is not None:
-        await runtime.__aenter__()
-    try:
-        yield
-    finally:
-        if runtime is not None:
-            await runtime.__aexit__(None, None, None)
-        app.state.live_grants.close()
-        app.state.local_access.close()
-        logger.info("Shutdown signal received — stopping active flows")
-        from backend.api.flow_manager import flow_manager
-
-        active_ids = list(flow_manager._flows.keys())
-        for pid in active_ids:
+    with ExitStack() as cleanup:
+        runtime = None
+        entered = False
+        serving = False
+        try:
+            file_handler = setup_file_logging()
+            if file_handler is not None:
+                cleanup.callback(file_handler.close)
+                cleanup.callback(logging.getLogger().removeHandler, file_handler)
+            await asyncio.to_thread(ensure_migrations, existing_only=True)
+            # A cancelled to_thread await does not stop the file-creating worker.
+            # Drain it before finally removes its pairing file and sessions.
+            starting_access = asyncio.create_task(
+                asyncio.to_thread(app.state.local_access.start)
+            )
             try:
-                logger.info(
-                    "Stopping project %d: snapshotting state, stopping agents & listeners…",
-                    pid,
+                await asyncio.shield(starting_access)
+            except asyncio.CancelledError:
+                try:
+                    await starting_access
+                finally:
+                    raise
+            if app.state.runtime_service is None:
+                from backend.api.runtime_dependencies import configured_runtime
+
+                app.state.runtime_service = await asyncio.to_thread(
+                    configured_runtime, app.state.live_grants, app=app
                 )
-                await asyncio.to_thread(flow_manager.stop_project_flow, pid)
-                logger.info("Project %d stopped successfully", pid)
-            except Exception:
-                logger.warning(
-                    "Error stopping project %d during shutdown", pid, exc_info=True
-                )
-        logger.info(
-            "Shutdown reconciliation finished for %d active project(s)", len(active_ids)
-        )
+            runtime = app.state.runtime_service
+            if runtime is not None:
+                await runtime.__aenter__()
+                entered = True
+            serving = True
+            yield
+        finally:
+            try:
+                if entered:
+                    await runtime.__aexit__(None, None, None)
+            finally:
+                try:
+                    app.state.live_grants.close()
+                finally:
+                    try:
+                        app.state.local_access.close()
+                    finally:
+                        if serving:
+                            await _stop_active_flows()
+
+
+async def _stop_active_flows():
+    """Reconcile legacy flows only after this server reached serving state."""
+    logger.info("Shutdown signal received — stopping active flows")
+    from backend.api.flow_manager import flow_manager
+
+    active_ids = list(flow_manager._flows.keys())
+    for pid in active_ids:
+        try:
+            logger.info(
+                "Stopping project %d: snapshotting state, stopping agents & listeners…",
+                pid,
+            )
+            await asyncio.to_thread(flow_manager.stop_project_flow, pid)
+            logger.info("Project %d stopped successfully", pid)
+        except Exception:
+            logger.warning(
+                "Error stopping project %d during shutdown", pid, exc_info=True
+            )
+    logger.info(
+        "Shutdown reconciliation finished for %d active project(s)", len(active_ids)
+    )
 
 
 def create_app(*, access: LocalAccess | None = None, runtime_service=None) -> FastAPI:

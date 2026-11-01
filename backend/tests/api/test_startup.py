@@ -35,7 +35,7 @@ assert not any(t.name.startswith('infinibay-') for t in threading.enumerate()), 
     assert result.returncode == 0, result.stderr
 
 
-def test_serving_initializes_database_without_probing_a_model(tmp_path, monkeypatch):
+def test_serving_opens_explicitly_initialized_database_without_probing_a_model(tmp_path, monkeypatch):
     from backend.api.main import create_app
     from backend.config import llm, model_capabilities
 
@@ -51,8 +51,11 @@ def test_serving_initializes_database_without_probing_a_model(tmp_path, monkeypa
     database = tmp_path / "fresh.db"
     monkeypatch.setenv("INFINIBAY_DB", str(database))
 
+    from backend.runtime.bootstrap import initialize_database
+
     app = create_app()
     assert not database.exists(), "App construction must not initialize persistence"
+    initialize_database(database)
     with TestClient(app, base_url="http://localhost") as client:
         assert client.get("/api/health/ready").json() == {"ready": True}
     with sqlite3.connect(database) as conn:
@@ -65,7 +68,7 @@ def test_migration_failure_is_not_hidden_by_the_api_lifespan(monkeypatch):
 
     app = create_app()
 
-    def fail():
+    def fail(**kwargs):
         raise RuntimeError("schema migration failed")
 
     monkeypatch.setattr(db, "ensure_migrations", fail)

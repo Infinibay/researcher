@@ -154,7 +154,13 @@ y organiza las siguientes entregas por resultados observables, sin reducir el pl
     referencias y objetos personalizados y revierte fallos. La32 conserva el historial
     nativo cerrado y permite un único reemplazo vivo; conserva unicidad de negocio
     y revierte fallos del índice. No se migró una base del usuario.
-11. **Revisión independiente inicial:** plan, escenarios y mapa de consumidores fueron
+11. **Inicialización explícita y arranque:** comando `researcher-bootstrap` para bases
+    y autoridad NUEVAS, con rutas privadas y rechazo de estado existente/parcial.
+    API, CLI y launcher rechazan DB ausente/vacía; cleanup de grants, credenciales
+    y log probado también ante cancelación. La fábrica owned usa el inicializador
+    real en su fixture. No es instalación de host ni restore completo.
+    [Guía](bootstrap.md), [resultados](bootstrap-results.json), [paquete](bootstrap-packaging.json).
+12. **Revisión independiente inicial:** plan, escenarios y mapa de consumidores fueron
     analizados con contexto limpio. Hay 71 herramientas individuales en 11 categorías.
     Esa revisión no sustituye la revisión final de toda la rama implementada.
 
@@ -201,8 +207,16 @@ y organiza las siguientes entregas por resultados observables, sin reducir el pl
 
 ## Verificación más reciente
 
-- Suite completa:1573 casos;1470 pasan,100 fallan con EXACTAMENTE las mismas
-  identidades de la línea base y3 se omiten.30 advertencias. La suite sigue roja.
+- Suite completa actual:1596 casos;1493 pasan,100 fallan con EXACTAMENTE las mismas
+  identidades de la línea base y3 se omiten.27 advertencias. La suite sigue roja.
+- Bootstrap:23 casos nuevos aprobados; comandos reales, journal/arranques/cleanup,
+  launcher probado con servicios sustituidos por guardias. Wheel/SDist offline;
+  14 archivos comparados y264 módulos backend importados sólo del wheel extraído.
+  Su entry point creó estado, rechazó repetición y sirvió dos veces conservando datos.
+  No hubo turno de modelo ni instalación del host. Ruff pasa en archivos modernos;
+  la CLI heredada conserva dos BLE001 previos sin cambios.
+- Las siguientes comprobaciones de entrada/composición pertenecen a checkpoints
+  anteriores y conservan su alcance; no se reetiquetan como una nueva inferencia:
 - Runtime:626 pasan.10 casos nuevos cubren la entrada productiva configurada,
   controlador/source fijos, DB copiada rechazada, Stop/corrección durante preparación
   y turno, informe para revisión sin aceptación y comando nativo real sin cuenta.

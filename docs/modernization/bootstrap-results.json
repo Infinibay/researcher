@@ -1,0 +1,79 @@
+{
+  "base_commit": "5348496",
+  "total": 1596,
+  "passed": 1493,
+  "failed": 100,
+  "skipped": 3,
+  "runtime_passed": 626,
+  "new_cases_passed": 23,
+  "new_cases": [
+    "backend.tests.api.test_bootstrap_startup::test_api_refuses_missing_or_empty_database_and_withdraws_grants[missing]",
+    "backend.tests.api.test_bootstrap_startup::test_api_refuses_missing_or_empty_database_and_withdraws_grants[empty]",
+    "backend.tests.api.test_bootstrap_startup::test_configuration_failure_removes_pairing_file_and_live_grants",
+    "backend.tests.api.test_bootstrap_startup::test_runtime_lifecycle_failure_still_closes_owner_access_and_grants[enter]",
+    "backend.tests.api.test_bootstrap_startup::test_runtime_lifecycle_failure_still_closes_owner_access_and_grants[exit]",
+    "backend.tests.api.test_bootstrap_startup::test_cancelled_owner_start_drains_thread_before_removing_its_file",
+    "backend.tests.api.test_bootstrap_startup::test_failed_startup_closes_its_log_file",
+    "backend.tests.cli.test_bootstrap::test_init_db_creates_private_usable_database_and_refuses_second_init",
+    "backend.tests.cli.test_bootstrap::test_init_db_never_adopts_existing_path[empty]",
+    "backend.tests.cli.test_bootstrap::test_init_db_never_adopts_existing_path[symlink]",
+    "backend.tests.cli.test_bootstrap::test_explicit_authority_supports_real_commit_and_reopen_without_source_db",
+    "backend.tests.cli.test_bootstrap::test_authority_roots_must_not_overlap[equal]",
+    "backend.tests.cli.test_bootstrap::test_authority_roots_must_not_overlap[nested]",
+    "backend.tests.cli.test_bootstrap::test_missing_witness_is_not_reinitialized",
+    "backend.tests.cli.test_bootstrap::test_partial_authority_failure_is_preserved_and_cannot_be_adopted",
+    "backend.tests.cli.test_bootstrap::test_explicit_cli_database_serves_twice_and_preserves_user_data",
+    "backend.tests.cli.test_launcher_startup::test_launcher_refuses_uninitialized_database_before_external_work[missing]",
+    "backend.tests.cli.test_launcher_startup::test_launcher_refuses_uninitialized_database_before_external_work[empty]",
+    "backend.tests.cli.test_startup::test_cli_startup_never_initializes_missing_or_empty_database[missing]",
+    "backend.tests.cli.test_startup::test_cli_startup_never_initializes_missing_or_empty_database[empty]",
+    "backend.tests.tools.test_database_initialization::test_serving_requires_initialized_database_without_creating_or_changing_it[missing]",
+    "backend.tests.tools.test_database_initialization::test_serving_requires_initialized_database_without_creating_or_changing_it[empty]",
+    "backend.tests.tools.test_database_initialization::test_existing_only_migration_preserves_recognized_data"
+  ],
+  "new_failures": [],
+  "resolved_failures": [],
+  "inherited_failure_identities": {
+    "path": "docs/modernization/baseline-results.json",
+    "sha256": "cd91994b488a4ff0aee3a00087803e2b03cd72593a8bd8675d4aee5fb5265203",
+    "comparison": "all100 EXACT identities match; raw current failures retained in JUnit"
+  },
+  "raw_junit": {
+    "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/bootstrap-full.xml",
+    "sha256": "240ba28969e0583e59485281f6fcaf420b31217d38394353188cda9801857ca6"
+  },
+  "suite_seconds": 233.633,
+  "directed": {
+    "core_and_product_and_journal": 70,
+    "cli_and_launcher": 5
+  },
+  "red_evidence": [
+    "bootstrap-red.log:11failed7passed",
+    "bootstrap-cancellation-red.log:1failed",
+    "bootstrap-logging-red.log:1failed",
+    "bootstrap-entries-red.log:4failed1passed"
+  ],
+  "validation": {
+    "locked_offline_sync": true,
+    "installed_bootstrap_console_help": true,
+    "offline_wheel_and_sdist_build": true,
+    "shell_syntax": true,
+    "model_turns": 0,
+    "user_data_migrated": false,
+    "global_suite_green": false,
+    "lint": "Modern changed files pass Ruff; legacy backend/cli/main.py retains two pre-existing BLE001 findings at unchanged catch sites",
+    "format": "Seven modern implementation/test files pass format check; legacy db/run formatting not broadly rewritten"
+  },
+  "delivery_timing": {
+    "goal_continuation_at": "2026-11-01T18:10:41.478000+00:00",
+    "verification_recorded_at": "2026-11-01T18:31:10.878163+00:00",
+    "elapsed_seconds": 1229.400163,
+    "meaning": "Elapsed interval, includes reading, development and checks; not active CPU. This is one delivery, insufficient for a final-project ETA."
+  },
+  "limits": [
+    "Fresh storage initialization and startup guards, not managed host enrollment, full restore/handoff, or all legacy writers.",
+    "Owned product tests use real API/controller/SQLite/kernel but controlled model/Ken protocols; prior actual subscription evidence is not relabeled as a new turn.",
+    "start.sh service lifecycle not executed; actual shell tested only through fail-fast guard with service stubs.",
+    "No complete frontend/package/CLI-TUI engine migration or final whole-branch acceptance."
+  ]
+}

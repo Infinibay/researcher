@@ -14,7 +14,7 @@ def owned_config(
     service_setup, ken_installation, code_host_asset, tmp_path, monkeypatch
 ):
     from backend.api import config
-    from backend.tests.runtime.authority_fixture import provisioned
+    from backend.runtime.bootstrap import initialize_authority
 
     relative = Path("/proc/self/cgroup").read_text().strip().split(":", 2)[2]
     parent = (Path("/sys/fs/cgroup") / relative.lstrip("/")).parent
@@ -24,7 +24,11 @@ def owned_config(
         pytest.skip("Requires delegated memory/pids cgroup controllers")
     authority = tmp_path / "authority"
     authority.mkdir(mode=0o700)
-    supplied = provisioned(authority)
+    supplied = SimpleNamespace(
+        **initialize_authority(
+            database_dir=authority / "database", witness_dir=authority / "witness"
+        )
+    )
     ken_installation.write_text(
         "#!"
         + str(ken_installation.parent / "python")

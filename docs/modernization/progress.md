@@ -3263,3 +3263,53 @@ review only when entire implementation is ready. No phase or goal completion cla
   and require a concrete blocked mandatory scenario before infrastructure expansion.
 - This checkpoint changes documentation/process only. No new model turn, code
   implementation, host deployment or user-data migration; no whole-plan completion.
+
+
+## Active delivery: explicit installation and serving startup — base5348496
+
+- Previous turn was progress: diagnostic evidence and short execution dashboard committed.
+- Old contract: API serving can create empty/new DB and startup failures before
+  yield leak local credentials/grants. Desired: explicit new-install CLI; serving
+  opens recognized existing DB only; all acquired access resources close on failure.
+- Preserve ensure_migrations default for explicit/legacy migration callers, add
+  existing_only for serving. Authority journal remains open-only; a separate explicit
+  initializer creates NEW private paths and never repairs/reuses partial state.
+- Tests: missing/empty/recognized DB; original lifecycle failure and cleanup; real
+  CLI new DB/repeat refusal/authority commit+reopen/overlap/partial and lost witness.
+  No host enrollment or real-data migration claimed. Directed checks first, one
+  broad regression run at delivery closure because DB/API contracts are shared.
+
+
+## Explicit storage initialization and startup delivery — verified
+
+- New researcher-bootstrap command (also python -m backend.cli.bootstrap): init-db
+  creates NEW private source only; init-authority creates NEW separated0700 roots,
+  0600 files, canonical original-format genesis, fsync and actual journal reopen.
+  Existing/partial paths are never adopted/overwritten; missing witness stays missing.
+  This is storage provision, not complete managed-host actor enrollment or restore.
+- API existing-only preflight reads schema without WAL initialization, then opens
+  writer mode=rw. Default ensure_migrations remains for explicit/legacy internals.
+- Ruling: CLI and start.sh also needed strict entry guards — shell's automatic
+  schema creation before API would bypass the new guard. RED4 showed it reaching
+  external setup with absent/empty source; GREEN5 checks actual shell with guarded
+  services. Replaced manual shell schema/migration8 SQL with shared strict migrator.
+- RED11→GREEN23 first directed group; RED cancellation reproduced worker creating
+  pairing file after cleanup; drain its original to_thread before close. RED log
+  handler leak fixed by lifespan-owned ExitStack. Config/runtime-enter/runtime-exit
+  failures close credentials/live grants; legacy flows only reconcile after serving.
+- Final directed70 core/API/CLI/product/journal pass plus5 CLI/launcher cases pass.
+  Owned factory fixture now initializes authority with production code; original
+  HTTP/controller/kernel and controlled model/Ken behavior pass without paid replay.
+- One full regression run1596:1493 pass100 EXACT baseline failure identities3 skip,
+  27 warnings,626 runtime pass;23new cases pass. No new/resolved failures; raw JUnit
+  and baseline hash in bootstrap-results.json. Global suite is still RED.
+- Offline uv lock check/sync, installed console help, wheel+SDist build pass.
+  Extracted wheel14 source comparisons; fresh -I -S process loads264 backend modules
+  only from wheel, creates/commits/reopens authority, refuses repeat/lost witness and
+  serves twice preserving data. Dependencies supplied explicitly; no full host/web
+  install claim. Ruff/format modern files and bash -n pass; two legacy CLI BLE001
+  remain pre-existing (not edited catches). Source/schema packaging hashes retained.
+- Documentation: bootstrap.md explains new versus existing state, partial failures,
+  backup-domain limit and operational commands. Dashboard advances to visible and
+  correctable reports. Whole-plan scope/43 scenarios remain open; no host install,
+  real user DB migration, model turn, push/merge/deploy or final acceptance.

@@ -85,8 +85,9 @@ del transporte proyecta la prueba original broker→source, sin otra señal para
 La [plantilla de configuración](../modernization/runtime-owned.example.json)
 describe los campos y debe guardarse fuera de los repositorios administrados.
 `INFINIBAY_RUNTIME_CONFIG` selecciona ese JSON. No se crea un journal perdido ni se
-adopta una DB como autoridad. El aprovisionamiento inicial y la instalación completa
-del host todavía requieren el trabajo explícito pendiente del plan.
+adopta una DB como autoridad. La [inicialización explícita de almacenamiento](../modernization/bootstrap.md)
+ya existe; el aprovisionamiento e inscripción completos del host y restore/handoff
+siguen pendientes del plan.
 
 - `runtime_profile: "owned-codex-v1"` selecciona esta fábrica. Un error no cambia
   al launcher anterior ni a una API facturada por uso.

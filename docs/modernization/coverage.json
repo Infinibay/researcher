@@ -1138,12 +1138,23 @@
       "evidence": [
         "backend/config/paths.py",
         "backend/tests/config/test_database_paths.py",
-        "backend/tests/tools/test_database_initialization.py"
+        "backend/tests/tools/test_database_initialization.py",
+        "docs/modernization/bootstrap.md",
+        "docs/modernization/bootstrap-results.json",
+        "docs/modernization/bootstrap-packaging.json",
+        "backend/cli/bootstrap.py",
+        "backend/runtime/bootstrap.py",
+        "backend/tests/cli/test_bootstrap.py",
+        "backend/tests/cli/test_launcher_startup.py",
+        "backend/tests/api/test_bootstrap_startup.py"
       ],
       "remaining": [
-        "Historical migration and restore validation",
-        "Safe bootstrap",
+        "Historical and real-data migration plus complete restore validation",
+        "Managed host/service bootstrap, all legacy writers and deployment handoff/enrollment",
         "Complete health/readiness and configured deployment startup"
+      ],
+      "implemented": [
+        "Explicit new source/authority storage CLI, existing-only API/CLI/launcher startup and cancellation/failure cleanup; owned product fixture uses production initializer. No complete managed-host enrollment or restore claim."
       ]
     },
     "runtime_comparison": {
@@ -2297,7 +2308,16 @@
         "docs/modernization/owned-factory-packaging.json",
         "docs/modernization/runtime-owned.example.json",
         "backend/tests/runtime/test_owned_factory.py",
-        "backend/tests/runtime/test_broker_commands.py"
+        "backend/tests/runtime/test_broker_commands.py",
+        "docs/modernization/bootstrap.md",
+        "docs/modernization/bootstrap-results.json",
+        "docs/modernization/bootstrap-packaging.json",
+        "backend/cli/bootstrap.py",
+        "backend/runtime/bootstrap.py",
+        "backend/tests/cli/test_bootstrap.py",
+        "backend/tests/cli/test_launcher_startup.py",
+        "backend/tests/api/test_bootstrap_startup.py",
+        "docs/modernization/owned-product-live.json"
       ],
       "implemented": [
         "Explicit owned profile selected by real app lifespan and owner HTTP request; no fallback after profile failure.",
@@ -2305,11 +2325,12 @@
         "Native state, published-shaped Ken prepare/catalog, external subscription snapshots and original broker workload lifecycle.",
         "Existing analysis job/output/controller through account-free native command profile; actual SDK/kernel calculation and boundary proof.",
         "Stop and user-example correction during startup/turn retire domain and consume observed closure after scopes exit.",
-        "Controlled generation produces one provisional finding/draft report/job receipt and needs_review, no automatic acceptance."
+        "Controlled generation produces one provisional finding/draft report/job receipt and needs_review, no automatic acceptance.",
+        "Explicit new source/authority storage CLI, existing-only API/CLI/launcher startup and cancellation/failure cleanup; owned product fixture uses production initializer. No complete managed-host enrollment or restore claim.",
+        "Actual owner/product entry completed one subscription turn with published Ken, 12 successful tool calls, draft readback and original closure evidence; observer failure/lost telemetry retained explicitly."
       ],
       "remaining": [
-        "One bounded actual native subscription/published Ken/business/analysis run through the new owner/product entry, not reusing prior composition-only acceptance",
-        "Explicit operator provisioning/bootstrap and clean host installation; source-loss startup guard before legacy ensure_migrations; full restore/handoff/origin/enrollment acceptance",
+        "Complete managed host installation, restore/handoff/origin/enrollment; storage initialization and API/CLI/launcher source-loss guards now exist",
         "Managed OAuth refresh/account coexistence/provider transport; current factory reads external CLI snapshots only",
         "Cold-service recovery and cross-attempt continuation, capacity/concurrency policy, disk retention",
         "Default legacy profile retirement, all71tools/11categories and fullengine/loops/autonomy/roles/flows/agent protocol/Git/review/CI",

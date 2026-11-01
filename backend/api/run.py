@@ -59,6 +59,7 @@ def setup_file_logging():
         _llm_logger.propagate = False  # don't bubble to root (stdout)
 
     logging.getLogger(__name__).info("File logging enabled → %s", log_file)
+    return file_handler
 
 
 def main():

@@ -64,7 +64,12 @@ is still being migrated; the candidate runtime is not yet the default.
 
 Set `INFINIBAY_DB` to select a database explicitly. Without an override, an
 existing recognized database is reused; multiple databases require a choice.
-A new workspace uses `.data/infinibay.db`. Startup does not move existing data.
+A new workspace defaults to `.data/infinibay.db`. Serving and CLI startup require an
+initialized database: create a NEW installation explicitly with
+`uv run --locked researcher-bootstrap init-db --database /absolute/path/source.db`,
+then select that same path with `INFINIBAY_DB`. An absent or empty existing database
+requires investigation/restore; startup does not recreate or move it.
+See [explicit initialization and recovery limits](docs/modernization/bootstrap.md).
 
 Implementation status for the modernization is recorded in
 [the execution ledger](docs/modernization/progress.md).
@@ -80,11 +85,19 @@ cd infinibay
 cp .env.example .env
 # Edit .env — set your LLM model and API key (or use Ollama defaults)
 
-# 3. Start everything
+# 3. For a NEW installation only: initialize the selected database
+uv sync --locked
+export INFINIBAY_DB="${XDG_STATE_HOME:-$HOME/.local/state}/researcher/source.db"
+uv run --locked researcher-bootstrap init-db --database "$INFINIBAY_DB"
+
+# 4. Start the legacy development stack (runtime migration is still in progress)
 ./start.sh
 ```
 
-`start.sh` handles everything: creates a Python venv, installs dependencies, initializes the database, starts Forgejo (local git server), and launches the backend (`:8000`) + frontend (`:5173`).
+`start.sh` checks the initialized database before external setup, installs the locked
+Python environment, migrates recognized data and starts the legacy Forgejo/backend/
+frontend stack. Its provider/Forgejo lifecycle is still being modernized. For the
+Codex subscription profile, follow [the owned runtime configuration](docs/architecture/owned-product-runtime.md).
 
 Open http://localhost:5173 in your browser.
 
