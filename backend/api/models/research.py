@@ -165,3 +165,37 @@ class ReportWindow(TextWindow):
     total_evidence: int
     evidence_offset: int
     next_evidence_offset: int | None
+
+
+class WriteWiki(Command):
+    """Write only the grant-bound project's wiki with an observed revision and stable intent."""
+
+    path: str = Field(min_length=1, max_length=512)
+    title: str = Field(min_length=1, max_length=1200)
+    content: str = Field(max_length=200000)
+    expected_revision: int = Field(strict=True, ge=0)
+    page_id: Identity | None = None
+    parent_path: str | None = Field(default=None, max_length=512)
+
+
+class CaptureWiki(Command):
+    """Name one immutable wiki revision and explicit namespace to capture as evidence."""
+
+    page_id: Identity
+    revision: Identity
+    namespace: Literal["project", "global"] = "project"
+
+
+class WikiRevision(BaseModel):
+    """One explicit authorized project/global revision in a bounded wiki corpus."""
+
+    model_config = ConfigDict(extra="forbid")
+    page_id: Identity
+    revision: Identity
+    namespace: Literal["project", "global"] = "project"
+
+
+class CaptureWikiCollection(Command):
+    """Capture every selected revision for normal exact/semantic source retrieval, or fail as a whole."""
+
+    members: list[WikiRevision] = Field(min_length=1, max_length=50)

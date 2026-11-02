@@ -1,16 +1,29 @@
+/** Owner authentication boundary, private query teardown and temporary-draft reload protection. @module */
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import { loadOwnerSession, pairOwner, subscribeOwnerSession } from '../../api/session'
 import { wsManager } from '../../api/websocket'
 import { useActivityFeedStore } from '../../stores/activityFeed'
 import { useLoopStateStore } from '../../stores/loopState'
+import { useWikiDrafts } from '../../stores/wikiDrafts'
 
+/** Keep protected product content locked until owner pairing succeeds; transient expiry preserves drafts. */
 export function OwnerSessionGate({children}: {children:ReactNode}) {
   const [state, setState] = useState<'checking'|'locked'|'ready'>('checking')
   const [code, setCode] = useState('')
   const [error, setError] = useState('')
   const [pending, setPending] = useState(false)
   const queryClient = useQueryClient()
+  const dirtyWiki = useWikiDrafts(state => Object.values(state.drafts).some(draft => draft.dirty))
+
+  /** Protect temporary document text on reload; transient auth loss does not erase a draft. */
+  useEffect(() => {
+    if (!dirtyWiki) return
+    const protect = (event: BeforeUnloadEvent) => { event.preventDefault(); event.returnValue = '' }
+    window.addEventListener('beforeunload', protect)
+    return () => window.removeEventListener('beforeunload', protect)
+  }, [dirtyWiki])
+
 
   useEffect(() => {
     let live = true
@@ -33,6 +46,7 @@ export function OwnerSessionGate({children}: {children:ReactNode}) {
     return () => { live = false; unsubscribe() }
   }, [queryClient])
 
+  /** Pair with the owner code once and clear the entered credential after the attempt. */
   async function unlock(event:FormEvent) {
     event.preventDefault()
     setPending(true)

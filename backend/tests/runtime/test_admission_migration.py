@@ -7,7 +7,8 @@ from dataclasses import asdict
 def test_version27_receipt_survives_without_an_inferred_binding(
     _isolated_db, db_conn, monkeypatch
 ):
-    from backend.db import migrations, peer_kind_migration
+    """A version27 receipt stays historical after upgrades without inventing admission evidence."""
+    from backend.db import migrations, peer_kind_migration, wiki_migration
     from backend.runtime.contracts import RunSpec
     from backend.runtime.sqlite_runs import SQLiteRunStore, _digest
     from backend.tools.base.db import ensure_migrations
@@ -15,6 +16,7 @@ def test_version27_receipt_survives_without_an_inferred_binding(
     apply = migrations.apply_sql_resource
     with monkeypatch.context() as patch:
         patch.setattr(peer_kind_migration, "migrate_ken_peers", lambda _conn: None)
+        patch.setattr(wiki_migration, "apply_wiki_schema", lambda _conn: None)
         patch.setattr(
             migrations,
             "apply_sql_resource",

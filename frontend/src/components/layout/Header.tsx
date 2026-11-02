@@ -1,5 +1,6 @@
 /** Shared owner session controls and visible project selection for all product routes. @module */
 import { closeOwnerSession } from '../../api/session'
+import { useWikiDrafts } from '../../stores/wikiDrafts'
 import { useState, useRef, useEffect } from 'react'
 import { useProjectStore } from '../../stores/project'
 import { useProjects, useProject, useStartProject, useStopProject } from '../../hooks/useProjects'
@@ -27,6 +28,14 @@ export function Header() {
     document.addEventListener('mousedown', handler)
     return () => document.removeEventListener('mousedown', handler)
   }, [])
+
+  /** Discard actual temporary wiki drafts only after an explicit successful logout. */
+  const closeSession = async () => {
+    if (Object.values(useWikiDrafts.getState().drafts).some(draft => draft.dirty) && !window.confirm('Hay borradores pendientes. Cerrar sesión descartará el texto temporal. ¿Quieres continuar?')) return
+    setSessionError('')
+    try { await closeOwnerSession(); useWikiDrafts.getState().clear() }
+    catch (error) { setSessionError(error instanceof Error ? error.message : 'No se pudo confirmar el cierre de sesión.') }
+  }
 
   const projects = data?.projects ?? []
   const isRunning = activeProject?.status === 'executing'
@@ -86,7 +95,7 @@ export function Header() {
 
       <div className="flex items-center gap-3">
         {sessionError && <span role="alert" className="text-xs text-red-300">{sessionError}</span>}
-        <button onClick={() => {setSessionError(''); closeOwnerSession().catch((error:Error) => setSessionError(error.message))}} className="rounded-md px-3 py-1.5 text-xs text-slate-300 hover:bg-surface-800 focus-visible:ring-2 focus-visible:ring-sky-400">Cerrar sesión</button>
+        <button onClick={closeSession} className="rounded-md px-3 py-1.5 text-xs text-slate-300 hover:bg-surface-800 focus-visible:ring-2 focus-visible:ring-sky-400">Cerrar sesión</button>
         {activeProject && (
           <>
             <span className="text-xs text-slate-500">{activeProject.status}</span>

@@ -1,0 +1,108 @@
+{
+  "states": [
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "workbench": {
+          "x": 192,
+          "y": 64,
+          "width": 1248,
+          "height": 1243.1875,
+          "top": 64,
+          "right": 1440,
+          "bottom": 1307.1875,
+          "left": 192
+        },
+        "reader": {
+          "x": 592,
+          "y": 92,
+          "width": 816,
+          "height": 1151.1875,
+          "top": 92,
+          "right": 1408,
+          "bottom": 1243.1875,
+          "left": 592
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-wiki/after-desktop-reader.png",
+      "sha256": "c8ae4c8ad9d8d467c1c71fd282674638457d0df8425a232cf65f03fef17edff8"
+    },
+    {
+      "name": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "workbench": {
+          "x": 0,
+          "y": 113,
+          "width": 390,
+          "height": 1578.625,
+          "top": 113,
+          "right": 390,
+          "bottom": 1691.625,
+          "left": 0
+        },
+        "reader": {
+          "x": 16,
+          "y": 197,
+          "width": 358,
+          "height": 1446.625,
+          "top": 197,
+          "right": 374,
+          "bottom": 1643.625,
+          "left": 16
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-wiki/after-mobile-reader.png",
+      "sha256": "35f4f0051b9bf64808f7fbcff26a380eba611db1d00f3d7ba5e606e8453a1415"
+    },
+    {
+      "name": "narrow",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 320,
+        "scroll": 320,
+        "workbench": {
+          "x": 0,
+          "y": 179,
+          "width": 320,
+          "height": 1698.03125,
+          "top": 179,
+          "right": 320,
+          "bottom": 1877.03125,
+          "left": 0
+        },
+        "reader": {
+          "x": 16,
+          "y": 263,
+          "width": 288,
+          "height": 1566.03125,
+          "top": 263,
+          "right": 304,
+          "bottom": 1829.03125,
+          "left": 16
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-wiki/after-narrow-reader.png",
+      "sha256": "72cfb61a543e4ed2ea2067fe905d7aea07d60df78a553b408b888b621317feb7"
+    }
+  ],
+  "errors": [],
+  "result": "passed"
+}

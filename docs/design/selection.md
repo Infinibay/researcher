@@ -198,3 +198,23 @@ necesarios: los elementos del concepto son texto/controles, sin imágenes de con
 La tipografía del título móvil y densidad del shell difieren del mock; quedan como
 ajustes P3 de coherencia global. No impiden el recorrido probado ni cierran la
 aceptación humana/lector de pantalla/zoom de esta ruta.
+
+
+## Wiki / Documentos — 2026-11-01
+
+Tres alternativas de escritorio generadas de forma independiente con capturas reales
+y el lenguaje editorial de Informes. Orden mostrado: Cuaderno con alcance, Biblioteca
+documental y Lectura con margen. La selección fue delegada explícitamente por el usuario.
+Se elige **Cuaderno con alcance**: índice persistente para cambiar entre notas y lector
+amplio con alcance/revisión a la vista. Biblioteca documental ocupa demasiada altura con
+la lista al leer; Lectura con margen duplica contexto y exige un paso extra para cambiar
+de documento. Juicio de diseño, no medición de avance ni aceptación humana.
+
+[Imágenes, prompts y procedencia](concepts/wiki/manifest.json). Móvil generado desde la
+imagen seleccionada: lista y lector como vistas separadas. Implementar sin repetir el
+título gigante de la página, sin usar «Espacio de nombres» como jerga innecesaria y sin
+presentar las notas como resultados validados. Usar «Este proyecto / Biblioteca global»
+y explicar el alcance global. Conservar borradores ante error/conflicto/cambio de proyecto.
+Piloto implementado y verificado en16 estados funcionales y tres anchos de lectura.
+Cinco pilotos en código,15/36 conceptos de escritorio y5/12 móviles; cero rutas con
+aceptación completa. [Recorrido y límites](audits/2026-11-01-wiki/report.md).

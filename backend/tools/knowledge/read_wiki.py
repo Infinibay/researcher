@@ -1,87 +1,85 @@
-"""Tool for reading wiki pages."""
+"""Transitional legacy wiki reader backed by explicit namespaces and recorded revisions.
 
-import sqlite3
-from typing import Type
+The legacy agent context remains separate from native grants; this adapter does not
+claim to migrate the old inference loop. Reads never select a global page implicitly.
+"""
 
-from pydantic import BaseModel, Field
+from typing import Literal
 
+from pydantic import BaseModel, ConfigDict, Field
+
+from backend.knowledge.wiki import WikiStore
+from backend.research.models import (
+    OperationConflict,
+    ResearchInputError,
+    ResearchNotFound,
+)
 from backend.tools.base.base_tool import InfinibayBaseTool
-from backend.tools.base.db import execute_with_retry, sanitize_fts5_query
+from backend.tools.base.db import ensure_migrations, get_db_path
 
 
 class ReadWikiInput(BaseModel):
-    page: str | None = Field(
-        default=None, description="Wiki page path to read (e.g. 'architecture/overview')"
-    )
-    search: str | None = Field(
-        default=None,
-        description=(
-            "Full-text search query across wiki pages. "
-            "Supports: | for OR, & for AND, * for prefix, \"quotes\" for exact phrases. "
-            "Example: 'architecture | design', 'auth*'"
-        ),
-    )
+    """Select an exact stored path or lexical search, with scope and recoverable cursors."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    page: str | None = None
+    search: str | None = None
+    namespace: Literal["project", "global"] = "project"
+    after_id: int = Field(default=0, ge=0)
+    limit: int = Field(default=50, ge=1, le=100)
+    offset: int = Field(default=0, ge=0)
+    max_chars: int = Field(default=12000, ge=1, le=20000)
 
 
 class ReadWikiTool(InfinibayBaseTool):
+    """Keep the legacy role tool usable while sharing exact identity and revision semantics."""
+
     name: str = "read_wiki"
-    description: str = (
-        "Read wiki pages. Specify a page path for a specific page, "
-        "use search for full-text search, or call with no args for the index."
-    )
-    args_schema: Type[BaseModel] = ReadWikiInput
+    description: str = "Read an exact wiki path, lexical search, or paged index. Choose namespace project/global explicitly; project is default and never falls back globally. Reads return id/revision/hash. Follow next_offset/next_after_id. Read complete content before editing and retain page_id/revision; a read is not a captured scientific source."
+    args_schema: type[BaseModel] = ReadWikiInput
 
     def _run(
-        self, page: str | None = None, search: str | None = None
-    ) -> str:
-        project_id = self.project_id
-
-        def _read(conn: sqlite3.Connection):
-            if page:
-                # Read specific page
-                row = conn.execute(
-                    """SELECT id, path, title, content, parent_path,
-                              created_by, updated_by, created_at, updated_at
-                       FROM wiki_pages
-                       WHERE path = ? AND (project_id = ? OR project_id IS NULL)""",
-                    (page, project_id),
-                ).fetchone()
-
-                if not row:
-                    raise ValueError(f"Wiki page '{page}' not found")
-                return dict(row)
-
-            elif search:
-                # Full-text search
-                safe_search = sanitize_fts5_query(search)
-                rows = conn.execute(
-                    """SELECT wp.id, wp.path, wp.title,
-                              snippet(wiki_fts, 2, '<b>', '</b>', '...', 64) AS snippet,
-                              wp.updated_at
-                       FROM wiki_pages wp
-                       JOIN wiki_fts ON wp.id = wiki_fts.rowid
-                       WHERE wiki_fts MATCH ?
-                         AND (wp.project_id = ? OR wp.project_id IS NULL)
-                       ORDER BY rank
-                       LIMIT 20""",
-                    (safe_search, project_id),
-                ).fetchall()
-                return {"results": [dict(r) for r in rows], "count": len(rows)}
-
-            else:
-                # Return index of all pages
-                rows = conn.execute(
-                    """SELECT id, path, title, parent_path, updated_at
-                       FROM wiki_pages
-                       WHERE project_id = ? OR project_id IS NULL
-                       ORDER BY path""",
-                    (project_id,),
-                ).fetchall()
-                return {"pages": [dict(r) for r in rows], "count": len(rows)}
-
+        self,
+        page=None,
+        search=None,
+        namespace="project",
+        after_id=0,
+        limit=50,
+        offset=0,
+        max_chars=12000,
+    ):
+        """Use shared recorded wiki state; do not rewrite paths or invoke embeddings."""
+        if page is not None and search is not None:
+            return self._error("Select a page or search, not both")
         try:
-            result = execute_with_retry(_read)
-        except ValueError as e:
-            return self._error(str(e))
-
-        return self._success(result)
+            database = get_db_path()
+            ensure_migrations(database, existing_only=True)
+            store = WikiStore(database)
+            if page is not None:
+                return self._success(
+                    store.read(
+                        self.project_id,
+                        page,
+                        namespace=namespace,
+                        offset=offset,
+                        max_chars=max_chars,
+                    )
+                )
+            result = store.list(
+                self.project_id,
+                namespace=namespace,
+                after_id=after_id,
+                limit=limit,
+                query=search,
+            )
+            pages = result.pop("pages")
+            return self._success(
+                {
+                    **result,
+                    "results" if search is not None else "pages": pages,
+                    "count": len(pages),
+                }
+            )
+        except (ResearchInputError, ResearchNotFound, OperationConflict) as exc:
+            return self._error(str(exc))

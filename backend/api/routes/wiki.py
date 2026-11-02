@@ -1,188 +1,249 @@
-"""Wiki page CRUD and search endpoints."""
+"""Owner wiki reads/edits with explicit namespaces, revision conflicts and retained history.
 
-from __future__ import annotations
+Owner session/CSRF protection is supplied by the application middleware. Agent tools
+use the separate grant-checked research routes; these endpoints never issue a grant.
+"""
 
-import sqlite3
+from typing import Literal
+from uuid import uuid4
 
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, Request
 
-from backend.api.exceptions import WikiPageNotFound
 from backend.api.models.wiki import (
     WikiPageCreate,
     WikiPageResponse,
     WikiPageUpdate,
     WikiSearchResult,
 )
-from backend.tools.base.db import execute_with_retry, sanitize_fts5_query
+from backend.knowledge.wiki import WikiStore
+from backend.research.models import ResearchNotFound
 
 router = APIRouter(prefix="/api", tags=["wiki"])
+Namespace = Literal["project", "global"]
+
+
+def store(request):
+    """Use the serving database's exact identity; never bootstrap a missing wiki store."""
+    research = getattr(request.app.state, "runtime_research_store", None)
+    runtime = getattr(request.app.state, "runtime_service", None)
+    if research is None and runtime is not None:
+        research = runtime.research
+    if research is None:
+        from backend.tools.base.db import get_db_path
+
+        database = get_db_path()
+    else:
+        database = research.database
+    return WikiStore(database)
 
 
 @router.get("/wiki", response_model=list[WikiPageResponse])
-async def list_wiki_pages(project_id: int = Query(...)):
-    """List all wiki pages for a project."""
+def list_wiki_pages(
+    request: Request,
+    project_id: int = Query(..., gt=0),
+    namespace: Namespace = "project",
+    after_id: int = Query(0, ge=0),
+    limit: int = Query(50, ge=1, le=100),
+):
+    """Keep the legacy list shape but bound it and require an explicit global selection."""
+    return store(request).list(
+        project_id, namespace=namespace, after_id=after_id, limit=limit
+    )["pages"]
 
-    def _query(conn: sqlite3.Connection) -> list[dict]:
-        rows = conn.execute(
-            """SELECT id, project_id, path, title, parent_path,
-                      created_by, updated_by, created_at, updated_at
-               FROM wiki_pages
-               WHERE project_id = ? OR project_id IS NULL
-               ORDER BY path ASC""",
-            (project_id,),
-        ).fetchall()
-        return [dict(r) for r in rows]
 
-    pages = execute_with_retry(_query)
-    return [WikiPageResponse(**p) for p in pages]
+@router.get("/wiki-index")
+def wiki_index(
+    request: Request,
+    project_id: int = Query(..., gt=0),
+    namespace: Namespace = "project",
+    after_id: int = Query(0, ge=0),
+    limit: int = Query(50, ge=1, le=100),
+    query: str | None = Query(None, min_length=1, max_length=500),
+):
+    """Return a recoverable index cursor and lexical query semantics to the current frontend."""
+    return store(request).list(
+        project_id, namespace=namespace, after_id=after_id, limit=limit, query=query
+    )
+
+
+def revision_response(row):
+    """Return the receipt's retained revision even after its active page changes or disappears."""
+    return {
+        "id": row["page_id"],
+        "project_id": row["project_id"],
+        "namespace": row["namespace"],
+        "path": row["path"],
+        "title": row["title"],
+        "content": row["content"],
+        "parent_path": row["parent_path"],
+        "revision": row["revision"],
+        "sha256": row["sha256"],
+        "updated_by": row["actor"],
+        "updated_at": row["recorded_at"],
+        "total_chars": len(row["content"]),
+        "offset": 0,
+        "next_offset": None,
+    }
 
 
 @router.post("/wiki", response_model=WikiPageResponse, status_code=201)
-async def create_wiki_page(body: WikiPageCreate):
-    """Create a new wiki page."""
-    title = body.title
-    if title is None:
-        title = body.path.split("/")[-1].replace("-", " ").replace("_", " ").title()
-
-    def _create(conn: sqlite3.Connection) -> dict:
-        # Check if path already exists
-        existing = conn.execute(
-            "SELECT id FROM wiki_pages WHERE path = ? AND project_id = ?",
-            (body.path, body.project_id),
-        ).fetchone()
-        if existing:
-            raise ValueError(f"Wiki page at path '{body.path}' already exists")
-
-        cursor = conn.execute(
-            """INSERT INTO wiki_pages
-               (project_id, path, title, content, created_by, updated_by)
-               VALUES (?, ?, ?, ?, 'api', 'api')""",
-            (body.project_id, body.path, title, body.content),
+def create_wiki_page(body: WikiPageCreate, request: Request):
+    """Create once at revision zero; retry returns the committed revision, not current content."""
+    wiki = store(request)
+    receipt = wiki.write(
+        project_id=body.project_id,
+        namespace=body.namespace,
+        path=body.path,
+        title=body.title or body.path.rsplit("/", 1)[-1] or body.path,
+        content=body.content,
+        parent_path=body.parent_path,
+        expected_revision=0,
+        actor="owner",
+        operation_key=body.operation_key or uuid4().hex,
+    )
+    return revision_response(
+        wiki.read_revision(
+            body.project_id,
+            receipt["page_id"],
+            receipt["revision"],
+            namespace=body.namespace,
         )
-        conn.commit()
-        row = conn.execute(
-            "SELECT * FROM wiki_pages WHERE id = ?", (cursor.lastrowid,)
-        ).fetchone()
-        return dict(row)
-
-    page = execute_with_retry(_create)
-    return WikiPageResponse(**page)
+    )
 
 
 @router.get("/wiki/{path:path}", response_model=WikiPageResponse)
-async def get_wiki_page(path: str, project_id: int = Query(...)):
-    """Get a wiki page by its path."""
-
-    def _query(conn: sqlite3.Connection) -> dict | None:
-        row = conn.execute(
-            """SELECT * FROM wiki_pages
-               WHERE path = ? AND (project_id = ? OR project_id IS NULL)""",
-            (path, project_id),
-        ).fetchone()
-        return dict(row) if row else None
-
-    page = execute_with_retry(_query)
-    if not page:
-        raise WikiPageNotFound(path)
-    return WikiPageResponse(**page)
+def get_wiki_page(
+    path: str,
+    request: Request,
+    project_id: int = Query(..., gt=0),
+    namespace: Namespace = "project",
+    offset: int = Query(0, ge=0),
+    max_chars: int = Query(200000, ge=1, le=200000),
+):
+    """Read an exact logical path as stored, including leading slashes, without rewriting identity."""
+    return store(request).read(
+        project_id, path, namespace=namespace, offset=offset, max_chars=max_chars
+    )
 
 
 @router.put("/wiki/{path:path}", response_model=WikiPageResponse)
-async def update_wiki_page(path: str, body: WikiPageUpdate, project_id: int = Query(...)):
-    """Update a wiki page."""
-
-    def _update(conn: sqlite3.Connection) -> dict | None:
-        row = conn.execute(
-            "SELECT * FROM wiki_pages WHERE path = ? AND (project_id = ? OR project_id IS NULL)",
-            (path, project_id),
-        ).fetchone()
-        if not row:
-            return None
-
-        updates = []
-        params = []
-        if body.title is not None:
-            updates.append("title = ?")
-            params.append(body.title)
-        if body.content is not None:
-            updates.append("content = ?")
-            params.append(body.content)
-
-        if updates:
-            updates.append("updated_by = 'api'")
-            updates.append("updated_at = CURRENT_TIMESTAMP")
-            params.append(row["id"])
-            conn.execute(
-                f"UPDATE wiki_pages SET {', '.join(updates)} WHERE id = ?",
-                params,
-            )
-            conn.commit()
-
-        row = conn.execute("SELECT * FROM wiki_pages WHERE id = ?", (row["id"],)).fetchone()
-        return dict(row)
-
-    page = execute_with_retry(_update)
-    if not page:
-        raise WikiPageNotFound(path)
-    return WikiPageResponse(**page)
+def update_wiki_page(
+    path: str,
+    body: WikiPageUpdate,
+    request: Request,
+    project_id: int = Query(..., gt=0),
+    namespace: Namespace = "project",
+):
+    """Apply a complete observed edit; reconcile the original receipt before reading current state."""
+    wiki = store(request)
+    receipt = wiki.write(
+        project_id=project_id,
+        namespace=namespace,
+        path=path,
+        title=body.title,
+        content=body.content,
+        parent_path=body.parent_path,
+        page_id=body.page_id,
+        expected_revision=body.expected_revision,
+        actor="owner",
+        operation_key=body.operation_key or uuid4().hex,
+    )
+    return revision_response(
+        wiki.read_revision(
+            project_id, receipt["page_id"], receipt["revision"], namespace=namespace
+        )
+    )
 
 
 @router.delete("/wiki/{path:path}", status_code=204)
-async def delete_wiki_page(path: str, project_id: int = Query(...)):
-    """Delete a wiki page."""
-
-    def _delete(conn: sqlite3.Connection) -> bool:
-        row = conn.execute(
-            "SELECT id FROM wiki_pages WHERE path = ? AND (project_id = ? OR project_id IS NULL)",
-            (path, project_id),
-        ).fetchone()
-        if not row:
-            return False
-        conn.execute("DELETE FROM wiki_pages WHERE id = ?", (row["id"],))
-        conn.commit()
-        return True
-
-    found = execute_with_retry(_delete)
-    if not found:
-        raise WikiPageNotFound(path)
+def delete_wiki_page(
+    path: str,
+    request: Request,
+    project_id: int = Query(..., gt=0),
+    namespace: Namespace = "project",
+    expected_revision: int = Query(..., gt=0),
+    page_id: int = Query(..., gt=0),
+    operation_key: str | None = Query(None, min_length=1, max_length=128),
+):
+    """Delete only the named scope/revision; retained versions remain recoverable by their ids."""
+    store(request).delete(
+        project_id,
+        path,
+        namespace=namespace,
+        expected_revision=expected_revision,
+        page_id=page_id,
+        actor="owner",
+        operation_key=operation_key or uuid4().hex,
+    )
 
 
 @router.get("/wiki-search", response_model=list[WikiSearchResult])
-async def search_wiki(q: str = Query(..., min_length=1), project_id: int = Query(...)):
-    """Search wiki pages using full-text search with LIKE fallback."""
+def search_wiki(
+    q: str,
+    request: Request,
+    project_id: int = Query(..., gt=0),
+    namespace: Namespace = "project",
+):
+    """Preserve the legacy result list with explicit lexical semantics and scope identity."""
+    pages = store(request).list(project_id, namespace=namespace, query=q, limit=100)[
+        "pages"
+    ]
+    return [{**page, "snippet": None} for page in pages]
 
-    def _search(conn: sqlite3.Connection) -> list[dict]:
-        # Try FTS first
-        try:
-            safe_q = sanitize_fts5_query(q)
-            rows = conn.execute(
-                """SELECT wp.path, wp.title,
-                          snippet(wiki_fts, 2, '<b>', '</b>', '...', 64) AS snippet,
-                          wp.updated_at
-                   FROM wiki_pages wp
-                   JOIN wiki_fts ON wp.id = wiki_fts.rowid
-                   WHERE wiki_fts MATCH ?
-                     AND (wp.project_id = ? OR wp.project_id IS NULL)
-                   ORDER BY rank
-                   LIMIT 20""",
-                (safe_q, project_id),
-            ).fetchall()
-            return [dict(r) for r in rows]
-        except Exception:
-            # Fallback to LIKE
-            like_q = f"%{q}%"
-            rows = conn.execute(
-                """SELECT path, title,
-                          SUBSTR(content, 1, 200) as snippet,
-                          updated_at
-                   FROM wiki_pages
-                   WHERE (project_id = ? OR project_id IS NULL)
-                     AND (title LIKE ? OR content LIKE ?)
-                   ORDER BY updated_at DESC
-                   LIMIT 20""",
-                (project_id, like_q, like_q),
-            ).fetchall()
-            return [dict(r) for r in rows]
 
-    results = execute_with_retry(_search)
-    return [WikiSearchResult(**r) for r in results]
+@router.get("/wiki-revisions/{page_id}")
+def wiki_revisions(
+    page_id: int,
+    request: Request,
+    project_id: int = Query(..., gt=0),
+    namespace: Namespace = "project",
+    before_revision: int | None = Query(None, gt=0),
+    limit: int = Query(20, ge=1, le=100),
+):
+    """Page retained revision metadata newest first; an absent active page does not erase history."""
+    from backend.knowledge.wiki import namespace_filter
+
+    wiki = store(request)
+    where, params = namespace_filter(project_id, namespace)
+    if before_revision is not None:
+        where += " AND revision<?"
+        params.append(before_revision)
+    with wiki.transaction() as conn:
+        rows = conn.execute(
+            f"SELECT page_id,revision,path,title,sha256,actor,recorded_at,origin FROM wiki_revisions WHERE {where} AND page_id=? ORDER BY revision DESC LIMIT ?",
+            (*params, page_id, limit + 1),
+        ).fetchall()
+    selected = [dict(row) for row in rows[:limit]]
+    if not selected and before_revision is None:
+        raise ResearchNotFound("Wiki revision history not found in this namespace")
+    return {
+        "revisions": selected,
+        "namespace": namespace,
+        "next_before_revision": selected[-1]["revision"] if len(rows) > limit else None,
+    }
+
+
+@router.get("/wiki-revisions/{page_id}/{revision}")
+def wiki_revision_read(
+    page_id: int,
+    revision: int,
+    request: Request,
+    project_id: int = Query(..., gt=0),
+    namespace: Namespace = "project",
+    offset: int = Query(0, ge=0),
+    max_chars: int = Query(12000, ge=1, le=20000),
+):
+    """Read one retained version with bounded text for comparison, never overwrite the editor."""
+    row = store(request).read_revision(
+        project_id, page_id, revision, namespace=namespace
+    )
+    text = row.pop("content")
+    content = text[offset : offset + max_chars]
+    end = offset + len(content)
+    return {
+        **row,
+        "content": content,
+        "offset": offset,
+        "total_chars": len(text),
+        "next_offset": end if end < len(text) else None,
+    }

@@ -1,85 +1,75 @@
-"""Tool for writing/updating wiki pages."""
+"""Transitional project wiki writer with observed identity/revision and no hidden embeddings.
 
-import sqlite3
-from typing import Type
+The owner/native APIs use the same records, but this old role adapter still uses its
+legacy context and informational event bus. It does not confer native grant semantics.
+"""
 
-from pydantic import BaseModel, Field
+from uuid import uuid4
 
+from pydantic import BaseModel, ConfigDict, Field
+
+from backend.knowledge.wiki import WikiStore
+from backend.research.models import (
+    OperationConflict,
+    ResearchInputError,
+    ResearchNotFound,
+)
 from backend.tools.base.base_tool import InfinibayBaseTool
-from backend.tools.base.db import execute_with_retry
+from backend.tools.base.db import ensure_migrations, get_db_path
 
 
 class WriteWikiInput(BaseModel):
-    page: str = Field(..., description="Wiki page path (e.g. 'architecture/overview')")
-    content: str = Field(..., description="Page content in markdown")
-    title: str | None = Field(default=None, description="Page title (defaults to last path segment)")
-    parent_path: str | None = Field(default=None, description="Parent page path for hierarchy")
+    """Create with revision zero, or supply the observed page id/revision and complete edit."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    page: str
+    content: str
+    title: str | None = None
+    parent_path: str | None = None
+    expected_revision: int = Field(default=0, ge=0)
+    page_id: int | None = Field(default=None, gt=0)
+    operation_key: str | None = Field(default=None, min_length=1, max_length=128)
 
 
 class WriteWikiTool(InfinibayBaseTool):
+    """Migrate legacy writes to the same project-only guarded records without provider calls."""
+
     name: str = "write_wiki"
-    description: str = (
-        "Create or update a wiki page. Pages are identified by their path "
-        "and support hierarchical organization."
-    )
-    args_schema: Type[BaseModel] = WriteWikiInput
+    description: str = "Create/update only this project wiki. Creation: expected_revision0, page_id null. To edit, first read the complete page and supply its exact page_id/revision plus full title/content/parent_path; null parent clears it. Preserve operation_key on retry. A conflict requires comparison, not silent rebase. No implicit global write or hidden embeddings. Notes are context, not scientific acceptance."
+    args_schema: type[BaseModel] = WriteWikiInput
 
     def _run(
         self,
-        page: str,
-        content: str,
-        title: str | None = None,
-        parent_path: str | None = None,
-    ) -> str:
-        agent_id = self._validate_agent_context()
+        page,
+        content,
+        title=None,
+        parent_path=None,
+        expected_revision=0,
+        page_id=None,
+        operation_key=None,
+    ):
+        """Persist a guarded revision/receipt, then emit only the retained legacy advisory notice."""
         project_id = self.project_id
-
-        # Default title from path
-        if title is None:
-            title = page.split("/")[-1].replace("-", " ").replace("_", " ").title()
-
-        def _write(conn: sqlite3.Connection) -> dict:
-            existing = conn.execute(
-                "SELECT id FROM wiki_pages WHERE path = ?", (page,)
-            ).fetchone()
-
-            if existing:
-                conn.execute(
-                    """UPDATE wiki_pages
-                       SET content = ?, title = ?, parent_path = ?,
-                           updated_by = ?, updated_at = CURRENT_TIMESTAMP
-                       WHERE id = ?""",
-                    (content, title, parent_path, agent_id, existing["id"]),
-                )
-                action = "updated"
-                page_id = existing["id"]
-            else:
-                cursor = conn.execute(
-                    """INSERT INTO wiki_pages
-                       (project_id, path, title, content, parent_path,
-                        created_by, updated_by)
-                       VALUES (?, ?, ?, ?, ?, ?, ?)""",
-                    (project_id, page, title, content, parent_path,
-                     agent_id, agent_id),
-                )
-                action = "created"
-                page_id = cursor.lastrowid
-
-            # Pre-compute embedding for semantic search
-            try:
-                from backend.tools.base.embeddings import store_wiki_embedding
-                store_wiki_embedding(conn, page_id, f"{title} {content[:500]}")
-            except Exception:
-                pass  # embedding is optional
-
-            conn.commit()
-            return {"page_id": page_id, "action": action}
-
+        actor = self.agent_id or "unknown"
+        title = title or page.rsplit("/", 1)[-1] or page
         try:
-            result = execute_with_retry(_write)
-        except Exception as e:
-            return self._error(f"Failed to write wiki page: {e}")
-
+            database = get_db_path()
+            ensure_migrations(database, existing_only=True)
+            result = WikiStore(database).write(
+                project_id=project_id,
+                namespace="project",
+                path=page,
+                title=title,
+                content=content,
+                parent_path=parent_path,
+                page_id=page_id,
+                expected_revision=expected_revision,
+                actor=actor,
+                operation_key=operation_key or uuid4().hex,
+            )
+        except (ResearchInputError, ResearchNotFound, OperationConflict) as exc:
+            return self._error(str(exc))
         from backend.flows.event_listeners import FlowEvent, event_bus
 
         event_bus.emit(
@@ -92,17 +82,12 @@ class WriteWikiTool(InfinibayBaseTool):
                     "path": page,
                     "title": title,
                     "action": result["action"],
-                    "agent_id": agent_id,
+                    "agent_id": actor,
+                    "operation_key": result["operation_key"],
+                    "revision": result["revision"],
+                    "authority": "advisory_notification_only",
                 },
             )
         )
-
-        self._log_tool_usage(
-            f"Wiki page {result['action']}: {page}"
-        )
-        return self._success({
-            "page_id": result["page_id"],
-            "path": page,
-            "title": title,
-            "action": result["action"],
-        })
+        self._log_tool_usage(f"Wiki page {result['action']}: {page}")
+        return self._success({**result, "path": page, "title": title})

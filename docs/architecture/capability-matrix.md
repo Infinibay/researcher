@@ -56,7 +56,7 @@ genérico ni chat libre para cubrir operaciones que falten.
 | `read_findings`, `search_findings`, `summarize_findings`, `search_knowledge` | Lectura/búsqueda/resumen estructurado del conocimiento por proyecto | `researcher_finding_read` existe; búsqueda deberá preservar estado, revisiones, procedencia y superseded | Lectura individual implementada; listado, búsqueda y resumen amplio pendientes |
 | `validate_finding`, `reject_finding` | Revisión explícita del conocimiento con evidencias | Reviewer, método, dependencias y versión; invalidar/revisar consumidores ante corrección | Pendiente. No asignar confianza científica por contrato de formato |
 | `write_report`, `read_report` | `researcher_report_write/read` y vista `/reports` | `reports.write/read`; Markdown canónico en `artifacts.content`, finding links, draft y recibo; paginación independiente de citas | Persistencia, recovery/fachada y API probados. Informes ya tiene piloto y20 estados de navegador verificados; aceptación humana/total y exportación pendientes |
-| `read_wiki`, `search_wiki`, `write_wiki` | Wiki tipada con identidad local/global explícita | Ruta única por proyecto; reglas separadas para global, parent y precedencia; revisión y autor | Pendiente. Misma ruta en dos proyectos y global no colisiona ni edita otro documento |
+| `read_wiki`, `search_wiki`, `write_wiki` | Wiki tipada local/global, revisiones y capturas para citas | Permisos separados; página+revisión observadas; recibos atómicos, historial retenido, parent del mismo alcance | Implementación parcial: cinco tools nativas y adaptadores heredados comparten identidad protegida; misma ruta en dos proyectos/global, carreras, respuesta perdida y borrado/recreación probados. SearchWiki aún usa su proveedor legado. Faltan consumidores/invalidación dependiente/evaluación representativa. Ver [contrato](wiki-knowledge.md) |
 | `create_hypothesis` | Hipótesis versionada en el dominio de investigación | Contexto, evidencia y estado experimental; un hallazgo no la valida automáticamente | Pendiente. Conservar el recorrido de revisión científica |
 | `create_epic`, `create_milestone`, `update_project`, `read_epics`, `read_milestones` | Operaciones de planificación del producto por MCP | Lectura/escritura por grant; claves de operación, dependencias y eventos atómicos | Pendiente. No usar SQL genérico como sustituto |
 | `create_repository` | Bootstrap/adopción/reparación explícitos del host | Reconciliar remoto/local/DB antes de retry; credencial host, no force push por alta parcial | Pendiente. Probar remoto creado+DB fallida y repo preexistente |
@@ -65,7 +65,7 @@ genérico ni chat libre para cubrir operaciones que falten.
 
 ## Wire contract demostrado
 
-El MCP nuevo anuncia catorce herramientas `researcher_*`, con schemas explícitos,
+El MCP nuevo anuncia diecinueve herramientas `researcher_*`, con schemas explícitos,
 anotaciones y errores MCP reales. No recibe proyecto/tarea/actor en argumentos,
 no emite grants y no ejecuta SQL. Referencias: `scripts/researcher_mcp_server.py`,
 `backend/api/models/research.py`, `backend/research/models.py` y

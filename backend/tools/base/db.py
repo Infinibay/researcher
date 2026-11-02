@@ -371,6 +371,11 @@ def ensure_migrations(db_path: str | None = None, *, existing_only: bool = False
             resource = Path(__file__).resolve().parents[2] / "db/native_state_schema.sql"
             apply_sql_resource(conn, resource)
             logger.info("Migration 32: retain closed native peers for explicit resume")
+        if 33 not in applied:
+            from backend.db.wiki_migration import apply_wiki_schema
+
+            apply_wiki_schema(conn)
+            logger.info("Migration 33: explicit wiki namespaces, revisions and captured wiki sources")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()

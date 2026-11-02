@@ -1,0 +1,529 @@
+{
+  "result": "passed",
+  "states": [
+    {
+      "name": "desktop-reading-final",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "heading": {
+          "x": 592,
+          "y": 126.421875,
+          "width": 816,
+          "height": 51.328125,
+          "top": 126.421875,
+          "right": 1408,
+          "bottom": 177.75,
+          "left": 592
+        },
+        "workbench": {
+          "x": 192,
+          "y": 64,
+          "width": 1248,
+          "height": 1104.015625,
+          "top": 64,
+          "right": 1440,
+          "bottom": 1168.015625,
+          "left": 192
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-wiki/after-desktop-reading-final.png",
+      "sha256": "008deb9a54a1b4752307c02db32e40a8f4f7bc94139507d9801bc41dfdd970a8"
+    },
+    {
+      "name": "desktop-history",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "heading": {
+          "x": 592,
+          "y": 126.421875,
+          "width": 816,
+          "height": 51.328125,
+          "top": 126.421875,
+          "right": 1408,
+          "bottom": 177.75,
+          "left": 592
+        },
+        "workbench": {
+          "x": 192,
+          "y": 64,
+          "width": 1248,
+          "height": 2561.078125,
+          "top": 64,
+          "right": 1440,
+          "bottom": 2625.078125,
+          "left": 192
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-wiki/after-desktop-history.png",
+      "sha256": "2ef28576dcee4684f2ed64e55d4053619d9ffc74e4c41f6b12455c11d597f9ff"
+    },
+    {
+      "name": "desktop-conflict",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "heading": {
+          "x": 592,
+          "y": -238.578125,
+          "width": 816,
+          "height": 51.328125,
+          "top": -238.578125,
+          "right": 1408,
+          "bottom": -187.25,
+          "left": 592
+        },
+        "workbench": {
+          "x": 192,
+          "y": -301,
+          "width": 1248,
+          "height": 1432.53125,
+          "top": -301,
+          "right": 1440,
+          "bottom": 1131.53125,
+          "left": 192
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-wiki/after-desktop-conflict.png",
+      "sha256": "5ad38e3431544fda51cacebc10152aa9a406300c05173eeb2cd3f127966a8b0b"
+    },
+    {
+      "name": "desktop-comparison",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "heading": {
+          "x": 592,
+          "y": -238.578125,
+          "width": 816,
+          "height": 51.328125,
+          "top": -238.578125,
+          "right": 1408,
+          "bottom": -187.25,
+          "left": 592
+        },
+        "workbench": {
+          "x": 192,
+          "y": -301,
+          "width": 1248,
+          "height": 2435.140625,
+          "top": -301,
+          "right": 1440,
+          "bottom": 2134.140625,
+          "left": 192
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-wiki/after-desktop-comparison.png",
+      "sha256": "2cde69ad13557527724fa8ed98dba53b7ce115b03f6d2ac7a0011397474c2f88"
+    },
+    {
+      "name": "desktop-saved",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "heading": {
+          "x": 592,
+          "y": 184.8125,
+          "width": 816,
+          "height": 51.328125,
+          "top": 184.8125,
+          "right": 1408,
+          "bottom": 236.140625,
+          "left": 592
+        },
+        "workbench": {
+          "x": 192,
+          "y": 64,
+          "width": 1248,
+          "height": 1208.796875,
+          "top": 64,
+          "right": 1440,
+          "bottom": 1272.796875,
+          "left": 192
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-wiki/after-desktop-saved.png",
+      "sha256": "fae1553c9da7beabf1f607b7c1ee5e53226733ac99ff1db10dd503a4b2526558"
+    },
+    {
+      "name": "desktop-uncertain-receipt",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "heading": {
+          "x": 592,
+          "y": -238.1875,
+          "width": 816,
+          "height": 51.328125,
+          "top": -238.1875,
+          "right": 1408,
+          "bottom": -186.859375,
+          "left": 592
+        },
+        "workbench": {
+          "x": 192,
+          "y": -359,
+          "width": 1248,
+          "height": 1517.3125,
+          "top": -359,
+          "right": 1440,
+          "bottom": 1158.3125,
+          "left": 192
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-wiki/after-desktop-uncertain-receipt.png",
+      "sha256": "3b735c2b3fb4620c2925e9737ffeac51151fa13b43354b2f2b15a2009574ae49"
+    },
+    {
+      "name": "desktop-late-response-new-document",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "heading": {
+          "x": 592,
+          "y": 184.8125,
+          "width": 816,
+          "height": 51.328125,
+          "top": 184.8125,
+          "right": 1408,
+          "bottom": 236.140625,
+          "left": 592
+        },
+        "workbench": {
+          "x": 192,
+          "y": 64,
+          "width": 1248,
+          "height": 960,
+          "top": 64,
+          "right": 1440,
+          "bottom": 1024,
+          "left": 192
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-wiki/after-desktop-late-response-new-document.png",
+      "sha256": "1e3b817c59ec485f072666a26e799ce9a051930074af99aef38d60dadc4586f8"
+    },
+    {
+      "name": "desktop-project-changed",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "workbench": {
+          "x": 192,
+          "y": 64,
+          "width": 1248,
+          "height": 960,
+          "top": 64,
+          "right": 1440,
+          "bottom": 1024,
+          "left": 192
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-wiki/after-desktop-project-changed.png",
+      "sha256": "f455e22f8ecc56ee99ce2f91064e1c32e510afefced0b54670777c605408e6d3"
+    },
+    {
+      "name": "desktop-recovered-draft",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "heading": {
+          "x": 592,
+          "y": 126.421875,
+          "width": 816,
+          "height": 51.328125,
+          "top": 126.421875,
+          "right": 1408,
+          "bottom": 177.75,
+          "left": 592
+        },
+        "workbench": {
+          "x": 192,
+          "y": 64,
+          "width": 1248,
+          "height": 1324.546875,
+          "top": 64,
+          "right": 1440,
+          "bottom": 1388.546875,
+          "left": 192
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-wiki/after-desktop-recovered-draft.png",
+      "sha256": "496b262fe86daf605376929865c4b177876845c4a2dcbce19f258462ecebacbf"
+    },
+    {
+      "name": "mobile-index",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "workbench": {
+          "x": 0,
+          "y": 113,
+          "width": 390,
+          "height": 732,
+          "top": 113,
+          "right": 390,
+          "bottom": 845,
+          "left": 0
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-wiki/after-mobile-index.png",
+      "sha256": "b109db76f4bc9b2d205eb8fc7a3efdc8dc2b3694f319acf3fb312483bb1f6a65"
+    },
+    {
+      "name": "mobile-global-reader",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "heading": {
+          "x": 16,
+          "y": 231.421875,
+          "width": 358,
+          "height": 38.625,
+          "top": 231.421875,
+          "right": 374,
+          "bottom": 270.046875,
+          "left": 16
+        },
+        "workbench": {
+          "x": 0,
+          "y": 113,
+          "width": 390,
+          "height": 740.6875,
+          "top": 113,
+          "right": 390,
+          "bottom": 853.6875,
+          "left": 0
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-wiki/after-mobile-global-reader.png",
+      "sha256": "226f6b570fa1d6b1a968a1294b1211d93994de770dde95ac5b1777a5c856ec27"
+    },
+    {
+      "name": "mobile-new-document",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "heading": {
+          "x": 16,
+          "y": 300.203125,
+          "width": 358,
+          "height": 38.625,
+          "top": 300.203125,
+          "right": 374,
+          "bottom": 338.828125,
+          "left": 16
+        },
+        "workbench": {
+          "x": 0,
+          "y": 97,
+          "width": 390,
+          "height": 1576.59375,
+          "top": 97,
+          "right": 390,
+          "bottom": 1673.59375,
+          "left": 0
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-wiki/after-mobile-new-document.png",
+      "sha256": "67179ba9c6a6badb1cd58262044edc7cee8a9c9a7aa5b43995a4c0a8b78f5f44"
+    },
+    {
+      "name": "mobile-literal-reader",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "heading": {
+          "x": 16,
+          "y": 337.625,
+          "width": 358,
+          "height": 38.625,
+          "top": 337.625,
+          "right": 374,
+          "bottom": 376.25,
+          "left": 16
+        },
+        "workbench": {
+          "x": 0,
+          "y": 112,
+          "width": 390,
+          "height": 732,
+          "top": 112,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-wiki/after-mobile-literal-reader.png",
+      "sha256": "4c0aa0d036054561be75d28618002c838155ca4a3f1163bce35aa864c69b6424"
+    },
+    {
+      "name": "mobile-delete-dialog",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "heading": {
+          "x": 16,
+          "y": 337.625,
+          "width": 358,
+          "height": 38.625,
+          "top": 337.625,
+          "right": 374,
+          "bottom": 376.25,
+          "left": 16
+        },
+        "workbench": {
+          "x": 0,
+          "y": 112,
+          "width": 390,
+          "height": 732,
+          "top": 112,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-wiki/after-mobile-delete-dialog.png",
+      "sha256": "552b0e85d7ec796c2d5c8b3cb68a23f32c46b6e5dc26fafaae345fea4161ae5f"
+    },
+    {
+      "name": "mobile-deleted-history",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "heading": {
+          "x": 48,
+          "y": 241,
+          "width": 294,
+          "height": 77.25,
+          "top": 241,
+          "right": 342,
+          "bottom": 318.25,
+          "left": 48
+        },
+        "workbench": {
+          "x": 0,
+          "y": 113,
+          "width": 390,
+          "height": 901.59375,
+          "top": 113,
+          "right": 390,
+          "bottom": 1014.59375,
+          "left": 0
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-wiki/after-mobile-deleted-history.png",
+      "sha256": "b196bea650ca5cabe60b8e28aca847ce9e0ff089829118cedd61bae6d7f69787"
+    },
+    {
+      "name": "mobile-foreign-link",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "workbench": {
+          "x": 0,
+          "y": 113,
+          "width": 390,
+          "height": 732,
+          "top": 113,
+          "right": 390,
+          "bottom": 845,
+          "left": 0
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-wiki/after-mobile-foreign-link.png",
+      "sha256": "f5582dd51a6e3dd1886388babc9116984e1b557202d6cf2a7a736a6b68e9b2c3"
+    }
+  ],
+  "actions": [
+    "Concurrent external edit produces409; draft retained, exact comparison shown, explicit overwrite preparation preserves local text and guarded save succeeds",
+    "A lost HTTP receipt after committed write is retried with the same intent; one revision only",
+    "Late successful save is recorded but never redirects a newer selected document or leaves a false pending draft",
+    "Draft survives project switch and returns to original scope; cancelling logout preserves it; explicit discard is separate",
+    "Owner global edit is explicit and leaves same-path project page intact; mobile create handles path punctuation and literal HTML; delete traps/restores keyboard focus and retained history remains readable"
+  ],
+  "errors": [],
+  "model_turns": 0,
+  "new_reference_deleted": true
+}

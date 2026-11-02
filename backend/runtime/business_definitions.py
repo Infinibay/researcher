@@ -7,10 +7,12 @@ SQL, credential issuance, environment discovery or model dependency.
 import inspect
 from dataclasses import dataclass
 from typing import Any, Literal, get_type_hints
+from urllib.parse import quote
 
 from pydantic import BaseModel, ConfigDict, create_model
 
 from backend.api.models.questions import HumanQuestion
+from backend.api.models.research import WikiRevision
 from backend.runtime.business_mediation import BUSINESS_NAMES
 
 
@@ -75,6 +77,9 @@ def definitions(client):
         "researcher_capture_reference",
         "researcher_capture_web",
         "researcher_capture_paper",
+        "researcher_capture_wiki",
+        "researcher_capture_wiki_collection",
+        "researcher_wiki_write",
         "researcher_finding_record",
         "researcher_report_write",
     }
@@ -188,7 +193,7 @@ class ResearchTools:
     async def researcher_source_structure(
         self, source_id: int, after_index: int = 0, limit: int = 50
     ) -> dict:
-        """Read normalized CSV record, JSON pointer, XML expanded path or DOCX body/table paragraph locators with exact saved-text offsets. Follow next_index using after_index until null. Unit indices in search/query results refer here. Not original byte offsets, visual page numbers or proof the whole document was read. Plain text/PDF snapshots may have zero units; PDF pages remain in source_read provenance."""
+        """Read normalized CSV record, JSON pointer, XML expanded path, DOCX body/table paragraph or captured wiki-revision locators with exact saved-text offsets. Follow next_index using after_index until null. Unit indices in search/query results refer here. Not original byte offsets, visual page numbers or proof the whole document was read. Plain text/PDF snapshots may have zero units; PDF pages remain in source_read provenance."""
         return await self._client.request(
             "GET",
             f"/sources/{source_id}/units",
@@ -278,5 +283,95 @@ class ResearchTools:
                 "offset": offset,
                 "max_chars": max_chars,
                 "evidence_offset": evidence_offset,
+            },
+        )
+
+    async def researcher_wiki_list(
+        self,
+        namespace: Literal["project", "global"] = "project",
+        after_id: int = 0,
+        limit: int = 50,
+        query: str | None = None,
+    ) -> dict:
+        """List one explicit wiki namespace with stable next_after_id; optional query is lexical FTS, not semantic absence evidence. Never merge global pages implicitly. Use a captured explicit revision collection and researcher_source_query for paraphrases. Metadata is contextual documentation, not scientific validation."""
+        return await self._client.request(
+            "GET",
+            "/wiki",
+            query={
+                "namespace": namespace,
+                "after_id": after_id,
+                "limit": limit,
+                **({"query": query} if query is not None else {}),
+            },
+        )
+
+    async def researcher_wiki_read(
+        self,
+        path: str,
+        namespace: Literal["project", "global"] = "project",
+        offset: int = 0,
+        max_chars: int = 12000,
+    ) -> dict:
+        """Read the exact stored logical path in one namespace, with id/revision/hash and next_offset. Read all required windows before editing; retain page_id, revision and full title/body/parent state. This read does not create a citable source. Global misses never fall back to a project or vice versa."""
+        return await self._client.request(
+            "GET",
+            "/wiki/" + quote(path, safe=""),
+            query={"namespace": namespace, "offset": offset, "max_chars": max_chars},
+        )
+
+    async def researcher_wiki_write(
+        self,
+        operation_key: str,
+        path: str,
+        title: str,
+        content: str,
+        expected_revision: int,
+        page_id: int | None = None,
+        parent_path: str | None = None,
+    ) -> dict:
+        """Write only this project's wiki, with stable operation_key. Creation uses expected_revision0 and page_id null. Editing requires the exact observed page_id/revision and complete title/body/parent state; null parent clears it. A stale or recreated page conflicts; do not rebase/overwrite silently. Preserve the draft and compare first. A wiki edit is context, not task acceptance, scientific validation or publication."""
+        return await self._client.request(
+            "POST",
+            "/wiki",
+            body={
+                "operation_key": operation_key,
+                "path": path,
+                "title": title,
+                "content": content,
+                "expected_revision": expected_revision,
+                "page_id": page_id,
+                "parent_path": parent_path,
+            },
+        )
+
+    async def researcher_capture_wiki(
+        self,
+        operation_key: str,
+        page_id: int,
+        revision: int,
+        namespace: Literal["project", "global"] = "project",
+    ) -> dict:
+        """Capture one explicitly named retained wiki revision as immutable exact-quotation evidence. Reading/editing a wiki does not itself create a source. Read the resulting captured source before citing. The snapshot may intentionally be historical; it does not prove current-page state or scientific validity. Reuse operation_key after a lost receipt."""
+        return await self._client.request(
+            "POST",
+            "/sources/wiki",
+            body={
+                "operation_key": operation_key,
+                "page_id": page_id,
+                "revision": revision,
+                "namespace": namespace,
+            },
+        )
+
+    async def researcher_capture_wiki_collection(
+        self, operation_key: str, members: list[WikiRevision]
+    ) -> dict:
+        """Capture all 1–50 explicitly selected wiki revisions into a bounded normalized source, preserving member offsets/hashes. Use researcher_source_query for offline paraphrase recovery and source_structure for exact member locators. This covers only selected members, never an unlisted whole wiki. Excess size/empty/foreign/duplicate members fail without partial capture. Reuse operation_key; no hidden model/vector store is used."""
+        return await self._client.request(
+            "POST",
+            "/sources/wiki-collection",
+            body={
+                "operation_key": operation_key,
+                "members": [member.model_dump() for member in members],
             },
         )

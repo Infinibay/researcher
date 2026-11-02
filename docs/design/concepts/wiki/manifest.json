@@ -1,0 +1,121 @@
+{
+  "date": "2026-11-01",
+  "base_commit": "7033259",
+  "generator": "image_gen.imagegen built-in; four independent calls; no API-key fallback",
+  "model": null,
+  "model_note": "Exact image model not exposed",
+  "image_count": 4,
+  "selected_desktop": "scoped-notebook",
+  "selection": "../../selection.md",
+  "implementation_status": "implemented notebook pilot; 16 functional states and 3 reading widths verified; complete human/route acceptance pending",
+  "assets": [
+    {
+      "id": "scoped-notebook",
+      "surface": "desktop",
+      "image": "scoped-notebook.png",
+      "sha256": "59538e703ec138b7a22dfdb9a2417785a8737b48d74d001f877a3f9550b9ce9a",
+      "pixel_dimensions": [
+        1487,
+        1058
+      ],
+      "layout_target": [
+        1440,
+        1024
+      ],
+      "prompt": "scoped-notebook.prompt.txt",
+      "prompt_sha256": "80ae4c2273dd5941dfb33abc3ee9b8bed83bc98dd7e1a4002d49746543beab5e",
+      "input_images": [
+        {
+          "path": "docs/design/audits/2026-11-01-wiki/before-desktop.png",
+          "sha256": "d71d2e0c596960b98fab4820a4d3dcf412e435821dd9726238eff1be14f45c38"
+        },
+        {
+          "path": "docs/design/concepts/reports/reading-with-provenance.png",
+          "sha256": "c6d3e84fb412965c31456a300458fb3ebc32431fb1fc40d80cf4befcf8814028"
+        }
+      ],
+      "inspected": true
+    },
+    {
+      "id": "library-desk",
+      "surface": "desktop",
+      "image": "library-desk.png",
+      "sha256": "a68951969926be64e6d0223e5c46f15d7344e5a478a26ae72282455bfb22b349",
+      "pixel_dimensions": [
+        1487,
+        1058
+      ],
+      "layout_target": [
+        1440,
+        1024
+      ],
+      "prompt": "library-desk.prompt.txt",
+      "prompt_sha256": "1bad5343ac7f02d65e6d143f35b319c85ad9962daa2961da92a763195da0da49",
+      "input_images": [
+        {
+          "path": "docs/design/audits/2026-11-01-wiki/before-desktop.png",
+          "sha256": "d71d2e0c596960b98fab4820a4d3dcf412e435821dd9726238eff1be14f45c38"
+        },
+        {
+          "path": "docs/design/concepts/reports/reading-with-provenance.png",
+          "sha256": "c6d3e84fb412965c31456a300458fb3ebc32431fb1fc40d80cf4befcf8814028"
+        }
+      ],
+      "inspected": true
+    },
+    {
+      "id": "reading-margin",
+      "surface": "desktop",
+      "image": "reading-margin.png",
+      "sha256": "ff601231292c99aae36a006efe241fe6a9cf618d202279b679d2730fdea8aaf1",
+      "pixel_dimensions": [
+        1487,
+        1058
+      ],
+      "layout_target": [
+        1440,
+        1024
+      ],
+      "prompt": "reading-margin.prompt.txt",
+      "prompt_sha256": "15c01588e51d85c250457bb5167b8a30b5a8d8777b685f84dcfde76fe821241d",
+      "input_images": [
+        {
+          "path": "docs/design/audits/2026-11-01-wiki/before-desktop.png",
+          "sha256": "d71d2e0c596960b98fab4820a4d3dcf412e435821dd9726238eff1be14f45c38"
+        },
+        {
+          "path": "docs/design/concepts/reports/reading-with-provenance.png",
+          "sha256": "c6d3e84fb412965c31456a300458fb3ebc32431fb1fc40d80cf4befcf8814028"
+        }
+      ],
+      "inspected": true
+    },
+    {
+      "id": "scoped-notebook-mobile",
+      "surface": "mobile",
+      "image": "scoped-notebook-mobile.png",
+      "sha256": "99c56ecd48685d319fdc2aedd1a53f891704f95950d2ea7d87ad37eda4c8d4ec",
+      "pixel_dimensions": [
+        853,
+        1844
+      ],
+      "layout_target": [
+        390,
+        844
+      ],
+      "prompt": "scoped-notebook-mobile.prompt.txt",
+      "prompt_sha256": "36fb9864dc7cd3767e5c47645fbfc34d24498a7202a9ed2475639166b02ae8f3",
+      "input_images": [
+        {
+          "path": "docs/design/concepts/wiki/scoped-notebook.png",
+          "sha256": "59538e703ec138b7a22dfdb9a2417785a8737b48d74d001f877a3f9550b9ce9a"
+        },
+        {
+          "path": "docs/design/audits/2026-11-01-wiki/before-mobile.png",
+          "sha256": "89674008fe380499c4225a0335430c32830ce0eb373848347e0289d600e6ea32"
+        }
+      ],
+      "inspected": true
+    }
+  ]
+}

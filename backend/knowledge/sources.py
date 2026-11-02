@@ -2,18 +2,27 @@
 
 from __future__ import annotations
 
-import json
 import logging
 import os
 import sqlite3
-from typing import Any
 
 from crewai.knowledge.source.base_knowledge_source import BaseKnowledgeSource
 
 from backend.config.settings import settings
-from backend.tools.base.db import execute_with_retry
+from backend.knowledge.wiki import WikiConflict, verify_current_revision
 
 logger = logging.getLogger(__name__)
+
+
+def execute_with_retry(*args, **kwargs):
+    """Defer the legacy registry import until a source loads data, after its classes are defined.
+
+    Keep this narrow patch point for existing consumers/tests; all database behavior
+    still belongs to the shared legacy helper, not a second retry implementation.
+    """
+    from backend.tools.base.db import execute_with_retry as execute
+
+    return execute(*args, **kwargs)
 
 
 def _chunk_text(
@@ -95,16 +104,18 @@ class FindingsKnowledgeSource(BaseKnowledgeSource):
                 f"{f['content']}\n"
                 f"Sources: {sources}"
             )
-            content_chunks.append({
-                "content": text,
-                "metadata": {
-                    "finding_id": f["id"],
-                    "topic": f["topic"],
-                    "confidence": f["confidence"],
-                    "finding_type": f["finding_type"],
-                    "source": "findings",
-                },
-            })
+            content_chunks.append(
+                {
+                    "content": text,
+                    "metadata": {
+                        "finding_id": f["id"],
+                        "topic": f["topic"],
+                        "confidence": f["confidence"],
+                        "finding_type": f["finding_type"],
+                        "source": "findings",
+                    },
+                }
+            )
         return content_chunks
 
     def validate_content(self) -> list[dict[str, str]]:
@@ -128,41 +139,58 @@ class FindingsKnowledgeSource(BaseKnowledgeSource):
 
 
 class WikiKnowledgeSource(BaseKnowledgeSource):
-    """Knowledge source backed by the ``wiki_pages`` table."""
+    """Legacy context includes project/global candidates, each with explicit identity; native reads select one scope."""
 
     project_id: int
 
     def load_content(self) -> list[dict[str, str]]:
-        """Fetch wiki pages and format them as content chunks."""
+        """Retain distinct namespace/id/revision evidence without inferring precedence or validation."""
         pid = self.project_id
 
         def _query(conn: sqlite3.Connection) -> list[dict]:
+            """Label independent project/global candidates and reject unrecorded content changes."""
             rows = conn.execute(
-                """SELECT id, path, title, content
+                """SELECT id, project_id, revision, path, title, content, parent_path
                    FROM wiki_pages
                    WHERE project_id = ? OR project_id IS NULL
                    ORDER BY path""",
                 (pid,),
             ).fetchall()
-            return [dict(r) for r in rows]
+            pages = [dict(row) for row in rows]
+            for page in pages:
+                namespace = "global" if page["project_id"] is None else "project"
+                verify_current_revision(conn, page, pid, namespace)
+            return pages
 
         try:
             pages = execute_with_retry(_query)
+        except WikiConflict:
+            raise
         except Exception:
             logger.exception("Failed to load wiki pages for project %d", pid)
             return []
 
         content_chunks = []
         for page in pages:
-            text = f"# {page['title']}\nPath: {page['path']}\n\n{page['content']}"
-            content_chunks.append({
-                "content": text,
-                "metadata": {
-                    "path": page["path"],
-                    "title": page["title"],
-                    "source": "wiki",
-                },
-            })
+            namespace = "global" if page["project_id"] is None else "project"
+            text = (
+                f"# {page['title']}\nNamespace: {namespace}\nPage ID: {page['id']}\n"
+                f"Revision: {page['revision']}\nPath: {page['path']}\n\n{page['content']}"
+            )
+            content_chunks.append(
+                {
+                    "content": text,
+                    "metadata": {
+                        "namespace": namespace,
+                        "project_id": page["project_id"],
+                        "page_id": page["id"],
+                        "revision": page["revision"],
+                        "path": page["path"],
+                        "title": page["title"],
+                        "source": "wiki",
+                    },
+                }
+            )
         return content_chunks
 
     def validate_content(self) -> list[dict[str, str]]:
@@ -224,7 +252,8 @@ class ReferenceFilesKnowledgeSource(BaseKnowledgeSource):
             if file_size > settings.MAX_FILE_SIZE_BYTES:
                 logger.debug(
                     "Skipping oversized reference file: %s (%d bytes)",
-                    fpath, file_size,
+                    fpath,
+                    file_size,
                 )
                 continue
 
@@ -241,15 +270,17 @@ class ReferenceFilesKnowledgeSource(BaseKnowledgeSource):
                 f"Description: {description}\n\n"
                 f"{file_content}"
             )
-            content_chunks.append({
-                "content": text,
-                "metadata": {
-                    "file_name": ref["file_name"],
-                    "file_type": ref.get("file_type", ""),
-                    "description": description,
-                    "source": "reference_files",
-                },
-            })
+            content_chunks.append(
+                {
+                    "content": text,
+                    "metadata": {
+                        "file_name": ref["file_name"],
+                        "file_type": ref.get("file_type", ""),
+                        "description": description,
+                        "source": "reference_files",
+                    },
+                }
+            )
         return content_chunks
 
     def validate_content(self) -> list[dict[str, str]]:
@@ -315,14 +346,16 @@ class ReportsKnowledgeSource(BaseKnowledgeSource):
                     continue
 
             description = report.get("description", "")
-            content_chunks.append({
-                "content": file_content,
-                "metadata": {
-                    "artifact_id": report["id"],
-                    "description": description,
-                    "source": "reports",
-                },
-            })
+            content_chunks.append(
+                {
+                    "content": file_content,
+                    "metadata": {
+                        "artifact_id": report["id"],
+                        "description": description,
+                        "source": "reports",
+                    },
+                }
+            )
         return content_chunks
 
     def validate_content(self) -> list[dict[str, str]]:

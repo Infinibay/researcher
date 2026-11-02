@@ -9,13 +9,15 @@ import pytest
 def test_version28_migration_preserves_rows_and_only_records_future_edits(
     _isolated_db, db_conn, monkeypatch
 ):
-    from backend.db import migrations, peer_kind_migration
+    """Preserve version28 rows and record only future edits after upgrading."""
+    from backend.db import migrations, peer_kind_migration, wiki_migration
     from backend.runtime.sqlite_runs import SQLiteRunStore
     from backend.tools.base.db import ensure_migrations
 
     apply = migrations.apply_sql_resource
     with monkeypatch.context() as patch:
         patch.setattr(peer_kind_migration, "migrate_ken_peers", lambda _conn: None)
+        patch.setattr(wiki_migration, "apply_wiki_schema", lambda _conn: None)
         patch.setattr(
             migrations,
             "apply_sql_resource",

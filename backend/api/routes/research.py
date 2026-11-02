@@ -1,6 +1,7 @@
 """Project-bound research tools; no arbitrary SQL, paths or model-side grants."""
 
 import asyncio
+from typing import Literal
 
 from fastapi import APIRouter, FastAPI, Query, Request
 from fastapi.responses import JSONResponse
@@ -10,6 +11,8 @@ from backend.api.models.research import (
     CapturePaper,
     CaptureReference,
     CaptureWeb,
+    CaptureWiki,
+    CaptureWikiCollection,
     FindingDetail,
     FindingReceipt,
     RecordFinding,
@@ -18,6 +21,7 @@ from backend.api.models.research import (
     SourceReceipt,
     SourceWindow,
     WriteReport,
+    WriteWiki,
 )
 from backend.api.research_dependencies import Context
 from backend.research.models import (
@@ -323,3 +327,63 @@ def report_read(
         "next_evidence_offset": end if end < len(row["evidence"]) else None,
         **_window(row["content"], offset, max_chars),
     }
+
+
+@router.get("/wiki")
+def wiki_list(
+    ctx: Context,
+    namespace: Literal["project", "global"] = "project",
+    after_id: int = Query(0, ge=0),
+    limit: int = Query(50, ge=1, le=100),
+    query: str | None = Query(None, min_length=1, max_length=500),
+):
+    """List one namespace and optional lexical search, with stable cursor and grant checks."""
+    return ctx.store.wiki_list(
+        ctx.scope, namespace=namespace, after_id=after_id, limit=limit, query=query
+    )
+
+
+@router.post("/wiki")
+def wiki_write(command: WriteWiki, ctx: Context):
+    """Apply one observed project wiki edit; the model cannot select actor/project/global write."""
+    return ctx.store.wiki_write(
+        ctx.scope,
+        command.operation_key,
+        **command.model_dump(exclude={"operation_key"}),
+    )
+
+
+@router.get("/wiki/{path:path}")
+def wiki_read(
+    path: str,
+    ctx: Context,
+    namespace: Literal["project", "global"] = "project",
+    offset: int = Query(0, ge=0),
+    max_chars: int = Query(12000, ge=1, le=20000),
+):
+    """Read a bounded explicitly scoped page without implying a captured source or validation."""
+    return ctx.store.wiki_read(
+        ctx.scope, path, namespace=namespace, offset=offset, max_chars=max_chars
+    )
+
+
+@router.post("/sources/wiki", response_model=SourceReceipt)
+def capture_wiki(command: CaptureWiki, ctx: Context):
+    """Turn one named retained wiki revision into immutable exact-quotation source evidence."""
+    return ctx.store.capture_wiki(
+        ctx.scope,
+        command.operation_key,
+        page_id=command.page_id,
+        revision=command.revision,
+        namespace=command.namespace,
+    )
+
+
+@router.post("/sources/wiki-collection", response_model=SourceReceipt)
+def capture_wiki_collection(command: CaptureWikiCollection, ctx: Context):
+    """Capture a bounded explicit corpus into the existing source/semantic pipeline; never silently sample."""
+    return ctx.store.capture_wiki_collection(
+        ctx.scope,
+        command.operation_key,
+        members=[member.model_dump() for member in command.members],
+    )

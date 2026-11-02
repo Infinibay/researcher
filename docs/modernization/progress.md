@@ -3916,3 +3916,178 @@ review only when entire implementation is ready. No phase or goal completion cla
   fifth pilot or any page acceptance. Legacy registries/roles/flows still require cutover.
 
 - Final full regression: 1748 total, 1645 passed, 100 EXACT baseline failures, 3 skipped; 641 runtime passes. No new/resolved failure identities. Final wheel matches 611 Python/SQL files. Raw logs/JUnit and current artifact hashes retained; whole suite remains red.
+
+## Active brief: explicit wiki identity and native knowledge — base7033259
+
+- Documents are usable natively, but research/reviewer flows still depend on wiki,
+  broader findings/review and coordination. Do not claim a role cutover by replacing
+  six RAG imports. Next complete knowledge/wiki through the same grant/runtime, then
+  its fifth UI pilot; remaining role dependencies stay recorded.
+- Observed: legacy wiki_pages.path is globally UNIQUE; reads/updates/deletes combine
+  project_id and NULL without explicit namespace. Two projects cannot own the same
+  path, and a local write may select a global page. This is the concrete plan C35
+  identity boundary to fix, not a new general-purpose knowledge framework.
+- Outcome: explicit project/global identity, same local path in two projects plus
+  global, CAS revision updates with retained history and retry receipts; reads/search
+  paginated and scoped. Global reads explicit, model writes project-only. No implicit
+  precedence or silent edit to a global document. Parent lookup stays in its namespace.
+- Reuse SQLiteResearchStore grants/operation receipts and SourceDraft snapshots; add
+  native wiki list/read/write/capture. Capturing an explicit wiki revision enables exact
+  findings/report citations, with source kind wiki rather than mislabelling it web/file.
+  No model provider, hidden summarizer, global vector index or new inference factory.
+- Data migration: preserve row ids/content/metadata, references, sequences and FTS while
+  replacing global path uniqueness with partial namespace indexes; retain initial wiki
+  revisions. Add wiki source kind without changing existing snapshots. Transactional
+  failure must restore schema/data and foreign-key enforcement. Tested downgrade must
+  refuse namespace collisions without deleting data; document this rollback constraint.
+- Migrate owner API and legacy wiki tool adapters to shared queries/writes; model tool
+  writes require an observed revision (0 for explicit creation), not a guessed rebase.
+  Keep existing owner wire shape where possible; deliberate CAS/namespace changes are
+  documented and consumed by the new frontend. No broad task-state rewrite in this slice.
+- UI: audit current Wiki from real captures first; generate3desktop alternatives and1
+  mobile for the chosen option, choose professionally within the user's authorization.
+  Reuse existing shell/editorial styling but give wiki its reading/editing workflow.
+  Expose namespace/revision and recoverable conflict; preserve draft on save errors and
+  project changes. No "AI" marketing or claims that a wiki edit validates research.
+- Exit: migration/backfill/id/sequence/FK/FTS/rollback, two-project/global collisions,
+  scoped native read/write/capture→exact finding/report, lost-receipt/CAS/withdrawal,
+  isolated wheel and final full-regression comparison; UI build/tests, screenshots,
+  keyboard/axe/reflow/error/conflict/project-isolation. All new relevant modules/classes/
+  methods/functions get searchable docstrings/JSDoc. No whole-goal or page acceptance claim.
+
+- Ruling after direct reader inspection: SearchWikiTool uses semantic embeddings,
+  while ReadWikiTool's search uses lexical FTS. A native lexical list/search is not
+  equivalent. Preserve useful paraphrase recovery by capturing a bounded explicit
+  collection of wiki revisions into the existing semantic source retriever, with
+  member locators/quotes. Do not add another vector store or hidden model call, and
+  do not claim the legacy semantic adapter retired before role/flow cutover.
+
+- Early wiki proof: four initial cases RED (global path uniqueness, implicit global
+  read, missing CAS/history adapter and native capture). Migration/store/owner/native
+  HTTP subset then10passed. Migration failure injection preserves schema/data/FKs;
+  downgrade/reapply exposed quoted SQLite table names, fixed with the same regression.
+  One fixture omitted findings.agent_id; corrected test setup before evaluating proof.
+- Follow-on identity failure: delete/recreate can reuse revision1 under the same path.
+  A stale editor could then target a different page. RED reproduced; guards now require
+  observed page_id plus revision for update/delete, and complete state for saves. Same-key
+  owner HTTP replies are reconstructed from retained revision, not a current-page read
+  before receipt recovery. Native writes remain project-only; namespace explicit on reads.
+- Old Wiki audit captured from real private browser fixture before UI changes:5contrast
+  violations on desktop; mobile reader visibly clipped despite scrollWidth==viewport.
+  The first audit attempt found WikiTree synthesizes a leading slash, breaking stored
+  non-leading paths. Captured the working legacy leading-path variant separately; fix
+  identity via exact stored path in the redesign, not by rewriting historical data.
+- Four built-in ImageGen jobs returned independently and all outputs inspected/copied
+  unchanged: scoped-notebook, library-desk, reading-margin and selected mobile. No paid
+  API fallback/model-id guess. Selection delegated by user: choose scoped-notebook,
+  split mobile list/detail; replace technical 'namespace' UI wording with explicit
+  project/global language.15/36desktop concepts,5/12mobile; still4codepilots/0accepted.
+- Live synthetic Wiki preview uses files-current/serve.py on exec69559; old UI/API loaded,
+  no autoreload. Inputs seeded after migration33 directly for before-state only; recreate
+  these synthetic pages through WikiStore before after-state history tests. Original trial
+  and original checkout untouched. Current new wiki source/schema work is not committed
+  or globally verified. No full-suite run until directed faults, UI and wheel are final.
+
+- Shared owner/native/legacy wiki boundary subset19passed. Native facade + real scoped
+  HTTP + local multilingual corpus retrieval + exact finding/report draft4passed,
+  including a logical path with '?/#' encoded by the transport. No generation turns.
+  New source kind wiki is supported by migration33 and immutable source persistence.
+- Native wiki adds5tools (business catalog19): list/read/project-only write, one revision
+  capture and explicit collection capture. Collection TDD2RED→GREEN. Local collection
+  retrieval maps matching chunks to retained page/revision units; no sampled whole-wiki
+  claim. Legacy SearchWiki still retains its configured provider until role cutover;
+  scoped candidate paging/provenance are explicit. Write-time hidden embeddings removed;
+  changed pages invalidate old vector cache (RED→GREEN), instead of ranking new text
+  with stale vectors. Legacy wiki_updated remains advisory, not native scheduling.
+- Wiki current-state reads/edits reject unversioned writer changes; retained revisions
+  verify their hashes. This is not full dependency invalidation of findings/context after
+  a wiki edit; that remains a knowledge/coordination requirement, with captured revision
+  identity visible. API idempotent replies recover retained revisions after later edits.
+- UI RED harness initially wrote paths relative to frontend with another frontend prefix;
+  no tests ran. Removed only the created empty nested directories, rewrote from repo root,
+  then ran Node with explicit frontend cwd. Only the subsequent actual assertion failure
+  log is RED evidence. Future frontend creates stay rooted in repo; test subprocess cwd
+  is explicit. Current UI implementation not yet changed.
+
+Checkpoint:7033259 is the committed structured-source delivery (1748total/1645pass/100EXACTbaselinefail/3skip;305wheel-directed). Active Wiki work is uncommitted; read the latest Active brief and follow-ons in docs/modernization/progress.md plus git status. Schema33, namespace/CAS/history/native wiki sources/collection, legacy adapters/import-cycle fixes and selected UI are in progress. No full-goal completion or page acceptance. Live preview is files-current/serve.py under unified exec81139; functional browser QA exec73673. Resume these handles/results, do not restart inference.
+
+- Source combined338passed (78.77s) before the last targeted metadata/import/identity
+  checks; final wheel/global still required. Fresh import2RED→GREEN: lazy knowledge
+  exports plus deferred legacy DB helper remove the standalone wiki/service import cycle.
+  Native wiki import loads neither CrewAI nor LiteLLM; legacy exports retain class identity.
+- Imported revision actor is now NULL when updated_by is absent; created_by alone is
+  not evidence of who wrote the current text. origin=legacy_snapshot distinguishes
+  the observed imported state from reconstructed history; current pages retain creator
+  metadata. Migration3passed; later identity/receipt/concurrency subset10passed.
+- Legacy context same-path/global/local test RED→GREEN; it labels namespace/id/revision
+  and verifies recorded content instead of claiming an unchanged revision after an
+  unversioned writer. Legacy DB-load error behavior/provider removal still belongs to
+  complete role migration; native context does not use this source builder.
+- Browser found nested main landmarks (two axe rules), corrected to a named section.
+  Actual reading then3widths passed/0axe (1440/390/320); screenshots inspected. Scoped
+  CSS removes inherited Task child margins and mobile navy gutters; headings remain
+  programmatically focusable without a misleading input-like black rectangle.
+- Frontend46passed + build; expanded pure draft/URL/rebase checks7passed separately
+  (48total expected next full frontend run). Current functional QA reached reading/history,
+  then failed to locate the editor textarea by exact accessible label. Probe now separates
+  navigation failure from naming; no final interaction/acceptance claim yet.
+
+- Resume after user interruption: final frontend49passed, build passed, final reading
+  at1440/390/320 passed0axe; functional16states/5action groups passed0axe/pageerrors.
+  A premature late-response assertion was a probe timing defect: HTTP headers were
+  not completed body/UI reconciliation. Corrected waits; no app patch for that result.
+- Changed-piece AST docstring audit found zero missing docs on modified declarations
+  and new modules. Ruff check23changed Python files passes; format22modern files passes.
+  Ruling: preserve db.py inherited formatting outside the five-line migration insertion
+  rather than reformat1400legacy lines; full-branch documentation/legacy cleanup remains
+  required. Tool schema canonical19business/5Wiki; notebook images inspected.
+- Browser synthetic invariants: report bytes, dispatch1/run1/source23 unchanged,
+  forbidden generation marker absent. Final source/build/probe hashes retained in
+  Wiki binding evidence. No additional model generation or remote embeddings.
+- Packaging setup first used global uv/no-build-isolation without setuptools; build
+  did not start. Reused existing .venv uv/Python with cached isolated build instead,
+  producing wheel+sdist offline without changing dependencies or installing the host.
+  Isolated wheel-directed verification is live; one global run follows only if green.
+
+- First wheel probe339passed/1failed. Exact failed identity is an unchanged baseline
+  finding test, not Wiki; its assertions were not relaxed. Ruling: include and report
+  this inherited failure explicitly in the package receipt. The verifier's previous
+  all-green assertion prevented import-origin telemetry, so rerun that same frozen
+  wheel with expected identity validation before the one global run. Product bytes
+  and archive do not change. Future package scopes must consult inherited IDs first.
+
+- Read-only next-slice discovery while frozen Wiki wheel runs: Finding review is still
+  legacy validate_finding.py status mutation; FindingsPage.tsx mixes old FTS/provider
+  results, unknown confidence and scope without native list/review contracts. Ken query
+  returned validate_finding.py and record_finding.py. A next Findings slice must preserve
+  legacy values as attributed historical metadata, not assert scientific validation,
+  and supply scoped list/read/provenance before replacing that UI. No product changes
+  for the next slice yet; Wiki remains active until package/global commit.
+
+- First full run1767cases/1658pass/106fail/3skip: six new failures share one cause.
+  Version23/27/28/29 fixture helpers skip future SQL migrations and the Ken rebuild,
+  but not the new Wiki rebuild; their setup reaches33 before historical assertions.
+  Ruling: skip Wiki only inside those four pre-version fixture contexts, preserving
+  historical version assertions and all actual upgrade/preservation checks. No product
+  or migration behavior is weakened. Record first red JUnit/log separately. Include
+  all historical migration tests in final packaged scope; repeat global only because
+  this actual failure changed tested fixture inputs, not because documentation changed.
+
+- Wiki final frozen package347cases/346pass/1exact known baseline finding failure;
+ 355backend modules loaded only from wheel,618matching Python/SQL sources. Historical
+ fixture followup7passed; final global live unified exec11139, no product edits.
+- Independent next-slice visual prep only in private scratch: Findings before desktop/
+ mobile captured9contrast nodes each. findings-next-brief.md and findings-prompts.json
+ record observed constraints and next criteria. Three built-in ImageGen desktop jobs
+ live in functions cell g127:2738 (evidence-ledger/claim-register/research-dossier),
+ each receiving actual Wiki style + actual Findings before images. Do not restart them.
+ Do not count these as delivered or stage Findings artifacts in the Wiki commit.
+
+- Synthetic preview PID1291628 verified by exact serve.py cmdline and managed cwd,
+  terminated explicitly after final Wiki and next Findings-before captures. Unified
+  exec81139 terminal SIGTERM wrapper traceback is expected intentional shutdown.
+  The three next ImageGen jobs are separate from research runtime model-turn counts.
+
+- Wiki delivery terminal: 1767 casos: 1664 pasan, 100 fallos heredados y 3 omitidos; 19 new cases pass, 643 runtime passes. New failures=[]; resolved=[]. Wheel 346 pasan y 1 fallo heredado explícito, 618 matching Python/SQL files. Frontend49/build,16 functional states +3reading widths/0axe. Five pilots/0accepted. Full goal remains active.
+
+- Wiki delivery terminal: 1767 casos: 1664 pasan, 100 fallos heredados y 3 omitidos; 19 new cases pass, 643 runtime passes. New failures=[]; resolved=[]. Wheel 346 pasan y 1 fallo heredado explícito, 618 matching Python/SQL files. Frontend49/build,16 functional states +3reading widths/0axe. Five pilots/0accepted. Full goal remains active.

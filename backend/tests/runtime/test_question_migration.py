@@ -7,7 +7,13 @@ import pytest
 
 
 def version23(database, conn, monkeypatch):
-    from backend.db import migrations, peer_kind_migration, question_migration
+    """Build a version23 fixture without newer rebuilds changing the migration under test."""
+    from backend.db import (
+        migrations,
+        peer_kind_migration,
+        question_migration,
+        wiki_migration,
+    )
     from backend.tools.base.db import ensure_migrations
 
     conn.execute("PRAGMA foreign_keys=ON")
@@ -15,6 +21,7 @@ def version23(database, conn, monkeypatch):
     with monkeypatch.context() as patch:
         patch.setattr(question_migration, "apply_question_schema", lambda _conn: None)
         patch.setattr(peer_kind_migration, "migrate_ken_peers", lambda _conn: None)
+        patch.setattr(wiki_migration, "apply_wiki_schema", lambda _conn: None)
         # This fixture deliberately represents version 23, not the newest schema.
         patch.setattr(
             migrations,

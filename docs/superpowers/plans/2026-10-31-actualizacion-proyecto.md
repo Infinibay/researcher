@@ -16,7 +16,7 @@
 
 ## 1. Alcance y criterios de éxito
 
-El trabajo solicitado ahora es este documento. La generación de imágenes, la elección de conceptos y su implementación forman parte de las fases de ejecución descritas aquí. No se generaron conceptos visuales ni se cambió el producto durante esta revisión.
+Este documento se redactó inicialmente como plan y su ejecución completa fue autorizada después. La modernización está en curso: [estado y siguiente entrega](../../modernization/execution-dashboard.md). Las observaciones históricas de esta revisión no describen automáticamente la implementación actual. Los requisitos de generación de conceptos, selección e implementación siguen vigentes hasta completar todas las páginas.
 
 Requisitos transversales:
 

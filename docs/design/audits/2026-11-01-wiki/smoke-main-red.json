@@ -1,0 +1,52 @@
+{
+  "states": [
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "workbench": {
+          "x": 192,
+          "y": 64,
+          "width": 1248,
+          "height": 960,
+          "top": 64,
+          "right": 1440,
+          "bottom": 1024,
+          "left": 192
+        },
+        "reader": {
+          "x": 592,
+          "y": 92,
+          "width": 784,
+          "height": 755.09375,
+          "top": 92,
+          "right": 1376,
+          "bottom": 847.09375,
+          "left": 592
+        }
+      },
+      "violations": [
+        {
+          "id": "landmark-main-is-top-level",
+          "impact": "moderate",
+          "nodes": 1
+        },
+        {
+          "id": "landmark-no-duplicate-main",
+          "impact": "moderate",
+          "nodes": 1
+        }
+      ],
+      "screenshot": "docs/design/audits/2026-11-01-wiki/after-desktop-reader.png",
+      "sha256": "d8e89641c8a157b850bec430d606fa369c0e9ad65dbcc86b13f3c6d03f00d0f0"
+    }
+  ],
+  "errors": [],
+  "result": "failed",
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   {\n+     description: 'Ensure the main landmark is at top level',\n+     help: 'Main landmark should not be contained in another landmark',\n+     helpUrl: 'https://dequeuniversity.com/rules/axe/4.14/landmark-main-is-top-level?application=playwright',\n+     id: 'landmark-main-is-top-level',\n+     impact: 'moderate',\n+     nodes: [\n+       {\n+         all: [],\n+         any: [\n+           {\n+             data: {\n+               role: 'main'\n+             },\n+             id: 'landmark-is-top-level',\n+             impact: 'moderate',\n+             message: 'The main landmark is contained in another landmark.',\n+             relatedNodes: []\n+           }\n+         ],\n+         failureSummary: 'Fix any of the following:\\n' +\n+           '  The main landmark is contained in another landmark.',\n+         html: '<main class=\"wiki-pane\" aria-label=\"Documento y edición\">',\n+         impact: 'moderate',\n+         none: [],\n+         target: [\n+           '.wiki-pane'\n+         ]\n+       }\n+     ],\n+     tags: [\n+       'cat.semantics',\n+       'best-practice'\n+     ]\n+   },\n+   {\n+     description: 'Ensure the document has at most one main landmark',\n+     help: 'Document should not have more than one main landmark',\n+     helpUrl: 'https://dequeuniversity.com/rules/axe/4.14/landmark-no-duplicate-main?application=playwright',\n+     id: 'landmark-no-duplicate-main',\n+     impact: 'moderate',\n+     nodes: [\n+       {\n+         all: [],\n+         any: [\n+           {\n+             data: null,\n+             id: 'page-no-duplicate-main',\n+             impact: 'moderate',\n+             message: 'Document has more than one main landmark',\n+             relatedNodes: [\n+               {\n+                 html: '<main class=\"wiki-pane\" aria-label=\"Documento y edición\">',\n+                 target: [\n+                   '.wiki-pane'\n+                 ]\n+               }\n+             ]\n+           }\n+         ],\n+         failureSummary: 'Fix any of the following:\\n  Document has more than one main landmark',\n+         html: '<main id=\"main-content\" tabindex=\"-1\" class=\"workspace-content min-w-0 flex-1 overflow-auto p-6\">',\n+         impact: 'moderate',\n+         none: [],\n+         target: [\n+           '#main-content'\n+         ]\n+       }\n+     ],\n+     tags: [\n+       'cat.semantics',\n+       'best-practice'\n+     ]\n+   }\n+ ]\n- []\n"
+}

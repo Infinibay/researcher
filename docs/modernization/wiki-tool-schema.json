@@ -1,0 +1,230 @@
+{
+  "business_catalog_tools": 19,
+  "tools": [
+    {
+      "name": "researcher_capture_wiki",
+      "description": "Capture one explicitly named retained wiki revision as immutable exact-quotation evidence. Reading/editing a wiki does not itself create a source. Read the resulting captured source before citing. The snapshot may intentionally be historical; it does not prove current-page state or scientific validity. Reuse operation_key after a lost receipt.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "operation_key": {
+            "type": "string"
+          },
+          "page_id": {
+            "type": "integer"
+          },
+          "revision": {
+            "type": "integer"
+          },
+          "namespace": {
+            "default": "project",
+            "enum": [
+              "project",
+              "global"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "operation_key",
+          "page_id",
+          "revision"
+        ],
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "researcher_capture_wiki_collection",
+      "description": "Capture all 1\u201350 explicitly selected wiki revisions into a bounded normalized source, preserving member offsets/hashes. Use researcher_source_query for offline paraphrase recovery and source_structure for exact member locators. This covers only selected members, never an unlisted whole wiki. Excess size/empty/foreign/duplicate members fail without partial capture. Reuse operation_key; no hidden model/vector store is used.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "operation_key": {
+            "type": "string"
+          },
+          "members": {
+            "items": {
+              "additionalProperties": false,
+              "description": "One explicit authorized project/global revision in a bounded wiki corpus.",
+              "properties": {
+                "page_id": {
+                  "exclusiveMinimum": 0,
+                  "type": "integer"
+                },
+                "revision": {
+                  "exclusiveMinimum": 0,
+                  "type": "integer"
+                },
+                "namespace": {
+                  "default": "project",
+                  "enum": [
+                    "project",
+                    "global"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "page_id",
+                "revision"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "operation_key",
+          "members"
+        ],
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "researcher_wiki_list",
+      "description": "List one explicit wiki namespace with stable next_after_id; optional query is lexical FTS, not semantic absence evidence. Never merge global pages implicitly. Use a captured explicit revision collection and researcher_source_query for paraphrases. Metadata is contextual documentation, not scientific validation.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "namespace": {
+            "default": "project",
+            "enum": [
+              "project",
+              "global"
+            ],
+            "type": "string"
+          },
+          "after_id": {
+            "default": 0,
+            "type": "integer"
+          },
+          "limit": {
+            "default": 50,
+            "type": "integer"
+          },
+          "query": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false
+      }
+    },
+    {
+      "name": "researcher_wiki_read",
+      "description": "Read the exact stored logical path in one namespace, with id/revision/hash and next_offset. Read all required windows before editing; retain page_id, revision and full title/body/parent state. This read does not create a citable source. Global misses never fall back to a project or vice versa.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "namespace": {
+            "default": "project",
+            "enum": [
+              "project",
+              "global"
+            ],
+            "type": "string"
+          },
+          "offset": {
+            "default": 0,
+            "type": "integer"
+          },
+          "max_chars": {
+            "default": 12000,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false
+      }
+    },
+    {
+      "name": "researcher_wiki_write",
+      "description": "Write only this project's wiki, with stable operation_key. Creation uses expected_revision0 and page_id null. Editing requires the exact observed page_id/revision and complete title/body/parent state; null parent clears it. A stale or recreated page conflicts; do not rebase/overwrite silently. Preserve the draft and compare first. A wiki edit is context, not task acceptance, scientific validation or publication.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "operation_key": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "expected_revision": {
+            "type": "integer"
+          },
+          "page_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "parent_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "required": [
+          "operation_key",
+          "path",
+          "title",
+          "content",
+          "expected_revision"
+        ],
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    }
+  ]
+}

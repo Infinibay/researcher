@@ -874,10 +874,19 @@
         "docs/modernization/admission-migration.json",
         "docs/modernization/admission-packaging.json",
         "backend/tests/runtime/test_admission_binding.py",
-        "backend/tests/runtime/test_admission_migration.py"
+        "backend/tests/runtime/test_admission_migration.py",
+        "docs/architecture/wiki-knowledge.md",
+        "docs/modernization/wiki-tool-schema.json",
+        "docs/modernization/wiki-results.json",
+        "docs/modernization/wiki-packaging.json",
+        "backend/tests/research/test_wiki_identity.py",
+        "backend/tests/research/test_wiki_migration.py",
+        "backend/tests/research/test_wiki_collection.py",
+        "backend/tests/research/test_wiki_imports.py",
+        "docs/design/audits/2026-11-01-wiki/report.md"
       ],
       "remaining": [
-        "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
+        "Wiki identity portion covered by scoped/CAS/ABA tests; repository/branch/merge/cleanup identity and complete scenario acceptance remain pending."
       ]
     },
     "D07": {
@@ -1591,7 +1600,9 @@
         "frontend/src/components/pages/ReportsPage.tsx",
         "frontend/src/styles/reports.css",
         "frontend/tests/report-design.test.ts",
-        "backend/tests/api/test_owner_report_evidence.py"
+        "backend/tests/api/test_owner_report_evidence.py",
+        "docs/design/concepts/wiki/manifest.json",
+        "docs/design/audits/2026-11-01-wiki/report.md"
       ],
       "notes": [
         "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json."
@@ -1610,11 +1621,13 @@
         "design-qa.md",
         "docs/design/concepts/reports/manifest.json",
         "docs/design/audits/2026-11-01-reports/report.md",
-        "docs/design/concepts/files/manifest.json"
+        "docs/design/concepts/files/manifest.json",
+        "docs/design/concepts/wiki/manifest.json",
+        "docs/design/audits/2026-11-01-wiki/report.md"
       ],
       "remaining": [
-        "Nine other routes need 27 desktop concepts/9 mobile adaptations and selection. Reports design selected but implementation pending; ten routes still need full implementation.",
-        "All twelve routes and shared components still need browser/interaction/accessibility/human-comprehension acceptance."
+        "Seven routes need 21 desktop concepts, 7 mobile adaptations, selection and implementation; five selected pilots are in code.",
+        "All twelve routes and shared components still need complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
       ]
     },
     "12_mobile_adaptations": {
@@ -1630,11 +1643,13 @@
         "design-qa.md",
         "docs/design/concepts/reports/manifest.json",
         "docs/design/audits/2026-11-01-reports/report.md",
-        "docs/design/concepts/files/manifest.json"
+        "docs/design/concepts/files/manifest.json",
+        "docs/design/concepts/wiki/manifest.json",
+        "docs/design/audits/2026-11-01-wiki/report.md"
       ],
       "remaining": [
-        "Nine other routes need 27 desktop concepts/9 mobile adaptations and selection. Reports design selected but implementation pending; ten routes still need full implementation.",
-        "All twelve routes and shared components still need browser/interaction/accessibility/human-comprehension acceptance."
+        "Seven routes need 21 desktop concepts, 7 mobile adaptations, selection and implementation; five selected pilots are in code.",
+        "All twelve routes and shared components still need complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
       ]
     },
     "design_selection": {
@@ -1658,10 +1673,12 @@
         "frontend/tests/report-design.test.ts",
         "backend/tests/api/test_owner_report_evidence.py",
         "docs/design/concepts/files/manifest.json",
-        "docs/design/audits/2026-11-01-files/report.md"
+        "docs/design/audits/2026-11-01-files/report.md",
+        "docs/design/concepts/wiki/manifest.json",
+        "docs/design/audits/2026-11-01-wiki/report.md"
       ],
       "remaining": [
-        "Nine routes still need implementation; Files has selected desktop/mobile targets, eight others need24 desktop concepts/8 mobile adaptations and selection.",
+        "Seven routes need 21 desktop concepts, 7 mobile adaptations, selection and implementation; five selected pilots are in code.",
         "All twelve routes and shared components still need complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
       ]
     },
@@ -1689,10 +1706,12 @@
         "frontend/tests/report-design.test.ts",
         "backend/tests/api/test_owner_report_evidence.py",
         "docs/design/concepts/files/manifest.json",
-        "docs/design/audits/2026-11-01-files/report.md"
+        "docs/design/audits/2026-11-01-files/report.md",
+        "docs/design/concepts/wiki/manifest.json",
+        "docs/design/audits/2026-11-01-wiki/report.md"
       ],
       "remaining": [
-        "Nine routes still need implementation; Files has selected desktop/mobile targets, eight others need24 desktop concepts/8 mobile adaptations and selection.",
+        "Seven routes still need concepts, selection and implementation: home, projects, epics, agents, findings, repositories and flow.",
         "All twelve routes and shared components still need complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
       ]
     },
@@ -1713,7 +1732,9 @@
         "frontend/src/components/pages/ReportsPage.tsx",
         "frontend/src/styles/reports.css",
         "frontend/tests/report-design.test.ts",
-        "backend/tests/api/test_owner_report_evidence.py"
+        "backend/tests/api/test_owner_report_evidence.py",
+        "docs/design/concepts/wiki/manifest.json",
+        "docs/design/audits/2026-11-01-wiki/report.md"
       ],
       "notes": [
         "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json."
@@ -2514,6 +2535,24 @@
       "remaining": [
         "Migrate legacy registries/roles/flows and remove old RAG/CrewAI providers once their consumers are replaced.",
         "Representative complex-document retrieval and human comprehension evaluation; normalized body scope is not full document review."
+      ]
+    },
+    "wiki_knowledge": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/wiki-knowledge.md",
+        "docs/modernization/wiki-tool-schema.json",
+        "docs/modernization/wiki-results.json",
+        "docs/modernization/wiki-packaging.json",
+        "backend/tests/research/test_wiki_identity.py",
+        "backend/tests/research/test_wiki_migration.py",
+        "backend/tests/research/test_wiki_collection.py",
+        "backend/tests/research/test_wiki_imports.py",
+        "docs/design/audits/2026-11-01-wiki/report.md"
+      ],
+      "remaining": [
+        "Migrate complete legacy roles/flows and semantic provider; preserve dependent-context/finding invalidation and retained history policy.",
+        "Representative retrieval/scientific and human-comprehension evaluation; complete Wiki acceptance."
       ]
     }
   }

@@ -7,7 +7,8 @@ from dataclasses import asdict
 def test_version29_dispatch_remains_unknown_after_repeatable_upgrade(
     _isolated_db, db_conn, monkeypatch
 ):
-    from backend.db import migrations, peer_kind_migration
+    """Retain unknown input on a version29 dispatch across repeatable upgrades."""
+    from backend.db import migrations, peer_kind_migration, wiki_migration
     from backend.runtime.codex_session import ExecutionLimits
     from backend.runtime.sqlite_runs import SQLiteRunStore
     from backend.tools.base.db import ensure_migrations
@@ -15,6 +16,7 @@ def test_version29_dispatch_remains_unknown_after_repeatable_upgrade(
     apply = migrations.apply_sql_resource
     with monkeypatch.context() as patch:
         patch.setattr(peer_kind_migration, "migrate_ken_peers", lambda _conn: None)
+        patch.setattr(wiki_migration, "apply_wiki_schema", lambda _conn: None)
         patch.setattr(
             migrations,
             "apply_sql_resource",

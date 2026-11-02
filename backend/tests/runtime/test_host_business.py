@@ -368,3 +368,173 @@ async def test_host_business_uses_real_api_scope_and_persists_one_report(
         assert not (
             await facade.call({"tool": "researcher_reference_list", "arguments": {}})
         )["success"]
+
+
+@pytest.mark.parametrize("semantic", [False, True])
+async def test_native_wiki_facade_keeps_revision_scope_and_exact_report_citations(
+    coordination, tmp_path, monkeypatch, semantic
+):
+    """Use the actual shared tool schemas/API and optional real local encoder, never an LLM stub reply."""
+    import time
+
+    from backend.api.main import create_app
+    from backend.knowledge.wiki import WikiStore
+    from backend.research.models import PERMISSIONS
+    from backend.runtime.business_mediation import BusinessTools
+    from backend.runtime.host_business import host_business
+
+    c = coordination
+    c.now[0] = time.time()
+    wiki = WikiStore(c.research.database)
+    tricky_path = "guide/a?b#c"
+    quote = "The controlled trial found no improvement in the treatment group compared with placebo."
+    first = wiki.write(
+        project_id=101,
+        namespace="project",
+        path=tricky_path,
+        title="Trial result",
+        content="Methods and background. " * 600 + "\n" + quote,
+        expected_revision=0,
+        actor="fixture",
+        operation_key="wiki-fixture",
+    )
+    other = wiki.write(
+        project_id=101,
+        namespace="project",
+        path="astronomy",
+        title="Orbital mechanics",
+        content="Galaxies and orbital mechanics. " * 400,
+        expected_revision=0,
+        actor="fixture",
+        operation_key="astro-fixture",
+    )
+    app = create_app()
+    if semantic:
+        from backend.research.semantic import SemanticRetriever
+        from backend.tests.research.test_semantic_retrieval import assets
+
+        app.state.retrieval = SemanticRetriever(assets())
+    token = c.research.issue_grant(
+        project_id=101, task_id=1001, agent_id="fixture", permissions=set(PERMISSIONS)
+    )
+    scope = c.research.authorize(token)
+    app.state.live_grants.activate(scope.grant_id)
+    async with host_business(
+        api_url="http://127.0.0.1",
+        token=token,
+        withdraw=lambda: app.state.live_grants.withdraw(scope.grant_id),
+        transport=httpx.ASGITransport(app=app),
+    ) as peer:
+        facade = await BusinessTools.connect(peer)
+
+        async def call(name, **arguments):
+            """Dispatch through native business mediation and decode its actual HTTP result."""
+            result = await facade.call({"tool": name, "arguments": arguments})
+            assert result["success"], result
+            return json.loads(result["contentItems"][0]["text"])
+
+        page = await call("researcher_wiki_read", path=tricky_path, max_chars=20000)
+        assert (
+            page["id"] == first["page_id"]
+            and page["revision"] == 1
+            and quote in page["content"]
+        )
+        listing = await call("researcher_wiki_list", limit=1)
+        assert len(listing["pages"]) == 1 and listing["next_after_id"] is not None
+        updated = await call(
+            "researcher_wiki_write",
+            operation_key="wiki-edit",
+            path=tricky_path,
+            title=page["title"],
+            content=page["content"] + "\nScope corrected.",
+            expected_revision=page["revision"],
+            page_id=page["id"],
+        )
+        assert updated["revision"] == 2
+        if semantic:
+            captured = await call(
+                "researcher_capture_wiki_collection",
+                operation_key="corpus",
+                members=[
+                    {
+                        "page_id": other["page_id"],
+                        "revision": 1,
+                        "namespace": "project",
+                    },
+                    {
+                        "page_id": first["page_id"],
+                        "revision": 1,
+                        "namespace": "project",
+                    },
+                ],
+            )
+            ranked = await call(
+                "researcher_source_query",
+                source_id=captured["source_id"],
+                query="¿Qué encontró el ensayo controlado sobre la mejora del tratamiento frente al placebo?",
+                limit=3,
+            )
+            assert ranked["full_coverage"] and ranked["execution"]["worker_closed"]
+            assert any(
+                quote in match["excerpt"] and 1 in match["unit_indices"]
+                for match in ranked["matches"]
+            )
+            structure = await call(
+                "researcher_source_structure", source_id=captured["source_id"]
+            )
+            assert structure["units"][1]["wiki_revision"] == 1
+        else:
+            captured = await call(
+                "researcher_capture_wiki",
+                operation_key="wiki-source",
+                page_id=page["id"],
+                revision=1,
+            )
+        snapshot = await call(
+            "researcher_source_read",
+            source_id=captured["source_id"],
+            offset=0,
+            max_chars=20000,
+        )
+        assert (
+            snapshot["kind"] == "wiki" and "Scope corrected." not in snapshot["content"]
+        )
+        finding = await call(
+            "researcher_finding_record",
+            operation_key="wiki-finding",
+            topic="Controlled trial",
+            content="No improvement was reported; not independent scientific validation.",
+            evidence=[{"source_id": captured["source_id"], "quote": quote}],
+        )
+        report = await call(
+            "researcher_report_write",
+            operation_key="wiki-report",
+            title="Trial notes",
+            content="The saved revision reported no improvement; this is a provisional reading.",
+            finding_ids=[finding["finding_id"]],
+        )
+        recovered = await call(
+            "researcher_report_read", artifact_id=report["artifact_id"]
+        )
+        assert (
+            recovered["status"] == "draft"
+            and recovered["evidence"][0]["quote"] == quote
+        )
+        assert (
+            c.conn.execute("SELECT status FROM tasks WHERE id=1001").fetchone()[0]
+            != "done"
+        )
+        denied = await facade.call(
+            {
+                "tool": "researcher_wiki_write",
+                "arguments": {
+                    "operation_key": "global-denied",
+                    "path": "global",
+                    "title": "Global",
+                    "content": "Forbidden",
+                    "expected_revision": 0,
+                    "namespace": "global",
+                },
+            }
+        )
+        assert not denied["success"]

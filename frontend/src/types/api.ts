@@ -1,3 +1,4 @@
+/** Owner/product API payload shapes; runtime scope and authorization remain server responsibilities. @module */
 export interface Project {
   id: number
   name: string
@@ -102,24 +103,56 @@ export interface ChatThread {
   message_count?: number
 }
 
+/** Wiki scope is explicit; a global page never masquerades as a project document. */
+export type WikiNamespace = 'project' | 'global'
+
+/** Current page identity/revision/hash; index reads omit content and embeddings. */
 export interface WikiPage {
-  id?: number
-  project_id?: number
+  id: number
+  project_id: number | null
+  namespace: WikiNamespace
   path: string
   title: string
-  content?: string
-  parent_path?: string
-  created_by?: string
-  updated_by?: string
-  created_at?: string
-  updated_at?: string
+  content?: string | null
+  parent_path?: string | null
+  created_by?: string | null
+  updated_by?: string | null
+  created_at?: string | null
+  updated_at?: string | null
+  revision: number
+  sha256: string
+  total_chars?: number | null
+  offset?: number | null
+  next_offset?: number | null
 }
 
-export interface WikiSearchResult {
+/** Retained wiki text is a named version, not proof of current-page state or validity. */
+export interface WikiRevision {
+  page_id: number
+  project_id: number | null
+  namespace: WikiNamespace
+  revision: number
   path: string
   title: string
-  snippet?: string
-  updated_at?: string
+  content: string
+  sha256: string
+  actor: string | null
+  origin: 'legacy_snapshot' | 'adapter_write'
+  recorded_at: string | null
+  offset?: number
+  total_chars?: number
+  next_offset?: number | null
+}
+
+/** Legacy lexical result identifies its scope/revision; it is not semantic confidence. */
+export interface WikiSearchResult {
+  id: number
+  path: string
+  title: string
+  namespace: WikiNamespace
+  revision: number
+  snippet?: string | null
+  updated_at?: string | null
 }
 
 /** Stored attachment metadata; existence alone does not prove reading or source capture. */

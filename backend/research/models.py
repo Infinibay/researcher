@@ -13,6 +13,8 @@ PERMISSIONS = frozenset(
         "reports.read",
         "reports.write",
         "questions.ask",
+        "wiki.read",
+        "wiki.write",
     }
 )
 
@@ -62,6 +64,8 @@ def operation_key(value: str) -> None:
 
 @dataclass(frozen=True)
 class ResearchScope:
+    """Host-issued project/task/context identity; every adapter must recheck stored grant authority."""
+
     grant_id: str
     project_id: int
     task_id: int
@@ -72,14 +76,17 @@ class ResearchScope:
 
 @dataclass(frozen=True)
 class SourceDraft:
-    kind: Literal["attachment", "web"]
+    """Bound exact captured document text and provenance before an immutable scoped source commit."""
+
+    kind: Literal["attachment", "web", "wiki"]
     locator: str
     title: str
     content: str
     provenance: dict = field(default_factory=dict)
 
     def __post_init__(self):
-        if self.kind not in ("attachment", "web"):
+        """Validate supported source kind and UTF-8 limits; provenance is evidence, not authorization."""
+        if self.kind not in ("attachment", "web", "wiki"):
             raise ResearchInputError("Unsupported source kind")
         bounded_text(self.locator, "locator", 4096)
         bounded_text(self.title, "title", 1200)

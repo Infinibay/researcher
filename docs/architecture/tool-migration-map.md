@@ -95,3 +95,12 @@ los consumidores. Véase [contrato de análisis](host-analysis-tools.md). Los te
 fake_command_server no demuestran por sí solos el sandbox del CLI. Los fallos
 heredados sirven para conservar resultados de producto; no obligan a conservar
 CrewAI, whitelist, contexto global, pseudoherramientas o rework ilimitado.
+
+## Wiki con identidad preservada
+
+Los adaptadores Wiki antiguos y cinco operaciones nativas comparten namespace explícito,
+página/revisión observadas y recibos. Captura individual/colección reutiliza fuentes y
+recuperación local; el catálogo de negocio tiene19 tools. Eso no migra los roles/flows
+ni retira SearchWiki y su proveedor legado. Pendientes búsqueda web, revisión científica,
+coordinación y demás capacidades antes de cortar las entradas antiguas.
+[Contrato, límites y migración33](wiki-knowledge.md).

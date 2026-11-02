@@ -48,6 +48,8 @@ def _hash(value: str) -> str:
 
 
 class SQLiteResearchStore:
+    """Own scoped source/finding/report/wiki transactions, revocable grants and atomic effect receipts."""
+
     def __init__(
         self,
         database: str | Path,
@@ -211,11 +213,13 @@ class SQLiteResearchStore:
 
     @staticmethod
     def _permission(kind):
+        """Bind each supported mutation to its explicit stored grant capability."""
         return {
             "source.capture": "sources.capture",
             "finding.record": "findings.write",
             "report.write": "reports.write",
             "question.ask": "questions.ask",
+            "wiki.write": "wiki.write",
         }[kind]
 
     @staticmethod
@@ -486,3 +490,170 @@ class SQLiteResearchStore:
                 conn, scope.project_id, result["finding_ids"]
             )
             return result
+
+    def wiki_read(self, scope, path, *, namespace="project", offset=0, max_chars=12000):
+        """Read one explicit namespace under a current wiki-read grant; never fall through globally."""
+        from backend.knowledge.wiki import read_page
+
+        with self._transaction() as conn:
+            self._check_scope(conn, scope, "wiki.read")
+            return read_page(
+                conn,
+                scope.project_id,
+                path,
+                namespace=namespace,
+                offset=offset,
+                max_chars=max_chars,
+            )
+
+    def wiki_list(self, scope, **options):
+        """Page scoped wiki metadata/lexical search without embeddings or an auxiliary LLM."""
+        from backend.knowledge.wiki import list_pages
+
+        with self._transaction() as conn:
+            self._check_scope(conn, scope, "wiki.read")
+            return list_pages(conn, scope.project_id, **options)
+
+    def wiki_write(
+        self,
+        scope,
+        key,
+        *,
+        path,
+        title,
+        content,
+        expected_revision,
+        parent_path=None,
+        page_id=None,
+    ):
+        """Commit a project-only revision and receipt after checking current grant/context authority."""
+        from backend.knowledge.wiki import validate_write, write_page
+
+        validate_write(path, title, content, expected_revision, parent_path, page_id)
+        intent = {
+            "page_id": page_id,
+            "path": path,
+            "title": title,
+            "content": content,
+            "expected_revision": expected_revision,
+            "parent_path": parent_path,
+        }
+        return self._write(
+            scope,
+            key,
+            "wiki.write",
+            intent,
+            lambda conn: write_page(
+                conn,
+                scope.project_id,
+                namespace="project",
+                actor=scope.agent_id,
+                **intent,
+            ),
+        )
+
+    def capture_wiki(self, scope, key, *, page_id, revision, namespace="project"):
+        """Capture exact retained wiki Markdown as source evidence; reading a page alone is not capture."""
+        from backend.knowledge.wiki import read_revision
+
+        positive_id(page_id)
+        positive_id(revision)
+        intent = {
+            "wiki_page_id": page_id,
+            "wiki_revision": revision,
+            "namespace": namespace,
+        }
+        prior = self.lookup_operation(scope, key, "source.capture", intent)
+        if prior is not None:
+            return prior
+        with self._transaction() as conn:
+            self._check_scope(conn, scope, "wiki.read")
+            row = read_revision(
+                conn, scope.project_id, page_id, revision, namespace=namespace
+            )
+        draft = SourceDraft(
+            kind="wiki",
+            locator=f"wiki:{namespace}:{page_id}@{revision}",
+            title=row["title"],
+            content=row["content"],
+            provenance={
+                **intent,
+                "wiki_path": row["path"],
+                "wiki_content_sha256": row["sha256"],
+                "wiki_actor": row["actor"],
+                "wiki_revision_origin": row["origin"],
+                "wiki_recorded_at": row["recorded_at"],
+                "extraction": "wiki-revision-v1",
+                "extraction_note": "Exact retained wiki Markdown, not scientific validation or current-page status.",
+            },
+        )
+        return self.capture_source(scope, key, draft, intent=intent)
+
+    def capture_wiki_collection(self, scope, key, *, members):
+        """Capture all explicitly selected wiki revisions for existing scoped semantic retrieval."""
+        from backend.knowledge.wiki import read_revision
+        from backend.research.models import ResearchInputError
+        from backend.research.structured_text import Units
+
+        if not isinstance(members, list) or not 1 <= len(members) <= 50:
+            raise ResearchInputError("Wiki collection requires 1–50 explicit revisions")
+        identities = set()
+        for member in members:
+            if not isinstance(member, dict) or set(member) != {
+                "page_id",
+                "revision",
+                "namespace",
+            }:
+                raise ResearchInputError(
+                    "Wiki collection member requires page_id/revision/namespace"
+                )
+            positive_id(member["page_id"])
+            positive_id(member["revision"])
+            identity = (member["namespace"], member["page_id"], member["revision"])
+            if (
+                member["namespace"] not in ("project", "global")
+                or identity in identities
+            ):
+                raise ResearchInputError(
+                    "Wiki collection scopes must be explicit and members distinct"
+                )
+            identities.add(identity)
+        intent = {"wiki_collection": members}
+        prior = self.lookup_operation(scope, key, "source.capture", intent)
+        if prior is not None:
+            return prior
+        units = Units()
+        with self._transaction() as conn:
+            self._check_scope(conn, scope, "wiki.read")
+            for member in members:
+                row = read_revision(conn, scope.project_id, **member)
+                if not row["content"].strip():
+                    raise ResearchInputError(
+                        "An empty wiki page cannot be captured as textual evidence"
+                    )
+                units.add(
+                    "wiki_page",
+                    f"wiki:{member['namespace']}:{member['page_id']}@{member['revision']}",
+                    row["content"],
+                )
+                units.units[-1].update(
+                    {
+                        "wiki_page_id": member["page_id"],
+                        "wiki_revision": member["revision"],
+                        "namespace": member["namespace"],
+                        "wiki_content_sha256": row["sha256"],
+                    }
+                )
+        content, provenance = units.finish(
+            "wiki",
+            collection_member_count=len(members),
+            extraction_note="Every requested retained wiki revision is included in request order. Markers identify members; quotations address this normalized collection, not current-page state or scientific validation.",
+        )
+        draft = SourceDraft(
+            kind="wiki",
+            locator="wiki-collection:" + _hash(_json(members)),
+            title=f"Wiki collection: {len(members)} revisions",
+            content=content,
+            provenance=provenance,
+        )
+        return self.capture_source(scope, key, draft, intent=intent)
