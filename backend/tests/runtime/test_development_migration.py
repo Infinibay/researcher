@@ -18,8 +18,10 @@ def version35(c):
         restore_code_reviews,
         restore_development_kinds,
         restore_development_workspaces,
+        restore_native_code_reviews,
     )
 
+    restore_native_code_reviews(c.conn)
     restore_code_reviews(c.conn)
     restore_code_checks(c.conn)
     restore_code_candidates(c.conn)

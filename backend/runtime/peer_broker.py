@@ -514,6 +514,13 @@ class PeerBroker:
                     if git_launch is not None
                     else registry.admission(peer_id)
                 )
+                if (
+                    git_launch is not None
+                    and admission["execution_kind"] == "code_review"
+                ):
+                    # Review Git reads the captured candidate; the immutable
+                    # source_binding remains the original global concession.
+                    admission = registry.admission(peer_id)
             # Retry reads its original effect receipt; it cannot open a new gate.
             workspace_write = (
                 existing.get("workspace_access") == "private-write"
@@ -692,10 +699,23 @@ class PeerBroker:
                 raise AuthorityConflict(
                     "Broker profile requires its original admitted peer kind"
                 )
-            if git_launch is not None and admission["execution_kind"] != "development":
+            if git_launch is not None and admission["execution_kind"] not in (
+                "development",
+                "code_review",
+            ):
                 raise AuthorityConflict(
                     "Writable preparation requires an admitted development execution"
                 )
+            if git_launch is not None and admission["execution_kind"] == "code_review":
+                from backend.runtime.code_reviews import CodeReviewView
+
+                if (
+                    not isinstance(admission["binding"], CodeReviewView)
+                    or git_launch.allocation is not None
+                ):
+                    raise AuthorityConflict(
+                        "Review Git requires its exact readonly candidate without writable allocation"
+                    )
             if check_launch is not None and (
                 admission["execution_kind"] != "development"
                 or not isinstance(admission["binding"], CheckExecutionView)

@@ -191,13 +191,15 @@ def test_normal_startup_installs_candidate_storage_and_unused_inverse_is_repeata
         restore_code_candidates,
         restore_code_checks,
         restore_code_reviews,
+        restore_native_code_reviews,
     )
     from backend.tools.base.db import ensure_migrations
 
     c = coordination
     assert (
-        c.conn.execute("SELECT max(version) FROM schema_migrations").fetchone()[0] == 40
+        c.conn.execute("SELECT max(version) FROM schema_migrations").fetchone()[0] == 41
     )
+    restore_native_code_reviews(c.conn)
     restore_code_reviews(c.conn)
     restore_code_checks(c.conn)
     restore_code_candidates(c.conn)

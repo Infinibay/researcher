@@ -66,7 +66,7 @@ class CodeReviews:
         subject = CandidateSubject.from_row(candidate)
         author = conn.execute(
             """SELECT a.id AS attempt_id,a.run_id,a.fence,a.thread_id,a.turn_id,a.status AS attempt_status,
-            r.actor_id,r.context_version,r.current_attempt_id,r.status AS run_status,r.execution_kind
+            r.actor_id,r.context_version,r.current_attempt_id,r.status AS run_status,r.execution_kind,r.prompt
             FROM runtime_attempts a JOIN runtime_runs r ON r.id=a.run_id
             WHERE a.id=? AND r.project_id=? AND r.task_id=?""",
             (attempt_id, project_id, subject.task_id),
@@ -150,8 +150,20 @@ class CodeReviews:
             )
         if hashlib.sha256(candidate["diff"]).hexdigest() != subject.diff_sha256:
             raise RunConflict("Saved candidate diff differs from its fingerprint")
+        original_input = conn.execute(
+            "SELECT input_sha256,length(CAST(input_text AS BLOB)) AS bytes FROM runtime_input_snapshots WHERE attempt_id=?",
+            (attempt_id,),
+        ).fetchone()
         snapshot = {
-            "schema_version": 1,
+            "schema_version": 2,
+            "author_request": {
+                "source_kind": "owner_admission",
+                "run_id": subject.run_id,
+                "text": author["prompt"],
+            },
+            "author_input": dict(original_input)
+            if original_input is not None
+            else None,
             "candidate": asdict(subject),
             "requirements": requirements,
             "author": {

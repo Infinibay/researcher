@@ -126,6 +126,7 @@ async def broker_inference(
     analysis,
     active=lambda: True,
     prepare_ken=None,
+    seal_tools=None,
 ):
     """Require original successful preparation and Ken readiness before admission.
 
@@ -327,9 +328,11 @@ async def broker_inference(
                     )
 
                 async def seal_development():
-                    """Retire all native, command and Ken peers before reading a candidate; keep original domain ownership."""
+                    """Retire original native/command/host-tool/Ken work while retaining domain ownership for capture or review validation."""
                     await native.rpc.aclose()
                     await analysis.aclose()
+                    if seal_tools is not None:
+                        await seal_tools()
                     await ken_scope.aclose()
 
                 facade = BrokerInferenceSession(
@@ -338,7 +341,9 @@ async def broker_inference(
                     admitted,
                     refresh,
                     endpoint,
-                    seal=seal_development if prepare_ken is not None else None,
+                    seal=seal_development
+                    if prepare_ken is not None or seal_tools is not None
+                    else None,
                 )
                 try:
                     yield facade

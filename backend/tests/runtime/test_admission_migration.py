@@ -35,6 +35,7 @@ def test_version27_receipt_survives_without_an_inferred_binding(
                     "code_candidate_schema.sql",
                     "code_check_schema.sql",
                     "code_review_schema.sql",
+                    "code_review_record_schema.sql",
                 )
                 else apply(conn, path)
             ),

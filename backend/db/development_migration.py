@@ -63,6 +63,12 @@ def _unused(conn, version):
                         "SELECT 1 FROM runtime_code_review_requests LIMIT 1"
                     ).fetchone()
                 )
+                or (
+                    version == 41
+                    and conn.execute(
+                        "SELECT 1 FROM runtime_code_review_records LIMIT 1"
+                    ).fetchone()
+                )
             )
             if blocked:
                 raise RuntimeError(
@@ -73,6 +79,21 @@ def _unused(conn, version):
     except BaseException:
         conn.rollback()
         raise
+
+
+def restore_native_code_reviews(conn):
+    """Remove unused version41 only before native review records or active/newer authority exist; retain all older packets and candidates."""
+    with _unused(conn, 41) as present:
+        if not present:
+            return
+        for name in (
+            "code_review_record_origin_immutable",
+            "code_review_proposal_immutable",
+            "code_review_confirmation_immutable",
+        ):
+            conn.execute("DROP TRIGGER " + name)
+        conn.execute("DROP TABLE runtime_code_review_records")
+        conn.execute("DELETE FROM schema_migrations WHERE version=41")
 
 
 def restore_code_reviews(conn):

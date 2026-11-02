@@ -20,6 +20,10 @@ source = finding = job = report = None
 review_mode = False
 development_mode = False
 review_subject = None
+code_review_mode = False
+code_packet = code_file = None
+native_thread_id = "owned-thread"
+native_turn_id = "owned-turn"
 
 
 def send(message):
@@ -27,13 +31,14 @@ def send(message):
 
 
 def call(name, arguments):
+    """Emit a controlled tool request attributed to this fixture's native thread and turn."""
     send(
         {
             "id": "tool-" + str(steps),
             "method": "item/tool/call",
             "params": {
-                "threadId": "owned-thread",
-                "turnId": "owned-turn",
+                "threadId": native_thread_id,
+                "turnId": native_turn_id,
                 "callId": "tool-" + str(steps),
                 "tool": name,
                 "arguments": arguments,
@@ -44,6 +49,8 @@ def call(name, arguments):
 
 def next_tool(response=None):
     """Advance controlled author or reviewer generation while using the real admitted tool bridge."""
+    if code_review_mode:
+        return next_code_review_tool(response)
     if review_mode:
         return next_review_tool(response)
     if development_mode:
@@ -123,8 +130,8 @@ def next_tool(response=None):
             {
                 "method": "item/completed",
                 "params": {
-                    "threadId": "owned-thread",
-                    "turnId": "owned-turn",
+                    "threadId": native_thread_id,
+                    "turnId": native_turn_id,
                     "item": {
                         "id": "answer",
                         "type": "agentMessage",
@@ -137,8 +144,12 @@ def next_tool(response=None):
             {
                 "method": "turn/completed",
                 "params": {
-                    "threadId": "owned-thread",
-                    "turn": {"id": "owned-turn", "status": "completed", "error": None},
+                    "threadId": native_thread_id,
+                    "turn": {
+                        "id": native_turn_id,
+                        "status": "completed",
+                        "error": None,
+                    },
                 },
             }
         )
@@ -178,8 +189,8 @@ def next_development_tool(response=None):
             {
                 "method": "item/completed",
                 "params": {
-                    "threadId": "owned-thread",
-                    "turnId": "owned-turn",
+                    "threadId": native_thread_id,
+                    "turnId": native_turn_id,
                     "item": {
                         "id": "answer",
                         "type": "agentMessage",
@@ -192,8 +203,12 @@ def next_development_tool(response=None):
             {
                 "method": "turn/completed",
                 "params": {
-                    "threadId": "owned-thread",
-                    "turn": {"id": "owned-turn", "status": "completed", "error": None},
+                    "threadId": native_thread_id,
+                    "turn": {
+                        "id": native_turn_id,
+                        "status": "completed",
+                        "error": None,
+                    },
                 },
             }
         )
@@ -251,8 +266,8 @@ def next_review_tool(response=None):
             {
                 "method": "item/completed",
                 "params": {
-                    "threadId": "owned-thread",
-                    "turnId": "owned-turn",
+                    "threadId": native_thread_id,
+                    "turnId": native_turn_id,
                     "item": {
                         "id": "answer",
                         "type": "agentMessage",
@@ -265,8 +280,133 @@ def next_review_tool(response=None):
             {
                 "method": "turn/completed",
                 "params": {
-                    "threadId": "owned-thread",
-                    "turn": {"id": "owned-turn", "status": "completed", "error": None},
+                    "threadId": native_thread_id,
+                    "turn": {
+                        "id": native_turn_id,
+                        "status": "completed",
+                        "error": None,
+                    },
+                },
+            }
+        )
+
+
+def next_code_review_tool(response=None):
+    """Generate controlled independent review calls; every source/proposal/Git/closure operation remains production code."""
+    global steps, code_packet, code_file, job
+    if response is not None:
+        if not response["success"]:
+            raise RuntimeError("Controlled code review tool failed: " + str(response))
+        value = json.loads(response["contentItems"][0]["text"])
+        if steps == 1:
+            assert value == 200
+        elif steps == 2:
+            assert value["complete_material"]
+            code_packet = value
+            assert (
+                json.loads(value["text"])["author_request"]["source_kind"]
+                == "owner_admission"
+            )
+        elif steps == 3:
+            assert (
+                value["complete_material"]
+                and "137 to 200" in json.loads(value["text"])["request"]
+            )
+        elif steps == 4:
+            assert value["complete_material"] and "+200" in value["text"]
+        elif steps == 5:
+            assert value["text"] == "200" and value["complete_file"]
+            code_file = value
+        elif steps == 6:
+            job = value["job_id"]
+        elif steps == 7 and value["status"] != "exited":
+            call("researcher_command_read", {"job_id": job, "wait_ms": 1000})
+            return
+        elif steps == 8:
+            assert value["state"] == "proposed"
+    steps += 1
+    if steps == 1:
+        call("ken_read", {"path": "fact.txt", "include": ["source"]})
+    elif steps in (2, 3, 4):
+        call(
+            "researcher_code_review_subject",
+            {
+                "section": {2: "packet", 3: "author_input", 4: "diff"}[steps],
+                "max_chars": 24000,
+            },
+        )
+    elif steps == 5:
+        call("researcher_code_review_file", {"path": "fact.txt"})
+    elif steps == 6:
+        call(
+            "researcher_python",
+            {
+                "operation_key": "verify-review-readonly",
+                "code": "from pathlib import Path\ntry: Path('fact.txt').write_text('unsafe')\nexcept OSError: print('readonly')\nelse: raise AssertionError('review source writable')",
+                "timeout_seconds": 5.0,
+            },
+        )
+    elif steps == 7:
+        call("researcher_command_read", {"job_id": job, "wait_ms": 1000})
+    elif steps == 8:
+        call(
+            "researcher_code_review_propose",
+            {
+                "operation_key": "review-" + code_packet["review_run_id"] + "-proposal",
+                "subject_sha256": code_packet["subject_sha256"],
+                "verdict": "supported",
+                "rationale": "The recorded owner request changes137 to200; the actual candidate source contains200.",
+                "checks": [
+                    {
+                        "criterion": "requested value",
+                        "outcome": "supported",
+                        "explanation": "Exact candidate source and full diff show200.",
+                    },
+                    {
+                        "criterion": "tests",
+                        "outcome": "not_applicable",
+                        "explanation": "This controlled fixture changes only a data value; no project-wide test execution is claimed.",
+                    },
+                ],
+                "references": [
+                    {
+                        "kind": "file",
+                        "path": "fact.txt",
+                        "sha256": code_file["sha256"],
+                        "start_line": 1,
+                        "quote": "200",
+                    }
+                ],
+                "limitations": [
+                    "Scoped data-only source inspection; not task acceptance, publication or a claim of project-wide test success."
+                ],
+            },
+        )
+    else:
+        send(
+            {
+                "method": "item/completed",
+                "params": {
+                    "threadId": native_thread_id,
+                    "turnId": native_turn_id,
+                    "item": {
+                        "id": "review-answer",
+                        "type": "agentMessage",
+                        "text": "Observé200 en el candidato solicitado. La revisión queda propuesta con alcance limitado; la tarea sigue sin aceptar ni publicar.",
+                    },
+                },
+            }
+        )
+        send(
+            {
+                "method": "turn/completed",
+                "params": {
+                    "threadId": native_thread_id,
+                    "turn": {
+                        "id": native_turn_id,
+                        "status": "completed",
+                        "error": None,
+                    },
                 },
             }
         )
@@ -334,6 +474,12 @@ for line in sys.stdin:
                 "stderr": output.stderr,
             }
     elif method == "thread/start":
+        code_review_mode = any(
+            tool["name"] == "researcher_code_review_propose"
+            for tool in params["dynamicTools"]
+        )
+        if code_review_mode:
+            native_thread_id, native_turn_id = "code-review-thread", "code-review-turn"
         development_mode = params.get("sandbox") == "workspace-write"
         review_mode = any(
             tool["name"] == "researcher_review_decide"
@@ -350,13 +496,13 @@ for line in sys.stdin:
             )
         )
         result = {
-            "thread": {"id": "owned-thread"},
+            "thread": {"id": native_thread_id},
             "modelProvider": "openai",
             "model": params["model"],
             "cwd": params["cwd"],
         }
     elif method == "turn/start":
-        result = {"turn": {"id": "owned-turn"}}
+        result = {"turn": {"id": native_turn_id}}
     if "id" in message:
         send({"id": message["id"], "result": result})
     if method == "turn/start":

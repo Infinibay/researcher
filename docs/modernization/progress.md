@@ -5045,3 +5045,119 @@ Resume at139250c; avoid re-running Wiki tests after docs-only followup.
 - Finish acceptance/publication and public code admission after that. All legacy,
   prompts/communication, UI, operator/migration/restore and whole-plan requirements
   remain in scope. This is a required internal stage, not the full objective.
+
+
+## 2026-11-02 — Original-owned native code review (base 446b2bb)
+
+- Added native readonly code review to the existing owner/coordinator, not a new
+  model loop. Schema41 reserves before effects; Git preflight, immutable attributed
+  proposal, final source-quote validation and Git/physical closure confirmation.
+  Confirmed means protocol completion, never task acceptance or publication.
+- Packet schema2 includes actual owner admission request plus exact frozen author
+  input reference/content. Missing input blocks startup; schema1 stays historical.
+  Readonly review grants exclude authorship and finding decisions. Three host tools
+  expose explicit material windows, exact candidate source and one stable proposal.
+  Citation identity does not prove logical support; instructions distinguish owner
+  statements/examples/observations/assumptions and request simple faithful examples.
+- Original cancellation work is drained. Context/source changes retain proposals;
+  native completion without confirmation is failed/code_review_unconfirmed. Six
+  real kernel/Git/SQL integrations use controlled generation and do not accept tasks.
+- Ruling: reuse DevelopmentKen's dedicated SDK task for readonly review too. Actual
+  integration reproduced AnyIO scope closure across tasks with normal readonly
+  broker_mcp; parent cancellation disappeared with this existing task ownership.
+  Cost if wrong: loss of reliable teardown; covered by full native lifecycle tests.
+- First full source2096cases:1993PASS/100FAIL/3SKIP in1069.987s,913runtimePASS.
+  Failure IDs equal the100inherited IDs, no new/resolved IDs; no assertion of equal
+  causes. Initial wheel336PASS/0FAIL/0SKIP in718.39s,375wheel-only backend modules.
+  Both artifacts predate the final two-file Ken-state correction below.
+- Real trial0: harness changed durable project budget20/4000000 to2/351000; policy
+  refused before inference, every peer closed. Harness BLOB serialization also
+  failed; saved recovery receipt and fixed verifier, not runtime policy.
+- Real trial1: one subscription reviewer with published Ken identified100.2vs120,
+  exact citations and needs_revision, but final Git rejected reserved root .ken
+  created by actual Ken. Proposal retained, all work closed, no original replay.
+- Ruling: align review status with capture's existing reserved-root-.ken policy;
+  require no indexed .ken entries and exclude only its root path from status.
+  Other code edits/untracked paths, nested .ken and .ken-extra still reject.
+  Cost if wrong: a broader exclusion could hide code; explicit negative cases
+  guard those paths and indexed metadata. RED1FAIL/2PASS; GREEN26Git/capturePASS.
+- Final corrected wheel preflight63PASS; final83PASS/0FAIL/0SKIP in302.80s includes
+  all6native integrations plus Git/capture/files/records/migrations/recovery.
+  339backend modules only from wheel,691matchingPython/SQL payloads. No backend
+  edit after final build. The earlier global run is not claimed for these bytes.
+- Real trial2: fresh fixture and original intent, same frozen budget. Codex0.166.0,
+  gpt-6.1-sol, published ken-rank0.18.0, subscription only, web disabled. One actual
+  reviewer turn completed/settled135071observed tokens, needs_revision confirmed,
+  all domains removed/global peers closed/concession inactive; original unchanged.
+  Correctly distinguished literal owner request from additional task metadata;
+  stated missing tests and Ken callers error rather than inventing evidence.
+  Total2real reviewer turns this delivery; author and bug controlled, not a broad
+  quality/comprehension evaluation. No API fallback or publication.
+- All138new/changed Python definitions have English docstrings;38files Ruff clean,
+  36format clean, existing whole-file debt in db.py/sqlite_runs.py. Documents,
+  coverage and native-code-review-{results,packaging,docstrings,live}.json updated;
+  pre-fix receipts retained separately. Protected root files not staged.
+- Next: owner acceptance of the exact current candidate/check/review object,
+  reconciliable publication and public development entry as an integrated product
+  flow. Rejected/stale review must not authorize publication. Then legacy consumer/
+  engine/role/CI cutover, communication/prompts/evals, remaining UI pages and all
+  43scenarios, installation/restore,100inherited failures and final fresh branch
+  review. Full goal remains active; this required stage is not whole completion.
+
+
+## 2026-11-02 — Original-owned native code review (base 446b2bb)
+
+- Added native readonly code review to the existing owner/coordinator, not a new
+  model loop. Schema41 reserves before effects; Git preflight, immutable attributed
+  proposal, final source-quote validation and Git/physical closure confirmation.
+  Confirmed means protocol completion, never task acceptance or publication.
+- Packet schema2 includes actual owner admission request plus exact frozen author
+  input reference/content. Missing input blocks startup; schema1 stays historical.
+  Readonly review grants exclude authorship and finding decisions. Three host tools
+  expose explicit material windows, exact candidate source and one stable proposal.
+  Citation identity does not prove logical support; instructions distinguish owner
+  statements/examples/observations/assumptions and request simple faithful examples.
+- Original cancellation work is drained. Context/source changes retain proposals;
+  native completion without confirmation is failed/code_review_unconfirmed. Six
+  real kernel/Git/SQL integrations use controlled generation and do not accept tasks.
+- Ruling: reuse DevelopmentKen's dedicated SDK task for readonly review too. Actual
+  integration reproduced AnyIO scope closure across tasks with normal readonly
+  broker_mcp; parent cancellation disappeared with this existing task ownership.
+  Cost if wrong: loss of reliable teardown; covered by full native lifecycle tests.
+- First full source2096cases:1993PASS/100FAIL/3SKIP in1069.987s,913runtimePASS.
+  Failure IDs equal the100inherited IDs, no new/resolved IDs; no assertion of equal
+  causes. Initial wheel336PASS/0FAIL/0SKIP in718.39s,375wheel-only backend modules.
+  Both artifacts predate the final two-file Ken-state correction below.
+- Real trial0: harness changed durable project budget20/4000000 to2/351000; policy
+  refused before inference, every peer closed. Harness BLOB serialization also
+  failed; saved recovery receipt and fixed verifier, not runtime policy.
+- Real trial1: one subscription reviewer with published Ken identified100.2vs120,
+  exact citations and needs_revision, but final Git rejected reserved root .ken
+  created by actual Ken. Proposal retained, all work closed, no original replay.
+- Ruling: align review status with capture's existing reserved-root-.ken policy;
+  require no indexed .ken entries and exclude only its root path from status.
+  Other code edits/untracked paths, nested .ken and .ken-extra still reject.
+  Cost if wrong: a broader exclusion could hide code; explicit negative cases
+  guard those paths and indexed metadata. RED1FAIL/2PASS; GREEN26Git/capturePASS.
+- Final corrected wheel preflight63PASS; final83PASS/0FAIL/0SKIP in302.80s includes
+  all6native integrations plus Git/capture/files/records/migrations/recovery.
+  339backend modules only from wheel,691matchingPython/SQL payloads. No backend
+  edit after final build. The earlier global run is not claimed for these bytes.
+- Real trial2: fresh fixture and original intent, same frozen budget. Codex0.166.0,
+  gpt-6.1-sol, published ken-rank0.18.0, subscription only, web disabled. One actual
+  reviewer turn completed/settled135071observed tokens, needs_revision confirmed,
+  all domains removed/global peers closed/concession inactive; original unchanged.
+  Correctly distinguished literal owner request from additional task metadata;
+  stated missing tests and Ken callers error rather than inventing evidence.
+  Total2real reviewer turns this delivery; author and bug controlled, not a broad
+  quality/comprehension evaluation. No API fallback or publication.
+- All138new/changed Python definitions have English docstrings;38files Ruff clean,
+  36format clean, existing whole-file debt in db.py/sqlite_runs.py. Documents,
+  coverage and native-code-review-{results,packaging,docstrings,live}.json updated;
+  pre-fix receipts retained separately. Protected root files not staged.
+- Next: owner acceptance of the exact current candidate/check/review object,
+  reconciliable publication and public development entry as an integrated product
+  flow. Rejected/stale review must not authorize publication. Then legacy consumer/
+  engine/role/CI cutover, communication/prompts/evals, remaining UI pages and all
+  43scenarios, installation/restore,100inherited failures and final fresh branch
+  review. Full goal remains active; this required stage is not whole completion.

@@ -182,7 +182,7 @@ class SQLiteResearchStore:
             attempt = conn.execute(
                 """SELECT a.id,a.status AS attempt_status,a.lease_expires_at,a.fence,
                     r.project_id,r.task_id,r.actor_id,r.context_version,r.status AS run_status,
-                    r.fence AS current_fence,r.current_attempt_id
+                    r.fence AS current_fence,r.current_attempt_id,r.id AS run_id,r.execution_kind
                     FROM runtime_attempts a JOIN runtime_runs r ON r.id=a.run_id
                     WHERE a.id=?""",
                 (row["runtime_attempt_id"],),
@@ -209,6 +209,21 @@ class SQLiteResearchStore:
             ):
                 raise ResearchForbidden(
                     "Execution attempt no longer owns this tool scope"
+                )
+            if attempt["execution_kind"] == "code_review":
+                from backend.research.models import CODE_REVIEW_PERMISSIONS
+                from backend.runtime.code_reviews import CodeReviews
+                from backend.runtime.sqlite_runs import SQLiteRunStore
+
+                if (
+                    not set(json.loads(row["permissions_json"]))
+                    <= CODE_REVIEW_PERMISSIONS
+                ):
+                    raise ResearchForbidden(
+                        "Code reviewer grants cannot acquire author mutation permissions"
+                    )
+                CodeReviews(SQLiteRunStore(self.database, clock=self.clock))._request(
+                    conn, scope.project_id, attempt["run_id"], require_current=True
                 )
         self._task(conn, scope.project_id, scope.task_id)
         from backend.knowledge.reviews import scope_request, verify_current

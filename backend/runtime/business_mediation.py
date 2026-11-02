@@ -56,6 +56,10 @@ REVIEW_NAMES = frozenset(
 )
 BUSINESS_NAMES = RESEARCH_NAMES
 DEVELOPMENT_NAMES = RESEARCH_NAMES - {"researcher_result_propose"}
+CODE_REVIEW_NAMES = REVIEW_NAMES - {
+    "researcher_review_subject",
+    "researcher_review_decide",
+}
 ALL_BUSINESS_NAMES = RESEARCH_NAMES | REVIEW_NAMES
 
 

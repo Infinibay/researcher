@@ -16,7 +16,11 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from uuid import uuid4
 
-from backend.research.models import RESEARCH_PERMISSIONS, REVIEW_PERMISSIONS
+from backend.research.models import (
+    CODE_REVIEW_PERMISSIONS,
+    RESEARCH_PERMISSIONS,
+    REVIEW_PERMISSIONS,
+)
 from backend.runtime.codex_session import ExecutionLimits
 from backend.runtime.contracts import (
     RunConflict,
@@ -204,12 +208,27 @@ class RuntimeService:
         if self._lock_fd is None or self._closing:
             raise RunConflict("Runtime owner is not accepting work")
 
+    async def review_code(self, spec, target):
+        """Admit and schedule one owner-observed independent native code review without enabling authoring, acceptance or publication."""
+        from backend.runtime.code_reviews import CodeReviews
+
+        self._accepting()
+        if spec.runtime != "codex":
+            raise RunConflict(
+                "This deployment admits only the Codex subscription adapter"
+            )
+        run, admitted = await asyncio.to_thread(
+            CodeReviews(self.store).admit_once, spec, target
+        )
+        return await self._schedule(run) if admitted else run
+
     async def retry_start(self, **command):
         self._accepting()
         run, requested = await asyncio.to_thread(self.store.request_start, **command)
         return await self._schedule(run) if requested else run
 
     async def _schedule(self, run):
+        """Schedule an admitted run once after checking its binding and execution profile."""
         async with self._admission_lock:
             self._accepting()
             run = await asyncio.to_thread(self.store.get, run.project_id, run.run_id)
@@ -225,7 +244,12 @@ class RuntimeService:
             context = await asyncio.to_thread(
                 self.store.context_snapshot, run.project_id, run.task_id
             )
-            if context["task"]["type"] != "research":
+            expected_types = (
+                ("code", "bug_fix")
+                if run.execution_kind == "code_review"
+                else ("research",)
+            )
+            if context["task"]["type"] not in expected_types:
                 return await self._note_issue(run, "task_changed")
             try:
                 workspace = await asyncio.to_thread(
@@ -280,6 +304,10 @@ class RuntimeService:
             ),
             "runtime_failed": (
                 "La ejecución no dejó una propuesta verificable. Conservamos los datos y recibos guardados; no se repetirá por su cuenta.",
+                "inspect_saved_work",
+            ),
+            "code_review_unconfirmed": (
+                "El revisor terminó su turno, pero no pudimos confirmar la revisión sobre el código observado. Conservamos la propuesta y su evidencia; revisa ese resultado antes de continuar.",
                 "inspect_saved_work",
             ),
             "native_search_unavailable": (
@@ -472,11 +500,17 @@ class RuntimeService:
         lease = heartbeat = token = result = peers = None
         error_type = None
         dispatch_reserved = native_started = False
+        code_review = review_confirmed = False
         try:
+            current_run = await asyncio.to_thread(
+                self.store.get, slot.spec.project_id, run_id
+            )
+            code_review = current_run.execution_kind == "code_review"
+            expected_types = ("code", "bug_fix") if code_review else ("research",)
             context = await asyncio.to_thread(
                 self.store.context_snapshot, slot.spec.project_id, slot.spec.task_id
             )
-            if context["task"]["type"] != "research":
+            if context["task"]["type"] not in expected_types:
                 raise RunConflict("Task type changed before native startup")
             await asyncio.to_thread(
                 self.workspaces.validate, slot.spec.project_id, slot.binding
@@ -503,7 +537,11 @@ class RuntimeService:
                 task_id=lease.task_id,
                 agent_id=lease.actor_id,
                 permissions=set(
-                    REVIEW_PERMISSIONS if review is not None else RESEARCH_PERMISSIONS
+                    CODE_REVIEW_PERMISSIONS
+                    if code_review
+                    else REVIEW_PERMISSIONS
+                    if review is not None
+                    else RESEARCH_PERMISSIONS
                 ),
                 ttl_seconds=min(3600, self.limits.wall_seconds + 180),
             )
@@ -537,7 +575,7 @@ class RuntimeService:
                     )
                     if context["context_version"] != lease.context_version:
                         raise StaleAttempt("Context changed before native dispatch")
-                    if context["task"]["type"] != "research":
+                    if context["task"]["type"] not in expected_types:
                         raise RunConflict("Task type changed before native dispatch")
                     await asyncio.to_thread(
                         self.workspaces.validate, slot.spec.project_id, slot.binding
@@ -545,7 +583,10 @@ class RuntimeService:
                     frozen = await asyncio.to_thread(
                         self.store.reserve_input,
                         lease,
-                        workspace=str(slot.workspace),
+                        workspace=str(
+                            getattr(session, "execution_workspace", None)
+                            or slot.workspace
+                        ),
                         catalog_hash=session.catalog_hash,
                         model=session.model,
                         developer_instructions=session.developer_instructions,
@@ -615,6 +656,9 @@ class RuntimeService:
                         on_started=on_started,
                         on_event=on_event,
                     )
+                    if code_review and result.status == "completed":
+                        await session.complete_review()
+                        review_confirmed = True
         except asyncio.CancelledError:
             error_type = "WorkerInterrupted"
         except Exception as exc:  # noqa: BLE001 — native/AnyIO boundary; redact exception details
@@ -707,6 +751,15 @@ class RuntimeService:
                         await asyncio.to_thread(
                             self.store.retire_inference, lease, outcome=slot.outcome
                         )
+                    elif (
+                        code_review
+                        and result is not None
+                        and result.status == "completed"
+                        and not review_confirmed
+                    ):
+                        await asyncio.to_thread(
+                            self.store.retire_inference, lease, outcome="failed"
+                        )
                     elif result is not None:
                         await asyncio.to_thread(
                             self.store.finish,
@@ -738,7 +791,20 @@ class RuntimeService:
                     current = await asyncio.to_thread(
                         self.store.get, slot.spec.project_id, run_id
                     )
-                    if result is None and error_type is not None:
+                    if (
+                        code_review
+                        and result is not None
+                        and result.status == "completed"
+                        and not review_confirmed
+                        and error_type is not None
+                    ):
+                        await self._note_issue(
+                            current,
+                            "code_review_unconfirmed",
+                            attempt_id=lease.attempt_id,
+                            inference_started=True,
+                        )
+                    elif result is None and error_type is not None:
                         code = (
                             "native_search_unavailable"
                             if error_type == "NativeSearchUnavailable"

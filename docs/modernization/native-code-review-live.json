@@ -1,0 +1,633 @@
+{
+  "status": "passed",
+  "stage": "assertions",
+  "generative_native_turns": 1,
+  "controlled_author_generation": true,
+  "host_injected_bug": true,
+  "fixture": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/native-code-review-live-fixture-3/test_actual_subscription_code_0",
+  "native_model": "gpt-6.1-sol",
+  "web_search": "disabled",
+  "automatic_replay": false,
+  "api_key_fallback": false,
+  "scope": "One real subscription code reviewer of a synthetic fractional-tax bug. Controlled author plus host-injected fixture; not a representative quality evaluation or acceptance/publication trial.",
+  "author_thread_id": "owned-thread",
+  "author_attempt_id": "cd46ae71-3ee4-43ac-acf8-35e0ec230067",
+  "candidate": {
+    "attempt_id": "cd46ae71-3ee4-43ac-acf8-35e0ec230067",
+    "run_id": "0d46d904-b72f-4b9c-91f7-e493e6e71c68",
+    "project_id": 101,
+    "task_id": 1001,
+    "repository_id": 11,
+    "context_version": 3,
+    "fence": 1,
+    "owner_id": "development-fixture",
+    "source_json": "{\"device\": 52, \"inode\": 4494867, \"registration_path\": \"/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-code-review-live-fixture-3/test_actual_subscription_code_0/workspaces/alpha\", \"repository_id\": 11, \"repository_name\": \"alpha\", \"requested_repository_id\": 11, \"workspace\": \"/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-code-review-live-fixture-3/test_actual_subscription_code_0/workspaces/alpha\"}",
+    "prepared_json": "{\"base_sha\": \"7e500fd9ab10708ebc18a7115fb2aec990c90345\", \"base_tree_sha\": \"625b77b828b8b6982adab95eb749410038d0e21e\", \"device\": 52, \"inode\": 4495008, \"source\": {\"device\": 52, \"inode\": 4494867, \"registration_path\": \"/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-code-review-live-fixture-3/test_actual_subscription_code_0/workspaces/alpha\", \"repository_id\": 11, \"repository_name\": \"alpha\", \"requested_repository_id\": 11, \"workspace\": \"/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-code-review-live-fixture-3/test_actual_subscription_code_0/workspaces/alpha\"}, \"workspace\": \"/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-code-review-live-fixture-3/test_actual_subscription_code_0/host-control/development/0d46d904-b72f-4b9c-91f7-e493e6e71c68/cd46ae71-3ee4-43ac-acf8-35e0ec230067/repository\"}",
+    "base_sha": "7e500fd9ab10708ebc18a7115fb2aec990c90345",
+    "base_tree_sha": "625b77b828b8b6982adab95eb749410038d0e21e",
+    "allocation": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-code-review-live-fixture-3/test_actual_subscription_code_0/host-control/development/0d46d904-b72f-4b9c-91f7-e493e6e71c68/cd46ae71-3ee4-43ac-acf8-35e0ec230067/candidate",
+    "state": "ready",
+    "workspace": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-code-review-live-fixture-3/test_actual_subscription_code_0/host-control/development/0d46d904-b72f-4b9c-91f7-e493e6e71c68/cd46ae71-3ee4-43ac-acf8-35e0ec230067/candidate/repository",
+    "device": 52,
+    "inode": 4495240,
+    "head_sha": "3a7206ba8cf411085317cfd620e7803a8a632be1",
+    "tree_sha": "fe9669c4d22642e96b318ced42f2782439916b11",
+    "diff": "diff --git a/fact.txt b/fact.txt\nindex 0973804c41c39805888c4929d03b076c4e5a2247..ae4ee13c08e7628701b925b8962108bd7643bf6e 100644\n--- a/fact.txt\n+++ b/fact.txt\n@@ -1 +1 @@\n-137\n\\ No newline at end of file\n+200\n\\ No newline at end of file\ndiff --git a/invoice.py b/invoice.py\nnew file mode 100644\nindex 0000000000000000000000000000000000000000..427e0bc8e29b54b7484ae484ebcc0246159ff1f6\n--- /dev/null\n+++ b/invoice.py\n@@ -0,0 +1,5 @@\n+\"\"\"Synthetic fractional-tax fixture deliberately containing a reviewable bug.\"\"\"\n+\n+def total_with_tax(amount, rate):\n+    \"\"\"Return total where rate is a fraction such as 0.2 for twenty percent.\"\"\"\n+    return amount * (1 + rate / 100)\n",
+    "diff_sha256": "ee412e6b6c6eee1e26b495ca036531315f89a99251ee1560a5c775bd1d6fd03c",
+    "writer_proof_json": "{\"grant_id\":\"61a59c4cd622b8f3b62f934409224bec2e7fb6020b16be331eae861e3e9306e3\",\"operations\":[{\"execution_closed\":true,\"operation_id\":\"12209addab5f72b97ded3e13da6d85879db966049e5ab424bf3b3ad02e7871ea\"},{\"execution_closed\":true,\"operation_id\":\"14e85fa6ab78a5eb95b9e32da240d639df3bcc01485809640881550eda9d4087\"},{\"execution_closed\":true,\"operation_id\":\"213427a8f40f505db728d273072a990fb93f912299dda1aa16c9d75d7c044a14\"},{\"execution_closed\":true,\"operation_id\":\"26ed38c0c1f98e9adc7b23843a9c40075f172fb028de3141d6e38feb6ced2cbc\"},{\"execution_closed\":true,\"operation_id\":\"2903e0e27303766b9e98dd6fd1adc016d6bbe11013a40dd102533da45a748080\"},{\"execution_closed\":true,\"operation_id\":\"3ba003174e5687ca1cdf6306b32f30b83aa94de8d91fc0c3ddf5da1656a9fddd\"},{\"execution_closed\":true,\"operation_id\":\"51c64b8053421039dc301ee36a7e12686414ad20cc8552f52f914ac73e51ba43\"},{\"execution_closed\":true,\"operation_id\":\"5222ff4b10bf395a15e61be00476e649628d9744c46fc7006456e0c6cd68ea67\"},{\"execution_closed\":true,\"operation_id\":\"58c2151a70020e230a0cd8d40d2abc18b8f1a237bca0c72e16d2925ab29f5a97\"},{\"execution_closed\":true,\"operation_id\":\"59f90f70b86f9972bd7e9c84e6cb0858b282f398265521f5683d0d37240adcde\"},{\"execution_closed\":true,\"operation_id\":\"5b92593a545df54c365f1880bad26344656215c5c809563634cebc08eb034e09\"},{\"execution_closed\":true,\"operation_id\":\"699687170581d922a60768536370a776b28b3317dc6ee9156ed8185a73075980\"},{\"execution_closed\":true,\"operation_id\":\"6b107dcb5bf78e350a033c886dafbf3374696c7c45c49dd056f83cbaabecb4c9\"},{\"execution_closed\":true,\"operation_id\":\"6b543d9d0f8ab84c10c2d18da24ed3222c255cb9bde2318cb968764db7ad8d65\"},{\"execution_closed\":true,\"operation_id\":\"79afde913c922f81f1fd69f7ab5c1822af503f42da7af9b034b55439abcd81a5\"},{\"execution_closed\":true,\"operation_id\":\"7f9a2c58b53b4a572bd605d9ff8f2cb455199f7160088f9c98a5c7443370ba87\"},{\"execution_closed\":true,\"operation_id\":\"9396524cf9df44dfbd0d1980ccf1bc3a9f33c8fbdcf4785d2fe88364559520f6\"},{\"execution_closed\":true,\"operation_id\":\"9971cc4c8fe685b9d5fdddf47b2b54c9d800255768422953f8c8f9c02aac1935\"},{\"execution_closed\":true,\"operation_id\":\"9d991844b8d8df5776556a3551085e1d0360ac447ed6e40cb0f26ca710388081\"},{\"execution_closed\":true,\"operation_id\":\"a4a85c8b8ef856a481841cbaa17d125bc96508a1e1757cc1bb1463d5b8566bd8\"},{\"execution_closed\":true,\"operation_id\":\"abaae70e59bf0d90d07a53afe47f6e92a39e7de0e2846595df6670b4a12b3278\"},{\"execution_closed\":true,\"operation_id\":\"b2b0232698bfff8eabb7de68cce7060615fc8d713218f4deda1385d9275a5790\"},{\"execution_closed\":true,\"operation_id\":\"bb56eafc891fc5abaa886696cac828e6a362e6b62a0e53fffa48308b1d27ac7d\"},{\"execution_closed\":true,\"operation_id\":\"c7dd8ef140f79621f3c1f0b5d7506ab6fd2e8971188884974e90eb5927c09990\"},{\"execution_closed\":true,\"operation_id\":\"d393bdfd5b154a74bddd908707c2d8b43c2e62f27e5793758f3d36b9cae91152\"},{\"execution_closed\":true,\"operation_id\":\"e84ce0bae8e2d6b193fe7db739f6e727dd61d2c70d42d877bea053eb65a6668a\"}]}",
+    "issue": null,
+    "created_at": 1793650337.5602782,
+    "updated_at": 1793650359.867525
+  },
+  "run_id": "94e7885d-fcd0-4f92-bcac-af1b2055aae2",
+  "runs": [
+    {
+      "id": "0d46d904-b72f-4b9c-91f7-e493e6e71c68",
+      "status": "needs_review",
+      "current_attempt_id": "cd46ae71-3ee4-43ac-acf8-35e0ec230067",
+      "context_version": 3,
+      "issue_json": null
+    },
+    {
+      "id": "94e7885d-fcd0-4f92-bcac-af1b2055aae2",
+      "status": "needs_review",
+      "current_attempt_id": "4ebdd76d-5a7c-461d-a835-e6b732f887eb",
+      "context_version": 3,
+      "issue_json": null
+    }
+  ],
+  "attempts": [
+    {
+      "id": "cd46ae71-3ee4-43ac-acf8-35e0ec230067",
+      "status": "finished",
+      "thread_id": "owned-thread",
+      "turn_id": "owned-turn",
+      "native_result_json": "{\"native_status\":\"completed\",\"summary\":\"Controlled author plus host-injected arithmetic bug; actual sealed candidate.\"}"
+    },
+    {
+      "id": "4ebdd76d-5a7c-461d-a835-e6b732f887eb",
+      "status": "finished",
+      "thread_id": "01a19de4-ca28-7ef2-8bf6-19504bf0b8a7",
+      "turn_id": "01a19de4-cd24-7a61-ac60-1d2ca16be022",
+      "native_result_json": "{\"native_status\":\"completed\",\"summary\":\"Registré la propuesta **needs_revision** con citas exactas y hashes del candidato.\\n\\nEl fallo está en [invoice.py:5](/run/researcher-source/invoice.py:5): divide `rate` entre 100 aunque ya representa una fracción. Comprobé que `total_with_tax(100, 0.2)` devuelve **100.2**, cuando debe devolver **120**: 100 más 20 de impuesto. La corrección es `amount * (1 + rate)`.\\n\\n[fact.txt](/run/researcher-source/fact.txt:1) contiene correctamente `200`. Leí la entrada original, el diff completo y ambos archivos, y consulté Ken.\\n\\nLímites: no hay comprobaciones registradas del autor ni suite visible; no pude verificar el repositorio original y la consulta de callers de Ken falló. No edité, acepté ni publiqué nada. El siguiente paso es corregir la fórmula y verificar el caso exigido.\"}"
+    }
+  ],
+  "dispatches": [
+    {
+      "model": "controlled-only",
+      "status": "reserved",
+      "native_status": null,
+      "observed_tokens": null,
+      "token_ceiling": 1000
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "status": "settled",
+      "native_status": "completed",
+      "observed_tokens": 135071,
+      "token_ceiling": 350000
+    }
+  ],
+  "records": [
+    {
+      "attempt_id": "4ebdd76d-5a7c-461d-a835-e6b732f887eb",
+      "run_id": "94e7885d-fcd0-4f92-bcac-af1b2055aae2",
+      "project_id": 101,
+      "task_id": 1001,
+      "context_version": 3,
+      "fence": 1,
+      "owner_id": "342160da6df74ea48f867ebf6e448bf7",
+      "subject_sha256": "0beca71e30b1d491b2587df577729c6cc28407de61e25fbe4f35932f055c92a2",
+      "state": "confirmed",
+      "preflight_json": "{\"closure\":{\"grant_id\":\"db9c14d427d874ea52a52077b3b90e47aadfa3bb2b1ce55861b672e575a93286\",\"operations\":[{\"execution_closed\":true,\"operation_id\":\"126f7cd488b16175e496a2dd43390ad9303ecbdd3b9c54784fbfaa5f363d0114\"},{\"execution_closed\":true,\"operation_id\":\"8a5560dfa07bca0a618fbfbc34ffb0b4209a4397ba15ee85d804ad9d9759a231\"},{\"execution_closed\":true,\"operation_id\":\"d366da971a0d716755ffd32202a477da68cd35bcf31413160deb5cea6bfb8422\"},{\"execution_closed\":true,\"operation_id\":\"daf901ceff7c2afe42e3fabaec1f0864728bf76da9d21c589f7968e573b034be\"},{\"execution_closed\":true,\"operation_id\":\"e53ddf5683d64e49f021c10ae8bde269f7fe0f937addc8c4d03d338cb87ab26a\"}]},\"git\":{\"base_sha\":\"7e500fd9ab10708ebc18a7115fb2aec990c90345\",\"diff_sha256\":\"ee412e6b6c6eee1e26b495ca036531315f89a99251ee1560a5c775bd1d6fd03c\",\"head_sha\":\"3a7206ba8cf411085317cfd620e7803a8a632be1\",\"tree_sha\":\"fe9669c4d22642e96b318ced42f2782439916b11\"}}",
+      "proposal_key": "review-94e7885d-fcd0-4f92-bcac-af1b2055aae2-proposal",
+      "proposal_json": "{\"checks\":[{\"criterion\":\"Cambio solicitado en fact.txt\",\"explanation\":\"Diff completo muestra 137 → 200 y lectura completa del archivo candidato confirma exactamente 200. También leído mediante Ken.\",\"outcome\":\"supported\"},{\"criterion\":\"Semántica fraccionaria de total_with_tax\",\"explanation\":\"La línea 5 convierte indebidamente la fracción dividiéndola por 100. Ejecución local del candidato: total_with_tax(100, 0.2)=100.2, esperado 120.0. Los controles (100,0) y (0,0.2) coinciden, pero no resuelven el fallo.\",\"outcome\":\"concern\"},{\"criterion\":\"Diff completo y consumidores relevantes\",\"explanation\":\"Leídos packet, author_input y diff completos, sin colas pendientes; ambos archivos completos con hashes. Ken encuentra solo la definición mediante búsqueda literal. El inventario de archivos no muestra otros archivos de aplicación ni pruebas. La consulta de callers de Ken falló por lenguaje no parseable; no se afirma cobertura del grafo.\",\"outcome\":\"supported\"},{\"criterion\":\"Evidencia de comprobaciones del autor\",\"explanation\":\"El packet contiene checks vacío: no hay comprobaciones registradas del autor que permitan verificar que leyó con Ken o informó resultados. La entrada histórica prueba lo solicitado, no su realización. Las tres comprobaciones ejecutadas aquí son del revisor, no una suite aportada por el autor.\",\"outcome\":\"not_checked\"},{\"criterion\":\"Preservación del repositorio original del propietario\",\"explanation\":\"La entrada registra una copia privada y el candidato muestra solo dos archivos cambiados; no se dispone de inspección del repositorio original para comprobar su estado.\",\"outcome\":\"not_checked\"},{\"criterion\":\"Seguridad, errores y mantenibilidad\",\"explanation\":\"En las cinco líneas de invoice.py no hay E/S, ejecución externa ni efectos laterales explícitos; la operación es constante para entradas numéricas habituales. La fórmula contradice su propio docstring y requiere corrección. No hay contrato de tipos, redondeo monetario o tasas inválidas que permita exigir políticas adicionales.\",\"outcome\":\"supported\"}],\"limitations\":[\"Revisión limitada al candidato exacto y al material capturado; sin cambios, aceptación, publicación ni acceso web.\",\"No hay suite de pruebas visible ni checks registrados del autor; el ensayo del revisor cubre solo tres entradas numéricas.\",\"No se verificó el repositorio original externo a la copia ni la realización histórica de la lectura Ken por el autor.\",\"La búsqueda de callers de Ken devolvió error; se complementó con búsqueda literal y el inventario de archivos, sin afirmar resolución dinámica de consumidores.\",\"Tipos admitidos, redondeo y tratamiento de tasas negativas o entradas inválidas no están especificados.\"],\"rationale\":\"Fallo concreto en invoice.py:5: se divide rate entre 100 aunque el requisito y el docstring indican que ya es una fracción. La ejecución del candidato con amount=100 y rate=0.2 devuelve 100.2, frente a 120.0 requerido. Corregir la fórmula a amount * (1 + rate) y verificar ese caso. La petición directa original del propietario se limita a cambiar fact.txt de 137 a 200 en la copia privada, leer con Ken e informar comprobaciones; el requisito de total_with_tax procede de los metadatos de tarea presentes en aquella entrada y de la petición actual de revisión. fact.txt sí contiene 200.\",\"references\":[{\"kind\":\"file\",\"path\":\"invoice.py\",\"quote\":\"def total_with_tax(amount, rate):\\n    \\\"\\\"\\\"Return total where rate is a fraction such as 0.2 for twenty percent.\\\"\\\"\\\"\\n    return amount * (1 + rate / 100)\",\"sha256\":\"261845bf591d47e00bacc2d167d6b60d2cbaf03670f5ae20d7cdd96b4bd64409\",\"start_line\":3},{\"kind\":\"file\",\"path\":\"fact.txt\",\"quote\":\"200\",\"sha256\":\"27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf\",\"start_line\":1}],\"verdict\":\"needs_revision\"}",
+      "reference_proof_json": "{\"references\":[{\"kind\":\"file\",\"path\":\"invoice.py\",\"quote\":\"def total_with_tax(amount, rate):\\n    \\\"\\\"\\\"Return total where rate is a fraction such as 0.2 for twenty percent.\\\"\\\"\\\"\\n    return amount * (1 + rate / 100)\",\"sha256\":\"261845bf591d47e00bacc2d167d6b60d2cbaf03670f5ae20d7cdd96b4bd64409\",\"source_bytes\":233,\"start_character_column\":1,\"start_line\":3},{\"kind\":\"file\",\"path\":\"fact.txt\",\"quote\":\"200\",\"sha256\":\"27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf\",\"source_bytes\":3,\"start_character_column\":1,\"start_line\":1}],\"reviewer\":{\"actor_id\":\"subscription-code-reviewer\",\"attempt_id\":\"4ebdd76d-5a7c-461d-a835-e6b732f887eb\",\"thread_id\":\"01a19de4-ca28-7ef2-8bf6-19504bf0b8a7\",\"turn_id\":\"01a19de4-cd24-7a61-ac60-1d2ca16be022\"}}",
+      "result_json": "{\"after_review\":{\"closure\":{\"grant_id\":\"db9c14d427d874ea52a52077b3b90e47aadfa3bb2b1ce55861b672e575a93286\",\"operations\":[{\"execution_closed\":true,\"operation_id\":\"0046bf995ffae8987bc40e44d9d9b0d326e213f0faae37c07be8ca3edf9d3502\"},{\"execution_closed\":true,\"operation_id\":\"126f7cd488b16175e496a2dd43390ad9303ecbdd3b9c54784fbfaa5f363d0114\"},{\"execution_closed\":true,\"operation_id\":\"192a1e699a389ced664ed10f2401dbf1a88a69f557a75ab82237ffe68155c210\"},{\"execution_closed\":true,\"operation_id\":\"257ebb2a6368d8e4b7db164a05004f493cc463852c6f7508e8dffe45a31ac47c\"},{\"execution_closed\":true,\"operation_id\":\"40fb8dd75d258770bc0501bd623a7e2103d0ab4231ee110f5538012c0c3be3f2\"},{\"execution_closed\":true,\"operation_id\":\"475e29b6e2920d15becedfcf2f7f3407d753485b4a6c953653271da5bff162d4\"},{\"execution_closed\":true,\"operation_id\":\"4a62e1a0bc675f02c18855156abdfe79c53efa8778aacc5fdebf6017edb3c3c1\"},{\"execution_closed\":true,\"operation_id\":\"4c6e5262d7a9f5166e123881ea50618ad5afb01c901638c9e292139fe6b6683f\"},{\"execution_closed\":true,\"operation_id\":\"5749e0120ed841f7e5078b13ec35fef3d3ea0d145218c68739faa7ad429d77a2\"},{\"execution_closed\":true,\"operation_id\":\"67803acff326ea8f1aae666935b9996eb5b89b80ffba235514da70c17387a7a3\"},{\"execution_closed\":true,\"operation_id\":\"68dcff3db20e3c699f15ad3e847346915f8132b64bb2d98fd5130779f0339ed2\"},{\"execution_closed\":true,\"operation_id\":\"6aa5e527340018c4438779678cd8bf9c7d80cd83d1afb8c66e252991ebde7d8b\"},{\"execution_closed\":true,\"operation_id\":\"7b4f7b1ebedc6e33905a4d2ee6ff951add0fb01b4d860612aac1adcc2a625de9\"},{\"execution_closed\":true,\"operation_id\":\"7cd145866faf4b8e517d3914df3e442ea5fbd846cdfb9753f2c79d24e0add50e\"},{\"execution_closed\":true,\"operation_id\":\"7ff8a3fbfde5382fc52df2bb16d40ef81392a6569a215e68e3a33f5e6c1f1de0\"},{\"execution_closed\":true,\"operation_id\":\"8a5560dfa07bca0a618fbfbc34ffb0b4209a4397ba15ee85d804ad9d9759a231\"},{\"execution_closed\":true,\"operation_id\":\"8acddc3b952279123682a0ef575307284e473c209914a64d555b6a8693438a81\"},{\"execution_closed\":true,\"operation_id\":\"8e09a3b3dbe1004b5cfedd6096245fd5645cf2fb80e4bd3a1e20547bf6a2f22e\"},{\"execution_closed\":true,\"operation_id\":\"a8896373d2972a28972efd41f0b034f4fb2e9f46c20253ca7786fd8b33dcd72d\"},{\"execution_closed\":true,\"operation_id\":\"b65314e109c318382bba007379bf5a912c5a38b4e76be8e950013f2ba255d656\"},{\"execution_closed\":true,\"operation_id\":\"ce39974f917866748f14e367abcf7531c0369de53c480a4a8b63fd91254925e7\"},{\"execution_closed\":true,\"operation_id\":\"d366da971a0d716755ffd32202a477da68cd35bcf31413160deb5cea6bfb8422\"},{\"execution_closed\":true,\"operation_id\":\"d4690105e56820eb9a0ef6c32a378e5f4446c9d011558ce4a32b6c7b05cf451e\"},{\"execution_closed\":true,\"operation_id\":\"daf901ceff7c2afe42e3fabaec1f0864728bf76da9d21c589f7968e573b034be\"},{\"execution_closed\":true,\"operation_id\":\"dcf6058d9db30e7cc976a9f8a863ad1ff9ca155193307ede6c456999be46946a\"},{\"execution_closed\":true,\"operation_id\":\"e53ddf5683d64e49f021c10ae8bde269f7fe0f937addc8c4d03d338cb87ab26a\"}]},\"git\":{\"base_sha\":\"7e500fd9ab10708ebc18a7115fb2aec990c90345\",\"diff_sha256\":\"ee412e6b6c6eee1e26b495ca036531315f89a99251ee1560a5c775bd1d6fd03c\",\"head_sha\":\"3a7206ba8cf411085317cfd620e7803a8a632be1\",\"tree_sha\":\"fe9669c4d22642e96b318ced42f2782439916b11\"}},\"candidate\":{\"attempt_id\":\"cd46ae71-3ee4-43ac-acf8-35e0ec230067\",\"base_sha\":\"7e500fd9ab10708ebc18a7115fb2aec990c90345\",\"context_version\":3,\"diff_sha256\":\"ee412e6b6c6eee1e26b495ca036531315f89a99251ee1560a5c775bd1d6fd03c\",\"fence\":1,\"head_sha\":\"3a7206ba8cf411085317cfd620e7803a8a632be1\",\"project_id\":101,\"repository_id\":11,\"run_id\":\"0d46d904-b72f-4b9c-91f7-e493e6e71c68\",\"task_id\":1001,\"tree_sha\":\"fe9669c4d22642e96b318ced42f2782439916b11\"},\"native_turn\":{\"thread_id\":\"01a19de4-ca28-7ef2-8bf6-19504bf0b8a7\",\"turn_id\":\"01a19de4-cd24-7a61-ac60-1d2ca16be022\"},\"proposal_sha256\":\"27cc3a5dff4856561fbb3bfbb2386da278ec99a06c38ea2d1504651c19432908\",\"reviewer\":{\"actor_id\":\"subscription-code-reviewer\",\"attempt_id\":\"4ebdd76d-5a7c-461d-a835-e6b732f887eb\",\"thread_id\":\"01a19de4-ca28-7ef2-8bf6-19504bf0b8a7\",\"turn_id\":\"01a19de4-cd24-7a61-ac60-1d2ca16be022\"},\"subject_sha256\":\"0beca71e30b1d491b2587df577729c6cc28407de61e25fbe4f35932f055c92a2\"}",
+      "issue": null,
+      "created_at": 1793650361.3957217,
+      "updated_at": 1793650450.758444
+    }
+  ],
+  "peers": [
+    {
+      "kind": "business",
+      "state": "closed",
+      "reason": "never_released"
+    },
+    {
+      "kind": "native",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "ken",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "ken",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "ken",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "ken",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "business",
+      "state": "closed",
+      "reason": "never_released"
+    },
+    {
+      "kind": "native",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "ken",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "ken",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "command",
+      "state": "closed",
+      "reason": "broker_verified"
+    }
+  ],
+  "task_status": "in_progress",
+  "proposal": {
+    "checks": [
+      {
+        "criterion": "Cambio solicitado en fact.txt",
+        "explanation": "Diff completo muestra 137 → 200 y lectura completa del archivo candidato confirma exactamente 200. También leído mediante Ken.",
+        "outcome": "supported"
+      },
+      {
+        "criterion": "Semántica fraccionaria de total_with_tax",
+        "explanation": "La línea 5 convierte indebidamente la fracción dividiéndola por 100. Ejecución local del candidato: total_with_tax(100, 0.2)=100.2, esperado 120.0. Los controles (100,0) y (0,0.2) coinciden, pero no resuelven el fallo.",
+        "outcome": "concern"
+      },
+      {
+        "criterion": "Diff completo y consumidores relevantes",
+        "explanation": "Leídos packet, author_input y diff completos, sin colas pendientes; ambos archivos completos con hashes. Ken encuentra solo la definición mediante búsqueda literal. El inventario de archivos no muestra otros archivos de aplicación ni pruebas. La consulta de callers de Ken falló por lenguaje no parseable; no se afirma cobertura del grafo.",
+        "outcome": "supported"
+      },
+      {
+        "criterion": "Evidencia de comprobaciones del autor",
+        "explanation": "El packet contiene checks vacío: no hay comprobaciones registradas del autor que permitan verificar que leyó con Ken o informó resultados. La entrada histórica prueba lo solicitado, no su realización. Las tres comprobaciones ejecutadas aquí son del revisor, no una suite aportada por el autor.",
+        "outcome": "not_checked"
+      },
+      {
+        "criterion": "Preservación del repositorio original del propietario",
+        "explanation": "La entrada registra una copia privada y el candidato muestra solo dos archivos cambiados; no se dispone de inspección del repositorio original para comprobar su estado.",
+        "outcome": "not_checked"
+      },
+      {
+        "criterion": "Seguridad, errores y mantenibilidad",
+        "explanation": "En las cinco líneas de invoice.py no hay E/S, ejecución externa ni efectos laterales explícitos; la operación es constante para entradas numéricas habituales. La fórmula contradice su propio docstring y requiere corrección. No hay contrato de tipos, redondeo monetario o tasas inválidas que permita exigir políticas adicionales.",
+        "outcome": "supported"
+      }
+    ],
+    "limitations": [
+      "Revisión limitada al candidato exacto y al material capturado; sin cambios, aceptación, publicación ni acceso web.",
+      "No hay suite de pruebas visible ni checks registrados del autor; el ensayo del revisor cubre solo tres entradas numéricas.",
+      "No se verificó el repositorio original externo a la copia ni la realización histórica de la lectura Ken por el autor.",
+      "La búsqueda de callers de Ken devolvió error; se complementó con búsqueda literal y el inventario de archivos, sin afirmar resolución dinámica de consumidores.",
+      "Tipos admitidos, redondeo y tratamiento de tasas negativas o entradas inválidas no están especificados."
+    ],
+    "rationale": "Fallo concreto en invoice.py:5: se divide rate entre 100 aunque el requisito y el docstring indican que ya es una fracción. La ejecución del candidato con amount=100 y rate=0.2 devuelve 100.2, frente a 120.0 requerido. Corregir la fórmula a amount * (1 + rate) y verificar ese caso. La petición directa original del propietario se limita a cambiar fact.txt de 137 a 200 en la copia privada, leer con Ken e informar comprobaciones; el requisito de total_with_tax procede de los metadatos de tarea presentes en aquella entrada y de la petición actual de revisión. fact.txt sí contiene 200.",
+    "references": [
+      {
+        "kind": "file",
+        "path": "invoice.py",
+        "quote": "def total_with_tax(amount, rate):\n    \"\"\"Return total where rate is a fraction such as 0.2 for twenty percent.\"\"\"\n    return amount * (1 + rate / 100)",
+        "sha256": "261845bf591d47e00bacc2d167d6b60d2cbaf03670f5ae20d7cdd96b4bd64409",
+        "start_line": 3
+      },
+      {
+        "kind": "file",
+        "path": "fact.txt",
+        "quote": "200",
+        "sha256": "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf",
+        "start_line": 1
+      }
+    ],
+    "verdict": "needs_revision"
+  },
+  "model_tool_names": [
+    "researcher_code_review_subject",
+    "researcher_code_review_subject",
+    "researcher_code_review_subject",
+    "ken_find",
+    "ken_read",
+    "ken_read",
+    "ken_find",
+    "ken_related",
+    "researcher_code_review_file",
+    "researcher_code_review_file",
+    "researcher_command_start",
+    "researcher_command_read",
+    "researcher_python",
+    "researcher_command_read",
+    "researcher_code_review_propose"
+  ],
+  "all_sampled_domains_removed": true,
+  "wall_seconds": 123.41,
+  "global_concession_inactive": true,
+  "global_peers_closed": true,
+  "harness_sha256": "69322dbb463d844bf8ff06ebce88189a1a91fe6557ce556ad4d96fe8707d2fc6",
+  "verified_local_versions": {
+    "codex_cli": "0.166.0",
+    "ken_rank": "0.18.0"
+  },
+  "earlier_trials": [
+    {
+      "receipt": "native-code-review-live-preflight-failure.json",
+      "reviewer_model_turns": 0,
+      "reason": "Harness budget mismatch rejected before dispatch; all peers closed."
+    },
+    {
+      "receipt": "native-code-review-live-before-ken-fix.json",
+      "reviewer_model_turns": 1,
+      "reason": "Correct arithmetic concern retained, protocol confirmation refused on actual reserved .ken state; two-file source fix tested before a fresh independent trial."
+    }
+  ],
+  "total_actual_reviewer_turns_this_delivery": 2
+}

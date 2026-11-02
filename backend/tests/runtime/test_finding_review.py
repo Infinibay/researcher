@@ -708,9 +708,11 @@ def test_review_schema_can_rollback_without_losing_original_work(authored_findin
         restore_code_reviews,
         restore_development_kinds,
         restore_development_workspaces,
+        restore_native_code_reviews,
     )
     from backend.db.result_migration import restore_result_schema
 
+    restore_native_code_reviews(c.conn)
     restore_code_reviews(c.conn)
     restore_code_checks(c.conn)
     restore_code_candidates(c.conn)

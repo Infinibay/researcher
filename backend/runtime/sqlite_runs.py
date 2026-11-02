@@ -199,17 +199,16 @@ class SQLiteRunStore:
         with self._transaction() as conn:
             return self._context_snapshot(conn, project_id, task_id)
 
-    @staticmethod
-    def _review_request(conn, project_id, run_id, *, require_current=False):
-        """Read a bound finding-review subject; productive research/development roots have no review request."""
-        """Read the original review descriptor, optionally requiring its subject now."""
+    def _review_request(self, conn, project_id, run_id, *, require_current=False):
+        """Read an admitted finding/code review descriptor; productive roots have none and native code dispatch also needs preflight."""
         from backend.knowledge.reviews import verify_current
 
         run = SQLiteRunStore._row(conn, project_id, run_id)
         if run["execution_kind"] == "code_review":
-            raise RunConflict(
-                "Native code-review execution is not enabled; only frozen subject inspection is available"
-            )
+            from backend.runtime.code_reviews import CodeReviews
+
+            code = CodeReviews(self)._request(conn, project_id, run_id, require_current=require_current)
+            return {"kind": "code_review", **{key:code[key] for key in ("run_id", "subject_sha256", "author_run_id", "author_attempt_id", "author_actor_id", "context_version")}}
         request = conn.execute(
             "SELECT * FROM finding_review_requests WHERE project_id=? AND run_id=?",
             (project_id, run_id),
@@ -445,7 +444,8 @@ class SQLiteRunStore:
             if review is not None:
                 context["review"] = review
             development = row["execution_kind"] == "development"
-            expected_types = ("code", "bug_fix") if development else ("research",)
+            code_review = row["execution_kind"] == "code_review"
+            expected_types = ("code", "bug_fix") if development or code_review else ("research",)
             if context["task"]["type"] not in expected_types:
                 raise RunConflict("Task type changed before input reservation")
             if development:
@@ -458,6 +458,11 @@ class SQLiteRunStore:
                     "workspace": "/run/researcher-source", "workspace_access": "private-write",
                     "acceptance": "not_granted", "publication": "not_granted",
                 }
+            elif code_review:
+                from backend.runtime.code_reviews import CodeReviews
+
+                view = CodeReviews(self).execution_view(conn,row)
+                context["execution"] = {"kind":"code_review", "repository_id":view.source.repository_id, "head_sha":view.head_sha, "tree_sha":view.tree_sha, "subject_sha256":view.subject_sha256, "workspace":"/run/researcher-source", "workspace_access":"readonly", "acceptance":"not_granted", "publication":"not_granted"}
             frozen = freeze_input(conn, row, context)
             if (
                 len(frozen.input_text.encode())
@@ -543,6 +548,7 @@ class SQLiteRunStore:
         project_turn_limit=20,
         project_token_limit=4000000,
     ):
+        """Reserve inference under current authority, requiring validated code review preflight."""
         import re
 
         from backend.runtime.native_commands import VERSION
@@ -559,6 +565,10 @@ class SQLiteRunStore:
         intent = (workspace, catalog_hash, VERSION, _json(asdict(limits)), model)
         row = self._authority(conn, lease)
         self._bound_workspace(conn, row, workspace)
+        if row["execution_kind"] == "code_review":
+            from backend.runtime.code_review_records import CodeReviewRecords
+
+            CodeReviewRecords(self).require_preflight(conn,row)
         if row["thread_id"] is None:
             raise RunConflict("Bind native thread before reserving dispatch")
         previous = conn.execute(

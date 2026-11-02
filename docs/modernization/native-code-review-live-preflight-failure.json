@@ -1,0 +1,34 @@
+{
+  "status": "failed_before_inference",
+  "generative_reviewer_turns": 0,
+  "cause": "Harness changed durable project budget from original20/4000000 to2/351000; policy correctly rejected change before dispatch. Harness receipt serialization also failed on retained BLOBs. No production change. Fixture retained; never replayed.",
+  "project_budget": [
+    {
+      "project_id": 101,
+      "turn_limit": 20,
+      "token_limit": 4000000
+    }
+  ],
+  "runs": [
+    {
+      "id": "f1846271-ea43-4300-ae28-0edc90f89fef",
+      "execution_kind": "development",
+      "status": "needs_review",
+      "issue_json": null
+    },
+    {
+      "id": "74a04da2-8718-4d7c-9ca6-d4b8858ae5f1",
+      "execution_kind": "code_review",
+      "status": "failed",
+      "issue_json": "{\"code\":\"runtime_failed\",\"inference_started\":false,\"message\":\"La ejecuci\u00f3n no dej\u00f3 una propuesta verificable. Conservamos los datos y recibos guardados; no se repetir\u00e1 por su cuenta.\",\"next_action\":\"inspect_saved_work\"}"
+    }
+  ],
+  "dispatches": [
+    {
+      "model": "controlled-only",
+      "status": "reserved",
+      "native_status": null
+    }
+  ],
+  "all_peers_closed": true
+}

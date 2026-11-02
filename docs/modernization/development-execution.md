@@ -151,8 +151,10 @@ La [captura de candidatos](code-candidates.md) ya produce un commit, un árbol y
 diff completos en una asignación independiente mediante Git propio. El controlador
 interno cierra los escritores y persiste la captura ligada al contexto e intento.
 Las [comprobaciones aisladas](code-checks.md) ya consumen esa versión y conservan
-resultados ligados al candidato. Antes de habilitar la entrada pública faltan
-revisión independiente, aceptación y publicación reconciliada. Terminar un turno
+resultados ligados al candidato. La [revisión independiente](code-reviews.md)
+conecta sesión nativa, Git antes/después, citas verificadas y cierre, con validación
+ampliada y ensayo real de suscripción documentados. Antes de habilitar la entrada pública faltan aceptación
+y publicación reconciliada. Terminar un turno
 o emitir texto de aprobación no cierra ese ciclo.
 
 Las evidencias se guardan en [development-docstrings.json](development-docstrings.json),

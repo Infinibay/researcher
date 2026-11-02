@@ -29,7 +29,9 @@ class OwnedGitExecutor:
             raise TypeError("Git requires an inspected fixed Git asset")
         self.owner, self.registry, self.lease = owner, registry, lease
         self.source = Path(source).absolute()
-        self.allocation = Path(allocation).absolute()
+        self.allocation = (
+            Path(allocation).absolute() if allocation is not None else None
+        )
         self.asset = asset
         self.git_binary = Path(asset.path)
         self.operations = []
@@ -41,7 +43,7 @@ class OwnedGitExecutor:
         path = Path(host_path).absolute()
         if path.is_relative_to(self.source):
             return PEER_WORKSPACE / path.relative_to(self.source)
-        if path.is_relative_to(self.allocation):
+        if self.allocation is not None and path.is_relative_to(self.allocation):
             return PEER_ALLOCATION / path.relative_to(self.allocation)
         raise ValueError("Path has no admitted Git execution mapping")
 
@@ -52,13 +54,17 @@ class OwnedGitExecutor:
         run = await asyncio.to_thread(
             self.registry.runs.get, self.lease.project_id, self.lease.run_id
         )
-        if run.execution_kind != "development":
+        if run.execution_kind not in ("development", "code_review"):
             raise ValueError(
                 "Git preparation requires an admitted development execution"
             )
+        if run.execution_kind == "code_review" and self.allocation is not None:
+            raise ValueError(
+                "Review Git permits only its readonly candidate, without an allocation"
+            )
         allocation = (
             PrivateAllocation.capture(self.allocation)
-            if self.allocation.exists()
+            if self.allocation is not None and self.allocation.exists()
             else None
         )
         launch = GitLaunch(

@@ -178,6 +178,7 @@ def test_unused_check_inverse_preserves_older_candidate_history(check_state):
     from backend.db.development_migration import (
         restore_code_checks,
         restore_code_reviews,
+        restore_native_code_reviews,
     )
     from backend.runtime.candidate_state import CodeCandidates
     from backend.runtime.peer_registry import PeerRegistry
@@ -191,8 +192,10 @@ def test_unused_check_inverse_preserves_older_candidate_history(check_state):
     s.c.store.finish(
         lease, native_status="completed", summary="Historical storage fixture"
     )
+    restore_native_code_reviews(s.c.conn)
     restore_code_reviews(s.c.conn)
     restore_code_checks(s.c.conn)
+    restore_native_code_reviews(s.c.conn)
     restore_code_reviews(s.c.conn)
     restore_code_checks(s.c.conn)
     assert CodeCandidates(s.c.store).inspect(101, lease.run_id) == before
@@ -209,6 +212,7 @@ def test_check_inverse_refuses_a_reserved_or_historical_check(check_state):
     from backend.db.development_migration import (
         restore_code_checks,
         restore_code_reviews,
+        restore_native_code_reviews,
     )
     from backend.runtime.check_contracts import CheckSpec
     from backend.runtime.peer_registry import PeerRegistry
@@ -221,6 +225,7 @@ def test_check_inverse_refuses_a_reserved_or_historical_check(check_state):
     s.c.store.finish(
         lease, native_status="completed", summary="Retained check reservation"
     )
+    restore_native_code_reviews(s.c.conn)
     restore_code_reviews(s.c.conn)
     with pytest.raises(RuntimeError, match="rollback refused"):
         restore_code_checks(s.c.conn)

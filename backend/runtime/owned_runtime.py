@@ -12,6 +12,7 @@ from uuid import uuid4
 import httpx
 
 from backend.research.models import (
+    CODE_REVIEW_PERMISSIONS,
     DEVELOPMENT_PERMISSIONS,
     RESEARCH_PERMISSIONS,
     REVIEW_PERMISSIONS,
@@ -21,11 +22,14 @@ from backend.runtime.authority_journal import WitnessedAuthorityJournal
 from backend.runtime.broker_inference import broker_inference
 from backend.runtime.broker_stdio import AsyncPeerBroker
 from backend.runtime.business_mediation import (
+    CODE_REVIEW_NAMES,
     DEVELOPMENT_NAMES,
     RESEARCH_NAMES,
     REVIEW_NAMES,
     BusinessTools,
+    ProjectTools,
 )
+from backend.runtime.code_review_instructions import CODE_REVIEW_INSTRUCTIONS
 from backend.runtime.codex_rpc import JsonRpcClient, RpcProtocolError
 from backend.runtime.codex_session import CodexSession, ExecutionLimits
 from backend.runtime.contracts import RunConflict
@@ -80,6 +84,7 @@ class OwnedInferenceSession(InferenceSession):
         execution_workspace=None,
         capture=None,
         check=None,
+        complete_review=None,
     ):
         """Retain original ownership and the actual execution directory as data, never as an access grant."""
         super().__init__(session.native, session.business, session.active)
@@ -89,6 +94,8 @@ class OwnedInferenceSession(InferenceSession):
         self._capture_task = None
         self._check = check
         self._check_tasks = {}
+        self._complete_review = complete_review
+        self._review_task = None
         self._running = False
         self._result = None
 
@@ -99,7 +106,7 @@ class OwnedInferenceSession(InferenceSession):
 
     async def run(self, text, *, on_event=None, on_started=None):
         """Run one native turn at a time; a started capture permanently seals further generation."""
-        if self._capture_task is not None:
+        if self._capture_task is not None or self._review_task is not None:
             raise RunConflict(
                 "Development session is sealed for its original candidate"
             )
@@ -190,8 +197,37 @@ class OwnedInferenceSession(InferenceSession):
         for _digest, task in self._check_tasks.values():
             if not task.done() and not task.cancelling():
                 task.cancel()
+        if (
+            self._review_task is not None
+            and not self._review_task.done()
+            and not self._review_task.cancelling()
+        ):
+            self._review_task.cancel()
         # Stop the original domain, including startup/Ken/analysis, before SQL.
         await self._owner.aclose()
+
+    async def complete_review(self):
+        """Seal one completed reviewer turn and join its original Git/closure confirmation, without accepting or publishing work."""
+        if (
+            self._complete_review is None
+            or self._running
+            or self._result is None
+            or self._result.status != "completed"
+        ):
+            raise RunConflict(
+                "Review confirmation requires a completed independent native turn"
+            )
+        if self._review_task is None:
+            self._review_task = asyncio.create_task(self._complete_review())
+            self._review_task.add_done_callback(
+                lambda done: done.exception() if not done.cancelled() else None
+            )
+        try:
+            return await asyncio.shield(self._review_task)
+        except asyncio.CancelledError:
+            await self.cancel()
+            await asyncio.gather(self._review_task, return_exceptions=True)
+            raise
 
 
 @dataclass(frozen=True)
@@ -269,10 +305,17 @@ class OwnedCodexRuntime:
         )
         run = await _settled(registry.runs.get, lease.project_id, lease.run_id)
         development = run.execution_kind == "development"
+        code_review = run.execution_kind == "code_review"
         expected_permissions = (
             DEVELOPMENT_PERMISSIONS
             if development
-            else (REVIEW_PERMISSIONS if review is not None else RESEARCH_PERMISSIONS)
+            else (
+                CODE_REVIEW_PERMISSIONS
+                if code_review
+                else (
+                    REVIEW_PERMISSIONS if review is not None else RESEARCH_PERMISSIONS
+                )
+            )
         )
         if scope.permissions != expected_permissions:
             raise ValueError(
@@ -289,6 +332,7 @@ class OwnedCodexRuntime:
         _private_control(states)
         with WitnessedAuthorityJournal(**self.authority) as journal:
             exported = None
+            code_tools = review_records = review_executor = None
             peer = analysis = None
             broker = None
             path = self.cgroup_parent / ("researcher-owned-" + uuid4().hex)
@@ -329,6 +373,27 @@ class OwnedCodexRuntime:
                                     asset=GitAsset.inspect(Path("/usr/bin/git")),
                                 )
                                 workspace = Path(view.workspace)
+                            elif code_review:
+                                from backend.runtime.code_review_controller import (
+                                    prepare_owned_review,
+                                )
+
+                                (
+                                    review_records,
+                                    review_executor,
+                                ) = await prepare_owned_review(
+                                    lease,
+                                    runs=registry.runs,
+                                    owner=owner,
+                                    registry=registry,
+                                    asset=GitAsset.inspect(Path("/usr/bin/git")),
+                                    settled=_settled,
+                                )
+                                workspace = Path(
+                                    (
+                                        await _settled(review_records.candidate, lease)
+                                    ).workspace
+                                )
                             state = await _settled(
                                 NativeState.provision,
                                 journal,
@@ -421,7 +486,9 @@ class OwnedCodexRuntime:
                                 developer_instructions=DEVELOPMENT_INSTRUCTIONS
                                 if development
                                 else (
-                                    REVIEW_INSTRUCTIONS
+                                    CODE_REVIEW_INSTRUCTIONS
+                                    if code_review
+                                    else REVIEW_INSTRUCTIONS
                                     if review is not None
                                     else INSTRUCTIONS
                                 ),
@@ -442,7 +509,9 @@ class OwnedCodexRuntime:
                                     names=DEVELOPMENT_NAMES
                                     if development
                                     else (
-                                        REVIEW_NAMES
+                                        CODE_REVIEW_NAMES
+                                        if code_review
+                                        else REVIEW_NAMES
                                         if review is not None
                                         else RESEARCH_NAMES
                                     ),
@@ -468,6 +537,18 @@ class OwnedCodexRuntime:
                                 business = await BusinessTools.connect(
                                     peer, active=admitted
                                 )
+                                if code_review:
+                                    from backend.runtime.code_review_tools import (
+                                        CodeReviewTools,
+                                    )
+
+                                    code_tools = CodeReviewTools(
+                                        review_records,
+                                        lease,
+                                        active=admitted,
+                                        settled=_settled,
+                                    )
+                                    business = ProjectTools(business, code_tools)
                                 async with broker_inference(
                                     native,
                                     ken,
@@ -475,7 +556,12 @@ class OwnedCodexRuntime:
                                     business=business,
                                     analysis=analysis,
                                     active=admitted,
-                                    prepare_ken=prepare_ken if development else None,
+                                    prepare_ken=prepare_ken
+                                    if development or code_review
+                                    else None,
+                                    seal_tools=code_tools.aclose
+                                    if code_tools is not None
+                                    else None,
                                 ) as session:
 
                                     async def capture():
@@ -532,6 +618,21 @@ class OwnedCodexRuntime:
                                             settled=_settled,
                                         )
 
+                                    async def complete_review():
+                                        """Retain the original physical reviewer domain through sealing and exact post-review Git validation."""
+                                        from backend.runtime.code_review_controller import (
+                                            confirm_owned_review,
+                                        )
+
+                                        return await confirm_owned_review(
+                                            lease,
+                                            records=review_records,
+                                            executor=review_executor,
+                                            session=session,
+                                            owner=owner,
+                                            settled=_settled,
+                                        )
+
                                     try:
                                         exported = OwnedInferenceSession(
                                             session,
@@ -540,6 +641,9 @@ class OwnedCodexRuntime:
                                             execution_workspace=workspace,
                                             capture=capture if development else None,
                                             check=check if development else None,
+                                            complete_review=complete_review
+                                            if code_review
+                                            else None,
                                         )
                                         yield exported
                                     finally:
@@ -553,6 +657,8 @@ class OwnedCodexRuntime:
                                                 task
                                                 for _digest, task in exported._check_tasks.values()
                                             ]
+                                            if exported._review_task is not None:
+                                                tasks.append(exported._review_task)
                                             if any(not task.done() for task in tasks):
                                                 await exported.cancel()
                                             if tasks:
@@ -563,6 +669,28 @@ class OwnedCodexRuntime:
                             withdraw()
                             watcher.cancel()
                             await asyncio.gather(watcher, return_exceptions=True)
+                            if code_review:
+                                # Retire physical work before waiting on host
+                                # source/SQL work or retaining interruption data.
+                                await owner.aclose()
+                                if code_tools is not None:
+                                    await code_tools.aclose()
+                                if review_records is not None:
+                                    retained = await _settled(
+                                        review_records.get,
+                                        lease.project_id,
+                                        lease.attempt_id,
+                                    )
+                                    if retained["state"] in (
+                                        "preparing",
+                                        "ready",
+                                        "proposed",
+                                    ):
+                                        await _settled(
+                                            review_records.observe_failure,
+                                            lease,
+                                            "Review ownership ended before confirmation",
+                                        )
             finally:
                 # Before broker creation no process can exist in this fresh leaf.
                 # A nonempty/uncertain domain is not silently removed or adopted.

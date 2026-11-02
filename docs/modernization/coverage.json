@@ -2770,6 +2770,32 @@
         "Complete reviewer flow/task acceptance and dependent-knowledge lifecycle",
         "Other memory/index/provider retirement and whole scenario acceptance"
       ]
+    },
+    "native_code_review": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/modernization/code-reviews.md",
+        "docs/modernization/native-code-review-docstrings.json",
+        "docs/modernization/native-code-review-smoke-packaging.json",
+        "backend/tests/runtime/test_code_review_session.py",
+        "backend/tests/runtime/test_code_review_records.py",
+        "docs/modernization/native-code-review-results.json",
+        "docs/modernization/native-code-review-packaging.json",
+        "docs/modernization/native-code-review-live.json"
+      ],
+      "implemented": [
+        "Original author request and exact frozen input retained separately from reviewer instructions",
+        "Actual Git before/after inside original reviewer domain; readonly candidate and distinct actor/attempt/native thread",
+        "Attributed immutable proposal with byte-hash/line quotations and explicit checks/limits; host confirmation requires closed peers and current evidence",
+        "Coordinator retains unconfirmed completion as failure without accepting or publishing code",
+        "Final corrected wheel83PASS after preflight63PASS; earlier broad wheel336PASS; pre-fix fullsource1993PASS/100inheritedFAIL/3SKIP, no new failure IDs",
+        "One successful actual subscription/published-Ken reviewer identifies100.2vs120, records needs_revision with exact citations, confirms and closes; previous actual proposal/failure retained separately; total2real reviewer turns",
+        "138new/changed definitions have English docstrings; final691Python/SQL payloads match wheel"
+      ],
+      "remaining": [
+        "Owner code acceptance, reconciliable publication and public development entry",
+        "Legacy reviewer/CI cutover and representative review/human comprehension evaluation"
+      ]
     }
   }
 }

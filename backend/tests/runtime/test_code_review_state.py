@@ -28,6 +28,21 @@ def review_state(candidate_state, request):
     s, author, _binding, _copies, candidates = candidate_state
     planned, _ = candidates.plan(author)
     candidate = candidates.complete(author, captured_result(planned), closed_proof())
+    if getattr(request, "param", None) == "frozen_author":
+        import hashlib
+
+        from backend.runtime.codex_session import ExecutionLimits
+
+        s.c.store.bind_thread(author, thread_id="author-thread")
+        s.c.store.reserve_input(
+            author,
+            workspace=json.loads(candidate["prepared_json"])["workspace"],
+            catalog_hash=hashlib.sha256(b"[]").hexdigest(),
+            catalog=[],
+            developer_instructions="Fixture original author input.",
+            model="fixture-model",
+            limits=ExecutionLimits(60, 30, 1, 10, 100),
+        )
     s.c.store.bind_native(author, thread_id="author-thread", turn_id="author-turn")
     s.c.conn.execute(
         "INSERT INTO runtime_peer_scopes(attempt_id,protocol_version,created_at) VALUES(?,1,?)",
@@ -84,6 +99,11 @@ def test_review_subject_retains_complete_original_candidate_and_closed_author(
     assert subject["snapshot"]["author"]["attempt_id"] == author.attempt_id
     assert subject["snapshot"]["author"]["thread_id"] == "author-thread"
     assert subject["snapshot"]["requirements"]["task"]["type"] == "code"
+    assert (
+        subject["snapshot"]["author_request"]["text"]
+        == _s.c.store.get(101, author.run_id).prompt
+    )
+    assert subject["snapshot"]["author_request"]["source_kind"] == "owner_admission"
     assert subject["snapshot"]["checks"] == []
     assert (
         subject["subject_sha256"]
@@ -350,12 +370,17 @@ def test_context_correction_between_publication_and_gate_prevents_review_payload
 
 def test_unused_review_inverse_preserves_closed_author_and_candidate(review_state):
     """Removing unused version40 keeps older candidate/check history and can be repeated and reapplied."""
-    from backend.db.development_migration import restore_code_reviews
+    from backend.db.development_migration import (
+        restore_code_reviews,
+        restore_native_code_reviews,
+    )
     from backend.tools.base.db import ensure_migrations
 
     s, author, _candidate, reviews = review_state
     before = reviews.subject(101, author.attempt_id)
+    restore_native_code_reviews(s.c.conn)
     restore_code_reviews(s.c.conn)
+    restore_native_code_reviews(s.c.conn)
     restore_code_reviews(s.c.conn)
     assert reviews.subject(101, author.attempt_id) == before
     assert (
@@ -371,7 +396,10 @@ def test_unused_review_inverse_preserves_closed_author_and_candidate(review_stat
 
 def test_review_history_prevents_inverse_even_after_the_reviewer_finishes(review_state):
     """A completed review reservation is retained history, independent of the active-authority guard."""
-    from backend.db.development_migration import restore_code_reviews
+    from backend.db.development_migration import (
+        restore_code_reviews,
+        restore_native_code_reviews,
+    )
 
     s, _author, _candidate, reviews = review_state
     spec, target = review_request(review_state)
@@ -383,6 +411,7 @@ def test_review_history_prevents_inverse_even_after_the_reviewer_finishes(review
     )
     before = reviews.request(101, run.run_id)
     with pytest.raises(RuntimeError, match="rollback refused"):
+        restore_native_code_reviews(s.c.conn)
         restore_code_reviews(s.c.conn)
     assert reviews.request(101, run.run_id) == before
 
@@ -421,10 +450,10 @@ def test_subject_refuses_overflow_instead_of_silently_dropping_checks(review_sta
         reviews.subject(101, author.attempt_id)
 
 
-def test_unimplemented_native_review_cannot_freeze_input_or_spend_a_dispatch_budget(
+def test_unvalidated_native_review_cannot_freeze_input_or_spend_a_dispatch_budget(
     review_state,
 ):
-    """Readonly inspection is not advertised as native review; failure rolls back the preceding input/dispatch reservation."""
+    """Readonly inspection cannot replace native Git validation; no input or dispatch budget is spent before that witness exists."""
     import hashlib
 
     from backend.runtime.codex_session import ExecutionLimits
@@ -436,7 +465,7 @@ def test_unimplemented_native_review_cannot_freeze_input_or_spend_a_dispatch_bud
     lease = s.c.store.claim(101, run.run_id, "review-host")
     s.c.store.bind_thread(lease, thread_id="independent-review-thread")
     before = s.c.conn.execute("SELECT * FROM runtime_project_budgets").fetchall()
-    with pytest.raises(RunConflict, match="not enabled"):
+    with pytest.raises(RunConflict, match="validated original candidate"):
         s.c.store.reserve_input(
             lease,
             workspace=candidate["workspace"],

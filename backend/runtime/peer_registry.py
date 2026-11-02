@@ -141,7 +141,12 @@ class PeerRegistry:
             from backend.runtime.code_reviews import CodeReviews
 
             try:
-                return CodeReviews(self.runs).execution_view(conn, row)
+                view = CodeReviews(self.runs).execution_view(conn, row)
+                if peer is not None and peer["kind"] == "native":
+                    from backend.runtime.code_review_records import CodeReviewRecords
+
+                    CodeReviewRecords(self.runs).require_preflight(conn, row)
+                return view
             except RunNotFound as exc:
                 raise RunConflict(
                     "Code review requires an exact candidate snapshot"

@@ -17,8 +17,10 @@ def test_unused_result_schema_rolls_back_and_reapplies_without_losing_tasks(
         restore_code_reviews,
         restore_development_kinds,
         restore_development_workspaces,
+        restore_native_code_reviews,
     )
 
+    restore_native_code_reviews(c.conn)
     restore_code_reviews(c.conn)
     restore_code_checks(c.conn)
     restore_code_candidates(c.conn)
@@ -66,8 +68,10 @@ def test_result_downgrade_refuses_live_authority_or_historical_delivery(
         restore_code_reviews,
         restore_development_kinds,
         restore_development_workspaces,
+        restore_native_code_reviews,
     )
 
+    restore_native_code_reviews(c.conn)
     restore_code_reviews(c.conn)
     restore_code_checks(c.conn)
     restore_code_candidates(c.conn)

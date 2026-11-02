@@ -1,4 +1,4 @@
-"""Keep published Ken's index aligned with an owned mutable development copy.
+"""Own published Ken over mutable development or readonly code-review source views.
 
 Source hashes are computed inside readonly owned peers, never by following
 model-controlled host paths. A changed copy closes the old MCP peer before
@@ -61,7 +61,7 @@ async def _settled(function, *args):
 
 
 class DevelopmentKen:
-    """Own MCP refresh and bounded source revisions for one original development attempt."""
+    """Own MCP refresh and bounded source revisions in one dedicated SDK task, including sealing from a code-review task."""
 
     def __init__(self, endpoint, *, prepare, validate, quiet, active):
         """Retain host-only factories; models cannot choose paths, profiles or executables."""

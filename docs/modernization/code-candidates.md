@@ -102,14 +102,16 @@ la autoridad activa o una versión posterior impiden ese retroceso.
 
 Las comprobaciones ya derivan una copia por receta del candidato exacto y guardan
 base/head/contexto junto a sus resultados. La revisión independiente de código
-sigue pendiente. La aceptación del usuario y la publicación son pasos distintos;
+ya tiene recorrido nativo interno con validación ampliada y ensayo de suscripción documentados.
+La aceptación del usuario y la publicación son pasos distintos;
 publicar exige revalidar el destino y poder reconciliar una respuesta perdida.
 Este documento no declara implementados esos contratos pendientes.
 
-La [admisión de revisión e inspección en lectura](code-reviews.md) ya conserva un
+La [revisión independiente en lectura](code-reviews.md) ya conserva un
 objeto inmutable con autor, requisitos y comprobaciones, exige otro hilo e impide
-escritura sobre el candidato. Su sesión nativa, validación Git antes/después y
-decisión siguen pendientes.
+escritura sobre el candidato. Su sesión nativa registra una propuesta con citas;
+el host valida Git antes/después y confirma el protocolo tras cerrar sus procesos.
+La confirmación conserva el juicio atribuido, sin aceptar ni publicar la tarea.
 
 La integración del controlador tiene evidencia separada en
 [candidate-controller-results.json](candidate-controller-results.json),
