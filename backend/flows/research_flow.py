@@ -55,7 +55,10 @@ class ResearchFlow(Flow[ResearchState]):
 
     @start()
     def assign_research(self):
-        """Load task and assign to researcher."""
+        """Refuse native-owned tasks before legacy service setup, agent selection or inference."""
+        from backend.runtime.lifecycle import require_legacy_flow
+
+        require_legacy_flow(self.state.task_id)
         update_subflow_step(self.state.project_id, "research_flow", "assign_research")
         logger.info("ResearchFlow: assign_research (task_id=%d)", self.state.task_id)
 

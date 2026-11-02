@@ -18,6 +18,14 @@ class Command(BaseModel):
     )
 
 
+class ProposeResult(Command):
+    """Select final persisted research reports without accepting or publishing them."""
+
+    report_ids: list[Identity] = Field(min_length=1, max_length=20)
+    summary: str = Field(min_length=1, max_length=12000)
+    limitations: list[str] = Field(min_length=1, max_length=20)
+
+
 class CaptureReference(Command):
     """Capture an attachment id; project and actor are provided by host credentials."""
 

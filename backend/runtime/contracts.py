@@ -139,6 +139,7 @@ class RunView:
     repository_name: str | None = None
     issue: dict | None = None
     review: dict | None = None
+    execution_kind: str = "research"
 
 
 @dataclass(frozen=True)

@@ -12,6 +12,7 @@ RESEARCH_PERMISSIONS = frozenset(
         "findings.write",
         "reports.read",
         "reports.write",
+        "results.propose",
         "questions.ask",
         "wiki.read",
         "wiki.write",
@@ -243,6 +244,36 @@ class ReportDraft:
     @property
     def markdown(self) -> str:
         return f"# {self.title}\n\n{self.content}"
+
+
+@dataclass(frozen=True)
+class ResultDraft:
+    """Select actual final reports and attributed limitations; this declaration never accepts a task."""
+
+    report_ids: tuple[int, ...]
+    summary: str
+    limitations: tuple[str, ...]
+
+    def __post_init__(self):
+        """Refuse ambiguous/oversized selections without inferring final drafts from writer activity."""
+        if (
+            not isinstance(self.report_ids, tuple)
+            or not 1 <= len(self.report_ids) <= 20
+            or len(set(self.report_ids)) != len(self.report_ids)
+        ):
+            raise ResearchInputError("Select 1–20 distinct report ids for delivery")
+        for report_id in self.report_ids:
+            positive_id(report_id)
+        bounded_text(self.summary, "delivery summary", 12000)
+        if (
+            not isinstance(self.limitations, tuple)
+            or not 1 <= len(self.limitations) <= 20
+        ):
+            raise ResearchInputError(
+                "State 1–20 actual limitations of the delivered work"
+            )
+        for limitation in self.limitations:
+            bounded_text(limitation, "delivery limitation", 4000)
 
 
 class SourceUnavailable(RuntimeError):

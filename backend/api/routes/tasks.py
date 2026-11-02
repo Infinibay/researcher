@@ -175,7 +175,7 @@ async def get_task(task_id: int, project_id: int | None = Query(default=None, gt
 
 @router.put("/{task_id}", response_model=TaskResponse)
 async def update_task(task_id: int, body: TaskUpdate, request: Request):
-    """Update a task. Emits status_changed events when status changes."""
+    """Edit versioned task inputs; native completion requires a separate owner acceptance."""
 
     # ── Pre-DB validation (Comments 1 & 3) ────────────────────────────
     # Fetch current status to validate before entering the DB callback.
@@ -211,6 +211,7 @@ async def update_task(task_id: int, body: TaskUpdate, request: Request):
 
     # ── Apply update ──────────────────────────────────────────────────
     def _update(conn: sqlite3.Connection) -> tuple[dict, bool] | None:
+        """Version edited inputs atomically and refuse generic lifecycle overrides for native-owned tasks."""
         row = conn.execute("SELECT * FROM tasks WHERE id = ?", (task_id,)).fetchone()
         if not row:
             return None
@@ -221,6 +222,8 @@ async def update_task(task_id: int, body: TaskUpdate, request: Request):
             ).fetchone()
             return context[0] if context is not None else 1
 
+        if body.status is not None and body.status != row["status"] and conn.execute("SELECT 1 FROM runtime_runs WHERE task_id=? LIMIT 1", (task_id,)).fetchone():
+            raise HTTPException(409, "Use native task acceptance, stop or context-correction controls to change this task's lifecycle")
         previous_version = context_version()
 
         updates = []

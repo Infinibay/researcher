@@ -17,6 +17,7 @@ class ApproveTaskInput(BaseModel):
 
 
 class ApproveTaskTool(InfinibayBaseTool):
+    """Approve legacy tasks while preserving explicit owner acceptance for native-owned work."""
     name: str = "approve_task"
     description: str = (
         "Approve a task that is in review_ready status, moving it to done. "
@@ -25,9 +26,14 @@ class ApproveTaskTool(InfinibayBaseTool):
     args_schema: Type[BaseModel] = ApproveTaskInput
 
     def _run(self, task_id: int, comment: str | None = None) -> str:
+        """Apply a legacy reviewer approval only when no native admission owns this task."""
         agent_id = self._validate_agent_context()
 
         def _approve(conn: sqlite3.Connection) -> dict:
+            """Preserve native ownership before any legacy state or scientific status mutation."""
+            from backend.runtime.lifecycle import require_legacy_task
+
+            require_legacy_task(conn, task_id)
             row = conn.execute(
                 "SELECT id, status, title, assigned_to FROM tasks WHERE id = ?",
                 (task_id,),

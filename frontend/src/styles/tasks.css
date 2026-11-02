@@ -72,7 +72,7 @@
 .task-workbench .task-proposal { padding: 0 0 1.5rem; border: 0; border-bottom: 1px solid var(--work-line); border-radius: 0; }
 .task-workbench .task-proposal > h4 { font-family: Georgia, 'Times New Roman', serif; font-size: 1.35rem; margin-bottom: 1rem; }
 .task-workbench .task-proposal .prose { font-size: 1rem; line-height: 1.7; max-width: 65ch; }
-.task-workbench .prose :where(p, li, strong, h1, h2, h3, h4) { color: var(--work-ink); }
+.task-workbench .prose :where(p, li, strong, h1, h2, h3, h4, h5, h6) { color: var(--work-ink); }
 .task-workbench .prose :where(a, code) { color: var(--work-accent); }
 .task-workbench .prose pre { background: var(--work-wash); color: var(--work-ink); border-color: var(--work-line); }
 .task-workbench .prose :where(blockquote, th, td, hr) { border-color: var(--work-line); color: var(--work-muted); }

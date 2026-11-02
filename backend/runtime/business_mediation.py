@@ -28,6 +28,7 @@ RESEARCH_NAMES = frozenset(
         "researcher_finding_query",
         "researcher_review_read",
         "researcher_report_write",
+        "researcher_result_propose",
         "researcher_report_read",
         "researcher_ask_user",
     }

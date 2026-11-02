@@ -702,6 +702,9 @@ def test_review_schema_can_rollback_without_losing_original_work(authored_findin
             "SELECT id,topic,content,status FROM findings WHERE id=?", (fid,)
         ).fetchone()
     )
+    from backend.db.result_migration import restore_result_schema
+
+    restore_result_schema(c.conn)
     restore_review_schema(c.conn)
     assert (
         c.conn.execute(

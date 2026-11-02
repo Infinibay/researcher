@@ -16,7 +16,7 @@ for arg in args:
     elif arg == "-c":
         config.update(tomllib.loads(next(args)))
 steps = 0
-source = finding = job = None
+source = finding = job = report = None
 review_mode = False
 review_subject = None
 
@@ -45,7 +45,7 @@ def next_tool(response=None):
     """Advance controlled author or reviewer generation while using the real admitted tool bridge."""
     if review_mode:
         return next_review_tool(response)
-    global steps, source, finding, job
+    global steps, source, finding, job, report
     if response is not None:
         Path("/home/actor/.codex/fixture-progress.json").write_text(
             json.dumps({"step": steps, "response": response})
@@ -62,6 +62,8 @@ def next_tool(response=None):
             source = value["source_id"]
         if steps == 5:
             finding = value["finding_id"]
+        if steps == 6:
+            report = value["artifact_id"]
     steps += 1
     if steps == 1:
         call("ken_read", {"path": "fact.txt"})
@@ -101,6 +103,12 @@ def next_tool(response=None):
                 "finding_ids": [finding],
             },
         )
+    elif steps == 7:
+        call("researcher_result_propose", {
+            "operation_key": "deliver", "report_ids": [report],
+            "summary": "Inspección documental y cálculo acotado.",
+            "limitations": ["La medición original no se repitió; el cálculo es evidencia separada."],
+        })
     else:
         send(
             {

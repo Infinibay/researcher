@@ -1,0 +1,652 @@
+{
+  "base_commit": "12f0f31",
+  "changed_or_new_definitions_documented": 92,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/models/research.py",
+      "symbol": "ProposeResult",
+      "line": 21,
+      "docstring": "Select final persisted research reports without accepting or publishing them.",
+      "file_sha256": "0c708ce988373f8863f863f1dfcbc74b9abf0ed67d7b10d200b5de40ae0b0122"
+    },
+    {
+      "path": "backend/api/routes/internal_findings.py",
+      "symbol": "validate_finding",
+      "line": 137,
+      "docstring": "Validate a provisional finding, changing status to active.",
+      "file_sha256": "87cd0bade488c97d0ce4fbcb8d8b0d1cd9407404c6a546a6d750d7fdca5cc0b4"
+    },
+    {
+      "path": "backend/api/routes/internal_findings.py",
+      "symbol": "validate_finding._validate",
+      "line": 140,
+      "docstring": "Preserve native ownership before any legacy state or scientific status mutation.",
+      "file_sha256": "87cd0bade488c97d0ce4fbcb8d8b0d1cd9407404c6a546a6d750d7fdca5cc0b4"
+    },
+    {
+      "path": "backend/api/routes/internal_findings.py",
+      "symbol": "reject_finding",
+      "line": 176,
+      "docstring": "Reject a finding, changing status to superseded.",
+      "file_sha256": "87cd0bade488c97d0ce4fbcb8d8b0d1cd9407404c6a546a6d750d7fdca5cc0b4"
+    },
+    {
+      "path": "backend/api/routes/internal_findings.py",
+      "symbol": "reject_finding._reject",
+      "line": 179,
+      "docstring": "Preserve native ownership before any legacy state or scientific status mutation.",
+      "file_sha256": "87cd0bade488c97d0ce4fbcb8d8b0d1cd9407404c6a546a6d750d7fdca5cc0b4"
+    },
+    {
+      "path": "backend/api/routes/internal_tasks.py",
+      "symbol": "approve_task",
+      "line": 37,
+      "docstring": "Approve a task in review_ready status, moving it to done.",
+      "file_sha256": "437e8d50c3151ab75395c4b6d514558ee3b527925a6421ac1064b288365cc9ed"
+    },
+    {
+      "path": "backend/api/routes/internal_tasks.py",
+      "symbol": "approve_task._approve",
+      "line": 40,
+      "docstring": "Preserve native ownership before any legacy state or scientific status mutation.",
+      "file_sha256": "437e8d50c3151ab75395c4b6d514558ee3b527925a6421ac1064b288365cc9ed"
+    },
+    {
+      "path": "backend/api/routes/research.py",
+      "symbol": "propose_result",
+      "line": 84,
+      "docstring": "Freeze only an actual admitted author's selected report and evidence versions.",
+      "file_sha256": "813bdd16788e7a9ab610f0f6a6e64287b20bcf5b8aeeaaf57c94e33aecc83350"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "AcceptResult",
+      "line": 121,
+      "docstring": "Bind an owner action to exactly the displayed candidate, context and review state.",
+      "file_sha256": "4d90033eeb4744bdcddd8c30e57e5c0cc7b4e2ea85d8a578d4c3df720e46682b"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "result_state",
+      "line": 137,
+      "docstring": "Inspect explicit delivery, actual review limits and distinct original owner acceptance.",
+      "file_sha256": "4d90033eeb4744bdcddd8c30e57e5c0cc7b4e2ea85d8a578d4c3df720e46682b"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "result_report",
+      "line": 146,
+      "docstring": "Page the selected frozen report instead of silently substituting its present-day artifact.",
+      "file_sha256": "4d90033eeb4744bdcddd8c30e57e5c0cc7b4e2ea85d8a578d4c3df720e46682b"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "accept_result",
+      "line": 169,
+      "docstring": "Require the paired owner and CSRF through local-access middleware; never a tool bearer.",
+      "file_sha256": "4d90033eeb4744bdcddd8c30e57e5c0cc7b4e2ea85d8a578d4c3df720e46682b"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "correct_context",
+      "line": 317,
+      "docstring": "Record an explicit owner correction for the next context, reopening accepted work without starting inference.",
+      "file_sha256": "4d90033eeb4744bdcddd8c30e57e5c0cc7b4e2ea85d8a578d4c3df720e46682b"
+    },
+    {
+      "path": "backend/api/routes/tasks.py",
+      "symbol": "update_task",
+      "line": 177,
+      "docstring": "Edit versioned task inputs; native completion requires a separate owner acceptance.",
+      "file_sha256": "463dcb7dfe4fabfdc2ea2f0d56d472477a569bd7c1ec354c5b97c21a3639901b"
+    },
+    {
+      "path": "backend/api/routes/tasks.py",
+      "symbol": "update_task._update",
+      "line": 213,
+      "docstring": "Version edited inputs atomically and refuse generic lifecycle overrides for native-owned tasks.",
+      "file_sha256": "463dcb7dfe4fabfdc2ea2f0d56d472477a569bd7c1ec354c5b97c21a3639901b"
+    },
+    {
+      "path": "backend/db/result_migration.py",
+      "symbol": "restore_result_schema",
+      "line": 4,
+      "docstring": "Remove unused migration 35 only after all live result authority is closed.\n\nDelivery and acceptance records are historical evidence. Once any exists,\nforward repair or an explicit backup restore is required instead of deletion.",
+      "file_sha256": "54ec40b3f10c7d2c216b5e0a5c7910d31b6a1556ab482d1d9607145ddaaa08ff"
+    },
+    {
+      "path": "backend/flows/research_flow.py",
+      "symbol": "ResearchFlow",
+      "line": 41,
+      "docstring": "Manages a research task through investigation and artifact verification.",
+      "file_sha256": "4db386ca95bf0903ec8796695ffbc7f0fb73aea091e14e35e0f4f744882cbbb5"
+    },
+    {
+      "path": "backend/flows/research_flow.py",
+      "symbol": "ResearchFlow.assign_research",
+      "line": 57,
+      "docstring": "Refuse native-owned tasks before legacy service setup, agent selection or inference.",
+      "file_sha256": "4db386ca95bf0903ec8796695ffbc7f0fb73aea091e14e35e0f4f744882cbbb5"
+    },
+    {
+      "path": "backend/flows/research_review_flow.py",
+      "symbol": "ResearchReviewFlow",
+      "line": 39,
+      "docstring": "Manages peer review for a research task independently.",
+      "file_sha256": "05bf989ed8e9b08f4f7d37a0d315c7a344807d315e14acff0b4cc759f15512b6"
+    },
+    {
+      "path": "backend/flows/research_review_flow.py",
+      "symbol": "ResearchReviewFlow.receive_review_request",
+      "line": 49,
+      "docstring": "Refuse native-owned work before selecting legacy agents, then prepare peer review.",
+      "file_sha256": "05bf989ed8e9b08f4f7d37a0d315c7a344807d315e14acff0b4cc759f15512b6"
+    },
+    {
+      "path": "backend/knowledge/results.py",
+      "symbol": "_check_size",
+      "line": 28,
+      "docstring": "Preflight SQLite byte lengths before loading bounded evidence into Python.\n\nTable, columns and predicate are internal SQL constants; only values come\nfrom callers. Canonical JSON expansion is checked again before persistence.",
+      "file_sha256": "a3fb74a8802ff7e1b09725bebce6bcb1b67f3ae4c294ec4034f8577b77a5b75a"
+    },
+    {
+      "path": "backend/knowledge/results.py",
+      "symbol": "author_scope",
+      "line": 46,
+      "docstring": "Require a real current research author attempt, never a reviewer-looking role name.",
+      "file_sha256": "a3fb74a8802ff7e1b09725bebce6bcb1b67f3ae4c294ec4034f8577b77a5b75a"
+    },
+    {
+      "path": "backend/knowledge/results.py",
+      "symbol": "_run",
+      "line": 78,
+      "docstring": "Read one actual run/attempt scope without inferring a project from its id.",
+      "file_sha256": "a3fb74a8802ff7e1b09725bebce6bcb1b67f3ae4c294ec4034f8577b77a5b75a"
+    },
+    {
+      "path": "backend/knowledge/results.py",
+      "symbol": "_report",
+      "line": 93,
+      "docstring": "Verify selected report bytes and original writer intent before attributing its delivery.",
+      "file_sha256": "a3fb74a8802ff7e1b09725bebce6bcb1b67f3ae4c294ec4034f8577b77a5b75a"
+    },
+    {
+      "path": "backend/knowledge/results.py",
+      "symbol": "snapshot",
+      "line": 190,
+      "docstring": "Capture only selected complete reports and their exact finding/source dependencies within a byte bound.",
+      "file_sha256": "a3fb74a8802ff7e1b09725bebce6bcb1b67f3ae4c294ec4034f8577b77a5b75a"
+    },
+    {
+      "path": "backend/knowledge/results.py",
+      "symbol": "snapshot.bounded",
+      "line": 224,
+      "docstring": "Accumulate complete canonical pieces and fail before retaining an oversized graph.",
+      "file_sha256": "a3fb74a8802ff7e1b09725bebce6bcb1b67f3ae4c294ec4034f8577b77a5b75a"
+    },
+    {
+      "path": "backend/knowledge/results.py",
+      "symbol": "record_proposal",
+      "line": 360,
+      "docstring": "Commit an immutable explicit delivery in the caller's live-author write transaction.",
+      "file_sha256": "a3fb74a8802ff7e1b09725bebce6bcb1b67f3ae4c294ec4034f8577b77a5b75a"
+    },
+    {
+      "path": "backend/knowledge/results.py",
+      "symbol": "result_state",
+      "line": 391,
+      "docstring": "Inspect explicit delivery and eligibility without deriving acceptance from native completion prose.",
+      "file_sha256": "a3fb74a8802ff7e1b09725bebce6bcb1b67f3ae4c294ec4034f8577b77a5b75a"
+    },
+    {
+      "path": "backend/knowledge/results.py",
+      "symbol": "review_gate",
+      "line": 546,
+      "docstring": "Describe actual finding reviews and unresolved limits without certifying the whole report.",
+      "file_sha256": "a3fb74a8802ff7e1b09725bebce6bcb1b67f3ae4c294ec4034f8577b77a5b75a"
+    },
+    {
+      "path": "backend/knowledge/results.py",
+      "symbol": "report_window",
+      "line": 599,
+      "docstring": "Read the frozen delivered report, even when current artifacts have since changed.",
+      "file_sha256": "a3fb74a8802ff7e1b09725bebce6bcb1b67f3ae4c294ec4034f8577b77a5b75a"
+    },
+    {
+      "path": "backend/knowledge/results.py",
+      "symbol": "acceptance_record",
+      "line": 650,
+      "docstring": "Return the immutable original owner receipt, not an assertion of present-day currentness.",
+      "file_sha256": "a3fb74a8802ff7e1b09725bebce6bcb1b67f3ae4c294ec4034f8577b77a5b75a"
+    },
+    {
+      "path": "backend/knowledge/results.py",
+      "symbol": "accept_result",
+      "line": 661,
+      "docstring": "Atomically accept one observed research version by owner action, without publishing or science promotion.",
+      "file_sha256": "a3fb74a8802ff7e1b09725bebce6bcb1b67f3ae4c294ec4034f8577b77a5b75a"
+    },
+    {
+      "path": "backend/research/models.py",
+      "symbol": "ResultDraft",
+      "line": 250,
+      "docstring": "Select actual final reports and attributed limitations; this declaration never accepts a task.",
+      "file_sha256": "27fe3966030c243ab9104d683b9225e9888a98faa9bb0d7b3a94c6bf4f582867"
+    },
+    {
+      "path": "backend/research/models.py",
+      "symbol": "ResultDraft.__post_init__",
+      "line": 257,
+      "docstring": "Refuse ambiguous/oversized selections without inferring final drafts from writer activity.",
+      "file_sha256": "27fe3966030c243ab9104d683b9225e9888a98faa9bb0d7b3a94c6bf4f582867"
+    },
+    {
+      "path": "backend/research/sqlite_store.py",
+      "symbol": "SQLiteResearchStore",
+      "line": 50,
+      "docstring": "Own scoped source/finding/report/wiki transactions, revocable grants and atomic effect receipts.",
+      "file_sha256": "774dba2b62af6bcd9ccdd9e5454d4a7f28f6bf2963e1e942a6ca9f3709e2f277"
+    },
+    {
+      "path": "backend/research/sqlite_store.py",
+      "symbol": "SQLiteResearchStore._permission",
+      "line": 232,
+      "docstring": "Bind each supported mutation to its explicit stored grant capability.",
+      "file_sha256": "774dba2b62af6bcd9ccdd9e5454d4a7f28f6bf2963e1e942a6ca9f3709e2f277"
+    },
+    {
+      "path": "backend/research/sqlite_store.py",
+      "symbol": "SQLiteResearchStore.propose_result",
+      "line": 303,
+      "docstring": "Record selected final reports under the actual live author grant, never accept a task.",
+      "file_sha256": "774dba2b62af6bcd9ccdd9e5454d4a7f28f6bf2963e1e942a6ca9f3709e2f277"
+    },
+    {
+      "path": "backend/runtime/business_definitions.py",
+      "symbol": "definitions",
+      "line": 71,
+      "docstring": "One canonical signature/schema and HTTP mapping for either transport.",
+      "file_sha256": "dfd9b0f413248d5d95619c64603207fecc1cc9a5256e14242f112cadd661c24b"
+    },
+    {
+      "path": "backend/runtime/business_definitions.py",
+      "symbol": "ResearchTools",
+      "line": 120,
+      "docstring": "Translate host-owned business tools to scoped HTTP without owning grants or inference.",
+      "file_sha256": "dfd9b0f413248d5d95619c64603207fecc1cc9a5256e14242f112cadd661c24b"
+    },
+    {
+      "path": "backend/runtime/business_definitions.py",
+      "symbol": "ResearchTools.researcher_result_propose",
+      "line": 424,
+      "docstring": "Explicitly deliver 1\u201320 final reports written by this author attempt. State what the selected work establishes, distinguish evidence from assumptions and list actual limits. Scratch reports are excluded unless selected. Reuse operation_key after uncertain responses. Delivery and native completion do not accept the task, verify user understanding or authorize publication.",
+      "file_sha256": "dfd9b0f413248d5d95619c64603207fecc1cc9a5256e14242f112cadd661c24b"
+    },
+    {
+      "path": "backend/runtime/contracts.py",
+      "symbol": "RunView",
+      "line": 118,
+      "docstring": "Immutable owner projection of one durable run, with optional attributed review metadata.",
+      "file_sha256": "f9c02c18a44fec835e12b776e7152f7260a8ed6c64e8ca5cbbc88f1143d08f59"
+    },
+    {
+      "path": "backend/runtime/lifecycle.py",
+      "symbol": "require_legacy_task",
+      "line": 9,
+      "docstring": "Refuse legacy mutation or inference for a task with any durable native admission.",
+      "file_sha256": "2df20cc724767425ef931addf21849f8cd75f920716b3f6a089b46cda2a73bd6"
+    },
+    {
+      "path": "backend/runtime/lifecycle.py",
+      "symbol": "require_legacy_finding",
+      "line": 27,
+      "docstring": "Protect all findings of an admitted task without guessing provenance from an actor name.",
+      "file_sha256": "2df20cc724767425ef931addf21849f8cd75f920716b3f6a089b46cda2a73bd6"
+    },
+    {
+      "path": "backend/runtime/lifecycle.py",
+      "symbol": "require_legacy_flow",
+      "line": 36,
+      "docstring": "Reject mixed ownership before a legacy flow selects agents or spends a model turn.",
+      "file_sha256": "2df20cc724767425ef931addf21849f8cd75f920716b3f6a089b46cda2a73bd6"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore",
+      "line": 65,
+      "docstring": "Own durable admission, fenced attempts and version-bound review requests in SQLite.",
+      "file_sha256": "2a54a9e97ac2d608a5fe38a8c2c3819e3ac180420e95ebe97866b0816332896b"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore._view",
+      "line": 131,
+      "docstring": "Project stored execution facts without interpreting a review verdict as task acceptance.",
+      "file_sha256": "2a54a9e97ac2d608a5fe38a8c2c3819e3ac180420e95ebe97866b0816332896b"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore.accept_result",
+      "line": 243,
+      "docstring": "Record one owner decision over exact delivered content; no native tool can enter this use case.",
+      "file_sha256": "2a54a9e97ac2d608a5fe38a8c2c3819e3ac180420e95ebe97866b0816332896b"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore.result_state",
+      "line": 259,
+      "docstring": "Inspect a scoped delivered result without accepting it or starting inference.",
+      "file_sha256": "2a54a9e97ac2d608a5fe38a8c2c3819e3ac180420e95ebe97866b0816332896b"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore.result_report",
+      "line": 266,
+      "docstring": "Read one explicitly selected immutable report in an owner-scoped bounded window.",
+      "file_sha256": "2a54a9e97ac2d608a5fe38a8c2c3819e3ac180420e95ebe97866b0816332896b"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore._advance_context",
+      "line": 2053,
+      "docstring": "Advance owner/evidence context and reopen a previously accepted version without erasing history.",
+      "file_sha256": "2a54a9e97ac2d608a5fe38a8c2c3819e3ac180420e95ebe97866b0816332896b"
+    },
+    {
+      "path": "backend/tests/runtime/fake_owned_native.py",
+      "symbol": "next_tool",
+      "line": 44,
+      "docstring": "Advance controlled author or reviewer generation while using the real admitted tool bridge.",
+      "file_sha256": "c9c17e8263b73f2d0c1200e125a34dc5005fce89eb1c9b79b63c52ba2cbc26fd"
+    },
+    {
+      "path": "backend/tests/runtime/test_admission_migration.py",
+      "symbol": "test_version27_receipt_survives_without_an_inferred_binding",
+      "line": 7,
+      "docstring": "A version27 receipt stays historical after upgrades without inventing admission evidence.",
+      "file_sha256": "4d5659266b4e3cd580dc65d493eb3d243ccd3f808df3880d1ee675bb3210ddac"
+    },
+    {
+      "path": "backend/tests/runtime/test_finding_review.py",
+      "symbol": "test_review_schema_can_rollback_without_losing_original_work",
+      "line": 694,
+      "docstring": "An unused additive review schema can be removed and upgraded without id loss.",
+      "file_sha256": "812211265b0f9a295c56a5d4185576b50952a7f68e9c2cd0dc30e09cb9ff2cf8"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_factory.py",
+      "symbol": "test_configured_owned_product_run_persists_draft_and_analysis_receipts",
+      "line": 105,
+      "docstring": "Prove controlled native author delivery and durable analysis receipts through the configured product runtime.",
+      "file_sha256": "e5543eeba7d732f780486f97f50f1f8c2cd9f4151cac2355b6ff19b4e77b2d89"
+    },
+    {
+      "path": "backend/tests/runtime/test_question_migration.py",
+      "symbol": "version23",
+      "line": 9,
+      "docstring": "Build a version23 fixture without newer rebuilds changing the migration under test.",
+      "file_sha256": "da7e8f5a923d7253bbcae8eac609ab08cda79a2de9e0332481e190af034893b5"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_acceptance.py",
+      "symbol": "make_active_result",
+      "line": 6,
+      "docstring": "Write real scoped report/evidence under one live independently admitted author attempt.",
+      "file_sha256": "25af7c51cea4922d32bf58090ed5aa9a937e23bc9456d827a6ff913f4ed6ae8b"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_acceptance.py",
+      "symbol": "active_result",
+      "line": 61,
+      "docstring": "Provide one real live author and its evidence-backed draft.",
+      "file_sha256": "25af7c51cea4922d32bf58090ed5aa9a937e23bc9456d827a6ff913f4ed6ae8b"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_acceptance.py",
+      "symbol": "test_result_proposal_selects_actual_deliverables_and_never_completes_task",
+      "line": 66,
+      "docstring": "A typed selection is independent of scratch writes, model completion text and scientific validation.",
+      "file_sha256": "25af7c51cea4922d32bf58090ed5aa9a937e23bc9456d827a6ff913f4ed6ae8b"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_acceptance.py",
+      "symbol": "test_completed_turn_without_delivery_does_not_invent_a_candidate",
+      "line": 113,
+      "docstring": "Written scratch reports and persuasive prose alone do not prove a selected final result.",
+      "file_sha256": "25af7c51cea4922d32bf58090ed5aa9a937e23bc9456d827a6ff913f4ed6ae8b"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_acceptance.py",
+      "symbol": "delivered_result",
+      "line": 131,
+      "docstring": "Finish an explicit versioned delivery without making an owner decision.",
+      "file_sha256": "25af7c51cea4922d32bf58090ed5aa9a937e23bc9456d827a6ff913f4ed6ae8b"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_acceptance.py",
+      "symbol": "accept",
+      "line": 151,
+      "docstring": "Send exactly the observed candidate/context/review identity to the trusted owner use case.",
+      "file_sha256": "25af7c51cea4922d32bf58090ed5aa9a937e23bc9456d827a6ff913f4ed6ae8b"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_acceptance.py",
+      "symbol": "make_accepted_result",
+      "line": 174,
+      "docstring": "Complete a real synthetic native research task through delivery, closure and an explicit owner decision.",
+      "file_sha256": "25af7c51cea4922d32bf58090ed5aa9a937e23bc9456d827a6ff913f4ed6ae8b"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_acceptance.py",
+      "symbol": "test_owner_acceptance_is_distinct_idempotent_and_does_not_publish",
+      "line": 193,
+      "docstring": "An explicit owner action completes one version, without promoting claims or report publication.",
+      "file_sha256": "25af7c51cea4922d32bf58090ed5aa9a937e23bc9456d827a6ff913f4ed6ae8b"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_acceptance.py",
+      "symbol": "test_missing_independent_review_requires_explicit_owner_acknowledgement",
+      "line": 222,
+      "docstring": "No recorded reviewer is not converted into implied scientific or human verification.",
+      "file_sha256": "25af7c51cea4922d32bf58090ed5aa9a937e23bc9456d827a6ff913f4ed6ae8b"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_acceptance.py",
+      "symbol": "test_changed_delivery_cannot_be_accepted_by_reusing_old_observation",
+      "line": 240,
+      "docstring": "The owner cannot accidentally accept a different report/source/context with an old button.",
+      "file_sha256": "25af7c51cea4922d32bf58090ed5aa9a937e23bc9456d827a6ff913f4ed6ae8b"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_acceptance.py",
+      "symbol": "test_owner_operation_keys_are_scoped_to_the_task",
+      "line": 279,
+      "docstring": "Different tasks can recover their own owner receipt using the same local action key.",
+      "file_sha256": "25af7c51cea4922d32bf58090ed5aa9a937e23bc9456d827a6ff913f4ed6ae8b"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_acceptance.py",
+      "symbol": "test_retry_after_context_change_returns_history_without_recompleting_task",
+      "line": 298,
+      "docstring": "A lost-response retry recovers its old decision, not authority over a corrected task.",
+      "file_sha256": "25af7c51cea4922d32bf58090ed5aa9a937e23bc9456d827a6ff913f4ed6ae8b"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_acceptance.py",
+      "symbol": "test_complete_source_bytes_are_bounded_before_delivery",
+      "line": 315,
+      "docstring": "Large mutated legacy evidence cannot disappear behind a small metadata-only candidate.",
+      "file_sha256": "25af7c51cea4922d32bf58090ed5aa9a937e23bc9456d827a6ff913f4ed6ae8b"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_acceptance.py",
+      "symbol": "test_delivery_freezes_complete_evidence_and_latest_explicit_selection",
+      "line": 340,
+      "docstring": "Old receipt replay cannot replace the current explicitly delivered immutable candidate.",
+      "file_sha256": "25af7c51cea4922d32bf58090ed5aa9a937e23bc9456d827a6ff913f4ed6ae8b"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_acceptance.py",
+      "symbol": "test_author_delivery_tool_crosses_actual_catalog_http_and_bound_grant",
+      "line": 378,
+      "docstring": "The new author capability uses the real transport and is absent from reviewer catalogs.",
+      "file_sha256": "25af7c51cea4922d32bf58090ed5aa9a937e23bc9456d827a6ff913f4ed6ae8b"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_acceptance.py",
+      "symbol": "test_owner_api_scopes_frozen_delivery_and_requires_owner_csrf",
+      "line": 435,
+      "docstring": "A frozen report remains inspectable after drift; tool bearers cannot accept on the owner's behalf.",
+      "file_sha256": "25af7c51cea4922d32bf58090ed5aa9a937e23bc9456d827a6ff913f4ed6ae8b"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_acceptance.py",
+      "symbol": "test_managed_task_cannot_be_completed_by_legacy_sql",
+      "line": 503,
+      "docstring": "Legacy helpers cannot skip the explicit owner action even if a model emits VALIDATED.",
+      "file_sha256": "25af7c51cea4922d32bf58090ed5aa9a937e23bc9456d827a6ff913f4ed6ae8b"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_acceptance.py",
+      "symbol": "test_changing_accepted_inputs_reopens_task_and_preserves_original_decision",
+      "line": 514,
+      "docstring": "New task requirements cannot inherit completion from the previous accepted version.",
+      "file_sha256": "25af7c51cea4922d32bf58090ed5aa9a937e23bc9456d827a6ff913f4ed6ae8b"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_acceptance.py",
+      "symbol": "test_owner_correction_reopens_accepted_task_once_without_repeating_work",
+      "line": 550,
+      "docstring": "A correction advances shared context and preserves the historic owner decision on retry.",
+      "file_sha256": "25af7c51cea4922d32bf58090ed5aa9a937e23bc9456d827a6ff913f4ed6ae8b"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_acceptance.py",
+      "symbol": "test_legacy_flags_cannot_promote_or_reject_managed_findings",
+      "line": 576,
+      "docstring": "Structured review assertions must not be bypassed by old mutable validation flags.",
+      "file_sha256": "25af7c51cea4922d32bf58090ed5aa9a937e23bc9456d827a6ff913f4ed6ae8b"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_acceptance.py",
+      "symbol": "test_legacy_author_flow_refuses_native_ownership_before_agent_selection",
+      "line": 590,
+      "docstring": "An admitted native task cannot also start the retained research inference loop.",
+      "file_sha256": "25af7c51cea4922d32bf58090ed5aa9a937e23bc9456d827a6ff913f4ed6ae8b"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_migration.py",
+      "symbol": "test_unused_result_schema_rolls_back_and_reapplies_without_losing_tasks",
+      "line": 6,
+      "docstring": "Only unused storage can be removed; original task data and owner tables survive.",
+      "file_sha256": "e783bebd51a71e3b04cf2b8dd9d17135bf509677e21b2b1e6769c4173662a6df"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_migration.py",
+      "symbol": "test_result_downgrade_refuses_live_authority_or_historical_delivery",
+      "line": 41,
+      "docstring": "A downgrade cannot erase a delivery or remove a capability while its authority remains live.",
+      "file_sha256": "e783bebd51a71e3b04cf2b8dd9d17135bf509677e21b2b1e6769c4173662a6df"
+    },
+    {
+      "path": "backend/tests/runtime/test_run_conversation.py",
+      "symbol": "test_task_execution_history_is_visible_after_task_completion",
+      "line": 165,
+      "docstring": "Keep scoped owner history readable after actual versioned delivery and owner acceptance.",
+      "file_sha256": "f5168c3fbf9c8eb9adcb95b930f219a25f407f100052acd96a520d3c3df7fe4a"
+    },
+    {
+      "path": "backend/tests/runtime/test_run_input_migration.py",
+      "symbol": "test_version29_dispatch_remains_unknown_after_repeatable_upgrade",
+      "line": 7,
+      "docstring": "Retain unknown input on a version29 dispatch across repeatable upgrades.",
+      "file_sha256": "e0c8ef82c63d8973c7243cd03ec02bb43e1e53e7968625e2f28eced0bfec4f80"
+    },
+    {
+      "path": "backend/tests/runtime/test_task_inputs_migration.py",
+      "symbol": "test_version28_migration_preserves_rows_and_only_records_future_edits",
+      "line": 9,
+      "docstring": "Preserve version28 rows and record only future edits after upgrading.",
+      "file_sha256": "4bd05f80c8f654e2b4168367a82ff6759bcea77d192caf6d1de8d5d6adbed5a1"
+    },
+    {
+      "path": "backend/tests/runtime/test_workspace_delivery.py",
+      "symbol": "test_owner_can_inspect_sources_and_closed_task_runs_without_runtime_config",
+      "line": 119,
+      "docstring": "Inspect original sources and accepted native history without configuration or newly minted tool authority.",
+      "file_sha256": "4d7546102cf171297f5dd48a67f20b328f408a2ff82e2a2adb60a9cc5d19b0a8"
+    },
+    {
+      "path": "backend/tools/base/db.py",
+      "symbol": "ensure_migrations",
+      "line": 111,
+      "docstring": "Run pending schema migrations for existing databases.\n\nChecks the ``schema_migrations`` table and applies any missing\nmigrations. Safe to call multiple times. Serving requires an already\ninitialized file; explicit installation/legacy callers may create one.",
+      "file_sha256": "8a9d0d3cc8fc914efaaaf3da9ac3fb86a64bb7ce69741fb9bdc3ca1d3fea9b9e"
+    },
+    {
+      "path": "backend/tools/knowledge/reject_finding.py",
+      "symbol": "RejectFindingTool",
+      "line": 17,
+      "docstring": "Retained legacy rejection adapter; native-owned findings require independent versioned review.",
+      "file_sha256": "f3cab865528ca04d2531004ce2400a8ac082e4d52e9c23235800267ea26800ed"
+    },
+    {
+      "path": "backend/tools/knowledge/reject_finding.py",
+      "symbol": "RejectFindingTool._run",
+      "line": 26,
+      "docstring": "Record legacy rejection only after checking that native runtime does not own the task.",
+      "file_sha256": "f3cab865528ca04d2531004ce2400a8ac082e4d52e9c23235800267ea26800ed"
+    },
+    {
+      "path": "backend/tools/knowledge/reject_finding.py",
+      "symbol": "RejectFindingTool._run._reject",
+      "line": 30,
+      "docstring": "Preserve native ownership before any legacy state or scientific status mutation.",
+      "file_sha256": "f3cab865528ca04d2531004ce2400a8ac082e4d52e9c23235800267ea26800ed"
+    },
+    {
+      "path": "backend/tools/knowledge/validate_finding.py",
+      "symbol": "ValidateFindingTool",
+      "line": 23,
+      "docstring": "Retained legacy validation adapter; native-owned findings cannot be promoted through mutable flags.",
+      "file_sha256": "c45b282c546c68fdccc2cf5d418bcd811f4bd9057229191c3b268c037a37d63c"
+    },
+    {
+      "path": "backend/tools/knowledge/validate_finding.py",
+      "symbol": "ValidateFindingTool._run",
+      "line": 32,
+      "docstring": "Apply legacy validation only to findings outside native-owned task lifecycles.",
+      "file_sha256": "c45b282c546c68fdccc2cf5d418bcd811f4bd9057229191c3b268c037a37d63c"
+    },
+    {
+      "path": "backend/tools/knowledge/validate_finding.py",
+      "symbol": "ValidateFindingTool._run._validate",
+      "line": 41,
+      "docstring": "Preserve native ownership before any legacy state or scientific status mutation.",
+      "file_sha256": "c45b282c546c68fdccc2cf5d418bcd811f4bd9057229191c3b268c037a37d63c"
+    },
+    {
+      "path": "backend/tools/task/approve_task.py",
+      "symbol": "ApproveTaskTool",
+      "line": 19,
+      "docstring": "Approve legacy tasks while preserving explicit owner acceptance for native-owned work.",
+      "file_sha256": "38649bbdc8afbc495553012687d21cee62e2e22317bed7b339a0447f210880e6"
+    },
+    {
+      "path": "backend/tools/task/approve_task.py",
+      "symbol": "ApproveTaskTool._run",
+      "line": 28,
+      "docstring": "Apply a legacy reviewer approval only when no native admission owns this task.",
+      "file_sha256": "38649bbdc8afbc495553012687d21cee62e2e22317bed7b339a0447f210880e6"
+    },
+    {
+      "path": "backend/tools/task/approve_task.py",
+      "symbol": "ApproveTaskTool._run._approve",
+      "line": 32,
+      "docstring": "Preserve native ownership before any legacy state or scientific status mutation.",
+      "file_sha256": "38649bbdc8afbc495553012687d21cee62e2e22317bed7b339a0447f210880e6"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

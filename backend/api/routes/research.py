@@ -15,6 +15,7 @@ from backend.api.models.research import (
     CaptureWikiCollection,
     FindingDetail,
     FindingReceipt,
+    ProposeResult,
     RecordFinding,
     RecordReview,
     ReportReceipt,
@@ -34,6 +35,7 @@ from backend.research.models import (
     ResearchForbidden,
     ResearchInputError,
     ResearchNotFound,
+    ResultDraft,
     ReviewCheck,
     ReviewDecision,
     SourceTooLarge,
@@ -75,6 +77,17 @@ async def record_review(command: RecordReview, ctx: Context):
     )
     return await asyncio.to_thread(
         ctx.store.record_review, ctx.scope, command.operation_key, draft
+    )
+
+
+@router.post("/result-proposals", status_code=201)
+async def propose_result(command: ProposeResult, ctx: Context):
+    """Freeze only an actual admitted author's selected report and evidence versions."""
+    draft = ResultDraft(
+        tuple(command.report_ids), command.summary, tuple(command.limitations)
+    )
+    return await asyncio.to_thread(
+        ctx.store.propose_result, ctx.scope, command.operation_key, draft
     )
 
 

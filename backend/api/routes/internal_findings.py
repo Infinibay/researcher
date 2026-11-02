@@ -138,6 +138,10 @@ async def validate_finding(finding_id: int, req: ValidateFindingRequest):
     """Validate a provisional finding, changing status to active."""
 
     def _validate(conn: sqlite3.Connection) -> dict:
+        """Preserve native ownership before any legacy state or scientific status mutation."""
+        from backend.runtime.lifecycle import require_legacy_finding
+
+        require_legacy_finding(conn, finding_id)
         row = conn.execute(
             "SELECT id, status, topic FROM findings WHERE id = ?",
             (finding_id,),
@@ -173,6 +177,10 @@ async def reject_finding(finding_id: int, req: RejectFindingRequest):
     """Reject a finding, changing status to superseded."""
 
     def _reject(conn: sqlite3.Connection) -> dict:
+        """Preserve native ownership before any legacy state or scientific status mutation."""
+        from backend.runtime.lifecycle import require_legacy_finding
+
+        require_legacy_finding(conn, finding_id)
         row = conn.execute(
             "SELECT id, status, topic FROM findings WHERE id = ?",
             (finding_id,),

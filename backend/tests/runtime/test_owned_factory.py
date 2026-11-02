@@ -105,6 +105,7 @@ def owned_config(
 async def test_configured_owned_product_run_persists_draft_and_analysis_receipts(
     owned_config,
 ):
+    """Prove controlled native author delivery and durable analysis receipts through the configured product runtime."""
     from backend.api.main import create_app
     from backend.api.runtime_dependencies import configured_runtime
 
@@ -124,6 +125,11 @@ async def test_configured_owned_product_run_persists_draft_and_analysis_receipts
                 for p in c.s.control.glob("native-state/*/home/fixture-progress.json")
             ],
         )
+        delivery = runtime.store.result_state(101, run.run_id)
+        assert delivery["eligible"] is True
+        assert delivery["candidate"]["kind"] == "research_reports"
+        assert delivery["candidate"]["reports"][0]["title"] == "Fixture inspection"
+        assert delivery["acceptance"] is None
         with runtime.store._transaction() as db:
             assert (
                 db.execute(

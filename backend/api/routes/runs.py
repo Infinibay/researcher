@@ -118,6 +118,64 @@ class StartFindingReview(BaseModel):
     )
 
 
+class AcceptResult(BaseModel):
+    """Bind an owner action to exactly the displayed candidate, context and review state."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    operation_key: str = Field(
+        min_length=1, max_length=128, pattern=r"^[A-Za-z0-9_.:-]+$"
+    )
+    candidate_id: int = Field(gt=0)
+    candidate_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    context_version: int = Field(gt=0)
+    review_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    acknowledge_limits: bool
+    note: str | None = Field(default=None, min_length=1, max_length=4000)
+
+
+@router.get("/{project_id}/runs/{run_id}/result")
+async def result_state(project_id: int, run_id: str, request: Request):
+    """Inspect explicit delivery, actual review limits and distinct original owner acceptance."""
+    data = await asyncio.to_thread(read_store(request).result_state, project_id, run_id)
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
+@router.get(
+    "/{project_id}/runs/{run_id}/result/candidates/{candidate_id}/reports/{report_id}"
+)
+async def result_report(
+    project_id: int,
+    run_id: str,
+    candidate_id: int,
+    report_id: int,
+    request: Request,
+    offset: int = Query(0, ge=0),
+    max_chars: int = Query(12000, ge=1, le=20000),
+):
+    """Page the selected frozen report instead of silently substituting its present-day artifact."""
+    data = await asyncio.to_thread(
+        read_store(request).result_report,
+        project_id,
+        run_id,
+        candidate_id,
+        report_id,
+        offset=offset,
+        max_chars=max_chars,
+    )
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
+@router.post("/{project_id}/runs/{run_id}/result/accept")
+async def accept_result(
+    project_id: int, run_id: str, body: AcceptResult, request: Request
+):
+    """Require the paired owner and CSRF through local-access middleware; never a tool bearer."""
+    data = await asyncio.to_thread(
+        read_store(request).accept_result, project_id, run_id, **body.model_dump()
+    )
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
 @router.get("/{project_id}/findings/{finding_id}/review-state")
 async def finding_review_state(
     project_id: int,
@@ -261,15 +319,23 @@ async def correct_context(
 ):
     # Deterministic source identity preserves retry intent. This labels origin,
     # not truth, understanding, or application inside an already-running turn.
-    version = await service(request).correct(
-        project_id=project_id,
-        task_id=task_id,
-        expected_version=body.expected_version,
-        operation_key=body.operation_key,
-        statement=body.statement,
-        source_kind=body.source_kind,
-        source_reference="owner-correction:" + body.operation_key,
+    """Record an explicit owner correction for the next context, reopening accepted work without starting inference."""
+    command = {
+        "project_id": project_id,
+        "task_id": task_id,
+        "expected_version": body.expected_version,
+        "operation_key": body.operation_key,
+        "statement": body.statement,
+        "source_kind": body.source_kind,
+        "source_reference": "owner-correction:" + body.operation_key,
+    }
+    runtime = request.app.state.runtime_service
+    version = (
+        (await runtime.correct(**command))
+        if runtime is not None
+        else await asyncio.to_thread(read_store(request).correct_context, **command)
     )
+
     return {
         "context_version": version,
         "application": "recorded_for_next_run",

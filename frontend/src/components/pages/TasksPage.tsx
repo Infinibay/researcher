@@ -127,6 +127,7 @@ function ProjectTaskWorkbench({ projectId }: { projectId: number }) {
     <div className="task-workbench" data-has-selection={selectedTaskId != null}>
       {returnArtifactId && <nav className="task-report-return" aria-label="Regreso al informe"><Link to={`/reports?project=${projectId}&artifact=${returnArtifactId}`}>Volver al informe</Link></nav>}
       {foreignLink && <p className="task-error" role="status">Este enlace corresponde a otro proyecto. Elige ese proyecto o una tarea de la lista actual.</p>}
+      {selectedTaskId != null && <h1 className="sr-only min-[701px]:hidden">Tareas</h1>}
       <div className="task-page-heading">
         <div><p className="task-eyebrow">ESPACIO DE TRABAJO</p><h1>Tareas</h1><p className="task-page-description">Selecciona una tarea para revisar la evidencia, corregir el contexto o iniciar trabajo.</p></div>
         <div className="flex gap-2">

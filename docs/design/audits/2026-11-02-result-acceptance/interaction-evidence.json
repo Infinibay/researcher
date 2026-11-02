@@ -1,0 +1,173 @@
+{
+  "result": "passed",
+  "states": [
+    {
+      "name": "desktop-before-decision",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-02-result-acceptance/desktop-before-decision.png",
+      "sha256": "4a26e856c74beee310861f99762ede48f5b1c9a0f8df0c1fe2575b3c71686f17"
+    },
+    {
+      "name": "desktop-frozen-report",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-02-result-acceptance/desktop-frozen-report.png",
+      "sha256": "c271cba314748d338f234040ef7d6ff5fe89351ec2dc44c76a9b9a6912332b8c"
+    },
+    {
+      "name": "mobile-delivery",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-02-result-acceptance/mobile-delivery.png",
+      "sha256": "bba8599f2cd84f34713b9154a4d38bcf8e3093bc450c4db4a25b5e98b334f78d"
+    },
+    {
+      "name": "narrow-delivery",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "layout": {
+        "width": 320,
+        "scroll": 320
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-02-result-acceptance/narrow-delivery.png",
+      "sha256": "ad55cf7bbed2d241b5ec7ed384b3aa3004bc6f8488de72dc8e99a8bf527dfc23"
+    },
+    {
+      "name": "desktop-pending-receipt-reloaded",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-02-result-acceptance/desktop-pending-receipt-reloaded.png",
+      "sha256": "e38b2e6371c35a0ab2ba63d0fe015241e9d47ba6f0b385a9d6a891d1ce87ba2e"
+    },
+    {
+      "name": "desktop-accepted",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-02-result-acceptance/desktop-accepted.png",
+      "sha256": "3a39013c1f699351712dff2bcdbb075472e1a95810e270ae53774212c6094c4d"
+    },
+    {
+      "name": "desktop-reopened-history",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-02-result-acceptance/desktop-reopened-history.png",
+      "sha256": "2dff338306549a591709ca0454ed2eb47022e4dca33d43e4fcf92ecf69009a2f"
+    },
+    {
+      "name": "desktop-final-work-controls",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-02-result-acceptance/desktop-final-work-controls.png",
+      "sha256": "57b61ba04c073cf984e60c6aa8cf45f5cef2fa86badfe4a5f8063a83334730a1"
+    },
+    {
+      "name": "mobile-final-work-controls",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-02-result-acceptance/mobile-final-work-controls.png",
+      "sha256": "55b87f695dfbb53e887594a96fabc1e71d491ed03402b82dd2ae49343e5c5720"
+    },
+    {
+      "name": "narrow-final-work-controls",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "layout": {
+        "width": 320,
+        "scroll": 320
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-02-result-acceptance/narrow-final-work-controls.png",
+      "sha256": "61535041965e97259fbeb2378fbe9d66251c0b047c1d590c8da96892ab787151"
+    }
+  ],
+  "actions": [
+    "Lost acceptance response -> reload -> explicit identical-packet retry -> exactly one owner receipt",
+    "Lost correction response -> reload -> identical retry -> one context advance, reopened task, original acceptance retained, no model restart",
+    "Final frontend: scoped native task status selector disabled with a visible route to explicit work controls; accepted history and correction remain readable at 1440/390/320",
+    "Actual Alpha -> Beta -> Alpha project-picker navigation while a correction response is lost: foreign project exposes no original control; returning recovers byte-equivalent original context-2 packet, with exactly one advance to context3"
+  ],
+  "errors": [],
+  "model_turns": 0,
+  "fixture": "Real owner APIs/stores with synthetic evidence; no generated model turn",
+  "database": {
+    "acceptances": 1,
+    "context": 2,
+    "task_status": "pending",
+    "finding": [
+      "provisional",
+      null
+    ],
+    "report": "draft"
+  },
+  "final_frontend_index_sha256": "61e05709f82194652f30aa31b5d70ccecb8e76aa36e5f90dbbeea3325638a79c",
+  "project_switch_retry": {
+    "post_count": 2,
+    "identical_packets": true,
+    "original_context": 2,
+    "final_context": 3,
+    "foreign_project_exposed_control": false,
+    "model_turns": 0
+  }
+}

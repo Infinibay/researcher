@@ -62,3 +62,9 @@ test('missing input history stays unknown and a new conversation is an explicit 
   assert.match(html,/Iniciar sin los mensajes anteriores/)
   assert.match(html,/type="checkbox"/)
 })
+
+test('native task lifecycle uses explicit work controls instead of a generic done selector',()=>{
+ const html=renderTask()
+ assert.match(html,/<select[^>]*aria-label="Estado de la tarea"[^>]*disabled=""/)
+ assert.match(html,/El estado se controla desde la pestaña Trabajo/)
+})

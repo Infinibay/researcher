@@ -382,6 +382,12 @@ def ensure_migrations(db_path: str | None = None, *, existing_only: bool = False
             resource = Path(__file__).resolve().parents[2] / "db/review_schema.sql"
             apply_sql_resource(conn, resource)
             logger.info("Migration 34: immutable version-bound finding reviews")
+        if 35 not in applied:
+            from backend.db.migrations import apply_sql_resource
+
+            resource = Path(__file__).resolve().parents[2] / "db/result_schema.sql"
+            apply_sql_resource(conn, resource)
+            logger.info("Migration 35: explicit research delivery and owner acceptance")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()

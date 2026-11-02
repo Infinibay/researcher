@@ -47,12 +47,15 @@ class ResearchReviewFlow(Flow[ResearchReviewState]):
 
     @start()
     def receive_review_request(self):
-        """Load task details and prepare for peer review."""
+        """Refuse native-owned work before selecting legacy agents, then prepare peer review."""
         logger.info(
             "ResearchReviewFlow: receive_review_request (task_id=%d)",
             self.state.task_id,
         )
 
+        from backend.runtime.lifecycle import require_legacy_flow
+
+        require_legacy_flow(self.state.task_id)
         task = get_task_by_id(self.state.task_id)
         if task is None:
             logger.error("Task %d not found", self.state.task_id)

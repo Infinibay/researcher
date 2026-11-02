@@ -238,6 +238,7 @@ class SQLiteResearchStore:
             "question.ask": "questions.ask",
             "wiki.write": "wiki.write",
             "review.record": "findings.review",
+            "result.propose": "results.propose",
         }[kind]
 
     @staticmethod
@@ -298,6 +299,19 @@ class SQLiteResearchStore:
                 ),
             )
             return result
+
+    def propose_result(self, scope, key, draft):
+        """Record selected final reports under the actual live author grant, never accept a task."""
+        from backend.knowledge.results import record_proposal
+
+        intent = {"producer_grant_id": scope.grant_id, "draft": asdict(draft)}
+        return self._write(
+            scope,
+            key,
+            "result.propose",
+            intent,
+            lambda conn: record_proposal(conn, scope, draft, now=self.clock()),
+        )
 
     def read_reviews(
         self,

@@ -1,3 +1,4 @@
+/** Project-scoped task workbench, original native attempts, delivered results and explicit owner corrections. @module */
 import { useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import { useQuery } from '@tanstack/react-query'
@@ -8,6 +9,7 @@ import { MarkdownRenderer } from '../common/MarkdownRenderer'
 import { TaskInputHistory } from './TaskInputHistory'
 import { RunInputRecord } from './RunInputRecord'
 import { RunCommands } from './RunCommands'
+import { TaskResults } from './ResultDelivery'
 
 const inputClass = 'w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] focus:outline-none focus:ring-2 focus:ring-[var(--work-accent)]'
 const buttonClass = 'rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50'
@@ -114,6 +116,7 @@ function SourceReader({ projectId, sourceId }: { projectId: number; sourceId: nu
   </section>
 }
 
+/** Keep execution controls and author delivery selection bound to the observed project and task. */
 export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onConversation, conversation, showProposal = true }: {
   projectId: number; taskId: number; conversationThreadId?: string; onConversation?: (threadId: string) => void; conversation?: ReactNode; showProposal?: boolean
 }) {
@@ -194,6 +197,7 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
     {data.questions.map(question => <QuestionCard key={`${projectId}:${taskId}:${question.request_id}`} projectId={projectId} taskId={taskId} question={question} />)}
     {current && ['reconciling', 'cancelling'].includes(current.status) && <RecoveryCard key={`${projectId}:${current.run_id}`} projectId={projectId} taskId={taskId} runId={current.run_id} />}
     {current && <RunCommands projectId={projectId} runId={current.run_id} />}
+    <TaskResults key={`${projectId}:${taskId}`} projectId={projectId} taskId={taskId} runs={data.runs} contextVersion={data.context.context_version} />
     {showProposal && current?.result && <section className="task-proposal space-y-2 rounded-md border border-[var(--work-line)] p-3" aria-label="Propuesta del agente">
       <h4 className="font-medium text-[var(--work-ink)]">{current.status === 'needs_review' ? 'Propuesta' : 'Resultado conservado'}</h4>
       <MarkdownRenderer content={current.result.summary} />

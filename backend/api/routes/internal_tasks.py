@@ -38,6 +38,10 @@ async def approve_task(task_id: int, req: TaskApproveRequest):
     """Approve a task in review_ready status, moving it to done."""
 
     def _approve(conn: sqlite3.Connection) -> dict:
+        """Preserve native ownership before any legacy state or scientific status mutation."""
+        from backend.runtime.lifecycle import require_legacy_task
+
+        require_legacy_task(conn, task_id)
         row = conn.execute(
             "SELECT id, status, title, assigned_to FROM tasks WHERE id = ?",
             (task_id,),

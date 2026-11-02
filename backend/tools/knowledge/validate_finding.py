@@ -21,6 +21,7 @@ class ValidateFindingInput(BaseModel):
 
 
 class ValidateFindingTool(InfinibayBaseTool):
+    """Retained legacy validation adapter; native-owned findings cannot be promoted through mutable flags."""
     name: str = "validate_finding"
     description: str = (
         "Validate a research finding, changing its status from "
@@ -34,9 +35,14 @@ class ValidateFindingTool(InfinibayBaseTool):
         validation_method: str | None = None,
         reproducibility_score: float | None = None,
     ) -> str:
+        """Apply legacy validation only to findings outside native-owned task lifecycles."""
         agent_id = self._validate_agent_context()
 
         def _validate(conn: sqlite3.Connection) -> dict:
+            """Preserve native ownership before any legacy state or scientific status mutation."""
+            from backend.runtime.lifecycle import require_legacy_finding
+
+            require_legacy_finding(conn, finding_id)
             row = conn.execute(
                 "SELECT id, topic, status FROM findings WHERE id = ?",
                 (finding_id,),

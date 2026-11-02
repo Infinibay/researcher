@@ -15,6 +15,7 @@ class RejectFindingInput(BaseModel):
 
 
 class RejectFindingTool(InfinibayBaseTool):
+    """Retained legacy rejection adapter; native-owned findings require independent versioned review."""
     name: str = "reject_finding"
     description: str = (
         "Reject a research finding, changing its status to 'superseded'. "
@@ -23,9 +24,14 @@ class RejectFindingTool(InfinibayBaseTool):
     args_schema: Type[BaseModel] = RejectFindingInput
 
     def _run(self, finding_id: int, reason: str) -> str:
+        """Record legacy rejection only after checking that native runtime does not own the task."""
         agent_id = self._validate_agent_context()
 
         def _reject(conn: sqlite3.Connection) -> dict:
+            """Preserve native ownership before any legacy state or scientific status mutation."""
+            from backend.runtime.lifecycle import require_legacy_finding
+
+            require_legacy_finding(conn, finding_id)
             row = conn.execute(
                 "SELECT id, topic, status FROM findings WHERE id = ?",
                 (finding_id,),

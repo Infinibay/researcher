@@ -119,7 +119,9 @@ async def test_questions_are_scoped_typed_and_cannot_use_legacy_response(
 async def test_owner_can_inspect_sources_and_closed_task_runs_without_runtime_config(
     coordination, workspace_app
 ):
+    """Inspect original sources and accepted native history without configuration or newly minted tool authority."""
     from backend.research.models import SourceDraft
+    from backend.tests.runtime.test_result_acceptance import make_accepted_result
 
     c = coordination
     token = c.research.issue_grant(
@@ -137,10 +139,7 @@ async def test_owner_can_inspect_sources_and_closed_task_runs_without_runtime_co
         ),
         intent={"reference_id": 1},
     )
-    run = c.store.admit(c.spec)
-    c.store.cancel(101, run.run_id)
-    c.conn.execute("UPDATE tasks SET status='done' WHERE id=1001")
-    c.conn.commit()
+    _, run = make_accepted_result(c)
     async with workspace_app.router.lifespan_context(workspace_app):
         async with httpx.AsyncClient(
             transport=httpx.ASGITransport(app=workspace_app),

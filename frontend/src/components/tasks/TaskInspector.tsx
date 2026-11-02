@@ -1,6 +1,9 @@
 /** Project-scoped task details, context correction and execution controls. @module */
 
 import { useState, useEffect, useRef } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { taskWorkspace } from '../../api/runtime'
+import type { TaskWorkspace } from '../../api/runtime'
 import { useTask, useTaskComments, useAddTaskComment, useUpdateTask, useTaskDependencies, useSetTaskDependencies, useTasks } from '../../hooks/useTasks'
 import { useProjectStore } from '../../stores/project'
 import { taskStatusLabels } from './TaskQueue'
@@ -24,6 +27,12 @@ export function TaskInspector({
   const { data: comments } = useTaskComments(taskId)
   const { data: dependencies } = useTaskDependencies(taskId)
   const { data: allTasks } = useTasks(projectId)
+  // Subscribe to the workbench's scoped read without creating a second polling request.
+  const workspace = useQuery<TaskWorkspace>({queryKey:['task-workspace',projectId,taskId],queryFn:()=>{if(projectId==null) throw new Error('Selecciona un proyecto antes de consultar la tarea.');return taskWorkspace(projectId,taskId)},enabled:false})
+  const scopedWorkspace = workspace.data?.project_id === projectId && workspace.data?.task_id === taskId
+  const nativeOwned = !!scopedWorkspace && !!workspace.data?.runs.length
+  const lifecycleEditable = !!scopedWorkspace && !workspace.isError && !nativeOwned
+
   const addComment = useAddTaskComment()
   const updateTask = useUpdateTask()
   const setDependencies = useSetTaskDependencies()
@@ -51,7 +60,7 @@ export function TaskInspector({
   }
 
   const handleStatusChange = (status: string) => {
-    updateTask.mutate({ id: taskId, status })
+    if (lifecycleEditable) updateTask.mutate({ id: taskId, status })
   }
 
   const saveTitle = () => {
@@ -82,7 +91,7 @@ export function TaskInspector({
                     aria-label="Estado de la tarea"
                     value={task.status}
                     onChange={(e) => handleStatusChange(e.target.value)}
-                    disabled={updateTask.isPending}
+                    disabled={!lifecycleEditable || updateTask.isPending}
                     className={`cursor-pointer rounded-full border-none px-2 py-0.5 text-xs font-medium focus:outline-none focus:ring-1 focus:ring-[var(--work-accent)] task-status`}
                   >
                     {taskStatuses.map((s) => (
@@ -93,6 +102,7 @@ export function TaskInspector({
                   </select>
                   <span className="task-status">{task.type === 'research' ? 'Investigación' : task.type}</span>
                 </div>
+                {nativeOwned && <p className="mt-2 text-xs text-[var(--work-muted)]">El estado se controla desde la pestaña Trabajo.</p>}
                 {editingTitle ? (
                   <div className="mt-1 flex items-center gap-2">
                     <h2 id={`task-title-${taskId}`} className="sr-only">Editar tarea: {task.title}</h2>
@@ -265,7 +275,7 @@ export function TaskInspector({
                       {taskStatuses.map((s) => (
                         <button
                           key={s}
-                          disabled={s === task.status || updateTask.isPending}
+                          disabled={!lifecycleEditable || s === task.status || updateTask.isPending}
                           onClick={() => handleStatusChange(s)}
                           className={`rounded-full px-2 py-0.5 text-xs font-medium disabled:opacity-30 task-status`}
                         >

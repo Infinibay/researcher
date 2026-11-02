@@ -163,11 +163,10 @@ def test_late_superseded_proposal_is_not_sent_as_a_current_reply(coordination):
 
 
 def test_task_execution_history_is_visible_after_task_completion(coordination):
-    c = coordination
-    run = c.store.admit(c.spec)
-    c.store.cancel(101, run.run_id)
-    c.conn.execute("UPDATE tasks SET status='done' WHERE id=1001")
-    c.conn.commit()
+    """Keep scoped owner history readable after actual versioned delivery and owner acceptance."""
+    from backend.tests.runtime.test_result_acceptance import make_accepted_result
+
+    c, run = make_accepted_result(coordination)
     assert c.store.task_runs(101, 1001)[0].run_id == run.run_id
     assert c.store.context_snapshot(101, 1001)["context_version"] == 1
     with pytest.raises(RunNotFound):

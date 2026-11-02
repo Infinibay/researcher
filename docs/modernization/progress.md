@@ -4505,3 +4505,82 @@ Resume at139250c; avoid re-running Wiki tests after docs-only followup.
   634source files match; global executable equivalence bound in the public result.
   Ruff lint/format22files and git diff whitespace checks pass. No account/model turn,
   no frontend change, no active verification jobs remain for this delivery.
+
+### Explicit result acceptance — implementation in progress after 12f0f31
+
+- Resumed the recorded result-acceptance brief inline; no new implementer/reviewer agents.
+  Seven initial SQL cases extended with RED→GREEN cases for task-local owner keys,
+  exact frozen source bytes, oversized evidence, latest explicit selection and historical
+  receipt replay after context changes. Core 11pass before transport integration.
+- Added author-only `researcher_result_propose`, actual catalog/HTTP/grant proof,
+  owner+CSRF result inspection/acceptance and frozen report windows. Directed transport
+  suite31pass/4skip; not a full acceptance or subscription-model proof.
+- Migration35 includes explicit immutable candidates/owner decisions, lossless unused
+  downgrade, live-authority/history refusal and historical fixture updates. Early directed
+  migration/review suite60pass. Final bytes still being integrated/reverified.
+- Ruling: database guard prevents native task DONE without a matching owner acceptance;
+  old approval/validation/rejection adapters and ResearchReviewFlow receive explicit
+  mixed-ownership guards, preserving legacy tasks without native admission history.
+  Accepted input edits reopen the task while keeping the original accepted run/receipt.
+- Reproducible integration defect: nested reopening on an indexed task input edit made
+  the old unconditional task FTS update trigger delete the not-yet-indexed new text.
+  Minimal SQLite proof with committed prior lifecycle: unconditional index updates fail
+  "database disk image is malformed"; updates limited to indexed columns pass integrity.
+  Migration35 now narrows that trigger; inverse restores its previous contract. A test
+  fixture also needed to commit its explicit FTS integrity-check write before a second
+  store connection requested a write transaction. No production retry added.
+- Still WIP: owner workbench integration, acceptance/revision uncertain retry persistence,
+  native controlled delivery, final package/global verification and one bounded actual
+  subscription author trial for the new capability. No overall completion/percentage claim.
+
+### Explicit delivery and owner acceptance — verified delivery after 12f0f31
+
+- Implemented author-only `researcher_result_propose`: exact selected reports, actual
+  admitted producer, immutable complete report/finding/quotation/source graph, original
+  source text retained, 2MiB/200finding/1000reference/200source bounds. Author24 business
+  tools; reviewer17, without author delivery. No acceptance from completion prose.
+- Actual owner API and Task workbench inspect the frozen report, actual independent
+  finding-review scope/limits and exact currentness. An explicit owner+CSRF action binds
+  candidate/context/review hashes; no publication or scientific status promotion.
+  Owner corrections and accepted input changes reopen work, retaining the original
+  decision. Generic task status controls are disabled for scoped native-owned tasks.
+- Browser proof on final frontend:10states at1440/390/320,0axe violations/overflow.
+  Lost acceptance and correction responses survive reload with identical original
+  packets; actual Alpha→Beta→Alpha navigation exposes no foreign-project retry control
+  and preserves the original context2 correction, advancing once to context3.
+  Native review alone is described independently of whether the task was later accepted.
+- One actual OpenAI subscription author turn, Codex0.166.0/modelgpt-6.1-sol/published
+  Ken0.18.0, used ken_find/ken_read and delivered the selected draft with the NEWtool.
+  Actual owner acceptance+duplicate receipt+correction+oldreceipt retry succeeded.
+  All observed domains/peers/grants closed; source unchanged; no native credential copy.
+  139210observed cumulative tokens is not billing. No second model turn or reviewer trial.
+- Final source global:1902cases =1799pass/100same inherited identities/3skip,
+  24new passing cases,719runtime passing. Initial global exposed two old fixtures which
+  fabricated native DONE viaSQL; migrated them to actual owner acceptance, preserving
+  their history/source assertions. Final rerun has no new failing case identities.
+  Ten inherited error-message variations were reviewed:2random flow UUIDs and8unordered
+  set diffs;2diffs are truncated and not fully comparable. Related implementation/test
+  sources are byte-identical to BASE; those100failures remain open, not repaired.
+- Final extracted wheel:226pass/0skip/0fail,640backend source files byte-matched,
+  349backend modules loaded exclusively from the wheel; network disabled except Unix
+  sockets and explicit prepared offline retrieval assets. Frontend66pass +production
+  build; existing bundle-size warning remains.92new/changed Python definitions have
+  English docstrings. New frontend APIs/components and relevant helpers have JSDoc.
+- Process lesson: before tightening a shared lifecycle invariant, search its direct SQL
+  fixture writers as well as consumers; the connected Ken index misses new worktree
+  files. Document/audit definitions before package freeze. SSR fixtures must explicitly
+  establish the selected project, its scoped query key and Zustand's server snapshot;
+  assuming those were shared masked a fixture weakness. No model trial was repeated to
+  fix fixture or UI-test setup.
+- Delivered contracts/evidence:result-acceptance.md, result-results.json,
+  result-packaging.json, result-docstrings.json, result-subscription-trial.json and
+  docs/design/audits/2026-11-02-result-acceptance. No new agents delegated per task;
+  independent whole-branch reviewer still reserved for the end of the complete plan.
+- Full goal remains active. Still research-only runtime delivery: development/Git/CI,
+  complete old producer/loop migration, remaining6route redesigns, all12route complete
+  acceptance, all43broad scenario closure,100baseline repairs, operator/CLI/backup and
+  final independent review remain open. A historical native task already marked DONE
+  without an acceptance record needs an explicit migration/reopening policy; this
+  delivery does not invent an acceptance or claim that malformed historical state is
+  repaired. General corrections without a candidate/runtime configuration and broader
+  owner lifecycle recovery remain part of the pending migration/communication work.

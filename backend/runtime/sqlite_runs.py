@@ -1,8 +1,8 @@
 """Host-owned execution identity and transactions; no inference or job replay.
 
 This adapter persists admission, authority and observations. It does not run a
-model, mint a business grant, prove remote job termination, accept a result or
-publish. Those use cases must build on these identities rather than bypass them.
+model, mint a business grant, prove remote job termination or publish. Owner
+acceptance is a distinct version-checked transaction over explicit delivered results.
 """
 
 import hashlib
@@ -153,6 +153,7 @@ class SQLiteRunStore:
             repository_id=row["bound_repository_id"],
             repository_name=row["bound_repository_name"],
             issue=json.loads(row["issue_json"]) if row["issue_json"] else None,
+            execution_kind=row["execution_kind"],
             review={
                 "finding_id": row["review_finding_id"],
                 "subject_sha256": row["review_subject_sha256"],
@@ -237,6 +238,38 @@ class SQLiteRunStore:
         with self._transaction() as conn:
             return self._review_request(
                 conn, project_id, run_id, require_current=require_current
+            )
+
+    def accept_result(self, project_id, run_id, **command):
+        """Record one owner decision over exact delivered content; no native tool can enter this use case."""
+        from backend.knowledge.results import accept_result
+
+        with self._transaction(write=True) as conn:
+            row = self._row(conn, project_id, run_id)
+            self._closed_peer_proof(conn, row["current_attempt_id"])
+            receipt, recorded = accept_result(
+                conn, project_id, run_id, now=self.clock(), **command
+            )
+            if recorded:
+                self._event(
+                    conn, project_id, row["task_id"], "result.accepted", receipt
+                )
+            return receipt
+
+    def result_state(self, project_id, run_id):
+        """Inspect a scoped delivered result without accepting it or starting inference."""
+        from backend.knowledge.results import result_state
+
+        with self._transaction() as conn:
+            return result_state(conn, project_id, run_id)
+
+    def result_report(self, project_id, run_id, candidate_id, report_id, **window):
+        """Read one explicitly selected immutable report in an owner-scoped bounded window."""
+        from backend.knowledge.results import report_window
+
+        with self._transaction() as conn:
+            return report_window(
+                conn, project_id, run_id, candidate_id, report_id, **window
             )
 
     def finding_review_state(self, project_id, finding_id, *, after_id=0, limit=20):
@@ -2028,11 +2061,25 @@ class SQLiteRunStore:
         source_kind,
         source_reference,
     ):
-        self._task(conn, project_id, task_id)
+        """Advance owner/evidence context and reopen a previously accepted version without erasing history."""
+        task = self._existing_task(conn, project_id, task_id)
         if self._context(conn, task_id) != expected_version:
             raise RunConflict(
                 "Context changed; reconcile the correction against its current version"
             )
+        if (
+            task["status"] == "done"
+            and conn.execute(
+                "SELECT 1 FROM runtime_result_acceptances a JOIN runtime_result_proposals p ON p.id=a.proposal_id WHERE a.project_id=? AND a.task_id=? AND p.context_version=? LIMIT 1",
+                (project_id, task_id, expected_version),
+            ).fetchone()
+        ):
+            conn.execute(
+                "UPDATE tasks SET status='pending',completed_at=NULL WHERE project_id=? AND id=?",
+                (project_id, task_id),
+            )
+        elif task["status"] in ("done", "cancelled", "failed"):
+            raise RunConflict("Task no longer accepts context corrections")
         version, now = expected_version + 1, self.clock()
         conn.execute(
             "INSERT INTO task_contexts(task_id,version) VALUES(?,?) ON CONFLICT(task_id) DO UPDATE SET version=excluded.version",

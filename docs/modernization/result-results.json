@@ -1,0 +1,105 @@
+{
+  "base_commit": "12f0f31",
+  "total": 1902,
+  "passed": 1799,
+  "failed": 100,
+  "skipped": 3,
+  "new_failures": [],
+  "resolved_failures": [],
+  "inherited_failure_identity_comparison": "EXACT same 100 case identities",
+  "inherited_failure_messages_changed_after_nondeterministic_output_normalization": [
+    "backend.tests.state.test_state_machine.TestGetAllowedTransitions::test_cancelled_transitions",
+    "backend.tests.state.test_state_machine.TestGetAllowedTransitions::test_done_transitions"
+  ],
+  "message_normalization": [
+    "Memory addresses",
+    "Temporary pytest run directory ids",
+    "Random Flow StateWithId UUIDs",
+    "Order of explicitly labelled pytest Extra items in a set diff"
+  ],
+  "new_cases_passed": 24,
+  "new_cases": [
+    "backend.tests.runtime.test_result_acceptance::test_author_delivery_tool_crosses_actual_catalog_http_and_bound_grant",
+    "backend.tests.runtime.test_result_acceptance::test_changed_delivery_cannot_be_accepted_by_reusing_old_observation[context]",
+    "backend.tests.runtime.test_result_acceptance::test_changed_delivery_cannot_be_accepted_by_reusing_old_observation[report]",
+    "backend.tests.runtime.test_result_acceptance::test_changed_delivery_cannot_be_accepted_by_reusing_old_observation[source]",
+    "backend.tests.runtime.test_result_acceptance::test_changing_accepted_inputs_reopens_task_and_preserves_original_decision",
+    "backend.tests.runtime.test_result_acceptance::test_complete_source_bytes_are_bounded_before_delivery",
+    "backend.tests.runtime.test_result_acceptance::test_completed_turn_without_delivery_does_not_invent_a_candidate",
+    "backend.tests.runtime.test_result_acceptance::test_delivery_freezes_complete_evidence_and_latest_explicit_selection",
+    "backend.tests.runtime.test_result_acceptance::test_legacy_author_flow_refuses_native_ownership_before_agent_selection",
+    "backend.tests.runtime.test_result_acceptance::test_legacy_flags_cannot_promote_or_reject_managed_findings[active]",
+    "backend.tests.runtime.test_result_acceptance::test_legacy_flags_cannot_promote_or_reject_managed_findings[superseded]",
+    "backend.tests.runtime.test_result_acceptance::test_managed_task_cannot_be_completed_by_legacy_sql",
+    "backend.tests.runtime.test_result_acceptance::test_missing_independent_review_requires_explicit_owner_acknowledgement",
+    "backend.tests.runtime.test_result_acceptance::test_owner_acceptance_is_distinct_idempotent_and_does_not_publish",
+    "backend.tests.runtime.test_result_acceptance::test_owner_api_scopes_frozen_delivery_and_requires_owner_csrf",
+    "backend.tests.runtime.test_result_acceptance::test_owner_correction_reopens_accepted_task_once_without_repeating_work",
+    "backend.tests.runtime.test_result_acceptance::test_owner_operation_keys_are_scoped_to_the_task",
+    "backend.tests.runtime.test_result_acceptance::test_result_proposal_selects_actual_deliverables_and_never_completes_task",
+    "backend.tests.runtime.test_result_acceptance::test_retry_after_context_change_returns_history_without_recompleting_task",
+    "backend.tests.runtime.test_result_migration::test_result_downgrade_refuses_live_authority_or_historical_delivery[grant]",
+    "backend.tests.runtime.test_result_migration::test_result_downgrade_refuses_live_authority_or_historical_delivery[live_run]",
+    "backend.tests.runtime.test_result_migration::test_result_downgrade_refuses_live_authority_or_historical_delivery[newer_migration]",
+    "backend.tests.runtime.test_result_migration::test_result_downgrade_refuses_live_authority_or_historical_delivery[proposal]",
+    "backend.tests.runtime.test_result_migration::test_unused_result_schema_rolls_back_and_reapplies_without_losing_tasks"
+  ],
+  "runtime_passed": 719,
+  "packaged_tests_passed": 226,
+  "backend_source_files_matching_wheel": 640,
+  "frontend": {
+    "tests_passed": 66,
+    "build": "passed; existing large-bundle warning remains",
+    "visual_states": 10,
+    "viewports": [
+      1440,
+      390,
+      320
+    ],
+    "axe_violations": 0
+  },
+  "subscription": {
+    "actual_native_turns": 1,
+    "model": "gpt-6.1-sol",
+    "published_ken": "0.18.0",
+    "observed_tokens": 139210,
+    "tokens_are_not_a_billing_estimate": true,
+    "acceptance_and_correction": "Real owner HTTP on synthetic evidence; lost-response behavior also tested in actual browser"
+  },
+  "validation": {
+    "source": "Final full backend/tests, socket network disabled except Unix sockets, prepared offline retrieval assets",
+    "package": "Extracted final wheel only, no checkout backend imports, offline",
+    "docstrings": "New/changed Python definitions carry English docstrings; new frontend modules/helpers carry JSDoc",
+    "goal": "ACTIVE; this result does not complete the full modernization plan"
+  },
+  "inherited_message_review": {
+    "raw_variations_reviewed": 10,
+    "classification": {
+      "random_flow_state_uuids": 2,
+      "unordered_set_diff_output": 8,
+      "truncated_set_diffs_not_fully_compared": 2
+    },
+    "evidence": "Inspected before/after messages: UUID-only CI variations; unordered set diff output in all eight transition cases, including two truncated diffs whose full item lists cannot be compared from JUnit. Related implementation/test files are byte-identical to the base. This does not repair those failures."
+  },
+  "limits": [
+    "The inherited 100 failures remain open; matching case identities is not proof that every old failure has the same cause. Message differences are reported separately.",
+    "Research report delivery only; code/Git publication and whole-report scientific validation are not implemented by this acceptance.",
+    "Browser evidence uses synthetic data and no model turn; the independent actual author trial is one bounded example, not a quality benchmark.",
+    "The only production change after the real trial was the legacy bare-schema fallback, outside that native author path; remaining changes were test fixtures/docstrings. Final package/global checks bind final bytes.",
+    "All 43 broad scenario closures, complete acceptance of all 12 routes, remaining 6 route redesigns, full legacy migration, 100 baseline repairs and final whole-branch independent review remain open."
+  ],
+  "backend_tree_sha256": "ed5ed10d4fa688ffee984c8dcb50c86bd80835818b8913b9f66e6a9c7ddbb781",
+  "receipts": {
+    "docs/modernization/result-packaging.json": "e7dee20c5453a16cb11b5a1f3274430484403b47b609252e444bdc773e62acc6",
+    "docs/modernization/result-docstrings.json": "a7a6081f842af012118d33d04da1a43c662a0c0f5ad79219d284e46c1575a9ba",
+    "docs/modernization/result-subscription-trial.json": "4fcdcd04861df339c2be831244788ffcba24e8561f595c383823a183cf81edec",
+    "docs/design/audits/2026-11-02-result-acceptance/interaction-evidence.json": "3dbd83986724e0e737cdb55b670d5eb9f28d8add5a35979001750e05782edfe1",
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/result-global.xml": "274b986d7e73f8d5441b0f73522c1ddb713313f550b1a30f6f50288a06ebe06b",
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/result-directed.xml": "9ef43458fe8a5b9309dcd5cdb4ec94d22617333dcde6fa6ad25c6ed7f9b2d10e"
+  },
+  "locks": {
+    "pyproject.toml": "7c5b51bdfba8179713dd7885aa8d5ccf7f56e428c93c3cb308ced078edb061dd",
+    "uv.lock": "4236ad559ddc50fbb376212a67fc71e367b866437e9f13f1af980bbc327661a0",
+    "frontend/package-lock.json": "300b10fc3359b492ed01a2527c1462d3315cf7bed77798bb5720948b549fb858"
+  }
+}
