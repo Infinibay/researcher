@@ -5367,3 +5367,40 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
 - Full goal remains active: publication, all engine/legacy/roles/tools/prompts/
   communication/UI/operation obligations,100inherited failures,43broad scenarios
   and final fresh-context whole-branch review. No merge, push or deployment.
+
+
+## Publication boundary checkpoint and explicit pause — base 712c9be
+
+- Previous goal turn: progress, public development committed712c9be. This turn
+  checked its live full-suite handle and investigated legacy merge before the
+  owner explicitly requested commit/push to a branch and then pause.
+- Ken indexed PRService search, recall and blast_radius surfaced only a lower
+  bound; manually read service, API route, merge tool and actual SQLite/Git tests.
+- Observed RED: after correcting required legacy fixture fields,5cases fail and
+  unrelated legacy merge passes. Historical approved label allowed actual local
+  Git mutation for a native task, another task, another project alias or no task;
+  controlled remote transport also lacked an ownership refusal.
+- Added lifecycle preflight before either local/Forgejo effect. Native task
+  history blocks; registered repository and actual device/inode also block source
+  aliases. RunConflict reaches the existing HTTP409 boundary; unrelated legacy
+  source retains its existing behavior. This is an intermediate migration guard,
+  not the native publisher or a cross-process effect fence.
+-35targeted cases pass6.98s, including6new publication cases plus task input and
+  legacy Git tool consumers. English module/function docs verified. Ruff/format
+  pass apart from pre-existing FURB188 in unchanged URL suffix parsing. No new
+  model calls, wheel or complete global result for this small guard.
+- Important remaining publication obligation: first native admission can race an
+  already-started legacy effect; preflight SQL is not physical exclusion. New
+  publication must own writable Git effects, exact accepted subject/destination,
+  external stable receipts and recovery; never reuse closed author authority.
+- Owner pause: sent SIGINT to the verified full-suite process1716857; drained
+  session66662 to terminal exit2. Retained public-development-full-paused.log/XML;
+  not a full result, not a claim that only100inherited failures remain. No native
+  test worker or private browser server deliberately left running. Resume global
+  with --timeout=180 only after explicit user resume. Protected root untracked
+  .agents/.codex/AGENTS.md remain unstaged. Push requested branch:
+  codex/project-modernization; outcome must be verified against the remote.
+- Full plan remains incomplete; user explicitly requested pause after commit/push.
+  Pending: native publication/races/reconciliation, engine/legacy/roles/tools,
+  prompts and human-agent evaluation,6web routes and12page acceptance,
+  installation/restore/operator flow, inherited failures and final branch review.

@@ -778,7 +778,9 @@
         "docs/modernization/code-reviews.md",
         "docs/modernization/code-review-state-results.json",
         "docs/modernization/code-review-state-packaging.json",
-        "backend/tests/runtime/test_code_review_state.py"
+        "backend/tests/runtime/test_code_review_state.py",
+        "backend/tests/runtime/test_legacy_code_publication.py",
+        "docs/modernization/legacy-publication-results.json"
       ]
     },
     "E11": {
@@ -2846,7 +2848,7 @@
         "First-wheel84PASS/352package-only modules; final11PASS/292package-only modules after only a missing endpoint docstring was added; complete payload/AST equivalence recorded,698matching sources"
       ],
       "remaining": [
-        "Full integration suite in progress with180s timeout; original20s-default invocation deliberately interrupted after verified harness mismatch",
+        "Full integration suite deliberately interrupted for owner-requested pause; original process terminal, rerun with180s upon explicit resume",
         "Reconciliable publication with exact destination/current accepted evidence and new effect ownership",
         "Legacy consumer/CI cutover, per-project policy, representative comprehension/accessibility and whole page/product acceptance"
       ]

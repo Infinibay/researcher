@@ -29,15 +29,26 @@ intento nuevo. 22 definiciones Python documentadas; seis archivos pasan Ruff/for
 docstring faltante de `workspace`. Comparación completa de payloads/AST sin
 docstrings y 11 casos del wheel final pasan; 698 fuentes coinciden.
 
-**Verificación en curso:** suite global. La primera invocación omitió el plazo de
+**Verificación interrumpida para la pausa del propietario:** suite global. La primera invocación omitió el plazo de
 integración y heredó 20 segundos; se detuvo con SIGINT/salida 2 y se reemplazó con
 180 segundos. No se atribuyen sus timeouts al producto sin investigar. Las cifras
-globales de arriba son históricas hasta observar el nuevo resultado. [Contrato](public-development.md),
+globales de arriba son históricas. La invocación corregida se detuvo mediante
+SIGINT y terminó con salida 2 por petición explícita de pausa; no queda ejecutándose.
+Reanudar con `--timeout=180` cuando el propietario retome el objetivo.
+[Contrato](public-development.md),
 [auditoría](../design/audits/2026-11-02-public-development/report.md).
 
 **Siguiente entrega:** publicación reconciliable con nueva autoridad y validación
 del destino exacto, conservando el veto de evidencia obsoleta o revisión rechazada.
 Ninguna aceptación previa autoriza a reutilizar el dominio cerrado del autor.
+
+**Checkpoint de publicación:** 35 casos dirigidos pasan tras reproducir cinco
+entradas que el merge antiguo no rechazaba. Preflight de tarea/repositorio/origen
+físico ahora bloquea esos casos y conserva repositorios legacy no relacionados.
+No constituye exclusión entre procesos ni resuelve primera admisión concurrente;
+el publicador reconciliable sigue pendiente. [Recibo](legacy-publication-results.json).
+El propietario pidió commit/push de la rama y después pausa; no se continúa con
+otra implementación hasta que solicite retomar el objetivo.
 
 ## Etapa anterior verificada: aceptación explícita de código
 

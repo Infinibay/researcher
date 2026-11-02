@@ -1,0 +1,54 @@
+{
+  "base_commit": "712c9be",
+  "status": "sequential_legacy_merge_bypass_reproduced_and_guarded",
+  "red": {
+    "failed": 5,
+    "passed": 1,
+    "scope": "Four real Git merge entries plus controlled remote merge had no native ownership refusal; unrelated legacy source still merges. Initial fixture NOT NULL errors were corrected before the observed RED."
+  },
+  "green": {
+    "passed": 35,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 6.98,
+    "scope": "6new publication cases, task input invalidation and legacy Git tools; real fixture Git and SQLite, controlled remote transport, no model."
+  },
+  "limits": [
+    "Does not implement native publication, external effect reconciliation or a writable-source execution domain.",
+    "Preflight ownership check is not a cross-process lock or proof against first native admission racing an already-started legacy merge. That remains required in the full publication cutover.",
+    "No new wheel or complete global suite for this guard; owner explicitly requested commit, push and pause."
+  ],
+  "documented_definitions": [
+    {
+      "path": "backend/runtime/lifecycle.py",
+      "symbol": "require_legacy_git_publication",
+      "docstring": "Reject legacy merge of native-owned tasks or registered physical sources, including another task/project alias; no historical approval grants publication authority."
+    },
+    {
+      "path": "backend/git/pr_service.py",
+      "symbol": "merge_pr",
+      "docstring": "Merge a pull request.\n\nIf ``FORGEJO_API_URL`` is set and the PR has a ``forgejo_pr_index``,\ncalls the Forgejo merge API.  Otherwise performs a local\n``git merge --no-ff``.\nThen marks the branch as merged and updates the PR status.\nNative-owned tasks and source identities are rejected before either\neffect; a historical PR label cannot authorize their publication."
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_code_publication.py",
+      "symbol": "legacy_publication",
+      "docstring": "Create two real local commits and historical PR metadata, without an accepted native candidate."
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_code_publication.py",
+      "symbol": "test_unaccepted_native_code_cannot_publish_through_legacy_merge",
+      "docstring": "Actual Git must stay unchanged despite a legacy approved label or a PR with another task/project identity."
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_code_publication.py",
+      "symbol": "test_native_pr_is_blocked_before_remote_merge",
+      "docstring": "An unavailable local clone or an ambient Forgejo setting cannot turn a native task's legacy status into remote authority."
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_code_publication.py",
+      "symbol": "test_unrelated_legacy_repository_keeps_its_existing_merge_path",
+      "docstring": "A native admission in a different physical source does not remove remaining legacy functionality."
+    }
+  ],
+  "known_lint_debt": "Existing FURB188 in the unchanged legacy URL suffix parser; all other checks and formatting pass."
+}

@@ -51,12 +51,15 @@
     "scope": "Actual owner HTTP, SQLite and UI; synthetic original author/Git/closure evidence and deliberately queued review. Native integration is separate."
   },
   "global_suite": {
-    "state": "running",
+    "state": "interrupted_for_explicit_owner_pause",
+    "terminal_exit_code": 2,
     "session_id": 66662,
     "timeout_seconds": 180,
+    "log": "public-development-full-paused.log",
+    "xml": "public-development-full-paused.xml",
+    "scope": "Partial invocation over the712c9be development delivery; not a completed global result. Later legacy publication guard has separate directed coverage.",
     "source_manifest": "public-development-source-manifest.json",
-    "previous_wrong_deadline_invocation": "Stopped via SIGINT and awaited exit2; retained in scratch. Do not treat its timeouts as verified product regressions.",
-    "receipt": "public-development-verification-retry.json"
+    "resume": "Run the full integration suite with --timeout=180 when goal work is explicitly resumed. No full test process remains live."
   },
   "runtime_model_calls": 0,
   "original_source_modified": false,

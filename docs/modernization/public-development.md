@@ -113,12 +113,15 @@ faltante de `workspace`: [comparación completa de payloads y AST sin docstrings
 El [wheel final](public-development-final-packaging.json) pasa otros 11 casos,
 292 módulos sólo del paquete y 698 fuentes Python/SQL coincidentes.
 
-La suite global de integración sigue en ejecución con plazo de 180 segundos por
+La suite global de integración se inició con plazo de 180 segundos por
 caso. La primera invocación heredó por error el plazo ordinario de 20 segundos;
 se detuvo mediante SIGINT y se esperó su salida antes de reemplazarla.
 [Registro del error de verificación](public-development-verification-retry.json).
 No se interpretan esos timeouts como regresiones demostradas ni se atribuye la
-suite de la entrega anterior al código nuevo. [Resultados y límites](public-development-results.json).
+suite de la entrega anterior al código nuevo. La invocación corregida se
+interrumpió mediante SIGINT y terminó con salida 2 para cumplir la pausa explícita
+del propietario; no queda ejecutándose ni acredita un resultado global completo.
+[Resultados y límites](public-development-results.json).
 Publicación reconciliable, migración de consumidores/loops antiguos,
 evaluaciones representativas de prompts/comprensión, operación y aceptación
 completa de las doce páginas siguen pendientes en el plan completo.

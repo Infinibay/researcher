@@ -23,6 +23,7 @@ class PRService:
     def _get_branch_service(self):
         if self._branch_service is None:
             from backend.git.branch_service import BranchService
+
             self._branch_service = BranchService()
         return self._branch_service
 
@@ -41,7 +42,7 @@ class PRService:
 
             rows = conn.execute(
                 f"""SELECT * FROM code_reviews
-                    WHERE {' AND '.join(where)}
+                    WHERE {" AND ".join(where)}
                     ORDER BY created_at DESC""",
                 params,
             ).fetchall()
@@ -121,10 +122,24 @@ class PRService:
         calls the Forgejo merge API.  Otherwise performs a local
         ``git merge --no-ff``.
         Then marks the branch as merged and updates the PR status.
+        Native-owned tasks and source identities are rejected before either
+        effect; a historical PR label cannot authorize their publication.
         """
         pr = self.get_pr(pr_id)
         if not pr:
             raise ValueError(f"PR {pr_id} not found")
+
+        from backend.runtime.lifecycle import require_legacy_git_publication
+
+        execute_with_retry(
+            lambda conn: require_legacy_git_publication(
+                conn,
+                task_id=pr.get("task_id"),
+                project_id=pr.get("project_id"),
+                repo_name=pr["repo_name"],
+                repo_path=repo_path,
+            )
+        )
 
         branch = pr["branch"]
         repo_name = pr["repo_name"]
@@ -209,6 +224,7 @@ class PRService:
         else:
             # HTTPS format: https://host/owner/repo
             from urllib.parse import urlparse
+
             parsed = urlparse(url)
             path_part = parsed.path.lstrip("/")
 
@@ -246,5 +262,7 @@ class PRService:
         from backend.git.forgejo_client import forgejo_client
 
         forgejo_client.merge_pull_request(
-            owner_repo, pr_index, merge_message=merge_message,
+            owner_repo,
+            pr_index,
+            merge_message=merge_message,
         )

@@ -21,9 +21,15 @@ El fixture del navegador retiene al revisor en cola y usa testigos físicos
 sintéticos; no sustituye la integración nativa. Las 22 definiciones Python
 nuevas/modificadas tienen docstrings. Wheel ampliado: 84 casos pasan; el final
 añade sólo un docstring y pasa 11 casos, con equivalencia de AST sin docstrings
-verificada y 698 fuentes coincidentes. La suite global sigue en ejecución tras
-corregir un plazo de verificación equivocado; no se afirma que haya pasado.
+verificada y 698 fuentes coincidentes. La suite global se interrumpió de forma
+controlada para la pausa explícita del propietario; no se afirma que haya pasado.
 [Alcance](public-development.md).
+
+El bloqueo adicional del merge antiguo pasa 35 pruebas dirigidas: rechaza tareas
+nativas y alias del mismo origen antes del efecto Git/Forgejo. No resuelve aún
+la carrera con una primera admisión simultánea ni implementa el publicador nuevo.
+[Evidencia y límites](legacy-publication-results.json). Trabajo pausado por petición
+del propietario después del checkpoint y push; el objetivo completo sigue pendiente.
 
 La siguiente evidencia global corresponde a la entrega anterior:
 
