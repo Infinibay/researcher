@@ -188,6 +188,36 @@ def test_owned_configuration_never_initializes_absent_global_authority(owned_con
     assert not Path(c.settings["authority"]["witness"]).exists()
 
 
+async def test_unavailable_search_leaves_an_actionable_owner_issue_without_dispatch(
+    owned_config,
+):
+    """Explain a failed capability admission without spending or hiding a fallback."""
+    from backend.api.main import create_app
+    from backend.api.runtime_dependencies import configured_runtime
+
+    c = owned_config
+    (c.s.workspace / "search-unavailable").touch()
+    app = create_app()
+    runtime = configured_runtime(app.state.live_grants, app=app)
+    async with runtime:
+        run = await runtime.submit(c.s.c.spec, repository_id=11)
+        await runtime.wait(run.run_id)
+        view = runtime.store.get(101, run.run_id)
+        assert view.issue["code"] == "native_search_unavailable"
+        assert "búsqueda web" in view.issue["message"]
+        assert view.issue["inference_started"] is False
+        assert view.issue["next_action"] == "review_runtime_configuration"
+        assert view.status == "failed"
+        with runtime.store._transaction() as db:
+            assert (
+                db.execute(
+                    "SELECT COUNT(*) FROM runtime_inference_dispatches"
+                ).fetchone()[0]
+                == 0
+            )
+            assert db.execute("SELECT COUNT(*) FROM findings").fetchone()[0] == 0
+
+
 @pytest.mark.parametrize("stage", ["prepare", "turn"])
 @pytest.mark.parametrize("action", ["stop", "correct"])
 async def test_owned_stop_withdraws_startup_or_generation_and_preserves_unknown_dispatch(

@@ -52,6 +52,8 @@ def _origin_key(origin):
 
 @dataclass(frozen=True)
 class NativeState:
+    """Witnessed native data identity and immutable original session intent."""
+
     state_id: str
     authority_id: str
     path: str
@@ -221,10 +223,13 @@ class NativeState:
         catalog_hash,
         developer_instructions,
         resume_thread_id,
+        web_search="disabled",
     ):
+        """Freeze model, catalog, instructions and search mode before native dispatch."""
         snapshot, record = self._active(journal, operation_id)
         intent = {
             "model": model,
+            "web_search": web_search,
             "catalog_hash": catalog_hash,
             "instructions_sha256": hashlib.sha256(
                 (developer_instructions or "").encode()

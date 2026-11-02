@@ -2615,6 +2615,25 @@
         "Migrate all legacy knowledge read/search/summary/review roles/flows/adapters and retire old embedding providers with parity evidence.",
         "Representative retrieval and human-comprehension evaluation; full route acceptance, retention and recovery."
       ]
+    },
+    "native_web_search": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/native-web-search.md",
+        "docs/modernization/native-search-live.json",
+        "docs/modernization/web-search-results.json",
+        "docs/modernization/web-search-packaging.json",
+        "backend/tests/runtime/test_native_search.py",
+        "backend/tests/runtime/test_broker_inference.py",
+        "backend/tests/runtime/test_owned_factory.py",
+        "backend/tests/runtime/test_codex_session.py",
+        "backend/tests/runtime/test_runtime_service.py"
+      ],
+      "remaining": [
+        "Migrate all legacy search consumers and retire old hidden provider selection with parity evidence.",
+        "Search-history UI, representative quality/comprehension evaluation, complete scenario acceptance and recovery; native results retained as bounded observed URL previews.",
+        "Independent scientific review remains separate and pending."
+      ]
     }
   }
 }

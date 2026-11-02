@@ -1,0 +1,385 @@
+{
+  "trial": "native-search-7447e5ad0f",
+  "status": "passed",
+  "stage": "acceptance",
+  "web_search": "live",
+  "generative_native_turns": 1,
+  "image_calls": 0,
+  "profile": "owned-codex-v1",
+  "native_version": "0.166.0",
+  "ken_version": "0.18.0",
+  "native_model": "gpt-6.1-sol",
+  "automatic_admission_or_turn_replay": false,
+  "vendor_websocket_proven": false,
+  "scope": "Real owner HTTP/lifespan/configured factory/RuntimeService/native subscription/published Ken/ASGI business/owned analysis on synthetic data. Not clean managed-host installation, complete enrollment, OAuth renewal, cold-service recovery or all-tool migration.",
+  "factory": "OwnedCodexRuntime",
+  "admission_status": 202,
+  "run_id": "9513353a-0deb-4dc9-beb5-bd34b1d92b07",
+  "owner_read_status": 200,
+  "owner_run": {
+    "run_id": "9513353a-0deb-4dc9-beb5-bd34b1d92b07",
+    "project_id": 101,
+    "task_id": 1001,
+    "actor_id": "researcher",
+    "context_version": 1,
+    "status": "needs_review",
+    "fence": 1,
+    "attempt_id": "4cf17642-0623-400e-ba7a-9e4862206f1e",
+    "thread_id": "01a19a5e-fdca-7120-a8eb-7bd24d70f25a",
+    "turn_id": "01a19a5f-0091-7c61-bb15-2d36316dfa03",
+    "prompt": "Ensayo sintético acotado de búsqueda nativa, autorizado por el propietario. Un único turno por suscripción; no lo reinicies ni cambies proveedor.\nUsa ken_find con consulta natural en inglés para localizar invoice_total y ken_read para leer invoice.py, sin ejecutar ni editar código.\nUsa la búsqueda web nativa para encontrar documentación oficial de Python sobre Decimal.quantize. Haz como máximo DOS búsquedas y UNA apertura nativa de una página de ese resultado. Expón la URL que observaste; no atribuyas a resultados una URL solamente inferida. Si la búsqueda no está disponible o no aporta una URL recuperable, informa ese límite y termina; no uses otro proveedor.\nCaptura UNA URL oficial encontrada con researcher_capture_web, clave native-search-7447e5ad0f-web, y lee su fuente. No descargues otras páginas ni uses comandos. Registra UN finding provisional con clave native-search-7447e5ad0f-finding y una cita exacta muy breve (máximo15palabras) de esa fuente (source_id,quote), distinguiendo documentación y código inspeccionado.\nGuarda UN informe draft con clave native-search-7447e5ad0f-report, enlazado al finding y léelo. Explica brevemente en español lo observado y sus límites. No marques la tarea aceptada/completada ni publiques. Termina con URL, source_id e identificador del informe.",
+    "runtime": "codex",
+    "result": {
+      "native_status": "completed",
+      "summary": "Ken localizó `invoice_total` y permitió leer `invoice.py`: calcula `base * (1 + rate)` y aplica `quantize(Decimal(\"0.01\"))`. La documentación oficial confirma el redondeo a un exponente fijo.\n\nRealicé una búsqueda y una apertura nativas. Leí el fragmento capturado que contiene la cita, registré el finding provisional **1** y guardé y leí el informe **draft**. No ejecuté ni edité código; no revisé toda la documentación ni publiqué o marqué la tarea como aceptada/completada.\n\nURL observada: [documentación oficial de Python](https://docs.python.org/3.11/library/decimal.html)  \nsource_id: **1**  \nIdentificador del informe: **1**"
+    },
+    "cancel_requested": false,
+    "operation_key": "native-search-7447e5ad0f",
+    "conversation_thread_id": null,
+    "model": "gpt-6.1-sol",
+    "repository_id": 11,
+    "repository_name": "fixture",
+    "issue": null
+  },
+  "runs": [
+    {
+      "id": "9513353a-0deb-4dc9-beb5-bd34b1d92b07",
+      "status": "needs_review",
+      "current_attempt_id": "4cf17642-0623-400e-ba7a-9e4862206f1e",
+      "fence": 1,
+      "context_version": 1,
+      "issue_json": null
+    }
+  ],
+  "attempts": [
+    {
+      "id": "4cf17642-0623-400e-ba7a-9e4862206f1e",
+      "status": "finished",
+      "thread_id": "01a19a5e-fdca-7120-a8eb-7bd24d70f25a",
+      "turn_id": "01a19a5f-0091-7c61-bb15-2d36316dfa03",
+      "native_result_json": "{\"native_status\":\"completed\",\"summary\":\"Ken localizó `invoice_total` y permitió leer `invoice.py`: calcula `base * (1 + rate)` y aplica `quantize(Decimal(\\\"0.01\\\"))`. La documentación oficial confirma el redondeo a un exponente fijo.\\n\\nRealicé una búsqueda y una apertura nativas. Leí el fragmento capturado que contiene la cita, registré el finding provisional **1** y guardé y leí el informe **draft**. No ejecuté ni edité código; no revisé toda la documentación ni publiqué o marqué la tarea como aceptada/completada.\\n\\nURL observada: [documentación oficial de Python](https://docs.python.org/3.11/library/decimal.html)  \\nsource_id: **1**  \\nIdentificador del informe: **1**\"}"
+    }
+  ],
+  "dispatches": [
+    {
+      "model": "gpt-6.1-sol",
+      "status": "settled",
+      "native_status": "completed",
+      "observed_tokens": 257498,
+      "token_ceiling": 350000,
+      "catalog_hash": "92c0357723fb640d770b05610d20c97d6267a194deac4b3b7468c1662b757d81"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 1,
+      "project_id": 101,
+      "title": "Inspección acotada de invoice_total y Decimal.quantize",
+      "content": "# Inspección acotada de invoice_total y Decimal.quantize\n\nSe localizó invoice_total mediante ken_find con una consulta natural en inglés y se leyó invoice.py con ken_read (líneas devueltas 1–5). El código calcula base * (1 + rate) y aplica quantize(Decimal(\"0.01\")); sus valores predeterminados son base 137 y tasa 0.21. Por inspección estática, cuantiza el total a centésimas.\n\nLa documentación oficial observada en el resultado nativo y abierta fue [decimal, Python 3.11](https://docs.python.org/3.11/library/decimal.html). Se capturó como source_id 1, SHA-256 f6b3f19ccb46db2e306435a3a50d228a64448208dd7f75bf2b172d6f47813e7f. Cita exacta breve: «The quantize() method rounds a number to a fixed exponent.» La documentación respalda la interpretación de quantize; la observación del código procede de Ken. Finding provisional vinculado: 1.\n\nLímites: una búsqueda nativa, una apertura nativa y una captura de esa misma URL; sin otros proveedores, comandos, ejecución ni edición de código. Se leyó la ventana inicial de 15000 de los 67865 caracteres capturados, que contiene la cita, sin revisar el resto de la página. No se verificaron resultados en ejecución, el contexto decimal activo ni la versión de Python del proyecto. El informe es un draft y el finding es provisional; no representan revisión independiente, aceptación de la tarea ni publicación.",
+      "status": "draft"
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "status": "provisional",
+      "content": "Documentación: la fuente oficial de Python 3.11 indica que quantize redondea a un exponente fijo. Código inspeccionado con ken_find (consulta natural en inglés) y ken_read: invoice.py, líneas 1–5, importa Decimal y devuelve (base * (1 + rate)).quantize(Decimal(\"0.01\")), con base 137 y tasa fraccionaria 0.21 por defecto. Interpretación estática: aplica la tasa a la base y cuantiza a centésimas. La cita adjunta respalda la semántica documental, no acredita el contenido del repositorio. No se ejecutó ni editó código ni se comprobó el contexto decimal en ejecución. Se realizó una búsqueda nativa y una apertura de su resultado; se capturó únicamente esa URL. Se leyó la ventana 0–15000 de 67865 caracteres de la fuente, que incluye la cita; no se revisó toda la página. Observación provisional sin revisión independiente."
+    }
+  ],
+  "citations": [
+    {
+      "finding_id": 1,
+      "source_id": 1,
+      "quote": "The quantize() method rounds a number to a fixed exponent."
+    }
+  ],
+  "sources": [
+    {
+      "id": 1,
+      "kind": "web",
+      "title": "decimal — Decimal fixed point and floating point arithmetic — Python 3.11.18 documentation",
+      "sha256": "f6b3f19ccb46db2e306435a3a50d228a64448208dd7f75bf2b172d6f47813e7f"
+    }
+  ],
+  "peers": [
+    {
+      "kind": "business",
+      "state": "closed",
+      "reason": "never_released"
+    },
+    {
+      "kind": "native",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "ken",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "ken",
+      "state": "closed",
+      "reason": "broker_verified"
+    }
+  ],
+  "jobs": [],
+  "operations": [
+    {
+      "operation_key": "native-search-7447e5ad0f-web",
+      "kind": "source.capture",
+      "result_json": "{\"kind\":\"web\",\"locator\":\"https://docs.python.org/3.11/library/decimal.html\",\"operation_key\":\"native-search-7447e5ad0f-web\",\"sha256\":\"f6b3f19ccb46db2e306435a3a50d228a64448208dd7f75bf2b172d6f47813e7f\",\"source_id\":1}"
+    },
+    {
+      "operation_key": "native-search-7447e5ad0f-finding",
+      "kind": "finding.record",
+      "result_json": "{\"confidence\":null,\"finding_id\":1,\"operation_key\":\"native-search-7447e5ad0f-finding\",\"status\":\"provisional\"}"
+    },
+    {
+      "operation_key": "native-search-7447e5ad0f-report",
+      "kind": "report.write",
+      "result_json": "{\"artifact_id\":1,\"operation_key\":\"native-search-7447e5ad0f-report\",\"status\":\"draft\",\"title\":\"Inspección acotada de invoice_total y Decimal.quantize\"}"
+    }
+  ],
+  "task_status": "in_progress",
+  "search_events": [
+    {
+      "method": "item/started",
+      "observation": {
+        "thread_id": "01a19a5e-fdca-7120-a8eb-7bd24d70f25a",
+        "turn_id": "01a19a5f-0091-7c61-bb15-2d36316dfa03",
+        "item_id": "exec-9049bc17-1bdd-4e70-806d-015468937219",
+        "type": "webSearch",
+        "provider": "openai",
+        "mode": "live",
+        "query": "",
+        "action": null,
+        "candidate_urls": [],
+        "results_state": "not_supplied",
+        "native_item_sha256": "a4b89ea6e8cf5cf0e4842dfbf5e1c2b2df89a732b6407656fb6929c315939c2e",
+        "truncated": false,
+        "evidence_status": "uncaptured_search_observation"
+      }
+    },
+    {
+      "method": "item/completed",
+      "observation": {
+        "thread_id": "01a19a5e-fdca-7120-a8eb-7bd24d70f25a",
+        "turn_id": "01a19a5f-0091-7c61-bb15-2d36316dfa03",
+        "item_id": "exec-9049bc17-1bdd-4e70-806d-015468937219",
+        "type": "webSearch",
+        "provider": "openai",
+        "mode": "live",
+        "query": "site:docs.python.org/3/library/decimal.html Decimal.quantize",
+        "action": {
+          "type": "search",
+          "query": "site:docs.python.org/3/library/decimal.html Decimal.quantize"
+        },
+        "candidate_urls": [
+          "https://docs.python.org/3.11/library/decimal.html",
+          "https://docs.python.org/3/library/decimal.html?highlight=clamp",
+          "https://docs.python.org/uk/3/library/decimal.html",
+          "https://docs.python.org/3/library/numeric.html",
+          "https://docs.python.org/fr/3/library/decimal.html",
+          "https://docs.python.org/3.11/tutorial/stdlib2.html",
+          "https://docs.python.org/id/3.10/library/decimal.html",
+          "https://docs.python.org/uk/3.11/library/decimal.html",
+          "https://docs.python.org/3.12/library/numeric.html",
+          "https://docs.python.org/3.11/library/numeric.html"
+        ],
+        "results_state": "supplied",
+        "native_item_sha256": "5aca19cfb2593872171802d84207d2f15e94f6d41532f1211c68144e7ace25a3",
+        "truncated": true,
+        "evidence_status": "uncaptured_search_observation"
+      }
+    },
+    {
+      "method": "item/started",
+      "observation": {
+        "thread_id": "01a19a5e-fdca-7120-a8eb-7bd24d70f25a",
+        "turn_id": "01a19a5f-0091-7c61-bb15-2d36316dfa03",
+        "item_id": "exec-e04cca20-36b7-42dd-bca1-6f174fc9ef59",
+        "type": "webSearch",
+        "provider": "openai",
+        "mode": "live",
+        "query": "",
+        "action": null,
+        "candidate_urls": [],
+        "results_state": "not_supplied",
+        "native_item_sha256": "fb588b0af0ef0d753605d1616152dcaa313763be386bf5715e9dc5fa09fa6834",
+        "truncated": false,
+        "evidence_status": "uncaptured_search_observation"
+      }
+    },
+    {
+      "method": "item/completed",
+      "observation": {
+        "thread_id": "01a19a5e-fdca-7120-a8eb-7bd24d70f25a",
+        "turn_id": "01a19a5f-0091-7c61-bb15-2d36316dfa03",
+        "item_id": "exec-e04cca20-36b7-42dd-bca1-6f174fc9ef59",
+        "type": "webSearch",
+        "provider": "openai",
+        "mode": "live",
+        "query": "https://docs.python.org/3.11/library/decimal.html",
+        "action": {
+          "type": "openPage"
+        },
+        "candidate_urls": [
+          "https://docs.python.org/3.11/library/decimal.html"
+        ],
+        "results_state": "supplied",
+        "native_item_sha256": "83c50d6c86880981438eafb89683c7dde126e96068365ee4d50d5e5a66c72343",
+        "truncated": false,
+        "evidence_status": "uncaptured_search_observation"
+      }
+    }
+  ],
+  "durable_search_observations": [
+    {
+      "attempt_id": "4cf17642-0623-400e-ba7a-9e4862206f1e",
+      "context_version": 1,
+      "fence": 1,
+      "native_kind": "tool.started",
+      "payload": {
+        "action": null,
+        "candidate_urls": [],
+        "evidence_status": "uncaptured_search_observation",
+        "item_id": "exec-9049bc17-1bdd-4e70-806d-015468937219",
+        "mode": "live",
+        "native_item_sha256": "a4b89ea6e8cf5cf0e4842dfbf5e1c2b2df89a732b6407656fb6929c315939c2e",
+        "provider": "openai",
+        "query": "",
+        "results_state": "not_supplied",
+        "thread_id": "01a19a5e-fdca-7120-a8eb-7bd24d70f25a",
+        "truncated": false,
+        "turn_id": "01a19a5f-0091-7c61-bb15-2d36316dfa03",
+        "type": "webSearch"
+      },
+      "run_id": "9513353a-0deb-4dc9-beb5-bd34b1d92b07",
+      "schema_version": 1
+    },
+    {
+      "attempt_id": "4cf17642-0623-400e-ba7a-9e4862206f1e",
+      "context_version": 1,
+      "fence": 1,
+      "native_kind": "tool.completed",
+      "payload": {
+        "action": {
+          "query": "site:docs.python.org/3/library/decimal.html Decimal.quantize",
+          "type": "search"
+        },
+        "candidate_urls": [
+          "https://docs.python.org/3.11/library/decimal.html",
+          "https://docs.python.org/3/library/decimal.html?highlight=clamp",
+          "https://docs.python.org/uk/3/library/decimal.html",
+          "https://docs.python.org/3/library/numeric.html",
+          "https://docs.python.org/fr/3/library/decimal.html",
+          "https://docs.python.org/3.11/tutorial/stdlib2.html",
+          "https://docs.python.org/id/3.10/library/decimal.html",
+          "https://docs.python.org/uk/3.11/library/decimal.html",
+          "https://docs.python.org/3.12/library/numeric.html",
+          "https://docs.python.org/3.11/library/numeric.html"
+        ],
+        "evidence_status": "uncaptured_search_observation",
+        "item_id": "exec-9049bc17-1bdd-4e70-806d-015468937219",
+        "mode": "live",
+        "native_item_sha256": "5aca19cfb2593872171802d84207d2f15e94f6d41532f1211c68144e7ace25a3",
+        "provider": "openai",
+        "query": "site:docs.python.org/3/library/decimal.html Decimal.quantize",
+        "results_state": "supplied",
+        "thread_id": "01a19a5e-fdca-7120-a8eb-7bd24d70f25a",
+        "truncated": true,
+        "turn_id": "01a19a5f-0091-7c61-bb15-2d36316dfa03",
+        "type": "webSearch"
+      },
+      "run_id": "9513353a-0deb-4dc9-beb5-bd34b1d92b07",
+      "schema_version": 1
+    },
+    {
+      "attempt_id": "4cf17642-0623-400e-ba7a-9e4862206f1e",
+      "context_version": 1,
+      "fence": 1,
+      "native_kind": "tool.started",
+      "payload": {
+        "action": null,
+        "candidate_urls": [],
+        "evidence_status": "uncaptured_search_observation",
+        "item_id": "exec-e04cca20-36b7-42dd-bca1-6f174fc9ef59",
+        "mode": "live",
+        "native_item_sha256": "fb588b0af0ef0d753605d1616152dcaa313763be386bf5715e9dc5fa09fa6834",
+        "provider": "openai",
+        "query": "",
+        "results_state": "not_supplied",
+        "thread_id": "01a19a5e-fdca-7120-a8eb-7bd24d70f25a",
+        "truncated": false,
+        "turn_id": "01a19a5f-0091-7c61-bb15-2d36316dfa03",
+        "type": "webSearch"
+      },
+      "run_id": "9513353a-0deb-4dc9-beb5-bd34b1d92b07",
+      "schema_version": 1
+    },
+    {
+      "attempt_id": "4cf17642-0623-400e-ba7a-9e4862206f1e",
+      "context_version": 1,
+      "fence": 1,
+      "native_kind": "tool.completed",
+      "payload": {
+        "action": {
+          "type": "openPage"
+        },
+        "candidate_urls": [
+          "https://docs.python.org/3.11/library/decimal.html"
+        ],
+        "evidence_status": "uncaptured_search_observation",
+        "item_id": "exec-e04cca20-36b7-42dd-bca1-6f174fc9ef59",
+        "mode": "live",
+        "native_item_sha256": "83c50d6c86880981438eafb89683c7dde126e96068365ee4d50d5e5a66c72343",
+        "provider": "openai",
+        "query": "https://docs.python.org/3.11/library/decimal.html",
+        "results_state": "supplied",
+        "thread_id": "01a19a5e-fdca-7120-a8eb-7bd24d70f25a",
+        "truncated": false,
+        "turn_id": "01a19a5f-0091-7c61-bb15-2d36316dfa03",
+        "type": "webSearch"
+      },
+      "run_id": "9513353a-0deb-4dc9-beb5-bd34b1d92b07",
+      "schema_version": 1
+    }
+  ],
+  "observed_tokens": 257498,
+  "model_tool_names": [
+    "ken_find",
+    "ken_read",
+    "researcher_capture_web",
+    "researcher_source_read",
+    "researcher_finding_record",
+    "researcher_report_write",
+    "researcher_report_read"
+  ],
+  "memory_peak_bytes_sampled": 1742581760,
+  "pids_peak_sampled": 61,
+  "last_sampled_memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+  "all_sampled_domains_removed": true,
+  "source_unchanged": true,
+  "global_concession_inactive": true,
+  "global_peers_closed": true,
+  "grant_retired": true,
+  "native_auth_files_absent": true,
+  "native_credential_scan_complete": true,
+  "native_access_token_bytes_absent": true,
+  "product_scope_closed": true,
+  "egress_observations": [
+    {
+      "connections": 14,
+      "payload_bytes": 1498711,
+      "drained": true
+    }
+  ],
+  "harness_sha256": "f2a769e5646441472a011d396ddd1810aa89416dde976641b4a1b7ece8abaa18",
+  "captured_source_url": "https://docs.python.org/3.11/library/decimal.html",
+  "captured_source_hash_verified": true,
+  "captured_url_observed_in_native_events": true,
+  "base_commit": "8a86957",
+  "limits": "One synthetic task on Codex0.166.0/gpt-6.1-sol/ken-rank0.18.0 using existing subscription. Does not establish all modes/models/accounts, independent scientific review, cold recovery, complete modernization or WebSocket use. Later URL-budget omission marker fix verified offline; subscription turn not repeated.",
+  "observed_tokens_note": "Native reported cumulative session total, counted once at its high-water mark; not a new-token billing/cost estimate."
+}

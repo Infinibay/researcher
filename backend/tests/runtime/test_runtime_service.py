@@ -105,6 +105,70 @@ def coordinator(setup, runtime, **kwargs):
     )
 
 
+async def test_search_events_survive_restart_without_creating_sources(service_setup):
+    """Persist original native query/URLs, including late factual observations."""
+
+    class SearchInference(ControlledInference):
+        """Supply native events only; the real coordinator persists their scope."""
+
+        web_search = "live"
+
+        async def run(self, prompt, *, on_started, on_event):
+            """Emit one optional-result search in the originally bound turn."""
+            await on_started(self.thread_id, "turn-a")
+            item = {"id": "search-1", "type": "webSearch", "query": "A concrete query"}
+            for method in ("item/started", "item/completed"):
+                if method == "item/completed":
+                    item = {
+                        **item,
+                        "results": [
+                            {"url": "https://example.org/paper", "title": "A paper"}
+                        ],
+                    }
+                await on_event(
+                    {
+                        "method": method,
+                        "params": {
+                            "threadId": self.thread_id,
+                            "turnId": "turn-a",
+                            "item": item,
+                        },
+                    }
+                )
+            return NativeTurnResult(
+                self.thread_id,
+                "turn-a",
+                "completed",
+                "Search candidates require capture.",
+                1,
+                None,
+                None,
+            )
+
+    s = service_setup
+    service = coordinator(s, SearchInference(s))
+    async with service:
+        run = await service.submit(s.c.spec)
+        await service.wait(run.run_id)
+    from backend.runtime.sqlite_runs import SQLiteRunStore
+
+    reopened = SQLiteRunStore(s.c.database)
+    events = reopened.events(101, after_id=0, limit=100).events
+    searches = [
+        e for e in events if e.data.get("payload", {}).get("type") == "webSearch"
+    ]
+    assert len(searches) == 2
+    completed = searches[-1].data
+    assert completed["context_version"] == 1
+    assert completed["payload"]["query"] == "A concrete query"
+    assert completed["payload"]["candidate_urls"] == ["https://example.org/paper"]
+    assert completed["payload"]["turn_id"] == "turn-a"
+    assert completed["payload"]["mode"] == "live"
+    assert completed["payload"]["evidence_status"] == "uncaptured_search_observation"
+    assert s.c.conn.execute("SELECT COUNT(*) FROM research_sources").fetchone()[0] == 0
+    assert s.c.conn.execute("SELECT COUNT(*) FROM findings").fetchone()[0] == 0
+
+
 async def test_question_parks_only_after_peers_close_and_answer_never_dispatches(
     service_setup,
 ):

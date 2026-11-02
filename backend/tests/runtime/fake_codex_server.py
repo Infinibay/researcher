@@ -68,9 +68,9 @@ while True:
         if scenario=='other-thread':
             send({'method':'turn/completed','params':{'threadId':'unrelated','turn':{'id':active,'status':'completed'}}})
             complete()
-        elif scenario=='tools':
+        elif scenario in ('tools','search-tools'):
             for n in range(4):
-                item={'id':str(n),'type':'commandExecution','command':'echo hello','status':'completed'}
+                item={'id':str(n),'type':'webSearch' if scenario=='search-tools' else 'commandExecution','command':'echo hello','status':'completed'}
                 event('item/started',turnId=active,item=item)
                 event('item/started',turnId=active,item=item)  # duplicate delivery
                 event('item/completed',turnId=active,item=item)

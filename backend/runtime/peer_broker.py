@@ -351,7 +351,14 @@ class PeerBroker:
         host_tools=False,
         code_host=None,
         native_state=None,
+        web_search="disabled",
     ):
+        """Launch an inspected native asset; search needs the owned host profile."""
+        from backend.runtime.native_search import validate_search_mode
+
+        validate_search_mode(web_search)
+        if web_search != "disabled" and host_tools is not True:
+            raise ValueError("Native search requires the owned host-tools profile")
         if type(host_tools) is not bool or (
             host_tools and (network is None or egress is None)
         ):
@@ -382,6 +389,7 @@ class PeerBroker:
             host_tools=host_tools,
             code_host=code_host,
             native_state=native_state,
+            web_search=web_search,
         )
 
     def run_command(self, registry, peer_id, *, operation_key, asset):
@@ -412,7 +420,9 @@ class PeerBroker:
         code_host=None,
         native_state=None,
         command_only=False,
+        web_search="disabled",
     ):
+        """Witness launch intent and manifests before releasing the original gate."""
         command_key(operation_key)
         if asset is None and ken is None:
             text(code, "analysis code", 64000)
@@ -442,6 +452,7 @@ class PeerBroker:
                         else "readonly-native-codex-v1"
                     ),
                     "host_tools": host_tools,
+                    "web_search": web_search,
                     **(
                         {
                             "native_state": asdict(native_state),
@@ -603,6 +614,7 @@ class PeerBroker:
                     **({"network": network} if network is not None else {}),
                     **({"channel": channel} if channel is not None else {}),
                     **({"host_tools": True} if host_tools else {}),
+                    **({"web_search": web_search} if web_search != "disabled" else {}),
                     **({"code_host": code_host} if code_host is not None else {}),
                     **(
                         {"native_state": native_state}

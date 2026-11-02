@@ -124,14 +124,18 @@ async def test_total_turn_budget_prevents_another_model_request(tmp_path):
     assert sum(r["method"] == "turn/start" for r in requests(tmp_path)) == 1
 
 
-async def test_tool_budget_counts_unique_native_items_and_interrupts_excess(tmp_path):
+@pytest.mark.parametrize("scenario", ["tools", "search-tools"])
+async def test_tool_budget_counts_unique_native_items_and_interrupts_excess(
+    tmp_path, scenario
+):
+    """Native search shares the unique-item tool fuse, including duplicate delivery."""
     from backend.runtime.codex_session import ExecutionLimitExceeded
 
     async with session(tmp_path, max_tool_calls=3) as runtime:
         with pytest.raises(ExecutionLimitExceeded, match="tool"):
-            await runtime.run("tools")
+            await runtime.run(scenario)
     async with session(tmp_path, max_tool_calls=4) as runtime:
-        assert (await runtime.run("tools")).tool_calls == 4
+        assert (await runtime.run(scenario)).tool_calls == 4
 
 
 async def test_observed_token_budget_interrupts_instead_of_retrying_a_provider(

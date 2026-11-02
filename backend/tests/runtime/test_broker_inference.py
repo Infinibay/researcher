@@ -65,7 +65,9 @@ def native(
     resume_thread_id=None,
     operation_key="inference",
     peer_id=None,
+    web_search="disabled",
 ):
+    """Build an actual broker session with a controlled generative peer."""
     from backend.runtime.codex_rpc import JsonRpcClient
     from backend.runtime.codex_session import CodexSession, ExecutionLimits
     from backend.runtime.egress_proxy import EgressPolicy
@@ -84,6 +86,7 @@ def native(
         host_tools=True,
         code_host=setup.code_host,
         native_state=state,
+        web_search=web_search,
     )
     return CodexSession(
         JsonRpcClient(endpoint),
@@ -356,11 +359,19 @@ async def test_retained_composition_resumes_same_thread_and_never_replays_turn(
 
 @pytest.mark.parametrize(
     "change",
-    ["catalog", "model", "instructions", "lost_thread_receipt", "stored_metadata"],
+    [
+        "catalog",
+        "model",
+        "instructions",
+        "search_mode",
+        "lost_thread_receipt",
+        "stored_metadata",
+    ],
 )
 async def test_retained_composition_rejects_changed_or_unknown_session_before_resume(
     composed_setup, tmp_path, change
 ):
+    """Reject resume when any frozen session policy or original receipt differs."""
     from backend.runtime.broker_inference import broker_inference
     from backend.runtime.broker_stdio import AsyncPeerBroker
     from backend.runtime.business_mediation import BusinessTools
@@ -413,6 +424,7 @@ async def test_retained_composition_rejects_changed_or_unknown_session_before_re
             resume_thread_id=thread,
             operation_key="resume",
             peer_id=replacement(s.registry, original_peer),
+            web_search="live" if change == "search_mode" else "disabled",
         )
         if change == "model":
             second.model = "another-model"
@@ -445,3 +457,50 @@ async def test_retained_composition_rejects_changed_or_unknown_session_before_re
             and "thread/start" not in methods
             and "turn/start" not in methods
         )
+
+
+@pytest.mark.parametrize("available", [True, False])
+async def test_search_capability_is_checked_before_thread_creation(
+    composed_setup, available
+):
+    """Unsupported discovery must not spend a turn or silently pick a provider."""
+    from backend.runtime.broker_inference import broker_inference
+    from backend.runtime.broker_stdio import AsyncPeerBroker
+    from backend.runtime.business_mediation import BusinessTools
+    from backend.runtime.native_search import NativeSearchUnavailable
+
+    s = composed_setup
+    if not available:
+        (s.s.workspace / "search-unavailable").touch()
+    async with AsyncPeerBroker(s.broker) as owner:
+        session = native(owner, s, web_search="live")
+        endpoint = owner.ken(
+            s.registry,
+            ken_peer(s.registry, s.command),
+            operation_key="ken-search",
+            installation=s.installation,
+        )
+        business = await BusinessTools.connect(Peer([tool("researcher_source_read")]))
+
+        async def open_search():
+            """Open the real host composition without requesting generation."""
+            async with broker_inference(
+                session,
+                endpoint,
+                prepared_operation=s.prepared,
+                business=business,
+                analysis=SimpleNamespace(catalog=[]),
+            ) as facade:
+                assert facade.web_search == "live"
+                methods = (await session.rpc.request("test/summary"))["methods"]
+                assert methods.index("modelProvider/capabilities/read") < methods.index(
+                    "thread/start"
+                )
+                assert "turn/start" not in methods
+
+        if available:
+            await open_search()
+        else:
+            with pytest.raises(NativeSearchUnavailable, match="unavailable"):
+                await open_search()
+            assert session.thread_id is None and session.turns_sent == 0

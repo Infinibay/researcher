@@ -255,6 +255,7 @@ class RuntimeService:
             return run
 
     async def _note_issue(self, run, code, *, attempt_id=None, inference_started=False):
+        """Persist a safe, actionable owner explanation for this original run."""
         messages = {
             "binding_missing": (
                 "Esta solicitud antigua no registró su repositorio. Cancélala y crea otra con una selección comprobable.",
@@ -275,6 +276,10 @@ class RuntimeService:
             "runtime_failed": (
                 "La ejecución no dejó una propuesta verificable. Conservamos los datos y recibos guardados; no se repetirá por su cuenta.",
                 "inspect_saved_work",
+            ),
+            "native_search_unavailable": (
+                "El proveedor configurado no admite búsqueda web nativa. No se inició inferencia ni se cambió de proveedor. Revisa la configuración del runtime y las capacidades de la cuenta antes de crear otra solicitud.",
+                "review_runtime_configuration",
             ),
             "task_changed": (
                 "La tarea cambió a un tipo que este motor todavía no puede ejecutar. La solicitud sigue guardada; revisa la tarea antes de continuar.",
@@ -555,6 +560,7 @@ class RuntimeService:
                         )
 
                     async def on_event(event):
+                        """Retain bounded original-turn facts without granting effect authority."""
                         method, params = event.get("method"), event.get("params", {})
                         if method == "thread/tokenUsage/updated":
                             await asyncio.to_thread(
@@ -566,19 +572,29 @@ class RuntimeService:
                         item = params.get("item", {})
                         if method not in ("item/started", "item/completed") or item.get(
                             "type"
-                        ) not in ("mcpToolCall", "dynamicToolCall"):
+                        ) not in ("mcpToolCall", "dynamicToolCall", "webSearch"):
                             return
                         stage = "started" if method == "item/started" else "completed"
+                        payload = {
+                            "thread_id": session.thread_id,
+                            "item_id": item["id"],
+                            "type": item["type"],
+                        }
+                        if item["type"] == "webSearch":
+                            from backend.runtime.native_search import search_observation
+
+                            payload = search_observation(
+                                item,
+                                mode=getattr(session, "web_search", "disabled"),
+                                thread_id=session.thread_id,
+                                turn_id=params.get("turnId"),
+                            )
                         await asyncio.to_thread(
                             self.store.observe_native,
                             lease,
                             observation_key="tool-" + stage + "-" + item["id"],
                             native_kind="tool." + stage,
-                            payload={
-                                "thread_id": session.thread_id,
-                                "item_id": item["id"],
-                                "type": item["type"],
-                            },
+                            payload=payload,
                         )
 
                     result = await session.run(
@@ -711,7 +727,9 @@ class RuntimeService:
                     )
                     if result is None and error_type is not None:
                         code = (
-                            "input_too_large"
+                            "native_search_unavailable"
+                            if error_type == "NativeSearchUnavailable"
+                            else "input_too_large"
                             if error_type == "InputTooLarge"
                             else "workspace_changed"
                             if error_type == "WorkspaceChanged"

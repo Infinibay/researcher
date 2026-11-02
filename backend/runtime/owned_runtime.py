@@ -54,9 +54,17 @@ async def _drain(reader):
 
 
 class OwnedInferenceSession(InferenceSession):
+    """Expose one original owned session and revoke its entire domain on Stop."""
+
     def __init__(self, session, owner, withdraw):
+        """Retain the original session, owner and revocation callback."""
         super().__init__(session.native, session.business, session.active)
         self._session, self._owner, self._withdraw = session, owner, withdraw
+
+    @property
+    def web_search(self):
+        """Return the attested search mode rather than guessing from model text."""
+        return self._session.web_search
 
     async def run(self, text, *, on_event=None, on_started=None):
         return await self._session.run(text, on_event=on_event, on_started=on_started)
@@ -69,6 +77,8 @@ class OwnedInferenceSession(InferenceSession):
 
 @dataclass(frozen=True)
 class OwnedCodexRuntime:
+    """Build subscription-only research sessions with required Ken and explicit search."""
+
     app: object
     research: object
     live_grants: object
@@ -83,9 +93,16 @@ class OwnedCodexRuntime:
     token_source: object
     broker_limits: object
     model: str
+    web_search: str = "live"
     _closed_attempts: dict = field(
         default_factory=dict, init=False, repr=False, compare=False
     )
+
+    def __post_init__(self):
+        """Reject invalid search configuration before admitting a product attempt."""
+        from backend.runtime.native_search import validate_search_mode
+
+        validate_search_mode(self.web_search)
 
     def consume_closure(self, lease):
         return self._closed_attempts.pop(lease.attempt_id, None) == (
@@ -105,6 +122,7 @@ class OwnedCodexRuntime:
         limits=None,
         peer_owner=None,
     ):
+        """Admit one original project attempt with required Ken and revocable peers."""
         if (
             peer_owner is None
             or self.app.state.live_grants is not self.live_grants
@@ -218,6 +236,7 @@ class OwnedCodexRuntime:
                                     idle_seconds=60,
                                 ),
                                 host_tools=True,
+                                web_search=self.web_search,
                             )
                             native = CodexSession(
                                 JsonRpcClient(

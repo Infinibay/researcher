@@ -50,10 +50,18 @@ def _prepared(endpoint, operation_id):
 
 
 class BrokerInferenceSession(InferenceSession):
+    """Refresh required Ken before dispatch and preserve the native launch policy."""
+
     def __init__(self, native, tools, active, refresh, endpoint):
+        """Bind host dispatch to this original native endpoint."""
         super().__init__(native, tools, active)
         self._refresh = refresh
         self._endpoint = endpoint
+
+    @property
+    def web_search(self):
+        """Expose the original manifested native discovery mode to the coordinator."""
+        return self._endpoint.web_search
 
     async def _request(self, request):
         if self.active() and request["method"] == "item/tool/call":
@@ -144,6 +152,7 @@ async def broker_inference(
         previous = native.before_thread
 
         async def preflight(rpc):
+            """Attest host policy, required Ken and search capability before a thread."""
             if previous is not None:
                 await previous(rpc)
             config = (await rpc.request("config/read", {"includeLayers": False}))[
@@ -151,7 +160,8 @@ async def broker_inference(
             ]
             features = config.get("features", {})
             if (
-                not all(
+                config.get("web_search") != endpoint.web_search
+                or not all(
                     features.get(name) is True
                     for name in (
                         "code_mode_host",
@@ -185,6 +195,14 @@ async def broker_inference(
                 )
             ):
                 raise RpcProtocolError("Owned native host-tool configuration mismatch")
+            if endpoint.web_search != "disabled":
+                from backend.runtime.native_search import NativeSearchUnavailable
+
+                capabilities = await rpc.request("modelProvider/capabilities/read", {})
+                if capabilities.get("webSearch") is not True:
+                    raise NativeSearchUnavailable(
+                        "Configured native web search is unavailable; no fallback was dispatched"
+                    )
             await refresh()
             await probe_code_mode(rpc)
             if endpoint.native_state is not None:
@@ -196,6 +214,7 @@ async def broker_inference(
                     catalog_hash=tools.catalog_hash,
                     developer_instructions=native.developer_instructions,
                     resume_thread_id=native.resume_thread_id,
+                    web_search=endpoint.web_search,
                 )
                 if native.resume_thread_id is not None:
                     thread = (

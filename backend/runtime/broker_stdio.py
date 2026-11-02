@@ -102,7 +102,9 @@ class AsyncPeerBroker:
         host_tools=False,
         code_host=None,
         native_state=None,
+        web_search="disabled",
     ):
+        """Describe a native peer with a fixed, manifested discovery policy."""
         return self._endpoint(
             registry,
             peer_id,
@@ -113,6 +115,7 @@ class AsyncPeerBroker:
             host_tools=host_tools,
             code_host=code_host,
             native_state=native_state,
+            web_search=web_search,
         )
 
     def ken(
@@ -151,7 +154,9 @@ class AsyncPeerBroker:
         code_host=None,
         native_state=None,
         command_only=False,
+        web_search="disabled",
     ):
+        """Allocate one non-replayable endpoint while its broker remains admitted."""
         if not self._entered or self._closing is not None:
             raise AuthorityConflict("Async broker is not admitted")
         if len(self._endpoints) >= 128:
@@ -172,11 +177,13 @@ class AsyncPeerBroker:
             code_host=code_host,
             native_state=native_state,
             command_only=command_only,
+            web_search=web_search,
         )
         self._endpoints.append(endpoint)
         return endpoint
 
     async def _start(self, endpoint):
+        """Forward the original endpoint policy to the bounded launch worker."""
         if self._closing is not None:
             raise AuthorityConflict("Async broker admission withdrawn")
         if len(self._pending) >= 8:
@@ -205,6 +212,8 @@ class AsyncPeerBroker:
             payload["egress"] = endpoint.egress
         if endpoint.host_tools is not False:
             payload["host_tools"] = endpoint.host_tools
+        if endpoint.web_search != "disabled":
+            payload["web_search"] = endpoint.web_search
         if endpoint.code_host is not None:
             payload["code_host"] = endpoint.code_host
         if endpoint.native_state is not None:
@@ -338,7 +347,9 @@ class BrokerEndpoint:
         code_host=None,
         native_state=None,
         command_only=False,
+        web_search="disabled",
     ):
+        """Retain launch arguments and handles for exactly one owned connection."""
         self.owner, self.registry, self.peer_id = owner, registry, peer_id
         self.operation_key, self.code = operation_key, code
         self.asset = asset
@@ -349,6 +360,7 @@ class BrokerEndpoint:
         self.code_host = code_host
         self.native_state = native_state
         self.command_only = command_only
+        self.web_search = web_search
         self.stdin = self.stdout = self.stderr = None
         self._raw = None
         self._operation = None

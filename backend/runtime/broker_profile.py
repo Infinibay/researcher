@@ -281,20 +281,29 @@ class NativeCapsule(AnalysisCapsule):
         host_tools=False,
         code_host=None,
         native_state=None,
+        web_search="disabled",
     ):
+        """Bind the inspected assets and trusted search mode to this capsule."""
         super().__init__(binding, None, info_fd)
         self.asset = asset
         self.network_config = network
         self.host_tools = host_tools
         self.code_host = code_host
         self.native_state = native_state
+        from backend.runtime.native_search import validate_search_mode
+
+        self.web_search = validate_search_mode(web_search)
+        if self.web_search != "disabled" and not host_tools:
+            raise ValueError("Native search requires the owned host-tools profile")
         self._state_fd = None
         self._code_host_fd = None
         self._network_fds = {}
         self._asset_fd = None
 
     def _program(self):
+        """Verify asset identities and construct the fixed native CLI policy."""
         path = Path(self.asset.path)
+        # Asset descriptors and CLI configuration are fixed before the launch gate.
         if path.is_relative_to(self.binding.workspace):
             raise ValueError("Native asset cannot belong to the source workspace")
         self._asset_fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC)
@@ -351,7 +360,7 @@ class NativeCapsule(AnalysisCapsule):
             "-c",
             "project_doc_max_bytes=0",
             "-c",
-            'web_search="disabled"',
+            'web_search="' + self.web_search + '"',
             "-c",
             'projects={"/run/researcher-source"={trust_level="untrusted"}}',
         ]
@@ -452,7 +461,9 @@ class NativeProxyCapsule(NativeCapsule):
         host_tools=False,
         code_host=None,
         native_state=None,
+        web_search="disabled",
     ):
+        """Keep the trusted discovery policy inside the original private network."""
         super().__init__(
             binding,
             asset,
@@ -461,6 +472,7 @@ class NativeProxyCapsule(NativeCapsule):
             host_tools=host_tools,
             code_host=code_host,
             native_state=native_state,
+            web_search=web_search,
         )
         self.channel = channel
 

@@ -8,12 +8,13 @@ import tomllib
 from pathlib import Path
 
 features = {}
+config = {}
 args = iter(sys.argv[1:])
 for arg in args:
     if arg in ("--enable", "--disable"):
         features[next(args)] = arg == "--enable"
     elif arg == "-c":
-        tomllib.loads("value=" + next(args).split("=", 1)[1])
+        config.update(tomllib.loads(next(args)))
 steps = 0
 source = finding = job = None
 
@@ -143,7 +144,13 @@ for line in sys.stdin:
                 "forced_login_method": "chatgpt",
                 "model_provider": "openai",
                 "chatgpt_base_url": "https://chatgpt.com/backend-api/",
+                "web_search": config.get("web_search", "disabled"),
             }
+        }
+    elif method == "modelProvider/capabilities/read":
+        result = {
+            "webSearch": not Path("search-unavailable").exists(),
+            "imageGeneration": False,
         }
     elif method == "command/exec":
         output = subprocess.run(

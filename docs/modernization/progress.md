@@ -4213,3 +4213,63 @@ Resume at139250c; avoid re-running Wiki tests after docs-only followup.
  621matching Python/SQL files. Full source1792/1689pass/100EXACTbaselinefail/3skip,
  645runtime;25newcases. Final frontend55/build, docstring presence audit clean on
   changed/new declarations. Full goal and whole-branch documentation audit remain open.
+
+## Active delivery: native search and scoped discovery provenance (BASE8a86957)
+
+- Reused actual native webSearch budget/control support and captured-source pipeline;
+  no second inference loop or fallback provider. Required published Ken remains admitted
+  before native threads. Root policy passed through owned config/broker/manifest/capsule,
+  attested by config/read; command/diagnostic peers retain disabled search. Explicit
+  disabled/cached/indexed/live choices; owned product defaults live. Original native
+  intent also freezes the search mode across resume.
+- RED5: absent bounded search observation helper and unsupported search-policy arguments;
+  RED1: coordinator discarded native search observations. GREEN6 then directed73pass
+  (37.34s), including real account-free Codex config modes, journal manifest, unchanged
+  shell restrictions, readiness-before-thread capability guard and persisted scoped URL
+  observations after reopening SQL. No scientific source created by discovery records.
+- Provider-defined optional results are not assumed present: retain missing/supplied,
+  observed safe URL fields, query/action, mode/provider, original thread/turn, input hash
+  and explicit truncation. Discard arbitrary fields; snippets never count as capture.
+  Existing runtime-events pagination recovers observations without a new store/schema.
+- One bounded synthetic product/subscription+realKen trial has now been dispatched by
+  probe-native-search.py; log native-search-live.log, private result
+  native-search-live-result.json. Inspect its original handle/result before any retry.
+  No API-key path. Need actual entitlement/event/source->finding->draft evidence,
+  cancellation/context fault checks, wheel/global regression and documentation before
+  committing this delivery. Whole goal remains active; no global percent claimed.
+
+- Single subscription trial terminal PASS (native-search-7447e5ad0f): one search,
+  one openPage, four durable search events; actual native supplied structured results.
+  Captured URL is in observed candidate URLs; captured content hash and exact citation
+  verified. Required ken_find/read, capture/read, finding provisional and report draft
+  write/read all ran. One dispatch/turn, reported cumulative257498tokens (not billing
+  estimate), no command jobs. All owned peers/domain/egress closed, grant retired,
+  source unchanged and native access-token scan clear. Receipt native-search-live.json.
+- Additional fault verification: tool budget includes duplicate-delivered webSearch;
+  original intent rejects changed search mode before resume. Late facts after Stop or
+  correction remain original-context observations without new source/dispatch. Corrected
+  two test-harness assumptions: source kind is user_message; a corrected standalone
+  store remains reconciling pending physical-close reconciliation, not superseded.
+  Existing safe product behavior retained. Directed control8pass, late8pass.
+- Real RED->GREEN for overlong single URL omission: previously dropped without marking
+  truncation, now explicit. Real RED->GREEN owner issue for unsupported provider:
+  previously runtime_failed, now native_search_unavailable with safe Spanish explanation,
+  inference_started=false, review_runtime_configuration; actual owned closure verified,
+  no dispatch/finding. One passed product test. No second subscription trial.
+- Changed/new declaration docstring AST audit has no missing entries; whole-branch
+  documentation audit remains pending. Isolated wheel regression is running from the
+  final source, exec88205. It includes retained capabilities plus search/broker/state/
+  session/control tests. Global run waits for its terminal receipt; do not replay trial.
+- Final serialization fault RED: raw UTF-8 preview bounds still allowed79,680JSONbytes
+  with control characters/escaped URL paths, exceeding the32,000record limit. Text and
+  URL budgets now count serialized JSON bytes; truncation remains explicit. Added the
+  regression to the existing bounded-observation test. This warranted fresh package and
+  global checks; no extra subscription run. Test fake formatting normalized in the same
+  final source freeze.
+- First global terminal before that JSON-budget fix:1701pass/100baselinefail/1extra
+  fixture timeout/3skip (357.85s). Extra timeout in unchanged
+  TestCodeReviewFlowStart::test_receive_review_request setup INSERT; isolated exact
+  test passed3.70s. Not relabeled as a source regression or silently ignored: retained
+  before-json-budget logs/XML; final global will compare every failure identity again.
+
+- Native search delivery terminal: 1805 casos: 1702 pasan, 100 fallos heredados y 3 omitidos; 658 runtime pass, 14 new cases. Wheel452 pasan y 1 fallo heredado explícito, 623 exact Python/SQL matches. One subscription trial; frontend unchanged. All 43 scenarios and the whole goal remain open.

@@ -99,6 +99,7 @@ def configured_runtime(live_grants, *, app=None):
 
 
 def _configured_owned(config, path, live_grants, app):
+    """Validate owner configuration and compose the actual serving controller."""
     from backend.runtime.authority_journal import WitnessedAuthorityJournal
     from backend.runtime.broker_profile import CodexAsset
     from backend.runtime.contracts import text
@@ -181,6 +182,7 @@ def _configured_owned(config, path, live_grants, app):
         token_source=ManagedTokenFile(paths["token_file"]),
         broker_limits=BrokerLimits(**config["broker_limits"]),
         model=config["model"],
+        web_search=config.get("web_search", "live"),
     )
     app.state.runtime_research_store = research
     return RuntimeService(
