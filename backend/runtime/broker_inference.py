@@ -2,7 +2,7 @@
 
 import asyncio
 import json
-from contextlib import asynccontextmanager
+from contextlib import AsyncExitStack, asynccontextmanager
 from pathlib import Path
 
 from backend.runtime.broker_mcp import McpTransportError, broker_mcp
@@ -87,7 +87,14 @@ class BrokerInferenceSession(InferenceSession):
 
 @asynccontextmanager
 async def broker_inference(
-    native, ken_endpoint, *, prepared_operation, business, analysis, active=lambda: True
+    native,
+    ken_endpoint,
+    *,
+    prepared_operation,
+    business,
+    analysis,
+    active=lambda: True,
+    prepare_ken=None,
 ):
     """Require original successful preparation and Ken readiness before admission.
 
@@ -106,7 +113,7 @@ async def broker_inference(
         or ken_endpoint.ken is None
         or ken_endpoint.ken_mode != "mcp"
         or native.workspace != PEER_WORKSPACE
-        or native.sandbox != "read-only"
+        or native.sandbox not in ("read-only", "workspace-write")
         or native.permission_profile is not None
         or (native.resume_thread_id is not None and endpoint.native_state is None)
         or native.thread_id is not None
@@ -115,6 +122,17 @@ async def broker_inference(
     ):
         raise RpcProtocolError(
             "Owned native/Ken profiles and an original readonly session required"
+        )
+
+    admission = await asyncio.to_thread(endpoint.registry.admission, endpoint.peer_id)
+    expected_sandbox = (
+        "workspace-write"
+        if admission["execution_kind"] == "development"
+        else "read-only"
+    )
+    if native.sandbox != expected_sandbox:
+        raise RpcProtocolError(
+            "Native filesystem policy differs from its current admitted execution kind"
         )
 
     def admitted():
@@ -129,9 +147,23 @@ async def broker_inference(
     await asyncio.to_thread(_prepared, ken_endpoint, prepared_operation)
     if not admitted():
         raise RpcProtocolError("Ken admission authority ended")
-    async with broker_mcp(ken_endpoint) as peer:
+    async with AsyncExitStack() as ken_scope:
         try:
-            ken = await KenTools.connect(peer, active=admitted)
+            if prepare_ken is None:
+                peer = await ken_scope.enter_async_context(broker_mcp(ken_endpoint))
+                ken = await KenTools.connect(peer, active=admitted)
+            else:
+                from backend.runtime.ken_development import DevelopmentKen
+
+                ken = await ken_scope.enter_async_context(
+                    DevelopmentKen(
+                        ken_endpoint,
+                        prepare=prepare_ken,
+                        validate=_prepared,
+                        quiet=analysis.quiescent,
+                        active=admitted,
+                    )
+                )
         except (KenNotReady, McpTransportError):
             raise RpcProtocolError(
                 "Ken catalog is not ready for native admission"
@@ -140,8 +172,13 @@ async def broker_inference(
         ken_hash = ken.catalog_hash
 
         async def refresh():
+            """Validate the original Ken catalog without reindexing while command control may still be needed."""
             try:
-                current = await KenTools.connect(peer, active=admitted)
+                if prepare_ken is None:
+                    current = await KenTools.connect(peer, active=admitted)
+                else:
+                    await ken.require_ready()
+                    current = ken
             except (KenNotReady, McpTransportError):
                 raise RpcProtocolError("Ken catalog is no longer ready") from None
             if current.catalog_hash != ken_hash:

@@ -2,9 +2,9 @@
 
 El sistema prepara una copia Git privada por intento y permite escritura en ella
 desde los perfiles nativos internos de desarrollo. **El servicio público todavía
-no admite tareas de desarrollo.** Falta conectar la fábrica de sesiones y los
-contratos de entrada/herramientas, y completar candidatos, comprobaciones, revisión
-y publicación.
+no admite tareas de desarrollo.** La fábrica interna ya conecta la preparación,
+el contexto y las herramientas de desarrollo. Faltan candidatos, comprobaciones,
+revisión, aceptación y publicación para completar el recorrido del producto.
 
 ## Dos directorios con responsabilidades distintas
 
@@ -111,13 +111,42 @@ de proceso. Se conserva lo ya escrito; un cierre confirmado no convierte esos
 archivos en un candidato aceptado. Repetir un lanzamiento devuelve su recibo sin
 abrir otra puerta de ejecución. Las pruebas también usan un proceso con la forma
 de Ken para comprobar lectura del código actualizado en esa misma copia y negativa
-de escritura. La prueba específica con Ken publicado durante un flujo completo de
-desarrollo sigue pendiente.
+de escritura.
 
-Los siguientes pasos son conectar la preparación con `OwnedCodexRuntime`, adaptar
-su contexto y catálogo de herramientas al trabajo de desarrollo, comprobar Ken
-publicado sobre esa misma copia y entregar un candidato ligado a repositorio,
-base, head, contexto e intento.
+## Sesión interna y actualización del índice de Ken
+
+`OwnedCodexRuntime` prepara la copia antes de iniciar los procesos de desarrollo.
+La entrada persistida identifica el repositorio, la base y el intento, y explica
+que editar no acepta ni publica la tarea. Las herramientas de desarrollo excluyen
+la propuesta de resultados de investigación; un permiso de investigación no se
+convierte en permiso de desarrollo. Las instrucciones exigen distinguir evidencia
+de suposiciones, explicar con ejemplos y documentar el código con docstrings en
+inglés para facilitar su búsqueda.
+
+Un índice preparado antes de una edición puede quedar obsoleto. La comprobación
+con `ken-rank` 0.18.0 publicado reprodujo este fallo al buscar un símbolo nuevo.
+`DevelopmentKen` calcula una huella acotada del código mediante procesos propios
+en lectura. Cuando cambia, cierra el MCP anterior, prepara de nuevo el índice y
+abre otro MCP bajo el mismo propietario. Un único task conserva la propiedad de
+los contextos del SDK durante su apertura, uso y cierre. Las lecturas repetidas y
+las escrituras internas de `.ken` no fuerzan otra preparación.
+
+Antes de consultar código se exige que no queden escritores activos; se comprueba
+la huella después de la consulta y se rechaza el resultado si cambió entre ambos
+puntos. Se mantienen disponibles las herramientas para leer o cancelar el comando.
+Si la cancelación cierra el proceso pero no obtiene un resultado final fiable,
+el intento pasa a reconciliación y no continúa consultando ni ejecutando efectos.
+El cierre físico no demuestra qué modificaciones se completaron.
+
+La prueba con el paquete publicado encontró un símbolo añadido en un archivo
+editado y otro en un archivo nuevo, mantuvo intacto el origen y cerró todos los
+procesos propios. Usó llamadas controladas a herramientas en una sesión interna;
+no inició generación de modelo ni demuestra admisión pública, revisión de código
+o publicación. La huella tiene límites de 20.000 entradas, 256 MiB y diez segundos;
+superarlos bloquea la consulta. No constituye una captura atómica del candidato.
+
+El siguiente paso es entregar un candidato ligado a repositorio, base, head,
+contexto e intento, comprobarlo y revisarlo antes de habilitar la entrada pública.
 Después deben integrarse comprobaciones, revisión independiente, aceptación y
 publicación reconciliada. Terminar un turno o emitir texto de aprobación no cierra
 ese ciclo.

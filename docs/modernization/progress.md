@@ -4722,3 +4722,41 @@ Resume at139250c; avoid re-running Wiki tests after docs-only followup.
   admission remain disconnected. Next is the full developer session/candidate
   workflow, with checks, independent review, owner acceptance and publication;
   files on disk and successful turns do not close that workflow or the whole goal.
+
+#### Internal development session and published Ken refresh — after 7db5e2a
+
+- The internal owned factory prepares the private copy before native/Ken startup;
+  code/bug-fix admissions derive the development kind and freeze input against
+  that actual execution directory. Original repository identity remains separate.
+  Existing public service restrictions remain in place. Development capabilities
+  exclude research result delivery, and a research grant cannot open this role.
+- Development instructions distinguish observed evidence, user statements and
+  assumptions, require useful examples/correction paths and English docstrings,
+  and reserve candidate acceptance/publication for the host workflow. A completed
+  controlled turn edits the copy, keeps the source intact and leaves needs_review.
+- Actual published ken-rank0.18.0 exposed stale source catalog after an edit.
+  DevelopmentKen now closes MCP, reruns original-owned preparation and reopens
+  MCP after a bounded source revision changes. One SDK owner task keeps AnyIO
+  context entry/use/exit together. Reads check revisions before/after retrieval;
+  active writers block code queries while command read/cancel remain reachable.
+- Published Ken probe passes36.87s: symbols in an edited file and a new file are
+  found, exactly3 preparations occur (initial + two source changes), an unchanged
+  read causes no preparation, original source stays intact and all peers close.
+  This is actual Ken/kernel/tool mediation with controlled native protocol and
+  zero model turns, not public admission or delivery/review/publication evidence.
+- Lifecycle6PASS/0FAIL includes late context correction, unchanged reads/cache,
+  writer blocking and Stop during reindex. A synchronous controlled command
+  transport cannot acknowledge termination: closure is recorded but unknown exit
+  correctly fences the attempt into reconciling. The initial positive expectation
+  was incorrect; the final test asserts no reindex or continued authority. The
+  production safeguard was preserved, with no fabricated exit code or replay.
+- Final relevant integration61PASS/0FAIL in71.83s. Earlier extended directed group
+  90PASS before the3additional lifecycle cases. Changed-file Ruff and whitespace
+  pass;44new/changed definitions documented. No model calls, frontend or lock
+  changes. Whole-source and wheel gates were not rerun for this increment; their
+  previous receipts still describe7db5e2a, not these changes.
+- Receipts:development-session-results.json, development-session-published-ken.json
+  and development-session-docstrings.json; updated development-execution.md.
+  Next: immutable code candidates, independent checks/review, explicit acceptance
+  and publication, then public development admission. Legacy migration, prompt
+  evaluation, remaining6page redesigns and whole-plan acceptance remain open.

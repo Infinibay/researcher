@@ -201,6 +201,7 @@ class SQLiteRunStore:
 
     @staticmethod
     def _review_request(conn, project_id, run_id, *, require_current=False):
+        """Read a bound finding-review subject; productive research/development roots have no review request."""
         """Read the original review descriptor, optionally requiring its subject now."""
         from backend.knowledge.reviews import verify_current
 
@@ -210,7 +211,7 @@ class SQLiteRunStore:
             (project_id, run_id),
         ).fetchone()
         if request is None:
-            if run["execution_kind"] != "research":
+            if run["execution_kind"] not in ("research", "development"):
                 raise RunConflict("Review execution has no original admitted subject")
             return None
         if (
@@ -439,8 +440,20 @@ class SQLiteRunStore:
             )
             if review is not None:
                 context["review"] = review
-            if context["task"]["type"] != "research":
+            development = row["execution_kind"] == "development"
+            expected_types = ("code", "bug_fix") if development else ("research",)
+            if context["task"]["type"] not in expected_types:
                 raise RunConflict("Task type changed before input reservation")
+            if development:
+                from backend.runtime.development_state import DevelopmentWorkspaces
+
+                view = DevelopmentWorkspaces.read_view(conn, lease.project_id, lease.attempt_id)
+                context["execution"] = {
+                    "kind": "development", "repository_id": view.source.repository_id,
+                    "base_sha": view.base_sha, "base_tree_sha": view.base_tree_sha,
+                    "workspace": "/run/researcher-source", "workspace_access": "private-write",
+                    "acceptance": "not_granted", "publication": "not_granted",
+                }
             frozen = freeze_input(conn, row, context)
             if (
                 len(frozen.input_text.encode())
@@ -988,7 +1001,7 @@ class SQLiteRunStore:
     def admit_once(
         self, spec: RunSpec, *, conversation_thread=None, binding=None, review=None
     ):
-        """Atomically admit a scoped run, freezing an independently authored review target."""
+        """Admit a typed author or bound independent finding review without reinterpreting historical receipts."""
         repository_id = binding.requested_repository_id if binding else None
         intent = self._admission_intent(
             spec, conversation_thread, repository_id, review
@@ -1023,6 +1036,8 @@ class SQLiteRunStore:
             )
             run_id = str(uuid4())
             now = self.clock()
+            task_type = conn.execute("SELECT type FROM tasks WHERE project_id=? AND id=?", (spec.project_id, spec.task_id)).fetchone()[0]
+            execution_kind = "finding_review" if review is not None else ("development" if task_type in ("code", "bug_fix") else "research")
             conn.execute(
                 """INSERT INTO runtime_runs(id,project_id,task_id,actor_id,context_version,operation_key,prompt,runtime,status,created_at,updated_at,execution_kind)
                 VALUES(?,?,?,?,?,?,?,?,'queued',?,?,?)""",
@@ -1037,7 +1052,7 @@ class SQLiteRunStore:
                     spec.runtime,
                     now,
                     now,
-                    "finding_review" if review is not None else "research",
+                    execution_kind,
                 ),
             )
             if subject is not None:

@@ -1,0 +1,42 @@
+{
+  "status": "scoped_verification_passed",
+  "base_commit": "7db5e2a",
+  "internal_development_session": true,
+  "public_development_admission": false,
+  "candidate_checks_review_acceptance_publication": "pending",
+  "tests": {
+    "development_session_lifecycle": {
+      "passed": 6,
+      "failed": 0,
+      "seconds": 33.74
+    },
+    "integration": {
+      "passed": 61,
+      "failed": 0,
+      "seconds": 71.83,
+      "files": [
+        "backend/tests/runtime/test_development_session.py",
+        "backend/tests/runtime/test_owned_factory.py",
+        "backend/tests/runtime/test_analysis_tools.py",
+        "backend/tests/runtime/test_broker_inference.py"
+      ]
+    },
+    "earlier_extended_directed": {
+      "passed": 90,
+      "failed": 0,
+      "seconds": 62.49,
+      "scope": "before the three additional index lifecycle cases"
+    }
+  },
+  "published_ken_probe": "development-session-published-ken.json",
+  "changed_definitions_documented": 44,
+  "ruff": "passed on changed Python files",
+  "whitespace": "passed",
+  "model_calls": 0,
+  "full_source_and_wheel": "not rerun for this increment; prior receipts concern base 7db5e2a only",
+  "limits": [
+    "Controlled native generation protocol; actual owned kernel/tool boundaries and published Ken.",
+    "Source fingerprint is retrieval consistency, not an atomic candidate.",
+    "Public service remains restricted to research."
+  ]
+}

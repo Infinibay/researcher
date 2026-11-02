@@ -18,6 +18,7 @@ for arg in args:
 steps = 0
 source = finding = job = report = None
 review_mode = False
+development_mode = False
 review_subject = None
 
 
@@ -45,6 +46,8 @@ def next_tool(response=None):
     """Advance controlled author or reviewer generation while using the real admitted tool bridge."""
     if review_mode:
         return next_review_tool(response)
+    if development_mode:
+        return next_development_tool(response)
     global steps, source, finding, job, report
     if response is not None:
         Path("/home/actor/.codex/fixture-progress.json").write_text(
@@ -104,11 +107,17 @@ def next_tool(response=None):
             },
         )
     elif steps == 7:
-        call("researcher_result_propose", {
-            "operation_key": "deliver", "report_ids": [report],
-            "summary": "Inspección documental y cálculo acotado.",
-            "limitations": ["La medición original no se repitió; el cálculo es evidencia separada."],
-        })
+        call(
+            "researcher_result_propose",
+            {
+                "operation_key": "deliver",
+                "report_ids": [report],
+                "summary": "Inspección documental y cálculo acotado.",
+                "limitations": [
+                    "La medición original no se repitió; el cálculo es evidencia separada."
+                ],
+            },
+        )
     else:
         send(
             {
@@ -120,6 +129,61 @@ def next_tool(response=None):
                         "id": "answer",
                         "type": "agentMessage",
                         "text": "Borrador persistido; la tarea requiere revisión.",
+                    },
+                },
+            }
+        )
+        send(
+            {
+                "method": "turn/completed",
+                "params": {
+                    "threadId": "owned-thread",
+                    "turn": {"id": "owned-turn", "status": "completed", "error": None},
+                },
+            }
+        )
+
+
+def next_development_tool(response=None):
+    """Exercise private edits, durable job reads and fresh Ken reads without proposing research acceptance."""
+    global steps, job
+    if response is not None:
+        assert response["success"], response
+        value = json.loads(response["contentItems"][0]["text"])
+        if steps == 2:
+            job = value["job_id"]
+        if steps == 3 and value["status"] != "exited":
+            call("researcher_command_read", {"job_id": job, "wait_ms": 1000})
+            return
+        if steps == 4:
+            assert value == 200, value
+    steps += 1
+    if steps == 1:
+        call("ken_read", {"path": "fact.txt"})
+    elif steps == 2:
+        call(
+            "researcher_python",
+            {
+                "operation_key": "edit-private",
+                "code": "from pathlib import Path;p=Path('fact.txt');p.write_text(str(int(p.read_text())+63));print(p.read_text())",
+                "timeout_seconds": 5.0,
+            },
+        )
+    elif steps == 3:
+        call("researcher_command_read", {"job_id": job, "wait_ms": 1000})
+    elif steps == 4:
+        call("ken_read", {"path": "fact.txt"})
+    else:
+        send(
+            {
+                "method": "item/completed",
+                "params": {
+                    "threadId": "owned-thread",
+                    "turnId": "owned-turn",
+                    "item": {
+                        "id": "answer",
+                        "type": "agentMessage",
+                        "text": "Copia privada actualizada; pendiente de candidato y revisión.",
                     },
                 },
             }
@@ -270,6 +334,7 @@ for line in sys.stdin:
                 "stderr": output.stderr,
             }
     elif method == "thread/start":
+        development_mode = params.get("sandbox") == "workspace-write"
         review_mode = any(
             tool["name"] == "researcher_review_decide"
             for tool in params["dynamicTools"]

@@ -11,20 +11,28 @@ from uuid import uuid4
 
 import httpx
 
-from backend.research.models import RESEARCH_PERMISSIONS, REVIEW_PERMISSIONS
+from backend.research.models import (
+    DEVELOPMENT_PERMISSIONS,
+    RESEARCH_PERMISSIONS,
+    REVIEW_PERMISSIONS,
+)
 from backend.runtime.analysis_tools import AnalysisTools
 from backend.runtime.authority_journal import WitnessedAuthorityJournal
 from backend.runtime.broker_inference import broker_inference
 from backend.runtime.broker_stdio import AsyncPeerBroker
 from backend.runtime.business_mediation import (
+    DEVELOPMENT_NAMES,
     RESEARCH_NAMES,
     REVIEW_NAMES,
     BusinessTools,
 )
 from backend.runtime.codex_rpc import JsonRpcClient, RpcProtocolError
 from backend.runtime.codex_session import CodexSession, ExecutionLimits
+from backend.runtime.development_instructions import DEVELOPMENT_INSTRUCTIONS
+from backend.runtime.development_state import DevelopmentWorkspaces
 from backend.runtime.egress_proxy import EgressPolicy
 from backend.runtime.execution_domain import ExecutionDomain
+from backend.runtime.git_capsule import GitAsset
 from backend.runtime.host_business import host_business
 from backend.runtime.native_commands import broker_command_executor
 from backend.runtime.native_inference import (
@@ -62,10 +70,11 @@ async def _drain(reader):
 class OwnedInferenceSession(InferenceSession):
     """Expose one original owned session and revoke its entire domain on Stop."""
 
-    def __init__(self, session, owner, withdraw):
-        """Retain the original session, owner and revocation callback."""
+    def __init__(self, session, owner, withdraw, *, execution_workspace=None):
+        """Retain original ownership and the actual execution directory as data, never as an access grant."""
         super().__init__(session.native, session.business, session.active)
         self._session, self._owner, self._withdraw = session, owner, withdraw
+        self.execution_workspace = execution_workspace
 
     @property
     def web_search(self):
@@ -83,7 +92,7 @@ class OwnedInferenceSession(InferenceSession):
 
 @dataclass(frozen=True)
 class OwnedCodexRuntime:
-    """Build subscription-only research sessions with required Ken and explicit search."""
+    """Build subscription-only sessions with required Ken and host-owned private development views."""
 
     app: object
     research: object
@@ -154,8 +163,12 @@ class OwnedCodexRuntime:
             lease.run_id,
             require_current=True,
         )
+        run = await _settled(registry.runs.get, lease.project_id, lease.run_id)
+        development = run.execution_kind == "development"
         expected_permissions = (
-            REVIEW_PERMISSIONS if review is not None else RESEARCH_PERMISSIONS
+            DEVELOPMENT_PERMISSIONS
+            if development
+            else (REVIEW_PERMISSIONS if review is not None else RESEARCH_PERMISSIONS)
         )
         if scope.permissions != expected_permissions:
             raise ValueError(
@@ -164,7 +177,7 @@ class OwnedCodexRuntime:
         limits = limits or ExecutionLimits(180, 90, 1, 25, 350000)
         workspace = Path(workspace).resolve(strict=True)
         native_peer = peer_owner.ids["native"]
-        binding = await _settled(registry.workspace_binding, native_peer)
+        binding = await _settled(registry.source_binding, native_peer)
         if binding is None or Path(binding.workspace) != workspace:
             raise ValueError("Owned runtime workspace differs from original admission")
         _private_control(self.control_root)
@@ -200,6 +213,18 @@ class OwnedCodexRuntime:
 
                         watcher = asyncio.create_task(watch())
                         try:
+                            if development:
+                                copies = self.control_root / "development"
+                                _private_control(copies)
+                                view = await DevelopmentWorkspaces(
+                                    registry.runs, copies
+                                ).prepare(
+                                    lease,
+                                    owner=owner,
+                                    registry=registry,
+                                    asset=GitAsset.inspect(Path("/usr/bin/git")),
+                                )
+                                workspace = Path(view.workspace)
                             state = await _settled(
                                 NativeState.provision,
                                 journal,
@@ -207,40 +232,65 @@ class OwnedCodexRuntime:
                                 native_peer,
                                 states / lease.attempt_id,
                             )
-                            prepare_peer = await _settled(
-                                registry.prepare, lease, "ken"
-                            )
-                            prepare = owner.ken(
-                                registry,
-                                prepare_peer,
-                                operation_key="ken-prepare",
-                                installation=self.installation,
-                                model_cache=self.model_cache,
-                                mode="prepare",
-                            )
-                            async with asyncio.timeout(90):
-                                await prepare.open(limit=65536)
-                                try:
-                                    await asyncio.gather(
-                                        _drain(prepare.stdout), _drain(prepare.stderr)
-                                    )
-                                    if (
-                                        await _settled(prepare._raw.wait, timeout=3)
-                                        != 0
-                                    ):
-                                        raise RpcProtocolError(
-                                            "Required Ken preparation did not complete"
+                            ken_generation = 0
+
+                            async def prepare_ken():
+                                """Prepare/reopen published Ken through original ownership without retaining two model processes."""
+                                nonlocal ken_generation
+                                suffix = (
+                                    ""
+                                    if ken_generation == 0
+                                    else "-refresh-" + str(ken_generation)
+                                )
+                                ken_generation += 1
+                                prepare_peer = await _settled(
+                                    registry.prepare, lease, "ken"
+                                )
+                                prepare = owner.ken(
+                                    registry,
+                                    prepare_peer,
+                                    operation_key="ken-prepare" + suffix,
+                                    installation=self.installation,
+                                    model_cache=self.model_cache,
+                                    mode="prepare",
+                                )
+                                async with asyncio.timeout(90):
+                                    await prepare.open(limit=65536)
+                                    try:
+                                        await asyncio.gather(
+                                            _drain(prepare.stdout),
+                                            _drain(prepare.stderr),
                                         )
-                                finally:
-                                    await prepare.aclose(timeout=5)
-                            ken_peer = await _settled(registry.prepare, lease, "ken")
-                            ken = owner.ken(
-                                registry,
-                                ken_peer,
-                                operation_key="ken-mcp",
-                                installation=self.installation,
-                                model_cache=self.model_cache,
-                            )
+                                        if (
+                                            await _settled(prepare._raw.wait, timeout=3)
+                                            != 0
+                                        ):
+                                            raise RpcProtocolError(
+                                                "Required Ken preparation did not complete"
+                                            )
+                                    finally:
+                                        closed = await prepare.aclose(timeout=5)
+                                        if (
+                                            not closed
+                                            or closed.get("execution_closed")
+                                            is not True
+                                        ):
+                                            raise RpcProtocolError(
+                                                "Ken preparation closure is unconfirmed"
+                                            )
+                                ken_peer = await _settled(
+                                    registry.prepare, lease, "ken"
+                                )
+                                ken = owner.ken(
+                                    registry,
+                                    ken_peer,
+                                    operation_key="ken-mcp" + suffix,
+                                    installation=self.installation,
+                                    model_cache=self.model_cache,
+                                )
+                                return ken, prepare._operation
+
+                            ken, prepared_operation = await prepare_ken()
                             endpoint = owner.native(
                                 registry,
                                 native_peer,
@@ -264,10 +314,16 @@ class OwnedCodexRuntime:
                                 workspace=PEER_WORKSPACE,
                                 model=self.model,
                                 limits=limits,
-                                developer_instructions=REVIEW_INSTRUCTIONS
-                                if review is not None
-                                else INSTRUCTIONS,
-                                sandbox="read-only",
+                                developer_instructions=DEVELOPMENT_INSTRUCTIONS
+                                if development
+                                else (
+                                    REVIEW_INSTRUCTIONS
+                                    if review is not None
+                                    else INSTRUCTIONS
+                                ),
+                                sandbox="workspace-write"
+                                if development
+                                else "read-only",
                                 subscription_auth=ExternalChatGPTAuth(
                                     self.token_source.tokens, active=admitted
                                 ),
@@ -279,9 +335,13 @@ class OwnedCodexRuntime:
                                     transport=httpx.ASGITransport(app=self.app),
                                     active=admitted,
                                     withdraw=withdraw,
-                                    names=REVIEW_NAMES
-                                    if review is not None
-                                    else RESEARCH_NAMES,
+                                    names=DEVELOPMENT_NAMES
+                                    if development
+                                    else (
+                                        REVIEW_NAMES
+                                        if review is not None
+                                        else RESEARCH_NAMES
+                                    ),
                                 ) as peer,
                                 AnalysisTools(
                                     journal=registry.runs,
@@ -307,14 +367,18 @@ class OwnedCodexRuntime:
                                 async with broker_inference(
                                     native,
                                     ken,
-                                    prepared_operation=prepare._operation,
+                                    prepared_operation=prepared_operation,
                                     business=business,
                                     analysis=analysis,
                                     active=admitted,
+                                    prepare_ken=prepare_ken if development else None,
                                 ) as session:
                                     try:
                                         exported = OwnedInferenceSession(
-                                            session, owner, withdraw
+                                            session,
+                                            owner,
+                                            withdraw,
+                                            execution_workspace=workspace,
                                         )
                                         yield exported
                                     finally:

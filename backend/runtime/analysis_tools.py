@@ -115,6 +115,8 @@ def _receipt(job, *, stdout_offset=0, stderr_offset=0, max_bytes=8192, **_):
 
 
 class AnalysisTools:
+    """Expose fenced command tools with descriptions matching the actual admitted execution view."""
+
     def __init__(
         self,
         *,
@@ -125,6 +127,7 @@ class AnalysisTools:
         python_executable,
         active=lambda: True,
     ):
+        """Bind host-selected command ownership and a readonly catalog until the actual view is validated."""
         self.journal, self.lease = journal, lease
         self.workspace = Path(workspace).resolve(strict=True)
         self.python = str(Path(python_executable).resolve(strict=True))
@@ -145,10 +148,29 @@ class AnalysisTools:
         ]
 
     async def __aenter__(self):
+        """Validate the current directory and advertise private writes only for a proven development view."""
         if self._entered or not await self._authorized():
             raise RunConflict("Analysis tools require one live attempt scope")
+        writable = await asyncio.to_thread(self._writable_view)
+        if writable:
+            for tool in self.catalog:
+                if tool["name"] in ("researcher_command_start", "researcher_python"):
+                    tool["description"] = tool["description"].replace(
+                        "Workspace is read-only",
+                        "This attempt's private workspace is writable; the original repository is not mounted",
+                    )
+                    tool["description"] += (
+                        " Edits remain a private draft and do not accept or publish the task."
+                    )
         self._entered = True
         return self
+
+    def _writable_view(self):
+        """Check physical dispatch identity in the same authority transaction before describing filesystem access."""
+        with self.journal._transaction() as conn:
+            row = self.journal._authority(conn, self.lease)
+            self.journal._bound_workspace(conn, row, str(self.workspace))
+            return row["execution_kind"] == "development"
 
     async def __aexit__(self, *_):
         await self.aclose()
@@ -159,6 +181,15 @@ class AnalysisTools:
             and self._active()
             and await asyncio.to_thread(self.journal.attempt_active, self.lease)
         )
+
+    async def quiescent(self):
+        """Close terminal writers before an index read; an active or uncertain writer keeps the copy unstable."""
+        async with self._lock:
+            if not await self._authorized():
+                return False
+            for job_id in tuple(self._owned):
+                await self._settle(await self._get(job_id))
+            return not self._owned
 
     async def call(self, params):
         if not self._entered or not await self._authorized():

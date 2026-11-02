@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "published_ken": "0.18.0",
+  "model_turns": 0,
+  "source_unchanged": true,
+  "private_edit_via_owned_command": true,
+  "same_owned_session_reads_updated_source": true,
+  "mcp_peer_reopened_for_new_source": true,
+  "new_file_symbol_found": true,
+  "ken_preparations": 3,
+  "new_symbol_found_after_edit": true,
+  "all_peers_closed": true,
+  "original_source_sha256": "1b091f435752a7530014673a65adb3bc99ecf6ab941daf9e25bbbe8233ee6eef",
+  "tool_result_sha256": {
+    "before": "6c251a9d3591f8cda2244ec10e079a3125a3bc435e264eda2295795b82383b3a",
+    "after": "c0bf2cdbc00971baa97f7ec4de9829440f1b5af914928bfa8f8524e3fbe18d8f",
+    "find_new_symbol": "4fc987c9ddd041b34378dcc8b9cc8b84358408177fd59adf3f33440270d35ad3",
+    "new_file_symbol": "8f1fcbdce0062890c0c684250c8a9ab513129f2773376796dd799fa6d10d747d"
+  },
+  "limits": "Host-driven calls in an owned session with controlled native protocol. Not real model generation, a public service entry, candidate delivery or whole-plan acceptance."
+}
