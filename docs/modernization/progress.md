@@ -4090,4 +4090,16 @@ Checkpoint:7033259 is the committed structured-source delivery (1748total/1645pa
 
 - Wiki delivery terminal: 1767 casos: 1664 pasan, 100 fallos heredados y 3 omitidos; 19 new cases pass, 643 runtime passes. New failures=[]; resolved=[]. Wheel 346 pasan y 1 fallo heredado explícito, 618 matching Python/SQL files. Frontend49/build,16 functional states +3reading widths/0axe. Five pilots/0accepted. Full goal remains active.
 
-- Wiki delivery terminal: 1767 casos: 1664 pasan, 100 fallos heredados y 3 omitidos; 19 new cases pass, 643 runtime passes. New failures=[]; resolved=[]. Wheel 346 pasan y 1 fallo heredado explícito, 618 matching Python/SQL files. Frontend49/build,16 functional states +3reading widths/0axe. Five pilots/0accepted. Full goal remains active.
+Checkpoint:139250c commits scoped versioned Wiki and selected notebook. Terminal
+1767total/1664pass/100EXACTbaselinefail/3skip;643runtime. Final wheel347cases/346pass/
+1explicit baseline failure,355imports onlywheel,618sources.49frontend/build/16interactive
++3reading widths/0axe. Preview intentionally stopped; no live exec/image jobs remain.
+Whole goal active; protected untracked roots retained.
+Next: findings-next-brief.md, private findings-before/ and findings-concepts/ hold real
+before screenshots and4generated/inspected concept images, selection evidence-ledger.
+Not yet copied to owned docs/inventory or implemented. No extra research model turns.
+Resume at139250c; avoid re-running Wiki tests after docs-only followup.
+
+- Ledger path note: scratch/progress.md is a symlink to this file. Resolve paths and
+  deduplicate writes; there are not two independent ledgers. Finalizer duplicate line
+  removed without repeating tests or changing product bytes.
