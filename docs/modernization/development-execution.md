@@ -145,8 +145,11 @@ no inició generación de modelo ni demuestra admisión pública, revisión de c
 o publicación. La huella tiene límites de 20.000 entradas, 256 MiB y diez segundos;
 superarlos bloquea la consulta. No constituye una captura atómica del candidato.
 
-El siguiente paso es entregar un candidato ligado a repositorio, base, head,
-contexto e intento, comprobarlo y revisarlo antes de habilitar la entrada pública.
+La [política de captura de candidatos](code-candidates.md) ya produce un commit,
+un árbol y un diff completos en una asignación independiente mediante Git propio.
+Todavía falta cerrar todos los escritores desde el controlador y persistir la
+captura vinculada al contexto e intento antes de entregarla. Después se debe
+comprobar y revisar esa misma versión antes de habilitar la entrada pública.
 Después deben integrarse comprobaciones, revisión independiente, aceptación y
 publicación reconciliada. Terminar un turno o emitir texto de aprobación no cierra
 ese ciclo.

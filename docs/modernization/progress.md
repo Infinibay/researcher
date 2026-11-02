@@ -4760,3 +4760,41 @@ Resume at139250c; avoid re-running Wiki tests after docs-only followup.
   Next: immutable code candidates, independent checks/review, explicit acceptance
   and publication, then public development admission. Legacy migration, prompt
   evaluation, remaining6page redesigns and whole-plan acceptance remain open.
+
+#### Exact private code-candidate capture policy — after 6b18b08
+
+- Continuation audit: preceding turn made progress (6b18b08 plus internal-session
+  and published-Ken evidence). Current managed state was rechecked before work.
+- New capture policy creates fresh independent Git metadata and reads actual
+  tracked/nonignored author files. Author config, hidden index flags and local
+  commits cannot pick the captured tree or parent. The source and author refs,
+  index and files remain unchanged. Complete binary diff and content/tree/commit
+  identities replace change-tracker or narrative inference for this boundary.
+- Actual rename/deletion coverage exposed stale base files in the fresh snapshot
+  after staging its index. Restoring only that snapshot's index to base before
+  materializing the new commit removes deleted files correctly. No author or
+  original checkout is reset. A separate demonstrated source-advance race now
+  fails final base revalidation (RED→GREEN), retaining both user and private work.
+- Root .ken is excluded; an admitted base tracking that path requires explicit
+  policy, as do embedded gitlinks. Ordinary Git ignores remain effective for new
+  generated files, while tracked edits cannot be hidden by a new ignore rule.
+  Oversized complete diffs and unconfirmed process closure fail; no preview is
+  accepted as complete evidence. Existing allocations are never reused/deleted.
+- Directed capture/broker21PASS/0FAIL, including actual owned kernel Git gates.
+  Full source1970=1867PASS/100same inherited failure IDs/3same container skips;
+  787runtime passes. All21cases added since the last whole-source baseline pass
+  (6internal-session +14candidate policy +1owned candidate Git case). No new or
+  resolved failure identities; causes/messages are not claimed identical.
+- Extracted wheel324PASS/0FAIL/0SKIP,371backend modules only from wheel and
+  658Python/SQL files matching the checkout. This gate also covers6b18b08's session
+  changes, which previously had only scoped verification. Changed Python Ruff and
+  whitespace pass;23new/changed definitions documented. No model calls, frontend,
+  dependency lock changes or new migration in this increment.
+- Receipts:code-candidate-results.json, code-candidate-packaging.json and
+  code-candidate-docstrings.json; behavior/limits in code-candidates.md.
+  Capture remains an internal policy, not a delivered candidate: the next change
+  must close native/command writers, reserve allocation durably, bind the result
+  to original attempt/context and run capture before retiring the original domain.
+  Reopening that same attempt in a new domain is forbidden by broker tombstones.
+  Independent checks/review, acceptance, publication, public development admission,
+  remaining legacy/prompt/UI work and whole-goal acceptance remain incomplete.

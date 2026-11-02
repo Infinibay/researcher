@@ -1,0 +1,29 @@
+{
+  "changed_definitions": 23,
+  "undocumented": [],
+  "definitions": [
+    "backend/runtime/code_candidate.py:CapturedCodeCandidate",
+    "backend/runtime/code_candidate.py:_author_identity",
+    "backend/runtime/code_candidate.py:capture_candidate",
+    "backend/runtime/code_candidate.py:capture_candidate.git",
+    "backend/runtime/code_candidate.py:capture_candidate.sha",
+    "backend/runtime/code_candidate.py:capture_candidate.stage",
+    "backend/tests/runtime/test_code_candidate.py:candidate_copy",
+    "backend/tests/runtime/test_code_candidate.py:test_candidate_captures_shell_edits_binary_rename_and_deletion",
+    "backend/tests/runtime/test_code_candidate.py:test_candidate_ignores_author_git_config_index_and_model_commit",
+    "backend/tests/runtime/test_code_candidate.py:test_candidate_keeps_ordinary_ignore_rules_and_all_tracked_edits",
+    "backend/tests/runtime/test_code_candidate.py:test_candidate_refuses_mismatched_or_redirected_identity",
+    "backend/tests/runtime/test_code_candidate.py:test_candidate_allocation_is_never_reused_or_deleted",
+    "backend/tests/runtime/test_code_candidate.py:test_source_commit_advance_blocks_capture_without_overwriting_private_work",
+    "backend/tests/runtime/test_code_candidate.py:test_candidate_refuses_incomplete_diff_instead_of_recording_a_preview",
+    "backend/tests/runtime/test_code_candidate.py:test_tracked_ken_metadata_requires_explicit_candidate_policy",
+    "backend/tests/runtime/test_code_candidate.py:test_candidate_rejects_embedded_gitlink_instead_of_omitting_its_content",
+    "backend/tests/runtime/test_code_candidate.py:test_source_advancing_during_capture_cannot_be_returned_as_current",
+    "backend/tests/runtime/test_code_candidate.py:test_source_advancing_during_capture_cannot_be_returned_as_current.SourceAdvances",
+    "backend/tests/runtime/test_code_candidate.py:test_source_advancing_during_capture_cannot_be_returned_as_current.SourceAdvances.run",
+    "backend/tests/runtime/test_code_candidate.py:test_candidate_rejects_unconfirmed_process_closure",
+    "backend/tests/runtime/test_code_candidate.py:test_candidate_rejects_unconfirmed_process_closure.UnclosedDiff",
+    "backend/tests/runtime/test_code_candidate.py:test_candidate_rejects_unconfirmed_process_closure.UnclosedDiff.run",
+    "backend/tests/runtime/test_broker_git.py:test_real_broker_captures_candidate_in_its_original_private_allocation"
+  ]
+}

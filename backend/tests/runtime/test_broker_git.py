@@ -371,3 +371,77 @@ async def test_cancelling_git_waits_for_actual_peer_closure(broker_setup):
             if not task.done():
                 task.cancel()
                 await asyncio.gather(task, return_exceptions=True)
+
+
+async def test_real_broker_captures_candidate_in_its_original_private_allocation(
+    broker_setup,
+):
+    """Actual Git gates pin a separate complete candidate while every peer retains original source ownership."""
+    from backend.runtime.broker_git import OwnedGitExecutor
+    from backend.runtime.broker_stdio import AsyncPeerBroker
+    from backend.runtime.code_candidate import capture_candidate
+    from backend.runtime.development_workspace import prepare_workspace
+    from backend.runtime.git_capsule import GitAsset
+
+    s, registry, peer, broker, storage, _domain_path = broker_setup
+    await fixture_git(s.workspace, "init", "-q")
+    (s.workspace / "value.py").write_text(
+        '"""Original owned candidate fixture."""\nVALUE = 137\n'
+    )
+    await fixture_git(s.workspace, "add", "value.py")
+    await fixture_git(
+        s.workspace,
+        "-c",
+        "user.name=Fixture",
+        "-c",
+        "user.email=fixture@localhost",
+        "commit",
+        "-qm",
+        "base",
+    )
+    with registry.runs._transaction() as conn:
+        _row, lease = registry._lease(conn, registry._row(conn, peer))
+    s.c.conn.execute(
+        "UPDATE runtime_runs SET execution_kind='development' WHERE id=?",
+        (lease.run_id,),
+    )
+    s.c.conn.commit()
+    allocation = s.control / "development" / lease.attempt_id
+    allocation.parent.mkdir(mode=0o700, parents=True)
+    binding = registry.source_binding(peer)
+    async with AsyncPeerBroker(broker) as owner:
+        executor = OwnedGitExecutor(
+            owner=owner,
+            registry=registry,
+            lease=lease,
+            source=s.workspace,
+            allocation=allocation,
+            asset=GitAsset.inspect(Path(shutil.which("git"))),
+        )
+        prepared = await prepare_workspace(binding, allocation, executor=executor)
+        author = Path(prepared.workspace)
+        (author / "value.py").write_text(
+            '"""Edited owned candidate fixture."""\nVALUE = 200\n'
+        )
+        (author / "new.py").write_text('"""New private source."""\nVALUE = 200\n')
+        first_capture_operation = len(executor.operations)
+        captured = await capture_candidate(
+            binding, prepared, allocation / "candidate", executor=executor
+        )
+        assert (Path(captured.workspace) / "new.py").read_bytes() == (
+            author / "new.py"
+        ).read_bytes()
+        assert b"VALUE = 200" in captured.diff and b"new.py" in captured.diff
+        assert len(executor.operations) > first_capture_operation
+        for operation_id in executor.operations:
+            operation = storage.load().records["broker:op:" + operation_id]
+            assert operation["execution_closed"] and operation["exit_code"] == 0
+            assert operation["execution_binding"]["workspace"] == str(s.workspace)
+            assert operation["runtime_manifest"]["launch"][
+                "allocation"
+            ] is None or operation["runtime_manifest"]["launch"]["allocation"][
+                "path"
+            ] == str(allocation)
+        assert "137" in (s.workspace / "value.py").read_text()
+        assert await fixture_git(s.workspace, "status", "--porcelain") == b""
+    assert storage.load().records[broker._grant_key]["state"] == "retired"
