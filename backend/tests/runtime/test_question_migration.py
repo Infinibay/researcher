@@ -42,6 +42,7 @@ def version23(database, conn, monkeypatch):
                     "development_schema.sql",
                     "development_workspace_schema.sql",
                     "code_candidate_schema.sql",
+                    "code_check_schema.sql",
                 )
                 else apply_resource(conn, path)
             ),

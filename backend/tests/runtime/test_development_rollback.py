@@ -14,10 +14,14 @@ def expanded(coordination):
         coordination.conn.execute(
             "SELECT max(version) FROM schema_migrations"
         ).fetchone()[0]
-        == 38
+        == 39
     )
-    from backend.db.development_migration import restore_code_candidates
+    from backend.db.development_migration import (
+        restore_code_candidates,
+        restore_code_checks,
+    )
 
+    restore_code_checks(coordination.conn)
     restore_code_candidates(coordination.conn)
     return coordination
 

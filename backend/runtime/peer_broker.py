@@ -28,6 +28,8 @@ from backend.runtime.broker_profile import (
     NativeCommandCapsule,
     NativeProxyCapsule,
 )
+from backend.runtime.check_capsule import CheckCapsule, CheckLaunch
+from backend.runtime.check_registry import CheckExecutionView
 from backend.runtime.contracts import command_key, text
 from backend.runtime.egress_channel import EgressChannel
 from backend.runtime.egress_proxy import EgressPolicy, TunnelProxy
@@ -409,6 +411,14 @@ class PeerBroker:
             registry, peer_id, operation_key=operation_key, git_launch=launch
         )
 
+    def run_check(self, registry, peer_id, *, operation_key, launch):
+        """Admit one immutable host check only against its separately reserved execution view."""
+        if not isinstance(launch, CheckLaunch):
+            raise TypeError("An immutable check launch manifest is required")
+        return self._run(
+            registry, peer_id, operation_key=operation_key, check_launch=launch
+        )
+
     def run_command(self, registry, peer_id, *, operation_key, asset):
         if not isinstance(asset, CodexAsset):
             raise TypeError("Command launch requires an inspected Codex asset")
@@ -439,9 +449,27 @@ class PeerBroker:
         command_only=False,
         web_search="disabled",
         git_launch=None,
+        check_launch=None,
     ):
         """Witness launch intent and manifests before releasing the original gate."""
         command_key(operation_key)
+        if check_launch is not None and any(
+            (
+                code is not None,
+                asset is not None,
+                ken is not None,
+                network is not None,
+                egress is not None,
+                host_tools,
+                command_only,
+                native_state is not None,
+                code_host is not None,
+                git_launch is not None,
+            )
+        ):
+            raise ValueError(
+                "Check profile cannot mix native, Git, network or arbitrary analysis profiles"
+            )
         if git_launch is not None and any(
             (
                 code is not None,
@@ -455,7 +483,12 @@ class PeerBroker:
             )
         ):
             raise ValueError("Git preparation cannot mix native or analysis profiles")
-        if asset is None and ken is None and git_launch is None:
+        if (
+            asset is None
+            and ken is None
+            and git_launch is None
+            and check_launch is None
+        ):
             text(code, "analysis code", 64000)
         kind = (
             "ken"
@@ -486,7 +519,7 @@ class PeerBroker:
                 existing.get("workspace_access") == "private-write"
                 if existing is not None
                 else (
-                    asset is not None
+                    (asset is not None or check_launch is not None)
                     and ken is None
                     and git_launch is None
                     and admission.get("execution_kind") == "development"
@@ -617,6 +650,23 @@ class PeerBroker:
                         )
                     },
                 }
+            if check_launch is not None:
+                manifest = {
+                    "profile": "private-candidate-check-v1",
+                    "launch": asdict(check_launch),
+                    "code_sha256": {
+                        name: hashlib.sha256(
+                            Path(__file__).with_name(name).read_bytes()
+                        ).hexdigest()
+                        for name in (
+                            "check_capsule.py",
+                            "check_worker.py",
+                            "check_registry.py",
+                            "broker_profile.py",
+                            "peer_payload.py",
+                        )
+                    },
+                }
             if command_only:
                 manifest["profile"] = "readonly-native-command-v1"
             if workspace_write:
@@ -646,13 +696,26 @@ class PeerBroker:
                 raise AuthorityConflict(
                     "Writable preparation requires an admitted development execution"
                 )
+            if check_launch is not None and (
+                admission["execution_kind"] != "development"
+                or not isinstance(admission["binding"], CheckExecutionView)
+                or admission["binding"].check_id != check_launch.check_id
+                or admission["binding"].spec_sha256 != check_launch.spec.sha256
+                or admission["binding"].metadata != check_launch.metadata
+            ):
+                raise AuthorityConflict(
+                    "Check requires its original candidate/recipe execution reservation"
+                )
             self._reserve(
                 admission,
                 operation_id,
                 intent,
                 peer_id,
                 runtime_manifest=manifest
-                if asset is not None or ken is not None or git_launch is not None
+                if asset is not None
+                or ken is not None
+                or git_launch is not None
+                or check_launch is not None
                 else None,
                 native_state=native_state,
                 workspace_write=workspace_write,
@@ -691,9 +754,13 @@ class PeerBroker:
                 )
                 if git_launch is not None:
                     capsule = GitCapsule
+                if check_launch is not None:
+                    capsule = CheckCapsule
                 with capsule(
                     admission["binding"],
-                    git_launch
+                    check_launch
+                    if check_launch is not None
+                    else git_launch
                     if git_launch is not None
                     else (
                         ken if ken is not None else (code if asset is None else asset)

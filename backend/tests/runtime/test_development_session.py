@@ -604,3 +604,182 @@ async def test_stop_during_sealing_joins_the_seal_task_before_scope_exit(
             session = observed.get("session")
             if session is not None and session._session._sealing is not None:
                 await asyncio.gather(session._session._sealing, return_exceptions=True)
+
+
+async def test_owned_checks_persist_exact_results_and_invalidate_mutated_copy(
+    development_config,
+):
+    """Actual isolated pytest uses the captured tree; a zero-exit command that edits source is invalidated without touching the candidate."""
+    import sys
+
+    from backend.runtime.check_contracts import CheckSpec
+    from backend.runtime.check_state import CodeChecks
+    from backend.tests.runtime.test_development_workspace import fixture_git
+
+    c = development_config
+    async with development_attempt(c) as d:
+        (c.s.workspace / "test_value.py").write_text(
+            "from pathlib import Path\ndef test_value():\n assert Path('fact.txt').read_text() == '200'\n"
+        )
+        await fixture_git(c.s.workspace, "add", "test_value.py")
+        await fixture_git(
+            c.s.workspace,
+            "-c",
+            "user.name=Fixture",
+            "-c",
+            "user.email=fixture@localhost",
+            "commit",
+            "-qm",
+            "test recipe",
+        )
+        async with d.coordinator.runtime.open(
+            workspace=c.s.workspace, tool_token=d.token, peer_owner=d.peers
+        ) as session:
+            await run_development_turn(d, session)
+            candidate = await session.capture_candidate()
+            spec = CheckSpec(
+                (
+                    str(Path(sys.executable).resolve()),
+                    "-m",
+                    "pytest",
+                    "-q",
+                    "-p",
+                    "no:cacheprovider",
+                ),
+                "pytest",
+                environment_id="runtime-python",
+            )
+            checked = await session.run_check("ci-unit", spec)
+            outcome = json.loads(checked["result_json"])
+            assert (
+                checked["state"] == "finished"
+                and outcome["status"] == "passed"
+                and outcome["tests"] == 1
+            )
+            assert outcome["subject"]["head_sha"] == candidate["head_sha"]
+            assert (
+                CodeChecks(d.coordinator.store).inspect(101, checked["id"]) == checked
+            )
+            before = set(session._owner.broker.journal.load().records)
+            assert await session.run_check("ci-unit", spec) == checked
+            assert set(session._owner.broker.journal.load().records) == before
+            edit = CheckSpec(
+                (
+                    str(Path(sys.executable).resolve()),
+                    "-c",
+                    "from pathlib import Path;Path('fact.txt').write_text('999')",
+                ),
+                "command",
+            )
+            changed = await session.run_check("ci-edits", edit)
+            assert json.loads(changed["result_json"])["status"] == "invalidated"
+            assert (Path(changed["workspace"]) / "fact.txt").read_text() == "999"
+            assert (Path(candidate["workspace"]) / "fact.txt").read_text() == "200"
+            assert (c.s.workspace / "fact.txt").read_text() == "137"
+            assert (
+                d.coordinator.store.context_snapshot(101, 1001)["task"]["status"]
+                != "done"
+            )
+
+
+async def test_check_result_after_context_correction_is_retained_without_approval(
+    development_config, monkeypatch
+):
+    """A real successful child cannot finish its check under a corrected context, and its original reservation is not replayed."""
+    from backend.runtime import check_execution
+    from backend.runtime.check_contracts import CheckSpec
+    from backend.runtime.check_state import CodeChecks
+    from backend.runtime.contracts import StaleAttempt
+
+    c = development_config
+    async with development_attempt(c) as d:
+        execute = check_execution.run_check_worker
+
+        async def corrected(*args, **kwargs):
+            """Apply a real owner correction after the original worker closed and before host validation/commit."""
+            result = await execute(*args, **kwargs)
+            d.coordinator.store.correct_context(
+                project_id=101,
+                task_id=1001,
+                expected_version=d.lease.context_version,
+                operation_key="check-late",
+                statement="Do not accept the current implementation.",
+                source_kind="user_message",
+                source_reference="owner:check-late",
+            )
+            return result
+
+        monkeypatch.setattr(check_execution, "run_check_worker", corrected)
+        async with d.coordinator.runtime.open(
+            workspace=c.s.workspace, tool_token=d.token, peer_owner=d.peers
+        ) as session:
+            await run_development_turn(d, session)
+            await session.capture_candidate()
+            with pytest.raises(StaleAttempt):
+                await session.run_check(
+                    "ci-late", CheckSpec(("/usr/bin/true",), "command")
+                )
+            with d.coordinator.store._transaction() as conn:
+                row = conn.execute(
+                    "SELECT id FROM runtime_code_checks WHERE run_id=? AND operation_key='ci-late'",
+                    (d.run.run_id,),
+                ).fetchone()
+            check = CodeChecks(d.coordinator.store).inspect(101, row["id"])
+            assert check["state"] == "reconciling" and check["result_json"] is None
+            assert Path(check["workspace"]).exists()
+
+
+async def test_stop_during_owned_check_closes_writer_and_retains_original_record(
+    development_config,
+):
+    """Actual slow CI cannot outlive Stop or turn a partial private execution copy into approved work."""
+    import sys
+
+    from backend.runtime.check_contracts import CheckSpec
+    from backend.runtime.check_state import CodeChecks
+
+    c = development_config
+    async with (
+        development_attempt(c) as d,
+        d.coordinator.runtime.open(
+            workspace=c.s.workspace, tool_token=d.token, peer_owner=d.peers
+        ) as session,
+    ):
+        await run_development_turn(d, session)
+        candidate = await session.capture_candidate()
+        spec = CheckSpec(
+            (
+                str(Path(sys.executable).resolve()),
+                "-c",
+                "from pathlib import Path;import time;Path('entered').write_text('started');time.sleep(30);Path('late').write_text('unsafe')",
+            ),
+            "command",
+            timeout_seconds=60,
+        )
+        running = asyncio.create_task(session.run_check("ci-stop", spec))
+        check = None
+        for _ in range(1500):
+            with d.coordinator.store._transaction() as conn:
+                found = conn.execute(
+                    "SELECT id FROM runtime_code_checks WHERE run_id=? AND operation_key='ci-stop'",
+                    (d.run.run_id,),
+                ).fetchone()
+            if found:
+                check = CodeChecks(d.coordinator.store).inspect(101, found["id"])
+                if (
+                    check["workspace"]
+                    and (Path(check["workspace"]) / "entered").exists()
+                ):
+                    break
+            await asyncio.sleep(0.02)
+        assert check and (Path(check["workspace"]) / "entered").exists()
+        await asyncio.wait_for(session.cancel(), 5)
+        await asyncio.wait_for(asyncio.gather(running, return_exceptions=True), 5)
+        retained = CodeChecks(d.coordinator.store).inspect(101, check["id"])
+        assert retained["state"] == "reconciling" and retained["result_json"] is None
+        assert not (Path(retained["workspace"]) / "late").exists()
+        assert (Path(candidate["workspace"]) / "fact.txt").read_text() == "200"
+        grant = session._owner.broker.journal.load().records[
+            session._owner.broker._grant_key
+        ]
+        assert grant["state"] == "retired" and grant["domain_removed"]

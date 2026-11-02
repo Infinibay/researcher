@@ -22,8 +22,16 @@ def _no_sockets():
 
 
 def _syscall_filter(
-    *, network, listener_setup=False, protected_peers=False, private_pairs=False
+    *,
+    network,
+    listener_setup=False,
+    protected_peers=False,
+    private_pairs=False,
+    local_sockets=False,
 ):
+    """Build verified x86_64 syscall policy with explicit Internet or private-local sockets and kernel control denials."""
+    if network and local_sockets:
+        raise ValueError("Internet and private-local socket policies cannot be mixed")
     if platform.machine() != "x86_64":
         raise RuntimeError("Analysis seccomp profile requires verified x86_64 ABI")
     deny = 0x00050000 | errno.EPERM
@@ -36,6 +44,14 @@ def _syscall_filter(
         (0x35, 0, 1, 0x40000000),
         (0x06, 0, 0, deny),
     ]
+    if local_sockets:
+        instructions += [
+            (0x15, 0, 4, 41),
+            (0x20, 0, 0, 16),
+            (0x15, 1, 0, 1),
+            (0x06, 0, 0, deny),
+            (0x06, 0, 0, 0x7FFF0000),
+        ]
     if network:
         # Only Internet-client socket families. Named/abstract Unix sockets and
         # netlink/packet controls are unavailable; private socketpair remains OK.
@@ -70,7 +86,9 @@ def _syscall_filter(
         denied += (310, 311, 438)  # process_vm_readv/writev and pidfd_getfd
     if network and not listener_setup:
         denied += (43, 49, 50, 288)  # accept/bind/listen/accept4, not client connect
-    socket_denials = () if network else ((41,) if private_pairs else (41, 53))
+    socket_denials = (
+        () if network or local_sockets else ((41,) if private_pairs else (41, 53))
+    )
     for number in socket_denials + denied:
         instructions += [(0x15, 0, 1, number), (0x06, 0, 0, deny)]
     # libc may fall back to ordinary fork/clone after ENOSYS. Every descendant
@@ -317,7 +335,7 @@ class NativeCapsule(AnalysisCapsule):
         from backend.runtime.development_state import DevelopmentView
 
         if not isinstance(self.binding, DevelopmentView):
-            raise ValueError(
+            raise ValueError(  # noqa: TRY004 -- preserve the authority-policy rejection contract.
                 "Writable native execution requires a prepared private development view"
             )
         path, original = (

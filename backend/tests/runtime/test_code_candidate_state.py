@@ -187,13 +187,17 @@ def test_normal_startup_installs_candidate_storage_and_unused_inverse_is_repeata
     coordination,
 ):
     """The packaged migration runs normally, and removing unused storage does not discard task rows."""
-    from backend.db.development_migration import restore_code_candidates
+    from backend.db.development_migration import (
+        restore_code_candidates,
+        restore_code_checks,
+    )
     from backend.tools.base.db import ensure_migrations
 
     c = coordination
     assert (
-        c.conn.execute("SELECT max(version) FROM schema_migrations").fetchone()[0] == 38
+        c.conn.execute("SELECT max(version) FROM schema_migrations").fetchone()[0] == 39
     )
+    restore_code_checks(c.conn)
     restore_code_candidates(c.conn)
     restore_code_candidates(c.conn)
     assert c.conn.execute("SELECT count(*) FROM tasks").fetchone()[0] == 3
@@ -232,7 +236,9 @@ def test_sql_ready_row_requires_a_domain_and_nonempty_closure_proof(
 
 def test_candidate_inverse_refuses_retained_history(candidate_state):
     """A reserved or interrupted capture is execution evidence, even before a commit is available."""
-    from backend.db.development_migration import restore_code_candidates
+    from backend.db.development_migration import (
+        restore_code_candidates,
+    )
 
     s, lease, _binding, _copies, candidates = candidate_state
     planned, _ = candidates.plan(lease)

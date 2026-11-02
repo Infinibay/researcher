@@ -4904,3 +4904,74 @@ Resume at139250c; avoid re-running Wiki tests after docs-only followup.
   and no ambient host subprocess/auth/network fallback remain required. These
   execution design points still need implementation and tests. All remaining
   engine/prompt/operator/UI/whole-plan work remains active.
+
+
+#### Exact candidate checks under original ownership — after 4522ce0
+
+- Previous status turn made authoritative progress: corrected stale status/dashboard,
+  documented implemented checks and started the source/wheel gates. It was not
+  merely a status restatement. This continuation joined those same live handles;
+  no job was restarted because its output was delayed.
+- Added migration39 and CodeChecks reservations before effects, immutable original
+  subject/recipe/allocation/peer identity and terminal result evidence. An existing
+  key returns original data without a second launch; incomplete reservations retain
+  their files and require inspection. An unused39 inverse preserves older completed
+  candidate history; any check reservation or active/newer authority blocks it.
+- Each host recipe gets a separate copy derived from exact captured head/tree.
+  Validation Git metadata is outside writable files and readonly inside the guest.
+  Owned Git revalidates head/tree/status after physical closure. Candidate/source
+  remain unchanged; tracked edits or nonignored new files invalidate results.
+- The original broker/domain gates the actual command, finite stdout/stderr and
+  optional JUnit collection. No ambient auth/home/Internet or host subprocess
+  fallback. Private Unix sockets work. Pinned executable and explicit system or
+  runtime-python package directory views are checked before dispatch. Environment
+  directory identity is not full dependency byte pinning; phase budgets are
+  preparation60, command<=300 and postvalidation30, not a single command deadline.
+- Reports are collected inside the guest, never by host-following a project path.
+  A FIFO report first reproduced a6.66s hang; O_NONBLOCK plus regular-file/size
+  validation fixes it. Never-bound peers cannot manufacture execution success.
+  Actual deadline expiry retains its collector cause and physical closure.
+- Owned session joins check tasks before authority/journal teardown. Integrated
+  actual pytest PASS1 on the exact edited candidate, same-key no replay, modified
+  execution copy invalidation, late context and Stop pass. No review/publication
+  authority is inferred. Native development instructions explicitly request Ken
+  source, rather than treating default symbol outlines as source evidence.
+- Initial complete source run:2039=1933PASS/103FAIL/3SKIP,853runtime PASS.
+  All22new cases pass;100previous failure IDs remain and3new recovery regressions
+  are identified exactly. First wheel384PASS/9FAIL in405.38s:6package-prefix fixture
+  errors and3actual bootstrap import errors. These failures are retained, not
+  silently relabeled as an accepted run.
+- Two-case isolated diagnosis1PASS/1FAIL in1.10s separates causes: Python3.12 -S
+  omits venv prefix setup, so the verifier now carries explicit host prefix plus
+  dependency path while keeping backend imports restricted to the wheel. The
+  actual defect was importing the safe XML parser during minimal broker recovery.
+  Move that import into CodeChecks.complete, where the host uses it. AST comparison
+  against the first artifact proves this is the sole production/test source delta.
+  All3recovery cases plus state/classification pass36cases in4.14s. No second full
+  source run is claimed after this fix; its preceding counts remain unchanged.
+- Final fresh extracted wheel393PASS/0FAIL/0SKIP in461.37s,386backend modules only
+  from that wheel,676matching Python/SQL payloads. All98new/changed definitions have
+  English docstrings.28changed Python files pass Ruff;27format clean, with existing
+  db.py formatting debt reproduced at HEAD and left outside this delivery. Existing
+  seccomp policies are byte-identical for all16previous flag combinations; new
+  local socket behavior has actual kernel coverage. No backend edit after final
+  wheel build; no model call, new published-Ken trial, frontend or lock change.
+- Evidence:owned-checks-results.json, owned-checks-packaging.json and
+  owned-checks-docstrings.json. Full source and first/final package waits overlapped;
+  their durations are not summed into an elapsed-time claim. The regression showed
+  why minimal extracted-wheel bootstrap and environment identity probes should run
+  before a broad gate. Keep future package output streaming for faster diagnosis.
+- Ken finding saved under candidate-check-original-owner-and-evidence with explicit
+  historical scope: connected Ken indexes the original checkout and rejects managed
+  worktree dependencies, and the local CLI has no project initialized. No file
+  freshness claim was manufactured. Recheck managed source/tests before reuse.
+- A possible cross-attempt operation-key collision was investigated rather than
+  assumed: current RunStore has no transition that retries the same run to queued.
+  The present key is per run and changed original scope fails closed; no speculative
+  retry API or storage change was introduced. Revisit if same-run retry is added.
+- Next concrete result: independent code review of the same candidate, then explicit
+  acceptance/publication and public development admission. Finding-review provenance
+  can inform it, but code_review dispatch currently intentionally rejects a workspace
+  without an exact candidate view. Do not bypass that guard to reuse research dispatch.
+  Whole legacy/communication/prompt/UI/operator/acceptance obligations remain open;
+  all43broad scenarios stay incomplete and the full goal remains active.

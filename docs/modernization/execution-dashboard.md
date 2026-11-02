@@ -6,24 +6,24 @@ Motivos del ajuste: [diagnóstico del proceso](workflow-review.md).
 
 ## Estado comprobado
 
-- Codex por suscripción y Ken publicado ensayados; fuentes/citas e informes draft conectados. Revisión documental independiente admitida y ensayada. Continúan consumidores y loops heredados, coordinación y desarrollo pendientes.
+- Codex por suscripción y Ken publicado ensayados; fuentes/citas e informes draft conectados. Revisión documental independiente admitida y ensayada. Desarrollo interno ya edita, captura candidatos exactos y ejecuta comprobaciones aisladas; faltan revisión de código, aceptación, publicación y entrada pública. Continúan consumidores y loops heredados y coordinación pendientes.
 - Interfaz: 6 pilotos, 18/36 conceptos de escritorio y 6/12 móviles. Quedan seis rutas por implementar; 0/12 tienen aceptación completa.
-- Última suite: 1878 casos: 1775 pasan, 100 fallos heredados y 3 omitidos. No hay fallos nuevos frente a la línea base; la suite sigue roja.
+- Suite del primer artefacto del ejecutor: 2039 casos, 1933 pasan, 103 fallan y 3 se omiten. Las tres regresiones nuevas de importación se corrigieron después: 36 pruebas dirigidas y 393 del wheel final pasan. El resultado global anterior conserva sus 103 fallos; no hubo una segunda suite completa tras corregir esa importación. Los 100 fallos heredados siguen pendientes.
 - Los 43 escenarios amplios continúan abiertos en [coverage.json](coverage.json). Se registran resultados y límites; no hay un porcentaje global defendible.
 
-## Última entrega verificada: lectores y contexto de hallazgos
+## Última entrega verificada: comprobaciones del candidato exacto
 
-**Resultado:** los lectores retenidos de metadatos, texto/citas, resumen, búsqueda semántica y feedback usan los registros canónicos. No descartan la confianza desconocida por defecto; tarea y búsqueda no amplían el proyecto. Las decisiones reales son legibles sin dar permiso para emitirlas. El contexto diferencia omitir y borrar: un actor desconocido o retirado no hereda otro proyecto; los contextos asíncronos conservan su alcance.
+**Resultado implementado:** cada receta se reserva antes de producir efectos y ejecuta en una copia separada del commit/árbol capturados, con Git de validación protegido. El host conserva receta, candidato, salida, JUnit, operación, cierre y resultado durable. Repetir una clave no lanza otra comprobación. Una modificación del código invalida el resultado; Stop o una corrección conservan el trabajo interrumpido sin aprobarlo bajo otro contexto.
 
-**Conocimiento:** `FindingsKnowledgeSource` dejó de seleccionarse; sus llamadas antiguas fallan antes de leer o indexar y explican el destino de migración. No se borran los índices históricos. Semántica usa pesos locales preparados, texto completo, plaza por proceso y comprobación del corpus al terminar; no reutiliza BLOBs sin versión ni toma sólo los últimos 500. La búsqueda combinada informa cada fuente fallida y mantiene los resultados parciales, sin convertir el error en ausencia.
+**Criterio de salida cumplido:** ejecución real de pytest, resultados distintos para fallo/cero pruebas/omitidas, copia de origen intacta, detección de cambios, Stop y contexto obsoleto cubiertos; migración y paquete verificados. Las comprobaciones no dan permiso para publicar.
 
-**Validación:** 37 casos nuevos, 80 dirigidos pasan. Paquete aislado: 160 pasan, 634 fuentes coincidentes; 22 archivos Python pasan Ruff lint/formato y 88 definiciones nuevas/modificadas están documentadas. Suite global: 1878 casos, 1775 pasan, los mismos 100 fallos heredados y 3 omitidos. Dos pruebas antiguas cambiaron de nombre; no se cuentan como casos nuevos.
+**Validación:** 22 casos nuevos; 99 pruebas previas de migración/estado/puertos y tres integraciones pasan. El wheel final verifica 393 casos sin fallos ni omisiones, 386 módulos sólo del paquete y 676 fuentes coincidentes. Las tres regresiones de recuperación del primer artefacto quedaron corregidas con 36 pruebas dirigidas; la comparación de AST demuestra que el único cambio posterior fue diferir la importación del parser hasta el registro del resultado. Las 98 definiciones nuevas/modificadas están documentadas. Las 16 combinaciones previas del filtro de syscalls conservan sus mismos bytes.
 
-**Reutilización de pruebas:** frontend sin cambios; se conserva el piloto y sus pruebas de la entrega anterior. No hubo nuevos turnos por suscripción. La revisión admitida que detectó 731 frente a 137 sigue documentada en [ensayo real](native-review-live.json).
+**Límites:** entornos `system` y `runtime-python` elegidos por host, sin instalación ni acceso a Internet; identidad física del directorio de dependencias, sin fijar todos sus bytes. Presupuestos separados por fase. Sin cambios de frontend ni nuevas llamadas de modelo; los ensayos anteriores con suscripción/Ken conservan su alcance histórico.
 
-[Contrato](../architecture/finding-readers.md), [resultados](finding-consumers-results.json), [paquete](finding-consumers-packaging.json), [docstrings](finding-consumers-docstrings.json).
+[Contrato](code-checks.md), [resultados y límites](owned-checks-results.json), [paquete](owned-checks-packaging.json), [docstrings](owned-checks-docstrings.json).
 
-**Siguiente acción:** completar el recorrido de revisión/aceptación del producto y retirar los writers, endpoints/CLI/MCP y flows heredados que todavía interpretan `VALIDATED`/`REJECTED`. La terminación del turno y la aceptación del resultado deben seguir separadas. Continuar desarrollo, roles/loops y comunicación tipada sin otro coordinador LLM. La invalidación de conocimiento dependiente permanece dentro del alcance.
+**Siguiente acción:** implementar revisión independiente de código y aceptación/publicación del mismo candidato antes de habilitar desarrollo público. Mantener pendientes la migración de writers/consumidores de hallazgos, roles/loops y comunicación tipada, sin añadir otro coordinador LLM. La invalidación de conocimiento dependiente permanece dentro del alcance.
 
 ## Cola posterior, manteniendo el alcance
 

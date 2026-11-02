@@ -100,11 +100,11 @@ la autoridad activa o una versión posterior impiden ese retroceso.
 
 ## Integración pendiente
 
-Después, comprobaciones y revisión independiente deben consumir la copia exacta
-del candidato en lectura y registrar base/head/contexto. La aceptación del usuario
-y la publicación son pasos distintos; publicar exige revalidar el destino y poder
-reconciliar una respuesta perdida. Este documento no declara implementados esos
-contratos pendientes.
+Las comprobaciones ya derivan una copia por receta del candidato exacto y guardan
+base/head/contexto junto a sus resultados. La revisión independiente de código
+sigue pendiente. La aceptación del usuario y la publicación son pasos distintos;
+publicar exige revalidar el destino y poder reconciliar una respuesta perdida.
+Este documento no declara implementados esos contratos pendientes.
 
 La integración del controlador tiene evidencia separada en
 [candidate-controller-results.json](candidate-controller-results.json),
@@ -131,7 +131,7 @@ terminar con su tarea de cierre aún viva. Ahora el contexto espera esa tarea an
 de liberar el diario; si se cancela la propia espera, cierra primero el dominio
 físico y conserva la espera del propietario original. Las pruebas cubren ambos
 casos y mantienen la captura interrumpida en reconciliación. Los contratos y la
-integración pendiente de comprobaciones están en [code-checks.md](code-checks.md).
+ejecución de comprobaciones están en [code-checks.md](code-checks.md).
 
 Las evidencias de este incremento están en
 [code-candidate-results.json](code-candidate-results.json),

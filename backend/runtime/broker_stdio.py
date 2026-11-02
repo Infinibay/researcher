@@ -89,6 +89,10 @@ class AsyncPeerBroker:
         """Create a fixed Git endpoint without admitting arbitrary writable model commands."""
         return self._endpoint(registry, peer_id, operation_key, git_launch=launch)
 
+    def check(self, registry, peer_id, *, operation_key, launch):
+        """Describe one fixed host check; the original registry/broker still own admission and G."""
+        return self._endpoint(registry, peer_id, operation_key, check_launch=launch)
+
     def command(self, registry, peer_id, *, operation_key, asset):
         return self._endpoint(
             registry, peer_id, operation_key, asset=asset, command_only=True
@@ -160,6 +164,7 @@ class AsyncPeerBroker:
         command_only=False,
         web_search="disabled",
         git_launch=None,
+        check_launch=None,
     ):
         """Allocate one non-replayable endpoint while its broker remains admitted."""
         if not self._entered or self._closing is not None:
@@ -184,6 +189,7 @@ class AsyncPeerBroker:
             command_only=command_only,
             web_search=web_search,
             git_launch=git_launch,
+            check_launch=check_launch,
         )
         self._endpoints.append(endpoint)
         return endpoint
@@ -195,7 +201,10 @@ class AsyncPeerBroker:
         if len(self._pending) >= 8:
             raise AuthorityBusy("Async broker launch queue full")
         loop = asyncio.get_running_loop()
-        if endpoint.git_launch is not None:
+        if endpoint.check_launch is not None:
+            start = self.broker.run_check
+            payload = {"launch": endpoint.check_launch}
+        elif endpoint.git_launch is not None:
             start = self.broker.run_git
             payload = {"launch": endpoint.git_launch}
         elif endpoint.ken is not None:
@@ -358,6 +367,7 @@ class BrokerEndpoint:
         command_only=False,
         web_search="disabled",
         git_launch=None,
+        check_launch=None,
     ):
         """Retain launch arguments and handles for exactly one owned connection."""
         self.owner, self.registry, self.peer_id = owner, registry, peer_id
@@ -372,6 +382,7 @@ class BrokerEndpoint:
         self.command_only = command_only
         self.web_search = web_search
         self.git_launch = git_launch
+        self.check_launch = check_launch
         self.stdin = self.stdout = self.stderr = None
         self._raw = None
         self._operation = None

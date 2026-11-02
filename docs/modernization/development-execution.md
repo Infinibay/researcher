@@ -3,8 +3,8 @@
 El sistema prepara una copia Git privada por intento y permite escritura en ella
 desde los perfiles nativos internos de desarrollo. **El servicio público todavía
 no admite tareas de desarrollo.** La fábrica interna ya conecta la preparación,
-el contexto, las herramientas de desarrollo y la captura durable de candidatos.
-Faltan comprobaciones, revisión, aceptación y publicación para completar el
+el contexto, las herramientas de desarrollo, la captura durable de candidatos y
+sus comprobaciones aisladas. Faltan revisión, aceptación y publicación para completar el
 recorrido del producto.
 
 ## Dos directorios con responsabilidades distintas
@@ -150,11 +150,10 @@ superarlos bloquea la consulta. No constituye una captura atómica del candidato
 La [captura de candidatos](code-candidates.md) ya produce un commit, un árbol y un
 diff completos en una asignación independiente mediante Git propio. El controlador
 interno cierra los escritores y persiste la captura ligada al contexto e intento.
-Después se debe comprobar y revisar esa misma versión antes de habilitar la entrada
-pública.
-Después deben integrarse comprobaciones, revisión independiente, aceptación y
-publicación reconciliada. Terminar un turno o emitir texto de aprobación no cierra
-ese ciclo.
+Las [comprobaciones aisladas](code-checks.md) ya consumen esa versión y conservan
+resultados ligados al candidato. Antes de habilitar la entrada pública faltan
+revisión independiente, aceptación y publicación reconciliada. Terminar un turno
+o emitir texto de aprobación no cierra ese ciclo.
 
 Las evidencias se guardan en [development-docstrings.json](development-docstrings.json),
 [development-packaging.json](development-packaging.json) y

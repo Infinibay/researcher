@@ -72,7 +72,14 @@ class OwnedInferenceSession(InferenceSession):
     """Expose one original owned session and revoke its entire domain on Stop."""
 
     def __init__(
-        self, session, owner, withdraw, *, execution_workspace=None, capture=None
+        self,
+        session,
+        owner,
+        withdraw,
+        *,
+        execution_workspace=None,
+        capture=None,
+        check=None,
     ):
         """Retain original ownership and the actual execution directory as data, never as an access grant."""
         super().__init__(session.native, session.business, session.active)
@@ -80,6 +87,8 @@ class OwnedInferenceSession(InferenceSession):
         self.execution_workspace = execution_workspace
         self._capture = capture
         self._capture_task = None
+        self._check = check
+        self._check_tasks = {}
         self._running = False
         self._result = None
 
@@ -127,6 +136,48 @@ class OwnedInferenceSession(InferenceSession):
             await asyncio.gather(self._capture_task, return_exceptions=True)
             raise
 
+    async def run_check(self, operation_key, spec):
+        """Run one host recipe only after exact capture; repeated keys join original tasks rather than launching again."""
+        from backend.runtime.check_contracts import CheckSpec
+
+        if (
+            self._check is None
+            or not isinstance(spec, CheckSpec)
+            or self._capture_task is None
+            or not self._capture_task.done()
+            or self._capture_task.cancelled()
+        ):
+            raise RunConflict("Checks require a captured development candidate")
+        if self._capture_task.result()["state"] != "ready":
+            raise RunConflict("Checks require a ready exact candidate")
+        from backend.runtime.contracts import command_key
+
+        command_key(operation_key)
+        existing = self._check_tasks.get(operation_key)
+        if existing is not None and existing[0] != spec.sha256:
+            raise RunConflict("Check operation already names another recipe")
+        if existing is None:
+            if (
+                self._owner._closing is not None
+                or self._owner.broker._withdrawn.is_set()
+            ):
+                raise RunConflict(
+                    "Original check domain retired; inspect saved observations without replay"
+                )
+            task = asyncio.create_task(self._check(operation_key, spec))
+            task.add_done_callback(
+                lambda done: done.exception() if not done.cancelled() else None
+            )
+            self._check_tasks[operation_key] = (spec.sha256, task)
+        else:
+            task = existing[1]
+        try:
+            return await asyncio.shield(task)
+        except asyncio.CancelledError:
+            await self.cancel()
+            await asyncio.gather(task, return_exceptions=True)
+            raise
+
     async def cancel(self):
         """Stop physical work before awaiting any interrupted capture's SQL observation."""
         self._withdraw()
@@ -136,6 +187,9 @@ class OwnedInferenceSession(InferenceSession):
             and not self._capture_task.cancelling()
         ):
             self._capture_task.cancel()
+        for _digest, task in self._check_tasks.values():
+            if not task.done() and not task.cancelling():
+                task.cancel()
         # Stop the original domain, including startup/Ken/analysis, before SQL.
         await self._owner.aclose()
 
@@ -442,6 +496,42 @@ class OwnedCodexRuntime:
                                             settled=_settled,
                                         )
 
+                                    async def check(operation_key, spec):
+                                        """Resolve explicit host environments and keep actual CI execution in original ownership."""
+                                        import sysconfig
+
+                                        from backend.runtime.check_capsule import (
+                                            CheckEnvironment,
+                                        )
+                                        from backend.runtime.check_controller import (
+                                            execute_owned_check,
+                                        )
+
+                                        if spec.environment_id == "system":
+                                            environment = CheckEnvironment.system()
+                                        elif spec.environment_id == "runtime-python":
+                                            environment = CheckEnvironment.capture(
+                                                "runtime-python",
+                                                Path(sysconfig.get_paths()["purelib"]),
+                                            )
+                                        else:
+                                            raise RunConflict(
+                                                "Selected check environment is unavailable; no fallback"
+                                            )
+                                        return await execute_owned_check(
+                                            lease,
+                                            operation_key,
+                                            spec,
+                                            runs=registry.runs,
+                                            owner=owner,
+                                            registry=registry,
+                                            asset=GitAsset.inspect(
+                                                Path("/usr/bin/git")
+                                            ),
+                                            environment=environment,
+                                            settled=_settled,
+                                        )
+
                                     try:
                                         exported = OwnedInferenceSession(
                                             session,
@@ -449,20 +539,26 @@ class OwnedCodexRuntime:
                                             withdraw,
                                             execution_workspace=workspace,
                                             capture=capture if development else None,
+                                            check=check if development else None,
                                         )
                                         yield exported
                                     finally:
                                         withdraw()
-                                        if (
-                                            exported is not None
-                                            and exported._capture_task is not None
-                                            and not exported._capture_task.done()
-                                        ):
-                                            await exported.cancel()
-                                            await asyncio.gather(
-                                                exported._capture_task,
-                                                return_exceptions=True,
-                                            )
+                                        if exported is not None:
+                                            tasks = (
+                                                [exported._capture_task]
+                                                if exported._capture_task is not None
+                                                else []
+                                            ) + [
+                                                task
+                                                for _digest, task in exported._check_tasks.values()
+                                            ]
+                                            if any(not task.done() for task in tasks):
+                                                await exported.cancel()
+                                            if tasks:
+                                                await asyncio.gather(
+                                                    *tasks, return_exceptions=True
+                                                )
                         finally:
                             withdraw()
                             watcher.cancel()

@@ -1,0 +1,374 @@
+{
+  "base_commit": "4522ce0",
+  "status": "source_gate_before_import_fix_plus_verified_final_delta",
+  "source": {
+    "total": 2039,
+    "passed": 1933,
+    "failed": 103,
+    "skipped": 3
+  },
+  "runtime_passed": 853,
+  "new_cases": [
+    "backend.tests.runtime.test_check_execution::test_check_profile_writes_only_copy_and_keeps_metadata_and_network_protected",
+    "backend.tests.runtime.test_check_execution::test_command_deadline_is_durable_infrastructure_error_with_closed_peer",
+    "backend.tests.runtime.test_check_execution::test_dependency_environment_cannot_silently_fall_back_to_system",
+    "backend.tests.runtime.test_check_execution::test_non_regular_report_is_rejected_without_blocking_collector",
+    "backend.tests.runtime.test_check_execution::test_real_pytest_report_is_collected_inside_owned_profile[VALUE = 137\\n-no_tests]",
+    "backend.tests.runtime.test_check_execution::test_real_pytest_report_is_collected_inside_owned_profile[def test_bad():\\n assert False\\n-failed]",
+    "backend.tests.runtime.test_check_execution::test_real_pytest_report_is_collected_inside_owned_profile[def test_ok():\\n assert True\\n-passed]",
+    "backend.tests.runtime.test_check_execution::test_real_pytest_report_is_collected_inside_owned_profile[import pytest\\ndef test_skip():\\n pytest.skip(\"fixture\")\\n-skipped]",
+    "backend.tests.runtime.test_check_state::test_check_inverse_refuses_a_reserved_or_historical_check",
+    "backend.tests.runtime.test_check_state::test_check_reservation_precedes_files_and_repeated_key_cannot_change_recipe",
+    "backend.tests.runtime.test_check_state::test_late_context_correction_retains_but_cannot_admit_a_check",
+    "backend.tests.runtime.test_check_state::test_never_released_peer_cannot_be_recorded_as_a_successful_check",
+    "backend.tests.runtime.test_check_state::test_prepared_copy_and_original_peer_are_required_before_admission",
+    "backend.tests.runtime.test_check_state::test_record_origin_is_immutable_before_execution",
+    "backend.tests.runtime.test_check_state::test_unused_check_inverse_preserves_older_candidate_history",
+    "backend.tests.runtime.test_check_workspace::test_check_copy_has_exact_candidate_head_and_protected_metadata",
+    "backend.tests.runtime.test_check_workspace::test_check_refuses_a_different_candidate_before_exposing_copy",
+    "backend.tests.runtime.test_check_workspace::test_project_git_config_cannot_hide_mutation_or_execute_a_host_filter",
+    "backend.tests.runtime.test_development_session::test_check_result_after_context_correction_is_retained_without_approval",
+    "backend.tests.runtime.test_development_session::test_owned_checks_persist_exact_results_and_invalidate_mutated_copy",
+    "backend.tests.runtime.test_development_session::test_stop_during_owned_check_closes_writer_and_retains_original_record",
+    "backend.tests.runtime.test_development_startup::test_failed_upgrade_leaves_only_committed_prior_migrations[code_check_schema.sql-39]"
+  ],
+  "removed_cases": [],
+  "new_failure_ids": [
+    "backend.tests.runtime.test_peer_broker::test_separate_recovery_after_broker_crash_and_project_db_loss[after-g]",
+    "backend.tests.runtime.test_peer_broker::test_separate_recovery_after_broker_crash_and_project_db_loss[before-global]",
+    "backend.tests.runtime.test_peer_broker::test_separate_recovery_after_broker_crash_and_project_db_loss[before-local]"
+  ],
+  "resolved_failure_ids": [],
+  "inherited_failure_ids": [
+    "backend.tests.agents.test_agent_creation.TestAgentCreation::test_agent_has_tools",
+    "backend.tests.agents.test_agent_creation.TestAgentCreation::test_create_agent[code_reviewer-backend.agents.code_reviewer-create_code_reviewer_agent-False]",
+    "backend.tests.agents.test_agent_creation.TestAgentCreation::test_create_agent[developer-backend.agents.developer-create_developer_agent-False]",
+    "backend.tests.agents.test_agent_creation.TestAgentCreation::test_create_agent[project_lead-backend.agents.project_lead-create_project_lead_agent-False]",
+    "backend.tests.agents.test_agent_creation.TestAgentCreation::test_create_agent[research_reviewer-backend.agents.research_reviewer-create_research_reviewer_agent-False]",
+    "backend.tests.agents.test_agent_creation.TestAgentCreation::test_create_agent[researcher-backend.agents.researcher-create_researcher_agent-False]",
+    "backend.tests.agents.test_agent_creation.TestAgentCreation::test_create_agent[team_lead-backend.agents.team_lead-create_team_lead_agent-True]",
+    "backend.tests.agents.test_agent_creation.TestRegistry::test_get_agent_by_role",
+    "backend.tests.agents.test_agent_creation.TestRoster::test_update_and_load_memory",
+    "backend.tests.agents.test_agent_creation.TestToolAssignment::test_code_reviewer_no_shell",
+    "backend.tests.agents.test_agent_creation.TestToolAssignment::test_developer_has_shell",
+    "backend.tests.agents.test_agent_creation.TestToolAssignment::test_project_lead_has_ask_user",
+    "backend.tests.agents.test_agent_creation.TestToolAssignment::test_project_lead_no_file_tools",
+    "backend.tests.agents.test_agent_creation.TestToolAssignment::test_research_reviewer_has_validate",
+    "backend.tests.agents.test_agent_creation.TestToolAssignment::test_researcher_has_web_tools",
+    "backend.tests.agents.test_agent_creation.TestToolAssignment::test_team_lead_delegation_enabled",
+    "backend.tests.api.test_routes.TestProjects::test_delete_project",
+    "backend.tests.communication.test_loop_guard.TestPingPong::test_alternating_pattern_detected",
+    "backend.tests.engine.test_llm_client.TestCallLlm::test_raises_after_max_retries",
+    "backend.tests.engine.test_llm_client.TestCallLlm::test_raises_on_permanent_error",
+    "backend.tests.engine.test_llm_client.TestCallLlm::test_retries_on_transient_error",
+    "backend.tests.flows.test_development_flow_ci.TestHandleCIResult::test_error_result",
+    "backend.tests.flows.test_development_flow_ci.TestHandleCIResult::test_failing_result",
+    "backend.tests.flows.test_development_flow_ci.TestHandleCIResult::test_no_tests_collected",
+    "backend.tests.flows.test_development_flow_ci.TestHandleCIResult::test_passing_result",
+    "backend.tests.flows.test_development_flow_ci.TestRunPreReviewCI::test_ci_fails",
+    "backend.tests.flows.test_development_flow_ci.TestRunPreReviewCI::test_ci_passes",
+    "backend.tests.flows.test_failed_status.TestFailedStatus::test_backlog_to_done_rejected",
+    "backend.tests.flows.test_failed_status.TestFailedStatus::test_backlog_to_failed_rejected",
+    "backend.tests.flows.test_failed_status.TestFailedStatus::test_update_task_status_safe_swallows_errors",
+    "backend.tests.flows.test_memory_integration.TestMemoryConfiguration::test_build_crew_memory_kwargs_ollama_embedder",
+    "backend.tests.flows.test_memory_integration.TestMemoryConfiguration::test_build_crew_memory_kwargs_openai_embedder",
+    "backend.tests.flows.test_memory_integration.TestMemoryConfiguration::test_build_crew_memory_kwargs_returns_memory_instance",
+    "backend.tests.flows.test_memory_integration.TestMemoryConfiguration::test_build_crew_memory_kwargs_uses_hardcoded_threshold",
+    "backend.tests.flows.test_research_flow.TestResearchFlowPeerReview::test_peer_review_rejected",
+    "backend.tests.flows.test_research_flow.TestResearchFlowPeerReview::test_peer_review_validated",
+    "backend.tests.flows.test_research_flow.TestResearchFlowPeerReviewRouter::test_router_max_revisions_reached",
+    "backend.tests.flows.test_research_flow.TestResearchFlowPeerReviewRouter::test_router_rejected",
+    "backend.tests.flows.test_research_flow.TestResearchFlowPeerReviewRouter::test_router_validated",
+    "backend.tests.flows.test_research_flow.TestResearchState::test_default_state",
+    "backend.tests.flows.test_research_flow.TestReviewerFeedbackExtraction::test_rejected_case_insensitive_prefix",
+    "backend.tests.flows.test_research_flow.TestReviewerFeedbackExtraction::test_rejected_extracts_feedback_after_prefix",
+    "backend.tests.flows.test_research_flow.TestReviewerFeedbackExtraction::test_rejected_fallback_when_no_prefix",
+    "backend.tests.flows.test_research_flow.TestReviewerFeedbackExtraction::test_validated_clears_feedback",
+    "backend.tests.flows.test_research_flow.TestReviseResearchFeedbackPropagation::test_revise_research_passes_feedback_to_prompt",
+    "backend.tests.integration.test_full_lifecycle.TestAllTasksDoneTriggerCompletion::test_all_tasks_done_triggers_completion",
+    "backend.tests.integration.test_full_lifecycle.TestCommunicationDuringLifecycle::test_communication_during_lifecycle",
+    "backend.tests.integration.test_full_lifecycle.TestDependencyBlocksTask::test_dependency_blocks_task",
+    "backend.tests.integration.test_full_lifecycle.TestDevelopmentLifecycle::test_development_lifecycle",
+    "backend.tests.integration.test_full_lifecycle.TestRejectionAndRetryLifecycle::test_rejection_and_retry",
+    "backend.tests.integration.test_full_lifecycle.TestResearchLifecycle::test_research_lifecycle",
+    "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[backlog-done]",
+    "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[backlog-failed]",
+    "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[backlog-in_progress]",
+    "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[backlog-review_ready]",
+    "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[cancelled-backlog]",
+    "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[cancelled-failed]",
+    "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[done-backlog]",
+    "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[done-failed]",
+    "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[done-pending]",
+    "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[failed-done]",
+    "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[failed-in_progress]",
+    "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[in_progress-done]",
+    "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[in_progress-pending]",
+    "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[pending-backlog]",
+    "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[pending-done]",
+    "backend.tests.state.test_state_machine.TestGetAllowedTransitions::test_backlog_transitions",
+    "backend.tests.state.test_state_machine.TestGetAllowedTransitions::test_cancelled_transitions",
+    "backend.tests.state.test_state_machine.TestGetAllowedTransitions::test_done_transitions",
+    "backend.tests.state.test_state_machine.TestGetAllowedTransitions::test_failed_transitions",
+    "backend.tests.state.test_state_machine.TestGetAllowedTransitions::test_in_progress_transitions",
+    "backend.tests.state.test_state_machine.TestGetAllowedTransitions::test_pending_transitions",
+    "backend.tests.state.test_state_machine.TestGetAllowedTransitions::test_rejected_transitions",
+    "backend.tests.state.test_state_machine.TestGetAllowedTransitions::test_review_ready_transitions",
+    "backend.tests.state.test_state_machine.TestValidateTransition::test_validate_transition_raises_on_invalid_move",
+    "backend.tests.test_orchestrator.TestGetTeamComposition::test_returns_correct_roles",
+    "backend.tests.tools.test_code_docs_search.TestCodeDocsSearchTool::test_code_docs_search_config_mapping",
+    "backend.tests.tools.test_code_docs_search.TestCodeDocsSearchTool::test_code_docs_search_with_url",
+    "backend.tests.tools.test_code_docs_search.TestCodeDocsSearchTool::test_code_docs_search_without_url",
+    "backend.tests.tools.test_doc_search_tools.TestDOCXSearchTool::test_docx_search_delegates_to_crewai",
+    "backend.tests.tools.test_doc_search_tools.TestDOCXSearchTool::test_docx_search_sandbox_validation",
+    "backend.tests.tools.test_doc_search_tools.TestJSONSearchTool::test_json_search_delegates",
+    "backend.tests.tools.test_doc_search_tools.TestXMLSearchTool::test_xml_search_delegates",
+    "backend.tests.tools.test_file_tools.TestReadFileTool::test_read_existing_file",
+    "backend.tests.tools.test_file_tools.TestReadFileTool::test_read_outside_sandbox",
+    "backend.tests.tools.test_file_tools.TestWriteFileTool::test_write_outside_sandbox",
+    "backend.tests.tools.test_knowledge_ingest.TestStoreScrapedContent::test_content_truncation",
+    "backend.tests.tools.test_knowledge_ingest.TestStoreScrapedContent::test_default_topic_from_url",
+    "backend.tests.tools.test_knowledge_ingest.TestStoreScrapedContent::test_store_scraped_content_creates_finding",
+    "backend.tests.tools.test_knowledge_tools.TestRecordFindingTool::test_record_finding",
+    "backend.tests.tools.test_scrape_tools.TestScrapeWebsiteTool::test_scrape_website_handles_failure",
+    "backend.tests.tools.test_scrape_tools.TestScrapeWebsiteTool::test_scrape_website_returns_content",
+    "backend.tests.tools.test_scrape_tools.TestScrapeWebsiteTool::test_scrape_website_stores_as_finding",
+    "backend.tests.tools.test_scrape_tools.TestSpiderScrapeTool::test_spider_scrape_delegates_to_crewai",
+    "backend.tests.tools.test_shell_tools.TestExecuteCommandPodMode::test_default_cwd_is_workspace",
+    "backend.tests.tools.test_task_tools.TestUpdateTaskStatusTool::test_invalid_transition",
+    "backend.tests.tools.test_web_search_backends.TestFetchWithTrafilatura::test_fetch_returns_content",
+    "backend.tests.tools.test_web_search_backends.TestSearchDDG::test_ddg_search_handles_exception",
+    "backend.tests.tools.test_web_search_backends.TestSearchDDG::test_ddg_search_returns_results",
+    "backend.tests.tools.test_web_search_backends.TestSearchSerper::test_serper_search_when_configured"
+  ],
+  "skipped_ids": [
+    "backend.tests.integration.test_pod_lifecycle.TestPodLifecycle::test_start_exec_stop",
+    "backend.tests.integration.test_pod_lifecycle.TestPodLifecycle::test_idempotent_start",
+    "backend.tests.integration.test_pod_lifecycle.TestPodLifecycle::test_exec_with_stdin"
+  ],
+  "directed_history": {
+    "migration_state_ports": {
+      "passed": 99,
+      "seconds": 23.81
+    },
+    "owned_session_integrations": {
+      "passed": 3,
+      "seconds": 179.38
+    },
+    "note": "Earlier directed observations; cases also included in the final source and wheel runs."
+  },
+  "checks": {
+    "changed_python_ruff_lint_files": 28,
+    "formatted_files": 27,
+    "formatting_exception": "backend/tools/base/db.py has pre-existing formatting debt, also reproduced against HEAD; unrelated formatting left unchanged.",
+    "documented_changed_or_new_definitions": 98
+  },
+  "model_calls": 0,
+  "new_published_ken_trial": false,
+  "frontend_changed": false,
+  "limits": [
+    "Full suite remains red with inherited failures; matching IDs do not prove identical causes/messages.",
+    "Internal development only; no code review, publication, public development admission or replacement of legacy CI.",
+    "Logical environment IDs and pinned dependency directory identity do not pin all dependency bytes.",
+    "Preparation, command and validation use separate time budgets.",
+    "No new real-model quality or subscription/Ken trial; prior receipts retain their historical scope.",
+    "The complete source run reports three new bootstrap failures before their targeted import fix. Do not relabel its 103 failures as a fresh final-source run with 100 failures."
+  ],
+  "source_artifact": {
+    "wheel_sha256": "2f34ec119c97c11fefa8900aa11c558ad5acdfd7525bf3b8bbe7abb6bfd3c640",
+    "scope": "Complete source run before the one-file import-defer fix; source counts and failure IDs describe that preceding artifact.",
+    "backend_sources_sha256": "8c0c4b7fc1c50a566b846db779985ab4c5f16bbcb4104641ef9dbf498dabcd22",
+    "seconds": 771.15
+  },
+  "final_delta": {
+    "changed_source_payloads": [
+      "backend/runtime/check_state.py"
+    ],
+    "ast_verified": "Only move check_results.evaluate_check import from module scope to CodeChecks.complete; no other production/test source delta.",
+    "targeted_passed": 36,
+    "targeted_failed": 0,
+    "targeted_skipped": 0,
+    "fixed_source_failure_ids": [
+      "backend.tests.runtime.test_peer_broker::test_separate_recovery_after_broker_crash_and_project_db_loss[after-g]",
+      "backend.tests.runtime.test_peer_broker::test_separate_recovery_after_broker_crash_and_project_db_loss[before-global]",
+      "backend.tests.runtime.test_peer_broker::test_separate_recovery_after_broker_crash_and_project_db_loss[before-local]"
+    ],
+    "note": "No second complete source run. The final extracted-wheel gate is recorded separately."
+  },
+  "existing_seccomp_profiles": {
+    "base_commit": "4522ce0",
+    "byte_identical_combinations": 16,
+    "profiles": [
+      {
+        "flags": {
+          "network": false,
+          "listener_setup": false,
+          "protected_peers": false,
+          "private_pairs": false
+        },
+        "policy_sha256": "c1c59d10488e9ccfdea4adafe5b839bf428078f4f15170195ca92103143c918e"
+      },
+      {
+        "flags": {
+          "network": false,
+          "listener_setup": false,
+          "protected_peers": false,
+          "private_pairs": true
+        },
+        "policy_sha256": "6392f772aef824febfc73f4fef3d780bc0162383678a8a2f18525e1e4634ecba"
+      },
+      {
+        "flags": {
+          "network": false,
+          "listener_setup": false,
+          "protected_peers": true,
+          "private_pairs": false
+        },
+        "policy_sha256": "53fde28d76bb43ed5ef1623911b861839eb99533cade3f87763ca098b5c244f5"
+      },
+      {
+        "flags": {
+          "network": false,
+          "listener_setup": false,
+          "protected_peers": true,
+          "private_pairs": true
+        },
+        "policy_sha256": "4bb2c3a33060596e508956b7d7cc3ab14ebe822b52fedfad6ca0bee6ed703551"
+      },
+      {
+        "flags": {
+          "network": false,
+          "listener_setup": true,
+          "protected_peers": false,
+          "private_pairs": false
+        },
+        "policy_sha256": "c1c59d10488e9ccfdea4adafe5b839bf428078f4f15170195ca92103143c918e"
+      },
+      {
+        "flags": {
+          "network": false,
+          "listener_setup": true,
+          "protected_peers": false,
+          "private_pairs": true
+        },
+        "policy_sha256": "6392f772aef824febfc73f4fef3d780bc0162383678a8a2f18525e1e4634ecba"
+      },
+      {
+        "flags": {
+          "network": false,
+          "listener_setup": true,
+          "protected_peers": true,
+          "private_pairs": false
+        },
+        "policy_sha256": "53fde28d76bb43ed5ef1623911b861839eb99533cade3f87763ca098b5c244f5"
+      },
+      {
+        "flags": {
+          "network": false,
+          "listener_setup": true,
+          "protected_peers": true,
+          "private_pairs": true
+        },
+        "policy_sha256": "4bb2c3a33060596e508956b7d7cc3ab14ebe822b52fedfad6ca0bee6ed703551"
+      },
+      {
+        "flags": {
+          "network": true,
+          "listener_setup": false,
+          "protected_peers": false,
+          "private_pairs": false
+        },
+        "policy_sha256": "186ad859e0adacf49991b949d79712d830aa0116b4628dfba606d2342875378c"
+      },
+      {
+        "flags": {
+          "network": true,
+          "listener_setup": false,
+          "protected_peers": false,
+          "private_pairs": true
+        },
+        "policy_sha256": "186ad859e0adacf49991b949d79712d830aa0116b4628dfba606d2342875378c"
+      },
+      {
+        "flags": {
+          "network": true,
+          "listener_setup": false,
+          "protected_peers": true,
+          "private_pairs": false
+        },
+        "policy_sha256": "beca76294659f419eacd1a67c399bab03655f9f276070de5068a246c5217bcc9"
+      },
+      {
+        "flags": {
+          "network": true,
+          "listener_setup": false,
+          "protected_peers": true,
+          "private_pairs": true
+        },
+        "policy_sha256": "beca76294659f419eacd1a67c399bab03655f9f276070de5068a246c5217bcc9"
+      },
+      {
+        "flags": {
+          "network": true,
+          "listener_setup": true,
+          "protected_peers": false,
+          "private_pairs": false
+        },
+        "policy_sha256": "383f84923e17177ef95a88c8abbcd7d92cbb2cac5fd010178e1013b8d140aebf"
+      },
+      {
+        "flags": {
+          "network": true,
+          "listener_setup": true,
+          "protected_peers": false,
+          "private_pairs": true
+        },
+        "policy_sha256": "383f84923e17177ef95a88c8abbcd7d92cbb2cac5fd010178e1013b8d140aebf"
+      },
+      {
+        "flags": {
+          "network": true,
+          "listener_setup": true,
+          "protected_peers": true,
+          "private_pairs": false
+        },
+        "policy_sha256": "28dbbcd19228e5cb8cf5a730b7469beb4327c521d8adc435bbfbd83d95d880ca"
+      },
+      {
+        "flags": {
+          "network": true,
+          "listener_setup": true,
+          "protected_peers": true,
+          "private_pairs": true
+        },
+        "policy_sha256": "28dbbcd19228e5cb8cf5a730b7469beb4327c521d8adc435bbfbd83d95d880ca"
+      }
+    ],
+    "limits": "Legacy flag combinations only. Actual new private-local socket behavior has separate kernel integration tests."
+  },
+  "first_package_gate": {
+    "passed": 384,
+    "failed": 9,
+    "seconds": 405.38,
+    "causes": {
+      "dependency_prefix_fixture_errors": 6,
+      "minimal_recovery_import_regressions": 3
+    },
+    "diagnosis": "Python3.12 -S leaves the base prefix; carrying the explicit host venv prefix fixes the fixture selection. Deferring report-parser import into CodeChecks.complete fixes the actual recovery bootstrap regression.",
+    "diagnostic_probe": {
+      "passed": 1,
+      "failed": 1,
+      "seconds": 1.1,
+      "scope": "Correct host prefix lets the actual isolation profile pass while the original bootstrap import still fails."
+    }
+  },
+  "final_wheel": {
+    "passed": 393,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 461.37,
+    "wheel_sha256": "698505e293aa8789275bee2037cccf6bb7e496b53d14a8da34c1d2403336b829",
+    "matching_source_payloads": 676,
+    "backend_modules_only_from_wheel": 386
+  }
+}

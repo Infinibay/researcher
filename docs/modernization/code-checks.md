@@ -1,9 +1,12 @@
 # Comprobaciones ligadas al candidato
 
-Los contratos y el clasificador están implementados. **Todavía no ejecutan CI ni
-guardan comprobaciones durables**, y las rutas heredadas de CI no han sido
-sustituidas por esta política. Una clasificación positiva tampoco constituye
-revisión independiente, aceptación ni permiso para publicar.
+El host puede ejecutar comandos y pytest sobre una copia privada del candidato
+exacto y conservar sus resultados. La migración 39 guarda reservas, receta,
+identidades físicas, operación y evidencia. Este recorrido es interno:
+`OwnedInferenceSession.run_check` requiere haber capturado y sellado el candidato.
+Las rutas heredadas de CI todavía no han sido sustituidas. Una comprobación
+positiva tampoco constituye revisión independiente, aceptación ni permiso para
+publicar.
 
 ## Identidad antes de interpretar el resultado
 
@@ -12,7 +15,7 @@ fence, contexto, base, commit, árbol y hash del diff. `CheckSpec` identifica el
 comando completo, protocolo de resultados, entorno seleccionado y límites de
 tiempo/salida. Ambos son inmutables y tienen huellas canónicas.
 
-`CheckObservation` representa lo que deberá recoger el ejecutor del host: candidato
+`CheckObservation` representa lo que recoge el ejecutor del host: candidato
 observado, receta, código de salida, cierre físico, integridad de la salida,
 coincidencia del código ejecutado y, para pytest, los bytes completos de JUnit.
 Estos valores deben proceder del ejecutor y sus recibos, no de afirmaciones del
@@ -43,33 +46,67 @@ número. El parser rechaza entidades XML y reportes superiores a un MiB. Los
 códigos de salida se contrastaron con el enum de la versión instalada; cero
 pruebas, uso incorrecto y límite de advertencias tienen resultados diferentes.
 
-## Ejecutor y persistencia pendientes
+## Ejecución y persistencia
 
-La integración debe reservar cada comprobación antes de iniciarla y registrar su
-candidato, receta, entorno, peer y operación originales. Debe utilizar el broker
-y los límites del intento, comprobar el cierre físico y revalidar contexto y
-contenido antes de registrar el resultado. Un crash exige inspeccionar el recibo
-original; no permite repetir el comando automáticamente.
+La integración reserva cada comprobación antes de crear archivos y registra su
+candidato, receta, entorno, peer y operación originales. Utiliza el broker y el
+dominio del intento original. Antes de confirmar resultado y evento en la misma
+transacción, exige cierre físico, contexto vigente y contenido coincidente.
+Repetir la misma clave en la ejecución devuelve el resultado existente; no
+autoriza otro comando. Una reserva interrumpida queda en `reconciling` y exige
+inspección del recibo original, sin repetición automática.
 
-La propuesta para admitir compilaciones y pruebas que escriben archivos es una
-copia privada por comprobación, derivada del commit exacto. El candidato permanece
-protegido y la copia debe coincidir antes y después de ejecutar. Los metadatos Git
-usados por el host para esa verificación deben quedar fuera del alcance escribible
-de las pruebas: no se puede confiar en filtros, referencias o flags de un índice
-que el propio código comprobado pueda modificar.
+Cada comprobación obtiene una copia privada derivada del commit exacto. El
+candidato y el repositorio original quedan fuera del perfil de ejecución. Los
+metadatos Git de validación están en un directorio separado y se montan en modo
+de sólo lectura; el host usa esa identidad protegida para verificar commit,
+árbol y estado antes y después. Cambiar código seguido o crear archivos no
+ignorados invalida el resultado; se permiten productos de compilación ignorados.
+El host no confía en una configuración o índice que las pruebas puedan escribir.
 
-El entorno de dependencias debe ser una elección explícita del host, con acceso
-acotado. La ausencia de intérprete o dependencias produce un error de
-infraestructura; no activa un subprocess del host ni un proveedor alternativo.
-Los reportes se deben recoger de forma acotada dentro del aislamiento, evitando
-leer desde el host rutas o enlaces simbólicos controlados por el proyecto.
+El host admite dos entornos explícitos: `system`, sin directorio adicional de
+paquetes, y `runtime-python`, con el directorio de paquetes del intérprete que
+ejecuta el servicio montado en modo de sólo lectura. El ejecutable se verifica y
+pertenece a las vistas de sistema/runtime permitidas. No hay instalación de
+dependencias ni selección arbitraria de entornos. Se comprueban ruta canónica,
+propietario, permisos y dispositivo/inodo del directorio; esto **no fija todos los
+bytes de sus dependencias**. Una política futura de entornos reproducibles debe
+versionar esos contenidos.
 
-Estas condiciones describen trabajo pendiente; todavía no hay un perfil de
-comprobaciones ni una migración de almacenamiento para ellas. Las observaciones
-de CI siguen siendo evidencia limitada y requieren revisión independiente y una
-decisión del propietario antes de publicar.
+El proceso no recibe las credenciales ni el directorio personal del host y no
+tiene acceso a Internet. Puede usar sockets Unix privados para sus bibliotecas.
+Los reportes se recogen dentro del aislamiento con apertura sin seguimiento de
+enlaces, sin bloqueo ante FIFO y con límite de tamaño. No se siguen desde el host
+rutas controladas por el proyecto. La terminación del colector no sustituye al
+recibo de cierre físico del dominio.
 
-La evidencia de los contratos y del cierre corregido está en
+La preparación tiene un presupuesto de 60 segundos y la validación posterior de
+30 segundos; el comando tiene su propio límite de hasta 300 segundos y salida
+acotada. Son presupuestos por fase, no un límite total igual al del comando.
+Stop cierra el propietario original y espera las tareas de comprobación antes
+de desmontar su ámbito. Si cambió el contexto, se conservan archivos y reserva,
+pero el resultado tardío no obtiene autoridad para aprobar el contexto nuevo.
+
+La inversa de la migración 39 sólo retira almacenamiento de comprobaciones sin
+uso, sin autoridad activa ni versiones posteriores. Conserva el historial previo
+de candidatos. Una reserva de comprobación basta para impedir ese retroceso; no
+se borran copias privadas para forzarlo. Las inversas anteriores mantienen sus
+propias restricciones y requieren retirar primero las versiones posteriores.
+
+Quedan pendientes la admisión pública del desarrollo, revisión independiente de
+código, aceptación/publicación, integración operativa y retirada del CI heredado.
+El código de pruebas y sus reportes son evidencia limitada: un proyecto también
+puede contener pruebas incompletas o un comando que fabrique un informe. La
+revisión debe evaluar su calidad antes de una decisión de publicación.
+
+La ejecución actual tiene evidencia en [owned-checks-results.json](owned-checks-results.json),
+[owned-checks-packaging.json](owned-checks-packaging.json) y
+[owned-checks-docstrings.json](owned-checks-docstrings.json). El wheel final pasa
+393 pruebas sin fallos ni omisiones. La suite completa anterior a la corrección
+de importación y las 36 pruebas posteriores se conservan con alcance separado;
+no se presentan como una segunda suite global aprobada.
+
+La evidencia anterior de los contratos y del cierre corregido está en
 [sealing-checks-results.json](sealing-checks-results.json),
 [sealing-checks-packaging.json](sealing-checks-packaging.json) y
 [sealing-checks-docstrings.json](sealing-checks-docstrings.json).

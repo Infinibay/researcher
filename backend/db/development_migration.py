@@ -27,9 +27,12 @@ def _unused(conn, version):
                     "SELECT 1 FROM schema_migrations WHERE version>? LIMIT 1",
                     (version,),
                 ).fetchone()
-                or conn.execute(
-                    "SELECT 1 FROM runtime_runs WHERE execution_kind IN ('development','code_review') LIMIT 1"
-                ).fetchone()
+                or (
+                    version <= 38
+                    and conn.execute(
+                        "SELECT 1 FROM runtime_runs WHERE execution_kind IN ('development','code_review') LIMIT 1"
+                    ).fetchone()
+                )
                 or conn.execute(
                     "SELECT 1 FROM runtime_runs WHERE status IN ('queued','running','cancelling','reconciling','waiting_input') LIMIT 1"
                 ).fetchone()
@@ -44,7 +47,15 @@ def _unused(conn, version):
                 )
                 or (
                     version == 38
-                    and conn.execute("SELECT 1 FROM runtime_code_candidates LIMIT 1").fetchone()
+                    and conn.execute(
+                        "SELECT 1 FROM runtime_code_candidates LIMIT 1"
+                    ).fetchone()
+                )
+                or (
+                    version == 39
+                    and conn.execute(
+                        "SELECT 1 FROM runtime_code_checks LIMIT 1"
+                    ).fetchone()
                 )
             )
             if blocked:
@@ -56,6 +67,22 @@ def _unused(conn, version):
     except BaseException:
         conn.rollback()
         raise
+
+
+def restore_code_checks(conn):
+    """Remove unused check storage while preserving older candidate history; active authority and check rows block it."""
+    with _unused(conn, 39) as present:
+        if not present:
+            return
+        for trigger in (
+            "code_check_origin_immutable",
+            "code_check_prepared_immutable",
+            "code_check_peer_immutable",
+            "code_check_finished_immutable",
+        ):
+            conn.execute("DROP TRIGGER " + trigger)
+        conn.execute("DROP TABLE runtime_code_checks")
+        conn.execute("DELETE FROM schema_migrations WHERE version=39")
 
 
 def restore_code_candidates(conn):

@@ -1,0 +1,694 @@
+{
+  "base_commit": "4522ce0",
+  "changed_or_new_definitions_documented": 98,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/db/development_migration.py",
+      "symbol": "_unused",
+      "line": 12,
+      "docstring": "Hold an idle connection's schema lock and reject live, historical or newer authority.",
+      "file_sha256": "afa87a8b8da4ca7760cb7c89c5d41e41376fcd2482fe4f54b91318f3dffd665f"
+    },
+    {
+      "path": "backend/db/development_migration.py",
+      "symbol": "restore_code_checks",
+      "line": 72,
+      "docstring": "Remove unused check storage while preserving older candidate history; active authority and check rows block it.",
+      "file_sha256": "afa87a8b8da4ca7760cb7c89c5d41e41376fcd2482fe4f54b91318f3dffd665f"
+    },
+    {
+      "path": "backend/runtime/broker_profile.py",
+      "symbol": "_syscall_filter",
+      "line": 24,
+      "docstring": "Build verified x86_64 syscall policy with explicit Internet or private-local sockets and kernel control denials.",
+      "file_sha256": "3e80d7793818df4fce8175387f10c50e22e08e4744c08ffe3a479c49eac74e77"
+    },
+    {
+      "path": "backend/runtime/broker_stdio.py",
+      "symbol": "AsyncPeerBroker",
+      "line": 53,
+      "docstring": "One attempt's async composition and bounded launch/control resources.\n\nOne launch worker serializes accepted starts (at most eight pending). Peer\nreceipt work cannot occupy the separate worker reserved for whole-attempt\nrevocation. IO uses event-loop pipes, not blocking reader threads.",
+      "file_sha256": "ac1b02f7818333613d6f3f4310848e142b4c04d462bb0e0b123776f806a382de"
+    },
+    {
+      "path": "backend/runtime/broker_stdio.py",
+      "symbol": "AsyncPeerBroker.check",
+      "line": 92,
+      "docstring": "Describe one fixed host check; the original registry/broker still own admission and G.",
+      "file_sha256": "ac1b02f7818333613d6f3f4310848e142b4c04d462bb0e0b123776f806a382de"
+    },
+    {
+      "path": "backend/runtime/broker_stdio.py",
+      "symbol": "AsyncPeerBroker._endpoint",
+      "line": 148,
+      "docstring": "Allocate one non-replayable endpoint while its broker remains admitted.",
+      "file_sha256": "ac1b02f7818333613d6f3f4310848e142b4c04d462bb0e0b123776f806a382de"
+    },
+    {
+      "path": "backend/runtime/broker_stdio.py",
+      "symbol": "AsyncPeerBroker._start",
+      "line": 197,
+      "docstring": "Forward the original endpoint policy to the bounded launch worker.",
+      "file_sha256": "ac1b02f7818333613d6f3f4310848e142b4c04d462bb0e0b123776f806a382de"
+    },
+    {
+      "path": "backend/runtime/broker_stdio.py",
+      "symbol": "BrokerEndpoint",
+      "line": 347,
+      "docstring": "A single post-gate connection; cannot reopen or replay a start receipt.",
+      "file_sha256": "ac1b02f7818333613d6f3f4310848e142b4c04d462bb0e0b123776f806a382de"
+    },
+    {
+      "path": "backend/runtime/broker_stdio.py",
+      "symbol": "BrokerEndpoint.__init__",
+      "line": 350,
+      "docstring": "Retain launch arguments and handles for exactly one owned connection.",
+      "file_sha256": "ac1b02f7818333613d6f3f4310848e142b4c04d462bb0e0b123776f806a382de"
+    },
+    {
+      "path": "backend/runtime/check_capsule.py",
+      "symbol": "CheckEnvironment",
+      "line": 20,
+      "docstring": "Explicit host-selected dependency directory identity; no ambient home/config or automatic dependency fallback.",
+      "file_sha256": "0213910cbbdc28a4e34be528e372af869aba797c2b0477e09c82c147efd91fef"
+    },
+    {
+      "path": "backend/runtime/check_capsule.py",
+      "symbol": "CheckEnvironment.__post_init__",
+      "line": 28,
+      "docstring": "Reject incomplete named environments and broad roots even when constructed without the capture helper.",
+      "file_sha256": "0213910cbbdc28a4e34be528e372af869aba797c2b0477e09c82c147efd91fef"
+    },
+    {
+      "path": "backend/runtime/check_capsule.py",
+      "symbol": "CheckEnvironment.system",
+      "line": 53,
+      "docstring": "Select only the common readonly system/runtime mounts, without extra package roots.",
+      "file_sha256": "0213910cbbdc28a4e34be528e372af869aba797c2b0477e09c82c147efd91fef"
+    },
+    {
+      "path": "backend/runtime/check_capsule.py",
+      "symbol": "CheckEnvironment.capture",
+      "line": 58,
+      "docstring": "Capture a normal installed package root, rejecting redirected, writable or overly broad host directories.",
+      "file_sha256": "0213910cbbdc28a4e34be528e372af869aba797c2b0477e09c82c147efd91fef"
+    },
+    {
+      "path": "backend/runtime/check_capsule.py",
+      "symbol": "CheckLaunch",
+      "line": 77,
+      "docstring": "Immutable host recipe and pinned executable; this manifest alone cannot authorize a workspace or process.",
+      "file_sha256": "0213910cbbdc28a4e34be528e372af869aba797c2b0477e09c82c147efd91fef"
+    },
+    {
+      "path": "backend/runtime/check_capsule.py",
+      "symbol": "CheckLaunch.__post_init__",
+      "line": 86,
+      "docstring": "Require a bounded recipe, matching explicit environment and readonly system/runtime executable.",
+      "file_sha256": "0213910cbbdc28a4e34be528e372af869aba797c2b0477e09c82c147efd91fef"
+    },
+    {
+      "path": "backend/runtime/check_capsule.py",
+      "symbol": "CheckCapsule",
+      "line": 109,
+      "docstring": "Keep the candidate/source absent while the original gate runs one manifest-bound check copy.",
+      "file_sha256": "0213910cbbdc28a4e34be528e372af869aba797c2b0477e09c82c147efd91fef"
+    },
+    {
+      "path": "backend/runtime/check_capsule.py",
+      "symbol": "CheckCapsule.__init__",
+      "line": 112,
+      "docstring": "Accept only the check registry's exact view and matching protected recipe/metadata identities.",
+      "file_sha256": "0213910cbbdc28a4e34be528e372af869aba797c2b0477e09c82c147efd91fef"
+    },
+    {
+      "path": "backend/runtime/check_capsule.py",
+      "symbol": "CheckCapsule._open",
+      "line": 127,
+      "docstring": "Pin a no-follow host asset until the gated spawn consumes its explicit mount.",
+      "file_sha256": "0213910cbbdc28a4e34be528e372af869aba797c2b0477e09c82c147efd91fef"
+    },
+    {
+      "path": "backend/runtime/check_capsule.py",
+      "symbol": "CheckCapsule._program",
+      "line": 140,
+      "docstring": "Pin program bytes and invoke only the packaged trusted collector with JSON data arguments.",
+      "file_sha256": "0213910cbbdc28a4e34be528e372af869aba797c2b0477e09c82c147efd91fef"
+    },
+    {
+      "path": "backend/runtime/check_capsule.py",
+      "symbol": "CheckCapsule._workspace_mount",
+      "line": 163,
+      "docstring": "Grant write access only to the check registry's prepared independent copy.",
+      "file_sha256": "0213910cbbdc28a4e34be528e372af869aba797c2b0477e09c82c147efd91fef"
+    },
+    {
+      "path": "backend/runtime/check_capsule.py",
+      "symbol": "CheckCapsule._filter",
+      "line": 167,
+      "docstring": "Allow private local test sockets while denying Internet families and kernel/peer-control operations.",
+      "file_sha256": "0213910cbbdc28a4e34be528e372af869aba797c2b0477e09c82c147efd91fef"
+    },
+    {
+      "path": "backend/runtime/check_capsule.py",
+      "symbol": "CheckCapsule._mounts",
+      "line": 173,
+      "docstring": "Mount protected validation Git and explicit dependencies readonly; neither host home nor broker control is exposed.",
+      "file_sha256": "0213910cbbdc28a4e34be528e372af869aba797c2b0477e09c82c147efd91fef"
+    },
+    {
+      "path": "backend/runtime/check_capsule.py",
+      "symbol": "CheckCapsule.__enter__",
+      "line": 211,
+      "docstring": "Retain all pinned mounts through the original broker's gated spawn.",
+      "file_sha256": "0213910cbbdc28a4e34be528e372af869aba797c2b0477e09c82c147efd91fef"
+    },
+    {
+      "path": "backend/runtime/check_controller.py",
+      "symbol": "execute_owned_check",
+      "line": 26,
+      "docstring": "Reserve before effects, prepare once and retain physical/result evidence without automatic effect replay.",
+      "file_sha256": "577add423b36572a8da11ab55173df8e5b6dcf6483b9a37fa492850e568605cd"
+    },
+    {
+      "path": "backend/runtime/check_execution.py",
+      "symbol": "RawCheckResult",
+      "line": 13,
+      "docstring": "Owned transport evidence and collected bytes, not a test verdict or publication authority.",
+      "file_sha256": "53ac5a8e9d2188c141d15ca409365f344534835601c7298f53f8735698c71cf7"
+    },
+    {
+      "path": "backend/runtime/check_execution.py",
+      "symbol": "run_check_worker",
+      "line": 25,
+      "docstring": "Run once under its original reservation; unknown transport never triggers another payload launch.",
+      "file_sha256": "53ac5a8e9d2188c141d15ca409365f344534835601c7298f53f8735698c71cf7"
+    },
+    {
+      "path": "backend/runtime/check_execution.py",
+      "symbol": "run_check_worker.collect",
+      "line": 33,
+      "docstring": "Drain one finite complete byte stream; a preview is not a terminal check observation.",
+      "file_sha256": "53ac5a8e9d2188c141d15ca409365f344534835601c7298f53f8735698c71cf7"
+    },
+    {
+      "path": "backend/runtime/check_registry.py",
+      "symbol": "CheckExecutionView",
+      "line": 15,
+      "docstring": "Exact writable check copy plus protected metadata and immutable candidate/recipe references.",
+      "file_sha256": "cccffecb130d2da3d9612ce324ad62be7e12107a0238193f859f206e70c8705d"
+    },
+    {
+      "path": "backend/runtime/check_registry.py",
+      "symbol": "CandidateCheckRegistry",
+      "line": 28,
+      "docstring": "Narrow the normal admission/final-binding transactions to one running check and its original peer.",
+      "file_sha256": "cccffecb130d2da3d9612ce324ad62be7e12107a0238193f859f206e70c8705d"
+    },
+    {
+      "path": "backend/runtime/check_registry.py",
+      "symbol": "CandidateCheckRegistry.__init__",
+      "line": 31,
+      "docstring": "Keep a fixed host-selected lease/check; model code cannot choose a different view or mount.",
+      "file_sha256": "cccffecb130d2da3d9612ce324ad62be7e12107a0238193f859f206e70c8705d"
+    },
+    {
+      "path": "backend/runtime/check_registry.py",
+      "symbol": "CandidateCheckRegistry._check",
+      "line": 38,
+      "docstring": "Recheck exact scope and both physical identities inside admission and final pre-G binding.",
+      "file_sha256": "cccffecb130d2da3d9612ce324ad62be7e12107a0238193f859f206e70c8705d"
+    },
+    {
+      "path": "backend/runtime/check_registry.py",
+      "symbol": "CandidateCheckRegistry._validate_development_source",
+      "line": 62,
+      "docstring": "Retain base registration validation and add the check identities at the final gate too.",
+      "file_sha256": "cccffecb130d2da3d9612ce324ad62be7e12107a0238193f859f206e70c8705d"
+    },
+    {
+      "path": "backend/runtime/check_registry.py",
+      "symbol": "CandidateCheckRegistry._execution_binding",
+      "line": 67,
+      "docstring": "Select only the recorded command peer's check directory, never the author copy or original source.",
+      "file_sha256": "cccffecb130d2da3d9612ce324ad62be7e12107a0238193f859f206e70c8705d"
+    },
+    {
+      "path": "backend/runtime/check_state.py",
+      "symbol": "CodeChecks",
+      "line": 18,
+      "docstring": "Keep reservations, physical view identity and result events in the original run store's transactions.",
+      "file_sha256": "54fe89bb5288177498b1995d120863709c20fa19da4ad53379f51621742c9bf1"
+    },
+    {
+      "path": "backend/runtime/check_state.py",
+      "symbol": "CodeChecks.__init__",
+      "line": 21,
+      "docstring": "Retain existing authority/clock/events; this store never launches a process or accepts a task.",
+      "file_sha256": "54fe89bb5288177498b1995d120863709c20fa19da4ad53379f51621742c9bf1"
+    },
+    {
+      "path": "backend/runtime/check_state.py",
+      "symbol": "CodeChecks._row",
+      "line": 27,
+      "docstring": "Read one check only inside its actual project, including interrupted historical records.",
+      "file_sha256": "54fe89bb5288177498b1995d120863709c20fa19da4ad53379f51621742c9bf1"
+    },
+    {
+      "path": "backend/runtime/check_state.py",
+      "symbol": "CodeChecks._origin",
+      "line": 38,
+      "docstring": "Prevent another original owner/fence/context from adopting the check's observations.",
+      "file_sha256": "54fe89bb5288177498b1995d120863709c20fa19da4ad53379f51621742c9bf1"
+    },
+    {
+      "path": "backend/runtime/check_state.py",
+      "symbol": "CodeChecks._current",
+      "line": 54,
+      "docstring": "Require live development authority and the unchanged ready candidate that this attempt captured.",
+      "file_sha256": "54fe89bb5288177498b1995d120863709c20fa19da4ad53379f51621742c9bf1"
+    },
+    {
+      "path": "backend/runtime/check_state.py",
+      "symbol": "CodeChecks.plan",
+      "line": 63,
+      "docstring": "Reserve one recipe/path before effects; a repeated key returns data without authorizing another execution.",
+      "file_sha256": "54fe89bb5288177498b1995d120863709c20fa19da4ad53379f51621742c9bf1"
+    },
+    {
+      "path": "backend/runtime/check_state.py",
+      "symbol": "CodeChecks.workspace",
+      "line": 128,
+      "docstring": "Reconstruct prepared data for a host caller; admission separately revalidates live authority and physical identity.",
+      "file_sha256": "54fe89bb5288177498b1995d120863709c20fa19da4ad53379f51621742c9bf1"
+    },
+    {
+      "path": "backend/runtime/check_state.py",
+      "symbol": "CodeChecks.prepared",
+      "line": 147,
+      "docstring": "Record only the exact private child and protected metadata of this reserved candidate head/tree.",
+      "file_sha256": "54fe89bb5288177498b1995d120863709c20fa19da4ad53379f51621742c9bf1"
+    },
+    {
+      "path": "backend/runtime/check_state.py",
+      "symbol": "CodeChecks.bind_peer",
+      "line": 206,
+      "docstring": "Bind one still-prepared original command peer before its gate can run the recipe.",
+      "file_sha256": "54fe89bb5288177498b1995d120863709c20fa19da4ad53379f51621742c9bf1"
+    },
+    {
+      "path": "backend/runtime/check_state.py",
+      "symbol": "CodeChecks.complete",
+      "line": 228,
+      "docstring": "Classify/persist actual terminal observations and the durable event together under current candidate authority.",
+      "file_sha256": "54fe89bb5288177498b1995d120863709c20fa19da4ad53379f51621742c9bf1"
+    },
+    {
+      "path": "backend/runtime/check_state.py",
+      "symbol": "CodeChecks.observe_failure",
+      "line": 320,
+      "docstring": "Retain the original owner's interrupted record even after context/lease authority ends.",
+      "file_sha256": "54fe89bb5288177498b1995d120863709c20fa19da4ad53379f51621742c9bf1"
+    },
+    {
+      "path": "backend/runtime/check_state.py",
+      "symbol": "CodeChecks.inspect",
+      "line": 341,
+      "docstring": "Return original check data without granting execution, acceptance or retry permission.",
+      "file_sha256": "54fe89bb5288177498b1995d120863709c20fa19da4ad53379f51621742c9bf1"
+    },
+    {
+      "path": "backend/runtime/check_worker.py",
+      "symbol": "main",
+      "line": 17,
+      "docstring": "Run one explicit recipe with clean environment, bounded capture and a single structured terminal observation.",
+      "file_sha256": "7e7db665f84a719756b48add2eeb8c2c7490608371a2bd97fafb9453f6c2e670"
+    },
+    {
+      "path": "backend/runtime/check_workspace.py",
+      "symbol": "PreparedCheckWorkspace",
+      "line": 26,
+      "docstring": "Exact candidate-derived execution directory and distinct protected Git metadata, not check approval.",
+      "file_sha256": "d5e602d116d29298cdbb1ae6f795d911ea477b4c2487b4ba2a374b5d2f051110"
+    },
+    {
+      "path": "backend/runtime/check_workspace.py",
+      "symbol": "_identity",
+      "line": 33,
+      "docstring": "Reject replaced execution/metadata directories before opening trusted validation commands.",
+      "file_sha256": "d5e602d116d29298cdbb1ae6f795d911ea477b4c2487b4ba2a374b5d2f051110"
+    },
+    {
+      "path": "backend/runtime/check_workspace.py",
+      "symbol": "_git",
+      "line": 49,
+      "docstring": "Require complete successful output and physical closure from the fixed credential-free Git port.",
+      "file_sha256": "d5e602d116d29298cdbb1ae6f795d911ea477b4c2487b4ba2a374b5d2f051110"
+    },
+    {
+      "path": "backend/runtime/check_workspace.py",
+      "symbol": "prepare_check_workspace",
+      "line": 76,
+      "docstring": "Clone an exact candidate once, then relocate its trusted Git metadata before exposing writable project files.",
+      "file_sha256": "d5e602d116d29298cdbb1ae6f795d911ea477b4c2487b4ba2a374b5d2f051110"
+    },
+    {
+      "path": "backend/runtime/check_workspace.py",
+      "symbol": "check_workspace_matches",
+      "line": 107,
+      "docstring": "Validate candidate bytes using protected metadata; never execute filters or read an index controlled by tests.",
+      "file_sha256": "d5e602d116d29298cdbb1ae6f795d911ea477b4c2487b4ba2a374b5d2f051110"
+    },
+    {
+      "path": "backend/runtime/check_workspace.py",
+      "symbol": "check_workspace_matches.git",
+      "line": 119,
+      "docstring": "Keep both identity and byte queries inside one total validation deadline.",
+      "file_sha256": "d5e602d116d29298cdbb1ae6f795d911ea477b4c2487b4ba2a374b5d2f051110"
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedInferenceSession",
+      "line": 71,
+      "docstring": "Expose one original owned session and revoke its entire domain on Stop.",
+      "file_sha256": "8d1288a49ea967fab728796d971c9a7f785fca2dea9c774a4cd826d78fb4de7e"
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedInferenceSession.__init__",
+      "line": 74,
+      "docstring": "Retain original ownership and the actual execution directory as data, never as an access grant.",
+      "file_sha256": "8d1288a49ea967fab728796d971c9a7f785fca2dea9c774a4cd826d78fb4de7e"
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedInferenceSession.run_check",
+      "line": 139,
+      "docstring": "Run one host recipe only after exact capture; repeated keys join original tasks rather than launching again.",
+      "file_sha256": "8d1288a49ea967fab728796d971c9a7f785fca2dea9c774a4cd826d78fb4de7e"
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedInferenceSession.cancel",
+      "line": 181,
+      "docstring": "Stop physical work before awaiting any interrupted capture's SQL observation.",
+      "file_sha256": "8d1288a49ea967fab728796d971c9a7f785fca2dea9c774a4cd826d78fb4de7e"
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedCodexRuntime",
+      "line": 198,
+      "docstring": "Build subscription-only sessions with required Ken and host-owned private development views.",
+      "file_sha256": "8d1288a49ea967fab728796d971c9a7f785fca2dea9c774a4cd826d78fb4de7e"
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedCodexRuntime.open",
+      "line": 235,
+      "docstring": "Admit one original project attempt with required Ken and revocable peers.",
+      "file_sha256": "8d1288a49ea967fab728796d971c9a7f785fca2dea9c774a4cd826d78fb4de7e"
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker",
+      "line": 113,
+      "docstring": "One externally supplied, non-reused domain for one original attempt.\n\n``run_peer`` owns reserve\u2192spawn\u2192global publication\u2192concrete local bind\u2192G.\nCallers receive a transport only after G and can only recover a receipt on\nretry. ``revoke`` withdraws G before waiting for SQL/constructors. Global\nrecovery needs only the journal/domain, never the original project DB.\nComplete actor-origin and endpoint authentication remain deployment work.",
+      "file_sha256": "bb05055bf36ec61878a1377bc0eec7bbbd823e4811ee1ba986ec616214040f14"
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker.run_check",
+      "line": 414,
+      "docstring": "Admit one immutable host check only against its separately reserved execution view.",
+      "file_sha256": "bb05055bf36ec61878a1377bc0eec7bbbd823e4811ee1ba986ec616214040f14"
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker._run",
+      "line": 433,
+      "docstring": "Witness launch intent and manifests before releasing the original gate.",
+      "file_sha256": "bb05055bf36ec61878a1377bc0eec7bbbd823e4811ee1ba986ec616214040f14"
+    },
+    {
+      "path": "backend/tests/runtime/test_admission_migration.py",
+      "symbol": "test_version27_receipt_survives_without_an_inferred_binding",
+      "line": 7,
+      "docstring": "A version27 receipt stays historical after upgrades without inventing admission evidence.",
+      "file_sha256": "84137a17f115c51c99b502ce7a03baa2ddb5f347171f6a762b278aaebc651678"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_execution.py",
+      "symbol": "check_profile",
+      "line": 14,
+      "docstring": "Use synthetic storage identities for profile-only tests; actual candidate Git has separate end-to-end coverage.",
+      "file_sha256": "af85d0cfbbcb542a84511880418621c8044132545c93023c0eba1bc65b64d3d8"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_execution.py",
+      "symbol": "check_profile.prepare",
+      "line": 51,
+      "docstring": "Reserve and bind a host recipe to its own physical copy and the original prepared command peer.",
+      "file_sha256": "af85d0cfbbcb542a84511880418621c8044132545c93023c0eba1bc65b64d3d8"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_execution.py",
+      "symbol": "test_check_profile_writes_only_copy_and_keeps_metadata_and_network_protected",
+      "line": 75,
+      "docstring": "The actual child cannot write its validation Git mount or escape through inherited directory descriptors.",
+      "file_sha256": "af85d0cfbbcb542a84511880418621c8044132545c93023c0eba1bc65b64d3d8"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_execution.py",
+      "symbol": "test_real_pytest_report_is_collected_inside_owned_profile",
+      "line": 135,
+      "docstring": "Actual pytest results come from bounded owned report bytes, not a host-followed workspace path.",
+      "file_sha256": "af85d0cfbbcb542a84511880418621c8044132545c93023c0eba1bc65b64d3d8"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_execution.py",
+      "symbol": "test_dependency_environment_cannot_silently_fall_back_to_system",
+      "line": 188,
+      "docstring": "A named dependency environment requires a real bounded package root, even with direct typed construction.",
+      "file_sha256": "af85d0cfbbcb542a84511880418621c8044132545c93023c0eba1bc65b64d3d8"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_execution.py",
+      "symbol": "test_non_regular_report_is_rejected_without_blocking_collector",
+      "line": 199,
+      "docstring": "A malicious report FIFO cannot keep the collector blocked after its command already exited.",
+      "file_sha256": "af85d0cfbbcb542a84511880418621c8044132545c93023c0eba1bc65b64d3d8"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_execution.py",
+      "symbol": "test_command_deadline_is_durable_infrastructure_error_with_closed_peer",
+      "line": 232,
+      "docstring": "An actual terminated child preserves its deadline cause and closure, without inventing a successful exit.",
+      "file_sha256": "af85d0cfbbcb542a84511880418621c8044132545c93023c0eba1bc65b64d3d8"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_state.py",
+      "symbol": "check_state",
+      "line": 21,
+      "docstring": "Complete synthetic storage identity; real Git/worker execution has separate integration tests.",
+      "file_sha256": "7a2eb182ca48a8a51338ab439eb5f06d4d275545f78f775c9c28c1c19594d79a"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_state.py",
+      "symbol": "prepared_copy",
+      "line": 36,
+      "docstring": "Make only the physical identities needed to test durable copy admission, without simulating Git verification.",
+      "file_sha256": "7a2eb182ca48a8a51338ab439eb5f06d4d275545f78f775c9c28c1c19594d79a"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_state.py",
+      "symbol": "test_check_reservation_precedes_files_and_repeated_key_cannot_change_recipe",
+      "line": 64,
+      "docstring": "A lost response leaves the original recipe/candidate/path, not permission to execute again.",
+      "file_sha256": "7a2eb182ca48a8a51338ab439eb5f06d4d275545f78f775c9c28c1c19594d79a"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_state.py",
+      "symbol": "test_prepared_copy_and_original_peer_are_required_before_admission",
+      "line": 85,
+      "docstring": "Only the reserved exact copy and one original command peer can enter the running state.",
+      "file_sha256": "7a2eb182ca48a8a51338ab439eb5f06d4d275545f78f775c9c28c1c19594d79a"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_state.py",
+      "symbol": "test_late_context_correction_retains_but_cannot_admit_a_check",
+      "line": 100,
+      "docstring": "Useful preparation bytes cannot authorize CI under requirements that have already changed.",
+      "file_sha256": "7a2eb182ca48a8a51338ab439eb5f06d4d275545f78f775c9c28c1c19594d79a"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_state.py",
+      "symbol": "test_record_origin_is_immutable_before_execution",
+      "line": 126,
+      "docstring": "A direct SQL update cannot retarget an existing recipe reservation to another candidate or allocation.",
+      "file_sha256": "7a2eb182ca48a8a51338ab439eb5f06d4d275545f78f775c9c28c1c19594d79a"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_state.py",
+      "symbol": "test_never_released_peer_cannot_be_recorded_as_a_successful_check",
+      "line": 142,
+      "docstring": "A prepared peer closed before binding is not evidence that the command actually ran.",
+      "file_sha256": "7a2eb182ca48a8a51338ab439eb5f06d4d275545f78f775c9c28c1c19594d79a"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_state.py",
+      "symbol": "test_unused_check_inverse_preserves_older_candidate_history",
+      "line": 176,
+      "docstring": "Removing unused version39 must preserve a completed version38 candidate and all original task/run data.",
+      "file_sha256": "7a2eb182ca48a8a51338ab439eb5f06d4d275545f78f775c9c28c1c19594d79a"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_state.py",
+      "symbol": "test_check_inverse_refuses_a_reserved_or_historical_check",
+      "line": 202,
+      "docstring": "An interrupted reservation is retained evidence even before a worker or result exists.",
+      "file_sha256": "7a2eb182ca48a8a51338ab439eb5f06d4d275545f78f775c9c28c1c19594d79a"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_workspace.py",
+      "symbol": "check_candidate",
+      "line": 17,
+      "docstring": "Capture one real independent candidate with no model or ambient project changes.",
+      "file_sha256": "8fa3bdac600539e9113b868a5951ded0fcc8726e6e27c9df1dcd286cd8514658"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_workspace.py",
+      "symbol": "test_check_copy_has_exact_candidate_head_and_protected_metadata",
+      "line": 38,
+      "docstring": "Only the independent execution copy is writable; its validation Git metadata is a separate private directory.",
+      "file_sha256": "8fa3bdac600539e9113b868a5951ded0fcc8726e6e27c9df1dcd286cd8514658"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_workspace.py",
+      "symbol": "test_project_git_config_cannot_hide_mutation_or_execute_a_host_filter",
+      "line": 67,
+      "docstring": "A writable placeholder .git cannot become the host validator's config/index, even without a mounted profile.",
+      "file_sha256": "8fa3bdac600539e9113b868a5951ded0fcc8726e6e27c9df1dcd286cd8514658"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_workspace.py",
+      "symbol": "test_check_refuses_a_different_candidate_before_exposing_copy",
+      "line": 94,
+      "docstring": "The same repo name does not authorize running tests against another head or tree.",
+      "file_sha256": "8fa3bdac600539e9113b868a5951ded0fcc8726e6e27c9df1dcd286cd8514658"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_candidate_state.py",
+      "symbol": "test_normal_startup_installs_candidate_storage_and_unused_inverse_is_repeatable",
+      "line": 186,
+      "docstring": "The packaged migration runs normally, and removing unused storage does not discard task rows.",
+      "file_sha256": "101b216c8556a395a59702d41a7b5a15410cb59a49df431b22b0dc7f6aa94dff"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_migration.py",
+      "symbol": "version35",
+      "line": 13,
+      "docstring": "Remove only unused newer structures so each test genuinely starts from the historical constraint.",
+      "file_sha256": "7738ffbb6e194731c8d1a6250fb91c8c87db8cae63e0248f68bf8dbf23c00fe9"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_rollback.py",
+      "symbol": "expanded",
+      "line": 11,
+      "docstring": "Use actual latest startup storage, then explicitly remove unused candidate storage to test the historical inverses.",
+      "file_sha256": "2d78634b810d08d4360a6e12dc580950563f18c324e5a4f9ce83318bea455c36"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_session.py",
+      "symbol": "test_owned_checks_persist_exact_results_and_invalidate_mutated_copy",
+      "line": 609,
+      "docstring": "Actual isolated pytest uses the captured tree; a zero-exit command that edits source is invalidated without touching the candidate.",
+      "file_sha256": "52f21f8375dbefb88ef86151f14ecf13d9f9ed7c8866623b5f4fd34806e2dd64"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_session.py",
+      "symbol": "test_check_result_after_context_correction_is_retained_without_approval",
+      "line": 685,
+      "docstring": "A real successful child cannot finish its check under a corrected context, and its original reservation is not replayed.",
+      "file_sha256": "52f21f8375dbefb88ef86151f14ecf13d9f9ed7c8866623b5f4fd34806e2dd64"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_session.py",
+      "symbol": "test_stop_during_owned_check_closes_writer_and_retains_original_record",
+      "line": 732,
+      "docstring": "Actual slow CI cannot outlive Stop or turn a partial private execution copy into approved work.",
+      "file_sha256": "52f21f8375dbefb88ef86151f14ecf13d9f9ed7c8866623b5f4fd34806e2dd64"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_startup.py",
+      "symbol": "version35",
+      "line": 9,
+      "docstring": "Build a historical database through the actual migrator while withholding only the new resources.",
+      "file_sha256": "7df9318bf2bbf0249e76392bdcb36c1658f626f1955292462395ecfe96553fe0"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_startup.py",
+      "symbol": "test_repeatable_upgrade_preserves_original_research_and_owner_data",
+      "line": 37,
+      "docstring": "Upgrade actual historical rows and child references without inventing preparation evidence.",
+      "file_sha256": "7df9318bf2bbf0249e76392bdcb36c1658f626f1955292462395ecfe96553fe0"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_startup.py",
+      "symbol": "test_failed_upgrade_leaves_only_committed_prior_migrations",
+      "line": 84,
+      "docstring": "An invalid new SQL tail cannot publish a partial index, column, table or migration marker.",
+      "file_sha256": "7df9318bf2bbf0249e76392bdcb36c1658f626f1955292462395ecfe96553fe0"
+    },
+    {
+      "path": "backend/tests/runtime/test_finding_review.py",
+      "symbol": "test_review_schema_can_rollback_without_losing_original_work",
+      "line": 694,
+      "docstring": "An unused additive review schema can be removed and upgraded without id loss.",
+      "file_sha256": "0981571ad5fba5f49f086ba4f019f5f68898003ddaa9f641c9ea4126f3748cca"
+    },
+    {
+      "path": "backend/tests/runtime/test_question_migration.py",
+      "symbol": "version23",
+      "line": 9,
+      "docstring": "Build a version23 fixture without newer rebuilds changing the migration under test.",
+      "file_sha256": "dd34e598f796b58c25320e139c5ed51b45ecba2b2a2de7e6815cd25e644ab343"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_migration.py",
+      "symbol": "test_unused_result_schema_rolls_back_and_reapplies_without_losing_tasks",
+      "line": 6,
+      "docstring": "Only unused storage can be removed; original task data and owner tables survive.",
+      "file_sha256": "f5ee85e249542e2b1c1dcbe391e03c17443dfa06f69363817f386c17e6cdbd37"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_migration.py",
+      "symbol": "test_result_downgrade_refuses_live_authority_or_historical_delivery",
+      "line": 52,
+      "docstring": "A downgrade cannot erase a delivery or remove a capability while its authority remains live.",
+      "file_sha256": "f5ee85e249542e2b1c1dcbe391e03c17443dfa06f69363817f386c17e6cdbd37"
+    },
+    {
+      "path": "backend/tests/runtime/test_run_input_migration.py",
+      "symbol": "test_version29_dispatch_remains_unknown_after_repeatable_upgrade",
+      "line": 7,
+      "docstring": "Retain unknown input on a version29 dispatch across repeatable upgrades.",
+      "file_sha256": "220b4d85b14da89ace71af98f1f59a631cba54f3d09bf70e8a5ee71114b5e78b"
+    },
+    {
+      "path": "backend/tests/runtime/test_task_inputs_migration.py",
+      "symbol": "test_version28_migration_preserves_rows_and_only_records_future_edits",
+      "line": 9,
+      "docstring": "Preserve version28 rows and record only future edits after upgrading.",
+      "file_sha256": "d2a7a1c03fc319cd8519a611caca4a013359e519b7126f7b7247d305beec763e"
+    },
+    {
+      "path": "backend/tools/base/db.py",
+      "symbol": "ensure_migrations",
+      "line": 111,
+      "docstring": "Run pending schema migrations for existing databases.\n\nChecks the ``schema_migrations`` table and applies any missing\nmigrations. Safe to call multiple times. Serving requires an already\ninitialized file; explicit installation/legacy callers may create one.",
+      "file_sha256": "23f2e2ba8f727ac8a0df26ed7b5ea6d59782cc1d48cc4254cba99fe27bb8855f"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}
