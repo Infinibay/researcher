@@ -8,22 +8,22 @@ Motivos del ajuste: [diagnóstico del proceso](workflow-review.md).
 
 - Codex por suscripción y Ken publicado ensayados; fuentes/citas e informes draft conectados. Revisión documental independiente admitida y ensayada. Continúan consumidores y loops heredados, coordinación y desarrollo pendientes.
 - Interfaz: 6 pilotos, 18/36 conceptos de escritorio y 6/12 móviles. Quedan seis rutas por implementar; 0/12 tienen aceptación completa.
-- Última suite: 1841 casos: 1738 pasan, 100 fallos heredados y 3 omitidos. No hay fallos nuevos frente a la línea base; la suite sigue roja.
+- Última suite: 1878 casos: 1775 pasan, 100 fallos heredados y 3 omitidos. No hay fallos nuevos frente a la línea base; la suite sigue roja.
 - Los 43 escenarios amplios continúan abiertos en [coverage.json](coverage.json). Se registran resultados y límites; no hay un porcentaje global defendible.
 
-## Última entrega verificada: revisión ligada a versión y feedback
+## Última entrega verificada: lectores y contexto de hallazgos
 
-**Resultado:** el propietario admite un revisor con hilo, intento y permisos distintos del autor. Se congela la versión del hallazgo y se conservan citas, contraevidencia, procedencia y límites. Una modificación pierde la atribución a su autor original si no coincide con su sello; una revisión anterior no se transfiere al texto nuevo. El autor puede leer feedback mediante su permiso ordinario, sin obtener permiso para decidir revisiones.
+**Resultado:** los lectores retenidos de metadatos, texto/citas, resumen, búsqueda semántica y feedback usan los registros canónicos. No descartan la confianza desconocida por defecto; tarea y búsqueda no amplían el proyecto. Las decisiones reales son legibles sin dar permiso para emitirlas. El contexto diferencia omitir y borrar: un actor desconocido o retirado no hereda otro proyecto; los contextos asíncronos conservan su alcance.
 
-**Interfaz:** el piloto de Hallazgos muestra primero la afirmación, luego la decisión, sus comprobaciones y limitaciones; permite solicitar/cerrar un intento, consultar historial y abrir la captura con el hash revisado. Distingue versión anterior y vigencia desconocida. El reenvío tras perder una respuesta conserva el paquete original, incluso tras recargar. Nueve estados funcionales y tres anchos finales sin infracciones de axe; aceptación integral todavía pendiente.
+**Conocimiento:** `FindingsKnowledgeSource` dejó de seleccionarse; sus llamadas antiguas fallan antes de leer o indexar y explican el destino de migración. No se borran los índices históricos. Semántica usa pesos locales preparados, texto completo, plaza por proceso y comprobación del corpus al terminar; no reutiliza BLOBs sin versión ni toma sólo los últimos 500. La búsqueda combinada informa cada fuente fallida y mantiene los resultados parciales, sin convertir el error en ausencia.
 
-**Validación:** 36 casos nuevos; regresión dirigida 939 pasan. Wheel aislado: 488 pasan y 1 fallo heredado explícito; 628 fuentes coincidentes. Frontend: 57 pasan y build correcto. Suite global: 1841 casos, 1738 pasan, los mismos 100 fallos heredados y 3 omitidos. Auditoría local: 122 definiciones Python nuevas/modificadas con docstrings; no sustituye la auditoría de toda la rama.
+**Validación:** 37 casos nuevos, 80 dirigidos pasan. Paquete aislado: 160 pasan, 634 fuentes coincidentes; 22 archivos Python pasan Ruff lint/formato y 88 definiciones nuevas/modificadas están documentadas. Suite global: 1878 casos, 1775 pasan, los mismos 100 fallos heredados y 3 omitidos. Dos pruebas antiguas cambiaron de nombre; no se cuentan como casos nuevos.
 
-**Ensayo real:** un revisor `gpt-6.1-sol` con tu suscripción y Ken publicado detectó 731 frente a 137 y registró «Requiere cambios», con citas y límites; un turno. La generación del autor fue controlada y sintética. Sin promoción del hallazgo/informe/tarea; cierre de permisos, peers y dominio comprobado. Este resultado no acredita calidad científica general.
+**Reutilización de pruebas:** frontend sin cambios; se conserva el piloto y sus pruebas de la entrega anterior. No hubo nuevos turnos por suscripción. La revisión admitida que detectó 731 frente a 137 sigue documentada en [ensayo real](native-review-live.json).
 
-[Contrato](../architecture/finding-reviews.md), [resultados](review-results.json), [paquete](review-packaging.json), [ensayo y límites](native-review-live.json), [prueba visual](../design/audits/2026-11-02-finding-review/report.md).
+[Contrato](../architecture/finding-readers.md), [resultados](finding-consumers-results.json), [paquete](finding-consumers-packaging.json), [docstrings](finding-consumers-docstrings.json).
 
-**Siguiente acción:** migrar consumidores heredados de validación, rechazo y conocimiento a este contrato, incluyendo feedback e invalidación de dependencias. Después, continuar la migración de roles/flows por capacidades y los recorridos de desarrollo. No cerrar el objetivo con la revisión de un único hallazgo.
+**Siguiente acción:** completar el recorrido de revisión/aceptación del producto y retirar los writers, endpoints/CLI/MCP y flows heredados que todavía interpretan `VALIDATED`/`REJECTED`. La terminación del turno y la aceptación del resultado deben seguir separadas. Continuar desarrollo, roles/loops y comunicación tipada sin otro coordinador LLM. La invalidación de conocimiento dependiente permanece dentro del alcance.
 
 ## Cola posterior, manteniendo el alcance
 

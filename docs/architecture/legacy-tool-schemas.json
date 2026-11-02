@@ -1,5 +1,5 @@
 {
-  "source": "backend.tools.ALL_TOOL_CLASSES declarations; not an MCP wire catalogue",
+  "source": "Current backend.tools.ALL_TOOL_CLASSES declarations; introspection only, not an MCP wire catalogue",
   "runtime_selected": false,
   "tools": [
     {
@@ -607,7 +607,7 @@
             "type": "integer"
           },
           "status": {
-            "description": "New status: cancelled, blocked, in_progress, failed, pending, backlog, rejected, review_ready, done",
+            "description": "New status: rejected, cancelled, in_progress, backlog, done, blocked, review_ready, failed, pending",
             "title": "Status",
             "type": "string"
           },
@@ -1772,6 +1772,8 @@
       "path": "backend/tools/knowledge/read_findings.py",
       "category": "knowledge",
       "input_schema": {
+        "additionalProperties": false,
+        "description": "Choose a paged metadata query or one finding's complete text/evidence windows.",
         "properties": {
           "query": {
             "anyOf": [
@@ -1783,12 +1785,12 @@
               }
             ],
             "default": null,
-            "description": "Full-text search query across findings. Supports: | for OR, & for AND, * for prefix, \"quotes\" for exact phrases. Example: 'security | auth', 'API & design*'",
             "title": "Query"
           },
           "task_id": {
             "anyOf": [
               {
+                "minimum": 0,
                 "type": "integer"
               },
               {
@@ -1796,16 +1798,23 @@
               }
             ],
             "default": null,
-            "description": "Filter findings by task ID. When omitted, defaults to the current task from agent context (if available). Pass 0 to explicitly disable task filtering and see all project findings.",
+            "description": "Omit for current task; 0 selects all tasks inside the bound project.",
             "title": "Task Id"
           },
           "min_confidence": {
-            "default": 0.0,
-            "description": "Minimum confidence filter",
-            "maximum": 1.0,
-            "minimum": 0.0,
-            "title": "Min Confidence",
-            "type": "number"
+            "anyOf": [
+              {
+                "maximum": 1,
+                "minimum": 0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Optional historical declared-confidence threshold; omit to include unknowns. Not scientific certainty.",
+            "title": "Min Confidence"
           },
           "finding_type": {
             "anyOf": [
@@ -1817,15 +1826,63 @@
               }
             ],
             "default": null,
-            "description": "Filter by finding type",
             "title": "Finding Type"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Status"
           },
           "limit": {
             "default": 50,
-            "description": "Max results",
             "maximum": 200,
             "minimum": 1,
             "title": "Limit",
+            "type": "integer"
+          },
+          "after_id": {
+            "default": 0,
+            "minimum": 0,
+            "title": "After Id",
+            "type": "integer"
+          },
+          "finding_id": {
+            "anyOf": [
+              {
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Finding Id"
+          },
+          "offset": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Offset",
+            "type": "integer"
+          },
+          "max_chars": {
+            "default": 12000,
+            "maximum": 20000,
+            "minimum": 1,
+            "title": "Max Chars",
+            "type": "integer"
+          },
+          "evidence_offset": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Evidence Offset",
             "type": "integer"
           }
         },
@@ -1839,23 +1896,28 @@
       "path": "backend/tools/knowledge/search_findings.py",
       "category": "knowledge",
       "input_schema": {
+        "additionalProperties": false,
+        "description": "Search natural text with explicit chunk pagination; no stored embedding or download fallback.",
         "properties": {
           "query": {
-            "description": "Text to search for among findings. Matches by semantic similarity against topic and content. Supports | for OR: 'security | auth' matches findings similar to either term.",
+            "description": "Natural-language semantic query. Use read_findings for lexical OR/AND/prefix syntax.",
+            "maxLength": 1000,
+            "minLength": 1,
             "title": "Query",
             "type": "string"
           },
           "threshold": {
             "default": 0.65,
-            "description": "Minimum cosine similarity (0-1). Lower = broader matches.",
-            "maximum": 1.0,
-            "minimum": 0.0,
+            "description": "Minimum chunk similarity, not scientific confidence.",
+            "maximum": 1,
+            "minimum": 0,
             "title": "Threshold",
             "type": "number"
           },
           "task_id": {
             "anyOf": [
               {
+                "minimum": 0,
                 "type": "integer"
               },
               {
@@ -1863,22 +1925,52 @@
               }
             ],
             "default": null,
-            "description": "Filter to a specific task. Omit to use current task context. Pass 0 to search all project findings.",
+            "description": "Omit for current task; 0 selects all tasks in this project.",
             "title": "Task Id"
           },
           "include_content": {
             "default": false,
-            "description": "Include full finding content (default: topics only for speed).",
+            "description": "Include a bounded body window with next_offset; read_findings recovers the rest and citations.",
             "title": "Include Content",
             "type": "boolean"
           },
           "limit": {
             "default": 20,
-            "description": "Max results",
-            "maximum": 100,
+            "maximum": 20,
             "minimum": 1,
             "title": "Limit",
             "type": "integer"
+          },
+          "after_rank": {
+            "default": 0,
+            "maximum": 2048,
+            "minimum": 0,
+            "title": "After Rank",
+            "type": "integer"
+          },
+          "expected_corpus_sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Expected Corpus Sha256"
+          },
+          "expected_record_set_sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Expected Record Set Sha256"
           }
         },
         "required": [
@@ -1968,6 +2060,8 @@
       "path": "backend/tools/knowledge/read_wiki.py",
       "category": "knowledge",
       "input_schema": {
+        "additionalProperties": false,
+        "description": "Select an exact stored path or lexical search, with scope and recoverable cursors.",
         "properties": {
           "page": {
             "anyOf": [
@@ -1979,7 +2073,6 @@
               }
             ],
             "default": null,
-            "description": "Wiki page path to read (e.g. 'architecture/overview')",
             "title": "Page"
           },
           "search": {
@@ -1992,8 +2085,42 @@
               }
             ],
             "default": null,
-            "description": "Full-text search query across wiki pages. Supports: | for OR, & for AND, * for prefix, \"quotes\" for exact phrases. Example: 'architecture | design', 'auth*'",
             "title": "Search"
+          },
+          "namespace": {
+            "default": "project",
+            "enum": [
+              "project",
+              "global"
+            ],
+            "title": "Namespace",
+            "type": "string"
+          },
+          "after_id": {
+            "default": 0,
+            "minimum": 0,
+            "title": "After Id",
+            "type": "integer"
+          },
+          "limit": {
+            "default": 50,
+            "maximum": 100,
+            "minimum": 1,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Offset",
+            "type": "integer"
+          },
+          "max_chars": {
+            "default": 12000,
+            "maximum": 20000,
+            "minimum": 1,
+            "title": "Max Chars",
+            "type": "integer"
           }
         },
         "title": "ReadWikiInput",
@@ -2006,7 +2133,24 @@
       "path": "backend/tools/knowledge/search_wiki.py",
       "category": "knowledge",
       "input_schema": {
+        "additionalProperties": false,
+        "description": "Legacy semantic query, explicitly scoped and paged; scores are not scientific confidence.",
         "properties": {
+          "namespace": {
+            "default": "project",
+            "enum": [
+              "project",
+              "global"
+            ],
+            "title": "Namespace",
+            "type": "string"
+          },
+          "after_id": {
+            "default": 0,
+            "minimum": 0,
+            "title": "After Id",
+            "type": "integer"
+          },
           "query": {
             "description": "Text to search for among wiki pages. Matches by semantic similarity, not exact keywords. Supports | for OR: 'architecture | design' matches pages similar to either term.",
             "title": "Query",
@@ -2048,14 +2192,14 @@
       "path": "backend/tools/knowledge/write_wiki.py",
       "category": "knowledge",
       "input_schema": {
+        "additionalProperties": false,
+        "description": "Create with revision zero, or supply the observed page id/revision and complete edit.",
         "properties": {
           "page": {
-            "description": "Wiki page path (e.g. 'architecture/overview')",
             "title": "Page",
             "type": "string"
           },
           "content": {
-            "description": "Page content in markdown",
             "title": "Content",
             "type": "string"
           },
@@ -2069,7 +2213,6 @@
               }
             ],
             "default": null,
-            "description": "Page title (defaults to last path segment)",
             "title": "Title"
           },
           "parent_path": {
@@ -2082,8 +2225,40 @@
               }
             ],
             "default": null,
-            "description": "Parent page path for hierarchy",
             "title": "Parent Path"
+          },
+          "expected_revision": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Expected Revision",
+            "type": "integer"
+          },
+          "page_id": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Page Id"
+          },
+          "operation_key": {
+            "anyOf": [
+              {
+                "maxLength": 128,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Operation Key"
           }
         },
         "required": [
@@ -2183,41 +2358,68 @@
       "path": "backend/tools/knowledge/search_knowledge.py",
       "category": "knowledge",
       "input_schema": {
+        "additionalProperties": false,
+        "description": "Search selected source kinds; a source error is not evidence of an empty corpus.",
         "properties": {
           "query": {
-            "description": "Full-text search query. Supports operators: 'term1 | term2' for OR, 'term1 & term2' for AND, 'arch*' for prefix matching, '\"exact phrase\"' for phrases. Examples: 'react | vue | angular', 'auth & security', 'micros*'",
+            "maxLength": 1000,
+            "minLength": 1,
             "title": "Query",
             "type": "string"
           },
           "sources": {
-            "default": [
-              "findings",
-              "wiki",
-              "reference_files",
-              "reports"
-            ],
-            "description": "Sources to search: findings, wiki, reference_files, reports",
             "items": {
+              "enum": [
+                "findings",
+                "wiki",
+                "reference_files",
+                "reports"
+              ],
               "type": "string"
             },
+            "maxItems": 4,
+            "minItems": 1,
             "title": "Sources",
             "type": "array"
           },
           "limit": {
             "default": 20,
-            "description": "Max results per source",
             "maximum": 100,
             "minimum": 1,
             "title": "Limit",
             "type": "integer"
           },
           "min_confidence": {
-            "default": 0.0,
-            "description": "Minimum confidence filter (findings only)",
-            "maximum": 1.0,
-            "minimum": 0.0,
-            "title": "Min Confidence",
-            "type": "number"
+            "anyOf": [
+              {
+                "maximum": 1,
+                "minimum": 0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Optional historical declaration threshold for findings; omit to retain unknowns.",
+            "title": "Min Confidence"
+          },
+          "namespace": {
+            "default": "project",
+            "enum": [
+              "project",
+              "global"
+            ],
+            "title": "Namespace",
+            "type": "string"
+          },
+          "cursors": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "description": "Per-source next_after_id values from coverage; stable id pagination.",
+            "title": "Cursors",
+            "type": "object"
           }
         },
         "required": [
@@ -2233,10 +2435,13 @@
       "path": "backend/tools/knowledge/summarize_findings.py",
       "category": "knowledge",
       "input_schema": {
+        "additionalProperties": false,
+        "description": "Select a task only inside the bound project and page its topic metadata.",
         "properties": {
           "task_id": {
             "anyOf": [
               {
+                "minimum": 0,
                 "type": "integer"
               },
               {
@@ -2244,11 +2449,94 @@
               }
             ],
             "default": null,
-            "description": "Task ID to summarize findings for. Omit or null to use the current task. Pass 0 to summarize all findings in the project.",
+            "description": "Omit for current task, 0 for all tasks in the bound project.",
             "title": "Task Id"
+          },
+          "after_id": {
+            "default": 0,
+            "minimum": 0,
+            "title": "After Id",
+            "type": "integer"
+          },
+          "limit": {
+            "default": 50,
+            "maximum": 200,
+            "minimum": 1,
+            "title": "Limit",
+            "type": "integer"
           }
         },
         "title": "SummarizeFindingsInput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "read_finding_reviews",
+      "class": "ReadFindingReviewsTool",
+      "path": "backend/tools/knowledge/read_finding_reviews.py",
+      "category": "knowledge",
+      "input_schema": {
+        "additionalProperties": false,
+        "description": "Select actual review history, a paged decision or its original frozen subject.",
+        "properties": {
+          "finding_id": {
+            "minimum": 1,
+            "title": "Finding Id",
+            "type": "integer"
+          },
+          "request_id": {
+            "anyOf": [
+              {
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Request Id"
+          },
+          "part": {
+            "default": "decision",
+            "enum": [
+              "decision",
+              "subject"
+            ],
+            "title": "Part",
+            "type": "string"
+          },
+          "after_id": {
+            "default": 0,
+            "minimum": 0,
+            "title": "After Id",
+            "type": "integer"
+          },
+          "limit": {
+            "default": 20,
+            "maximum": 50,
+            "minimum": 1,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "default": 0,
+            "minimum": 0,
+            "title": "Offset",
+            "type": "integer"
+          },
+          "max_chars": {
+            "default": 12000,
+            "maximum": 20000,
+            "minimum": 1,
+            "title": "Max Chars",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "finding_id"
+        ],
+        "title": "ReadFindingReviewsInput",
         "type": "object"
       }
     },
@@ -2965,5 +3253,6 @@
       "status": "consumer_and_destination_review_pending"
     }
   ],
-  "scope": "71 registered tools: original Pydantic input declarations, not proof of a safe MCP boundary or complete capability migration. Additional declarations require consumer review."
+  "scope": "72 registered tools: current Pydantic input declarations, without tool construction or inference. Not proof of safe authority or complete capability migration. Additional source declarations are retained historical inventory requiring consumer review.",
+  "updated": "2026-11-02"
 }

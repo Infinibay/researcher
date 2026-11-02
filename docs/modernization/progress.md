@@ -4421,3 +4421,87 @@ Resume at139250c; avoid re-running Wiki tests after docs-only followup.
   Ruling: keep these two migration edits minimal and disclose the formatting exceptions;
   cost is style inconsistency, not an unverified behavior change. Do not report format
   completely green. Full modernization and final review remain open.
+
+
+## Active delivery: canonical finding consumers and legacy scope withdrawal — BASE777acd6
+
+- Previous turn classified PROGRESS:777acd6, source1738pass/100EXACTbaselinefail/3skip,
+  wheel488pass+1known failure, real one-turn reviewer contradiction trial. Reuse it.
+- Brief: scratch/finding-consumers-brief.md. Migrate retained read/list/summary/semantic/
+  cross-source finding consumers to canonical project-scoped projections and feedback.
+  Retire live finding vector injection instead of repairing an unversioned cache.
+- Initial9RED real-DB cases: nativeNULLconfidence hidden, foreign-task summary leak,
+  missing project, paged full body, unified lookup and unavailable local semantic model.
+- Unexpected red clarified a prerequisite: set_context(project_id=None) preserves prior
+  context. Also stamped retired tools can fall back to another actor's thread state.
+  Added4separate real-context RED cases. Ruling: distinguish omitted/cleared fields,
+  restore only each actor's own snapshot and make a retired binding fail closed before
+  widening legacy-reader reuse. Actual production setter callers inspected (agents/base,
+  orchestrator, autonomy/agent_loop); native grant runtime is separate. Cost: callers
+  switching only agent_id must establish that agent's project instead of borrowing it.
+  Legacy fixture resets intended to clear now actually clear; baseline changes must be
+  diagnosed, not forced back to100failures. ContextVar values take precedence over shared
+  thread mirrors. New scope tests include copied async execution contexts.
+- Evidence distinction: SearchFindings used local Chroma DefaultEmbeddingFunction, not
+  evidence of paid API use; its unversioned blobs/500candidates/truncated bodies need
+  replacement by prepared bounded local worker. CrewAI memory is a separate auxiliary
+  path. Legacy /api/internal mutations requireOWNER+CSRF, not native bearer authority.
+
+- Canonical consumers implemented: metadata/body/evidence paging, deterministic whole-set
+  summary+topics on one snapshot, project/task guards, unknown confidence retained, actual
+  feedback reader shared with native auth transaction, cross-source coverage per kind.
+- Retained semantic search now uses the pinned offline full-corpus worker; ignores old
+  vector BLOBs, refuses501members instead of sampling, rechecks text/metadata/set after
+  worker and shares a process-wide slot with API instances. Initial capacity test raced
+  the edit and was not valid RED evidence; reverted only the fix and reran to actual
+  1RED/2.95s, restored and covered by80focusedGREEN. No model/account calls.
+- FindingsKnowledgeSource selection removed from role/project builders. Direct load/add
+  returns actionable retirement error before DB/embeddings,7RED->GREEN. Historical
+  vector collections preserved on disk, not reused by this path. Other Crew sources
+  and memory/legacy writers/flows remain open. Compatibility constructor/export retained.
+- Canonical feedback made available in role/task catalogs. Actual instantiated catalogs
+  found3gaps (project_lead/plan/create_tickets),3RED/5GREEN; fixed those plus the matching
+  review task preset. Native business catalog remains23author/17review, no new decision
+  authority from role/reader names. Full schema inventory refreshed72declarations without
+  tool construction. Clear actor context no longer falls back across retired bindings.
+- Focused80pass/14.02s with actual prepared local encoder; extracted wheel160pass/0skip/
+  0fail/51.03s,332backend modules only from wheel. Ruff22changedPythonfiles lint/format
+  pass;88new/modified qualified definitions documented. Frontend untouched; reuse777acd6
+  browser/build receipts. No reason to repeat subscription reviewer or UI concepts.
+- Full regression currently executing under the actual unified handle from tool output,
+  one launch only, socket-disabled with Unix allowed and explicit prepared local assets.
+  Do not treat a slow observation as stopped/restart it. No final counts or delivery
+  commit yet. Whole plan/43broad scenarios/remaining routes/final branch review stay open.
+
+- Terminal finding-consumer delivery (BASE777acd6):1878source cases1775pass/100EXACT
+  inherited failures/3skip,695runtime pass,37new cases;2old service tests renamed but
+  excluded from new-case count. Global338.24s. No newly introduced failure identities.
+  Wheel160pass/0skip/0fail/51.03s,634Python/SQL exact source matches,332modules onlywheel.
+  Focused80pass/14.02s. Final verifier binds all bytes/receipts; no repeated full suite
+  or account trial needed for subsequent docs-only edits.
+- Lint/format22changedPythonfiles pass;88new/modified qualified definitions have English
+  docstrings. Full-branch audit still open. Registered legacy schemas refreshed72without
+  constructing tools. Native profile remains23author/17review; no frontend files changed.
+- Documented contract finding-readers.md, inventory/migration map updated. CoverageU02/U03
+  and finding/context/legacy deliverables have added evidence; no broad scenario promoted
+  to complete. New review/consumer entries explicitly retain writer/flow/acceptance,
+  representative quality, other memory/provider and whole-plan limitations.
+- Next is a complete typed review/acceptance lifecycle and legacy producer/flow cutover,
+  not merely deleting validate/reject while old flows can still auto-DONE from modeltext.
+  Explicit owner acceptance over a versioned candidate, dependent invalidation, remaining
+  native development/Git/CI, all43scenarios/all12route acceptance, remaining6routes,
+  100baseline repairs and final independent branch review remain open. Goal active.
+
+- Post-global documentation correction: context module heading still said thread-local
+  fallback, while implementation now uses execution-local ContextVars and actor bindings.
+  Corrected ONLY that module docstring heading. Executable AST equality verified against
+  the globally tested wheel; every other backend file byte-identical. Kept the old tested
+  wheel privately, recorded finding-consumers-docstring-equivalence.json, rebuilt and
+  reran the targeted packaged proof on final bytes rather than repeating the338sfull
+  suite for documentation. New docstring audit digest updated;88definition contracts
+  unchanged. Final global receipt explicitly records this scope distinction.
+
+- Final-byte package proof after heading-only correction:160pass/0skip/0fail/50.47s,
+  634source files match; global executable equivalence bound in the public result.
+  Ruff lint/format22files and git diff whitespace checks pass. No account/model turn,
+  no frontend change, no active verification jobs remain for this delivery.

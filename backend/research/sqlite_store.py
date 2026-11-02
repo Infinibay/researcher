@@ -312,54 +312,21 @@ class SQLiteResearchStore:
         max_chars=12000,
     ):
         """Read attributed feedback or frozen old subjects in the same authenticated snapshot."""
-        from backend.knowledge.findings import window
-        from backend.knowledge.reviews import (
-            canonical,
-            finding_review_detail,
-            finding_review_state,
-        )
-        from backend.research.models import ResearchInputError
+        from backend.knowledge.reviews import read_feedback
 
-        positive_id(finding_id)
-        if part not in ("decision", "subject"):
-            raise ResearchInputError("Unknown review read part")
         with self._transaction() as conn:
             self._check_scope(conn, scope, "findings.read")
-            self._finding(conn, scope.project_id, finding_id)
-            if request_id is None:
-                if offset != 0 or part != "decision":
-                    raise ResearchInputError(
-                        "Choose a review request before paging its text"
-                    )
-                return {
-                    "read_kind": "history",
-                    **finding_review_state(
-                        conn,
-                        scope.project_id,
-                        finding_id,
-                        after_id=after_id,
-                        limit=limit,
-                    ),
-                }
-            detail = finding_review_detail(conn, scope.project_id, request_id)
-            if detail["finding_id"] != finding_id:
-                raise ResearchNotFound("Review request does not belong to this finding")
-            value = detail.pop("decision")
-            if part == "subject":
-                text = conn.execute(
-                    "SELECT snapshot_json FROM finding_review_requests WHERE project_id=? AND id=?",
-                    (scope.project_id, request_id),
-                ).fetchone()[0]
-                available = True
-            else:
-                text = canonical(value) if value is not None else ""
-                available = value is not None
-            return {
-                **detail,
-                "read_kind": part,
-                "available": available,
-                **window(text, offset, max_chars),
-            }
+            return read_feedback(
+                conn,
+                scope.project_id,
+                finding_id,
+                request_id=request_id,
+                part=part,
+                after_id=after_id,
+                limit=limit,
+                offset=offset,
+                max_chars=max_chars,
+            )
 
     def read_review_subject(self, scope, *, offset=0, max_chars=12000):
         """Page this reviewer's exact immutable subject, never an inferred latest version."""

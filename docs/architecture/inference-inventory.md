@@ -42,8 +42,8 @@ posterior que haga el agente sí pertenece al turno del runtime.
 
 Se buscaron llamadas `completion`, `acompletion`, `embeddings.create`, `get_llm`,
 `call_llm`, construcción Crew/Memory y wrappers documentales; se leyeron los
-productores y sus puntos de uso. El catálogo de 71 herramientas registradas y
-sus schemas está en `legacy-tool-schemas.json`. Es una inspección del código
+productores y sus puntos de uso. El snapshot inicial de 71 herramientas, actualizado a 72 declaraciones para los
+lectores retenidos de hallazgos, y sus schemas está en `legacy-tool-schemas.json`. Es una inspección del código
 propio y de las entradas identificadas a librerías, no una captura exhaustiva
 del tráfico de cada dependencia ni una prueba de ausencia de toda inferencia
 transitiva. La prueba ordinaria bloquea sockets y no arranca modelos.
@@ -78,8 +78,26 @@ bootstrap separado; importar/servir/listar no carga ni descarga el modelo. Se mi
 vectores/batches locales y CPU/RSS del hijo, sin equipararlos a tokens LLM o facturación.
 Es trabajo de embeddings real, aunque no genere texto ni use una API externa.
 
-PDF y semántica comparten transporte/límites/proceso con propietario. Por aplicación
-hay una plaza semántica; saturación/fallo/modelo ausente son explícitos. El presupuesto
+PDF y semántica comparten transporte/límites/proceso con propietario. Por proceso hay ahora una plaza semántica compartida entre API y lectores
+retenidos; saturación/fallo/modelo ausente son explícitos. El presupuesto
 global de todos los actores y su inscripción completa en cgroups/journal todavía
 requiere integración: los límites por worker no prueban ese cierre.
 [Contrato](semantic-source-retrieval.md), [ensayo retenido](../modernization/semantic-product-evidence.json).
+
+
+## Lectores retenidos de hallazgos — 2026-11-02
+
+`search_findings` ya usa el corpus completo y el mismo worker local preparado de
+las lecturas nativas. No reutiliza BLOBs sin versión ni activa Chroma/downloads como
+fallback. La antigua función de deduplicación y otras escrituras/búsquedas heredadas
+siguen inventariadas por separado: no se declara retirada toda esa categoría.
+
+`read_findings`, `summarize_findings` y la rama de hallazgos de `search_knowledge`
+comparten las proyecciones del registro canónico. El feedback es una lectura de
+decisiones existentes, sin síntesis LLM ni nuevos permisos de revisión.
+`FindingsKnowledgeSource` dejó de seleccionarse y sus llamadas directas fallan antes
+de leer o indexar. Memoria CrewAI y otros sources todavía requieren su migración.
+
+Las pruebas con assets locales preparados sí ejecutan el encoder offline; no generan
+completions ni usan una cuenta. El catálogo de declaraciones se refrescó a 72 tipos,
+sin construir herramientas o inferencia. [Contrato](finding-readers.md).

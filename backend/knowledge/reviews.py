@@ -530,3 +530,65 @@ def finding_review_detail(conn, project_id, request_id):
         "scientific_confidence": None,
         "review_scope": "reported_checks_only",
     }
+
+
+def read_feedback(
+    conn,
+    project_id,
+    finding_id,
+    *,
+    request_id=None,
+    part="decision",
+    after_id=0,
+    limit=20,
+    offset=0,
+    max_chars=12000,
+):
+    """Project bounded attributed feedback on the caller's already-authorized SQL snapshot.
+
+    The native caller must check its live findings.read grant in this same transaction;
+    owner/retained host readers establish their own project boundary before calling.
+    This projection never admits a review or upgrades a reader's authority.
+    """
+    from backend.knowledge.findings import window
+
+    positive_id(project_id)
+    positive_id(finding_id)
+    if part not in ("decision", "subject"):
+        raise ResearchInputError("Unknown review read part")
+    if (
+        conn.execute(
+            "SELECT 1 FROM findings WHERE project_id=? AND id=?",
+            (project_id, finding_id),
+        ).fetchone()
+        is None
+    ):
+        raise ResearchNotFound("Finding not found in this project")
+    if request_id is None:
+        if offset != 0 or part != "decision":
+            raise ResearchInputError("Choose a review request before paging its text")
+        return {
+            "read_kind": "history",
+            **finding_review_state(
+                conn, project_id, finding_id, after_id=after_id, limit=limit
+            ),
+        }
+    detail = finding_review_detail(conn, project_id, request_id)
+    if detail["finding_id"] != finding_id:
+        raise ResearchNotFound("Review request does not belong to this finding")
+    value = detail.pop("decision")
+    if part == "subject":
+        text = conn.execute(
+            "SELECT snapshot_json FROM finding_review_requests WHERE project_id=? AND id=?",
+            (project_id, request_id),
+        ).fetchone()[0]
+        available = True
+    else:
+        text = canonical(value) if value is not None else ""
+        available = value is not None
+    return {
+        **detail,
+        "read_kind": part,
+        "available": available,
+        **window(text, offset, max_chars),
+    }

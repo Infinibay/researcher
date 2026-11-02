@@ -1,113 +1,39 @@
-"""Tool for getting a compact summary of findings."""
+"""Deterministic finding counts with paged topics and explicitly historical confidence."""
 
-import sqlite3
-from typing import Type
-
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 from backend.tools.base.base_tool import InfinibayBaseTool
-from backend.tools.base.db import execute_with_retry
+from backend.tools.knowledge._finding_reader import FINDING_READ_ERRORS, finding_reader
 
 
 class SummarizeFindingsInput(BaseModel):
+    """Select a task only inside the bound project and page its topic metadata."""
+
+    model_config = ConfigDict(extra="forbid")
     task_id: int | None = Field(
-        default=None,
-        description=(
-            "Task ID to summarize findings for. "
-            "Omit or null to use the current task. "
-            "Pass 0 to summarize all findings in the project."
-        ),
+        None,
+        ge=0,
+        description="Omit for current task, 0 for all tasks in the bound project.",
     )
+    after_id: int = Field(0, ge=0)
+    limit: int = Field(50, ge=1, le=200)
 
 
 class SummarizeFindingsTool(InfinibayBaseTool):
+    """Reuse the canonical complete-set aggregate without LLM synthesis or confidence promotion."""
+
     name: str = "summarize_findings"
-    description: str = (
-        "Get a compact overview of findings: counts by type, confidence "
-        "stats, topic list with status, and status breakdown. Useful "
-        "before writing reports to see what you have."
-    )
-    args_schema: Type[BaseModel] = SummarizeFindingsInput
+    description: str = "Count all findings in this project/task by type/status and report known/unknown historical confidence separately from scientific certainty. topics is a metadata page: follow next_after_id. This deterministic summary does not read full claim bodies or establish independent review; use read_findings/read_finding_reviews to inspect them."
+    args_schema: type[BaseModel] = SummarizeFindingsInput
 
-    def _run(self, task_id: int | None = None) -> str:
-        project_id = self.project_id
-
-        # Resolve task_id: None → current task, 0 → all project findings
-        if task_id is None:
-            task_id = self.task_id
-
-        # Ensure task_id is int for comparison (some contexts might pass strings)
-        if task_id is not None:
-            try:
-                task_id = int(task_id)
-            except (ValueError, TypeError):
-                pass
-
-        def _query(conn: sqlite3.Connection) -> dict:
-            # Build WHERE clause
-            if task_id is not None and task_id > 0:
-                where = "WHERE f.task_id = ?"
-                params: tuple = (task_id,)
-            elif project_id:
-                where = "WHERE f.project_id = ?"
-                params = (project_id,)
-            else:
-                return {
-                    "error": "No task_id or project_id available",
-                    "by_type": [],
-                    "topics": [],
-                    "total_count": 0,
-                    "status_breakdown": {},
-                }
-
-            # Group by finding_type: count, avg/min/max confidence
-            by_type = conn.execute(
-                f"""\
-                SELECT finding_type,
-                       COUNT(*) as count,
-                       ROUND(AVG(confidence), 2) as avg_confidence,
-                       ROUND(MIN(confidence), 2) as min_confidence,
-                       ROUND(MAX(confidence), 2) as max_confidence
-                FROM findings f
-                {where}
-                GROUP BY finding_type
-                ORDER BY count DESC
-                """,
-                params,
-            ).fetchall()
-
-            # Topic list (no content, just metadata)
-            topics = conn.execute(
-                f"""\
-                SELECT id, topic, finding_type, confidence, status
-                FROM findings f
-                {where}
-                ORDER BY finding_type, confidence DESC
-                """,
-                params,
-            ).fetchall()
-
-            # Status breakdown
-            status_rows = conn.execute(
-                f"""\
-                SELECT status, COUNT(*) as count
-                FROM findings f
-                {where}
-                GROUP BY status
-                """,
-                params,
-            ).fetchall()
-
-            return {
-                "by_type": [dict(r) for r in by_type],
-                "topics": [dict(r) for r in topics],
-                "total_count": sum(r["count"] for r in by_type),
-                "status_breakdown": {r["status"]: r["count"] for r in status_rows},
-            }
-
-        result = execute_with_retry(_query)
-        scope = f"task #{task_id}" if task_id is not None and task_id > 0 else "project"
-        self._log_tool_usage(
-            f"Summarized {result['total_count']} findings for {scope}"
-        )
-        return self._success(result)
+    def _run(self, task_id=None, after_id=0, limit=50):
+        """Keep aggregate counts and the current topic page in the same scoped SQL snapshot."""
+        try:
+            store, project, task = finding_reader(self, task_id)
+            return self._success(
+                store.summary_page(
+                    project, task_id=task, after_id=after_id, limit=limit
+                )
+            )
+        except FINDING_READ_ERRORS as exc:
+            return self._error(f"Finding summary failed: {exc}")

@@ -53,88 +53,33 @@ def _chunk_text(
 
 
 class FindingsKnowledgeSource(BaseKnowledgeSource):
-    """Knowledge source backed by the ``findings`` table."""
+    """Deprecated mutable-finding index: use canonical current readers and attributed feedback.
+
+    Constructor compatibility is retained so old callers receive an actionable error.
+    No finding rows, embedding model, vector collection or old cache is loaded here.
+    """
 
     project_id: int
-    min_confidence: float = 0.0
+    min_confidence: float | None = None
     status_filter: str = "active"
 
     def load_content(self) -> list[dict[str, str]]:
-        """Fetch findings from SQLite and format them as content chunks."""
-        status = self.status_filter
-        min_conf = self.min_confidence
-        pid = self.project_id
-
-        def _query(conn: sqlite3.Connection) -> list[dict]:
-            # 'active' means any non-rejected status
-            if status == "active":
-                rows = conn.execute(
-                    """SELECT id, topic, content, confidence, finding_type,
-                              sources_json, status
-                       FROM findings
-                       WHERE project_id = ?
-                         AND status != 'rejected'
-                         AND confidence >= ?
-                       ORDER BY confidence DESC""",
-                    (pid, min_conf),
-                ).fetchall()
-            else:
-                rows = conn.execute(
-                    """SELECT id, topic, content, confidence, finding_type,
-                              sources_json, status
-                       FROM findings
-                       WHERE project_id = ? AND status = ? AND confidence >= ?
-                       ORDER BY confidence DESC""",
-                    (pid, status, min_conf),
-                ).fetchall()
-            return [dict(r) for r in rows]
-
-        try:
-            findings = execute_with_retry(_query)
-        except Exception:
-            logger.exception("Failed to load findings for project %d", pid)
-            return []
-
-        content_chunks = []
-        for f in findings:
-            sources = f.get("sources_json", "[]")
-            text = (
-                f"[{f['finding_type']}] {f['topic']} "
-                f"(confidence={f['confidence']})\n"
-                f"{f['content']}\n"
-                f"Sources: {sources}"
-            )
-            content_chunks.append(
-                {
-                    "content": text,
-                    "metadata": {
-                        "finding_id": f["id"],
-                        "topic": f["topic"],
-                        "confidence": f["confidence"],
-                        "finding_type": f["finding_type"],
-                        "source": "findings",
-                    },
-                }
-            )
-        return content_chunks
+        """Refuse unversioned finding injection instead of silently dropping unknowns or reviving old claims."""
+        raise RuntimeError(
+            "Mutable finding vector context is retired; use read_findings, search_findings "
+            "and read_finding_reviews for scoped current records, citations and review currentness"
+        )
 
     def validate_content(self) -> list[dict[str, str]]:
-        """Load and return findings content."""
+        """Return the same explicit migration failure as a direct content load."""
         return self.load_content()
 
     def add(self) -> None:
-        """Chunk and save findings content to the vector store."""
-        content_chunks = self.load_content()
-        if not content_chunks:
-            return
-        self.chunks = []
-        for chunk in content_chunks:
-            self.chunks.extend(_chunk_text(chunk["content"]))
-        if self.chunks and self.storage:
-            self._save_documents()
+        """Refuse new vector writes; existing stored collections are not deleted or reused."""
+        self.load_content()
 
     async def aadd(self) -> None:
-        """Async version — delegates to synchronous add."""
+        """Keep asynchronous obsolete callers from silently rebuilding the retired index."""
         self.add()
 
 

@@ -1,4 +1,4 @@
-"""Agent context management — process-global storage with thread-local fallback.
+"""Actor-bound context and explicit execution-local scope for retained tools.
 
 CrewAI agents with ``max_execution_time`` set run tool execution inside a
 ``concurrent.futures.ThreadPoolExecutor``, meaning tools execute in a
@@ -11,8 +11,9 @@ cannot propagate across this boundary.
 time (via ``bind_tools_to_agent()``), so they can look up the correct context
 from any thread.
 
-**Fallback**: thread-local → ContextVar → environment variables (for backwards
-compatibility and non-tool callers).
+**Unbound callers**: execution-local ContextVar, then environment only before a
+context is established. Explicit None withdraws a value and masks environment fallback.
+Thread-local values are compatibility mirrors, never authoritative across async tasks.
 """
 
 import logging
@@ -20,7 +21,6 @@ import os
 import threading
 from contextvars import ContextVar
 from dataclasses import dataclass, replace
-from typing import Optional
 
 _ctx_logger = logging.getLogger(__name__)
 
@@ -35,98 +35,102 @@ _tls = threading.local()
 
 # ── ContextVar storage (fallback for asyncio-aware code paths) ───────────────
 
-_project_id_var: ContextVar[Optional[int]] = ContextVar("project_id", default=None)
-_agent_id_var: ContextVar[Optional[str]] = ContextVar("agent_id", default=None)
-_agent_run_id_var: ContextVar[Optional[str]] = ContextVar("agent_run_id", default=None)
-_task_id_var: ContextVar[Optional[int]] = ContextVar("task_id", default=None)
-_workspace_path_var: ContextVar[Optional[str]] = ContextVar("workspace_path", default=None)
+
+class _Omitted:
+    """Distinguish an omitted update from an explicit withdrawal of context."""
+
+
+_UNSET = _Omitted()
+_project_id_var: ContextVar = ContextVar("project_id", default=_UNSET)
+_agent_id_var: ContextVar = ContextVar("agent_id", default=_UNSET)
+_agent_run_id_var: ContextVar = ContextVar("agent_run_id", default=_UNSET)
+_task_id_var: ContextVar = ContextVar("task_id", default=_UNSET)
+_workspace_path_var: ContextVar = ContextVar("workspace_path", default=_UNSET)
 
 
 @dataclass
 class ToolContext:
     """Snapshot of current agent context."""
-    project_id: Optional[int] = None
-    agent_id: Optional[str] = None
-    agent_run_id: Optional[str] = None
-    task_id: Optional[int] = None
-    workspace_path: Optional[str] = None
-    event_id: Optional[int] = None
-    resume_state: Optional[dict] = None
+
+    project_id: int | None = None
+    agent_id: str | None = None
+    agent_run_id: str | None = None
+    task_id: int | None = None
+    workspace_path: str | None = None
+    event_id: int | None = None
+    resume_state: dict | None = None
 
 
 # ── Setting context ──────────────────────────────────────────────────────────
 
 
 def set_context(
-    project_id: int | None = None,
-    agent_id: str | None = None,
-    agent_run_id: str | None = None,
-    task_id: int | None = None,
-    workspace_path: str | None = None,
-    event_id: int | None = None,
-    resume_state: dict | None = None,
+    project_id: int | None | _Omitted = _UNSET,
+    agent_id: str | None | _Omitted = _UNSET,
+    agent_run_id: str | None | _Omitted = _UNSET,
+    task_id: int | None | _Omitted = _UNSET,
+    workspace_path: str | None | _Omitted = _UNSET,
+    event_id: int | None | _Omitted = _UNSET,
+    resume_state: dict | None | _Omitted = _UNSET,
 ) -> ToolContext:
-    """Set context variables for the current execution scope.
+    """Apply explicit updates to one actor; None clears, omitted fields preserve its own snapshot.
 
-    Writes to:
-    1. Process-global dict (keyed by agent_id) — accessible from any thread
-    2. Thread-local storage — for callers in the same thread
-    3. ContextVar — for asyncio-aware code
+    Switching actors restores only that actor's registered scope, or an empty scope
+    for an unknown actor. ContextVars are authoritative within async executions;
+    stamped worker-thread tools use the actor registry. An explicit clear never
+    falls back to an environment value or another actor's thread-local state.
     """
-    # Robustly cast IDs to int if possible (helps when reading from JSON/ENV)
-    if project_id is not None:
-        try:
-            project_id = int(project_id)
-        except (ValueError, TypeError):
-            pass
-    if task_id is not None:
-        try:
-            task_id = int(task_id)
-        except (ValueError, TypeError):
-            pass
-
-    # ── Write to thread-local + ContextVar (backwards compat) ────────────
-    if project_id is not None:
-        _tls.project_id = project_id
-        _project_id_var.set(project_id)
-    if agent_id is not None:
-        _tls.agent_id = agent_id
-        _agent_id_var.set(agent_id)
-    if agent_run_id is not None:
-        _tls.agent_run_id = agent_run_id
-        _agent_run_id_var.set(agent_run_id)
-    if task_id is not None:
-        _tls.task_id = task_id
-        _task_id_var.set(task_id)
-    if workspace_path is not None:
-        _tls.workspace_path = workspace_path
-        _workspace_path_var.set(workspace_path)
-
-    # ── Write to process-global dict ─────────────────────────────────────
-    # We need an agent_id to key the dict.  If one was provided, use it.
-    # Otherwise, check thread-local for a previously set agent_id.
-    key = agent_id or getattr(_tls, "agent_id", None) or _agent_id_var.get()
-    if key:
-        with _agent_contexts_lock:
-            existing = _agent_contexts.get(key, ToolContext())
-            _agent_contexts[key] = ToolContext(
-                project_id=project_id if project_id is not None else existing.project_id,
-                agent_id=key,
-                agent_run_id=agent_run_id if agent_run_id is not None else existing.agent_run_id,
-                task_id=task_id if task_id is not None else existing.task_id,
-                workspace_path=workspace_path if workspace_path is not None else existing.workspace_path,
-                event_id=event_id if event_id is not None else existing.event_id,
-                resume_state=resume_state if resume_state is not None else existing.resume_state,
-            )
-
-    # Only log when meaningful fields are being set (avoid spam during tool init)
-    if agent_id or project_id or task_id:
-        _ctx_logger.debug(
-            "set_context: thread=%d(%s) agent_id=%s project_id=%s task_id=%s global_key=%s",
-            threading.get_ident(), threading.current_thread().name,
-            agent_id, project_id, task_id, key,
-        )
-    return get_context()
+    previous = get_context()
+    key = previous.agent_id if agent_id is _UNSET else agent_id
+    supplied = {
+        "project_id": project_id,
+        "agent_id": agent_id,
+        "agent_run_id": agent_run_id,
+        "task_id": task_id,
+        "workspace_path": workspace_path,
+        "event_id": event_id,
+        "resume_state": resume_state,
+    }
+    for field in ("project_id", "task_id"):
+        value = supplied[field]
+        if value is not _UNSET and value is not None:
+            try:
+                supplied[field] = int(value)
+            except (ValueError, TypeError):
+                pass
+    with _agent_contexts_lock:
+        if key is None:
+            if previous.agent_id:
+                _agent_contexts.pop(previous.agent_id, None)
+            base = previous if agent_id is _UNSET else ToolContext()
+        elif key != previous.agent_id:
+            base = _agent_contexts.get(key, ToolContext(agent_id=key))
+        else:
+            base = _agent_contexts.get(key, previous)
+        updates = {
+            name: value for name, value in supplied.items() if value is not _UNSET
+        }
+        updates["agent_id"] = key
+        current = replace(base, **updates)
+        if key:
+            _agent_contexts[key] = current
+    for name, variable in (
+        ("project_id", _project_id_var),
+        ("agent_id", _agent_id_var),
+        ("agent_run_id", _agent_run_id_var),
+        ("task_id", _task_id_var),
+        ("workspace_path", _workspace_path_var),
+    ):
+        value = getattr(current, name)
+        variable.set(value)
+        setattr(_tls, name, value)
+    _ctx_logger.debug(
+        "set_context: actor=%s project=%s task=%s",
+        current.agent_id,
+        current.project_id,
+        current.task_id,
+    )
+    return current
 
 
 def get_context_for_agent(agent_id: str) -> ToolContext:
@@ -151,7 +155,7 @@ def bind_tools_to_agent(tools: list, agent_id: str) -> None:
     for tool in tools:
         try:
             object.__setattr__(tool, "_bound_agent_id", agent_id)
-        except Exception:
+        except (AttributeError, TypeError):
             _ctx_logger.debug(
                 "bind_tools_to_agent: could not stamp tool %s",
                 getattr(tool, "name", type(tool).__name__),
@@ -172,43 +176,38 @@ def get_context() -> ToolContext:
     )
 
 
+def _context_value(variable, environment):
+    """Use environment only before a context was established, never after explicit clearing."""
+    value = variable.get()
+    return environment() if value is _UNSET else value
+
+
 def _get_project_id() -> int | None:
-    return (
-        getattr(_tls, "project_id", None)
-        or _project_id_var.get()
-        or _env_int("INFINIBAY_PROJECT_ID")
-    )
+    """Resolve project in this execution without borrowing mutable thread state."""
+    return _context_value(_project_id_var, lambda: _env_int("INFINIBAY_PROJECT_ID"))
 
 
 def _get_agent_id() -> str | None:
-    return (
-        getattr(_tls, "agent_id", None)
-        or _agent_id_var.get()
-        or os.environ.get("INFINIBAY_AGENT_ID")
-    )
+    """Resolve the current execution's actor, preserving an explicit clear."""
+    return _context_value(_agent_id_var, lambda: os.environ.get("INFINIBAY_AGENT_ID"))
 
 
 def _get_agent_run_id() -> str | None:
-    return (
-        getattr(_tls, "agent_run_id", None)
-        or _agent_run_id_var.get()
-        or os.environ.get("INFINIBAY_AGENT_RUN_ID")
+    """Resolve the current actor run without retaining another actor's invocation."""
+    return _context_value(
+        _agent_run_id_var, lambda: os.environ.get("INFINIBAY_AGENT_RUN_ID")
     )
 
 
 def _get_task_id() -> int | None:
-    return (
-        getattr(_tls, "task_id", None)
-        or _task_id_var.get()
-        or _env_int("INFINIBAY_TASK_ID")
-    )
+    """Resolve the selected task or explicit absence in this execution."""
+    return _context_value(_task_id_var, lambda: _env_int("INFINIBAY_TASK_ID"))
 
 
 def _get_workspace_path() -> str | None:
-    return (
-        getattr(_tls, "workspace_path", None)
-        or _workspace_path_var.get()
-        or os.environ.get("INFINIBAY_WORKSPACE_PATH")
+    """Resolve workspace only from this execution or its initial container environment."""
+    return _context_value(
+        _workspace_path_var, lambda: os.environ.get("INFINIBAY_WORKSPACE_PATH")
     )
 
 

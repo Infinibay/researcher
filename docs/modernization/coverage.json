@@ -1061,7 +1061,13 @@
         "docs/modernization/research-mcp-evidence.json",
         "docs/architecture/capability-matrix.md",
         "docs/architecture/inference-inventory.md",
-        "docs/modernization/research-runtime-evidence.json"
+        "docs/modernization/research-runtime-evidence.json",
+        "docs/architecture/finding-readers.md",
+        "docs/modernization/finding-consumers-results.json",
+        "docs/modernization/finding-consumers-packaging.json",
+        "backend/tests/research/test_finding_consumers.py",
+        "backend/tests/research/test_legacy_context_scope.py",
+        "backend/tests/knowledge/test_finding_memory_retirement.py"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
@@ -1077,7 +1083,13 @@
         "docs/modernization/product-runtime-evidence.json",
         "docs/modernization/product-stop-evidence.json",
         "backend/tests/runtime/test_runtime_service.py",
-        "backend/tests/runtime/test_inference_journal.py"
+        "backend/tests/runtime/test_inference_journal.py",
+        "docs/architecture/finding-readers.md",
+        "docs/modernization/finding-consumers-results.json",
+        "docs/modernization/finding-consumers-packaging.json",
+        "backend/tests/research/test_finding_consumers.py",
+        "backend/tests/research/test_legacy_context_scope.py",
+        "backend/tests/knowledge/test_finding_memory_retirement.py"
       ]
     },
     "U04": {
@@ -1357,7 +1369,13 @@
         "docs/modernization/product-runtime-evidence.json",
         "docs/modernization/product-stop-evidence.json",
         "backend/tests/runtime/test_runtime_service.py",
-        "backend/tests/runtime/test_inference_journal.py"
+        "backend/tests/runtime/test_inference_journal.py",
+        "docs/architecture/finding-readers.md",
+        "docs/modernization/finding-consumers-results.json",
+        "docs/modernization/finding-consumers-packaging.json",
+        "backend/tests/research/test_finding_consumers.py",
+        "backend/tests/research/test_legacy_context_scope.py",
+        "backend/tests/knowledge/test_finding_memory_retirement.py"
       ],
       "remaining": [
         "Recheck transitive/dynamic consumers as they migrate; route/remove every retained inference path."
@@ -1509,7 +1527,13 @@
         "backend/tests/runtime/test_run_input.py",
         "backend/tests/runtime/test_run_input_migration.py",
         "evals/runtime/run_input_continuity.py",
-        "frontend/tests/task-design.test.ts"
+        "frontend/tests/task-design.test.ts",
+        "docs/architecture/finding-readers.md",
+        "docs/modernization/finding-consumers-results.json",
+        "docs/modernization/finding-consumers-packaging.json",
+        "backend/tests/research/test_finding_consumers.py",
+        "backend/tests/research/test_legacy_context_scope.py",
+        "backend/tests/knowledge/test_finding_memory_retirement.py"
       ],
       "remaining": [
         "Reserved datasets and before/after comparisons across all prompts and held-out cases.",
@@ -1776,7 +1800,14 @@
     },
     "legacy_removal": {
       "status": "pending",
-      "evidence": []
+      "evidence": [
+        "docs/architecture/finding-readers.md",
+        "docs/modernization/finding-consumers-results.json",
+        "docs/modernization/finding-consumers-packaging.json",
+        "backend/tests/research/test_finding_consumers.py",
+        "backend/tests/research/test_legacy_context_scope.py",
+        "backend/tests/knowledge/test_finding_memory_retirement.py"
+      ]
     },
     "final_independent_review": {
       "status": "pending",
@@ -2608,7 +2639,13 @@
         "backend/tests/research/test_finding_semantic.py",
         "backend/tests/runtime/test_host_business.py",
         "docs/design/audits/2026-11-01-findings/report.md",
-        "frontend/tests/findings-design.test.ts"
+        "frontend/tests/findings-design.test.ts",
+        "docs/architecture/finding-readers.md",
+        "docs/modernization/finding-consumers-results.json",
+        "docs/modernization/finding-consumers-packaging.json",
+        "backend/tests/research/test_finding_consumers.py",
+        "backend/tests/research/test_legacy_context_scope.py",
+        "backend/tests/knowledge/test_finding_memory_retirement.py"
       ],
       "remaining": [
         "Independently admitted reviewer, version-bound decisions and dependent knowledge invalidation; labels and stored methods are not independent scientific review.",
@@ -2633,6 +2670,46 @@
         "Migrate all legacy search consumers and retire old hidden provider selection with parity evidence.",
         "Search-history UI, representative quality/comprehension evaluation, complete scenario acceptance and recovery; native results retained as bounded observed URL previews.",
         "Independent scientific review remains separate and pending."
+      ]
+    },
+    "finding_reviews": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/finding-reviews.md",
+        "docs/modernization/review-results.json",
+        "docs/modernization/review-packaging.json",
+        "docs/modernization/native-review-live.json",
+        "backend/tests/runtime/test_finding_review.py"
+      ],
+      "implemented": [
+        "Owner-admitted independent attempt/thread/permission profile with immutable subject and version-bound citations",
+        "Actual one-turn subscription reviewer identifies controlled731-vs137 contradiction; stored attributed checks/limits, no automatic task acceptance"
+      ],
+      "remaining": [
+        "Complete legacy reviewer/validation/rejection flow cutover and explicit product acceptance",
+        "Representative scientific-quality and human interaction evaluation; broad scenarios remain open"
+      ]
+    },
+    "finding_consumers": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/finding-readers.md",
+        "docs/modernization/finding-consumers-results.json",
+        "docs/modernization/finding-consumers-packaging.json",
+        "backend/tests/research/test_finding_consumers.py",
+        "backend/tests/research/test_legacy_context_scope.py",
+        "backend/tests/knowledge/test_finding_memory_retirement.py"
+      ],
+      "implemented": [
+        "Canonical retained finding metadata/body/summary/semantic and feedback reads",
+        "Unknown confidence retained; explicit project/task scope; actor/context withdrawal and copied execution isolation",
+        "Offline complete corpus with process-wide slot and post-worker version check",
+        "Mutable finding vector-source selection retired; direct obsolete calls fail before indexing"
+      ],
+      "remaining": [
+        "Legacy finding writers and internal HTTP/MCP producer cutover",
+        "Complete reviewer flow/task acceptance and dependent-knowledge lifecycle",
+        "Other memory/index/provider retirement and whole scenario acceptance"
       ]
     }
   }

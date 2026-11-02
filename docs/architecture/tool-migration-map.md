@@ -118,3 +118,27 @@ además de los escritores/reviewers antiguos y sus roles/flows, conservan consum
 y proveedores hasta el corte por capacidades. No se declara eliminado ese RAG. La
 revisión necesita admisión real, evidencia/versiones y separación del productor; los
 labels del lector no implementan ese protocolo. [Contrato](finding-registry.md).
+
+
+## Lectores de hallazgos migrados — 2026-11-02
+
+El snapshot original de 71 declaraciones queda como referencia histórica; el archivo
+de schemas refleja ahora 72 clases registradas, incluida lectura de feedback. No es
+el catálogo MCP nativo ni certifica autoridad segura de los writers antiguos.
+
+Se conectaron read/list/summary/semantic y la rama de hallazgos de búsqueda combinada
+al registro canónico; se añadió lectura de decisiones/sujetos y se retiró la selección
+del source vectorial mutable. La semántica reutiliza el encoder preparado, rechaza
+muestreo y comprueba el corpus al terminar. Un fallo parcial de fuente se conserva.
+Los cursores, previews, confianza histórica y vigencia no comprobada son explícitos.
+
+Los catálogos por rol/tipo que dan acceso a claims ofrecen también feedback. El
+contexto retenido distingue omitir/retirar y no toma un actor ambiental tras retirar
+una herramienta. Sigue siendo contexto del host, no el grant nativo con fence/lease.
+
+Los writers `validate_finding`/`reject_finding`, el MCP/HTTP antiguo y los flows que
+interpretan `VALIDATED`/`REJECTED` aún requieren un corte de recorrido completo. No
+basta borrar el nombre de una herramienta mientras un flow pueda dar la tarea por
+terminada por texto del modelo. La aceptación explícita y la invalidación del
+conocimiento dependiente siguen dentro del alcance pendiente.
+[Contrato y límites](finding-readers.md).

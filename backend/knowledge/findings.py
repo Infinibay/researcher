@@ -598,6 +598,21 @@ class FindingStore:
         with self._transaction() as conn:
             return summarize_findings(conn, project_id, **selection)
 
+    def summary_page(self, project_id, *, after_id=0, limit=50, **selection):
+        """Bind whole-set counts and paged topic metadata to one project-scoped snapshot."""
+        with self._transaction() as conn:
+            summary = summarize_findings(conn, project_id, **selection)
+            page = list_findings(
+                conn, project_id, after_id=after_id, limit=limit, **selection
+            )
+            return {
+                **summary,
+                "topics": page["items"],
+                "next_after_id": page["next_after_id"],
+                "topics_total": page["total_matching"],
+                "topics_scope": "paged metadata, not full claim bodies",
+            }
+
     def read(self, project_id, finding_id, **selection):
         """Recover bounded text/evidence for the selected project and finding."""
         with self._transaction() as conn:
@@ -617,6 +632,76 @@ class FindingStore:
         """Page literal historical source declarations, explicitly distinct from captured quotations."""
         with self._transaction() as conn:
             return legacy_sources(conn, project_id, finding_id, **selection)
+
+    def reviews(self, project_id, finding_id, **selection):
+        """Read actual feedback and immutable old subjects without granting decision authority."""
+        from backend.knowledge.reviews import read_feedback
+
+        with self._transaction() as conn:
+            return read_feedback(conn, project_id, finding_id, **selection)
+
+    def query(
+        self,
+        project_id,
+        retriever,
+        query,
+        *,
+        threshold=0.0,
+        include_content=False,
+        limit=20,
+        after_rank=0,
+        expected_corpus_sha256=None,
+        expected_record_set_sha256=None,
+        **selection,
+    ):
+        """Recheck the full corpus after local ranking before releasing metadata or body windows."""
+        if (
+            type(threshold) not in (int, float)
+            or not math.isfinite(threshold)
+            or not 0 <= threshold <= 1
+        ):
+            raise ResearchInputError(
+                "Similarity threshold must be finite and between 0 and 1"
+            )
+        with self._transaction() as conn:
+            before = finding_corpus(conn, project_id, **selection)
+        result = query_corpus(
+            before,
+            retriever,
+            query,
+            limit=limit,
+            after_rank=after_rank,
+            expected_corpus_sha256=expected_corpus_sha256,
+            expected_record_set_sha256=expected_record_set_sha256,
+        )
+        with self._transaction() as conn:
+            current = finding_corpus(conn, project_id, **selection)
+            if not corpus_unchanged(before, current):
+                raise OperationConflict(
+                    "Finding corpus changed while searching; inspect current records before retrying"
+                )
+            matches = []
+            for match in result["matches"]:
+                if match["score"] < threshold:
+                    continue
+                item = _finding(conn, project_id, match["finding_id"])
+                if include_content:
+                    text = conn.execute(
+                        "SELECT content FROM findings WHERE project_id=? AND id=?",
+                        (project_id, item["id"]),
+                    ).fetchone()[0]
+                    item.update(window(text, 0, 12000))
+                matches.append({**item, **match, "similarity": match["score"]})
+            return {
+                **result,
+                "project_id": project_id,
+                "matches": matches,
+                "count": len(matches),
+                "total_candidates": current["corpus_count"],
+                "threshold": threshold,
+                "threshold_scope": "retrieval chunk similarity, not scientific certainty",
+                "results_scope": "paged ranked chunks; the same finding may have multiple matching windows",
+            }
 
     def corpus(self, project_id, **selection):
         """Freeze a complete bounded current finding corpus in one read-only snapshot."""

@@ -1,8 +1,6 @@
 """Tests for KnowledgeService in backend/knowledge/service.py."""
 
-from unittest.mock import patch, MagicMock
-
-import pytest
+from unittest.mock import patch
 
 from backend.config.settings import Settings
 from backend.knowledge.service import KnowledgeService
@@ -34,27 +32,33 @@ class TestConfigureEmbedder:
 
 
 class TestGetSourcesForProject:
+    """Retained builders omit mutable findings in favor of scoped readers."""
+
     @patch("backend.knowledge.service.FindingsKnowledgeSource")
     @patch("backend.knowledge.service.WikiKnowledgeSource")
     @patch("backend.knowledge.service.ReferenceFilesKnowledgeSource")
     @patch("backend.knowledge.service.ReportsKnowledgeSource")
-    def test_get_sources_for_project_returns_four(
+    def test_get_sources_for_project_returns_retained_document_sources(
         self, mock_reports, mock_ref, mock_wiki, mock_findings
     ):
+        """Keep retained document sources without constructing a finding vector source."""
         sources = KnowledgeService.get_sources_for_project(project_id=1)
-        assert len(sources) == 4
+        assert len(sources) == 3
 
 
 class TestGetSourcesForRole:
+    """Role document context remains available while live findings use current tools."""
+
     @patch("backend.knowledge.service.FindingsKnowledgeSource")
     @patch("backend.knowledge.service.WikiKnowledgeSource")
     @patch("backend.knowledge.service.ReferenceFilesKnowledgeSource")
     @patch("backend.knowledge.service.ReportsKnowledgeSource")
-    def test_researcher_gets_four_sources(
+    def test_researcher_uses_document_sources_and_live_finding_tools(
         self, mock_reports, mock_ref, mock_wiki, mock_findings
     ):
+        """Researcher context keeps documents while finding tools inspect current records."""
         sources = KnowledgeService.get_sources_for_role("researcher", project_id=1)
-        assert len(sources) == 4
+        assert len(sources) == 3
 
     @patch("backend.knowledge.service.FindingsKnowledgeSource")
     @patch("backend.knowledge.service.WikiKnowledgeSource")
@@ -73,7 +77,9 @@ class TestGetSourcesForRole:
         import logging
 
         with caplog.at_level(logging.WARNING, logger="backend.knowledge.service"):
-            sources = KnowledgeService.get_sources_for_role("unknown_role", project_id=1)
+            sources = KnowledgeService.get_sources_for_role(
+                "unknown_role", project_id=1
+            )
 
         assert len(sources) == 1
         assert "No knowledge source mapping" in caplog.text

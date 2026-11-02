@@ -1,0 +1,9 @@
+{
+  "global_tested_wheel_sha256": "faca937a0b5e2b673b4a8b23c7276017a40b86ebd9ff1037d083569a2b982c25",
+  "post_global_change": "Only the context module docstring heading: remove stale thread-local-fallback wording. No executable AST changed.",
+  "path": "backend/tools/base/context.py",
+  "before_sha256": "d42d34cd20fd9c46b495ebef99edf58479017847a2c67e7222a7d7f07f78cc47",
+  "after_sha256": "e3d49048bb34ce40c9ca8a72d89e71af73be70178678efdb67c02bbf26a03862",
+  "executable_ast_equal": true,
+  "all_other_backend_sources_unchanged": true
+}

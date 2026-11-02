@@ -10,7 +10,9 @@ from crewai.knowledge.source.base_knowledge_source import BaseKnowledgeSource
 
 from backend.config.settings import Settings, settings
 from backend.knowledge.sources import (
-    FindingsKnowledgeSource,
+    FindingsKnowledgeSource as FindingsKnowledgeSource,  # noqa: PLC0414 - deprecated import compatibility
+)
+from backend.knowledge.sources import (
     ReferenceFilesKnowledgeSource,
     ReportsKnowledgeSource,
     WikiKnowledgeSource,
@@ -72,14 +74,13 @@ class KnowledgeService:
         When disabled, returns ``{"memory": False}``.
         """
         from crewai import Memory
+
         from backend.config.llm import get_llm
 
         _patch_telemetry_memory_attribute()
 
         # Store LanceDB alongside the rest of INFINIBAY data in .data/
-        memory_path = str(
-            Path(settings.DB_PATH).resolve().parent / "memory"
-        )
+        memory_path = str(Path(settings.DB_PATH).resolve().parent / "memory")
 
         memory = Memory(
             llm=get_llm(),
@@ -98,62 +99,36 @@ class KnowledgeService:
 
     @staticmethod
     def get_sources_for_project(project_id: int) -> list[BaseKnowledgeSource]:
-        """Return all four knowledge sources scoped to *project_id*."""
+        """Return retained document sources; mutable findings use scoped readers, not vector injection."""
         return [
-            FindingsKnowledgeSource(project_id=project_id),
             WikiKnowledgeSource(project_id=project_id),
             ReferenceFilesKnowledgeSource(project_id=project_id),
             ReportsKnowledgeSource(project_id=project_id),
         ]
 
     @staticmethod
-    def get_sources_for_role(
-        role: str, project_id: int
-    ) -> list[BaseKnowledgeSource]:
-        """Return role-appropriate knowledge sources.
+    def get_sources_for_role(role: str, project_id: int) -> list[BaseKnowledgeSource]:
+        """Select retained document sources without treating declared confidence as knowledge authority.
 
-        Role mapping:
-
-        ============== =============================================
-        Role           Sources
-        ============== =============================================
-        researcher     All 4 sources
-        research_rev.  Findings (min_conf=0.0), Wiki, Reports
-        team_lead      Wiki, Findings (active, min_conf=0.6)
-        project_lead   Wiki, Findings (active, min_conf=0.7)
-        developer      Wiki, ReferenceFiles
-        code_reviewer   Wiki
-        ============== =============================================
+        Findings are intentionally absent: role tools inspect their current project,
+        citations and version-bound review feedback. Other CrewAI integrations remain
+        legacy consumers until their own explicit runtime migration.
         """
         role_sources: dict[str, list[BaseKnowledgeSource]] = {
             "researcher": [
-                FindingsKnowledgeSource(project_id=project_id),
                 WikiKnowledgeSource(project_id=project_id),
                 ReferenceFilesKnowledgeSource(project_id=project_id),
                 ReportsKnowledgeSource(project_id=project_id),
             ],
             "research_reviewer": [
-                FindingsKnowledgeSource(
-                    project_id=project_id, min_confidence=0.0,
-                ),
                 WikiKnowledgeSource(project_id=project_id),
                 ReportsKnowledgeSource(project_id=project_id),
             ],
             "team_lead": [
                 WikiKnowledgeSource(project_id=project_id),
-                FindingsKnowledgeSource(
-                    project_id=project_id,
-                    status_filter="active",
-                    min_confidence=0.6,
-                ),
             ],
             "project_lead": [
                 WikiKnowledgeSource(project_id=project_id),
-                FindingsKnowledgeSource(
-                    project_id=project_id,
-                    status_filter="active",
-                    min_confidence=0.7,
-                ),
             ],
             "developer": [
                 WikiKnowledgeSource(project_id=project_id),
@@ -187,6 +162,7 @@ _telemetry_patched = False
 
 
 def _patch_telemetry_memory_attribute() -> None:
+    """Keep optional legacy telemetry serializable without selecting a model or changing workflow authority."""
     global _telemetry_patched
     if _telemetry_patched:
         return
@@ -198,6 +174,7 @@ def _patch_telemetry_memory_attribute() -> None:
         _orig = Telemetry._add_attribute
 
         def _safe_add_attribute(self, span, key, value):
+            """Reduce only the legacy memory telemetry attribute to a supported scalar."""
             if key == "crew_memory" and not isinstance(
                 value, (bool, str, bytes, int, float, type(None))
             ):
@@ -205,5 +182,7 @@ def _patch_telemetry_memory_attribute() -> None:
             return _orig(self, span, key, value)
 
         Telemetry._add_attribute = _safe_add_attribute
-    except Exception:
-        pass  # telemetry is optional, don't crash
+    except Exception:  # noqa: BLE001 - optional telemetry must not govern legacy workflow success
+        logger.debug(
+            "Legacy CrewAI memory telemetry compatibility hook unavailable"
+        )  # telemetry is optional, don't crash

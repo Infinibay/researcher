@@ -1,157 +1,77 @@
-"""Tool for searching findings by semantic similarity."""
+"""Retained semantic finding reader using the complete canonical corpus and pinned local worker."""
 
-import sqlite3
-from typing import Type
+from pydantic import BaseModel, ConfigDict, Field
 
-import numpy as np
-from pydantic import BaseModel, Field
-
+from backend.config.settings import settings
+from backend.research.semantic import SemanticRetriever
 from backend.tools.base.base_tool import InfinibayBaseTool
-from backend.tools.base.db import execute_with_retry, parse_query_or_terms
+from backend.tools.knowledge._finding_reader import FINDING_READ_ERRORS, finding_reader
 
 
 class SearchFindingsInput(BaseModel):
+    """Search natural text with explicit chunk pagination; no stored embedding or download fallback."""
+
+    model_config = ConfigDict(extra="forbid")
     query: str = Field(
-        ...,
-        description=(
-            "Text to search for among findings. "
-            "Matches by semantic similarity against topic and content. "
-            "Supports | for OR: 'security | auth' matches findings similar to either term."
-        ),
+        min_length=1,
+        max_length=1000,
+        description="Natural-language semantic query. Use read_findings for lexical OR/AND/prefix syntax.",
     )
     threshold: float = Field(
-        default=0.65,
-        ge=0.0,
-        le=1.0,
-        description="Minimum cosine similarity (0-1). Lower = broader matches.",
+        0.65,
+        ge=0,
+        le=1,
+        description="Minimum chunk similarity, not scientific confidence.",
     )
     task_id: int | None = Field(
-        default=None,
-        description=(
-            "Filter to a specific task. Omit to use current task context. "
-            "Pass 0 to search all project findings."
-        ),
+        None,
+        ge=0,
+        description="Omit for current task; 0 selects all tasks in this project.",
     )
     include_content: bool = Field(
-        default=False,
-        description="Include full finding content (default: topics only for speed).",
+        False,
+        description="Include a bounded body window with next_offset; read_findings recovers the rest and citations.",
     )
-    limit: int = Field(default=20, ge=1, le=100, description="Max results")
+    limit: int = Field(20, ge=1, le=20)
+    after_rank: int = Field(0, ge=0, le=2048)
+    expected_corpus_sha256: str | None = None
+    expected_record_set_sha256: str | None = None
 
 
 class SearchFindingsTool(InfinibayBaseTool):
+    """Retain the role tool while eliminating sampled candidates and unversioned vector reuse."""
+
     name: str = "search_findings"
-    description: str = (
-        "Search findings by semantic similarity. Returns findings whose "
-        "topic and content are similar to the query, ranked by similarity score. "
-        "Use this to check if a finding already exists before recording "
-        "a new one, or to find related findings across tasks."
-    )
-    args_schema: Type[BaseModel] = SearchFindingsInput
+    description: str = "Search complete finding titles/bodies in the bound project/current task with prepared pinned offline assets. task_id=0 widens only within this project. Oversized corpora fail explicitly instead of sampling500rows. limit1-20 returns ranked chunks (a finding may appear twice); follow next_rank with both returned corpus fingerprints. Scores and stored confidence do not certify science. Inspect read_findings/read_finding_reviews for full context, citations and review currentness. No automatic downloads or alternate-provider fallback."
+    args_schema: type[BaseModel] = SearchFindingsInput
 
     def _run(
         self,
-        query: str,
-        threshold: float = 0.65,
-        task_id: int | None = None,
-        include_content: bool = False,
-        limit: int = 20,
-    ) -> str:
-        project_id = self.project_id
-
-        # Resolve task_id
-        if task_id is None:
-            effective_task_id = self.task_id
-        elif task_id == 0:
-            effective_task_id = None
-        else:
-            effective_task_id = task_id
-
-        # Fetch candidate findings
-        def _fetch(conn: sqlite3.Connection) -> list[dict]:
-            conditions = ["1=1"]
-            params: list = []
-
-            if project_id:
-                conditions.append("project_id = ?")
-                params.append(project_id)
-            if effective_task_id:
-                conditions.append("task_id = ?")
-                params.append(effective_task_id)
-
-            where = " AND ".join(conditions)
-
-            cols = "id, topic, task_id, confidence, finding_type, status, created_at, embedding"
-            if include_content:
-                cols += ", content, sources_json"
-
-            rows = conn.execute(
-                f"SELECT {cols} FROM findings WHERE {where} "
-                f"ORDER BY created_at DESC LIMIT 500",
-                params,
-            ).fetchall()
-            return [dict(r) for r in rows]
-
+        query,
+        threshold=0.65,
+        task_id=None,
+        include_content=False,
+        limit=20,
+        after_rank=0,
+        expected_corpus_sha256=None,
+        expected_record_set_sha256=None,
+    ):
+        """Bind scope/configuration once and disclose results only after current corpus revalidation."""
         try:
-            candidates = execute_with_retry(_fetch)
-        except Exception as e:
-            return self._error(f"Failed to fetch findings: {e}")
-
-        if not candidates:
-            return self._success({"matches": [], "count": 0, "total_candidates": 0})
-
-        # Compute semantic similarity
-        try:
-            from backend.tools.base.dedup import _get_embed_fn, _cosine_similarity
-            from backend.tools.base.embeddings import embedding_from_blob
-
-            embed_fn = _get_embed_fn()
-
-            # Parse OR-terms: embed each sub-query, use max similarity
-            or_terms = parse_query_or_terms(query)
-            query_vecs = [np.asarray(v) for v in embed_fn(or_terms)]
-
-            # Split candidates into those with pre-computed embeddings and those without
-            with_emb = [(i, c) for i, c in enumerate(candidates) if c.get("embedding")]
-            without_emb = [(i, c) for i, c in enumerate(candidates) if not c.get("embedding")]
-
-            scores = [0.0] * len(candidates)
-
-            # Use stored embeddings (fast path)
-            for i, c in with_emb:
-                emb_vec = embedding_from_blob(c["embedding"])
-                scores[i] = max(_cosine_similarity(qv, emb_vec) for qv in query_vecs)
-
-            # Fallback: embed topic + content for candidates without stored embeddings
-            if without_emb:
-                texts = [
-                    f"{c['topic']} {c.get('content', '')[:500]}" if include_content or c.get("content")
-                    else c["topic"]
-                    for _, c in without_emb
-                ]
-                embeddings = embed_fn(texts)
-                for j, (i, _) in enumerate(without_emb):
-                    emb_vec = np.asarray(embeddings[j])
-                    scores[i] = max(_cosine_similarity(qv, emb_vec) for qv in query_vecs)
-
-            # Filter and rank
-            scored = []
-            for i, c in enumerate(candidates):
-                if scores[i] >= threshold:
-                    match = dict(c)
-                    match.pop("embedding", None)  # don't return raw blob
-                    match["similarity"] = round(scores[i], 4)
-                    scored.append(match)
-
-            scored.sort(key=lambda x: x["similarity"], reverse=True)
-            scored = scored[:limit]
-
-        except Exception as e:
-            return self._error(f"Similarity search failed: {e}")
-
-        return self._success({
-            "matches": scored,
-            "count": len(scored),
-            "total_candidates": len(candidates),
-            "threshold": threshold,
-        })
+            store, project, task = finding_reader(self, task_id)
+            retriever = SemanticRetriever(settings.RETRIEVAL_ASSET_DIR)
+            result = store.query(
+                project,
+                retriever,
+                query,
+                task_id=task,
+                threshold=threshold,
+                include_content=include_content,
+                limit=limit,
+                after_rank=after_rank,
+                expected_corpus_sha256=expected_corpus_sha256,
+                expected_record_set_sha256=expected_record_set_sha256,
+            )
+            return self._success(result)
+        except FINDING_READ_ERRORS as exc:
+            return self._error(f"Finding semantic search failed: {exc}")

@@ -6,13 +6,12 @@ import logging
 import os
 import sqlite3
 from abc import ABC
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from crewai.tools import BaseTool
 
 from backend.config.settings import settings
 from backend.tools.base.context import (
-    get_context,
     get_context_for_agent,
     get_current_agent_id,
     get_current_agent_run_id,
@@ -20,7 +19,12 @@ from backend.tools.base.context import (
     get_current_task_id,
     get_current_workspace_path,
 )
-from backend.tools.base.db import DBConnection, execute_with_retry, get_db_path
+from backend.tools.base.db import execute_with_retry
+
+if TYPE_CHECKING:
+    from backend.security.pod_manager import SandboxResult
+    from backend.tools.base.context import ToolContext
+
 
 logger = logging.getLogger(__name__)
 
@@ -37,9 +41,9 @@ class InfinibayBaseTool(BaseTool, ABC):
       (e.g. ``project_id``, ``agent_id``) that are not in the tool's
       schema.  ``run()`` strips them before calling ``_run()``.
 
-    Context resolution order:
-    1. Agent-bound context (process-global dict, works across threads)
-    2. Thread-local / ContextVar / environment variables (fallback)
+    Stamped tools read only their actor registry record, including a cleared or
+    retired record. They never fall through to an ambient actor. Unstamped legacy
+    callers use their execution-local ContextVars or initial container environment.
     """
 
     def run(self, *args: Any, **kwargs: Any) -> Any:
@@ -51,8 +55,7 @@ class InfinibayBaseTool(BaseTool, ABC):
         """
         sig = inspect.signature(self._run)
         accepts_var_kw = any(
-            p.kind == inspect.Parameter.VAR_KEYWORD
-            for p in sig.parameters.values()
+            p.kind == inspect.Parameter.VAR_KEYWORD for p in sig.parameters.values()
         )
         if not accepts_var_kw:
             allowed = set(sig.parameters.keys())
@@ -60,52 +63,56 @@ class InfinibayBaseTool(BaseTool, ABC):
             if extra:
                 logger.debug(
                     "Tool %s: stripping unexpected kwargs %s",
-                    self.name, extra,
+                    self.name,
+                    extra,
                 )
                 kwargs = {k: v for k, v in kwargs.items() if k in allowed}
         return super().run(*args, **kwargs)
 
     def _get_bound_context(self) -> "ToolContext | None":
-        """Get context from process-global storage using bound agent ID."""
+        """Resolve a stamped actor even when retired; never fall back to another actor."""
         bound_id = getattr(self, "_bound_agent_id", None)
         if bound_id:
-            ctx = get_context_for_agent(bound_id)
-            if ctx.agent_id is not None:
-                return ctx
+            return get_context_for_agent(bound_id)
         return None
 
     @property
     def project_id(self) -> int | None:
+        """Read the stamped actor project or the explicit unbound execution scope."""
         ctx = self._get_bound_context()
-        if ctx and ctx.project_id is not None:
+        if ctx is not None:
             return ctx.project_id
         return get_current_project_id()
 
     @property
     def agent_id(self) -> str | None:
+        """Return the actual binding owner; a retired binding does not adopt the ambient actor."""
         ctx = self._get_bound_context()
-        if ctx and ctx.agent_id is not None:
+        if ctx is not None:
             return ctx.agent_id
         return get_current_agent_id()
 
     @property
     def agent_run_id(self) -> str | None:
+        """Read this actor invocation without falling back after retirement or explicit clearing."""
         ctx = self._get_bound_context()
-        if ctx and ctx.agent_run_id is not None:
+        if ctx is not None:
             return ctx.agent_run_id
         return get_current_agent_run_id()
 
     @property
     def task_id(self) -> int | None:
+        """Read this actor task, preserving an explicit absence instead of a previous task."""
         ctx = self._get_bound_context()
-        if ctx and ctx.task_id is not None:
+        if ctx is not None:
             return ctx.task_id
         return get_current_task_id()
 
     @property
     def workspace_path(self) -> str | None:
+        """Resolve only this actor workspace; missing bindings cannot borrow another actor workspace."""
         ctx = self._get_bound_context()
-        if ctx and ctx.workspace_path is not None:
+        if ctx is not None:
             return ctx.workspace_path
         return get_current_workspace_path()
 
@@ -192,7 +199,13 @@ class InfinibayBaseTool(BaseTool, ABC):
             conn.execute(
                 """INSERT INTO status_updates (project_id, agent_id, agent_run_id, message, progress)
                    VALUES (?, ?, ?, ?, ?)""",
-                (project_id, agent_id, agent_run_id, f"[{self.name}] {message}", progress),
+                (
+                    project_id,
+                    agent_id,
+                    agent_run_id,
+                    f"[{self.name}] {message}",
+                    progress,
+                ),
             )
             conn.commit()
 

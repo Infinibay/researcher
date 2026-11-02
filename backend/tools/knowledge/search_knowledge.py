@@ -1,177 +1,67 @@
-"""Tool for unified cross-source knowledge search using FTS5."""
+"""Scoped deterministic cross-source lookup with explicit partial coverage and review provenance."""
 
-import sqlite3
-from typing import Type
+from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
+from backend.knowledge.search import KnowledgeSearchStore
 from backend.tools.base.base_tool import InfinibayBaseTool
-from backend.tools.base.db import execute_with_retry, sanitize_fts5_query
+from backend.tools.knowledge._finding_reader import FINDING_READ_ERRORS, finding_reader
 
 
 class SearchKnowledgeInput(BaseModel):
-    query: str = Field(
-        ...,
-        description=(
-            "Full-text search query. Supports operators: "
-            "'term1 | term2' for OR, 'term1 & term2' for AND, "
-            "'arch*' for prefix matching, '\"exact phrase\"' for phrases. "
-            "Examples: 'react | vue | angular', 'auth & security', 'micros*'"
-        ),
+    """Search selected source kinds; a source error is not evidence of an empty corpus."""
+
+    model_config = ConfigDict(extra="forbid")
+    query: str = Field(min_length=1, max_length=1000)
+    sources: list[Literal["findings", "wiki", "reference_files", "reports"]] = Field(
+        default_factory=lambda: ["findings", "wiki", "reference_files", "reports"],
+        min_length=1,
+        max_length=4,
     )
-    sources: list[str] = Field(
-        default=["findings", "wiki", "reference_files", "reports"],
-        description="Sources to search: findings, wiki, reference_files, reports",
+    limit: int = Field(20, ge=1, le=100)
+    min_confidence: float | None = Field(
+        None,
+        ge=0,
+        le=1,
+        description="Optional historical declaration threshold for findings; omit to retain unknowns.",
     )
-    limit: int = Field(default=20, ge=1, le=100, description="Max results per source")
-    min_confidence: float = Field(
-        default=0.0, ge=0.0, le=1.0,
-        description="Minimum confidence filter (findings only)",
+    namespace: Literal["project", "global"] = "project"
+    cursors: dict[str, int] = Field(
+        default_factory=dict,
+        description="Per-source next_after_id values from coverage; stable id pagination.",
     )
 
 
 class SearchKnowledgeTool(InfinibayBaseTool):
+    """Retain the old role lookup while sharing canonical findings and disclosing source failures."""
+
     name: str = "search_knowledge"
-    description: str = (
-        "Unified search across knowledge sources (findings, wiki, reference files, reports). "
-        "Uses full-text search for fast, relevant results. "
-        "Query supports operators: | for OR, & for AND, * for prefix, \"quotes\" for exact phrases. "
-        "Example: 'react | vue', 'auth & token*', '\"machine learning\" | AI'."
-    )
-    args_schema: Type[BaseModel] = SearchKnowledgeInput
+    description: str = "Lexical search inside the bound project across selected findings, wiki, reference-file metadata and report text. Unknown finding confidence is included unless an explicit historical threshold is selected. Results are bounded previews with source identity, not evidence that full documents were read. coverage reports each requested source as searched/failed plus its cursor; partial or failed is not no matches. Wiki namespace project/global is explicit, with no implicit global fallback. Read findings and their reviews before claiming scientific support."
+    args_schema: type[BaseModel] = SearchKnowledgeInput
 
     def _run(
         self,
-        query: str,
-        sources: list[str] | None = None,
-        limit: int = 20,
-        min_confidence: float = 0.0,
-    ) -> str:
-        if sources is None:
-            sources = ["findings", "wiki", "reference_files", "reports"]
-
-        project_id = self.project_id
-        all_results: list[dict] = []
-
-        def _search(conn: sqlite3.Connection) -> list[dict]:
-            results = []
-
-            safe_query = sanitize_fts5_query(query)
-
-            if "findings" in sources:
-                try:
-                    rows = conn.execute(
-                        """SELECT f.id, f.topic AS title,
-                                  snippet(findings_fts, 1, '<b>', '</b>', '...', 64) AS snippet,
-                                  f.confidence, f.finding_type, f.status
-                           FROM findings f
-                           JOIN findings_fts fts ON f.id = fts.rowid
-                           WHERE fts.findings_fts MATCH ?
-                             AND (f.project_id = ? OR f.project_id IS NULL)
-                             AND f.confidence >= ?
-                             AND f.status != 'rejected'
-                           ORDER BY rank
-                           LIMIT ?""",
-                        (safe_query, project_id, min_confidence, limit),
-                    ).fetchall()
-                    for r in rows:
-                        results.append({
-                            "source_type": "findings",
-                            "id": r["id"],
-                            "title": r["title"],
-                            "snippet": r["snippet"],
-                            "confidence": r["confidence"],
-                            "finding_type": r["finding_type"],
-                        })
-                except sqlite3.OperationalError:
-                    pass  # FTS table may not exist
-
-            if "wiki" in sources:
-                try:
-                    rows = conn.execute(
-                        """SELECT wp.id, wp.title,
-                                  snippet(wiki_fts, 2, '<b>', '</b>', '...', 64) AS snippet,
-                                  wp.path
-                           FROM wiki_pages wp
-                           JOIN wiki_fts ON wp.id = wiki_fts.rowid
-                           WHERE wiki_fts MATCH ?
-                             AND (wp.project_id = ? OR wp.project_id IS NULL)
-                           ORDER BY rank
-                           LIMIT ?""",
-                        (safe_query, project_id, limit),
-                    ).fetchall()
-                    for r in rows:
-                        results.append({
-                            "source_type": "wiki",
-                            "id": r["id"],
-                            "title": r["title"],
-                            "snippet": r["snippet"],
-                            "path": r["path"],
-                        })
-                except sqlite3.OperationalError:
-                    pass
-
-            if "reference_files" in sources:
-                try:
-                    rows = conn.execute(
-                        """SELECT rf.id, rf.file_name AS title,
-                                  snippet(reference_files_fts, 1, '<b>', '</b>', '...', 64) AS snippet,
-                                  rf.file_type
-                           FROM reference_files rf
-                           JOIN reference_files_fts ON rf.id = reference_files_fts.rowid
-                           WHERE reference_files_fts MATCH ?
-                             AND rf.project_id = ?
-                           ORDER BY rank
-                           LIMIT ?""",
-                        (safe_query, project_id, limit),
-                    ).fetchall()
-                    for r in rows:
-                        results.append({
-                            "source_type": "reference_files",
-                            "id": r["id"],
-                            "title": r["title"],
-                            "snippet": r["snippet"],
-                            "file_type": r["file_type"],
-                        })
-                except sqlite3.OperationalError:
-                    pass  # FTS table may not exist in old DBs
-
-            if "reports" in sources:
-                try:
-                    rows = conn.execute(
-                        """SELECT a.id, a.file_path AS title,
-                                  snippet(artifacts_fts, 1, '<b>', '</b>', '...', 64) AS snippet
-                           FROM artifacts a
-                           JOIN artifacts_fts ON a.id = artifacts_fts.rowid
-                           WHERE artifacts_fts MATCH ?
-                             AND a.type = 'report'
-                             AND a.project_id = ?
-                           ORDER BY rank
-                           LIMIT ?""",
-                        (safe_query, project_id, limit),
-                    ).fetchall()
-                    for r in rows:
-                        results.append({
-                            "source_type": "reports",
-                            "id": r["id"],
-                            "title": r["title"],
-                            "snippet": r["snippet"],
-                        })
-                except sqlite3.OperationalError:
-                    pass  # FTS table may not exist in old DBs
-
-            return results
-
+        query,
+        sources=None,
+        limit=20,
+        min_confidence=None,
+        namespace="project",
+        cursors=None,
+    ):
+        """Keep source errors visible while paging stable identities in one project-scoped snapshot."""
         try:
-            all_results = execute_with_retry(_search)
-        except Exception as e:
-            return self._error(f"Knowledge search failed: {e}")
-
-        self._log_tool_usage(
-            f"Searched '{query}' across {sources} — {len(all_results)} results"
-        )
-        return self._success({
-            "query": query,
-            "results": all_results,
-            "count": len(all_results),
-        })
+            store, project, _ = finding_reader(self, 0)
+            return self._success(
+                KnowledgeSearchStore(store.database).query(
+                    project,
+                    query,
+                    sources=sources,
+                    limit=limit,
+                    min_confidence=min_confidence,
+                    namespace=namespace,
+                    cursors=cursors,
+                )
+            )
+        except FINDING_READ_ERRORS as exc:
+            return self._error(f"Knowledge search failed: {exc}")

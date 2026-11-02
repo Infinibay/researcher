@@ -32,6 +32,8 @@ from backend.research.retrieval_assets import (
 from backend.research.worker_transport import exchange
 
 WORKER = Path(__file__).with_name("semantic_worker.py")
+# Adapters and API applications in one process share the same physical-worker budget.
+_PROCESS_CAPACITY = BoundedSemaphore(1)
 
 
 @dataclass(frozen=True)
@@ -67,13 +69,13 @@ class SemanticLimits:
 
 
 class SemanticRetriever:
-    """One application-owned capacity slot and an explicitly prepared offline asset directory."""
+    """One process-owned capacity slot and an explicitly prepared offline asset directory."""
 
     def __init__(self, directory, *, limits=None):
         """Bind configuration without reading assets, loading a model, downloading or creating state."""
         self.directory = Path(directory).absolute() if directory else None
         self.limits = limits or SemanticLimits()
-        self._capacity = BoundedSemaphore(1)
+        self._capacity = _PROCESS_CAPACITY
 
     def status(self):
         """Declare setup state without reading weights or mistaking configuration for readiness."""
