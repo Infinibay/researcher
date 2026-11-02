@@ -85,6 +85,10 @@ class AsyncPeerBroker:
     def peer(self, registry, peer_id, *, operation_key, code):
         return self._endpoint(registry, peer_id, operation_key, code=code)
 
+    def git(self, registry, peer_id, *, operation_key, launch):
+        """Create a fixed Git endpoint without admitting arbitrary writable model commands."""
+        return self._endpoint(registry, peer_id, operation_key, git_launch=launch)
+
     def command(self, registry, peer_id, *, operation_key, asset):
         return self._endpoint(
             registry, peer_id, operation_key, asset=asset, command_only=True
@@ -155,6 +159,7 @@ class AsyncPeerBroker:
         native_state=None,
         command_only=False,
         web_search="disabled",
+        git_launch=None,
     ):
         """Allocate one non-replayable endpoint while its broker remains admitted."""
         if not self._entered or self._closing is not None:
@@ -178,6 +183,7 @@ class AsyncPeerBroker:
             native_state=native_state,
             command_only=command_only,
             web_search=web_search,
+            git_launch=git_launch,
         )
         self._endpoints.append(endpoint)
         return endpoint
@@ -189,7 +195,10 @@ class AsyncPeerBroker:
         if len(self._pending) >= 8:
             raise AuthorityBusy("Async broker launch queue full")
         loop = asyncio.get_running_loop()
-        if endpoint.ken is not None:
+        if endpoint.git_launch is not None:
+            start = self.broker.run_git
+            payload = {"launch": endpoint.git_launch}
+        elif endpoint.ken is not None:
             start = self.broker.run_ken
             payload = {
                 "installation": endpoint.ken,
@@ -348,6 +357,7 @@ class BrokerEndpoint:
         native_state=None,
         command_only=False,
         web_search="disabled",
+        git_launch=None,
     ):
         """Retain launch arguments and handles for exactly one owned connection."""
         self.owner, self.registry, self.peer_id = owner, registry, peer_id
@@ -361,6 +371,7 @@ class BrokerEndpoint:
         self.native_state = native_state
         self.command_only = command_only
         self.web_search = web_search
+        self.git_launch = git_launch
         self.stdin = self.stdout = self.stderr = None
         self._raw = None
         self._operation = None
@@ -419,10 +430,11 @@ class BrokerEndpoint:
             self._raw.close_handles()
 
     async def aclose(self, *, timeout):
+        """Close through the original process owner and return its physical closure receipt."""
         if self._closing is None:
             self._closing = asyncio.create_task(self._shutdown())
         async with asyncio.timeout(timeout):
-            await asyncio.shield(self._closing)
+            return await asyncio.shield(self._closing)
 
     async def _shutdown(self):
         self._close_io()

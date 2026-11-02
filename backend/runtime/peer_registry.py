@@ -20,6 +20,8 @@ from backend.runtime.peer_process import (
 
 
 class PeerRegistry:
+    """Register fenced owned peers and distinguish original sources from private execution copies."""
+
     def __init__(self, runs):
         self.runs = runs
 
@@ -104,27 +106,55 @@ class PeerRegistry:
         with self.runs._transaction() as conn:
             return dict(self._row(conn, peer_id))
 
-    def workspace_binding(self, peer_id):
-        """Return the original source admission for filesystem-using peers.
-
-        Business transport does not consume the source tree. Historical host
-        diagnostics may lack an admission; product runs always persist one.
-        This reads the immutable run binding, never today's repository selection.
-        """
+    def source_binding(self, peer_id):
+        """Read the immutable original registration, independently of a private execution view."""
         with self.runs._transaction() as conn:
             peer = self._row(conn, peer_id)
             self._check_origin(peer)
-            if peer["kind"] not in ("native", "command", "ken"):
-                return None
-            binding = conn.execute(
-                """SELECT b.* FROM runtime_workspace_bindings b
-                JOIN runtime_attempts a ON a.run_id=b.run_id WHERE a.id=?""",
-                (peer["attempt_id"],),
-            ).fetchone()
-            return self.runs._binding_view(binding) if binding is not None else None
+            return self._source_binding(conn, peer)
 
-    def admission(self, peer_id):
-        """Revalidate an original prepared peer; data alone never opens its gate."""
+    def _source_binding(self, conn, peer):
+        """Read only the original run binding; business transports have no filesystem view."""
+        if peer["kind"] not in ("native", "command", "ken"):
+            return None
+        binding = conn.execute(
+            """SELECT b.* FROM runtime_workspace_bindings b
+            JOIN runtime_attempts a ON a.run_id=b.run_id WHERE a.id=?""",
+            (peer["attempt_id"],),
+        ).fetchone()
+        return self.runs._binding_view(binding) if binding is not None else None
+
+    def _execution_binding(self, conn, peer, row, source):
+        """Select the host-owned ready view; development cannot fall back to the original source."""
+        if source is None:
+            return None
+        if row["execution_kind"] == "development":
+            from backend.runtime.development_state import DevelopmentWorkspaces
+
+            view = DevelopmentWorkspaces.read_view(
+                conn, row["project_id"], peer["attempt_id"]
+            )
+            if view.source != source:
+                raise RunConflict("Private copy differs from the admitted source")
+            return view
+        if row["execution_kind"] == "code_review":
+            raise RunConflict("Code review requires an exact candidate snapshot")
+        return source
+
+    def workspace_binding(self, peer_id):
+        """Resolve the execution view; private development copies require a current fenced owner."""
+        with self.runs._transaction() as conn:
+            peer = self._row(conn, peer_id)
+            self._check_origin(peer)
+            row, lease = self._lease(conn, peer)
+            if row["execution_kind"] in ("development", "code_review"):
+                self.runs._authority(conn, lease)
+            return self._execution_binding(
+                conn, peer, row, self._source_binding(conn, peer)
+            )
+
+    def admission(self, peer_id, *, source_only=False):
+        """Revalidate a prepared peer and both views atomically; source_only is reserved for host Git preparation."""
         with self.runs._transaction() as conn:
             peer = self._row(conn, peer_id)
             self._check_origin(peer)
@@ -141,8 +171,15 @@ class PeerRegistry:
                 project_id=row["project_id"],
                 task_id=row["task_id"],
                 context_version=lease.context_version,
+                execution_kind=row["execution_kind"],
             )
-        result["binding"] = self.workspace_binding(peer_id)
+            source = self._source_binding(conn, peer)
+            result["source_binding"] = source
+            result["binding"] = (
+                source
+                if source_only
+                else self._execution_binding(conn, peer, row, source)
+            )
         return result
 
     @staticmethod

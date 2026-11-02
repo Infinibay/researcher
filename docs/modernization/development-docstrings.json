@@ -1,0 +1,673 @@
+{
+  "base_commit": "1885bf0",
+  "changed_or_new_definitions_documented": 95,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/runtime/broker_git.py",
+      "symbol": "OwnedGitExecutor",
+      "line": 23,
+      "docstring": "Run fixed preparation Git under one original attempt's actual global process owner.",
+      "file_sha256": "a2044d74a9bf40fd0e21a3272f35a775b6fbc1c83e90ed466271135f1302b66f"
+    },
+    {
+      "path": "backend/runtime/broker_git.py",
+      "symbol": "OwnedGitExecutor.__init__",
+      "line": 26,
+      "docstring": "Bind host-selected source, allocation and executable before any Git operation is admitted.",
+      "file_sha256": "a2044d74a9bf40fd0e21a3272f35a775b6fbc1c83e90ed466271135f1302b66f"
+    },
+    {
+      "path": "backend/runtime/broker_git.py",
+      "symbol": "OwnedGitExecutor.execution_path",
+      "line": 39,
+      "docstring": "Map only this original source or this allocation, without assuming shared host paths.",
+      "file_sha256": "a2044d74a9bf40fd0e21a3272f35a775b6fbc1c83e90ed466271135f1302b66f"
+    },
+    {
+      "path": "backend/runtime/broker_git.py",
+      "symbol": "OwnedGitExecutor.run",
+      "line": 48,
+      "docstring": "Collect bounded complete raw output and require actual broker closure before returning a result.",
+      "file_sha256": "a2044d74a9bf40fd0e21a3272f35a775b6fbc1c83e90ed466271135f1302b66f"
+    },
+    {
+      "path": "backend/runtime/broker_stdio.py",
+      "symbol": "AsyncPeerBroker",
+      "line": 53,
+      "docstring": "One attempt's async composition and bounded launch/control resources.\n\nOne launch worker serializes accepted starts (at most eight pending). Peer\nreceipt work cannot occupy the separate worker reserved for whole-attempt\nrevocation. IO uses event-loop pipes, not blocking reader threads.",
+      "file_sha256": "1d59e19227eb55f0332feeee803a215871d2669013524edb86f044f7c20e9334"
+    },
+    {
+      "path": "backend/runtime/broker_stdio.py",
+      "symbol": "AsyncPeerBroker.git",
+      "line": 88,
+      "docstring": "Create a fixed Git endpoint without admitting arbitrary writable model commands.",
+      "file_sha256": "1d59e19227eb55f0332feeee803a215871d2669013524edb86f044f7c20e9334"
+    },
+    {
+      "path": "backend/runtime/broker_stdio.py",
+      "symbol": "AsyncPeerBroker._endpoint",
+      "line": 144,
+      "docstring": "Allocate one non-replayable endpoint while its broker remains admitted.",
+      "file_sha256": "1d59e19227eb55f0332feeee803a215871d2669013524edb86f044f7c20e9334"
+    },
+    {
+      "path": "backend/runtime/broker_stdio.py",
+      "symbol": "AsyncPeerBroker._start",
+      "line": 191,
+      "docstring": "Forward the original endpoint policy to the bounded launch worker.",
+      "file_sha256": "1d59e19227eb55f0332feeee803a215871d2669013524edb86f044f7c20e9334"
+    },
+    {
+      "path": "backend/runtime/broker_stdio.py",
+      "symbol": "BrokerEndpoint",
+      "line": 338,
+      "docstring": "A single post-gate connection; cannot reopen or replay a start receipt.",
+      "file_sha256": "1d59e19227eb55f0332feeee803a215871d2669013524edb86f044f7c20e9334"
+    },
+    {
+      "path": "backend/runtime/broker_stdio.py",
+      "symbol": "BrokerEndpoint.__init__",
+      "line": 341,
+      "docstring": "Retain launch arguments and handles for exactly one owned connection.",
+      "file_sha256": "1d59e19227eb55f0332feeee803a215871d2669013524edb86f044f7c20e9334"
+    },
+    {
+      "path": "backend/runtime/broker_stdio.py",
+      "symbol": "BrokerEndpoint.aclose",
+      "line": 432,
+      "docstring": "Close through the original process owner and return its physical closure receipt.",
+      "file_sha256": "1d59e19227eb55f0332feeee803a215871d2669013524edb86f044f7c20e9334"
+    },
+    {
+      "path": "backend/runtime/development_state.py",
+      "symbol": "DevelopmentView",
+      "line": 25,
+      "docstring": "Exact private execution directory, retaining its distinct original source admission.",
+      "file_sha256": "93186f84b1c2ceb416016a1f62f64854cd9e194beaae1c23670e274a059b6906"
+    },
+    {
+      "path": "backend/runtime/development_state.py",
+      "symbol": "DevelopmentWorkspaces",
+      "line": 36,
+      "docstring": "Persist one non-reusable preparation allocation per development attempt.",
+      "file_sha256": "93186f84b1c2ceb416016a1f62f64854cd9e194beaae1c23670e274a059b6906"
+    },
+    {
+      "path": "backend/runtime/development_state.py",
+      "symbol": "DevelopmentWorkspaces.__init__",
+      "line": 39,
+      "docstring": "Bind a pre-created private host control directory, without creating or adopting copies.",
+      "file_sha256": "93186f84b1c2ceb416016a1f62f64854cd9e194beaae1c23670e274a059b6906"
+    },
+    {
+      "path": "backend/runtime/development_state.py",
+      "symbol": "DevelopmentWorkspaces._row",
+      "line": 45,
+      "docstring": "Read an attempt only in its actual project, including historical preparation state.",
+      "file_sha256": "93186f84b1c2ceb416016a1f62f64854cd9e194beaae1c23670e274a059b6906"
+    },
+    {
+      "path": "backend/runtime/development_state.py",
+      "symbol": "DevelopmentWorkspaces._origin",
+      "line": 56,
+      "docstring": "Prevent a different owner, fence or task from writing an old attempt's observations.",
+      "file_sha256": "93186f84b1c2ceb416016a1f62f64854cd9e194beaae1c23670e274a059b6906"
+    },
+    {
+      "path": "backend/runtime/development_state.py",
+      "symbol": "DevelopmentWorkspaces._source",
+      "line": 72,
+      "docstring": "Require live development authority and the unchanged original repository registration.",
+      "file_sha256": "93186f84b1c2ceb416016a1f62f64854cd9e194beaae1c23670e274a059b6906"
+    },
+    {
+      "path": "backend/runtime/development_state.py",
+      "symbol": "DevelopmentWorkspaces.plan",
+      "line": 87,
+      "docstring": "Record allocation before filesystem work; repeats return data without authorizing a reset.",
+      "file_sha256": "93186f84b1c2ceb416016a1f62f64854cd9e194beaae1c23670e274a059b6906"
+    },
+    {
+      "path": "backend/runtime/development_state.py",
+      "symbol": "DevelopmentWorkspaces.complete",
+      "line": 139,
+      "docstring": "Persist a closed preparation result only for the live owner and exact planned private child.",
+      "file_sha256": "93186f84b1c2ceb416016a1f62f64854cd9e194beaae1c23670e274a059b6906"
+    },
+    {
+      "path": "backend/runtime/development_state.py",
+      "symbol": "DevelopmentWorkspaces.observe_failure",
+      "line": 196,
+      "docstring": "Retain a former owner's bounded failure observation without restoring business authority.",
+      "file_sha256": "93186f84b1c2ceb416016a1f62f64854cd9e194beaae1c23670e274a059b6906"
+    },
+    {
+      "path": "backend/runtime/development_state.py",
+      "symbol": "DevelopmentWorkspaces.inspect",
+      "line": 221,
+      "docstring": "Return the current attempt's retained preparation, without authorizing its execution.",
+      "file_sha256": "93186f84b1c2ceb416016a1f62f64854cd9e194beaae1c23670e274a059b6906"
+    },
+    {
+      "path": "backend/runtime/development_state.py",
+      "symbol": "DevelopmentWorkspaces.read_view",
+      "line": 228,
+      "docstring": "Read ready identity inside a caller's authority transaction; filesystem is pinned again at spawn.",
+      "file_sha256": "93186f84b1c2ceb416016a1f62f64854cd9e194beaae1c23670e274a059b6906"
+    },
+    {
+      "path": "backend/runtime/development_state.py",
+      "symbol": "DevelopmentWorkspaces.view",
+      "line": 241,
+      "docstring": "Return ready data for inspection; peer admission separately verifies the current lease.",
+      "file_sha256": "93186f84b1c2ceb416016a1f62f64854cd9e194beaae1c23670e274a059b6906"
+    },
+    {
+      "path": "backend/runtime/development_state.py",
+      "symbol": "DevelopmentWorkspaces.prepare",
+      "line": 246,
+      "docstring": "Prepare once through the actual broker and retain interrupted copies without automatic replay.",
+      "file_sha256": "93186f84b1c2ceb416016a1f62f64854cd9e194beaae1c23670e274a059b6906"
+    },
+    {
+      "path": "backend/runtime/development_state.py",
+      "symbol": "DevelopmentWorkspaces.prepare.settled",
+      "line": 251,
+      "docstring": "Drain host filesystem/SQL work before its owned preparation scope can unwind.",
+      "file_sha256": "93186f84b1c2ceb416016a1f62f64854cd9e194beaae1c23670e274a059b6906"
+    },
+    {
+      "path": "backend/runtime/development_workspace.py",
+      "symbol": "GitResult",
+      "line": 44,
+      "docstring": "Owned executor evidence; a truncated output or unclosed process is not a usable Git result.",
+      "file_sha256": "3c890e0b8314345c79801bb9760c19dd37159ba69c51e701c9964c21bde7cd13"
+    },
+    {
+      "path": "backend/runtime/development_workspace.py",
+      "symbol": "GitExecutor",
+      "line": 53,
+      "docstring": "Host-selected trusted Git asset and owned process execution port, never supplied by a model.",
+      "file_sha256": "3c890e0b8314345c79801bb9760c19dd37159ba69c51e701c9964c21bde7cd13"
+    },
+    {
+      "path": "backend/runtime/development_workspace.py",
+      "symbol": "GitExecutor.execution_path",
+      "line": 58,
+      "docstring": "Map an admitted host source/allocation to the executor's explicit mount namespace.",
+      "file_sha256": "3c890e0b8314345c79801bb9760c19dd37159ba69c51e701c9964c21bde7cd13"
+    },
+    {
+      "path": "backend/runtime/development_workspace.py",
+      "symbol": "GitExecutor.run",
+      "line": 62,
+      "docstring": "Execute inside the caller's owned boundary with bounded complete output and proven closure.",
+      "file_sha256": "3c890e0b8314345c79801bb9760c19dd37159ba69c51e701c9964c21bde7cd13"
+    },
+    {
+      "path": "backend/runtime/development_workspace.py",
+      "symbol": "PreparedDevelopmentWorkspace",
+      "line": 68,
+      "docstring": "Independent execution directory and pinned base, not acceptance or publication authority.",
+      "file_sha256": "3c890e0b8314345c79801bb9760c19dd37159ba69c51e701c9964c21bde7cd13"
+    },
+    {
+      "path": "backend/runtime/development_workspace.py",
+      "symbol": "git_environment",
+      "line": 79,
+      "docstring": "Construct a clean environment; host OAuth, Git config, askpass and arbitrary helper paths are absent.",
+      "file_sha256": "3c890e0b8314345c79801bb9760c19dd37159ba69c51e701c9964c21bde7cd13"
+    },
+    {
+      "path": "backend/runtime/development_workspace.py",
+      "symbol": "_source_identity",
+      "line": 98,
+      "docstring": "Reject a replaced or redirected registered directory before or after asynchronous preparation.",
+      "file_sha256": "3c890e0b8314345c79801bb9760c19dd37159ba69c51e701c9964c21bde7cd13"
+    },
+    {
+      "path": "backend/runtime/development_workspace.py",
+      "symbol": "prepare_workspace",
+      "line": 115,
+      "docstring": "Clone an exact committed source into a fresh private attempt directory without sharing metadata.\n\nDirty/hidden-index sources, linked/shared metadata and submodules need explicit\npolicy before admission; they are refused without editing or deleting anything.\nThe returned copy is only a preparation dependency. Runtime lease binding,\nwritable capsule admission, durable recovery and candidate publication belong\nto the native controller and must be wired before enabling development tasks.",
+      "file_sha256": "3c890e0b8314345c79801bb9760c19dd37159ba69c51e701c9964c21bde7cd13"
+    },
+    {
+      "path": "backend/runtime/development_workspace.py",
+      "symbol": "prepare_workspace.git",
+      "line": 159,
+      "docstring": "Consume complete closed Git evidence under one total deadline; never infer success from a partial result.",
+      "file_sha256": "3c890e0b8314345c79801bb9760c19dd37159ba69c51e701c9964c21bde7cd13"
+    },
+    {
+      "path": "backend/runtime/development_workspace.py",
+      "symbol": "prepare_workspace.sha",
+      "line": 198,
+      "docstring": "Read one full canonical Git identity, not an abbreviated branch name or human output.",
+      "file_sha256": "3c890e0b8314345c79801bb9760c19dd37159ba69c51e701c9964c21bde7cd13"
+    },
+    {
+      "path": "backend/runtime/git_capsule.py",
+      "symbol": "GitAsset",
+      "line": 21,
+      "docstring": "Pinned trusted system Git executable; its installed /usr helper layout stays readonly.",
+      "file_sha256": "63a204d3f6ac097d987c891f59bff210aba7c993b2bfaaba55ea0007ed1c22e1"
+    },
+    {
+      "path": "backend/runtime/git_capsule.py",
+      "symbol": "PrivateAllocation",
+      "line": 26,
+      "docstring": "Original private directory identity; it cannot authorize a source or another allocation.",
+      "file_sha256": "63a204d3f6ac097d987c891f59bff210aba7c993b2bfaaba55ea0007ed1c22e1"
+    },
+    {
+      "path": "backend/runtime/git_capsule.py",
+      "symbol": "PrivateAllocation.capture",
+      "line": 34,
+      "docstring": "Capture a real operator-owned directory without following a replacement symlink.",
+      "file_sha256": "63a204d3f6ac097d987c891f59bff210aba7c993b2bfaaba55ea0007ed1c22e1"
+    },
+    {
+      "path": "backend/runtime/git_capsule.py",
+      "symbol": "GitLaunch",
+      "line": 51,
+      "docstring": "Immutable fixed-program invocation and allocation manifest supplied only by the owner.",
+      "file_sha256": "63a204d3f6ac097d987c891f59bff210aba7c993b2bfaaba55ea0007ed1c22e1"
+    },
+    {
+      "path": "backend/runtime/git_capsule.py",
+      "symbol": "GitLaunch.__post_init__",
+      "line": 60,
+      "docstring": "Reject mixed environment, arbitrary programs and directories outside the two explicit views.",
+      "file_sha256": "63a204d3f6ac097d987c891f59bff210aba7c993b2bfaaba55ea0007ed1c22e1"
+    },
+    {
+      "path": "backend/runtime/git_capsule.py",
+      "symbol": "GitCapsule",
+      "line": 92,
+      "docstring": "Execute only pinned Git under the original gate with a separate private allocation mount.",
+      "file_sha256": "63a204d3f6ac097d987c891f59bff210aba7c993b2bfaaba55ea0007ed1c22e1"
+    },
+    {
+      "path": "backend/runtime/git_capsule.py",
+      "symbol": "GitCapsule.__init__",
+      "line": 95,
+      "docstring": "Keep the source admission separate from the optional writable private copy.",
+      "file_sha256": "63a204d3f6ac097d987c891f59bff210aba7c993b2bfaaba55ea0007ed1c22e1"
+    },
+    {
+      "path": "backend/runtime/git_capsule.py",
+      "symbol": "GitCapsule._program",
+      "line": 104,
+      "docstring": "Pin Git bytes before spawn and avoid shell interpolation of any argument.",
+      "file_sha256": "63a204d3f6ac097d987c891f59bff210aba7c993b2bfaaba55ea0007ed1c22e1"
+    },
+    {
+      "path": "backend/runtime/git_capsule.py",
+      "symbol": "GitCapsule._mounts",
+      "line": 124,
+      "docstring": "Expose /bin aliases and the exact opened allocation; no host control/home is mounted.",
+      "file_sha256": "63a204d3f6ac097d987c891f59bff210aba7c993b2bfaaba55ea0007ed1c22e1"
+    },
+    {
+      "path": "backend/runtime/git_capsule.py",
+      "symbol": "GitCapsule.__enter__",
+      "line": 152,
+      "docstring": "Retain pinned asset/allocation descriptors until the owner's gated spawn has consumed them.",
+      "file_sha256": "63a204d3f6ac097d987c891f59bff210aba7c993b2bfaaba55ea0007ed1c22e1"
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker",
+      "line": 111,
+      "docstring": "One externally supplied, non-reused domain for one original attempt.\n\n``run_peer`` owns reserve\u2192spawn\u2192global publication\u2192concrete local bind\u2192G.\nCallers receive a transport only after G and can only recover a receipt on\nretry. ``revoke`` withdraws G before waiting for SQL/constructors. Global\nrecovery needs only the journal/domain, never the original project DB.\nComplete actor-origin and endpoint authentication remain deployment work.",
+      "file_sha256": "0e4c67061b3de84950a03d813f2031d8cd2a979d30e13a560484f7ae8dd4419e"
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker._reserve",
+      "line": 154,
+      "docstring": "Retain one immutable source concession and record each operation's actual execution view.",
+      "file_sha256": "0e4c67061b3de84950a03d813f2031d8cd2a979d30e13a560484f7ae8dd4419e"
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker.run_git",
+      "line": 402,
+      "docstring": "Admit fixed Git preparation only through the original development command peer.",
+      "file_sha256": "0e4c67061b3de84950a03d813f2031d8cd2a979d30e13a560484f7ae8dd4419e"
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker._run",
+      "line": 421,
+      "docstring": "Witness launch intent and manifests before releasing the original gate.",
+      "file_sha256": "0e4c67061b3de84950a03d813f2031d8cd2a979d30e13a560484f7ae8dd4419e"
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "symbol": "PeerRegistry",
+      "line": 22,
+      "docstring": "Register fenced owned peers and distinguish original sources from private execution copies.",
+      "file_sha256": "99173ccac7b7c34aea701b5ae20e7c1413a8b4c3a6066ed9c90f15d7e81eeeed"
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "symbol": "PeerRegistry.source_binding",
+      "line": 109,
+      "docstring": "Read the immutable original registration, independently of a private execution view.",
+      "file_sha256": "99173ccac7b7c34aea701b5ae20e7c1413a8b4c3a6066ed9c90f15d7e81eeeed"
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "symbol": "PeerRegistry._source_binding",
+      "line": 116,
+      "docstring": "Read only the original run binding; business transports have no filesystem view.",
+      "file_sha256": "99173ccac7b7c34aea701b5ae20e7c1413a8b4c3a6066ed9c90f15d7e81eeeed"
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "symbol": "PeerRegistry._execution_binding",
+      "line": 127,
+      "docstring": "Select the host-owned ready view; development cannot fall back to the original source.",
+      "file_sha256": "99173ccac7b7c34aea701b5ae20e7c1413a8b4c3a6066ed9c90f15d7e81eeeed"
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "symbol": "PeerRegistry.workspace_binding",
+      "line": 144,
+      "docstring": "Resolve the execution view; private development copies require a current fenced owner.",
+      "file_sha256": "99173ccac7b7c34aea701b5ae20e7c1413a8b4c3a6066ed9c90f15d7e81eeeed"
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "symbol": "PeerRegistry.admission",
+      "line": 156,
+      "docstring": "Revalidate a prepared peer and both views atomically; source_only is reserved for host Git preparation.",
+      "file_sha256": "99173ccac7b7c34aea701b5ae20e7c1413a8b4c3a6066ed9c90f15d7e81eeeed"
+    },
+    {
+      "path": "backend/tests/runtime/test_broker_git.py",
+      "symbol": "test_real_broker_prepares_copy_and_closes_every_git_peer",
+      "line": 12,
+      "docstring": "Prove exact source/copy isolation and global/source closure through the actual resource owner.",
+      "file_sha256": "d5394ee76ff45c4306898b89519ecd80dfef4a3d67e8ee468bf859f32bc06ccc"
+    },
+    {
+      "path": "backend/tests/runtime/test_broker_git.py",
+      "symbol": "prepare_policy_fixture",
+      "line": 81,
+      "docstring": "Select the low-level development kind without claiming public developer admission is enabled.",
+      "file_sha256": "d5394ee76ff45c4306898b89519ecd80dfef4a3d67e8ee468bf859f32bc06ccc"
+    },
+    {
+      "path": "backend/tests/runtime/test_broker_git.py",
+      "symbol": "test_durable_preparation_keeps_one_global_source_and_exposes_only_ready_copy",
+      "line": 96,
+      "docstring": "A real Git preparation and later analysis share ownership without confusing source and execution paths.",
+      "file_sha256": "d5394ee76ff45c4306898b89519ecd80dfef4a3d67e8ee468bf859f32bc06ccc"
+    },
+    {
+      "path": "backend/tests/runtime/test_broker_git.py",
+      "symbol": "test_context_change_after_real_clone_retains_copy_without_admitting_it",
+      "line": 165,
+      "docstring": "Late preparation cannot cross a corrected context; its useful files and closure evidence survive.",
+      "file_sha256": "d5394ee76ff45c4306898b89519ecd80dfef4a3d67e8ee468bf859f32bc06ccc"
+    },
+    {
+      "path": "backend/tests/runtime/test_broker_git.py",
+      "symbol": "test_context_change_after_real_clone_retains_copy_without_admitting_it.correct_before_complete",
+      "line": 198,
+      "docstring": "Model the owner correcting requirements after the physical clone has already finished.",
+      "file_sha256": "d5394ee76ff45c4306898b89519ecd80dfef4a3d67e8ee468bf859f32bc06ccc"
+    },
+    {
+      "path": "backend/tests/runtime/test_broker_git.py",
+      "symbol": "test_git_broker_keeps_original_source_readonly",
+      "line": 234,
+      "docstring": "Even an admitted Git writer can mutate only the private allocation, never its registered source.",
+      "file_sha256": "d5394ee76ff45c4306898b89519ecd80dfef4a3d67e8ee468bf859f32bc06ccc"
+    },
+    {
+      "path": "backend/tests/runtime/test_broker_git.py",
+      "symbol": "test_cancelling_git_waits_for_actual_peer_closure",
+      "line": 277,
+      "docstring": "A cancelled preparation cannot report success while its Git/shell child remains capable of acting.",
+      "file_sha256": "d5394ee76ff45c4306898b89519ecd80dfef4a3d67e8ee468bf859f32bc06ccc"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_migration.py",
+      "symbol": "insert_kind",
+      "line": 13,
+      "docstring": "Create schema-only fixture roots; this does not claim that a native actor was admitted.",
+      "file_sha256": "64a34c7a5907d8ee5adf93e41ecf6fd6dc268e160ca2f5c8eba0fce45b2c0cfa"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_migration.py",
+      "symbol": "test_expansion_preserves_existing_attempt_references_and_owner_objects",
+      "line": 23,
+      "docstring": "The kind expansion keeps primary identities and foreign keys instead of renaming the runs table.",
+      "file_sha256": "64a34c7a5907d8ee5adf93e41ecf6fd6dc268e160ca2f5c8eba0fce45b2c0cfa"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_migration.py",
+      "symbol": "test_expanded_kind_is_persisted_explicitly_without_inference_from_role_name",
+      "line": 59,
+      "docstring": "Development/review identity is actual stored data; this is schema evidence, not a writable runtime proof.",
+      "file_sha256": "64a34c7a5907d8ee5adf93e41ecf6fd6dc268e160ca2f5c8eba0fce45b2c0cfa"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_migration.py",
+      "symbol": "test_execution_slots_allow_one_author_and_one_independent_review_only",
+      "line": 73,
+      "docstring": "Two different author kinds cannot race for the same task, nor can two review kinds.",
+      "file_sha256": "64a34c7a5907d8ee5adf93e41ecf6fd6dc268e160ca2f5c8eba0fce45b2c0cfa"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_state.py",
+      "symbol": "development_state",
+      "line": 14,
+      "docstring": "Prepare real source registration and lease without enabling a public developer API.",
+      "file_sha256": "31a7a0c08e953d250fb2c42768eb219bba66b05d7dea55e721b39ec014d574f8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_state.py",
+      "symbol": "test_plan_is_durable_before_copy_and_does_not_reallocate_or_adopt_existing_work",
+      "line": 39,
+      "docstring": "A crash before clone leaves a real scope record; repeat planning returns data without permission to reset.",
+      "file_sha256": "31a7a0c08e953d250fb2c42768eb219bba66b05d7dea55e721b39ec014d574f8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_state.py",
+      "symbol": "test_ready_copy_preserves_source_and_has_an_explicit_execution_view",
+      "line": 59,
+      "docstring": "Only the pinned child of the planned allocation can become the native execution view.",
+      "file_sha256": "31a7a0c08e953d250fb2c42768eb219bba66b05d7dea55e721b39ec014d574f8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_state.py",
+      "symbol": "test_ready_record_requires_complete_identity_in_storage",
+      "line": 99,
+      "docstring": "SQLite NULL semantics cannot turn incomplete preparation evidence into a ready copy.",
+      "file_sha256": "31a7a0c08e953d250fb2c42768eb219bba66b05d7dea55e721b39ec014d574f8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_state.py",
+      "symbol": "test_context_correction_blocks_late_ready_result_and_preserves_preparation_evidence",
+      "line": 119,
+      "docstring": "A useful old copy is retained but cannot authorize writes under a corrected task context.",
+      "file_sha256": "31a7a0c08e953d250fb2c42768eb219bba66b05d7dea55e721b39ec014d574f8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_state.py",
+      "symbol": "test_development_peer_never_falls_back_to_original_source",
+      "line": 153,
+      "docstring": "Preparing a native peer does not make the source checkout its implicit execution directory.",
+      "file_sha256": "31a7a0c08e953d250fb2c42768eb219bba66b05d7dea55e721b39ec014d574f8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_state.py",
+      "symbol": "test_ready_peer_admission_separates_source_and_execution_view",
+      "line": 166,
+      "docstring": "All author peers share the ready copy while their global concession keeps the original source.",
+      "file_sha256": "31a7a0c08e953d250fb2c42768eb219bba66b05d7dea55e721b39ec014d574f8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "fixture_git",
+      "line": 11,
+      "docstring": "Run synthetic fixture Git outside the event loop; this helper never runs product or model code.",
+      "file_sha256": "431f3dfe80a5e0ff53797f8f1fe7aa5fa8f81023fb995db1ae45ed0d9d6567a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "source_repository",
+      "line": 19,
+      "docstring": "Create a committed synthetic source and a binding with no model/account connection.",
+      "file_sha256": "431f3dfe80a5e0ff53797f8f1fe7aa5fa8f81023fb995db1ae45ed0d9d6567a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "RealGitExecutor",
+      "line": 52,
+      "docstring": "Test-only subprocess owner for trusted Git on synthetic data, never the production runtime executor.",
+      "file_sha256": "431f3dfe80a5e0ff53797f8f1fe7aa5fa8f81023fb995db1ae45ed0d9d6567a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "RealGitExecutor.execution_path",
+      "line": 57,
+      "docstring": "The synthetic host-only executor uses identity path mapping.",
+      "file_sha256": "431f3dfe80a5e0ff53797f8f1fe7aa5fa8f81023fb995db1ae45ed0d9d6567a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "RealGitExecutor.run",
+      "line": 61,
+      "docstring": "Execute actual Git with the supplied clean environment and close its process on failure.",
+      "file_sha256": "431f3dfe80a5e0ff53797f8f1fe7aa5fa8f81023fb995db1ae45ed0d9d6567a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "test_prepared_copy_has_exact_base_and_no_source_auth_or_remotes",
+      "line": 86,
+      "docstring": "A real detached independent copy cannot inherit source config or redirect the source checkout.",
+      "file_sha256": "431f3dfe80a5e0ff53797f8f1fe7aa5fa8f81023fb995db1ae45ed0d9d6567a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "test_dirty_source_is_retained_and_not_silently_adopted",
+      "line": 129,
+      "docstring": "Preparation cannot silently attribute previous user edits to a newly admitted attempt.",
+      "file_sha256": "431f3dfe80a5e0ff53797f8f1fe7aa5fa8f81023fb995db1ae45ed0d9d6567a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "test_existing_attempt_directory_is_never_reset_or_removed",
+      "line": 146,
+      "docstring": "A resumed/crashed allocation requires reconciliation rather than destructive recreation.",
+      "file_sha256": "431f3dfe80a5e0ff53797f8f1fe7aa5fa8f81023fb995db1ae45ed0d9d6567a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "test_repository_tree_larger_than_command_preview_is_prepared_completely",
+      "line": 161,
+      "docstring": "A realistic tree cannot be rejected or silently truncated at a command-output preview boundary.",
+      "file_sha256": "431f3dfe80a5e0ff53797f8f1fe7aa5fa8f81023fb995db1ae45ed0d9d6567a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "test_unconfirmed_execution_or_partial_output_cannot_produce_workspace_receipt",
+      "line": 192,
+      "docstring": "Git-looking bytes alone do not prove command completion or physical process closure.",
+      "file_sha256": "431f3dfe80a5e0ff53797f8f1fe7aa5fa8f81023fb995db1ae45ed0d9d6567a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "test_unconfirmed_execution_or_partial_output_cannot_produce_workspace_receipt.Unconfirmed",
+      "line": 199,
+      "docstring": "Supply incomplete owner evidence without launching any command.",
+      "file_sha256": "431f3dfe80a5e0ff53797f8f1fe7aa5fa8f81023fb995db1ae45ed0d9d6567a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "test_unconfirmed_execution_or_partial_output_cannot_produce_workspace_receipt.Unconfirmed.run",
+      "line": 202,
+      "docstring": "Return explicit uncertainty rather than an invented successful process.",
+      "file_sha256": "431f3dfe80a5e0ff53797f8f1fe7aa5fa8f81023fb995db1ae45ed0d9d6567a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "test_failure_after_clone_retains_copy_and_refuses_destructive_retry",
+      "line": 213,
+      "docstring": "A failed later preparation step leaves recoverable files rather than resetting a reused path.",
+      "file_sha256": "431f3dfe80a5e0ff53797f8f1fe7aa5fa8f81023fb995db1ae45ed0d9d6567a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "test_failure_after_clone_retains_copy_and_refuses_destructive_retry.LoseCloneResponse",
+      "line": 220,
+      "docstring": "Exercise a real completed clone followed by a lost owner-side observation.",
+      "file_sha256": "431f3dfe80a5e0ff53797f8f1fe7aa5fa8f81023fb995db1ae45ed0d9d6567a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "test_failure_after_clone_retains_copy_and_refuses_destructive_retry.LoseCloneResponse.run",
+      "line": 223,
+      "docstring": "Retain the completed effect before reporting an uncertain response.",
+      "file_sha256": "431f3dfe80a5e0ff53797f8f1fe7aa5fa8f81023fb995db1ae45ed0d9d6567a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "test_hidden_index_edits_are_preserved_instead_of_silently_adopted",
+      "line": 244,
+      "docstring": "Assume-unchanged index flags cannot hide prior user work from the preparation precondition.",
+      "file_sha256": "431f3dfe80a5e0ff53797f8f1fe7aa5fa8f81023fb995db1ae45ed0d9d6567a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "test_source_clean_filters_cannot_execute_during_preflight",
+      "line": 261,
+      "docstring": "Reading source status must not run arbitrary repository-configured code on the host executor.",
+      "file_sha256": "431f3dfe80a5e0ff53797f8f1fe7aa5fa8f81023fb995db1ae45ed0d9d6567a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "test_source_config_cannot_redirect_preflight_to_another_working_tree",
+      "line": 298,
+      "docstring": "A registered directory cannot acquire another source's identity through core.worktree.",
+      "file_sha256": "431f3dfe80a5e0ff53797f8f1fe7aa5fa8f81023fb995db1ae45ed0d9d6567a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "test_preparation_uses_explicit_namespace_paths_without_exposing_host_tree",
+      "line": 319,
+      "docstring": "The Git workflow must work when execution sees mounted aliases instead of host path names.",
+      "file_sha256": "431f3dfe80a5e0ff53797f8f1fe7aa5fa8f81023fb995db1ae45ed0d9d6567a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "test_preparation_uses_explicit_namespace_paths_without_exposing_host_tree.NamespacedGit",
+      "line": 328,
+      "docstring": "Test-only mount executor; product integration still requires actual gated owner/cgroup admission.",
+      "file_sha256": "431f3dfe80a5e0ff53797f8f1fe7aa5fa8f81023fb995db1ae45ed0d9d6567a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "test_preparation_uses_explicit_namespace_paths_without_exposing_host_tree.NamespacedGit.execution_path",
+      "line": 331,
+      "docstring": "Translate only the admitted source and this one private allocation to their mount aliases.",
+      "file_sha256": "431f3dfe80a5e0ff53797f8f1fe7aa5fa8f81023fb995db1ae45ed0d9d6567a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "test_preparation_uses_explicit_namespace_paths_without_exposing_host_tree.NamespacedGit.run",
+      "line": 340,
+      "docstring": "Run actual Git in a namespace containing only source, allocation and runtime files.",
+      "file_sha256": "431f3dfe80a5e0ff53797f8f1fe7aa5fa8f81023fb995db1ae45ed0d9d6567a8"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

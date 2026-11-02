@@ -4584,3 +4584,70 @@ Resume at139250c; avoid re-running Wiki tests after docs-only followup.
   delivery does not invent an acceptance or claim that malformed historical state is
   repaired. General corrections without a candidate/runtime configuration and broader
   owner lifecycle recovery remain part of the pending migration/communication work.
+
+### Native development execution — active implementation after1885bf0
+
+- Began the complete development milestone rather than exposing writable access to the
+  registered source. Current production admission remains research-only until the
+  private copy, owned process boundary, delivery and publication contracts are connected.
+- Added an exact-base independent Git-copy primitive with an explicit executor port;
+  no default host subprocess launcher. Its path mapping is explicit so namespace aliases
+  cannot be mistaken for host paths. Synthetic real-Git and namespace tests cover source
+  preservation, clean configuration, retained partial clones, duplicate allocation,
+  hidden index edits, redirected worktrees and complete large-tree evidence. One total
+  deadline and complete-output/physical-closure evidence are required.
+- Prepared migration36 as a resource, NOT yet added to normal startup migration wiring:
+  development/code_review are explicit stored kinds; one author and one review slot per
+  task. Actual project SQLite3.47.1 supports widening the column without renaming the
+  runs table or breaking child references. Tests preserve actual runs/attempts and owner
+  objects. Forward/reverse migration wiring and historical builders remain to integrate.
+- Git2.56.0 verified locally; exact revision, regular transport and empty-template
+  behavior checked against the [primary Git documentation](https://git-scm.com/docs/git-clone).
+  Ordinary sources are covered first; linked/shared metadata, submodules and repository
+  filters require deliberate policy before enabling those inputs. No source resets,
+  auth copying or cleanup fallback were introduced. These limits do not close the
+  corresponding broad scenarios or the complete native development milestone.
+- Existing WorktreeManager/-B/auth-copy behavior is not reused. Next: actual gated Git
+  executor/private allocation mount, per-attempt durable preparation, writable private
+  native/command view plus Ken on that same copy, then exact code candidate/check/review/
+  owner acceptance/publication. No new subscription/model turn for Git-only tests.
+- Checkpoint for this active milestone:16directed tests pass, including actual namespace
+  path mapping and four-kind schema preservation;36new Python definitions documented.
+  This is preparation-layer evidence. The Git executor still needs the actual broker/
+  lease/concession boundary; development admission, writable agent views and publication
+  remain disabled/unimplemented. No fresh full regression/package or model trial is
+  claimed for these uncommitted additions.
+
+#### Prepared development copy through the actual broker — verified increment
+
+- Supersedes the preparation-layer checkpoint above: trusted Git now runs through
+  the real original broker, fenced peer admission and kernel resource domain.
+  Original source is readonly; only the exact private allocation is writable.
+  Bounded complete stdout/stderr and original-owner physical closure are required.
+- Migration37 retains per-attempt preparation before clone. Ready directory/base
+  identity is immutable even after reconciliation; incomplete SQL NULL identity
+  cannot satisfy ready storage. Interrupted copies are retained, never reset or
+  silently cloned again. Context corrections block late preparation completion.
+- Ruling: preserve source admission separately from execution view — the original
+  repository remains the global concession/publication precondition, while each
+  operation records its actual private directory. Otherwise valid Git preparation
+  and subsequent private execution would disagree about their global source grant.
+  Development peer views have no original-directory fallback before preparation.
+- Actual Git-to-later-analysis integration proves the private copy is used and the
+  original stays unchanged. Duplicate preparation creates no new operations. A real
+  clone followed by owner correction retains files and closed command receipts but
+  cannot become ready under the old context. No model/account turn was used.
+- Validation:30new source cases pass; combined full source run plus12explicit local
+  semantic reruns gives1932unique cases=1829PASS/100same inherited failure IDs/3same
+  container skips, including749runtime passes. The initial full command omitted
+  semantic asset configuration; its1817PASS/100FAIL/15SKIP is preserved separately.
+  No new/resolved failure IDs; no claim that inherited causes/messages are identical.
+- Extracted final wheel:286PASS/0FAIL/0SKIP,362backend modules loaded only from wheel,
+  650Python/SQL source files match the checkout.95new/changed definitions documented;
+  changed-file Ruff and whitespace checks pass. Frontend and dependency locks unchanged.
+- Contracts and exact receipts:development-execution.md, development-results.json,
+  development-packaging.json, development-docstrings.json. This is an internal
+  preparation increment, not completed development delivery. Startup migrations36/37
+  remain unwired until safe inverses/historical builders are integrated. Writable
+  native/command sessions, Ken on the same copy, exact candidates/checks/review/owner
+  acceptance/publication and all broader plan items remain active work.

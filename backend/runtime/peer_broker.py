@@ -32,6 +32,7 @@ from backend.runtime.contracts import command_key, text
 from backend.runtime.egress_channel import EgressChannel
 from backend.runtime.egress_proxy import EgressPolicy, TunnelProxy
 from backend.runtime.execution_domain import DomainIdentity, ExecutionDomain
+from backend.runtime.git_capsule import GitCapsule, GitLaunch
 from backend.runtime.ken_worker import KenInstallation
 from backend.runtime.native_network import NativeNetwork
 from backend.runtime.native_state import NativeState
@@ -160,6 +161,7 @@ class PeerBroker:
         runtime_manifest=None,
         native_state=None,
     ):
+        """Retain one immutable source concession and record each operation's actual execution view."""
         snapshot = self.journal.load()
         active = snapshot.records.get("broker:active")
         grant = snapshot.records.get(self._grant_key)
@@ -189,7 +191,9 @@ class PeerBroker:
                 admission["fence"],
             ):
                 raise AuthorityConflict("Global domain belongs to another attempt")
-            if grant["workspace_binding"] != asdict(admission["binding"]):
+            if grant["workspace_binding"] != asdict(
+                admission.get("source_binding", admission["binding"])
+            ):
                 raise AuthorityConflict("Global source admission differs")
             if grant.get("limits") != asdict(self._limits):
                 raise AuthorityConflict("Shared broker resource policy changed")
@@ -209,7 +213,9 @@ class PeerBroker:
                 "global_fence": fence + 1,
                 "domain_path": str(self.domain.path),
                 "domain_identity": asdict(self.domain.identity),
-                "workspace_binding": asdict(admission["binding"]),
+                "workspace_binding": asdict(
+                    admission.get("source_binding", admission["binding"])
+                ),
                 "limits": asdict(self._limits),
                 **{
                     key: admission[key]
@@ -233,6 +239,7 @@ class PeerBroker:
             "namespace": None,
             "gate_sent": False,
             "exit_code": None,
+            "execution_binding": asdict(admission["binding"]),
             **(
                 {"runtime_manifest": runtime_manifest}
                 if runtime_manifest is not None
@@ -392,6 +399,14 @@ class PeerBroker:
             web_search=web_search,
         )
 
+    def run_git(self, registry, peer_id, *, operation_key, launch):
+        """Admit fixed Git preparation only through the original development command peer."""
+        if not isinstance(launch, GitLaunch):
+            raise TypeError("An immutable Git launch manifest is required")
+        return self._run(
+            registry, peer_id, operation_key=operation_key, git_launch=launch
+        )
+
     def run_command(self, registry, peer_id, *, operation_key, asset):
         if not isinstance(asset, CodexAsset):
             raise TypeError("Command launch requires an inspected Codex asset")
@@ -421,10 +436,24 @@ class PeerBroker:
         native_state=None,
         command_only=False,
         web_search="disabled",
+        git_launch=None,
     ):
         """Witness launch intent and manifests before releasing the original gate."""
         command_key(operation_key)
-        if asset is None and ken is None:
+        if git_launch is not None and any(
+            (
+                code is not None,
+                asset is not None,
+                ken is not None,
+                network is not None,
+                egress is not None,
+                host_tools,
+                command_only,
+                native_state is not None,
+            )
+        ):
+            raise ValueError("Git preparation cannot mix native or analysis profiles")
+        if asset is None and ken is None and git_launch is None:
             text(code, "analysis code", 64000)
         kind = (
             "ken"
@@ -547,6 +576,24 @@ class PeerBroker:
                         )
                     },
                 }
+            if git_launch is not None:
+                manifest = {
+                    "profile": "owned-git-preparation-v1",
+                    "execution_kind": "development",
+                    "launch": asdict(git_launch),
+                    "code_sha256": {
+                        name: hashlib.sha256(
+                            Path(__file__).with_name(name).read_bytes()
+                        ).hexdigest()
+                        for name in (
+                            "git_capsule.py",
+                            "broker_profile.py",
+                            "broker_git.py",
+                            "development_workspace.py",
+                            "peer_payload.py",
+                        )
+                    },
+                }
             if command_only:
                 manifest["profile"] = "readonly-native-command-v1"
             manifest["limits"] = asdict(self._limits)
@@ -560,10 +607,18 @@ class PeerBroker:
                 return PeerStart(operation_id, existing["state"], False)
             if self._withdrawn.is_set():
                 raise AuthorityConflict("Broker admission withdrawn")
-            admission = registry.admission(peer_id)
+            admission = (
+                registry.admission(peer_id, source_only=True)
+                if git_launch is not None
+                else registry.admission(peer_id)
+            )
             if admission["binding"] is None or admission["kind"] != kind:
                 raise AuthorityConflict(
                     "Broker profile requires its original admitted peer kind"
+                )
+            if git_launch is not None and admission["execution_kind"] != "development":
+                raise AuthorityConflict(
+                    "Writable preparation requires an admitted development execution"
                 )
             self._reserve(
                 admission,
@@ -571,7 +626,7 @@ class PeerBroker:
                 intent,
                 peer_id,
                 runtime_manifest=manifest
-                if asset is not None or ken is not None
+                if asset is not None or ken is not None or git_launch is not None
                 else None,
                 native_state=native_state,
             )
@@ -607,9 +662,15 @@ class PeerBroker:
                         )
                     )
                 )
+                if git_launch is not None:
+                    capsule = GitCapsule
                 with capsule(
                     admission["binding"],
-                    ken if ken is not None else (code if asset is None else asset),
+                    git_launch
+                    if git_launch is not None
+                    else (
+                        ken if ken is not None else (code if asset is None else asset)
+                    ),
                     write_fd,
                     **({"network": network} if network is not None else {}),
                     **({"channel": channel} if channel is not None else {}),
