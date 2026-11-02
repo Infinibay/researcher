@@ -1,0 +1,393 @@
+{
+  "base_commit": "2c145ff",
+  "changed_or_new_definitions_documented": 55,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/db/development_migration.py",
+      "symbol": "_unused",
+      "line": 12,
+      "docstring": "Hold an idle connection's schema lock and reject live, historical or newer authority.",
+      "file_sha256": "b7fccf3e7166e0c7c1e09676b287c6194f12879f5028066bbed359ed16f72158"
+    },
+    {
+      "path": "backend/db/development_migration.py",
+      "symbol": "restore_code_reviews",
+      "line": 78,
+      "docstring": "Remove unused version40 only without review history, live authority or later schemas; retain all older candidates/checks.",
+      "file_sha256": "b7fccf3e7166e0c7c1e09676b287c6194f12879f5028066bbed359ed16f72158"
+    },
+    {
+      "path": "backend/runtime/code_reviews.py",
+      "symbol": "CodeReviewTarget",
+      "line": 28,
+      "docstring": "Owner-observed author candidate and complete review packet fingerprint, not a moving branch or role name.",
+      "file_sha256": "61c2a5f6ff970d329f997eeb07fb569c84e90adffbeac30da12c703d78c566f2"
+    },
+    {
+      "path": "backend/runtime/code_reviews.py",
+      "symbol": "CodeReviewTarget.__post_init__",
+      "line": 34,
+      "docstring": "Require a complete candidate identifier and explicit SHA-256 observation before admission.",
+      "file_sha256": "61c2a5f6ff970d329f997eeb07fb569c84e90adffbeac30da12c703d78c566f2"
+    },
+    {
+      "path": "backend/runtime/code_reviews.py",
+      "symbol": "CodeReviewView",
+      "line": 44,
+      "docstring": "Readonly exact captured candidate and distinct original registration; never permission to edit either view.",
+      "file_sha256": "61c2a5f6ff970d329f997eeb07fb569c84e90adffbeac30da12c703d78c566f2"
+    },
+    {
+      "path": "backend/runtime/code_reviews.py",
+      "symbol": "CodeReviews",
+      "line": 56,
+      "docstring": "Own immutable review admission and provenance using the existing transaction, receipt and event boundary.",
+      "file_sha256": "61c2a5f6ff970d329f997eeb07fb569c84e90adffbeac30da12c703d78c566f2"
+    },
+    {
+      "path": "backend/runtime/code_reviews.py",
+      "symbol": "CodeReviews.__init__",
+      "line": 59,
+      "docstring": "Retain the actual run store without creating another scheduler or inference loop.",
+      "file_sha256": "61c2a5f6ff970d329f997eeb07fb569c84e90adffbeac30da12c703d78c566f2"
+    },
+    {
+      "path": "backend/runtime/code_reviews.py",
+      "symbol": "CodeReviews._subject",
+      "line": 63,
+      "docstring": "Snapshot current requirements, exact candidate, original closed author and every retained check within a finite budget.",
+      "file_sha256": "61c2a5f6ff970d329f997eeb07fb569c84e90adffbeac30da12c703d78c566f2"
+    },
+    {
+      "path": "backend/runtime/code_reviews.py",
+      "symbol": "CodeReviews.subject",
+      "line": 175,
+      "docstring": "Observe an admissible complete packet; this read neither starts a review nor accepts its content.",
+      "file_sha256": "61c2a5f6ff970d329f997eeb07fb569c84e90adffbeac30da12c703d78c566f2"
+    },
+    {
+      "path": "backend/runtime/code_reviews.py",
+      "symbol": "CodeReviews.admit_once",
+      "line": 180,
+      "docstring": "Atomically reserve a separate actor/run and its immutable packet; repeated intent returns only its original receipt.",
+      "file_sha256": "61c2a5f6ff970d329f997eeb07fb569c84e90adffbeac30da12c703d78c566f2"
+    },
+    {
+      "path": "backend/runtime/code_reviews.py",
+      "symbol": "CodeReviews._request",
+      "line": 304,
+      "docstring": "Read original immutable data; current access additionally verifies requirements, checks and exact source origin.",
+      "file_sha256": "61c2a5f6ff970d329f997eeb07fb569c84e90adffbeac30da12c703d78c566f2"
+    },
+    {
+      "path": "backend/runtime/code_reviews.py",
+      "symbol": "CodeReviews.request",
+      "line": 337,
+      "docstring": "Inspect a historical or explicitly current review without issuing process or mutation authority.",
+      "file_sha256": "61c2a5f6ff970d329f997eeb07fb569c84e90adffbeac30da12c703d78c566f2"
+    },
+    {
+      "path": "backend/runtime/code_reviews.py",
+      "symbol": "CodeReviews._view",
+      "line": 345,
+      "docstring": "Translate only a captured candidate identity into the readonly guest execution view.",
+      "file_sha256": "61c2a5f6ff970d329f997eeb07fb569c84e90adffbeac30da12c703d78c566f2"
+    },
+    {
+      "path": "backend/runtime/code_reviews.py",
+      "symbol": "CodeReviews.execution_view",
+      "line": 357,
+      "docstring": "Require the admitted source and unchanged packet before exposing a candidate to a readonly peer.",
+      "file_sha256": "61c2a5f6ff970d329f997eeb07fb569c84e90adffbeac30da12c703d78c566f2"
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "symbol": "PeerRegistry",
+      "line": 22,
+      "docstring": "Register fenced owned peers and distinguish original sources from private execution copies.",
+      "file_sha256": "646966c13ff5fb00effe962a6530535474b47ff24b8220aa52c95fd5ffb53a4d"
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "symbol": "PeerRegistry._execution_binding",
+      "line": 127,
+      "docstring": "Select the host-owned ready view; development cannot fall back to the original source.",
+      "file_sha256": "646966c13ff5fb00effe962a6530535474b47ff24b8220aa52c95fd5ffb53a4d"
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "symbol": "PeerRegistry._validate_development_source",
+      "line": 151,
+      "docstring": "Require the original registration and directory to remain current before each private-view gate.",
+      "file_sha256": "646966c13ff5fb00effe962a6530535474b47ff24b8220aa52c95fd5ffb53a4d"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore",
+      "line": 65,
+      "docstring": "Own durable admission, fenced attempts and version-bound review requests in SQLite.",
+      "file_sha256": "179319426b297329c96595dcd38900b8b09c10e940941e09133b5be970487d17"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore._review_request",
+      "line": 203,
+      "docstring": "Read a bound finding-review subject; productive research/development roots have no review request.",
+      "file_sha256": "179319426b297329c96595dcd38900b8b09c10e940941e09133b5be970487d17"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore._bound_workspace",
+      "line": 1157,
+      "docstring": "Validate dispatch against its actual ready view while retaining the original source registration.",
+      "file_sha256": "179319426b297329c96595dcd38900b8b09c10e940941e09133b5be970487d17"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore._independent_review_thread",
+      "line": 1472,
+      "docstring": "Reject reuse of the author's native context even under a different role/attempt.",
+      "file_sha256": "179319426b297329c96595dcd38900b8b09c10e940941e09133b5be970487d17"
+    },
+    {
+      "path": "backend/tests/runtime/test_admission_migration.py",
+      "symbol": "test_version27_receipt_survives_without_an_inferred_binding",
+      "line": 7,
+      "docstring": "A version27 receipt stays historical after upgrades without inventing admission evidence.",
+      "file_sha256": "af4915539d60762a14d16daca174596a14aa91c60fb734b496c7a4836e329670"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_state.py",
+      "symbol": "test_unused_check_inverse_preserves_older_candidate_history",
+      "line": 176,
+      "docstring": "Removing unused version39 must preserve a completed version38 candidate and all original task/run data.",
+      "file_sha256": "114d2aac41be0fc0710e2c22a46dbbefe325e9baa3cb5755a9856fbd4b309fad"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_state.py",
+      "symbol": "test_check_inverse_refuses_a_reserved_or_historical_check",
+      "line": 207,
+      "docstring": "An interrupted reservation is retained evidence even before a worker or result exists.",
+      "file_sha256": "114d2aac41be0fc0710e2c22a46dbbefe325e9baa3cb5755a9856fbd4b309fad"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_candidate_state.py",
+      "symbol": "test_normal_startup_installs_candidate_storage_and_unused_inverse_is_repeatable",
+      "line": 186,
+      "docstring": "The packaged migration runs normally, and removing unused storage does not discard task rows.",
+      "file_sha256": "ad8eb82b96704082788530c27198706ac43558f25987e0c06c7a4d93bce403cd"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_state.py",
+      "symbol": "review_state",
+      "line": 23,
+      "docstring": "Create synthetic durable author provenance; real native/namespace evidence has separate integration coverage.",
+      "file_sha256": "f6e9a5dd04ffe60a1e240b7142533dad35970a246899e08f60da4356fe33a124"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_state.py",
+      "symbol": "review_request",
+      "line": 60,
+      "docstring": "Select the actual complete observed subject and a distinct actor without interpreting a role name.",
+      "file_sha256": "f6e9a5dd04ffe60a1e240b7142533dad35970a246899e08f60da4356fe33a124"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_state.py",
+      "symbol": "test_review_subject_retains_complete_original_candidate_and_closed_author",
+      "line": 77,
+      "docstring": "The subject identifies original author/native scope, exact Git version, task requirements and check evidence.",
+      "file_sha256": "f6e9a5dd04ffe60a1e240b7142533dad35970a246899e08f60da4356fe33a124"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_state.py",
+      "symbol": "test_admission_reuses_its_receipt_and_keeps_source_separate_from_review_view",
+      "line": 94,
+      "docstring": "A review is a separate durable run and readonly candidate view, never a reset of the author's workspace.",
+      "file_sha256": "f6e9a5dd04ffe60a1e240b7142533dad35970a246899e08f60da4356fe33a124"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_state.py",
+      "symbol": "test_review_admission_rejects_unobserved_or_related_authority",
+      "line": 124,
+      "docstring": "An actor label, foreign scope or changed hash cannot authorize an independent review.",
+      "file_sha256": "f6e9a5dd04ffe60a1e240b7142533dad35970a246899e08f60da4356fe33a124"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_state.py",
+      "symbol": "test_review_thread_must_differ_from_the_actual_author_thread",
+      "line": 142,
+      "docstring": "A new run and actor do not make the author's resumed context independent.",
+      "file_sha256": "f6e9a5dd04ffe60a1e240b7142533dad35970a246899e08f60da4356fe33a124"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_state.py",
+      "symbol": "test_context_correction_invalidates_admitted_review_without_erasing_history",
+      "line": 157,
+      "docstring": "The saved packet remains inspectable while new requirements withdraw its execution authority.",
+      "file_sha256": "f6e9a5dd04ffe60a1e240b7142533dad35970a246899e08f60da4356fe33a124"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_state.py",
+      "symbol": "test_subject_and_source_admission_are_immutable_in_storage",
+      "line": 182,
+      "docstring": "A direct SQL update cannot retarget the reviewer to another version while retaining the original receipt.",
+      "file_sha256": "f6e9a5dd04ffe60a1e240b7142533dad35970a246899e08f60da4356fe33a124"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_state.py",
+      "symbol": "test_role_names_and_unclosed_or_unknown_origin_do_not_make_a_subject_reviewable",
+      "line": 205,
+      "docstring": "Reject missing or contradictory original evidence before admitting a reviewer.",
+      "file_sha256": "f6e9a5dd04ffe60a1e240b7142533dad35970a246899e08f60da4356fe33a124"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_state.py",
+      "symbol": "readonly_review_broker",
+      "line": 237,
+      "docstring": "Give a new admitted review its own real broker/domain; author metadata remains explicitly synthetic storage data.",
+      "file_sha256": "f6e9a5dd04ffe60a1e240b7142533dad35970a246899e08f60da4356fe33a124"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_state.py",
+      "symbol": "test_admitted_review_peer_mounts_only_the_candidate_readonly",
+      "line": 278,
+      "docstring": "A real gated child reads candidate bytes and cannot edit them or access the original repository's host path.",
+      "file_sha256": "f6e9a5dd04ffe60a1e240b7142533dad35970a246899e08f60da4356fe33a124"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_state.py",
+      "symbol": "test_context_correction_between_publication_and_gate_prevents_review_payload",
+      "line": 306,
+      "docstring": "Actual pre-G binding revalidates the frozen packet instead of relying on its earlier admission.",
+      "file_sha256": "f6e9a5dd04ffe60a1e240b7142533dad35970a246899e08f60da4356fe33a124"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_state.py",
+      "symbol": "test_context_correction_between_publication_and_gate_prevents_review_payload.corrected",
+      "line": 316,
+      "docstring": "Correct the real task after global publication while the original kernel gate is still closed.",
+      "file_sha256": "f6e9a5dd04ffe60a1e240b7142533dad35970a246899e08f60da4356fe33a124"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_state.py",
+      "symbol": "test_unused_review_inverse_preserves_closed_author_and_candidate",
+      "line": 351,
+      "docstring": "Removing unused version40 keeps older candidate/check history and can be repeated and reapplied.",
+      "file_sha256": "f6e9a5dd04ffe60a1e240b7142533dad35970a246899e08f60da4356fe33a124"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_state.py",
+      "symbol": "test_review_history_prevents_inverse_even_after_the_reviewer_finishes",
+      "line": 372,
+      "docstring": "A completed review reservation is retained history, independent of the active-authority guard.",
+      "file_sha256": "f6e9a5dd04ffe60a1e240b7142533dad35970a246899e08f60da4356fe33a124"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_state.py",
+      "symbol": "test_pending_check_remains_unknown_and_changed_evidence_invalidates_review",
+      "line": 391,
+      "docstring": "The packet never invents success and cannot retain currentness when a late original observation changes it.",
+      "file_sha256": "f6e9a5dd04ffe60a1e240b7142533dad35970a246899e08f60da4356fe33a124"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_state.py",
+      "symbol": "test_subject_refuses_overflow_instead_of_silently_dropping_checks",
+      "line": 415,
+      "docstring": "All retained check records must fit the explicit subject budget; selecting a convenient subset is not allowed.",
+      "file_sha256": "f6e9a5dd04ffe60a1e240b7142533dad35970a246899e08f60da4356fe33a124"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_state.py",
+      "symbol": "test_unimplemented_native_review_cannot_freeze_input_or_spend_a_dispatch_budget",
+      "line": 424,
+      "docstring": "Readonly inspection is not advertised as native review; failure rolls back the preceding input/dispatch reservation.",
+      "file_sha256": "f6e9a5dd04ffe60a1e240b7142533dad35970a246899e08f60da4356fe33a124"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_migration.py",
+      "symbol": "version35",
+      "line": 13,
+      "docstring": "Remove only unused newer structures so each test genuinely starts from the historical constraint.",
+      "file_sha256": "fb35c3ade7b85a37ec059f4d330ab1af24671ea94cfbb3c5358fecbe5dd54ef1"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_rollback.py",
+      "symbol": "expanded",
+      "line": 11,
+      "docstring": "Use actual latest startup storage, then explicitly remove unused candidate storage to test the historical inverses.",
+      "file_sha256": "1014df4df203bca06d069c794945190b33f280f4d4ce6eb98de8f014860d2aca"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_startup.py",
+      "symbol": "version35",
+      "line": 9,
+      "docstring": "Build a historical database through the actual migrator while withholding only the new resources.",
+      "file_sha256": "129992613443965487835cf5fe958b6a4d7db332cbc7ec51e9681b339201c081"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_startup.py",
+      "symbol": "test_repeatable_upgrade_preserves_original_research_and_owner_data",
+      "line": 38,
+      "docstring": "Upgrade actual historical rows and child references without inventing preparation evidence.",
+      "file_sha256": "129992613443965487835cf5fe958b6a4d7db332cbc7ec51e9681b339201c081"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_startup.py",
+      "symbol": "test_failed_upgrade_leaves_only_committed_prior_migrations",
+      "line": 86,
+      "docstring": "An invalid new SQL tail cannot publish a partial index, column, table or migration marker.",
+      "file_sha256": "129992613443965487835cf5fe958b6a4d7db332cbc7ec51e9681b339201c081"
+    },
+    {
+      "path": "backend/tests/runtime/test_finding_review.py",
+      "symbol": "test_review_schema_can_rollback_without_losing_original_work",
+      "line": 694,
+      "docstring": "An unused additive review schema can be removed and upgraded without id loss.",
+      "file_sha256": "6cd199fde09533e3070ba0416a196fdc63d25d797f2f3232d98ef40518255341"
+    },
+    {
+      "path": "backend/tests/runtime/test_question_migration.py",
+      "symbol": "version23",
+      "line": 9,
+      "docstring": "Build a version23 fixture without newer rebuilds changing the migration under test.",
+      "file_sha256": "dbb3d40ca05ab7441b232a7b36f03c76259b7f92da404da4f88b91225e5b22d3"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_migration.py",
+      "symbol": "test_unused_result_schema_rolls_back_and_reapplies_without_losing_tasks",
+      "line": 6,
+      "docstring": "Only unused storage can be removed; original task data and owner tables survive.",
+      "file_sha256": "6ac6d77154193360109852eaab184e86201853c713f54bdd36bb1ab221dea866"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_migration.py",
+      "symbol": "test_result_downgrade_refuses_live_authority_or_historical_delivery",
+      "line": 54,
+      "docstring": "A downgrade cannot erase a delivery or remove a capability while its authority remains live.",
+      "file_sha256": "6ac6d77154193360109852eaab184e86201853c713f54bdd36bb1ab221dea866"
+    },
+    {
+      "path": "backend/tests/runtime/test_run_input_migration.py",
+      "symbol": "test_version29_dispatch_remains_unknown_after_repeatable_upgrade",
+      "line": 7,
+      "docstring": "Retain unknown input on a version29 dispatch across repeatable upgrades.",
+      "file_sha256": "c6162880aeb58183fde9af6b6cc878dcd5624c53effdcf15421537c2809df691"
+    },
+    {
+      "path": "backend/tests/runtime/test_task_inputs_migration.py",
+      "symbol": "test_version28_migration_preserves_rows_and_only_records_future_edits",
+      "line": 9,
+      "docstring": "Preserve version28 rows and record only future edits after upgrading.",
+      "file_sha256": "af81b5e645d8c4bc916722cb3a45e033527eda29b212b5b2b7f7e76d3091ae1d"
+    },
+    {
+      "path": "backend/tools/base/db.py",
+      "symbol": "ensure_migrations",
+      "line": 111,
+      "docstring": "Run pending schema migrations for existing databases.\n\nChecks the ``schema_migrations`` table and applies any missing\nmigrations. Safe to call multiple times. Serving requires an already\ninitialized file; explicit installation/legacy callers may create one.",
+      "file_sha256": "8904f502963c23ab0f328d3a04b90284bb472c83b2a15919bd1c5e8e937bbab3"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

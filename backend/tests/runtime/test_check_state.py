@@ -175,7 +175,10 @@ def test_never_released_peer_cannot_be_recorded_as_a_successful_check(check_stat
 
 def test_unused_check_inverse_preserves_older_candidate_history(check_state):
     """Removing unused version39 must preserve a completed version38 candidate and all original task/run data."""
-    from backend.db.development_migration import restore_code_checks
+    from backend.db.development_migration import (
+        restore_code_checks,
+        restore_code_reviews,
+    )
     from backend.runtime.candidate_state import CodeCandidates
     from backend.runtime.peer_registry import PeerRegistry
     from backend.tools.base.db import ensure_migrations
@@ -188,7 +191,9 @@ def test_unused_check_inverse_preserves_older_candidate_history(check_state):
     s.c.store.finish(
         lease, native_status="completed", summary="Historical storage fixture"
     )
+    restore_code_reviews(s.c.conn)
     restore_code_checks(s.c.conn)
+    restore_code_reviews(s.c.conn)
     restore_code_checks(s.c.conn)
     assert CodeCandidates(s.c.store).inspect(101, lease.run_id) == before
     assert s.c.store.get(101, lease.run_id).status == "needs_review"
@@ -201,11 +206,22 @@ def test_unused_check_inverse_preserves_older_candidate_history(check_state):
 
 def test_check_inverse_refuses_a_reserved_or_historical_check(check_state):
     """An interrupted reservation is retained evidence even before a worker or result exists."""
-    from backend.db.development_migration import restore_code_checks
+    from backend.db.development_migration import (
+        restore_code_checks,
+        restore_code_reviews,
+    )
     from backend.runtime.check_contracts import CheckSpec
+    from backend.runtime.peer_registry import PeerRegistry
 
     s, lease, checks = check_state
     row, _ = checks.plan(lease, "retained", CheckSpec(("/usr/bin/true",), "command"))
+    registry = PeerRegistry(s.c.store)
+    for kind in ("native", "business"):
+        registry.close(registry.prepare(lease, kind))
+    s.c.store.finish(
+        lease, native_status="completed", summary="Retained check reservation"
+    )
+    restore_code_reviews(s.c.conn)
     with pytest.raises(RuntimeError, match="rollback refused"):
         restore_code_checks(s.c.conn)
     assert checks.inspect(101, row["id"]) == row

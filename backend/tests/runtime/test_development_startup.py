@@ -24,6 +24,7 @@ def version35(database, conn, monkeypatch):
                     "development_workspace_schema.sql",
                     "code_candidate_schema.sql",
                     "code_check_schema.sql",
+                    "code_review_schema.sql",
                 )
                 else apply(conn, path)
             ),
@@ -67,7 +68,7 @@ def test_repeatable_upgrade_preserves_original_research_and_owner_data(
     )
     assert (
         db_conn.execute("SELECT max(version) FROM schema_migrations").fetchone()[0]
-        == 39
+        == 40
     )
     assert db_conn.execute("PRAGMA foreign_key_check").fetchall() == []
 
@@ -79,6 +80,7 @@ def test_repeatable_upgrade_preserves_original_research_and_owner_data(
         ("development_workspace_schema.sql", 37),
         ("code_candidate_schema.sql", 38),
         ("code_check_schema.sql", 39),
+        ("code_review_schema.sql", 40),
     ],
 )
 def test_failed_upgrade_leaves_only_committed_prior_migrations(
@@ -125,15 +127,22 @@ def test_failed_upgrade_leaves_only_committed_prior_migrations(
         ).fetchone()
         is not None
     )
-    assert candidate_present == (marker == 39)
-    assert (
+    assert candidate_present == (marker >= 39)
+    checks_present = (
         db_conn.execute(
             "SELECT 1 FROM sqlite_master WHERE name='runtime_code_checks'"
+        ).fetchone()
+        is not None
+    )
+    assert checks_present == (marker >= 40)
+    assert (
+        db_conn.execute(
+            "SELECT 1 FROM sqlite_master WHERE name='runtime_code_review_requests'"
         ).fetchone()
         is None
     )
     ensure_migrations(_isolated_db)
     assert (
         db_conn.execute("SELECT max(version) FROM schema_migrations").fetchone()[0]
-        == 39
+        == 40
     )

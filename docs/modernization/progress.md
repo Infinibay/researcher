@@ -4975,3 +4975,73 @@ Resume at139250c; avoid re-running Wiki tests after docs-only followup.
   without an exact candidate view. Do not bypass that guard to reuse research dispatch.
   Whole legacy/communication/prompt/UI/operator/acceptance obligations remain open;
   all43broad scenarios stay incomplete and the full goal remains active.
+
+
+#### Frozen code-review admission and readonly inspection — after 2c145ff
+
+- Previous goal turn made concrete progress: committed owned candidate checks as
+  2c145ff, completed the original live gates and retained their exact scopes. This
+  continuation verified that head and reused the Ken conclusion with untracked
+  validity explicitly acknowledged; the indexed original checkout lacks new modules.
+- CodeReviews admits one owner-observed candidate packet under another actor/run.
+  Immutable migration40 requests preserve original author attempt/thread, current
+  requirements/corrections/answers, exact CandidateSubject and every retained check
+  with output hashes/counts. Pending check results remain unknown. Packets exceed
+  neither64checks nor1MiB; overflow is rejected, not silently omitted. Blob rows
+  stream one at a time. Progress status is excluded from requirements so claim does
+  not invalidate an otherwise identical packet.
+- Original author must be finished/needs_review with native thread/turn, a closed
+  originally bound native peer and complete scoped peer closure. Another role name
+  is insufficient. Admission atomically retains original source registration,
+  request, run, receipt and ordinary run.admitted event. Same intent reads data;
+  changed scope/recipe does not create a replacement run. Task/context/project/
+  observed-subject or actor mismatch rejects admission.
+- New readonly CodeReviewView keeps original source separate from captured directory
+  dev/inode/head/tree/subject identity. PeerRegistry validates the packet during
+  admission and final pre-G binding. Both native thread bind paths reject the
+  author's actual thread. Actual kernel tests prove candidate-only readonly mount
+  and suppression of payload after a real context correction between publication
+  and G. Fixture author/Git identities remain explicitly synthetic; these tests
+  are not Git validation or a native reviewer quality trial.
+- Native code-review dispatch is explicitly still unavailable. Attempting to freeze
+  its input rolls back the preceding dispatch/budget reservation and leaves no
+  input snapshot. This prevents advertising storage/inspection as an implemented
+  native session. Native review tools/instructions, before/after Git validation,
+  attributed decision, acceptance/publication and public code admission remain open.
+- Startup applies40 atomically; failure of its resource retains committed36-39 and
+  no40marker/table. Empty idle40 inverse preserves older candidate/check history;
+  retained review rows block inverse after reviewer completion. Historical fixture
+  suppression/explicit inverse ordering updated. The older39reservation inverse
+  case now finishes its author and removes empty40 first, so its refusal really
+  tests retained39history instead of accidentally relying on active/newer storage.
+- RED9missing-module fixture cases precede implementation. An initial spec fixture
+  assumed context1 after task metadata had advanced it:4expected-positive cases
+  correctly rejected that stale context; the fixture now uses the observed author
+  version, without weakening policy. Kernel bodies15PASS initially exposed2fixture
+  teardown errors because ExecutionDomain.close already removed the directory;
+  conditional cleanup fixes the test lifecycle, without product code changes.
+- Directed108PASS26.55s and shared-consumer109PASS65.03s overlap; final protocol
+  20PASS5.45s includes2actual kernel cases and unavailable-native budget rollback.
+  Final wheel preflight29PASS7.55s ran before expanded199PASS86.16s;0FAIL/0SKIP,
+  350backend imports only from wheel and679matching Python/SQL payloads. Final
+  wheel covers the union of source gates. No new global suite, subscription/model
+  call, published-Ken inference trial, frontend, locks or whole-scenario acceptance.
+  The100inherited source failures remain open; no global-green claim.
+- All55new/changed definitions have English docstrings;17Python files pass Ruff,
+  15format clean. Existing db.py/sqlite_runs.py whole-file formatting debt was
+  reproduced at HEAD; only changed blocks formatted. No backend edit after final
+  wheel build. Evidence:code-review-state-{results,packaging,docstrings}.json and
+  separate smoke packaging receipt; contract/code-reviews.md and coverage updated.
+- Next concrete result: actual native review over the frozen candidate. Current
+  OwnedGitExecutor.run and PeerBroker Git preparation admit only development and
+  select source_only; extending them must use the admitted CodeReviewView as the
+  readonly Git source while retaining original registration as global concession.
+  Never map an assumed shared host path or use host subprocess fallback. Validate
+  candidate bytes before native input and after sealing the review's owned work.
+  Then connect readonly research capabilities plus code-specific subject/source/
+  decision tools and attributed proposal persistence, with actual distinct native
+  thread tests. Existing broker_inference sealing currently supports development;
+  inspect its cleanup before extending it to ordinary readonly Ken sessions.
+- Finish acceptance/publication and public code admission after that. All legacy,
+  prompts/communication, UI, operator/migration/restore and whole-plan requirements
+  remain in scope. This is a required internal stage, not the full objective.

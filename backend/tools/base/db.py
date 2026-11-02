@@ -412,6 +412,12 @@ def ensure_migrations(db_path: str | None = None, *, existing_only: bool = False
             resource = Path(__file__).resolve().parents[2] / "db/code_check_schema.sql"
             apply_sql_resource(conn, resource)
             logger.info("Migration 39: original-owned exact candidate checks")
+        if 40 not in applied:
+            from backend.db.migrations import apply_sql_resource
+
+            resource = Path(__file__).resolve().parents[2] / "db/code_review_schema.sql"
+            apply_sql_resource(conn, resource)
+            logger.info("Migration 40: immutable independent code review subjects")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()

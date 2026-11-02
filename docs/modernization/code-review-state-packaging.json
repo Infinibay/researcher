@@ -1,0 +1,44 @@
+{
+  "base_commit": "2c145ff",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "6bf00b7fe14796c44ccc51cdf2fc1c8907084fb2b925ec364569f2890a75cd66",
+  "observed": {
+    "tests_passed": 199,
+    "failures": [],
+    "skipped": 0,
+    "backend_modules_loaded": 350,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "network": "Disabled except Unix sockets",
+    "semantic_assets": "Explicit prepared pinned public offline assets outside wheel"
+  },
+  "backend_tree": {
+    "matching_source_files": 679,
+    "sha256": "908cef7740f77f74204643e20b2906fe2111877057d639ca8d23b4835d05bc2b"
+  },
+  "bootstrap": "Python3.12 -I -S with explicit installed dependency path and original host venv prefix restored; backend import paths remain restricted to extracted wheel.",
+  "limits": "Extracted backend wheel plus installed dependencies and explicit prepared offline assets; not a clean full host installation or an inference-quality trial.",
+  "selected_test_paths": [
+    "backend/tests/runtime/test_code_review_state.py",
+    "backend/tests/runtime/test_check_state.py",
+    "backend/tests/runtime/test_development_startup.py",
+    "backend/tests/runtime/test_development_rollback.py",
+    "backend/tests/runtime/test_development_migration.py",
+    "backend/tests/runtime/test_code_candidate_state.py",
+    "backend/tests/runtime/test_admission_migration.py",
+    "backend/tests/runtime/test_question_migration.py",
+    "backend/tests/runtime/test_task_inputs_migration.py",
+    "backend/tests/runtime/test_run_input_migration.py",
+    "backend/tests/runtime/test_result_migration.py",
+    "backend/tests/runtime/test_finding_review.py",
+    "backend/tests/runtime/test_peer_broker.py",
+    "backend/tests/runtime/test_peer_ownership.py",
+    "backend/tests/runtime/test_peer_workspace_view.py",
+    "backend/tests/runtime/test_broker_git.py",
+    "backend/tests/runtime/test_run_input.py",
+    "backend/tests/runtime/test_task_input_versioning.py",
+    "backend/tests/runtime/test_inference_journal.py",
+    "backend/tests/runtime/test_workspace_delivery.py"
+  ],
+  "verifier_sha256": "b00b520285f8e57ad66ebfcc96b770c1d7751a7491b252c749ee0d5ad5abb052"
+}

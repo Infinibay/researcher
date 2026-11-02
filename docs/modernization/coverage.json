@@ -435,7 +435,11 @@
         "backend/tests/runtime/test_check_execution.py",
         "backend/tests/runtime/test_development_session.py",
         "docs/modernization/owned-checks-results.json",
-        "docs/modernization/owned-checks-docstrings.json"
+        "docs/modernization/owned-checks-docstrings.json",
+        "docs/modernization/code-reviews.md",
+        "docs/modernization/code-review-state-results.json",
+        "docs/modernization/code-review-state-packaging.json",
+        "backend/tests/runtime/test_code_review_state.py"
       ],
       "remaining": [
         "Durable product startup/shutdown and all tool lifecycle integration; old flows are not covered by owned command evidence",
@@ -482,7 +486,11 @@
         "backend/tests/runtime/test_check_execution.py",
         "backend/tests/runtime/test_development_session.py",
         "docs/modernization/owned-checks-results.json",
-        "docs/modernization/owned-checks-docstrings.json"
+        "docs/modernization/owned-checks-docstrings.json",
+        "docs/modernization/code-reviews.md",
+        "docs/modernization/code-review-state-results.json",
+        "docs/modernization/code-review-state-packaging.json",
+        "backend/tests/runtime/test_code_review_state.py"
       ]
     },
     "E05": {
@@ -766,7 +774,11 @@
         "backend/tests/runtime/test_check_execution.py",
         "backend/tests/runtime/test_development_session.py",
         "docs/modernization/owned-checks-results.json",
-        "docs/modernization/owned-checks-docstrings.json"
+        "docs/modernization/owned-checks-docstrings.json",
+        "docs/modernization/code-reviews.md",
+        "docs/modernization/code-review-state-results.json",
+        "docs/modernization/code-review-state-packaging.json",
+        "backend/tests/runtime/test_code_review_state.py"
       ]
     },
     "E11": {
@@ -784,7 +796,12 @@
     },
     "E12": {
       "status": "pending",
-      "evidence": []
+      "evidence": [
+        "docs/modernization/code-reviews.md",
+        "docs/modernization/code-review-state-results.json",
+        "docs/modernization/code-review-state-packaging.json",
+        "backend/tests/runtime/test_code_review_state.py"
+      ]
     },
     "D01": {
       "status": "in_progress",

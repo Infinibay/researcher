@@ -106,6 +106,11 @@ sigue pendiente. La aceptación del usuario y la publicación son pasos distinto
 publicar exige revalidar el destino y poder reconciliar una respuesta perdida.
 Este documento no declara implementados esos contratos pendientes.
 
+La [admisión de revisión e inspección en lectura](code-reviews.md) ya conserva un
+objeto inmutable con autor, requisitos y comprobaciones, exige otro hilo e impide
+escritura sobre el candidato. Su sesión nativa, validación Git antes/después y
+decisión siguen pendientes.
+
 La integración del controlador tiene evidencia separada en
 [candidate-controller-results.json](candidate-controller-results.json),
 [candidate-controller-packaging.json](candidate-controller-packaging.json) y

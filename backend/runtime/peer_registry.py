@@ -138,7 +138,14 @@ class PeerRegistry:
                 raise RunConflict("Private copy differs from the admitted source")
             return view
         if row["execution_kind"] == "code_review":
-            raise RunConflict("Code review requires an exact candidate snapshot")
+            from backend.runtime.code_reviews import CodeReviews
+
+            try:
+                return CodeReviews(self.runs).execution_view(conn, row)
+            except RunNotFound as exc:
+                raise RunConflict(
+                    "Code review requires an exact candidate snapshot"
+                ) from exc
         return source
 
     def _validate_development_source(self, conn, row, source):
@@ -151,6 +158,8 @@ class PeerRegistry:
 
             self.runs._check_registration(conn, row["project_id"], source)
             _source_identity(source)
+            if row["execution_kind"] == "code_review":
+                self._execution_binding(conn, None, row, source)
 
     def workspace_binding(self, peer_id):
         """Resolve the execution view; private development copies require a current fenced owner."""

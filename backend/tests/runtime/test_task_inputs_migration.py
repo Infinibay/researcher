@@ -34,6 +34,7 @@ def test_version28_migration_preserves_rows_and_only_records_future_edits(
                     "development_workspace_schema.sql",
                     "code_candidate_schema.sql",
                     "code_check_schema.sql",
+                    "code_review_schema.sql",
                 )
                 else apply(conn, path)
             ),

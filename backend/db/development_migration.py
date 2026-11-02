@@ -57,6 +57,12 @@ def _unused(conn, version):
                         "SELECT 1 FROM runtime_code_checks LIMIT 1"
                     ).fetchone()
                 )
+                or (
+                    version == 40
+                    and conn.execute(
+                        "SELECT 1 FROM runtime_code_review_requests LIMIT 1"
+                    ).fetchone()
+                )
             )
             if blocked:
                 raise RuntimeError(
@@ -67,6 +73,16 @@ def _unused(conn, version):
     except BaseException:
         conn.rollback()
         raise
+
+
+def restore_code_reviews(conn):
+    """Remove unused version40 only without review history, live authority or later schemas; retain all older candidates/checks."""
+    with _unused(conn, 40) as present:
+        if not present:
+            return
+        conn.execute("DROP TRIGGER code_review_request_immutable")
+        conn.execute("DROP TABLE runtime_code_review_requests")
+        conn.execute("DELETE FROM schema_migrations WHERE version=40")
 
 
 def restore_code_checks(conn):

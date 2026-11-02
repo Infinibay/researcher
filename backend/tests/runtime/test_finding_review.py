@@ -705,11 +705,13 @@ def test_review_schema_can_rollback_without_losing_original_work(authored_findin
     from backend.db.development_migration import (
         restore_code_candidates,
         restore_code_checks,
+        restore_code_reviews,
         restore_development_kinds,
         restore_development_workspaces,
     )
     from backend.db.result_migration import restore_result_schema
 
+    restore_code_reviews(c.conn)
     restore_code_checks(c.conn)
     restore_code_candidates(c.conn)
     restore_development_workspaces(c.conn)

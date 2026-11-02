@@ -206,6 +206,10 @@ class SQLiteRunStore:
         from backend.knowledge.reviews import verify_current
 
         run = SQLiteRunStore._row(conn, project_id, run_id)
+        if run["execution_kind"] == "code_review":
+            raise RunConflict(
+                "Native code-review execution is not enabled; only frozen subject inspection is available"
+            )
         request = conn.execute(
             "SELECT * FROM finding_review_requests WHERE project_id=? AND run_id=?",
             (project_id, run_id),
@@ -1170,7 +1174,14 @@ class SQLiteRunStore:
                 _source_identity(view)
                 expected = view.workspace
             if workspace is not None and row["execution_kind"] == "code_review":
-                raise WorkspaceChanged("Code review requires an exact candidate snapshot")
+                from backend.runtime.code_reviews import CodeReviews
+
+                try:
+                    expected = CodeReviews(self).execution_view(conn, row).workspace
+                except RunNotFound as exc:
+                    raise WorkspaceChanged(
+                        "Code review requires an exact candidate snapshot"
+                    ) from exc
             if workspace is not None and workspace != expected:
                 raise WorkspaceChanged("Dispatch differs from the admitted workspace")
         elif workspace is not None and row["execution_kind"] in ("development", "code_review"):
@@ -1466,6 +1477,18 @@ class SQLiteRunStore:
         ).fetchone()
         if row is not None and row[0] == thread_id:
             raise RunConflict("An independent reviewer requires a new native thread")
+        kind = conn.execute(
+            "SELECT execution_kind FROM runtime_runs WHERE id=?", (lease.run_id,)
+        ).fetchone()
+        if kind is not None and kind[0] == "code_review":
+            code = conn.execute(
+                "SELECT author_thread_id FROM runtime_code_review_requests WHERE project_id=? AND run_id=?",
+                (lease.project_id, lease.run_id),
+            ).fetchone()
+            if code is None or code[0] == thread_id:
+                raise RunConflict(
+                    "An independent code reviewer requires an admitted subject and a new native thread"
+                )
 
     def bind_thread(self, lease, *, thread_id):
         """Persist the known thread before sending a possibly uncertain turn."""
