@@ -1,0 +1,13 @@
+{
+  "result": "passed",
+  "model_turns": 0,
+  "actions": [
+    "Unknown successful response with receipt reads unavailable remains explicit",
+    "Reload retains original project/task/repository/context/subject/operation key",
+    "Owner resend uses byte-equivalent payload and recovers the admitted attempt",
+    "Exactly one controlled generation for two POSTs; closing retains saved decision"
+  ],
+  "controlled_generations_added": 1,
+  "post_count": 2,
+  "identical_packets": true
+}

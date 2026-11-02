@@ -116,6 +116,8 @@ class WorkspaceBinding:
 
 @dataclass(frozen=True)
 class RunView:
+    """Immutable owner projection of one durable run, with optional attributed review metadata."""
+
     run_id: str
     project_id: int
     task_id: int
@@ -136,6 +138,7 @@ class RunView:
     repository_id: int | None = None
     repository_name: str | None = None
     issue: dict | None = None
+    review: dict | None = None
 
 
 @dataclass(frozen=True)

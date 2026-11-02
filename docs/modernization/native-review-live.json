@@ -1,0 +1,289 @@
+{
+  "trial": "native-review-a59807684b",
+  "status": "passed",
+  "stage": "acceptance",
+  "web_search": "disabled",
+  "fixture_retained": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/native-review-a59807684b-j4pr17_a",
+  "controlled_author_generation": true,
+  "generative_native_turns": 1,
+  "image_calls": 0,
+  "profile": "owned-codex-v1",
+  "native_version": "0.166.0",
+  "ken_version": "0.18.0",
+  "native_model": "gpt-6.1-sol",
+  "automatic_admission_or_turn_replay": false,
+  "vendor_websocket_proven": false,
+  "scope": "One actual independent reviewer through owner HTTP, configured owned runtime, OpenAI subscription and published Ken. Original author generation is controlled and deliberately records 731 while its source states 137; this is a documentary contradiction test, not calibrated scientific validity or a real author model trial.",
+  "controlled_author_attempt_id": "f5f55e1a-e7a3-4bca-a678-977ff174bb63",
+  "finding_id": 1,
+  "factory": "OwnedCodexRuntime",
+  "admission_status": 202,
+  "run_id": "a2b9a22e-b37d-40fb-b75f-9218af81033d",
+  "owner_read_status": 200,
+  "owner_run": {
+    "run_id": "a2b9a22e-b37d-40fb-b75f-9218af81033d",
+    "project_id": 101,
+    "task_id": 1001,
+    "actor_id": "research-reviewer",
+    "context_version": 1,
+    "status": "needs_review",
+    "fence": 1,
+    "attempt_id": "42700c5a-47fb-4477-a753-4b91969fc838",
+    "thread_id": "01a19ae6-bccf-7333-9026-c1a17e3656a3",
+    "turn_id": "01a19ae6-be62-7f21-9831-6239b44149e6",
+    "prompt": "Revisa de manera independiente el hallazgo indicado y si su cuenta está respaldada por la captura guardada. Lee el objetivo y sus fuentes; usa Ken con consulta en inglés para localizar sample_count en invoice.py y lee el código, sin ejecutar ni editar. Registra una decisión con citas exactas y límites concretos. No cambies hallazgos, informes ni estados de aceptación. Resume en español qué comprobaste. Son datos sintéticos; no navegues por la web ni uses otro proveedor.",
+    "runtime": "codex",
+    "result": {
+      "native_status": "completed",
+      "summary": "Registré la decisión **requiere revisión** (`needs_revision`).\n\nLa captura completa dice «The sample contains 137 units.», mientras que el hallazgo y el borrador afirman **731**. Localicé `sample_count` mediante una consulta en inglés con Ken y leí el código: devuelve `SAMPLE_COUNT`, definido como **137**.\n\nLa revisión comprueba concordancia documental, sin reproducir mediciones. No ejecuté ni edité código, no navegué por la web y no cambié hallazgos, informes ni estados de aceptación."
+    },
+    "cancel_requested": false,
+    "operation_key": "native-review-a59807684b",
+    "conversation_thread_id": null,
+    "model": "gpt-6.1-sol",
+    "repository_id": 11,
+    "repository_name": "fixture",
+    "issue": null,
+    "review": {
+      "finding_id": 1,
+      "subject_sha256": "e2a8ac599addb35c0786cc773501eb32bcbc31bd50f6b4f02ab7da9811f3c9ab",
+      "decision_id": 1,
+      "verdict": "needs_revision"
+    }
+  },
+  "runs": [
+    {
+      "id": "af52ddda-f915-49e1-8b4a-25931e9c244b",
+      "status": "needs_review",
+      "current_attempt_id": "f5f55e1a-e7a3-4bca-a678-977ff174bb63",
+      "fence": 1,
+      "context_version": 1,
+      "issue_json": null
+    },
+    {
+      "id": "a2b9a22e-b37d-40fb-b75f-9218af81033d",
+      "status": "needs_review",
+      "current_attempt_id": "42700c5a-47fb-4477-a753-4b91969fc838",
+      "fence": 1,
+      "context_version": 1,
+      "issue_json": null
+    }
+  ],
+  "attempts": [
+    {
+      "id": "f5f55e1a-e7a3-4bca-a678-977ff174bb63",
+      "status": "finished",
+      "thread_id": "controlled-author-thread",
+      "turn_id": "controlled-author-turn",
+      "native_result_json": "{\"native_status\":\"completed\",\"summary\":\"Controlled authored proposal for actual independent review.\"}"
+    },
+    {
+      "id": "42700c5a-47fb-4477-a753-4b91969fc838",
+      "status": "finished",
+      "thread_id": "01a19ae6-bccf-7333-9026-c1a17e3656a3",
+      "turn_id": "01a19ae6-be62-7f21-9831-6239b44149e6",
+      "native_result_json": "{\"native_status\":\"completed\",\"summary\":\"Registré la decisión **requiere revisión** (`needs_revision`).\\n\\nLa captura completa dice «The sample contains 137 units.», mientras que el hallazgo y el borrador afirman **731**. Localicé `sample_count` mediante una consulta en inglés con Ken y leí el código: devuelve `SAMPLE_COUNT`, definido como **137**.\\n\\nLa revisión comprueba concordancia documental, sin reproducir mediciones. No ejecuté ni edité código, no navegué por la web y no cambié hallazgos, informes ni estados de aceptación.\"}"
+    }
+  ],
+  "dispatches": [
+    {
+      "model": "gpt-6.1-sol",
+      "status": "settled",
+      "native_status": "completed",
+      "observed_tokens": 95151,
+      "token_ceiling": 350000,
+      "catalog_hash": "a68516ef2f0a24931f978297a5bfacce8466468043ce82734d8021b261a2a585"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 1,
+      "project_id": 101,
+      "title": "Synthetic sample draft",
+      "content": "# Synthetic sample draft\n\nThe recorded sample contains 731 units.",
+      "status": "draft"
+    }
+  ],
+  "findings": [
+    {
+      "id": 1,
+      "status": "provisional",
+      "content": "The recorded sample contains 731 units."
+    }
+  ],
+  "citations": [
+    {
+      "finding_id": 1,
+      "source_id": 1,
+      "quote": "137 units"
+    }
+  ],
+  "sources": [
+    {
+      "id": 1,
+      "kind": "attachment",
+      "title": "Synthetic sample record",
+      "sha256": "6b34b9e703ed8ff1bdb0b7a4a9aa5e5e6063da8006cd29b8d6a53f887319ea1b"
+    }
+  ],
+  "peers": [
+    {
+      "kind": "business",
+      "state": "closed",
+      "reason": "never_released"
+    },
+    {
+      "kind": "native",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "ken",
+      "state": "closed",
+      "reason": "broker_verified"
+    },
+    {
+      "kind": "ken",
+      "state": "closed",
+      "reason": "broker_verified"
+    }
+  ],
+  "jobs": [],
+  "operations": [
+    {
+      "operation_key": "controlled-source",
+      "kind": "source.capture",
+      "result_json": "{\"kind\":\"attachment\",\"locator\":\"synthetic:sample\",\"operation_key\":\"controlled-source\",\"sha256\":\"6b34b9e703ed8ff1bdb0b7a4a9aa5e5e6063da8006cd29b8d6a53f887319ea1b\",\"source_id\":1}"
+    },
+    {
+      "operation_key": "controlled-finding",
+      "kind": "finding.record",
+      "result_json": "{\"confidence\":null,\"finding_id\":1,\"finding_version_schema\":1,\"finding_version_sha256\":\"173497dfa656d753dc04eb71a9f3164f4c7fcb607e7cb4c41235bc1bc9691f6d\",\"operation_key\":\"controlled-finding\",\"status\":\"provisional\"}"
+    },
+    {
+      "operation_key": "controlled-report",
+      "kind": "report.write",
+      "result_json": "{\"artifact_id\":1,\"operation_key\":\"controlled-report\",\"status\":\"draft\",\"title\":\"Synthetic sample draft\"}"
+    },
+    {
+      "operation_key": "review-a2b9a22e-b37d-40fb-b75f-9218af81033d-decision",
+      "kind": "review.record",
+      "result_json": "{\"decision_id\":1,\"finding_id\":1,\"independent_attempt\":true,\"operation_key\":\"review-a2b9a22e-b37d-40fb-b75f-9218af81033d-decision\",\"report_published\":false,\"review_run_id\":\"a2b9a22e-b37d-40fb-b75f-9218af81033d\",\"scientific_confidence\":null,\"subject_sha256\":\"e2a8ac599addb35c0786cc773501eb32bcbc31bd50f6b4f02ab7da9811f3c9ab\",\"task_accepted\":false,\"verdict\":\"needs_revision\"}"
+    }
+  ],
+  "task_status": "in_progress",
+  "review_detail": {
+    "project_id": 101,
+    "task_id": 1001,
+    "request_id": 1,
+    "run_id": "a2b9a22e-b37d-40fb-b75f-9218af81033d",
+    "operation_key": "native-review-a59807684b",
+    "finding_id": 1,
+    "subject_sha256": "e2a8ac599addb35c0786cc773501eb32bcbc31bd50f6b4f02ab7da9811f3c9ab",
+    "subject_current": true,
+    "currentness_reason": null,
+    "context_version": 1,
+    "status": "needs_review",
+    "reviewer_actor_id": "research-reviewer",
+    "reviewer_attempt_id": "42700c5a-47fb-4477-a753-4b91969fc838",
+    "reviewer_fence": 1,
+    "author_attempt_id": "f5f55e1a-e7a3-4bca-a678-977ff174bb63",
+    "decision_id": 1,
+    "decision": {
+      "checks": [
+        {
+          "criterion": "Identidad y alcance del objeto revisado",
+          "explanation": "Se leyó íntegramente el objeto congelado con hash e2a8ac599addb35c0786cc773501eb32bcbc31bd50f6b4f02ab7da9811f3c9ab, incluida la procedencia del autor controlled-author, su intento f5f55e1a-e7a3-4bca-a678-977ff174bb63, la cita y el borrador vinculado 1.",
+          "outcome": "supported"
+        },
+        {
+          "criterion": "Exactitud de la cita y respaldo de la cuenta",
+          "explanation": "La fuente 1 se leyó completa (30 caracteres, sin cola pendiente). Contiene «The sample contains 137 units.». La cita «137 units» está presente, pero contradice las 731 unidades del hallazgo y del borrador.",
+          "outcome": "concern"
+        },
+        {
+          "criterion": "Comprobación estática del código solicitado",
+          "explanation": "Se buscó con Ken en inglés y se leyó invoice.py, líneas 1–6 devueltas. SAMPLE_COUNT = 137 y sample_count() devuelve SAMPLE_COUNT. Esta lectura coincide con la captura; no se ejecutó ni editó el código.",
+          "outcome": "supported"
+        },
+        {
+          "criterion": "Calidad de la fuente y alcance metodológico",
+          "explanation": "La captura es un registro sintético breve suficiente para cotejar la cifra documental. No contiene método de medición, datos individuales ni validación experimental; la conclusión se limita a la concordancia documental.",
+          "outcome": "supported"
+        },
+        {
+          "criterion": "Reproducción de medición o ejecución del programa",
+          "explanation": "La solicitud limita la revisión a datos sintéticos guardados y lectura del código, sin ejecución. No se afirma haber reproducido un experimento.",
+          "outcome": "not_applicable"
+        }
+      ],
+      "evidence": [
+        {
+          "quote": "The sample contains 137 units.",
+          "source_id": 1
+        }
+      ],
+      "limitations": [
+        "La revisión comprueba el respaldo documental de la cuenta; no verifica una medición real ni la veracidad experimental del registro sintético.",
+        "El código se inspeccionó estáticamente en el estado devuelto por Ken; no se ejecutó y no se obtuvo una revisión de Git que permita extrapolar a otras versiones.",
+        "No se consultó la web ni otro proveedor, ni se incorporaron nuevas fuentes.",
+        "No se modificaron hallazgos, informes ni estados de aceptación."
+      ],
+      "rationale": "El hallazgo congelado afirma 731 unidades y el borrador vinculado repite esa cifra. La única captura citada, leída íntegramente, afirma 137 unidades; la cita guardada «137 units» es exacta pero no respalda 731. La lectura estática de invoice.py mediante Ken concuerda con 137. La cuenta declarada debe corregirse y el borrador alinearse con la fuente.",
+      "review_scope": "reported_checks_only",
+      "scientific_confidence": null,
+      "verdict": "needs_revision",
+      "verified_evidence": [
+        {
+          "quote": "The sample contains 137 units.",
+          "quote_offset": 0,
+          "source_id": 1,
+          "source_sha256": "6b34b9e703ed8ff1bdb0b7a4a9aa5e5e6063da8006cd29b8d6a53f887319ea1b",
+          "source": {
+            "captured_at": 1793600166.3089082,
+            "id": 1,
+            "kind": "attachment",
+            "locator": "synthetic:sample",
+            "project_id": 101,
+            "provenance": {},
+            "sha256": "6b34b9e703ed8ff1bdb0b7a4a9aa5e5e6063da8006cd29b8d6a53f887319ea1b",
+            "task_id": 1001,
+            "title": "Synthetic sample record"
+          }
+        }
+      ]
+    },
+    "scientific_confidence": null,
+    "review_scope": "reported_checks_only"
+  },
+  "search_events": [],
+  "observed_tokens": 95151,
+  "model_tool_names": [
+    "researcher_review_subject",
+    "researcher_source_read",
+    "ken_find",
+    "ken_read",
+    "researcher_review_decide"
+  ],
+  "memory_peak_bytes_sampled": 1393328128,
+  "pids_peak_sampled": 57,
+  "last_sampled_memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+  "all_sampled_domains_removed": true,
+  "source_unchanged": true,
+  "global_concession_inactive": true,
+  "global_peers_closed": true,
+  "grant_retired": true,
+  "native_auth_files_absent": true,
+  "native_credential_scan_complete": true,
+  "native_access_token_bytes_absent": true,
+  "product_scope_closed": true,
+  "egress_observations": [
+    {
+      "connections": 9,
+      "payload_bytes": 1078496,
+      "drained": true
+    }
+  ],
+  "harness_sha256": "f516207db0b8b7a05c3505ceb34b41d7735f7d46fd64803e798a15fd8d472b25",
+  "reported_token_accounting_note": "95151 is the native reported cumulative observed-token counter; not a billable-new-token estimate."
+}

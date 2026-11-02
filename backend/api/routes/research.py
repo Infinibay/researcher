@@ -16,6 +16,7 @@ from backend.api.models.research import (
     FindingDetail,
     FindingReceipt,
     RecordFinding,
+    RecordReview,
     ReportReceipt,
     ReportWindow,
     SourceReceipt,
@@ -33,6 +34,8 @@ from backend.research.models import (
     ResearchForbidden,
     ResearchInputError,
     ResearchNotFound,
+    ReviewCheck,
+    ReviewDecision,
     SourceTooLarge,
     SourceUnavailable,
 )
@@ -44,6 +47,35 @@ from backend.research.provenance import (
 from backend.research.retrieval_assets import RetrievalBusy, RetrievalUnavailable
 
 router = APIRouter(prefix="/api/research-tools", tags=["research-tools"])
+
+
+@router.get("/review-subject")
+async def read_review_subject(
+    ctx: Context,
+    offset: int = Query(0, ge=0),
+    max_chars: int = Query(12000, ge=1, le=20000),
+):
+    """Page only the authenticated reviewer's exact admitted subject."""
+    return await asyncio.to_thread(
+        ctx.store.read_review_subject, ctx.scope, offset=offset, max_chars=max_chars
+    )
+
+
+@router.post("/review-decisions", status_code=201)
+async def record_review(command: RecordReview, ctx: Context):
+    """Keep actor, attempt, target and subject version fixed by the stored grant."""
+    draft = ReviewDecision(
+        command.verdict,
+        command.rationale,
+        tuple(
+            ReviewCheck(c.criterion, c.outcome, c.explanation) for c in command.checks
+        ),
+        tuple(EvidenceReference(e.source_id, e.quote) for e in command.evidence),
+        tuple(command.limitations),
+    )
+    return await asyncio.to_thread(
+        ctx.store.record_review, ctx.scope, command.operation_key, draft
+    )
 
 
 @router.post("/questions", status_code=201)
@@ -337,6 +369,30 @@ def finding_query(
         if cancelled.is_set():
             raise ResearchForbidden("Semantic query authority was withdrawn")
         return result
+
+
+@router.get("/findings/{finding_id}/reviews")
+def finding_reviews(
+    finding_id: int,
+    ctx: Context,
+    request_id: int | None = Query(None, gt=0),
+    part: Literal["decision", "subject"] = "decision",
+    after_id: int = Query(0, ge=0),
+    limit: int = Query(20, ge=1, le=50),
+    offset: int = Query(0, ge=0),
+    max_chars: int = Query(12000, ge=1, le=20000),
+):
+    """Read review feedback without exposing owner admission or choosing another project."""
+    return ctx.store.read_reviews(
+        ctx.scope,
+        finding_id,
+        request_id=request_id,
+        part=part,
+        after_id=after_id,
+        limit=limit,
+        offset=offset,
+        max_chars=max_chars,
+    )
 
 
 @router.post("/findings", response_model=FindingReceipt)

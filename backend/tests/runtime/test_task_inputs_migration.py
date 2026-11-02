@@ -28,6 +28,7 @@ def test_version28_migration_preserves_rows_and_only_records_future_edits(
                     "task_inputs_schema.sql",
                     "run_input_schema.sql",
                     "native_state_schema.sql",
+                    "review_schema.sql",
                 )
                 else apply(conn, path)
             ),

@@ -16,7 +16,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from uuid import uuid4
 
-from backend.research.models import PERMISSIONS
+from backend.research.models import RESEARCH_PERMISSIONS, REVIEW_PERMISSIONS
 from backend.runtime.codex_session import ExecutionLimits
 from backend.runtime.contracts import (
     RunConflict,
@@ -159,7 +159,10 @@ class RuntimeService:
                 os.close(self._lock_fd)
                 self._lock_fd = None
 
-    async def submit(self, spec, *, repository_id=None, conversation_thread=None):
+    async def submit(
+        self, spec, *, repository_id=None, conversation_thread=None, review=None
+    ):
+        """Admit one owner request with an optional observed independent review target."""
         self._accepting()
         if spec.runtime != "codex":
             raise RunConflict(
@@ -170,6 +173,7 @@ class RuntimeService:
             spec,
             conversation_thread=conversation_thread,
             repository_id=repository_id,
+            review=review,
         )
         if previous is not None:
             return previous  # Receipt lookup never retries a queued start.
@@ -192,6 +196,7 @@ class RuntimeService:
             spec,
             conversation_thread=conversation_thread,
             binding=binding,
+            review=review,
         )
         return await self._schedule(run) if admitted else run
 
@@ -486,12 +491,20 @@ class RuntimeService:
             slot.attempt_id = lease.attempt_id
             slot.lease_deadline = time.monotonic() + 30
             heartbeat = asyncio.create_task(self._heartbeat(slot, lease))
+            review = await asyncio.to_thread(
+                self.store.review_request,
+                lease.project_id,
+                lease.run_id,
+                require_current=True,
+            )
             token = await asyncio.to_thread(
                 self.research.issue_grant,
                 project_id=lease.project_id,
                 task_id=lease.task_id,
                 agent_id=lease.actor_id,
-                permissions=set(PERMISSIONS),
+                permissions=set(
+                    REVIEW_PERMISSIONS if review is not None else RESEARCH_PERMISSIONS
+                ),
                 ttl_seconds=min(3600, self.limits.wall_seconds + 180),
             )
             scope = await asyncio.to_thread(self.research.authorize, token)

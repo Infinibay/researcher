@@ -4273,3 +4273,151 @@ Resume at139250c; avoid re-running Wiki tests after docs-only followup.
   before-json-budget logs/XML; final global will compare every failure identity again.
 
 - Native search delivery terminal: 1805 casos: 1702 pasan, 100 fallos heredados y 3 omitidos; 658 runtime pass, 14 new cases. Wheel452 pasan y 1 fallo heredado explícito, 623 exact Python/SQL matches. One subscription trial; frontend unchanged. All 43 scenarios and the whole goal remain open.
+
+## Active delivery: admitted version-bound research review (BASE60f5170)
+
+- Previous goal turn was concrete progress: committed native search, actual subscription/
+  Ken/source/finding/draft evidence, final wheel and source regressions. No old jobs live.
+- Desired path: owner-admitted reviewer run, frozen finding/evidence/source/report subject,
+  known original author attempt; independent actor/attempt, readonly business catalog and
+  explicit decision permission. Persist review assertions and actual operational origin
+  separately; no task acceptance/publication or scientific-confidence inference.
+- Shared contract plan: migration34 adds immutable review requests/decisions, not a new
+  inference loop. Preserve ordinary RunSpec/admission hashes; optional review intent
+  extends only review admissions. A review may coexist with its closed author proposal
+  (needs_review); queued/running/unreconciled or unrelated proposal blocks it. Same
+  task context correction/Stop revoke authority. Existing grant/receipt/worker ownership
+  and Codex/Ken mediation reused. No reviewer self-admission tool.
+- Subject hash binds complete finding row, exact saved citations, verified source hashes/
+  provenance and linked draft report snapshots; bounded complete snapshot, no silent
+  clipping. Legacy unknown author provenance remains unknown, not inferred from a role.
+  Stale or foreign subject/author attempts, self-review and wrong grants reject before
+  decision; operation retry recovers receipts without starting another model turn.
+- Needed consumers: SQLiteRunStore admission/input/views, RuntimeService grant selection,
+  owned runtime prompt/catalog, research API/client/definitions and finding owner readers;
+  legacy validate/reject/knowledge readers require explicit cutover/invalidation, not
+  interpreting historical active flags as the new review. Tests before each behavior;
+  new/changed declarations get English docstrings. Final installed-wheel/global checks
+  before commit. No per-step subagent; whole goal remains active.
+- Core review RED->GREEN: missing subject snapshot, typed owner target, independent
+  admission and decision APIs.22 focused core/owner/controlled-owned cases now cover
+  snapshots, hashes, native origin, self/stale/unrelated-run rejection, bounded decision
+  receipts, readonly grant/catalog, real HTTP mediation, CSRF owner admission, exact
+  evidence, context/revocation and actual controlled native/Ken/closure. No model turn.
+- Shared contract regression48pass after fixing four historical migration builders to
+  skip review_schema.sql when deliberately constructing versions23/27/28/29. Their old
+  expected versions/receipt semantics remain unchanged. Do not treat test fixtures with
+  newer migration34 applied as evidence for historical formats.
+- Actual index constraint found: one active-task SQL index included closed author
+  proposals. Migration34 adds explicit execution_kind, keeps one active run per kind,
+  and app admission allows only its closed author proposal alongside the review;
+  all working/unreconciled/unrelated runs still block admission. Immutable request and
+  decision tables preserve actor/attempt/version without promoting findings/reports.
+- Additional RED->GREEN: derived embedding BLOB broke canonical subject JSON; cache
+  excluded. Administrative acceptance of an unchanged report/author proposal wrongly
+  invalidated subject; transient administrative states excluded, original identity and
+  closed-origin eligibility retained. Missing captured-source joins previously dropped
+  citations silently; now integrity failure. Full scientific material/citations/source
+  provenance and linked report content/identities remain bound, no silent clipping.
+- Actual role integration: ordinary catalog remains22 (stable BUSINESS_NAMES alias),
+  review exposes16 readonly/question/decision names; ALL_BUSINESS_NAMES recognizes
+  both. Required Ken and analysis transports reused. Dedicated reviewer instructions
+  frozen with catalog; original request determines grant/catalog, never a prompt label.
+  Runtime owner view has explicit review target/decision metadata. Owner/API controls
+  pass, but UI, detailed fault review/migration downgrade, scientific/legacy consumer
+  cutover, final package/global and optional bounded real reviewer trial remain pending.
+- Owner/API version-bound admission now works through a CSRF-protected owner route;
+  scope/actor/subject cannot be supplied to reviewer tools. Frozen subject and decisions
+  have separate paged inspection paths; decision records remain attributed assertions,
+  scientific_confidenceNone, findingprovisional/reportdraft/taskin_progress unchanged.
+- Additional actual RED->GREEN: a new actor/attempt could still bind the author's
+  native thread; bind_thread AND bind_native now reject it before a dispatch. Native
+  review uses dedicated instructions, readonly16-tool business catalog, required Ken
+  and original owned control/closure, with no author mutation tools.26 focused cases
+  after safe downgrade tests: rollback allowed only before any review admission,
+  otherwise refuses loss; old work/IDs/FKs survive downgrade/re-upgrade.
+- Large directed runtime/research/bootstrap regression now running from current source,
+  run-review-directed.py (live unified handle from tool output), no model/account access.
+  No real reviewer subscription trial has been started. Frontend controls/history,
+  detailed boundary tests, final wheel/global receipts and consumer cutover remain open.
+- Preliminary directed regression terminal:929pass/0fail,250.30s, no model/account.
+  This ran before the final additional-evidence/source-window changes; not a receipt
+  for the final delivery bytes. Current focused review suite30pass/6.88s, owner source
+  compatibility5pass/1.52s. No subscription reviewer trial, wheel, global or browser QA
+  started for this delivery. All changes remain WIP on BASE60f5170, not committed.
+- Additional evidence was a concrete gap: a changed counter-source outside the author's
+  citations still showed its decision as current (2RED). Added immutable normalized
+  finding_review_evidence with scoped FKs, full source metadata snapshots and fingerprints;
+  changed text/provenance invalidates history/detail without transferring the decision.
+  Exact saved quotes remain separate from underlying measurement validity. Current30
+  pass includes both changes and independent countercitation retention/provenance.
+- Test correction: legacy db_conn has FK enforcement off; initial retention assertion
+  neither enabled it nor isolated a source used only by review. Fixed fixture to enable
+  FK and use genuine counterevidence without finding_sources links; it now tests the
+  new relation instead of the pre-existing citation FK. No product rollback workaround.
+- Existing owner source viewer lacked actual/expected hash validation. Reused that API
+  for review evidence, added saved-text verification and optional expected_sha256 plus
+  locator disclosure; regression5pass. UI does not need a duplicate source transport.
+- Before finalizing, resolve current-claim author provenance: author_origin currently
+  links a finding's original writer operation by id/agent but does not verify current
+  claim content against the original effect/intent. A later body edit could falsely
+  retain that author. Add a producer version seal in existing effect receipts and/or
+  verified reconstruction of historical intent; unknown provenance must remain unknown.
+  Also ordinary finding metadata still returns legacy not_recorded even after actual
+  independent decisions; add truthful read feedback/presence and a scoped read path.
+  These are required before the review delivery is committed, alongside UI and remaining
+  validation/cutover obligations. Do not declare the whole goal or review work complete.
+
+- Review continuation (2026-11-02): sealed current finding content/topic/citations against
+  original author effect (new seal + exact historical intent reconstruction); altered claims
+  lose attributed origin. Shared authenticated review history/detail feedback for ordinary
+  agents now reuses the same SQL transaction. Review presence metadata distinguishes stored
+  decisions from not-checked currentness. Focused backend36pass/7.86s after these changes.
+- Findings review panel implemented against the selected evidence-ledger concept. Explicit
+  observed-version start, registered-repository choice, task-wide active-review guard, real
+  saved verdict/checks/limits, old/unknown version warnings, history and expected-hash source
+  reader. Pending HTTP retries retain scope/version/nonce (session storage, no source text),
+  no automatic mutation retry. Need browser interaction proof and remaining recovery cases.
+  Frontend57pass/0fail; production build passes after replacing Array.at for ES target.
+  These are focused checks, not full-plan completion. No new model/subscription trial.
+
+- Review delivery terminal (2026-11-02, BASE60f5170): 1841 source cases,1738pass,
+  100 EXACT inherited failures,3skip;694runtime pass;36new cases. Global330.62s.
+  Directed939pass/252.10s. Frozen wheel488pass+1explicit inherited RecordFindingTool
+  failure;628Python/SQL bytes match managed source. No new failure identities.
+- Frontend57pass and final production build. Browser9functional states plus3final
+  widths (1440/390/320),0axe violations or page errors. Additional persisted retry:
+  lost success + GET503 + reload -> two identical POSTs, one controlled generation.
+  Claim moved before detailed review after visual inspection; selected ledger reused.
+- Real independent reviewer trial native-review-a59807684b: onegpt-6.1-sol subscription
+  turn, publishedKen0.18.0, Codex0.166.0, native web disabled, no API-key fallback.
+  Controlled author produced731 claim with137 source through actual author authority;
+  real reviewer read subject/source and Ken code, recordedneeds_revision with exact
+  quote and documentary/methodological limitations. Original finding/report/task stay
+  provisional/draft/in_progress.95151native cumulative observed tokens (not billing).
+  All peers/domains/grants closed, concession inactive, copied auth/access token absent.
+  Reuse this valid trial; do not repeat it for unchanged behavior/documentation.
+- Local documentation audit122qualified new/changed Python definitions with English
+  docstrings; relevant new TS interfaces/hooks/helpers/components have JSDoc. Full-branch
+  audit remains open. Docs: architecture/finding-reviews.md, review-results.json,
+  review-packaging.json, native-review-live.json, review-docstrings.json and browser audit.
+- Fixture rework retained privately: browser harness initially referenced nonexistent
+  ResearchScope.run_id; changed to grant_id. Restart then encountered existing workspace
+  directory; made only fixture directory creation idempotent. Neither required a product
+  workaround or model turn. Earlier failed fixture DB/receipts retained. A docstring
+  insertion was initially placed after a decorator; parser caught it before final wheel,
+  corrected and rebuilt. Final wheel/global verify the corrected bytes.
+- Review is a bounded delivered capability, not modernization completion. Next migrate
+  legacy validate/reject/knowledge consumers and dependency invalidation using the actual
+  review contract; then role/flow/development cutover. All43 broad scenarios,6remaining
+  routes,0/12full acceptance,100baseline failures, full documentation audit and final
+  whole-branch independent review remain open. Goal stays active.
+
+- Quality: Ruff lint passes across24changed Python files. Whole-file formatting check
+  passes22/24; exceptions are tools/base/db.py (pre-existing formatting throughout) and
+  test_run_input_migration.py (the now-long schema exclusion tuple). No mandatory format
+  gate found in pyproject. Formatting both whole files is deferred to avoid mixing
+  unrelated legacy changes or invalidating already-frozen byte receipts for style only.
+  Ruling: keep these two migration edits minimal and disclose the formatting exceptions;
+  cost is style inconsistency, not an unverified behavior change. Do not report format
+  completely green. Full modernization and final review remain open.

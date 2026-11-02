@@ -1,13 +1,17 @@
+/** Same-origin owner transport with explicit HTTP failures and encoded query values. @module */
 import { ownerFetch } from './session.ts'
 
+/** Preserve HTTP status so callers can distinguish rejection from an unavailable receipt. */
 export class ApiError extends Error {
   status: number
+  /** Keep the server explanation and response status without treating it as empty data. */
   constructor(status: number, message: string) {
     super(message)
     this.status = status
   }
 }
 
+/** Fetch owner-authorized JSON; propagate non-success responses as errors. */
 export async function fetchApi<T>(
   path: string,
   options?: RequestInit,
@@ -24,7 +28,7 @@ export async function fetchApi<T>(
     let message = res.statusText
     try {
       const body = await res.json()
-      message = body.detail || body.message || message
+      message = body.detail || body.message || body.error || message
     } catch {}
     throw new ApiError(res.status, message)
   }
@@ -33,6 +37,7 @@ export async function fetchApi<T>(
   return res.json()
 }
 
+/** Encode optional filters as query values without changing the base endpoint. */
 export function buildUrl(
   base: string,
   params?: Record<string, string | number | boolean | null | undefined>,

@@ -75,3 +75,22 @@
 .findings-assessment summary {min-height:2.75rem;padding-block:.65rem;color:var(--work-accent);cursor:pointer}
 
 .findings-filters > div {display:grid;gap:.25rem}
+
+/* Review decisions preserve the ledger's quiet hierarchy and disclose technical identity on demand. */
+.findings-review h2 {font-size:1.35rem;margin-bottom:.5rem}
+.findings-review h3 {font-size:1.1rem;margin:1.25rem 0 .5rem}
+.findings-review > header > p {max-width:65ch}
+.findings-review-start,.findings-review-status {margin-top:1rem;padding:1rem;background:var(--work-wash)}
+.findings-review-start > button {margin-block:.75rem .25rem}
+.findings-review-status a {display:inline-block;color:var(--work-accent);text-decoration:underline;padding-block:.75rem}
+.findings-review-status button {display:block;border:1px solid var(--work-line)}
+.findings-review-history {display:grid;gap:.5rem;margin-block:1.25rem}
+.findings-review-decision {margin-top:1.25rem;border-top:1px solid var(--work-line);padding-top:1rem}
+.findings-review-warning {border-left:3px solid #936720;background:#f9eacb;color:#654512;padding:.75rem 1rem}
+.findings-review-checks {list-style:none;padding:0}
+.findings-review-checks > li {border-top:1px solid var(--work-line);padding:.75rem 0}
+.findings-review ul:not(.findings-review-checks) {list-style:disc;padding-left:1.25rem}
+.findings-review-decision dl {display:grid;grid-template-columns:minmax(6rem,1fr) minmax(0,2fr);gap:.5rem;margin-block:1rem}
+.findings-review-decision dd {overflow-wrap:anywhere}
+.findings-review-decision summary {min-height:2.75rem;padding-block:.75rem;cursor:pointer}
+.findings-review .findings-citation blockquote {margin-block:.75rem}

@@ -11,11 +11,16 @@ from uuid import uuid4
 
 import httpx
 
+from backend.research.models import RESEARCH_PERMISSIONS, REVIEW_PERMISSIONS
 from backend.runtime.analysis_tools import AnalysisTools
 from backend.runtime.authority_journal import WitnessedAuthorityJournal
 from backend.runtime.broker_inference import broker_inference
 from backend.runtime.broker_stdio import AsyncPeerBroker
-from backend.runtime.business_mediation import BusinessTools
+from backend.runtime.business_mediation import (
+    RESEARCH_NAMES,
+    REVIEW_NAMES,
+    BusinessTools,
+)
 from backend.runtime.codex_rpc import JsonRpcClient, RpcProtocolError
 from backend.runtime.codex_session import CodexSession, ExecutionLimits
 from backend.runtime.egress_proxy import EgressPolicy
@@ -29,6 +34,7 @@ from backend.runtime.native_inference import (
 )
 from backend.runtime.native_state import NativeState
 from backend.runtime.peer_broker import PeerBroker
+from backend.runtime.review_instructions import REVIEW_INSTRUCTIONS
 from backend.runtime.subscription_auth import ExternalChatGPTAuth
 from backend.runtime.workspaces import PEER_WORKSPACE
 
@@ -142,6 +148,19 @@ class OwnedCodexRuntime:
             lease.context_version,
         ):
             raise ValueError("Business authority differs from original attempt")
+        review = await _settled(
+            registry.runs.review_request,
+            lease.project_id,
+            lease.run_id,
+            require_current=True,
+        )
+        expected_permissions = (
+            REVIEW_PERMISSIONS if review is not None else RESEARCH_PERMISSIONS
+        )
+        if scope.permissions != expected_permissions:
+            raise ValueError(
+                "Business capabilities differ from the original admitted execution kind"
+            )
         limits = limits or ExecutionLimits(180, 90, 1, 25, 350000)
         workspace = Path(workspace).resolve(strict=True)
         native_peer = peer_owner.ids["native"]
@@ -245,7 +264,9 @@ class OwnedCodexRuntime:
                                 workspace=PEER_WORKSPACE,
                                 model=self.model,
                                 limits=limits,
-                                developer_instructions=INSTRUCTIONS,
+                                developer_instructions=REVIEW_INSTRUCTIONS
+                                if review is not None
+                                else INSTRUCTIONS,
                                 sandbox="read-only",
                                 subscription_auth=ExternalChatGPTAuth(
                                     self.token_source.tokens, active=admitted
@@ -258,6 +279,9 @@ class OwnedCodexRuntime:
                                     transport=httpx.ASGITransport(app=self.app),
                                     active=admitted,
                                     withdraw=withdraw,
+                                    names=REVIEW_NAMES
+                                    if review is not None
+                                    else RESEARCH_NAMES,
                                 ) as peer,
                                 AnalysisTools(
                                     journal=registry.runs,

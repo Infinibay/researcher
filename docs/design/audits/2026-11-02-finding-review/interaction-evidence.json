@@ -1,0 +1,141 @@
+{
+  "result": "passed",
+  "states": [
+    {
+      "name": "desktop-before-request",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-02-finding-review/desktop-before-request.png",
+      "sha256": "6ae5160f226bc1d31904174073aafb28ce7274423a707d6cb3dd7f5a3da8fb43"
+    },
+    {
+      "name": "desktop-decision",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-02-finding-review/desktop-decision.png",
+      "sha256": "f2cbdc4e474edd6bc7cf15d82690225a8dcb2ea2ae38ecd18e7423b1d791ddda"
+    },
+    {
+      "name": "desktop-reviewed-capture",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-02-finding-review/desktop-reviewed-capture.png",
+      "sha256": "ebe3e07bb247af42b07e2ff66825cb5b5472ded3deaecf7e36201526339adba9"
+    },
+    {
+      "name": "desktop-lost-receipt-reconciled",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-02-finding-review/desktop-lost-receipt-reconciled.png",
+      "sha256": "89f6c9d2711afa364e95038bffa90e99d8193366a58dae9c6ad082371d655d2c"
+    },
+    {
+      "name": "mobile-decision",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-02-finding-review/mobile-decision.png",
+      "sha256": "fbd4f2fa2f5ad1d874ee51a29b6014fd0d483e934a1a9d35a893e9bee2a4717e"
+    },
+    {
+      "name": "narrow-decision",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 320,
+        "scroll": 320
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-02-finding-review/narrow-decision.png",
+      "sha256": "8e42d6c654939f2ba1181ed18d62f90d4619358f9a919184553fd731014f7ebc"
+    },
+    {
+      "name": "desktop-changed-source",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-02-finding-review/desktop-changed-source.png",
+      "sha256": "f61d8cba50dd0689b8145f0b52667f1ccc3639380093fe135a692a707ee1d0ce"
+    },
+    {
+      "name": "desktop-unverifiable-currentness",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-02-finding-review/desktop-unverifiable-currentness.png",
+      "sha256": "8033d28c8c0fbfce3643e86cf9fefd625469a82175c0e7cba102968a938f12b9"
+    },
+    {
+      "name": "desktop-foreign-detail-blocked",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-02-finding-review/desktop-foreign-detail-blocked.png",
+      "sha256": "f06bbd9ef789b98ac503d37f826df35a95bc826ccf2de55cb20e27b9f660ae5b"
+    }
+  ],
+  "actions": [
+    "Explicit scoped request -> independently bound controlled decision, limited checks, actual quoted source, expected hash, focus return, close retains saved decision",
+    "Lost successful POST receipt reconciles from scoped operation key without a second generation or automatic model retry",
+    "A saved decision is explicitly old when its original source changes; no transfer to the new source version",
+    "Source corruption remains an error plus inspectable attributed decision, not empty history or current confidence",
+    "Foreign-project review payload cannot display even if delivered under a current scoped URL"
+  ],
+  "errors": [],
+  "model_turns": 0,
+  "controlled_generation": true
+}

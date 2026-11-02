@@ -19,9 +19,14 @@ from backend.runtime.business_definitions import definitions
 
 
 class HostBusinessPeer:
-    def __init__(self, client, *, active, withdraw):
+    """Serve host-selected business tools only while the original attempt authority remains live."""
+
+    def __init__(self, client, *, active, withdraw, names=None):
+        """Expose only the business names selected by the trusted attempt controller."""
         self._client, self._active, self._withdraw = client, active, withdraw
-        self._definitions = {tool.name: tool for tool in definitions(client)}
+        self._definitions = {
+            tool.name: tool for tool in definitions(client, names=names)
+        }
         self._closing = None
         self.closed = False
 
@@ -85,7 +90,7 @@ class HostBusinessPeer:
 
 @asynccontextmanager
 async def host_business(
-    *, api_url, token, withdraw, active=lambda: True, transport=None
+    *, api_url, token, withdraw, active=lambda: True, transport=None, names=None
 ):
     """The caller supplies the API's actual live-grant withdrawal, not a receipt.
 
@@ -94,7 +99,7 @@ async def host_business(
     The host must still own/enroll its API actor and persist grant retirement.
     """
     async with AsyncResearcherHTTPClient(api_url, token, transport=transport) as client:
-        peer = HostBusinessPeer(client, active=active, withdraw=withdraw)
+        peer = HostBusinessPeer(client, active=active, withdraw=withdraw, names=names)
         try:
             yield peer
         finally:

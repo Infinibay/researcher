@@ -17,6 +17,8 @@ for arg in args:
         config.update(tomllib.loads(next(args)))
 steps = 0
 source = finding = job = None
+review_mode = False
+review_subject = None
 
 
 def send(message):
@@ -40,6 +42,9 @@ def call(name, arguments):
 
 
 def next_tool(response=None):
+    """Advance controlled author or reviewer generation while using the real admitted tool bridge."""
+    if review_mode:
+        return next_review_tool(response)
     global steps, source, finding, job
     if response is not None:
         Path("/home/actor/.codex/fixture-progress.json").write_text(
@@ -122,6 +127,79 @@ def next_tool(response=None):
         )
 
 
+def next_review_tool(response=None):
+    """Exercise admitted review reads and one decision without any author mutation."""
+    global steps, review_subject
+    if response is not None:
+        if not response["success"]:
+            raise RuntimeError("Controlled review tool failed: " + str(response))
+        value = json.loads(response["contentItems"][0]["text"])
+        if steps == 2:
+            assert value["next_offset"] is None
+            review_subject = json.loads(value["content"])
+        if steps == 3:
+            assert "137 units" in value["content"]
+    steps += 1
+    if steps == 1:
+        call("ken_read", {"path": "fact.txt"})
+    elif steps == 2:
+        call("researcher_review_subject", {"max_chars": 20000})
+    elif steps == 3:
+        call(
+            "researcher_source_read",
+            {"source_id": review_subject["evidence"][0]["source"]["id"]},
+        )
+    elif steps == 4:
+        call(
+            "researcher_review_decide",
+            {
+                "operation_key": "controlled-review-decision",
+                "verdict": "supported",
+                "rationale": "The captured text supports the recorded count.",
+                "checks": [
+                    {
+                        "criterion": "claim_support",
+                        "outcome": "supported",
+                        "explanation": "The source explicitly reports 137 units.",
+                    }
+                ],
+                "evidence": [
+                    {
+                        "source_id": review_subject["evidence"][0]["source"]["id"],
+                        "quote": "137 units",
+                    }
+                ],
+                "limitations": [
+                    "The original measurement was not independently repeated."
+                ],
+            },
+        )
+    else:
+        send(
+            {
+                "method": "item/completed",
+                "params": {
+                    "threadId": "owned-thread",
+                    "turnId": "owned-turn",
+                    "item": {
+                        "id": "answer",
+                        "type": "agentMessage",
+                        "text": "Revisión registrada con alcance limitado; tarea sin aceptar.",
+                    },
+                },
+            }
+        )
+        send(
+            {
+                "method": "turn/completed",
+                "params": {
+                    "threadId": "owned-thread",
+                    "turn": {"id": "owned-turn", "status": "completed", "error": None},
+                },
+            }
+        )
+
+
 for line in sys.stdin:
     message = json.loads(line)
     method = message.get("method")
@@ -184,12 +262,17 @@ for line in sys.stdin:
                 "stderr": output.stderr,
             }
     elif method == "thread/start":
+        review_mode = any(
+            tool["name"] == "researcher_review_decide"
+            for tool in params["dynamicTools"]
+        )
         Path("/home/actor/.codex/fixture-thread.json").write_text(
             json.dumps(
                 {
                     "model": params["model"],
                     "cwd": params["cwd"],
                     "catalog": params["dynamicTools"],
+                    "developer_instructions": params.get("developerInstructions"),
                 }
             )
         )

@@ -1,5 +1,6 @@
 """Read projections for the authenticated owner, never agent bearer authority."""
 
+import hashlib
 import json
 from contextlib import closing
 from dataclasses import asdict
@@ -7,7 +8,7 @@ from pathlib import PurePosixPath
 
 from backend.db.connection import connect
 from backend.runtime.command_output import output_window
-from backend.runtime.contracts import RunNotFound, identity, text
+from backend.runtime.contracts import RunConflict, RunNotFound, identity, text
 from backend.runtime.run_inputs import MESSAGE_SELECT
 from backend.runtime.sqlite_runs import SQLiteRunStore
 
@@ -47,7 +48,10 @@ def _job_summary(row, run):
 
 
 class OwnerRuntimeView:
+    """Read owner-visible execution receipts and captured evidence without issuing agent authority."""
+
     def __init__(self, database):
+        """Bind owner read projections to the same existing database as the durable run store."""
         self.database = str(database)
         self.runs = SQLiteRunStore(database)
 
@@ -194,6 +198,7 @@ class OwnerRuntimeView:
         }
 
     def workspace(self, project_id, task_id):
+        """Return scoped task inputs, registered repositories and saved execution/question state."""
         context = self.runs.context_snapshot(project_id, task_id)
         runs = self.runs.task_runs(project_id, task_id)
         with closing(connect(self.database, existing_only=True)) as conn:
@@ -223,6 +228,8 @@ class OwnerRuntimeView:
                 (project_id, task_id),
             ).fetchall()
         return {
+            "project_id": project_id,
+            "task_id": task_id,
             "context": context,
             "runs": [asdict(run) for run in runs],
             "sources": [dict(row) for row in sources],
@@ -245,7 +252,10 @@ class OwnerRuntimeView:
             ],
         }
 
-    def source(self, project_id, source_id, *, offset=0, max_chars=12000):
+    def source(
+        self, project_id, source_id, *, offset=0, max_chars=12000, expected_sha256=None
+    ):
+        """Read saved owner evidence only after checking actual and optional reviewed hashes."""
         with closing(connect(self.database, existing_only=True)) as conn:
             row = conn.execute(
                 "SELECT * FROM research_sources WHERE project_id=? AND id=?",
@@ -254,12 +264,19 @@ class OwnerRuntimeView:
             if row is None:
                 raise RunNotFound("Captured source not found in this project")
             content = row["content"]
+            if hashlib.sha256(content.encode()).hexdigest() != row["sha256"]:
+                raise RunConflict("Captured source hash differs from its saved text")
+            if expected_sha256 is not None and row["sha256"] != expected_sha256:
+                raise RunConflict(
+                    "Captured source version differs from the reviewed hash"
+                )
             end = min(len(content), offset + max_chars)
             return {
                 "source_id": source_id,
                 "project_id": project_id,
                 "title": row["title"],
                 "kind": row["kind"],
+                "locator": row["locator"],
                 "sha256": row["sha256"],
                 "captured_at": row["captured_at"],
                 "provenance": json.loads(row["provenance_json"]),

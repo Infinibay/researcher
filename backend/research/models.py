@@ -4,7 +4,7 @@ import re
 from dataclasses import dataclass, field
 from typing import Literal
 
-PERMISSIONS = frozenset(
+RESEARCH_PERMISSIONS = frozenset(
     {
         "sources.read",
         "sources.capture",
@@ -17,6 +17,17 @@ PERMISSIONS = frozenset(
         "wiki.write",
     }
 )
+REVIEW_PERMISSIONS = frozenset(
+    {
+        "sources.read",
+        "findings.read",
+        "reports.read",
+        "wiki.read",
+        "questions.ask",
+        "findings.review",
+    }
+)
+PERMISSIONS = RESEARCH_PERMISSIONS | REVIEW_PERMISSIONS
 
 
 class ResearchInputError(ValueError):
@@ -37,6 +48,24 @@ class OperationConflict(RuntimeError):
 
 class InvalidEvidence(ResearchInputError):
     """A citation or report basis does not support the requested record."""
+
+
+@dataclass(frozen=True)
+class ReviewTarget:
+    """Owner-observed finding and complete subject fingerprint for review admission."""
+
+    finding_id: int
+    subject_sha256: str
+
+    def __post_init__(self):
+        """Reject ambiguous identities before constructing a durable review request."""
+        positive_id(self.finding_id)
+        if not isinstance(self.subject_sha256, str) or not re.fullmatch(
+            r"[0-9a-f]{64}", self.subject_sha256
+        ):
+            raise ResearchInputError(
+                "Review subject requires an observed SHA-256 fingerprint"
+            )
 
 
 def bounded_text(value: str, name: str, max_bytes: int) -> None:
@@ -106,6 +135,63 @@ class EvidenceReference:
         if self.quote not in source["content"]:
             raise InvalidEvidence(
                 "Citation is not an exact excerpt of the captured source"
+            )
+
+
+@dataclass(frozen=True)
+class ReviewCheck:
+    """One attributed reviewer check, explicitly distinguishing missing assessment."""
+
+    criterion: str
+    outcome: str
+    explanation: str
+
+    def __post_init__(self):
+        """Bound named checks without inferring quality from a checkbox count."""
+        bounded_text(self.criterion, "review criterion", 80)
+        bounded_text(self.explanation, "review explanation", 4000)
+        if self.outcome not in (
+            "supported",
+            "concern",
+            "not_checked",
+            "not_applicable",
+        ):
+            raise ResearchInputError("Unsupported review check outcome")
+
+
+@dataclass(frozen=True)
+class ReviewDecision:
+    """Version-specific reviewer assertions and exact evidence, never task acceptance."""
+
+    verdict: str
+    rationale: str
+    checks: tuple[ReviewCheck, ...]
+    evidence: tuple[EvidenceReference, ...]
+    limitations: tuple[str, ...]
+
+    def __post_init__(self):
+        """Require a bounded, internally consistent explanation and explicit limits."""
+        if self.verdict not in ("supported", "needs_revision", "inconclusive"):
+            raise ResearchInputError("Unsupported review verdict")
+        bounded_text(self.rationale, "review rationale", 12000)
+        if not 1 <= len(self.checks) <= 12 or len(
+            {c.criterion for c in self.checks}
+        ) != len(self.checks):
+            raise ResearchInputError("A review needs 1–12 distinct explained checks")
+        if len(self.evidence) > 20 or len(set(self.evidence)) != len(self.evidence):
+            raise InvalidEvidence(
+                "A review permits at most 20 distinct exact citations"
+            )
+        if not 1 <= len(self.limitations) <= 12:
+            raise ResearchInputError("A review needs 1–12 explicit scope limitations")
+        for limit in self.limitations:
+            bounded_text(limit, "review limitation", 2000)
+        if self.verdict == "supported" and (
+            not self.evidence
+            or any(c.outcome in ("concern", "not_checked") for c in self.checks)
+        ):
+            raise InvalidEvidence(
+                "A supported verdict needs exact evidence and no explicitly unresolved checks"
             )
 
 

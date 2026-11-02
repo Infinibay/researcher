@@ -102,6 +102,75 @@ class StartRun(BaseModel):
     repository_id: int | None = Field(None, ge=1)
 
 
+class StartFindingReview(BaseModel):
+    """Owner-observed version and task scope for a separately admitted reviewer."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
+    context_version: int = Field(ge=1)
+    finding_id: int = Field(ge=1)
+    subject_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    repository_id: int | None = Field(None, ge=1)
+    request: str = Field(
+        default="Revisa el hallazgo y sus fuentes guardadas. Explica qué comprobaste, qué decisión registraste y qué sigue sin conocerse.",
+        min_length=1,
+        max_length=12000,
+    )
+
+
+@router.get("/{project_id}/findings/{finding_id}/review-state")
+async def finding_review_state(
+    project_id: int,
+    finding_id: int,
+    request: Request,
+    after_id: int = Query(0, ge=0),
+    limit: int = Query(20, ge=1, le=50),
+):
+    """Inspect an explicit current subject before requesting independently admitted work."""
+    data = await asyncio.to_thread(
+        read_store(request).finding_review_state,
+        project_id,
+        finding_id,
+        after_id=after_id,
+        limit=limit,
+    )
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
+@router.get("/{project_id}/finding-reviews/{request_id}")
+async def finding_review_detail(project_id: int, request_id: int, request: Request):
+    """Show the actual decision and its old/current subject identity without accepting it."""
+    data = await asyncio.to_thread(
+        read_store(request).finding_review_detail, project_id, request_id
+    )
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
+@router.post("/{project_id}/tasks/{task_id}/finding-reviews", status_code=202)
+async def start_finding_review(
+    project_id: int, task_id: int, body: StartFindingReview, request: Request
+):
+    """Only an owner request can admit this host-selected independent reviewer role."""
+    from backend.research.models import ReviewTarget
+
+    spec = RunSpec(
+        project_id,
+        task_id,
+        "research-reviewer",
+        body.context_version,
+        body.operation_key,
+        body.request,
+        "codex",
+    )
+    return asdict(
+        await service(request).submit(
+            spec,
+            repository_id=body.repository_id,
+            review=ReviewTarget(body.finding_id, body.subject_sha256),
+        )
+    )
+
+
 class RetryStart(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
     operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
@@ -308,12 +377,15 @@ async def owner_source(
     request: Request,
     offset: int = Query(0, ge=0),
     max_chars: int = Query(12000, ge=1, le=20000),
+    expected_sha256: str | None = Query(None, pattern=r"^[0-9a-f]{64}$"),
 ):
+    """Read an owner-scoped saved source window, verifying actual and optional reviewed hashes."""
     data = await asyncio.to_thread(
         owner_view(request).source,
         project_id,
         source_id,
         offset=offset,
         max_chars=max_chars,
+        expected_sha256=expected_sha256,
     )
     return JSONResponse(data, headers={"Cache-Control": "no-store"})

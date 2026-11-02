@@ -63,6 +63,25 @@ class RecordFinding(Command):
     evidence: list[Citation] = Field(min_length=1, max_length=20)
 
 
+class ReviewCheckBody(BaseModel):
+    """One explicit reviewer assertion; not_checked is distinct from supported."""
+
+    model_config = ConfigDict(extra="forbid")
+    criterion: str = Field(min_length=1, max_length=80)
+    outcome: Literal["supported", "concern", "not_checked", "not_applicable"]
+    explanation: str = Field(min_length=1, max_length=4000)
+
+
+class RecordReview(Command):
+    """Decide only the reviewer grant's stored subject, with no caller-chosen scope."""
+
+    verdict: Literal["supported", "needs_revision", "inconclusive"]
+    rationale: str = Field(min_length=1, max_length=12000)
+    checks: list[ReviewCheckBody] = Field(min_length=1, max_length=12)
+    evidence: list[Citation] = Field(max_length=20)
+    limitations: list[str] = Field(min_length=1, max_length=12)
+
+
 class WriteReport(Command):
     """Persist a draft linked to retained findings; this command does not accept a task."""
 
@@ -170,6 +189,8 @@ class FindingDetail(TextWindow):
     validation_method: str | None
     reproducibility_score: float | None
     review_status: str
+    legacy_review_status: str | None = None
+    review: dict[str, Any] | None = None
     legacy_sources_json: str | None
     legacy_sources_total_chars: int
     legacy_sources_next_offset: int | None

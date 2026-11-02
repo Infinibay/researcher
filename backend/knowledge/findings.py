@@ -13,6 +13,7 @@ import sqlite3
 from contextlib import closing, contextmanager
 
 from backend.db.connection import connect
+from backend.knowledge.reviews import review_presence
 from backend.research.models import (
     OperationConflict,
     ResearchInputError,
@@ -109,7 +110,7 @@ def filters(
     return " AND ".join(clauses), params
 
 
-def metadata(row):
+def metadata(row, *, review=None):
     """Keep historical assertions visible while leaving scientific confidence unknown."""
     result = dict(row)
     result["review_status"] = (
@@ -118,6 +119,10 @@ def metadata(row):
         or result.get("status") in {"active", "superseded"}
         else "not_recorded"
     )
+    result["legacy_review_status"] = result["review_status"]
+    result["review"] = review
+    if review is not None:
+        result["review_status"] = review["status"]
     result["scientific_confidence"] = None
     result["confidence_origin"] = (
         "stored_declaration" if result.get("confidence") is not None else "unknown"
@@ -171,9 +176,10 @@ def list_findings(conn, project_id, *, after_id=0, limit=50, **selection):
         (*params, after_id, limit + 1),
     ).fetchall()
     selected = rows[:limit]
+    reviews = review_presence(conn, project_id, [row["id"] for row in selected])
     return {
         "project_id": project_id,
-        "items": [metadata(row) for row in selected],
+        "items": [metadata(row, review=reviews.get(row["id"])) for row in selected],
         "next_after_id": selected[-1]["id"] if len(rows) > limit else None,
         "total_matching": total,
         "search_kind": "fts5_lexical" if selection.get("query") is not None else None,
@@ -221,7 +227,9 @@ def _finding(conn, project_id, finding_id):
     ).fetchone()
     if row is None:
         raise ResearchNotFound("Finding not found in this project")
-    return metadata(row)
+    return metadata(
+        row, review=review_presence(conn, project_id, [finding_id]).get(finding_id)
+    )
 
 
 def evidence(conn, project_id, finding_id, *, offset=0, limit=20):
@@ -425,8 +433,9 @@ def finding_corpus(conn, project_id, *, finding_ids=None, **selection):
     ).fetchall()
     units = Units()
     snapshots = []
+    reviews = review_presence(conn, project_id, [row["id"] for row in rows])
     for row in rows:
-        item = metadata(row)
+        item = metadata(row, review=reviews.get(row["id"]))
         snapshot = hashlib.sha256(
             json.dumps(
                 item,

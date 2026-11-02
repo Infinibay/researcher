@@ -149,6 +149,7 @@ class SQLiteResearchStore:
             raise ResearchForbidden("Task no longer accepts tool operations")
 
     def _check_scope(self, conn, scope: ResearchScope, permission: str | None = None):
+        """Recheck stored grant, live attempt, context and review-subject authority in this transaction."""
         row = conn.execute(
             "SELECT g.*,c.version AS current_version FROM tool_grants g JOIN task_contexts c ON c.task_id=g.task_id WHERE g.id=?",
             (scope.grant_id,),
@@ -210,6 +211,22 @@ class SQLiteResearchStore:
                     "Execution attempt no longer owns this tool scope"
                 )
         self._task(conn, scope.project_id, scope.task_id)
+        from backend.knowledge.reviews import scope_request, verify_current
+        from backend.research.models import REVIEW_PERMISSIONS
+
+        review = scope_request(conn, scope)
+        if review is not None:
+            if not set(json.loads(row["permissions_json"])) <= REVIEW_PERMISSIONS:
+                raise ResearchForbidden(
+                    "Reviewer grants cannot acquire author mutation permissions"
+                )
+            if permission in {
+                "sources.read",
+                "findings.read",
+                "reports.read",
+                "wiki.read",
+            }:
+                verify_current(conn, review)
 
     @staticmethod
     def _permission(kind):
@@ -220,6 +237,7 @@ class SQLiteResearchStore:
             "report.write": "reports.write",
             "question.ask": "questions.ask",
             "wiki.write": "wiki.write",
+            "review.record": "findings.review",
         }[kind]
 
     @staticmethod
@@ -280,6 +298,214 @@ class SQLiteResearchStore:
                 ),
             )
             return result
+
+    def read_reviews(
+        self,
+        scope,
+        finding_id,
+        *,
+        request_id=None,
+        part="decision",
+        after_id=0,
+        limit=20,
+        offset=0,
+        max_chars=12000,
+    ):
+        """Read attributed feedback or frozen old subjects in the same authenticated snapshot."""
+        from backend.knowledge.findings import window
+        from backend.knowledge.reviews import (
+            canonical,
+            finding_review_detail,
+            finding_review_state,
+        )
+        from backend.research.models import ResearchInputError
+
+        positive_id(finding_id)
+        if part not in ("decision", "subject"):
+            raise ResearchInputError("Unknown review read part")
+        with self._transaction() as conn:
+            self._check_scope(conn, scope, "findings.read")
+            self._finding(conn, scope.project_id, finding_id)
+            if request_id is None:
+                if offset != 0 or part != "decision":
+                    raise ResearchInputError(
+                        "Choose a review request before paging its text"
+                    )
+                return {
+                    "read_kind": "history",
+                    **finding_review_state(
+                        conn,
+                        scope.project_id,
+                        finding_id,
+                        after_id=after_id,
+                        limit=limit,
+                    ),
+                }
+            detail = finding_review_detail(conn, scope.project_id, request_id)
+            if detail["finding_id"] != finding_id:
+                raise ResearchNotFound("Review request does not belong to this finding")
+            value = detail.pop("decision")
+            if part == "subject":
+                text = conn.execute(
+                    "SELECT snapshot_json FROM finding_review_requests WHERE project_id=? AND id=?",
+                    (scope.project_id, request_id),
+                ).fetchone()[0]
+                available = True
+            else:
+                text = canonical(value) if value is not None else ""
+                available = value is not None
+            return {
+                **detail,
+                "read_kind": part,
+                "available": available,
+                **window(text, offset, max_chars),
+            }
+
+    def read_review_subject(self, scope, *, offset=0, max_chars=12000):
+        """Page this reviewer's exact immutable subject, never an inferred latest version."""
+        from backend.knowledge.findings import window
+        from backend.knowledge.reviews import scope_request
+
+        with self._transaction() as conn:
+            self._check_scope(conn, scope, "findings.read")
+            review = scope_request(conn, scope)
+            if review is None:
+                raise ResearchForbidden("This grant has no admitted review subject")
+            return {
+                "finding_id": review["finding_id"],
+                "subject_sha256": review["subject_sha256"],
+                "review_run_id": review["run_id"],
+                "reviewer_attempt_id": review["reviewer_attempt_id"],
+                "author_attempt_id": review["author_attempt_id"],
+                "review_scope": "reported_checks_only",
+                **window(review["snapshot_json"], offset, max_chars),
+            }
+
+    def record_review(self, scope, key, draft):
+        """Commit one attributed decision for the live original review request and subject."""
+        from backend.knowledge.reviews import (
+            scope_request,
+            source_version,
+            verify_current,
+        )
+        from backend.research.models import (
+            InvalidEvidence,
+            ResearchInputError,
+            ReviewDecision,
+        )
+
+        if not isinstance(draft, ReviewDecision):
+            raise ResearchInputError("A typed explained review decision is required")
+        with self._transaction() as conn:
+            self._check_scope(conn, scope, "findings.review")
+            review = scope_request(conn, scope)
+            if review is None:
+                raise ResearchForbidden(
+                    "Review decisions require an owner-admitted reviewer attempt"
+                )
+        intent = {
+            "review_run_id": review["run_id"],
+            "subject_sha256": review["subject_sha256"],
+            "decision": asdict(draft),
+        }
+        if len(_json(intent).encode()) > 200000:
+            raise ResearchInputError(
+                "Serialized review decision exceeds its 200000-byte budget"
+            )
+
+        def apply(conn):
+            """Recheck the complete subject and exact evidence inside the receipt transaction."""
+            current_request = scope_request(conn, scope)
+            if current_request is None or current_request["run_id"] != review["run_id"]:
+                raise ResearchForbidden("Original review admission ended")
+            verify_current(conn, current_request)
+            if conn.execute(
+                "SELECT 1 FROM finding_review_decisions WHERE run_id=?",
+                (review["run_id"],),
+            ).fetchone():
+                raise OperationConflict(
+                    "This review already has a decision; recover its original receipt"
+                )
+            verified_evidence = []
+            source_versions = {}
+            for ref in draft.evidence:
+                source = self._source(conn, scope.project_id, ref.source_id)
+                if _hash(source["content"]) != source["sha256"]:
+                    raise InvalidEvidence(
+                        "Review source hash differs from its saved text"
+                    )
+                ref.validate_against(source)
+                metadata, version = source_version(source)
+                source_versions[ref.source_id] = (metadata, version)
+                verified_evidence.append(
+                    {
+                        "source_id": source["id"],
+                        "source_sha256": source["sha256"],
+                        "quote": ref.quote,
+                        "quote_offset": source["content"].index(ref.quote),
+                    }
+                )
+            self._check_scope(conn, scope, "findings.review")
+            if (
+                sum(len(_json(meta).encode()) for meta, _ in source_versions.values())
+                > 1048576
+            ):
+                raise ResearchInputError(
+                    "Complete review evidence metadata exceeds its one MiB snapshot budget"
+                )
+            payload = {
+                **asdict(draft),
+                "verified_evidence": verified_evidence,
+                "review_scope": "reported_checks_only",
+                "scientific_confidence": None,
+            }
+            cursor = conn.execute(
+                """INSERT INTO finding_review_decisions(run_id,project_id,finding_id,subject_sha256,
+                reviewer_attempt_id,reviewer_actor_id,reviewer_fence,verdict,decision_json,created_at)
+                VALUES(?,?,?,?,?,?,?,?,?,?)""",
+                (
+                    review["run_id"],
+                    scope.project_id,
+                    review["finding_id"],
+                    review["subject_sha256"],
+                    review["reviewer_attempt_id"],
+                    scope.agent_id,
+                    review["reviewer_fence"],
+                    draft.verdict,
+                    _json(payload),
+                    self.clock(),
+                ),
+            )
+            result = {
+                "decision_id": cursor.lastrowid,
+                "review_run_id": review["run_id"],
+                "finding_id": review["finding_id"],
+                "subject_sha256": review["subject_sha256"],
+                "verdict": draft.verdict,
+                "independent_attempt": True,
+                "scientific_confidence": None,
+                "task_accepted": False,
+                "report_published": False,
+            }
+            for sid, (metadata, version) in source_versions.items():
+                conn.execute(
+                    "INSERT INTO finding_review_evidence(project_id,decision_id,source_id,source_sha256,metadata_sha256,metadata_json) VALUES(?,?,?,?,?,?)",
+                    (
+                        scope.project_id,
+                        cursor.lastrowid,
+                        sid,
+                        metadata["sha256"],
+                        version,
+                        _json(metadata),
+                    ),
+                )
+            conn.execute(
+                "INSERT INTO events_log(project_id,event_type,event_source,entity_type,entity_id,event_data_json) VALUES(?,'finding.review_recorded','runtime','finding',?,?)",
+                (scope.project_id, review["finding_id"], _json(result)),
+            )
+            return result
+
+        return self._write(scope, key, "review.record", intent, apply)
 
     def capture_source(self, scope, key, draft: SourceDraft, *, intent: dict):
         digest = _hash(draft.content)
@@ -374,7 +600,12 @@ class SQLiteResearchStore:
             ]
 
     def record_finding(self, scope, key, draft: FindingDraft):
+        """Persist a provisional claim with an effect receipt sealing its authored version."""
+
         def apply(conn):
+            """Validate exact quotations and save the producer seal in the same transaction."""
+            from backend.knowledge.reviews import finding_version
+
             sources = [
                 self._source(conn, scope.project_id, ref.source_id)
                 for ref in draft.evidence
@@ -403,6 +634,11 @@ class SQLiteResearchStore:
                 "finding_id": finding_id,
                 "status": "provisional",
                 "confidence": None,
+                "finding_version_schema": 1,
+                "finding_version_sha256": finding_version(
+                    self._finding(conn, scope.project_id, finding_id),
+                    [asdict(ref) for ref in draft.evidence],
+                ),
             }
 
         return self._write(scope, key, "finding.record", asdict(draft), apply)

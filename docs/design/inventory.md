@@ -49,3 +49,8 @@ seis rutas pendientes de implementar y cero rutas con aceptación completa.
 Wiki tiene cuatro conceptos inspeccionados y selección delegada: [procedencia](concepts/wiki/manifest.json). La captura previa detectó contraste bajo y recorte del lector móvil; [piloto verificado y límites](audits/2026-11-01-wiki/report.md).
 
 Hallazgos tiene [18 estados funcionales y lectura en tres anchos](audits/2026-11-01-findings/report.md), con valores históricos atribuidos y citas contrastables. La revisión independiente y aceptación integral permanecen abiertas.
+
+Actualización 2026-11-02: el piloto de Hallazgos incorpora revisión independiente admitida,
+historial, fuentes con hash revisado y recuperación de recibos. [Nueve estados y tres
+anchos finales](audits/2026-11-02-finding-review/report.md). La aceptación integral
+sigue pendiente; continúan seis pilotos y cero páginas plenamente aceptadas.

@@ -12,8 +12,8 @@ from urllib.parse import quote
 from pydantic import BaseModel, ConfigDict, create_model
 
 from backend.api.models.questions import HumanQuestion
-from backend.api.models.research import WikiRevision
-from backend.runtime.business_mediation import BUSINESS_NAMES
+from backend.api.models.research import Citation, ReviewCheckBody, WikiRevision
+from backend.runtime.business_mediation import ALL_BUSINESS_NAMES, RESEARCH_NAMES
 
 
 @dataclass(frozen=True)
@@ -68,8 +68,11 @@ class ToolDefinition:
         return expand(schema)
 
 
-def definitions(client):
+def definitions(client, *, names=None):
     """One canonical signature/schema and HTTP mapping for either transport."""
+    selected = RESEARCH_NAMES if names is None else frozenset(names)
+    if not selected or not selected <= ALL_BUSINESS_NAMES:
+        raise ValueError("Unknown or empty host-admitted business catalog")
     handlers = ResearchTools(client)
     tools = []
     writes = {
@@ -82,8 +85,9 @@ def definitions(client):
         "researcher_wiki_write",
         "researcher_finding_record",
         "researcher_report_write",
+        "researcher_review_decide",
     }
-    for name in sorted(BUSINESS_NAMES):
+    for name in sorted(selected):
         handler = getattr(handlers, name)
         hints = get_type_hints(handler)
         fields = {
@@ -118,6 +122,61 @@ class ResearchTools:
     def __init__(self, client):
         """Bind the host HTTP client; the model receives only schemas and tool results."""
         self._client = client
+
+    async def researcher_review_subject(
+        self, offset: int = 0, max_chars: int = 12000
+    ) -> dict:
+        """Read this admitted review's immutable JSON subject and original author/attempt. Follow next_offset until the required finding, citations and linked report context are read; an unread tail remains unknown. Subject changes stop review reads. This does not admit a review or grant authority to another finding."""
+        return await self._client.request(
+            "GET", "/review-subject", query={"offset": offset, "max_chars": max_chars}
+        )
+
+    async def researcher_review_read(
+        self,
+        finding_id: int,
+        request_id: int | None = None,
+        part: Literal["decision", "subject"] = "decision",
+        after_id: int = 0,
+        limit: int = 20,
+        offset: int = 0,
+        max_chars: int = 12000,
+    ) -> dict:
+        """Read prior review history, or one stored decision/frozen subject by request_id, in this project. Follow history next_after_id and text next_offset. Decisions are attributed reviewer assertions under their original context and subject hash; subject_current null means unavailable, false means changed. Stored presence or supported verdict is not current scientific certainty or permission. Inspect exact old subject/evidence before reusing feedback; this tool never admits, decides, accepts or publishes work."""
+        return await self._client.request(
+            "GET",
+            f"/findings/{finding_id}/reviews",
+            query={
+                "request_id": request_id,
+                "part": part,
+                "after_id": after_id,
+                "limit": limit,
+                "offset": offset,
+                "max_chars": max_chars,
+            },
+        )
+
+    async def researcher_review_decide(
+        self,
+        operation_key: str,
+        verdict: Literal["supported", "needs_revision", "inconclusive"],
+        rationale: str,
+        checks: list[ReviewCheckBody],
+        evidence: list[Citation],
+        limitations: list[str],
+    ) -> dict:
+        """Record one decision for the original admitted subject only. Explain checks and limits; evidence must quote saved sources exactly. supported cannot contain unresolved reported checks. This records an independent attempt's assertions, not calibrated certainty, task acceptance or report publication. Reuse operation_key after an uncertain response; never admit yourself or repeat the model turn."""
+        return await self._client.request(
+            "POST",
+            "/review-decisions",
+            body={
+                "operation_key": operation_key,
+                "verdict": verdict,
+                "rationale": rationale,
+                "checks": [c.model_dump() for c in checks],
+                "evidence": [e.model_dump() for e in evidence],
+                "limitations": limitations,
+            },
+        )
 
     async def researcher_ask_user(
         self, operation_key: str, questions: list[HumanQuestion]

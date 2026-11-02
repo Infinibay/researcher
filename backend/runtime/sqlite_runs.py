@@ -63,7 +63,10 @@ def _duration(seconds):
 
 
 class SQLiteRunStore:
+    """Own durable admission, fenced attempts and version-bound review requests in SQLite."""
+
     def __init__(self, database: str | Path, *, clock: Callable[[], float] = time.time):
+        """Bind an existing migrated database and the clock used for lease and receipt checks."""
         self.database = str(database)
         self.clock = clock
 
@@ -101,17 +104,22 @@ class SQLiteRunStore:
 
     @staticmethod
     def _row(conn, project_id, run_id):
+        """Load a run in its actual project, joining its native attempt, repository and review identity."""
         identity(project_id)
         text(run_id, "run_id", 128)
         row = conn.execute(
             """SELECT r.*,a.thread_id,a.turn_id,a.owner_id,a.status AS attempt_status,
             a.lease_expires_at,a.native_result_json,a.fence AS attempt_fence,
             chat.thread_id AS conversation_thread_id,dispatch.model AS dispatch_model,
-            binding.repository_id AS bound_repository_id,binding.repository_name AS bound_repository_name
+            binding.repository_id AS bound_repository_id,binding.repository_name AS bound_repository_name,
+            review.finding_id AS review_finding_id,review.subject_sha256 AS review_subject_sha256,
+            decision.id AS review_decision_id,decision.verdict AS review_verdict
             FROM runtime_runs r LEFT JOIN runtime_attempts a ON a.id=r.current_attempt_id
             LEFT JOIN runtime_chat_links chat ON chat.run_id=r.id
             LEFT JOIN runtime_inference_dispatches dispatch ON dispatch.attempt_id=a.id
             LEFT JOIN runtime_workspace_bindings binding ON binding.run_id=r.id
+            LEFT JOIN finding_review_requests review ON review.run_id=r.id
+            LEFT JOIN finding_review_decisions decision ON decision.run_id=r.id
             WHERE r.project_id=? AND r.id=?""",
             (project_id, run_id),
         ).fetchone()
@@ -121,6 +129,7 @@ class SQLiteRunStore:
 
     @staticmethod
     def _view(row):
+        """Project stored execution facts without interpreting a review verdict as task acceptance."""
         return RunView(
             run_id=row["id"],
             project_id=row["project_id"],
@@ -144,6 +153,14 @@ class SQLiteRunStore:
             repository_id=row["bound_repository_id"],
             repository_name=row["bound_repository_name"],
             issue=json.loads(row["issue_json"]) if row["issue_json"] else None,
+            review={
+                "finding_id": row["review_finding_id"],
+                "subject_sha256": row["review_subject_sha256"],
+                "decision_id": row["review_decision_id"],
+                "verdict": row["review_verdict"],
+            }
+            if row["review_finding_id"] is not None
+            else None,
         )
 
     @staticmethod
@@ -180,6 +197,63 @@ class SQLiteRunStore:
     def context_snapshot(self, project_id, task_id):
         with self._transaction() as conn:
             return self._context_snapshot(conn, project_id, task_id)
+
+    @staticmethod
+    def _review_request(conn, project_id, run_id, *, require_current=False):
+        """Read the original review descriptor, optionally requiring its subject now."""
+        from backend.knowledge.reviews import verify_current
+
+        run = SQLiteRunStore._row(conn, project_id, run_id)
+        request = conn.execute(
+            "SELECT * FROM finding_review_requests WHERE project_id=? AND run_id=?",
+            (project_id, run_id),
+        ).fetchone()
+        if request is None:
+            if run["execution_kind"] != "research":
+                raise RunConflict("Review execution has no original admitted subject")
+            return None
+        if (
+            run["execution_kind"] != "finding_review"
+            or run["actor_id"] == request["author_actor_id"]
+        ):
+            raise RunConflict("Review execution does not identify an independent actor")
+        if require_current:
+            verify_current(conn, dict(request))
+        return {
+            key: request[key]
+            for key in (
+                "run_id",
+                "finding_id",
+                "subject_sha256",
+                "author_run_id",
+                "author_attempt_id",
+                "author_actor_id",
+                "context_version",
+            )
+        }
+
+    def review_request(self, project_id, run_id, *, require_current=False):
+        """Expose the durable mode without inferring it from a prompt or role name."""
+        with self._transaction() as conn:
+            return self._review_request(
+                conn, project_id, run_id, require_current=require_current
+            )
+
+    def finding_review_state(self, project_id, finding_id, *, after_id=0, limit=20):
+        """Inspect an observed subject and page actual review attempts without auto-validation."""
+        from backend.knowledge.reviews import finding_review_state
+
+        with self._transaction() as conn:
+            return finding_review_state(
+                conn, project_id, finding_id, after_id=after_id, limit=limit
+            )
+
+    def finding_review_detail(self, project_id, request_id):
+        """Read an attributed bounded decision, preserving stale and partial assessments."""
+        from backend.knowledge.reviews import finding_review_detail
+
+        with self._transaction() as conn:
+            return finding_review_detail(conn, project_id, request_id)
 
     def _context_snapshot(self, conn, project_id, task_id):
         self._existing_task(conn, project_id, task_id)
@@ -327,6 +401,11 @@ class SQLiteRunStore:
                 )
             row = self._row(conn, lease.project_id, lease.run_id)
             context = self._context_snapshot(conn, lease.project_id, lease.task_id)
+            review = self._review_request(
+                conn, lease.project_id, lease.run_id, require_current=True
+            )
+            if review is not None:
+                context["review"] = review
             if context["task"]["type"] != "research":
                 raise RunConflict("Task type changed before input reservation")
             frozen = freeze_input(conn, row, context)
@@ -762,7 +841,8 @@ class SQLiteRunStore:
         return self._view(self._row(conn, row["project_id"], row["id"]))
 
     @staticmethod
-    def _admission_intent(spec, conversation_thread, repository_id=None):
+    def _admission_intent(spec, conversation_thread, repository_id=None, review=None):
+        """Keep historical ordinary intents stable and bind explicit review targets."""
         intent = {"kind": "admit", **asdict(spec)}
         if conversation_thread is not None:
             command_key(conversation_thread)
@@ -770,16 +850,27 @@ class SQLiteRunStore:
         if repository_id is not None:
             identity(repository_id)
             intent["repository_id"] = repository_id
+        if review is not None:
+            from backend.research.models import ReviewTarget
+
+            if not isinstance(review, ReviewTarget):
+                raise ValueError("A typed owner-observed review target is required")
+            intent["review"] = asdict(review)
         return intent
 
-    def _admission_receipt(self, conn, spec, conversation_thread, repository_id):
-        intent = self._admission_intent(spec, conversation_thread, repository_id)
+    def _admission_receipt(
+        self, conn, spec, conversation_thread, repository_id, review=None
+    ):
+        """Recover original admission receipts without rechecking or replaying effects."""
+        intent = self._admission_intent(
+            spec, conversation_thread, repository_id, review
+        )
         try:
             return self._receipt(
                 conn, spec.project_id, spec.task_id, spec.operation_key, intent
             )
         except RunConflict:
-            if repository_id is None:
+            if repository_id is None or review is not None:
                 raise
             # Historical receipts did not record selection. They may be read,
             # never used to infer a workspace or restart a queued request.
@@ -800,10 +891,13 @@ class SQLiteRunStore:
                 raise RunConflict("Operation key already identifies another intent")
             return old
 
-    def admission_receipt(self, spec, *, conversation_thread=None, repository_id=None):
+    def admission_receipt(
+        self, spec, *, conversation_thread=None, repository_id=None, review=None
+    ):
+        """Read an exact ordinary or review request receipt without scheduling work."""
         with self._transaction() as conn:
             receipt = self._admission_receipt(
-                conn, spec, conversation_thread, repository_id
+                conn, spec, conversation_thread, repository_id, review
             )
             return (
                 self._view(self._row(conn, spec.project_id, receipt["run_id"]))
@@ -831,19 +925,44 @@ class SQLiteRunStore:
             )
             return receipt["version"] if receipt else None
 
+    @staticmethod
+    def _review_subject(conn, spec, target):
+        """Require the observed complete subject and an actual different original author."""
+        from backend.knowledge.reviews import finding_subject
+
+        subject = finding_subject(conn, spec.project_id, target.finding_id)
+        if subject["snapshot"]["finding"]["task_id"] != spec.task_id:
+            raise RunConflict("Review finding belongs to another task")
+        if subject["subject_sha256"] != target.subject_sha256:
+            raise RunConflict("Review subject changed; inspect the current version")
+        if not subject["reviewable"]:
+            raise RunConflict("Independent review requires known closed author origin")
+        if subject["snapshot"]["author"]["actor_id"] == spec.actor_id:
+            raise RunConflict("Independent review requires a different admitted actor")
+        return subject
+
     def admit(
-        self, spec: RunSpec, *, conversation_thread=None, binding=None
+        self, spec: RunSpec, *, conversation_thread=None, binding=None, review=None
     ) -> RunView:
+        """Return the durable receipt for one scoped admission, freezing a review target when supplied."""
         return self.admit_once(
-            spec, conversation_thread=conversation_thread, binding=binding
+            spec,
+            conversation_thread=conversation_thread,
+            binding=binding,
+            review=review,
         )[0]
 
-    def admit_once(self, spec: RunSpec, *, conversation_thread=None, binding=None):
+    def admit_once(
+        self, spec: RunSpec, *, conversation_thread=None, binding=None, review=None
+    ):
+        """Atomically admit a scoped run, freezing an independently authored review target."""
         repository_id = binding.requested_repository_id if binding else None
-        intent = self._admission_intent(spec, conversation_thread, repository_id)
+        intent = self._admission_intent(
+            spec, conversation_thread, repository_id, review
+        )
         with self._transaction(write=True) as conn:
             receipt = self._admission_receipt(
-                conn, spec, conversation_thread, repository_id
+                conn, spec, conversation_thread, repository_id, review
             )
             if receipt is not None:
                 return self._view(
@@ -852,11 +971,18 @@ class SQLiteRunStore:
             self._task(conn, spec.project_id, spec.task_id)
             if self._context(conn, spec.task_id) != spec.context_version:
                 raise RunConflict("Run context is already obsolete")
+            subject = (
+                self._review_subject(conn, spec, review) if review is not None else None
+            )
             active = conn.execute(
-                "SELECT id FROM runtime_runs WHERE project_id=? AND task_id=? AND status IN ('queued','running','cancelling','reconciling','waiting_input','needs_review')",
+                "SELECT id,status FROM runtime_runs WHERE project_id=? AND task_id=? AND status IN ('queued','running','cancelling','reconciling','waiting_input','needs_review')",
                 (spec.project_id, spec.task_id),
-            ).fetchone()
-            if active is not None:
+            ).fetchall()
+            author_run = subject["snapshot"]["author"]["run_id"] if subject else None
+            if any(
+                row["id"] != author_run or row["status"] != "needs_review"
+                for row in active
+            ):
                 raise RunConflict("Task already has active or unreconciled work")
             conn.execute(
                 "INSERT OR IGNORE INTO task_contexts(task_id,version) VALUES(?,1)",
@@ -865,8 +991,8 @@ class SQLiteRunStore:
             run_id = str(uuid4())
             now = self.clock()
             conn.execute(
-                """INSERT INTO runtime_runs(id,project_id,task_id,actor_id,context_version,operation_key,prompt,runtime,status,created_at,updated_at)
-                VALUES(?,?,?,?,?,?,?,?,'queued',?,?)""",
+                """INSERT INTO runtime_runs(id,project_id,task_id,actor_id,context_version,operation_key,prompt,runtime,status,created_at,updated_at,execution_kind)
+                VALUES(?,?,?,?,?,?,?,?,'queued',?,?,?)""",
                 (
                     run_id,
                     spec.project_id,
@@ -878,8 +1004,29 @@ class SQLiteRunStore:
                     spec.runtime,
                     now,
                     now,
+                    "finding_review" if review is not None else "research",
                 ),
             )
+            if subject is not None:
+                author = subject["snapshot"]["author"]
+                conn.execute(
+                    """INSERT INTO finding_review_requests(run_id,project_id,task_id,finding_id,context_version,
+                    subject_sha256,snapshot_json,author_run_id,author_attempt_id,author_actor_id,created_at)
+                    VALUES(?,?,?,?,?,?,?,?,?,?,?)""",
+                    (
+                        run_id,
+                        spec.project_id,
+                        spec.task_id,
+                        review.finding_id,
+                        spec.context_version,
+                        review.subject_sha256,
+                        _json(subject["snapshot"]),
+                        author["run_id"],
+                        author["attempt_id"],
+                        author["actor_id"],
+                        now,
+                    ),
+                )
             if conversation_thread is not None:
                 self._attach_conversation(conn, spec, run_id, conversation_thread)
             if binding is not None:
@@ -1247,11 +1394,22 @@ class SQLiteRunStore:
                 expires,
             )
 
+    @staticmethod
+    def _independent_review_thread(conn, lease, thread_id):
+        """Reject reuse of the author's native context even under a different role/attempt."""
+        row = conn.execute(
+            "SELECT json_extract(snapshot_json,'$.author.thread_id') FROM finding_review_requests WHERE project_id=? AND run_id=?",
+            (lease.project_id, lease.run_id),
+        ).fetchone()
+        if row is not None and row[0] == thread_id:
+            raise RunConflict("An independent reviewer requires a new native thread")
+
     def bind_thread(self, lease, *, thread_id):
         """Persist the known thread before sending a possibly uncertain turn."""
         text(thread_id, "thread_id", 256)
         with self._transaction(write=True) as conn:
             row = self._authority(conn, lease)
+            self._independent_review_thread(conn, lease, thread_id)
             if row["thread_id"] is not None:
                 if row["thread_id"] != thread_id:
                     raise RunConflict(
@@ -1275,10 +1433,12 @@ class SQLiteRunStore:
             )
 
     def bind_native(self, lease, *, thread_id, turn_id):
+        """Bind an original turn while preserving review context independence."""
         text(thread_id, "thread_id", 256)
         text(turn_id, "turn_id", 256)
         with self._transaction(write=True) as conn:
             row = self._authority(conn, lease)
+            self._independent_review_thread(conn, lease, thread_id)
             if (row["thread_id"] is not None and row["thread_id"] != thread_id) or (
                 row["turn_id"] is not None and row["turn_id"] != turn_id
             ):

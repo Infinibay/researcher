@@ -1,0 +1,54 @@
+{
+  "result": "passed",
+  "states": [
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "claim": 271.109375,
+        "review": 360.59375
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-02-finding-review/final-desktop.png",
+      "sha256": "9debe4451d8f3cbc6c039573ee3cbef5f943ba112155902b02915e057a090a01"
+    },
+    {
+      "name": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "claim": 394.96875,
+        "review": 484.453125
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-02-finding-review/final-mobile.png",
+      "sha256": "9fdbc8976b4417da2fe720b7c6258b2142c6dae3c39dbfc5bf41c83627b3cd66"
+    },
+    {
+      "name": "narrow",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 320,
+        "scroll": 320,
+        "claim": 450.96875,
+        "review": 589.9375
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-02-finding-review/final-narrow.png",
+      "sha256": "71d286a3b2ce9ec37a5f7db243adbb4ee6fb200f1f55fd011547a4551de61e5c"
+    }
+  ],
+  "model_turns": 0
+}

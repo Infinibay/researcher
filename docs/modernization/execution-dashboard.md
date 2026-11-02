@@ -6,20 +6,24 @@ Motivos del ajuste: [diagnóstico del proceso](workflow-review.md).
 
 ## Estado comprobado
 
-- Codex por suscripción y Ken publicado ensayados; fuentes/citas e informes draft conectados. Continúan consumidores y loops heredados, coordinación, revisión y desarrollo pendientes.
+- Codex por suscripción y Ken publicado ensayados; fuentes/citas e informes draft conectados. Revisión documental independiente admitida y ensayada. Continúan consumidores y loops heredados, coordinación y desarrollo pendientes.
 - Interfaz: 6 pilotos, 18/36 conceptos de escritorio y 6/12 móviles. Quedan seis rutas por implementar; 0/12 tienen aceptación completa.
-- Última suite: 1805 casos: 1702 pasan, 100 fallos heredados y 3 omitidos. No hay fallos nuevos frente a la línea base; la suite sigue roja.
+- Última suite: 1841 casos: 1738 pasan, 100 fallos heredados y 3 omitidos. No hay fallos nuevos frente a la línea base; la suite sigue roja.
 - Los 43 escenarios amplios continúan abiertos en [coverage.json](coverage.json). Se registran resultados y límites; no hay un porcentaje global defendible.
 
-## Última entrega verificada: búsqueda nativa con procedencia
+## Última entrega verificada: revisión ligada a versión y feedback
 
-**Resultado:** política configurada/atestada, búsquedas acotadas del mismo Codex por suscripción y observaciones recuperables en su proyecto/intento/contexto. Ausencia de resultados estructurados significa desconocido; snippets y marcadores no crean evidencia. El proveedor no compatible recibe una explicación concreta sin iniciar inferencia.
+**Resultado:** el propietario admite un revisor con hilo, intento y permisos distintos del autor. Se congela la versión del hallazgo y se conservan citas, contraevidencia, procedencia y límites. Una modificación pierde la atribución a su autor original si no coincide con su sello; una revisión anterior no se transfiere al texto nuevo. El autor puede leer feedback mediante su permiso ordinario, sin obtener permiso para decidir revisiones.
 
-**Ensayo real:** una búsqueda y una apertura → URL observada → fuente capturada con hash/cita exacta → finding provisional → informe draft y lectura. Ken publicado obligatorio; un turno, sin API-key fallback. Cierre de peers/dominio y fuente sin cambios comprobados.
+**Interfaz:** el piloto de Hallazgos muestra primero la afirmación, luego la decisión, sus comprobaciones y limitaciones; permite solicitar/cerrar un intento, consultar historial y abrir la captura con el hash revisado. Distingue versión anterior y vigencia desconocida. El reenvío tras perder una respuesta conserva el paquete original, incluso tras recargar. Nueve estados funcionales y tres anchos finales sin infracciones de axe; aceptación integral todavía pendiente.
 
-**Validación:** wheel aislado 452 pasan y 1 fallo heredado explícito, 623 fuentes coincidentes; suite global con identidades heredadas explícitas, aún roja. Frontend sin cambios. [Contrato](../architecture/native-web-search.md), [resultados](web-search-results.json), [paquete](web-search-packaging.json), [ensayo y límites](native-search-live.json).
+**Validación:** 36 casos nuevos; regresión dirigida 939 pasan. Wheel aislado: 488 pasan y 1 fallo heredado explícito; 628 fuentes coincidentes. Frontend: 57 pasan y build correcto. Suite global: 1841 casos, 1738 pasan, los mismos 100 fallos heredados y 3 omitidos. Auditoría local: 122 definiciones Python nuevas/modificadas con docstrings; no sustituye la auditoría de toda la rama.
 
-**Siguiente acción:** revisión independiente realmente admitida y ligada a la versión revisada; después migrar roles/flows y consumidores por capacidades. El buscador heredado sigue activo para sus consumidores anteriores. Reutilizar las capturas, el registro de hallazgos y el dueño durable.
+**Ensayo real:** un revisor `gpt-6.1-sol` con tu suscripción y Ken publicado detectó 731 frente a 137 y registró «Requiere cambios», con citas y límites; un turno. La generación del autor fue controlada y sintética. Sin promoción del hallazgo/informe/tarea; cierre de permisos, peers y dominio comprobado. Este resultado no acredita calidad científica general.
+
+[Contrato](../architecture/finding-reviews.md), [resultados](review-results.json), [paquete](review-packaging.json), [ensayo y límites](native-review-live.json), [prueba visual](../design/audits/2026-11-02-finding-review/report.md).
+
+**Siguiente acción:** migrar consumidores heredados de validación, rechazo y conocimiento a este contrato, incluyendo feedback e invalidación de dependencias. Después, continuar la migración de roles/flows por capacidades y los recorridos de desarrollo. No cerrar el objetivo con la revisión de un único hallazgo.
 
 ## Cola posterior, manteniendo el alcance
 

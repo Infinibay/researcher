@@ -86,5 +86,19 @@
   "mobile_status": "generated, inspected; separate index/detail; illustration is not literal evidence",
   "base_product_commit": "0cbed92",
   "image_count": 4,
-  "selected_desktop": "evidence-ledger"
+  "selected_desktop": "evidence-ledger",
+  "review_extension": {
+    "date": "2026-11-02",
+    "selected_concept_reused": true,
+    "interaction_states": 9,
+    "final_widths": [
+      1440,
+      390,
+      320
+    ],
+    "retry_survives_reload": true,
+    "actual_subscription_reviewer_verified": true,
+    "full_route_acceptance": false,
+    "evidence": "docs/design/audits/2026-11-02-finding-review/report.md"
+  }
 }

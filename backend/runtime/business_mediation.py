@@ -5,7 +5,7 @@ import json
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-BUSINESS_NAMES = frozenset(
+RESEARCH_NAMES = frozenset(
     {
         "researcher_reference_list",
         "researcher_capture_reference",
@@ -26,11 +26,35 @@ BUSINESS_NAMES = frozenset(
         "researcher_finding_list",
         "researcher_finding_summary",
         "researcher_finding_query",
+        "researcher_review_read",
         "researcher_report_write",
         "researcher_report_read",
         "researcher_ask_user",
     }
 )
+REVIEW_NAMES = frozenset(
+    {
+        "researcher_reference_list",
+        "researcher_source_list",
+        "researcher_source_read",
+        "researcher_source_structure",
+        "researcher_source_search",
+        "researcher_source_query",
+        "researcher_finding_read",
+        "researcher_finding_list",
+        "researcher_finding_summary",
+        "researcher_finding_query",
+        "researcher_report_read",
+        "researcher_wiki_list",
+        "researcher_wiki_read",
+        "researcher_ask_user",
+        "researcher_review_subject",
+        "researcher_review_decide",
+        "researcher_review_read",
+    }
+)
+BUSINESS_NAMES = RESEARCH_NAMES
+ALL_BUSINESS_NAMES = RESEARCH_NAMES | REVIEW_NAMES
 
 
 def _failure(message):
@@ -122,14 +146,17 @@ class McpTools:
 
 
 class BusinessTools(McpTools):
+    """Project only the admitted business capability catalog into a native tool session."""
+
     @classmethod
     async def connect(cls, peer, *, active=lambda: True):
+        """Validate unique known tool names before exposing the host-selected capability subset."""
         tools = (await peer.list_tools()).tools
         names = [tool.name for tool in tools]
         if (
             not names
             or len(names) != len(set(names))
-            or not set(names) <= BUSINESS_NAMES
+            or not set(names) <= ALL_BUSINESS_NAMES
         ):
             raise ValueError(
                 "Unexpected business MCP capabilities; native turn was not admitted"

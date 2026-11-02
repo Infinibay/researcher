@@ -1,3 +1,4 @@
+/** Scoped owner runtime reads and explicit durable execution controls. @module */
 import { fetchApi } from './client.ts'
 
 export interface RuntimeRun {
@@ -25,7 +26,10 @@ export interface TaskInputChange {
   changes: Record<string, { before: string | number | null; after: string | number | null }>
 }
 
+/** Registered task inputs, owner controls and their explicit project/task scope. */
 export interface TaskWorkspace {
+  project_id: number
+  task_id: number
   context: {
     task: { title: string; description: string | null; type: string; status: string }
     context_version: number
@@ -279,10 +283,11 @@ export function recordCorrection(projectId: number, taskId: number, body: {
   )
 }
 
-export function sourceWindow(projectId: number, sourceId: number, offset = 0) {
-  return fetchApi<{ source_id: number; title: string; sha256: string; captured_at: number;
+/** Read saved source text, optionally requiring the exact version named by a review. */
+export function sourceWindow(projectId: number, sourceId: number, offset = 0, expectedSha?:string) {
+  return fetchApi<{ project_id:number;source_id: number; title: string; locator?:string;sha256: string; captured_at: number;
     content: string; offset: number; next_offset: number | null; total_chars: number }>(
-    `/api/projects/${projectId}/research-sources/${sourceId}?offset=${offset}&max_chars=12000`,
+    `/api/projects/${projectId}/research-sources/${sourceId}?offset=${offset}&max_chars=12000${expectedSha?`&expected_sha256=${encodeURIComponent(expectedSha)}`:''}`,
   )
 }
 

@@ -328,6 +328,9 @@ export interface Finding {
   agent_id: string | null; created_at: string | null; status: string | null
   finding_type: string | null; confidence: number | null; scientific_confidence: number | null
   confidence_origin: string; review_status: string; validation_method: string | null
+  legacy_review_status?: string
+  /** Presence is stored provenance, never a currentness check or scientific acceptance. */
+  review?: {latest_request_id:number;latest_decision_request_id:number|null;status:string;currentness:'not_checked'} | null
   reproducibility_score: number | null; content_chars: number; content_excerpt: string
   evidence_count: number; confidence_invalid?: boolean; confidence_original?: string
 }

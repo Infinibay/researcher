@@ -4,7 +4,7 @@ import {before,after,test} from 'node:test'
 import {createServer,type ViteDevServer} from 'vite'
 let server:ViteDevServer
 let findingModel:typeof import('../src/components/findings/presentation')
-let renderFindings:(options?:{noProject?:boolean;foreign?:boolean;poisoned?:boolean;legacy?:boolean;indexFailure?:boolean;detailFailure?:boolean;empty?:boolean;unsafe?:boolean})=>string
+let renderFindings:(options?:{noProject?:boolean;foreign?:boolean;poisoned?:boolean;legacy?:boolean;indexFailure?:boolean;detailFailure?:boolean;empty?:boolean;unsafe?:boolean;reviewed?:boolean;staleReview?:boolean;reviewFailure?:boolean;foreignReview?:boolean})=>string
 before(async()=>{
  server=await createServer({configFile:false,server:{middlewareMode:true,hmr:false,ws:false,watch:null},esbuild:{jsx:'automatic'},optimizeDeps:{noDiscovery:true},resolve:{alias:[{find:/^react-router-dom$/,replacement:new URL('../node_modules/react-router-dom/dist/index.mjs',import.meta.url).pathname},{find:/^react-router$/,replacement:new URL('../node_modules/react-router/dist/development/index.mjs',import.meta.url).pathname},{find:/^react-router\/dom$/,replacement:new URL('../node_modules/react-router/dist/development/dom-export.mjs',import.meta.url).pathname}]},ssr:{noExternal:[/react-router/]}})
  ;({renderFindings,findingModel}=await server.ssrLoadModule('/tests/findings-design-fixture.tsx'))
@@ -40,4 +40,18 @@ test('semantic result pages retain the same corpus and metadata revision before 
  assert.equal(findingModel.sameFindingCorpus([base,{...base,record_set_sha256:'c'.repeat(64)}],101),false)
  assert.equal(findingModel.sameFindingCorpus([{...base,project_id:202}],101),false)
  assert.equal(findingModel.sameFindingCorpus([{...base,matches:[{...base.matches[0],finding_id:99}]}],101),false)
+})
+
+
+test('actual review provenance is distinct from scientific certainty and legacy declarations',()=>{
+ const html=renderFindings({reviewed:true})
+ assert.match(html,/Respaldado en lo comprobado/)
+ assert.match(html,/No se volvió a ejecutar el experimento/)
+ assert.match(html,/La fuente declara una tasa fraccionaria/)
+ assert.doesNotMatch(html,/Sin revisión independiente registrada|Validado científicamente/)
+})
+test('stale or unavailable review does not become current confidence or empty history',()=>{
+ assert.match(renderFindings({reviewed:true,staleReview:true}),/versión anterior|contexto anterior/)
+ assert.match(renderFindings({reviewFailure:true}),/No se pudo consultar la revisión/)
+ assert.doesNotMatch(renderFindings({reviewed:true,foreignReview:true}),/FOREIGN REVIEW SECRET|Respaldado en lo comprobado/)
 })
