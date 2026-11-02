@@ -1,168 +1,233 @@
-"""Findings list, FTS search, semantic search, and detail endpoints."""
+"""Owner finding registry and exact captured evidence; no hidden inference or global-id reads.
 
-from __future__ import annotations
+Owner session protection is provided by middleware. Native tools use the separate
+research routes and revalidate their host-issued project/capability authority.
+"""
 
-import logging
-import sqlite3
+from typing import Annotated
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, Depends, Query, Request
 
-from backend.api.models.finding import FindingResponse, FindingSearchResult
-from backend.tools.base.db import execute_with_retry, sanitize_fts5_query
-
-logger = logging.getLogger(__name__)
+from backend.knowledge.findings import FindingStore
 
 router = APIRouter(prefix="/api", tags=["findings"])
 
 
-@router.get("/findings", response_model=list[FindingResponse])
-async def list_findings(
-    project_id: int = Query(...),
-    q: str | None = Query(default=None),
-    finding_type: str | None = Query(default=None),
-    status: str | None = Query(default=None),
-    min_confidence: float | None = Query(default=None),
-    limit: int = Query(default=50, ge=1, le=200),
+def store(request):
+    """Choose the serving store's database before consulting transitional global configuration."""
+    research = getattr(request.app.state, "runtime_research_store", None)
+    runtime = getattr(request.app.state, "runtime_service", None)
+    if research is None and runtime is not None:
+        research = runtime.research
+    if research is None:
+        from backend.tools.base.db import get_db_path
+
+        database = get_db_path()
+    else:
+        database = research.database
+    return FindingStore(database)
+
+
+def selection(
+    q: str | None = Query(None, min_length=1, max_length=1000),
+    finding_type: str | None = None,
+    status: str | None = None,
+    min_confidence: float | None = Query(None, ge=0, le=1),
+    task_id: int | None = Query(None, gt=0),
 ):
-    """List/search findings. Uses FTS5 when q is provided."""
-
-    def _query(conn: sqlite3.Connection) -> list[dict]:
-        if q:
-            safe_q = sanitize_fts5_query(q)
-            try:
-                rows = conn.execute(
-                    """SELECT f.* FROM findings f
-                       JOIN findings_fts fts ON f.id = fts.rowid
-                       WHERE fts.findings_fts MATCH ?
-                         AND f.project_id = ?
-                       ORDER BY rank
-                       LIMIT ?""",
-                    (safe_q, project_id, limit),
-                ).fetchall()
-                return [dict(r) for r in rows]
-            except Exception:
-                # Fallback to LIKE
-                like_q = f"%{q}%"
-                rows = conn.execute(
-                    """SELECT * FROM findings
-                       WHERE project_id = ?
-                         AND (topic LIKE ? OR content LIKE ?)
-                       ORDER BY created_at DESC
-                       LIMIT ?""",
-                    (project_id, like_q, like_q, limit),
-                ).fetchall()
-                return [dict(r) for r in rows]
-
-        clauses = ["project_id = ?"]
-        params: list = [project_id]
-        if finding_type is not None:
-            clauses.append("finding_type = ?")
-            params.append(finding_type)
-        if status is not None:
-            clauses.append("status = ?")
-            params.append(status)
-        if min_confidence is not None:
-            clauses.append("confidence >= ?")
-            params.append(min_confidence)
-        params.append(limit)
-        where = " AND ".join(clauses)
-        rows = conn.execute(
-            f"SELECT * FROM findings WHERE {where} ORDER BY created_at DESC LIMIT ?",
-            params,
-        ).fetchall()
-        return [dict(r) for r in rows]
-
-    results = execute_with_retry(_query)
-    return [FindingResponse(**r) for r in results]
+    """Translate owner query fields once, retaining every chosen filter together."""
+    return {
+        "query": q,
+        "finding_type": finding_type,
+        "status": status,
+        "min_confidence": min_confidence,
+        "task_id": task_id,
+    }
 
 
-@router.get("/findings/search", response_model=list[FindingSearchResult])
-async def search_findings_semantic(
-    project_id: int = Query(...),
-    query: str = Query(..., min_length=1),
-    threshold: float = Query(default=0.7, ge=0.0, le=1.0),
-    limit: int = Query(default=20, ge=1, le=100),
+Filters = Annotated[dict, Depends(selection)]
+
+
+@router.get("/findings")
+def list_findings(
+    request: Request,
+    filters: Filters,
+    project_id: int = Query(..., gt=0),
+    after_id: int = Query(0, ge=0),
+    limit: int = Query(50, ge=1, le=200),
 ):
-    """Semantic search across findings using embeddings."""
-    import numpy as np
-    from backend.tools.base.dedup import _cosine_similarity, _get_embed_fn
-
-    def _get_findings(conn: sqlite3.Connection) -> list[dict]:
-        rows = conn.execute(
-            """SELECT id, topic, content, confidence, status, finding_type,
-                      agent_id, created_at
-               FROM findings
-               WHERE project_id = ?
-               ORDER BY created_at DESC
-               LIMIT 500""",
-            (project_id,),
-        ).fetchall()
-        return [dict(r) for r in rows]
-
-    findings = execute_with_retry(_get_findings)
-    if not findings:
-        return []
-
-    try:
-        embed_fn = _get_embed_fn()
-        texts = [f"{f['topic']}: {f['content'][:500]}" for f in findings]
-        all_texts = [query] + texts
-        embeddings = embed_fn(all_texts)
-        query_vec = np.asarray(embeddings[0])
-
-        results = []
-        for i, finding in enumerate(findings):
-            sim = _cosine_similarity(query_vec, np.asarray(embeddings[i + 1]))
-            if sim >= threshold:
-                results.append(FindingSearchResult(**finding, similarity=sim))
-
-        results.sort(key=lambda r: r.similarity, reverse=True)
-        return results[:limit]
-    except Exception as e:
-        logger.warning("Semantic search failed, falling back to FTS: %s", e)
-        # Fallback to FTS
-        def _fts_fallback(conn: sqlite3.Connection) -> list[dict]:
-            safe_q = sanitize_fts5_query(query)
-            try:
-                rows = conn.execute(
-                    """SELECT f.id, f.topic, f.content, f.confidence, f.status,
-                              f.finding_type, f.agent_id, f.created_at
-                       FROM findings f
-                       JOIN findings_fts fts ON f.id = fts.rowid
-                       WHERE fts.findings_fts MATCH ?
-                         AND f.project_id = ?
-                       ORDER BY rank
-                       LIMIT ?""",
-                    (safe_q, project_id, limit),
-                ).fetchall()
-            except Exception:
-                like_q = f"%{query}%"
-                rows = conn.execute(
-                    """SELECT id, topic, content, confidence, status,
-                              finding_type, agent_id, created_at
-                       FROM findings
-                       WHERE project_id = ? AND (topic LIKE ? OR content LIKE ?)
-                       ORDER BY created_at DESC LIMIT ?""",
-                    (project_id, like_q, like_q, limit),
-                ).fetchall()
-            return [dict(r) for r in rows]
-
-        fallback_results = execute_with_retry(_fts_fallback)
-        return [FindingSearchResult(**r, similarity=0.0) for r in fallback_results]
+    """Retain the old array shape with explicit excerpt/continuation fields and bounded text."""
+    result = store(request).list(project_id, after_id=after_id, limit=limit, **filters)
+    return [
+        {
+            **row,
+            "content": row["content_excerpt"],
+            "total_chars": row["content_chars"],
+            "next_offset": len(row["content_excerpt"])
+            if row["content_chars"] > len(row["content_excerpt"])
+            else None,
+        }
+        for row in result["items"]
+    ]
 
 
-@router.get("/findings/{finding_id}", response_model=FindingResponse)
-async def get_finding(finding_id: int):
-    """Get a single finding by ID."""
+@router.get("/findings-index")
+def finding_index(
+    request: Request,
+    filters: Filters,
+    project_id: int = Query(..., gt=0),
+    after_id: int = Query(0, ge=0),
+    limit: int = Query(50, ge=1, le=100),
+):
+    """Expose a cursor/count envelope for the scoped metadata-only findings index."""
+    return store(request).list(project_id, after_id=after_id, limit=limit, **filters)
 
-    def _query(conn: sqlite3.Connection) -> dict | None:
-        row = conn.execute(
-            "SELECT * FROM findings WHERE id = ?",
-            (finding_id,),
-        ).fetchone()
-        return dict(row) if row else None
 
-    result = execute_with_retry(_query)
-    if not result:
-        raise HTTPException(status_code=404, detail="Finding not found")
-    return FindingResponse(**result)
+@router.get("/findings-summary")
+def finding_summary(
+    request: Request, filters: Filters, project_id: int = Query(..., gt=0)
+):
+    """Return structured complete counts with unknown scientific confidence kept unknown."""
+    return store(request).summary(project_id, **filters)
+
+
+@router.get("/findings-query")
+def finding_query(
+    request: Request,
+    project_id: int = Query(..., gt=0),
+    query: str = Query(..., min_length=1, max_length=1000),
+    finding_type: str | None = None,
+    status: str | None = None,
+    min_confidence: float | None = Query(None, ge=0, le=1),
+    task_id: int | None = Query(None, gt=0),
+    finding_ids: str | None = Query(None, max_length=1000),
+    limit: int = Query(5, ge=1, le=20),
+    after_rank: int = Query(0, ge=0, le=2048),
+    expected_corpus_sha256: str | None = Query(None, pattern=r"^[0-9a-f]{64}$"),
+    expected_record_set_sha256: str | None = Query(None, pattern=r"^[0-9a-f]{64}$"),
+):
+    """Search a complete bounded current set with the existing offline worker, never a lexical fallback."""
+    from backend.knowledge.findings import corpus_unchanged, query_corpus, selected_ids
+    from backend.research.retrieval_assets import RetrievalUnavailable
+
+    repository = store(request)
+    filters = {
+        "finding_type": finding_type,
+        "status": status,
+        "min_confidence": min_confidence,
+        "task_id": task_id,
+        "finding_ids": selected_ids(finding_ids),
+    }
+    corpus = repository.corpus(project_id, **filters)
+    result = query_corpus(
+        corpus,
+        request.app.state.retrieval,
+        query,
+        limit=limit,
+        after_rank=after_rank,
+        expected_corpus_sha256=expected_corpus_sha256,
+        expected_record_set_sha256=expected_record_set_sha256,
+    )
+    if not corpus_unchanged(corpus, repository.corpus(project_id, **filters)):
+        raise RetrievalUnavailable(
+            "Finding corpus changed during semantic retrieval; retry the current selection"
+        )
+    return {"project_id": project_id, **result}
+
+
+@router.get("/findings/search")
+def search_findings_semantic(
+    request: Request,
+    project_id: int = Query(..., gt=0),
+    query: str = Query(..., min_length=1, max_length=1000),
+    threshold: float = Query(0.7, ge=0, le=1),
+    limit: int = Query(20, ge=1, le=20),
+):
+    """Retain an array-shaped adapter with real local chunk scores and explicit corpus identity."""
+    result = finding_query(
+        request=request,
+        project_id=project_id,
+        query=query,
+        finding_type=None,
+        status=None,
+        min_confidence=None,
+        task_id=None,
+        finding_ids=None,
+        limit=limit,
+        after_rank=0,
+        expected_corpus_sha256=None,
+        expected_record_set_sha256=None,
+    )
+    found = {}
+    for match in result["matches"]:
+        if match["score"] < threshold or match["finding_id"] in found:
+            continue
+        row = store(request).read(project_id, match["finding_id"])
+        found[match["finding_id"]] = {
+            **row,
+            "similarity": match["score"],
+            "search_kind": result["search_kind"],
+            "corpus_sha256": result["corpus_sha256"],
+            "corpus_count": result["corpus_count"],
+            "next_rank": result.get("next_rank"),
+        }
+    return list(found.values())
+
+
+@router.get("/findings/{finding_id}")
+def get_finding(
+    finding_id: int,
+    request: Request,
+    project_id: int = Query(..., gt=0),
+    offset: int = Query(0, ge=0),
+    max_chars: int = Query(12000, ge=1, le=20000),
+    evidence_offset: int = Query(0, ge=0),
+):
+    """Read bounded current body/citations only for the explicitly selected project."""
+    return store(request).read(
+        project_id,
+        finding_id,
+        offset=offset,
+        max_chars=max_chars,
+        evidence_offset=evidence_offset,
+    )
+
+
+@router.get("/findings/{finding_id}/evidence")
+def finding_evidence(
+    finding_id: int,
+    request: Request,
+    project_id: int = Query(..., gt=0),
+    offset: int = Query(0, ge=0),
+):
+    """Page saved exact quotations independently of body windows; missing relations stay visible."""
+    return store(request).evidence(project_id, finding_id, offset=offset)
+
+
+@router.get("/findings/{finding_id}/legacy-sources")
+def finding_legacy_sources(
+    finding_id: int,
+    request: Request,
+    project_id: int = Query(..., gt=0),
+    offset: int = Query(0, ge=0),
+    max_chars: int = Query(8000, ge=1, le=20000),
+):
+    """Read unverified original source declarations literally with explicit continuation."""
+    return store(request).legacy_sources(
+        project_id, finding_id, offset=offset, max_chars=max_chars
+    )
+
+
+@router.get("/findings/{finding_id}/sources/{source_id}")
+def finding_source(
+    finding_id: int,
+    source_id: int,
+    request: Request,
+    project_id: int = Query(..., gt=0),
+    offset: int = Query(0, ge=0),
+    max_chars: int = Query(12000, ge=1, le=20000),
+):
+    """Inspect an actually cited, hash-verified saved source rather than opening a live URL/file."""
+    return store(request).source(
+        project_id, finding_id, source_id, offset=offset, max_chars=max_chars
+    )

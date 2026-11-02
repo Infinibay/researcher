@@ -7,6 +7,107 @@ import httpx
 import pytest
 
 
+@pytest.mark.parametrize("semantic", [False, True])
+async def test_native_finding_registry_facade_preserves_filters_cursors_and_exact_evidence(
+    coordination, semantic
+):
+    """Cross the actual admitted schema/HTTP boundary without a model-generated canned result."""
+    import time
+
+    from backend.api.main import create_app
+    from backend.research.models import (
+        PERMISSIONS,
+        EvidenceReference,
+        FindingDraft,
+        SourceDraft,
+    )
+    from backend.runtime.business_mediation import BusinessTools
+    from backend.runtime.host_business import host_business
+
+    c = coordination
+    c.now[0] = time.time()
+    app = create_app()
+    token = c.research.issue_grant(
+        project_id=101, task_id=1001, agent_id="fixture", permissions=set(PERMISSIONS)
+    )
+    scope = c.research.authorize(token)
+    app.state.live_grants.activate(scope.grant_id)
+    source = c.research.capture_source(
+        scope,
+        "registry-source",
+        SourceDraft(
+            "web", "https://example.org/policy", "Policy", "Tax rates are fractions."
+        ),
+        intent={},
+    )["source_id"]
+    finding = c.research.record_finding(
+        scope,
+        "registry-finding",
+        FindingDraft(
+            "Tax convention",
+            "The convention uses fractions.",
+            (EvidenceReference(source, "Tax rates are fractions."),),
+        ),
+    )["finding_id"]
+    if semantic:
+        from backend.research.semantic import SemanticRetriever
+        from backend.tests.research.test_semantic_retrieval import assets
+
+        app.state.retrieval = SemanticRetriever(assets())
+    async with host_business(
+        api_url="http://127.0.0.1",
+        token=token,
+        withdraw=lambda: app.state.live_grants.withdraw(scope.grant_id),
+        transport=httpx.ASGITransport(app=app),
+    ) as peer:
+        facade = await BusinessTools.connect(peer)
+
+        async def call(name, **arguments):
+            """Decode a successful real facade result while preserving the full failure on assertion."""
+            response = await facade.call({"tool": name, "arguments": arguments})
+            assert response["success"], response
+            return json.loads(response["contentItems"][0]["text"])
+
+        page = await call(
+            "researcher_finding_list", query="fractions", status="provisional", limit=1
+        )
+        assert page["items"][0]["id"] == finding and page["next_after_id"] is None
+        summary = await call("researcher_finding_summary", status="provisional")
+        assert summary["total_count"] == 1 and summary["scientific_confidence"] is None
+        other_task = await call("researcher_finding_list", for_task_id=2002)
+        assert other_task["items"] == []
+        read = await call("researcher_finding_read", finding_id=finding, max_chars=10)
+        assert read["next_offset"] == 10 and read["evidence"][0]["quote_is_exact"]
+        if semantic:
+            ranked = await call(
+                "researcher_finding_query",
+                query="How are tax rates represented?",
+                finding_ids=[finding],
+                limit=3,
+            )
+            assert ranked["finding_ids"] == [finding] and ranked["full_coverage"]
+            assert (
+                ranked["execution"]["worker_closed"]
+                and ranked["matches"][0]["finding_id"] == finding
+            )
+            assert "source_id" not in ranked
+            continued = await call(
+                "researcher_finding_query",
+                query="How are tax rates represented?",
+                finding_ids=[finding],
+                limit=3,
+                after_rank=1,
+                expected_corpus_sha256=ranked["corpus_sha256"],
+                expected_record_set_sha256=ranked["record_set_sha256"],
+            )
+            assert continued["corpus_sha256"] == ranked["corpus_sha256"]
+            assert (
+                continued["full_coverage"] and continued["execution"]["worker_closed"]
+            )
+
+    assert peer.closed and not app.state.live_grants.allows(scope.grant_id)
+
+
 async def test_host_catalog_keeps_credentials_and_authority_out_of_tool_arguments():
     from backend.runtime.business_mediation import BUSINESS_NAMES, BusinessTools
     from backend.runtime.host_business import host_business

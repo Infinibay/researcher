@@ -1,0 +1,90 @@
+{
+  "status": "implemented evidence-ledger pilot;18 functional states and3reading widths verified; independent review and full route/human acceptance pending",
+  "generator": "built-in image_gen; 3 independent desktop calls",
+  "model": null,
+  "model_note": "Not exposed by tool",
+  "date": "2026-11-01",
+  "assets": [
+    {
+      "id": "evidence-ledger",
+      "surface": "desktop",
+      "file": "evidence-ledger.png",
+      "sha256": "7f07ac240ce9fb1c17848e7d4bb3e8787d066fd50d574f66ff9c1867d54282fc",
+      "dimensions": [
+        1487,
+        1058
+      ],
+      "target": [
+        1440,
+        1024
+      ],
+      "prompt_file": "evidence-ledger.prompt.txt",
+      "prompt_sha256": "31a37bc08730c2da2b7d249897af4c712008dfa823fa154bca13f03da5ef76e9"
+    },
+    {
+      "id": "claim-register",
+      "surface": "desktop",
+      "file": "claim-register.png",
+      "sha256": "cfa764ad7f8042b490dcb713e105a4e4bf6d6b0f16786623462a5806206c638f",
+      "dimensions": [
+        1487,
+        1058
+      ],
+      "target": [
+        1440,
+        1024
+      ],
+      "prompt_file": "claim-register.prompt.txt",
+      "prompt_sha256": "5748ed3dab19b63bd060cd5adac960460afb948ba2bb24bbb5067c30e7c9ca5f"
+    },
+    {
+      "id": "research-dossier",
+      "surface": "desktop",
+      "file": "research-dossier.png",
+      "sha256": "7a1e8967073b5aedf67d5445e6d060cee05c194a4b748adae57a9e2eabcb8b2d",
+      "dimensions": [
+        1487,
+        1058
+      ],
+      "target": [
+        1440,
+        1024
+      ],
+      "prompt_file": "research-dossier.prompt.txt",
+      "prompt_sha256": "171f5e9ce56a853835a5030acbe6e8d7f243c02b4dda75b0a45c2a86d0fc9fdd"
+    },
+    {
+      "id": "evidence-ledger-mobile",
+      "surface": "mobile",
+      "file": "evidence-ledger-mobile.png",
+      "sha256": "d47ee2f724fc11296d8db09f309064aaec52fad10415b28dbe8dd358798b3637",
+      "dimensions": [
+        853,
+        1844
+      ],
+      "target": [
+        390,
+        844
+      ],
+      "prompt_file": "evidence-ledger-mobile.prompt.txt",
+      "prompt_sha256": "291bb9f27be70b2712106e3f37726c78793fa7a36150475d99fbd90c6d474569",
+      "reference": "evidence-ledger.png"
+    }
+  ],
+  "references": {
+    "docs/design/audits/2026-11-01-wiki/after-desktop-reading-final.png": "008deb9a54a1b4752307c02db32e40a8f4f7bc94139507d9801bc41dfdd970a8",
+    "docs/design/audits/2026-11-01-findings/before-desktop.png": "1ee4ff05beac2654b6540b5a32d0de097a43b16d0deea8a6916106301ae91099"
+  },
+  "selected": "evidence-ledger",
+  "selection_basis": "Persistent index and broad evidence reader maintain orientation when inspecting multiple claims. Register pushes reading below the list; dossier duplicates review metadata and narrows text. Design judgment, not human acceptance.",
+  "implementation_corrections": [
+    "Use only actual captured quotes/source identities; illustrative generated text is not research evidence.",
+    "Do not invent modified-at values or separate explanation field when absent; label original claim body accurately.",
+    "Preserve legacy numeric confidence as attributed historical self-report, never scientific confidence.",
+    "Scientific validation and independently admitted review cannot be inferred from a state flag."
+  ],
+  "mobile_status": "generated, inspected; separate index/detail; illustration is not literal evidence",
+  "base_product_commit": "0cbed92",
+  "image_count": 4,
+  "selected_desktop": "evidence-ledger"
+}

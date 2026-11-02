@@ -322,22 +322,61 @@ export interface FileContent {
   html_url?: string
 }
 
+/** Current finding metadata; historical declarations are separate from independent review. */
 export interface Finding {
-  id: number
-  project_id?: number
-  task_id: number
-  agent_run_id?: string
-  topic: string
-  content: string
-  sources_json?: string
-  confidence?: number
-  agent_id: string
-  status?: string
-  finding_type?: string
-  validation_method?: string
-  reproducibility_score?: number
-  created_at?: string
-  similarity?: number
+  id: number; project_id: number; task_id: number | null; topic: string
+  agent_id: string | null; created_at: string | null; status: string | null
+  finding_type: string | null; confidence: number | null; scientific_confidence: number | null
+  confidence_origin: string; review_status: string; validation_method: string | null
+  reproducibility_score: number | null; content_chars: number; content_excerpt: string
+  evidence_count: number; confidence_invalid?: boolean; confidence_original?: string
+}
+
+/** Exact saved quotation relationship, with missing/inconsistent legacy records made explicit. */
+export interface FindingEvidence {
+  finding_id: number; source_id: number; quote: string; quote_chars: number
+  quote_is_exact: boolean; quote_offset: number | null; quote_truncated: boolean
+  source_unavailable: boolean; kind: string | null; locator: string | null
+  title: string | null; sha256: string | null; captured_at: number | null
+  finding_status: string | null
+}
+
+/** Independently paged citations never imply that omitted records were examined. */
+export interface FindingCitations {
+  project_id: number; finding_id: number; evidence: FindingEvidence[]
+  total_evidence: number; evidence_offset: number; next_evidence_offset: number | null
+}
+
+/** One current body window, rather than an invented retained revision. */
+export interface FindingDetail extends Finding, FindingCitations {
+  content: string; total_chars: number; offset: number; next_offset: number | null
+  legacy_sources_json: string | null; legacy_sources_total_chars: number
+  legacy_sources_next_offset: number | null
+}
+
+/** Historical raw declarations are preserved but never treated as verified captured citations. */
+export interface FindingLegacySources {
+  project_id:number;finding_id:number;content:string;total_chars:number;offset:number
+  next_offset:number|null;verification:'unverified_legacy_declaration'
+}
+
+/** Stable metadata cursor and full matching count for an explicit project/filter set. */
+export interface FindingIndex {
+  project_id: number; items: Finding[]; total_matching: number; next_after_id: number | null
+}
+
+/** Complete bounded local retrieval result; scores describe chunks, not scientific confidence. */
+export interface FindingRanking {
+  project_id: number; corpus_count: number; finding_ids: number[]; corpus_sha256?: string; record_set_sha256?: string
+  search_kind: string; scientific_confidence: null; full_coverage: boolean; next_rank: number | null
+  matches: {finding_id:number;topic:string;excerpt:string;score:number;rank:number;record_sha256:string}[]
+}
+
+/** Read only a captured source linked to the selected finding; this is not a live fetch. */
+export interface FindingSource {
+  project_id:number; finding_id:number; source_id:number; kind:string; title:string
+  locator:string; sha256:string; captured_at:number; provenance:Record<string,unknown>
+  content:string; offset:number; total_chars:number; next_offset:number|null
 }
 
 export interface Artifact {

@@ -4103,3 +4103,113 @@ Resume at139250c; avoid re-running Wiki tests after docs-only followup.
 - Ledger path note: scratch/progress.md is a symlink to this file. Resolve paths and
   deduplicate writes; there are not two independent ledgers. Finalizer duplicate line
   removed without repeating tests or changing product bytes.
+
+## Active brief — Findings registry/evidence/UI (BASE0cbed92)
+
+- Previous goal turn: progress. Wiki committed139250c with final regression/packaging/
+  browser evidence; handoff0cbed92. Managed worktree clean except protected roots.
+- Outcome: scoped owner/native paged finding list, combined lexical filters, bounded
+  detail/exact captured-source evidence, structured summary, complete bounded local
+  semantic corpus and selected Findings UI. Reuse SQLite research store, canonical
+  business schemas, existing SemanticRetriever/Units and owner session. No migration
+  or new inference loop needed for this read/inspection boundary.
+- Ruling: independent review needs actual reviewer admission; current runs fix actor
+  researcher and grant all ordinary research permissions. A separate status label or
+  model assertion cannot prove independence. Deliver review provenance honestly now;
+  retain explicit independent-review/legacy-writer/engine work in capability matrix,
+  not a fake validate checkbox. No claim of complete finding review/role cutover.
+- Design: private4concepts generated/inspected; evidence-ledger selected by delegated
+  judgment, mobile separate list/detail. Native unscored findings and historical
+  confidence/active flags stay distinguishable. Generated source text/timestamps are
+  illustrative; implementation uses actual saved data, no invented explanation/date.
+- Exit: registry filters/cursors/unknown metadata, project/token/serving DB isolation,
+  long text/evidence/source windows, corruption, explicit semantic scope/limits/
+  cancellation/current-authority, dynamic native facade to real API. UI desktop/mobile,
+  safe Markdown, focus, errors/recovery, late foreign state and clear review status;
+  wheel-directed including historical migration callers, then one global regression.
+- Docs/JSDoc on added relevant declarations. No extra research model turn without a
+  new unresolved synthesis question. Initial8focused backend cases written before
+  implementation; read their actual RED output next.
+
+- Findings initial8RED→GREEN: owner project/id and serving DB isolation; lexical
+  filters combine; stable cursors/counts; unknown confidence and old validation flags
+  retained with honest provenance; long body windows; exact quoted snapshot lookup
+  rejects uncited/corrupt source. Added native reader window case RED→GREEN.
+- Semantic7RED→GREEN incl real offline encoder: late text past500chars retrieved,
+  exact title/body offsets, no source creation; oversized/foreign selection fails
+  whole; revocation/edit/insert/live withdrawal during query rejects late disclosure.
+  New native tools list/summary/query bring canonical business catalog22; native
+  read now has independent text/citation cursors. Dynamic facade/API cases2passed.
+- Legacy sources_json preview/window RED→GREEN: retains original unverified
+  declarations, distinct from captured quotations; malformed empty lexical query
+  rejects422. Native for_task_id is a read filter inside fixed project, not new
+  grant/task authority; RED→GREEN, facade covers a foreign task filter returning0.
+- Current broad directed256passed (research +host business/mediation),63.45s.
+  Full frontend54passed/build;5new actual SSR cases cover scope, legacy semantics,
+  errors/empty and inert Markdown. No subscription research turns; local embeddings
+  real. These are directed checks, not a final global/wheel claim.
+- Followup corpus test found two actual defects: metadata-clipped long title fed
+  semantic corpus and assumed100bytes/record rejected valid near-limit text. Each
+  reproduced RED; full title now used and exact normalized byte accounting includes
+  prefix/id/separators.20focused registry/semantic cases GREEN,10.15s, after fix.
+  Ruff/format all11changed Python files and changed-piece AST docstrings pass.
+- Design4images now copied unchanged to docs/design/concepts/findings; selected
+  evidence-ledger, mobile separate views. Inventory18/36desktop,6/12mobile/selected;
+  still5delivered pilots/0fullyaccepted until Findings final QA/package. Before
+  screenshots9contrast nodes desktop/mobile. Initial new3widths passed0axe; inspected
+  captures led to compact historical-evaluation details, shorter card previews and
+  independently scrolling desktop panes. Full frontend54/build includes those changes.
+- Live synthetic preview unified exec54288, findings-current/serve.py. Dedicated
+  view.db copied read-only from previous Wiki fixture then seeded own synthetic
+  claims/pagination/legacy-source declaration and foreign601. Before invariants in
+  findings-current/before-invariants.json. No original checkout/trial/Wiki DB changed.
+  Server loaded before final corpus/for_task_id fixes, so restart from exact source
+  before final interactive QA. Last3width smoke on final frontend is exec87425;
+  inspect result, then verified-stop preview. No model inference account call allowed
+  in preview; ForbiddenNative marker must stay absent.
+- Remaining this active delivery: full functional browser QA (list pagination/combined
+  filters, native-vs-legacy labels, body/citation/legacy-source continuations, exact
+  source focus/literal HTML, real semantic & unavailable/retry, late project changes),
+  final backend fault review incl malformed nonempty FTS grammar and query bounds;
+  preserve legacy read/search/summary adapters or record clear consumer cutover work;
+  architecture/schema/capability/coverage docs, final wheel-directed (include historical
+  migration callers), one global regression and explicit owned commit. Independent
+  review admission/mutation and legacy engine/provider retirement remain separate
+  required plan work, not implemented by these labels. Do not close the goal.
+
+- Final frontend reading smoke exec87425 terminal0:1440/390/320 pass0axe, no pageerrors
+  or clipped reader. Verified preview terminated intentionally; exec54288 closes by
+  SIGTERM. No remaining live model/browser/test jobs for Findings. Resume from
+  BASE0cbed92 plus uncommitted changes; do not repeat the already terminal jobs.
+
+- Goal turn resumption: previous turn classified progress (new registry/read/search/UI
+  code and directed/visual evidence), not final delivery. Read current managed sources;
+  no old jobs live. Ken recall for old Findings route has no relevant saved memory.
+- Final faults3RED→GREEN: malformed nonempty FTS prefix was SQLite unterminated string,
+  now explicit422 without LIKE fallback; semantic continuation previously admitted a
+  worker with rank from an unobserved/mutated set, now needs both prior text/record-set
+  hashes and rejects409 before worker. Native/owner variants tested. UI corpus page
+  mixing helper was absent (RED), now validates same hashes/members/project,6SSRgreen.
+  A syntax error in the first edit script prevented any edit; its unrelated test process
+  only reran existing RED. Corrected the script and verified actual GREEN separately.
+- Functional QA script findings-qa.mjs is running unified exec from current tool output;
+  preview is exec58299, findings-current/serve.py restarted with current API; final
+  frontend compiled in findings-ui-build-qa.log. Review exact returned handles/logs,
+  do not restart live processes solely for elapsed time.
+
+- Findings delivery terminal: 1792 casos: 1689 pasan, 100 fallos heredados y 3 omitidos; 25 new cases passed, 645 runtime passes. New failures=[]; resolved=[]. Wheel 371 pasan y 1 fallo heredado explícito, 621 matching Python/SQL files. Frontend55/build,18 functional states +3reading widths/0axe. Six pilots/0accepted. Full goal active.
+
+- Functional QA18states GREEN/0axe/pageerrors, final3width reading smoke GREEN.
+  Reused unchanged partial cases while correcting verifier assumptions: body clicks
+  must await actual response/body position, configured read retry is1, and Header uses
+  existing project buttons rather than a select. ARIA probe named Tipo correctly;
+  label markup normalization is not a proven screen-reader comprehension fix. No app
+  behavior patch was needed for those verifier failures. Final backend continued
+  rank binding was actual product RED→GREEN, with positive facade and browser checks.
+- Final browser invariants preserve finding/citation row hashes, report/source/ref/wiki
+  and runtime counts. No research generation marker; local retrieval only. Preview
+  verified by PID/cmdline/cwd and stopped explicitly; exec58299 terminal143 expected.
+  Packaging372cases/371pass/1explicit known baseline failure;357imports onlywheel,
+ 621matching Python/SQL files. Full source1792/1689pass/100EXACTbaselinefail/3skip,
+ 645runtime;25newcases. Final frontend55/build, docstring presence audit clean on
+  changed/new declarations. Full goal and whole-branch documentation audit remain open.

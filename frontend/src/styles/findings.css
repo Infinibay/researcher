@@ -1,0 +1,77 @@
+/* Evidence ledger: preserve reading space and epistemic labels at every viewport. */
+.task-workbench.findings-workbench {display:grid;grid-template-columns:minmax(18rem,24rem) minmax(0,1fr);margin:-1.5rem;min-height:calc(100dvh - 4rem)}
+.findings-workbench > :not(.task-split) {margin:0}
+.findings-workbench :where(h1,h2,h3) {color:var(--work-ink);font-family:Georgia,'Times New Roman',serif;font-weight:600;line-height:1.2;overflow-wrap:anywhere}
+.findings-workbench h1 {font-size:clamp(2rem,3vw,3rem);margin:.75rem 0 1.25rem}
+.findings-workbench h2 {font-size:1.6rem;margin-bottom:1rem}
+.findings-workbench h3 {font-size:1.15rem}
+.findings-workbench :where(p,li,blockquote,pre) {overflow-wrap:anywhere;line-height:1.65}
+.findings-workbench button {padding:.5rem .75rem;min-height:2.75rem;border-radius:.25rem;color:var(--work-accent);text-align:left}
+.findings-workbench button:hover:not(:disabled) {background:var(--work-wash)}
+.findings-workbench button:disabled {opacity:.6}
+.findings-workbench .findings-primary {color:#fff;background:var(--work-accent-fill);font-weight:600}
+.findings-workbench .findings-primary:hover:not(:disabled) {background:var(--work-accent-strong)}
+.findings-workbench .findings-secondary {border:1px solid var(--work-line);white-space:nowrap}
+.findings-workbench :where(input[type=search],select) {background:var(--work-paper);color:var(--work-ink);border:1px solid var(--work-line);padding:.5rem .65rem;border-radius:.25rem;width:100%}
+.findings-index {border-right:1px solid var(--work-line);padding:1.25rem 0}
+.findings-index > header,.findings-search,.findings-count {padding-inline:1.25rem}
+.findings-index > header {margin-bottom:1.5rem}
+.findings-index > header :where(h1,h2) {font-size:1.8rem;margin:0 0 .35rem}
+.findings-index > header p,.findings-search > p,.findings-search details p {color:var(--work-muted);font-size:.85rem}
+.findings-search {display:grid;gap:.5rem;margin-bottom:1.5rem}
+.findings-search label {font-size:.875rem;color:var(--work-muted)}
+.findings-search details {font-size:.85rem}
+.findings-search summary {min-height:2.75rem;padding-block:.65rem;color:var(--work-accent);cursor:pointer}
+.findings-filters {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.5rem;margin-block:.75rem}
+.findings-filters label {display:grid;gap:.25rem}
+.findings-list {list-style:none;padding:0;margin:0}
+.findings-list > li {border-top:1px solid var(--work-line);border-left:3px solid transparent}
+.findings-list > li[data-selected=true],.findings-list > li:has(button[aria-current=true]) {border-left-color:var(--work-accent);background:var(--work-wash)}
+.findings-list > li > button {display:grid;gap:.65rem;padding:1.25rem;width:100%;border-radius:0;color:var(--work-ink)}
+.findings-list > li > button strong {font-size:1.05rem;line-height:1.4;overflow-wrap:anywhere}
+.findings-list > li > button > span {font-size:.875rem}
+.findings-row-meta {display:flex;align-items:center;flex-wrap:wrap;gap:.5rem 1rem;color:var(--work-muted);font-size:.875rem}
+.findings-state {padding:.15rem .45rem;background:var(--work-wash);color:var(--work-muted);border-radius:.25rem}
+.findings-state[data-status=provisional] {background:#f9eacb;color:#754b12}
+.findings-mark {display:flex;align-items:start;gap:.5rem;padding:.75rem 1.25rem 0;font-size:.85rem;color:var(--work-muted)}
+.findings-workbench .findings-mark input {width:1.1rem;min-height:1.25rem;flex-shrink:0;margin-top:.15rem;accent-color:var(--work-accent)}
+.findings-count {font-size:.85rem;color:var(--work-muted);margin:.75rem 0}
+.findings-pane {padding:1.75rem 2rem 3rem;min-width:0}
+.findings-back {display:none;margin-bottom:1.25rem}
+.findings-reader {max-width:68rem}
+.findings-reader-heading {padding-bottom:1.25rem;border-bottom:1px solid var(--work-line);margin-bottom:1.5rem}
+.findings-muted {color:var(--work-muted);font-size:.875rem}
+.findings-assessment {font-size:.9rem;color:var(--work-muted);padding-bottom:1.5rem;border-bottom:1px solid var(--work-line);margin-bottom:1.5rem}
+.findings-assessment p + p {margin-top:.5rem}
+.findings-body .prose {max-width:68ch;line-height:1.75}
+.findings-body .prose h1 {font-size:1.9rem}
+.findings-window-nav {display:flex;flex-wrap:wrap;gap:.5rem;margin-block:.75rem}
+.findings-body > .findings-muted {margin-top:1rem}
+.findings-evidence,.findings-provenance {border-top:1px solid var(--work-line);padding-top:1.5rem;margin-top:1.75rem}
+.findings-evidence > p {color:var(--work-muted);font-size:.9rem;margin-bottom:1.25rem}
+.findings-citation {padding-block:1.25rem;border-top:1px solid var(--work-line)}
+.findings-citation header {display:flex;align-items:start;justify-content:space-between;gap:.75rem;margin-bottom:1rem}
+.findings-citation blockquote {white-space:pre-wrap;background:var(--work-wash);border-left:3px solid var(--work-accent);padding:1rem;font-size:1rem}
+.findings-citation > p {margin-top:.65rem;font-size:.875rem}
+.findings-source h2 {margin-top:1.5rem}
+.findings-source p {margin-bottom:.5rem}
+.findings-source-text {white-space:pre-wrap;background:var(--work-wash);padding:1.25rem;margin-block:1.5rem;font-size:.95rem}
+.findings-source-text mark {background:#f9eacb;color:#50370f}
+.findings-source details {margin-top:1.5rem}
+.findings-source code {overflow-wrap:anywhere}
+.findings-error {color:var(--work-error)}
+.findings-message {padding:1.25rem}
+.findings-idle {padding:3rem 2rem;max-width:44rem}
+.findings-workbench :where(h1,h2)[tabindex='-1']:focus {outline:none}
+@media(max-width:1100px) {.task-workbench.findings-workbench {grid-template-columns:minmax(16rem,19rem) minmax(0,1fr)}.findings-pane {padding:1.5rem}}
+@media(max-width:760px) {.task-workbench.findings-workbench {display:block;margin:-1.5rem;min-height:calc(100dvh - 7rem)}.findings-workbench[data-detail=true] .findings-index {display:none}.findings-workbench[data-detail=false] .findings-pane {display:none}.findings-index {border:0}.findings-pane {padding:1.25rem 1rem 3rem}.findings-back {display:inline-block}.findings-workbench h1 {font-size:2.1rem}.findings-citation header {flex-wrap:wrap}.findings-citation header button {flex-shrink:0}}
+
+.findings-legacy-sources {border-top:1px solid var(--work-line);margin-top:1.5rem;padding-top:1rem;font-size:.875rem}
+.findings-legacy-sources summary {min-height:2.75rem;padding-block:.65rem;color:var(--work-accent);cursor:pointer}
+.findings-legacy-sources pre {white-space:pre-wrap;background:var(--work-wash);padding:1rem;margin-block:1rem}
+
+@media(min-width:761px) {.task-workbench.findings-workbench {height:calc(100dvh - 4rem);min-height:0}.findings-index,.findings-pane {overflow-y:auto;overscroll-behavior:contain}}
+.findings-row-preview {display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.findings-assessment summary {min-height:2.75rem;padding-block:.65rem;color:var(--work-accent);cursor:pointer}
+
+.findings-filters > div {display:grid;gap:.25rem}

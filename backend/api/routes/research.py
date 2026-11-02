@@ -248,6 +248,97 @@ def source_query(
         return result
 
 
+@router.get("/findings")
+def finding_list(
+    ctx: Context,
+    q: str | None = Query(None, min_length=1, max_length=1000),
+    finding_type: str | None = None,
+    status: str | None = None,
+    min_confidence: float | None = Query(None, ge=0, le=1),
+    for_task_id: int | None = Query(None, gt=0),
+    after_id: int = Query(0, ge=0),
+    limit: int = Query(50, ge=1, le=100),
+):
+    """List bound-project metadata; combine lexical/type/status/historical-confidence filters."""
+    return ctx.store.list_findings(
+        ctx.scope,
+        query=q,
+        finding_type=finding_type,
+        status=status,
+        min_confidence=min_confidence,
+        task_id=for_task_id,
+        after_id=after_id,
+        limit=limit,
+    )
+
+
+@router.get("/findings-summary")
+def finding_summary(
+    ctx: Context,
+    q: str | None = Query(None, min_length=1, max_length=1000),
+    finding_type: str | None = None,
+    status: str | None = None,
+    min_confidence: float | None = Query(None, ge=0, le=1),
+    for_task_id: int | None = Query(None, gt=0),
+):
+    """Count the complete selected set without synthesizing claims or averaging scientific certainty."""
+    return ctx.store.summarize_findings(
+        ctx.scope,
+        query=q,
+        finding_type=finding_type,
+        status=status,
+        min_confidence=min_confidence,
+        task_id=for_task_id,
+    )
+
+
+@router.get("/findings-query")
+def finding_query(
+    ctx: Context,
+    request: Request,
+    query: str = Query(min_length=1, max_length=1000),
+    finding_type: str | None = None,
+    status: str | None = None,
+    min_confidence: float | None = Query(None, ge=0, le=1),
+    for_task_id: int | None = Query(None, gt=0),
+    finding_ids: str | None = Query(None, max_length=1000),
+    limit: int = Query(5, ge=1, le=20),
+    after_rank: int = Query(0, ge=0, le=2048),
+    expected_corpus_sha256: str | None = Query(None, pattern=r"^[0-9a-f]{64}$"),
+    expected_record_set_sha256: str | None = Query(None, pattern=r"^[0-9a-f]{64}$"),
+):
+    """Rank complete scoped finding text, then revalidate the exact set and live authority."""
+    from backend.knowledge.findings import corpus_unchanged, query_corpus, selected_ids
+
+    selection = {
+        "finding_type": finding_type,
+        "status": status,
+        "min_confidence": min_confidence,
+        "task_id": for_task_id,
+        "finding_ids": selected_ids(finding_ids),
+    }
+    corpus = ctx.store.finding_corpus(ctx.scope, **selection)
+    with request.app.state.live_grants.operation(ctx.scope.grant_id) as cancelled:
+        result = query_corpus(
+            corpus,
+            request.app.state.retrieval,
+            query,
+            limit=limit,
+            after_rank=after_rank,
+            expected_corpus_sha256=expected_corpus_sha256,
+            expected_record_set_sha256=expected_record_set_sha256,
+            cancelled=cancelled,
+        )
+        current = ctx.store.finding_corpus(ctx.scope, **selection)
+        if not corpus_unchanged(corpus, current):
+            raise RetrievalUnavailable(
+                "Finding corpus changed during semantic retrieval; retry the current selection"
+            )
+        if cancelled.is_set():
+            raise ResearchForbidden("Semantic query authority was withdrawn")
+        return result
+
+
 @router.post("/findings", response_model=FindingReceipt)
 def finding_record(command: RecordFinding, ctx: Context):
     """Persist a provisional finding only after checking its exact saved-source quotations."""
@@ -263,25 +354,22 @@ def finding_record(command: RecordFinding, ctx: Context):
 
 
 @router.get("/findings/{finding_id}", response_model=FindingDetail)
-def finding_read(finding_id: int, ctx: Context):
-    """Read one project-scoped finding with retained evidence and validation state."""
-    row = ctx.store.read_finding(ctx.scope, finding_id)
-    return {
-        "finding_id": row["id"],
-        **{
-            key: row[key]
-            for key in (
-                "project_id",
-                "task_id",
-                "topic",
-                "content",
-                "finding_type",
-                "status",
-                "confidence",
-                "evidence",
-            )
-        },
-    }
+def finding_read(
+    finding_id: int,
+    ctx: Context,
+    offset: int = Query(0, ge=0),
+    max_chars: int = Query(12000, ge=1, le=20000),
+    evidence_offset: int = Query(0, ge=0),
+):
+    """Read explicit claim/evidence windows; stored flags and confidence retain their actual provenance."""
+    row = ctx.store.read_finding(
+        ctx.scope,
+        finding_id,
+        offset=offset,
+        max_chars=max_chars,
+        evidence_offset=evidence_offset,
+    )
+    return {"finding_id": row["id"], **row}
 
 
 @router.post("/reports", response_model=ReportReceipt)

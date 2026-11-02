@@ -137,18 +137,46 @@ class EvidenceResponse(BaseModel):
     finding_status: str
 
 
-class FindingDetail(BaseModel):
-    """Read a scoped finding with evidence and the stored, possibly unknown confidence."""
+class FindingEvidence(EvidenceResponse):
+    """Keep incomplete legacy relationships visible without inventing missing source metadata."""
+
+    kind: str | None
+    locator: str | None
+    title: str | None
+    sha256: str | None
+    captured_at: float | None
+    finding_status: str | None
+    quote_is_exact: bool
+    quote_offset: int | None
+    source_unavailable: bool
+    quote_chars: int
+    quote_truncated: bool
+
+
+class FindingDetail(TextWindow):
+    """Page current text and citations; historical status/confidence never certify independent review."""
 
     finding_id: int
     project_id: int
-    task_id: int
+    task_id: int | None
     topic: str
-    content: str
-    finding_type: str
-    status: str
+    agent_id: str | None
+    created_at: str | None
+    finding_type: str | None
+    status: str | None
     confidence: float | None
-    evidence: list[EvidenceResponse]
+    scientific_confidence: float | None
+    confidence_origin: str
+    validation_method: str | None
+    reproducibility_score: float | None
+    review_status: str
+    legacy_sources_json: str | None
+    legacy_sources_total_chars: int
+    legacy_sources_next_offset: int | None
+    evidence: list[FindingEvidence]
+    total_evidence: int
+    evidence_offset: int
+    next_evidence_offset: int | None
 
 
 class ReportWindow(TextWindow):

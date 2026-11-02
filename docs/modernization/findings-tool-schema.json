@@ -1,0 +1,339 @@
+{
+  "business_catalog_tools": 22,
+  "finding_tools": [
+    {
+      "name": "researcher_finding_list",
+      "description": "Page all matching project finding metadata by stable id (limit1\u2013100); follow next_after_id. Lexical query/type/status/declared-confidence filters combine. Omit min_confidence to retain unknown values; stored numeric confidence and active/validation_method flags are historical assertions, not scientific certainty or independent review. Use finding_read for complete body/evidence windows. Use for_task_id only as a read filter inside the bound project; it does not change tool authority.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "finding_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "min_confidence": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "for_task_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "after_id": {
+            "default": 0,
+            "type": "integer"
+          },
+          "limit": {
+            "default": 50,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false
+      }
+    },
+    {
+      "name": "researcher_finding_query",
+      "description": "Paraphrase search across complete current finding titles/bodies with the pinned local encoder. Select1\u201350 distinct finding_ids or all filtered project findings; sets over500 rows/200000 bytes fail without sampling. Limit1\u201320 ranked chunks, follow next_rank with both prior corpus_sha256 and record_set_sha256 as expected_corpus_sha256/expected_record_set_sha256; changed sets require a fresh rank0 query. Exact excerpt offsets refer to title + two newlines + body, not captured scientific sources. Cosine scores measure chunk similarity, never scientific confidence. Read finding citations/source snapshots before using a claim as evidence. No remote or lexical fallback; changed corpus/authority rejects the late result. Use for_task_id only as a read filter inside the bound project; it does not change tool authority.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "finding_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "finding_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "min_confidence": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "for_task_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "limit": {
+            "default": 5,
+            "type": "integer"
+          },
+          "after_rank": {
+            "default": 0,
+            "type": "integer"
+          },
+          "expected_corpus_sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "expected_record_set_sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false
+      }
+    },
+    {
+      "name": "researcher_finding_read",
+      "description": "Read a scoped current finding with bounded text (max_chars1\u201320000) and20 saved quotations. Follow next_offset and next_evidence_offset independently. Unknown confidence/review stay unknown; a stored active flag does not certify independent validation. quote_is_exact checks saved text membership, not scientific support. Inspect original captured sources with source_read before claiming complete review.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "finding_id": {
+            "type": "integer"
+          },
+          "offset": {
+            "default": 0,
+            "type": "integer"
+          },
+          "max_chars": {
+            "default": 12000,
+            "type": "integer"
+          },
+          "evidence_offset": {
+            "default": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "finding_id"
+        ],
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false
+      }
+    },
+    {
+      "name": "researcher_finding_record",
+      "description": "Persist a provisional finding. finding_type is its category; provisional is its validation status, not a category. evidence contains objects {source_id: integer, quote: exact captured excerpt}. No invented confidence; preserve provenance and reuse operation_key on retry.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "operation_key": {
+            "type": "string"
+          },
+          "topic": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "finding_type": {
+            "default": "observation",
+            "enum": [
+              "observation",
+              "hypothesis",
+              "experiment",
+              "proof",
+              "conclusion"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "operation_key",
+          "topic",
+          "content",
+          "evidence"
+        ],
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "researcher_finding_summary",
+      "description": "Return complete filtered project counts grouped by stored type/status, without an LLM summary. Declared-confidence averages describe stored numbers only; scientific confidence remains unknown. This is not scientific validation or a synthesized conclusion. Use for_task_id only as a read filter inside the bound project; it does not change tool authority.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "finding_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "min_confidence": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "for_task_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false
+      }
+    }
+  ]
+}

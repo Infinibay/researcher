@@ -1,0 +1,108 @@
+{
+  "states": [
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "workbench": {
+          "x": 192,
+          "y": 64,
+          "width": 1248,
+          "height": 960,
+          "top": 64,
+          "right": 1440,
+          "bottom": 1024,
+          "left": 192
+        },
+        "reader": {
+          "x": 608,
+          "y": 92,
+          "width": 800,
+          "height": 970.40625,
+          "top": 92,
+          "right": 1408,
+          "bottom": 1062.40625,
+          "left": 608
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-findings/after-desktop-reader.png",
+      "sha256": "d45ca04d9c7a921df5e1161bc2c23807831a54f944cbad715862c1bf4e41be1b"
+    },
+    {
+      "name": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "workbench": {
+          "x": 0,
+          "y": 113,
+          "width": 390,
+          "height": 1280.203125,
+          "top": 113,
+          "right": 390,
+          "bottom": 1393.203125,
+          "left": 0
+        },
+        "reader": {
+          "x": 16,
+          "y": 197,
+          "width": 358,
+          "height": 1148.203125,
+          "top": 197,
+          "right": 374,
+          "bottom": 1345.203125,
+          "left": 16
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-findings/after-mobile-reader.png",
+      "sha256": "7bc65f95a65e60220d8270b1c07996d55fa2c09df1d44c272bb1cc99e628ac4a"
+    },
+    {
+      "name": "narrow",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 320,
+        "scroll": 320,
+        "workbench": {
+          "x": 0,
+          "y": 179,
+          "width": 320,
+          "height": 1464.8125,
+          "top": 179,
+          "right": 320,
+          "bottom": 1643.8125,
+          "left": 0
+        },
+        "reader": {
+          "x": 16,
+          "y": 263,
+          "width": 288,
+          "height": 1332.8125,
+          "top": 263,
+          "right": 304,
+          "bottom": 1595.8125,
+          "left": 16
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-findings/after-narrow-reader.png",
+      "sha256": "5c96a4144ae10046852c5c463790204e5c47dcd628452c98a4d7a4b40eab78fa"
+    }
+  ],
+  "errors": [],
+  "result": "passed"
+}

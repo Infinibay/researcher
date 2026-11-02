@@ -417,12 +417,37 @@ class SQLiteResearchStore:
             raise ResearchNotFound("Finding not found in this project")
         return dict(row)
 
-    def read_finding(self, scope, finding_id):
+    def list_findings(self, scope, **selection):
+        """Return scoped metadata pages; stored confidence is a declaration, not scientific validation."""
+        from backend.knowledge.findings import list_findings
+
         with self._transaction() as conn:
             self._check_scope(conn, scope, "findings.read")
-            result = self._finding(conn, scope.project_id, finding_id)
-            result["evidence"] = self._evidence(conn, scope.project_id, [finding_id])
-            return result
+            return list_findings(conn, scope.project_id, **selection)
+
+    def summarize_findings(self, scope, **selection):
+        """Aggregate every matching finding without sampling or another inference loop."""
+        from backend.knowledge.findings import summarize_findings
+
+        with self._transaction() as conn:
+            self._check_scope(conn, scope, "findings.read")
+            return summarize_findings(conn, scope.project_id, **selection)
+
+    def finding_corpus(self, scope, **selection):
+        """Freeze a complete current scoped finding corpus, rechecking grant/context authority."""
+        from backend.knowledge.findings import finding_corpus
+
+        with self._transaction() as conn:
+            self._check_scope(conn, scope, "findings.read")
+            return finding_corpus(conn, scope.project_id, **selection)
+
+    def read_finding(self, scope, finding_id, **selection):
+        """Read bounded current claim/citation windows with actual historical review provenance."""
+        from backend.knowledge.findings import read_finding
+
+        with self._transaction() as conn:
+            self._check_scope(conn, scope, "findings.read")
+            return read_finding(conn, scope.project_id, finding_id, **selection)
 
     @staticmethod
     def _evidence(conn, project_id, finding_ids):

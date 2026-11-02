@@ -1335,7 +1335,15 @@
         "docs/modernization/pdf-web-packaging.json",
         "backend/tests/research/test_pdf_web.py",
         "docs/architecture/structured-sources.md",
-        "docs/modernization/formats-results.json"
+        "docs/modernization/formats-results.json",
+        "docs/architecture/finding-registry.md",
+        "docs/modernization/findings-tool-schema.json",
+        "docs/modernization/findings-results.json",
+        "docs/modernization/findings-packaging.json",
+        "backend/tests/research/test_finding_registry.py",
+        "backend/tests/research/test_finding_semantic.py",
+        "docs/design/audits/2026-11-01-findings/report.md",
+        "frontend/tests/findings-design.test.ts"
       ],
       "remaining": [
         "Migrate/expose retained capabilities and their actual consumers (inventory of71 tools exists).",
@@ -1602,7 +1610,16 @@
         "frontend/tests/report-design.test.ts",
         "backend/tests/api/test_owner_report_evidence.py",
         "docs/design/concepts/wiki/manifest.json",
-        "docs/design/audits/2026-11-01-wiki/report.md"
+        "docs/design/audits/2026-11-01-wiki/report.md",
+        "docs/architecture/finding-registry.md",
+        "docs/modernization/findings-tool-schema.json",
+        "docs/modernization/findings-results.json",
+        "docs/modernization/findings-packaging.json",
+        "backend/tests/research/test_finding_registry.py",
+        "backend/tests/research/test_finding_semantic.py",
+        "backend/tests/runtime/test_host_business.py",
+        "docs/design/audits/2026-11-01-findings/report.md",
+        "frontend/tests/findings-design.test.ts"
       ],
       "notes": [
         "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json."
@@ -1623,11 +1640,13 @@
         "docs/design/audits/2026-11-01-reports/report.md",
         "docs/design/concepts/files/manifest.json",
         "docs/design/concepts/wiki/manifest.json",
-        "docs/design/audits/2026-11-01-wiki/report.md"
+        "docs/design/audits/2026-11-01-wiki/report.md",
+        "docs/design/concepts/findings/manifest.json",
+        "docs/design/audits/2026-11-01-findings/report.md"
       ],
       "remaining": [
-        "Seven routes need 21 desktop concepts, 7 mobile adaptations, selection and implementation; five selected pilots are in code.",
-        "All twelve routes and shared components still need complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
+        "Six routes still need concepts, selection and implementation: home, projects, epics, agents, repositories and flow. Eighteen desktop concepts and six mobile adaptations remain.",
+        "All twelve routes and shared components still require complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
       ]
     },
     "12_mobile_adaptations": {
@@ -1645,11 +1664,13 @@
         "docs/design/audits/2026-11-01-reports/report.md",
         "docs/design/concepts/files/manifest.json",
         "docs/design/concepts/wiki/manifest.json",
-        "docs/design/audits/2026-11-01-wiki/report.md"
+        "docs/design/audits/2026-11-01-wiki/report.md",
+        "docs/design/concepts/findings/manifest.json",
+        "docs/design/audits/2026-11-01-findings/report.md"
       ],
       "remaining": [
-        "Seven routes need 21 desktop concepts, 7 mobile adaptations, selection and implementation; five selected pilots are in code.",
-        "All twelve routes and shared components still need complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
+        "Six routes still need concepts, selection and implementation: home, projects, epics, agents, repositories and flow. Eighteen desktop concepts and six mobile adaptations remain.",
+        "All twelve routes and shared components still require complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
       ]
     },
     "design_selection": {
@@ -1675,11 +1696,13 @@
         "docs/design/concepts/files/manifest.json",
         "docs/design/audits/2026-11-01-files/report.md",
         "docs/design/concepts/wiki/manifest.json",
-        "docs/design/audits/2026-11-01-wiki/report.md"
+        "docs/design/audits/2026-11-01-wiki/report.md",
+        "docs/design/concepts/findings/manifest.json",
+        "docs/design/audits/2026-11-01-findings/report.md"
       ],
       "remaining": [
-        "Seven routes need 21 desktop concepts, 7 mobile adaptations, selection and implementation; five selected pilots are in code.",
-        "All twelve routes and shared components still need complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
+        "Six routes still need concepts, selection and implementation: home, projects, epics, agents, repositories and flow. Eighteen desktop concepts and six mobile adaptations remain.",
+        "All twelve routes and shared components still require complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
       ]
     },
     "all_screens_implemented": {
@@ -1708,11 +1731,13 @@
         "docs/design/concepts/files/manifest.json",
         "docs/design/audits/2026-11-01-files/report.md",
         "docs/design/concepts/wiki/manifest.json",
-        "docs/design/audits/2026-11-01-wiki/report.md"
+        "docs/design/audits/2026-11-01-wiki/report.md",
+        "docs/design/concepts/findings/manifest.json",
+        "docs/design/audits/2026-11-01-findings/report.md"
       ],
       "remaining": [
-        "Seven routes still need concepts, selection and implementation: home, projects, epics, agents, findings, repositories and flow.",
-        "All twelve routes and shared components still need complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
+        "Six routes still need concepts, selection and implementation: home, projects, epics, agents, repositories and flow. Eighteen desktop concepts and six mobile adaptations remain.",
+        "All twelve routes and shared components still require complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
       ]
     },
     "accessibility_e2e": {
@@ -1734,7 +1759,16 @@
         "frontend/tests/report-design.test.ts",
         "backend/tests/api/test_owner_report_evidence.py",
         "docs/design/concepts/wiki/manifest.json",
-        "docs/design/audits/2026-11-01-wiki/report.md"
+        "docs/design/audits/2026-11-01-wiki/report.md",
+        "docs/architecture/finding-registry.md",
+        "docs/modernization/findings-tool-schema.json",
+        "docs/modernization/findings-results.json",
+        "docs/modernization/findings-packaging.json",
+        "backend/tests/research/test_finding_registry.py",
+        "backend/tests/research/test_finding_semantic.py",
+        "backend/tests/runtime/test_host_business.py",
+        "docs/design/audits/2026-11-01-findings/report.md",
+        "frontend/tests/findings-design.test.ts"
       ],
       "notes": [
         "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json."
@@ -2511,7 +2545,15 @@
         "backend/runtime/live_grants.py",
         "backend/research/structured_text.py",
         "backend/research/provenance.py",
-        "backend/research/parser_process.py"
+        "docs/architecture/finding-registry.md",
+        "docs/modernization/findings-tool-schema.json",
+        "docs/modernization/findings-results.json",
+        "docs/modernization/findings-packaging.json",
+        "backend/tests/research/test_finding_registry.py",
+        "backend/tests/research/test_finding_semantic.py",
+        "backend/tests/runtime/test_host_business.py",
+        "docs/design/audits/2026-11-01-findings/report.md",
+        "frontend/tests/findings-design.test.ts"
       ],
       "remaining": [
         "Audit modules/classes/methods and relevant functions added earlier in this branch; add meaningful searchable docstrings/JSDoc where missing or stale.",
@@ -2553,6 +2595,25 @@
       "remaining": [
         "Migrate complete legacy roles/flows and semantic provider; preserve dependent-context/finding invalidation and retained history policy.",
         "Representative retrieval/scientific and human-comprehension evaluation; complete Wiki acceptance."
+      ]
+    },
+    "finding_registry": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/finding-registry.md",
+        "docs/modernization/findings-tool-schema.json",
+        "docs/modernization/findings-results.json",
+        "docs/modernization/findings-packaging.json",
+        "backend/tests/research/test_finding_registry.py",
+        "backend/tests/research/test_finding_semantic.py",
+        "backend/tests/runtime/test_host_business.py",
+        "docs/design/audits/2026-11-01-findings/report.md",
+        "frontend/tests/findings-design.test.ts"
+      ],
+      "remaining": [
+        "Independently admitted reviewer, version-bound decisions and dependent knowledge invalidation; labels and stored methods are not independent scientific review.",
+        "Migrate all legacy knowledge read/search/summary/review roles/flows/adapters and retire old embedding providers with parity evidence.",
+        "Representative retrieval and human-comprehension evaluation; full route acceptance, retention and recovery."
       ]
     }
   }

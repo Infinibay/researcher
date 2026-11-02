@@ -243,9 +243,102 @@ class ResearchTools:
             },
         )
 
-    async def researcher_finding_read(self, finding_id: int) -> dict:
-        """Read a finding, current status and captured-source excerpts in the bound project."""
-        return await self._client.request("GET", f"/findings/{finding_id}")
+    async def researcher_finding_list(
+        self,
+        query: str | None = None,
+        finding_type: str | None = None,
+        status: str | None = None,
+        min_confidence: float | None = None,
+        for_task_id: int | None = None,
+        after_id: int = 0,
+        limit: int = 50,
+    ) -> dict:
+        """Page all matching project finding metadata by stable id (limit1–100); follow next_after_id. Lexical query/type/status/declared-confidence filters combine. Omit min_confidence to retain unknown values; stored numeric confidence and active/validation_method flags are historical assertions, not scientific certainty or independent review. Use finding_read for complete body/evidence windows. Use for_task_id only as a read filter inside the bound project; it does not change tool authority."""
+        return await self._client.request(
+            "GET",
+            "/findings",
+            query={
+                "q": query,
+                "finding_type": finding_type,
+                "status": status,
+                "min_confidence": min_confidence,
+                "for_task_id": for_task_id,
+                "after_id": after_id,
+                "limit": limit,
+            },
+        )
+
+    async def researcher_finding_summary(
+        self,
+        query: str | None = None,
+        finding_type: str | None = None,
+        status: str | None = None,
+        min_confidence: float | None = None,
+        for_task_id: int | None = None,
+    ) -> dict:
+        """Return complete filtered project counts grouped by stored type/status, without an LLM summary. Declared-confidence averages describe stored numbers only; scientific confidence remains unknown. This is not scientific validation or a synthesized conclusion. Use for_task_id only as a read filter inside the bound project; it does not change tool authority."""
+        return await self._client.request(
+            "GET",
+            "/findings-summary",
+            query={
+                "q": query,
+                "finding_type": finding_type,
+                "status": status,
+                "min_confidence": min_confidence,
+                "for_task_id": for_task_id,
+            },
+        )
+
+    async def researcher_finding_query(
+        self,
+        query: str,
+        finding_ids: list[int] | None = None,
+        finding_type: str | None = None,
+        status: str | None = None,
+        min_confidence: float | None = None,
+        for_task_id: int | None = None,
+        limit: int = 5,
+        after_rank: int = 0,
+        expected_corpus_sha256: str | None = None,
+        expected_record_set_sha256: str | None = None,
+    ) -> dict:
+        """Paraphrase search across complete current finding titles/bodies with the pinned local encoder. Select1–50 distinct finding_ids or all filtered project findings; sets over500 rows/200000 bytes fail without sampling. Limit1–20 ranked chunks, follow next_rank with both prior corpus_sha256 and record_set_sha256 as expected_corpus_sha256/expected_record_set_sha256; changed sets require a fresh rank0 query. Exact excerpt offsets refer to title + two newlines + body, not captured scientific sources. Cosine scores measure chunk similarity, never scientific confidence. Read finding citations/source snapshots before using a claim as evidence. No remote or lexical fallback; changed corpus/authority rejects the late result. Use for_task_id only as a read filter inside the bound project; it does not change tool authority."""
+        return await self._client.request(
+            "GET",
+            "/findings-query",
+            query={
+                "query": query,
+                "finding_ids": None
+                if finding_ids is None
+                else ",".join(map(str, finding_ids)),
+                "finding_type": finding_type,
+                "status": status,
+                "min_confidence": min_confidence,
+                "for_task_id": for_task_id,
+                "limit": limit,
+                "after_rank": after_rank,
+                "expected_corpus_sha256": expected_corpus_sha256,
+                "expected_record_set_sha256": expected_record_set_sha256,
+            },
+        )
+
+    async def researcher_finding_read(
+        self,
+        finding_id: int,
+        offset: int = 0,
+        max_chars: int = 12000,
+        evidence_offset: int = 0,
+    ) -> dict:
+        """Read a scoped current finding with bounded text (max_chars1–20000) and20 saved quotations. Follow next_offset and next_evidence_offset independently. Unknown confidence/review stay unknown; a stored active flag does not certify independent validation. quote_is_exact checks saved text membership, not scientific support. Inspect original captured sources with source_read before claiming complete review."""
+        return await self._client.request(
+            "GET",
+            f"/findings/{finding_id}",
+            query={
+                "offset": offset,
+                "max_chars": max_chars,
+                "evidence_offset": evidence_offset,
+            },
+        )
 
     async def researcher_report_write(
         self,

@@ -104,3 +104,17 @@ recuperación local; el catálogo de negocio tiene19 tools. Eso no migra los rol
 ni retira SearchWiki y su proveedor legado. Pendientes búsqueda web, revisión científica,
 coordinación y demás capacidades antes de cortar las entradas antiguas.
 [Contrato, límites y migración33](wiki-knowledge.md).
+
+## Registro de hallazgos y próxima migración
+
+El catálogo actual del host contiene22 herramientas de negocio. Listado, consulta,
+resumen estructurado y lectura por ventanas sustituyen esas operaciones en el
+recorrido nativo; Hallazgos inspecciona afirmaciones/citas con alcance explícito.
+Las flags/métodos/confianza antiguos se atribuyen al registro histórico, sin afirmar
+review independiente. El conjunto semántico y cada continuación quedan identificados.
+
+ReadFindingsTool, SearchFindingsTool, SummarizeFindingsTool y SearchKnowledgeTool,
+además de los escritores/reviewers antiguos y sus roles/flows, conservan consumidores
+y proveedores hasta el corte por capacidades. No se declara eliminado ese RAG. La
+revisión necesita admisión real, evidencia/versiones y separación del productor; los
+labels del lector no implementan ese protocolo. [Contrato](finding-registry.md).

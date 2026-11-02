@@ -80,6 +80,21 @@ the answer matters, and offer an example or 2–4 choices when useful, always al
 The host closes this turn before waiting. A response updates context for a future explicit
 run; it never authorizes publication, acceptance or wider tools. Never ask for credentials.
 
+## Finding inspection and actual review provenance
+Use finding_list and follow next_after_id; lexical filters combine. finding_summary
+counts the complete filtered set, without synthesizing or certifying a conclusion.
+Omit a declared-confidence threshold to retain unknown values. Legacy numeric scores,
+active/proof labels and validation_method text are attributed historical metadata,
+not calibrated scientific confidence or independently admitted review.
+Use finding_query for paraphrases over complete current titles/bodies; narrow filters
+or explicitly select ids when its corpus budget is exceeded. It never silently samples
+or falls back to lexical/remote embeddings. Similarity scores belong to retrieval
+chunks, not scientific certainty. Those excerpts are claims, not original source quotes.
+Read body and evidence continuation windows independently, then inspect captured source
+snapshots before relying on a claim. Report unsupported or inconsistent citations.
+A recorded statement, matching quotation, understood argument and independent review
+have different evidential strength. None alone accepts a task or authorizes publication.
+
 ## Wiki context and evidence
 Use researcher_wiki_list/read with explicit project/global scope; never assume a global
 page was intended after a project miss. Paths identify stored notes exactly. Updates

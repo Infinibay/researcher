@@ -1,35 +1,34 @@
 # Tablero de ejecución de la actualización
 
-Actualizado: 2026-11-01. Objetivo: implementar **todo** el [plan](../superpowers/plans/2026-10-31-actualizacion-proyecto.md).
+Actualizado: 2026-11-02. Objetivo: implementar **todo** el [plan](../superpowers/plans/2026-10-31-actualizacion-proyecto.md).
 Este tablero organiza el trabajo; no reemplaza requisitos ni declara fases terminadas.
 Motivos del ajuste: [diagnóstico del proceso](workflow-review.md).
 
 ## Estado comprobado
 
-- Runtime Codex por suscripción y Ken publicado ensayados; herramientas de investigación, fuentes/citas e informes draft conectados. Continúan consumidores heredados y capacidades pendientes.
-- Interfaz: 5 pilotos, 15/36 conceptos de escritorio y 5/12 móviles. Quedan siete rutas por implementar; 0/12 tienen aceptación completa.
-- Última suite: 1767 casos: 1664 pasan, 100 fallos heredados y 3 omitidos. No hay fallos nuevos frente a la línea base; la suite sigue roja.
-- Los43 escenarios amplios siguen abiertos. Su evidencia parcial está en [coverage.json](coverage.json).
-- No hay un porcentaje global defendible. Se cuentan resultados utilizables y verificaciones, sin convertir actividad en avance ponderado.
+- Codex por suscripción y Ken publicado ensayados; fuentes/citas e informes draft conectados. Continúan consumidores y loops heredados, coordinación, revisión y desarrollo pendientes.
+- Interfaz: 6 pilotos, 18/36 conceptos de escritorio y 6/12 móviles. Quedan seis rutas por implementar; 0/12 tienen aceptación completa.
+- Última suite: 1792 casos: 1689 pasan, 100 fallos heredados y 3 omitidos. No hay fallos nuevos frente a la línea base; la suite sigue roja.
+- Los 43 escenarios amplios continúan abiertos en [coverage.json](coverage.json). Se registran resultados y límites; no hay un porcentaje global defendible.
 
-## Última entrega verificada: Wiki con alcance y revisiones
+## Última entrega verificada: Hallazgos con evidencia contrastable
 
-**Resultado:** la misma ruta coexiste en proyectos distintos y biblioteca global; las ediciones requieren página/revisión observadas, conservan historia y recuperan recibos sin duplicar. Captura individual/colección permite citas y recuperación semántica local sobre revisiones explícitas.
+**Resultado:** listado/filtros/cursor/resumen estructurado por proyecto; texto, citas y declaraciones históricas paginados; captura citada comprobada por hash. Categorías, confianza y flags antiguas conservadas con su procedencia, sin inferir revisión independiente.
 
-**Interfaz:** cuaderno elegido entre tres conceptos y móvil, con alcance visible, borrador preservado, comparación de conflictos y respuestas tardías que respetan la vista actual.16 estados funcionales y lectura a1440/390/320px pasaron axe; no constituyen aceptación humana completa.
+**Búsqueda:** encoder local fijado sobre títulos/cuerpos completos de un conjunto explícito acotado. Sin muestra oculta ni fallback; continuación ligada a huellas y revalidación de corpus/autoridad. La similitud no expresa certeza científica.
 
-**Validación:** paquete aislado: 346 pasan y 1 fallo heredado explícito; 618 archivos Python/SQL coinciden. Frontend49 pruebas y build. No hubo nuevos turnos de investigación ni proveedores de embeddings remotos. [Contrato](../architecture/wiki-knowledge.md), [resultados](wiki-results.json), [paquete](wiki-packaging.json), [navegador](../design/audits/2026-11-01-wiki/report.md).
+**Interfaz:** registro con evidencia y lector móvil separado. 18 estados funcionales y lectura a 1440/390/320 px pasan controles automáticos; siguen pendientes comprensión/aceptación integral.
 
-**Límites:** los roles/flows/RAG antiguos y SearchWiki conservan consumidores/proveedor hasta completar su migración. Falta invalidar/revisar conocimiento dependiente de correcciones; una nota guardada no valida científicamente su contenido.
+**Validación:** wheel aislado: 371 pasan y 1 fallo heredado explícito, 621 fuentes Python/SQL coinciden.55 pruebas frontend y build. Sin nuevos turnos de investigación ni embeddings remotos. [Contrato](../architecture/finding-registry.md), [resultados](findings-results.json), [paquete](findings-packaging.json), [navegador](../design/audits/2026-11-01-findings/report.md).
 
-**Siguiente acción:** completar lectura/listado/búsqueda y revisión explícita de hallazgos, con procedencia y estados honestos, y rediseñar `/findings`. Luego completar búsqueda web/coordinación y cortar consumidores por recorridos completos. Reutilizar runtime/fuentes existentes.
+**Siguiente acción:** completar búsqueda web y coordinación/review realmente admitidos, y migrar consumidores por capacidades. Los adaptadores/roles/flows antiguos siguen activos; una etiqueta no sustituye al engine ni acredita independencia. Reutilizar el dueño durable, las capturas y la recuperación existentes.
 
 ## Cola posterior, manteniendo el alcance
 
 1. Completar investigación útil: búsqueda web, documentos/PDF, conocimiento/wiki y revisión científica; migrar herramientas por capacidades, con sus prompts y contratos.
 2. Desarrollo completo: edición/candidato, pruebas, revisión, Git/CI y efectos externos reconciliables. Resolver requisitos de aislamiento antes de habilitar cada efecto.
 3. Migrar autonomía, roles, flows y comunicación entre agentes al mismo dueño durable; no añadir otro loop LLM. La comunicación humano–agente se verifica en cada recorrido.
-4. Extender diseño a las demás páginas, con conceptos y selección por página; completar aceptación de los cinco pilotos existentes.
+4. Extender diseño a las demás páginas, con conceptos y selección por página; completar aceptación de los seis pilotos existentes.
 5. Completar inventario/evaluaciones de todos los prompts y llamadas auxiliares, migraciones/restauración, dependencias, instalación, CLI/TUI y retirada del motor anterior. Trabajar estas obligaciones dentro de las entregas que las toquen; este orden no las aplaza todas al final.
 6. Verificación global, revisión independiente de toda la rama y entrega. No cerrar el objetivo con un subconjunto.
 

@@ -218,3 +218,17 @@ y explicar el alcance global. Conservar borradores ante error/conflicto/cambio d
 Piloto implementado y verificado en16 estados funcionales y tres anchos de lectura.
 Cinco pilotos en código,15/36 conceptos de escritorio y5/12 móviles; cero rutas con
 aceptación completa. [Recorrido y límites](audits/2026-11-01-wiki/report.md).
+
+## Hallazgos — 2026-11-01
+
+Tres alternativas independientes y una adaptación móvil generadas e inspeccionadas.
+Se elige **Registro con evidencia**: índice persistente y lector amplio conservan la
+orientación al contrastar varias afirmaciones. La tabla empuja la lectura bajo el
+listado; el dossier duplica metadatos y estrecha el texto. Juicio delegado de diseño,
+no aceptación humana. [Imágenes/procedencia](concepts/findings/manifest.json).
+
+El contenido ilustrativo de las imágenes no se utiliza como evidencia real. Implementar
+con citas/fechas/autorías guardadas; no inventar modificación ni un campo de explicación
+que no exista. Usar Fuentes citadas, porque pueden apoyar o contradecir la afirmación.
+La confianza declarada heredada no equivale a certeza científica; la revisión independiente
+requiere admisión real del reviewer. Móvil separa lista/lector. Piloto implementado y verificado en18 estados funcionales; aceptación completa pendiente.

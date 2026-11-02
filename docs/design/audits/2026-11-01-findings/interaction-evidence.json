@@ -1,0 +1,348 @@
+{
+  "result": "passed",
+  "states": [
+    {
+      "name": "desktop-index",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-findings/after-desktop-index.png",
+      "sha256": "176f29b0d9bb7e9347d5779d7a6a3643a29fe14f6b41771d96a2ffc2c6a36b88"
+    },
+    {
+      "name": "desktop-pagination",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-findings/after-desktop-pagination.png",
+      "sha256": "dd2c28fea32f6193303bad9474e63289bb68582b1d72f6d239ec55f700e8ccfc"
+    },
+    {
+      "name": "desktop-legacy-assessment",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "reader": {
+          "x": 608,
+          "y": 92,
+          "width": 800,
+          "height": 970.40625,
+          "top": 92,
+          "right": 1408,
+          "bottom": 1062.40625,
+          "left": 608
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-findings/after-desktop-legacy-assessment.png",
+      "sha256": "32c3374fcc08fb9bd9fd2dcd285d8427c736e051048fbe8b3a2ca195a966b1c5"
+    },
+    {
+      "name": "desktop-declared-assessment",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "reader": {
+          "x": 608,
+          "y": 92,
+          "width": 800,
+          "height": 1057.703125,
+          "top": 92,
+          "right": 1408,
+          "bottom": 1149.703125,
+          "left": 608
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-findings/after-desktop-declared-assessment.png",
+      "sha256": "8cba7e0b84fa082fe7d9e9dacc68bd5e2f413f7c513c7bec2070359da6ca8880"
+    },
+    {
+      "name": "desktop-exact-capture",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "reader": {
+          "x": 608,
+          "y": 92,
+          "width": 800,
+          "height": 623.9375,
+          "top": 92,
+          "right": 1408,
+          "bottom": 715.9375,
+          "left": 608
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-findings/after-desktop-exact-capture.png",
+      "sha256": "e7893d5a2ce332878ce33490c1097971028451ce9429c1e93085d3ea52d74e1a"
+    },
+    {
+      "name": "desktop-legacy-sources",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "reader": {
+          "x": 608,
+          "y": -96,
+          "width": 800,
+          "height": 1459.90625,
+          "top": -96,
+          "right": 1408,
+          "bottom": 1363.90625,
+          "left": 608
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-findings/after-desktop-legacy-sources.png",
+      "sha256": "40851435f8d32b185bdf3171c065ab780171932966a12b8acccd16602a45fd6c"
+    },
+    {
+      "name": "desktop-citation-pagination",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "reader": {
+          "x": 608,
+          "y": -3109,
+          "width": 800,
+          "height": 4181.65625,
+          "top": -3109,
+          "right": 1408,
+          "bottom": 1072.65625,
+          "left": 608
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-findings/after-desktop-citation-pagination.png",
+      "sha256": "f50dcf7dc1aef5100df72bb46764560b4e8af52f62009fe8f22a8a2cbe580d46"
+    },
+    {
+      "name": "desktop-long-body-tail",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "reader": {
+          "x": 608,
+          "y": 92,
+          "width": 800,
+          "height": 2336.328125,
+          "top": 92,
+          "right": 1408,
+          "bottom": 2428.328125,
+          "left": 608
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-findings/after-desktop-long-body-tail.png",
+      "sha256": "4ea54e30a1c8ccd2d0f3d7d7e7321f6ac801c4e113e4c32fe6b7ed8faa1b426f"
+    },
+    {
+      "name": "desktop-semantic",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-findings/after-desktop-semantic.png",
+      "sha256": "d4f79a32886af77babef98d64163bd919860ad3bec7dce42e9e39ce95402bf39"
+    },
+    {
+      "name": "desktop-semantic-continuation",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-findings/after-desktop-semantic-continuation.png",
+      "sha256": "7619bb658f23abcb763f7fc41d62392257b875af882865dd19cafc7fade27a80"
+    },
+    {
+      "name": "desktop-semantic-selected",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-findings/after-desktop-semantic-selected.png",
+      "sha256": "0e3f0e05e42a56bff6cc9926a7b8020908ee18f620387cb33e9c37474b60cb67"
+    },
+    {
+      "name": "desktop-semantic-unavailable",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-findings/after-desktop-semantic-unavailable.png",
+      "sha256": "111f6db3a037d4eba9c1c07fa210e0961e8eddf91163805a5fe3495a30c2d1f5"
+    },
+    {
+      "name": "mobile-index",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-findings/after-mobile-index.png",
+      "sha256": "5bc9dea768d0a1c27c0af98cd2cd648f3e4d4d4a3226317f3ff6d5070cd8b8e0"
+    },
+    {
+      "name": "mobile-reader",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "reader": {
+          "x": 16,
+          "y": 196,
+          "width": 358,
+          "height": 1148.203125,
+          "top": 196,
+          "right": 374,
+          "bottom": 1344.203125,
+          "left": 16
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-findings/after-mobile-reader.png",
+      "sha256": "106fb8d9695b7f0f20da70d42fb2146cb00defc81f4ce1215c73ad32d639e3cb"
+    },
+    {
+      "name": "mobile-capture",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "reader": {
+          "x": 16,
+          "y": 196,
+          "width": 358,
+          "height": 719.34375,
+          "top": 196,
+          "right": 374,
+          "bottom": 915.34375,
+          "left": 16
+        }
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-findings/after-mobile-capture.png",
+      "sha256": "a15e5ca05f2480a1e6f602476cd28b2d1088e54307c462f3069c2744653cc9f5"
+    },
+    {
+      "name": "mobile-foreign-link",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-findings/after-mobile-foreign-link.png",
+      "sha256": "b035d0da89f34ad73d6018c708bb227ac7c99fcb63894bd3522defbbdb497760"
+    },
+    {
+      "name": "mobile-foreign-id",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-findings/after-mobile-foreign-id.png",
+      "sha256": "f10b553e5dcd7271b2ed9227bb55f1752209705e52b932e455c163203b11c076"
+    },
+    {
+      "name": "desktop-late-project-read",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440
+      },
+      "violations": [],
+      "screenshot": "docs/design/audits/2026-11-01-findings/after-desktop-late-project-read.png",
+      "sha256": "2ce45c1d0e9e780538041141c02576027b932e6cf5442b19bed19f3a4491330f"
+    }
+  ],
+  "actions": [
+    "Stable full metadata pagination, combined lexical/type/status filters, attributed legacy evaluation, exact captured quote and literal HTML, source return focus, raw declaration continuation",
+    "All21 saved citations recoverable, long finding body reaches actual late limitation via explicit fragment navigation",
+    "Actual pinned local encoder searches57 complete filtered findings; next rank carries matching text/metadata fingerprints; explicit single-member corpus searches only marked finding",
+    "Explicit503 across the configured automatic retry stays a semantic error without lexical substitution; manual retry reaches the real local search",
+    "Separate mobile list/detail/source, programmatic reading focus and return focus, literal HTML inert, foreign URL scope and foreign id blocked",
+    "A held admitted finding read released after project switch cannot display its old title/body in the new project"
+  ],
+  "errors": [],
+  "research_model_turns": 0,
+  "reused_partial_sha256": "fe1c8dc2a11be5b7e943728775ba97ab617288a49aa931b0d41a6fa85a3571c3"
+}

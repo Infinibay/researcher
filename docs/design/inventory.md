@@ -14,12 +14,12 @@ archivos generados e inspeccionados, no pantallas aceptadas.
 | `/agents` | 0 | 0 | Pendiente | Pendiente | Pendiente |
 | `/chat` | 3 | 1 | Conversación con evidencia | Piloto en código | Parcial: capturas reales; aceptación pendiente |
 | `/wiki` | 3 | 1 | Cuaderno con alcance | Piloto en código | Parcial: lectura/conflictos/recibos/móvil; aceptación pendiente |
-| `/findings` | 0 | 0 | Pendiente | Pendiente | Pendiente |
+| `/findings` | 3 | 1 | Registro con evidencia | Piloto en código | Parcial: filtros/citas/semántica/móvil; aceptación pendiente |
 | `/reports` | 3 | 1 | Lectura con trazabilidad | Piloto en código | Parcial: recorrido y capturas; aceptación humana pendiente |
 | `/files` | 3 | 1 | Archivo con inspector | Piloto en código | Parcial: recorrido/teclado; aceptación humana pendiente |
 | `/repositories` | 0 | 0 | Pendiente | Pendiente | Pendiente |
 | `/flow` | 0 | 0 | Pendiente | Pendiente | Pendiente |
-| **Total** | **15 / 36** | **5 / 12** | **5 / 12** | **5 pilotos** | **0 / 12** |
+| **Total** | **18 / 36** | **6 / 12** | **6 / 12** | **6 pilotos** | **0 / 12** |
 
 Los prompts, archivos, hashes, tamaños y procedencia del piloto están en
 [concepts/tasks/manifest.json](concepts/tasks/manifest.json). Las tres alternativas
@@ -43,7 +43,9 @@ El rediseño está implementado y su [recorrido](audits/2026-11-01-reports/repor
 Archivos (`/files`) implementa el archivo con inspector y el detalle móvil, con
 subida explícita, previa de texto/PDF, descarga original y borrado confirmado.
 [Conceptos y hashes](concepts/files/manifest.json),
-[recorrido y límites](audits/2026-11-01-files/report.md). Cinco pilotos en código,
-siete rutas pendientes de implementar y cero rutas con aceptación completa.
+[recorrido y límites](audits/2026-11-01-files/report.md). Seis pilotos en código,
+seis rutas pendientes de implementar y cero rutas con aceptación completa.
 
 Wiki tiene cuatro conceptos inspeccionados y selección delegada: [procedencia](concepts/wiki/manifest.json). La captura previa detectó contraste bajo y recorte del lector móvil; [piloto verificado y límites](audits/2026-11-01-wiki/report.md).
+
+Hallazgos tiene [18 estados funcionales y lectura en tres anchos](audits/2026-11-01-findings/report.md), con valores históricos atribuidos y citas contrastables. La revisión independiente y aceptación integral permanecen abiertas.

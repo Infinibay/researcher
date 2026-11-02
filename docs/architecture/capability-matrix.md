@@ -53,7 +53,8 @@ genérico ni chat libre para cubrir operaciones que falten.
 | `spider_scrape` | Integración opcional de scraping avanzado, aislada del camino por defecto | Servicio/credencial propios, red declarada; snapshots consumibles por el resto del producto | Pendiente de decisión de compatibilidad. No afirmar equivalencia del fetch de texto con navegador/servicio avanzado |
 | `read_reference_files` | `researcher_reference_list`, `researcher_capture_reference`, lectura/búsqueda de snapshot | `sources.read/capture`; ruta del host no expuesta; lectura por FD, sin traversal/symlinks, cuota de bytes | Implementado para UTF-8, PDF con texto y CSV/DOCX/JSON/XML, vía la misma fachada/API y revalidación al commit. Estructura paginada, citas sobre snapshot normalizado; límites en [formatos estructurados](structured-sources.md) y [PDF](pdf-sources.md) |
 | `record_finding` | `researcher_finding_record` | `findings.write`, citas exactas, grant/contexto vigente, estado provisional, confianza desconocida; receipt atómico | Implementado y probado. No convierte similitud o redacción convincente en evidencia validada |
-| `read_findings`, `search_findings`, `summarize_findings`, `search_knowledge` | Lectura/búsqueda/resumen estructurado del conocimiento por proyecto | `researcher_finding_read` existe; búsqueda deberá preservar estado, revisiones, procedencia y superseded | Lectura individual implementada; listado, búsqueda y resumen amplio pendientes |
+| `read_findings`, `search_findings`, `summarize_findings` | Registro tipado: `researcher_finding_list/read/query/summary` | Proyecto del grant, filtro de lectura por tarea, cursores/ventanas independientes, declaración histórica separada de revisión acreditada | Implementado en fachada/API y piloto Hallazgos: búsqueda FTS combina filtros; semántica local cubre un corpus completo acotado y exige huellas en continuaciones. Citas/JSON heredado paginados, captura citada verificada por hash para el propietario. Falta migrar roles/adaptadores/proveedores antiguos y revisión independiente. [Contrato](finding-registry.md) |
+| `search_knowledge` | Composición tipada entre hallazgos, Wiki, fuentes y reportes | Cada componente conserva proyecto, procedencia, cobertura y límites | Operaciones individuales implementadas parcialmente; falta migrar búsqueda unificada y consumidores heredados sin prometer cobertura inexistente |
 | `validate_finding`, `reject_finding` | Revisión explícita del conocimiento con evidencias | Reviewer, método, dependencias y versión; invalidar/revisar consumidores ante corrección | Pendiente. No asignar confianza científica por contrato de formato |
 | `write_report`, `read_report` | `researcher_report_write/read` y vista `/reports` | `reports.write/read`; Markdown canónico en `artifacts.content`, finding links, draft y recibo; paginación independiente de citas | Persistencia, recovery/fachada y API probados. Informes ya tiene piloto y20 estados de navegador verificados; aceptación humana/total y exportación pendientes |
 | `read_wiki`, `search_wiki`, `write_wiki` | Wiki tipada local/global, revisiones y capturas para citas | Permisos separados; página+revisión observadas; recibos atómicos, historial retenido, parent del mismo alcance | Implementación parcial: cinco tools nativas y adaptadores heredados comparten identidad protegida; misma ruta en dos proyectos/global, carreras, respuesta perdida y borrado/recreación probados. SearchWiki aún usa su proveedor legado. Faltan consumidores/invalidación dependiente/evaluación representativa. Ver [contrato](wiki-knowledge.md) |
@@ -65,11 +66,12 @@ genérico ni chat libre para cubrir operaciones que falten.
 
 ## Wire contract demostrado
 
-El MCP nuevo anuncia diecinueve herramientas `researcher_*`, con schemas explícitos,
+El MCP nuevo anuncia veintidós herramientas `researcher_*`, con schemas explícitos,
 anotaciones y errores MCP reales. No recibe proyecto/tarea/actor en argumentos,
 no emite grants y no ejecuta SQL. Referencias: `scripts/researcher_mcp_server.py`,
 `backend/api/models/research.py`, `backend/research/models.py` y
-`docs/modernization/research-mcp-evidence.json`. Esto demuestra el subconjunto
+`docs/modernization/research-mcp-evidence.json` como ensayo histórico; catálogo actual en
+`docs/modernization/findings-tool-schema.json` y firmas canónicas. Esto demuestra el subconjunto
 de investigación, no la migración del catálogo completo.
 
 Ken real y el MCP de negocio se descubrieron en ambos candidatos. El bridge de
