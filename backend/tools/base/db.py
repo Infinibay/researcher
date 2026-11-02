@@ -388,6 +388,18 @@ def ensure_migrations(db_path: str | None = None, *, existing_only: bool = False
             resource = Path(__file__).resolve().parents[2] / "db/result_schema.sql"
             apply_sql_resource(conn, resource)
             logger.info("Migration 35: explicit research delivery and owner acceptance")
+        if 36 not in applied:
+            from backend.db.migrations import apply_sql_resource
+
+            resource = Path(__file__).resolve().parents[2] / "db/development_schema.sql"
+            apply_sql_resource(conn, resource)
+            logger.info("Migration 36: explicit native development and code review kinds")
+        if 37 not in applied:
+            from backend.db.migrations import apply_sql_resource
+
+            resource = Path(__file__).resolve().parents[2] / "db/development_workspace_schema.sql"
+            apply_sql_resource(conn, resource)
+            logger.info("Migration 37: retained private development preparation identity")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()

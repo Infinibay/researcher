@@ -63,11 +63,27 @@ la corrección tardía y la negativa a reconstruir una asignación repetida. Los
 fixtures de bajo nivel seleccionan explícitamente el nuevo tipo de ejecución;
 esto no demuestra admisión pública de desarrollo.
 
-Las migraciones 36 y 37 existen como recursos probados y todavía no se ejecutan
-desde el arranque normal. Antes de conectarlas se requieren sus inversas seguras,
-la adaptación de los constructores históricos y pruebas de actualización y
-recuperación. Fuentes con metadatos compartidos, submódulos o filtros Git necesitan
-una política explícita antes de admitirlas.
+Las migraciones 36 y 37 se ejecutan desde el arranque normal. Las pruebas de
+actualización preservan ejecuciones y referencias antiguas sin inventar copias de
+desarrollo para ellas. Cada recurso se aplica en su propia transacción: si falla
+el 37, el 36 puede quedar aplicado por completo; el siguiente arranque intenta
+solo lo pendiente. No se publica un marcador para un recurso parcialmente aplicado.
+
+`restore_development_workspaces()` y `restore_development_kinds()` permiten retirar,
+en ese orden, estructuras nuevas **sin uso**. Rechazan historial de desarrollo,
+preparaciones retenidas, autoridad activa y versiones posteriores. Si un índice
+propio del usuario impide cambiar la columna, la operación se revierte completa;
+no se elimina ese índice para forzar el retroceso. Estas funciones son inversas
+programáticas; el flujo de operador, las copias de seguridad y su CLI siguen dentro
+del trabajo pendiente.
+
+El arranque usa transacciones locales de SQLite; no se ha demostrado una migración
+en línea con servidores de versiones distintas. Fuentes con metadatos compartidos,
+submódulos o filtros Git necesitan una política explícita antes de admitirlas.
+
+La identidad del origen se comprueba otra vez inmediatamente antes de abrir la
+puerta del proceso. Una edición del registro del repositorio entre la reserva y
+ese punto bloquea el comando y conserva evidencia de cierre sin ejecución.
 
 Los siguientes pasos son conectar la preparación con `OwnedCodexRuntime`, permitir
 escritura exclusivamente sobre la copia privada, ejecutar Ken sobre esa misma
@@ -78,5 +94,10 @@ ese ciclo.
 
 Las evidencias se guardan en [development-docstrings.json](development-docstrings.json),
 [development-packaging.json](development-packaging.json) y
-[development-results.json](development-results.json). Sus límites forman parte del
+[development-results.json](development-results.json). La integración posterior del
+arranque tiene evidencia separada en
+[development-startup-results.json](development-startup-results.json),
+[development-startup-packaging.json](development-startup-packaging.json) y
+[development-startup-docstrings.json](development-startup-docstrings.json).
+Sus límites forman parte del
 resultado; no sustituyen las pruebas pendientes del flujo completo.

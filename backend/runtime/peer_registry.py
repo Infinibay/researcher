@@ -141,6 +141,17 @@ class PeerRegistry:
             raise RunConflict("Code review requires an exact candidate snapshot")
         return source
 
+    def _validate_development_source(self, conn, row, source):
+        """Require the original registration and directory to remain current before each private-view gate."""
+        if source is not None and row["execution_kind"] in (
+            "development",
+            "code_review",
+        ):
+            from backend.runtime.development_workspace import _source_identity
+
+            self.runs._check_registration(conn, row["project_id"], source)
+            _source_identity(source)
+
     def workspace_binding(self, peer_id):
         """Resolve the execution view; private development copies require a current fenced owner."""
         with self.runs._transaction() as conn:
@@ -149,9 +160,9 @@ class PeerRegistry:
             row, lease = self._lease(conn, peer)
             if row["execution_kind"] in ("development", "code_review"):
                 self.runs._authority(conn, lease)
-            return self._execution_binding(
-                conn, peer, row, self._source_binding(conn, peer)
-            )
+            source = self._source_binding(conn, peer)
+            self._validate_development_source(conn, row, source)
+            return self._execution_binding(conn, peer, row, source)
 
     def admission(self, peer_id, *, source_only=False):
         """Revalidate a prepared peer and both views atomically; source_only is reserved for host Git preparation."""
@@ -174,6 +185,7 @@ class PeerRegistry:
                 execution_kind=row["execution_kind"],
             )
             source = self._source_binding(conn, peer)
+            self._validate_development_source(conn, row, source)
             result["source_binding"] = source
             result["binding"] = (
                 source
@@ -203,6 +215,7 @@ class PeerRegistry:
         return row, lease
 
     def bind(self, peer_id, identity):
+        """Bind a still-gated namespace only while its lease, source registration and directory remain current."""
         # The bootstrap is still gated; capture again immediately before commit.
         if NamespaceIdentity.capture(identity.init_pid) != identity:
             raise RunConflict("Namespace identity changed before binding")
@@ -213,6 +226,9 @@ class PeerRegistry:
                 raise RunConflict("Peer gate is no longer releasable")
             row, lease = self._lease(conn, peer)
             self.runs._authority(conn, lease)
+            self._validate_development_source(
+                conn, row, self._source_binding(conn, peer)
+            )
             if (identity.boot_id, identity.observer_namespace) != (
                 peer["boot_id"],
                 peer["observer_namespace"],

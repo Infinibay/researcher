@@ -10,6 +10,18 @@ from backend.db.migrations import apply_sql_resource
 RESOURCE = Path(__file__).resolve().parents[2] / "db/development_schema.sql"
 
 
+def version35(c):
+    """Remove only unused newer structures so each test genuinely starts from the historical constraint."""
+    from backend.db.development_migration import (
+        restore_development_kinds,
+        restore_development_workspaces,
+    )
+
+    restore_development_workspaces(c.conn)
+    restore_development_kinds(c.conn)
+    return c
+
+
 def insert_kind(c, run_id, kind):
     """Create schema-only fixture roots; this does not claim that a native actor was admitted."""
     c.conn.execute(
@@ -24,7 +36,7 @@ def test_expansion_preserves_existing_attempt_references_and_owner_objects(
     coordination,
 ):
     """The kind expansion keeps primary identities and foreign keys instead of renaming the runs table."""
-    c = coordination
+    c = version35(coordination)
     run = c.store.admit(c.spec)
     lease = c.store.claim(101, run.run_id, "schema-owner")
     c.conn.execute("CREATE TABLE owner_notes(body TEXT)")
@@ -60,7 +72,7 @@ def test_expanded_kind_is_persisted_explicitly_without_inference_from_role_name(
     coordination, kind
 ):
     """Development/review identity is actual stored data; this is schema evidence, not a writable runtime proof."""
-    c = coordination
+    c = version35(coordination)
     apply_sql_resource(c.conn, RESOURCE)
     insert_kind(c, "new-kind", kind)
     c.conn.commit()
@@ -72,7 +84,7 @@ def test_expanded_kind_is_persisted_explicitly_without_inference_from_role_name(
 
 def test_execution_slots_allow_one_author_and_one_independent_review_only(coordination):
     """Two different author kinds cannot race for the same task, nor can two review kinds."""
-    c = coordination
+    c = version35(coordination)
     c.store.admit(c.spec)
     apply_sql_resource(c.conn, RESOURCE)
     with pytest.raises(sqlite3.IntegrityError):

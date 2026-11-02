@@ -1,0 +1,267 @@
+{
+  "base_commit": "abe63ce",
+  "changed_or_new_definitions_documented": 37,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/db/development_migration.py",
+      "symbol": "_unused",
+      "line": 12,
+      "docstring": "Hold an idle connection's schema lock and reject live, historical or newer authority.",
+      "file_sha256": "638c1185ec8040814f9dd0b02476b4255cb02a54144925c33a42a114e30d74db"
+    },
+    {
+      "path": "backend/db/development_migration.py",
+      "symbol": "restore_development_workspaces",
+      "line": 57,
+      "docstring": "Remove migration37 only before any preparation or development execution has been recorded.",
+      "file_sha256": "638c1185ec8040814f9dd0b02476b4255cb02a54144925c33a42a114e30d74db"
+    },
+    {
+      "path": "backend/db/development_migration.py",
+      "symbol": "restore_development_kinds",
+      "line": 68,
+      "docstring": "Restore the two research kinds after unused later storage is explicitly removed.",
+      "file_sha256": "638c1185ec8040814f9dd0b02476b4255cb02a54144925c33a42a114e30d74db"
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "symbol": "PeerRegistry",
+      "line": 22,
+      "docstring": "Register fenced owned peers and distinguish original sources from private execution copies.",
+      "file_sha256": "e166f1577abab267d566eccaebe1afd8944ac68a1e5e6b5752d1af4d533be280"
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "symbol": "PeerRegistry._validate_development_source",
+      "line": 144,
+      "docstring": "Require the original registration and directory to remain current before each private-view gate.",
+      "file_sha256": "e166f1577abab267d566eccaebe1afd8944ac68a1e5e6b5752d1af4d533be280"
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "symbol": "PeerRegistry.workspace_binding",
+      "line": 155,
+      "docstring": "Resolve the execution view; private development copies require a current fenced owner.",
+      "file_sha256": "e166f1577abab267d566eccaebe1afd8944ac68a1e5e6b5752d1af4d533be280"
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "symbol": "PeerRegistry.admission",
+      "line": 167,
+      "docstring": "Revalidate a prepared peer and both views atomically; source_only is reserved for host Git preparation.",
+      "file_sha256": "e166f1577abab267d566eccaebe1afd8944ac68a1e5e6b5752d1af4d533be280"
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "symbol": "PeerRegistry.bind",
+      "line": 217,
+      "docstring": "Bind a still-gated namespace only while its lease, source registration and directory remain current.",
+      "file_sha256": "e166f1577abab267d566eccaebe1afd8944ac68a1e5e6b5752d1af4d533be280"
+    },
+    {
+      "path": "backend/tests/runtime/test_admission_migration.py",
+      "symbol": "test_version27_receipt_survives_without_an_inferred_binding",
+      "line": 7,
+      "docstring": "A version27 receipt stays historical after upgrades without inventing admission evidence.",
+      "file_sha256": "147eac4fdb8447a65337cc3bcc82aa9d8e37fb5ab4c0739dfc36af5b1e30e88e"
+    },
+    {
+      "path": "backend/tests/runtime/test_broker_git.py",
+      "symbol": "test_real_broker_prepares_copy_and_closes_every_git_peer",
+      "line": 11,
+      "docstring": "Prove exact source/copy isolation and global/source closure through the actual resource owner.",
+      "file_sha256": "1b21fd18201549cae8bf85ef51636567f8bd9b9fc9e26b0588bdbf827a37f68e"
+    },
+    {
+      "path": "backend/tests/runtime/test_broker_git.py",
+      "symbol": "prepare_policy_fixture",
+      "line": 77,
+      "docstring": "Select the low-level development kind without claiming public developer admission is enabled.",
+      "file_sha256": "1b21fd18201549cae8bf85ef51636567f8bd9b9fc9e26b0588bdbf827a37f68e"
+    },
+    {
+      "path": "backend/tests/runtime/test_broker_git.py",
+      "symbol": "test_durable_preparation_keeps_one_global_source_and_exposes_only_ready_copy",
+      "line": 89,
+      "docstring": "A real Git preparation and later analysis share ownership without confusing source and execution paths.",
+      "file_sha256": "1b21fd18201549cae8bf85ef51636567f8bd9b9fc9e26b0588bdbf827a37f68e"
+    },
+    {
+      "path": "backend/tests/runtime/test_broker_git.py",
+      "symbol": "test_context_change_after_real_clone_retains_copy_without_admitting_it",
+      "line": 154,
+      "docstring": "Late preparation cannot cross a corrected context; its useful files and closure evidence survive.",
+      "file_sha256": "1b21fd18201549cae8bf85ef51636567f8bd9b9fc9e26b0588bdbf827a37f68e"
+    },
+    {
+      "path": "backend/tests/runtime/test_broker_git.py",
+      "symbol": "test_changed_source_registration_between_reservation_and_gate_cannot_launch_git",
+      "line": 262,
+      "docstring": "Owner changes during gated startup must be checked again before a Git payload can execute.",
+      "file_sha256": "1b21fd18201549cae8bf85ef51636567f8bd9b9fc9e26b0588bdbf827a37f68e"
+    },
+    {
+      "path": "backend/tests/runtime/test_broker_git.py",
+      "symbol": "test_changed_source_registration_between_reservation_and_gate_cannot_launch_git.redirect_before_gate",
+      "line": 278,
+      "docstring": "Model an explicit repository-registration edit after the process exists but before its gate opens.",
+      "file_sha256": "1b21fd18201549cae8bf85ef51636567f8bd9b9fc9e26b0588bdbf827a37f68e"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_migration.py",
+      "symbol": "version35",
+      "line": 13,
+      "docstring": "Remove only unused newer structures so each test genuinely starts from the historical constraint.",
+      "file_sha256": "78fa0d1bed7c9eb934c275a9c123dc510d09180796b39b117cb18731e918dc47"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_migration.py",
+      "symbol": "test_expansion_preserves_existing_attempt_references_and_owner_objects",
+      "line": 35,
+      "docstring": "The kind expansion keeps primary identities and foreign keys instead of renaming the runs table.",
+      "file_sha256": "78fa0d1bed7c9eb934c275a9c123dc510d09180796b39b117cb18731e918dc47"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_migration.py",
+      "symbol": "test_expanded_kind_is_persisted_explicitly_without_inference_from_role_name",
+      "line": 71,
+      "docstring": "Development/review identity is actual stored data; this is schema evidence, not a writable runtime proof.",
+      "file_sha256": "78fa0d1bed7c9eb934c275a9c123dc510d09180796b39b117cb18731e918dc47"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_migration.py",
+      "symbol": "test_execution_slots_allow_one_author_and_one_independent_review_only",
+      "line": 85,
+      "docstring": "Two different author kinds cannot race for the same task, nor can two review kinds.",
+      "file_sha256": "78fa0d1bed7c9eb934c275a9c123dc510d09180796b39b117cb18731e918dc47"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_rollback.py",
+      "symbol": "expanded",
+      "line": 11,
+      "docstring": "Use actual latest startup storage, including both new development migration markers.",
+      "file_sha256": "732d35025da0d5daf9ecd6a1afa9af9ffa3b573bacc4d9535f6fb7d2a32837df"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_rollback.py",
+      "symbol": "test_unused_inverse_preserves_research_rows_children_and_owner_objects",
+      "line": 22,
+      "docstring": "Downgrade keeps original identities and schema objects and can be reapplied without loss.",
+      "file_sha256": "732d35025da0d5daf9ecd6a1afa9af9ffa3b573bacc4d9535f6fb7d2a32837df"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_rollback.py",
+      "symbol": "test_workspace_inverse_refuses_authority_and_history_without_partial_deletion",
+      "line": 75,
+      "docstring": "Even a closed or interrupted preparation is retained evidence, not disposable empty schema.",
+      "file_sha256": "732d35025da0d5daf9ecd6a1afa9af9ffa3b573bacc4d9535f6fb7d2a32837df"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_rollback.py",
+      "symbol": "test_kind_inverse_requires_later_storage_to_be_removed_first",
+      "line": 118,
+      "docstring": "An old downgrade cannot silently remove or reinterpret a newer schema.",
+      "file_sha256": "732d35025da0d5daf9ecd6a1afa9af9ffa3b573bacc4d9535f6fb7d2a32837df"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_rollback.py",
+      "symbol": "test_kind_inverse_requires_legacy_history_and_closed_peers",
+      "line": 130,
+      "docstring": "Removing empty workspace storage does not authorize reinterpretation of an execution or an unclosed scope.",
+      "file_sha256": "732d35025da0d5daf9ecd6a1afa9af9ffa3b573bacc4d9535f6fb7d2a32837df"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_rollback.py",
+      "symbol": "test_inverse_failure_rolls_back_marker_index_and_column",
+      "line": 164,
+      "docstring": "A source-owner index depending on the kind causes an atomic refusal, never a damaged partial downgrade.",
+      "file_sha256": "732d35025da0d5daf9ecd6a1afa9af9ffa3b573bacc4d9535f6fb7d2a32837df"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_startup.py",
+      "symbol": "version35",
+      "line": 9,
+      "docstring": "Build a historical database through the actual migrator while withholding only the new resources.",
+      "file_sha256": "8ca692237fb55576cfbe8409a9622482022450e535a248dd65628a4fe2d0732d"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_startup.py",
+      "symbol": "test_repeatable_upgrade_preserves_original_research_and_owner_data",
+      "line": 32,
+      "docstring": "Upgrade actual historical rows and child references without inventing preparation evidence.",
+      "file_sha256": "8ca692237fb55576cfbe8409a9622482022450e535a248dd65628a4fe2d0732d"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_startup.py",
+      "symbol": "test_failed_upgrade_leaves_only_committed_prior_migrations",
+      "line": 74,
+      "docstring": "An invalid new SQL tail cannot publish a partial index, column, table or migration marker.",
+      "file_sha256": "8ca692237fb55576cfbe8409a9622482022450e535a248dd65628a4fe2d0732d"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_state.py",
+      "symbol": "development_state",
+      "line": 12,
+      "docstring": "Prepare real source registration and lease without enabling a public developer API.",
+      "file_sha256": "7ffde6fa0c5c5cf8d13e0f4ecf871ddd64c362324779669ab303c53e0a54c6b6"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_state.py",
+      "symbol": "test_ready_peer_admission_separates_source_and_execution_view",
+      "line": 160,
+      "docstring": "All author peers share the ready copy while their global concession keeps the original source.",
+      "file_sha256": "7ffde6fa0c5c5cf8d13e0f4ecf871ddd64c362324779669ab303c53e0a54c6b6"
+    },
+    {
+      "path": "backend/tests/runtime/test_finding_review.py",
+      "symbol": "test_review_schema_can_rollback_without_losing_original_work",
+      "line": 694,
+      "docstring": "An unused additive review schema can be removed and upgraded without id loss.",
+      "file_sha256": "996a3a6907a544b91b85b9bddcd505e4e7d31e4b712953126891b138589d0fd8"
+    },
+    {
+      "path": "backend/tests/runtime/test_question_migration.py",
+      "symbol": "version23",
+      "line": 9,
+      "docstring": "Build a version23 fixture without newer rebuilds changing the migration under test.",
+      "file_sha256": "4b07aba721d2c0d4fb07fae99790286e8ce3b896d59074dacad4d90cc078db9b"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_migration.py",
+      "symbol": "test_unused_result_schema_rolls_back_and_reapplies_without_losing_tasks",
+      "line": 6,
+      "docstring": "Only unused storage can be removed; original task data and owner tables survive.",
+      "file_sha256": "1c5ba4dbde0769b8a03f1c905cdde0339e110ae19754312b74c8059be39ae16a"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_migration.py",
+      "symbol": "test_result_downgrade_refuses_live_authority_or_historical_delivery",
+      "line": 45,
+      "docstring": "A downgrade cannot erase a delivery or remove a capability while its authority remains live.",
+      "file_sha256": "1c5ba4dbde0769b8a03f1c905cdde0339e110ae19754312b74c8059be39ae16a"
+    },
+    {
+      "path": "backend/tests/runtime/test_run_input_migration.py",
+      "symbol": "test_version29_dispatch_remains_unknown_after_repeatable_upgrade",
+      "line": 7,
+      "docstring": "Retain unknown input on a version29 dispatch across repeatable upgrades.",
+      "file_sha256": "1fb57d87c5261409a1f75b9f6e7c66c0f6980b7f39f8d3fa584c3a7422c08b2a"
+    },
+    {
+      "path": "backend/tests/runtime/test_task_inputs_migration.py",
+      "symbol": "test_version28_migration_preserves_rows_and_only_records_future_edits",
+      "line": 9,
+      "docstring": "Preserve version28 rows and record only future edits after upgrading.",
+      "file_sha256": "2b9de9a90700dd2c2c75fbcdb6554a194bef444048178adc6466c9febd87e4cc"
+    },
+    {
+      "path": "backend/tools/base/db.py",
+      "symbol": "ensure_migrations",
+      "line": 111,
+      "docstring": "Run pending schema migrations for existing databases.\n\nChecks the ``schema_migrations`` table and applies any missing\nmigrations. Safe to call multiple times. Serving requires an already\ninitialized file; explicit installation/legacy callers may create one.",
+      "file_sha256": "cd3b8e277b59791c307a43cbe63c4c0f49daa6bcaa09aa94bdcafbc88aa68ec2"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

@@ -704,6 +704,10 @@ def test_review_schema_can_rollback_without_losing_original_work(authored_findin
     )
     from backend.db.result_migration import restore_result_schema
 
+    from backend.db.development_migration import restore_development_kinds, restore_development_workspaces
+
+    restore_development_workspaces(c.conn)
+    restore_development_kinds(c.conn)
     restore_result_schema(c.conn)
     restore_review_schema(c.conn)
     assert (

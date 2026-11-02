@@ -28,7 +28,7 @@ def test_version27_receipt_survives_without_an_inferred_binding(
                     "task_inputs_schema.sql",
                     "run_input_schema.sql",
                     "native_state_schema.sql",
-                    "review_schema.sql", "result_schema.sql",
+                    "review_schema.sql", "result_schema.sql", "development_schema.sql", "development_workspace_schema.sql",
                 )
                 else apply(conn, path)
             ),

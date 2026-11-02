@@ -5,7 +5,6 @@ from pathlib import Path
 
 import pytest
 
-from backend.db.migrations import apply_sql_resource
 from backend.tests.runtime.test_development_workspace import fixture_git
 
 
@@ -35,9 +34,6 @@ async def test_real_broker_prepares_copy_and_closes_every_git_peer(broker_setup)
     with registry.runs._transaction() as conn:
         _row, lease = registry._lease(conn, registry._row(conn, peer))
     # Low-level schema/policy fixture; full product admission is intentionally not inferred.
-    apply_sql_resource(
-        s.c.conn, Path(__file__).resolve().parents[2] / "db/development_schema.sql"
-    )
     s.c.conn.execute(
         "UPDATE runtime_runs SET execution_kind='development' WHERE id=?",
         (lease.run_id,),
@@ -82,9 +78,6 @@ async def prepare_policy_fixture(s, registry, peer):
     """Select the low-level development kind without claiming public developer admission is enabled."""
     with registry.runs._transaction() as conn:
         _row, lease = registry._lease(conn, registry._row(conn, peer))
-    apply_sql_resource(
-        s.c.conn, Path(__file__).resolve().parents[2] / "db/development_schema.sql"
-    )
     s.c.conn.execute(
         "UPDATE runtime_runs SET execution_kind='development' WHERE id=?",
         (lease.run_id,),
@@ -103,10 +96,6 @@ async def test_durable_preparation_keeps_one_global_source_and_exposes_only_read
 
     s, registry, peer, broker, storage, _ = broker_setup
     lease = await prepare_policy_fixture(s, registry, peer)
-    apply_sql_resource(
-        s.c.conn,
-        Path(__file__).resolve().parents[2] / "db/development_workspace_schema.sql",
-    )
     await fixture_git(s.workspace, "init", "-q")
     (s.workspace / "value.py").write_text("VALUE = 137\n")
     await fixture_git(s.workspace, "add", "value.py")
@@ -173,10 +162,6 @@ async def test_context_change_after_real_clone_retains_copy_without_admitting_it
 
     s, registry, peer, broker, storage, _ = broker_setup
     lease = await prepare_policy_fixture(s, registry, peer)
-    apply_sql_resource(
-        s.c.conn,
-        Path(__file__).resolve().parents[2] / "db/development_workspace_schema.sql",
-    )
     await fixture_git(s.workspace, "init", "-q")
     (s.workspace / "value.py").write_text("VALUE = 137\n")
     await fixture_git(s.workspace, "add", "value.py")
@@ -272,6 +257,61 @@ async def test_git_broker_keeps_original_source_readonly(broker_setup):
             ]
             is True
         )
+
+
+async def test_changed_source_registration_between_reservation_and_gate_cannot_launch_git(
+    broker_setup, monkeypatch
+):
+    """Owner changes during gated startup must be checked again before a Git payload can execute."""
+    from backend.runtime.broker_git import OwnedGitExecutor
+    from backend.runtime.broker_stdio import AsyncPeerBroker
+    from backend.runtime.contracts import WorkspaceChanged
+    from backend.runtime.development_workspace import git_environment
+    from backend.runtime.git_capsule import GitAsset
+    from backend.runtime.workspaces import PEER_WORKSPACE
+
+    s, registry, peer, broker, storage, _ = broker_setup
+    lease = await prepare_policy_fixture(s, registry, peer)
+    asset = GitAsset.inspect(Path(shutil.which("git")))
+    original = registry.bind
+
+    def redirect_before_gate(peer_id, identity):
+        """Model an explicit repository-registration edit after the process exists but before its gate opens."""
+        with registry.runs._transaction(write=True) as conn:
+            conn.execute(
+                "UPDATE repositories SET local_path=? WHERE id=11",
+                (str(s.workspace.parent / "changed"),),
+            )
+        return original(peer_id, identity)
+
+    monkeypatch.setattr(registry, "bind", redirect_before_gate)
+    async with AsyncPeerBroker(broker) as owner:
+        executor = OwnedGitExecutor(
+            owner=owner,
+            registry=registry,
+            lease=lease,
+            source=s.workspace,
+            allocation=s.control / "unallocated",
+            asset=asset,
+        )
+        with pytest.raises(WorkspaceChanged):
+            await executor.run(
+                (asset.path, "--version"),
+                cwd=PEER_WORKSPACE,
+                env=git_environment(Path("/home/actor")),
+                timeout=10,
+            )
+        assert not executor.receipts
+    operations = [
+        value
+        for key, value in storage.load().records.items()
+        if key.startswith("broker:op:")
+    ]
+    assert len(operations) == 1
+    assert (
+        operations[0]["gate_sent"] is False
+        and operations[0]["execution_closed"] is True
+    )
 
 
 async def test_cancelling_git_waits_for_actual_peer_closure(broker_setup):

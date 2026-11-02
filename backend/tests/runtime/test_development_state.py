@@ -7,8 +7,6 @@ from pathlib import Path
 
 import pytest
 
-from backend.db.migrations import apply_sql_resource
-
 
 @pytest.fixture
 def development_state(service_setup):
@@ -17,10 +15,6 @@ def development_state(service_setup):
     from backend.runtime.workspaces import WorkspaceRegistry
 
     s = service_setup
-    for filename in ("development_schema.sql", "development_workspace_schema.sql"):
-        apply_sql_resource(
-            s.c.conn, Path(__file__).resolve().parents[2] / "db" / filename
-        )
     s.c.conn.execute("UPDATE tasks SET type='code' WHERE id=1001")
     s.c.conn.commit()
     version = s.c.store.context_snapshot(101, 1001)["context_version"]
@@ -186,3 +180,14 @@ def test_ready_peer_admission_separates_source_and_execution_view(development_st
     assert admission["binding"].workspace == str(copy)
     assert admission["binding"] == registry.workspace_binding(peer)
     assert registry.admission(peer, source_only=True)["binding"] == source
+    from backend.runtime.contracts import WorkspaceChanged
+
+    s.c.conn.execute("UPDATE repositories SET local_path=? WHERE id=11", (str(copy),))
+    s.c.conn.commit()
+    for read in (
+        lambda: registry.admission(peer),
+        lambda: registry.admission(peer, source_only=True),
+        lambda: registry.workspace_binding(peer),
+    ):
+        with pytest.raises(WorkspaceChanged):
+            read()

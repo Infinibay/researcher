@@ -4651,3 +4651,40 @@ Resume at139250c; avoid re-running Wiki tests after docs-only followup.
   remain unwired until safe inverses/historical builders are integrated. Writable
   native/command sessions, Ken on the same copy, exact candidates/checks/review/owner
   acceptance/publication and all broader plan items remain active work.
+
+#### Development storage startup and lossless inverse — after abe63ce
+
+- Connected migrations36/37 to normal startup, retaining original research rows,
+  rowids, child references and owner objects. Historical fixture builders continue
+  to build their stated old versions before testing a real upgrade. Injected SQL
+  failures prove each resource rolls back its own DDL and marker; earlier complete
+  resources may remain applied and the next startup applies only missing ones.
+- Added explicit unused-only inverses:37then36. They refuse newer versions, live
+  roots, unclosed peers, development/code-review history and retained preparations.
+  An owner index preventing column replacement produces an atomic refusal with the
+  marker, original index and column preserved. No filesystem cleanup is performed.
+- Ruling: retain the proven local transactional SQLite constraint expansion rather
+  than introduce a parallel execution-kind model — the table/FK identities and old
+  values survive, and new public development admission remains disabled. This is
+  local startup evidence, not an online mixed-version rollout guarantee; used
+  development history cannot be downgraded with these inverses.
+- Closed a demonstrated reservation/gate race: every development peer checks the
+  original repository registration/directory at view resolution, admission and
+  final local binding before G. A real born Git peer whose registration changes
+  after global reservation remains unexecuted and is physically closed. Research
+  source/read-only behavior remains covered by existing broker/ownership tests.
+- Full source1945=1842PASS/100same inherited failure IDs/3same container skips,
+  including762runtime passes;13new cases all pass. Semantic assets were configured
+  in this full invocation. Final extracted wheel299PASS/0FAIL/0SKIP,365backend
+  modules loaded only from wheel;653Python/SQL files exactly match the checkout.
+  37new/changed definitions documented. No model calls, frontend or lock changes.
+- New module/directed-file Ruff and whitespace checks pass. minor (deferred): the
+  expanded changed-file Ruff check reports the same pre-existing E402/F811 in
+  test_finding_review.py:472/476 (fixture registration); compared against abe63ce
+  with identical diagnostics. No unrelated fixture-import cleanup in this increment.
+- Exact evidence:development-startup-results.json, development-startup-packaging.json,
+  development-startup-docstrings.json; updated development-execution.md. Public
+  development execution remains disabled. Next is native/command write access only
+  to the ready copy, factory preparation and Ken on that same copy, followed by
+  exact candidates/checks/review/owner acceptance/publication. The full goal and
+  all broader unclosed plan items remain active.
