@@ -4,7 +4,8 @@ El propietario puede inspeccionar una entrega de desarrollo y aceptar la versió
 exacta que observó, con sus comprobaciones y revisión independiente. La acción
 cierra la tarea y conserva un recibo histórico. Publicar sigue siendo una acción
 separada y pendiente: requiere comprobar otra vez código, destino y autoridad.
-La entrada pública de desarrollo también sigue pendiente.
+La [entrada pública de desarrollo y revisión](public-development.md) ya conecta
+este recorrido con Tareas y mantiene separada la publicación.
 
 ```mermaid
 flowchart LR
@@ -135,6 +136,6 @@ también llevan JSDoc. Esto no constituye una auditoría documental de todo el r
 
 La elegibilidad de aceptación todavía se compone en el adaptador de almacenamiento;
 la intención y política de comprobaciones son neutrales y no dependen de HTTP.
-La retirada de consumidores/loops antiguos, publicación, entrada pública de
-edición, políticas configurables, evaluación representativa de comprensión y
+La retirada de consumidores/loops antiguos, publicación,
+políticas por proyecto, evaluación representativa de comprensión y
 aceptación completa de las doce páginas permanecen dentro del objetivo.

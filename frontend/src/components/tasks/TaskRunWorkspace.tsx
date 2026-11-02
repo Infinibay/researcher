@@ -199,7 +199,7 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
     {current && ['reconciling', 'cancelling'].includes(current.status) && <RecoveryCard key={`${projectId}:${current.run_id}`} projectId={projectId} taskId={taskId} runId={current.run_id} />}
     {current && <RunCommands projectId={projectId} runId={current.run_id} />}
     <TaskResults key={`${projectId}:${taskId}`} projectId={projectId} taskId={taskId} runs={data.runs} contextVersion={data.context.context_version} />
-    <TaskCodeResults key={`code:${projectId}:${taskId}`} projectId={projectId} taskId={taskId} runs={data.runs} contextVersion={data.context.context_version} />
+    <TaskCodeResults key={`code:${projectId}:${taskId}`} projectId={projectId} taskId={taskId} runs={data.runs} contextVersion={data.context.context_version} reviewAvailable={data.runtime.configured && supported} />
     {showProposal && current?.result && <section className="task-proposal space-y-2 rounded-md border border-[var(--work-line)] p-3" aria-label="Propuesta del agente">
       <h4 className="font-medium text-[var(--work-ink)]">{current.status === 'needs_review' ? 'Propuesta' : 'Resultado conservado'}</h4>
       <MarkdownRenderer content={current.result.summary} />

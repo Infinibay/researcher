@@ -1,0 +1,162 @@
+{
+  "base_commit": "593cf69",
+  "changed_or_new_definitions_documented": 22,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "StartCodeReview",
+      "line": 121,
+      "docstring": "Owner-observed exact author candidate; the host chooses the separate reviewer and readonly capabilities.",
+      "file_sha256": "5ba78b946109e43588d66bb62df26e712962960dfc513ef6a44eed9f1c7539ac"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "start_code_review",
+      "line": 133,
+      "docstring": "Admit one independent review through the existing owner/CSRF boundary and original receipt; never accept or publish.",
+      "file_sha256": "5ba78b946109e43588d66bb62df26e712962960dfc513ef6a44eed9f1c7539ac"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "workspace",
+      "line": 519,
+      "docstring": "Expose scoped owner history and only the configured adapter's actual task capabilities without opening inference.",
+      "file_sha256": "5ba78b946109e43588d66bb62df26e712962960dfc513ef6a44eed9f1c7539ac"
+    },
+    {
+      "path": "backend/api/runtime_dependencies.py",
+      "symbol": "_configured_owned",
+      "line": 101,
+      "docstring": "Validate owner configuration and compose the actual serving controller.",
+      "file_sha256": "dd8c50313aed65e5df61746da91535f9ecfade2c3dd723b6063feb393f22d8dc"
+    },
+    {
+      "path": "backend/runtime/development_policy.py",
+      "symbol": "parse_development_checks",
+      "line": 10,
+      "docstring": "Copy a bounded JSON check list into immutable validated recipes; reject unknown fields and environments without fallback.",
+      "file_sha256": "d78723c49e3ad3212cdf6a759083c2530b4455dec1b45053166d5c0963cbe5fe"
+    },
+    {
+      "path": "backend/runtime/development_policy.py",
+      "symbol": "development_instructions",
+      "line": 29,
+      "docstring": "Bind the exact host plan into the original frozen developer instructions without representing commands as successful tests.",
+      "file_sha256": "d78723c49e3ad3212cdf6a759083c2530b4455dec1b45053166d5c0963cbe5fe"
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedCodexRuntime",
+      "line": 235,
+      "docstring": "Build subscription-only sessions with required Ken and host-owned private development views.",
+      "file_sha256": "478e60685820d7a23e9513cd972cf07381e40820e5075ff7d77005e1afe06f43"
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedCodexRuntime.__post_init__",
+      "line": 259,
+      "docstring": "Reject invalid search configuration before admitting a product attempt.",
+      "file_sha256": "478e60685820d7a23e9513cd972cf07381e40820e5075ff7d77005e1afe06f43"
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedCodexRuntime.open",
+      "line": 286,
+      "docstring": "Admit one original project attempt with required Ken and revocable peers.",
+      "file_sha256": "478e60685820d7a23e9513cd972cf07381e40820e5075ff7d77005e1afe06f43"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService",
+      "line": 61,
+      "docstring": "Own native attempts and grant-bound tool closure before durable terminal states.",
+      "file_sha256": "41ef4d0cc2476168a702e23c99940a6bf6a7c4435a3d0b822b04bb8112bc33f0"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService.submit",
+      "line": 167,
+      "docstring": "Admit one owner request with an optional observed independent review target.",
+      "file_sha256": "41ef4d0cc2476168a702e23c99940a6bf6a7c4435a3d0b822b04bb8112bc33f0"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService.supported_task_types",
+      "line": 213,
+      "docstring": "Advertise only the configured adapter's supported authoring types; older adapters retain research-only admission.",
+      "file_sha256": "41ef4d0cc2476168a702e23c99940a6bf6a7c4435a3d0b822b04bb8112bc33f0"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService.review_code",
+      "line": 217,
+      "docstring": "Admit and schedule one owner-observed independent native code review without enabling authoring, acceptance or publication.",
+      "file_sha256": "41ef4d0cc2476168a702e23c99940a6bf6a7c4435a3d0b822b04bb8112bc33f0"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._schedule",
+      "line": 240,
+      "docstring": "Schedule an admitted run once after checking its binding and execution profile.",
+      "file_sha256": "41ef4d0cc2476168a702e23c99940a6bf6a7c4435a3d0b822b04bb8112bc33f0"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._note_issue",
+      "line": 299,
+      "docstring": "Persist a safe, actionable owner explanation for this original run.",
+      "file_sha256": "41ef4d0cc2476168a702e23c99940a6bf6a7c4435a3d0b822b04bb8112bc33f0"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._execute",
+      "line": 515,
+      "docstring": "Own one admitted native turn, then prove peer/tool closure before finalizing it.",
+      "file_sha256": "41ef4d0cc2476168a702e23c99940a6bf6a7c4435a3d0b822b04bb8112bc33f0"
+    },
+    {
+      "path": "backend/tests/runtime/test_public_development.py",
+      "symbol": "test_owner_http_develops_checks_reviews_and_accepts_exact_candidate",
+      "line": 16,
+      "docstring": "Public requests share the original owned coordinator; duplicate admission never edits, checks or reviews twice.",
+      "file_sha256": "bb20eff81ca2a75d74f791fbec9e76147564542b51781008c25ff6edc83e4a9d"
+    },
+    {
+      "path": "backend/tests/runtime/test_public_development.py",
+      "symbol": "test_development_recipe_configuration_rejects_ambiguous_policy",
+      "line": 187,
+      "docstring": "Bad host recipes cannot enable authoring with guessed executables, ignored fields or an unbounded check list.",
+      "file_sha256": "bb20eff81ca2a75d74f791fbec9e76147564542b51781008c25ff6edc83e4a9d"
+    },
+    {
+      "path": "backend/tests/runtime/test_public_development.py",
+      "symbol": "test_development_recipe_policy_freezes_complete_explicit_host_plan",
+      "line": 195,
+      "docstring": "Copy mutable configuration into immutable recipes and disclose every command in frozen host instructions.",
+      "file_sha256": "bb20eff81ca2a75d74f791fbec9e76147564542b51781008c25ff6edc83e4a9d"
+    },
+    {
+      "path": "backend/tests/runtime/test_public_development.py",
+      "symbol": "test_older_adapter_does_not_admit_development_or_claim_its_capabilities",
+      "line": 210,
+      "docstring": "The public service rejects unsupported authoring before persistence or tool authority instead of falling back to research.",
+      "file_sha256": "bb20eff81ca2a75d74f791fbec9e76147564542b51781008c25ff6edc83e4a9d"
+    },
+    {
+      "path": "backend/tests/runtime/test_public_development.py",
+      "symbol": "test_completed_turn_does_not_hide_failed_candidate_pipeline",
+      "line": 237,
+      "docstring": "A completed native turn cannot conceal missing capture/check closure or mark the public development task done.",
+      "file_sha256": "bb20eff81ca2a75d74f791fbec9e76147564542b51781008c25ff6edc83e4a9d"
+    },
+    {
+      "path": "backend/tests/runtime/test_public_development.py",
+      "symbol": "test_completed_turn_does_not_hide_failed_candidate_pipeline.unavailable",
+      "line": 265,
+      "docstring": "Inject a host pipeline failure after the actual native turn, preserving real finalization and physical closure.",
+      "file_sha256": "bb20eff81ca2a75d74f791fbec9e76147564542b51781008c25ff6edc83e4a9d"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery have English docstrings. New frontend modules, exported helpers and components also carry English JSDoc; no claim that all historic project definitions are documented."
+}

@@ -4,6 +4,8 @@ import { useMutation,useQuery,useQueryClient } from '@tanstack/react-query'
 import { ApiError } from '../../api/client'
 import { codeActions,codeResultDiff,codeResultState,matchesCodeReceipt,prepareCodeAcceptance,sendCodeAcceptance,type CodeAcceptanceAction } from '../../api/codeResults'
 import type { RuntimeRun } from '../../api/runtime'
+import { codeReviewActions } from '../../api/codeReviews'
+import { CodeReviewRequest } from './CodeReviewRequest'
 
 const buttonClass='rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--work-accent)]'
 const verdicts:Record<string,string>={supported:'Respaldado por el revisor',needs_revision:'Requiere cambios',inconclusive:'Sin evidencia suficiente'}
@@ -25,7 +27,7 @@ function CodeDiff({projectId,runId,sha}:{projectId:number;runId:string;sha:strin
 }
 
 /** Keep retries tied to the saved owner observation even when newer evidence arrives. */
-export function CodeDelivery({projectId,taskId,runId,contextVersion,readOnly=false,onPending}:{projectId:number;taskId:number;runId:string;contextVersion:number;readOnly?:boolean;onPending?:(run:string|null)=>void}) {
+export function CodeDelivery({projectId,taskId,runId,contextVersion,readOnly=false,reviewAvailable=false,onPending}:{projectId:number;taskId:number;runId:string;contextVersion:number;readOnly?:boolean;reviewAvailable?:boolean;onPending?:(run:string|null)=>void}) {
   const client=useQueryClient()
   const state=useQuery({queryKey:['code-result',projectId,runId,contextVersion],queryFn:()=>codeResultState(projectId,runId),retry:false})
   const [ready,setReady]=useState(typeof window==='undefined')
@@ -90,6 +92,7 @@ export function CodeDelivery({projectId,taskId,runId,contextVersion,readOnly=fal
         {data.checks.limitations.map((item,index)=><p key={`${item.code}:${index}`} className="text-sm text-[var(--work-muted)]">{item.message}</p>)}
       </section>
       <section className="space-y-2" aria-label="Revisión independiente"><h4 className="text-sm font-medium text-[var(--work-ink)]">Revisión independiente</h4>
+        <CodeReviewRequest data={data} available={reviewAvailable} readOnly={readOnly || !!saved} onPending={onPending}/>
         <p className="text-sm text-[var(--work-ink)]">{data.review?.proposal?verdicts[data.review.proposal.verdict]:'Sin decisión confirmada'}</p>
         {data.review?.proposal && data.review.state!=='confirmed' && <p className="text-sm text-[var(--work-muted)]">Propuesta sin confirmar; no acredita una revisión completada.</p>}
         {data.review && (!data.candidate_current || data.blockers.some(item=>item.code==='review_not_current')) && <p className="text-sm text-[var(--work-muted)]">Revisión histórica; no acredita el contexto actual.</p>}
@@ -116,18 +119,18 @@ export function CodeDelivery({projectId,taskId,runId,contextVersion,readOnly=fal
 }
 
 /** Keep pending code decisions discoverable even when their run leaves the recent author list. */
-export function TaskCodeResults({projectId,taskId,runs,contextVersion}:{projectId:number;taskId:number;runs:RuntimeRun[];contextVersion:number}) {
+export function TaskCodeResults({projectId,taskId,runs,contextVersion,reviewAvailable=false}:{projectId:number;taskId:number;runs:RuntimeRun[];contextVersion:number;reviewAvailable?:boolean}) {
   const authors=runs.filter(run=>run.execution_kind==='development')
   const [selection,setSelection]=useState<string|null>(null)
   const [pending,setPending]=useState<string|null>(null)
   const [error,setError]=useState('')
   const [ready,setReady]=useState(typeof window==='undefined')
-  useEffect(()=>{try {const run=codeActions.pendingRun(window.sessionStorage,projectId,taskId);setPending(run);setSelection(run);setReady(true)} catch(issue) {setError(issue instanceof Error?issue.message:'No se pudo recuperar la decisión pendiente.')}},[projectId,taskId])
+  useEffect(()=>{try {const acceptance=codeActions.pendingRun(window.sessionStorage,projectId,taskId);const review=codeReviewActions.pendingRun(window.sessionStorage,projectId,taskId);if(acceptance && review && acceptance!==review) throw new Error('Hay solicitudes pendientes para dos versiones. Consulta sus recibos antes de continuar.');const run=acceptance??review;setPending(run);setSelection(run);setReady(true)} catch(issue) {setError(issue instanceof Error?issue.message:'No se pudo recuperar la decisión pendiente.')}},[projectId,taskId])
   const chosen=pending??selection??authors[0]?.run_id
   if(!chosen) return error?<p role="alert">{error}</p>:null
   return <div className="space-y-2">
     {error && <p role="alert">{error}</p>}
     {authors.length>1 && <label className="block space-y-1 text-sm text-[var(--work-ink)]"><span>Código de una ejecución</span><select className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] p-2" disabled={!!pending} value={chosen} onChange={event=>setSelection(event.target.value)}>{!authors.some(run=>run.run_id===chosen) && <option value={chosen}>Aceptación pendiente de una ejecución anterior</option>}{authors.map(run=><option key={run.run_id} value={run.run_id}>Contexto {run.context_version} · {run.status==='accepted'?'aceptación registrada':'candidato conservado'}</option>)}</select></label>}
-    <CodeDelivery key={`${projectId}:${taskId}:${chosen}`} projectId={projectId} taskId={taskId} runId={chosen} contextVersion={contextVersion} readOnly={!ready || !!error} onPending={setPending}/>
+    <CodeDelivery key={`${projectId}:${taskId}:${chosen}`} projectId={projectId} taskId={taskId} runId={chosen} contextVersion={contextVersion} readOnly={!ready || !!error} reviewAvailable={reviewAvailable} onPending={setPending}/>
   </div>
 }

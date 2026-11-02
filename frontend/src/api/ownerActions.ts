@@ -9,7 +9,7 @@ export interface OwnerAction {
 }
 
 /** Reuse packet/pointer semantics with separate stable namespaces and strict domain parsers. */
-export function ownerActionStore<T extends OwnerAction>(namespace:'result'|'code', parse:(value:unknown)=>T) {
+export function ownerActionStore<T extends OwnerAction>(namespace:'result'|'code'|'code-review', parse:(value:unknown)=>T) {
   /** Preserve existing research keys while preventing code/research packet collisions. */
   const key=(project:number,task:number,run:string)=>`researcher:${namespace}-action:v1:${project}:${task}:${encodeURIComponent(run)}`
   /** Keep the original run discoverable after pagination, navigation or reload. */

@@ -6,7 +6,7 @@ ni los archivos del repositorio original o de la copia del autor.
 
 La sesión interna ya dispone de un controlador que cierra los escritores,
 registra el candidato de forma durable y lo vincula al intento y al contexto.
-La [revisión independiente](code-reviews.md) y la [aceptación humana](code-acceptance.md) se integran mediante contratos separados. Entrada pública de desarrollo y publicación siguen pendientes.
+La [revisión independiente](code-reviews.md) y la [aceptación humana](code-acceptance.md) se integran mediante contratos separados. La [entrada pública de desarrollo](public-development.md) ya las conecta; publicación sigue pendiente.
 
 ## Qué se captura
 

@@ -1,0 +1,9 @@
+{
+  "reason": "Global invocation omitted the established integration timeout override and inherited20seconds. Historical passing actual integration cases require up to84.358seconds.",
+  "action": "Verified original process1706153, requested SIGINT, and waited for terminal exit2 before replacement.",
+  "original_exit_code": 2,
+  "original_log": "public-development-full-wrong-deadline.log",
+  "replacement_timeout_seconds": 180,
+  "not_a_product_regression_claim": true,
+  "avoid_repeat": "Pass --timeout=180 for the full native integration suite, as the extracted-wheel verifier already does; preserve the stricter default for ordinary tests."
+}

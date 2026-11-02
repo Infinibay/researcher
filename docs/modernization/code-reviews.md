@@ -1,11 +1,12 @@
 # Revisión independiente del candidato
 
-El recorrido interno conecta una sesión nativa separada con el candidato exacto
+El recorrido conecta una sesión nativa separada con el candidato exacto
 del autor, valida Git antes y después, verifica citas y conserva una decisión
 atribuida. La [aceptación humana posterior](code-acceptance.md) ya tiene API y panel de
-Tareas; publicación y entrada pública de desarrollo siguen pendientes. La admisión nativa sigue siendo interna mediante `review_code`; todavía no hay
-acción web para solicitar esa sesión. La aceptación posterior enlazada sí tiene
-panel y rutas del propietario.
+Tareas; publicación sigue pendiente. La [entrada pública](public-development.md)
+usa `review_code` desde una ruta del propietario y un control de Tareas con
+recuperación de la misma solicitud. La aceptación posterior tiene su propia
+acción y no se infiere de la revisión.
 
 ```mermaid
 flowchart TD

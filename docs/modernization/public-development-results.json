@@ -1,0 +1,68 @@
+{
+  "base_commit": "593cf69",
+  "status": "public_development_and_independent_review_connected_publication_pending",
+  "directed": {
+    "passed": 10,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 117.46,
+    "scope": "Actual owner HTTP author/check/reviewer/acceptance, original source preserved, original duplicate receipts; unsupported runtime and pipeline failures. Native generation and Ken controlled."
+  },
+  "consumer_tests": {
+    "passed": 51,
+    "seconds": 17.11,
+    "scope": "RuntimeService, owner workspace, admission binding, frozen input; overlaps packaged checks, counts not additive."
+  },
+  "frontend": {
+    "passed": 75,
+    "build": "passed",
+    "warnings_retained": [
+      "Existing bundle-size warning",
+      "Existing stale Browserslist data"
+    ]
+  },
+  "wheel": {
+    "first_tests_passed": 84,
+    "first_seconds": 147.6,
+    "first_modules_only_from_wheel": 352,
+    "final_tests_passed": 11,
+    "final_modules_only_from_wheel": 292,
+    "matching_python_sql_files": 698,
+    "only_intervening_python_change": "Added the missing workspace endpoint docstring; complete payload and docstring-stripped AST comparison recorded separately."
+  },
+  "docstrings": {
+    "new_or_changed_python_definitions": 22,
+    "missing": 0,
+    "scope": "Current delivery, not the whole project."
+  },
+  "browser": {
+    "screenshots_inspected": 6,
+    "widths": [
+      1440,
+      390,
+      320
+    ],
+    "panel_axe_violations": 0,
+    "page_errors": 0,
+    "horizontal_overflow": false,
+    "review_posts": 2,
+    "review_admissions": 1,
+    "new_review_attempts": 0,
+    "scope": "Actual owner HTTP, SQLite and UI; synthetic original author/Git/closure evidence and deliberately queued review. Native integration is separate."
+  },
+  "global_suite": {
+    "state": "running",
+    "session_id": 66662,
+    "timeout_seconds": 180,
+    "source_manifest": "public-development-source-manifest.json",
+    "previous_wrong_deadline_invocation": "Stopped via SIGINT and awaited exit2; retained in scratch. Do not treat its timeouts as verified product regressions.",
+    "receipt": "public-development-verification-retry.json"
+  },
+  "runtime_model_calls": 0,
+  "original_source_modified": false,
+  "remaining": [
+    "Reconciliable publication with exact accepted candidate/current destination and fresh physical authority",
+    "Global result comparison and investigation of any new failures",
+    "All remaining complete-plan engine/legacy/roles/tools/prompts/human/design/operation requirements; fresh final whole-branch review"
+  ]
+}

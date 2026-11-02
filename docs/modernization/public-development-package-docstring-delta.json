@@ -1,0 +1,9 @@
+{
+  "first_wheel_sha256": "d056655d64357f74b378438bc1b991637fafb7f438f6e9fa475b15598f510aca",
+  "final_wheel_sha256": "5abcd830ffb0329fa4d190ff63fd998925d9da67989be63f4f8b2fde3e8b2f34",
+  "changed_backend_payloads": [
+    "backend/api/routes/runs.py"
+  ],
+  "only_docstrings_changed": true,
+  "method": "Compare full backend Python/SQL payloads, then compare changed Python ASTs after stripping module/class/function docstrings. Runtime semantics unchanged; not a runtime proof."
+}

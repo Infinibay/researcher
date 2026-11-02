@@ -7,6 +7,7 @@ from contextlib import asynccontextmanager
 from dataclasses import dataclass, field
 from functools import partial
 from pathlib import Path
+from typing import ClassVar
 from uuid import uuid4
 
 import httpx
@@ -33,7 +34,7 @@ from backend.runtime.code_review_instructions import CODE_REVIEW_INSTRUCTIONS
 from backend.runtime.codex_rpc import JsonRpcClient, RpcProtocolError
 from backend.runtime.codex_session import CodexSession, ExecutionLimits
 from backend.runtime.contracts import RunConflict
-from backend.runtime.development_instructions import DEVELOPMENT_INSTRUCTIONS
+from backend.runtime.development_policy import development_instructions
 from backend.runtime.development_state import DevelopmentWorkspaces
 from backend.runtime.egress_proxy import EgressPolicy
 from backend.runtime.execution_domain import ExecutionDomain
@@ -234,6 +235,7 @@ class OwnedInferenceSession(InferenceSession):
 class OwnedCodexRuntime:
     """Build subscription-only sessions with required Ken and host-owned private development views."""
 
+    supported_task_types: ClassVar[tuple[str, ...]] = ("research", "code", "bug_fix")
     app: object
     research: object
     live_grants: object
@@ -249,6 +251,7 @@ class OwnedCodexRuntime:
     broker_limits: object
     model: str
     web_search: str = "live"
+    development_checks: tuple = ()
     _closed_attempts: dict = field(
         default_factory=dict, init=False, repr=False, compare=False
     )
@@ -258,6 +261,18 @@ class OwnedCodexRuntime:
         from backend.runtime.native_search import validate_search_mode
 
         validate_search_mode(self.web_search)
+        from backend.runtime.check_contracts import CheckSpec
+
+        if (
+            not isinstance(self.development_checks, tuple)
+            or len(self.development_checks) > 8
+            or any(
+                not isinstance(check, CheckSpec) for check in self.development_checks
+            )
+        ):
+            raise ValueError(
+                "Owned development requires immutable bounded host check recipes"
+            )
 
     def consume_closure(self, lease):
         return self._closed_attempts.pop(lease.attempt_id, None) == (
@@ -483,7 +498,9 @@ class OwnedCodexRuntime:
                                 workspace=PEER_WORKSPACE,
                                 model=self.model,
                                 limits=limits,
-                                developer_instructions=DEVELOPMENT_INSTRUCTIONS
+                                developer_instructions=development_instructions(
+                                    self.development_checks
+                                )
                                 if development
                                 else (
                                     CODE_REVIEW_INSTRUCTIONS

@@ -5300,3 +5300,70 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
   Full plan still active: public author/reviewer admission and reconciliable
   publication, all legacy/engine/roles/tools/prompts/human/UI/operation requirements,
   100inherited failures,43broad scenarios and fresh final whole-branch review.
+
+
+## Public development and owner-requested independent review — base 593cf69
+
+- Previous goal turn classification: no progress (status-only response). Revalidated
+  HEAD/status/dashboard; resumed the next authorized public development delivery.
+- Brief: connect owner Tasks/Conversation entry to existing private development,
+  exact capture/checks, independent review and explicit acceptance. Exit: actual
+  owner HTTP path to accepted exact code with original source intact, duplicate
+  admission receipts without rerun, UI reload recovery, unsupported adapter and
+  failed pipeline protected. Publication remains a separate required next delivery.
+- Ken focused service search/recall/related: managed runtime files are not indexed
+  in the original checkout. Read known current managed sources and their actual
+  callers/tests; do not treat irrelevant search results as support. No new loop.
+- Ruling: configured immutable host development_checks, max8 explicit recipes with
+  supported environments and absolute executable; freeze every recipe/hash in the
+  original developer instructions before native inference. Default[] stays absent
+  checks, never implicit success. Why: reuse existing owned CI/candidate boundaries;
+  cost if wrong: unclear or mutable check provenance. Original input/actual results
+  verified in HTTP integration. No new persistence schema was necessary.
+- RuntimeService admits only adapter-advertised task types, selects development
+  grants, requires capture_ready and finishes its host check pipeline after a
+  completed native turn. Capture/check-controller failure retains failed state and
+  code_candidate_unconfirmed. Existing result/check classifications govern gates.
+- Owner-only task code-reviews endpoint selects code-reviewer and observed exact
+  target. Rejects caller actor/repository/publication fields, stale target, foreign
+  scope and operation/body conflicts. Existing original receipt never reschedules.
+- Tasks review action saves exact body/nonce/candidate/context before sending and
+  recovers original request after reload. Dedicated namespace reuses ownerActions;
+  acceptance/research keys stay unchanged. Pending author remains discoverable.
+- RED7 source cases (research-only capability/missing policy), frontend request2RED
+  and real component missing-actionRED; implementation→source10PASS117.46s incl
+  real owner HTTP/Git/SQL/kernel author-check-review-accept with controlled native
+  generation/Ken. Separate51consumerPASS17.11s. No actual model calls this delivery.
+- First wheel84PASS147.60s/352wheel-only backend modules. Late docstring audit found
+  workspace missing; added its English documentation. It is the only changed
+  payload between wheels, verified by complete comparison and docstring-stripped
+  AST equality. Final wheel11PASS/292wheel-only modules,698matching Python/SQL files.
+  No expensive native rerun just for prose. Final22new/changed definitions documented;
+  six changed/new Python files pass Ruff and format. Frontend75PASS/build with prior
+  bundle/Browserslist warnings. Generated tracked tsbuildinfo restored.
+- ProductDesign audit: built-in browser host unavailable, no saved context; used
+  existing authorized local test Chromium. Six screenshots at1440/390/320 all
+  inspected, no overflow/JSerrors and zero panel-only Axe violations. Lost response
+  after actual review admission→reload exact custom text/body/nonce→explicit same
+  POST returns original queued receipt. One review admission, zero review attempts,
+  zero acceptances. Synthetic original Git/closure witnesses and deliberately held
+  scheduling are explicit; native physical integration is a separate source/wheel
+  test. Private browser server1705409 stopped, session77254 exit143 confirmed.
+- Verification error and correction: full-suite call omitted integration timeout
+  and inherited20s, although known passing native cases take30–84s. Verified process
+  1706153, sent SIGINT, drained session43672 to exit2; archived wrong-deadline log/XML.
+  Restarted only after terminal receipt, using --timeout=180. Current live full-suite
+  session66662; log/XML public-development-full.*. No claim about its final counts,
+  new failure identities or whole-suite success until observed. This is harness
+  rework, not evidence of a product regression. Source manifest saved for recheck.
+- Evidence: public-development.md and results/packaging/final-packaging/docstrings/
+  package-docstring-delta/verification-retry JSON; six-state browser audit report.
+- Next publication boundary lead (source observation, no runtime reproduction yet):
+  legacy PRService.merge_pr and /api/git/prs/{id}/merge select a mutable branch and
+  external/local effect before DB status updates, without native acceptance checks.
+  Must reproduce and close this bypass before using legacy publication for native
+  tasks; native publication still needs new reconciliable effect ownership and
+  exact destination revalidation. Do not reuse closed author/reviewer leases.
+- Full goal remains active: publication, all engine/legacy/roles/tools/prompts/
+  communication/UI/operation obligations,100inherited failures,43broad scenarios
+  and final fresh-context whole-branch review. No merge, push or deployment.

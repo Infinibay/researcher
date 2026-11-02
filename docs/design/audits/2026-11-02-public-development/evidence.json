@@ -1,0 +1,107 @@
+{
+  "status": "passed",
+  "scope": "Actual owner HTTP/SQLite/Tasks UI. Synthetic stored author/Git/closure witnesses; reviewer admitted and deliberately held queued. Native generation and physical integration have separate tests. Local test Chromium because built-in browser host unavailable.",
+  "states": [
+    {
+      "file": "01-desktop-request.png",
+      "sha256": "5c3b68c0a398dcb21da9bd6a30f566e4b1c88f26097b2d0e25d745635080baee",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "02-mobile-request.png",
+      "sha256": "4996c4e94828987a1f67766867fc8636cfaf12a0fd36cb31f8eacf77609346dd",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "03-narrow-request.png",
+      "sha256": "585ca5db689334ab700be47ba06fc194b3bd42a475a1731dbcde6837309fef50",
+      "layout": {
+        "width": 320,
+        "scroll": 320
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "04-response-lost.png",
+      "sha256": "9aa8ddb16c140f2d3f38b7b8836bf6dc923b51c9d3e2f593841ebad4e816f658",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "05-reload-original-request.png",
+      "sha256": "a9b3a8e03debfbc33c5c0290a7c7107ae8456ea2b518a56cc174bcf34ac875e6",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "06-same-receipt.png",
+      "sha256": "bab3ae7402bfd054acf99f882dbb32db86357896ac3d3875483e8522211d42e7",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    }
+  ],
+  "page_errors": [],
+  "requests": [
+    {
+      "operation_key": "61aaa5d4-6c82-4a0a-9d71-468da5015343",
+      "attempt_id": "1d7fad3e-d3ad-47fd-8ddb-38e418ea337c",
+      "context_version": 2,
+      "subject_sha256": "b0b2373830681a3efb9516d3d7c496568973b2235c92cff650080ee16cb1f848",
+      "request": "Comprueba el ejemplo 100 \u00d7 1,2 = 120 y explica qu\u00e9 falta verificar."
+    },
+    {
+      "operation_key": "61aaa5d4-6c82-4a0a-9d71-468da5015343",
+      "attempt_id": "1d7fad3e-d3ad-47fd-8ddb-38e418ea337c",
+      "context_version": 2,
+      "subject_sha256": "b0b2373830681a3efb9516d3d7c496568973b2235c92cff650080ee16cb1f848",
+      "request": "Comprueba el ejemplo 100 \u00d7 1,2 = 120 y explica qu\u00e9 falta verificar."
+    }
+  ],
+  "model_turns": 0,
+  "receipt": {
+    "run_id": "1d448805-be18-4523-9d07-f61ff968f32c",
+    "project_id": 101,
+    "task_id": 1001,
+    "actor_id": "code-reviewer",
+    "context_version": 2,
+    "status": "queued",
+    "fence": 0,
+    "attempt_id": null,
+    "thread_id": null,
+    "turn_id": null,
+    "prompt": "Comprueba el ejemplo 100 \u00d7 1,2 = 120 y explica qu\u00e9 falta verificar.",
+    "runtime": "codex",
+    "result": null,
+    "cancel_requested": false,
+    "operation_key": "61aaa5d4-6c82-4a0a-9d71-468da5015343",
+    "conversation_thread_id": null,
+    "model": null,
+    "repository_id": 11,
+    "repository_name": "alpha",
+    "issue": null,
+    "review": null,
+    "execution_kind": "code_review"
+  },
+  "database_observation": {
+    "runtime_code_review_requests": 1,
+    "runtime_code_acceptances": 0,
+    "runtime_attempts": 1
+  }
+}

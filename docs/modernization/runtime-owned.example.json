@@ -2,6 +2,7 @@
   "runtime_profile": "owned-codex-v1",
   "model": "gpt-6.1-sol",
   "web_search": "live",
+  "development_checks": [],
   "codex_binary": "/opt/codex-0.166.0/bin/codex",
   "code_mode_host": "/opt/codex-0.166.0/bin/codex-code-mode-host",
   "token_file": "/home/you/.codex/auth.json",

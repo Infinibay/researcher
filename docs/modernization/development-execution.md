@@ -1,11 +1,11 @@
 # Ejecución nativa de desarrollo: preparación aislada
 
 El sistema prepara una copia Git privada por intento y permite escritura en ella
-desde los perfiles nativos internos de desarrollo. **El servicio público todavía
-no admite tareas de desarrollo.** La fábrica interna ya conecta la preparación,
+desde los perfiles nativos de desarrollo. El servicio público admite `code` y
+`bug_fix` cuando está configurado `owned-codex-v1`. La fábrica conecta la preparación,
 el contexto, las herramientas de desarrollo, la captura durable de candidatos y
-sus comprobaciones aisladas. Faltan revisión, aceptación y publicación para completar el
-recorrido del producto.
+sus comprobaciones aisladas. La [entrada pública](public-development.md) añade
+revisión solicitada desde Tareas y aceptación explícita. Publicación sigue pendiente.
 
 ## Dos directorios con responsabilidades distintas
 
@@ -153,7 +153,7 @@ interno cierra los escritores y persiste la captura ligada al contexto e intento
 Las [comprobaciones aisladas](code-checks.md) ya consumen esa versión y conservan
 resultados ligados al candidato. La [revisión independiente](code-reviews.md)
 conecta sesión nativa, Git antes/después, citas verificadas y cierre, con validación
-ampliada y ensayo real de suscripción documentados. La [aceptación humana](code-acceptance.md) ya tiene API y panel. La entrada pública de desarrollo y la publicación reconciliada siguen pendientes
+ampliada y ensayo real de suscripción documentados. La [aceptación humana](code-acceptance.md) ya tiene API y panel. La [entrada pública](public-development.md) ya conecta el desarrollo y su revisión; la publicación reconciliada sigue pendiente
 para cerrar el recorrido. Terminar un turno
 o emitir texto de aprobación no cierra ese ciclo.
 

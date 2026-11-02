@@ -2793,7 +2793,7 @@
         "138new/changed definitions have English docstrings; final691Python/SQL payloads match wheel"
       ],
       "remaining": [
-        "Reconciliable publication and public development entry; owner acceptance now separately implemented",
+        "Reconciliable publication; public development/reviewer entry and owner acceptance now separately implemented",
         "Legacy reviewer/CI cutover and representative review/human comprehension evaluation"
       ]
     },
@@ -2819,9 +2819,36 @@
         "30directed history/policy cases pass including64/65history boundary; final97-case wheel delta covers actual native coordinator, owner HTTP, research and migrations. Global2126 observation predates this four-file history guard."
       ],
       "remaining": [
-        "Public code authoring/reviewer admission and reconciliable publication integration",
+        "Reconciliable publication integration; public authoring/reviewer admission now separately implemented",
         "Project-configurable policy extension, legacy consumer/CI cutover and all broad scenario acceptance",
         "Representative comprehension/accessibility evaluation and whole page/product acceptance"
+      ]
+    },
+    "public_development": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/modernization/public-development.md",
+        "docs/modernization/public-development-docstrings.json",
+        "docs/design/audits/2026-11-02-public-development/report.md",
+        "backend/tests/runtime/test_public_development.py",
+        "frontend/tests/code-review-actions.test.ts",
+        "frontend/tests/code-result-design.test.ts",
+        "docs/modernization/public-development-results.json",
+        "docs/modernization/public-development-packaging.json",
+        "docs/modernization/public-development-final-packaging.json"
+      ],
+      "implemented": [
+        "Owned adapter public code/bug_fix admission through the original coordinator; legacy adapters retain research only",
+        "Mandatory exact capture and explicit immutable host checks after native completion; check plan disclosed in frozen developer instructions",
+        "Owner-only independent review endpoint and Tasks action; exact packet/operation survives lost response and reload without another dispatch",
+        "10directed tests pass including actual HTTP/Git/kernel/SQLite author-check-review-accept integration with controlled generation;51consumer tests pass",
+        "Frontend75PASS/build;6inspected screenshots at3widths;one review admission after2identical sends;22Python definitions documented",
+        "First-wheel84PASS/352package-only modules; final11PASS/292package-only modules after only a missing endpoint docstring was added; complete payload/AST equivalence recorded,698matching sources"
+      ],
+      "remaining": [
+        "Full integration suite in progress with180s timeout; original20s-default invocation deliberately interrupted after verified harness mismatch",
+        "Reconciliable publication with exact destination/current accepted evidence and new effect ownership",
+        "Legacy consumer/CI cutover, per-project policy, representative comprehension/accessibility and whole page/product acceptance"
       ]
     }
   }

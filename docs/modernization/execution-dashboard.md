@@ -4,12 +4,42 @@ Actualizado: 2026-11-02. Objetivo: implementar **todo** el [plan](../superpowers
 
 ## Estado comprobado
 
-- Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo interno edita, captura y comprueba candidatos exactos; ahora también registra revisión nativa separada. Aceptación del propietario conectada a API/Tareas; faltan publicación, admisión pública y cutover de consumidores/loops antiguos.
+- Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Faltan publicación y cutover de consumidores/loops antiguos.
 - Interfaz: seis pilotos, 18/36 conceptos de escritorio y 6/12 móviles; seis rutas pendientes y 0/12 páginas completamente aceptadas.
 - Última suite global (antes del ajuste final del historial): 2126 casos, 2023 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados, sin fallos nuevos por identidad; no se afirman causas idénticas. Pasan 943 casos del runtime.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Última etapa verificada: aceptación explícita de código
+## Etapa actual: entrada pública de desarrollo y revisión
+
+**Resultado:** el adaptador con aislamiento admite `code`/`bug_fix`; los anteriores
+conservan investigación. El host captura el candidato después del turno y ejecuta
+recetas explícitas congeladas en las instrucciones originales. Captura o pipeline
+fallidos no se ocultan detrás de un turno completado. Tareas solicita otro revisor
+con el objeto exacto; cuerpo/clave sobreviven respuesta perdida y recarga.
+
+**Verificación terminada:** diez casos dirigidos, con recorrido owner HTTP completo
+hasta aceptación, comprobación real y origen intacto; 51 consumidores pasan.
+Generación y Ken controlados, sin inferencia real nueva. Frontend 75 pruebas/build;
+seis capturas inspeccionadas en tres anchos, cero errores de página/desbordamiento
+y cero Axe en el panel nuevo. El navegador tiene procedencia física sintética y
+retiene la revisión en cola; dos envíos idénticos dejan una admisión y ningún
+intento nuevo. 22 definiciones Python documentadas; seis archivos pasan Ruff/formato.
+
+**Paquete:** 84 casos pasan en el wheel ampliado; después se añadió sólo el
+docstring faltante de `workspace`. Comparación completa de payloads/AST sin
+docstrings y 11 casos del wheel final pasan; 698 fuentes coinciden.
+
+**Verificación en curso:** suite global. La primera invocación omitió el plazo de
+integración y heredó 20 segundos; se detuvo con SIGINT/salida 2 y se reemplazó con
+180 segundos. No se atribuyen sus timeouts al producto sin investigar. Las cifras
+globales de arriba son históricas hasta observar el nuevo resultado. [Contrato](public-development.md),
+[auditoría](../design/audits/2026-11-02-public-development/report.md).
+
+**Siguiente entrega:** publicación reconciliable con nueva autoridad y validación
+del destino exacto, conservando el veto de evidencia obsoleta o revisión rechazada.
+Ninguna aceptación previa autoriza a reutilizar el dominio cerrado del autor.
+
+## Etapa anterior verificada: aceptación explícita de código
 
 **Resultado:** el propietario inspecciona commit/contexto, diff capturado, resultados
 y revisión; acepta únicamente la observación exacta con reconocimiento de límites
@@ -49,11 +79,12 @@ no se atribuye a estos bytes; no hubo otra ejecución global.
 [paquete](code-acceptance-packaging.json), [docstrings](code-acceptance-docstrings.json),
 [auditoría](../design/audits/2026-11-02-code-acceptance/report.md).
 
-**Siguiente entrega:** conectar la entrada pública de desarrollo al recorrido
+**Continuación prevista entonces:** conectar la entrada pública de desarrollo al recorrido
 existente de edición/captura/comprobaciones/revisión/aceptación y completar la
 publicación reconciliable. La publicación debe revalidar código/destino y mantener
 el veto de revisión rechazada o evidencia obsoleta. Continúan todas las obligaciones
 de motor/roles/herramientas/comunicación/prompts/interfaz/operación del plan.
+La entrada pública ya se conecta en la etapa actual; publicación sigue pendiente.
 
 ## Etapa anterior: revisión nativa del candidato
 

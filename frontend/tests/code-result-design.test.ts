@@ -39,3 +39,12 @@ test('a later positive review does not conceal an earlier objection on the same 
   assert.match(html,/La revisión anterior observó una tasa incorrecta/)
   assert.doesNotMatch(html,/>Aceptar esta versión<\/button>/)
 })
+
+test('an unreviewed current candidate offers an explicit independent request with no implied acceptance',()=>{
+  const html=renderCodeResult('unreviewed')
+  assert.match(html,/Solicitar revisión independiente/)
+  assert.match(html,/otro agente.*versión.*petición original/)
+  assert.match(html,/no acepta ni publica/)
+  assert.doesNotMatch(html,/>Aceptar esta versión<\/button>/)
+  assert.doesNotMatch(renderCodeResult('stale'),/>Solicitar revisión independiente<\/button>/)
+})

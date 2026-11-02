@@ -103,6 +103,7 @@ def _configured_owned(config, path, live_grants, app):
     from backend.runtime.authority_journal import WitnessedAuthorityJournal
     from backend.runtime.broker_profile import CodexAsset
     from backend.runtime.contracts import text
+    from backend.runtime.development_policy import parse_development_checks
     from backend.runtime.ken_worker import KenInstallation
     from backend.runtime.native_inference import _private_control
     from backend.runtime.native_network import NativeNetwork
@@ -183,6 +184,9 @@ def _configured_owned(config, path, live_grants, app):
         broker_limits=BrokerLimits(**config["broker_limits"]),
         model=config["model"],
         web_search=config.get("web_search", "live"),
+        development_checks=parse_development_checks(
+            config.get("development_checks", [])
+        ),
     )
     app.state.runtime_research_store = research
     return RuntimeService(

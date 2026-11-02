@@ -118,6 +118,40 @@ class StartFindingReview(BaseModel):
     )
 
 
+class StartCodeReview(BaseModel):
+    """Owner-observed exact author candidate; the host chooses the separate reviewer and readonly capabilities."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
+    context_version: int = Field(gt=0)
+    attempt_id: str = Field(min_length=1, max_length=128)
+    subject_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    request: str = Field(min_length=1, max_length=12000)
+
+
+@router.post("/{project_id}/tasks/{task_id}/code-reviews", status_code=202)
+async def start_code_review(
+    project_id: int, task_id: int, body: StartCodeReview, request: Request
+):
+    """Admit one independent review through the existing owner/CSRF boundary and original receipt; never accept or publish."""
+    from backend.runtime.code_reviews import CodeReviewTarget
+
+    try:
+        spec = RunSpec(
+            project_id,
+            task_id,
+            "code-reviewer",
+            body.context_version,
+            body.operation_key,
+            body.request,
+            "codex",
+        )
+        target = CodeReviewTarget(body.attempt_id, body.subject_sha256)
+    except ValueError as error:
+        raise HTTPException(422, str(error)) from error
+    return asdict(await service(request).review_code(spec, target))
+
+
 class AcceptResult(BaseModel):
     """Bind an owner action to exactly the displayed candidate, context and review state."""
 
@@ -483,10 +517,15 @@ async def question_inbox(
 
 @router.get("/{project_id}/tasks/{task_id}/workspace")
 async def workspace(project_id: int, task_id: int, request: Request):
+    """Expose scoped owner history and only the configured adapter's actual task capabilities without opening inference."""
     data = await asyncio.to_thread(owner_view(request).workspace, project_id, task_id)
     data["runtime"] = {
         "configured": request.app.state.runtime_service is not None,
-        "supported_task_types": ["research"],
+        "supported_task_types": list(
+            request.app.state.runtime_service.supported_task_types
+        )
+        if request.app.state.runtime_service is not None
+        else [],
         "model": getattr(
             getattr(request.app.state.runtime_service, "runtime", None), "model", None
         ),

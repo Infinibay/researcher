@@ -1,4 +1,4 @@
-"""One local owner composes durable research runs with a native inference adapter.
+"""One local owner composes durable research, development and review with native inference.
 
 No model loop lives here: one admitted request sends at most one native turn.
 All native and MCP context managers enter/exit in the same worker task. HTTP
@@ -18,6 +18,7 @@ from uuid import uuid4
 
 from backend.research.models import (
     CODE_REVIEW_PERMISSIONS,
+    DEVELOPMENT_PERMISSIONS,
     RESEARCH_PERMISSIONS,
     REVIEW_PERMISSIONS,
 )
@@ -189,9 +190,9 @@ class RuntimeService:
         context = await asyncio.to_thread(
             self.store.context_snapshot, spec.project_id, spec.task_id
         )
-        if context["task"]["type"] != "research":
+        if context["task"]["type"] not in self.supported_task_types:
             raise RunConflict(
-                "Development capabilities are still being migrated; select a research task"
+                "Configured runtime does not support this task type; no fallback is permitted"
             )
         if context["context_version"] != spec.context_version:
             raise RunConflict("Request uses an obsolete context version")
@@ -208,6 +209,11 @@ class RuntimeService:
         if self._lock_fd is None or self._closing:
             raise RunConflict("Runtime owner is not accepting work")
 
+    @property
+    def supported_task_types(self):
+        """Advertise only the configured adapter's supported authoring types; older adapters retain research-only admission."""
+        return getattr(self.runtime, "supported_task_types", ("research",))
+
     async def review_code(self, spec, target):
         """Admit and schedule one owner-observed independent native code review without enabling authoring, acceptance or publication."""
         from backend.runtime.code_reviews import CodeReviews
@@ -216,6 +222,10 @@ class RuntimeService:
         if spec.runtime != "codex":
             raise RunConflict(
                 "This deployment admits only the Codex subscription adapter"
+            )
+        if "code" not in self.supported_task_types:
+            raise RunConflict(
+                "Configured runtime does not support isolated code review"
             )
         run, admitted = await asyncio.to_thread(
             CodeReviews(self.store).admit_once, spec, target
@@ -246,10 +256,13 @@ class RuntimeService:
             )
             expected_types = (
                 ("code", "bug_fix")
-                if run.execution_kind == "code_review"
+                if run.execution_kind in ("development", "code_review")
                 else ("research",)
             )
-            if context["task"]["type"] not in expected_types:
+            if (
+                context["task"]["type"] not in expected_types
+                or context["task"]["type"] not in self.supported_task_types
+            ):
                 return await self._note_issue(run, "task_changed")
             try:
                 workspace = await asyncio.to_thread(
@@ -308,6 +321,10 @@ class RuntimeService:
             ),
             "code_review_unconfirmed": (
                 "El revisor terminó su turno, pero no pudimos confirmar la revisión sobre el código observado. Conservamos la propuesta y su evidencia; revisa ese resultado antes de continuar.",
+                "inspect_saved_work",
+            ),
+            "code_candidate_unconfirmed": (
+                "El turno terminó, pero no se completó la captura del candidato o sus comprobaciones. Conservamos la evidencia disponible; no se aceptó ni publicó código. Revisa el resultado antes de continuar.",
                 "inspect_saved_work",
             ),
             "native_search_unavailable": (
@@ -501,12 +518,16 @@ class RuntimeService:
         error_type = None
         dispatch_reserved = native_started = False
         code_review = review_confirmed = False
+        development = development_complete = False
         try:
             current_run = await asyncio.to_thread(
                 self.store.get, slot.spec.project_id, run_id
             )
             code_review = current_run.execution_kind == "code_review"
-            expected_types = ("code", "bug_fix") if code_review else ("research",)
+            development = current_run.execution_kind == "development"
+            expected_types = (
+                ("code", "bug_fix") if code_review or development else ("research",)
+            )
             context = await asyncio.to_thread(
                 self.store.context_snapshot, slot.spec.project_id, slot.spec.task_id
             )
@@ -539,6 +560,8 @@ class RuntimeService:
                 permissions=set(
                     CODE_REVIEW_PERMISSIONS
                     if code_review
+                    else DEVELOPMENT_PERMISSIONS
+                    if development
                     else REVIEW_PERMISSIONS
                     if review is not None
                     else RESEARCH_PERMISSIONS
@@ -656,6 +679,17 @@ class RuntimeService:
                         on_started=on_started,
                         on_event=on_event,
                     )
+                    if development and result.status == "completed":
+                        candidate = await session.capture_candidate()
+                        if candidate["state"] != "ready":
+                            raise RunConflict(
+                                "Completed development has no ready exact candidate"
+                            )
+                        for index, recipe in enumerate(self.runtime.development_checks):
+                            await session.run_check(
+                                f"host-check-{index + 1}-{recipe.sha256}", recipe
+                            )
+                        development_complete = True
                     if code_review and result.status == "completed":
                         await session.complete_review()
                         review_confirmed = True
@@ -752,10 +786,12 @@ class RuntimeService:
                             self.store.retire_inference, lease, outcome=slot.outcome
                         )
                     elif (
-                        code_review
+                        (
+                            (code_review and not review_confirmed)
+                            or (development and not development_complete)
+                        )
                         and result is not None
                         and result.status == "completed"
-                        and not review_confirmed
                     ):
                         await asyncio.to_thread(
                             self.store.retire_inference, lease, outcome="failed"
@@ -792,15 +828,19 @@ class RuntimeService:
                         self.store.get, slot.spec.project_id, run_id
                     )
                     if (
-                        code_review
+                        (
+                            (code_review and not review_confirmed)
+                            or (development and not development_complete)
+                        )
                         and result is not None
                         and result.status == "completed"
-                        and not review_confirmed
                         and error_type is not None
                     ):
                         await self._note_issue(
                             current,
-                            "code_review_unconfirmed",
+                            "code_review_unconfirmed"
+                            if code_review
+                            else "code_candidate_unconfirmed",
                             attempt_id=lease.attempt_id,
                             inference_started=True,
                         )
