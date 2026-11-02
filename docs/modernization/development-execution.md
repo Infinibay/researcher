@@ -1,9 +1,10 @@
 # Ejecución nativa de desarrollo: preparación aislada
 
-Este incremento implementa la preparación interna de una copia Git privada por
-intento. **El servicio público todavía no admite tareas de desarrollo.** La
-escritura nativa, la entrega de candidatos, las comprobaciones, la revisión y la
-publicación siguen pendientes de integración.
+El sistema prepara una copia Git privada por intento y permite escritura en ella
+desde los perfiles nativos internos de desarrollo. **El servicio público todavía
+no admite tareas de desarrollo.** Falta conectar la fábrica de sesiones y los
+contratos de entrada/herramientas, y completar candidatos, comprobaciones, revisión
+y publicación.
 
 ## Dos directorios con responsabilidades distintas
 
@@ -85,9 +86,38 @@ La identidad del origen se comprueba otra vez inmediatamente antes de abrir la
 puerta del proceso. Una edición del registro del repositorio entre la reserva y
 ese punto bloquea el comando y conserva evidencia de cierre sin ejecución.
 
-Los siguientes pasos son conectar la preparación con `OwnedCodexRuntime`, permitir
-escritura exclusivamente sobre la copia privada, ejecutar Ken sobre esa misma
-copia y entregar un candidato ligado a repositorio, base, head, contexto e intento.
+## Escritura privada mediante comandos nativos
+
+El broker obtiene el modo de acceso de una admisión vigente y de su tipo de
+ejecución. Los perfiles nativos de desarrollo reciben una copia preparada y privada
+en escritura; investigación, diagnósticos y Ken conservan lectura del código. El
+modelo no elige rutas de montaje ni permisos. La concesión conserva el repositorio
+original y cada operación registra el acceso y la vista que efectivamente utilizó.
+
+La reserva de un comando o de inferencia valida el directorio privado contra el
+intento actual, la identidad de la copia y el registro original. Pasar el directorio
+original para un despacho de desarrollo se rechaza. La copia debe permanecer
+separada del origen y mantener permisos privados. Los ejecutables del sistema se
+montan en lectura; el alias `/bin` permite ejecutar scripts que utilizan `/bin/sh`.
+
+Las pruebas ejecutan el binario Codex 0.166.0 real para editar archivos mediante
+RPC de comandos y comprobar sus recibos. También ejercitan el perfil nativo de
+App Server. La documentación de OpenAI describe `command/exec` como una operación
+que no crea una conversación; este incremento no inicia turnos de modelo.
+[Contrato de App Server](https://learn.chatgpt.com/docs/app-server#command-execution).
+
+Cancelar un escritor cierra su namespace y los hijos que hayan creado otra sesión
+de proceso. Se conserva lo ya escrito; un cierre confirmado no convierte esos
+archivos en un candidato aceptado. Repetir un lanzamiento devuelve su recibo sin
+abrir otra puerta de ejecución. Las pruebas también usan un proceso con la forma
+de Ken para comprobar lectura del código actualizado en esa misma copia y negativa
+de escritura. La prueba específica con Ken publicado durante un flujo completo de
+desarrollo sigue pendiente.
+
+Los siguientes pasos son conectar la preparación con `OwnedCodexRuntime`, adaptar
+su contexto y catálogo de herramientas al trabajo de desarrollo, comprobar Ken
+publicado sobre esa misma copia y entregar un candidato ligado a repositorio,
+base, head, contexto e intento.
 Después deben integrarse comprobaciones, revisión independiente, aceptación y
 publicación reconciliada. Terminar un turno o emitir texto de aprobación no cierra
 ese ciclo.
@@ -99,5 +129,9 @@ arranque tiene evidencia separada en
 [development-startup-results.json](development-startup-results.json),
 [development-startup-packaging.json](development-startup-packaging.json) y
 [development-startup-docstrings.json](development-startup-docstrings.json).
+La escritura privada se verifica en
+[development-write-results.json](development-write-results.json),
+[development-write-packaging.json](development-write-packaging.json) y
+[development-write-docstrings.json](development-write-docstrings.json).
 Sus límites forman parte del
 resultado; no sustituyen las pruebas pendientes del flujo completo.

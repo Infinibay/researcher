@@ -1,4 +1,4 @@
-"""Concrete readonly analysis and credential-free native transport capsules."""
+"""Readonly analysis and host-selected private development/native transport capsules."""
 
 import errno
 import hashlib
@@ -110,6 +110,10 @@ class AnalysisCapsule:
     def _mounts(self):
         return []
 
+    def _workspace_mount(self, source):
+        """Keep analysis, Git sources and other base views readonly regardless of execution kind."""
+        return "--ro-bind-fd"
+
     def _network(self):
         return []
 
@@ -117,6 +121,7 @@ class AnalysisCapsule:
         return _no_sockets()
 
     def __enter__(self):
+        """Pin the execution directory and compose isolated mounts before the broker can spawn its gated child."""
         try:
             source = os.open(
                 self.binding.workspace,
@@ -147,7 +152,7 @@ class AnalysisCapsule:
                 "/usr",
                 "/usr",
             ]
-            for path in (Path("/lib"), Path("/lib64")):
+            for path in (Path("/bin"), Path("/lib"), Path("/lib64")):
                 if path.is_symlink():
                     args += ["--symlink", os.readlink(path), str(path)]
                 elif path.exists():
@@ -171,7 +176,7 @@ class AnalysisCapsule:
                 "/home/actor",
                 "--dir",
                 "/run/researcher-host",
-                "--ro-bind-fd",
+                self._workspace_mount(source),
                 str(source),
                 str(PEER_WORKSPACE),
                 "--ro-bind-data",
@@ -267,8 +272,9 @@ class CodexAsset:
 class NativeCapsule(AnalysisCapsule):
     """Distinct native App Server transport profile; no credential mounts.
 
-    Host networking is available to the trusted client; namespace/control calls
-    remain denied. Ken/code-mode/full inference integration is not admitted here.
+    The broker selects readonly source access or write access to a prepared
+    private development copy. Network variants retain their own policy while
+    namespace/control calls remain denied.
     """
 
     def __init__(
@@ -282,9 +288,13 @@ class NativeCapsule(AnalysisCapsule):
         code_host=None,
         native_state=None,
         web_search="disabled",
+        workspace_write=False,
     ):
         """Bind the inspected assets and trusted search mode to this capsule."""
         super().__init__(binding, None, info_fd)
+        if type(workspace_write) is not bool:
+            raise TypeError("Native workspace access must be selected by the host")
+        self.workspace_write = workspace_write
         self.asset = asset
         self.network_config = network
         self.host_tools = host_tools
@@ -299,6 +309,32 @@ class NativeCapsule(AnalysisCapsule):
         self._code_host_fd = None
         self._network_fds = {}
         self._asset_fd = None
+
+    def _workspace_mount(self, source):
+        """Admit writes only to a pinned private development view selected by fresh broker authority."""
+        if not self.workspace_write:
+            return super()._workspace_mount(source)
+        from backend.runtime.development_state import DevelopmentView
+
+        if not isinstance(self.binding, DevelopmentView):
+            raise ValueError(
+                "Writable native execution requires a prepared private development view"
+            )
+        path, original = (
+            Path(self.binding.workspace),
+            Path(self.binding.source.workspace),
+        )
+        info = os.fstat(source)
+        if (
+            path.is_relative_to(original)
+            or original.is_relative_to(path)
+            or info.st_uid != os.getuid()
+            or info.st_mode & 0o077
+        ):
+            raise WorkspaceChanged(
+                "Writable native view must remain private and separate from its original source"
+            )
+        return "--bind-fd"
 
     def _program(self):
         """Verify asset identities and construct the fixed native CLI policy."""
@@ -438,7 +474,7 @@ class NativeCapsule(AnalysisCapsule):
 
 
 class NativeCommandCapsule(NativeCapsule):
-    """Account-free native command RPC under the original readonly kernel scope."""
+    """Account-free command RPC under a readonly source or explicitly selected private write view."""
 
     def _network(self):
         return []
@@ -462,6 +498,7 @@ class NativeProxyCapsule(NativeCapsule):
         code_host=None,
         native_state=None,
         web_search="disabled",
+        workspace_write=False,
     ):
         """Keep the trusted discovery policy inside the original private network."""
         super().__init__(
@@ -473,6 +510,7 @@ class NativeProxyCapsule(NativeCapsule):
             code_host=code_host,
             native_state=native_state,
             web_search=web_search,
+            workspace_write=workspace_write,
         )
         self.channel = channel
 

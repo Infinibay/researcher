@@ -4688,3 +4688,37 @@ Resume at139250c; avoid re-running Wiki tests after docs-only followup.
   to the ready copy, factory preparation and Ken on that same copy, followed by
   exact candidates/checks/review/owner acceptance/publication. The full goal and
   all broader unclosed plan items remain active.
+
+#### Native write access to the ready private copy — after 2e3b172
+
+- Actual native command RPC and the native App Server profile can write only to
+  the ready private DevelopmentView. Fresh host admission selects access from
+  execution kind; the model cannot request a mount or write flag. Capsules pin
+  the directory, require a private separate view, and retain readonly system
+  mounts. Original registration remains the run binding and global concession.
+- Dispatch validation now checks development jobs/inference against the current
+  ready copy and original registration; sending the original directory is refused.
+  Profiles, effective access and actual view are witnessed before G. A repeated
+  command launch returns its original receipt without another execution effect.
+- Existing research commands remain readonly. Diagnostic analysis and a Ken-shaped
+  worker read modified private code but cannot write it, including through inherited
+  directory descriptors. Published Ken development-session/index refresh evidence
+  is still pending. This does not promote the shaped probe into a published trial.
+- Standard readonly /bin aliases moved to the base mounts so /bin/sh-based scripts
+  work inside native commands; the Git capsule no longer duplicates that mount.
+  Demonstrated failures preceded dispatch/private-mount/shell corrections.
+- A real private writer with a child using a new process session is cancelled through
+  its owned executor: actual closure is recorded, writes stop and partial files stay
+  available. The source remains unchanged. Job stdout/closure receipts persist after
+  scope exit. Both native probes use Codex0.166.0 without any model thread/turn.
+- Full source1949=1846PASS/100same inherited failure IDs/3same container skips;
+  766runtime passes,4new cases pass and0cases removed. Extracted final wheel303PASS/
+  0FAIL/0SKIP,366backend modules only from wheel,653matching Python/SQL files.
+  21new/changed definitions documented; changed-file Ruff and whitespace clean.
+  No model calls, frontend changes or dependency lock changes.
+- Receipts:development-write-results.json, development-write-packaging.json and
+  development-write-docstrings.json; contract updated in development-execution.md.
+  OwnedCodexRuntime factory preparation, development input/catalog and public
+  admission remain disconnected. Next is the full developer session/candidate
+  workflow, with checks, independent review, owner acceptance and publication;
+  files on disk and successful turns do not close that workflow or the whole goal.

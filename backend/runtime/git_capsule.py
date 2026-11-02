@@ -122,13 +122,8 @@ class GitCapsule(AnalysisCapsule):
         return [str(Path(sys.executable).resolve(strict=True)), "-I", "-S", "-c", code]
 
     def _mounts(self):
-        """Expose /bin aliases and the exact opened allocation; no host control/home is mounted."""
+        """Expose the exact opened allocation; common readonly system aliases belong to the base capsule."""
         mounts = ["--ro-bind-fd", str(self._asset_fd), self.launch.asset.path]
-        binary_root = Path("/bin")
-        if binary_root.is_symlink():
-            mounts += ["--symlink", os.readlink(binary_root), "/bin"]
-        else:
-            mounts += ["--ro-bind", "/bin", "/bin"]
         if self.launch.allocation is not None:
             allocation = self.launch.allocation
             path = Path(allocation.path)

@@ -1136,15 +1136,30 @@ class SQLiteRunStore:
         )
 
     def _bound_workspace(self, conn, row, workspace=None):
+        """Validate dispatch against its actual ready view while retaining the original source registration."""
         binding = conn.execute(
             "SELECT * FROM runtime_workspace_bindings WHERE run_id=?", (row["id"],)
         ).fetchone()
         if binding is not None:
-            self._check_registration(
-                conn, row["project_id"], self._binding_view(binding)
-            )
-            if workspace is not None and workspace != binding["workspace"]:
+            source = self._binding_view(binding)
+            self._check_registration(conn, row["project_id"], source)
+            expected = source.workspace
+            if workspace is not None and row["execution_kind"] == "development":
+                from backend.runtime.development_state import DevelopmentWorkspaces
+                from backend.runtime.development_workspace import _source_identity
+
+                view = DevelopmentWorkspaces.read_view(conn, row["project_id"], row["current_attempt_id"])
+                if view.source != source:
+                    raise WorkspaceChanged("Private execution view differs from the admitted source")
+                _source_identity(source)
+                _source_identity(view)
+                expected = view.workspace
+            if workspace is not None and row["execution_kind"] == "code_review":
+                raise WorkspaceChanged("Code review requires an exact candidate snapshot")
+            if workspace is not None and workspace != expected:
                 raise WorkspaceChanged("Dispatch differs from the admitted workspace")
+        elif workspace is not None and row["execution_kind"] in ("development", "code_review"):
+            raise WorkspaceChanged("Development dispatch requires an admitted source and private view")
 
     def request_start(
         self, *, project_id, run_id, expected_fence, context_version, operation_key

@@ -1,0 +1,155 @@
+{
+  "base_commit": "2e3b172",
+  "changed_or_new_definitions_documented": 21,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/runtime/broker_profile.py",
+      "symbol": "AnalysisCapsule",
+      "line": 94,
+      "docstring": "Own pinned input/assets through spawn; never mounts broker control or home.",
+      "file_sha256": "66efa280a85191172f2a2ca2249d905a504ab64beb478c718db12031cc0bfceb"
+    },
+    {
+      "path": "backend/runtime/broker_profile.py",
+      "symbol": "AnalysisCapsule._workspace_mount",
+      "line": 113,
+      "docstring": "Keep analysis, Git sources and other base views readonly regardless of execution kind.",
+      "file_sha256": "66efa280a85191172f2a2ca2249d905a504ab64beb478c718db12031cc0bfceb"
+    },
+    {
+      "path": "backend/runtime/broker_profile.py",
+      "symbol": "AnalysisCapsule.__enter__",
+      "line": 123,
+      "docstring": "Pin the execution directory and compose isolated mounts before the broker can spawn its gated child.",
+      "file_sha256": "66efa280a85191172f2a2ca2249d905a504ab64beb478c718db12031cc0bfceb"
+    },
+    {
+      "path": "backend/runtime/broker_profile.py",
+      "symbol": "NativeCapsule",
+      "line": 272,
+      "docstring": "Distinct native App Server transport profile; no credential mounts.\n\nThe broker selects readonly source access or write access to a prepared\nprivate development copy. Network variants retain their own policy while\nnamespace/control calls remain denied.",
+      "file_sha256": "66efa280a85191172f2a2ca2249d905a504ab64beb478c718db12031cc0bfceb"
+    },
+    {
+      "path": "backend/runtime/broker_profile.py",
+      "symbol": "NativeCapsule.__init__",
+      "line": 280,
+      "docstring": "Bind the inspected assets and trusted search mode to this capsule.",
+      "file_sha256": "66efa280a85191172f2a2ca2249d905a504ab64beb478c718db12031cc0bfceb"
+    },
+    {
+      "path": "backend/runtime/broker_profile.py",
+      "symbol": "NativeCapsule._workspace_mount",
+      "line": 313,
+      "docstring": "Admit writes only to a pinned private development view selected by fresh broker authority.",
+      "file_sha256": "66efa280a85191172f2a2ca2249d905a504ab64beb478c718db12031cc0bfceb"
+    },
+    {
+      "path": "backend/runtime/broker_profile.py",
+      "symbol": "NativeCommandCapsule",
+      "line": 476,
+      "docstring": "Account-free command RPC under a readonly source or explicitly selected private write view.",
+      "file_sha256": "66efa280a85191172f2a2ca2249d905a504ab64beb478c718db12031cc0bfceb"
+    },
+    {
+      "path": "backend/runtime/broker_profile.py",
+      "symbol": "NativeProxyCapsule",
+      "line": 486,
+      "docstring": "Private NET with a trusted FD relay and a stricter native child filter.",
+      "file_sha256": "66efa280a85191172f2a2ca2249d905a504ab64beb478c718db12031cc0bfceb"
+    },
+    {
+      "path": "backend/runtime/broker_profile.py",
+      "symbol": "NativeProxyCapsule.__init__",
+      "line": 489,
+      "docstring": "Keep the trusted discovery policy inside the original private network.",
+      "file_sha256": "66efa280a85191172f2a2ca2249d905a504ab64beb478c718db12031cc0bfceb"
+    },
+    {
+      "path": "backend/runtime/git_capsule.py",
+      "symbol": "GitCapsule",
+      "line": 92,
+      "docstring": "Execute only pinned Git under the original gate with a separate private allocation mount.",
+      "file_sha256": "88a251cce03b057a3b37ce70fce2d4de72d0659d750ba9ffebff6990d643e50d"
+    },
+    {
+      "path": "backend/runtime/git_capsule.py",
+      "symbol": "GitCapsule._mounts",
+      "line": 124,
+      "docstring": "Expose the exact opened allocation; common readonly system aliases belong to the base capsule.",
+      "file_sha256": "88a251cce03b057a3b37ce70fce2d4de72d0659d750ba9ffebff6990d643e50d"
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker",
+      "line": 111,
+      "docstring": "One externally supplied, non-reused domain for one original attempt.\n\n``run_peer`` owns reserve\u2192spawn\u2192global publication\u2192concrete local bind\u2192G.\nCallers receive a transport only after G and can only recover a receipt on\nretry. ``revoke`` withdraws G before waiting for SQL/constructors. Global\nrecovery needs only the journal/domain, never the original project DB.\nComplete actor-origin and endpoint authentication remain deployment work.",
+      "file_sha256": "0c5ce4d349cbdec41838f8ade264e83900fdade10e3823ed3dd3203c3661864b"
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker._reserve",
+      "line": 154,
+      "docstring": "Retain one immutable source concession and record each operation's actual execution view.",
+      "file_sha256": "0c5ce4d349cbdec41838f8ade264e83900fdade10e3823ed3dd3203c3661864b"
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker._run",
+      "line": 423,
+      "docstring": "Witness launch intent and manifests before releasing the original gate.",
+      "file_sha256": "0c5ce4d349cbdec41838f8ade264e83900fdade10e3823ed3dd3203c3661864b"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore",
+      "line": 65,
+      "docstring": "Own durable admission, fenced attempts and version-bound review requests in SQLite.",
+      "file_sha256": "305313c4eb20cdec221b0295b6f76c8ab686b96e01bb944b3bfbfe62f1dc0449"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore._bound_workspace",
+      "line": 1138,
+      "docstring": "Validate dispatch against its actual ready view while retaining the original source registration.",
+      "file_sha256": "305313c4eb20cdec221b0295b6f76c8ab686b96e01bb944b3bfbfe62f1dc0449"
+    },
+    {
+      "path": "backend/tests/runtime/test_broker_commands.py",
+      "symbol": "ready_development_copy",
+      "line": 13,
+      "docstring": "Prepare a real private Git copy using the low-level development policy fixture and actual broker.",
+      "file_sha256": "bcd48e4fb82274fc05e66b8e72518d1c6c922139f26eb63068643ec5daa2406b"
+    },
+    {
+      "path": "backend/tests/runtime/test_broker_commands.py",
+      "symbol": "test_development_native_command_writes_only_ready_private_copy",
+      "line": 45,
+      "docstring": "Actual native command RPC edits the prepared copy while its original source, credentials and network stay unavailable.",
+      "file_sha256": "bcd48e4fb82274fc05e66b8e72518d1c6c922139f26eb63068643ec5daa2406b"
+    },
+    {
+      "path": "backend/tests/runtime/test_broker_commands.py",
+      "symbol": "test_development_diagnostics_and_ken_remain_readonly_on_the_same_copy",
+      "line": 134,
+      "docstring": "A development kind permits writes only in its native author profile, not diagnostic or Ken code.",
+      "file_sha256": "bcd48e4fb82274fc05e66b8e72518d1c6c922139f26eb63068643ec5daa2406b"
+    },
+    {
+      "path": "backend/tests/runtime/test_broker_commands.py",
+      "symbol": "test_cancelling_private_writer_closes_detached_children_and_retains_files",
+      "line": 188,
+      "docstring": "Stop ends the actual writable namespace and preserves already-created private files for inspection.",
+      "file_sha256": "bcd48e4fb82274fc05e66b8e72518d1c6c922139f26eb63068643ec5daa2406b"
+    },
+    {
+      "path": "backend/tests/runtime/test_broker_commands.py",
+      "symbol": "test_native_app_server_profile_uses_private_write_mount_without_a_model_turn",
+      "line": 247,
+      "docstring": "The native actor profile shares the private mount policy; this probe uses only account-free command RPC.",
+      "file_sha256": "bcd48e4fb82274fc05e66b8e72518d1c6c922139f26eb63068643ec5daa2406b"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

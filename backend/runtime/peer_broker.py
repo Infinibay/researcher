@@ -160,6 +160,7 @@ class PeerBroker:
         *,
         runtime_manifest=None,
         native_state=None,
+        workspace_write=False,
     ):
         """Retain one immutable source concession and record each operation's actual execution view."""
         snapshot = self.journal.load()
@@ -240,6 +241,7 @@ class PeerBroker:
             "gate_sent": False,
             "exit_code": None,
             "execution_binding": asdict(admission["binding"]),
+            "workspace_access": "private-write" if workspace_write else "read",
             **(
                 {"runtime_manifest": runtime_manifest}
                 if runtime_manifest is not None
@@ -469,6 +471,27 @@ class PeerBroker:
                     "key": operation_key,
                 }
             )
+            existing = self.journal.load().records.get("broker:op:" + operation_id)
+            admission = None
+            if existing is None:
+                if self._withdrawn.is_set():
+                    raise AuthorityConflict("Broker admission withdrawn")
+                admission = (
+                    registry.admission(peer_id, source_only=True)
+                    if git_launch is not None
+                    else registry.admission(peer_id)
+                )
+            # Retry reads its original effect receipt; it cannot open a new gate.
+            workspace_write = (
+                existing.get("workspace_access") == "private-write"
+                if existing is not None
+                else (
+                    asset is not None
+                    and ken is None
+                    and git_launch is None
+                    and admission.get("execution_kind") == "development"
+                )
+            )
             manifest = (
                 {"code": code, "profile": "readonly-stdlib-analysis-v1"}
                 if asset is None
@@ -596,9 +619,17 @@ class PeerBroker:
                 }
             if command_only:
                 manifest["profile"] = "readonly-native-command-v1"
+            if workspace_write:
+                manifest["profile"] = (
+                    "private-development-native-command-v1"
+                    if command_only
+                    else manifest["profile"].replace(
+                        "readonly-", "private-development-", 1
+                    )
+                )
+                manifest["workspace_access"] = "private-write"
             manifest["limits"] = asdict(self._limits)
             intent = _digest(manifest)
-            existing = self.journal.load().records.get("broker:op:" + operation_id)
             if existing is not None:
                 if existing["intent"] != intent:
                     raise AuthorityConflict(
@@ -607,11 +638,6 @@ class PeerBroker:
                 return PeerStart(operation_id, existing["state"], False)
             if self._withdrawn.is_set():
                 raise AuthorityConflict("Broker admission withdrawn")
-            admission = (
-                registry.admission(peer_id, source_only=True)
-                if git_launch is not None
-                else registry.admission(peer_id)
-            )
             if admission["binding"] is None or admission["kind"] != kind:
                 raise AuthorityConflict(
                     "Broker profile requires its original admitted peer kind"
@@ -629,6 +655,7 @@ class PeerBroker:
                 if asset is not None or ken is not None or git_launch is not None
                 else None,
                 native_state=native_state,
+                workspace_write=workspace_write,
             )
             self._projection_source = registry
             self._gate_observed[operation_id] = False
@@ -677,6 +704,11 @@ class PeerBroker:
                     **({"host_tools": True} if host_tools else {}),
                     **({"web_search": web_search} if web_search != "disabled" else {}),
                     **({"code_host": code_host} if code_host is not None else {}),
+                    **(
+                        {"workspace_write": workspace_write}
+                        if asset is not None
+                        else {}
+                    ),
                     **(
                         {"native_state": native_state}
                         if native_state is not None

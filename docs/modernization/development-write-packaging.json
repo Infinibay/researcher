@@ -1,0 +1,20 @@
+{
+  "base_commit": "2e3b172",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "e5953f21b32716a6f3c14d39bd4a79677b0572bfc03d7812c4484b2f4fd42f21",
+  "observed": {
+    "tests_passed": 303,
+    "failures": [],
+    "skipped": 0,
+    "backend_modules_loaded": 366,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "network": "Disabled except Unix sockets",
+    "semantic_assets": "Explicit prepared pinned public offline assets outside wheel"
+  },
+  "backend_tree": {
+    "matching_source_files": 653,
+    "sha256": "a136daadf2a94758a0ad92fe54ad8a5466125e1f9b5f7aa20b8810b9130b1aa7"
+  },
+  "limits": "Extracted backend wheel plus installed dependencies and explicit prepared offline assets; not a clean full host installation or an inference-quality trial."
+}
