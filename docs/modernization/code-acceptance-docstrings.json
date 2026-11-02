@@ -1,0 +1,470 @@
+{
+  "base_commit": "dc680ee",
+  "changed_or_new_definitions_documented": 66,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "AcceptCodeResult",
+      "line": 136,
+      "docstring": "Owner-only exact candidate/review observation; agent identity and publication authority cannot be supplied.",
+      "file_sha256": "e731cb568e2c5eda4b08a44e9383239a1f1042bf4a55efadac4112b954789de3"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "code_result_state",
+      "line": 150,
+      "docstring": "Show scoped code/check/review evidence and historical acceptance without starting inference.",
+      "file_sha256": "e731cb568e2c5eda4b08a44e9383239a1f1042bf4a55efadac4112b954789de3"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "code_result_diff",
+      "line": 159,
+      "docstring": "Read an explicit window of the exact captured diff, including its identity and unread tail.",
+      "file_sha256": "e731cb568e2c5eda4b08a44e9383239a1f1042bf4a55efadac4112b954789de3"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "accept_code_result",
+      "line": 181,
+      "docstring": "Record an explicit paired-owner/CSRF decision; this endpoint neither dispatches inference nor publishes code.",
+      "file_sha256": "e731cb568e2c5eda4b08a44e9383239a1f1042bf4a55efadac4112b954789de3"
+    },
+    {
+      "path": "backend/db/development_migration.py",
+      "symbol": "_unused",
+      "line": 12,
+      "docstring": "Hold an idle connection's schema lock and reject live, historical or newer authority.",
+      "file_sha256": "2e06b8a83bf8cc5ccf78bfde2067d7f2b037a58a55657acf5a675404c81d3d17"
+    },
+    {
+      "path": "backend/db/development_migration.py",
+      "symbol": "restore_code_acceptances",
+      "line": 90,
+      "docstring": "Remove unused version42 without deleting owner history and restore the exact prior research acceptance triggers.",
+      "file_sha256": "2e06b8a83bf8cc5ccf78bfde2067d7f2b037a58a55657acf5a675404c81d3d17"
+    },
+    {
+      "path": "backend/runtime/code_acceptance_policy.py",
+      "symbol": "CodeAcceptanceIntent",
+      "line": 14,
+      "docstring": "One explicit owner observation, retained unchanged after an uncertain response.",
+      "file_sha256": "aa98bd6481e9fcbe9e1d21403283c79215f3fd74907a5d1303b2840ec100ba65"
+    },
+    {
+      "path": "backend/runtime/code_acceptance_policy.py",
+      "symbol": "CodeAcceptanceIntent.__post_init__",
+      "line": 25,
+      "docstring": "Reject coercion, incomplete fingerprints and implicit acknowledgement before effects.",
+      "file_sha256": "aa98bd6481e9fcbe9e1d21403283c79215f3fd74907a5d1303b2840ec100ba65"
+    },
+    {
+      "path": "backend/runtime/code_acceptance_policy.py",
+      "symbol": "assess_code_checks",
+      "line": 41,
+      "docstring": "Block failed/unfinished/unknown results; require acknowledgement of absent or skipped tests without relabeling them.",
+      "file_sha256": "aa98bd6481e9fcbe9e1d21403283c79215f3fd74907a5d1303b2840ec100ba65"
+    },
+    {
+      "path": "backend/runtime/code_acceptance_policy.py",
+      "symbol": "prior_code_review_issues",
+      "line": 80,
+      "docstring": "Preserve earlier concerns about the same exact subject; a newer positive verdict cannot erase a confirmed objection.",
+      "file_sha256": "aa98bd6481e9fcbe9e1d21403283c79215f3fd74907a5d1303b2840ec100ba65"
+    },
+    {
+      "path": "backend/runtime/code_acceptances.py",
+      "symbol": "CodeAcceptances",
+      "line": 23,
+      "docstring": "Keep exact owner observations and historical receipts separate from native turn completion.",
+      "file_sha256": "9fcf1ed78fdc3ceda6dfe41485c252b319d835cdb5b17a27387823fe88e8aaae"
+    },
+    {
+      "path": "backend/runtime/code_acceptances.py",
+      "symbol": "CodeAcceptances.__init__",
+      "line": 26,
+      "docstring": "Use the existing scoped store, clock and durable events without adding another scheduler.",
+      "file_sha256": "9fcf1ed78fdc3ceda6dfe41485c252b319d835cdb5b17a27387823fe88e8aaae"
+    },
+    {
+      "path": "backend/runtime/code_acceptances.py",
+      "symbol": "CodeAcceptances._receipt",
+      "line": 32,
+      "docstring": "Return original immutable owner history without asserting currentness.",
+      "file_sha256": "9fcf1ed78fdc3ceda6dfe41485c252b319d835cdb5b17a27387823fe88e8aaae"
+    },
+    {
+      "path": "backend/runtime/code_acceptances.py",
+      "symbol": "CodeAcceptances._state",
+      "line": 40,
+      "docstring": "Derive current eligibility from original scoped evidence while retaining stale receipts as history.",
+      "file_sha256": "9fcf1ed78fdc3ceda6dfe41485c252b319d835cdb5b17a27387823fe88e8aaae"
+    },
+    {
+      "path": "backend/runtime/code_acceptances.py",
+      "symbol": "CodeAcceptances.state",
+      "line": 286,
+      "docstring": "Inspect the exact version, review, missing checks and original decision without inference or effects.",
+      "file_sha256": "9fcf1ed78fdc3ceda6dfe41485c252b319d835cdb5b17a27387823fe88e8aaae"
+    },
+    {
+      "path": "backend/runtime/code_acceptances.py",
+      "symbol": "CodeAcceptances.diff",
+      "line": 291,
+      "docstring": "Read bounded captured diff text without substituting current filesystem bytes or hiding an unread tail.",
+      "file_sha256": "9fcf1ed78fdc3ceda6dfe41485c252b319d835cdb5b17a27387823fe88e8aaae"
+    },
+    {
+      "path": "backend/runtime/code_acceptances.py",
+      "symbol": "CodeAcceptances.accept",
+      "line": 331,
+      "docstring": "Atomically record one paired-owner observation and close author/reviewer states; never publish code.",
+      "file_sha256": "9fcf1ed78fdc3ceda6dfe41485c252b319d835cdb5b17a27387823fe88e8aaae"
+    },
+    {
+      "path": "backend/runtime/code_reviews.py",
+      "symbol": "CodeReviews",
+      "line": 56,
+      "docstring": "Own immutable review admission and provenance using the existing transaction, receipt and event boundary.",
+      "file_sha256": "b6b2fc902377f8b439febf4a50d59423774c7247be124e09fd201aa33ff6e017"
+    },
+    {
+      "path": "backend/runtime/code_reviews.py",
+      "symbol": "CodeReviews._subject",
+      "line": 63,
+      "docstring": "Snapshot complete evidence; accepted authors are allowed only for explicit readonly owner reconstruction.",
+      "file_sha256": "b6b2fc902377f8b439febf4a50d59423774c7247be124e09fd201aa33ff6e017"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore",
+      "line": 65,
+      "docstring": "Own durable admission, fenced attempts and version-bound review requests in SQLite.",
+      "file_sha256": "052213dda0e8c6724313226d7076da58c36e9823991690377e47801d8f6fccb7"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore.code_result_state",
+      "line": 270,
+      "docstring": "Expose exact code/check/review observations to the owner without native dispatch.",
+      "file_sha256": "052213dda0e8c6724313226d7076da58c36e9823991690377e47801d8f6fccb7"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore.accept_code",
+      "line": 276,
+      "docstring": "Translate a paired-owner command into a neutral immutable intent; no native tool exposes this method.",
+      "file_sha256": "052213dda0e8c6724313226d7076da58c36e9823991690377e47801d8f6fccb7"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore.code_result_diff",
+      "line": 283,
+      "docstring": "Read the captured historical diff with complete-byte identity and explicit text coverage.",
+      "file_sha256": "052213dda0e8c6724313226d7076da58c36e9823991690377e47801d8f6fccb7"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore._advance_context",
+      "line": 2135,
+      "docstring": "Advance owner/evidence context and reopen a previously accepted version without erasing history.",
+      "file_sha256": "052213dda0e8c6724313226d7076da58c36e9823991690377e47801d8f6fccb7"
+    },
+    {
+      "path": "backend/tests/runtime/test_admission_migration.py",
+      "symbol": "test_version27_receipt_survives_without_an_inferred_binding",
+      "line": 7,
+      "docstring": "A version27 receipt stays historical after upgrades without inventing admission evidence.",
+      "file_sha256": "bbe5aedaf4d71e0b78bf31bf3ef75b04e3907e548f58f8542d581b5c4c26b01c"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_state.py",
+      "symbol": "test_unused_check_inverse_preserves_older_candidate_history",
+      "line": 176,
+      "docstring": "Removing unused version39 must preserve a completed version38 candidate and all original task/run data.",
+      "file_sha256": "286ff6abcb4626b808df97bbbb5fd5b7e2f8c87f9e40a7ef5c1cf3bd60b33705"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_state.py",
+      "symbol": "test_check_inverse_refuses_a_reserved_or_historical_check",
+      "line": 213,
+      "docstring": "An interrupted reservation is retained evidence even before a worker or result exists.",
+      "file_sha256": "286ff6abcb4626b808df97bbbb5fd5b7e2f8c87f9e40a7ef5c1cf3bd60b33705"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance.py",
+      "symbol": "code_result",
+      "line": 25,
+      "docstring": "Close an attributed reviewer over synthetic Git/owner witnesses, with verdict selected before immutable persistence.",
+      "file_sha256": "efe35c22135427a157dcd0abc18fd920d86bb457bb993b20bb65bc0868ca991d"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance.py",
+      "symbol": "finish_owner_review",
+      "line": 30,
+      "docstring": "Complete one distinct storage-only review using original state transitions and explicitly synthetic physical witnesses.",
+      "file_sha256": "efe35c22135427a157dcd0abc18fd920d86bb457bb993b20bb65bc0868ca991d"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance.py",
+      "symbol": "owner_intent",
+      "line": 93,
+      "docstring": "Prepare one exact neutral owner observation; retries preserve every field.",
+      "file_sha256": "efe35c22135427a157dcd0abc18fd920d86bb457bb993b20bb65bc0868ca991d"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance.py",
+      "symbol": "test_owner_acceptance_is_version_bound_atomic_idempotent_and_separate_from_publication",
+      "line": 111,
+      "docstring": "Finishing author/reviewer leaves task incomplete; only observed explicit owner acceptance closes it and records one durable event.",
+      "file_sha256": "efe35c22135427a157dcd0abc18fd920d86bb457bb993b20bb65bc0868ca991d"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance.py",
+      "symbol": "test_owner_acknowledgement_cannot_override_rejected_or_unconfirmed_review",
+      "line": 150,
+      "docstring": "A fluent native completion and a checkbox cannot turn concerns or missing confirmation into approval.",
+      "file_sha256": "efe35c22135427a157dcd0abc18fd920d86bb457bb993b20bb65bc0868ca991d"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance.py",
+      "symbol": "test_correction_reopens_accepted_code_without_rewriting_its_original_receipt",
+      "line": 165,
+      "docstring": "An old retry returns history, while changed owner requirements lose present-day acceptance.",
+      "file_sha256": "efe35c22135427a157dcd0abc18fd920d86bb457bb993b20bb65bc0868ca991d"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance.py",
+      "symbol": "test_code_acceptance_never_leaks_or_mutates_a_different_project",
+      "line": 196,
+      "docstring": "Receipt keys and internal candidate IDs cannot select another project's result.",
+      "file_sha256": "efe35c22135427a157dcd0abc18fd920d86bb457bb993b20bb65bc0868ca991d"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance.py",
+      "symbol": "test_owner_http_code_acceptance_requires_pairing_csrf_and_exact_observation",
+      "line": 210,
+      "docstring": "Actual owner HTTP preserves authorization, bounded historical diff and one idempotent explicit acceptance.",
+      "file_sha256": "efe35c22135427a157dcd0abc18fd920d86bb457bb993b20bb65bc0868ca991d"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance.py",
+      "symbol": "test_metadata_change_reopens_code_and_direct_sql_cannot_invent_acceptance",
+      "line": 282,
+      "docstring": "The SQL boundary rejects old completion helpers and reopens accepted code when task inputs change.",
+      "file_sha256": "efe35c22135427a157dcd0abc18fd920d86bb457bb993b20bb65bc0868ca991d"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance.py",
+      "symbol": "test_code_acceptance_rolls_back_all_changes_when_its_event_cannot_commit",
+      "line": 312,
+      "docstring": "A lost event write must not leave task completion, reviewer retirement or an apparent receipt.",
+      "file_sha256": "efe35c22135427a157dcd0abc18fd920d86bb457bb993b20bb65bc0868ca991d"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance.py",
+      "symbol": "test_code_acceptance_rolls_back_all_changes_when_its_event_cannot_commit.fail_event",
+      "line": 322,
+      "docstring": "Reproduce a durable event failure inside the same transaction after state writes.",
+      "file_sha256": "efe35c22135427a157dcd0abc18fd920d86bb457bb993b20bb65bc0868ca991d"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance.py",
+      "symbol": "test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history",
+      "line": 340,
+      "docstring": "An unused downgrade restores research-only guards; a retained owner decision requires forward repair instead of deletion.",
+      "file_sha256": "efe35c22135427a157dcd0abc18fd920d86bb457bb993b20bb65bc0868ca991d"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance.py",
+      "symbol": "test_owner_read_of_accepted_code_never_reopens_native_review_admission",
+      "line": 378,
+      "docstring": "Readonly accepted-author reconstruction is explicit and cannot weaken the default native review precondition.",
+      "file_sha256": "efe35c22135427a157dcd0abc18fd920d86bb457bb993b20bb65bc0868ca991d"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance.py",
+      "symbol": "followup_owner_review",
+      "line": 392,
+      "docstring": "Close the previous storage-only review request and produce another independent attributed judgment of the same subject.",
+      "file_sha256": "efe35c22135427a157dcd0abc18fd920d86bb457bb993b20bb65bc0868ca991d"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance.py",
+      "symbol": "test_later_supported_review_cannot_hide_an_earlier_current_rejection",
+      "line": 428,
+      "docstring": "Cancelling an old review run and asking another reviewer must not erase an unresolved objection about the exact same code.",
+      "file_sha256": "efe35c22135427a157dcd0abc18fd920d86bb457bb993b20bb65bc0868ca991d"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance.py",
+      "symbol": "test_prior_inconclusive_review_remains_visible_without_becoming_a_rejection",
+      "line": 447,
+      "docstring": "New supported evidence may resolve missing inspection, but the owner still sees and acknowledges earlier limits.",
+      "file_sha256": "efe35c22135427a157dcd0abc18fd920d86bb457bb993b20bb65bc0868ca991d"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance.py",
+      "symbol": "test_review_history_overflow_is_explicit_and_cannot_silently_authorize_acceptance",
+      "line": 465,
+      "docstring": "The complete bounded history gate permits64 prior reviews and rejects65 without hiding a tail.",
+      "file_sha256": "efe35c22135427a157dcd0abc18fd920d86bb457bb993b20bb65bc0868ca991d"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance_policy.py",
+      "symbol": "test_check_policy_never_converts_missing_or_failed_tests_to_success",
+      "line": 24,
+      "docstring": "An owner can acknowledge finite missing evidence, but cannot use that acknowledgement to waive failed or unfinished work.",
+      "file_sha256": "7bd0c831451efa4a10a3baed74c297822edf6edeedbfedfcf01cfd8e4041ec96"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance_policy.py",
+      "symbol": "test_code_owner_intent_requires_explicit_neutral_identity",
+      "line": 44,
+      "docstring": "Request validation rejects coercions and incomplete observations before any database or model work.",
+      "file_sha256": "7bd0c831451efa4a10a3baed74c297822edf6edeedbfedfcf01cfd8e4041ec96"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance_policy.py",
+      "symbol": "test_prior_review_policy_distinguishes_confirmed_objection_from_unconfirmed_judgment",
+      "line": 70,
+      "docstring": "All prior concerns remain attributed; only a confirmed rejection is treated as a blocking verdict.",
+      "file_sha256": "7bd0c831451efa4a10a3baed74c297822edf6edeedbfedfcf01cfd8e4041ec96"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_candidate_state.py",
+      "symbol": "test_normal_startup_installs_candidate_storage_and_unused_inverse_is_repeatable",
+      "line": 186,
+      "docstring": "The packaged migration runs normally, and removing unused storage does not discard task rows.",
+      "file_sha256": "afa8bffcf1c729e1b903a725b7ed493442e2879ffc2cdf377773bec6a0c74317"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_candidate_state.py",
+      "symbol": "test_owner_reads_of_preparing_code_return_explicit_unavailability",
+      "line": 256,
+      "docstring": "A normal in-progress capture must not become an HTTP500 or a fabricated empty diff.",
+      "file_sha256": "afa8bffcf1c729e1b903a725b7ed493442e2879ffc2cdf377773bec6a0c74317"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_records.py",
+      "symbol": "test_unused_native_review_inverse_preserves_existing_packet",
+      "line": 295,
+      "docstring": "Removing unused native-stage storage must retain an older completed review request and its frozen author context.",
+      "file_sha256": "ba05cd656bb20543efa39dde3ecf042183fa3850d5af9e50f555ffe2e90b8789"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_records.py",
+      "symbol": "test_retained_native_reservation_blocks_inverse_even_after_failure",
+      "line": 329,
+      "docstring": "An attempt that failed before any model call still retains its non-replayable reservation and evidence.",
+      "file_sha256": "ba05cd656bb20543efa39dde3ecf042183fa3850d5af9e50f555ffe2e90b8789"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_session.py",
+      "symbol": "test_coordinator_schedules_native_review_and_does_not_finish_unconfirmed_work",
+      "line": 296,
+      "docstring": "The actual product owner selects readonly review grants and classifies failed confirmation independently of native turn completion.",
+      "file_sha256": "951195a3560ea3f942a3b07dc5f2566e9fe63f0175ac48ce2efda44f0e5c60fa"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_state.py",
+      "symbol": "test_unused_review_inverse_preserves_closed_author_and_candidate",
+      "line": 371,
+      "docstring": "Removing unused version40 keeps older candidate/check history and can be repeated and reapplied.",
+      "file_sha256": "8af2358c7709f51fa4679545a31b3aa4b45302e5f102ab424b4cb773c978a3d8"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_state.py",
+      "symbol": "test_review_history_prevents_inverse_even_after_the_reviewer_finishes",
+      "line": 400,
+      "docstring": "A completed review reservation is retained history, independent of the active-authority guard.",
+      "file_sha256": "8af2358c7709f51fa4679545a31b3aa4b45302e5f102ab424b4cb773c978a3d8"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_migration.py",
+      "symbol": "version35",
+      "line": 13,
+      "docstring": "Remove only unused newer structures so each test genuinely starts from the historical constraint.",
+      "file_sha256": "21407d37701c5556b9ed3c6c64274cca57e35650f88daa597c5eaaf1e3aae642"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_rollback.py",
+      "symbol": "expanded",
+      "line": 11,
+      "docstring": "Use actual latest startup storage, then explicitly remove unused candidate storage to test the historical inverses.",
+      "file_sha256": "eae7c5e5caa396a27c6e42a3411947c562855a357d3764c55fdedfc3cbefad84"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_startup.py",
+      "symbol": "version35",
+      "line": 9,
+      "docstring": "Build a historical database through the actual migrator while withholding only the new resources.",
+      "file_sha256": "25406f4b350e5a37f72b9dd068b6a02ed2592afc287672e28657d0a261c6fe63"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_startup.py",
+      "symbol": "test_repeatable_upgrade_preserves_original_research_and_owner_data",
+      "line": 40,
+      "docstring": "Upgrade actual historical rows and child references without inventing preparation evidence.",
+      "file_sha256": "25406f4b350e5a37f72b9dd068b6a02ed2592afc287672e28657d0a261c6fe63"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_startup.py",
+      "symbol": "test_failed_upgrade_leaves_only_committed_prior_migrations",
+      "line": 90,
+      "docstring": "An invalid new SQL tail cannot publish a partial index, column, table or migration marker.",
+      "file_sha256": "25406f4b350e5a37f72b9dd068b6a02ed2592afc287672e28657d0a261c6fe63"
+    },
+    {
+      "path": "backend/tests/runtime/test_finding_review.py",
+      "symbol": "test_review_schema_can_rollback_without_losing_original_work",
+      "line": 694,
+      "docstring": "An unused additive review schema can be removed and upgraded without id loss.",
+      "file_sha256": "6784675f5c3914dd408076873c36b25affa503d3530303fe8b9d977d5ce8678b"
+    },
+    {
+      "path": "backend/tests/runtime/test_question_migration.py",
+      "symbol": "version23",
+      "line": 9,
+      "docstring": "Build a version23 fixture without newer rebuilds changing the migration under test.",
+      "file_sha256": "ba846d4348f3edd0e132ccf34234be2e2cacfea2a3d6650278715aec948fcc14"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_migration.py",
+      "symbol": "test_unused_result_schema_rolls_back_and_reapplies_without_losing_tasks",
+      "line": 6,
+      "docstring": "Only unused storage can be removed; original task data and owner tables survive.",
+      "file_sha256": "7c643bc854fa97fd491dd567a8c0f9fd2be476f544618573ddf4631de4cc3041"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_migration.py",
+      "symbol": "test_result_downgrade_refuses_live_authority_or_historical_delivery",
+      "line": 59,
+      "docstring": "A downgrade cannot erase a delivery or remove a capability while its authority remains live.",
+      "file_sha256": "7c643bc854fa97fd491dd567a8c0f9fd2be476f544618573ddf4631de4cc3041"
+    },
+    {
+      "path": "backend/tests/runtime/test_run_input_migration.py",
+      "symbol": "test_version29_dispatch_remains_unknown_after_repeatable_upgrade",
+      "line": 7,
+      "docstring": "Retain unknown input on a version29 dispatch across repeatable upgrades.",
+      "file_sha256": "44641db4d03a05638e803dd42a5df04a32d8962d308e947e40226480b8418c70"
+    },
+    {
+      "path": "backend/tests/runtime/test_task_inputs_migration.py",
+      "symbol": "test_version28_migration_preserves_rows_and_only_records_future_edits",
+      "line": 9,
+      "docstring": "Preserve version28 rows and record only future edits after upgrading.",
+      "file_sha256": "a0ef669e5c986d2b306ea8d78fbf1e6eea3b40896dd18e87a7d94b5d3cb71c00"
+    },
+    {
+      "path": "backend/tools/base/db.py",
+      "symbol": "ensure_migrations",
+      "line": 111,
+      "docstring": "Run pending schema migrations for existing databases.\n\nChecks the ``schema_migrations`` table and applies any missing\nmigrations. Safe to call multiple times. Serving requires an already\ninitialized file; explicit installation/legacy callers may create one.",
+      "file_sha256": "847a12a81d19da1b8cf854c935007bcc52d415d6771fbf6b42c759582d277611"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery have English docstrings. New frontend modules, exported helpers and components also carry English JSDoc; no claim that all historic project definitions are documented."
+}

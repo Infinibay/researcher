@@ -133,6 +133,64 @@ class AcceptResult(BaseModel):
     note: str | None = Field(default=None, min_length=1, max_length=4000)
 
 
+class AcceptCodeResult(BaseModel):
+    """Owner-only exact candidate/review observation; agent identity and publication authority cannot be supplied."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
+    attempt_id: str = Field(min_length=1, max_length=128)
+    context_version: int = Field(gt=0)
+    subject_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    review_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    acknowledge_limits: bool
+    note: str | None = Field(default=None, min_length=1, max_length=4000)
+
+
+@router.get("/{project_id}/runs/{run_id}/code-result")
+async def code_result_state(project_id: int, run_id: str, request: Request):
+    """Show scoped code/check/review evidence and historical acceptance without starting inference."""
+    data = await asyncio.to_thread(
+        read_store(request).code_result_state, project_id, run_id
+    )
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
+@router.get("/{project_id}/runs/{run_id}/code-result/diff")
+async def code_result_diff(
+    project_id: int,
+    run_id: str,
+    request: Request,
+    offset: int = Query(0, ge=0),
+    max_chars: int = Query(12000, ge=1, le=24000),
+):
+    """Read an explicit window of the exact captured diff, including its identity and unread tail."""
+    try:
+        data = await asyncio.to_thread(
+            read_store(request).code_result_diff,
+            project_id,
+            run_id,
+            offset=offset,
+            max_chars=max_chars,
+        )
+    except ValueError as error:
+        raise HTTPException(422, str(error)) from error
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
+@router.post("/{project_id}/runs/{run_id}/code-result/accept")
+async def accept_code_result(
+    project_id: int, run_id: str, body: AcceptCodeResult, request: Request
+):
+    """Record an explicit paired-owner/CSRF decision; this endpoint neither dispatches inference nor publishes code."""
+    try:
+        data = await asyncio.to_thread(
+            read_store(request).accept_code, project_id, run_id, **body.model_dump()
+        )
+    except ValueError as error:
+        raise HTTPException(422, str(error)) from error
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
 @router.get("/{project_id}/runs/{run_id}/result")
 async def result_state(project_id: int, run_id: str, request: Request):
     """Inspect explicit delivery, actual review limits and distinct original owner acceptance."""

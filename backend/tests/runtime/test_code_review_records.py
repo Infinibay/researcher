@@ -294,7 +294,10 @@ async def test_review_tool_scope_drains_original_host_work_before_closing(
 
 def test_unused_native_review_inverse_preserves_existing_packet(review_state):
     """Removing unused native-stage storage must retain an older completed review request and its frozen author context."""
-    from backend.db.development_migration import restore_native_code_reviews
+    from backend.db.development_migration import (
+        restore_code_acceptances,
+        restore_native_code_reviews,
+    )
     from backend.tools.base.db import ensure_migrations
 
     s, _author, _candidate, reviews = review_state
@@ -308,7 +311,9 @@ def test_unused_native_review_inverse_preserves_existing_packet(review_state):
         lease, native_status="completed", summary="Synthetic completed storage request"
     )
     before = reviews.request(101, run.run_id)
+    restore_code_acceptances(s.c.conn)
     restore_native_code_reviews(s.c.conn)
+    restore_code_acceptances(s.c.conn)
     restore_native_code_reviews(s.c.conn)
     assert reviews.request(101, run.run_id) == before
     ensure_migrations(s.c.database)
@@ -323,7 +328,10 @@ def test_unused_native_review_inverse_preserves_existing_packet(review_state):
 @pytest.mark.parametrize("review_state", ["frozen_author"], indirect=True)
 def test_retained_native_reservation_blocks_inverse_even_after_failure(review_records):
     """An attempt that failed before any model call still retains its non-replayable reservation and evidence."""
-    from backend.db.development_migration import restore_native_code_reviews
+    from backend.db.development_migration import (
+        restore_code_acceptances,
+        restore_native_code_reviews,
+    )
 
     s, lease, _target, records, _files, _witness = review_records
     row, _ = records.reserve(lease)
@@ -333,5 +341,6 @@ def test_retained_native_reservation_blocks_inverse_even_after_failure(review_re
         summary="Synthetic failure before native preparation",
     )
     with pytest.raises(RuntimeError, match="rollback refused"):
+        restore_code_acceptances(s.c.conn)
         restore_native_code_reviews(s.c.conn)
     assert records.get(101, lease.attempt_id) == row

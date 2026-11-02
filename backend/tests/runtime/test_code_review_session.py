@@ -356,3 +356,25 @@ async def test_coordinator_schedules_native_review_and_does_not_finish_unconfirm
                 != "done"
             )
             assert (c.s.workspace / "fact.txt").read_text() == "137"
+            owner_state = d.coordinator.store.code_result_state(101, d.run.run_id)
+            if changed:
+                assert not owner_state["eligible"] and owner_state["acceptance"] is None
+            else:
+                assert (
+                    owner_state["eligible"] and owner_state["requires_acknowledgement"]
+                )
+                receipt = d.coordinator.store.accept_code(
+                    101,
+                    d.run.run_id,
+                    operation_key="explicit-owner-code-acceptance",
+                    attempt_id=d.lease.attempt_id,
+                    context_version=d.lease.context_version,
+                    subject_sha256=owner_state["subject_sha256"],
+                    review_sha256=owner_state["review_sha256"],
+                    acknowledge_limits=True,
+                    note="Owner accepts this exact controlled candidate with its displayed limitations.",
+                )
+                assert receipt["task_accepted"] and not receipt["publication_performed"]
+                assert d.coordinator.store.code_result_state(101, d.run.run_id)[
+                    "acceptance_current"
+                ]

@@ -36,6 +36,7 @@ def test_version28_migration_preserves_rows_and_only_records_future_edits(
                     "code_check_schema.sql",
                     "code_review_schema.sql",
                     "code_review_record_schema.sql",
+                    "code_acceptance_schema.sql",
                 )
                 else apply(conn, path)
             ),

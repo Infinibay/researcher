@@ -1,0 +1,186 @@
+{
+  "status": "passed",
+  "scope": "Actual Tasks UI, paired-owner HTTP and SQLite. Synthetic stored Git/closure witnesses; native process integration is separate. Built-in browser access unavailable; local test Chromium fallback.",
+  "states": [
+    {
+      "name": "desktop-evidence",
+      "screenshot": "docs/design/audits/2026-11-02-code-acceptance/01-desktop-evidence.png",
+      "sha256": "c2aa67d27979859a0af0f01f8cf64ad543180725a4885a5e84528ab8511801df",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "name": "desktop-explicit-limits",
+      "screenshot": "docs/design/audits/2026-11-02-code-acceptance/02-desktop-explicit-limits.png",
+      "sha256": "d74e5e88fdad6fbb3339cc57ed188b40c68b0f51f445d5bfea449b55d18f04cd",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "name": "mobile-evidence",
+      "screenshot": "docs/design/audits/2026-11-02-code-acceptance/03-mobile-evidence.png",
+      "sha256": "c3d8dd63669defc5dc2e60f16b6517bd8630c61a98e9534dd145538d8b3ce6f0",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "name": "mobile-explicit-limits",
+      "screenshot": "docs/design/audits/2026-11-02-code-acceptance/04-mobile-explicit-limits.png",
+      "sha256": "feef989320c56f1d58c6bf4be9cd6abb54e0414a11486b675161c46057da85b8",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "name": "narrow-evidence",
+      "screenshot": "docs/design/audits/2026-11-02-code-acceptance/05-narrow-evidence.png",
+      "sha256": "3287eeaa82b63d045d1be433ea2aa4d62b1fef3014f3bb0bc407f13554d5b4cf",
+      "layout": {
+        "width": 320,
+        "scroll": 320
+      },
+      "axe_violations": []
+    },
+    {
+      "name": "narrow-explicit-limits",
+      "screenshot": "docs/design/audits/2026-11-02-code-acceptance/06-narrow-explicit-limits.png",
+      "sha256": "79b88d645245f26e8944755d3a093e0cdde5fbed1894b56173712ff711288742",
+      "layout": {
+        "width": 320,
+        "scroll": 320
+      },
+      "axe_violations": []
+    },
+    {
+      "name": "note-length-limit",
+      "screenshot": "docs/design/audits/2026-11-02-code-acceptance/07-note-length-limit.png",
+      "sha256": "e71afd9feb338844ae4916a4686f8957d8f760577d925d640fab55192d99477f",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "name": "request-lost-before-commit",
+      "screenshot": "docs/design/audits/2026-11-02-code-acceptance/08-request-lost-before-commit.png",
+      "sha256": "7592ff490638dd091fdc664625f55ea18d166cc36f5c278d5021ad86669f71ab",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "name": "response-lost-after-commit",
+      "screenshot": "docs/design/audits/2026-11-02-code-acceptance/09-response-lost-after-commit.png",
+      "sha256": "015ee61b9f5548694fbe89cdc4ac990c350572050c56693486027e0f9feb07e9",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "name": "receipt-recovered-after-reload",
+      "screenshot": "docs/design/audits/2026-11-02-code-acceptance/10-receipt-recovered-after-reload.png",
+      "sha256": "9ee20bcfdd7eed6a6ace8200ab90e106d299c75ff15348c3dd020f6b44855f9e",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "name": "prior-confirmed-objection",
+      "screenshot": "docs/design/audits/2026-11-02-code-acceptance/11-prior-confirmed-objection.png",
+      "sha256": "a4f487c87ff90de0f339253d9c2117d912ca0f2073af24c8c2357c198f078be6",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    }
+  ],
+  "actions": [
+    "Actual paired-owner session",
+    "Three viewport widths and explicit unchecked acknowledgement",
+    "Captured diff and original quoted source opened",
+    "First request lost before server mutation",
+    "Reload preserves exact original body/nonce",
+    "Explicit identical retry committed but response lost",
+    "Reload recovers matching server receipt and clears only its local packet",
+    "Later supported review retains and displays earlier confirmed objection; no acceptance control"
+  ],
+  "page_errors": [],
+  "model_turns": 0,
+  "committed_receipt": {
+    "project_id": 101,
+    "task_id": 1001,
+    "run_id": "4159066d-824e-4df5-b3f2-70ed764c5d8b",
+    "operation_key": "2c04d642-f894-4967-a620-a5eff2dc9b1a",
+    "attempt_id": "ddf337cb-801c-4250-968f-07816967d044",
+    "context_version": 2,
+    "subject_sha256": "9312d24f0a0f06d7ed242f205e8436ebf4438649ef6206bbfe66e2da7a0182bb",
+    "review_sha256": "e66142b1c5afeb79dc0674f7d9821308f6960953d43026515a68ae87bef0823c",
+    "acknowledge_limits": true,
+    "note": "Acepto esta versi\u00f3n con la ausencia de comprobaciones indicada.",
+    "review_run_id": "f5c2cabc-7d91-4206-b676-b67c1ae509c1",
+    "actor_source": "paired_owner_action",
+    "accepted_at": 1793655946.4171367,
+    "task_accepted": true,
+    "publication_performed": false,
+    "acceptance_scope": "captured_code_version",
+    "candidate": {
+      "project_id": 101,
+      "task_id": 1001,
+      "repository_id": 11,
+      "run_id": "4159066d-824e-4df5-b3f2-70ed764c5d8b",
+      "attempt_id": "ddf337cb-801c-4250-968f-07816967d044",
+      "context_version": 2,
+      "fence": 1,
+      "base_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "head_sha": "cccccccccccccccccccccccccccccccccccccccc",
+      "tree_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "diff_sha256": "236c3b08211e43b0c6ac5a6c96d57c6e0e8ec78d324868841d88793a664574b2"
+    },
+    "check_limitations": [
+      {
+        "code": "checks_absent",
+        "message": "No hay comprobaciones registradas del candidato."
+      }
+    ],
+    "review_limitations": [
+      "Synthetic closure/Git witnesses; no test suite or model inference claimed."
+    ],
+    "review_issues": []
+  },
+  "database_observation": {
+    "acceptances": 1,
+    "code_accepted_events": 1,
+    "task_status": "done"
+  },
+  "visual_review": {
+    "scope": "New panel only; no complete page/accessibility/comprehension acceptance.",
+    "unchanged_images_verified_by_file_hash": 8,
+    "pending_values_verified_against_saved_packet": true,
+    "new_history_case": "A later supported review leaves the earlier confirmed objection visible and blocks acceptance.",
+    "all_current_images_inspected_or_revalidated_by_identical_file_hash": true
+  },
+  "disagreement_database_observation": {
+    "acceptances": 0,
+    "confirmed_objections": 1,
+    "confirmed_supported": 1
+  }
+}

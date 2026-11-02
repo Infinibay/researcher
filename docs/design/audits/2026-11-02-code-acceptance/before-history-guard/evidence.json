@@ -1,0 +1,175 @@
+{
+  "status": "passed",
+  "scope": "Actual Tasks UI, paired-owner HTTP and SQLite. Synthetic stored Git/closure witnesses; native process integration is separate. Built-in browser access unavailable; local test Chromium fallback.",
+  "states": [
+    {
+      "name": "desktop-evidence",
+      "screenshot": "docs/design/audits/2026-11-02-code-acceptance/before-history-guard/01-desktop-evidence.png",
+      "sha256": "c2aa67d27979859a0af0f01f8cf64ad543180725a4885a5e84528ab8511801df",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "name": "desktop-explicit-limits",
+      "screenshot": "docs/design/audits/2026-11-02-code-acceptance/before-history-guard/02-desktop-explicit-limits.png",
+      "sha256": "d74e5e88fdad6fbb3339cc57ed188b40c68b0f51f445d5bfea449b55d18f04cd",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "name": "mobile-evidence",
+      "screenshot": "docs/design/audits/2026-11-02-code-acceptance/before-history-guard/03-mobile-evidence.png",
+      "sha256": "7ec532164bfaf4d03622e65011139037098ae6b633c4100663f6569b088dccc9",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "name": "mobile-explicit-limits",
+      "screenshot": "docs/design/audits/2026-11-02-code-acceptance/before-history-guard/04-mobile-explicit-limits.png",
+      "sha256": "309507a0728ca0f81027ef69ab2b8fc45f4aa254b4cd3e5b7d4a35e716651dd4",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "name": "narrow-evidence",
+      "screenshot": "docs/design/audits/2026-11-02-code-acceptance/before-history-guard/05-narrow-evidence.png",
+      "sha256": "3287eeaa82b63d045d1be433ea2aa4d62b1fef3014f3bb0bc407f13554d5b4cf",
+      "layout": {
+        "width": 320,
+        "scroll": 320
+      },
+      "axe_violations": []
+    },
+    {
+      "name": "narrow-explicit-limits",
+      "screenshot": "docs/design/audits/2026-11-02-code-acceptance/before-history-guard/06-narrow-explicit-limits.png",
+      "sha256": "79b88d645245f26e8944755d3a093e0cdde5fbed1894b56173712ff711288742",
+      "layout": {
+        "width": 320,
+        "scroll": 320
+      },
+      "axe_violations": []
+    },
+    {
+      "name": "note-length-limit",
+      "screenshot": "docs/design/audits/2026-11-02-code-acceptance/before-history-guard/07-note-length-limit.png",
+      "sha256": "e71afd9feb338844ae4916a4686f8957d8f760577d925d640fab55192d99477f",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "name": "request-lost-before-commit",
+      "screenshot": "docs/design/audits/2026-11-02-code-acceptance/before-history-guard/08-request-lost-before-commit.png",
+      "sha256": "7592ff490638dd091fdc664625f55ea18d166cc36f5c278d5021ad86669f71ab",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "name": "response-lost-after-commit",
+      "screenshot": "docs/design/audits/2026-11-02-code-acceptance/before-history-guard/09-response-lost-after-commit.png",
+      "sha256": "015ee61b9f5548694fbe89cdc4ac990c350572050c56693486027e0f9feb07e9",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "name": "receipt-recovered-after-reload",
+      "screenshot": "docs/design/audits/2026-11-02-code-acceptance/before-history-guard/10-receipt-recovered-after-reload.png",
+      "sha256": "9ee20bcfdd7eed6a6ace8200ab90e106d299c75ff15348c3dd020f6b44855f9e",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    }
+  ],
+  "actions": [
+    "Actual paired-owner session",
+    "Three viewport widths and explicit unchecked acknowledgement",
+    "Captured diff and original quoted source opened",
+    "First request lost before server mutation",
+    "Reload preserves exact original body/nonce",
+    "Explicit identical retry committed but response lost",
+    "Reload recovers matching server receipt and clears only its local packet"
+  ],
+  "page_errors": [],
+  "model_turns": 0,
+  "committed_receipt": {
+    "project_id": 101,
+    "task_id": 1001,
+    "run_id": "cf3b62e8-85ab-437d-a82f-860f74b3efd8",
+    "operation_key": "01769c8d-be95-483d-b5b9-3e2e57cbee6b",
+    "attempt_id": "ace68f59-1a58-40fd-8329-37c14ce9147b",
+    "context_version": 2,
+    "subject_sha256": "25d5603c2d475b846d3bea737ae6eabffa1021b48d35af8a875531c79d37d2ab",
+    "review_sha256": "f00c79b30d1f8d7c5ad1a0a5c159ab48eda91c977aabe59bd2e7f13a59f62283",
+    "acknowledge_limits": true,
+    "note": "Acepto esta versi\u00f3n con la ausencia de comprobaciones indicada.",
+    "review_run_id": "d7dc2c34-a415-4853-9980-9adac3721a00",
+    "actor_source": "paired_owner_action",
+    "accepted_at": 1793653437.8968973,
+    "task_accepted": true,
+    "publication_performed": false,
+    "acceptance_scope": "captured_code_version",
+    "candidate": {
+      "project_id": 101,
+      "task_id": 1001,
+      "repository_id": 11,
+      "run_id": "cf3b62e8-85ab-437d-a82f-860f74b3efd8",
+      "attempt_id": "ace68f59-1a58-40fd-8329-37c14ce9147b",
+      "context_version": 2,
+      "fence": 1,
+      "base_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "head_sha": "cccccccccccccccccccccccccccccccccccccccc",
+      "tree_sha": "dddddddddddddddddddddddddddddddddddddddd",
+      "diff_sha256": "236c3b08211e43b0c6ac5a6c96d57c6e0e8ec78d324868841d88793a664574b2"
+    },
+    "check_limitations": [
+      {
+        "code": "checks_absent",
+        "message": "No hay comprobaciones registradas del candidato."
+      }
+    ],
+    "review_limitations": [
+      "Synthetic closure/Git witnesses; no test suite or model inference claimed."
+    ]
+  },
+  "database_observation": {
+    "acceptances": 1,
+    "code_accepted_events": 1,
+    "task_status": "done"
+  },
+  "visual_review": {
+    "all_current_images_inspected": true,
+    "unchanged_images_verified_by_identical_pixel_file_hashes": [
+      "01-desktop-evidence.png",
+      "02-desktop-explicit-limits.png",
+      "04-mobile-explicit-limits.png",
+      "05-narrow-evidence.png",
+      "06-narrow-explicit-limits.png"
+    ],
+    "corrected_pending_fields_verified_by_browser_assertions": true,
+    "oversized_unicode_note_remained_editable": true,
+    "scope": "Panel only; no global accessibility or human comprehension acceptance."
+  }
+}

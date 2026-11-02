@@ -703,6 +703,7 @@ def test_review_schema_can_rollback_without_losing_original_work(authored_findin
         ).fetchone()
     )
     from backend.db.development_migration import (
+        restore_code_acceptances,
         restore_code_candidates,
         restore_code_checks,
         restore_code_reviews,
@@ -711,6 +712,8 @@ def test_review_schema_can_rollback_without_losing_original_work(authored_findin
         restore_native_code_reviews,
     )
     from backend.db.result_migration import restore_result_schema
+
+    restore_code_acceptances(c.conn)
 
     restore_native_code_reviews(c.conn)
     restore_code_reviews(c.conn)

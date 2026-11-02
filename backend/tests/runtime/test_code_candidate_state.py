@@ -188,6 +188,7 @@ def test_normal_startup_installs_candidate_storage_and_unused_inverse_is_repeata
 ):
     """The packaged migration runs normally, and removing unused storage does not discard task rows."""
     from backend.db.development_migration import (
+        restore_code_acceptances,
         restore_code_candidates,
         restore_code_checks,
         restore_code_reviews,
@@ -197,8 +198,9 @@ def test_normal_startup_installs_candidate_storage_and_unused_inverse_is_repeata
 
     c = coordination
     assert (
-        c.conn.execute("SELECT max(version) FROM schema_migrations").fetchone()[0] == 41
+        c.conn.execute("SELECT max(version) FROM schema_migrations").fetchone()[0] == 42
     )
+    restore_code_acceptances(c.conn)
     restore_native_code_reviews(c.conn)
     restore_code_reviews(c.conn)
     restore_code_checks(c.conn)
@@ -249,3 +251,17 @@ def test_candidate_inverse_refuses_retained_history(candidate_state):
     with pytest.raises(RuntimeError, match="rollback refused"):
         restore_code_candidates(s.c.conn)
     assert candidates.inspect(lease.project_id, lease.run_id) == planned
+
+
+def test_owner_reads_of_preparing_code_return_explicit_unavailability(candidate_state):
+    """A normal in-progress capture must not become an HTTP500 or a fabricated empty diff."""
+    from backend.runtime.code_acceptances import CodeAcceptances
+    from backend.runtime.contracts import RunConflict
+
+    s, lease, _binding, _copies, candidates = candidate_state
+    candidates.plan(lease)
+    owner = CodeAcceptances(s.c.store)
+    with pytest.raises(RunConflict):
+        owner.state(lease.project_id, lease.run_id)
+    with pytest.raises(RunConflict):
+        owner.diff(lease.project_id, lease.run_id)

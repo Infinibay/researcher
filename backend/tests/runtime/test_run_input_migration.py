@@ -34,6 +34,7 @@ def test_version29_dispatch_remains_unknown_after_repeatable_upgrade(
                     "code_check_schema.sql",
                     "code_review_schema.sql",
                     "code_review_record_schema.sql",
+                    "code_acceptance_schema.sql",
                 )
                 else apply(conn, path)
             ),

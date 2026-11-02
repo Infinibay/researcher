@@ -10,6 +10,7 @@ import { TaskInputHistory } from './TaskInputHistory'
 import { RunInputRecord } from './RunInputRecord'
 import { RunCommands } from './RunCommands'
 import { TaskResults } from './ResultDelivery'
+import { TaskCodeResults } from './CodeDelivery'
 
 const inputClass = 'w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] focus:outline-none focus:ring-2 focus:ring-[var(--work-accent)]'
 const buttonClass = 'rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50'
@@ -198,6 +199,7 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
     {current && ['reconciling', 'cancelling'].includes(current.status) && <RecoveryCard key={`${projectId}:${current.run_id}`} projectId={projectId} taskId={taskId} runId={current.run_id} />}
     {current && <RunCommands projectId={projectId} runId={current.run_id} />}
     <TaskResults key={`${projectId}:${taskId}`} projectId={projectId} taskId={taskId} runs={data.runs} contextVersion={data.context.context_version} />
+    <TaskCodeResults key={`code:${projectId}:${taskId}`} projectId={projectId} taskId={taskId} runs={data.runs} contextVersion={data.context.context_version} />
     {showProposal && current?.result && <section className="task-proposal space-y-2 rounded-md border border-[var(--work-line)] p-3" aria-label="Propuesta del agente">
       <h4 className="font-medium text-[var(--work-ink)]">{current.status === 'needs_review' ? 'Propuesta' : 'Resultado conservado'}</h4>
       <MarkdownRenderer content={current.result.summary} />

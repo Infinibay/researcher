@@ -1,0 +1,21 @@
+{
+  "base_commit": "dc680ee",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "ffc360d4b418009464bb6a279804b6d315e5639367ab6160447d4f7e95ea0048",
+  "observed": {
+    "tests_passed": 97,
+    "failures": [],
+    "skipped": 0,
+    "backend_modules_loaded": 343,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "network": "Disabled except Unix sockets",
+    "semantic_assets": "Explicit prepared pinned public offline assets outside wheel"
+  },
+  "backend_tree": {
+    "matching_source_files": 696,
+    "sha256": "086af64a570cfabf4a8aed2181977150dc9e3327a4970a18bf23e79448eacaed"
+  },
+  "bootstrap": "Python3.12 -I -S with explicit installed dependency path and original host venv prefix restored; backend import paths remain restricted to extracted wheel.",
+  "limits": "Extracted backend wheel plus installed dependencies and explicit prepared offline assets; not a clean full host installation or an inference-quality trial."
+}

@@ -13,6 +13,7 @@ RESOURCE = Path(__file__).resolve().parents[2] / "db/development_schema.sql"
 def version35(c):
     """Remove only unused newer structures so each test genuinely starts from the historical constraint."""
     from backend.db.development_migration import (
+        restore_code_acceptances,
         restore_code_candidates,
         restore_code_checks,
         restore_code_reviews,
@@ -20,6 +21,8 @@ def version35(c):
         restore_development_workspaces,
         restore_native_code_reviews,
     )
+
+    restore_code_acceptances(c.conn)
 
     restore_native_code_reviews(c.conn)
     restore_code_reviews(c.conn)

@@ -6,7 +6,7 @@ ni los archivos del repositorio original o de la copia del autor.
 
 La sesión interna ya dispone de un controlador que cierra los escritores,
 registra el candidato de forma durable y lo vincula al intento y al contexto.
-**No habilita desarrollo público, revisión, aceptación ni publicación.**
+La [revisión independiente](code-reviews.md) y la [aceptación humana](code-acceptance.md) se integran mediante contratos separados. Entrada pública de desarrollo y publicación siguen pendientes.
 
 ## Qué se captura
 
@@ -103,7 +103,7 @@ la autoridad activa o una versión posterior impiden ese retroceso.
 Las comprobaciones ya derivan una copia por receta del candidato exacto y guardan
 base/head/contexto junto a sus resultados. La revisión independiente de código
 ya tiene recorrido nativo interno con validación ampliada y ensayo de suscripción documentados.
-La aceptación del usuario y la publicación son pasos distintos;
+La [aceptación del usuario](code-acceptance.md) ya tiene API y panel; la publicación es un paso distinto;
 publicar exige revalidar el destino y poder reconciliar una respuesta perdida.
 Este documento no declara implementados esos contratos pendientes.
 

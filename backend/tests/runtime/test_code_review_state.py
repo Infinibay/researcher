@@ -371,6 +371,7 @@ def test_context_correction_between_publication_and_gate_prevents_review_payload
 def test_unused_review_inverse_preserves_closed_author_and_candidate(review_state):
     """Removing unused version40 keeps older candidate/check history and can be repeated and reapplied."""
     from backend.db.development_migration import (
+        restore_code_acceptances,
         restore_code_reviews,
         restore_native_code_reviews,
     )
@@ -378,8 +379,10 @@ def test_unused_review_inverse_preserves_closed_author_and_candidate(review_stat
 
     s, author, _candidate, reviews = review_state
     before = reviews.subject(101, author.attempt_id)
+    restore_code_acceptances(s.c.conn)
     restore_native_code_reviews(s.c.conn)
     restore_code_reviews(s.c.conn)
+    restore_code_acceptances(s.c.conn)
     restore_native_code_reviews(s.c.conn)
     restore_code_reviews(s.c.conn)
     assert reviews.subject(101, author.attempt_id) == before
@@ -397,6 +400,7 @@ def test_unused_review_inverse_preserves_closed_author_and_candidate(review_stat
 def test_review_history_prevents_inverse_even_after_the_reviewer_finishes(review_state):
     """A completed review reservation is retained history, independent of the active-authority guard."""
     from backend.db.development_migration import (
+        restore_code_acceptances,
         restore_code_reviews,
         restore_native_code_reviews,
     )
@@ -411,6 +415,7 @@ def test_review_history_prevents_inverse_even_after_the_reviewer_finishes(review
     )
     before = reviews.request(101, run.run_id)
     with pytest.raises(RuntimeError, match="rollback refused"):
+        restore_code_acceptances(s.c.conn)
         restore_native_code_reviews(s.c.conn)
         restore_code_reviews(s.c.conn)
     assert reviews.request(101, run.run_id) == before

@@ -267,6 +267,25 @@ class SQLiteRunStore:
         with self._transaction() as conn:
             return result_state(conn, project_id, run_id)
 
+    def code_result_state(self, project_id, run_id):
+        """Expose exact code/check/review observations to the owner without native dispatch."""
+        from backend.runtime.code_acceptances import CodeAcceptances
+
+        return CodeAcceptances(self).state(project_id, run_id)
+
+    def accept_code(self, project_id, run_id, **command):
+        """Translate a paired-owner command into a neutral immutable intent; no native tool exposes this method."""
+        from backend.runtime.code_acceptance_policy import CodeAcceptanceIntent
+        from backend.runtime.code_acceptances import CodeAcceptances
+
+        return CodeAcceptances(self).accept(project_id, run_id, CodeAcceptanceIntent(**command))
+
+    def code_result_diff(self, project_id, run_id, **window):
+        """Read the captured historical diff with complete-byte identity and explicit text coverage."""
+        from backend.runtime.code_acceptances import CodeAcceptances
+
+        return CodeAcceptances(self).diff(project_id, run_id, **window)
+
     def result_report(self, project_id, run_id, candidate_id, report_id, **window):
         """Read one explicitly selected immutable report in an owner-scoped bounded window."""
         from backend.knowledge.results import report_window
@@ -2132,10 +2151,13 @@ class SQLiteRunStore:
             )
         if (
             task["status"] == "done"
-            and conn.execute(
+            and (conn.execute(
                 "SELECT 1 FROM runtime_result_acceptances a JOIN runtime_result_proposals p ON p.id=a.proposal_id WHERE a.project_id=? AND a.task_id=? AND p.context_version=? LIMIT 1",
                 (project_id, task_id, expected_version),
-            ).fetchone()
+            ).fetchone() or (
+                conn.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='runtime_code_acceptances'").fetchone()
+                and conn.execute("SELECT 1 FROM runtime_code_acceptances WHERE project_id=? AND task_id=? AND context_version=? LIMIT 1", (project_id, task_id, expected_version)).fetchone()
+            ))
         ):
             conn.execute(
                 "UPDATE tasks SET status='pending',completed_at=NULL WHERE project_id=? AND id=?",

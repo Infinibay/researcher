@@ -60,8 +60,8 @@ class CodeReviews:
         """Retain the actual run store without creating another scheduler or inference loop."""
         self.runs = runs
 
-    def _subject(self, conn, project_id, attempt_id):
-        """Snapshot current requirements, exact candidate, original closed author and every retained check within a finite budget."""
+    def _subject(self, conn, project_id, attempt_id, *, allow_accepted=False):
+        """Snapshot complete evidence; accepted authors are allowed only for explicit readonly owner reconstruction."""
         candidate = CodeCandidates._row(conn, project_id, attempt_id)
         subject = CandidateSubject.from_row(candidate)
         author = conn.execute(
@@ -71,22 +71,28 @@ class CodeReviews:
             WHERE a.id=? AND r.project_id=? AND r.task_id=?""",
             (attempt_id, project_id, subject.task_id),
         ).fetchone()
-        if author is None or (
-            author["run_id"],
-            author["current_attempt_id"],
-            author["fence"],
-            author["context_version"],
-            author["attempt_status"],
-            author["run_status"],
-            author["execution_kind"],
-        ) != (
-            subject.run_id,
-            attempt_id,
-            subject.fence,
-            subject.context_version,
-            "finished",
-            "needs_review",
-            "development",
+        if (
+            author is None
+            or (
+                author["run_id"],
+                author["current_attempt_id"],
+                author["fence"],
+                author["context_version"],
+                author["attempt_status"],
+                author["execution_kind"],
+            )
+            != (
+                subject.run_id,
+                attempt_id,
+                subject.fence,
+                subject.context_version,
+                "finished",
+                "development",
+            )
+            or author["run_status"]
+            not in (
+                ("needs_review", "accepted") if allow_accepted else ("needs_review",)
+            )
         ):
             raise RunConflict(
                 "Code review requires its closed original author candidate"

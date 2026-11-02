@@ -153,8 +153,8 @@ interno cierra los escritores y persiste la captura ligada al contexto e intento
 Las [comprobaciones aisladas](code-checks.md) ya consumen esa versión y conservan
 resultados ligados al candidato. La [revisión independiente](code-reviews.md)
 conecta sesión nativa, Git antes/después, citas verificadas y cierre, con validación
-ampliada y ensayo real de suscripción documentados. Antes de habilitar la entrada pública faltan aceptación
-y publicación reconciliada. Terminar un turno
+ampliada y ensayo real de suscripción documentados. La [aceptación humana](code-acceptance.md) ya tiene API y panel. La entrada pública de desarrollo y la publicación reconciliada siguen pendientes
+para cerrar el recorrido. Terminar un turno
 o emitir texto de aprobación no cierra ese ciclo.
 
 Las evidencias se guardan en [development-docstrings.json](development-docstrings.json),

@@ -176,6 +176,7 @@ def test_never_released_peer_cannot_be_recorded_as_a_successful_check(check_stat
 def test_unused_check_inverse_preserves_older_candidate_history(check_state):
     """Removing unused version39 must preserve a completed version38 candidate and all original task/run data."""
     from backend.db.development_migration import (
+        restore_code_acceptances,
         restore_code_checks,
         restore_code_reviews,
         restore_native_code_reviews,
@@ -192,9 +193,11 @@ def test_unused_check_inverse_preserves_older_candidate_history(check_state):
     s.c.store.finish(
         lease, native_status="completed", summary="Historical storage fixture"
     )
+    restore_code_acceptances(s.c.conn)
     restore_native_code_reviews(s.c.conn)
     restore_code_reviews(s.c.conn)
     restore_code_checks(s.c.conn)
+    restore_code_acceptances(s.c.conn)
     restore_native_code_reviews(s.c.conn)
     restore_code_reviews(s.c.conn)
     restore_code_checks(s.c.conn)
@@ -210,6 +213,7 @@ def test_unused_check_inverse_preserves_older_candidate_history(check_state):
 def test_check_inverse_refuses_a_reserved_or_historical_check(check_state):
     """An interrupted reservation is retained evidence even before a worker or result exists."""
     from backend.db.development_migration import (
+        restore_code_acceptances,
         restore_code_checks,
         restore_code_reviews,
         restore_native_code_reviews,
@@ -225,6 +229,7 @@ def test_check_inverse_refuses_a_reserved_or_historical_check(check_state):
     s.c.store.finish(
         lease, native_status="completed", summary="Retained check reservation"
     )
+    restore_code_acceptances(s.c.conn)
     restore_native_code_reviews(s.c.conn)
     restore_code_reviews(s.c.conn)
     with pytest.raises(RuntimeError, match="rollback refused"):

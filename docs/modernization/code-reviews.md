@@ -2,9 +2,10 @@
 
 El recorrido interno conecta una sesión nativa separada con el candidato exacto
 del autor, valida Git antes y después, verifica citas y conserva una decisión
-atribuida. La aceptación humana, publicación y entrada pública de desarrollo
-siguen pendientes. El coordinador ofrece `review_code`; todavía no existe un
-endpoint HTTP ni una interfaz web para este recorrido.
+atribuida. La [aceptación humana posterior](code-acceptance.md) ya tiene API y panel de
+Tareas; publicación y entrada pública de desarrollo siguen pendientes. La admisión nativa sigue siendo interna mediante `review_code`; todavía no hay
+acción web para solicitar esa sesión. La aceptación posterior enlazada sí tiene
+panel y rutas del propietario.
 
 ```mermaid
 flowchart TD
@@ -15,7 +16,7 @@ flowchart TD
     E --> F[Inspección del candidato en lectura]
     F --> G[Revisión nativa y propuesta atribuida]
     G --> V[Cierre y validación Git y citas; confirmación]
-    V -. Pendiente .-> H[Aceptación del propietario]
+    V --> H[Aceptación del propietario]
     H -. Pendiente .-> I[Publicación de esa misma versión]
 ```
 

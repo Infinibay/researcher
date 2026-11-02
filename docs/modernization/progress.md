@@ -5161,3 +5161,142 @@ Resume at139250c; avoid re-running Wiki tests after docs-only followup.
   engine/role/CI cutover, communication/prompts/evals, remaining UI pages and all
   43scenarios, installation/restore,100inherited failures and final fresh branch
   review. Full goal remains active; this required stage is not whole completion.
+
+
+## WIP 2026-11-02 — owner code acceptance after dc680ee
+- New code_acceptance_policy.py neutral intent/check policy and code_acceptances.py adapter; schema42 code_acceptance_schema.sql; read-only accepted-author packet reconstruction explicit allow_accepted. Ownership native default remains strict.
+- SQLiteRunStore code_result_state/accept_code/code_result_diff wrappers and context-correction support; owner routes /code-result, /diff, /accept; SQL completion/reopen guards support exact code decisions. _unused42/inverse added, historical fixtures skip/peel42, startup42 failure gate.
+- RED13policy and6storage; GREEN19initial, then60HTTP/migration/review and111shared consumers. Stage must still add/finish owner state edge cases, source/doc audit and wheel bootstrap/gates. No commit since dc680ee.
+- Frontend new ownerActions.ts extracts existing research packet lifecycle without changing research keys; codeResults.ts code namespace; CodeDelivery.tsx/TaskCodeResults mounted in TaskRunWorkspace; RuntimeRun union adds existing code kinds. 13targeted frontend action/SSR states PASS. First build failed on TypeScript union narrowing in results.ts; fixed moving body alias into branches, build currently session92990.
+- Native coordinator integration extended, running session67168 (-k coordinator). IMPORTANT immediately inspect insertion location: generic assert anchor may have inserted owner_state block into first test where changed undefined instead of coordinator test. Correct if needed before final integration gate.
+- Shared111PASS before latest integration edit. Actual browser screenshots/interactions still pending, frontend fulltest/build pending, wheel/docstrings/tests sourcecases and docs/commit pending. No model trial needed for owner decision; previous native trial receipt remains historical.
+- Protected root .agents/.codex/AGENTS.md stay untracked. Worktree /home/andres/.codex/worktrees/b09e/researcher. Full plan active, acceptance/publication/public code entry +legacy/prompts/UI/operations still in scope.
+
+WIP continuation: integration insertion verified correct at coordinator test lines359+, not first test. Native coordinator2PASS99.48s (positive explicit acceptance and changed-code refusal); shared111PASS; frontend71PASS/buildPASS. Added preparing owner read RED(TypeError on None diff)→GREEN explicit RunConflict. Python59new/changed definitions documented,23filesRuff/21format; final backend wheel built696?inspectcount. Bootstrap50PASS308wheel-only backend imports. Broader package session83558 and global source session85109 are LIVE original handles, do not restart on timeout. No backend edits after final build.
+Browser initial9captures/7actions passed HTTP/storage assertions, but visual inspection found pending fields after reload showed blank note/unchecked acknowledgement while actual frozen body was retained correctly. Archived initial images/evidence under docs/design/audits/2026-11-02-code-acceptance/before-reload-display-fix. Browser script now asserts rendered restored note+checkbox; must run RED on old frontend then fix controls to render saved.body values, rebuild and GREEN. Synthetic browserfixture2prepared (code-acceptance-browser-data-2), originalfixture accepted and retained. Server1PID1674438 terminated, handle30623 terminal143. New server2starting next tool handle; fixture/current origin file points new run once initialized. Audit uses Chromium fallback because mcp CUA host returnedunavailable; saved ProductDesign context absent. Backend browser fixture synthetic, separate native integration actual kernel; modelcalls0. Current sourceonly uncommitted, HEADdc680ee.
+
+
+## 2026-11-02 — Explicit owner code acceptance (base dc680ee)
+
+- Neutral CodeAcceptanceIntent/check/history policy and CodeAcceptances adapter;
+  schema42 immutable owner receipt, atomic event/status/revocation writes and
+  completion/reopen guards. Existing research behavior and keys preserved.
+- Exact candidate/context/subject/review observation, originally closed author and
+  independent confirmed/supported reviewer; no other live work. Failed/unknown/
+  unfinished checks block. Missing/no-tests/skipped work stays explicit and needs
+  owner acknowledgement. The acknowledgement records a statement, not understanding.
+- Owner-only GET code-result/diff and POST accept use existing pairing/CSRF; bearer
+  tools cannot enter. Captured UTF8 diff windows retain full hash and unread-tail
+  coverage. Preparing capture RED(TypeError on None diff)→GREEN explicit unavailable.
+- Readonly accepted-author reconstruction is opt-in; native review default remains
+  needs_review. Same operation/body returns original receipt after later correction;
+  changed intent rejects. Corrections reopen current task without deleting history.
+- CodeDelivery mounted in Tasks; research/code share ownerActions implementation with
+  separate namespaces, existing research keys unchanged. Exact scope/body/nonce kept
+  over reload, retry and lost responses. Owner note is bounded and remains editable
+  when too long. Current/historical/unconfirmed review labels stay distinct.
+- First policy13RED, storage6RED, ownerHTTP404RED; initial19PASS,60sharedPASS then
+  111sharedPASS. Native coordinator2PASS99.48s uses actual Git/kernel/SQL and controlled
+  generation; confirmed review requires separate explicit acceptance, changed code
+  remains blocked. No actual model generation or new published-Ken inference trial.
+- Initial source2126cases:2023PASS/100FAIL/3SKIP in1090.75s;943runtimePASS. Failure IDs
+  exactly the100inherited IDs, not an assertion of equal causes. Initial packaged
+  wheel217PASS349.94s/362wheel-only backend modules;696matchingPython/SQL payloads.
+- Browser initially passed body/storage assertions but inspection found disabled
+  checkbox/note reverted to blank defaults after reload. Explicit browser regression
+  RED(false!=true), then controls render saved.body values. Browser also verifies
+  oversized Unicode note can be corrected. Initial/red captures retained separately.
+- Ruling: latest positive review cannot erase earlier current confirmed needs_revision.
+  A real SQLite two-review scenario reproduced eligible=True after cancelling the
+  prior run. Keep objections, classify unconfirmed/inconclusive evidence separately,
+  block confirmed rejection, bind material history into owner observation. Cost if
+  wrong: stale/disputed code could be accepted; regression prevents that. No silent
+  history tail:64prior reviews allowed/65blocked, actually tested with scoped records.
+  A single-review receipt keeps its original digest. Generated message copy excluded
+  from evidence fingerprint so wording does not invalidate an otherwise same receipt.
+- Final delta source30PASS including all history outcomes/boundary; final bootstrap
+  56PASS and wheel97PASS131.24s/343backend modules only from wheel;696same sources.
+  Covers owner HTTP/policy/storage/migration/research and2actual native coordinator
+  integrations. Four Python files changed after whole-source run; earlier global
+  result is NOT attributed to final bytes and no second global run is claimed.
+- Final frontend72PASS/buildPASS. Actual owner HTTP/UI/SQL browser11captures at
+  1440/390/320, zero panel-scoped Axe violations, zero page JS errors. Lost request
+  before mutation→reload same body/nonce→explicit retry committed with response lost
+  →reload matching receipt, no third mutation. One acceptance/one code.accepted event.
+  Fresh separate disagreement fixture shows older confirmed objection beside later
+  supported review, no acceptance control. Synthetic stored closure/Git fixtures
+  explicitly separated from native process integration; no user comprehension study
+  or whole-page acceptance claimed. Integrated browser host unavailable; local test
+  Chromium used, no saved ProductDesign context. All saved final images inspected or
+  revalidated by identical file hashes in this audit. Private servers stopped.
+- Final66new/changed Python definitions documented in English;23files Ruff/21format
+  pass with prior whole-file debt in db.py/sqlite_runs.py. New frontend modules/
+  components/helpers JSDoc. Generated tracked tsbuildinfo restored, no lock changes.
+- Evidence:code-acceptance-{results,packaging,smoke-packaging,docstrings}.json,
+  before-history receipts and docs/design/audits/2026-11-02-code-acceptance/report.md.
+  Full plan still active: public author/reviewer admission and reconciliable
+  publication, all legacy/engine/roles/tools/prompts/human/UI/operation requirements,
+  100inherited failures,43broad scenarios and fresh final whole-branch review.
+
+
+## 2026-11-02 — Explicit owner code acceptance (base dc680ee)
+
+- Neutral CodeAcceptanceIntent/check/history policy and CodeAcceptances adapter;
+  schema42 immutable owner receipt, atomic event/status/revocation writes and
+  completion/reopen guards. Existing research behavior and keys preserved.
+- Exact candidate/context/subject/review observation, originally closed author and
+  independent confirmed/supported reviewer; no other live work. Failed/unknown/
+  unfinished checks block. Missing/no-tests/skipped work stays explicit and needs
+  owner acknowledgement. The acknowledgement records a statement, not understanding.
+- Owner-only GET code-result/diff and POST accept use existing pairing/CSRF; bearer
+  tools cannot enter. Captured UTF8 diff windows retain full hash and unread-tail
+  coverage. Preparing capture RED(TypeError on None diff)→GREEN explicit unavailable.
+- Readonly accepted-author reconstruction is opt-in; native review default remains
+  needs_review. Same operation/body returns original receipt after later correction;
+  changed intent rejects. Corrections reopen current task without deleting history.
+- CodeDelivery mounted in Tasks; research/code share ownerActions implementation with
+  separate namespaces, existing research keys unchanged. Exact scope/body/nonce kept
+  over reload, retry and lost responses. Owner note is bounded and remains editable
+  when too long. Current/historical/unconfirmed review labels stay distinct.
+- First policy13RED, storage6RED, ownerHTTP404RED; initial19PASS,60sharedPASS then
+  111sharedPASS. Native coordinator2PASS99.48s uses actual Git/kernel/SQL and controlled
+  generation; confirmed review requires separate explicit acceptance, changed code
+  remains blocked. No actual model generation or new published-Ken inference trial.
+- Initial source2126cases:2023PASS/100FAIL/3SKIP in1090.75s;943runtimePASS. Failure IDs
+  exactly the100inherited IDs, not an assertion of equal causes. Initial packaged
+  wheel217PASS349.94s/362wheel-only backend modules;696matchingPython/SQL payloads.
+- Browser initially passed body/storage assertions but inspection found disabled
+  checkbox/note reverted to blank defaults after reload. Explicit browser regression
+  RED(false!=true), then controls render saved.body values. Browser also verifies
+  oversized Unicode note can be corrected. Initial/red captures retained separately.
+- Ruling: latest positive review cannot erase earlier current confirmed needs_revision.
+  A real SQLite two-review scenario reproduced eligible=True after cancelling the
+  prior run. Keep objections, classify unconfirmed/inconclusive evidence separately,
+  block confirmed rejection, bind material history into owner observation. Cost if
+  wrong: stale/disputed code could be accepted; regression prevents that. No silent
+  history tail:64prior reviews allowed/65blocked, actually tested with scoped records.
+  A single-review receipt keeps its original digest. Generated message copy excluded
+  from evidence fingerprint so wording does not invalidate an otherwise same receipt.
+- Final delta source30PASS including all history outcomes/boundary; final bootstrap
+  56PASS and wheel97PASS131.24s/343backend modules only from wheel;696same sources.
+  Covers owner HTTP/policy/storage/migration/research and2actual native coordinator
+  integrations. Four Python files changed after whole-source run; earlier global
+  result is NOT attributed to final bytes and no second global run is claimed.
+- Final frontend72PASS/buildPASS. Actual owner HTTP/UI/SQL browser11captures at
+  1440/390/320, zero panel-scoped Axe violations, zero page JS errors. Lost request
+  before mutation→reload same body/nonce→explicit retry committed with response lost
+  →reload matching receipt, no third mutation. One acceptance/one code.accepted event.
+  Fresh separate disagreement fixture shows older confirmed objection beside later
+  supported review, no acceptance control. Synthetic stored closure/Git fixtures
+  explicitly separated from native process integration; no user comprehension study
+  or whole-page acceptance claimed. Integrated browser host unavailable; local test
+  Chromium used, no saved ProductDesign context. All saved final images inspected or
+  revalidated by identical file hashes in this audit. Private servers stopped.
+- Final66new/changed Python definitions documented in English;23files Ruff/21format
+  pass with prior whole-file debt in db.py/sqlite_runs.py. New frontend modules/
+  components/helpers JSDoc. Generated tracked tsbuildinfo restored, no lock changes.
+- Evidence:code-acceptance-{results,packaging,smoke-packaging,docstrings}.json,
+  before-history receipts and docs/design/audits/2026-11-02-code-acceptance/report.md.
+  Full plan still active: public author/reviewer admission and reconciliable
+  publication, all legacy/engine/roles/tools/prompts/human/UI/operation requirements,
+  100inherited failures,43broad scenarios and fresh final whole-branch review.

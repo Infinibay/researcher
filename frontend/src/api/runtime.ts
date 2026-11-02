@@ -2,7 +2,7 @@
 import { fetchApi } from './client.ts'
 
 export interface RuntimeRun {
-  execution_kind: 'research' | 'finding_review'
+  execution_kind: 'research' | 'finding_review' | 'development' | 'code_review'
   run_id: string
   project_id: number
   task_id: number

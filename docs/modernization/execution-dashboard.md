@@ -4,12 +4,58 @@ Actualizado: 2026-11-02. Objetivo: implementar **todo** el [plan](../superpowers
 
 ## Estado comprobado
 
-- Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo interno edita, captura y comprueba candidatos exactos; ahora también registra revisión nativa separada. Faltan aceptación, publicación, admisión pública y cutover de consumidores/loops antiguos.
+- Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo interno edita, captura y comprueba candidatos exactos; ahora también registra revisión nativa separada. Aceptación del propietario conectada a API/Tareas; faltan publicación, admisión pública y cutover de consumidores/loops antiguos.
 - Interfaz: seis pilotos, 18/36 conceptos de escritorio y 6/12 móviles; seis rutas pendientes y 0/12 páginas completamente aceptadas.
-- Última suite global: 2096 casos, 1993 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados, sin fallos nuevos por identidad; no se afirman causas idénticas. Esa ejecución empezó antes del ajuste final de `.ken`, validado por separado.
+- Última suite global (antes del ajuste final del historial): 2126 casos, 2023 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados, sin fallos nuevos por identidad; no se afirman causas idénticas. Pasan 943 casos del runtime.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Última etapa verificada: revisión nativa del candidato
+## Última etapa verificada: aceptación explícita de código
+
+**Resultado:** el propietario inspecciona commit/contexto, diff capturado, resultados
+y revisión; acepta únicamente la observación exacta con reconocimiento de límites
+cuando corresponda. Revisión rechazada/inconclusa/sin confirmar, fallos y trabajo
+sin cerrar bloquean aceptación. Ausencia de pruebas nunca se etiqueta como éxito.
+Recibo, evento y estados se guardan juntos; una corrección reabre la tarea y
+conserva la decisión histórica. Publicación sigue separada y pendiente.
+
+**Validación:** RED de contrato/almacenamiento y de lectura de captura en preparación;
+111 casos compartidos pasan y dos integraciones reales de coordinador pasan con
+generación controlada. Bootstrap del wheel: 50 pasan. Ampliación: 217 pasan sin
+fallos ni omisiones en 349,94 segundos, 362 módulos sólo del paquete y 696 fuentes
+coincidentes. Suite global anterior al ajuste final del historial: 2023 pasan, mismos 100 fallos heredados y tres
+omisiones en 1090,75 segundos; no es una suite global verde. Las 66 definiciones
+Python nuevas/modificadas tienen docstrings; 23 archivos pasan Ruff y 21 formato,
+con deuda previa en los dos módulos grandes restantes.
+
+**Interfaz:** 72 pruebas y build pasan. Once capturas, tres anchos, cero incidencias
+Axe dentro del panel nuevo y cero errores de página. Dos envíos con cuerpo/clave
+idénticos simulan pérdida antes y después del guardado: una aceptación y un evento
+en SQLite; otra recarga recupera el recibo sin tercer envío. La inspección visual
+detectó que campos pendientes vacíos no representaban el cuerpo guardado; nueva
+prueba roja y corrección verifican casilla/nota originales. Se conservan ambos
+recibos y capturas anteriores. No hay aceptación general de la página ni estudio
+de comprensión; el fixture del navegador usa procedencia sintética explícita.
+
+**Ajuste final:** una regresión demostró que una revisión favorable podía ocultar
+una objeción anterior del mismo candidato. Ahora la objeción confirmada bloquea,
+y la propuesta sin confirmar se conserva con su fuerza explícita. Historial
+acotado sin omitir una cola; objeciones materiales ligadas a la huella. Pasan
+30 casos dirigidos, 56 de bootstrap y 97 del wheel final en 131,24 segundos,
+con 343 módulos sólo del paquete y 696 fuentes coincidentes. La captura once
+verifica el desacuerdo visible y ausencia de aceptación. La suite global previa
+no se atribuye a estos bytes; no hubo otra ejecución global.
+
+[Contrato](code-acceptance.md), [resultados](code-acceptance-results.json),
+[paquete](code-acceptance-packaging.json), [docstrings](code-acceptance-docstrings.json),
+[auditoría](../design/audits/2026-11-02-code-acceptance/report.md).
+
+**Siguiente entrega:** conectar la entrada pública de desarrollo al recorrido
+existente de edición/captura/comprobaciones/revisión/aceptación y completar la
+publicación reconciliable. La publicación debe revalidar código/destino y mantener
+el veto de revisión rechazada o evidencia obsoleta. Continúan todas las obligaciones
+de motor/roles/herramientas/comunicación/prompts/interfaz/operación del plan.
+
+## Etapa anterior: revisión nativa del candidato
 
 **Resultado:** otro actor/intento/hilo inspecciona el candidato en lectura, recibe petición/entrada originales y comprobaciones completas, y guarda una propuesta con citas y límites. Git se valida antes/después en el dominio original; tras cerrar sesión/herramientas/Ken, el host verifica otra vez las citas y confirma el protocolo. El coordinador retiene como fallo una terminación nativa sin confirmación. No acepta ni publica tareas.
 
@@ -19,7 +65,7 @@ Actualizado: 2026-11-02. Objetivo: implementar **todo** el [plan](../superpowers
 
 [Contrato](code-reviews.md), [resultados](native-code-review-results.json), [paquete final](native-code-review-packaging.json), [paquete anterior al ajuste](native-code-review-before-ken-fix-packaging.json), [ensayo real](native-code-review-live.json), [docstrings](native-code-review-docstrings.json).
 
-**Siguiente entrega:** aceptación humana del candidato exacto, publicación reconciliable y admisión pública, integradas con los contratos existentes de desarrollo/comprobaciones/revisión. Mantener el veto de revisión rechazada o evidencia obsoleta sobre publicación, y las decisiones humanas separadas de terminar un turno. Después, completar el cutover de los consumidores/loops antiguos, sin otro coordinador LLM. Todas las obligaciones restantes de comunicación, prompts, conocimiento, interfaz y operación siguen en alcance.
+**Continuación prevista en aquel checkpoint:** aceptación humana, publicación y admisión pública. La aceptación ya se integra en la etapa posterior descrita arriba; publicación y admisión pública siguen pendientes. Mantener el veto de revisión rechazada o evidencia obsoleta sobre publicación, y las decisiones humanas separadas de terminar un turno. Después, completar el cutover de los consumidores/loops antiguos, sin otro coordinador LLM. Todas las obligaciones restantes de comunicación, prompts, conocimiento, interfaz y operación siguen en alcance.
 
 ## Etapa anterior verificada: admisión e inspección de revisión
 

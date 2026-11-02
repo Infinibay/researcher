@@ -2793,8 +2793,35 @@
         "138new/changed definitions have English docstrings; final691Python/SQL payloads match wheel"
       ],
       "remaining": [
-        "Owner code acceptance, reconciliable publication and public development entry",
+        "Reconciliable publication and public development entry; owner acceptance now separately implemented",
         "Legacy reviewer/CI cutover and representative review/human comprehension evaluation"
+      ]
+    },
+    "owner_code_acceptance": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/modernization/code-acceptance.md",
+        "docs/modernization/code-acceptance-results.json",
+        "docs/modernization/code-acceptance-packaging.json",
+        "docs/modernization/code-acceptance-docstrings.json",
+        "docs/design/audits/2026-11-02-code-acceptance/report.md",
+        "backend/tests/runtime/test_code_acceptance.py",
+        "frontend/src/components/tasks/CodeDelivery.tsx"
+      ],
+      "implemented": [
+        "Exact candidate/review/context observed fingerprints, actual author/reviewer closure and immutable paired-owner receipt",
+        "Failed/unfinished/unconfirmed/rejected work blocks; missing/skipped tests stay explicit and require owner acknowledgement",
+        "Atomic event/state/permission updates, same-intent receipt retry and historical reopening on corrections; schema42 with lossless unused inverse",
+        "Owner HTTP pairing/CSRF/project scope; captured bounded diff; task panel with separate native review/acceptance/publication states",
+        "Shared durable frontend packet store preserves research keys; exact saved note/acknowledgement survive reload and lost response; one acceptance/event verified",
+        "Global2126cases:2023PASS/100inheritedFAIL/3SKIP; pre-history wheel217PASS and final delta wheel97PASS/56bootstrap,696matching sources; frontend72PASS/build;11panel captures/3widths;66Python definitions documented",
+        "Earlier confirmed objections remain blocking on the same subject despite a later supported review; unconfirmed/inconclusive concerns retain explicit status and acknowledgement",
+        "30directed history/policy cases pass including64/65history boundary; final97-case wheel delta covers actual native coordinator, owner HTTP, research and migrations. Global2126 observation predates this four-file history guard."
+      ],
+      "remaining": [
+        "Public code authoring/reviewer admission and reconciliable publication integration",
+        "Project-configurable policy extension, legacy consumer/CI cutover and all broad scenario acceptance",
+        "Representative comprehension/accessibility evaluation and whole page/product acceptance"
       ]
     }
   }

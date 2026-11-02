@@ -1,5 +1,6 @@
 /** Version-bound owner result inspection and durable local retry packets. @module */
 import { fetchApi } from './client.ts'
+import { ownerActionStore } from './ownerActions.ts'
 
 /** Exact selected report metadata; full text is read from its frozen candidate. */
 export interface DeliveredReport {
@@ -65,58 +66,30 @@ export function prepareAcceptance(projectId:number,taskId:number,runId:string,ob
 export function prepareResultChange(projectId:number,taskId:number,runId:string,contextVersion:number,statement:string):ResultAction & {kind:'change'} {
  return Object.freeze({schema:1,kind:'change',projectId,taskId,runId,body:Object.freeze({operation_key:crypto.randomUUID(),expected_version:contextVersion,statement,source_kind:'user_message'})})
 }
-/** Keep local receipts isolated by project, task and original author run. */
-function storageKey(projectId:number,taskId:number,runId:string) {return `researcher:result-action:v1:${projectId}:${taskId}:${encodeURIComponent(runId)}`}
-/** Locate a pending task decision even when its author has left the recent run list. */
-export function pendingResultRun(storage:Pick<Storage,'getItem'>,projectId:number,taskId:number):string|null {
- const raw=storage.getItem(`researcher:result-pending:v1:${projectId}:${taskId}`)
- if(raw===null) return null
- try {
-  const pointer=JSON.parse(raw)
-  if(typeof pointer.runId!=='string' || !pointer.runId || pointer.runId.length>128) throw new Error('scope')
-  const action=loadResultAction(storage,projectId,taskId,pointer.runId)
-  if(!action || action.body.operation_key!==pointer.operationKey) throw new Error('packet')
-  return pointer.runId
- } catch {throw new Error('No se pudo recuperar la decisión pendiente de esta tarea. Consulta su historial antes de preparar otra.')}
-}
-/** Persist before sending; storage failure must not produce an unrecorded owner mutation. */
-export function saveResultAction(storage:ActionStorage,action:ResultAction) {
- const previous=pendingResultRun(storage,action.projectId,action.taskId)
- if(previous!==null) {
-  const old=loadResultAction(storage,action.projectId,action.taskId,previous)
-  if(old?.body.operation_key!==action.body.operation_key) throw new Error('Hay una decisión pendiente de esta tarea. Consulta su recibo antes de preparar otra.')
- }
- storage.setItem(storageKey(action.projectId,action.taskId,action.runId),JSON.stringify(action))
- storage.setItem(`researcher:result-pending:v1:${action.projectId}:${action.taskId}`,JSON.stringify({runId:action.runId,operationKey:action.body.operation_key}))
-}
-/** Recover a strict scoped packet; corrupt state cannot silently turn into a new action. */
-export function loadResultAction(storage:Pick<Storage,'getItem'>,projectId:number,taskId:number,runId:string):ResultAction|null {
- const value=storage.getItem(storageKey(projectId,taskId,runId))
- if(value===null) return null
- try {
-  if(value.length>64000) throw new Error('oversized')
-  const action=JSON.parse(value)
+/** Validate domain fields while the shared store preserves the existing research scope/keys. */
+function parseResultAction(value:unknown):ResultAction {
+ const action=value as ResultAction
+ const positive=(v:unknown)=>typeof v==='number' && Number.isSafeInteger(v) && v>0
+ const sha=(v:unknown)=>typeof v==='string' && /^[a-f0-9]{64}$/.test(v)
+ if(action.kind==='accept') {
   const body=action.body
-  const positive=(v:unknown)=>typeof v==='number' && Number.isSafeInteger(v) && v>0
-  const sha=(v:unknown)=>typeof v==='string' && /^[a-f0-9]{64}$/.test(v)
-  if(action.schema!==1 || action.projectId!==projectId || action.taskId!==taskId || action.runId!==runId || !body || typeof body.operation_key!=='string' || !/^[A-Za-z0-9_.:-]{1,128}$/.test(body.operation_key)) throw new Error('scope')
-  if(action.kind==='accept') {
-   if(!positive(body.candidate_id) || !positive(body.context_version) || !sha(body.candidate_sha256) || !sha(body.review_sha256) || typeof body.acknowledge_limits!=='boolean' || !(body.note===null || (typeof body.note==='string' && body.note.length<=4000))) throw new Error('acceptance')
-  } else if(action.kind==='change') {
-   if(!positive(body.expected_version) || body.source_kind!=='user_message' || typeof body.statement!=='string' || !body.statement.trim() || body.statement.length>12000) throw new Error('correction')
-  } else throw new Error('kind')
-  return Object.freeze({...action,body:Object.freeze({...body})}) as ResultAction
- } catch {throw new Error('No se pudo recuperar la decisión guardada. Consulta el resultado antes de preparar otra.')}
+  if(!positive(body.candidate_id) || !positive(body.context_version) || !sha(body.candidate_sha256) || !sha(body.review_sha256) || typeof body.acknowledge_limits!=='boolean' || !(body.note===null || (typeof body.note==='string' && body.note.length<=4000))) throw new Error('acceptance')
+ } else if(action.kind==='change') {
+  const body=action.body
+  if(!positive(body.expected_version) || body.source_kind!=='user_message' || typeof body.statement!=='string' || !body.statement.trim() || body.statement.length>12000) throw new Error('correction')
+ } else throw new Error('kind')
+ return action
 }
-/** Clear only the exact resolved packet, never a newer decision stored in the same scope. */
-export function clearResultAction(storage:ActionStorage,action:ResultAction) {
- const current=loadResultAction(storage,action.projectId,action.taskId,action.runId)
- if(current?.body.operation_key===action.body.operation_key) {
-  const pointer=storage.getItem(`researcher:result-pending:v1:${action.projectId}:${action.taskId}`)
-  if(pointer!==null && JSON.parse(pointer).operationKey===action.body.operation_key) storage.removeItem(`researcher:result-pending:v1:${action.projectId}:${action.taskId}`)
-  storage.removeItem(storageKey(action.projectId,action.taskId,action.runId))
- }
-}
+/** Existing research packets keep their namespace and body contract during extraction. */
+const resultActions=ownerActionStore<ResultAction>('result',parseResultAction)
+/** Locate the original pending research run, including runs outside the recent list. */
+export const pendingResultRun=resultActions.pendingRun
+/** Persist the complete original research decision before sending. */
+export const saveResultAction=resultActions.save
+/** Recover exact scoped research history without refreshing its fingerprints. */
+export const loadResultAction=resultActions.load
+/** Clear only the resolved original research decision. */
+export const clearResultAction=resultActions.clear
 /** Explicitly retry the saved command; callers never substitute refreshed hashes or context. */
 export function sendResultAction(action:ResultAction) {
  const path=action.kind==='accept'?`/api/projects/${action.projectId}/runs/${encodeURIComponent(action.runId)}/result/accept`:`/api/projects/${action.projectId}/tasks/${action.taskId}/context-corrections`

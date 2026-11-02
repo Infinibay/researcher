@@ -69,6 +69,12 @@ def _unused(conn, version):
                         "SELECT 1 FROM runtime_code_review_records LIMIT 1"
                     ).fetchone()
                 )
+                or (
+                    version == 42
+                    and conn.execute(
+                        "SELECT 1 FROM runtime_code_acceptances LIMIT 1"
+                    ).fetchone()
+                )
             )
             if blocked:
                 raise RuntimeError(
@@ -79,6 +85,34 @@ def _unused(conn, version):
     except BaseException:
         conn.rollback()
         raise
+
+
+def restore_code_acceptances(conn):
+    """Remove unused version42 without deleting owner history and restore the exact prior research acceptance triggers."""
+    import sqlite3
+    from pathlib import Path
+
+    with _unused(conn, 42) as present:
+        if not present:
+            return
+        names = ("native_task_done_requires_acceptance", "reopen_changed_accepted_task")
+        for name in names:
+            conn.execute("DROP TRIGGER " + name)
+        conn.execute("DROP TRIGGER code_acceptance_immutable")
+        conn.execute("DROP TABLE runtime_code_acceptances")
+        statement = ""
+        for line in (
+            Path(__file__)
+            .with_name("result_schema.sql")
+            .read_text()
+            .splitlines(keepends=True)
+        ):
+            statement += line
+            if sqlite3.complete_statement(statement):
+                if any("CREATE TRIGGER " + name + " " in statement for name in names):
+                    conn.execute(statement)
+                statement = ""
+        conn.execute("DELETE FROM schema_migrations WHERE version=42")
 
 
 def restore_native_code_reviews(conn):
