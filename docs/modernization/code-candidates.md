@@ -124,9 +124,14 @@ el código.
 
 `ready` describe la captura histórica. No demuestra por sí solo que su contexto
 siga vigente al consultarla: los consumidores deben conservar su versión y
-revalidarla antes de revisar, aceptar o publicar. Sigue pendiente ampliar la
-prueba de Stop al intervalo de cierre del SDK, antes de empezar Git; la prueba
-actual interrumpe una captura después de cerrar esos procesos.
+revalidarla antes de revisar, aceptar o publicar.
+
+La prueba posterior de Stop durante el cierre confirmó que el contexto podía
+terminar con su tarea de cierre aún viva. Ahora el contexto espera esa tarea antes
+de liberar el diario; si se cancela la propia espera, cierra primero el dominio
+físico y conserva la espera del propietario original. Las pruebas cubren ambos
+casos y mantienen la captura interrumpida en reconciliación. Los contratos y la
+integración pendiente de comprobaciones están en [code-checks.md](code-checks.md).
 
 Las evidencias de este incremento están en
 [code-candidate-results.json](code-candidate-results.json),

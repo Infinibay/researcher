@@ -524,3 +524,83 @@ async def test_unacknowledged_writer_cannot_become_a_ready_candidate(
         assert d.coordinator.store.get(101, d.run.run_id).status == "reconciling"
         assert not (author / "writer-late").exists()
         assert (c.s.workspace / "fact.txt").read_text() == "137"
+
+
+@pytest.mark.parametrize("cancel_scope", [False, True])
+async def test_stop_during_sealing_joins_the_seal_task_before_scope_exit(
+    development_config, monkeypatch, cancel_scope
+):
+    """Physical Stop remains prompt while factory teardown retains and joins the in-flight sealing task."""
+    from backend.runtime.analysis_tools import AnalysisTools
+    from backend.runtime.candidate_state import CodeCandidates
+
+    c = development_config
+    entered = asyncio.Event()
+    release = asyncio.Event()
+    stopped = asyncio.Event()
+    closed = asyncio.Event()
+    close = AnalysisTools.aclose
+    observed = {}
+
+    async def held_close(self):
+        """Hold the existing seal owner at command cleanup while allowing outer scope cleanup to run."""
+        session = observed.get("session")
+        if session is not None and asyncio.current_task() is session._session._sealing:
+            entered.set()
+            await release.wait()
+        await close(self)
+
+    monkeypatch.setattr(AnalysisTools, "aclose", held_close)
+    async with development_attempt(c) as d:
+
+        async def own_scope():
+            """Keep entry/exit on one task, stop during sealing and expose only lifecycle observations."""
+            async with d.coordinator.runtime.open(
+                workspace=c.s.workspace, tool_token=d.token, peer_owner=d.peers
+            ) as session:
+                observed["session"] = session
+                await run_development_turn(d, session)
+                capture = asyncio.create_task(session.capture_candidate())
+                await asyncio.wait_for(entered.wait(), 10)
+                await asyncio.wait_for(session.cancel(), 5)
+                await asyncio.wait_for(
+                    asyncio.gather(capture, return_exceptions=True), 5
+                )
+                stopped.set()
+            closed.set()
+
+        scope = asyncio.create_task(own_scope())
+        try:
+            await asyncio.wait_for(stopped.wait(), 30)
+            session = observed["session"]
+            grant = session._owner.broker.journal.load().records[
+                session._owner.broker._grant_key
+            ]
+            assert grant["state"] == "retired" and grant["domain_removed"]
+            await asyncio.sleep(0.1)
+            assert not scope.done() and not closed.is_set(), (
+                "Factory exited while its sealing task was still alive"
+            )
+            if cancel_scope:
+                scope.cancel()
+                await asyncio.sleep(0.05)
+                assert not scope.done(), "Cancelled scope abandoned its sealing owner"
+            release.set()
+            result = await asyncio.wait_for(
+                asyncio.gather(scope, return_exceptions=True), 5
+            )
+            if cancel_scope:
+                assert isinstance(result[0], asyncio.CancelledError)
+            else:
+                assert result == [None]
+            assert session._session._sealing.done()
+            assert (
+                CodeCandidates(d.coordinator.store).inspect(101, d.run.run_id)["state"]
+                == "reconciling"
+            )
+        finally:
+            release.set()
+            await asyncio.gather(scope, return_exceptions=True)
+            session = observed.get("session")
+            if session is not None and session._session._sealing is not None:
+                await asyncio.gather(session._session._sealing, return_exceptions=True)

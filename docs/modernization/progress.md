@@ -4856,3 +4856,51 @@ Resume at139250c; avoid re-running Wiki tests after docs-only followup.
   acceptance/publication and public code admission. Ready is historical capture
   data, not proof of current context or approval. Remaining legacy/prompt/UI/
   operator/whole-goal acceptance work stays open; no whole-goal completion claim.
+
+#### Stop during sealing and versioned check policy — after 466c099
+
+- Continuation audit: previous turn made progress (466c099 plus durable-capture,
+  migration and published-Ken evidence). Revalidated current source and saved Ken
+  conclusions before acting on the explicitly unproven sealing hypothesis.
+- Reproduced the lifecycle gap with a real owned session: hold command cleanup
+  inside its sealing task, Stop the original domain, and observe factory exit
+  while sealing remains alive (RED9.10s). Physical closure already worked; the
+  missing invariant was joining the pending task before scope/journal teardown.
+- BrokerInferenceSession.drain_seal now joins the original sealing task before
+  native/Ken contexts unwind. Cancellation during this join closes the original
+  physical owner first under a shield, then drains the same join. No replacement
+  shutdown owner, lease or domain is created. Both ordinary Stop and cancellation
+  of outer scope pass17.04s; incomplete capture remains reconciling.
+- Added immutable CandidateSubject, CheckSpec and CheckObservation contracts plus
+  scoped CheckOutcome/evaluate_check policy. Outcomes retain observed subject and
+  recipe identities even when invalidated. Wrong repo/base/head/context/attempt,
+  changed recipe/code, unknown termination and incomplete output never pass.
+  A generic command has unknown test counts. Pytest needs bounded safe JUnit case
+  evidence and distinguishes passed/failed/no_tests/skipped/infrastructure errors;
+  warnings-limit exit6 (verified against installed ExitCode) is a failed check.
+  XML entities, oversized/malformed reports and contradictory reports fail closed.
+- These are pure classification contracts, not a CI executor, collection proof,
+  durable check store or a replacement for legacy CI. No E10/E11 whole-scenario
+  acceptance is claimed. The next executor must supply actual original-owned
+  observations and persist exact subject/recipe/peer/operation identity.
+- Directed67owned/session/broker/analysis PASS;26policy tests PASS (RED→GREEN).
+  Full source2017=1914PASS/100same inherited failure IDs/3same container skips;
+  834runtime passes. All28new cases pass (2sealing +26policy), no removed cases or
+  new/resolved failure identities. Causes/messages are not claimed identical.
+- Fresh extracted wheel371PASS/0FAIL/0SKIP,377backend modules only from wheel and
+  665matching Python/SQL files. All28new/changed definitions documented; changed
+  Python Ruff/whitespace pass. No late backend edits after this wheel was built.
+  No model calls, new published-Ken trial, frontend, migration or lock changes.
+- Evidence:sealing-checks-results.json, sealing-checks-packaging.json and
+  sealing-checks-docstrings.json; updated code-candidates.md and added code-checks.md
+  with exact implemented/pending distinctions. Ken findings record both the fixed
+  lifecycle defect and the next execution-boundary investigation.
+- Next: isolated versioned check execution and durable records, then independent
+  review and explicit acceptance/publication before public development admission.
+  Prefer a per-check writable copy derived from exact candidate head/tree while
+  keeping candidate and validation Git metadata protected; tests must not mutate
+  metadata later trusted by host Git. Collect bounded reports inside ownership,
+  never by host-following an untrusted report symlink. Explicit toolchain assets
+  and no ambient host subprocess/auth/network fallback remain required. These
+  execution design points still need implementation and tests. All remaining
+  engine/prompt/operator/UI/whole-plan work remains active.

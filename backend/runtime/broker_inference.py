@@ -5,6 +5,8 @@ import json
 from contextlib import AsyncExitStack, asynccontextmanager
 from pathlib import Path
 
+import anyio
+
 from backend.runtime.broker_mcp import McpTransportError, broker_mcp
 from backend.runtime.broker_stdio import BrokerEndpoint
 from backend.runtime.business_mediation import ProjectTools
@@ -98,6 +100,20 @@ class BrokerInferenceSession(InferenceSession):
             self._sealed = True
             self._sealing = asyncio.create_task(self._seal())
         await asyncio.shield(self._sealing)
+
+    async def drain_seal(self):
+        """Join original sealing cleanup before scope/journal exit; cancellation closes physical ownership first."""
+        if self._sealing is None:
+            return
+        joined = asyncio.gather(self._sealing, return_exceptions=True)
+        try:
+            await asyncio.shield(joined)
+        except asyncio.CancelledError:
+            with anyio.CancelScope(shield=True):
+                self._endpoint.owner.broker.withdraw()
+                await self._endpoint.owner.aclose()
+                await joined
+            raise
 
 
 @asynccontextmanager
@@ -316,7 +332,7 @@ async def broker_inference(
                     await analysis.aclose()
                     await ken_scope.aclose()
 
-                yield BrokerInferenceSession(
+                facade = BrokerInferenceSession(
                     native,
                     tools,
                     admitted,
@@ -324,6 +340,10 @@ async def broker_inference(
                     endpoint,
                     seal=seal_development if prepare_ken is not None else None,
                 )
+                try:
+                    yield facade
+                finally:
+                    await facade.drain_seal()
         finally:
             # A closed connection is never reusable. Retain its admitted catalog
             # for receipts, but do not leave a callback to a retired MCP scope.
