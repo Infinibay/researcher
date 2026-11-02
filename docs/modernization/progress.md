@@ -4798,3 +4798,61 @@ Resume at139250c; avoid re-running Wiki tests after docs-only followup.
   Reopening that same attempt in a new domain is forbidden by broker tombstones.
   Independent checks/review, acceptance, publication, public development admission,
   remaining legacy/prompt/UI work and whole-goal acceptance remain incomplete.
+
+#### Durable candidate controller and original writer closure — after 3327a5a
+
+- Continuation audit: previous turn made progress (3327a5a and exact owned-Git
+  capture evidence). Revalidated branch/worktree and reused the saved Ken finding.
+- Migration38 runs from normal startup and retains one reserved candidate per
+  original attempt. It pins project/task/repository/run/attempt/owner/fence/context,
+  source/prepared identity, base and allocation before filesystem effects. Ready
+  rows require full commit/tree/diff identities and nonempty domain closure data;
+  origin and ready observations are immutable. State/event commit together.
+- CodeCandidates rejects wrong repository/base/directory/hash, active peers,
+  unresolved commands and stale context. A former owner can record its own
+  interruption classification without restoring authority. Existing reservations
+  authorize inspection, never allocation reset or an automatic second capture.
+  Startup failure/retry remains resource-atomic. Unused inverse38 precedes37/36
+  and refuses retained history/live authority; historical fixture builders and
+  earlier inverse tests now explicitly withhold/remove the newer schema.
+- OwnedInferenceSession.capture_candidate requires a completed development turn,
+  seals further model dispatch, closes native/command/Ken peers and verifies
+  original-domain physical receipts before owned Git. Capture runs before original
+  domain retirement. Repeated calls join the same task/result. Stop withdraws and
+  physically closes before source SQL recovery; interrupted bytes/reservations stay.
+- Real integrated positives freeze the actual host input, run the controlled
+  native protocol, edit the private copy, capture/persist its exact tree and finish
+  needs_review with the task unaccepted. Late context correction after successful
+  Git cannot mark ready. A completed model turn plus an unacknowledged live writer
+  becomes reconciling after physical closure, never a ready candidate.
+- Directed145PASS. Full source1989=1886PASS/100same inherited failure IDs/3same
+  container skips, including806runtime passes. All19new cases pass:14state,
+  4session/capture and1startup-resource failure case. No new/resolved failure IDs;
+  causes/messages are not claimed identical. The full suite remains red.
+- Extracted wheel343PASS/0FAIL/0SKIP,374backend modules only from that wheel.
+  After that gate, one missing method docstring and one test import format were
+  corrected. The final wheel has662matching Python/SQL files; archive comparison
+  proves only those two payloads changed, production AST excluding docstrings is
+  unchanged, normalized test AST matches, and the changed migration test plus
+  isolated imports pass from the final wheel. The343test result belongs to the
+  preceding artifact, not a repeated broad run of the final artifact. Both hashes
+  and the precise delta are retained in candidate-controller-packaging.json.
+- Published Ken0.18.0 integrated probe PASS45.61s: actual source reads before/after
+  edit, original source unchanged,26original operations physically closed, exact
+  candidate ready and run needs_review/task unaccepted. Controlled native turn1,
+  real model generation0. The first fixture read only default symbol structure;
+  bounded synthetic stderr proved that mismatch. Explicit include=[source]
+  corrected the fixture without changing product behavior or inventing source
+  evidence from symbol_count0. Actual published receipts are retained separately.
+- Changed-file Ruff/whitespace pass;61new/changed definitions documented. No
+  frontend, dependency lock or actual model-call changes. Evidence:
+  candidate-controller-results.json, candidate-controller-packaging.json,
+  candidate-controller-docstrings.json and candidate-controller-published-ken.json;
+  contracts updated in code-candidates.md and development-execution.md.
+- Next boundary audit: Stop during sealing itself (the held capture test starts
+  after sealing); retain/join the SDK owner task before journal teardown if the
+  audit demonstrates a gap. This is a hypothesis to test, not a diagnosed failure.
+  Then implement exact candidate checks and independent review, explicit owner
+  acceptance/publication and public code admission. Ready is historical capture
+  data, not proof of current context or approval. Remaining legacy/prompt/UI/
+  operator/whole-goal acceptance work stays open; no whole-goal completion claim.

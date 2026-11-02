@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "published_ken": "0.18.0",
+  "model_generation_calls": 0,
+  "controlled_native_turns": 1,
+  "actual_owned_kernel_and_mcp": true,
+  "ken_reads_private_revision_before_and_after_edit": true,
+  "durable_candidate_state": "ready",
+  "run_state": "needs_review",
+  "task_accepted": false,
+  "original_source_unchanged": true,
+  "all_peers_closed": true,
+  "candidate": {
+    "repository_id": 11,
+    "context_version": 2,
+    "base_sha": "3110bedf9c792c45692bfb1ab6fde633737a6b20",
+    "head_sha": "95afb52b4ae821de51c211fcf1da92e241bb7498",
+    "tree_sha": "f54eb104d026f149dbf8d35520f6e04f27e360d8",
+    "diff_sha256": "dd4b3ed1265c91fe56e786a870f5775f51c39ce34dca1de36c37822e71b9d0b7"
+  },
+  "writer_operations_closed": 26,
+  "diff_sha256_verified": true,
+  "limits": "Published Ken, actual owned process boundaries and durable controller, with controlled generation protocol. No real model generation, public code admission, independent checks/review, acceptance or publication."
+}

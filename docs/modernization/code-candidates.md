@@ -4,8 +4,8 @@ La captura produce un commit y un árbol Git exactos en una copia independiente,
 con un diff completo que incluye binarios. No modifica las referencias, el índice
 ni los archivos del repositorio original o de la copia del autor.
 
-Este componente interno todavía necesita un controlador que cierre los escritores,
-registre el candidato de forma durable y lo vincule al intento y al contexto.
+La sesión interna ya dispone de un controlador que cierra los escritores,
+registra el candidato de forma durable y lo vincula al intento y al contexto.
 **No habilita desarrollo público, revisión, aceptación ni publicación.**
 
 ## Qué se captura
@@ -58,28 +58,75 @@ comprueba otra vez la base original al terminar. Si el usuario avanza esa base,
 se conserva la asignación pero no se devuelve un candidato como vigente. Las
 asignaciones existentes nunca se reinicializan ni se borran al repetir una captura.
 
-Ejemplo: el agente edita `price.py` de 137 a 200 y se captura A. Después cambia su
-copia a 300. Las comprobaciones de A deben seguir leyendo 200 desde la copia del
-candidato. Sus resultados no pueden aprobar B, el candidato que contiene 300.
+Ejemplo: el agente edita `price.py` de 137 a 200 y se captura A. Más tarde, otro
+intento cambia el valor a 300. Las comprobaciones de A deben seguir leyendo 200
+desde su copia del candidato. Sus resultados no pueden aprobar B, el candidato
+que contiene 300.
+
+## Reserva, cierre y recuperación
+
+`OwnedInferenceSession.capture_candidate()` exige un turno de desarrollo completado
+y reserva el destino en SQLite antes de empezar. Sella la sesión para impedir
+otros turnos y llamadas del modelo; después cierra los procesos nativos, comandos
+y Ken. El controlador comprueba sus recibos físicos en el diario del broker
+original antes de lanzar Git. La doble comparación del árbol sigue siendo una
+comprobación adicional; no sustituye la barrera de cierre.
+
+La migración 38 agrega `runtime_code_candidates`. La reserva fija proyecto, tarea,
+repositorio, intento, propietario, fence, versión de contexto, base y destino.
+La finalización guarda commit, árbol, diff y recibos de cierre en la misma
+transacción que el evento durable. Las identidades originales no se pueden editar
+y una captura lista es un registro histórico inmutable.
+
+| Estado | Significado |
+| --- | --- |
+| `capturing` | Reserva durable; todavía no hay un candidato listo. |
+| `ready` | Captura exacta registrada bajo el contexto vigente y con evidencia de cierre. Sigue pendiente de comprobaciones y revisión. |
+| `reconciling` | Interrupción o corrección durante la captura; se conservan la reserva y los archivos disponibles. |
+
+Un reintento en la misma sesión espera el resultado original; no vuelve a ejecutar
+Git. Una reserva encontrada al reabrir almacenamiento permite inspección, sin
+autorizar otra captura. Si el usuario corrige después de Git pero antes de SQLite,
+la versión anterior no se marca lista y su copia permanece recuperable. Stop
+retira y cierra el dominio antes de esperar la observación en SQLite. Un comando
+cerrado sin resultado final fiable bloquea el candidato y exige reconciliación.
+
+La captura ocurre antes de retirar el dominio original: el broker prohíbe crear
+un dominio nuevo para repetir efectos de ese mismo intento. Después del cierre,
+el coordinador puede finalizar la ejecución como pendiente de revisión conservando
+el candidato; esto no acepta la tarea. La inversa `restore_code_candidates()` solo
+retira almacenamiento sin uso y debe preceder a las inversas 37 y 36. El historial,
+la autoridad activa o una versión posterior impiden ese retroceso.
 
 ## Integración pendiente
-
-El controlador debe cerrar y comprobar todos los escritores antes de capturar.
-La doble comparación del árbol detecta cambios observables, pero no sustituye esa
-barrera: por sí sola no demuestra ausencia de un escritor concurrente.
-
-Debe reservar y persistir la identidad del candidato antes de ejecutar sus pasos,
-con proyecto, tarea, repositorio, intento, propietario, fence y versión de contexto.
-Un fallo entre Git y SQLite necesita reconciliación sobre la asignación retenida;
-un reintento no debe crear otro commit o adoptar archivos existentes sin evidencia.
-La captura debe ocurrir antes de retirar el dominio original: el broker prohíbe
-crear un dominio nuevo para repetir efectos de ese mismo intento.
 
 Después, comprobaciones y revisión independiente deben consumir la copia exacta
 del candidato en lectura y registrar base/head/contexto. La aceptación del usuario
 y la publicación son pasos distintos; publicar exige revalidar el destino y poder
 reconciliar una respuesta perdida. Este documento no declara implementados esos
 contratos pendientes.
+
+La integración del controlador tiene evidencia separada en
+[candidate-controller-results.json](candidate-controller-results.json),
+[candidate-controller-packaging.json](candidate-controller-packaging.json) y
+[candidate-controller-docstrings.json](candidate-controller-docstrings.json).
+La [prueba con Ken publicado](candidate-controller-published-ken.json) usa
+`ken-rank` 0.18.0, MCP y aislamiento reales con generación nativa controlada.
+Lee la revisión original y la editada, comprueba 26 recibos de cierre y termina
+con candidato listo, ejecución pendiente de revisión y tarea sin aceptar. No
+inicia generación de un modelo real.
+
+El escenario inicial confundía la estructura devuelta por `ken_read` con contenido
+del archivo. El paquete publicado devuelve símbolos por defecto: comprobar una
+línea exige solicitar `include=["source"]`. La prueba corregida hace esa solicitud
+explícita; un índice de símbolos no se presenta como evidencia de haber leído
+el código.
+
+`ready` describe la captura histórica. No demuestra por sí solo que su contexto
+siga vigente al consultarla: los consumidores deben conservar su versión y
+revalidarla antes de revisar, aceptar o publicar. Sigue pendiente ampliar la
+prueba de Stop al intervalo de cierre del SDK, antes de empezar Git; la prueba
+actual interrumpe una captura después de cerrar esos procesos.
 
 Las evidencias de este incremento están en
 [code-candidate-results.json](code-candidate-results.json),

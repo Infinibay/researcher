@@ -52,9 +52,12 @@ def _prepared(endpoint, operation_id):
 class BrokerInferenceSession(InferenceSession):
     """Refresh required Ken before dispatch and preserve the native launch policy."""
 
-    def __init__(self, native, tools, active, refresh, endpoint):
+    def __init__(self, native, tools, active, refresh, endpoint, *, seal=None):
         """Bind host dispatch to this original native endpoint."""
-        super().__init__(native, tools, active)
+        self._sealed = False
+        self._sealing = None
+        self._seal = seal
+        super().__init__(native, tools, lambda: active() and not self._sealed)
         self._refresh = refresh
         self._endpoint = endpoint
 
@@ -71,6 +74,9 @@ class BrokerInferenceSession(InferenceSession):
         raise NativeInputRequired(request)
 
     async def run(self, text, *, on_event=None, on_started=None):
+        """Run only before capture seals dispatch, retaining the original Ken and native-state admission checks."""
+        if self._sealed:
+            raise RpcProtocolError("Native session is sealed for candidate capture")
         await self._refresh()
         endpoint = self._endpoint
         if endpoint.native_state is not None:
@@ -83,6 +89,15 @@ class BrokerInferenceSession(InferenceSession):
                 text,
             )
         return await super().run(text, on_event=on_event, on_started=on_started)
+
+    async def seal(self):
+        """Disable model dispatch and close its original writers once, leaving the host's broker available for capture."""
+        if self._seal is None:
+            raise RpcProtocolError("This session has no development capture boundary")
+        if self._sealing is None:
+            self._sealed = True
+            self._sealing = asyncio.create_task(self._seal())
+        await asyncio.shield(self._sealing)
 
 
 @asynccontextmanager
@@ -294,7 +309,21 @@ async def broker_inference(
                         endpoint._operation,
                         native.thread_id,
                     )
-                yield BrokerInferenceSession(native, tools, admitted, refresh, endpoint)
+
+                async def seal_development():
+                    """Retire all native, command and Ken peers before reading a candidate; keep original domain ownership."""
+                    await native.rpc.aclose()
+                    await analysis.aclose()
+                    await ken_scope.aclose()
+
+                yield BrokerInferenceSession(
+                    native,
+                    tools,
+                    admitted,
+                    refresh,
+                    endpoint,
+                    seal=seal_development if prepare_ken is not None else None,
+                )
         finally:
             # A closed connection is never reusable. Retain its admitted catalog
             # for receipts, but do not leave a callback to a retired MCP scope.

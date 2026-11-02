@@ -11,8 +11,13 @@ def test_unused_result_schema_rolls_back_and_reapplies_without_losing_tasks(
     from backend.tools.base.db import ensure_migrations
 
     c = coordination
-    from backend.db.development_migration import restore_development_kinds, restore_development_workspaces
+    from backend.db.development_migration import (
+        restore_code_candidates,
+        restore_development_kinds,
+        restore_development_workspaces,
+    )
 
+    restore_code_candidates(c.conn)
     restore_development_workspaces(c.conn)
     restore_development_kinds(c.conn)
     c.conn.execute("CREATE TABLE owner_notes(body TEXT)")
@@ -51,8 +56,13 @@ def test_result_downgrade_refuses_live_authority_or_historical_delivery(
     from backend.tests.runtime.test_result_acceptance import make_active_result
 
     c = coordination
-    from backend.db.development_migration import restore_development_kinds, restore_development_workspaces
+    from backend.db.development_migration import (
+        restore_code_candidates,
+        restore_development_kinds,
+        restore_development_workspaces,
+    )
 
+    restore_code_candidates(c.conn)
     restore_development_workspaces(c.conn)
     restore_development_kinds(c.conn)
     if obstacle == "newer_migration":

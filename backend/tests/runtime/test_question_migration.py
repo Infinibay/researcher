@@ -37,7 +37,11 @@ def version23(database, conn, monkeypatch):
                     "task_inputs_schema.sql",
                     "run_input_schema.sql",
                     "native_state_schema.sql",
-                    "review_schema.sql", "result_schema.sql", "development_schema.sql", "development_workspace_schema.sql",
+                    "review_schema.sql",
+                    "result_schema.sql",
+                    "development_schema.sql",
+                    "development_workspace_schema.sql",
+                    "code_candidate_schema.sql",
                 )
                 else apply_resource(conn, path)
             ),

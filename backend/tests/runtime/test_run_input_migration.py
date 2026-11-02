@@ -22,7 +22,16 @@ def test_version29_dispatch_remains_unknown_after_repeatable_upgrade(
             "apply_sql_resource",
             lambda conn, path: (
                 None
-                if path.name in ("run_input_schema.sql", "native_state_schema.sql", "review_schema.sql", "result_schema.sql", "development_schema.sql", "development_workspace_schema.sql")
+                if path.name
+                in (
+                    "run_input_schema.sql",
+                    "native_state_schema.sql",
+                    "review_schema.sql",
+                    "result_schema.sql",
+                    "development_schema.sql",
+                    "development_workspace_schema.sql",
+                    "code_candidate_schema.sql",
+                )
                 else apply(conn, path)
             ),
         )

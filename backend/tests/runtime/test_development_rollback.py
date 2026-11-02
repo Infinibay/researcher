@@ -9,13 +9,16 @@ from backend.db.migrations import apply_sql_resource
 
 @pytest.fixture
 def expanded(coordination):
-    """Use actual latest startup storage, including both new development migration markers."""
+    """Use actual latest startup storage, then explicitly remove unused candidate storage to test the historical inverses."""
     assert (
         coordination.conn.execute(
             "SELECT max(version) FROM schema_migrations"
         ).fetchone()[0]
-        == 37
+        == 38
     )
+    from backend.db.development_migration import restore_code_candidates
+
+    restore_code_candidates(coordination.conn)
     return coordination
 
 
@@ -163,11 +166,12 @@ def test_kind_inverse_requires_legacy_history_and_closed_peers(expanded, obstacl
 
 def test_inverse_failure_rolls_back_marker_index_and_column(expanded):
     """A source-owner index depending on the kind causes an atomic refusal, never a damaged partial downgrade."""
+    import sqlite3
+
     from backend.db.development_migration import (
         restore_development_kinds,
         restore_development_workspaces,
     )
-    import sqlite3
 
     c = expanded
     restore_development_workspaces(c.conn)

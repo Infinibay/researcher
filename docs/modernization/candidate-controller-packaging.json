@@ -1,0 +1,39 @@
+{
+  "base_commit": "3327a5a",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "ecdddbc43899776b932e73621625f5fb88ca02abba4bfd4cb50ca6d7d5bd228d",
+  "observed": {
+    "tests_passed": 343,
+    "failures": [],
+    "skipped": 0,
+    "backend_modules_loaded": 374,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "network": "Disabled except Unix sockets",
+    "semantic_assets": "Explicit prepared pinned public offline assets outside wheel"
+  },
+  "backend_tree": {
+    "matching_source_files": 662,
+    "sha256": "c04a6cd07997b0e624ef04c6f0753962318c3df599788a5243834b2c54b57ed0"
+  },
+  "limits": "Extracted backend wheel plus installed dependencies and explicit prepared offline assets; not a clean full host installation or an inference-quality trial.",
+  "final_documentation_revision": {
+    "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+    "wheel_directory": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/candidate-controller-final-dist",
+    "wheel_sha256": "ab6c5e4be2141520a7a72a4ac63bfb699cf45146ec8358eb77da06b67469cafc",
+    "changed_archive_entries": [
+      "backend/runtime/broker_inference.py",
+      "backend/tests/runtime/test_finding_review.py",
+      "researcher-0.1.0.dist-info/RECORD"
+    ],
+    "change": "One method docstring added and one test-only import block sorted; AST excluding docstrings/independent import ordering and all other archive payloads are identical to the 343-test artifact. The changed migration test also passes from the final wheel.",
+    "semantic_ast_unchanged": true,
+    "backend_source_files_matching_final_wheel": 662,
+    "backend_tree_sha256": "953ee9c8aae02adcd50a711c6caff2a11a3cd54e4df15a569f682bb3c963af5a",
+    "final_targeted_migration_test_passed": true,
+    "documented_method_imported_from_final_wheel": true,
+    "backend_modules_loaded": 213,
+    "backend_imports_only_from_final_wheel": true,
+    "tests_not_repeated": "The 343-test run applies to the preceding artifact. This final documentation/test-import delta is checked by payload/normalized-AST equality, source provenance, an isolated import and the changed migration test, not another broad 343-test run."
+  }
+}

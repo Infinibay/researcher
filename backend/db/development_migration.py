@@ -42,6 +42,10 @@ def _unused(conn, version):
                         "SELECT 1 FROM runtime_development_workspaces LIMIT 1"
                     ).fetchone()
                 )
+                or (
+                    version == 38
+                    and conn.execute("SELECT 1 FROM runtime_code_candidates LIMIT 1").fetchone()
+                )
             )
             if blocked:
                 raise RuntimeError(
@@ -52,6 +56,17 @@ def _unused(conn, version):
     except BaseException:
         conn.rollback()
         raise
+
+
+def restore_code_candidates(conn):
+    """Remove migration38 only before any candidate, development history or active authority exists."""
+    with _unused(conn, 38) as present:
+        if not present:
+            return
+        conn.execute("DROP TRIGGER code_candidate_ready_immutable")
+        conn.execute("DROP TRIGGER code_candidate_origin_immutable")
+        conn.execute("DROP TABLE runtime_code_candidates")
+        conn.execute("DELETE FROM schema_migrations WHERE version=38")
 
 
 def restore_development_workspaces(conn):

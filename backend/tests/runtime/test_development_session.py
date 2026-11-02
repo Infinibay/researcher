@@ -226,9 +226,12 @@ def ken_preparations(session):
 async def test_unchanged_code_and_metadata_do_not_reprepare_ken(development_config):
     """Source consistency is content-based; ordinary reads and Ken metadata writes keep the same index revision."""
     c = development_config
-    async with development_attempt(c) as d, d.coordinator.runtime.open(
-        workspace=c.s.workspace, tool_token=d.token, peer_owner=d.peers
-    ) as session:
+    async with (
+        development_attempt(c) as d,
+        d.coordinator.runtime.open(
+            workspace=c.s.workspace, tool_token=d.token, peer_owner=d.peers
+        ) as session,
+    ):
         assert len(ken_preparations(session)) == 1
         for _ in range(2):
             response = await call_development_tool(
@@ -271,13 +274,8 @@ async def test_active_writer_blocks_query_and_uncertain_cancel_requires_reconcil
                 break
             await asyncio.sleep(0.02)
         assert marker.exists()
-        blocked = await call_development_tool(
-            session, "ken_read", {"path": "fact.txt"}
-        )
-        assert (
-            not blocked["success"]
-            and "writer" in blocked["contentItems"][0]["text"]
-        )
+        blocked = await call_development_tool(session, "ken_read", {"path": "fact.txt"})
+        assert not blocked["success"] and "writer" in blocked["contentItems"][0]["text"]
         cancelled = await call_development_tool(
             session, "researcher_command_cancel", {"job_id": job}
         )
@@ -292,9 +290,7 @@ async def test_active_writer_blocks_query_and_uncertain_cancel_requires_reconcil
         assert d.coordinator.store.get(101, d.run.run_id).status == "reconciling"
         assert not d.coordinator.store.attempt_active(d.lease)
         assert len(ken_preparations(session)) == 1
-        ready = await call_development_tool(
-            session, "ken_read", {"path": "fact.txt"}
-        )
+        ready = await call_development_tool(session, "ken_read", {"path": "fact.txt"})
         assert not ready["success"] and len(ken_preparations(session)) == 1
         assert marker.exists()
         assert not (c.s.workspace / "writer-entered").exists()
@@ -327,4 +323,204 @@ async def test_stop_during_reindex_closes_original_owner_without_reopening_ken(
                 row["execution_closed"] for row in preparations
             )
         assert d.coordinator.runtime.consume_closure(d.lease)
+        assert (c.s.workspace / "fact.txt").read_text() == "137"
+
+
+async def run_development_turn(d, session):
+    """Freeze actual host input and bind native turn identity before controlled generation edits the private copy."""
+    coordinator, lease = d.coordinator, d.lease
+    coordinator.store.bind_thread(lease, thread_id=session.thread_id)
+    frozen = coordinator.store.reserve_input(
+        lease,
+        workspace=str(session.execution_workspace),
+        catalog_hash=session.catalog_hash,
+        model=session.model,
+        developer_instructions=session.developer_instructions,
+        catalog=session.catalog,
+        limits=coordinator.limits,
+    )
+
+    async def on_started(thread_id, turn_id):
+        """Persist the native turn observation through the same coordinator binding used by product runs."""
+        await asyncio.to_thread(
+            coordinator.store.bind_native, lease, thread_id=thread_id, turn_id=turn_id
+        )
+
+    return await session.run(frozen.input_text, on_started=on_started)
+
+
+async def test_completed_turn_seals_writers_and_persists_exact_candidate(
+    development_config,
+):
+    """A successful private turn can freeze once, close model tools and retain one exact attempt/context candidate."""
+    from backend.runtime.codex_session import NativeInputRequired
+    from backend.runtime.contracts import RunConflict
+    from backend.tests.runtime.test_development_workspace import fixture_git
+
+    c = development_config
+    async with development_attempt(c) as d:
+        async with d.coordinator.runtime.open(
+            workspace=c.s.workspace, tool_token=d.token, peer_owner=d.peers
+        ) as session:
+            with pytest.raises(RunConflict, match="completed"):
+                await session.capture_candidate()
+            result = await run_development_turn(d, session)
+            assert result.status == "completed"
+            ready = await session.capture_candidate()
+            assert (
+                ready["state"] == "ready" and ready["attempt_id"] == d.lease.attempt_id
+            )
+            assert (
+                ready["context_version"] == d.lease.context_version
+                and ready["repository_id"] == 11
+            )
+            snapshot = Path(ready["workspace"])
+            assert (snapshot / "fact.txt").read_text() == "200"
+            assert (c.s.workspace / "fact.txt").read_text() == "137"
+            assert (
+                await fixture_git(snapshot, "rev-parse", "HEAD")
+            ).decode().strip() == ready["head_sha"]
+            assert json.loads(ready["writer_proof_json"])["operations"]
+            before = set(session._owner.broker.journal.load().records)
+            assert await session.capture_candidate() == ready
+            assert set(session._owner.broker.journal.load().records) == before
+            with pytest.raises(RunConflict, match="sealed"):
+                await session.run("Try editing the captured candidate")
+            with pytest.raises(NativeInputRequired):
+                await call_development_tool(
+                    session,
+                    "researcher_python",
+                    {"operation_key": "late", "code": "print('late')"},
+                )
+        await d.peers.aclose()
+        assert all(row["state"] == "closed" for row in d.peers._rows())
+        assert d.coordinator.runtime.consume_closure(d.lease)
+        d.coordinator.store.settle_inference(
+            d.lease, observed_tokens=result.observed_tokens, native_status=result.status
+        )
+        d.coordinator.store.finish(
+            d.lease, native_status=result.status, summary=result.text
+        )
+        assert d.coordinator.store.get(101, d.run.run_id).status == "needs_review"
+        assert (
+            d.coordinator.store.context_snapshot(101, 1001)["task"]["status"] != "done"
+        )
+
+
+async def test_context_correction_after_git_capture_retains_unaccepted_candidate(
+    development_config, monkeypatch
+):
+    """Late Git success cannot become ready after the owner's version changes; the captured bytes remain recoverable."""
+    from backend.runtime import code_candidate
+    from backend.runtime.candidate_state import CodeCandidates
+    from backend.runtime.contracts import StaleAttempt
+
+    c = development_config
+    async with development_attempt(c) as d:
+        capture = code_candidate.capture_candidate
+
+        async def corrected(*args, **kwargs):
+            """Apply one real context correction after physical Git capture but before its SQL completion."""
+            result = await capture(*args, **kwargs)
+            d.coordinator.store.correct_context(
+                project_id=101,
+                task_id=1001,
+                expected_version=d.lease.context_version,
+                operation_key="late-candidate",
+                statement="Keep the value 137.",
+                source_kind="user_message",
+                source_reference="owner:late",
+            )
+            return result
+
+        monkeypatch.setattr(code_candidate, "capture_candidate", corrected)
+        async with d.coordinator.runtime.open(
+            workspace=c.s.workspace, tool_token=d.token, peer_owner=d.peers
+        ) as session:
+            await run_development_turn(d, session)
+            with pytest.raises(StaleAttempt):
+                await session.capture_candidate()
+            retained = CodeCandidates(d.coordinator.store).inspect(101, d.run.run_id)
+            assert retained["state"] == "reconciling"
+            assert (
+                Path(retained["allocation"]) / "repository/fact.txt"
+            ).read_text() == "200"
+            assert (c.s.workspace / "fact.txt").read_text() == "137"
+
+
+async def test_stop_during_capture_drains_original_owner_and_retains_reservation(
+    development_config, monkeypatch
+):
+    """Stop does not wait for a capture callback to finish before closing its domain, and never marks the reservation ready."""
+    from backend.runtime import code_candidate
+    from backend.runtime.candidate_state import CodeCandidates
+
+    c = development_config
+    entered = asyncio.Event()
+
+    async def held(*_args, **_kwargs):
+        """Hold the host capture boundary to test cancellation ownership without a model or fake success result."""
+        entered.set()
+        await asyncio.Event().wait()
+
+    monkeypatch.setattr(code_candidate, "capture_candidate", held)
+    async with (
+        development_attempt(c) as d,
+        d.coordinator.runtime.open(
+            workspace=c.s.workspace, tool_token=d.token, peer_owner=d.peers
+        ) as session,
+    ):
+        await run_development_turn(d, session)
+        capture = asyncio.create_task(session.capture_candidate())
+        await asyncio.wait_for(entered.wait(), 10)
+        await asyncio.wait_for(session.cancel(), 5)
+        await asyncio.wait_for(asyncio.gather(capture, return_exceptions=True), 5)
+        retained = CodeCandidates(d.coordinator.store).inspect(101, d.run.run_id)
+        assert retained["state"] == "reconciling" and retained["head_sha"] is None
+        grant = session._owner.broker.journal.load().records[
+            session._owner.broker._grant_key
+        ]
+        assert grant["state"] == "retired" and grant["domain_removed"]
+        assert (Path(session.execution_workspace) / "fact.txt").read_text() == "200"
+
+
+async def test_unacknowledged_writer_cannot_become_a_ready_candidate(
+    development_config,
+):
+    """A completed model turn cannot override an uncertain command receipt when sealing its actual writer."""
+    from backend.runtime.candidate_state import CodeCandidates
+    from backend.runtime.contracts import RunConflict
+
+    c = development_config
+    async with (
+        development_attempt(c) as d,
+        d.coordinator.runtime.open(
+            workspace=c.s.workspace, tool_token=d.token, peer_owner=d.peers
+        ) as session,
+    ):
+        await run_development_turn(d, session)
+        started = await call_development_tool(
+            session,
+            "researcher_python",
+            {
+                "operation_key": "writer-at-capture",
+                "code": "from pathlib import Path;import time;Path('writer-entered').write_text('started');time.sleep(30);Path('writer-late').write_text('unsafe')",
+                "timeout_seconds": 30.0,
+            },
+        )
+        job = json.loads(started["contentItems"][0]["text"])["job_id"]
+        author = Path(session.execution_workspace)
+        for _ in range(100):
+            if (author / "writer-entered").exists():
+                break
+            await asyncio.sleep(0.02)
+        assert (author / "writer-entered").exists()
+        with pytest.raises(RunConflict):
+            await session.capture_candidate()
+        retained = CodeCandidates(d.coordinator.store).inspect(101, d.run.run_id)
+        assert retained["state"] == "reconciling" and retained["head_sha"] is None
+        receipt = d.coordinator.store.get_job(101, job)
+        assert receipt.local_execution_closed and receipt.status == "unknown"
+        assert d.coordinator.store.get(101, d.run.run_id).status == "reconciling"
+        assert not (author / "writer-late").exists()
         assert (c.s.workspace / "fact.txt").read_text() == "137"

@@ -28,6 +28,7 @@ from backend.runtime.business_mediation import (
 )
 from backend.runtime.codex_rpc import JsonRpcClient, RpcProtocolError
 from backend.runtime.codex_session import CodexSession, ExecutionLimits
+from backend.runtime.contracts import RunConflict
 from backend.runtime.development_instructions import DEVELOPMENT_INSTRUCTIONS
 from backend.runtime.development_state import DevelopmentWorkspaces
 from backend.runtime.egress_proxy import EgressPolicy
@@ -70,11 +71,17 @@ async def _drain(reader):
 class OwnedInferenceSession(InferenceSession):
     """Expose one original owned session and revoke its entire domain on Stop."""
 
-    def __init__(self, session, owner, withdraw, *, execution_workspace=None):
+    def __init__(
+        self, session, owner, withdraw, *, execution_workspace=None, capture=None
+    ):
         """Retain original ownership and the actual execution directory as data, never as an access grant."""
         super().__init__(session.native, session.business, session.active)
         self._session, self._owner, self._withdraw = session, owner, withdraw
         self.execution_workspace = execution_workspace
+        self._capture = capture
+        self._capture_task = None
+        self._running = False
+        self._result = None
 
     @property
     def web_search(self):
@@ -82,10 +89,53 @@ class OwnedInferenceSession(InferenceSession):
         return self._session.web_search
 
     async def run(self, text, *, on_event=None, on_started=None):
-        return await self._session.run(text, on_event=on_event, on_started=on_started)
+        """Run one native turn at a time; a started capture permanently seals further generation."""
+        if self._capture_task is not None:
+            raise RunConflict(
+                "Development session is sealed for its original candidate"
+            )
+        if self._running:
+            raise RunConflict("A native turn is already running in this session")
+        self._running = True
+        self._result = None
+        try:
+            self._result = await self._session.run(
+                text, on_event=on_event, on_started=on_started
+            )
+            return self._result
+        finally:
+            self._running = False
+
+    async def capture_candidate(self):
+        """Freeze one completed development turn through its host controller; repeats join its original result only."""
+        if (
+            self._capture is None
+            or self._running
+            or self._result is None
+            or self._result.status != "completed"
+        ):
+            raise RunConflict("Candidate capture requires a completed development turn")
+        if self._capture_task is None:
+            self._capture_task = asyncio.create_task(self._capture())
+            self._capture_task.add_done_callback(
+                lambda done: done.exception() if not done.cancelled() else None
+            )
+        try:
+            return await asyncio.shield(self._capture_task)
+        except asyncio.CancelledError:
+            await self.cancel()
+            await asyncio.gather(self._capture_task, return_exceptions=True)
+            raise
 
     async def cancel(self):
+        """Stop physical work before awaiting any interrupted capture's SQL observation."""
         self._withdraw()
+        if (
+            self._capture_task is not None
+            and not self._capture_task.done()
+            and not self._capture_task.cancelling()
+        ):
+            self._capture_task.cancel()
         # Stop the original domain, including startup/Ken/analysis, before SQL.
         await self._owner.aclose()
 
@@ -373,16 +423,46 @@ class OwnedCodexRuntime:
                                     active=admitted,
                                     prepare_ken=prepare_ken if development else None,
                                 ) as session:
+
+                                    async def capture():
+                                        """Capture under the original live domain after sealing all of this session's writers."""
+                                        from backend.runtime.candidate_capture import (
+                                            capture_owned_candidate,
+                                        )
+
+                                        return await capture_owned_candidate(
+                                            lease,
+                                            runs=registry.runs,
+                                            session=session,
+                                            owner=owner,
+                                            registry=registry,
+                                            asset=GitAsset.inspect(
+                                                Path("/usr/bin/git")
+                                            ),
+                                            settled=_settled,
+                                        )
+
                                     try:
                                         exported = OwnedInferenceSession(
                                             session,
                                             owner,
                                             withdraw,
                                             execution_workspace=workspace,
+                                            capture=capture if development else None,
                                         )
                                         yield exported
                                     finally:
                                         withdraw()
+                                        if (
+                                            exported is not None
+                                            and exported._capture_task is not None
+                                            and not exported._capture_task.done()
+                                        ):
+                                            await exported.cancel()
+                                            await asyncio.gather(
+                                                exported._capture_task,
+                                                return_exceptions=True,
+                                            )
                         finally:
                             withdraw()
                             watcher.cancel()

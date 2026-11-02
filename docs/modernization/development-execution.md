@@ -3,8 +3,9 @@
 El sistema prepara una copia Git privada por intento y permite escritura en ella
 desde los perfiles nativos internos de desarrollo. **El servicio público todavía
 no admite tareas de desarrollo.** La fábrica interna ya conecta la preparación,
-el contexto y las herramientas de desarrollo. Faltan candidatos, comprobaciones,
-revisión, aceptación y publicación para completar el recorrido del producto.
+el contexto, las herramientas de desarrollo y la captura durable de candidatos.
+Faltan comprobaciones, revisión, aceptación y publicación para completar el
+recorrido del producto.
 
 ## Dos directorios con responsabilidades distintas
 
@@ -70,8 +71,9 @@ desarrollo para ellas. Cada recurso se aplica en su propia transacción: si fall
 el 37, el 36 puede quedar aplicado por completo; el siguiente arranque intenta
 solo lo pendiente. No se publica un marcador para un recurso parcialmente aplicado.
 
-`restore_development_workspaces()` y `restore_development_kinds()` permiten retirar,
-en ese orden, estructuras nuevas **sin uso**. Rechazan historial de desarrollo,
+`restore_code_candidates()`, `restore_development_workspaces()` y
+`restore_development_kinds()` permiten retirar, en ese orden, estructuras nuevas
+**sin uso**. Rechazan historial de desarrollo,
 preparaciones retenidas, autoridad activa y versiones posteriores. Si un índice
 propio del usuario impide cambiar la columna, la operación se revierte completa;
 no se elimina ese índice para forzar el retroceso. Estas funciones son inversas
@@ -145,11 +147,11 @@ no inició generación de modelo ni demuestra admisión pública, revisión de c
 o publicación. La huella tiene límites de 20.000 entradas, 256 MiB y diez segundos;
 superarlos bloquea la consulta. No constituye una captura atómica del candidato.
 
-La [política de captura de candidatos](code-candidates.md) ya produce un commit,
-un árbol y un diff completos en una asignación independiente mediante Git propio.
-Todavía falta cerrar todos los escritores desde el controlador y persistir la
-captura vinculada al contexto e intento antes de entregarla. Después se debe
-comprobar y revisar esa misma versión antes de habilitar la entrada pública.
+La [captura de candidatos](code-candidates.md) ya produce un commit, un árbol y un
+diff completos en una asignación independiente mediante Git propio. El controlador
+interno cierra los escritores y persiste la captura ligada al contexto e intento.
+Después se debe comprobar y revisar esa misma versión antes de habilitar la entrada
+pública.
 Después deben integrarse comprobaciones, revisión independiente, aceptación y
 publicación reconciliada. Terminar un turno o emitir texto de aprobación no cierra
 ese ciclo.
