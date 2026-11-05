@@ -58,6 +58,7 @@ async def test_owner_http_develops_checks_reviews_and_accepts_exact_candidate(
             "research",
             "code",
             "bug_fix",
+            "plan",
         ]
         version = workspace["context"]["context_version"]
         body = {

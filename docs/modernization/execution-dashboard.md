@@ -9,7 +9,33 @@ Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: planificación nativa y aceptación del grafo
+## Etapa actual: despacho aprobado y entregas causales
+
+**Resultado:** el propietario ejecuta una versión exacta del plan aceptado. El
+coordinador del runtime existente conserva una entrega original por tarea, espera
+resultados aceptados vigentes y pasa sus fuentes/límites al siguiente agente.
+Reinicio sólo programa runs originales aún sin intento; Stop pausa el despacho
+antes de retirar peers. Una premisa cambiada invalida el grafo autorizado y bloquea
+aceptaciones posteriores basadas en ella. No hay otro loop LLM ni activación por chat.
+
+**Verificación:**8 casos nuevos, incluido planificador→investigación→aceptación→
+desarrollo privado con broker/kernel/Git reales y generación/Ken controlados.
+Primera selección amplia:115/117pasan; expectativa antigua de3tipos corregida y
+los10casos de desarrollo público pasan después. Sigue fallando la inversa42 ante
+esquemas posteriores (DD003). Wheel aislado:100pasan, ese caso excluido explícito;
+353imports sólo paquete,744fuentes coincidentes. Frontend86/build y8estados browser
+pasan;2POST originales de ejecutar/pausar tras pérdida/recarga dejan una autorización,
+un hijo detenido y dependiente sin run.58Python/14TS documentados. Sin suite global verde.
+
+**Siguiente bloque principal:** retirar los consumidores competidores de autonomía,
+orchestrator/flows, claims y mensajes, CLI/TUI mediante el mismo servicio; conectar
+recuperación/sucesores y reautorización del grafo corregido. No basta borrar
+get_engine ni convertir el chat en comandos. Mantener alcance completo de herramientas,
+prompts, libros/evaluaciones, interacción, páginas y migraciones. No pulir ahora el panel.
+[Contrato](../architecture/accepted-plan-execution.md), [resultados](plan-execution-results.json),
+[paquete](plan-execution-packaging.json), [auditoría](../design/audits/2026-11-05-plan-execution/report.md).
+
+## Etapa anterior: planificación nativa y aceptación del grafo
 
 **Resultado:** iniciar el proyecto admite una tarea `plan` en el runtime Codex/Ken
 existente; ya no arranca CrewAI, equipo ficticio ni loops desde esa ruta. Propone

@@ -1,0 +1,356 @@
+{
+  "base_commit": "4aa61ec",
+  "scope": "New modules and new/changed qualified definitions including enclosing definitions; English docstrings for Ken, not a global documentation audit.",
+  "definitions_or_modules": 58,
+  "missing": [],
+  "entries": [
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "ExecuteProjectPlan",
+      "line": 347,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "ControlPlanExecution",
+      "line": 355,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "project_plan_execution",
+      "line": 362,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "execute_project_plan",
+      "line": 371,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "control_project_plan_execution",
+      "line": 382,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/run_inputs.py",
+      "name": "freeze_input",
+      "line": 89,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "RuntimeService",
+      "line": 62,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "RuntimeService.__init__",
+      "line": 65,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "RuntimeService.__aenter__",
+      "line": 131,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "RuntimeService.__aexit__",
+      "line": 152,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "RuntimeService.stop_project",
+      "line": 302,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "RuntimeService.execute_plan",
+      "line": 323,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "RuntimeService.control_plan_execution",
+      "line": 332,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "RuntimeService.control_plan_execution.linked",
+      "line": 339,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "RuntimeService._dispatch_loop",
+      "line": 349,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "RuntimeService.dispatch_planned_work",
+      "line": 363,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "name": "SQLiteRunStore",
+      "line": 65,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "name": "SQLiteRunStore.admit_once",
+      "line": 1055,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "name": "SQLiteRunStore._execution_subject",
+      "line": 1421,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_code_publications.py",
+      "name": "test_publication_request_is_immutable_and_startup_preserves_original_records",
+      "line": 131,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_public_development.py",
+      "name": "test_owner_http_develops_checks_reviews_and_accepts_exact_candidate",
+      "line": 16,
+      "documented": true
+    },
+    {
+      "path": "backend/tools/base/db.py",
+      "name": "ensure_migrations",
+      "line": 111,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/execution.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/execution.py",
+      "name": "PlanExecutions",
+      "line": 18,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/execution.py",
+      "name": "PlanExecutions.__init__",
+      "line": 21,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/execution.py",
+      "name": "PlanExecutions._manifest",
+      "line": 25,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/execution.py",
+      "name": "PlanExecutions._execution",
+      "line": 89,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/execution.py",
+      "name": "PlanExecutions._current",
+      "line": 99,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/execution.py",
+      "name": "PlanExecutions.state",
+      "line": 112,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/execution.py",
+      "name": "PlanExecutions.authorize",
+      "line": 176,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/execution.py",
+      "name": "PlanExecutions.control",
+      "line": 244,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/execution.py",
+      "name": "PlanExecutions.pause_project",
+      "line": 284,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/execution.py",
+      "name": "PlanExecutions.pending",
+      "line": 292,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/execution.py",
+      "name": "PlanExecutions.note_issue",
+      "line": 302,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/execution.py",
+      "name": "PlanExecutions._prerequisites",
+      "line": 328,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/execution.py",
+      "name": "PlanExecutions.prepare",
+      "line": 380,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/execution.py",
+      "name": "PlanExecutions.attach",
+      "line": 473,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/execution.py",
+      "name": "PlanExecutions.input",
+      "line": 500,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_plan_execution.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_plan_execution.py",
+      "name": "test_owned_accepted_plan_dispatches_root_then_exact_evidence_to_private_development",
+      "line": 13,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_plan_execution.py",
+      "name": "test_owned_accepted_plan_dispatches_root_then_exact_evidence_to_private_development.issued",
+      "line": 66,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_execution.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_execution.py",
+      "name": "accepted_plan",
+      "line": 9,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_execution.py",
+      "name": "authorize",
+      "line": 32,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_execution.py",
+      "name": "accept_documentary_result",
+      "line": 47,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_execution.py",
+      "name": "test_execution_requires_distinct_owner_authorization_and_original_delivery",
+      "line": 110,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_execution.py",
+      "name": "test_dependent_handoff_contains_original_accepted_evidence_and_blocks_changed_context",
+      "line": 143,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_execution.py",
+      "name": "test_execution_pause_and_resume_never_replay_an_attempted_delivery",
+      "line": 181,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_execution.py",
+      "name": "test_changed_dependency_graph_cannot_reuse_owner_execution_manifest",
+      "line": 207,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_execution.py",
+      "name": "DeliveryInference",
+      "line": 219,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_execution.py",
+      "name": "DeliveryInference.__init__",
+      "line": 224,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_execution.py",
+      "name": "DeliveryInference.open",
+      "line": 237,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_execution.py",
+      "name": "DeliveryInference.open.session",
+      "line": 242,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_execution.py",
+      "name": "DeliveryInference.run",
+      "line": 254,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_execution.py",
+      "name": "DeliveryInference.cancel",
+      "line": 272,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_execution.py",
+      "name": "test_service_recovers_never_started_delivery_and_stop_prevents_refill",
+      "line": 277,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_execution.py",
+      "name": "test_changed_prerequisite_blocks_acceptance_of_already_delivered_consumer",
+      "line": 308,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_execution.py",
+      "name": "test_execution_http_requires_exact_owner_manifest_and_separate_pause_control",
+      "line": 335,
+      "documented": true
+    }
+  ]
+}

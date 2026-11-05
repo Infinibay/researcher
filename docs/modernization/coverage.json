@@ -2963,13 +2963,13 @@
         "Strict owner API and scheduler capability gate; no remote transport means admission refused, no generic broker profile fallback",
         "Push/PR/merge durable prerequisites and separate merge stages, known receipts immutable, unknown remote effects retained;61directed+2sharedlocalnative+77frontend pass",
         "Configured operator-only HTTPS credential/trust, fixed trusted Git argv through actual broker/domain and readonly sealed repository configuration; shares host network, not kernel destination ACL",
-        "Real TLS/Git smart HTTP and controlled Forgejo REST push→PR→exact merge plus held receive-pack Stop; original stage uncertain, local closure real, repeat action no new write;82directed+1physical pass;73documented definitions",
+        "Real TLS/Git smart HTTP and controlled Forgejo REST push\u2192PR\u2192exact merge plus held receive-pack Stop; original stage uncertain, local closure real, repeat action no new write;82directed+1physical pass;73documented definitions",
         "Schema46 exclusive original HTTP host identity/client closure and immutable fresh readonly observer attempts; original global domain retirement before recovery",
         "Exact readonly remote Git type/capsule and bounded GET-only recovery; historical context and missing candidate allowed, issue/native/model authority denied",
-        "Owner CSRF/strict recovery API and immutable same-command receipt;88directed and native TLS Stop→server completes→fresh observation with no new write pass",
+        "Owner CSRF/strict recovery API and immutable same-command receipt;88directed and native TLS Stop\u2192server completes\u2192fresh observation with no new write pass",
         "Final TLS integration recovers response-lost PR and merge bookkeeping, then held push/Stop; no repeat POST/push/inference. Final wheel88PASS/337package-only modules/730matching sources;58documented definitions",
         "Owner readonly destination discovery derives canonical remote ID and branch facts from configured origin, checks accepted provenance before/after, no writes/inference; configured-only capability and saved bounded original history",
-        "Tasks explicit push→PR→merge and separate readonly original recovery; packet/root/predecessor/version/head validated, original requests survive lost reply/reload, no generic host run recovery or model label",
+        "Tasks explicit push\u2192PR\u2192merge and separate readonly original recovery; packet/root/predecessor/version/head validated, original requests survive lost reply/reload, no generic host run recovery or model label",
         "92backend/92wheel/80frontend/build pass;9rendered states at1440/390px zero errors/overflow/Axe on panel, browser remote/domain witnesses explicitly synthetic and separate from prior real native TLS;23Python+31TS documented declarations"
       ],
       "remaining": [
@@ -3010,12 +3010,43 @@
         "94directed including actual kernel/controlled native+Ken planning,100wheel with740matching sources,83frontend/build and9browser states;76Python/19TS documented"
       ],
       "remaining": [
-        "Explicit accepted-plan execution decision, durable readiness/delivery/claim and typed agent handoffs; no text-triggered activation or second LLM loop",
+        "Explicit dispatch and causal prerequisite handoffs now delivered separately in accepted_plan_execution; original plan acceptance still never auto-starts work",
         "Autonomy/orchestrator/remaining flow/tool/CLI/TUI cutover and physical legacy writer exclusion across processes",
-        "Project pause/restart and individual predecessor-context transitive invalidation; complete plan/task lifecycle and review/acceptance of descendants",
+        "Basic project Stop/unissued restart and graph-wide premise invalidation delivered; corrected-graph reauthorization, delivery successor recovery and full lifecycle remain",
         "Multi-repo/empty-project planning bootstrap, all task types, native planning history deletion/archive/restore and inverse47",
         "Typed code/source evidence in plan basis, semantic support/representative prompting and human-comprehension evaluations; no claims from lexical quote membership",
         "Remaining6web routes/12page final acceptance and whole-suite/inherited failures/final fresh review still in full goal"
+      ]
+    },
+    "accepted_plan_execution": {
+      "status": "central_dispatch_and_handoffs_connected_legacy_cutover_and_reauthorization_pending",
+      "evidence": [
+        "backend/planning/execution.py",
+        "backend/db/plan_execution_schema.sql",
+        "backend/tests/runtime/test_plan_execution.py",
+        "backend/tests/runtime/test_owned_plan_execution.py",
+        "frontend/src/api/planExecution.ts",
+        "frontend/src/components/tasks/PlanExecution.tsx",
+        "docs/architecture/accepted-plan-execution.md",
+        "docs/modernization/plan-execution-results.json",
+        "docs/modernization/plan-execution-packaging.json",
+        "docs/design/audits/2026-11-05-plan-execution/report.md"
+      ],
+      "implemented": [
+        "Separate exact owner manifest execution decision; one persistent original task delivery and immutable causal handoff per node, atomic native admission/link and original receipt",
+        "Same RuntimeService owns deterministic readiness, capacity/quota/native workers; no model orchestration loop or text-triggered activation",
+        "Current accepted prerequisite result identity, complete immutable research snapshots/sources/limitations enter exact frozen native input; no hidden truncation",
+        "Changed premise pauses/fences/revokes/versions all nodes in the authorized graph; obsolete closed consumer acceptance rejected; no automatic impact on other projects",
+        "Durable pause/project Stop before peer withdrawal; recover only unattempted queued original runs; failed/cancelled/uncertain attempts never replayed by coordinator",
+        "Strict owner HTTP and Tasks controls; exact execute/pause/resume packets persist across loss/reload"
+      ],
+      "remaining": [
+        "One original execution per accepted plan; corrected-graph reauthorization and explicit delivery lineage to recovered/manual successor runs remain next main-block work",
+        "Graph-wide conservative invalidation; branch-selective scope and independent-node priority scheduling remain deferred",
+        "Code prerequisites currently transfer acceptance/head/tree/diff identities and explicit not-published limitation; complete candidate reading/adoption across code tasks remains integration work",
+        "Legacy autonomy/orchestrator/flows/tools/CLI/TUI still compete and require actual migration; known local registration check is not global physical legacy writer exclusion",
+        "Large complete predecessor snapshots can exceed native input budget and block before inference; no silent truncation; windowed handoff evidence reads remain future capability",
+        "No real model/prompt quality/human comprehension evaluation, full-page acceptance, current global-suite green, full host install or migration-inverse completion"
       ]
     }
   }

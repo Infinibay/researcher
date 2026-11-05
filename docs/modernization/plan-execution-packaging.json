@@ -1,0 +1,22 @@
+{
+  "base_commit": "4aa61ec",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "d4bea1b4cd5a0598111183324ecb1557d9c4138bb756f0186324664186acbd67",
+  "observed": {
+    "tests_passed": 100,
+    "failures": [],
+    "skipped": 0,
+    "backend_modules_loaded": 353,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "network": "Disabled except Unix sockets",
+    "semantic_assets": "Explicit prepared pinned public offline assets outside wheel"
+  },
+  "backend_tree": {
+    "matching_source_files": 744,
+    "sha256": "336d1bb523b0864f15745441ca3eafd21dd916cfb675757285ccc677f04ae5b2"
+  },
+  "bootstrap": "Python3.12 -I -S with explicit installed dependency path and original host venv prefix restored; backend import paths remain restricted to extracted wheel.",
+  "excluded_known_failure": "test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history[frozen_author] fails because inverse42 refuses later schemas43\u201348; separate initial receipt preserved; no weakening of guard.",
+  "limits": "Extracted backend wheel plus installed dependencies and explicit prepared offline assets; not a clean full host installation or an inference-quality trial."
+}

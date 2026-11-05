@@ -344,6 +344,47 @@ async def accept_project_plan(
     return JSONResponse(data, headers={"Cache-Control": "no-store"})
 
 
+class ExecuteProjectPlan(BaseModel):
+    """Exact observed graph context; the owner cannot supply agents, prompts, grants or arbitrary task identities."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
+    manifest_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+
+
+class ControlPlanExecution(ExecuteProjectPlan):
+    """Pause or resume the same original execution; resume is not an instruction to replay stopped attempts."""
+
+    status: Literal["active", "paused"]
+
+
+@router.get("/{project_id}/runs/{run_id}/project-plan/execution")
+async def project_plan_execution(project_id: int, run_id: str, request: Request):
+    """Read exact execution preview and causal deliveries without starting an agent or requiring a live runtime."""
+    from backend.planning.execution import PlanExecutions
+
+    data = await asyncio.to_thread(PlanExecutions(read_store(request)).state, project_id, run_id)
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
+@router.post("/{project_id}/runs/{run_id}/project-plan/execution")
+async def execute_project_plan(project_id: int, run_id: str, body: ExecuteProjectPlan, request: Request):
+    """Record a distinct paired-owner execution decision; the existing runtime dispatcher owns readiness and physical attempts."""
+    from backend.api.flow_manager import flow_manager
+
+    if flow_manager.is_project_running(project_id):
+        raise RunConflict("Stop and reconcile the registered legacy project owner before native execution")
+    data = await service(request).execute_plan(project_id, run_id, **body.model_dump())
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
+@router.post("/{project_id}/plan-executions/{execution_id}/control")
+async def control_project_plan_execution(project_id: int, execution_id: str, body: ControlPlanExecution, request: Request):
+    """Persist owner pause/resume first; returned pause acknowledges intent and never claims that native peers have physically closed."""
+    data = await service(request).control_plan_execution(project_id, execution_id, **body.model_dump())
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
 class RemotePreviewBody(BaseModel):
     """Owner branch choices only; server identity, registered URL and credential are derived by the host."""
 

@@ -76,6 +76,7 @@ class RuntimeService:
         project_turn_limit=20,
         project_token_limit=4000000,
     ):
+        """Compose one journal owner, native worker limits and deterministic authorized-plan dispatch; construction starts no work."""
         self.store = store
         self.research = research
         self.questions = SQLiteQuestionStore(store, research)
@@ -96,6 +97,9 @@ class RuntimeService:
         self._recovery_jobs = {}
         self._closing = False
         self._admission_lock = asyncio.Lock()
+        self._dispatch_lock = asyncio.Lock()
+        self._dispatch_wake = asyncio.Event()
+        self._dispatcher = None
 
     def _acquire(self):
         # The canonical DB path, rather than a configurable control path, owns
@@ -125,6 +129,7 @@ class RuntimeService:
             raise
 
     async def __aenter__(self):
+        """Acquire exclusive journal ownership and observe durable unissued plan work without replaying native attempts."""
         if self._lock_fd is not None:
             raise RunConflict("Runtime owner is already started")
         acquiring = asyncio.create_task(asyncio.to_thread(self._acquire))
@@ -141,11 +146,17 @@ class RuntimeService:
                 os.close(fd)
             raise
         self._closing = False
+        self._dispatcher = asyncio.create_task(self._dispatch_loop(), name="researcher-plan-dispatch")
         return self
 
     async def __aexit__(self, exc_type, exc, tb):
+        """Drain dispatcher admissions before withdrawing workers and releasing the journal owner lock."""
         self._closing = True
         try:
+            self._dispatch_wake.set()
+            if self._dispatcher is not None:
+                await self._dispatcher
+                self._dispatcher = None
             workers = list(self._workers.items())
             await asyncio.gather(
                 *(self.stop(slot.spec.project_id, run_id) for run_id, slot in workers),
@@ -291,6 +302,10 @@ class RuntimeService:
     async def stop_project(self, project_id):
         """Withdraw every active native run in this project; returned states preserve unconfirmed physical closure rather than claiming all work stopped."""
 
+        from backend.planning.execution import PlanExecutions
+
+        await asyncio.to_thread(PlanExecutions(self.store).pause_project, project_id)
+
         def pending():
             """Read durable original active run IDs without admitting or replaying work."""
             with self.store._transaction() as conn:
@@ -304,6 +319,75 @@ class RuntimeService:
 
         ids = await asyncio.to_thread(pending)
         return [await self.stop(project_id, run_id) for run_id in ids]
+
+    async def execute_plan(self, project_id, plan_run_id, **command):
+        """Persist the exact owner execution authorization, then wake the single deterministic dispatcher without awaiting generation."""
+        from backend.planning.execution import PlanExecutions
+
+        self._accepting()
+        receipt = await asyncio.to_thread(PlanExecutions(self.store).authorize, project_id, plan_run_id, **command)
+        self._dispatch_wake.set()
+        return receipt
+
+    async def control_plan_execution(self, project_id, execution_id, **command):
+        """Persist pause before withdrawing linked peers; resume wakes only still-unissued original deliveries."""
+        from backend.planning.execution import PlanExecutions
+
+        self._accepting()
+        receipt = await asyncio.to_thread(PlanExecutions(self.store).control, project_id, execution_id, **command)
+        if receipt["status"] == "paused":
+            def linked():
+                """Resolve exact original run IDs belonging to this execution, without widening Stop to other accepted plans."""
+                with self.store._transaction() as conn:
+                    return [r[0] for r in conn.execute("SELECT d.run_id FROM runtime_plan_deliveries d JOIN runtime_plan_executions e ON e.id=d.execution_id JOIN runtime_runs r ON r.id=d.run_id WHERE d.execution_id=? AND e.status='paused' AND r.project_id=? AND r.status IN ('queued','running','cancelling','reconciling','waiting_input','needs_review')", (execution_id, project_id))]
+
+            for run_id in await asyncio.to_thread(linked):
+                await self.stop(project_id, run_id)
+        self._dispatch_wake.set()
+        return receipt
+
+    async def _dispatch_loop(self):
+        """Recheck durable owner-authorized readiness on wake or bounded polling; this loop performs no inference or chat-based decisions."""
+        while not self._closing:
+            self._dispatch_wake.clear()
+            try:
+                await self.dispatch_planned_work()
+            except Exception as error:  # noqa: BLE001 -- retain durable work, never replay after an observation failure
+                logger.error("Plan dispatch observation failed (%s)", type(error).__name__)
+            if not self._closing:
+                try:
+                    await asyncio.wait_for(self._dispatch_wake.wait(), 1)
+                except TimeoutError:
+                    pass
+
+    async def dispatch_planned_work(self):
+        """Admit original ready deliveries and recover only queued runs with no attempt; quotas, closure and native reservation remain owned by the existing run worker."""
+        from backend.planning.execution import PlanExecutions
+
+        async with self._dispatch_lock:
+            self._accepting()
+            executions = PlanExecutions(self.store)
+            for delivery in await asyncio.to_thread(executions.pending):
+                if self._closing:
+                    return
+                if len(self._workers) >= self.max_concurrent or any(w.spec.project_id == delivery["project_id"] for w in self._workers.values()):
+                    continue
+                try:
+                    prepared = await asyncio.to_thread(executions.prepare, delivery["execution_id"], delivery["task_id"])
+                    if prepared is None:
+                        continue
+                    spec, binding = prepared
+                    context = await asyncio.to_thread(self.store.context_snapshot, spec.project_id, spec.task_id)
+                    if context["task"]["type"] not in self.supported_task_types:
+                        raise RunConflict("Configured native adapter does not support this planned task type")
+                    await asyncio.to_thread(self.workspaces.validate, spec.project_id, binding)
+                    if self.control_root.resolve().is_relative_to(Path(binding.workspace)):
+                        raise WorkspaceChanged("Repository contains runtime control state")
+                    run, admitted = await asyncio.to_thread(self.store.admit_once, spec, binding=binding)
+                    if admitted or (run.status == "queued" and run.attempt_id is None and (run.issue is None or run.issue.get("code") == "capacity")):
+                        await self._schedule(run)
+                except (RunConflict, RunNotFound, ValueError) as error:
+                    await asyncio.to_thread(executions.note_issue, delivery["execution_id"], delivery["task_id"], type(error).__name__)
 
     async def preview_remote(self, project_id, local_run_id, target_ref, base_ref):
         """Query the configured adapter for a readonly destination observation; no run or write authority is admitted."""

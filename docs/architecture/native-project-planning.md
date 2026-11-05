@@ -1,7 +1,7 @@
 # Planificación nativa de proyectos
 
-Estado: inicio, propuesta y aceptación conectados. El despacho del trabajo aprobado
-y la retirada integral de los motores antiguos son el siguiente bloque principal.
+Estado: inicio, propuesta y aceptación conectados. El [despacho aprobado](accepted-plan-execution.md)
+se incorporó después de este contrato. Sigue pendiente la retirada integral de motores antiguos.
 
 ```mermaid
 flowchart LR

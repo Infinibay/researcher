@@ -157,3 +157,19 @@ El mapa anterior sigue siendo histórico para los demás consumidores. Autonomí
 orchestrator, flows específicos y CLI/TUI aún requieren despacho/control sobre el
 dueño nuevo. La existencia del plan no demuestra exclusión física de writers
 legacy ni cierre científico/visual. [Contrato](native-project-planning.md).
+
+
+## Despacho aprobado y handoffs conectados — 2026-11-05
+
+La decisión owner separada del plan usa RuntimeService y entregas persistidas,
+con causa/destino/contexto y resultados aceptados originales. Los snapshots de
+investigación entran en el input del siguiente agente con fuentes y límites.
+Correcciones invalidan el grafo autorizado, incluyendo resultados ya entregados;
+Stop pausa antes de retirar intentos. Reinicio no reenvía prompts emitidos.
+
+Esto sustituye el recorrido nuevo de coordinación del grafo, sin migrar todavía
+los productores antiguos TakeTask/TaskFlowHandler/orchestrator/AgentLoop/listeners,
+flows/CLI/TUI ni todos sus resultados de dominio. No se afirma exclusión global.
+El siguiente bloque debe cortar esos consumidores con capacidades reales y
+recuperación/reautorización; no más pulido de publicación/planificación.
+[Contrato y límites](accepted-plan-execution.md).

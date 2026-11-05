@@ -13,7 +13,15 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Verificación actual
 
-La entrada de proyecto ya inicia planificación nativa y la revisión del plan aparece
+La planificación y el despacho aprobado del grafo usan ahora el mismo runtime.
+La entrega al siguiente agente conserva resultados aceptados, fuentes y límites;
+Stop/reinicio/correcciones conservan la identidad original.8casos nuevos,86frontend,
+100del wheel aislado y8estados browser pasan en los alcances registrados. El
+recorrido físico usa generación/Ken controlados. Sigue fallando la inversa42 frente
+a esquemas posteriores y falta el cutover legacy; no hay suite global actual verde.
+[Contrato](../architecture/accepted-plan-execution.md), [resultados](plan-execution-results.json).
+
+Etapa anterior de planificación: La entrada de proyecto ya inicia planificación nativa y la revisión del plan aparece
 en Tareas. Propuesta y aceptación son operaciones distintas; aceptar crea un grafo
 pendiente y no ejecuta agentes. Premisas cambiadas invalidan la autoridad del plan
 y sus hijos. Pasan94 backend,100 del wheel,83 frontend/build y nueve estados del

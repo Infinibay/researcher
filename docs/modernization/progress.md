@@ -5973,3 +5973,75 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
   handoffs through same runtime; migrate actual competing legacy consumers.
   Do not re-audit publication or polish planning panel. DD009/010 retain UI and
   lifecycle details for later. Goal active, no global completion/percentage.
+
+
+## 2026-11-05 — accepted-plan execution and causal handoffs (base4aa61ec)
+- Previous goal turn: progress (explicit macro-first policy durably saved). This
+  continuation committed native planning4aa61ec, then implemented the next MAIN
+  capability: separate exact owner execution, durable ready deliveries, same
+  RuntimeService native workers and causal prerequisite handoffs. No second model
+  loop, inferred acceptance, peer-chat activation or auto code publication.
+- Authorization manifest freezes accepted plan/repository/nodes/context/edges.
+  Delivery prepared before admission; original run link and receipt atomic.
+  Same-key retries return original IDs; attempts already issued/uncertain/failed/
+  stopped never replayed by coordinator. Restart schedules only queued originals
+  with no attempt. Existing capacity/quota/native profile/closure still apply.
+- Typed work.request binds original owner cause, actor/task/context and accepted
+  prerequisites; complete research reports/sources/limits enter frozen native input.
+  No silent evidence truncation; big complete input may block before generation.
+  Code prerequisites currently transfer candidate identities/not-published limit;
+  full candidate reading/adoption between code tasks remains integration work.
+- Ruling: graph-wide conservative invalidation inside one authorized plan, not
+  all projects. Root-cause test demonstrated closed child could be accepted after
+  source context changed. Added transactional context/fence/grant/question
+  invalidation and attributed tool-evidence revisions so existing acceptance and
+  publication boundaries reject obsolete consumers. Branch-selective scope later;
+  costs independent branches their previous authorization after a correction.
+- Ruling: one original execution per accepted plan, no silent successor/adoption.
+  Corrected-graph reauthorization and lineage to recovery/manual successor runs
+  are MAIN pending work with consumer cutover, not a claim engine complete.
+- Pause state durable before withdrawal, project Stop pauses before run enumeration.
+  Historical pause receipt cannot cancel new work after another durable resume.
+  Strict paired-owner API excludes actor/prompt/grant/arbitrary task/proof inputs.
+  Tasks explains distinct accept/execute, simple dependency example, result state
+  and physical closure; saved execute/control packets survive loss/reload.
+- RED4 missing execution module→GREEN4 storage; service restart RED timeout→GREEN;
+  stale closed consumer acceptance RED (did not raise)→GREEN after context trigger;
+  execution HTTP RED404→GREEN. Initial implementation used joined run row as
+  binding DTO; actual binding-table columns differ, corrected original lookup.
+  Existing prerequisite gate supplied a stronger failure than test regex expected;
+  widened regex only, retained authority/no-acceptance evidence assertions.
+  Frontend RED3 missing API→GREEN3 exact packet/foreign receipt/corruption cases.
+- Source broad117cases:115PASS,2FAIL. Public-dev failure was exact advertised-types
+  assertion still expecting3; added plan to expected list, full module10PASS120.93s
+  including actual development/check/review/acceptance. Other failure is existing
+  test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history[frozen_author]
+  (inverse42 refuses later schemas43–48), DD003; guard not weakened/fixed in this block.
+  Core final7PASS3.97s;8new including separate owned physical chain test.
+- Owned integration actual broker/kernel/Git/SQLite/profile closure, controlled
+  generation/Ken:3original turns (plan/research/code), owner accepted research before
+  child starts, original source137 intact, code candidate private and unaccepted,
+  all registered peers closed. No real model/user repo mutation.
+- Wheel initial100PASS1knownFAIL reproduced inverse; final selected100PASS with
+  that one case explicitly excluded/documented,353backend imports only extracted
+  wheel,744matchingPython/SQL payloads. Initial source/wheel failures preserved in
+  result receipts; no global green claim. Frontend86PASS/TS+Vite buildPASS; existing
+  warnings deferred; generated tracked tsbuildinfo restored.
+- Browser actual API/scheduler/SQLite/React with explicitly synthetic generation/
+  closure:8states1440/390px,0pageerrors/overflow/Axe in header/panel.2identical
+  executePOSTs and2identical pausePOSTs after loss/reload leave1authorization,
+  1original child canceled,0dependent runs. Images01/04/08 visually inspected.
+  Current selected Tasks style retained;0/12whole-page acceptance unchanged.
+- English docstrings58Python and14TS named definitions/modules. Ruff and diff
+  checks pass. Contract/results/package/browser report, dashboard/coverage/status
+  and deferred details updated. One docs patch failed verification (partial
+  expected line), no files written; corrected focused patch, no lost work.
+- Browser closed in finally. Server125589 verified exact script and cwd, SIGINT;
+  handle71358terminal130. Source88026terminal1 (reported failures), current public
+  41087terminal0, package48786terminal0, frontend21331terminal0, core72313terminal0.
+  No old live handle inferred from files. No push/merge/deploy. Goal remains active.
+- Next MAIN BLOCK: actual autonomy/orchestrator/flow/claims/messages/CLI/TUI cutover
+  through native owner, delivery recovery/successors and corrected-graph
+  reauthorization. Preserve full roles/tools/prompts/books/evals/interaction,
+  remote recovery remaining,6web routes/12page acceptance,43scenarios/inherited
+  failures, install/restore/inverses and final fresh review. Stop panel polish.

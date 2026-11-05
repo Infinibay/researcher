@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-05",
+  "base_commit": "4aa61ec",
+  "status": "explicit_accepted_plan_dispatch_and_causal_handoffs_connected_legacy_cutover_and_reauthorization_pending",
+  "new_backend_cases": 8,
+  "directed_initial": {
+    "total": 117,
+    "passed": 115,
+    "failures": [
+      "backend.tests.runtime.test_code_acceptance::test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history[frozen_author]",
+      "backend.tests.runtime.test_public_development::test_owner_http_develops_checks_reviews_and_accepts_exact_candidate"
+    ],
+    "skipped": 0,
+    "sha256": "92cf9d06cb2ff0eae4893fa213407f227cca0fea69ef7aac71cc8b84df774184"
+  },
+  "public_development_after_expected_plan_type_update": {
+    "total": 10,
+    "passed": 10,
+    "failures": [],
+    "skipped": 0,
+    "sha256": "1e3ffd3836081b149d20bcb67f270aabeaa112ea97f4e2ce867a81b6d7695526"
+  },
+  "known_remaining_failure": "backend.tests.runtime.test_code_acceptance::test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history[frozen_author]",
+  "failure_explanation": "Inverse42 intentionally refuses later schemas43\u201348. Still pending DD003; guard was not weakened. Other initial failure expected only3tasktypes before planning was added; updated exact list to include plan and all10 public development cases passed.",
+  "owned_chain": {
+    "passed": true,
+    "native_dispatches": 3,
+    "generation": "Controlled; no real model inference",
+    "ken_command": "Controlled fixture",
+    "physical": "Actual owned controller/broker/kernel/Git/SQLite/source-readonly/private-development/closure",
+    "source_value_after": "137",
+    "code_acceptance_or_publication": false
+  },
+  "frontend": {
+    "passed": 86,
+    "failed": 0,
+    "build": "TypeScript/Vite passed; existing warnings deferred"
+  },
+  "browser": {
+    "states": 8,
+    "execution_posts": 2,
+    "pause_posts": 2,
+    "authorizations": 1,
+    "original_child_runs": 1,
+    "dependent_runs": 0,
+    "page_errors": [],
+    "axe_violations": 0,
+    "horizontal_overflow": false,
+    "generation_and_peer_closure": "Explicitly synthetic, separate from owned physical chain",
+    "evidence": "docs/design/audits/2026-11-05-plan-execution/evidence.json"
+  },
+  "package": "docs/modernization/plan-execution-packaging.json",
+  "python_documented_definitions_or_modules": 58,
+  "typescript_documented_definitions_or_modules": 14,
+  "implemented": [
+    "Separate exact owner manifest execution decision; one persistent original task delivery and immutable causal handoff per node, atomic native admission/link and original receipt",
+    "Same RuntimeService owns deterministic readiness, capacity/quota/native workers; no model orchestration loop or text-triggered activation",
+    "Current accepted prerequisite result identity, complete immutable research snapshots/sources/limitations enter exact frozen native input; no hidden truncation",
+    "Changed premise pauses/fences/revokes/versions all nodes in the authorized graph; obsolete closed consumer acceptance rejected; no automatic impact on other projects",
+    "Durable pause/project Stop before peer withdrawal; recover only unattempted queued original runs; failed/cancelled/uncertain attempts never replayed by coordinator",
+    "Strict owner HTTP and Tasks controls; exact execute/pause/resume packets persist across loss/reload"
+  ],
+  "limits": [
+    "One original execution per accepted plan; corrected-graph reauthorization and explicit delivery lineage to recovered/manual successor runs remain next main-block work",
+    "Graph-wide conservative invalidation; branch-selective scope and independent-node priority scheduling remain deferred",
+    "Code prerequisites currently transfer acceptance/head/tree/diff identities and explicit not-published limitation; complete candidate reading/adoption across code tasks remains integration work",
+    "Legacy autonomy/orchestrator/flows/tools/CLI/TUI still compete and require actual migration; known local registration check is not global physical legacy writer exclusion",
+    "Large complete predecessor snapshots can exceed native input budget and block before inference; no silent truncation; windowed handoff evidence reads remain future capability",
+    "No real model/prompt quality/human comprehension evaluation, full-page acceptance, current global-suite green, full host install or migration-inverse completion"
+  ]
+}

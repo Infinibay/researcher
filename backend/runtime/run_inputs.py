@@ -87,6 +87,10 @@ def conversation_history(conn, row):
 
 
 def freeze_input(conn, row, context):
+    """Freeze complete original task/history and typed prerequisite delivery; reject oversize material without hidden omission."""
+    # Input validation belongs to the owning store before this renderer; reading
+    # its immutable packet here preserves the exact original causal material.
+    delivery = conn.execute("SELECT h.packet_json FROM runtime_plan_handoffs h JOIN runtime_plan_deliveries d ON d.id=h.delivery_id WHERE d.run_id=?", (row["id"],)).fetchone()
     payload = {
         "schema_version": 1,
         **context,
@@ -102,6 +106,7 @@ def freeze_input(conn, row, context):
             "name": row["bound_repository_name"],
         },
         "conversation": conversation_history(conn, row),
+        "work_delivery": json.loads(delivery["packet_json"]) if delivery else None,
     }
     encoded = json.dumps(
         payload,

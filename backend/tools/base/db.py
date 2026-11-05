@@ -460,6 +460,12 @@ def ensure_migrations(db_path: str | None = None, *, existing_only: bool = False
             resource = Path(__file__).resolve().parents[2] / "db/project_planning_schema.sql"
             apply_sql_resource(conn, resource)
             logger.info("Migration 47: native project planning")
+        if 48 not in applied:
+            from backend.db.migrations import apply_sql_resource
+
+            resource = Path(__file__).resolve().parents[2] / "db/plan_execution_schema.sql"
+            apply_sql_resource(conn, resource)
+            logger.info("Migration 48: accepted-plan execution deliveries")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()

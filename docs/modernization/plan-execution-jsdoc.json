@@ -1,0 +1,90 @@
+{
+  "base_commit": "4aa61ec",
+  "scope": "New plan execution API/UI modules and relevant named declarations. Changed existing owner store/TaskWorkspace reuse established JSDoc; not a whole repository audit.",
+  "definitions_or_modules": 14,
+  "missing": [],
+  "entries": [
+    {
+      "path": "frontend/src/api/planExecution.ts",
+      "name": "<module>",
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/planExecution.ts",
+      "name": "WorkDelivery",
+      "line": 6,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/planExecution.ts",
+      "name": "ExecutionState",
+      "line": 8,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/planExecution.ts",
+      "name": "ExecutionAction",
+      "line": 10,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/planExecution.ts",
+      "name": "ExecutionReceipt",
+      "line": 12,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/planExecution.ts",
+      "name": "parse",
+      "line": 15,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/planExecution.ts",
+      "name": "prepareExecutionAction",
+      "line": 19,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/planExecution.ts",
+      "name": "matchesExecutionReceipt",
+      "line": 21,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/planExecution.ts",
+      "name": "executionState",
+      "line": 23,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/planExecution.ts",
+      "name": "sendExecutionAction",
+      "line": 25,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/components/tasks/PlanExecution.tsx",
+      "name": "<module>",
+      "documented": true
+    },
+    {
+      "path": "frontend/src/components/tasks/PlanExecution.tsx",
+      "name": "PlanExecution",
+      "line": 11,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/components/tasks/PlanExecution.tsx",
+      "name": "resolved",
+      "line": 16,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/components/tasks/PlanExecution.tsx",
+      "name": "submit",
+      "line": 20,
+      "documented": true
+    }
+  ]
+}

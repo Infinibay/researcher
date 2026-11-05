@@ -1161,6 +1161,9 @@ class SQLiteRunStore:
                 intent,
                 {"run_id": run_id},
             )
+            from backend.planning.execution import PlanExecutions
+
+            PlanExecutions(self).attach(conn, spec, run_id)
             self._event(
                 conn,
                 spec.project_id,
@@ -1438,6 +1441,9 @@ class SQLiteRunStore:
                 CodePublications(self).current(conn, row)
         else:
             self._task(conn, row["project_id"], row["task_id"])
+            from backend.planning.execution import PlanExecutions
+
+            PlanExecutions(self).input(conn, row)
             if conn.execute("SELECT 1 FROM runtime_project_plan_requests WHERE run_id=?", (row["id"],)).fetchone():
                 from backend.planning.store import ProjectPlans
 

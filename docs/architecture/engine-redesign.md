@@ -3,9 +3,9 @@
 Estado: investigación, desarrollo/revisión/publicación y planificación nativa
 conectados al runtime Codex/Ken. La ruta web de inicio de proyecto usa ahora una
 tarea de planificación y aceptación explícita del grafo; no arranca CrewAI.
-[Contrato y límites](native-project-planning.md). Despacho del trabajo aprobado,
-comunicación tipada y cutover de autonomía/orchestrator/demás flows/CLI/TUI siguen
-pendientes. No hay otro loop LLM en el coordinador nuevo.
+[Planificación](native-project-planning.md). El [despacho aprobado y los handoffs](accepted-plan-execution.md)
+usan el mismo servicio y evidencia aceptada. Cutover de autonomía/orchestrator/flows/CLI/TUI,
+comunicación explicativa y recuperación/reautorización siguen pendientes. No hay otro loop LLM.
 
 ## Un dueño por decisión
 
