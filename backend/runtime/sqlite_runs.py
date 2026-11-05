@@ -5,6 +5,8 @@ model, mint a business grant, prove remote job termination or publish. Owner
 acceptance is a distinct version-checked transaction over explicit delivered results.
 """
 
+from backend.runtime.task_profiles import DOCUMENTARY_TASK_TYPES
+
 import hashlib
 import json
 import time
@@ -479,7 +481,7 @@ class SQLiteRunStore:
                 context["review"] = review
             development = row["execution_kind"] == "development"
             code_review = row["execution_kind"] == "code_review"
-            expected_types = ("code", "bug_fix") if development or code_review else ("research",) if row["execution_kind"] == "finding_review" else ("research", "plan")
+            expected_types = ("code", "bug_fix") if development or code_review else DOCUMENTARY_TASK_TYPES if row["execution_kind"] == "finding_review" else (*DOCUMENTARY_TASK_TYPES, "plan")
             if context["task"]["type"] not in expected_types:
                 raise RunConflict("Task type changed before input reservation")
             if development:
@@ -497,6 +499,8 @@ class SQLiteRunStore:
 
                 view = CodeReviews(self).execution_view(conn,row)
                 context["execution"] = {"kind":"code_review", "repository_id":view.source.repository_id, "head_sha":view.head_sha, "tree_sha":view.tree_sha, "subject_sha256":view.subject_sha256, "workspace":"/run/researcher-source", "workspace_access":"readonly", "acceptance":"not_granted", "publication":"not_granted"}
+            if context["task"]["type"] == "investigation" and row["execution_kind"] == "research":
+                context["execution"] = {"kind": "investigation", "methodology": "scope_gather_organize_summarize", "workspace_access": "readonly", "acceptance": "not_granted", "publication": "not_granted"}
             frozen = freeze_input(conn, row, context)
             if (
                 len(frozen.input_text.encode())

@@ -311,7 +311,8 @@ class ProgressEvalHandler(EventHandler):
 class ReworkHandler(EventHandler):
     """Handles task_rejected events -> rework by the assigned developer/researcher."""
 
-    def execute(self, event: dict[str, Any]) -> None:
+    def execute(self, event: dict[str, Any]) -> dict[str, Any] | None:
+        """Return an owner hint for migrated/native work before any legacy claim or inference."""
         from backend.agents.registry import get_agent_by_role
         from backend.engine import get_engine
         from backend.flows.helpers import (
@@ -330,6 +331,13 @@ class ReworkHandler(EventHandler):
         if task_id is None:
             logger.warning("ReworkHandler: no task_id in payload for event %d", event["id"])
             return
+
+        from backend.runtime.legacy_handoff import legacy_event_handoff
+
+        handoff = legacy_event_handoff(project_id, task_id)
+        if handoff is not None:
+            logger.info("Legacy event %s is an owner handoff for task %s; no work authorized", event["id"], task_id)
+            return handoff
 
         task = get_task_by_id(task_id)
         if not task:

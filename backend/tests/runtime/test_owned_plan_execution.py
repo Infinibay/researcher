@@ -9,9 +9,11 @@ import pytest
 from backend.tests.runtime.test_owned_factory import owned_config as owned_config  # noqa: PLC0414 -- shared physical runtime fixture.
 
 
+@pytest.mark.parametrize("root_type", ["research", "investigation"])
 @pytest.mark.timeout(180)
 async def test_owned_accepted_plan_dispatches_root_then_exact_evidence_to_private_development(
     owned_config,
+    root_type,
 ):
     """One original owner execution sends three native turns total: planner, researcher and developer; only owner-accepted research wakes its dependent and no code is accepted or published."""
     from backend.api.main import create_app
@@ -22,6 +24,15 @@ async def test_owned_accepted_plan_dispatches_root_then_exact_evidence_to_privat
     from backend.tests.runtime.test_result_acceptance import accept
 
     c = owned_config
+    if root_type == "investigation":
+        from pathlib import Path
+
+        fixture = Path(c.settings["codex_binary"])
+        original = fixture.read_text()
+        assert original.count('"type": "research",') == 1
+        fixture.write_text(
+            original.replace('"type": "research",', '"type": "investigation",')
+        )
     await fixture_git(c.s.workspace, "init", "-q")
     await fixture_git(c.s.workspace, "add", "fact.txt")
     await fixture_git(
@@ -82,6 +93,45 @@ async def test_owned_accepted_plan_dispatches_root_then_exact_evidence_to_privat
         assert not runtime.store.task_runs(101, tasks[1])
         research_state = runtime.store.result_state(101, root.run_id)
         assert research_state["eligible"], research_state
+        if root_type == "investigation":
+            with runtime.store._transaction() as conn:
+                snapshot = json.loads(
+                    conn.execute(
+                        "SELECT snapshot_json FROM runtime_result_proposals WHERE run_id=?",
+                        (root.run_id,),
+                    ).fetchone()[0]
+                )
+                assert (
+                    snapshot["reports"][0]["investigation"]["areas"][1]["finding_ids"]
+                    == []
+                )
+                frozen = json.loads(
+                    conn.execute(
+                        "SELECT input_text FROM runtime_input_snapshots i JOIN runtime_attempts a ON a.id=i.attempt_id WHERE a.run_id=?",
+                        (root.run_id,),
+                    ).fetchone()[0]
+                )
+                assert frozen["execution"]["kind"] == "investigation"
+                assert frozen["execution"]["workspace_access"] == "readonly"
+                assert snapshot["scientific_confidence"] is None
+            threads = [
+                json.loads(p.read_text())
+                for p in c.s.control.glob("native-state/*/home/fixture-thread.json")
+            ]
+            author = next(
+                t
+                for t in threads
+                if any(
+                    tool["name"] == "researcher_investigation_summary"
+                    for tool in t["catalog"]
+                )
+            )
+            names = {tool["name"] for tool in author["catalog"]}
+            assert (
+                "researcher_report_write" not in names
+                and "researcher_review_decide" not in names
+            )
+            assert author["sandbox"] == "read-only"
         accept(
             SimpleNamespace(store=runtime.store),
             SimpleNamespace(run_id=root.run_id, context_version=root.context_version),
@@ -105,6 +155,10 @@ async def test_owned_accepted_plan_dispatches_root_then_exact_evidence_to_privat
             source = packet["work_delivery"]["prerequisites"][0]
             assert source["run_id"] == root.run_id
             assert "137" in json.dumps(source["snapshot"])
+            if root_type == "investigation":
+                assert source["snapshot"]["reports"][0]["investigation"][
+                    "scope_excludes"
+                ] == ["Repetir la medición original."]
             assert source["snapshot"]["limitations"] == [
                 "La medición original no se repitió; el cálculo es evidencia separada."
             ]

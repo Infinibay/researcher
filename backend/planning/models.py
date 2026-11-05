@@ -3,6 +3,8 @@
 import json
 import re
 
+from backend.runtime.task_profiles import DOCUMENTARY_TASK_TYPES
+
 
 def _text(value, name, maximum):
     """Require meaningful bounded UTF-8 content without silently truncating a planning premise."""
@@ -84,7 +86,7 @@ def validate_plan(packet, sources):
         if task["key"] in task_keys or task["epic_key"] not in epic_keys:
             raise ValueError("Duplicate task key or missing epic")
         task_keys.add(task["key"])
-        if task["type"] not in ("research", "code", "bug_fix"):
+        if task["type"] not in (*DOCUMENTARY_TASK_TYPES, "code", "bug_fix"):
             raise ValueError("Plan task type is not supported by the owned runtime")
         if type(task["priority"]) is not int or not 1 <= task["priority"] <= 5:
             raise ValueError("Invalid task priority")

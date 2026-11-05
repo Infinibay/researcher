@@ -15,7 +15,8 @@ logger = logging.getLogger(__name__)
 class ReviewHandler(EventHandler):
     """Handles review_ready events -> CodeReviewFlow or research peer review."""
 
-    def execute(self, event: dict[str, Any]) -> None:
+    def execute(self, event: dict[str, Any]) -> dict[str, Any] | None:
+        """Return an owner hint for migrated/native work before any legacy claim or inference."""
         from backend.flows.helpers import get_task_by_id, has_active_review_run
 
         payload = _parse_payload(event)
@@ -26,6 +27,13 @@ class ReviewHandler(EventHandler):
         if task_id is None:
             logger.warning("ReviewHandler: no task_id in payload for event %d", event["id"])
             return
+
+        from backend.runtime.legacy_handoff import legacy_event_handoff
+
+        handoff = legacy_event_handoff(project_id, task_id)
+        if handoff is not None:
+            logger.info("Legacy event %s is an owner handoff for task %s; no work authorized", event["id"], task_id)
+            return handoff
 
         if has_active_review_run(task_id):
             logger.info("ReviewHandler: review already active for task %d, skipping", task_id)
@@ -70,6 +78,11 @@ class ReviewHandler(EventHandler):
         import sqlite3
 
         def _claim(conn: sqlite3.Connection) -> bool:
+            """Reject owner-managed tasks before atomically recording a remaining legacy reviewer."""
+            from backend.runtime.lifecycle import require_legacy_task
+
+            conn.execute("BEGIN IMMEDIATE")
+            require_legacy_task(conn, task_id)
             cursor = conn.execute(
                 """UPDATE tasks SET reviewer = ?
                    WHERE id = ? AND status = 'review_ready'

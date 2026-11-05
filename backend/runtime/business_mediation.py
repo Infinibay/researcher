@@ -54,13 +54,14 @@ REVIEW_NAMES = frozenset(
         "researcher_review_read",
     }
 )
+INVESTIGATION_NAMES = (RESEARCH_NAMES - {"researcher_report_write"}) | {"researcher_investigation_summary"}
 BUSINESS_NAMES = RESEARCH_NAMES
 DEVELOPMENT_NAMES = RESEARCH_NAMES - {"researcher_result_propose"}
 CODE_REVIEW_NAMES = REVIEW_NAMES - {
     "researcher_review_subject",
     "researcher_review_decide",
 }
-ALL_BUSINESS_NAMES = RESEARCH_NAMES | REVIEW_NAMES
+ALL_BUSINESS_NAMES = RESEARCH_NAMES | REVIEW_NAMES | INVESTIGATION_NAMES
 
 
 def _failure(message):

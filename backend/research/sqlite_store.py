@@ -250,6 +250,7 @@ class SQLiteResearchStore:
             "source.capture": "sources.capture",
             "finding.record": "findings.write",
             "report.write": "reports.write",
+            "investigation.summary": "reports.write",
             "question.ask": "questions.ask",
             "wiki.write": "wiki.write",
             "review.record": "findings.review",
@@ -692,39 +693,47 @@ class SQLiteResearchStore:
             references.extend(dict(row) for row in rows)
         return references
 
-    def write_report(self, scope, key, draft: ReportDraft):
-        def apply(conn):
-            for finding_id in draft.finding_ids:
-                finding = self._finding(conn, scope.project_id, finding_id)
-                validate_report_finding(
-                    finding, self._evidence(conn, scope.project_id, [finding_id])
-                )
-            cursor = conn.execute(
-                "INSERT INTO artifacts(project_id,task_id,type,file_path,description,content) VALUES(?,?,'report','pending',?,?)",
-                (
-                    scope.project_id,
-                    scope.task_id,
-                    draft.report_type + ": " + draft.title,
-                    draft.markdown,
-                ),
+    def _insert_report(self, conn, scope, draft):
+        """Insert canonical draft/evidence rows inside the caller's already-authorized receipt transaction; shared by ordinary and exploratory reports."""
+        for finding_id in draft.finding_ids:
+            finding = self._finding(conn, scope.project_id, finding_id)
+            validate_report_finding(
+                finding, self._evidence(conn, scope.project_id, [finding_id])
             )
-            artifact_id = cursor.lastrowid
+        cursor = conn.execute(
+            "INSERT INTO artifacts(project_id,task_id,type,file_path,description,content) VALUES(?,?,'report','pending',?,?)",
+            (
+                scope.project_id,
+                scope.task_id,
+                draft.report_type + ": " + draft.title,
+                draft.markdown,
+            ),
+        )
+        artifact_id = cursor.lastrowid
+        conn.execute(
+            "UPDATE artifacts SET file_path=? WHERE id=?",
+            (f"reports/{artifact_id}.md", artifact_id),
+        )
+        conn.execute(
+            "INSERT INTO research_reports(artifact_id,title,report_type,status,content_sha256) VALUES(?,?,?,'draft',?)",
+            (artifact_id, draft.title, draft.report_type, _hash(draft.markdown)),
+        )
+        for finding_id in draft.finding_ids:
             conn.execute(
-                "UPDATE artifacts SET file_path=? WHERE id=?",
-                (f"reports/{artifact_id}.md", artifact_id),
+                "INSERT INTO report_findings(project_id,artifact_id,finding_id) VALUES(?,?,?)",
+                (scope.project_id, artifact_id, finding_id),
             )
-            conn.execute(
-                "INSERT INTO research_reports(artifact_id,title,report_type,status,content_sha256) VALUES(?,?,?,'draft',?)",
-                (artifact_id, draft.title, draft.report_type, _hash(draft.markdown)),
-            )
-            for finding_id in draft.finding_ids:
-                conn.execute(
-                    "INSERT INTO report_findings(project_id,artifact_id,finding_id) VALUES(?,?,?)",
-                    (scope.project_id, artifact_id, finding_id),
-                )
-            return {"artifact_id": artifact_id, "status": "draft", "title": draft.title}
+        return {"artifact_id": artifact_id, "status": "draft", "title": draft.title}
 
-        return self._write(scope, key, "report.write", asdict(draft), apply)
+    def write_report(self, scope, key, draft: ReportDraft):
+        """Persist an ordinary canonical report and its exact original writer receipt under the current scoped grant."""
+        return self._write(scope, key, "report.write", asdict(draft), lambda conn: self._insert_report(conn, scope, draft))
+
+    def write_investigation_summary(self, scope, key, draft):
+        """Persist a typed exploratory scope/area summary through the same report and receipt transaction, never a task acceptance."""
+        from backend.research.investigation import write_summary
+
+        return write_summary(self, scope, key, draft)
 
     def read_report(self, scope, artifact_id):
         with self._transaction() as conn:

@@ -484,6 +484,12 @@ def ensure_migrations(db_path: str | None = None, *, existing_only: bool = False
             resource = Path(__file__).resolve().parents[2] / "db/plan_reauthorization_schema.sql"
             apply_sql_resource(conn, resource)
             logger.info("Migration 51: corrected graph owner reauthorization")
+        if 52 not in applied:
+            from backend.db.migrations import apply_sql_resource
+
+            resource = Path(__file__).resolve().parents[2] / "db/investigation_schema.sql"
+            apply_sql_resource(conn, resource)
+            logger.info("Migration 52: exploratory investigation summaries")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()

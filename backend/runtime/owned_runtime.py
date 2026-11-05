@@ -27,6 +27,7 @@ from backend.runtime.broker_stdio import AsyncPeerBroker
 from backend.runtime.business_mediation import (
     CODE_REVIEW_NAMES,
     DEVELOPMENT_NAMES,
+    INVESTIGATION_NAMES,
     RESEARCH_NAMES,
     REVIEW_NAMES,
     BusinessTools,
@@ -42,6 +43,7 @@ from backend.runtime.egress_proxy import EgressPolicy
 from backend.runtime.execution_domain import ExecutionDomain
 from backend.runtime.git_capsule import GitAsset
 from backend.runtime.host_business import host_business
+from backend.runtime.investigation_instructions import INVESTIGATION_INSTRUCTIONS
 from backend.runtime.native_commands import broker_command_executor
 from backend.runtime.native_inference import (
     INSTRUCTIONS,
@@ -52,6 +54,7 @@ from backend.runtime.native_state import NativeState
 from backend.runtime.peer_broker import PeerBroker
 from backend.runtime.review_instructions import REVIEW_INSTRUCTIONS
 from backend.runtime.subscription_auth import ExternalChatGPTAuth
+from backend.runtime.task_profiles import NATIVE_TASK_TYPES
 from backend.runtime.workspaces import PEER_WORKSPACE
 
 
@@ -237,12 +240,7 @@ class OwnedInferenceSession(InferenceSession):
 class OwnedCodexRuntime:
     """Build subscription-only sessions with required Ken and host-owned private development views."""
 
-    supported_task_types: ClassVar[tuple[str, ...]] = (
-        "research",
-        "code",
-        "bug_fix",
-        "plan",
-    )
+    supported_task_types: ClassVar[tuple[str, ...]] = NATIVE_TASK_TYPES
     app: object
     research: object
     live_grants: object
@@ -402,6 +400,7 @@ class OwnedCodexRuntime:
         planning = (
             run.execution_kind == "research" and context["task"]["type"] == "plan"
         )
+        investigation = run.execution_kind == "research" and context["task"]["type"] == "investigation"
         development = run.execution_kind == "development"
         code_review = run.execution_kind == "code_review"
         expected_permissions = (
@@ -596,6 +595,8 @@ class OwnedCodexRuntime:
                                     if review is not None
                                     else PLANNING_INSTRUCTIONS
                                     if planning
+                                    else INVESTIGATION_INSTRUCTIONS
+                                    if investigation
                                     else INSTRUCTIONS
                                 ),
                                 sandbox="workspace-write"
@@ -619,6 +620,8 @@ class OwnedCodexRuntime:
                                         if code_review
                                         else REVIEW_NAMES
                                         if review is not None
+                                        else INVESTIGATION_NAMES
+                                        if investigation
                                         else RESEARCH_NAMES
                                     ),
                                 ) as peer,

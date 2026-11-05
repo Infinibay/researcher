@@ -1,0 +1,367 @@
+{
+  "base_commit": "2c8d64c",
+  "goal_status": "in_progress",
+  "capability": "Native scoped exploratory investigation with typed cited summary, existing independent review/owner acceptance/dependent dispatch and real legacy entry/claim cutover.",
+  "schema": 52,
+  "source": {
+    "passed": 51,
+    "failures": [],
+    "skipped": 0,
+    "case_seconds": 7.325
+  },
+  "source_excluded": [
+    "backend.tests.tools.test_task_tools.TestUpdateTaskStatusTool::test_invalid_transition"
+  ],
+  "source_excluded_evidence": "Observed old assertion expects invalid-transition wording; baseline failure ID also listed in docs/modernization/workspace-delivery-results.json. Underlying implementation/test unchanged. Not fixed or claimed globally green.",
+  "owned": {
+    "passed": 1,
+    "seconds": 38.6,
+    "skipped": 0,
+    "scope": "Actual configured runtime, broker/kernel/Git, planner/investigator/developer;3original controlled native dispatches, exact structured exploratory snapshot, owner acceptance gates dependent private edit, source137unchanged,0codeacceptance,peersclosed. Generation and Ken controlled; no real model inference.",
+    "log": "investigation-owned.log",
+    "final_extracted_wheel_case_seconds": 38.798
+  },
+  "wheel": {
+    "base_commit": "2c8d64c",
+    "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+    "wheel_sha256": "b4b9cb84f2657cc137a18b1b0335f1ae54fdd0005e6596de2de0b1c86c175626",
+    "observed": {
+      "tests_passed": 20,
+      "failures": [],
+      "skipped": 0,
+      "backend_modules_loaded": 353,
+      "backend_imports_only_from_wheel": true,
+      "model_turns": 0,
+      "actual_kernel_owned_fixture": true,
+      "generation_and_ken": "Controlled; fixture-account, no real subscription inference",
+      "network": "Disabled except Unix sockets",
+      "semantic_assets": "Explicit prepared pinned public offline assets outside wheel"
+    },
+    "backend_tree": {
+      "matching_source_files": 767,
+      "sha256": "0f7a1e4cdde0582788ef4e330ecfde6382481a328b2bfcf710037cf88d598f3b"
+    },
+    "bootstrap": "Python3.12 -I -S with explicit installed dependency path and original host venv prefix restored; backend import paths remain restricted to extracted wheel.",
+    "initial_broader_receipt": "docs/modernization/investigation-packaging-initial.json",
+    "validation_scope": "Final planner instruction update verified through directed planning/summary tests and actual owned kernel/Git from this extracted wheel. Broader238case initial receipt retained; all other backend bytes compared separately.",
+    "limits": "Extracted backend wheel plus installed dependencies and explicit prepared offline assets; not a clean full host installation or an inference-quality trial.",
+    "changes_since_broader_suite": {
+      "only_source_changed": "backend/planning/instructions.py",
+      "proof": "Replacing this entry in final wheel source manifest with base2c8d64c bytes exactly reproduces initial238case wheel tree SHA256. All other767entry manifest bytes identical.",
+      "current_checkout_matches_final_wheel": true
+    },
+    "initial_broader_suite_exclusions": "Legacy invalid-transition text assertion recorded in the prior global baseline also excluded. Development inverse40/41/42 tests refuse later schemas43\u201352: test_unused_review_inverse_preserves_closed_author_and_candidate, test_unused_native_review_inverse_preserves_existing_packet, test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history[frozen_author]. Prior terminal-owner source receipt observes these guards with schemas43\u201349; current52selected run excludes them. Inverses43\u201352 remain required; guard not weakened (DD003).",
+    "excluded_known_failure": [],
+    "case_seconds": 47.158,
+    "owned_case_seconds": 38.798
+  },
+  "migration": "Actual51\u219252 atomic failure injection rolls back metadata table and owner guards; successful repeated upgrade preserves historical done investigation and report; foreign keys checked. Inverses43\u201352/fullrestore remain pending.",
+  "python_documentation": {
+    "definitions": 83,
+    "missing": [],
+    "receipt": "docs/modernization/investigation-docstrings.json"
+  },
+  "lint": {
+    "base_commit": "2c8d64c",
+    "observed_total": 30,
+    "inherited_count": 28,
+    "introduced": [
+      {
+        "cell": null,
+        "code": "I001",
+        "end_location": {
+          "column": 64,
+          "row": 8
+        },
+        "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/api/models/research.py",
+        "fix": {
+          "applicability": "safe",
+          "edits": [
+            {
+              "content": "from typing import Annotated, Any, Literal\n\nfrom pydantic import BaseModel, ConfigDict, Field, model_validator\n\nfrom backend.research.investigation import InvestigationSummary\nfrom backend.research.papers import resolve_paper\n\n",
+              "end_location": {
+                "column": 1,
+                "row": 10
+              },
+              "location": {
+                "column": 1,
+                "row": 3
+              }
+            }
+          ],
+          "message": "Organize imports"
+        },
+        "location": {
+          "column": 1,
+          "row": 3
+        },
+        "message": "Import block is un-sorted or un-formatted",
+        "name": "unsorted-imports",
+        "noqa_row": 3,
+        "severity": "error",
+        "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+      },
+      {
+        "cell": null,
+        "code": "I001",
+        "end_location": {
+          "column": 82,
+          "row": 50
+        },
+        "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/api/routes/research.py",
+        "fix": {
+          "applicability": "safe",
+          "edits": [
+            {
+              "content": "import asyncio\nfrom typing import Literal\n\nfrom fastapi import APIRouter, FastAPI, Query, Request\nfrom fastapi.responses import JSONResponse\n\nfrom backend.api.models.questions import AskUser\nfrom backend.api.models.research import (\n    CapturePaper,\n    CaptureReference,\n    CaptureWeb,\n    CaptureWiki,\n    CaptureWikiCollection,\n    FindingDetail,\n    FindingReceipt,\n    ProposeResult,\n    RecordFinding,\n    RecordReview,\n    ReportReceipt,\n    ReportWindow,\n    SourceReceipt,\n    SourceWindow,\n    WriteInvestigationSummary,\n    WriteReport,\n    WriteWiki,\n)\nfrom backend.api.research_dependencies import Context\nfrom backend.research.models import (\n    EvidenceReference,\n    FindingDraft,\n    InvalidEvidence,\n    OperationConflict,\n    ReportDraft,\n    ResearchForbidden,\n    ResearchInputError,\n    ResearchNotFound,\n    ResultDraft,\n    ReviewCheck,\n    ReviewDecision,\n    SourceTooLarge,\n    SourceUnavailable,\n)\nfrom backend.research.provenance import (\n    intersecting_units,\n    provenance_summary,\n    structure_page,\n)\nfrom backend.research.retrieval_assets import RetrievalBusy, RetrievalUnavailable\n\n",
+              "end_location": {
+                "column": 1,
+                "row": 52
+              },
+              "location": {
+                "column": 1,
+                "row": 3
+              }
+            }
+          ],
+          "message": "Organize imports"
+        },
+        "location": {
+          "column": 1,
+          "row": 3
+        },
+        "message": "Import block is un-sorted or un-formatted",
+        "name": "unsorted-imports",
+        "noqa_row": 3,
+        "severity": "error",
+        "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+      }
+    ],
+    "remaining": [
+      {
+        "path": "backend/api/models/research.py",
+        "code": "I001",
+        "line": 3,
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/api/routes/research.py",
+        "code": "I001",
+        "line": 3,
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/autonomy/handlers/misc_handlers.py",
+        "code": "I001",
+        "line": 135,
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/autonomy/handlers/misc_handlers.py",
+        "code": "BLE001",
+        "line": 151,
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/autonomy/handlers/misc_handlers.py",
+        "code": "I001",
+        "line": 170,
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/autonomy/handlers/misc_handlers.py",
+        "code": "I001",
+        "line": 239,
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/autonomy/handlers/misc_handlers.py",
+        "code": "I001",
+        "line": 280,
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/autonomy/handlers/misc_handlers.py",
+        "code": "I001",
+        "line": 467,
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/autonomy/handlers/review_handlers.py",
+        "code": "I001",
+        "line": 77,
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/autonomy/handlers/review_handlers.py",
+        "code": "I001",
+        "line": 100,
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/autonomy/handlers/review_handlers.py",
+        "code": "S110",
+        "line": 112,
+        "message": "`try`-`except`-`pass` detected, consider logging the exception"
+      },
+      {
+        "path": "backend/autonomy/handlers/review_handlers.py",
+        "code": "BLE001",
+        "line": 112,
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/autonomy/handlers/review_handlers.py",
+        "code": "I001",
+        "line": 118,
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/autonomy/handlers/review_handlers.py",
+        "code": "BLE001",
+        "line": 134,
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/autonomy/handlers/review_handlers.py",
+        "code": "I001",
+        "line": 164,
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/autonomy/handlers/review_handlers.py",
+        "code": "F401",
+        "line": 171,
+        "message": "`backend.flows.helpers.update_task_status` imported but unused"
+      },
+      {
+        "path": "backend/autonomy/handlers/review_handlers.py",
+        "code": "BLE001",
+        "line": 187,
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/autonomy/handlers/task_handlers.py",
+        "code": "SIM102",
+        "line": 43,
+        "message": "Use a single `if` statement instead of nested `if` statements"
+      },
+      {
+        "path": "backend/autonomy/handlers/task_handlers.py",
+        "code": "I001",
+        "line": 98,
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/autonomy/handlers/task_handlers.py",
+        "code": "I001",
+        "line": 114,
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/autonomy/scavenger.py",
+        "code": "BLE001",
+        "line": 311,
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/flows/main_project_flow.py",
+        "code": "I001",
+        "line": 14,
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/flows/main_project_flow.py",
+        "code": "F401",
+        "line": 18,
+        "message": "`typing.Any` imported but unused"
+      },
+      {
+        "path": "backend/flows/main_project_flow.py",
+        "code": "F401",
+        "line": 44,
+        "message": "`backend.flows.flow_helpers._pause_agent_loops` imported but unused"
+      },
+      {
+        "path": "backend/flows/main_project_flow.py",
+        "code": "F401",
+        "line": 47,
+        "message": "`backend.flows.state_models.TaskType` imported but unused"
+      },
+      {
+        "path": "backend/runtime/sqlite_runs.py",
+        "code": "I001",
+        "line": 8,
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/runtime/sqlite_runs.py",
+        "code": "I001",
+        "line": 1431,
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/runtime/sqlite_runs.py",
+        "code": "I001",
+        "line": 1531,
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tools/task/take_task.py",
+        "code": "UP035",
+        "line": 4,
+        "message": "`typing.Type` is deprecated, use `type` instead"
+      },
+      {
+        "path": "backend/tools/task/take_task.py",
+        "code": "UP006",
+        "line": 29,
+        "message": "Use `type` instead of `Type` for type annotation"
+      }
+    ]
+  },
+  "defects_reproduced_and_fixed": [
+    "Actual old InvestigationFlow attempted LoopEngine inference before migration. Now pure scoped read-only handoff.",
+    "Legacy review/rework started review or returned no owner action; scavenger reoffered owner tasks and main flow launched old worker. Four RED\u2192GREEN consumer cases.",
+    "Task claim/done SQL on an unadmitted investigation now refused by schema52; actual owner acceptance still completes it."
+  ],
+  "human_communication": "Typed summary states scope, included/excluded work, area evidence, unknown method, limits and next steps. Prompt distinguishes user statement/example/observed evidence/assumption and allows correction; no claim of measured human comprehension.",
+  "ui_scope": "Existing task/report controls and canonical Markdown; no new UI implementation, no new concept images or browser acceptance claimed.",
+  "deferred_details": [
+    "DD003 inverses/restore52",
+    "DD017 localization, handoff pagination and style warnings"
+  ],
+  "full_goal_remaining": [
+    "Other legacy domain outcomes, claims/listeners/AgentLoop and global physical writer exclusion",
+    "Manual drafts/candidates and retained-code complete publication/recovery scenario",
+    "Web endpoint binding and advanced terminal parity",
+    "Remote Forgejo and recovery gaps",
+    "All prompt/book/model/scientific/human evaluation",
+    "6remaining web routes;18of36desktop and6of12mobile concepts;0of12pages fully accepted",
+    "43broad scenarios; global known failures; clean host installation/restore/inverses; final fresh whole-branch review"
+  ],
+  "authorization": "Local worktree only; no push, merge, deploy or new subagents.",
+  "wheel_initial_broader": {
+    "base_commit": "2c8d64c",
+    "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+    "wheel_sha256": "44abcd98ed408ca85d61f06877158e4956b9669f7dd59026ef0e800d586494ae",
+    "observed": {
+      "tests_passed": 238,
+      "failures": [],
+      "skipped": 0,
+      "backend_modules_loaded": 405,
+      "backend_imports_only_from_wheel": true,
+      "model_turns": 0,
+      "network": "Disabled except Unix sockets",
+      "semantic_assets": "Explicit prepared pinned public offline assets outside wheel"
+    },
+    "backend_tree": {
+      "matching_source_files": 767,
+      "sha256": "8ffe100830736ea300180cf8df8f6dd41c776d3f40102788bb4ec6587ceb5df6"
+    },
+    "bootstrap": "Python3.12 -I -S with explicit installed dependency path and original host venv prefix restored; backend import paths remain restricted to extracted wheel.",
+    "excluded_known_failure": "Legacy invalid-transition text assertion recorded in the prior global baseline also excluded. Development inverse40/41/42 tests refuse later schemas43\u201352: test_unused_review_inverse_preserves_closed_author_and_candidate, test_unused_native_review_inverse_preserves_existing_packet, test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history[frozen_author]. Prior terminal-owner source receipt observes these guards with schemas43\u201349; current52selected run excludes them. Inverses43\u201352 remain required; guard not weakened (DD003).",
+    "limits": "Extracted backend wheel plus installed dependencies and explicit prepared offline assets; not a clean full host installation or an inference-quality trial."
+  },
+  "final_verification": "20cases including actual owned kernel/Git run pass in final extracted wheel after planner instruction correction; initial broader238case wheel retained, only source delta verified as planning instructions."
+}

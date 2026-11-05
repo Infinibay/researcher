@@ -314,11 +314,14 @@ class Scavenger:
     def _find_orphan_tasks(
         self, sql: str, params: tuple[Any, ...]
     ) -> list[dict[str, Any]]:
-        """Run a query and return list of dicts."""
+        """Find legacy candidates only; native-owned work is not a missing legacy event."""
 
         def _query(conn: sqlite3.Connection) -> list[dict[str, Any]]:
+            """Filter scoped query candidates against the actual native ownership boundary."""
             rows = conn.execute(sql, params).fetchall()
-            return [dict(r) for r in rows]
+            from backend.runtime.legacy_handoff import native_owner_handoff
+
+            return [dict(row) for row in rows if native_owner_handoff(conn, self.project_id, row["id"]) is None]
 
         try:
             return execute_with_retry(_query)

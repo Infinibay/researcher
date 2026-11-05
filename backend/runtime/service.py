@@ -36,6 +36,7 @@ from backend.runtime.contracts import (
 from backend.runtime.peer_registry import AttemptPeers
 from backend.runtime.recovery import RunRecovery
 from backend.runtime.sqlite_questions import SQLiteQuestionStore
+from backend.runtime.task_profiles import DOCUMENTARY_TASK_TYPES
 from backend.runtime.workspaces import WorkspaceRegistry
 
 __all__ = ["RuntimeService", "WorkspaceRegistry"]
@@ -590,7 +591,7 @@ class RuntimeService:
                     "code_publication",
                     "remote_publication",
                 )
-                else ("research", "plan")
+                else (*DOCUMENTARY_TASK_TYPES, "plan")
             )
             if (
                 context["task"]["type"] not in expected_types
@@ -927,9 +928,9 @@ class RuntimeService:
             expected_types = (
                 ("code", "bug_fix")
                 if code_review or development
-                else ("research",)
+                else DOCUMENTARY_TASK_TYPES
                 if current_run.execution_kind == "finding_review"
-                else ("research", "plan")
+                else (*DOCUMENTARY_TASK_TYPES, "plan")
             )
             context = await asyncio.to_thread(
                 self.store.context_snapshot, slot.spec.project_id, slot.spec.task_id

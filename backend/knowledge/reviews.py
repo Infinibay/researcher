@@ -16,6 +16,7 @@ from backend.research.models import (
     ResearchNotFound,
     positive_id,
 )
+from backend.runtime.task_profiles import DOCUMENTARY_TASK_TYPES
 
 
 def canonical(value):
@@ -439,7 +440,7 @@ def finding_review_state(conn, project_id, finding_id, *, after_id=0, limit=20):
     ).fetchone()
     task_active = (
         task["status"] not in ("done", "cancelled", "failed")
-        and task["type"] == "research"
+        and task["type"] in DOCUMENTARY_TASK_TYPES
     )
     return {
         "project_id": project_id,

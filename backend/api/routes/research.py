@@ -23,6 +23,7 @@ from backend.api.models.research import (
     SourceReceipt,
     SourceWindow,
     WriteReport,
+    WriteInvestigationSummary,
     WriteWiki,
 )
 from backend.api.research_dependencies import Context
@@ -451,6 +452,12 @@ def report_write(command: WriteReport, ctx: Context):
         report_type=command.report_type,
     )
     return ctx.store.write_report(ctx.scope, command.operation_key, draft)
+
+
+@router.post("/investigation-summaries", status_code=201)
+def investigation_summary_write(command: WriteInvestigationSummary, ctx: Context):
+    """Persist typed scope/area evidence and ordinary Markdown report in one fenced receipt transaction, without accepting work."""
+    return ctx.store.write_investigation_summary(ctx.scope, command.operation_key, command.summary)
 
 
 @router.get("/reports/{artifact_id}", response_model=ReportWindow)

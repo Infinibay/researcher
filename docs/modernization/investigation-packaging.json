@@ -1,0 +1,34 @@
+{
+  "base_commit": "2c8d64c",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "b4b9cb84f2657cc137a18b1b0335f1ae54fdd0005e6596de2de0b1c86c175626",
+  "observed": {
+    "tests_passed": 20,
+    "failures": [],
+    "skipped": 0,
+    "backend_modules_loaded": 353,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "actual_kernel_owned_fixture": true,
+    "generation_and_ken": "Controlled; fixture-account, no real subscription inference",
+    "network": "Disabled except Unix sockets",
+    "semantic_assets": "Explicit prepared pinned public offline assets outside wheel"
+  },
+  "backend_tree": {
+    "matching_source_files": 767,
+    "sha256": "0f7a1e4cdde0582788ef4e330ecfde6382481a328b2bfcf710037cf88d598f3b"
+  },
+  "bootstrap": "Python3.12 -I -S with explicit installed dependency path and original host venv prefix restored; backend import paths remain restricted to extracted wheel.",
+  "initial_broader_receipt": "docs/modernization/investigation-packaging-initial.json",
+  "validation_scope": "Final planner instruction update verified through directed planning/summary tests and actual owned kernel/Git from this extracted wheel. Broader238case initial receipt retained; all other backend bytes compared separately.",
+  "limits": "Extracted backend wheel plus installed dependencies and explicit prepared offline assets; not a clean full host installation or an inference-quality trial.",
+  "changes_since_broader_suite": {
+    "only_source_changed": "backend/planning/instructions.py",
+    "proof": "Replacing this entry in final wheel source manifest with base2c8d64c bytes exactly reproduces initial238case wheel tree SHA256. All other767entry manifest bytes identical.",
+    "current_checkout_matches_final_wheel": true
+  },
+  "initial_broader_suite_exclusions": "Legacy invalid-transition text assertion recorded in the prior global baseline also excluded. Development inverse40/41/42 tests refuse later schemas43\u201352: test_unused_review_inverse_preserves_closed_author_and_candidate, test_unused_native_review_inverse_preserves_existing_packet, test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history[frozen_author]. Prior terminal-owner source receipt observes these guards with schemas43\u201349; current52selected run excludes them. Inverses43\u201352 remain required; guard not weakened (DD003).",
+  "excluded_known_failure": [],
+  "case_seconds": 47.158,
+  "owned_case_seconds": 38.798
+}

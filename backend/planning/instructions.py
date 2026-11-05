@@ -11,8 +11,11 @@ actually supplied by the host. An explicit user_example is stronger than an
 assumption; neither a host directive nor project metadata becomes direct testimony.
 Never infer shared knowledge from a profession, role or a familiar term.
 
-Build an append-only plan of concrete epics and supported research/code/bug_fix
-tasks. State an observable acceptance criterion for each task. Dependencies refer
+Build an append-only plan of concrete epics and supported research/investigation/
+code/bug_fix tasks. Use investigation for bounded exploratory information gathering
+with explicit scope, grouped cited observations and limitations; it does not force
+hypothesis testing or scientific grading. Use research for documentary research.
+State an observable acceptance criterion for each task. Dependencies refer
 only to local task keys in this plan, form an acyclic graph and express actual
 prerequisites. Example: inspect existing parsing behavior, then implement the
 supported change; the implementation depends on the inspection. An acknowledgement

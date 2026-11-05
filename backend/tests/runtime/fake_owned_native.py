@@ -17,6 +17,7 @@ for arg in args:
         config.update(tomllib.loads(next(args)))
 steps = 0
 source = finding = job = report = None
+investigation_mode = False
 planning_mode = False
 plan_material = None
 review_mode = False
@@ -105,6 +106,40 @@ def next_tool(response=None):
                 "topic": "fixture",
                 "content": "Inspected a synthetic attachment; calculation200 is separate execution evidence.",
                 "evidence": [{"source_id": source, "quote": "Fixture base 137 units."}],
+            },
+        )
+    elif steps == 6 and investigation_mode:
+        call(
+            "researcher_investigation_summary",
+            {
+                "operation_key": "report",
+                "summary": {
+                    "title": "Fixture investigation",
+                    "question": "¿Qué cuenta consta y qué sigue sin verificarse?",
+                    "scope_includes": [
+                        "Inspeccionar la fuente aportada y ejecutar un cálculo separado."
+                    ],
+                    "scope_excludes": ["Repetir la medición original."],
+                    "areas": [
+                        {
+                            "title": "Cuenta documentada",
+                            "observations": "La fuente registra 137 unidades; el cálculo separado da 200.",
+                            "finding_ids": [finding],
+                        },
+                        {
+                            "title": "Método de medición",
+                            "observations": "No se aportó un protocolo de medición.",
+                            "finding_ids": [],
+                        },
+                    ],
+                    "conclusion": "Se verificó el texto, no la medición original.",
+                    "limitations": [
+                        "La medición original no se repitió; el cálculo es evidencia separada."
+                    ],
+                    "next_steps": [
+                        "Obtener el protocolo si la decisión requiere verificar la medición."
+                    ],
+                },
             },
         )
     elif steps == 6:
@@ -588,6 +623,10 @@ for line in sys.stdin:
                 "stderr": output.stderr,
             }
     elif method == "thread/start":
+        investigation_mode = any(
+            tool["name"] == "researcher_investigation_summary"
+            for tool in params["dynamicTools"]
+        )
         planning_mode = any(
             tool["name"] == "researcher_plan_propose" for tool in params["dynamicTools"]
         )
@@ -607,6 +646,7 @@ for line in sys.stdin:
                 {
                     "model": params["model"],
                     "cwd": params["cwd"],
+                    "sandbox": params.get("sandbox"),
                     "catalog": params["dynamicTools"],
                     "developer_instructions": params.get("developerInstructions"),
                 }

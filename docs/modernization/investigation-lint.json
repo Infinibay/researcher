@@ -1,0 +1,259 @@
+{
+  "base_commit": "2c8d64c",
+  "observed_total": 30,
+  "inherited_count": 28,
+  "introduced": [
+    {
+      "cell": null,
+      "code": "I001",
+      "end_location": {
+        "column": 64,
+        "row": 8
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/api/models/research.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "from typing import Annotated, Any, Literal\n\nfrom pydantic import BaseModel, ConfigDict, Field, model_validator\n\nfrom backend.research.investigation import InvestigationSummary\nfrom backend.research.papers import resolve_paper\n\n",
+            "end_location": {
+              "column": 1,
+              "row": 10
+            },
+            "location": {
+              "column": 1,
+              "row": 3
+            }
+          }
+        ],
+        "message": "Organize imports"
+      },
+      "location": {
+        "column": 1,
+        "row": 3
+      },
+      "message": "Import block is un-sorted or un-formatted",
+      "name": "unsorted-imports",
+      "noqa_row": 3,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+    },
+    {
+      "cell": null,
+      "code": "I001",
+      "end_location": {
+        "column": 82,
+        "row": 50
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/api/routes/research.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "import asyncio\nfrom typing import Literal\n\nfrom fastapi import APIRouter, FastAPI, Query, Request\nfrom fastapi.responses import JSONResponse\n\nfrom backend.api.models.questions import AskUser\nfrom backend.api.models.research import (\n    CapturePaper,\n    CaptureReference,\n    CaptureWeb,\n    CaptureWiki,\n    CaptureWikiCollection,\n    FindingDetail,\n    FindingReceipt,\n    ProposeResult,\n    RecordFinding,\n    RecordReview,\n    ReportReceipt,\n    ReportWindow,\n    SourceReceipt,\n    SourceWindow,\n    WriteInvestigationSummary,\n    WriteReport,\n    WriteWiki,\n)\nfrom backend.api.research_dependencies import Context\nfrom backend.research.models import (\n    EvidenceReference,\n    FindingDraft,\n    InvalidEvidence,\n    OperationConflict,\n    ReportDraft,\n    ResearchForbidden,\n    ResearchInputError,\n    ResearchNotFound,\n    ResultDraft,\n    ReviewCheck,\n    ReviewDecision,\n    SourceTooLarge,\n    SourceUnavailable,\n)\nfrom backend.research.provenance import (\n    intersecting_units,\n    provenance_summary,\n    structure_page,\n)\nfrom backend.research.retrieval_assets import RetrievalBusy, RetrievalUnavailable\n\n",
+            "end_location": {
+              "column": 1,
+              "row": 52
+            },
+            "location": {
+              "column": 1,
+              "row": 3
+            }
+          }
+        ],
+        "message": "Organize imports"
+      },
+      "location": {
+        "column": 1,
+        "row": 3
+      },
+      "message": "Import block is un-sorted or un-formatted",
+      "name": "unsorted-imports",
+      "noqa_row": 3,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+    }
+  ],
+  "remaining": [
+    {
+      "path": "backend/api/models/research.py",
+      "code": "I001",
+      "line": 3,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/api/routes/research.py",
+      "code": "I001",
+      "line": 3,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/autonomy/handlers/misc_handlers.py",
+      "code": "I001",
+      "line": 135,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/autonomy/handlers/misc_handlers.py",
+      "code": "BLE001",
+      "line": 151,
+      "message": "Do not catch blind exception: `Exception`"
+    },
+    {
+      "path": "backend/autonomy/handlers/misc_handlers.py",
+      "code": "I001",
+      "line": 170,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/autonomy/handlers/misc_handlers.py",
+      "code": "I001",
+      "line": 239,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/autonomy/handlers/misc_handlers.py",
+      "code": "I001",
+      "line": 280,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/autonomy/handlers/misc_handlers.py",
+      "code": "I001",
+      "line": 467,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/autonomy/handlers/review_handlers.py",
+      "code": "I001",
+      "line": 77,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/autonomy/handlers/review_handlers.py",
+      "code": "I001",
+      "line": 100,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/autonomy/handlers/review_handlers.py",
+      "code": "S110",
+      "line": 112,
+      "message": "`try`-`except`-`pass` detected, consider logging the exception"
+    },
+    {
+      "path": "backend/autonomy/handlers/review_handlers.py",
+      "code": "BLE001",
+      "line": 112,
+      "message": "Do not catch blind exception: `Exception`"
+    },
+    {
+      "path": "backend/autonomy/handlers/review_handlers.py",
+      "code": "I001",
+      "line": 118,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/autonomy/handlers/review_handlers.py",
+      "code": "BLE001",
+      "line": 134,
+      "message": "Do not catch blind exception: `Exception`"
+    },
+    {
+      "path": "backend/autonomy/handlers/review_handlers.py",
+      "code": "I001",
+      "line": 164,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/autonomy/handlers/review_handlers.py",
+      "code": "F401",
+      "line": 171,
+      "message": "`backend.flows.helpers.update_task_status` imported but unused"
+    },
+    {
+      "path": "backend/autonomy/handlers/review_handlers.py",
+      "code": "BLE001",
+      "line": 187,
+      "message": "Do not catch blind exception: `Exception`"
+    },
+    {
+      "path": "backend/autonomy/handlers/task_handlers.py",
+      "code": "SIM102",
+      "line": 43,
+      "message": "Use a single `if` statement instead of nested `if` statements"
+    },
+    {
+      "path": "backend/autonomy/handlers/task_handlers.py",
+      "code": "I001",
+      "line": 98,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/autonomy/handlers/task_handlers.py",
+      "code": "I001",
+      "line": 114,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/autonomy/scavenger.py",
+      "code": "BLE001",
+      "line": 311,
+      "message": "Do not catch blind exception: `Exception`"
+    },
+    {
+      "path": "backend/flows/main_project_flow.py",
+      "code": "I001",
+      "line": 14,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/flows/main_project_flow.py",
+      "code": "F401",
+      "line": 18,
+      "message": "`typing.Any` imported but unused"
+    },
+    {
+      "path": "backend/flows/main_project_flow.py",
+      "code": "F401",
+      "line": 44,
+      "message": "`backend.flows.flow_helpers._pause_agent_loops` imported but unused"
+    },
+    {
+      "path": "backend/flows/main_project_flow.py",
+      "code": "F401",
+      "line": 47,
+      "message": "`backend.flows.state_models.TaskType` imported but unused"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "code": "I001",
+      "line": 8,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "code": "I001",
+      "line": 1431,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "code": "I001",
+      "line": 1531,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/tools/task/take_task.py",
+      "code": "UP035",
+      "line": 4,
+      "message": "`typing.Type` is deprecated, use `type` instead"
+    },
+    {
+      "path": "backend/tools/task/take_task.py",
+      "code": "UP006",
+      "line": 29,
+      "message": "Use `type` instead of `Type` for type annotation"
+    }
+  ]
+}

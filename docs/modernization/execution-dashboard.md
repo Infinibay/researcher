@@ -9,7 +9,40 @@ Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: adopción explícita de grafos corregidos
+## Etapa actual: investigación exploratoria y entradas antiguas
+
+**Resultado:** `investigation` produce un resumen tipado de alcance, áreas con
+hallazgos citados, límites y siguientes pasos. Usa el propietario y despacho
+existentes, Ken y sandbox de lectura. Conserva revisión documental independiente y
+aceptación explícita; sólo después libera el trabajo dependiente.
+
+Las entradas reales de InvestigationFlow, TaskFlowHandler, TakeTask, revisión y
+retrabajo devuelven una indicación owner con referencias originales. MainProjectFlow
+termina ese despacho sin evaluar progreso ni declarar completo el proyecto; el
+scavenger no lo vuelve a ofrecer. No se inicia otro loop ni se reclama esa tarea.
+
+**Verificación:**51backend dirigidas y238del paquete inicial pasan;4casos conocidos
+excluidos explícitamente. Tras actualizar las instrucciones del planificador,
+20casos del wheel final —incluido el recorrido con kernel/Git— pasan sin omisiones.
+Se comprobó que ése es el único archivo cambiado entre ambos paquetes. Broker/kernel/Git real: planificación→
+investigación→aceptación→desarrollo privado dependiente,3turnos originales con
+generación/Ken controlados, fuente137intacta,0aceptaciones de código.405imports sólo
+del wheel inicial y353del final;767fuentes Python/SQL coincidentes; import exploratorio sin inicializar
+LoopEngine/MainProjectFlow. Migración51→52 atómica y repetible conserva registros
+históricos;83definiciones documentadas.28avisos Ruff heredados y2I001 nuevos quedan
+anotados enDD017. Sin inferencia real ni evaluación de comprensión humana; no se
+afirma suite global verde o aceptación visual nueva. [Resultados](investigation-results.json),
+[paquete](investigation-packaging.json), [contrato](../architecture/native-investigation.md).
+
+**Siguiente bloque principal:** migrar los resultados propios de investigación
+científica y sus consumidores, preservando métodos/evidencias y revisión, sin otro
+loop LLM. Continuar por los demás tipos y las entradas de AgentLoop/listeners hasta
+cerrar la exclusión física global legacy. Adopción de drafts/candidatos, interfaz,
+comunicación/evaluaciones y todos los demás requisitos del plan siguen pendientes.
+No volver sobre detalles secundarios del resumen o del handoff en esta pasada.
+
+## Etapa anterior: adopción explícita de grafos corregidos
+
 
 **Resultado:** las correcciones de tarea o proyecto pueden adoptarse mediante otra
 decisión exacta del propietario, conservando plan, aceptación y autorización
@@ -29,7 +62,7 @@ documentadas. DosI001heredados del store se conservan comoDD016; sin suite globa
 verde ni evaluación real de prompting/comprensión. [Resultados](plan-reauthorization-results.json),
 [paquete](plan-reauthorization-packaging.json), [contrato](../architecture/corrected-graph-reauthorization.md).
 
-**Siguiente bloque principal:** migrar los consumidores reales de flows/autonomía,
+**Siguiente bloque previsto entonces (histórico):** migrar los consumidores reales de flows/autonomía,
 claims/listeners y herramientas al único owner, preservando resultados de dominio.
 Empezar por el recorrido de investigación exploratoria y su admisión/claims nativos;
 comprobar las entradas actuales antes de cortar el consumidor legacy. No otra

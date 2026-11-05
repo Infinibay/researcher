@@ -5,6 +5,7 @@ from typing import Annotated, Any, Literal
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from backend.research.papers import resolve_paper
+from backend.research.investigation import InvestigationSummary
 
 Identity = Annotated[int, Field(strict=True, gt=0)]
 
@@ -24,6 +25,12 @@ class ProposeResult(Command):
     report_ids: list[Identity] = Field(min_length=1, max_length=20)
     summary: str = Field(min_length=1, max_length=12000)
     limitations: list[str] = Field(min_length=1, max_length=20)
+
+
+class WriteInvestigationSummary(Command):
+    """Typed exploratory content only; project, task, author and permissions come from the live native grant."""
+
+    summary: InvestigationSummary
 
 
 class CaptureReference(Command):

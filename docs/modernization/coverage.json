@@ -3141,6 +3141,23 @@
         "Manual drafts/unaccepted-run and private candidate file adoption, remaining domain task types, integral retained code review/acceptance/publication scenarios.",
         "Full prompts/books/evals/science/human understanding,6remaining web routes/0of12pages fully accepted,43broad scenarios, current global failures/clean install/restore/inverses43\u201351/final fresh review."
       ]
+    },
+    "native_exploratory_investigation": {
+      "status": "typed_summary_review_acceptance_dependencies_and_exploratory_legacy_handoff_connected_other_domains_and_global_exclusion_pending",
+      "evidence": [
+        "backend/research/investigation.py",
+        "backend/runtime/legacy_handoff.py",
+        "backend/runtime/task_profiles.py",
+        "backend/runtime/investigation_instructions.py",
+        "backend/planning/instructions.py",
+        "backend/db/investigation_schema.sql",
+        "backend/flows/investigation_flow.py",
+        "backend/tests/runtime/test_investigation.py",
+        "backend/tests/runtime/test_owned_plan_execution.py",
+        "docs/architecture/native-investigation.md",
+        "docs/modernization/investigation-results.json",
+        "docs/modernization/investigation-packaging.json"
+      ]
     }
   }
 }

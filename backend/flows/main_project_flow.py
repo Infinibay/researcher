@@ -703,7 +703,7 @@ class MainProjectFlow(Flow[ProjectState]):
     def _launch_pending_tasks(self) -> str:
         """Launch up to max_concurrent_tasks sub-flows and wait for any to finish.
 
-        Returns "no_pending_tasks" or "task_completed" as routing signals.
+        Returns "native_owner_required", "no_pending_tasks" or "task_completed"; an owner handoff ends dispatch without evaluating project completion.
         """
         self.state.current_step = "check_and_launch_tasks"
         save_snapshot(self.state.project_id, "main_project_flow", "check_and_launch_tasks", self.state)
@@ -719,7 +719,29 @@ class MainProjectFlow(Flow[ProjectState]):
         available_slots = self.state.max_concurrent_tasks - len(self.state.running_task_ids)
         pending = get_pending_tasks(self.state.project_id)
         pending = [t for t in pending if t["id"] not in self.state.running_task_ids]
+        from backend.runtime.legacy_handoff import legacy_event_handoff
+
+        handed_off = []
+        legacy_pending = []
+        for task in pending:
+            handoff = legacy_event_handoff(self.state.project_id, task["id"])
+            if handoff is None:
+                legacy_pending.append(task)
+            else:
+                handed_off.append(handoff)
         self.state.total_tasks = len(pending) + len(self.state.running_task_ids)
+        pending = legacy_pending
+        if handed_off:
+            log_flow_event(
+                self.state.project_id, "native_owner_handoff", "main_project_flow",
+                "project", self.state.project_id,
+                {"tasks": handed_off, "local_execution_closed": False,
+                 "next_action": "Stop the registered legacy project before authorizing native work in the task workspace."},
+            )
+        if handed_off and not pending and not self.state.running_task_ids:
+            self.state.current_step = "native_owner_required"
+            save_snapshot(self.state.project_id, "main_project_flow", "native_owner_required", self.state)
+            return "native_owner_required"
 
         if not pending and not self.state.running_task_ids:
             logger.info("MainProjectFlow: no pending or running tasks")
@@ -805,13 +827,13 @@ class MainProjectFlow(Flow[ProjectState]):
             elif task_type == "investigation":
                 from backend.flows.investigation_flow import InvestigationFlow
                 flow = InvestigationFlow()
-                flow.kickoff(inputs={
+                handoff = flow.kickoff(inputs={
                     "project_id": self.state.project_id,
                     "task_id": task_id,
                 })
                 log_flow_event(
-                    self.state.project_id, "investigation_flow_completed",
-                    "main_project_flow", "task", task_id,
+                    self.state.project_id, "native_owner_handoff",
+                    "main_project_flow", "task", task_id, handoff,
                 )
             elif task_type in dev_types:
                 from backend.flows.development_flow import DevelopmentFlow
@@ -853,6 +875,10 @@ class MainProjectFlow(Flow[ProjectState]):
         task = get_task_by_id(task_id)
         if task is None:
             return False
+        from backend.runtime.legacy_handoff import legacy_event_handoff
+
+        if legacy_event_handoff(task["project_id"], task_id) is not None:
+            return False  # Not tracked by this legacy dispatcher; no physical-closure claim.
         return task.get("status") in ("in_progress", "pending", "review_ready", "backlog")
 
     # ── Completion check ──────────────────────────────────────────────────

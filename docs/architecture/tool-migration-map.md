@@ -193,3 +193,22 @@ con4turnos controlados originales y sin merge. Esto no retira AgentLoop,
 MainProjectFlow/demás flows, claims, herramientas ni listeners globales. Tampoco
 completa recuperación/sucesores, reautorización ni paridad terminal avanzada.
 [Contrato](terminal-owner-client.md), [migración](../modernization/terminal-owner.md).
+
+
+## Investigación exploratoria y entradas antiguas — 2026-11-05
+
+El resultado `investigation` ya tiene un recorrido nativo propio: alcance,
+recopilación, áreas con evidencias, resumen, límites, revisión documental y
+aceptación explícita. Reutiliza reportes y el despacho durable; no agrega un loop.
+La herramienta tipada sustituye `report_write` en el catálogo de su autor.
+
+`InvestigationFlow` es ahora una entrada de sólo lectura hacia el propietario.
+TaskFlowHandler/TakeTask, handlers de revisión/retrabajo, MainProjectFlow y
+scavenger dejan de reclamar o reofrecer investigación exploratoria y tareas con
+historial nativo. La indicación incluye proyecto/tarea reales y referencias
+originales; procesar el evento no completa la tarea ni autoriza otra ejecución.
+
+Este corte no retira todos los demás tipos de Flow/AgentLoop/listeners ni sus
+resultados de dominio. La investigación científica antigua conserva consumidores
+hasta migrar sus métodos y evaluaciones. El cierre físico global de writers sigue
+pendiente. [Contrato y prueba](native-investigation.md).

@@ -1,0 +1,589 @@
+{
+  "base_commit": "2c8d64c",
+  "changed_or_new_definitions_documented": 83,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/models/research.py",
+      "symbol": "WriteInvestigationSummary",
+      "line": 30,
+      "docstring": "Typed exploratory content only; project, task, author and permissions come from the live native grant.",
+      "file_sha256": "5b0a4335d649d0a98d75e65fe71babfa96833055541ce9ea25b04d0848447397"
+    },
+    {
+      "path": "backend/api/routes/research.py",
+      "symbol": "investigation_summary_write",
+      "line": 458,
+      "docstring": "Persist typed scope/area evidence and ordinary Markdown report in one fenced receipt transaction, without accepting work.",
+      "file_sha256": "cb579b912b763b9de1c1eba1593f449201fbd0dde4e8e87a3434b372262eab83"
+    },
+    {
+      "path": "backend/autonomy/handlers/misc_handlers.py",
+      "symbol": "ReworkHandler",
+      "line": 311,
+      "docstring": "Handles task_rejected events -> rework by the assigned developer/researcher.",
+      "file_sha256": "c350f350fa5ef97b21f88d88532e0d684b3fdf2db4a91c15d0de85e7b9905f5a"
+    },
+    {
+      "path": "backend/autonomy/handlers/misc_handlers.py",
+      "symbol": "ReworkHandler.execute",
+      "line": 314,
+      "docstring": "Return an owner hint for migrated/native work before any legacy claim or inference.",
+      "file_sha256": "c350f350fa5ef97b21f88d88532e0d684b3fdf2db4a91c15d0de85e7b9905f5a"
+    },
+    {
+      "path": "backend/autonomy/handlers/review_handlers.py",
+      "symbol": "ReviewHandler",
+      "line": 15,
+      "docstring": "Handles review_ready events -> CodeReviewFlow or research peer review.",
+      "file_sha256": "c1b76f63bd71b499b709e3cf05aca3018c528673bc1b76c7afa1cb3d378a6f25"
+    },
+    {
+      "path": "backend/autonomy/handlers/review_handlers.py",
+      "symbol": "ReviewHandler.execute",
+      "line": 18,
+      "docstring": "Return an owner hint for migrated/native work before any legacy claim or inference.",
+      "file_sha256": "c1b76f63bd71b499b709e3cf05aca3018c528673bc1b76c7afa1cb3d378a6f25"
+    },
+    {
+      "path": "backend/autonomy/handlers/review_handlers.py",
+      "symbol": "ReviewHandler._claim_review",
+      "line": 75,
+      "docstring": "Atomically claim a task for review. Returns True if this agent won.",
+      "file_sha256": "c1b76f63bd71b499b709e3cf05aca3018c528673bc1b76c7afa1cb3d378a6f25"
+    },
+    {
+      "path": "backend/autonomy/handlers/review_handlers.py",
+      "symbol": "ReviewHandler._claim_review._claim",
+      "line": 80,
+      "docstring": "Reject owner-managed tasks before atomically recording a remaining legacy reviewer.",
+      "file_sha256": "c1b76f63bd71b499b709e3cf05aca3018c528673bc1b76c7afa1cb3d378a6f25"
+    },
+    {
+      "path": "backend/autonomy/handlers/task_handlers.py",
+      "symbol": "TaskFlowHandler",
+      "line": 15,
+      "docstring": "Handles task_available and task_resume events.\n\nDispatches to DevelopmentFlow or ResearchFlow based on task type.",
+      "file_sha256": "a6ffe77f90c641a6fb7317185efc6c474eb7d2f1843e87ba4265a647e2e6474a"
+    },
+    {
+      "path": "backend/autonomy/handlers/task_handlers.py",
+      "symbol": "TaskFlowHandler.execute",
+      "line": 21,
+      "docstring": "Acknowledge owner-managed task hints without claiming them; dispatch remaining legacy tasks.",
+      "file_sha256": "a6ffe77f90c641a6fb7317185efc6c474eb7d2f1843e87ba4265a647e2e6474a"
+    },
+    {
+      "path": "backend/autonomy/handlers/task_handlers.py",
+      "symbol": "TaskFlowHandler._get_task_type",
+      "line": 96,
+      "docstring": "Look up the task type from the DB.",
+      "file_sha256": "a6ffe77f90c641a6fb7317185efc6c474eb7d2f1843e87ba4265a647e2e6474a"
+    },
+    {
+      "path": "backend/autonomy/handlers/task_handlers.py",
+      "symbol": "TaskFlowHandler._get_task_type._query",
+      "line": 101,
+      "docstring": "Read only the requested task inside its actual project.",
+      "file_sha256": "a6ffe77f90c641a6fb7317185efc6c474eb7d2f1843e87ba4265a647e2e6474a"
+    },
+    {
+      "path": "backend/autonomy/handlers/task_handlers.py",
+      "symbol": "TaskFlowHandler._claim_task",
+      "line": 112,
+      "docstring": "Atomically claim a task.",
+      "file_sha256": "a6ffe77f90c641a6fb7317185efc6c474eb7d2f1843e87ba4265a647e2e6474a"
+    },
+    {
+      "path": "backend/autonomy/handlers/task_handlers.py",
+      "symbol": "TaskFlowHandler._claim_task._claim",
+      "line": 117,
+      "docstring": "Check ownership and claim eligible legacy work under the same write lock.",
+      "file_sha256": "a6ffe77f90c641a6fb7317185efc6c474eb7d2f1843e87ba4265a647e2e6474a"
+    },
+    {
+      "path": "backend/autonomy/scavenger.py",
+      "symbol": "Scavenger",
+      "line": 28,
+      "docstring": "Scan for orphan tasks and create missing agent_events.",
+      "file_sha256": "c329a4581c98f5a5ccbf380cc05dcffedf6bbe478c7871175dfa90ddda93abc3"
+    },
+    {
+      "path": "backend/autonomy/scavenger.py",
+      "symbol": "Scavenger._find_orphan_tasks",
+      "line": 314,
+      "docstring": "Find legacy candidates only; native-owned work is not a missing legacy event.",
+      "file_sha256": "c329a4581c98f5a5ccbf380cc05dcffedf6bbe478c7871175dfa90ddda93abc3"
+    },
+    {
+      "path": "backend/autonomy/scavenger.py",
+      "symbol": "Scavenger._find_orphan_tasks._query",
+      "line": 319,
+      "docstring": "Filter scoped query candidates against the actual native ownership boundary.",
+      "file_sha256": "c329a4581c98f5a5ccbf380cc05dcffedf6bbe478c7871175dfa90ddda93abc3"
+    },
+    {
+      "path": "backend/flows/__init__.py",
+      "symbol": "__getattr__",
+      "line": 64,
+      "docstring": "Load the requested historical export only, preserving its original class/module identity.",
+      "file_sha256": "022fafdf2720bebb593d7f0af96856a24d1431c714ef46b210ca29c28be48dc2"
+    },
+    {
+      "path": "backend/flows/investigation_flow.py",
+      "symbol": "InvestigationFlow",
+      "line": 15,
+      "docstring": "Keep the old kickoff entry as a read-only bridge to explicit native admission.",
+      "file_sha256": "e92747b9478f7e542f8a6c6fd1c0b39d7b98e7858b44734b8f255918522cbc54"
+    },
+    {
+      "path": "backend/flows/investigation_flow.py",
+      "symbol": "InvestigationFlow.__init__",
+      "line": 18,
+      "docstring": "Retain a compatibility state object without initializing a legacy flow engine.",
+      "file_sha256": "e92747b9478f7e542f8a6c6fd1c0b39d7b98e7858b44734b8f255918522cbc54"
+    },
+    {
+      "path": "backend/flows/investigation_flow.py",
+      "symbol": "InvestigationFlow.kickoff",
+      "line": 22,
+      "docstring": "Validate actual project/task scope and return existing native references or the owner admission action.",
+      "file_sha256": "e92747b9478f7e542f8a6c6fd1c0b39d7b98e7858b44734b8f255918522cbc54"
+    },
+    {
+      "path": "backend/flows/main_project_flow.py",
+      "symbol": "MainProjectFlow",
+      "line": 56,
+      "docstring": "Orchestrates the complete project lifecycle using event-driven flows.",
+      "file_sha256": "892adaee0315549d63b11f23e16d9c75a874d1479425a7602bee7375069b7997"
+    },
+    {
+      "path": "backend/flows/main_project_flow.py",
+      "symbol": "MainProjectFlow._launch_pending_tasks",
+      "line": 703,
+      "docstring": "Launch up to max_concurrent_tasks sub-flows and wait for any to finish.\n\nReturns \"native_owner_required\", \"no_pending_tasks\" or \"task_completed\"; an owner handoff ends dispatch without evaluating project completion.",
+      "file_sha256": "892adaee0315549d63b11f23e16d9c75a874d1479425a7602bee7375069b7997"
+    },
+    {
+      "path": "backend/flows/main_project_flow.py",
+      "symbol": "MainProjectFlow._run_sub_flow",
+      "line": 806,
+      "docstring": "Run a sub-flow in a background thread and signal completion.",
+      "file_sha256": "892adaee0315549d63b11f23e16d9c75a874d1479425a7602bee7375069b7997"
+    },
+    {
+      "path": "backend/flows/main_project_flow.py",
+      "symbol": "MainProjectFlow._is_task_still_running",
+      "line": 872,
+      "docstring": "Check if a task is still in a running state.",
+      "file_sha256": "892adaee0315549d63b11f23e16d9c75a874d1479425a7602bee7375069b7997"
+    },
+    {
+      "path": "backend/knowledge/results.py",
+      "symbol": "_report",
+      "line": 94,
+      "docstring": "Verify selected report bytes and original writer intent before attributing its delivery.",
+      "file_sha256": "ae6f580a71c2c8606ad474c83c1ebb884d71751b9c5344887ce59a5d782e3a2a"
+    },
+    {
+      "path": "backend/knowledge/results.py",
+      "symbol": "snapshot",
+      "line": 198,
+      "docstring": "Capture only selected complete reports and their exact finding/source dependencies within a byte bound.",
+      "file_sha256": "ae6f580a71c2c8606ad474c83c1ebb884d71751b9c5344887ce59a5d782e3a2a"
+    },
+    {
+      "path": "backend/knowledge/reviews.py",
+      "symbol": "finding_review_state",
+      "line": 380,
+      "docstring": "Inspect an observed subject and page actual review attempts without auto-validation.",
+      "file_sha256": "10942f0cf9299ff458e5ce0d71ff7249ac0cf84d3473a37b8bfdd5c8d05cfa30"
+    },
+    {
+      "path": "backend/planning/execution.py",
+      "symbol": "PlanExecutions",
+      "line": 19,
+      "docstring": "Own an immutable original execution and explicit owner graph revisions; author results still require independent review and owner acceptance.",
+      "file_sha256": "8ab7da37f756c80ba69b00bfee922669e59f1a5957a87c2a05db0f0d348caa6f"
+    },
+    {
+      "path": "backend/planning/execution.py",
+      "symbol": "PlanExecutions._manifest",
+      "line": 85,
+      "docstring": "Capture current accepted plan, original repository and exact node contexts/edges, excluding operational status so accepting a result does not change the intent.",
+      "file_sha256": "8ab7da37f756c80ba69b00bfee922669e59f1a5957a87c2a05db0f0d348caa6f"
+    },
+    {
+      "path": "backend/planning/execution.py",
+      "symbol": "PlanExecutions.prepare",
+      "line": 463,
+      "docstring": "Freeze one ready original delivery before admission; unfinished dependencies and attempted deliveries stay pending/history without replay.",
+      "file_sha256": "8ab7da37f756c80ba69b00bfee922669e59f1a5957a87c2a05db0f0d348caa6f"
+    },
+    {
+      "path": "backend/planning/models.py",
+      "symbol": "validate_plan",
+      "line": 29,
+      "docstring": "Return a detached validated append-only plan; quotes must exist in attributed material, and every dependency must stay inside its DAG.",
+      "file_sha256": "a5977fa47b62a067bb01160ee32b0d70d3cb553a58791188ec22890edfeabe69"
+    },
+    {
+      "path": "backend/planning/tools.py",
+      "symbol": "TaskProposal",
+      "line": 41,
+      "docstring": "Supported task outcome, acceptance criteria and local prerequisites; no actor/claim/permission can be model selected.",
+      "file_sha256": "0d337029ba43c135b9b6beb81a12fd1b4af7aaf96acc50d6834a2b4e66c18f68"
+    },
+    {
+      "path": "backend/research/investigation.py",
+      "symbol": "InvestigationArea",
+      "line": 20,
+      "docstring": "Group actual finding references by an explicit area; an empty reference list identifies an unresolved area rather than fabricated evidence.",
+      "file_sha256": "0d7203a503ad3c28538d472be1f340f06144b97859c03f48207621ea8471ca7f"
+    },
+    {
+      "path": "backend/research/investigation.py",
+      "symbol": "InvestigationSummary",
+      "line": 29,
+      "docstring": "One bounded Scope/Gather/Organize/Summarize output; the author states limits and next steps without accepting work or grading scientific confidence.",
+      "file_sha256": "0d7203a503ad3c28538d472be1f340f06144b97859c03f48207621ea8471ca7f"
+    },
+    {
+      "path": "backend/research/investigation.py",
+      "symbol": "InvestigationSummary.bounded_report",
+      "line": 45,
+      "docstring": "Validate actual report constraints and full retained size before any write; never trim evidence silently.",
+      "file_sha256": "0d7203a503ad3c28538d472be1f340f06144b97859c03f48207621ea8471ca7f"
+    },
+    {
+      "path": "backend/research/investigation.py",
+      "symbol": "InvestigationSummary.report",
+      "line": 54,
+      "docstring": "Produce canonical Markdown and exact linked findings from the same typed summary used for provenance; no secondary synthesis model runs.",
+      "file_sha256": "0d7203a503ad3c28538d472be1f340f06144b97859c03f48207621ea8471ca7f"
+    },
+    {
+      "path": "backend/research/investigation.py",
+      "symbol": "write_summary",
+      "line": 95,
+      "docstring": "Atomically write the scoped typed summary, canonical report and one original receipt under the live native investigation author's grant.",
+      "file_sha256": "0d7203a503ad3c28538d472be1f340f06144b97859c03f48207621ea8471ca7f"
+    },
+    {
+      "path": "backend/research/investigation.py",
+      "symbol": "write_summary.apply",
+      "line": 102,
+      "docstring": "Keep report/metadata/receipt in the same owner transaction; a missing artifact cannot become a delivered result.",
+      "file_sha256": "0d7203a503ad3c28538d472be1f340f06144b97859c03f48207621ea8471ca7f"
+    },
+    {
+      "path": "backend/research/investigation.py",
+      "symbol": "verified_summary",
+      "line": 134,
+      "docstring": "Bind typed scope and canonical report to the actual original author operation; metadata words alone cannot label an arbitrary draft as an investigation result.",
+      "file_sha256": "0d7203a503ad3c28538d472be1f340f06144b97859c03f48207621ea8471ca7f"
+    },
+    {
+      "path": "backend/research/sqlite_store.py",
+      "symbol": "SQLiteResearchStore",
+      "line": 50,
+      "docstring": "Own scoped source/finding/report/wiki transactions, revocable grants and atomic effect receipts.",
+      "file_sha256": "3d1225cb35466fe1b3171486a887cc512ab22e81319a6118f7ce5662641f210b"
+    },
+    {
+      "path": "backend/research/sqlite_store.py",
+      "symbol": "SQLiteResearchStore._permission",
+      "line": 247,
+      "docstring": "Bind each supported mutation to its explicit stored grant capability.",
+      "file_sha256": "3d1225cb35466fe1b3171486a887cc512ab22e81319a6118f7ce5662641f210b"
+    },
+    {
+      "path": "backend/research/sqlite_store.py",
+      "symbol": "SQLiteResearchStore._insert_report",
+      "line": 696,
+      "docstring": "Insert canonical draft/evidence rows inside the caller's already-authorized receipt transaction; shared by ordinary and exploratory reports.",
+      "file_sha256": "3d1225cb35466fe1b3171486a887cc512ab22e81319a6118f7ce5662641f210b"
+    },
+    {
+      "path": "backend/research/sqlite_store.py",
+      "symbol": "SQLiteResearchStore.write_report",
+      "line": 728,
+      "docstring": "Persist an ordinary canonical report and its exact original writer receipt under the current scoped grant.",
+      "file_sha256": "3d1225cb35466fe1b3171486a887cc512ab22e81319a6118f7ce5662641f210b"
+    },
+    {
+      "path": "backend/research/sqlite_store.py",
+      "symbol": "SQLiteResearchStore.write_investigation_summary",
+      "line": 732,
+      "docstring": "Persist a typed exploratory scope/area summary through the same report and receipt transaction, never a task acceptance.",
+      "file_sha256": "3d1225cb35466fe1b3171486a887cc512ab22e81319a6118f7ce5662641f210b"
+    },
+    {
+      "path": "backend/runtime/business_definitions.py",
+      "symbol": "definitions",
+      "line": 72,
+      "docstring": "One canonical signature/schema and HTTP mapping for either transport.",
+      "file_sha256": "9bc4438dcff65b33a5786b7173ef316e0228b4d327db0f210985566eb6126038"
+    },
+    {
+      "path": "backend/runtime/business_definitions.py",
+      "symbol": "ResearchTools",
+      "line": 122,
+      "docstring": "Translate host-owned business tools to scoped HTTP without owning grants or inference.",
+      "file_sha256": "9bc4438dcff65b33a5786b7173ef316e0228b4d327db0f210985566eb6126038"
+    },
+    {
+      "path": "backend/runtime/business_definitions.py",
+      "symbol": "ResearchTools.researcher_investigation_summary",
+      "line": 426,
+      "docstring": "Persist one scoped exploratory report: question, included/excluded scope, observations grouped by area and exact finding IDs, conclusion, limits and proposed next steps. Unresolved areas may have no findings; the complete report needs cited evidence. This is a draft, not scientific confidence, owner acceptance or permission to execute next steps. Reuse operation_key after an uncertain reply.",
+      "file_sha256": "9bc4438dcff65b33a5786b7173ef316e0228b4d327db0f210985566eb6126038"
+    },
+    {
+      "path": "backend/runtime/legacy_handoff.py",
+      "symbol": "native_owner_handoff",
+      "line": 15,
+      "docstring": "Return an owner hint for migrated/native-owned tasks, or None for remaining legacy work; reject missing and foreign task scope.",
+      "file_sha256": "a22c6643678d81f8003ea6e5218f528ec9812ec701cad4b73aea45070fbb3257"
+    },
+    {
+      "path": "backend/runtime/legacy_handoff.py",
+      "symbol": "legacy_event_handoff",
+      "line": 56,
+      "docstring": "Resolve a legacy event in its project, without selecting agents or changing task state.",
+      "file_sha256": "a22c6643678d81f8003ea6e5218f528ec9812ec701cad4b73aea45070fbb3257"
+    },
+    {
+      "path": "backend/runtime/lifecycle.py",
+      "symbol": "require_legacy_task",
+      "line": 9,
+      "docstring": "Refuse legacy mutation/inference for migrated exploratory work and any task with native admission history.",
+      "file_sha256": "8323f8990d2a4a4d8d4a70941c8ddfe792b8f8a13d8f55c17c660a945540cc8b"
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedCodexRuntime",
+      "line": 240,
+      "docstring": "Build subscription-only sessions with required Ken and host-owned private development views.",
+      "file_sha256": "7a8a2d049b401295e6cc9cdb5443df941454cef3a81f3f12027d7e6d550abd0f"
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedCodexRuntime.open",
+      "line": 361,
+      "docstring": "Admit one original project attempt with required Ken and revocable peers.",
+      "file_sha256": "7a8a2d049b401295e6cc9cdb5443df941454cef3a81f3f12027d7e6d550abd0f"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService",
+      "line": 63,
+      "docstring": "Own native attempts and grant-bound tool closure before durable terminal states.",
+      "file_sha256": "c943f348be2571caeb6d77aba58379a013cef423559c4f709f350210df611d93"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._schedule",
+      "line": 568,
+      "docstring": "Schedule an admitted run once after checking its binding and execution profile.",
+      "file_sha256": "c943f348be2571caeb6d77aba58379a013cef423559c4f709f350210df611d93"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._execute",
+      "line": 915,
+      "docstring": "Own one admitted native turn, then prove peer/tool closure before finalizing it.",
+      "file_sha256": "c943f348be2571caeb6d77aba58379a013cef423559c4f709f350210df611d93"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore",
+      "line": 67,
+      "docstring": "Own durable admission, fenced attempts and version-bound review requests in SQLite.",
+      "file_sha256": "b4a87a875e9322c8df2a4c30e0258325638412e0cc7905cdbc1fdb9b78e3318d"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore.reserve_input",
+      "line": 429,
+      "docstring": "Atomically freeze host input and reserve its one non-replayable turn.",
+      "file_sha256": "b4a87a875e9322c8df2a4c30e0258325638412e0cc7905cdbc1fdb9b78e3318d"
+    },
+    {
+      "path": "backend/tests/runtime/fake_owned_native.py",
+      "symbol": "next_tool",
+      "line": 53,
+      "docstring": "Advance controlled author or reviewer generation while using the real admitted tool bridge.",
+      "file_sha256": "3e8a2864f45f4f84aa8abb9d3e0ee2147b3290e6fcfd5903c90ca1321eb008be"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_publications.py",
+      "symbol": "test_publication_request_is_immutable_and_startup_preserves_original_records",
+      "line": 131,
+      "docstring": "Normal startup installs the typed publication schema, keeps accepted provenance and prevents retargeting its immutable original request.",
+      "file_sha256": "4e1933a26da646ecab6e390b271355741de07ecbe6282921abb7668f55b5aa2e"
+    },
+    {
+      "path": "backend/tests/runtime/test_investigation.py",
+      "symbol": "investigation_state",
+      "line": 19,
+      "docstring": "Create one actual bound author and captured evidence under an explicitly admitted exploratory task.",
+      "file_sha256": "a5f9ec9952fe484e9931db161cfea1558afe8c21a80c5d59f1a804689abe735a"
+    },
+    {
+      "path": "backend/tests/runtime/test_investigation.py",
+      "symbol": "summary_packet",
+      "line": 67,
+      "docstring": "Describe one supported documentary observation and an unresolved area without fabricating another finding.",
+      "file_sha256": "a5f9ec9952fe484e9931db161cfea1558afe8c21a80c5d59f1a804689abe735a"
+    },
+    {
+      "path": "backend/tests/runtime/test_investigation.py",
+      "symbol": "test_typed_investigation_summary_is_idempotent_deliverable_and_owner_accepted",
+      "line": 92,
+      "docstring": "One structured summary preserves scope, grouped evidence and unknowns in report/result snapshots; only the existing owner decision completes the task.",
+      "file_sha256": "a5f9ec9952fe484e9931db161cfea1558afe8c21a80c5d59f1a804689abe735a"
+    },
+    {
+      "path": "backend/tests/runtime/test_investigation.py",
+      "symbol": "test_generic_report_cannot_bypass_exploratory_summary_contract",
+      "line": 154,
+      "docstring": "An investigation cannot masquerade as a typed scoped result by selecting an ordinary free-text report.",
+      "file_sha256": "a5f9ec9952fe484e9931db161cfea1558afe8c21a80c5d59f1a804689abe735a"
+    },
+    {
+      "path": "backend/tests/runtime/test_investigation.py",
+      "symbol": "test_legacy_investigation_entry_and_event_handoff_do_not_claim_or_start_work",
+      "line": 174,
+      "docstring": "The actual old flow/event entry now exposes owner admission, retaining historical reports and leaving task/result state unchanged.",
+      "file_sha256": "a5f9ec9952fe484e9931db161cfea1558afe8c21a80c5d59f1a804689abe735a"
+    },
+    {
+      "path": "backend/tests/runtime/test_investigation.py",
+      "symbol": "test_legacy_take_task_and_direct_completion_cannot_bypass_owner_investigation",
+      "line": 225,
+      "docstring": "Current legacy tools and raw legacy completion/claim statements cannot turn an unadmitted investigation into running or accepted work.",
+      "file_sha256": "a5f9ec9952fe484e9931db161cfea1558afe8c21a80c5d59f1a804689abe735a"
+    },
+    {
+      "path": "backend/tests/runtime/test_investigation.py",
+      "symbol": "test_legacy_review_and_rework_are_hints_not_authorization",
+      "line": 255,
+      "docstring": "Queued review/rejection messages cannot claim an investigator or create an automatic native review.",
+      "file_sha256": "a5f9ec9952fe484e9931db161cfea1558afe8c21a80c5d59f1a804689abe735a"
+    },
+    {
+      "path": "backend/tests/runtime/test_investigation.py",
+      "symbol": "test_legacy_scavenger_excludes_owner_only_and_native_owned_tasks",
+      "line": 284,
+      "docstring": "A documentary handoff must not be rediscovered as missing legacy work indefinitely.",
+      "file_sha256": "a5f9ec9952fe484e9931db161cfea1558afe8c21a80c5d59f1a804689abe735a"
+    },
+    {
+      "path": "backend/tests/runtime/test_investigation.py",
+      "symbol": "test_legacy_project_stops_dispatching_owner_only_work_without_evaluating_completion",
+      "line": 296,
+      "docstring": "Only-native pending work returns a distinct handoff route; it must not re-enter legacy progress inference or call the project complete.",
+      "file_sha256": "a5f9ec9952fe484e9931db161cfea1558afe8c21a80c5d59f1a804689abe735a"
+    },
+    {
+      "path": "backend/tests/runtime/test_investigation.py",
+      "symbol": "test_investigation_summary_keeps_original_intent_and_rejects_foreign_evidence",
+      "line": 318,
+      "docstring": "Retry changes, foreign evidence and metadata overwrites cannot manufacture a different original exploratory result.",
+      "file_sha256": "a5f9ec9952fe484e9931db161cfea1558afe8c21a80c5d59f1a804689abe735a"
+    },
+    {
+      "path": "backend/tests/runtime/test_investigation.py",
+      "symbol": "test_investigation_finding_uses_independent_versioned_review",
+      "line": 361,
+      "docstring": "The ordinary exact-subject review can inspect an exploratory summary without changing confidence, accepting the result or completing the task.",
+      "file_sha256": "a5f9ec9952fe484e9931db161cfea1558afe8c21a80c5d59f1a804689abe735a"
+    },
+    {
+      "path": "backend/tests/runtime/test_investigation.py",
+      "symbol": "test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_report",
+      "line": 421,
+      "docstring": "A failed schema52 install rolls back its table/guards; a repeatable successful upgrade preserves actual schema51 historical records.",
+      "file_sha256": "a5f9ec9952fe484e9931db161cfea1558afe8c21a80c5d59f1a804689abe735a"
+    },
+    {
+      "path": "backend/tests/runtime/test_investigation.py",
+      "symbol": "test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_report.skip_investigation",
+      "line": 432,
+      "docstring": "Prepare exactly schema51 without changing any historical migration resource.",
+      "file_sha256": "a5f9ec9952fe484e9931db161cfea1558afe8c21a80c5d59f1a804689abe735a"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_plan_execution.py",
+      "symbol": "test_owned_accepted_plan_dispatches_root_then_exact_evidence_to_private_development",
+      "line": 14,
+      "docstring": "One original owner execution sends three native turns total: planner, researcher and developer; only owner-accepted research wakes its dependent and no code is accepted or published.",
+      "file_sha256": "03310c868a168a58345d51583a33da76930cbb1956388313ff679aad24a671f4"
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_continuation.py",
+      "symbol": "test_delivery_migration_preserves_original_packets_and_rolls_back_whole_rebuild",
+      "line": 318,
+      "docstring": "A failed migration cannot leave rebuilt half-tables; upgrading an actual schema49 preserves original identities and exact handoff bytes.",
+      "file_sha256": "a4293f736a53dd597937a3e76df78fd21ee06d87c28241e360a54dcc4e2aa284"
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_continuation.py",
+      "symbol": "test_delivery_migration_preserves_original_packets_and_rolls_back_whole_rebuild.skip_fifty",
+      "line": 331,
+      "docstring": "Prepare the real pre-upgrade schema without modifying its historical SQL resources.",
+      "file_sha256": "a4293f736a53dd597937a3e76df78fd21ee06d87c28241e360a54dcc4e2aa284"
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_reauthorization.py",
+      "symbol": "test_revision_migration_rolls_back_failed_upgrade_and_preserves_original_execution",
+      "line": 388,
+      "docstring": "A failed schema51 install cannot change existing manifests or replace the old invalidation view; successful retry retains exact original intent and foreign keys.",
+      "file_sha256": "a4220646ea94cf627788818ca222d1ba15d19ea5a9ef683db1506bd06ec0041b"
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_reauthorization.py",
+      "symbol": "test_revision_migration_rolls_back_failed_upgrade_and_preserves_original_execution.skip_revision",
+      "line": 401,
+      "docstring": "Prepare the actual schema50 while leaving its historical SQL resources unchanged.",
+      "file_sha256": "a4220646ea94cf627788818ca222d1ba15d19ea5a9ef683db1506bd06ec0041b"
+    },
+    {
+      "path": "backend/tools/base/db.py",
+      "symbol": "ensure_migrations",
+      "line": 111,
+      "docstring": "Run pending schema migrations for existing databases.\n\nChecks the ``schema_migrations`` table and applies any missing\nmigrations. Safe to call multiple times. Serving requires an already\ninitialized file; explicit installation/legacy callers may create one.",
+      "file_sha256": "f3078d067c021646798d5861392da851806b6148c15994729f71d5c175b5f3db"
+    },
+    {
+      "path": "backend/tools/task/take_task.py",
+      "symbol": "TakeTaskInput",
+      "line": 12,
+      "docstring": "Identify the task within the tool's already-bound project.",
+      "file_sha256": "11382385d4c151a26b2ef46e1fb66124a514150079d443f49d5f2381c8fdd6da"
+    },
+    {
+      "path": "backend/tools/task/take_task.py",
+      "symbol": "TakeTaskTool",
+      "line": 18,
+      "docstring": "Claim remaining legacy tasks or return a read-only native owner hint.",
+      "file_sha256": "11382385d4c151a26b2ef46e1fb66124a514150079d443f49d5f2381c8fdd6da"
+    },
+    {
+      "path": "backend/tools/task/take_task.py",
+      "symbol": "TakeTaskTool._run",
+      "line": 31,
+      "docstring": "Scope every read/claim to the bound project and never claim owner-managed work.",
+      "file_sha256": "11382385d4c151a26b2ef46e1fb66124a514150079d443f49d5f2381c8fdd6da"
+    },
+    {
+      "path": "backend/tools/task/take_task.py",
+      "symbol": "TakeTaskTool._run._take",
+      "line": 36,
+      "docstring": "Resolve the owner boundary and claim remaining work in one write transaction.",
+      "file_sha256": "11382385d4c151a26b2ef46e1fb66124a514150079d443f49d5f2381c8fdd6da"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

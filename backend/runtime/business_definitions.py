@@ -13,6 +13,7 @@ from pydantic import BaseModel, ConfigDict, create_model
 
 from backend.api.models.questions import HumanQuestion
 from backend.api.models.research import Citation, ReviewCheckBody, WikiRevision
+from backend.research.investigation import InvestigationSummary
 from backend.runtime.business_mediation import ALL_BUSINESS_NAMES, RESEARCH_NAMES
 
 
@@ -85,6 +86,7 @@ def definitions(client, *, names=None):
         "researcher_wiki_write",
         "researcher_finding_record",
         "researcher_report_write",
+        "researcher_investigation_summary",
         "researcher_result_propose",
         "researcher_review_decide",
     }
@@ -420,6 +422,10 @@ class ResearchTools:
                 "report_type": report_type,
             },
         )
+
+    async def researcher_investigation_summary(self, operation_key: str, summary: InvestigationSummary) -> dict:
+        """Persist one scoped exploratory report: question, included/excluded scope, observations grouped by area and exact finding IDs, conclusion, limits and proposed next steps. Unresolved areas may have no findings; the complete report needs cited evidence. This is a draft, not scientific confidence, owner acceptance or permission to execute next steps. Reuse operation_key after an uncertain reply."""
+        return await self._client.request("POST", "/investigation-summaries", body={"operation_key": operation_key, "summary": summary.model_dump(mode="json")})
 
     async def researcher_result_propose(
         self,

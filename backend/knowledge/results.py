@@ -19,6 +19,7 @@ from backend.research.models import (
     SourceTooLarge,
     positive_id,
 )
+from backend.runtime.task_profiles import DOCUMENTARY_TASK_TYPES
 
 MAX_BYTES = 2 * 1024**2
 MAX_REFERENCES = 1000
@@ -131,10 +132,10 @@ def _report(conn, run, report_id):
         )
     ]
     rows = conn.execute(
-        """SELECT o.operation_key,o.request_hash,o.result_json,g.agent_id,g.context_version,
+        """SELECT o.operation_key,o.request_hash,o.result_json,o.kind,o.grant_id,g.agent_id,g.context_version,
         a.id AS attempt_id,a.run_id FROM tool_operations o JOIN tool_grants g ON g.id=o.grant_id
         JOIN runtime_attempts a ON a.id=g.runtime_attempt_id
-        WHERE o.project_id=? AND o.task_id=? AND o.kind='report.write' AND g.runtime_bound=1
+        WHERE o.project_id=? AND o.task_id=? AND o.kind IN ('report.write','investigation.summary') AND g.runtime_bound=1
         AND json_extract(o.result_json,'$.artifact_id')=? AND a.id=? AND a.run_id=? LIMIT 2""",
         (
             run["project_id"],
@@ -149,13 +150,19 @@ def _report(conn, run, report_id):
             "Select reports actually written by this admitted author attempt"
         )
     producer = rows[0]
+    investigation = None
+    task_type = conn.execute("SELECT type FROM tasks WHERE project_id=? AND id=?", (run["project_id"], run["task_id"])).fetchone()[0]
+    if producer["kind"] == "investigation.summary" or task_type == "investigation":
+        from backend.research.investigation import verified_summary
+
+        investigation = verified_summary(conn, run, report_id, producer, row["content"])
     packet = {
         "project_id": run["project_id"],
         "task_id": run["task_id"],
         "agent_id": producer["agent_id"],
         "context_version": producer["context_version"],
-        "kind": "report.write",
-        "intent": {
+        "kind": producer["kind"],
+        "intent": investigation if investigation is not None else {
             "title": row["title"],
             "content": row["content"][len(prefix) :],
             "finding_ids": finding_ids,
@@ -177,6 +184,7 @@ def _report(conn, run, report_id):
         "content": row["content"],
         "content_sha256": row["content_sha256"],
         "finding_ids": finding_ids,
+        **({"investigation": investigation} if investigation is not None else {}),
         "producer": {
             "run_id": producer["run_id"],
             "attempt_id": producer["attempt_id"],
@@ -215,9 +223,9 @@ def snapshot(conn, run, draft):
         FROM tasks WHERE project_id=? AND id=?""",
         (run["project_id"], run["task_id"]),
     ).fetchone()
-    if task is None or task["type"] != "research":
+    if task is None or task["type"] not in DOCUMENTARY_TASK_TYPES:
         raise ResearchForbidden(
-            "Only research-report delivery is implemented for this runtime"
+            "Only native documentary report delivery is implemented for this runtime"
         )
     size = 0
 

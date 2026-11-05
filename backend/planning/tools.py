@@ -42,7 +42,7 @@ class TaskProposal(EpicProposal):
     """Supported task outcome, acceptance criteria and local prerequisites; no actor/claim/permission can be model selected."""
 
     epic_key: str = Field(pattern=r"^[A-Za-z][A-Za-z0-9_-]{0,47}$")
-    type: Literal["research", "code", "bug_fix"]
+    type: Literal["research", "investigation", "code", "bug_fix"]
     acceptance_criteria: str = Field(min_length=1, max_length=8000)
     priority: int = Field(ge=1, le=5)
     depends_on: list[str] = Field(max_length=32)
