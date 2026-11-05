@@ -1,15 +1,41 @@
 # Tablero de ejecución de la actualización
 
-Actualizado: 2026-11-02. Objetivo: implementar **todo** el [plan](../superpowers/plans/2026-10-31-actualizacion-proyecto.md). Este tablero no reemplaza requisitos ni declara el plan terminado. [Diagnóstico del proceso](workflow-review.md).
+Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../superpowers/plans/2026-10-31-actualizacion-proyecto.md). Este tablero no reemplaza requisitos ni declara el plan terminado. [Diagnóstico del proceso](workflow-review.md).
 
 ## Estado comprobado
 
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Faltan publicación y cutover de consumidores/loops antiguos.
 - Interfaz: seis pilotos, 18/36 conceptos de escritorio y 6/12 móviles; seis rutas pendientes y 0/12 páginas completamente aceptadas.
-- Última suite global (antes del ajuste final del historial): 2126 casos, 2023 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados, sin fallos nuevos por identidad; no se afirman causas idénticas. Pasan 943 casos del runtime.
+- Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: entrada pública de desarrollo y revisión
+## Etapa actual: publicación con efecto y recibo propios
+
+**Resultado parcial:** política Git interna con candidato exacto y metadatos de
+origen/candidato fijados. La rama y el recibo ligado a la intención se guardan
+atómicamente; un destino movido o una respuesta perdida no disparan otro efecto.
+Los checkouts primarios/vinculados se rechazan. El estado histórico aplicado se
+conserva aunque otro actor mueva después la rama.
+
+**Verificación:** 38 casos dirigidos, incluidos 20 nuevos con Git real; 38 del wheel
+en 4,92 segundos, 237 módulos sólo del paquete y 701 fuentes coincidentes.
+39 definiciones nuevas documentadas en inglés. Tres regresiones observadas y
+corregidas: consulta fallida tras commit, copia de `.git` con recibo aparentemente
+válido y adopción del recibo con destino cambiado. No hubo llamadas a modelos.
+
+**Pendiente inmediato:** admisión durable ligada a aceptación y tipo de ejecución
+del host, claim/authority sin reabrir la tarea terminada; peers sólo de comandos;
+launch/capsule con sólo `.git` escribible y stdin exacto en el manifiesto. Después,
+controlador físico, API/Tareas y efectos remotos. El módulo nuevo no se expone
+todavía como publicación del producto. [Contrato/debate](../architecture/code-publication.md),
+[recibo](publication-policy-results.json), [paquete](publication-policy-packaging.json).
+
+**Baseline completado:** al retomar se ejecutó el checkpoint previo con
+`--timeout=180`, hasta salida terminal 1: 2045 pasan/100 heredados fallan/3 omitidos.
+No se reinicia una suite sin comprobar su proceso. Este resultado no se atribuye
+a la política nueva añadida después. [Alcance](resumed-baseline-results.json).
+
+## Etapa anterior: entrada pública de desarrollo y revisión
 
 **Resultado:** el adaptador con aislamiento admite `code`/`bug_fix`; los anteriores
 conservan investigación. El host captura el candidato después del turno y ejecuta
@@ -34,7 +60,8 @@ integración y heredó 20 segundos; se detuvo con SIGINT/salida 2 y se reemplaz�
 180 segundos. No se atribuyen sus timeouts al producto sin investigar. Las cifras
 globales de arriba son históricas. La invocación corregida se detuvo mediante
 SIGINT y terminó con salida 2 por petición explícita de pausa; no queda ejecutándose.
-Reanudar con `--timeout=180` cuando el propietario retome el objetivo.
+El propietario retomó el objetivo el 2026-11-05 y la nueva ejecución terminó;
+su resultado y límites figuran en la etapa actual.
 [Contrato](public-development.md),
 [auditoría](../design/audits/2026-11-02-public-development/report.md).
 
@@ -47,8 +74,8 @@ entradas que el merge antiguo no rechazaba. Preflight de tarea/repositorio/orige
 físico ahora bloquea esos casos y conserva repositorios legacy no relacionados.
 No constituye exclusión entre procesos ni resuelve primera admisión concurrente;
 el publicador reconciliable sigue pendiente. [Recibo](legacy-publication-results.json).
-El propietario pidió commit/push de la rama y después pausa; no se continúa con
-otra implementación hasta que solicite retomar el objetivo.
+El propietario pidió commit/push de la rama y después pausa. Reanudó explícitamente
+el objetivo el 2026-11-05; continúa activo.
 
 ## Etapa anterior verificada: aceptación explícita de código
 

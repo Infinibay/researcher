@@ -638,7 +638,9 @@
         "backend/tests/runtime/test_check_execution.py",
         "backend/tests/runtime/test_development_session.py",
         "docs/modernization/owned-checks-results.json",
-        "docs/modernization/owned-checks-docstrings.json"
+        "docs/modernization/owned-checks-docstrings.json",
+        "docs/architecture/code-publication.md",
+        "docs/modernization/publication-policy-results.json"
       ]
     },
     "E07": {
@@ -780,7 +782,9 @@
         "docs/modernization/code-review-state-packaging.json",
         "backend/tests/runtime/test_code_review_state.py",
         "backend/tests/runtime/test_legacy_code_publication.py",
-        "docs/modernization/legacy-publication-results.json"
+        "docs/modernization/legacy-publication-results.json",
+        "docs/architecture/code-publication.md",
+        "docs/modernization/publication-policy-results.json"
       ]
     },
     "E11": {
@@ -802,7 +806,9 @@
         "docs/modernization/code-reviews.md",
         "docs/modernization/code-review-state-results.json",
         "docs/modernization/code-review-state-packaging.json",
-        "backend/tests/runtime/test_code_review_state.py"
+        "backend/tests/runtime/test_code_review_state.py",
+        "docs/architecture/code-publication.md",
+        "docs/modernization/publication-policy-results.json"
       ]
     },
     "D01": {
@@ -2848,9 +2854,32 @@
         "First-wheel84PASS/352package-only modules; final11PASS/292package-only modules after only a missing endpoint docstring was added; complete payload/AST equivalence recorded,698matching sources"
       ],
       "remaining": [
-        "Full integration suite deliberately interrupted for owner-requested pause; original process terminal, rerun with180s upon explicit resume",
+        "Completed resumed baseline0c8b8d9:2148cases,2045PASS/100inheritedFAIL/3SKIP; future publication integration needs its own final global acceptance",
         "Reconciliable publication with exact destination/current accepted evidence and new effect ownership",
         "Legacy consumer/CI cutover, per-project policy, representative comprehension/accessibility and whole page/product acceptance"
+      ]
+    },
+    "code_publication": {
+      "status": "in_progress",
+      "evidence": [
+        "backend/runtime/publication_git.py",
+        "backend/tests/runtime/test_publication_git.py",
+        "docs/architecture/code-publication.md",
+        "docs/modernization/publication-policy-results.json",
+        "docs/modernization/publication-policy-packaging.json",
+        "docs/modernization/publication-policy-docstrings.json"
+      ],
+      "implemented": [
+        "Internal exact-ref policy with fixed host port; candidate Git/diff/bytes and original source/candidate metadata identity checked",
+        "Actual atomic branch+intent-bound marker transaction; destination CAS, primary/linked checkout refusal, no working-tree edits",
+        "Closed-original reconciliation without effect replay; historical applied effect separated from moved target; post-commit read failure remains uncertain",
+        "38directed and38extracted-wheel cases pass including20new policy cases;701matching sources,237package-only modules,39documented definitions"
+      ],
+      "remaining": [
+        "Durable acceptance-bound publication admission, typed host execution kind, claim/authority rules without reopening accepted tasks",
+        "Fresh broker/cgroup command-only scope and metadata-only writable capsule with immutable transaction stdin manifest",
+        "Owner API/Tasks request/recovery with original durable intent; global physical exclusion and post-correction historical effect semantics",
+        "Remote push/PR/merge and stable remote identity/reconciliation; full product acceptance"
       ]
     }
   }

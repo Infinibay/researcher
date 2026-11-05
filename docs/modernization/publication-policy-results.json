@@ -1,0 +1,41 @@
+{
+  "base_commit": "0c8b8d9",
+  "status": "internal_exact_git_ref_policy_tested_product_publication_not_enabled",
+  "source": {
+    "passed": 38,
+    "failed": 0,
+    "skipped": 0,
+    "new_policy_cases": 20,
+    "seconds": 4.77,
+    "scope": "Real temporary Git repos and test-only subprocess port. Existing code-review Git and legacy publication guards also checked. No production broker/domain/HTTP publication claim."
+  },
+  "red_observed": [
+    "Original policy module absent:12failures.",
+    "Post-commit read failure propagated ordinary OSError:1failure/14pass; corrected to retain publication uncertainty.",
+    "Copied metadata with identical refs was adopted:1failure/15pass; corrected by original metadata identity binding.",
+    "Changed destination adopted another request marker and malformed Git identities entered the view:4failures/16pass; marker now binds complete destination and candidate identities are validated."
+  ],
+  "packaged": {
+    "tests_passed": 38,
+    "failures": [],
+    "skipped": 0,
+    "backend_modules_loaded": 237,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "network": "Disabled except Unix sockets",
+    "semantic_assets": "Explicit prepared pinned public offline assets outside wheel"
+  },
+  "matching_python_sql_payloads": 701,
+  "docstrings": {
+    "definitions_documented": 39,
+    "missing": 0
+  },
+  "model_turns": 0,
+  "source_repositories_modified": "Only temporary test repositories; user checkout/source unchanged.",
+  "limits": [
+    "No durable publication request, code_publication execution-kind migration, command-only scope or writable-metadata capsule is enabled yet.",
+    "No publication HTTP/UI control, remote push/PR/merge or complete product publication.",
+    "The completed full suite belongs to checkpoint0c8b8d9; it does not cover this later new policy.",
+    "Legacy first-admission/effect race and context change after release still need the fresh host ownership/cutover contract."
+  ]
+}

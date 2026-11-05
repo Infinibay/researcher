@@ -5404,3 +5404,64 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
   Pending: native publication/races/reconciliation, engine/legacy/roles/tools,
   prompts and human-agent evaluation,6web routes and12page acceptance,
   installation/restore/operator flow, inherited failures and final branch review.
+
+
+## Resume and exact local Git publication policy — base 0c8b8d9
+
+- Previous goal turn: progress (committed/pushed0c8b8d9, then explicitly paused).
+  Owner set goal active2026-11-05. Revalidated original/main and managed worktree:
+  managed HEAD unchanged, no live tests; original checkout has user edits and stays
+  untouched. Work remains only in managed codex/project-modernization.
+- Resumed full baseline with explicit180s deadline, offline assets and provider
+  credentials/runtime config withdrawn. Session87836 terminal exit1 as expected
+  for the unresolved suite. Actual2148cases:2045PASS/100FAIL/3SKIP1164.11s;
+  965runtimePASS. Failure identifiers exactly100inherited, not a claim of identical
+  causes. No new publication policy cases were in that collection; tracked backend
+  diff against0c8b8d9 was empty. Evidence:resumed-baseline-results.json.
+- Task remains in progress: complete accepted-code publication with fresh host
+  effect ownership, durable original intent/receipt, exact destination and eventual
+  remote push/PR/merge. This checkpoint implements internal Git policy, not product
+  admission or writable-domain capability. No new owner endpoint or UI is enabled.
+- Focused Ken service/Git search remained on the original unmodified index; read
+  actual managed modules before relying on matches. Clean-context read-only agent
+  publication_execution_map mapped claim/authority, command-only peers, closure,
+  exact acceptance-linked exclusion and a distinct metadata-write capsule. No agent
+  edited code or ran tests; decisions and material failure scenarios saved in
+  docs/architecture/code-publication.md. Existing inferred-owner sessions cannot
+  be reused. _task stays strict; a publication-specific execution subject is next.
+- Ruling: local publication first targets an explicit non-checked-out branch;
+  branch and stable intent-bound receipt commit atomically via update-ref stdin.
+  This is one required stage, not a replacement for remote push/PR/merge. Checked-out
+  branches (including linked worktrees) are rejected to preserve working-tree
+  consistency. Original source is read-only in the future profile except pinned
+  .git; accepted candidate stays readonly. Transaction input must enter the actual
+  broker manifest; current ordinary GitLaunch does not provide it yet.
+- New publication_git.py reuses GitExecutor/GitResult, credential-free Git policy
+  and exact review candidate validation. PublicationView carries full same-format
+  Git SHA/evidence and original source/candidate metadata device/inode. Internal
+  port requires transact(input_text). No production host subprocess fallback.
+- Actual temporary Git tests verify exact commit+marker, original main/index/files
+  unchanged, destination CAS race leaving no partial marker, primary/linked checkout
+  refusal, altered candidate rejection, response loss and later moved destination.
+  Reconciliation requires independently proven original closure, never transacts.
+- RED12missing-module→GREEN12. Added regression: post-commit read failure leaked
+  ordinary OSError (1RED/14PASS)→uncertain. Copied .git marker was adopted
+  (1RED/15PASS)→original metadata identity required before/after. Another destination
+  reused a prior marker and malformed Git SHA values entered commands (4RED/16PASS)
+  →marker binds complete target observation and view validates full Git identities.
+- Final source38PASS4.77s incl20new policy cases plus readonly review/legacy guards;
+  extracted-wheel38PASS4.92s,237backend modules only from wheel,701matchingPython/SQL
+  payloads.39new definitions/modules documented in English, Ruff/format pass for
+  both new Python files. No frontend/dependency/lock changes, model calls, real
+  remote publication or changes to user repositories.
+- Next concrete implementation: immutable acceptance-bound code_publication
+  request/run kind and migration; publication-only claim/authority allows taskdone
+  without re-opening, inference forbidden. Then command-only scope/closure and
+  distinct broker launch/capsule with pinned metadata+immutable stdin, actual
+  owner-domain integration, API/Tasks and remote effect stages. Context correction
+  after gate cannot erase a historical applied effect; physical/semantic fence
+  and legacy first-admission race remain required. Full43scenarios remain open.
+- User resume revokes the earlier pause. Full plan remains active, not narrowed:
+  engine/legacy/roles/tools, prompts and comprehension,6remaining web routes and
+  acceptance of12pages, installation/restore/CLI/TUI,100inherited failures and final
+  whole-branch fresh review all remain in scope. No new merge/push/deployment.

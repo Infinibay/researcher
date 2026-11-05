@@ -13,6 +13,19 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Verificación actual
 
+El propietario reactivó el objetivo el 2026-11-05. La suite global del checkpoint
+`0c8b8d9` terminó: 2148 casos, 2045 pasan, 100 fallan y tres se omiten;
+965 casos del runtime pasan. Mismos identificadores de fallo heredados, sin afirmar
+causas idénticas. [Recibo](resumed-baseline-results.json).
+
+La política interna de publicación Git posterior pasa 38 casos dirigidos y 38 del
+wheel: candidato exacto, rama/recibo atómicos, respuesta perdida, destino movido,
+checkouts y metadatos originales. 39 definiciones documentadas; 701 fuentes del
+paquete coinciden. Sigue pendiente su admisión durable, nuevo dominio del host,
+API/Tareas y push/PR/merge. No se habilitó publicación del producto ni se atribuye
+la suite anterior a este módulo nuevo. [Contrato y siguiente integración](../architecture/code-publication.md),
+[resultados](publication-policy-results.json).
+
 La entrega de entrada pública pasa diez pruebas dirigidas, incluido un recorrido
 HTTP hasta aceptación con Git/kernel/SQLite reales y generación controlada; 51
 pruebas de consumidores también pasan. Frontend: 75 pruebas y build, seis capturas
@@ -21,15 +34,15 @@ El fixture del navegador retiene al revisor en cola y usa testigos físicos
 sintéticos; no sustituye la integración nativa. Las 22 definiciones Python
 nuevas/modificadas tienen docstrings. Wheel ampliado: 84 casos pasan; el final
 añade sólo un docstring y pasa 11 casos, con equivalencia de AST sin docstrings
-verificada y 698 fuentes coincidentes. La suite global se interrumpió de forma
-controlada para la pausa explícita del propietario; no se afirma que haya pasado.
+verificada y 698 fuentes coincidentes. La suite global interrumpida entonces
+conserva su recibo; la ejecución completada al retomar se describe arriba.
 [Alcance](public-development.md).
 
 El bloqueo adicional del merge antiguo pasa 35 pruebas dirigidas: rechaza tareas
 nativas y alias del mismo origen antes del efecto Git/Forgejo. No resuelve aún
 la carrera con una primera admisión simultánea ni implementa el publicador nuevo.
-[Evidencia y límites](legacy-publication-results.json). Trabajo pausado por petición
-del propietario después del checkpoint y push; el objetivo completo sigue pendiente.
+[Evidencia y límites](legacy-publication-results.json). El objetivo está activo
+después de la reanudación explícita; el plan completo sigue pendiente.
 
 La siguiente evidencia global corresponde a la entrega anterior:
 
