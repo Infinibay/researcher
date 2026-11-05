@@ -1,0 +1,86 @@
+{
+  "status": "passed",
+  "scope": "Actual owner HTTP/RuntimeService/new observation attempt/SQLite/Tasks. Original and observer closure/ref witnesses explicitly synthetic, no Git/model execution here. Separate native integration proves physical recovery.",
+  "states": [
+    {
+      "file": "01-desktop-recovery.png",
+      "sha256": "b37d49fcfd8e300ee334108c01a5e7fb11772ef13a9970bb5fd3db5440c08de5",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "02-mobile-recovery.png",
+      "sha256": "40aedf68f6dd8c868682957a8d85fc6a60bac920f363d9dfdd531ceb10d89a31",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "03-response-lost.png",
+      "sha256": "c48bbf43d578f5b99fb776b1307ab55ec252cf591a747a9724f7a97fa43671b0",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "04-reload-original.png",
+      "sha256": "05afe19921f6d03420d628a1bd8e488443ba99b1fc70c6a85f17ccf909a05996",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "05-same-recovery-receipt.png",
+      "sha256": "540328df33cacdb88683c581d64960e9ec76c372b13b8a121e02106b1cb76c1c",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    }
+  ],
+  "page_errors": [],
+  "requests": [
+    {
+      "operation_key": "c09ca35e-d525-4eca-a4f1-45ddebb6c20c",
+      "attempt_id": "9300cc60-7e73-4eb3-8b0d-caf8fddf5545",
+      "expected_fence": 1
+    },
+    {
+      "operation_key": "c09ca35e-d525-4eca-a4f1-45ddebb6c20c",
+      "attempt_id": "9300cc60-7e73-4eb3-8b0d-caf8fddf5545",
+      "expected_fence": 1
+    }
+  ],
+  "receipt": {
+    "author_run_id": "c89ff2a2-32b8-4122-aa8e-8e15bfe52446",
+    "completed_after_withdrawal": false,
+    "context_version": 2,
+    "grant_id": "synthetic-browser-observer",
+    "observed": {
+      "head_sha": "cccccccccccccccccccccccccccccccccccccccc",
+      "observed_marker_sha": "cccccccccccccccccccccccccccccccccccccccc",
+      "observed_target_sha": "cccccccccccccccccccccccccccccccccccccccc",
+      "receipt_ref": "refs/researcher/publications/858a25260c549c1bbfb17ac33c0b4d9f979f54534e5d330a118ebea19c432fbf",
+      "state": "published",
+      "target_current": true
+    },
+    "observer_attempt_id": "9243c270-f581-4ab8-bde1-520446bf19aa",
+    "operation_key": "publish-code",
+    "proof_sha256": "47269e2437e095f071e1196637a681e4545bb4b8b746306dfc95b827056f51da",
+    "publication_performed": true,
+    "recorded_at": 1793894705.3869126,
+    "recovery_operation_key": "c09ca35e-d525-4eca-a4f1-45ddebb6c20c",
+    "run_id": "3c8d9f0c-eaf4-4e26-9d4e-05620e75e1d5",
+    "source_attempt_id": "9300cc60-7e73-4eb3-8b0d-caf8fddf5545"
+  }
+}

@@ -10,17 +10,35 @@ from backend.runtime.code_publications import CodePublications
 from backend.runtime.execution_domain import ExecutionDomain
 from backend.runtime.git_capsule import GitAsset
 from backend.runtime.peer_process import PeerUncertain
-from backend.runtime.publication_executor import OwnedPublicationGitExecutor
-from backend.runtime.publication_git import PublicationRefIntent, publish_candidate_ref
+from backend.runtime.publication_executor import (
+    OwnedPublicationGitExecutor,
+    OwnedPublicationObserver,
+)
+from backend.runtime.publication_git import (
+    PublicationRefIntent,
+    publish_candidate_ref,
+    reconcile_candidate_ref,
+)
 
 
-async def execute_owned_publication(runtime, peers, *, active):
+async def execute_owned_publication(runtime, peers, *, active, observation=False):
     """Publish through a newly owned command domain and return evidence only after its actual physical retirement."""
     registry, lease = peers.registry, peers.lease
     publications = CodePublications(registry.runs)
     with registry.runs._transaction() as conn:
         run = registry.runs._row(conn, lease.project_id, lease.run_id)
-        view = publications.current(conn, run)
+        from backend.runtime.publication_recovery import PublicationRecovery
+
+        recovery = PublicationRecovery(registry.runs)
+        if observation != (recovery.observation(conn, run) is not None):
+            raise ValueError(
+                "Publication mode differs from the original attempt capability"
+            )
+        view = (
+            recovery.subject(conn, run)
+            if observation
+            else publications.current(conn, run)
+        )
         request = publications._request(conn, lease.project_id, lease.run_id)
     intent = PublicationRefIntent(
         lease.run_id, request["target_ref"], request["expected_target_sha"]
@@ -45,15 +63,28 @@ async def execute_owned_publication(runtime, peers, *, active):
 
                     watcher = asyncio.create_task(watch())
                     try:
-                        executor = OwnedPublicationGitExecutor(
+                        executor = (
+                            OwnedPublicationObserver
+                            if observation
+                            else OwnedPublicationGitExecutor
+                        )(
                             owner=owner,
                             registry=registry,
                             lease=lease,
                             view=view,
                             asset=GitAsset.inspect(Path("/usr/bin/git")),
                         )
-                        observed = await publish_candidate_ref(
-                            view, intent, executor=executor
+                        observed = (
+                            await reconcile_candidate_ref(
+                                view,
+                                intent,
+                                executor=executor,
+                                original_execution_closed=True,
+                            )
+                            if observation
+                            else await publish_candidate_ref(
+                                view, intent, executor=executor
+                            )
                         )
                     finally:
                         broker.withdraw()

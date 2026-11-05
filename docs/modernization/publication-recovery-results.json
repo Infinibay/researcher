@@ -1,0 +1,43 @@
+{
+  "base_commit": "e402453",
+  "date": "2026-11-05",
+  "status": "local_publication_readonly_recovery_connected_full_plan_in_progress",
+  "directed": {
+    "tests": 42,
+    "passed": 42,
+    "failed": [],
+    "skipped": 0,
+    "seconds": 10.004,
+    "receipt_sha256": "54cd1c6800c44135fab7e990d5d7bb3d583fb5a5360df411b0af4e95de1c5ed4"
+  },
+  "physical": {
+    "tests": 2,
+    "passed": 2,
+    "failed": [],
+    "skipped": 0,
+    "seconds": 128.694,
+    "receipt_sha256": "7390e63516716a25e7876daa1e80a4e49de5d3aae55d3e186abc6e5f24103e1c"
+  },
+  "physical_scope": "Two real Git/kernel/broker/SQLite flows, controlled native generation/fixture Ken. Positive ordinary publication and actual transaction committed then controlled response loss; new readonly observer recovers marker, one transaction total, receipt replay and zero additional inference. Physical run preceded the final restrictive missing-global-proof guard, covered separately by RED then current directed/package tests.",
+  "frontend": {
+    "passed": 77,
+    "failed": 0,
+    "build": "TypeScript and Vite pass; known bundle/Browserslist warnings deferred"
+  },
+  "browser": "docs/design/audits/2026-11-05-publication-recovery/evidence.json",
+  "package": "docs/modernization/publication-recovery-packaging.json",
+  "documented_python_definitions_or_modules": 47,
+  "red_green": [
+    "Two initial storage cases failed for missing publication_recovery module, then passed",
+    "Frontend saved recovery packet failed for missing module, then passed",
+    "Missing original global domain with locally closed namespace was incorrectly accepted; regression failed, then guard rejected it"
+  ],
+  "limits": [
+    "No new full-suite claim; resumed baseline predates both publication integrations",
+    "Backend recovery storage and browser fixture use explicit synthetic witnesses; physical tests separate",
+    "No remote push/PR/merge or global exclusion of legacy writers",
+    "Interrupted observer restart with an already saved recovery key requires explicit refreshed observation; DD-005",
+    "Schema43/44 inverses and old inverse fixtures deferred; broader migration suite not claimed green",
+    "No new subscription inference or mutations of user repositories"
+  ]
+}

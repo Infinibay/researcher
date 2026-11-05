@@ -4,40 +4,48 @@ Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../supe
 
 ## Estado comprobado
 
-- Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; faltan reconciliación operativa, efectos remotos y cutover de consumidores/loops antiguos.
+- Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; faltan efectos remotos y cutover de consumidores/loops antiguos.
 - Interfaz: seis pilotos, 18/36 conceptos de escritorio y 6/12 móviles; seis rutas pendientes y 0/12 páginas completamente aceptadas.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: publicación local conectada
+## Etapa actual: recuperación local conectada
 
-**Resultado:** Tareas solicita una rama nueva para la versión aceptada exacta.
-La admisión durable guarda cuerpo/clave; un intento nuevo del host usa broker,
-dominio y peers sólo de comandos. Sólo `.git` original es escribible; stdin
-completo queda en el manifiesto. No se reserva inferencia ni se reabre la tarea.
-Cierre físico y resultado/evento quedan comprobados antes de registrar éxito.
+**Resultado:** ante publicación incierta, Tareas puede comprobar qué ocurrió.
+El journal prueba cierre original de broker/dominio con procedencia exacta antes
+de crear un intento nuevo de lectura. Su permiso admite sólo destino/recibo,
+con `.git` fijado en lectura; no reutiliza la autoridad de escritura ni abre
+inferencia. Puede conservar el efecto histórico después de corregir el contexto.
+Resultado/evento/recibo distinguen publicado, no aplicado e incierto.
 
-**Verificación:** 25 pruebas dirigidas pasan y una integración real de
-Git/kernel/broker/SQLite pasa en 63,88 s, con generación de autor/revisor controlada.
-Frontend 76 pruebas/build; cinco capturas de escritorio/móvil verifican respuesta
-perdida y recarga con la misma rama/cuerpo/clave. Cero errores/desbordamiento/Axe
-en el panel. El navegador usa procedencia sintética y retiene el trabajo en cola;
-no prueba el efecto físico. Wheel: 25 pasan, 314 módulos sólo del paquete,
-709 fuentes coincidentes. 79 definiciones/módulos documentados en inglés.
+**Verificación:** 42 pruebas dirigidas pasan, incluidas recuperación genérica y
+prueba negativa de cierre local sin evidencia global. Dos integraciones físicas
+pasan en 128.69 s: publicación normal y commit con respuesta perdida,
+seguido de nuevo observador y una sola transacción total. Generación controlada;
+ningún turno de modelo en publicación/recuperación. Frontend77/build; cinco
+capturas escritorio/móvil inspeccionadas, dos consultas idénticas tras respuesta
+perdida/recarga, cero errores/desbordamiento/Axe en panel. Browser con testigos
+sintéticos explícitos, no prueba Git. 47 definiciones/módulos documentados.
 
-**Límite comprobado:** consumidores ampliados: 34 pasan y un fixture de inverse42
-falla porque el nuevo esquema43 activa el guard de versión posterior. Queda
-registrado con el inverse43 para la pasada de migraciones; no se cuenta entre los
-100 fallos heredados ni se afirma una suite global nueva verde.
+**Siguiente capacidad principal:** push/PR/merge con identidad remota exacta y
+consulta antes de retry; también exclusión física legacy. Interrupción de un
+observador antes del recibo, inversas43/44 y controles de capacidad quedan
+registrados en [deferred-details.md](deferred-details.md).
+[Contrato](../architecture/code-publication.md), [resultados](publication-recovery-results.json),
+[paquete](publication-recovery-packaging.json).
 
-**Siguiente capacidad principal:** reconciliación operativa de efecto incierto,
-seguida de push/PR/merge con identidad remota exacta; exclusión física legacy aún
-pendiente. Los detalles secundarios están en [deferred-details.md](deferred-details.md).
-[Contrato](../architecture/code-publication.md),
-[resultados](publication-connected-results.json), [paquete](publication-connected-packaging.json).
+## Etapa anterior: publicación local conectada
 
-**Baseline histórico:** `0c8b8d9` con `--timeout=180`: 2045 pasan/100 fallan/3
-omitidos. Es anterior a la integración actual. [Alcance](resumed-baseline-results.json).
+La entrega `e402453` conecta solicitud owner, aceptación exacta, nuevo intento del
+host, broker/capsule y Tareas para crear una rama nueva. Preserva archivos/tarea
+y no usa inferencia. Pruebas dirigidas25, integración física1, frontend76/build,
+wheel25 y79definiciones documentadas. Consumidores ampliados34PASS/1FAIL: fixture
+inverse42 ante nuevo esquema43; no se atribuye a los100 fallos heredados.
+[Recibo histórico](publication-connected-results.json).
+
+**Baseline histórico:** `0c8b8d9`, anterior a ambas integraciones: 2045 pasan,
+100 fallan y tres se omiten. [Alcance](resumed-baseline-results.json). No es una
+suite global verde de la implementación actual.
 
 ## Etapa anterior: entrada pública de desarrollo y revisión
 

@@ -7,6 +7,8 @@ import type { RuntimeRun } from '../../api/runtime'
 import { codeReviewActions } from '../../api/codeReviews'
 import { CodeReviewRequest } from './CodeReviewRequest'
 import { CodePublicationRequest } from './CodePublicationRequest'
+import { CodePublicationRecovery } from './CodePublicationRecovery'
+import { publicationRecoveryActions } from '../../api/publicationRecovery'
 import { codePublicationActions } from '../../api/codePublications'
 
 const buttonClass='rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--work-accent)]'
@@ -103,7 +105,7 @@ export function CodeDelivery({projectId,taskId,runId,contextVersion,readOnly=fal
       {!!data.review_issues?.length && <section className="space-y-2 text-sm" aria-label="Revisiones anteriores del mismo candidato"><h4 className="font-medium text-[var(--work-ink)]">Revisiones anteriores del mismo candidato</h4>{data.review_issues.map(issue=><details key={issue.run_id}><summary className="cursor-pointer text-[var(--work-ink)]">{issue.blocking?'Objeción confirmada sin resolver':issue.state==='confirmed'?'Revisión anterior con límites':'Propuesta anterior sin confirmar'}</summary><p className="mt-2 text-[var(--work-muted)]">{issue.message}</p><p className="mt-1 whitespace-pre-wrap text-[var(--work-ink)]">{issue.rationale}</p><p className="mt-1 break-all font-mono text-xs text-[var(--work-muted)]">{issue.run_id}</p></details>)}</section>}
       {data.blockers.length>0 && <div className="space-y-2 border-l-2 border-[var(--work-line)] pl-3 text-sm text-[var(--work-ink)]"><p>No se puede aceptar esta versión todavía.</p><ul className="list-disc space-y-1 pl-5">{data.blockers.map((item,index)=><li key={`${item.code}:${index}`}>{item.message}</li>)}</ul></div>}
       {data.acceptance && <div role="status" className="space-y-1 text-sm text-[var(--work-ink)]"><p>{data.acceptance_current?'Aceptación registrada':'Aceptación histórica; ya no acredita el contexto actual'}</p>{data.acceptance.note && <p className="whitespace-pre-wrap text-[var(--work-muted)]">{data.acceptance.note}</p>}</div>}
-      <CodePublicationRequest data={data} available={reviewAvailable} readOnly={readOnly || !!saved} onPending={onPending}/>
+      <CodePublicationRecovery data={data} readOnly={readOnly} onPending={onPending}/><CodePublicationRequest data={data} available={reviewAvailable} readOnly={readOnly || !!saved} onPending={onPending}/>
       {saved && <p className="text-sm text-[var(--work-muted)]">Hay una aceptación pendiente de confirmar. Reenviarla conserva la versión y el contexto {saved.body.context_version} originales.</p>}
       {(data.eligible || saved) && !data.acceptance && <form className="space-y-3" onSubmit={event=>{event.preventDefault();submit()}}>
         <fieldset className="space-y-3" disabled={!!saved || accept.isPending || !ready || readOnly || !!storageError}>
@@ -128,7 +130,7 @@ export function TaskCodeResults({projectId,taskId,runs,contextVersion,reviewAvai
   const [pending,setPending]=useState<string|null>(null)
   const [error,setError]=useState('')
   const [ready,setReady]=useState(typeof window==='undefined')
-  useEffect(()=>{try {const acceptance=codeActions.pendingRun(window.sessionStorage,projectId,taskId);const review=codeReviewActions.pendingRun(window.sessionStorage,projectId,taskId);const publication=codePublicationActions.pendingRun(window.sessionStorage,projectId,taskId);if(new Set([acceptance,review,publication].filter(Boolean)).size>1) throw new Error('Hay solicitudes pendientes para dos versiones. Consulta sus recibos antes de continuar.');const run=acceptance??review??publication;setPending(run);setSelection(run);setReady(true)} catch(issue) {setError(issue instanceof Error?issue.message:'No se pudo recuperar la decisión pendiente.')}},[projectId,taskId])
+  useEffect(()=>{try {const acceptance=codeActions.pendingRun(window.sessionStorage,projectId,taskId);const review=codeReviewActions.pendingRun(window.sessionStorage,projectId,taskId);const publication=codePublicationActions.pendingRun(window.sessionStorage,projectId,taskId);const recovery=publicationRecoveryActions.pendingRun(window.sessionStorage,projectId,taskId);if(new Set([acceptance,review,publication,recovery].filter(Boolean)).size>1) throw new Error('Hay solicitudes pendientes para dos versiones. Consulta sus recibos antes de continuar.');const run=acceptance??review??publication??recovery;setPending(run);setSelection(run);setReady(true)} catch(issue) {setError(issue instanceof Error?issue.message:'No se pudo recuperar la decisión pendiente.')}},[projectId,taskId])
   const chosen=pending??selection??authors[0]?.run_id
   if(!chosen) return error?<p role="alert">{error}</p>:null
   return <div className="space-y-2">

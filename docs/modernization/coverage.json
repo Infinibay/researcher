@@ -640,7 +640,9 @@
         "docs/modernization/owned-checks-results.json",
         "docs/modernization/owned-checks-docstrings.json",
         "docs/architecture/code-publication.md",
-        "docs/modernization/publication-policy-results.json"
+        "docs/modernization/publication-policy-results.json",
+        "docs/modernization/publication-recovery-results.json",
+        "docs/architecture/code-publication.md"
       ]
     },
     "E07": {
@@ -784,7 +786,9 @@
         "backend/tests/runtime/test_legacy_code_publication.py",
         "docs/modernization/legacy-publication-results.json",
         "docs/architecture/code-publication.md",
-        "docs/modernization/publication-policy-results.json"
+        "docs/modernization/publication-policy-results.json",
+        "docs/modernization/publication-recovery-results.json",
+        "docs/architecture/code-publication.md"
       ]
     },
     "E11": {
@@ -808,7 +812,9 @@
         "docs/modernization/code-review-state-packaging.json",
         "backend/tests/runtime/test_code_review_state.py",
         "docs/architecture/code-publication.md",
-        "docs/modernization/publication-policy-results.json"
+        "docs/modernization/publication-policy-results.json",
+        "docs/modernization/publication-recovery-results.json",
+        "docs/architecture/code-publication.md"
       ]
     },
     "D01": {
@@ -2879,7 +2885,14 @@
         "frontend/src/components/tasks/CodePublicationRequest.tsx",
         "docs/modernization/publication-connected-results.json",
         "docs/modernization/publication-connected-packaging.json",
-        "docs/design/audits/2026-11-05-code-publication/report.md"
+        "docs/design/audits/2026-11-05-code-publication/report.md",
+        "backend/runtime/publication_recovery.py",
+        "backend/runtime/publication_closure.py",
+        "backend/db/publication_recovery_schema.sql",
+        "backend/tests/runtime/test_publication_recovery.py",
+        "docs/modernization/publication-recovery-results.json",
+        "docs/modernization/publication-recovery-packaging.json",
+        "docs/design/audits/2026-11-05-publication-recovery/report.md"
       ],
       "implemented": [
         "Internal exact-ref policy with fixed host port; candidate Git/diff/bytes and original source/candidate metadata identity checked",
@@ -2888,13 +2901,16 @@
         "38directed and38extracted-wheel cases pass including20new policy cases;701matching sources,237package-only modules,39documented definitions",
         "Durable immutable acceptance-bound host publication admission/claim, command-only scope and no inference; task remains done",
         "Fresh broker/cgroup and metadata-only writable capsule; exact transaction stdin in broker manifest; physical original closure and durable result/event",
-        "Owner API/Tasks new local branch, original request preserved across lost response/reload;25directed+1physical PASS, frontend76PASS/build, wheel25PASS"
+        "Owner API/Tasks new local branch, original request preserved across lost response/reload;25directed+1physical PASS, frontend76PASS/build, wheel25PASS",
+        "Owner recovery proves original global closure then allocates fresh per-attempt readonly observation capability on original publication run; no reuse of writer lease",
+        "Readonly exact target/marker queries with pinned source metadata, historical context permitted only for readonly observer; candidate need not exist",
+        "Atomic recovery result/event/receipt distinguishes published,not_applied,uncertain; original packet survives lost reply/reload;42directed+2physical+77frontend pass"
       ],
       "remaining": [
-        "Operator reconciliation of uncertain original effect; expanded physical correction/crash races",
+        "Expanded physical correction/crash races including interrupted observer continuation (DD-005)",
         "Global physical exclusion from legacy writers during cutover",
         "Remote push/PR/merge with exact remote identity and receipt reconciliation",
-        "Schema43 inverse and inverse42 fixture adaptation; capacity/host status UI polish",
+        "Schema43/44 inverses and old inverse fixture adaptation; capacity/host status UI polish",
         "Whole product acceptance; no current full-suite green claim"
       ]
     }

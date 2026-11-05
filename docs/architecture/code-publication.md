@@ -3,7 +3,7 @@
 La publicación es un efecto del host con autoridad y recibo propios. El autor y
 el revisor ya terminaron sus intentos; una aceptación histórica no reactiva sus
 procesos ni autoriza nuevos comandos. Este contrato desarrolla E06, E10 y E12 del
-plan completo. Push, PR, merge y recuperación operativa siguen pendientes.
+plan completo. Push, PR, merge y ampliación de carreras físicas siguen pendientes.
 
 **Estado actual:** el propietario puede publicar desde Tareas el commit aceptado
 en una rama local nueva. La solicitud queda guardada con su aceptación exacta;
@@ -47,7 +47,10 @@ flowchart TD
     G --> H[Comprobar cierre físico original]
     H --> I[Guardar resultado y evento juntos]
     G -. resultado incierto .-> J[Conservar solicitud y evidencia sin repetir]
-    J -. pendiente operativo .-> K[Reconciliar efecto original]
+    J --> K[Cerrar dominio original y comprobar procedencia]
+    K --> L[Intento nuevo de sólo lectura]
+    L --> M[Consultar rama y recibo sin repetir escritura]
+    M --> I
 ```
 
 `code_publication_schema.sql` añade la versión 43 y la solicitud inmutable.
@@ -79,7 +82,7 @@ la admisión anterior y no agenda otro intento.
 | Qué pasaría si… | Solución y alcance comprobado |
 | --- | --- |
 | La referencia cambia entre preflight y escritura | CAS de referencia y recibo en una sola transacción; Git real verifica ausencia de recibo parcial. |
-| Git confirma y se pierde la respuesta o falla la consulta posterior | La política conserva incertidumbre y reconcilia sólo con cierre original probado. El producto conserva la solicitud sin repetir; su flujo operativo de reconciliación sigue pendiente. |
+| Git confirma y se pierde la respuesta o falla la consulta posterior | La política conserva incertidumbre y reconcilia sólo con cierre original probado. El producto cierra la autoridad original y crea un intento de observación de sólo lectura, con recibo propio; nunca repite la transacción. |
 | Alguien mueve la rama después | La política conserva efecto histórico y destino observado por separado. No convierte la diferencia en permiso para repetir. |
 | Se reutiliza el ID con otra rama | Recibo ligado a intención completa; no adopta el anterior. |
 | Se reemplaza `.git` por una copia | Identidad original en política y descriptores en capsule; rechazo de metadatos sustituidos. |
@@ -93,24 +96,56 @@ El análisis previo con un subagente de contexto limpio ayudó a separar la nuev
 operación de las sesiones cerradas de inferencia. No reemplaza estas pruebas ni
 constituye la revisión independiente final de toda la rama.
 
+## Recuperación operativa conectada
+
+El propietario envía el intento y fence observados con una clave estable a
+`POST /api/projects/{project}/code-publications/{run}/recovery`. Antes de ejecutar
+otra consulta, el host verifica en el journal global la procedencia original de
+base de datos, proyecto, tarea, intento y fence. Retira los dominios originales y
+proyecta su cierre a los peers originales. Un broker vivo no se adopta como muerto.
+No se acepta del cliente un booleano que afirme cierre.
+
+La migración 44 conserva el comando, prueba de cierre y **nuevo intento de
+observación** en `runtime_publication_observations`. Conserva la solicitud de
+publicación original; no reutiliza su lease cerrado. Esta autoridad específica
+permite únicamente consultas exactas `for-each-ref` del destino y recibo originales.
+El broker rechaza usarla con un launch de escritura. La capsule fija `.git` en
+lectura, sin montar el candidato ni otorgar acceso de escritura a metadatos.
+El candidato puede haber desaparecido; el origen y sus metadatos deben conservar
+sus identidades y registro originales.
+
+Esto permite observar un efecto histórico después de corregir la tarea. Sólo el
+observador de lectura tiene esa excepción de contexto; los gates de inferencia y
+publicación con escritura conservan sus precondiciones. El nuevo dominio también
+debe cerrar físicamente antes de guardar resultado, evento y recibo juntos.
+
+La respuesta distingue `published`, `not_applied` y `uncertain`. En el primer caso
+se conserva por separado si la rama aún apunta al candidato; una rama movida no
+borra el efecto histórico. El segundo acredita que el efecto original no se
+aplicó y permite solicitar explícitamente una publicación nueva. El tercero
+conserva un recibo de observación, sin inventar un resultado final de publicación
+ni autorizar una nueva escritura. Volver a enviar una consulta completada devuelve
+su recibo original sin ejecutar Git otra vez.
+
 ## Verificación y pendientes
 
-[Resultados actuales](../modernization/publication-connected-results.json): 25
-pruebas dirigidas, una integración física, 76 pruebas frontend y build. Cinco
-capturas del panel se comprobaron en escritorio/móvil, incluida respuesta perdida
-y recarga; cero errores de página, desbordamiento o incidencias Axe en el panel.
-El navegador usa testigos sintéticos y retiene la ejecución en cola; no prueba el
-efecto Git. [Auditoría](../design/audits/2026-11-05-code-publication/report.md).
+[Resultados de recuperación](../modernization/publication-recovery-results.json)
+y [paquete](../modernization/publication-recovery-packaging.json). La integración
+física confirma pérdida de respuesta después del commit, una única transacción,
+un intento de lectura distinto y ningún turno adicional del modelo. Las pruebas
+de almacenamiento usan testigos explícitamente sintéticos y verifican contexto
+corregido, prueba original exacta, estado incierto y ausencia de efecto.
+Las [capturas de recuperación](../design/audits/2026-11-05-publication-recovery/report.md)
+comprueban el mismo comando después de respuesta perdida y recarga; no son prueba
+del efecto físico Git. [Docstrings](../modernization/publication-recovery-docstrings.json).
 
-El [wheel actual](../modernization/publication-connected-packaging.json) pasa 25
-pruebas aisladas. La comprobación ampliada de consumidores dio 34 aprobadas y un
-fallo de un fixture de reversión 42 frente a esquema 43. Se conserva el fallo y se
-registra su adaptación con el rollback 43 en [detalles diferidos](../modernization/deferred-details.md).
+La [entrega local anterior](../modernization/publication-connected-results.json)
+conserva sus pruebas y límites históricos. Los fixtures de reversión de esquemas
+anteriores y las inversas 43/44 quedan en [detalles diferidos](../modernization/deferred-details.md).
 No se afirma una suite global actual verde; el [baseline](../modernization/resumed-baseline-results.json)
-es anterior a esta integración. [Docstrings](../modernization/publication-connected-docstrings.json).
+es anterior a estas integraciones.
 
-Siguientes capacidades principales: reconciliación operativa de la publicación
-incierta, push/PR/merge con identidad remota exacta y consulta antes de retry;
-exclusión física durante cutover legacy. Los detalles de cola/UI y migración se
-conservan para su pasada correspondiente. Crear la rama local no completa el
-recorrido de publicación ni el plan general.
+Siguiente capacidad principal: push/PR/merge con identidad remota exacta y consulta
+antes de retry. También siguen pendientes exclusión física durante cutover legacy,
+ampliación de carreras/crashes, migración/restore y evaluación de producto completo.
+La recuperación local no completa esas capacidades ni el plan general.

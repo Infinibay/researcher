@@ -214,7 +214,17 @@ class PeerRegistry:
                 from backend.runtime.publication_git import PublicationRefIntent
 
                 publications = CodePublications(self.runs)
-                result["publication_view"] = publications.current(conn, row)
+                from backend.runtime.publication_recovery import PublicationRecovery
+
+                recovery = PublicationRecovery(self.runs)
+                result["publication_observation"] = (
+                    recovery.observation(conn, row) is not None
+                )
+                result["publication_view"] = (
+                    recovery.subject(conn, row)
+                    if result["publication_observation"]
+                    else publications.current(conn, row)
+                )
                 request = publications._request(conn, row["project_id"], row["id"])
                 result["publication_ref_intent"] = PublicationRefIntent(
                     row["id"], request["target_ref"], request["expected_target_sha"]

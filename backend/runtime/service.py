@@ -246,6 +246,114 @@ class RuntimeService:
         )
         return await self._schedule(run) if admitted else run
 
+    async def reconcile_publication(self, **command):
+        """Recover one original publication by new readonly observation; an exact completed owner command returns without launching again."""
+        from backend.runtime.publication_recovery import PublicationRecovery
+
+        self._accepting()
+        recovery = PublicationRecovery(self.store)
+        receipt = await asyncio.to_thread(recovery.receipt, **command)
+        if receipt is not None:
+            return receipt
+        key = (command["project_id"], command["run_id"], command["operation_key"])
+        intent = recovery.intent(**command)
+        existing = self._recovery_jobs.get(key)
+        if existing is not None and not existing[1].done():
+            if existing[0] != intent:
+                raise RunConflict("Recovery key already identifies another request")
+            return await asyncio.shield(existing[1])
+        self._recovery_jobs = {
+            key: entry
+            for key, entry in self._recovery_jobs.items()
+            if not entry[1].done()
+        }
+        if len(self._recovery_jobs) >= 128:
+            raise RunConflict("Recovery control capacity reached")
+        task = asyncio.create_task(self._observe_publication_once(command))
+        task.add_done_callback(
+            lambda done: None if done.cancelled() else done.exception()
+        )
+        self._recovery_jobs[key] = (intent, task)
+        return await asyncio.shield(task)
+
+    async def _observe_publication_once(self, command):
+        """Retire original physical authority, own the fresh observer and save its result only after its separate domain closes."""
+        from backend.runtime.code_publications import CodePublications
+        from backend.runtime.publication_recovery import PublicationRecovery
+
+        recovery = PublicationRecovery(self.store)
+        slot = self._workers.get(command["run_id"])
+        if slot is not None:
+            self._withdraw(slot, "failed")
+            await asyncio.shield(slot.task)
+        if not hasattr(self.runtime, "close_publication") or not hasattr(
+            self.runtime, "observe_publication"
+        ):
+            raise RunConflict(
+                "Configured runtime cannot perform owned readonly publication recovery"
+            )
+        proof = await asyncio.to_thread(
+            self.runtime.close_publication,
+            self.store,
+            command["project_id"],
+            command["run_id"],
+            command["attempt_id"],
+        )
+        async with self._admission_lock:
+            self._accepting()
+            if len(self._workers) >= self.max_concurrent or any(
+                w.spec.project_id == command["project_id"]
+                for w in self._workers.values()
+            ):
+                raise RunConflict(
+                    "Host capacity occupied; retain this original recovery request"
+                )
+            lease, peers = await asyncio.to_thread(
+                recovery.begin, **command, proof=proof, owner_id=self.owner_id
+            )
+            run = await asyncio.to_thread(
+                self.store.get, lease.project_id, lease.run_id
+            )
+            binding = await asyncio.to_thread(
+                self.store.workspace_binding, lease.project_id, lease.run_id
+            )
+            slot = _Worker(
+                run,
+                Path(binding.workspace),
+                binding,
+                attempt_id=lease.attempt_id,
+                task=asyncio.current_task(),
+            )
+            slot.lease_deadline = time.monotonic() + 30
+            slot.intent_committed.set()
+            self._workers[lease.run_id] = slot
+        heartbeat = asyncio.create_task(self._heartbeat(slot, lease))
+        result = None
+        try:
+            result = await self.runtime.observe_publication(
+                peers,
+                active=lambda: slot.active and time.monotonic() < slot.lease_deadline,
+            )
+        finally:
+            slot.active = False
+            heartbeat.cancel()
+            await asyncio.gather(heartbeat, return_exceptions=True)
+            try:
+                await peers.aclose()
+                closed = self.runtime.consume_closure(lease) is True and peers.closed()
+                if result is None or not closed:
+                    await asyncio.to_thread(
+                        CodePublications(self.store).interrupted,
+                        lease,
+                        physically_closed=closed,
+                        reason="ObservationInterrupted",
+                    )
+            finally:
+                self._workers.pop(lease.run_id, None)
+        if not closed:
+            raise RunConflict("Readonly observation physical closure remains uncertain")
+        return await asyncio.to_thread(recovery.complete, lease, result[0], result[1])
+
     async def retry_start(self, **command):
         self._accepting()
         run, requested = await asyncio.to_thread(self.store.request_start, **command)

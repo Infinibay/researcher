@@ -20,3 +20,17 @@ test('publication reload and retry preserve the entire original accepted subject
     assert.equal((sent[0] as unknown[])[0],'/api/projects/101/runs/author%3Aa/code-publications')
   } finally {globalThis.fetch=original}
 })
+
+test('publication recovery retries the exact original attempt and fence after reload',async()=>{
+  const {preparePublicationRecovery,publicationRecoveryActions,sendPublicationRecovery}=await import('../src/api/publicationRecovery.ts')
+  const values=new Map<string,string>(),storage={getItem:(k:string)=>values.get(k)??null,setItem:(k:string,v:string)=>{values.set(k,v)},removeItem:(k:string)=>{values.delete(k)}}
+  const action=preparePublicationRecovery(101,24,'author:a','publication:a','original-attempt',3)
+  publicationRecoveryActions.save(storage,action)
+  const original=globalThis.fetch,sent:unknown[]=[]
+  try {
+    globalThis.fetch=async(url,options)=>{sent.push([String(url),JSON.parse(String(options?.body))]);if(sent.length===1)throw new TypeError('response lost');return Response.json({run_id:'publication:a',source_attempt_id:'original-attempt',recovery_operation_key:action.body.operation_key,publication_performed:true,observed:{state:'published'}})}
+    await assert.rejects(sendPublicationRecovery(action),/response lost/)
+    await sendPublicationRecovery(publicationRecoveryActions.load(storage,101,24,'author:a')!)
+    assert.deepEqual(sent[0],sent[1]);assert.equal((sent[0] as unknown[])[0],'/api/projects/101/code-publications/publication%3Aa/recovery')
+  } finally {globalThis.fetch=original}
+})

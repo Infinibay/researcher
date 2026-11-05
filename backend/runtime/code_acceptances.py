@@ -267,7 +267,7 @@ class CodeAcceptances:
             "SELECT 1 FROM sqlite_master WHERE type='table' AND name='runtime_code_publication_requests'"
         ).fetchone():
             latest = conn.execute(
-                """SELECT p.*,r.status,r.operation_key FROM runtime_code_publication_requests p
+                """SELECT p.*,r.status,r.operation_key,r.current_attempt_id,r.fence FROM runtime_code_publication_requests p
             JOIN runtime_runs r ON r.id=p.run_id WHERE p.project_id=? AND p.author_run_id=? ORDER BY p.created_at DESC,p.rowid DESC LIMIT 1""",
                 (project_id, run_id),
             ).fetchone()
@@ -279,6 +279,8 @@ class CodeAcceptances:
                     {
                         "run_id": latest["run_id"],
                         "status": latest["status"],
+                        "attempt_id": latest["current_attempt_id"],
+                        "fence": latest["fence"],
                         "operation_key": latest["operation_key"],
                         "intent": json.loads(latest["intent_json"]),
                         "result": result,
@@ -289,7 +291,11 @@ class CodeAcceptances:
                             + latest["target_ref"]
                             + ". El registro conserva la referencia observada al publicar."
                         )
-                        if result
+                        if result and result["publication_performed"]
+                        else "La publicación original no se aplicó; no se repitió su transacción."
+                        if result and result['observed']['state']=='not_applied'
+                        else "No se ha confirmado el resultado. Puedes comprobar qué ocurrió sin volver a publicar."
+                        if latest['status']=='reconciling'
                         else "Publicación registrada; consulta su estado y su resultado antes de solicitar otra.",
                     }
                 )

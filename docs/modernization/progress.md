@@ -5530,3 +5530,70 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
 - Test/browser sessions terminal; private browser server explicitly stopped.
   Protected root .agents/.codex/AGENTS.md left unstaged; original checkout untouched.
   This is a local checkpoint; no new push/merge/deploy or goal pause.
+
+
+## Operational readonly publication recovery — base e402453, 2026-11-05
+
+- Previous goal turn: progress, actual local publication checkpoint e402453. This
+  turn implements the next major capability, not another generic architecture
+  audit. Full plan remains active and explicit macro-first policy persists.
+- Read Ken owned-local-code-publication; targeted find/related still indexes old
+  checkout and cannot map managed additions. Read actual managed consumers once:
+  publication policy/controller/executor/capsule, service recovery, peer admission,
+  authority journal and existing generic recovery tests. No repeated index search.
+- Ruling: preserve original publication identity and add a NEW fenced readonly
+  observation attempt on that run, with explicit immutable per-attempt capability.
+  Do not reuse closed writer lease or introduce an inference turn/new publication
+  identity. Schema44 records original recovery command/closure, source and observer
+  attempts and result. Historical context exception applies only to this readonly
+  capability; native inference/write publication gates retain exact acceptance.
+  Cost if wrong: an incorrectly recognized observation could broaden authority;
+  broker enforces distinct typed read-only launch and exact original target/marker.
+- Host first matches original database/project/task/attempt/fence in witnessed
+  global grants, retires dead original domain and projects closure. Live original
+  broker cannot be adopted as dead. Fresh observer domain permits only exact
+  for-each-ref queries through readonly pinned .git, with no candidate mount,
+  fetch/update-ref/stdin transaction or model capability. Candidate may be gone;
+  original source registration and metadata identity remain required.
+- Result/event/recovery receipt save atomically after separate observer physical
+  closure. Published/non-applied/uncertain stay distinct; uncertainty never becomes
+  a successful publication or permission to replay. Corrected context retains
+  historical applied effect. Exact completed recovery key returns original receipt
+  before creating another observer. Tareas saves original attempt/fence/key before
+  send, restores it on reload and explains response-loss uncertainty with an example.
+- RED2missing module→storageGREEN; frontend saved packetREDmissing module→GREEN.
+  Additional central provenance regressionRED: locally closed bound namespace with
+  no original global grant was wrongly accepted as domain proof. Added refusal,
+  directed/packageGREEN. No unrelated edge-case audit or minor polish pass.
+- Actual physical publication+recovery pair2PASS128.69s. One normal publication;
+  another actual update-ref commits then controlled transport response is lost.
+  Separate readonly attempt finds original marker; writes count remains exactly1,
+  stored receipt replay launches nothing and inference count unchanged. Git/kernel/
+  broker/SQLite real; author/reviewer generation and Ken fixture controlled.
+  Physical run preceded only final restrictive missing-global-proof guard, separately
+  red/green in current directed and wheel tests; no third expensive native rerun
+  for that isolated rejection check or documentation edits.
+- Current directed42PASS10.05s, includes12generic recovery cases. Extracted wheel
+  42PASS,319backend modules only from package,713matchingPython/SQL. Frontend77PASS,
+  TypeScript/Vite buildPASS (known warnings deferred). Initial commands used wrong
+  frontend cwd and test_recovery.py path; corrected invocation completed with actual
+  evidence, not product failures. Ruff/diff check pass;47new/changed Python definitions
+  and modules documented in English, including inherited host capability owners.
+- Actual Tasks/owner HTTP/RuntimeService/new attempt/SQLite QA5captures inspected
+  at1440/390px. Deliberately synthetic source/observer closure/ref witnesses, no Git
+  or model execution in browser. Two identical recovery POSTs with reply loss/reload
+  recover one receipt and one observer. Zero page errors/overflow/Axe in panel;
+  not whole-page acceptance or representative human comprehension evaluation.
+- Main local recovery capability is connected; record DD-005 interrupted observer
+  before receipt/new explicit observation and pre-command empty scope for later
+  recovery/crash pass. Inverses43/44, old migration fixtures and capacity/host UI
+  remain DD-003/004. Do not spiral into these before remote effects. Next main work:
+  exact remote push/PR/merge with stable remote receipt/reconciliation, then remaining
+  legacy/engine/agent communication/tools/prompts and6web routes/12page acceptance,
+  installation/restore/CLI/TUI, inherited failures and final whole-branch fresh review.
+- No global suite green claim. Historical baseline0c8b8d9 predates publication and
+  still2045PASS/100FAIL/3SKIP; current migration inverse adaptations are additional
+  known work, not asserted inherited. No new provider inference/user repo mutation.
+- Private browser server stopped; source/package/native/browser sessions terminal.
+  Original checkout untouched; root .agents/.codex/AGENTS.md unstaged. Local commit
+  only, no new push/merge/deploy or goal pause. Coverage/dashboard/status updated.

@@ -22,7 +22,7 @@ export function CodePublicationRequest({data,available,readOnly,onPending}:{data
     client.invalidateQueries({queryKey:['task-workspace',data.project_id,data.task_id]})
     client.invalidateQueries({queryKey:['code-result',data.project_id,data.run_id]})
   }})
-  const canPublish=available && data.acceptance_current && !!data.acceptance && !data.publication.run_id && !notice
+  const canPublish=available && data.acceptance_current && !!data.acceptance && (!data.publication.run_id || data.publication.result?.observed.state==='not_applied') && !notice
   if(!canPublish && !saved && !error && !notice) return null
   /** Persist the exact accepted observation before the first network call; retries never refresh it silently. */
   function submit() {

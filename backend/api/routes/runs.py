@@ -418,6 +418,16 @@ async def reconcile_run(
     )
 
 
+@router.post("/{project_id}/code-publications/{run_id}/recovery")
+async def recover_code_publication(
+    project_id: int, run_id: str, body: RecoverRun, request: Request
+):
+    """Observe a closed original local publication under fresh readonly host authority; never replay its transaction."""
+    return await service(request).reconcile_publication(
+        project_id=project_id, run_id=run_id, **body.model_dump()
+    )
+
+
 @router.post("/{project_id}/tasks/{task_id}/runs", status_code=202)
 async def start_run(project_id: int, task_id: int, body: StartRun, request: Request):
     try:

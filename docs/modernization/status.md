@@ -7,7 +7,7 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 - Runtime durable por proyecto/tarea/intento/contexto, controles humanos, recuperación, preguntas y propuestas separadas de aceptación. Codex CLI por suscripción y Ken publicado ensayados; consumidores/loops antiguos y ampliación productiva pendientes.
 - Investigación nativa con adjuntos, HTTPS/DOI/arXiv/PDF, CSV/DOCX/JSON/XML, estructura/offsets/citas y recuperación semántica local fijada; hallazgos provisionales e informes draft. Búsqueda web nativa trazable y revisión documental independiente ensayadas. No equivale a validación científica representativa. [Revisión documental](../architecture/finding-reviews.md).
 - Wiki local/global con revisiones, recibos, historia y capturas. Migración 33 conserva datos y rechaza downgrade con pérdida. [Contrato](../architecture/wiki-knowledge.md).
-- Desarrollo desde Tareas/Conversación con edición privada, captura Git exacta y comprobaciones configuradas por el host. Revisión independiente solicitada desde Tareas; aceptación explícita del propietario. Stop/correcciones conservan evidencia sin aprobar contexto obsoleto. Publicación en rama local conectada; faltan recuperación operativa y efectos remotos. [Entrada pública y límites](public-development.md).
+- Desarrollo desde Tareas/Conversación con edición privada, captura Git exacta y comprobaciones configuradas por el host. Revisión independiente solicitada desde Tareas; aceptación explícita del propietario. Stop/correcciones conservan evidencia sin aprobar contexto obsoleto. Publicación en rama local conectada; recuperación local de sólo lectura conectada; faltan efectos remotos. [Entrada pública y límites](public-development.md).
 - Seis pilotos web: Tareas, Conversación, Informes, Archivos, Wiki y Hallazgos; 18/36 conceptos de escritorio y 6/12 móviles, con 0/12 páginas completamente aceptadas. [Inventario](../design/inventory.md).
 - Inicialización explícita, autoridad/broker/dominio, acceso y wheel comprobados en los recorridos documentados. Instalación integral y backup/restore pendientes.
 
@@ -18,20 +18,23 @@ El propietario reactivó el objetivo el 2026-11-05. La suite global del checkpoi
 965 casos del runtime pasan. Mismos identificadores de fallo heredados, sin afirmar
 causas idénticas. [Recibo](resumed-baseline-results.json).
 
-La publicación local ya conecta aceptación, admisión durable, intento nuevo del
-host sin inferencia, broker/capsule y Tareas. Pasa 25 pruebas dirigidas y una
-integración física con Git/kernel/SQLite reales; 76 pruebas frontend y build.
-La recuperación de una respuesta HTTP perdida conserva cuerpo/clave/rama después
-de recargar. Wheel: 25 pasan, 314 módulos sólo del paquete y 709 fuentes
-coincidentes. 79 definiciones/módulos documentados en inglés.
+La publicación local conecta aceptación, admisión durable, nuevo host sin
+inferencia, broker/capsule y Tareas. La recuperación ahora prueba cierre original
+y usa un intento nuevo con acceso de lectura a rama/recibo; conserva historia tras
+corrección y distingue efecto aplicado, no aplicado e incierto.
 
-Consumidores ampliados: 34 pasan y un fixture de reversión42 falla al encontrar el
-nuevo esquema43. Se registra para la pasada de migraciones; no se atribuye al
-baseline heredado ni se afirma suite global verde. Reconciliación operativa,
-push/PR/merge y exclusión física legacy siguen pendientes.
-[Contrato](../architecture/code-publication.md),
-[resultados](publication-connected-results.json),
-[auditoría UI](../design/audits/2026-11-05-code-publication/report.md).
+Pasan 42 pruebas dirigidas y dos integraciones físicas con Git/kernel/SQLite
+reales en 128.69 s, con generación controlada. Frontend77/build; cinco
+capturas y recuperación del mismo comando después de perder la respuesta y
+recargar. 47 definiciones/módulos documentados en inglés. El wheel tiene
+verificación separada, sin atribuirle una instalación integral del host.
+
+No se afirma suite global verde: el baseline es anterior y siguen pendientes
+inversas43/44 y adaptación de fixtures de esquemas previos. Push/PR/merge,
+exclusión física legacy y ampliación de carreras/crashes continúan pendientes.
+[Contrato](../architecture/code-publication.md), [resultados](publication-recovery-results.json),
+[paquete](publication-recovery-packaging.json),
+[auditoría UI](../design/audits/2026-11-05-publication-recovery/report.md).
 
 La entrega de entrada pública pasa diez pruebas dirigidas, incluido un recorrido
 HTTP hasta aceptación con Git/kernel/SQLite reales y generación controlada; 51

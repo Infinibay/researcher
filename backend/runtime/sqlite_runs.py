@@ -1399,8 +1399,13 @@ class SQLiteRunStore:
         """Validate a host publication's exact acceptance without reopening done; all native inference kinds retain the ordinary task gate."""
         if row["execution_kind"] == "code_publication":
             from backend.runtime.code_publications import CodePublications
+            from backend.runtime.publication_recovery import PublicationRecovery
 
-            CodePublications(self).current(conn, row)
+            recovery = PublicationRecovery(self)
+            if recovery.observation(conn, row) is not None:
+                recovery.subject(conn, row)
+            else:
+                CodePublications(self).current(conn, row)
         else:
             self._task(conn, row["project_id"], row["task_id"])
 
@@ -1476,9 +1481,12 @@ class SQLiteRunStore:
             lease.fence,
             lease.fence,
         )
-        if actual != expected or row["context_version"] != self._context(
+        from backend.runtime.publication_recovery import PublicationRecovery
+
+        readonly_observation = PublicationRecovery.observation(conn, row) is not None
+        if actual != expected or (not readonly_observation and row["context_version"] != self._context(
             conn, row["task_id"]
-        ):
+        )):
             raise StaleAttempt(
                 "Attempt identity, fence or context is no longer current"
             )

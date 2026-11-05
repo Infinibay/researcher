@@ -47,6 +47,7 @@ from backend.runtime.peer_process import (
 from backend.runtime.publication_capsule import (
     PublicationGitCapsule,
     PublicationGitLaunch,
+    PublicationObservationLaunch,
 )
 
 
@@ -542,6 +543,20 @@ class PeerBroker:
                         raise AuthorityConflict(
                             "Host publication requires its exact typed Git launch"
                         )
+                    observing = admission.get("publication_observation", False)
+                    if observing != isinstance(
+                        git_launch, PublicationObservationLaunch
+                    ):
+                        raise AuthorityConflict(
+                            "Observation authority cannot publish or adopt write authority"
+                        )
+                    if observing and git_launch.arguments[-1] not in (
+                        admission["publication_ref_intent"].target_ref,
+                        admission["publication_ref_intent"].receipt_ref,
+                    ):
+                        raise AuthorityConflict(
+                            "Observation ref differs from the original publication"
+                        )
                     if git_launch.input_text is not None and (
                         git_launch.arguments[-2:] != ("update-ref", "--stdin")
                         or git_launch.input_text
@@ -676,7 +691,9 @@ class PeerBroker:
                 }
             if git_launch is not None:
                 manifest = {
-                    "profile": "owned-git-publication-v1"
+                    "profile": "owned-git-publication-observation-v1"
+                    if isinstance(git_launch, PublicationObservationLaunch)
+                    else "owned-git-publication-v1"
                     if isinstance(git_launch, PublicationGitLaunch)
                     else "owned-git-preparation-v1",
                     "execution_kind": "code_publication"
@@ -788,7 +805,8 @@ class PeerBroker:
                 else None,
                 native_state=native_state,
                 workspace_write=workspace_write,
-                metadata_write=isinstance(git_launch, PublicationGitLaunch),
+                metadata_write=isinstance(git_launch, PublicationGitLaunch)
+                and not isinstance(git_launch, PublicationObservationLaunch),
             )
             self._projection_source = registry
             self._gate_observed[operation_id] = False

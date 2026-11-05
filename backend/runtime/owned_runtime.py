@@ -288,6 +288,22 @@ class OwnedCodexRuntime:
 
         return await execute_owned_publication(self, peers, active=active)
 
+    async def observe_publication(self, peers, *, active):
+        """Observe original ref evidence through a new readonly domain; never reactivate the closed publishing lease."""
+        from backend.runtime.publication_controller import execute_owned_publication
+
+        return await execute_owned_publication(
+            self, peers, active=active, observation=True
+        )
+
+    def close_publication(self, store, project_id, run_id, attempt_id):
+        """Prove retirement of this exact original publication's global grants before admitting any new readonly observer."""
+        from backend.runtime.publication_closure import close_original_publication
+
+        return close_original_publication(
+            self.authority, store, project_id, run_id, attempt_id
+        )
+
     @asynccontextmanager
     async def open(
         self,

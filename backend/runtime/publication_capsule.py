@@ -6,7 +6,7 @@ from pathlib import Path
 
 from backend.runtime.broker_profile import AnalysisCapsule
 from backend.runtime.contracts import WorkspaceChanged
-from backend.runtime.development_workspace import git_environment
+from backend.runtime.development_workspace import _POLICY, git_environment
 from backend.runtime.git_capsule import GitAsset, GitCapsule
 from backend.runtime.publication_git import PublicationDirectory, PublicationView
 from backend.runtime.workspaces import PEER_WORKSPACE
@@ -60,6 +60,33 @@ class PublicationGitLaunch:
             )
 
 
+@dataclass(frozen=True)
+class PublicationObservationLaunch(PublicationGitLaunch):
+    """Exact readonly ref query; no allocation, stdin transaction, fetch or other Git operation can enter this capability."""
+
+    def __post_init__(self):
+        """Allow only the fixed ref observation command; the broker additionally binds its ref to the original target or marker."""
+        super().__post_init__()
+        prefix = (
+            *_POLICY,
+            "-c",
+            "uploadpack.packObjectsHook=",
+            "-c",
+            "transfer.fsckObjects=true",
+            "for-each-ref",
+            "--count=2",
+            "--format=%(refname)%00%(objectname)",
+        )
+        if (
+            self.cwd != str(PEER_WORKSPACE)
+            or self.input_text is not None
+            or self.arguments[:-1] != prefix
+        ):
+            raise ValueError(
+                "Readonly publication observation permits only exact ref reads"
+            )
+
+
 class PublicationGitCapsule(GitCapsule):
     """Reuse the fixed Git program while granting write access only to its original source metadata directory."""
 
@@ -94,6 +121,16 @@ class PublicationGitCapsule(GitCapsule):
     def _mounts(self):
         """Expose only original pinned descriptors; candidate and source working files never become writable."""
         view = self.launch.view
+        if isinstance(self.launch, PublicationObservationLaunch):
+            metadata = self._directory(view.source_metadata)
+            return [
+                "--ro-bind-fd",
+                str(self._asset_fd),
+                self.launch.asset.path,
+                "--ro-bind-fd",
+                str(metadata),
+                str(PEER_WORKSPACE / ".git"),
+            ]
         source, candidate = Path(view.source.workspace), Path(view.workspace)
         if source.is_relative_to(candidate) or candidate.is_relative_to(source):
             raise ValueError(
