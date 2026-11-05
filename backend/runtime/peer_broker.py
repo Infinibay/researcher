@@ -49,7 +49,11 @@ from backend.runtime.publication_capsule import (
     PublicationGitLaunch,
     PublicationObservationLaunch,
 )
-from backend.runtime.remote_capsule import RemoteGitCapsule, RemoteGitLaunch
+from backend.runtime.remote_capsule import (
+    RemoteGitCapsule,
+    RemoteGitLaunch,
+    RemoteObservationLaunch,
+)
 
 
 def _digest(value):
@@ -559,6 +563,8 @@ class PeerBroker:
                     )
                     if (
                         not isinstance(git_launch, RemoteGitLaunch)
+                        or admission.get("remote_observation", False)
+                        != isinstance(git_launch, RemoteObservationLaunch)
                         or self.remote_transport is None
                         or git_launch.intent != original
                         or git_launch.view != admission["remote_view"]

@@ -5788,3 +5788,72 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
 - New test/package jobs terminal. Local checkpoint only, no push/merge/deploy.
   Protected root .agents/.codex/AGENTS.md remain untracked; original checkout
   untouched. Task results/packaging/docstrings linked in current dashboard.
+
+
+## Fresh readonly remote recovery — base6014f7c, 2026-11-05
+
+- Previous goal turn made real progress: owned HTTPS transport6014f7c. Continued
+  main capability per explicit macro-first policy; no unrelated cleanup/audits.
+  Ken focused recovery query/relationship unhelpful (managed files unindexed),
+  read actual known sources/consumers instead. Applied executing-plans,
+  ken-plan-change, TDD and evidence-before-completion; no new subagents.
+- Schema46 records exclusive original HTTP process/client identity and immutable
+  fresh readonly observer command/closure/result. RemoteHTTPClients registers
+  before first request; actual controller records close after AsyncClient closes.
+  Recovery requires exact DB/attempt/fence plus original global Git retirement.
+  Live host without recorded HTTP closure blocks; same-kernel/namespace absence/
+  replacement may prove original process death, no host signaling/remote-stop claim.
+- Ruling: trusted host owns its HTTP sockets exclusively, never transferring them
+  to another process. Original kernel/namespace visibility ambiguity blocks proof.
+  Old schema45 uncertainty lacking recorded HTTP identity is not silently adopted.
+  Cost: those old attempts need explicit operator reconciliation, not fabricated
+  retrospective identities. Server may still finish after every local client closes.
+- Reused existing local observer lifecycle through fixed trusted table selector;
+  local intent/table/route behavior preserved. Fresh RemoteRecovery subject reads
+  historical source/metadata/remote registration, not current acceptance/candidate.
+  Context correction retains history without granting new acceptance. Native/model
+  peers and RemotePublications.issue forbidden. RemoteObservationLaunch only exact
+  original ls-remote, source metadata readonly, sealed safe config, no candidate
+  mount. HTTP recovery GET-only; POST hook refuses observer authority.
+- Shared service owns fresh observer and closes original writer first, including
+  original HTTP scope. Strict paired/CSRF remote recovery route accepts only exact
+  attempt/fence/key; completed same command returns original receipt without
+  rescheduling/network. Complete atomically saves original known facts, observations,
+  result/event/receipt after own closure. Remote absence remains uncertain; no
+  manufactured unissued merge stage. Known original effect facts remain immutable.
+- RED4new cases missing remote_clients/remote_recovery→storageGREEN; extended6new
+  cases cover live HTTP refusal, history after correction, absence uncertainty,
+  wrong HTTP proof, readonly push rejection and owner HTTP identical receipt.
+  First native extension failed on TEST field current_attempt_id (SQLite) vs public
+  RunView.attempt_id; fixed from actual contract, not counted as feature RED.
+- First broad run63PASS4FAIL: max-schema fixture45 expected46; and3actual isolated
+  -S broker-crash subprocesses imported HTTPX via new authority dependency. Moved
+  remote runtime imports inside relevant methods, restoring dependency-light
+  observation detection. Updated startup expectation46; downgrade guards unchanged.
+  Final directed88PASS56.29s, including all3isolated crash tests, no skips.
+- Final actual TLS/native integration1PASS119.47s: real Git smart HTTP and controlled
+  Forgejo REST, original PR and merge metadata replies deliberately lost, fresh
+  observers recover both with one POST each; then held original push+Stop, server
+  later finishes, candidate directory moved away, fresh readonly Git observer
+  recovers receipt with no new push. Repeated same recovery opens no network.
+  Final local client/domain proofs real, no model inference, token absent journal.
+  Fixture remains NOT an actual Forgejo binary or user server/protection trial.
+- Final current wheel88PASS,337backend imports only package,730matching Python/SQL
+  sources, isolated -I -S explicit dependencies/offline assets.58new/changed qualified
+  definitions/modules have English docstrings. Ruff/diff checks pass. No new global
+  suite/full-host-install/UI acceptance claim; frontend unchanged.
+- Main recovery capability works; stop expansion here. Next major: Tasks push/PR/
+  merge/recovery controls with persistent original intent and explicit explanations.
+  Prepared next brief: owner readonly registered-remote discovery should supply
+  actual repo ID instead of asking user for internal IDs; advertise real configured
+  capability and keep remote away from generic run recovery. Existing Tasks pilot
+  selected already; full12page acceptance and remaining6routes still open.
+- Deferred details include interrupted observer before receipt, old attempts/HTTP
+  crash expansion, inverses43/44/45/46, adoption after withdrawal. Explicit
+  continuation of unissued partial merge stage remains a main product obligation,
+  never an automatic recovery write. Legacy engine/roles/flows/tools/prompts/books/
+  human-comprehension,43scenarios, install/restore/CLI/TUI/inherited failures and
+  final fresh branch review remain. Full goal active, no percentage/completion claim.
+- All new package/native/directed handles terminal; no browser server created.
+  Local checkpoint only: no push/merge/deploy; original checkout and protected root
+  .agents/.codex/AGENTS.md untouched. Current receipts linked from dashboard.

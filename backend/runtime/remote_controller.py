@@ -13,25 +13,37 @@ from backend.runtime.forgejo_publication import ForgejoPublicationClient
 from backend.runtime.git_capsule import GitAsset
 from backend.runtime.peer_broker import PeerBroker
 from backend.runtime.peer_process import PeerUncertain
-from backend.runtime.remote_executor import OwnedRemoteGitExecutor
+from backend.runtime.remote_executor import OwnedRemoteGitExecutor, OwnedRemoteObserver
 from backend.runtime.remote_publication import (
     RemoteEffectUncertain,
     push_candidate_remote,
+    reconcile_remote_push,
 )
 from backend.runtime.remote_runtime import RemotePublications
 
 
-async def execute_owned_remote(runtime, peers, *, active):
+async def execute_owned_remote(runtime, peers, *, active, observation=False):
     """Execute one explicit remote stage under fresh ownership; retain unknown effects and prove only local client/domain closure."""
     registry, lease = peers.registry, peers.lease
     records = RemotePublications(registry.runs)
+    from backend.runtime.remote_clients import RemoteHTTPClients
+    from backend.runtime.remote_recovery import RemoteRecovery
+
+    recovery = RemoteRecovery(registry.runs)
+    clients = RemoteHTTPClients(registry.runs)
     config = runtime.remote_transport
     if config is None:
         raise RunConflict("Owned remote transport is not configured")
     with registry.runs._transaction() as conn:
         row = registry.runs._row(conn, lease.project_id, lease.run_id)
         request = records._request(conn, lease.project_id, lease.run_id)
-        view = records.current(conn, row)
+        if observation != (recovery.observation(conn, row) is not None):
+            raise RunConflict(
+                "Remote transport mode differs from original attempt authority"
+            )
+        view = (
+            recovery.subject(conn, row) if observation else records.current(conn, row)
+        )
     protocol = records.protocol(lease.project_id, lease.run_id)
     remote = protocol["push"].remote if isinstance(protocol, dict) else protocol.remote
     if remote.api_base != config.api_base:
@@ -40,7 +52,13 @@ async def execute_owned_remote(runtime, peers, *, active):
     needs_git = stage in ("push", "merge")
     broker = executor = client = watcher = None
     path = None
+    effects = {
+        effect["effect_name"]
+        for effect in records.request(lease.project_id, lease.run_id)["effects"]
+    }
+    observations = {}
     http_result = None
+    client_registered = False
     proof = None
     current = asyncio.current_task()
 
@@ -60,7 +78,7 @@ async def execute_owned_remote(runtime, peers, *, active):
 
     async def issue_http(method, url, payload):
         """Reserve only the actual original POST at its write boundary, after readonly preflights and before network release."""
-        if stage not in ("pull", "merge"):
+        if observation or stage not in ("pull", "merge"):
             raise RunConflict("This remote stage has no HTTP write permission")
         if stage == "pull":
             expected_url = (
@@ -130,22 +148,30 @@ async def execute_owned_remote(runtime, peers, *, active):
                         remote_transport=config,
                     )
                     owner = await stack.enter_async_context(AsyncPeerBroker(broker))
-                client = await stack.enter_async_context(
-                    ForgejoPublicationClient(
-                        config.api_base,
-                        config.token(),
-                        verify=config.ssl_context(),
-                        before_request=live,
-                        before_write=issue_http,
-                    )
+                client = ForgejoPublicationClient(
+                    config.api_base,
+                    config.token(),
+                    verify=config.ssl_context(),
+                    before_request=live,
+                    before_write=issue_http,
                 )
+                await asyncio.to_thread(clients.open, lease)
+                client_registered = True
+                await stack.enter_async_context(client)
                 watcher = asyncio.create_task(watch())
                 try:
-                    if needs_git:
+                    if needs_git and (
+                        not observation
+                        or ("push" if stage == "push" else "merge_git") in effects
+                    ):
                         intent = (
                             protocol["push"] if isinstance(protocol, dict) else protocol
                         )
-                        executor = OwnedRemoteGitExecutor(
+                        executor = (
+                            OwnedRemoteObserver
+                            if observation
+                            else OwnedRemoteGitExecutor
+                        )(
                             owner=owner,
                             registry=registry,
                             lease=lease,
@@ -156,25 +182,60 @@ async def execute_owned_remote(runtime, peers, *, active):
                             client=client,
                             effect_name="push" if stage == "push" else "merge_git",
                         )
-                        observed = await push_candidate_remote(
-                            view, intent, executor=executor
+                        observed = (
+                            await reconcile_remote_push(
+                                view,
+                                intent,
+                                executor=executor,
+                                original_client_closed=True,
+                            )
+                            if observation
+                            else await push_candidate_remote(
+                                view, intent, executor=executor
+                            )
                         )
-                        await asyncio.to_thread(
-                            records.observe,
-                            lease,
-                            "push" if stage == "push" else "merge_git",
-                            observed,
-                            client_closed=True,
+                        name = "push" if stage == "push" else "merge_git"
+                        if observation:
+                            observations[name] = observed
+                        else:
+                            await asyncio.to_thread(
+                                records.observe,
+                                lease,
+                                name,
+                                observed,
+                                client_closed=True,
+                            )
+                    if stage == "pull" and (not observation or "pull" in effects):
+                        http_result = (
+                            await client.reconcile_pull(
+                                protocol, original_client_closed=True
+                            )
+                            if observation
+                            else await client.create_pull(protocol)
                         )
-                    if stage == "pull":
-                        http_result = await client.create_pull(protocol)
+                        if observation:
+                            observations["pull"] = http_result
                     elif stage == "merge":
-                        http_result = await client.record_exact_merge(
-                            protocol["pull"],
-                            protocol["number"],
-                            protocol["push"],
-                            observed,
-                        )
+                        if observation:
+                            if (
+                                "merge_record" in effects
+                                and observed.state == "published"
+                            ):
+                                http_result = await client.reconcile_exact_merge(
+                                    protocol["pull"],
+                                    protocol["number"],
+                                    protocol["push"],
+                                    observed,
+                                    original_client_closed=True,
+                                )
+                                observations["merge_record"] = http_result
+                        else:
+                            http_result = await client.record_exact_merge(
+                                protocol["pull"],
+                                protocol["number"],
+                                protocol["push"],
+                                observed,
+                            )
                 finally:
                     if watcher is not None:
                         watcher.cancel()
@@ -209,6 +270,8 @@ async def execute_owned_remote(runtime, peers, *, active):
                         {"operation_id": key, **snapshot["broker:op:" + key]}
                         for key in executor.operations
                     ]
+            if http_closed and client_registered:
+                await asyncio.to_thread(clients.close, lease)
             if domain_closed and http_closed:
                 runtime._closed_attempts[lease.attempt_id] = (
                     lease.project_id,
@@ -216,7 +279,7 @@ async def execute_owned_remote(runtime, peers, *, active):
                     lease.fence,
                     lease.context_version,
                 )
-            if http_result is not None and http_closed:
+            if http_result is not None and http_closed and not observation:
                 await asyncio.to_thread(
                     records.observe,
                     lease,
@@ -239,4 +302,4 @@ async def execute_owned_remote(runtime, peers, *, active):
             }
         if not domain_closed or not http_closed:
             raise PeerUncertain("Owned remote local transport closure is unconfirmed")
-        return None, proof
+        return observations if observation else None, proof

@@ -294,6 +294,25 @@ class OwnedCodexRuntime:
 
         return await execute_owned_remote(self, peers, active=active)
 
+    async def observe_remote_publication(self, peers, *, active):
+        """Observe original remote effects through new readonly Git/HTTP authority; never resume a write stage."""
+        from backend.runtime.remote_controller import execute_owned_remote
+
+        return await execute_owned_remote(self, peers, active=active, observation=True)
+
+    def close_remote_publication(self, store, project_id, run_id, attempt_id):
+        """Prove original host HTTP and global Git-domain closure before another readonly remote observer is admitted."""
+        from backend.runtime.publication_closure import close_original_publication
+        from backend.runtime.remote_clients import RemoteHTTPClients
+
+        http = RemoteHTTPClients(store).closure(project_id, run_id, attempt_id)
+        return {
+            **close_original_publication(
+                self.authority, store, project_id, run_id, attempt_id, remote=True
+            ),
+            **http,
+        }
+
     async def publish_code(self, peers, *, active):
         """Execute an explicitly admitted host publication under fresh ownership without opening Codex or using the author/reviewer sessions."""
         from backend.runtime.publication_controller import execute_owned_publication

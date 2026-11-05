@@ -3,14 +3,19 @@
 import asyncio
 
 from backend.runtime.contracts import RunConflict
-from backend.runtime.publication_executor import OwnedPublicationGitExecutor
-from backend.runtime.remote_capsule import RemoteGitLaunch
+from backend.runtime.publication_executor import (
+    OwnedPublicationGitExecutor,
+    OwnedPublicationObserver,
+)
+from backend.runtime.remote_capsule import RemoteGitLaunch, RemoteObservationLaunch
 from backend.runtime.remote_publication import RemoteEffectUncertain
 from backend.runtime.remote_runtime import RemotePublications
 
 
 class OwnedRemoteGitExecutor(OwnedPublicationGitExecutor):
     """Reuse complete owned Git transport/closure without a subprocess fallback or model-visible PAT."""
+
+    launch_type = RemoteGitLaunch
 
     def __init__(self, *, intent, config, client, effect_name, **kwargs):
         """Pin original remote protocol and actual operator credential configuration before creating any endpoint."""
@@ -31,7 +36,7 @@ class OwnedRemoteGitExecutor(OwnedPublicationGitExecutor):
         """Authorize only exact remote/profile commands and reserve the original write once after all readonly preflight work."""
         if not command or command[0] != self.asset.path:
             raise RunConflict("Remote Git asset differs from its inspected program")
-        launch = RemoteGitLaunch(
+        launch = self.launch_type(
             self.asset,
             tuple(command[1:]),
             str(cwd),
@@ -52,3 +57,10 @@ class OwnedRemoteGitExecutor(OwnedPublicationGitExecutor):
                     "Original remote write was already issued; observe it without another push"
                 )
         return await self._invoke(launch, timeout=timeout)
+
+
+class OwnedRemoteObserver(OwnedRemoteGitExecutor):
+    """Use original complete stream/closure transport with only exact remote ref read authority and no candidate mount."""
+
+    launch_type = RemoteObservationLaunch
+    execution_path = OwnedPublicationObserver.execution_path

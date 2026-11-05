@@ -4,7 +4,7 @@ La migración 45 y `RemotePublications` conectan push, PR y merge con intentos,
 recibos y etapas durables. El runtime con configuración remota usa ahora Git y
 HTTP propios del host. Sin esa configuración rechaza la admisión. La integración
 HTTPS comprueba el recorrido completo con Git real y una API Forgejo controlada;
-la recuperación remota y los controles de Tareas siguen pendientes.
+la recuperación remota de sólo lectura está conectada; faltan controles de Tareas.
 
 ## Una decisión explícita por acción
 
@@ -81,6 +81,9 @@ conserva sus precondiciones y límites del proveedor.
 
 - `POST /api/projects/{project}/runs/{origin}/remote-publications`, cuerpo
   discriminado por `stage`: `push`, `pull` o `merge`.
+- `POST /api/projects/{project}/remote-publications/{run}/recovery` consulta lo ocurrido
+  mediante un observador nuevo; cuerpo estricto `operation_key`, `attempt_id`,
+  `expected_fence`. No vuelve a enviar el efecto.
 - `GET /api/projects/{project}/remote-publications/{run}` inspecciona solicitud,
   protocolo y etapas guardadas; no conecta al servidor ni inicia un efecto.
 
@@ -146,9 +149,12 @@ usan testigos de transporte sintéticos y se conservan como evidencia histórica
 No se afirma suite global actual verde ni compatibilidad ensayada con una instancia
 Forgejo real. Las inversas 43/44/45 y fixtures antiguos siguen registrados.
 
-Siguiente capacidad principal: observadores de recuperación de sólo lectura con
-autoridad nueva y cierre original comprobado; después controles de Tareas que
-conserven la solicitud ante respuesta perdida. Ausencia remota sigue siendo
-incierta y nunca autoriza repetir el push o POST. El resultado positivo de un
-intento retirado requiere una política explícita de adopción: la admisión actual
-exige prerrequisitos `accepted`. Estas tareas y el cutover legacy siguen en alcance.
+La [recuperación remota](remote-recovery.md) usa ahora observadores nuevos de sólo
+lectura después de comprobar cierre original Git/HTTP. Pasan 88 pruebas dirigidas
+y la integración TLS ampliada con Stop, finalización posterior del servidor y
+consulta sin repetir escritura. [Resultados](../modernization/remote-recovery-results.json).
+
+Siguiente capacidad principal: controles de Tareas que conserven la solicitud ante
+respuesta perdida. También siguen abiertos adopción explícita de resultados tras
+retirada, etapas no emitidas de un merge parcial y compatibilidad con Forgejo real.
+La recuperación no convierte ninguna de esas tareas en un retry automático.

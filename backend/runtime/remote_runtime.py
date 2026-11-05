@@ -362,6 +362,10 @@ class RemotePublications:
         """Reserve one original effect before its network gate; an existing issued/unknown stage is never another dispatch permit."""
         with self.runs._transaction(write=True) as conn:
             run = self.runs._authority(conn, lease)
+            from backend.runtime.remote_recovery import RemoteRecovery
+
+            if RemoteRecovery.observation(conn, run) is not None:
+                raise RunConflict("Readonly remote observation cannot issue a write")
             row = self._request(conn, lease.project_id, lease.run_id)
             if effect_name not in EFFECTS[row["stage"]]:
                 raise RunConflict("Effect is outside the original remote stage")

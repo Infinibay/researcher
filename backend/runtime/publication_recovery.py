@@ -22,6 +22,8 @@ from backend.runtime.recovery import RunRecovery
 class PublicationRecovery:
     """Keep recovery receipts, original closure and new observation capability separate from write publication authority."""
 
+    observation_table = "runtime_publication_observations"
+
     def __init__(self, runs):
         """Use the original SQLite store without acquiring any effect or process authority."""
         self.runs = runs
@@ -90,7 +92,7 @@ class PublicationRecovery:
                     "Recovery already completed; read its original receipt"
                 )
             if conn.execute(
-                "SELECT 1 FROM runtime_publication_observations WHERE project_id=? AND task_id=? AND operation_key=?",
+                f"SELECT 1 FROM {self.observation_table} WHERE project_id=? AND task_id=? AND operation_key=?",
                 (row["project_id"], row["task_id"], command["operation_key"]),
             ).fetchone():
                 raise RunConflict(
@@ -136,7 +138,7 @@ class PublicationRecovery:
                 (attempt_id, row["id"], owner_id, fence, now + 30, now),
             )
             conn.execute(
-                "INSERT INTO runtime_publication_observations(attempt_id,run_id,project_id,task_id,operation_key,source_attempt_id,expected_fence,request_json,closure_json,created_at) VALUES(?,?,?,?,?,?,?,?,?,?)",
+                f"INSERT INTO {self.observation_table}(attempt_id,run_id,project_id,task_id,operation_key,source_attempt_id,expected_fence,request_json,closure_json,created_at) VALUES(?,?,?,?,?,?,?,?,?,?)",
                 (
                     attempt_id,
                     row["id"],
@@ -170,7 +172,9 @@ class PublicationRecovery:
                 conn,
                 row["project_id"],
                 row["task_id"],
-                "code.publication_observation_started",
+                "remote.publication_observation_started"
+                if row["execution_kind"] == "remote_publication"
+                else "code.publication_observation_started",
                 {
                     "run_id": row["id"],
                     "attempt_id": attempt_id,

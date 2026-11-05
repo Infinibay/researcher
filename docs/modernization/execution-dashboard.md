@@ -9,27 +9,36 @@ Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: transporte HTTPS remoto propio
+## Etapa actual: recuperación remota de sólo lectura
 
-**Resultado:** configuración opcional del operador, PAT privado fuera de las
-fuentes y Git/HTTP propios del host. Push → PR → merge exacto atraviesan API,
-scheduler, broker/dominio y etapas originales; Stop conserva incertidumbre cuando
-el servidor podría seguir trabajando. Sin configuración se rechaza la capacidad.
-El Git confiable comparte red del host con argv/origen/configuración fijados;
-no se afirma una ACL de destinos del kernel.
+**Resultado:** esquema46 con identidad/cierre del cliente HTTP original y recibos
+inmutables del observador nuevo. Primero se demuestra cierre Git/HTTP; después se
+consulta el recibo/PR/merge original con otra autoridad de lectura. La corrección
+del contexto permite conservar historia; no concede escritura ni aceptación nueva.
+Falta de recibo sigue incierta y jamás autoriza otro push/POST. El candidato puede
+haber desaparecido; sólo se monta el origen en lectura.
 
-**Verificación:**82 pruebas dirigidas y una integración TLS con Git smart HTTP
-real y API Forgejo controlada pasan. La integración prueba cadena completa,
-repetición sin otro efecto, `.git/config` con `insteadOf` ignorado, PAT ausente del
-journal y cancelación durante receive-pack con cierre local real. 73 definiciones/
-módulos nuevos o cambiados tienen docstrings. No hay nueva suite global verde ni
-prueba con binario Forgejo real; el frontend no cambió.
+**Verificación:**88 pruebas dirigidas pasan, seis nuevas. Owner HTTP con pairing/
+CSRF/cuerpo estricto devuelve el recibo original sin reagendar. La integración TLS
+real prueba Stop→servidor termina→observador nuevo y pérdida de respuesta en PR/
+registro de merge por separado, sin más escrituras ni turnos de modelo. El wheel
+pasa88 casos con337 módulos sólo paquete y730 fuentes coincidentes.
+58 definiciones/módulos con docstrings. No hay suite global actual verde.
 
-**Siguiente capacidad principal:** observadores remotos de sólo lectura con cierre
-original y autoridad nueva, luego controles de Tareas con solicitud persistida.
-Compatibilidad con una instancia real y protecciones permanece en alcance.
-[Contrato](../architecture/remote-runtime.md), [resultados](remote-transport-results.json),
-[paquete](remote-transport-packaging.json).
+**Siguiente capacidad principal:** controles de Tareas con intención persistida,
+explicación del efecto/incertidumbre y decisiones separadas de push/PR/merge.
+Adopción tras retirada, continuidad de merge parcial, compatibilidad con Forgejo
+real, recuperación/crashes ampliados y cutover legacy siguen en alcance.
+[Contrato](../architecture/remote-recovery.md), [resultados](remote-recovery-results.json),
+[paquete](remote-recovery-packaging.json).
+
+## Etapa anterior: transporte HTTPS remoto propio
+
+Configuración opcional de HTTPS/PAT del host, Git exacto por broker/dominio y HTTP
+acotado. Sin configuración se rechaza capacidad. Git confiable comparte red del
+host con argv/origen/configuración fijados, sin ACL de destinos del kernel.
+82 pruebas dirigidas,82 del wheel y una integración TLS Git/REST controlado pasaron;
+73 definiciones documentadas. [Recibo histórico](remote-transport-results.json).
 
 ## Etapa anterior: admisión y etapas remotas durables
 

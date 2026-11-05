@@ -73,8 +73,11 @@ def tls_remote(tmp_path, socket_enabled):
         posts=[],
         paths=[],
         hold=False,
+        drop_pull_reply=True,
+        drop_merge_reply=True,
         entered=threading.Event(),
         release=threading.Event(),
+        finished=threading.Event(),
     )
     backend = (
         Path(
@@ -179,6 +182,8 @@ def tls_remote(tmp_path, socket_enabled):
                     timeout=20,
                     check=True,
                 )
+                if self.command == "POST" and path.endswith("/git-receive-pack"):
+                    state.finished.set()
                 head, separator, data = result.stdout.partition(b"\r\n\r\n")
                 if not separator:
                     head, separator, data = result.stdout.partition(b"\n\n")
@@ -229,6 +234,9 @@ def tls_remote(tmp_path, socket_enabled):
                     "merged": False,
                 }
                 state.pulls.append(record)
+                if state.drop_pull_reply:
+                    state.drop_pull_reply = False
+                    return
                 self.reply(201, pull_record(record))
                 return
             if path.startswith(base + "/pulls/"):
@@ -246,6 +254,9 @@ def tls_remote(tmp_path, socket_enabled):
                 )
                 state.posts.append("merge")
                 record.update(merged=True, merge_commit_sha=payload["MergeCommitID"])
+                if state.drop_merge_reply:
+                    state.drop_merge_reply = False
+                    return
                 self.reply(204)
                 return
             self.reply(404)
@@ -372,6 +383,16 @@ async def test_actual_owned_https_push_pr_merge_and_stop_retire_only_local_clien
             ),
         )
         await runtime.wait(pull.run_id)
+        lost = runtime.store.get(101, pull.run_id)
+        assert lost.status == "reconciling"
+        recovered_pull = await runtime.reconcile_remote_publication(
+            project_id=101,
+            run_id=pull.run_id,
+            attempt_id=lost.attempt_id,
+            expected_fence=lost.fence,
+            operation_key="observe-lost-pull-reply",
+        )
+        assert recovered_pull["effects_confirmed"]
         assert runtime.store.get(101, pull.run_id).status == "accepted", (
             records.request(101, pull.run_id)
         )
@@ -379,6 +400,16 @@ async def test_actual_owned_https_push_pr_merge_and_stop_retire_only_local_clien
             101, RemoteMergeRequest("owned-https-merge", pull.run_id)
         )
         await runtime.wait(merge.run_id)
+        lost = runtime.store.get(101, merge.run_id)
+        assert lost.status == "reconciling"
+        recovered_merge = await runtime.reconcile_remote_publication(
+            project_id=101,
+            run_id=merge.run_id,
+            attempt_id=lost.attempt_id,
+            expected_fence=lost.fence,
+            operation_key="observe-lost-merge-reply",
+        )
+        assert recovered_merge["effects_confirmed"]
         assert runtime.store.get(101, merge.run_id).status == "accepted", (
             records.request(101, merge.run_id)
         )
@@ -390,6 +421,7 @@ async def test_actual_owned_https_push_pr_merge_and_stop_retire_only_local_clien
         assert server.token not in (c.s.workspace / ".git/config").read_text()
         assert not any("/wrong/" in path for path in server.paths)
         server.hold = True
+        server.finished.clear()
         stopped = await runtime.publish_remote(
             101,
             RemotePushRequest(
@@ -409,6 +441,32 @@ async def test_actual_owned_https_push_pr_merge_and_stop_retire_only_local_clien
             records.request(101, stopped.run_id)["effects"][0]["state"] == "uncertain"
         )
         server.release.set()
+        assert await asyncio.to_thread(server.finished.wait, 30)
+        original = runtime.store.get(101, stopped.run_id)
+        observer_command = {
+            "project_id": 101,
+            "run_id": stopped.run_id,
+            "attempt_id": original.attempt_id,
+            "expected_fence": original.fence,
+            "operation_key": "observe-stopped-original",
+        }
+        original_candidate = Path(view["workspace"])
+        original_candidate.rename(
+            original_candidate.with_name(original_candidate.name + "-retained")
+        )
+        writes_before = server.git_writes
+        recovered = await runtime.reconcile_remote_publication(**observer_command)
+        assert recovered["effects_confirmed"]
+        assert recovered["observations"]["push"]["state"] == "published"
+        assert recovered["observer_attempt_id"] != original.attempt_id
+        assert recovered["completed_after_withdrawal"]
+        assert runtime.store.get(101, stopped.run_id).status == "cancelled"
+        requests_after = len(server.paths)
+        assert (
+            await runtime.reconcile_remote_publication(**observer_command) == recovered
+        )
+        assert len(server.paths) == requests_after
+        assert server.git_writes == writes_before and server.posts == ["pull", "merge"]
         with runtime.store._transaction() as conn:
             assert (
                 conn.execute(

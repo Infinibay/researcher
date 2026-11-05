@@ -1,0 +1,56 @@
+{
+  "base_commit": "6014f7c",
+  "date": "2026-11-05",
+  "status": "owned_readonly_remote_recovery_connected_tasks_pending",
+  "directed": {
+    "total": 88,
+    "passed": 88,
+    "failed": [],
+    "skipped": 0,
+    "seconds": 55.814,
+    "receipt_sha256": "ae7bd3571b8d7e8ccf2ed265c2027a84e3f48f2b4db2bcb1da27018ac185ab9f"
+  },
+  "actual_tls_chain_with_readonly_observer": {
+    "total": 1,
+    "passed": 1,
+    "failed": [],
+    "skipped": 0,
+    "seconds": 119.246,
+    "receipt_sha256": "8ee7849ca3674e8dcb0c73fcc7327a54237bfb686e0870d8a7ce7a2bfe525f97"
+  },
+  "new_cases": 6,
+  "documented_definitions_or_modules": 58,
+  "package": "docs/modernization/remote-recovery-packaging.json",
+  "scope": [
+    "Schema46 records original exclusive host HTTP process/client lifetime and immutable fresh observer command/fence/closure/result",
+    "Recovery requires actual original global Git domain retirement and explicit HTTP closure or proved same-host original process absence; live unclosed HTTP process blocks",
+    "Fresh readonly authority permits exact ls-remote/GET only, after context correction and without candidate availability; issue and native/model peers prohibited",
+    "Atomic original positive effect history plus separate observer receipt; remote absence stays uncertain, known facts immutable and original writes never reissued",
+    "Paired/CSRF strict owner HTTP route returns identical completed command receipt without scheduling another observer",
+    "Actual TLS chain Stop\u2192server completion\u2192fresh original receipt observation with candidate moved away, no extra Git write/POST or inference",
+    "Final actual TLS test loses response after original PR creation and after original merge bookkeeping, recovers both via fresh observers, then exercises held push/Stop/recovery; exactly one PR POST and one merge POST, no replay"
+  ],
+  "validation_notes": [
+    "Initial four new storage cases failed on missing modules; native extension first failed on test using SQLite current_attempt_id instead of public RunView.attempt_id; fixed from actual contract",
+    "First broad run found isolated -S broker subprocess imported HTTPX through new authority import; moved remote store imports inside relevant methods, existing three crash-recovery tests now pass",
+    "Initial source broad result63PASS/4FAIL also included max schema45 fixture expectation; updated startup assertion to46 without weakening downgrade guards",
+    "Final extended native pass119.47s follows import fix and covers readonly recovery for all three stages; final wheel includes exact matching current Python/SQL payloads"
+  ],
+  "limits": [
+    "TLS fixture serves controlled Forgejo REST contract, not actual Forgejo executable/protection compatibility",
+    "HTTP closure assumes trusted host exclusively owns its registered client sockets, without transferring them to another process",
+    "Older schema45 uncertain attempts lacking original HTTP identity cannot be silently adopted",
+    "Interrupted observer command before receipt, explicit adoption after withdrawal and unissued remainder of a partial merge remain open",
+    "No new global-suite green/full host install/frontend/UI acceptance claim; Tasks controls and legacy cutover still pending"
+  ],
+  "package_observed": {
+    "tests_passed": 88,
+    "failures": [],
+    "skipped": 0,
+    "backend_modules_loaded": 337,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "network": "Disabled except Unix sockets",
+    "semantic_assets": "Explicit prepared pinned public offline assets outside wheel"
+  }
+}

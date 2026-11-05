@@ -216,7 +216,17 @@ class PeerRegistry:
                 from backend.runtime.remote_runtime import RemotePublications
 
                 remote = RemotePublications(self.runs)
-                result["remote_view"] = remote.current(conn, row)
+                from backend.runtime.remote_recovery import RemoteRecovery
+
+                recovery = RemoteRecovery(self.runs)
+                result["remote_observation"] = (
+                    recovery.observation(conn, row) is not None
+                )
+                result["remote_view"] = (
+                    recovery.subject(conn, row)
+                    if result["remote_observation"]
+                    else remote.current(conn, row)
+                )
                 result["remote_effects"] = [
                     dict(effect)
                     for effect in conn.execute(

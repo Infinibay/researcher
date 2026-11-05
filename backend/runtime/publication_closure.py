@@ -7,13 +7,20 @@ from backend.runtime.peer_broker import PeerBroker
 from backend.runtime.peer_registry import PeerRegistry
 
 
-def close_original_publication(authority, store, project_id, run_id, attempt_id):
+def close_original_publication(
+    authority, store, project_id, run_id, attempt_id, *, remote=False
+):
     """Match global grants to original database/attempt/fence and project verified retirement before declaring that original execution closed."""
     registry = PeerRegistry(store)
     origin = registry._database_identity()
     with store._transaction() as conn:
         run = store._row(conn, project_id, run_id)
-        CodePublications(store)._request(conn, project_id, run_id)
+        if remote:
+            from backend.runtime.remote_runtime import RemotePublications
+
+            RemotePublications(store)._request(conn, project_id, run_id)
+        else:
+            CodePublications(store)._request(conn, project_id, run_id)
         attempt = conn.execute(
             "SELECT * FROM runtime_attempts WHERE id=? AND run_id=?",
             (attempt_id, run_id),

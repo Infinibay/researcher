@@ -2926,7 +2926,15 @@
         "backend/tests/runtime/test_remote_transport.py",
         "docs/modernization/remote-transport-results.json",
         "docs/modernization/remote-transport-packaging.json",
-        "docs/modernization/remote-transport-docstrings.json"
+        "docs/modernization/remote-transport-docstrings.json",
+        "backend/db/remote_recovery_schema.sql",
+        "backend/runtime/remote_clients.py",
+        "backend/runtime/remote_recovery.py",
+        "backend/tests/runtime/test_remote_recovery.py",
+        "docs/architecture/remote-recovery.md",
+        "docs/modernization/remote-recovery-results.json",
+        "docs/modernization/remote-recovery-packaging.json",
+        "docs/modernization/remote-recovery-docstrings.json"
       ],
       "implemented": [
         "Internal exact-ref policy with fixed host port; candidate Git/diff/bytes and original source/candidate metadata identity checked",
@@ -2946,14 +2954,20 @@
         "Strict owner API and scheduler capability gate; no remote transport means admission refused, no generic broker profile fallback",
         "Push/PR/merge durable prerequisites and separate merge stages, known receipts immutable, unknown remote effects retained;61directed+2sharedlocalnative+77frontend pass",
         "Configured operator-only HTTPS credential/trust, fixed trusted Git argv through actual broker/domain and readonly sealed repository configuration; shares host network, not kernel destination ACL",
-        "Real TLS/Git smart HTTP and controlled Forgejo REST push→PR→exact merge plus held receive-pack Stop; original stage uncertain, local closure real, repeat action no new write;82directed+1physical pass;73documented definitions"
+        "Real TLS/Git smart HTTP and controlled Forgejo REST push→PR→exact merge plus held receive-pack Stop; original stage uncertain, local closure real, repeat action no new write;82directed+1physical pass;73documented definitions",
+        "Schema46 exclusive original HTTP host identity/client closure and immutable fresh readonly observer attempts; original global domain retirement before recovery",
+        "Exact readonly remote Git type/capsule and bounded GET-only recovery; historical context and missing candidate allowed, issue/native/model authority denied",
+        "Owner CSRF/strict recovery API and immutable same-command receipt;88directed and native TLS Stop→server completes→fresh observation with no new write pass",
+        "Final TLS integration recovers response-lost PR and merge bookkeeping, then held push/Stop; no repeat POST/push/inference. Final wheel88PASS/337package-only modules/730matching sources;58documented definitions"
       ],
       "remaining": [
         "Expanded physical correction/crash races including DD-005; legacy writer physical exclusion",
         "Schema43/44 inverses and old inverse fixtures, capacity/host UI, whole product and full-suite acceptance",
-        "Readonly remote observers/recovery and Tasks controls, including explicit known-result adoption after withdrawal",
+        "Tasks controls and explicit known-result adoption after withdrawal; readonly remote recovery connected",
         "Finalize durable merge transport/stage coordination under real server protection/identity contract",
-        "Compatibility with actual Forgejo instance/protected branches and repository identity stability during network effect; TLS fixture is controlled REST contract"
+        "Compatibility with actual Forgejo instance/protected branches and repository identity stability during network effect; TLS fixture is controlled REST contract",
+        "Explicit continuation of an unissued remainder in a partial merge; observer must never create it implicitly",
+        "Expanded HTTP host-crash/old-attempt migration and interrupted-observer scenarios; schema46 inverse remains pending"
       ]
     }
   }

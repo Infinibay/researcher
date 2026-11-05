@@ -263,12 +263,24 @@ class RuntimeService:
         )
         return await self._schedule(run) if admitted else run
 
-    async def reconcile_publication(self, **command):
+    async def reconcile_remote_publication(self, **command):
+        """Recover original remote evidence with a new readonly owner; no configuration or request can turn recovery into another write."""
+        if getattr(self.runtime, "supports_remote_publication", False) is not True:
+            raise RunConflict(
+                "Configured runtime has no owned remote observation transport"
+            )
+        return await self.reconcile_publication(remote=True, **command)
+
+    async def reconcile_publication(self, *, remote=False, **command):
         """Recover one original publication by new readonly observation; an exact completed owner command returns without launching again."""
         from backend.runtime.publication_recovery import PublicationRecovery
 
         self._accepting()
-        recovery = PublicationRecovery(self.store)
+        from backend.runtime.remote_recovery import RemoteRecovery
+
+        recovery = (
+            RemoteRecovery(self.store) if remote else PublicationRecovery(self.store)
+        )
         receipt = await asyncio.to_thread(recovery.receipt, **command)
         if receipt is not None:
             return receipt
@@ -286,31 +298,35 @@ class RuntimeService:
         }
         if len(self._recovery_jobs) >= 128:
             raise RunConflict("Recovery control capacity reached")
-        task = asyncio.create_task(self._observe_publication_once(command))
+        task = asyncio.create_task(
+            self._observe_publication_once(command, remote=remote)
+        )
         task.add_done_callback(
             lambda done: None if done.cancelled() else done.exception()
         )
         self._recovery_jobs[key] = (intent, task)
         return await asyncio.shield(task)
 
-    async def _observe_publication_once(self, command):
+    async def _observe_publication_once(self, command, *, remote=False):
         """Retire original physical authority, own the fresh observer and save its result only after its separate domain closes."""
-        from backend.runtime.code_publications import CodePublications
         from backend.runtime.publication_recovery import PublicationRecovery
+        from backend.runtime.remote_recovery import RemoteRecovery
 
-        recovery = PublicationRecovery(self.store)
+        recovery = (
+            RemoteRecovery(self.store) if remote else PublicationRecovery(self.store)
+        )
         slot = self._workers.get(command["run_id"])
         if slot is not None:
             self._withdraw(slot, "failed")
             await asyncio.shield(slot.task)
-        if not hasattr(self.runtime, "close_publication") or not hasattr(
-            self.runtime, "observe_publication"
-        ):
+        close = "close_remote_publication" if remote else "close_publication"
+        observe = "observe_remote_publication" if remote else "observe_publication"
+        if not hasattr(self.runtime, close) or not hasattr(self.runtime, observe):
             raise RunConflict(
                 "Configured runtime cannot perform owned readonly publication recovery"
             )
         proof = await asyncio.to_thread(
-            self.runtime.close_publication,
+            getattr(self.runtime, close),
             self.store,
             command["project_id"],
             command["run_id"],
@@ -347,7 +363,7 @@ class RuntimeService:
         heartbeat = asyncio.create_task(self._heartbeat(slot, lease))
         result = None
         try:
-            result = await self.runtime.observe_publication(
+            result = await getattr(self.runtime, observe)(
                 peers,
                 active=lambda: slot.active and time.monotonic() < slot.lease_deadline,
             )
@@ -360,7 +376,7 @@ class RuntimeService:
                 closed = self.runtime.consume_closure(lease) is True and peers.closed()
                 if result is None or not closed:
                     await asyncio.to_thread(
-                        CodePublications(self.store).interrupted,
+                        recovery.publications.interrupted,
                         lease,
                         physically_closed=closed,
                         reason="ObservationInterrupted",

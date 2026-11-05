@@ -1404,7 +1404,13 @@ class SQLiteRunStore:
         if row["execution_kind"] == "remote_publication":
             from backend.runtime.remote_runtime import RemotePublications
 
-            RemotePublications(self).current(conn, row)
+            from backend.runtime.remote_recovery import RemoteRecovery
+
+            recovery = RemoteRecovery(self)
+            if recovery.observation(conn, row) is not None:
+                recovery.subject(conn, row)
+            else:
+                RemotePublications(self).current(conn, row)
         elif row["execution_kind"] == "code_publication":
             from backend.runtime.code_publications import CodePublications
             from backend.runtime.publication_recovery import PublicationRecovery
@@ -1491,7 +1497,10 @@ class SQLiteRunStore:
         )
         from backend.runtime.publication_recovery import PublicationRecovery
 
-        readonly_observation = PublicationRecovery.observation(conn, row) is not None
+        from backend.runtime.remote_recovery import RemoteRecovery
+
+        readonly_observation = (PublicationRecovery.observation(conn, row) is not None
+            or RemoteRecovery.observation(conn, row) is not None)
         if actual != expected or (not readonly_observation and row["context_version"] != self._context(
             conn, row["task_id"]
         )):

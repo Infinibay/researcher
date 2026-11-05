@@ -529,6 +529,16 @@ async def recover_code_publication(
     )
 
 
+@router.post("/{project_id}/remote-publications/{run_id}/recovery")
+async def recover_remote_publication(
+    project_id: int, run_id: str, body: RecoverRun, request: Request
+):
+    """Observe original remote history with fresh readonly authority after actual original Git/HTTP closure; never repeat push or POST."""
+    return await service(request).reconcile_remote_publication(
+        project_id=project_id, run_id=run_id, **body.model_dump()
+    )
+
+
 @router.post("/{project_id}/tasks/{task_id}/runs", status_code=202)
 async def start_run(project_id: int, task_id: int, body: StartRun, request: Request):
     try:

@@ -119,6 +119,19 @@ class RemoteGitLaunch(PublicationGitLaunch):
         )
 
 
+@dataclass(frozen=True, kw_only=True)
+class RemoteObservationLaunch(RemoteGitLaunch):
+    """One exact readonly ls-remote command with no candidate, push, fetch or local mutation capability."""
+
+    def __post_init__(self):
+        """Narrow the original immutable protocol to its complete fixed target/marker query only."""
+        super().__post_init__()
+        if self.arguments != (*_POLICY, *_EXTRA, *self.intent.query_arguments):
+            raise ValueError(
+                "Readonly remote authority allows only original ref observation"
+            )
+
+
 class RemoteGitCapsule(PublicationGitCapsule):
     """Own pinned Git and private mounts while preventing repository config/URL rewrites from changing the credential destination."""
 
@@ -184,10 +197,6 @@ class RemoteGitCapsule(PublicationGitCapsule):
         source = self._directory(view.source_metadata)
         from backend.runtime.publication_git import PublicationDirectory
 
-        candidate = self._directory(
-            PublicationDirectory(view.workspace, view.device, view.inode)
-        )
-        metadata = self._directory(view.candidate_metadata)
         version = "1" if len(view.head_sha) == 64 else "0"
         config = "[core]\nrepositoryformatversion=" + version + "\nbare=false\n"
         if version == "1":
@@ -195,9 +204,6 @@ class RemoteGitCapsule(PublicationGitCapsule):
         fixed = _domain_spawn.sealed(config.encode())
         self._stack.callback(os.close, fixed)
         self._remote_fds.append(fixed)
-        candidate_fixed = _domain_spawn.sealed(config.encode())
-        self._stack.callback(os.close, candidate_fixed)
-        self._remote_fds.append(candidate_fixed)
         mounts = [
             "--ro-bind-fd",
             str(self._asset_fd),
@@ -205,19 +211,29 @@ class RemoteGitCapsule(PublicationGitCapsule):
             "--ro-bind-fd",
             str(source),
             str(PEER_WORKSPACE / ".git"),
-            "--ro-bind-fd",
-            str(candidate),
-            str(PEER_PUBLICATION_CANDIDATE),
-            "--ro-bind-fd",
-            str(metadata),
-            str(PEER_PUBLICATION_CANDIDATE / ".git"),
             "--ro-bind-data",
             str(fixed),
             str(PEER_WORKSPACE / ".git/config"),
-            "--ro-bind-data",
-            str(candidate_fixed),
-            str(PEER_PUBLICATION_CANDIDATE / ".git/config"),
         ]
+        if not isinstance(self.launch, RemoteObservationLaunch):
+            candidate = self._directory(
+                PublicationDirectory(view.workspace, view.device, view.inode)
+            )
+            metadata = self._directory(view.candidate_metadata)
+            candidate_fixed = _domain_spawn.sealed(config.encode())
+            self._stack.callback(os.close, candidate_fixed)
+            self._remote_fds.append(candidate_fixed)
+            mounts += [
+                "--ro-bind-fd",
+                str(candidate),
+                str(PEER_PUBLICATION_CANDIDATE),
+                "--ro-bind-fd",
+                str(metadata),
+                str(PEER_PUBLICATION_CANDIDATE / ".git"),
+                "--ro-bind-data",
+                str(candidate_fixed),
+                str(PEER_PUBLICATION_CANDIDATE / ".git/config"),
+            ]
         if self.launch.networked:
             fds = self._stack.enter_context(self.remote_transport.network.opened())
             self._remote_fds.extend(fds.values())

@@ -448,6 +448,12 @@ def ensure_migrations(db_path: str | None = None, *, existing_only: bool = False
             resource = Path(__file__).resolve().parents[2] / "db/remote_publication_schema.sql"
             apply_sql_resource(conn, resource)
             logger.info("Migration 45: durable remote effect ownership")
+        if 46 not in applied:
+            from backend.db.migrations import apply_sql_resource
+
+            resource = Path(__file__).resolve().parents[2] / "db/remote_recovery_schema.sql"
+            apply_sql_resource(conn, resource)
+            logger.info("Migration 46: readonly remote recovery and HTTP ownership")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()
