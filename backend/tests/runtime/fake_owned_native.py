@@ -307,15 +307,31 @@ def next_code_review_tool(response=None):
         elif steps == 2:
             assert value["complete_material"]
             code_packet = value
-            assert (
-                json.loads(value["text"])["author_request"]["source_kind"]
-                == "owner_admission"
+            origin = json.loads(value["text"])["author_request"]
+            assert origin["source_kind"] in (
+                "owner_admission",
+                "coordinated_owner_execution",
             )
+            if origin["source_kind"] == "coordinated_owner_execution":
+                assert origin["work_delivery_id"] and origin["plan_run_id"]
+                assert len(origin["work_delivery_sha256"]) == 64
         elif steps == 3:
-            assert (
-                value["complete_material"]
-                and "137 to 200" in json.loads(value["text"])["request"]
-            )
+            assert value["complete_material"]
+            actual_input = json.loads(value["text"])
+            if (
+                json.loads(code_packet["text"])["author_request"]["source_kind"]
+                == "coordinated_owner_execution"
+            ):
+                original = actual_input["work_delivery"]["plan_context"][
+                    "original_material"
+                ]
+                assert original["instruction_origin"] == "owner_message"
+                assert "137 to 200" in original["owner_request"]
+                assert actual_input["work_delivery"]["plan_context"]["accepted_plan"][
+                    "assumptions"
+                ]
+            else:
+                assert "137 to 200" in actual_input["request"]
         elif steps == 4:
             assert value["complete_material"] and "+200" in value["text"]
         elif steps == 5:

@@ -146,11 +146,14 @@ class LocalAccess:
 
 
 class OwnerAccessMiddleware:
+    """Separate owner sessions/CSRF and optional physical endpoint binding from model-side tool authority."""
+
     def __init__(self, app, *, access: LocalAccess):
         self.app = app
         self.access = access
 
     async def __call__(self, scope, receive, send):
+        """Authorize owner transport and reject a changed database before a retained terminal action can reach its route."""
         if scope["type"] not in {"http", "websocket"}:
             return await self.app(scope, receive, send)
         headers = Headers(scope=scope)
@@ -245,7 +248,7 @@ class OwnerAccessMiddleware:
         if unsafe and not path.startswith("/api/research-tools/"):
             pairing = path == "/api/session" and scope["method"] == "POST"
             if pairing:
-                if headers.get("x-researcher-client") != "web":
+                if headers.get("x-researcher-client") not in ("web", "terminal"):
                     return await deny(403, "Explicit owner pairing client required")
                 if (
                     headers.get("content-type", "").split(";", 1)[0].strip().lower()
@@ -257,4 +260,14 @@ class OwnerAccessMiddleware:
                 _digest(session.csrf_token),
             ):
                 return await deny(403, "Valid owner CSRF token required")
+        endpoint = headers.get("x-researcher-endpoint")
+        if endpoint is not None and self.access.valid(session):
+            from backend.api.owner_endpoint import endpoint_identity
+
+            if endpoint != await asyncio.to_thread(endpoint_identity, connection):
+                return await JSONResponse(
+                    status_code=409,
+                    content={"code": "owner_endpoint_changed", "detail": "Owner database identity changed; retain the original pending intent and inspect its history before another action."},
+                    headers={"Cache-Control": "no-store"},
+                )(scope, receive, send)
         await self.app(scope, receive, send)

@@ -13,15 +13,18 @@ MAX_INPUT_BYTES = 1048576
 MAX_HISTORY_MESSAGES = 200
 
 MESSAGE_SELECT = """SELECT cm.*,r.id AS runtime_run_id,r.status AS runtime_status,
+    note.operation_key AS owner_note_key,
     CASE WHEN cm.id=q.answer_message_id THEN q.answer_context_version ELSE r.context_version END AS context_version,
     r.task_id, CASE WHEN cm.id=q.question_message_id THEN 'question' WHEN cm.id=q.answer_message_id THEN 'answer'
     ELSE 'recorded' END AS delivery FROM chat_messages cm
     LEFT JOIN runtime_chat_links link ON cm.id=link.user_message_id OR cm.id=link.proposal_message_id
     LEFT JOIN runtime_question_links q ON cm.id=q.question_message_id OR cm.id=q.answer_message_id
+    LEFT JOIN runtime_owner_notes note ON note.project_id=cm.project_id AND note.message_id=cm.id
     LEFT JOIN runtime_runs r ON r.id=COALESCE(link.run_id,q.run_id)"""
 
 
 def conversation_history(conn, row):
+    """Retain scoped original conversation and explicit note/instruction provenance; a paired note proves authorship without granting work authority."""
     link = conn.execute(
         "SELECT * FROM runtime_chat_links WHERE project_id=? AND run_id=?",
         (row["project_id"], row["id"]),
@@ -61,12 +64,15 @@ def conversation_history(conn, row):
             and m["conversation_type"] == "user_to_agent"
             else "agent_proposal"
             if m["runtime_run_id"] is not None
+            else "owner_note"
+            if m["owner_note_key"] is not None
             else "unattributed_record"
         )
         messages.append(
             {
                 "message_id": m["id"],
                 "kind": kind,
+                **({"work_authorized": False} if kind == "owner_note" else {}),
                 "recorded_sender": m["from_agent"],
                 "source_context_version": m["context_version"],
                 "same_context_version": m["context_version"] == row["context_version"]

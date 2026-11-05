@@ -6045,3 +6045,96 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
   reauthorization. Preserve full roles/tools/prompts/books/evals/interaction,
   remote recovery remaining,6web routes/12page acceptance,43scenarios/inherited
   failures, install/restore/inverses and final fresh review. Stop panel polish.
+
+
+## 2026-11-05 — actual terminal/orchestrator and owner-note cutover (baseacb9132)
+- Previous goal turn: progress (native planning4aa61ec and accepted dispatchacb9132).
+  Main capability now replaces actual ProjectOrchestrator + classic CLI/TUI callers
+  with owner HTTP projection, not a get_engine stub. No terminal agents/model/tool
+  context/local DB/cwd index/auto-DONE/review-word parsing/auto-merge. Same serving
+  RuntimeService owns real work. Closing terminal preserves server-owned attempts.
+- Ruling: explicit server/project/private key file and original request journal,
+  not inferred cwd/project1/provider settings. Native model configured by host
+  runtime JSON; old --model rejected rather than pretending LLM_MODEL controls it.
+  Cost: users must migrate terminal launch options and old implicit automatic
+  execution/merge becomes explicit observe/accept/execute/review/accept decisions.
+  Migration guide and README updated; advanced terminal parity remains full scope.
+- OwnerClient fixed loopback origin, proxies/redirects off, private credential
+  read, in-memory owner session/CSRF, exact immutable packet/expected receipt before
+  POST, locked atomic fsynced scoped journal. Wrong/incomplete/foreign receipts
+  retain uncertainty. No new mutation overwrites pending; retry retains exact
+  operation/body. Reset old rejection flag before each retry so a later unknown
+  success cannot be discarded using an earlier rejection. Explicit dismissal only
+  for definite rejection after inspection. Model OAuth/grant tokens never stored.
+- Ruling: URL/project labels do not prove endpoint continuity. Schema49 random
+  installation identity plus physical DB identity, returned at pairing and bound
+  in optional X-Researcher-Endpoint; changed/cloned DB rejected before route. Web
+  persistent actions have NOT adopted this yet, required future integration.
+  Server-declared actual workspaces protect state/key location. Initial cwd guard
+  incorrectly assumed terminal cwd was source, reproduced home-like launch
+  rejection plus allowed real source state; corrected using served workspace facts.
+- Owner note POST stores original receipt/thread/message/event atomically, no
+  legacy agent_events/bus activation. Compatibility without key still appends;
+  new terminal always sends key. Explicit native instruction/correction unchanged.
+  Frozen history classifies receipt-backed owner_note/work_authorizedfalse instead
+  of unverified generic from_agentuser label; authorship is not truth or assignment.
+- Actual full chain found coordinated code instruction mislabeled owner_admission
+  and original plan premise absent from child input. RED missing plan_context→
+  GREEN handoffv2 original material/origin/accepted draft/assumptions. Reviewer
+  source_kindcoordinated_owner_execution now reflects host-composed instruction;
+  developer instructions updated. No historical input/receipt rewrite. Old prepared
+  handoff comparison can require reconcile; coordinated current review subjects
+  change due corrected attribution, direct subject shape unchanged.
+- TDD: notes duplicate message/thread and legacy activation RED2→GREEN; initial
+  test lacked workspace_app import fixture (setup errors, not product RED), fixed.
+  Endpoint DB replacement REDmissingID→GREEN changed-physical-DB refusal. Client
+  module RED4→GREEN, stale rejection flag RED→GREEN, scoped finding-page rejection
+  RED→GREEN, source/cwd assumptions RED2→GREEN, incomplete acceptance-ID receipt
+  RED→GREEN. Controller RED old circular import/unsupported owner_client→GREEN;
+  CLI/TUI entry RED3 old flags/constructor→GREEN. No tests weakened to permit
+  fallback or text completion. Old engine-bound orchestrator8tests/settings tests
+  replaced with native contract/integration tests; startup probe requirement
+  retained/strengthened, explicit bootstrap guard helper retained unused by CLI.
+- Real root HTTP chain initial failure: test assumed canonical JSON task-map order;
+  selected actual task types instead. Second failure: controlled reviewer required
+  a direct owner's137to200 request but delegated prompt lacked original premises;
+  exposed real attribution/input gap above. Fixture retains strict direct branch
+  and now checks exact coordinated source_kind/cause/original owner premise/limits;
+  no bypass of native review or acceptance guards.
+- Final actual CLI/HTTP/SQLite/owned broker/kernel/Git flow104.39s PASS: four native
+  original turns(plan/research/private code/review), separate owner acceptances,
+  original execute HTTP response lost AFTERcommit; terminal close/reopen/retry uses
+  same packet and same authorization. Source137 intact, all peers closed, no merge/
+  publication. Generation and Ken command controlled fixtures, not real inference.
+- Real Textual/OwnerClient/HTTP/owner/SQLite1PASS1.70s:110x36 visible project/server,
+  note receipt,1note/0agent_events/0native runs/0pending. SVG exported, PNG rendered
+  with rsvg-convert and visually inspected. Separate widget test and real owned CLI
+  chain cover other boundaries; no representative human comprehension/Axe claim.
+- Source selection137PASS2FAIL1deselected75.65s: unused inverse40/41 tests refuse
+  later schemas43–49 (same known category as inverse42 explicitly excluded based
+  prior observed failure). Exact IDs preserved in terminal-owner-results.json;
+  development rollback guard not weakened. DD003 retains inverse43–49/fixture work.
+  Final core37PASS, frontend86PASS(no frontend implementation change). Changed
+  files Ruff/diffPASS; broad backend/cli lint also included19existing unmodified
+  watcher/index issues, deferred DD013 instead of unrelated cleanup.
+- Final wheel96PASS,364imports only extracted package,753matchingPythonSQL; three
+  inverse tests explicitly excluded/documented. Current wheel hash and all source
+  bytes rechecked, no mismatch. README/package metadata final rebuild verified.
+  No global suite green, full host install/restore or quality-evaluation claim.
+  English docstrings142 new/changed definitions/modules for Ken, missing[]; not
+  a whole-repo audit. Fresh CLI import loads no backend.engine/agents/autonomy/flows.
+- Ken focused wiring find errored; indexed old orchestrator relationship gave
+  named test lower bound. Read actual managed files and consumers. Accessory
+  recalls for session/access/reviewer instructions checked after edits, no stored
+  findings; no claims of indexed completeness or stale memory truth.
+- Macro-first: central terminal/notes/attribution capability works; publish guide,
+  contract, results/package/capture, dashboard/coverage and deferred details. No
+  further terminal polish. Next MAIN BLOCK remaining flow/autonomy/claims/listener/
+  tools consumers and recovery/successors/graph reauthorization. Full scope of
+  roles/prompts/books/evals/interactions, remote recovery/Forgejo,6web routes/12page
+  acceptance,43scenarios/inherited failures/install/restore/inverses/final fresh
+  review remains. No goal completion or percentage, no push/merge/deploy.
+- Jobs terminal: owned82514exit0/TUI57433exit0/frontend78861exit0/source47428exit1
+  (reported inverses)/core70329exit0/finalpackage40922exit0. API servers run inside
+  tests and are awaited after should_exit in finally; sockets and clients closed.
+  Original checkout/protected untracked root .agents/.codex/AGENTS.md untouched.

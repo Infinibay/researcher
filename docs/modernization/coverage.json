@@ -3011,7 +3011,7 @@
       ],
       "remaining": [
         "Explicit dispatch and causal prerequisite handoffs now delivered separately in accepted_plan_execution; original plan acceptance still never auto-starts work",
-        "Autonomy/orchestrator/remaining flow/tool/CLI/TUI cutover and physical legacy writer exclusion across processes",
+        "Autonomy/remaining flows/tool consumers and global physical legacy exclusion remain; orchestrator/CLI/TUI entry cut over, advanced parity pending",
         "Basic project Stop/unissued restart and graph-wide premise invalidation delivered; corrected-graph reauthorization, delivery successor recovery and full lifecycle remain",
         "Multi-repo/empty-project planning bootstrap, all task types, native planning history deletion/archive/restore and inverse47",
         "Typed code/source evidence in plan basis, semantic support/representative prompting and human-comprehension evaluations; no claims from lexical quote membership",
@@ -3041,12 +3041,49 @@
         "Strict owner HTTP and Tasks controls; exact execute/pause/resume packets persist across loss/reload"
       ],
       "remaining": [
-        "One original execution per accepted plan; corrected-graph reauthorization and explicit delivery lineage to recovered/manual successor runs remain next main-block work",
+        "Delivery recovery/manual successor lineage and corrected-graph reauthorization remain; orchestrator/CLI/TUI core now uses same owner service, advanced parity pending",
         "Graph-wide conservative invalidation; branch-selective scope and independent-node priority scheduling remain deferred",
         "Code prerequisites currently transfer acceptance/head/tree/diff identities and explicit not-published limitation; complete candidate reading/adoption across code tasks remains integration work",
         "Legacy autonomy/orchestrator/flows/tools/CLI/TUI still compete and require actual migration; known local registration check is not global physical legacy writer exclusion",
         "Large complete predecessor snapshots can exceed native input budget and block before inference; no silent truncation; windowed handoff evidence reads remain future capability",
         "No real model/prompt quality/human comprehension evaluation, full-page acceptance, current global-suite green, full host install or migration-inverse completion"
+      ]
+    },
+    "terminal_owner_client": {
+      "status": "terminal_orchestrator_and_owner_note_consumers_migrated_other_legacy_consumers_and_advanced_parity_pending",
+      "evidence": [
+        "backend/cli/owner_client.py",
+        "backend/cli/main.py",
+        "backend/cli/tui.py",
+        "backend/orchestrator.py",
+        "backend/communication/owner_notes.py",
+        "backend/db/owner_note_schema.sql",
+        "backend/api/owner_endpoint.py",
+        "backend/tests/test_orchestrator.py",
+        "backend/tests/cli/test_owner_client.py",
+        "backend/tests/runtime/test_owner_notes.py",
+        "backend/tests/runtime/test_terminal_tui_http.py",
+        "docs/architecture/terminal-owner-client.md",
+        "docs/modernization/terminal-owner-results.json",
+        "docs/modernization/terminal-owner-packaging.json",
+        "docs/design/audits/2026-11-05-terminal-owner/report.md"
+      ],
+      "implemented": [
+        "ProjectOrchestrator and actual classic/TUI entry points use the same owner HTTP service; removed local team/model/worktree/auto-DONE/review-token/auto-merge pipeline",
+        "Explicit project/origin/private pairing file and source-independent cwd; owner-served actual workspace roots protect key/journal location",
+        "Installation plus physical database endpoint identity retained; optional bound header rejects changed/copied DB before action; URL/project labels alone insufficient",
+        "Private cross-process locked atomic journal retains exact packet and expected receipt before POST; loss/restart/foreign/incomplete replies preserve uncertainty; rejected status reset before each retry",
+        "Plain owner messages store idempotent explanatory notes without legacy agent events; frozen history distinguishes owner_note authorship from instruction authority or an unverified sender label",
+        "Typed plan preview/accept/execute/pause/resume, task/current-context admission, research/code inspection, independent code review and exact owner acceptance; server remains execution owner",
+        "Handoff v2 carries original plan material/origins/accepted proposal/assumptions; coordinated code review no longer labels host-composed instruction as literal owner statement"
+      ],
+      "remaining": [
+        "Remaining flows/autonomy/claims/listeners/tool registries still need actual migration and global physical legacy-writer exclusion",
+        "Corrected-graph reauthorization, recovery/manual successor lineage, complete candidate adoption across code tasks and task lifecycle remain required",
+        "Terminal advanced parity for scientific review/questions/publication/remote/recovery and explicit multi-repository selection remains; existing web controls retained",
+        "Persisted endpoint binding for web pending actions and generic-note reply-loss UX/live projection still need integration; current bound identity contract is implemented by terminal",
+        "Historical prepared handoff v1 cannot silently gain new material; original snapshots/receipts preserved, explicit reconciliation required",
+        "No model/prompt-quality/human comprehension/scientific evaluation, whole-page acceptance, full host install/restore or migration inverse completion; no full goal completion"
       ]
     }
   }

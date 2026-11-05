@@ -8,13 +8,20 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
 class ChatMessageCreate(BaseModel):
-    message: str = Field(..., min_length=1)
+    """Explanatory note only; native instructions and corrections have their own typed endpoints."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    operation_key: str | None = Field(None, pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
+    message: str = Field(..., min_length=1, max_length=50000)
     to_agent: str | None = None
     to_role: str = Field(default="project_lead")
     thread_id: str | None = Field(None, pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
 
 
 class ChatMessageResponse(BaseModel):
+    """Persisted attributed conversation and its delivery receipt, independent of task activation."""
+
+    operation_key: str | None = None
     id: int
     project_id: int
     thread_id: str | None = None

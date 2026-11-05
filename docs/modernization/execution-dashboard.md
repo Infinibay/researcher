@@ -9,7 +9,33 @@ Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: despacho aprobado y entregas causales
+## Etapa actual: terminal y notas sobre el único owner
+
+**Resultado:** orchestrator y entradas CLI/TUI usan la misma API owner del runtime.
+No crean otro equipo/motor/DB ni hacen DONE/review/merge por texto. Notas owner
+quedan como conversación sin activación. El cliente conserva paquete/versiones y
+recibo original tras pérdida/reinicio; URL/IDs no sustituyen identidad física DB.
+Las entregas nuevas conservan material/origen/supuestos del plan; revisar una
+instrucción coordinada ya no la atribuye como cita literal del propietario.
+
+**Verificación:** selección amplia137PASS/2FAIL (inversas40/41 ante esquemas posteriores;
+la inversa42 ya conocida se excluyó explícita). Núcleo final37PASS.
+CLI/HTTP/broker/kernel/Git:4turnos originales con generación/Ken controlados,
+respuesta perdida/cliente reabierto, investigación→código privado→revisión→aceptación,
+fuente137 intacta y cero merge/publicación automática. TUI110×36 real sobre HTTP/DB:
+1nota/0activaciones, captura inspeccionada. Frontend86PASS; wheel96PASS,364imports
+sólo paquete,753fuentes;3inversas excluidas y documentadas.142definiciones Python
+documentadas. No hay suite global verde ni inferencia/comprensión real evaluada.
+
+**Siguiente bloque principal:** migrar de verdad flows/autonomía/claims/listeners y
+herramientas restantes al mismo owner, conectar recuperación/sucesores y
+reautorización de grafos corregidos. Paridad terminal avanzada y binding web de
+endpoint siguen dentro del alcance. No otra pasada de pulido de terminal o publicación.
+[Contrato](../architecture/terminal-owner-client.md), [guía](terminal-owner.md),
+[resultados](terminal-owner-results.json), [paquete](terminal-owner-packaging.json),
+[captura](../design/audits/2026-11-05-terminal-owner/report.md).
+
+## Etapa anterior: despacho aprobado y entregas causales
 
 **Resultado:** el propietario ejecuta una versión exacta del plan aceptado. El
 coordinador del runtime existente conserva una entrega original por tarea, espera

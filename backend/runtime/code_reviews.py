@@ -186,6 +186,18 @@ class CodeReviews:
             "diff_bytes": len(candidate["diff"]),
             "checks": checks,
         }
+        delivery = conn.execute(
+            "SELECT h.packet_json,h.packet_sha256 FROM runtime_plan_handoffs h JOIN runtime_plan_deliveries d ON d.id=h.delivery_id WHERE d.run_id=?",
+            (subject.run_id,),
+        ).fetchone()
+        if delivery is not None:
+            handoff = json.loads(delivery["packet_json"])
+            snapshot["author_request"].update(
+                source_kind="coordinated_owner_execution",
+                work_delivery_id=handoff["delivery_id"],
+                work_delivery_sha256=delivery["packet_sha256"],
+                plan_run_id=handoff["cause"]["plan_run_id"],
+            )
         if len(canonical(snapshot).encode()) > 1048576:
             raise RunConflict("Complete code review subject exceeds one MiB")
         return {"subject_sha256": digest(snapshot), "snapshot": snapshot}, candidate

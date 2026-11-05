@@ -24,6 +24,7 @@ async def owner_client(app):
 async def test_generic_reply_keeps_scope_without_activating_native_work(
     coordination, workspace_app
 ):
+    """Plain notes preserve project/thread scope and never activate native work or the legacy autonomy queue, regardless of destination label."""
     c = coordination
     c.store.admit(c.spec, conversation_thread="native-owner")
     async with (
@@ -52,7 +53,7 @@ async def test_generic_reply_keeps_scope_without_activating_native_work(
             json={"message": "Legacy message", "to_agent": "legacy-worker"},
         )
         assert legacy.status_code == 201
-        assert c.conn.execute("SELECT COUNT(*) FROM agent_events").fetchone()[0] == 1
+        assert c.conn.execute("SELECT COUNT(*) FROM agent_events").fetchone()[0] == 0
 
 
 @pytest.fixture

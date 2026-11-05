@@ -4,8 +4,9 @@ Estado: investigación, desarrollo/revisión/publicación y planificación nativ
 conectados al runtime Codex/Ken. La ruta web de inicio de proyecto usa ahora una
 tarea de planificación y aceptación explícita del grafo; no arranca CrewAI.
 [Planificación](native-project-planning.md). El [despacho aprobado y los handoffs](accepted-plan-execution.md)
-usan el mismo servicio y evidencia aceptada. Cutover de autonomía/orchestrator/flows/CLI/TUI,
-comunicación explicativa y recuperación/reautorización siguen pendientes. No hay otro loop LLM.
+usan el mismo servicio y evidencia aceptada. El [orchestrator y las entradas CLI/TUI](terminal-owner-client.md) usan ya la API owner común,
+sin equipo/motor propio. Cutover de autonomía/demás flows/herramientas, comunicación entre agentes
+y recuperación/reautorización siguen pendientes; la terminal aún necesita paridad avanzada. No hay otro loop LLM.
 
 ## Un dueño por decisión
 

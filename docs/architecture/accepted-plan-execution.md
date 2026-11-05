@@ -42,8 +42,8 @@ aceptaciones registradas por otras rutas del producto.
 
 ## Evidencia entregada
 
-La entrega `work.request` distingue causa, destinatario y prerrequisitos. Para
-investigación incluye aceptación y snapshot inmutable: informes, fuentes, citas y
+La entrega `work.request` distingue causa, destinatario y prerrequisitos. Las entregas nuevas versión2 incluyen además material original del plan, origen y
+supuestos; [procedencia y terminal](terminal-owner-client.md). Para investigación incluye aceptación y snapshot inmutable: informes, fuentes, citas y
 limitaciones. Aceptación documental no equivale a confianza científica. Para código
 conserva aceptación e identidad de candidato/head/tree/diff y avisa que aceptar
 no publica sus archivos en la fuente. Ampliar la lectura/uso de candidatos entre
@@ -95,5 +95,6 @@ fuente137 intacta, cero aceptaciones/publicaciones de código.
 
 El navegador usa generación/cierre sintéticos explícitos. No se afirma inferencia
 real, prompting evaluado, comprensión humana, suite global verde ni engine completo.
-Siguen consumidores antiguos, comunicación explicativa de agentes, recuperación de
-entregas, CLI/TUI, lifecycle/inversas y exclusión física global del escritor legacy.
+El cliente terminal se migró después; siguen otros consumidores antiguos,
+comunicación explicativa de agentes, recuperación de entregas, paridad terminal avanzada,
+lifecycle/inversas y exclusión física global del escritor legacy.

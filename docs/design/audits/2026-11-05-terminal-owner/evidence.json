@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "scope": "Actual Textual/OwnerClient/HTTP/owner session/SQLite, no inference runtime configured",
+  "columns": 110,
+  "rows": 36,
+  "notes": 1,
+  "agent_events": 0,
+  "native_runs": 0,
+  "pending_action": false
+}

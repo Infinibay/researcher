@@ -1,0 +1,860 @@
+{
+  "base_commit": "acb9132",
+  "scope": "New modules and new/changed qualified definitions including enclosing definitions; English docstrings for Ken, not a global documentation audit.",
+  "definitions_or_modules": 142,
+  "missing": [],
+  "entries": [
+    {
+      "path": "backend/api/local_access.py",
+      "name": "OwnerAccessMiddleware",
+      "line": 148,
+      "documented": true
+    },
+    {
+      "path": "backend/api/local_access.py",
+      "name": "OwnerAccessMiddleware.__call__",
+      "line": 155,
+      "documented": true
+    },
+    {
+      "path": "backend/api/models/chat.py",
+      "name": "ChatMessageCreate",
+      "line": 10,
+      "documented": true
+    },
+    {
+      "path": "backend/api/models/chat.py",
+      "name": "ChatMessageResponse",
+      "line": 21,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/chat.py",
+      "name": "send_message",
+      "line": 85,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/session.py",
+      "name": "session_status",
+      "line": 18,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/session.py",
+      "name": "pair_owner",
+      "line": 28,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/main.py",
+      "name": "_init_db",
+      "line": 12,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/main.py",
+      "name": "_handle_command",
+      "line": 19,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/main.py",
+      "name": "_run_classic_repl",
+      "line": 28,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/main.py",
+      "name": "main",
+      "line": 100,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/tui.py",
+      "name": "ResearcherTUI",
+      "line": 125,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/tui.py",
+      "name": "ResearcherTUI.__init__",
+      "line": 128,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/tui.py",
+      "name": "ResearcherTUI.compose",
+      "line": 45,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/tui.py",
+      "name": "ResearcherTUI.on_mount",
+      "line": 69,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/tui.py",
+      "name": "ResearcherTUI.submitted",
+      "line": 77,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/tui.py",
+      "name": "ResearcherTUI.view",
+      "line": 90,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/tui.py",
+      "name": "ResearcherTUI._execute",
+      "line": 96,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/tui.py",
+      "name": "ResearcherTUI.action_help",
+      "line": 104,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/tui.py",
+      "name": "ResearcherTUI.action_tasks",
+      "line": 108,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/tui.py",
+      "name": "ResearcherTUI.action_events",
+      "line": 112,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/tui.py",
+      "name": "ResearcherTUI.action_knowledge",
+      "line": 116,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/tui.py",
+      "name": "ResearcherTUI.on_unmount",
+      "line": 120,
+      "documented": true
+    },
+    {
+      "path": "backend/orchestrator.py",
+      "name": "OrchestratorEvent",
+      "line": 13,
+      "documented": true
+    },
+    {
+      "path": "backend/orchestrator.py",
+      "name": "_identifier",
+      "line": 53,
+      "documented": true
+    },
+    {
+      "path": "backend/orchestrator.py",
+      "name": "_number",
+      "line": 60,
+      "documented": true
+    },
+    {
+      "path": "backend/orchestrator.py",
+      "name": "_json",
+      "line": 67,
+      "documented": true
+    },
+    {
+      "path": "backend/orchestrator.py",
+      "name": "_plain",
+      "line": 72,
+      "documented": true
+    },
+    {
+      "path": "backend/orchestrator.py",
+      "name": "ProjectOrchestrator",
+      "line": 77,
+      "documented": true
+    },
+    {
+      "path": "backend/orchestrator.py",
+      "name": "ProjectOrchestrator.__init__",
+      "line": 80,
+      "documented": true
+    },
+    {
+      "path": "backend/orchestrator.py",
+      "name": "ProjectOrchestrator.initialize",
+      "line": 91,
+      "documented": true
+    },
+    {
+      "path": "backend/orchestrator.py",
+      "name": "ProjectOrchestrator._post",
+      "line": 95,
+      "documented": true
+    },
+    {
+      "path": "backend/orchestrator.py",
+      "name": "ProjectOrchestrator._read",
+      "line": 110,
+      "documented": true
+    },
+    {
+      "path": "backend/orchestrator.py",
+      "name": "ProjectOrchestrator._proposal",
+      "line": 118,
+      "documented": true
+    },
+    {
+      "path": "backend/orchestrator.py",
+      "name": "ProjectOrchestrator._accept_plan",
+      "line": 153,
+      "documented": true
+    },
+    {
+      "path": "backend/orchestrator.py",
+      "name": "ProjectOrchestrator._execution",
+      "line": 180,
+      "documented": true
+    },
+    {
+      "path": "backend/orchestrator.py",
+      "name": "ProjectOrchestrator._task",
+      "line": 236,
+      "documented": true
+    },
+    {
+      "path": "backend/orchestrator.py",
+      "name": "ProjectOrchestrator._run_task",
+      "line": 242,
+      "documented": true
+    },
+    {
+      "path": "backend/orchestrator.py",
+      "name": "ProjectOrchestrator._result",
+      "line": 276,
+      "documented": true
+    },
+    {
+      "path": "backend/orchestrator.py",
+      "name": "ProjectOrchestrator._accept_result",
+      "line": 287,
+      "documented": true
+    },
+    {
+      "path": "backend/orchestrator.py",
+      "name": "ProjectOrchestrator._review_code",
+      "line": 353,
+      "documented": true
+    },
+    {
+      "path": "backend/orchestrator.py",
+      "name": "ProjectOrchestrator.handle_user_message",
+      "line": 387,
+      "documented": true
+    },
+    {
+      "path": "backend/orchestrator.py",
+      "name": "ProjectOrchestrator.get_status",
+      "line": 489,
+      "documented": true
+    },
+    {
+      "path": "backend/orchestrator.py",
+      "name": "ProjectOrchestrator.shutdown",
+      "line": 496,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/execution.py",
+      "name": "PlanExecutions",
+      "line": 18,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/execution.py",
+      "name": "PlanExecutions.prepare",
+      "line": 380,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/code_reviews.py",
+      "name": "CodeReviews",
+      "line": 56,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/code_reviews.py",
+      "name": "CodeReviews._subject",
+      "line": 63,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/run_inputs.py",
+      "name": "conversation_history",
+      "line": 26,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_main.py",
+      "name": "test_local_help_describes_distinct_observation_and_execution",
+      "line": 9,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_main.py",
+      "name": "test_local_exit_does_not_infer_a_server_stop",
+      "line": 17,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_main.py",
+      "name": "test_local_commands_cannot_fall_back_to_a_model_or_mutate_legacy_settings",
+      "line": 25,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_main.py",
+      "name": "test_classic_console_routes_plain_notes_and_typed_commands_to_shared_controller",
+      "line": 30,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_main.py",
+      "name": "test_classic_console_routes_plain_notes_and_typed_commands_to_shared_controller.Controller",
+      "line": 38,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_main.py",
+      "name": "test_classic_console_routes_plain_notes_and_typed_commands_to_shared_controller.Controller.handle_user_message",
+      "line": 44,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_main.py",
+      "name": "test_single_action_does_not_mix_prompt_and_unrelated_command",
+      "line": 56,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_startup.py",
+      "name": "test_single_prompt_requires_explicit_owner_context_before_runtime_work",
+      "line": 9,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_startup.py",
+      "name": "test_single_prompt_requires_explicit_owner_context_before_runtime_work.forbidden",
+      "line": 13,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/fake_owned_native.py",
+      "name": "next_code_review_tool",
+      "line": 298,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_code_publications.py",
+      "name": "test_publication_request_is_immutable_and_startup_preserves_original_records",
+      "line": 131,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_execution.py",
+      "name": "test_dependent_handoff_contains_original_accepted_evidence_and_blocks_changed_context",
+      "line": 143,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_workspace_delivery.py",
+      "name": "test_generic_reply_keeps_scope_without_activating_native_work",
+      "line": 24,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/test_orchestrator.py",
+      "name": "test_terminal_owns_no_engine_and_recovers_exact_work_through_real_owner_http",
+      "line": 27,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/test_orchestrator.py",
+      "name": "test_terminal_owns_no_engine_and_recovers_exact_work_through_real_owner_http.LostExecutionReply",
+      "line": 83,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/test_orchestrator.py",
+      "name": "test_terminal_owns_no_engine_and_recovers_exact_work_through_real_owner_http.LostExecutionReply.__init__",
+      "line": 86,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/test_orchestrator.py",
+      "name": "test_terminal_owns_no_engine_and_recovers_exact_work_through_real_owner_http.LostExecutionReply.handle_request",
+      "line": 90,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/test_orchestrator.py",
+      "name": "test_terminal_owns_no_engine_and_recovers_exact_work_through_real_owner_http.LostExecutionReply.close",
+      "line": 103,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/test_orchestrator.py",
+      "name": "test_terminal_owns_no_engine_and_recovers_exact_work_through_real_owner_http.terminal_run",
+      "line": 137,
+      "documented": true
+    },
+    {
+      "path": "backend/tools/base/db.py",
+      "name": "ensure_migrations",
+      "line": 111,
+      "documented": true
+    },
+    {
+      "path": "backend/api/owner_endpoint.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/api/owner_endpoint.py",
+      "name": "endpoint_identity",
+      "line": 8,
+      "documented": true
+    },
+    {
+      "path": "backend/api/owner_endpoint.py",
+      "name": "endpoint_scope",
+      "line": 31,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "TerminalError",
+      "line": 17,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "_private_file",
+      "line": 21,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "TerminalJournal",
+      "line": 44,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "TerminalJournal.__init__",
+      "line": 47,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "TerminalJournal.locked",
+      "line": 66,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "TerminalJournal.read",
+      "line": 84,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "TerminalJournal.write",
+      "line": 112,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "OwnerClient",
+      "line": 137,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "OwnerClient.__init__",
+      "line": 140,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "OwnerClient._pair",
+      "line": 185,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "OwnerClient._bind",
+      "line": 227,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "OwnerClient._path",
+      "line": 239,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "OwnerClient._action",
+      "line": 271,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "OwnerClient._request",
+      "line": 314,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "OwnerClient.get",
+      "line": 342,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "OwnerClient.observe",
+      "line": 360,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "OwnerClient.observed",
+      "line": 368,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "OwnerClient.pending",
+      "line": 378,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "OwnerClient.thread",
+      "line": 383,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "OwnerClient.post",
+      "line": 388,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "OwnerClient._send",
+      "line": 410,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "OwnerClient._receipt_identities",
+      "line": 449,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "OwnerClient._receipt_identities.reference",
+      "line": 452,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "OwnerClient._receipt_identities.positive",
+      "line": 460,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "OwnerClient.retry",
+      "line": 491,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "OwnerClient.dismiss_rejected",
+      "line": 500,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/owner_client.py",
+      "name": "OwnerClient.close",
+      "line": 512,
+      "documented": true
+    },
+    {
+      "path": "backend/communication/owner_notes.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/communication/owner_notes.py",
+      "name": "OwnerNotes",
+      "line": 10,
+      "documented": true
+    },
+    {
+      "path": "backend/communication/owner_notes.py",
+      "name": "OwnerNotes.__init__",
+      "line": 13,
+      "documented": true
+    },
+    {
+      "path": "backend/communication/owner_notes.py",
+      "name": "OwnerNotes.record",
+      "line": 17,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_native_entry.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_native_entry.py",
+      "name": "test_single_prompt_admits_native_planning_through_shared_owner_api",
+      "line": 9,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_native_entry.py",
+      "name": "test_single_prompt_admits_native_planning_through_shared_owner_api.forbidden",
+      "line": 20,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_native_entry.py",
+      "name": "test_single_prompt_admits_native_planning_through_shared_owner_api.handle",
+      "line": 24,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_native_entry.py",
+      "name": "test_terminal_model_override_cannot_silently_change_unrelated_legacy_settings",
+      "line": 82,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_native_entry.py",
+      "name": "test_tui_keeps_owner_context_visible_and_uses_typed_command_port",
+      "line": 109,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_native_entry.py",
+      "name": "test_tui_keeps_owner_context_visible_and_uses_typed_command_port.Controller",
+      "line": 117,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_native_entry.py",
+      "name": "test_tui_keeps_owner_context_visible_and_uses_typed_command_port.Controller.handle_user_message",
+      "line": 123,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_native_entry.py",
+      "name": "test_tui_keeps_owner_context_visible_and_uses_typed_command_port.Controller.shutdown",
+      "line": 128,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_owner_client.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_owner_client.py",
+      "name": "client_config",
+      "line": 9,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_owner_client.py",
+      "name": "test_terminal_lost_response_reloads_exact_original_packet_and_receipt",
+      "line": 22,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_owner_client.py",
+      "name": "test_terminal_lost_response_reloads_exact_original_packet_and_receipt.handler",
+      "line": 29,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_owner_client.py",
+      "name": "test_terminal_changed_database_identity_cannot_replay_pending_work",
+      "line": 94,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_owner_client.py",
+      "name": "test_terminal_changed_database_identity_cannot_replay_pending_work.handler",
+      "line": 102,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_owner_client.py",
+      "name": "test_terminal_rejects_foreign_receipt_and_requires_explicit_disposal_of_rejection",
+      "line": 141,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_owner_client.py",
+      "name": "test_terminal_rejects_foreign_receipt_and_requires_explicit_disposal_of_rejection.handler",
+      "line": 149,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_owner_client.py",
+      "name": "test_terminal_configuration_cannot_send_credentials_to_remote_or_untrusted_state",
+      "line": 209,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_owner_client.py",
+      "name": "test_terminal_finding_page_cannot_change_its_project_scope",
+      "line": 229,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_owner_client.py",
+      "name": "test_terminal_finding_page_cannot_change_its_project_scope.handler",
+      "line": 233,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_owner_client.py",
+      "name": "test_terminal_cwd_is_not_assumed_to_be_the_servers_source_workspace",
+      "line": 263,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_owner_client.py",
+      "name": "test_terminal_cwd_is_not_assumed_to_be_the_servers_source_workspace.handler",
+      "line": 274,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_owner_client.py",
+      "name": "test_terminal_pending_state_cannot_be_inside_declared_server_workspace",
+      "line": 293,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_owner_client.py",
+      "name": "test_terminal_pending_state_cannot_be_inside_declared_server_workspace.handler",
+      "line": 303,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_owner_client.py",
+      "name": "test_terminal_cannot_resolve_acceptance_without_created_task_identities",
+      "line": 345,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_owner_client.py",
+      "name": "test_terminal_cannot_resolve_acceptance_without_created_task_identities.handler",
+      "line": 349,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_terminal_controller.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_terminal_controller.py",
+      "name": "test_terminal_plan_and_acceptance_use_exact_observed_versions",
+      "line": 6,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_terminal_controller.py",
+      "name": "test_terminal_plan_and_acceptance_use_exact_observed_versions.handle",
+      "line": 51,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_terminal_controller.py",
+      "name": "test_terminal_requires_observation_and_has_no_local_task_completion",
+      "line": 97,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/cli/test_terminal_controller.py",
+      "name": "test_terminal_requires_observation_and_has_no_local_task_completion.handle",
+      "line": 107,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owner_notes.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owner_notes.py",
+      "name": "test_owner_note_retry_preserves_original_message_without_dispatch",
+      "line": 7,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owner_notes.py",
+      "name": "test_legacy_note_body_remains_readable_but_no_longer_activates_autonomy",
+      "line": 41,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owner_notes.py",
+      "name": "test_paired_endpoint_identity_detects_replaced_database_before_note_mutation",
+      "line": 70,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owner_notes.py",
+      "name": "test_frozen_conversation_distinguishes_attributed_owner_note_from_instruction",
+      "line": 104,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_terminal_tui_http.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_terminal_tui_http.py",
+      "name": "test_tui_records_explanatory_note_through_actual_owner_service",
+      "line": 12,
+      "documented": true
+    }
+  ]
+}

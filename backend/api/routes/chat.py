@@ -1,11 +1,10 @@
-"""Chat message endpoints."""
+"""Owner explanatory conversation and explicit native instruction endpoints; plain message text never activates another agent engine."""
 
 from __future__ import annotations
 
 import asyncio
 import logging
 import sqlite3
-import uuid
 from dataclasses import asdict
 
 from fastapi import APIRouter, HTTPException, Query, Request
@@ -83,85 +82,14 @@ async def send_instruction(project_id: int, body: NativeInstruction, request: Re
 
 
 @router.post("/{project_id}", response_model=ChatMessageResponse, status_code=201)
-async def send_message(project_id: int, body: ChatMessageCreate):
-    """Send a user message. The event listener will process it."""
+async def send_message(project_id: int, body: ChatMessageCreate, request: Request):
+    """Record an original explanatory owner note; destination labels and message text never enqueue autonomy or start a native turn."""
+    from backend.api.routes.runs import read_store
+    from backend.communication.owner_notes import OwnerNotes
 
-    def _create(conn: sqlite3.Connection) -> dict:
-        # Create or reuse a thread
-        thread_id = body.thread_id or str(uuid.uuid4())
-        if body.thread_id is not None:
-            existing = conn.execute(
-                "SELECT status FROM conversation_threads WHERE thread_id=? AND project_id=?",
-                (thread_id, project_id),
-            ).fetchone()
-            if existing is None:
-                raise HTTPException(404, "Conversation not found in this project")
-            if existing["status"] != "active":
-                raise HTTPException(
-                    409, "Conversation is closed; start a new conversation"
-                )
-        else:
-            conn.execute(
-                """INSERT OR IGNORE INTO conversation_threads
-               (thread_id, project_id, thread_type, created_at)
-               VALUES (?, ?, 'user_chat', CURRENT_TIMESTAMP)""",
-                (thread_id, project_id),
-            )
-
-        cursor = conn.execute(
-            """INSERT INTO chat_messages
-               (project_id, thread_id, from_agent, to_agent, to_role,
-                message, conversation_type, created_at)
-               VALUES (?, ?, 'user', ?, ?, ?, 'user_to_agent', CURRENT_TIMESTAMP)""",
-            (project_id, thread_id, body.to_agent, body.to_role, body.message),
-        )
-        conn.execute(
-            "UPDATE conversation_threads SET last_message_at=CURRENT_TIMESTAMP WHERE thread_id=?",
-            (thread_id,),
-        )
-        conn.commit()
-
-        row = conn.execute(
-            "SELECT * FROM chat_messages WHERE id = ?", (cursor.lastrowid,)
-        ).fetchone()
-        return dict(row)
-
-    message = await asyncio.to_thread(execute_with_retry, _create)
-
-    # Create agent_events so the autonomy system dispatches the message
-    # to the target agent(s).  User messages get PRIORITY_URGENT.
-    try:
-        from backend.autonomy.events import create_message_event
-
-        create_message_event(
-            project_id=project_id,
-            from_agent="user",
-            to_agent=body.to_agent,
-            to_role=body.to_role,
-            message=body.message,
-            thread_id=message.get("thread_id"),
-            message_id=message.get("id"),
-            conversation_type="user_to_agent",
-        )
-    except Exception as exc:  # noqa: BLE001 — legacy dispatch is separate from the stored-message receipt
-        logger.warning("Legacy message dispatch unavailable (%s)", type(exc).__name__)
-
-    # Emit EventBus event for WebSocket relay
-    event_bus.emit(
-        FlowEvent(
-            event_type="user_message_sent",
-            project_id=project_id,
-            entity_type="message",
-            entity_id=message.get("id"),
-            data={
-                "from": "user",
-                "to_agent": body.to_agent,
-                "to_role": body.to_role,
-                "message": body.message[:200],
-            },
-        )
+    message = await asyncio.to_thread(
+        OwnerNotes(read_store(request)).record, project_id, body.model_dump()
     )
-
     return ChatMessageResponse(**message)
 
 

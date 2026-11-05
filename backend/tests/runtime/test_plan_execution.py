@@ -160,6 +160,17 @@ def test_dependent_handoff_contains_original_accepted_evidence_and_blocks_change
     with s.c.store._transaction() as conn:
         handoff = executions.input(conn, s.c.store._row(conn, 101, child.run_id))
     source = handoff["prerequisites"][0]
+    assert (
+        handoff["plan_context"]["original_material"]["owner_request"]
+        == "Investigate the issue and propose a plan."
+    )
+    assert (
+        handoff["plan_context"]["original_material"]["instruction_origin"]
+        == "owner_message"
+    )
+    assert handoff["plan_context"]["accepted_plan"]["assumptions"] == [
+        "The existing repository remains the target."
+    ]
     assert source["run_id"] == root.run_id
     assert source["acceptance"]["subject_sha256"] == accepted["candidate_sha256"]
     assert source["snapshot"]["reports"][0]["content"].endswith("137 units.")

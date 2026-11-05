@@ -82,7 +82,8 @@ original tras recarga y enlaza el trabajo creado pendiente.
 `/start` ya no inicializa equipos, threads ni autonomía CrewAI. Registros locales
 de flows, listeners o autonomía antiguos bloquean su entrada aunque haya terminado
 el thread raíz. Eso no demuestra exclusión física global de consumidores antiguos:
-FlowManager, LoopEngine, orchestrator, otros flows y CLI/TUI aún requieren cutover.
+FlowManager, LoopEngine y otros flows aún requieren cutover. El [cliente terminal](terminal-owner-client.md)
+sustituyó después el orchestrator/CLI/TUI antiguo; su paridad avanzada sigue pendiente.
 
 ## Evidencia y límites
 

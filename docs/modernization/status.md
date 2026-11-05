@@ -13,6 +13,17 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Verificación actual
 
+Orchestrator/CLI/TUI ya usan la API owner común, con recibos privados y decisiones
+explícitas. Las notas no activan agentes. Handoff y revisión conservan la procedencia
+del plan. El recorrido de terminal/HTTP/broker/kernel/Git con generación controlada
+llega a aceptación con4turnos originales y fuente intacta. TUI real y86frontend
+pasan;96wheel seleccionadas pasan con3inversas conocidas excluidas. La selección
+amplia de fuente mantiene2fallos de inversa; no hay suite global actual verde.
+[Contrato](../architecture/terminal-owner-client.md), [guía](terminal-owner.md),
+[resultados](terminal-owner-results.json).
+
+Etapa anterior de planificación y despacho:
+
 La planificación y el despacho aprobado del grafo usan ahora el mismo runtime.
 La entrega al siguiente agente conserva resultados aceptados, fuentes y límites;
 Stop/reinicio/correcciones conservan la identidad original.8casos nuevos,86frontend,

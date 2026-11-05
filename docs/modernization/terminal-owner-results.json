@@ -1,0 +1,77 @@
+{
+  "date": "2026-11-05",
+  "base_commit": "acb9132",
+  "status": "terminal_orchestrator_and_owner_note_consumers_migrated_other_legacy_consumers_and_advanced_parity_pending",
+  "directed": {
+    "total": 139,
+    "passed": 137,
+    "failures": [
+      "backend.tests.runtime.test_code_review_state::test_unused_review_inverse_preserves_closed_author_and_candidate",
+      "backend.tests.runtime.test_code_review_records::test_unused_native_review_inverse_preserves_existing_packet"
+    ],
+    "skipped": 0,
+    "sha256": "bfd1e3ca551ef7f1212dc07d00e711b0621be2f8a03d0e5775f62827fcedeb84"
+  },
+  "final_core": {
+    "total": 37,
+    "passed": 37,
+    "failures": [],
+    "skipped": 0,
+    "sha256": "905f5c8c56c91ebc463c7ca9a7617cee9f82b0c9d6b7796f3cd94b8461147371"
+  },
+  "owned_http": {
+    "total": 1,
+    "passed": 1,
+    "failures": [],
+    "skipped": 0,
+    "sha256": "6e6b1091cfc5cdb224f841c6dd40bc281746946867e01312efdcd900e2e7b69a"
+  },
+  "real_tui_http": {
+    "total": 1,
+    "passed": 1,
+    "failures": [],
+    "skipped": 0,
+    "sha256": "867be4eb83d1e4da8f1a537cf7cdfd95d25e1b7b0315635db9d9bd9a2d15e65a"
+  },
+  "controlled_owned_flow": {
+    "native_turns": 4,
+    "scope": "Actual OwnerClient/HTTP/SQLite/owned runtime/broker/kernel/Git: planning, research, private development, separate code review and explicit owner acceptance. Generation and Ken commands are controlled fixtures; no real model inference.",
+    "execution_response_loss": "Actual HTTP action committed before first reply is discarded; terminal close/reopen and same-key retry recover original receipt.",
+    "code_accepted": true,
+    "source_fact_after": "137",
+    "automatic_merge_or_publication": false,
+    "registered_peers_unclosed": 0
+  },
+  "frontend": {
+    "passed": 86,
+    "failed": 0,
+    "scope": "Existing frontend tests, unchanged frontend implementation; no new browser/page acceptance claim"
+  },
+  "python_documented_definitions_or_modules": 142,
+  "package": "docs/modernization/terminal-owner-packaging.json",
+  "tui_evidence": "docs/design/audits/2026-11-05-terminal-owner/evidence.json",
+  "known_failures": [
+    "backend.tests.runtime.test_code_review_state::test_unused_review_inverse_preserves_closed_author_and_candidate",
+    "backend.tests.runtime.test_code_review_records::test_unused_native_review_inverse_preserves_existing_packet",
+    "backend.tests.runtime.test_code_acceptance::test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history[frozen_author]"
+  ],
+  "failure_scope": "Current source selection reproduced the first two; the third was explicitly excluded after prior verified failure. Development inverse guards40/41/42 refuse later schemas43\u201349; DD003, no guard weakened. No current global-suite green claim.",
+  "implemented": [
+    "ProjectOrchestrator and actual classic/TUI entry points use the same owner HTTP service; removed local team/model/worktree/auto-DONE/review-token/auto-merge pipeline",
+    "Explicit project/origin/private pairing file and source-independent cwd; owner-served actual workspace roots protect key/journal location",
+    "Installation plus physical database endpoint identity retained; optional bound header rejects changed/copied DB before action; URL/project labels alone insufficient",
+    "Private cross-process locked atomic journal retains exact packet and expected receipt before POST; loss/restart/foreign/incomplete replies preserve uncertainty; rejected status reset before each retry",
+    "Plain owner messages store idempotent explanatory notes without legacy agent events; frozen history distinguishes owner_note authorship from instruction authority or an unverified sender label",
+    "Typed plan preview/accept/execute/pause/resume, task/current-context admission, research/code inspection, independent code review and exact owner acceptance; server remains execution owner",
+    "Handoff v2 carries original plan material/origins/accepted proposal/assumptions; coordinated code review no longer labels host-composed instruction as literal owner statement"
+  ],
+  "limits": [
+    "Remaining flows/autonomy/claims/listeners/tool registries still need actual migration and global physical legacy-writer exclusion",
+    "Corrected-graph reauthorization, recovery/manual successor lineage, complete candidate adoption across code tasks and task lifecycle remain required",
+    "Terminal advanced parity for scientific review/questions/publication/remote/recovery and explicit multi-repository selection remains; existing web controls retained",
+    "Persisted endpoint binding for web pending actions and generic-note reply-loss UX/live projection still need integration; current bound identity contract is implemented by terminal",
+    "Historical prepared handoff v1 cannot silently gain new material; original snapshots/receipts preserved, explicit reconciliation required",
+    "No model/prompt-quality/human comprehension/scientific evaluation, whole-page acceptance, full host install/restore or migration inverse completion; no full goal completion"
+  ],
+  "process": "Macro-first: central capability connected and tested, presentation/legacy lint details deferred; proceed to remaining engine consumers and recovery instead of another terminal polish pass."
+}

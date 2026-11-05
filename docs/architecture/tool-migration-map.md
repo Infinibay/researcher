@@ -7,7 +7,7 @@ abreviatura incorrecta. El contador y las clases se contrastan con
 `legacy-tool-schemas.json` y `backend/tools/__init__.py`. El inventario es un snapshot
 del catálogo heredado, no el catálogo MCP productivo ni el estado actual del runtime.
 
-## Frontera actual y decisión
+## Frontera observada en a644164 y decisión inicial
 
 La cadena heredada es `get_tools_for_role` → `agents/base.py` → contexto global,
 thread-local/ContextVar/env → `engine/loop_tools.py` → `_run`. No se portará esa
@@ -173,3 +173,23 @@ flows/CLI/TUI ni todos sus resultados de dominio. No se afirma exclusión global
 El siguiente bloque debe cortar esos consumidores con capacidades reales y
 recuperación/reautorización; no más pulido de publicación/planificación.
 [Contrato y límites](accepted-plan-execution.md).
+
+
+## Orchestrator, terminal y notas owner migrados — 2026-11-05
+
+ProjectOrchestrator dejó de importar agentes/get_engine/contexto global. CLI/TUI
+usan OwnerClient sobre la misma API owner y conservan solicitudes/versiones en
+estado privado; no inicializan otra DB ni modelo ni completan/mezclan por texto.
+El proyecto/servidor se eligen explícitamente. El servicio declara identidad física
+DB y workspaces; cwd y etiquetas no se tratan como contexto compartido probado.
+
+La ruta owner de notas guarda recibo e historial, sin crear agent_events ni el
+bus-event antiguo de activación. El input distingue nota owner sin autoridad de
+instrucción. Handoffv2 conserva material original del plan/orígenes/supuestos y el
+revisor distingue admisión directa de instrucción coordinada del host.
+
+La prueba de CLI/HTTP/broker/kernel/Git llega a revisión independiente/aceptación
+con4turnos controlados originales y sin merge. Esto no retira AgentLoop,
+MainProjectFlow/demás flows, claims, herramientas ni listeners globales. Tampoco
+completa recuperación/sucesores, reautorización ni paridad terminal avanzada.
+[Contrato](terminal-owner-client.md), [migración](../modernization/terminal-owner.md).

@@ -4,6 +4,14 @@ A prototype multi-agent swarm system for autonomous research, investigation, and
 
 Agents collaborate through an event-driven architecture: a team lead plans work, researchers gather information, developers write code, and reviewers check quality. All orchestrated by flows that react to events in real time.
 
+The modernization now connects native project planning, research/development,
+independent review and explicit acceptance to one configured owner service.
+The terminal uses that same service; it no longer creates another agent engine
+or a local model team. See [current status](docs/modernization/execution-dashboard.md)
+and the [CLI/TUI migration guide](docs/modernization/terminal-owner.md). Remaining
+legacy flows and provider setup below are transitional; Ollama/LLM_MODEL settings
+do not configure the native subscription runtime.
+
 ## Requirements
 
 - **Python 3.12 or 3.13** (the transitional CrewAI dependency does not support 3.14)
@@ -15,8 +23,8 @@ Agents collaborate through an event-driven architecture: a team lead plans work,
 - **OpenSSL CLI** for ephemeral local TLS certificates in the test suite
 - **Node.js 24 LTS** (for the frontend; version in `frontend/.node-version`)
 - **Podman** or **Docker** (for sandbox and Forgejo)
-- **Ollama** (for local LLM inference)
-- A machine with at least 16GB RAM and a GPU with 12GB+ VRAM for 14B models
+- **Ollama** and local-model GPU sizing apply to the retained legacy provider setup
+  below; the native entry uses the configured subscription runtime.
 
 ## Reproducible development setup
 
@@ -59,13 +67,14 @@ uv run --locked --script scripts/researcher_mcp_server.py
 Its host supplies `RESEARCHER_API_URL` and a short-lived `RESEARCHER_TOOL_TOKEN`;
 project/task/actor are bound by that grant. It exposes research business tools,
 not SQL or grant issuance. See [the research slice](docs/architecture/research-slice.md)
-for tested behavior, limits and pending integration. The default product engine
-is still being migrated; the candidate runtime is not yet the default.
+for tested behavior, limits and pending integration. Project start and terminal
+entry use the configured native owner service and refuse a legacy fallback;
+remaining internal flows and autonomy consumers are still being migrated.
 
 Set `INFINIBAY_DB` to select a database explicitly. Without an override, an
 existing recognized database is reused; multiple databases require a choice.
-A new workspace defaults to `.data/infinibay.db`. Serving and CLI startup require an
-initialized database: create a NEW installation explicitly with
+A new workspace defaults to `.data/infinibay.db`. Serving requires an initialized database; CLI/TUI connect to that serving
+owner and do not bootstrap a local database. Create a NEW installation explicitly with
 `uv run --locked researcher-bootstrap init-db --database /absolute/path/source.db`,
 then select that same path with `INFINIBAY_DB`. An absent or empty existing database
 requires investigation/restore; startup does not recreate or move it.

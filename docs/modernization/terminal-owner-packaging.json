@@ -1,0 +1,22 @@
+{
+  "base_commit": "acb9132",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "e7fccaed01a5c25915eda9e5cfa1df7a9324f868ee8af4c82594ed1dfc335978",
+  "observed": {
+    "tests_passed": 96,
+    "failures": [],
+    "skipped": 0,
+    "backend_modules_loaded": 364,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "network": "Disabled except Unix sockets",
+    "semantic_assets": "Explicit prepared pinned public offline assets outside wheel"
+  },
+  "backend_tree": {
+    "matching_source_files": 753,
+    "sha256": "086e28e2ed3f770e9e2292b975a65e1c45ce7fedb0021bea5ed5e1e22b35782e"
+  },
+  "bootstrap": "Python3.12 -I -S with explicit installed dependency path and original host venv prefix restored; backend import paths remain restricted to extracted wheel.",
+  "excluded_known_failure": "Development inverse40/41/42 tests refuse later schemas43\u201349: test_unused_review_inverse_preserves_closed_author_and_candidate, test_unused_native_review_inverse_preserves_existing_packet, test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history[frozen_author]. Separate current source receipt preserves failures; guard not weakened (DD003).",
+  "limits": "Extracted backend wheel plus installed dependencies and explicit prepared offline assets; not a clean full host installation or an inference-quality trial."
+}
