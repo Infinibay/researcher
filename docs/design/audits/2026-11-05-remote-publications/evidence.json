@@ -1,0 +1,145 @@
+{
+  "status": "passed",
+  "scope": "Actual owner HTTP/discovery policy/service/fresh observer/SQLite/Tasks. Upstream Forgejo and effect/domain witnesses explicitly synthetic; separate native TLS integration covers physical transport/recovery.",
+  "states": [
+    {
+      "file": "01-desktop-initial.png",
+      "sha256": "492ab27139699f9318c455d161d99c89562f960a93d5eddc1aee590e60fee34d",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "02-mobile-initial.png",
+      "sha256": "1581959c07e56ac95c04a9cb326d9fb69e8972dfdf4e8f2ff3f44546a3a3bc2b",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "03-destination-observed.png",
+      "sha256": "8121564b9862d38e4923cfe7ec8ee735b944527efcf301772ae3d8a270744e97",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "04-push-response-lost.png",
+      "sha256": "af202d1561526a6d5f5dfbf1eb755d1588dc8661016aa5f2aebefb2113a5ed94",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "05-push-reload-original.png",
+      "sha256": "2e8522d910c7eb05e93c4f4ff08017927daf465e6a381850297de8e6fc0899be",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "06-recovery-response-lost.png",
+      "sha256": "250c8f81ca47cf5ad6a53212d02c21b01b61666f09ee5beec30e26324021b3aa",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "07-pr-created-separate-merge.png",
+      "sha256": "deb9775b881bce306088480eca9eaecce3f632d6af2bceeb57c1885490bed37f",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "08-mobile-completed.png",
+      "sha256": "de17d5b4205115fba860ab2ac1a6c4708ad9ce67415c9ef71f2daa0ffe86eba7",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "09-desktop-completed.png",
+      "sha256": "52a2a8d59ca775adefda8f8ef38b30c7777db1c80397babe23fe80915e189c0a",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    }
+  ],
+  "page_errors": [],
+  "write_requests": [
+    {
+      "stage": "push",
+      "remote": {
+        "api_base": "https://forgejo.example/api/v1",
+        "repository_id": 71,
+        "full_name": "owner/repo",
+        "clone_url": "https://forgejo.example/owner/repo.git"
+      },
+      "target_ref": "refs/heads/researcher/task-1001",
+      "expected_target_sha": null,
+      "operation_key": "63999573-d47b-4bdd-bd1a-82ac9750d5dc"
+    },
+    {
+      "stage": "push",
+      "remote": {
+        "api_base": "https://forgejo.example/api/v1",
+        "repository_id": 71,
+        "full_name": "owner/repo",
+        "clone_url": "https://forgejo.example/owner/repo.git"
+      },
+      "target_ref": "refs/heads/researcher/task-1001",
+      "expected_target_sha": null,
+      "operation_key": "63999573-d47b-4bdd-bd1a-82ac9750d5dc"
+    },
+    {
+      "stage": "pull",
+      "base_ref": "refs/heads/main",
+      "base_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "title": "Cambio revisado de la tarea 1001",
+      "body": "Versión aceptada y revisada en Researcher.",
+      "operation_key": "32d7315c-c1b0-46fa-9193-2d83a3a27f28"
+    },
+    {
+      "stage": "merge",
+      "operation_key": "86c29e9d-958d-4f44-aa76-627ddf23c9fe"
+    }
+  ],
+  "recovery_requests": [
+    {
+      "operation_key": "39521ff4-01bf-40f4-9c57-bd297ab2bafc",
+      "attempt_id": "d27a5dd4-3011-458d-9270-c71c311115e9",
+      "expected_fence": 1
+    },
+    {
+      "operation_key": "39521ff4-01bf-40f4-9c57-bd297ab2bafc",
+      "attempt_id": "d27a5dd4-3011-458d-9270-c71c311115e9",
+      "expected_fence": 1
+    }
+  ],
+  "fixture_counts": {
+    "push": 1,
+    "pull": 1,
+    "merge_git": 1,
+    "merge_record": 1,
+    "observers": 1
+  }
+}

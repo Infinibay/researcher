@@ -288,6 +288,23 @@ class OwnedCodexRuntime:
         """Expose remote capability only when operator HTTPS/credential configuration was explicitly validated."""
         return self.remote_transport is not None
 
+    async def preview_remote(
+        self, store, project_id, local_run_id, target_ref, base_ref
+    ):
+        """Observe only the registered accepted destination over owned bounded HTTP; this control cannot issue Git or HTTP writes."""
+        from backend.runtime.forgejo_publication import ForgejoPublicationClient
+        from backend.runtime.remote_destinations import RemoteDestinations
+
+        config = self.remote_transport
+        if config is None:
+            raise ValueError("Owned remote transport is not configured")
+        async with ForgejoPublicationClient(
+            config.api_base, config.token(), verify=config.ssl_context()
+        ) as client:
+            return await RemoteDestinations(store).observe(
+                project_id, local_run_id, target_ref, base_ref, client=client
+            )
+
     async def publish_remote(self, peers, *, active):
         """Execute one original remote owner action through owned fixed Git and bounded host HTTP without model inference."""
         from backend.runtime.remote_controller import execute_owned_remote

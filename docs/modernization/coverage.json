@@ -2934,7 +2934,16 @@
         "docs/architecture/remote-recovery.md",
         "docs/modernization/remote-recovery-results.json",
         "docs/modernization/remote-recovery-packaging.json",
-        "docs/modernization/remote-recovery-docstrings.json"
+        "docs/modernization/remote-recovery-docstrings.json",
+        "backend/runtime/remote_destinations.py",
+        "backend/tests/runtime/test_remote_destinations.py",
+        "frontend/src/api/remotePublications.ts",
+        "frontend/src/components/tasks/RemotePublications.tsx",
+        "frontend/tests/remote-publication-actions.test.ts",
+        "docs/architecture/remote-tasks.md",
+        "docs/modernization/remote-tasks-results.json",
+        "docs/modernization/remote-tasks-packaging.json",
+        "docs/design/audits/2026-11-05-remote-publications/report.md"
       ],
       "implemented": [
         "Internal exact-ref policy with fixed host port; candidate Git/diff/bytes and original source/candidate metadata identity checked",
@@ -2958,16 +2967,20 @@
         "Schema46 exclusive original HTTP host identity/client closure and immutable fresh readonly observer attempts; original global domain retirement before recovery",
         "Exact readonly remote Git type/capsule and bounded GET-only recovery; historical context and missing candidate allowed, issue/native/model authority denied",
         "Owner CSRF/strict recovery API and immutable same-command receipt;88directed and native TLS Stop→server completes→fresh observation with no new write pass",
-        "Final TLS integration recovers response-lost PR and merge bookkeeping, then held push/Stop; no repeat POST/push/inference. Final wheel88PASS/337package-only modules/730matching sources;58documented definitions"
+        "Final TLS integration recovers response-lost PR and merge bookkeeping, then held push/Stop; no repeat POST/push/inference. Final wheel88PASS/337package-only modules/730matching sources;58documented definitions",
+        "Owner readonly destination discovery derives canonical remote ID and branch facts from configured origin, checks accepted provenance before/after, no writes/inference; configured-only capability and saved bounded original history",
+        "Tasks explicit push→PR→merge and separate readonly original recovery; packet/root/predecessor/version/head validated, original requests survive lost reply/reload, no generic host run recovery or model label",
+        "92backend/92wheel/80frontend/build pass;9rendered states at1440/390px zero errors/overflow/Axe on panel, browser remote/domain witnesses explicitly synthetic and separate from prior real native TLS;23Python+31TS documented declarations"
       ],
       "remaining": [
         "Expanded physical correction/crash races including DD-005; legacy writer physical exclusion",
         "Schema43/44 inverses and old inverse fixtures, capacity/host UI, whole product and full-suite acceptance",
-        "Tasks controls and explicit known-result adoption after withdrawal; readonly remote recovery connected",
+        "Explicit known-result adoption after withdrawal; Tasks controls and readonly remote recovery connected",
         "Finalize durable merge transport/stage coordination under real server protection/identity contract",
         "Compatibility with actual Forgejo instance/protected branches and repository identity stability during network effect; TLS fixture is controlled REST contract",
         "Explicit continuation of an unissued remainder in a partial merge; observer must never create it implicitly",
-        "Expanded HTTP host-crash/old-attempt migration and interrupted-observer scenarios; schema46 inverse remains pending"
+        "Expanded HTTP host-crash/old-attempt migration and interrupted-observer scenarios; schema46 inverse remains pending",
+        "Remote history pagination/older-chain selection and complete12page acceptance, including representative human comprehension; current panel audit is scoped"
       ]
     }
   }

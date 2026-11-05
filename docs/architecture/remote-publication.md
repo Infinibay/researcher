@@ -4,7 +4,7 @@ La publicación local y su recuperación están conectadas. El protocolo remoto 
 push, PR y merge también dispone de [admisión durable y transporte propio
 configurable](remote-runtime.md): Git/HTTP del host con etapas originales y cierre
 local comprobado. La integración TLS usa Git real y una API Forgejo controlada.
-La recuperación remota de sólo lectura está conectada. Faltan controles de Tareas, comprobación con Forgejo real y
+La recuperación remota de sólo lectura está conectada. Los [controles de Tareas](remote-tasks.md) están conectados. Faltan comprobación con Forgejo real y
 cutover legacy; el recorrido completo sigue en curso.
 
 ## Push de versión exacta y recibo
@@ -125,8 +125,8 @@ efecto del host. La clave de una acción del usuario, cuyo ámbito es proyecto/t
 se conserva aparte; no se debe reutilizar sin ese ámbito como identidad remota.
 
 La admisión durable ya liga la solicitud a la aceptación y publicación local.
-Siguiente trabajo principal: controles de Tareas, adopción explícita después de
-retirada y comprobación con una instancia real de Forgejo bajo
+Siguen pendientes adopción explícita después de retirada, continuidad de etapas
+no emitidas de un merge parcial y comprobación con una instancia real de Forgejo bajo
 sus protecciones. El [transporte propio](remote-runtime.md) ya aplica credencial
 del host, HTTPS, autoridad y cierre; no se expone como herramienta libre del
 agente ni como subprocess sin broker. El objetivo completo y los escenarios

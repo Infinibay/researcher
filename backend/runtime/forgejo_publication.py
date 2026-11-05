@@ -202,6 +202,57 @@ class ForgejoPublicationClient:
                 raise
             raise RemoteAPIError("Forgejo read could not be completed") from None
 
+    async def discover_remote(self, clone_url):
+        """Observe only a canonical registered repository under this configured credential origin; no caller can select another token destination."""
+        prefix = self.api_base[: -len("/api/v1")] + "/"
+        if (
+            not isinstance(clone_url, str)
+            or not clone_url.startswith(prefix)
+            or not clone_url.endswith(".git")
+        ):
+            raise RunConflict(
+                "Registered repository differs from configured HTTPS origin"
+            )
+        provisional = RemoteRepository(
+            self.api_base, 1, clone_url[len(prefix) : -4], clone_url
+        )
+        record = await self._request("GET", self._path(provisional))
+        try:
+            observed = RemoteRepository(
+                self.api_base, record["id"], record["full_name"], record["clone_url"]
+            )
+        except (TypeError, KeyError, ValueError) as error:
+            raise RemoteAPIError(
+                "Remote repository response has no complete canonical identity"
+            ) from error
+        if (observed.full_name, observed.clone_url) != (
+            provisional.full_name,
+            provisional.clone_url,
+        ):
+            raise RunConflict("Remote repository differs from registered destination")
+        return observed
+
+    async def observe_branch(self, remote, ref):
+        """Read a complete explicit branch SHA or a 404 observation; missing data is a preview fact, not permission to retry an unknown write."""
+        PublicationRefIntent("owner-preview", ref, None)
+        record = await self._request(
+            "GET",
+            self._path(
+                remote, "/branches/" + quote(ref[len("refs/heads/") :], safe="")
+            ),
+            missing=True,
+        )
+        if record is None:
+            return None
+        try:
+            sha = record["commit"]["id"]
+            RemotePushIntent("owner-preview", remote, ref, None, sha, sha)
+        except (TypeError, KeyError, ValueError) as error:
+            raise RemoteAPIError(
+                "Remote branch lacks a complete SHA observation"
+            ) from error
+        return sha
+
     async def verify_remote(self, remote):
         """Require the same numeric server repository and canonical clone URL; a recreated same-name repository cannot inherit its receipt."""
         record = await self._request("GET", self._path(remote))

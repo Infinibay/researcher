@@ -7,7 +7,7 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 - Runtime durable por proyecto/tarea/intento/contexto, controles humanos, recuperación, preguntas y propuestas separadas de aceptación. Codex CLI por suscripción y Ken publicado ensayados; consumidores/loops antiguos y ampliación productiva pendientes.
 - Investigación nativa con adjuntos, HTTPS/DOI/arXiv/PDF, CSV/DOCX/JSON/XML, estructura/offsets/citas y recuperación semántica local fijada; hallazgos provisionales e informes draft. Búsqueda web nativa trazable y revisión documental independiente ensayadas. No equivale a validación científica representativa. [Revisión documental](../architecture/finding-reviews.md).
 - Wiki local/global con revisiones, recibos, historia y capturas. Migración 33 conserva datos y rechaza downgrade con pérdida. [Contrato](../architecture/wiki-knowledge.md).
-- Desarrollo desde Tareas/Conversación con edición privada, captura Git exacta y comprobaciones configuradas por el host. Revisión independiente solicitada desde Tareas; aceptación explícita del propietario. Stop/correcciones conservan evidencia sin aprobar contexto obsoleto. Publicación en rama local conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota de sólo lectura conectada; faltan controles remotos. [Entrada pública y límites](public-development.md).
+- Desarrollo desde Tareas/Conversación con edición privada, captura Git exacta y comprobaciones configuradas por el host. Revisión independiente solicitada desde Tareas; aceptación explícita del propietario. Stop/correcciones conservan evidencia sin aprobar contexto obsoleto. Publicación en rama local conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota de sólo lectura y controles de Tareas conectados. [Entrada pública y límites](public-development.md).
 - Seis pilotos web: Tareas, Conversación, Informes, Archivos, Wiki y Hallazgos; 18/36 conceptos de escritorio y 6/12 móviles, con 0/12 páginas completamente aceptadas. [Inventario](../design/inventory.md).
 - Inicialización explícita, autoridad/broker/dominio, acceso y wheel comprobados en los recorridos documentados. Instalación integral y backup/restore pendientes.
 
@@ -18,17 +18,22 @@ El propietario reactivó el objetivo el 2026-11-05. La suite global del checkpoi
 965 casos del runtime pasan. Mismos identificadores de fallo heredados, sin afirmar
 causas idénticas. [Recibo](resumed-baseline-results.json).
 
-La recuperación remota está conectada por owner HTTP con observador nuevo de
-sólo lectura. Esquema46 registra identidad/cierre del cliente HTTP; exige además
-retiro original del dominio Git. Consulta después de corrección o sin candidato,
-sin otra escritura ni inferencia. Una ausencia remota sigue incierta. Pasan88
-pruebas dirigidas y88 del wheel;58 definiciones/módulos tienen docstrings.
-Integración TLS real de Stop y recuperación sin replay comprobada, incluida la
-pérdida de respuesta de PR/registro de merge. API Forgejo del fixture controlada,
-no binario Forgejo real. [Contrato](../architecture/remote-recovery.md),
-[resultados](remote-recovery-results.json), [paquete](remote-recovery-packaging.json).
-Faltan controles de Tareas, adopción explícita tras retirada y etapas no emitidas
-de un merge parcial; compatibilidad real y cutover legacy permanecen en alcance.
+Tareas conecta ahora consulta del destino registrado, push, PR, merge separado y
+recuperación remota de sólo lectura. La UI conserva los cuerpos originales antes
+de enviar y comprueba sus recibos tras respuesta perdida/recarga; no pide IDs
+internos o credenciales. Pasan92 backend,92 del wheel,80 frontend/build y nueve
+estados de navegador escritorio/móvil sin errores/desbordamiento/Axe en el panel.
+Los testigos remotos/físicos del navegador son sintéticos explícitos; la integración
+TLS anterior prueba transporte real por separado.23 definiciones Python y31
+TypeScript documentadas. [Contrato](../architecture/remote-tasks.md),
+[resultados](remote-tasks-results.json), [auditoría](../design/audits/2026-11-05-remote-publications/report.md).
+
+La [recuperación del esquema46](../architecture/remote-recovery.md) prueba cierre
+original HTTP/dominio Git antes del observador nuevo, incluso tras corrección o
+sin candidato. La ausencia remota sigue incierta. La adopción tras retirada,
+etapas no emitidas de merge parcial, compatibilidad real y cutover legacy
+permanecen en alcance. Siguiente bloque grande: coordinación y consumidores del
+engine, sin otra pasada de detalles de publicación ahora.
 
 El [transporte propio](../architecture/remote-runtime.md) usa configuración opcional
 de HTTPS/PAT del host, Git exacto por broker/dominio y HTTP acotado. Sin

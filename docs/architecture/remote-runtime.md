@@ -4,7 +4,7 @@ La migración 45 y `RemotePublications` conectan push, PR y merge con intentos,
 recibos y etapas durables. El runtime con configuración remota usa ahora Git y
 HTTP propios del host. Sin esa configuración rechaza la admisión. La integración
 HTTPS comprueba el recorrido completo con Git real y una API Forgejo controlada;
-la recuperación remota de sólo lectura está conectada; faltan controles de Tareas.
+la recuperación remota de sólo lectura está conectada; los [controles de Tareas](remote-tasks.md) están conectados.
 
 ## Una decisión explícita por acción
 
@@ -154,7 +154,7 @@ lectura después de comprobar cierre original Git/HTTP. Pasan 88 pruebas dirigid
 y la integración TLS ampliada con Stop, finalización posterior del servidor y
 consulta sin repetir escritura. [Resultados](../modernization/remote-recovery-results.json).
 
-Siguiente capacidad principal: controles de Tareas que conserven la solicitud ante
-respuesta perdida. También siguen abiertos adopción explícita de resultados tras
+Los controles de Tareas conservan la solicitud ante respuesta perdida y recarga,
+con decisiones separadas y recuperación de lectura. Siguen abiertos adopción explícita de resultados tras
 retirada, etapas no emitidas de un merge parcial y compatibilidad con Forgejo real.
 La recuperación no convierte ninguna de esas tareas en un retry automático.

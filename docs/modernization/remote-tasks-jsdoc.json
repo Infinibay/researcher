@@ -1,0 +1,192 @@
+{
+  "base_commit": "920c789",
+  "scope": "New remote API/UI modules and relevant named declarations. Changed existing owner store/TaskWorkspace reuse established JSDoc; not a whole repository audit.",
+  "definitions_or_modules": 31,
+  "missing": [],
+  "entries": [
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "<module>",
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "RemoteRepository",
+      "line": 7,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "RemoteChoice",
+      "line": 9,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "RemoteAction",
+      "line": 11,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "RemoteObservation",
+      "line": 13,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "RemoteProtocol",
+      "line": 15,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "RemoteRequest",
+      "line": 17,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "RemoteEntry",
+      "line": 19,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "RemoteHistory",
+      "line": 21,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "RemotePreview",
+      "line": 23,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "RemoteRecoveryAction",
+      "line": 25,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "RemoteRecoveryReceipt",
+      "line": 27,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "ref",
+      "line": 30,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "same",
+      "line": 32,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "parseRemote",
+      "line": 34,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "parseRecovery",
+      "line": 47,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "prepareRemoteAction",
+      "line": 51,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "matchesRemoteReceipt",
+      "line": 56,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "sendRemoteAction",
+      "line": 58,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "remoteHistory",
+      "line": 60,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "previewRemote",
+      "line": 62,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "prepareRemoteRecovery",
+      "line": 64,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/remotePublications.ts",
+      "name": "sendRemoteRecovery",
+      "line": 66,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/components/tasks/RemotePublications.tsx",
+      "name": "<module>",
+      "documented": true
+    },
+    {
+      "path": "frontend/src/components/tasks/RemotePublications.tsx",
+      "name": "outcome",
+      "line": 13,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/components/tasks/RemotePublications.tsx",
+      "name": "TaskRemotePublications",
+      "line": 22,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/components/tasks/RemotePublications.tsx",
+      "name": "RemotePublicationPanel",
+      "line": 37,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/components/tasks/RemotePublications.tsx",
+      "name": "refresh",
+      "line": 46,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/components/tasks/RemotePublications.tsx",
+      "name": "resolved",
+      "line": 48,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/components/tasks/RemotePublications.tsx",
+      "name": "submit",
+      "line": 60,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/components/tasks/RemotePublications.tsx",
+      "name": "observe",
+      "line": 62,
+      "documented": true
+    }
+  ]
+}

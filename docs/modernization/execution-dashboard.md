@@ -4,33 +4,45 @@ Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../supe
 
 ## Estado comprobado
 
-- Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; faltan recuperación/controles remotos y cutover de consumidores/loops antiguos.
+- Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; falta cutover de consumidores/loops antiguos.
 - Interfaz: seis pilotos, 18/36 conceptos de escritorio y 6/12 móviles; seis rutas pendientes y 0/12 páginas completamente aceptadas.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: recuperación remota de sólo lectura
+## Etapa actual: controles remotos de Tareas
 
-**Resultado:** esquema46 con identidad/cierre del cliente HTTP original y recibos
-inmutables del observador nuevo. Primero se demuestra cierre Git/HTTP; después se
-consulta el recibo/PR/merge original con otra autoridad de lectura. La corrección
-del contexto permite conservar historia; no concede escritura ni aceptación nueva.
-Falta de recibo sigue incierta y jamás autoriza otro push/POST. El candidato puede
-haber desaparecido; sólo se monta el origen en lectura.
+**Resultado:** consulta explícita del destino registrado, identidad/ramas derivadas
+por el host y decisiones separadas de push, PR y merge. Tareas conserva el cuerpo,
+versión y destino originales ante respuesta perdida/recarga; la recuperación usa
+su propio comando de lectura con intento original. No se piden IDs internos ni
+credenciales al usuario. Se distinguen solicitud registrada, efecto comprobado e
+incertidumbre; ésta nunca habilita reenvío del efecto.
 
-**Verificación:**88 pruebas dirigidas pasan, seis nuevas. Owner HTTP con pairing/
-CSRF/cuerpo estricto devuelve el recibo original sin reagendar. La integración TLS
-real prueba Stop→servidor termina→observador nuevo y pérdida de respuesta en PR/
-registro de merge por separado, sin más escrituras ni turnos de modelo. El wheel
-pasa88 casos con337 módulos sólo paquete y730 fuentes coincidentes.
-58 definiciones/módulos con docstrings. No hay suite global actual verde.
+**Verificación:**92 pruebas backend,92 del wheel (339 módulos sólo paquete,
+732 fuentes coincidentes),80 frontend y build. Navegador: nueve estados en
+1440/390 px, cero errores/desbordamiento/Axe en el panel; dos POST idénticos de
+publicación conservan un efecto y dos consultas idénticas conservan un observador.
+PR y merge requieren botones distintos. Testigos remotos/físicos del navegador
+son sintéticos explícitos; no sustituyen la integración TLS anterior.23 definiciones
+Python y31 TypeScript documentadas. No hay suite global actual verde ni aceptación
+completa de la página.
 
-**Siguiente capacidad principal:** controles de Tareas con intención persistida,
-explicación del efecto/incertidumbre y decisiones separadas de push/PR/merge.
-Adopción tras retirada, continuidad de merge parcial, compatibilidad con Forgejo
-real, recuperación/crashes ampliados y cutover legacy siguen en alcance.
-[Contrato](../architecture/remote-recovery.md), [resultados](remote-recovery-results.json),
-[paquete](remote-recovery-packaging.json).
+**Siguiente bloque principal:** coordinación/planificación y cutover de entradas
+legacy hacia el dueño nativo existente: flows, autonomía, orchestrator y herramientas.
+Recuperar el mapa de consumidores antes de editar; no crear otro loop LLM ni dejar
+los accesos antiguos como dueños competidores. Adopción tras retirada y continuidad
+de merge parcial siguen explícitas para la pasada integral; no ampliar ahora con
+pulido o auditorías repetidas de publicación.
+[Contrato](../architecture/remote-tasks.md), [resultados](remote-tasks-results.json),
+[paquete](remote-tasks-packaging.json), [auditoría](../design/audits/2026-11-05-remote-publications/report.md).
+
+## Etapa anterior: recuperación remota de sólo lectura
+
+Esquema46 con identidad/cierre HTTP y observador nuevo después de retirar Git/
+HTTP originales. GET/ls-remote exactos, contexto histórico y candidato ausente;
+no issue/inferencia/replay.88 dirigidas y88 del wheel; integración TLS real de
+respuesta perdida en PR/registro de merge y Stop con finalización posterior del
+servidor.58 definiciones documentadas. [Recibo histórico](remote-recovery-results.json).
 
 ## Etapa anterior: transporte HTTPS remoto propio
 

@@ -74,6 +74,6 @@ ni los turnos de modelo;
 repetir el comando no abre una consulta nueva. No prueba compatibilidad con un
 binario Forgejo real ni una instalación completa del host.
 
-Siguiente entrega: controles de Tareas con solicitud persistida. La adopción
+Los [controles de Tareas](remote-tasks.md) ya conservan la solicitud persistida. La adopción
 explícita tras retirada, continuidad de un merge parcial, crashes ampliados e
 inversas de migración siguen dentro del alcance completo.

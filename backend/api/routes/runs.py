@@ -308,6 +308,38 @@ async def start_remote_publication(
     return {"run": asdict(run), "request": packet}
 
 
+class RemotePreviewBody(BaseModel):
+    """Owner branch choices only; server identity, registered URL and credential are derived by the host."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    target_ref: str = Field(min_length=1, max_length=240)
+    base_ref: str = Field(min_length=1, max_length=240)
+
+
+@router.post("/{project_id}/code-publications/{run_id}/remote-preview")
+async def preview_remote_destination(
+    project_id: int, run_id: str, body: RemotePreviewBody, request: Request
+):
+    """Observe a registered accepted destination under paired-owner/CSRF control without performing publication."""
+    try:
+        return await service(request).preview_remote(
+            project_id, run_id, body.target_ref, body.base_ref
+        )
+    except ValueError as error:
+        raise HTTPException(422, "Invalid remote branch observation") from error
+
+
+@router.get("/{project_id}/code-publications/{run_id}/remote-publications")
+async def remote_publication_history(project_id: int, run_id: str, request: Request):
+    """Read only saved original remote actions for this exact scoped local publication; no implicit server lookup or retry."""
+    from backend.runtime.remote_destinations import RemoteDestinations
+
+    data = await asyncio.to_thread(
+        RemoteDestinations(read_store(request)).history, project_id, run_id
+    )
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
 @router.get("/{project_id}/remote-publications/{run_id}")
 async def remote_publication_detail(project_id: int, run_id: str, request: Request):
     """Inspect original remote owner intent and issued/unknown/result stages without network calls or retry."""
@@ -696,6 +728,12 @@ async def workspace(project_id: int, task_id: int, request: Request):
         )
         if request.app.state.runtime_service is not None
         else [],
+        "remote_publication": getattr(
+            getattr(request.app.state.runtime_service, "runtime", None),
+            "supports_remote_publication",
+            False,
+        )
+        is True,
         "model": getattr(
             getattr(request.app.state.runtime_service, "runtime", None), "model", None
         ),

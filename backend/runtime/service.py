@@ -246,6 +246,19 @@ class RuntimeService:
         )
         return await self._schedule(run) if admitted else run
 
+    async def preview_remote(self, project_id, local_run_id, target_ref, base_ref):
+        """Query the configured adapter for a readonly destination observation; no run or write authority is admitted."""
+        self._accepting()
+        if getattr(
+            self.runtime, "supports_remote_publication", False
+        ) is not True or not hasattr(self.runtime, "preview_remote"):
+            raise RunConflict(
+                "Configured runtime has no owned remote observation transport"
+            )
+        return await self.runtime.preview_remote(
+            self.store, project_id, local_run_id, target_ref, base_ref
+        )
+
     async def publish_remote(self, project_id, request):
         """Admit one exact remote owner action only with a configured owned transport; scoped retry never creates another host effect."""
         from backend.runtime.remote_runtime import RemotePublications

@@ -1,0 +1,146 @@
+{
+  "base_commit": "920c789",
+  "scope": "New modules and new/changed qualified definitions including enclosing definitions; English docstrings for Ken, not a global documentation audit.",
+  "definitions_or_modules": 23,
+  "missing": [],
+  "entries": [
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "RemotePreviewBody",
+      "line": 311,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "preview_remote_destination",
+      "line": 320,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "remote_publication_history",
+      "line": 333,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "workspace",
+      "line": 721,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "ForgejoPublicationClient",
+      "line": 107,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "ForgejoPublicationClient.discover_remote",
+      "line": 205,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "ForgejoPublicationClient.observe_branch",
+      "line": 235,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "name": "OwnedCodexRuntime",
+      "line": 235,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "name": "OwnedCodexRuntime.preview_remote",
+      "line": 291,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "RuntimeService",
+      "line": 61,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "RuntimeService.preview_remote",
+      "line": 249,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_destinations.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_destinations.py",
+      "name": "RemoteDestinations",
+      "line": 12,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_destinations.py",
+      "name": "RemoteDestinations.__init__",
+      "line": 15,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_destinations.py",
+      "name": "RemoteDestinations.subject",
+      "line": 20,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_destinations.py",
+      "name": "RemoteDestinations.observe",
+      "line": 34,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_destinations.py",
+      "name": "RemoteDestinations.history",
+      "line": 67,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_destinations.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_destinations.py",
+      "name": "test_destination_preview_derives_server_identity_without_effects_and_rejects_changed_acceptance",
+      "line": 34,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_destinations.py",
+      "name": "test_destination_preview_derives_server_identity_without_effects_and_rejects_changed_acceptance.upstream",
+      "line": 46,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_destinations.py",
+      "name": "test_destination_discovery_refuses_a_registered_foreign_origin_before_sending_credentials",
+      "line": 114,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_destinations.py",
+      "name": "test_owner_remote_discovery_history_and_actual_capability_are_scoped",
+      "line": 144,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_destinations.py",
+      "name": "test_owner_remote_discovery_history_and_actual_capability_are_scoped.preview",
+      "line": 169,
+      "documented": true
+    }
+  ]
+}

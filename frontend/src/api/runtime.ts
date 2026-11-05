@@ -15,6 +15,7 @@ export interface RuntimeRun {
   cancel_requested: boolean
   model: string | null
   fence: number
+  attempt_id?: string | null
   repository_id: number | null
   repository_name: string | null
   issue: { code: string; message: string; next_action: string; inference_started: boolean | null } | null
@@ -43,7 +44,7 @@ export interface TaskWorkspace {
   sources: { id: number; title: string; kind: string; sha256: string; captured_at: number; captured_for_task_id: number }[]
   reports: { id: number; title: string; status: string; created_at: string }[]
   questions: RuntimeQuestion[]
-  runtime: { configured: boolean; supported_task_types: string[]; model: string | null }
+  runtime: { configured: boolean; supported_task_types: string[]; model: string | null; remote_publication?: boolean }
 }
 
 export interface RuntimeQuestion {

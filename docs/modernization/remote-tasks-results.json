@@ -1,0 +1,53 @@
+{
+  "base_commit": "920c789",
+  "date": "2026-11-05",
+  "status": "remote_owner_tasks_discovery_actions_and_readonly_recovery_connected",
+  "directed": {
+    "total": 92,
+    "passed": 92,
+    "failed": [],
+    "skipped": 0,
+    "seconds": 56.386,
+    "receipt_sha256": "6bb334dbc493d4d0fa199e81c2fbf3335d34a82075e61f6a4defc191e54bd59a"
+  },
+  "frontend": {
+    "passed": 80,
+    "failed": 0,
+    "skipped": 0,
+    "build": "TypeScript and Vite passed; existing bundle warnings remain deferred"
+  },
+  "browser": {
+    "states": 9,
+    "page_errors": [],
+    "axe_violations": 0,
+    "horizontal_overflow": false,
+    "publication_posts": 4,
+    "recovery_posts": 2,
+    "fixture_counts": {
+      "push": 1,
+      "pull": 1,
+      "merge_git": 1,
+      "merge_record": 1,
+      "observers": 1
+    },
+    "evidence": "docs/design/audits/2026-11-05-remote-publications/evidence.json",
+    "scope": "Actual owner HTTP/discovery policy/service/fresh observer/SQLite/Tasks. Upstream Forgejo and effect/domain witnesses explicitly synthetic; separate native TLS integration covers physical transport/recovery."
+  },
+  "documented_python_definitions_or_modules": 23,
+  "documented_typescript_definitions_or_modules": 31,
+  "package": "docs/modernization/remote-tasks-packaging.json",
+  "scope": [
+    "Readonly registered-repository discovery derives server numeric ID and exact branch observations from fixed configured HTTPS origin, revalidates accepted provenance before/after and refuses foreign token destination",
+    "Owner CSRF/strict preview, saved bounded original remote action history and configured-only capability flag; preview never creates a run or grants publication",
+    "Tasks explicit push/PR/merge controls with original body/root/predecessor/context/head packet persisted before POST; exact receipt validation after response loss/reload",
+    "Separate readonly recovery packet retains exact uncertain attempt/fence; no generic run recovery or fictitious execution model label for host publications",
+    "Actual owner API/scheduler/SQLite UI traversal with controlled remote effect/domain witnesses; same push request sent twice creates one host effect, same recovery request twice creates one observer, PR/merge separately authorized"
+  ],
+  "limits": [
+    "Browser upstream/physical effect witnesses are explicitly synthetic; actual native TLS transport/recovery evidence remains in remote-recovery-results.json and was not repeated for UI-only integration",
+    "No actual Forgejo executable/protected-server compatibility or representative human-comprehension acceptance claim",
+    "History shows latest100 operations with explicit truncation and blocks new decisions when truncated; complete history pagination and selection among older chains remain deferred",
+    "Explicit adoption after withdrawal and continuation of an unissued partial merge stage still pending",
+    "No fresh global-suite green or full host installation claim; six web routes and12page final acceptance remain in full scope"
+  ]
+}

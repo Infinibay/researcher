@@ -5857,3 +5857,72 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
 - All new package/native/directed handles terminal; no browser server created.
   Local checkpoint only: no push/merge/deploy; original checkout and protected root
   .agents/.codex/AGENTS.md untouched. Current receipts linked from dashboard.
+
+
+## Remote owner Tasks controls — base920c789, 2026-11-05
+
+- Previous goal turn progress: actual HTTPS transport6014f7c and fresh readonly
+  recovery920c789 committed. This turn completes the main owner UI path, following
+  persisted macro-first policy. Reused selected Tasks pilot/brief and existing
+  action-packet lifecycle; no new direction/page/concepts or repeated native audit.
+  Ken focused search/related again lacks managed modules; actual known consumers
+  read, no repeated speculative searches or new review agents.
+- Added RemoteDestinations: explicit readonly discovery from registered clone URL
+  and configured HTTPS origin, actual numeric repo/branch facts with accepted
+  source/candidate provenance before/after. No arbitrary URL/token from owner,
+  no run/inference/write grant. Foreign origin refused before transport; changed
+  context rejects observation. Forgejo port adds bounded discovery/branch GETs.
+- Strict paired-owner/CSRF preview route, saved history scoped by original local
+  publication and configured-only remote capability flag. History preserves
+  original requests/effects/results after withdrawal. Ruling: latest100 with
+  visible truncation and no new decision on incomplete history; pagination and
+  older-chain selection deferred DD-008. Cost: a long history needs the later
+  pagination work before another UI decision, rather than invent absence.
+- Tasks panel now explains accepted exact version and three separate owner steps,
+  actual destination/base observation and changed-base refusal. Stage requests
+  persist root/predecessor/context/head/full body+key before POST; response must
+  match every original field including nested remote identity. Original saved
+  packet/pointer survive response loss/reload. Same completed admission can be
+  resolved from matching saved history without another effect.
+- Separate readonly recovery packet retains original attempt/fence/command. Lost
+  reply retries same observation receipt, never push/PR/merge. Uncertain server
+  completion and partially recorded merge explained; changed/withdrawn results
+  remain history. Generic inference recovery and fictitious execution model label
+  excluded for host publications. Credential/internal numeric repo ID never user
+  input. Existing runtime model configuration/other page layouts unchanged.
+- RED4backend missing RemoteDestinations/capability→GREEN4. RED3frontend missing
+  remote API module→GREEN3; an earlier shell test-file path used frontend twice,
+  corrected cwd/path before observing feature RED, no product issue attributed.
+  Final source92PASS56.94s, including original broker isolated-crash regressions;
+  frontend80PASS/build. No new schema/dependency or model inference.
+- Browser actual owner HTTP/discovery policy/scheduler/SQLite/React with explicitly
+  synthetic upstream effect/domain witnesses:9states1440x1100/390x844,0pageerrors/
+  horizontal overflow/Axe on panel. Lost push reply and lost observer reply each
+  retained complete packet across reload;2identical admissionPOSTs→1push,2identical
+  recoveryPOSTs→1observer. Separate later PR/merge decisions,1effect each. Capture
+  inspection covers desktop/mobile entry, push/recovery response loss, PR separate
+  merge and completed desktop. Selected Tasks style preserved;0/12whole-page
+  acceptance unchanged. No representative human comprehension/whole-app axe claim.
+- Final wheel92PASS,339backend imports only package,732matching Python/SQL payloads;
+  -I -S with explicit installed dependencies/offline assets.23new/changed Python
+  definitions/modules and31new TS declarations/modules documented for Ken. Ruff,
+  JSDoc inventory, TypeScript/build and diff checks pass. Existing bundle warnings
+  deferred, generated tracked tsbuildinfo restored. No new global-suite green/full
+  host install/actual Forgejo server claim. Prior actual TLS/native evidence is
+  separate and not rerun merely for UI-only integration.
+- Main remote Tasks path works. Next MAIN BLOCK: planning/typed agent coordination
+  and migration of competing legacy engine/flow/autonomy/tool consumers. Read
+  engine-redesign.md and tool-migration-map.md; actual get_engine still constructs
+  LoopEngine, FlowManager still starts threads. Do not relabel a legacy loop as
+  native or retain two owners; preserve domain outcomes through RuntimeService and
+  persistent typed controls. Existing map historical snapshot needs source checks,
+  not a new generic audit. Stop publication polish now per explicit user policy.
+- Full scope still includes remote adoption after withdrawal/unissued partial
+  merge continuation, real Forgejo/protections/identity trial, legacy writer physical
+  exclusion, remaining tools/roles/flows/prompts/books/evals/interaction,6web routes/
+  12page final acceptance,43scenarios/inherited failures, install/restore/CLI/TUI,
+  inverses and final fresh whole-branch review. No percentage or goal completion.
+- Directed/frontend/build/package/browser jobs terminal. Owned fixture server
+  PID99618 observed from exact command, stopped with SIGINT, handle24535terminal130;
+  Playwright browser closed in finally. Original checkout and protected untracked
+  root .agents/.codex/AGENTS.md untouched. Local checkpoint only, no push/merge/deploy.
