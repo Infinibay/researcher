@@ -14,6 +14,8 @@
 
 **Criterio de documentación añadido por el usuario (1 de noviembre de 2026):** escribir y mantener docstrings en módulos, clases, métodos y funciones relevantes nuevos o modificados; usar JSDoc en TypeScript. Explicar responsabilidad, contrato, efectos y límites con vocabulario del dominio e identificadores buscables por Ken; evitar repetir el nombre o describir sólo la sintaxis. Documentar también supuestos y fallos relevantes. Revisar el código ya incorporado durante esta modernización: no basta con documentar únicamente las siguientes entregas. Verificar la correspondencia entre documentación y comportamiento al revisar cada cambio.
 
+**Política de ejecución indicada por el usuario (5 de noviembre de 2026):** resolver primero lo grueso de cada tarea y avanzar por capacidades completas. Cuando la idea central funcione, registrar los detalles secundarios pendientes y continuar con la siguiente capacidad; no resolverlos en esa misma pasada ni ampliar la investigación por ellos. Retomarlos en una fase posterior de pulido. Un defecto que impida el resultado central se resuelve dentro de la tarea. Al reanudar o después de compactar el contexto, recuperar esta política antes de elegir trabajo. [Lista de detalles diferidos](../../modernization/deferred-details.md).
+
 ## 1. Alcance y criterios de éxito
 
 Este documento se redactó inicialmente como plan y su ejecución completa fue autorizada después. La modernización está en curso: [estado y siguiente entrega](../../modernization/execution-dashboard.md). Las observaciones históricas de esta revisión no describen automáticamente la implementación actual. Los requisitos de generación de conceptos, selección e implementación siguen vigentes hasta completar todas las páginas.

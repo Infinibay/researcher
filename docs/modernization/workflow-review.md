@@ -1,5 +1,18 @@
 # Revisión del proceso de actualización
 
+
+## Política vigente del usuario — 2026-11-05
+
+Primero cerrar las capacidades principales. Si la idea central de una tarea ya
+funciona y sólo quedan detalles secundarios, anotarlos en
+[detalles diferidos](deferred-details.md) y continuar; resolverlos en una pasada
+posterior. No ampliar el diseño ni repetir auditorías por esos detalles. Un fallo
+que impida el resultado central se resuelve dentro de su tarea.
+
+Esta política es una instrucción explícita del usuario y debe recuperarse después
+de compactar el contexto. El diagnóstico histórico de abajo aporta evidencia;
+no desplaza esta prioridad de ejecución.
+
 Fecha: 2026-11-01. Corte de la revisión: antes de esta consulta de diagnóstico.
 Documento de trabajo: [tablero de ejecución](execution-dashboard.md).
 Respaldo privado del análisis: `/home/andres/.superpowers/diagnosing-superpowers/01a19284-81b5-7762-8bf6-8c542ca18939`. No se exportaron conversaciones ni credenciales.

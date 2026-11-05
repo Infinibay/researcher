@@ -5465,3 +5465,18 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
   engine/legacy/roles/tools, prompts and comprehension,6remaining web routes and
   acceptance of12pages, installation/restore/CLI/TUI,100inherited failures and final
   whole-branch fresh review all remain in scope. No new merge/push/deployment.
+
+
+## User execution policy retained for compaction — 2026-11-05
+
+- Explicit user steering: solve each task's main capability first. Once its central
+  idea works, record secondary details and move on; revisit them in a later polish
+  pass. Do not get entangled in micro-details. This changes execution order, not
+  the full modernization scope.
+- User explicitly requested retaining this after chat compaction. Policy saved at
+  the top of the plan, in the dashboard rules and workflow review; deferred-details.md
+  is the concrete backlog. On resume read it before selecting work. Existing
+  FURB188 and frontend build warnings are deferred rather than cleaned up now.
+- Current main task remains connecting accepted code to a durable, freshly owned
+  publication operation and then its product controls. Do not spend this phase on
+  minor parser/style/build-warning cleanup or repeated generic audits.
