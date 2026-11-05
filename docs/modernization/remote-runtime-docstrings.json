@@ -1,0 +1,368 @@
+{
+  "base_commit": "add30b4",
+  "scope": "New modules and changed/new Python definitions including enclosing classes; English docstrings, not a global repository audit.",
+  "definitions_or_modules": 60,
+  "missing": [],
+  "entries": [
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "RemoteRepositoryObservation",
+      "line": 221,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "StartRemotePush",
+      "line": 231,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "StartRemotePull",
+      "line": 242,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "StartRemoteMerge",
+      "line": 254,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "start_remote_publication",
+      "line": 268,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "remote_publication_detail",
+      "line": 312,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/code_acceptances.py",
+      "name": "CodeAcceptances",
+      "line": 23,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/code_acceptances.py",
+      "name": "_state",
+      "line": 40,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "name": "PeerBroker",
+      "line": 122,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "name": "_run",
+      "line": 447,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "name": "PeerRegistry",
+      "line": 22,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "name": "AttemptPeers",
+      "line": 379,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "name": "_prepare",
+      "line": 53,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "name": "admission",
+      "line": 187,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "name": "_prepare",
+      "line": 400,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "RuntimeService",
+      "line": 61,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "publish_remote",
+      "line": 249,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "_schedule",
+      "line": 376,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "_execute_publication",
+      "line": 444,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "name": "SQLiteRunStore",
+      "line": 65,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "name": "_reserve_inference",
+      "line": 558,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "name": "_closed_peer_proof",
+      "line": 856,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "name": "_execution_subject",
+      "line": 1402,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "name": "_claim",
+      "line": 1420,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_code_publications.py",
+      "name": "test_publication_request_is_immutable_and_startup_preserves_original_records",
+      "line": 131,
+      "documented": true
+    },
+    {
+      "path": "backend/tools/base/db.py",
+      "name": "ensure_migrations",
+      "line": 111,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "RemotePushRequest",
+      "line": 31,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "RemotePullRequest",
+      "line": 43,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "RemoteMergeRequest",
+      "line": 56,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "RemotePublications",
+      "line": 64,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "__init__",
+      "line": 67,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "linked_runs",
+      "line": 73,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "_request",
+      "line": 92,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "_protocol",
+      "line": 104,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "protocol",
+      "line": 124,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "request",
+      "line": 129,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "_root",
+      "line": 159,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "_remote",
+      "line": 171,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "_registration",
+      "line": 178,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "current",
+      "line": 189,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "admit_once",
+      "line": 199,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "issue",
+      "line": 361,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "_validate",
+      "line": 426,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "observe",
+      "line": 487,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "complete",
+      "line": 536,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "_issue",
+      "line": 639,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "interrupted",
+      "line": 648,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "typed",
+      "line": 108,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_runtime.py",
+      "name": "remote_request",
+      "line": 26,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_runtime.py",
+      "name": "claim_remote",
+      "line": 88,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_runtime.py",
+      "name": "positive_push",
+      "line": 101,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_runtime.py",
+      "name": "test_remote_admission_owns_new_host_identity_and_issued_effect_is_not_dispatched_twice",
+      "line": 119,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_runtime.py",
+      "name": "test_remote_unknown_effect_retains_original_issued_stage_and_context_withdraws_write_authority",
+      "line": 156,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_runtime.py",
+      "name": "test_pr_and_merge_have_separate_original_effect_stages_and_no_dummy_http_command",
+      "line": 194,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_runtime.py",
+      "name": "test_owner_http_remote_action_requires_capability_and_retains_original_queued_request",
+      "line": 275,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_runtime.py",
+      "name": "test_runtime_scheduler_routes_remote_work_without_model_dispatch",
+      "line": 337,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_runtime.py",
+      "name": "held",
+      "line": 292,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_runtime.py",
+      "name": "publish",
+      "line": 349,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_runtime.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    }
+  ]
+}

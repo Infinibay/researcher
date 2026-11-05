@@ -56,7 +56,10 @@ class PeerRegistry:
             raise ValueError("Unknown owned peer kind")
         peer_id = uuid4().hex
         run = self.runs._authority(conn, lease)
-        if run["execution_kind"] == "code_publication" and kind != "command":
+        if (
+            run["execution_kind"] in ("code_publication", "remote_publication")
+            and kind != "command"
+        ):
             raise RunConflict("Host publication permits command peers only")
         if (
             kind in ("command", "ken")
@@ -209,6 +212,14 @@ class PeerRegistry:
                 if source_only
                 else self._execution_binding(conn, peer, row, source)
             )
+            if row["execution_kind"] == "remote_publication":
+                from backend.runtime.remote_runtime import RemotePublications
+
+                remote = RemotePublications(self.runs)
+                remote.current(conn, row)
+                result["remote_publication"] = remote._request(
+                    conn, row["project_id"], row["id"]
+                )
             if row["execution_kind"] == "code_publication":
                 from backend.runtime.code_publications import CodePublications
                 from backend.runtime.publication_git import PublicationRefIntent
@@ -397,7 +408,7 @@ class AttemptPeers:
         )
         for kind in (
             ()
-            if run["execution_kind"] == "code_publication"
+            if run["execution_kind"] in ("code_publication", "remote_publication")
             else ("business", "native")
         ):
             ids[kind] = registry._prepare(conn, lease, kind)

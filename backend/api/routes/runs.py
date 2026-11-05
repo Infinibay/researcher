@@ -218,6 +218,107 @@ async def start_code_publication(
     return {"run": asdict(run), "request": saved}
 
 
+class RemoteRepositoryObservation(BaseModel):
+    """Owner-observed remote identity; no credential or filesystem/process capability can be supplied."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    api_base: str = Field(min_length=1, max_length=2048)
+    repository_id: int = Field(gt=0)
+    full_name: str = Field(min_length=1, max_length=240)
+    clone_url: str = Field(min_length=1, max_length=4096)
+
+
+class StartRemotePush(BaseModel):
+    """Explicit push request distinct from local acceptance and later PR/merge decisions."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    stage: Literal["push"]
+    operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
+    remote: RemoteRepositoryObservation
+    target_ref: str = Field(min_length=1, max_length=240)
+    expected_target_sha: str | None = Field(pattern=r"^(?:[a-f0-9]{40}|[a-f0-9]{64})$")
+
+
+class StartRemotePull(BaseModel):
+    """Original PR description and base observation over one exact completed remote push."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    stage: Literal["pull"]
+    operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
+    base_ref: str = Field(min_length=1, max_length=240)
+    base_sha: str = Field(pattern=r"^(?:[a-f0-9]{40}|[a-f0-9]{64})$")
+    title: str = Field(min_length=1, max_length=256)
+    body: str = Field(min_length=1, max_length=12000)
+
+
+class StartRemoteMerge(BaseModel):
+    """Separate owner decision to merge the exact completed original PR."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    stage: Literal["merge"]
+    operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
+
+
+RemotePublicationBody = Annotated[
+    StartRemotePush | StartRemotePull | StartRemoteMerge, Field(discriminator="stage")
+]
+
+
+@router.post("/{project_id}/runs/{origin_run_id}/remote-publications", status_code=202)
+async def start_remote_publication(
+    project_id: int, origin_run_id: str, body: RemotePublicationBody, request: Request
+):
+    """Admit a strict owner action only when its runtime has owned remote transport; replay returns the original action, never another effect."""
+    from backend.runtime.remote_publication import RemoteRepository
+    from backend.runtime.remote_runtime import (
+        RemoteMergeRequest,
+        RemotePublications,
+        RemotePullRequest,
+        RemotePushRequest,
+    )
+
+    try:
+        if isinstance(body, StartRemotePush):
+            command = RemotePushRequest(
+                body.operation_key,
+                origin_run_id,
+                RemoteRepository(**body.remote.model_dump()),
+                body.target_ref,
+                body.expected_target_sha,
+            )
+        elif isinstance(body, StartRemotePull):
+            command = RemotePullRequest(
+                body.operation_key,
+                origin_run_id,
+                body.base_ref,
+                body.base_sha,
+                body.title,
+                body.body,
+            )
+        else:
+            command = RemoteMergeRequest(body.operation_key, origin_run_id)
+        run = await service(request).publish_remote(project_id, command)
+    except ValueError as error:
+        raise HTTPException(
+            status_code=422, detail="Invalid original remote publication intent"
+        ) from error
+    packet = await asyncio.to_thread(
+        RemotePublications(read_store(request)).request, project_id, run.run_id
+    )
+    return {"run": asdict(run), "request": packet}
+
+
+@router.get("/{project_id}/remote-publications/{run_id}")
+async def remote_publication_detail(project_id: int, run_id: str, request: Request):
+    """Inspect original remote owner intent and issued/unknown/result stages without network calls or retry."""
+    from backend.runtime.remote_runtime import RemotePublications
+
+    packet = await asyncio.to_thread(
+        RemotePublications(read_store(request)).request, project_id, run_id
+    )
+    return JSONResponse(packet, headers={"Cache-Control": "no-store"})
+
+
 @router.get("/{project_id}/code-publications/{run_id}")
 async def code_publication_detail(project_id: int, run_id: str, request: Request):
     """Read original host publication intent and receipt without starting Git or inference."""

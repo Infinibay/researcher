@@ -583,7 +583,7 @@ class SQLiteRunStore:
         identity(project_token_limit)
         intent = (workspace, catalog_hash, VERSION, _json(asdict(limits)), model)
         row = self._authority(conn, lease)
-        if row["execution_kind"] == "code_publication":
+        if row["execution_kind"] in ("code_publication", "remote_publication"):
             raise RunConflict("host-only publication cannot reserve model inference")
         self._bound_workspace(conn, row, workspace)
         if row["execution_kind"] == "code_review":
@@ -854,7 +854,7 @@ class SQLiteRunStore:
 
     @staticmethod
     def _closed_peer_proof(conn, attempt_id):
-        """Require all original peers closed and the real kinds expected by this attempt; publication has commands, not dummy model peers."""
+        """Require original peer closure by execution kind; an HTTP-only remote stage has no fictitious model or command process peers."""
         scope = conn.execute(
             "SELECT 1 FROM runtime_peer_scopes WHERE attempt_id=?", (attempt_id,)
         ).fetchone()
@@ -863,7 +863,11 @@ class SQLiteRunStore:
                 "SELECT kind,state FROM runtime_peers WHERE attempt_id=?", (attempt_id,)
             ).fetchall()
             run = conn.execute("SELECT r.execution_kind FROM runtime_runs r JOIN runtime_attempts a ON a.run_id=r.id WHERE a.id=?", (attempt_id,)).fetchone()
-            required = {"command"} if run and run[0] == "code_publication" else {"native", "business"}
+            required = {"command"} if run and run[0] in ("code_publication", "remote_publication") else {"native", "business"}
+            if run and run[0] == "remote_publication":
+                remote = conn.execute("SELECT p.stage FROM runtime_remote_publications p JOIN runtime_attempts a ON a.run_id=p.run_id WHERE a.id=?", (attempt_id,)).fetchone()
+                if remote and remote[0] == "pull":
+                    required = set()
             if not required <= {peer["kind"] for peer in peers} or any(
                 peer["state"] != "closed" for peer in peers
             ):
@@ -1397,7 +1401,11 @@ class SQLiteRunStore:
 
     def _execution_subject(self, conn, row):
         """Validate a host publication's exact acceptance without reopening done; all native inference kinds retain the ordinary task gate."""
-        if row["execution_kind"] == "code_publication":
+        if row["execution_kind"] == "remote_publication":
+            from backend.runtime.remote_runtime import RemotePublications
+
+            RemotePublications(self).current(conn, row)
+        elif row["execution_kind"] == "code_publication":
             from backend.runtime.code_publications import CodePublications
             from backend.runtime.publication_recovery import PublicationRecovery
 
@@ -1431,7 +1439,7 @@ class SQLiteRunStore:
             "UPDATE runtime_runs SET status='running',fence=?,current_attempt_id=?,updated_at=?,issue_json=NULL WHERE id=?",
             (fence, attempt_id, now, run_id),
         )
-        if row["execution_kind"] != "code_publication":
+        if row["execution_kind"] not in ("code_publication", "remote_publication"):
             conn.execute(
                 "UPDATE tasks SET status='in_progress' WHERE project_id=? AND id=?",
                 (project_id, row["task_id"]),

@@ -246,6 +246,20 @@ class RuntimeService:
         )
         return await self._schedule(run) if admitted else run
 
+    async def publish_remote(self, project_id, request):
+        """Admit one exact remote owner action only with a configured owned transport; scoped retry never creates another host effect."""
+        from backend.runtime.remote_runtime import RemotePublications
+
+        self._accepting()
+        if not hasattr(self.runtime, "publish_remote"):
+            raise RunConflict(
+                "Configured runtime has no owned remote publication transport"
+            )
+        run, admitted = await asyncio.to_thread(
+            RemotePublications(self.store).admit_once, project_id, request
+        )
+        return await self._schedule(run) if admitted else run
+
     async def reconcile_publication(self, **command):
         """Recover one original publication by new readonly observation; an exact completed owner command returns without launching again."""
         from backend.runtime.publication_recovery import PublicationRecovery
@@ -379,7 +393,12 @@ class RuntimeService:
             expected_types = (
                 ("code", "bug_fix")
                 if run.execution_kind
-                in ("development", "code_review", "code_publication")
+                in (
+                    "development",
+                    "code_review",
+                    "code_publication",
+                    "remote_publication",
+                )
                 else ("research",)
             )
             if (
@@ -416,20 +435,24 @@ class RuntimeService:
             self._workers[run.run_id] = slot
             slot.task = asyncio.create_task(
                 self._execute_publication(run.run_id, slot)
-                if run.execution_kind == "code_publication"
+                if run.execution_kind in ("code_publication", "remote_publication")
                 else self._execute(run.run_id, slot),
                 name="researcher-run-" + run.run_id,
             )
             return run
 
     async def _execute_publication(self, run_id, slot):
-        """Own host Git work without inference and preserve uncertainty until original physical closure is proven."""
+        """Own one typed host publication without inference and retain unknown effects until its actual local transports close."""
         from backend.runtime.code_publications import CodePublications
+        from backend.runtime.remote_runtime import RemotePublications
 
         publications = CodePublications(self.store)
         lease = peers = heartbeat = result = None
         reason = "PublicationInterrupted"
         try:
+            run = await asyncio.to_thread(self.store.get, slot.spec.project_id, run_id)
+            remote = run.execution_kind == "remote_publication"
+            publications = RemotePublications(self.store) if remote else publications
             lease, peers = await asyncio.to_thread(
                 AttemptPeers.claim,
                 self.store,
@@ -440,7 +463,10 @@ class RuntimeService:
             slot.attempt_id = lease.attempt_id
             slot.lease_deadline = time.monotonic() + 30
             heartbeat = asyncio.create_task(self._heartbeat(slot, lease))
-            result = await self.runtime.publish_code(
+            publish = (
+                self.runtime.publish_remote if remote else self.runtime.publish_code
+            )
+            result = await publish(
                 peers,
                 active=lambda: slot.active and time.monotonic() < slot.lease_deadline,
             )

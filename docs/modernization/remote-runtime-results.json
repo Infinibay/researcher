@@ -1,0 +1,45 @@
+{
+  "base_commit": "add30b4",
+  "date": "2026-11-05",
+  "status": "durable_remote_runtime_and_capability_gated_owner_api_transport_pending",
+  "directed": {
+    "total": 61,
+    "passed": 61,
+    "failed": [],
+    "skipped": 0,
+    "seconds": 15.62,
+    "receipt_sha256": "b66e342e63d83c8cf4688c78be468f2e60dbe02fbfd86662f552a7ee4e7d55cd"
+  },
+  "shared_local_physical": {
+    "total": 2,
+    "passed": 2,
+    "failed": [],
+    "skipped": 0,
+    "seconds": 129.909,
+    "receipt_sha256": "a58ad4c90be7f2b4b1aba02af4d7b67b16bf69a9eac0529caf3525e32a7e69c7"
+  },
+  "frontend": {
+    "passed": 77,
+    "failed": 0,
+    "build": "TypeScript/Vite passed; existing warnings deferred; only execution-kind type changed, no new UI action or visual acceptance claim"
+  },
+  "new_runtime_cases": 5,
+  "package": "docs/modernization/remote-runtime-packaging.json",
+  "documented_definitions_or_modules": 60,
+  "scope": [
+    "Schema45, immutable owner requests, exact local acceptance/provenance and scoped operation receipt; global host run ID binds remote protocol",
+    "Fresh host claim preserves done and blocks inference/native peers; issue-once stages, unknown effects and separate Git/HTTP closure contracts",
+    "Actual owner pairing/CSRF/strict-body HTTP with held scheduling; actual RuntimeService worker routes controlled synthetic remote stage once without model dispatch",
+    "Push\u2192PR\u2192merge storage prerequisites with synthetic original closure witnesses; no fictitious HTTP command peer; merge bookkeeping cannot precede positive Git receipt",
+    "Two actual local publication/recovery integrations rerun due shared runtime changes, with controlled native generation and fixture Ken; no remote network coverage claimed"
+  ],
+  "limits": [
+    "Default runtime lacks remote network/credential profile and rejects remote admission; no production remote effect enabled",
+    "Remote stage tests use explicit synthetic physical/client closure witnesses; no real HTTPS/Forgejo/host remote credential test in this checkpoint",
+    "Remote readonly observation/recovery control and Tasks action remain pending",
+    "Current prerequisite admission requires accepted, including known-positive prior stages; explicit adoption after withdrawal remains pending",
+    "Schema45 forward FK/startup exercised; inverse43/44/45 and old inverse fixture adaptation still pending",
+    "No fresh full-suite green claim; historical baseline predates remote additions",
+    "No new inference or mutation of user repositories/servers"
+  ]
+}

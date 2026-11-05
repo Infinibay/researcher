@@ -203,6 +203,11 @@ class CodeAcceptances:
         owned_publications = CodePublications.linked_runs(
             conn, project_id, run_id, self._receipt(conn, project_id, run_id)
         )
+        from backend.runtime.remote_runtime import RemotePublications
+
+        owned_publications |= RemotePublications.linked_runs(
+            conn, project_id, owned_publications
+        )
         other = conn.execute(
             """SELECT id,status FROM runtime_runs WHERE project_id=? AND task_id=?
             AND id NOT IN (?,?) AND status IN ('queued','running','cancelling','reconciling','waiting_input','needs_review')""",
@@ -293,9 +298,9 @@ class CodeAcceptances:
                         )
                         if result and result["publication_performed"]
                         else "La publicación original no se aplicó; no se repitió su transacción."
-                        if result and result['observed']['state']=='not_applied'
+                        if result and result["observed"]["state"] == "not_applied"
                         else "No se ha confirmado el resultado. Puedes comprobar qué ocurrió sin volver a publicar."
-                        if latest['status']=='reconciling'
+                        if latest["status"] == "reconciling"
                         else "Publicación registrada; consulta su estado y su resultado antes de solicitar otra.",
                     }
                 )

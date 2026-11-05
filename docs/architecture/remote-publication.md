@@ -2,8 +2,9 @@
 
 La publicación local y su recuperación ya están conectadas al producto. Este
 checkpoint implementa el **protocolo interno remoto** de push y PR y un cliente
-HTTP de Forgejo. Todavía faltan su admisión durable, transporte con autoridad
-propia, credenciales del host y controles web. No hay una nueva acción remota
+HTTP de Forgejo. La [admisión durable y las etapas del runtime](remote-runtime.md) ya están
+conectadas con un gate de capacidad; aún faltan transporte con autoridad propia,
+credenciales del host y controles web. No hay una nueva acción remota
 habilitada para el usuario. El protocolo de merge exacto también está implementado; su integración productiva
 sigue pendiente. No se sustituye por el merge legacy ni se declara terminado el
 recorrido completo.
@@ -125,8 +126,8 @@ La identidad de operación del puerto debe proceder del ID durable global del
 efecto del host. La clave de una acción del usuario, cuyo ámbito es proyecto/tarea,
 se conserva aparte; no se debe reutilizar sin ese ámbito como identidad remota.
 
-Siguiente trabajo principal: admisión remota durable ligada a la aceptación y
-publicación local, perfil de Git/HTTP con autoridad propia y credencial del host,
+La admisión durable ya liga la solicitud a la aceptación y publicación local.
+Siguiente trabajo principal: perfil de Git/HTTP con autoridad propia y credencial del host,
 pruebas de integración HTTPS/control/closure, API/Tareas y coordinación durable de las dos etapas del merge exacto. El puerto
 actual no se expone como herramienta de agente ni como atajo por subprocess del
 host. El objetivo completo y los escenarios E06/E10/E12 continúan en curso.

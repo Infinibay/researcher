@@ -535,6 +535,10 @@ class PeerBroker:
                     # Review Git reads the captured candidate; the immutable
                     # source_binding remains the original global concession.
                     admission = registry.admission(peer_id)
+                if admission["execution_kind"] == "remote_publication":
+                    raise AuthorityConflict(
+                        "Remote publication requires its configured typed network profile"
+                    )
                 if admission["execution_kind"] == "code_publication":
                     if (
                         not isinstance(git_launch, PublicationGitLaunch)

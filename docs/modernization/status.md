@@ -18,6 +18,16 @@ El propietario reactivó el objetivo el 2026-11-05. La suite global del checkpoi
 965 casos del runtime pasan. Mismos identificadores de fallo heredados, sin afirmar
 causas idénticas. [Recibo](resumed-baseline-results.json).
 
+La admisión remota y sus etapas ya son durables: esquema 45, solicitud owner
+inmutable, run/lease nuevos y reserva de cada efecto antes del gate. API estricta
+y scheduler conectados con comprobación de capacidad. Default sin transporte
+remoto: rechaza admisión, sin fallback de proceso libre ni nueva acción web.
+Pasan 61 pruebas dirigidas,61 del wheel y77 del frontend y build; 60 definiciones documentadas.
+Dos integraciones físicas del recorrido local pasan en 129,91 s por los cambios
+compartidos; los nuevos testigos de cierre remoto son sintéticos explícitos.
+Faltan transporte/credencial/HTTPS reales, recuperación remota y Tareas.
+[Contrato](../architecture/remote-runtime.md), [resultados](remote-runtime-results.json).
+
 El protocolo remoto interno pasa 34 casos dirigidos (14 nuevos): push atómico
 con SHA/recibo/CAS en Git real, y puerto HTTPX de PR con identidad exacta y
 recuperación de respuesta perdida. El merge interno usa CAS Git con ascendencia
@@ -33,7 +43,7 @@ y usa un intento nuevo con acceso de lectura a rama/recibo; conserva historia tr
 corrección y distingue efecto aplicado, no aplicado e incierto.
 
 Pasan 42 pruebas dirigidas y dos integraciones físicas con Git/kernel/SQLite
-reales en 128.69 s, con generación controlada. Frontend77/build; cinco
+reales en 128.69 s, con generación controlada. Frontend: 77 pruebas y build; cinco
 capturas y recuperación del mismo comando después de perder la respuesta y
 recargar. 47 definiciones/módulos documentados en inglés. El wheel tiene
 verificación separada, sin atribuirle una instalación integral del host.

@@ -5666,3 +5666,75 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
 - All new test/package sessions terminal; no browser server created, no remote/user
   repository writes. Original checkout untouched; protected root .agents/.codex/
   AGENTS.md unstaged. Local checkpoint only; no push/merge/deploy or goal pause.
+
+
+## Durable remote runtime actions and issued stages — baseadd30b4, 2026-11-05
+
+- Previous goal turn: progress, committed internal protocol add30b4. This turn
+  implements the owner/run/effect-stage boundary it required. Full plan remains
+  active; user macro-first policy retained, no generic audit agents or unrelated
+  cleanups. Ken recall reused protocol findings; focused factory search remains
+  on old index, so actual known shared runtime/HTTP sources were read manually.
+- Schema45 adds remote_publication to typed runtime kinds, preserving exact prior
+  task-done acceptance trigger and shared publication active slot. Immutable remote
+  owner request points to exact original successful local publication and acceptance.
+  Push, PR and merge each require a separate explicit owner action and fresh host
+  run. Protocol receipt keys derive from host UUID, not scoped client operation key.
+- RemotePublications revalidates current original acceptance, source/candidate
+  metadata and registered remote; only exact descendants excluded from acceptance
+  blockers. Fresh claim keeps task done and disallows inference/native peers. Git
+  stage requires actual command/domain closure; HTTP-only PR has original scope
+  and HTTP closure without fictitious process peers. Merge requires both.
+- Stage issue commits original protocol/attempt/fence before effect. Second reserve
+  returns dispatch=false; a caller must never open another write for it. Known
+  positive outcomes immutable; unknown observations retained separately and absent
+  remote evidence remains uncertain. Bookkeeping cannot issue before original exact
+  merge_git receipt. Late original results can record history after withdrawal,
+  never grant a new write. Result/event commit together from recorded stages.
+- Ruling: scheduler reuses the established host publication worker with a typed
+  remote store/driver, preserving local behavior and actual closure consumption.
+  Admission requires a configured publish_remote capability. DEFAULT OWNED RUNTIME
+  HAS NO REMOTE TRANSPORT YET and rejects before admission; PeerBroker explicitly
+  refuses generic local/analysis profiles for remote runs until its typed network
+  profile exists. Cost: API/domain ready but remote writes remain unavailable;
+  fixtures cannot be promoted to production credentials/network authority.
+- Strict discriminated owner API push/pull/merge plus readonly saved-stage endpoint
+  added. Pairing/CSRF/project/forbid-extra checks exercised, host protocol/actor/path/
+  credential/proof cannot be client supplied. Scoped original retry returns same
+  run and never reschedules. Scheduler controlled transport executes once with no
+  inference dispatch. No Tasks action/visual redesign added; TS execution-kind
+  union updated only.
+- RED3missing remote_runtime module→storageGREEN; first green attempt lacked exact
+  linked-run exclusion due failed scripted anchor, fixed after reading actual block.
+  Actual5new cases cover stage chain/issue-once/unknown correction/owner HTTP/runtime
+  worker. Synthetic local and remote closure witnesses explicitly labeled; these
+  are not real remote transport integration. Source61PASS15.63s across affected
+  publication/recovery/protocol consumers. Real shared LOCAL publication/recovery
+  pair2PASS129.91s, controlled native generation and fixture Ken; rerun justified by
+  changed claim/authority/worker path, not attributed to remote HTTPS.
+- Current extracted wheel61PASS15.21s,325backend modules only package,
+  720matchingPython/SQL. Frontend77PASS/buildPASS, known warnings deferred. Ruff all
+  changed Python passes;8appropriate files format pass (large SQLite/db prior format
+  debt retained).60new/changed definitions/modules documented in English. Final
+  broker/registry line-wrap formatting preceded final wheel verification; no extra
+  costly physical rerun for whitespace. No new global suite green claim.
+- DD-003 now retains inverse43/44/45 and old inverse fixtures; DD-006 records current
+  accepted-only prerequisite policy vs explicit adoption of known positive results
+  after withdrawal. Do not get entangled there before transport. Original source
+  uncertainty/legacy global exclusion and prior DDs remain in full scope.
+- NEXT MAIN WORK: actual typed owned remote Git/HTTP network and host credential
+  profile, real HTTPS/Stop/closure tests, then readonly remote recovery and Tasks.
+  Reuse existing protocol and effect records. Reserve issue at the actual write
+  boundary (port interceptor/before-POST), after readonly preflights, with current
+  lease; do not reserve then blindly perform many reads and later write without
+  rechecking. Keep HTTP client closure distinct from server termination; no blind
+  retry. No new migration/actor framework just for another stage if current records
+  already express it. After core delivery works, record secondary details and move
+  to other main plan capabilities, not repeated generic edge audits.
+- Entire engine/roles/tools/agent communication/prompts/comprehension, remaining6web
+  routes/12page acceptance, install/restore/CLI/TUI, inherited failures/scenarios and
+  final fresh whole-branch review still required. No narrower success definition.
+- Final source/native/frontend/package jobs verified terminal. No browser/private
+  server created in this turn. No user remote/repo mutation or model inference.
+  Protected root .agents/.codex/AGENTS.md unstaged; original checkout untouched.
+  Local checkpoint only, no new push/merge/deploy or pause.

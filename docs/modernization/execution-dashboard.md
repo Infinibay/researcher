@@ -9,7 +9,32 @@ Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: protocolo interno remoto
+## Etapa actual: admisión y etapas remotas durables
+
+**Resultado:** migración 45, un run nuevo por acción explícita push/PR/merge,
+ligado a publicación local y aceptación exactas. ID global del host separado de
+clave del usuario. Cada efecto se registra como emitido antes de su gate; la
+segunda reserva no autoriza otro dispatch. El merge guarda Git y registro HTTP
+como etapas separadas. Historia e incertidumbre no se convierten en repetición.
+
+**API y scheduler:** cuerpos estrictos con pairing/CSRF, recibos originales,
+claim sin reabrir tarea ni inferencia. HTTP puro no prepara procesos ficticios.
+El runtime predeterminado aún carece de transporte remoto: rechaza admisión y el
+broker no ofrece un perfil genérico como sustituto.
+
+**Verificación:**61 pruebas dirigidas, incluidas5 nuevas de almacenamiento/owner HTTP/
+scheduler con testigos remotos sintéticos;61 del wheel,325 módulos sólo paquete,
+720 fuentes coincidentes. Dos integraciones físicas locales compartidas pasan en
+129,91 s; no prueban red remota. Frontend: 77 pruebas y build, sólo tipo de ejecución.
+60 definiciones/módulos documentados en inglés. No hay nueva suite global verde.
+
+**Siguiente capacidad principal:** perfil/executor de red/credenciales del host y
+prueba HTTPS/Stop/cierre reales; después observadores de recuperación y Tareas.
+[Contrato](../architecture/remote-runtime.md), [resultados](remote-runtime-results.json),
+[paquete](remote-runtime-packaging.json). Inversas y adopción tras retirada quedan
+registradas en detalles diferidos; el alcance completo sigue activo.
+
+## Etapa anterior: protocolo interno remoto
 
 **Avance:** push del SHA aceptado y recibo remoto en una transacción atómica,
 con CAS del destino. Una respuesta perdida se reconcilia por evidencia positiva;
@@ -44,7 +69,7 @@ Resultado/evento/recibo distinguen publicado, no aplicado e incierto.
 prueba negativa de cierre local sin evidencia global. Dos integraciones físicas
 pasan en 128.69 s: publicación normal y commit con respuesta perdida,
 seguido de nuevo observador y una sola transacción total. Generación controlada;
-ningún turno de modelo en publicación/recuperación. Frontend77/build; cinco
+ningún turno de modelo en publicación/recuperación. Frontend: 77 pruebas y build; cinco
 capturas escritorio/móvil inspeccionadas, dos consultas idénticas tras respuesta
 perdida/recarga, cero errores/desbordamiento/Axe en panel. Browser con testigos
 sintéticos explícitos, no prueba Git. 47 definiciones/módulos documentados.
