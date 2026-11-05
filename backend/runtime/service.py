@@ -76,6 +76,7 @@ class RuntimeService:
         max_concurrent=2,
         project_turn_limit=20,
         project_token_limit=4000000,
+        legacy_active=None,
     ):
         """Compose one journal owner, native worker limits and deterministic authorized-plan dispatch; construction starts no work."""
         self.store = store
@@ -84,6 +85,9 @@ class RuntimeService:
         self.recovery = RunRecovery(store)
         self.live_grants = live_grants
         self.runtime = runtime
+        if legacy_active is not None and not callable(legacy_active):
+            raise ValueError("Legacy activity must be an explicit controller observation port")
+        self.legacy_active = legacy_active
         self.workspaces = workspaces
         self.control_root = Path(control_root).absolute()
         self.limits = limits or ExecutionLimits(180, 90, 1, 25, 350000)
@@ -387,6 +391,9 @@ class RuntimeService:
             for delivery in await asyncio.to_thread(executions.pending):
                 if self._closing:
                     return
+                if self._legacy_controller_active(delivery["project_id"]):
+                    await asyncio.to_thread(executions.note_issue, delivery["execution_id"], delivery["task_id"], "legacy_owner_active")
+                    continue
                 if len(self._workers) >= self.max_concurrent or any(w.spec.project_id == delivery["project_id"] for w in self._workers.values()):
                     continue
                 try:
@@ -401,7 +408,7 @@ class RuntimeService:
                     if self.control_root.resolve().is_relative_to(Path(binding.workspace)):
                         raise WorkspaceChanged("Repository contains runtime control state")
                     run, admitted = await asyncio.to_thread(self.store.admit_once, spec, binding=binding)
-                    if admitted or (run.status == "queued" and run.attempt_id is None and (run.issue is None or run.issue.get("code") == "capacity")):
+                    if admitted or (run.status == "queued" and run.attempt_id is None and (run.issue is None or run.issue.get("code") in ("capacity", "legacy_owner_active"))):
                         await self._schedule(run)
                 except (RunConflict, RunNotFound, ValueError) as error:
                     await asyncio.to_thread(executions.note_issue, delivery["execution_id"], delivery["task_id"], type(error).__name__)
@@ -565,6 +572,16 @@ class RuntimeService:
         run, requested = await asyncio.to_thread(self.store.request_start, **command)
         return await self._schedule(run) if requested else run
 
+    def _legacy_controller_active(self, project_id):
+        """Observe the serving controller before native work; unknown liveness holds the request, while standalone coordinators explicitly have no legacy-controller port."""
+        if self.legacy_active is None:
+            return False
+        try:
+            return self.legacy_active(project_id) is not False
+        except Exception as error:  # noqa: BLE001 -- failed observation never grants native execution.
+            logger.warning("Legacy closure observation failed for project %s (%s)", project_id, type(error).__name__)
+            return True
+
     async def _schedule(self, run):
         """Schedule an admitted run once after checking its binding and execution profile."""
         async with self._admission_lock:
@@ -572,6 +589,8 @@ class RuntimeService:
             run = await asyncio.to_thread(self.store.get, run.project_id, run.run_id)
             if run.status != "queued" or run.run_id in self._workers:
                 return run
+            if self._legacy_controller_active(run.project_id):
+                return await self._note_issue(run, "legacy_owner_active", inference_started=False)
             binding = await asyncio.to_thread(
                 self.store.workspace_binding, run.project_id, run.run_id
             )
@@ -622,6 +641,8 @@ class RuntimeService:
             # No await between this ownership check and publishing the worker.
             # Shutdown may have completed while validation ran in its thread.
             self._accepting()
+            if self._legacy_controller_active(run.project_id):
+                return await self._note_issue(run, "legacy_owner_active", inference_started=False)
             slot = _Worker(spec, workspace, binding)
             slot.intent_committed.set()
             self._workers[run.run_id] = slot
@@ -699,6 +720,10 @@ class RuntimeService:
     async def _note_issue(self, run, code, *, attempt_id=None, inference_started=False):
         """Persist a safe, actionable owner explanation for this original run."""
         messages = {
+            "legacy_owner_active": (
+                "El inicio está en espera: no pudimos comprobar que el proyecto esté libre de una ejecución anterior. La solicitud nueva está guardada y no se ha iniciado. Detén cualquier ejecución anterior y vuelve a intentar.",
+                "retry_start",
+            ),
             "binding_missing": (
                 "Esta solicitud antigua no registró su repositorio. Cancélala y crea otra con una selección comprobable.",
                 "new_request",

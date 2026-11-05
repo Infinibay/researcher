@@ -57,6 +57,7 @@ async def test_owned_accepted_plan_dispatches_root_then_exact_evidence_to_privat
     app = create_app()
     runtime = configured_runtime(app.state.live_grants, app=app)
     app.state.runtime_service = runtime
+    assert callable(runtime.legacy_active)
     async with runtime:
         plan = await runtime.start_project_plan(
             101,

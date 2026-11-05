@@ -18,18 +18,26 @@ class FlowManager:
     """Tracks running flows and listener managers across projects."""
 
     def __init__(self) -> None:
+        """Track actual main/autonomy/listener workers and their own cooperative stop signals, without starting execution."""
         self._flows: dict[int, Any] = {}
+        self._threads: dict[int, threading.Thread] = {}
+        self._stop_signals: dict[int, threading.Event] = {}
         self._listeners: dict[int, ListenerManager] = {}
         self._autonomy: dict[int, Any] = {}
         self._lock = threading.Lock()
 
-    def start_project_flow(self, project_id: int) -> None:
-        """Start the MainProjectFlow and event listeners for a project."""
+    def start_project_flow(self, project_id: int) -> dict[str, Any] | None:
+        """Start remaining legacy projects only; native admission returns an owner hint before listeners, workers or stale-event clearing."""
+        from backend.runtime.legacy_handoff import legacy_project_handoff
+
+        handoff = legacy_project_handoff(project_id)
+        if handoff is not None:
+            return handoff
         from backend.flows.main_project_flow import MainProjectFlow
         from backend.flows.snapshot_service import load_snapshot
 
         with self._lock:
-            if project_id in self._flows:
+            if self.is_project_running(project_id):
                 logger.warning("Flow already running for project %d", project_id)
                 return
 
@@ -78,12 +86,15 @@ class FlowManager:
             flow = MainProjectFlow()
             self._flows[project_id] = flow
 
+            signal = threading.Event()
+            self._stop_signals[project_id] = signal
             thread = threading.Thread(
                 target=self._run_flow,
-                args=(flow, project_id, snapshot_inputs),
+                args=(flow, project_id, snapshot_inputs, signal),
                 name=f"MainProjectFlow-p{project_id}",
                 daemon=True,
             )
+            self._threads[project_id] = thread
             thread.start()
 
             # Start agent loops paused — the flow resumes them when entering
@@ -104,6 +115,7 @@ class FlowManager:
         flow: Any,
         project_id: int,
         snapshot_inputs: dict[str, Any] | None = None,
+        stop_requested: threading.Event | None = None,
     ) -> None:
         """Run the flow in a thread. Cleans up on completion."""
         try:
@@ -112,55 +124,93 @@ class FlowManager:
                 # Merge snapshot state — snapshot values take precedence except project_id
                 merged = {**snapshot_inputs, **inputs}
                 inputs = merged
-            flow.kickoff(inputs=inputs)
+            from backend.runtime.legacy_scope import legacy_stop_scope
+
+            with legacy_stop_scope(project_id, stop_requested or threading.Event()):
+                flow.kickoff(inputs=inputs)
         except Exception:
             logger.exception("Flow failed for project %d", project_id)
         finally:
             with self._lock:
-                self._flows.pop(project_id, None)
+                if self._flows.get(project_id) is flow:
+                    self._flows.pop(project_id, None)
 
-    def stop_project_flow(self, project_id: int) -> None:
-        """Stop listeners for a project. Snapshots flow state before teardown."""
+    def stop_project_flow(self, project_id: int) -> dict[str, Any]:
+        """Signal and observe registered legacy controllers without dropping live references, holding the registry lock during joins or resetting native-owned tasks."""
         with self._lock:
-            # Snapshot flow state before tearing down
             flow = self._flows.get(project_id)
-            if flow is not None and hasattr(flow, "state"):
-                try:
-                    from backend.flows.snapshot_service import save_snapshot
+            thread = self._threads.get(project_id)
+            signal = self._stop_signals.get(project_id)
+            from backend.autonomy.agent_loop import get_loop_manager
 
-                    save_snapshot(
-                        project_id,
-                        "main_project_flow",
-                        getattr(flow.state, "current_step", "")
-                        or flow.state.status.value,
-                        flow.state,
-                    )
-                except Exception:
-                    logger.warning(
-                        "Could not snapshot flow for project %d",
-                        project_id,
-                        exc_info=True,
-                    )
+            loop_mgr = self._autonomy.get(project_id) or get_loop_manager(project_id)
+            listeners = self._listeners.get(project_id)
+        if signal is not None:
+            signal.set()
+        if flow is not None and hasattr(flow, "state"):
+            try:
+                from backend.flows.snapshot_service import save_snapshot
 
-            # Stop agent loops — signal all loops first, then join.
-            # Kill pods BEFORE joining so blocked exec_in_pod calls terminate.
-            loop_mgr = self._autonomy.pop(project_id, None)
-            if loop_mgr:
-                loop_mgr.stop_signal()  # signal all stop events (non-blocking)
-
-            if loop_mgr:
-                loop_mgr.stop_join()  # now join threads (pods already dead)
-
-            # Reset in_progress tasks to pending so they can be picked up on restart.
-            # This runs AFTER agent loops are stopped, so no agent is actively working.
+                save_snapshot(
+                    project_id,
+                    "main_project_flow",
+                    getattr(flow.state, "current_step", "") or flow.state.status.value,
+                    flow.state,
+                )
+            except Exception:
+                logger.warning(
+                    "Could not snapshot legacy flow %d", project_id, exc_info=True
+                )
+        if loop_mgr is not None:
+            loop_mgr.stop_signal()
+            loop_mgr.stop_join()
+        if listeners is not None:
+            try:
+                listeners.stop_all()
+            except TimeoutError:
+                logger.warning(
+                    "Legacy listener still stopping for project %d", project_id
+                )
+        if thread is not None and thread is not threading.current_thread():
+            thread.join(timeout=5.0)
+        with self._lock:
+            if thread is not None and not thread.is_alive():
+                if self._threads.get(project_id) is thread:
+                    self._threads.pop(project_id, None)
+                    self._stop_signals.pop(project_id, None)
+                if self._flows.get(project_id) is flow:
+                    self._flows.pop(project_id, None)
+            if (
+                loop_mgr is not None
+                and not self._registered_running(loop_mgr)
+                and self._autonomy.get(project_id) is loop_mgr
+            ):
+                self._autonomy.pop(project_id, None)
+            if (
+                listeners is not None
+                and not self._registered_running(listeners)
+                and self._listeners.get(project_id) is listeners
+            ):
+                self._listeners.pop(project_id, None)
+            closed = not self.is_project_running(project_id)
+        if closed:
             self._reset_in_progress_tasks(project_id)
+            from backend.runtime.legacy_handoff import legacy_project_handoff
 
-            lm = self._listeners.pop(project_id, None)
-            if lm:
-                lm.stop_all()
-            self._flows.pop(project_id, None)
-            update_project_status(project_id, "paused")
-            logger.info("Stopped flow/listeners for project %d", project_id)
+            if legacy_project_handoff(project_id) is None:
+                update_project_status(project_id, "paused")
+        return {
+            "project_id": project_id,
+            "stop_requested": True,
+            "registered_workers_closed": closed,
+            "closure_scope": "registered_legacy_threads_only",
+        }
+
+    @staticmethod
+    def _registered_running(owner) -> bool:
+        """Observe known controller liveness; an opaque registry entry remains unresolved rather than presumed closed."""
+        observed = getattr(owner, "is_running", None)
+        return observed if isinstance(observed, bool) else True
 
     @staticmethod
     def _reset_in_progress_tasks(project_id: int) -> None:
@@ -173,23 +223,36 @@ class FlowManager:
         import sqlite3
 
         def _reset(conn: sqlite3.Connection) -> int:
-            # Reset tasks
+            """Check native ownership under the write lock before clearing any legacy task/event state."""
+            from backend.runtime.legacy_handoff import native_project_handoff
+
+            conn.execute("BEGIN IMMEDIATE")
+            if native_project_handoff(conn, project_id) is not None:
+                conn.rollback()
+                return 0
+            from backend.runtime.task_profiles import OWNER_ONLY_LEGACY_TASK_TYPES
+
+            excluded = ",".join("?" for _ in OWNER_ONLY_LEGACY_TASK_TYPES)
+            # Migrated task types remain owner-controlled even before the first run.
             cursor = conn.execute(
-                """UPDATE tasks SET status = 'pending', assigned_to = NULL
-                   WHERE project_id = ? AND status = 'in_progress'""",
-                (project_id,),
+                f"""UPDATE tasks SET status = 'pending', assigned_to = NULL
+                   WHERE project_id = ? AND status = 'in_progress' AND type NOT IN ({excluded})""",
+                (project_id, *OWNER_ONLY_LEGACY_TASK_TYPES),
             )
             count = cursor.rowcount
 
             # Mark in_progress/claimed events as failed
             conn.execute(
-                """UPDATE agent_events
+                f"""UPDATE agent_events
                    SET status = 'failed',
                        error_message = 'graceful_shutdown',
                        completed_at = CURRENT_TIMESTAMP
                    WHERE project_id = ?
-                     AND status IN ('in_progress', 'claimed')""",
-                (project_id,),
+                     AND status IN ('in_progress', 'claimed')
+                     AND NOT EXISTS(SELECT 1 FROM tasks t WHERE t.project_id=agent_events.project_id
+                       AND t.id=CASE WHEN json_valid(agent_events.payload_json) THEN json_extract(agent_events.payload_json,'$.task_id') END
+                       AND t.type IN ({excluded}))""",
+                (project_id, *OWNER_ONLY_LEGACY_TASK_TYPES),
             )
 
             conn.commit()
@@ -252,16 +315,26 @@ class FlowManager:
 
     def get_flow_status(self, project_id: int) -> str:
         """Get the running status of a project's flow."""
-        if project_id in self._flows:
-            return "running"
-        return "stopped"
+        return "running" if self.is_project_running(project_id) else "stopped"
 
     def is_project_running(self, project_id: int) -> bool:
         """Detect every registered legacy owner; a finished flow thread does not prove its autonomy or listeners closed."""
+        from backend.autonomy.agent_loop import get_loop_manager
+
+        thread = self._threads.get(project_id)
+        external = get_loop_manager(project_id)
         return (
             project_id in self._flows
-            or project_id in self._autonomy
-            or project_id in self._listeners
+            or (thread is not None and thread.is_alive())
+            or (external is not None and self._registered_running(external))
+            or (
+                project_id in self._autonomy
+                and self._registered_running(self._autonomy[project_id])
+            )
+            or (
+                project_id in self._listeners
+                and self._registered_running(self._listeners[project_id])
+            )
         )
 
 

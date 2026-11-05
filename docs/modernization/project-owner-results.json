@@ -1,0 +1,83 @@
+{
+  "base_commit": "f3e184f",
+  "status": "registered_legacy_project_boundaries_connected_global_retirement_pending",
+  "authoritative_workspace": "/home/andres/.codex/worktrees/b09e/researcher",
+  "schema_version": 53,
+  "new_migration": false,
+  "implemented": [
+    "Actual stored native admission excludes legacy activation/inference/recovery across the project, including tasks without their own run. No admission is fabricated.",
+    "Stored event scope/payload and verified saved resume state replace incoming arguments and previous actor context. Owner handoff acknowledges event only, preserves original payload, grants no work or task completion.",
+    "Main/autonomy/watchdog thread references survive bounded Stop timeout. Listener callbacks remain registered until unsubscribe. Native request dispatch observes local/global registered controllers and preserves queued original requests on live/unknown activity.",
+    "Cooperative project Stop and post-inference checks prevent subsequent old-tool effects. Recovery ownership is checked in the write transaction; native task state and old worktree files remain preserved.",
+    "Spanish blocking/Stop explanations distinguish request, observation, paused intent and scope of closure. Existing product layout and controls retained."
+  ],
+  "verification": {
+    "new_boundary_tests": {
+      "passed": 21,
+      "seconds": 6.74,
+      "path": "backend/tests/runtime/test_project_owner_cutover.py"
+    },
+    "overlapping_source_regressions": [
+      {
+        "passed": 145,
+        "seconds": 15.97,
+        "scope": "Autonomy, engine, main flow and new project boundaries"
+      },
+      {
+        "passed": 44,
+        "seconds": 15.41,
+        "scope": "Project cutover, exploratory and scientific domains"
+      },
+      {
+        "passed": 48,
+        "seconds": 20.44,
+        "scope": "Project cutover, RuntimeService and project planning"
+      }
+    ],
+    "isolated_wheel": {
+      "tests_passed": 417,
+      "failures": [],
+      "skipped": 0,
+      "backend_modules_loaded": 435,
+      "backend_imports_only_from_wheel": true,
+      "model_turns": 0,
+      "controlled_native_turns_in_owned_fixture": 4,
+      "actual_kernel_owned_fixture": true,
+      "network": "Disabled except Unix sockets",
+      "semantic_assets": "Explicit prepared pinned public offline assets outside wheel",
+      "generation_and_ken": "Controlled physical owned fixture; no real model inference"
+    },
+    "isolated_wheel_seconds": 167.81,
+    "matching_source_files": 773,
+    "physical_owned_chain": {
+      "seconds": 44.61,
+      "controlled_native_turns": 4,
+      "real_kernel_broker_git_sqlite": true,
+      "real_model_turns": 0,
+      "scope": "Planner → scientific research and command/source/report/wiki evidence → independent review → explicit acceptance → dependent private development. Controlled generation and Ken; all fixture peers closed; source intact; no code acceptance."
+    },
+    "frontend": {
+      "tests_passed": 92,
+      "failed": 0,
+      "skipped": 0,
+      "typescript_and_vite_build_passed": true,
+      "new_browser_acceptance": false
+    },
+    "english_python_docstrings": {
+      "changed_or_new_definitions": 107,
+      "missing": []
+    },
+    "lint": {
+      "inherited": 50,
+      "introduced_minor": 4,
+      "details": "project-owner-lint.json; DD019"
+    },
+    "excluded_known_cases": "Legacy invalid-transition text assertion recorded in the prior global baseline also excluded. Development inverse40/41/42 tests refuse later schemas43–53: test_unused_review_inverse_preserves_closed_author_and_candidate, test_unused_native_review_inverse_preserves_existing_packet, test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history[frozen_author]. Prior terminal-owner source receipt observes these guards with schemas43–49; current53selected run excludes them. Inverses43–53 remain required; guard not weakened (DD003)."
+  },
+  "limits": [
+    "Registered-thread observation is local evidence, not atomic cross-controller/cross-process exclusion or proof all legacy producers/children/in-flight callbacks have closed.",
+    "Remaining DevelopmentFlow/CodeReviewFlow and other task types, auxiliary model paths and legacy framework removal remain required.",
+    "Explicit partial-work/private-candidate adoption remains a principal capability; old linked dirty worktrees are not relabelled as original native authors.",
+    "No new real model trial, human comprehension study, full-page design acceptance, clean host installation/restore or global-green claim. Inverses43–53, known global failures and full plan remain active."
+  ]
+}

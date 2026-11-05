@@ -35,6 +35,10 @@ class Scavenger:
 
     def scavenge(self) -> int:
         """Run role-specific scan. Returns number of events created."""
+        from backend.runtime.legacy_handoff import legacy_project_handoff
+
+        if legacy_project_handoff(self.project_id) is not None:
+            return 0
         if not self._is_project_executing():
             return 0
 

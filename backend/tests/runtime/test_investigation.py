@@ -292,7 +292,7 @@ def test_legacy_scavenger_excludes_owner_only_and_native_owned_tasks(coordinatio
     rows = scavenger._find_orphan_tasks(
         "SELECT id FROM tasks WHERE project_id=? ORDER BY id", (101,)
     )
-    assert [row["id"] for row in rows] == [1002]
+    assert [row["id"] for row in rows] == []
 
 
 def test_legacy_project_stops_dispatching_owner_only_work_without_evaluating_completion(

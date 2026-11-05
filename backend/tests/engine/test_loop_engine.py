@@ -18,6 +18,13 @@ from backend.engine.loop_models import (
 )
 
 
+@pytest.fixture(autouse=True)
+def explicit_legacy_project(db_conn):
+    """Give legacy model fixtures a real explicit project; a generic mock attribute is not ownership evidence."""
+    db_conn.execute("INSERT OR IGNORE INTO projects(id,name)VALUES(1,'Explicit legacy model fixture')")
+    db_conn.commit()
+
+
 # ── Model tests ─────────────────────────────────────────────────────────────
 
 
@@ -582,10 +589,12 @@ def _make_step_complete_call(
 
 
 class TestLoopEngine:
+    """Run the retained engine only in an explicit legacy-project fixture."""
     def _make_agent(self):
         """Create a minimal mock agent."""
         agent = MagicMock()
         agent.agent_id = "test_agent_p1"
+        agent.project_id = 1
         agent.backstory = "You are a test agent."
         agent.tools = []
         return agent
@@ -1071,9 +1080,12 @@ class TestLoopEngine:
 
 
 class TestForcedToolChoice:
+    """Keep legacy tool-choice behavior separate from native project ownership."""
     def _make_agent(self):
+        """Bind the controlled legacy actor to the seeded project without model inference."""
         agent = MagicMock()
         agent.agent_id = "test_agent_p1"
+        agent.project_id = 1
         agent.backstory = "You are a test agent."
         agent.tools = []
         return agent
@@ -1215,9 +1227,12 @@ class TestForcedToolChoice:
 
 
 class TestRepetitionDetection:
+    """Verify remaining legacy repetition behavior under an explicit project scope."""
     def _make_agent(self, tools=None):
+        """Bind repetition fixtures to real legacy project metadata and controlled tools."""
         agent = MagicMock()
         agent.agent_id = "test_agent_p1"
+        agent.project_id = 1
         agent.backstory = "You are a test agent."
         agent.tools = tools or []
         return agent

@@ -9,7 +9,31 @@ Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: investigación científica y evidencia de comandos
+## Etapa actual: activadores antiguos del proyecto acotados
+
+**Resultado:** la admisión nativa real excluye los productores antiguos registrados
+del proyecto completo, también para tareas sin run propio. Mensajes, recuperación
+y arranque comprueban el proyecto; el despacho usa evento/contexto guardados.
+Stop conserva referencias a hilos vivos y callbacks; la solicitud nativa espera
+si sigue una ejecución antigua registrada o no se pudo observar su cierre.
+No se resetean tareas nativas ni se borran candidatos anteriores.
+
+**Verificación:**21casos nuevos,145de regresión dirigida y417del wheel pasan
+(los grupos se solapan);4casos históricos excluidos.435imports sólo del paquete,
+773fuentes coincidentes. Recorrido científico de4turnos controlados con
+kernel/broker/Git reales en44,61s; paquete167,81s.92frontend y compilación pasan.
+107definiciones documentadas;4avisos menores nuevos quedan enDD019. Sin nueva
+inferencia real, suite global verde, evaluación humana o aceptación visual.
+[Resultados](project-owner-results.json), [paquete](project-owner-packaging.json),
+[contrato y límites](../architecture/native-project-owner-cutover.md).
+
+**Siguiente bloque principal:** migrar el resultado de desarrollo/revisión y
+trabajo parcial/candidatos previos al recorrido nativo existente. La exclusión
+atómica/global entre procesos, productores desconocidos, tipos restantes e
+inferencia auxiliar sigue pendiente. No ampliar ahora el registro de hilos ni
+pulir paneles/metadatos. Todo el resto del plan permanece en alcance.
+
+## Etapa anterior: investigación científica y evidencia de comandos
 
 **Resultado:** pregunta/métodos, alternativas, hipótesis, experimentos, síntesis
 temática, informe, wiki y revisión usan las capacidades nativas existentes.
@@ -32,7 +56,7 @@ ninguno nuevo. No se afirma suite global verde, calidad de modelos, comprensión
 humana o aceptación visual nueva. [Resultados](scientific-results.json),
 [paquete](scientific-packaging.json), [contrato](../architecture/native-scientific-research.md).
 
-**Siguiente bloque principal:** cortar los activadores reales restantes de
+**Siguiente bloque previsto entonces (histórico):** cortar los activadores reales restantes de
 AgentLoop/MessageHandler/listeners/FlowManager y los recorridos de desarrollo,
 revisión y tipos pendientes, preservando datos/candidatos previos. Revisar sus
 consumidores y la adopción explícita de trabajo parcial antes de retirar una

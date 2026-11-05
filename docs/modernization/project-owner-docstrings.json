@@ -1,0 +1,757 @@
+{
+  "base_commit": "f3e184f",
+  "changed_or_new_definitions_documented": 107,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/flow_manager.py",
+      "symbol": "FlowManager",
+      "line": 17,
+      "docstring": "Tracks running flows and listener managers across projects.",
+      "file_sha256": "ec21a8a81138d0c390de4d7ee301ea6486a76b256d295815cdc3a27706afda95"
+    },
+    {
+      "path": "backend/api/flow_manager.py",
+      "symbol": "FlowManager.__init__",
+      "line": 20,
+      "docstring": "Track actual main/autonomy/listener workers and their own cooperative stop signals, without starting execution.",
+      "file_sha256": "ec21a8a81138d0c390de4d7ee301ea6486a76b256d295815cdc3a27706afda95"
+    },
+    {
+      "path": "backend/api/flow_manager.py",
+      "symbol": "FlowManager.start_project_flow",
+      "line": 29,
+      "docstring": "Start remaining legacy projects only; native admission returns an owner hint before listeners, workers or stale-event clearing.",
+      "file_sha256": "ec21a8a81138d0c390de4d7ee301ea6486a76b256d295815cdc3a27706afda95"
+    },
+    {
+      "path": "backend/api/flow_manager.py",
+      "symbol": "FlowManager._run_flow",
+      "line": 113,
+      "docstring": "Run the flow in a thread. Cleans up on completion.",
+      "file_sha256": "ec21a8a81138d0c390de4d7ee301ea6486a76b256d295815cdc3a27706afda95"
+    },
+    {
+      "path": "backend/api/flow_manager.py",
+      "symbol": "FlowManager.stop_project_flow",
+      "line": 138,
+      "docstring": "Signal and observe registered legacy controllers without dropping live references, holding the registry lock during joins or resetting native-owned tasks.",
+      "file_sha256": "ec21a8a81138d0c390de4d7ee301ea6486a76b256d295815cdc3a27706afda95"
+    },
+    {
+      "path": "backend/api/flow_manager.py",
+      "symbol": "FlowManager._registered_running",
+      "line": 210,
+      "docstring": "Observe known controller liveness; an opaque registry entry remains unresolved rather than presumed closed.",
+      "file_sha256": "ec21a8a81138d0c390de4d7ee301ea6486a76b256d295815cdc3a27706afda95"
+    },
+    {
+      "path": "backend/api/flow_manager.py",
+      "symbol": "FlowManager._reset_in_progress_tasks",
+      "line": 216,
+      "docstring": "Reset in_progress tasks to pending during graceful shutdown.\n\nSince we just stopped all agent loops, any in_progress task has no\nagent working on it. Reset to pending so it gets picked up on restart.\nAlso marks their in_progress events as failed with 'graceful_shutdown'.",
+      "file_sha256": "ec21a8a81138d0c390de4d7ee301ea6486a76b256d295815cdc3a27706afda95"
+    },
+    {
+      "path": "backend/api/flow_manager.py",
+      "symbol": "FlowManager._reset_in_progress_tasks._reset",
+      "line": 225,
+      "docstring": "Check native ownership under the write lock before clearing any legacy task/event state.",
+      "file_sha256": "ec21a8a81138d0c390de4d7ee301ea6486a76b256d295815cdc3a27706afda95"
+    },
+    {
+      "path": "backend/api/flow_manager.py",
+      "symbol": "FlowManager.get_flow_status",
+      "line": 316,
+      "docstring": "Get the running status of a project's flow.",
+      "file_sha256": "ec21a8a81138d0c390de4d7ee301ea6486a76b256d295815cdc3a27706afda95"
+    },
+    {
+      "path": "backend/api/flow_manager.py",
+      "symbol": "FlowManager.is_project_running",
+      "line": 320,
+      "docstring": "Detect every registered legacy owner; a finished flow thread does not prove its autonomy or listeners closed.",
+      "file_sha256": "ec21a8a81138d0c390de4d7ee301ea6486a76b256d295815cdc3a27706afda95"
+    },
+    {
+      "path": "backend/api/routes/projects.py",
+      "symbol": "stop_project",
+      "line": 257,
+      "docstring": "Withdraw this project's native work and request legacy teardown where present; paused describes owner intent, not unproved physical closure.",
+      "file_sha256": "7aaf77ef630e4c4f4f0ebeaa80a8f28e4ec058cc963ef9d5d32f006e3489cd93"
+    },
+    {
+      "path": "backend/api/runtime_dependencies.py",
+      "symbol": "_legacy_project_active",
+      "line": 15,
+      "docstring": "Observe actual registered legacy threads for every serving native factory; absence of a flow label alone is insufficient.",
+      "file_sha256": "7f93cad74b164fb7483e288836436b1bfa039a11d3ff0d457251b620f722a754"
+    },
+    {
+      "path": "backend/api/runtime_dependencies.py",
+      "symbol": "configured_runtime",
+      "line": 22,
+      "docstring": "No environment setting => product reads remain available, admission is 503.\n\nConstruction/import never opens a model or copies OAuth credentials. Paths\nand policy come from the owner, never from an admission/tool request.",
+      "file_sha256": "7f93cad74b164fb7483e288836436b1bfa039a11d3ff0d457251b620f722a754"
+    },
+    {
+      "path": "backend/api/runtime_dependencies.py",
+      "symbol": "_configured_owned",
+      "line": 109,
+      "docstring": "Validate owner configuration and compose the actual serving controller.",
+      "file_sha256": "7f93cad74b164fb7483e288836436b1bfa039a11d3ff0d457251b620f722a754"
+    },
+    {
+      "path": "backend/autonomy/agent_loop.py",
+      "symbol": "AgentLoop",
+      "line": 48,
+      "docstring": "Single event-driven loop per agent.",
+      "file_sha256": "bafa9662fb5d64f4e70f6b722220b31b29dbc40caa1abb8207543357ccfeed6a"
+    },
+    {
+      "path": "backend/autonomy/agent_loop.py",
+      "symbol": "AgentLoop.start",
+      "line": 76,
+      "docstring": "Start only a remaining legacy project's worker; native history is an exclusion, never restart authority.",
+      "file_sha256": "bafa9662fb5d64f4e70f6b722220b31b29dbc40caa1abb8207543357ccfeed6a"
+    },
+    {
+      "path": "backend/autonomy/agent_loop.py",
+      "symbol": "AgentLoop.stop",
+      "line": 101,
+      "docstring": "Request stop and observe a bounded join; retain a live thread reference and refuse to claim closure after timeout.",
+      "file_sha256": "bafa9662fb5d64f4e70f6b722220b31b29dbc40caa1abb8207543357ccfeed6a"
+    },
+    {
+      "path": "backend/autonomy/agent_loop.py",
+      "symbol": "AgentLoop.resume",
+      "line": 122,
+      "docstring": "Resume legacy polling only while the explicit project has no native admission history.",
+      "file_sha256": "bafa9662fb5d64f4e70f6b722220b31b29dbc40caa1abb8207543357ccfeed6a"
+    },
+    {
+      "path": "backend/autonomy/agent_loop.py",
+      "symbol": "AgentLoop._run",
+      "line": 140,
+      "docstring": "Main entry point: recover then loop.",
+      "file_sha256": "bafa9662fb5d64f4e70f6b722220b31b29dbc40caa1abb8207543357ccfeed6a"
+    },
+    {
+      "path": "backend/autonomy/agent_loop.py",
+      "symbol": "AgentLoop._loop",
+      "line": 186,
+      "docstring": "Main loop: poll \u2192 evaluate \u2192 claim \u2192 execute \u2192 complete.",
+      "file_sha256": "bafa9662fb5d64f4e70f6b722220b31b29dbc40caa1abb8207543357ccfeed6a"
+    },
+    {
+      "path": "backend/autonomy/agent_loop.py",
+      "symbol": "AgentLoop._execute_event",
+      "line": 295,
+      "docstring": "Validate stored scope first; acknowledge native owner hints separately from doing task work or starting a legacy handler.",
+      "file_sha256": "bafa9662fb5d64f4e70f6b722220b31b29dbc40caa1abb8207543357ccfeed6a"
+    },
+    {
+      "path": "backend/autonomy/agent_loop.py",
+      "symbol": "AgentLoopManager",
+      "line": 403,
+      "docstring": "Manages AgentLoop lifecycle for all agents in a project.",
+      "file_sha256": "bafa9662fb5d64f4e70f6b722220b31b29dbc40caa1abb8207543357ccfeed6a"
+    },
+    {
+      "path": "backend/autonomy/agent_loop.py",
+      "symbol": "AgentLoopManager.start_all",
+      "line": 412,
+      "docstring": "Start a remaining legacy roster; a native project gets an owner hint before any worker or watchdog.",
+      "file_sha256": "bafa9662fb5d64f4e70f6b722220b31b29dbc40caa1abb8207543357ccfeed6a"
+    },
+    {
+      "path": "backend/autonomy/agent_loop.py",
+      "symbol": "AgentLoopManager.resume_all",
+      "line": 458,
+      "docstring": "Never resume a competing legacy producer after native project admission.",
+      "file_sha256": "bafa9662fb5d64f4e70f6b722220b31b29dbc40caa1abb8207543357ccfeed6a"
+    },
+    {
+      "path": "backend/autonomy/agent_loop.py",
+      "symbol": "AgentLoopManager.stop",
+      "line": 469,
+      "docstring": "Request stop and report observed registered-thread closure, retaining any live workers.",
+      "file_sha256": "bafa9662fb5d64f4e70f6b722220b31b29dbc40caa1abb8207543357ccfeed6a"
+    },
+    {
+      "path": "backend/autonomy/agent_loop.py",
+      "symbol": "AgentLoopManager.stop_signal",
+      "line": 474,
+      "docstring": "Signal every registered worker first; this does not assert thread or child-process closure.",
+      "file_sha256": "bafa9662fb5d64f4e70f6b722220b31b29dbc40caa1abb8207543357ccfeed6a"
+    },
+    {
+      "path": "backend/autonomy/agent_loop.py",
+      "symbol": "AgentLoopManager.is_running",
+      "line": 481,
+      "docstring": "Observe actual worker/watchdog liveness even after stop was requested.",
+      "file_sha256": "bafa9662fb5d64f4e70f6b722220b31b29dbc40caa1abb8207543357ccfeed6a"
+    },
+    {
+      "path": "backend/autonomy/agent_loop.py",
+      "symbol": "AgentLoopManager.stop_join",
+      "line": 485,
+      "docstring": "Bound each join and retain live references/registry membership until actual thread exit; no timeout becomes a closure receipt.",
+      "file_sha256": "bafa9662fb5d64f4e70f6b722220b31b29dbc40caa1abb8207543357ccfeed6a"
+    },
+    {
+      "path": "backend/autonomy/agent_loop.py",
+      "symbol": "AgentLoopManager._recover_zombie_events",
+      "line": 538,
+      "docstring": "Reset events stuck in in_progress beyond the timeout threshold.",
+      "file_sha256": "bafa9662fb5d64f4e70f6b722220b31b29dbc40caa1abb8207543357ccfeed6a"
+    },
+    {
+      "path": "backend/autonomy/agent_loop.py",
+      "symbol": "AgentLoopManager._recover_zombie_events._reset",
+      "line": 542,
+      "docstring": "Keep a native project's old event history intact; timeout is not native execution recovery.",
+      "file_sha256": "bafa9662fb5d64f4e70f6b722220b31b29dbc40caa1abb8207543357ccfeed6a"
+    },
+    {
+      "path": "backend/autonomy/handlers/misc_handlers.py",
+      "symbol": "MessageHandler",
+      "line": 15,
+      "docstring": "Handles message_received and user_message_received events.",
+      "file_sha256": "f4d9962c21870b53cb3394ff552e77c6b1448f944dd35edc70355bebefb62612"
+    },
+    {
+      "path": "backend/autonomy/handlers/misc_handlers.py",
+      "symbol": "MessageHandler.execute",
+      "line": 18,
+      "docstring": "Hand off a natively admitted project before legacy dispatch, inferred intervention or completion.",
+      "file_sha256": "f4d9962c21870b53cb3394ff552e77c6b1448f944dd35edc70355bebefb62612"
+    },
+    {
+      "path": "backend/autonomy/handlers/misc_handlers.py",
+      "symbol": "HealthCheckHandler",
+      "line": 41,
+      "docstring": "Handles stagnation/health events -> Team Lead intervention.",
+      "file_sha256": "f4d9962c21870b53cb3394ff552e77c6b1448f944dd35edc70355bebefb62612"
+    },
+    {
+      "path": "backend/autonomy/handlers/misc_handlers.py",
+      "symbol": "HealthCheckHandler.execute",
+      "line": 44,
+      "docstring": "Hand off a natively admitted project before legacy dispatch, inferred intervention or completion.",
+      "file_sha256": "f4d9962c21870b53cb3394ff552e77c6b1448f944dd35edc70355bebefb62612"
+    },
+    {
+      "path": "backend/autonomy/handlers/misc_handlers.py",
+      "symbol": "ProgressEvalHandler",
+      "line": 110,
+      "docstring": "Handles evaluate_progress and all_tasks_done events.",
+      "file_sha256": "f4d9962c21870b53cb3394ff552e77c6b1448f944dd35edc70355bebefb62612"
+    },
+    {
+      "path": "backend/autonomy/handlers/misc_handlers.py",
+      "symbol": "ProgressEvalHandler.execute",
+      "line": 113,
+      "docstring": "Hand off a natively admitted project before legacy dispatch, inferred intervention or completion.",
+      "file_sha256": "f4d9962c21870b53cb3394ff552e77c6b1448f944dd35edc70355bebefb62612"
+    },
+    {
+      "path": "backend/autonomy/liveness.py",
+      "symbol": "find_dead_agent_tasks",
+      "line": 83,
+      "docstring": "Find in_progress tasks whose assigned agent is dead.\n\nReturns list of {task_id, task_title, agent_id, seconds_since_poll}.",
+      "file_sha256": "6326729c398128ae4ef4c4bd1102326c1e4ead97d9a630d0e1f8d21641951f10"
+    },
+    {
+      "path": "backend/autonomy/liveness.py",
+      "symbol": "find_dead_agent_tasks._query",
+      "line": 90,
+      "docstring": "Return scoped legacy candidates only; native project/task ownership is not inferred from a heartbeat.",
+      "file_sha256": "6326729c398128ae4ef4c4bd1102326c1e4ead97d9a630d0e1f8d21641951f10"
+    },
+    {
+      "path": "backend/autonomy/liveness.py",
+      "symbol": "recover_dead_agent_task",
+      "line": 119,
+      "docstring": "Reset a task from in_progress \u2192 pending and fail its in_progress events.\n\nReturns True if the task was reset.",
+      "file_sha256": "6326729c398128ae4ef4c4bd1102326c1e4ead97d9a630d0e1f8d21641951f10"
+    },
+    {
+      "path": "backend/autonomy/liveness.py",
+      "symbol": "recover_dead_agent_task._recover",
+      "line": 125,
+      "docstring": "Resolve the actual task project and reject native-owned recovery in the same write transaction.",
+      "file_sha256": "6326729c398128ae4ef4c4bd1102326c1e4ead97d9a630d0e1f8d21641951f10"
+    },
+    {
+      "path": "backend/autonomy/scavenger.py",
+      "symbol": "Scavenger",
+      "line": 28,
+      "docstring": "Scan for orphan tasks and create missing agent_events.",
+      "file_sha256": "22d3e53dcfa49407649a811c417180aa47bf291f14dde933cec52c8a049c548a"
+    },
+    {
+      "path": "backend/autonomy/scavenger.py",
+      "symbol": "Scavenger.scavenge",
+      "line": 36,
+      "docstring": "Run role-specific scan. Returns number of events created.",
+      "file_sha256": "22d3e53dcfa49407649a811c417180aa47bf291f14dde933cec52c8a049c548a"
+    },
+    {
+      "path": "backend/engine/loop_engine.py",
+      "symbol": "_summarize_step",
+      "line": 137,
+      "docstring": "Use a dedicated LLM call to produce a structured step summary.\n\nReturns a dict with keys: summary, files_to_preload, changes_made,\ndiscovered, pending, anti_patterns.",
+      "file_sha256": "7f6801d87dcbac10e310ff964756b97abb30bd3ff90ca546699c3740f47d14f1"
+    },
+    {
+      "path": "backend/engine/loop_engine.py",
+      "symbol": "LoopEngine",
+      "line": 245,
+      "docstring": "Plan-execute-summarize loop engine.\n\nEach iteration rebuilds the prompt from scratch with only:\nsystem prompt + task + plan + compact summaries + current step.\nRaw tool output exists only temporarily during a step, then is\ndiscarded and replaced with a structured summary.",
+      "file_sha256": "7f6801d87dcbac10e310ff964756b97abb30bd3ff90ca546699c3740f47d14f1"
+    },
+    {
+      "path": "backend/engine/loop_engine.py",
+      "symbol": "LoopEngine.execute",
+      "line": 294,
+      "docstring": "Execute only for an explicitly identified legacy project; native admission excludes competing model work before provider setup.",
+      "file_sha256": "7f6801d87dcbac10e310ff964756b97abb30bd3ff90ca546699c3740f47d14f1"
+    },
+    {
+      "path": "backend/engine/loop_engine.py",
+      "symbol": "LoopEngine.execute.ownership_check",
+      "line": 340,
+      "docstring": "Withdraw the old tracker and producer at a boundary if actual project ownership changed.",
+      "file_sha256": "7f6801d87dcbac10e310ff964756b97abb30bd3ff90ca546699c3740f47d14f1"
+    },
+    {
+      "path": "backend/engine/loop_engine.py",
+      "symbol": "LoopEngine.execute.legacy_model_call",
+      "line": 352,
+      "docstring": "Fence provider calls and their replies; a completed old request does not restore authority to interpret or act.",
+      "file_sha256": "7f6801d87dcbac10e310ff964756b97abb30bd3ff90ca546699c3740f47d14f1"
+    },
+    {
+      "path": "backend/engine/loop_engine.py",
+      "symbol": "LoopEngine._apply_guardrail",
+      "line": 1065,
+      "docstring": "Validate remaining legacy output while preserving its project owner check across retries, replies and tool effects.",
+      "file_sha256": "7f6801d87dcbac10e310ff964756b97abb30bd3ff90ca546699c3740f47d14f1"
+    },
+    {
+      "path": "backend/flows/event_listeners.py",
+      "symbol": "ListenerManager",
+      "line": 504,
+      "docstring": "Manages event listeners for a project.\n\nListeners emit to the EventBus for WebSocket relay to the frontend.\nAgent work scheduling is now handled by AgentLoop via persistent\nagent_events in the DB \u2014 these handlers create agent_events for\naggregate conditions (stagnation, all-tasks-done) detected by listeners.",
+      "file_sha256": "079487437a7694240b4ce0fe134aa1da8b97700041e0600108b435303ec546ca"
+    },
+    {
+      "path": "backend/flows/event_listeners.py",
+      "symbol": "ListenerManager.__init__",
+      "line": 513,
+      "docstring": "Track polling threads and scheduling subscriptions separately so neither is mistaken for completed teardown.",
+      "file_sha256": "079487437a7694240b4ce0fe134aa1da8b97700041e0600108b435303ec546ca"
+    },
+    {
+      "path": "backend/flows/event_listeners.py",
+      "symbol": "ListenerManager.start_all",
+      "line": 520,
+      "docstring": "Start legacy scheduling listeners only before native project admission.",
+      "file_sha256": "079487437a7694240b4ce0fe134aa1da8b97700041e0600108b435303ec546ca"
+    },
+    {
+      "path": "backend/flows/event_listeners.py",
+      "symbol": "ListenerManager.wire_flow_handlers",
+      "line": 545,
+      "docstring": "Subscribe handlers for aggregate events \u2192 persistent agent_events.\n\nAgent work routing is handled by AgentLoop via persistent DB events.\nThese handlers create agent_events for conditions detected by listeners.",
+      "file_sha256": "079487437a7694240b4ce0fe134aa1da8b97700041e0600108b435303ec546ca"
+    },
+    {
+      "path": "backend/flows/event_listeners.py",
+      "symbol": "ListenerManager.is_running",
+      "line": 734,
+      "docstring": "Observe actual registered listener threads, including checks still returning after Stop.",
+      "file_sha256": "079487437a7694240b4ce0fe134aa1da8b97700041e0600108b435303ec546ca"
+    },
+    {
+      "path": "backend/flows/event_listeners.py",
+      "symbol": "ListenerManager.stop_all",
+      "line": 738,
+      "docstring": "Unsubscribe future scheduling and attempt every stop; retain unresolved listeners instead of losing closure evidence.",
+      "file_sha256": "079487437a7694240b4ce0fe134aa1da8b97700041e0600108b435303ec546ca"
+    },
+    {
+      "path": "backend/flows/main_project_flow.py",
+      "symbol": "MainProjectFlow",
+      "line": 56,
+      "docstring": "Orchestrates the complete project lifecycle using event-driven flows.",
+      "file_sha256": "259b6c5a77f2ae705707f34e0ac14e8b06eb29f1808209bc46a3df580d8ce87e"
+    },
+    {
+      "path": "backend/flows/main_project_flow.py",
+      "symbol": "MainProjectFlow.initialize_project",
+      "line": 62,
+      "docstring": "Load or create a project and store state for routing.",
+      "file_sha256": "259b6c5a77f2ae705707f34e0ac14e8b06eb29f1808209bc46a3df580d8ce87e"
+    },
+    {
+      "path": "backend/runtime/legacy_handoff.py",
+      "symbol": "native_project_handoff",
+      "line": 15,
+      "docstring": "Return a project-only exclusion hint from actual native admission history; do not guess a task, grant authority or infer legacy process closure.",
+      "file_sha256": "cb7e496f87f40d0b87683da39e12be214497b6a8fa01950b9baca32c27a931e9"
+    },
+    {
+      "path": "backend/runtime/legacy_handoff.py",
+      "symbol": "legacy_project_handoff",
+      "line": 53,
+      "docstring": "Resolve project ownership for a legacy entry without initializing workers or altering stored messages.",
+      "file_sha256": "cb7e496f87f40d0b87683da39e12be214497b6a8fa01950b9baca32c27a931e9"
+    },
+    {
+      "path": "backend/runtime/legacy_handoff.py",
+      "symbol": "native_owner_handoff",
+      "line": 60,
+      "docstring": "Return an owner hint for migrated/native-owned tasks, or None for remaining legacy work; reject missing and foreign task scope.",
+      "file_sha256": "cb7e496f87f40d0b87683da39e12be214497b6a8fa01950b9baca32c27a931e9"
+    },
+    {
+      "path": "backend/runtime/legacy_scope.py",
+      "symbol": "legacy_stop_scope",
+      "line": 16,
+      "docstring": "Bind the owning controller's signal for this call tree and restore any prior scope on exit.",
+      "file_sha256": "57c0db3e75606d5b2a8c044f56062ab6c809f71100a3235faeae07e525db594b"
+    },
+    {
+      "path": "backend/runtime/legacy_scope.py",
+      "symbol": "check_legacy_stop",
+      "line": 27,
+      "docstring": "Stop future legacy effects after a request; a mismatched project scope cannot be silently borrowed.",
+      "file_sha256": "57c0db3e75606d5b2a8c044f56062ab6c809f71100a3235faeae07e525db594b"
+    },
+    {
+      "path": "backend/runtime/lifecycle.py",
+      "symbol": "NativeOwnerRequired",
+      "line": 9,
+      "docstring": "Actual native project ownership excludes competing legacy activation; no physical-closure claim is implied.",
+      "file_sha256": "40f327f3feaa4649ba9bae29526c9b33215439ba8330c992d05650b2e4b89d9a"
+    },
+    {
+      "path": "backend/runtime/lifecycle.py",
+      "symbol": "require_legacy_project",
+      "line": 13,
+      "docstring": "Refuse a legacy producer for a real natively admitted project, using stored evidence rather than a role, marker or ambient task.",
+      "file_sha256": "40f327f3feaa4649ba9bae29526c9b33215439ba8330c992d05650b2e4b89d9a"
+    },
+    {
+      "path": "backend/runtime/lifecycle.py",
+      "symbol": "require_legacy_execution_project",
+      "line": 23,
+      "docstring": "Check the explicit project again at an old engine boundary; never choose a project from role, cwd or another thread's context.",
+      "file_sha256": "40f327f3feaa4649ba9bae29526c9b33215439ba8330c992d05650b2e4b89d9a"
+    },
+    {
+      "path": "backend/runtime/lifecycle.py",
+      "symbol": "require_legacy_task",
+      "line": 30,
+      "docstring": "Refuse legacy mutation/inference for migrated documentary/scientific work and any task with native admission history.",
+      "file_sha256": "40f327f3feaa4649ba9bae29526c9b33215439ba8330c992d05650b2e4b89d9a"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService",
+      "line": 63,
+      "docstring": "Own native attempts and grant-bound tool closure before durable terminal states.",
+      "file_sha256": "2bb061903dd1bf1c8a5403ec28d7d6be20711806fc09ff1be7dd866b28e87f1d"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService.__init__",
+      "line": 66,
+      "docstring": "Compose one journal owner, native worker limits and deterministic authorized-plan dispatch; construction starts no work.",
+      "file_sha256": "2bb061903dd1bf1c8a5403ec28d7d6be20711806fc09ff1be7dd866b28e87f1d"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService.dispatch_planned_work",
+      "line": 384,
+      "docstring": "Admit original ready deliveries and recover only queued runs with no attempt; quotas, closure and native reservation remain owned by the existing run worker.",
+      "file_sha256": "2bb061903dd1bf1c8a5403ec28d7d6be20711806fc09ff1be7dd866b28e87f1d"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._legacy_controller_active",
+      "line": 575,
+      "docstring": "Observe the serving controller before native work; unknown liveness holds the request, while standalone coordinators explicitly have no legacy-controller port.",
+      "file_sha256": "2bb061903dd1bf1c8a5403ec28d7d6be20711806fc09ff1be7dd866b28e87f1d"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._schedule",
+      "line": 585,
+      "docstring": "Schedule an admitted run once after checking its binding and execution profile.",
+      "file_sha256": "2bb061903dd1bf1c8a5403ec28d7d6be20711806fc09ff1be7dd866b28e87f1d"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._note_issue",
+      "line": 720,
+      "docstring": "Persist a safe, actionable owner explanation for this original run.",
+      "file_sha256": "2bb061903dd1bf1c8a5403ec28d7d6be20711806fc09ff1be7dd866b28e87f1d"
+    },
+    {
+      "path": "backend/tests/engine/test_loop_engine.py",
+      "symbol": "explicit_legacy_project",
+      "line": 22,
+      "docstring": "Give legacy model fixtures a real explicit project; a generic mock attribute is not ownership evidence.",
+      "file_sha256": "eb8fbcf016fc4e08312f2e692854a65e3645ecf5ff7e8a9f048acb46874b5bb4"
+    },
+    {
+      "path": "backend/tests/engine/test_loop_engine.py",
+      "symbol": "TestLoopEngine",
+      "line": 591,
+      "docstring": "Run the retained engine only in an explicit legacy-project fixture.",
+      "file_sha256": "eb8fbcf016fc4e08312f2e692854a65e3645ecf5ff7e8a9f048acb46874b5bb4"
+    },
+    {
+      "path": "backend/tests/engine/test_loop_engine.py",
+      "symbol": "TestLoopEngine._make_agent",
+      "line": 593,
+      "docstring": "Create a minimal mock agent.",
+      "file_sha256": "eb8fbcf016fc4e08312f2e692854a65e3645ecf5ff7e8a9f048acb46874b5bb4"
+    },
+    {
+      "path": "backend/tests/engine/test_loop_engine.py",
+      "symbol": "TestForcedToolChoice",
+      "line": 1082,
+      "docstring": "Keep legacy tool-choice behavior separate from native project ownership.",
+      "file_sha256": "eb8fbcf016fc4e08312f2e692854a65e3645ecf5ff7e8a9f048acb46874b5bb4"
+    },
+    {
+      "path": "backend/tests/engine/test_loop_engine.py",
+      "symbol": "TestForcedToolChoice._make_agent",
+      "line": 1084,
+      "docstring": "Bind the controlled legacy actor to the seeded project without model inference.",
+      "file_sha256": "eb8fbcf016fc4e08312f2e692854a65e3645ecf5ff7e8a9f048acb46874b5bb4"
+    },
+    {
+      "path": "backend/tests/engine/test_loop_engine.py",
+      "symbol": "TestRepetitionDetection",
+      "line": 1229,
+      "docstring": "Verify remaining legacy repetition behavior under an explicit project scope.",
+      "file_sha256": "eb8fbcf016fc4e08312f2e692854a65e3645ecf5ff7e8a9f048acb46874b5bb4"
+    },
+    {
+      "path": "backend/tests/engine/test_loop_engine.py",
+      "symbol": "TestRepetitionDetection._make_agent",
+      "line": 1231,
+      "docstring": "Bind repetition fixtures to real legacy project metadata and controlled tools.",
+      "file_sha256": "eb8fbcf016fc4e08312f2e692854a65e3645ecf5ff7e8a9f048acb46874b5bb4"
+    },
+    {
+      "path": "backend/tests/runtime/test_investigation.py",
+      "symbol": "test_legacy_scavenger_excludes_owner_only_and_native_owned_tasks",
+      "line": 284,
+      "docstring": "A documentary handoff must not be rediscovered as missing legacy work indefinitely.",
+      "file_sha256": "a992360e3da49b3674b0ce59f96cd6ca8c2cce3a8d79e247e7d5b65df5e8b267"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_plan_execution.py",
+      "symbol": "test_owned_accepted_plan_dispatches_root_then_exact_evidence_to_private_development",
+      "line": 14,
+      "docstring": "One owner execution dispatches planner, author and developer, plus a separate exact-subject reviewer for the scientific case; only explicit research acceptance releases the dependent and no code is accepted or published.",
+      "file_sha256": "0c856a093bbcab2d069bc807059ddc4e57095b1f07aef17e3515425436b1f040"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "admitted_project",
+      "line": 8,
+      "docstring": "Persist actual native intent, leaving the separate legacy-looking code task without a native run.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_native_project_fences_other_task_legacy_claim_without_minting_work",
+      "line": 19,
+      "docstring": "Project owner evidence also excludes a fresh task; task ID absence must not reopen an old engine in the same project.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_actual_old_engine_refuses_native_project_before_model_configuration",
+      "line": 34,
+      "docstring": "The old model entry cannot spend another turn merely because it was called outside the migrated flow handlers.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_actual_old_engine_refuses_native_project_before_model_configuration.forbidden",
+      "line": 42,
+      "docstring": "Fail if provider setup is reached before owner exclusion.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_native_project_generic_events_are_owner_hints_not_inference",
+      "line": 62,
+      "docstring": "An unscoped message or inferred stagnation/completion must not choose a task or run a legacy team lead.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_native_project_generic_events_are_owner_hints_not_inference.forbidden",
+      "line": 70,
+      "docstring": "Detect a competing inference or message side effect.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_dead_legacy_worker_and_shutdown_cannot_reset_native_project_tasks",
+      "line": 96,
+      "docstring": "Legacy heartbeat/thread assumptions cannot clear a native project's task assignment or put work back in a claim queue.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_actual_legacy_starts_do_not_open_workers_in_native_project",
+      "line": 116,
+      "docstring": "Native project exclusion happens before listener/roster/thread startup or stale-event clearing.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_actual_legacy_starts_do_not_open_workers_in_native_project.forbidden",
+      "line": 125,
+      "docstring": "Catch new legacy worker/listener construction.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_old_engine_rechecks_after_a_model_reply_before_using_its_output",
+      "line": 148,
+      "docstring": "Native ownership appearing during a legacy model call stops interpretation/tools and the next loop instead of treating old context as fresh authority.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_old_engine_rechecks_after_a_model_reply_before_using_its_output.reply",
+      "line": 165,
+      "docstring": "Commit real native intent while the one controlled legacy call is in flight.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_agent_stop_timeout_retains_the_live_thread_until_actual_exit",
+      "line": 190,
+      "docstring": "A join timeout cannot erase the only live worker reference or be reported as physical closure.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_agent_stop_timeout_retains_the_live_thread_until_actual_exit.held_worker",
+      "line": 200,
+      "docstring": "Remain physically alive after a stop request until this test releases it.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_legacy_event_ack_preserves_message_and_cannot_call_a_handler_in_native_project",
+      "line": 222,
+      "docstring": "Completing a documentary hint in the old queue is distinct from doing task work or promoting the old message to an owner instruction.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_foreign_stored_event_cannot_be_acknowledged_using_a_native_project_label",
+      "line": 262,
+      "docstring": "The stored project/recipient outrank an incoming event dictionary's claimed context.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_flow_stop_keeps_actual_main_thread_registered_until_it_exits",
+      "line": 292,
+      "docstring": "Stopping listeners does not close a held main flow; native admission must still see the registered live thread after a bounded join.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_flow_stop_keeps_actual_main_thread_registered_until_it_exits.kickoff",
+      "line": 302,
+      "docstring": "Simulate an existing legacy main-flow operation that has not returned yet.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_loop_manager_does_not_erase_a_worker_that_ignored_stop_timeout",
+      "line": 343,
+      "docstring": "The project registry and manager retain the live child until a later observation proves thread exit.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_legacy_stop_signal_during_model_reply_blocks_following_effects",
+      "line": 377,
+      "docstring": "A cooperative stop is checked after the current request returns, without treating its completion as permission to continue.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_legacy_stop_signal_during_model_reply_blocks_following_effects.reply",
+      "line": 396,
+      "docstring": "Return from one controlled request after the owning controller requested stop.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_legacy_dispatch_uses_stored_message_and_clears_an_inherited_task_scope",
+      "line": 414,
+      "docstring": "An incoming dictionary and prior thread context cannot replace stored user evidence or invent the task of a project-only message.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_legacy_dispatch_uses_stored_message_and_clears_an_inherited_task_scope.read_only_handler",
+      "line": 442,
+      "docstring": "Inspect actual evidence and scope without model work or mutations.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_direct_native_request_waits_for_observed_legacy_thread_exit",
+      "line": 481,
+      "docstring": "Task-level native submission cannot bypass live legacy controllers; retry starts only the original queued request after the actual thread exits.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_failed_legacy_liveness_observation_never_grants_native_start",
+      "line": 540,
+      "docstring": "An observation error is unresolved closure, not proof that no competing controller remains.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_failed_legacy_liveness_observation_never_grants_native_start.unknown",
+      "line": 552,
+      "docstring": "Simulate an unavailable registered-controller observation.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_project_stop_api_discloses_unclosed_legacy_controller",
+      "line": 564,
+      "docstring": "The public stop response reports pending legacy closure instead of turning a paused label into evidence that a worker ended.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_owner_cutover.py",
+      "symbol": "test_wired_legacy_callbacks_remain_registered_until_explicit_unsubscribe",
+      "line": 595,
+      "docstring": "An empty listener-thread list is insufficient while its project scheduling callbacks are still wired.",
+      "file_sha256": "7cf41d0d90de4586cb65f0fef58bbdc690d5cad11998c14f2f55716b5b91054e"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

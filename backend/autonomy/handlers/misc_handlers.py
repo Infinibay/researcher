@@ -15,12 +15,18 @@ logger = logging.getLogger(__name__)
 class MessageHandler(EventHandler):
     """Handles message_received and user_message_received events."""
 
-    def execute(self, event: dict[str, Any]) -> None:
+    def execute(self, event: dict[str, Any]) -> dict[str, Any] | None:
+        """Hand off a natively admitted project before legacy dispatch, inferred intervention or completion."""
         from backend.flows.helpers.message_dispatcher import dispatch_message
 
         payload = _parse_payload(event)
         project_id = event["project_id"]
         agent_id = event["agent_id"]
+        from backend.runtime.legacy_handoff import legacy_project_handoff
+
+        handoff = legacy_project_handoff(project_id)
+        if handoff is not None:
+            return handoff
         from_agent = payload.get("from_agent", "unknown")
         message = payload.get("message", "")
         thread_id = payload.get("thread_id")
@@ -35,12 +41,18 @@ class MessageHandler(EventHandler):
 class HealthCheckHandler(EventHandler):
     """Handles stagnation/health events -> Team Lead intervention."""
 
-    def execute(self, event: dict[str, Any]) -> None:
+    def execute(self, event: dict[str, Any]) -> dict[str, Any] | None:
+        """Hand off a natively admitted project before legacy dispatch, inferred intervention or completion."""
         from backend.flows.helpers import log_flow_event
         from backend.flows.helpers.stagnation import get_stuck_tasks
 
         project_id = event["project_id"]
         agent_id = event["agent_id"]
+        from backend.runtime.legacy_handoff import legacy_project_handoff
+
+        handoff = legacy_project_handoff(project_id)
+        if handoff is not None:
+            return handoff
 
         logger.info(
             "HealthCheckHandler: running health check (agent=%s, project=%d)",
@@ -98,12 +110,18 @@ class HealthCheckHandler(EventHandler):
 class ProgressEvalHandler(EventHandler):
     """Handles evaluate_progress and all_tasks_done events."""
 
-    def execute(self, event: dict[str, Any]) -> None:
+    def execute(self, event: dict[str, Any]) -> dict[str, Any] | None:
+        """Hand off a natively admitted project before legacy dispatch, inferred intervention or completion."""
         from backend.flows.helpers import send_agent_message
 
         payload = _parse_payload(event)
         project_id = event["project_id"]
         event_type = event["event_type"]
+        from backend.runtime.legacy_handoff import legacy_project_handoff
+
+        handoff = legacy_project_handoff(project_id)
+        if handoff is not None:
+            return handoff
 
         if event_type == "all_tasks_done":
             self._handle_all_tasks_done(project_id)

@@ -1,0 +1,25 @@
+{
+  "base_commit": "f3e184f",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "c1411535d1d992089789c582b9819f5b6d454a628b7256af1caeee059dd48d50",
+  "observed": {
+    "tests_passed": 417,
+    "failures": [],
+    "skipped": 0,
+    "backend_modules_loaded": 435,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "controlled_native_turns_in_owned_fixture": 4,
+    "actual_kernel_owned_fixture": true,
+    "network": "Disabled except Unix sockets",
+    "semantic_assets": "Explicit prepared pinned public offline assets outside wheel",
+    "generation_and_ken": "Controlled physical owned fixture; no real model inference"
+  },
+  "backend_tree": {
+    "matching_source_files": 773,
+    "sha256": "7ca6c195eae03675820afa5cd40e586ec4013282faa37288fda10d4407a7b799"
+  },
+  "bootstrap": "Python3.12 -I -S with explicit installed dependency path and original host venv prefix restored; backend import paths remain restricted to extracted wheel.",
+  "excluded_known_failure": "Legacy invalid-transition text assertion recorded in the prior global baseline also excluded. Development inverse40/41/42 tests refuse later schemas43\u201353: test_unused_review_inverse_preserves_closed_author_and_candidate, test_unused_native_review_inverse_preserves_existing_packet, test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history[frozen_author]. Prior terminal-owner source receipt observes these guards with schemas43\u201349; current53selected run excludes them. Inverses43\u201353 remain required; guard not weakened (DD003).",
+  "limits": "Extracted backend wheel plus installed dependencies and explicit prepared offline assets; not a clean full host installation or an inference-quality trial."
+}

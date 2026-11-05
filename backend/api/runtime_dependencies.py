@@ -12,6 +12,13 @@ from backend.runtime.service import RuntimeService, WorkspaceRegistry
 from backend.runtime.sqlite_runs import SQLiteRunStore
 
 
+def _legacy_project_active(project_id):
+    """Observe actual registered legacy threads for every serving native factory; absence of a flow label alone is insufficient."""
+    from backend.api.flow_manager import flow_manager
+
+    return flow_manager.is_project_running(project_id)
+
+
 def configured_runtime(live_grants, *, app=None):
     """No environment setting => product reads remain available, admission is 503.
 
@@ -79,6 +86,7 @@ def configured_runtime(live_grants, *, app=None):
         live_grants,
         native,
         workspaces=WorkspaceRegistry(database, source_root),
+        legacy_active=_legacy_project_active,
         control_root=control,
         limits=ExecutionLimits(
             **config.get(
@@ -232,6 +240,7 @@ def _configured_owned(config, path, live_grants, app):
         live_grants,
         native,
         workspaces=WorkspaceRegistry(database, source_root),
+        legacy_active=_legacy_project_active,
         control_root=control,
         max_concurrent=1,
         limits=ExecutionLimits(

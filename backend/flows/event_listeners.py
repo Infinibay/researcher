@@ -511,12 +511,19 @@ class ListenerManager:
     """
 
     def __init__(self, project_id: int, bus: EventBus | None = None) -> None:
+        """Track polling threads and scheduling subscriptions separately so neither is mistaken for completed teardown."""
         self.project_id = project_id
         self.bus = bus or event_bus
         self._listeners: list[BaseEventListener] = []
+        self._wired = False
 
-    def start_all(self) -> None:
-        """Start all default listeners for the project."""
+    def start_all(self) -> dict[str, Any] | None:
+        """Start legacy scheduling listeners only before native project admission."""
+        from backend.runtime.legacy_handoff import legacy_project_handoff
+
+        handoff = legacy_project_handoff(self.project_id)
+        if handoff is not None:
+            return handoff
         from backend.communication.listeners import CommunicationLoopListener
 
         self._listeners = [
@@ -541,6 +548,11 @@ class ListenerManager:
         Agent work routing is handled by AgentLoop via persistent DB events.
         These handlers create agent_events for conditions detected by listeners.
         """
+        from backend.runtime.legacy_handoff import legacy_project_handoff
+
+        if legacy_project_handoff(self.project_id) is not None or self._wired:
+            return
+        self._wired = True
         self.bus.subscribe("task_created", self._create_task_available_events)
         self.bus.subscribe("stagnation_detected", self._create_stagnation_events)
         self.bus.subscribe("all_tasks_done", self._create_all_done_events)
@@ -718,12 +730,34 @@ class ListenerManager:
             ),
         )
 
+    @property
+    def is_running(self) -> bool:
+        """Observe actual registered listener threads, including checks still returning after Stop."""
+        return self._wired or any(listener.is_running for listener in self._listeners)
+
     def stop_all(self) -> None:
-        """Stop all running listeners."""
+        """Unsubscribe future scheduling and attempt every stop; retain unresolved listeners instead of losing closure evidence."""
+        for event_type, callback in (
+            ("task_created", self._create_task_available_events),
+            ("stagnation_detected", self._create_stagnation_events),
+            ("all_tasks_done", self._create_all_done_events),
+            ("waiting_for_research", self._create_waiting_events),
+            ("task_rejected", self._create_task_rejected_events),
+            ("communication_loop_detected", self._handle_communication_loop),
+        ):
+            self.bus.unsubscribe(event_type, callback)
+        self._wired = False
+        unresolved = []
         for listener in self._listeners:
-            listener.stop()
-        self._listeners.clear()
-        logger.info("Stopped all event listeners for project %d", self.project_id)
+            try:
+                listener.stop()
+            except Exception:
+                unresolved.append(listener)
+                logger.warning("Legacy listener stop unverified for project %d", self.project_id, exc_info=True)
+        self._listeners = unresolved
+        if unresolved:
+            raise TimeoutError("Registered legacy listener closure remains unverified")
+        logger.info("Stopped registered event listeners for project %d", self.project_id)
 
     def add_listener(self, listener: BaseEventListener) -> None:
         """Add and start a custom listener."""

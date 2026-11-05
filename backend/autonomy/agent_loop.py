@@ -73,8 +73,13 @@ class AgentLoop:
         self._hour_start = 0.0
         self._max_actions_per_hour = settings.AGENT_LOOP_MAX_ACTIONS_PER_HOUR
 
-    def start(self) -> None:
-        """Start the agent loop in a daemon thread."""
+    def start(self) -> dict[str, Any] | None:
+        """Start only a remaining legacy project's worker; native history is an exclusion, never restart authority."""
+        from backend.runtime.legacy_handoff import legacy_project_handoff
+
+        handoff = legacy_project_handoff(self.project_id)
+        if handoff is not None:
+            return handoff
         if self._thread is not None and self._thread.is_alive():
             logger.warning("AgentLoop already running for %s", self.agent_id)
             return
@@ -93,29 +98,34 @@ class AgentLoop:
             self.agent_id, self.role, self._base_interval,
         )
 
-    def stop(self) -> None:
-        """Signal the loop to stop and wait for it."""
+    def stop(self) -> bool:
+        """Request stop and observe a bounded join; retain a live thread reference and refuse to claim closure after timeout."""
         self._stop_event.set()
         if self._thread is not None:
             self._thread.join(timeout=5.0)
             if self._thread.is_alive():
-                logger.warning("AgentLoop thread for %s did not stop in time", self.agent_id)
+                logger.warning("AgentLoop thread for %s still alive after stop request", self.agent_id)
+                return False
             self._thread = None
-
-        # Update loop state to stopped
         try:
             save_loop_state(self.agent_id, self.project_id, None, "stopped")
         except Exception:
-            pass
+            logger.debug("Could not save stopped legacy loop state", exc_info=True)
         logger.info("AgentLoop stopped for %s", self.agent_id)
+        return True
 
     def pause(self) -> None:
         """Pause the loop — it will idle until resumed."""
         self._pause_event.clear()
         logger.info("AgentLoop paused for %s", self.agent_id)
 
-    def resume(self) -> None:
-        """Resume a paused loop."""
+    def resume(self) -> dict[str, Any] | None:
+        """Resume legacy polling only while the explicit project has no native admission history."""
+        from backend.runtime.legacy_handoff import legacy_project_handoff
+
+        handoff = legacy_project_handoff(self.project_id)
+        if handoff is not None:
+            return handoff
         self._pause_event.set()
         logger.info("AgentLoop resumed for %s", self.agent_id)
 
@@ -130,11 +140,18 @@ class AgentLoop:
     def _run(self) -> None:
         """Main entry point: recover then loop."""
         try:
+            from backend.runtime.legacy_handoff import legacy_project_handoff
+
+            if legacy_project_handoff(self.project_id) is not None:
+                return
             self._recover_in_progress()
         except Exception:
             logger.exception("AgentLoop: recovery failed for %s", self.agent_id)
 
-        self._loop()
+        from backend.runtime.legacy_scope import legacy_stop_scope
+
+        with legacy_stop_scope(self.project_id, self._stop_event):
+            self._loop()
 
     def _recover_in_progress(self) -> None:
         """On startup: check for an event that was in_progress when we crashed."""
@@ -184,6 +201,10 @@ class AgentLoop:
             if self._stop_event.is_set():
                 break
 
+            from backend.runtime.legacy_handoff import legacy_project_handoff
+
+            if legacy_project_handoff(self.project_id) is not None:
+                break
             # Reset hourly counter
             now = time.monotonic()
             if now - self._hour_start >= 3600:
@@ -271,8 +292,31 @@ class AgentLoop:
 
         logger.info("AgentLoop: loop exited for %s", self.agent_id)
 
-    def _execute_event(self, event: dict[str, Any]) -> None:
-        """Mark in-progress, dispatch to handler, mark completed/failed."""
+    def _execute_event(self, event: dict[str, Any]) -> dict[str, Any] | None:
+        """Validate stored scope first; acknowledge native owner hints separately from doing task work or starting a legacy handler."""
+        stored = get_event_by_id(event["id"])
+        if stored is None or stored["project_id"] != self.project_id or stored["agent_id"] != self.agent_id or event.get("project_id", self.project_id) != self.project_id or event.get("agent_id", self.agent_id) != self.agent_id:
+            raise ValueError("Legacy event project/recipient scope does not match its stored origin")
+        from backend.runtime.legacy_handoff import legacy_event_handoff, legacy_project_handoff
+
+        resume = event.get("_resume_state")
+        if resume is not None:
+            retained = stored.get("progress_json")
+            retained = json.loads(retained) if isinstance(retained, str) else retained
+            if not isinstance(retained, dict) or retained.get("loop_state") != resume:
+                raise ValueError("Legacy resume state does not match its stored event scope")
+        event = dict(stored)
+        if resume is not None:
+            event["_resume_state"] = resume
+        raw = event.get("payload_json") or "{}"
+        payload = json.loads(raw) if isinstance(raw, str) else raw
+        if not isinstance(payload, dict):
+            raise ValueError("Stored legacy event payload must be an object")
+        task_id = payload.get("task_id")
+        handoff = legacy_event_handoff(self.project_id, task_id) if task_id is not None else legacy_project_handoff(self.project_id)
+        if handoff is not None:
+            update_event_status(event["id"], "completed", progress={"owner_handoff": handoff, "task_completed": False})
+            return handoff
         event_type = event.get("event_type", "unknown")
 
         handler = self.handlers.get(event_type)
@@ -292,6 +336,11 @@ class AgentLoop:
         from backend.tools.base.context import set_context
 
         ctx_kwargs: dict[str, Any] = {
+            "project_id": self.project_id,
+            "task_id": task_id,
+            "agent_run_id": None,
+            "workspace_path": None,
+            "resume_state": resume,
             "agent_id": self.agent_id,
             "event_id": event["id"],
         }
@@ -301,7 +350,10 @@ class AgentLoop:
         set_context(**ctx_kwargs)
 
         try:
-            handler.execute(event)
+            from backend.runtime.legacy_scope import legacy_stop_scope
+
+            with legacy_stop_scope(self.project_id, self._stop_event):
+                handler.execute(event)
             update_event_status(event["id"], "completed")
             self._consecutive_errors = 0
             logger.info(
@@ -357,8 +409,13 @@ class AgentLoopManager:
         self._watchdog_thread: threading.Thread | None = None
         self._watchdog_stop = threading.Event()
 
-    def start_all(self) -> None:
-        """Query the roster and start an AgentLoop for each eligible agent."""
+    def start_all(self) -> dict[str, Any] | None:
+        """Start a remaining legacy roster; a native project gets an owner hint before any worker or watchdog."""
+        from backend.runtime.legacy_handoff import legacy_project_handoff
+
+        handoff = legacy_project_handoff(self.project_id)
+        if handoff is not None:
+            return handoff
         roster = self._get_roster()
 
         for entry in roster:
@@ -398,33 +455,49 @@ class AgentLoopManager:
             loop.pause()
         logger.info("AgentLoopManager: paused all loops for project %d", self.project_id)
 
-    def resume_all(self) -> None:
-        """Resume all paused agent loops."""
+    def resume_all(self) -> dict[str, Any] | None:
+        """Never resume a competing legacy producer after native project admission."""
+        from backend.runtime.legacy_handoff import legacy_project_handoff
+
+        handoff = legacy_project_handoff(self.project_id)
+        if handoff is not None:
+            return handoff
         for loop in self._loops.values():
             loop.resume()
         logger.info("AgentLoopManager: resumed all loops for project %d", self.project_id)
 
-    def stop(self) -> None:
-        """Stop all agent loops (signal + join)."""
+    def stop(self) -> bool:
+        """Request stop and report observed registered-thread closure, retaining any live workers."""
         self.stop_signal()
-        self.stop_join()
+        return self.stop_join()
 
     def stop_signal(self) -> None:
-        """Signal all loops to stop (non-blocking)."""
+        """Signal every registered worker first; this does not assert thread or child-process closure."""
         self._watchdog_stop.set()
         for loop in self._loops.values():
             loop._stop_event.set()
 
-    def stop_join(self) -> None:
-        """Join all loop threads and clean up. Call after stop_signal()."""
+    @property
+    def is_running(self) -> bool:
+        """Observe actual worker/watchdog liveness even after stop was requested."""
+        return bool(self._watchdog_thread is not None and self._watchdog_thread.is_alive()) or any(loop.is_running for loop in self._loops.values())
+
+    def stop_join(self) -> bool:
+        """Bound each join and retain live references/registry membership until actual thread exit; no timeout becomes a closure receipt."""
         if self._watchdog_thread is not None:
             self._watchdog_thread.join(timeout=5.0)
-            self._watchdog_thread = None
-        for agent_id, loop in self._loops.items():
-            loop.stop()
-        self._loops.clear()
-        _loop_managers.pop(self.project_id, None)
-        logger.info("AgentLoopManager stopped for project %d", self.project_id)
+            if not self._watchdog_thread.is_alive():
+                self._watchdog_thread = None
+        for agent_id, loop in list(self._loops.items()):
+            if loop.stop():
+                self._loops.pop(agent_id, None)
+        if self.is_running:
+            logger.warning("Legacy workers still stopping for project %d", self.project_id)
+            return False
+        if _loop_managers.get(self.project_id) is self:
+            _loop_managers.pop(self.project_id, None)
+        logger.info("AgentLoopManager registered threads stopped for project %d", self.project_id)
+        return True
 
     def _watchdog_loop(self) -> None:
         """Periodically recover zombie events and dead-agent tasks."""
@@ -467,6 +540,11 @@ class AgentLoopManager:
         timeout_seconds = settings.AGENT_LOOP_EVENT_TIMEOUT
 
         def _reset(conn: sqlite3.Connection) -> list[tuple[int, str]]:
+            """Keep a native project's old event history intact; timeout is not native execution recovery."""
+            from backend.runtime.legacy_handoff import native_project_handoff
+
+            if native_project_handoff(conn, self.project_id) is not None:
+                return []
             rows = conn.execute(
                 """SELECT id, agent_id FROM agent_events
                    WHERE project_id = ?

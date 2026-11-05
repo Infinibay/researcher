@@ -231,3 +231,19 @@ por el contrato público y el recorrido nativo con revisión independiente.
 Siguen pendientes AgentLoop/MessageHandler/listeners/FlowManager, los tipos restantes
 y la exclusión física global; no se deduce cierre de la ausencia en un registro.
 [Contrato y evaluación](native-scientific-research.md).
+
+
+## Activadores antiguos del proyecto acotados — 2026-11-05
+
+El historial real de admisión nativa ahora excluye el arranque/reanudación de
+AgentLoop/FlowManager/listeners, mensajes/salud/progreso, el engine antiguo y la
+recuperación del proyecto entero, incluidas tareas sin ejecución propia. El
+scavenger no reofrece sus tareas ni elimina worktrees. El evento guardado fija el
+contexto; su acuse no completa una tarea ni crea autoridad nativa.
+
+La parada conserva referencias a hilos vivos y callbacks conectados. El despacho
+nativo consulta los controladores registrados y conserva la solicitud en espera
+si su cierre no se pudo observar. No equivale a exclusión global/atómica entre
+procesos ni prueba el cierre de productores desconocidos. Desarrollo/revisión,
+adopción explícita de candidatos previos, otros tipos y retirada de dependencias
+siguen pendientes. [Contrato, evidencia y límites](native-project-owner-cutover.md).

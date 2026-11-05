@@ -88,6 +88,7 @@ def find_dead_agent_tasks(project_id: int) -> list[dict[str, Any]]:
     timeout = settings.AGENT_LOOP_DEAD_AGENT_TIMEOUT
 
     def _query(conn: sqlite3.Connection) -> list[dict[str, Any]]:
+        """Return scoped legacy candidates only; native project/task ownership is not inferred from a heartbeat."""
         rows = conn.execute(
             """SELECT t.id AS task_id, t.title AS task_title,
                       t.assigned_to AS agent_id,
@@ -104,7 +105,9 @@ def find_dead_agent_tasks(project_id: int) -> list[dict[str, Any]]:
                  )""",
             (project_id, timeout),
         ).fetchall()
-        return [dict(r) for r in rows]
+        from backend.runtime.legacy_handoff import native_owner_handoff
+
+        return [dict(row) for row in rows if native_owner_handoff(conn, project_id, row["task_id"]) is None]
 
     try:
         return execute_with_retry(_query)
@@ -120,6 +123,14 @@ def recover_dead_agent_task(task_id: int, agent_id: str, reason: str = "dead_age
     """
 
     def _recover(conn: sqlite3.Connection) -> bool:
+        """Resolve the actual task project and reject native-owned recovery in the same write transaction."""
+        from backend.runtime.legacy_handoff import native_owner_handoff
+
+        conn.execute("BEGIN IMMEDIATE")
+        task = conn.execute("SELECT project_id FROM tasks WHERE id=?", (task_id,)).fetchone()
+        if task is None or native_owner_handoff(conn, task[0], task_id) is not None:
+            conn.rollback()
+            return False
         # Only reset if still in_progress and assigned to this agent
         cursor = conn.execute(
             """UPDATE tasks SET status = 'pending', assigned_to = NULL

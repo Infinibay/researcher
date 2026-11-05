@@ -1,0 +1,23 @@
+{
+  "base_commit": "f3e184f",
+  "scope": "Changed Python files plus new legacy_scope and project-owner tests; same project Ruff configuration. Compare path/code/message counts, ignoring relocated line numbers.",
+  "current_warnings": 54,
+  "baseline_warnings": 66,
+  "inherited_warnings": 50,
+  "introduced": [
+    {
+      "path": "backend/autonomy/agent_loop.py",
+      "code": "TRY004",
+      "message": "Prefer `TypeError` exception for invalid type",
+      "count": 1
+    },
+    {
+      "path": "backend/engine/loop_engine.py",
+      "code": "I001",
+      "message": "Import block is un-sorted or un-formatted",
+      "count": 3
+    }
+  ],
+  "resolved_warning_count": 16,
+  "note": "Import/style warnings are deferred with the retiring legacy consumers; no general style cleanup in this delivery."
+}

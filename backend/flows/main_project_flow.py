@@ -61,6 +61,10 @@ class MainProjectFlow(Flow[ProjectState]):
     @start()
     def initialize_project(self):
         """Load or create a project and store state for routing."""
+        if self.state.project_id:
+            from backend.runtime.lifecycle import require_legacy_execution_project
+
+            require_legacy_execution_project(self.state.project_id)
         logger.info("MainProjectFlow: initialize_project (project_id=%d)", self.state.project_id)
 
         if self.state.project_id > 0:

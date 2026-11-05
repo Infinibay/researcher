@@ -140,6 +140,8 @@ def _summarize_step(
     state: LoopState,
     step_result: StepResult,
     llm_params: dict[str, Any],
+    *,
+    call_model=None,
 ) -> dict[str, Any]:
     """Use a dedicated LLM call to produce a structured step summary.
 
@@ -147,6 +149,8 @@ def _summarize_step(
     discovered, pending, anti_patterns.
     """
     from backend.config.settings import settings
+    from backend.runtime.lifecycle import NativeOwnerRequired
+    from backend.engine.base import AgentKilledError
 
     if not settings.LOOP_SUMMARIZER_ENABLED:
         return {
@@ -180,7 +184,7 @@ def _summarize_step(
     )
 
     try:
-        resp = call_llm(
+        resp = (call_model or call_llm)(
             llm_params,
             [
                 {"role": "system", "content": "You are a concise step summarizer. Respond with JSON only."},
@@ -202,6 +206,8 @@ def _summarize_step(
                 "pending": data.get("pending", ""),
                 "anti_patterns": data.get("anti_patterns", ""),
             }
+    except (NativeOwnerRequired, AgentKilledError):
+        raise
     except Exception as exc:
         logger.debug("Step summarizer failed: %s", exc)
 
@@ -304,6 +310,13 @@ class LoopEngine(AgentEngine):
         summarizer_enabled: bool | None = None,
         identity_override: str | None = None,
     ) -> str:
+        """Execute only for an explicitly identified legacy project; native admission excludes competing model work before provider setup."""
+        from backend.runtime.lifecycle import require_legacy_execution_project
+
+        from backend.runtime.legacy_scope import check_legacy_stop
+
+        check_legacy_stop(agent.project_id)
+        require_legacy_execution_project(agent.project_id)
         from backend.config.llm import get_litellm_params
         from backend.config.settings import settings
 
@@ -323,6 +336,26 @@ class LoopEngine(AgentEngine):
 
         # File change tracker
         file_tracker = FileChangeTracker()
+
+        def ownership_check():
+            """Withdraw the old tracker and producer at a boundary if actual project ownership changed."""
+            from backend.engine.base import AgentKilledError
+            from backend.runtime.lifecycle import NativeOwnerRequired
+
+            try:
+                check_legacy_stop(agent.project_id)
+                require_legacy_execution_project(agent.project_id)
+            except (NativeOwnerRequired, AgentKilledError):
+                file_tracker.deactivate()
+                raise
+
+        def legacy_model_call(*args, **kwargs):
+            """Fence provider calls and their replies; a completed old request does not restore authority to interpret or act."""
+            ownership_check()
+            response = call_llm(*args, **kwargs)
+            ownership_check()
+            return response
+
         self._last_file_tracker = file_tracker
 
         # Context budget
@@ -453,7 +486,7 @@ class LoopEngine(AgentEngine):
                 # ── LLM call ──────────────────────────────────────
                 if manual_tc:
                     try:
-                        response = call_llm(llm_params, messages)
+                        response = legacy_model_call(llm_params, messages)
                     except Exception:
                         raise
 
@@ -488,7 +521,7 @@ class LoopEngine(AgentEngine):
                 else:
                     iter_tools = planning_schemas if is_planning else tool_schemas
                     try:
-                        response = call_llm(
+                        response = legacy_model_call(
                             llm_params, messages, iter_tools, tool_choice="required",
                         )
                     except Exception as exc:
@@ -620,6 +653,7 @@ class LoopEngine(AgentEngine):
                         tool_results_text: list[str] = []
 
                         for batch in batches:
+                            ownership_check()
                             # Capture pre-content for file change tracking
                             pre_contents: dict[str, str | None] = {}
                             for tc in batch:
@@ -863,7 +897,7 @@ class LoopEngine(AgentEngine):
                 step_result = StepResult(summary="Step completed.", status="continue")
 
             # --- Step summarizer (dedicated LLM call for structured summary) ---
-            summary_data = _summarize_step(messages, desc, state, step_result, llm_params)
+            summary_data = _summarize_step(messages, desc, state, step_result, llm_params, call_model=legacy_model_call)
 
             # --- Plan management ---
             if not state.plan.steps:
@@ -952,6 +986,7 @@ class LoopEngine(AgentEngine):
                 return self._apply_guardrail(
                     result, guardrail, guardrail_max_retries,
                     llm_params, system_prompt, desc, expected, state, tool_schemas, tool_dispatch,
+                    call_model=legacy_model_call, ownership_check=ownership_check,
                 )
 
             if step_result.status == "blocked":
@@ -980,6 +1015,7 @@ class LoopEngine(AgentEngine):
                     return self._apply_guardrail(
                         result, guardrail, guardrail_max_retries,
                         llm_params, system_prompt, desc, expected, state, tool_schemas, tool_dispatch,
+                    call_model=legacy_model_call, ownership_check=ownership_check,
                     )
             else:
                 consecutive_all_done = 0
@@ -1038,8 +1074,16 @@ class LoopEngine(AgentEngine):
         state: LoopState,
         tool_schemas: list[dict[str, Any]],
         tool_dispatch: dict[str, Any],
+        *,
+        call_model=None,
+        ownership_check=None,
     ) -> str:
-        """Validate result with guardrail; retry with feedback if it fails."""
+        """Validate remaining legacy output while preserving its project owner check across retries, replies and tool effects."""
+        from backend.runtime.lifecycle import NativeOwnerRequired
+        from backend.engine.base import AgentKilledError
+
+        if ownership_check is not None:
+            ownership_check()
         if guardrail is None:
             return result
 
@@ -1047,6 +1091,8 @@ class LoopEngine(AgentEngine):
         max_per_action = settings.LOOP_MAX_TOOL_CALLS_PER_ACTION
 
         for attempt in range(max_retries):
+            if ownership_check is not None:
+                ownership_check()
             try:
                 validation = guardrail(result)
                 if isinstance(validation, tuple):
@@ -1071,7 +1117,7 @@ class LoopEngine(AgentEngine):
                     step_text = ""
                     action_tool_calls = 0
                     while action_tool_calls < max_per_action:
-                        response = call_llm(
+                        response = (call_model or call_llm)(
                             llm_params, messages,
                             tool_schemas if tool_schemas else None,
                         )
@@ -1105,6 +1151,8 @@ class LoopEngine(AgentEngine):
                                         "content": '{"status": "acknowledged"}',
                                     })
                                     break
+                                if ownership_check is not None:
+                                    ownership_check()
                                 tc_result = execute_tool_call(
                                     tool_dispatch,
                                     tc.function.name,
@@ -1126,6 +1174,8 @@ class LoopEngine(AgentEngine):
                 else:
                     if validation:
                         return result
+            except (NativeOwnerRequired, AgentKilledError):
+                raise
             except Exception as exc:
                 logger.warning("Guardrail raised exception: %s", exc)
 

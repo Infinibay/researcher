@@ -3173,6 +3173,28 @@
         "docs/modernization/scientific-results.json",
         "docs/modernization/scientific-packaging.json"
       ]
+    },
+    "native_project_owner_cutover": {
+      "status": "registered_legacy_project_boundaries_connected_global_retirement_pending",
+      "evidence": [
+        "backend/runtime/legacy_handoff.py",
+        "backend/runtime/lifecycle.py",
+        "backend/runtime/legacy_scope.py",
+        "backend/api/flow_manager.py",
+        "backend/api/runtime_dependencies.py",
+        "backend/autonomy/agent_loop.py",
+        "backend/flows/event_listeners.py",
+        "backend/runtime/service.py",
+        "backend/tests/runtime/test_project_owner_cutover.py",
+        "docs/architecture/native-project-owner-cutover.md",
+        "docs/modernization/project-owner-results.json",
+        "docs/modernization/project-owner-packaging.json"
+      ],
+      "remaining": [
+        "Atomic global legacy exclusion and actual remaining domain/auxiliary inference retirement.",
+        "Explicit adoption of old/unaccepted work and private candidate files, retained review/acceptance/publication.",
+        "All broader visual, prompt, model, human comprehension, installation/restore/inverse/global-suite and final review requirements."
+      ]
     }
   }
 }

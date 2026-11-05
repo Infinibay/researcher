@@ -261,11 +261,13 @@ async def stop_project(project_id: int, request: Request):
         raise ProjectNotFound(project_id)
     runtime = request.app.state.runtime_service
     runs = await runtime.stop_project(project_id) if runtime is not None else []
+    legacy = None
     if flow_manager.is_project_running(project_id):
-        await asyncio.to_thread(flow_manager.stop_project_flow, project_id)
+        legacy = await asyncio.to_thread(flow_manager.stop_project_flow, project_id)
     await asyncio.to_thread(update_project_status, project_id, "paused")
     return {
-        "message": "Detención solicitada; consulta los intentos para comprobar su cierre.",
+        "message": "Detención solicitada; el cierre de una ejecución anterior del proyecto sigue sin comprobarse." if legacy is not None and not legacy["registered_workers_closed"] else "Detención solicitada; consulta los intentos para comprobar su cierre.",
+        "legacy_control": legacy,
         "status": "paused",
         "runs": [asdict(run) for run in runs],
     }
