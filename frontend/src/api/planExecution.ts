@@ -3,7 +3,7 @@ import {fetchApi} from './client.ts'
 import {ownerActionStore} from './ownerActions.ts'
 
 /** Original causal data is evidence, not an agent command extracted from chat. */
-export interface WorkDelivery {delivery_id:string;task_id:number;run_id:string|null;status:string;issue:{code:string;next_action:string}|null;handoff:{kind:'work.request';cause:{plan_run_id:string};prerequisites:{task_id:number;run_id:string;kind:string;context_version:number}[]}|null}
+export interface WorkDelivery {delivery_id:string;predecessor_delivery_id:string|null;current:boolean;task_id:number;run_id:string|null;status:string;issue:{code:string;next_action:string}|null;handoff:{kind:'work.request';cause:{plan_run_id:string};prerequisites:{task_id:number;run_id:string;kind:string;context_version:number}[]}|null}
 /** A current graph context and its original execution remain distinct from plan acceptance. */
 export interface ExecutionState {project_id:number;task_id:number;plan_run_id:string;manifest_sha256:string|null;manifest:{tasks:{task_id:number;title:string;type:string;depends_on:number[]}[]}|null;eligible:boolean;blocked_reason:string;execution:{execution_id:string;operation_key:string;manifest_sha256:string;status:'active'|'paused';current:boolean;deliveries:WorkDelivery[]}|null}
 /** One immutable execute/pause/resume request; controls identify their original execution. */

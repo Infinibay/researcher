@@ -9,7 +9,35 @@ Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: terminal y notas sobre el único owner
+## Etapa actual: sucesoras de entregas interrumpidas
+
+**Resultado:** una decisión owner sobre evidencia exacta crea una sola entrega
+sucesora de un intento cerrado. Conserva run/peers/efectos/consumo/paquete anterior;
+no reinicia sesiones ni presupuestos. Usa el dispatcher existente. Pausa permanece
+pausa; los resultados pasan por revisión/aceptación existentes y los dependientes
+reciben la identidad del nuevo autor. API, terminal y Tareas conectados, con
+solicitudes originales preservadas tras pérdida de respuesta/reinicio/recarga.
+
+**Verificación:** 118pruebas backend dirigidas pasan, con3inversas antiguas
+excluidas y documentadas; 88frontend y compilación pasan. Ensayo broker/kernel/Git
+real con generación/Ken controlados: fallo nativo inicial→cierre→reinicio→sucesora
+investigadora→aceptación→desarrollo privado dependiente; fuente137 intacta y cero
+aceptaciones de código. Seis estados web escritorio/móvil, una sucesora después de
+respuesta perdida/recarga, cero desbordamientos/errores de página/Axe en el panel.
+Migración49→50 preserva bytes y rollback de fallo comprobado. Wheel116PASS,368imports
+sólo paquete y757fuentes coincidentes.52definiciones Python documentadas; sin
+evaluación de inferencia/comprensión real ni suite global verde.
+[Resultados](plan-continuation-results.json), [paquete](plan-continuation-packaging.json),
+[contrato](../architecture/plan-delivery-continuations.md).
+
+**Siguiente bloque principal:** reautorizar explícitamente grafos corregidos y
+continuar la migración real de flows/autonomía/claims/listeners/herramientas al
+único owner. Adopción de runs manuales y candidatos, exclusión física global legacy
+y todos los demás entregables siguen en alcance. Una observación tardía que cambia
+la evidencia de una sucesora autorizada la bloquea; falta el control explícito de
+sustitución de esa autorización aún no emitida. No otra pasada de pulido del panel.
+
+## Etapa anterior: terminal y notas sobre el único owner
 
 **Resultado:** orchestrator y entradas CLI/TUI usan la misma API owner del runtime.
 No crean otro equipo/motor/DB ni hacen DONE/review/merge por texto. Notas owner

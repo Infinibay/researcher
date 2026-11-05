@@ -280,6 +280,7 @@ class OwnerClient:
                 "plan.accept": rf"/api/projects/{p}/runs/{rid}/project-plan/accept",
                 "plan.execute": rf"/api/projects/{p}/runs/{rid}/project-plan/execution",
                 "plan.control": rf"/api/projects/{p}/plan-executions/{rid}/control",
+                "plan.continue": rf"/api/projects/{p}/plan-executions/{rid}/deliveries/{rid}/continuation",
                 "task.start": rf"/api/projects/{p}/tasks/[1-9][0-9]*/runs",
                 "result.accept": rf"/api/projects/{p}/runs/{rid}/result/accept",
                 "code.review": rf"/api/projects/{p}/tasks/[1-9][0-9]*/code-reviews",
@@ -479,6 +480,8 @@ class OwnerClient:
             )
         elif kind in ("plan.execute", "plan.control"):
             valid = reference(data.get("execution_id"))
+        elif kind == "plan.continue":
+            valid = all(reference(data.get(key)) for key in ("execution_id", "predecessor_delivery_id", "previous_run_id", "delivery_id")) and data["delivery_id"] != data["predecessor_delivery_id"] and data.get("inference_started") is False
         elif kind in ("task.start", "code.review"):
             valid = reference(data.get("run_id"))
         elif kind == "note.create":

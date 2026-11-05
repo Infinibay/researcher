@@ -1,0 +1,22 @@
+{
+  "base_commit": "6c95a9f",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "11becc1224718704dae4598f6c6a4e133b35f59e8b49cf16547d0dd547b77f43",
+  "observed": {
+    "tests_passed": 116,
+    "failures": [],
+    "skipped": 0,
+    "backend_modules_loaded": 368,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "network": "Disabled except Unix sockets",
+    "semantic_assets": "Explicit prepared pinned public offline assets outside wheel"
+  },
+  "backend_tree": {
+    "matching_source_files": 757,
+    "sha256": "f713ff5311b0e9b456b45911f87cc7dafd84642df3cb32a260cb8fa050358c79"
+  },
+  "bootstrap": "Python3.12 -I -S with explicit installed dependency path and original host venv prefix restored; backend import paths remain restricted to extracted wheel.",
+  "excluded_known_failure": "Three inverse40/41/42 tests explicitly excluded. Prior terminal-owner source receipt observed their guards refusing schemas43\u201349; current selected schema50 runs do not rerun those cases. Inverses43\u201350/restore remain required (DD003); guard not weakened.",
+  "limits": "Extracted backend wheel plus installed dependencies and explicit prepared offline assets; not a clean full host installation or an inference-quality trial."
+}

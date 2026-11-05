@@ -3012,7 +3012,7 @@
       "remaining": [
         "Explicit dispatch and causal prerequisite handoffs now delivered separately in accepted_plan_execution; original plan acceptance still never auto-starts work",
         "Autonomy/remaining flows/tool consumers and global physical legacy exclusion remain; orchestrator/CLI/TUI entry cut over, advanced parity pending",
-        "Basic project Stop/unissued restart and graph-wide premise invalidation delivered; corrected-graph reauthorization, delivery successor recovery and full lifecycle remain",
+        "Basic project Stop/unissued restart and graph-wide premise invalidation delivered; closed-delivery successors now connected; corrected-graph reauthorization, manual-run adoption and full lifecycle remain",
         "Multi-repo/empty-project planning bootstrap, all task types, native planning history deletion/archive/restore and inverse47",
         "Typed code/source evidence in plan basis, semantic support/representative prompting and human-comprehension evaluations; no claims from lexical quote membership",
         "Remaining6web routes/12page final acceptance and whole-suite/inherited failures/final fresh review still in full goal"
@@ -3041,10 +3041,10 @@
         "Strict owner HTTP and Tasks controls; exact execute/pause/resume packets persist across loss/reload"
       ],
       "remaining": [
-        "Delivery recovery/manual successor lineage and corrected-graph reauthorization remain; orchestrator/CLI/TUI core now uses same owner service, advanced parity pending",
+        "Closed-delivery successors now connected; manual-run adoption and corrected-graph reauthorization remain; orchestrator/CLI/TUI core now uses same owner service, advanced parity pending",
         "Graph-wide conservative invalidation; branch-selective scope and independent-node priority scheduling remain deferred",
         "Code prerequisites currently transfer acceptance/head/tree/diff identities and explicit not-published limitation; complete candidate reading/adoption across code tasks remains integration work",
-        "Legacy autonomy/orchestrator/flows/tools/CLI/TUI still compete and require actual migration; known local registration check is not global physical legacy writer exclusion",
+        "Legacy autonomy/remaining flows/tools still require actual migration; orchestrator/CLI/TUI core cut over separately; known local registration check is not global physical legacy writer exclusion",
         "Large complete predecessor snapshots can exceed native input budget and block before inference; no silent truncation; windowed handoff evidence reads remain future capability",
         "No real model/prompt quality/human comprehension evaluation, full-page acceptance, current global-suite green, full host install or migration-inverse completion"
       ]
@@ -3079,11 +3079,39 @@
       ],
       "remaining": [
         "Remaining flows/autonomy/claims/listeners/tool registries still need actual migration and global physical legacy-writer exclusion",
-        "Corrected-graph reauthorization, recovery/manual successor lineage, complete candidate adoption across code tasks and task lifecycle remain required",
+        "Closed-delivery successors now connected; corrected-graph reauthorization, manual-run adoption, complete candidate adoption across code tasks and task lifecycle remain required",
         "Terminal advanced parity for scientific review/questions/publication/remote/recovery and explicit multi-repository selection remains; existing web controls retained",
         "Persisted endpoint binding for web pending actions and generic-note reply-loss UX/live projection still need integration; current bound identity contract is implemented by terminal",
         "Historical prepared handoff v1 cannot silently gain new material; original snapshots/receipts preserved, explicit reconciliation required",
         "No model/prompt-quality/human comprehension/scientific evaluation, whole-page acceptance, full host install/restore or migration inverse completion; no full goal completion"
+      ]
+    },
+    "plan_delivery_continuations": {
+      "status": "closed_delivery_successors_connected_corrected_graph_reauthorization_and_manual_adoption_pending",
+      "evidence": [
+        "backend/planning/continuations.py",
+        "backend/db/plan_continuation_schema.sql",
+        "backend/tests/runtime/test_plan_continuation.py",
+        "backend/tests/runtime/test_owned_plan_continuation.py",
+        "frontend/src/api/planContinuations.ts",
+        "frontend/src/components/tasks/DeliveryContinuation.tsx",
+        "docs/architecture/plan-delivery-continuations.md",
+        "docs/modernization/plan-continuation-results.json",
+        "docs/modernization/plan-continuation-packaging.json",
+        "docs/design/audits/2026-11-05-plan-continuation/report.md"
+      ],
+      "implemented": [
+        "One distinct paired-owner decision over exact closed predecessor observations creates one nonforking successor; immutable original delivery/run/effects/inference history retained.",
+        "Existing deterministic dispatcher and ordinary review/owner-acceptance/dependency path; no second model loop, native replay, autoaccept or budget reset.",
+        "Current physical database peer origin/closure, effects/jobs and graph context validated before authority; late changed evidence blocks instead of silently adopting it.",
+        "Strict owner API, retained private terminal command and React Tasks controls; original authorization recovered after loss/restart/reload, paused graph remains paused.",
+        "Transactional schema49\u219250 preservation and failed-rebuild rollback;118source selected,116wheel,1owned,88frontend,6browser states and documented Python changes."
+      ],
+      "remaining": [
+        "Corrected-graph reauthorization and explicit manual-run/candidate adoption remain main integration work.",
+        "Late changed predecessor evidence blocks an already authorized successor; explicit replacement of that unused obsolete authorization is still required.",
+        "Remaining legacy flows/autonomy/claims/listeners/tools and global physical legacy exclusion remain.",
+        "Remaining6web routes,0/12pages fully accepted, all43broad scenarios and full install/restore/inverses43\u201350/final fresh branch review remain."
       ]
     }
   }

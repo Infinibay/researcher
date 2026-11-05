@@ -472,6 +472,12 @@ def ensure_migrations(db_path: str | None = None, *, existing_only: bool = False
             resource = Path(__file__).resolve().parents[2] / "db/owner_note_schema.sql"
             apply_sql_resource(conn, resource)
             logger.info("Migration 49: explanatory owner note receipts")
+        if 50 not in applied:
+            from backend.db.migrations import apply_sql_resource
+
+            resource = Path(__file__).resolve().parents[2] / "db/plan_continuation_schema.sql"
+            apply_sql_resource(conn, resource)
+            logger.info("Migration 50: explicit plan delivery continuations")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()

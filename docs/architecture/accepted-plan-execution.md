@@ -64,8 +64,10 @@ obsoletos las fronteras existentes de aceptación y publicación. Conserva histo
 Esta primera política invalida todo ese grafo, incluidas ramas independientes;
 no afecta automáticamente otros proyectos. Faltan selección por rama y
 reautorización del grafo corregido. Hay una autorización original por plan; no
-inventar otra para sortear contexto obsoleto. La recuperación explícita sigue en
-el alcance del siguiente bloque.
+inventar otra para sortear contexto obsoleto. La continuación de una entrega
+cerrada, sobre el manifiesto todavía vigente, se incorporó después mediante una
+[decisión explícita de sucesora](plan-delivery-continuations.md). La reautorización
+del grafo corregido sigue pendiente.
 
 Pausar persiste intención antes de retirar runs vinculados. Stop de proyecto pausa
 autorizaciones antes de enumerar intentos. Su recibo reconoce la decisión, sin
@@ -75,6 +77,8 @@ estado durable actual está activo por otro control.
 Al reiniciar sólo se programa el run original en cola que nunca tuvo intento.
 Un intento emitido, incierto, detenido o fallido conserva identidad y requiere
 controles/reconciliación existentes. Reanudar despacho no repite su prompt.
+Una sucesora requiere cierre y permiso nuevo sobre sus efectos/consumo originales;
+no sustituye el run ni su recibo. Se despacha por el mismo `RuntimeService`.
 
 ## Producto y evidencia
 

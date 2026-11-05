@@ -1,0 +1,81 @@
+{
+  "base_commit": "6c95a9f",
+  "goal_status": "in_progress",
+  "capability": "Explicit owner-authorized successor deliveries within the existing RuntimeService; original closure/effects/budget/history retained.",
+  "schema": 50,
+  "source_core": {
+    "passed": 118,
+    "failures": [],
+    "skipped": [],
+    "seconds": 62.891
+  },
+  "source_core_excluded": [
+    "test_unused_review_inverse_preserves_closed_author_and_candidate",
+    "test_unused_native_review_inverse_preserves_existing_packet",
+    "test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history"
+  ],
+  "owned_final": {
+    "passed": 1,
+    "failures": [],
+    "skipped": [],
+    "seconds": 42.642
+  },
+  "owned_scope": "Actual isolated native startup failure and registered peer closure; service restart; one explicit successor research turn, owner result acceptance, dependent private development. Native generation and Ken commands controlled, no model inference. Source fact.txt stays137; 2 author runs for interrupted task; peers closed; 0 code acceptances. Planning acceptance fixture uses synthetic earlier peer witnesses.",
+  "frontend": {
+    "tests_passed": 88,
+    "tsc_exit": 0,
+    "vite_build_exit": 0,
+    "warnings": "Previously recorded bundle size/Browserslist data warnings (DD002)."
+  },
+  "browser": {
+    "states": 6,
+    "continuation_posts": 2,
+    "successors": 1,
+    "dispatch_status": "paused",
+    "page_errors": [],
+    "axe_violations_in_panel": 0,
+    "horizontal_overflow": false,
+    "evidence": "docs/design/audits/2026-11-05-plan-continuation/evidence.json",
+    "scope": "Actual React/API/SQLite; controlled generation and synthetic original closure."
+  },
+  "migration": "Actual schema49 upgrade preserves original run/delivery/packet bytes and FK/immutability. Injected migration50 ledger failure rolls back whole table rebuild before successful retry.",
+  "wheel": {
+    "base_commit": "6c95a9f",
+    "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+    "wheel_sha256": "11becc1224718704dae4598f6c6a4e133b35f59e8b49cf16547d0dd547b77f43",
+    "observed": {
+      "tests_passed": 116,
+      "failures": [],
+      "skipped": 0,
+      "backend_modules_loaded": 368,
+      "backend_imports_only_from_wheel": true,
+      "model_turns": 0,
+      "network": "Disabled except Unix sockets",
+      "semantic_assets": "Explicit prepared pinned public offline assets outside wheel"
+    },
+    "backend_tree": {
+      "matching_source_files": 757,
+      "sha256": "f713ff5311b0e9b456b45911f87cc7dafd84642df3cb32a260cb8fa050358c79"
+    },
+    "bootstrap": "Python3.12 -I -S with explicit installed dependency path and original host venv prefix restored; backend import paths remain restricted to extracted wheel.",
+    "excluded_known_failure": "Three inverse40/41/42 tests explicitly excluded. Prior terminal-owner source receipt observed their guards refusing schemas43\u201349; current selected schema50 runs do not rerun those cases. Inverses43\u201350/restore remain required (DD003); guard not weakened.",
+    "limits": "Extracted backend wheel plus installed dependencies and explicit prepared offline assets; not a clean full host installation or an inference-quality trial."
+  },
+  "initial_package_failure_resolved": {
+    "test": "test_publication_request_is_immutable_and_startup_preserves_original_records[frozen_author]",
+    "observed": "Test expected max schema49; new normal startup installs50.",
+    "change": "Update expected version50 while retaining original provenance and immutable-publication assertions.",
+    "verification": "Final extracted-wheel run116passes."
+  },
+  "python_documentation": {
+    "definitions": 52,
+    "missing": []
+  },
+  "limits": [
+    "No global suite green or new real-subscription/prompt-quality/human-comprehension claim.",
+    "Corrected-graph reauthorization and explicit manual-run/candidate adoption remain main integration work.",
+    "Late changed predecessor evidence blocks an already authorized successor; explicit replacement of that unused obsolete authorization is still required.",
+    "Remaining legacy flows/autonomy/claims/listeners/tools and global physical legacy exclusion remain.",
+    "Remaining6web routes,0/12pages fully accepted, all43broad scenarios and full install/restore/inverses43\u201350/final fresh branch review remain."
+  ]
+}

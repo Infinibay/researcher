@@ -358,6 +358,30 @@ class ControlPlanExecution(ExecuteProjectPlan):
     status: Literal["active", "paused"]
 
 
+class ContinuePlanDelivery(BaseModel):
+    """Exact owner-observed closed predecessor; arbitrary prompts, actors or task substitutions cannot enter a continuation."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
+    snapshot_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+
+
+@router.get("/{project_id}/plan-executions/{execution_id}/deliveries/{delivery_id}/continuation")
+async def plan_delivery_continuation(project_id: int, execution_id: str, delivery_id: str, request: Request):
+    """Inspect original closure, partial effects and consumption without starting work; available when the native runtime is offline."""
+    from backend.planning.execution import PlanExecutions
+
+    data = await asyncio.to_thread(PlanExecutions(read_store(request)).continuation_state, project_id, execution_id, delivery_id)
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
+@router.post("/{project_id}/plan-executions/{execution_id}/deliveries/{delivery_id}/continuation")
+async def continue_plan_delivery(project_id: int, execution_id: str, delivery_id: str, body: ContinuePlanDelivery, request: Request):
+    """Authorize one causal successor under paired-owner/CSRF control; paused dispatch stays paused and the old run remains historical."""
+    data = await service(request).continue_plan_delivery(project_id, execution_id, delivery_id, **body.model_dump())
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
 @router.get("/{project_id}/runs/{run_id}/project-plan/execution")
 async def project_plan_execution(project_id: int, run_id: str, request: Request):
     """Read exact execution preview and causal deliveries without starting an agent or requiring a live runtime."""

@@ -27,6 +27,8 @@ HELP = """Conversación y trabajo son decisiones distintas:
   /execute-plan RUN           Ejecutar la versión observada
   /pause-plan RUN              Pausar despacho y solicitar detención
   /resume-plan RUN             Continuar trabajo aún no emitido
+  /continuation EXEC ENTREGA   Leer cierre y efectos del intento anterior
+  /continue-delivery EXEC ENTREGA  Autorizar una sucesora de esa entrega observada
   /tasks                      Leer tareas reales del proyecto
   /task ID                    Leer contexto, repositorios y runs de una tarea
   /run ID OBJETIVO            Admitir trabajo sobre el contexto observado
@@ -176,6 +178,31 @@ class ProjectOrchestrator:
             "Plan aceptado: se crearon tareas pendientes; no se inició su ejecución.\n"
             + _json(result)
         )
+
+    def _continuation(self, arguments, *, authorize):
+        """Present original closed effects before granting one exact successor; the shared durable owner journal handles lost responses."""
+        parts = arguments.split()
+        if len(parts) != 2:
+            raise TerminalError("Indica el ID de ejecución y el ID de entrega mostrados por /execution.")
+        execution, delivery = parts
+        path = f"{self.prefix}/plan-executions/{_identifier(execution)}/deliveries/{_identifier(delivery)}/continuation"
+        key = f"continuation:{execution}:{delivery}"
+        if not authorize:
+            value = self._read(key, path)
+            if value.get("execution_id") != execution or value.get("delivery_id") != delivery:
+                raise TerminalError("La observación no corresponde a la entrega solicitada.")
+            return "Una sucesora es un turno nuevo: conserva el intento, efectos y consumo anteriores. No repite automáticamente acciones ni adopta archivos privados. Si el plan está pausado, seguirá pausado.\n" + _json(value)
+        state = self.client.observed(key)
+        if not state.get("eligible") or state.get("execution_id") != execution or state.get("delivery_id") != delivery:
+            raise TerminalError("Consulta /continuation para comprobar el cierre y las condiciones actuales de esa entrega.")
+        body = {"snapshot_sha256": state["snapshot_sha256"]}
+        result = self._post("plan.continue", path, body, {
+            "project_id": self.project_id, "execution_id": execution,
+            "predecessor_delivery_id": delivery,
+            "previous_run_id": state["snapshot"]["previous_run"]["run_id"],
+            "snapshot_sha256": body["snapshot_sha256"], "inference_started": False,
+        })
+        return "Sucesora autorizada; el intento anterior conserva su historia. El despacho y cada resultado siguen sujetos a sus controles y aceptación.\n" + _json(result)
 
     def _execution(self, run, command):
         """Inspect or control an original exact graph authorization; resume cannot replace failed/cancelled/uncertain attempts."""
@@ -429,6 +456,8 @@ class ProjectOrchestrator:
             text = self._accept_plan(arguments)
         elif command in ("/execution", "/execute-plan", "/pause-plan", "/resume-plan"):
             text = self._execution(arguments, command)
+        elif command in ("/continuation", "/continue-delivery"):
+            text = self._continuation(arguments, authorize=command == "/continue-delivery")
         elif command == "/task":
             text = self._task(_number(arguments))
         elif command == "/run":

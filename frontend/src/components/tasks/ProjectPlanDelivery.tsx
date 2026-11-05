@@ -5,13 +5,14 @@ import {ApiError} from '../../api/client'
 import {matchesPlanReceipt,planActions,preparePlanAcceptance,projectPlanState,sendPlanAcceptance,type PlanAcceptanceAction} from '../../api/projectPlans'
 import type {RuntimeRun} from '../../api/runtime'
 import {executionActions} from '../../api/planExecution'
+import {continuationActions} from '../../api/planContinuations'
 import {PlanExecution} from './PlanExecution'
 const button='rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--work-accent)]'
 
 /** Preserve a pending original proposal selection across pagination/reload; newer runs cannot silently replace an unacknowledged owner decision. */
 export function TaskProjectPlan({projectId,taskId,runs}:{projectId:number;taskId:number;runs:RuntimeRun[]}) {
  const [pending,setPending]=useState<string|null>(null),[ready,setReady]=useState(false),[error,setError]=useState('')
- useEffect(()=>{try{setPending(executionActions.pendingRun(sessionStorage,projectId,taskId)??planActions.pendingRun(sessionStorage,projectId,taskId));setReady(true)}catch(e){setError(e instanceof Error?e.message:'No se pudo recuperar la decisión del plan.')}},[projectId,taskId])
+ useEffect(()=>{try{setPending(continuationActions.pendingRun(sessionStorage,projectId,taskId)??executionActions.pendingRun(sessionStorage,projectId,taskId)??planActions.pendingRun(sessionStorage,projectId,taskId));setReady(true)}catch(e){setError(e instanceof Error?e.message:'No se pudo recuperar la decisión del plan.')}},[projectId,taskId])
  const run=pending??runs.find(run=>run.execution_kind==='research')?.run_id
  if(!run)return error?<p role="alert">{error}</p>:null
  return <section className="min-w-0 space-y-4 rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] p-4" aria-label="Propuesta de planificación"><h3 className="font-medium text-[var(--work-ink)]">Propuesta de planificación</h3><p className="text-sm text-[var(--work-muted)]">El agente propone trabajo. Tú revisas sus bases y decides si se crean tareas pendientes. Aceptar este plan no inicia su ejecución.</p>{error&&<p role="alert">{error}</p>}<PlanDecision key={`${projectId}:${taskId}:${run}`} projectId={projectId} taskId={taskId} runId={run} working={runs.some(item=>item.run_id===run&&['queued','running','cancelling'].includes(item.status))} readOnly={!ready||!!error} onResolved={()=>setPending(null)} onPending={()=>setPending(run)}/></section>

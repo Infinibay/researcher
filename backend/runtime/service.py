@@ -360,6 +360,15 @@ class RuntimeService:
                 except TimeoutError:
                     pass
 
+    async def continue_plan_delivery(self, project_id, execution_id, delivery_id, **command):
+        """Record exact owner authority for a closed delivery's successor, then wake the same dispatcher; no thread, prompt or budget is replayed."""
+        from backend.planning.execution import PlanExecutions
+
+        self._accepting()
+        receipt = await asyncio.to_thread(PlanExecutions(self.store).continue_delivery, project_id, execution_id, delivery_id, **command)
+        self._dispatch_wake.set()
+        return receipt
+
     async def dispatch_planned_work(self):
         """Admit original ready deliveries and recover only queued runs with no attempt; quotas, closure and native reservation remain owned by the existing run worker."""
         from backend.planning.execution import PlanExecutions

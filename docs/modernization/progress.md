@@ -6138,3 +6138,51 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
   (reported inverses)/core70329exit0/finalpackage40922exit0. API servers run inside
   tests and are awaited after should_exit in finally; sockets and clients closed.
   Original checkout/protected untracked root .agents/.codex/AGENTS.md untouched.
+
+## 2026-11-05 — Explicit closed-delivery successors (base6c95a9f)
+
+- Previous goal turn6c95a9f: progress (terminal/notes migrated). The subsequent
+  policy acknowledgment added no implementation; revalidated clean managed HEAD
+  and existing macro-first policy before selecting this next main capability.
+- Ruling: native recovery closes peers but cannot replay prompts; old autonomy
+  reset/replay cannot become owner authority. Implement explicit successor
+  deliveries first as required recovery foundation, retaining corrected-graph
+  reauthorization and actual legacy consumer migration as next main work.
+- PlanContinuations + schema50: exact owner snapshot of closed failed/cancelled
+  original, registered origin/closure, effects/jobs/inference/candidate limits.
+  One nonforking successor; immutable original row/packet/run, unchanged budget.
+  Same dispatcher and normal result-review/owner-acceptance/dependency path.
+  Later changed observations block; no silent adoption or obsolete graph reuse.
+- Owner API, actual terminal command/private journal and Tasks UI connected.
+  Repeated decisions/restart/reload return the same successor receipt; pause
+  stays pause. Human explanation includes concrete saved-source example and
+  distinguishes unknown command outcome from local process closure.
+- Migration49→50 verifies original bytes/links/guards/FK and injected whole
+  rebuild rollback. Historical SQL47–49 unchanged. Initial extracted-wheel
+  failure was publication startup test still asserting maxschema49; changed
+  expected50, preserving provenance/immutability assertions. Final116PASS.
+- Source118PASS/3known inverse tests explicitly excluded62.891s. Owned final
+  1PASS42.642s: actual native startup failure→closedpeers→service restart→owner
+  successor→research acceptance→dependent private development, source137intact,
+  2rootruns,0codeacceptance. Generation/Ken controlled; planner witness synthetic.
+  No subscription/model inference or semantic/human comprehension claim.
+- Frontend88PASS, tsc/build pass.6actual React/API/SQL browser states at1440×1100
+  and390×844, response lost/reload→2identicalPOST→1successor, graphstillpaused,
+  0pageerrors/Axeviolations/horizontaloverflow in examined panel. Screens01/02
+  inspected. Polish raw status/title selection deferredDD015; no extra pass.
+- Final wheel116PASS,368imports only extracted wheel,757matchingPythonSQL,
+  sha11becc1224718704dae4598f6c6a4e133b35f59e8b49cf16547d0dd547b77f43.
+  Final source bytecomparison mismatches[].52changed/newPython definitions/module
+  docs,missing[]. New TS helpers/component documented. Ruff/diff clean.
+- No global suite green, inverse43–50/fullrestore, full host install or plan
+  completion claim. Current selected tests exclude inverse40/41/42; prior
+  terminal source receipt documents guards refusing later schemas; not weakened.
+- Next main: corrected-graph reauthorization/explicit replacement of unused
+  obsolete authorization, manualrun/candidateadoption, actualflows/autonomy/
+  claims/listeners/tools. Other full plan obligations remain unchanged, including
+ 6web routes/12pageacceptance,43scenarios, prompts/evals/communication/science,
+  remoteForgejo/recovery, installation/restore/inverses/finalfreshbranchreview.
+- All processes terminal:83114source0,85157owned0,33528package0,40740browser0,
+  server31865INT→130(exactPID204523verifiedbeforecontrol),browserclosed.
+  Original checkout/protected root .agents/.codex/AGENTS.md untouched.
+  No new subagents, push, merge or deploy. Goal remains active.

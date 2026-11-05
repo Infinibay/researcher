@@ -41,6 +41,11 @@ Los resultados de tareas se consultan por sus propios runs. `/help` muestra los
 controles de investigación, desarrollo, revisión y aceptación. `/pause-plan RUN`
 usa la ejecución previamente consultada; su recibo solicita detención. Consulta
 los intentos para comprobar cierre. Reanudar sólo continúa trabajo aún no emitido.
+Para una entrega fallida o detenida, consulta sus IDs en `/execution RUN` y usa
+`/continuation EJECUCION ENTREGA`. Después de revisar los efectos y consumo
+anteriores, `/continue-delivery EJECUCION ENTREGA` autoriza una sucesora distinta.
+El intento anterior se conserva y un plan pausado sigue pausado.
+[Contrato y límites](../architecture/plan-delivery-continuations.md).
 
 Si se pierde una respuesta, conserva el mismo directorio de estado y usa `/retry`.
 No rehagas el comando con otra clave. Un servidor que cambió de DB se rechaza

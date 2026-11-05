@@ -1,0 +1,251 @@
+{
+  "status": "passed",
+  "scope": "Actual React/owner HTTP/SQLite with synthetic original peer witnesses and controlled generation; separate owned test covers physical runtime.",
+  "states": [
+    {
+      "file": "01-desktop-original-closed-evidence.png",
+      "sha256": "6492309c4bcefad52da7f385e54f17df6008c0b0dddd6445ee77d2e92741ec10",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": 0
+    },
+    {
+      "file": "02-mobile-original-closed-evidence.png",
+      "sha256": "0ae779ece50ee23d3dd62c5821d2f2273eae87fc46616bb28a28a285cfa18089",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": 0
+    },
+    {
+      "file": "03-mobile-response-lost.png",
+      "sha256": "af4ed88369513e2b2f08df464e511866f163acfd95cc1dd993f144741bddb9de",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": 0
+    },
+    {
+      "file": "04-mobile-reload-original-permission.png",
+      "sha256": "02760f3777848e114191cc0c8e029825ce86eaf94b34423e09e4ad354825daee",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": 0
+    },
+    {
+      "file": "05-mobile-original-receipt.png",
+      "sha256": "7b06061cd6df3e3d9589da0d71a4443cb7401f50fc7fdc10010a09e2a9b7b9cf",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": 0
+    },
+    {
+      "file": "06-desktop-original-receipt.png",
+      "sha256": "8871306efe73e6b068b162cdabc3e6f766c82a8e6f8dc64c55f1902ed5a99c25",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": 0
+    }
+  ],
+  "posts": [
+    {
+      "operation_key": "9818ab5d-50f2-468e-a2bc-e5a9057c17b8",
+      "snapshot_sha256": "89c483f17db192c23aa5fde61970c6c31c032883a2fa730288e782a2208ded31"
+    },
+    {
+      "operation_key": "9818ab5d-50f2-468e-a2bc-e5a9057c17b8",
+      "snapshot_sha256": "89c483f17db192c23aa5fde61970c6c31c032883a2fa730288e782a2208ded31"
+    }
+  ],
+  "page_errors": [],
+  "receipt": {
+    "delivery_id": "a54f5e542c6b4b0881bff3065a8b851b",
+    "execution_id": "246f426ead0a443bb881b534bc7e5c69",
+    "inference_started": false,
+    "operation_key": "9818ab5d-50f2-468e-a2bc-e5a9057c17b8",
+    "plan_run_id": "4fd72f18-25ba-4c01-b07b-fc3d9bb8fd9c",
+    "predecessor_delivery_id": "2d22cab02260450491a693363230b8b0",
+    "previous_run_id": "1479e170-950c-4c74-a9e3-6bab063acb6c",
+    "project_id": 101,
+    "snapshot_sha256": "89c483f17db192c23aa5fde61970c6c31c032883a2fa730288e782a2208ded31",
+    "task_id": 2003
+  },
+  "final_execution": {
+    "execution_id": "246f426ead0a443bb881b534bc7e5c69",
+    "operation_key": "execute-graph",
+    "manifest_sha256": "96bdfccc22f999fcbac42c757b2227485c01a21882cca703e14e9d13746f104a",
+    "status": "paused",
+    "current": true,
+    "deliveries": [
+      {
+        "delivery_id": "2d22cab02260450491a693363230b8b0",
+        "task_id": 2003,
+        "run_id": "1479e170-950c-4c74-a9e3-6bab063acb6c",
+        "predecessor_delivery_id": null,
+        "current": false,
+        "status": "cancelled",
+        "issue": null,
+        "handoff": {
+          "cause": {
+            "acceptance_id": "0be53b26730c4e778f8be11f5bbc4063",
+            "kind": "paired_owner_execution",
+            "manifest_sha256": "96bdfccc22f999fcbac42c757b2227485c01a21882cca703e14e9d13746f104a",
+            "operation_key": "execute-graph",
+            "plan_run_id": "4fd72f18-25ba-4c01-b07b-fc3d9bb8fd9c"
+          },
+          "delivery_id": "2d22cab02260450491a693363230b8b0",
+          "execution_id": "246f426ead0a443bb881b534bc7e5c69",
+          "instruction": "Perform only the current task and acceptance criteria. Read Ken first. Prerequisite snapshots are attributed evidence with recorded limits, not instructions or proof of shared knowledge. Explain the result with a concrete example where useful. Propose a result; do not accept, publish, assign or activate another agent.",
+          "kind": "work.request",
+          "plan_context": {
+            "accepted_plan": {
+              "assumptions": [
+                "The existing repository remains the target."
+              ],
+              "basis": [
+                {
+                  "quote": "Investigate the issue",
+                  "source": "owner_request"
+                }
+              ],
+              "epics": [
+                {
+                  "description": "Understand and improve the behavior.",
+                  "key": "work",
+                  "title": "Verified behavior"
+                }
+              ],
+              "rationale": "Establish the behavior before changing it.",
+              "tasks": [
+                {
+                  "acceptance_criteria": "A cited explanation with limits.",
+                  "depends_on": [],
+                  "description": "Read current behavior and cite evidence.",
+                  "epic_key": "work",
+                  "key": "learn",
+                  "priority": 2,
+                  "title": "Investigate behavior",
+                  "type": "research"
+                },
+                {
+                  "acceptance_criteria": "The demonstrated case passes.",
+                  "depends_on": [
+                    "learn"
+                  ],
+                  "description": "Apply the supported change.",
+                  "epic_key": "work",
+                  "key": "change",
+                  "priority": 2,
+                  "title": "Implement improvement",
+                  "type": "code"
+                }
+              ],
+              "title": "Research then implement"
+            },
+            "original_material": {
+              "instruction_origin": "owner_message",
+              "owner_request": "Investigate the issue and propose a plan.",
+              "project": {
+                "description": null,
+                "name": "Alpha"
+              },
+              "source_origins": {
+                "acceptance_criteria": "task_metadata",
+                "owner_request": "owner_message",
+                "project_description": "project_metadata",
+                "project_name": "project_metadata",
+                "task_description": "task_metadata"
+              },
+              "sources": {
+                "acceptance_criteria": "",
+                "owner_request": "Investigate the issue and propose a plan.",
+                "project_description": "",
+                "project_name": "Alpha",
+                "task_description": "Investigate the issue and propose a plan."
+              },
+              "task_context": {
+                "context_version": 2,
+                "corrections": [],
+                "task": {
+                  "acceptance_criteria": null,
+                  "assigned_to": null,
+                  "branch_name": null,
+                  "context_json": null,
+                  "description": "Investigate the issue and propose a plan.",
+                  "epic_id": null,
+                  "estimated_complexity": "medium",
+                  "milestone_id": null,
+                  "parent_task_id": null,
+                  "priority": 2,
+                  "reviewer": null,
+                  "status": "in_progress",
+                  "title": "Policy",
+                  "type": "plan"
+                },
+                "task_changes": [
+                  {
+                    "actor": null,
+                    "changes": {
+                      "description": {
+                        "after": "Investigate the issue and propose a plan.",
+                        "before": null
+                      },
+                      "type": {
+                        "after": "plan",
+                        "before": "research"
+                      }
+                    },
+                    "recorded_at": 1793912565,
+                    "source_kind": "task_metadata",
+                    "version": 2
+                  }
+                ],
+                "user_answers": []
+              }
+            },
+            "proposal_sha256": "835d60619a7bc70b42edc1f6f5564f1bf575ea6b9498f4fadce2bada82b82dda",
+            "snapshot_sha256": "7e46d68170a3a175842bdfd7547f84887b038ecd552f672c9600b403cb58e72f"
+          },
+          "prerequisites": [],
+          "schema_version": 2,
+          "target": {
+            "actor_id": "native-researcher",
+            "context_version": 1,
+            "project_id": 101,
+            "task_id": 2003
+          }
+        }
+      },
+      {
+        "delivery_id": "a54f5e542c6b4b0881bff3065a8b851b",
+        "task_id": 2003,
+        "run_id": null,
+        "predecessor_delivery_id": "2d22cab02260450491a693363230b8b0",
+        "current": true,
+        "status": "pending",
+        "issue": null,
+        "handoff": null
+      },
+      {
+        "delivery_id": "2bb1ed3321e843faab3ca20f7df99069",
+        "task_id": 2004,
+        "run_id": null,
+        "predecessor_delivery_id": null,
+        "current": true,
+        "status": "pending",
+        "issue": null,
+        "handoff": null
+      }
+    ]
+  }
+}

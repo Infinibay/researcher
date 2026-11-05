@@ -1,0 +1,268 @@
+{
+  "base_commit": "6c95a9f",
+  "scope": "New/changed Python module/class/function definitions in the continuation block, including tests; not whole-repository documentation coverage. New TypeScript API/component helpers have JSDoc; tsc verified separately.",
+  "definitions": 52,
+  "missing": [],
+  "checked": [
+    {
+      "file": "backend/planning/continuations.py",
+      "symbol": "<module>",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/planning/continuations.py",
+      "symbol": "PlanContinuations",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/planning/continuations.py",
+      "symbol": "PlanContinuations.__init__",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/planning/continuations.py",
+      "symbol": "PlanContinuations._delivery",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/planning/continuations.py",
+      "symbol": "PlanContinuations._snapshot",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/planning/continuations.py",
+      "symbol": "PlanContinuations.validate",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/planning/continuations.py",
+      "symbol": "PlanContinuations.state",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/planning/continuations.py",
+      "symbol": "PlanContinuations.authorize",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/planning/execution.py",
+      "symbol": "<module>",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/planning/execution.py",
+      "symbol": "PlanExecutions",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/planning/execution.py",
+      "symbol": "PlanExecutions.continuation_state",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/planning/execution.py",
+      "symbol": "PlanExecutions.continue_delivery",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/planning/execution.py",
+      "symbol": "PlanExecutions.state",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/planning/execution.py",
+      "symbol": "PlanExecutions.pending",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/planning/execution.py",
+      "symbol": "PlanExecutions.note_issue",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/planning/execution.py",
+      "symbol": "PlanExecutions.prepare",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/planning/execution.py",
+      "symbol": "PlanExecutions.input",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/runtime/service.py",
+      "symbol": "<module>",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/runtime/service.py",
+      "symbol": "RuntimeService",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/runtime/service.py",
+      "symbol": "RuntimeService.continue_plan_delivery",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/api/routes/runs.py",
+      "symbol": "<module>",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/api/routes/runs.py",
+      "symbol": "ContinuePlanDelivery",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/api/routes/runs.py",
+      "symbol": "plan_delivery_continuation",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/api/routes/runs.py",
+      "symbol": "continue_plan_delivery",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/orchestrator.py",
+      "symbol": "<module>",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/orchestrator.py",
+      "symbol": "ProjectOrchestrator",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/orchestrator.py",
+      "symbol": "ProjectOrchestrator._continuation",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/orchestrator.py",
+      "symbol": "ProjectOrchestrator.handle_user_message",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/cli/owner_client.py",
+      "symbol": "<module>",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/cli/owner_client.py",
+      "symbol": "OwnerClient",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/cli/owner_client.py",
+      "symbol": "OwnerClient._action",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/cli/owner_client.py",
+      "symbol": "OwnerClient._receipt_identities",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/tools/base/db.py",
+      "symbol": "<module>",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/tools/base/db.py",
+      "symbol": "ensure_migrations",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/tests/runtime/test_plan_continuation.py",
+      "symbol": "<module>",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/tests/runtime/test_plan_continuation.py",
+      "symbol": "interrupted_delivery",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/tests/runtime/test_plan_continuation.py",
+      "symbol": "test_owner_continuation_creates_one_successor_and_keeps_original_history",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/tests/runtime/test_plan_continuation.py",
+      "symbol": "test_continuation_refuses_unclosed_attempt_and_obsolete_owner_snapshot",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/tests/runtime/test_plan_continuation.py",
+      "symbol": "test_continuation_keeps_paused_dispatch_and_rejects_changed_graph",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/tests/runtime/test_plan_continuation.py",
+      "symbol": "test_owner_http_continuation_survives_reply_loss_and_uses_existing_dispatcher",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/tests/runtime/test_plan_continuation.py",
+      "symbol": "test_continuation_revalidates_prior_effects_before_dispatch_and_preserves_receipts",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/tests/runtime/test_plan_continuation.py",
+      "symbol": "test_successor_result_acceptance_releases_dependent_with_new_author_identity",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/tests/runtime/test_plan_continuation.py",
+      "symbol": "test_delivery_migration_preserves_original_packets_and_rolls_back_whole_rebuild",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/tests/runtime/test_plan_continuation.py",
+      "symbol": "test_delivery_migration_preserves_original_packets_and_rolls_back_whole_rebuild.skip_fifty",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/tests/runtime/test_owned_plan_continuation.py",
+      "symbol": "<module>",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/tests/runtime/test_owned_plan_continuation.py",
+      "symbol": "test_owned_failed_delivery_continues_once_and_releases_dependent",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/tests/runtime/test_owned_plan_continuation.py",
+      "symbol": "test_owned_failed_delivery_continues_once_and_releases_dependent.terminal",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/tests/cli/test_terminal_controller.py",
+      "symbol": "<module>",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/tests/cli/test_terminal_controller.py",
+      "symbol": "test_terminal_continuation_retains_observed_snapshot_after_reply_loss",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/tests/cli/test_terminal_controller.py",
+      "symbol": "test_terminal_continuation_retains_observed_snapshot_after_reply_loss.handle",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/tests/runtime/test_code_publications.py",
+      "symbol": "<module>",
+      "has_docstring": true
+    },
+    {
+      "file": "backend/tests/runtime/test_code_publications.py",
+      "symbol": "test_publication_request_is_immutable_and_startup_preserves_original_records",
+      "has_docstring": true
+    }
+  ]
+}
