@@ -1,0 +1,20 @@
+{
+  "base_commit": "808b737",
+  "stage": "initial_broad_package",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "369a1be462f4d4a81ec72e2a15f25662b6b668bd448442060e28bdc18f4d8f1f",
+  "passed": 287,
+  "failures": [
+    "backend.tests.runtime.test_result_acceptance::test_legacy_author_flow_refuses_native_ownership_before_agent_selection"
+  ],
+  "skipped": 0,
+  "explicitly_deselected_known_cases": 4,
+  "wall_seconds": 138.05,
+  "owned_case_seconds": 42.842,
+  "backend_tree": {
+    "matching_source_files": 771,
+    "sha256": "ef219c96a04684fcc495313a931e3c5946532ab408cc7d78abd58813dd988c19"
+  },
+  "scope": "Actual isolated extracted-wheel bootstrap and broad native/research/storage/CLI/legacy tests, including physical scientific kernel/Git/reviewer/acceptance/dependent pipeline; controlled generation/Ken, no real model inference. Failed case still calls removed assign_research stage; public kickoff now returns scoped original native references.",
+  "global_status": "Not globally green or full-goal complete."
+}

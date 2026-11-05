@@ -490,6 +490,12 @@ def ensure_migrations(db_path: str | None = None, *, existing_only: bool = False
             resource = Path(__file__).resolve().parents[2] / "db/investigation_schema.sql"
             apply_sql_resource(conn, resource)
             logger.info("Migration 52: exploratory investigation summaries")
+        if 53 not in applied:
+            from backend.db.migrations import apply_sql_resource
+
+            resource = Path(__file__).resolve().parents[2] / "db/scientific_schema.sql"
+            apply_sql_resource(conn, resource)
+            logger.info("Migration 53: native scientific research ownership")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()

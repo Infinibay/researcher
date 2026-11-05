@@ -286,6 +286,8 @@ def test_legacy_scavenger_excludes_owner_only_and_native_owned_tasks(coordinatio
     from backend.autonomy.scavenger import Scavenger
 
     investigation_state(coordination)
+    coordination.conn.execute("UPDATE tasks SET type='code' WHERE id=1002")
+    coordination.conn.commit()
     scavenger = Scavenger("legacy-researcher", 101, "researcher")
     rows = scavenger._find_orphan_tasks(
         "SELECT id FROM tasks WHERE project_id=? ORDER BY id", (101,)
@@ -431,7 +433,7 @@ def test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_
 
     def skip_investigation(conn, path):
         """Prepare exactly schema51 without changing any historical migration resource."""
-        if path.name != "investigation_schema.sql":
+        if path.name not in ("investigation_schema.sql", "scientific_schema.sql"):
             apply(conn, path)
 
     monkeypatch.setattr(migrations, "apply_sql_resource", skip_investigation)

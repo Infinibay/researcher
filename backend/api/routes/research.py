@@ -8,6 +8,7 @@ from fastapi.responses import JSONResponse
 
 from backend.api.models.questions import AskUser
 from backend.api.models.research import (
+    CaptureCommand,
     CapturePaper,
     CaptureReference,
     CaptureWeb,
@@ -22,8 +23,8 @@ from backend.api.models.research import (
     ReportWindow,
     SourceReceipt,
     SourceWindow,
-    WriteReport,
     WriteInvestigationSummary,
+    WriteReport,
     WriteWiki,
 )
 from backend.api.research_dependencies import Context
@@ -50,6 +51,12 @@ from backend.research.provenance import (
 from backend.research.retrieval_assets import RetrievalBusy, RetrievalUnavailable
 
 router = APIRouter(prefix="/api/research-tools", tags=["research-tools"])
+
+
+@router.post("/command-sources", response_model=SourceReceipt, status_code=201)
+def command_source_capture(command: CaptureCommand, ctx: Context):
+    """Capture only actual complete command bytes in the current author scope, never output submitted by the model."""
+    return ctx.store.capture_command(ctx.scope, command.operation_key, command.job_id)
 
 
 @router.get("/review-subject")

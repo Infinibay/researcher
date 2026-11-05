@@ -587,17 +587,19 @@ def test_legacy_flags_cannot_promote_or_reject_managed_findings(active_result, s
     )
 
 
-def test_legacy_author_flow_refuses_native_ownership_before_agent_selection(
+def test_legacy_author_flow_hands_off_native_ownership_without_agent_selection(
     active_result,
 ):
-    """An admitted native task cannot also start the retained research inference loop."""
+    """An old public entry preserves the original native author and exposes only an owner hint, without another inference, claim or acceptance."""
     from backend.flows.research_flow import ResearchFlow
 
-    c, _, _, _, _, _ = active_result
-    flow = ResearchFlow()
-    flow.state.project_id = 101
-    flow.state.task_id = 1001
-    flow.state.knowledge_service_enabled = False
-    with pytest.raises(ValueError, match="Native-owned task"):
-        flow.assign_research()
+    c, lease, _, _, _, _ = active_result
+    original = c.store.get(101, lease.run_id)
+    result = ResearchFlow().kickoff(inputs={"project_id": 101, "task_id": 1001})
+    assert result["delivery"] == "native_owner_handoff"
+    assert result["event_authorizes_work"] is False
+    assert result["native_runs"] == [{"run_id": lease.run_id, "status": original.status, "context_version": original.context_version}]
+    assert c.store.get(101, lease.run_id) == original
+    assert c.conn.execute("SELECT count(*) FROM runtime_runs").fetchone()[0] == 1
     assert c.conn.execute("SELECT count(*) FROM agent_runs").fetchone()[0] == 0
+    assert c.conn.execute("SELECT count(*) FROM runtime_result_acceptances").fetchone()[0] == 0

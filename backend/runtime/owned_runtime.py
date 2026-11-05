@@ -53,6 +53,7 @@ from backend.runtime.native_inference import (
 from backend.runtime.native_state import NativeState
 from backend.runtime.peer_broker import PeerBroker
 from backend.runtime.review_instructions import REVIEW_INSTRUCTIONS
+from backend.runtime.scientific_instructions import SCIENTIFIC_RESEARCH_INSTRUCTIONS
 from backend.runtime.subscription_auth import ExternalChatGPTAuth
 from backend.runtime.task_profiles import NATIVE_TASK_TYPES
 from backend.runtime.workspaces import PEER_WORKSPACE
@@ -597,7 +598,7 @@ class OwnedCodexRuntime:
                                     if planning
                                     else INVESTIGATION_INSTRUCTIONS
                                     if investigation
-                                    else INSTRUCTIONS
+                                    else INSTRUCTIONS + SCIENTIFIC_RESEARCH_INSTRUCTIONS
                                 ),
                                 sandbox="workspace-write"
                                 if development

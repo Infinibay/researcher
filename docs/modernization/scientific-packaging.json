@@ -1,0 +1,34 @@
+{
+  "base_commit": "808b737",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "34831525b2563c93221279ad079bac0970946ec80605bb3e85b692252d2806b3",
+  "observed": {
+    "tests_passed": 46,
+    "failures": [],
+    "skipped": 0,
+    "backend_modules_loaded": 295,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "network": "Disabled except Unix sockets",
+    "semantic_assets": "Explicit prepared pinned public offline assets outside wheel",
+    "broader_package_receipt": "docs/modernization/scientific-packaging-initial.json"
+  },
+  "backend_tree": {
+    "matching_source_files": 771,
+    "sha256": "ef1ea8202c25da557d2a7d75f3eb02403c24f7c4f85ed5385ad595bf6b51307d"
+  },
+  "bootstrap": "Python3.12 -I -S with explicit installed dependency path and original host venv prefix restored; backend import paths remain restricted to extracted wheel.",
+  "validation_scope": "Final directed package after adapting one stale test to the new public legacy entry. Actual physical scientific pipeline passed in retained initial broad package; compare source manifests before reusing that evidence.",
+  "limits": "Extracted backend wheel plus installed dependencies and explicit prepared offline assets; not a clean full host installation or an inference-quality trial.",
+  "initial_broader_receipt": "docs/modernization/scientific-packaging-initial.json",
+  "changes_since_initial_broad_package": {
+    "all_backend_member_differences": [
+      "backend/tests/runtime/test_result_acceptance.py"
+    ],
+    "compiled_and_application_members_identical": true,
+    "current_checkout_matches_final_python_sql": true,
+    "rationale": "Only one stale test now calls the public read-only kickoff and checks original native identity/no new agent or acceptance. No application or compiled code changed after initial287pass/1stale-failure run, whose physical scientific case passed."
+  },
+  "initial_broader_suite_exclusions": "Legacy invalid-transition text assertion recorded in the prior global baseline also excluded. Development inverse40/41/42 tests refuse later schemas43\u201353: test_unused_review_inverse_preserves_closed_author_and_candidate, test_unused_native_review_inverse_preserves_existing_packet, test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history[frozen_author]. Prior terminal-owner source receipt observes these guards with schemas43\u201349; current53selected run excludes them. Inverses43\u201353 remain required; guard not weakened (DD003).",
+  "excluded_known_failure": []
+}

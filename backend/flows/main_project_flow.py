@@ -816,13 +816,13 @@ class MainProjectFlow(Flow[ProjectState]):
             if task_type == "research":
                 from backend.flows.research_flow import ResearchFlow
                 flow = ResearchFlow()
-                flow.kickoff(inputs={
+                handoff = flow.kickoff(inputs={
                     "project_id": self.state.project_id,
                     "task_id": task_id,
                 })
                 log_flow_event(
-                    self.state.project_id, "research_flow_completed",
-                    "main_project_flow", "task", task_id,
+                    self.state.project_id, "native_owner_handoff",
+                    "main_project_flow", "task", task_id, handoff,
                 )
             elif task_type == "investigation":
                 from backend.flows.investigation_flow import InvestigationFlow

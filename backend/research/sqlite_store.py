@@ -504,32 +504,24 @@ class SQLiteResearchStore:
 
         return self._write(scope, key, "review.record", intent, apply)
 
-    def capture_source(self, scope, key, draft: SourceDraft, *, intent: dict):
+    def _insert_source(self, conn, scope, draft: SourceDraft):
+        """Insert one exact captured document inside the caller's already-authorized source/receipt transaction."""
         digest = _hash(draft.content)
+        cursor = conn.execute(
+            "INSERT INTO research_sources(project_id,task_id,kind,locator,title,content,sha256,provenance_json,captured_at) VALUES(?,?,?,?,?,?,?,?,?)",
+            (scope.project_id, scope.task_id, draft.kind, draft.locator, draft.title, draft.content, digest, _json(draft.provenance), self.clock()),
+        )
+        return {"source_id": cursor.lastrowid, "sha256": digest, "kind": draft.kind, "locator": draft.locator}
 
-        def apply(conn):
-            cursor = conn.execute(
-                "INSERT INTO research_sources(project_id,task_id,kind,locator,title,content,sha256,provenance_json,captured_at) VALUES(?,?,?,?,?,?,?,?,?)",
-                (
-                    scope.project_id,
-                    scope.task_id,
-                    draft.kind,
-                    draft.locator,
-                    draft.title,
-                    draft.content,
-                    digest,
-                    _json(draft.provenance),
-                    self.clock(),
-                ),
-            )
-            return {
-                "source_id": cursor.lastrowid,
-                "sha256": digest,
-                "kind": draft.kind,
-                "locator": draft.locator,
-            }
+    def capture_source(self, scope, key, draft: SourceDraft, *, intent: dict):
+        """Persist captured document and original receipt together; ordinary capture intent remains compatible."""
+        return self._write(scope, key, "source.capture", intent, lambda conn: self._insert_source(conn, scope, draft))
 
-        return self._write(scope, key, "source.capture", intent, apply)
+    def capture_command(self, scope, key, job_id):
+        """Capture this native author's actual closed terminal command output as exact citable evidence without replaying work."""
+        from backend.research.command_sources import capture_command
+
+        return capture_command(self, scope, key, job_id)
 
     @staticmethod
     def _source(conn, project_id, source_id):

@@ -212,3 +212,22 @@ Este corte no retira todos los demás tipos de Flow/AgentLoop/listeners ni sus
 resultados de dominio. La investigación científica antigua conserva consumidores
 hasta migrar sus métodos y evaluaciones. El cierre físico global de writers sigue
 pendiente. [Contrato y prueba](native-investigation.md).
+
+
+## Investigación científica y revisión antiguas retiradas del recorrido — 2026-11-05
+
+ResearchFlow/ResearchReviewFlow ahora devuelven indicaciones owner de sólo lectura.
+Sus hipótesis, experimentos, síntesis temática, informes, wiki y revisión se
+expresan mediante capacidades nativas existentes. La captura nueva de salida real
+de comandos completa el puente de evidencia experimental; no se añadió otro
+registro de hipótesis ni otro loop de revisión/síntesis.
+
+`research` y `investigation` son owner-only. Los handlers y claims compartidos,
+el despacho de MainProjectFlow y el scavenger conservan trabajo para el propietario;
+ni `VALIDATED` ni agotar revisiones lo completan. El esquema53 conserva historia y
+bloquea claims/finalización antiguos. Los tests del protocolo retirado se cambiaron
+por el contrato público y el recorrido nativo con revisión independiente.
+
+Siguen pendientes AgentLoop/MessageHandler/listeners/FlowManager, los tipos restantes
+y la exclusión física global; no se deduce cierre de la ausencia en un registro.
+[Contrato y evaluación](native-scientific-research.md).

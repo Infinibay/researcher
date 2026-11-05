@@ -169,7 +169,9 @@ class TestDeveloperScavenger:
 
 
 class TestResearcherScavenger:
-    def test_finds_research_tasks_only(self, db_conn, executing_project):
+    """Migrated scientific tasks must not be rediscovered as legacy worker events."""
+    def test_research_tasks_are_not_legacy_work(self, db_conn, executing_project):
+        """Retain pending scientific work without emitting a legacy claim event."""
         pid = executing_project
         agent_id = f"researcher_1_p{pid}"
         seed_roster(db_conn, pid, [(agent_id, "researcher")])
@@ -179,11 +181,11 @@ class TestResearcherScavenger:
 
         created = Scavenger(agent_id, pid, "researcher").scavenge()
 
-        assert created == 1
-        events = _get_events(db_conn, pid, agent_id)
-        assert events[0]["event_type"] == "task_available"
+        assert created == 0
+        assert _get_events(db_conn, pid, agent_id) == []
 
-    def test_finds_rejected_research(self, db_conn, executing_project):
+    def test_rejected_research_requires_explicit_native_action(self, db_conn, executing_project):
+        """A historical rejection does not authorize an automatic scientific rework."""
         pid = executing_project
         agent_id = f"researcher_1_p{pid}"
         seed_roster(db_conn, pid, [(agent_id, "researcher")])
@@ -194,9 +196,8 @@ class TestResearcherScavenger:
         )
 
         created = Scavenger(agent_id, pid, "researcher").scavenge()
-        assert created == 1
-        events = _get_events(db_conn, pid, agent_id)
-        assert events[0]["event_type"] == "task_rejected"
+        assert created == 0
+        assert _get_events(db_conn, pid, agent_id) == []
 
 
 # ===========================================================================
@@ -246,7 +247,9 @@ class TestCodeReviewerScavenger:
 
 
 class TestResearchReviewerScavenger:
-    def test_finds_research_review_ready(self, db_conn, executing_project):
+    """Research review needs exact native owner admission rather than a role scavenger hint."""
+    def test_scientific_review_requires_an_exact_owner_request(self, db_conn, executing_project):
+        """A review_ready task is not a versioned independent review request."""
         pid = executing_project
         agent_id = f"research_reviewer_p{pid}"
         seed_roster(db_conn, pid, [(agent_id, "research_reviewer")])
@@ -255,9 +258,8 @@ class TestResearchReviewerScavenger:
 
         created = Scavenger(agent_id, pid, "research_reviewer").scavenge()
 
-        assert created == 1
-        events = _get_events(db_conn, pid, agent_id)
-        assert events[0]["event_type"] == "review_ready"
+        assert created == 0
+        assert _get_events(db_conn, pid, agent_id) == []
 
     def test_ignores_code_tasks(self, db_conn, executing_project):
         pid = executing_project

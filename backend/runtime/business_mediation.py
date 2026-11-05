@@ -9,6 +9,7 @@ RESEARCH_NAMES = frozenset(
     {
         "researcher_reference_list",
         "researcher_capture_reference",
+        "researcher_capture_command",
         "researcher_capture_web",
         "researcher_capture_paper",
         "researcher_capture_wiki",
@@ -56,7 +57,7 @@ REVIEW_NAMES = frozenset(
 )
 INVESTIGATION_NAMES = (RESEARCH_NAMES - {"researcher_report_write"}) | {"researcher_investigation_summary"}
 BUSINESS_NAMES = RESEARCH_NAMES
-DEVELOPMENT_NAMES = RESEARCH_NAMES - {"researcher_result_propose"}
+DEVELOPMENT_NAMES = RESEARCH_NAMES - {"researcher_result_propose", "researcher_capture_command"}
 CODE_REVIEW_NAMES = REVIEW_NAMES - {
     "researcher_review_subject",
     "researcher_review_decide",

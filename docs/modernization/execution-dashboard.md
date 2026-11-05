@@ -9,7 +9,38 @@ Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: investigación exploratoria y entradas antiguas
+## Etapa actual: investigación científica y evidencia de comandos
+
+**Resultado:** pregunta/métodos, alternativas, hipótesis, experimentos, síntesis
+temática, informe, wiki y revisión usan las capacidades nativas existentes.
+La salida real de un comando cerrado se captura como fuente citable; conserva
+origen, bytes/hashes, errores y límites. No se añadió otro loop ni registro de
+hipótesis. ResearchFlow/ResearchReviewFlow ahora sólo indican la acción owner;
+`research` pasa al mismo límite que `investigation`. No hay aceptación por etiqueta
+o por agotar revisiones. La aceptación explícita libera el trabajo dependiente.
+
+**Verificación:**80pruebas dirigidas pasan. Ensayo broker/kernel/Git real con
+4turnos controlados: planificador→autor científico→revisor independiente→desarrollo
+privado dependiente tras aceptar. Hipótesis/experimento/conclusión,2fuentes,
+informe/wiki; fuente137intacta,0aceptaciones de código y peers cerrados.
+El paquete amplio pasó287casos y falló1expectativa de una etapa retirada;
+4casos históricos excluidos. Tras adaptar esa prueba al contrato público,
+el wheel final pasa46casos sin omisiones. Todos los miembros de aplicación y
+binarios coinciden entre ambos paquetes; sólo cambió ese test. Migración52→53
+atómica conserva historia;64definiciones documentadas;17avisos Ruff heredados,
+ninguno nuevo. No se afirma suite global verde, calidad de modelos, comprensión
+humana o aceptación visual nueva. [Resultados](scientific-results.json),
+[paquete](scientific-packaging.json), [contrato](../architecture/native-scientific-research.md).
+
+**Siguiente bloque principal:** cortar los activadores reales restantes de
+AgentLoop/MessageHandler/listeners/FlowManager y los recorridos de desarrollo,
+revisión y tipos pendientes, preservando datos/candidatos previos. Revisar sus
+consumidores y la adopción explícita de trabajo parcial antes de retirar una
+capacidad. No volver sobre metadatos de comandos, estilo o paneles secundarios.
+El resto íntegro del plan —incluidas interfaz y evaluaciones humanas— sigue activo.
+
+## Etapa anterior: investigación exploratoria y entradas antiguas
+
 
 **Resultado:** `investigation` produce un resumen tipado de alcance, áreas con
 hallazgos citados, límites y siguientes pasos. Usa el propietario y despacho
@@ -34,7 +65,7 @@ anotados enDD017. Sin inferencia real ni evaluación de comprensión humana; no 
 afirma suite global verde o aceptación visual nueva. [Resultados](investigation-results.json),
 [paquete](investigation-packaging.json), [contrato](../architecture/native-investigation.md).
 
-**Siguiente bloque principal:** migrar los resultados propios de investigación
+**Siguiente bloque previsto entonces (histórico):** migrar los resultados propios de investigación
 científica y sus consumidores, preservando métodos/evidencias y revisión, sin otro
 loop LLM. Continuar por los demás tipos y las entradas de AgentLoop/listeners hasta
 cerrar la exclusión física global legacy. Adopción de drafts/candidatos, interfaz,

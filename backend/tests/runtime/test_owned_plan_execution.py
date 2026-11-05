@@ -9,13 +9,13 @@ import pytest
 from backend.tests.runtime.test_owned_factory import owned_config as owned_config  # noqa: PLC0414 -- shared physical runtime fixture.
 
 
-@pytest.mark.parametrize("root_type", ["research", "investigation"])
+@pytest.mark.parametrize("root_type", ["research", "investigation", "scientific"])
 @pytest.mark.timeout(180)
 async def test_owned_accepted_plan_dispatches_root_then_exact_evidence_to_private_development(
     owned_config,
     root_type,
 ):
-    """One original owner execution sends three native turns total: planner, researcher and developer; only owner-accepted research wakes its dependent and no code is accepted or published."""
+    """One owner execution dispatches planner, author and developer, plus a separate exact-subject reviewer for the scientific case; only explicit research acceptance releases the dependent and no code is accepted or published."""
     from backend.api.main import create_app
     from backend.api.runtime_dependencies import configured_runtime
     from backend.planning.execution import PlanExecutions
@@ -32,6 +32,15 @@ async def test_owned_accepted_plan_dispatches_root_then_exact_evidence_to_privat
         assert original.count('"type": "research",') == 1
         fixture.write_text(
             original.replace('"type": "research",', '"type": "investigation",')
+        )
+    if root_type == "scientific":
+        from pathlib import Path
+
+        fixture = Path(c.settings["codex_binary"])
+        fixture.write_text(
+            fixture.read_text().replace(
+                "scientific_mode = False", "scientific_mode = True", 1
+            )
         )
     await fixture_git(c.s.workspace, "init", "-q")
     await fixture_git(c.s.workspace, "add", "fact.txt")
@@ -83,7 +92,9 @@ async def test_owned_accepted_plan_dispatches_root_then_exact_evidence_to_privat
                 run_id = next(d["run_id"] for d in deliveries if d["task_id"] == task)
                 if run_id:
                     await runtime.wait(run_id)
-                    return runtime.store.get(101, run_id)
+                    observed = runtime.store.get(101, run_id)
+                    if observed.status not in ("queued", "running", "cancelling"):
+                        return observed
                 await asyncio.sleep(0.05)
             raise AssertionError("Original authorized delivery was not admitted")
 
@@ -132,6 +143,64 @@ async def test_owned_accepted_plan_dispatches_root_then_exact_evidence_to_privat
                 and "researcher_review_decide" not in names
             )
             assert author["sandbox"] == "read-only"
+        if root_type == "scientific":
+            from dataclasses import replace
+
+            from backend.knowledge.reviews import finding_subject
+            from backend.research.models import ReviewTarget
+
+            with runtime.store._transaction() as conn:
+                fid = conn.execute(
+                    "SELECT id FROM findings WHERE task_id=? AND finding_type='conclusion'",
+                    (tasks[0],),
+                ).fetchone()[0]
+                subject = finding_subject(conn, 101, fid)
+                types = [
+                    r[0]
+                    for r in conn.execute(
+                        "SELECT finding_type FROM findings WHERE task_id=? ORDER BY id",
+                        (tasks[0],),
+                    )
+                ]
+                assert types == ["hypothesis", "hypothesis", "experiment", "conclusion"]
+                source = conn.execute(
+                    "SELECT provenance_json FROM research_sources WHERE task_id=? AND locator LIKE 'command-receipt:%'",
+                    (tasks[0],),
+                ).fetchone()
+                meta = json.loads(source[0])["job"]
+                assert meta["local_execution_closed"] and meta["exit_code"] == 0
+                assert meta["stdout_bytes"] == 4 and meta["output_limited"] is False
+                assert (
+                    conn.execute(
+                        "SELECT count(*)FROM wiki_revisions WHERE project_id=101"
+                    ).fetchone()[0]
+                    == 1
+                )
+            review = await runtime.submit(
+                replace(
+                    c.s.c.spec,
+                    task_id=tasks[0],
+                    context_version=root.context_version,
+                    actor_id="independent-scientific-reviewer",
+                    operation_key="scientific-owner-review",
+                    prompt="Check the exact conclusion, method, alternatives and both original sources.",
+                ),
+                repository_id=11,
+                review=ReviewTarget(fid, subject["subject_sha256"]),
+            )
+            await runtime.wait(review.run_id)
+            decision = runtime.store.get(101, review.run_id)
+            assert (
+                decision.status == "needs_review"
+                and decision.review["decision_id"] is not None
+            ), decision
+            assert (
+                decision.attempt_id != root.attempt_id
+                and decision.thread_id != root.thread_id
+            )
+            assert not runtime.store.task_runs(101, tasks[1])
+            research_state = runtime.store.result_state(101, root.run_id)
+            assert research_state["eligible"] and research_state["acceptance"] is None
         accept(
             SimpleNamespace(store=runtime.store),
             SimpleNamespace(run_id=root.run_id, context_version=root.context_version),
@@ -162,12 +231,9 @@ async def test_owned_accepted_plan_dispatches_root_then_exact_evidence_to_privat
             assert source["snapshot"]["limitations"] == [
                 "La medición original no se repitió; el cálculo es evidencia separada."
             ]
-            assert (
-                conn.execute(
-                    "SELECT count(*)FROM runtime_inference_dispatches"
-                ).fetchone()[0]
-                == 3
-            )
+            assert conn.execute(
+                "SELECT count(*)FROM runtime_inference_dispatches"
+            ).fetchone()[0] == (4 if root_type == "scientific" else 3)
             assert (
                 conn.execute(
                     "SELECT count(*)FROM runtime_peers WHERE state!='closed'"

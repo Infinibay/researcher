@@ -400,7 +400,7 @@ def test_revision_migration_rolls_back_failed_upgrade_and_preserves_original_exe
 
     def skip_revision(conn, path):
         """Prepare the actual schema50 while leaving its historical SQL resources unchanged."""
-        if path.name not in ("plan_reauthorization_schema.sql", "investigation_schema.sql"):
+        if path.name not in ("plan_reauthorization_schema.sql", "investigation_schema.sql", "scientific_schema.sql"):
             apply(conn, path)
 
     monkeypatch.setattr(migrations, "apply_sql_resource", skip_revision)

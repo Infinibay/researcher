@@ -1,0 +1,111 @@
+{
+  "base_commit": "808b737",
+  "goal_status": "in_progress",
+  "capability": "Scientific domain outcomes moved onto existing native findings/reports/wiki/review/acceptance/DAG, retained command output becomes actual cited source, real legacy scientific author/reviewer entries hand off without old inference/automatic acceptance.",
+  "schema": 53,
+  "source": {
+    "passed": 80,
+    "failures": [],
+    "skipped": 0,
+    "case_seconds": 12.141
+  },
+  "owned_source": {
+    "passed": 1,
+    "failures": [],
+    "skipped": 0,
+    "case_seconds": 45.406
+  },
+  "owned_scope": "Actual configured broker/kernel/Git/planner/scientific author/separate exact-subject reviewer/owner acceptance/dependent private developer,4original controlled native dispatches;2hypotheses+experiment+conclusion,actual retained stdout200fromsource137+63,report/wiki,2source independent review,source137unchanged,0codeacceptance/allpeersclosed. Generation/Ken controlled; no real model/scientific-quality inference.",
+  "wheel_initial_broad": {
+    "base_commit": "808b737",
+    "stage": "initial_broad_package",
+    "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+    "wheel_sha256": "369a1be462f4d4a81ec72e2a15f25662b6b668bd448442060e28bdc18f4d8f1f",
+    "passed": 287,
+    "failures": [
+      "backend.tests.runtime.test_result_acceptance::test_legacy_author_flow_refuses_native_ownership_before_agent_selection"
+    ],
+    "skipped": 0,
+    "explicitly_deselected_known_cases": 4,
+    "wall_seconds": 138.05,
+    "owned_case_seconds": 42.842,
+    "backend_tree": {
+      "matching_source_files": 771,
+      "sha256": "ef219c96a04684fcc495313a931e3c5946532ab408cc7d78abd58813dd988c19"
+    },
+    "scope": "Actual isolated extracted-wheel bootstrap and broad native/research/storage/CLI/legacy tests, including physical scientific kernel/Git/reviewer/acceptance/dependent pipeline; controlled generation/Ken, no real model inference. Failed case still calls removed assign_research stage; public kickoff now returns scoped original native references.",
+    "global_status": "Not globally green or full-goal complete."
+  },
+  "wheel_final": {
+    "base_commit": "808b737",
+    "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+    "wheel_sha256": "34831525b2563c93221279ad079bac0970946ec80605bb3e85b692252d2806b3",
+    "observed": {
+      "tests_passed": 46,
+      "failures": [],
+      "skipped": 0,
+      "backend_modules_loaded": 295,
+      "backend_imports_only_from_wheel": true,
+      "model_turns": 0,
+      "network": "Disabled except Unix sockets",
+      "semantic_assets": "Explicit prepared pinned public offline assets outside wheel",
+      "broader_package_receipt": "docs/modernization/scientific-packaging-initial.json"
+    },
+    "backend_tree": {
+      "matching_source_files": 771,
+      "sha256": "ef1ea8202c25da557d2a7d75f3eb02403c24f7c4f85ed5385ad595bf6b51307d"
+    },
+    "bootstrap": "Python3.12 -I -S with explicit installed dependency path and original host venv prefix restored; backend import paths remain restricted to extracted wheel.",
+    "validation_scope": "Final directed package after adapting one stale test to the new public legacy entry. Actual physical scientific pipeline passed in retained initial broad package; compare source manifests before reusing that evidence.",
+    "limits": "Extracted backend wheel plus installed dependencies and explicit prepared offline assets; not a clean full host installation or an inference-quality trial.",
+    "initial_broader_receipt": "docs/modernization/scientific-packaging-initial.json",
+    "changes_since_initial_broad_package": {
+      "all_backend_member_differences": [
+        "backend/tests/runtime/test_result_acceptance.py"
+      ],
+      "compiled_and_application_members_identical": true,
+      "current_checkout_matches_final_python_sql": true,
+      "rationale": "Only one stale test now calls the public read-only kickoff and checks original native identity/no new agent or acceptance. No application or compiled code changed after initial287pass/1stale-failure run, whose physical scientific case passed."
+    },
+    "initial_broader_suite_exclusions": "Legacy invalid-transition text assertion recorded in the prior global baseline also excluded. Development inverse40/41/42 tests refuse later schemas43\u201353: test_unused_review_inverse_preserves_closed_author_and_candidate, test_unused_native_review_inverse_preserves_existing_packet, test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history[frozen_author]. Prior terminal-owner source receipt observes these guards with schemas43\u201349; current53selected run excludes them. Inverses43\u201353 remain required; guard not weakened (DD003).",
+    "excluded_known_failure": []
+  },
+  "documentation": {
+    "changed_new_python_definitions": 64,
+    "missing": [],
+    "receipt": "docs/modernization/scientific-docstrings.json"
+  },
+  "methodology": "Conditional question framework, actual search scope and coverage, alternatives and discriminating evidence, dependence/counterevidence/sensitivity, actual command measurement vs source empirical measurement, formal framework name/version/unit/reasons when applicable. No arbitrary GRADE-like numeric bands or automatic best-effort acceptance.",
+  "migration": "Injected53install failure rolls back new guards while retaining52; retry idempotent, historical done scientific task/report unchanged,0invented owneracceptance,foreignkeysvalid. Inverses43\u201353/fullrestore remain required.",
+  "fixture_corrections": [
+    {
+      "observation": "Persisted planned run ID could appear before RuntimeService registered its in-memory worker; wait alone returned early.",
+      "resolution": "Fixture observes original durable run status until terminal; no new run/restart or service wait API rewrite."
+    },
+    {
+      "observation": "Controlled reviewer tried supported verdict with a not_checked empirical-replication check; actual validator correctly rejected it.",
+      "resolution": "Review target is a bounded arithmetic/documentary conclusion, so empirical replication is explicitly not_applicable to that claim. Guard unchanged; reviewer still reads both sources and states no empirical validation."
+    },
+    {
+      "observation": "One broad package test called removed assign_research and expected a ValueError.",
+      "resolution": "Changed that test to actual public kickoff and stronger original-native/no-agent/no-acceptance invariants. Final46case wheel passes; all application/compiled package bytes identical to initial broad wheel."
+    }
+  ],
+  "limits": [
+    "No whole-goal completion or globally green suite; initial broad1failure explicitly retained alongside finalfix.",
+    "No real model quality, formal scientific validity, human comprehension or new visual acceptance measured.",
+    "Global AgentLoop/MessageHandler/listener/FlowManager/other-type physical legacy exclusion remains pending.",
+    "Command capture currently offered to native documentary/scientific/exploratory authors; development integration and other artifacts remain part of their own required work.",
+    "Historical state/read models preserved, removed stage tests replaced by public owner contract and actual native evidence/review pipeline tests."
+  ],
+  "full_goal_remaining": [
+    "Remaining domain types/actual legacy activators/global physical exclusion",
+    "Manual drafts/unaccepted runs/private candidate adoption and retained-code full review/acceptance/publication",
+    "Web endpoint binding and advanced terminal parity",
+    "Remote Forgejo/recovery gaps",
+    "All prompts/books/model/scientific/human communication evaluations",
+    "6remaining web routes;18of36desktop6of12mobileconcepts;0of12pages fullyaccepted",
+    "43broad scenarios;globalfailures;clean installation/restore/inverses;finalfreshwholebranchreview"
+  ],
+  "authorization": "Local managed worktree only; no new subagents, push, merge or deploy."
+}

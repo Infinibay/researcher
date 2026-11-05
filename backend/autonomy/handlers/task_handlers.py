@@ -57,15 +57,16 @@ class TaskFlowHandler(EventHandler):
             if task_type == "research":
                 from backend.flows.research_flow import ResearchFlow
                 flow = ResearchFlow()
-                flow.kickoff(inputs={
+                handoff = flow.kickoff(inputs={
                     "project_id": project_id,
                     "task_id": task_id,
                     "researcher_id": agent_id,
                 })
                 log_flow_event(
-                    project_id, "research_flow_completed",
-                    "agent_loop", "task", task_id,
+                    project_id, "native_owner_handoff",
+                    "agent_loop", "task", task_id, handoff,
                 )
+                return handoff
             else:
                 from backend.flows.development_flow import DevelopmentFlow
                 flow = DevelopmentFlow()

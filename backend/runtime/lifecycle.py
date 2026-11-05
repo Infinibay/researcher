@@ -7,12 +7,12 @@ belongs to the versioned independent review protocol, regardless of role labels.
 
 
 def require_legacy_task(conn, task_id):
-    """Refuse legacy mutation/inference for migrated exploratory work and any task with native admission history."""
+    """Refuse legacy mutation/inference for migrated documentary/scientific work and any task with native admission history."""
     from backend.runtime.task_profiles import OWNER_ONLY_LEGACY_TASK_TYPES
 
     task = conn.execute("SELECT type FROM tasks WHERE id=?", (task_id,)).fetchone()
     if task is not None and task[0] in OWNER_ONLY_LEGACY_TASK_TYPES:
-        raise ValueError("Investigation requires the native owner task workspace")
+        raise ValueError("Research and investigation require the native owner task workspace")
     if (
         conn.execute(
             "SELECT 1 FROM sqlite_master WHERE type='table' AND name='runtime_runs'"

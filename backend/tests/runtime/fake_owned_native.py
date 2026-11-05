@@ -17,6 +17,9 @@ for arg in args:
         config.update(tomllib.loads(next(args)))
 steps = 0
 source = finding = job = report = None
+scientific_mode = False
+scientific_finding_ids = []
+scientific_output_source = None
 investigation_mode = False
 planning_mode = False
 plan_material = None
@@ -57,9 +60,15 @@ def next_tool(response=None):
     if code_review_mode:
         return next_code_review_tool(response)
     if review_mode:
-        return next_review_tool(response)
+        return (
+            next_scientific_review_tool(response)
+            if scientific_mode
+            else next_review_tool(response)
+        )
     if development_mode:
         return next_development_tool(response)
+    if scientific_mode:
+        return next_scientific_tool(response)
     global steps, source, finding, job, report
     if response is not None:
         Path("/home/actor/.codex/fixture-progress.json").write_text(
@@ -467,6 +476,235 @@ def next_code_review_tool(response=None):
         )
 
 
+def finish_scientific_turn(message):
+    """End the controlled protocol with an explicitly limited research or review candidate."""
+    send(
+        {
+            "method": "item/completed",
+            "params": {
+                "threadId": native_thread_id,
+                "turnId": native_turn_id,
+                "item": {
+                    "id": "science-answer",
+                    "type": "agentMessage",
+                    "text": message,
+                },
+            },
+        }
+    )
+    send(
+        {
+            "method": "turn/completed",
+            "params": {
+                "threadId": native_thread_id,
+                "turn": {"id": native_turn_id, "status": "completed", "error": None},
+            },
+        }
+    )
+
+
+def next_scientific_tool(response=None):
+    """Exercise actual source/job capture, competing hypotheses, experiment, synthesis and wiki through native host tools; generation is scripted."""
+    global steps, source, job, report, scientific_output_source
+    if response is not None:
+        if not response["success"]:
+            raise RuntimeError("Controlled scientific tool failed: " + str(response))
+        value = json.loads(response["contentItems"][0]["text"])
+        if steps == 2:
+            job = value["job_id"]
+        if steps == 3 and (
+            value["status"] != "exited" or not value["local_execution_closed"]
+        ):
+            call("researcher_command_read", {"job_id": job, "wait_ms": 1000})
+            return
+        if steps == 4:
+            source = value["source_id"]
+        if steps == 5:
+            scientific_output_source = value["source_id"]
+        if steps in (6, 7, 8, 9):
+            scientific_finding_ids.append(value["finding_id"])
+        if steps == 11:
+            report = value["artifact_id"]
+    steps += 1
+    if steps == 1:
+        call("ken_read", {"path": "fact.txt"})
+    elif steps == 2:
+        call(
+            "researcher_python",
+            {
+                "operation_key": "science-calc",
+                "code": "from pathlib import Path;print(int(Path('fact.txt').read_text())+63)",
+                "timeout_seconds": 5.0,
+            },
+        )
+    elif steps == 3:
+        call("researcher_command_read", {"job_id": job, "wait_ms": 1000})
+    elif steps == 4:
+        call(
+            "researcher_capture_reference",
+            {"operation_key": "science-input", "reference_file_id": 7},
+        )
+    elif steps == 5:
+        call(
+            "researcher_capture_command",
+            {"operation_key": "science-output", "job_id": job},
+        )
+    elif steps in (6, 7, 8, 9):
+        kind, topic, body = {
+            6: (
+                "hypothesis",
+                "H1: explicit arithmetic",
+                "Adding63to the recorded137predicts200; this is an interpretation to test, not empirical replication.",
+            ),
+            7: (
+                "hypothesis",
+                "H2: no arithmetic needed",
+                "Treating the original recorded count as already200is an alternative contradicted by the supplied137and the explicit calculation.",
+            ),
+            8: (
+                "experiment",
+                "Retained calculation",
+                "Read fact.txt and add63once. The actual closed command output is200. This is one deterministic calculation, not a repeated sampling experiment.",
+            ),
+            9: (
+                "conclusion",
+                "Scope-limited arithmetic",
+                "The supplied text records137; the separately retained calculation gives200. H1fits that bounded arithmetic and H2does not. No empirical measurement protocol, independent sampling units or population causal effect were tested.",
+            ),
+        }[steps]
+        evidence = [{"source_id": source, "quote": "Fixture base 137 units."}]
+        if steps >= 8:
+            evidence.append({"source_id": scientific_output_source, "quote": "200"})
+        call(
+            "researcher_finding_record",
+            {
+                "operation_key": "science-finding-" + str(steps),
+                "topic": topic,
+                "content": body,
+                "finding_type": kind,
+                "evidence": evidence,
+            },
+        )
+    elif steps == 10:
+        call(
+            "researcher_wiki_write",
+            {
+                "operation_key": "science-note",
+                "path": "scientific-fixture",
+                "title": "Cálculo y medición son evidencias distintas",
+                "content": "La fuente registra137. El cálculo retenido da200. No se repitió la medición ni se conoce el protocolo. Nota contextual; no validación científica.",
+                "expected_revision": 0,
+            },
+        )
+    elif steps == 11:
+        text = (
+            "## Pregunta y unidad\n¿Qué interpretación aritmética concuerda con el dato aportado? Una entrada de fixture; ninguna unidad muestral empírica identificada.\n## Métodos y alcance de búsqueda\nKen leyó fact.txt. Sólo se inspeccionó el adjunto y se ejecutó una suma con Python estándar. No hubo revisión bibliográfica ni búsqueda web.\n## Hipótesis y evidencia por tema\nH1:137+63produce200. H2:137ya representa200. La fuente dice137 y la salida capturada es200; H2contradice esas observaciones en este alcance. No se elige una hipótesis contando páginas o inconsistencias.\n## Experimento\nJob "
+            + str(job)
+            + "; código: leer fact.txt y sumar63. Se conserva stdout, argv, salida y cierre en una fuente citable. Una ejecución determinista; no replicación empírica.\n## Discusión y contraevidencia\nSin la entrada original no puede atribuirse el resultado al dato137. Ambas fuentes dependen del mismo fixture; no son dos réplicas independientes. La medición original, protocolo y población siguen desconocidos.\n## Evaluación\nNo se realizó GRADE ni se asignó certeza numérica. La revisión documental independiente y aceptación del propietario son decisiones separadas.\n## Conclusión y próximos pasos\nEl resultado acotado es aritmético. Obtener el protocolo y unidades independientes si la decisión exige verificar una medición.\n## Referencias\nFuente de entrada #"
+            + str(source)
+            + "; recibo de comando #"
+            + str(scientific_output_source)
+            + "."
+        )
+        call(
+            "researcher_report_write",
+            {
+                "operation_key": "science-report",
+                "title": "Investigación de cálculo y medición",
+                "content": text,
+                "finding_ids": scientific_finding_ids,
+                "report_type": "research",
+            },
+        )
+    elif steps == 12:
+        call(
+            "researcher_result_propose",
+            {
+                "operation_key": "science-deliver",
+                "report_ids": [report],
+                "summary": "Contraste de hipótesis con cálculo retenido y límites explícitos.",
+                "limitations": [
+                    "La medición original no se repitió; el cálculo es evidencia separada."
+                ],
+            },
+        )
+    else:
+        finish_scientific_turn(
+            "Informe y nota guardados; revisión y aceptación siguen siendo decisiones explícitas."
+        )
+
+
+def next_scientific_review_tool(response=None):
+    """Inspect the author's exact finding and both retained sources through an independently admitted review-only session."""
+    global steps, review_subject
+    if response is not None:
+        if not response["success"]:
+            raise RuntimeError("Controlled scientific review failed: " + str(response))
+        value = json.loads(response["contentItems"][0]["text"])
+        if steps == 1:
+            review_subject = json.loads(value["content"])
+        if steps == 2:
+            assert "137 units" in value["content"]
+        if steps == 3:
+            assert "Standard output" in value["content"] and "200" in value["content"]
+    steps += 1
+    if steps == 1:
+        call("researcher_review_subject", {"max_chars": 20000})
+    elif steps in (2, 3):
+        call(
+            "researcher_source_read",
+            {"source_id": review_subject["evidence"][steps - 2]["source"]["id"]},
+        )
+    elif steps == 4:
+        call(
+            "researcher_review_decide",
+            {
+                "operation_key": "science-review",
+                "verdict": "supported",
+                "rationale": "El texto y el cálculo retenido respaldan la conclusión acotada; no verifican la medición empírica.",
+                "checks": [
+                    {
+                        "criterion": "claim_support",
+                        "outcome": "supported",
+                        "explanation": "Se leyeron las dos fuentes originales.",
+                    },
+                    {
+                        "criterion": "method_scope",
+                        "outcome": "supported",
+                        "explanation": "El informe limita el resultado a una suma y distingue hipótesis, ejecución y medición.",
+                    },
+                    {
+                        "criterion": "counterevidence",
+                        "outcome": "supported",
+                        "explanation": "La alternativaH2se contrasta con137y200; no hay réplicas independientes.",
+                    },
+                    {
+                        "criterion": "empirical_replication",
+                        "outcome": "not_applicable",
+                        "explanation": "La conclusión examinada se limita al cálculo; no afirma replicación empírica, protocolo ni población.",
+                    },
+                ],
+                "evidence": [
+                    {
+                        "source_id": review_subject["evidence"][0]["source"]["id"],
+                        "quote": "137 units",
+                    },
+                    {
+                        "source_id": review_subject["evidence"][1]["source"]["id"],
+                        "quote": "200",
+                    },
+                ],
+                "limitations": [
+                    "Revisión documental de dos fuentes dependientes; no certeza científica calibrada."
+                ],
+            },
+        )
+    else:
+        finish_scientific_turn(
+            "Revisión documental propuesta; no acepta la tarea ni valida una medición."
+        )
+
+
 def next_planning_tool(response=None):
     """Produce a controlled justified graph through actual native host tools, with no child execution or owner approval capability."""
     global steps, plan_material
@@ -641,6 +879,11 @@ for line in sys.stdin:
             tool["name"] == "researcher_review_decide"
             for tool in params["dynamicTools"]
         )
+        if scientific_mode and review_mode:
+            native_thread_id, native_turn_id = (
+                "science-review-thread",
+                "science-review-turn",
+            )
         Path("/home/actor/.codex/fixture-thread.json").write_text(
             json.dumps(
                 {

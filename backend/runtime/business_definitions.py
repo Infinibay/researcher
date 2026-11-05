@@ -79,6 +79,7 @@ def definitions(client, *, names=None):
     writes = {
         "researcher_ask_user",
         "researcher_capture_reference",
+        "researcher_capture_command",
         "researcher_capture_web",
         "researcher_capture_paper",
         "researcher_capture_wiki",
@@ -281,6 +282,10 @@ class ResearchTools:
             f"/sources/{source_id}/query",
             query={"query": query, "limit": limit, "after_rank": after_rank},
         )
+
+    async def researcher_capture_command(self, operation_key: str, job_id: str) -> dict:
+        """Capture this author attempt's retained terminal and physically closed command stdout/stderr as exact cited source text. Supply the actual job_id only; the host resolves bytes/origin/closure. Failed exits/truncation remain explicit limits; binary or incomplete output is refused. Capture neither reruns the command nor validates its scientific conclusion; preserve operation_key on retry."""
+        return await self._client.request("POST", "/command-sources", body={"operation_key": operation_key, "job_id": job_id})
 
     async def researcher_finding_record(
         self,

@@ -1,0 +1,456 @@
+{
+  "base_commit": "808b737",
+  "changed_or_new_definitions_documented": 64,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/models/research.py",
+      "symbol": "CaptureCommand",
+      "line": 22,
+      "docstring": "Identify an actual retained job; all output, origin and authority are resolved by the host.",
+      "file_sha256": "28274d08603d0b393c6b94be1bf7a574b8afe7cefe3dbb77f569d1ce6a77d5fd"
+    },
+    {
+      "path": "backend/api/routes/research.py",
+      "symbol": "command_source_capture",
+      "line": 57,
+      "docstring": "Capture only actual complete command bytes in the current author scope, never output submitted by the model.",
+      "file_sha256": "ce5ce8187646910da9e6295eb00d0bb5f9e809816d6016c440dc1568b4ffe88d"
+    },
+    {
+      "path": "backend/autonomy/handlers/task_handlers.py",
+      "symbol": "TaskFlowHandler",
+      "line": 15,
+      "docstring": "Handles task_available and task_resume events.\n\nDispatches to DevelopmentFlow or ResearchFlow based on task type.",
+      "file_sha256": "77f74efc0324a646bdfd69f5fe88edb29ab4e037fc7e3b228e6df751390efc89"
+    },
+    {
+      "path": "backend/autonomy/handlers/task_handlers.py",
+      "symbol": "TaskFlowHandler.execute",
+      "line": 21,
+      "docstring": "Acknowledge owner-managed task hints without claiming them; dispatch remaining legacy tasks.",
+      "file_sha256": "77f74efc0324a646bdfd69f5fe88edb29ab4e037fc7e3b228e6df751390efc89"
+    },
+    {
+      "path": "backend/flows/main_project_flow.py",
+      "symbol": "MainProjectFlow",
+      "line": 56,
+      "docstring": "Orchestrates the complete project lifecycle using event-driven flows.",
+      "file_sha256": "4d34add21c62acd80b9f0c795ed650d3017d51cd5ce8c77d1f269eb76c5f4f35"
+    },
+    {
+      "path": "backend/flows/main_project_flow.py",
+      "symbol": "MainProjectFlow._run_sub_flow",
+      "line": 806,
+      "docstring": "Run a sub-flow in a background thread and signal completion.",
+      "file_sha256": "4d34add21c62acd80b9f0c795ed650d3017d51cd5ce8c77d1f269eb76c5f4f35"
+    },
+    {
+      "path": "backend/flows/research_flow.py",
+      "symbol": "ResearchFlow",
+      "line": 15,
+      "docstring": "Resolve an old scientific entry to the actual scoped owner workspace without selecting agents or executing a legacy stage.",
+      "file_sha256": "e31a2324344db2e3a57fd7067cce13bd443802d8cd8457e97721ff33011dc2e4"
+    },
+    {
+      "path": "backend/flows/research_flow.py",
+      "symbol": "ResearchFlow.__init__",
+      "line": 18,
+      "docstring": "Retain historical state shape without initializing CrewAI, services or a model loop.",
+      "file_sha256": "e31a2324344db2e3a57fd7067cce13bd443802d8cd8457e97721ff33011dc2e4"
+    },
+    {
+      "path": "backend/flows/research_flow.py",
+      "symbol": "ResearchFlow.kickoff",
+      "line": 22,
+      "docstring": "Return original native references or explicit owner admission; old review/revision labels confer no authority.",
+      "file_sha256": "e31a2324344db2e3a57fd7067cce13bd443802d8cd8457e97721ff33011dc2e4"
+    },
+    {
+      "path": "backend/flows/research_review_flow.py",
+      "symbol": "ResearchReviewFlow",
+      "line": 15,
+      "docstring": "Resolve an old scientific entry to the actual scoped owner workspace without selecting agents or executing a legacy stage.",
+      "file_sha256": "c1d671be4bc2b7887c261fd37bc03e275ddf6005e4cf063da65c25219415f711"
+    },
+    {
+      "path": "backend/flows/research_review_flow.py",
+      "symbol": "ResearchReviewFlow.__init__",
+      "line": 18,
+      "docstring": "Retain historical state shape without initializing CrewAI, services or a model loop.",
+      "file_sha256": "c1d671be4bc2b7887c261fd37bc03e275ddf6005e4cf063da65c25219415f711"
+    },
+    {
+      "path": "backend/flows/research_review_flow.py",
+      "symbol": "ResearchReviewFlow.kickoff",
+      "line": 22,
+      "docstring": "Return original native references or explicit owner admission; old review/revision labels confer no authority.",
+      "file_sha256": "c1d671be4bc2b7887c261fd37bc03e275ddf6005e4cf063da65c25219415f711"
+    },
+    {
+      "path": "backend/flows/state_models.py",
+      "symbol": "ResearchState",
+      "line": 133,
+      "docstring": "Compatibility snapshot of the retired scientific author flow; historical hypotheses, scores and report metadata never authorize native execution or acceptance.",
+      "file_sha256": "52a5b56d690ad6582ec734d952e2e3a508484f3ad3b880ae153af946a8953e08"
+    },
+    {
+      "path": "backend/flows/state_models.py",
+      "symbol": "InvestigationState",
+      "line": 151,
+      "docstring": "Compatibility snapshot for the exploratory owner handoff; historical fields do not start a model stage or grant authority.",
+      "file_sha256": "52a5b56d690ad6582ec734d952e2e3a508484f3ad3b880ae153af946a8953e08"
+    },
+    {
+      "path": "backend/flows/state_models.py",
+      "symbol": "ResearchReviewState",
+      "line": 164,
+      "docstring": "Compatibility snapshot of retired review/revision routing; stored labels and retry counts cannot validate findings, resume work or accept a native result.",
+      "file_sha256": "52a5b56d690ad6582ec734d952e2e3a508484f3ad3b880ae153af946a8953e08"
+    },
+    {
+      "path": "backend/research/command_sources.py",
+      "symbol": "capture_command",
+      "line": 17,
+      "docstring": "Atomically capture only this current native author's closed terminal job, retaining failures/truncation and refusing binary or incomplete output.",
+      "file_sha256": "d4fa00e82d8a95816e8eda90eb12e8c968a3618bd3783da61bf0a9b27abbd91a"
+    },
+    {
+      "path": "backend/research/command_sources.py",
+      "symbol": "capture_command.apply",
+      "line": 21,
+      "docstring": "Resolve actual stored origin/closure and create the document with the same source/receipt transaction.",
+      "file_sha256": "d4fa00e82d8a95816e8eda90eb12e8c968a3618bd3783da61bf0a9b27abbd91a"
+    },
+    {
+      "path": "backend/research/sqlite_store.py",
+      "symbol": "SQLiteResearchStore",
+      "line": 50,
+      "docstring": "Own scoped source/finding/report/wiki transactions, revocable grants and atomic effect receipts.",
+      "file_sha256": "f91f7b8997ff42df3797ba963813dda01f03666ff86d3dda6fd8132e29a4d9dc"
+    },
+    {
+      "path": "backend/research/sqlite_store.py",
+      "symbol": "SQLiteResearchStore._insert_source",
+      "line": 507,
+      "docstring": "Insert one exact captured document inside the caller's already-authorized source/receipt transaction.",
+      "file_sha256": "f91f7b8997ff42df3797ba963813dda01f03666ff86d3dda6fd8132e29a4d9dc"
+    },
+    {
+      "path": "backend/research/sqlite_store.py",
+      "symbol": "SQLiteResearchStore.capture_source",
+      "line": 516,
+      "docstring": "Persist captured document and original receipt together; ordinary capture intent remains compatible.",
+      "file_sha256": "f91f7b8997ff42df3797ba963813dda01f03666ff86d3dda6fd8132e29a4d9dc"
+    },
+    {
+      "path": "backend/research/sqlite_store.py",
+      "symbol": "SQLiteResearchStore.capture_command",
+      "line": 520,
+      "docstring": "Capture this native author's actual closed terminal command output as exact citable evidence without replaying work.",
+      "file_sha256": "f91f7b8997ff42df3797ba963813dda01f03666ff86d3dda6fd8132e29a4d9dc"
+    },
+    {
+      "path": "backend/runtime/business_definitions.py",
+      "symbol": "definitions",
+      "line": 72,
+      "docstring": "One canonical signature/schema and HTTP mapping for either transport.",
+      "file_sha256": "badf1efbee82f28cd1c64ea2a84ba71d2cfda7fb990197d66af4d03748458b43"
+    },
+    {
+      "path": "backend/runtime/business_definitions.py",
+      "symbol": "ResearchTools",
+      "line": 123,
+      "docstring": "Translate host-owned business tools to scoped HTTP without owning grants or inference.",
+      "file_sha256": "badf1efbee82f28cd1c64ea2a84ba71d2cfda7fb990197d66af4d03748458b43"
+    },
+    {
+      "path": "backend/runtime/business_definitions.py",
+      "symbol": "ResearchTools.researcher_capture_command",
+      "line": 286,
+      "docstring": "Capture this author attempt's retained terminal and physically closed command stdout/stderr as exact cited source text. Supply the actual job_id only; the host resolves bytes/origin/closure. Failed exits/truncation remain explicit limits; binary or incomplete output is refused. Capture neither reruns the command nor validates its scientific conclusion; preserve operation_key on retry.",
+      "file_sha256": "badf1efbee82f28cd1c64ea2a84ba71d2cfda7fb990197d66af4d03748458b43"
+    },
+    {
+      "path": "backend/runtime/lifecycle.py",
+      "symbol": "require_legacy_task",
+      "line": 9,
+      "docstring": "Refuse legacy mutation/inference for migrated documentary/scientific work and any task with native admission history.",
+      "file_sha256": "43416a8be4bbc03065fd250c929e2d0438b6208b762983dfc54d6a1f8056fb05"
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedCodexRuntime",
+      "line": 241,
+      "docstring": "Build subscription-only sessions with required Ken and host-owned private development views.",
+      "file_sha256": "9f674fb0f899bc01ec6abd7a196e3d396a38061e33c094180674757ce0b5391e"
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedCodexRuntime.open",
+      "line": 362,
+      "docstring": "Admit one original project attempt with required Ken and revocable peers.",
+      "file_sha256": "9f674fb0f899bc01ec6abd7a196e3d396a38061e33c094180674757ce0b5391e"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore",
+      "line": 67,
+      "docstring": "Own durable admission, fenced attempts and version-bound review requests in SQLite.",
+      "file_sha256": "de80e271915d02e63d31b9185f858980f8d945e7a0465192cd12cfa8010d5361"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore.reserve_input",
+      "line": 429,
+      "docstring": "Atomically freeze host input and reserve its one non-replayable turn.",
+      "file_sha256": "de80e271915d02e63d31b9185f858980f8d945e7a0465192cd12cfa8010d5361"
+    },
+    {
+      "path": "backend/tests/autonomy/test_scavenger.py",
+      "symbol": "TestResearcherScavenger",
+      "line": 171,
+      "docstring": "Migrated scientific tasks must not be rediscovered as legacy worker events.",
+      "file_sha256": "9cfc43a6abf5fe74a98eee81af4775489ce337fb3012d71fcb6309c6b91b5096"
+    },
+    {
+      "path": "backend/tests/autonomy/test_scavenger.py",
+      "symbol": "TestResearcherScavenger.test_research_tasks_are_not_legacy_work",
+      "line": 173,
+      "docstring": "Retain pending scientific work without emitting a legacy claim event.",
+      "file_sha256": "9cfc43a6abf5fe74a98eee81af4775489ce337fb3012d71fcb6309c6b91b5096"
+    },
+    {
+      "path": "backend/tests/autonomy/test_scavenger.py",
+      "symbol": "TestResearcherScavenger.test_rejected_research_requires_explicit_native_action",
+      "line": 187,
+      "docstring": "A historical rejection does not authorize an automatic scientific rework.",
+      "file_sha256": "9cfc43a6abf5fe74a98eee81af4775489ce337fb3012d71fcb6309c6b91b5096"
+    },
+    {
+      "path": "backend/tests/autonomy/test_scavenger.py",
+      "symbol": "TestResearchReviewerScavenger",
+      "line": 249,
+      "docstring": "Research review needs exact native owner admission rather than a role scavenger hint.",
+      "file_sha256": "9cfc43a6abf5fe74a98eee81af4775489ce337fb3012d71fcb6309c6b91b5096"
+    },
+    {
+      "path": "backend/tests/autonomy/test_scavenger.py",
+      "symbol": "TestResearchReviewerScavenger.test_scientific_review_requires_an_exact_owner_request",
+      "line": 251,
+      "docstring": "A review_ready task is not a versioned independent review request.",
+      "file_sha256": "9cfc43a6abf5fe74a98eee81af4775489ce337fb3012d71fcb6309c6b91b5096"
+    },
+    {
+      "path": "backend/tests/flows/test_research_flow.py",
+      "symbol": "test_historical_research_state_remains_readable",
+      "line": 10,
+      "docstring": "Old hypothesis/confidence fields remain attributed history; loading them starts no stage or validation.",
+      "file_sha256": "c6d7dc4e577dc9ae39279163510d831f7974709ad12fb035d993cd195e22a64c"
+    },
+    {
+      "path": "backend/tests/flows/test_research_flow.py",
+      "symbol": "test_public_legacy_scientific_kickoff_is_a_scoped_owner_hint",
+      "line": 24,
+      "docstring": "Research/review entry reads the real project/task and never claims, revises, reviews or completes from old labels.",
+      "file_sha256": "c6d7dc4e577dc9ae39279163510d831f7974709ad12fb035d993cd195e22a64c"
+    },
+    {
+      "path": "backend/tests/flows/test_research_flow.py",
+      "symbol": "test_legacy_scientific_entry_never_guesses_missing_or_foreign_scope",
+      "line": 64,
+      "docstring": "Missing, foreign or coerced identifiers cannot select a convenient project or trigger old inference.",
+      "file_sha256": "c6d7dc4e577dc9ae39279163510d831f7974709ad12fb035d993cd195e22a64c"
+    },
+    {
+      "path": "backend/tests/runtime/fake_owned_native.py",
+      "symbol": "next_tool",
+      "line": 56,
+      "docstring": "Advance controlled author or reviewer generation while using the real admitted tool bridge.",
+      "file_sha256": "9686f97217a76d43f051b13de4386dad3ee4a842ab77a35bb151283b8e967fa1"
+    },
+    {
+      "path": "backend/tests/runtime/fake_owned_native.py",
+      "symbol": "finish_scientific_turn",
+      "line": 479,
+      "docstring": "End the controlled protocol with an explicitly limited research or review candidate.",
+      "file_sha256": "9686f97217a76d43f051b13de4386dad3ee4a842ab77a35bb151283b8e967fa1"
+    },
+    {
+      "path": "backend/tests/runtime/fake_owned_native.py",
+      "symbol": "next_scientific_tool",
+      "line": 506,
+      "docstring": "Exercise actual source/job capture, competing hypotheses, experiment, synthesis and wiki through native host tools; generation is scripted.",
+      "file_sha256": "9686f97217a76d43f051b13de4386dad3ee4a842ab77a35bb151283b8e967fa1"
+    },
+    {
+      "path": "backend/tests/runtime/fake_owned_native.py",
+      "symbol": "next_scientific_review_tool",
+      "line": 637,
+      "docstring": "Inspect the author's exact finding and both retained sources through an independently admitted review-only session.",
+      "file_sha256": "9686f97217a76d43f051b13de4386dad3ee4a842ab77a35bb151283b8e967fa1"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_publications.py",
+      "symbol": "test_publication_request_is_immutable_and_startup_preserves_original_records",
+      "line": 131,
+      "docstring": "Normal startup installs the typed publication schema, keeps accepted provenance and prevents retargeting its immutable original request.",
+      "file_sha256": "c84ffa83f75539b7491b8c1db6da117d25925288ae1bbb2b95cbb799a15d65aa"
+    },
+    {
+      "path": "backend/tests/runtime/test_investigation.py",
+      "symbol": "test_legacy_scavenger_excludes_owner_only_and_native_owned_tasks",
+      "line": 284,
+      "docstring": "A documentary handoff must not be rediscovered as missing legacy work indefinitely.",
+      "file_sha256": "003328d286d935fe10c5a95f5094114f721f74130589441761e8ed0699063198"
+    },
+    {
+      "path": "backend/tests/runtime/test_investigation.py",
+      "symbol": "test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_report",
+      "line": 423,
+      "docstring": "A failed schema52 install rolls back its table/guards; a repeatable successful upgrade preserves actual schema51 historical records.",
+      "file_sha256": "003328d286d935fe10c5a95f5094114f721f74130589441761e8ed0699063198"
+    },
+    {
+      "path": "backend/tests/runtime/test_investigation.py",
+      "symbol": "test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_report.skip_investigation",
+      "line": 434,
+      "docstring": "Prepare exactly schema51 without changing any historical migration resource.",
+      "file_sha256": "003328d286d935fe10c5a95f5094114f721f74130589441761e8ed0699063198"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_plan_execution.py",
+      "symbol": "test_owned_accepted_plan_dispatches_root_then_exact_evidence_to_private_development",
+      "line": 14,
+      "docstring": "One owner execution dispatches planner, author and developer, plus a separate exact-subject reviewer for the scientific case; only explicit research acceptance releases the dependent and no code is accepted or published.",
+      "file_sha256": "ecbe86c2df1cb28fe844c10f0166dd9d2dcde861fe8c625dad0bd691bc1c9b87"
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_continuation.py",
+      "symbol": "test_delivery_migration_preserves_original_packets_and_rolls_back_whole_rebuild",
+      "line": 318,
+      "docstring": "A failed migration cannot leave rebuilt half-tables; upgrading an actual schema49 preserves original identities and exact handoff bytes.",
+      "file_sha256": "acfd05971839973311ab662954f6f2b765b67444bef68eee5a59cd96026bf5fe"
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_continuation.py",
+      "symbol": "test_delivery_migration_preserves_original_packets_and_rolls_back_whole_rebuild.skip_fifty",
+      "line": 331,
+      "docstring": "Prepare the real pre-upgrade schema without modifying its historical SQL resources.",
+      "file_sha256": "acfd05971839973311ab662954f6f2b765b67444bef68eee5a59cd96026bf5fe"
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_reauthorization.py",
+      "symbol": "test_revision_migration_rolls_back_failed_upgrade_and_preserves_original_execution",
+      "line": 388,
+      "docstring": "A failed schema51 install cannot change existing manifests or replace the old invalidation view; successful retry retains exact original intent and foreign keys.",
+      "file_sha256": "6053528c80e8b62a1fb13b65395645566d8aad02130e5306b518c15e32cffdb8"
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_reauthorization.py",
+      "symbol": "test_revision_migration_rolls_back_failed_upgrade_and_preserves_original_execution.skip_revision",
+      "line": 401,
+      "docstring": "Prepare the actual schema50 while leaving its historical SQL resources unchanged.",
+      "file_sha256": "6053528c80e8b62a1fb13b65395645566d8aad02130e5306b518c15e32cffdb8"
+    },
+    {
+      "path": "backend/tests/runtime/test_result_acceptance.py",
+      "symbol": "test_legacy_author_flow_hands_off_native_ownership_without_agent_selection",
+      "line": 590,
+      "docstring": "An old public entry preserves the original native author and exposes only an owner hint, without another inference, claim or acceptance.",
+      "file_sha256": "8dca940373dd14cc931ff1c9f35183c3d1572cd75687d7aaea7c98a333fc3448"
+    },
+    {
+      "path": "backend/tests/runtime/test_scientific_research.py",
+      "symbol": "scientific_state",
+      "line": 19,
+      "docstring": "Bind one current native researcher and original tool scope without invoking a model.",
+      "file_sha256": "eb81650abd4a486a658e54d6b5cda7e52b1f11e1cd0226e94331e108387febdf"
+    },
+    {
+      "path": "backend/tests/runtime/test_scientific_research.py",
+      "symbol": "command_receipt",
+      "line": 36,
+      "docstring": "Insert an explicitly synthetic command receipt linked to an actual registered fixture peer.",
+      "file_sha256": "eb81650abd4a486a658e54d6b5cda7e52b1f11e1cd0226e94331e108387febdf"
+    },
+    {
+      "path": "backend/tests/runtime/test_scientific_research.py",
+      "symbol": "test_captured_command_is_real_citable_source_with_original_receipt_and_no_scientific_certainty",
+      "line": 87,
+      "docstring": "A retained job's exact stdout becomes cited experimental evidence, not a model-supplied transcript or confidence score.",
+      "file_sha256": "eb81650abd4a486a658e54d6b5cda7e52b1f11e1cd0226e94331e108387febdf"
+    },
+    {
+      "path": "backend/tests/runtime/test_scientific_research.py",
+      "symbol": "test_command_capture_refuses_incomplete_or_lossy_evidence",
+      "line": 161,
+      "docstring": "A terminal-looking row is insufficient while its peer remains open, output is binary, or dispatch outcome is unknown.",
+      "file_sha256": "eb81650abd4a486a658e54d6b5cda7e52b1f11e1cd0226e94331e108387febdf"
+    },
+    {
+      "path": "backend/tests/runtime/test_scientific_research.py",
+      "symbol": "test_command_capture_exposes_failed_exit_and_output_limit_instead_of_inventing_success",
+      "line": 185,
+      "docstring": "A closed failing/truncated experiment can be retained as limited evidence, with all failure flags visible.",
+      "file_sha256": "eb81650abd4a486a658e54d6b5cda7e52b1f11e1cd0226e94331e108387febdf"
+    },
+    {
+      "path": "backend/tests/runtime/test_scientific_research.py",
+      "symbol": "test_real_legacy_scientific_entry_returns_owner_hint_without_claim_or_automatic_acceptance",
+      "line": 200,
+      "docstring": "Even a queued scientific review/revision must not restart old inference or complete work after a retry limit.",
+      "file_sha256": "eb81650abd4a486a658e54d6b5cda7e52b1f11e1cd0226e94331e108387febdf"
+    },
+    {
+      "path": "backend/tests/runtime/test_scientific_research.py",
+      "symbol": "test_command_capture_rejects_foreign_attempt_and_unbound_grant",
+      "line": 225,
+      "docstring": "A current author cannot borrow another task's actual job, and an unbound broad grant cannot substitute for an admitted author.",
+      "file_sha256": "eb81650abd4a486a658e54d6b5cda7e52b1f11e1cd0226e94331e108387febdf"
+    },
+    {
+      "path": "backend/tests/runtime/test_scientific_research.py",
+      "symbol": "test_command_capture_key_cannot_select_another_original_job",
+      "line": 248,
+      "docstring": "A lost capture reply can recover only its original job/source, never a new experiment under the same key.",
+      "file_sha256": "eb81650abd4a486a658e54d6b5cda7e52b1f11e1cd0226e94331e108387febdf"
+    },
+    {
+      "path": "backend/tests/runtime/test_scientific_research.py",
+      "symbol": "test_queued_scientific_events_do_not_start_old_claim_review_or_rework",
+      "line": 271,
+      "docstring": "Old hints cannot select a scientific worker, use a review label as authority or complete best-effort work.",
+      "file_sha256": "eb81650abd4a486a658e54d6b5cda7e52b1f11e1cd0226e94331e108387febdf"
+    },
+    {
+      "path": "backend/tests/runtime/test_scientific_research.py",
+      "symbol": "test_pre_admission_scientific_claim_and_completion_are_owner_guarded",
+      "line": 301,
+      "docstring": "Historical research remains readable, while a new raw legacy claim/completion requires native admission/acceptance.",
+      "file_sha256": "eb81650abd4a486a658e54d6b5cda7e52b1f11e1cd0226e94331e108387febdf"
+    },
+    {
+      "path": "backend/tests/runtime/test_scientific_research.py",
+      "symbol": "test_scientific_owner_guard_upgrade_is_atomic_and_keeps_historical_reports",
+      "line": 314,
+      "docstring": "A failed schema53 install leaves schema52 data/guards intact; a repeatable retry preserves historical scientific completion without inventing acceptance.",
+      "file_sha256": "eb81650abd4a486a658e54d6b5cda7e52b1f11e1cd0226e94331e108387febdf"
+    },
+    {
+      "path": "backend/tests/runtime/test_scientific_research.py",
+      "symbol": "test_scientific_owner_guard_upgrade_is_atomic_and_keeps_historical_reports.skip_scientific",
+      "line": 325,
+      "docstring": "Prepare exactly the prior schema, without editing historical migration SQL.",
+      "file_sha256": "eb81650abd4a486a658e54d6b5cda7e52b1f11e1cd0226e94331e108387febdf"
+    },
+    {
+      "path": "backend/tools/base/db.py",
+      "symbol": "ensure_migrations",
+      "line": 111,
+      "docstring": "Run pending schema migrations for existing databases.\n\nChecks the ``schema_migrations`` table and applies any missing\nmigrations. Safe to call multiple times. Serving requires an already\ninitialized file; explicit installation/legacy callers may create one.",
+      "file_sha256": "2f29672d27ca188d337449202abd7491330e7ccba65a5d58723e3e5755db2932"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

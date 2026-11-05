@@ -3158,6 +3158,21 @@
         "docs/modernization/investigation-results.json",
         "docs/modernization/investigation-packaging.json"
       ]
+    },
+    "native_scientific_research": {
+      "status": "domain_outcomes_command_evidence_review_acceptance_and_scientific_legacy_entries_connected_global_exclusion_and_evaluations_pending",
+      "evidence": [
+        "backend/research/command_sources.py",
+        "backend/runtime/scientific_instructions.py",
+        "backend/db/scientific_schema.sql",
+        "backend/flows/research_flow.py",
+        "backend/flows/research_review_flow.py",
+        "backend/tests/runtime/test_scientific_research.py",
+        "backend/tests/runtime/test_owned_plan_execution.py",
+        "docs/architecture/native-scientific-research.md",
+        "docs/modernization/scientific-results.json",
+        "docs/modernization/scientific-packaging.json"
+      ]
     }
   }
 }

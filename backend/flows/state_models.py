@@ -131,7 +131,7 @@ class CodeReviewState(BaseModel):
 
 
 class ResearchState(BaseModel):
-    """State for ResearchFlow — manages research lifecycle up to artifact verification."""
+    """Compatibility snapshot of the retired scientific author flow; historical hypotheses, scores and report metadata never authorize native execution or acceptance."""
 
     project_id: int = 0
     project_name: str = ""
@@ -149,7 +149,7 @@ class ResearchState(BaseModel):
 
 
 class InvestigationState(BaseModel):
-    """State for InvestigationFlow — simplified research without hypothesis testing."""
+    """Compatibility snapshot for the exploratory owner handoff; historical fields do not start a model stage or grant authority."""
 
     project_id: int = 0
     project_name: str = ""
@@ -162,7 +162,7 @@ class InvestigationState(BaseModel):
 
 
 class ResearchReviewState(BaseModel):
-    """State for ResearchReviewFlow — independent peer review for research tasks."""
+    """Compatibility snapshot of retired review/revision routing; stored labels and retry counts cannot validate findings, resume work or accept a native result."""
 
     project_id: int = 0
     project_name: str = ""

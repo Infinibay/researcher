@@ -1,279 +1,69 @@
-"""Tests for ResearchFlow."""
-
-from __future__ import annotations
-
-from unittest.mock import patch
+"""Scientific legacy compatibility preserves historical data and resolves owner actions without model-stage execution or automatic acceptance."""
 
 import pytest
 
+from backend.flows.research_flow import ResearchFlow
+from backend.flows.research_review_flow import ResearchReviewFlow
 from backend.flows.state_models import ResearchState
-from backend.tests.flows.conftest import make_mock_agent, make_mock_engine
 
 
-class TestResearchState:
-    """Test ResearchState model."""
+def test_historical_research_state_remains_readable():
+    """Old hypothesis/confidence fields remain attributed history; loading them starts no stage or validation."""
+    state = ResearchState(
+        project_id=1,
+        task_id=10,
+        hypothesis="Algorithm X may be faster.",
+        confidence_scores=[0.85, 0.72],
+    )
+    assert state.hypothesis == "Algorithm X may be faster."
+    assert state.confidence_scores == [0.85, 0.72]
+    assert ResearchState().findings == []
 
-    def test_default_state(self):
-        state = ResearchState()
-        assert state.task_id == 0
-        assert state.hypothesis == ""
-        assert state.findings == []
-        assert state.validated is False
-        assert state.peer_review_status == "pending"
 
-    def test_state_with_values(self):
-        state = ResearchState(
-            project_id=1,
-            task_id=10,
-            hypothesis="Algorithm X is faster than Y",
-            confidence_scores=[0.85, 0.72],
+@pytest.mark.parametrize("entry", [ResearchFlow, ResearchReviewFlow])
+def test_public_legacy_scientific_kickoff_is_a_scoped_owner_hint(
+    db_conn, executing_project, entry
+):
+    """Research/review entry reads the real project/task and never claims, revises, reviews or completes from old labels."""
+    task = db_conn.execute(
+        "SELECT id,status,assigned_to FROM tasks WHERE project_id=? AND type='research'",
+        (executing_project,),
+    ).fetchone()
+    before = tuple(task)
+    flow = entry()
+    result = flow.kickoff(
+        inputs={
+            "project_id": executing_project,
+            "task_id": task["id"],
+            "researcher_id": "old-worker",
+            "validated": True,
+            "revision_count": 999,
+        }
+    )
+    assert result["delivery"] == "native_owner_handoff"
+    assert result["native_runs"] == []
+    assert (
+        result["event_authorizes_work"] is False
+        and result["inference_started_by_handoff"] is False
+    )
+    assert (
+        tuple(
+            db_conn.execute(
+                "SELECT id,status,assigned_to FROM tasks WHERE id=?", (task["id"],)
+            ).fetchone()
         )
-        assert state.hypothesis == "Algorithm X is faster than Y"
-        assert len(state.confidence_scores) == 2
+        == before
+    )
+    assert flow.state.task_id == task["id"]
 
 
-class TestResearchFlowAssignment:
-    """Test research task assignment."""
-
-    @patch("backend.flows.research_flow.get_engine")
-    @patch("backend.flows.research_flow.get_available_agent_by_role")
-    @patch("backend.flows.research_flow.log_flow_event")
-    def test_assign_research_success(self, mock_log, mock_agent, mock_get_engine, db_conn, executing_project):
-        mock_agent.return_value = make_mock_agent("researcher", executing_project)
-        mock_get_engine.return_value = make_mock_engine("Research plan outlined")
-
-        from backend.flows.research_flow import ResearchFlow
-
-        flow = ResearchFlow()
-        flow.state.project_id = executing_project
-        flow.state.task_id = 2  # Research task from fixture
-        flow.state.knowledge_service_enabled = False
-
-        result = flow.assign_research()
-        # @start() methods no longer return routing strings
-        assert result is None
-
-        # Routing is now handled by the router method
-        route = flow.route_assignment()
-        assert route == "task_assigned"
-
-    @patch("backend.flows.research_flow.get_available_agent_by_role")
-    def test_assign_research_task_not_found(self, mock_agent, db_conn):
-        from backend.flows.research_flow import ResearchFlow
-
-        flow = ResearchFlow()
-        flow.state.project_id = 1
-        flow.state.task_id = 99999
-        flow.state.knowledge_service_enabled = False
-
-        result = flow.assign_research()
-        # @start() methods no longer return routing strings
-        assert result is None
-
-        # Routing is now handled by the router method
-        route = flow.route_assignment()
-        assert route == "error"
-
-
-class TestResearchFlowPeerReview:
-    """Test peer review routing."""
-
-    @patch("backend.flows.research_flow.get_engine")
-    @patch("backend.flows.research_flow.get_available_agent_by_role")
-    @patch("backend.flows.research_flow.get_agent_by_role")
-    @patch("backend.flows.research_flow.log_flow_event")
-    def test_peer_review_validated(self, mock_log, mock_get_agent, mock_avail_agent, mock_get_engine, db_conn, executing_project):
-        mock_reviewer = make_mock_agent("research_reviewer", executing_project)
-        mock_avail_agent.return_value = mock_reviewer
-        mock_get_engine.return_value = make_mock_engine("VALIDATED: Methodology is sound")
-
-        from backend.flows.research_flow import ResearchFlow
-
-        flow = ResearchFlow()
-        flow.state.project_id = executing_project
-        flow.state.task_id = 2
-        flow.state.hypothesis = "Test hypothesis"
-        flow.state.knowledge_service_enabled = False
-
-        result = flow.request_peer_review()
-        # @listen() methods no longer return routing strings
-        assert result is None
-        assert flow.state.validated is True
-        assert flow.state.peer_review_status == "validated"
-
-    @patch("backend.flows.research_flow.get_engine")
-    @patch("backend.flows.research_flow.get_available_agent_by_role")
-    @patch("backend.flows.research_flow.get_agent_by_role")
-    @patch("backend.flows.research_flow.log_flow_event")
-    def test_peer_review_rejected(self, mock_log, mock_get_agent, mock_avail_agent, mock_get_engine, db_conn, executing_project):
-        mock_reviewer = make_mock_agent("research_reviewer", executing_project)
-        mock_avail_agent.return_value = mock_reviewer
-        mock_get_engine.return_value = make_mock_engine("REJECTED: Insufficient evidence for conclusion")
-
-        from backend.flows.research_flow import ResearchFlow
-
-        flow = ResearchFlow()
-        flow.state.project_id = executing_project
-        flow.state.task_id = 2
-        flow.state.hypothesis = "Test hypothesis"
-        flow.state.knowledge_service_enabled = False
-
-        result = flow.request_peer_review()
-        # @listen() methods no longer return routing strings
-        assert result is None
-        assert flow.state.validated is False
-        assert flow.state.peer_review_status == "rejected"
-
-
-class TestReviewerFeedbackExtraction:
-    """Test that reviewer feedback is extracted and stored in state."""
-
-    @patch("backend.flows.research_flow.get_engine")
-    @patch("backend.flows.research_flow.get_available_agent_by_role")
-    @patch("backend.flows.research_flow.get_agent_by_role")
-    @patch("backend.flows.research_flow.log_flow_event")
-    def test_rejected_extracts_feedback_after_prefix(self, mock_log, mock_get_agent, mock_avail_agent, mock_get_engine, db_conn, executing_project):
-        mock_reviewer = make_mock_agent("research_reviewer", executing_project)
-        mock_avail_agent.return_value = mock_reviewer
-        mock_get_engine.return_value = make_mock_engine("REJECTED: Insufficient evidence for conclusion")
-
-        from backend.flows.research_flow import ResearchFlow
-
-        flow = ResearchFlow()
-        flow.state.project_id = executing_project
-        flow.state.task_id = 2
-        flow.state.knowledge_service_enabled = False
-
-        flow.request_peer_review()
-        assert flow.state.validated is False
-        assert flow.state.last_reviewer_feedback == "Insufficient evidence for conclusion"
-
-    @patch("backend.flows.research_flow.get_engine")
-    @patch("backend.flows.research_flow.get_available_agent_by_role")
-    @patch("backend.flows.research_flow.get_agent_by_role")
-    @patch("backend.flows.research_flow.log_flow_event")
-    def test_rejected_fallback_when_no_prefix(self, mock_log, mock_get_agent, mock_avail_agent, mock_get_engine, db_conn, executing_project):
-        raw_result = "The research lacks credible sources and has logical gaps"
-        mock_reviewer = make_mock_agent("research_reviewer", executing_project)
-        mock_avail_agent.return_value = mock_reviewer
-        mock_get_engine.return_value = make_mock_engine(raw_result)
-
-        from backend.flows.research_flow import ResearchFlow
-
-        flow = ResearchFlow()
-        flow.state.project_id = executing_project
-        flow.state.task_id = 2
-        flow.state.knowledge_service_enabled = False
-
-        flow.request_peer_review()
-        assert flow.state.validated is False
-        assert flow.state.last_reviewer_feedback == raw_result
-
-    @patch("backend.flows.research_flow.get_engine")
-    @patch("backend.flows.research_flow.get_available_agent_by_role")
-    @patch("backend.flows.research_flow.get_agent_by_role")
-    @patch("backend.flows.research_flow.log_flow_event")
-    def test_validated_clears_feedback(self, mock_log, mock_get_agent, mock_avail_agent, mock_get_engine, db_conn, executing_project):
-        mock_reviewer = make_mock_agent("research_reviewer", executing_project)
-        mock_avail_agent.return_value = mock_reviewer
-        mock_get_engine.return_value = make_mock_engine("VALIDATED: Methodology is sound")
-
-        from backend.flows.research_flow import ResearchFlow
-
-        flow = ResearchFlow()
-        flow.state.project_id = executing_project
-        flow.state.task_id = 2
-        flow.state.last_reviewer_feedback = "old feedback from previous round"
-        flow.state.knowledge_service_enabled = False
-
-        flow.request_peer_review()
-        assert flow.state.validated is True
-        assert flow.state.last_reviewer_feedback == ""
-
-    @patch("backend.flows.research_flow.get_engine")
-    @patch("backend.flows.research_flow.get_available_agent_by_role")
-    @patch("backend.flows.research_flow.get_agent_by_role")
-    @patch("backend.flows.research_flow.log_flow_event")
-    def test_rejected_case_insensitive_prefix(self, mock_log, mock_get_agent, mock_avail_agent, mock_get_engine, db_conn, executing_project):
-        mock_reviewer = make_mock_agent("research_reviewer", executing_project)
-        mock_avail_agent.return_value = mock_reviewer
-        mock_get_engine.return_value = make_mock_engine("Rejected: Confidence scores are inflated")
-
-        from backend.flows.research_flow import ResearchFlow
-
-        flow = ResearchFlow()
-        flow.state.project_id = executing_project
-        flow.state.task_id = 2
-        flow.state.knowledge_service_enabled = False
-
-        flow.request_peer_review()
-        assert flow.state.validated is False
-        assert flow.state.last_reviewer_feedback == "Confidence scores are inflated"
-
-
-class TestReviseResearchFeedbackPropagation:
-    """Test that reviewer feedback is passed to the revision prompt."""
-
-    @patch("backend.flows.research_flow.get_engine")
-    @patch("backend.flows.research_flow.get_agent_by_role")
-    @patch("backend.flows.research_flow.log_flow_event")
-    @patch("backend.flows.research_flow.res_tasks")
-    def test_revise_research_passes_feedback_to_prompt(self, mock_res_tasks, mock_log, mock_get_agent, mock_get_engine, db_conn, executing_project):
-        mock_researcher = make_mock_agent("researcher", executing_project)
-        mock_get_agent.return_value = mock_researcher
-        mock_get_engine.return_value = make_mock_engine("Revision complete")
-        mock_res_tasks.revise_research.return_value = ("mock desc", "mock expected")
-
-        from backend.flows.research_flow import ResearchFlow
-
-        feedback = "Insufficient evidence for conclusion 3"
-        flow = ResearchFlow()
-        flow.state.project_id = executing_project
-        flow.state.task_id = 2
-        flow.state.researcher_id = f"researcher_p{executing_project}"
-        flow.state.last_reviewer_feedback = feedback
-        flow.state.revision_count = 1
-        flow.state.knowledge_service_enabled = False
-
-        flow.revise_research()
-
-        mock_res_tasks.revise_research.assert_called_once_with(
-            2,
-            reviewer_feedback=feedback,
-            project_id=executing_project,
-            project_name="",
-        )
-
-
-class TestResearchFlowPeerReviewRouter:
-    """Test the peer review router."""
-
-    def test_router_validated(self):
-        from backend.flows.research_flow import ResearchFlow
-
-        flow = ResearchFlow()
-        flow.state.validated = True
-        result = flow.peer_review_router()
-        assert result == "validated"
-
-    def test_router_rejected(self):
-        from backend.flows.research_flow import ResearchFlow
-
-        flow = ResearchFlow()
-        flow.state.validated = False
-        flow.state.revision_count = 0
-        flow.state.max_revisions = 7
-        result = flow.peer_review_router()
-        assert result == "rejected"
-        # Router now increments revision_count on rejection
-        assert flow.state.revision_count == 1
-
-    def test_router_max_revisions_reached(self):
-        from backend.flows.research_flow import ResearchFlow
-
-        flow = ResearchFlow()
-        flow.state.validated = False
-        flow.state.revision_count = 6
-        flow.state.max_revisions = 7
-        result = flow.peer_review_router()
-        assert result == "max_revisions_reached"
+@pytest.mark.parametrize("entry", [ResearchFlow, ResearchReviewFlow])
+@pytest.mark.parametrize(
+    "project,task", [(999999, 2), (1, 999999), (True, 2), (1, "2")]
+)
+def test_legacy_scientific_entry_never_guesses_missing_or_foreign_scope(
+    db_conn, executing_project, entry, project, task
+):
+    """Missing, foreign or coerced identifiers cannot select a convenient project or trigger old inference."""
+    with pytest.raises(ValueError):
+        entry().kickoff(inputs={"project_id": project, "task_id": task})

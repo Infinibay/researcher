@@ -1,0 +1,114 @@
+{
+  "base_commit": "808b737",
+  "observed_total": 17,
+  "inherited_count": 17,
+  "introduced": [],
+  "remaining": [
+    {
+      "path": "backend/autonomy/handlers/task_handlers.py",
+      "code": "SIM102",
+      "line": 43,
+      "message": "Use a single `if` statement instead of nested `if` statements"
+    },
+    {
+      "path": "backend/autonomy/handlers/task_handlers.py",
+      "code": "I001",
+      "line": 99,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/autonomy/handlers/task_handlers.py",
+      "code": "I001",
+      "line": 115,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/flows/main_project_flow.py",
+      "code": "I001",
+      "line": 14,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/flows/main_project_flow.py",
+      "code": "F401",
+      "line": 18,
+      "message": "`typing.Any` imported but unused"
+    },
+    {
+      "path": "backend/flows/main_project_flow.py",
+      "code": "F401",
+      "line": 44,
+      "message": "`backend.flows.flow_helpers._pause_agent_loops` imported but unused"
+    },
+    {
+      "path": "backend/flows/main_project_flow.py",
+      "code": "F401",
+      "line": 47,
+      "message": "`backend.flows.state_models.TaskType` imported but unused"
+    },
+    {
+      "path": "backend/flows/state_models.py",
+      "code": "I001",
+      "line": 3,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/flows/state_models.py",
+      "code": "F401",
+      "line": 5,
+      "message": "`datetime.datetime` imported but unused"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "code": "I001",
+      "line": 8,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "code": "I001",
+      "line": 1433,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "code": "I001",
+      "line": 1533,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/tests/autonomy/test_scavenger.py",
+      "code": "I001",
+      "line": 3,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/tests/autonomy/test_scavenger.py",
+      "code": "F401",
+      "line": 7,
+      "message": "`pytest` imported but unused"
+    },
+    {
+      "path": "backend/tests/autonomy/test_scavenger.py",
+      "code": "F841",
+      "line": 83,
+      "message": "Local variable `t1` is assigned to but never used"
+    },
+    {
+      "path": "backend/tests/autonomy/test_scavenger.py",
+      "code": "F841",
+      "line": 84,
+      "message": "Local variable `t2` is assigned to but never used"
+    },
+    {
+      "path": "backend/tests/autonomy/test_scavenger.py",
+      "code": "F841",
+      "line": 141,
+      "message": "Local variable `t1` is assigned to but never used"
+    }
+  ],
+  "additional_final_file_check": {
+    "path": "backend/tests/runtime/test_result_acceptance.py",
+    "result": "Ruff pass after adapting the retired-stage test; no application changes."
+  }
+}

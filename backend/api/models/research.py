@@ -4,8 +4,8 @@ from typing import Annotated, Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
-from backend.research.papers import resolve_paper
 from backend.research.investigation import InvestigationSummary
+from backend.research.papers import resolve_paper
 
 Identity = Annotated[int, Field(strict=True, gt=0)]
 
@@ -17,6 +17,12 @@ class Command(BaseModel):
     operation_key: str = Field(
         min_length=1, max_length=128, pattern=r"^[A-Za-z0-9_.:-]+$"
     )
+
+
+class CaptureCommand(Command):
+    """Identify an actual retained job; all output, origin and authority are resolved by the host."""
+
+    job_id: str = Field(min_length=1, max_length=128)
 
 
 class ProposeResult(Command):

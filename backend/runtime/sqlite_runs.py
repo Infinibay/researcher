@@ -501,6 +501,8 @@ class SQLiteRunStore:
                 context["execution"] = {"kind":"code_review", "repository_id":view.source.repository_id, "head_sha":view.head_sha, "tree_sha":view.tree_sha, "subject_sha256":view.subject_sha256, "workspace":"/run/researcher-source", "workspace_access":"readonly", "acceptance":"not_granted", "publication":"not_granted"}
             if context["task"]["type"] == "investigation" and row["execution_kind"] == "research":
                 context["execution"] = {"kind": "investigation", "methodology": "scope_gather_organize_summarize", "workspace_access": "readonly", "acceptance": "not_granted", "publication": "not_granted"}
+            if context["task"]["type"] == "research" and row["execution_kind"] == "research":
+                context["execution"] = {"kind": "scientific_research", "methodology": "question_evidence_hypotheses_synthesis", "workspace_access": "readonly", "acceptance": "not_granted", "publication": "not_granted"}
             frozen = freeze_input(conn, row, context)
             if (
                 len(frozen.input_text.encode())
