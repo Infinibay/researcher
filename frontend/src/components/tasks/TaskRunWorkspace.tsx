@@ -12,6 +12,7 @@ import { RunCommands } from './RunCommands'
 import { TaskResults } from './ResultDelivery'
 import { TaskCodeResults } from './CodeDelivery'
 import { TaskRemotePublications } from './RemotePublications'
+import { TaskProjectPlan } from './ProjectPlanDelivery'
 
 const inputClass = 'w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] focus:outline-none focus:ring-2 focus:ring-[var(--work-accent)]'
 const buttonClass = 'rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50'
@@ -199,7 +200,7 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
     {data.questions.map(question => <QuestionCard key={`${projectId}:${taskId}:${question.request_id}`} projectId={projectId} taskId={taskId} question={question} />)}
     {current && !['code_publication','remote_publication'].includes(current.execution_kind) && ['reconciling', 'cancelling'].includes(current.status) && <RecoveryCard key={`${projectId}:${current.run_id}`} projectId={projectId} taskId={taskId} runId={current.run_id} />}
     {current && <RunCommands projectId={projectId} runId={current.run_id} />}
-    <TaskResults key={`${projectId}:${taskId}`} projectId={projectId} taskId={taskId} runs={data.runs} contextVersion={data.context.context_version} />
+    {data.context.task.type==='plan'?<TaskProjectPlan projectId={projectId} taskId={taskId} runs={data.runs}/>:<TaskResults key={`${projectId}:${taskId}`} projectId={projectId} taskId={taskId} runs={data.runs} contextVersion={data.context.context_version} />}
     <TaskCodeResults key={`code:${projectId}:${taskId}`} projectId={projectId} taskId={taskId} runs={data.runs} contextVersion={data.context.context_version} reviewAvailable={data.runtime.configured && supported} />
     <TaskRemotePublications key={`remote:${projectId}:${taskId}`} projectId={projectId} taskId={taskId} runs={data.runs} available={data.runtime.configured && data.runtime.remote_publication===true} defaultBranch={data.repositories.find(repository=>repository.id===current?.repository_id)?.default_branch??'main'} />
     {showProposal && current?.result && <section className="task-proposal space-y-2 rounded-md border border-[var(--work-line)] p-3" aria-label="Propuesta del agente">

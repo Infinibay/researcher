@@ -1,9 +1,11 @@
 # Rediseño del engine y de la coordinación
 
-Estado: primer recorrido productivo de investigación conectado a la API autenticada
-mediante `RuntimeService`, Codex y Ken aislado. La migración del engine completo
-sigue pendiente: orchestrator/LoopEngine y los demás flows todavía existen.
-Ver `native-runtime-boundary.md` y `runtime-decision.md`.
+Estado: investigación, desarrollo/revisión/publicación y planificación nativa
+conectados al runtime Codex/Ken. La ruta web de inicio de proyecto usa ahora una
+tarea de planificación y aceptación explícita del grafo; no arranca CrewAI.
+[Contrato y límites](native-project-planning.md). Despacho del trabajo aprobado,
+comunicación tipada y cutover de autonomía/orchestrator/demás flows/CLI/TUI siguen
+pendientes. No hay otro loop LLM en el coordinador nuevo.
 
 ## Un dueño por decisión
 

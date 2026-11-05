@@ -12,9 +12,11 @@ from uuid import uuid4
 
 import httpx
 
+from backend.planning.instructions import PLANNING_INSTRUCTIONS
 from backend.research.models import (
     CODE_REVIEW_PERMISSIONS,
     DEVELOPMENT_PERMISSIONS,
+    PLANNING_PERMISSIONS,
     RESEARCH_PERMISSIONS,
     REVIEW_PERMISSIONS,
 )
@@ -235,7 +237,12 @@ class OwnedInferenceSession(InferenceSession):
 class OwnedCodexRuntime:
     """Build subscription-only sessions with required Ken and host-owned private development views."""
 
-    supported_task_types: ClassVar[tuple[str, ...]] = ("research", "code", "bug_fix")
+    supported_task_types: ClassVar[tuple[str, ...]] = (
+        "research",
+        "code",
+        "bug_fix",
+        "plan",
+    )
     app: object
     research: object
     live_grants: object
@@ -389,6 +396,12 @@ class OwnedCodexRuntime:
             require_current=True,
         )
         run = await _settled(registry.runs.get, lease.project_id, lease.run_id)
+        context = await _settled(
+            registry.runs.context_snapshot, lease.project_id, lease.task_id
+        )
+        planning = (
+            run.execution_kind == "research" and context["task"]["type"] == "plan"
+        )
         development = run.execution_kind == "development"
         code_review = run.execution_kind == "code_review"
         expected_permissions = (
@@ -398,7 +411,11 @@ class OwnedCodexRuntime:
                 CODE_REVIEW_PERMISSIONS
                 if code_review
                 else (
-                    REVIEW_PERMISSIONS if review is not None else RESEARCH_PERMISSIONS
+                    REVIEW_PERMISSIONS
+                    if review is not None
+                    else PLANNING_PERMISSIONS
+                    if planning
+                    else RESEARCH_PERMISSIONS
                 )
             )
         )
@@ -577,6 +594,8 @@ class OwnedCodexRuntime:
                                     if code_review
                                     else REVIEW_INSTRUCTIONS
                                     if review is not None
+                                    else PLANNING_INSTRUCTIONS
+                                    if planning
                                     else INSTRUCTIONS
                                 ),
                                 sandbox="workspace-write"
@@ -594,7 +613,7 @@ class OwnedCodexRuntime:
                                     active=admitted,
                                     withdraw=withdraw,
                                     names=DEVELOPMENT_NAMES
-                                    if development
+                                    if development or planning
                                     else (
                                         CODE_REVIEW_NAMES
                                         if code_review
@@ -631,6 +650,17 @@ class OwnedCodexRuntime:
 
                                     code_tools = CodeReviewTools(
                                         review_records,
+                                        lease,
+                                        active=admitted,
+                                        settled=_settled,
+                                    )
+                                    business = ProjectTools(business, code_tools)
+                                elif planning:
+                                    from backend.planning.store import ProjectPlans
+                                    from backend.planning.tools import PlanningTools
+
+                                    code_tools = PlanningTools(
+                                        ProjectPlans(registry.runs),
                                         lease,
                                         active=admitted,
                                         settled=_settled,

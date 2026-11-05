@@ -2982,6 +2982,41 @@
         "Expanded HTTP host-crash/old-attempt migration and interrupted-observer scenarios; schema46 inverse remains pending",
         "Remote history pagination/older-chain selection and complete12page acceptance, including representative human comprehension; current panel audit is scoped"
       ]
+    },
+    "native_project_planning": {
+      "status": "central_path_connected_full_engine_coordination_pending",
+      "evidence": [
+        "backend/planning/models.py",
+        "backend/planning/store.py",
+        "backend/planning/tools.py",
+        "backend/planning/instructions.py",
+        "backend/db/project_planning_schema.sql",
+        "backend/tests/runtime/test_project_planning.py",
+        "backend/tests/runtime/test_owned_planning.py",
+        "backend/api/routes/projects.py",
+        "frontend/src/api/projectPlans.ts",
+        "frontend/src/components/tasks/ProjectPlanDelivery.tsx",
+        "frontend/tests/project-plan-actions.test.ts",
+        "docs/architecture/native-project-planning.md",
+        "docs/modernization/native-planning-results.json",
+        "docs/modernization/native-planning-packaging.json",
+        "docs/design/audits/2026-11-05-native-planning/report.md"
+      ],
+      "implemented": [
+        "Owned native readonly plan type on existing runtime, required Ken and scoped host proposal tools; no generic result-propose capability or task execution permission",
+        "Bounded append-only DAG/key/type/quote validation and explicit material origins/assumptions; immutable proposal and exact owner expansion after closure",
+        "Atomic pending epics/tasks/dependencies and original receipt; obsolete plan/child contexts denied, current accepted prerequisites required",
+        "Web start/stop migrated to native controller; local legacy registrations block entry, no thread/team/autonomy startup; original start body and owner decision survive reload/lost response",
+        "94directed including actual kernel/controlled native+Ken planning,100wheel with740matching sources,83frontend/build and9browser states;76Python/19TS documented"
+      ],
+      "remaining": [
+        "Explicit accepted-plan execution decision, durable readiness/delivery/claim and typed agent handoffs; no text-triggered activation or second LLM loop",
+        "Autonomy/orchestrator/remaining flow/tool/CLI/TUI cutover and physical legacy writer exclusion across processes",
+        "Project pause/restart and individual predecessor-context transitive invalidation; complete plan/task lifecycle and review/acceptance of descendants",
+        "Multi-repo/empty-project planning bootstrap, all task types, native planning history deletion/archive/restore and inverse47",
+        "Typed code/source evidence in plan basis, semantic support/representative prompting and human-comprehension evaluations; no claims from lexical quote membership",
+        "Remaining6web routes/12page final acceptance and whole-suite/inherited failures/final fresh review still in full goal"
+      ]
     }
   }
 }

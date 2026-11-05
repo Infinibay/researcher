@@ -9,32 +9,43 @@ Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: controles remotos de Tareas
+## Etapa actual: planificación nativa y aceptación del grafo
 
-**Resultado:** consulta explícita del destino registrado, identidad/ramas derivadas
-por el host y decisiones separadas de push, PR y merge. Tareas conserva el cuerpo,
-versión y destino originales ante respuesta perdida/recarga; la recuperación usa
-su propio comando de lectura con intento original. No se piden IDs internos ni
-credenciales al usuario. Se distinguen solicitud registrada, efecto comprobado e
-incertidumbre; ésta nunca habilita reenvío del efecto.
+**Resultado:** iniciar el proyecto admite una tarea `plan` en el runtime Codex/Ken
+existente; ya no arranca CrewAI, equipo ficticio ni loops desde esa ruta. Propone
+un grafo acotado con citas literales, atribución y suposiciones separadas. El
+propietario revisa en Tareas y acepta la propuesta exacta después del cierre:
+se crean épicas/tareas/dependencias pendientes, sin ejecutar ninguna. Repetir el
+inicio o la aceptación devuelve sus identidades originales.
 
-**Verificación:**92 pruebas backend,92 del wheel (339 módulos sólo paquete,
-732 fuentes coincidentes),80 frontend y build. Navegador: nueve estados en
-1440/390 px, cero errores/desbordamiento/Axe en el panel; dos POST idénticos de
-publicación conservan un efecto y dos consultas idénticas conservan un observador.
-PR y merge requieren botones distintos. Testigos remotos/físicos del navegador
-son sintéticos explícitos; no sustituyen la integración TLS anterior.23 definiciones
-Python y31 TypeScript documentadas. No hay suite global actual verde ni aceptación
-completa de la página.
+El cambio de premisas invalida contexto/autoridad del plan y sus tareas hijas;
+las dependencias requieren resultados aceptados vigentes. Se conservan historia
+y correcciones atribuidas. Los listeners/autonomía antiguos registrados también
+bloquean el nuevo inicio, aunque el thread del flow haya terminado.
 
-**Siguiente bloque principal:** coordinación/planificación y cutover de entradas
-legacy hacia el dueño nativo existente: flows, autonomía, orchestrator y herramientas.
-Recuperar el mapa de consumidores antes de editar; no crear otro loop LLM ni dejar
-los accesos antiguos como dueños competidores. Adopción tras retirada y continuidad
-de merge parcial siguen explícitas para la pasada integral; no ampliar ahora con
-pulido o auditorías repetidas de publicación.
-[Contrato](../architecture/remote-tasks.md), [resultados](remote-tasks-results.json),
-[paquete](remote-tasks-packaging.json), [auditoría](../design/audits/2026-11-05-remote-publications/report.md).
+**Verificación:**94 backend, incluido recorrido físico con generación/Ken
+controlados;100 del wheel con362 módulos sólo paquete y740 fuentes coincidentes;
+83 frontend/build. Navegador: nueve estados1440/390px sin errores/desbordamiento/
+Axe en header y panel. Dos inicios y dos aceptaciones idénticos tras respuesta
+perdida/recarga dejan un turno/propuesta y un grafo, con cero ejecuciones hijas.
+76 definiciones Python y19 TypeScript documentadas. No hay suite global actual
+verde ni evaluación representativa del prompting/comprensión.
+
+**Siguiente bloque principal:** despacho durable de trabajo aprobado y handoffs
+entre agentes, consumiendo el mismo runtime y resultados aceptados. Retirar los
+llamadores competidores de autonomía/orchestrator/flows/CLI/TUI y demostrar exclusión
+física legacy. La aceptación actual no autoriza despacho automático; no presentarla
+como engine completo. No ampliar ahora publicación ni pulir el panel del plan.
+[Contrato](../architecture/native-project-planning.md), [resultados](native-planning-results.json),
+[paquete](native-planning-packaging.json), [auditoría](../design/audits/2026-11-05-native-planning/report.md).
+
+## Etapa anterior: controles remotos de Tareas
+
+Consulta de destino registrado, decisiones separadas push/PR/merge y observación
+remota con paquetes originales ante pérdida de respuesta/recarga.92 backend/92wheel,
+80 frontend/build y nueve estados visuales pasan en ese checkpoint; testigos
+remotos del browser sintéticos explícitos. Adopción tras retirada, continuidad de
+merge parcial y compatibilidad real siguen abiertas. [Recibo histórico](remote-tasks-results.json).
 
 ## Etapa anterior: recuperación remota de sólo lectura
 

@@ -1,0 +1,169 @@
+{
+  "status": "passed",
+  "scope": "Actual owner HTTP/start/scheduler/host proposal tools/SQLite/Tasks with controlled generation and explicitly synthetic native peer closure. Actual owned Codex/Ken/profile closure is tested separately.",
+  "states": [
+    {
+      "file": "01-native-project-start.png",
+      "sha256": "93b4802f49a6e65616863ad63a6a1e07b3211230caaae3257746ae537ce7c610",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "02-start-response-lost.png",
+      "sha256": "3a2c4b941a80ce3d91164bd40b60690f7ccad08be4b9169c0541bec5485a0f19",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "03-reload-original-start.png",
+      "sha256": "69aa7d72237584498600d2641852dabe30a95f0b4d39fc078123f72a63edb3f7",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "04-desktop-proposal.png",
+      "sha256": "d4e21117389246660d7c7d84d5cb3be21fd2f36b622e8d50ed69b34d87cf9093",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "05-mobile-proposal.png",
+      "sha256": "42c6e9be14f76ed8f21223b54f4acf7acc46a103c6d21d49441793e1a6cd1983",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "06-accept-response-lost.png",
+      "sha256": "0ad32583e6589ec79ad80b5bcf8baec71b30eb3edba762da9015e92fffae5878",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "07-reload-original-acceptance.png",
+      "sha256": "061e588d50e7dadbbb09d38f11a44a9f23ed2bbf32e314849a65198d6a38157c",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "08-mobile-accepted-pending.png",
+      "sha256": "9bc8c8a8fa38c058618b522043a0eeb09de468de53c2af6e6d6b1dc3bc2f1a21",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "09-desktop-accepted-pending.png",
+      "sha256": "6d3b823d9958b082b1b1acb583cf42ee1d68c37bdab0dcd38eaf0d0416c8e2e4",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    }
+  ],
+  "start_requests": [
+    {
+      "operation_key": "9efe80e3-655c-4ff4-8ab6-d73f7da9d053",
+      "prompt": null,
+      "repository_id": null
+    },
+    {
+      "operation_key": "9efe80e3-655c-4ff4-8ab6-d73f7da9d053",
+      "prompt": null,
+      "repository_id": null
+    }
+  ],
+  "accept_requests": [
+    {
+      "operation_key": "65d51b15-2db8-4c33-9e6b-6367f29958b5",
+      "proposal_sha256": "e7a64db8e0eda0bb1b7bc2bd3cc5745649222fcf1079de7340217186ec018934",
+      "context_version": 1
+    },
+    {
+      "operation_key": "65d51b15-2db8-4c33-9e6b-6367f29958b5",
+      "proposal_sha256": "e7a64db8e0eda0bb1b7bc2bd3cc5745649222fcf1079de7340217186ec018934",
+      "context_version": 1
+    }
+  ],
+  "page_errors": [],
+  "start_receipt": {
+    "message": "Planificación nativa guardada; la propuesta requerirá tu aceptación.",
+    "status": "planning",
+    "planning_task_id": 2003,
+    "request": {
+      "operation_key": "9efe80e3-655c-4ff4-8ab6-d73f7da9d053",
+      "prompt": null,
+      "repository_id": null
+    },
+    "run": {
+      "run_id": "7e5959a0-e35a-45b9-8722-4ce4baf01bac",
+      "project_id": 101,
+      "task_id": 2003,
+      "actor_id": "native-project-planner",
+      "context_version": 1,
+      "status": "needs_review",
+      "fence": 1,
+      "attempt_id": "00fa34b0-05b8-4176-8731-dc9e37b6ab24",
+      "thread_id": "browser-plan-7e5959a0-e35a-45b9-8722-4ce4baf01bac",
+      "turn_id": "browser-plan-turn",
+      "prompt": "Propose an actionable plan for the registered project. Separate observed project data from assumptions. Do not execute the proposed work.",
+      "runtime": "codex",
+      "result": {
+        "native_status": "completed",
+        "summary": "Guardé una propuesta con dos tareas dependientes. Falta tu aceptación; no inicié las tareas propuestas."
+      },
+      "cancel_requested": false,
+      "operation_key": "plan-32201d4a03c040385502d0d9f943386d1f8d1bf55b02579a03547da118054720",
+      "conversation_thread_id": null,
+      "model": "Controlled browser planner — no model inference",
+      "repository_id": 11,
+      "repository_name": "alpha",
+      "issue": null,
+      "review": null,
+      "execution_kind": "research"
+    }
+  },
+  "accept_receipt": {
+    "context_version": 1,
+    "epics": {
+      "behavior": 1
+    },
+    "execution_started": false,
+    "operation_key": "65d51b15-2db8-4c33-9e6b-6367f29958b5",
+    "project_id": 101,
+    "proposal_sha256": "e7a64db8e0eda0bb1b7bc2bd3cc5745649222fcf1079de7340217186ec018934",
+    "run_id": "7e5959a0-e35a-45b9-8722-4ce4baf01bac",
+    "task_id": 2003,
+    "tasks": {
+      "improve": 2005,
+      "inspect": 2004
+    }
+  },
+  "counts": {
+    "turns": 1,
+    "proposals": 1
+  }
+}

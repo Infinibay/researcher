@@ -82,7 +82,11 @@ async def _stop_active_flows():
     logger.info("Shutdown signal received — stopping active flows")
     from backend.api.flow_manager import flow_manager
 
-    active_ids = list(flow_manager._flows.keys())
+    active_ids = (
+        set(flow_manager._flows)
+        | set(flow_manager._autonomy)
+        | set(flow_manager._listeners)
+    )
     for pid in active_ids:
         try:
             logger.info(

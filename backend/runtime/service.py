@@ -19,6 +19,7 @@ from uuid import uuid4
 from backend.research.models import (
     CODE_REVIEW_PERMISSIONS,
     DEVELOPMENT_PERMISSIONS,
+    PLANNING_PERMISSIONS,
     RESEARCH_PERMISSIONS,
     REVIEW_PERMISSIONS,
 )
@@ -246,6 +247,64 @@ class RuntimeService:
         )
         return await self._schedule(run) if admitted else run
 
+    async def start_project_plan(
+        self, project_id, *, operation_key=None, prompt=None, repository_id=None
+    ):
+        """Admit the original native planning task without legacy threads; a repeated start never replays its model turn."""
+        from backend.planning.store import ProjectPlans
+
+        self._accepting()
+        if "plan" not in self.supported_task_types:
+            raise RunConflict(
+                "Configure the owned Codex planning runtime before starting this project"
+            )
+        plans = ProjectPlans(self.store)
+        command = {
+            "operation_key": operation_key,
+            "prompt": prompt,
+            "repository_id": repository_id,
+        }
+        original = await asyncio.to_thread(plans.prepare_start, project_id, **command)
+        if original is None:
+            binding = await asyncio.to_thread(
+                self.workspaces.bind, project_id, repository_id
+            )
+            if self.control_root.resolve().is_relative_to(Path(binding.workspace)):
+                raise RunConflict("Repository contains runtime control state")
+            original = await asyncio.to_thread(
+                plans.prepare_start, project_id, binding=binding, **command
+            )
+        spec, binding = original
+        receipt = await asyncio.to_thread(
+            self.store.admission_receipt,
+            spec,
+            repository_id=binding.requested_repository_id,
+        )
+        if receipt is not None:
+            return receipt
+        await asyncio.to_thread(self.workspaces.validate, project_id, binding)
+        run, admitted = await asyncio.to_thread(
+            self.store.admit_once, spec, binding=binding
+        )
+        return await self._schedule(run) if admitted else run
+
+    async def stop_project(self, project_id):
+        """Withdraw every active native run in this project; returned states preserve unconfirmed physical closure rather than claiming all work stopped."""
+
+        def pending():
+            """Read durable original active run IDs without admitting or replaying work."""
+            with self.store._transaction() as conn:
+                return [
+                    r["id"]
+                    for r in conn.execute(
+                        "SELECT id FROM runtime_runs WHERE project_id=? AND status IN ('queued','running','cancelling','reconciling','waiting_input','needs_review')",
+                        (project_id,),
+                    )
+                ]
+
+        ids = await asyncio.to_thread(pending)
+        return [await self.stop(project_id, run_id) for run_id in ids]
+
     async def preview_remote(self, project_id, local_run_id, target_ref, base_ref):
         """Query the configured adapter for a readonly destination observation; no run or write authority is admitted."""
         self._accepting()
@@ -431,7 +490,7 @@ class RuntimeService:
                     "code_publication",
                     "remote_publication",
                 )
-                else ("research",)
+                else ("research", "plan")
             )
             if (
                 context["task"]["type"] not in expected_types
@@ -766,7 +825,11 @@ class RuntimeService:
             code_review = current_run.execution_kind == "code_review"
             development = current_run.execution_kind == "development"
             expected_types = (
-                ("code", "bug_fix") if code_review or development else ("research",)
+                ("code", "bug_fix")
+                if code_review or development
+                else ("research",)
+                if current_run.execution_kind == "finding_review"
+                else ("research", "plan")
             )
             context = await asyncio.to_thread(
                 self.store.context_snapshot, slot.spec.project_id, slot.spec.task_id
@@ -804,6 +867,8 @@ class RuntimeService:
                     if development
                     else REVIEW_PERMISSIONS
                     if review is not None
+                    else PLANNING_PERMISSIONS
+                    if context["task"]["type"] == "plan"
                     else RESEARCH_PERMISSIONS
                 ),
                 ttl_seconds=min(3600, self.limits.wall_seconds + 180),

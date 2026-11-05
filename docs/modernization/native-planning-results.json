@@ -1,0 +1,58 @@
+{
+  "base_commit": "28ba437",
+  "date": "2026-11-05",
+  "status": "native_project_start_structured_plan_and_owner_expansion_connected_dispatch_and_legacy_cutover_pending",
+  "directed": {
+    "total": 94,
+    "passed": 94,
+    "failed": [],
+    "skipped": 0,
+    "seconds": 46.202,
+    "receipt_sha256": "d37405d1f21578bcf4065019f11660ded6c1765807ca3565031159ffbad3fbdc"
+  },
+  "new_cases": 9,
+  "owned_planning_integration": {
+    "passed": 1,
+    "scope": "Actual product controller/SQLite/broker/kernel/read-only source/closure; native generation and Ken command are controlled fixtures, no real model inference. One original native dispatch, separate owner expansion, zero child runs."
+  },
+  "frontend": {
+    "passed": 83,
+    "failed": 0,
+    "build": "TypeScript/Vite passed; existing bundle/Browserslist warnings deferred"
+  },
+  "browser": {
+    "states": 9,
+    "start_posts": 2,
+    "accept_posts": 2,
+    "counts": {
+      "turns": 1,
+      "proposals": 1
+    },
+    "page_errors": [],
+    "axe_violations": 0,
+    "horizontal_overflow": false,
+    "scope": "Actual owner HTTP/start/scheduler/host proposal tools/SQLite/Tasks with controlled generation and explicitly synthetic native peer closure. Actual owned Codex/Ken/profile closure is tested separately.",
+    "evidence": "docs/design/audits/2026-11-05-native-planning/evidence.json"
+  },
+  "python_documented_definitions_or_modules": 76,
+  "typescript_documented_definitions_or_modules": 19,
+  "package": "docs/modernization/native-planning-packaging.json",
+  "scope": [
+    "Pure bounded DAG/type/key/quote policy separate from runtime/storage; exact attributed source quotes, explicit assumptions, metadata versus owner/host origin retained",
+    "Schema47 original planning snapshots/proposals/owner expansion/start intent; owner acceptance after current completed original attempt and closed peer scope creates pending epics/tasks/dependencies atomically and idempotently",
+    "Plan tasks use existing owned Codex/Ken readonly profile and host proposal tools; generic result-propose capability/permission omitted, no model create/claim/accept/activate capability",
+    "Project/name/description or accepted-plan context changes version affected planning/child contexts, retain tool-evidence correction, fence active attempts/revoke grants and deny new obsolete child work; unsatisfied current prerequisites block native admission",
+    "Public project start and stop connect native controller; start never initializes old team/threads/autonomy, known legacy listeners/autonomy after flow exit block native start; no closure inferred from absent root flow",
+    "Tasks preview explains rationale, literal basis attribution, assumptions and dependencies; original start/acceptance packets survive response loss and reload; children remain pending/no inference after acceptance"
+  ],
+  "limits": [
+    "Accepted-plan dispatch/typed agent handoffs and complete autonomy/orchestrator/flow/CLI/TUI cutover remain pending; this is not full engine replacement",
+    "Known local legacy registration is not global physical writer exclusion; unmanaged legacy processes and other launch paths still require migration/reconciliation",
+    "Web start currently requires one active registered repository when no explicit repository_id; multi-repo selector/empty-project bootstrap remains integration work",
+    "Plan expansion is append-only and initial proposed types are research/code/bug_fix, not all12 historical task types; no automatic child execution",
+    "Quote membership proves literal source attribution, not semantic entailment/scientific correctness; typed code/source citation expansion and representative prompting/human comprehension evaluations remain open",
+    "Individual prerequisite-context transitive invalidation, project pause/execution lifecycle, native planning history deletion/restore/inverse47 and full visual acceptance still open",
+    "Browser generation/peer closure are explicitly synthetic; actual source native integration uses controlled generation/fixture Ken; no user subscription/model turn or user repository modification this checkpoint",
+    "No current global-suite green or complete host install claim; baseline100 inherited failures predates this change"
+  ]
+}

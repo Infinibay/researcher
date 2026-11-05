@@ -1,0 +1,464 @@
+{
+  "base_commit": "28ba437",
+  "scope": "New modules and new/changed qualified definitions including enclosing definitions; English docstrings for Ken, not a global documentation audit.",
+  "definitions_or_modules": 76,
+  "missing": [],
+  "entries": [
+    {
+      "path": "backend/api/flow_manager.py",
+      "name": "FlowManager",
+      "line": 17,
+      "documented": true
+    },
+    {
+      "path": "backend/api/flow_manager.py",
+      "name": "FlowManager.is_project_running",
+      "line": 259,
+      "documented": true
+    },
+    {
+      "path": "backend/api/main.py",
+      "name": "_stop_active_flows",
+      "line": 80,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/projects.py",
+      "name": "StartProjectPlanning",
+      "line": 218,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/projects.py",
+      "name": "start_project",
+      "line": 228,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/projects.py",
+      "name": "stop_project",
+      "line": 257,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "AcceptProjectPlan",
+      "line": 311,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "project_plan_state",
+      "line": 321,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "accept_project_plan",
+      "line": 332,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "name": "OwnedCodexRuntime",
+      "line": 237,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "name": "OwnedCodexRuntime.open",
+      "line": 363,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "RuntimeService",
+      "line": 62,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "RuntimeService.start_project_plan",
+      "line": 250,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "RuntimeService.stop_project",
+      "line": 291,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "RuntimeService.stop_project.pending",
+      "line": 294,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "RuntimeService._schedule",
+      "line": 467,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "RuntimeService._execute",
+      "line": 814,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "name": "SQLiteRunStore",
+      "line": 65,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "name": "SQLiteRunStore._task",
+      "line": 92,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "name": "SQLiteRunStore.reserve_input",
+      "line": 424,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "name": "SQLiteRunStore.admit_once",
+      "line": 1055,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "name": "SQLiteRunStore._execution_subject",
+      "line": 1418,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/fake_owned_native.py",
+      "name": "next_tool",
+      "line": 52,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/fake_owned_native.py",
+      "name": "next_planning_tool",
+      "line": 419,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_code_publications.py",
+      "name": "test_publication_request_is_immutable_and_startup_preserves_original_records",
+      "line": 131,
+      "documented": true
+    },
+    {
+      "path": "backend/tools/base/db.py",
+      "name": "ensure_migrations",
+      "line": 111,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/__init__.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/instructions.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/models.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/models.py",
+      "name": "_text",
+      "line": 7,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/models.py",
+      "name": "_keys",
+      "line": 13,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/models.py",
+      "name": "_key",
+      "line": 19,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/models.py",
+      "name": "validate_plan",
+      "line": 27,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/store.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/store.py",
+      "name": "ProjectPlans",
+      "line": 19,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/store.py",
+      "name": "ProjectPlans.__init__",
+      "line": 22,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/store.py",
+      "name": "ProjectPlans._project",
+      "line": 27,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/store.py",
+      "name": "ProjectPlans.capture",
+      "line": 37,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/store.py",
+      "name": "ProjectPlans._request",
+      "line": 96,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/store.py",
+      "name": "ProjectPlans.current",
+      "line": 106,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/store.py",
+      "name": "ProjectPlans.material",
+      "line": 120,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/store.py",
+      "name": "ProjectPlans.propose",
+      "line": 144,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/store.py",
+      "name": "ProjectPlans._ready",
+      "line": 203,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/store.py",
+      "name": "ProjectPlans.state",
+      "line": 239,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/store.py",
+      "name": "ProjectPlans.accept",
+      "line": 290,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/store.py",
+      "name": "ProjectPlans.start_receipt",
+      "line": 399,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/store.py",
+      "name": "ProjectPlans.prepare_start",
+      "line": 411,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/store.py",
+      "name": "ProjectPlans._start_packet",
+      "line": 473,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/tools.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/tools.py",
+      "name": "Arguments",
+      "line": 13,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/tools.py",
+      "name": "ContextWindow",
+      "line": 19,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/tools.py",
+      "name": "PlanBasis",
+      "line": 26,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/tools.py",
+      "name": "EpicProposal",
+      "line": 33,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/tools.py",
+      "name": "TaskProposal",
+      "line": 41,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/tools.py",
+      "name": "PlanDraft",
+      "line": 51,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/tools.py",
+      "name": "PlanProposal",
+      "line": 62,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/tools.py",
+      "name": "PlanningTools",
+      "line": 69,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/tools.py",
+      "name": "PlanningTools.__init__",
+      "line": 72,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/tools.py",
+      "name": "PlanningTools.catalog_hash",
+      "line": 97,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/tools.py",
+      "name": "PlanningTools.call",
+      "line": 101,
+      "documented": true
+    },
+    {
+      "path": "backend/planning/tools.py",
+      "name": "PlanningTools.aclose",
+      "line": 146,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_planning.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_planning.py",
+      "name": "test_owned_project_start_proposes_then_owner_accepts_without_executing_children",
+      "line": 9,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_project_planning.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_project_planning.py",
+      "name": "draft",
+      "line": 6,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_project_planning.py",
+      "name": "test_plan_policy_refuses_cycles_missing_keys_and_fabricated_shared_context",
+      "line": 45,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_project_planning.py",
+      "name": "planning_state",
+      "line": 72,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_project_planning.py",
+      "name": "test_owner_acceptance_creates_original_tasks_and_dependencies_once_after_closed_proposal",
+      "line": 98,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_project_planning.py",
+      "name": "test_project_change_versions_the_planner_and_preserves_historical_proposal",
+      "line": 143,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_project_planning.py",
+      "name": "test_project_start_uses_one_native_request_and_never_launches_legacy_threads",
+      "line": 174,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_project_planning.py",
+      "name": "test_project_start_uses_one_native_request_and_never_launches_legacy_threads.held",
+      "line": 192,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_project_planning.py",
+      "name": "test_project_start_uses_one_native_request_and_never_launches_legacy_threads.forbidden",
+      "line": 198,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_project_planning.py",
+      "name": "test_host_planner_tools_bind_scope_and_cannot_create_work_or_auto_accept",
+      "line": 240,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_project_planning.py",
+      "name": "test_plan_owner_http_refuses_proof_fields_and_created_children_require_prerequisites",
+      "line": 278,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_project_planning.py",
+      "name": "test_project_entry_recognizes_legacy_autonomy_after_the_flow_thread_exits",
+      "line": 343,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_project_planning.py",
+      "name": "test_changed_accepted_plan_invalidates_its_children_before_any_new_execution",
+      "line": 352,
+      "documented": true
+    }
+  ]
+}

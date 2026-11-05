@@ -5926,3 +5926,50 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
   PID99618 observed from exact command, stopped with SIGINT, handle24535terminal130;
   Playwright browser closed in finally. Original checkout and protected untracked
   root .agents/.codex/AGENTS.md untouched. Local checkpoint only, no push/merge/deploy.
+
+
+## 2026-11-05 — native project planning checkpoint (base28ba437)
+- Previous goal turn: progress. Explicit macro-first user policy reaffirmed and
+  stored in deferred-details.md and Ken for compaction; no scope reduction.
+- Main capability: project start persists one original native plan request, runs
+  owned readonly Codex/Ken, retains a structured attributed proposal, and accepts
+  the exact closed proposal into pending epics/tasks/DAG. No child execution.
+  Public start no longer initializes CrewAI/team/flow/autonomy threads.
+- Ruling: reuse the existing research execution profile plus plan-specific host
+  tools/permissions, not another model loop. Pure bounded graph policy is separate
+  from persistence. Initial child types research/code/bug_fix and append-only work;
+  broader types/lifecycle remain full scope. Metadata is attributed metadata, never
+  assumed user testimony; quote membership is not semantic entailment proof.
+- Owner start/acceptance packets survive response loss/reload and preserve original
+  scope/IDs. Acceptance requires current original completed native attempt, actual
+  registered peer closure and no competing unresolved same-task work. Project/plan
+  changes invalidate contexts/authority and retain attributed correction evidence.
+  Current prerequisites required before child admission. Legacy local registry
+  includes listeners/autonomy after root flow exit; not global writer exclusion.
+- RED→GREEN: missing package/API/tools; native input gate initially research-only;
+  physical catalog initially included generic result_propose (removed from plan
+  projection); child invalidation initially relied on a nested SQLite trigger that
+  does not recurse by default (directly versions/fences/revokes children now).
+  Test setup errors s.registry and nonexistent dispatch.run_id corrected to actual
+  interfaces. Wrong plural test filename caused collection exit4, then corrected.
+  Frontend missing module RED3; first full suite76PASS7FAIL due added router Link
+  in isolated SSR, replaced with established same-origin anchor pattern, no test
+  weakened. Known legacy autonomy predicate reproduced and corrected.
+- Evidence: source94PASS46.66s, frontend83PASS/buildPASS, wheel100PASS with362imports
+  only from extracted package and740matchingPython/SQL payloads. Native physical
+  integration uses actual broker/kernel/readonly source/closure, controlled
+  generation/Ken. Browser nine states1440/390px; no page errors/overflow/Axe in
+  header/panel. Two original start/accept POSTs after loss/reload leave1turn/proposal
+  and1graph; zero child runs. Browser peers explicitly synthetic. No real model
+  inference or user repository change, no current global-suite green claim.
+- English docstrings:76Python and19TypeScript declarations/modules documented.
+  At resumed checkpoint, source planning core freshly rerun9PASS4.33s; targeted
+  Ruff and git diff --check pass. Earlier full checks recorded in committed JSON.
+  Added native-project-planning.md and screenshot audit report; preserved all
+  remaining full-plan scenarios and legacy/UI/migration limitations.
+- Fixture browser closed; owned server108840 received SIGINT and recorded handle
+ 5819terminal130. No live prior job inferred from stale files. No push/merge/deploy.
+- Next MAIN BLOCK: durable explicit execution of accepted graph and typed causal
+  handoffs through same runtime; migrate actual competing legacy consumers.
+  Do not re-audit publication or polish planning panel. DD009/010 retain UI and
+  lifecycle details for later. Goal active, no global completion/percentage.

@@ -142,3 +142,18 @@ basta borrar el nombre de una herramienta mientras un flow pueda dar la tarea po
 terminada por texto del modelo. La aceptación explícita y la invalidación del
 conocimiento dependiente siguen dentro del alcance pendiente.
 [Contrato y límites](finding-readers.md).
+
+
+## Planificación nativa conectada — 2026-11-05
+
+El catálogo del plan usa las capacidades de investigación sin `result_propose` y
+agrega dos herramientas del host: contexto original por ventanas y propuesta de
+grafo. No son herencia de las herramientas antiguas ni permisos de crear/asignar/
+ejecutar tareas. El propietario acepta la propuesta exacta después del cierre;
+una transacción crea trabajo pendiente y sus dependencias. Un mensaje no activa
+agentes. El inicio web usa ese recorrido; ya no inicializa el equipo ni threads.
+
+El mapa anterior sigue siendo histórico para los demás consumidores. Autonomía,
+orchestrator, flows específicos y CLI/TUI aún requieren despacho/control sobre el
+dueño nuevo. La existencia del plan no demuestra exclusión física de writers
+legacy ni cierre científico/visual. [Contrato](native-project-planning.md).

@@ -90,9 +90,21 @@ class SQLiteRunStore:
 
     @staticmethod
     def _task(conn, project_id, task_id):
+        """Require open scoped work and current accepted plan/prerequisites before granting any native child execution authority."""
         row = SQLiteRunStore._existing_task(conn, project_id, task_id)
         if row["status"] in ("done", "cancelled", "failed"):
             raise RunConflict("Task no longer admits execution")
+        if conn.execute("""SELECT 1 FROM runtime_project_plan_tasks p JOIN runtime_project_plan_acceptances a ON a.id=p.acceptance_id
+            JOIN runtime_runs r ON r.id=a.run_id WHERE p.task_id=? AND (r.status!='accepted' OR a.context_version!=coalesce(
+            (SELECT version FROM task_contexts WHERE task_id=a.task_id),1))""", (task_id,)).fetchone():
+            raise RunConflict("The original accepted project plan changed; inspect its history before new child work")
+        if conn.execute("SELECT 1 FROM runtime_project_plan_tasks WHERE task_id=?", (task_id,)).fetchone() and conn.execute(
+            """SELECT 1 FROM task_dependencies d JOIN tasks p ON p.id=d.depends_on_task_id
+            WHERE d.task_id=? AND d.dependency_type='blocks' AND (p.status!='done' OR NOT EXISTS(
+                SELECT 1 FROM runtime_runs r WHERE r.project_id=p.project_id AND r.task_id=p.id
+                AND r.status='accepted' AND r.context_version=coalesce((SELECT version FROM task_contexts WHERE task_id=p.id),1))) LIMIT 1""", (task_id,)
+        ).fetchone():
+            raise RunConflict("A prerequisite task still lacks a current accepted result")
         return row
 
     @staticmethod
@@ -464,7 +476,7 @@ class SQLiteRunStore:
                 context["review"] = review
             development = row["execution_kind"] == "development"
             code_review = row["execution_kind"] == "code_review"
-            expected_types = ("code", "bug_fix") if development or code_review else ("research",)
+            expected_types = ("code", "bug_fix") if development or code_review else ("research",) if row["execution_kind"] == "finding_review" else ("research", "plan")
             if context["task"]["type"] not in expected_types:
                 raise RunConflict("Task type changed before input reservation")
             if development:
@@ -1097,6 +1109,10 @@ class SQLiteRunStore:
                     execution_kind,
                 ),
             )
+            if task_type == "plan" and review is None:
+                from backend.planning.store import ProjectPlans
+
+                ProjectPlans.capture(conn, self, spec, run_id)
             if subject is not None:
                 author = subject["snapshot"]["author"]
                 conn.execute(
@@ -1422,6 +1438,10 @@ class SQLiteRunStore:
                 CodePublications(self).current(conn, row)
         else:
             self._task(conn, row["project_id"], row["task_id"])
+            if conn.execute("SELECT 1 FROM runtime_project_plan_requests WHERE run_id=?", (row["id"],)).fetchone():
+                from backend.planning.store import ProjectPlans
+
+                ProjectPlans(self).current(conn, row)
 
     def _claim(self, conn, project_id, run_id, owner_id, *, lease_seconds=30):
         """Claim a new fenced attempt under its typed subject; publication preserves the already accepted task state."""

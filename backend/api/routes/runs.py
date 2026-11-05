@@ -308,6 +308,42 @@ async def start_remote_publication(
     return {"run": asdict(run), "request": packet}
 
 
+class AcceptProjectPlan(BaseModel):
+    """Owner decision over one exact proposal/version; task IDs and execution permission are not client supplied."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
+    proposal_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    context_version: int = Field(ge=1)
+
+
+@router.get("/{project_id}/runs/{run_id}/project-plan")
+async def project_plan_state(project_id: int, run_id: str, request: Request):
+    """Inspect original structured planning material, proposal and distinct owner acceptance without dispatching work."""
+    from backend.planning.store import ProjectPlans
+
+    data = await asyncio.to_thread(
+        ProjectPlans(read_store(request)).state, project_id, run_id
+    )
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
+@router.post("/{project_id}/runs/{run_id}/project-plan/accept")
+async def accept_project_plan(
+    project_id: int, run_id: str, body: AcceptProjectPlan, request: Request
+):
+    """Atomically create pending graph nodes from an exact closed proposal under paired-owner/CSRF control; no model or child task is started."""
+    from backend.planning.store import ProjectPlans
+
+    data = await asyncio.to_thread(
+        ProjectPlans(read_store(request)).accept,
+        project_id,
+        run_id,
+        **body.model_dump(),
+    )
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
 class RemotePreviewBody(BaseModel):
     """Owner branch choices only; server identity, registered URL and credential are derived by the host."""
 

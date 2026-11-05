@@ -454,6 +454,12 @@ def ensure_migrations(db_path: str | None = None, *, existing_only: bool = False
             resource = Path(__file__).resolve().parents[2] / "db/remote_recovery_schema.sql"
             apply_sql_resource(conn, resource)
             logger.info("Migration 46: readonly remote recovery and HTTP ownership")
+        if 47 not in applied:
+            from backend.db.migrations import apply_sql_resource
+
+            resource = Path(__file__).resolve().parents[2] / "db/project_planning_schema.sql"
+            apply_sql_resource(conn, resource)
+            logger.info("Migration 47: native project planning")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()

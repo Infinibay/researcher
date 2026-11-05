@@ -1,10 +1,13 @@
-"""Project CRUD endpoints and flow control."""
+"""Project CRUD and native planning controls; project start never activates legacy agent-loop threads."""
 
 from __future__ import annotations
 
+import asyncio
 import sqlite3
+from dataclasses import asdict
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
+from pydantic import BaseModel, ConfigDict, Field
 
 from backend.api.exceptions import ProjectNotFound, ProjectRunning
 from backend.api.flow_manager import flow_manager
@@ -145,30 +148,35 @@ async def delete_project(project_id: int):
         # Tables referencing tasks (must go before tasks)
         conn.execute(
             "DELETE FROM task_dependencies WHERE task_id IN "
-            "(SELECT id FROM tasks WHERE project_id = ?)", p,
+            "(SELECT id FROM tasks WHERE project_id = ?)",
+            p,
         )
         conn.execute(
             "DELETE FROM task_comments WHERE task_id IN "
-            "(SELECT id FROM tasks WHERE project_id = ?)", p,
+            "(SELECT id FROM tasks WHERE project_id = ?)",
+            p,
         )
 
         # Tables referencing findings (must go before findings)
         conn.execute(
             "DELETE FROM finding_deps WHERE finding_id IN "
-            "(SELECT id FROM findings WHERE project_id = ?)", p,
+            "(SELECT id FROM findings WHERE project_id = ?)",
+            p,
         )
 
         # agent_performance is global (keyed by agent_id, no project FK).
         # Delete entries whose agent_id matches agents in this project.
         conn.execute(
             "DELETE FROM agent_performance WHERE agent_id IN "
-            "(SELECT agent_id FROM agent_roster WHERE project_id = ?)", p,
+            "(SELECT agent_id FROM agent_roster WHERE project_id = ?)",
+            p,
         )
 
         # All tables directly referencing projects
         conn.execute("DELETE FROM agent_events WHERE project_id = ?", p)
         conn.execute(
-            "DELETE FROM agent_loop_state WHERE project_id = ?", p,
+            "DELETE FROM agent_loop_state WHERE project_id = ?",
+            p,
         )
         conn.execute("DELETE FROM autonomy_actions WHERE project_id = ?", p)
         conn.execute("DELETE FROM flow_snapshots WHERE project_id = ?", p)
@@ -207,31 +215,57 @@ async def delete_project(project_id: int):
     execute_with_retry(_delete)
 
 
-@router.post("/{project_id}/start")
-async def start_project(project_id: int):
-    """Start the project flow and event listeners."""
-    from backend.agents.registry import initialize_project_team
+class StartProjectPlanning(BaseModel):
+    """Explicit owner planning input; optional key preserves old bodyless starts as one original start per project premise snapshot."""
 
-    state = load_project_state(project_id)
-    if not state:
-        raise ProjectNotFound(project_id)
+    model_config = ConfigDict(extra="forbid", strict=True)
+    operation_key: str | None = Field(default=None, pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
+    prompt: str | None = Field(default=None, min_length=1, max_length=50000)
+    repository_id: int | None = Field(default=None, ge=1)
+
+
+@router.post("/{project_id}/start")
+async def start_project(
+    project_id: int, request: Request, body: StartProjectPlanning | None = None
+):
+    """Start one durable owned native plan; never launch CrewAI threads, clear events or imply execution permission from a planning response."""
+    from backend.api.routes.runs import service
+    from backend.runtime.contracts import RunConflict
 
     if flow_manager.is_project_running(project_id):
-        return {"message": f"Project {project_id} is already running"}
+        raise RunConflict(
+            "Legacy project work is still registered; stop and reconcile its original owner before native planning"
+        )
+    command = body or StartProjectPlanning()
+    run = await service(request).start_project_plan(project_id, **command.model_dump())
+    from backend.planning.store import ProjectPlans
 
-    # Initialize the agent team immediately so they show up in the UI
-    initialize_project_team(project_id)
-
-    flow_manager.start_project_flow(project_id)
-    return {"message": f"Project {project_id} started", "status": "executing"}
+    runtime = service(request)
+    original = await asyncio.to_thread(
+        ProjectPlans(runtime.store).start_receipt, project_id, run.run_id
+    )
+    return {
+        "message": "Planificación nativa guardada; la propuesta requerirá tu aceptación.",
+        "status": "planning",
+        "planning_task_id": run.task_id,
+        "request": original,
+        "run": asdict(run),
+    }
 
 
 @router.post("/{project_id}/stop")
-async def stop_project(project_id: int):
-    """Stop the project flow and event listeners."""
-    state = load_project_state(project_id)
+async def stop_project(project_id: int, request: Request):
+    """Withdraw this project's native work and request legacy teardown where present; paused describes owner intent, not unproved physical closure."""
+    state = await asyncio.to_thread(load_project_state, project_id)
     if not state:
         raise ProjectNotFound(project_id)
-
-    flow_manager.stop_project_flow(project_id)
-    return {"message": f"Project {project_id} stopped", "status": "paused"}
+    runtime = request.app.state.runtime_service
+    runs = await runtime.stop_project(project_id) if runtime is not None else []
+    if flow_manager.is_project_running(project_id):
+        await asyncio.to_thread(flow_manager.stop_project_flow, project_id)
+    await asyncio.to_thread(update_project_status, project_id, "paused")
+    return {
+        "message": "Detención solicitada; consulta los intentos para comprobar su cierre.",
+        "status": "paused",
+        "runs": [asdict(run) for run in runs],
+    }

@@ -17,6 +17,8 @@ for arg in args:
         config.update(tomllib.loads(next(args)))
 steps = 0
 source = finding = job = report = None
+planning_mode = False
+plan_material = None
 review_mode = False
 development_mode = False
 review_subject = None
@@ -49,6 +51,8 @@ def call(name, arguments):
 
 def next_tool(response=None):
     """Advance controlled author or reviewer generation while using the real admitted tool bridge."""
+    if planning_mode:
+        return next_planning_tool(response)
     if code_review_mode:
         return next_code_review_tool(response)
     if review_mode:
@@ -412,6 +416,100 @@ def next_code_review_tool(response=None):
         )
 
 
+def next_planning_tool(response=None):
+    """Produce a controlled justified graph through actual native host tools, with no child execution or owner approval capability."""
+    global steps, plan_material
+    if response is not None:
+        if not response["success"]:
+            raise RuntimeError("Controlled planning tool failed: " + str(response))
+        value = json.loads(response["contentItems"][0]["text"])
+        if steps == 2:
+            assert value["next_offset"] is None
+            plan_material = json.loads(value["content"])
+    steps += 1
+    if steps == 1:
+        call("ken_read", {"path": "fact.txt"})
+    elif steps == 2:
+        call("researcher_plan_context", {})
+    elif steps == 3:
+        call(
+            "researcher_plan_propose",
+            {
+                "operation_key": "controlled-plan-proposal",
+                "plan": {
+                    "title": "Understand then improve",
+                    "rationale": "Inspect observed behavior before choosing a code change.",
+                    "assumptions": [
+                        "The registered repository remains the intended target."
+                    ],
+                    "basis": [
+                        {
+                            "source": "owner_request",
+                            "quote": plan_material["owner_request"][:80],
+                        }
+                    ],
+                    "epics": [
+                        {
+                            "key": "behavior",
+                            "title": "Verified behavior",
+                            "description": "Understand and improve the registered code.",
+                        }
+                    ],
+                    "tasks": [
+                        {
+                            "key": "inspect",
+                            "epic_key": "behavior",
+                            "type": "research",
+                            "title": "Inspect current behavior",
+                            "description": "Read relevant code and record cited evidence.",
+                            "acceptance_criteria": "A supported explanation and explicit limits.",
+                            "priority": 2,
+                            "depends_on": [],
+                        },
+                        {
+                            "key": "improve",
+                            "epic_key": "behavior",
+                            "type": "code",
+                            "title": "Implement supported improvement",
+                            "description": "Apply the change supported by inspection.",
+                            "acceptance_criteria": "The demonstrated behavior is verified.",
+                            "priority": 2,
+                            "depends_on": ["inspect"],
+                        },
+                    ],
+                },
+            },
+        )
+    else:
+        send(
+            {
+                "method": "item/completed",
+                "params": {
+                    "threadId": native_thread_id,
+                    "turnId": native_turn_id,
+                    "item": {
+                        "id": "plan-answer",
+                        "type": "agentMessage",
+                        "text": "Guardé una propuesta: primero inspeccionar el comportamiento y después aplicar el cambio respaldado. La suposición sobre el repositorio queda explícita. No creé tareas ni inicié trabajo; falta tu aceptación.",
+                    },
+                },
+            }
+        )
+        send(
+            {
+                "method": "turn/completed",
+                "params": {
+                    "threadId": native_thread_id,
+                    "turn": {
+                        "id": native_turn_id,
+                        "status": "completed",
+                        "error": None,
+                    },
+                },
+            }
+        )
+
+
 for line in sys.stdin:
     message = json.loads(line)
     method = message.get("method")
@@ -474,6 +572,9 @@ for line in sys.stdin:
                 "stderr": output.stderr,
             }
     elif method == "thread/start":
+        planning_mode = any(
+            tool["name"] == "researcher_plan_propose" for tool in params["dynamicTools"]
+        )
         code_review_mode = any(
             tool["name"] == "researcher_code_review_propose"
             for tool in params["dynamicTools"]

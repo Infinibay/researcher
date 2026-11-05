@@ -1,3 +1,4 @@
+/** Project CRUD and native planning entry; full visual redesign remains a separate planned deliverable. @module */
 import { useState } from 'react'
 import { useProjects, useCreateProject, useDeleteProject, useStartProject, useStopProject } from '../../hooks/useProjects'
 import { useProjectStore } from '../../stores/project'
@@ -18,6 +19,7 @@ const statusVariant: Record<string, string> = {
   failed: 'error',
 }
 
+/** Show saved projects and open one durable native planning request instead of activating legacy flow threads. */
 export function ProjectsPage() {
   const { data, isLoading, error, refetch } = useProjects()
   const createProject = useCreateProject()
@@ -94,6 +96,7 @@ export function ProjectsPage() {
         </div>
       )}
 
+      {startProject.error&&<p role="alert" className="text-sm text-red-300">No se confirmó la planificación. Conservamos la solicitud original. {startProject.error.message}</p>}
       {projects.length === 0 ? (
         <EmptyState
           title="No projects yet"
@@ -151,7 +154,7 @@ export function ProjectsPage() {
                       disabled={startProject.isPending || p.status === 'completed'}
                       className="rounded px-2 py-1 text-xs font-medium text-emerald-400 hover:bg-emerald-500/10 disabled:opacity-50"
                     >
-                      Start
+                      {startProject.hasSavedStart(p.id)?'Reenviar inicio':'Planificar'}
                     </button>
                   )}
                   <button

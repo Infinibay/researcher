@@ -109,11 +109,11 @@ export function Header() {
               </button>
             ) : (
               <button
-                onClick={() => startProject.mutate(activeProject.id)}
+                onClick={() => startProject.mutate(activeProject.id,{onError:error=>setSessionError(`No se confirmó la planificación. Conservamos la solicitud original. ${error.message}`),onSuccess:()=>setSessionError('')})}
                 disabled={startProject.isPending || activeProject.status === 'completed'}
                 className="rounded-md bg-emerald-800 px-3 py-1.5 text-xs font-medium text-white hover:bg-emerald-900 disabled:opacity-50"
               >
-                  Iniciar proyecto
+                  {startProject.hasSavedStart(activeProject.id)?'Reenviar el mismo inicio':'Planificar proyecto'}
               </button>
             )}
           </>

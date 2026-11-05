@@ -13,6 +13,16 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Verificación actual
 
+La entrada de proyecto ya inicia planificación nativa y la revisión del plan aparece
+en Tareas. Propuesta y aceptación son operaciones distintas; aceptar crea un grafo
+pendiente y no ejecuta agentes. Premisas cambiadas invalidan la autoridad del plan
+y sus hijos. Pasan94 backend,100 del wheel,83 frontend/build y nueve estados del
+browser. La integración de kernel/broker/SQLite usa generación y Ken controlados;
+no prueba calidad de un modelo real. [Contrato](../architecture/native-project-planning.md),
+[resultados](native-planning-results.json), [auditoría](../design/audits/2026-11-05-native-planning/report.md).
+Faltan despacho aprobado, handoffs tipados y retirada del resto del engine legacy.
+
+
 El propietario reactivó el objetivo el 2026-11-05. La suite global del checkpoint
 `0c8b8d9` terminó: 2148 casos, 2045 pasan, 100 fallan y tres se omiten;
 965 casos del runtime pasan. Mismos identificadores de fallo heredados, sin afirmar

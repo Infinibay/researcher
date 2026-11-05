@@ -1,0 +1,120 @@
+{
+  "base_commit": "28ba437",
+  "scope": "New remote API/UI modules and relevant named declarations. Changed existing owner store/TaskWorkspace reuse established JSDoc; not a whole repository audit.",
+  "definitions_or_modules": 19,
+  "missing": [],
+  "entries": [
+    {
+      "path": "frontend/src/api/projectPlans.ts",
+      "name": "<module>",
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/projectPlans.ts",
+      "name": "ProposedTask",
+      "line": 7,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/projectPlans.ts",
+      "name": "ProjectPlanDraft",
+      "line": 9,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/projectPlans.ts",
+      "name": "ProjectPlanState",
+      "line": 11,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/projectPlans.ts",
+      "name": "PlanAcceptanceReceipt",
+      "line": 13,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/projectPlans.ts",
+      "name": "PlanAcceptanceAction",
+      "line": 15,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/projectPlans.ts",
+      "name": "parse",
+      "line": 18,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/projectPlans.ts",
+      "name": "preparePlanAcceptance",
+      "line": 22,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/projectPlans.ts",
+      "name": "matchesPlanReceipt",
+      "line": 24,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/projectPlans.ts",
+      "name": "projectPlanState",
+      "line": 26,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/projectPlans.ts",
+      "name": "sendPlanAcceptance",
+      "line": 28,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/projectPlans.ts",
+      "name": "PlanningStart",
+      "line": 31,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/projectPlans.ts",
+      "name": "PlanningStartReceipt",
+      "line": 33,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/api/projectPlans.ts",
+      "name": "startProjectPlanning",
+      "line": 35,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/components/tasks/ProjectPlanDelivery.tsx",
+      "name": "<module>",
+      "documented": true
+    },
+    {
+      "path": "frontend/src/components/tasks/ProjectPlanDelivery.tsx",
+      "name": "TaskProjectPlan",
+      "line": 10,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/components/tasks/ProjectPlanDelivery.tsx",
+      "name": "PlanDecision",
+      "line": 19,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/components/tasks/ProjectPlanDelivery.tsx",
+      "name": "resolved",
+      "line": 24,
+      "documented": true
+    },
+    {
+      "path": "frontend/src/components/tasks/ProjectPlanDelivery.tsx",
+      "name": "submit",
+      "line": 28,
+      "documented": true
+    }
+  ]
+}

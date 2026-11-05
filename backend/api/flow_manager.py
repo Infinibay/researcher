@@ -9,7 +9,7 @@ from typing import Any
 from backend.agents.registry import initialize_project_team
 from backend.config.settings import settings
 from backend.flows.event_listeners import ListenerManager, event_bus
-from backend.flows.helpers import load_project_state, update_project_status
+from backend.flows.helpers import update_project_status
 
 logger = logging.getLogger(__name__)
 
@@ -52,22 +52,26 @@ class FlowManager:
             if snapshot and snapshot.get("state_json"):
                 try:
                     import json
+
                     parsed = json.loads(snapshot["state_json"])
                     if isinstance(parsed, dict):
                         snapshot_inputs = parsed
                     else:
                         logger.warning(
                             "Snapshot state_json for project %d is not a dict (got %s), ignoring",
-                            project_id, type(parsed).__name__,
+                            project_id,
+                            type(parsed).__name__,
                         )
                     logger.info(
                         "Loaded snapshot for project %d (step=%s)",
-                        project_id, snapshot.get("current_step", "?"),
+                        project_id,
+                        snapshot.get("current_step", "?"),
                     )
                 except Exception:
                     logger.warning(
                         "Could not parse snapshot state_json for project %d",
-                        project_id, exc_info=True,
+                        project_id,
+                        exc_info=True,
                     )
 
             # Start flow in a background thread to avoid blocking
@@ -87,6 +91,7 @@ class FlowManager:
             # or interfering while the flow drives agents during planning.
             if settings.AUTONOMY_ENABLED:
                 from backend.autonomy.agent_loop import AgentLoopManager
+
                 loop_mgr = AgentLoopManager(project_id)
                 loop_mgr.start_all()
                 loop_mgr.pause_all()
@@ -95,7 +100,10 @@ class FlowManager:
             logger.info("Started flow and listeners for project %d", project_id)
 
     def _run_flow(
-        self, flow: Any, project_id: int, snapshot_inputs: dict[str, Any] | None = None,
+        self,
+        flow: Any,
+        project_id: int,
+        snapshot_inputs: dict[str, Any] | None = None,
     ) -> None:
         """Run the flow in a thread. Cleans up on completion."""
         try:
@@ -123,7 +131,8 @@ class FlowManager:
                     save_snapshot(
                         project_id,
                         "main_project_flow",
-                        getattr(flow.state, "current_step", "") or flow.state.status.value,
+                        getattr(flow.state, "current_step", "")
+                        or flow.state.status.value,
                         flow.state,
                     )
                 except Exception:
@@ -193,12 +202,14 @@ class FlowManager:
             if count:
                 logger.info(
                     "Graceful shutdown: reset %d in_progress tasks to pending for project %d",
-                    count, project_id,
+                    count,
+                    project_id,
                 )
         except Exception:
             logger.warning(
                 "Could not reset in_progress tasks for project %d",
-                project_id, exc_info=True,
+                project_id,
+                exc_info=True,
             )
 
     @staticmethod
@@ -229,12 +240,14 @@ class FlowManager:
             if cancelled:
                 logger.info(
                     "Cleared %d stale agent events for project %d",
-                    cancelled, project_id,
+                    cancelled,
+                    project_id,
                 )
         except Exception:
             logger.debug(
                 "Could not clear stale events for project %d",
-                project_id, exc_info=True,
+                project_id,
+                exc_info=True,
             )
 
     def get_flow_status(self, project_id: int) -> str:
@@ -244,8 +257,12 @@ class FlowManager:
         return "stopped"
 
     def is_project_running(self, project_id: int) -> bool:
-        """Check if a project's flow is currently running."""
-        return project_id in self._flows
+        """Detect every registered legacy owner; a finished flow thread does not prove its autonomy or listeners closed."""
+        return (
+            project_id in self._flows
+            or project_id in self._autonomy
+            or project_id in self._listeners
+        )
 
 
 # Global instance
