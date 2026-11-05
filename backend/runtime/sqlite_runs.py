@@ -866,7 +866,7 @@ class SQLiteRunStore:
             required = {"command"} if run and run[0] in ("code_publication", "remote_publication") else {"native", "business"}
             if run and run[0] == "remote_publication":
                 remote = conn.execute("SELECT p.stage FROM runtime_remote_publications p JOIN runtime_attempts a ON a.run_id=p.run_id WHERE a.id=?", (attempt_id,)).fetchone()
-                if remote and remote[0] == "pull":
+                if (remote and remote[0] == "pull") or not peers:
                     required = set()
             if not required <= {peer["kind"] for peer in peers} or any(
                 peer["state"] != "closed" for peer in peers

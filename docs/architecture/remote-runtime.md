@@ -1,11 +1,10 @@
 # Autoridad y etapas durables de publicación remota
 
-La migración 45 y `RemotePublications` conectan las solicitudes de push, PR y merge
-con intentos nuevos del host, recibos y etapas durables. La API y el scheduler
-reconocen esas solicitudes. **El runtime predeterminado todavía no dispone del
-perfil remoto de red/credenciales**: rechaza su admisión en lugar de ejecutar el
-adaptador de pruebas o un subprocess libre. La publicación remota del producto
-sigue en curso; los controles web y la recuperación remota aún faltan.
+La migración 45 y `RemotePublications` conectan push, PR y merge con intentos,
+recibos y etapas durables. El runtime con configuración remota usa ahora Git y
+HTTP propios del host. Sin esa configuración rechaza la admisión. La integración
+HTTPS comprueba el recorrido completo con Git real y una API Forgejo controlada;
+la recuperación remota y los controles de Tareas siguen pendientes.
 
 ## Una decisión explícita por acción
 
@@ -54,10 +53,11 @@ sequenceDiagram
     A->>D: Resultado/evento juntos o conservar incertidumbre
 ```
 
-El transporte de esa secuencia aún debe implementarse con su perfil de red y
-credenciales. La reserva `issue` no es por sí sola un permiso de red. El broker
-actual rechaza el nuevo tipo hasta disponer del perfil específico; no le concede
-el perfil de análisis o Git local como fallback.
+El transporte usa un broker/dominio nuevo para los comandos Git y un cliente
+HTTP acotado para la API. La reserva `issue` ocurre inmediatamente antes de la
+escritura original. El broker comprueba protocolo, configuración y efecto emitido;
+una reserva global por efecto impide abrirlo otra vez con otro ID de comando.
+El PR HTTP no necesita un proceso Git ficticio.
 
 Una segunda reserva de la misma etapa devuelve `dispatch=false`. El controlador
 no debe abrir otra petición al ver ese resultado. La API repetida tampoco vuelve
@@ -90,24 +90,65 @@ el cliente. La capacidad del runtime se comprueba antes de crear el run. El valo
 observado de ID remoto sigue requiriendo validación efectiva por el transporte;
 la admisión no inventa que ya habló con Forgejo.
 
-La prueba de API usa scheduling retenido y la del scheduler un transporte
-controlado con testigos explícitamente sintéticos. Prueban SQL/owner/lease/etapas,
-no efectos de red o cierre físico remoto. Dos integraciones físicas del recorrido
-local anterior se repitieron por los cambios compartidos de claim/scheduler.
-No se les atribuye cobertura del nuevo transporte remoto.
+## Configuración del operador y credenciales
+
+Añadir al JSON de configuración del runtime y reiniciar el servicio:
+
+```json
+{
+  "remote_publication": {
+    "api_base": "https://forgejo.example/api/v1",
+    "username": "usuario-del-token",
+    "token_file": "/ruta-del-host/privada/forgejo.pat"
+  }
+}
+```
+
+Es un fragmento del JSON existente, no una configuración completa. El archivo del
+PAT debe ser regular, propiedad del usuario del servicio, privado (por ejemplo
+`0600`) y estar fuera del workspace gestionado. No incluir el PAT en el JSON.
+`ca_bundle` y `resolver` son opcionales; heredan los valores del runtime y sus
+predeterminados del sistema. La CA, el resolver y la credencial deben estar fuera
+de las fuentes gestionadas. El origen HTTPS configurado debe coincidir exactamente
+con el de la solicitud admitida. La identidad numérica del repositorio se consulta
+antes y después del efecto; una URL no demuestra identidad permanente del servidor.
+El [manual de Forgejo](https://forgejo.org/docs/v17.0/user/getting-started/first-repository/)
+describe el uso de nombre de usuario y PAT para Git HTTPS.
+
+Git recibe la credencial desde un FD sellado privado; el wrapper confiable la
+inyecta en un header limitado a la URL. El PAT no entra en argv, manifiestos,
+fuentes ni contexto del modelo. HTTP usa su cliente autenticado al origen fijo.
+Se mantienen verificación TLS y de hostname, sin redirects ni proxy del entorno.
+Los permisos de la cuenta y las protecciones de rama siguen siendo del servidor.
+
+Los únicos comandos Git de red autorizados son consultas de referencias fijas y
+el push atómico exacto. El proceso confiable comparte la red del host para esos
+comandos: **no es una ACL de destinos impuesta por el kernel**. La frontera depende
+del programa fijado, argv exactos, origen HTTPS y configuración Git sellada. El
+perfil de red de los agentes de modelo no cambia. Origen/candidato y sus metadatos
+se montan en lectura; una configuración segura superpuesta impide `url.insteadOf`
+y helpers del repositorio sin modificar el archivo original.
 
 ## Verificación y siguientes capacidades
 
-[Resultados](../modernization/remote-runtime-results.json),
-[paquete](../modernization/remote-runtime-packaging.json) y
-[docstrings](../modernization/remote-runtime-docstrings.json). Las inversas de
-esquemas 43/44/45 y fixtures antiguos quedan registradas; no se afirma una suite
-global actual verde.
+[Transporte](../modernization/remote-transport-results.json),
+[paquete](../modernization/remote-transport-packaging.json) y
+[docstrings](../modernization/remote-transport-docstrings.json). Pasan 82 casos
+dirigidos y una integración TLS real de push → PR → merge. Esta última usa Git
+smart HTTP real y una API Forgejo controlada, no un binario Forgejo ni un servidor
+del usuario. Prueba además Stop durante receive-pack: cierre local comprobado,
+etapa incierta y run en reconciliación, sin afirmar que se detuvo el servidor.
+Comprueba que repetir la acción no abre otro efecto y que el journal no contiene
+el PAT. No consume inferencia para publicar.
 
-Siguiente entrega principal: perfil y executor Git/HTTP remoto con credencial del
-host, autoridad real y pruebas HTTPS/Stop/cierre; luego recuperación con nuevos
-observadores y controles de Tareas. Debe conservar la distinción entre cierre del
-cliente y trabajo remoto y verificar identidad del repositorio durante el efecto.
-El resultado positivo de un intento retirado requiere una política explícita de
-adopción: la admisión actual exige que el prerrequisito esté `accepted`.
-Nada de esto se elimina del alcance por haber cerrado este bloque de persistencia.
+Las [pruebas previas de admisión](../modernization/remote-runtime-results.json)
+usan testigos de transporte sintéticos y se conservan como evidencia histórica.
+No se afirma suite global actual verde ni compatibilidad ensayada con una instancia
+Forgejo real. Las inversas 43/44/45 y fixtures antiguos siguen registrados.
+
+Siguiente capacidad principal: observadores de recuperación de sólo lectura con
+autoridad nueva y cierre original comprobado; después controles de Tareas que
+conserven la solicitud ante respuesta perdida. Ausencia remota sigue siendo
+incierta y nunca autoriza repetir el push o POST. El resultado positivo de un
+intento retirado requiere una política explícita de adopción: la admisión actual
+exige prerrequisitos `accepted`. Estas tareas y el cutover legacy siguen en alcance.

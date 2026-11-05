@@ -572,6 +572,18 @@ class RemotePublications:
                 and effects[name]["client_closed"]
                 for name in EFFECTS[row["stage"]]
             )
+            if (
+                known
+                and row["stage"] in ("push", "merge")
+                and conn.execute(
+                    "SELECT 1 FROM runtime_peers WHERE attempt_id=? AND kind='command' AND state='closed'",
+                    (lease.attempt_id,),
+                ).fetchone()
+                is None
+            ):
+                raise RunConflict(
+                    "Successful remote Git result requires original closed command evidence"
+                )
             run = self.runs._row(conn, lease.project_id, lease.run_id)
             current = (
                 run["status"] == "running"

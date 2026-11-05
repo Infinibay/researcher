@@ -251,7 +251,10 @@ class RuntimeService:
         from backend.runtime.remote_runtime import RemotePublications
 
         self._accepting()
-        if not hasattr(self.runtime, "publish_remote"):
+        if (
+            not hasattr(self.runtime, "publish_remote")
+            or getattr(self.runtime, "supports_remote_publication", True) is not True
+        ):
             raise RunConflict(
                 "Configured runtime has no owned remote publication transport"
             )

@@ -7,7 +7,7 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 - Runtime durable por proyecto/tarea/intento/contexto, controles humanos, recuperación, preguntas y propuestas separadas de aceptación. Codex CLI por suscripción y Ken publicado ensayados; consumidores/loops antiguos y ampliación productiva pendientes.
 - Investigación nativa con adjuntos, HTTPS/DOI/arXiv/PDF, CSV/DOCX/JSON/XML, estructura/offsets/citas y recuperación semántica local fijada; hallazgos provisionales e informes draft. Búsqueda web nativa trazable y revisión documental independiente ensayadas. No equivale a validación científica representativa. [Revisión documental](../architecture/finding-reviews.md).
 - Wiki local/global con revisiones, recibos, historia y capturas. Migración 33 conserva datos y rechaza downgrade con pérdida. [Contrato](../architecture/wiki-knowledge.md).
-- Desarrollo desde Tareas/Conversación con edición privada, captura Git exacta y comprobaciones configuradas por el host. Revisión independiente solicitada desde Tareas; aceptación explícita del propietario. Stop/correcciones conservan evidencia sin aprobar contexto obsoleto. Publicación en rama local conectada; recuperación local de sólo lectura conectada; faltan efectos remotos. [Entrada pública y límites](public-development.md).
+- Desarrollo desde Tareas/Conversación con edición privada, captura Git exacta y comprobaciones configuradas por el host. Revisión independiente solicitada desde Tareas; aceptación explícita del propietario. Stop/correcciones conservan evidencia sin aprobar contexto obsoleto. Publicación en rama local conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; faltan recuperación y controles remotos. [Entrada pública y límites](public-development.md).
 - Seis pilotos web: Tareas, Conversación, Informes, Archivos, Wiki y Hallazgos; 18/36 conceptos de escritorio y 6/12 móviles, con 0/12 páginas completamente aceptadas. [Inventario](../design/inventory.md).
 - Inicialización explícita, autoridad/broker/dominio, acceso y wheel comprobados en los recorridos documentados. Instalación integral y backup/restore pendientes.
 
@@ -18,24 +18,20 @@ El propietario reactivó el objetivo el 2026-11-05. La suite global del checkpoi
 965 casos del runtime pasan. Mismos identificadores de fallo heredados, sin afirmar
 causas idénticas. [Recibo](resumed-baseline-results.json).
 
-La admisión remota y sus etapas ya son durables: esquema 45, solicitud owner
-inmutable, run/lease nuevos y reserva de cada efecto antes del gate. API estricta
-y scheduler conectados con comprobación de capacidad. Default sin transporte
-remoto: rechaza admisión, sin fallback de proceso libre ni nueva acción web.
-Pasan 61 pruebas dirigidas,61 del wheel y77 del frontend y build; 60 definiciones documentadas.
-Dos integraciones físicas del recorrido local pasan en 129,91 s por los cambios
-compartidos; los nuevos testigos de cierre remoto son sintéticos explícitos.
-Faltan transporte/credencial/HTTPS reales, recuperación remota y Tareas.
-[Contrato](../architecture/remote-runtime.md), [resultados](remote-runtime-results.json).
-
-El protocolo remoto interno pasa 34 casos dirigidos (14 nuevos): push atómico
-con SHA/recibo/CAS en Git real, y puerto HTTPX de PR con identidad exacta y
-recuperación de respuesta perdida. El merge interno usa CAS Git con ascendencia
-y registra después el mismo SHA en Forgejo, sin repetir etapas inciertas.
-Aún no tiene admisión durable ni transporte
-productivo con autoridad/credencial propia, API/Tareas o coordinación productiva de esas etapas. No se
-habilitaron efectos remotos nuevos. [Contrato](../architecture/remote-publication.md),
-[resultados](remote-publication-results.json).
+El transporte remoto propio está conectado a las etapas durables del esquema45.
+Configuración opcional de HTTPS/PAT del host; Git exacto por broker/dominio y
+HTTP acotado sin inferencia. Sin configuración se rechaza admisión. Pasan82 casos
+dirigidos y una integración TLS real push → PR → merge y Stop durante receive-pack,
+con API Forgejo controlada. El cliente cerrado no demuestra que el servidor se
+detuvo: el resultado queda incierto. 73 definiciones/módulos con docstrings.
+No se ensayó un binario Forgejo real; Git confiable comparte red del host bajo
+restricción de programa/argv/configuración, no ACL de destinos del kernel.
+Faltan recuperación remota de sólo lectura, controles de Tareas y compatibilidad
+con instancia real. [Contrato](../architecture/remote-runtime.md),
+[resultados](remote-transport-results.json), [paquete](remote-transport-packaging.json).
+Los [61 casos de admisión](remote-runtime-results.json) y los
+[34 casos del protocolo](remote-publication-results.json) son evidencia histórica
+separada, no otra suite global verde.
 
 La publicación local conecta aceptación, admisión durable, nuevo host sin
 inferencia, broker/capsule y Tareas. La recuperación ahora prueba cierre original
@@ -49,7 +45,7 @@ recargar. 47 definiciones/módulos documentados en inglés. El wheel tiene
 verificación separada, sin atribuirle una instalación integral del host.
 
 No se afirma suite global verde: el baseline es anterior y siguen pendientes
-inversas43/44 y adaptación de fixtures de esquemas previos. Push/PR/merge,
+inversas43/44 y adaptación de fixtures de esquemas previos. Compatibilidad remota,
 exclusión física legacy y ampliación de carreras/crashes continúan pendientes.
 [Contrato](../architecture/code-publication.md), [resultados](publication-recovery-results.json),
 [paquete](publication-recovery-packaging.json),

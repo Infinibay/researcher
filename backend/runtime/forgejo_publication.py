@@ -107,7 +107,16 @@ class RemoteMergeObservation:
 class ForgejoPublicationClient:
     """Own a finite async HTTP transport with fixed credential origin, no redirects, environment proxy or blind retries."""
 
-    def __init__(self, api_base, token, *, transport=None):
+    def __init__(
+        self,
+        api_base,
+        token,
+        *,
+        transport=None,
+        verify=True,
+        before_request=None,
+        before_write=None,
+    ):
         """Keep credentials only in the trusted HTTP client, never URLs, process arguments, receipts or model-visible manifests."""
         if (
             not isinstance(token, str)
@@ -123,6 +132,7 @@ class ForgejoPublicationClient:
             api_base[: -len("/api/v1")] + "/validation/repository.git",
         )
         self.api_base = api_base
+        self._before_request, self._before_write = before_request, before_write
         self._headers = {
             "Authorization": "token " + token,
             "Accept": "application/json",
@@ -133,6 +143,7 @@ class ForgejoPublicationClient:
             trust_env=False,
             follow_redirects=False,
             transport=transport,
+            verify=verify,
         )
 
     async def __aenter__(self):
@@ -154,6 +165,10 @@ class ForgejoPublicationClient:
     async def _request(self, method, url, *, payload=None, missing=False, empty=False):
         """Read complete bounded uncompressed JSON, suppress raw errors and classify all uncertain remote writes conservatively."""
         try:
+            if self._before_request is not None:
+                await self._before_request()
+            if method != "GET" and self._before_write is not None:
+                await self._before_write(method, url, payload)
             async with self._client.stream(
                 method, url, headers=self._headers, json=payload, follow_redirects=False
             ) as response:

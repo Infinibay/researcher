@@ -1,13 +1,11 @@
 # Publicación remota de una versión aceptada
 
-La publicación local y su recuperación ya están conectadas al producto. Este
-checkpoint implementa el **protocolo interno remoto** de push y PR y un cliente
-HTTP de Forgejo. La [admisión durable y las etapas del runtime](remote-runtime.md) ya están
-conectadas con un gate de capacidad; aún faltan transporte con autoridad propia,
-credenciales del host y controles web. No hay una nueva acción remota
-habilitada para el usuario. El protocolo de merge exacto también está implementado; su integración productiva
-sigue pendiente. No se sustituye por el merge legacy ni se declara terminado el
-recorrido completo.
+La publicación local y su recuperación están conectadas. El protocolo remoto de
+push, PR y merge también dispone de [admisión durable y transporte propio
+configurable](remote-runtime.md): Git/HTTP del host con etapas originales y cierre
+local comprobado. La integración TLS usa Git real y una API Forgejo controlada.
+Faltan recuperación remota, controles de Tareas, comprobación con Forgejo real y
+cutover legacy; el recorrido completo sigue en curso.
 
 ## Push de versión exacta y recibo
 
@@ -29,7 +27,7 @@ Se comprueban los bytes/Git del candidato, la ascendencia base → head y los
 metadatos originales. Coincidencia de archivos no prueba ascendencia: un commit
 sin relación con la base se rechaza antes del efecto. Se conserva
 el checkout abierto del origen. No se llama a hooks del repositorio ni se acepta
-un remote con credenciales embebidas; el transporte productivo deberá suministrar
+un remote con credenciales embebidas; el transporte propio suministra
 la credencial fuera de argumentos, manifiestos y contexto del modelo.
 
 Ejemplo: se acepta A y se pide crear `reviewed-change`. El remoto recibe A y su
@@ -46,7 +44,7 @@ local original y adopta evidencia positiva del recibo. Si no aparece el recibo,
 el resultado sigue siendo **incierto**. No se reutiliza la conclusión local
 `not_applied` basándose solamente en una consulta remota vacía.
 
-El controlador futuro debe guardar la intención y la etapa antes de liberar el
+El controlador guarda la intención y la etapa antes de liberar el
 primer efecto. Un retry de la solicitud HTTP del usuario recuperará ese registro;
 no podrá llamar otra vez al método de push porque aún no haya visto un recibo.
 
@@ -108,7 +106,7 @@ formar parte de la migración antes de habilitarlo.
 | Se crea un PR y se pierde la respuesta | El mismo marcador permite recuperarlo con GET; no se repite POST. |
 | Head/base cambian en un PR existente | Se conserva existencia; `candidate_current` queda falso. |
 | La consulta de PR alcanza el presupuesto | Error de lectura incompleta; no habilita creación por supuesta ausencia. |
-| La API sólo protege el head al mergear | Git CAS protege el destino; el API registra después el mismo SHA ya aplicado. Integración productiva pendiente. |
+| La API sólo protege el head al mergear | Git CAS protege el destino; el API registra después el mismo SHA ya aplicado. Transporte propio conectado; compatibilidad con instancia real pendiente. |
 | Los archivos coinciden pero el head tiene historia ajena | Se rechaza antes del push: se exige ascendencia, además de diff/bytes. |
 | Se pierde el POST del registro de merge | Se consulta el merge SHA del PR original; no se repiten ni Git ni POST. |
 
@@ -127,7 +125,9 @@ efecto del host. La clave de una acción del usuario, cuyo ámbito es proyecto/t
 se conserva aparte; no se debe reutilizar sin ese ámbito como identidad remota.
 
 La admisión durable ya liga la solicitud a la aceptación y publicación local.
-Siguiente trabajo principal: perfil de Git/HTTP con autoridad propia y credencial del host,
-pruebas de integración HTTPS/control/closure, API/Tareas y coordinación durable de las dos etapas del merge exacto. El puerto
-actual no se expone como herramienta de agente ni como atajo por subprocess del
-host. El objetivo completo y los escenarios E06/E10/E12 continúan en curso.
+Siguiente trabajo principal: recuperación remota con un observador nuevo de sólo
+lectura, controles de Tareas y comprobación con una instancia real de Forgejo bajo
+sus protecciones. El [transporte propio](remote-runtime.md) ya aplica credencial
+del host, HTTPS, autoridad y cierre; no se expone como herramienta libre del
+agente ni como subprocess sin broker. El objetivo completo y los escenarios
+E06/E10/E12 continúan en curso.

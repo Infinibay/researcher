@@ -123,6 +123,36 @@ class RemotePushIntent:
             )
 
     @property
+    def query_arguments(self):
+        """Build only the exact original target/marker query for the trusted transport profile."""
+        return (
+            *_REMOTE_POLICY,
+            "ls-remote",
+            "--refs",
+            "--",
+            self.remote.clone_url,
+            self.target_ref,
+            self.receipt_ref,
+        )
+
+    @property
+    def push_arguments(self):
+        """Build the complete one-shot atomic remote ref CAS, without an unconstrained force or another refspec."""
+        return (
+            *_REMOTE_POLICY,
+            "push",
+            "--porcelain",
+            "--atomic",
+            "--no-verify",
+            f"--force-with-lease={self.target_ref}:{self.expected_target_sha or ''}",
+            f"--force-with-lease={self.receipt_ref}:",
+            "--",
+            self.remote.clone_url,
+            f"{self.head_sha}:{self.target_ref}",
+            f"{self.head_sha}:{self.receipt_ref}",
+        )
+
+    @property
     def receipt_ref(self):
         """Bind a remote atomic receipt to complete repository identity, candidate and original target observation."""
         return _RECEIPTS + hashlib.sha256(canonical(asdict(self)).encode()).hexdigest()
@@ -149,16 +179,7 @@ async def _identity(executor, remote):
 
 async def _refs(git, view, intent):
     """Observe only the two complete remote refs, rejecting partial, duplicate or malformed server output."""
-    output = await git.run(
-        view.source.workspace,
-        *_REMOTE_POLICY,
-        "ls-remote",
-        "--refs",
-        "--",
-        intent.remote.clone_url,
-        intent.target_ref,
-        intent.receipt_ref,
-    )
+    output = await git.run(view.source.workspace, *intent.query_arguments)
     refs = {}
     for line in output.splitlines():
         sha, separator, name = line.partition(b"\t")
@@ -218,22 +239,8 @@ async def push_candidate_remote(view, intent, *, executor, timeout=60):
         )
     if target != intent.expected_target_sha:
         raise RunConflict("Remote destination changed from its original observation")
-    expected = intent.expected_target_sha or ""
     try:
-        await git.run(
-            view.source.workspace,
-            *_REMOTE_POLICY,
-            "push",
-            "--porcelain",
-            "--atomic",
-            "--no-verify",
-            f"--force-with-lease={intent.target_ref}:{expected}",
-            f"--force-with-lease={intent.receipt_ref}:",
-            "--",
-            intent.remote.clone_url,
-            f"{intent.head_sha}:{intent.target_ref}",
-            f"{intent.head_sha}:{intent.receipt_ref}",
-        )
+        await git.run(view.source.workspace, *intent.push_arguments)
         await _identity(executor, intent.remote)
         target, marker = await _refs(git, view, intent)
         _plain_metadata(view.source, view.source_metadata)

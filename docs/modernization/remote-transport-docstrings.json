@@ -1,0 +1,446 @@
+{
+  "base_commit": "13f52f6",
+  "scope": "New modules and new/changed qualified definitions (including enclosing definitions); English docstrings for code discovery, not a global documentation audit.",
+  "definitions_or_modules": 73,
+  "missing": [],
+  "entries": [
+    {
+      "path": "backend/api/runtime_dependencies.py",
+      "name": "_configured_owned",
+      "line": 101,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "ForgejoPublicationClient",
+      "line": 107,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "ForgejoPublicationClient.__init__",
+      "line": 110,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "ForgejoPublicationClient._request",
+      "line": 165,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "name": "OwnedCodexRuntime",
+      "line": 235,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "name": "OwnedCodexRuntime.supports_remote_publication",
+      "line": 287,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "name": "OwnedCodexRuntime.publish_remote",
+      "line": 291,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "name": "PeerBroker",
+      "line": 123,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "name": "PeerBroker.__init__",
+      "line": 133,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "name": "PeerBroker._reserve",
+      "line": 168,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "name": "PeerBroker._run",
+      "line": 460,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "name": "PeerRegistry",
+      "line": 22,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "name": "PeerRegistry.admission",
+      "line": 187,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_publication.py",
+      "name": "RemotePushIntent",
+      "line": 94,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_publication.py",
+      "name": "RemotePushIntent.query_arguments",
+      "line": 126,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_publication.py",
+      "name": "RemotePushIntent.push_arguments",
+      "line": 139,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_publication.py",
+      "name": "_refs",
+      "line": 180,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_publication.py",
+      "name": "push_candidate_remote",
+      "line": 217,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "RemotePublications",
+      "line": 64,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_runtime.py",
+      "name": "RemotePublications.complete",
+      "line": 536,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "RuntimeService",
+      "line": 61,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "RuntimeService.publish_remote",
+      "line": 249,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "name": "SQLiteRunStore",
+      "line": 65,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "name": "SQLiteRunStore._closed_peer_proof",
+      "line": 856,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_capsule.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_capsule.py",
+      "name": "RemoteGitLaunch",
+      "line": 29,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_capsule.py",
+      "name": "RemoteGitLaunch.__post_init__",
+      "line": 35,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_capsule.py",
+      "name": "RemoteGitLaunch.local_candidate_commands",
+      "line": 61,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_capsule.py",
+      "name": "RemoteGitLaunch.allowed_commands",
+      "line": 92,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_capsule.py",
+      "name": "RemoteGitLaunch.is_write",
+      "line": 108,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_capsule.py",
+      "name": "RemoteGitLaunch.networked",
+      "line": 113,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_capsule.py",
+      "name": "RemoteGitCapsule",
+      "line": 122,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_capsule.py",
+      "name": "RemoteGitCapsule.__init__",
+      "line": 125,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_capsule.py",
+      "name": "RemoteGitCapsule._network",
+      "line": 150,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_capsule.py",
+      "name": "RemoteGitCapsule._filter",
+      "line": 154,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_capsule.py",
+      "name": "RemoteGitCapsule._program",
+      "line": 158,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_capsule.py",
+      "name": "RemoteGitCapsule._mounts",
+      "line": 181,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_capsule.py",
+      "name": "RemoteGitCapsule.__enter__",
+      "line": 251,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_controller.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_controller.py",
+      "name": "execute_owned_remote",
+      "line": 24,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_controller.py",
+      "name": "execute_owned_remote.live",
+      "line": 47,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_controller.py",
+      "name": "execute_owned_remote.live.check",
+      "line": 52,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_controller.py",
+      "name": "execute_owned_remote.issue_http",
+      "line": 61,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_controller.py",
+      "name": "execute_owned_remote.watch",
+      "line": 103,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_executor.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_executor.py",
+      "name": "OwnedRemoteGitExecutor",
+      "line": 12,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_executor.py",
+      "name": "OwnedRemoteGitExecutor.__init__",
+      "line": 15,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_executor.py",
+      "name": "OwnedRemoteGitExecutor.verify_remote",
+      "line": 26,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_executor.py",
+      "name": "OwnedRemoteGitExecutor._publication_run",
+      "line": 30,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_transport.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_transport.py",
+      "name": "RemoteTransportConfig",
+      "line": 16,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_transport.py",
+      "name": "RemoteTransportConfig.__post_init__",
+      "line": 24,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_transport.py",
+      "name": "RemoteTransportConfig.token",
+      "line": 42,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_transport.py",
+      "name": "RemoteTransportConfig.public_manifest",
+      "line": 66,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_transport.py",
+      "name": "RemoteTransportConfig.identity",
+      "line": 78,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_transport.py",
+      "name": "RemoteTransportConfig.ssl_context",
+      "line": 86,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_remote_transport.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_remote_transport.py",
+      "name": "tls_remote",
+      "line": 23,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_remote_transport.py",
+      "name": "tls_remote.ref",
+      "line": 86,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_remote_transport.py",
+      "name": "tls_remote.pull_record",
+      "line": 93,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_remote_transport.py",
+      "name": "tls_remote.Handler",
+      "line": 108,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_remote_transport.py",
+      "name": "tls_remote.Handler.log_message",
+      "line": 111,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_remote_transport.py",
+      "name": "tls_remote.Handler.reply",
+      "line": 114,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_remote_transport.py",
+      "name": "tls_remote.Handler.do_GET",
+      "line": 127,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_remote_transport.py",
+      "name": "tls_remote.Handler.do_POST",
+      "line": 131,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_remote_transport.py",
+      "name": "tls_remote.Handler.handle_request",
+      "line": 135,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_remote_transport.py",
+      "name": "test_actual_owned_https_push_pr_merge_and_stop_retire_only_local_clients",
+      "line": 271,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_transport.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_transport.py",
+      "name": "test_remote_transport_reads_private_credential_without_serializing_secret",
+      "line": 8,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_transport.py",
+      "name": "test_http_write_hook_runs_at_write_boundary_and_read_hook_cannot_grant_another_write",
+      "line": 29,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_transport.py",
+      "name": "test_http_write_hook_runs_at_write_boundary_and_read_hook_cannot_grant_another_write.before_request",
+      "line": 37,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_transport.py",
+      "name": "test_http_write_hook_runs_at_write_boundary_and_read_hook_cannot_grant_another_write.before_write",
+      "line": 41,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_transport.py",
+      "name": "test_http_write_hook_runs_at_write_boundary_and_read_hook_cannot_grant_another_write.server",
+      "line": 46,
+      "documented": true
+    }
+  ]
+}

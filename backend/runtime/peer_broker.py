@@ -49,6 +49,7 @@ from backend.runtime.publication_capsule import (
     PublicationGitLaunch,
     PublicationObservationLaunch,
 )
+from backend.runtime.remote_capsule import RemoteGitCapsule, RemoteGitLaunch
 
 
 def _digest(value):
@@ -129,7 +130,9 @@ class PeerBroker:
     Complete actor-origin and endpoint authentication remain deployment work.
     """
 
-    def __init__(self, journal, domain, *, limits=None):
+    def __init__(self, journal, domain, *, limits=None, remote_transport=None):
+        """Bind original physical ownership and optional operator remote configuration before any peer or credential is admitted."""
+        self.remote_transport = remote_transport
         if limits is None:
             limits = BrokerLimits()
         if not isinstance(limits, BrokerLimits):
@@ -176,6 +179,15 @@ class PeerBroker:
     ):
         """Retain one immutable source concession and record each operation's actual execution view."""
         snapshot = self.journal.load()
+        remote_key = None
+        if runtime_manifest and runtime_manifest.get("remote_effect_operation_id"):
+            remote_key = (
+                "broker:remote-effect:" + runtime_manifest["remote_effect_operation_id"]
+            )
+            if snapshot.records.get(remote_key) not in (None, operation_id):
+                raise AuthorityConflict(
+                    "Original remote effect already owns a different global operation"
+                )
         active = snapshot.records.get("broker:active")
         grant = snapshot.records.get(self._grant_key)
         attempt_key = "broker:attempt:" + _digest(
@@ -273,6 +285,7 @@ class PeerBroker:
                 "broker:fence": grant["global_fence"],
                 attempt_key: self.grant_id,
                 "broker:op:" + operation_id: operation,
+                **({remote_key: operation_id} if remote_key is not None else {}),
                 **(
                     {
                         native_state.key: native_state.reservation(
@@ -536,10 +549,51 @@ class PeerBroker:
                     # source_binding remains the original global concession.
                     admission = registry.admission(peer_id)
                 if admission["execution_kind"] == "remote_publication":
-                    raise AuthorityConflict(
-                        "Remote publication requires its configured typed network profile"
+                    from backend.runtime.remote_runtime import RemotePublications
+
+                    protocol = RemotePublications._protocol(
+                        admission["remote_publication"]
                     )
-                if admission["execution_kind"] == "code_publication":
+                    original = (
+                        protocol["push"] if isinstance(protocol, dict) else protocol
+                    )
+                    if (
+                        not isinstance(git_launch, RemoteGitLaunch)
+                        or self.remote_transport is None
+                        or git_launch.intent != original
+                        or git_launch.view != admission["remote_view"]
+                        or git_launch.transport_identity
+                        != self.remote_transport.identity
+                        or git_launch.intent.remote.api_base
+                        != self.remote_transport.api_base
+                    ):
+                        raise AuthorityConflict(
+                            "Remote Git requires its original configured operator profile and intent"
+                        )
+                    if git_launch.is_write:
+                        name = (
+                            "push"
+                            if admission["remote_publication"]["stage"] == "push"
+                            else "merge_git"
+                        )
+                        effect = next(
+                            (
+                                effect
+                                for effect in admission["remote_effects"]
+                                if effect["effect_name"] == name
+                            ),
+                            None,
+                        )
+                        if (
+                            effect is None
+                            or effect["state"] != "issued"
+                            or effect["attempt_id"] != admission["attempt_id"]
+                        ):
+                            raise AuthorityConflict(
+                                "Original remote write stage has not been reserved for this attempt"
+                            )
+                        admission["remote_effect_operation_id"] = effect["operation_id"]
+                elif admission["execution_kind"] == "code_publication":
                     if (
                         not isinstance(git_launch, PublicationGitLaunch)
                         or git_launch.view != admission["publication_view"]
@@ -695,15 +749,35 @@ class PeerBroker:
                 }
             if git_launch is not None:
                 manifest = {
-                    "profile": "owned-git-publication-observation-v1"
+                    "profile": "owned-remote-git-v1"
+                    if isinstance(git_launch, RemoteGitLaunch)
+                    else "owned-git-publication-observation-v1"
                     if isinstance(git_launch, PublicationObservationLaunch)
                     else "owned-git-publication-v1"
                     if isinstance(git_launch, PublicationGitLaunch)
                     else "owned-git-preparation-v1",
-                    "execution_kind": "code_publication"
+                    "execution_kind": "remote_publication"
+                    if isinstance(git_launch, RemoteGitLaunch)
+                    else "code_publication"
                     if isinstance(git_launch, PublicationGitLaunch)
                     else "development",
                     "launch": asdict(git_launch),
+                    **(
+                        {
+                            "remote_effect_operation_id": admission.get(
+                                "remote_effect_operation_id"
+                            )
+                            if admission is not None
+                            else existing["runtime_manifest"].get(
+                                "remote_effect_operation_id"
+                            ),
+                            "network": "configured-https-trusted-program"
+                            if git_launch.networked
+                            else "none",
+                        }
+                        if isinstance(git_launch, RemoteGitLaunch)
+                        else {}
+                    ),
                     "code_sha256": {
                         name: hashlib.sha256(
                             Path(__file__).with_name(name).read_bytes()
@@ -714,6 +788,15 @@ class PeerBroker:
                             "broker_git.py",
                             "development_workspace.py",
                             "peer_payload.py",
+                        )
+                        + (
+                            (
+                                "remote_capsule.py",
+                                "remote_transport.py",
+                                "remote_publication.py",
+                            )
+                            if isinstance(git_launch, RemoteGitLaunch)
+                            else ()
                         )
                         + (
                             (
@@ -772,6 +855,7 @@ class PeerBroker:
                 "development",
                 "code_review",
                 "code_publication",
+                "remote_publication",
             ):
                 raise AuthorityConflict(
                     "Writable preparation requires an admitted development execution"
@@ -810,7 +894,9 @@ class PeerBroker:
                 native_state=native_state,
                 workspace_write=workspace_write,
                 metadata_write=isinstance(git_launch, PublicationGitLaunch)
-                and not isinstance(git_launch, PublicationObservationLaunch),
+                and not isinstance(
+                    git_launch, (PublicationObservationLaunch, RemoteGitLaunch)
+                ),
             )
             self._projection_source = registry
             self._gate_observed[operation_id] = False
@@ -846,7 +932,9 @@ class PeerBroker:
                 )
                 if git_launch is not None:
                     capsule = (
-                        PublicationGitCapsule
+                        RemoteGitCapsule
+                        if isinstance(git_launch, RemoteGitLaunch)
+                        else PublicationGitCapsule
                         if isinstance(git_launch, PublicationGitLaunch)
                         else GitCapsule
                     )
@@ -862,6 +950,11 @@ class PeerBroker:
                         ken if ken is not None else (code if asset is None else asset)
                     ),
                     write_fd,
+                    **(
+                        {"remote_transport": self.remote_transport}
+                        if isinstance(git_launch, RemoteGitLaunch)
+                        else {}
+                    ),
                     **({"network": network} if network is not None else {}),
                     **({"channel": channel} if channel is not None else {}),
                     **({"host_tools": True} if host_tools else {}),

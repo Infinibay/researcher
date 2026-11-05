@@ -252,6 +252,7 @@ class OwnedCodexRuntime:
     model: str
     web_search: str = "live"
     development_checks: tuple = ()
+    remote_transport: object = None
     _closed_attempts: dict = field(
         default_factory=dict, init=False, repr=False, compare=False
     )
@@ -281,6 +282,17 @@ class OwnedCodexRuntime:
             lease.fence,
             lease.context_version,
         )
+
+    @property
+    def supports_remote_publication(self):
+        """Expose remote capability only when operator HTTPS/credential configuration was explicitly validated."""
+        return self.remote_transport is not None
+
+    async def publish_remote(self, peers, *, active):
+        """Execute one original remote owner action through owned fixed Git and bounded host HTTP without model inference."""
+        from backend.runtime.remote_controller import execute_owned_remote
+
+        return await execute_owned_remote(self, peers, active=active)
 
     async def publish_code(self, peers, *, active):
         """Execute an explicitly admitted host publication under fresh ownership without opening Codex or using the author/reviewer sessions."""

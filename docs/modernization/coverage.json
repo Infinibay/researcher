@@ -2917,7 +2917,16 @@
         "backend/tests/runtime/test_remote_runtime.py",
         "docs/architecture/remote-runtime.md",
         "docs/modernization/remote-runtime-results.json",
-        "docs/modernization/remote-runtime-packaging.json"
+        "docs/modernization/remote-runtime-packaging.json",
+        "backend/runtime/remote_transport.py",
+        "backend/runtime/remote_capsule.py",
+        "backend/runtime/remote_executor.py",
+        "backend/runtime/remote_controller.py",
+        "backend/tests/runtime/test_owned_remote_transport.py",
+        "backend/tests/runtime/test_remote_transport.py",
+        "docs/modernization/remote-transport-results.json",
+        "docs/modernization/remote-transport-packaging.json",
+        "docs/modernization/remote-transport-docstrings.json"
       ],
       "implemented": [
         "Internal exact-ref policy with fixed host port; candidate Git/diff/bytes and original source/candidate metadata identity checked",
@@ -2935,16 +2944,16 @@
         "Internal exact fast-forward Git merge CAS with ancestry fact, followed by same-SHA Forgejo manually-merged bookkeeping; no API head-only base-race claim;14new cases/34directed pass",
         "Schema45 immutable separate remote owner action/run and exact local acceptance/provenance; host-global remote IDs and issue-once effect stages",
         "Strict owner API and scheduler capability gate; no remote transport means admission refused, no generic broker profile fallback",
-        "Push/PR/merge durable prerequisites and separate merge stages, known receipts immutable, unknown remote effects retained;61directed+2sharedlocalnative+77frontend pass"
+        "Push/PR/merge durable prerequisites and separate merge stages, known receipts immutable, unknown remote effects retained;61directed+2sharedlocalnative+77frontend pass",
+        "Configured operator-only HTTPS credential/trust, fixed trusted Git argv through actual broker/domain and readonly sealed repository configuration; shares host network, not kernel destination ACL",
+        "Real TLS/Git smart HTTP and controlled Forgejo REST push→PR→exact merge plus held receive-pack Stop; original stage uncertain, local closure real, repeat action no new write;82directed+1physical pass;73documented definitions"
       ],
       "remaining": [
-        "Fresh owned remote Git/HTTP network and credential transport plus actual HTTPS/withdrawal/closure tests",
-        "Durable coordination of exact Git merge/Forgejo bookkeeping, protected-server support and identity stability during effect",
         "Expanded physical correction/crash races including DD-005; legacy writer physical exclusion",
         "Schema43/44 inverses and old inverse fixtures, capacity/host UI, whole product and full-suite acceptance",
-        "Actual owned remote transport/capability configuration and HTTPS/Stop/closure verification; default still disabled",
         "Readonly remote observers/recovery and Tasks controls, including explicit known-result adoption after withdrawal",
-        "Finalize durable merge transport/stage coordination under real server protection/identity contract"
+        "Finalize durable merge transport/stage coordination under real server protection/identity contract",
+        "Compatibility with actual Forgejo instance/protected branches and repository identity stability during network effect; TLS fixture is controlled REST contract"
       ]
     }
   }

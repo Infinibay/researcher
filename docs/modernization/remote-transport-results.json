@@ -1,0 +1,36 @@
+{
+  "base_commit": "13f52f6",
+  "date": "2026-11-05",
+  "status": "owned_configured_https_remote_transport_verified_recovery_and_tasks_pending",
+  "directed": {
+    "total": 82,
+    "passed": 82,
+    "failed": [],
+    "skipped": 0,
+    "seconds": 50.904,
+    "receipt_sha256": "98cb7b9ae5963e995acbefa178b98f6a400ad8fe86864977fa8351283e9b393e"
+  },
+  "actual_tls_chain": {
+    "total": 1,
+    "passed": 1,
+    "failed": [],
+    "skipped": 0,
+    "seconds": 112.939,
+    "receipt_sha256": "6444199fc428bfeb3c05492c04698601c634b836aaba7fe867d6e87a7b99df84"
+  },
+  "documented_definitions_or_modules": 73,
+  "package": "docs/modernization/remote-transport-packaging.json",
+  "scope": [
+    "Optional operator-only HTTPS configuration with private host PAT; absent configuration refuses remote capability",
+    "Exact immutable Git argv through original owned broker/cgroup; readonly source/candidate and sealed safe Git configuration defeat actual url.insteadOf fixture",
+    "Real TLS and Git smart HTTP receive-pack plus controlled Forgejo REST contract; actual RuntimeService push, PR and exact merge with original durable stages; repeat action does not issue another write",
+    "Stop while remote receive-pack is held closes actual local client/domain, retains issued stage as uncertain and reconciling; remote server completion is never inferred from local closure",
+    "No publication inference; PAT absent from source Git config and entire execution journal; two Git writes and one PR/merge metadata POST in positive chain"
+  ],
+  "limits": [
+    "Networked fixed trusted Git shares host network; confinement is by program, exact argv, sealed config and HTTPS origin, not a kernel destination ACL",
+    "Forgejo REST contract is served by the TLS test fixture; no real Forgejo executable, user server, user PAT or user repository mutated",
+    "Readonly remote observation/recovery and Tasks controls remain pending; explicit adoption of positive withdrawn stages remains pending",
+    "No new whole-suite green or full install claim; prior frontend verification is historical and UI is unchanged in this checkpoint"
+  ]
+}

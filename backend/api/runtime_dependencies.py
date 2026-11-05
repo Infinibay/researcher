@@ -165,6 +165,42 @@ def _configured_owned(config, path, live_grants, app):
             return False
 
     research = SQLiteResearchStore(database, runtime_authority=source_authority)
+    remote_transport = None
+    if config.get("remote_publication") is not None:
+        from backend.runtime.remote_transport import RemoteTransportConfig
+
+        supplied = config["remote_publication"]
+        if not isinstance(supplied, dict) or set(supplied) - {
+            "api_base",
+            "username",
+            "token_file",
+            "ca_bundle",
+            "resolver",
+        }:
+            raise ValueError("Unknown remote publication operator configuration")
+        remote_network = NativeNetwork.inspect(
+            resolver=supplied.get(
+                "resolver", config.get("resolver", "/etc/resolv.conf")
+            ),
+            ca_bundle=supplied.get(
+                "ca_bundle",
+                config.get("ca_bundle", "/etc/ssl/certs/ca-certificates.crt"),
+            ),
+        )
+        token_path = Path(supplied["token_file"]).resolve(strict=True)
+        for host_path in (
+            token_path,
+            Path(remote_network.ca_bundle.path),
+            Path(remote_network.resolver.path),
+        ):
+            if host_path.is_relative_to(source_root):
+                raise ValueError(
+                    "Remote credentials and trust must stay outside managed sources"
+                )
+        remote_transport = RemoteTransportConfig(
+            supplied["api_base"], supplied["username"], token_path, remote_network
+        )
+        remote_transport.token()
     native = OwnedCodexRuntime(
         app=app,
         research=research,
@@ -184,6 +220,7 @@ def _configured_owned(config, path, live_grants, app):
         broker_limits=BrokerLimits(**config["broker_limits"]),
         model=config["model"],
         web_search=config.get("web_search", "live"),
+        remote_transport=remote_transport,
         development_checks=parse_development_checks(
             config.get("development_checks", [])
         ),

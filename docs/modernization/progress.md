@@ -5738,3 +5738,53 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
   server created in this turn. No user remote/repo mutation or model inference.
   Protected root .agents/.codex/AGENTS.md unstaged; original checkout untouched.
   Local checkpoint only, no new push/merge/deploy or pause.
+
+
+## Owned HTTPS remote transport — base13f52f6, 2026-11-05
+
+- Previous goal turn verified persisted user policy; implementation resumes from
+  the actual managed worktree. Old handles80456/1548 are missing/terminal; their
+  final JUnit/logs show82PASS51.35s and1native TLS PASS112.99s, not restarted.
+- Added optional operator RemoteTransportConfig: fixed canonical HTTPS API, actual
+  username, private current-UID regular bounded PAT file outside source; pinned CA/
+  resolver public trust. Config absent rejects capability. Credentials rotate
+  without storing secret or secret hash in execution identity.
+- RemoteGitLaunch/RemoteGitCapsule whitelist exact original intent argv; all
+  repository/candidate metadata readonly with sealed safe config overlays. Actual
+  malicious url.insteadOf fixture ignored without modifying source config. PAT
+  sealed private FD, URL-scoped Basic header in trusted wrapper env, absent argv/
+  manifests/source/journal. HTTP client fixed origin/TLS and authority check before
+  every request; exact payload and issue-once stage at actual POST boundary.
+- Ruling: networked fixed trusted Git uses shared host network with program/argv/
+  sealed-config/HTTPS-origin confinement, NOT a kernel destination ACL. Model
+  network profiles unchanged. Cost: kernel does not restrict this trusted Git's
+  destinations; document this boundary rather than pretend stronger isolation.
+- OwnedRemoteGitExecutor reuses original broker transport and closure, no host
+  subprocess fallback. Broker validates original remote/stage/config identity;
+  global effect reservation prevents another command ID replay. Actual controller
+  owns Git domain and HTTP client, no fictitious PR process. Authority SQLite
+  check opens/closes in owning worker thread. Stop schedules reserved broker
+  closer before cancellation; local closure never proves remote server stopped.
+- Current source82directed PASS and1physical TLS PASS. TLS fixture real
+  git-http-backend/bare remote, controlled Forgejo REST API and synthetic PAT:
+  local accepted publication→push→PR→exact merge, same action no new write, no
+  inference; held second receive-pack+Stop yields reconciling/uncertain with actual
+  clients/domain closed. Positive chain2Git writes/1PR POST/1merge metadata POST.
+  This is NOT an actual Forgejo binary/user server/protected-branch compatibility
+  trial. Original user repositories/remotes untouched.
+- Extracted current wheel82PASS,334backend imports only wheel,726Python/SQL payloads
+  match source; isolated -I -S explicit installed dependencies/offline assets.
+  Source/packages have no skips/failures in directed scope.73new/changed qualified
+  definitions/modules have English docstrings; Ruff/diff checks pass. No new global
+  suite/full install/real inference claim. Frontend unchanged; historical77/build
+  not rerun for backend-only profile. Policy: main capability works; move on.
+- Next major capability: fresh readonly remote observation/recovery after exact
+  original Git+HTTP closure, never reissue write; then Tasks controls preserving
+  original request. Missing receipt remains uncertain. Adoption after withdrawal,
+  inverses43/44/45 and legacy cutover remain recorded, no unrelated micro-audits.
+- Full engine/roles/flows/tools/prompts/books/human-comprehension work,6web routes/
+  12page acceptance, install/restore/CLI/TUI,43scenarios/inherited failures and final
+  fresh branch review remain; full goal active, no percentage claim.
+- New test/package jobs terminal. Local checkpoint only, no push/merge/deploy.
+  Protected root .agents/.codex/AGENTS.md remain untracked; original checkout
+  untouched. Task results/packaging/docstrings linked in current dashboard.

@@ -216,7 +216,14 @@ class PeerRegistry:
                 from backend.runtime.remote_runtime import RemotePublications
 
                 remote = RemotePublications(self.runs)
-                remote.current(conn, row)
+                result["remote_view"] = remote.current(conn, row)
+                result["remote_effects"] = [
+                    dict(effect)
+                    for effect in conn.execute(
+                        "SELECT * FROM runtime_remote_effects WHERE run_id=?",
+                        (row["id"],),
+                    )
+                ]
                 result["remote_publication"] = remote._request(
                     conn, row["project_id"], row["id"]
                 )
