@@ -6186,3 +6186,56 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
   server31865INT→130(exactPID204523verifiedbeforecontrol),browserclosed.
   Original checkout/protected root .agents/.codex/AGENTS.md untouched.
   No new subagents, push, merge or deploy. Goal remains active.
+
+## 2026-11-05 — Corrected graph owner revisions (basea6dcb3a)
+
+- Previous goal turna6dcb3a: progress. Revalidated authoritative clean managed
+  branch and macro-first policy, then implemented next missing graph capability.
+- Ruling: preserve original execution/plan acceptance and add immutable owner
+  revisions in the same lineage, rather than rewrite original manifest or invent
+  a new model plan. Exact observed current task/project graph+closed history,
+  retained native acceptances, explicit replacement of unused obsolete delivery;
+  adoption stays paused and resume identifies authorization_revision.
+- Schema51 effective manifest/context-members views; subsequent corrections
+  fence latest author. Scope/cycle/closure/unknown effects/context verified.
+  Current accepted results can be explicitly retained, never reaccepted by prose.
+  New deliveries use existing dispatcher/result acceptance/dependent handoffs.
+- Reproduced/fixed manual-child bypass of stale revised parent authority; use
+  transaction DB plus exact historical facts, not globalDB/classproxy. Existing
+  schema50continuation instructions/receipts retained forrev0.
+- API strict owner/CSRF, private terminal /graph-revision and /reauthorize-plan,
+  Tasks before/after/current criteria/dependencies plus retained results and
+  distinct adopt-paused/resume controls. Lost reply/restart/reload same packet.
+- Source133PASS/3knowninversecasesexcluded66.184s. Owned final1PASS40.821s: actual
+  startupfailure/peerclosure/restart/projectcorrection/adopt/resume/research
+  acceptance/dependentprivatecode;2rootruns,source137intact,0codeacceptance.
+  Generation/Ken controlled; earlier planner fixture peers synthetic.
+- Wheel135PASS,371imports onlywheel,761matchingPythonSQL;
+  sha70276dd1d8a5890ec1439b2cbdd1b598f37a237d764dd53ee846b88f7fb6f491.
+  Final source comparison mismatch[].74changed/newPython definitions/module
+  docstrings,missing[]. TS helpers/components/type documented.
+- Frontend92PASS/tsc/build. Browser6states1440x1100/390x844,2identicaladoptPOST
+  afterloss/reload->1revision, resume/pause pinrevision1;0pageerrors/overflow/Axe
+  in examined panel. Initial actual React31 from structured metadata history
+  fixed through SSR RED->GREEN and escaped JSON/booleans. InvalidARIAgroup
+  role fixed after actualAxe failure. Screens01/02 visually inspected.
+- Subsequent browser invocation encountered already-advanced priorfixture;
+  preserved its originalDB/receipt, closed observedserver, used another DB path
+  and explicitrevision0precheck. No restarting uncertain native work.
+- Migration50->51 injected failure rollback preserves originalmanifest/view/FK;
+  historical SQL47–50unchanged. Prior50upgrade test prepares49byexcluding51
+  too; publication schemaassert51updated. Three inverse40/41/42tests excluded,
+  guards unchanged; inverses43–51/fullrestore still required, no globalgreen.
+- New/otherchangedPythonRuffPASS. Sharedstore2inheritedI001 imports, observed
+  alsoona6base, deferredDD016; otherwisePASSwithonlyI001excluded. Bundle and
+  BrowserslistwarningsDD002retained. Secondarypanelpolishnotundertaken.
+- Next MAIN: actual legacy flows/autonomy/claims/listeners/tools/domain-profile
+  migration, starting exploratory investigation seam. No more generic audits
+  or journal/broker/panel rewrites. Manualdraft/candidateadoption, retainedcode
+  fullscenario, webendpointbindingDD012/terminaladvancedparity, remoteForgejo,
+  scientific/prompts/books/model/human evals,6web routes/12pageacceptance,43cases,
+  globalfailures/install/restore/inverses/finalfreshreview all remain in goal.
+- Processes terminal:core36155=0,owned21338=0,package30197=0,frontend84844=0,
+  browser7191=0;server73676exactPID216387INT->130;prior60036PID212351INT->130;
+  browserclosed. No newagents/push/merge/deploy, original checkout and protected
+  root.agents/.codex/AGENTS.mduntouched. Full goal remains active.

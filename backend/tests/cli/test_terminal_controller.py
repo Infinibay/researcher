@@ -168,3 +168,46 @@ def test_terminal_requires_observation_and_has_no_local_task_completion(tmp_path
     assert calls == []
     assert not hasattr(controller, "tasks")
     controller.shutdown()
+
+
+def test_terminal_corrected_graph_keeps_original_adoption_packet_across_restart(tmp_path):
+    """A lost graph-revision receipt keeps the inspected snapshot, intended revision and manifest instead of silently adopting newer context."""
+    import json
+
+    import httpx
+
+    from backend.cli.owner_client import OwnerClient, TerminalError
+    from backend.orchestrator import ProjectOrchestrator
+    from backend.tests.cli.test_owner_client import client_config
+
+    posts = []
+
+    def handle(request):
+        """Control only transport replies while the terminal persists and validates the original decision."""
+        if request.url.path == "/api/session":
+            return httpx.Response(200, json={"authenticated": True, "csrf_token": "csrf", "endpoint_id": "a" * 64, "workspace_roots": []})
+        if request.method == "GET":
+            return httpx.Response(200, json={"project_id": 101, "execution_id": "exec:a", "plan_run_id": "plan:a", "eligible": True, "manifest_sha256": "c" * 64, "snapshot_sha256": "d" * 64, "snapshot": {"previous_revision": 1, "changes": [], "corrected_tasks": [], "retained_results": []}})
+        body = json.loads(request.content)
+        posts.append(body)
+        if len(posts) == 1:
+            raise httpx.ReadError("Lost graph adoption response")
+        return httpx.Response(200, json={"project_id": 101, "execution_id": "exec:a", "plan_run_id": "plan:a", "authorization_revision": 2, "manifest_sha256": "c" * 64, "status": "paused", "deliveries": {"42": "new:a"}, "retained_results": [], "inference_started": False, **body})
+
+    config = client_config(tmp_path)
+    client = OwnerClient(**config, transport=httpx.MockTransport(handle))
+    controller = ProjectOrchestrator(project_id=101, owner_client=client)
+    with pytest.raises(TerminalError):
+        controller.handle_user_message("/reauthorize-plan exec:a")
+    controller.handle_user_message("/graph-revision exec:a")
+    with pytest.raises(TerminalError):
+        controller.handle_user_message("/reauthorize-plan exec:a")
+    client.close()
+    client = OwnerClient(**config, transport=httpx.MockTransport(handle))
+    try:
+        result = client.retry()
+        assert posts[0] == posts[1]
+        assert result["authorization_revision"] == 2
+        assert client.pending() is None
+    finally:
+        client.close()

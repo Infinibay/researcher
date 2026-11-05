@@ -1,0 +1,110 @@
+{
+  "base_commit": "a6dcb3a",
+  "scope": "AST comparison of new/changed Python modules/classes/functions, including test helpers. Not a whole-repository documentation audit. New TS API/components/history helpers have JSDoc and compile separately.",
+  "definitions": 74,
+  "missing": [],
+  "by_file": {
+    "backend/planning/execution.py": [
+      "<module>",
+      "PlanExecutions",
+      "PlanExecutions.reauthorization_state",
+      "PlanExecutions.reauthorize",
+      "PlanExecutions._validate_delivery",
+      "PlanExecutions.admits_revised_task",
+      "PlanExecutions._manifest",
+      "PlanExecutions._execution",
+      "PlanExecutions._current",
+      "PlanExecutions.state",
+      "PlanExecutions.control",
+      "PlanExecutions.pending",
+      "PlanExecutions.prepare",
+      "PlanExecutions.input"
+    ],
+    "backend/planning/reauthorizations.py": [
+      "<module>",
+      "PlanReauthorizations",
+      "PlanReauthorizations.__init__",
+      "PlanReauthorizations._history",
+      "PlanReauthorizations._facts",
+      "PlanReauthorizations._snapshot",
+      "PlanReauthorizations.state",
+      "PlanReauthorizations.validate_history",
+      "PlanReauthorizations.retained",
+      "PlanReauthorizations.authorize"
+    ],
+    "backend/planning/continuations.py": [
+      "<module>",
+      "PlanContinuations",
+      "PlanContinuations._snapshot",
+      "PlanContinuations.state",
+      "PlanContinuations.authorize"
+    ],
+    "backend/runtime/sqlite_runs.py": [
+      "<module>",
+      "SQLiteRunStore",
+      "SQLiteRunStore._task"
+    ],
+    "backend/runtime/service.py": [
+      "<module>",
+      "RuntimeService",
+      "RuntimeService.reauthorize_plan"
+    ],
+    "backend/api/routes/runs.py": [
+      "<module>",
+      "ControlPlanExecution",
+      "ReauthorizePlanExecution",
+      "plan_graph_reauthorization",
+      "reauthorize_plan_graph"
+    ],
+    "backend/tools/base/db.py": [
+      "<module>",
+      "ensure_migrations"
+    ],
+    "backend/cli/owner_client.py": [
+      "<module>",
+      "OwnerClient",
+      "OwnerClient._action",
+      "OwnerClient._receipt_identities"
+    ],
+    "backend/orchestrator.py": [
+      "<module>",
+      "ProjectOrchestrator",
+      "ProjectOrchestrator._graph_revision",
+      "ProjectOrchestrator._execution",
+      "ProjectOrchestrator.handle_user_message"
+    ],
+    "backend/tests/runtime/test_plan_reauthorization.py": [
+      "<module>",
+      "corrected_graph",
+      "test_owner_reauthorizes_corrected_graph_once_without_rewriting_original",
+      "test_reauthorization_blocks_live_work_and_rejects_changed_snapshot_or_cycle",
+      "test_reauthorization_preserves_still_current_accepted_result_without_repeating_it",
+      "test_graph_revision_controls_require_the_observed_authorization_not_just_same_manifest",
+      "test_reauthorization_replaces_unissued_successor_with_late_changed_evidence",
+      "test_later_correction_fences_effective_revision_and_new_author_lease",
+      "test_http_reauthorization_recovers_revision_and_only_resumes_explicitly",
+      "test_revision_migration_rolls_back_failed_upgrade_and_preserves_original_execution",
+      "test_revision_migration_rolls_back_failed_upgrade_and_preserves_original_execution.skip_revision",
+      "test_late_history_change_cannot_admit_child_using_stale_revised_parent_authority"
+    ],
+    "backend/tests/runtime/test_owned_plan_reauthorization.py": [
+      "<module>",
+      "test_owned_corrected_graph_reauthorization_releases_dependent",
+      "test_owned_corrected_graph_reauthorization_releases_dependent.terminal"
+    ],
+    "backend/tests/runtime/test_plan_continuation.py": [
+      "<module>",
+      "test_delivery_migration_preserves_original_packets_and_rolls_back_whole_rebuild",
+      "test_delivery_migration_preserves_original_packets_and_rolls_back_whole_rebuild.skip_fifty"
+    ],
+    "backend/tests/runtime/test_code_publications.py": [
+      "<module>",
+      "test_publication_request_is_immutable_and_startup_preserves_original_records"
+    ],
+    "backend/tests/cli/test_terminal_controller.py": [
+      "<module>",
+      "test_terminal_corrected_graph_keeps_original_adoption_packet_across_restart",
+      "test_terminal_corrected_graph_keeps_original_adoption_packet_across_restart.handle"
+    ]
+  }
+}

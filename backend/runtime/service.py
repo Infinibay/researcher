@@ -369,6 +369,13 @@ class RuntimeService:
         self._dispatch_wake.set()
         return receipt
 
+    async def reauthorize_plan(self, project_id, execution_id, **command):
+        """Persist the exact corrected owner graph and its closed history; leave dispatch paused until a distinct revision-bound resume."""
+        from backend.planning.execution import PlanExecutions
+
+        self._accepting()
+        return await asyncio.to_thread(PlanExecutions(self.store).reauthorize, project_id, execution_id, **command)
+
     async def dispatch_planned_work(self):
         """Admit original ready deliveries and recover only queued runs with no attempt; quotas, closure and native reservation remain owned by the existing run worker."""
         from backend.planning.execution import PlanExecutions

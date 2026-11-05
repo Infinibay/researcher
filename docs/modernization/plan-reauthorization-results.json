@@ -1,0 +1,105 @@
+{
+  "base_commit": "a6dcb3a",
+  "goal_status": "in_progress",
+  "capability": "Explicit owner adoption of corrected task/project graph with immutable revisions, exact prior facts and retained current acceptances; same dispatcher, paused until revision-bound resume.",
+  "schema": 51,
+  "source_core": {
+    "passed": 133,
+    "failures": [],
+    "skipped": [],
+    "seconds": 66.184
+  },
+  "source_core_excluded": [
+    "test_unused_review_inverse_preserves_closed_author_and_candidate",
+    "test_unused_native_review_inverse_preserves_existing_packet",
+    "test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history"
+  ],
+  "owned": {
+    "passed": 1,
+    "failures": [],
+    "skipped": [],
+    "seconds": 40.821
+  },
+  "owned_scope": "Actual native startup failure, registered broker/kernel peer closure, restart, changed project premises, exact graph adoption and separate resume, research/owner acceptance, dependent private development. Source fact137 unchanged,2rootruns,0codeacceptance. Native generation and Ken controlled; earlier plan fixture witnesses synthetic. No model inference.",
+  "frontend": {
+    "tests_passed": 92,
+    "tsc_exit": 0,
+    "vite_build_exit": 0,
+    "warnings": "Previously recorded bundle size/Browserslist data warnings (DD002)."
+  },
+  "browser": {
+    "states": 6,
+    "adoption_posts": 2,
+    "authorization_revision": 1,
+    "new_deliveries": 2,
+    "controls": [
+      {
+        "status": "active",
+        "authorization_revision": 1
+      },
+      {
+        "status": "paused",
+        "authorization_revision": 1
+      }
+    ],
+    "page_errors": [],
+    "horizontal_overflow": false,
+    "axe_violations_in_examined_panel": 0,
+    "source": "docs/design/audits/2026-11-05-plan-reauthorization/evidence.json",
+    "scope": "Actual React/owner HTTP/SQLite; original closure and generation synthetic. Final fixture prepared separately after closing the previous server and preserving its advanced revision."
+  },
+  "migration": "Actual50\u219251 upgrade preserves original manifests and membership; injected ledger insertion failure rolls back the revision table/view changes, then successful retry retains foreign keys. Resources47\u201350 unchanged.",
+  "wheel": {
+    "base_commit": "a6dcb3a",
+    "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+    "wheel_sha256": "70276dd1d8a5890ec1439b2cbdd1b598f37a237d764dd53ee846b88f7fb6f491",
+    "observed": {
+      "tests_passed": 135,
+      "failures": [],
+      "skipped": 0,
+      "backend_modules_loaded": 371,
+      "backend_imports_only_from_wheel": true,
+      "model_turns": 0,
+      "network": "Disabled except Unix sockets",
+      "semantic_assets": "Explicit prepared pinned public offline assets outside wheel"
+    },
+    "backend_tree": {
+      "matching_source_files": 761,
+      "sha256": "b9b90e95aaf786ce72a7a769dcc10c4e1b7390ce893d45383dcd87c260a27eb3"
+    },
+    "bootstrap": "Python3.12 -I -S with explicit installed dependency path and original host venv prefix restored; backend import paths remain restricted to extracted wheel.",
+    "excluded_known_failure": "Three inverse40/41/42 cases explicitly excluded. Prior terminal source receipt observed guards refusing later schemas43\u201349; current selected51run does not rerun them. Inverses43\u201351/full restore remain required (DD003), guard unchanged.",
+    "limits": "Extracted backend wheel plus installed dependencies and explicit prepared offline assets; not a clean full host installation or an inference-quality trial."
+  },
+  "python_documentation": {
+    "definitions": 74,
+    "missing": []
+  },
+  "defects_reproduced_and_fixed": [
+    {
+      "defect": "A manual child request could borrow revised parent authority after old history changed.",
+      "proof": "test_late_history_change_cannot_admit_child_using_stale_revised_parent_authority RED\u2192GREEN; final source/wheel suites. Uses actual transaction DB for closure identity."
+    },
+    {
+      "defect": "Structured project metadata rendered as an object crashed the task workspace (React31).",
+      "proof": "Actual browser plus real SSR test RED\u2192GREEN; literal JSON/boolean text and HTML escaping verified."
+    },
+    {
+      "defect": "ARIA label on generic differences div lacked a valid role.",
+      "proof": "Actual browser Axe failure then final six-state zero-violation run with named group."
+    }
+  ],
+  "lint": {
+    "new_and_other_changed_python": "PASS",
+    "shared_store": "Two inherited I001 import-order warnings at1427/1527, also observed on a6dcb3a at1424/1524. Store otherwise passes with onlyI001excluded (DD016).",
+    "diff_check": "PASS"
+  },
+  "limits": [
+    "No current global-suite green, new real-subscription/prompt-quality/human-comprehension/scientific evaluation or whole-plan completion claim.",
+    "Owned revised-graph chain stops at dependent private development proposal. Retained code review/acceptance/publication need full-scenario verification.",
+    "Node membership/types remain bounded to original accepted graph and supportedresearch/code/bug_fix; more domain task profiles remain required.",
+    "Manual drafts/unaccepted-run adoption, candidate file transfer, actual legacy flow/autonomy/claim/listener/tool migration and global physical legacy exclusion remain.",
+    "Six web routes,0/12pages fully accepted,43broad scenarios, full install/restore/inverses43\u201351 and final fresh whole-branch review remain.",
+    "Persisted physical endpoint binding for web pending actions remains the shared integration gap recorded in DD012; this block does not claim copied/replaced DB recovery for web clients."
+  ]
+}

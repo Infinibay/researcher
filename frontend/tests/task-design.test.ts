@@ -3,10 +3,11 @@ import { after, before, test } from 'node:test'
 import { createServer, type ViteDevServer } from 'vite'
 
 let server: ViteDevServer
+let renderTaskInputHistory: (changes: import('../src/api/runtime.ts').TaskInputChange[]) => string
 let renderTask: (options?: { failure?: boolean; taskType?: string; inputChange?: boolean; inputState?: string }) => string
 before(async () => {
   server = await createServer({ configFile: false, server: { middlewareMode: true, hmr: false, ws: false, watch: null }, esbuild: { jsx: 'automatic' }, optimizeDeps: { noDiscovery: true } })
-  ;({ renderTask } = await server.ssrLoadModule('/tests/task-design-fixture.tsx'))
+  ;({ renderTask, renderTaskInputHistory } = await server.ssrLoadModule('/tests/task-design-fixture.tsx'))
 })
 after(async () => { await server?.close() })
 
@@ -67,4 +68,10 @@ test('native task lifecycle uses explicit work controls instead of a generic don
  const html=renderTask()
  assert.match(html,/<select[^>]*aria-label="Estado de la tarea"[^>]*disabled=""/)
  assert.match(html,/El estado se controla desde la pestaña Trabajo/)
+})
+
+
+test('structured project context edits remain readable and escaped without crashing task history',()=>{
+ const html=renderTaskInputHistory([{version:4,source_kind:'task_metadata',actor:null,changes:{context_json:{before:{project_metadata:{description:'Old <claim>'}},after:{project_metadata:{description:'Inspect 138 units',flags:[true,false]}}}}}])
+ assert.match(html,/Old &lt;claim&gt;/);assert.match(html,/Inspect 138 units/);assert.match(html,/project_metadata/);assert.match(html,/true/);assert.match(html,/false/);assert.doesNotMatch(html,/Old <claim>/)
 })

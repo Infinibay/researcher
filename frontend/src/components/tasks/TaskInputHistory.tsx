@@ -1,4 +1,5 @@
-import type { TaskInputChange } from '../../api/runtime'
+/** Literal task metadata history preserves attributed before/after values, including structured project context. @module */
+import type { TaskInputChange, TaskInputValue } from '../../api/runtime'
 
 const fieldLabels: Record<string, string> = {
   title: 'Título', description: 'Descripción', type: 'Tipo',
@@ -8,6 +9,10 @@ const fieldLabels: Record<string, string> = {
   epic_id: 'Épica', milestone_id: 'Hito', parent_task_id: 'Tarea principal',
 }
 
+/** Render JSON as escaped text, preserving booleans and structure without interpreting metadata as UI elements. */
+function displayValue(value:TaskInputValue):string {return value===null?'Sin valor':typeof value==='object'?JSON.stringify(value,null,2):String(value)}
+
+/** Show original edits and unknown authorship without letting structured context crash the task workspace. */
 export function TaskInputHistory({ changes }: { changes: TaskInputChange[] }) {
   if (!changes.length) return null
   return <details className="space-y-2 rounded-md border border-[var(--work-line)] p-3">
@@ -17,8 +22,8 @@ export function TaskInputHistory({ changes }: { changes: TaskInputChange[] }) {
       <p className="text-xs text-[var(--work-muted)]">Contexto {change.version} · Edición de tarea · Autor no registrado</p>
       <dl className="mt-2 space-y-3">{Object.entries(change.changes).map(([field, values]) => <div key={field}>
         <dt className="font-medium text-[var(--work-ink)]">{fieldLabels[field] ?? field}</dt>
-        <dd className="mt-1 text-[var(--work-muted)]">Antes: <span className="whitespace-pre-wrap break-words">{values.before ?? 'Sin valor'}</span></dd>
-        <dd className="mt-1 text-[var(--work-ink)]">Después: <span className="whitespace-pre-wrap break-words">{values.after ?? 'Sin valor'}</span></dd>
+        <dd className="mt-1 text-[var(--work-muted)]">Antes: <span className="whitespace-pre-wrap break-words">{displayValue(values.before)}</span></dd>
+        <dd className="mt-1 text-[var(--work-ink)]">Después: <span className="whitespace-pre-wrap break-words">{displayValue(values.after)}</span></dd>
       </div>)}</dl>
     </section>)}
   </details>

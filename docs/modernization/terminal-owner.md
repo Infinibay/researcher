@@ -47,6 +47,14 @@ anteriores, `/continue-delivery EJECUCION ENTREGA` autoriza una sucesora distint
 El intento anterior se conserva y un plan pausado sigue pausado.
 [Contrato y límites](../architecture/plan-delivery-continuations.md).
 
+Si cambió el grafo o el contexto del proyecto, `/graph-revision EJECUCION`
+permite revisar diferencias, efectos y resultados vigentes. Después,
+`/reauthorize-plan EJECUCION` adopta esa versión con otra decisión, conservando el
+plan original y manteniendo el despacho pausado. Consulta de nuevo `/execution RUN`
+antes de `/resume-plan RUN`: los controles identifican la revisión observada,
+aunque otra revisión tenga el mismo grafo.
+[Contrato de revisión](../architecture/corrected-graph-reauthorization.md).
+
 Si se pierde una respuesta, conserva el mismo directorio de estado y usa `/retry`.
 No rehagas el comando con otra clave. Un servidor que cambió de DB se rechaza
 aunque conserve URL e IDs. Al reiniciar la API, usa su fichero actual de

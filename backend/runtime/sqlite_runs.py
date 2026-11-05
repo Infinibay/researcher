@@ -97,7 +97,10 @@ class SQLiteRunStore:
         if conn.execute("""SELECT 1 FROM runtime_project_plan_tasks p JOIN runtime_project_plan_acceptances a ON a.id=p.acceptance_id
             JOIN runtime_runs r ON r.id=a.run_id WHERE p.task_id=? AND (r.status!='accepted' OR a.context_version!=coalesce(
             (SELECT version FROM task_contexts WHERE task_id=a.task_id),1))""", (task_id,)).fetchone():
-            raise RunConflict("The original accepted project plan changed; inspect its history before new child work")
+            from backend.planning.execution import PlanExecutions
+
+            if not PlanExecutions.admits_revised_task(conn, project_id, task_id):
+                raise RunConflict("The original accepted project plan changed; inspect its history before new child work")
         if conn.execute("SELECT 1 FROM runtime_project_plan_tasks WHERE task_id=?", (task_id,)).fetchone() and conn.execute(
             """SELECT 1 FROM task_dependencies d JOIN tasks p ON p.id=d.depends_on_task_id
             WHERE d.task_id=? AND d.dependency_type='blocks' AND (p.status!='done' OR NOT EXISTS(

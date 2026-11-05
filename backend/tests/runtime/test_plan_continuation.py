@@ -330,7 +330,7 @@ def test_delivery_migration_preserves_original_packets_and_rolls_back_whole_rebu
 
     def skip_fifty(conn, path):
         """Prepare the real pre-upgrade schema without modifying its historical SQL resources."""
-        if path.name != "plan_continuation_schema.sql":
+        if path.name not in ("plan_continuation_schema.sql", "plan_reauthorization_schema.sql"):
             apply(conn, path)
 
     monkeypatch.setattr(migrations, "apply_sql_resource", skip_fifty)

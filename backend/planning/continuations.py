@@ -122,7 +122,7 @@ class PlanContinuations:
             "SELECT attempt_id,state,head_sha,tree_sha,diff_sha256,issue FROM runtime_code_candidates WHERE run_id=? ORDER BY created_at DESC LIMIT 1",
             (run["id"],),
         ).fetchone()
-        return {
+        snapshot = {
             "execution_id": e["id"],
             "predecessor_delivery_id": d["id"],
             "manifest_sha256": e["manifest_sha256"],
@@ -137,6 +137,9 @@ class PlanContinuations:
                 "Unknown job results remain unknown even when their local process is proven closed. Do not repeat an effect merely because its result is unknown.",
             ],
         }
+        if e["authorization_revision"]:
+            snapshot["authorization_revision"] = e["authorization_revision"]
+        return snapshot
 
     def validate(self, conn, execution, delivery):
         """Keep the predecessor's exact observations current through admission/dispatch; later evidence needs another owner decision, never silent adoption."""
@@ -161,6 +164,7 @@ class PlanContinuations:
             e, d = self._delivery(conn, project, execution, delivery)
             snapshot, reason = None, ""
             try:
+                self.executions._validate_delivery(conn, e, d)
                 snapshot = self._snapshot(conn, e, d)
             except RunConflict as error:
                 reason = str(error)
@@ -192,6 +196,7 @@ class PlanContinuations:
             old = self.runs._receipt(conn, project, plan_task, operation_key, intent)
             if old is not None:
                 return old
+            self.executions._validate_delivery(conn, e, d)
             snapshot = self._snapshot(conn, e, d)
             if digest(snapshot) != snapshot_sha256:
                 raise RunConflict(

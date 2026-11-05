@@ -2,6 +2,7 @@ import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { TaskInspector } from '../src/components/tasks/TaskInspector'
+import { TaskInputHistory } from '../src/components/tasks/TaskInputHistory'
 import { useProjectStore } from '../src/stores/project'
 
 export function renderTask({ taskType = 'research', failure = false, inputChange = false, inputState = 'none' } = {}) {
@@ -28,4 +29,9 @@ export function renderTask({ taskType = 'research', failure = false, inputChange
   useProjectStore.setState({activeProjectId:previousProject})
   useProjectStore.getInitialState().activeProjectId = previousInitialProject
   return output
+}
+
+/** Render actual metadata history independently so structured JSON context cannot crash an otherwise unrelated task screen. */
+export function renderTaskInputHistory(changes: import('../src/api/runtime').TaskInputChange[]) {
+  return renderToStaticMarkup(<TaskInputHistory changes={changes} />)
 }

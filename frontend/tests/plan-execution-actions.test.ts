@@ -36,3 +36,12 @@ test('damaged execution packets cannot silently refresh the authorized context',
  saved.setItem('researcher:plan-execution-action:v1:101:42:plan%3Aa',JSON.stringify({...action,body:{...action.body,actor_id:'injected'}}))
  assert.throws(()=>api.executionActions.load(saved,101,42,'plan:a'))
 })
+
+test('a resume packet binds the observed graph authorization revision',async()=>{
+ const api=await import('../src/api/planExecution.ts'),previous=globalThis.fetch
+ try{
+  const action=api.prepareExecutionAction(101,42,'plan:a','a'.repeat(64),'active','execution:a',2)
+  globalThis.fetch=async(_url,options)=>{const body=JSON.parse(String(options?.body));assert.equal(body.authorization_revision,2);return Response.json({project_id:101,task_id:42,plan_run_id:'plan:a',execution_id:'execution:a',operation_key:body.operation_key,manifest_sha256:body.manifest_sha256,status:'active',authorization_revision:1})}
+  await assert.rejects(api.sendExecutionAction(action),/recibo/)
+ }finally{globalThis.fetch=previous}
+})

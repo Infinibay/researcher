@@ -99,9 +99,10 @@ o comprensión humana.
 [docstrings](../modernization/plan-continuation-docstrings.json) y
 [recorrido visual](../design/audits/2026-11-05-plan-continuation/report.md).
 
-**Reautorizar un grafo corregido** es el siguiente bloque principal; la continuación
-exige el manifiesto original vigente. Siguen pendientes adopción explícita de runs
-manuales, archivos de candidatos entre tareas/sucesoras, migración real de
-consumidores legacy y exclusión física global de sus escritores, inversas43–50 y
+La [reautorización de un grafo corregido](corrected-graph-reauthorization.md) se
+incorporó después. La continuación de una entrega sigue exigiendo la autorización
+vigente y su revisión exacta. Siguen pendientes adopción explícita de drafts/runs
+manuales no aceptados, archivos de candidatos entre tareas/sucesoras, migración real de
+consumidores legacy y exclusión física global de sus escritores, inversas43–51 y
 aceptación global del producto. No iniciar otra pasada de pulido de este panel:
 los detalles se registran en la lista diferida y se conserva el alcance completo.

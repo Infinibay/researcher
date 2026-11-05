@@ -9,7 +9,35 @@ Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: sucesoras de entregas interrumpidas
+## Etapa actual: adopción explícita de grafos corregidos
+
+**Resultado:** las correcciones de tarea o proyecto pueden adoptarse mediante otra
+decisión exacta del propietario, conservando plan, aceptación y autorización
+originales. La revisión guarda diferencias, efectos/consumo anteriores y resultados
+aceptados vigentes que retiene. Sustituye entregas sin inventar intentos, mantiene
+el despacho pausado y exige reanudar la revisión observada. No crea otro loop.
+API, terminal y Tareas conservan la misma decisión tras pérdida/reinicio/recarga.
+
+**Verificación:** 133backend dirigidas y135del wheel pasan,3inversas antiguas
+excluidas explícitamente.92frontend/compilación pasan. Ensayo broker/kernel/Git real,
+generación/Ken controlados: fallo→cierre→reinicio→corrección de proyecto→adopción y
+reanudar→investigación aceptada→desarrollo privado dependiente, fuente137intacta,
+0aceptaciones de código. Seis estados web,2POST idénticos→1revisión y controles
+reanudar/pausar ligados a ella;0errores/desbordamientos/Axe en el panel examinado.
+Migración50→51 conserva identidad y revierte fallo provocado;74definiciones Python
+documentadas. DosI001heredados del store se conservan comoDD016; sin suite global
+verde ni evaluación real de prompting/comprensión. [Resultados](plan-reauthorization-results.json),
+[paquete](plan-reauthorization-packaging.json), [contrato](../architecture/corrected-graph-reauthorization.md).
+
+**Siguiente bloque principal:** migrar los consumidores reales de flows/autonomía,
+claims/listeners y herramientas al único owner, preservando resultados de dominio.
+Empezar por el recorrido de investigación exploratoria y su admisión/claims nativos;
+comprobar las entradas actuales antes de cortar el consumidor legacy. No otra
+reimplementación del journal, broker o panel de recuperación. Adopción de drafts y
+candidatos, tipos restantes, exclusión física global legacy y todos los demás
+requisitos del plan siguen en alcance. Los detalles de presentación se posponen.
+
+## Etapa anterior: sucesoras de entregas interrumpidas
 
 **Resultado:** una decisión owner sobre evidencia exacta crea una sola entrega
 sucesora de un intento cerrado. Conserva run/peers/efectos/consumo/paquete anterior;

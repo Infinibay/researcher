@@ -62,12 +62,13 @@ cerca intentos, retira grants y vence preguntas. Así también rechazan resultad
 obsoletos las fronteras existentes de aceptación y publicación. Conserva historia.
 
 Esta primera política invalida todo ese grafo, incluidas ramas independientes;
-no afecta automáticamente otros proyectos. Faltan selección por rama y
-reautorización del grafo corregido. Hay una autorización original por plan; no
+no afecta automáticamente otros proyectos. La selección por rama sigue pendiente.
+La autorización original del plan permanece inmutable; no
 inventar otra para sortear contexto obsoleto. La continuación de una entrega
 cerrada, sobre el manifiesto todavía vigente, se incorporó después mediante una
-[decisión explícita de sucesora](plan-delivery-continuations.md). La reautorización
-del grafo corregido sigue pendiente.
+[decisión explícita de sucesora](plan-delivery-continuations.md). La [reautorización del grafo corregido](corrected-graph-reauthorization.md) se
+incorporó después: conserva la decisión original y exige otra adopción del
+propietario, manteniendo el despacho pausado.
 
 Pausar persiste intención antes de retirar runs vinculados. Stop de proyecto pausa
 autorizaciones antes de enumerar intentos. Su recibo reconoce la decisión, sin

@@ -29,6 +29,8 @@ HELP = """Conversación y trabajo son decisiones distintas:
   /resume-plan RUN             Continuar trabajo aún no emitido
   /continuation EXEC ENTREGA   Leer cierre y efectos del intento anterior
   /continue-delivery EXEC ENTREGA  Autorizar una sucesora de esa entrega observada
+  /graph-revision EXEC        Revisar cambios del grafo, efectos y resultados vigentes
+  /reauthorize-plan EXEC      Adoptar ese grafo observado; mantiene el despacho pausado
   /tasks                      Leer tareas reales del proyecto
   /task ID                    Leer contexto, repositorios y runs de una tarea
   /run ID OBJETIVO            Admitir trabajo sobre el contexto observado
@@ -179,6 +181,28 @@ class ProjectOrchestrator:
             + _json(result)
         )
 
+    def _graph_revision(self, execution, *, authorize):
+        """Expose corrected premises and historical evidence before a distinct exact owner adoption; never resume or silently refresh its snapshot."""
+        path = f"{self.prefix}/plan-executions/{_identifier(execution)}/reauthorization"
+        key = "graph-revision:" + execution
+        if not authorize:
+            state = self._read(key, path)
+            if state.get("execution_id") != execution:
+                raise TerminalError("La revisión no corresponde a la ejecución solicitada.")
+            return "Revisa los cambios y las condiciones actuales. Adoptar este grafo es una decisión nueva: conserva la historia y los resultados aceptados vigentes, sustituye propuestas anteriores cuando haga falta y mantiene el despacho pausado.\n" + _json(state)
+        state = self.client.observed(key)
+        if not state.get("eligible") or state.get("execution_id") != execution:
+            raise TerminalError("Consulta /graph-revision para revisar el cierre y el grafo actual antes de adoptarlo.")
+        body = {"snapshot_sha256": state["snapshot_sha256"]}
+        result = self._post("plan.reauthorize", path, body, {
+            "project_id": self.project_id, "execution_id": execution,
+            "plan_run_id": state["plan_run_id"], "snapshot_sha256": state["snapshot_sha256"],
+            "manifest_sha256": state["manifest_sha256"],
+            "authorization_revision": state["snapshot"]["previous_revision"] + 1,
+            "status": "paused", "inference_started": False,
+        })
+        return "Grafo adoptado como una revisión nueva. Conservamos las decisiones y efectos anteriores; el despacho sigue pausado. Consulta /execution y decide después si reanudar esa revisión.\n" + _json(result)
+
     def _continuation(self, arguments, *, authorize):
         """Present original closed effects before granting one exact successor; the shared durable owner journal handles lost responses."""
         parts = arguments.split()
@@ -243,6 +267,7 @@ class ProjectOrchestrator:
         body = {
             "manifest_sha256": execution["manifest_sha256"],
             "status": "paused" if command == "/pause-plan" else "active",
+            **({"authorization_revision": execution["authorization_revision"]} if execution.get("authorization_revision") else {}),
         }
         result = self._post(
             "plan.control",
@@ -458,6 +483,8 @@ class ProjectOrchestrator:
             text = self._execution(arguments, command)
         elif command in ("/continuation", "/continue-delivery"):
             text = self._continuation(arguments, authorize=command == "/continue-delivery")
+        elif command in ("/graph-revision", "/reauthorize-plan"):
+            text = self._graph_revision(arguments, authorize=command == "/reauthorize-plan")
         elif command == "/task":
             text = self._task(_number(arguments))
         elif command == "/run":

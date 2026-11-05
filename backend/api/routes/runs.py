@@ -356,6 +356,31 @@ class ControlPlanExecution(ExecuteProjectPlan):
     """Pause or resume the same original execution; resume is not an instruction to replay stopped attempts."""
 
     status: Literal["active", "paused"]
+    authorization_revision: int = Field(default=0, ge=0)
+
+
+class ReauthorizePlanExecution(BaseModel):
+    """Owner-observed corrected graph and history; the host derives all task identities, delivery scope and permissions."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
+    snapshot_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+
+
+@router.get("/{project_id}/plan-executions/{execution_id}/reauthorization")
+async def plan_graph_reauthorization(project_id: int, execution_id: str, request: Request):
+    """Offer exact current premises, changes, retained acceptances and original closed effects without starting work."""
+    from backend.planning.execution import PlanExecutions
+
+    data = await asyncio.to_thread(PlanExecutions(read_store(request)).reauthorization_state, project_id, execution_id)
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
+@router.post("/{project_id}/plan-executions/{execution_id}/reauthorization")
+async def reauthorize_plan_graph(project_id: int, execution_id: str, body: ReauthorizePlanExecution, request: Request):
+    """Record a separate paired-owner revision; original intent stays immutable and corrected dispatch remains paused."""
+    data = await service(request).reauthorize_plan(project_id, execution_id, **body.model_dump())
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
 
 
 class ContinuePlanDelivery(BaseModel):

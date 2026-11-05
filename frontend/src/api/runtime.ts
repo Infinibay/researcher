@@ -21,11 +21,15 @@ export interface RuntimeRun {
   issue: { code: string; message: string; next_action: string; inference_started: boolean | null } | null
 }
 
+/** Literal JSON metadata may include structured project context; it is data rather than a renderable React child. */
+export type TaskInputValue = string | number | boolean | null | TaskInputValue[] | {[key:string]:TaskInputValue}
+
+/** Observed metadata edits retain literal before/after data and unknown recorded authorship. */
 export interface TaskInputChange {
   version: number
   source_kind: 'task_metadata'
   actor: null
-  changes: Record<string, { before: string | number | null; after: string | number | null }>
+  changes: Record<string, { before: TaskInputValue; after: TaskInputValue }>
 }
 
 /** Registered task inputs, owner controls and their explicit project/task scope. */
