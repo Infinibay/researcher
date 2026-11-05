@@ -1,0 +1,145 @@
+{
+  "status": "passed",
+  "scope": "Actual Tasks/owner HTTP/SQLite; synthetic stored Git/review/closure witnesses; publication deliberately held queued. Actual physical publication proven by separate owned integration. Local test Chromium, integrated browser unavailable.",
+  "states": [
+    {
+      "file": "01-desktop-request.png",
+      "sha256": "baca0cab21413d6a617545810ce05fabaddfe2e0bb28b0541fbe989675e7094d",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "02-mobile-request.png",
+      "sha256": "6cb2a67da252a6f763cc84c0874116614859f3cc7c172e4d766ea6f5672d0419",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "03-response-lost.png",
+      "sha256": "1e36640bc14766f1b1abb60921bd08ad6dd721aa6177a3ba7be3f5d821c0f43c",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "04-reload-original.png",
+      "sha256": "6438b75825e8a4bd3a192723e2aa03c6ec5c4e8492b8057329bae0a9b1ee826b",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "05-same-receipt.png",
+      "sha256": "feaf420360b6b7fedfe7145bf51dd940748a075bd9eb1c1548ea2120ceb65a9b",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    }
+  ],
+  "page_errors": [],
+  "requests": [
+    {
+      "operation_key": "f5c7d3c7-993d-4704-832c-6dbd83dfa5e5",
+      "acceptance_operation_key": "owner-accept-code",
+      "author_attempt_id": "ab1cd541-37c1-4a44-912b-4c1bc9cd819c",
+      "context_version": 2,
+      "subject_sha256": "45fbf1718dcf662accce31bf047eebddad592d2460d191aebce8de276655206d",
+      "review_sha256": "18a2ac91a452932d6177f93cb9b5a804fff8b0814d5ebdc1a0a418ecd3f63fa1",
+      "target_ref": "refs/heads/researcher/reviewed-browser-example",
+      "expected_target_sha": null
+    },
+    {
+      "operation_key": "f5c7d3c7-993d-4704-832c-6dbd83dfa5e5",
+      "acceptance_operation_key": "owner-accept-code",
+      "author_attempt_id": "ab1cd541-37c1-4a44-912b-4c1bc9cd819c",
+      "context_version": 2,
+      "subject_sha256": "45fbf1718dcf662accce31bf047eebddad592d2460d191aebce8de276655206d",
+      "review_sha256": "18a2ac91a452932d6177f93cb9b5a804fff8b0814d5ebdc1a0a418ecd3f63fa1",
+      "target_ref": "refs/heads/researcher/reviewed-browser-example",
+      "expected_target_sha": null
+    }
+  ],
+  "model_turns": 0,
+  "receipt": {
+    "run": {
+      "run_id": "fe58b09b-9fbd-44b6-b013-22909e2c8629",
+      "project_id": 101,
+      "task_id": 1001,
+      "actor_id": "owner-publication",
+      "context_version": 2,
+      "status": "queued",
+      "fence": 0,
+      "attempt_id": null,
+      "thread_id": null,
+      "turn_id": null,
+      "prompt": "Publish the exact accepted candidate to refs/heads/researcher/reviewed-browser-example",
+      "runtime": "codex",
+      "result": null,
+      "cancel_requested": false,
+      "operation_key": "f5c7d3c7-993d-4704-832c-6dbd83dfa5e5",
+      "conversation_thread_id": null,
+      "model": null,
+      "repository_id": 11,
+      "repository_name": "alpha",
+      "issue": null,
+      "review": null,
+      "execution_kind": "code_publication"
+    },
+    "request": {
+      "run_id": "fe58b09b-9fbd-44b6-b013-22909e2c8629",
+      "intent": {
+        "acceptance_operation_key": "owner-accept-code",
+        "author_attempt_id": "ab1cd541-37c1-4a44-912b-4c1bc9cd819c",
+        "context_version": 2,
+        "expected_target_sha": null,
+        "operation_key": "f5c7d3c7-993d-4704-832c-6dbd83dfa5e5",
+        "review_sha256": "18a2ac91a452932d6177f93cb9b5a804fff8b0814d5ebdc1a0a418ecd3f63fa1",
+        "subject_sha256": "45fbf1718dcf662accce31bf047eebddad592d2460d191aebce8de276655206d",
+        "target_ref": "refs/heads/researcher/reviewed-browser-example"
+      },
+      "view": {
+        "base_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "candidate_metadata": {
+          "device": 55,
+          "inode": 76710,
+          "path": "/tmp/pytest-of-andres/pytest-18/test_prepare_frozen_author_0/host-control/development/4a31e383-b401-4712-a228-893bc245042d/ab1cd541-37c1-4a44-912b-4c1bc9cd819c/candidate/repository/.git"
+        },
+        "device": 55,
+        "diff_sha256": "236c3b08211e43b0c6ac5a6c96d57c6e0e8ec78d324868841d88793a664574b2",
+        "head_sha": "cccccccccccccccccccccccccccccccccccccccc",
+        "inode": 76707,
+        "source": {
+          "device": 55,
+          "inode": 76700,
+          "registration_path": "/tmp/pytest-of-andres/pytest-18/test_prepare_frozen_author_0/workspaces/alpha",
+          "repository_id": 11,
+          "repository_name": "alpha",
+          "requested_repository_id": 11,
+          "workspace": "/tmp/pytest-of-andres/pytest-18/test_prepare_frozen_author_0/workspaces/alpha"
+        },
+        "source_metadata": {
+          "device": 55,
+          "inode": 76709,
+          "path": "/tmp/pytest-of-andres/pytest-18/test_prepare_frozen_author_0/workspaces/alpha/.git"
+        },
+        "subject_sha256": "45fbf1718dcf662accce31bf047eebddad592d2460d191aebce8de276655206d",
+        "tree_sha": "dddddddddddddddddddddddddddddddddddddddd",
+        "workspace": "/tmp/pytest-of-andres/pytest-18/test_prepare_frozen_author_0/host-control/development/4a31e383-b401-4712-a228-893bc245042d/ab1cd541-37c1-4a44-912b-4c1bc9cd819c/candidate/repository"
+      },
+      "receipt_ref": "refs/researcher/publications/6f6cf411f4572f7932527ab08d418af7553d8cd040d7c276a081b6c53f48ed2f",
+      "result": null
+    }
+  }
+}

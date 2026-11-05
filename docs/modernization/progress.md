@@ -5480,3 +5480,53 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
 - Current main task remains connecting accepted code to a durable, freshly owned
   publication operation and then its product controls. Do not spend this phase on
   minor parser/style/build-warning cleanup or repeated generic audits.
+
+
+## Durable local code publication connected — base e648e5c, 2026-11-05
+
+- Previous goal turn classified no progress: confirmed an already persisted user
+  policy. This turn resumed pending implementation verification and creates the
+  actual product checkpoint. Explicit macro-first policy remains binding after
+  compaction: central capabilities first, secondary details recorded, no repeated
+  generic audits or polish loops.
+- Schema43, immutable acceptance-bound CodePublications intent/receipt, separate
+  code_publication run and fresh command-only owner now connect to broker/cgroup,
+  metadata-only writable capsule, fixed Git executor, RuntimeService, strict owner
+  HTTP and Tasks. Original task stays done; original author/review stay closed;
+  no model inference can be reserved. Only exact linked publications are excluded
+  from acceptance blockers. Full transaction stdin enters original broker manifest.
+- Ruling: the first public operation creates a new local branch; internal exact
+  target policy remains available. This advances publication, not a replacement
+  for operator reconciliation or remote push/PR/merge. Full plan stays active.
+- Actual native integration first exposed update-ref stdin exit137: broker kept
+  a duplicate writer after transport took ownership. RED real pipe EOF test and
+  failed actual integration changed the next action; transfer post-gate input
+  ownership while retaining broker process supervision. Pipe regression passes;
+  actual Git/kernel/broker/SQLite integration PASS1 in63.88s. Controlled native
+  author/reviewer and fixture Ken, zero additional dispatch during publication,
+  original source files unchanged, exact accepted head in branch, all peers closed.
+- Source directed25PASS3.70s; real owner HTTP strict-body/CSRF and original receipt
+  included. Consumer group34PASS/1FAIL48.99s: inverse42 fixture runs on new43,
+  existing newer-version guard correctly refuses. Explicitly new known adaptation
+  work, not one of the100 inherited baseline failures. Record DD-003 with inverse43
+  and fixture staging; do not weaken guard or chase all migration details now.
+- Frontend76PASS/buildPASS; existing bundle/Browserslist warnings DD-002. Local
+  Chromium used after integrated browser reports host unavailable. Actual owner
+  API/SQLite/Tasks fixture deliberately retains synthetic stored provenance and
+  holds publication queued.5captures desktop/mobile inspected; zero page errors,
+  overflow or Axe within panel. Lost response, reload and two identical POSTs keep
+  original candidate/acceptance/branch/key and recover one admission. This does not
+  claim physical Git effect from browser; separate native test supplies that evidence.
+- Current wheel isolated25PASS;314backend modules only extracted wheel,
+  709Python/SQL matching payloads. Initial no-isolation build lacked setuptools;
+  uv offline isolated build succeeds.79new/changed definitions/modules have English
+  docstrings; targeted Ruff and git diff check pass. No new full global suite.
+  Baseline0c8b8d9 remains historical2045PASS/100FAIL/3SKIP, not attributed to new code.
+- Docs/coverage/dashboard/status updated; DD-004 retains queued retry/host status UI.
+  Next main capability: operator reconciliation of uncertain publication, then
+  exact remote push/PR/merge and legacy physical exclusion. Entire engine/roles/
+  tools/prompts/human comprehension,6web routes/12page acceptance, installation/
+  backup/restore, inherited failures and final fresh whole-branch review remain.
+- Test/browser sessions terminal; private browser server explicitly stopped.
+  Protected root .agents/.codex/AGENTS.md left unstaged; original checkout untouched.
+  This is a local checkpoint; no new push/merge/deploy or goal pause.

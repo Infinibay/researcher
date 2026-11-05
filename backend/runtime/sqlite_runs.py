@@ -583,6 +583,8 @@ class SQLiteRunStore:
         identity(project_token_limit)
         intent = (workspace, catalog_hash, VERSION, _json(asdict(limits)), model)
         row = self._authority(conn, lease)
+        if row["execution_kind"] == "code_publication":
+            raise RunConflict("host-only publication cannot reserve model inference")
         self._bound_workspace(conn, row, workspace)
         if row["execution_kind"] == "code_review":
             from backend.runtime.code_review_records import CodeReviewRecords
@@ -852,6 +854,7 @@ class SQLiteRunStore:
 
     @staticmethod
     def _closed_peer_proof(conn, attempt_id):
+        """Require all original peers closed and the real kinds expected by this attempt; publication has commands, not dummy model peers."""
         scope = conn.execute(
             "SELECT 1 FROM runtime_peer_scopes WHERE attempt_id=?", (attempt_id,)
         ).fetchone()
@@ -859,7 +862,9 @@ class SQLiteRunStore:
             peers = conn.execute(
                 "SELECT kind,state FROM runtime_peers WHERE attempt_id=?", (attempt_id,)
             ).fetchall()
-            if not {"native", "business"} <= {peer["kind"] for peer in peers} or any(
+            run = conn.execute("SELECT r.execution_kind FROM runtime_runs r JOIN runtime_attempts a ON a.run_id=r.id WHERE a.id=?", (attempt_id,)).fetchone()
+            required = {"command"} if run and run[0] == "code_publication" else {"native", "business"}
+            if not required <= {peer["kind"] for peer in peers} or any(
                 peer["state"] != "closed" for peer in peers
             ):
                 raise RunConflict("Owned peer closure has not been proven")
@@ -1390,11 +1395,21 @@ class SQLiteRunStore:
                 conn, project_id, run_id, owner_id, lease_seconds=lease_seconds
             )
 
+    def _execution_subject(self, conn, row):
+        """Validate a host publication's exact acceptance without reopening done; all native inference kinds retain the ordinary task gate."""
+        if row["execution_kind"] == "code_publication":
+            from backend.runtime.code_publications import CodePublications
+
+            CodePublications(self).current(conn, row)
+        else:
+            self._task(conn, row["project_id"], row["task_id"])
+
     def _claim(self, conn, project_id, run_id, owner_id, *, lease_seconds=30):
+        """Claim a new fenced attempt under its typed subject; publication preserves the already accepted task state."""
         text(owner_id, "owner_id", 128)
         _duration(lease_seconds)
         row = self._row(conn, project_id, run_id)
-        self._task(conn, project_id, row["task_id"])
+        self._execution_subject(conn, row)
         if row["status"] != "queued" or row["context_version"] != self._context(
             conn, row["task_id"]
         ):
@@ -1411,10 +1426,11 @@ class SQLiteRunStore:
             "UPDATE runtime_runs SET status='running',fence=?,current_attempt_id=?,updated_at=?,issue_json=NULL WHERE id=?",
             (fence, attempt_id, now, run_id),
         )
-        conn.execute(
-            "UPDATE tasks SET status='in_progress' WHERE project_id=? AND id=?",
-            (project_id, row["task_id"]),
-        )
+        if row["execution_kind"] != "code_publication":
+            conn.execute(
+                "UPDATE tasks SET status='in_progress' WHERE project_id=? AND id=?",
+                (project_id, row["task_id"]),
+            )
         self._event(
             conn,
             project_id,
@@ -1440,6 +1456,7 @@ class SQLiteRunStore:
         )
 
     def _authority(self, conn, lease, *, allow_finished=False, now=None):
+        """Check original owner/fence/context and the current execution subject before granting live effect authority."""
         row = self._row(conn, lease.project_id, lease.run_id)
         actual = (
             row["current_attempt_id"],
@@ -1473,7 +1490,7 @@ class SQLiteRunStore:
             or row["lease_expires_at"] <= (self.clock() if now is None else now)
         ):
             raise StaleAttempt("Attempt authority expired or was withdrawn")
-        self._task(conn, lease.project_id, lease.task_id)
+        self._execution_subject(conn, row)
         return row
 
     def heartbeat(self, lease: AttemptLease, *, lease_seconds=30) -> AttemptLease:

@@ -232,6 +232,20 @@ class RuntimeService:
         )
         return await self._schedule(run) if admitted else run
 
+    async def publish_code(self, project_id, author_run_id, intent):
+        """Admit one explicit owner publication and schedule only its original fresh host attempt."""
+        from backend.runtime.code_publications import CodePublications
+
+        self._accepting()
+        if not hasattr(self.runtime, "publish_code"):
+            raise RunConflict(
+                "Configured runtime does not support owned code publication"
+            )
+        run, admitted = await asyncio.to_thread(
+            CodePublications(self.store).admit_once, project_id, author_run_id, intent
+        )
+        return await self._schedule(run) if admitted else run
+
     async def retry_start(self, **command):
         self._accepting()
         run, requested = await asyncio.to_thread(self.store.request_start, **command)
@@ -256,7 +270,8 @@ class RuntimeService:
             )
             expected_types = (
                 ("code", "bug_fix")
-                if run.execution_kind in ("development", "code_review")
+                if run.execution_kind
+                in ("development", "code_review", "code_publication")
                 else ("research",)
             )
             if (
@@ -292,9 +307,68 @@ class RuntimeService:
             slot.intent_committed.set()
             self._workers[run.run_id] = slot
             slot.task = asyncio.create_task(
-                self._execute(run.run_id, slot), name="researcher-run-" + run.run_id
+                self._execute_publication(run.run_id, slot)
+                if run.execution_kind == "code_publication"
+                else self._execute(run.run_id, slot),
+                name="researcher-run-" + run.run_id,
             )
             return run
+
+    async def _execute_publication(self, run_id, slot):
+        """Own host Git work without inference and preserve uncertainty until original physical closure is proven."""
+        from backend.runtime.code_publications import CodePublications
+
+        publications = CodePublications(self.store)
+        lease = peers = heartbeat = result = None
+        reason = "PublicationInterrupted"
+        try:
+            lease, peers = await asyncio.to_thread(
+                AttemptPeers.claim,
+                self.store,
+                slot.spec.project_id,
+                run_id,
+                self.owner_id,
+            )
+            slot.attempt_id = lease.attempt_id
+            slot.lease_deadline = time.monotonic() + 30
+            heartbeat = asyncio.create_task(self._heartbeat(slot, lease))
+            result = await self.runtime.publish_code(
+                peers,
+                active=lambda: slot.active and time.monotonic() < slot.lease_deadline,
+            )
+        except (Exception, asyncio.CancelledError) as error:  # noqa: BLE001 -- host boundary retains partial work and redacts exception details.
+            reason = type(error).__name__
+            logger.warning("Host publication retained for inspection (%s)", reason)
+        finally:
+            slot.active = False
+            if heartbeat is not None:
+                heartbeat.cancel()
+                await asyncio.gather(heartbeat, return_exceptions=True)
+            await slot.intent_committed.wait()
+            try:
+                if peers is not None:
+                    await peers.aclose()
+                if lease is not None:
+                    closed = (
+                        self.runtime.consume_closure(lease) is True and peers.closed()
+                    )
+                    if result is not None and closed:
+                        await asyncio.to_thread(
+                            publications.complete, lease, result[0], result[1]
+                        )
+                    else:
+                        await asyncio.to_thread(
+                            publications.interrupted,
+                            lease,
+                            physically_closed=closed,
+                            reason=reason,
+                        )
+            except Exception as error:  # noqa: BLE001 -- preserve reconciliation rather than replacing uncertain effects.
+                logger.error(
+                    "Publication requires reconciliation (%s)", type(error).__name__
+                )
+            finally:
+                self._workers.pop(run_id, None)
 
     async def _note_issue(self, run, code, *, attempt_id=None, inference_started=False):
         """Persist a safe, actionable owner explanation for this original run."""

@@ -1,0 +1,481 @@
+{
+  "scope": "New modules and new/modified Python class/function definitions since e648e5c; includes enclosing modified classes. English docstrings; no global repository documentation claim.",
+  "definitions": 79,
+  "missing": [],
+  "entries": [
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "StartCodePublication",
+      "line": 183,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "start_code_publication",
+      "line": 200,
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "code_publication_detail",
+      "line": 222,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/broker_git.py",
+      "name": "OwnedGitExecutor",
+      "line": 23,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/broker_git.py",
+      "name": "__init__",
+      "line": 26,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/broker_git.py",
+      "name": "run",
+      "line": 51,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/broker_git.py",
+      "name": "_invoke",
+      "line": 80,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/code_acceptances.py",
+      "name": "CodeAcceptances",
+      "line": 23,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/code_acceptances.py",
+      "name": "_state",
+      "line": 40,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "name": "OwnedCodexRuntime",
+      "line": 235,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "name": "publish_code",
+      "line": 285,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "name": "PeerTransport",
+      "line": 90,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "name": "PeerBroker",
+      "line": 121,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "name": "__init__",
+      "line": 93,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "name": "_reserve",
+      "line": 164,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "name": "run_git",
+      "line": 419,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "name": "_run",
+      "line": 446,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "name": "PeerRegistry",
+      "line": 22,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "name": "AttemptPeers",
+      "line": 358,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "name": "_prepare",
+      "line": 53,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "name": "admission",
+      "line": 184,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/peer_registry.py",
+      "name": "_prepare",
+      "line": 379,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_git.py",
+      "name": "PublicationRefIntent",
+      "line": 114,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_git.py",
+      "name": "publish_candidate_ref",
+      "line": 313,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_git.py",
+      "name": "transaction",
+      "line": 161,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "RuntimeService",
+      "line": 61,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "publish_code",
+      "line": 235,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "_schedule",
+      "line": 254,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "_execute_publication",
+      "line": 317,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "name": "SQLiteRunStore",
+      "line": 65,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "name": "_reserve_inference",
+      "line": 558,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "name": "_closed_peer_proof",
+      "line": 856,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "name": "_execution_subject",
+      "line": 1398,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "name": "_claim",
+      "line": 1407,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "name": "_authority",
+      "line": 1458,
+      "documented": true
+    },
+    {
+      "path": "backend/tools/base/db.py",
+      "name": "ensure_migrations",
+      "line": 111,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/code_publications.py",
+      "name": "CodePublicationIntent",
+      "line": 33,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/code_publications.py",
+      "name": "CodePublications",
+      "line": 61,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/code_publications.py",
+      "name": "__post_init__",
+      "line": 45,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/code_publications.py",
+      "name": "__init__",
+      "line": 64,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/code_publications.py",
+      "name": "linked_runs",
+      "line": 69,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/code_publications.py",
+      "name": "_view",
+      "line": 103,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/code_publications.py",
+      "name": "_request",
+      "line": 111,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/code_publications.py",
+      "name": "request",
+      "line": 122,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/code_publications.py",
+      "name": "current",
+      "line": 136,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/code_publications.py",
+      "name": "_matches",
+      "line": 161,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/code_publications.py",
+      "name": "admit_once",
+      "line": 182,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/code_publications.py",
+      "name": "complete",
+      "line": 316,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/code_publications.py",
+      "name": "interrupted",
+      "line": 404,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/code_publications.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_capsule.py",
+      "name": "PublicationGitLaunch",
+      "line": 18,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_capsule.py",
+      "name": "PublicationGitCapsule",
+      "line": 63,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_capsule.py",
+      "name": "__post_init__",
+      "line": 28,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_capsule.py",
+      "name": "__init__",
+      "line": 66,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_capsule.py",
+      "name": "_directory",
+      "line": 80,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_capsule.py",
+      "name": "_mounts",
+      "line": 94,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_capsule.py",
+      "name": "__enter__",
+      "line": 122,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_capsule.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_controller.py",
+      "name": "execute_owned_publication",
+      "line": 17,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_controller.py",
+      "name": "watch",
+      "line": 39,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_controller.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_executor.py",
+      "name": "OwnedPublicationGitExecutor",
+      "line": 14,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_executor.py",
+      "name": "__init__",
+      "line": 17,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_executor.py",
+      "name": "execution_path",
+      "line": 30,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_executor.py",
+      "name": "run",
+      "line": 41,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_executor.py",
+      "name": "transact",
+      "line": 45,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_executor.py",
+      "name": "_publication_run",
+      "line": 51,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_executor.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_code_publications.py",
+      "name": "publication_request",
+      "line": 30,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_code_publications.py",
+      "name": "test_publication_admission_has_own_command_only_attempt_and_preserves_acceptance",
+      "line": 58,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_code_publications.py",
+      "name": "test_publication_requires_exact_current_acceptance_and_keeps_old_receipt_after_correction",
+      "line": 95,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_code_publications.py",
+      "name": "test_publication_request_is_immutable_and_startup_preserves_original_records",
+      "line": 131,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_code_publications.py",
+      "name": "test_owner_http_publication_admits_once_and_does_not_accept_client_authority",
+      "line": 157,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_code_publications.py",
+      "name": "held",
+      "line": 177,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_code_publications.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_publication.py",
+      "name": "test_owned_publication_runs_after_acceptance_without_another_model_turn",
+      "line": 14,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_publication.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_peer_transport_eof.py",
+      "name": "test_post_gate_transport_can_finish_stdin_without_retiring_the_process",
+      "line": 7,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_peer_transport_eof.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    }
+  ]
+}

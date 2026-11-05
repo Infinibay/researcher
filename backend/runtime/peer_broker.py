@@ -44,6 +44,10 @@ from backend.runtime.peer_process import (
     close_namespace,
     start_ticks,
 )
+from backend.runtime.publication_capsule import (
+    PublicationGitCapsule,
+    PublicationGitLaunch,
+)
 
 
 def _digest(value):
@@ -87,6 +91,7 @@ class PeerTransport:
     """Post-gate data endpoints. The broker retains pidfd/reaping ownership."""
 
     def __init__(self, owner):
+        """Transfer post-gate input ownership so closing the client stream delivers EOF while the broker retains process supervision."""
         self._wait = owner.wait
         streams = []
         try:
@@ -101,6 +106,9 @@ class PeerTransport:
                 stream.close()
             raise
         self.stdin, self.stdout, self.stderr = streams
+        # G has already been delivered. Only the returned transport owns data
+        # input now, so closing it must deliver real EOF to the child.
+        owner.stdin.close()
 
     def wait(self, *, timeout=5):
         return self._wait(timeout=timeout)
@@ -163,6 +171,7 @@ class PeerBroker:
         runtime_manifest=None,
         native_state=None,
         workspace_write=False,
+        metadata_write=False,
     ):
         """Retain one immutable source concession and record each operation's actual execution view."""
         snapshot = self.journal.load()
@@ -243,7 +252,11 @@ class PeerBroker:
             "gate_sent": False,
             "exit_code": None,
             "execution_binding": asdict(admission["binding"]),
-            "workspace_access": "private-write" if workspace_write else "read",
+            "workspace_access": "git-metadata-write"
+            if metadata_write
+            else "private-write"
+            if workspace_write
+            else "read",
             **(
                 {"runtime_manifest": runtime_manifest}
                 if runtime_manifest is not None
@@ -405,7 +418,7 @@ class PeerBroker:
 
     def run_git(self, registry, peer_id, *, operation_key, launch):
         """Admit fixed Git preparation only through the original development command peer."""
-        if not isinstance(launch, GitLaunch):
+        if not isinstance(launch, (GitLaunch, PublicationGitLaunch)):
             raise TypeError("An immutable Git launch manifest is required")
         return self._run(
             registry, peer_id, operation_key=operation_key, git_launch=launch
@@ -521,6 +534,28 @@ class PeerBroker:
                     # Review Git reads the captured candidate; the immutable
                     # source_binding remains the original global concession.
                     admission = registry.admission(peer_id)
+                if admission["execution_kind"] == "code_publication":
+                    if (
+                        not isinstance(git_launch, PublicationGitLaunch)
+                        or git_launch.view != admission["publication_view"]
+                    ):
+                        raise AuthorityConflict(
+                            "Host publication requires its exact typed Git launch"
+                        )
+                    if git_launch.input_text is not None and (
+                        git_launch.arguments[-2:] != ("update-ref", "--stdin")
+                        or git_launch.input_text
+                        != admission["publication_ref_intent"].transaction(
+                            git_launch.view.head_sha
+                        )
+                    ):
+                        raise AuthorityConflict(
+                            "Publication input differs from the original owner transaction"
+                        )
+                elif isinstance(git_launch, PublicationGitLaunch):
+                    raise AuthorityConflict(
+                        "Publication Git requires a fresh host publication attempt"
+                    )
             # Retry reads its original effect receipt; it cannot open a new gate.
             workspace_write = (
                 existing.get("workspace_access") == "private-write"
@@ -641,8 +676,12 @@ class PeerBroker:
                 }
             if git_launch is not None:
                 manifest = {
-                    "profile": "owned-git-preparation-v1",
-                    "execution_kind": "development",
+                    "profile": "owned-git-publication-v1"
+                    if isinstance(git_launch, PublicationGitLaunch)
+                    else "owned-git-preparation-v1",
+                    "execution_kind": "code_publication"
+                    if isinstance(git_launch, PublicationGitLaunch)
+                    else "development",
                     "launch": asdict(git_launch),
                     "code_sha256": {
                         name: hashlib.sha256(
@@ -654,6 +693,15 @@ class PeerBroker:
                             "broker_git.py",
                             "development_workspace.py",
                             "peer_payload.py",
+                        )
+                        + (
+                            (
+                                "publication_capsule.py",
+                                "publication_git.py",
+                                "publication_executor.py",
+                            )
+                            if isinstance(git_launch, PublicationGitLaunch)
+                            else ()
                         )
                     },
                 }
@@ -702,6 +750,7 @@ class PeerBroker:
             if git_launch is not None and admission["execution_kind"] not in (
                 "development",
                 "code_review",
+                "code_publication",
             ):
                 raise AuthorityConflict(
                     "Writable preparation requires an admitted development execution"
@@ -739,6 +788,7 @@ class PeerBroker:
                 else None,
                 native_state=native_state,
                 workspace_write=workspace_write,
+                metadata_write=isinstance(git_launch, PublicationGitLaunch),
             )
             self._projection_source = registry
             self._gate_observed[operation_id] = False
@@ -773,7 +823,11 @@ class PeerBroker:
                     )
                 )
                 if git_launch is not None:
-                    capsule = GitCapsule
+                    capsule = (
+                        PublicationGitCapsule
+                        if isinstance(git_launch, PublicationGitLaunch)
+                        else GitCapsule
+                    )
                 if check_launch is not None:
                     capsule = CheckCapsule
                 with capsule(

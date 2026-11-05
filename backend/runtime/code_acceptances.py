@@ -198,16 +198,23 @@ class CodeAcceptances:
             }
         )
         blockers.extend(check_policy["blockers"])
+        from backend.runtime.code_publications import CodePublications
+
+        owned_publications = CodePublications.linked_runs(
+            conn, project_id, run_id, self._receipt(conn, project_id, run_id)
+        )
         other = conn.execute(
             """SELECT id,status FROM runtime_runs WHERE project_id=? AND task_id=?
             AND id NOT IN (?,?) AND status IN ('queued','running','cancelling','reconciling','waiting_input','needs_review')""",
             (project_id, run["task_id"], run_id, row["run_id"] if row else ""),
         ).fetchall()
+        other = [item for item in other if item["id"] not in owned_publications]
         live = conn.execute(
-            """SELECT 1 FROM runtime_peers p JOIN runtime_attempts a ON a.id=p.attempt_id
-            JOIN runtime_runs r ON r.id=a.run_id WHERE r.project_id=? AND r.task_id=? AND p.state!='closed' LIMIT 1""",
+            """SELECT r.id FROM runtime_peers p JOIN runtime_attempts a ON a.id=p.attempt_id
+            JOIN runtime_runs r ON r.id=a.run_id WHERE r.project_id=? AND r.task_id=? AND p.state!='closed'""",
             (project_id, run["task_id"]),
-        ).fetchone()
+        ).fetchall()
+        live = [item for item in live if item["id"] not in owned_publications]
         if other or live:
             blockers.append(
                 {
@@ -251,6 +258,41 @@ class CodeAcceptances:
             and task_status not in ("done", "failed", "cancelled")
             and row["reviewer_status"] == "needs_review"
         )
+        publication = {
+            "performed": False,
+            "eligibility": "not_evaluated",
+            "message": "Aceptar esta versión no la publica. Puedes publicar después el candidato aceptado en una rama nueva.",
+        }
+        if conn.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='table' AND name='runtime_code_publication_requests'"
+        ).fetchone():
+            latest = conn.execute(
+                """SELECT p.*,r.status,r.operation_key FROM runtime_code_publication_requests p
+            JOIN runtime_runs r ON r.id=p.run_id WHERE p.project_id=? AND p.author_run_id=? ORDER BY p.created_at DESC,p.rowid DESC LIMIT 1""",
+                (project_id, run_id),
+            ).fetchone()
+            if latest:
+                result = (
+                    json.loads(latest["result_json"]) if latest["result_json"] else None
+                )
+                publication.update(
+                    {
+                        "run_id": latest["run_id"],
+                        "status": latest["status"],
+                        "operation_key": latest["operation_key"],
+                        "intent": json.loads(latest["intent_json"]),
+                        "result": result,
+                        "target_ref": latest["target_ref"],
+                        "performed": bool(result and result["publication_performed"]),
+                        "message": (
+                            "Versión publicada en "
+                            + latest["target_ref"]
+                            + ". El registro conserva la referencia observada al publicar."
+                        )
+                        if result
+                        else "Publicación registrada; consulta su estado y su resultado antes de solicitar otra.",
+                    }
+                )
         return {
             "project_id": project_id,
             "task_id": run["task_id"],
@@ -276,11 +318,7 @@ class CodeAcceptances:
             ),
             "acceptance": receipt,
             "acceptance_current": acceptance_current,
-            "publication": {
-                "performed": False,
-                "eligibility": "not_evaluated",
-                "message": "Aceptar esta versión no la publica. El destino y el código se comprobarán por separado antes de publicar.",
-            },
+            "publication": publication,
         }
 
     def state(self, project_id, run_id):

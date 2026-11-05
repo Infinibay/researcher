@@ -180,6 +180,55 @@ class AcceptCodeResult(BaseModel):
     note: str | None = Field(default=None, min_length=1, max_length=4000)
 
 
+class StartCodePublication(BaseModel):
+    """Owner-observed acceptance and destination; execution authority, paths and credentials remain host-owned."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
+    acceptance_operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
+    author_attempt_id: str = Field(min_length=1, max_length=128)
+    context_version: int = Field(gt=0)
+    subject_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    review_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    target_ref: str = Field(min_length=1, max_length=240)
+    expected_target_sha: str | None = Field(
+        default=None, pattern=r"^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+    )
+
+
+@router.post("/{project_id}/runs/{author_run_id}/code-publications", status_code=202)
+async def start_code_publication(
+    project_id: int, author_run_id: str, body: StartCodePublication, request: Request
+):
+    """Admit one paired-owner publication; replay returns its original request/result without another effect or model turn."""
+    from backend.runtime.code_publications import (
+        CodePublicationIntent,
+        CodePublications,
+    )
+
+    try:
+        intent = CodePublicationIntent(**body.model_dump())
+    except ValueError as error:
+        raise HTTPException(422, str(error)) from error
+    runtime = service(request)
+    run = await runtime.publish_code(project_id, author_run_id, intent)
+    saved = await asyncio.to_thread(
+        CodePublications(runtime.store).request, project_id, run.run_id
+    )
+    return {"run": asdict(run), "request": saved}
+
+
+@router.get("/{project_id}/code-publications/{run_id}")
+async def code_publication_detail(project_id: int, run_id: str, request: Request):
+    """Read original host publication intent and receipt without starting Git or inference."""
+    from backend.runtime.code_publications import CodePublications
+
+    data = await asyncio.to_thread(
+        CodePublications(read_store(request)).request, project_id, run_id
+    )
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
 @router.get("/{project_id}/runs/{run_id}/code-result")
 async def code_result_state(project_id: int, run_id: str, request: Request):
     """Show scoped code/check/review evidence and historical acceptance without starting inference."""

@@ -1,0 +1,48 @@
+{
+  "base_commit": "e648e5c",
+  "date": "2026-11-05",
+  "status": "local_branch_flow_verified_full_publication_in_progress",
+  "directed": {
+    "receipt_sha256": "45fed711b87d99d47c83d1ace1c7ca7186fd01029d58f9574e95021448bb19a3",
+    "tests": 25,
+    "passed": 25,
+    "failed": [],
+    "skipped": 0,
+    "seconds": 3.703
+  },
+  "physical_integration": {
+    "receipt_sha256": "59abba2f699d762c336b25c32e0f907ca230d98345dca5bbf6d3b76edd57466f",
+    "tests": 1,
+    "passed": 1,
+    "failed": [],
+    "skipped": 0,
+    "seconds": 63.883
+  },
+  "consumers": {
+    "receipt_sha256": "38e79c7bc0131ab245f1f98b802e2739b2e9cd3f8a4a5bccbf58c2fc884ce541",
+    "tests": 35,
+    "passed": 34,
+    "failed": [
+      "backend.tests.runtime.test_code_acceptance::test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history[frozen_author]"
+    ],
+    "skipped": 0,
+    "seconds": 48.989
+  },
+  "frontend": {
+    "tests_passed": 76,
+    "failed": 0,
+    "build": "passed; existing bundle/Browserslist warnings deferred"
+  },
+  "browser": "docs/design/audits/2026-11-05-code-publication/evidence.json",
+  "package": "docs/modernization/publication-connected-packaging.json",
+  "physical_scope": "Real Git/kernel/broker/SQLite after controlled author/reviewer generation and fixture Ken. No model dispatch during publication; closed original peers and unchanged source files. Native run preceded final HTTP/UI and documentation-only additions.",
+  "known_failure": "Consumer inverse42 fixture expects rollback from42; startup now installs43 and existing newer-schema guard refuses. Requires staged inverse43/fixture update; not attributed to inherited baseline failures.",
+  "limits": [
+    "No new full-suite result; baseline0c8b8d9 predates this integration",
+    "Operator reconciliation for uncertain effects remains incomplete; no automatic replay",
+    "No remote push/PR/merge or global legacy writer exclusion",
+    "Browser fixture uses synthetic stored provenance and holds scheduling; physical integration is separate",
+    "No new subscription inference or user repository mutation"
+  ],
+  "previous_goal_turn": "no progress: confirmation revalidated an already persisted policy; resumed with pending verification and implementation checkpoint"
+}

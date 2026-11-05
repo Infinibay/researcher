@@ -158,6 +158,19 @@ class PublicationRefIntent:
             ).hexdigest()
         )
 
+    def transaction(self, head_sha):
+        """Build the one complete branch/marker transaction bound into the host broker manifest."""
+        if not isinstance(head_sha, str) or not _SHA.fullmatch(head_sha):
+            raise ValueError("Publication transaction requires a full candidate SHA")
+        update = (
+            f"create {self.target_ref} {head_sha}"
+            if self.expected_target_sha is None
+            else f"update {self.target_ref} {head_sha} {self.expected_target_sha}"
+        )
+        return (
+            f"start\n{update}\ncreate {self.receipt_ref} {head_sha}\nprepare\ncommit\n"
+        )
+
 
 @dataclass(frozen=True)
 class PublicationRefObservation:
@@ -339,12 +352,7 @@ async def publish_candidate_ref(view, intent, *, executor, timeout=60):
     _source_identity(view)
     _plain_metadata(view.source, view.source_metadata)
     _plain_metadata(view, view.candidate_metadata)
-    update = (
-        f"create {intent.target_ref} {view.head_sha}"
-        if intent.expected_target_sha is None
-        else f"update {intent.target_ref} {view.head_sha} {intent.expected_target_sha}"
-    )
-    transaction = f"start\n{update}\ncreate {intent.receipt_ref} {view.head_sha}\nprepare\ncommit\n"
+    transaction = intent.transaction(view.head_sha)
     try:
         await git.run(root, "update-ref", "--stdin", input_text=transaction)
         target = await git.ref(root, intent.target_ref)

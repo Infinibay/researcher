@@ -37,6 +37,7 @@ class OwnedGitExecutor:
         self.operations = []
         self.receipts = []
         self._sequence = 0
+        self._operation_prefix = "git-prepare"
 
     def execution_path(self, host_path):
         """Map only this original source or this allocation, without assuming shared host paths."""
@@ -74,12 +75,16 @@ class OwnedGitExecutor:
             tuple(sorted(env.items())),
             allocation,
         )
+        return await self._invoke(launch, timeout=timeout)
+
+    async def _invoke(self, launch, *, timeout, input_text=None):
+        """Observe one original command peer and close it physically; publication also sends its complete manifested stdin."""
         peer_id = await asyncio.to_thread(self.registry.prepare, self.lease, "command")
         self._sequence += 1
         endpoint = self.owner.git(
             self.registry,
             peer_id,
-            operation_key=f"git-prepare-{self._sequence}",
+            operation_key=f"{self._operation_prefix}-{self._sequence}",
             launch=launch,
         )
         output = error = b""
@@ -88,6 +93,10 @@ class OwnedGitExecutor:
             async with asyncio.timeout(timeout):
                 await endpoint.open(limit=65536)
                 self.operations.append(endpoint._operation)
+                if input_text is not None:
+                    endpoint.stdin.write(input_text.encode("utf-8"))
+                    await endpoint.stdin.drain()
+                    endpoint.stdin.close()
 
                 async def capture(reader, bound):
                     """Drain a complete stream within its byte budget, never treating a truncated prefix as evidence."""

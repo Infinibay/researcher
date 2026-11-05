@@ -51,10 +51,13 @@ class PeerRegistry:
             return self._prepare(conn, lease, kind)
 
     def _prepare(self, conn, lease, kind):
+        """Register only capabilities allowed by the original execution kind; publication is command-only host work."""
         if kind not in ("native", "business", "command", "ken"):
             raise ValueError("Unknown owned peer kind")
         peer_id = uuid4().hex
-        self.runs._authority(conn, lease)
+        run = self.runs._authority(conn, lease)
+        if run["execution_kind"] == "code_publication" and kind != "command":
+            raise RunConflict("Host publication permits command peers only")
         if (
             kind in ("command", "ken")
             and conn.execute(
@@ -206,6 +209,16 @@ class PeerRegistry:
                 if source_only
                 else self._execution_binding(conn, peer, row, source)
             )
+            if row["execution_kind"] == "code_publication":
+                from backend.runtime.code_publications import CodePublications
+                from backend.runtime.publication_git import PublicationRefIntent
+
+                publications = CodePublications(self.runs)
+                result["publication_view"] = publications.current(conn, row)
+                request = publications._request(conn, row["project_id"], row["id"])
+                result["publication_ref_intent"] = PublicationRefIntent(
+                    row["id"], request["target_ref"], request["expected_target_sha"]
+                )
         return result
 
     @staticmethod
@@ -364,14 +377,19 @@ class AttemptPeers:
 
     @classmethod
     def _prepare(cls, conn, runs, lease):
+        """Create the original peer scope, without fictitious native/business peers for a host-only publication."""
         registry = PeerRegistry(runs)
         ids = {}
-        runs._authority(conn, lease)
+        run = runs._authority(conn, lease)
         conn.execute(
             "INSERT INTO runtime_peer_scopes(attempt_id,protocol_version,created_at) VALUES(?,1,?)",
             (lease.attempt_id, runs.clock()),
         )
-        for kind in ("business", "native"):
+        for kind in (
+            ()
+            if run["execution_kind"] == "code_publication"
+            else ("business", "native")
+        ):
             ids[kind] = registry._prepare(conn, lease, kind)
         return cls(registry, lease, ids)
 

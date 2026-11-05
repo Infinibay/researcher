@@ -30,6 +30,7 @@ test('owner history remains distinct from publication and code correctness',()=>
   assert.match(html,/Acepto con estos límites/)
   assert.match(html,/Aceptar esta versión no la publica/)
   assert.doesNotMatch(html,/>Aceptar esta versión<\/button>/)
+  assert.match(html,/Publicar en una rama nueva/)
 })
 
 test('a later positive review does not conceal an earlier objection on the same candidate',()=>{

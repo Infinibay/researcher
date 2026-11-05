@@ -4,36 +4,40 @@ Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../supe
 
 ## Estado comprobado
 
-- Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Faltan publicación y cutover de consumidores/loops antiguos.
+- Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; faltan reconciliación operativa, efectos remotos y cutover de consumidores/loops antiguos.
 - Interfaz: seis pilotos, 18/36 conceptos de escritorio y 6/12 móviles; seis rutas pendientes y 0/12 páginas completamente aceptadas.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: publicación con efecto y recibo propios
+## Etapa actual: publicación local conectada
 
-**Resultado parcial:** política Git interna con candidato exacto y metadatos de
-origen/candidato fijados. La rama y el recibo ligado a la intención se guardan
-atómicamente; un destino movido o una respuesta perdida no disparan otro efecto.
-Los checkouts primarios/vinculados se rechazan. El estado histórico aplicado se
-conserva aunque otro actor mueva después la rama.
+**Resultado:** Tareas solicita una rama nueva para la versión aceptada exacta.
+La admisión durable guarda cuerpo/clave; un intento nuevo del host usa broker,
+dominio y peers sólo de comandos. Sólo `.git` original es escribible; stdin
+completo queda en el manifiesto. No se reserva inferencia ni se reabre la tarea.
+Cierre físico y resultado/evento quedan comprobados antes de registrar éxito.
 
-**Verificación:** 38 casos dirigidos, incluidos 20 nuevos con Git real; 38 del wheel
-en 4,92 segundos, 237 módulos sólo del paquete y 701 fuentes coincidentes.
-39 definiciones nuevas documentadas en inglés. Tres regresiones observadas y
-corregidas: consulta fallida tras commit, copia de `.git` con recibo aparentemente
-válido y adopción del recibo con destino cambiado. No hubo llamadas a modelos.
+**Verificación:** 25 pruebas dirigidas pasan y una integración real de
+Git/kernel/broker/SQLite pasa en 63,88 s, con generación de autor/revisor controlada.
+Frontend 76 pruebas/build; cinco capturas de escritorio/móvil verifican respuesta
+perdida y recarga con la misma rama/cuerpo/clave. Cero errores/desbordamiento/Axe
+en el panel. El navegador usa procedencia sintética y retiene el trabajo en cola;
+no prueba el efecto físico. Wheel: 25 pasan, 314 módulos sólo del paquete,
+709 fuentes coincidentes. 79 definiciones/módulos documentados en inglés.
 
-**Pendiente inmediato:** admisión durable ligada a aceptación y tipo de ejecución
-del host, claim/authority sin reabrir la tarea terminada; peers sólo de comandos;
-launch/capsule con sólo `.git` escribible y stdin exacto en el manifiesto. Después,
-controlador físico, API/Tareas y efectos remotos. El módulo nuevo no se expone
-todavía como publicación del producto. [Contrato/debate](../architecture/code-publication.md),
-[recibo](publication-policy-results.json), [paquete](publication-policy-packaging.json).
+**Límite comprobado:** consumidores ampliados: 34 pasan y un fixture de inverse42
+falla porque el nuevo esquema43 activa el guard de versión posterior. Queda
+registrado con el inverse43 para la pasada de migraciones; no se cuenta entre los
+100 fallos heredados ni se afirma una suite global nueva verde.
 
-**Baseline completado:** al retomar se ejecutó el checkpoint previo con
-`--timeout=180`, hasta salida terminal 1: 2045 pasan/100 heredados fallan/3 omitidos.
-No se reinicia una suite sin comprobar su proceso. Este resultado no se atribuye
-a la política nueva añadida después. [Alcance](resumed-baseline-results.json).
+**Siguiente capacidad principal:** reconciliación operativa de efecto incierto,
+seguida de push/PR/merge con identidad remota exacta; exclusión física legacy aún
+pendiente. Los detalles secundarios están en [deferred-details.md](deferred-details.md).
+[Contrato](../architecture/code-publication.md),
+[resultados](publication-connected-results.json), [paquete](publication-connected-packaging.json).
+
+**Baseline histórico:** `0c8b8d9` con `--timeout=180`: 2045 pasan/100 fallan/3
+omitidos. Es anterior a la integración actual. [Alcance](resumed-baseline-results.json).
 
 ## Etapa anterior: entrada pública de desarrollo y revisión
 

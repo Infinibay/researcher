@@ -2867,19 +2867,35 @@
         "docs/architecture/code-publication.md",
         "docs/modernization/publication-policy-results.json",
         "docs/modernization/publication-policy-packaging.json",
-        "docs/modernization/publication-policy-docstrings.json"
+        "docs/modernization/publication-policy-docstrings.json",
+        "backend/runtime/code_publications.py",
+        "backend/runtime/publication_controller.py",
+        "backend/runtime/publication_executor.py",
+        "backend/runtime/publication_capsule.py",
+        "backend/db/code_publication_schema.sql",
+        "backend/tests/runtime/test_code_publications.py",
+        "backend/tests/runtime/test_owned_publication.py",
+        "backend/tests/runtime/test_peer_transport_eof.py",
+        "frontend/src/components/tasks/CodePublicationRequest.tsx",
+        "docs/modernization/publication-connected-results.json",
+        "docs/modernization/publication-connected-packaging.json",
+        "docs/design/audits/2026-11-05-code-publication/report.md"
       ],
       "implemented": [
         "Internal exact-ref policy with fixed host port; candidate Git/diff/bytes and original source/candidate metadata identity checked",
         "Actual atomic branch+intent-bound marker transaction; destination CAS, primary/linked checkout refusal, no working-tree edits",
         "Closed-original reconciliation without effect replay; historical applied effect separated from moved target; post-commit read failure remains uncertain",
-        "38directed and38extracted-wheel cases pass including20new policy cases;701matching sources,237package-only modules,39documented definitions"
+        "38directed and38extracted-wheel cases pass including20new policy cases;701matching sources,237package-only modules,39documented definitions",
+        "Durable immutable acceptance-bound host publication admission/claim, command-only scope and no inference; task remains done",
+        "Fresh broker/cgroup and metadata-only writable capsule; exact transaction stdin in broker manifest; physical original closure and durable result/event",
+        "Owner API/Tasks new local branch, original request preserved across lost response/reload;25directed+1physical PASS, frontend76PASS/build, wheel25PASS"
       ],
       "remaining": [
-        "Durable acceptance-bound publication admission, typed host execution kind, claim/authority rules without reopening accepted tasks",
-        "Fresh broker/cgroup command-only scope and metadata-only writable capsule with immutable transaction stdin manifest",
-        "Owner API/Tasks request/recovery with original durable intent; global physical exclusion and post-correction historical effect semantics",
-        "Remote push/PR/merge and stable remote identity/reconciliation; full product acceptance"
+        "Operator reconciliation of uncertain original effect; expanded physical correction/crash races",
+        "Global physical exclusion from legacy writers during cutover",
+        "Remote push/PR/merge with exact remote identity and receipt reconciliation",
+        "Schema43 inverse and inverse42 fixture adaptation; capacity/host status UI polish",
+        "Whole product acceptance; no current full-suite green claim"
       ]
     }
   }

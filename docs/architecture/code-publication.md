@@ -3,107 +3,114 @@
 La publicación es un efecto del host con autoridad y recibo propios. El autor y
 el revisor ya terminaron sus intentos; una aceptación histórica no reactiva sus
 procesos ni autoriza nuevos comandos. Este contrato desarrolla E06, E10 y E12 del
-plan completo y conserva pendientes push, PR, merge y su reconciliación remota.
+plan completo. Push, PR, merge y recuperación operativa siguen pendientes.
 
-**Estado actual:** `backend/runtime/publication_git.py` implementa y prueba la
-política de referencias Git mediante un puerto confiable. No tiene ruta HTTP,
-admisión durable, integración con el broker ni acción web habilitada. Las pruebas
-usan Git real sobre repositorios temporales y un adaptador de procesos exclusivo
-del test. No demuestran autoridad de producción ni publicación completa del producto.
+**Estado actual:** el propietario puede publicar desde Tareas el commit aceptado
+en una rama local nueva. La solicitud queda guardada con su aceptación exacta;
+un intento nuevo del host usa su propio broker y dominio, sin inferencia.
+La integración con Git, kernel, broker y SQLite reales verifica el efecto, el
+cierre físico y la conservación de los archivos originales. Autoría/revisión usan
+generación controlada en ese test; no es un nuevo ensayo de calidad del modelo.
 
 ## Qué se publica y qué evidencia conserva
 
-La primera operación local coloca el commit exacto del candidato en una rama
-observada explícitamente. El destino puede estar ausente o señalar la base/candidato
-aceptados; no se fuerza una rama que cambió desde la observación. No se actualiza
-una rama abierta en ningún checkout, porque sus archivos quedarían desalineados.
+La operación coloca el commit exacto del candidato en una rama explícita. La
+interfaz crea únicamente ramas ausentes; la política interna también admite una
+referencia previamente observada con precondiciones. No se fuerza una rama que
+cambió desde esa observación ni se actualiza una rama abierta en algún checkout.
 El contenido del working tree original permanece en su versión anterior.
 
 Una transacción `git update-ref --stdin` actualiza la rama y crea su recibo
 `refs/researcher/publications/<huella>` juntos. La huella incluye identidad de la
 operación, rama y SHA previo observado. El recibo apunta al head exacto del
-candidato. Cambiar el destino conservando una etiqueta de solicitud no permite
-adoptar el recibo de otra intención.
+candidato. El manifiesto original del broker incluye toda la entrada de esa
+transacción; otro cuerpo no puede adoptar su recibo.
 
-Ejemplo: se publica el candidato A en `refs/heads/reviewed-change`. Git confirma
-la transacción, pero se pierde la respuesta. Tras comprobar que el proceso original
-cerró, se consulta el recibo y la rama. Si otra persona movió después esa rama a B,
-se conserva «A fue publicado por esta operación; el destino ahora apunta a B».
-La diferencia no se convierte en «no ocurrió nada» ni dispara otro efecto.
+Ejemplo: se acepta A y se solicita crear `researcher/cambio-revisado`. La rama
+señala A, pero los archivos del checkout abierto siguen en su versión anterior.
+Aceptar A, crear esa rama y subirla a un servidor son decisiones separadas.
 
 `target_current` sólo expresa que la referencia Git todavía apunta al head del
-candidato. No acredita vigencia del contexto de la tarea, aceptación actual,+cierre de procesos ni éxito remoto. Esas condiciones pertenecen al controlador.
+candidato. No acredita vigencia del contexto de la tarea, aceptación actual,
+cierre de procesos ni éxito remoto.
 
-## Recorrido del producto que falta conectar
+## Recorrido conectado
 
 ```mermaid
 flowchart TD
-    A[Intención explícita del propietario] --> B[Guardar solicitud y aceptación exactas]
-    B --> C[Nuevo intento del host sin inferencia]
-    C --> D[Validar contexto y destino]
-    D --> E[Broker y dominio nuevos; sólo Git autorizado]
-    E --> F[Revalidar candidato y metadatos]
-    F --> G[Transacción de rama y recibo]
+    A[Propietario acepta una versión exacta] --> B[Solicita una rama local explícita]
+    B --> C[Guardar intención y recibo de admisión]
+    C --> D[Nuevo intento del host sin modelo]
+    D --> E[Validar aceptación, contexto y origen]
+    E --> F[Broker nuevo: comandos Git acotados]
+    F --> G[Rama y recibo en una transacción]
     G --> H[Comprobar cierre físico original]
-    H --> I[Recibo y evento durable del producto]
-    G -. respuesta incierta .-> J[Conservar operación original]
-    J --> H
-    H --> K[Consultar recibo y destino sin repetir efecto]
+    H --> I[Guardar resultado y evento juntos]
+    G -. resultado incierto .-> J[Conservar solicitud y evidencia sin repetir]
+    J -. pendiente operativo .-> K[Reconciliar efecto original]
 ```
 
-La solicitud debe fijar proyecto, tarea, aceptación, intento del autor, contexto,
-huellas de candidato/revisión, rama y SHA previo. El controlador usa el propietario,
-leases, fences y capacidad existentes. No necesita un turno de modelo ni otros
-agentes; Codex y Ken continúan en los recorridos de autoría/revisión.
+`code_publication_schema.sql` añade la versión 43 y la solicitud inmutable.
+`CodePublications` fija proyecto, tarea, aceptación, intento del autor, contexto,
+huellas de candidato/revisión, destino y SHA previo. `_claim`/`_authority` validan
+ese sujeto sin reabrir la tarea terminada. No se puede reservar inferencia ni
+crear peers native/business para este tipo de ejecución.
 
-El análisis con un subagente de contexto limpio confirmó que reutilizar la sesión
-de inferencia crearía dependencias incorrectas: `_claim` rechaza tareas terminadas
-y cambia su estado; `AttemptPeers` prepara native/business; `_closed_peer_proof`
-los exige; `GitCapsule` mantiene el origen en lectura. Se decidió conservar esas
-reglas para sus tipos actuales y añadir un perfil específico de publicación.
+Sólo las publicaciones ligadas a esa aceptación exacta se excluyen de sus bloqueos
+de trabajo simultáneo. No existe una excepción general por etiqueta de ejecución.
+Los tipos anteriores conservan sus requisitos de tarea y cierre.
 
-Cambios siguientes, con consumidores concretos:
+`PublicationGitCapsule` mantiene el origen en lectura salvo su `.git` original,
+y el candidato aceptado en lectura bajo una ruta independiente. Los descriptores
+fijan device/inode antes del spawn. El executor usa el broker existente, sin
+fallback de subprocess del host. El controlador retira el dominio original antes
+de entregar evidencia al servicio. Resultado, evento y estados se guardan juntos.
+Una corrección posterior no promueve el efecto histórico al contexto nuevo.
 
-1. Admitir `code_publication` con una solicitud inmutable ligada a la aceptación.
-   `_claim`/`_authority` validarán ese sujeto sin reabrir una tarea terminada.
-   Se mantendrán los controles existentes para investigación, autoría y revisión.
-   La nueva operación no podrá reservar inferencia.
-2. Preparar sólo peers de comandos. La prueba de cierre exigirá los comandos
-   reales del efecto y sus recibos, sin crear native/business ficticios.
-   La lectura de aceptación reconocerá sólo su publicación exactamente vinculada;
-   no excluirá cualquier trabajo por su etiqueta de tipo.
-3. Añadir un launch/capsule Git específico. Origen en lectura, sólo `.git` original
-   escribible y candidato aceptado en lectura bajo otra ruta. Los descriptores
-   fijarán device/inode originales. La entrada completa de la transacción debe
-   quedar incluida en el manifiesto del broker; el executor actual no envía stdin.
-4. Guardar la etapa antes del efecto. Una respuesta perdida exige cerrar/reconciliar
-   la operación anterior, consultar recibo/destino y conservar su evidencia. Un
-   resultado obsoleto puede ser historia de un efecto aplicado; no es publicación
-   vigente del nuevo contexto. La autorización al liberar el efecto y la corrección
-   posterior deben tener un punto de orden definido y comprobado.
-5. Conectar API y Tareas con el cuerpo original persistido, igual que aceptación y
-   revisión. Después integrar push/PR/merge con identidad remota exacta y consulta
-   de efectos antes de retry. Crear una rama local no completa esas capacidades.
+API: `POST /api/projects/{project}/runs/{author}/code-publications` admite la
+intención estricta; `GET /api/projects/{project}/code-publications/{run}` recupera
+la solicitud guardada. Se aplican pairing/CSRF y alcance de propietario existentes.
+El cliente guarda cuerpo y clave antes de enviar. Una respuesta perdida y una
+recarga conservan la rama y la aceptación originales; repetir el POST recupera
+la admisión anterior y no agenda otro intento.
 
 ## Problemas examinados y soluciones
 
-| Qué pasaría si… | Solución y evidencia actual |
+| Qué pasaría si… | Solución y alcance comprobado |
 | --- | --- |
-| La referencia cambia entre preflight y escritura | CAS de referencia y creación del recibo en una sola transacción; prueba real verifica que no queda un recibo parcial. |
-| Git confirma y se pierde la respuesta o falla la consulta posterior | Se conserva incertidumbre; reconciliación sólo con cierre original probado y sin otra transacción. Probado en Git real. |
-| Alguien mueve la rama después | Se conservan efecto histórico y destino observado por separado. Probado. |
-| Se reutiliza el ID con otra rama | Recibo ligado a la intención completa; no adopta el anterior. Regresión observada y corregida. |
-| Se reemplaza `.git` por una copia con las mismas referencias | Identidad original de metadatos conservada; rechazo aunque el recibo copiado parezca válido. Probado en política; fijación de descriptor en capsule pendiente. |
-| El commit coincide pero los archivos del candidato cambiaron | Se reutiliza la validación Git/diff/bytes de revisión. Probado. |
-| Se intenta publicar sobre un checkout primario o vinculado | Se rechaza el destino; comprobado en ambos casos. No hay checkout/reset automático. |
-| Una corrección llega después de liberar un efecto | El controlador deberá conservar el efecto y su contexto original, sin promoverlo al contexto nuevo. Integración pendiente. |
-| Un merge legacy empieza justo antes de la primera admisión nativa | El preflight legacy existente no constituye exclusión física. Debe resolverse en el cutover de escrituras y autoridad; no está cerrado por estas pruebas. |
+| La referencia cambia entre preflight y escritura | CAS de referencia y recibo en una sola transacción; Git real verifica ausencia de recibo parcial. |
+| Git confirma y se pierde la respuesta o falla la consulta posterior | La política conserva incertidumbre y reconcilia sólo con cierre original probado. El producto conserva la solicitud sin repetir; su flujo operativo de reconciliación sigue pendiente. |
+| Alguien mueve la rama después | La política conserva efecto histórico y destino observado por separado. No convierte la diferencia en permiso para repetir. |
+| Se reutiliza el ID con otra rama | Recibo ligado a intención completa; no adopta el anterior. |
+| Se reemplaza `.git` por una copia | Identidad original en política y descriptores en capsule; rechazo de metadatos sustituidos. |
+| Cambian los archivos del candidato | Validación Git/diff/bytes antes del efecto; no basta que coincida un nombre de rama. |
+| Se intenta publicar sobre un checkout primario o vinculado | Rechazo sin checkout/reset automático. |
+| El cliente cierra stdin, pero Git no recibe EOF | Se reprodujo un writer duplicado retenido por el broker. El transporte es ahora dueño del input después de G; prueba de pipe real y publicación física pasan. |
+| Llega una corrección | La autoridad viva se retira; un efecto aplicado pertenece a su contexto original. Almacenamiento comprueba retirada y conserva recibo; falta ampliar carreras físicas. |
+| Un merge legacy empieza antes de la primera admisión nativa | El preflight legacy no constituye exclusión física global. Resolver en el cutover de escrituras. |
 
-## Verificación
+El análisis previo con un subagente de contexto limpio ayudó a separar la nueva
+operación de las sesiones cerradas de inferencia. No reemplaza estas pruebas ni
+constituye la revisión independiente final de toda la rama.
 
-Las [pruebas dirigidas](../modernization/publication-policy-results.json) incluyen
-Git real, fallos de transporte controlados y candidatos/destinos temporales.
-Las nuevas definiciones tienen [docstrings en inglés](../modernization/publication-policy-docstrings.json).
-La [suite global del checkpoint anterior](../modernization/resumed-baseline-results.json)
-terminó antes de incorporar esta política al producto y no se atribuye a ella.
-No hubo inferencia nueva ni cambios en repositorios del usuario durante estos tests.
+## Verificación y pendientes
+
+[Resultados actuales](../modernization/publication-connected-results.json): 25
+pruebas dirigidas, una integración física, 76 pruebas frontend y build. Cinco
+capturas del panel se comprobaron en escritorio/móvil, incluida respuesta perdida
+y recarga; cero errores de página, desbordamiento o incidencias Axe en el panel.
+El navegador usa testigos sintéticos y retiene la ejecución en cola; no prueba el
+efecto Git. [Auditoría](../design/audits/2026-11-05-code-publication/report.md).
+
+El [wheel actual](../modernization/publication-connected-packaging.json) pasa 25
+pruebas aisladas. La comprobación ampliada de consumidores dio 34 aprobadas y un
+fallo de un fixture de reversión 42 frente a esquema 43. Se conserva el fallo y se
+registra su adaptación con el rollback 43 en [detalles diferidos](../modernization/deferred-details.md).
+No se afirma una suite global actual verde; el [baseline](../modernization/resumed-baseline-results.json)
+es anterior a esta integración. [Docstrings](../modernization/publication-connected-docstrings.json).
+
+Siguientes capacidades principales: reconciliación operativa de la publicación
+incierta, push/PR/merge con identidad remota exacta y consulta antes de retry;
+exclusión física durante cutover legacy. Los detalles de cola/UI y migración se
+conservan para su pasada correspondiente. Crear la rama local no completa el
+recorrido de publicación ni el plan general.

@@ -15,7 +15,7 @@ export interface CodeResultState {
   subject_sha256:string|null;review_sha256:string;review:{run_id:string;attempt_id:string;actor_id:string;state:string;proposal:CodeReviewProposal|null}|null
   eligible:boolean;blockers:{code:string;message:string}[];checks:{limitations:{code:string;message:string}[]};requires_acknowledgement:boolean
   review_issues?:{run_id:string;state:string;verdict:string;rationale:string;blocking:boolean;message:string}[]
-  acceptance:CodeAcceptanceReceipt|null;acceptance_current:boolean;publication:{performed:false;eligibility:string;message:string}
+  acceptance:CodeAcceptanceReceipt|null;acceptance_current:boolean;publication:{performed:boolean;eligibility:string;message:string;run_id?:string;status?:string;target_ref?:string}
 }
 /** One explicit captured diff window with identity and unread-tail information. */
 export interface CodeDiffWindow {content:string;offset:number;next_offset:number|null;total_chars:number;bytes:number;sha256:string;complete_file:boolean}

@@ -282,6 +282,12 @@ class OwnedCodexRuntime:
             lease.context_version,
         )
 
+    async def publish_code(self, peers, *, active):
+        """Execute an explicitly admitted host publication under fresh ownership without opening Codex or using the author/reviewer sessions."""
+        from backend.runtime.publication_controller import execute_owned_publication
+
+        return await execute_owned_publication(self, peers, active=active)
+
     @asynccontextmanager
     async def open(
         self,
