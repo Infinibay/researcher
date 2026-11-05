@@ -1,0 +1,40 @@
+{
+  "base_commit": "406ef7d",
+  "date": "2026-11-05",
+  "status": "internal_remote_push_pr_and_exact_merge_protocol_product_not_enabled",
+  "tests": {
+    "total": 34,
+    "passed": 34,
+    "failed": [],
+    "seconds": 2.381,
+    "receipt_sha256": "43a7de330dab2c427447c240ccd2297fca1c7fa4e47a9e5c2696cb4506948153"
+  },
+  "new_cases": 14,
+  "scope": [
+    "Actual temporary bare Git remotes, exact candidate+receipt atomic push, actual post-preflight race, source unchanged, post-commit response loss and moved target",
+    "Controlled HTTPX Forgejo responses, fixed credential origin/no redirects, numeric repository identity, lost PR response with readonly recovery, absent remote object remains uncertain, moved candidate/base history",
+    "Actual Git exact fast-forward merge CAS and negative unrelated-history regression; typed original Git receipt gates Forgejo manually-merged bookkeeping",
+    "Controlled lost merge-bookkeeping response, readonly same-SHA recovery and missing-original-receipt refusal before HTTP"
+  ],
+  "docstrings": 68,
+  "package": "docs/modernization/remote-publication-packaging.json",
+  "api_contract": {
+    "source": "https://code.forgejo.org/swagger.v1.json",
+    "sampled_definition_sha256": "245d5151b7b2265d0eb0ef3d51cd9d2f6076f3445ffd08f729e1b86afbe0d5f8",
+    "observation": "MergePullRequestOption exposes head_commit_id without a base-SHA CAS field; do not claim read then POST is an atomic base guard."
+  },
+  "limits": [
+    "No remote owner admission/API/Tasks action enabled by this checkpoint",
+    "Test subprocess executor is fixture-only; new remote owned network/credential transport remains required",
+    "No real user Forgejo server, TLS transport or production Git egress tested",
+    "No durable remote request journal or complete push/PR/merge product delivery yet",
+    "No new global suite result, frontend change or provider inference",
+    "Numeric identity before/after is not by itself an atomic server-side identity lease during the remote effect"
+  ],
+  "remaining": [
+    "Durable remote intent and issued/unknown stages tied to current owner acceptance and original local publication",
+    "Fresh owned Git/HTTP transport and host-only credential, actual HTTPS and withdrawal/closure integration",
+    "Remote owner API/Tareas with original saved request recovery",
+    "Durable two-stage exact Git merge/Forgejo association reconciliation, protected-server capability and legacy cutover"
+  ]
+}

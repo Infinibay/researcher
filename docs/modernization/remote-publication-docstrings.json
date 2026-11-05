@@ -1,0 +1,416 @@
+{
+  "base_commit": "406ef7d",
+  "scope": "Four new Python modules and their classes/functions; English docstrings, not a repository-wide audit.",
+  "definitions_or_modules": 68,
+  "missing": [],
+  "entries": [
+    {
+      "path": "backend/runtime/remote_publication.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_publication.py",
+      "name": "RemoteEffectUncertain",
+      "line": 38,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_publication.py",
+      "name": "RemoteRepository",
+      "line": 43,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_publication.py",
+      "name": "RemotePushIntent",
+      "line": 94,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_publication.py",
+      "name": "RemotePushObservation",
+      "line": 132,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_publication.py",
+      "name": "_identity",
+      "line": 144,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_publication.py",
+      "name": "_refs",
+      "line": 150,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_publication.py",
+      "name": "_observed",
+      "line": 183,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_publication.py",
+      "name": "push_candidate_remote",
+      "line": 196,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_publication.py",
+      "name": "reconcile_remote_push",
+      "line": 250,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_publication.py",
+      "name": "__post_init__",
+      "line": 51,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_publication.py",
+      "name": "__post_init__",
+      "line": 104,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/remote_publication.py",
+      "name": "receipt_ref",
+      "line": 126,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "RemoteAPIError",
+      "line": 26,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "RemotePullIntent",
+      "line": 31,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "RemotePullObservation",
+      "line": 83,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "RemoteMergeObservation",
+      "line": 96,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "ForgejoPublicationClient",
+      "line": 107,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "__post_init__",
+      "line": 43,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "marker",
+      "line": 68,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "marked_body",
+      "line": 77,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "__init__",
+      "line": 110,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "__aenter__",
+      "line": 138,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "__aexit__",
+      "line": 142,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "_path",
+      "line": 146,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "_request",
+      "line": 154,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "verify_remote",
+      "line": 190,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "_pull",
+      "line": 204,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "_find_pull",
+      "line": 241,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "_branch",
+      "line": 266,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "create_pull",
+      "line": 282,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "reconcile_pull",
+      "line": 315,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "_merge_proof",
+      "line": 333,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "_merged",
+      "line": 357,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "record_exact_merge",
+      "line": 375,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/forgejo_publication.py",
+      "name": "reconcile_exact_merge",
+      "line": 419,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_publication.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_publication.py",
+      "name": "RemoteFixtureGit",
+      "line": 15,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_publication.py",
+      "name": "remote_git",
+      "line": 42,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_publication.py",
+      "name": "test_exact_remote_push_and_receipt_are_atomic_and_source_stays_unchanged",
+      "line": 74,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_publication.py",
+      "name": "test_lost_remote_push_response_reconciles_only_positive_receipt_without_another_push",
+      "line": 95,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_publication.py",
+      "name": "test_remote_marker_absence_after_local_client_closure_is_still_uncertain",
+      "line": 117,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_publication.py",
+      "name": "test_remote_target_cas_refuses_a_moved_branch_without_creating_marker",
+      "line": 130,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_publication.py",
+      "name": "test_remote_intent_binds_repository_id_and_complete_observed_target",
+      "line": 146,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_publication.py",
+      "name": "test_receive_pack_cas_rejects_a_race_after_preflight_without_partial_receipt",
+      "line": 170,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_publication.py",
+      "name": "test_fast_forward_merge_uses_exact_accepted_head_and_base_cas",
+      "line": 201,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_publication.py",
+      "name": "test_exact_merge_refuses_an_unrelated_history_even_with_matching_files_and_base_lease",
+      "line": 221,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_publication.py",
+      "name": "__init__",
+      "line": 18,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_publication.py",
+      "name": "verify_remote",
+      "line": 25,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_publication.py",
+      "name": "run",
+      "line": 29,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_publication.py",
+      "name": "race",
+      "line": 183,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_forgejo_publication.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_forgejo_publication.py",
+      "name": "repository",
+      "line": 9,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_forgejo_publication.py",
+      "name": "pull_intent",
+      "line": 21,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_forgejo_publication.py",
+      "name": "pull",
+      "line": 37,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_forgejo_publication.py",
+      "name": "test_remote_identity_uses_numeric_repo_id_and_never_follows_a_redirect",
+      "line": 51,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_forgejo_publication.py",
+      "name": "test_lost_pr_creation_response_recovers_original_marker_without_another_post",
+      "line": 92,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_forgejo_publication.py",
+      "name": "test_absent_pr_after_closed_client_is_not_proof_that_server_did_not_create_it",
+      "line": 143,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_forgejo_publication.py",
+      "name": "test_existing_original_pr_remains_history_after_head_or_base_moves",
+      "line": 172,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_forgejo_publication.py",
+      "name": "test_merge_receipt_records_only_an_exact_git_cas_and_recovers_lost_api_response",
+      "line": 205,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_forgejo_publication.py",
+      "name": "test_merge_recording_rejects_missing_original_ref_receipt_before_http_write",
+      "line": 281,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_forgejo_publication.py",
+      "name": "server",
+      "line": 62,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_forgejo_publication.py",
+      "name": "server",
+      "line": 101,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_forgejo_publication.py",
+      "name": "server",
+      "line": 149,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_forgejo_publication.py",
+      "name": "server",
+      "line": 178,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_forgejo_publication.py",
+      "name": "server",
+      "line": 236,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_forgejo_publication.py",
+      "name": "server",
+      "line": 303,
+      "documented": true
+    }
+  ]
+}

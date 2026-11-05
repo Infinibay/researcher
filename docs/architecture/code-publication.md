@@ -149,3 +149,7 @@ Siguiente capacidad principal: push/PR/merge con identidad remota exacta y consu
 antes de retry. También siguen pendientes exclusión física durante cutover legacy,
 ampliación de carreras/crashes, migración/restore y evaluación de producto completo.
 La recuperación local no completa esas capacidades ni el plan general.
+
+El siguiente checkpoint conserva el [protocolo remoto interno](remote-publication.md)
+de push/PR/merge y sus pruebas; todavía no habilita su transporte y controles
+productivos. La conexión local descrita aquí permanece separada.

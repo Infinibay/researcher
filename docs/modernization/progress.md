@@ -5597,3 +5597,72 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
 - Private browser server stopped; source/package/native/browser sessions terminal.
   Original checkout untouched; root .agents/.codex/AGENTS.md unstaged. Local commit
   only, no new push/merge/deploy or goal pause. Coverage/dashboard/status updated.
+
+
+## Exact remote push/PR/merge protocol — base406ef7d, 2026-11-05
+
+- Previous goal turn: progress, committed406ef7d operational readonly local recovery.
+  This is the next required remote backend stage, not replacement/narrowing of the
+  full goal or a declaration that remote product delivery is complete. User macro-
+  first policy remains binding; no generic review agents or minor cleanup loops.
+- Ken recalled local recovery; focused Forgejo class search and source verification,
+  recall/blast radius on legacy ForgejoClient. Existing client uses subprocess curl
+  with token arguments, swallowed get_repo failures and unguarded head/base merge
+  effects; native legacy publication guard remains in place. No change to those
+  consumers yet; new trusted transport is distinct pending actual cutover.
+- Read official served Swagger at https://code.forgejo.org/swagger.v1.json and kept
+  public definitions/hash. MergePullRequestOption exposes head_commit_id and
+  manually-merged/MergeCommitID but no base-SHA CAS. Do not claim GET then merge POST
+  protects the exact prior base. This was an observed provider limitation, not an
+  assumed equivalent of the local Git transaction.
+- New remote_publication.py: original numeric repo/API origin/canonical clone URL,
+  full accepted base/head and observed target. Actual atomic push sends exact SHA
+  and complete-intent-bound remote receipt together with leases on both refs.
+  Original source and working files unchanged. Recreated repo ID or another target
+  observation cannot inherit the marker. Executor must verify original remote
+  identity; production network authority/credentials remain a separate obligation.
+- Remote server can finish after client disconnect. Unlike local closed transaction
+  observation, absence of a remote marker/object remains uncertain; no implicit
+  not_applied or second push/POST. Positive original receipt can recover history
+  even if a destination later moved. Local client closure is necessary, not remote
+  server termination proof. Record issued stage before effect in future admission.
+- New ForgejoPublicationClient: bounded async HTTPX, fixed origin credential, no
+  redirect/environment proxy/blind retry, no raw response/secret error output.
+  Complete bounded PR pages; original marker ties repo/refs/SHA/prose. Matching PR
+  existence and current candidate/base eligibility separated. Lost creation reply
+  recovers same original PR through reads only; absent PR remains unknown.
+- Ruling: exact merge uses Git CAS from accepted base to exact accepted head, with
+  ancestry fact and receipt, then manually-merged records that same SHA in Forgejo.
+  Two separate original effects require durable stage/receipt reconciliation; no
+  repeated Git or POST after response loss. No force_merge/delete/automerge/other
+  merge commit. Cost: protected servers disallowing this Git update need an equivalent
+  proved server capability; never bypass protections or claim head-only API base CAS.
+- RED initial Git/HTTP missing modules; GREEN core9, actual receive-pack race then
+  exact merge/receipt tests extended. RED2missing record_exact_merge→GREEN. Critical
+  ancestry regression demonstrated matching files/diff and exact base lease still
+  permitted unrelated history rewrite (DID NOT RAISE). Added explicit merge-base
+  --is-ancestor before effect; current directed/package green. No unrelated extra
+  edge audit. Fixture initially unpacked old SimpleNamespace as tuple; corrected
+  test setup after reading original fixture, not attributed to product behavior.
+- Current source34PASS2.38s,14new cases plus20prior local policy. Git real in temp
+  bare remotes incl atomic receipt/CAS race/unchanged source/lost reply/moved target/
+  exact merge and unrelated-history refusal. HTTPX transport controlled; no real
+  user remote, TLS connection, token, inference or new UI. Actual subprocess port
+  is fixture-only; do not rebrand it as broker ownership or production HTTPS.
+- Extracted wheel34PASS,199backend modules only package,717matchingPython/SQL sources.
+  All68new definitions/modules have English docstrings. Ruff/format/diff checks pass.
+  No new global suite, frontend or expensive local native130s rerun: shared runtime
+  source and UI unchanged. Existing migration inverse debt remains documented.
+- Main task still IN PROGRESS: product remote owner admission and issued/uncertain
+  stage journal, fresh owned Git/HTTP network/host credential transport, actual HTTPS
+  and Stop/closure integration, API/Tareas, durable merge stage coordination, remote
+  identity stability/server protection contract and legacy cutover. Port operation
+  identity must be globally unique durable HOST effect ID, not unscoped client key.
+  Next concrete work: implement those owner/effect records then profile/executor;
+  reuse current protocol, do not redo its Git/PR analysis or its passing tests for docs.
+- Full engine/roles/agent communication/tools/prompts/human comprehension,6web routes/
+  12page acceptance, install/restore/CLI/TUI, inherited failures/scenarios and final
+  fresh branch review remain. No percentage or broad completion claim.
+- All new test/package sessions terminal; no browser server created, no remote/user
+  repository writes. Original checkout untouched; protected root .agents/.codex/
+  AGENTS.md unstaged. Local checkpoint only; no push/merge/deploy or goal pause.

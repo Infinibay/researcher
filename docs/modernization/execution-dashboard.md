@@ -9,7 +9,29 @@ Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: recuperación local conectada
+## Etapa actual: protocolo interno remoto
+
+**Avance:** push del SHA aceptado y recibo remoto en una transacción atómica,
+con CAS del destino. Una respuesta perdida se reconcilia por evidencia positiva;
+la ausencia remota tras cerrar el cliente sigue siendo incierta. Cliente Forgejo
+HTTPX acotado, origen/ID numérico fijados y PR con marcador de intención original.
+La recuperación no vuelve a emitir POST; head/base movidos quedan como historia.
+Merge interno: Git CAS al head aceptado con ascendencia comprobada, seguido del
+registro del mismo SHA en Forgejo; cada etapa conserva su incertidumbre.
+
+**Verificación:** 34 casos dirigidos pasan, 14 nuevos: Git real con remotos bare
+(incluida carrera después del preflight) y HTTPX controlado. El subprocess es
+exclusivo de fixture; no demuestra red/credencial/autoridad productiva ni TLS.
+[Contrato y límites](../architecture/remote-publication.md),
+[resultados](remote-publication-results.json), [paquete](remote-publication-packaging.json).
+
+**Pendiente inmediato:** admisión y etapas durables remotas, transporte con
+propietario/dominio/credencial del host, integración HTTPS, API/Tareas y coordinación durable de las dos etapas
+del merge exacto. Este checkpoint no habilita efectos remotos del producto. El
+contrato de merge de Forgejo ofrece guard de head, no CAS de base; no simularlo
+con un GET seguido de POST. La recuperación local anterior permanece conectada.
+
+## Etapa anterior: recuperación local conectada
 
 **Resultado:** ante publicación incierta, Tareas puede comprobar qué ocurrió.
 El journal prueba cierre original de broker/dominio con procedencia exacta antes

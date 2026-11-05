@@ -18,6 +18,15 @@ El propietario reactivó el objetivo el 2026-11-05. La suite global del checkpoi
 965 casos del runtime pasan. Mismos identificadores de fallo heredados, sin afirmar
 causas idénticas. [Recibo](resumed-baseline-results.json).
 
+El protocolo remoto interno pasa 34 casos dirigidos (14 nuevos): push atómico
+con SHA/recibo/CAS en Git real, y puerto HTTPX de PR con identidad exacta y
+recuperación de respuesta perdida. El merge interno usa CAS Git con ascendencia
+y registra después el mismo SHA en Forgejo, sin repetir etapas inciertas.
+Aún no tiene admisión durable ni transporte
+productivo con autoridad/credencial propia, API/Tareas o coordinación productiva de esas etapas. No se
+habilitaron efectos remotos nuevos. [Contrato](../architecture/remote-publication.md),
+[resultados](remote-publication-results.json).
+
 La publicación local conecta aceptación, admisión durable, nuevo host sin
 inferencia, broker/capsule y Tareas. La recuperación ahora prueba cierre original
 y usa un intento nuevo con acceso de lectura a rama/recibo; conserva historia tras

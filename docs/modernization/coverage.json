@@ -642,7 +642,9 @@
         "docs/architecture/code-publication.md",
         "docs/modernization/publication-policy-results.json",
         "docs/modernization/publication-recovery-results.json",
-        "docs/architecture/code-publication.md"
+        "docs/architecture/code-publication.md",
+        "docs/architecture/remote-publication.md",
+        "docs/modernization/remote-publication-results.json"
       ]
     },
     "E07": {
@@ -788,7 +790,9 @@
         "docs/architecture/code-publication.md",
         "docs/modernization/publication-policy-results.json",
         "docs/modernization/publication-recovery-results.json",
-        "docs/architecture/code-publication.md"
+        "docs/architecture/code-publication.md",
+        "docs/architecture/remote-publication.md",
+        "docs/modernization/remote-publication-results.json"
       ]
     },
     "E11": {
@@ -814,7 +818,9 @@
         "docs/architecture/code-publication.md",
         "docs/modernization/publication-policy-results.json",
         "docs/modernization/publication-recovery-results.json",
-        "docs/architecture/code-publication.md"
+        "docs/architecture/code-publication.md",
+        "docs/architecture/remote-publication.md",
+        "docs/modernization/remote-publication-results.json"
       ]
     },
     "D01": {
@@ -2892,7 +2898,14 @@
         "backend/tests/runtime/test_publication_recovery.py",
         "docs/modernization/publication-recovery-results.json",
         "docs/modernization/publication-recovery-packaging.json",
-        "docs/design/audits/2026-11-05-publication-recovery/report.md"
+        "docs/design/audits/2026-11-05-publication-recovery/report.md",
+        "backend/runtime/remote_publication.py",
+        "backend/runtime/forgejo_publication.py",
+        "backend/tests/runtime/test_remote_publication.py",
+        "backend/tests/runtime/test_forgejo_publication.py",
+        "docs/architecture/remote-publication.md",
+        "docs/modernization/remote-publication-results.json",
+        "docs/modernization/remote-publication-packaging.json"
       ],
       "implemented": [
         "Internal exact-ref policy with fixed host port; candidate Git/diff/bytes and original source/candidate metadata identity checked",
@@ -2904,14 +2917,18 @@
         "Owner API/Tasks new local branch, original request preserved across lost response/reload;25directed+1physical PASS, frontend76PASS/build, wheel25PASS",
         "Owner recovery proves original global closure then allocates fresh per-attempt readonly observation capability on original publication run; no reuse of writer lease",
         "Readonly exact target/marker queries with pinned source metadata, historical context permitted only for readonly observer; candidate need not exist",
-        "Atomic recovery result/event/receipt distinguishes published,not_applied,uncertain; original packet survives lost reply/reload;42directed+2physical+77frontend pass"
+        "Atomic recovery result/event/receipt distinguishes published,not_applied,uncertain; original packet survives lost reply/reload;42directed+2physical+77frontend pass",
+        "Internal remote atomic exact-SHA+intent-bound receipt push, actual receive-pack CAS race and positive readonly reconciliation; remote absence remains uncertain",
+        "Bounded async Forgejo HTTP port with numeric repository/origin identity and exact original PR marker; lost response recovered without another POST; not production authority",
+        "Internal exact fast-forward Git merge CAS with ancestry fact, followed by same-SHA Forgejo manually-merged bookkeeping; no API head-only base-race claim;14new cases/34directed pass"
       ],
       "remaining": [
-        "Expanded physical correction/crash races including interrupted observer continuation (DD-005)",
-        "Global physical exclusion from legacy writers during cutover",
-        "Remote push/PR/merge with exact remote identity and receipt reconciliation",
-        "Schema43/44 inverses and old inverse fixture adaptation; capacity/host status UI polish",
-        "Whole product acceptance; no current full-suite green claim"
+        "Durable remote owner admission and original effect-stage journal tied to accepted local publication",
+        "Fresh owned remote Git/HTTP network and credential transport plus actual HTTPS/withdrawal/closure tests",
+        "Remote owner API/Tasks and original saved intent recovery",
+        "Durable coordination of exact Git merge/Forgejo bookkeeping, protected-server support and identity stability during effect",
+        "Expanded physical correction/crash races including DD-005; legacy writer physical exclusion",
+        "Schema43/44 inverses and old inverse fixtures, capacity/host UI, whole product and full-suite acceptance"
       ]
     }
   }
