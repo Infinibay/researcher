@@ -1,8 +1,12 @@
-"""API-specific configuration extending the base INFINIBAY settings."""
+"""Resolve API assets and writable attachment storage once at process startup.
 
+INFINIBAY_UPLOAD_BASE_DIR selects existing attachment storage explicitly.
+Otherwise uploads live below INFINIBAY_DATA, or the working directory's .data.
+Reading configuration never creates directories or relocates existing files.
+"""
+
+import os
 from pathlib import Path
-
-_PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 
 # API defaults
 API_HOST: str = "127.0.0.1"
@@ -15,5 +19,14 @@ CORS_ORIGINS: list[str] = [
     "http://127.0.0.1:5173",
     "http://127.0.0.1:8000",
 ]
-STATIC_DIR: str = "frontend/dist"
-UPLOAD_DIR: str = str(_PROJECT_ROOT / ".data" / "uploads")
+STATIC_DIR: str = str(
+    Path(os.environ.get("INFINIBAY_STATIC_DIR", "frontend/dist")).expanduser().resolve()
+)
+UPLOAD_DIR: str = str(
+    Path(
+        os.environ.get(
+            "INFINIBAY_UPLOAD_BASE_DIR",
+            str(Path(os.environ.get("INFINIBAY_DATA", ".data")) / "uploads"),
+        )
+    ).expanduser().resolve()
+)

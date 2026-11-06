@@ -16,7 +16,41 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: autonomía y plantillas/proveedores históricos retirados
+## Etapa actual: operación, arranque e imágenes — en curso
+
+La imagen de web/API ya se construyó y probó con Podman aislado: instala el wheel
+y su extensión nativa, incluye la web compilada y ejecuta como UID1000. Los
+314 archivos productivos Python/SQL instalados coinciden con fuente. Los adjuntos
+pueden conservar su ubicación explícita o usar el directorio de datos, fuera de
+site-packages; health consulta esa ubicación. Se recuperó el fixture API y se
+adaptó el cambio genérico de estado al rechazo nativo, conservando la edición
+de metadatos.
+
+**Comprobado:** 91 pruebas API/configuración y tres de salud pasan. La imagen
+rechaza arranque sin base e inicialización sobre datos existentes; sirve la web,
+exige emparejamiento, crea un proyecto y conserva un adjunto descargable tras
+reiniciar. Ambos cierres se observan y la sesión antigua queda invalidada.
+No hubo llamadas a modelos. [Contrato](../architecture/container-operation.md),
+[resultados](operation-image-results.json).
+
+Esto no acepta aún el despliegue completo: siguen Forgejo, el aprovisionamiento
+del host y la admisión nativa dentro del contenedor. El build conserva las
+dependencias frontend existentes; sus actualizaciones planificadas siguen siendo
+trabajo principal. No hay nueva suite global ni aceptación integral de páginas.
+
+**Lista vigente:**
+- Implementado recientemente: retirada de componentes antiguos; imagen instalada
+  de web/API con prueba real de persistencia, reinicio y acceso del propietario.
+- En curso: operación/despliegue; siguiente paso, actualización y ensayo de
+  backup/upgrade de Forgejo, seguido de aprovisionamiento/admisión nativa.
+- Pendiente principal: migraciones/inversas/restauración real; historial y
+  presupuestos; actualización de dependencias frontend; evaluación real, humana,
+  científica y global; aceptación integral de las 12 páginas y revisión final.
+  Los 48 conceptos y 12 pilotos no equivalen a páginas completamente aceptadas.
+- Al final: todos los detalles secundarios registrados. DD061 conserva nueve
+  avisos de lint, el aviso de tamaño del bundle y la deprecación de TestClient.
+
+## Etapa anterior: autonomía y plantillas/proveedores históricos retirados
 
 Se retiran 54 módulos: autonomía, su scope antiguo de cancelación, 39 plantillas
 de roles/tecnologías y dos configuradores de proveedor. Se conserva el registro

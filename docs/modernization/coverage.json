@@ -1485,7 +1485,12 @@
         "docs/architecture/legacy-catalog-removal.md",
         "docs/modernization/catalog-removal-results.json",
         "docs/modernization/catalog-removal-packaging.json",
-        "backend/tests/runtime/test_legacy_catalog_removal.py"
+        "backend/tests/runtime/test_legacy_catalog_removal.py",
+        "docs/architecture/container-operation.md",
+        "docs/modernization/operation-image-results.json",
+        "evals/operation/container_smoke.py",
+        "backend/tests/config/test_api_paths.py",
+        "backend/tests/api/test_storage_health.py"
       ]
     },
     "U08": {
@@ -1528,7 +1533,12 @@
         "requirements.txt",
         "scripts/infinibay_mcp_server.py.lock",
         "docs/modernization/baseline.md",
-        "docs/modernization/spider-results.json"
+        "docs/modernization/spider-results.json",
+        "docs/architecture/container-operation.md",
+        "docs/modernization/operation-image-results.json",
+        "evals/operation/container_smoke.py",
+        "backend/tests/config/test_api_paths.py",
+        "backend/tests/api/test_storage_health.py"
       ]
     },
     "database_config": {
@@ -1544,7 +1554,12 @@
         "backend/runtime/bootstrap.py",
         "backend/tests/cli/test_bootstrap.py",
         "backend/tests/cli/test_launcher_startup.py",
-        "backend/tests/api/test_bootstrap_startup.py"
+        "backend/tests/api/test_bootstrap_startup.py",
+        "docs/architecture/container-operation.md",
+        "docs/modernization/operation-image-results.json",
+        "evals/operation/container_smoke.py",
+        "backend/tests/config/test_api_paths.py",
+        "backend/tests/api/test_storage_health.py"
       ],
       "remaining": [
         "Historical and real-data migration plus complete restore validation",
@@ -4060,6 +4075,26 @@
         "169source/169installedPASS; three unchanged migration fixtures fail. Previous installed baseline receipt reused with committed-byte verification, not rerun.",
         "49old testfunctions retired and two retained/renamed; no repaired-failure count from deleted tests.",
         "Operation, integration fixtures, migration/inverse/restore, history/budgets and full product acceptance remain."
+      ]
+    },
+    "service_image_operation": {
+      "status": "in_progress",
+      "implemented": [
+        "Pinned-base multistage web/API image installs native wheel and runs as uid1000; source API fixture restored.",
+        "Explicit upload/static paths; storage health checks chosen attachment root without setup.",
+        "Actual isolated Podman bootstrap refusal, owner pairing, compiled web, project/upload/download and repeat startup with retained bytes and invalidated sessions."
+      ],
+      "evidence": [
+        "docs/architecture/container-operation.md",
+        "docs/modernization/operation-image-results.json",
+        "evals/operation/container_smoke.py",
+        "backend/tests/config/test_api_paths.py",
+        "backend/tests/api/test_storage_health.py"
+      ],
+      "remaining": [
+        "Forgejo upgrade, backup/restore rehearsal and remote Git operations.",
+        "Containerized native admission, managed host resources/account/Ken enrollment and deployment/restore validation.",
+        "Frontend dependency upgrades, global suite, all-page and final independent acceptance."
       ]
     }
   }

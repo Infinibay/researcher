@@ -5,28 +5,21 @@ backend/tests/conftest.py.  This module overrides seeded_project to
 match API-specific needs (status='new', no roster entries).
 """
 
-from unittest.mock import patch
-
 import pytest
 from starlette.testclient import TestClient
 
 
 @pytest.fixture()
 def test_app(_isolated_db):
-    """Create the FastAPI test app with periodic tasks disabled."""
-    with (
-        patch("backend.security.cleanup.cleanup_manager.schedule_periodic_cleanup"),
-        patch("backend.git.cleanup_service.schedule_periodic_cleanup"),
-    ):
-        from backend.api.local_access import LocalAccess
-        from backend.api.main import create_app
+    """Construct the actual native owner app over isolated storage; startup has no legacy maintenance jobs to patch."""
+    from backend.api.local_access import LocalAccess
+    from backend.api.main import create_app
 
-        app = create_app(
-            access=LocalAccess(
-                pairing_key="api-fixture-owner-code-at-least-32-characters"
-            )
+    return create_app(
+        access=LocalAccess(
+            pairing_key="api-fixture-owner-code-at-least-32-characters"
         )
-    return app
+    )
 
 
 @pytest.fixture()

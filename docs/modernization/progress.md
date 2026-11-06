@@ -7106,3 +7106,42 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
 - Prompt83candidates279files515archived;144newlyarchived2unchangedASTrevalidated0pending. API metadata line identity migrated with previous_id, not archived as a changed instruction.2auditPASS0.112s. No native policy semantic change or efficacy/human comprehension claim.
 - Next principal operation/startup/images/integration fixtures. Migrations/inverse/realdatarestore, fullhistory/budgets, model/human/science/globaleval12pageacceptance/finalfreshreview remain.43scenarios12pilots48concepts0fullyaccepted unchanged. Goal active.
 - Alljobs terminal:5707focused0,93924source1,13255promptinventory0,71512packagedriver0(expectedpytest1). Audit6947 stopped on moved line identity then corrected without rerunning model/tests. Source driver first rejected nonexistent plural test path before starting pytest; baseline guard first exposed dev seed exclusion before driver existed. No live job restarted due missing output.
+
+## 2026-11-06 — installed service image and repeat startup, based on d877880
+
+Current principal task remains operation/deployment. The previous status-only turn
+was no implementation progress; this cut changes the actual packaging and storage
+behavior. ALL principal capabilities still precede ALL fine details, and every
+principal transition must publish updated done/current/pending lists.
+
+- Added configurable upload/static paths, preserving an explicitly selected old
+  attachment root without moving files. Health follows the selected storage.
+- Restored real API fixtures after removal of old maintenance services; generic
+  task status edits remain rejected while metadata edits still work.
+- Built pinned-base Node/Python multistage image with compiled web, installed wheel
+  and native extension; UID1000. Actual Python3.13.17 imports resolve inside the
+  image, all314 production Python/SQL match, pip check passes. Existing dev seed
+  SQL remains excluded by the previously declared package-data rule.
+-91 API/config cases pass;3 additional storage-health cases pass. Real isolated
+  Podman smoke proves bootstrap guards, owner pairing, web assets, project and
+  uploaded bytes across restart, old-session invalidation and two observed
+  SIGTERM exits143. Source DB integrity passes; runtime_runs remains0.
+-12 changed/new definitions have English docstrings.83 prompt candidates across
+  279 files remain reviewed; no new semantic native instruction or model call.
+- Local Podman conmon dropped LD_LIBRARY_PATH when invoking the unpacked crun;
+  a task-local crun wrapper restores its library path. The image was not rebuilt
+  for that tooling failure. The same original build handle completed successfully.
+- The image's README metadata predates later documentation edits; executable
+  production bytes match final source. No new global suite, native container
+  admission, account/Ken host enrollment, Forgejo upgrade or actual-data restore.
+- Principal next: Forgejo backup/upgrade/restore/Git rehearsal, then remaining
+  native host operation; frontend dependency upgrades also remain principal.
+  Later: migrations/inverses/real restore, full history/budgets, real model/human/
+  scientific/global evaluation, all12page acceptance and final fresh review.
+- DD061 records9 lint findings, bundle warning and TestClient deprecation. No push,
+  merge or deployment; protected untracked instruction roots remain untouched.
+
+Evidence: `docs/modernization/operation-image-results.json`,
+`docs/architecture/container-operation.md`, portable
+`evals/operation/container_smoke.py`; task-local operation-image-smoke/result.json,
+service.log, operation-image-build.log, operation-image-package.json and two XMLs.

@@ -262,3 +262,17 @@ las capacidades principales. También la línea vacía final de
 `backend/runtime/legacy_handoff.py`. No reconstruir el paquete ni repetir los
 recorridos por este pulido. Los fallos de fixtures de migración, el fixture API
 histórico y la configuración/operación integral siguen como trabajo principal.
+
+## DD061 — detalles tras empaquetar web/API y probar persistencia
+
+Nueve avisos de lint en health, el test API histórico y el nuevo smoke quedan
+para después de todas las capacidades principales: S110/BLE001, UP017, I001/F401
+y PLW1510. También quedan para esa fase el aviso de Vite por bundle superior a
+500kB y la deprecación de Starlette TestClient/httpx. No repetir el recorrido del
+contenedor sólo por estos detalles. La instalación de herramientas de build aún
+resuelve rangos/repositorios: no se afirma reproducibilidad byte a byte.
+
+La actualización de dependencias frontend, Forgejo, el aprovisionamiento/admisión
+nativa y los fallos de migración/restore son trabajo principal, no pulido diferido.
+El fixture API histórico de DD059/DD060 ya se recuperó; 91 casos API/configuración
+y tres de salud pasan en el alcance de este corte.

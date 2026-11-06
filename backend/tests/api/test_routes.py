@@ -112,18 +112,21 @@ class TestTasks:
         data = resp.json()
         assert all(t["status"] == "backlog" for t in data)
 
-    def test_update_task_status(self, client, seeded_project):
-        # Create task
+    def test_generic_task_status_change_requires_native_control(self, client, seeded_project, db_conn):
+        """Owner metadata edits remain available, while a generic status PUT cannot start native work or bypass its recorded decisions."""
         create_resp = client.post(
             "/api/tasks",
             json={"project_id": seeded_project, "title": "Task B"},
         )
         task_id = create_resp.json()["id"]
 
-        # Transition backlog -> pending
         resp = client.put(f"/api/tasks/{task_id}", json={"status": "pending"})
-        assert resp.status_code == 200
-        assert resp.json()["status"] == "pending"
+        assert resp.status_code == 409
+        assert client.get(f"/api/tasks/{task_id}").json()["status"] == "backlog"
+        edited = client.put(f"/api/tasks/{task_id}", json={"title": "Clarified task"})
+        assert edited.status_code == 200
+        assert edited.json()["title"] == "Clarified task"
+        assert db_conn.execute("SELECT count(*) FROM runtime_runs").fetchone()[0] == 0
 
     def test_add_task_comment(self, client, seeded_project):
         # Create task

@@ -8,8 +8,8 @@ The modernization now connects native project planning, research/development,
 independent review and explicit acceptance to one configured owner service.
 The terminal uses that same service; it no longer creates another agent engine
 or a local model team. See [current status](docs/modernization/execution-dashboard.md)
-and the [CLI/TUI migration guide](docs/modernization/terminal-owner.md). Remaining
-legacy flows and provider setup below are transitional; Ollama/LLM_MODEL settings
+and the [CLI/TUI migration guide](docs/modernization/terminal-owner.md). The old
+flows and provider backend have been retired; historical Ollama/LLM_MODEL settings
 do not configure the native subscription runtime.
 
 ## Requirements
@@ -191,58 +191,36 @@ their original selection. Codex checks the selected pair against its account
 catalog before dispatch and does not substitute another model or billed provider.
 See [model configuration](docs/architecture/model-configuration.md).
 
-## Historical container deployment
+## Container operation
 
-The following container settings describe the retained deployment being migrated.
-The native runtime uses the owned-process and authority configuration documented
-above.
+The multi-stage `Containerfile` builds the web application and installs a Python
+wheel including the native extension. Python dependencies use the hashed lock
+export; frontend dependencies use `npm ci`. Image bases have fixed digests, and
+the final process runs as an unprivileged user with data outside the installation.
 
-When `INFINIBAY_SANDBOX_ENABLED=true`, each agent runs its tools inside an isolated Podman/Docker pod. This means file operations, shell commands, and git operations happen in a container — not on your host machine.
+See [container setup and persistence](docs/architecture/container-operation.md)
+for explicit new-database initialization, local access and repeat startup.
+Native agent execution also requires the external host resources described in
+the owned-runtime guide; building a service image does not provision those resources.
+The historical per-agent pod settings do not configure native isolation.
 
-- Each agent gets its own persistent pod with a dedicated workspace
-- Pods are created on demand and cleaned up when idle
-- GPU passthrough is supported via `INFINIBAY_SANDBOX_GPU_ENABLED=true` (requires nvidia-container-toolkit)
+Attachment storage defaults to `<INFINIBAY_DATA>/uploads`, with `.data` below the
+working directory as the default data root. Set `INFINIBAY_UPLOAD_BASE_DIR` to keep
+using an existing attachment directory after moving or reinstalling the service.
+No directory is relocated automatically. `INFINIBAY_DB` selects the database
+independently. [.env.example](.env.example) lists the current operation variables.
 
-Set `INFINIBAY_SANDBOX_ENABLED=false` for local development without containers.
+## Remaining modernization work
 
-## Historical model experiments
+The [execution dashboard](docs/modernization/execution-dashboard.md) tracks the
+remaining host provisioning, migration/restore, history/budget, real-model and
+human evaluation, and whole-product acceptance work. Local tests and the twelve
+web pilots do not establish complete acceptance of the product.
 
-These observations belong to the retired provider backend. They do not establish
-quality, compatibility or cost for the current native runtime:
-
-| Model | Speed | Tool Calling | Research | Notes |
-|---|---|---|---|---|
-| **nemotron-3-nano:30b** | Very fast | Excellent | Very good | Best throughput, follows tool calls reliably |
-| **qwen3.5:27b** | Medium | Excellent | Excellent | Best overall quality, very few hallucinations |
-| **gpt-oss:20b** | Very fast | Very good | Good | Excellent throughput, some tool hallucinations |
-| **glm-4.7-flash:128k** | Medium | Very good | Good | Strong orchestration |
-| **ministral-3:14b** | Very fast | Good | Very good | Medium orchestration |
-
-### Closed-source models
-
-The system works with Gemini, OpenAI, and Anthropic APIs — and they perform well. However, **token consumption is extreme** because the prompts are very explicit and detailed (necessary for small open-weight models to follow instructions reliably). Keep this in mind for cost.
-
-## Historical provider configuration
-
-The following variables describe the retired provider setup. They do not select
-the native subscription model or its permissions; use the
-[current model configuration](docs/architecture/model-configuration.md).
-
-```bash
-INFINIBAY_LLM_MODEL=ollama_chat/nemotron-3-nano:30b   # LiteLLM format
-INFINIBAY_LLM_API_KEY=not-needed               # Only needed for cloud providers
-INFINIBAY_LLM_BASE_URL=http://localhost:11434/  # Only for Ollama/custom endpoints
-INFINIBAY_SANDBOX_ENABLED=true
-```
-
-Embedding provider is auto-detected from your LLM provider. Override with `INFINIBAY_EMBEDDING_PROVIDER` if needed.
-
-See `.env.example` for all options.
-
-## Known Issues
-
-- **UI bugs**: the Stop button doesn't actually stop agents — you need to `Ctrl+C` the backend process.
-- **Duplicate tool execution**: some tools (particularly `send_message` and `add_comment`) occasionally fire twice in a single agent step.
+Historical provider benchmarks and the original Stop/duplicate-tool reports
+remain in Git history and the modernization plan; they are not measurements of
+the current native runtime. Current failures and deferred details are recorded
+in the dashboard and its evidence links.
 
 ## Contributing
 

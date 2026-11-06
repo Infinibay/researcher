@@ -1,0 +1,162 @@
+{
+  "scope": "Installed web/API service image and configurable attachment storage; no native agent admission or Forgejo upgrade acceptance.",
+  "base_commit": "d8778800b9fcd4b41ec4b51b710708696c2837b0",
+  "image": {
+    "id": "b6eb104f90cbc62213ae03afdf53943b2d2761538f032dd415db4b30e8d7d3e8",
+    "user": "researcher",
+    "size": 561150992,
+    "bases": [
+      {
+        "Id": "4412cecc4af63502bd64d4b862be90b306d4134759d45cde783514dafdd6d03c",
+        "Digest": "sha256:4cea12ab7d78a3312c85f8cab19b6971d4fe9704da25443986c0bc20a6678850",
+        "RepoDigests": [
+          "docker.io/library/python@sha256:4cea12ab7d78a3312c85f8cab19b6971d4fe9704da25443986c0bc20a6678850",
+          "docker.io/library/python@sha256:e32be0e55814a08977501ca863271d9bd02443710db8f2afaf8372e2c4508530"
+        ],
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 125071076,
+        "reference": "docker.io/library/python:3.13.17-slim-bookworm"
+      },
+      {
+        "Id": "280af3207172947339cc2e8c9d2efac585716fd906af49f57d6fdf0dbb829a73",
+        "Digest": "sha256:c0a93797ee78814ae6d32fcca2561fdbbe423149c3f5389aad32d86e9fd85bd4",
+        "RepoDigests": [
+          "docker.io/library/node@sha256:01d566e8d94d8c619591d78652babfccd3c6992a3dffa9ed5ab39e11cf6c70e9",
+          "docker.io/library/node@sha256:c0a93797ee78814ae6d32fcca2561fdbbe423149c3f5389aad32d86e9fd85bd4"
+        ],
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 235719846,
+        "reference": "docker.io/library/node:24.22.2-bookworm-slim"
+      }
+    ]
+  },
+  "package": {
+    "uid": 1000,
+    "python": "3.13.17",
+    "package": "/opt/venv/lib/python3.13/site-packages/backend",
+    "native_extension": "/opt/venv/lib/python3.13/site-packages/backend/runtime/_domain_spawn.cpython-313-x86_64-linux-gnu.so",
+    "project_version": "0.1.0",
+    "uploads": "/data/uploads",
+    "static": "/app/frontend/dist",
+    "static_present": true
+  },
+  "matching_production_python_sql_files": 314,
+  "source_only_known_package_data_exclusion": [
+    "db/seeds/dev_data.sql"
+  ],
+  "pip_check": "No broken requirements found.",
+  "source_tests": [
+    {
+      "receipt": "operation-api-final.xml",
+      "cases": 91,
+      "passed": 91,
+      "failed": 0
+    },
+    {
+      "receipt": "operation-health.xml",
+      "cases": 3,
+      "passed": 3,
+      "failed": 0
+    }
+  ],
+  "container_smoke": {
+    "image": "localhost/researcher:modernization",
+    "model_calls": 0,
+    "native_admission": "not exercised",
+    "missing_database_refused_without_creation": true,
+    "existing_database_bootstrap_refused_without_change": true,
+    "web_asset_sha256": "845d8f1957573b2a4d1bc503fb10cd9d4dac8bc7bfb878a46539b304e602bb8d",
+    "first_stop_exit_code": 143,
+    "project_id": 1,
+    "file_id": 1,
+    "attachment_sha256": "927ad0b4964b03c1cf3e1f32f8881cbe30dcbc4766084067f2cc82b290d70290",
+    "restart_preserves_project_and_attachment": true,
+    "restart_requires_new_owner_pairing": true,
+    "second_stop_exit_code": 143,
+    "status": "passed"
+  },
+  "documented_changed_definitions": [
+    {
+      "path": "backend/api/routes/health.py",
+      "symbol": "health_check",
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/health.py",
+      "symbol": "readiness_check",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/api/conftest.py",
+      "symbol": "test_app",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/api/test_routes.py",
+      "symbol": "TestTasks.test_generic_task_status_change_requires_native_control",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/api/test_storage_health.py",
+      "symbol": "test_health_uses_selected_upload_storage_without_creating_it",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/config/test_api_paths.py",
+      "symbol": "test_upload_selection_preserves_existing_files_without_initializing_storage",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/config/test_api_paths.py",
+      "symbol": "test_installed_static_assets_can_be_selected_outside_working_directory",
+      "documented": true
+    },
+    {
+      "path": "evals/operation/container_smoke.py",
+      "symbol": "main",
+      "documented": true
+    },
+    {
+      "path": "evals/operation/container_smoke.py",
+      "symbol": "main.pod",
+      "documented": true
+    },
+    {
+      "path": "evals/operation/container_smoke.py",
+      "symbol": "main.wait_ready",
+      "documented": true
+    },
+    {
+      "path": "evals/operation/container_smoke.py",
+      "symbol": "main.pair",
+      "documented": true
+    },
+    {
+      "path": "evals/operation/container_smoke.py",
+      "symbol": "main.stop",
+      "documented": true
+    }
+  ],
+  "lint_deferred": {
+    "id": "DD061",
+    "count": 9,
+    "codes": [
+      "S110",
+      "BLE001",
+      "UP017",
+      "I001",
+      "F401",
+      "PLW1510"
+    ]
+  },
+  "limits": [
+    "No full-suite rerun; historical global failures retain their earlier receipts.",
+    "No model/account call; containerized native admission and full host resources remain unverified.",
+    "No Forgejo upgrade or real-data restoration in this cut.",
+    "The web build still uses the existing frontend dependency set; planned Vite/Tailwind and related upgrades remain principal work.",
+    "All 12 UI routes remain pilots awaiting integral acceptance.",
+    "The wheel README metadata predates this cut's documentation edits; all 314 installed production Python/SQL files match the final executable source."
+  ]
+}
