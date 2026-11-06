@@ -4,6 +4,13 @@ Versión 1. Guía de producto para agentes, prompts, estados y conversaciones de
 la interfaz. Su existencia no implica que el motor antiguo ya la aplique:
 la integración y las evaluaciones se siguen en `docs/modernization/coverage.json`.
 
+La política común del catálogo nativo versión2 ya aplica estas distinciones en
+los perfiles del runtime. La prueba de integración conserva el texto exacto enviado;
+eso no prueba que un modelo o una persona lo hayan comprendido. Véanse el
+[inventario revisado](../prompts/inventory.md) y los
+[casos de evaluación](../../evals/prompts/cases.json), todavía sin comparación con
+modelos ni evaluación humana de comprensión.
+
 ## Qué debe conseguir cada explicación
 
 El usuario debe poder identificar el hallazgo, entender por qué importa,

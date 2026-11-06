@@ -1,0 +1,57 @@
+{
+  "baseline_commit": "85f7acd",
+  "current_catalog_version": 2,
+  "measurement": "UTF-8 bytes and exact text hashes. Not model tokens, cost, latency, semantic correctness or user understanding.",
+  "profiles": [
+    {
+      "profile": "scientific_research",
+      "baseline_utf8_bytes": 13581,
+      "current_utf8_bytes": 10250,
+      "baseline_sha256": "518a8df19199967178c9b017d60bf67f08be39e236aa8e90750e74a42672c325",
+      "current_sha256": "be3371bf8ae99d12d3deaabfd2eaa985f380074cc316687ef6ae8261be5963c3"
+    },
+    {
+      "profile": "code_audit",
+      "baseline_utf8_bytes": 10155,
+      "current_utf8_bytes": 6363,
+      "baseline_sha256": "3adb688bd7c0d8212a5a19071c7ae065d255234ea7dd44f1e65a7fb2752d9fb3",
+      "current_sha256": "157000003e14a1f1f50af6a9cb0711faf843472c8040d072a1fec822c819249e"
+    },
+    {
+      "profile": "planning",
+      "baseline_utf8_bytes": 4029,
+      "current_utf8_bytes": 4860,
+      "baseline_sha256": "e99a776599b9bee245b20d641142cb1d88890e2fd096a5c50119ca901f57a4d7",
+      "current_sha256": "7da941a9c6e829e172aa78e4b0dddfa3c03e0bd16c6bffd9ed9b075a7d42d3bc"
+    },
+    {
+      "profile": "investigation",
+      "baseline_utf8_bytes": 2557,
+      "current_utf8_bytes": 3742,
+      "baseline_sha256": "41630988d80197bc66f1ca847a20a02bc6d7dd07c002241f1f91905a55dc916f",
+      "current_sha256": "f425650374c85c846514e252582eff10b4d828189fdc80e9ed138a8ac41065f0"
+    },
+    {
+      "profile": "development",
+      "baseline_utf8_bytes": 5773,
+      "current_utf8_bytes": 4999,
+      "baseline_sha256": "22af61c3c7b15637fe98cb71e3ca8dc86f4bafb856a3b1f4e592a74a25e0841e",
+      "current_sha256": "ad60b949567d12cfc578b1621172fe2f72ec0103a12717bc43ab5a68a0c27bed"
+    },
+    {
+      "profile": "code_review",
+      "baseline_utf8_bytes": 4147,
+      "current_utf8_bytes": 5016,
+      "baseline_sha256": "0ea451a468a63cc6e7b1aa8b71bbafb8ec861ed0ad904f2f296c99e5e32c6289",
+      "current_sha256": "80b5443b4266e523a416839bfff52712de2c17f55cc5cfd5f6aea970d222eed3"
+    },
+    {
+      "profile": "finding_review",
+      "baseline_utf8_bytes": 3159,
+      "current_utf8_bytes": 4520,
+      "baseline_sha256": "0baefb8085b292392d3cbebd2bd771b1b5eb7bbda96195ad663ea012a2f988bb",
+      "current_sha256": "dbf82977ca2536ca85afd8259c18274c2e2635fd6997dc176eb8f80ddbdeae2d"
+    }
+  ],
+  "model_evaluations": "not_run"
+}

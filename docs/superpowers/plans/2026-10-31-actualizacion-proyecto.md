@@ -16,6 +16,8 @@
 
 **Política de ejecución indicada por el usuario (5 de noviembre de 2026):** resolver primero lo grueso de cada tarea y avanzar por capacidades completas. Cuando la idea central funcione, registrar los detalles secundarios pendientes y continuar con la siguiente capacidad; no resolverlos en esa misma pasada ni ampliar la investigación por ellos. Retomarlos únicamente después de terminar todas las tareas gruesas del plan, según reiteración explícita del usuario del 6 de noviembre; no al terminar cada tarea individual. Un defecto que impida el resultado central se resuelve dentro de la tarea. Al reanudar o después de compactar el contexto, recuperar esta política antes de elegir trabajo. [Lista de detalles diferidos](../../modernization/deferred-details.md).
 
+**Seguimiento pedido por el usuario (6 de noviembre de 2026):** en cada cambio de tarea principal, mostrar en el chat una lista actualizada de lo implementado, lo que está en curso y lo pendiente; explicar qué se cerró y qué empieza. Mantener el tablero coherente y esta regla después de compactar, sin porcentajes inventados ni confundir pilotos con aceptación integral.
+
 ## 1. Alcance y criterios de éxito
 
 Este documento se redactó inicialmente como plan y su ejecución completa fue autorizada después. La modernización está en curso: [estado y siguiente entrega](../../modernization/execution-dashboard.md). Las observaciones históricas de esta revisión no describen automáticamente la implementación actual. Los requisitos de generación de conceptos, selección e implementación siguen vigentes hasta completar todas las páginas.

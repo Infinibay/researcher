@@ -12,7 +12,7 @@ from uuid import uuid4
 
 import httpx
 
-from backend.planning.instructions import PLANNING_INSTRUCTIONS
+from backend.prompts.native import build_instructions
 from backend.research.models import (
     CODE_REVIEW_PERMISSIONS,
     DEVELOPMENT_PERMISSIONS,
@@ -33,28 +33,21 @@ from backend.runtime.business_mediation import (
     BusinessTools,
     ProjectTools,
 )
-from backend.runtime.code_audit_instructions import CODE_AUDIT_INSTRUCTIONS
-from backend.runtime.code_review_instructions import CODE_REVIEW_INSTRUCTIONS
 from backend.runtime.codex_rpc import JsonRpcClient, RpcProtocolError
 from backend.runtime.codex_session import CodexSession, ExecutionLimits
 from backend.runtime.contracts import RunConflict
-from backend.runtime.development_policy import development_instructions
 from backend.runtime.development_state import DevelopmentWorkspaces
 from backend.runtime.egress_proxy import EgressPolicy
 from backend.runtime.execution_domain import ExecutionDomain
 from backend.runtime.git_capsule import GitAsset
 from backend.runtime.host_business import host_business
-from backend.runtime.investigation_instructions import INVESTIGATION_INSTRUCTIONS
 from backend.runtime.native_commands import broker_command_executor
 from backend.runtime.native_inference import (
-    INSTRUCTIONS,
     InferenceSession,
     _private_control,
 )
 from backend.runtime.native_state import NativeState
 from backend.runtime.peer_broker import PeerBroker
-from backend.runtime.review_instructions import REVIEW_INSTRUCTIONS
-from backend.runtime.scientific_instructions import SCIENTIFIC_RESEARCH_INSTRUCTIONS
 from backend.runtime.subscription_auth import ExternalChatGPTAuth
 from backend.runtime.task_profiles import NATIVE_TASK_TYPES
 from backend.runtime.workspaces import PEER_WORKSPACE
@@ -608,23 +601,7 @@ class OwnedCodexRuntime:
                                 reasoning_effort=selected_model['reasoning_effort'],
                                 before_thread=verify_model,
                                 limits=limits,
-                                developer_instructions=development_instructions(
-                                    self.development_checks
-                                )
-                                if development
-                                else (
-                                    CODE_REVIEW_INSTRUCTIONS
-                                    if code_review
-                                    else REVIEW_INSTRUCTIONS
-                                    if review is not None
-                                    else PLANNING_INSTRUCTIONS
-                                    if planning
-                                    else INVESTIGATION_INSTRUCTIONS
-                                    if investigation
-                                    else INSTRUCTIONS + CODE_AUDIT_INSTRUCTIONS
-                                    if audit
-                                    else INSTRUCTIONS + SCIENTIFIC_RESEARCH_INSTRUCTIONS
-                                ),
+                                developer_instructions=build_instructions(run.execution_kind, context['task']['type'], checks=self.development_checks),
                                 sandbox="workspace-write"
                                 if development
                                 else "read-only",

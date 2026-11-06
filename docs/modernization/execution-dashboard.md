@@ -2,6 +2,13 @@
 
 Actualizado: 2026-11-06. Objetivo activo: implementar **todo** el [plan](../superpowers/plans/2026-10-31-actualizacion-proyecto.md). Este tablero no reemplaza requisitos ni declara el plan terminado. [Diagnóstico del proceso](workflow-review.md).
 
+## Seguimiento al cambiar de tarea
+
+En cada transición de tarea principal, publicar en el chat la lista actualizada:
+implementado con su alcance, tarea en curso y tareas pendientes. Decir qué se cerró
+y cuál empieza. Política explícita del usuario del6noviembre; se mantiene después
+de compactar. Primero todas las tareas gruesas; todos los detalles secundarios al final.
+
 ## Estado comprobado
 
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor retirados; quedan consumidores, herramientas y dependencias antiguos.
@@ -9,7 +16,42 @@ Actualizado: 2026-11-06. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: configuración de modelos por ámbito
+## Etapa actual: catálogo de prompts revisado y versionado
+
+La revisión estática propia tiene578entradas candidatas de512archivos, con decisiones
+explícitas ligadas a fuente/consumidores;0decisiones nuevas u obsoletas sin revisar.
+No son578prompts únicos ni pruebas de eficacia. El catálogo nativov2 centraliza
+política y selecciona siete capacidades; el adaptador anterior conserva un perfil
+de referencia. Los perfiles fueron reescritos o conservados con motivo y el warmup
+directo se rechaza antes de HTTP. La instantánea original conserva la política enviada.
+
+**Verificación:**12tests acotadosPASS3.12s;20instaladosPASS7.678s/834miembros
+coincidentes/230imports sóloentorno/85distribuciones. Un turno de producto/Ken
+controlados;0modelos reales/remotos del usuario.21defsPython documentadas,0faltantes.
+Planificación vuelve a pasar2.33s. Batería previa65PASS/3FAIL: dos casos corregidos
+por wording/fixture de schema; el timeout de checks a60s también aparece en
+wheel85f7acd. Queda en engine/validación global, no en pulido. La migración29→actual
+sigue fallando en el fixture anterior por un trigger ausente de43, también en85f7acd.
+
+[Inventario y criterios](../prompts/inventory.md), [resultados](prompt-catalog-results.json),
+[paquete](prompt-catalog-packaging.json). Baseline/casos reservados preparados;
+comparación con modelos y comprensión humana/científica siguen pendientes. Sin
+cambios frontend, no nuevas capturas/build ni aceptación global por esta entrega.
+
+| Bloque | Estado actual |
+| --- | --- |
+| Runtime Codex/Ken, control y recuperación | Recorridos implementados; evaluación global abierta |
+| Investigación y desarrollo con evidencia/revisión/aceptación | Recorridos funcionales; capacidades y aceptación global pendientes |
+| Fuentes Git y configuración de modelos | Implementados en los alcances documentados |
+| Prompts y comunicación humano–agente | Catálogo/revisión estática implementados; comparación con modelos y comprensión humana pendientes |
+| Engine, coordinación entre agentes y retirada heredada | Incompleto |
+| Dependencias e infraestructura restantes | Actualización parcial |
+| Resumen, Planificación, Agentes y Ejecución | Cuatro rutas pendientes de conceptos/implementación |
+| Migración/restore, operación, historial/presupuestos y CLI/TUI | Parcial; validación integral pendiente |
+|43escenarios, doce páginas, evaluación humana/científica y revisión final | Pendientes de aceptación integral |
+| Pulido secundario de todos los bloques | Después de todas las tareas gruesas |
+
+## Etapa anterior: configuración de modelos por ámbito
 
 La cabecera permite guardar/restablecer modelo y esfuerzo con prioridad
 agente-del-proyecto → proyecto → global → host. Los cambios afectan a intentos

@@ -96,3 +96,6 @@ retomarlo. No convertir su registro en otra investigación o implementación.
 
 
 | DD-039 | Unificar los tokens visuales del diálogo oscuro con las páginas claras; afinar densidad, elección de agentes conocidos e historial de ediciones de configuración. La identificación exacta ya se explica y se muestra en Tareas; no se infiere de un rol. La validación de catálogo real/elección congelada/revisión optimista ya está implementada. | `ModelSettingsDialog.tsx`, `model-settings-results.json`, capturas `2026-11-06-model-settings` | Pulido **después de todas las capacidades principales**. No repetir actores/kernel por estos ajustes de interfaz; continuar ahora con el catálogo completo de prompts. |
+
+
+| DD-040 | Compactar la representación repetida del inventario/ledger, uniformar estilo/imports y corregir detalles tipográficos de instrucciones después de todos los bloques principales. La revisión/frescura/versionado ya funciona; no repetir kernel por redacción. | `docs/prompts/`, `scripts/audit_prompt_inventory.py`, `backend/prompts/native.py` | Pulido final. La eficacia con modelos/personas, el timeout de checks, migración/restore y retirada del engine siguen siendo tareas principales, nunca detalles diferidos. |

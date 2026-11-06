@@ -1,0 +1,91 @@
+{
+  "base_commit": "85f7acd",
+  "catalog_version": 2,
+  "inventory": {
+    "source_files": 512,
+    "candidates": 578,
+    "unreviewed_or_stale": 0,
+    "review_claim": "Explicit source/direct-consumer-bound migration and semantic dispositions, not proof of efficacy, dynamic reachability or user understanding.",
+    "checker": "scripts/audit_prompt_inventory.py --check passed"
+  },
+  "focused_source": {
+    "passed": 12,
+    "failed": 0,
+    "seconds": 3.12,
+    "scope": "Prompt selection/identity, actual sent/frozen native policy with controlled generation/Ken, retired warmup and inventory freshness"
+  },
+  "installed": {
+    "passed": 20,
+    "failures": 0,
+    "skipped": 0,
+    "installed_distributions": 85,
+    "sdk": "1.30.0",
+    "excluded_frameworks": [
+      "chromadb",
+      "crewai",
+      "crewai-tools",
+      "fastmcp",
+      "fastmcp-slim",
+      "litellm",
+      "ollama",
+      "tree-sitter",
+      "tree-sitter-c",
+      "tree-sitter-javascript",
+      "tree-sitter-python",
+      "tree-sitter-rust",
+      "tree-sitter-typescript"
+    ],
+    "project_noneditable": true,
+    "backend_modules": 230,
+    "all_backend_imports_from_native_env": true,
+    "matched_application_members": 834,
+    "console_help": 0,
+    "console_missing_token": 2,
+    "console_real_stdio": true,
+    "console_created_database": false,
+    "real_model_turns": 0,
+    "controlled_product_turns": 1,
+    "controlled_child_protocol_turns": 0,
+    "synthetic_inference_adapter_turns": "One controlled product/Ken turn checks exact sent/frozen policy. Other input-continuity cases use a controlled inference adapter; no model-comprehension claim.",
+    "actual_host_publications": "No publication or user remote effects",
+    "seconds": 7.678
+  },
+  "broad_prior_sweep": {
+    "passed": 65,
+    "failed": 3,
+    "seconds": 630.85,
+    "limits": "Pre-final common-policy condensation. Not a final green global suite.",
+    "failures": [
+      {
+        "case": "test_scientific_owner_guard_upgrade_is_atomic_and_keeps_historical_reports",
+        "cause": "Old test prepared schema52 but did not exclude new model-settings migration55. Fixture corrected; scoped guard case passes."
+      },
+      {
+        "case": "test_owned_project_start_proposes_then_owner_accepts_without_executing_children",
+        "cause": "Expected exact host_default is not direct user testimony wording; equivalent owner wording restored. Current full planning case passes in2.33s."
+      },
+      {
+        "case": "test_owned_checks_persist_exact_results_and_invalidate_mutated_copy",
+        "cause": "Timed out at60s, also reproduced from installed85f7acd before this prompt change. Trace includes journal history parsing; root performance cause not conclusively diagnosed. Remains engine/global-validation work, not secondary polish."
+      }
+    ]
+  },
+  "historical_migration_probe": {
+    "case": "test_version29_dispatch_remains_unknown_after_repeatable_upgrade",
+    "result": "Fails in source and installed85f7acd at migration43 due missing native_task_done_requires_acceptance trigger. No new prompt cause established; remains migration work."
+  },
+  "docstrings": {
+    "changed_named_definitions": 21,
+    "missing": 0
+  },
+  "warmup_cli": {
+    "exit": 2,
+    "stdout_empty": true,
+    "inference_or_http_sent": false
+  },
+  "real_model_turns": 0,
+  "user_remote_effects": 0,
+  "frontend": "Unchanged; no new frontend test/build/browser claim. Prior123 frontend receipt remains historical.",
+  "quality_evaluation": "Baseline exact policies, byte/hash comparison and reserved/development cases prepared; no real-model efficacy or human comprehension evaluation claimed.",
+  "remaining": "Real subscription before/after evaluation; observed human/scientific quality; legacy engine/tool removal;43scenarios/global tests/restore/DD030/inverses43\u201354/remaining4routes/all12acceptance/final independent review."
+}

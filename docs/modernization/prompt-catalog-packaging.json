@@ -1,0 +1,48 @@
+{
+  "base_commit": "85f7acd",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "56c1eb139ff4b7b4100d43fe145a483a3a216385409bc4cdc42bd99dece6d4b5",
+  "observed": {
+    "passed": 20,
+    "failures": 0,
+    "skipped": 0,
+    "installed_distributions": 85,
+    "sdk": "1.30.0",
+    "excluded_frameworks": [
+      "chromadb",
+      "crewai",
+      "crewai-tools",
+      "fastmcp",
+      "fastmcp-slim",
+      "litellm",
+      "ollama",
+      "tree-sitter",
+      "tree-sitter-c",
+      "tree-sitter-javascript",
+      "tree-sitter-python",
+      "tree-sitter-rust",
+      "tree-sitter-typescript"
+    ],
+    "project_noneditable": true,
+    "backend_modules": 230,
+    "all_backend_imports_from_native_env": true,
+    "matched_application_members": 834,
+    "console_help": 0,
+    "console_missing_token": 2,
+    "console_real_stdio": true,
+    "console_created_database": false,
+    "real_model_turns": 0,
+    "controlled_product_turns": 1,
+    "controlled_child_protocol_turns": 0,
+    "synthetic_inference_adapter_turns": "One controlled product/Ken turn checks exact sent/frozen policy. Other input-continuity cases use a controlled inference adapter; no model-comprehension claim.",
+    "actual_host_publications": "No publication or user remote effects",
+    "seconds": 7.678
+  },
+  "tests": [
+    "backend/tests/runtime/test_prompt_catalog.py",
+    "backend/tests/runtime/test_run_input.py"
+  ],
+  "excluded_legacy_extra_cases": [],
+  "bootstrap": "Existing clean native-only env; final noneditable wheel reinstalled offline without dependency changes. Python-I outside checkout; no inherited source or old site-packages. Explicit prepared local semantic assets.",
+  "limits": "Focused installed prompt selection/provenance/warmup refusal and frozen-input contracts, actual owned runtime/kernel/SQLite plus controlled generation/Ken. No real model turns or user remotes. Repository inventory checker is a source-maintenance script tested separately, not an installed runtime command. Not global, restore, host install, prompt efficacy or user comprehension. No frontend changes in this delivery."
+}

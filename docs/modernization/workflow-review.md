@@ -9,6 +9,13 @@ funciona y sólo quedan detalles secundarios, anotarlos en
 posterior, **después de terminar todas las tareas gruesas del plan**, según reiteración explícita del usuario del6noviembre. No hacer una ronda de pulido después de cada tarea. No ampliar el diseño ni repetir auditorías por esos detalles. Un fallo
 que impida el resultado central se resuelve dentro de su tarea.
 
+Seguimiento pedido por el usuario el6noviembre: en cada cambio de tarea principal,
+mostrar en el chat una lista actualizada de lo implementado, la tarea en curso y
+lo pendiente. Indicar qué se cerró y cuál empieza; conservar los bloques restantes
+del plan y separar los pilotos de la aceptación integral. Actualizar también el
+tablero para que esta regla sobreviva a la compactación. No inventar porcentajes
+ni confundir pruebas parciales con progreso global aceptado.
+
 Esta política es una instrucción explícita del usuario y debe recuperarse después
 de compactar el contexto. El diagnóstico histórico de abajo aporta evidencia;
 no desplaza esta prioridad de ejecución.

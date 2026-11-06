@@ -4,6 +4,8 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- Catálogo nativo de promptsv2 y revisión explícita de578candidatos/512archivos; no autoaprobación por familia ni inferencia directa de warmup.12tests acotados y20instaladas pasan. Eficacia de modelos/comprensión humana aún no evaluadas; timeout de checks y fixture de migración siguen abiertos. [Inventario](../prompts/inventory.md), [resultados](prompt-catalog-results.json).
+
 - Configuración web global/proyecto/agente y esfuerzo de razonamiento, con elección congelada por intento y catálogo nativo comprobado antes de enviar.103backend,123frontend/build,11instaladas y4capturas acotadas; cero modelos reales en esta entrega. [Contrato](../architecture/model-configuration.md), [resultados](model-settings-results.json).
 
 - Reserva local cerrada explícitamente sin borrar ni dar Git por completado; nueva adopción independiente y reparación guardada antes de programación recuperables.35pruebas en fuente,122frontend/build y4capturas web; no nueva verificación de wheel/global. [Contrato](../architecture/source-reservation.md), [resultados](source-reservation-results.json).

@@ -1,0 +1,155 @@
+{
+  "base_commit": "85f7acd",
+  "scope": "Changed/new named Python definitions and modules in backend, scripts and evals; no claim about all historical code.",
+  "definitions_documented": 21,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/prompts/native.py",
+      "symbol": "_compose",
+      "line": 98,
+      "documented": true,
+      "source_sha256": "3d56cbe951c6de1a5b2dcc1a57b53039f0a8cb5f65c6c2b0245672c13915211a"
+    },
+    {
+      "path": "backend/prompts/native.py",
+      "symbol": "build_instructions",
+      "line": 103,
+      "documented": true,
+      "source_sha256": "3d56cbe951c6de1a5b2dcc1a57b53039f0a8cb5f65c6c2b0245672c13915211a"
+    },
+    {
+      "path": "backend/prompts/native.py",
+      "symbol": "instruction_identity",
+      "line": 116,
+      "documented": true,
+      "source_sha256": "3d56cbe951c6de1a5b2dcc1a57b53039f0a8cb5f65c6c2b0245672c13915211a"
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedCodexRuntime",
+      "line": 235,
+      "documented": true,
+      "source_sha256": "16b43f69142dd5af23cc623dcb14118918376c01d5bb87baa34ab37af440a985"
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedCodexRuntime.open",
+      "line": 361,
+      "documented": true,
+      "source_sha256": "16b43f69142dd5af23cc623dcb14118918376c01d5bb87baa34ab37af440a985"
+    },
+    {
+      "path": "backend/scripts/warmup_prefix_cache.py",
+      "symbol": "_warmup_one",
+      "line": 6,
+      "documented": true,
+      "source_sha256": "3c5a2c53aa3105266194eac9f6fe183578d0a5b03b4b29b2f672d93a5d15eac5"
+    },
+    {
+      "path": "backend/scripts/warmup_prefix_cache.py",
+      "symbol": "main",
+      "line": 13,
+      "documented": true,
+      "source_sha256": "3c5a2c53aa3105266194eac9f6fe183578d0a5b03b4b29b2f672d93a5d15eac5"
+    },
+    {
+      "path": "backend/tests/runtime/test_prompt_catalog.py",
+      "symbol": "test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity",
+      "line": 14,
+      "documented": true,
+      "source_sha256": "3459c91e47f4d2b339ebf9cd8baeb39f567602e7d5181c46b2feb07e178adff8"
+    },
+    {
+      "path": "backend/tests/runtime/test_prompt_catalog.py",
+      "symbol": "test_catalog_does_not_relabel_old_instructions_or_admit_host_publication_as_inference",
+      "line": 25,
+      "documented": true,
+      "source_sha256": "3459c91e47f4d2b339ebf9cd8baeb39f567602e7d5181c46b2feb07e178adff8"
+    },
+    {
+      "path": "backend/tests/runtime/test_prompt_catalog.py",
+      "symbol": "test_warmup_compatibility_entry_refuses_before_http_or_prompt_rendering",
+      "line": 33,
+      "documented": true,
+      "source_sha256": "3459c91e47f4d2b339ebf9cd8baeb39f567602e7d5181c46b2feb07e178adff8"
+    },
+    {
+      "path": "backend/tests/runtime/test_prompt_catalog.py",
+      "symbol": "test_actual_owned_turn_records_the_exact_versioned_policy_sent_to_native",
+      "line": 40,
+      "documented": true,
+      "source_sha256": "3459c91e47f4d2b339ebf9cd8baeb39f567602e7d5181c46b2feb07e178adff8"
+    },
+    {
+      "path": "backend/tests/runtime/test_prompt_inventory.py",
+      "symbol": "test_inventory_includes_actual_tool_docstrings_and_new_source_candidates",
+      "line": 7,
+      "documented": true,
+      "source_sha256": "c3d93dd3cd93c6fb4a655d344eaf27176599e9d93cde7f00c3b0cf176dee5426"
+    },
+    {
+      "path": "backend/tests/runtime/test_prompt_inventory.py",
+      "symbol": "test_inventory_never_auto_approves_a_new_or_changed_template",
+      "line": 22,
+      "documented": true,
+      "source_sha256": "c3d93dd3cd93c6fb4a655d344eaf27176599e9d93cde7f00c3b0cf176dee5426"
+    },
+    {
+      "path": "backend/tests/runtime/test_scientific_research.py",
+      "symbol": "test_scientific_owner_guard_upgrade_is_atomic_and_keeps_historical_reports",
+      "line": 314,
+      "documented": true,
+      "source_sha256": "8a14ad6ce135a3bb3621c2114f4485e302d99e8adb3183239d695efe34b2eebc"
+    },
+    {
+      "path": "backend/tests/runtime/test_scientific_research.py",
+      "symbol": "test_scientific_owner_guard_upgrade_is_atomic_and_keeps_historical_reports.skip_scientific",
+      "line": 325,
+      "documented": true,
+      "source_sha256": "8a14ad6ce135a3bb3621c2114f4485e302d99e8adb3183239d695efe34b2eebc"
+    },
+    {
+      "path": "evals/prompts/measure_profiles.py",
+      "symbol": "main",
+      "line": 11,
+      "documented": true,
+      "source_sha256": "8c323ec8dfd6c80cde1632081f046b508e862c3edda9eb9dd4eae16b86fd75ab"
+    },
+    {
+      "path": "scripts/audit_prompt_inventory.py",
+      "symbol": "module_name",
+      "line": 14,
+      "documented": true,
+      "source_sha256": "652d39284cc8aa51739366aea2723aec419e3cd9e3bd38da7b17012837fa47b7"
+    },
+    {
+      "path": "scripts/audit_prompt_inventory.py",
+      "symbol": "prompt_nodes",
+      "line": 20,
+      "documented": true,
+      "source_sha256": "652d39284cc8aa51739366aea2723aec419e3cd9e3bd38da7b17012837fa47b7"
+    },
+    {
+      "path": "scripts/audit_prompt_inventory.py",
+      "symbol": "family",
+      "line": 60,
+      "documented": true,
+      "source_sha256": "652d39284cc8aa51739366aea2723aec419e3cd9e3bd38da7b17012837fa47b7"
+    },
+    {
+      "path": "scripts/audit_prompt_inventory.py",
+      "symbol": "inventory",
+      "line": 74,
+      "documented": true,
+      "source_sha256": "652d39284cc8aa51739366aea2723aec419e3cd9e3bd38da7b17012837fa47b7"
+    },
+    {
+      "path": "scripts/audit_prompt_inventory.py",
+      "symbol": "main",
+      "line": 116,
+      "documented": true,
+      "source_sha256": "652d39284cc8aa51739366aea2723aec419e3cd9e3bd38da7b17012837fa47b7"
+    }
+  ]
+}

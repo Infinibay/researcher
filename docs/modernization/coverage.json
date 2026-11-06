@@ -1722,7 +1722,8 @@
       "remaining": [
         "Migrate all legacy callers and capability families",
         "Recover uncertain work with typed human controls",
-        "Versioned Git/review/CI acceptance and full frontend integration"
+        "Versioned Git/review/CI acceptance and full frontend integration",
+        "Investigate60s owned-check timeout reproduced from prior wheel; trace includes journal history parsing. Do not infer a cause or hide this as UI polish."
       ]
     },
     "communication_guide": {
@@ -1761,16 +1762,35 @@
         "backend/tests/runtime/test_run_input.py",
         "backend/tests/runtime/test_run_input_migration.py",
         "evals/runtime/run_input_continuity.py",
-        "frontend/tests/task-design.test.ts"
+        "frontend/tests/task-design.test.ts",
+        "docs/prompts/inventory.md",
+        "docs/modernization/prompt-catalog-results.json",
+        "evals/prompts/cases.json"
       ],
       "remaining": [
-        "Apply to product prompts and first vertical workflow",
-        "Communication/context datasets and human comprehension evaluation"
+        "Reserved communication/context comparisons and observed human comprehension; exact policy delivery does not establish understanding."
       ]
     },
     "prompt_inventory": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/prompts/inventory.md",
+        "docs/prompts/inventory.json",
+        "docs/prompts/review-decisions.json",
+        "docs/prompts/profile-comparison.json",
+        "docs/modernization/prompt-catalog-results.json",
+        "docs/modernization/prompt-catalog-packaging.json",
+        "backend/prompts/native.py",
+        "backend/tests/runtime/test_prompt_catalog.py",
+        "backend/tests/runtime/test_prompt_inventory.py",
+        "evals/prompts/baseline.json",
+        "evals/prompts/cases.json"
+      ],
+      "implemented": "Owned static inventory578candidates/512files with explicit source/direct-consumer-bound dispositions; native catalogv2 and capability rewrites, retired direct warmup.",
+      "remaining": [
+        "Before/after efficacy and reserved-case comparisons using the same subscription model/effort/tools/context.",
+        "Dynamic consumer/native-system exposure limits and actual human comprehension remain explicit; physical legacy removal belongs to the engine block."
+      ]
     },
     "context_evals": {
       "status": "in_progress",
@@ -1790,7 +1810,10 @@
         "docs/modernization/finding-consumers-packaging.json",
         "backend/tests/research/test_finding_consumers.py",
         "backend/tests/research/test_legacy_context_scope.py",
-        "backend/tests/knowledge/test_finding_memory_retirement.py"
+        "backend/tests/knowledge/test_finding_memory_retirement.py",
+        "docs/prompts/inventory.md",
+        "docs/modernization/prompt-catalog-results.json",
+        "evals/prompts/cases.json"
       ],
       "remaining": [
         "Reserved datasets and before/after comparisons across all prompts and held-out cases.",
@@ -1799,7 +1822,15 @@
     },
     "communication_evals": {
       "status": "pending",
-      "evidence": []
+      "evidence": [
+        "docs/interaction/communication-guide.md",
+        "evals/prompts/cases.json",
+        "evals/prompts/baseline.json",
+        "docs/modernization/prompt-catalog-results.json"
+      ],
+      "remaining": [
+        "Execute reserved/development comparisons; observe actual human comprehension and correction effort. Designed cases are not evaluated outcomes."
+      ]
     },
     "data_migrations": {
       "status": "in_progress",
@@ -1866,7 +1897,8 @@
       ],
       "remaining": [
         "Historical migration fixtures and backup/restore",
-        "Legacy data/consumer translation and complete preservation validation"
+        "Legacy data/consumer translation and complete preservation validation",
+        "Rebuild version29 migration fixture/chain verification: same missing-trigger failure at migration43 also occurs in prior installed wheel. Full restore/inverse acceptance remains open."
       ]
     },
     "backup_restore": {
