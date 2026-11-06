@@ -1,3 +1,4 @@
+/** Owner-authorized repository/history readers; old PR labels do not grant native publication authority. @module */
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { fetchApi, buildUrl } from '../api/client'
 import type {
@@ -73,6 +74,25 @@ export function usePRs(projectId: number | null) {
     queryFn: () =>
       fetchApi<PullRequest[]>(buildUrl('/api/git/prs', { project_id: projectId! })),
     enabled: projectId != null,
+  })
+}
+
+/** Documentary navigation from a historical PR; byte availability, old authorship and current native acceptance remain separate. */
+export interface PROwnerEntry {
+  project_id: number | null
+  task: { id: number; title: string; type: string } | null
+  task_type_accepts_code_input: boolean
+  native_admission_run_id: string | null
+  recorded_worktrees: { source_id: string; label: string; availability: string }[]
+  branch_snapshot_import: 'pending'
+}
+
+/** Read only the selected PR's scoped bridge; reading never starts inference or retries an owner effect. */
+export function usePROwnerEntry(prId: number) {
+  return useQuery({
+    queryKey: ['pr-owner-entry', prId],
+    queryFn: () => fetchApi<PROwnerEntry>(`/api/git/prs/${prId}/owner-entry`),
+    retry: false,
   })
 }
 

@@ -1,0 +1,89 @@
+{
+  "base_commit": "05b1628",
+  "python_files": 8,
+  "new": [
+    [
+      "backend/tests/runtime/test_native_git_retirement.py",
+      "F811",
+      "Redefinition of unused `legacy_publication` from line 8: `legacy_publication` redefined here"
+    ],
+    [
+      "backend/tests/runtime/test_native_git_retirement.py",
+      "F811",
+      "Redefinition of unused `legacy_publication` from line 8: `legacy_publication` redefined here"
+    ],
+    [
+      "backend/tests/runtime/test_native_git_retirement.py",
+      "F811",
+      "Redefinition of unused `legacy_publication` from line 8: `legacy_publication` redefined here"
+    ],
+    [
+      "backend/tests/runtime/test_native_git_retirement.py",
+      "F811",
+      "Redefinition of unused `legacy_publication` from line 8: `legacy_publication` redefined here"
+    ],
+    [
+      "backend/tests/runtime/test_native_git_retirement.py",
+      "F811",
+      "Redefinition of unused `legacy_publication` from line 8: `legacy_publication` redefined here"
+    ],
+    [
+      "backend/tests/runtime/test_native_git_retirement.py",
+      "F811",
+      "Redefinition of unused `legacy_publication` from line 8: `legacy_publication` redefined here"
+    ],
+    [
+      "backend/tests/runtime/test_native_git_retirement.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ]
+  ],
+  "inherited": [
+    [
+      "backend/api/routes/git.py",
+      "PLW1510",
+      "`subprocess.run` without explicit `check` argument"
+    ],
+    [
+      "backend/api/routes/git.py",
+      "PLW1510",
+      "`subprocess.run` without explicit `check` argument"
+    ],
+    [
+      "backend/api/routes/git.py",
+      "PLW1510",
+      "`subprocess.run` without explicit `check` argument"
+    ],
+    [
+      "backend/api/routes/git.py",
+      "PLW1510",
+      "`subprocess.run` without explicit `check` argument"
+    ],
+    [
+      "backend/api/routes/git.py",
+      "RUF100",
+      "Unused `noqa` directive (non-enabled: `S324`)"
+    ],
+    [
+      "backend/api/routes/git.py",
+      "S110",
+      "`try`-`except`-`pass` detected, consider logging the exception"
+    ],
+    [
+      "backend/api/routes/git.py",
+      "BLE001",
+      "Do not catch blind exception: `Exception`"
+    ],
+    [
+      "backend/git/branch_service.py",
+      "UP017",
+      "Use `datetime.UTC` alias"
+    ],
+    [
+      "backend/git/pr_service.py",
+      "FURB188",
+      "Prefer `str.removesuffix()` over conditionally replacing with slice."
+    ]
+  ],
+  "resolved": []
+}

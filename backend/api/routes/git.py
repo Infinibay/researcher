@@ -99,35 +99,8 @@ async def list_branches(
 
 @router.post("/branches", response_model=BranchResponse, status_code=201)
 async def create_branch(body: BranchCreate):
-    """Create a git branch for a task.
-
-    Generates a branch name from the task title, runs ``git checkout -b``,
-    registers the branch in the DB, and updates ``tasks.branch_name``.
-    """
-    # Resolve repo_path from DB — never trust caller-supplied paths
-    # (they may be container or worktree paths that don't exist on the host).
-    task_row = branch_service._get_task_row(body.task_id)
-    if not task_row:
-        raise HTTPException(status_code=404, detail=f"Task {body.task_id} not found")
-    repo_path = _resolve_repo_path(task_row["project_id"], body.repo_name)
-
-    branch_name = branch_service.create_branch_for_task(
-        task_id=body.task_id,
-        repo_path=repo_path,
-        base_branch=body.base_branch,
-        repo_name=body.repo_name,
-    )
-
-    branch = branch_service.get_branch_for_task(body.task_id)
-    if not branch:
-        raise HTTPException(status_code=500, detail="Branch created but not found in DB")
-
-    _log_event(
-        branch["project_id"], "branch_created", "api", "branch", branch["id"],
-        {"branch_name": branch_name, "task_id": body.task_id},
-    )
-
-    return BranchResponse(**branch)
+    """Refuse retired branch mutation before resolving source paths, invoking Git or recording a created event."""
+    branch_service.create_branch_for_task(body.task_id, "", base_branch=body.base_branch, repo_name=body.repo_name)
 
 
 # ── Pull Requests ─────────────────────────────────────────────────────────────
@@ -152,25 +125,16 @@ async def get_pr(pr_id: int):
     return PRResponse(**pr)
 
 
+@router.get("/prs/{pr_id}/owner-entry")
+async def pr_owner_entry(pr_id: int):
+    """Expose documentary scope and native next actions, not acceptance, branch availability or a new run."""
+    return pr_service.owner_entry(pr_id)
+
+
 @router.post("/prs/{pr_id}/merge", response_model=PRResponse)
 async def merge_pr(pr_id: int, body: PRMergeRequest):
-    """Merge a pull request."""
-    pr = pr_service.get_pr(pr_id)
-    if not pr:
-        raise HTTPException(status_code=404, detail=f"PR {pr_id} not found")
-
-    # Resolve repo_path from repositories table
-    repo_path = _resolve_repo_path(pr.get("project_id"), pr["repo_name"])
-
-    pr_service.merge_pr(pr_id, repo_path, merge_message=body.merge_message)
-
-    _log_event(
-        pr.get("project_id"), "pr_merged", "api", "code_review", pr_id,
-        {"branch": pr["branch"]},
-    )
-
-    updated = pr_service.get_pr(pr_id)
-    return PRResponse(**updated)
+    """Refuse retired publication before resolving a clone or transport; original history remains intact even when files are unavailable."""
+    pr_service.merge_pr(pr_id, "", merge_message=body.merge_message)
 
 
 @router.post("/prs/{pr_id}/close", response_model=PRResponse)
@@ -196,7 +160,7 @@ async def close_pr(pr_id: int):
 
 @router.post("/cleanup")
 async def trigger_cleanup(body: CleanupRequest):
-    """Trigger branch cleanup for merged branches."""
+    """Refuse retired cleanup before Git, network or history changes; retained branches are not disposable from a merged label."""
     cleaned = cleanup_service.cleanup_merged_branches(
         project_id=body.project_id,
         repo_path=body.repo_path,

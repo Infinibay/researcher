@@ -1,8 +1,7 @@
 """Protect migrated tasks from legacy claims, approval and mutable validation.
 
-All persisted task types use native owner entry. Historical project-level adapters
-remain admission-guarded until their separate cutover; a hint never proves that
-old producers have physically stopped.
+All persisted task types use native owner entry. Historical producers and Git effects are retired even before first admission;
+a hint never proves that old producers have physically stopped.
 """
 
 
@@ -70,44 +69,10 @@ def require_legacy_finding(conn, finding_id):
 
 
 def require_legacy_git_publication(conn, *, task_id, project_id, repo_name, repo_path):
-    """Reject legacy merge of native-owned tasks or registered physical sources, including another task/project alias; no historical approval grants publication authority."""
-    from pathlib import Path
+    """Refuse every retired publication before Git/network, including unregistered sources and PRs without tasks; policy does not imply a prior native admission."""
+    from backend.runtime.legacy_git import retired_git_effect
 
-    from backend.runtime.contracts import RunConflict
-
-    if task_id is not None:
-        try:
-            require_legacy_task(conn, task_id)
-        except ValueError as error:
-            raise RunConflict(str(error)) from error
-    if (
-        conn.execute(
-            "SELECT 1 FROM sqlite_master WHERE type='table' AND name='runtime_workspace_bindings'"
-        ).fetchone()
-        is None
-    ):
-        return
-    registered = conn.execute(
-        """SELECT 1 FROM runtime_workspace_bindings b JOIN repositories r ON r.id=b.repository_id
-        WHERE r.project_id=? AND r.name=? LIMIT 1""",
-        (project_id, repo_name),
-    ).fetchone()
-    physical = None
-    try:
-        info = Path(repo_path).stat()
-    except OSError:
-        # Remote-only historical repositories need not have a local clone.
-        # Their actual registered identity and native task are still checked.
-        pass
-    else:
-        physical = conn.execute(
-            "SELECT 1 FROM runtime_workspace_bindings WHERE device=? AND inode=? LIMIT 1",
-            (info.st_dev, info.st_ino),
-        ).fetchone()
-    if registered or physical:
-        raise RunConflict(
-            "Native-owned repository requires publication of its exact accepted candidate; legacy PR status is not authority"
-        )
+    retired_git_effect("PR merge")
 
 
 def require_legacy_flow(task_id):

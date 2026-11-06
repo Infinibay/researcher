@@ -1,11 +1,9 @@
-"""Service wrapping the code_reviews table and optional Forgejo merge API."""
+"""Historical PR metadata and owner navigation; competing local/remote publication is retired in favor of the native exact-candidate API."""
 
 from __future__ import annotations
 
 import logging
-import os
 import sqlite3
-import subprocess
 from typing import Any
 
 from backend.tools.base.db import execute_with_retry
@@ -14,13 +12,15 @@ logger = logging.getLogger(__name__)
 
 
 class PRService:
-    """Manages pull/merge requests via the ``code_reviews`` table."""
+    """Read and annotate historical PR records without treating status or actor labels as native acceptance/publication authority."""
 
     def __init__(self, branch_service=None):
+        """Keep the optional historical branch metadata service without starting Git or a remote transport."""
         # Lazy-imported to avoid circular deps; set at module init
         self._branch_service = branch_service
 
     def _get_branch_service(self):
+        """Resolve the metadata service for explicit historical status annotations, never native publication."""
         if self._branch_service is None:
             from backend.git.branch_service import BranchService
 
@@ -72,6 +72,12 @@ class PRService:
 
         return execute_with_retry(_query)
 
+    def owner_entry(self, pr_id: int) -> dict:
+        """Read an actual scoped navigation bridge without inventing a prior native run or issuing execution/effect authority."""
+        from backend.runtime.legacy_git import pr_owner_entry
+
+        return execute_with_retry(lambda conn: pr_owner_entry(conn, pr_id))
+
     def update_pr_status(
         self,
         pr_id: int,
@@ -110,57 +116,17 @@ class PRService:
             logger.info("Updated PR %d status to '%s'", pr_id, status)
         return updated
 
-    def merge_pr(
-        self,
-        pr_id: int,
-        repo_path: str,
-        merge_message: str | None = None,
-    ) -> bool:
-        """Merge a pull request.
-
-        If ``FORGEJO_API_URL`` is set and the PR has a ``forgejo_pr_index``,
-        calls the Forgejo merge API.  Otherwise performs a local
-        ``git merge --no-ff``.
-        Then marks the branch as merged and updates the PR status.
-        Native-owned tasks and source identities are rejected before either
-        effect; a historical PR label cannot authorize their publication.
-        """
+    def merge_pr(self, pr_id: int, repo_path: str, merge_message: str | None = None) -> bool:
+        """Refuse retired local/remote publication; historical PR approval never substitutes for a native exact candidate and current owner acceptance."""
         pr = self.get_pr(pr_id)
-        if not pr:
+        if pr is None:
             raise ValueError(f"PR {pr_id} not found")
-
         from backend.runtime.lifecycle import require_legacy_git_publication
 
-        execute_with_retry(
-            lambda conn: require_legacy_git_publication(
-                conn,
-                task_id=pr.get("task_id"),
-                project_id=pr.get("project_id"),
-                repo_name=pr["repo_name"],
-                repo_path=repo_path,
-            )
-        )
-
-        branch = pr["branch"]
-        repo_name = pr["repo_name"]
-        forgejo_index = pr.get("forgejo_pr_index")
-
-        forgejo_url = os.environ.get("FORGEJO_API_URL")
-        if forgejo_url and forgejo_index:
-            owner_repo = self._resolve_owner_repo(pr.get("project_id"), repo_name)
-            self._forgejo_merge(owner_repo, forgejo_index, merge_message)
-        else:
-            self._local_merge(repo_path, branch, merge_message)
-
-        # Mark branch as merged
-        bs = self._get_branch_service()
-        bs.mark_branch_merged(branch, repo_name)
-
-        # Update PR status
-        self.update_pr_status(pr_id, "merged")
-
-        logger.info("Merged PR %d (branch '%s') in repo '%s'", pr_id, branch, repo_name)
-        return True
+        execute_with_retry(lambda conn: require_legacy_git_publication(
+            conn, task_id=pr.get("task_id"), project_id=pr.get("project_id"),
+            repo_name=pr["repo_name"], repo_path=repo_path,
+        ))
 
     def close_pr(self, pr_id: int) -> bool:
         """Close/abandon a pull request.
@@ -236,33 +202,14 @@ class PRService:
 
     @staticmethod
     def _local_merge(repo_path: str, branch: str, message: str | None = None) -> None:
-        """Perform a local ``git merge --no-ff``."""
-        cmd = ["git", "merge", "--no-ff", branch]
-        if message:
-            cmd.extend(["-m", message])
-        subprocess.run(
-            cmd,
-            cwd=repo_path,
-            check=True,
-            capture_output=True,
-            text=True,
-        )
+        """Refuse direct old helper calls before Git; use the original accepted-candidate owner publication API."""
+        from backend.runtime.legacy_git import retired_git_effect
+
+        retired_git_effect("local PR merge")
 
     @staticmethod
-    def _forgejo_merge(
-        owner_repo: str,
-        pr_index: int,
-        merge_message: str | None = None,
-    ) -> None:
-        """Merge a PR via the Forgejo API.
+    def _forgejo_merge(owner_repo: str, pr_index: int, merge_message: str | None = None) -> None:
+        """Refuse old remote helper calls before importing a transport or reading credentials; a historical PR is not publication authority."""
+        from backend.runtime.legacy_git import retired_git_effect
 
-        Uses ``ForgejoClient.merge_pull_request`` which calls
-        ``POST /repos/{owner}/{repo}/pulls/{index}/merge``.
-        """
-        from backend.git.forgejo_client import forgejo_client
-
-        forgejo_client.merge_pull_request(
-            owner_repo,
-            pr_index,
-            merge_message=merge_message,
-        )
+        retired_git_effect("remote PR merge")

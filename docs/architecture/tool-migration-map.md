@@ -359,3 +359,17 @@ lectura de `.pids`. Sin configuración nativa se informa modo de inspección, si
 generación. Ken/modelo/suscripción siguen en el host nativo. [Contrato](native-startup.md).
 Git/material retenido/publicación, consumidores de agentes/conocimiento y pruebas
 antiguas siguen pendientes; no confundir un arranque correcto con su migración.
+
+## Efectos Git antiguos posteriores a05b1628
+
+PR merge/creación de ramas, helpers local/Forgejo y cleanup local/remoto/stale/
+periódico rechazan antes de efectos, incluso sin admisión previa/tarea/registro
+nativo del repositorio. Historia y ramas se conservan. PR expandido muestra la
+procedencia y lleva a Tareas; `owner-entry` correlaciona proyecto/repositorio/rama,
+no adivina contexto, archivos disponibles, aceptación ni autoría. La publicación
+nativa exacta mantiene su API original. [Contrato](native-git-retirement.md).
+
+La importación exacta de ramas sin copia de archivos, la cadena retenida completa,
+selección automática de material para sucesoras y otros consumidores Git de
+lectura siguen siendo obligaciones principales. No están resueltas por rechazar
+la ruta antigua. Anotaciones de metadata/comentarios no dan autoridad nativa.

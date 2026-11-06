@@ -9,7 +9,35 @@ Actualizado: 2026-11-06. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: arranque instalado sin setup incidental
+## Etapa actual: retirar efectos Git competidores y conservar historia
+
+**Resultado:** merge/creación de ramas y cleanup local/remoto/stale/periódico
+antiguos rechazan antes de Git/red/estado/eventos, incluso sin tarea ni admisión
+previa/repositorio registrado. Se conservan refs/archivos/historia. PR expandido
+explica la diferencia entre aprobación antigua y aceptación actual, muestra los
+registros de origen y lleva a Tareas. `owner-entry` no inventa contexto, bytes
+presentes ni admisiones. La publicación exacta nativa mantiene su implementación.
+
+**Verificación:**85PASS0FAIL0SKIP25.05s fuente;85PASS26.039s desde wheel no editable
+sin frameworks antiguos.207imports backend sólo instalados;796miembros coinciden.
+Git real137/999, PR sin tarea, clon no disponible, rama/historia intactas, ninguna
+llamada remota/hilo cleanup; owner API y contratos nativos de publicación/datos.
+97tests frontend pasan; TypeScript y Vite4.81s.42definiciones documentadas,
+0avisos nuevos en producción;7de tests y semántica menor de404 diferidos DD026.
+0modelos reales. No ensayo nuevo integral de publicación física ni aceptación
+visual; no se afirma suite global verde.
+[Resultados](native-git-results.json), [paquete](native-git-packaging.json),
+[contrato](../architecture/native-git-retirement.md).
+
+**Siguiente principal:** importar material exacto de ramas sin archivos retenidos
+y cerrar la cadena de publicación retenida. Los archivos de worktree/copia privada
+ya tienen selección explícita como datos para un autor nuevo; el bridge no reemplaza
+la importación de una rama. Revisar lectores Git y agentes/conocimiento/consumidores
+antiguos pendientes, sin volver al pulido de guards/MCP/launcher. Proyecto integral,
+sucesoras, settings/visuales/prompts/evaluaciones/restore/global y resto íntegro del
+plan siguen abiertos.
+
+## Etapa anterior: arranque instalado sin setup incidental
 
 **Resultado:** `start.sh` delega a `researcher-start`; API y web se ejecutan sobre
 loopback con sus procesos originales. No source de `.env`, instalaciones,

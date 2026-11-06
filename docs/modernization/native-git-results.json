@@ -1,0 +1,35 @@
+{
+  "base_commit": "05b1628",
+  "status": "competing_legacy_git_effects_retired",
+  "red": {
+    "final_new_effect_tests": "8FAIL2.63s after correcting test module/stdlib spies; actual PR local effect without task reproduces bypass, remote spy exposed attempt.",
+    "handoff_tests": "3FAIL1.53s (missing helper; HTTP fixture first rejected untrusted default testserver host before endpoint).",
+    "baseline_limits": "Existing5native guard assertions also failed on stale expected Native-owned text vs current task policy; not new safety regressions. Initial global threading.Thread spy damaged async fixture teardown; changed to module-local SimpleNamespace before final RED."
+  },
+  "first_green": "14PASS4.49s before history bridge; then16PASS1FAIL caused invalid TestClient host, then84PASS1FAIL because cleanup test omitted required historical repo_path. Corrected only fixtures; no guard weakening.",
+  "source": {
+    "passed": 85,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 25.05
+  },
+  "installed_receipt": "docs/modernization/native-git-packaging.json",
+  "frontend": {
+    "tests_passed": 97,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 1.673,
+    "typescript_build": true,
+    "vite_seconds": 4.81,
+    "browser_visual_acceptance": false
+  },
+  "quality": {
+    "definitions_documented": 42,
+    "missing_docs": 0,
+    "new_lint": 7,
+    "production_new_lint": 0,
+    "inherited_lint": 9,
+    "deferred": "DD-026"
+  },
+  "limits": "Existing native publication/data contracts checked using actual Git fixtures and controlled ports; not another complete physical author/check/reviewer/owner/publication chain, real model/Ken ranking, whole global suite or restore. Branch-only material import and full retained publication remain principal pending. No legacy branch/file deleted."
+}

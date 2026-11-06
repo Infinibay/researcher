@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 import { useProjectStore } from '../../stores/project'
 import {
   useRepos,
@@ -9,6 +10,7 @@ import {
   usePRComments,
   useCreateRepo,
   useCreatePRComment,
+  usePROwnerEntry,
 } from '../../hooks/useGit'
 import { useSendMessage } from '../../hooks/useChat'
 import { useAgents } from '../../hooks/useAgents'
@@ -410,7 +412,9 @@ function TreeNodeView({
 
 // ── PR Detail (expanded) ──────────────────────────────────────────────────────
 
+/** Show original PR discussion and an explicit owner bridge; old approval is history, never a current acceptance or a request to merge. */
 function PRDetail({ pr }: { pr: PullRequest }) {
+  const ownerEntry = usePROwnerEntry(pr.id)
   const { data: comments, isLoading } = usePRComments(pr.id)
   const createComment = useCreatePRComment()
   const [draft, setDraft] = useState('')
@@ -425,6 +429,18 @@ function PRDetail({ pr }: { pr: PullRequest }) {
 
   return (
     <div className="mt-2 space-y-3 border-t border-surface-700 pt-3">
+      <section aria-label="Continuar desde el PR histórico" className="space-y-2 rounded border border-surface-600 p-3 text-xs text-slate-300">
+        <h5 className="font-semibold text-slate-100">Continuar con estos cambios</h5>
+        <p>El estado de este PR pertenece al flujo anterior. Para publicar sus cambios, el flujo actual necesita desarrollo, comprobaciones, revisión independiente y tu aceptación de la versión exacta.</p>
+        {ownerEntry.isLoading && <p role="status">Consultando los registros de origen…</p>}
+        {ownerEntry.error && <ErrorMessage message={ownerEntry.error.message} retry={() => ownerEntry.refetch()} />}
+        {ownerEntry.data && <>
+          {ownerEntry.data.task ? <p>Tarea registrada: #{ownerEntry.data.task.id} · {ownerEntry.data.task.title}. {ownerEntry.data.task_type_accepts_code_input ? 'Puedes inspeccionar allí el material para un intento nuevo.' : 'Para reutilizar código, elige una tarea de desarrollo.'}</p> : <p>Este PR no tiene una tarea vigente en su proyecto. Elige una tarea de desarrollo; no se asignó una automáticamente.</p>}
+          {ownerEntry.data.recorded_worktrees.length > 0 ? <p>Registros de worktree asociados a esta rama: {ownerEntry.data.recorded_worktrees.map(item => `${item.label} (#${item.source_id})`).join(', ')}. Sus archivos aún no se han comprobado. En Tareas puedes inspeccionar y seleccionar archivos como entrada para el autor nuevo.</p> : <p>No hay un worktree registrado para esta rama. La importación directa del contenido de la rama aún no está disponible; conserva la rama y su historial.</p>}
+          <p>Consultar este panel no inicia trabajo ni acepta o publica cambios.</p>
+          {ownerEntry.data.project_id != null && <Link className="inline-block rounded border border-surface-600 px-3 py-1.5 text-sky-300 hover:bg-surface-700" to="/tasks">Abrir tareas</Link>}
+        </>}
+      </section>
       {pr.summary && (
         <p className="text-xs text-slate-400">{pr.summary}</p>
       )}

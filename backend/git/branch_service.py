@@ -1,22 +1,20 @@
-"""Service for branch lifecycle management."""
+"""Historical branch metadata; source creation is retired and native development/publication owns actual new code."""
 
 from __future__ import annotations
 
 import logging
 import re
 import sqlite3
-import subprocess
 from datetime import datetime, timezone
 from typing import Any
 
-from backend.flows.helpers import set_task_branch
 from backend.tools.base.db import execute_with_retry
 
 logger = logging.getLogger(__name__)
 
 
 class BranchService:
-    """Manages git branches: creation, listing, status transitions."""
+    """Read and annotate stored branch history without inferring native ownership, acceptance or permission to mutate Git."""
 
     def generate_branch_name(self, task_id: int, task_title: str) -> str:
         """Generate a branch name from a task id and title.
@@ -53,52 +51,10 @@ class BranchService:
         project_id: int | None = None,
         created_by: str = "developer",
     ) -> str:
-        """Create a git branch for a task and register it in the DB.
+        """Refuse competing legacy source mutation before looking up roles, invoking Git or changing task/branch records."""
+        from backend.runtime.legacy_git import retired_git_effect
 
-        1. Looks up the task title to generate a branch name.
-        2. Runs ``git branch <name> <base>`` (does NOT checkout).
-        3. Inserts into the ``branches`` table.
-        4. Updates ``tasks.branch_name`` via :func:`set_task_branch`.
-        """
-        task = self._get_task_row(task_id)
-        if not task:
-            raise ValueError(f"Task {task_id} not found")
-
-        if project_id is None:
-            project_id = task["project_id"]
-
-        branch_name = self.generate_branch_name(task_id, task["title"])
-
-        # Create branch without switching HEAD (safe for concurrent use)
-        subprocess.run(
-            ["git", "branch", branch_name, base_branch],
-            cwd=repo_path,
-            check=True,
-            capture_output=True,
-            text=True,
-        )
-
-        # Register branch in DB
-        def _insert(conn: sqlite3.Connection) -> None:
-            conn.execute(
-                """INSERT INTO branches
-                       (project_id, task_id, repo_name, branch_name,
-                        base_branch, status, created_by)
-                   VALUES (?, ?, ?, ?, ?, 'active', ?)""",
-                (project_id, task_id, repo_name, branch_name, base_branch, created_by),
-            )
-            conn.commit()
-
-        execute_with_retry(_insert)
-
-        # Update task record
-        set_task_branch(task_id, branch_name)
-
-        logger.info(
-            "Created branch '%s' for task %d in repo '%s'",
-            branch_name, task_id, repo_name,
-        )
-        return branch_name
+        retired_git_effect("task branch creation")
 
     def list_branches(
         self,

@@ -36,7 +36,10 @@
         "docs/modernization/native-mcp-packaging.json",
         "docs/architecture/native-startup.md",
         "docs/modernization/native-startup-results.json",
-        "docs/modernization/native-startup-packaging.json"
+        "docs/modernization/native-startup-packaging.json",
+        "docs/architecture/native-git-retirement.md",
+        "docs/modernization/native-git-results.json",
+        "docs/modernization/native-git-packaging.json"
       ]
     },
     "C02": {
@@ -602,7 +605,10 @@
         "docs/modernization/native-mcp-packaging.json",
         "docs/architecture/native-startup.md",
         "docs/modernization/native-startup-results.json",
-        "docs/modernization/native-startup-packaging.json"
+        "docs/modernization/native-startup-packaging.json",
+        "docs/architecture/native-git-retirement.md",
+        "docs/modernization/native-git-results.json",
+        "docs/modernization/native-git-packaging.json"
       ]
     },
     "E06": {
@@ -871,7 +877,10 @@
         "docs/modernization/native-mcp-packaging.json",
         "docs/architecture/native-startup.md",
         "docs/modernization/native-startup-results.json",
-        "docs/modernization/native-startup-packaging.json"
+        "docs/modernization/native-startup-packaging.json",
+        "docs/architecture/native-git-retirement.md",
+        "docs/modernization/native-git-results.json",
+        "docs/modernization/native-git-packaging.json"
       ]
     },
     "E12": {

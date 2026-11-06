@@ -1,0 +1,50 @@
+{
+  "base_commit": "05b1628",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "3e99ee05dae7c0cb4e9aacf8b273b672883dd6eb321fa2c8e045f1e88c95e7ba",
+  "observed": {
+    "passed": 85,
+    "failures": 0,
+    "skipped": 0,
+    "installed_distributions": 85,
+    "sdk": "1.30.0",
+    "excluded_frameworks": [
+      "chromadb",
+      "crewai",
+      "crewai-tools",
+      "fastmcp",
+      "fastmcp-slim",
+      "litellm",
+      "ollama",
+      "tree-sitter",
+      "tree-sitter-c",
+      "tree-sitter-javascript",
+      "tree-sitter-python",
+      "tree-sitter-rust",
+      "tree-sitter-typescript"
+    ],
+    "project_noneditable": true,
+    "backend_modules": 207,
+    "all_backend_imports_from_native_env": true,
+    "matched_application_members": 796,
+    "console_help": 0,
+    "console_missing_token": 2,
+    "console_real_stdio": true,
+    "console_created_database": false,
+    "real_model_turns": 0,
+    "seconds": 26.039
+  },
+  "tests": [
+    "backend/tests/runtime/test_native_git_retirement.py",
+    "backend/tests/runtime/test_legacy_code_publication.py",
+    "backend/tests/runtime/test_code_publications.py",
+    "backend/tests/runtime/test_publication_git.py",
+    "backend/tests/runtime/test_remote_publication.py",
+    "backend/tests/runtime/test_remote_destinations.py",
+    "backend/tests/runtime/test_publication_recovery.py",
+    "backend/tests/runtime/test_file_imports.py",
+    "backend/tests/runtime/test_code_carryover.py"
+  ],
+  "bootstrap": "Existing clean native-only env; final noneditable wheel reinstalled offline without dependency changes. Python-I outside checkout; no inherited source or old site-packages. Explicit prepared local semantic assets.",
+  "limits": "Real Git fixtures, retired entry guards, actual owner API/history scope, existing native candidate/acceptance/publication/remote/recovery and file-data contracts; installed MCP stdio rejection. No new full physical author/reviewer/publication turn, real model/Ken ranking, host provisioning, global suite or restore claim."
+}

@@ -90,11 +90,12 @@ async def test_native_pr_is_blocked_before_remote_merge(
     remote.assert_not_called()
 
 
-async def test_unrelated_legacy_repository_keeps_its_existing_merge_path(
+async def test_another_repository_does_not_restore_retired_legacy_merge(
     legacy_publication, tmp_path
 ):
-    """A native admission in a different physical source does not remove remaining legacy functionality."""
+    """All project publication now requires native owner policy; admission in another source does not revive an old PR approval."""
     from backend.git.pr_service import PRService
+    from backend.runtime.contracts import RunConflict
     from backend.runtime.workspaces import WorkspaceRegistry
 
     s = legacy_publication
@@ -107,9 +108,10 @@ async def test_unrelated_legacy_repository_keeps_its_existing_merge_path(
     s.c.conn.commit()
     binding = WorkspaceRegistry(s.c.database, s.root).bind(101, 12)
     s.c.store.admit(replace(s.c.spec, task_id=1002), binding=binding)
-    assert PRService().merge_pr(71, str(s.workspace)) is True
-    assert (s.workspace / "value.txt").read_text() == "999\n"
+    with pytest.raises(RunConflict, match="Native-owned"):
+        PRService().merge_pr(71, str(s.workspace))
+    assert (s.workspace / "value.txt").read_text() == "137\n"
     assert (
         s.c.conn.execute("SELECT status FROM code_reviews WHERE id=71").fetchone()[0]
-        == "merged"
+        == "approved"
     )
