@@ -82,7 +82,8 @@ async def test_pr_owner_entry_correlates_real_project_repository_and_task_withou
     assert entry['acceptance'] == entry['publication'] == 'not_conferred_by_history'
     assert [item['source_id'] for item in entry['recorded_worktrees']] == ['7']
     assert entry['recorded_worktrees'][0]['availability'] == 'not_inspected'
-    assert entry['branch_snapshot_import'] == 'pending'
+    assert entry['branch_snapshot_import'] == 'requires_owned_preparation'
+    assert entry['branch_id'] is not None
     assert entry['original_context'] == 'unknown'
     assert s.c.conn.execute('SELECT COUNT(*) FROM runtime_runs').fetchone()[0] == 0
 

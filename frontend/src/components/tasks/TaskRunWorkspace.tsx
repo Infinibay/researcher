@@ -8,6 +8,7 @@ import { useAnswer, useCorrection, useInstruction, useRecovery, useStartRetry, u
 import { MarkdownRenderer } from '../common/MarkdownRenderer'
 import { FileImportInput } from './FileImportInput'
 import { PriorCodeInput } from './PriorCodeInput'
+import { BranchImportInput } from './BranchImportInput'
 import { TaskInputHistory } from './TaskInputHistory'
 import { RunInputRecord } from './RunInputRecord'
 import { RunCommands } from './RunCommands'
@@ -214,6 +215,7 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
     </section>}
     {(data.runtime.development_task_types ?? []).includes(data.context.task.type)&&<PriorCodeInput key={`prior:${projectId}:${taskId}`} projectId={projectId} taskId={taskId} runs={data.runs} selected={priorCode} locked={intent.current!=null||send.isPending} onSelect={setPriorCode}/>}
     {(data.runtime.development_task_types ?? []).includes(data.context.task.type)&&<FileImportInput key={`files:${projectId}:${taskId}`} projectId={projectId} taskId={taskId} selected={priorCode} locked={intent.current!=null||send.isPending} configured={data.runtime.configured} onSelect={setPriorCode}/>}
+    {(data.runtime.development_task_types ?? []).includes(data.context.task.type)&&<BranchImportInput key={`branch:${projectId}:${taskId}`} projectId={projectId} taskId={taskId} selected={priorCode} locked={intent.current!=null||send.isPending} configured={data.runtime.configured} onSelect={setPriorCode}/>}
     <form className="space-y-2" onSubmit={event => { event.preventDefault(); submit() }}>
       <label className="block text-[var(--work-ink)]" htmlFor={`request-${taskId}`}>Solicitud para esta tarea</label>
       <textarea id={`request-${taskId}`} className={inputClass} rows={3} value={message} maxLength={50000} readOnly={intent.current != null} onChange={event => setMessage(event.target.value)} placeholder="Explica qué quieres comprobar y qué resultado necesitas. Puedes incluir un ejemplo." />

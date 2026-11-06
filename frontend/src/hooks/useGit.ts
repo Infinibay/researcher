@@ -84,7 +84,8 @@ export interface PROwnerEntry {
   task_type_accepts_code_input: boolean
   native_admission_run_id: string | null
   recorded_worktrees: { source_id: string; label: string; availability: string }[]
-  branch_snapshot_import: 'pending'
+  branch_id: number | null
+  branch_snapshot_import: 'requires_owned_preparation' | 'requires_branch_record'
 }
 
 /** Read only the selected PR's scoped bridge; reading never starts inference or retries an owner effect. */

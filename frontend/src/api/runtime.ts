@@ -232,7 +232,13 @@ export function sendAnswer(intent: AnswerIntent) {
 export interface PriorCodeSelection {attempt_id:string;snapshot_sha256:string}
 /** Owner-chosen paths in a recorded origin, without an asserted native author or Git base. */
 export interface PriorFilesSelection {source_kind:'legacy_worktree'|'private_copy';source_id:string;paths:readonly string[];snapshot_sha256:string}
-export type PriorMaterialSelection = PriorCodeSelection | PriorFilesSelection
+/** Full owner-chosen commit in a recorded branch; this selection is not an observation of captured bytes. */
+export interface PriorBranchSelection {source_kind:'legacy_branch';branch_id:number;commit_sha:string}
+export type PriorMaterialSelection = PriorCodeSelection | PriorFilesSelection | PriorBranchSelection
+/** Historical labels are read-only suggestions; availability and original context remain unverified. */
+export interface BranchInputSource {source_kind:'legacy_branch';branch_id:number;repository_id:number;branch:string;recorded_commit_sha:string|null;recorded_task_id:number|null;recorded_status:string;availability:'not_inspected'}
+/** List actual branch records inside the selected project, without invoking Git or starting a model. */
+export function branchInputSources(projectId:number,taskId:number) {return fetchApi<BranchInputSource[]>(`/api/projects/${projectId}/tasks/${taskId}/prior-branches`)}
 export interface FileImportSource {source_kind:'legacy_worktree'|'private_copy';source_id:string;repository_id:number;label:string;recorded_status:string;task_relation:string}
 export interface ImportedFile {path:string;kind:'file'|'symlink'|'missing';content_base64?:string;target_base64?:string;git_mode?:string;bytes?:number;sha256?:string}
 export interface FileImportPacket {snapshot_sha256:string;snapshot:{origin:{kind:string;recorded_agent_label?:string;recorded_context_version?:number};source:{repository_id:number};original_input:Record<string,unknown>|null;original_input_status:'unknown'|'recorded';selection_scope:'selected_paths_only';files:ImportedFile[]};authority:'data_only';acceptance:'not_granted'}
@@ -282,7 +288,7 @@ export function prepareInstruction(projectId: number, draft: InstructionDraft): 
     || !/^[A-Za-z0-9_.:-]{1,128}$/.test(draft.thread_id)
     || !draft.message.trim() || draft.message.length > 50000
     || (draft.repository_id != null && (!Number.isSafeInteger(draft.repository_id) || draft.repository_id <= 0))
-    || (draft.prior_code != null && (!/^[0-9a-f]{64}$/.test(draft.prior_code.snapshot_sha256)||('attempt_id' in draft.prior_code&&(!draft.prior_code.attempt_id.trim()||draft.prior_code.attempt_id.length>128))))) {
+    || (draft.prior_code != null && ('commit_sha' in draft.prior_code ? draft.prior_code.source_kind!=='legacy_branch'||!Number.isSafeInteger(draft.prior_code.branch_id)||draft.prior_code.branch_id<=0||!/^(?:[0-9a-f]{40}|[0-9a-f]{64})$/.test(draft.prior_code.commit_sha) : !/^[0-9a-f]{64}$/.test(draft.prior_code.snapshot_sha256)||('attempt_id' in draft.prior_code&&(!draft.prior_code.attempt_id.trim()||draft.prior_code.attempt_id.length>128))))) {
     throw new Error('Revisa la tarea, el contexto y el contenido de la solicitud.')
   }
   if(draft.prior_code&&'paths' in draft.prior_code)checkFileSelection(draft.prior_code)

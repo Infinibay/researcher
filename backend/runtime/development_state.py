@@ -136,8 +136,8 @@ class DevelopmentWorkspaces:
             )
             return self._row(conn, lease.project_id, lease.attempt_id), True
 
-    def complete(self, lease, prepared):
-        """Persist a closed preparation result only for the live owner and exact planned private child."""
+    def complete(self, lease, prepared, prior_branch=None):
+        """Atomically persist the exact ready copy and any acquired branch data under the live original owner; pending selection is never usable model input."""
         if not isinstance(prepared, PreparedDevelopmentWorkspace):
             raise TypeError("A prepared development workspace is required")
         with self.runs._transaction(write=True) as conn:
@@ -158,6 +158,9 @@ class DevelopmentWorkspaces:
                 raise RunConflict(
                     "Prepared copy differs from its original allocation or base"
                 )
+            from backend.runtime.branch_inputs import BranchInputs
+
+            BranchInputs(self.runs).save(conn, lease, prepared, prior_branch)
             values = {
                 name: getattr(prepared, name)
                 for name in (
@@ -281,7 +284,11 @@ class DevelopmentWorkspaces:
             prepared = await prepare_workspace(
                 source, planned["allocation"], executor=executor
             )
-            await settled(self.complete, lease, prepared)
+            from backend.runtime.branch_inputs import BranchInputs, capture_branch
+
+            selected = await settled(BranchInputs(self.runs).requested, lease)
+            packet = await capture_branch(source, prepared, selected, executor=executor) if selected is not None else None
+            await settled(self.complete, lease, prepared, packet)
             return await settled(self.view, lease.project_id, lease.attempt_id)
         except BaseException as exc:
             # Record a classification, never raw Git output, credentials or host paths.

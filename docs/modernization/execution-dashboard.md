@@ -9,7 +9,36 @@ Actualizado: 2026-11-06. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: retirar efectos Git competidores y conservar historia
+## Etapa actual: material exacto de ramas y publicación nativa del resultado nuevo
+
+**Resultado:** Tareas/Conversación aceptan rama registrada + commit completo como
+datos para un autor nuevo. La preparación Git propia captura diff binario completo,
+base/árbol/hash antes de congelar la entrada. Rama movida/faltante, salida parcial,
+cierre no probado, contexto cambiado, metadata reservada o exceso de límites
+impiden el modelo. Recibo de captura y copia preparada quedan juntos; no nueva
+tabla/controller ni cambio del recibo de admisión. La UI explica selección frente
+a adquisición y aprobación antigua frente a aceptación actual.
+
+**Verificación:**92casos fuente pasan. Final wheel no editable/sin frameworks
+antiguos:93PASS0FAIL0SKIP151.763s,248imports backend sólo del entorno instalado y
+798miembros coincidentes. Cadena real kernel/broker/Git/SQLite: rama anterior999,
+entrada congelada exacta, autor nuevo adapta200, comprobación, revisor distinto,
+aceptación y publicación local del candidato nuevo. Fuente137/ramavieja999
+conservadas, refnueva200; repetición devuelve recibo sin otra inferencia. Dos turnos
+nativos controlados + una publicación host en este ensayo;0modelos reales/Ken
+controlado.99tests frontend y TypeScript/build pasan, sin aceptación visual.
+57definiciones documentadas;11avisos de imports diferidos DD027,8heredados.
+[Resultados](prior-branch-results.json), [paquete](prior-branch-packaging.json),
+[contrato](../architecture/prior-branch-input.md).
+
+**Siguiente principal:** material de predecesoras para sucesoras del grafo y cierre
+integral/informe del proyecto, manteniendo controles de aceptación. La selección
+explícita de una rama registrada ya funciona; descubrir/admitir metadata no
+registrada, lectores Git/consumidores antiguos restantes, settings/visuales/prompts/
+evaluaciones/global/restore/revisión final y resto íntegro del plan siguen abiertos.
+No volver a pulir recibos/guards/imports por detalles de estilo.
+
+## Etapa anterior: retirar efectos Git competidores y conservar historia
 
 **Resultado:** merge/creación de ramas y cleanup local/remoto/stale/periódico
 antiguos rechazan antes de Git/red/estado/eventos, incluso sin tarea ni admisión

@@ -967,8 +967,9 @@ class SQLiteRunStore:
         if prior_code is not None:
             from backend.runtime.code_carryover import PriorCodeTarget
             from backend.runtime.file_imports import PriorFilesTarget
+            from backend.runtime.branch_inputs import PriorBranchTarget
 
-            if review is not None or not isinstance(prior_code, (PriorCodeTarget, PriorFilesTarget)):
+            if review is not None or not isinstance(prior_code, (PriorCodeTarget, PriorFilesTarget, PriorBranchTarget)):
                 raise ValueError("Prior code requires a typed author input selection")
             intent["prior_code"] = asdict(prior_code)
         return intent

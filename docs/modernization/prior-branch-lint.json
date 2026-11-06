@@ -1,0 +1,104 @@
+{
+  "base_commit": "8e23a5d",
+  "python_files": 13,
+  "new": [
+    [
+      "backend/api/models/chat.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/api/routes/runs.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/runtime/branch_inputs.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/runtime/branch_inputs.py",
+      "F401",
+      "`json` imported but unused"
+    ],
+    [
+      "backend/runtime/code_carryover.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/runtime/sqlite_runs.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/tests/runtime/test_prior_branch_input.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/tests/runtime/test_prior_branch_input.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/tests/runtime/test_prior_branch_input.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/tests/runtime/test_prior_branch_input.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/tests/runtime/test_prior_branch_input.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ]
+  ],
+  "inherited": [
+    [
+      "backend/tests/runtime/test_native_git_retirement.py",
+      "F811",
+      "Redefinition of unused `legacy_publication` from line 8: `legacy_publication` redefined here"
+    ],
+    [
+      "backend/tests/runtime/test_native_git_retirement.py",
+      "F811",
+      "Redefinition of unused `legacy_publication` from line 8: `legacy_publication` redefined here"
+    ],
+    [
+      "backend/tests/runtime/test_native_git_retirement.py",
+      "F811",
+      "Redefinition of unused `legacy_publication` from line 8: `legacy_publication` redefined here"
+    ],
+    [
+      "backend/tests/runtime/test_native_git_retirement.py",
+      "F811",
+      "Redefinition of unused `legacy_publication` from line 8: `legacy_publication` redefined here"
+    ],
+    [
+      "backend/tests/runtime/test_native_git_retirement.py",
+      "F811",
+      "Redefinition of unused `legacy_publication` from line 8: `legacy_publication` redefined here"
+    ],
+    [
+      "backend/tests/runtime/test_native_git_retirement.py",
+      "F811",
+      "Redefinition of unused `legacy_publication` from line 8: `legacy_publication` redefined here"
+    ],
+    [
+      "backend/tests/runtime/test_native_git_retirement.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/tests/runtime/test_public_development.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ]
+  ],
+  "resolved": []
+}

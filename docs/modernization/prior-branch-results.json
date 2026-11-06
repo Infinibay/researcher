@@ -1,0 +1,40 @@
+{
+  "base_commit": "8e23a5d",
+  "status": "registered_branch_input_and_native_local_publication_verified",
+  "red": {
+    "core": "7FAIL0.94s missing branch input module; source fixture context version and allocation-parent setup corrected after first implementation.",
+    "http_contract": "1FAIL7PASS1.33s strict Tasks/Conversation rejected branch selection before shared DTO added. Initial test insertion syntax corrected before valid RED.",
+    "frontend": "2FAIL original instruction validator rejected branch and listing function absent."
+  },
+  "source": {
+    "passed": 92,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 33.47
+  },
+  "isolated_installed": {
+    "passed": 93,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 151.763,
+    "receipt": "docs/modernization/prior-branch-packaging.json"
+  },
+  "physical_scope": "Actual kernel/broker/Git/SQLite original owned branch acquisition, exact frozen input, fresh controlled author consumes actual diff999and adapts200, host check, distinct reviewer, explicit owner acceptance, native local publication and idempotent replay; original137/oldbranch999 preserved. Publication adds no inference dispatch.",
+  "verification_rework": "First source physical trial116.95s reached and verified publication/replay, then last test acceptance-count assertion incorrectly used an already-closed SQLite connection. Moved assertion back into its original transaction; no product correction. Final wheel runs entire chain and completes93tests. Did not repeat source physical trial solely for fixture fix.",
+  "frontend": {
+    "passed": 99,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 1.712,
+    "typescript_build": true,
+    "browser_visual_acceptance": false
+  },
+  "quality": {
+    "definitions_documented": 57,
+    "missing_docs": 0,
+    "new_lint": 11,
+    "inherited_lint": 8,
+    "deferred": "DD-027"
+  },
+  "limits": "Recorded branch/repository only; stored last_commit_hash is historical, full owner choice verified by owned acquisition. No automatic unrecorded-branch discovery/registration or graph successor selection. Controlled generation/Ken,0real model calls; not ranking/model-quality/remote server/global suite/fullUI/host provisioning/restore proof. No new table/schema/controller or mutation of original admission receipt."
+}

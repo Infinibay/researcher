@@ -373,3 +373,14 @@ La importación exacta de ramas sin copia de archivos, la cadena retenida comple
 selección automática de material para sucesoras y otros consumidores Git de
 lectura siguen siendo obligaciones principales. No están resueltas por rechazar
 la ruta antigua. Anotaciones de metadata/comentarios no dan autoridad nativa.
+
+## Material exacto de ramas posterior a8e23a5d
+
+La selección de una rama registrada y commit completo ya se transforma en datos
+exactos durante la preparación Git propia del intento nuevo, antes de congelar
+su entrada. No requiere worktree anterior, otro controller ni nueva tabla;
+no cambia la aceptación ni importa la autoridad del PR viejo. Tasks/Conversación
+comparten el contrato y la UI distingue selección histórica de bytes capturados.
+[Contrato y límites](prior-branch-input.md). La selección de material para
+sucesoras del grafo, metadata de ramas no registradas, otros consumidores antiguos
+y cierre integral/revisión final siguen dentro del alcance pendiente.

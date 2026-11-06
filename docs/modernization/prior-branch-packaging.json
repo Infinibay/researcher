@@ -1,0 +1,52 @@
+{
+  "base_commit": "8e23a5d",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "9cc8947abea16ee42020a743bcabf4b8dba53717d7e79595e1ebf0f1c010388d",
+  "observed": {
+    "passed": 93,
+    "failures": 0,
+    "skipped": 0,
+    "installed_distributions": 85,
+    "sdk": "1.30.0",
+    "excluded_frameworks": [
+      "chromadb",
+      "crewai",
+      "crewai-tools",
+      "fastmcp",
+      "fastmcp-slim",
+      "litellm",
+      "ollama",
+      "tree-sitter",
+      "tree-sitter-c",
+      "tree-sitter-javascript",
+      "tree-sitter-python",
+      "tree-sitter-rust",
+      "tree-sitter-typescript"
+    ],
+    "project_noneditable": true,
+    "backend_modules": 248,
+    "all_backend_imports_from_native_env": true,
+    "matched_application_members": 798,
+    "console_help": 0,
+    "console_missing_token": 2,
+    "console_real_stdio": true,
+    "console_created_database": false,
+    "real_model_turns": 0,
+    "controlled_native_turns": 2,
+    "actual_host_publications": 1,
+    "seconds": 151.763
+  },
+  "tests": [
+    "backend/tests/runtime/test_prior_branch_input.py",
+    "backend/tests/runtime/test_development_state.py",
+    "backend/tests/runtime/test_code_carryover.py",
+    "backend/tests/runtime/test_file_imports.py",
+    "backend/tests/runtime/test_run_input.py",
+    "backend/tests/runtime/test_admission_binding.py",
+    "backend/tests/runtime/test_native_git_retirement.py",
+    "backend/tests/runtime/test_code_publications.py",
+    "backend/tests/runtime/test_public_development.py::test_owner_http_develops_checks_reviews_and_accepts_exact_candidate[legacy-branch]"
+  ],
+  "bootstrap": "Existing clean native-only env; final noneditable wheel reinstalled offline without dependency changes. Python-I outside checkout; no inherited source or old site-packages. Explicit prepared local semantic assets.",
+  "limits": "Actual owned branch acquisition + frozen input + fresh controlled author + independent host check + distinct native reviewer + owner acceptance + native local publication and idempotent replay. Actual kernel/broker/Git/SQLite; source137/oldbranch999 retained/newpublished200. Native-only installed contract consumers and console stdio. Controlled generation/Ken,0real models; not real ranking/model quality, remote server integration, global suite, host provisioning or restore."
+}

@@ -15,8 +15,8 @@ from backend.tests.runtime.test_owned_factory import (
 @pytest.mark.timeout(420)
 @pytest.mark.parametrize(
     "task_type,reuse_prior",
-    [("code", False), ("code", True), ("code", "legacy_files"), ("optimization", False)],
-    ids=["fresh", "carryover", "legacy-files", "optimization"],
+    [("code", False), ("code", True), ("code", "legacy_files"), ("optimization", False), ('code', 'legacy_branch')],
+    ids=["fresh", "carryover", "legacy-files", "optimization", 'legacy-branch'],
 )
 async def test_owner_http_develops_checks_reviews_and_accepts_exact_candidate(
     development_config,
@@ -45,6 +45,16 @@ async def test_owner_http_develops_checks_reviews_and_accepts_exact_candidate(
         "base",
     )
     legacy_root = None
+    branch_head = None
+    if reuse_prior == 'legacy_branch':
+        original_branch = (await fixture_git(c.s.workspace, 'branch', '--show-current')).decode().strip()
+        await fixture_git(c.s.workspace, 'checkout', '-qb', 'retained-old-code')
+        (c.s.workspace / 'fact.txt').write_text('999')
+        await fixture_git(c.s.workspace, '-c', 'user.name=Fixture', '-c', 'user.email=fixture@localhost', 'commit', '-qam', 'historical branch data')
+        branch_head = (await fixture_git(c.s.workspace, 'rev-parse', 'HEAD')).decode().strip()
+        await fixture_git(c.s.workspace, 'checkout', '-q', original_branch)
+        c.s.c.conn.execute("INSERT INTO branches(id,project_id,task_id,repo_name,branch_name,status,created_by,last_commit_hash) VALUES(71,101,1001,'alpha','retained-old-code','active','historic-label',?)", (branch_head,))
+        c.s.c.conn.commit()
     if reuse_prior == "legacy_files":
         legacy_root = c.s.workspace / ".worktrees" / "old-developer"
         await fixture_git(
@@ -87,6 +97,11 @@ async def test_owner_http_develops_checks_reviews_and_accepts_exact_candidate(
             "repository_id": 11,
         }
         path = "/api/projects/101/tasks/1001/runs"
+        if reuse_prior == 'legacy_branch':
+            listed = await owner.get('/api/projects/101/tasks/1001/prior-branches')
+            assert listed.status_code == 200 and listed.json()[0]['branch_id'] == 71
+            body['request'] = 'Adapt selected older branch from999to current137 to200 requirements. Explain retained input, fresh checks and no inherited approval.'
+            body['prior_code'] = {'source_kind': 'legacy_branch', 'branch_id': 71, 'commit_sha': branch_head}
         if reuse_prior == "legacy_files":
             preview = await owner.post(
                 "/api/projects/101/tasks/1001/prior-files/preview",
@@ -170,6 +185,18 @@ async def test_owner_http_develops_checks_reviews_and_accepts_exact_candidate(
         assert check["spec"]["argv"] == recipe["argv"]
         assert check["result"]["status"] == "passed"
         record = runtime.store.input_record(101, run["run_id"])
+        if reuse_prior == 'legacy_branch':
+            import base64
+
+            saved = json.loads(record['input_text'])
+            packet = saved['prior_code']
+            assert packet['snapshot']['acquisition']=='captured'
+            assert packet['snapshot']['candidate']['head_sha']==branch_head
+            assert packet['snapshot']['original_input'] is None
+            assert b'+999' in base64.b64decode(packet['snapshot']['diff_base64'])
+            assert packet['authority']=='data_only' and packet['acceptance']=='not_granted'
+            with runtime.store._transaction() as conn:
+                assert any(b'selected old branch adapted' in bytes(row[0]) for row in conn.execute('SELECT stdout FROM runtime_jobs WHERE run_id=?', (run['run_id'],)))
         if reuse_prior == "legacy_files":
             saved = json.loads(record["input_text"])
             assert saved["prior_code"]["snapshot"]["original_input"] is None
@@ -264,12 +291,34 @@ async def test_owner_http_develops_checks_reviews_and_accepts_exact_candidate(
                 ).fetchone()[0]
                 == 1
             )
-            assert (
-                conn.execute(
-                    "SELECT COUNT(*) FROM runtime_code_acceptances"
-                ).fetchone()[0]
-                == 1
-            )
+            assert conn.execute('SELECT COUNT(*) FROM runtime_code_acceptances').fetchone()[0] == 1
+
+        if reuse_prior == 'legacy_branch':
+            publish_body = {
+                'operation_key': 'publish-reused-branch',
+                'acceptance_operation_key': 'public-owner-acceptance',
+                'author_attempt_id': state['candidate']['attempt_id'],
+                'context_version': version,
+                'subject_sha256': state['subject_sha256'],
+                'review_sha256': state['review_sha256'],
+                'target_ref': 'refs/heads/reused-reviewed-code', 'expected_target_sha': None,
+            }
+            with runtime.store._transaction() as conn:
+                dispatches = conn.execute('SELECT COUNT(*) FROM runtime_inference_dispatches').fetchone()[0]
+            published = await owner.post(f"/api/projects/101/runs/{run['run_id']}/code-publications", json=publish_body)
+            assert published.status_code == 202, published.text
+            publication_run = published.json()['run']['run_id']
+            await runtime.wait(publication_run)
+            result = await owner.get(f'/api/projects/101/code-publications/{publication_run}')
+            assert result.status_code == 200, result.text
+            assert result.json()['result']['publication_performed'], result.json()
+            assert (await fixture_git(c.s.workspace, 'show', 'refs/heads/reused-reviewed-code:fact.txt')) == b'200'
+            assert (await fixture_git(c.s.workspace, 'show', 'refs/heads/retained-old-code:fact.txt')) == b'999'
+            assert (c.s.workspace / 'fact.txt').read_text() == '137'
+            replayed = await owner.post(f"/api/projects/101/runs/{run['run_id']}/code-publications", json=publish_body)
+            assert replayed.status_code == 202 and replayed.json()['run']['run_id'] == publication_run
+            with runtime.store._transaction() as conn:
+                assert conn.execute('SELECT COUNT(*) FROM runtime_inference_dispatches').fetchone()[0] == dispatches
 
 
 @pytest.mark.parametrize(

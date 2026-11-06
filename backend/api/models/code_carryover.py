@@ -54,3 +54,18 @@ class PriorFilesSelection(FileImportSource):
         return PriorFilesTarget(
             self.source_kind, self.source_id, tuple(self.paths), self.snapshot_sha256
         )
+
+
+class PriorBranchSelection(BaseModel):
+    """Explicit historical branch record and complete immutable commit; its bytes are acquired by original owned preparation before inference."""
+
+    model_config = ConfigDict(extra='forbid', strict=True)
+    source_kind: Literal['legacy_branch']
+    branch_id: int = Field(gt=0)
+    commit_sha: str = Field(pattern=r'^(?:[0-9a-f]{40}|[0-9a-f]{64})$')
+
+    def target(self):
+        """Translate the owner choice without claiming a live ref observation, captured bytes or inherited approval."""
+        from backend.runtime.branch_inputs import PriorBranchTarget
+
+        return PriorBranchTarget(self.branch_id, self.commit_sha)

@@ -101,6 +101,13 @@ operations. See [the MCP migration](docs/architecture/native-mcp-entry.md) for
 the outcome mapping and verification limits. Remaining Git/startup consumers
 and legacy tests still need migration.
 
+Tasks can reuse selected older files, an exact prior native candidate, or a
+registered historical branch plus its full commit SHA as data for a fresh author.
+Branch changes are captured by the existing owned preparation before the model
+turn; a moving name or historical `approved` label cannot grant acceptance.
+Checks, distinct review and owner acceptance/publication run again. See
+[exact branch input](docs/architecture/prior-branch-input.md) for scope and limits.
+
 Set `INFINIBAY_DB` to select a database explicitly. Without an override, an
 existing recognized database is reused; multiple databases require a choice.
 A new workspace defaults to `.data/infinibay.db`. Serving requires an initialized database; CLI/TUI connect to that serving

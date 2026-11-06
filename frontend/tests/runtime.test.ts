@@ -1,6 +1,29 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 
+test('exact historical branch selection stays immutable after editing and a lost response', async()=>{
+ const {prepareInstruction,sendInstruction}=await import('../src/api/runtime.ts')
+ const selected={source_kind:'legacy_branch' as const,branch_id:71,commit_sha:'a'.repeat(40)}
+ const intent=prepareInstruction(101,{task_id:1001,context_version:3,thread_id:'branch',message:'Adapt the earlier commit under current requirements.',repository_id:11,prior_code:selected})
+ selected.commit_sha='b'.repeat(40)
+ const original=globalThis.fetch;const sent:any[]=[]
+ try{globalThis.fetch=async(_url,options)=>{sent.push(JSON.parse(String(options?.body)));if(sent.length===1)throw new TypeError('Lost receipt');return Response.json({})}
+  await assert.rejects(sendInstruction(intent));await sendInstruction(intent)
+  assert.deepEqual(sent[0],sent[1]);assert.equal(sent[1].prior_code.commit_sha,'a'.repeat(40))
+  assert.equal(Object.isFrozen(intent.body.prior_code),true)
+  assert.throws(()=>prepareInstruction(101,{task_id:1001,context_version:3,thread_id:'branch',message:'Adapt',prior_code:{source_kind:'legacy_branch',branch_id:71,commit_sha:'main'}}))
+ }finally{globalThis.fetch=original}
+})
+
+test('historical branch listing is a scoped read and never asks the model to select repository paths',async()=>{
+ const {branchInputSources}=await import('../src/api/runtime.ts')
+ const original=globalThis.fetch;const sent:any[]=[]
+ try{globalThis.fetch=async(url,options)=>{sent.push({url:String(url),method:options?.method??'GET'});return Response.json([])}
+  await branchInputSources(101,1001)
+  assert.deepEqual(sent,[{url:'/api/projects/101/tasks/1001/prior-branches',method:'GET'}])
+ }finally{globalThis.fetch=original}
+})
+
 test('selected old file paths stay bound to the original instruction after edits and an uncertain response',async()=>{
  const {prepareInstruction,sendInstruction}=await import('../src/api/runtime.ts')
  const paths=['fact.txt'];const target={source_kind:'legacy_worktree' as const,source_id:'7',paths,snapshot_sha256:'a'.repeat(64)}

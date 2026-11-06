@@ -26,6 +26,7 @@ plan_material = None
 review_mode = False
 development_mode = False
 prior_code_patch = None
+prior_selected_branch = False
 prior_selected_files = None
 code_prior_files = False
 review_subject = None
@@ -282,6 +283,7 @@ def development_edit_code():
         + "patch=base64.b64decode(" + repr(prior_code_patch) + ",validate=True)\n"
         + "subprocess.run(['/usr/bin/git','apply','--check','--binary','-'],input=patch,check=True)\n"
         + "subprocess.run(['/usr/bin/git','apply','--binary','-'],input=patch,check=True)\n"
+        + ("p=Path('fact.txt');assert p.read_text()=='999';p.write_text('200');print('selected old branch adapted')\n" if prior_selected_branch else "")
         + "print('prior patch applied');print(Path('fact.txt').read_text())"
     )
 
@@ -405,6 +407,12 @@ def next_code_review_tool(response=None):
                 assert earlier["original_input_status"] == "unknown"
                 assert earlier["origin"]["task_relation"] == "selected_by_owner_not_historically_verified"
                 code_prior_files = True
+            elif actual_input.get("prior_code") and actual_input['prior_code']['snapshot']['origin']['kind']=='selected_legacy_branch':
+                assert 'Adapt selected older branch' in actual_input['request']
+                earlier = actual_input['prior_code']['snapshot']
+                assert earlier['acquisition']=='captured' and earlier['original_input'] is None
+                assert 'fact.txt' in earlier['changed_paths']
+                assert earlier['candidate']['head_sha']==earlier['selection']['selected_commit_sha']
             elif actual_input.get("prior_code"):
                 assert "Reuse the exact earlier patch" in actual_input["request"]
                 earlier = actual_input["prior_code"]["snapshot"]
@@ -951,6 +959,11 @@ for line in sys.stdin:
                 if "files" in prior["snapshot"]:
                     assert prior["snapshot"]["origin"]["kind"] in ("selected_legacy_worktree_files", "selected_private_copy_files")
                     prior_selected_files = prior["snapshot"]["files"]
+                elif prior['snapshot']['origin']['kind']=='selected_legacy_branch':
+                    assert prior['snapshot']['acquisition']=='captured'
+                    assert prior['snapshot']['original_input'] is None
+                    prior_selected_branch = True
+                    prior_code_patch = prior['snapshot']['diff_base64']
                 else:
                     assert prior["snapshot"]["origin"]["attempt_id"] != initial["scope"]["attempt_id"]
                     prior_code_patch = prior["snapshot"]["diff_base64"]

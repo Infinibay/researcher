@@ -6,7 +6,7 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
-from backend.api.models.code_carryover import PriorCodeSelection, PriorFilesSelection
+from backend.api.models.code_carryover import PriorBranchSelection, PriorCodeSelection, PriorFilesSelection
 
 
 class ChatMessageCreate(BaseModel):
@@ -62,7 +62,7 @@ class NativeInstruction(BaseModel):
     thread_id: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
     message: str = Field(min_length=1, max_length=50000)
     repository_id: int | None = Field(None, gt=0)
-    prior_code: PriorCodeSelection | PriorFilesSelection | None = None
+    prior_code: PriorCodeSelection | PriorFilesSelection | PriorBranchSelection | None = None
 
 
 class ChatThreadResponse(BaseModel):

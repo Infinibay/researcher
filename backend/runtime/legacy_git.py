@@ -30,6 +30,10 @@ def pr_owner_entry(conn, pr_id: int) -> dict:
     repo = conn.execute(
         "SELECT id FROM repositories WHERE project_id=? AND name=?", (pr['project_id'], pr['repo_name'])
     ).fetchone()
+    branch = conn.execute(
+        'SELECT id FROM branches WHERE project_id=? AND repo_name=? AND branch_name=?',
+        (pr['project_id'], pr['repo_name'], pr['branch']),
+    ).fetchone() if repo is not None else None
     worktrees = []
     if repo is not None:
         worktrees = [
@@ -53,8 +57,9 @@ def pr_owner_entry(conn, pr_id: int) -> dict:
         'recorded_repository_name': pr['repo_name'], 'recorded_branch': pr['branch'],
         'historical_status': pr['status'],
         'native_admission_run_id': owner['native_admission_run_id'] if owner else None,
-        'recorded_worktrees': worktrees, 'branch_snapshot_import': 'pending',
+        'recorded_worktrees': worktrees, 'branch_id': branch['id'] if branch is not None else None,
+        'branch_snapshot_import': 'requires_owned_preparation' if branch is not None else 'requires_branch_record',
         'original_context': 'unknown', 'acceptance': 'not_conferred_by_history',
         'publication': 'not_conferred_by_history', 'inference_started': False,
-        'explanation': 'This is historical PR metadata. Recorded worktrees can be explicitly inspected and selected as file data for fresh native development; availability and original author/context are not verified here. A branch with no retained files still needs the pending exact branch-material import. Old approval/merged labels confer no native acceptance or publication authority.',
+        'explanation': 'This is historical PR metadata. Recorded worktrees can be inspected as selected file data; a recorded branch can be selected with a full immutable commit for original owned acquisition before a fresh author turn. Availability and original author/context are not verified by this read. Old approval/merged labels confer no native acceptance or publication authority.',
     }

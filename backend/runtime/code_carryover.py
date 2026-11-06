@@ -139,9 +139,10 @@ class CodeCarryovers:
     def capture(self, conn, spec, binding, target):
         """Bind an exact earlier-code or selected-file observation and the same registered source to fresh development."""
         from backend.runtime.file_imports import FileImports, PriorFilesTarget
+        from backend.runtime.branch_inputs import BranchInputs, PriorBranchTarget
 
         if (
-            not isinstance(target, (PriorCodeTarget, PriorFilesTarget))
+            not isinstance(target, (PriorCodeTarget, PriorFilesTarget, PriorBranchTarget))
             or binding is None
         ):
             raise RunConflict(
@@ -153,6 +154,8 @@ class CodeCarryovers:
         ).fetchone()
         if task is None or task["type"] not in DEVELOPMENT_TASK_TYPES:
             raise RunConflict("Prior code is input only for a fresh development task")
+        if isinstance(target, PriorBranchTarget):
+            return BranchInputs(self.runs).select(conn, spec, binding, target)
         packet = (
             FileImports(self.runs).packet(
                 conn,
@@ -187,7 +190,7 @@ class CodeCarryovers:
         return packet
 
     @staticmethod
-    def input(conn, row):
+    def admitted(conn, row):
         """Read the original atomic admission receipt, independent of later source state and candidate files."""
         receipt = conn.execute(
             "SELECT result_json FROM runtime_commands WHERE project_id=? AND task_id=? AND operation_key=?",
@@ -203,4 +206,14 @@ class CodeCarryovers:
             != packet["snapshot_sha256"]
         ):
             raise RunConflict("Saved prior-code receipt is inconsistent")
+        return packet
+
+    @staticmethod
+    def input(conn, row):
+        """Resolve original data into the frozen prompt only after a selected branch has completed its owned acquisition."""
+        packet = CodeCarryovers.admitted(conn, row)
+        if packet is not None and packet['snapshot']['origin']['kind'] == 'selected_legacy_branch':
+            from backend.runtime.branch_inputs import BranchInputs
+
+            return BranchInputs.input(conn, row, packet)
         return packet

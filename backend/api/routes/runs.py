@@ -12,6 +12,7 @@ from backend.api.models.code_carryover import (
     PreviewFileImport,
     PriorCodeSelection,
     PriorFilesSelection,
+    PriorBranchSelection,
 )
 from backend.api.models.questions import AnswerQuestions
 from backend.runtime.contracts import RunConflict, RunNotFound, RunSpec
@@ -107,7 +108,7 @@ class StartRun(BaseModel):
     context_version: int = Field(ge=1)
     request: str = Field(min_length=1, max_length=50000)
     repository_id: int | None = Field(None, ge=1)
-    prior_code: PriorCodeSelection | PriorFilesSelection | None = None
+    prior_code: PriorCodeSelection | PriorFilesSelection | PriorBranchSelection | None = None
 
 
 class StartFindingReview(BaseModel):
@@ -737,6 +738,14 @@ async def prior_file_sources(project_id: Annotated[int, Path(gt=0)], task_id: An
     from backend.runtime.file_imports import FileImports
 
     return await asyncio.to_thread(FileImports(read_store(request)).sources, project_id, task_id)
+
+
+@router.get('/{project_id}/tasks/{task_id}/prior-branches')
+async def prior_branch_sources(project_id: Annotated[int, Path(gt=0)], task_id: Annotated[int, Path(gt=0)], request: Request):
+    """List scoped recorded branches without executing Git; the owner chooses a full commit and original preparation must verify/capture it."""
+    from backend.runtime.branch_inputs import BranchInputs
+
+    return await asyncio.to_thread(BranchInputs(read_store(request)).sources, project_id, task_id)
 
 
 @router.post("/{project_id}/tasks/{task_id}/prior-files/preview")

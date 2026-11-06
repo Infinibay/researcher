@@ -39,7 +39,10 @@
         "docs/modernization/native-startup-packaging.json",
         "docs/architecture/native-git-retirement.md",
         "docs/modernization/native-git-results.json",
-        "docs/modernization/native-git-packaging.json"
+        "docs/modernization/native-git-packaging.json",
+        "docs/architecture/prior-branch-input.md",
+        "docs/modernization/prior-branch-results.json",
+        "docs/modernization/prior-branch-packaging.json"
       ]
     },
     "C02": {
@@ -608,7 +611,10 @@
         "docs/modernization/native-startup-packaging.json",
         "docs/architecture/native-git-retirement.md",
         "docs/modernization/native-git-results.json",
-        "docs/modernization/native-git-packaging.json"
+        "docs/modernization/native-git-packaging.json",
+        "docs/architecture/prior-branch-input.md",
+        "docs/modernization/prior-branch-results.json",
+        "docs/modernization/prior-branch-packaging.json"
       ]
     },
     "E06": {
@@ -880,7 +886,10 @@
         "docs/modernization/native-startup-packaging.json",
         "docs/architecture/native-git-retirement.md",
         "docs/modernization/native-git-results.json",
-        "docs/modernization/native-git-packaging.json"
+        "docs/modernization/native-git-packaging.json",
+        "docs/architecture/prior-branch-input.md",
+        "docs/modernization/prior-branch-results.json",
+        "docs/modernization/prior-branch-packaging.json"
       ]
     },
     "E12": {

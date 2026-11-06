@@ -41,7 +41,7 @@ export function FileImportInput({projectId,taskId,selected,locked,configured,onS
       {packet.snapshot.original_input&&<details><summary>Entrada original registrada</summary><pre className="max-h-80 overflow-auto whitespace-pre-wrap text-xs">{JSON.stringify(packet.snapshot.original_input,null,2)}</pre></details>}
       <p>Repositorio del material: {source.repository_id}. Elige el mismo repositorio al iniciar la solicitud.</p>
       <button type="button" className="rounded-md border border-[var(--work-line)] px-3 py-2 disabled:opacity-50" disabled={locked||preview.isFetching||!!preview.error} onClick={()=>onSelect(Object.freeze({source_kind:source.source_kind,source_id:source.source_id,paths:Object.freeze([...paths]),snapshot_sha256:packet.snapshot_sha256}))}>Usar estos archivos en la próxima solicitud</button>
-      {selected&&'source_kind'in selected&&<p role="status">Archivos seleccionados como material para el autor nuevo. El inicio necesita la solicitud de abajo.</p>}
+      {selected&&'paths'in selected&&<p role="status">Archivos seleccionados como material para el autor nuevo. El inicio necesita la solicitud de abajo.</p>}
     </>}
   </section>
 }

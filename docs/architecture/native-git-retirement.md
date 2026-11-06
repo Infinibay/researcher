@@ -41,12 +41,13 @@ data. Original task type still matters: research history is not silently treated
 as a development task. The owner must choose a development task for code input.
 Worktree records in this bridge do not prove those paths remain available.
 
-**Principal remaining capability:** import exact branch-only material where there
-is no retained filesystem copy. The bridge marks this pending and keeps the ref
-and history intact. This cut neither implements nor substitutes for that import,
-automatic successor material selection or the complete retained-publication
-chain. It must reuse bounded owned Git-read machinery; an ambient host `git show`
-or trusting a moving branch label would bypass existing physical/source policy.
+The later [exact branch-input capability](prior-branch-input.md) now acquires
+registered branch-only material through the existing owned preparation, with an
+explicit full commit and unchanged source. The bridge points to that selection
+when an actual branch record exists; it does not invent one. Automatic successor
+material selection and broader retained-publication scenarios remain separate.
+An ambient host `git show` or trusting a moving branch label would bypass the
+existing physical/source policy.
 
 Verification uses actual local Git fixtures (`137` current vs `999` historical),
 preadmission PRs without tasks, unavailable historical clones, no remote calls or
