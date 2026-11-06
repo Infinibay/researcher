@@ -1,0 +1,62 @@
+[
+  {
+    "path": "frontend/src/api/agentRuns.ts",
+    "name": "AgentRun",
+    "line": 4,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/api/agentRuns.ts",
+    "name": "AgentRunPage",
+    "line": 13,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/api/agentRuns.ts",
+    "name": "agentRuns",
+    "line": 18,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/pages/AgentsPage.tsx",
+    "name": "tokens",
+    "line": 14,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/pages/AgentsPage.tsx",
+    "name": "AgentsPage",
+    "line": 16,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/pages/AgentsPage.tsx",
+    "name": "AgentLedger",
+    "line": 22,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/pages/AgentsPage.tsx",
+    "name": "select",
+    "line": 29,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/pages/AgentsPage.tsx",
+    "name": "back",
+    "line": 31,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/pages/AgentsPage.tsx",
+    "name": "AgentDetail",
+    "line": 46,
+    "documented": true
+  },
+  {
+    "path": "frontend/tests/agents.browser.mjs",
+    "name": "capture",
+    "line": 39,
+    "documented": true
+  }
+]

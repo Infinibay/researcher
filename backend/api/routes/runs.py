@@ -951,6 +951,21 @@ async def workspace(project_id: int, task_id: int, request: Request):
     return JSONResponse(data, headers={"Cache-Control": "no-store"})
 
 
+@router.get("/{project_id}/agent-runs")
+async def agent_runs(
+    project_id: int,
+    request: Request,
+    before_seq: int | None = Query(default=None, ge=1, le=9223372036854775807),
+    limit: int = Query(default=25, ge=1, le=100),
+):
+    """Read project-native actors and current attempt usage without dispatching or probing processes."""
+    data = await asyncio.to_thread(
+        owner_view(request).agent_runs, project_id, before_seq=before_seq, limit=limit
+    )
+    data['runtime_configured'] = request.app.state.runtime_service is not None
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
 @router.get("/{project_id}/research-sources/{source_id}")
 async def owner_source(
     project_id: int,

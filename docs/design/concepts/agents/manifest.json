@@ -1,0 +1,53 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-11-06",
+  "route": "/agents",
+  "desktop_count": 3,
+  "mobile_count": 1,
+  "selection": "roster",
+  "selected_by": "assistant, explicitly delegated by owner",
+  "display_order": [
+    "roster",
+    "matrix",
+    "journal"
+  ],
+  "references": [
+    "docs/design/audits/2026-11-06-agents/before.png",
+    "docs/design/audits/2026-11-06-home/01-desktop.png"
+  ],
+  "images": [
+    {
+      "file": "roster.png",
+      "sha256": "1c0f301a9fd42b182cd0a11359286a6b1519cb55f89a34775d2337b27a302629",
+      "width": 1487,
+      "height": 1058,
+      "prompt": "roster.prompt.txt",
+      "selected": true
+    },
+    {
+      "file": "matrix.png",
+      "sha256": "5ac9e02170ed5218c9a7d0402825e416b58422c0c5edd77914161f6d803e6a44",
+      "width": 1487,
+      "height": 1058,
+      "prompt": "matrix.prompt.txt",
+      "selected": false
+    },
+    {
+      "file": "journal.png",
+      "sha256": "146ab9370d50919e1e5a4141aa9de2080275c728ad60c0ae952266dd2bd6c00c",
+      "width": 1487,
+      "height": 1058,
+      "prompt": "journal.prompt.txt",
+      "selected": false
+    },
+    {
+      "file": "mobile.png",
+      "sha256": "c3e8f92053de8b649fb5ef87b15ecf4a194d8abf1d7c32dce09bc81d6694cb7e",
+      "width": 853,
+      "height": 1844,
+      "prompt": "mobile.prompt.txt",
+      "selected": true
+    }
+  ],
+  "limits": "Concept references, not product captures. Model/date/count examples are illustrative; the product renders actual scoped records."
+}

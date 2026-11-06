@@ -4,6 +4,8 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- Agentes conectado a registros nativos, identidad/intento/modelo/consumo y Stop original.19backend,123frontend/build y8capturas acotadas;6defsPython/10TS-JS documentadas. **Estado acumulado:11pilotos,33/36desktop,11/12mobile,0aceptaciónintegral**. Sigue Ejecución. [Recibo y límites](../design/audits/2026-11-06-agents/report.md).
+
 - Planificación con grupos/hitos, dependencias y propuestas nativas legibles con enlace original de decisión. Tres conceptos y móvil;9capturasconfixtures,123testsfrontend/build,14funcionesdocumentadas.10pilotos,30/36desktop,10/12mobile,0aceptaciónintegral. [Recibo y límites](../design/audits/2026-11-06-planning/report.md).
 
 - Resumen rediseñado con tres conceptos y móvil; preguntas, planes, tareas y contexto original conectados. Cinco capturas con fixtures,123testsfrontend/build,0Axe/JS en región revisada.9pilotos,27/36desktop,9/12mobile,0aceptaciónintegral. [Resultado y límites](../design/audits/2026-11-06-home/report.md).

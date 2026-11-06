@@ -116,3 +116,12 @@ armonizar contador singular/plural y etiquetas de relaciones, integrar ajuste de
 cabecera/margen móvil conDD041. No retirar contexto ni hacer que estados parezcan
 casillas de aceptación. La recuperación de CRUD sin operation_key y preservación
 de historia pertenecen a engine/operación principal; no están diferidas como pulido.
+
+## DD043 — densidad del registro de Agentes
+
+Después de todas las capacidades principales: compactar cabecera/espaciado y
+ajustar jerarquía de filas, singular/plural y agrupación visual por agente sin
+perder ejecuciones anteriores. Integrar el ajuste móvil compartido deDD041.
+La identidad, consulta nativa, consumo desconocido, paginación y Stop ya funcionan.
+Historial completo de intentos/presupuestos, cierre físico global y retirada de
+consumidores legacy siguen como capacidades principales, no como pulido diferido.

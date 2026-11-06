@@ -1,0 +1,67 @@
+{
+  "scope": "Controlled HTTP fixtures; no actual model, runtime or user data.",
+  "states": [
+    {
+      "name": "01-desktop",
+      "width": 1440,
+      "axe": 0
+    },
+    {
+      "name": "02-mobile",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "02b-mobile-control",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "03-stop-uncertain",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "04-stop-requested",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "05-queued-unknown",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "06-project-isolation",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "07-read-error",
+      "width": 390,
+      "axe": 0
+    }
+  ],
+  "writes": [
+    {
+      "method": "POST",
+      "path": "/api/projects/1/runs/run-a/stop"
+    },
+    {
+      "method": "POST",
+      "path": "/api/projects/1/runs/run-a/stop"
+    }
+  ],
+  "errors": [],
+  "checks": [
+    "scoped-native-ledger",
+    "unknown-is-not-zero",
+    "original-task-link",
+    "stop-failure-not-success",
+    "stop-request-not-closure",
+    "older-run-pagination",
+    "project-switch-clears-selection",
+    "query-error-is-not-empty",
+    "explicit-read-retry"
+  ]
+}

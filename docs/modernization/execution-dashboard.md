@@ -12,11 +12,23 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 ## Estado comprobado
 
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor retirados; quedan consumidores, herramientas y dependencias antiguos.
-- Interfaz: diez pilotos, 30/36 conceptos de escritorio y 10/12 móviles; dos rutas pendientes y 0/12 páginas completamente aceptadas.
+- Interfaz: once pilotos, 33/36 conceptos de escritorio y 11/12 móviles; una ruta pendiente y 0/12 páginas completamente aceptadas.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: Planificación implementada; continúan Agentes y Ejecución
+## Etapa actual: Agentes implementado; continúa Ejecución
+
+Agentes ya consulta ejecuciones nativas con identidad/tarea/intento, modelo y
+consumo observado, paginación y Stop original. Desconocido sigue siendo desconocido;
+un estado guardado no demuestra actividad actual. Tres conceptos y móvil,
+selección registro con detalle.19backendPASS,123frontend/build3.94s y8capturas
+controladas sin incidencias Axe/JS;6defsPython y10TS/JS documentadas.
+[Recorrido y límites](../design/audits/2026-11-06-agents/report.md).
+La aceptación integral, historial completo de intentos/presupuestos y cierre
+físico global siguen pendientes. DD043 sólo conserva detalles secundarios.
+**Siguiente principal: Ejecución**, última ruta pendiente de conceptos/piloto.
+
+## Etapa anterior: Planificación implementada; continúan Agentes y Ejecución
 
 Planificación conserva grupos/hitos y añade consulta de propuestas originales,
 suposiciones y dependencias. Tres conceptos y móvil; selección árbol con detalle.
@@ -66,7 +78,7 @@ cambios frontend, no nuevas capturas/build ni aceptación global por esta entreg
 | Prompts y comunicación humano–agente | Catálogo/revisión estática implementados; comparación con modelos y comprensión humana pendientes |
 | Engine, coordinación entre agentes y retirada heredada | Incompleto |
 | Dependencias e infraestructura restantes | Actualización parcial |
-| Agentes y Ejecución | Dos rutas pendientes de conceptos/implementación; Planificación es el décimo piloto |
+| Interfaz web | Agentes es el undécimo piloto; falta Ejecución y la aceptación integral de las doce páginas |
 | Migración/restore, operación, historial/presupuestos y CLI/TUI | Parcial; validación integral pendiente |
 |43escenarios, doce páginas, evaluación humana/científica y revisión final | Pendientes de aceptación integral |
 | Pulido secundario de todos los bloques | Después de todas las tareas gruesas |

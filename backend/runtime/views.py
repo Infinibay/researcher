@@ -197,6 +197,62 @@ class OwnerRuntimeView:
             else None,
         }
 
+    def agent_runs(self, project_id, *, before_seq=None, limit=25):
+        """Page native run identities and current-attempt observations in one read snapshot.
+
+        This is saved activity, not a liveness probe or a legacy roster. Token
+        observations are cumulative high-water values for the current attempt;
+        missing dispatch/usage remains null. Peer counts describe receipts only,
+        never prove physical closure, provider quota or task acceptance.
+        """
+        identity(project_id)
+        if before_seq is not None and (
+            type(before_seq) is not int or not 1 <= before_seq <= 9223372036854775807
+        ):
+            raise ValueError('Invalid run cursor')
+        if type(limit) is not int or not 1 <= limit <= 100:
+            raise ValueError('Invalid run page size')
+        with closing(connect(self.database, existing_only=True)) as conn, conn:
+            conn.execute('BEGIN')
+            if conn.execute('SELECT 1 FROM projects WHERE id=?', (project_id,)).fetchone() is None:
+                raise RunNotFound('Project not found')
+            counts = conn.execute(
+                'SELECT COUNT(*), COUNT(DISTINCT actor_id) FROM runtime_runs WHERE project_id=?',
+                (project_id,),
+            ).fetchone()
+            rows = conn.execute(
+                """SELECT r.rowid AS seq,r.id AS run_id,r.project_id,r.task_id,r.actor_id,
+                r.context_version,r.status,r.cancel_requested,r.execution_kind,r.created_at,
+                t.title AS task_title,t.type AS task_type,r.current_attempt_id AS attempt_id,
+                a.status AS attempt_status,a.started_at,
+                (SELECT COUNT(*) FROM runtime_attempts history WHERE history.run_id=r.id) AS attempt_count,
+                d.model,d.status AS dispatch_status,d.observed_tokens,d.token_ceiling,
+                m.selection_json AS model_selection,
+                (SELECT COUNT(*) FROM runtime_peers p WHERE p.attempt_id=a.id) AS peer_count,
+                (SELECT COUNT(*) FROM runtime_peers p WHERE p.attempt_id=a.id AND p.state<>'closed') AS unclosed_peer_count
+                FROM runtime_runs r JOIN tasks t ON t.project_id=r.project_id AND t.id=r.task_id
+                LEFT JOIN runtime_attempts a ON a.id=r.current_attempt_id AND a.run_id=r.id
+                LEFT JOIN runtime_inference_dispatches d ON d.attempt_id=a.id AND d.project_id=r.project_id
+                LEFT JOIN runtime_attempt_models m ON m.attempt_id=a.id
+                WHERE r.project_id=? AND (? IS NULL OR r.rowid<?)
+                ORDER BY r.rowid DESC LIMIT ?""",
+                (project_id, before_seq, before_seq, limit + 1),
+            ).fetchall()
+        items = []
+        for row in rows[:limit]:
+            item = dict(row)
+            item['seq'] = str(item['seq'])
+            item['cancel_requested'] = bool(item['cancel_requested'])
+            item['model_selection'] = json.loads(item['model_selection']) if item['model_selection'] else None
+            items.append(item)
+        return {
+            'project_id': project_id,
+            'total_runs': counts[0],
+            'total_actors': counts[1],
+            'items': items,
+            'next_before_seq': items[-1]['seq'] if len(rows) > limit else None,
+        }
+
     def workspace(self, project_id, task_id):
         """Return scoped task inputs, registered repositories and saved execution/question state."""
         context = self.runs.context_snapshot(project_id, task_id)

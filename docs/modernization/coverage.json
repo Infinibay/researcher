@@ -1717,7 +1717,9 @@
         "docs/modernization/parser-results.json",
         "docs/modernization/parser-packaging.json",
         "backend/tests/research/test_parser_process.py",
-        "backend/tests/runtime/test_live_grants.py"
+        "backend/tests/runtime/test_live_grants.py",
+        "backend/tests/runtime/test_agent_runs.py",
+        "docs/design/audits/2026-11-06-agents/report.md"
       ],
       "remaining": [
         "Migrate all legacy callers and capability families",
@@ -1980,11 +1982,14 @@
         "frontend/tests/home.browser.mjs",
         "docs/design/concepts/planning/manifest.json",
         "docs/design/audits/2026-11-06-planning/report.md",
-        "frontend/tests/planning.browser.mjs"
+        "frontend/tests/planning.browser.mjs",
+        "docs/design/concepts/agents/manifest.json",
+        "docs/design/audits/2026-11-06-agents/report.md",
+        "frontend/tests/agents.browser.mjs"
       ],
       "remaining": [
-        "Two routes need concepts/selection/implementation: agents and flow. Six desktop and two mobile concepts remain.",
-        "All twelve routes/shared components need integral interaction/accessibility/human acceptance; zero fully accepted. Planning is a fixture-tested pilot; original CRUD recovery/history guarantees remain engine/operation work. DD042 is secondary visual polish only."
+        "One route needs concepts/selection/implementation: flow. Three desktop and one mobile concept remain.",
+        "All twelve routes/shared components need integral interaction/accessibility/human acceptance; zero fully accepted. Agent current-attempt observations and fixture Stop controls do not establish full budget history or physical runtime closure. Planning CRUD recovery/history stays principal engine/operation work; DD043 is secondary polish only."
       ]
     },
     "12_mobile_adaptations": {
@@ -2016,11 +2021,14 @@
         "docs/modernization/repositories-packaging.json",
         "backend/tests/runtime/test_repository_reading.py",
         "frontend/tests/repository-explorer.test.ts",
-        "frontend/tests/repository-file-design.test.ts"
+        "frontend/tests/repository-file-design.test.ts",
+        "docs/design/concepts/agents/manifest.json",
+        "docs/design/audits/2026-11-06-agents/report.md",
+        "frontend/tests/agents.browser.mjs"
       ],
       "remaining": [
-        "Four routes still need concepts/selection/implementation: home, epics, agents and flow; twelve desktop concepts and four mobile adaptations remain.",
-        "Repository explorer is a pilot: explicit full create/adopt Git/clone/remote/repair remains principal work. All twelve routes/shared components require complete interaction/accessibility/human-comprehension acceptance; none is fully accepted."
+        "One route needs concepts/selection/implementation: flow. Three desktop and one mobile concept remain.",
+        "All twelve routes/shared components need integral interaction/accessibility/human acceptance; zero fully accepted. Agent current-attempt observations and fixture Stop controls do not establish full budget history or physical runtime closure. Planning CRUD recovery/history stays principal engine/operation work; DD043 is secondary polish only."
       ]
     },
     "design_selection": {
@@ -2066,11 +2074,14 @@
         "frontend/tests/home.browser.mjs",
         "docs/design/concepts/planning/manifest.json",
         "docs/design/audits/2026-11-06-planning/report.md",
-        "frontend/tests/planning.browser.mjs"
+        "frontend/tests/planning.browser.mjs",
+        "docs/design/concepts/agents/manifest.json",
+        "docs/design/audits/2026-11-06-agents/report.md",
+        "frontend/tests/agents.browser.mjs"
       ],
       "remaining": [
-        "Two routes need concepts/selection/implementation: agents and flow. Six desktop and two mobile concepts remain.",
-        "All twelve routes/shared components need integral interaction/accessibility/human acceptance; zero fully accepted. Planning is a fixture-tested pilot; original CRUD recovery/history guarantees remain engine/operation work. DD042 is secondary visual polish only."
+        "One route needs concepts/selection/implementation: flow. Three desktop and one mobile concept remain.",
+        "All twelve routes/shared components need integral interaction/accessibility/human acceptance; zero fully accepted. Agent current-attempt observations and fixture Stop controls do not establish full budget history or physical runtime closure. Planning CRUD recovery/history stays principal engine/operation work; DD043 is secondary polish only."
       ]
     },
     "all_screens_implemented": {
@@ -2113,11 +2124,14 @@
         "docs/modernization/repositories-packaging.json",
         "backend/tests/runtime/test_repository_reading.py",
         "frontend/tests/repository-explorer.test.ts",
-        "frontend/tests/repository-file-design.test.ts"
+        "frontend/tests/repository-file-design.test.ts",
+        "docs/design/concepts/agents/manifest.json",
+        "docs/design/audits/2026-11-06-agents/report.md",
+        "frontend/tests/agents.browser.mjs"
       ],
       "remaining": [
-        "Four routes still need concepts/selection/implementation: home, epics, agents and flow; twelve desktop concepts and four mobile adaptations remain.",
-        "Repository explorer is a pilot: explicit full create/adopt Git/clone/remote/repair remains principal work. All twelve routes/shared components require complete interaction/accessibility/human-comprehension acceptance; none is fully accepted."
+        "One route needs concepts/selection/implementation: flow. Three desktop and one mobile concept remain.",
+        "All twelve routes/shared components need integral interaction/accessibility/human acceptance; zero fully accepted. Agent current-attempt observations and fixture Stop controls do not establish full budget history or physical runtime closure. Planning CRUD recovery/history stays principal engine/operation work; DD043 is secondary polish only."
       ]
     },
     "accessibility_e2e": {
