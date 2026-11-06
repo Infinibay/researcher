@@ -1,0 +1,287 @@
+{
+  "base_commit": "1c51557",
+  "removed_files": [
+    {
+      "path": "backend/agents/__init__.py",
+      "sha256": "9c2833806798814573ab2675fd83e4b8f99a98982c99003188db497a2453542d",
+      "lines": 31,
+      "test_functions": []
+    },
+    {
+      "path": "backend/agents/base.py",
+      "sha256": "23aac5319e81ffd83ceb10f9ba0a95caee8ea594e291d24597bca97e53b909d0",
+      "lines": 362,
+      "test_functions": []
+    },
+    {
+      "path": "backend/agents/code_reviewer.py",
+      "sha256": "78fca527856720e312b1d00cd04ce41ccd41ebe4b568be5132c992e97e277951",
+      "lines": 37,
+      "test_functions": []
+    },
+    {
+      "path": "backend/agents/developer.py",
+      "sha256": "aa734ad17fadd9557c104795526fac825f7a6a23eedfec3279a52e5cc65eaa5e",
+      "lines": 40,
+      "test_functions": []
+    },
+    {
+      "path": "backend/agents/project_lead.py",
+      "sha256": "55ac09fe3527ca0aefc215054b283fbf15b8ce7afa65c58706ac9affb0d4ee01",
+      "lines": 38,
+      "test_functions": []
+    },
+    {
+      "path": "backend/agents/registry.py",
+      "sha256": "230505d66316edae9c7aa996b794ff848e8b4a784f94e07a768358516c62a886",
+      "lines": 437,
+      "test_functions": []
+    },
+    {
+      "path": "backend/agents/research_reviewer.py",
+      "sha256": "063a4bffcc71c85a7717ef572f8d5a23b0e955b189b0313ce399f2db7a1f6e8b",
+      "lines": 45,
+      "test_functions": []
+    },
+    {
+      "path": "backend/agents/researcher.py",
+      "sha256": "12598baea67882f93ea1196a738b60a8047e6b52c89f02bf34d46088a9f5e6ac",
+      "lines": 45,
+      "test_functions": []
+    },
+    {
+      "path": "backend/agents/team_lead.py",
+      "sha256": "a1b7c1f0186bed400402d48a34168652c6759445dbb22a1a04ba3f362d2a9476",
+      "lines": 39,
+      "test_functions": []
+    },
+    {
+      "path": "backend/tests/agents/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "lines": 0,
+      "test_functions": []
+    },
+    {
+      "path": "backend/tests/agents/test_agent_creation.py",
+      "sha256": "f1da4442f42db342beef9c5d949857ead2f125d205923abcfea3efad3dc5d716",
+      "lines": 442,
+      "test_functions": [
+        "test_db",
+        "test_create_agent",
+        "test_agent_has_tools",
+        "test_register_in_roster",
+        "test_register_idempotent",
+        "test_update_and_load_memory",
+        "test_register_agent_standalone",
+        "test_register_invalid_role",
+        "test_get_agent_by_role",
+        "test_get_all_agents",
+        "test_update_agent_status",
+        "test_update_agent_status_invalid",
+        "test_create_and_complete_agent_run",
+        "test_create_agent_run_via_registry",
+        "test_complete_nonexistent_run",
+        "test_activate_context",
+        "test_project_lead_has_ask_user",
+        "test_project_lead_no_file_tools",
+        "test_developer_has_shell",
+        "test_code_reviewer_no_shell",
+        "test_researcher_has_web_tools",
+        "test_research_reviewer_has_validate",
+        "test_team_lead_delegation_enabled"
+      ]
+    },
+    {
+      "path": "backend/knowledge/service.py",
+      "sha256": "d47ec84b2275cddaaef69e51175fb23a514b7eb5f8d71ac79e99e6543e82cf31",
+      "lines": 188,
+      "test_functions": []
+    },
+    {
+      "path": "backend/knowledge/sources.py",
+      "sha256": "a5f22c15b635ed227f9c5508130fe8d65eaba817c73ea2f40b6d65840b47d303",
+      "lines": 323,
+      "test_functions": []
+    },
+    {
+      "path": "backend/flows/crewai_event_bridge.py",
+      "sha256": "d055e2a850dd44bca2ebe5c517105cdd7e7ef9660a6ff2295b84161ca1b9a1b7",
+      "lines": 205,
+      "test_functions": []
+    },
+    {
+      "path": "backend/tools/_legacy_catalog.py",
+      "sha256": "e078bb06f1b2ea70f0922514675e1eb2bed7997072aa1450eba4f5bef65788ab",
+      "lines": 548,
+      "test_functions": []
+    },
+    {
+      "path": "backend/tests/knowledge/test_knowledge_service.py",
+      "sha256": "7e152a260b6c45a3f10d44684dda590ac76bfca694a147bb58c99dbe1ec0f416",
+      "lines": 85,
+      "test_functions": [
+        "test_configure_embedder_default",
+        "test_configure_embedder_with_base_url",
+        "test_get_sources_for_project_returns_retained_document_sources",
+        "test_researcher_uses_document_sources_and_live_finding_tools",
+        "test_developer_gets_two_sources",
+        "test_code_reviewer_gets_one_source",
+        "test_unknown_role_falls_back_to_wiki_only"
+      ]
+    },
+    {
+      "path": "backend/tests/knowledge/test_finding_memory_retirement.py",
+      "sha256": "5b1e0d7217e2dfda5bbfebf980f5da57afd81dc1e16cf7199662446ffd3fc647",
+      "lines": 46,
+      "test_functions": [
+        "test_role_context_does_not_select_mutable_finding_vector_sources",
+        "test_project_source_builder_leaves_findings_to_scoped_readers",
+        "test_direct_legacy_finding_index_call_fails_before_loading_or_embedding"
+      ]
+    },
+    {
+      "path": "backend/tests/flows/test_memory_integration.py",
+      "sha256": "86e2d0c6abebab3f989785999647f35fca78e4b006a387b6d01aec9bf848300b",
+      "lines": 78,
+      "test_functions": [
+        "test_build_crew_memory_kwargs_returns_memory_instance",
+        "test_build_crew_memory_kwargs_openai_embedder",
+        "test_build_crew_memory_kwargs_ollama_embedder",
+        "test_build_crew_memory_kwargs_uses_hardcoded_threshold"
+      ]
+    }
+  ],
+  "rationale": "Native actor/tool ownership already replaced role factories. Keep roster/run/memory rows and native scoped readers; remove uncalled constructors, automatic framework memory and catalog instantiation. Optional Context7/Spider and remaining leaf tool implementation/dependencies are not declared migrated by this removal.",
+  "replacement_tests": [
+    "backend/tests/runtime/test_legacy_catalog_removal.py",
+    "backend/tests/runtime/test_agent_runs.py",
+    "backend/tests/research/test_wiki_identity.py",
+    "backend/tests/research/test_wiki_imports.py",
+    "backend/tests/runtime/test_native_mcp_entry.py"
+  ],
+  "test_retirement_is_not_failure_repair": true,
+  "unchanged_prompt_reviews_rechecked": [
+    {
+      "id": "backend/prompts/code_reviewer/system.py::build_system_prompt",
+      "removed_consumers": [
+        "backend/agents/code_reviewer.py"
+      ]
+    },
+    {
+      "id": "backend/prompts/code_reviewer/system.py::build_system_prompt.prompt@29",
+      "removed_consumers": [
+        "backend/agents/code_reviewer.py"
+      ]
+    },
+    {
+      "id": "backend/prompts/developer/system.py::build_system_prompt",
+      "removed_consumers": [
+        "backend/agents/developer.py"
+      ]
+    },
+    {
+      "id": "backend/prompts/developer/system.py::build_system_prompt.prompt@48",
+      "removed_consumers": [
+        "backend/agents/developer.py"
+      ]
+    },
+    {
+      "id": "backend/prompts/project_lead/system.py::build_system_prompt",
+      "removed_consumers": [
+        "backend/agents/project_lead.py"
+      ]
+    },
+    {
+      "id": "backend/prompts/project_lead/system.py::build_system_prompt.prompt@29",
+      "removed_consumers": [
+        "backend/agents/project_lead.py"
+      ]
+    },
+    {
+      "id": "backend/prompts/research_reviewer/system.py::build_system_prompt",
+      "removed_consumers": [
+        "backend/agents/research_reviewer.py"
+      ]
+    },
+    {
+      "id": "backend/prompts/research_reviewer/system.py::build_system_prompt.prompt@29",
+      "removed_consumers": [
+        "backend/agents/research_reviewer.py"
+      ]
+    },
+    {
+      "id": "backend/prompts/researcher/system.py::build_system_prompt",
+      "removed_consumers": [
+        "backend/agents/researcher.py"
+      ]
+    },
+    {
+      "id": "backend/prompts/researcher/system.py::build_system_prompt.prompt@29",
+      "removed_consumers": [
+        "backend/agents/researcher.py"
+      ]
+    },
+    {
+      "id": "backend/prompts/team.py::ROLE_DESCRIPTIONS",
+      "removed_consumers": [
+        "backend/agents/registry.py"
+      ]
+    },
+    {
+      "id": "backend/prompts/team.py::TOOLS_INTRO",
+      "removed_consumers": [
+        "backend/agents/registry.py"
+      ]
+    },
+    {
+      "id": "backend/prompts/team.py::build_memory_section",
+      "removed_consumers": [
+        "backend/agents/registry.py"
+      ]
+    },
+    {
+      "id": "backend/prompts/team.py::build_system_awareness",
+      "removed_consumers": [
+        "backend/agents/registry.py"
+      ]
+    },
+    {
+      "id": "backend/prompts/team.py::build_team_section",
+      "removed_consumers": [
+        "backend/agents/registry.py"
+      ]
+    },
+    {
+      "id": "backend/prompts/team.py::build_clarification_protocol",
+      "removed_consumers": [
+        "backend/agents/registry.py"
+      ]
+    },
+    {
+      "id": "backend/prompts/team.py::build_conversation_context",
+      "removed_consumers": [
+        "backend/agents/registry.py"
+      ]
+    },
+    {
+      "id": "backend/prompts/team.py::build_state_context",
+      "removed_consumers": [
+        "backend/agents/registry.py"
+      ]
+    },
+    {
+      "id": "backend/prompts/team_lead/system.py::build_system_prompt",
+      "removed_consumers": [
+        "backend/agents/team_lead.py"
+      ]
+    },
+    {
+      "id": "backend/prompts/team_lead/system.py::build_system_prompt.prompt@29",
+      "removed_consumers": [
+        "backend/agents/team_lead.py"
+      ]
+    }
+  ],
+  "remaining_direct_or_relative_imports": [],
+  "consumer_coverage": "backend/ and scripts/ Python excluding tests; static imports plus inspected literal/dynamic factory sites, not a proof of every constructed dynamic name."
+}

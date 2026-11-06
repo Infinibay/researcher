@@ -16,7 +16,27 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: motor de inferencia antiguo retirado
+## Etapa actual: constructores, catálogo por rol y memoria CrewAI retirados
+
+Se eliminan trece módulos antiguos y se conservan las identidades, memoria y
+ejecuciones históricas en SQLite. Los consumidores de contexto usan las lecturas
+nativas de Wiki/hallazgos; las capacidades actuales tienen herramientas para
+consultar sus revisiones. El snapshot del catálogo antiguo queda como documento.
+[Contrato y límites](../architecture/legacy-catalog-removal.md).
+
+**Comprobado:** 47 pruebas en fuente pasan; 30 en el paquete instalado, con 797
+fuentes coincidentes y un recorrido de investigación controlado. Cinco
+definiciones documentadas; Ruff sin incidencias en los archivos revisados.
+Prompts: 553 candidatos / 487 archivos, 25 entradas archivadas en total y ninguna
+revisión pendiente. No cambia la aceptación de las doce páginas.
+
+**Siguiente principal:** herramientas individuales, Context7/Spider e índices
+antiguos, antes de cerrar la retirada de dependencias. El extra `legacy` todavía
+existe: no se declara CrewAI completamente retirado. Después continúan operación,
+migraciones/restore, historial/presupuestos, CLI, evaluaciones reales/humanas y
+aceptación global. Todos los detalles secundarios siguen para el final.
+
+## Etapa anterior: motor de inferencia antiguo retirado
 
 Se eliminan doce módulos de `backend.engine` y sus pruebas específicas; los
 consumidores reales de la señal de parada pasan a `runtime.legacy_scope`.

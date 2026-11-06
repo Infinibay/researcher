@@ -513,3 +513,17 @@ herramientas y aceptación es el runtime nativo existente. Se retiran las prueba
 de ese algoritmo sin contarlas como fallos reparados. El catálogo de herramientas
 legacy y sus dependencias permanecen como siguiente trabajo principal.
 [Contrato y verificación](legacy-engine-removal.md).
+
+## Constructores, catálogo por rol y memoria retirados — 2026-11-06
+
+La retirada del último consumidor productivo permite eliminar el catálogo que
+instanciaba herramientas y los constructores/registro de agentes antiguos.
+También se retiran KnowledgeService/sources y el puente de eventos CrewAI;
+los lectores nativos y la historia almacenada permanecen. Trece módulos,
+47 pruebas en fuente y30instaladas; no se cuentan pruebas obsoletas como fallos
+reparados. [Contrato y límites](legacy-catalog-removal.md).
+
+Las herramientas individuales antiguas, sus dependencias y los adaptadores
+Context7/Spider siguen pendientes. El snapshot de71schemas es histórico y no
+requiere importar clases; no representa el catálogo MCP actual ni demuestra
+equivalencia de capacidades externas.

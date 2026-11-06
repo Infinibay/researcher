@@ -6733,3 +6733,39 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
   human/scientific evaluations,43scenarios/all12pages/finalfreshreview. Twelve
   pilots/48concepts/0fullyaccepted unchanged. All secondary details follow all
   principal tasks; updated chat checklist at every principal transition persists.
+
+## 2026-11-06 — consumidores del catálogo por rol y memoria retirados
+
+- Previous goal turn was progress:1c51557 removed the inference engine. Revalidated
+  managed branch and protected roots. Current source/relative-import review shows
+  role factories had no product callers; the old catalog's only consumer was the
+  old agent constructor. Ken original index is historical, not this branch.
+- Removed13production modules:9agent constructors/registry,2framework knowledge
+  adapters, CrewAIevent bridge and executable tool catalog. Simplified package
+  exports; no framework base imitation or new dispatch loop. Retired5test files/
+  37functions with hashes/identities preserved. Old roster/run/memory rows remain;
+  native wiki scope/history and finding-review catalogs replace old contexts.
+- Initial absence testRED/retained readPASS. First source selection failed at
+  collection because an old leaf-tool test module requires its explicit legacy
+  extra; moved the native catalog regression to the native module. Next46PASS/
+  1FAIL exposed an incorrect migrated test field page_id; actual reader uses id.
+  Corrected test only. Final47PASS12.30s, actual MCPstdio/controller/wikihistory.
+  An early build preceding that test correction was superseded after finalPASS.
+- Final fresh-copy installed wheel30PASS0FAIL0SKIP8.988s/797matchingmembers/
+  234env-onlyimports/85native-only distributions; removed packages absent. One
+  controlled research product turn with actual kernel/broker/SQLite,0realmodels/
+  user effects. Native-runtime-env now contains catalog-removal wheel, not1c51557
+  engine-removal wheel. Five changed/new Python defs documented;0targetedRuff.
+- Promptinventory553candidates/487files;7additional removed entries archived
+  (25total),20same-source reviews revalidated against unchanged remaining
+  consumers and explicit removed paths. Check+2auditor testsPASS. No inference
+  quality or complete dynamic-callgraph claim. No newfrontend/global run.
+- All handles terminal:98513exit1,24018exit0,61829exit0,38817/98378exit0,
+  9066exit0. No retained server/model actor. No newagents/push/merge/deploy.
+- Next principal remains individual tool adapters, Context7/Spider compatibility
+  and obsolete indexes/deps. These optional integrations have no proven native
+  equivalent yet; ordinary text fetch is not advanced scraping. Do not remove
+  their capability merely for a green suite. The extra legacy still exists.
+  Full migrations/restore/historybudget/CLI/operation/realprompt-human-science/
+  43scenarios/all12pages/finalreview remain. Macro-first/task-transition list
+  policy persists;12pilots48concepts0accepted unchanged, no new polish detour.

@@ -2,18 +2,9 @@
   "schema_version": 1,
   "scope": "Owned backend/ and scripts/ Python, excluding tests. Syntax-selected prompt builders/literals/tool descriptions; external native system prompts and arbitrary owner/source text are outside this static inventory.",
   "coverage": "Candidates are not unique rendered prompts. Dynamic rendering size and non-direct consumers remain unknown. Reviews are explicit declarations bound to source and direct module consumers, not proof of efficacy or complete runtime reachability. requires_review entries are unfinished.",
-  "files_scanned": 500,
+  "files_scanned": 487,
   "source_tree": {
     "backend/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "backend/agents/__init__.py": "9c2833806798814573ab2675fd83e4b8f99a98982c99003188db497a2453542d",
-    "backend/agents/base.py": "23aac5319e81ffd83ceb10f9ba0a95caee8ea594e291d24597bca97e53b909d0",
-    "backend/agents/code_reviewer.py": "78fca527856720e312b1d00cd04ce41ccd41ebe4b568be5132c992e97e277951",
-    "backend/agents/developer.py": "aa734ad17fadd9557c104795526fac825f7a6a23eedfec3279a52e5cc65eaa5e",
-    "backend/agents/project_lead.py": "55ac09fe3527ca0aefc215054b283fbf15b8ce7afa65c58706ac9affb0d4ee01",
-    "backend/agents/registry.py": "230505d66316edae9c7aa996b794ff848e8b4a784f94e07a768358516c62a886",
-    "backend/agents/research_reviewer.py": "063a4bffcc71c85a7717ef572f8d5a23b0e955b189b0313ce399f2db7a1f6e8b",
-    "backend/agents/researcher.py": "12598baea67882f93ea1196a738b60a8047e6b52c89f02bf34d46088a9f5e6ac",
-    "backend/agents/team_lead.py": "a1b7c1f0186bed400402d48a34168652c6759445dbb22a1a04ba3f362d2a9476",
     "backend/api/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "backend/api/config.py": "7f0245a85ea0eeea1c2092eb56be407c5ec1dbe9ef82f045a1111e4adf1e7e95",
     "backend/api/dependencies.py": "51c13649706b869e773a5685f36d1211c266b8a6c1ae2975c1e6fe9f02cbed26",
@@ -136,7 +127,6 @@
     "backend/flows/__init__.py": "022fafdf2720bebb593d7f0af96856a24d1431c714ef46b210ca29c28be48dc2",
     "backend/flows/brainstorming_flow.py": "725e4478e808bb280df429b28850678a5c5febfde5a05c0024345a0ade6babeb",
     "backend/flows/code_review_flow.py": "ab1c9c476df1ba2c483082679be10d2e22772b226a1f0e2432a06e65357c0dae",
-    "backend/flows/crewai_event_bridge.py": "d055e2a850dd44bca2ebe5c517105cdd7e7ef9660a6ff2295b84161ca1b9a1b7",
     "backend/flows/development_flow.py": "bcdd6d05e889976616d57a5be0e2318b50c764afccf61d8f21b5b9a6705b367b",
     "backend/flows/event_bus.py": "e335d689869622d10af507213a00cff804308a1f670202ace4bc881a9d2b3b69",
     "backend/flows/event_listeners.py": "079487437a7694240b4ce0fe134aa1da8b97700041e0600108b435303ec546ca",
@@ -175,13 +165,11 @@
     "backend/git/source_repair_program.py": "0f1814caa6176b2f4dd9d18ea6ab67c5cea6baf8cc3656e6a3326f72779b9da0",
     "backend/git/source_service.py": "a3f5ad357b31380d23132d35709f1a9115ebba71097bdf2d3dca38e907ab656e",
     "backend/git/worktree_manager.py": "193a5dd89819d956a1492f69aa884c855bd389854235e2e10486a2aaaf1d2bb3",
-    "backend/knowledge/__init__.py": "2a4745e83127a5995fcff403ce81fe5a3a4091d7758f05ac70fe7f0e7133b2a1",
+    "backend/knowledge/__init__.py": "6b7d3514d830ae8c054b77b4171e48936acc3a0543ad4ea8c4c5eeccc069d4f6",
     "backend/knowledge/findings.py": "9178675183309c9e548cdac155af4bcc0ddc34835e25e6d62445fa2a489cbd7b",
     "backend/knowledge/results.py": "ae6f580a71c2c8606ad474c83c1ebb884d71751b9c5344887ce59a5d782e3a2a",
     "backend/knowledge/reviews.py": "10942f0cf9299ff458e5ce0d71ff7249ac0cf84d3473a37b8bfdd5c8d05cfa30",
     "backend/knowledge/search.py": "21d765060972325854b3a526e6fa5104069a01fa5eaf8fb8e6b6ddfb9973630b",
-    "backend/knowledge/service.py": "d47ec84b2275cddaaef69e51175fb23a514b7eb5f8d71ac79e99e6543e82cf31",
-    "backend/knowledge/sources.py": "a5f22c15b635ed227f9c5508130fe8d65eaba817c73ea2f40b6d65840b47d303",
     "backend/knowledge/wiki.py": "1724baf773bbc493d8a704e3a8e56bda8f7d2bc52e6760dbf879032263d96f09",
     "backend/network_destinations.py": "3277110ea5739f838c32974550d31b6e5c1ecbdd96afd6f74c23d4f23179f13d",
     "backend/orchestrator.py": "8d2e2288e0cbd43103a853879d186188b6710bee464698f7800fe8ac0765cbd5",
@@ -381,9 +369,8 @@
     "backend/state/dependency_validator.py": "61738303dcb801e8e2b7997ef05221f1138cb7860304ad35295b825ecd894da6",
     "backend/state/machine.py": "bea2818a8b9ad0dede0b2c20510ec2f03ad4328a4fcd5f4712928f1647e39c21",
     "backend/state/progress.py": "c4afd69693f079c2edca4cc4bdfa1194cbf450f9e6a14a49ca2fbb06b6d5a2bc",
-    "backend/tools/__init__.py": "a045baa83bf34d5ae9904d940ddf1e42b1ca2069165402dd12e9534d7a98d7da",
+    "backend/tools/__init__.py": "3d0fa2176abdfce1a799856cbd70681d9a24463cc5b0673b27a09958d8b7982d",
     "backend/tools/_legacy_access.py": "92d04507f5bd320b229ff35a975090368ec3a7761a4aa7514dfe7e3bc5800717",
-    "backend/tools/_legacy_catalog.py": "e078bb06f1b2ea70f0922514675e1eb2bed7997072aa1450eba4f5bef65788ab",
     "backend/tools/base/__init__.py": "8ca5e5fd60622b862972b9be00cac2be6d764f38f99ca0e9030fc385d2de196e",
     "backend/tools/base/base_tool.py": "802f28d29c1fa4a32e9db0ad6f6b52a1a3ffc4162356511f76d155e4babd3a9f",
     "backend/tools/base/context.py": "e3d49048bb34ce40c9ca8a72d89e71af73be70178678efdb67c02bbf26a03862",
@@ -506,231 +493,6 @@
     "scripts/researcher_mcp_server.py": "18b24a3c795cb38226eea4fd338d5d423ba9ab5ee2d5b91a737a6a612c099f92"
   },
   "entries": [
-    {
-      "id": "backend/agents/code_reviewer.py::create_code_reviewer_agent.goal@28",
-      "path": "backend/agents/code_reviewer.py",
-      "symbol": "create_code_reviewer_agent.goal@28",
-      "line": 28,
-      "end_line": 31,
-      "owner": "backend.agents.code_reviewer",
-      "family": "historical_engine_or_coordination",
-      "disposition": "pending_legacy_removal",
-      "objective": "Code Reviewer agent — quality assurance for code changes.",
-      "source_sha256": "78fca527856720e312b1d00cd04ce41ccd41ebe4b568be5132c992e97e277951",
-      "source_bytes": 82,
-      "rendered_utf8_bytes": 65,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "045ce015bffc436cbebd256bbdb84f5f0a11d07b062189c2e8f1d4f131f8fbfc",
-      "direct_module_consumers": {
-        "backend/agents/__init__.py": "9c2833806798814573ab2675fd83e4b8f99a98982c99003188db497a2453542d"
-      },
-      "suggested_disposition": "pending_legacy_removal",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "review_evidence": [
-        "backend/agents/code_reviewer.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    {
-      "id": "backend/agents/developer.py::create_developer_agent.goal@30",
-      "path": "backend/agents/developer.py",
-      "symbol": "create_developer_agent.goal@30",
-      "line": 30,
-      "end_line": 32,
-      "owner": "backend.agents.developer",
-      "family": "historical_engine_or_coordination",
-      "disposition": "pending_legacy_removal",
-      "objective": "Developer agent — code implementation specialist.",
-      "source_sha256": "aa734ad17fadd9557c104795526fac825f7a6a23eedfec3279a52e5cc65eaa5e",
-      "source_bytes": 63,
-      "rendered_utf8_bytes": 61,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "0f0a46de42da438cefb986d8084d983ae4d86e1fe90f339dd3d7f061c742be58",
-      "direct_module_consumers": {
-        "backend/agents/__init__.py": "9c2833806798814573ab2675fd83e4b8f99a98982c99003188db497a2453542d"
-      },
-      "suggested_disposition": "pending_legacy_removal",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "review_evidence": [
-        "backend/agents/developer.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    {
-      "id": "backend/agents/project_lead.py::create_project_lead_agent.goal@24",
-      "path": "backend/agents/project_lead.py",
-      "symbol": "create_project_lead_agent.goal@24",
-      "line": 24,
-      "end_line": 28,
-      "owner": "backend.agents.project_lead",
-      "family": "historical_engine_or_coordination",
-      "disposition": "pending_legacy_removal",
-      "objective": "Project Lead agent — bridge between user and technical team.",
-      "source_sha256": "55ac09fe3527ca0aefc215054b283fbf15b8ce7afa65c58706ac9affb0d4ee01",
-      "source_bytes": 205,
-      "rendered_utf8_bytes": 173,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "814e8c62bfc5354951d8bd60e34d3d01759f055e59a030078346800a83aad0b6",
-      "direct_module_consumers": {
-        "backend/agents/__init__.py": "9c2833806798814573ab2675fd83e4b8f99a98982c99003188db497a2453542d"
-      },
-      "suggested_disposition": "pending_legacy_removal",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "review_evidence": [
-        "backend/agents/project_lead.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    {
-      "id": "backend/agents/research_reviewer.py::create_research_reviewer_agent.goal@35",
-      "path": "backend/agents/research_reviewer.py",
-      "symbol": "create_research_reviewer_agent.goal@35",
-      "line": 35,
-      "end_line": 38,
-      "owner": "backend.agents.research_reviewer",
-      "family": "historical_engine_or_coordination",
-      "disposition": "pending_legacy_removal",
-      "objective": "Research Reviewer agent — scientific peer review specialist.",
-      "source_sha256": "063a4bffcc71c85a7717ef572f8d5a23b0e955b189b0313ce399f2db7a1f6e8b",
-      "source_bytes": 92,
-      "rendered_utf8_bytes": 75,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "6ffd205b5b57f7619ac6ba295f2684e8438ec67d8435911d99f9f13059045175",
-      "direct_module_consumers": {
-        "backend/agents/__init__.py": "9c2833806798814573ab2675fd83e4b8f99a98982c99003188db497a2453542d"
-      },
-      "suggested_disposition": "pending_legacy_removal",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "review_evidence": [
-        "backend/agents/research_reviewer.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    {
-      "id": "backend/agents/researcher.py::create_researcher_agent.goal@35",
-      "path": "backend/agents/researcher.py",
-      "symbol": "create_researcher_agent.goal@35",
-      "line": 35,
-      "end_line": 38,
-      "owner": "backend.agents.researcher",
-      "family": "historical_engine_or_coordination",
-      "disposition": "pending_legacy_removal",
-      "objective": "Researcher agent — scientific investigation specialist.",
-      "source_sha256": "12598baea67882f93ea1196a738b60a8047e6b52c89f02bf34d46088a9f5e6ac",
-      "source_bytes": 102,
-      "rendered_utf8_bytes": 85,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3987b712a0ef4bae2bc1edfefa383529f9e136cee189b824b0c6cef552de7848",
-      "direct_module_consumers": {
-        "backend/agents/__init__.py": "9c2833806798814573ab2675fd83e4b8f99a98982c99003188db497a2453542d"
-      },
-      "suggested_disposition": "pending_legacy_removal",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "review_evidence": [
-        "backend/agents/researcher.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
     {
       "id": "backend/api/dependencies.py::get_project_id.description@24",
       "path": "backend/api/dependencies.py",
@@ -1529,94 +1291,6 @@
       "review_conflicts": []
     },
     {
-      "id": "backend/knowledge/sources.py::ReferenceFilesKnowledgeSource.load_content.description@212",
-      "path": "backend/knowledge/sources.py",
-      "symbol": "ReferenceFilesKnowledgeSource.load_content.description@212",
-      "line": 212,
-      "end_line": 212,
-      "owner": "backend.knowledge.sources",
-      "family": "other_owned_prompt_candidate",
-      "disposition": "retained_input_renderer",
-      "objective": "Custom CrewAI knowledge sources backed by INFINIBAY's SQLite database.",
-      "source_sha256": "a5f22c15b635ed227f9c5508130fe8d65eaba817c73ea2f40b6d65840b47d303",
-      "source_bytes": 26,
-      "rendered_utf8_bytes": null,
-      "variables_kind": "referenced_identifiers",
-      "variables": [
-        "ref"
-      ],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "b630a8f3d9723b6f34f377c7e60066033351b122e68759df6b8a257dca0175b5",
-      "direct_module_consumers": {
-        "backend/knowledge/service.py": "d47ec84b2275cddaaef69e51175fb23a514b7eb5f8d71ac79e99e6543e82cf31"
-      },
-      "suggested_disposition": "requires_review",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed as source/report description or attributed review-feedback data, not trusted model policy. Original content/currentness/provenance must remain explicit; no scientific certainty or new authority is created.",
-      "review_evidence": [
-        "backend/knowledge/sources.py",
-        "backend/runtime/run_inputs.py",
-        "backend/runtime/business_definitions.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": []
-    },
-    {
-      "id": "backend/knowledge/sources.py::ReportsKnowledgeSource.load_content.description@293",
-      "path": "backend/knowledge/sources.py",
-      "symbol": "ReportsKnowledgeSource.load_content.description@293",
-      "line": 293,
-      "end_line": 293,
-      "owner": "backend.knowledge.sources",
-      "family": "other_owned_prompt_candidate",
-      "disposition": "retained_input_renderer",
-      "objective": "Custom CrewAI knowledge sources backed by INFINIBAY's SQLite database.",
-      "source_sha256": "a5f22c15b635ed227f9c5508130fe8d65eaba817c73ea2f40b6d65840b47d303",
-      "source_bytes": 29,
-      "rendered_utf8_bytes": null,
-      "variables_kind": "referenced_identifiers",
-      "variables": [
-        "report"
-      ],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "b630a8f3d9723b6f34f377c7e60066033351b122e68759df6b8a257dca0175b5",
-      "direct_module_consumers": {
-        "backend/knowledge/service.py": "d47ec84b2275cddaaef69e51175fb23a514b7eb5f8d71ac79e99e6543e82cf31"
-      },
-      "suggested_disposition": "requires_review",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed as source/report description or attributed review-feedback data, not trusted model policy. Original content/currentness/provenance must remain explicit; no scientific certainty or new authority is created.",
-      "review_evidence": [
-        "backend/knowledge/sources.py",
-        "backend/runtime/run_inputs.py",
-        "backend/runtime/business_definitions.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": []
-    },
-    {
       "id": "backend/planning/instructions.py::PLANNING_INSTRUCTIONS",
       "path": "backend/planning/instructions.py",
       "symbol": "PLANNING_INSTRUCTIONS",
@@ -1730,10 +1404,6 @@
       ],
       "direct_import_consumers": [
         {
-          "path": "backend/agents/code_reviewer.py",
-          "line": 8
-        },
-        {
           "path": "backend/prompts/code_reviewer/__init__.py",
           "line": 3
         }
@@ -1748,21 +1418,21 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "9232fc82425c423012e11a763fe632f19d9b20882cdcaaabde7beb9aad9ac2ee",
+      "dependencies_sha256": "81c46d1f4b88cfbd3183bda2bb49c0c9b3939fce99f91b1474e3bc499cb94fb1",
       "direct_module_consumers": {
-        "backend/agents/code_reviewer.py": "78fca527856720e312b1d00cd04ce41ccd41ebe4b568be5132c992e97e277951",
         "backend/prompts/code_reviewer/__init__.py": "24fbe04b4c7b1b01eb8460951fbdaed6274ac7c7911017e91207bcd8167465fa"
       },
       "suggested_disposition": "archived_not_native",
       "review_status": "reviewed",
-      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies.",
+      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "review_evidence": [
         "backend/prompts/code_reviewer/system.py",
         "backend/runtime/owned_runtime.py",
         "backend/runtime/lifecycle.py",
         "backend/config/llm.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/catalog-removal-inventory.json"
       ],
       "review_conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
@@ -1800,21 +1470,21 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "9232fc82425c423012e11a763fe632f19d9b20882cdcaaabde7beb9aad9ac2ee",
+      "dependencies_sha256": "81c46d1f4b88cfbd3183bda2bb49c0c9b3939fce99f91b1474e3bc499cb94fb1",
       "direct_module_consumers": {
-        "backend/agents/code_reviewer.py": "78fca527856720e312b1d00cd04ce41ccd41ebe4b568be5132c992e97e277951",
         "backend/prompts/code_reviewer/__init__.py": "24fbe04b4c7b1b01eb8460951fbdaed6274ac7c7911017e91207bcd8167465fa"
       },
       "suggested_disposition": "archived_not_native",
       "review_status": "reviewed",
-      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies.",
+      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "review_evidence": [
         "backend/prompts/code_reviewer/system.py",
         "backend/runtime/owned_runtime.py",
         "backend/runtime/lifecycle.py",
         "backend/config/llm.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/catalog-removal-inventory.json"
       ],
       "review_conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
@@ -1987,10 +1657,6 @@
       ],
       "direct_import_consumers": [
         {
-          "path": "backend/agents/developer.py",
-          "line": 8
-        },
-        {
           "path": "backend/prompts/developer/__init__.py",
           "line": 3
         }
@@ -2005,21 +1671,21 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "57d983e313668d9f0b480a0f04edebcd11cf9fed0dad1f63a563325698288a62",
+      "dependencies_sha256": "1ad86b8b4c4c3e67bdb7b2a90209abfd93df864359f800cbb50e43f69f607ac5",
       "direct_module_consumers": {
-        "backend/agents/developer.py": "aa734ad17fadd9557c104795526fac825f7a6a23eedfec3279a52e5cc65eaa5e",
         "backend/prompts/developer/__init__.py": "c9463a50b136aa28f4faaf1a7ba78a8f1ff9287511562cc395c1fb99bbc9d0de"
       },
       "suggested_disposition": "archived_not_native",
       "review_status": "reviewed",
-      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies.",
+      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "review_evidence": [
         "backend/prompts/developer/system.py",
         "backend/runtime/owned_runtime.py",
         "backend/runtime/lifecycle.py",
         "backend/config/llm.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/catalog-removal-inventory.json"
       ],
       "review_conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
@@ -2058,21 +1724,21 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "57d983e313668d9f0b480a0f04edebcd11cf9fed0dad1f63a563325698288a62",
+      "dependencies_sha256": "1ad86b8b4c4c3e67bdb7b2a90209abfd93df864359f800cbb50e43f69f607ac5",
       "direct_module_consumers": {
-        "backend/agents/developer.py": "aa734ad17fadd9557c104795526fac825f7a6a23eedfec3279a52e5cc65eaa5e",
         "backend/prompts/developer/__init__.py": "c9463a50b136aa28f4faaf1a7ba78a8f1ff9287511562cc395c1fb99bbc9d0de"
       },
       "suggested_disposition": "archived_not_native",
       "review_status": "reviewed",
-      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies.",
+      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "review_evidence": [
         "backend/prompts/developer/system.py",
         "backend/runtime/owned_runtime.py",
         "backend/runtime/lifecycle.py",
         "backend/config/llm.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/catalog-removal-inventory.json"
       ],
       "review_conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
@@ -3513,10 +3179,6 @@
       ],
       "direct_import_consumers": [
         {
-          "path": "backend/agents/project_lead.py",
-          "line": 8
-        },
-        {
           "path": "backend/prompts/project_lead/__init__.py",
           "line": 3
         }
@@ -3531,21 +3193,21 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "94083dc69b48c0901072432a972e097ad4273cac347ef43e5bcd3e3940584d78",
+      "dependencies_sha256": "ae563e438f5a92682f8584fd6fe2220f398a8f3d47d59d753a7d6e3f67e71a67",
       "direct_module_consumers": {
-        "backend/agents/project_lead.py": "55ac09fe3527ca0aefc215054b283fbf15b8ce7afa65c58706ac9affb0d4ee01",
         "backend/prompts/project_lead/__init__.py": "ad8907cbc069bb74717da6e5c705fdfc085a2a017d3cb3497cc582228ffb9a69"
       },
       "suggested_disposition": "archived_not_native",
       "review_status": "reviewed",
-      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies.",
+      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "review_evidence": [
         "backend/prompts/project_lead/system.py",
         "backend/runtime/owned_runtime.py",
         "backend/runtime/lifecycle.py",
         "backend/config/llm.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/catalog-removal-inventory.json"
       ],
       "review_conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
@@ -3583,21 +3245,21 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "94083dc69b48c0901072432a972e097ad4273cac347ef43e5bcd3e3940584d78",
+      "dependencies_sha256": "ae563e438f5a92682f8584fd6fe2220f398a8f3d47d59d753a7d6e3f67e71a67",
       "direct_module_consumers": {
-        "backend/agents/project_lead.py": "55ac09fe3527ca0aefc215054b283fbf15b8ce7afa65c58706ac9affb0d4ee01",
         "backend/prompts/project_lead/__init__.py": "ad8907cbc069bb74717da6e5c705fdfc085a2a017d3cb3497cc582228ffb9a69"
       },
       "suggested_disposition": "archived_not_native",
       "review_status": "reviewed",
-      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies.",
+      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "review_evidence": [
         "backend/prompts/project_lead/system.py",
         "backend/runtime/owned_runtime.py",
         "backend/runtime/lifecycle.py",
         "backend/config/llm.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/catalog-removal-inventory.json"
       ],
       "review_conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
@@ -4185,10 +3847,6 @@
       ],
       "direct_import_consumers": [
         {
-          "path": "backend/agents/research_reviewer.py",
-          "line": 8
-        },
-        {
           "path": "backend/prompts/research_reviewer/__init__.py",
           "line": 3
         }
@@ -4203,21 +3861,21 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "92259d8840324246f0ad448a331f10e577fe140cb23b703bd1f8020df59232e4",
+      "dependencies_sha256": "54c0087137c50b37cc6a3317e1188bdc1fe19fc3d4381bb823a59abc447f8dfb",
       "direct_module_consumers": {
-        "backend/agents/research_reviewer.py": "063a4bffcc71c85a7717ef572f8d5a23b0e955b189b0313ce399f2db7a1f6e8b",
         "backend/prompts/research_reviewer/__init__.py": "dee22bd4a1c93dde8403d674d08572bd147268a7e52bb3fa64d8e0ef9cf8b2ed"
       },
       "suggested_disposition": "archived_not_native",
       "review_status": "reviewed",
-      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies.",
+      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "review_evidence": [
         "backend/prompts/research_reviewer/system.py",
         "backend/runtime/owned_runtime.py",
         "backend/runtime/lifecycle.py",
         "backend/config/llm.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/catalog-removal-inventory.json"
       ],
       "review_conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
@@ -4255,21 +3913,21 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "92259d8840324246f0ad448a331f10e577fe140cb23b703bd1f8020df59232e4",
+      "dependencies_sha256": "54c0087137c50b37cc6a3317e1188bdc1fe19fc3d4381bb823a59abc447f8dfb",
       "direct_module_consumers": {
-        "backend/agents/research_reviewer.py": "063a4bffcc71c85a7717ef572f8d5a23b0e955b189b0313ce399f2db7a1f6e8b",
         "backend/prompts/research_reviewer/__init__.py": "dee22bd4a1c93dde8403d674d08572bd147268a7e52bb3fa64d8e0ef9cf8b2ed"
       },
       "suggested_disposition": "archived_not_native",
       "review_status": "reviewed",
-      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies.",
+      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "review_evidence": [
         "backend/prompts/research_reviewer/system.py",
         "backend/runtime/owned_runtime.py",
         "backend/runtime/lifecycle.py",
         "backend/config/llm.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/catalog-removal-inventory.json"
       ],
       "review_conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
@@ -4573,10 +4231,6 @@
       ],
       "direct_import_consumers": [
         {
-          "path": "backend/agents/researcher.py",
-          "line": 8
-        },
-        {
           "path": "backend/prompts/researcher/__init__.py",
           "line": 3
         }
@@ -4591,21 +4245,21 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "d140ea4030668daf3ae410f581c105a3487216cab3e2053bc427ad687769f0ff",
+      "dependencies_sha256": "55559f275c050e5c5c63c265faf87ec4f68698dd44172c2f66318dad5cb8c387",
       "direct_module_consumers": {
-        "backend/agents/researcher.py": "12598baea67882f93ea1196a738b60a8047e6b52c89f02bf34d46088a9f5e6ac",
         "backend/prompts/researcher/__init__.py": "5cf538d1c297fa55adee0fa9b3ee754797dff45d3c7beb639fea29dfea07bad6"
       },
       "suggested_disposition": "archived_not_native",
       "review_status": "reviewed",
-      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies.",
+      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "review_evidence": [
         "backend/prompts/researcher/system.py",
         "backend/runtime/owned_runtime.py",
         "backend/runtime/lifecycle.py",
         "backend/config/llm.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/catalog-removal-inventory.json"
       ],
       "review_conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
@@ -4643,21 +4297,21 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "d140ea4030668daf3ae410f581c105a3487216cab3e2053bc427ad687769f0ff",
+      "dependencies_sha256": "55559f275c050e5c5c63c265faf87ec4f68698dd44172c2f66318dad5cb8c387",
       "direct_module_consumers": {
-        "backend/agents/researcher.py": "12598baea67882f93ea1196a738b60a8047e6b52c89f02bf34d46088a9f5e6ac",
         "backend/prompts/researcher/__init__.py": "5cf538d1c297fa55adee0fa9b3ee754797dff45d3c7beb639fea29dfea07bad6"
       },
       "suggested_disposition": "archived_not_native",
       "review_status": "reviewed",
-      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies.",
+      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "review_evidence": [
         "backend/prompts/researcher/system.py",
         "backend/runtime/owned_runtime.py",
         "backend/runtime/lifecycle.py",
         "backend/config/llm.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/catalog-removal-inventory.json"
       ],
       "review_conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
@@ -6715,9 +6369,8 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "8cd93155de5809b2e2ed25bcfead3cac2924b621fb4c9440b4135965ffd76f20",
+      "dependencies_sha256": "ad212c6eb4c0b19a45a021326d6f484df3f8308b6a6bc518452eb894a841d0e0",
       "direct_module_consumers": {
-        "backend/agents/registry.py": "230505d66316edae9c7aa996b794ff848e8b4a784f94e07a768358516c62a886",
         "backend/flows/helpers/messaging.py": "916fc126dd488f27b03d9a4c21590e7dc0e4c5cc633626058b1416f351959918",
         "backend/prompts/code_reviewer/tasks.py": "ed4906d54772a50e78976d8b9abaf80f53edfaa983b927635edb5fef4f41d491",
         "backend/prompts/developer/tasks.py": "8d076b869956ee4bf13afcc0e4442ebca8cec47676b85c4585c011321dd584e1",
@@ -6736,14 +6389,15 @@
       },
       "suggested_disposition": "archived_not_native",
       "review_status": "reviewed",
-      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies.",
+      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "review_evidence": [
         "backend/prompts/team.py",
         "backend/runtime/owned_runtime.py",
         "backend/runtime/lifecycle.py",
         "backend/config/llm.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/catalog-removal-inventory.json"
       ],
       "review_conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
@@ -6800,9 +6454,8 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "8cd93155de5809b2e2ed25bcfead3cac2924b621fb4c9440b4135965ffd76f20",
+      "dependencies_sha256": "ad212c6eb4c0b19a45a021326d6f484df3f8308b6a6bc518452eb894a841d0e0",
       "direct_module_consumers": {
-        "backend/agents/registry.py": "230505d66316edae9c7aa996b794ff848e8b4a784f94e07a768358516c62a886",
         "backend/flows/helpers/messaging.py": "916fc126dd488f27b03d9a4c21590e7dc0e4c5cc633626058b1416f351959918",
         "backend/prompts/code_reviewer/tasks.py": "ed4906d54772a50e78976d8b9abaf80f53edfaa983b927635edb5fef4f41d491",
         "backend/prompts/developer/tasks.py": "8d076b869956ee4bf13afcc0e4442ebca8cec47676b85c4585c011321dd584e1",
@@ -6821,14 +6474,15 @@
       },
       "suggested_disposition": "archived_not_native",
       "review_status": "reviewed",
-      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies.",
+      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "review_evidence": [
         "backend/prompts/team.py",
         "backend/runtime/owned_runtime.py",
         "backend/runtime/lifecycle.py",
         "backend/config/llm.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/catalog-removal-inventory.json"
       ],
       "review_conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
@@ -6885,9 +6539,8 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "8cd93155de5809b2e2ed25bcfead3cac2924b621fb4c9440b4135965ffd76f20",
+      "dependencies_sha256": "ad212c6eb4c0b19a45a021326d6f484df3f8308b6a6bc518452eb894a841d0e0",
       "direct_module_consumers": {
-        "backend/agents/registry.py": "230505d66316edae9c7aa996b794ff848e8b4a784f94e07a768358516c62a886",
         "backend/flows/helpers/messaging.py": "916fc126dd488f27b03d9a4c21590e7dc0e4c5cc633626058b1416f351959918",
         "backend/prompts/code_reviewer/tasks.py": "ed4906d54772a50e78976d8b9abaf80f53edfaa983b927635edb5fef4f41d491",
         "backend/prompts/developer/tasks.py": "8d076b869956ee4bf13afcc0e4442ebca8cec47676b85c4585c011321dd584e1",
@@ -6906,14 +6559,15 @@
       },
       "suggested_disposition": "archived_not_native",
       "review_status": "reviewed",
-      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies.",
+      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "review_evidence": [
         "backend/prompts/team.py",
         "backend/runtime/owned_runtime.py",
         "backend/runtime/lifecycle.py",
         "backend/config/llm.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/catalog-removal-inventory.json"
       ],
       "review_conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
@@ -6947,9 +6601,8 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "8cd93155de5809b2e2ed25bcfead3cac2924b621fb4c9440b4135965ffd76f20",
+      "dependencies_sha256": "ad212c6eb4c0b19a45a021326d6f484df3f8308b6a6bc518452eb894a841d0e0",
       "direct_module_consumers": {
-        "backend/agents/registry.py": "230505d66316edae9c7aa996b794ff848e8b4a784f94e07a768358516c62a886",
         "backend/flows/helpers/messaging.py": "916fc126dd488f27b03d9a4c21590e7dc0e4c5cc633626058b1416f351959918",
         "backend/prompts/code_reviewer/tasks.py": "ed4906d54772a50e78976d8b9abaf80f53edfaa983b927635edb5fef4f41d491",
         "backend/prompts/developer/tasks.py": "8d076b869956ee4bf13afcc0e4442ebca8cec47676b85c4585c011321dd584e1",
@@ -6968,14 +6621,15 @@
       },
       "suggested_disposition": "archived_not_native",
       "review_status": "reviewed",
-      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies.",
+      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "review_evidence": [
         "backend/prompts/team.py",
         "backend/runtime/owned_runtime.py",
         "backend/runtime/lifecycle.py",
         "backend/config/llm.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/catalog-removal-inventory.json"
       ],
       "review_conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
@@ -7037,9 +6691,8 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "8cd93155de5809b2e2ed25bcfead3cac2924b621fb4c9440b4135965ffd76f20",
+      "dependencies_sha256": "ad212c6eb4c0b19a45a021326d6f484df3f8308b6a6bc518452eb894a841d0e0",
       "direct_module_consumers": {
-        "backend/agents/registry.py": "230505d66316edae9c7aa996b794ff848e8b4a784f94e07a768358516c62a886",
         "backend/flows/helpers/messaging.py": "916fc126dd488f27b03d9a4c21590e7dc0e4c5cc633626058b1416f351959918",
         "backend/prompts/code_reviewer/tasks.py": "ed4906d54772a50e78976d8b9abaf80f53edfaa983b927635edb5fef4f41d491",
         "backend/prompts/developer/tasks.py": "8d076b869956ee4bf13afcc0e4442ebca8cec47676b85c4585c011321dd584e1",
@@ -7058,14 +6711,15 @@
       },
       "suggested_disposition": "archived_not_native",
       "review_status": "reviewed",
-      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies.",
+      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "review_evidence": [
         "backend/prompts/team.py",
         "backend/runtime/owned_runtime.py",
         "backend/runtime/lifecycle.py",
         "backend/config/llm.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/catalog-removal-inventory.json"
       ],
       "review_conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
@@ -7097,9 +6751,8 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "8cd93155de5809b2e2ed25bcfead3cac2924b621fb4c9440b4135965ffd76f20",
+      "dependencies_sha256": "ad212c6eb4c0b19a45a021326d6f484df3f8308b6a6bc518452eb894a841d0e0",
       "direct_module_consumers": {
-        "backend/agents/registry.py": "230505d66316edae9c7aa996b794ff848e8b4a784f94e07a768358516c62a886",
         "backend/flows/helpers/messaging.py": "916fc126dd488f27b03d9a4c21590e7dc0e4c5cc633626058b1416f351959918",
         "backend/prompts/code_reviewer/tasks.py": "ed4906d54772a50e78976d8b9abaf80f53edfaa983b927635edb5fef4f41d491",
         "backend/prompts/developer/tasks.py": "8d076b869956ee4bf13afcc0e4442ebca8cec47676b85c4585c011321dd584e1",
@@ -7118,14 +6771,15 @@
       },
       "suggested_disposition": "archived_not_native",
       "review_status": "reviewed",
-      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies.",
+      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "review_evidence": [
         "backend/prompts/team.py",
         "backend/runtime/owned_runtime.py",
         "backend/runtime/lifecycle.py",
         "backend/config/llm.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/catalog-removal-inventory.json"
       ],
       "review_conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
@@ -7171,9 +6825,8 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "8cd93155de5809b2e2ed25bcfead3cac2924b621fb4c9440b4135965ffd76f20",
+      "dependencies_sha256": "ad212c6eb4c0b19a45a021326d6f484df3f8308b6a6bc518452eb894a841d0e0",
       "direct_module_consumers": {
-        "backend/agents/registry.py": "230505d66316edae9c7aa996b794ff848e8b4a784f94e07a768358516c62a886",
         "backend/flows/helpers/messaging.py": "916fc126dd488f27b03d9a4c21590e7dc0e4c5cc633626058b1416f351959918",
         "backend/prompts/code_reviewer/tasks.py": "ed4906d54772a50e78976d8b9abaf80f53edfaa983b927635edb5fef4f41d491",
         "backend/prompts/developer/tasks.py": "8d076b869956ee4bf13afcc0e4442ebca8cec47676b85c4585c011321dd584e1",
@@ -7192,14 +6845,15 @@
       },
       "suggested_disposition": "archived_not_native",
       "review_status": "reviewed",
-      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies.",
+      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "review_evidence": [
         "backend/prompts/team.py",
         "backend/runtime/owned_runtime.py",
         "backend/runtime/lifecycle.py",
         "backend/config/llm.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/catalog-removal-inventory.json"
       ],
       "review_conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
@@ -7274,9 +6928,8 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "8cd93155de5809b2e2ed25bcfead3cac2924b621fb4c9440b4135965ffd76f20",
+      "dependencies_sha256": "ad212c6eb4c0b19a45a021326d6f484df3f8308b6a6bc518452eb894a841d0e0",
       "direct_module_consumers": {
-        "backend/agents/registry.py": "230505d66316edae9c7aa996b794ff848e8b4a784f94e07a768358516c62a886",
         "backend/flows/helpers/messaging.py": "916fc126dd488f27b03d9a4c21590e7dc0e4c5cc633626058b1416f351959918",
         "backend/prompts/code_reviewer/tasks.py": "ed4906d54772a50e78976d8b9abaf80f53edfaa983b927635edb5fef4f41d491",
         "backend/prompts/developer/tasks.py": "8d076b869956ee4bf13afcc0e4442ebca8cec47676b85c4585c011321dd584e1",
@@ -7295,14 +6948,15 @@
       },
       "suggested_disposition": "archived_not_native",
       "review_status": "reviewed",
-      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies.",
+      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "review_evidence": [
         "backend/prompts/team.py",
         "backend/runtime/owned_runtime.py",
         "backend/runtime/lifecycle.py",
         "backend/config/llm.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/catalog-removal-inventory.json"
       ],
       "review_conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
@@ -9001,10 +8655,6 @@
       ],
       "direct_import_consumers": [
         {
-          "path": "backend/agents/team_lead.py",
-          "line": 8
-        },
-        {
           "path": "backend/prompts/team_lead/__init__.py",
           "line": 3
         }
@@ -9019,21 +8669,21 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "4e5fc7dbe2f59d3e4f3811fc0b851bbec9a6a25791de1847bbb98c2eda5e0c36",
+      "dependencies_sha256": "5c24e5977f44fef66f155c133c3d1f59c2a7793973b61f4c9b7e41c49013afa0",
       "direct_module_consumers": {
-        "backend/agents/team_lead.py": "a1b7c1f0186bed400402d48a34168652c6759445dbb22a1a04ba3f362d2a9476",
         "backend/prompts/team_lead/__init__.py": "3f69fd00b42493e650379ad35baf61744314ca8227ea96f5ee07b0a93581cc6a"
       },
       "suggested_disposition": "archived_not_native",
       "review_status": "reviewed",
-      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies.",
+      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "review_evidence": [
         "backend/prompts/team_lead/system.py",
         "backend/runtime/owned_runtime.py",
         "backend/runtime/lifecycle.py",
         "backend/config/llm.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/catalog-removal-inventory.json"
       ],
       "review_conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
@@ -9071,21 +8721,21 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "4e5fc7dbe2f59d3e4f3811fc0b851bbec9a6a25791de1847bbb98c2eda5e0c36",
+      "dependencies_sha256": "5c24e5977f44fef66f155c133c3d1f59c2a7793973b61f4c9b7e41c49013afa0",
       "direct_module_consumers": {
-        "backend/agents/team_lead.py": "a1b7c1f0186bed400402d48a34168652c6759445dbb22a1a04ba3f362d2a9476",
         "backend/prompts/team_lead/__init__.py": "3f69fd00b42493e650379ad35baf61744314ca8227ea96f5ee07b0a93581cc6a"
       },
       "suggested_disposition": "archived_not_native",
       "review_status": "reviewed",
-      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies.",
+      "review_rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "review_evidence": [
         "backend/prompts/team_lead/system.py",
         "backend/runtime/owned_runtime.py",
         "backend/runtime/lifecycle.py",
         "backend/config/llm.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/catalog-removal-inventory.json"
       ],
       "review_conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."

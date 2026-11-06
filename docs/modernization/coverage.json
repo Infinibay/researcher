@@ -57,7 +57,11 @@
         "docs/modernization/human-question-evidence.json",
         "docs/modernization/human-question-results.json",
         "backend/tests/runtime/test_human_questions.py",
-        "backend/tests/runtime/test_runtime_service.py"
+        "backend/tests/runtime/test_runtime_service.py",
+        "docs/architecture/legacy-catalog-removal.md",
+        "docs/modernization/catalog-removal-results.json",
+        "docs/modernization/catalog-removal-packaging.json",
+        "backend/tests/runtime/test_legacy_catalog_removal.py"
       ]
     },
     "C03": {
@@ -322,7 +326,11 @@
         "docs/architecture/legacy-engine-removal.md",
         "docs/modernization/engine-removal-results.json",
         "docs/modernization/engine-removal-packaging.json",
-        "backend/tests/runtime/test_legacy_engine_removal.py"
+        "backend/tests/runtime/test_legacy_engine_removal.py",
+        "docs/architecture/legacy-catalog-removal.md",
+        "docs/modernization/catalog-removal-results.json",
+        "docs/modernization/catalog-removal-packaging.json",
+        "backend/tests/runtime/test_legacy_catalog_removal.py"
       ]
     },
     "E02": {
@@ -832,7 +840,11 @@
         "docs/architecture/legacy-engine-removal.md",
         "docs/modernization/engine-removal-results.json",
         "docs/modernization/engine-removal-packaging.json",
-        "backend/tests/runtime/test_legacy_engine_removal.py"
+        "backend/tests/runtime/test_legacy_engine_removal.py",
+        "docs/architecture/legacy-catalog-removal.md",
+        "docs/modernization/catalog-removal-results.json",
+        "docs/modernization/catalog-removal-packaging.json",
+        "backend/tests/runtime/test_legacy_catalog_removal.py"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -1341,7 +1353,11 @@
         "docs/modernization/finding-consumers-packaging.json",
         "backend/tests/research/test_finding_consumers.py",
         "backend/tests/research/test_legacy_context_scope.py",
-        "backend/tests/knowledge/test_finding_memory_retirement.py"
+        "backend/tests/knowledge/test_finding_memory_retirement.py",
+        "docs/architecture/legacy-catalog-removal.md",
+        "docs/modernization/catalog-removal-results.json",
+        "docs/modernization/catalog-removal-packaging.json",
+        "backend/tests/runtime/test_legacy_catalog_removal.py"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
@@ -1363,7 +1379,11 @@
         "docs/modernization/finding-consumers-packaging.json",
         "backend/tests/research/test_finding_consumers.py",
         "backend/tests/research/test_legacy_context_scope.py",
-        "backend/tests/knowledge/test_finding_memory_retirement.py"
+        "backend/tests/knowledge/test_finding_memory_retirement.py",
+        "docs/architecture/legacy-catalog-removal.md",
+        "docs/modernization/catalog-removal-results.json",
+        "docs/modernization/catalog-removal-packaging.json",
+        "backend/tests/runtime/test_legacy_catalog_removal.py"
       ]
     },
     "U04": {
@@ -1461,7 +1481,11 @@
         "docs/architecture/legacy-engine-removal.md",
         "docs/modernization/engine-removal-results.json",
         "docs/modernization/engine-removal-packaging.json",
-        "backend/tests/runtime/test_legacy_engine_removal.py"
+        "backend/tests/runtime/test_legacy_engine_removal.py",
+        "docs/architecture/legacy-catalog-removal.md",
+        "docs/modernization/catalog-removal-results.json",
+        "docs/modernization/catalog-removal-packaging.json",
+        "backend/tests/runtime/test_legacy_catalog_removal.py"
       ]
     },
     "U08": {

@@ -282,28 +282,3 @@ def test_retained_semantic_results_reject_changed_corpus_before_disclosure(
     monkeypatch.setattr(adapter, "SemanticRetriever", ChangingRetriever)
     data = json.loads(SearchFindingsTool()._run(query="observation", threshold=0))
     assert "error" in data and "corpus changed" in data["error"].lower()
-
-
-@pytest.mark.parametrize(
-    "kind,name",
-    [
-        ("role", "project_lead"),
-        ("role", "team_lead"),
-        ("role", "researcher"),
-        ("role", "research_reviewer"),
-        ("task", "research"),
-        ("task", "plan"),
-        ("task", "create_tickets"),
-        ("task", "requirements"),
-    ],
-)
-def test_retained_finding_catalog_can_inspect_actual_review_feedback(kind, name):
-    """A consumer offered claim previews must also be able to inspect the actual decision and limits."""
-    from backend.tools import get_tools_for_role, get_tools_for_task_type
-
-    tools = (
-        get_tools_for_role(name) if kind == "role" else get_tools_for_task_type(name)
-    )
-    names = {tool.name for tool in tools}
-    assert "read_findings" in names
-    assert "read_finding_reviews" in names

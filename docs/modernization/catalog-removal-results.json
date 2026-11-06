@@ -1,0 +1,12 @@
+{
+  "base_commit": "1c51557",
+  "passed": 47,
+  "failures": [],
+  "skipped": 0,
+  "seconds": 12.3,
+  "scope": "Native dependency environment: retired module entry, retained historical roster, native actor ledger, wiki import/identity/history, native feedback catalogs, actual MCPstdio and registered-controller lifecycle. No real models or user effects; not the full suite.",
+  "harness_corrections": [
+    "Moved the native catalog check out of a test module with remaining opt-in leaf tool imports, after collection correctly refused missing legacy dependencies.",
+    "Corrected the migrated wiki-reader assertion from page_id to its actual id field; production wiki code unchanged. A build started before that fixture correction was superseded by the final clean-copy build."
+  ]
+}

@@ -114,14 +114,3 @@ def test_private_validation_entries_cannot_bypass_retired_provider_policy(entry)
             llm.validate_function_calling()
         else:
             model_capabilities._run_probes({'model':'old-provider'})
-
-
-def test_explicit_legacy_tool_metadata_still_resolves_without_model_execution():
-    """Lazy exports retain historical schema/name readers while native database imports avoid the entire role-tool graph."""
-    from backend.tools import DeepWebResearchTool, get_tools_for_role
-    from backend.tools.web.deep_research import DeepWebResearchTool as original
-
-    assert DeepWebResearchTool is original
-    tools = get_tools_for_role('researcher')
-    assert tools and len({tool.name for tool in tools}) == len(tools)
-    assert all(isinstance(tool.name,str) and tool.args_schema is not None for tool in tools)

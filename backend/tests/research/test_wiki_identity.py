@@ -299,9 +299,8 @@ def test_wiki_edit_invalidates_legacy_vectors_instead_of_ranking_new_text_with_o
         )
 
 
-def test_legacy_wiki_context_keeps_colliding_scope_identity_visible(research_store):
-    """The remaining legacy context path must distinguish same-path local/global candidates."""
-    from backend.knowledge import WikiKnowledgeSource
+def test_native_wiki_reader_keeps_colliding_scope_identity_visible(research_store):
+    """Native context reads distinguish original page IDs and revisions across same-path local/global pages without automatic vector injection."""
     from backend.knowledge.wiki import WikiStore
 
     store = WikiStore(research_store.database)
@@ -316,13 +315,11 @@ def test_legacy_wiki_context_keeps_colliding_scope_identity_visible(research_sto
             actor="fixture",
             operation_key="same-" + namespace,
         )
-    chunks = WikiKnowledgeSource(project_id=101).load_content()
-    assert {chunk["metadata"]["namespace"] for chunk in chunks} == {"project", "global"}
-    assert len({chunk["metadata"]["page_id"] for chunk in chunks}) == 2
-    assert all(
-        "Namespace:" in chunk["content"] and "Revision: 1" in chunk["content"]
-        for chunk in chunks
-    )
+    pages = [store.read(101, "same/path", namespace=namespace) for namespace in ("project", "global")]
+    assert {page["namespace"] for page in pages} == {"project", "global"}
+    assert len({page["id"] for page in pages}) == 2
+    assert {page["content"] for page in pages} == {"Project note", "Global note"}
+    assert all(page["revision"] == 1 for page in pages)
 
 
 def test_owner_wiki_receipts_survive_delete_and_stale_ids_cannot_edit_a_recreated_path(

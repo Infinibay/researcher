@@ -1,9 +1,9 @@
 # Inventario y revisión de prompts
 
 Catálogo nativo versión2; revisión inicial sobre `85f7acd`, actualizada después de
-retirar el motor antiguo sobre `62bb67b`. El [inventario detallado](inventory.json)
-contiene 560 entradas candidatas de 500 archivos Python. **No son 560 prompts distintos
-ni 560 evaluaciones con modelos.** Se archivan 18 entradas del engine eliminado,
+retirar motor y constructores antiguos sobre `1c51557`. El [inventario detallado](inventory.json)
+contiene 553 entradas candidatas de 487 archivos Python. **No son 553 prompts distintos
+ni 553 evaluaciones con modelos.** Se archivan 25 entradas de los módulos eliminados,
 conservando sus decisiones históricas en `retired_entries`.
 Incluye plantillas, constructores, descripciones de herramientas, campos de schema,
 valores de entrada y falsos positivos explícitamente excluidos.
@@ -31,8 +31,8 @@ sea correcta o de que se conozcan todos los consumidores dinámicos.
 | Descripciones de herramientas nativas |33| Conservadas tras leer su texto y comprobar el productor; límites, identidad original, paginación y resultados desconocidos explícitos |
 | Plantillas de roles anteriores |144| Conservadas como históricas, fuera de la composición nativa; no adaptar el protocolo de un loop retirado |
 | Schemas/descripciones del catálogo anterior |339| Conservados para lectores históricos opt-in; no exponer sus permisos por rol, SQL, push o certeza aparente al runtime nativo |
-| Coordinación antigua restante |11| Retirada de consumidores pendiente; no son instrucciones del runtime nuevo. Las 18 entradas del engine ya eliminado quedan archivadas |
-| Proyección de entrada/fuentes/feedback |5| Conservada como datos atribuidos; no convertir texto recibido en política confiable |
+| Coordinación antigua restante |6| Retirada de consumidores pendiente; no son instrucciones del runtime nuevo. Engine y constructores eliminados quedan archivados |
+| Proyección de entrada/fuentes/feedback |3| Conservada como datos atribuidos; no convertir texto recibido en política confiable |
 | CLI/OpenAPI, instrumentación y readiness |15| Excluidos como instrucciones de agente: metadatos humanos/de entrada, scanner o fixture fijo de protocolo |
 
 La retirada física de código heredado sigue siendo una tarea del plan. Su

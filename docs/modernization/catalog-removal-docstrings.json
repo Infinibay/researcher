@@ -1,0 +1,43 @@
+{
+  "base_commit": "1c51557",
+  "changed_or_new_definitions_documented": 5,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/tests/research/test_wiki_identity.py",
+      "symbol": "test_native_wiki_reader_keeps_colliding_scope_identity_visible",
+      "line": 302,
+      "docstring": "Native context reads distinguish original page IDs and revisions across same-path local/global pages without automatic vector injection.",
+      "file_sha256": "72ee9963f22b09856ab40ce4596aa5aa91326201bad2932ed69f4801cac56775"
+    },
+    {
+      "path": "backend/tests/research/test_wiki_imports.py",
+      "symbol": "test_knowledge_entry_points_import_independently_without_incidental_engine_order",
+      "line": 11,
+      "docstring": "Native wiki and its package entry load no framework memory, model stack or retired catalog.",
+      "file_sha256": "7b6b088c94b017f6d23d72b4bafb039246a770100eee45370f34b80274c4d62a"
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_catalog_removal.py",
+      "symbol": "test_role_factories_and_framework_memory_are_not_available",
+      "line": 8,
+      "docstring": "A role name cannot construct a second model/tool owner or inject unversioned framework memory.",
+      "file_sha256": "5fbd069cc9d8aceae03724390848f374f12f7b7af3447249c085871abbf9abe6"
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_catalog_removal.py",
+      "symbol": "test_historical_roster_reader_preserves_original_memory_and_runs",
+      "line": 32,
+      "docstring": "Retiring constructors leaves old identities, memory text and recorded execution available without adopting or executing them.",
+      "file_sha256": "5fbd069cc9d8aceae03724390848f374f12f7b7af3447249c085871abbf9abe6"
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_catalog_removal.py",
+      "symbol": "test_native_finding_catalog_can_inspect_actual_review_feedback",
+      "line": 53,
+      "docstring": "Native capabilities offering claim previews also expose actual review feedback; a historical role no longer selects tools.",
+      "file_sha256": "5fbd069cc9d8aceae03724390848f374f12f7b7af3447249c085871abbf9abe6"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}
