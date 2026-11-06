@@ -1,15 +1,8 @@
-"""Resilient LLM client for the loop engine.
-
-Wraps litellm.completion with:
-- Retry logic with exponential backoff for transient errors
-- Model capability adaptation (/no_think, tool_choice downgrade, JSON mode)
-- Transient vs permanent error classification
-"""
+"""Historical error classifiers and retired direct-model entry; no provider calls, automatic retries or fallback billing are available."""
 
 from __future__ import annotations
 
 import logging
-import time
 from typing import Any
 
 logger = logging.getLogger(__name__)
@@ -76,65 +69,7 @@ def call_llm(
     tools: list[dict[str, Any]] | None = None,
     tool_choice: str | dict[str, Any] = "auto",
 ) -> Any:
-    """Call litellm.completion with retry for transient errors.
+    """Reject direct old-provider generation before client import, adaptation or retries; the native runtime owns the admitted turn."""
+    from backend.runtime.lifecycle import NativeOwnerRequired
 
-    Adapts request parameters based on probed model capabilities:
-    - Downgrades tool_choice="required" -> "auto" if unsupported
-    - Injects /no_think prefix for models with thinking sections
-    - Enables JSON mode when no tools present
-    - Skips response_format=json_object when tools are present (grammar conflict)
-    """
-    import litellm
-    from backend.config.model_capabilities import get_model_capabilities
-
-    caps = get_model_capabilities()
-
-    kwargs: dict[str, Any] = {**params, "messages": messages}
-    if tools:
-        kwargs["tools"] = tools
-        # Downgrade tool_choice if model doesn't support "required"
-        if tool_choice == "required" and not caps.supports_tool_choice_required:
-            kwargs["tool_choice"] = "auto"
-        else:
-            kwargs["tool_choice"] = tool_choice
-
-        # Inject /no_think prefix for models with thinking sections
-        # (Qwen 3.x emits <think> tags that break JSON tool call parsing)
-        if caps.has_thinking_sections and messages:
-            last_user = None
-            for i in range(len(messages) - 1, -1, -1):
-                if messages[i].get("role") == "user":
-                    last_user = i
-                    break
-            if last_user is not None:
-                content = messages[last_user].get("content", "")
-                if not content.startswith("/no_think"):
-                    messages = list(messages)  # Don't mutate caller's list
-                    messages[last_user] = {
-                        **messages[last_user],
-                        "content": f"/no_think\n{content}",
-                    }
-                    kwargs["messages"] = messages
-
-    # Force JSON output when no tools present -- prevents models from
-    # mixing natural language with JSON in manual TC mode.
-    # Do NOT set when tools are present -- JSON grammar conflicts with
-    # function calling grammar in some backends.
-    if caps.supports_json_mode and not tools:
-        kwargs["response_format"] = {"type": "json_object"}
-
-    last_exc: Exception | None = None
-    for attempt in range(1, LLM_RETRIES + 1):
-        try:
-            return litellm.completion(**kwargs)
-        except Exception as exc:
-            last_exc = exc
-            if not is_transient(exc) or attempt == LLM_RETRIES:
-                raise
-            delay = LLM_RETRY_DELAY * (2 ** (attempt - 1))
-            logger.warning(
-                "Transient LLM error (attempt %d/%d), retrying in %.1fs: %s",
-                attempt, LLM_RETRIES, delay, str(exc)[:200],
-            )
-            time.sleep(delay)
-    raise last_exc  # type: ignore[misc]
+    raise NativeOwnerRequired("Legacy model calls are retired; use an explicitly admitted native runtime turn")

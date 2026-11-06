@@ -11,6 +11,7 @@ from starlette.testclient import TestClient
 
 
 def test_importing_api_does_not_create_a_database_or_start_maintenance(tmp_path):
+    """A cold API import does not open storage, start maintenance or load legacy model/tool frameworks."""
     database = tmp_path / "unopened" / "project.db"
     program = """
 import sys, threading
@@ -18,7 +19,10 @@ from pathlib import Path
 from pytest_socket import disable_socket
 disable_socket(allow_unix_socket=True)
 import backend.api.main
+from backend.api.local_access import LocalAccess
+app = backend.api.main.create_app(access=LocalAccess(pairing_key='synthetic-cold-api-key-at-least-32-characters'))
 assert not Path(sys.argv[1]).exists(), 'Import created a database'
+assert 'crewai' not in sys.modules and 'litellm' not in sys.modules, 'Import initialized legacy model frameworks'
 assert not any(t.name.startswith('infinibay-') for t in threading.enumerate()), 'Import started maintenance'
 """
     env = {key: value for key, value in os.environ.items() if "API_KEY" not in key}

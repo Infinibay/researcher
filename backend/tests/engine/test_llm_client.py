@@ -1,14 +1,11 @@
 """Tests for backend.engine.llm_client."""
 
-from unittest.mock import MagicMock, patch
 
 import pytest
 
 from backend.engine.llm_client import (
     is_malformed_tool_call,
     is_transient,
-    call_llm,
-    LLM_RETRIES,
 )
 
 
@@ -56,67 +53,13 @@ class TestIsMalformedToolCall:
         assert is_malformed_tool_call(Exception("connection error")) is False
 
 
-class TestCallLlm:
-    @patch("backend.config.model_capabilities.get_model_capabilities")
-    @patch("litellm.completion")
-    def test_retries_on_transient_error(self, mock_completion, mock_caps):
-        mock_caps.return_value = MagicMock(
-            supports_tool_choice_required=True,
-            has_thinking_sections=False,
-            supports_json_mode=False,
-        )
+class TestRetiredCallLlm:
+    """Historical pure classifiers remain available; direct generation no longer owns retries or provider calls."""
 
-        # Fail twice with transient error, then succeed
-        mock_completion.side_effect = [
-            Exception("connection error"),
-            Exception("timeout"),
-            MagicMock(choices=[MagicMock()]),
-        ]
+    def test_old_call_requires_native_admission(self):
+        """Provider parameters cannot authorize a call through the retired client."""
+        from backend.engine.llm_client import call_llm
+        from backend.runtime.lifecycle import NativeOwnerRequired
 
-        with patch("backend.engine.llm_client.time.sleep"):  # Don't actually sleep
-            result = call_llm(
-                params={"model": "test"},
-                messages=[{"role": "user", "content": "hello"}],
-            )
-
-        assert mock_completion.call_count == 3
-
-    @patch("backend.config.model_capabilities.get_model_capabilities")
-    @patch("litellm.completion")
-    def test_raises_on_permanent_error(self, mock_completion, mock_caps):
-        mock_caps.return_value = MagicMock(
-            supports_tool_choice_required=True,
-            has_thinking_sections=False,
-            supports_json_mode=False,
-        )
-
-        mock_completion.side_effect = Exception("does not support tools")
-
-        with pytest.raises(Exception, match="does not support tools"):
-            call_llm(
-                params={"model": "test"},
-                messages=[{"role": "user", "content": "hello"}],
-            )
-
-        # Should not retry permanent errors
-        assert mock_completion.call_count == 1
-
-    @patch("backend.config.model_capabilities.get_model_capabilities")
-    @patch("litellm.completion")
-    def test_raises_after_max_retries(self, mock_completion, mock_caps):
-        mock_caps.return_value = MagicMock(
-            supports_tool_choice_required=True,
-            has_thinking_sections=False,
-            supports_json_mode=False,
-        )
-
-        mock_completion.side_effect = Exception("connection error")
-
-        with patch("backend.engine.llm_client.time.sleep"):
-            with pytest.raises(Exception, match="connection error"):
-                call_llm(
-                    params={"model": "test"},
-                    messages=[{"role": "user", "content": "hello"}],
-                )
-
-        assert mock_completion.call_count == LLM_RETRIES
+        with pytest.raises(NativeOwnerRequired):
+            call_llm({"model":"old-provider"},[{"role":"user","content":"old request"}])

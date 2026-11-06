@@ -1,0 +1,175 @@
+{
+  "base_commit": "487cdd2",
+  "python_files": 11,
+  "new": [
+    [
+      "backend/config/llm.py",
+      "RET501",
+      "Do not explicitly `return None` in function if it is the only possible return value"
+    ],
+    [
+      "backend/config/llm.py",
+      "RET501",
+      "Do not explicitly `return None` in function if it is the only possible return value"
+    ],
+    [
+      "backend/config/llm.py",
+      "RET501",
+      "Do not explicitly `return None` in function if it is the only possible return value"
+    ],
+    [
+      "backend/config/llm.py",
+      "RET501",
+      "Do not explicitly `return None` in function if it is the only possible return value"
+    ]
+  ],
+  "inherited": [
+    [
+      "backend/config/llm.py",
+      "SIM114",
+      "Combine `if` branches using logical `or` operator"
+    ],
+    [
+      "backend/prompts/team.py",
+      "UP017",
+      "Use `datetime.UTC` alias"
+    ],
+    [
+      "backend/prompts/team.py",
+      "UP017",
+      "Use `datetime.UTC` alias"
+    ],
+    [
+      "backend/prompts/team.py",
+      "BLE001",
+      "Do not catch blind exception: `Exception`"
+    ],
+    [
+      "backend/tools/base/__init__.py",
+      "RUF022",
+      "`__all__` is not sorted"
+    ],
+    [
+      "backend/tools/web/deep_research.py",
+      "UP035",
+      "`typing.Type` is deprecated, use `type` instead"
+    ],
+    [
+      "backend/tools/web/deep_research.py",
+      "UP006",
+      "Use `type` instead of `Type` for type annotation"
+    ]
+  ],
+  "resolved": [
+    [
+      "backend/config/llm.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/config/llm.py",
+      "BLE001",
+      "Do not catch blind exception: `Exception`"
+    ],
+    [
+      "backend/config/model_capabilities.py",
+      "F401",
+      "`json` imported but unused"
+    ],
+    [
+      "backend/config/model_capabilities.py",
+      "F401",
+      "`dataclasses.field` imported but unused"
+    ],
+    [
+      "backend/config/model_capabilities.py",
+      "BLE001",
+      "Do not catch blind exception: `Exception`"
+    ],
+    [
+      "backend/config/model_capabilities.py",
+      "BLE001",
+      "Do not catch blind exception: `Exception`"
+    ],
+    [
+      "backend/config/model_capabilities.py",
+      "BLE001",
+      "Do not catch blind exception: `Exception`"
+    ],
+    [
+      "backend/config/model_capabilities.py",
+      "BLE001",
+      "Do not catch blind exception: `Exception`"
+    ],
+    [
+      "backend/config/model_capabilities.py",
+      "BLE001",
+      "Do not catch blind exception: `Exception`"
+    ],
+    [
+      "backend/engine/llm_client.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/prompts/team.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/prompts/team.py",
+      "F841",
+      "Local variable `now` is assigned to but never used"
+    ],
+    [
+      "backend/tests/engine/test_llm_client.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/tests/engine/test_llm_client.py",
+      "F841",
+      "Local variable `result` is assigned to but never used"
+    ],
+    [
+      "backend/tests/engine/test_llm_client.py",
+      "SIM117",
+      "Use a single `with` statement with multiple contexts instead of nested `with` statements"
+    ],
+    [
+      "backend/tools/base/__init__.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/tools/web/deep_research.py",
+      "BLE001",
+      "Do not catch blind exception: `Exception`"
+    ],
+    [
+      "backend/tools/web/deep_research.py",
+      "BLE001",
+      "Do not catch blind exception: `Exception`"
+    ],
+    [
+      "backend/tools/web/deep_research.py",
+      "BLE001",
+      "Do not catch blind exception: `Exception`"
+    ],
+    [
+      "backend/tools/web/deep_research.py",
+      "BLE001",
+      "Do not catch blind exception: `Exception`"
+    ],
+    [
+      "backend/tools/web/deep_research.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/tools/web/deep_research.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ]
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "base_commit": "487cdd2",
+  "status": "legacy_auxiliary_provider_generation_and_billing_fallback_retired_native_research_preserved",
+  "schema_version": 54,
+  "new_persistence_or_execution_loop": false,
+  "implemented": [
+    "Retired old config get_llm/get_litellm_params, function-calling validation/probe_model/private probes and direct llm_client.call_llm before provider import, generation or retries. Capability defaults are unknown, not guessed supported or failed probes marked successful.",
+    "Old environment/setup hooks export no API keys and patch no clients. Actual model/account/capability handling remains in the original native runtime; changing legacy LLM settings does not configure the native model. Settings/UI migration remains explicit.",
+    "Historical conversation reader performs no model summary or digest-cache substitution. It shows bounded attributed literal excerpts and explicit omissions, uses timestamp/id ordering and retains original stored messages.",
+    "Old DeepWebResearch sync/async returns scoped owner policy before any search, fetch or synthesis. Native admitted research owns discovery/capture/citations/reports; an owner hint is not a research result.",
+    "Moved old role/tool metadata into lazily loaded _legacy_catalog and made old base-tool export lazy. Cold API import AND create_app load neither CrewAI nor LiteLLM, create no database and start no maintenance. Explicit historic schema/role exports still resolve."
+  ],
+  "verification": {
+    "red": [
+      "8FAIL1PASS0.91s initial provider/probe/env/web cases; initial summary test had no configured provider and was strengthened.",
+      "Strong summary case1FAIL0.37s with explicit synthetic provider.",
+      "Consumer run2FAIL140PASS36.48s: timestamp ties displayed oldest messages, and cold API root-tool imports caused an actual import cycle. Stable timestamp/id order and lazy catalogue/base exports fix the causes."
+    ],
+    "overlapping_source_groups": [
+      {
+        "passed": 9,
+        "seconds": 0.8,
+        "scope": "first retirement contract"
+      },
+      {
+        "passed": 142,
+        "seconds": 36.39,
+        "scope": "retirement, startup, legacy project guards, native conversations/input/service, web/PDF sources"
+      },
+      {
+        "passed": 56,
+        "seconds": 28.89,
+        "scope": "strong cold API factory, explicit legacy metadata and native authentication/rotation/withdrawal; overlaps other groups"
+      }
+    ],
+    "final_extracted_wheel": {
+      "tests_passed": 179,
+      "failures": [],
+      "skipped": 0,
+      "backend_modules_loaded": 362,
+      "backend_imports_only_from_wheel": true,
+      "model_turns": 0,
+      "controlled_native_turns": 1,
+      "actual_kernel_owned_fixture": true,
+      "network": "Disabled except Unix sockets",
+      "generation_and_ken": "Controlled native researcher and Ken; actual kernel/broker/SQLite, captured source/analysis/report. Actual pinned Codex search-policy protocol also tested without an account or generation. No real-model or retrieval-ranking quality claim.",
+      "seconds": 67.589
+    },
+    "physical_native_research": {
+      "seconds": 2.146,
+      "controlled_native_turns": 1,
+      "real_model_turns": 0,
+      "actual_kernel_broker_sqlite": true,
+      "assertions": [
+        "Actual configured native research produces captured source, provisional finding, selected draft report and completed analysis-command receipt.",
+        "Original file remains137; calculation stdout contains200; task is not owner-accepted or done.",
+        "All native peers close and the original broker grant retires."
+      ]
+    },
+    "native_search": "Actual pinned Codex protocol validates configured search policy without an account or model generation; source/capability observation and late-context limits are tested.",
+    "cold_api": "Separate subprocess and isolated-wheel pre-test bootstrap import and construct the API without legacy frameworks, database creation or maintenance startup.",
+    "documentation": {
+      "checked_changed_or_new_definitions": 52,
+      "missing_inherited_query_docstring": 1,
+      "deferred": "DD023"
+    },
+    "lint": {
+      "new": 4,
+      "scope": "RET501 in inert legacy setup hooks only; no runtime failure.",
+      "inherited": 7,
+      "resolved": 22,
+      "deferred": "DD023"
+    },
+    "frontend": "No frontend change, new browser/full-page or human comprehension acceptance."
+  },
+  "remaining": [
+    "Native-only dependency installation/locking and removal of core CrewAI/crewai-tools/LiteLLM/Ollama/Chroma/old parser consumers, legacy agent/knowledge constructors, old MCP/Git/install exposure and obsolete behavior tests.",
+    "Legacy settings UI/provider fields do not choose the native model; preserve actual configured runtime model and complete the settings redesign.",
+    "Whole-project acceptance/final report, selected material for successors, retained publication, endpoint/TUI parity, all prompt/book/model/science/human evaluations, remaining six routes/all full-page acceptance,43broad scenarios/current global suite, clean install/restore/inverses43\u201354 and final fresh branch review."
+  ],
+  "limits": "No whole-goal completion, full dependency removal, native-only clean installation, real-model or Ken-ranking quality, global-green suite or cross-process/unregistered legacy worker closure claim."
+}

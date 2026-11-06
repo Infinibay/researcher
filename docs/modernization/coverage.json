@@ -22,7 +22,11 @@
         "docs/architecture/native-project-producer-cutover.md",
         "docs/modernization/project-producer-results.json",
         "docs/modernization/project-producer-packaging.json",
-        "backend/tests/runtime/test_project_producer_retirement.py"
+        "backend/tests/runtime/test_project_producer_retirement.py",
+        "docs/architecture/native-auxiliary-inference-cutover.md",
+        "docs/modernization/auxiliary-results.json",
+        "docs/modernization/auxiliary-packaging.json",
+        "backend/tests/runtime/test_auxiliary_inference_retirement.py"
       ]
     },
     "C02": {
@@ -574,7 +578,11 @@
         "docs/architecture/native-project-producer-cutover.md",
         "docs/modernization/project-producer-results.json",
         "docs/modernization/project-producer-packaging.json",
-        "backend/tests/runtime/test_project_producer_retirement.py"
+        "backend/tests/runtime/test_project_producer_retirement.py",
+        "docs/architecture/native-auxiliary-inference-cutover.md",
+        "docs/modernization/auxiliary-results.json",
+        "docs/modernization/auxiliary-packaging.json",
+        "backend/tests/runtime/test_auxiliary_inference_retirement.py"
       ]
     },
     "E06": {
@@ -829,7 +837,11 @@
         "docs/architecture/native-project-producer-cutover.md",
         "docs/modernization/project-producer-results.json",
         "docs/modernization/project-producer-packaging.json",
-        "backend/tests/runtime/test_project_producer_retirement.py"
+        "backend/tests/runtime/test_project_producer_retirement.py",
+        "docs/architecture/native-auxiliary-inference-cutover.md",
+        "docs/modernization/auxiliary-results.json",
+        "docs/modernization/auxiliary-packaging.json",
+        "backend/tests/runtime/test_auxiliary_inference_retirement.py"
       ]
     },
     "E12": {

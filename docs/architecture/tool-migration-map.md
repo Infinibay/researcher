@@ -309,3 +309,18 @@ config/model_capabilities, engine/llm_client y DeepResearch ni todo Git/MCP/inst
 antiguo. Sus consumidores, dependencias y pruebas son el siguiente bloque principal;
 cierre integral e informe final de proyecto siguen pendientes, sin equiparar una
 etiqueta de estado a aceptación comprobada.
+
+
+## Inferencia auxiliar posterior a 487cdd2
+
+Retiradas las llamadas directas del cliente/configuración/probes antiguos,
+exportación de API keys, síntesis DeepResearch y resumen de conversación. Modelos,
+autenticación y capacidad real permanecen en el runtime nativo; lectores históricos
+usan texto atribuido y capacidades desconocidas. El catálogo anterior se movió a
+`backend.tools._legacy_catalog`, con exports lazy para evitar inicialización de
+frameworks/ciclos al importar la API/base. La metadata histórica sigue resolviendo.
+[Contrato](native-auxiliary-inference-cutover.md).
+
+No se eliminaron aún las dependencias de esos lectores/constructores ni se probó
+instalación nativa limpia. Es el siguiente corte junto con MCP/Git/instalación y
+pruebas de comportamiento retirado; no sustituirlo por pulido de hooks.

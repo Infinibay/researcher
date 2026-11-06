@@ -1,0 +1,10 @@
+{
+  "base_commit": "487cdd2",
+  "changed_or_new_definitions_checked": 52,
+  "missing": [
+    {
+      "path": "backend/prompts/team.py",
+      "symbol": "build_conversation_context._query"
+    }
+  ]
+}

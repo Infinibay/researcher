@@ -54,3 +54,6 @@ retomarlo. No convertir su registro en otra investigación o implementación.
 
 
 | DD-022 | Dos tests heredados de Stop modificados para simular trabajadores ya existentes carecen de docstring propio. Seis RUF059 de handles sintéticos no usados y un S102 por compilar exclusivamente la función conocida de la fixture controlada. Producción modificada documentada y sin avisos nuevos;7heredados,34resueltos. | `test_listener_lifecycle.py`, `test_project_producer_retirement.py`; `project-producer-docstrings.json`, `project-producer-lint.json` | Pasada de documentación/estilo después de retirar consumidores principales. No repetir el ensayo nativo por estos detalles. |
+
+
+| DD-023 | Cuatro RET501 por `return None` explícito en hooks de proveedor ya inertes y un docstring pendiente en `_query` del lector histórico, modificado para ordenar por ID. Son detalles de estilo/documentación; el no-gasto de proveedor y el aislamiento están comprobados.7avisos heredados,22resueltos. | `config/llm.py`, `prompts/team.py`; `auxiliary-lint.json`, `auxiliary-docstrings.json` | Pasada posterior de documentación/estilo. No reabrir el pipeline nativo ni el catálogo para este pulido. |

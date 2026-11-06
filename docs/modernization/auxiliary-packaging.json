@@ -1,0 +1,42 @@
+{
+  "base_commit": "487cdd2",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "f79320668df2966fec7cb387d4afe442c666b705037bf4f5bc8477bb8e5ceb3c",
+  "observed": {
+    "tests_passed": 179,
+    "failures": [],
+    "skipped": 0,
+    "backend_modules_loaded": 362,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "controlled_native_turns": 1,
+    "actual_kernel_owned_fixture": true,
+    "network": "Disabled except Unix sockets",
+    "generation_and_ken": "Controlled native researcher and Ken; actual kernel/broker/SQLite, captured source/analysis/report. Actual pinned Codex search-policy protocol also tested without an account or generation. No real-model or retrieval-ranking quality claim.",
+    "seconds": 67.589
+  },
+  "backend_tree": {
+    "matching_source_files": 785,
+    "sha256": "0ead605366c330086c146d520ae359d1012a0169b4f6b14780f96df0ab8df6d3"
+  },
+  "tests": [
+    "backend/tests/runtime/test_auxiliary_inference_retirement.py",
+    "backend/tests/engine/test_llm_client.py",
+    "backend/tests/api/test_startup.py",
+    "backend/tests/runtime/test_project_producer_retirement.py",
+    "backend/tests/runtime/test_project_owner_cutover.py",
+    "backend/tests/runtime/test_run_conversation.py",
+    "backend/tests/runtime/test_run_input.py",
+    "backend/tests/runtime/test_runtime_service.py",
+    "backend/tests/research/test_web_fetcher.py",
+    "backend/tests/research/test_pdf_web.py",
+    "backend/tests/runtime/test_subscription_provider.py",
+    "backend/tests/runtime/test_subscription_auth.py",
+    "backend/tests/runtime/test_subscription_session.py",
+    "backend/tests/runtime/test_native_search.py",
+    "backend/tests/runtime/test_owned_factory.py::test_configured_owned_product_run_persists_draft_and_analysis_receipts[research]"
+  ],
+  "bootstrap": "Python3.12 -I -S; explicit installed dependency path and original host venv prefix; all backend imports from extracted wheel.",
+  "exclusions": "No case deselected from this suite. Full old test migration, inverse43\u201354 and clean native-only dependency installation remain required; no guard weakened.",
+  "limits": "Prepared offline assets and installed dependencies; not a clean host install, full suite, real-model evaluation or global legacy producer closure."
+}

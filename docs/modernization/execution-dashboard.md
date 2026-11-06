@@ -4,12 +4,40 @@ Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../supe
 
 ## Estado comprobado
 
-- Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; quedan auxiliares, herramientas y dependencias antiguos.
+- Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor retirados; quedan consumidores, herramientas y dependencias antiguos.
 - Interfaz: seis pilotos, 18/36 conceptos de escritorio y 6/12 móviles; seis rutas pendientes y 0/12 páginas completamente aceptadas.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: retirar activación antigua de proyectos
+## Etapa actual: retirar inferencia auxiliar y fallback de proveedor
+
+**Resultado:** configuración/cliente/probes antiguos rechazan antes de construir
+modelos, generar o reintentar. No se exportan API keys ni se parchean clientes;
+capacidades no observadas quedan desconocidas. El lector histórico usa texto
+atribuido y límites explícitos; DeepResearch antiguo deriva al propietario antes
+de web/modelo. La investigación real sigue en la sesión nativa admitida.
+
+El catálogo de herramientas/base antiguo se carga solo por petición explícita.
+La API puede importarse y construirse en frío sin CrewAI/LiteLLM, sin crear DB ni
+mantenimiento. Los lectores de schemas históricos siguen disponibles.
+
+**Verificación:**142casos dirigidos y56de autenticación/arranque pasan (se solapan).
+Wheel final179PASS0FAIL0SKIP67.59s,362imports sólo del paquete. Investigación
+nativa controlada con kernel/broker/SQLite: fuente/hallazgo/informe y comando real,
+fuente137intacta/cálculo200, peers cerrados y grant retirado; no aceptación inventada.
+Protocolo real de búsqueda del Codex fijado comprobado sin cuenta ni generación.
+0turnos de modelo real.52definiciones revisadas;1docstring de helper heredado y
+4avisos de estilo en hooks inertes quedanDD023;7avisos heredados/22resueltos.
+[Resultados](auxiliary-results.json), [paquete](auxiliary-packaging.json),
+[contrato](../architecture/native-auxiliary-inference-cutover.md).
+
+**Siguiente bloque principal:** instalación/dependencias del runtime nativo y
+consumidores de herramientas/agentes/conocimiento/MCP/Git antiguos. Contrastar las
+capacidades actuales antes de quitar dependencias; no volver a pulir wrappers,
+snapshots o registros. Settings/modelo nativo, cierre integral del proyecto,
+material de sucesoras/publicación retenida y el resto del plan siguen pendientes.
+
+## Etapa anterior: retirar activación antigua de proyectos
 
 **Resultado:** MainProjectFlow/BrainstormingFlow/TicketCreationFlow son entradas
 de solo lectura al propietario. FlowManager no crea trabajadores ni borra eventos;
@@ -32,13 +60,6 @@ sin arrancar hijos y fuente137 intacta.0modelos reales.92definiciones comprobada
 7avisos de tests diferidosDD022. No nueva aceptación visual ni suite global verde.
 [Resultados](project-producer-results.json), [paquetes](project-producer-packaging.json),
 [contrato](../architecture/native-project-producer-cutover.md).
-
-**Siguiente bloque principal:** retirar auxiliares/proveedores y herramientas
-antiguos con sus consumidores y dependencias: resumen de conversación, detección
-de capacidades, llm_client, DeepResearch y entradas legacy de Git/MCP/instalación.
-Conservar las capacidades de producto necesarias y migrar sus pruebas, sin otra
-pasada de pulido de registros/snapshots/guardas. Cierre integral del proyecto,
-material de sucesoras, publicación retenida y el resto íntegro del plan siguen activos.
 
 ## Etapa anterior: retirar ejecución antigua por tarea
 
