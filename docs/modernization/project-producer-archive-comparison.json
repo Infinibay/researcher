@@ -1,0 +1,10 @@
+{
+  "first_wheel_sha256": "2eaf10fb296d0efc2a2004291bfb85ff8f887aa933f6e6bf29345d88185e58cf",
+  "final_wheel_sha256": "be2a54a8dee078feb1319e2050df77483e4b358d108f22248240c1220d9c45e4",
+  "application_members": 525,
+  "identical_application_members": 525,
+  "changed_members": [
+    "backend/tests/runtime/test_owned_planning.py"
+  ],
+  "meaning": "Only the physical test expected an unscoped global task count; it now compares the actual project count. Runtime source and controlled native fixture are byte-identical."
+}

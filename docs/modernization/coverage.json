@@ -18,7 +18,11 @@
         "docs/architecture/human-questions.md",
         "docs/modernization/human-question-evidence.json",
         "docs/modernization/human-question-results.json",
-        "backend/tests/runtime/test_human_questions.py"
+        "backend/tests/runtime/test_human_questions.py",
+        "docs/architecture/native-project-producer-cutover.md",
+        "docs/modernization/project-producer-results.json",
+        "docs/modernization/project-producer-packaging.json",
+        "backend/tests/runtime/test_project_producer_retirement.py"
       ]
     },
     "C02": {
@@ -566,7 +570,11 @@
         "docs/architecture/native-task-flow-cutover.md",
         "docs/modernization/code-flow-results.json",
         "docs/modernization/code-flow-packaging.json",
-        "backend/tests/runtime/test_code_flow_cutover.py"
+        "backend/tests/runtime/test_code_flow_cutover.py",
+        "docs/architecture/native-project-producer-cutover.md",
+        "docs/modernization/project-producer-results.json",
+        "docs/modernization/project-producer-packaging.json",
+        "backend/tests/runtime/test_project_producer_retirement.py"
       ]
     },
     "E06": {
@@ -817,7 +825,11 @@
         "docs/architecture/native-task-flow-cutover.md",
         "docs/modernization/code-flow-results.json",
         "docs/modernization/code-flow-packaging.json",
-        "backend/tests/runtime/test_code_flow_cutover.py"
+        "backend/tests/runtime/test_code_flow_cutover.py",
+        "docs/architecture/native-project-producer-cutover.md",
+        "docs/modernization/project-producer-results.json",
+        "docs/modernization/project-producer-packaging.json",
+        "backend/tests/runtime/test_project_producer_retirement.py"
       ]
     },
     "E12": {

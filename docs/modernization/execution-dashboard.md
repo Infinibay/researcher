@@ -4,12 +4,43 @@ Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../supe
 
 ## Estado comprobado
 
-- Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución antigua por tarea retirada, faltan productores de proyecto e inferencia auxiliar.
+- Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; quedan auxiliares, herramientas y dependencias antiguos.
 - Interfaz: seis pilotos, 18/36 conceptos de escritorio y 6/12 móviles; seis rutas pendientes y 0/12 páginas completamente aceptadas.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: retirar ejecución antigua por tarea
+## Etapa actual: retirar activación antigua de proyectos
+
+**Resultado:** MainProjectFlow/BrainstormingFlow/TicketCreationFlow son entradas
+de solo lectura al propietario. FlowManager no crea trabajadores ni borra eventos;
+Start/Resume/listeners y engine antiguos rechazan activación antes de la primera
+admisión. Stop conserva los trabajadores/callbacks realmente vivos sin resetear
+historia. Handlers de mensajes/salud/progreso/revisión/rework y helpers Crew/agent
+task ya no ejecutan modelos ni completan proyectos.
+
+El planificador nativo conserva requisitos/planes/ideas históricos e inventario
+real de tareas como fuentes atribuidas, con límites explícitos y sin reproducir
+sesiones/aprobaciones. No hay nueva tabla o loop; esquema54 sin cambios.
+
+**Verificación:**128casos dirigidos pasan. Primer wheel233PASS1fallo de fixture:
+comparaba tareas del proyecto con el total de dos proyectos. Final29PASS0FAIL0SKIP
+9.24s,322imports sólo del paquete;525miembros de aplicación idénticos y
+solo el test cambia su contador. Ensayo nativo readonly con kernel/broker/SQLite
+reales: cita requisito histórico137→propuesta→cierre→aceptación del grafo una vez,
+sin arrancar hijos y fuente137 intacta.0modelos reales.92definiciones comprobadas,
+0docstrings/avisos nuevos faltantes en producción;2tests heredados sin docstring y
+7avisos de tests diferidosDD022. No nueva aceptación visual ni suite global verde.
+[Resultados](project-producer-results.json), [paquetes](project-producer-packaging.json),
+[contrato](../architecture/native-project-producer-cutover.md).
+
+**Siguiente bloque principal:** retirar auxiliares/proveedores y herramientas
+antiguos con sus consumidores y dependencias: resumen de conversación, detección
+de capacidades, llm_client, DeepResearch y entradas legacy de Git/MCP/instalación.
+Conservar las capacidades de producto necesarias y migrar sus pruebas, sin otra
+pasada de pulido de registros/snapshots/guardas. Cierre integral del proyecto,
+material de sucesoras, publicación retenida y el resto íntegro del plan siguen activos.
+
+## Etapa anterior: retirar ejecución antigua por tarea
 
 **Resultado:** DevelopmentFlow/CodeReviewFlow son entradas de solo lectura al
 propietario. Se retiraron sus loops/CI/rework/automerge, el despacho/reset/espera
@@ -29,12 +60,6 @@ DD021.0avisos nuevos de producción;12heredados,29resueltos. No aceptación visu
 suite global verde ni cierre físico global afirmados.
 [Resultados](code-flow-results.json), [paquete](code-flow-packaging.json),
 [contrato](../architecture/native-task-flow-cutover.md).
-
-**Siguiente bloque principal:** retirar productores de proyecto de
-FlowManager/AgentLoop/listeners y la inferencia auxiliar, preservando resultados
-necesarios y Stop de trabajadores realmente registrados. Después, selección de
-material para sucesoras del plan y capacidades pendientes. No volver a pulir
-snapshots/selectores/journals ni tratar un handoff como prueba de cierre.
 
 ## Etapa anterior: importar rutas de trabajo anterior
 

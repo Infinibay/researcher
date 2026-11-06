@@ -1,0 +1,31 @@
+{
+  "base_commit": "3d794f7",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "be2a54a8dee078feb1319e2050df77483e4b358d108f22248240c1220d9c45e4",
+  "observed": {
+    "tests_passed": 29,
+    "failures": [],
+    "skipped": 0,
+    "backend_modules_loaded": 322,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "controlled_native_turns": 1,
+    "actual_kernel_owned_fixture": true,
+    "network": "Disabled except Unix sockets",
+    "generation_and_ken": "Controlled native planner and Ken; actual kernel/broker/SQLite and readonly source. No real-model or retrieval-ranking quality claim.",
+    "seconds": 9.242
+  },
+  "backend_tree": {
+    "matching_source_files": 783,
+    "sha256": "45b51dac975e27209f88b19134c322a961e048a025b29b087be74996928e3f49"
+  },
+  "tests": [
+    "backend/tests/runtime/test_project_producer_retirement.py",
+    "backend/tests/runtime/test_project_planning.py",
+    "backend/tests/flows/test_listener_lifecycle.py",
+    "backend/tests/runtime/test_owned_planning.py::test_owned_project_start_proposes_then_owner_accepts_without_executing_children"
+  ],
+  "bootstrap": "Python3.12 -I -S; explicit installed dependency path and original host venv prefix; all backend imports from extracted wheel.",
+  "exclusions": "No deselected case belongs to this selected suite. Full old test migration, inverse43\u201354 and clean-host restore remain required; no guard weakened.",
+  "limits": "Prepared offline assets and installed dependencies; not a clean host install, full suite, real-model evaluation or global legacy producer closure."
+}

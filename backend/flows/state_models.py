@@ -62,7 +62,7 @@ class TaskType(str, Enum):
 
 
 class ProjectState(BaseModel):
-    """State for MainProjectFlow — orchestrates the entire project lifecycle."""
+    """Historical project snapshot retained for inspection; its requirements, plan, stage and approval labels are data, never native execution or project-acceptance authority."""
 
     project_id: int = 0
     project_name: str = ""

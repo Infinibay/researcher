@@ -84,8 +84,7 @@ def test_main_task_dispatch_hands_off_existing_work_without_reset_or_project_com
     flow = MainProjectFlow()
     flow.state.project_id = 101
     before = dict(s.c.conn.execute("SELECT * FROM tasks WHERE id=1001").fetchone())
-    assert flow._wait_for_autonomous_completion() == "native_owner_required"
-    assert flow._launch_pending_tasks() == "native_owner_required"
+    assert flow.kickoff({"project_id":101})["event_authorizes_work"] is False
     assert dict(s.c.conn.execute("SELECT * FROM tasks WHERE id=1001").fetchone()) == before
     assert s.c.conn.execute("SELECT COUNT(*) FROM agent_events").fetchone()[0] == 0
     assert s.c.conn.execute("SELECT COUNT(*) FROM runtime_runs").fetchone()[0] == 0

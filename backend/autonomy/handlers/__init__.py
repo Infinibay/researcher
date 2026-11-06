@@ -1,22 +1,14 @@
-"""Event handlers that bridge agent_events to existing sub-flows.
-
-Each handler maps an event type to execution logic, reusing all existing
-sub-flows (DevelopmentFlow, ResearchFlow, CodeReviewFlow) and the
-``build_crew`` / ``dispatch_message`` infrastructure.
-
-Import safety: all imports from backend.flows.* and backend.agents.* are
-LAZY (inside method bodies) to avoid the circular import chain.
-"""
+"""Compatibility event handlers return scoped owner hints; native admission, review, correction and acceptance use their explicit runtime controls."""
 
 from .base import EventHandler, _parse_payload
-from .task_handlers import TaskFlowHandler
-from .review_handlers import ReviewHandler
 from .misc_handlers import (
     HealthCheckHandler,
     MessageHandler,
     ProgressEvalHandler,
     ReworkHandler,
 )
+from .review_handlers import ReviewHandler
+from .task_handlers import TaskFlowHandler
 
 __all__ = [
     "EventHandler",

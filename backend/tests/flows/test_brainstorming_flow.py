@@ -2,14 +2,12 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone, timedelta
-from unittest.mock import patch
+from datetime import datetime, timedelta, timezone
 
 import pytest
 
 from backend.flows.helpers import calculate_time_elapsed, format_ideas, parse_ideas
 from backend.flows.state_models import BrainstormPhase, BrainstormState
-from backend.tests.flows.conftest import make_mock_agent
 
 
 class TestBrainstormState:
@@ -83,127 +81,6 @@ class TestCalculateTimeElapsed:
         assert 1199 <= elapsed <= 1201
 
 
-class TestBrainstormingFlowStart:
-    """Test session start."""
-
-    @patch("backend.communication.thread_manager.ThreadManager")
-    @patch("backend.flows.brainstorming_flow.log_flow_event")
-    def test_start_session(self, mock_log, mock_tm_cls):
-        mock_tm_cls.return_value.create_thread.return_value = "test-thread-id"
-
-        from backend.flows.brainstorming_flow import BrainstormingFlow
-
-        flow = BrainstormingFlow()
-        flow.state.project_id = 1
-
-        result = flow.start_session()
-        # start_session no longer returns a routing string (routing is done by brainstorm_phase router)
-        assert result is None
-        assert len(flow.state.participants) == 3
-        assert flow.state.start_time != ""
-        assert flow.state.phase == BrainstormPhase.BRAINSTORM
-        assert flow.state.thread_id == "test-thread-id"
-        mock_tm_cls.return_value.create_thread.assert_called_once_with(
-            project_id=1,
-            thread_type="brainstorming",
-            participants=["team_lead", "developer", "researcher"],
-        )
-
-
-class TestBrainstormingFlowConsolidation:
-    """Test idea consolidation."""
-
-    @patch("backend.flows.brainstorming_flow.run_agent_task")
-    @patch("backend.flows.brainstorming_flow.get_agent_by_role")
-    @patch("backend.flows.brainstorming_flow.log_flow_event")
-    def test_consolidate_ideas(self, mock_log, mock_agent, mock_run):
-        mock_agent.return_value = make_mock_agent("team_lead")
-        mock_run.return_value = (
-            "1. Combined Feature: Merged auth and security features\n"
-            "2. Analytics: Dashboard and reporting combined"
-        )
-
-        from backend.flows.brainstorming_flow import BrainstormingFlow
-
-        flow = BrainstormingFlow()
-        flow.state.project_id = 1
-        flow.state.ideas = [
-            {"title": "Auth", "description": "Add authentication"},
-            {"title": "Security", "description": "Add security features"},
-            {"title": "Dashboard", "description": "Add analytics dashboard"},
-        ]
-
-        result = flow.consolidate_ideas()
-        # consolidate_ideas is a non-router listener — no routing return value
-        assert result is None
-        assert flow.state.phase == BrainstormPhase.CONSOLIDATION
-        assert len(flow.state.consolidated_ideas) > 0
-
-
-class TestBrainstormingFlowUserDecision:
-    """Test user presentation and decision routing."""
-
-    @patch("backend.flows.brainstorming_flow.log_flow_event")
-    @patch("backend.flows.brainstorming_flow.run_agent_task")
-    @patch("backend.flows.brainstorming_flow.get_agent_by_role")
-    def test_present_to_user_approved(self, mock_agent, mock_run, mock_log):
-        mock_agent.return_value = make_mock_agent("project_lead")
-        mock_run.return_value = "APPROVED"
-
-        from backend.flows.brainstorming_flow import BrainstormingFlow
-
-        flow = BrainstormingFlow()
-        flow.state.project_id = 1
-        flow.state.selected_ideas = [{"title": "Feature A", "description": "Do A"}]
-
-        result = flow.present_to_user()
-        assert result == "approved"
-        assert flow.state.user_approved is True
-
-    @patch("backend.flows.brainstorming_flow.log_flow_event")
-    @patch("backend.flows.brainstorming_flow.run_agent_task")
-    @patch("backend.flows.brainstorming_flow.get_agent_by_role")
-    def test_present_to_user_rejected(self, mock_agent, mock_run, mock_log):
-        mock_agent.return_value = make_mock_agent("project_lead")
-        mock_run.return_value = "REJECTED: Need more innovative ideas"
-
-        from backend.flows.brainstorming_flow import BrainstormingFlow
-
-        flow = BrainstormingFlow()
-        flow.state.project_id = 1
-        flow.state.selected_ideas = [{"title": "Feature A", "description": "Do A"}]
-
-        result = flow.present_to_user()
-        assert result == "rejected"
-        assert flow.state.user_approved is False
-        assert "innovative" in flow.state.user_feedback
-
-
-class TestBrainstormingFlowRejection:
-    """Test rejection and restart."""
-
-    @patch("backend.flows.brainstorming_flow.log_flow_event")
-    def test_reset_for_new_round(self, mock_log):
-        from backend.flows.brainstorming_flow import BrainstormingFlow
-
-        flow = BrainstormingFlow()
-        flow.state.project_id = 1
-        flow.state.ideas = [{"title": "A", "description": "Desc"}]
-        flow.state.consolidated_ideas = [{"title": "B", "description": "Desc"}]
-        flow.state.selected_ideas = [{"title": "C", "description": "Desc"}]
-        flow.state.round_count = 3
-        flow.state.user_feedback = "Not innovative enough"
-
-        result = flow.reset_for_new_round()
-        # reset_for_new_round is a non-router listener — no routing return value
-        assert result is None
-        assert flow.state.ideas == []
-        assert flow.state.consolidated_ideas == []
-        assert flow.state.selected_ideas == []
-        assert flow.state.round_count == 0
-        assert flow.state.phase == BrainstormPhase.BRAINSTORM
-
-
 class TestFormatIdeas:
     """Test format_ideas helper."""
 
@@ -236,58 +113,16 @@ class TestFormatIdeas:
         assert format_ideas([]) == ""
 
 
-class TestRunAgentTask:
-    """Test run_agent_task helper."""
+class TestRetiredAgentTask:
+    """The old helper rejects before activating context, tracking a run or constructing a provider."""
 
-    @patch("backend.engine.get_engine")
-    def test_basic_invocation(self, mock_get_engine):
+    def test_old_helper_has_no_model_or_agent_effect(self, db_conn, executing_project):
+        """An actual project requires native owner entry even before its first native run."""
+        from types import SimpleNamespace
+
         from backend.flows.helpers import run_agent_task
-        from backend.tests.flows.conftest import make_mock_agent, make_mock_engine
+        from backend.runtime.lifecycle import NativeOwnerRequired
 
-        agent = make_mock_agent("team_lead")
-        mock_get_engine.return_value = make_mock_engine("result text")
-
-        result = run_agent_task(agent, ("do the thing", "expected output"))
-
-        assert result == "result text"
-        agent.activate_context.assert_called_once_with(task_id=None)
-        mock_get_engine.return_value.execute.assert_called_once()
-        agent.create_agent_run.assert_not_called()
-
-    @patch("backend.engine.get_engine")
-    def test_with_run_tracking(self, mock_get_engine):
-        from backend.flows.helpers import run_agent_task
-        from backend.tests.flows.conftest import make_mock_agent, make_mock_engine
-
-        agent = make_mock_agent("developer")
-        mock_get_engine.return_value = make_mock_engine("done")
-
-        result = run_agent_task(
-            agent, ("implement", "code"), task_id=42, track_run=True,
-        )
-
-        assert result == "done"
-        agent.activate_context.assert_called_once_with(task_id=42)
-        agent.create_agent_run.assert_called_once_with(42)
-        agent.complete_agent_run.assert_called_once()
-        call_args = agent.complete_agent_run.call_args
-        assert call_args[0][0] == "test-run-id"
-        assert call_args[1]["status"] == "completed"
-
-    @patch("backend.engine.get_engine")
-    def test_failure_completes_run_as_failed(self, mock_get_engine):
-        from backend.flows.helpers import run_agent_task
-        from backend.tests.flows.conftest import make_mock_agent
-
-        agent = make_mock_agent("developer")
-        mock_get_engine.return_value.execute.side_effect = RuntimeError("LLM down")
-
-        with pytest.raises(RuntimeError, match="LLM down"):
-            run_agent_task(
-                agent, ("implement", "code"), task_id=42, track_run=True,
-            )
-
-        agent.complete_agent_run.assert_called_once()
-        call_args = agent.complete_agent_run.call_args
-        assert call_args[1]["status"] == "failed"
-        assert call_args[1]["error_class"] == "RuntimeError"
+        agent = SimpleNamespace(project_id=executing_project)
+        with pytest.raises(NativeOwnerRequired):
+            run_agent_task(agent, ("old brainstorm", "old output"), task_id=1, track_run=True)

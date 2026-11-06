@@ -11,10 +11,10 @@ class NativeOwnerRequired(ValueError):
 
 
 def require_legacy_project(conn, project_id):
-    """Refuse a legacy producer for a real natively admitted project, using stored evidence rather than a role, marker or ambient task."""
-    from backend.runtime.legacy_handoff import native_project_handoff
+    """Refuse a legacy producer for every actual project before or after admission, using stored evidence rather than a role, marker or ambient task."""
+    from backend.runtime.legacy_handoff import project_owner_entry
 
-    if native_project_handoff(conn, project_id) is not None:
+    if project_owner_entry(conn, project_id) is not None:
         raise NativeOwnerRequired(
             "Native-owned project requires its owner workspace; legacy inference or recovery is not authorized"
         )

@@ -19,6 +19,11 @@ async def test_owned_project_start_proposes_then_owner_accepts_without_executing
     runtime = configured_runtime(app.state.live_grants, app=app)
     app.state.runtime_service = runtime
     before = c.s.c.conn.execute("SELECT count(*)FROM tasks").fetchone()[0]
+    project_before = c.s.c.conn.execute("SELECT count(*)FROM tasks WHERE project_id=101").fetchone()[0]
+    import json
+
+    c.s.c.conn.execute("INSERT INTO flow_snapshots(project_id,flow_name,current_step,state_json) VALUES(101,'main_project_flow','planning',?)", (json.dumps({"requirements":"The old request mentions137units.","plan":"Inspect first; old approval is not current permission.","thread_id":"old-session-must-not-resume"}),))
+    c.s.c.conn.commit()
     async with runtime:
         run = await runtime.start_project_plan(
             101,
@@ -31,6 +36,10 @@ async def test_owned_project_start_proposes_then_owner_accepts_without_executing
         assert saved.status == "needs_review", saved
         state = ProjectPlans(runtime.store).state(101, run.run_id)
         assert state["eligible"] and state["proposal"], state
+        historic_basis = [item for item in state["proposal"]["draft"]["basis"] if item["source"].endswith(":requirements")]
+        assert historic_basis and "137units" in historic_basis[0]["quote"]
+        assert state["snapshot"]["source_origins"][historic_basis[0]["source"]] == "legacy_snapshot"
+        assert state["snapshot"]["project_history"]["task_inventory"]["total"] == project_before
         assert (
             c.s.c.conn.execute("SELECT count(*)FROM tasks").fetchone()[0] == before + 1
         )

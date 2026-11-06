@@ -2,14 +2,8 @@
 
 from __future__ import annotations
 
-import sqlite3
-from unittest.mock import MagicMock, patch
-
-import pytest
-
 from backend.flows.helpers import load_project_state, update_project_status
 from backend.flows.state_models import ProjectState, ProjectStatus
-from backend.tests.flows.conftest import make_mock_agent, make_mock_crew
 
 
 class TestMainProjectFlowHelpers:
@@ -66,114 +60,15 @@ class TestProjectState:
         assert state.status == ProjectStatus.EXECUTING
 
 
-class TestMainProjectFlowInitialize:
-    """Test initialization paths of MainProjectFlow."""
+class TestMainProjectCompatibility:
+    """Old project entry preserves history and exposes owner policy instead of planning or completion."""
 
-    @patch("backend.flows.main_project_flow.log_flow_event")
-    def test_initialize_new_project(self, mock_log, db_conn):
+    def test_existing_project_returns_owner_entry(self, db_conn, executing_project):
+        """A legacy executing label does not start the new planner or alter tasks."""
         from backend.flows.main_project_flow import MainProjectFlow
 
-        flow = MainProjectFlow()
-        flow.state.project_id = 0
-        flow.state.project_name = "New Project"
-
-        result = flow.initialize_project()
-        # @start() methods no longer return routing strings
-        assert result is None
-        assert flow.state.project_id > 0
-        assert flow.state.status == ProjectStatus.NEW
-
-        # Routing is now handled by the router method
-        route = flow.route_initialization()
-        assert route == "start_planning"
-
-    @patch("backend.flows.main_project_flow.log_flow_event")
-    def test_initialize_resume_executing(self, mock_log, db_conn, executing_project):
-        from backend.flows.main_project_flow import MainProjectFlow
-
-        flow = MainProjectFlow()
-        flow.state.project_id = executing_project
-
-        result = flow.initialize_project()
-        # @start() methods no longer return routing strings
-        assert result is None
-        assert flow.state.status == ProjectStatus.EXECUTING
-
-        # Routing is now handled by the router method
-        route = flow.route_initialization()
-        assert route == "resume_execution"
-
-    @patch("backend.flows.main_project_flow.log_flow_event")
-    def test_initialize_completed_project(self, mock_log, db_conn, sample_project):
-        update_project_status(sample_project, "completed")
-
-        from backend.flows.main_project_flow import MainProjectFlow
-
-        flow = MainProjectFlow()
-        flow.state.project_id = sample_project
-
-        result = flow.initialize_project()
-        # @start() methods no longer return routing strings
-        assert result is None
-        assert flow.state.status == ProjectStatus.COMPLETED
-
-        # Routing is now handled by the router method
-        route = flow.route_initialization()
-        assert route == "already_complete"
-
-
-class TestMainProjectFlowTaskRouting:
-    """Test the check_and_launch_tasks router and _launch_pending_tasks logic."""
-
-    def test_check_and_launch_tasks_hands_off(self, db_conn, executing_project):
-        """Actual historical tasks are referenced without legacy dispatch or completion."""
-        from backend.flows.main_project_flow import MainProjectFlow
-
-        flow = MainProjectFlow()
-        flow.state.project_id = executing_project
-        assert flow.check_and_launch_tasks() == "native_owner_required"
-
-    def test_empty_tasks_do_not_accept_a_project(self, db_conn, sample_project):
-        """An empty list is not native owner acceptance of project completion."""
-        from backend.flows.main_project_flow import MainProjectFlow
-
-        flow = MainProjectFlow()
-        flow.state.project_id = sample_project
-        assert flow.check_and_launch_tasks() == "native_owner_required"
-
-    def test_route_initialization_new(self, db_conn):
-        """route_initialization routes NEW status to start_planning."""
-        from backend.flows.main_project_flow import MainProjectFlow
-
-        flow = MainProjectFlow()
-        flow.state.status = ProjectStatus.NEW
-
-        result = flow.route_initialization()
-        assert result == "start_planning"
-
-    @patch("backend.flows.main_project_flow.log_flow_event")
-    def test_route_initialization_executing(self, mock_log, db_conn):
-        """route_initialization routes EXECUTING status to resume_execution."""
-        from backend.flows.main_project_flow import MainProjectFlow
-
-        flow = MainProjectFlow()
-        flow.state.status = ProjectStatus.EXECUTING
-
-        result = flow.route_initialization()
-        assert result == "resume_execution"
-
-
-class TestMainProjectFlowPlanRejection:
-    """Test the plan rejection loop."""
-
-    def test_handle_rejection_clears_plan(self):
-        from backend.flows.main_project_flow import MainProjectFlow
-
-        flow = MainProjectFlow()
-        flow.state.project_id = 1
-        flow.state.plan = "Some plan that was rejected"
-        flow.state.feedback = "Need more detail"
-
-        result = flow.handle_rejection()
-        assert result == "start_planning"
-        assert flow.state.plan == ""
+        before = [tuple(row) for row in db_conn.execute("SELECT * FROM tasks ORDER BY id")]
+        hint = MainProjectFlow().kickoff({"project_id": executing_project})
+        assert hint["native_admission_run_id"] is None
+        assert hint["event_authorizes_work"] is False
+        assert [tuple(row) for row in db_conn.execute("SELECT * FROM tasks ORDER BY id")] == before

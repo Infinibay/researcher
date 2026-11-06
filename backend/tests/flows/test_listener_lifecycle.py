@@ -20,9 +20,15 @@ class ControlledListener(BaseEventListener):
         self.release.wait(timeout=2)
 
 
+def attach_existing_worker(listener):
+    """Simulate a registered poller from the prior version; public start may no longer create one."""
+    listener._thread = threading.Thread(target=listener._poll_loop, daemon=True)
+    listener._thread.start()
+
+
 def test_stop_wakes_an_idle_listener_without_waiting_for_its_poll_interval():
     listener = ControlledListener()
-    listener.start()
+    attach_existing_worker(listener)
     assert listener.entered.wait(timeout=1)
     stopped = threading.Event()
 
@@ -39,7 +45,7 @@ def test_stop_wakes_an_idle_listener_without_waiting_for_its_poll_interval():
 
 def test_stop_timeout_keeps_the_live_listener_owned_and_prevents_restart():
     listener = ControlledListener(block=True, poll_interval=0.01)
-    listener.start()
+    attach_existing_worker(listener)
     assert listener.entered.wait(timeout=1)
     try:
         with pytest.raises(TimeoutError, match="still running"):

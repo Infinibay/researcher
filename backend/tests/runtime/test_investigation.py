@@ -308,11 +308,7 @@ def test_legacy_project_stops_dispatching_owner_only_work_without_evaluating_com
     c.conn.commit()
     flow = MainProjectFlow()
     flow.state.project_id = 101
-    monkeypatch.setattr(
-        "backend.flows.main_project_flow.threading.Thread",
-        lambda *a, **kw: pytest.fail("No legacy worker may start"),
-    )
-    assert flow._launch_pending_tasks() == "native_owner_required"
+    assert flow.kickoff({"project_id":101})["event_authorizes_work"] is False
     assert flow.state.running_task_ids == []
     assert c.conn.execute("SELECT count(*)FROM runtime_runs").fetchone()[0] == 0
 

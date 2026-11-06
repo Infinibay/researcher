@@ -6,6 +6,7 @@ from uuid import uuid4
 
 from backend.knowledge.reviews import canonical, digest
 from backend.planning.models import validate_plan
+from backend.planning.project_history import capture_project_history
 from backend.runtime.contracts import (
     RunConflict,
     RunNotFound,
@@ -76,6 +77,9 @@ class ProjectPlans:
                 or "",
             },
         }
+        snapshot["project_history"] = capture_project_history(
+            conn, spec.project_id, spec.task_id, snapshot["sources"], snapshot["source_origins"]
+        )
         for correction in task_context["corrections"]:
             key = "correction:" + str(correction["version"])
             snapshot["sources"][key] = correction["statement"]

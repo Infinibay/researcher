@@ -1,0 +1,96 @@
+{
+  "base_commit": "3d794f7",
+  "status": "legacy_project_activation_and_handlers_retired_historic_context_connected_native_planning_other_auxiliaries_pending",
+  "schema_version": 54,
+  "new_persistence_or_execution_loop": false,
+  "implemented": [
+    "MainProjectFlow/BrainstormingFlow/TicketCreationFlow are readonly scoped compatibility entries; old agent/model/round/ticket/repository-setup/project-completion automation removed.",
+    "FlowManager Start returns owner policy before flow import, team/listener/thread creation or event clearing. Stop retains actual live/unknown registered workers and callbacks without resetting historical assignments or events.",
+    "Shared project policy blocks AgentLoop/manager Start/Resume, listener wiring and direct BaseEventListener Start, before first native admission too. Actual native_project_handoff remains history-only; policy entry has null admission when none exists.",
+    "Task/review/message/health/progress/rework handlers and message dispatcher now return only scoped owner hints. Crew/agent task helpers reject before context/tracking/provider construction; direct old engine is fenced before model setup.",
+    "Native planning freezes attributed stored requirements/plan/ideas plus actual scoped task inventory in its existing admission snapshot. No old session/thread/approval authority, foreign project data or automatic task replay. Explicit bounded/unreadable/oversized/invalid-UTF8 limits; complete original request survives source change/deletion.",
+    "Native planning rationale explicitly separates evidence, assumptions and useful options/corrections. Typed proposal/owner graph acceptance remain separate from child execution or project completion."
+  ],
+  "verification": {
+    "red": [
+      "6missing-owner-policy/context failures4.40s",
+      "Direct listener still created thread:1FAIL0.62s",
+      "Escaped invalid UTF8 legacy field crashed admission:1FAIL3PASS1.66s"
+    ],
+    "overlapping_source_groups": [
+      {
+        "passed": 120,
+        "seconds": 28.79
+      },
+      {
+        "passed": 127,
+        "seconds": 30.59
+      },
+      {
+        "passed": 128,
+        "seconds": 30.34
+      }
+    ],
+    "initial_wheel": {
+      "passed": 233,
+      "failed": 1,
+      "skipped": 0,
+      "seconds": 70.84,
+      "scope": "One test compared scoped project inventory to global two-project task count; controlled planner itself completed and cited actual legacy source. Failure occurred before owner acceptance."
+    },
+    "final_wheel": {
+      "tests_passed": 29,
+      "failures": [],
+      "skipped": 0,
+      "backend_modules_loaded": 322,
+      "backend_imports_only_from_wheel": true,
+      "model_turns": 0,
+      "controlled_native_turns": 1,
+      "actual_kernel_owned_fixture": true,
+      "network": "Disabled except Unix sockets",
+      "generation_and_ken": "Controlled native planner and Ken; actual kernel/broker/SQLite and readonly source. No real-model or retrieval-ranking quality claim.",
+      "seconds": 9.242
+    },
+    "application_comparison": {
+      "members": 525,
+      "identical": 525,
+      "only_changed_member": "backend/tests/runtime/test_owned_planning.py",
+      "reason": "Read actual project task count for the history assertion; no application or controlled native fixture change."
+    },
+    "physical_chain": {
+      "seconds": 1.369,
+      "controlled_native_turns_final": 1,
+      "controlled_native_turns_initial": 1,
+      "actual_kernel_broker_sqlite": true,
+      "real_model_turns": 0,
+      "stages": [
+        "Original project requirements137 and old plan preserved as attributed legacy_snapshot",
+        "Native readonly planner reads Ken and complete frozen planning context",
+        "Typed proposal quotes exact historic requirement and owner request",
+        "Native peers close and draft is eligible without task creation",
+        "Owner accepts original proposal once, creating two pending children",
+        "Same owner/start keys retain original identities; no child run dispatched; original file137 unchanged"
+      ]
+    },
+    "documentation": {
+      "changed_or_new_definitions_checked": 92,
+      "missing_production": 0,
+      "missing_inherited_changed_tests": 2,
+      "deferred": "DD022"
+    },
+    "lint": {
+      "new_test_only": 7,
+      "new_production": 0,
+      "inherited": 7,
+      "resolved": 34,
+      "deferred": "DD022"
+    },
+    "frontend": "No frontend source change or new UI/browser/human acceptance claimed."
+  },
+  "remaining": [
+    "Actual auxiliary provider/probe/legacy-tool consumers: prompts/team.py summary, config/model_capabilities.py, engine/llm_client.py, DeepResearchTool and legacy Git/MCP/installation exposure; dependency retirement and old-test migration.",
+    "Global cross-process/unregistered legacy physical exclusion is not proved by policy hints or registered-thread Stop.",
+    "Project-level acceptance/final report, graph successor material selection, retained publication, endpoint/TUI parity, all prompts/book/model/scientific/human evaluations, remaining routes/full visual acceptance,43scenarios/current global suite, clean install/restore/inverses43\u201354 and final fresh whole-branch review."
+  ],
+  "limits": "No whole-goal completion, global-green suite, real-model or Ken-ranking quality, cross-process closure, clean-host install or full legacy-dependency removal claim."
+}

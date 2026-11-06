@@ -293,3 +293,19 @@ aceptación, finalización del proyecto ni prueba de cierre físico.
 AgentLoop/listeners/FlowManager e inferencia auxiliar siguen como capacidad
 principal pendiente; la retirada de cuerpos privados inalcanzables de handlers
 se hará en ese corte. No volver sobre selectores/snapshots/journals para pulirlos.
+
+
+## Activación de proyectos y contexto histórico posterior a 3d794f7
+
+Main/Brainstorm/Ticket flows, handlers y dispatcher dejaron de inferir/crear
+trabajo automáticamente. FlowManager/AgentLoop/listeners aplican política nativa
+también antes de la primera admisión, conservando evidencia real de Stop. Requisitos,
+planes e ideas antiguos e inventario de tareas entran al planificador nativo como
+fuentes históricas atribuidas y limitadas, sin autoridad de sesión/aprobación.
+No hay nueva tabla ni loop. [Contrato](native-project-producer-cutover.md).
+
+El corte no retira aún los proveedores auxiliares en prompts/team,
+config/model_capabilities, engine/llm_client y DeepResearch ni todo Git/MCP/instalación
+antiguo. Sus consumidores, dependencias y pruebas son el siguiente bloque principal;
+cierre integral e informe final de proyecto siguen pendientes, sin equiparar una
+etiqueta de estado a aceptación comprobada.

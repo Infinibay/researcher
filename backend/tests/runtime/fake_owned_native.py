@@ -771,7 +771,12 @@ def next_planning_tool(response=None):
                         {
                             "source": "owner_request",
                             "quote": plan_material["owner_request"][:80],
-                        }
+                        },
+                        *[
+                            {"source":key,"quote":value[:80]}
+                            for key,value in plan_material["sources"].items()
+                            if key.endswith(":requirements")
+                        ],
                     ],
                     "epics": [
                         {

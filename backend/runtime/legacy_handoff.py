@@ -50,11 +50,31 @@ def native_project_handoff(
     }
 
 
-def legacy_project_handoff(project_id: int) -> dict[str, Any] | None:
-    """Resolve project ownership for a legacy entry without initializing workers or altering stored messages."""
+def project_owner_entry(conn: sqlite3.Connection, project_id: int) -> dict[str, Any]:
+    """Resolve every actual project to native owner policy while keeping evidence of prior admission distinct from the policy itself."""
+    hint = native_project_handoff(conn, project_id)
+    if hint is not None:
+        return hint
+    project = conn.execute("SELECT name FROM projects WHERE id=?", (project_id,)).fetchone()
+    return {
+        "delivery": "native_owner_handoff",
+        "scope": "project",
+        "project_id": project_id,
+        "project_name": project[0],
+        "native_admission_run_id": None,
+        "event_authorizes_work": False,
+        "inference_started_by_handoff": False,
+        "legacy_execution_closure": "not_assessed",
+        "next_action": "inspect_native_project_workspace",
+        "explanation": "Project work requires explicit native owner admission, including before the first run. Inspect stored requirements, plans, ideas and current work in the owner workspace. This policy hint does not authorize execution, infer project acceptance, recreate old sessions or prove old workers have stopped.",
+    }
+
+
+def legacy_project_handoff(project_id: int) -> dict[str, Any]:
+    """Return an actual scoped owner entry before any old activation; no native history is fabricated when it is absent."""
     from backend.autonomy.db import execute_with_retry
 
-    return execute_with_retry(lambda conn: native_project_handoff(conn, project_id))
+    return execute_with_retry(lambda conn: project_owner_entry(conn, project_id))
 
 
 def native_owner_handoff(

@@ -1,0 +1,7 @@
+{
+  "status": "broad_artifact_and_final_focused_artifact",
+  "initial": "project-producer-initial-packaging.json",
+  "final": "project-producer-final-packaging.json",
+  "comparison": "project-producer-archive-comparison.json",
+  "limits": "Initial233PASS1fixtureFAIL; final29PASS0FAIL0SKIP. All525application members identical, only test count scope corrected. Not a full-suite pass on final artifact or global regression claim."
+}

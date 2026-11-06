@@ -1,11 +1,10 @@
-"""Reporting and agent execution helpers for INFINIBAY flows."""
+"""Read historical project reports and events; legacy Crew/model activation helpers are retired in favor of explicit native owner runs."""
 
 from __future__ import annotations
 
 import json
 import logging
 import sqlite3
-import time
 from datetime import datetime, timezone
 from typing import Any
 
@@ -13,25 +12,9 @@ from backend.tools.base.db import execute_with_retry
 
 logger = logging.getLogger(__name__)
 
-# Transient LLM errors that should be retried
-_TRANSIENT_LLM_ERRORS = (
-    "Invalid response from LLM call",
-    "Connection error",
-    "Rate limit",
-    "timeout",
-    "503",
-    "502",
-    "429",
-)
-
+# Historical arguments remain readable, but no retry or provider is executed.
 DEFAULT_LLM_RETRIES = 3
-DEFAULT_LLM_RETRY_DELAY = 5.0  # seconds
-
-
-def _is_transient_llm_error(exc: Exception) -> bool:
-    """Check if an exception looks like a transient LLM provider error."""
-    msg = str(exc)
-    return any(pattern.lower() in msg.lower() for pattern in _TRANSIENT_LLM_ERRORS)
+DEFAULT_LLM_RETRY_DELAY = 5.0
 
 
 def kickoff_with_retry(
@@ -40,25 +23,10 @@ def kickoff_with_retry(
     max_retries: int = DEFAULT_LLM_RETRIES,
     base_delay: float = DEFAULT_LLM_RETRY_DELAY,
 ) -> Any:
-    """Run ``crew.kickoff()`` with exponential-backoff retries for transient LLM errors.
+    """Reject the retired Crew kickoff entry; retry arguments or an old approval never authorize model execution."""
+    from backend.runtime.lifecycle import NativeOwnerRequired
 
-    Non-transient errors are re-raised immediately.
-    """
-    last_exc: Exception | None = None
-    for attempt in range(1, max_retries + 1):
-        try:
-            return crew.kickoff()
-        except Exception as exc:
-            last_exc = exc
-            if not _is_transient_llm_error(exc) or attempt == max_retries:
-                raise
-            delay = base_delay * (2 ** (attempt - 1))
-            logger.warning(
-                "Transient LLM error (attempt %d/%d), retrying in %.1fs: %s",
-                attempt, max_retries, delay, str(exc)[:200],
-            )
-            time.sleep(delay)
-    raise last_exc  # unreachable, but keeps type checkers happy
+    raise NativeOwnerRequired("Legacy Crew kickoff is retired; use an explicitly admitted native owner run")
 
 
 def generate_final_report(project_id: int) -> str:
@@ -170,48 +138,14 @@ def build_crew(
     guardrail_max_retries: int = 5,
     task_tools: list | None = None,
 ) -> Any:
-    """Build a Crew with a single agent and task, applying INFINIBAY defaults.
-
-    Centralizes Crew+Task construction so that ``max_rpm``, guardrails,
-    ``output_pydantic``, and task-specific tools are configured consistently
-    across all flows.
-
-    Returns:
-        A ready-to-kickoff ``Crew`` instance.
-    """
-    from crewai import Crew, Task
-
-    from backend.knowledge.service import KnowledgeService
-
-    memory_kwargs = KnowledgeService.build_crew_memory_kwargs()
-
-    desc, expected = task_prompt
-    task_kwargs: dict[str, Any] = {
-        "description": desc,
-        "agent": agent.crewai_agent,
-        "expected_output": expected,
-    }
-    if output_pydantic is not None:
-        task_kwargs["output_pydantic"] = output_pydantic
-    if guardrail is not None:
-        task_kwargs["guardrail"] = guardrail
-        task_kwargs["guardrail_max_retries"] = guardrail_max_retries
-    if task_tools is not None:
-        # Stamp task-specific tools with the agent's ID so they can look up
-        # context from the process-global dict even in worker threads (CrewAI
-        # runs tools in a ThreadPoolExecutor when max_execution_time is set).
-        from backend.tools.base.context import bind_tools_to_agent
-
-        bind_tools_to_agent(task_tools, agent.agent_id)
-        task_kwargs["tools"] = task_tools
-
-    return Crew(
-        agents=[agent.crewai_agent],
-        tasks=[Task(**task_kwargs)],
-        verbose=verbose,
-        max_rpm=30,
-        **memory_kwargs,
+    """Reject old Crew construction in actual project scope before model, knowledge-service, context or tool initialization."""
+    from backend.runtime.lifecycle import (
+        NativeOwnerRequired,
+        require_legacy_execution_project,
     )
+
+    require_legacy_execution_project(agent.project_id)
+    raise NativeOwnerRequired("Legacy Crew construction is retired; use native owner admission")
 
 
 def run_agent_task(
@@ -226,59 +160,14 @@ def run_agent_task(
     guardrail_max_retries: int = 5,
     task_tools: list | None = None,
 ) -> str:
-    """Run a single CrewAI task on *agent* and return the string result.
+    """Reject automatic old agent tasks before context activation, run tracking or provider setup; historical keyword arguments confer no execution authority."""
+    from backend.runtime.lifecycle import (
+        NativeOwnerRequired,
+        require_legacy_execution_project,
+    )
 
-    Encapsulates the Crew + Task boilerplate used across all flows:
-    activate context -> (optionally) create agent_run -> build Crew -> kickoff ->
-    (optionally) complete agent_run.
-
-    Args:
-        agent: A ``InfinibayAgent`` instance (caller is responsible for acquisition).
-        task_prompt: ``(description, expected_output)`` tuple from a prompt function.
-        task_id: Passed to ``activate_context`` for tool-level context.
-        track_run: If True, calls ``create_agent_run`` / ``complete_agent_run``.
-        verbose: Crew verbosity flag.
-        output_pydantic: Pydantic model class for structured output validation.
-        guardrail: Task guardrail function or LLM-based string.
-        guardrail_max_retries: Max retries when guardrail validation fails.
-        task_tools: Override task-specific tools (subset of agent tools).
-    """
-    from backend.engine import get_engine
-
-    agent.activate_context(task_id=task_id)
-
-    run_id: str | None = None
-    if track_run and task_id is not None:
-        run_id = agent.create_agent_run(task_id)
-
-    from backend.engine.base import AgentKilledError
-
-    try:
-        result_str = get_engine().execute(
-            agent, task_prompt,
-            verbose=verbose,
-            output_pydantic=output_pydantic,
-            guardrail=guardrail,
-            guardrail_max_retries=guardrail_max_retries,
-            task_tools=task_tools,
-        )
-    except AgentKilledError:
-        if run_id:
-            agent.complete_agent_run(run_id, status="interrupted")
-        raise
-    except Exception as exc:
-        if run_id:
-            agent.complete_agent_run(
-                run_id, status="failed", error_class=type(exc).__name__,
-            )
-        raise
-
-    if run_id:
-        agent.complete_agent_run(
-            run_id, status="completed", output_summary=result_str[:500],
-        )
-
-    return result_str
+    require_legacy_execution_project(agent.project_id)
+    raise NativeOwnerRequired("Legacy agent tasks are retired; use native owner admission")
 
 
 def calculate_time_elapsed(start_time: str) -> float:

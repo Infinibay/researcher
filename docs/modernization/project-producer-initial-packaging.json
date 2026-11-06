@@ -1,0 +1,14 @@
+{
+  "base_commit": "3d794f7",
+  "tests": 234,
+  "passed": 233,
+  "failed": [
+    {
+      "name": "test_owned_project_start_proposes_then_owner_accepts_without_executing_children",
+      "seconds": 1.355
+    }
+  ],
+  "skipped": 0,
+  "seconds": 70.84,
+  "limits": "One controlled native planning turn completed and cited the original legacy requirement; the fixture failed before owner acceptance by comparing project-only inventory against both projects. Not an end-to-end acceptance success. Runtime and controlled native fixture are unchanged in final artifact; see archive comparison."
+}

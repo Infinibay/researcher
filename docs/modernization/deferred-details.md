@@ -51,3 +51,6 @@ retomarlo. No convertir su registro en otra investigación o implementación.
 
 
 | DD-021 | Un I001 nuevo en un import local del test público y falta docstring en el método heredado `TestDevelopmentFlowHelpers.test_check_dependencies_resolved`, cuyo setup pasó a historia insertada. Producción modificada documentada y sin avisos nuevos;12avisos heredados y29resueltos. No reabrir el recorrido físico para estos detalles. | `test_public_development.py`, `test_development_flow.py`; `code-flow-lint.json`, `code-flow-docstrings.json` | Pasada de documentación/estilo posterior a los cortes principales, antes de aceptación integral. |
+
+
+| DD-022 | Dos tests heredados de Stop modificados para simular trabajadores ya existentes carecen de docstring propio. Seis RUF059 de handles sintéticos no usados y un S102 por compilar exclusivamente la función conocida de la fixture controlada. Producción modificada documentada y sin avisos nuevos;7heredados,34resueltos. | `test_listener_lifecycle.py`, `test_project_producer_retirement.py`; `project-producer-docstrings.json`, `project-producer-lint.json` | Pasada de documentación/estilo después de retirar consumidores principales. No repetir el ensayo nativo por estos detalles. |

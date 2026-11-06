@@ -32,24 +32,15 @@ class BaseEventListener(ABC):
         self._thread: threading.Thread | None = None
         self._last_check: str = datetime.now(UTC).isoformat()
 
-    def start(self) -> None:
-        """Start the listener in a background daemon thread."""
+    def start(self) -> dict | None:
+        """Keep existing live ownership visible, but return native owner policy instead of starting a new legacy poller."""
         if self._thread is not None and self._thread.is_alive():
             if self._stop_requested.is_set():
                 raise RuntimeError("Listener is still stopping; cannot start another worker")
             return
-        self._stop_requested.clear()
-        self._running = True
-        self._thread = threading.Thread(
-            target=self._poll_loop,
-            name=f"{self.__class__.__name__}-p{self.project_id}",
-            daemon=True,
-        )
-        self._thread.start()
-        logger.info(
-            "%s started for project %d (interval=%.1fs)",
-            self.__class__.__name__, self.project_id, self.poll_interval,
-        )
+        from backend.runtime.legacy_handoff import legacy_project_handoff
+
+        return legacy_project_handoff(self.project_id)
 
     def stop(self, timeout: float = 5.0) -> None:
         """Wake idle polling; retain ownership if a check has not terminated."""
@@ -64,6 +55,7 @@ class BaseEventListener(ABC):
 
     @property
     def is_running(self) -> bool:
+        """Observe the original registered thread rather than a start/stop intent flag."""
         return self._thread is not None and self._thread.is_alive()
 
     def _poll_loop(self) -> None:

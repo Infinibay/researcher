@@ -102,14 +102,14 @@ def test_dead_legacy_worker_and_shutdown_cannot_reset_native_project_tasks(
 
     c, _run = admitted_project(coordination)
     assert recover_dead_agent_task(1003, "legacy-worker") is False
-    FlowManager._reset_in_progress_tasks(101)
+    FlowManager().stop_project_flow(101)
     assert c.conn.execute(
         "SELECT status,assigned_to FROM tasks WHERE id=1003"
     ).fetchone()[:] == ("in_progress", "legacy-worker")
-    assert recover_dead_agent_task(2003, "legacy-other") is True
+    assert recover_dead_agent_task(2003, "legacy-other") is False
     assert c.conn.execute(
         "SELECT status,assigned_to FROM tasks WHERE id=2003"
-    ).fetchone()[:] == ("pending", None)
+    ).fetchone()[:] == ("in_progress", "legacy-other")
 
 
 @pytest.mark.parametrize("entry", ["flow", "loop", "loop_manager"])
@@ -299,32 +299,17 @@ def test_flow_stop_keeps_actual_main_thread_registered_until_it_exits(
 
     release, entered = threading.Event(), threading.Event()
 
-    def kickoff(inputs):
-        """Simulate an existing legacy main-flow operation that has not returned yet."""
+    def held_worker():
+        """Represent an already-running registered worker; new legacy start is retired."""
         entered.set()
         release.wait(3)
 
-    monkeypatch.setattr(
-        "backend.flows.main_project_flow.MainProjectFlow",
-        lambda: SimpleNamespace(kickoff=kickoff),
-    )
-    monkeypatch.setattr(
-        "backend.api.flow_manager.initialize_project_team", lambda project_id: None
-    )
-    monkeypatch.setattr(
-        "backend.api.flow_manager.ListenerManager",
-        lambda *a, **kw: SimpleNamespace(
-            start_all=lambda: None,
-            wire_flow_handlers=lambda: None,
-            stop_all=lambda: None,
-            is_running=False,
-        ),
-    )
-    monkeypatch.setattr("backend.api.flow_manager.settings.AUTONOMY_ENABLED", False)
     manager = FlowManager()
-    manager.start_project_flow(202)
+    worker = threading.Thread(target=held_worker, name="existing-main-p202", daemon=True)
+    manager._threads[202] = worker
+    manager._stop_signals[202] = threading.Event()
+    worker.start()
     assert entered.wait(1)
-    worker = next(t for t in threading.enumerate() if t.name == "MainProjectFlow-p202")
     join = worker.join
     monkeypatch.setattr(worker, "join", lambda timeout=None: join(0.01))
     try:
@@ -393,21 +378,14 @@ def test_legacy_stop_signal_during_model_reply_blocks_following_effects(
         lambda: SimpleNamespace(supports_function_calling=True),
     )
 
-    def reply(*args, **kwargs):
-        """Return from one controlled request after the owning controller requested stop."""
-        signal.set()
-        return object()
+    def forbidden(*args, **kwargs):
+        """A requested Stop must prevent even the first legacy provider call."""
+        pytest.fail("Stopped legacy producer cannot call a model")
 
-    monkeypatch.setattr("backend.engine.loop_engine.call_llm", reply)
-    agent = SimpleNamespace(
-        project_id=202,
-        agent_id="legacy-other",
-        backstory="Legacy fixture",
-        tools=[],
-        name="Fixture",
-        role="developer",
-    )
-    with legacy_stop_scope(202, signal), pytest.raises(AgentKilledError):
+    monkeypatch.setattr("backend.engine.loop_engine.call_llm", forbidden)
+    agent = SimpleNamespace(project_id=202, agent_id="legacy-other")
+    signal.set()
+    with legacy_stop_scope(202, signal), pytest.raises((AgentKilledError, ValueError)):
         LoopEngine().execute(agent, ("Old request", "Old output"), verbose=False)
 
 
@@ -473,7 +451,8 @@ def test_legacy_dispatch_uses_stored_message_and_clears_an_inherited_task_scope(
                 ),
             }
         )
-        assert observed == [(original, 202, None, None, None, None)]
+        assert observed == []
+        assert c.conn.execute("SELECT payload_json FROM agent_events WHERE id=?", (eid,)).fetchone()[0] == original
     finally:
         set_context(project_id=None, agent_id=None, task_id=None)
 
@@ -602,7 +581,9 @@ def test_wired_legacy_callbacks_remain_registered_until_explicit_unsubscribe(
 
     c = coordination
     listeners = ListenerManager(101, bus=EventBus())
-    listeners.wire_flow_handlers()
+    # Simulate subscriptions installed by a prior version, not a new activation.
+    listeners._wired = True
+    listeners.bus.subscribe("task_created", listeners._create_task_available_events)
     c.store.admit(c.spec)
     manager = FlowManager()
     manager._listeners[101] = listeners
