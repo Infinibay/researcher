@@ -1,0 +1,28 @@
+{
+  "base_commit": "4bcdc92",
+  "status": "native_mcp_adapter_verified",
+  "red": "Initial 3 failures because packaged stdio module absent; first implementation 3PASS. Additional protocol/DTO/scope/subprocess coverage added.",
+  "source": {
+    "passed": 79,
+    "failed": 0,
+    "skipped": 4,
+    "seconds": 23.87,
+    "skip_reason": "Explicit pinned local semantic model fixture not supplied in first source run. All four execute in isolated installed final proof with prepared assets."
+  },
+  "installed_receipt": "docs/modernization/native-mcp-packaging.json",
+  "script_environments": {
+    "researcher_help": 0,
+    "historical_help": 0,
+    "locked_offline": true,
+    "sdk": "1.30.0",
+    "fastmcp": false
+  },
+  "quality": {
+    "definitions_documented": 29,
+    "missing_docs": 0,
+    "new_lint": 5,
+    "deferred": "DD-024"
+  },
+  "verification_rework": "First installed suite83PASS36.41s; subsequent console-only step hit SDK stderr default captured during pytest and already closed. Verification explicitly supplies sys.__stderr__; final installed83PASS35.494s plus real console roundtrip. No application/model retry, wheel unchanged.",
+  "limitations": "No new physical author/reviewer or real model turn; host/config/real Ken ranking/global suite/UI/restore/retained Git publication remain open."
+}

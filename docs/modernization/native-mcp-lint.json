@@ -1,0 +1,45 @@
+{
+  "base_commit": "4bcdc92",
+  "python_files": 5,
+  "new": [
+    [
+      "backend/research/stdio_server.py",
+      "BLE001",
+      "Do not catch blind exception: `Exception`"
+    ],
+    [
+      "backend/tests/runtime/test_native_mcp_entry.py",
+      "SIM117",
+      "Use a single `with` statement with multiple contexts instead of nested `with` statements"
+    ],
+    [
+      "backend/tests/runtime/test_native_mcp_entry.py",
+      "SIM117",
+      "Use a single `with` statement with multiple contexts instead of nested `with` statements"
+    ],
+    [
+      "scripts/infinibay_mcp_server.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "scripts/researcher_mcp_server.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ]
+  ],
+  "inherited": [
+    [
+      "scripts/infinibay_mcp_server.py",
+      "EXE001",
+      "Shebang is present but file is not executable"
+    ]
+  ],
+  "resolved": [
+    [
+      "scripts/infinibay_mcp_server.py",
+      "BLE001",
+      "Do not catch blind exception: `Exception`"
+    ]
+  ]
+}

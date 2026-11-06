@@ -72,22 +72,34 @@ export the compatibility file instead of editing it by hand:
 uv export --locked --no-dev --no-emit-project --format requirements-txt --output-file requirements.txt
 ```
 
-The general historical MCP script remains a migration consumer. Native generation
-uses the admitted, scoped business MCP and Ken; installing `[legacy]` does not
-authorize an old MCP/agent to mutate a native task.
+The packaged research MCP uses the same scoped business definitions and standard
+MCP SDK as the native runtime. After installing the project, its host can launch:
 
-The new scoped research MCP has a separate locked script environment:
+```bash
+researcher-mcp
+```
+
+For a source checkout, a separate locked script environment is also supported:
 
 ```bash
 uv run --locked --script scripts/researcher_mcp_server.py
 ```
 
-Its host supplies `RESEARCHER_API_URL` and a short-lived `RESEARCHER_TOOL_TOKEN`;
+Its admitting host supplies `RESEARCHER_API_URL` (numeric loopback HTTP, default
+`http://127.0.0.1:8000`) and a short-lived `RESEARCHER_TOOL_TOKEN`;
 project/task/actor are bound by that grant. It exposes research business tools,
-not SQL or grant issuance. See [the research slice](docs/architecture/research-slice.md)
-for tested behavior, limits and pending integration. Project start and terminal
-entry use the configured native owner service and refuse a legacy fallback;
-remaining internal flows and autonomy consumers are still being migrated.
+not SQL or grant issuance. Configure the mandatory Ken MCP separately through
+the native host. An API key, old `INFINIBAY_*` actor labels or a syntactically
+valid token do not authorize a call. This command does not start a host or mint
+grants. `--help` works without credentials or storage.
+
+`scripts/infinibay_mcp_server.py` now launches this same research gateway and
+prints a migration notice on stderr. Its old task approval, role messaging, SQL
+and PR tools are retired. Development, planning and formal review retain their
+host-selected native catalogues; acceptance and publication use explicit owner
+operations. See [the MCP migration](docs/architecture/native-mcp-entry.md) for
+the outcome mapping and verification limits. Remaining Git/startup consumers
+and legacy tests still need migration.
 
 Set `INFINIBAY_DB` to select a database explicitly. Without an override, an
 existing recognized database is reused; multiple databases require a choice.

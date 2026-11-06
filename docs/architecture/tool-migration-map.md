@@ -337,3 +337,15 @@ checkout o venv anterior. [Contrato](native-python-installation.md).
 No se borraron todos los consumidores legacy ni se provisionó el host completo.
 MCP/Git/agentes/conocimiento/instalador y pruebas antiguas son el siguiente corte,
 sin volver a pulir el selector de dependencias o el wrapper de metadata.
+
+## Entrada MCP posterior a4bcdc92
+
+`researcher-mcp` y los dos nombres de script comparten las definiciones nativas
+de investigación y el SDK MCP del runtime, sin FastMCP duplicado. Token y contexto
+pertenecen al host/API; SQL de sólo lectura, aprobaciones, PRs y mensajes por rol
+del script viejo dejan de ser herramientas de esa entrada. Planificación,
+desarrollo, revisión y aceptación/publicación mantienen sus destinos nativos
+explícitos. El [contrato y mapa de resultados](native-mcp-entry.md) distingue
+esa migración de los consumidores Git/material retenido/arranque aún abiertos.
+Ken es el MCP obligatorio separado del host; esta entrada no lo instala ni
+declara que está disponible.

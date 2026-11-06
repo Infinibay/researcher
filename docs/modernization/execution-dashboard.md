@@ -1,6 +1,6 @@
 # Tablero de ejecución de la actualización
 
-Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../superpowers/plans/2026-10-31-actualizacion-proyecto.md). Este tablero no reemplaza requisitos ni declara el plan terminado. [Diagnóstico del proceso](workflow-review.md).
+Actualizado: 2026-11-06. Objetivo activo: implementar **todo** el [plan](../superpowers/plans/2026-10-31-actualizacion-proyecto.md). Este tablero no reemplaza requisitos ni declara el plan terminado. [Diagnóstico del proceso](workflow-review.md).
 
 ## Estado comprobado
 
@@ -9,7 +9,32 @@ Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: instalación Python nativa independiente
+## Etapa actual: entrada MCP nativa común
+
+**Resultado:** `researcher-mcp` y los dos scripts compatibles comparten catálogo,
+DTOs, transporte HTTP y SDK MCP1.30.0 del runtime. Sin FastMCP adicional, SQL,
+identidad por variables antiguas ni aceptación/publicación por herramientas de
+investigación. Autoridad y revocación permanecen en la API; Ken sigue separado
+como MCP obligatorio del host. README y mapa de capacidades actualizados.
+
+**Verificación:** paquete no editable, entorno nativo sin frameworks antiguos:
+83PASS0FAIL0SKIP35.49s;216imports backend sólo del entorno instalado y792miembros
+coincidentes con el wheel. Protocolo SDK real en memoria/subproceso y comando
+instalado; API/SQLite confirma aislamiento y revocación. Ambos scripts locked
+arrancan help offline.0modelos reales.29definiciones documentadas;5avisos de estilo
+registrados DD024, sin otra pasada de pulido. Fuente inicial79PASS4SKIP por datos
+semánticos no configurados; los cuatro sí corren en la prueba instalada.
+[Resultados](native-mcp-results.json), [paquete](native-mcp-packaging.json),
+[contrato](../architecture/native-mcp-entry.md).
+
+**Siguiente bloque principal:** retirar bootstrap de proveedores/instalaciones y
+arranque antiguo `start.sh`, preservando estado y cierre de procesos propios;
+Git/material retenido/publicación, agentes/conocimiento y pruebas antiguas siguen
+abiertos. Cierre integral del proyecto, sucesoras, settings/visuales/prompts y
+resto íntegro del plan siguen activos. Este corte no prueba host/cuenta/Ken reales,
+restore o suite global ni añade aceptación visual.
+
+## Etapa anterior: instalación Python nativa independiente
 
 **Resultado:**20dependencias directas por defecto; once paquetes de frameworks,
 proveedores, vector DB y parsers antiguos quedan en el extra histórico `legacy`.
