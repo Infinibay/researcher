@@ -566,3 +566,11 @@ con46funciones de prueba específicas. Los reemplazos y cambios de contrato est�
 en [native-adapter-retirement.md](native-adapter-retirement.md). Permanecen las
 políticas web robots/frecuencia, las otras familias y las cinco bibliotecas legacy.
 El fallo de versión54/55 del test de publicación se conserva para migraciones.
+
+## Captura directa con política web — 2026-11-06
+
+HTML/texto/PDF nativos comprueban robots y frecuencia compartida por instancia
+HTTP, manteniendo plazo, Stop, DNS/TLS y citas.161pruebas de fuente y161del paquete
+pasan. [Contrato y límites](direct-web-policy.md). Spider todavía requiere su
+preflight y límites explícitos de ejecución remota; los wrappers web no se
+retiran en este checkpoint. Las demás familias y dependencias siguen pendientes.

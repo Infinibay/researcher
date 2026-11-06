@@ -1,0 +1,30 @@
+{
+  "base_commit": "b0a1fab",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "sha256": "b1d2914d0a5e9737f97fdf989e36ac89f9496d3c4c7cfff5fce42dd88058f046",
+  "observed": {
+    "exit_code": 0,
+    "cases": 161,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 27.479,
+    "all_backend_imports_installed": true,
+    "backend_modules": 207,
+    "matching_python_sql": 732,
+    "installed_distributions": 85,
+    "legacy_installed": false,
+    "real_model_calls": 0,
+    "real_provider_calls": 0
+  },
+  "tests": [
+    "backend/tests/research/test_web_policy.py",
+    "backend/tests/research/test_web_fetcher.py",
+    "backend/tests/research/test_pdf_web.py",
+    "backend/tests/research/test_https_transport.py",
+    "backend/tests/research/test_http.py",
+    "backend/tests/research/test_paper_capture.py",
+    "backend/tests/research/test_context7.py",
+    "backend/tests/research/test_spider.py"
+  ],
+  "limits": "Focused direct source and provider regression suite. DNS/socket/provider data controlled; actual private-CA TLS, HTTP parsing, PDF worker, SQLite/citation and Stop ownership exercised. No model/provider calls, whole-suite result, multiprocess rate budget or remote Spider behavior claimed. Existing development seed db/seeds/dev_data.sql is outside unchanged db/*.sql package data."
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 69,
+      "row": 12
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/research/test_web_policy.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import hashlib\nimport time\nfrom concurrent.futures import ThreadPoolExecutor\nfrom threading import Event\n\nimport pytest\n\nfrom backend.research.models import ResearchForbidden, SourceTooLarge, SourceUnavailable\nfrom backend.research.web_fetcher import PublicWebFetcher\nfrom backend.research.web_policy import RobotsRules, WebAccessPolicy\nfrom backend.tests.research.test_web_fetcher import MemoryConnection\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 15
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  }
+]

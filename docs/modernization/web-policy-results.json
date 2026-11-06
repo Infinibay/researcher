@@ -1,0 +1,16 @@
+{
+  "base_commit": "b0a1fab",
+  "passed": 161,
+  "failed": 0,
+  "skipped": 0,
+  "seconds": 26.027,
+  "initial_red": "Default reader returned a snapshot for a robots-disallowed target instead of raising SourceUnavailable.",
+  "first_batch": "103 pass, 2 fail. One new HTTP assertion wrongly expected 502 instead of existing 422; one paper cancellation fixture needed explicit transport-only policy. Both corrected; final scope includes provider regressions.",
+  "scope": "Direct HTTPS robots and shared HTTP rate policy, URL/DNS/TLS bounds, PDF worker/Stop, HTTP-to-SQLite-to-citation plus Context7/Spider regressions. Controlled public DNS/socket/provider data. Not the global suite or remote-provider policy acceptance.",
+  "remaining": [
+    "Spider preflight and remote acquisition policy limits",
+    "Legacy web wrapper retirement",
+    "Other principal plan blocks and final UI/global acceptance",
+    "Previously observed migration54/55 failure is unchanged and outside this batch"
+  ]
+}

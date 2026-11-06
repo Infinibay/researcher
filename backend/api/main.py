@@ -124,8 +124,13 @@ def create_app(*, access: LocalAccess | None = None, runtime_service=None) -> Fa
     app.state.runtime_service = runtime_service
     from backend.config.settings import settings
     from backend.research.semantic import SemanticRetriever
+    from backend.research.web_policy import WebAccessPolicy
 
     app.state.retrieval = SemanticRetriever(settings.RETRIEVAL_ASSET_DIR)
+    app.state.web_access_policy = WebAccessPolicy(
+        requests_per_minute=settings.WEB_RPM_LIMIT,
+        cache_ttl=settings.WEB_ROBOTS_CACHE_TTL,
+    )
 
     from backend.api.request_limits import ToolRequestLimits
 

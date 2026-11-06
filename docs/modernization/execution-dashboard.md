@@ -16,7 +16,27 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: adaptadores de ejecución y documentos retirados
+## Etapa actual: política de captura web, directa implementada
+
+La captura directa de HTML/texto/PDF comprueba robots antes de cada destino y
+comparte cuota entre solicitudes. Conserva DNS/TLS, plazo, Stop y procedencia;
+los rechazos no guardan fuentes parciales. [Contrato](../architecture/direct-web-policy.md).
+
+**Comprobado:**161pruebas en fuente y161en el paquete instalado,0fallos/omisiones;
+732archivos Python/SQL coinciden,207imports son del entorno,85distribuciones sin
+frameworks antiguos.50definiciones nuevas/modificadas documentadas. Inventario de
+prompts394candidatos/421archivos,187archivados,0revisiones estáticas pendientes.
+DNS/socket/proveedores controlados;0llamadas reales a modelos/proveedores.
+
+**En curso:** terminar política de Spider y retirar wrappers web; la cuota local
+no demuestra control sobre redirecciones/subrecursos remotos. Después siguen
+tareas/comunicación/proyecto/conocimiento y cinco bibliotecas legacy; operación,
+migraciones/restore, historial/presupuestos, CLI y evaluación real/humana/global.
+12pilotos48conceptos0páginas aceptadas integralmente;43escenarios abiertos.
+El fallo54/55 anterior permanece para migraciones; esta batería no lo incluye.
+Detalles secundarios al final, incluyendo el orden de imports DD050.
+
+## Etapa anterior: adaptadores de ejecución y documentos retirados
 
 Se retiran23módulos de shell/Git/RAG/SQL genérico y documentación CrewAI. Los
 recorridos nativos conservan ejecución, publicación tras aceptación, parsers,

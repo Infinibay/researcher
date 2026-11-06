@@ -6,6 +6,17 @@ from http.client import HTTPConnection
 import pytest
 
 
+class TransportOnlyPolicy:
+    """Keep transport fixtures focused; test_web_policy covers the real host policy."""
+
+    def authorize(self, url, load_robots, deadline, cancelled):
+        """Avoid adding robots fixtures to tests of independent HTTP/parser failures."""
+        return {"decision": "test-only-transport"}
+
+    def acquire(self, deadline, cancelled):
+        """Leave cancellation/deadline enforcement to the transport under test."""
+
+
 class SocketBuffer:
     def __init__(self, response):
         self.response = response
@@ -34,6 +45,7 @@ class MemoryConnection(HTTPConnection):
 
 
 def fetcher(responses, *, addresses=("93.184.216.34",), **limits):
+    """Exercise transport with a test-only policy unless an integration policy is supplied."""
     from backend.research.web_fetcher import PublicWebFetcher
 
     connections = []
@@ -48,7 +60,10 @@ def fetcher(responses, *, addresses=("93.184.216.34",), **limits):
         return MemoryConnection(host, port, address, timeout, responses.pop(0))
 
     return (
-        PublicWebFetcher(resolver=resolve, connection_factory=connection, **limits),
+        PublicWebFetcher(
+            resolver=resolve, connection_factory=connection,
+            policy=limits.pop("policy", TransportOnlyPolicy()), **limits,
+        ),
         connections,
         resolutions,
     )

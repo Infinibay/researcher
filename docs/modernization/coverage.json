@@ -3852,6 +3852,25 @@
       ],
       "implemented": "Explicit global/project/project-actor pair and reset, optimistic revisions, frozen per-attempt selection, actual native catalog refusal before thread/turn, owner dialog and task provenance.",
       "remaining": "Actual account/model matrix and whole-product acceptance remain unproven; secondary selector/theme work deferred until all principal capabilities."
+    },
+    "direct_web_policy": {
+      "status": "direct_capture_verified_spider_and_web_retirement_pending",
+      "evidence": [
+        "docs/architecture/direct-web-policy.md",
+        "docs/modernization/web-policy-results.json",
+        "docs/modernization/web-policy-packaging.json",
+        "backend/tests/research/test_web_policy.py",
+        "backend/tests/research/test_http.py"
+      ],
+      "implemented": [
+        "Robots decisions before each direct source redirect; bounded shared per-application HTTP budget/cache, original timeout and Stop, provenance, HTTP/PDF/SQLite/citation.",
+        "161 source and 161 installed tests pass; controlled public DNS/socket/provider data."
+      ],
+      "remaining": [
+        "Spider initial-target policy and explicit remote-execution limits, legacy web retirement",
+        "Multiprocess/host operation as required in the deployment block; no distributed quota claimed",
+        "All original principal blocks,43scenarios and12page acceptance; fine details at the end"
+      ]
     }
   }
 }

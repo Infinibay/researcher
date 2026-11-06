@@ -6,7 +6,7 @@ import pytest
 
 from backend.research.models import SourceUnavailable
 from backend.tests.research.pdf_fixtures import pdf_bytes
-from backend.tests.research.test_web_fetcher import fetcher
+from backend.tests.research.test_web_fetcher import TransportOnlyPolicy, fetcher
 
 
 def pdf_response(data, *, mime="application/pdf"):
@@ -105,6 +105,7 @@ def test_withdrawn_web_fetch_retains_ownership_until_blocked_io_closes():
     gate = LiveGrants()
     gate.activate("attempt-a")
     web = PublicWebFetcher(
+        policy=TransportOnlyPolicy(),
         resolver=lambda host, timeout: ["93.184.216.34"],
         connection_factory=connection,
         owner=gate,

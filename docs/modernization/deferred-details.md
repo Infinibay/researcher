@@ -186,3 +186,5 @@ Seguimiento deDD048 (adaptadores nativos): los avisos I001/RUF022 del export web
 persisten en[native-adapters-lint.json](native-adapters-lint.json). No se reabre
 la migración por ellos. El fallo54/55, la recuperación de Chroma sin fuente original
 y la política web robots/frecuencia son tareas principales de sus bloques.
+
+| DD-050 | Un aviso Ruff I001 por orden de imports en el nuevo test de política web; no impide la captura ni su verificación. | `backend/tests/research/test_web_policy.py`, evidencia `web-policy-lint.json` | Pulido después de todas las tareas principales. Spider y retirada web siguen como tareas principales, no detalles. |

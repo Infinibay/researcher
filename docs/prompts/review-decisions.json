@@ -16,9 +16,9 @@
       "conflicts": []
     },
     "backend/api/main.py::create_app.description@111": {
-      "dependencies_sha256": "63ba95d7da793b98a5670afd925e0f866afe8ce65626f528620c5168a478503a",
+      "dependencies_sha256": "ff9482bf45bbcd05f12cf5cd2342b554d9cdb13e1ad70d60e0119bf19d7c1f9b",
       "decision": "excluded_human_or_input_metadata",
-      "rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose.",
+      "rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose. Revalidated for direct-web policy: this candidate AST is unchanged; create_app adds only shared robots/rate host state, without changing project metadata or agent instructions.",
       "evidence": [
         "backend/api/main.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
@@ -82,9 +82,9 @@
       "conflicts": []
     },
     "backend/api/routes/projects.py::_project_to_response.description@79": {
-      "dependencies_sha256": "9be6badcbda2ec624300d556e865e0dc55a5af8391fb9509ef5b077eab0cd189",
+      "dependencies_sha256": "eee044d0ce9ab5c16aeec705600916f332ee05a86fe7f0ab2f614c834682314c",
       "decision": "excluded_human_or_input_metadata",
-      "rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose.",
+      "rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose. Revalidated for direct-web policy: this candidate AST is unchanged; create_app adds only shared robots/rate host state, without changing project metadata or agent instructions.",
       "evidence": [
         "backend/api/routes/projects.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",

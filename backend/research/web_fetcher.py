@@ -1,4 +1,4 @@
-"""Public HTTPS source acquisition with pinned DNS, manual redirects and bounds.
+"""Public HTTPS source acquisition with robots/rate policy, pinned DNS and bounds.
 
 No proxy credentials, cookies, private destinations or automatic redirects.
 Text and PDF snapshots share URL policy; PDF extraction uses the owned worker.
@@ -10,7 +10,7 @@ import re
 import socket
 import ssl
 import time
-from contextlib import closing, nullcontext
+from contextlib import closing, contextmanager, nullcontext
 from html.parser import HTMLParser
 from http.client import HTTPException, HTTPSConnection
 from threading import Event
@@ -27,6 +27,7 @@ from backend.research.models import (
     SourceTooLarge,
     SourceUnavailable,
 )
+from backend.research.web_policy import DEFAULT_WEB_POLICY, MAX_ROBOTS_BYTES, USER_AGENT
 
 
 def _resolve(host: str, timeout: float) -> list[str]:
@@ -139,6 +140,7 @@ class PublicWebFetcher:
         pdf_parser=None,
         owner=None,
         grant_id=None,
+        policy=None,
     ):
         """Bind trusted transport/parser policy and optional host operation ownership."""
         if (owner is None) != (grant_id is None):
@@ -155,6 +157,7 @@ class PublicWebFetcher:
         self.clock = clock
         self.pdf_parser = pdf_parser
         self.owner, self.grant_id = owner, grant_id
+        self.policy = DEFAULT_WEB_POLICY if policy is None else policy
 
     def _remaining(self, deadline, cancelled):
         """Reject withdrawn work before each network/parser step and preserve one deadline."""
@@ -232,114 +235,116 @@ class PublicWebFetcher:
         with operation as cancelled:
             return self._fetch(url, cancelled)
 
-    def _fetch(self, url: str, cancelled) -> SourceDraft:
-        """Own all connections and parsing until cancellation/deadline cleanup finishes."""
-        requested = url
-        current = url
-        deadline = self.clock() + self.timeout_seconds
-        for hop in range(self.max_redirects + 1):
-            host, target, normalized, literal = self._url(current)
-            addresses = (
-                [str(literal)]
-                if literal is not None
-                else self.resolve(host, self._remaining(deadline, cancelled))
+    @contextmanager
+    def _response(self, url, deadline, cancelled):
+        """Own one rate-limited HTTP exchange after validating and pinning every address."""
+        host, target, normalized, literal = self._url(url)
+        addresses = (
+            [str(literal)] if literal is not None
+            else self.resolve(host, self._remaining(deadline, cancelled))
+        )
+        if not addresses or len(addresses) > 64:
+            raise SourceUnavailable("Public source has no bounded DNS address set")
+        vetted = [_public_address(address) for address in addresses]
+        address = str(min(vetted, key=lambda value: (value.version, str(value))))
+        self.policy.acquire(deadline, cancelled)
+        try:
+            with closing(self.connection_factory(
+                host, 443, address, self._remaining(deadline, cancelled)
+            )) as conn:
+                conn.request("GET", target, headers={
+                    "User-Agent": USER_AGENT,
+                    "Accept": "text/html,text/plain,application/json,application/pdf",
+                    "Accept-Encoding": "identity",
+                })
+                if conn.sock is not None:
+                    conn.sock.settimeout(self._remaining(deadline, cancelled))
+                with conn.getresponse() as response:
+                    yield conn, response, address, normalized
+        except ResearchForbidden:
+            raise
+        except (OSError, HTTPException) as exc:
+            raise SourceUnavailable(
+                "Public source connection failed or exceeded its deadline"
+            ) from exc
+
+    def _body(self, conn, response, limit, deadline, cancelled):
+        """Read a complete identity-encoded body within one byte and time budget."""
+        if response.getheader("Content-Encoding", "identity").lower() not in ("", "identity"):
+            raise SourceUnavailable("Compressed source responses are not accepted by this bounded text route")
+        length = response.getheader("Content-Length")
+        if length is not None:
+            if not length.isdigit():
+                raise SourceUnavailable("Public source returned an invalid length")
+            if int(length) > limit:
+                raise SourceTooLarge("Public source exceeds the byte limit")
+        chunks, size = [], 0
+        while size <= limit:
+            remaining = self._remaining(deadline, cancelled)
+            if conn.sock is not None:
+                conn.sock.settimeout(remaining)
+            chunk = response.read1(min(65536, limit + 1 - size))
+            if not chunk:
+                break
+            chunks.append(chunk)
+            size += len(chunk)
+        if size > limit:
+            raise SourceTooLarge("Public source exceeds the byte limit")
+        if length is not None and size != int(length):
+            raise SourceUnavailable(
+                "Public source body ended before its declared length; no partial source was saved"
             )
-            if not addresses or len(addresses) > 64:
-                raise SourceUnavailable("Public source has no bounded DNS address set")
-            vetted = [_public_address(address) for address in addresses]
-            address = str(min(vetted, key=lambda value: (value.version, str(value))))
-            try:
-                with closing(
-                    self.connection_factory(
-                        host, 443, address, self._remaining(deadline, cancelled)
-                    )
-                ) as conn:
-                    conn.request(
-                        "GET",
-                        target,
-                        headers={
-                            "User-Agent": "Researcher/0.1 source-reader",
-                            "Accept": "text/html,text/plain,application/json,application/pdf",
-                            "Accept-Encoding": "identity",
-                        },
-                    )
-                    if conn.sock is not None:
-                        conn.sock.settimeout(self._remaining(deadline, cancelled))
-                    with conn.getresponse() as response:
-                        if response.status in (301, 302, 303, 307, 308):
-                            location = response.getheader("Location")
-                            if (
-                                hop >= self.max_redirects
-                                or not location
-                                or len(location) > 4096
-                            ):
-                                raise SourceUnavailable(
-                                    "Public source redirect limit exceeded or missing destination"
-                                )
-                            current = urljoin(normalized, location)
-                            continue
-                        if not 200 <= response.status < 300:
-                            raise SourceUnavailable(
-                                f"Public source returned HTTP {response.status}"
-                            )
-                        if response.getheader(
-                            "Content-Encoding", "identity"
-                        ).lower() not in ("", "identity"):
-                            raise SourceUnavailable(
-                                "Compressed source responses are not accepted by this bounded text route"
-                            )
-                        length = response.getheader("Content-Length")
-                        if length is not None:
-                            if not length.isdigit():
-                                raise SourceUnavailable(
-                                    "Public source returned an invalid length"
-                                )
-                            if int(length) > self.max_bytes:
-                                raise SourceTooLarge(
-                                    "Public source exceeds the byte limit"
-                                )
-                        mime = response.headers.get_content_type()
-                        if not (
-                            mime.startswith("text/")
-                            or mime
-                            in (
-                                "application/json",
-                                "application/xml",
-                                "application/xhtml+xml",
-                                "application/pdf",
-                                "application/octet-stream",
-                            )
-                        ):
-                            raise SourceUnavailable(
-                                "Public source content type requires a dedicated parser"
-                            )
-                        charset = response.headers.get_content_charset() or "utf-8"
-                        chunks = []
-                        size = 0
-                        while size <= self.max_bytes:
-                            remaining = self._remaining(deadline, cancelled)
-                            if conn.sock is not None:
-                                conn.sock.settimeout(remaining)
-                            chunk = response.read1(
-                                min(65536, self.max_bytes + 1 - size)
-                            )
-                            if not chunk:
-                                break
-                            chunks.append(chunk)
-                            size += len(chunk)
-                        if size > self.max_bytes:
-                            raise SourceTooLarge("Public source exceeds the byte limit")
-                        if length is not None and size != int(length):
-                            raise SourceUnavailable(
-                                "Public source body ended before its declared length; no partial source was saved"
-                            )
-                        data = b"".join(chunks)
-            except ResearchForbidden:
-                raise
-            except (OSError, HTTPException) as exc:
-                raise SourceUnavailable(
-                    "Public source connection failed or exceeded its deadline"
-                ) from exc
+        return b"".join(chunks)
+
+    def _robots(self, url, deadline, cancelled):
+        """Load robots via the same owned HTTPS transport, with at most five redirects."""
+        current = url
+        for hop in range(6):
+            with self._response(current, deadline, cancelled) as (conn, reply, _, normalized):
+                if reply.status in (301, 302, 303, 307, 308):
+                    location = reply.getheader("Location")
+                    if hop == 5 or not location or len(location) > 4096:
+                        raise SourceUnavailable("robots.txt redirect limit exceeded or missing destination")
+                    current = urljoin(normalized, location)
+                    continue
+                if not 200 <= reply.status < 300:
+                    return reply.status, b"", normalized
+                if reply.headers.get_content_type() != "text/plain":
+                    raise SourceUnavailable("robots.txt must be served as text/plain")
+                return reply.status, self._body(
+                    conn, reply, MAX_ROBOTS_BYTES, deadline, cancelled
+                ), normalized
+        raise SourceUnavailable("robots.txt redirect limit exceeded")
+
+    def _fetch(self, url: str, cancelled) -> SourceDraft:
+        """Own policy checks, connections and parsing until cancellation cleanup finishes."""
+        requested = current = url
+        deadline = self.clock() + self.timeout_seconds
+        policy_evidence = []
+        for hop in range(self.max_redirects + 1):
+            host, target, normalized, _ = self._url(current)
+            decision = self.policy.authorize(
+                normalized, lambda value: self._robots(value, deadline, cancelled),
+                deadline, cancelled,
+            )
+            policy_evidence.append({"url": normalized, **decision})
+            with self._response(normalized, deadline, cancelled) as (conn, response, address, _):
+                if response.status in (301, 302, 303, 307, 308):
+                    location = response.getheader("Location")
+                    if hop >= self.max_redirects or not location or len(location) > 4096:
+                        raise SourceUnavailable("Public source redirect limit exceeded or missing destination")
+                    current = urljoin(normalized, location)
+                    continue
+                if not 200 <= response.status < 300:
+                    raise SourceUnavailable(f"Public source returned HTTP {response.status}")
+                mime = response.headers.get_content_type()
+                if not (mime.startswith("text/") or mime in (
+                    "application/json", "application/xml", "application/xhtml+xml",
+                    "application/pdf", "application/octet-stream",
+                )):
+                    raise SourceUnavailable("Public source content type requires a dedicated parser")
+                charset = response.headers.get_content_charset() or "utf-8"
+                data = self._body(conn, response, self.max_bytes, deadline, cancelled)
             title = host + target
             if mime == "application/pdf" or (
                 mime == "application/octet-stream" and data.startswith(b"%PDF-")
@@ -392,6 +397,7 @@ class PublicWebFetcher:
                     "mime_type": mime,
                     **extraction,
                     "redirects": hop,
+                    "access_policy": policy_evidence,
                     "resolved_public_address": address,
                 },
             )

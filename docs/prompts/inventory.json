@@ -2,7 +2,7 @@
   "schema_version": 1,
   "scope": "Owned backend/ and scripts/ Python, excluding tests. Syntax-selected prompt builders/literals/tool descriptions; external native system prompts and arbitrary owner/source text are outside this static inventory.",
   "coverage": "Candidates are not unique rendered prompts. Dynamic rendering size and non-direct consumers remain unknown. Reviews are explicit declarations bound to source and direct module consumers, not proof of efficacy or complete runtime reachability. requires_review entries are unfinished.",
-  "files_scanned": 420,
+  "files_scanned": 421,
   "source_tree": {
     "backend/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "backend/api/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -11,7 +11,7 @@
     "backend/api/exceptions.py": "874b055b3a8aa8c11b96c45adc7f02bfdce80a07ddf2c35e854c96b655f4b585",
     "backend/api/flow_manager.py": "c223ecf8a48a09c855ada31f2307bd47b9bd9c229b693c1c95655caa4c47b7fa",
     "backend/api/local_access.py": "114456de477b4248fdc5a8aa2554c3962e0df9fe8675e782ea27e2703048f155",
-    "backend/api/main.py": "b307e79b97c3ce7a64de0503e82f1d74428758184d255c8f191d4021ab11a5d5",
+    "backend/api/main.py": "a025a6c980af4d876b97d2879b977eefe4e800bf9a30c82a7bbd407a0dcd263d",
     "backend/api/models/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "backend/api/models/agent.py": "23eb182f59601828bcf0a0c54660e9ee96e4b959b10f5560ec54cb77c03ea6ff",
     "backend/api/models/artifact.py": "ff6be607902eb0db2f5009ef2ab014fe23cfd09e9f68a43f5fcae1f03f36b357",
@@ -30,7 +30,7 @@
     "backend/api/models/wiki.py": "68dcc9c8e4062bdf2834edcdd5475403b6c92992448a8fd23fe9b88680c029f3",
     "backend/api/owner_endpoint.py": "dad24b99645ff4b35049a9bea37764719429600a510fabe9775add8875ace52c",
     "backend/api/request_limits.py": "00008d5f7984e56c5a4501a907ee7561cce63f32addafe4a7c9c110596755735",
-    "backend/api/research_dependencies.py": "79da1964df1696ebf2168c650e2146c4a7fbd9e3564d9329c7113e1bf67537ff",
+    "backend/api/research_dependencies.py": "f3fc64aee99d82804d3532a05cabb3a835146e3151cb17d79706331a9ea255a0",
     "backend/api/routes/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "backend/api/routes/agents.py": "5ba0ef1ef5798f294b4cc449c2612f9686184dbf03e02d0712a8fd66d20f771e",
     "backend/api/routes/artifacts.py": "39f1c7a9ef32ce6c54285d8dffc46c6b7e82cf2ef26b783be0ddcdda1034a765",
@@ -232,7 +232,8 @@
     "backend/research/sqlite_store.py": "f91f7b8997ff42df3797ba963813dda01f03666ff86d3dda6fd8132e29a4d9dc",
     "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
     "backend/research/structured_text.py": "3721074c14461cabc26be374a1e64954747fe1e5656a524d6d293c29ec922599",
-    "backend/research/web_fetcher.py": "1d8d91f0a2d6736a36f093baacb4eb772c2989d115953315cbe7446959ffa3f9",
+    "backend/research/web_fetcher.py": "f09108c93e9928d90866de6821c89e9d6f7e677ccb3967f7ab2242afe6c49f4e",
+    "backend/research/web_policy.py": "9b22dce8fb3cb895d579f42c469c0f6163a9c1a72bd27944e62ee754f729115f",
     "backend/research/worker_limits.py": "7c633a5ba1db3b45948330ad4e85c0993f05b760587cc249261ce3810b83cb0d",
     "backend/research/worker_transport.py": "f8ec45d7cb2cf12d2dec30049b34c9025ebbf86fafd9a43f9a2bac526c673083",
     "backend/runtime/__init__.py": "4cd821bf227b55f0037304a924016d3827baaa924797487a6392154d7ac3c19e",
@@ -474,7 +475,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "excluded_human_or_input_metadata",
       "objective": "FastAPI application factory for the INFINIBAY API.",
-      "source_sha256": "b307e79b97c3ce7a64de0503e82f1d74428758184d255c8f191d4021ab11a5d5",
+      "source_sha256": "a025a6c980af4d876b97d2879b977eefe4e800bf9a30c82a7bbd407a0dcd263d",
       "source_bytes": 54,
       "rendered_utf8_bytes": 52,
       "variables_kind": "referenced_identifiers",
@@ -490,11 +491,11 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "63ba95d7da793b98a5670afd925e0f866afe8ce65626f528620c5168a478503a",
+      "dependencies_sha256": "ff9482bf45bbcd05f12cf5cd2342b554d9cdb13e1ad70d60e0119bf19d7c1f9b",
       "direct_module_consumers": {},
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose.",
+      "review_rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose. Revalidated for direct-web policy: this candidate AST is unchanged; create_app adds only shared robots/rate host state, without changing project metadata or agent instructions.",
       "review_evidence": [
         "backend/api/main.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
@@ -738,13 +739,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "9be6badcbda2ec624300d556e865e0dc55a5af8391fb9509ef5b077eab0cd189",
+      "dependencies_sha256": "eee044d0ce9ab5c16aeec705600916f332ee05a86fe7f0ab2f614c834682314c",
       "direct_module_consumers": {
-        "backend/api/main.py": "b307e79b97c3ce7a64de0503e82f1d74428758184d255c8f191d4021ab11a5d5"
+        "backend/api/main.py": "a025a6c980af4d876b97d2879b977eefe4e800bf9a30c82a7bbd407a0dcd263d"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose.",
+      "review_rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose. Revalidated for direct-web policy: this candidate AST is unchanged; create_app adds only shared robots/rate host state, without changing project metadata or agent instructions.",
       "review_evidence": [
         "backend/api/routes/projects.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",

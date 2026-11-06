@@ -78,6 +78,7 @@ def get_research_context(
                 pdf_parser=parser,
             ),
             web_fetcher=PublicWebFetcher(
+                policy=request.app.state.web_access_policy,
                 pdf_parser=parser,
                 owner=request.app.state.live_grants,
                 grant_id=scope.grant_id,

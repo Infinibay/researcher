@@ -412,8 +412,12 @@ def test_public_pdf_http_capture_retries_and_cites_the_original_download(
     from backend.tests.research.pdf_fixtures import pdf_bytes
     from backend.tests.research.test_pdf_web import pdf_response
     from backend.tests.research.test_web_fetcher import fetcher
+    from backend.tests.research.test_web_policy import response
 
-    responses = [pdf_response(pdf_bytes("Tax rates are fractions.", "Rate: 0.21."))]
+    responses = [
+        response(b"User-agent: Researcher\nDisallow: /private\n"),
+        pdf_response(pdf_bytes("Tax rates are fractions.", "Rate: 0.21.")),
+    ]
 
     def configured(**options):
         """Keep policy, owned parser and persistence real; replace only DNS/socket transport."""
@@ -438,6 +442,14 @@ def test_public_pdf_http_capture_retries_and_cites_the_original_download(
     ).json()
     assert window["provenance"]["page_count"] == 2
     assert window["provenance"]["execution"]["worker_closed"] is True
+    assert window["provenance"]["access_policy"][0]["robots_status"] == 200
+    denied = research_client.post(
+        "/api/research-tools/sources/web", headers=headers,
+        json={"operation_key": "denied", "url": "https://docs.example.org/private"},
+    )
+    assert denied.status_code == 422, denied.text
+    assert "robots" in denied.text
+    assert db_conn.execute("SELECT count(*) FROM research_sources").fetchone()[0] == 1
     assert (
         window["content"]
         == "[Page 1]\nTax rates are fractions.\n\n[Page 2]\nRate: 0.21."

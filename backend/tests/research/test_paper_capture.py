@@ -10,7 +10,7 @@ from backend.tests.research.test_http import (
     research_client,
 )
 from backend.tests.research.test_pdf_web import pdf_response
-from backend.tests.research.test_web_fetcher import fetcher
+from backend.tests.research.test_web_fetcher import TransportOnlyPolicy, fetcher
 
 __all__ = ["research_client"]  # Export the reused pytest fixture explicitly.
 
@@ -23,7 +23,8 @@ def paper_transport(monkeypatch):
     responses, calls, hosts = [], [], []
 
     def configured(**options):
-        """Compose the same owned parser and public network policy used by production."""
+        """Keep paper/SSRF coverage focused; HTTP policy integration lives in test_http."""
+        options["policy"] = TransportOnlyPolicy()
         web, connections, resolutions = fetcher(responses, **options)
         calls.append(connections)
         hosts.append(resolutions)
@@ -255,6 +256,7 @@ def test_authority_revoked_after_paper_download_cannot_commit(
 
     def configured(**options):
         """Withdraw the database grant after real PDF extraction but before persistence."""
+        options["policy"] = TransportOnlyPolicy()
         web, _, _ = fetcher(
             [pdf_response(pdf_bytes("Uncommitted evidence"))], **options
         )

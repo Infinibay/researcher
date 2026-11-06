@@ -6951,3 +6951,13 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
   retirement; then task/communication/project/knowledge and remaining dependencies.
   Operation/migrations/restore/history/budgets/CLI/realprompt-human-science/
   43scenarios/all12pages/finalreview remain full-scope.12pilots48concepts0accepted.
+
+## Direct web access policy — 2026-11-06
+
+- Resumed b0a1fab in the managed worktree; task-transition list already persisted in dashboard/workflow/plan. User policy retained: principal capabilities first, fine details last. No new subagents/push/merge/deploy.
+- Native direct HTML/text/PDF now checks robots before every page/redirect and shares rate/cache state across API request readers. Same pinned public HTTPS, bounded robots body/redirects, original deadline, Stop ownership and attributed decisions. Explicit RFC9309-derived choices documented; no full conformance claim.
+- RED reproduced default reader accepting a robots-denied source. Initial batch103PASS2FAIL: wrong new HTTP expectation502 versus existing422; paper revocation fixture unintentionally received real robots policy. Fixed fixture/expectation without weakening production policy.
+- Final161sourcePASS0FAIL0SKIP26.027s; installed161PASS0FAIL0SKIP27.479s. Clean-copy wheel732matchingPythonSQL,207backend imports all installed,85distributions/no legacy. Actual TLS/privateCA, HTTP/PDF/SQLite/citation and Stop; public DNS/socket/provider data controlled,0models/providers/userdata effects. No new global-suite assertion.
+-50changed/new definitions and modules documented;1I001 recordedDD050. Prompt394candidates/421files,187archived;2unchanged candidate ASTs revalidated against host composition-only diff;0static review pending, quality evaluation still open.
+- Direct capture substep complete; the principal web block remains open for Spider preflight/remote limitations and wrapper retirement. Other tool families/deps, operation, migrations/restore (including known54/55), history/budgets/CLI, model/human/science/global/full-page acceptance remain.12pilots48concepts0fullyaccepted and43scenarios unchanged.
+- Original source process34803terminal1, final88749terminal0, package17531terminal0. Full logs/XML under .superpowers/sdd/2026-10-31-actualizacion-proyecto/web-policy-*. No inference runtime launched.
