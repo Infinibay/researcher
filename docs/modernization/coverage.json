@@ -84,7 +84,13 @@
         "docs/modernization/source-repair-packaging.json",
         "backend/tests/runtime/test_source_repair.py",
         "backend/tests/git/test_source_repair_program.py",
-        "docs/design/audits/2026-11-06-source-repair/report.md"
+        "docs/design/audits/2026-11-06-source-repair/report.md",
+        "docs/architecture/source-history.md",
+        "docs/modernization/source-history-results.json",
+        "docs/modernization/source-history-packaging.json",
+        "backend/tests/runtime/test_source_history.py",
+        "frontend/tests/source-history.test.ts",
+        "docs/design/audits/2026-11-06-source-history/report.md"
       ]
     },
     "C04": {
@@ -1118,7 +1124,13 @@
         "docs/modernization/source-repair-packaging.json",
         "backend/tests/runtime/test_source_repair.py",
         "backend/tests/git/test_source_repair_program.py",
-        "docs/design/audits/2026-11-06-source-repair/report.md"
+        "docs/design/audits/2026-11-06-source-repair/report.md",
+        "docs/architecture/source-history.md",
+        "docs/modernization/source-history-results.json",
+        "docs/modernization/source-history-packaging.json",
+        "backend/tests/runtime/test_source_history.py",
+        "frontend/tests/source-history.test.ts",
+        "docs/design/audits/2026-11-06-source-history/report.md"
       ]
     },
     "D10": {
@@ -3525,7 +3537,7 @@
       ]
     },
     "repository_explorer": {
-      "status": "selected_explorer_local_remote_setup_and_explicit_repair_verified_history_extended_acceptance_pending",
+      "status": "selected_explorer_setup_repair_cross_browser_history_verified_reservation_extended_acceptance_pending",
       "evidence": [
         "docs/design/concepts/repositories/manifest.json",
         "docs/design/audits/2026-11-06-repositories/report.md",
@@ -3556,7 +3568,13 @@
         "docs/modernization/source-repair-packaging.json",
         "backend/tests/runtime/test_source_repair.py",
         "backend/tests/git/test_source_repair_program.py",
-        "docs/design/audits/2026-11-06-source-repair/report.md"
+        "docs/design/audits/2026-11-06-source-repair/report.md",
+        "docs/architecture/source-history.md",
+        "docs/modernization/source-history-results.json",
+        "docs/modernization/source-history-packaging.json",
+        "backend/tests/runtime/test_source_history.py",
+        "frontend/tests/source-history.test.ts",
+        "docs/design/audits/2026-11-06-source-history/report.md"
       ],
       "implemented": [
         "Three desktop concepts+mobile selected/implemented; complete immutable tree/blob read, explicit branch refresh, source scope/focus, historical review owner entry and original registration retry.",
@@ -3564,10 +3582,11 @@
         "Explicit original administrative create/adopt/HTTPS clone, no fake task IDs; source/project/lifespan Stop, retained partial folders, history deletion/completion guards and readonly recovery of Git-finished/registration-lost. Retired old init/clone/credential/origin/automatic remote/force-push entry points.",
         "Source control uses actual pre-G captured owner and immutable original project scope; real held TLS clone closes locally before source SQLite writes, without stopping a later owner on receipt replay.",
         "Explicit empty remote creation on the selected configured server/user or organization/visibility; atomic administrative HTTP ownership, single issued POST, positive original marker recovery, real client closure before SQLite waits and honest remote uncertainty after source/project Stop.175installed contracts/116frontend/5additional browser captures; no real model/user remote effects.",
-        "Explicit local repair under separately saved original authorization and actual private allocation/broker/driver hash. Original never-claimed/pre-domain/never-reserved domain closure distinguished without fake grants. Preserved local files/index/config/head, initial missing ref compare-and-set, clone partial fetch/checkout and explicit/default branch. Dirty incomplete clone cannot be registered by readonly observation as owner deletions.186installed contracts/117frontend/5additional captures; no user model/remote write."
+        "Explicit local repair under separately saved original authorization and actual private allocation/broker/driver hash. Original never-claimed/pre-domain/never-reserved domain closure distinguished without fake grants. Preserved local files/index/config/head, initial missing ref compare-and-set, clone partial fetch/checkout and explicit/default branch. Dirty incomplete clone cannot be registered by readonly observation as owner deletions.186installed contracts/117frontend/5additional captures; no user model/remote write.",
+        "Cross-browser exact original source history with separate readonly locator/preserved pending packet, normalized field order, selected identity/minimum fence/known choices validation, no setup POST from history, scoped owner observation and late GET operation/project isolation.121frontend/16focused installed owner regressions/3paired contexts/5final captures; no global rerun or user model/remote effect."
       ],
       "remaining": [
-        "Cross-browser original history selection/recovery; reservation resolution/adoption/abandonment; accepted but unscheduled repair handoff; SHA256 metadata reconstruction and extended special metadata/submodules/time budgets; old missing closure histories/restore remain before full page acceptance.",
+        "Reservation resolution/adoption/abandonment; accepted but unscheduled repair handoff; DD030/delete/restore and old missing closure histories; SHA256 metadata reconstruction, special metadata/submodules and global time/output budgets remain before full-page acceptance.",
         "Source reader budgets/concurrency/special metadata/submodules, remote annotation identity, full page/human/whole-plan/global/restore/final review remain."
       ]
     }

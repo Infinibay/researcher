@@ -4,6 +4,8 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- Historia original entre navegadores: abrir una preparación sin recrear su POST, conservar otra solicitud local pendiente y rechazar respuestas/controles de otra identidad o intento.121frontend,16pruebas instaladas enfocadas y tres contextos de navegador. [Contrato](../architecture/source-history.md), [resultados](source-history-results.json). Reserva/adopción y restore siguen abiertos.
+
 - Reparación explícita de preparaciones Git interrumpidas: conserva archivos, índice/config/HEAD existentes; puede completar primera revisión o archivos faltantes. Incluye cancelación antes de dueño/dominio y testigo de dominio retirado sin concesión. Observar ya no da por listo un checkout parcial.186pruebas instaladas,117frontend y5capturas. [Contrato](../architecture/source-repair.md), [resultados](source-repair-results.json). Historia entre navegadores y aceptación integral siguen abiertas.
 
 - Creación explícita de remoto vacío: servidor, cuenta/organización y visibilidad elegidos; un único POST y recuperación readonly de respuesta perdida. Stop conserva incertidumbre remota.175pruebas instaladas,116frontend,5capturas;49definiciones Python documentadas. [Contrato](../architecture/remote-source-creation.md), [resultados](remote-source-results.json).

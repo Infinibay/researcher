@@ -103,13 +103,15 @@ class SourceService:
                 self._workers[(project,key)] = asyncio.create_task(self._run(project,key), name='researcher-source-'+row['operation_id'])
             return await _settled(self.view, project, key)
 
-    async def reconcile(self, project, key):
-        """Start only explicit readonly reconciliation of the retained operation; no implicit clone, initialization, commit or credentialed write is replayed."""
+    async def reconcile(self, project, key, *, operation_id=None, fence=None):
+        """Validate a selected historical identity/fence before scheduling readonly recovery; no implicit setup write or different current attempt is substituted."""
         async with self._lock:
             self.parent._accepting()
             if self._closing or self.parent._source_project_stops.get(project) or self.parent._legacy_controller_active(project):
                 raise RunConflict('El proyecto no admite reconciliación mientras otro dueño conserve actividad.')
             row = await _settled(self.records.read, project, key)
+            if (operation_id is not None or fence is not None) and (row['operation_id'],row['fence'])!=(operation_id,fence):
+                raise RunConflict('La operación o el intento original observado cambió. Consulta su historia antes de observarlo.')
             live = self._workers.get((project,key))
             if live and not live.done():
                 raise RunConflict('El trabajador original sigue activo. Obsérvalo o detenlo antes de reconciliar.')

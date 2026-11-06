@@ -79,3 +79,9 @@ La preparación añade [continuación explícita de Git interrumpido](audits/202
 con5capturas adicionales de escritorio/móvil. Conserva la dirección seleccionada
 y las cuentas24/36desktop,8/12mobile,8pilotos,0aceptadas. Historial entre navegadores,
 resolución de reservas/adopción, formatos/límites y aceptación integral siguen abiertos.
+
+
+La historia de Repositorios se puede abrir desde otro navegador sin crear otra
+preparación ni sustituir un packet pendiente; [recorrido y límites](audits/2026-11-06-source-history/report.md).
+Tres contextos owner y cinco capturas finales, con respuestas tardías entre
+operaciones/proyectos. Conserva24/36desktop,8/12mobile,8pilotos,0aceptadas.

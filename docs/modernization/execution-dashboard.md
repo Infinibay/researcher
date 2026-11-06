@@ -9,7 +9,37 @@ Actualizado: 2026-11-06. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: continuar Git interrumpido conservando trabajo
+## Etapa actual: historia original entre navegadores
+
+Repositorios abre una operación guardada desde otra sesión sin recrear el POST.
+El localizador de historia conserva proyecto/clave/identidad/elecciones/fence
+mínimo y se guarda separado de la solicitud pendiente. Se puede volver a esa
+solicitud intacta. Los controles usan el intento observado; una respuesta tardía
+no cambia la operación o proyecto actual. Observación valida ahora ID/fence antes
+de programar, con compatibilidad bodyless anterior. Historia no expone el POST
+original de alta como recuperación automática.
+
+**Verificación:**121frontendPASS/build5.13s,4contratos nuevos de transporte/storage.
+16owner/source/remotePASS32.44s y16instaladas32.224s/223imports sóloenv/
+826miembros coincidentes/85distribuciones;0turnos nativos/modelos/remotos del usuario.
+No se presenta como otra batería global186. Tres contextos de navegador,
+5capturas finales1440/390px,0POST de efectos en la verificación readonly,
+2respuestas tardías,0incidencias Axe/errores JS/desbordamiento. La secuencia
+original observó/reparó una vez la fuente detenida;4grants reales cerrados.
+4defsPython/75módulos o nombresTS documentados;5avisos estáticos diferidosDD037.
+[Contrato](../architecture/source-history.md), [resultados](source-history-results.json),
+[paquete](source-history-packaging.json), [web](../design/audits/2026-11-06-source-history/report.md).
+
+**Siguiente principal:** resolver una reserva retenida de forma explícita para
+poder adoptar su carpeta, conservando archivos e historia; luego recuperar una
+reparación guardada que no llegó a programarse. DD030/restore, formatos/límites,
+configuración/modelos/prompts/libros, evaluación humana/científica,43escenarios/
+global/install/inversas43–54/cuatro rutas/aceptación12páginas/revisión final siguen
+siendo el plan completo.24/36desktop,8/12mobile,8pilotos,0/12aceptadas sin cambios.
+La caché de30s/frescura/fecha de consulta, densidad y foco quedan para pulido;
+los controles obsoletos ya son rechazados, no se retargetean.
+
+## Etapa anterior: continuar Git interrumpido conservando trabajo
 
 El owner puede autorizar una reparación ligada al intento observado, con clave
 propia conservada antes del POST. La continuación reutiliza la asignación privada

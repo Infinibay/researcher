@@ -1,0 +1,36 @@
+{
+  "base_commit": "3218eb8",
+  "changed_or_new_definitions_documented": 4,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/routes/source_operations.py",
+      "symbol": "observe_source",
+      "line": 83,
+      "docstring": "Reconcile the selected original identity/fence when supplied; retain bodyless compatibility without letting historical controls silently select a different attempt.",
+      "file_sha256": "2b96699f412134498d4075a59541197ec446c2aea9a1c7dbd90b6bd7406fbbe8"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService",
+      "line": 33,
+      "docstring": "Own actual administrative worker handles without inventing native turns or replaying interrupted writes after restart.",
+      "file_sha256": "c568a4a632d186ceede4ac09eaf4abbda4e60a1e69995ed155bc7e76de79f704"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.reconcile",
+      "line": 106,
+      "docstring": "Validate a selected historical identity/fence before scheduling readonly recovery; no implicit setup write or different current attempt is substituted.",
+      "file_sha256": "c568a4a632d186ceede4ac09eaf4abbda4e60a1e69995ed155bc7e76de79f704"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_history.py",
+      "symbol": "test_history_observation_rejects_replaced_or_stale_scope_before_scheduling",
+      "line": 8,
+      "docstring": "An owner opening recorded history cannot reconcile another operation or fence after a stale response, and exact completed observation starts no actor.",
+      "file_sha256": "edba20305ecf58add971692e120d52e3953e884a476082c20dc9138439e605db"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

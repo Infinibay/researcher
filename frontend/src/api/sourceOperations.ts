@@ -17,6 +17,8 @@ export interface SourceOperation extends SourceSummary {project_id:number;reques
 export interface SourceRepairIntent {repair_key:string;operation_id:string;fence:number}
 /** Keep the original source and continuation together so a reload cannot retarget another source or newer fence. */
 export interface SourceRepairPacket {schema:1;source:SourcePacket;body:SourceRepairIntent}
+/** A readonly history locator preserves the selected identity and known choices; it is never execution authority or a replacement pending request. */
+export interface SourceHistoryTarget {projectId:number;operation_key:string;operation_id:string;mode:SourceInput['mode'];name:string;path:string|null;fence:number}
 /** Use the same persistence boundary as browser storage without requiring a browser in transport tests. */
 type StoragePort=Pick<Storage,'getItem'|'setItem'|'removeItem'>
 
@@ -34,7 +36,8 @@ function validate(packet:SourcePacket,project=packet.projectId):SourcePacket{
   let url:URL;try{url=new URL(b.remote_url??'')}catch{throw new Error('Selecciona una URL HTTPS sin credenciales.')}
   if(url.protocol!=='https:'||url.username||url.password||url.search||url.hash)throw new Error('Selecciona una URL HTTPS sin credenciales.')
  }
- return Object.freeze({...packet,body:Object.freeze({...b})})
+ const {operation_key,mode,name,path,branch,remote_url,remote_owner,private:visibility,remote_server,use_configured_auth}=b
+ return Object.freeze({...packet,body:Object.freeze({operation_key,mode,name,path,branch,remote_url,remote_owner,private:visibility,remote_server,use_configured_auth})})
 }
 
 /** Generate an original key once, after the owner selects a mode and source; no transport is started here. */
@@ -59,10 +62,41 @@ function checked(value:SourceOperation,packet:SourcePacket){const {operation_key
 export async function sendSource(packet:SourcePacket){validate(packet);return checked(await fetchApi<SourceOperation>(`/api/projects/${packet.projectId}/source-operations`,{method:'POST',body:JSON.stringify(packet.body)}),packet)}
 /** Read without cloning, initializing, repairing or contacting a remote. */
 export async function readSource(packet:SourcePacket){validate(packet);return checked(await fetchApi<SourceOperation>(`/api/projects/${packet.projectId}/source-operations/${encodeURIComponent(packet.body.operation_key)}`),packet)}
+
+/** Validate only a bounded original history locator, without constructing an intent or inferring choices absent from the summary. */
+function validateHistory(target:SourceHistoryTarget,project=target.projectId):SourceHistoryTarget{
+ if(!target||Object.keys(target).sort().join(',')!=='fence,mode,name,operation_id,operation_key,path,projectId'||target.projectId!==project||!Number.isSafeInteger(project)||project<1||!/^[A-Za-z0-9_.:-]{1,128}$/.test(target.operation_key)||!/^[a-f0-9]{32}$/.test(target.operation_id)||!['create','adopt','clone','create_remote'].includes(target.mode)||!/^[A-Za-z0-9][A-Za-z0-9_.-]{0,80}$/.test(target.name)||!Number.isSafeInteger(target.fence)||target.fence<0||(target.mode==='create_remote'?target.path!==null:typeof target.path!=='string'||!target.path.startsWith('/')||target.path.length>4096))throw new Error('No se pudo comprobar la operación original seleccionada.')
+ return Object.freeze({...target})
+}
+
+/** Freeze the exact selected project/key/identity and already-known summary choices, not a newest-operation fallback. */
+export function sourceHistoryTarget(project:number,item:SourceSummary):SourceHistoryTarget{return validateHistory({projectId:project,operation_key:item.operation_key,operation_id:item.operation_id,mode:item.mode as SourceInput['mode'],name:item.name,path:item.path,fence:item.fence})}
+
+/** Recover original server choices only after matching the selected identity; a newer fence is a fresh observation and a lower one is rejected. */
+export function sourcePacketFromHistory(target:SourceHistoryTarget,value:SourceOperation):SourcePacket{
+ validateHistory(target)
+ if(value.project_id!==target.projectId||value.operation_key!==target.operation_key||value.operation_id!==target.operation_id||value.fence<target.fence||value.mode!==target.mode||value.name!==target.name||value.path!==target.path||!value.request||value.request.mode!==target.mode||value.request.name!==target.name||value.request.path!==target.path)throw new Error('La respuesta no corresponde a la operación original seleccionada.')
+ const packet=validate({schema:1,projectId:target.projectId,body:{operation_key:target.operation_key,...value.request}})
+ checked(value,packet)
+ return packet
+}
+
+/** Read exact original history with owner access; never prepare, repair, clone, initialize or contact its remote. */
+export async function readSourceHistory(target:SourceHistoryTarget){validateHistory(target);const value=await fetchApi<SourceOperation>(`/api/projects/${target.projectId}/source-operations/${encodeURIComponent(target.operation_key)}`);sourcePacketFromHistory(target,value);return value}
+
+/** Persist a readonly view independently of every unresolved local source and repair packet. */
+export const sourceHistory={
+ /** Restore a bounded locator; missing history is not inferred from corrupt storage. */
+ load(storage:Pick<Storage,'getItem'>,project:number):SourceHistoryTarget|null{const raw=storage.getItem(`researcher:source-history:v1:${project}`);if(raw===null)return null;try{if(raw.length>12000)throw new Error('size');return validateHistory(JSON.parse(raw),project)}catch{throw new Error('No se pudo recuperar la vista de historia original. La solicitud pendiente se conserva.')}},
+ /** Changing a view cannot overwrite a pending mutation, even when another operation is selected. */
+ save(storage:Pick<Storage,'setItem'>,target:SourceHistoryTarget){validateHistory(target);storage.setItem(`researcher:source-history:v1:${target.projectId}`,JSON.stringify(target))},
+ /** Clear only this exact view; another selected operation and all pending requests remain untouched. */
+ clear(storage:StoragePort,target:SourceHistoryTarget){validateHistory(target);if(JSON.stringify(this.load(storage,target.projectId))!==JSON.stringify(target))throw new Error('La vista original seleccionada cambió; no se borró.');storage.removeItem(`researcher:source-history:v1:${target.projectId}`)}
+}
 /** Stop exactly the observed administrative fence; no task or PID is invented by the browser. */
 export async function stopSource(packet:SourcePacket,observed:SourceOperation){checked(observed,packet);const value=checked(await fetchApi<SourceOperation>(`/api/projects/${packet.projectId}/source-operations/${encodeURIComponent(packet.body.operation_key)}/stop`,{method:'POST',body:JSON.stringify({operation_id:observed.operation_id,fence:observed.fence})}),packet);if(value.operation_id!==observed.operation_id||value.fence!==observed.fence)throw new Error('El recibo no corresponde al intento detenido. Consulta su estado.');return value}
 /** Explicit reconciliation observes retained state only; it never repeats an initialization, commit or clone. */
-export async function observeSource(packet:SourcePacket){validate(packet);return checked(await fetchApi<SourceOperation>(`/api/projects/${packet.projectId}/source-operations/${encodeURIComponent(packet.body.operation_key)}/observe`,{method:'POST'}),packet)}
+export async function observeSource(packet:SourcePacket,observed?:SourceOperation){validate(packet);if(observed)checked(observed,packet);return checked(await fetchApi<SourceOperation>(`/api/projects/${packet.projectId}/source-operations/${encodeURIComponent(packet.body.operation_key)}/observe`,{method:'POST',...(observed?{body:JSON.stringify({operation_id:observed.operation_id,fence:observed.fence})}:{})}),packet)}
 
 /** Validate a retained explicit local continuation without choosing a new fence or granting arbitrary commands. */
 function validateRepair(packet:SourceRepairPacket):SourceRepairPacket{

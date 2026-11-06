@@ -1,0 +1,166 @@
+{
+  "scope": "Changed backend source-history files only",
+  "findings": [
+    {
+      "cell": null,
+      "code": "F401",
+      "end_location": {
+        "column": 87,
+        "row": 9
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/git/source_service.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "from backend.git.source_operations import SourceLease, SourceOperations",
+            "end_location": {
+              "column": 87,
+              "row": 9
+            },
+            "location": {
+              "column": 1,
+              "row": 9
+            }
+          }
+        ],
+        "message": "Remove unused import: `backend.git.source_operations.SourceRequest`"
+      },
+      "location": {
+        "column": 74,
+        "row": 9
+      },
+      "message": "`backend.git.source_operations.SourceRequest` imported but unused",
+      "name": "unused-import",
+      "noqa_row": 9,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unused-import"
+    },
+    {
+      "cell": null,
+      "code": "BLE001",
+      "end_location": {
+        "column": 25,
+        "row": 170
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/git/source_service.py",
+      "fix": null,
+      "location": {
+        "column": 16,
+        "row": 170
+      },
+      "message": "Do not catch blind exception: `Exception`",
+      "name": "blind-except",
+      "noqa_row": 170,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/blind-except"
+    },
+    {
+      "cell": null,
+      "code": "F401",
+      "end_location": {
+        "column": 14,
+        "row": 3
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_source_history.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "",
+            "end_location": {
+              "column": 1,
+              "row": 4
+            },
+            "location": {
+              "column": 1,
+              "row": 3
+            }
+          }
+        ],
+        "message": "Remove unused import: `pytest`"
+      },
+      "location": {
+        "column": 8,
+        "row": 3
+      },
+      "message": "`pytest` imported but unused",
+      "name": "unused-import",
+      "noqa_row": 3,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unused-import"
+    },
+    {
+      "cell": null,
+      "code": "PLC0414",
+      "end_location": {
+        "column": 82,
+        "row": 5
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_source_history.py",
+      "fix": {
+        "applicability": "unsafe",
+        "edits": [
+          {
+            "content": "owned_config",
+            "end_location": {
+              "column": 82,
+              "row": 5
+            },
+            "location": {
+              "column": 54,
+              "row": 5
+            }
+          }
+        ],
+        "message": "Remove import alias"
+      },
+      "location": {
+        "column": 54,
+        "row": 5
+      },
+      "message": "Import alias does not rename original package",
+      "name": "useless-import-alias",
+      "noqa_row": 5,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/useless-import-alias"
+    },
+    {
+      "cell": null,
+      "code": "I001",
+      "end_location": {
+        "column": 66,
+        "row": 12
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_source_history.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "    from backend.tests.runtime.test_owned_source_setup import git\n    from backend.tests.runtime.test_source_repair import app_for_sources\n    from backend.tests.runtime.test_workspace_delivery import owner_client\n",
+            "end_location": {
+              "column": 1,
+              "row": 13
+            },
+            "location": {
+              "column": 1,
+              "row": 10
+            }
+          }
+        ],
+        "message": "Organize imports"
+      },
+      "location": {
+        "column": 5,
+        "row": 10
+      },
+      "message": "Import block is un-sorted or un-formatted",
+      "name": "unsorted-imports",
+      "noqa_row": 10,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+    }
+  ],
+  "warnings": 5,
+  "critical": []
+}

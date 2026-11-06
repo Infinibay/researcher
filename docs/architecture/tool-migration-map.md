@@ -474,3 +474,15 @@ Un checkout incompleto no se registra como borrados del usuario por observarlo.
 Cierre distingue nunca admitido, previo al dominio y dominio real retirado sin
 concesión, conservando evidencia y sin tareas ficticias.
 [Contrato](source-repair.md), [resultados](../modernization/source-repair-results.json).
+
+
+## Historia owner entre navegadores — después de3218eb8
+
+El GET original y el resumen de ProjectWorkspace permiten abrir otra operación sin
+recrear una intención. El navegador conserva un localizador de lectura separado
+para no reemplazar su packet pendiente. Validación de identidad/elecciones/fence
+mínimo y caches por proyecto/operación evitan respuestas cruzadas. La observación
+owner comprueba ahora el ID/fence recibido antes de programar; las llamadas
+bodyless anteriores siguen compatibles. No se concede autoridad de ejecución
+desde un localizador ni se expone creación automática desde la historia.
+[Contrato](source-history.md), [resultados](../modernization/source-history-results.json).

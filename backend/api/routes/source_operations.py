@@ -80,9 +80,9 @@ async def stop_source(project_id: int, operation_key: str, body: StopSource, req
 
 
 @router.post('/{operation_key}/observe', status_code=202)
-async def observe_source(project_id: int, operation_key: str, request: Request):
-    """Request readonly reconciliation of the original retained directory and closure; an uncertain effect is never blindly reissued."""
-    value = await service(request).sources.reconcile(project_id, operation_key)
+async def observe_source(project_id: int, operation_key: str, request: Request, body: StopSource | None = None):
+    """Reconcile the selected original identity/fence when supplied; retain bodyless compatibility without letting historical controls silently select a different attempt."""
+    value = await service(request).sources.reconcile(project_id, operation_key, **(body.model_dump() if body else {}))
     return JSONResponse(value, status_code=202, headers={'Cache-Control':'no-store'})
 
 

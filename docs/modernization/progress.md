@@ -6557,3 +6557,46 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
   oldclosure/restore/DD030, settings/models/prompts/books/science/human/terminal/
   history/budget,43scenarios/global/hostinstall/inverses43–54/remaining4routes/
   all12acceptance/finalfreshreview remain the original complete goal.
+
+## 2026-11-06 — original source history across paired browsers
+
+- Previous3218eb8goal turn was progress. Revalidated actual managed HEAD/clean
+  tracked state, full goal and macro-first policy before next principal.
+- Added independent readonly history locator and exact original project/key/ID/
+  known choices/minimum-fence validation. Server request becomes a canonical
+  packet without minting a key, inferring server or overwriting another pending
+  local request. Earlier repair storage remains compatible with JSON reordering.
+- History view no longer exposes source setup POST. Existing Stop/Repair remain
+  exact observed scope; Observe optionally checks ID/fence before scheduling and
+  web always supplies it, with previous bodyless API compatibility preserved.
+  Per-project/key/id/minfence queries and attributed mutation invalidation keep
+  late responses from replacing another operation or project. Original pending
+  packet survives history/reload/return byte-for-byte; focus follows loaded result.
+-121frontendPASS/build5.13s,4new data/storage cases.16source owner/service/remote
+  PASS32.44s; final focused noneditable wheel16PASS0FAIL0SKIP32.224s/223installed
+  imports/826matching members/85native-only distributions, SDK1.30realstdio/help/
+  refusalnoDB;0native/model/user-remote turns. No new global186run claim.
+- Actual3paired browser contexts and5final1440/390captures,0scopedAxe/overflow/JS
+  errors. Empty browser reopened stopped original and observed/repaired it once,
+  with original ID and advanced fences, no preparationPOST or newlocalpacket.
+  Original owner file retained; journal4grants retired,3same source operations and
+  foreign/pending planned records untouched;0native turns. Final readonly repeat
+ 0effectPOST+2actual delayedGET operation/project switches, pending packet intact.
+- First browser verifier reached its second late-read barrier but30s query cache
+  sent no cold GET. Confirmed live client21484, stopped it withSIGINTterminal130,
+  retained authoritative server and completed effects, then readonly59330terminal0
+  used cold-cache reloads/bounded barriers. No Observe/Repair/setup replay. Final
+  snapshot checks its single authorization/history and retained screenshot hashes.
+  Server46884terminal2 afteractualSIGINT; installed57543/backend18480/frontend19858
+  terminal0. No retained QA server/unknown live handle. Captures desktop/mobile
+  visually inspected; recorded cache/freshness polish instead of reopening code.
+-4changed/new Python defs and75TSmodules/names documented,0missing;5noncritical
+  static findings incl inheritedDD037. Updated architecture/status/dashboard/tool
+  map/coverage/Ken and reservation brief.24/36desktop8/12mobile8pilots0/12accepted
+  unchanged;C03/D09in_progress. No scenario/global/full-page completion claim.
+- Next principal: end a stopped source reservation explicitly so its retained
+  folder can be adopted without deleting files/history; then accepted-unscheduled
+  repair handoff. DD030/restore/old closure histories/formats/budgets, settings/
+  models/prompts/books/science/human/terminal/history,43scenarios/global/install/
+  inverses43–54/remaining4routes/all12pageacceptance/finalfreshreview remain full
+  original goal. No newpush/merge/deploy/routine agents; keep macro-first policy.

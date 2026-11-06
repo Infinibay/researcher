@@ -1,0 +1,48 @@
+{
+  "base_commit": "3218eb8",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "2610d8d24e98c5259239a5a75c684fdc02791d2823554cb0cda79ba17dab99ac",
+  "observed": {
+    "passed": 16,
+    "failures": 0,
+    "skipped": 0,
+    "installed_distributions": 85,
+    "sdk": "1.30.0",
+    "excluded_frameworks": [
+      "chromadb",
+      "crewai",
+      "crewai-tools",
+      "fastmcp",
+      "fastmcp-slim",
+      "litellm",
+      "ollama",
+      "tree-sitter",
+      "tree-sitter-c",
+      "tree-sitter-javascript",
+      "tree-sitter-python",
+      "tree-sitter-rust",
+      "tree-sitter-typescript"
+    ],
+    "project_noneditable": true,
+    "backend_modules": 223,
+    "all_backend_imports_from_native_env": true,
+    "matched_application_members": 826,
+    "console_help": 0,
+    "console_missing_token": 2,
+    "console_real_stdio": true,
+    "console_created_database": false,
+    "real_model_turns": 0,
+    "controlled_native_turns": 0,
+    "synthetic_inference_adapter_turns": "No inference adapters exercised in this scoped owner-history suite",
+    "actual_host_publications": "Local publication regression fixtures only; no user remote",
+    "seconds": 32.224
+  },
+  "tests": [
+    "backend/tests/runtime/test_source_history.py",
+    "backend/tests/runtime/test_source_service.py",
+    "backend/tests/runtime/test_remote_source.py"
+  ],
+  "excluded_legacy_extra_cases": [],
+  "bootstrap": "Existing clean native-only env; final noneditable wheel reinstalled offline without dependency changes. Python-I outside checkout; no inherited source or old site-packages. Explicit prepared local semantic assets.",
+  "limits": "Focused installed owner source history/reconciliation scope plus existing source-service and remote-source regressions.16cases, actual Git/kernel/verified TLS,0native/model turns or user remotes. Original186core receipt remains historical; this is not a new global suite, full restore, host install or page acceptance. Frontend independently verified through current tests/build/paired browsers."
+}

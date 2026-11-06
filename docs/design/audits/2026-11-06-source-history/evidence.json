@@ -1,0 +1,91 @@
+{
+  "status": "passed",
+  "scope": "Three actual paired browser contexts, real owner HTTP/SQLite/Git/kernel. One browser preserves an independent pending request; another starts empty and explicitly observes/repairs retained partial Git. Late actual GET replies cannot replace another selected operation/project. No model/user remote.",
+  "states": [
+    {
+      "file": "01-desktop-history-with-other-pending-request.png",
+      "sha256": "2a0434e58ab5a4c86259d1ae4215a6c603907b9c4e6e4faf67a1396635275f69",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "02-mobile-empty-browser-reopens-partial-original.png",
+      "sha256": "a1ff59750c7b238db6239f0f99b79ae423af775fddb13b37baf819380b356170",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "03-mobile-recorded-result-recovered-without-repair-replay.png",
+      "sha256": "4f749b54c5a06df5938e4ddd787553d15efa8b7432d58debfc42900cf0289b23",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "04-desktop-late-read-keeps-selected-operation.png",
+      "sha256": "41b77b275a402f61d4194b5d0f3dc8a61dff37aef2c77748b1945510952ce600",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "05-desktop-late-read-keeps-other-project.png",
+      "sha256": "8d32753263b27d69e6d43fda8f592cc5176634c9469e5f67ba212a6ce3b002d1",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    }
+  ],
+  "original_scenario_captures": [
+    {
+      "file": "03-mobile-fresh-observation-and-original-repair.png",
+      "sha256": "684e5b561185bc1dd08a17a3dda04671eca062ba68cb3809dff0869236569c4e"
+    },
+    {
+      "file": "04-desktop-late-read-keeps-selected-operation.png",
+      "sha256": "41b77b275a402f61d4194b5d0f3dc8a61dff37aef2c77748b1945510952ce600"
+    }
+  ],
+  "page_errors": [],
+  "posts": [],
+  "late_reads": [
+    "original actual GET released after operation switch",
+    "original actual GET released after project switch"
+  ],
+  "completed_actions_not_replayed": true,
+  "pending_packet_unchanged": true,
+  "empty_browser_did_not_create_source_packet": true,
+  "original_control_scenario": {
+    "owner_observation_attempts": 1,
+    "owner_repair_authorizations": [
+      {
+        "fence": 2,
+        "operation_id": "efec0df14be94a009f17a8dc8233801f",
+        "repair_key": "8712d274-46b5-4a75-828c-d5f8c7522d6b"
+      }
+    ],
+    "final_fence": 3,
+    "history_fences": [
+      1,
+      2
+    ],
+    "retained_operation_id": "efec0df14be94a009f17a8dc8233801f",
+    "all_four_grants_closed": true,
+    "original_prepare_posts_from_browsers": 0,
+    "server_source_count": 3,
+    "native_runs": 0,
+    "note": "Original actual browser sequence observed then repaired once. Its second late-read barrier assumed a cold query but the cache was fresh; stopped that verifier, retained the same server state and completed readonly verification with cold-query reloads and bounded barriers. No setup, observation or repair was replayed."
+  }
+}

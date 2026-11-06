@@ -1,0 +1,66 @@
+{
+  "base_commit": "3218eb8",
+  "frontend": {
+    "passed": 121,
+    "failed": 0,
+    "history_transport_cases": 4,
+    "build": "Vite5.13s; inherited large-chunk/Browserslist notices"
+  },
+  "source_owner_regressions": {
+    "passed": 16,
+    "seconds": 32.44,
+    "scope": "History observed-ID/fence plus source-service and remote-source"
+  },
+  "installed": {
+    "passed": 16,
+    "failures": 0,
+    "skipped": 0,
+    "installed_distributions": 85,
+    "sdk": "1.30.0",
+    "excluded_frameworks": [
+      "chromadb",
+      "crewai",
+      "crewai-tools",
+      "fastmcp",
+      "fastmcp-slim",
+      "litellm",
+      "ollama",
+      "tree-sitter",
+      "tree-sitter-c",
+      "tree-sitter-javascript",
+      "tree-sitter-python",
+      "tree-sitter-rust",
+      "tree-sitter-typescript"
+    ],
+    "project_noneditable": true,
+    "backend_modules": 223,
+    "all_backend_imports_from_native_env": true,
+    "matched_application_members": 826,
+    "console_help": 0,
+    "console_missing_token": 2,
+    "console_real_stdio": true,
+    "console_created_database": false,
+    "real_model_turns": 0,
+    "controlled_native_turns": 0,
+    "synthetic_inference_adapter_turns": "No inference adapters exercised in this scoped owner-history suite",
+    "actual_host_publications": "Local publication regression fixtures only; no user remote",
+    "seconds": 32.224
+  },
+  "browser": {
+    "evidence": "docs/design/audits/2026-11-06-source-history/evidence.json",
+    "verified_readonly_captures": 5,
+    "paired_contexts": 3,
+    "readonly_recheck_effect_posts": 0,
+    "late_reads": 2,
+    "original_observations": 1,
+    "original_repair_authorizations": 1,
+    "actual_closed_grants": 4,
+    "pending_request_preserved": true,
+    "native_runs": 0
+  },
+  "documented_python_definitions": 4,
+  "documented_ts_modules_or_named_definitions": 75,
+  "static_findings": 5,
+  "critical_static_findings": 0,
+  "remaining": "Reservation/adoption/abandonment and unscheduled repair handoff, DD030/delete/restore, source formats/budgets, remaining4routes/models/prompts/human/science/global43scenarios/12page acceptance/final review. Historical186core receipt is not a new global run."
+}

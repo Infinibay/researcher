@@ -69,3 +69,8 @@
 @media(max-width:700px){.repo-layout{display:block}.repo-reading{display:none;padding:1.5rem}.repo-layout[data-open=true]>.repo-register{display:none}.repo-layout[data-open=true]>.repo-reading{display:block}.repo-register{border:0}.repo-back{display:inline-flex}.repo-inspector>h2,.repo-registration>h2,.repo-empty h2{font-size:1.75rem}.repo-code-layout{display:block}.repo-tree{border:0;padding:0}.repo-file-pane{display:none;padding:0}.repo-code-layout[data-file-open=true]>.repo-tree{display:none}.repo-code-layout[data-file-open=true]>.repo-file-pane{display:block}.repo-code{max-height:65dvh}.repo-revision{gap:.5rem}.repo-revision>details{width:100%}}
 
 .repo-file-context {font-size:.8125rem;color:var(--work-muted);overflow-wrap:anywhere}
+
+/* Recorded history is a separate view; owner requests and their recovery controls remain explicit. */
+.repo-history-context {border-left:3px solid var(--work-accent);padding:.75rem 1rem;margin-block:1.5rem;background:var(--work-wash)}
+.repo-setup-history li {display:grid;gap:.35rem;padding-block:1rem;border-bottom:1px solid var(--work-line)}
+.repo-setup-history li>button {justify-self:start}
