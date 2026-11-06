@@ -4,6 +4,8 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- Resumen rediseñado con tres conceptos y móvil; preguntas, planes, tareas y contexto original conectados. Cinco capturas con fixtures,123testsfrontend/build,0Axe/JS en región revisada.9pilotos,27/36desktop,9/12mobile,0aceptaciónintegral. [Resultado y límites](../design/audits/2026-11-06-home/report.md).
+
 - Catálogo nativo de promptsv2 y revisión explícita de578candidatos/512archivos; no autoaprobación por familia ni inferencia directa de warmup.12tests acotados y20instaladas pasan. Eficacia de modelos/comprensión humana aún no evaluadas; timeout de checks y fixture de migración siguen abiertos. [Inventario](../prompts/inventory.md), [resultados](prompt-catalog-results.json).
 
 - Configuración web global/proyecto/agente y esfuerzo de razonamiento, con elección congelada por intento y catálogo nativo comprobado antes de enviar.103backend,123frontend/build,11instaladas y4capturas acotadas; cero modelos reales en esta entrega. [Contrato](../architecture/model-configuration.md), [resultados](model-settings-results.json).

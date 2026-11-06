@@ -99,3 +99,12 @@ retomarlo. No convertir su registro en otra investigación o implementación.
 
 
 | DD-040 | Compactar la representación repetida del inventario/ledger, uniformar estilo/imports y corregir detalles tipográficos de instrucciones después de todos los bloques principales. La revisión/frescura/versionado ya funciona; no repetir kernel por redacción. | `docs/prompts/`, `scripts/audit_prompt_inventory.py`, `backend/prompts/native.py` | Pulido final. La eficacia con modelos/personas, el timeout de checks, migración/restore y retirada del engine siguen siendo tareas principales, nunca detalles diferidos. |
+
+## DD041 — densidad de Resumen y coherencia de cabecera
+
+Después de todas las capacidades principales: compactar el espaciado de preguntas
+sin perder contexto/paginación; unificar el fondo/margen móvil y peso del CTA.
+La cabecera compartida ocupa varias filas y aún muestra etiquetas legacy en inglés;
+retirar su interpretación de actividad basada en metadatos pertenece al bloque
+principal de engine/estados; el ajuste visual de altura sí pertenece al pulido.
+No se certifica aceptación integral de Resumen por el pase de fixtures/Axe.

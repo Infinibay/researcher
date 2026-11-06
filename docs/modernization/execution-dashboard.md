@@ -12,11 +12,21 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 ## Estado comprobado
 
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor retirados; quedan consumidores, herramientas y dependencias antiguos.
-- Interfaz: ocho pilotos, 24/36 conceptos de escritorio y 8/12 móviles; cuatro rutas pendientes y 0/12 páginas completamente aceptadas.
+- Interfaz: nueve pilotos, 27/36 conceptos de escritorio y 9/12 móviles; tres rutas pendientes y 0/12 páginas completamente aceptadas.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: catálogo de prompts revisado y versionado
+## Etapa actual: Resumen implementado; continúa Planificación
+
+Resumen tiene tres conceptos y adaptación móvil, selección delegada y recorrido
+conectado a workspace/tareas/preguntas existentes. Enlaces originales, errores
+parciales y cambio de proyecto; sin inferir aceptación por porcentajes de tareas.
+Cinco capturas con fixtures,0Axe/JS/escrituras;123testsfrontend y build4.04s.
+[Resultados y límites](../design/audits/2026-11-06-home/report.md).
+Sigue siendo piloto; DD041 conserva pulido de densidad/cabecera para después de
+las tareas gruesas. Próxima principal: Planificación, después Agentes y Ejecución.
+
+## Etapa anterior: catálogo de prompts revisado y versionado
 
 La revisión estática propia tiene578entradas candidatas de512archivos, con decisiones
 explícitas ligadas a fuente/consumidores;0decisiones nuevas u obsoletas sin revisar.
@@ -46,7 +56,7 @@ cambios frontend, no nuevas capturas/build ni aceptación global por esta entreg
 | Prompts y comunicación humano–agente | Catálogo/revisión estática implementados; comparación con modelos y comprensión humana pendientes |
 | Engine, coordinación entre agentes y retirada heredada | Incompleto |
 | Dependencias e infraestructura restantes | Actualización parcial |
-| Resumen, Planificación, Agentes y Ejecución | Cuatro rutas pendientes de conceptos/implementación |
+| Planificación, Agentes y Ejecución | Tres rutas pendientes de conceptos/implementación; Resumen es el noveno piloto |
 | Migración/restore, operación, historial/presupuestos y CLI/TUI | Parcial; validación integral pendiente |
 |43escenarios, doce páginas, evaluación humana/científica y revisión final | Pendientes de aceptación integral |
 | Pulido secundario de todos los bloques | Después de todas las tareas gruesas |

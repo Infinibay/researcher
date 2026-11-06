@@ -1,0 +1,45 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-11-06",
+  "route": "/",
+  "desktop_count": 3,
+  "mobile_count": 1,
+  "selection": "situation-notebook",
+  "selected_by": "assistant, explicitly delegated by owner",
+  "reference": "docs/design/audits/2026-11-06-source-reservation/03-desktop-new-adoption-keeps-original-history.png",
+  "images": [
+    {
+      "file": "decision-desk.png",
+      "sha256": "2c6b0006eb7d1d6b2f62e0cf12a8807f011844ee7d70332a834fb67f33211bd9",
+      "width": 1487,
+      "height": 1058,
+      "prompt": "decision-desk.prompt.txt",
+      "selected": false
+    },
+    {
+      "file": "situation-notebook-mobile.png",
+      "sha256": "bdefb973f947234406601617c901d70f78f440a5a61bd9b154e7355ab8af0f73",
+      "width": 852,
+      "height": 1846,
+      "prompt": "situation-notebook-mobile.prompt.txt",
+      "selected": true
+    },
+    {
+      "file": "situation-notebook.png",
+      "sha256": "0ef45ad8146e8963cd80b37e5d8e52937b015923f5d5eca76058292975d8f240",
+      "width": 1487,
+      "height": 1058,
+      "prompt": "situation-notebook.prompt.txt",
+      "selected": true
+    },
+    {
+      "file": "work-route.png",
+      "sha256": "525c7a736a2ea18568dddbfecd17f7bc1c232c75cc00f78ab233acf84de68847",
+      "width": 1487,
+      "height": 1058,
+      "prompt": "work-route.prompt.txt",
+      "selected": false
+    }
+  ],
+  "limits": "Concept images are references, not screenshots of working UI. Generated task-state labels were corrected to real product semantics."
+}
