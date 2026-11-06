@@ -2,11 +2,31 @@
 
 import json
 import re
+from dataclasses import dataclass
 from pathlib import Path
 
 from backend.git.source_operations import SourceOperations
 from backend.knowledge.reviews import digest
 from backend.runtime.contracts import RunConflict, RunNotFound, command_key, text
+
+
+@dataclass(frozen=True)
+class PreparedProjectStop:
+    """Read-validated original project intent and immutable serialized scope; this host-only value is never accepted from an HTTP caller."""
+
+    intent_json: str
+    scope_json: str | None
+    receipt_json: str | None
+
+    @property
+    def scope(self):
+        """Return a detached original target set; mutating a consumer's copy cannot change the prepared authorization snapshot."""
+        return json.loads(self.scope_json) if self.scope_json is not None else None
+
+    @property
+    def receipt(self):
+        """Recover a prior exact receipt without withdrawing any newer local owner."""
+        return json.loads(self.receipt_json) if self.receipt_json is not None else None
 
 
 class ProjectWorkspace:
@@ -114,28 +134,58 @@ class ProjectWorkspace:
             self.workspaces._bind(conn, project, rid)
             return {'project_id':project, 'repository_id':rid, 'name':name, 'path':path, 'filesystem_changed':False, 'remote_changed':False}
 
-    def request_stop(self, project, *, task_id, operation_key, scope_sha256):
+    def _stop_receipt(self, conn, project, task_id, operation_key, intent):
+        """Read exact native or administrative project Stop history before observing or withdrawing current work."""
+        metadata = SourceOperations._load(conn,project)
+        administrative = metadata.get('owner_project_stops_v1',{}).get(operation_key)
+        if administrative is not None:
+            if administrative['intent'] != intent:
+                raise RunConflict('La solicitud Stop original identifica otro alcance.')
+            return administrative['receipt']
+        return self.runs._receipt(conn,project,task_id,operation_key,intent) if task_id is not None else None
+
+    def prepare_stop(self, project, *, task_id, operation_key, scope_sha256):
+        """Validate the owner's complete observed scope in a readonly transaction before physical withdrawal; a history replay targets nothing new."""
+        command_key(operation_key)
+        intent = {'kind':'project.stop','project_id':project,'task_id':task_id,'scope_sha256':scope_sha256}
+        with self.runs._transaction() as conn:
+            self._project(conn, project)
+            receipt = self._stop_receipt(conn, project, task_id, operation_key, intent)
+            if receipt is not None:
+                return PreparedProjectStop(json.dumps(intent),None,json.dumps(receipt))
+            scope = self._stop_scope(conn,project)
+            tasks = sorted({r['task_id'] for r in scope['runs']} | {g['task_id'] for g in scope['graphs']})
+            if scope['legacy_registered'] or not (tasks or scope.get('source_operations')) or task_id != (tasks[0] if tasks else None) or digest(scope) != scope_sha256:
+                raise RunConflict('La actividad cambió o hay un dueño anterior registrado; consulta los intentos originales antes de detener.')
+            return PreparedProjectStop(json.dumps(intent),json.dumps(scope),None)
+
+    def request_stop(self, project, *, task_id, operation_key, scope_sha256, prepared=None):
         """Atomically pause exactly observed graphs and withdraw exactly observed run authority before acknowledging intent; replay never retargets new work or claims closure."""
         command_key(operation_key)
         intent = {'kind':'project.stop','project_id':project,'task_id':task_id,'scope_sha256':scope_sha256}
         with self.runs._transaction(write=True) as conn:
             self._project(conn, project)
-            metadata = SourceOperations._load(conn,project)
-            administrative = metadata.get('owner_project_stops_v1',{}).get(operation_key)
-            if administrative is not None:
-                if administrative['intent'] != intent:
-                    raise RunConflict('La solicitud Stop original identifica otro alcance.')
-                return administrative['receipt'], False
-            old = self.runs._receipt(conn,project,task_id,operation_key,intent) if task_id is not None else None
+            old = self._stop_receipt(conn, project, task_id, operation_key, intent)
             if old is not None:
                 return old, False
-            scope = self._stop_scope(conn,project)
-            tasks = sorted({r['task_id'] for r in scope['runs']} | {g['task_id'] for g in scope['graphs']})
-            if scope['legacy_registered'] or not (tasks or scope.get('source_operations')) or task_id != (tasks[0] if tasks else None) or digest(scope) != scope_sha256:
-                raise RunConflict('La actividad cambió o hay un dueño anterior registrado; consulta los intentos originales antes de detener.')
+            if prepared is None:
+                scope = self._stop_scope(conn,project)
+                tasks = sorted({r['task_id'] for r in scope['runs']} | {g['task_id'] for g in scope['graphs']})
+                if scope['legacy_registered'] or not (tasks or scope.get('source_operations')) or task_id != (tasks[0] if tasks else None) or digest(scope) != scope_sha256:
+                    raise RunConflict('La actividad cambió o hay un dueño anterior registrado; consulta los intentos originales antes de detener.')
+            else:
+                if not isinstance(prepared, PreparedProjectStop) or json.loads(prepared.intent_json) != intent or prepared.scope is None or digest(prepared.scope) != scope_sha256:
+                    raise RunConflict('La preparación del Stop no corresponde a la solicitud original.')
+                scope = prepared.scope
             for graph in scope['graphs']:
+                current = conn.execute('SELECT plan_run_id,manifest_sha256,authorization_revision FROM runtime_plan_effective_executions WHERE project_id=? AND id=?',(project,graph['execution_id'])).fetchone()
+                if current is None or any(current[key] != graph[key] for key in ('plan_run_id','manifest_sha256','authorization_revision')):
+                    raise RunConflict('La autorización del grafo original cambió; no se pausó una revisión posterior.')
                 conn.execute("UPDATE runtime_plan_executions SET status='paused',updated_at=? WHERE project_id=? AND id=?", (self.runs.clock(),project,graph['execution_id']))
             for run in scope['runs']:
+                current = self.runs._row(conn,project,run['run_id'])
+                if any(current[key] != run[key] for key in ('task_id','context_version','fence')) or current['current_attempt_id'] != run['attempt_id']:
+                    raise RunConflict('El intento nativo original cambió; no se detuvo un intento posterior.')
                 self.runs._cancel(conn,project,run['run_id'])
             for source in scope.get('source_operations',[]):
                 SourceOperations.withdraw(conn,project,source['operation_key'],operation_id=source['operation_id'],fence=source['fence'])

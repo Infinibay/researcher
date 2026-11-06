@@ -62,8 +62,8 @@ class SourceGitExecutor:
 
 
 @asynccontextmanager
-async def source_executor(records,lease,*,authority,cgroup_parent,source_network=None,source_transport=None,broker_limits=None):
-    """Retain one real administrative kernel domain through every fixed command and verified retirement, using the shared global concession."""
+async def source_executor(records,lease,*,authority,cgroup_parent,source_network=None,source_transport=None,broker_limits=None,on_owner=None):
+    """Own one administrative domain and call trusted synchronous on_owner inside its scope before the first Git gate; retirement remains with the original broker."""
     view=await _settled(records.allocate,lease)
     path=Path(cgroup_parent)/('researcher-source-setup-'+uuid4().hex);path.mkdir(mode=0o700)
     with WitnessedAuthorityJournal(**authority)as journal:
@@ -71,10 +71,13 @@ async def source_executor(records,lease,*,authority,cgroup_parent,source_network
             broker=PeerBroker(journal,domain,limits=broker_limits,source_network=source_network,source_transport=source_transport)
             await _settled(records.attach_domain,lease,grant_id=broker.grant_id,path=path,identity=domain.identity)
             async with AsyncPeerBroker(broker)as owner:
-                yield SourceGitExecutor(records,lease,owner,view,GitAsset.inspect(Path('/usr/bin/git')))
+                executor = SourceGitExecutor(records,lease,owner,view,GitAsset.inspect(Path('/usr/bin/git')))
+                if on_owner is not None:
+                    on_owner(executor)
+                yield executor
 
 
-async def execute_source(records,project,key,*,authority,cgroup_parent,source_network=None,source_transport=None,broker_limits=None):
+async def execute_source(records,project,key,*,authority,cgroup_parent,source_network=None,source_transport=None,broker_limits=None,on_owner=None):
     """Execute an original local-create/adopt/clone intent, registering only after original domain closure; exact completed retry starts nothing."""
     row=await _settled(records.read,project,key)
     if row['status']=='completed':return row['receipt']
@@ -84,7 +87,7 @@ async def execute_source(records,project,key,*,authority,cgroup_parent,source_ne
     validate_source_transport(request,source_transport,row['remote_identity'])
     lease=await _settled(records.claim,project,key,'source-owner-'+uuid4().hex)
     try:
-        async with source_executor(records,lease,authority=authority,cgroup_parent=cgroup_parent,source_network=source_network,source_transport=source_transport,broker_limits=broker_limits)as executor:
+        async with source_executor(records,lease,authority=authority,cgroup_parent=cgroup_parent,source_network=source_network,source_transport=source_transport,broker_limits=broker_limits,on_owner=on_owner)as executor:
             stages=('init','commit')if request.mode=='create'else('clone','read_index','checkout')if request.mode=='clone'else()
             for stage in stages:
                 result=await executor.stage(stage)
@@ -96,7 +99,7 @@ async def execute_source(records,project,key,*,authority,cgroup_parent,source_ne
         raise
 
 
-async def reconcile_source(records,project,key,*,authority,cgroup_parent,broker_limits=None):
+async def reconcile_source(records,project,key,*,authority,cgroup_parent,broker_limits=None,on_owner=None):
     """Recover original closure then observe only retained Git state in a fresh readonly domain; never repeat init/commit/clone or claim remote server termination."""
     row=await _settled(records.read,project,key)
     if row['status']=='completed':return row['receipt']
@@ -109,7 +112,7 @@ async def reconcile_source(records,project,key,*,authority,cgroup_parent,broker_
         await _settled(PeerBroker.project_recovered,journal,grant_id)
     lease=await _settled(records.begin_observation,project,key,'source-observer-'+uuid4().hex)
     try:
-        async with source_executor(records,lease,authority=authority,cgroup_parent=cgroup_parent,broker_limits=broker_limits)as executor:
+        async with source_executor(records,lease,authority=authority,cgroup_parent=cgroup_parent,broker_limits=broker_limits,on_owner=on_owner)as executor:
             observation=await executor.observe()
         return await _settled(records.register,lease,observation)
     except BaseException:

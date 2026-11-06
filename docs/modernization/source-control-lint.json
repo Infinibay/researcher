@@ -1,0 +1,13 @@
+{
+  "base_commit": "c9f8cee",
+  "scope": "Configured Ruff rules for changed/new Python files; includes inherited findings, no causal attribution. Secondary style/import findings deferred.",
+  "total": 11,
+  "codes": {
+    "I001": 7,
+    "F401": 1,
+    "SIM117": 1,
+    "TRY004": 1,
+    "BLE001": 1
+  },
+  "critical_syntax_or_undefined": []
+}

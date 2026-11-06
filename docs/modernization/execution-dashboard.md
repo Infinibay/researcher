@@ -9,7 +9,30 @@ Actualizado: 2026-11-06. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: preparación explícita de fuentes y ciclo de vida
+## Etapa actual: Stop físico antes de esperar SQLite
+
+El lease y broker reales se capturan antes del primer G. Stop rechaza fences
+obsoletos, retira el dueño original y después espera intención/recibos. Proyectos
+valida una lectura completa y congela sus identidades; un recibo antiguo vuelve
+sin retirar un clone posterior. El cierre de aplicación y el Stop general drenan
+admisión sin habilitar dueños administrativos tardíos.
+
+**Verificación:**5casos de prioridad7.11s con Git/TLS real,70regresiones en fuente
+61.14s y1proyecto con proceso nativo controlado2.18s. Wheel no editable final:
+164PASS0FAIL0SKIP121.553s,267imports instalados/820miembros coincidentes,
+85distribuciones/sin frameworks antiguos.1turno nativo controlado,0modelos reales
+ni escrituras a remotos del usuario.45definiciones Python documentadas, sin
+faltantes;11avisos estáticos, incluidos heredados, diferidosDD034. Sin cambios
+frontend ni nuevas rondas de conceptos/capturas. [Resultados](source-control-results.json),
+[paquete](source-control-packaging.json), [contrato](../architecture/source-control.md).
+
+**Siguiente principal:** crear remoto como elección separada de namespace,
+visibilidad y origen configurado, con identidad original y observación sin repetir
+un POST desconocido. Después, reparar etapas locales incompletas/sin concesión
+original e historia entre navegadores. Las mezclas/admisiones nativas tardías,
+43escenarios,12páginas y todo el objetivo original siguen pendientes de aceptación.
+
+## Etapa anterior: preparación explícita de fuentes y ciclo de vida
 
 **Resultado utilizable:** crear Git local, adoptar Git existente y clonar HTTPS
 con intención/dueño/intento/fence administrativos propios; ninguna tarea de
@@ -32,7 +55,7 @@ sintético en el caso de error de shutdown.115frontend1.747s/build4.98s;
 [contrato](../architecture/source-operations.md),
 [QA](../design/audits/2026-11-06-source-setup/report.md).
 
-**Siguiente principal:** comprobar prioridad física de Stop bajo SQLite contendido
+**Siguiente al cerrar ese checkpoint:** comprobar prioridad física de Stop bajo SQLite contendido
 sin perder la barrera de admisión/cierre ya corregida; luego crear remoto de forma separada con namespace/visibilidad
 explícitos e identidad recuperable; luego reparar etapas init/commit/clone/checkout
 incompletas y casos sin concesión original. Observar Git ya terminado no resuelve

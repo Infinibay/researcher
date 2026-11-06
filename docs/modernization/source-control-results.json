@@ -1,0 +1,107 @@
+{
+  "base_commit": "c9f8cee",
+  "status": "original_source_owner_withdrawal_before_sql_connected_global_acceptance_pending",
+  "implemented": [
+    "Synchronous withdrawal and single retirement future in original AsyncPeerBroker; aclose drains that same future.",
+    "Trusted pre-G callback captures immutable actual SourceLease/operation ID/broker; stale fences reject without SQL; late matching handoffs conditionally withdraw before G.",
+    "Source Stop, exact observed project Stop, bodyless project Stop and application shutdown withdraw captured owners before source SQLite writes.",
+    "Readonly project preflight returns existing receipts without touching current work; frozen original scope is revalidated by identity/revision in the write transaction. HTTP cancellation drains the original authorized writer.",
+    "Application closing fuse precedes admission drain/final snapshot. Bodyless project source-admission fuse keeps late administrative handoffs from receiving G."
+  ],
+  "red": [
+    {
+      "case": "Real held TLS clone under SQLite BEGIN IMMEDIATE",
+      "result": "Individual1FAIL4.11s; original domain remained live while Stop waited on its intent writer."
+    },
+    {
+      "case": "Exact observed project Stop under the same contention",
+      "result": "1FAIL4.09s before readonly preflight/frozen scope and early owner withdrawal."
+    }
+  ],
+  "source": {
+    "focused_priority": {
+      "passed": 5,
+      "seconds": 7.11,
+      "scope": "Four actual Git control paths, stale-fence negative check and prior receipt replay while a later clone remains alive."
+    },
+    "shared_source_runtime": {
+      "passed": 70,
+      "seconds": 61.14
+    },
+    "owned_native_project_api": {
+      "passed": 1,
+      "seconds": 2.18,
+      "controlled_native_dispatches": 1,
+      "real_models": 0
+    }
+  },
+  "installed": {
+    "passed": 164,
+    "failures": 0,
+    "skipped": 0,
+    "installed_distributions": 85,
+    "sdk": "1.30.0",
+    "excluded_frameworks": [
+      "chromadb",
+      "crewai",
+      "crewai-tools",
+      "fastmcp",
+      "fastmcp-slim",
+      "litellm",
+      "ollama",
+      "tree-sitter",
+      "tree-sitter-c",
+      "tree-sitter-javascript",
+      "tree-sitter-python",
+      "tree-sitter-rust",
+      "tree-sitter-typescript"
+    ],
+    "project_noneditable": true,
+    "backend_modules": 267,
+    "all_backend_imports_from_native_env": true,
+    "matched_application_members": 820,
+    "console_help": 0,
+    "console_missing_token": 2,
+    "console_real_stdio": true,
+    "console_created_database": false,
+    "real_model_turns": 0,
+    "controlled_native_turns": 1,
+    "synthetic_inference_adapter_turns": "In-process controlled adapters in runtime-service tests; not individually counted",
+    "actual_host_publications": "Local publication regression fixtures only; no user remote",
+    "seconds": 121.553
+  },
+  "excluded_legacy_extra_cases": [
+    "backend/tests/git/test_repository_manager.py::test_old_model_tool_explains_owner_replacement_without_setup"
+  ],
+  "documentation": {
+    "changed_python_definitions": 45,
+    "missing": []
+  },
+  "static": {
+    "base_commit": "c9f8cee",
+    "scope": "Configured Ruff rules for changed/new Python files; includes inherited findings, no causal attribution. Secondary style/import findings deferred.",
+    "total": 11,
+    "codes": {
+      "I001": 7,
+      "F401": 1,
+      "SIM117": 1,
+      "TRY004": 1,
+      "BLE001": 1
+    },
+    "critical_syntax_or_undefined": []
+  },
+  "frontend": "No code/design changes or new browser acceptance claimed. Existing selected source/Projects UI uses unchanged request/receipt shapes; no concept or full-page count change.",
+  "observation_limits": [
+    "Physical priority is proved by the actual broker-returned kernel DomainClosure with full original identity before source SQL release. Journal retirement and peer projection are verified after SQL drains.",
+    "An earlier observer polled the independent journal mutation lock and could delay its seal. That observation contention is distinct from continuing payload execution; no restart was inferred from a timeout.",
+    "Actual remote fixture handler remains held after local closure. No remote termination, publication or semantic-success claim.",
+    "Native/Ken process in owned project Stop uses controlled generation; in-process runtime-service adapters are synthetic and not individually counted. No real model/user remote write."
+  ],
+  "remaining_principal": [
+    "Separate explicit remote creation and original issued-write/readonly reconciliation.",
+    "Partial local-write repair, no-original-grant closure and cross-browser history selection.",
+    "Global native admission handoffs/mixed owner failures,43scenarios/global suite/host install/restore/inverses43–54 and full12-page acceptance.",
+    "Original full settings/models/prompts/books/science/human/terminal/history/budget/DD030/final fresh review scope retained."
+  ],
+  "full_goal": "Active unchanged; this checkpoint does not complete the modernization objective."
+}

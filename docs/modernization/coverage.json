@@ -69,7 +69,11 @@
         "docs/modernization/chat-packaging.json",
         "docs/design/concepts/chat/manifest.json",
         "backend/tests/runtime/test_question_inbox.py",
-        "frontend/tests/chat-design.test.ts"
+        "frontend/tests/chat-design.test.ts",
+        "docs/architecture/source-control.md",
+        "docs/modernization/source-control-results.json",
+        "docs/modernization/source-control-packaging.json",
+        "backend/tests/runtime/test_source_control.py"
       ]
     },
     "C04": {
@@ -1088,7 +1092,11 @@
         "docs/architecture/source-operations.md",
         "docs/modernization/source-setup-results.json",
         "docs/modernization/source-setup-packaging.json",
-        "backend/tests/runtime/test_source_service.py"
+        "backend/tests/runtime/test_source_service.py",
+        "docs/architecture/source-control.md",
+        "docs/modernization/source-control-results.json",
+        "docs/modernization/source-control-packaging.json",
+        "backend/tests/runtime/test_source_control.py"
       ]
     },
     "D10": {
@@ -3511,12 +3519,17 @@
         "docs/design/audits/2026-11-06-source-setup/report.md",
         "backend/tests/runtime/test_owned_source_setup.py",
         "backend/tests/runtime/test_source_service.py",
-        "backend/tests/runtime/test_source_shutdown.py"
+        "backend/tests/runtime/test_source_shutdown.py",
+        "docs/architecture/source-control.md",
+        "docs/modernization/source-control-results.json",
+        "docs/modernization/source-control-packaging.json",
+        "backend/tests/runtime/test_source_control.py"
       ],
       "implemented": [
         "Three desktop concepts+mobile selected/implemented; complete immutable tree/blob read, explicit branch refresh, source scope/focus, historical review owner entry and original registration retry.",
         "Actual full-SHA/error/parent-root failures reproduced and fixed;22installed contracts/112frontend/15browser captures. No native/model/remote-effect turn.",
-        "Explicit original administrative create/adopt/HTTPS clone, no fake task IDs; source/project/lifespan Stop, retained partial folders, history deletion/completion guards and readonly recovery of Git-finished/registration-lost. Retired old init/clone/credential/origin/automatic remote/force-push entry points."
+        "Explicit original administrative create/adopt/HTTPS clone, no fake task IDs; source/project/lifespan Stop, retained partial folders, history deletion/completion guards and readonly recovery of Git-finished/registration-lost. Retired old init/clone/credential/origin/automatic remote/force-push entry points.",
+        "Source control uses actual pre-G captured owner and immutable original project scope; real held TLS clone closes locally before source SQLite writes, without stopping a later owner on receipt replay."
       ],
       "remaining": [
         "Separate explicit remote creation and original remote response-loss reconciliation; partial local-write repair/no-grant crash cases and cross-browser history/restore integration remain.",

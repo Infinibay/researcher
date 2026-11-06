@@ -11,7 +11,7 @@ import logging
 import os
 import stat
 import time
-from contextlib import asynccontextmanager
+from contextlib import ExitStack, asynccontextmanager, contextmanager
 from dataclasses import dataclass, field
 from pathlib import Path
 from uuid import uuid4
@@ -106,6 +106,55 @@ class RuntimeService:
         self._dispatch_wake = asyncio.Event()
         self._dispatcher = None
         self._sources = None
+        self._source_project_stops = {}
+
+    @contextmanager
+    def project_stop_scope(self, project_id, scope):
+        """Withdraw exactly read-validated original local handles before the project Stop write; no cached later attempt can inherit this scope."""
+        native = []
+        for run in scope['runs']:
+            slot = self._workers.get(run['run_id'])
+            if slot is not None:
+                if slot.spec.project_id != project_id or slot.spec.context_version != run['context_version'] or slot.attempt_id != run['attempt_id']:
+                    raise RunConflict('El dueño nativo observado cambió; no se retiró otro intento.')
+                native.append(slot)
+        sources = scope.get('source_operations',[])
+        if sources:
+            for source in sources:
+                self.sources.validate_stop_target(project_id,source['operation_key'],operation_id=source['operation_id'],fence=source['fence'])
+        with ExitStack() as cleanup:
+            for source in sources:
+                cleanup.enter_context(self.sources.stop_scope(project_id,source['operation_key'],operation_id=source['operation_id'],fence=source['fence']))
+            try:
+                for slot in native:
+                    slot.intent_committed.clear()
+                    self._withdraw(slot, 'cancelled')
+                yield
+            finally:
+                for slot in native:
+                    slot.intent_committed.set()
+
+    @asynccontextmanager
+    async def _bodyless_project_stop_scope(self, project_id):
+        """Withdraw current project owners before SQL and drain source handoffs under a temporary fuse; later explicit requests are never replayed by this Stop."""
+        self._source_project_stops[project_id] = self._source_project_stops.get(project_id,0) + 1
+        native = [slot for slot in self._workers.values() if slot.spec.project_id == project_id]
+        try:
+            for slot in native:
+                slot.intent_committed.clear()
+                self._withdraw(slot, 'cancelled')
+            if self._sources is not None:
+                self._sources.withdraw_project(project_id)
+                await self._sources.drain_admission()
+            yield
+        finally:
+            for slot in native:
+                slot.intent_committed.set()
+            remaining = self._source_project_stops[project_id] - 1
+            if remaining:
+                self._source_project_stops[project_id] = remaining
+            else:
+                del self._source_project_stops[project_id]
 
     @property
     def sources(self):
@@ -330,33 +379,34 @@ class RuntimeService:
     async def stop_project(self, project_id):
         """Withdraw every active native run in this project; returned states preserve unconfirmed physical closure rather than claiming all work stopped."""
 
-        from backend.planning.execution import PlanExecutions
+        async with self._bodyless_project_stop_scope(project_id):
+            from backend.planning.execution import PlanExecutions
 
-        await asyncio.to_thread(PlanExecutions(self.store).pause_project, project_id)
+            await asyncio.to_thread(PlanExecutions(self.store).pause_project, project_id)
 
-        from backend.git.source_operations import SourceOperations
+            from backend.git.source_operations import SourceOperations
 
-        def source_history():
-            """Observe administrative history even after this process restarted without reactivating or replaying its worker."""
-            with self.store._transaction() as conn:
-                return SourceOperations.has_history(conn.execute('SELECT metadata_json FROM projects WHERE id=?',(project_id,)).fetchone()[0])
+            def source_history():
+                """Observe administrative history even after this process restarted without reactivating or replaying its worker."""
+                with self.store._transaction() as conn:
+                    return SourceOperations.has_history(conn.execute('SELECT metadata_json FROM projects WHERE id=?',(project_id,)).fetchone()[0])
 
-        if await asyncio.to_thread(source_history):
-            await self.sources.stop_project(project_id)
+            if await asyncio.to_thread(source_history):
+                await self.sources.stop_project(project_id)
 
-        def pending():
-            """Read durable original active run IDs without admitting or replaying work."""
-            with self.store._transaction() as conn:
-                return [
-                    r["id"]
-                    for r in conn.execute(
-                        "SELECT id FROM runtime_runs WHERE project_id=? AND status IN ('queued','running','cancelling','reconciling','waiting_input','needs_review')",
-                        (project_id,),
-                    )
-                ]
+            def pending():
+                """Read durable original active run IDs without admitting or replaying work."""
+                with self.store._transaction() as conn:
+                    return [
+                        r["id"]
+                        for r in conn.execute(
+                            "SELECT id FROM runtime_runs WHERE project_id=? AND status IN ('queued','running','cancelling','reconciling','waiting_input','needs_review')",
+                            (project_id,),
+                        )
+                    ]
 
-        ids = await asyncio.to_thread(pending)
-        return [await self.stop(project_id, run_id) for run_id in ids]
+            ids = await asyncio.to_thread(pending)
+            return [await self.stop(project_id, run_id) for run_id in ids]
 
     async def execute_plan(self, project_id, plan_run_id, **command):
         """Persist the exact owner execution authorization, then wake the single deterministic dispatcher without awaiting generation."""

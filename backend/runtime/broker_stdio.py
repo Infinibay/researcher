@@ -300,11 +300,16 @@ class AsyncPeerBroker:
         future.add_done_callback(observed)
         return await asyncio.shield(future)
 
-    async def aclose(self):
+    def withdraw(self):
+        """Withdraw G synchronously on the owning event loop and start the original physical retirement without awaiting source-local SQL."""
         if self._closing is None:
             self.broker.withdraw()
             self._closing = asyncio.create_task(self._shutdown())
-        await asyncio.shield(self._closing)
+        return self._closing
+
+    async def aclose(self):
+        """Drain the single original retirement future; caller cancellation cannot transfer or cancel physical ownership."""
+        await asyncio.shield(self.withdraw())
 
     async def _shutdown(self):
         pending = list(self._pending)

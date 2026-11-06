@@ -73,6 +73,7 @@ def tls_remote(tmp_path, socket_enabled):
         posts=[],
         paths=[],
         hold=False,
+        hold_clone=False,
         drop_pull_reply=True,
         drop_merge_reply=True,
         entered=threading.Event(),
@@ -157,6 +158,10 @@ def tls_remote(tmp_path, socket_enabled):
                 if not path.startswith("/owner/repo.git/"):
                     self.reply(404)
                     return
+                if state.hold_clone and self.command == 'GET' and path.endswith('/info/refs'):
+                    state.entered.set()
+                    state.release.wait(20)
+                    state.finished.set()
                 if self.command == "POST" and path.endswith("/git-receive-pack"):
                     state.git_writes += 1
                     if state.hold:

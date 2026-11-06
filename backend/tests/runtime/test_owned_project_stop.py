@@ -13,6 +13,7 @@ async def test_observed_project_stop_withdraws_actual_original_worker_and_replay
     """The existing runtime owns the kernel domain; SQL fences and exact owner targets precede local withdrawal, while a replay returns only the original intent receipt."""
     from backend.api.main import create_app
     from backend.api.runtime_dependencies import configured_runtime
+    from backend.api.routes.projects import StopObservedProject, stop_project
     from backend.planning.project_workspace import ProjectWorkspace
     from backend.tests.runtime.authority_fixture import journal
 
@@ -35,10 +36,12 @@ async def test_observed_project_stop_withdraws_actual_original_worker_and_replay
         assert state['project']['status'] == 'new'
         assert [r['run_id'] for r in state['activity']] == [run.run_id]
         body = {'operation_key':'stop-original-native-project',**state['stop']}
-        receipt,created = records.request_stop(101,**body)
-        assert created and receipt['closure']=='unconfirmed'
-        assert runtime.store.get(101,run.run_id).status == 'cancelling'
-        await runtime.stop(101,run.run_id)
+        from types import SimpleNamespace
+
+        response = await stop_project(101,SimpleNamespace(app=app),StopObservedProject(**body))
+        receipt = json.loads(response.body)
+        assert receipt['closure']=='unconfirmed'
+        assert runtime.store.get(101,run.run_id).status in ('cancelling','cancelled')
         await asyncio.wait_for(runtime.wait(run.run_id),20)
         assert runtime.store.get(101,run.run_id).status == 'cancelled'
         assert records.request_stop(101,**body) == (receipt,False)

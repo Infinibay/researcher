@@ -1,0 +1,323 @@
+{
+  "base_commit": "c9f8cee",
+  "changed_or_new_definitions_documented": 45,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/routes/projects.py",
+      "symbol": "stop_project",
+      "line": 332,
+      "docstring": "Withdraw this project's native work and request legacy teardown where present; paused describes owner intent, not unproved physical closure.",
+      "file_sha256": "082bcd4ab97c6ec419cf35fd8b1a7d75585f84ccc29618b54ba1cf94a58c6497"
+    },
+    {
+      "path": "backend/git/source_executor.py",
+      "symbol": "source_executor",
+      "line": 65,
+      "docstring": "Own one administrative domain and call trusted synchronous on_owner inside its scope before the first Git gate; retirement remains with the original broker.",
+      "file_sha256": "ba558614c6f3816c494b52e13dd4a54c475e46c7dde056749a35f1b24fe363d8"
+    },
+    {
+      "path": "backend/git/source_executor.py",
+      "symbol": "execute_source",
+      "line": 80,
+      "docstring": "Execute an original local-create/adopt/clone intent, registering only after original domain closure; exact completed retry starts nothing.",
+      "file_sha256": "ba558614c6f3816c494b52e13dd4a54c475e46c7dde056749a35f1b24fe363d8"
+    },
+    {
+      "path": "backend/git/source_executor.py",
+      "symbol": "reconcile_source",
+      "line": 102,
+      "docstring": "Recover original closure then observe only retained Git state in a fresh readonly domain; never repeat init/commit/clone or claim remote server termination.",
+      "file_sha256": "ba558614c6f3816c494b52e13dd4a54c475e46c7dde056749a35f1b24fe363d8"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations",
+      "line": 123,
+      "docstring": "Persist bounded original setup intents and directory ownership through the existing SQLite/project-metadata transaction.",
+      "file_sha256": "a59e5ac33ae495a08a36089c6862245508d8ccc4805567ae80ae580dff27d932"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.request_project_stop",
+      "line": 371,
+      "docstring": "Resolve and withdraw the current fence atomically for a bodyless whole-project Stop whose admission fuse already covers this original operation.",
+      "file_sha256": "a59e5ac33ae495a08a36089c6862245508d8ccc4805567ae80ae580dff27d932"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceControl",
+      "line": 16,
+      "docstring": "Immutable original administrative lease and actual broker, captured by the trusted executor before its first Git gate.",
+      "file_sha256": "76b481f4a85b497c877cffd62f80b54913b3e2c9f1e7aec4202020025841885d"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceControl.matches",
+      "line": 23,
+      "docstring": "A browser observation can withdraw only this original owner; a later observation fence never inherits an older Stop.",
+      "file_sha256": "76b481f4a85b497c877cffd62f80b54913b3e2c9f1e7aec4202020025841885d"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceControl.withdraw",
+      "line": 27,
+      "docstring": "Reuse the original broker's reserved Stop resources and retirement future; metadata is deliberately outside this physical path.",
+      "file_sha256": "76b481f4a85b497c877cffd62f80b54913b3e2c9f1e7aec4202020025841885d"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService",
+      "line": 32,
+      "docstring": "Own actual administrative worker handles without inventing native turns or replaying interrupted writes after restart.",
+      "file_sha256": "76b481f4a85b497c877cffd62f80b54913b3e2c9f1e7aec4202020025841885d"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.__init__",
+      "line": 35,
+      "docstring": "Reuse the serving runtime's original host configuration, store, owner lock and kernel broker boundaries.",
+      "file_sha256": "76b481f4a85b497c877cffd62f80b54913b3e2c9f1e7aec4202020025841885d"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService._capture_owner",
+      "line": 54,
+      "docstring": "Bind actual executor ownership before G, conditionally withdrawing a late handoff only after its original requested identity matches.",
+      "file_sha256": "76b481f4a85b497c877cffd62f80b54913b3e2c9f1e7aec4202020025841885d"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService._withdraw",
+      "line": 64,
+      "docstring": "Withdraw the already-captured original owner before cancelling its worker; late owners are held by the same local admission fuse.",
+      "file_sha256": "76b481f4a85b497c877cffd62f80b54913b3e2c9f1e7aec4202020025841885d"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.submit",
+      "line": 83,
+      "docstring": "Persist exact owner intent before scheduling one bounded worker; an original replay returns history and never restarts a stopped or uncertain effect.",
+      "file_sha256": "76b481f4a85b497c877cffd62f80b54913b3e2c9f1e7aec4202020025841885d"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.reconcile",
+      "line": 101,
+      "docstring": "Start only explicit readonly reconciliation of the retained operation; no implicit clone, initialization, commit or credentialed write is replayed.",
+      "file_sha256": "76b481f4a85b497c877cffd62f80b54913b3e2c9f1e7aec4202020025841885d"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService._run",
+      "line": 117,
+      "docstring": "Keep executor teardown in its owning task and retain failures as saved uncertainty; raw transport errors and secrets never enter the owner response.",
+      "file_sha256": "76b481f4a85b497c877cffd62f80b54913b3e2c9f1e7aec4202020025841885d"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.validate_stop_target",
+      "line": 154,
+      "docstring": "Reject a mismatching captured original before any physical withdrawal; absent local ownership is not proof of remote or durable closure.",
+      "file_sha256": "76b481f4a85b497c877cffd62f80b54913b3e2c9f1e7aec4202020025841885d"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.stop_scope",
+      "line": 161,
+      "docstring": "Hold one conditional original Stop through either individual or exact project persistence; it can withdraw only a matching real owner.",
+      "file_sha256": "76b481f4a85b497c877cffd62f80b54913b3e2c9f1e7aec4202020025841885d"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.stop",
+      "line": 184,
+      "docstring": "Withdraw an exact observed original owner before SQL, then persist intent and drain its actual worker without retargeting a new fence.",
+      "file_sha256": "76b481f4a85b497c877cffd62f80b54913b3e2c9f1e7aec4202020025841885d"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.withdraw_project",
+      "line": 201,
+      "docstring": "Withdraw only this application's actual administrative workers of the selected project before bodyless project Stop can wait on SQL.",
+      "file_sha256": "76b481f4a85b497c877cffd62f80b54913b3e2c9f1e7aec4202020025841885d"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.drain_admission",
+      "line": 207,
+      "docstring": "Drain accepted source handoffs while the project or application fuse keeps late owners from receiving G.",
+      "file_sha256": "76b481f4a85b497c877cffd62f80b54913b3e2c9f1e7aec4202020025841885d"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.stop_project",
+      "line": 212,
+      "docstring": "Withdraw all currently recorded administrative work for the legacy bodyless project Stop, preserving uncertain original effects when no live handle exists.",
+      "file_sha256": "76b481f4a85b497c877cffd62f80b54913b3e2c9f1e7aec4202020025841885d"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.close",
+      "line": 221,
+      "docstring": "Withdraw all owned source jobs before the runtime releases its exclusive store owner lock; cancellation is issued once and closure is drained.",
+      "file_sha256": "76b481f4a85b497c877cffd62f80b54913b3e2c9f1e7aec4202020025841885d"
+    },
+    {
+      "path": "backend/planning/project_workspace.py",
+      "symbol": "PreparedProjectStop",
+      "line": 14,
+      "docstring": "Read-validated original project intent and immutable serialized scope; this host-only value is never accepted from an HTTP caller.",
+      "file_sha256": "19cd1b50392e8185623fe7aebe7fbe843a24afd931f31a08138b7744297099f5"
+    },
+    {
+      "path": "backend/planning/project_workspace.py",
+      "symbol": "PreparedProjectStop.scope",
+      "line": 22,
+      "docstring": "Return a detached original target set; mutating a consumer's copy cannot change the prepared authorization snapshot.",
+      "file_sha256": "19cd1b50392e8185623fe7aebe7fbe843a24afd931f31a08138b7744297099f5"
+    },
+    {
+      "path": "backend/planning/project_workspace.py",
+      "symbol": "PreparedProjectStop.receipt",
+      "line": 27,
+      "docstring": "Recover a prior exact receipt without withdrawing any newer local owner.",
+      "file_sha256": "19cd1b50392e8185623fe7aebe7fbe843a24afd931f31a08138b7744297099f5"
+    },
+    {
+      "path": "backend/planning/project_workspace.py",
+      "symbol": "ProjectWorkspace",
+      "line": 32,
+      "docstring": "Project real saved state without treating metadata as activity/closure or inventing a plan choice; no model, Git, remote setup or second coordinator.",
+      "file_sha256": "19cd1b50392e8185623fe7aebe7fbe843a24afd931f31a08138b7744297099f5"
+    },
+    {
+      "path": "backend/planning/project_workspace.py",
+      "symbol": "ProjectWorkspace._stop_receipt",
+      "line": 137,
+      "docstring": "Read exact native or administrative project Stop history before observing or withdrawing current work.",
+      "file_sha256": "19cd1b50392e8185623fe7aebe7fbe843a24afd931f31a08138b7744297099f5"
+    },
+    {
+      "path": "backend/planning/project_workspace.py",
+      "symbol": "ProjectWorkspace.prepare_stop",
+      "line": 147,
+      "docstring": "Validate the owner's complete observed scope in a readonly transaction before physical withdrawal; a history replay targets nothing new.",
+      "file_sha256": "19cd1b50392e8185623fe7aebe7fbe843a24afd931f31a08138b7744297099f5"
+    },
+    {
+      "path": "backend/planning/project_workspace.py",
+      "symbol": "ProjectWorkspace.request_stop",
+      "line": 162,
+      "docstring": "Atomically pause exactly observed graphs and withdraw exactly observed run authority before acknowledging intent; replay never retargets new work or claims closure.",
+      "file_sha256": "19cd1b50392e8185623fe7aebe7fbe843a24afd931f31a08138b7744297099f5"
+    },
+    {
+      "path": "backend/runtime/broker_stdio.py",
+      "symbol": "AsyncPeerBroker",
+      "line": 53,
+      "docstring": "One attempt's async composition and bounded launch/control resources.\n\nOne launch worker serializes accepted starts (at most eight pending). Peer\nreceipt work cannot occupy the separate worker reserved for whole-attempt\nrevocation. IO uses event-loop pipes, not blocking reader threads.",
+      "file_sha256": "91b2aa7308c469799cf1f90b89d4a61449e12eebda2755e8199c671d0cb24cc6"
+    },
+    {
+      "path": "backend/runtime/broker_stdio.py",
+      "symbol": "AsyncPeerBroker.withdraw",
+      "line": 303,
+      "docstring": "Withdraw G synchronously on the owning event loop and start the original physical retirement without awaiting source-local SQL.",
+      "file_sha256": "91b2aa7308c469799cf1f90b89d4a61449e12eebda2755e8199c671d0cb24cc6"
+    },
+    {
+      "path": "backend/runtime/broker_stdio.py",
+      "symbol": "AsyncPeerBroker.aclose",
+      "line": 310,
+      "docstring": "Drain the single original retirement future; caller cancellation cannot transfer or cancel physical ownership.",
+      "file_sha256": "91b2aa7308c469799cf1f90b89d4a61449e12eebda2755e8199c671d0cb24cc6"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService",
+      "line": 63,
+      "docstring": "Own native attempts and grant-bound tool closure before durable terminal states.",
+      "file_sha256": "f013ccb42074138dc13b3ded3090c4e0d9331117d9e45222011d5fbe6670e33b"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService.__init__",
+      "line": 66,
+      "docstring": "Compose one journal owner, native worker limits and deterministic authorized-plan dispatch; construction starts no work.",
+      "file_sha256": "f013ccb42074138dc13b3ded3090c4e0d9331117d9e45222011d5fbe6670e33b"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService.project_stop_scope",
+      "line": 112,
+      "docstring": "Withdraw exactly read-validated original local handles before the project Stop write; no cached later attempt can inherit this scope.",
+      "file_sha256": "f013ccb42074138dc13b3ded3090c4e0d9331117d9e45222011d5fbe6670e33b"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._bodyless_project_stop_scope",
+      "line": 138,
+      "docstring": "Withdraw current project owners before SQL and drain source handoffs under a temporary fuse; later explicit requests are never replayed by this Stop.",
+      "file_sha256": "f013ccb42074138dc13b3ded3090c4e0d9331117d9e45222011d5fbe6670e33b"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService.stop_project",
+      "line": 379,
+      "docstring": "Withdraw every active native run in this project; returned states preserve unconfirmed physical closure rather than claiming all work stopped.",
+      "file_sha256": "f013ccb42074138dc13b3ded3090c4e0d9331117d9e45222011d5fbe6670e33b"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_project_stop.py",
+      "symbol": "test_observed_project_stop_withdraws_actual_original_worker_and_replay_is_readonly",
+      "line": 12,
+      "docstring": "The existing runtime owns the kernel domain; SQL fences and exact owner targets precede local withdrawal, while a replay returns only the original intent receipt.",
+      "file_sha256": "696dfd8596b18ad37e27b3f12f28ad59c2258f41b5522f533bf6c32f43471a86"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_remote_transport.py",
+      "symbol": "tls_remote",
+      "line": 23,
+      "docstring": "Serve real smart HTTP Git over verified local TLS plus a small controlled Forgejo REST contract; all effect actors are fixture-owned.",
+      "file_sha256": "9344506353130a8744a6681b216e550088aaafd9a0579777bba0f53a9a36c308"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_remote_transport.py",
+      "symbol": "tls_remote.Handler",
+      "line": 112,
+      "docstring": "Bounded fixture protocol handler; authentication values are never logged or saved as artifacts.",
+      "file_sha256": "9344506353130a8744a6681b216e550088aaafd9a0579777bba0f53a9a36c308"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_remote_transport.py",
+      "symbol": "tls_remote.Handler.handle_request",
+      "line": 139,
+      "docstring": "Authenticate by protocol, then execute only this temporary repository or its explicit REST model.",
+      "file_sha256": "9344506353130a8744a6681b216e550088aaafd9a0579777bba0f53a9a36c308"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_control.py",
+      "symbol": "physical_before_sql_release",
+      "line": 11,
+      "docstring": "Observe the actual original broker's returned kernel DomainClosure; journal sealing is checked after persistence drains, without polling its mutation lock.",
+      "file_sha256": "0279d1248aced90207e6d50ac3f433cc7b0ffd8604c40946b5cc453e5e47e1ee"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_control.py",
+      "symbol": "test_source_stop_retires_actual_clone_before_sqlite_intent_can_commit",
+      "line": 20,
+      "docstring": "A real TLS clone remains blocked at its server while its exact local kernel domain closes despite an unrelated source-store writer.",
+      "file_sha256": "0279d1248aced90207e6d50ac3f433cc7b0ffd8604c40946b5cc453e5e47e1ee"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_control.py",
+      "symbol": "test_project_stop_receipt_replay_cannot_withdraw_a_new_held_source",
+      "line": 103,
+      "docstring": "The exact prior project Stop returns its old receipt while SQLite is busy and another actual source clone remains alive, never borrowing the new owner.",
+      "file_sha256": "0279d1248aced90207e6d50ac3f433cc7b0ffd8604c40946b5cc453e5e47e1ee"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

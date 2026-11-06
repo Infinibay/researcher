@@ -368,6 +368,12 @@ class SourceOperations:
         with self.runs._transaction(write=True) as conn:
             return self.withdraw(conn, project, key, operation_id=operation_id, fence=fence)
 
+    def request_project_stop(self, project, key, *, operation_id):
+        """Resolve and withdraw the current fence atomically for a bodyless whole-project Stop whose admission fuse already covers this original operation."""
+        with self.runs._transaction(write=True) as conn:
+            _, row = self._row(conn, project, key)
+            return self.withdraw(conn, project, key, operation_id=operation_id, fence=row['fence'])
+
     @classmethod
     def withdraw(cls, conn, project, key, *, operation_id, fence):
         """Withdraw one original source inside either the individual Stop or atomic whole-project Stop admission transaction."""

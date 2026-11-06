@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import sqlite3
 from dataclasses import asdict
+from contextlib import nullcontext
 
 from backend.git.source_operations import SourceOperations
 
@@ -334,13 +335,20 @@ async def stop_project(project_id: int, request: Request, body: StopObservedProj
     if not state:
         raise ProjectNotFound(project_id)
     if body is not None:
-        receipt, created = await asyncio.to_thread(_workspace(request).request_stop, project_id, **body.model_dump())
+        from backend.runtime.owned_runtime import _settled
+
+        workspace = _workspace(request)
+        prepared = await asyncio.to_thread(workspace.prepare_stop, project_id, **body.model_dump())
+        if prepared.receipt is not None:
+            return JSONResponse(prepared.receipt, headers={"Cache-Control":"no-store"})
         runtime = request.app.state.runtime_service
-        if created and runtime is not None:
-            for run_id in receipt['run_ids']:
-                await runtime.stop(project_id,run_id)
-            for source in receipt.get('source_operations',[]):
-                await runtime.sources.stop(project_id,source['operation_key'],operation_id=source['operation_id'],fence=source['fence'])
+        with runtime.project_stop_scope(project_id,prepared.scope) if runtime is not None else nullcontext():
+            receipt, created = await _settled(workspace.request_stop, project_id, prepared=prepared, **body.model_dump())
+            if created and runtime is not None:
+                for run_id in receipt['run_ids']:
+                    await runtime.stop(project_id,run_id)
+                for source in receipt.get('source_operations',[]):
+                    await runtime.sources.stop(project_id,source['operation_key'],operation_id=source['operation_id'],fence=source['fence'])
         return JSONResponse(receipt, headers={"Cache-Control":"no-store"})
     runtime = request.app.state.runtime_service
     runs = await runtime.stop_project(project_id) if runtime is not None else []

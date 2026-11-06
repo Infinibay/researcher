@@ -78,3 +78,6 @@ retomarlo. No convertir su registro en otra investigación o implementación.
 
 
 | DD-033 | Pulido de preparación de fuentes:25avisos Ruff en archivos tocados, incluidos heredados (imports/estilo y catches deliberados); ninguno de sintaxis o nombres indefinidos.150definiciones Python y54módulos/definiciones TS documentados. En móvil, reducir densidad de rutas, recuperar foco al cambiar formulario y traducir algún detalle técnico final. | `source-setup-lint.json`, `source-setup-docstrings.json`, `source-setup-jsdoc.json`; `SourceSetup.tsx` | Pasada posterior de pulido. No repetir Git/kernel por estos detalles. Crear remoto, reparar etapas incompletas y recuperar historia entre navegadores son trabajo principal, no DD033. |
+
+
+| DD-034 | Once avisos estáticos en archivos del control físico, incluidos heredados: siete I001, un F401, SIM117, TRY004 y BLE001; ninguno de sintaxis o nombres indefinidos.45definiciones nuevas/modificadas documentadas. El servidor TLS de prueba puede registrar el EOF esperado al responder a un cliente ya retirado. | `source-control-lint.json`, `source-control-docstrings.json`; fixture TLS | Pulido posterior. No repetir kernel/native por imports, comentarios o ese log de desconexión. Remoto separado, reparación parcial, restore y evaluación de admisiones tardías siguen siendo trabajo principal. |

@@ -98,14 +98,11 @@ recibos históricos nunca vuelven a cerrar un alcance cambiado.
 
 ## Integración principal que falta
 
-- Stop bajo contención SQL/admisión. La carrera de alta posterior al cierre está
-  reproducida y corregida. Derivación del código, aún sin ensayo de contención:
-  el Stop individual espera `request_stop` antes de cancelar su handle, y el cierre
-  espera la admisión antes de tomar el snapshot. Falta comprobar prioridad física
-  con Git activo y SQLite bloqueado. Una opción es conservar el broker/lease real
-  en un handle inmutable del dueño para retirar primero su gate sin aceptar un
-  fence obsoleto; drenar luego admisión y recibos. No se afirma resuelto por las
-  pruebas ordinarias de Stop.
+- La [prioridad física de Stop](source-control.md) ya se ensayó y corrigió para
+  fuente, proyecto observado/general y aplicación bajo SQLite ocupado. Quedan
+  evaluación global de admisiones nativas tardías, mezclas de trabajos y los
+  escenarios de fallo/restore completos; esos cuatro controles no constituyen
+  aceptación de todo el engine.
 - Crear un remoto como decisión separada, con namespace/visibilidad explícitos,
   identidad original y reconciliación de respuesta perdida; actualmente se rechaza.
 - Reparar etapas locales incompletas, dominios sin concesión registrada y crashes
