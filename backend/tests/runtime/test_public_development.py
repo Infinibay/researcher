@@ -14,12 +14,13 @@ from backend.tests.runtime.test_owned_factory import (
 
 @pytest.mark.timeout(420)
 @pytest.mark.parametrize(
-    "reuse_prior",
-    [False, True, "legacy_files"],
-    ids=["fresh", "carryover", "legacy-files"],
+    "task_type,reuse_prior",
+    [("code", False), ("code", True), ("code", "legacy_files"), ("optimization", False)],
+    ids=["fresh", "carryover", "legacy-files", "optimization"],
 )
 async def test_owner_http_develops_checks_reviews_and_accepts_exact_candidate(
     development_config,
+    task_type,
     reuse_prior,
 ):
     """Fresh authoring and explicit prior-code reuse keep original receipts, independent checks/review and an unchanged source."""
@@ -29,6 +30,8 @@ async def test_owner_http_develops_checks_reviews_and_accepts_exact_candidate(
     from backend.tests.runtime.test_workspace_delivery import owner_client
 
     c = development_config
+    c.s.c.conn.execute("UPDATE tasks SET type=? WHERE id=1001", (task_type,))
+    c.s.c.conn.commit()
     await fixture_git(c.s.workspace, "init", "-q")
     await fixture_git(c.s.workspace, "add", "fact.txt")
     await fixture_git(
@@ -72,13 +75,10 @@ async def test_owner_http_develops_checks_reviews_and_accepts_exact_candidate(
     async with app.router.lifespan_context(app), owner_client(app) as owner:
         workspace_path = "/api/projects/101/tasks/1001/workspace"
         workspace = (await owner.get(workspace_path)).json()
-        assert workspace["runtime"]["supported_task_types"] == [
-            "research",
-            "code",
-            "bug_fix",
-            "plan",
-            "investigation",
-        ]
+        from backend.runtime.task_profiles import NATIVE_TASK_TYPES, DEVELOPMENT_TASK_TYPES
+
+        assert workspace["runtime"]["supported_task_types"] == list(NATIVE_TASK_TYPES)
+        assert workspace["runtime"]["development_task_types"] == list(DEVELOPMENT_TASK_TYPES)
         version = workspace["context"]["context_version"]
         body = {
             "operation_key": "public-author",

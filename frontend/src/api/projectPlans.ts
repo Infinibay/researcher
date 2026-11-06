@@ -4,7 +4,7 @@ import {ownerActionStore,type OwnerActionStorage} from './ownerActions.ts'
 import type {RuntimeRun} from './runtime.ts'
 
 /** Local graph references are proposal data, never server identities or agent permissions. */
-export interface ProposedTask {key:string;epic_key:string;type:'research'|'code'|'bug_fix';title:string;description:string;acceptance_criteria:string;priority:number;depends_on:string[]}
+export interface ProposedTask {key:string;epic_key:string;type:'research'|'investigation'|'review'|'code'|'bug_fix'|'test'|'design'|'integrate'|'documentation'|'experimentation'|'optimization';title:string;description:string;acceptance_criteria:string;priority:number;depends_on:string[]}
 /** A justified append-only graph separates observed basis from assumptions the owner can correct. */
 export interface ProjectPlanDraft {title:string;rationale:string;assumptions:string[];basis:{source:string;quote:string}[];epics:{key:string;title:string;description:string}[];tasks:ProposedTask[]}
 /** Original material, proposal and distinct acceptance remain readable after withdrawal. */

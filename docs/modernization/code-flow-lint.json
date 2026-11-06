@@ -1,0 +1,221 @@
+{
+  "base_commit": "189e2e2",
+  "python_files": 31,
+  "current_issues": 13,
+  "new": [
+    [
+      "backend/tests/runtime/test_public_development.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ]
+  ],
+  "resolved": [
+    [
+      "backend/api/routes/runs.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/autonomy/scavenger.py",
+      "BLE001",
+      "Do not catch blind exception: `Exception`"
+    ],
+    [
+      "backend/flows/code_review_flow.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/flows/code_review_flow.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/flows/code_review_flow.py",
+      "F401",
+      "`json` imported but unused"
+    ],
+    [
+      "backend/flows/code_review_flow.py",
+      "F401",
+      "`backend.flows.helpers.parse_ci_output` imported but unused"
+    ],
+    [
+      "backend/flows/development_flow.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/flows/development_flow.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/flows/development_flow.py",
+      "F401",
+      "`typing.Any` imported but unused"
+    ],
+    [
+      "backend/flows/development_flow.py",
+      "F401",
+      "`backend.flows.helpers.parse_ci_output` imported but unused"
+    ],
+    [
+      "backend/flows/development_flow.py",
+      "PIE810",
+      "Call `startswith` once with a `tuple`"
+    ],
+    [
+      "backend/flows/main_project_flow.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/flows/main_project_flow.py",
+      "F401",
+      "`typing.Any` imported but unused"
+    ],
+    [
+      "backend/flows/main_project_flow.py",
+      "F401",
+      "`backend.flows.flow_helpers._pause_agent_loops` imported but unused"
+    ],
+    [
+      "backend/flows/main_project_flow.py",
+      "F401",
+      "`backend.flows.state_models.TaskType` imported but unused"
+    ],
+    [
+      "backend/runtime/sqlite_runs.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/runtime/sqlite_runs.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/runtime/sqlite_runs.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/tests/autonomy/test_scavenger.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/tests/autonomy/test_scavenger.py",
+      "F401",
+      "`pytest` imported but unused"
+    ],
+    [
+      "backend/tests/autonomy/test_scavenger.py",
+      "F841",
+      "Local variable `t1` is assigned to but never used"
+    ],
+    [
+      "backend/tests/autonomy/test_scavenger.py",
+      "F841",
+      "Local variable `t1` is assigned to but never used"
+    ],
+    [
+      "backend/tests/autonomy/test_scavenger.py",
+      "F841",
+      "Local variable `t2` is assigned to but never used"
+    ],
+    [
+      "backend/tests/flows/test_code_review_flow.py",
+      "F401",
+      "`sqlite3` imported but unused"
+    ],
+    [
+      "backend/tests/flows/test_code_review_flow.py",
+      "F401",
+      "`pytest` imported but unused"
+    ],
+    [
+      "backend/tests/flows/test_development_flow.py",
+      "F401",
+      "`sqlite3` imported but unused"
+    ],
+    [
+      "backend/tests/flows/test_development_flow.py",
+      "F401",
+      "`pytest` imported but unused"
+    ],
+    [
+      "backend/tests/flows/test_development_flow.py",
+      "F401",
+      "`backend.tests.flows.conftest.make_mock_crew` imported but unused"
+    ],
+    [
+      "backend/tests/flows/test_development_flow_ci.py",
+      "F401",
+      "`pytest` imported but unused"
+    ]
+  ],
+  "inherited": [
+    [
+      "backend/api/routes/tasks.py",
+      "F401",
+      "`backend.flows.helpers.log_flow_event` imported but unused"
+    ],
+    [
+      "backend/api/routes/tasks.py",
+      "S110",
+      "`try`-`except`-`pass` detected, consider logging the exception"
+    ],
+    [
+      "backend/api/routes/tasks.py",
+      "S110",
+      "`try`-`except`-`pass` detected, consider logging the exception"
+    ],
+    [
+      "backend/api/routes/tasks.py",
+      "BLE001",
+      "Do not catch blind exception: `Exception`"
+    ],
+    [
+      "backend/api/routes/tasks.py",
+      "BLE001",
+      "Do not catch blind exception: `Exception`"
+    ],
+    [
+      "backend/flows/state_models.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/flows/state_models.py",
+      "F401",
+      "`datetime.datetime` imported but unused"
+    ],
+    [
+      "backend/tests/flows/test_main_project_flow.py",
+      "F401",
+      "`sqlite3` imported but unused"
+    ],
+    [
+      "backend/tests/flows/test_main_project_flow.py",
+      "F401",
+      "`unittest.mock.MagicMock` imported but unused"
+    ],
+    [
+      "backend/tests/flows/test_main_project_flow.py",
+      "F401",
+      "`pytest` imported but unused"
+    ],
+    [
+      "backend/tests/flows/test_main_project_flow.py",
+      "F401",
+      "`backend.tests.flows.conftest.make_mock_agent` imported but unused"
+    ],
+    [
+      "backend/tests/flows/test_main_project_flow.py",
+      "F401",
+      "`backend.tests.flows.conftest.make_mock_crew` imported but unused"
+    ]
+  ]
+}

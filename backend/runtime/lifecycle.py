@@ -1,8 +1,8 @@
-"""Protect native-owned tasks from legacy approval and mutable scientific validation.
+"""Protect migrated tasks from legacy claims, approval and mutable validation.
 
-Legacy adapters remain available for tasks without native admission history. Once
-admitted, task completion belongs to explicit owner acceptance and finding review
-belongs to the versioned independent review protocol, regardless of role labels.
+All persisted task types use native owner entry. Historical project-level adapters
+remain admission-guarded until their separate cutover; a hint never proves that
+old producers have physically stopped.
 """
 
 
@@ -28,13 +28,15 @@ def require_legacy_execution_project(project_id):
 
 
 def require_legacy_task(conn, task_id):
-    """Refuse legacy mutation/inference for migrated documentary/scientific work and any task with native admission history."""
+    """Refuse legacy mutation/inference for all migrated task categories and any task with native admission history."""
     from backend.runtime.task_profiles import OWNER_ONLY_LEGACY_TASK_TYPES
 
     task = conn.execute("SELECT type FROM tasks WHERE id=?", (task_id,)).fetchone()
     if task is not None and task[0] in OWNER_ONLY_LEGACY_TASK_TYPES:
         raise ValueError(
             "Research and investigation require the native owner task workspace"
+            if task[0] in ("research", "investigation")
+            else "Task execution requires the native owner task workspace"
         )
     if (
         conn.execute(

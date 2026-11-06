@@ -1,0 +1,94 @@
+{
+  "base_commit": "189e2e2",
+  "status": "legacy_development_review_task_execution_retired_native_profiles_connected_project_producers_pending",
+  "schema_version": 54,
+  "implemented": [
+    "DevelopmentFlow and CodeReviewFlow are readonly scoped owner-hint adapters; no old inference/CI-fix/rework/completion/automatic PR merge.",
+    "MainProjectFlow task phase no longer resets assignments, launches task threads, waits an hour or infers project completion. Native admission references are actual or explicitly null; no physical closure claim.",
+    "Idle Scavenger hook no longer reconstructs task events or deletes preserved worktrees, including before first native admission.",
+    "All12persisted task categories have native profiles. Eight repository-artifact types use native development/check/independent candidate review/owner acceptance. Review is a readonly attributed code audit, not exact candidate approval; plan keeps native planning.",
+    "Shared profile consumers cover admission, frozen input, runtime dispatch, prior-file/candidate input, documentary results/review, planner catalog and graph, API capability metadata and web task controls.",
+    "Atomic repeatable schema54 rejects pre-admission old claim/done and retains post-admission exact owner acceptance guards, without rewriting historical status, assignment, branch, reports or minting native proof."
+  ],
+  "verification": {
+    "red": "Initial19failures: all10newly mapped types, public old kickoffs, preadmission done, main task dispatch and scavenger. One initial scavenger fixture failed on an invalid project status before exercising cleanup; corrected to executing. First implementation19PASS6.37s. Consumer run exposed missing import, obsolete private-method assertions and prior-schema fixtures; corrected.",
+    "overlapping_source_groups": [
+      {
+        "passed": 39,
+        "seconds": 9.53,
+        "scope": "cutover guards, rollback/retry/history and planner domain/catalog"
+      },
+      {
+        "passed": 166,
+        "seconds": 42.36,
+        "scope": "cutover/carryover/import/planning/science/investigation/results/old flow compatibility/scavenger; audit owner acceptance included"
+      }
+    ],
+    "extracted_wheel": {
+      "tests_passed": 235,
+      "failures": [],
+      "skipped": 0,
+      "backend_modules_loaded": 396,
+      "backend_imports_only_from_wheel": true,
+      "model_turns": 0,
+      "controlled_native_turns": 3,
+      "actual_kernel_owned_fixture": true,
+      "network": "Disabled except Unix sockets",
+      "generation_and_ken": "Controlled native author/reviewer/auditor and controlled Ken; actual kernel/broker/Git/SQLite. No real-model or retrieval-ranking quality claim.",
+      "seconds": 169.467
+    },
+    "physical_chains": [
+      {
+        "task_type": "optimization",
+        "seconds": 83.12,
+        "controlled_native_turns": 2,
+        "stages": [
+          "owner HTTP admission",
+          "fresh private author",
+          "exact candidate and check",
+          "distinct candidate reviewer",
+          "owner acceptance"
+        ],
+        "assertions": "Canonical source137 retained, new candidate200, no publication; existing original receipt and independent review semantics retained."
+      },
+      {
+        "task_type": "review",
+        "seconds": 1.845,
+        "controlled_native_turns": 1,
+        "stages": [
+          "configured native readonly auditor",
+          "captured source and provisional finding",
+          "selected report delivery",
+          "closed peers and retired grant"
+        ],
+        "assertions": "Original fact137 unchanged; report remains draft, task not done. Frozen input contains explicit audit limits; no candidate approval invented."
+      }
+    ],
+    "frontend": {
+      "passed": 97,
+      "failed": 0,
+      "skipped": 0,
+      "build_seconds": 4.84,
+      "limits": "TypeScript/Vite and SSR/contract tests; no new browser/full-page/human acceptance. Existing bundle/Browserslist warnings retained."
+    },
+    "documentation": {
+      "changed_or_new_definitions_checked": 101,
+      "missing": 1,
+      "limits": "One inherited test method whose historical setup changed lacks its own docstring; DD021. No missing production definition in changed/new scope."
+    },
+    "lint": {
+      "new": 1,
+      "inherited": 12,
+      "resolved": 29,
+      "limits": "Only new warning is I001 in a test-local import; deferred DD021. No new production lint warning."
+    },
+    "model_turns": 0,
+    "physical_trial_repeated": false
+  },
+  "remaining": [
+    "Project-level old FlowManager/AgentLoop/listeners/MainProjectFlow planning/setup/brainstorm/finalization and auxiliary inference, global physical exclusion and legacy dependency retirement.",
+    "Remove unreachable private legacy handler bodies with the producer cutover; source guards are not global physical proof.",
+    "Automatic selected material for graph successors, retained publication, endpoint/TUI parity, prompts/book techniques/model/science/human evaluations, remaining six routes and all full-page acceptance,43broad scenarios/current global suite, clean install/restore/inverses43\u201354 and final fresh whole-branch review."
+  ],
+  "limits": "No claim of whole-plan completion, global-green suite, clean host install, real-model quality, actual Ken ranking quality or global old-producer closure."
+}

@@ -275,3 +275,21 @@ comprometido/indexado y código pendiente no se ocultan. No hay otro loop.
 Esto permite avanzar al corte real de DevelopmentFlow/CodeReviewFlow. Su retirada,
 otros tipos/auxiliares, dispatcher y exclusión global siguen pendientes; no volver
 al pulido del importador. [Contrato y límites](selected-old-file-import.md).
+
+
+## Corte de ejecución por tarea posterior a 189e2e2
+
+DevelopmentFlow/CodeReviewFlow ahora son entradas compatibles de solo lectura.
+Se retiraron sus loops/CI/rework/automerge, el despacho/reset/espera de tareas de
+MainProjectFlow y la recuperación/limpieza del scavenger. Las doce categorías
+persistidas tienen perfil nativo; review es auditoría documental de solo lectura,
+separada de la revisión formal de candidato. Catálogo de planificación, admisión,
+inputs, aceptación, reutilización de archivos y controles web comparten el mapa.
+Esquema54 bloquea claims/done antiguos antes de admisión; después conserva la
+aceptación exacta existente, sin reescribir historia. El handoff no es inferencia,
+aceptación, finalización del proyecto ni prueba de cierre físico.
+
+[Contrato y límites](native-task-flow-cutover.md). Productores de proyecto,
+AgentLoop/listeners/FlowManager e inferencia auxiliar siguen como capacidad
+principal pendiente; la retirada de cuerpos privados inalcanzables de handlers
+se hará en ese corte. No volver sobre selectores/snapshots/journals para pulirlos.

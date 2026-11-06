@@ -1,7 +1,8 @@
 """MainProjectFlow — root orchestrator for the INFINIBAY project lifecycle.
 
 Manages: project creation → requirements → planning → approval → execution → completion.
-Delegates work to DevelopmentFlow, ResearchFlow, and BrainstormingFlow.
+Task execution hands off to the native owner; project-level legacy planning,
+setup, brainstorming and finalization await their separate cutover.
 
 CrewAI Flow routing rules (v1.9.3):
 - @listen("X") triggers when method named "X" completes, OR when a router returns "X"
@@ -15,18 +16,16 @@ from __future__ import annotations
 
 import logging
 import threading
-from typing import Any
 
 from crewai.flow.flow import Flow, listen, or_, router, start
 from crewai.flow.persistence import persist
 
 from backend.agents.registry import get_agent_by_role, initialize_project_team
-from backend.config.settings import settings
+from backend.engine import get_engine
 from backend.flows.guardrails import (
     validate_plan_output,
     validate_requirements_output,
 )
-from backend.engine import get_engine
 from backend.flows.helpers import (
     classify_approval_response,
     create_project,
@@ -41,10 +40,9 @@ from backend.flows.helpers import (
     send_agent_message,
     update_project_status,
 )
-from backend.flows.flow_helpers import _pause_agent_loops, _resume_agent_loops
 from backend.flows.react_trace import _is_incomplete_react_trace, _strip_react_trace
 from backend.flows.snapshot_service import save_snapshot
-from backend.flows.state_models import ProjectState, ProjectStatus, TaskType
+from backend.flows.state_models import ProjectState, ProjectStatus
 from backend.prompts.project_lead import tasks as pl_tasks
 from backend.prompts.team import build_conversation_context
 from backend.prompts.team_lead import tasks as tl_tasks
@@ -510,25 +508,8 @@ class MainProjectFlow(Flow[ProjectState]):
         "create_additional_tickets",
     ))
     def check_and_launch_tasks(self):
-        """Check for pending tasks and launch sub-flows.
-
-        This router is triggered by multiple sources:
-        - create_structure: after project structure is created
-        - resume_execution: when resuming a paused project
-        - check_pending_after_task: after a task completes (cycle)
-        - after_brainstorm: after brainstorming creates new tasks
-        - handle_stagnation: after stagnation intervention
-
-        When AUTONOMY_ENABLED, delegates to a passive wait while agents
-        autonomously pick up work. Otherwise falls back to centralized dispatch.
-        """
-        # Ensure agent loops are running — they start paused and are
-        # resumed here when the flow enters the execution phase.
-        _resume_agent_loops(self.state.project_id)
-
-        if settings.AUTONOMY_ENABLED:
-            return self._wait_for_autonomous_completion()
-        return self._launch_pending_tasks()
+        """End legacy task dispatch at the owner workspace without resuming old agents or deriving project completion."""
+        return self._handoff_task_execution()
 
     @listen("task_completed")
     def check_pending_after_task(self):
@@ -540,350 +521,52 @@ class MainProjectFlow(Flow[ProjectState]):
         self.state.brainstorm_attempts = 0
         self.state.evaluate_progress_attempts = 0
 
+    def _handoff_task_execution(self) -> str:
+        """Record actual scoped task references without resetting assignments, deleting partial work, dispatching inference or claiming worker closure."""
+        from backend.runtime.legacy_handoff import (
+            native_owner_handoff,
+            native_project_handoff,
+        )
+        from backend.tools.base.db import execute_with_retry
+
+        def inspect(conn):
+            """Separate actual admission history from the policy that all task categories now require an owner entry."""
+            project = conn.execute("SELECT name FROM projects WHERE id=?", (self.state.project_id,)).fetchone()
+            if project is None:
+                raise ValueError("Project not found in the specified scope")
+            hint = native_project_handoff(conn, self.state.project_id)
+            if hint is None:
+                hint = {
+                    "delivery": "native_owner_handoff",
+                    "scope": "project",
+                    "project_id": self.state.project_id,
+                    "project_name": project[0],
+                    "native_admission_run_id": None,
+                    "event_authorizes_work": False,
+                    "inference_started_by_handoff": False,
+                    "legacy_execution_closure": "not_assessed",
+                    "next_action": "inspect_native_project_workspace",
+                    "explanation": "Task execution now requires explicit owner admission. No native admission is recorded; inspect the workspace and stop registered legacy producers before authorizing work. Historical completion labels do not accept the project.",
+                }
+            hint["tasks"] = [
+                native_owner_handoff(conn, self.state.project_id, row[0])
+                for row in conn.execute("SELECT id FROM tasks WHERE project_id=? ORDER BY id", (self.state.project_id,))
+            ]
+            return hint
+
+        hint = execute_with_retry(inspect)
+        self.state.current_step = "native_owner_required"
+        log_flow_event(self.state.project_id, "native_owner_handoff", "main_project_flow", "project", self.state.project_id, hint)
+        save_snapshot(self.state.project_id, "main_project_flow", "native_owner_required", self.state)
+        return "native_owner_required"
+
     def _wait_for_autonomous_completion(self) -> str:
-        """Wait passively while agents autonomously pick up work.
-
-        Agents driven by AutonomyScheduler heartbeats observe DB state, claim
-        tasks, and launch sub-flows.  This method simply waits for either
-        all_tasks_done or task_available events, rechecking each time.
-        """
-        self.state.current_step = "autonomous_execution"
-        save_snapshot(
-            self.state.project_id, "main_project_flow",
-            "autonomous_execution", self.state,
-        )
-
-        from backend.flows.event_listeners import event_bus
-
-        # Reset tasks stuck in in_progress from a previous crash
-        self._reset_stale_in_progress_tasks()
-
-        pending = get_pending_tasks(self.state.project_id)
-        if not pending:
-            # No pending tasks at all — might be done
-            logger.info("MainProjectFlow: no pending tasks, checking completion")
-            return "no_pending_tasks"
-
-        # Ensure agent_events exist for all pending tasks so agent loops
-        # can pick them up.  After a restart, ephemeral EventBus events are
-        # lost and the DB may have zero pending agent_events.
-        self._ensure_task_events(pending)
-
-        log_flow_event(
-            self.state.project_id, "autonomous_execution_started",
-            "main_project_flow", "project", self.state.project_id,
-            {"pending_count": len(pending)},
-        )
-
-        completion_event = threading.Event()
-
-        def _on_all_done(event):
-            if event.project_id == self.state.project_id:
-                completion_event.set()
-
-        def _on_task_available(event):
-            """New tasks created (e.g. by TicketCreationFlow) — re-check."""
-            if event.project_id == self.state.project_id:
-                completion_event.set()
-
-        event_bus.subscribe("all_tasks_done", _on_all_done)
-        event_bus.subscribe("task_available", _on_task_available)
-        try:
-            while True:
-                completion_event.wait(timeout=3600)  # 1h max between checks
-                completion_event.clear()
-
-                # Re-check: are there still pending/running tasks?
-                remaining = get_pending_tasks(self.state.project_id)
-                running = self._count_running_tasks()
-                if not remaining and running == 0:
-                    break
-
-                # If only new tasks appeared (task_available), agents will pick
-                # them up autonomously — just keep waiting
-        finally:
-            event_bus.unsubscribe("all_tasks_done", _on_all_done)
-            event_bus.unsubscribe("task_available", _on_task_available)
-
-        self.state.completed_tasks = get_completed_task_count(self.state.project_id)
-        return "no_pending_tasks"
-
-    def _reset_stale_in_progress_tasks(self) -> None:
-        """Reset tasks stuck in in_progress from a previous crash back to pending.
-
-        When the system is killed (Ctrl+C), tasks that were being worked on
-        remain in 'in_progress' with no agent actually processing them.
-        """
-        from backend.tools.base.db import execute_with_retry
-
-        def _reset(conn):
-            cursor = conn.execute(
-                """UPDATE tasks SET status = 'pending', assigned_to = NULL
-                   WHERE project_id = ? AND status = 'in_progress'""",
-                (self.state.project_id,),
-            )
-            conn.commit()
-            return cursor.rowcount
-
-        count = execute_with_retry(_reset)
-        if count:
-            logger.info(
-                "MainProjectFlow: reset %d stale in_progress tasks to pending "
-                "for project %d",
-                count, self.state.project_id,
-            )
-
-    def _ensure_task_events(self, pending_tasks: list[dict]) -> None:
-        """Create task_available agent_events for pending tasks that lack them.
-
-        After a restart, the persistent agent_events table may be empty even
-        though tasks exist in backlog/pending.  This method fills the gap so
-        agent loops can discover work.
-        """
-        from backend.autonomy.events import create_task_event
-        from backend.tools.base.db import execute_with_retry
-
-        def _tasks_with_pending_events(conn):
-            """Return set of task_ids that already have a pending task_available event."""
-            rows = conn.execute(
-                """SELECT DISTINCT
-                       json_extract(payload_json, '$.task_id') as task_id
-                   FROM agent_events
-                   WHERE project_id = ? AND event_type = 'task_available'
-                     AND status = 'pending'""",
-                (self.state.project_id,),
-            ).fetchall()
-            return {r["task_id"] for r in rows if r["task_id"] is not None}
-
-        existing = execute_with_retry(_tasks_with_pending_events)
-        created = 0
-
-        for task in pending_tasks:
-            task_id = task["id"]
-            if task_id in existing:
-                continue
-
-            task_type = task.get("type", "development")
-            if task_type in ("research", "investigation"):
-                target_role = "researcher"
-            elif task_type == "review":
-                target_role = "code_reviewer"
-            else:
-                target_role = "developer"
-
-            ids = create_task_event(
-                self.state.project_id, task_id, "task_available",
-                target_role=target_role,
-                source="resume_recovery",
-                extra_payload={
-                    "task_type": task_type,
-                    "task_priority": task.get("priority", 2),
-                },
-            )
-            created += len(ids)
-
-        if created:
-            logger.info(
-                "MainProjectFlow: created %d task_available agent_events "
-                "for project %d on resume",
-                created, self.state.project_id,
-            )
-
-    def _count_running_tasks(self) -> int:
-        """Count tasks currently in_progress or review_ready for this project."""
-        from backend.tools.base.db import execute_with_retry
-
-        def _query(conn):
-            row = conn.execute(
-                """SELECT COUNT(*) as cnt FROM tasks
-                   WHERE project_id = ?
-                     AND status IN ('in_progress', 'review_ready')""",
-                (self.state.project_id,),
-            ).fetchone()
-            return row["cnt"] if row else 0
-
-        return execute_with_retry(_query)
+        """Retain the old caller entry as an immediate owner hint; never wait on old workers or manufacture completion."""
+        return self._handoff_task_execution()
 
     def _launch_pending_tasks(self) -> str:
-        """Launch up to max_concurrent_tasks sub-flows and wait for any to finish.
-
-        Returns "native_owner_required", "no_pending_tasks" or "task_completed"; an owner handoff ends dispatch without evaluating project completion.
-        """
-        self.state.current_step = "check_and_launch_tasks"
-        save_snapshot(self.state.project_id, "main_project_flow", "check_and_launch_tasks", self.state)
-
-        from backend.flows.event_listeners import event_bus
-
-        # Clean running_task_ids — remove any tasks that are already done
-        self.state.running_task_ids = [
-            tid for tid in self.state.running_task_ids
-            if self._is_task_still_running(tid)
-        ]
-
-        available_slots = self.state.max_concurrent_tasks - len(self.state.running_task_ids)
-        pending = get_pending_tasks(self.state.project_id)
-        pending = [t for t in pending if t["id"] not in self.state.running_task_ids]
-        from backend.runtime.legacy_handoff import legacy_event_handoff
-
-        handed_off = []
-        legacy_pending = []
-        for task in pending:
-            handoff = legacy_event_handoff(self.state.project_id, task["id"])
-            if handoff is None:
-                legacy_pending.append(task)
-            else:
-                handed_off.append(handoff)
-        self.state.total_tasks = len(pending) + len(self.state.running_task_ids)
-        pending = legacy_pending
-        if handed_off:
-            log_flow_event(
-                self.state.project_id, "native_owner_handoff", "main_project_flow",
-                "project", self.state.project_id,
-                {"tasks": handed_off, "local_execution_closed": False,
-                 "next_action": "Stop the registered legacy project before authorizing native work in the task workspace."},
-            )
-        if handed_off and not pending and not self.state.running_task_ids:
-            self.state.current_step = "native_owner_required"
-            save_snapshot(self.state.project_id, "main_project_flow", "native_owner_required", self.state)
-            return "native_owner_required"
-
-        if not pending and not self.state.running_task_ids:
-            logger.info("MainProjectFlow: no pending or running tasks")
-            return "no_pending_tasks"
-
-        # Launch new tasks up to available slots
-        tasks_to_launch = pending[:available_slots]
-        completion_event = threading.Event()
-
-        for task_data in tasks_to_launch:
-            task_id = task_data["id"]
-            task_type = task_data.get("type", "development")
-            self.state.running_task_ids.append(task_id)
-
-            logger.info(
-                "MainProjectFlow: launching sub-flow for task %d (type=%s, running=%d)",
-                task_id, task_type, len(self.state.running_task_ids),
-            )
-
-            thread = threading.Thread(
-                target=self._run_sub_flow,
-                args=(task_id, task_type, completion_event),
-                name=f"SubFlow-task{task_id}",
-                daemon=True,
-            )
-            thread.start()
-
-        if not tasks_to_launch and self.state.running_task_ids:
-            logger.info(
-                "MainProjectFlow: all %d slots occupied, waiting for completion",
-                len(self.state.running_task_ids),
-            )
-
-        if not self.state.running_task_ids:
-            return "no_pending_tasks"
-
-        # Wait for any sub-flow to finish or new ticket to arrive
-        def _on_task_done(event):
-            if event.project_id == self.state.project_id:
-                completion_event.set()
-
-        def _on_task_available(event):
-            if event.project_id == self.state.project_id:
-                completion_event.set()
-
-        event_bus.subscribe("task_done", _on_task_done)
-        event_bus.subscribe("task_available", _on_task_available)
-        try:
-            completion_event.wait(timeout=3600)
-        finally:
-            event_bus.unsubscribe("task_done", _on_task_done)
-            event_bus.unsubscribe("task_available", _on_task_available)
-
-        # Remove finished tasks from running list
-        self.state.running_task_ids = [
-            tid for tid in self.state.running_task_ids
-            if self._is_task_still_running(tid)
-        ]
-
-        return "task_completed"
-
-    def _run_sub_flow(
-        self,
-        task_id: int,
-        task_type: str,
-        completion_event: threading.Event,
-    ) -> None:
-        """Run a sub-flow in a background thread and signal completion."""
-        dev_types = {"development", "bug_fix", "test", "integration", "design", "documentation"}
-
-        try:
-            if task_type == "research":
-                from backend.flows.research_flow import ResearchFlow
-                flow = ResearchFlow()
-                handoff = flow.kickoff(inputs={
-                    "project_id": self.state.project_id,
-                    "task_id": task_id,
-                })
-                log_flow_event(
-                    self.state.project_id, "native_owner_handoff",
-                    "main_project_flow", "task", task_id, handoff,
-                )
-            elif task_type == "investigation":
-                from backend.flows.investigation_flow import InvestigationFlow
-                flow = InvestigationFlow()
-                handoff = flow.kickoff(inputs={
-                    "project_id": self.state.project_id,
-                    "task_id": task_id,
-                })
-                log_flow_event(
-                    self.state.project_id, "native_owner_handoff",
-                    "main_project_flow", "task", task_id, handoff,
-                )
-            elif task_type in dev_types:
-                from backend.flows.development_flow import DevelopmentFlow
-                flow = DevelopmentFlow()
-                flow.kickoff(inputs={
-                    "project_id": self.state.project_id,
-                    "task_id": task_id,
-                })
-                log_flow_event(
-                    self.state.project_id, "development_flow_completed",
-                    "main_project_flow", "task", task_id,
-                )
-            else:
-                from backend.flows.development_flow import DevelopmentFlow
-                flow = DevelopmentFlow()
-                flow.kickoff(inputs={
-                    "project_id": self.state.project_id,
-                    "task_id": task_id,
-                })
-                log_flow_event(
-                    self.state.project_id, "development_flow_completed",
-                    "main_project_flow", "task", task_id,
-                )
-        except Exception:
-            logger.exception(
-                "MainProjectFlow: sub-flow failed for task %d", task_id,
-            )
-            log_flow_event(
-                self.state.project_id, "sub_flow_failed",
-                "main_project_flow", "task", task_id,
-            )
-        finally:
-            completion_event.set()
-
-    @staticmethod
-    def _is_task_still_running(task_id: int) -> bool:
-        """Check if a task is still in a running state."""
-        from backend.flows.helpers import get_task_by_id
-        task = get_task_by_id(task_id)
-        if task is None:
-            return False
-        from backend.runtime.legacy_handoff import legacy_event_handoff
-
-        if legacy_event_handoff(task["project_id"], task_id) is not None:
-            return False  # Not tracked by this legacy dispatcher; no physical-closure claim.
-        return task.get("status") in ("in_progress", "pending", "review_ready", "backlog")
+        """Retain the old caller entry without thread dispatch, restart resets or fabricated task progress."""
+        return self._handoff_task_execution()
 
     # ── Completion check ──────────────────────────────────────────────────
 

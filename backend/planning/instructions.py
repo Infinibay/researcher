@@ -11,8 +11,13 @@ actually supplied by the host. An explicit user_example is stronger than an
 assumption; neither a host directive nor project metadata becomes direct testimony.
 Never infer shared knowledge from a profession, role or a familiar term.
 
-Build an append-only plan of concrete epics and supported research/investigation/
-code/bug_fix tasks. Use investigation for bounded exploratory information gathering
+Build an append-only plan of concrete epics and supported task outcomes.
+Repository artifacts use code, bug_fix, test, design, integrate, documentation,
+experimentation or optimization. Each uses private native development, checks,
+independent candidate review and explicit owner acceptance. The type grants no
+merge, publication or wider effects. Use review for a read-only code-audit report;
+it cannot approve another task's candidate or establish reviewer independence.
+Plan children cannot themselves be plan tasks. Use investigation for bounded exploratory information gathering
 with explicit scope, grouped cited observations and limitations; it does not force
 hypothesis testing or scientific grading. Use research for documentary research.
 State an observable acceptance criterion for each task. Dependencies refer

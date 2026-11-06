@@ -5,8 +5,6 @@ model, mint a business grant, prove remote job termination or publish. Owner
 acceptance is a distinct version-checked transaction over explicit delivered results.
 """
 
-from backend.runtime.task_profiles import DOCUMENTARY_TASK_TYPES
-
 import hashlib
 import json
 import time
@@ -39,6 +37,7 @@ from backend.runtime.contracts import (
     text,
     validate_correction,
 )
+from backend.runtime.task_profiles import DEVELOPMENT_TASK_TYPES, DOCUMENTARY_TASK_TYPES
 
 
 def _json(value):
@@ -481,7 +480,7 @@ class SQLiteRunStore:
                 context["review"] = review
             development = row["execution_kind"] == "development"
             code_review = row["execution_kind"] == "code_review"
-            expected_types = ("code", "bug_fix") if development or code_review else DOCUMENTARY_TASK_TYPES if row["execution_kind"] == "finding_review" else (*DOCUMENTARY_TASK_TYPES, "plan")
+            expected_types = DEVELOPMENT_TASK_TYPES if development or code_review else DOCUMENTARY_TASK_TYPES if row["execution_kind"] == "finding_review" else (*DOCUMENTARY_TASK_TYPES, "plan")
             if context["task"]["type"] not in expected_types:
                 raise RunConflict("Task type changed before input reservation")
             if development:
@@ -1111,7 +1110,7 @@ class SQLiteRunStore:
             run_id = str(uuid4())
             now = self.clock()
             task_type = conn.execute("SELECT type FROM tasks WHERE project_id=? AND id=?", (spec.project_id, spec.task_id)).fetchone()[0]
-            execution_kind = "finding_review" if review is not None else ("development" if task_type in ("code", "bug_fix") else "research")
+            execution_kind = "finding_review" if review is not None else ("development" if task_type in DEVELOPMENT_TASK_TYPES else "research")
             conn.execute(
                 """INSERT INTO runtime_runs(id,project_id,task_id,actor_id,context_version,operation_key,prompt,runtime,status,created_at,updated_at,execution_kind)
                 VALUES(?,?,?,?,?,?,?,?,'queued',?,?,?)""",
@@ -1441,9 +1440,8 @@ class SQLiteRunStore:
     def _execution_subject(self, conn, row):
         """Validate a host publication's exact acceptance without reopening done; all native inference kinds retain the ordinary task gate."""
         if row["execution_kind"] == "remote_publication":
-            from backend.runtime.remote_runtime import RemotePublications
-
             from backend.runtime.remote_recovery import RemoteRecovery
+            from backend.runtime.remote_runtime import RemotePublications
 
             recovery = RemoteRecovery(self)
             if recovery.observation(conn, row) is not None:
@@ -1542,7 +1540,6 @@ class SQLiteRunStore:
             lease.fence,
         )
         from backend.runtime.publication_recovery import PublicationRecovery
-
         from backend.runtime.remote_recovery import RemoteRecovery
 
         readonly_observation = (PublicationRecovery.observation(conn, row) is not None

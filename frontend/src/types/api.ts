@@ -46,7 +46,7 @@ export interface Task {
   project_id: number
   epic_id?: number
   milestone_id?: number
-  type: 'code' | 'research' | 'investigation' | 'review' | 'test' | 'design' | 'integrate' | 'documentation' | 'bug_fix' | 'plan'
+  type: 'code' | 'research' | 'investigation' | 'review' | 'test' | 'design' | 'integrate' | 'documentation' | 'bug_fix' | 'plan' | 'experimentation' | 'optimization'
   status: 'backlog' | 'pending' | 'in_progress' | 'review_ready' | 'rejected' | 'done'
   title: string
   description?: string

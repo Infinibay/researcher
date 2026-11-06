@@ -222,7 +222,12 @@ async def update_task(task_id: int, body: TaskUpdate, request: Request):
             ).fetchone()
             return context[0] if context is not None else 1
 
-        if body.status is not None and body.status != row["status"] and conn.execute("SELECT 1 FROM runtime_runs WHERE task_id=? LIMIT 1", (task_id,)).fetchone():
+        from backend.runtime.task_profiles import OWNER_ONLY_LEGACY_TASK_TYPES
+
+        if body.status is not None and body.status != row["status"] and (
+            row["type"] in OWNER_ONLY_LEGACY_TASK_TYPES
+            or conn.execute("SELECT 1 FROM runtime_runs WHERE task_id=? LIMIT 1", (task_id,)).fetchone()
+        ):
             raise HTTPException(409, "Use native task acceptance, stop or context-correction controls to change this task's lifecycle")
         previous_version = context_version()
 

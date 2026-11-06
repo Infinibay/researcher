@@ -13,7 +13,7 @@ from backend.runtime.contracts import (
     WorkspaceBinding,
     command_key,
 )
-from backend.runtime.task_profiles import DOCUMENTARY_TASK_TYPES
+from backend.runtime.task_profiles import DEVELOPMENT_TASK_TYPES, DOCUMENTARY_TASK_TYPES
 
 
 class PlanExecutions:
@@ -129,7 +129,7 @@ class PlanExecutions:
             not tasks
             or {t["task_id"] for t in tasks} != expected
             or any(
-                t["type"] not in (*DOCUMENTARY_TASK_TYPES, "code", "bug_fix")
+                t["type"] not in (*DOCUMENTARY_TASK_TYPES, *DEVELOPMENT_TASK_TYPES)
                 or not set(t["depends_on"]) <= expected
                 for t in tasks
             )

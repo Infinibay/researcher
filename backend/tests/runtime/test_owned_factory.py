@@ -102,8 +102,9 @@ def owned_config(
     )
 
 
+@pytest.mark.parametrize("task_type", ["research", "review"])
 async def test_configured_owned_product_run_persists_draft_and_analysis_receipts(
-    owned_config,
+    owned_config, task_type,
 ):
     """Prove controlled native author delivery and durable analysis receipts through the configured product runtime."""
     from backend.api.main import create_app
@@ -114,8 +115,13 @@ async def test_configured_owned_product_run_persists_draft_and_analysis_receipts
     runtime = configured_runtime(app.state.live_grants, app=app)
     app.state.runtime_service = runtime
     assert type(runtime.runtime).__name__ == "OwnedCodexRuntime"
+    from dataclasses import replace
+
+    c.s.c.conn.execute("UPDATE tasks SET type=? WHERE id=1001", (task_type,))
+    c.s.c.conn.commit()
+    spec = replace(c.s.c.spec, context_version=runtime.store.context_snapshot(101,1001)["context_version"])
     async with runtime:
-        run = await runtime.submit(c.s.c.spec, repository_id=11)
+        run = await runtime.submit(spec, repository_id=11)
         await runtime.wait(run.run_id)
         view = runtime.store.get(101, run.run_id)
         assert view.status == "needs_review", (
@@ -160,6 +166,10 @@ async def test_configured_owned_product_run_persists_draft_and_analysis_receipts
                 != "done"
             )
         assert (c.s.workspace / "fact.txt").read_text() == "137"
+        if task_type == "review":
+            frozen = runtime.store.input_record(101, run.run_id)
+            assert "read-only code audit" in frozen["developer_instructions"]
+            assert "cannot approve" in frozen["developer_instructions"]
         from backend.tests.runtime.authority_fixture import journal
 
         with journal(c.authority) as storage:

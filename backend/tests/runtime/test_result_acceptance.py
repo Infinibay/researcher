@@ -58,8 +58,14 @@ def make_active_result(c, task_id=1001):
 
 
 @pytest.fixture
-def active_result(coordination):
+def active_result(coordination, request):
     """Provide one real live author and its evidence-backed draft."""
+    if getattr(request, "param", "research") == "review":
+        from dataclasses import replace
+
+        coordination.conn.execute("UPDATE tasks SET type='review' WHERE id=1001")
+        coordination.conn.commit()
+        coordination.spec = replace(coordination.spec, context_version=coordination.store.context_snapshot(101,1001)["context_version"])
     return make_active_result(coordination)
 
 
@@ -190,6 +196,7 @@ def make_accepted_result(c):
     return c, lease
 
 
+@pytest.mark.parametrize("active_result", ["research", "review"], indirect=True)
 def test_owner_acceptance_is_distinct_idempotent_and_does_not_publish(delivered_result):
     """An explicit owner action completes one version, without promoting claims or report publication."""
     from backend.research.models import OperationConflict

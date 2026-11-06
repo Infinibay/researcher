@@ -324,7 +324,7 @@ def test_scientific_owner_guard_upgrade_is_atomic_and_keeps_historical_reports(
 
     def skip_scientific(conn, path):
         """Prepare exactly the prior schema, without editing historical migration SQL."""
-        if path.name != "scientific_schema.sql":
+        if path.name not in ("scientific_schema.sql", "native_task_cutover_schema.sql"):
             apply(conn, path)
 
     monkeypatch.setattr(migrations, "apply_sql_resource", skip_scientific)

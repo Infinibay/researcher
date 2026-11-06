@@ -1,0 +1,47 @@
+{
+  "base_commit": "189e2e2",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "1eaa20b70dee23c38f0e4060168287e3a0533f0b7ed04c2b96cc4a0024211183",
+  "observed": {
+    "tests_passed": 235,
+    "failures": [],
+    "skipped": 0,
+    "backend_modules_loaded": 396,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "controlled_native_turns": 3,
+    "actual_kernel_owned_fixture": true,
+    "network": "Disabled except Unix sockets",
+    "generation_and_ken": "Controlled native author/reviewer/auditor and controlled Ken; actual kernel/broker/Git/SQLite. No real-model or retrieval-ranking quality claim.",
+    "seconds": 169.467
+  },
+  "backend_tree": {
+    "matching_source_files": 781,
+    "sha256": "352ee27956144f1cb68d38489523d5f08f05199d0ff70cab7c8c81cb35ccdc66"
+  },
+  "tests": [
+    "backend/tests/runtime/test_code_flow_cutover.py",
+    "backend/tests/runtime/test_code_carryover.py",
+    "backend/tests/runtime/test_file_imports.py",
+    "backend/tests/runtime/test_project_planning.py",
+    "backend/tests/runtime/test_plan_execution.py",
+    "backend/tests/runtime/test_scientific_research.py",
+    "backend/tests/runtime/test_investigation.py",
+    "backend/tests/runtime/test_result_acceptance.py",
+    "backend/tests/runtime/test_code_acceptance.py",
+    "backend/tests/runtime/test_code_publications.py",
+    "backend/tests/runtime/test_code_review_state.py",
+    "backend/tests/runtime/test_code_review_records.py",
+    "backend/tests/runtime/test_runtime_service.py",
+    "backend/tests/flows/test_main_project_flow.py",
+    "backend/tests/flows/test_development_flow.py",
+    "backend/tests/flows/test_development_flow_ci.py",
+    "backend/tests/flows/test_code_review_flow.py",
+    "backend/tests/autonomy/test_scavenger.py",
+    "backend/tests/runtime/test_public_development.py::test_owner_http_develops_checks_reviews_and_accepts_exact_candidate[optimization]",
+    "backend/tests/runtime/test_owned_factory.py::test_configured_owned_product_run_persists_draft_and_analysis_receipts[review]"
+  ],
+  "bootstrap": "Python3.12 -I -S; explicit installed dependency path and original host venv prefix; all backend imports from extracted wheel.",
+  "exclusions": "Three pre-existing inverse40/41/42 cases reject later schemas; inverse43\u201354 remains required (DD003). No guard weakened.",
+  "limits": "Prepared offline assets and installed dependencies; not a clean host install, full suite, real-model evaluation or global legacy producer closure."
+}

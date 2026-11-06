@@ -8,7 +8,11 @@ from fastapi import APIRouter, FastAPI, HTTPException, Path, Query, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
-from backend.api.models.code_carryover import PreviewFileImport, PriorCodeSelection, PriorFilesSelection
+from backend.api.models.code_carryover import (
+    PreviewFileImport,
+    PriorCodeSelection,
+    PriorFilesSelection,
+)
 from backend.api.models.questions import AnswerQuestions
 from backend.runtime.contracts import RunConflict, RunNotFound, RunSpec
 from backend.runtime.peer_process import PeerUncertain
@@ -878,7 +882,15 @@ async def question_inbox(
 async def workspace(project_id: int, task_id: int, request: Request):
     """Expose scoped owner history and only the configured adapter's actual task capabilities without opening inference."""
     data = await asyncio.to_thread(owner_view(request).workspace, project_id, task_id)
+    from backend.runtime.task_profiles import (
+        DEVELOPMENT_TASK_TYPES,
+        OWNER_ONLY_LEGACY_TASK_TYPES,
+    )
+
+    service = request.app.state.runtime_service
     data["runtime"] = {
+        "owner_controlled_task_types": list(OWNER_ONLY_LEGACY_TASK_TYPES),
+        "development_task_types": [kind for kind in DEVELOPMENT_TASK_TYPES if service is not None and kind in service.supported_task_types],
         "configured": request.app.state.runtime_service is not None,
         "supported_task_types": list(
             request.app.state.runtime_service.supported_task_types

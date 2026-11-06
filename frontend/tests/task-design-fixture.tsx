@@ -5,7 +5,7 @@ import { TaskInspector } from '../src/components/tasks/TaskInspector'
 import { TaskInputHistory } from '../src/components/tasks/TaskInputHistory'
 import { useProjectStore } from '../src/stores/project'
 
-export function renderTask({ taskType = 'research', failure = false, inputChange = false, inputState = 'none' } = {}) {
+export function renderTask({ taskType = 'research', failure = false, inputChange = false, inputState = 'none', noRuns = false } = {}) {
   const previousProject = useProjectStore.getState().activeProjectId
   // React SSR reads Zustand's initial snapshot instead of the live browser snapshot.
   const previousInitialProject = useProjectStore.getInitialState().activeProjectId
@@ -19,8 +19,8 @@ export function renderTask({ taskType = 'research', failure = false, inputChange
   client.setQueryData(['task-workspace', 101, 24], {
     project_id:101, task_id:24,
     context: { context_version: 3, task: { type: taskType, status: 'in_progress' }, corrections: [], task_changes: inputChange ? [{version: 3, source_kind: 'task_metadata', actor: null, changes: {description: {before: 'Base 100', after: 'Base <200>'}}}] : [] },
-    runtime: { configured: true, supported_task_types: ['research'], model: 'fixture-model' },
-    runs: [{ execution_kind: 'research', run_id: 'fixture-run', status: 'needs_review', context_version: 2, model: 'fixture-model', prompt: 'Comprobar', result: { summary: 'Hallazgo provisional: falta comprobar el servidor.' } }],
+    runtime: { configured: true, supported_task_types: ['research'], owner_controlled_task_types: ['research','investigation','review','code','bug_fix','test','design','integrate','documentation','experimentation','optimization','plan'], development_task_types: ['code','bug_fix','test','design','integrate','documentation','experimentation','optimization'], model: 'fixture-model' },
+    runs: noRuns ? [] : [{ execution_kind: 'research', run_id: 'fixture-run', status: 'needs_review', context_version: 2, model: 'fixture-model', prompt: 'Comprobar', result: { summary: 'Hallazgo provisional: falta comprobar el servidor.' } }],
     repositories: [], questions: [], references: [], sources: [], reports: [],
   })
   if (inputState !== 'none') client.setQueryData(['run-input', 101, 'fixture-run'], inputState === 'unknown' ? {available:false,reason:'no_record'} : {available:true,native_start_observed:true,model:'fixture-model',input_sha256:'a'.repeat(64),instructions_sha256:'b'.repeat(64),developer_instructions:'Preserve evidence strength.',business_catalog:[],input_text:JSON.stringify({context_version:2,request:'Original request <kept>',conversation:{cutoff_message_id:17,messages:[{message_id:11}],other_task_messages_excluded:2}})})

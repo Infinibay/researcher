@@ -8,6 +8,7 @@ from dataclasses import dataclass
 
 from backend.runtime.candidate_state import CodeCandidates
 from backend.runtime.contracts import InputTooLarge, RunConflict, text
+from backend.runtime.task_profiles import DEVELOPMENT_TASK_TYPES
 
 
 def _encoded(value):
@@ -150,7 +151,7 @@ class CodeCarryovers:
             "SELECT type FROM tasks WHERE project_id=? AND id=?",
             (spec.project_id, spec.task_id),
         ).fetchone()
-        if task is None or task["type"] not in ("code", "bug_fix"):
+        if task is None or task["type"] not in DEVELOPMENT_TASK_TYPES:
             raise RunConflict("Prior code is input only for a fresh development task")
         packet = (
             FileImports(self.runs).packet(

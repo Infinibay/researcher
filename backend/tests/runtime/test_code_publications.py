@@ -150,7 +150,7 @@ def test_publication_request_is_immutable_and_startup_preserves_original_records
     assert publications.request(101, run.run_id)["intent"] == intent.__dict__
     assert (
         s.c.conn.execute("SELECT max(version) FROM schema_migrations").fetchone()[0]
-        == 53
+        == 54
     )
 
 

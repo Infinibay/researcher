@@ -4,7 +4,7 @@ import { createServer, type ViteDevServer } from 'vite'
 
 let server: ViteDevServer
 let renderTaskInputHistory: (changes: import('../src/api/runtime.ts').TaskInputChange[]) => string
-let renderTask: (options?: { failure?: boolean; taskType?: string; inputChange?: boolean; inputState?: string }) => string
+let renderTask: (options?: { failure?: boolean; taskType?: string; inputChange?: boolean; inputState?: string; noRuns?: boolean }) => string
 before(async () => {
   server = await createServer({ configFile: false, server: { middlewareMode: true, hmr: false, ws: false, watch: null }, esbuild: { jsx: 'automatic' }, optimizeDeps: { noDiscovery: true } })
   ;({ renderTask, renderTaskInputHistory } = await server.ssrLoadModule('/tests/task-design-fixture.tsx'))
@@ -74,4 +74,11 @@ test('native task lifecycle uses explicit work controls instead of a generic don
 test('structured project context edits remain readable and escaped without crashing task history',()=>{
  const html=renderTaskInputHistory([{version:4,source_kind:'task_metadata',actor:null,changes:{context_json:{before:{project_metadata:{description:'Old <claim>'}},after:{project_metadata:{description:'Inspect 138 units',flags:[true,false]}}}}}])
  assert.match(html,/Old &lt;claim&gt;/);assert.match(html,/Inspect 138 units/);assert.match(html,/project_metadata/);assert.match(html,/true/);assert.match(html,/false/);assert.doesNotMatch(html,/Old <claim>/)
+})
+
+
+test('a migrated technical task cannot use the old lifecycle selector before first admission',()=>{
+ const html=renderTask({taskType:'optimization',noRuns:true})
+ assert.match(html,/<select[^>]*aria-label="Estado de la tarea"[^>]*disabled=""/)
+ assert.match(html,/El estado se controla desde la pestaña Trabajo/)
 })

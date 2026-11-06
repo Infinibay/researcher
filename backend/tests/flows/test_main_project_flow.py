@@ -125,32 +125,21 @@ class TestMainProjectFlowInitialize:
 class TestMainProjectFlowTaskRouting:
     """Test the check_and_launch_tasks router and _launch_pending_tasks logic."""
 
-    @patch("backend.flows.main_project_flow.MainProjectFlow._launch_pending_tasks")
-    def test_check_and_launch_tasks_delegates(self, mock_launch, db_conn, executing_project):
-        """check_and_launch_tasks router delegates to _launch_pending_tasks."""
+    def test_check_and_launch_tasks_hands_off(self, db_conn, executing_project):
+        """Actual historical tasks are referenced without legacy dispatch or completion."""
         from backend.flows.main_project_flow import MainProjectFlow
-
-        mock_launch.return_value = "task_completed"
 
         flow = MainProjectFlow()
         flow.state.project_id = executing_project
+        assert flow.check_and_launch_tasks() == "native_owner_required"
 
-        result = flow.check_and_launch_tasks()
-        assert result == "task_completed"
-        mock_launch.assert_called_once()
-
-    @patch("backend.flows.main_project_flow.MainProjectFlow._launch_pending_tasks")
-    def test_check_and_launch_no_tasks(self, mock_launch, db_conn, sample_project):
-        """check_and_launch_tasks returns no_pending_tasks when nothing to do."""
+    def test_empty_tasks_do_not_accept_a_project(self, db_conn, sample_project):
+        """An empty list is not native owner acceptance of project completion."""
         from backend.flows.main_project_flow import MainProjectFlow
-
-        mock_launch.return_value = "no_pending_tasks"
 
         flow = MainProjectFlow()
         flow.state.project_id = sample_project
-
-        result = flow.check_and_launch_tasks()
-        assert result == "no_pending_tasks"
+        assert flow.check_and_launch_tasks() == "native_owner_required"
 
     def test_route_initialization_new(self, db_conn):
         """route_initialization routes NEW status to start_planning."""

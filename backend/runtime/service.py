@@ -36,7 +36,7 @@ from backend.runtime.contracts import (
 from backend.runtime.peer_registry import AttemptPeers
 from backend.runtime.recovery import RunRecovery
 from backend.runtime.sqlite_questions import SQLiteQuestionStore
-from backend.runtime.task_profiles import DOCUMENTARY_TASK_TYPES
+from backend.runtime.task_profiles import DEVELOPMENT_TASK_TYPES, DOCUMENTARY_TASK_TYPES
 from backend.runtime.workspaces import WorkspaceRegistry
 
 __all__ = ["RuntimeService", "WorkspaceRegistry"]
@@ -604,7 +604,7 @@ class RuntimeService:
                 self.store.context_snapshot, run.project_id, run.task_id
             )
             expected_types = (
-                ("code", "bug_fix")
+                DEVELOPMENT_TASK_TYPES
                 if run.execution_kind
                 in (
                     "development",
@@ -953,7 +953,7 @@ class RuntimeService:
             code_review = current_run.execution_kind == "code_review"
             development = current_run.execution_kind == "development"
             expected_types = (
-                ("code", "bug_fix")
+                DEVELOPMENT_TASK_TYPES
                 if code_review or development
                 else DOCUMENTARY_TASK_TYPES
                 if current_run.execution_kind == "finding_review"

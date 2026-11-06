@@ -92,7 +92,7 @@ class ProjectState(BaseModel):
 
 
 class DevelopmentState(BaseModel):
-    """State for DevelopmentFlow — handles task assignment, coding, and review."""
+    """Historical development snapshot; assignment, CI and approval fields are attributed old state, never native authority."""
 
     project_id: int = 0
     project_name: str = ""
@@ -113,7 +113,7 @@ class DevelopmentState(BaseModel):
 
 
 class CodeReviewState(BaseModel):
-    """State for CodeReviewFlow — manages the dev/reviewer review cycle."""
+    """Historical code-review snapshot; old verdicts and CI fields never accept or publish a native candidate."""
 
     project_id: int = 0
     project_name: str = ""

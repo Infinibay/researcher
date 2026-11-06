@@ -33,6 +33,7 @@ from backend.runtime.business_mediation import (
     BusinessTools,
     ProjectTools,
 )
+from backend.runtime.code_audit_instructions import CODE_AUDIT_INSTRUCTIONS
 from backend.runtime.code_review_instructions import CODE_REVIEW_INSTRUCTIONS
 from backend.runtime.codex_rpc import JsonRpcClient, RpcProtocolError
 from backend.runtime.codex_session import CodexSession, ExecutionLimits
@@ -401,6 +402,7 @@ class OwnedCodexRuntime:
         planning = (
             run.execution_kind == "research" and context["task"]["type"] == "plan"
         )
+        audit = run.execution_kind == "research" and context["task"]["type"] == "review"
         investigation = run.execution_kind == "research" and context["task"]["type"] == "investigation"
         development = run.execution_kind == "development"
         code_review = run.execution_kind == "code_review"
@@ -598,6 +600,8 @@ class OwnedCodexRuntime:
                                     if planning
                                     else INVESTIGATION_INSTRUCTIONS
                                     if investigation
+                                    else INSTRUCTIONS + CODE_AUDIT_INSTRUCTIONS
+                                    if audit
                                     else INSTRUCTIONS + SCIENTIFIC_RESEARCH_INSTRUCTIONS
                                 ),
                                 sandbox="workspace-write"

@@ -30,7 +30,7 @@ export function TaskInspector({
   // Subscribe to the workbench's scoped read without creating a second polling request.
   const workspace = useQuery<TaskWorkspace>({queryKey:['task-workspace',projectId,taskId],queryFn:()=>{if(projectId==null) throw new Error('Selecciona un proyecto antes de consultar la tarea.');return taskWorkspace(projectId,taskId)},enabled:false})
   const scopedWorkspace = workspace.data?.project_id === projectId && workspace.data?.task_id === taskId
-  const nativeOwned = !!scopedWorkspace && !!workspace.data?.runs.length
+  const nativeOwned = !!scopedWorkspace && (!!workspace.data?.runs.length || !!workspace.data?.runtime.owner_controlled_task_types?.includes(workspace.data.context.task.type))
   const lifecycleEditable = !!scopedWorkspace && !workspace.isError && !nativeOwned
 
   const addComment = useAddTaskComment()

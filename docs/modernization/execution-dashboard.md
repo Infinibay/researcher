@@ -4,12 +4,39 @@ Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../supe
 
 ## Estado comprobado
 
-- Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; falta cutover de consumidores/loops antiguos.
+- Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución antigua por tarea retirada, faltan productores de proyecto e inferencia auxiliar.
 - Interfaz: seis pilotos, 18/36 conceptos de escritorio y 6/12 móviles; seis rutas pendientes y 0/12 páginas completamente aceptadas.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: importar rutas de trabajo anterior
+## Etapa actual: retirar ejecución antigua por tarea
+
+**Resultado:** DevelopmentFlow/CodeReviewFlow son entradas de solo lectura al
+propietario. Se retiraron sus loops/CI/rework/automerge, el despacho/reset/espera
+de tareas de MainProjectFlow y la recuperación/limpieza del scavenger. Las doce
+categorías persistidas tienen entrada nativa; ocho producen archivos del repo,
+`review` produce una auditoría de solo lectura y `plan` conserva su grafo nativo.
+Planificador/API/interfaz usan el mapa compartido. Esquema54 conserva historia y
+bloquea claims/done antiguos; admisión por sí sola tampoco permite completar.
+
+**Verificación:**166pruebas dirigidas y97frontend pasan (grupos se solapan).
+Wheel aislado:235PASS0FAIL0SKIP169,47s,396imports sólo del paquete. Kernel/Git/SQLite
+reales y3turnos controlados: optimización→candidato→check→revisión independiente→
+aceptación83,12s; auditoría readonly→fuente/hallazgo/informe1,85s, fuente sin cambios.
+0turnos de modelo real. TypeScript/Vite4,84s.101definiciones comprobadas; falta un
+docstring en un test heredado y un import de test tiene aviso nuevo, anotados en
+DD021.0avisos nuevos de producción;12heredados,29resueltos. No aceptación visual,
+suite global verde ni cierre físico global afirmados.
+[Resultados](code-flow-results.json), [paquete](code-flow-packaging.json),
+[contrato](../architecture/native-task-flow-cutover.md).
+
+**Siguiente bloque principal:** retirar productores de proyecto de
+FlowManager/AgentLoop/listeners y la inferencia auxiliar, preservando resultados
+necesarios y Stop de trabajadores realmente registrados. Después, selección de
+material para sucesoras del plan y capacidades pendientes. No volver a pulir
+snapshots/selectores/journals ni tratar un handoff como prueba de cierre.
+
+## Etapa anterior: importar rutas de trabajo anterior
 
 **Resultado:** Tareas/Conversación permiten usar archivos elegidos de worktrees
 antiguos o copias privadas sin candidato. Conservan bytes, modo ejecutable, enlace
@@ -31,12 +58,6 @@ y778fuentes coincidentes. No se repitió la cadena física para ese guard negati
 No se afirman suite global verde, modelos/comprensión ni aceptación visual nueva.
 [Resultados](file-import-results.json), [paquete](file-import-packaging.json),
 [contrato](../architecture/selected-old-file-import.md).
-
-**Siguiente bloque principal:** retirar los resultados y consumidores de
-DevelopmentFlow/CodeReviewFlow mediante la autoría/revisión nativas existentes y
-los caminos de conservación ya conectados. Después, selección para sucesoras del
-plan y tipos/auxiliares restantes. La exclusión global y el resto íntegro del plan
-siguen activos. No añadir otra pasada de snapshot, selector, journal o broker.
 
 ## Etapa anterior: reutilizar cambios nativos como entrada nueva
 
