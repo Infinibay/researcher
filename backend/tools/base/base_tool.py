@@ -8,9 +8,8 @@ import sqlite3
 from abc import ABC
 from typing import TYPE_CHECKING, Any
 
-from crewai.tools import BaseTool
-
 from backend.config.settings import settings
+from backend.tools._legacy_access import load_legacy_tool_base
 from backend.tools.base.context import (
     get_context_for_agent,
     get_current_agent_id,
@@ -25,6 +24,8 @@ if TYPE_CHECKING:
     from backend.security.pod_manager import SandboxResult
     from backend.tools.base.context import ToolContext
 
+
+BaseTool = load_legacy_tool_base()
 
 logger = logging.getLogger(__name__)
 

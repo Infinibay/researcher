@@ -15,6 +15,9 @@ def __getattr__(name: str):
     """Load the historical catalogue only for a known explicitly requested export; unknown attributes do not initialize anything."""
     if name not in _LEGACY_EXPORTS:
         raise AttributeError(name)
+    from backend.tools._legacy_access import require_legacy_extra
+
+    require_legacy_extra()
     value = getattr(import_module("backend.tools._legacy_catalog"), name)
     globals()[name] = value
     return value

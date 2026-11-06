@@ -324,3 +324,16 @@ frameworks/ciclos al importar la API/base. La metadata histórica sigue resolvie
 No se eliminaron aún las dependencias de esos lectores/constructores ni se probó
 instalación nativa limpia. Es el siguiente corte junto con MCP/Git/instalación y
 pruebas de comportamiento retirado; no sustituirlo por pulido de hooks.
+
+
+## Instalación predeterminada posterior a b2ad539
+
+El runtime nativo funciona en una instalación independiente sin CrewAI/crewai-tools/
+LiteLLM/Ollama/Chroma/los parsers tree-sitter antiguos. Esos once requisitos son un
+extra histórico explícito y no otro backend. API/CLI e investigación/planificación/
+desarrollo pasan desde el paquete instalado; ningún import backend proviene del
+checkout o venv anterior. [Contrato](native-python-installation.md).
+
+No se borraron todos los consumidores legacy ni se provisionó el host completo.
+MCP/Git/agentes/conocimiento/instalador y pruebas antiguas son el siguiente corte,
+sin volver a pulir el selector de dependencias o el wrapper de metadata.

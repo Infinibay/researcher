@@ -9,7 +9,33 @@ Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: retirar inferencia auxiliar y fallback de proveedor
+## Etapa actual: instalación Python nativa independiente
+
+**Resultado:**20dependencias directas por defecto; once paquetes de frameworks,
+proveedores, vector DB y parsers antiguos quedan en el extra histórico `legacy`.
+Lock/export regenerados; extras de proveedor viejos retirados. Los pedidos de
+lectores antiguos sin extra fallan antes de cargar frameworks, con explicación
+precisa. README usa la entrada nativa; no hay otra tabla, controller o loop.
+
+**Verificación:** venv nuevo, no editable, sin heredar `.venv`;85distribuciones
+incluyendo pruebas y proyecto, ninguno de los once paquetes antiguos. Wheel final:
+193PASS0FAIL0SKIP160.52s,294imports backend del entorno nuevo y787fuentes
+Python/SQL coincidentes;527archivos de aplicación instalados coinciden, extensión
+incluida. Cuatro turnos controlados kernel/broker/Git/SQLite: investigación,
+planificación y optimización/check/revisor/aceptación.0modelos reales.
+CLI/bootstrap instalados, init esquema54/integridad y rechazo conservando base
+existente;`uv pip check` pasa.21casos del entorno anterior también pasan.
+13definiciones documentadas,0avisos Ruff nuevos. No nueva aceptación visual.
+[Resultados](native-installation-results.json), [entorno](native-installation-packaging.json),
+[contrato](../architecture/native-python-installation.md).
+
+**Siguiente bloque principal:** entradas/consumidores antiguos de MCP/Git/agentes/
+conocimiento e instalación `start.sh`, preservando capacidades necesarias. Este
+venv no equivale a provisionar host/cuenta/SDK/Ken reales ni restaurar un despliegue.
+Cierre integral del proyecto, material de sucesoras/publicación retenida,
+settings/visuales/prompts/evaluaciones y el resto íntegro del plan siguen activos.
+
+## Etapa anterior: retirar inferencia auxiliar y fallback de proveedor
 
 **Resultado:** configuración/cliente/probes antiguos rechazan antes de construir
 modelos, generar o reintentar. No se exportan API keys ni se parchean clientes;
@@ -30,12 +56,6 @@ Protocolo real de búsqueda del Codex fijado comprobado sin cuenta ni generació
 4avisos de estilo en hooks inertes quedanDD023;7avisos heredados/22resueltos.
 [Resultados](auxiliary-results.json), [paquete](auxiliary-packaging.json),
 [contrato](../architecture/native-auxiliary-inference-cutover.md).
-
-**Siguiente bloque principal:** instalación/dependencias del runtime nativo y
-consumidores de herramientas/agentes/conocimiento/MCP/Git antiguos. Contrastar las
-capacidades actuales antes de quitar dependencias; no volver a pulir wrappers,
-snapshots o registros. Settings/modelo nativo, cierre integral del proyecto,
-material de sucesoras/publicación retenida y el resto del plan siguen pendientes.
 
 ## Etapa anterior: retirar activación antigua de proyectos
 

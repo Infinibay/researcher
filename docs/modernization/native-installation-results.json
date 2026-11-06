@@ -1,0 +1,78 @@
+{
+  "base_commit": "b2ad539",
+  "status": "native_default_dependencies_installed_and_exercised_without_legacy_frameworks",
+  "schema_version": 54,
+  "new_persistence_or_execution_loop": false,
+  "implemented": [
+    "Moved11old framework/provider/vector/parser distributions from default dependencies to explicit optional [legacy] historical-reader extra. Native default has20direct requirements; spider optional unchanged. Unsupported anthropic/gemini backend extras removed; current Python range unchanged.",
+    "Regenerated uv.lock offline and default nondev requirements.txt. Lock contains188packages across all optional groups; that is not the installed default graph.",
+    "Historical metadata/base-class access checks optional dependency metadata before importing frameworks. Missing extra yields a specific LegacyMetadataUnavailable error; no install, provider choice, partial role catalogue load or native configuration mutation. Explicit old schemas still work in the preserved original development environment.",
+    "README now documents native default/smoke/entry, separate historical-reader extra and actual runtime/host toolchain setup, instead of instructing an API-key/legacy provider startup for new installs."
+  ],
+  "verification": {
+    "red": [
+      "2FAIL0.13s: old mandatory packages and unsupported provider extras.",
+      "Missing optional-reader module:1FAIL2PASS0.17s."
+    ],
+    "source": {
+      "passed": 21,
+      "seconds": 5.54,
+      "scope": "manifest/optional-reader contracts, old provider retirement/metadata compatibility and API startup in preserved original .venv"
+    },
+    "isolated_install": {
+      "method": "uv sync --locked --offline --no-editable with explicit new UV_PROJECT_ENVIRONMENT; final wheel then reinstalled --offline --no-deps. Existing .venv untouched.",
+      "installed_distributions": 85,
+      "includes": "Default+development test tooling and the project; not a production-only package count.",
+      "legacy_installed": [],
+      "project_noneditable": true,
+      "legacy_frameworks_loaded": false,
+      "loaded_backend_modules": 294,
+      "all_backend_imports_from_native_env": true,
+      "matching_python_sql_files": 787
+    },
+    "packaged_suite": {
+      "passed": 193,
+      "failures": [],
+      "skipped": 0,
+      "seconds": 160.522,
+      "bootstrap": "Python-I from a temporary directory outside checkout, explicit separate pytest.ini; no source checkout or old site-packages import.",
+      "controlled_native_turns": 4,
+      "real_model_turns": 0,
+      "physical_cases": [
+        {
+          "case": "test_owner_http_develops_checks_reviews_and_accepts_exact_candidate[optimization]",
+          "seconds": 82.844
+        },
+        {
+          "case": "test_configured_owned_product_run_persists_draft_and_analysis_receipts[research]",
+          "seconds": 1.877
+        },
+        {
+          "case": "test_owned_project_start_proposes_then_owner_accepts_without_executing_children",
+          "seconds": 1.383
+        }
+      ],
+      "scope": "Actual kernel/broker/Git/SQLite research, planning and optimization author/check/review/owner acceptance. Controlled generation and Ken; actual pinned native search policy, no account or inference."
+    },
+    "console": "native-installation-console.json: installed CLI/bootstrap --help, fresh schema54 init/integrity and repeat-init refusal preserving actual database bytes; uv pip check passes, all527application members match final wheel including compiled extension.",
+    "quality": {
+      "changed_or_new_python_definitions": 13,
+      "missing_docstrings": 0,
+      "new_lint": 0,
+      "inherited_lint": 0
+    },
+    "frontend": "No frontend source change/new browser or full-page/human acceptance."
+  },
+  "dependency_contract": {
+    "default_direct": 20,
+    "legacy_optional_direct": 11,
+    "locked_all_groups": 188,
+    "wheel_sha256": "7fc0c6f44221785d2cd4d1639bac293ee7b8bedace2e104c3d045711818f396a"
+  },
+  "remaining": [
+    "Real host provisioning/deployment/start.sh, mandatory separately installed Codex/Ken account/toolchain, real model/Ken ranking evaluations and installation on other Python/OS versions; this same-host Python environment is not a full host acceptance.",
+    "Remaining old agent/knowledge/tool/MCP/Git consumers and historical test migration; [legacy] is metadata inspection, never an alternate inference backend.",
+    "Full project acceptance/final report, graph successor material/retained publication, settings/model UI, endpoint/TUI parity, all prompt/book/science/human evaluations, six routes/all full-page acceptance,43scenarios/current global suite, clean restore/inverses43\u201354/final fresh review."
+  ],
+  "limits": "Not whole-plan completion, global suite green, every old module removed, real-provider quality, cross-process/unregistered legacy worker closure, existing deployment recovery or full host installation."
+}

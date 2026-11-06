@@ -26,7 +26,11 @@
         "docs/architecture/native-auxiliary-inference-cutover.md",
         "docs/modernization/auxiliary-results.json",
         "docs/modernization/auxiliary-packaging.json",
-        "backend/tests/runtime/test_auxiliary_inference_retirement.py"
+        "backend/tests/runtime/test_auxiliary_inference_retirement.py",
+        "docs/architecture/native-python-installation.md",
+        "docs/modernization/native-installation-results.json",
+        "docs/modernization/native-installation-packaging.json",
+        "docs/modernization/native-installation-console.json"
       ]
     },
     "C02": {
@@ -582,7 +586,11 @@
         "docs/architecture/native-auxiliary-inference-cutover.md",
         "docs/modernization/auxiliary-results.json",
         "docs/modernization/auxiliary-packaging.json",
-        "backend/tests/runtime/test_auxiliary_inference_retirement.py"
+        "backend/tests/runtime/test_auxiliary_inference_retirement.py",
+        "docs/architecture/native-python-installation.md",
+        "docs/modernization/native-installation-results.json",
+        "docs/modernization/native-installation-packaging.json",
+        "docs/modernization/native-installation-console.json"
       ]
     },
     "E06": {
@@ -841,7 +849,11 @@
         "docs/architecture/native-auxiliary-inference-cutover.md",
         "docs/modernization/auxiliary-results.json",
         "docs/modernization/auxiliary-packaging.json",
-        "backend/tests/runtime/test_auxiliary_inference_retirement.py"
+        "backend/tests/runtime/test_auxiliary_inference_retirement.py",
+        "docs/architecture/native-python-installation.md",
+        "docs/modernization/native-installation-results.json",
+        "docs/modernization/native-installation-packaging.json",
+        "docs/modernization/native-installation-console.json"
       ]
     },
     "E12": {

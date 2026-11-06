@@ -22,19 +22,39 @@ do not configure the native subscription runtime.
   `cgroup.kill` (Linux 5.14 or newer). No spawn-then-migrate fallback is provided.
 - **OpenSSL CLI** for ephemeral local TLS certificates in the test suite
 - **Node.js 24 LTS** (for the frontend; version in `frontend/.node-version`)
-- **Podman** or **Docker** (for sandbox and Forgejo)
-- **Ollama** and local-model GPU sizing apply to the retained legacy provider setup
-  below; the native entry uses the configured subscription runtime.
+- **Podman** or **Docker** only for the retained Forgejo/container deployment.
+- The native backend uses the separately configured Codex toolchain, subscription
+  authentication and the required published `ken-rank` installation. See
+  [owned runtime setup](docs/architecture/owned-product-runtime.md).
 
 ## Reproducible development setup
 
 ```bash
 uv sync --locked
-uv run --locked pytest
+uv run --locked pytest backend/tests/api/test_startup.py backend/tests/cli/test_bootstrap.py
 cd frontend
 npm ci
 npm run build
 ```
+
+The Python install defaults to the native runtime. CrewAI, crewai-tools, LiteLLM,
+Ollama, Chroma and the old tree-sitter stack are optional historical readers:
+
+```bash
+# Only when inspecting old tool schemas or running the historical test corpus:
+uv sync --locked --extra legacy
+```
+
+This extra does not enable an inference backend. Old provider calls are retired;
+actual model selection belongs to the configured native runtime. The former
+`anthropic` and `gemini` extras are no longer advertised. A request for an old
+catalogue without `[legacy]` explains the missing optional reader before loading
+frameworks. Native database/API/CLI operations need none of those packages.
+
+The commands above run native smoke checks. The full historical test corpus still
+has migration failures and expects the optional legacy readers; it is not a claim
+that every test has already been ported. See the
+[native installation evidence](docs/modernization/native-installation-results.json).
 
 The test command blocks external sockets and limits each test to 20 seconds.
 Real execution-domain tests create and remove unique children under the test
@@ -52,11 +72,9 @@ export the compatibility file instead of editing it by hand:
 uv export --locked --no-dev --no-emit-project --format requirements-txt --output-file requirements.txt
 ```
 
-The standalone MCP server has its own locked script environment:
-
-```bash
-uv run --locked --script scripts/infinibay_mcp_server.py
-```
+The general historical MCP script remains a migration consumer. Native generation
+uses the admitted, scoped business MCP and Ken; installing `[legacy]` does not
+authorize an old MCP/agent to mutate a native task.
 
 The new scoped research MCP has a separate locked script environment:
 
@@ -86,31 +104,37 @@ Implementation status for the modernization is recorded in
 ## Quick Start
 
 ```bash
-# 1. Clone and enter the repo
-git clone https://github.com/your-org/infinibay.git
-cd infinibay
-
-# 2. Copy and edit the environment config
-cp .env.example .env
-# Edit .env — set your LLM model and API key (or use Ollama defaults)
-
-# 3. For a NEW installation only: initialize the selected database
+# From this checkout: install the locked native Python environment
 uv sync --locked
+
+# For a NEW installation only; preserve existing deployments for migration/restore
 export INFINIBAY_DB="${XDG_STATE_HOME:-$HOME/.local/state}/researcher/source.db"
+mkdir -p "$(dirname "$INFINIBAY_DB")"
 uv run --locked researcher-bootstrap init-db --database "$INFINIBAY_DB"
 
-# 4. Start the legacy development stack (runtime migration is still in progress)
-./start.sh
+# Configure INFINIBAY_RUNTIME_CONFIG using the owned-runtime guide, then serve
+uv run --locked python -m backend.api.run
+
+# In another terminal, start the frontend
+cd frontend
+npm ci
+npm run dev -- --host 127.0.0.1
 ```
 
-`start.sh` checks the initialized database before external setup, installs the locked
-Python environment, migrates recognized data and starts the legacy Forgejo/backend/
-frontend stack. Its provider/Forgejo lifecycle is still being modernized. For the
-Codex subscription profile, follow [the owned runtime configuration](docs/architecture/owned-product-runtime.md).
+Configure the actual Codex account/model, Ken installation, source workspace and
+owned process resources using [the native runtime guide](docs/architecture/owned-product-runtime.md).
+Python dependency installation does not provision these host components or restore
+an existing deployment. The initialization command refuses existing files; use
+migration/restore for existing data. The previous `start.sh`/Forgejo installation
+path remains a separate migration item and is not the native setup above.
 
 Open http://localhost:5173 in your browser.
 
-## Sandbox
+## Historical container deployment
+
+The following container settings describe the retained deployment being migrated.
+The native runtime uses the owned-process and authority configuration documented
+above.
 
 When `INFINIBAY_SANDBOX_ENABLED=true`, each agent runs its tools inside an isolated Podman/Docker pod. This means file operations, shell commands, and git operations happen in a container — not on your host machine.
 

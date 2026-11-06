@@ -1,0 +1,26 @@
+{
+  "commands": [
+    {
+      "command": "researcher --help",
+      "exit": 0
+    },
+    {
+      "command": "researcher-bootstrap --help",
+      "exit": 0
+    },
+    {
+      "command": "researcher-bootstrap init-db --database /tmp/researcher-native-console-mg28runm/source.sqlite",
+      "exit": 0
+    },
+    {
+      "command": "repeat init-db",
+      "exit": 1,
+      "existing_database_preserved": true
+    }
+  ],
+  "database_schema": 54,
+  "integrity": "ok",
+  "application_members_match_final_wheel": 527,
+  "dependency_check": "Using Python 3.12.9 environment at: .superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env\nChecked 85 packages in 2ms\nAll installed packages are compatible\n",
+  "limits": "Synthetic NEW source database and preserved refusal; not existing-deployment restore, host cgroup provisioning or actual subscription/Ken installation."
+}
