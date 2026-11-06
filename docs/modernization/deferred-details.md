@@ -215,3 +215,13 @@ Después de todas las capacidades principales: los dos avisos I001 de
 tras retirar un caso de wrapper. No reabrir el recorrido por estos detalles.
 Los dos fallos de migración/inversa reproducidos y la recuperación de informes
 con bytes sólo en archivos son trabajo principal de datos/restore, no DD055.
+
+## DD056 — estilo tras retirar bibliotecas antiguas
+
+Después de todas las capacidades principales: tres imports sin uso en
+`backend/tests/flows/conftest.py` (F401) y el orden de `__all__` en
+`backend/tools/base/__init__.py` (RUF022), registrados en
+`legacy-dependencies-lint.json`. El marcador pytest `integration` sin registrar
+también queda para la pasada final. Los siete fallos de flows reproducidos y
+la ejecución pendiente de los tres casos de pod son trabajo principal de
+servicios/operación, no detalles de estilo.

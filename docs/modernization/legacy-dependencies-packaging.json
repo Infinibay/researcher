@@ -1,0 +1,46 @@
+{
+  "base_commit": "e78d752",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "sha256": "ed91db524d4c71d23adca99fe6de4856c850ff03713f6683b02e74f3653d735d",
+  "observed": {
+    "exit_code": 1,
+    "cases": 134,
+    "failed": 7,
+    "failed_cases": [
+      "test_start_and_stop_all",
+      "test_add_custom_listener",
+      "test_backlog_to_done_rejected",
+      "test_backlog_to_failed_rejected",
+      "test_update_task_status_safe_swallows_errors",
+      "test_routes_to_no_structure_when_no_tasks",
+      "test_routes_to_not_complete_when_tasks_exist"
+    ],
+    "skipped_cases": [
+      "test_start_exec_stop",
+      "test_idempotent_start",
+      "test_exec_with_stdin"
+    ],
+    "skipped": 3,
+    "seconds": 10.322,
+    "all_backend_imports_installed": true,
+    "backend_modules": 256,
+    "matching_python_sql": 676,
+    "installed_distributions": 83,
+    "legacy_installed": false,
+    "legacy_extra_or_requirement": false,
+    "real_model_calls": 0,
+    "real_provider_calls": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_native_adapter_retirement.py",
+    "backend/tests/flows",
+    "backend/tests/integration",
+    "backend/tests/runtime/test_legacy_catalog_removal.py",
+    "backend/tests/runtime/test_auxiliary_inference_retirement.py",
+    "backend/tests/api/test_startup.py",
+    "backend/tests/cli/test_bootstrap.py",
+    "backend/tests/research/test_wiki_imports.py",
+    "backend/tests/research/test_stdio_server.py"
+  ],
+  "limits": "Five legacy libraries and their optional extra removed, with five unused helper modules/lazy export and old persistence fixtures. Declared/locked/exported dependencies and shell launcher tests run only from source because pyproject/uv.lock/requirements/start.sh are checkout artifacts; installed metadata separately proves no legacy extra/requirement. Seven old flow failures reproduce in the preceding e78d752 source snapshot using the retained legacy environment, with address-only normalization; the installed suite is not fully green. Three old pod-image integration cases remain skipped. No data deletion, migration/restore, current global or model/human/scientific/page acceptance claim. Existing development seed db/seeds/dev_data.sql remains outside unchanged db/*.sql package data."
+}

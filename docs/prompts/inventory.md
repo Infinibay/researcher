@@ -1,10 +1,12 @@
 # Inventario y revisión de prompts
 
 Catálogo nativo versión2; revisión inicial sobre `85f7acd`, actualizada después de
-retirar herramientas de conocimiento sobre `a5b57af`. El [inventario detallado](inventory.json)
-contiene 234 entradas candidatas de 370 archivos Python. **No son 234 prompts distintos
+retirar bibliotecas y auxiliares antiguos sobre `e78d752`. El [inventario detallado](inventory.json)
+contiene 234 entradas candidatas de 365 archivos Python. **No son 234 prompts distintos
 ni 234 evaluaciones con modelos.** Se archivan 364 entradas de los módulos eliminados,
 conservando sus decisiones históricas en `retired_entries`.
+La retirada de bibliotecas/auxiliares elimina cinco módulos de la fuente inventariada
+sin cambiar candidatos, descripciones ni decisiones semánticas de prompts.
 El corte de conocimiento archiva45 candidatos y revisa dos descripciones:
 búsqueda conjunta con cobertura/permisos por fuente y lectura de informes con
 procedencia histórica explícita. Se revalidan48 AST sin cambios contra los

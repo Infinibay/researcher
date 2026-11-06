@@ -1,8 +1,8 @@
 # Infinibay
 
-A prototype multi-agent swarm system for autonomous research, investigation, and software development — designed to run on consumer hardware with small open-weight models (14B parameters and under).
+A local workspace for research, investigation and software development with recoverable agent execution.
 
-Agents collaborate through an event-driven architecture: a team lead plans work, researchers gather information, developers write code, and reviewers check quality. All orchestrated by flows that react to events in real time.
+Agents work through a configured native runtime with scoped tools, retained evidence and separate review and owner acceptance. Planning, execution, correction and publication have distinct recorded decisions.
 
 The modernization now connects native project planning, research/development,
 independent review and explicit acceptance to one configured owner service.
@@ -14,7 +14,7 @@ do not configure the native subscription runtime.
 
 ## Requirements
 
-- **Python 3.12 or 3.13** (the transitional CrewAI dependency does not support 3.14)
+- **Python 3.12 or 3.13** (the retained supported range; broader runtime/kernel compatibility still needs verification)
 - **uv** (locked Python installation)
 - **Linux C compiler and Python development headers** for the native execution-domain
   extension; source installs now build a platform-specific wheel. Its kernel path
@@ -37,13 +37,10 @@ npm ci
 npm run build
 ```
 
-The Python install defaults to the native runtime. CrewAI, crewai-tools, LiteLLM,
-Ollama and Chroma are optional historical readers:
-
-```bash
-# Only when inspecting old tool schemas or running the historical test corpus:
-uv sync --locked --extra legacy
-```
+The Python installation uses the native runtime. CrewAI, crewai-tools, LiteLLM,
+Ollama and Chroma, their old tool wrappers and the `legacy` extra have been removed.
+Historical database records remain readable through the scoped native interfaces;
+removing these packages does not delete or automatically migrate old data.
 
 The duplicate code index, its file/structural tools and six tree-sitter requirements
 have been retired. Code discovery uses Ken; edits use owned native commands in
@@ -53,12 +50,10 @@ Shell/Git/RAG adapters, generic model SQL and the CrewAI documentation search
 wrapper have also been retired. Their native replacements and remaining migration
 work are described in [adapter migration](docs/architecture/native-adapter-retirement.md).
 
-This extra does not enable an inference backend. Old provider calls are retired;
-actual model selection belongs to the configured native runtime. The former
-`anthropic` and `gemini` extras are no longer advertised. The old role catalogue
-and constructors have been removed; remaining individual legacy readers still
-require their optional dependencies. Native database/API/CLI operations need none
-of those packages.
+Actual model selection belongs to the configured native runtime; see
+[model configuration](docs/architecture/model-configuration.md). The former
+`anthropic`, `gemini` and `legacy` extras do not enable another inference backend.
+The recorded schema snapshot and migration maps document the retired tool names.
 
 Optional library documentation uses the native Context7 source tools. Set
 `CONTEXT7_API_KEY` on the server; the historical `INFINIBAY_CONTEXT7_API_KEY`
@@ -72,8 +67,8 @@ separate quota. The old `spider` extra and its SDK are removed; no SDK is requir
 See [Spider setup and capture limits](docs/architecture/spider-sources.md).
 
 The commands above run native smoke checks. The full historical test corpus still
-has migration failures and expects the optional legacy readers; it is not a claim
-that every test has already been ported. See the
+has migration and legacy-service failures; removing optional packages does not
+establish that every test has been ported. See the
 [native installation evidence](docs/modernization/native-installation-results.json).
 
 The test command blocks external sockets and limits each test to 20 seconds.
@@ -210,9 +205,10 @@ When `INFINIBAY_SANDBOX_ENABLED=true`, each agent runs its tools inside an isola
 
 Set `INFINIBAY_SANDBOX_ENABLED=false` for local development without containers.
 
-## Tested Models
+## Historical model experiments
 
-The system is designed for small models. Here's what works:
+These observations belong to the retired provider backend. They do not establish
+quality, compatibility or cost for the current native runtime:
 
 | Model | Speed | Tool Calling | Research | Notes |
 |---|---|---|---|---|
@@ -226,9 +222,11 @@ The system is designed for small models. Here's what works:
 
 The system works with Gemini, OpenAI, and Anthropic APIs — and they perform well. However, **token consumption is extreme** because the prompts are very explicit and detailed (necessary for small open-weight models to follow instructions reliably). Keep this in mind for cost.
 
-## Configuration
+## Historical provider configuration
 
-All config uses the `INFINIBAY_` prefix. The essential variables:
+The following variables describe the retired provider setup. They do not select
+the native subscription model or its permissions; use the
+[current model configuration](docs/architecture/model-configuration.md).
 
 ```bash
 INFINIBAY_LLM_MODEL=ollama_chat/nemotron-3-nano:30b   # LiteLLM format

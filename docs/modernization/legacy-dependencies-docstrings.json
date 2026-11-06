@@ -1,0 +1,9 @@
+{
+  "changed_or_new_definitions": [
+    "backend/tests/config/test_native_dependencies.py::test_extras_lock_and_export_cannot_reintroduce_retired_stacks",
+    "backend/tests/config/test_native_dependencies.py::test_shared_database_context_exports_do_not_load_a_framework_tool_base",
+    "backend/tests/runtime/test_native_adapter_retirement.py::test_replaced_framework_adapters_are_unavailable"
+  ],
+  "missing": [],
+  "scope": "Qualified AST comparison against e78d752, changed/new definitions and module docstrings only. English documentation for Ken."
+}

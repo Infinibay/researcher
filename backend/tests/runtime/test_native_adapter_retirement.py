@@ -14,6 +14,9 @@ def test_replaced_framework_adapters_are_unavailable():
         'backend.tools.rag', 'backend.tools.data', 'backend.tools.web', 'backend.tools.task',
         'backend.tools.communication', 'backend.tools.project', 'backend.tools.knowledge', 'backend.communication.question_registry',
         'backend.communication.response_event_registry',
+        'backend.tools._legacy_access', 'backend.tools.base.base_tool',
+        'backend.tools.base.dedup', 'backend.tools.base.embeddings',
+        'backend.tools.base.permissions',
     ):
         assert importlib.util.find_spec(module) is None, module
     web = Path(backend.__file__).parent / 'tools' / 'web'

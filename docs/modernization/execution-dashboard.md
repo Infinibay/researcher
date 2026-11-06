@@ -11,12 +11,41 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 
 ## Estado comprobado
 
-- Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor retirados; quedan consumidores, herramientas y dependencias antiguos.
+- Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. Quedan servicios, lectores, rutas internas y CLI heredados.
 - Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 0/12 páginas están completamente aceptadas.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: herramientas antiguas de conocimiento retiradas
+## Etapa actual: bibliotecas antiguas retiradas; siguen servicios y CLI
+
+Se retiran CrewAI, crewai-tools, LiteLLM, Ollama y Chroma, el extra `legacy`,
+cinco auxiliares sin uso, la exportación diferida de la clase base y dos fixtures
+de persistencia. El lock pasa de 177 a 86 paquetes sin cambiar las versiones
+retenidas ni el export de producción. No se alteran datos históricos.
+[Cambios y límites](../architecture/native-legacy-dependencies.md).
+
+**Comprobado:** 129 pruebas pasan desde fuente y 124 en el paquete instalado;
+ambos conjuntos conservan siete fallos de flows antiguos y tres omisiones por
+imagen de pod. Los siete fallos se reproducen en el código anterior con el
+entorno histórico: no es una comparación con dependencias idénticas. Coinciden
+676 archivos Python/SQL y los 256 imports backend proceden del entorno instalado,
+con 83 distribuciones compatibles sin las bibliotecas retiradas. El auditor de
+prompts pasa sus dos tests; siguen 234 candidatos en 365 archivos, sin revisión
+estática pendiente. No hay una nueva suite global ni aceptación integral.
+
+**Lista vigente:**
+- Cerrado recientemente: herramientas web, tareas, comunicación, proyecto y
+  conocimiento, sus cinco bibliotecas antiguas y auxiliares sin consumidores.
+- Siguiente tarea principal: servicios, lectores, rutas internas y CLI heredados,
+  incluidos los fallos de flows y del detector de conversación antiguo.
+- Pendiente principal: operación; migraciones/inversas/restauración y datos
+  históricos; historial completo y presupuestos; evaluación real, humana,
+  científica y global; aceptación integral de las 12 páginas y revisión final.
+  Siguen 43 escenarios abiertos, 12 pilotos y 48 conceptos.
+- Al final: todos los detalles secundarios registrados; los cuatro avisos de
+  estilo de este corte quedan en DD056. Los fallos de flows son trabajo principal.
+
+## Etapa anterior: herramientas antiguas de conocimiento retiradas
 
 Se retiran13herramientas/15módulos después de cubrir búsqueda conjunta nativa y
 lectura de informes históricos con texto retenido en DB y procedencia explícita.

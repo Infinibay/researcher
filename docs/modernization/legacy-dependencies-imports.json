@@ -1,0 +1,33 @@
+{
+  "files_scanned": 642,
+  "roots": [
+    "backend",
+    "scripts"
+  ],
+  "targets": [
+    "crewai",
+    "crewai_tools",
+    "litellm",
+    "ollama",
+    "chromadb",
+    "backend.tools._legacy_access",
+    "backend.tools.base.base_tool",
+    "backend.tools.base.dedup",
+    "backend.tools.base.embeddings",
+    "backend.tools.base.permissions",
+    "backend.tools.knowledge",
+    "backend.tools.project",
+    "backend.tools.task",
+    "backend.tools.communication",
+    "backend.tools.web",
+    "backend.tools.file",
+    "backend.tools.code_intel",
+    "backend.tools.context7",
+    "backend.tools.shell",
+    "backend.tools.git",
+    "backend.tools.rag",
+    "backend.tools.data"
+  ],
+  "remaining_static_imports": [],
+  "limits": "Absolute and relative AST imports, with __init__.py resolved as its package, including tests. This corrects the previous scratch scanner package-name shortcut and rechecks earlier retired families. Lazy base export separately removed and tested. Dynamic external imports/historical prose not inferred absent."
+}

@@ -1,38 +1,39 @@
 # Instalación Python del runtime nativo
 
-La instalación predeterminada usa20dependencias directas para la API, CLI/TUI,
-protocolo MCP, captura/formatos y recuperación semántica local. CrewAI,
-crewai-tools, LiteLLM, Ollama, Chroma y seis distribuciones tree-sitter pertenecen
-al extra opcional `legacy`, que conserva lectores históricos de schemas/herramientas.
-No habilita otro backend de inferencia. Se retiraron los extras de proveedor
-`anthropic`/`gemini`; el modelo real pertenece a la configuración nativa existente.
+La instalación usa20dependencias directas para API, CLI/TUI, MCP, captura/formatos
+y recuperación semántica local. Las herramientas antiguas y sus cinco bibliotecas
+CrewAI, crewai-tools, LiteLLM, Ollama y Chroma están retiradas. No existe el extra
+`legacy`; tampoco se conservan los extras de proveedor `anthropic`/`gemini` ni
+las seis distribuciones tree-sitter. El modelo pertenece al runtime nativo y su
+[configuración explícita](model-configuration.md).
 
 ```bash
 uv sync --locked
 uv run --locked pytest backend/tests/api/test_startup.py backend/tests/cli/test_bootstrap.py
 ```
 
-El corpus histórico aún requiere migración y lectores opcionales:
+`uv.lock` pasa de177a86entradas al retirar dependencias opcionales y transitivas,
+sin añadir paquetes ni cambiar versiones retenidas. El export de producción
+`requirements.txt` conserva sus bytes: la instalación predeterminada ya omitía
+esos extras. El número de entradas multiplataforma del lock no equivale al número
+de distribuciones instaladas en un host. Se conserva Python3.12–3.13; ampliar el
+rango requiere verificar el runtime y el kernel, no sólo resolver dependencias.
 
-```bash
-uv sync --locked --extra legacy
-```
+No se borran tablas, vectores, índices Chroma ni archivos históricos. Los datos
+retenidos se consultan mediante interfaces nativas con procedencia explícita.
+La restauración/importación de material que sólo existe en archivos o en un
+índice antiguo sigue como tarea principal; retirar una librería no la ejecuta.
+Las referencias de schema se conservan como documentación, no como clases
+importables capaces de crear otro motor de agentes.
 
-No es el comando para activar agentes ni recuperar sesiones antiguas. El acceso
-explícito a esos lectores valida sus dependencias antes de importar frameworks;
-si faltan, devuelve `LegacyMetadataUnavailable` con la ruta de inspección opcional.
-La base de datos y el catálogo MCP de negocio nativo no cargan esos lectores.
-El entorno de desarrollo anterior se conserva para comprobar su compatibilidad.
+La evidencia de este corte, incluidos los fallos heredados que siguen abiertos,
+está en [retirada de dependencias](native-legacy-dependencies.md),
+[resultados actuales](../modernization/legacy-dependencies-results.json) y
+[paquete instalado](../modernization/legacy-dependencies-packaging.json).
 
-`uv.lock` mantiene todas las opciones reproducibles, incluso las no instaladas:
-188paquetes en el lock no significan188paquetes en la instalación predeterminada.
-`requirements.txt` se exporta desde el lock sin extras ni dependencias de desarrollo;
-no se mantiene a mano. Las versiones de las dependencias retenidas no cambian en
-este corte. Se conserva el rango Python actual; ampliar soporte requiere su matriz
-real de runtime/kernel.
+## Ensayo histórico anterior a la retirada de herramientas
 
-## Prueba desde una instalación independiente
-
+Este apartado conserva la evidencia del corte inicial; no describe el paquete actual.
 Se creó otro venv, no editable, usando el lock sin red y sin alterar `.venv`.
 Incluye85distribuciones con las herramientas de pruebas y el proyecto. No está
 instalado ninguno de los once paquetes antiguos. Se reinstaló el wheel final sin
@@ -67,12 +68,12 @@ un SDK fijado instalado aparte, assets preparados y una fixture Ken controlada.
 La instalación real de esos componentes y su evaluación siguen siendo entregas
 separadas. Ver [runtime configurado](owned-product-runtime.md).
 
-Los scripts `start.sh`, MCP/Git generales, consumidores legacy y tests antiguos
-siguen como migración principal. El corpus global y el resto visual/prompts/modelos/
-interacción humana, cierre de proyecto y restore/inversas43–54 siguen abiertos.
-Una instalación Python sin frameworks antiguos no demuestra cierre de procesos
-viejos no registrados ni aceptación integral del plan.
+El estado vigente está en el [tablero de ejecución](../modernization/execution-dashboard.md).
+La retirada de paquetes no demuestra cierre de procesos viejos, recuperación de
+datos reales, aceptación de la interfaz ni eficacia de modelos/comunicación.
+Los servicios/CLI heredados, operación, historial y presupuestos, migración/restore
+y la evaluación integral conservan sus entregas principales.
 
-[Resultados](../modernization/native-installation-results.json),
-[paquete y entorno instalado](../modernization/native-installation-packaging.json),
-[console scripts](../modernization/native-installation-console.json).
+[Evidencia del ensayo inicial](../modernization/native-installation-results.json),
+[paquete inicial](../modernization/native-installation-packaging.json),
+[console scripts iniciales](../modernization/native-installation-console.json).

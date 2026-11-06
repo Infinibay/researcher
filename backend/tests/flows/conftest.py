@@ -28,23 +28,6 @@ def _isolated_db(tmp_path, monkeypatch):
 
 
 @pytest.fixture(autouse=True)
-def _disable_persistence(monkeypatch):
-    """Disable @persist decorator to avoid 'id' field requirement in tests."""
-    from crewai.flow.persistence import decorators as persist_mod
-
-    original_persist = persist_mod.persist
-
-    def noop_persist(persistence=None, verbose=False):
-        """No-op persist decorator for tests."""
-        def decorator(target):
-            return target
-        return decorator
-
-    monkeypatch.setattr(persist_mod, "persist", noop_persist)
-    yield
-
-
-@pytest.fixture(autouse=True)
 def _disable_autonomy(monkeypatch):
     """Disable autonomy layer so flow tests use the original centralized loop."""
     monkeypatch.setattr(

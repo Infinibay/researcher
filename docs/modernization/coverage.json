@@ -3980,6 +3980,22 @@
         "Historical file-only report bytes still need explicit restoration/import; no guessed host path fallback or conversion into accepted native work.",
         "Legacy libraries/helpers/services, real data migration/operation and integral acceptance remain."
       ]
+    },
+    "legacy_dependency_retirement": {
+      "status": "complete",
+      "scope": "Five legacy libraries, optional extra, unused helpers/lazy export and old persistence fixtures removed; no data changes or broad scenario closure.",
+      "evidence": [
+        "docs/architecture/native-legacy-dependencies.md",
+        "docs/modernization/legacy-dependencies-results.json",
+        "docs/modernization/legacy-dependencies-packaging.json",
+        "docs/modernization/legacy-dependencies-imports.json",
+        "backend/tests/config/test_native_dependencies.py"
+      ],
+      "limitations": [
+        "Source 129 PASS/7 FAIL/3 SKIP; installed 124 PASS/7 FAIL/3 SKIP. Seven failures reproduce on prior source with a different retained legacy dependency environment.",
+        "Restoration of old Chroma-only data/file-only reports and remaining legacy services/CLI are principal work.",
+        "No new global, model, human, scientific or integral page acceptance."
+      ]
     }
   }
 }

@@ -1,0 +1,305 @@
+{
+  "base_commit": "e78d752",
+  "status": "scoped_dependency_retirement_complete_with_preexisting_flow_failures",
+  "removed_direct_libraries": [
+    "crewai",
+    "crewai-tools",
+    "litellm",
+    "ollama",
+    "chromadb"
+  ],
+  "removed_helper_modules": [
+    "backend/tools/_legacy_access.py",
+    "backend/tools/base/base_tool.py",
+    "backend/tools/base/dedup.py",
+    "backend/tools/base/embeddings.py",
+    "backend/tools/base/permissions.py"
+  ],
+  "removed_other_consumers": [
+    "backend.tools.base lazy InfinibayBaseTool export",
+    "CrewAI persistence fixtures in flows and integration tests"
+  ],
+  "lock_diff": {
+    "before_packages": 177,
+    "after_packages": 86,
+    "removed": [
+      "aiofiles",
+      "aiohappyeyeballs",
+      "aiohttp",
+      "aiosignal",
+      "aiosqlite",
+      "appdirs",
+      "bcrypt",
+      "beautifulsoup4",
+      "boto3",
+      "botocore",
+      "build",
+      "cel-python",
+      "chromadb",
+      "crewai",
+      "crewai-cli",
+      "crewai-core",
+      "crewai-tools",
+      "deprecation",
+      "distro",
+      "docstring-parser",
+      "durationpy",
+      "et-xmlfile",
+      "fastuuid",
+      "frozenlist",
+      "google-re2",
+      "googleapis-common-protos",
+      "grpcio",
+      "h2",
+      "hpack",
+      "hyperframe",
+      "importlib-metadata",
+      "importlib-resources",
+      "instructor",
+      "jinja2",
+      "jiter",
+      "jmespath",
+      "json-repair",
+      "json5",
+      "jsonref",
+      "kubernetes",
+      "lance-namespace",
+      "lance-namespace-urllib3-client",
+      "lancedb",
+      "lark",
+      "litellm",
+      "markupsafe",
+      "mmh3",
+      "multidict",
+      "oauthlib",
+      "ollama",
+      "openai",
+      "openpyxl",
+      "opentelemetry-exporter-http-transport",
+      "opentelemetry-exporter-otlp-common",
+      "opentelemetry-exporter-otlp-proto-common",
+      "opentelemetry-exporter-otlp-proto-grpc",
+      "opentelemetry-exporter-otlp-proto-http",
+      "opentelemetry-proto",
+      "opentelemetry-sdk",
+      "opentelemetry-semantic-conventions",
+      "orjson",
+      "overrides",
+      "pdfminer-six",
+      "pdfplumber",
+      "pendulum",
+      "pillow",
+      "portalocker",
+      "propcache",
+      "pyarrow",
+      "pybase64",
+      "pymupdf",
+      "pypdfium2",
+      "pypika",
+      "pyproject-hooks",
+      "python-docx",
+      "pytube",
+      "requests-oauthlib",
+      "s3transfer",
+      "shellingham",
+      "sniffio",
+      "soupsieve",
+      "tenacity",
+      "tiktoken",
+      "tomli",
+      "tomli-w",
+      "typer",
+      "uv",
+      "websocket-client",
+      "yarl",
+      "youtube-transcript-api",
+      "zipp"
+    ],
+    "added": [],
+    "retained_version_changes": {}
+  },
+  "production_requirements_byte_identical": true,
+  "suites": {
+    "source": {
+      "cases": 139,
+      "passed": 129,
+      "failed": 7,
+      "errors": [],
+      "skipped": 3,
+      "seconds": 9.823,
+      "failures": [
+        {
+          "name": "test_start_and_stop_all",
+          "message": "assert 0 == 7\n +  where 0 = len([])\n +    where [] = <backend.flows.event_listeners.ListenerManager object at 0x7f2766f6ac30>.listeners"
+        },
+        {
+          "name": "test_add_custom_listener",
+          "message": "assert False\n +  where False = <backend.flows.event_listeners.TaskStatusChangedListener object at 0x7f2766f6a360>.is_running"
+        },
+        {
+          "name": "test_backlog_to_done_rejected",
+          "message": "Failed: DID NOT RAISE ValueError"
+        },
+        {
+          "name": "test_backlog_to_failed_rejected",
+          "message": "Failed: DID NOT RAISE ValueError"
+        },
+        {
+          "name": "test_update_task_status_safe_swallows_errors",
+          "message": "AssertionError: assert 'done' == 'backlog'\n  \n  - backlog\n  + done"
+        },
+        {
+          "name": "test_routes_to_no_structure_when_no_tasks",
+          "message": "AttributeError: 'MainProjectFlow' object has no attribute 'completion_router'"
+        },
+        {
+          "name": "test_routes_to_not_complete_when_tasks_exist",
+          "message": "AttributeError: 'MainProjectFlow' object has no attribute 'completion_router'"
+        }
+      ],
+      "skipped_cases": [
+        "test_start_exec_stop",
+        "test_idempotent_start",
+        "test_exec_with_stdin"
+      ]
+    },
+    "baseline": {
+      "cases": 7,
+      "passed": 0,
+      "failed": 7,
+      "errors": [],
+      "skipped": 0,
+      "seconds": 3.171,
+      "failures": [
+        {
+          "name": "test_start_and_stop_all",
+          "message": "assert 0 == 7\n +  where 0 = len([])\n +    where [] = <backend.flows.event_listeners.ListenerManager object at 0x7fe1b43f2780>.listeners"
+        },
+        {
+          "name": "test_add_custom_listener",
+          "message": "assert False\n +  where False = <backend.flows.event_listeners.TaskStatusChangedListener object at 0x7fe0e4e271d0>.is_running"
+        },
+        {
+          "name": "test_backlog_to_done_rejected",
+          "message": "Failed: DID NOT RAISE ValueError"
+        },
+        {
+          "name": "test_backlog_to_failed_rejected",
+          "message": "Failed: DID NOT RAISE ValueError"
+        },
+        {
+          "name": "test_update_task_status_safe_swallows_errors",
+          "message": "AssertionError: assert 'done' == 'backlog'\n  \n  - backlog\n  + done"
+        },
+        {
+          "name": "test_routes_to_no_structure_when_no_tasks",
+          "message": "AttributeError: 'MainProjectFlow' object has no attribute 'completion_router'"
+        },
+        {
+          "name": "test_routes_to_not_complete_when_tasks_exist",
+          "message": "AttributeError: 'MainProjectFlow' object has no attribute 'completion_router'"
+        }
+      ],
+      "skipped_cases": []
+    },
+    "package": {
+      "cases": 134,
+      "passed": 124,
+      "failed": 7,
+      "errors": [],
+      "skipped": 3,
+      "seconds": 10.322,
+      "failures": [
+        {
+          "name": "test_start_and_stop_all",
+          "message": "assert 0 == 7\n +  where 0 = len([])\n +    where [] = <backend.flows.event_listeners.ListenerManager object at 0x7f949f66e900>.listeners"
+        },
+        {
+          "name": "test_add_custom_listener",
+          "message": "assert False\n +  where False = <backend.flows.event_listeners.TaskStatusChangedListener object at 0x7f949f66ed20>.is_running"
+        },
+        {
+          "name": "test_backlog_to_done_rejected",
+          "message": "Failed: DID NOT RAISE ValueError"
+        },
+        {
+          "name": "test_backlog_to_failed_rejected",
+          "message": "Failed: DID NOT RAISE ValueError"
+        },
+        {
+          "name": "test_update_task_status_safe_swallows_errors",
+          "message": "AssertionError: assert 'done' == 'backlog'\n  \n  - backlog\n  + done"
+        },
+        {
+          "name": "test_routes_to_no_structure_when_no_tasks",
+          "message": "AttributeError: 'MainProjectFlow' object has no attribute 'completion_router'"
+        },
+        {
+          "name": "test_routes_to_not_complete_when_tasks_exist",
+          "message": "AttributeError: 'MainProjectFlow' object has no attribute 'completion_router'"
+        }
+      ],
+      "skipped_cases": [
+        "test_start_exec_stop",
+        "test_idempotent_start",
+        "test_exec_with_stdin"
+      ]
+    },
+    "prompts": {
+      "cases": 2,
+      "passed": 2,
+      "failed": 0,
+      "errors": [],
+      "skipped": 0,
+      "seconds": 0.119,
+      "failures": [],
+      "skipped_cases": []
+    }
+  },
+  "baseline_comparison": {
+    "commit": "e78d752",
+    "method": "git archive of preceding source, Python -I and retained legacy environment required by old CrewAI fixtures",
+    "identical_dependency_environment": false,
+    "matching_failure_ids_and_messages_after_address_normalization": true,
+    "normalization": "Only hexadecimal object memory addresses; all original failure messages retained above",
+    "scope": "Seven selected failing cases; not a full baseline/global run"
+  },
+  "packaging_evidence": "docs/modernization/legacy-dependencies-packaging.json",
+  "final_checks": {
+    "uv_pip_check": "83 packages compatible",
+    "uv_lock_check_offline": "86 packages resolved",
+    "prompt_inventory_check": {
+      "files": 365,
+      "entries": 234,
+      "requires_review": 0
+    },
+    "prompt_auditor_passed": 2
+  },
+  "docstrings": {
+    "changed_or_new_definitions": 3,
+    "missing": 0
+  },
+  "deferred_details": {
+    "ruff_findings": 4,
+    "reference": "DD056",
+    "additional_existing_warning": "Unregistered pytest integration marker"
+  },
+  "real_model_calls": 0,
+  "real_provider_calls": 0,
+  "data_or_schema_modified": false,
+  "remaining_primary": [
+    "Legacy services/listeners/readers/internal routes/CLI, including seven old-flow failures and earlier LoopGuard failure",
+    "Operation and three skipped pod cases",
+    "Real-data migration, inverse and restoration including file-only reports and old collections",
+    "Complete history and budgets",
+    "Real-model, human communication, scientific and global evaluation",
+    "Integral acceptance of 12 pages and final fresh review"
+  ],
+  "limits": [
+    "The native source and installed suites retain seven failures and three skips; not a green suite.",
+    "Five manifest/shell-launcher cases are source-only; installed METADATA independently checked.",
+    "Static AST import absence covers 642 backend/scripts files, corrected relative package handling; dynamic/external consumers unknown.",
+    "No new global suite or closure of any of the 43 broad scenarios; 12 pilots, 48 concepts, zero fully accepted pages.",
+    "No paid model/provider request. A legacy baseline telemetry connection was blocked by the socket guard."
+  ]
+}
