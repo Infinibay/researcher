@@ -1,0 +1,229 @@
+{
+  "date": "2026-11-06",
+  "base_commit": "12a1744",
+  "scope": "Retire unused per-agent sandbox and legacy product launcher; require explicit owned-codex-v1; preserve files and native capabilities.",
+  "removed_files": [
+    {
+      "path": "backend/security/__init__.py",
+      "sha256": "39b80a742ec454df8ffa9ba3927692d6f202e618d4671d0a4cf1985d1971d8ce",
+      "lines": 22,
+      "test_functions": 0
+    },
+    {
+      "path": "backend/security/cleanup.py",
+      "sha256": "1f00cef634e1ae7059a850f857005e6c517540abfa2eecc411634a6b9a01be78",
+      "lines": 147,
+      "test_functions": 0
+    },
+    {
+      "path": "backend/security/container_runtime.py",
+      "sha256": "fbef372452d4ee02318ff9b137519625a38028689ff27a159cb95ea50c50861c",
+      "lines": 321,
+      "test_functions": 0
+    },
+    {
+      "path": "backend/security/pod_manager.py",
+      "sha256": "a04346c22715acc40743a49632198c7eaaab40291b0b0263c084caa2bdf3ae25",
+      "lines": 272,
+      "test_functions": 0
+    },
+    {
+      "path": "backend/security/resource_limits.py",
+      "sha256": "716a2d3a0c94d80093bcf24ef0cb6e8ab10036796069cb4d329cfb8e3eca6dcf",
+      "lines": 27,
+      "test_functions": 0
+    },
+    {
+      "path": "backend/security/sandbox.py",
+      "sha256": "19afdb7cb82ad51cf03c9deccd838124aaadeb0cfa87e86163badbaecf1a6a27",
+      "lines": 111,
+      "test_functions": 0
+    },
+    {
+      "path": "backend/security/workspace_manager.py",
+      "sha256": "d47d3f9ef9c0c2da167b01f653f6ffe8b4489005757f6eeee932fb6376e6cb8f",
+      "lines": 49,
+      "test_functions": 0
+    },
+    {
+      "path": "backend/tests/security/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "lines": 0,
+      "test_functions": 0
+    },
+    {
+      "path": "backend/tests/security/test_pod_manager.py",
+      "sha256": "9816707c01122b1672cccff134a2cc4eafcd5583ff2833da61f2e1664947cb5b",
+      "lines": 164,
+      "test_functions": 13
+    },
+    {
+      "path": "backend/tests/security/test_sandbox.py",
+      "sha256": "4b3ecb84eeddcd23659b6f8908c9859e20e0653fc2ad27f7dd2a0657e5c81f24",
+      "lines": 120,
+      "test_functions": 6
+    },
+    {
+      "path": "backend/tests/integration/test_pod_lifecycle.py",
+      "sha256": "bcad5b012a8996e6a8ff0a38cf5d9f92a7a80115f77b0a6910486b2aff6173e2",
+      "lines": 108,
+      "test_functions": 3
+    },
+    {
+      "path": "Containerfile.sandbox",
+      "sha256": "8308b9161144f6b1101c27b934f6c55c2888f3aede1f643a92a420772fedd679",
+      "lines": 54,
+      "test_functions": 0
+    },
+    {
+      "path": "scripts/infinibay_file_helper.py",
+      "sha256": "9139494d18efa19b56e7e7a1575787a836f2597e5016321aca9e7f3cab119530",
+      "lines": 370,
+      "test_functions": 0
+    },
+    {
+      "path": "backend/tests/runtime/test_native_factory.py",
+      "sha256": "ec47ae6b02e92ad89ac508a7c0413541f3457dd78121def175de151d5f9cb4c0",
+      "lines": 465,
+      "test_functions": 16
+    },
+    {
+      "path": "backend/tests/runtime/fake_production_codex.py",
+      "sha256": "05252f03c9cb88125e9045d6538760e094f7dff4bb0901b302f6781bd0e019fa",
+      "lines": 102,
+      "test_functions": 0
+    },
+    {
+      "path": "evals/runtime/run_native_boundary.py",
+      "sha256": "c094d68fed2961d338c4c909225f2fec6b59f37ce2e3fa8d9e37fbbff2157b4e",
+      "lines": 243,
+      "test_functions": 0
+    },
+    {
+      "path": "evals/runtime/run_ken_identity.py",
+      "sha256": "703f568f55460652507c904a1b7c1c2c2d2dcdf78ac534f6be767587108dcbd6",
+      "lines": 266,
+      "test_functions": 0
+    },
+    {
+      "path": "evals/runtime/run_crash_recovery.py",
+      "sha256": "cb826c41875f1544a6811ebbc48472b1bb729ef99668f406a0c916c25e5b9aef",
+      "lines": 215,
+      "test_functions": 0
+    }
+  ],
+  "retired_test_functions": 38,
+  "removed_skipped_pod_cases": 3,
+  "behavior": [
+    "Missing/legacy/unknown profiles fail before host composition; absent runtime environment still permits inspection.",
+    "OwnedCodexRuntime is the only serving factory. Shared InferenceSession/private control helper retained and documented.",
+    "No filesystem workspaces, attachments, existing containers, credentials or database records removed.",
+    "Three diagnostic runners tied to the deleted launcher retired; historical receipts are not current deployment proofs."
+  ],
+  "tests": {
+    "receipts": {
+      "sandbox-retirement-tests": {
+        "tests": "164",
+        "failures": "5",
+        "errors": "0",
+        "skipped": "0",
+        "time": "55.170",
+        "sha256": "d873b066e48630ba480dbc75c5ee6cb3f15b0dab2185293f66dae6adbb5238aa"
+      },
+      "sandbox-profile-tests": {
+        "tests": "10",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "0.358",
+        "sha256": "5c2bb16d43be1db4b0eaade5ed83c02c41ab2fa5e04e91974f8a3fa16b8da340"
+      },
+      "sandbox-installed-tests": {
+        "tests": "164",
+        "failures": "6",
+        "errors": "0",
+        "skipped": "0",
+        "time": "56.259",
+        "sha256": "cffe96ec04851868dd24af0f0896616618e5a54b7c23d483118275cb41287c33"
+      },
+      "sandbox-installed-startup-tests": {
+        "tests": "4",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "2.154",
+        "sha256": "4c8adb24c93ab261df7d01cd0243f689babe74f93674c5de8ef9e7c8f44cbdbc"
+      }
+    },
+    "source_final_unique_passes": 164,
+    "installed_final_unique_passes": 162,
+    "source_only_checks": 2,
+    "initial_source_failures": "Five new assertions overlooked the autouse fixture database. Changed the assertion to compare all initial bytes; all ten profile cases then passed.",
+    "initial_installed_failures": "Two tests require repository pyproject/lock/export files absent from a wheel; these passed in source. Four startup tests ran from /tmp, making fixture credentials children of cwd and correctly triggering the owner guard; rerun only those four from an empty sibling directory, all passed.",
+    "isolation": "Installed tests used python -I, explicit standalone pytest config, --pyargs and no checkout pythonpath.",
+    "models_called": 0,
+    "not_global": true
+  },
+  "package": {
+    "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+    "sha256": "8f279b41cd373264f0c1b63dae7650936e3ab4f7eb984a4c9e742b545c88796b",
+    "python_sql_files": 568,
+    "stale": [],
+    "byte_mismatches": [],
+    "build": "uv build: sdist then wheel in fresh extraction",
+    "wheel_sha256": "8f279b41cd373264f0c1b63dae7650936e3ab4f7eb984a4c9e742b545c88796b",
+    "installed_python_sql_files": 568,
+    "mismatches": [],
+    "extra_python_sql_files": [],
+    "compatible_distributions": 83,
+    "seed_imports_from_installed_package": 22,
+    "rejected_build": "Direct incremental wheel included removed files from pre-existing build/lib; never installed. Rebuilt via uv build (sdist followed by clean wheel extraction). Prior receipts remain historical; this observation does not invalidate byte-verified earlier artifacts."
+  },
+  "static_audit": {
+    "python_files_scanned": 554,
+    "retired_import_or_literal_matches": [],
+    "limits": "AST imports and literal references only; dynamic constructed imports remain outside this check. No runtime telemetry or general dead-code proof.",
+    "documentation": [
+      {
+        "path": "backend/api/runtime_dependencies.py",
+        "module_documented": true,
+        "undocumented_definitions": []
+      },
+      {
+        "path": "backend/config/settings.py",
+        "module_documented": true,
+        "undocumented_definitions": []
+      },
+      {
+        "path": "backend/runtime/native_inference.py",
+        "module_documented": true,
+        "undocumented_definitions": []
+      },
+      {
+        "path": "backend/tests/runtime/test_runtime_profile.py",
+        "module_documented": true,
+        "undocumented_definitions": []
+      }
+    ]
+  },
+  "prompts": {
+    "candidates": 83,
+    "files": 271,
+    "archived": 515,
+    "unchanged_ast_revalidations": 7,
+    "pending_static_reviews": 0,
+    "new_model_evaluation": false
+  },
+  "remaining": [
+    "Native host provisioning/enrollment and full container admission.",
+    "Migration/inverse/real-data restoration; remaining legacy configuration and historical evaluation runners.",
+    "Frontend dependencies, history/budgets, real/human/scientific/global evaluation and all 12 page acceptance.",
+    "Secondary style issues DD063, after all macro capabilities."
+  ],
+  "source_sha256": {
+    "backend/api/runtime_dependencies.py": "6ee61c2ddb7d9e2f44632a8c2f1f1b3206a6d42d17cd4c4d10a94501171a5bf2",
+    "backend/runtime/native_inference.py": "cbffb526d596e6e3d5955bd4017996c211f8594134617d4569544437d3a765e6",
+    "backend/config/settings.py": "9f2b1cfac4fa96df3bd9eeffd8a770daeb3703faba1b7ec63851f2a628244d58",
+    "backend/tests/runtime/test_runtime_profile.py": "d607874ed16b9b4f3ca9b0efc0f4b69be9ccf6051cf8492bf67fe3b989daffac"
+  }
+}

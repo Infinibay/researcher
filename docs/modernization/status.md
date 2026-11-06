@@ -4,6 +4,8 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Sandbox y launcher antiguos retirados:** 18 archivos eliminados y una sola fábrica productiva, con perfil `owned-codex-v1` explícito. Se conservan archivos y adjuntos. 164 casos de fuente y 162 del paquete instalado pasan en las selecciones documentadas; dos comprobaciones de manifiestos son sólo de fuente. Wheel limpio: 568 archivos Python/SQL idénticos, sin archivos retirados. 38 funciones de test históricas retiradas, no reparadas; host/admisión integral siguen pendientes. [Migración](../architecture/native-sandbox-retirement.md), [resultados](sandbox-retirement-results.json).
+
 - **Forgejo15.0.11, TLS y restauración ensayados:** manifiesto fijado, puerto local, directorios explícitos y mapeo rootless. Upgrade real9.0.3→15.0.11 con cuenta/token/repositorio/ramas/PR conservados; clone/push TLS y cliente nativo de PR comprobados. Backup restaurado en otra carpeta, copia actualizada conservada. Doctor28checks/exit0 con aviso heredado DD062. No migra la instancia del usuario ni completa el host nativo. [Guía](../architecture/forgejo-upgrade.md), [resultados](forgejo-upgrade-results.json).
 
 - **Imagen instalada de web/API y persistencia comprobadas:** wheel Python3.13 con extensión nativa, web compilada y UID1000; 314 archivos productivos Python/SQL coinciden. 91 pruebas API/configuración y tres de salud pasan. El recorrido real de contenedor conserva proyecto y adjunto tras reiniciar, exige nuevo emparejamiento y observa ambos cierres. Siguen Forgejo, aprovisionamiento/admisión nativa, actualizaciones frontend y aceptación integral. [Contrato](../architecture/container-operation.md), [resultados](operation-image-results.json).

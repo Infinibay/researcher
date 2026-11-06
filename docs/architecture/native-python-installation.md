@@ -12,6 +12,13 @@ uv sync --locked
 uv run --locked pytest backend/tests/api/test_startup.py backend/tests/cli/test_bootstrap.py
 ```
 
+Para distribuir después de retirar módulos, construir primero el sdist y después
+el wheel desde su extracción limpia mediante `uv build` (sin `--wheel`). El build
+directo de un wheel en un checkout con `build/` antiguo puede volver a empaquetar
+módulos borrados. En el corte de sandbox se detectó y descartó un artefacto así;
+la reconstrucción limpia y la instalación aislada se verifican en los
+[resultados de retirada](../modernization/sandbox-retirement-results.json).
+
 `uv.lock` pasa de177a86entradas al retirar dependencias opcionales y transitivas,
 sin añadir paquetes ni cambiar versiones retenidas. El export de producción
 `requirements.txt` conserva sus bytes: la instalación predeterminada ya omitía

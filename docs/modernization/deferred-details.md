@@ -286,3 +286,13 @@ salida libre de avisos. Revisar su migración a EMAIL_DOMAIN_ALLOWLIST conservan
 valores efectivos en la pasada de configuración fina. No repetir backup/upgrade/
 restore por esos detalles. La caducidad/renovación de TLS se documenta como acción
 operativa explícita; no hay generación ni rotación automática al arrancar.
+
+## DD063 — estilo tras retirar sandbox y launcher
+
+Tres avisos en los archivos afectados: TRY004 por el ValueError de configuración
+JSON y dos F401 heredados del conftest de herramientas; queda también una línea
+vacía final en ese conftest. Resolver durante la pasada final de estilo, sin
+repetir pruebas de procesos o builds por estos detalles. Los fallos iniciales
+de la aserción de fixture fueron corregidos y comprobados de nuevo; el artefacto con caché
+antigua fue descartado y reconstruido desde sdist. No son pendientes de estilo.
+

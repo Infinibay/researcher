@@ -16,7 +16,34 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: operación — Forgejo ensayado; sigue el host nativo
+## Etapa actual: sandbox y launcher retirados; sigue el aprovisionamiento nativo
+
+El producto exige el perfil explícito `owned-codex-v1`. Se retiraron pods,
+imagen histórica, helper de archivos y launcher anterior; la sesión compartida
+del runtime nativo se conserva. No se borran fuentes, adjuntos ni datos.
+[Mapa y migración](../architecture/native-sandbox-retirement.md),
+[resultados y límites](sandbox-retirement-results.json).
+
+**Comprobado:** 164 casos de fuente y 162 del paquete instalado pasan en las
+selecciones y correcciones documentadas; dos checks de manifiestos son sólo de
+fuente. El wheel reconstruido desde sdist contiene 568 archivos Python/SQL
+idénticos a fuente e instalación, sin archivos eliminados de builds anteriores.
+Se retiraron 38 funciones de test, incluidas tres de pods antes omitidas; no se
+cuentan como fallos reparados. Catálogo: 83 candidatos en 271 archivos, siete AST
+revalidados sin cambios de instrucciones. No hay nueva suite global ni modelos.
+
+**Lista vigente:**
+- Cerrado recientemente: imagen web/API y ensayo de Forgejo; ahora sandbox y
+  launcher históricos, con configuración y guía de migración vigentes.
+- En curso: aprovisionamiento del host nativo, recursos/cuenta/Ken y admisión
+  completa; quedan configuración antigua y runners históricos por revisar.
+- Pendiente principal: dependencias frontend; migraciones/inversas/restauración
+  real; historial/presupuestos; evaluación real, humana, científica y global;
+  aceptación integral de 12 páginas y revisión final. Siguen 43 escenarios abiertos.
+- Al final: todos los detalles secundarios. DD063 conserva tres avisos de lint
+  y una línea vacía; no se repiten recorridos por esos detalles.
+
+## Etapa anterior: operación — Forgejo ensayado; sigue el host nativo
 
 Forgejo queda fijado en15.0.11 por digest, con HTTPS, puerto local y directorios
 explícitos de datos/TLS. El override rootless conserva el mapeo UID1000 ensayado.

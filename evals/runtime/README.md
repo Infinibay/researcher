@@ -1,5 +1,14 @@
 # Runtime comparison fixtures
 
+> Estado de migración, 2026-11-06: el producto sólo admite `owned-codex-v1`.
+> Los ensayos anteriores y sus recibos se conservan como evidencia histórica,
+> no como validación del despliegue vigente. Los tres diagnósticos ligados al
+> launcher retirado (`run_native_boundary.py`, `run_ken_identity.py`,
+> `run_crash_recovery.py`) se eliminaron. Los demás runners de esta carpeta
+> necesitan comprobarse con el perfil vigente antes de atribuirles resultados
+> actuales. [Migración y pruebas del reemplazo](../../docs/architecture/native-sandbox-retirement.md).
+
+
 These fixtures contain an **intentional invoice defect** and two tests expected
 to fail before the correction scenario. They are synthetic, not product source
 or a financial policy. Common backend tests never launch a model.
@@ -110,10 +119,7 @@ cierre confirmado, grants revocados y estado cancelado. Usa datos nuevos y
 sobrescribe api_url/control_root para su servidor propio. No equivale a probar
 un tool de negocio lento ni a medir la cuota restante.
 
-`run_native_boundary.py --live ...` verifica configuración, Ken, negocio,
-restricciones y recibos de cierre sin inferir. `--verify-resume` es un diagnóstico
-separado: un thread sin turnos puede fallar como `thread not loaded`; no se cuenta
-como reanudación exitosa. `check_business_catalog.py` valida el catálogo real del
+`check_business_catalog.py` valida el catálogo real del
 MCP con su entorno uv bloqueado, sin HTTP ni modelos. `run_parent_loss.py --live`
 mata sólo su holder propio y comprueba peer y efecto demorado; usa pidfds de libc
 porque este Python no expone los wrappers Linux. Ninguno toca datos del usuario.
@@ -138,8 +144,6 @@ comprueba que los siete peers de comandos usan `/run/researcher-source` como ra�
 lógica, y prueba cálculo/lectura y denegación de escritura, escape, red y entorno.
 No envía turnos de modelo. Conserva la identidad del host en el journal.
 
-`run_ken_identity.py --config /ruta/runtime.json --codex-binary /ruta/codex`
-comprueba preparación CLI, búsqueda/lectura MCP reales, vista lógica de la fuente
-y admisión original conservada. No solicita generación. El config contiene paths
-privados de herramientas, caché y HOME administrado; no debe publicarse ni incluir
-credenciales inline. Ver [contrato y límites](../../docs/architecture/pinned-peer-workspace.md).
+La identidad de Ken y la fuente del runtime vigente se comprueban en
+`backend/tests/runtime/test_broker_ken.py` y `test_ken_worker.py`. Los recibos
+anteriores del diagnóstico retirado quedan en la documentación histórica.

@@ -1,5 +1,10 @@
 # Runtime nativo y coordinación del primer recorrido
 
+**Documento histórico del primer recorrido.** Su launcher fue retirado.
+La configuración y operación vigentes están en [el runtime con propietario](owned-product-runtime.md)
+y [la guía de migración](native-sandbox-retirement.md). Los resultados aquí
+descritos no prueban el despliegue actual completo.
+
 Estado: implementado para tareas de investigación mediante la API del propietario.
 El engine heredado y sus demás capacidades todavía requieren migración. Tareas
 y Chat ya tienen entrega funcional sobre este coordinador; ver `human-workspace.md`.

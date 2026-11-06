@@ -7188,3 +7188,39 @@ compose-overlay-check.json,pre-upgrade.tar}`. The complete backup contains fixtu
 secrets and remains private scratch; it is not committed. Next principal work:
 retire unused historical sandbox/image, finish native host setup/admission;
 then frontend dependency upgrades and all previously open full-plan requirements.
+
+## 2026-11-06 — sandbox and implicit launcher retired, based on 12a1744
+
+Previous goal turn: no implementation progress (status acknowledgement). This turn
+removes 18 files: seven security modules, old image/helper, old launcher fixtures
+and three dependent evaluation runners; removes CodexRuntime implementation and
+sandbox settings, preserves shared InferenceSession/private-control helpers.
+Factory now requires explicit owned-codex-v1 and rejects malformed JSON before
+host composition. No user data or existing containers removed. Migration guide,
+current JSON examples, historical evidence notices and dashboard updated.
+
+Source:159PASS+5fixture-assertion failures; corrected only the assumption about the
+autouse database, profile selection10PASS =>164 unique final passing cases.
+Installed:-I/--pyargs/standalone config;158PASS+6failures. Two manifest tests require
+source pyproject/lock/export (pass in source). Four owner-startup tests correctly
+rejected credentials beneath cwd=/tmp; run from a new empty sibling directory,
+4PASS =>162 unique installed cases. No broad retry or fresh model inference.
+
+Direct incremental wheel was rejected: stale build/lib reintroduced deleted files.
+uv build via sdist/clean extraction produced SHA8f279b41cd373264f0c1b63dae7650936e3ab4f7eb984a4c9e742b545c88796b;
+568Python/SQL files match source/wheel/install with no stale extras. Task-local
+native-runtime-env now installs this wheel;83distributions compatible. Native
+extension retained. Current container image was not rebuilt by this code cut.
+AST imports/literals:554Python files,zero retired references,limited to direct
+syntax.38testfunctions retired,including3previouslyskippedpods;not repaired.
+Promptinventory83/271,515archived,7AST-unchanged revalidations,0pendingstaticreviews.
+All definitions/modules in four affected product/test modules documented.
+DD063 records3lintwarnings and testconftest trailingblank;all finepolishlast.
+
+Next:host native resource/account/Ken provisioning and full admission; remaining
+obsolete settings/evaluation runners,frontend dependencies,migration/inverse/restore,
+history/budgets,real/human/scientific/global evaluation,12page acceptance/finalreview.
+43broad scenarios remain open. Raw evidence:sandbox-retirement-tests.xml,
+sandbox-profile-tests.xml,sandbox-installed-tests.xml,sandbox-installed-startup-tests.xml,
+sandbox-retirement-audit.json,sandbox-wheel-check.json,sandbox-installed-byte-check.json.
+No newpush/deploy, no newmodelturn, no global completion claim.

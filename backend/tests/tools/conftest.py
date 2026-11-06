@@ -74,16 +74,3 @@ def agent_context(test_db):
     # Reset context
     set_context(project_id=None, agent_id=None, agent_run_id=None, task_id=None)
 
-
-@pytest.fixture
-def sandbox_dir(tmp_dir):
-    """Create a sandboxed directory for file operations."""
-    sandbox = os.path.join(tmp_dir, "research")
-    os.makedirs(sandbox)
-
-    # Temporarily override settings
-    from backend.config.settings import settings
-    original = settings.ALLOWED_BASE_DIRS[:]
-    settings.ALLOWED_BASE_DIRS = [sandbox]
-    yield sandbox
-    settings.ALLOWED_BASE_DIRS = original

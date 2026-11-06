@@ -1,8 +1,5 @@
 """Centralized configuration for Infinibay."""
 
-import os
-from pathlib import Path
-
 from pydantic import AliasChoices, Field, field_validator
 from pydantic_settings import BaseSettings
 
@@ -31,6 +28,8 @@ def _extract_provider(model: str) -> str:
 
 
 class Settings(BaseSettings):
+    """Load retained application settings; native execution uses its explicit profile."""
+
     DB_PATH: str = Field(
         default_factory=resolve_database_path,
         validation_alias=AliasChoices("INFINIBAY_DB", "INFINIBAY_DB_PATH", "DB_PATH"),
@@ -39,6 +38,7 @@ class Settings(BaseSettings):
     @field_validator("DB_PATH", mode="before")
     @classmethod
     def normalize_database_path(cls, value: str) -> str:
+        """Resolve the configured database without initializing or migrating it."""
         return resolve_database_path(explicit_path=value)
 
     MAX_RETRIES: int = 5
@@ -49,34 +49,6 @@ class Settings(BaseSettings):
     WEB_TIMEOUT: int = 30
     GIT_PUSH_TIMEOUT: int = 120
     CHAT_POLL_INTERVAL: float = 2.0
-
-    # Sandbox
-    SANDBOX_ENABLED: bool = False
-    ALLOWED_BASE_DIRS: list[str] = ["/research"]
-    ALLOWED_COMMANDS: list[str] = [
-        "git", "python", "python3", "pip", "npm", "node", "npx", "fnm",
-        "pytest", "make", "cargo", "rustc", "rustup", "go", "javac", "java",
-        "ls", "cat", "head", "tail", "wc", "diff", "find", "grep", "pwd",
-        "mkdir", "cp", "mv", "rm", "touch", "chmod",
-        "curl", "wget", "dig", "nslookup", "host", "whois",
-        "tar", "unzip", "gzip",
-        "pdflatex", "bibtex", "latexmk",
-    ]
-
-    # Container sandbox
-    SANDBOX_IMAGE: str = "infinibay-sandbox:latest"
-    SANDBOX_CONTAINER_RUNTIME: str | None = None  # None = auto-detect
-    SANDBOX_GPU_ENABLED: bool = False  # Pass GPU devices into pods/containers
-    WORKSPACE_BASE_DIR: str = os.environ.get(
-        "INFINIBAY_WORKSPACE_BASE_DIR",
-        os.getcwd(),
-    )
-    UPLOAD_BASE_DIR: str = os.environ.get(
-        "INFINIBAY_UPLOAD_BASE_DIR",
-        str(Path(__file__).resolve().parent.parent.parent / ".data" / "uploads"),
-    )
-    CLEANUP_INTERVAL_SECONDS: int = 300
-    SANDBOX_NETWORK: str = "slirp4netns"  # "none" | "slirp4netns" | "host" | custom network name
 
     # File limits
     MAX_FILE_SIZE_BYTES: int = 10 * 1024 * 1024  # 10MB

@@ -4129,6 +4129,22 @@
         "Docker Compose rendering and actual rootless Podman execution; no Docker daemon or other UID/kernel validation.",
         "Doctor28checks exit0 with deprecated configuration message recorded in DD062."
       ]
+    },
+    "native_sandbox_launcher_retirement": {
+      "status": "complete",
+      "scope": "Retire unused per-agent sandbox and legacy product launcher; require explicit owned-codex-v1; preserve files and native capabilities.",
+      "evidence": [
+        "docs/architecture/native-sandbox-retirement.md",
+        "docs/modernization/sandbox-retirement-results.json",
+        "backend/tests/runtime/test_runtime_profile.py",
+        "backend/tests/runtime/test_owned_factory.py",
+        "backend/tests/runtime/test_broker_inference.py"
+      ],
+      "limitations": [
+        "164source cases pass across initial selection and focused correction;162installed cases pass across initial selection and corrected startup cwd. Two repository manifest checks are source-only.",
+        "38old testfunctions including three skipped pod cases retired, not repaired.",
+        "No global suite/model evaluation;host provisioning/container admission/restore and broad scenarios remain open."
+      ]
     }
   }
 }

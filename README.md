@@ -55,6 +55,11 @@ Actual model selection belongs to the configured native runtime; see
 `anthropic`, `gemini` and `legacy` extras do not enable another inference backend.
 The recorded schema snapshot and migration maps document the retired tool names.
 
+Runtime configuration must explicitly select `owned-codex-v1`; the implicit
+launcher, per-agent pods and sandbox image have been retired. Existing files
+and attachments are preserved. Follow the [host migration guide](docs/architecture/native-sandbox-retirement.md)
+instead of copying an old runtime configuration or sandbox environment variables.
+
 Optional library documentation uses the native Context7 source tools. Set
 `CONTEXT7_API_KEY` on the server; the historical `INFINIBAY_CONTEXT7_API_KEY`
 name is also accepted. Its provider quota is separate from the OpenAI subscription.

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "scope": "Owned backend/ and scripts/ Python, excluding tests. Syntax-selected prompt builders/literals/tool descriptions; external native system prompts and arbitrary owner/source text are outside this static inventory.",
   "coverage": "Candidates are not unique rendered prompts. Dynamic rendering size and non-direct consumers remain unknown. Reviews are explicit declarations bound to source and direct module consumers, not proof of efficacy or complete runtime reachability. requires_review entries are unfinished.",
-  "files_scanned": 279,
+  "files_scanned": 271,
   "source_tree": {
     "backend/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "backend/api/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -57,7 +57,7 @@
     "backend/api/routes/user_requests.py": "b31bd5c9847f01e51702a7891f3691afdbf5b8f202cf05c59dfbc51456616043",
     "backend/api/routes/wiki.py": "f5f33c8578b78ebb801c4ebe58c7e938c6b55aa0ed3a84923017942574030a31",
     "backend/api/run.py": "431c3f13bd938ec7026f2428b5e198e05ef3d51bc474b38cf21c8ea14e00e9c9",
-    "backend/api/runtime_dependencies.py": "ca3f33717bdd559d782f0bab9f1ff4a6c962295e47f537a7ead5b6f89f381f5e",
+    "backend/api/runtime_dependencies.py": "6ee61c2ddb7d9e2f44632a8c2f1f1b3206a6d42d17cd4c4d10a94501171a5bf2",
     "backend/api/websocket.py": "f0538917e39fe8a2e9431748ea0e5bb8d85de1699eda5cec30ba8057d271b30c",
     "backend/cli/__init__.py": "2c1ede5c60f0d7defd518afafdeb4cf0f5d26eda8b72c95f8d296d2a560fa457",
     "backend/cli/bootstrap.py": "91b7f4e12e2ac76bd901bde52cfd5ec3955dd7ace5252cca1ca8a3e40fbcb2ff",
@@ -73,7 +73,7 @@
     "backend/communication/ownership.py": "72bb624195447fd39133f5d491c0a7c33b03e6f4e7056abd2f8567542b4b21cb",
     "backend/config/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "backend/config/paths.py": "fe6b8c12d09eb2d38636a687750e731f34b5cc15b0467a40b92e9688036f0e18",
-    "backend/config/settings.py": "e78ec9ccc31abc896183938aab79c757626baed3972559f6365ede710bfe7949",
+    "backend/config/settings.py": "9f2b1cfac4fa96df3bd9eeffd8a770daeb3703faba1b7ec63851f2a628244d58",
     "backend/config/user_settings.py": "6808c27200ab5c52de970c257a463f8f05fdc553babc69192397cf89447a7dd6",
     "backend/db/__init__.py": "7ba3d0ee146291d15ebdc396460e2f6156374c922a20f3dacfd5f424310996e4",
     "backend/db/connection.py": "1439101f51745e81ff34780a4f6ee477c7b4ac7fbda0cb27dcf76bc177c08888",
@@ -221,7 +221,7 @@
     "backend/runtime/live_grants.py": "9765288f781df83c6e8d3c9e390ae941f49a9fa4c1df161295b64cfd5f41808d",
     "backend/runtime/model_settings.py": "876a6af6da86055532ac3bb663fd1af7c62aec8ea407fbded04b1fd0e6fdd4eb",
     "backend/runtime/native_commands.py": "02f76c3544fa7908817c5ed0c61afc21541b6b80c2abb74eb5b5c448b467010b",
-    "backend/runtime/native_inference.py": "317196467c4f8dbf527f9f13e7a0ffc376840d2c4e4f70b8daead5ea91568737",
+    "backend/runtime/native_inference.py": "cbffb526d596e6e3d5955bd4017996c211f8594134617d4569544437d3a765e6",
     "backend/runtime/native_network.py": "1bd3201968329f81df232a916b6252cf5f8f2ddae909ac826faa570a25de5778",
     "backend/runtime/native_search.py": "a0661b96d8dfbd7811e8183d00491d19fbce89301a42cbc5ee195fd552cd5092",
     "backend/runtime/native_state.py": "e5cc1b82c97cb9cac06b53c231d0ccef33283980e72195233ef57ca4c232ceaf",
@@ -262,13 +262,6 @@
     "backend/runtime/views.py": "740317583068e859a0f1df8e5ded26ceb00f3e0c5e93a268b614c9bd28043871",
     "backend/runtime/workspaces.py": "41d2381ccc3b5025cb265eb7a4c353f3a125d357aee38974898ce5394256c98e",
     "backend/scripts/warmup_prefix_cache.py": "3c5a2c53aa3105266194eac9f6fe183578d0a5b03b4b29b2f672d93a5d15eac5",
-    "backend/security/__init__.py": "39b80a742ec454df8ffa9ba3927692d6f202e618d4671d0a4cf1985d1971d8ce",
-    "backend/security/cleanup.py": "1f00cef634e1ae7059a850f857005e6c517540abfa2eecc411634a6b9a01be78",
-    "backend/security/container_runtime.py": "fbef372452d4ee02318ff9b137519625a38028689ff27a159cb95ea50c50861c",
-    "backend/security/pod_manager.py": "a04346c22715acc40743a49632198c7eaaab40291b0b0263c084caa2bdf3ae25",
-    "backend/security/resource_limits.py": "716a2d3a0c94d80093bcf24ef0cb6e8ab10036796069cb4d329cfb8e3eca6dcf",
-    "backend/security/sandbox.py": "19afdb7cb82ad51cf03c9deccd838124aaadeb0cfa87e86163badbaecf1a6a27",
-    "backend/security/workspace_manager.py": "d47d3f9ef9c0c2da167b01f653f6ffe8b4489005757f6eeee932fb6376e6cb8f",
     "backend/state/__init__.py": "6084aeeb2a453d8553fe9248724a5aac72476f1d212c0de3a350c7bc71bb6b80",
     "backend/state/completion.py": "f7b45ea6fcab233689933d0f9867af0cfa4843019ea4b56908bcef616b5cf63e",
     "backend/state/dependency_validator.py": "61738303dcb801e8e2b7997ef05221f1138cb7860304ad35295b825ecd894da6",
@@ -280,7 +273,6 @@
     "backend/tools/base/context.py": "e3d49048bb34ce40c9ca8a72d89e71af73be70178678efdb67c02bbf26a03862",
     "backend/tools/base/db.py": "f64cee75110c13430ea4d14c647b191f3514b0d07cfb1daa18c19626220f4830",
     "scripts/audit_prompt_inventory.py": "652d39284cc8aa51739366aea2723aec419e3cd9e3bd38da7b17012837fa47b7",
-    "scripts/infinibay_file_helper.py": "9139494d18efa19b56e7e7a1575787a836f2597e5016321aca9e7f3cab119530",
     "scripts/infinibay_mcp_server.py": "63c00560a315a28e57a27f6f2ca723feabcba90f7c375b978b351481b22e3dbb",
     "scripts/researcher_mcp_server.py": "18b24a3c795cb38226eea4fd338d5d423ba9ab5ee2d5b91a737a6a612c099f92"
   },
@@ -888,9 +880,8 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "a2e5dbd81e14b94723978f9cc95375685e257d210cba6b1f171f4ed45c561686",
+      "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
       "direct_module_consumers": {
-        "backend/runtime/native_inference.py": "317196467c4f8dbf527f9f13e7a0ffc376840d2c4e4f70b8daead5ea91568737",
         "backend/runtime/owned_runtime.py": "16b43f69142dd5af23cc623dcb14118918376c01d5bb87baa34ab37af440a985"
       },
       "suggested_disposition": "rewritten",
@@ -932,9 +923,8 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "a2e5dbd81e14b94723978f9cc95375685e257d210cba6b1f171f4ed45c561686",
+      "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
       "direct_module_consumers": {
-        "backend/runtime/native_inference.py": "317196467c4f8dbf527f9f13e7a0ffc376840d2c4e4f70b8daead5ea91568737",
         "backend/runtime/owned_runtime.py": "16b43f69142dd5af23cc623dcb14118918376c01d5bb87baa34ab37af440a985"
       },
       "suggested_disposition": "rewritten",
@@ -985,9 +975,8 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "a2e5dbd81e14b94723978f9cc95375685e257d210cba6b1f171f4ed45c561686",
+      "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
       "direct_module_consumers": {
-        "backend/runtime/native_inference.py": "317196467c4f8dbf527f9f13e7a0ffc376840d2c4e4f70b8daead5ea91568737",
         "backend/runtime/owned_runtime.py": "16b43f69142dd5af23cc623dcb14118918376c01d5bb87baa34ab37af440a985"
       },
       "suggested_disposition": "rewritten",
@@ -1031,9 +1020,8 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "a2e5dbd81e14b94723978f9cc95375685e257d210cba6b1f171f4ed45c561686",
+      "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
       "direct_module_consumers": {
-        "backend/runtime/native_inference.py": "317196467c4f8dbf527f9f13e7a0ffc376840d2c4e4f70b8daead5ea91568737",
         "backend/runtime/owned_runtime.py": "16b43f69142dd5af23cc623dcb14118918376c01d5bb87baa34ab37af440a985"
       },
       "suggested_disposition": "rewritten",
@@ -1067,12 +1055,7 @@
         "SOURCE_INSTRUCTIONS",
         "_compose"
       ],
-      "direct_import_consumers": [
-        {
-          "path": "backend/runtime/native_inference.py",
-          "line": 64
-        }
-      ],
+      "direct_import_consumers": [],
       "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
       "evaluation_cases": [
         "CTX01",
@@ -1083,9 +1066,8 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "a2e5dbd81e14b94723978f9cc95375685e257d210cba6b1f171f4ed45c561686",
+      "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
       "direct_module_consumers": {
-        "backend/runtime/native_inference.py": "317196467c4f8dbf527f9f13e7a0ffc376840d2c4e4f70b8daead5ea91568737",
         "backend/runtime/owned_runtime.py": "16b43f69142dd5af23cc623dcb14118918376c01d5bb87baa34ab37af440a985"
       },
       "suggested_disposition": "rewritten",
@@ -1173,9 +1155,8 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "b3323760326064dcf112e7851b97b838c8bc2b74922451438d45798db2e4e149",
+      "dependencies_sha256": "a47310b9b0d7e77911a5055d9dcef6854ec8d8d8154b4c9d3ef5dcb843eb791b",
       "direct_module_consumers": {
-        "backend/runtime/native_inference.py": "317196467c4f8dbf527f9f13e7a0ffc376840d2c4e4f70b8daead5ea91568737",
         "backend/runtime/owned_runtime.py": "16b43f69142dd5af23cc623dcb14118918376c01d5bb87baa34ab37af440a985"
       },
       "suggested_disposition": "requires_review",
@@ -3928,9 +3909,9 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "5b5ccb158c788bb8e14696cf16620531cff8a41489aa75875ade59808e4d097b",
+      "dependencies_sha256": "168c5fccdc937305f1934a5ae5b02c8b6a60d075907c210622f165f149b8a849",
       "direct_module_consumers": {
-        "backend/api/runtime_dependencies.py": "ca3f33717bdd559d782f0bab9f1ff4a6c962295e47f537a7ead5b6f89f381f5e",
+        "backend/api/runtime_dependencies.py": "6ee61c2ddb7d9e2f44632a8c2f1f1b3206a6d42d17cd4c4d10a94501171a5bf2",
         "backend/prompts/native.py": "3d56cbe951c6de1a5b2dcc1a57b53039f0a8cb5f65c6c2b0245672c13915211a"
       },
       "suggested_disposition": "reviewed_native",

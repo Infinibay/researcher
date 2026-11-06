@@ -122,7 +122,7 @@
       "conflicts": []
     },
     "backend/prompts/native.py::COMMON_INSTRUCTIONS": {
-      "dependencies_sha256": "a2e5dbd81e14b94723978f9cc95375685e257d210cba6b1f171f4ed45c561686",
+      "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
       "decision": "merged_and_rewritten",
       "rationale": "Centralized current owner/context, evidence, correction, Ken, typed effects and explanation policy; source acquisition is separate from restricted reviewer/planner capabilities. Exact version/hash is sent and retained.",
       "evidence": [
@@ -133,10 +133,11 @@
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json"
       ],
-      "conflicts": []
+      "conflicts": [],
+      "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed."
     },
     "backend/prompts/native.py::SOURCE_INSTRUCTIONS": {
-      "dependencies_sha256": "a2e5dbd81e14b94723978f9cc95375685e257d210cba6b1f171f4ed45c561686",
+      "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
       "decision": "merged_and_rewritten",
       "rationale": "Centralized current owner/context, evidence, correction, Ken, typed effects and explanation policy; source acquisition is separate from restricted reviewer/planner capabilities. Exact version/hash is sent and retained.",
       "evidence": [
@@ -147,10 +148,11 @@
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json"
       ],
-      "conflicts": []
+      "conflicts": [],
+      "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed."
     },
     "backend/prompts/native.py::build_instructions": {
-      "dependencies_sha256": "a2e5dbd81e14b94723978f9cc95375685e257d210cba6b1f171f4ed45c561686",
+      "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
       "decision": "merged_and_rewritten",
       "rationale": "Centralized current owner/context, evidence, correction, Ken, typed effects and explanation policy; source acquisition is separate from restricted reviewer/planner capabilities. Exact version/hash is sent and retained.",
       "evidence": [
@@ -161,10 +163,11 @@
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json"
       ],
-      "conflicts": []
+      "conflicts": [],
+      "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed."
     },
     "backend/prompts/native.py::instruction_identity": {
-      "dependencies_sha256": "a2e5dbd81e14b94723978f9cc95375685e257d210cba6b1f171f4ed45c561686",
+      "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
       "decision": "merged_and_rewritten",
       "rationale": "Centralized current owner/context, evidence, correction, Ken, typed effects and explanation policy; source acquisition is separate from restricted reviewer/planner capabilities. Exact version/hash is sent and retained.",
       "evidence": [
@@ -175,10 +178,11 @@
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json"
       ],
-      "conflicts": []
+      "conflicts": [],
+      "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed."
     },
     "backend/prompts/native.py::GENERIC_INSTRUCTIONS": {
-      "dependencies_sha256": "a2e5dbd81e14b94723978f9cc95375685e257d210cba6b1f171f4ed45c561686",
+      "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
       "decision": "merged_and_rewritten",
       "rationale": "Centralized current owner/context, evidence, correction, Ken, typed effects and explanation policy; source acquisition is separate from restricted reviewer/planner capabilities. Exact version/hash is sent and retained.",
       "evidence": [
@@ -189,7 +193,8 @@
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json"
       ],
-      "conflicts": []
+      "conflicts": [],
+      "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed."
     },
     "backend/research/stdio_server.py::main.description@93": {
       "dependencies_sha256": "37d0a82d854ea51389652d84bcc1d95955e0d1e71a446edeb9707aa22a6b6333",
@@ -203,7 +208,7 @@
       "conflicts": []
     },
     "backend/runtime/analysis_tools.py::_TOOLS": {
-      "dependencies_sha256": "b3323760326064dcf112e7851b97b838c8bc2b74922451438d45798db2e4e149",
+      "dependencies_sha256": "a47310b9b0d7e77911a5055d9dcef6854ec8d8d8154b4c9d3ef5dcb843eb791b",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -215,7 +220,8 @@
       ],
       "conflicts": [
         "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
-      ]
+      ],
+      "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed."
     },
     "backend/runtime/business_definitions.py::INSTRUCTIONS": {
       "dependencies_sha256": "01343bd4048d74ff1ed8ea86acacc07e68d80f27bfeb24ca0f356d5af84f77ef",
@@ -748,7 +754,7 @@
       ]
     },
     "backend/runtime/development_policy.py::development_instructions": {
-      "dependencies_sha256": "5b5ccb158c788bb8e14696cf16620531cff8a41489aa75875ade59808e4d097b",
+      "dependencies_sha256": "168c5fccdc937305f1934a5ae5b02c8b6a60d075907c210622f165f149b8a849",
       "decision": "retained",
       "rationale": "Reviewed capability-specific procedure against its bound typed tools and host ownership. Shared policy is composed by native catalog; historical role hierarchy, imaginary scientific certainty and automatic acceptance are excluded. Host checks are disclosed as configuration, not passing results.",
       "evidence": [
@@ -758,7 +764,8 @@
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json"
       ],
-      "conflicts": []
+      "conflicts": [],
+      "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed."
     },
     "backend/runtime/investigation_instructions.py::INVESTIGATION_INSTRUCTIONS": {
       "dependencies_sha256": "84b004a0dec9f6a8be6e289ff11c15499197099bf0e612d6f8f112028c175d40",

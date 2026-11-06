@@ -91,8 +91,9 @@ siguen pendientes del plan.
 
 - `runtime_profile: "owned-codex-v1"` selecciona esta fábrica. Un error no cambia
   al launcher anterior ni a una API facturada por uso.
-- La configuración sin ese perfil conserva temporalmente el camino heredado para
-  migrar capacidades; retirarlo sigue siendo obligatorio, no está terminado.
+- Un JSON sin ese perfil o con `legacy-codex` se rechaza antes de abrir recursos.
+  El launcher anterior y los pods históricos están retirados; véase la
+  [migración de configuración y capacidades](native-sandbox-retirement.md).
 - Una autoridad admite una concesión activa; este perfil exige `max_concurrent:1`.
   Esto no completa coordinación entre agentes ni concurrencia multiproyecto.
 - La memoria/PIDs son política explícita del host. El ejemplo2GiB responde al OOM
