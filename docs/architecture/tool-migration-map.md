@@ -349,3 +349,13 @@ explícitos. El [contrato y mapa de resultados](native-mcp-entry.md) distingue
 esa migración de los consumidores Git/material retenido/arranque aún abiertos.
 Ken es el MCP obligatorio separado del host; esta entrada no lo instala ni
 declara que está disponible.
+
+## Arranque posterior a4a7d4d6
+
+`start.sh` delega al comando instalado `researcher-start`: API y Vite locales,
+con preflight de estado existente y procesos propios. La instalación/bootstrap
+queda explícita; no hay proveedor/model pull/Forgejo/contraseña por defecto ni
+lectura de `.pids`. Sin configuración nativa se informa modo de inspección, sin
+generación. Ken/modelo/suscripción siguen en el host nativo. [Contrato](native-startup.md).
+Git/material retenido/publicación, consumidores de agentes/conocimiento y pruebas
+antiguas siguen pendientes; no confundir un arranque correcto con su migración.

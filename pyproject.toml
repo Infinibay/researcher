@@ -62,6 +62,7 @@ dev = [
 researcher = "backend.cli.main:main"
 researcher-bootstrap = "backend.cli.bootstrap:main"
 researcher-mcp = "backend.research.stdio_server:main"
+researcher-start = "backend.cli.launcher:main"
 
 [tool.setuptools.packages.find]
 include = ["backend*"]

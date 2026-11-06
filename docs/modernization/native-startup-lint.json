@@ -1,0 +1,18 @@
+{
+  "base_commit": "4a7d4d6",
+  "python_files": 2,
+  "new": [
+    [
+      "backend/tests/cli/test_native_launcher.py",
+      "PLW1510",
+      "`subprocess.run` without explicit `check` argument"
+    ],
+    [
+      "backend/tests/cli/test_native_launcher.py",
+      "PLW1510",
+      "`subprocess.run` without explicit `check` argument"
+    ]
+  ],
+  "inherited": [],
+  "resolved": []
+}

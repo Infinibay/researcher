@@ -33,7 +33,10 @@
         "docs/modernization/native-installation-console.json",
         "docs/architecture/native-mcp-entry.md",
         "docs/modernization/native-mcp-results.json",
-        "docs/modernization/native-mcp-packaging.json"
+        "docs/modernization/native-mcp-packaging.json",
+        "docs/architecture/native-startup.md",
+        "docs/modernization/native-startup-results.json",
+        "docs/modernization/native-startup-packaging.json"
       ]
     },
     "C02": {
@@ -596,7 +599,10 @@
         "docs/modernization/native-installation-console.json",
         "docs/architecture/native-mcp-entry.md",
         "docs/modernization/native-mcp-results.json",
-        "docs/modernization/native-mcp-packaging.json"
+        "docs/modernization/native-mcp-packaging.json",
+        "docs/architecture/native-startup.md",
+        "docs/modernization/native-startup-results.json",
+        "docs/modernization/native-startup-packaging.json"
       ]
     },
     "E06": {
@@ -862,7 +868,10 @@
         "docs/modernization/native-installation-console.json",
         "docs/architecture/native-mcp-entry.md",
         "docs/modernization/native-mcp-results.json",
-        "docs/modernization/native-mcp-packaging.json"
+        "docs/modernization/native-mcp-packaging.json",
+        "docs/architecture/native-startup.md",
+        "docs/modernization/native-startup-results.json",
+        "docs/modernization/native-startup-packaging.json"
       ]
     },
     "E12": {

@@ -9,7 +9,34 @@ Actualizado: 2026-11-06. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: entrada MCP nativa común
+## Etapa actual: arranque instalado sin setup incidental
+
+**Resultado:** `start.sh` delega a `researcher-start`; API y web se ejecutan sobre
+loopback con sus procesos originales. No source de `.env`, instalaciones,
+model pull, provisión Forgejo/contraseña predeterminada ni `.pids`/pkill.
+`--check` es lectura de prerrequisitos; `--api-only` sirve fuera del checkout web.
+Sin configuración nativa se informa modo de inspección. Runtime/Ken/cuenta reales
+siguen bajo validación del host/API, no se infieren de este check.
+
+**Verificación:**40casos fuente pasan;35casos compatibles pasan desde wheel
+instalado sin frameworks antiguos,0omisiones5.22s.157imports backend sólo del
+entorno instalado;794miembros del wheel coinciden. Dos arranques reales seguidos
+API+Vite con Node24.22.2: readiness, HTTP200 del índice, SIGTERM→143/cierre de ambos
+puertos, proceso ajeno vivo, `.pids` intacto, `.env` inerte, fila137 y esquema
+conservados e integridad SQLiteok.1.02s y1.17s.0modelos reales, modo inspección.
+11definiciones documentadas,0avisos nuevos en producción;2avisos de tests DD025.
+La protección que rechaza credenciales dentro del workspace se conservó y se
+observó en el ensayo. No nueva aceptación visual ni host nativo provisionado.
+[Resultados](native-startup-results.json), [paquete](native-startup-packaging.json),
+[contrato](../architecture/native-startup.md).
+
+**Siguiente bloque principal:** Git/material retenido/publicación y consumidores
+antiguos de agentes/conocimiento/pruebas, preservando resultados necesarios.
+Cierre integral, sucesoras, settings/visuales/prompts/evaluaciones, restore,
+43escenarios/suite global y revisión final siguen pendientes. No volver al
+pulido de launcher/MCP/metadata salvo un fallo principal reproducido.
+
+## Etapa anterior: entrada MCP nativa común
 
 **Resultado:** `researcher-mcp` y los dos scripts compatibles comparten catálogo,
 DTOs, transporte HTTP y SDK MCP1.30.0 del runtime. Sin FastMCP adicional, SQL,

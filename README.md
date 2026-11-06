@@ -133,12 +133,33 @@ npm ci
 npm run dev -- --host 127.0.0.1
 ```
 
+After installing Python and frontend dependencies explicitly, `./start.sh` starts
+both services on loopback. It uses `.venv/bin/python`, or the executable selected
+by `RESEARCHER_PYTHON`; `RESEARCHER_NODE` can select the installed Node executable.
+It does not install packages, pull models, provision Forgejo or execute `.env`.
+Export configuration in the host environment before launching.
+
+```bash
+./start.sh --check                 # Read-only prerequisite check, no services
+./start.sh                        # API8000 + web5173; Ctrl+C closes these children
+researcher-start --api-only        # Installed command, no frontend/Node needed
+researcher-start --api-only --port 8100
+```
+
+The frontend proxy currently targets API port8000; alternate ports require
+`--api-only`. Missing or empty databases are refused before services start. With
+no `INFINIBAY_RUNTIME_CONFIG`, the launcher explicitly reports inspection mode:
+owner history/read operations are available, native generation/admission is not.
+Prerequisite checks do not verify account login, Ken availability or native host
+resources; the API lifespan validates actual runtime configuration. See
+[the startup contract](docs/architecture/native-startup.md).
+
 Configure the actual Codex account/model, Ken installation, source workspace and
 owned process resources using [the native runtime guide](docs/architecture/owned-product-runtime.md).
 Python dependency installation does not provision these host components or restore
 an existing deployment. The initialization command refuses existing files; use
-migration/restore for existing data. The previous `start.sh`/Forgejo installation
-path remains a separate migration item and is not the native setup above.
+migration/restore for existing data. Forgejo/container provisioning is a separate
+operator action; the normal startup command does not configure these services.
 
 Open http://localhost:5173 in your browser.
 

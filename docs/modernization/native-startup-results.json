@@ -1,0 +1,53 @@
+{
+  "base_commit": "4a7d4d6",
+  "status": "installed_startup_verified",
+  "red": "3FAIL0.22s: old script sources .env and lacks help/check; native launcher module missing. First GREEN5PASS0.66s.",
+  "source": {
+    "passed": 40,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 5.52,
+    "scope": "New launcher and existing shell missing/empty DB guards, bootstrap, API lifespan, database paths, native dependency manifest and settings."
+  },
+  "installed_receipt": "docs/modernization/native-startup-packaging.json",
+  "installed_scope": "35 installed-compatible tests; source-only shell-copy/pyproject manifest assertions stay in source suite. Wheel metadata and absence of old frameworks verified independently.",
+  "real_startups": [
+    {
+      "cycle": 1,
+      "api_ready": true,
+      "web_index_http200": true,
+      "owner_exit": 143,
+      "ports_closed": true,
+      "unrelated_sentinel_alive": true,
+      "old_pid_file_unchanged": true,
+      "shell_env_not_executed": true,
+      "marker137_retained": true,
+      "schema_history_retained": true,
+      "integrity": "ok",
+      "seconds": 1.022
+    },
+    {
+      "cycle": 2,
+      "api_ready": true,
+      "web_index_http200": true,
+      "owner_exit": 143,
+      "ports_closed": true,
+      "unrelated_sentinel_alive": true,
+      "old_pid_file_unchanged": true,
+      "shell_env_not_executed": true,
+      "marker137_retained": true,
+      "schema_history_retained": true,
+      "integrity": "ok",
+      "seconds": 1.167
+    }
+  ],
+  "quality": {
+    "definitions_documented": 11,
+    "missing_docs": 0,
+    "new_lint": 2,
+    "production_lint": 0,
+    "deferred": "DD-025"
+  },
+  "verification_rework": "Scratch worker syntax fixed before any test/service. First installed run35PASS2FAIL because repository pyproject assertions were incorrectly included in installed test selection; use installed metadata, keep source manifest tests in40PASS source evidence. Next35PASS then actual API rejected fixture auth under workspace; correct fixture credentials to external private temp directory, keep real guard unchanged. Final35PASS plus two actual full API/Vite cycles. No app correction or model retry for these fixture errors.",
+  "limits": "Inspection-mode repeat startup proves service lifecycle, retained marker/schema/integrity; not native model/account/Ken/worker provisioning, restore or full UI/global verification."
+}

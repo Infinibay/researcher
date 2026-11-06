@@ -1,0 +1,64 @@
+{
+  "base_commit": "4a7d4d6",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "f6463e31ac77e48f2911034545a054c90b25dfd1cb8f7abb263d263872050294",
+  "observed": {
+    "passed": 35,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 5.223,
+    "backend_modules": 157,
+    "imports_only_installed": true,
+    "matched_application_members": 794,
+    "noneditable": true,
+    "installed_distributions": 85,
+    "legacy_frameworks": false,
+    "console_help": 0,
+    "check_readonly": true,
+    "startup_cycles": [
+      {
+        "cycle": 1,
+        "api_ready": true,
+        "web_index_http200": true,
+        "owner_exit": 143,
+        "ports_closed": true,
+        "unrelated_sentinel_alive": true,
+        "old_pid_file_unchanged": true,
+        "shell_env_not_executed": true,
+        "marker137_retained": true,
+        "schema_history_retained": true,
+        "integrity": "ok",
+        "seconds": 1.022
+      },
+      {
+        "cycle": 2,
+        "api_ready": true,
+        "web_index_http200": true,
+        "owner_exit": 143,
+        "ports_closed": true,
+        "unrelated_sentinel_alive": true,
+        "old_pid_file_unchanged": true,
+        "shell_env_not_executed": true,
+        "marker137_retained": true,
+        "schema_history_retained": true,
+        "integrity": "ok",
+        "seconds": 1.167
+      }
+    ],
+    "frontend_node": "24.22.2",
+    "real_model_turns": 0,
+    "native_runtime_configured": false
+  },
+  "tests": [
+    "backend/tests/cli/test_native_launcher.py::test_launcher_check_refuses_missing_database_without_creating_parent",
+    "backend/tests/cli/test_native_launcher.py::test_children_stop_on_service_exit_and_preserve_an_unrelated_process",
+    "backend/tests/cli/test_native_launcher.py::test_launcher_sigterm_drains_its_actual_child_and_preserves_old_pid_file",
+    "backend/tests/cli/test_bootstrap.py",
+    "backend/tests/api/test_startup.py",
+    "backend/tests/config/test_user_settings.py",
+    "backend/tests/config/test_database_paths.py",
+    "backend/tests/config/test_native_dependencies.py::test_missing_historical_dependencies_explain_the_optional_reader_path"
+  ],
+  "environment": "Same Linux host; final noneditable wheel installed offline into preserved native-only env. Python-I outside source; actual Vite frontend linked from managed checkout, pinned Node24.22.2. Explicit isolated current source DB and inspection mode.",
+  "limits": "Actual repeat API+web startup/readiness/signal cleanup; not native-model/worker/Ken provisioning, restored deployment, full rendered UI acceptance or global suite."
+}
