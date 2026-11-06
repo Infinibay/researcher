@@ -1,0 +1,34 @@
+{
+  "base_commit": "2882f0b",
+  "python_files": 6,
+  "new": [
+    [
+      "backend/planning/completion.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/tests/runtime/test_project_completion.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ]
+  ],
+  "inherited": [
+    [
+      "backend/api/routes/runs.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ],
+    [
+      "backend/flows/helpers/db_helpers.py",
+      "BLE001",
+      "Do not catch blind exception: `Exception`"
+    ],
+    [
+      "backend/tests/runtime/test_owned_code_dependencies.py",
+      "I001",
+      "Import block is un-sorted or un-formatted"
+    ]
+  ],
+  "resolved": []
+}

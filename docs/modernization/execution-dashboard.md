@@ -9,7 +9,43 @@ Actualizado: 2026-11-06. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: material de código aceptado para sucesoras
+## Etapa actual: informe y cierre explícito del proyecto
+
+**Resultado:** informe determinista atribuido sobre alcance original/actual, plan,
+entregas y todas las tareas del proyecto. Exige aceptaciones actuales, cierre y
+revisión existentes; una etiqueta done no sustituye evidencia. El propietario
+revisa el informe, escribe su declaración y reconoce cada candidato sin publicar.
+Recibo/informe/snapshot/estado/evento quedan atómicos en la transacción existente.
+CRUD/helper antiguos ya no pueden declarar completed. Cambiar alcance deja el
+cierre anterior como historia; reenviar su solicitud no vuelve a cerrar nada.
+Sin nuevo modelo, tabla, controller o publicación. Web conserva la decisión tras
+pérdida de respuesta/recarga y permite leer fuentes completas con teclado.
+
+**Verificación:**34PASS19.455s fuente;7consumidores antiguos pasan por separado.
+Wheel no editable/sin frameworks antiguos:123PASS0FAIL0SKIP391.279s, con cuatro
+inversas heredadas excluidas y listadas.253imports backend sólo instalados,
+804miembros coincidentes. Cadena real329.733s: plan/dos autores/comprobaciones/
+revisiones/aceptaciones; cierre con reconocimiento incompleto rechazado y cierre
+exacto aceptado/repetible. Fuente137 intacta/dos candidatos200 sin publicar,
+cinco turnos controlados,0modelos reales/Ken controlado.102tests frontend,
+TypeScript/build5.06s. Siete estados navegador escritorio/móvil,0errores JS,
+0infracciones axe en área revisada/overflow horizontal; no aceptación de página
+completa ni comprensión humana.26definiciones Python documentadas/28TS revisadas,
+dos imports diferidos DD029. [Resultados](project-completion-results.json),
+[paquete](project-completion-packaging.json),
+[contrato](../architecture/project-completion.md),
+[navegador](../design/audits/2026-11-06-project-completion/report.md).
+
+**Siguiente principal:** rediseño y conexión de Proyectos al alcance y cierre
+reales: tres conceptos desktop/uno móvil, selección razonada e implementación,
+CRUD/planificación/Stop y navegación a informes/versiones reales. Leer el brief
+`projects-page-brief.md` del seguimiento. Evitar pulir recibos/imports/este panel.
+Quedan expansión histórica de efectos/presupuestos/adopciones, paridad terminal,
+consumidores restantes, settings/modelos, todas las páginas/prompts/evaluaciones,
+43escenarios/global/instalación/restore/inversas y revisión final. Ningún requisito
+del plan se retira por esta entrega.
+
+## Etapa anterior: material de código aceptado para sucesoras
 
 **Resultado:** entregas nuevas esquema3 describen paquete, entrada original y diff
 binario de la predecesora aceptada. Autor sucesor y revisor de su autor exacto

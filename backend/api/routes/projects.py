@@ -97,10 +97,15 @@ async def get_project_progress(project_id: int):
 
 @router.put("/{project_id}", response_model=ProjectResponse)
 async def update_project(project_id: int, body: ProjectUpdate):
-    """Update project name or description."""
+    """Update metadata and operational labels; completion requires a separate exact whole-project report decision."""
     state = load_project_state(project_id)
     if not state:
         raise ProjectNotFound(project_id)
+
+    if body.status == "completed":
+        from backend.runtime.contracts import RunConflict
+
+        raise RunConflict("Consulta y acepta el informe completo del proyecto antes de cerrarlo.")
 
     updates = []
     params = []
@@ -115,7 +120,6 @@ async def update_project(project_id: int, body: ProjectUpdate):
         params.append(body.status)
 
     if updates:
-        updates.append("updated_at = CURRENT_TIMESTAMP")
         params.append(project_id)
         sql = f"UPDATE projects SET {', '.join(updates)} WHERE id = ?"
 

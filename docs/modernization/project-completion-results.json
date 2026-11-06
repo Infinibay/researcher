@@ -1,0 +1,69 @@
+{
+  "base_commit": "2882f0b",
+  "status": "whole_project_attributed_report_and_exact_owner_completion_connected",
+  "ruling": "Deterministic attributed report over original scope/current accepted artifacts; no additional unverified model narrative. Reuse existing runtime_commands transaction, exact owner hash/statement/unpublished acknowledgements, no new table/controller/LLM loop.",
+  "red": {
+    "module": "1FAIL0.44s before completion module",
+    "http": "1FAIL1.44s before completion route",
+    "frontend": "3FAIL ERR_MODULE_NOT_FOUND before completion packet module",
+    "scope_edit": "1FAIL1.63s: actual project description PUT referenced missing updated_at column; corrected to actual project schema",
+    "keyboard": "First browser run reached2states then scrollable-region-focusable serious violation; added labelled keyboard-focusable report/evidence areas before final run."
+  },
+  "source": {
+    "passed": 34,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 19.455,
+    "scope": "Project completion plus existing graph execution/continuation/reauthorization contracts."
+  },
+  "legacy_source_consumers": {
+    "passed": 7,
+    "failed": 0,
+    "seconds": 2.43,
+    "limits": "Existing source environment; one inherited pytest_socket warning from attempted framework socket use. No network/model success claimed."
+  },
+  "isolated_installed": {
+    "passed": 123,
+    "failed": 0,
+    "skipped": 0,
+    "explicitly_excluded_preexisting_inverse_cases": 4,
+    "seconds": 391.279,
+    "receipt": "docs/modernization/project-completion-packaging.json"
+  },
+  "physical": {
+    "seconds": 329.733,
+    "controlled_native_turns": 5,
+    "real_model_turns": 0,
+    "actual_host_publications": 0,
+    "scope": "Actual kernel/broker/Git/SQLite planner/twoauthors/checks/distinctreviews/explicitacceptances. New project starts after removing only unused seed task rows before any native history. Both200candidates remain private; canonical137 preserved. Exact whole-project report state eligible, missing unpublished acknowledgement rejects, explicit acknowledgement/statement accepts and original retry returns receipt/current validity. All five actual runs and effects retained.",
+    "limits": "Generation/Ken controlled; no semantic fulfillment/human comprehension/scientific confidence/real ranking/global/restore proof."
+  },
+  "frontend": {
+    "passed": 102,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 1.696770155,
+    "typescript_build": true,
+    "build_seconds": 5.06
+  },
+  "browser": {
+    "states": 7,
+    "requests": 2,
+    "actual_owner_api_and_sqlite": true,
+    "synthetic_result_closure_witnesses": true,
+    "real_model_turns": 0,
+    "scope": "Desktop1440/mobile390, original report/limits, owner statement, committed response loss/reload/exact same request recovery, later scope correction/historical acceptance,0pageerrors/0scopedaxeviolations/nohorizontaloverflow.",
+    "evidence": "docs/design/audits/2026-11-06-project-completion/evidence.json",
+    "full_page_acceptance": false
+  },
+  "quality": {
+    "changed_or_new_python_definitions_documented": 26,
+    "typescript_definitions_and_modules_checked": 28,
+    "missing_docs": 0,
+    "new_lint": 2,
+    "inherited_lint": 3,
+    "deferred": "DD-029"
+  },
+  "rework": "First installed selection included legacy flows/conftest whose autouse CrewAI import contaminated collection; failed1.23s before physical work. Removed legacy-only suite from native-only selection and verified those7tests separately in source. Corrected test seed done-label arrangement to INSERT restored historical label because current UPDATE guard correctly rejects unsupported done. Routine node PATH/cwd command mistakes corrected before final outputs; no native restart solely from expired observation.",
+  "limits": "All project tasks included; any unsupported/unaccepted historical task blocks rather than being silently discarded. Closed predecessor effect/budget expansion, broader historical/manual adoption, advanced CLI/TUI parity and full host/restore/model/prompt/science/human/global/visual obligations remain. Historical completed status alone is not proof that a later report remains current. No new image concepts/full-page visual acceptance claimed; Tasks uses its existing chosen direction."
+}

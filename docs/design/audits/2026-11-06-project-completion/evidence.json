@@ -1,0 +1,84 @@
+{
+  "status": "passed",
+  "scope": "Actual owner HTTP/SQLite/React, synthetic accepted reports and peer closure; separate installed owned five-turn proof, zero browser model turns.",
+  "states": [
+    {
+      "file": "01-desktop-ready-without-owner-statement.png",
+      "sha256": "09bb23ddba3d932a175e5faf314afe43c68b448981c46e17b4d9140fad224e9c",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "02-desktop-report-original-limits.png",
+      "sha256": "69ec7f8d25980de650ce7b11e2181f3049417b5c69589b192edc8cc57f43f0a1",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "03-mobile-owner-scope-decision.png",
+      "sha256": "067d69fd3799a26e41607253139365c2a4b5ec22626934b417be893adc3b1cb6",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "04-mobile-reply-lost.png",
+      "sha256": "4cfff9c021c927e93bf64dd70891b05a8571f9388eb599b0a5b7a8502e5aa0ac",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "05-mobile-reload-original-packet.png",
+      "sha256": "f7cc80d26582bc400968e85c8e63f7d17e5519e858164edc8c4d19df631dbc23",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "06-mobile-exact-receipt-recovered.png",
+      "sha256": "422adec656e62442866c94e090edadc9c4d02f59e9b5ee7a37791311254be163",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "07-desktop-old-decision-changed-scope.png",
+      "sha256": "131be82dc74669cc7f2267c08be3f880f0f82ea9d087e7b147e57067f0279d84",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    }
+  ],
+  "requests": [
+    {
+      "operation_key": "51343fe4-a3cb-4f62-9bd0-318f02a6cf5a",
+      "report_sha256": "2a25e65d97c62823ea6423348a04c3ee949559347fc714d65eda0a8f4102eeed",
+      "acknowledged_unpublished_attempts": [],
+      "statement": "Revisé el alcance original y los dos informes. Acepto su cierre con la limitación de que la medición no fue repetida."
+    },
+    {
+      "operation_key": "51343fe4-a3cb-4f62-9bd0-318f02a6cf5a",
+      "report_sha256": "2a25e65d97c62823ea6423348a04c3ee949559347fc714d65eda0a8f4102eeed",
+      "acknowledged_unpublished_attempts": [],
+      "statement": "Revisé el alcance original y los dos informes. Acepto su cierre con la limitación de que la medición no fue repetida."
+    }
+  ],
+  "page_errors": []
+}

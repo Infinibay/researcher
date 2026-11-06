@@ -1,0 +1,23 @@
+/** Whole-project report inspection and exact explicit owner closure; no native turn or publication is inferred. @module */
+import {fetchApi} from './client.ts'
+import {ownerActionStore} from './ownerActions.ts'
+
+/** Historical acceptance is separate from whether its scope still matches current evidence. */
+export interface CompletionReceipt {kind:'project.completion';project_id:number;task_id:number;plan_run_id:string;operation_key:string;report_sha256:string;acknowledged_unpublished_attempts:string[];statement:string;project_status:'completed';publication_performed:false;report_markdown:string;snapshot:unknown}
+/** A deterministic report includes every project task and structural blocker, never an automatic semantic verdict. */
+export interface CompletionState {project_id:number;task_id:number;plan_run_id:string;report_sha256:string;report_markdown:string;blockers:{code:string;task_id?:number;message:string}[];unpublished_attempts:string[];eligible:boolean;acceptance:CompletionReceipt|null;acceptance_current:boolean;snapshot:unknown}
+/** Persist the exact reviewed report, statement and unpublished candidate acknowledgement before sending. */
+export interface CompletionAction {readonly schema:1;readonly kind:'project-completion';readonly projectId:number;readonly taskId:number;readonly runId:string;readonly body:Readonly<{operation_key:string;report_sha256:string;acknowledged_unpublished_attempts:readonly string[];statement:string}>}
+
+/** Damaged reload data cannot manufacture proof, change scope or silently omit unpublished code. */
+function parse(value:unknown):CompletionAction {const a=value as CompletionAction,b=a.body;if(a.kind!=='project-completion'||Object.keys(b).sort().join(',')!=='acknowledged_unpublished_attempts,operation_key,report_sha256,statement'||!/^[a-f0-9]{64}$/.test(b.report_sha256)||typeof b.statement!=='string'||!b.statement.trim()||b.statement.length>4000||!Array.isArray(b.acknowledged_unpublished_attempts)||b.acknowledged_unpublished_attempts.length>256||b.acknowledged_unpublished_attempts.some(id=>typeof id!=='string'||!id||id.length>128)||new Set(b.acknowledged_unpublished_attempts).size!==b.acknowledged_unpublished_attempts.length)throw new Error('Consulta el informe y escribe una declaración de revisión válida.');return {...a,body:{...b,acknowledged_unpublished_attempts:Object.freeze([...b.acknowledged_unpublished_attempts])}}}
+/** Closure uses a separate stable receipt namespace and the shared durable pointer semantics. */
+export const completionActions=ownerActionStore<CompletionAction>('project-completion',parse)
+/** Freeze the actual observed scope; no default statement pretends that the owner reviewed it. */
+export function prepareCompletion(projectId:number,taskId:number,runId:string,report:string,unpublished:readonly string[],statement:string):CompletionAction {const action=parse({schema:1,kind:'project-completion',projectId,taskId,runId,body:{operation_key:crypto.randomUUID(),report_sha256:report,acknowledged_unpublished_attempts:[...unpublished].sort(),statement}});return Object.freeze({...action,body:Object.freeze(action.body)})}
+/** Only the exact original result resolves an uncertain completion request. */
+export function matchesCompletion(r:CompletionReceipt,a:CompletionAction){return r.kind==='project.completion'&&r.project_id===a.projectId&&r.task_id===a.taskId&&r.plan_run_id===a.runId&&r.operation_key===a.body.operation_key&&r.report_sha256===a.body.report_sha256&&r.statement===a.body.statement&&JSON.stringify(r.acknowledged_unpublished_attempts)===JSON.stringify(a.body.acknowledged_unpublished_attempts)&&r.project_status==='completed'&&r.publication_performed===false}
+/** Read without requiring a running inference service; verify the returned owner scope. */
+export async function completionState(project:number,task:number,run:string){const state=await fetchApi<CompletionState>(`/api/projects/${project}/runs/${encodeURIComponent(run)}/project-plan/completion`);if(state.project_id!==project||state.task_id!==task||state.plan_run_id!==run)throw new Error('El informe no corresponde a este proyecto y plan.');return state}
+/** Reuse the original complete packet after response loss; never replace its hash with a newer report. */
+export async function sendCompletion(action:CompletionAction){parse(action);const receipt=await fetchApi<CompletionReceipt>(`/api/projects/${action.projectId}/runs/${encodeURIComponent(action.runId)}/project-plan/completion/accept`,{method:'POST',body:JSON.stringify(action.body)});if(!matchesCompletion(receipt,action))throw new Error('El recibo no corresponde al cierre original. Conservamos tu solicitud.');return receipt}

@@ -12,16 +12,18 @@ from backend.tests.runtime.test_owned_factory import owned_config as owned_confi
 
 @pytest.mark.timeout(480)
 async def test_owned_successor_reads_exact_accepted_code_and_input_without_assuming_publication(owned_config, monkeypatch):
-    """Both authors/checks/reviewers use real kernel/broker/Git/SQLite; only owner acceptance releases the successor, which consumes actual predecessor bytes privately."""
+    """Real kernel/broker/Git/SQLite prove causal authors/checks/reviews and exact owner project closure with explicit unpublished acknowledgement, without semantic-success or real-model claims."""
     from backend.api.main import create_app
     from backend.api.runtime_dependencies import configured_runtime
     from backend.planning.execution import PlanExecutions
     from backend.planning.store import ProjectPlans
     from backend.runtime.code_acceptances import CodeAcceptances
     from backend.runtime.code_reviews import CodeReviews, CodeReviewTarget
+    from backend.runtime.contracts import RunConflict
     from backend.tests.runtime.test_code_acceptance import owner_intent
     from backend.tests.runtime.test_development_workspace import fixture_git
     from backend.runtime import service
+    from backend.planning.completion import ProjectCompletion
 
     warning = service.logger.warning
 
@@ -34,6 +36,10 @@ async def test_owned_successor_reads_exact_accepted_code_and_input_without_assum
     monkeypatch.setattr(service.logger, 'warning', fixture_warning)
 
     c = owned_config
+    # These unused seed rows have no run/attempt/history. Start the physical
+    # project with only its real plan, retaining every subsequently issued run.
+    c.s.c.conn.execute('DELETE FROM tasks WHERE project_id=101 AND id IN (1001,1002)')
+    c.s.c.conn.commit()
     script = Path(c.settings['codex_binary'])
     fixture = script.read_text()
     assert fixture.count('"type": "research",') == 1
@@ -111,3 +117,17 @@ async def test_owned_successor_reads_exact_accepted_code_and_input_without_assum
             assert conn.execute('SELECT COUNT(*) FROM runtime_code_publication_requests').fetchone()[0] == 0
         assert len(runtime.store.task_runs(101, tasks[0])) == 2
         assert len(runtime.store.task_runs(101, tasks[1])) == 2
+        completion = ProjectCompletion(runtime.store, legacy_active=runtime.legacy_active)
+        report = completion.state(101, plan.run_id)
+        assert report['eligible'], report['blockers']
+        assert len(report['unpublished_attempts']) == 2
+        decision = {'operation_key': 'owner-completes-causal-project', 'report_sha256': report['report_sha256'],
+                    'acknowledged_unpublished_attempts': report['unpublished_attempts'],
+                    'statement': 'Revisé el alcance y los dos candidatos comprobados y revisados. Acepto el cierre con ambos sin publicar y con los límites descritos.'}
+        with pytest.raises(RunConflict, match='sin aceptar/cerrar|reconocer'):
+            completion.accept(101, plan.run_id, **{**decision, 'acknowledged_unpublished_attempts': []})
+        receipt = completion.accept(101, plan.run_id, **decision)
+        assert completion.accept(101, plan.run_id, **decision) == receipt
+        assert completion.state(101, plan.run_id)['acceptance_current']
+        assert receipt['snapshot'] == report['snapshot'] and not receipt['publication_performed']
+        assert (c.s.workspace / 'fact.txt').read_text() == '137'

@@ -402,3 +402,18 @@ fuente137conservada.0modelos reales/publicaciones. No demuestra calidad semánti
 restore, suite global ni cierre integral de proyecto; ese cierre/informe es el
 siguiente bloque. [Contrato](predecessor-code-material.md),
 [resultados](../modernization/predecessor-material-results.json).
+
+
+## Informe y cierre de proyecto — 2026-11-06
+
+El informe actual se compone de evidencia atribuida con versiones, no del prompt
+antiguo que declaraba completo el proyecto antes de revisarlo. El endpoint de
+consulta no necesita inferencia; el cierre usa una decisión owner/CSRF exacta con
+informe/hash/declaración/reconocimiento de candidatos sin publicar. Reutiliza la
+transacción/recibo/evento existente; ninguna tarea, revisión o publicación se
+acepta por derivación de contadores. CRUD/helper de status completed rechazan.
+La web conserva solicitudes tras perder respuesta y diferencia cierre histórico
+de vigencia actual. La API de edición ya usa el schema real de proyectos, que
+no tiene updated_at. [Contrato](project-completion.md),
+[resultados](../modernization/project-completion-results.json). Historial ampliado,
+adopciones, paridad terminal y aceptación global siguen pendientes.

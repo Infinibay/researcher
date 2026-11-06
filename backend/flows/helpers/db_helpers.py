@@ -85,7 +85,11 @@ def get_project_name(project_id: int) -> str:
 
 
 def update_project_status(project_id: int, status: str) -> None:
-    """Update the status of a project."""
+    """Update operational labels; completion requires an exact native report and a distinct owner decision."""
+    if status == "completed":
+        from backend.runtime.lifecycle import NativeOwnerRequired
+
+        raise NativeOwnerRequired("Project completion requires explicit owner acceptance of the current whole-project report")
 
     def _update(conn: sqlite3.Connection) -> None:
         if status == "completed":

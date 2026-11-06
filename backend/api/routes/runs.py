@@ -425,6 +425,38 @@ async def project_plan_execution(project_id: int, run_id: str, request: Request)
     return JSONResponse(data, headers={"Cache-Control": "no-store"})
 
 
+class CompleteProject(BaseModel):
+    """A paired owner's explicit scope review and acknowledgement of every observed unpublished candidate; no caller-supplied proof or authority."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
+    report_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+    acknowledged_unpublished_attempts: list[str] = Field(max_length=256)
+    statement: str = Field(min_length=1, max_length=4000)
+
+
+@router.get("/{project_id}/runs/{run_id}/project-plan/completion")
+async def project_completion_report(project_id: int, run_id: str, request: Request):
+    """Read the complete attributed project report offline; no inference, publication, task acceptance or completion effect occurs."""
+    from backend.api.flow_manager import flow_manager
+    from backend.planning.completion import ProjectCompletion
+
+    records = ProjectCompletion(read_store(request), legacy_active=flow_manager.is_project_running)
+    data = await asyncio.to_thread(records.state, project_id, run_id)
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
+@router.post("/{project_id}/runs/{run_id}/project-plan/completion/accept")
+async def accept_project_completion(project_id: int, run_id: str, body: CompleteProject, request: Request):
+    """Commit only an exact paired-owner whole-project decision; retries recover the historical receipt without repeating any project effect."""
+    from backend.api.flow_manager import flow_manager
+    from backend.planning.completion import ProjectCompletion
+
+    records = ProjectCompletion(read_store(request), legacy_active=flow_manager.is_project_running)
+    data = await asyncio.to_thread(records.accept, project_id, run_id, **body.model_dump())
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
 @router.post("/{project_id}/runs/{run_id}/project-plan/execution")
 async def execute_project_plan(project_id: int, run_id: str, body: ExecuteProjectPlan, request: Request):
     """Record a distinct paired-owner execution decision; the existing runtime dispatcher owns readiness and physical attempts."""

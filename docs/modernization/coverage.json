@@ -3346,8 +3346,31 @@
         "Actual clean installed five-turn graph with both author/check/review/acceptance chains, unchanged original source and no publications;115selectedcasespass,4inheritedinversefailuresexplicitlyretained"
       ],
       "remaining": [
-        "Whole-project closure/final report, documentary large handoff windows, broader retained/manual adoption, current global suite/inverses/restore and all original visual/model/science/human/final-review obligations",
+        "Whole-project report/explicit closure now connected separately; documentary large handoff windows, broader retained/manual adoption, current global suite/inverses/restore and all original visual/model/science/human/final-review obligations",
         "Earlier startup ValueError has no exact cause and was not reproduced; preserve diagnostic limitation, do not assert it fixed."
+      ]
+    },
+    "owner_project_completion": {
+      "status": "current_project_report_and_exact_owner_completion_verified_full_lifecycle_pending",
+      "evidence": [
+        "backend/planning/completion.py",
+        "backend/tests/runtime/test_project_completion.py",
+        "backend/tests/runtime/test_owned_code_dependencies.py",
+        "frontend/src/api/projectCompletion.ts",
+        "frontend/src/components/tasks/ProjectCompletion.tsx",
+        "frontend/tests/project-completion-actions.test.ts",
+        "docs/architecture/project-completion.md",
+        "docs/modernization/project-completion-results.json",
+        "docs/modernization/project-completion-packaging.json",
+        "docs/design/audits/2026-11-06-project-completion/evidence.json"
+      ],
+      "implemented": [
+        "All project tasks/current accepted artifacts and original scope included; exact report snapshot/hash and explicit owner statement/each unpublished candidate acknowledgement, existing receipt transaction/no new model or publication",
+        "Native-only123selectedpass excluding4oldinverses; actual5turn graph then exact host project closure/replay, canonical137 retained; source34plus7legacy, frontend102/build, browser7states with exact lost-reply recovery and changed-scope historical validity"
+      ],
+      "remaining": [
+        "Projects route discoverability/full redesign and all12page final acceptance; broader closed effect/budget history expansion/historical/manual adoption/advanced terminal parity",
+        "Representative semantic/human/science/model/prompt evaluations, current global suite/43scenarios, installation/restore/inverses and final fresh review remain required"
       ]
     }
   }
