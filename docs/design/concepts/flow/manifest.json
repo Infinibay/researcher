@@ -1,0 +1,53 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-11-06",
+  "route": "/flow",
+  "desktop_count": 3,
+  "mobile_count": 1,
+  "selection": "inspector",
+  "selected_by": "assistant, explicitly delegated by owner",
+  "display_order": [
+    "inspector",
+    "map",
+    "timeline"
+  ],
+  "references": [
+    "docs/design/audits/2026-11-06-flow/before.png",
+    "docs/design/audits/2026-11-06-agents/01-desktop.png"
+  ],
+  "images": [
+    {
+      "file": "inspector.png",
+      "sha256": "f856073f1faa307977bf52ff1ba70290a38e14778bc75adb45e7e85d0e03ce05",
+      "width": 1487,
+      "height": 1058,
+      "prompt": "inspector.prompt.txt",
+      "selected": true
+    },
+    {
+      "file": "map.png",
+      "sha256": "53fc52e08b8c09747d6c41a3b29e7ce7d882cb58819d6489dbc133da0925721b",
+      "width": 1487,
+      "height": 1058,
+      "prompt": "map.prompt.txt",
+      "selected": false
+    },
+    {
+      "file": "timeline.png",
+      "sha256": "946081fbb7d322b92be0a9ae9ece1e6d8bb64b6721caa86ebfaff04e40a81405",
+      "width": 1487,
+      "height": 1058,
+      "prompt": "timeline.prompt.txt",
+      "selected": false
+    },
+    {
+      "file": "mobile.png",
+      "sha256": "73e20ef18cd606ad8d51d5b11eba5981c00a9c8f5372f98a11cf2c663aa5d322",
+      "width": 852,
+      "height": 1846,
+      "prompt": "mobile.prompt.txt",
+      "selected": true
+    }
+  ],
+  "limits": "Reference concepts, not actual product data. Generated illustrative rejection controls and task chronology are not implemented; original native controls and actual causal deliveries are authoritative."
+}

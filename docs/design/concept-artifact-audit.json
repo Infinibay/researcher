@@ -1,0 +1,94 @@
+{
+  "date": "2026-11-06",
+  "scope": "Generated artifact presence, SHA-256, per-route 3 desktop +1 mobile and selected-desktop identity. Independent generation/selection rationale are recorded in each manifest/brief; this audit is not UI or human acceptance.",
+  "routes": [
+    {
+      "route_directory": "agents",
+      "manifest": "docs/design/concepts/agents/manifest.json",
+      "selected": "roster",
+      "desktop": 3,
+      "mobile": 1
+    },
+    {
+      "route_directory": "chat",
+      "manifest": "docs/design/concepts/chat/manifest.json",
+      "selected": "conversation-with-evidence",
+      "desktop": 3,
+      "mobile": 1
+    },
+    {
+      "route_directory": "files",
+      "manifest": "docs/design/concepts/files/manifest.json",
+      "selected": "archive-inspector",
+      "desktop": 3,
+      "mobile": 1
+    },
+    {
+      "route_directory": "findings",
+      "manifest": "docs/design/concepts/findings/manifest.json",
+      "selected": "evidence-ledger",
+      "desktop": 3,
+      "mobile": 1
+    },
+    {
+      "route_directory": "flow",
+      "manifest": "docs/design/concepts/flow/manifest.json",
+      "selected": "inspector",
+      "desktop": 3,
+      "mobile": 1
+    },
+    {
+      "route_directory": "home",
+      "manifest": "docs/design/concepts/home/manifest.json",
+      "selected": "situation-notebook",
+      "desktop": 3,
+      "mobile": 1
+    },
+    {
+      "route_directory": "planning",
+      "manifest": "docs/design/concepts/planning/manifest.json",
+      "selected": "tree-detail",
+      "desktop": 3,
+      "mobile": 1
+    },
+    {
+      "route_directory": "projects",
+      "manifest": "docs/design/concepts/projects/manifest.json",
+      "selected": "project-dossier",
+      "desktop": 3,
+      "mobile": 1
+    },
+    {
+      "route_directory": "reports",
+      "manifest": "docs/design/concepts/reports/manifest.json",
+      "selected": "reading-with-provenance",
+      "desktop": 3,
+      "mobile": 1
+    },
+    {
+      "route_directory": "repositories",
+      "manifest": "docs/design/concepts/repositories/manifest.json",
+      "selected": "source-explorer",
+      "desktop": 3,
+      "mobile": 1
+    },
+    {
+      "route_directory": "tasks",
+      "manifest": "docs/design/concepts/tasks/manifest.json",
+      "selected": "editorial-inspector",
+      "desktop": 3,
+      "mobile": 1
+    },
+    {
+      "route_directory": "wiki",
+      "manifest": "docs/design/concepts/wiki/manifest.json",
+      "selected": "scoped-notebook",
+      "desktop": 3,
+      "mobile": 1
+    }
+  ],
+  "desktop": 36,
+  "mobile": 12,
+  "unique_images": 48,
+  "fully_accepted_pages": 0
+}

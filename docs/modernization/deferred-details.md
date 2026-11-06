@@ -125,3 +125,12 @@ perder ejecuciones anteriores. Integrar el ajuste móvil compartido deDD041.
 La identidad, consulta nativa, consumo desconocido, paginación y Stop ya funcionan.
 Historial completo de intentos/presupuestos, cierre físico global y retirada de
 consumidores legacy siguen como capacidades principales, no como pulido diferido.
+
+## DD044 — densidad e inspector de Ejecución
+
+Después de todas las capacidades principales: compactar etiquetas/espacios del
+inspector y controles reutilizados, armonizar singular/plural e integrar la
+cabecera móvil compartida. Mantener el título accesible y la distinción entre
+relación causal e historia. La navegación, evidencia y pausa original ya funcionan.
+Recuperación física global, presupuestos completos, retiradas legacy y evaluación
+humana siguen como capacidades principales; no se difieren como pulido.

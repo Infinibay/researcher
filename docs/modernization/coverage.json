@@ -1948,7 +1948,7 @@
       ]
     },
     "36_desktop_concepts": {
-      "status": "in_progress",
+      "status": "verified",
       "evidence": [
         "docs/design/inventory.md",
         "docs/design/selection.md",
@@ -1985,15 +1985,17 @@
         "frontend/tests/planning.browser.mjs",
         "docs/design/concepts/agents/manifest.json",
         "docs/design/audits/2026-11-06-agents/report.md",
-        "frontend/tests/agents.browser.mjs"
+        "frontend/tests/agents.browser.mjs",
+        "docs/design/concepts/flow/manifest.json",
+        "docs/design/audits/2026-11-06-flow/report.md",
+        "docs/design/concept-artifact-audit.json",
+        "frontend/tests/flow.browser.mjs"
       ],
-      "remaining": [
-        "One route needs concepts/selection/implementation: flow. Three desktop and one mobile concept remain.",
-        "All twelve routes/shared components need integral interaction/accessibility/human acceptance; zero fully accepted. Agent current-attempt observations and fixture Stop controls do not establish full budget history or physical runtime closure. Planning CRUD recovery/history stays principal engine/operation work; DD043 is secondary polish only."
-      ]
+      "remaining": [],
+      "implemented": "All12route manifests:36desktop+12mobile images,48unique matching hashes, prompts and exact selected-desktop identities checked6Nov. Generation/selection rationale recorded per manifest/brief; not UI or human acceptance."
     },
     "12_mobile_adaptations": {
-      "status": "in_progress",
+      "status": "verified",
       "evidence": [
         "docs/design/inventory.md",
         "docs/design/selection.md",
@@ -2024,15 +2026,17 @@
         "frontend/tests/repository-file-design.test.ts",
         "docs/design/concepts/agents/manifest.json",
         "docs/design/audits/2026-11-06-agents/report.md",
-        "frontend/tests/agents.browser.mjs"
+        "frontend/tests/agents.browser.mjs",
+        "docs/design/concepts/flow/manifest.json",
+        "docs/design/audits/2026-11-06-flow/report.md",
+        "docs/design/concept-artifact-audit.json",
+        "frontend/tests/flow.browser.mjs"
       ],
-      "remaining": [
-        "One route needs concepts/selection/implementation: flow. Three desktop and one mobile concept remain.",
-        "All twelve routes/shared components need integral interaction/accessibility/human acceptance; zero fully accepted. Agent current-attempt observations and fixture Stop controls do not establish full budget history or physical runtime closure. Planning CRUD recovery/history stays principal engine/operation work; DD043 is secondary polish only."
-      ]
+      "remaining": [],
+      "implemented": "All12route manifests:36desktop+12mobile images,48unique matching hashes, prompts and exact selected-desktop identities checked6Nov. Generation/selection rationale recorded per manifest/brief; not UI or human acceptance."
     },
     "design_selection": {
-      "status": "in_progress",
+      "status": "verified",
       "evidence": [
         "docs/design/inventory.md",
         "docs/design/selection.md",
@@ -2077,12 +2081,14 @@
         "frontend/tests/planning.browser.mjs",
         "docs/design/concepts/agents/manifest.json",
         "docs/design/audits/2026-11-06-agents/report.md",
-        "frontend/tests/agents.browser.mjs"
+        "frontend/tests/agents.browser.mjs",
+        "docs/design/concepts/flow/manifest.json",
+        "docs/design/audits/2026-11-06-flow/report.md",
+        "docs/design/concept-artifact-audit.json",
+        "frontend/tests/flow.browser.mjs"
       ],
-      "remaining": [
-        "One route needs concepts/selection/implementation: flow. Three desktop and one mobile concept remain.",
-        "All twelve routes/shared components need integral interaction/accessibility/human acceptance; zero fully accepted. Agent current-attempt observations and fixture Stop controls do not establish full budget history or physical runtime closure. Planning CRUD recovery/history stays principal engine/operation work; DD043 is secondary polish only."
-      ]
+      "remaining": [],
+      "implemented": "All12route manifests:36desktop+12mobile images,48unique matching hashes, prompts and exact selected-desktop identities checked6Nov. Generation/selection rationale recorded per manifest/brief; not UI or human acceptance."
     },
     "all_screens_implemented": {
       "status": "in_progress",
@@ -2127,11 +2133,15 @@
         "frontend/tests/repository-file-design.test.ts",
         "docs/design/concepts/agents/manifest.json",
         "docs/design/audits/2026-11-06-agents/report.md",
-        "frontend/tests/agents.browser.mjs"
+        "frontend/tests/agents.browser.mjs",
+        "docs/design/concepts/flow/manifest.json",
+        "docs/design/audits/2026-11-06-flow/report.md",
+        "docs/design/concept-artifact-audit.json",
+        "frontend/tests/flow.browser.mjs"
       ],
       "remaining": [
-        "One route needs concepts/selection/implementation: flow. Three desktop and one mobile concept remain.",
-        "All twelve routes/shared components need integral interaction/accessibility/human acceptance; zero fully accepted. Agent current-attempt observations and fixture Stop controls do not establish full budget history or physical runtime closure. Planning CRUD recovery/history stays principal engine/operation work; DD043 is secondary polish only."
+        "All12routes have selected implemented pilots. Complete integral interaction/accessibility/human and real-runtime acceptance for every page and shared component.",
+        "Full history/budgets, native legacy cutover, physical recovery and retained capability gaps remain principal engine/operation work. DD044 is secondary polish only."
       ]
     },
     "accessibility_e2e": {

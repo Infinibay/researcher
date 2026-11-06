@@ -12,11 +12,27 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 ## Estado comprobado
 
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor retirados; quedan consumidores, herramientas y dependencias antiguos.
-- Interfaz: once pilotos, 33/36 conceptos de escritorio y 11/12 móviles; una ruta pendiente y 0/12 páginas completamente aceptadas.
+- Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 0/12 páginas están completamente aceptadas.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: Agentes implementado; continúa Ejecución
+## Etapa actual: doce páginas piloto; continúa el engine y la retirada antigua
+
+Ejecución consulta planes/grafos/entregas reales, muestra dependencias y evidencia
+recibida, separa historia del avance vigente y conserva enlaces originales.
+Reutiliza los controles existentes; una pausa con respuesta perdida se recupera
+con el mismo paquete después de recargar. Diez estados HTTP controlados sin
+incidencias Axe/JS; 123 pruebas frontend y build pasan. Doce declaraciones JSDoc.
+[Recorrido y límites](../design/audits/2026-11-06-flow/report.md).
+
+Se verificaron **36 imágenes desktop, 12 móviles y doce selecciones** por presencia,
+hash y manifest ([auditoría](../design/concept-artifact-audit.json)). Esos entregables
+quedan comprobados; doce pilotos no significan aceptación integral.
+**Siguiente principal:** completar el uso del runtime nativo en los consumidores
+restantes del engine, incluida la coherencia de controles/estado globales.
+El pulido DD044 espera a que terminen todas las capacidades principales.
+
+## Etapa anterior: Agentes implementado; continúa Ejecución
 
 Agentes ya consulta ejecuciones nativas con identidad/tarea/intento, modelo y
 consumo observado, paginación y Stop original. Desconocido sigue siendo desconocido;
@@ -78,7 +94,7 @@ cambios frontend, no nuevas capturas/build ni aceptación global por esta entreg
 | Prompts y comunicación humano–agente | Catálogo/revisión estática implementados; comparación con modelos y comprensión humana pendientes |
 | Engine, coordinación entre agentes y retirada heredada | Incompleto |
 | Dependencias e infraestructura restantes | Actualización parcial |
-| Interfaz web | Agentes es el undécimo piloto; falta Ejecución y la aceptación integral de las doce páginas |
+| Interfaz web | Doce pilotos y 48 conceptos comprobados; aceptación integral de las doce páginas pendiente |
 | Migración/restore, operación, historial/presupuestos y CLI/TUI | Parcial; validación integral pendiente |
 |43escenarios, doce páginas, evaluación humana/científica y revisión final | Pendientes de aceptación integral |
 | Pulido secundario de todos los bloques | Después de todas las tareas gruesas |

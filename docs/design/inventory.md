@@ -18,8 +18,8 @@ archivos generados e inspeccionados, no pantallas aceptadas.
 | `/reports` | 3 | 1 | Lectura con trazabilidad | Piloto en código | Parcial: recorrido y capturas; aceptación humana pendiente |
 | `/files` | 3 | 1 | Archivo con inspector | Piloto en código | Parcial: recorrido/teclado; aceptación humana pendiente |
 | `/repositories` | 3 | 1 | Explorador con registro de fuentes | Piloto de exploración; alta completa pendiente | Parcial: snapshot/errores/origen/foco/móvil; aceptación pendiente |
-| `/flow` | 0 | 0 | Pendiente | Pendiente | Pendiente |
-| **Total** | **33 / 36** | **11 / 12** | **11 / 12** | **11 pilotos** | **0 / 12** |
+| `/flow` | 3 | 1 | Inspector del recorrido real | Piloto en código | Parcial: dependencias/evidencia/pausa/historia/móvil; aceptación pendiente |
+| **Total** | **36 / 36** | **12 / 12** | **12 / 12** | **12 pilotos** | **0 / 12** |
 
 Los prompts, archivos, hashes, tamaños y procedencia del piloto están en
 [concepts/tasks/manifest.json](concepts/tasks/manifest.json). Las tres alternativas
@@ -91,3 +91,5 @@ Actualización 2026-11-06, Resumen: [selección](concepts/home/brief.md), [manif
 Actualización6noviembre, Planificación: [selección](concepts/planning/brief.md), [manifest](concepts/planning/manifest.json), [recorrido y límites](audits/2026-11-06-planning/report.md).30/36desktop,10/12mobile,10pilotos,0aceptadas. Agentes y Ejecución siguen pendientes de conceptos/implementación.
 
 Agentes tiene tres conceptos y móvil, con registro nativo paginado y Stop original: [selección](concepts/agents/brief.md), [ocho capturas y límites](audits/2026-11-06-agents/report.md). Resta Ejecución; once pilotos, cero aceptaciones integrales.
+
+Ejecución completa la colección de conceptos: [selección](concepts/flow/brief.md), [diez capturas y límites](audits/2026-11-06-flow/report.md). Las doce rutas tienen piloto. La [auditoría de artefactos](concept-artifact-audit.json) comprueba 48 imágenes únicas, hashes, prompts y selección; la aceptación integral sigue 0/12.

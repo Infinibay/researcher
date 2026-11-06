@@ -1,0 +1,74 @@
+[
+  {
+    "path": "frontend/src/components/pages/FlowPage.tsx",
+    "name": "Plan",
+    "line": 13,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/pages/FlowPage.tsx",
+    "name": "Node",
+    "line": 15,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/pages/FlowPage.tsx",
+    "name": "FlowPage",
+    "line": 19,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/pages/FlowPage.tsx",
+    "name": "ProjectExecution",
+    "line": 26,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/pages/FlowPage.tsx",
+    "name": "select",
+    "line": 32,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/pages/FlowPage.tsx",
+    "name": "back",
+    "line": 34,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/pages/FlowPage.tsx",
+    "name": "PlanInspector",
+    "line": 49,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/pages/FlowPage.tsx",
+    "name": "select",
+    "line": 59,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/pages/FlowPage.tsx",
+    "name": "back",
+    "line": 61,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/pages/FlowPage.tsx",
+    "name": "resolved",
+    "line": 63,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/pages/FlowPage.tsx",
+    "name": "TaskInspection",
+    "line": 82,
+    "documented": true
+  },
+  {
+    "path": "frontend/tests/flow.browser.mjs",
+    "name": "capture",
+    "line": 43,
+    "documented": true
+  }
+]

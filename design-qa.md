@@ -1,6 +1,6 @@
 # QA visual de los pilotos de la modernización
 
-Resultado actual: **parcial; once pilotos, 33/36 conceptos de escritorio, 11/12 móviles y 0/12 rutas aceptadas completamente**. Una ruta sigue pendiente de conceptos/implementación. Las secciones siguientes conservan evidencia histórica con su alcance original.
+Resultado actual: **parcial; doce pilotos, 36/36 conceptos de escritorio, 12/12 móviles y 0/12 rutas aceptadas completamente**. Todas las rutas tienen conceptos y piloto; queda la aceptación integral. Las secciones siguientes conservan evidencia histórica con su alcance original.
 
 El bloqueo inicial de CUA queda como antecedente histórico. El plan autorizado
 ya exige Playwright y axe; Chromium local con sandbox funciona. No se necesita
@@ -115,3 +115,12 @@ Ocho estados con fixturesHTTP,0Axe/JS/desbordamiento; Stop original con error y
 solicitud separada de cierre, datos desconocidos, paginación y cambio de proyecto.
 [Recorrido y límites](docs/design/audits/2026-11-06-agents/report.md). DD043 difiere
 densidad tras todas las capacidades; no hay aceptación integral ni demo desplegada.
+
+## Ejecución — resultado del alcance: passed
+
+Inspector elegido y móvil comparados contra capturas reales. Diez estados con
+HTTP controlado, sin incidencias Axe/JS/desbordamiento; navegación por dependencias,
+historia separada, contexto obsoleto y recuperación de la misma pausa tras recarga.
+[Recorrido y límites](docs/design/audits/2026-11-06-flow/report.md). DD044 conserva
+densidad secundaria para el final. Las doce rutas tienen piloto; ninguna se declara
+aceptada integralmente. No hay nueva inferencia, demo viva ni despliegue.
