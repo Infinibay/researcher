@@ -1,13 +1,13 @@
 # Matriz de capacidades y migración
 
-Estado: inventario verificado; migración parcial. Codex está integrado al primer
-recorrido de investigación por API autenticada; el resto del catálogo continúa
-pendiente. Ver `native-runtime-boundary.md`. Una fila pendiente no es una
-capacidad ya disponible.
+Estado: migración parcial. Los cierres recientes están en el tablero de ejecución
+y en los contratos enlazados. Varias filas conservan requisitos del inventario
+inicial: no constituyen por sí solas un diagnóstico del código actual. El cierre
+integral sigue pendiente. Ver `native-runtime-boundary.md`.
 
 `legacy-tool-schemas.json` conserva los nombres, clases, archivos y **schemas
-Pydantic actuales de las 71 herramientas registradas** en
-`backend.tools.ALL_TOOL_CLASSES`. Se obtuvieron sin instanciar herramientas y
+Pydantic históricos de las 71 herramientas entonces registradas** en
+el ya retirado `backend.tools.ALL_TOOL_CLASSES`. Se obtuvieron sin instanciar herramientas y
 con conexión de sockets bloqueada. Las declaraciones adicionales fuera del
 registro están separadas: su existencia no demuestra uso ni autoriza retirarlas.
 Los schemas antiguos son evidencia de compatibilidad a migrar, no el contrato
@@ -30,9 +30,10 @@ genérico ni chat libre para cubrir operaciones que falten.
 
 | Herramientas actuales | Destino | Permisos, efectos y persistencia | Estado y prueba exigida |
 | --- | --- | --- | --- |
-| `read_file`, `list_directory`, `glob` | Lectura nativa en workspace confinado; adjuntos fuera de ese árbol por MCP propio | Lectura limitada por raíz real; sin credenciales ni montajes de otros proyectos | Parcial en fixtures nativos. Falta probar confinamiento de proceso, symlinks y mounts del despliegue |
-| `write_file`, `edit_file` | Edición nativa en worktree propio | Escritura de archivos, sin permiso implícito de commit/push. Evidencia: diff Git completo del candidato | Corrección sintética probada en ambos candidatos; falta integración con aceptación y recuperación |
-| `code_search`, `directory_search` | Ken MCP para código y documentos del repo; búsqueda documental del proyecto separada | Ken obligatorio por workspace; cobertura, revisión e índice visibles; consultas vacías no prueban ausencia | Ken real probado en fixtures. Falta preparado completo del repo y confinamiento de rutas. No retirar búsqueda de documentos no soportados por Ken |
+| `read_file`, `list_directory`, `glob`, lectura parcial y búsqueda literal | Lectura Ken y comandos/Python acotados en el workspace admitido | Vista y autoridad del intento; archivos externos por captura explícita | Wrappers antiguos retirados; usar los límites del comando y leer sus ventanas. Aislamiento cubierto por las pruebas de workspace/comandos. [Contrato](native-code-operations.md) |
+| `write_file`, `edit_file`, inserción/reemplazo, edición múltiple y patches | Comandos/Python en la copia privada | Cierre físico de escritores; diff/candidato/checks con SHA; aceptación/publicación separadas | Wrappers retirados, recorrido nativo comprobado. [Contrato y alcance](native-code-operations.md) |
+| `code_search`, descubrimiento de símbolos/referencias/estructura y diagnósticos | Ken y comprobadores del lenguaje disponibles; recuperación documental separada | Un solo índice de código; cobertura e incertidumbre explícitas | Índice y dos indexadores CLI antiguos retirados. No equiparar una consulta vacía con ausencia ni un toolchain ausente con diagnóstico limpio. [Contrato](native-code-operations.md) |
+| `add_symbol`, `edit_symbol`, `remove_symbol`, `rename_symbol`, `move_symbol` | Lectura Ken → transformación local explícita → actualización de callers/imports → candidato/check | Escrituras exclusivamente en copia privada; no API semántica universal ni aceptación por texto | Recorrido real de efectos con generación/Ken controlados; implementación antigua retirada. Evaluación de calidad real/multilenguaje pendiente. [Contrato](native-code-operations.md) |
 | `git_diff`, `git_status` | Lecturas nativas/host sobre repo identificado | Lectura de repo/base/head reales; sin singleton de «último diff» | Pendiente del recorrido de candidato versionado |
 | `git_branch`, `git_commit` | Servicio Git del host y MCP tipado | Repo/worktree/intento fijados; locks y receipt; no adoptar ni reparar un repo por accidente | Pendiente. Probar homónimos, carreras, commit incierto y reinicio |
 | `git_push`, `create_pr`, `merge_pr` | Host de publicación, detrás de aceptación sobre SHA exacto | Credencial del host; scope de autorización explícito. Persistir identidad remota y reconciliar antes de retry | Pendiente. CI/review de A no autoriza B; un DONE nativo no publica |

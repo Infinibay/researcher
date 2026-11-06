@@ -6852,3 +6852,54 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
   removal. The legacy extra remains. Operation/migrations/restore/history/budgets/
   CLI/realprompt-human-science/43scenarios/all12pages/finalreview remain.
   Macro-first/task-transition list persists;12pilots48concepts0accepted unchanged.
+
+### 2026-11-06 — Native code operations, duplicate index retirement and principal blockers
+
+- Previous goal turn was no progress on implementation: status/policy confirmation
+  only. Revalidated managed6429bff/branch and resumed the available code migration;
+  no blocker, no goal-status change. Protected original checkout/.agents/.codex/
+  AGENTS.md preserved. No agents, push, merge or deployment.
+- Ken recall/related returned original-checkout lower bounds or unindexed native
+  files. Read actual managed consumers. Static absolute/relative imports across
+  backend found only removed-wrapper tests outside the 44 retired modules;
+  exact module strings reviewed. Arbitrary dynamic/external consumers unproven.
+- Proved actual request-boundary Ken read→Python edit/add/remove/rename→updated
+  caller→move/import update→fresh Ken→controlled native turn→candidate→host check.
+  Git/kernel/SQLite/file effects real; generation/Ken controlled. Original files,
+  HEAD and task acceptance unchanged. Initial fixture needed owned_config imported
+  and explicit current-directory imports under isolated Python; fixed fixture,
+  not runtime policy. Explicit peer registry closure joins actual owned handles.
+- At60s test timed out during check after candidate ready. Original handle53723
+  drained to exit1; no replacement launch while it was live. Retained journal
+  profiling:12loads1.564s,history1.450s. Bounded8MiB verified-prefix reuse rereads
+  actual bytes, rejects same-length/timestamp tampering, revalidates live observer,
+  new appends, SQL rows and agreement. Original durability/recovery/format kept.
+  RED2FAIL2PASS, then38authority checks pass; completed native path21.26s.
+  Same synthetic100transition/20load benchmark:baseline0.196s/current0.064s,
+  corpus unchanged. This is a microbenchmark, not global product throughput.
+- Removed44code-index/file/CLI modules and17obsolete wrapper test functions;
+  no ci_* DDL/data change. uv lock offline185→179:only six tree-sitter packages
+  removed, no added package or changed retained version. Five requirements remain
+  in legacy; root tool DB/context and other leaf capabilities remain to migrate.
+- Source broad batch124PASS3FAIL0SKIP169.64s. Three independent broker crash
+  recoveries failed because package git imported API/services/Pydantic under-I-S.
+  Explicit git.services composition plus API consumer migration resolves this.
+  A first lazy-export attempt exposed module/singleton name collisions and was
+  replaced, not retained. Final followup38PASS0FAIL0SKIP10.64s covers broker crash,
+  authority SIGKILL, isolated import, actual Git owner HTTP and prompt auditor.
+  Across these batches153distinct cases have latest passing observations.
+- Clean-copy final wheel installed noneditable in native env:73PASS0FAIL0SKIP
+  31.873s;757matchingPythonSQLmembers,238env-onlybackend imports,85distributions
+  without legacy. Actual private refactor/candidate/check and crash/storage tests;
+  no real model/provider/user-data effects. Current env holds code-operations wheel.
+-16new/changed definitions documented;10Ruff warnings recordedDD049 (includes
+  pre-existing Git route warnings), no fine cleanup. Prompt451/443,95more archived
+  (130total), developer policy explicitly reviewed and unchanged BranchCreate
+  literal revalidated against sole consumer import change. Inventorycheck passes.
+- Terminal handles29790exit1,53723exit1,38417exit0,96430exit1,11612exit0,
+  42502exit1,62901exit1,79894exit0,43799exit0,12943exit0. No live model/server/test.
+  Scratch code-operations-* retains logs/XML/runner and consumer/profile evidence.
+- Next main: remaining leaf tools and five optional legacy libraries, then full
+  operation/migrations/restore/history/budgets/CLI/realprompt-human-science/
+  43scenarios/all12pages/finalreview.12pilots48concepts0accepted unchanged.
+  Macro-first and updated chat list at main-task transitions remain mandatory.

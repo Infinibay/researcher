@@ -9,6 +9,7 @@ LEGACY_DISTRIBUTIONS = {
     'tree-sitter-python','tree-sitter-javascript','tree-sitter-typescript',
     'tree-sitter-c','tree-sitter-rust',
 }
+RETIRED_PARSERS = {name for name in LEGACY_DISTRIBUTIONS if name.startswith('tree-sitter')}
 
 
 def dependency_names(requirements):
@@ -27,7 +28,8 @@ def test_historical_metadata_is_explicit_and_old_backend_extras_are_not_advertis
     """Optional metadata inspection is distinct from authorizing or configuring another production inference backend."""
     spec = tomllib.loads((Path(__file__).resolve().parents[3]/'pyproject.toml').read_text())['project']
     extras = spec['optional-dependencies']
-    assert LEGACY_DISTRIBUTIONS <= dependency_names(extras.get('legacy',[]))
+    assert LEGACY_DISTRIBUTIONS - RETIRED_PARSERS == dependency_names(extras.get('legacy',[]))
+    assert not RETIRED_PARSERS & dependency_names(extras.get('legacy',[]))
     assert not {'anthropic','gemini'} & set(extras)
 
 

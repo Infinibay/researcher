@@ -16,7 +16,30 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: Spider migrado y SDK opcional retirado
+## Etapa actual: herramientas de código e índice duplicado retirados
+
+Ken queda como descubrimiento/lectura/memoria técnica; comandos poseídos realizan
+las escrituras en la copia privada. Ensayo de edición, alta/baja, rename/move,
+actualización de imports/callers, refresco Ken, candidato y check exacto. Se retiran
+44módulos y seis requisitos tree-sitter; las tablas/filas ci_* se conservan.
+[Contrato y límites](../architecture/native-code-operations.md).
+
+**Comprobado:**153casos distintos con última observación satisfactoria en dos
+baterías de fuente;73pruebas del wheel pasan sin omisiones,757fuentes coinciden y
+238imports proceden sólo del entorno nativo. Se corrigió la reinterpretación
+repetida del historial y la carga indirecta de servicios web al importar Git en
+el broker aislado.16definiciones documentadas;451candidatos de prompt/443archivos,
+130entradas archivadas,0revisiones estáticas pendientes. Generación/Ken controlados;
+no nueva evaluación de calidad con modelos. Detalles de lint aplazadosDD049.
+
+**Siguiente principal:** restantes herramientas heredadas de shell/Git,
+coordinación/tareas/proyecto/conocimiento/fuentes y sus cinco bibliotecas legacy.
+Resolver capacidades útiles que falten antes de retirar cada implementación.
+Después operación, migraciones/restore, historial/presupuestos, CLI y evaluación
+real/humana/científica/global. Siguen12pilotos48conceptos0páginas aceptadas
+integralmente. Todos los detalles secundarios al final.
+
+## Etapa anterior: Spider migrado y SDK opcional retirado
 
 Captura avanzada de una página por MCP/API/fuente SQLite, con modos explícitos
 smart/browser/http y markdown/texto. Clave y créditos del host; contenido para

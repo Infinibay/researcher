@@ -550,3 +550,11 @@ fallos históricos reparados. Lock sin cambios de versiones restantes.
 122pruebas relacionadas y71instaladas pasan, con proveedor controlado.
 [Contrato y límites](spider-sources.md). Siguen las otras herramientas, índices,
 dependencias legacy y aceptación global; los detallesDD048 esperan al final.
+
+## Corte actual: operaciones de código consolidadas (6 de noviembre)
+
+Ken y comandos poseídos sustituyen el índice duplicado y los wrappers de archivo/
+edición estructural. Se retiran 44 módulos, seis requisitos tree-sitter y 17 tests
+de wrappers; los datos ci_* permanecen. El ensayo de efectos y sus límites están
+en [native-code-operations.md](native-code-operations.md). Restan otras herramientas
+y cinco dependencias del extra legacy; no se declara cerrada toda la migración.

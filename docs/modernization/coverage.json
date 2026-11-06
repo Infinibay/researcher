@@ -1613,7 +1613,11 @@
         "docs/modernization/ken-host-results.json",
         "docs/modernization/ken-host-live.json",
         "docs/modernization/ken-host-packaging.json",
-        "docs/modernization/owned-joint-host-v3.json"
+        "docs/modernization/owned-joint-host-v3.json",
+        "docs/architecture/native-code-operations.md",
+        "docs/modernization/code-operations-results.json",
+        "docs/modernization/code-operations-packaging.json",
+        "backend/tests/runtime/test_native_code_operations.py"
       ],
       "remaining": [
         "Full comparative/product scenarios and failure acceptance"
@@ -2292,7 +2296,11 @@
         "docs/modernization/spider-retirement.json",
         "docs/modernization/spider-results.json",
         "docs/modernization/spider-packaging.json",
-        "backend/tests/research/test_spider.py"
+        "backend/tests/research/test_spider.py",
+        "docs/architecture/native-code-operations.md",
+        "docs/modernization/code-operations-results.json",
+        "docs/modernization/code-operations-packaging.json",
+        "backend/tests/runtime/test_native_code_operations.py"
       ],
       "context7_cutover": {
         "implemented": "Optional host-owned library search and JSON/text documentation captured as attributed immutable sources; real MCP/HTTP/API/SQLite/citation with controlled provider bytes. Three CrewAI modules retired.",
@@ -2303,6 +2311,11 @@
         "implemented": "Optional single-page smart/browser/http scraping with host credentials/credit ceiling, immutable source capture and explicit finding citation. Shared bounded transport with Context7. Old module/three SDK-specific cases/extra retired. Lock removes three packages without changing retained versions.",
         "verified": "122 source /71 installed tests, zero failures/skips; DNS/socket and generation/Ken controlled. No real provider/model/user effects.",
         "remaining": "External provider availability/rendering/credit enforcement, aggregate budgets, other leaf tools/code indices/dependencies and whole-plan acceptance."
+      },
+      "native_code_operations_cutover": {
+        "implemented": "Ken discovery plus scoped native private writes, updated dependent imports/callers, exact candidate/checks. Removed 44 file/code-index/CLI modules and six direct tree-sitter requirements; ci_* data retained.",
+        "verified": "153 distinct source tests have latest passing observations across two scoped batches; installed wheel73PASS0FAIL0SKIP. Generation/Ken controlled; physical writes/Git/kernel/SQLite/crash recovery real.",
+        "remaining": "Other leaf tools and five optional legacy libraries, migrations/restore/operations, real model/human/science evaluation and global acceptance."
       }
     },
     "final_independent_review": {
@@ -2620,7 +2633,11 @@
         "docs/modernization/owned-factory-packaging.json",
         "docs/modernization/runtime-owned.example.json",
         "backend/tests/runtime/test_owned_factory.py",
-        "backend/tests/runtime/test_broker_commands.py"
+        "backend/tests/runtime/test_broker_commands.py",
+        "docs/architecture/native-code-operations.md",
+        "docs/modernization/code-operations-results.json",
+        "docs/modernization/code-operations-packaging.json",
+        "backend/tests/runtime/test_native_code_operations.py"
       ],
       "remaining": [
         "Migrate retained legacy shell/flow consumers and full code-interpreter capabilities.",
@@ -2739,7 +2756,11 @@
         "docs/modernization/authority-journal-results.json",
         "docs/modernization/authority-journal-evidence.json",
         "docs/modernization/authority-journal-packaging.json",
-        "docs/modernization/authority-journal-benchmark.json"
+        "docs/modernization/authority-journal-benchmark.json",
+        "backend/tests/runtime/test_authority_history_reuse.py",
+        "docs/modernization/code-operations-journal-benchmark.json",
+        "docs/modernization/code-operations-results.json",
+        "docs/modernization/code-operations-packaging.json"
       ],
       "implemented": [
         "Open-only witnessed SQL state with canonical actual-row hashing, CAS, original-intent receipts and PREPARE/SQL/COMMIT forward storage recovery.",
@@ -2752,7 +2773,8 @@
         "Legacy writer migration, global cross-database/alias exclusion and verified deployment/restore/handoff.",
         "Provisioned checkpoint/retention/capacity protocol and production performance acceptance; jointly rewound SQL+witness needs an external monotonic reference.",
         "All engine/tool/prompt/human/frontend acceptance and baseline failures remain in the full goal."
-      ]
+      ],
+      "verified_prefix_reuse": "Production broker history reads compare actual prefix bytes before reusing chain validation. Live enrollment, SQL row hashing, append validation and durability/recovery checks retained. 8MiB buffer bound; full operator checkpoint/capacity remains pending."
     },
     "execution_domain_kernel": {
       "status": "in_progress",
@@ -3082,7 +3104,8 @@
         "docs/design/audits/2026-11-01-findings/report.md",
         "frontend/tests/findings-design.test.ts",
         "docs/modernization/context7-docstrings.json",
-        "docs/modernization/spider-docstrings.json"
+        "docs/modernization/spider-docstrings.json",
+        "docs/modernization/code-operations-docstrings.json"
       ],
       "remaining": [
         "Audit modules/classes/methods and relevant functions added earlier in this branch; add meaningful searchable docstrings/JSDoc where missing or stale.",

@@ -1,0 +1,21 @@
+{
+  "scope": "Same synthetic 100-transition corpus, 20 sequential loads each, first load included, actual canonical SQL rows and fsync; no actor/model/user-data effects. A local microbenchmark, not an end-to-end throughput claim.",
+  "baseline_commit": "6429bff",
+  "baseline_source_sha256": "2d31f1c0c0dc1d54b27c904af493b4632418c150dea017b3fec4a59d1d918eb0",
+  "current_source_sha256": "0ad8279290da5d01a3c58e81c64d1b89137205614869951bd64fba8bf45110dc",
+  "corpus_bytes": 212736,
+  "corpus_sha256": "a36e5d43b9c7ba810139aee18f1b882776ec5080f56bbf66c1ee41c07e20cb68",
+  "unchanged_corpus": true,
+  "results": {
+    "baseline": {
+      "seconds": 0.19638456098618917,
+      "first_read_seconds": 0.009963319011148997,
+      "later_read_mean_seconds": 0.0098116443144758
+    },
+    "current": {
+      "seconds": 0.06423636998806614,
+      "first_read_seconds": 0.010083047993248329,
+      "later_read_mean_seconds": 0.0028501748418325165
+    }
+  }
+}

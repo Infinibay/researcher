@@ -2,11 +2,7 @@
 
 from importlib.metadata import PackageNotFoundError, distribution
 
-LEGACY_DISTRIBUTIONS = (
-    'crewai','crewai-tools','litellm','ollama','chromadb','tree-sitter',
-    'tree-sitter-python','tree-sitter-javascript','tree-sitter-typescript',
-    'tree-sitter-c','tree-sitter-rust',
-)
+LEGACY_DISTRIBUTIONS = ('crewai', 'crewai-tools', 'litellm', 'ollama', 'chromadb')
 
 
 class LegacyMetadataUnavailable(RuntimeError):

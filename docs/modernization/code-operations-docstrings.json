@@ -1,0 +1,159 @@
+{
+  "scope": "New/changed Python definitions compared by AST with 6429bff, plus affected module docstrings; string-embedded fixture programs are checked by behavioral tests. Older branch-wide documentation audit remains pending.",
+  "modules": [
+    {
+      "path": "backend/api/routes/git.py",
+      "docstring": true,
+      "sha256": "e7a15d28277c9ff5ffe04fdde5b5e96b044c6559935b8b41f226a91260916077"
+    },
+    {
+      "path": "backend/git/__init__.py",
+      "docstring": true,
+      "sha256": "c7c45a2348dd6689634677cb58dfba68d655386465deeb152f8a37035ef025ab"
+    },
+    {
+      "path": "backend/runtime/authority_journal.py",
+      "docstring": true,
+      "sha256": "0ad8279290da5d01a3c58e81c64d1b89137205614869951bd64fba8bf45110dc"
+    },
+    {
+      "path": "backend/runtime/development_instructions.py",
+      "docstring": true,
+      "sha256": "44cc94a81c09943e7233c8eaa65a9ef88be22e1542209f12f0f8767c3648770a"
+    },
+    {
+      "path": "backend/tests/config/test_native_dependencies.py",
+      "docstring": true,
+      "sha256": "f57474be01f9abcfd7b9543a02664f3851a415c29c3fbff8126ad7746681afd2"
+    },
+    {
+      "path": "backend/tests/security/test_tools_pod_mode.py",
+      "docstring": true,
+      "sha256": "8c195e030d198371e5189981a41022b220f998f70782cb714639d48e5c3b32a5"
+    },
+    {
+      "path": "backend/tools/_legacy_access.py",
+      "docstring": true,
+      "sha256": "ad0d2baf384231e0c5c2258614c9ba18f91d5745fe03b6a501bb1ff022954a5b"
+    },
+    {
+      "path": "backend/git/services.py",
+      "docstring": true,
+      "sha256": "02451ca6c182598d65d7e46d7e5ac5f65aeb4099668ebd7fbd37b0ea910d420a"
+    },
+    {
+      "path": "backend/tests/git/test_native_package_boundary.py",
+      "docstring": true,
+      "sha256": "6ac3c464dac94c7b0cfff2d31a9f2155f1c2a2047405a8b33fcdea7ba198ebb2"
+    },
+    {
+      "path": "backend/tests/runtime/test_native_code_operations.py",
+      "docstring": true,
+      "sha256": "7643848121c8d9649de6ccb86ebcde25751b8b4abc1680bf9c74141e7f20391d"
+    },
+    {
+      "path": "backend/tests/runtime/test_authority_history_reuse.py",
+      "docstring": true,
+      "sha256": "63935ce0a58626d63277ebc71fbb5c0a81c02d34f43f73251e1f5ce31ca2208a"
+    }
+  ],
+  "definitions": [
+    {
+      "path": "backend/runtime/authority_journal.py",
+      "name": "WitnessedAuthorityJournal",
+      "line": 171,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/authority_journal.py",
+      "name": "__init__",
+      "line": 180,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/authority_journal.py",
+      "name": "close",
+      "line": 224,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/authority_journal.py",
+      "name": "_history",
+      "line": 379,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/config/test_native_dependencies.py",
+      "name": "test_historical_metadata_is_explicit_and_old_backend_extras_are_not_advertised",
+      "line": 27,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/git/test_native_package_boundary.py",
+      "name": "test_native_broker_import_uses_only_its_isolated_dependencies",
+      "line": 8,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/git/test_native_package_boundary.py",
+      "name": "test_existing_service_exports_keep_the_original_singletons",
+      "line": 22,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_native_code_operations.py",
+      "name": "_tool",
+      "line": 98,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_native_code_operations.py",
+      "name": "_python",
+      "line": 105,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_native_code_operations.py",
+      "name": "test_native_refactor_updates_callers_and_captures_checked_private_candidate",
+      "line": 124,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_native_code_operations.py",
+      "name": "test_native_installation_has_no_second_code_index_or_legacy_file_executor",
+      "line": 177,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_authority_history_reuse.py",
+      "name": "test_verified_history_parses_each_appended_prepare_once",
+      "line": 10,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_authority_history_reuse.py",
+      "name": "test_same_length_witness_tampering_is_detected_after_reuse",
+      "line": 35,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_authority_history_reuse.py",
+      "name": "test_reused_history_still_checks_live_observer_enrollment",
+      "line": 54,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_authority_history_reuse.py",
+      "name": "test_large_history_uses_bounded_streaming_validation",
+      "line": 67,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_authority_history_reuse.py",
+      "name": "observed",
+      "line": 17,
+      "documented": true
+    }
+  ],
+  "missing": []
+}

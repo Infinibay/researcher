@@ -37,88 +37,10 @@ def _set_agent_context():
     set_context(project_id=1, agent_id="dev_1_p1")
 
 
-class TestReadFilePodMode:
-    def test_read_delegates_to_pod(self):
-        from backend.tools.file.read_file import ReadFileTool
-        tool = ReadFileTool()
-
-        exec_mock = MagicMock(return_value=_make(
-            stdout=json.dumps({
-                "ok": True,
-                "data": {"content": "     1\thello world", "total_lines": 1},
-            })
-        ))
-
-        with patch.object(tool, "_is_pod_mode", return_value=True), \
-             patch.object(tool, "_exec_in_pod", exec_mock):
-            result = tool._run(path="/workspace/test.py")
-
-        exec_mock.assert_called_once()
-        args, kwargs = exec_mock.call_args
-        assert args[0] == ["infinibay-file-helper"]
-        stdin = json.loads(kwargs["stdin_data"])
-        assert stdin["op"] == "read"
-        assert "hello world" in result
-
-    def test_read_error_from_pod(self):
-        from backend.tools.file.read_file import ReadFileTool
-        tool = ReadFileTool()
-
-        exec_mock = MagicMock(return_value=_make(
-            stdout=json.dumps({"ok": False, "error": "File not found: /workspace/x.py"})
-        ))
-
-        with patch.object(tool, "_is_pod_mode", return_value=True), \
-             patch.object(tool, "_exec_in_pod", exec_mock):
-            result = tool._run(path="/workspace/x.py")
-
-        assert "File not found" in result
 
 
-class TestWriteFilePodMode:
-    def test_write_delegates_to_pod(self):
-        from backend.tools.file.write_file import WriteFileTool
-        tool = WriteFileTool()
-
-        exec_mock = MagicMock(return_value=_make(
-            stdout=json.dumps({
-                "ok": True,
-                "data": {"path": "/workspace/new.py", "action": "created",
-                         "size_bytes": 42, "before_hash": None, "after_hash": "abc123"},
-            })
-        ))
-
-        with patch.object(tool, "_is_pod_mode", return_value=True), \
-             patch.object(tool, "_exec_in_pod", exec_mock):
-            result = tool._run(path="/workspace/new.py", content="print('hi')")
-
-        assert "created" in result
-        exec_mock.assert_called_once()
 
 
-class TestEditFilePodMode:
-    def test_edit_delegates_to_pod(self):
-        from backend.tools.file.edit_file import EditFileTool
-        tool = EditFileTool()
-
-        exec_mock = MagicMock(return_value=_make(
-            stdout=json.dumps({
-                "ok": True,
-                "data": {"path": "/workspace/f.py", "action": "modified",
-                         "replacements": 1, "size_bytes": 100,
-                         "before_hash": "aaa", "after_hash": "bbb"},
-            })
-        ))
-
-        with patch.object(tool, "_is_pod_mode", return_value=True), \
-             patch.object(tool, "_exec_in_pod", exec_mock):
-            result = tool._run(
-                path="/workspace/f.py",
-                old_string="foo",
-                new_string="bar",
-            )
-
-        assert "modified" in result
 
 
 class TestExecuteCommandPodMode:

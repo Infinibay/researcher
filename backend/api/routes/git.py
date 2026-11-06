@@ -30,7 +30,7 @@ from backend.api.models.git import (
 from backend.config.settings import settings
 
 logger = logging.getLogger(__name__)
-from backend.git import (
+from backend.git.services import (
     branch_service,
     cleanup_service,
     pr_service,

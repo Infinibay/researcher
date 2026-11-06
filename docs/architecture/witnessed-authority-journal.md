@@ -116,3 +116,13 @@ en cada operación, y la medición corresponde a un solo host/filesystem.
 
 Estas obligaciones conservan su aceptación en el plan completo. La existencia
 del módulo no habilita edición ni cierra la fase de autoridad global.
+
+## Actualización: prefijo validado por bytes (6 de noviembre)
+
+La integración posterior utiliza este registro en el broker real. El cierre de
+[operaciones de código](native-code-operations.md) elimina la reinterpretación
+repetida del prefijo idéntico: lectura efectiva de bytes en cada operación,
+inscripción viva, validación de cada append y verificación SQL/acuerdo entre
+almacenes conservadas. Buffer acotado a8MiB, sin confiar en stat/mtime y sin
+cambiar formato, fsync, recuperación ni límites del historial. Las nuevas
+pruebas de reutilización y las anteriores de corrupción/SIGKILL pasan.

@@ -3255,5 +3255,5 @@
   ],
   "scope": "72 registered tools: current Pydantic input declarations, without tool construction or inference. Not proof of safe authority or complete capability migration. Additional source declarations are retained historical inventory requiring consumer review.",
   "updated": "2026-11-02",
-  "current_status": "Historical schema snapshot. The executable role catalog and agent constructors were removed in the catalog-removal checkpoint; individual leaf tool implementations and optional provider compatibility are not all retired. This snapshot is not the native MCP catalog."
+  "current_status": "Historical schema snapshot. The executable role catalog and agent constructors were removed in the catalog-removal checkpoint; individual leaf tool implementations and optional provider compatibility are not all retired. This snapshot is not the native MCP catalog. File/code-intelligence implementations and their CLI indexers were retired in the native code-operations checkpoint. Their declarations remain historical; see native-code-operations.md."
 }

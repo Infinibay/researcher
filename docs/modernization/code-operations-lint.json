@@ -1,0 +1,331 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 53,
+      "row": 40
+    },
+    "filename": "backend/api/routes/git.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from backend.git.forgejo_client import forgejo_client\nfrom backend.git.services import (\n    branch_service,\n    cleanup_service,\n    pr_service,\n    repository_manager,\n)\nfrom backend.tools.base.db import execute_with_retry\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 42
+          },
+          "location": {
+            "column": 1,
+            "row": 33
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 33
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 33,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "PLW1510",
+    "end_location": {
+      "column": 30,
+      "row": 359
+    },
+    "filename": "backend/api/routes/git.py",
+    "fix": {
+      "applicability": "displayonly",
+      "edits": [
+        {
+          "content": "check=False, ",
+          "end_location": {
+            "column": 58,
+            "row": 360
+          },
+          "location": {
+            "column": 58,
+            "row": 360
+          }
+        }
+      ],
+      "message": "Add explicit `check=False`"
+    },
+    "location": {
+      "column": 16,
+      "row": 359
+    },
+    "message": "`subprocess.run` without explicit `check` argument",
+    "name": "subprocess-run-without-check",
+    "noqa_row": 359,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/subprocess-run-without-check"
+  },
+  {
+    "cell": null,
+    "code": "S110",
+    "end_location": {
+      "column": 13,
+      "row": 608
+    },
+    "filename": "backend/api/routes/git.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 607
+    },
+    "message": "`try`-`except`-`pass` detected, consider logging the exception",
+    "name": "try-except-pass",
+    "noqa_row": 607,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/try-except-pass"
+  },
+  {
+    "cell": null,
+    "code": "BLE001",
+    "end_location": {
+      "column": 21,
+      "row": 607
+    },
+    "filename": "backend/api/routes/git.py",
+    "fix": null,
+    "location": {
+      "column": 12,
+      "row": 607
+    },
+    "message": "Do not catch blind exception: `Exception`",
+    "name": "blind-except",
+    "noqa_row": 607,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/blind-except"
+  },
+  {
+    "cell": null,
+    "code": "RUF022",
+    "end_location": {
+      "column": 2,
+      "row": 23
+    },
+    "filename": "backend/git/services.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "[\n    \"BranchCleanupService\",\n    \"BranchService\",\n    \"ForgejoClient\",\n    \"PRService\",\n    \"RepositoryManager\",\n    \"WorktreeManager\",\n    \"branch_service\",\n    \"cleanup_service\",\n    \"forgejo_client\",\n    \"pr_service\",\n    \"repository_manager\",\n    \"worktree_manager\",\n]",
+          "end_location": {
+            "column": 2,
+            "row": 23
+          },
+          "location": {
+            "column": 11,
+            "row": 10
+          }
+        }
+      ],
+      "message": "Apply an isort-style sorting to `__all__`"
+    },
+    "location": {
+      "column": 11,
+      "row": 10
+    },
+    "message": "`__all__` is not sorted",
+    "name": "unsorted-dunder-all",
+    "noqa_row": 10,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-dunder-all"
+  },
+  {
+    "cell": null,
+    "code": "PLW1510",
+    "end_location": {
+      "column": 28,
+      "row": 18
+    },
+    "filename": "backend/tests/git/test_native_package_boundary.py",
+    "fix": {
+      "applicability": "displayonly",
+      "edits": [
+        {
+          "content": "check=False, ",
+          "end_location": {
+            "column": 71,
+            "row": 18
+          },
+          "location": {
+            "column": 71,
+            "row": 18
+          }
+        }
+      ],
+      "message": "Add explicit `check=False`"
+    },
+    "location": {
+      "column": 14,
+      "row": 18
+    },
+    "message": "`subprocess.run` without explicit `check` argument",
+    "name": "subprocess-run-without-check",
+    "noqa_row": 18,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/subprocess-run-without-check"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 82,
+      "row": 23
+    },
+    "filename": "backend/tests/runtime/test_native_code_operations.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import asyncio\nimport importlib.util\nimport json\nfrom pathlib import Path\n\nimport pytest\n\nfrom backend.tests.runtime.test_development_session import (\n    call_development_tool,\n    development_attempt,\n    ken_preparations,\n    run_development_turn,\n)\nfrom backend.tests.runtime.test_development_session import (\n    development_config as development_config,\n)\nfrom backend.tests.runtime.test_development_workspace import fixture_git\nfrom backend.tests.runtime.test_owned_factory import owned_config as owned_config\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 26
+          },
+          "location": {
+            "column": 1,
+            "row": 8
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 8
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 8,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "PLC0414",
+    "end_location": {
+      "column": 45,
+      "row": 18
+    },
+    "filename": "backend/tests/runtime/test_native_code_operations.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "development_config",
+          "end_location": {
+            "column": 45,
+            "row": 18
+          },
+          "location": {
+            "column": 5,
+            "row": 18
+          }
+        }
+      ],
+      "message": "Remove import alias"
+    },
+    "location": {
+      "column": 5,
+      "row": 18
+    },
+    "message": "Import alias does not rename original package",
+    "name": "useless-import-alias",
+    "noqa_row": 18,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/useless-import-alias"
+  },
+  {
+    "cell": null,
+    "code": "PLC0414",
+    "end_location": {
+      "column": 82,
+      "row": 23
+    },
+    "filename": "backend/tests/runtime/test_native_code_operations.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "owned_config",
+          "end_location": {
+            "column": 82,
+            "row": 23
+          },
+          "location": {
+            "column": 54,
+            "row": 23
+          }
+        }
+      ],
+      "message": "Remove import alias"
+    },
+    "location": {
+      "column": 54,
+      "row": 23
+    },
+    "message": "Import alias does not rename original package",
+    "name": "useless-import-alias",
+    "noqa_row": 23,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/useless-import-alias"
+  },
+  {
+    "cell": null,
+    "code": "ISC004",
+    "end_location": {
+      "column": 89,
+      "row": 159
+    },
+    "filename": "backend/tests/runtime/test_native_code_operations.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "(",
+          "end_location": {
+            "column": 18,
+            "row": 154
+          },
+          "location": {
+            "column": 18,
+            "row": 154
+          }
+        },
+        {
+          "content": ")",
+          "end_location": {
+            "column": 89,
+            "row": 159
+          },
+          "location": {
+            "column": 89,
+            "row": 159
+          }
+        }
+      ],
+      "message": "Did you forget a comma?"
+    },
+    "location": {
+      "column": 18,
+      "row": 154
+    },
+    "message": "Unparenthesized implicit string concatenation in collection",
+    "name": "implicit-string-concatenation-in-collection-literal",
+    "noqa_row": 154,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/implicit-string-concatenation-in-collection-literal"
+  }
+]

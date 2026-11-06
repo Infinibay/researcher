@@ -8,6 +8,7 @@ The future broker owns grants, actor authentication, bootstrap and release polic
 
 import fcntl
 import hashlib
+import io
 import json
 import os
 import re
@@ -25,6 +26,7 @@ MAX_STATE_BYTES = 8 * 1024 * 1024
 MAX_RECORDS = 100000
 MAX_LINE_BYTES = 1024 * 1024
 MAX_JOURNAL_BYTES = 128 * 1024 * 1024
+MAX_HISTORY_CACHE_BYTES = 8 * 1024 * 1024
 MAX_DATABASE_BYTES = 128 * 1024 * 1024
 MAX_SEQUENCE = 2**63 - 1
 
@@ -176,6 +178,7 @@ class WitnessedAuthorityJournal:
     """
 
     def __init__(self, *, database, witness, mutex, authority_id):
+        """Bind original private files and an empty, bounded cache of verified witness bytes."""
         if not isinstance(authority_id, str) or not 1 <= len(authority_id) <= 128:
             raise ValueError("An externally provisioned authority ID is required")
         self.authority_id = authority_id
@@ -183,6 +186,7 @@ class WitnessedAuthorityJournal:
         self._local = threading.RLock()
         self._fds = {}
         self._paths = {}
+        self._history_cache = None
         try:
             for name, supplied in (
                 ("database", database),
@@ -218,12 +222,14 @@ class WitnessedAuthorityJournal:
         self.close()
 
     def close(self):
+        """Release original descriptors and cached evidence without acquiring an inherited post-fork lock."""
         # A vanished parent thread may own the inherited RLock. Closing copies
         # after fork must not wait on it or unlock the parent's flock.
         with self._local if self._pid == os.getpid() else nullcontext():
             for fd in self._fds.values():
                 os.close(fd)
             self._fds.clear()
+            self._history_cache = None
 
     @staticmethod
     def _identity(info):
@@ -371,6 +377,14 @@ class WitnessedAuthorityJournal:
         ]
 
     def _history(self):
+        """Validate actual witness bytes, reusing only an identical previously verified prefix.
+
+        Every call reads the current file; timestamps and size alone never prove
+        integrity. The unchanged prefix retains its chain/semantic validation,
+        while appended records and live enrollment are checked anew. Oversized
+        histories use the original streaming path without retaining a buffer.
+        SQL rows and cross-store agreement remain verified by the caller.
+        """
         size = os.fstat(self._fds["witness"]).st_size
         if size > MAX_JOURNAL_BYTES:
             raise AuthorityCapacity("Authority witness needs a provisioned checkpoint")
@@ -379,8 +393,25 @@ class WitnessedAuthorityJournal:
         receipts = {}
         valid_end = 0
         torn = False
-        with os.fdopen(os.dup(self._fds["witness"]), "rb") as stream:
+        buffered = None
+        with os.fdopen(os.dup(self._fds["witness"]), "rb") as disk:
+            disk.seek(0)
+            if size <= MAX_HISTORY_CACHE_BYTES:
+                candidate = disk.read(MAX_HISTORY_CACHE_BYTES + 1)
+                if len(candidate) <= MAX_HISTORY_CACHE_BYTES:
+                    buffered = candidate
+            stream = io.BytesIO(buffered) if buffered is not None else disk
             stream.seek(0)
+            cached = self._history_cache
+            self._history_cache = None
+            if buffered is not None and cached is not None and buffered.startswith(cached[0]):
+                prefix, history = cached
+                self._header(_decode(prefix.split(b"\n", 1)[0])["payload"])
+                previous = history.head
+                commit, pending = history.commit, history.pending
+                receipts = dict(history.receipts)
+                valid_end = history.valid_end
+                stream.seek(valid_end)
             while raw := stream.readline(MAX_LINE_BYTES + 1):
                 if len(raw) > MAX_LINE_BYTES:
                     raise AuthorityCapacity(
@@ -459,7 +490,10 @@ class WitnessedAuthorityJournal:
             raise AuthorityUncertain(
                 "Authority genesis is missing; no bootstrap performed"
             )
-        return _History(commit, pending, previous, receipts, valid_end, torn)
+        history = _History(commit, pending, previous, receipts, valid_end, torn)
+        if buffered is not None:
+            self._history_cache = (buffered[:valid_end], history)
+        return history
 
     def _header(self, payload):
         if not isinstance(payload, dict) or not isinstance(payload.get("files"), dict):

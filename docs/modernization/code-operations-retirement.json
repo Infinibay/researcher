@@ -1,0 +1,278 @@
+{
+  "baseline": "6429bff",
+  "scope": "All backend Python files, static absolute/relative imports and exact module strings; not arbitrary computed imports or third-party consumers. New regression tests included separately.",
+  "removed_files": [
+    {
+      "path": "backend/cli/index_queue.py",
+      "sha256": "05808ba4d0b095125c69534de54f9009705fea59e7b5465f4c857227293cd0bb"
+    },
+    {
+      "path": "backend/cli/initial_index.py",
+      "sha256": "750d5a77132b10f9414a6f0e19342b7987dd34b63cdae4842c740e18c06c9490"
+    },
+    {
+      "path": "backend/code_intel/__init__.py",
+      "sha256": "033dffcfc4fbf954e4a93e66829fcf47b726a6f5048d80786961e5e46c1091bf"
+    },
+    {
+      "path": "backend/code_intel/analyzer.py",
+      "sha256": "837be4229315e0312bd90a3c7583429a21839adf4f625c3ad8f9b9e4b870310f"
+    },
+    {
+      "path": "backend/code_intel/import_resolver.py",
+      "sha256": "09ec7ee000229984e2d7d91110864813925b54276d1a31d5d020d2e5225cb571"
+    },
+    {
+      "path": "backend/code_intel/index.py",
+      "sha256": "7a5536fd42dc27371cf86b7d6f94539e01e4ccadf9e11577ec0859c6b402963f"
+    },
+    {
+      "path": "backend/code_intel/indexer.py",
+      "sha256": "8ad15336d414ff26724ccab078635f1d8790d5331822b6f77a7bdb18f92a1d63"
+    },
+    {
+      "path": "backend/code_intel/models.py",
+      "sha256": "5f1ad053a37156b0df2acf04427cf3e97765eb7805f27b06978a6840d92a327a"
+    },
+    {
+      "path": "backend/code_intel/parsers/__init__.py",
+      "sha256": "d761b1c5e9a5957dbb76b450ce5825e667ff352dbd2b882d14e6728ea2e3bf03"
+    },
+    {
+      "path": "backend/code_intel/parsers/base.py",
+      "sha256": "2e76cfc5215ed787ef062b09a75d5dba0b30443bc87d8b3f9e8bfbfe3ec17404"
+    },
+    {
+      "path": "backend/code_intel/parsers/c_parser.py",
+      "sha256": "143e029117b93c4fb2d57cb6aeae50017b87435151026f5833a7a220a8a6cbcb"
+    },
+    {
+      "path": "backend/code_intel/parsers/javascript_parser.py",
+      "sha256": "b2cb29e3cd9c776be0c8bcd04a4627c117cdc6c04be8175e0039cd62f0725238"
+    },
+    {
+      "path": "backend/code_intel/parsers/python_parser.py",
+      "sha256": "591cc34066791cf93eaa0556b28f3c34aaf63ae788208cc83e9c82128ccdc404"
+    },
+    {
+      "path": "backend/code_intel/parsers/rust_parser.py",
+      "sha256": "c8dda8a2080e87505c261b8e0b413a4f21b63c53afa3bf5445e11d0403920a02"
+    },
+    {
+      "path": "backend/code_intel/parsers/typescript_parser.py",
+      "sha256": "b456908b251f693dfb4b6afb9301a3e7aa0e65158c8980cec5824209cc0546be"
+    },
+    {
+      "path": "backend/code_intel/query.py",
+      "sha256": "adeb551010f915341cb2eaa5058c0710d7bc155558b3baa32087a5c249a2d1fa"
+    },
+    {
+      "path": "backend/code_intel/resolve.py",
+      "sha256": "0bd44e08eb5f26b147665c3d20010cf9fbbfed49e279cc16ebd81ae75f0a789c"
+    },
+    {
+      "path": "backend/code_intel/smart_index.py",
+      "sha256": "a3c153a3803ec376b130f880efdfd9f22660860708ff9ef174e6f88ca443bbb5"
+    },
+    {
+      "path": "backend/code_intel/stdlib_modules.py",
+      "sha256": "918df5fe5d67b5556974b035851fd9242c6249f93ae8f83f40546dab35db1b4b"
+    },
+    {
+      "path": "backend/tools/code_intel/__init__.py",
+      "sha256": "03b17675e5ddf8fdab6988a99d172eeb4de136a8ef00156bfe22f36ec1233452"
+    },
+    {
+      "path": "backend/tools/code_intel/add_method.py",
+      "sha256": "a8f339de55e83d344bbab62aa627921824ab89aa3f4320c701fcf903c5e4d313"
+    },
+    {
+      "path": "backend/tools/code_intel/analyze_code.py",
+      "sha256": "9900b73cc523735541f4ba1f290942442d99ffccd74413b229fd854c26cc5ba8"
+    },
+    {
+      "path": "backend/tools/code_intel/edit_method.py",
+      "sha256": "388bddf5d40d1a08b9032bdb5e882a697ba067e3baf6507acd82ab4e7c608966"
+    },
+    {
+      "path": "backend/tools/code_intel/find_definition.py",
+      "sha256": "1bf57f1167a401f2a2c73654d818a937ccac8ea2f78ce27c8f3a8a35e7a36890"
+    },
+    {
+      "path": "backend/tools/code_intel/find_references.py",
+      "sha256": "d994ca6509c453cec4b2698c4124c84f5c3c43a55bfbbed479d68fb000a46978"
+    },
+    {
+      "path": "backend/tools/code_intel/get_symbol_code.py",
+      "sha256": "3d752f8159451577a11086688ac6e0ba620df48512c3958361fbae439b0d6d8b"
+    },
+    {
+      "path": "backend/tools/code_intel/list_symbols.py",
+      "sha256": "30138345770002908e6ee2752c7a105c11b49765086639ddd7323b9ae78f78a8"
+    },
+    {
+      "path": "backend/tools/code_intel/move_symbol.py",
+      "sha256": "2d0e5630a20d52466fc37fbc55ffff9ea0f5976b09c5db936d0db7141b0188ec"
+    },
+    {
+      "path": "backend/tools/code_intel/project_structure.py",
+      "sha256": "88b4c12d245b5d8cb2e86c1f92aa5213749743c1091dc47edac52cedb41e451f"
+    },
+    {
+      "path": "backend/tools/code_intel/remove_method.py",
+      "sha256": "d1832280d0ee55e293a0a348233f6f8552f477898edb531a51a4d11312faff0e"
+    },
+    {
+      "path": "backend/tools/code_intel/rename_symbol.py",
+      "sha256": "2a7913e726e69b88ee79d8f8fde00712e75196edc647ca49a7a9e42c1ecade68"
+    },
+    {
+      "path": "backend/tools/code_intel/search_symbols.py",
+      "sha256": "628f3afe5ca658c381bc0324cf58cae4d2a4980313f6db71cc05bf214553595a"
+    },
+    {
+      "path": "backend/tools/file/__init__.py",
+      "sha256": "2b5b75843ab2d59a99d0000fe1b8ad93309d02dab98b104c6b342686d4a721e4"
+    },
+    {
+      "path": "backend/tools/file/apply_patch.py",
+      "sha256": "304f1c147986d59ccf2c987e52bee4419703bbb655448af94c6b031a29c78bd6"
+    },
+    {
+      "path": "backend/tools/file/code_search.py",
+      "sha256": "3b347bbe23be6843e063ae7d9d1ed885aa59a49700dfa533b00b4cf32812a337"
+    },
+    {
+      "path": "backend/tools/file/edit_file.py",
+      "sha256": "6562ea383090e6f5c368f55434b9df1149e01eb5b28b8f4f8701b9933551a2ce"
+    },
+    {
+      "path": "backend/tools/file/glob_tool.py",
+      "sha256": "2bd1e13dc7695b2584155abbd4445f13d3b67dea76748aa7b5c97e67d528320c"
+    },
+    {
+      "path": "backend/tools/file/insert_lines.py",
+      "sha256": "d73b44366b7975eae871619f352b0695793130d698e8fceeded5f2982492800f"
+    },
+    {
+      "path": "backend/tools/file/list_directory.py",
+      "sha256": "9cf53d754d2f535595bfbacab14ed706ba08f156e0a62ee3bd9095a784cdc4ac"
+    },
+    {
+      "path": "backend/tools/file/multi_edit_file.py",
+      "sha256": "fb66d5a46302e756a0a6e78ceb2772f1f24fcf09e06863eb2ce6d6ac66e55c93"
+    },
+    {
+      "path": "backend/tools/file/partial_read.py",
+      "sha256": "e959cdacea50da36ae6d77dd8b81569f3526d33551d3700448a2da4a5d45134d"
+    },
+    {
+      "path": "backend/tools/file/read_file.py",
+      "sha256": "847720317135ea7d941d86f3b5fa27f04d9ec8c086456b95ac47efed0d22c37a"
+    },
+    {
+      "path": "backend/tools/file/replace_lines.py",
+      "sha256": "6367cb1e056b0d08841f6da0a671fcbb9733f6fd5a43cb4096bc3c17e7c4196b"
+    },
+    {
+      "path": "backend/tools/file/write_file.py",
+      "sha256": "60ac376a6099c4a150fee4a9673a809ef940e9442621066cb26869994126839d"
+    }
+  ],
+  "external_imports": [
+    {
+      "path": "backend/tests/security/test_tools_pod_mode.py",
+      "line": 42,
+      "modules": [
+        "backend.tools.file.read_file",
+        "backend.tools.file.read_file.ReadFileTool"
+      ]
+    },
+    {
+      "path": "backend/tests/security/test_tools_pod_mode.py",
+      "line": 64,
+      "modules": [
+        "backend.tools.file.read_file",
+        "backend.tools.file.read_file.ReadFileTool"
+      ]
+    },
+    {
+      "path": "backend/tests/security/test_tools_pod_mode.py",
+      "line": 80,
+      "modules": [
+        "backend.tools.file.write_file",
+        "backend.tools.file.write_file.WriteFileTool"
+      ]
+    },
+    {
+      "path": "backend/tests/security/test_tools_pod_mode.py",
+      "line": 101,
+      "modules": [
+        "backend.tools.file.edit_file",
+        "backend.tools.file.edit_file.EditFileTool"
+      ]
+    },
+    {
+      "path": "backend/tests/tools/test_file_tools.py",
+      "line": 7,
+      "modules": [
+        "backend.tools.file",
+        "backend.tools.file.ListDirectoryTool",
+        "backend.tools.file.ReadFileTool",
+        "backend.tools.file.WriteFileTool"
+      ]
+    }
+  ],
+  "exact_module_literals": [
+    {
+      "path": "backend/tests/runtime/test_native_code_operations.py",
+      "line": 176,
+      "literal": "backend.code_intel"
+    },
+    {
+      "path": "backend/tests/runtime/test_native_code_operations.py",
+      "line": 176,
+      "literal": "backend.tools.code_intel"
+    },
+    {
+      "path": "backend/tests/runtime/test_native_code_operations.py",
+      "line": 176,
+      "literal": "backend.tools.file"
+    },
+    {
+      "path": "backend/tests/runtime/test_native_code_operations.py",
+      "line": 177,
+      "literal": "backend.cli.initial_index"
+    },
+    {
+      "path": "backend/tests/runtime/test_native_code_operations.py",
+      "line": 177,
+      "literal": "backend.cli.index_queue"
+    }
+  ],
+  "retained_data": [
+    "ci_files",
+    "ci_symbols",
+    "ci_references",
+    "ci_imports",
+    "ci_diagnostics",
+    "ci_symbols_fts"
+  ],
+  "retired_test_functions": 17,
+  "post_validation": {
+    "remaining_backend_imports": [],
+    "scope": "All backend Python AST absolute and resolved relative imports; arbitrary computed imports and external consumers remain unknown.",
+    "removed_lock_packages": [
+      "tree-sitter",
+      "tree-sitter-c",
+      "tree-sitter-javascript",
+      "tree-sitter-python",
+      "tree-sitter-rust",
+      "tree-sitter-typescript"
+    ],
+    "added_lock_packages": [],
+    "changed_retained_versions": [],
+    "remaining_locked_packages": 179,
+    "unchanged_ci_schema_owner_sha256": "f0c30679c49a244acd70ccfe54f9087a1b808eee30fd7ccb8dd5e43aa31991be"
+  }
+}

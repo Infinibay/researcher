@@ -38,12 +38,16 @@ npm run build
 ```
 
 The Python install defaults to the native runtime. CrewAI, crewai-tools, LiteLLM,
-Ollama, Chroma and the old tree-sitter stack are optional historical readers:
+Ollama and Chroma are optional historical readers:
 
 ```bash
 # Only when inspecting old tool schemas or running the historical test corpus:
 uv sync --locked --extra legacy
 ```
+
+The duplicate code index, its file/structural tools and six tree-sitter requirements
+have been retired. Code discovery uses Ken; edits use owned native commands in
+the private development copy. See [code operations](docs/architecture/native-code-operations.md).
 
 This extra does not enable an inference backend. Old provider calls are retired;
 actual model selection belongs to the configured native runtime. The former

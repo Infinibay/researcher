@@ -170,3 +170,13 @@ del ensayo MCP. No se modifican esos diccionarios durante la ejecución.
 No reabrir la integración por estos avisos. Las herramientas/índices restantes,
 presupuestos agregados y validación de proveedores reales siguen como trabajo
 principal, no como detalles diferidos.
+
+## DD049 — estilo de la consolidación de código
+
+Después de todas las capacidades principales: revisar los 10 avisos del
+[informe de código](code-operations-lint.json): orden de imports/exports, aliases
+de fixtures pytest y concatenación implícita de la receta de comprobación;
+también avisos previos de las rutas Git sobre subprocesos y excepciones.
+Los aliases registran fixtures por nombre y deben conservar esa semántica.
+No reabrir la migración por estilo; el cierre global de herramientas y los
+checkpoint/capacidad operativos del historial siguen como tareas principales.
