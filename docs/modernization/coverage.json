@@ -3599,6 +3599,19 @@
         "Reservation resolution/adoption/abandonment; accepted but unscheduled repair handoff; DD030/delete/restore and old missing closure histories; SHA256 metadata reconstruction, special metadata/submodules and global time/output budgets remain before full-page acceptance.",
         "Source reader budgets/concurrency/special metadata/submodules, remote annotation identity, full page/human/whole-plan/global/restore/final review remain."
       ]
+    },
+    "model_configuration": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/model-configuration.md",
+        "docs/modernization/model-settings-results.json",
+        "docs/modernization/model-settings-packaging.json",
+        "backend/tests/runtime/test_model_settings.py",
+        "frontend/tests/model-settings.test.ts",
+        "docs/design/audits/2026-11-06-model-settings/report.md"
+      ],
+      "implemented": "Explicit global/project/project-actor pair and reset, optimistic revisions, frozen per-attempt selection, actual native catalog refusal before thread/turn, owner dialog and task provenance.",
+      "remaining": "Actual account/model matrix and whole-product acceptance remain unproven; secondary selector/theme work deferred until all principal capabilities."
     }
   }
 }

@@ -6,6 +6,7 @@ import { useProjectStore } from '../../stores/project'
 import { useProjects, useProject, useStartProject, useStopProject } from '../../hooks/useProjects'
 import { useActivityFeedStore } from '../../stores/activityFeed'
 import { StatusDot } from '../common/StatusDot'
+import {ModelSettingsDialog} from './ModelSettingsDialog'
 
 /** Identify the visible project in both button text and its accessible name. */
 export function Header() {
@@ -16,6 +17,7 @@ export function Header() {
   const stopProject = useStopProject()
   const [sessionError, setSessionError] = useState('')
   const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [modelSettings,setModelSettings]=useState<{projectId:number|null;projectName:string|null}|null>(null)
   const ref = useRef<HTMLDivElement>(null)
   const toggleFeed = useActivityFeedStore((s) => s.toggleFeed)
   const feedOpen = useActivityFeedStore((s) => s.feedOpen)
@@ -119,6 +121,8 @@ export function Header() {
           </>
         )}
 
+        <button onClick={()=>setModelSettings({projectId:activeProjectId,projectName:activeProject?.name??null})}>Modelos</button>
+        {modelSettings&&<ModelSettingsDialog {...modelSettings} onClose={()=>setModelSettings(null)}/>}
         <button
           onClick={toggleFeed}
           aria-label="Actividad del proyecto" aria-pressed={feedOpen}

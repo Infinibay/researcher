@@ -127,12 +127,14 @@ class SQLiteRunStore:
             """SELECT r.*,a.thread_id,a.turn_id,a.owner_id,a.status AS attempt_status,
             a.lease_expires_at,a.native_result_json,a.fence AS attempt_fence,
             chat.thread_id AS conversation_thread_id,dispatch.model AS dispatch_model,
+            model_choice.selection_json AS model_selection_json,
             binding.repository_id AS bound_repository_id,binding.repository_name AS bound_repository_name,
             review.finding_id AS review_finding_id,review.subject_sha256 AS review_subject_sha256,
             decision.id AS review_decision_id,decision.verdict AS review_verdict
             FROM runtime_runs r LEFT JOIN runtime_attempts a ON a.id=r.current_attempt_id
             LEFT JOIN runtime_chat_links chat ON chat.run_id=r.id
             LEFT JOIN runtime_inference_dispatches dispatch ON dispatch.attempt_id=a.id
+            LEFT JOIN runtime_attempt_models model_choice ON model_choice.attempt_id=a.id
             LEFT JOIN runtime_workspace_bindings binding ON binding.run_id=r.id
             LEFT JOIN finding_review_requests review ON review.run_id=r.id
             LEFT JOIN finding_review_decisions decision ON decision.run_id=r.id
@@ -166,6 +168,7 @@ class SQLiteRunStore:
             operation_key=row["operation_key"],
             conversation_thread_id=row["conversation_thread_id"],
             model=row["dispatch_model"],
+            model_selection=json.loads(row["model_selection_json"]) if row["model_selection_json"] else None,
             repository_id=row["bound_repository_id"],
             repository_name=row["bound_repository_name"],
             issue=json.loads(row["issue_json"]) if row["issue_json"] else None,

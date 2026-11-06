@@ -6,7 +6,7 @@
 Primero cerrar las capacidades principales. Si la idea central de una tarea ya
 funciona y sólo quedan detalles secundarios, anotarlos en
 [detalles diferidos](deferred-details.md) y continuar; resolverlos en una pasada
-posterior. No ampliar el diseño ni repetir auditorías por esos detalles. Un fallo
+posterior, **después de terminar todas las tareas gruesas del plan**, según reiteración explícita del usuario del6noviembre. No hacer una ronda de pulido después de cada tarea. No ampliar el diseño ni repetir auditorías por esos detalles. Un fallo
 que impida el resultado central se resuelve dentro de su tarea.
 
 Esta política es una instrucción explícita del usuario y debe recuperarse después

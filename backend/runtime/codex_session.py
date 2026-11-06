@@ -111,6 +111,7 @@ class CodexSession:
         workspace: Path,
         model: str,
         limits: ExecutionLimits,
+        reasoning_effort: str = "low",
         resume_thread_id: str | None = None,
         developer_instructions: str | None = None,
         sandbox: str = "workspace-write",
@@ -118,9 +119,13 @@ class CodexSession:
         before_thread: Callable[[JsonRpcClient], Awaitable[None]] | None = None,
         subscription_auth=None,
     ) -> None:
+        """Bind one model/effort pair and bounded subscription session; construction sends no native request and grants no tool authority."""
         self.rpc = rpc
         self.workspace = workspace.resolve()
         self.model = model
+        from backend.runtime.model_settings import model_profile
+
+        self.reasoning_effort = model_profile(model, reasoning_effort)["reasoning_effort"]
         self.limits = limits
         self.resume_thread_id = resume_thread_id
         self.developer_instructions = developer_instructions
@@ -252,7 +257,7 @@ class CodexSession:
                     {
                         "threadId": self.thread_id,
                         "input": [{"type": "text", "text": text}],
-                        "effort": "low",
+                        "effort": self.reasoning_effort,
                     },
                 )
                 self.turn_id = response["turn"]["id"]

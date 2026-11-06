@@ -1,11 +1,13 @@
 /** Scoped owner runtime reads and explicit durable execution controls. @module */
 import { fetchApi } from './client.ts'
 
+/** Durable runtime observation distinguishes a frozen requested pair from the model actually bound to inference. */
 export interface RuntimeRun {
   execution_kind: 'research' | 'finding_review' | 'development' | 'code_review' | 'code_publication' | 'remote_publication'
   run_id: string
   project_id: number
   task_id: number
+  actor_id?:string
   context_version: number
   operation_key: string
   conversation_thread_id: string | null
@@ -14,6 +16,7 @@ export interface RuntimeRun {
   result: { native_status: string; summary: string } | null
   cancel_requested: boolean
   model: string | null
+  model_selection?:{model:string;reasoning_effort:string;source:string;revision:number;attempt_id:string;fence:number}|null
   fence: number
   attempt_id?: string | null
   repository_id: number | null

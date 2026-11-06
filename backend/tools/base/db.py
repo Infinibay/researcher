@@ -502,6 +502,12 @@ def ensure_migrations(db_path: str | None = None, *, existing_only: bool = False
             resource = Path(__file__).resolve().parents[2] / "db/native_task_cutover_schema.sql"
             apply_sql_resource(conn, resource)
             logger.info("Migration 54: native ownership of all task categories")
+        if 55 not in applied:
+            from backend.db.migrations import apply_sql_resource
+
+            resource = Path(__file__).resolve().parents[2] / "db/model_settings_schema.sql"
+            apply_sql_resource(conn, resource)
+            logger.info("Migration 55: owner model settings and immutable attempt selection")
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()

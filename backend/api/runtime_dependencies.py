@@ -227,6 +227,7 @@ def _configured_owned(config, path, live_grants, app):
         token_source=ManagedTokenFile(paths["token_file"]),
         broker_limits=BrokerLimits(**config["broker_limits"]),
         model=config["model"],
+        reasoning_effort=config.get("reasoning_effort", "low"),
         web_search=config.get("web_search", "live"),
         remote_transport=remote_transport,
         development_checks=parse_development_checks(

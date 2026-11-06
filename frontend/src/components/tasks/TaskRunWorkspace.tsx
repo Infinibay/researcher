@@ -190,7 +190,9 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
       <h3 className="font-semibold text-[var(--work-ink)]">{state.title}</h3>
       <p className="text-[var(--work-muted)]">{state.description}</p>
       <p className="text-xs text-[var(--work-muted)]">Contexto vigente: {data.context.context_version}{current ? ` · resultado bajo contexto ${current.context_version}` : ''}</p>
-      {data.runtime.model && <p className="text-xs text-[var(--work-muted)]">Modelo configurado: {data.runtime.model}</p>}
+      {data.runtime.model && <p className="text-xs text-[var(--work-muted)]">Modelo inicial del equipo: {data.runtime.model}</p>}
+      {current?.model_selection&&<p className="text-xs text-[var(--work-muted)]">Elección guardada para este intento: {current.model_selection.model} · razonamiento {current.model_selection.reasoning_effort}. Cambiar la configuración no modifica esta elección.</p>}
+      {current?.actor_id&&<p className="text-xs text-[var(--work-muted)]">Identificador del agente: {current.actor_id}</p>}
       {current && !['code_publication','remote_publication'].includes(current.execution_kind) && <p className="text-xs text-[var(--work-muted)]">Modelo de esta ejecución: {current.model ?? 'sin registrar'}</p>}
       {current && <p className="text-xs text-[var(--work-muted)]">Repositorio admitido: {current.repository_name ?? current.repository_id ?? 'sin registrar en este historial'}</p>}
     </div>

@@ -257,18 +257,23 @@ class OwnedCodexRuntime:
     token_source: object
     broker_limits: object
     model: str
+    reasoning_effort: str = "low"
     web_search: str = "live"
     development_checks: tuple = ()
     remote_transport: object = None
     _closed_attempts: dict = field(
         default_factory=dict, init=False, repr=False, compare=False
     )
+    _model_catalog: dict = field(default_factory=dict, init=False, repr=False, compare=False)
 
     def __post_init__(self):
         """Reject invalid search configuration before admitting a product attempt."""
         from backend.runtime.native_search import validate_search_mode
 
         validate_search_mode(self.web_search)
+        from backend.runtime.model_settings import model_profile
+
+        model_profile(self.model, self.reasoning_effort)
         from backend.runtime.check_contracts import CheckSpec
 
         if (
@@ -389,6 +394,19 @@ class OwnedCodexRuntime:
             lease.context_version,
         ):
             raise ValueError("Business authority differs from original attempt")
+        from backend.runtime.model_settings import ModelSettings, validate_native_model
+
+        selected_model = await _settled(
+            ModelSettings(registry.runs).freeze,
+            lease,
+            host_model=self.model,
+            host_effort=self.reasoning_effort,
+        )
+
+        async def verify_model(rpc):
+            """Check this frozen original pair against the actual signed-in account catalog before thread creation; never select an alternative."""
+            await validate_native_model(rpc, selected_model, self._model_catalog)
+
         review = await _settled(
             registry.runs.review_request,
             lease.project_id,
@@ -586,7 +604,9 @@ class OwnedCodexRuntime:
                                     endpoint, request_timeout=20, max_messages=512
                                 ),
                                 workspace=PEER_WORKSPACE,
-                                model=self.model,
+                                model=selected_model['model'],
+                                reasoning_effort=selected_model['reasoning_effort'],
+                                before_thread=verify_model,
                                 limits=limits,
                                 developer_instructions=development_instructions(
                                     self.development_checks

@@ -100,8 +100,11 @@ siguen pendientes del plan.
 - `token_file` aporta snapshots de la sesión CLI administrada. La fábrica sólo
   relee rotaciones externas; token vencido/sin cambio se rechaza. No implementa ni
   demuestra renovación OAuth, coexistencia de cuentas o WebSocket del proveedor.
-- El modelo se sigue eligiendo por JSON global con reinicio; faltan selectores web,
-  por proyecto/agente y la migración de las demás capacidades del producto.
+- El JSON aporta modelo/esfuerzo iniciales. La cabecera permite elegir una pareja
+  global, por proyecto o agente del proyecto para futuros intentos; cada intento
+  conserva su elección y la verifica contra el catálogo nativo antes del turno.
+  Véase [configuración de modelos](model-configuration.md). La migración de las
+  demás capacidades del producto sigue abierta.
 
 ## Evidencia
 

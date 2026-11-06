@@ -1,0 +1,6 @@
+{
+  "base_commit": "a44d002",
+  "scope": "All named functions/interfaces/classes/type aliases and modules in the four configuration UI files; RuntimeRun and changed task workspace explanations are documented separately; no claim about every anonymous callback.",
+  "definitions_checked": 20,
+  "missing": []
+}

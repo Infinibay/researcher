@@ -926,6 +926,8 @@ for line in sys.stdin:
             "webSearch": not Path("search-unavailable").exists(),
             "imageGeneration": False,
         }
+    elif method == "model/list":
+        result = {'data':[{'model':name,'displayName':name,'supportedReasoningEfforts':[{'reasoningEffort':effort} for effort in ('low','medium','high')]} for name in ('controlled-only','controlled-alt')],'nextCursor':None}
     elif method == "command/exec":
         output = subprocess.run(
             params["command"],
@@ -999,6 +1001,7 @@ for line in sys.stdin:
             "cwd": params["cwd"],
         }
     elif method == "turn/start":
+        Path("/home/actor/.codex/fixture-turn.json").write_text(json.dumps(params))
         if development_mode:
             initial = json.loads(params["input"][0]["text"])
             code_sources = [item for item in (initial.get('work_delivery') or {}).get('prerequisites', []) if item['kind']=='accepted_code_candidate']

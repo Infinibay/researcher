@@ -1,0 +1,81 @@
+{
+  "status": "passed",
+  "scope": "Actual owner API/SQLite model configuration in existing shell: lost PUT reply, global/project/actor precedence/reset, separate project. No inference or user remotes.",
+  "states": [
+    {
+      "file": "01-desktop-project-model-and-scope.png",
+      "sha256": "b10b06920b00498d7876b69b9b97a0e7ca0355c837bf7fc6299294499acc4587",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440,
+        "dialogWidth": 718,
+        "dialogClient": 718
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "02-mobile-lost-save-recovered-with-selection-preserved.png",
+      "sha256": "8fda70945d0c2314da1cfe9e62762ea956d5155be15c87eb4ec0af3866b562ba",
+      "layout": {
+        "width": 390,
+        "scroll": 390,
+        "dialogWidth": 352,
+        "dialogClient": 352
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "03-desktop-project-actor-model-override.png",
+      "sha256": "e3d05be1fe1e441a1ba07dafc9a7d32e49b25a10227c51c49e5f6a1a8304706d",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440,
+        "dialogWidth": 718,
+        "dialogClient": 718
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "04-mobile-other-project-inherits-global-only.png",
+      "sha256": "0e8df376039042648207cd0158238741b7684010d59383fcdb2d3205a3e6d7e6",
+      "layout": {
+        "width": 390,
+        "scroll": 390,
+        "dialogWidth": 352,
+        "dialogClient": 352
+      },
+      "axe_violations": []
+    }
+  ],
+  "errors": [],
+  "writes": [
+    {
+      "project_id": 101,
+      "actor_id": null,
+      "expected_revision": 0,
+      "model": "controlled-alt",
+      "reasoning_effort": "high"
+    },
+    {
+      "project_id": null,
+      "actor_id": null,
+      "expected_revision": 0,
+      "model": "controlled-only",
+      "reasoning_effort": "medium"
+    },
+    {
+      "project_id": 101,
+      "actor_id": "reviewer",
+      "expected_revision": 0,
+      "model": "controlled-only",
+      "reasoning_effort": "low"
+    },
+    {
+      "project_id": 101,
+      "actor_id": "reviewer",
+      "expected_revision": 1,
+      "model": null,
+      "reasoning_effort": null
+    }
+  ]
+}

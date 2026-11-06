@@ -9,7 +9,32 @@ Actualizado: 2026-11-06. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: reserva cerrada y adopción independiente
+## Etapa actual: configuración de modelos por ámbito
+
+La cabecera permite guardar/restablecer modelo y esfuerzo con prioridad
+agente-del-proyecto → proyecto → global → host. Los cambios afectan a intentos
+nuevos; cada intento conserva su pareja, origen y revisión. El catálogo real de
+Codex se comprueba antes del thread/turn; una pareja ausente produce explicación
+sin sustitución ni fallback facturado. Un guardado perdido conserva el borrador.
+La elección guardada se distingue del modelo de inferencia realmente registrado.
+
+**Verificación:**103backendPASS42.86s;123frontendPASS/build5.26s. Wheel no editable
+11PASS12.237s,831miembros coincidentes/233imports sóloentorno/85distribuciones,
+1turno de producto/Ken controlados y1de protocolo hijo,0modelos reales/remotos del
+usuario. Cuatro capturas1440/390px,0Axe/JS/desbordamiento en diálogo;4PUT,
+0turnos por configurar,hostJSONintacto.44defsPython/20módulos/nombresTS documentados.
+[Contrato](../architecture/model-configuration.md), [resultados](model-settings-results.json),
+[paquete](model-settings-packaging.json), [web](../design/audits/2026-11-06-model-settings/report.md).
+
+**Siguiente principal:** inventariar y revisar todo el catálogo de prompts,
+incluidas instrucciones nativas y composición dinámica, usando las skills de libros
+pertinentes y evaluaciones que distingan evidencia de suposición. Después continuar
+con las restantes capacidades principales, incluidas las cuatro rutas. El pulido
+de todas las tareas queda para el final, sin reabrir ahora estilo/caché/selector.
+Los43escenarios/global/restore/DD030/inversas43–54/instalación/aceptación12páginas/
+revisión final siguen abiertos.24/36conceptosdesktop,8/12mobile,8pilotos,0aceptadas.
+
+## Etapa anterior: reserva cerrada y adopción independiente
 
 El propietario puede cerrar una preparación local detenida después de comprobar
 su cierre original, conservar carpeta/historia y preparar una nueva adopción.

@@ -1,0 +1,316 @@
+{
+  "base_commit": "a44d002",
+  "changed_or_new_definitions_documented": 44,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/main.py",
+      "symbol": "create_app",
+      "line": 107,
+      "file_sha256": "b307e79b97c3ce7a64de0503e82f1d74428758184d255c8f191d4021ab11a5d5",
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/model_settings.py",
+      "symbol": "UpdateModelSetting",
+      "line": 16,
+      "file_sha256": "7d6efbe85c4a674fd49044d0ed443bf34d5e113aa594fa97bf8194e96a5ad482",
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/model_settings.py",
+      "symbol": "configured",
+      "line": 26,
+      "file_sha256": "7d6efbe85c4a674fd49044d0ed443bf34d5e113aa594fa97bf8194e96a5ad482",
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/model_settings.py",
+      "symbol": "view",
+      "line": 33,
+      "file_sha256": "7d6efbe85c4a674fd49044d0ed443bf34d5e113aa594fa97bf8194e96a5ad482",
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/model_settings.py",
+      "symbol": "read_settings",
+      "line": 41,
+      "file_sha256": "7d6efbe85c4a674fd49044d0ed443bf34d5e113aa594fa97bf8194e96a5ad482",
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/model_settings.py",
+      "symbol": "update_settings",
+      "line": 49,
+      "file_sha256": "7d6efbe85c4a674fd49044d0ed443bf34d5e113aa594fa97bf8194e96a5ad482",
+      "documented": true
+    },
+    {
+      "path": "backend/api/runtime_dependencies.py",
+      "symbol": "_configured_owned",
+      "line": 109,
+      "file_sha256": "ca3f33717bdd559d782f0bab9f1ff4a6c962295e47f537a7ead5b6f89f381f5e",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/codex_session.py",
+      "symbol": "CodexSession",
+      "line": 98,
+      "file_sha256": "96000d101fb2a038d5e923727302ef3604d28703aea22ca52440acc9ddda05a0",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/codex_session.py",
+      "symbol": "CodexSession.__init__",
+      "line": 107,
+      "file_sha256": "96000d101fb2a038d5e923727302ef3604d28703aea22ca52440acc9ddda05a0",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/codex_session.py",
+      "symbol": "CodexSession.run",
+      "line": 229,
+      "file_sha256": "96000d101fb2a038d5e923727302ef3604d28703aea22ca52440acc9ddda05a0",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/contracts.py",
+      "symbol": "RunView",
+      "line": 118,
+      "file_sha256": "4736ef2d36d2812adbb22e9c4264bae94584203487690f5c0a7896587bd02c87",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/model_settings.py",
+      "symbol": "ModelUnavailable",
+      "line": 10,
+      "file_sha256": "876a6af6da86055532ac3bb663fd1af7c62aec8ea407fbded04b1fd0e6fdd4eb",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/model_settings.py",
+      "symbol": "model_profile",
+      "line": 14,
+      "file_sha256": "876a6af6da86055532ac3bb663fd1af7c62aec8ea407fbded04b1fd0e6fdd4eb",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/model_settings.py",
+      "symbol": "ModelSettings",
+      "line": 23,
+      "file_sha256": "876a6af6da86055532ac3bb663fd1af7c62aec8ea407fbded04b1fd0e6fdd4eb",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/model_settings.py",
+      "symbol": "ModelSettings.__init__",
+      "line": 26,
+      "file_sha256": "876a6af6da86055532ac3bb663fd1af7c62aec8ea407fbded04b1fd0e6fdd4eb",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/model_settings.py",
+      "symbol": "ModelSettings._scope",
+      "line": 31,
+      "file_sha256": "876a6af6da86055532ac3bb663fd1af7c62aec8ea407fbded04b1fd0e6fdd4eb",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/model_settings.py",
+      "symbol": "ModelSettings._setting",
+      "line": 43,
+      "file_sha256": "876a6af6da86055532ac3bb663fd1af7c62aec8ea407fbded04b1fd0e6fdd4eb",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/model_settings.py",
+      "symbol": "ModelSettings._resolve",
+      "line": 48,
+      "file_sha256": "876a6af6da86055532ac3bb663fd1af7c62aec8ea407fbded04b1fd0e6fdd4eb",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/model_settings.py",
+      "symbol": "ModelSettings.view",
+      "line": 60,
+      "file_sha256": "876a6af6da86055532ac3bb663fd1af7c62aec8ea407fbded04b1fd0e6fdd4eb",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/model_settings.py",
+      "symbol": "ModelSettings.update",
+      "line": 66,
+      "file_sha256": "876a6af6da86055532ac3bb663fd1af7c62aec8ea407fbded04b1fd0e6fdd4eb",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/model_settings.py",
+      "symbol": "ModelSettings.freeze",
+      "line": 78,
+      "file_sha256": "876a6af6da86055532ac3bb663fd1af7c62aec8ea407fbded04b1fd0e6fdd4eb",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/model_settings.py",
+      "symbol": "validate_native_model",
+      "line": 90,
+      "file_sha256": "876a6af6da86055532ac3bb663fd1af7c62aec8ea407fbded04b1fd0e6fdd4eb",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedCodexRuntime",
+      "line": 242,
+      "file_sha256": "97ca7e06c7cb501595a035a7a01765125befcbf8762b720b5f38fa9b681ecc2e",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedCodexRuntime.__post_init__",
+      "line": 269,
+      "file_sha256": "97ca7e06c7cb501595a035a7a01765125befcbf8762b720b5f38fa9b681ecc2e",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedCodexRuntime.open",
+      "line": 368,
+      "file_sha256": "97ca7e06c7cb501595a035a7a01765125befcbf8762b720b5f38fa9b681ecc2e",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedCodexRuntime.open.verify_model",
+      "line": 406,
+      "file_sha256": "97ca7e06c7cb501595a035a7a01765125befcbf8762b720b5f38fa9b681ecc2e",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService",
+      "line": 63,
+      "file_sha256": "96f03134807e46df3e3862db802718d3d13a3b92ba77407716a9ec1251e6eb24",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._note_issue",
+      "line": 803,
+      "file_sha256": "96f03134807e46df3e3862db802718d3d13a3b92ba77407716a9ec1251e6eb24",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._execute",
+      "line": 1027,
+      "file_sha256": "96f03134807e46df3e3862db802718d3d13a3b92ba77407716a9ec1251e6eb24",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore",
+      "line": 66,
+      "file_sha256": "51382f07aef7518adbef1007f14877f45c90953dcfdf8230130aaade278a916b",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore._row",
+      "line": 122,
+      "file_sha256": "51382f07aef7518adbef1007f14877f45c90953dcfdf8230130aaade278a916b",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore._view",
+      "line": 149,
+      "file_sha256": "51382f07aef7518adbef1007f14877f45c90953dcfdf8230130aaade278a916b",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_model_settings.py",
+      "symbol": "test_model_scope_precedence_revision_reset_and_project_isolation",
+      "line": 11,
+      "file_sha256": "69a7702d9d2688bd1c5df6106749b7607d18b8511923f889a94c0ba362223c39",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_model_settings.py",
+      "symbol": "test_attempt_model_selection_is_frozen_before_inference_even_after_policy_changes",
+      "line": 32,
+      "file_sha256": "69a7702d9d2688bd1c5df6106749b7607d18b8511923f889a94c0ba362223c39",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_model_settings.py",
+      "symbol": "test_native_catalog_checks_requested_model_and_effort_without_sending_a_turn",
+      "line": 51,
+      "file_sha256": "69a7702d9d2688bd1c5df6106749b7607d18b8511923f889a94c0ba362223c39",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_model_settings.py",
+      "symbol": "test_native_catalog_checks_requested_model_and_effort_without_sending_a_turn.Catalog",
+      "line": 54,
+      "file_sha256": "69a7702d9d2688bd1c5df6106749b7607d18b8511923f889a94c0ba362223c39",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_model_settings.py",
+      "symbol": "test_native_catalog_checks_requested_model_and_effort_without_sending_a_turn.Catalog.__init__",
+      "line": 56,
+      "file_sha256": "69a7702d9d2688bd1c5df6106749b7607d18b8511923f889a94c0ba362223c39",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_model_settings.py",
+      "symbol": "test_native_catalog_checks_requested_model_and_effort_without_sending_a_turn.Catalog.request",
+      "line": 59,
+      "file_sha256": "69a7702d9d2688bd1c5df6106749b7607d18b8511923f889a94c0ba362223c39",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_model_settings.py",
+      "symbol": "test_codex_session_sends_selected_reasoning_effort_instead_of_fixed_low",
+      "line": 70,
+      "file_sha256": "69a7702d9d2688bd1c5df6106749b7607d18b8511923f889a94c0ba362223c39",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_model_settings.py",
+      "symbol": "test_owner_configuration_changes_future_choices_without_retargeting_actual_native_attempt",
+      "line": 79,
+      "file_sha256": "69a7702d9d2688bd1c5df6106749b7607d18b8511923f889a94c0ba362223c39",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_model_settings.py",
+      "symbol": "test_owner_configuration_changes_future_choices_without_retargeting_actual_native_attempt.held",
+      "line": 85,
+      "file_sha256": "69a7702d9d2688bd1c5df6106749b7607d18b8511923f889a94c0ba362223c39",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_model_settings.py",
+      "symbol": "test_unavailable_model_has_no_thread_turn_or_fallback_and_keeps_original_choice",
+      "line": 107,
+      "file_sha256": "69a7702d9d2688bd1c5df6106749b7607d18b8511923f889a94c0ba362223c39",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_model_settings.py",
+      "symbol": "test_deleted_empty_project_does_not_leave_policy_for_a_recreated_project",
+      "line": 121,
+      "file_sha256": "69a7702d9d2688bd1c5df6106749b7607d18b8511923f889a94c0ba362223c39",
+      "documented": true
+    },
+    {
+      "path": "backend/tools/base/db.py",
+      "symbol": "ensure_migrations",
+      "line": 111,
+      "file_sha256": "f0c30679c49a244acd70ccfe54f9087a1b808eee30fd7ccb8dd5e43aa31991be",
+      "documented": true
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

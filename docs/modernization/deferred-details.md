@@ -93,3 +93,6 @@ retomarlo. No convertir su registro en otra investigación o implementación.
 
 
 | DD-038 | Afinar densidad de rutas, encuadre/foco y actualización de la lista lateral tras adoptar; heredado del piloto. No reabrir ahora imports/estilo ni otra ronda de capturas por esos detalles. | `SourceSetup.tsx`, capturas `2026-11-06-source-reservation`, DD036/DD037 | Resolver después de **todas las capacidades principales**, según reiteración del usuario del6nov. Configuración/modelos, prompts/comunicación, cuatro rutas y los demás bloques gruesos tienen prioridad. |
+
+
+| DD-039 | Unificar los tokens visuales del diálogo oscuro con las páginas claras; afinar densidad, elección de agentes conocidos e historial de ediciones de configuración. La identificación exacta ya se explica y se muestra en Tareas; no se infiere de un rol. La validación de catálogo real/elección congelada/revisión optimista ya está implementada. | `ModelSettingsDialog.tsx`, `model-settings-results.json`, capturas `2026-11-06-model-settings` | Pulido **después de todas las capacidades principales**. No repetir actores/kernel por estos ajustes de interfaz; continuar ahora con el catálogo completo de prompts. |

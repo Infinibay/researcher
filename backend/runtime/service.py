@@ -839,6 +839,10 @@ class RuntimeService:
                 "El proveedor configurado no admite búsqueda web nativa. No se inició inferencia ni se cambió de proveedor. Revisa la configuración del runtime y las capacidades de la cuenta antes de crear otra solicitud.",
                 "review_runtime_configuration",
             ),
+            "native_model_unavailable": (
+                "El modelo o esfuerzo elegido no está disponible en el catálogo de Codex de esta cuenta. No se envió un turno ni se eligió otro modelo. Revisa la configuración; la solicitud y la elección original se conservan.",
+                "review_runtime_configuration",
+            ),
             "task_changed": (
                 "La tarea cambió a un tipo que este motor todavía no puede ejecutar. La solicitud sigue guardada; revisa la tarea antes de continuar.",
                 "inspect_saved_work",
@@ -1362,6 +1366,8 @@ class RuntimeService:
                         code = (
                             "native_search_unavailable"
                             if error_type == "NativeSearchUnavailable"
+                            else "native_model_unavailable"
+                            if error_type == "ModelUnavailable"
                             else "input_too_large"
                             if error_type == "InputTooLarge"
                             else "workspace_changed"

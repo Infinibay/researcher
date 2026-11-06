@@ -4,6 +4,8 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- Configuración web global/proyecto/agente y esfuerzo de razonamiento, con elección congelada por intento y catálogo nativo comprobado antes de enviar.103backend,123frontend/build,11instaladas y4capturas acotadas; cero modelos reales en esta entrega. [Contrato](../architecture/model-configuration.md), [resultados](model-settings-results.json).
+
 - Reserva local cerrada explícitamente sin borrar ni dar Git por completado; nueva adopción independiente y reparación guardada antes de programación recuperables.35pruebas en fuente,122frontend/build y4capturas web; no nueva verificación de wheel/global. [Contrato](../architecture/source-reservation.md), [resultados](source-reservation-results.json).
 
 - Historia original entre navegadores: abrir una preparación sin recrear su POST, conservar otra solicitud local pendiente y rechazar respuestas/controles de otra identidad o intento.121frontend,16pruebas instaladas enfocadas y tres contextos de navegador. [Contrato](../architecture/source-history.md), [resultados](source-history-results.json). Reserva/adopción y restore siguen abiertos.
@@ -151,6 +153,6 @@ sin reetiquetarlos como ensayos nuevos.
 
 ## Pendiente
 
-Completar capacidades retenidas y retirar roles/flows/CrewAI/RAG anteriores; coordinación y comunicación entre agentes; consumidores de búsqueda, conocimiento y revisión científica; publicación reconciliable del desarrollo y ampliación de políticas de aceptación y sustitución del CI heredado; evaluación de todos los prompts y comprensión humano–agente; historial largo/presupuestos/operación; migración/restauración y CLI/TUI; seis rutas web y aceptación de las doce; auditoría global de docstrings; resolver o reemplazar justificadamente los 100 fallos heredados y revisión independiente final de toda la rama.
+Completar capacidades retenidas y retirar roles/flows/CrewAI/RAG anteriores; coordinación y comunicación entre agentes; consumidores de búsqueda, conocimiento y revisión científica; publicación reconciliable del desarrollo y ampliación de políticas de aceptación y sustitución del CI heredado; evaluación de todos los prompts y comprensión humano–agente; historial largo/presupuestos/operación; migración/restauración y CLI/TUI; cuatro rutas web y aceptación de las doce; auditoría global de docstrings; resolver o reemplazar justificadamente los 100 fallos heredados y revisión independiente final de toda la rama.
 
-Los 43 escenarios amplios continúan abiertos. No hay un porcentaje global defendible: las pruebas verifican límites concretos y no miden producto aceptado. El modelo se configura mediante JSON global con reinicio; no hay selector web ni configuración por agente/proyecto. El [registro](progress.md) conserva checkpoints históricos y sus límites, sin reetiquetarlos como ensayos nuevos.
+Los 43 escenarios amplios continúan abiertos. No hay un porcentaje global defendible: las pruebas verifican límites concretos y no miden producto aceptado. El modelo y esfuerzo se configuran desde la cabecera para global/proyecto/agente; cada intento conserva su elección original y la disponibilidad se comprueba mediante el catálogo nativo. El JSON del host sigue aportando el valor inicial. El [registro](progress.md) conserva checkpoints históricos y sus límites, sin reetiquetarlos como ensayos nuevos.

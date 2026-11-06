@@ -495,3 +495,11 @@ conserva archivos e historia y retira la reserva. Una adopción posterior tiene
 su propia solicitud. Las autorizaciones viejas no pueden actuar sobre ella.
 [Contrato](source-reservation.md),
 [resultados](../modernization/source-reservation-results.json).
+
+## Configuración de modelos del propietario
+
+`GET/PUT /api/model-settings` usa sesión/CSRF del propietario y revisión optimista;
+no forma parte del catálogo MCP del modelo. Configura futuros intentos, sin dar
+herramientas/credenciales/permisos. El runtime conserva una elección por intento y
+comprueba `model/list` en su conexión real antes de thread/turn.
+[Contrato](model-configuration.md), [resultados](../modernization/model-settings-results.json).

@@ -140,6 +140,7 @@ class RunView:
     issue: dict | None = None
     review: dict | None = None
     execution_kind: str = "research"
+    model_selection: dict | None = None
 
 
 @dataclass(frozen=True)

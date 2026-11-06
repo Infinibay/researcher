@@ -1,0 +1,48 @@
+{
+  "base_commit": "a44d002",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "d9923e4a2c3690fd267b385471b811f83b1215775ae533f93eeae3bc288f6817",
+  "observed": {
+    "passed": 11,
+    "failures": 0,
+    "skipped": 0,
+    "installed_distributions": 85,
+    "sdk": "1.30.0",
+    "excluded_frameworks": [
+      "chromadb",
+      "crewai",
+      "crewai-tools",
+      "fastmcp",
+      "fastmcp-slim",
+      "litellm",
+      "ollama",
+      "tree-sitter",
+      "tree-sitter-c",
+      "tree-sitter-javascript",
+      "tree-sitter-python",
+      "tree-sitter-rust",
+      "tree-sitter-typescript"
+    ],
+    "project_noneditable": true,
+    "backend_modules": 233,
+    "all_backend_imports_from_native_env": true,
+    "matched_application_members": 831,
+    "console_help": 0,
+    "console_missing_token": 2,
+    "console_real_stdio": true,
+    "console_created_database": false,
+    "real_model_turns": 0,
+    "controlled_product_turns": 1,
+    "controlled_child_protocol_turns": 1,
+    "synthetic_inference_adapter_turns": "One controlled product author turn with required controlled Ken, one low-level child protocol turn; unsupported original pair rejected before thread/turn",
+    "actual_host_publications": "Actual local source release/adoption; no publication or user remote",
+    "seconds": 12.237
+  },
+  "tests": [
+    "backend/tests/runtime/test_model_settings.py",
+    "backend/tests/runtime/test_source_reservation.py"
+  ],
+  "excluded_legacy_extra_cases": [],
+  "bootstrap": "Existing clean native-only env; final noneditable wheel reinstalled offline without dependency changes. Python-I outside checkout; no inherited source or old site-packages. Explicit prepared local semantic assets.",
+  "limits": "Focused installed model policy/owned runtime/child protocol and source reservation:11cases, actual Git/kernel/SQLite plus controlled generation/Ken. No real model turns or user remotes. Not global, full restore, complete host install or page acceptance. Current source103 regressions and frontend123/build are separate receipts."
+}

@@ -170,6 +170,12 @@ operator action; the normal startup command does not configure these services.
 
 Open http://localhost:5173 in your browser.
 
+Use **Modelos** in the workspace header to set a global, project or project-agent
+model and reasoning effort. Changes apply to new attempts; current attempts retain
+their original selection. Codex checks the selected pair against its account
+catalog before dispatch and does not substitute another model or billed provider.
+See [model configuration](docs/architecture/model-configuration.md).
+
 ## Historical container deployment
 
 The following container settings describe the retained deployment being migrated.

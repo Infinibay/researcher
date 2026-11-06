@@ -1,0 +1,79 @@
+{
+  "base_commit": "a44d002",
+  "backend": {
+    "passed": 103,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 42.86,
+    "scope": "Model settings, owned factory, Codex session, coordination and runtime service; current source"
+  },
+  "installed": {
+    "passed": 11,
+    "failures": 0,
+    "skipped": 0,
+    "installed_distributions": 85,
+    "sdk": "1.30.0",
+    "excluded_frameworks": [
+      "chromadb",
+      "crewai",
+      "crewai-tools",
+      "fastmcp",
+      "fastmcp-slim",
+      "litellm",
+      "ollama",
+      "tree-sitter",
+      "tree-sitter-c",
+      "tree-sitter-javascript",
+      "tree-sitter-python",
+      "tree-sitter-rust",
+      "tree-sitter-typescript"
+    ],
+    "project_noneditable": true,
+    "backend_modules": 233,
+    "all_backend_imports_from_native_env": true,
+    "matched_application_members": 831,
+    "console_help": 0,
+    "console_missing_token": 2,
+    "console_real_stdio": true,
+    "console_created_database": false,
+    "real_model_turns": 0,
+    "controlled_product_turns": 1,
+    "controlled_child_protocol_turns": 1,
+    "synthetic_inference_adapter_turns": "One controlled product author turn with required controlled Ken, one low-level child protocol turn; unsupported original pair rejected before thread/turn",
+    "actual_host_publications": "Actual local source release/adoption; no publication or user remote",
+    "seconds": 12.237
+  },
+  "frontend": {
+    "passed": 123,
+    "failed": 0,
+    "build_seconds": 5.26
+  },
+  "browser": {
+    "evidence": "docs/design/audits/2026-11-06-model-settings/evidence.json",
+    "captures": 4,
+    "scope": "owner dialog within existing shell, not another page",
+    "puts": 4,
+    "lost_reply_draft_preserved": true,
+    "global_project_actor_inheritance_and_reset": true,
+    "separate_project_isolated": true,
+    "scoped_axe_violations": 0,
+    "js_errors": 0,
+    "horizontal_overflow": false,
+    "native_runs": 0,
+    "host_configuration_preserved": true,
+    "limits": "Captures precede final explanatory actor-ID text and task actor-ID line; subsequent final build includes these. Prior verifier stopped after one real save due ambiguous locator; resumed same server and saved state without replaying that save."
+  },
+  "migration": {
+    "version": 55,
+    "empty_project_settings_cascade": true,
+    "reset_revision_retained": true,
+    "attempt_selection_frozen": true
+  },
+  "documentation": {
+    "python_changed_definitions": 44,
+    "ts_modules_or_named_definitions": 20,
+    "missing": 0
+  },
+  "live_handles": "All terminal: source42353 exit0; package1598 exit0; browser5378 exit0; server39892 exit2 after SIGINT; frontend21999/70980 exit0. No retained QA server.",
+  "remaining": "No new global suite/43-scenario acceptance, actual account availability certification or full host restore. Original prompts/books/communication/science, four routes, twelve page acceptance, legacy removal, budgets/history/CLI, restore/DD030/inverses43\u201354 and final independent review remain required."
+}
