@@ -1688,7 +1688,12 @@
         "docs/modernization/spider-retirement.json",
         "docs/modernization/spider-results.json",
         "docs/modernization/spider-packaging.json",
-        "backend/tests/research/test_spider.py"
+        "backend/tests/research/test_spider.py",
+        "docs/architecture/native-adapter-retirement.md",
+        "docs/modernization/native-adapters-retirement.json",
+        "docs/modernization/native-adapters-results.json",
+        "docs/modernization/native-adapters-packaging.json",
+        "backend/tests/runtime/test_native_adapter_retirement.py"
       ],
       "remaining": [
         "Migrate/expose retained capabilities and their actual consumers (inventory of71 tools exists).",
@@ -1990,7 +1995,12 @@
         "Historical migration fixtures and backup/restore",
         "Legacy data/consumer translation and complete preservation validation",
         "Rebuild version29 migration fixture/chain verification: same missing-trigger failure at migration43 also occurs in prior installed wheel. Full restore/inverse acceptance remains open."
-      ]
+      ],
+      "native_adapter_observation": {
+        "test": "backend/tests/runtime/test_code_publications.py::test_publication_request_is_immutable_and_startup_preserves_original_records[frozen_author]",
+        "observed": "Actual max schema version55 vs expected54, reproduced source and installed. Earlier immutable request/original state assertions pass. Both test and migration source unchanged from1da098e.",
+        "action": "Resolve during comprehensive migration43–55/inverse/restore validation; do not silently update assertion during adapter retirement. Include cache-only Chroma export when original documents are unavailable."
+      }
     },
     "backup_restore": {
       "status": "pending",
@@ -2300,7 +2310,12 @@
         "docs/architecture/native-code-operations.md",
         "docs/modernization/code-operations-results.json",
         "docs/modernization/code-operations-packaging.json",
-        "backend/tests/runtime/test_native_code_operations.py"
+        "backend/tests/runtime/test_native_code_operations.py",
+        "docs/architecture/native-adapter-retirement.md",
+        "docs/modernization/native-adapters-retirement.json",
+        "docs/modernization/native-adapters-results.json",
+        "docs/modernization/native-adapters-packaging.json",
+        "backend/tests/runtime/test_native_adapter_retirement.py"
       ],
       "context7_cutover": {
         "implemented": "Optional host-owned library search and JSON/text documentation captured as attributed immutable sources; real MCP/HTTP/API/SQLite/citation with controlled provider bytes. Three CrewAI modules retired.",
@@ -2316,6 +2331,11 @@
         "implemented": "Ken discovery plus scoped native private writes, updated dependent imports/callers, exact candidate/checks. Removed 44 file/code-index/CLI modules and six direct tree-sitter requirements; ci_* data retained.",
         "verified": "153 distinct source tests have latest passing observations across two scoped batches; installed wheel73PASS0FAIL0SKIP. Generation/Ken controlled; physical writes/Git/kernel/SQLite/crash recovery real.",
         "remaining": "Other leaf tools and five optional legacy libraries, migrations/restore/operations, real model/human/science evaluation and global acceptance."
+      },
+      "native_adapter_cutover": {
+        "implemented": "Retired23shell/Git/RAG/generic model SQL/code-doc modules. Existing native command/publication/document/citation contracts preserved; no DB/Git/history/source/Chroma data deletion.",
+        "verified": "Source132PASS1FAIL0SKIP; installed107PASS1FAIL0SKIP. Both keep unchanged migration54vs55 assertion failure;730wheel source hashes and separate211module import audit. No claim of complete acceptance.",
+        "remaining": "Web robots/frequency policy and wrappers; tasks/communication/project/knowledge/shared utilities; five optional legacy libraries. Chroma cache-only export/restore and all full evaluation remain required."
       }
     },
     "final_independent_review": {
@@ -2637,7 +2657,12 @@
         "docs/architecture/native-code-operations.md",
         "docs/modernization/code-operations-results.json",
         "docs/modernization/code-operations-packaging.json",
-        "backend/tests/runtime/test_native_code_operations.py"
+        "backend/tests/runtime/test_native_code_operations.py",
+        "docs/architecture/native-adapter-retirement.md",
+        "docs/modernization/native-adapters-retirement.json",
+        "docs/modernization/native-adapters-results.json",
+        "docs/modernization/native-adapters-packaging.json",
+        "backend/tests/runtime/test_native_adapter_retirement.py"
       ],
       "remaining": [
         "Migrate retained legacy shell/flow consumers and full code-interpreter capabilities.",
@@ -3105,7 +3130,8 @@
         "frontend/tests/findings-design.test.ts",
         "docs/modernization/context7-docstrings.json",
         "docs/modernization/spider-docstrings.json",
-        "docs/modernization/code-operations-docstrings.json"
+        "docs/modernization/code-operations-docstrings.json",
+        "docs/modernization/native-adapters-docstrings.json"
       ],
       "remaining": [
         "Audit modules/classes/methods and relevant functions added earlier in this branch; add meaningful searchable docstrings/JSDoc where missing or stale.",
@@ -3124,7 +3150,12 @@
         "backend/research/provenance.py",
         "backend/tests/research/test_structured_capture.py",
         "backend/tests/research/test_source_structure.py",
-        "backend/tests/runtime/test_host_business.py"
+        "backend/tests/runtime/test_host_business.py",
+        "docs/architecture/native-adapter-retirement.md",
+        "docs/modernization/native-adapters-retirement.json",
+        "docs/modernization/native-adapters-results.json",
+        "docs/modernization/native-adapters-packaging.json",
+        "backend/tests/runtime/test_native_adapter_retirement.py"
       ],
       "remaining": [
         "Migrate legacy registries/roles/flows and remove old RAG/CrewAI providers once their consumers are replaced.",
@@ -3379,7 +3410,12 @@
         "docs/architecture/remote-tasks.md",
         "docs/modernization/remote-tasks-results.json",
         "docs/modernization/remote-tasks-packaging.json",
-        "docs/design/audits/2026-11-05-remote-publications/report.md"
+        "docs/design/audits/2026-11-05-remote-publications/report.md",
+        "docs/architecture/native-adapter-retirement.md",
+        "docs/modernization/native-adapters-retirement.json",
+        "docs/modernization/native-adapters-results.json",
+        "docs/modernization/native-adapters-packaging.json",
+        "backend/tests/runtime/test_native_adapter_retirement.py"
       ],
       "implemented": [
         "Internal exact-ref policy with fixed host port; candidate Git/diff/bytes and original source/candidate metadata identity checked",

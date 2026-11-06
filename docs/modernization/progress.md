@@ -6903,3 +6903,51 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
   operation/migrations/restore/history/budgets/CLI/realprompt-human-science/
   43scenarios/all12pages/finalreview.12pilots48concepts0accepted unchanged.
   Macro-first and updated chat list at main-task transitions remain mandatory.
+
+### 2026-11-06 — Native command/Git/document adapters replace framework wrappers
+
+- Previous goal turn was progress1da098e. Revalidated managed tracked-clean branch,
+  full objective, original checkout/protected directories. No agents/push/merge/
+  deployment. Macro-first/task-transition list preserved. Ken old-checkout recall/
+  blast radius used as lower bounds; actual managed files/consumers checked.
+- Read old command/Git/RAG/generic SQL/code-doc contracts and native replacements.
+  Retired23modules and5test files containing46wrapper test functions; those are
+  obsolete tests, not repaired failures. Only non-test external importer was the
+  web export. Static audit corrected __init__.py relative-import package handling;
+  post-scan across backend rechecks this23and previous44modules, no remaining
+  static imports. Dynamic/external consumers remain unproven.
+- Native jobs and private edits retain ownership/closure; host publication retains
+  exact owner acceptance and recovery; documents use canonical parser/semantic
+  sources and Context7/citations. No hidden CrewAI document LLM/embedding builder,
+  generic model SQL or direct-host sandbox fallback retained. Scope/contract changes
+  explicit in native-adapter-retirement.md. DB/files/Git/Chroma assets untouched;
+  cache-only Chroma export remains principal migration work. No dependency changes;
+  lock179packages/five explicit optional legacy requirements unchanged.
+- RED old shell import availability. Source133cases:132PASS1FAIL0SKIP91.65s.
+  Failure is unchanged publication startup test expecting54while unchanged
+  migrations install55; preceding original-state/immutable-intent assertions pass.
+  Preserved for migration block rather than editing its expectation now.
+- Clean-copy final wheel installed in native env. Actual installed108cases:
+  107PASS1FAIL0SKIP90.444s, same migration failure. Native commands/refactor/
+  candidate/check/owner-accepted publication, parsers/local multilingual ONNX,
+  Context7 MCP/API/SQLite/citation; generation/Ken/provider bytes controlled.
+  No new real model/provider/user-data effects.730PythonSQLmembers match current
+  source/wheel. Existing dev_data.sql is outside db/*.sql package rule, explicitly
+  disclosed rather than counted as a matching runtime member.
+- Original package worker completed tests but its metadata receipt assertion
+  expected qualified classname; external pytest.ini produced empty classname.
+  Retained original XML/log, verified exact test name/installed path/55==54 and
+  fixed runner for future. Did not replay90s of tests. Independent read-only
+  metadata/import audit211backend modules all from env,85distributions/no legacy.
+  Original full post-test sys.modules map unavailable and not claimed.
+- One new function and both affected modules documented. Two pre-existing web
+  export style findings remainDD048. Prompt394/420,57more archived(187total),
+  17unchanged sources revalidated against exact sole web export consumer change.
+  Inventorycheck and2auditor testsPASS0.13s. No efficacy/global acceptance claim.
+- Terminal handles56779exit1,38085exit0,26996exit1,8658exit0. No live server/model/
+  test actor. Native env now holds native-adapters wheel. Scratch native-adapters-*
+  retains original source/package logs/XML, runner, corrected consumer inventory.
+- Next principal: native robots/frequency acquisition policy before web wrapper
+  retirement; then task/communication/project/knowledge and remaining dependencies.
+  Operation/migrations/restore/history/budgets/CLI/realprompt-human-science/
+  43scenarios/all12pages/finalreview remain full-scope.12pilots48concepts0accepted.

@@ -16,7 +16,29 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: herramientas de código e índice duplicado retirados
+## Etapa actual: adaptadores de ejecución y documentos retirados
+
+Se retiran23módulos de shell/Git/RAG/SQL genérico y documentación CrewAI. Los
+recorridos nativos conservan ejecución, publicación tras aceptación, parsers,
+recuperación semántica local y documentación capturada. Datos e índices Chroma
+existentes permanecen; su migración/exportación no se declara terminada.
+[Contrato y límites](../architecture/native-adapter-retirement.md).
+
+**Comprobado:**132pruebas de fuente y107del wheel pasan; ambas baterías conservan
+una falla de versión54/55 en el test de arranque de publicación, para el bloque
+migraciones.0omisiones.730fuentes coinciden; una auditoría posterior sin ejecutar
+pruebas comprueba211imports del entorno.46tests de wrappers retirados no cuentan
+como reparaciones.394candidatos de prompt/420archivos,187entradas archivadas,
+0revisiones estáticas pendientes. Función nueva y módulos afectados documentados.
+
+**Siguiente principal:** política de captura web (robots.txt/frecuencia), antes de
+retirar los wrappers web; después tareas/comunicación/proyecto/conocimiento y las
+cinco bibliotecas legacy restantes. Luego operación, migraciones/restore,
+historial/presupuestos, CLI y evaluación real/humana/científica/global.
+Siguen12pilotos48conceptos0páginas aceptadas integralmente. Detalles secundarios
+al final; estilo web ya registradoDD048.
+
+## Etapa anterior: herramientas de código e índice duplicado retirados
 
 Ken queda como descubrimiento/lectura/memoria técnica; comandos poseídos realizan
 las escrituras en la copia privada. Ensayo de edición, alta/baja, rename/move,

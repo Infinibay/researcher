@@ -180,3 +180,9 @@ también avisos previos de las rutas Git sobre subprocesos y excepciones.
 Los aliases registran fixtures por nombre y deben conservar esa semántica.
 No reabrir la migración por estilo; el cierre global de herramientas y los
 checkpoint/capacidad operativos del historial siguen como tareas principales.
+
+
+Seguimiento deDD048 (adaptadores nativos): los avisos I001/RUF022 del export web
+persisten en[native-adapters-lint.json](native-adapters-lint.json). No se reabre
+la migración por ellos. El fallo54/55, la recuperación de Chroma sin fuente original
+y la política web robots/frecuencia son tareas principales de sus bloques.

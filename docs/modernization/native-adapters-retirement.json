@@ -1,0 +1,272 @@
+{
+  "baseline": "1da098e",
+  "scope": "All backend Python AST absolute/relative imports and exact module strings. Arbitrary computed imports and consumers outside this repository remain unknown.",
+  "selected_modules": [
+    {
+      "path": "backend/tools/data/__init__.py",
+      "sha256": "f8b53cd982fb90018c3d584872411ef3f3aae80b262e17cc3ca13410f16d0769"
+    },
+    {
+      "path": "backend/tools/data/nl2sql.py",
+      "sha256": "44e8ce48b7c2897e13cb15ac9dcc7cd4640f659c9c48c7263a70d947f27cde7b"
+    },
+    {
+      "path": "backend/tools/git/__init__.py",
+      "sha256": "a51aed0466eb3bcf853a2cc3000408dd7045de4a6f28a4d7c64e11d98b5e8548"
+    },
+    {
+      "path": "backend/tools/git/branch.py",
+      "sha256": "a7e1dbaaad2db1374290da9bdf84553d8b93290e2b90c3c262ed2d6869ade460"
+    },
+    {
+      "path": "backend/tools/git/commit.py",
+      "sha256": "993dfc2a256b77cca6cc2930090b9e9254a7d5e603f55677e204868015adfe48"
+    },
+    {
+      "path": "backend/tools/git/create_pr.py",
+      "sha256": "9ef5b32cf3bec36edbdebbe343f4e1e33580ccd3ff0fabe92dc0c5b1de8c3cbf"
+    },
+    {
+      "path": "backend/tools/git/diff.py",
+      "sha256": "a604d591016d5eeeaf2b954bf1b15031d59c159b0dfb5f93df11105ba35d9708"
+    },
+    {
+      "path": "backend/tools/git/merge_pr.py",
+      "sha256": "09d2f36a0358c9ae65f9d8ae2167ca958a3fc8820ff3aee8196e489d059a72c3"
+    },
+    {
+      "path": "backend/tools/git/push.py",
+      "sha256": "e6e2735363f89106cf85d4d49778463e0c9b7dd6192b5cce1fb82d864f3cc0f6"
+    },
+    {
+      "path": "backend/tools/git/status.py",
+      "sha256": "117101b920a0410b2e13a456c4e10e7c8b26998ee9e7c66bd1d8806c4c071453"
+    },
+    {
+      "path": "backend/tools/rag/__init__.py",
+      "sha256": "f5f541f1562fa464c40f947312dfbf558b1f9b5bfb8b9a12ec0e212ca953bf77"
+    },
+    {
+      "path": "backend/tools/rag/base.py",
+      "sha256": "09d774e290a539f558e4cce96f19f8cf8a2af4b8fdc3a670ebd62bf21ec1b6c8"
+    },
+    {
+      "path": "backend/tools/rag/csv_search.py",
+      "sha256": "8e7824a202625d048624903222a1fe5d90aaeec658c1b7042d7af6578c7c020f"
+    },
+    {
+      "path": "backend/tools/rag/directory_search.py",
+      "sha256": "0b28524aa6f3f07e6403251c494c0a8f62cd2a99ef403d14d330348becdf6d22"
+    },
+    {
+      "path": "backend/tools/rag/docx_search.py",
+      "sha256": "bd3adebe517e606c6cb91f20834268a44a3ee320519dda0da4c073296a745e89"
+    },
+    {
+      "path": "backend/tools/rag/json_search.py",
+      "sha256": "c43e917e29f7d78eb1160caf661c1b526149f02aef655e7056ca6b0416edd9c2"
+    },
+    {
+      "path": "backend/tools/rag/pdf_search.py",
+      "sha256": "1e0ce9733f99fe86fde6de4672f1ece86f91a11cfeb106a90abd546585918804"
+    },
+    {
+      "path": "backend/tools/rag/xml_search.py",
+      "sha256": "32b261f34dad8cd708500903b59d524c7d03d22af924177823484816b9e9a23a"
+    },
+    {
+      "path": "backend/tools/shell/__init__.py",
+      "sha256": "c7ad0c34c055ea1732444fad7bb98efe8635bacad9d923514c243fa753d23b19"
+    },
+    {
+      "path": "backend/tools/shell/code_interpreter.py",
+      "sha256": "2011882012e3bd45b375251591f4d5c8ff5ad8eaa61f4b3dbd3081b30168d086"
+    },
+    {
+      "path": "backend/tools/shell/execute_command.py",
+      "sha256": "ead65f34f96af6f553b9d56debffea6a379b0629b95f0f3204e30b0b02512114"
+    },
+    {
+      "path": "backend/tools/web/code_docs_search.py",
+      "sha256": "5aab36a51d435f0d916e40b3e96628406b95e0f7b3e849a0240cac89e96351be"
+    },
+    {
+      "path": "backend/tools/web/crewai_tool_config.py",
+      "sha256": "21e5f72e77ea41432ae1c25a3f7dff944549cbaa112112ddc2a72822188053f6"
+    }
+  ],
+  "external_imports": [
+    {
+      "path": "backend/tools/web/__init__.py",
+      "line": 8,
+      "modules": [
+        "backend.tools.web.code_docs_search",
+        "backend.tools.web.code_docs_search.CodeDocsSearchInfinibayTool"
+      ]
+    },
+    {
+      "path": "backend/tests/security/test_tools_pod_mode.py",
+      "line": 48,
+      "modules": [
+        "backend.tools.shell.execute_command",
+        "backend.tools.shell.execute_command.ExecuteCommandTool"
+      ]
+    },
+    {
+      "path": "backend/tests/security/test_tools_pod_mode.py",
+      "line": 67,
+      "modules": [
+        "backend.tools.shell.execute_command",
+        "backend.tools.shell.execute_command.ExecuteCommandTool"
+      ]
+    },
+    {
+      "path": "backend/tests/security/test_tools_pod_mode.py",
+      "line": 83,
+      "modules": [
+        "backend.tools.shell.code_interpreter",
+        "backend.tools.shell.code_interpreter.CodeInterpreterTool"
+      ]
+    },
+    {
+      "path": "backend/tests/security/test_tools_pod_mode.py",
+      "line": 103,
+      "modules": [
+        "backend.tools.git.status",
+        "backend.tools.git.status.GitStatusTool"
+      ]
+    },
+    {
+      "path": "backend/tests/security/test_tools_pod_mode.py",
+      "line": 123,
+      "modules": [
+        "backend.tools.git.diff",
+        "backend.tools.git.diff.GitDiffTool"
+      ]
+    },
+    {
+      "path": "backend/tests/tools/test_code_docs_search.py",
+      "line": 8,
+      "modules": [
+        "backend.tools.web.code_docs_search",
+        "backend.tools.web.code_docs_search.CodeDocsSearchInfinibayTool"
+      ]
+    },
+    {
+      "path": "backend/tests/tools/test_doc_search_tools.py",
+      "line": 9,
+      "modules": [
+        "backend.tools.rag.docx_search",
+        "backend.tools.rag.docx_search.DOCXSearchInfinibayTool"
+      ]
+    },
+    {
+      "path": "backend/tests/tools/test_doc_search_tools.py",
+      "line": 10,
+      "modules": [
+        "backend.tools.rag.json_search",
+        "backend.tools.rag.json_search.JSONSearchInfinibayTool"
+      ]
+    },
+    {
+      "path": "backend/tests/tools/test_doc_search_tools.py",
+      "line": 11,
+      "modules": [
+        "backend.tools.rag.xml_search",
+        "backend.tools.rag.xml_search.XMLSearchInfinibayTool"
+      ]
+    },
+    {
+      "path": "backend/tests/tools/test_git_tools.py",
+      "line": 8,
+      "modules": [
+        "backend.tools.git",
+        "backend.tools.git.GitBranchTool",
+        "backend.tools.git.GitCommitTool",
+        "backend.tools.git.GitDiffTool",
+        "backend.tools.git.GitStatusTool"
+      ]
+    },
+    {
+      "path": "backend/tests/tools/test_shell_tools.py",
+      "line": 30,
+      "modules": [
+        "backend.tools.shell.execute_command",
+        "backend.tools.shell.execute_command.ExecuteCommandTool"
+      ]
+    },
+    {
+      "path": "backend/tests/tools/test_shell_tools.py",
+      "line": 158,
+      "modules": [
+        "backend.tools.shell.execute_command",
+        "backend.tools.shell.execute_command.ExecuteCommandTool"
+      ]
+    }
+  ],
+  "exact_module_literals": [],
+  "relative_import_resolution": "Containing directory is the package for both modules and __init__.py; resolve level-1 ancestors. Does not treat __init__ as a package component.",
+  "retired_tests": [
+    {
+      "path": "backend/tests/security/test_tools_pod_mode.py",
+      "sha256": "8c195e030d198371e5189981a41022b220f998f70782cb714639d48e5c3b32a5",
+      "test_functions": 5
+    },
+    {
+      "path": "backend/tests/tools/test_code_docs_search.py",
+      "sha256": "24b10109595e139741d34018d5c46626239a5c35431de47fc37c235a7142f4d8",
+      "test_functions": 4
+    },
+    {
+      "path": "backend/tests/tools/test_doc_search_tools.py",
+      "sha256": "1e22577be518a59419ff3363d3c93be9364f79e30a8feed3a0267a4a9c352e2c",
+      "test_functions": 10
+    },
+    {
+      "path": "backend/tests/tools/test_git_tools.py",
+      "sha256": "35d6704a749fa5b22c396aba89305e73e52632c9123ae42156a995d4a121c702",
+      "test_functions": 8
+    },
+    {
+      "path": "backend/tests/tools/test_shell_tools.py",
+      "sha256": "e051736ad6bb902951e0adab0f25ebc29ec0a6d6d133d9a405577834257fe40f",
+      "test_functions": 19
+    }
+  ],
+  "retained_data": "No database, source/reference files, artifacts, historical Git records, Chroma collections or local model assets are changed/deleted. Existing cache-only Chroma data still needs explicit migration/export validation in the migration block.",
+  "remaining": "Historical web acquisition policy, task/communication/project/knowledge adapters, shared DB/context and five optional legacy requirements. The old generic model SQL interface is intentionally retired, not ported.",
+  "prompt_review": {
+    "retired": 57,
+    "total_archived": 187,
+    "unchanged_source_revalidated": [
+      "backend/tools/web/deep_research.py::DeepWebResearchTool.description",
+      "backend/tools/web/deep_research.py::DeepWebResearchInput.description@14",
+      "backend/tools/web/fetch.py::WebFetchTool.description",
+      "backend/tools/web/fetch.py::WebFetchInput.description@17",
+      "backend/tools/web/fetch.py::WebFetchInput.description@19",
+      "backend/tools/web/fetch.py::WebFetchInput.description@23",
+      "backend/tools/web/read_paper.py::ReadPaperTool.description",
+      "backend/tools/web/read_paper.py::ReadPaperInput.description@18",
+      "backend/tools/web/read_paper.py::ReadPaperInput.description@19",
+      "backend/tools/web/read_paper.py::ReadPaperInput.description@20",
+      "backend/tools/web/scrape_website.py::ScrapeWebsiteInfinibayTool.description",
+      "backend/tools/web/scrape_website.py::ScrapeWebsiteInput.description@14",
+      "backend/tools/web/scrape_website.py::ScrapeWebsiteInput.description@17",
+      "backend/tools/web/scrape_website.py::ScrapeWebsiteInput.description@21",
+      "backend/tools/web/search.py::WebSearchTool.description",
+      "backend/tools/web/search.py::WebSearchInput.description@18",
+      "backend/tools/web/search.py::WebSearchInput.description@20"
+    ],
+    "scope": "Explicit same-source and sole exact web export consumer diff, not semantic auto-approval or model efficacy evaluation."
+  },
+  "post_validation": {
+    "remaining_backend_imports": [],
+    "scope": "All backend Python AST imports with correct package-directory resolution, including a recheck of all44modules from1da098e. Arbitrary dynamic/external imports unproven.",
+    "unchanged_files": {
+      "backend/tools/base/db.py": "f0c30679c49a244acd70ccfe54f9087a1b808eee30fd7ccb8dd5e43aa31991be",
+      "backend/tests/runtime/test_code_publications.py": "276953f4a9d123852c9b9102cf60cfc616eadb5148977f92f9b09e6be459ff27",
+      "pyproject.toml": "073a0fa889763e6464709b78ac39e815abb4b4970d79325486c847eb436b3279",
+      "uv.lock": "e90d5e9437cb509b9821061b4fa4d44d56af3d093e82bdf340a767ca84a0a667"
+    }
+  }
+}

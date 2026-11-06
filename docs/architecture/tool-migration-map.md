@@ -558,3 +558,11 @@ edición estructural. Se retiran 44 módulos, seis requisitos tree-sitter y 17 t
 de wrappers; los datos ci_* permanecen. El ensayo de efectos y sus límites están
 en [native-code-operations.md](native-code-operations.md). Restan otras herramientas
 y cinco dependencias del extra legacy; no se declara cerrada toda la migración.
+
+## Corte actual: ejecución y documentos (6 de noviembre)
+
+Se retiran23módulos de wrappers shell/Git/RAG/SQL y documentación CrewAI, junto
+con46funciones de prueba específicas. Los reemplazos y cambios de contrato están
+en [native-adapter-retirement.md](native-adapter-retirement.md). Permanecen las
+políticas web robots/frecuencia, las otras familias y las cinco bibliotecas legacy.
+El fallo de versión54/55 del test de publicación se conserva para migraciones.

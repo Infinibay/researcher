@@ -49,6 +49,10 @@ The duplicate code index, its file/structural tools and six tree-sitter requirem
 have been retired. Code discovery uses Ken; edits use owned native commands in
 the private development copy. See [code operations](docs/architecture/native-code-operations.md).
 
+Shell/Git/RAG adapters, generic model SQL and the CrewAI documentation search
+wrapper have also been retired. Their native replacements and remaining migration
+work are described in [adapter migration](docs/architecture/native-adapter-retirement.md).
+
 This extra does not enable an inference backend. Old provider calls are retired;
 actual model selection belongs to the configured native runtime. The former
 `anthropic` and `gemini` extras are no longer advertised. The old role catalogue

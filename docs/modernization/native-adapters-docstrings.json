@@ -1,0 +1,24 @@
+{
+  "scope": "Only one new test function and two affected modules; no new production methods/classes. Earlier branch-wide audit remains pending.",
+  "modules": [
+    {
+      "path": "backend/tests/runtime/test_native_adapter_retirement.py",
+      "sha256": "5a4b0161723723818d915eadf1f0c01497ebd9b625b4ffa14c520306b0dd6d54",
+      "documented": true
+    },
+    {
+      "path": "backend/tools/web/__init__.py",
+      "sha256": "e6d7a9ef49a2317b69531da95a452c7f0ea7264d06f2721c4b4512e4a7d5f598",
+      "documented": true
+    }
+  ],
+  "definitions": [
+    {
+      "path": "backend/tests/runtime/test_native_adapter_retirement.py",
+      "name": "test_replaced_command_git_document_and_sql_adapters_are_unavailable",
+      "line": 10,
+      "documented": true
+    }
+  ],
+  "missing": []
+}

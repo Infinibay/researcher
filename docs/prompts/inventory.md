@@ -1,9 +1,9 @@
 # Inventario y revisión de prompts
 
 Catálogo nativo versión2; revisión inicial sobre `85f7acd`, actualizada después de
-consolidar las operaciones de código sobre `6429bff`. El [inventario detallado](inventory.json)
-contiene 451 entradas candidatas de 443 archivos Python. **No son 451 prompts distintos
-ni 451 evaluaciones con modelos.** Se archivan 130 entradas de los módulos eliminados,
+retirar adaptadores de ejecución/documentos sobre `1da098e`. El [inventario detallado](inventory.json)
+contiene 394 entradas candidatas de 420 archivos Python. **No son 394 prompts distintos
+ni 394 evaluaciones con modelos.** Se archivan 187 entradas de los módulos eliminados,
 conservando sus decisiones históricas en `retired_entries`.
 Incluye plantillas, constructores, descripciones de herramientas, campos de schema,
 valores de entrada y falsos positivos explícitamente excluidos.
@@ -22,6 +22,10 @@ explicita cuota separada, modos, captura/cita y límites de la parada remota.
 La consolidación de código archiva 95 entradas adicionales y revisa la política
 de desarrollo: Ken para descubrir/leer, comandos para escribir, referencias y
 literales diferenciados, revisión del diff y comprobación del candidato.
+
+La retirada de adaptadores archiva57entradas adicionales;17textos web conservan
+bytes idénticos y se revalidan contra el único cambio de su consumidor directo:
+retirar el export CodeDocsSearch. Las políticas web siguen como tarea principal.
 
 Cada entrada identifica módulo/símbolo/líneas, objetivo, variables, consumidores
 directos, bytes de fuente y tamaño UTF-8 cuando el literal es conocido, reglas o
@@ -42,7 +46,7 @@ sea correcta o de que se conozcan todos los consumidores dinámicos.
 | Perfiles nativos y recetas del host |8| Seis reescritos y dos conservados; reglas específicas separadas de las comunes |
 | Descripciones de herramientas nativas |36| Conservadas tras leer su texto y comprobar el productor; límites, identidad original, paginación y resultados desconocidos explícitos |
 | Plantillas de roles anteriores |144| Conservadas como históricas, fuera de la composición nativa; no adaptar el protocolo de un loop retirado |
-| Schemas/descripciones del catálogo anterior |234| Conservados para lectores históricos opt-in; no exponer sus permisos por rol, SQL, push o certeza aparente al runtime nativo |
+| Schemas/descripciones del catálogo anterior |177| Conservados para lectores históricos opt-in; no exponer sus permisos por rol, SQL, push o certeza aparente al runtime nativo |
 | Coordinación antigua restante |6| Retirada de consumidores pendiente; no son instrucciones del runtime nuevo. Engine y constructores eliminados quedan archivados |
 | Proyección de entrada/fuentes/feedback |3| Conservada como datos atribuidos; no convertir texto recibido en política confiable |
 | CLI/OpenAPI, instrumentación y readiness |15| Excluidos como instrucciones de agente: metadatos humanos/de entrada, scanner o fixture fijo de protocolo |

@@ -3777,397 +3777,6 @@
         "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
       ]
     },
-    "backend/tools/data/nl2sql.py::_SCHEMA_DESCRIPTION": {
-      "dependencies_sha256": "da62fb6c93006df79995c8de9ba92252cabd87032980627104efd7864fe2bbf6",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/data/nl2sql.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/data/nl2sql.py::NL2SQLTool.description": {
-      "dependencies_sha256": "da62fb6c93006df79995c8de9ba92252cabd87032980627104efd7864fe2bbf6",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/data/nl2sql.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/data/nl2sql.py::NL2SQLInput.description@66": {
-      "dependencies_sha256": "da62fb6c93006df79995c8de9ba92252cabd87032980627104efd7864fe2bbf6",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/data/nl2sql.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/data/nl2sql.py::NL2SQLInput.description@72": {
-      "dependencies_sha256": "da62fb6c93006df79995c8de9ba92252cabd87032980627104efd7864fe2bbf6",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/data/nl2sql.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/git/branch.py::GitBranchInput.description@18": {
-      "dependencies_sha256": "b3f11c5897ca1c85ef18a90aaf16a06e71709419b32f60f7dbb1e414f718877b",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/git/branch.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/git/branch.py::GitBranchInput.description@20": {
-      "dependencies_sha256": "b3f11c5897ca1c85ef18a90aaf16a06e71709419b32f60f7dbb1e414f718877b",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/git/branch.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/git/commit.py::GitCommitTool.description": {
-      "dependencies_sha256": "84a18ffa82e9e51161defd166a13fdb6409d6d57f3d06071a9befd6b7b8980f7",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/git/commit.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/git/commit.py::GitCommitInput.description@14": {
-      "dependencies_sha256": "84a18ffa82e9e51161defd166a13fdb6409d6d57f3d06071a9befd6b7b8980f7",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/git/commit.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/git/commit.py::GitCommitInput.description@17": {
-      "dependencies_sha256": "84a18ffa82e9e51161defd166a13fdb6409d6d57f3d06071a9befd6b7b8980f7",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/git/commit.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/git/create_pr.py::CreatePRInput.description@18": {
-      "dependencies_sha256": "e0fdb1fa3b1a88d66f4eb7031cec080d58b9fa2120030d3935baeb8ebc8ea43a",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/git/create_pr.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/git/create_pr.py::CreatePRInput.description@19": {
-      "dependencies_sha256": "e0fdb1fa3b1a88d66f4eb7031cec080d58b9fa2120030d3935baeb8ebc8ea43a",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/git/create_pr.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/git/create_pr.py::CreatePRInput.description@20": {
-      "dependencies_sha256": "e0fdb1fa3b1a88d66f4eb7031cec080d58b9fa2120030d3935baeb8ebc8ea43a",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/git/create_pr.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/git/diff.py::GitDiffTool.description": {
-      "dependencies_sha256": "9fcb4fd891150b65efe2d5916a9275ddc554f7161738cd5ab116901f67f44ed7",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/git/diff.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/git/diff.py::GitDiffInput.description@13": {
-      "dependencies_sha256": "9fcb4fd891150b65efe2d5916a9275ddc554f7161738cd5ab116901f67f44ed7",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/git/diff.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/git/diff.py::GitDiffInput.description@16": {
-      "dependencies_sha256": "9fcb4fd891150b65efe2d5916a9275ddc554f7161738cd5ab116901f67f44ed7",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/git/diff.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/git/diff.py::GitDiffInput.description@19": {
-      "dependencies_sha256": "9fcb4fd891150b65efe2d5916a9275ddc554f7161738cd5ab116901f67f44ed7",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/git/diff.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/git/merge_pr.py::MergePRTool.description": {
-      "dependencies_sha256": "5e9096e20cb5e1ab203b1115595589cf0a69a1865a464dc9d51fdb5120b123c8",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/git/merge_pr.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/git/merge_pr.py::MergePRInput.description@18": {
-      "dependencies_sha256": "5e9096e20cb5e1ab203b1115595589cf0a69a1865a464dc9d51fdb5120b123c8",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/git/merge_pr.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/git/merge_pr.py::MergePRInput.description@21": {
-      "dependencies_sha256": "5e9096e20cb5e1ab203b1115595589cf0a69a1865a464dc9d51fdb5120b123c8",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/git/merge_pr.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/git/push.py::GitPushTool.description": {
-      "dependencies_sha256": "e978c1bc3f6d789d98ea0043dba896439b125154b96d764e893a3f30f66ddc31",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/git/push.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/git/push.py::GitPushInput.description@15": {
-      "dependencies_sha256": "e978c1bc3f6d789d98ea0043dba896439b125154b96d764e893a3f30f66ddc31",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/git/push.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/git/push.py::GitPushInput.description@17": {
-      "dependencies_sha256": "e978c1bc3f6d789d98ea0043dba896439b125154b96d764e893a3f30f66ddc31",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/git/push.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/git/status.py::GitStatusTool.description": {
-      "dependencies_sha256": "0fc796526e2519c9b3cff3498bea8023a4091f45b31db00c4696771f650b4000",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/git/status.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
     "backend/tools/knowledge/read_finding_reviews.py::ReadFindingReviewsTool.description": {
       "dependencies_sha256": "914a59fdb71d786a974d1b2f05fc797ee918617295b42ea1f28bd694e75b4235",
       "decision": "retained_historical_schema",
@@ -5460,533 +5069,6 @@
         "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
       ]
     },
-    "backend/tools/rag/csv_search.py::CSVSearchTool.description": {
-      "dependencies_sha256": "30c4655cc0ebdd346264538755dfa1affe534cfb0d56afff1a7df94ff0b77f25",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/rag/csv_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/rag/csv_search.py::CSVSearchInput.description@25": {
-      "dependencies_sha256": "30c4655cc0ebdd346264538755dfa1affe534cfb0d56afff1a7df94ff0b77f25",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/rag/csv_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/rag/csv_search.py::CSVSearchInput.description@26": {
-      "dependencies_sha256": "30c4655cc0ebdd346264538755dfa1affe534cfb0d56afff1a7df94ff0b77f25",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/rag/csv_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/rag/csv_search.py::CSVSearchInput.description@28": {
-      "dependencies_sha256": "30c4655cc0ebdd346264538755dfa1affe534cfb0d56afff1a7df94ff0b77f25",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/rag/csv_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/rag/directory_search.py::DirectorySearchTool.description": {
-      "dependencies_sha256": "312257754b179d4f8f0f4ecfc044bc8dd2831e4ca999084eef6c2b2cc4e7a1b4",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/rag/directory_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/rag/directory_search.py::DirectorySearchInput.description@29": {
-      "dependencies_sha256": "312257754b179d4f8f0f4ecfc044bc8dd2831e4ca999084eef6c2b2cc4e7a1b4",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/rag/directory_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/rag/directory_search.py::DirectorySearchInput.description@30": {
-      "dependencies_sha256": "312257754b179d4f8f0f4ecfc044bc8dd2831e4ca999084eef6c2b2cc4e7a1b4",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/rag/directory_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/rag/directory_search.py::DirectorySearchInput.description@33": {
-      "dependencies_sha256": "312257754b179d4f8f0f4ecfc044bc8dd2831e4ca999084eef6c2b2cc4e7a1b4",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/rag/directory_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/rag/directory_search.py::DirectorySearchInput.description@36": {
-      "dependencies_sha256": "312257754b179d4f8f0f4ecfc044bc8dd2831e4ca999084eef6c2b2cc4e7a1b4",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/rag/directory_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/rag/docx_search.py::DOCXSearchInfinibayTool.description": {
-      "dependencies_sha256": "c6e94312b0edad303a48da9b8a34705b83148d75dc70289a9425d4e5ccd2559a",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/rag/docx_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/rag/docx_search.py::DOCXSearchInput.description@16": {
-      "dependencies_sha256": "c6e94312b0edad303a48da9b8a34705b83148d75dc70289a9425d4e5ccd2559a",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/rag/docx_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/rag/docx_search.py::DOCXSearchInput.description@17": {
-      "dependencies_sha256": "c6e94312b0edad303a48da9b8a34705b83148d75dc70289a9425d4e5ccd2559a",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/rag/docx_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/rag/json_search.py::JSONSearchInfinibayTool.description": {
-      "dependencies_sha256": "215030e75f9b64d056a1216ab5e94f25b6194dc2349a817c52bbd3131ecb804d",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/rag/json_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/rag/json_search.py::JSONSearchInput.description@16": {
-      "dependencies_sha256": "215030e75f9b64d056a1216ab5e94f25b6194dc2349a817c52bbd3131ecb804d",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/rag/json_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/rag/json_search.py::JSONSearchInput.description@17": {
-      "dependencies_sha256": "215030e75f9b64d056a1216ab5e94f25b6194dc2349a817c52bbd3131ecb804d",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/rag/json_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/rag/pdf_search.py::PDFSearchTool.description": {
-      "dependencies_sha256": "9a53ae3435f0fef032013d4b0be5af80e503fc42165582cb7bab18cfc9760bdd",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/rag/pdf_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/rag/pdf_search.py::PDFSearchInput.description@22": {
-      "dependencies_sha256": "9a53ae3435f0fef032013d4b0be5af80e503fc42165582cb7bab18cfc9760bdd",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/rag/pdf_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/rag/pdf_search.py::PDFSearchInput.description@23": {
-      "dependencies_sha256": "9a53ae3435f0fef032013d4b0be5af80e503fc42165582cb7bab18cfc9760bdd",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/rag/pdf_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/rag/pdf_search.py::PDFSearchInput.description@25": {
-      "dependencies_sha256": "9a53ae3435f0fef032013d4b0be5af80e503fc42165582cb7bab18cfc9760bdd",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/rag/pdf_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/rag/xml_search.py::XMLSearchInfinibayTool.description": {
-      "dependencies_sha256": "acedd8da7c0cbfe0c193d2437827a82971f5ef9a69db94fee790f8402843cef5",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/rag/xml_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/rag/xml_search.py::XMLSearchInput.description@16": {
-      "dependencies_sha256": "acedd8da7c0cbfe0c193d2437827a82971f5ef9a69db94fee790f8402843cef5",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/rag/xml_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/rag/xml_search.py::XMLSearchInput.description@17": {
-      "dependencies_sha256": "acedd8da7c0cbfe0c193d2437827a82971f5ef9a69db94fee790f8402843cef5",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/rag/xml_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/shell/code_interpreter.py::CodeInterpreterTool.description": {
-      "dependencies_sha256": "88db297ac5bc919c7d5ee27f005732cada68b7c1a445b4a395b8b5207147f7e7",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/shell/code_interpreter.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/shell/code_interpreter.py::CodeInterpreterInput.description@20": {
-      "dependencies_sha256": "88db297ac5bc919c7d5ee27f005732cada68b7c1a445b4a395b8b5207147f7e7",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/shell/code_interpreter.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/shell/code_interpreter.py::CodeInterpreterInput.description@23": {
-      "dependencies_sha256": "88db297ac5bc919c7d5ee27f005732cada68b7c1a445b4a395b8b5207147f7e7",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/shell/code_interpreter.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/shell/code_interpreter.py::CodeInterpreterInput.description@29": {
-      "dependencies_sha256": "88db297ac5bc919c7d5ee27f005732cada68b7c1a445b4a395b8b5207147f7e7",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/shell/code_interpreter.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/shell/execute_command.py::ExecuteCommandTool.description": {
-      "dependencies_sha256": "27a8bda8155a41c02840ea7978c07bb668cd577124385bc0b838e1ac74674dd9",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/shell/execute_command.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/shell/execute_command.py::ExecuteCommandInput.description@25": {
-      "dependencies_sha256": "27a8bda8155a41c02840ea7978c07bb668cd577124385bc0b838e1ac74674dd9",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/shell/execute_command.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/shell/execute_command.py::ExecuteCommandInput.description@27": {
-      "dependencies_sha256": "27a8bda8155a41c02840ea7978c07bb668cd577124385bc0b838e1ac74674dd9",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/shell/execute_command.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/shell/execute_command.py::ExecuteCommandInput.description@30": {
-      "dependencies_sha256": "27a8bda8155a41c02840ea7978c07bb668cd577124385bc0b838e1ac74674dd9",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/shell/execute_command.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/shell/execute_command.py::ExecuteCommandInput.description@33": {
-      "dependencies_sha256": "27a8bda8155a41c02840ea7978c07bb668cd577124385bc0b838e1ac74674dd9",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/shell/execute_command.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
     "backend/tools/task/add_comment.py::AddCommentTool.description": {
       "dependencies_sha256": "aa025a5904bf85278745cbd732bb26e8acb3bcf9b60c4ce044b144ba257cd0a8",
       "decision": "retained_historical_schema",
@@ -6939,61 +6021,10 @@
         "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
       ]
     },
-    "backend/tools/web/code_docs_search.py::CodeDocsSearchInfinibayTool.description": {
-      "dependencies_sha256": "fef71786759f2a7b079d41ba4637dc63e91c3a9c14f3d3b0b6370f3892a74462",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/web/code_docs_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/web/code_docs_search.py::CodeDocsSearchInput.description@12": {
-      "dependencies_sha256": "fef71786759f2a7b079d41ba4637dc63e91c3a9c14f3d3b0b6370f3892a74462",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/web/code_docs_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/web/code_docs_search.py::CodeDocsSearchInput.description@15": {
-      "dependencies_sha256": "fef71786759f2a7b079d41ba4637dc63e91c3a9c14f3d3b0b6370f3892a74462",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/web/code_docs_search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
     "backend/tools/web/deep_research.py::DeepWebResearchTool.description": {
-      "dependencies_sha256": "00c8a029627908cd6cf8513671c221172e776d9255aef37b10ce477129ca4c73",
+      "dependencies_sha256": "da11cf985c6d3d432bb4b9b7ab10de8f34fe5892cda81e3ce9951df4fecbd5ba",
       "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
       "evidence": [
         "backend/tools/web/deep_research.py",
         "backend/tools/__init__.py",
@@ -7008,9 +6039,9 @@
       ]
     },
     "backend/tools/web/deep_research.py::DeepWebResearchInput.description@14": {
-      "dependencies_sha256": "00c8a029627908cd6cf8513671c221172e776d9255aef37b10ce477129ca4c73",
+      "dependencies_sha256": "da11cf985c6d3d432bb4b9b7ab10de8f34fe5892cda81e3ce9951df4fecbd5ba",
       "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
       "evidence": [
         "backend/tools/web/deep_research.py",
         "backend/tools/__init__.py",
@@ -7025,9 +6056,9 @@
       ]
     },
     "backend/tools/web/fetch.py::WebFetchTool.description": {
-      "dependencies_sha256": "0e7f3d127ec723fb4ad0f253479f904378b81dc513efbd77494f0c271cdd9ae6",
+      "dependencies_sha256": "7b47782abb51dc73abd0046892e46d2880ee3191e389acf1df40b2ffa0e52274",
       "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
       "evidence": [
         "backend/tools/web/fetch.py",
         "backend/tools/__init__.py",
@@ -7042,9 +6073,9 @@
       ]
     },
     "backend/tools/web/fetch.py::WebFetchInput.description@17": {
-      "dependencies_sha256": "0e7f3d127ec723fb4ad0f253479f904378b81dc513efbd77494f0c271cdd9ae6",
+      "dependencies_sha256": "7b47782abb51dc73abd0046892e46d2880ee3191e389acf1df40b2ffa0e52274",
       "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
       "evidence": [
         "backend/tools/web/fetch.py",
         "backend/tools/__init__.py",
@@ -7059,9 +6090,9 @@
       ]
     },
     "backend/tools/web/fetch.py::WebFetchInput.description@19": {
-      "dependencies_sha256": "0e7f3d127ec723fb4ad0f253479f904378b81dc513efbd77494f0c271cdd9ae6",
+      "dependencies_sha256": "7b47782abb51dc73abd0046892e46d2880ee3191e389acf1df40b2ffa0e52274",
       "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
       "evidence": [
         "backend/tools/web/fetch.py",
         "backend/tools/__init__.py",
@@ -7076,9 +6107,9 @@
       ]
     },
     "backend/tools/web/fetch.py::WebFetchInput.description@23": {
-      "dependencies_sha256": "0e7f3d127ec723fb4ad0f253479f904378b81dc513efbd77494f0c271cdd9ae6",
+      "dependencies_sha256": "7b47782abb51dc73abd0046892e46d2880ee3191e389acf1df40b2ffa0e52274",
       "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
       "evidence": [
         "backend/tools/web/fetch.py",
         "backend/tools/__init__.py",
@@ -7093,9 +6124,9 @@
       ]
     },
     "backend/tools/web/read_paper.py::ReadPaperTool.description": {
-      "dependencies_sha256": "9450fdf708ec493a8aae6227eed494810beccba75e0356fa1ab23c87a050f416",
+      "dependencies_sha256": "8125249b88bc1a02a6d8c0107fb9d91e1f45730dca8e4318c2438d3a7c467e6d",
       "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
       "evidence": [
         "backend/tools/web/read_paper.py",
         "backend/tools/__init__.py",
@@ -7110,9 +6141,9 @@
       ]
     },
     "backend/tools/web/read_paper.py::ReadPaperInput.description@18": {
-      "dependencies_sha256": "9450fdf708ec493a8aae6227eed494810beccba75e0356fa1ab23c87a050f416",
+      "dependencies_sha256": "8125249b88bc1a02a6d8c0107fb9d91e1f45730dca8e4318c2438d3a7c467e6d",
       "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
       "evidence": [
         "backend/tools/web/read_paper.py",
         "backend/tools/__init__.py",
@@ -7127,9 +6158,9 @@
       ]
     },
     "backend/tools/web/read_paper.py::ReadPaperInput.description@19": {
-      "dependencies_sha256": "9450fdf708ec493a8aae6227eed494810beccba75e0356fa1ab23c87a050f416",
+      "dependencies_sha256": "8125249b88bc1a02a6d8c0107fb9d91e1f45730dca8e4318c2438d3a7c467e6d",
       "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
       "evidence": [
         "backend/tools/web/read_paper.py",
         "backend/tools/__init__.py",
@@ -7144,9 +6175,9 @@
       ]
     },
     "backend/tools/web/read_paper.py::ReadPaperInput.description@20": {
-      "dependencies_sha256": "9450fdf708ec493a8aae6227eed494810beccba75e0356fa1ab23c87a050f416",
+      "dependencies_sha256": "8125249b88bc1a02a6d8c0107fb9d91e1f45730dca8e4318c2438d3a7c467e6d",
       "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
       "evidence": [
         "backend/tools/web/read_paper.py",
         "backend/tools/__init__.py",
@@ -7161,9 +6192,9 @@
       ]
     },
     "backend/tools/web/scrape_website.py::ScrapeWebsiteInfinibayTool.description": {
-      "dependencies_sha256": "6e52d2a0200da845bfca180f7ac7abaa6cf211af77fc218c071c59e93d063889",
+      "dependencies_sha256": "c7ac685beac8ce96f67e696d0c7813bfc202bb53630c416ce106ca52c3764504",
       "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
       "evidence": [
         "backend/tools/web/scrape_website.py",
         "backend/tools/__init__.py",
@@ -7178,9 +6209,9 @@
       ]
     },
     "backend/tools/web/scrape_website.py::ScrapeWebsiteInput.description@14": {
-      "dependencies_sha256": "6e52d2a0200da845bfca180f7ac7abaa6cf211af77fc218c071c59e93d063889",
+      "dependencies_sha256": "c7ac685beac8ce96f67e696d0c7813bfc202bb53630c416ce106ca52c3764504",
       "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
       "evidence": [
         "backend/tools/web/scrape_website.py",
         "backend/tools/__init__.py",
@@ -7195,9 +6226,9 @@
       ]
     },
     "backend/tools/web/scrape_website.py::ScrapeWebsiteInput.description@17": {
-      "dependencies_sha256": "6e52d2a0200da845bfca180f7ac7abaa6cf211af77fc218c071c59e93d063889",
+      "dependencies_sha256": "c7ac685beac8ce96f67e696d0c7813bfc202bb53630c416ce106ca52c3764504",
       "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
       "evidence": [
         "backend/tools/web/scrape_website.py",
         "backend/tools/__init__.py",
@@ -7212,9 +6243,9 @@
       ]
     },
     "backend/tools/web/scrape_website.py::ScrapeWebsiteInput.description@21": {
-      "dependencies_sha256": "6e52d2a0200da845bfca180f7ac7abaa6cf211af77fc218c071c59e93d063889",
+      "dependencies_sha256": "c7ac685beac8ce96f67e696d0c7813bfc202bb53630c416ce106ca52c3764504",
       "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
       "evidence": [
         "backend/tools/web/scrape_website.py",
         "backend/tools/__init__.py",
@@ -7229,9 +6260,9 @@
       ]
     },
     "backend/tools/web/search.py::WebSearchTool.description": {
-      "dependencies_sha256": "ac3427949f4da26a6af631cfcffba755cfbb974a657ffc326debc463e2d715e0",
+      "dependencies_sha256": "6aa3ef5f0570b25a3724fe12cdf57d897f60cfc22faa1e0b7399d5ab71c395fa",
       "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
       "evidence": [
         "backend/tools/web/search.py",
         "backend/tools/__init__.py",
@@ -7246,9 +6277,9 @@
       ]
     },
     "backend/tools/web/search.py::WebSearchInput.description@18": {
-      "dependencies_sha256": "ac3427949f4da26a6af631cfcffba755cfbb974a657ffc326debc463e2d715e0",
+      "dependencies_sha256": "6aa3ef5f0570b25a3724fe12cdf57d897f60cfc22faa1e0b7399d5ab71c395fa",
       "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
       "evidence": [
         "backend/tools/web/search.py",
         "backend/tools/__init__.py",
@@ -7263,9 +6294,9 @@
       ]
     },
     "backend/tools/web/search.py::WebSearchInput.description@20": {
-      "dependencies_sha256": "ac3427949f4da26a6af631cfcffba755cfbb974a657ffc326debc463e2d715e0",
+      "dependencies_sha256": "6aa3ef5f0570b25a3724fe12cdf57d897f60cfc22faa1e0b7399d5ab71c395fa",
       "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
       "evidence": [
         "backend/tools/web/search.py",
         "backend/tools/__init__.py",
@@ -9671,6 +8702,1032 @@
         "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
       ],
       "retirement": "Source retired in native code-operations consolidation; file edits remain owned native commands and discovery uses Ken. See docs/modernization/code-operations-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/data/nl2sql.py::_SCHEMA_DESCRIPTION": {
+      "dependencies_sha256": "da62fb6c93006df79995c8de9ba92252cabd87032980627104efd7864fe2bbf6",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/data/nl2sql.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/data/nl2sql.py::NL2SQLTool.description": {
+      "dependencies_sha256": "da62fb6c93006df79995c8de9ba92252cabd87032980627104efd7864fe2bbf6",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/data/nl2sql.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/data/nl2sql.py::NL2SQLInput.description@66": {
+      "dependencies_sha256": "da62fb6c93006df79995c8de9ba92252cabd87032980627104efd7864fe2bbf6",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/data/nl2sql.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/data/nl2sql.py::NL2SQLInput.description@72": {
+      "dependencies_sha256": "da62fb6c93006df79995c8de9ba92252cabd87032980627104efd7864fe2bbf6",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/data/nl2sql.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/git/branch.py::GitBranchInput.description@18": {
+      "dependencies_sha256": "b3f11c5897ca1c85ef18a90aaf16a06e71709419b32f60f7dbb1e414f718877b",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/git/branch.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/git/branch.py::GitBranchInput.description@20": {
+      "dependencies_sha256": "b3f11c5897ca1c85ef18a90aaf16a06e71709419b32f60f7dbb1e414f718877b",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/git/branch.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/git/commit.py::GitCommitTool.description": {
+      "dependencies_sha256": "84a18ffa82e9e51161defd166a13fdb6409d6d57f3d06071a9befd6b7b8980f7",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/git/commit.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/git/commit.py::GitCommitInput.description@14": {
+      "dependencies_sha256": "84a18ffa82e9e51161defd166a13fdb6409d6d57f3d06071a9befd6b7b8980f7",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/git/commit.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/git/commit.py::GitCommitInput.description@17": {
+      "dependencies_sha256": "84a18ffa82e9e51161defd166a13fdb6409d6d57f3d06071a9befd6b7b8980f7",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/git/commit.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/git/create_pr.py::CreatePRInput.description@18": {
+      "dependencies_sha256": "e0fdb1fa3b1a88d66f4eb7031cec080d58b9fa2120030d3935baeb8ebc8ea43a",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/git/create_pr.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/git/create_pr.py::CreatePRInput.description@19": {
+      "dependencies_sha256": "e0fdb1fa3b1a88d66f4eb7031cec080d58b9fa2120030d3935baeb8ebc8ea43a",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/git/create_pr.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/git/create_pr.py::CreatePRInput.description@20": {
+      "dependencies_sha256": "e0fdb1fa3b1a88d66f4eb7031cec080d58b9fa2120030d3935baeb8ebc8ea43a",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/git/create_pr.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/git/diff.py::GitDiffTool.description": {
+      "dependencies_sha256": "9fcb4fd891150b65efe2d5916a9275ddc554f7161738cd5ab116901f67f44ed7",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/git/diff.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/git/diff.py::GitDiffInput.description@13": {
+      "dependencies_sha256": "9fcb4fd891150b65efe2d5916a9275ddc554f7161738cd5ab116901f67f44ed7",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/git/diff.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/git/diff.py::GitDiffInput.description@16": {
+      "dependencies_sha256": "9fcb4fd891150b65efe2d5916a9275ddc554f7161738cd5ab116901f67f44ed7",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/git/diff.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/git/diff.py::GitDiffInput.description@19": {
+      "dependencies_sha256": "9fcb4fd891150b65efe2d5916a9275ddc554f7161738cd5ab116901f67f44ed7",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/git/diff.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/git/merge_pr.py::MergePRTool.description": {
+      "dependencies_sha256": "5e9096e20cb5e1ab203b1115595589cf0a69a1865a464dc9d51fdb5120b123c8",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/git/merge_pr.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/git/merge_pr.py::MergePRInput.description@18": {
+      "dependencies_sha256": "5e9096e20cb5e1ab203b1115595589cf0a69a1865a464dc9d51fdb5120b123c8",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/git/merge_pr.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/git/merge_pr.py::MergePRInput.description@21": {
+      "dependencies_sha256": "5e9096e20cb5e1ab203b1115595589cf0a69a1865a464dc9d51fdb5120b123c8",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/git/merge_pr.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/git/push.py::GitPushTool.description": {
+      "dependencies_sha256": "e978c1bc3f6d789d98ea0043dba896439b125154b96d764e893a3f30f66ddc31",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/git/push.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/git/push.py::GitPushInput.description@15": {
+      "dependencies_sha256": "e978c1bc3f6d789d98ea0043dba896439b125154b96d764e893a3f30f66ddc31",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/git/push.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/git/push.py::GitPushInput.description@17": {
+      "dependencies_sha256": "e978c1bc3f6d789d98ea0043dba896439b125154b96d764e893a3f30f66ddc31",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/git/push.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/git/status.py::GitStatusTool.description": {
+      "dependencies_sha256": "0fc796526e2519c9b3cff3498bea8023a4091f45b31db00c4696771f650b4000",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/git/status.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/rag/csv_search.py::CSVSearchTool.description": {
+      "dependencies_sha256": "30c4655cc0ebdd346264538755dfa1affe534cfb0d56afff1a7df94ff0b77f25",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/rag/csv_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/rag/csv_search.py::CSVSearchInput.description@25": {
+      "dependencies_sha256": "30c4655cc0ebdd346264538755dfa1affe534cfb0d56afff1a7df94ff0b77f25",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/rag/csv_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/rag/csv_search.py::CSVSearchInput.description@26": {
+      "dependencies_sha256": "30c4655cc0ebdd346264538755dfa1affe534cfb0d56afff1a7df94ff0b77f25",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/rag/csv_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/rag/csv_search.py::CSVSearchInput.description@28": {
+      "dependencies_sha256": "30c4655cc0ebdd346264538755dfa1affe534cfb0d56afff1a7df94ff0b77f25",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/rag/csv_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/rag/directory_search.py::DirectorySearchTool.description": {
+      "dependencies_sha256": "312257754b179d4f8f0f4ecfc044bc8dd2831e4ca999084eef6c2b2cc4e7a1b4",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/rag/directory_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/rag/directory_search.py::DirectorySearchInput.description@29": {
+      "dependencies_sha256": "312257754b179d4f8f0f4ecfc044bc8dd2831e4ca999084eef6c2b2cc4e7a1b4",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/rag/directory_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/rag/directory_search.py::DirectorySearchInput.description@30": {
+      "dependencies_sha256": "312257754b179d4f8f0f4ecfc044bc8dd2831e4ca999084eef6c2b2cc4e7a1b4",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/rag/directory_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/rag/directory_search.py::DirectorySearchInput.description@33": {
+      "dependencies_sha256": "312257754b179d4f8f0f4ecfc044bc8dd2831e4ca999084eef6c2b2cc4e7a1b4",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/rag/directory_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/rag/directory_search.py::DirectorySearchInput.description@36": {
+      "dependencies_sha256": "312257754b179d4f8f0f4ecfc044bc8dd2831e4ca999084eef6c2b2cc4e7a1b4",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/rag/directory_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/rag/docx_search.py::DOCXSearchInfinibayTool.description": {
+      "dependencies_sha256": "c6e94312b0edad303a48da9b8a34705b83148d75dc70289a9425d4e5ccd2559a",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/rag/docx_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/rag/docx_search.py::DOCXSearchInput.description@16": {
+      "dependencies_sha256": "c6e94312b0edad303a48da9b8a34705b83148d75dc70289a9425d4e5ccd2559a",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/rag/docx_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/rag/docx_search.py::DOCXSearchInput.description@17": {
+      "dependencies_sha256": "c6e94312b0edad303a48da9b8a34705b83148d75dc70289a9425d4e5ccd2559a",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/rag/docx_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/rag/json_search.py::JSONSearchInfinibayTool.description": {
+      "dependencies_sha256": "215030e75f9b64d056a1216ab5e94f25b6194dc2349a817c52bbd3131ecb804d",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/rag/json_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/rag/json_search.py::JSONSearchInput.description@16": {
+      "dependencies_sha256": "215030e75f9b64d056a1216ab5e94f25b6194dc2349a817c52bbd3131ecb804d",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/rag/json_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/rag/json_search.py::JSONSearchInput.description@17": {
+      "dependencies_sha256": "215030e75f9b64d056a1216ab5e94f25b6194dc2349a817c52bbd3131ecb804d",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/rag/json_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/rag/pdf_search.py::PDFSearchTool.description": {
+      "dependencies_sha256": "9a53ae3435f0fef032013d4b0be5af80e503fc42165582cb7bab18cfc9760bdd",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/rag/pdf_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/rag/pdf_search.py::PDFSearchInput.description@22": {
+      "dependencies_sha256": "9a53ae3435f0fef032013d4b0be5af80e503fc42165582cb7bab18cfc9760bdd",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/rag/pdf_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/rag/pdf_search.py::PDFSearchInput.description@23": {
+      "dependencies_sha256": "9a53ae3435f0fef032013d4b0be5af80e503fc42165582cb7bab18cfc9760bdd",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/rag/pdf_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/rag/pdf_search.py::PDFSearchInput.description@25": {
+      "dependencies_sha256": "9a53ae3435f0fef032013d4b0be5af80e503fc42165582cb7bab18cfc9760bdd",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/rag/pdf_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/rag/xml_search.py::XMLSearchInfinibayTool.description": {
+      "dependencies_sha256": "acedd8da7c0cbfe0c193d2437827a82971f5ef9a69db94fee790f8402843cef5",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/rag/xml_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/rag/xml_search.py::XMLSearchInput.description@16": {
+      "dependencies_sha256": "acedd8da7c0cbfe0c193d2437827a82971f5ef9a69db94fee790f8402843cef5",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/rag/xml_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/rag/xml_search.py::XMLSearchInput.description@17": {
+      "dependencies_sha256": "acedd8da7c0cbfe0c193d2437827a82971f5ef9a69db94fee790f8402843cef5",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/rag/xml_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/shell/code_interpreter.py::CodeInterpreterTool.description": {
+      "dependencies_sha256": "88db297ac5bc919c7d5ee27f005732cada68b7c1a445b4a395b8b5207147f7e7",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/shell/code_interpreter.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/shell/code_interpreter.py::CodeInterpreterInput.description@20": {
+      "dependencies_sha256": "88db297ac5bc919c7d5ee27f005732cada68b7c1a445b4a395b8b5207147f7e7",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/shell/code_interpreter.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/shell/code_interpreter.py::CodeInterpreterInput.description@23": {
+      "dependencies_sha256": "88db297ac5bc919c7d5ee27f005732cada68b7c1a445b4a395b8b5207147f7e7",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/shell/code_interpreter.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/shell/code_interpreter.py::CodeInterpreterInput.description@29": {
+      "dependencies_sha256": "88db297ac5bc919c7d5ee27f005732cada68b7c1a445b4a395b8b5207147f7e7",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/shell/code_interpreter.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/shell/execute_command.py::ExecuteCommandTool.description": {
+      "dependencies_sha256": "27a8bda8155a41c02840ea7978c07bb668cd577124385bc0b838e1ac74674dd9",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/shell/execute_command.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/shell/execute_command.py::ExecuteCommandInput.description@25": {
+      "dependencies_sha256": "27a8bda8155a41c02840ea7978c07bb668cd577124385bc0b838e1ac74674dd9",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/shell/execute_command.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/shell/execute_command.py::ExecuteCommandInput.description@27": {
+      "dependencies_sha256": "27a8bda8155a41c02840ea7978c07bb668cd577124385bc0b838e1ac74674dd9",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/shell/execute_command.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/shell/execute_command.py::ExecuteCommandInput.description@30": {
+      "dependencies_sha256": "27a8bda8155a41c02840ea7978c07bb668cd577124385bc0b838e1ac74674dd9",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/shell/execute_command.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/shell/execute_command.py::ExecuteCommandInput.description@33": {
+      "dependencies_sha256": "27a8bda8155a41c02840ea7978c07bb668cd577124385bc0b838e1ac74674dd9",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/shell/execute_command.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/web/code_docs_search.py::CodeDocsSearchInfinibayTool.description": {
+      "dependencies_sha256": "fef71786759f2a7b079d41ba4637dc63e91c3a9c14f3d3b0b6370f3892a74462",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/web/code_docs_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/web/code_docs_search.py::CodeDocsSearchInput.description@12": {
+      "dependencies_sha256": "fef71786759f2a7b079d41ba4637dc63e91c3a9c14f3d3b0b6370f3892a74462",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/web/code_docs_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/web/code_docs_search.py::CodeDocsSearchInput.description@15": {
+      "dependencies_sha256": "fef71786759f2a7b079d41ba4637dc63e91c3a9c14f3d3b0b6370f3892a74462",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/web/code_docs_search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
     }
   }
 }

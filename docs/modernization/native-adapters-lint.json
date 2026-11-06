@@ -1,0 +1,72 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 55,
+      "row": 7
+    },
+    "filename": "backend/tools/web/__init__.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from .deep_research import DeepWebResearchTool\nfrom .fetch import WebFetchTool\nfrom .read_paper import ReadPaperTool\nfrom .scrape_website import ScrapeWebsiteInfinibayTool\nfrom .search import WebSearchTool\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 9
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "RUF022",
+    "end_location": {
+      "column": 2,
+      "row": 12
+    },
+    "filename": "backend/tools/web/__init__.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "[\n    \"DeepWebResearchTool\",\n    \"ReadPaperTool\",\n    \"ScrapeWebsiteInfinibayTool\",\n    \"WebFetchTool\",\n    \"WebSearchTool\",\n]",
+          "end_location": {
+            "column": 2,
+            "row": 12
+          },
+          "location": {
+            "column": 11,
+            "row": 9
+          }
+        }
+      ],
+      "message": "Apply an isort-style sorting to `__all__`"
+    },
+    "location": {
+      "column": 11,
+      "row": 9
+    },
+    "message": "`__all__` is not sorted",
+    "name": "unsorted-dunder-all",
+    "noqa_row": 9,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-dunder-all"
+  }
+]
