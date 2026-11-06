@@ -1,0 +1,62 @@
+{
+  "base_commit": "9cbce80",
+  "source": {
+    "cases": 82,
+    "passed": 82,
+    "failed": {},
+    "skipped": 0,
+    "seconds": 36.643
+  },
+  "installed": {
+    "cases": 82,
+    "passed": 82,
+    "failed": {},
+    "skipped": 0,
+    "seconds": 37.757
+  },
+  "frontend": {
+    "passed": 6,
+    "failed": 0,
+    "files": [
+      "frontend/tests/project-structure.test.ts",
+      "frontend/tests/project-plan-actions.test.ts"
+    ],
+    "build": "passed",
+    "limits": "Static rendering of actual hierarchy preview and existing exact owner-action receipt contracts; no browser/full-page/human acceptance claim."
+  },
+  "retired": {
+    "tools": 8,
+    "modules": 9,
+    "test_functions": 1
+  },
+  "new_capabilities": [
+    "Optional milestone proposals, owner-visible review, same-epic validation, atomic creation/retry/rollback and exact downstream plan delivery.",
+    "Native project-scoped epic/milestone pagination and complete text windows, including project-scoped child counts."
+  ],
+  "prompt_inventory": {
+    "changed_or_new_reviewed": [
+      "backend/planning/instructions.py::PLANNING_INSTRUCTIONS",
+      "backend/planning/tools.py::PlanningTools.__init__.descriptions@91",
+      "backend/runtime/business_definitions.py::ResearchTools.researcher_project_structure.wire_description",
+      "backend/runtime/business_definitions.py::ResearchTools.researcher_project_structure_read.wire_description"
+    ],
+    "unchanged_asts_revalidated": 57,
+    "newly_archived": 31,
+    "candidates": 278,
+    "files": 385,
+    "archived": 319,
+    "pending_static_reviews": 0,
+    "audit_tests_passed": 2
+  },
+  "documented_python_definitions": 30,
+  "style_findings_in_changed_python_files": 3,
+  "real_model_calls": 0,
+  "real_provider_calls": 0,
+  "limits": [
+    "Selected contracts only; global historical failures have not been rerun or counted as fixed.",
+    "Historical services, knowledge wrappers and five legacy libraries remain principal work.",
+    "No schema/data/dependency changes; real-data restore remains unverified.",
+    "No efficacy, human/scientific or whole-page acceptance claim."
+  ],
+  "diff_check": "One trailing blank line in the modified historical repository test; recorded as deferred style, no executable change."
+}

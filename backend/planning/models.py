@@ -2,6 +2,7 @@
 
 import json
 import re
+from datetime import date
 
 from backend.runtime.task_profiles import DEVELOPMENT_TASK_TYPES, DOCUMENTARY_TASK_TYPES
 
@@ -12,9 +13,9 @@ def _text(value, name, maximum):
         raise ValueError(f"{name} must be nonempty and at most {maximum} UTF-8 bytes")
 
 
-def _keys(value, required):
-    """Reject extra fields that could smuggle task IDs, actors or execution permission into a model proposal."""
-    if not isinstance(value, dict) or set(value) != set(required):
+def _keys(value, required, optional=()):
+    """Require declared fields and allow only explicit optional extensions, never IDs or execution authority."""
+    if not isinstance(value, dict) or not set(required) <= set(value) <= set(required) | set(optional):
         raise ValueError("Plan fields differ from the declared proposal contract")
 
 
@@ -27,8 +28,8 @@ def _key(value):
 
 
 def validate_plan(packet, sources):
-    """Return a detached validated append-only plan; quotes must exist in attributed material, and every dependency must stay inside its DAG."""
-    _keys(packet, ("title", "rationale", "assumptions", "basis", "epics", "tasks"))
+    """Validate exact basis, optional milestone grouping and a closed task DAG without rewriting historical proposal shapes."""
+    _keys(packet, ("title", "rationale", "assumptions", "basis", "epics", "tasks"), ("milestones",))
     _text(packet["title"], "Plan title", 256)
     _text(packet["rationale"], "Plan rationale", 12000)
     if not isinstance(packet["assumptions"], list) or len(packet["assumptions"]) > 16:
@@ -57,6 +58,7 @@ def validate_plan(packet, sources):
     ):
         raise ValueError("Plan must contain 1–12 epics and 1–32 tasks")
     epic_keys = set()
+    milestone_epics = {}
     task_keys = set()
     graph = {}
     for epic in epics:
@@ -67,6 +69,23 @@ def validate_plan(packet, sources):
         epic_keys.add(epic["key"])
         _text(epic["title"], "Epic title", 256)
         _text(epic["description"], "Epic description", 8000)
+    milestones = packet.get("milestones", [])
+    if not isinstance(milestones, list) or len(milestones) > 32:
+        raise ValueError("Plan milestones must be a list of at most 32 groups")
+    for milestone in milestones:
+        _keys(milestone, ("key", "epic_key", "title", "description"), ("due_date",))
+        _key(milestone["key"])
+        _key(milestone["epic_key"])
+        if milestone["key"] in milestone_epics or milestone["epic_key"] not in epic_keys:
+            raise ValueError("Duplicate milestone key or missing epic")
+        milestone_epics[milestone["key"]] = milestone["epic_key"]
+        _text(milestone["title"], "Milestone title", 256)
+        _text(milestone["description"], "Milestone description", 8000)
+        due = milestone.get("due_date")
+        if due is not None:
+            if not isinstance(due, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", due):
+                raise ValueError("Milestone due_date must be an ISO calendar date or null")
+            date.fromisoformat(due)
     for task in tasks:
         _keys(
             task,
@@ -80,12 +99,17 @@ def validate_plan(packet, sources):
                 "priority",
                 "depends_on",
             ),
+            ("milestone_key",),
         )
         _key(task["key"])
         _key(task["epic_key"])
         if task["key"] in task_keys or task["epic_key"] not in epic_keys:
             raise ValueError("Duplicate task key or missing epic")
         task_keys.add(task["key"])
+        if task.get("milestone_key") is not None:
+            _key(task["milestone_key"])
+            if milestone_epics.get(task["milestone_key"]) != task["epic_key"]:
+                raise ValueError("Task milestone must belong to its declared epic")
         if task["type"] not in (*DOCUMENTARY_TASK_TYPES, *DEVELOPMENT_TASK_TYPES):
             raise ValueError("Plan task type is not supported by the owned runtime")
         if type(task["priority"]) is not int or not 1 <= task["priority"] <= 5:

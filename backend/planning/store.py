@@ -294,7 +294,7 @@ class ProjectPlans:
     def accept(
         self, project_id, run_id, *, operation_key, proposal_sha256, context_version
     ):
-        """Atomically expand only the exact closed owner-observed plan; retry returns the same IDs without another graph or execution."""
+        """Atomically create the exact owner-reviewed epics, optional milestones and task DAG; retries return original IDs without execution."""
         command_key(operation_key)
         intent = {
             "kind": "plan.accept",
@@ -331,18 +331,25 @@ class ProjectPlans:
             )
             acceptance_id = uuid4().hex
             epics = {}
+            milestones = {}
             tasks = {}
             for index, epic in enumerate(plan["epics"]):
                 epics[epic["key"]] = conn.execute(
                     "INSERT INTO epics(project_id,title,description,order_index,created_by)VALUES(?,?,?,?,'native-plan')",
                     (project_id, epic["title"], epic["description"], index),
                 ).lastrowid
+            for index, milestone in enumerate(plan.get("milestones", [])):
+                milestones[milestone["key"]] = conn.execute(
+                    "INSERT INTO milestones(project_id,epic_id,title,description,due_date,order_index)VALUES(?,?,?,?,?,?)",
+                    (project_id, epics[milestone["epic_key"]], milestone["title"], milestone["description"], milestone.get("due_date"), index),
+                ).lastrowid
             for task in plan["tasks"]:
                 tasks[task["key"]] = conn.execute(
-                    "INSERT INTO tasks(project_id,epic_id,type,status,title,description,acceptance_criteria,priority,created_by)VALUES(?,?,?,'pending',?,?,?,?,'native-plan')",
+                    "INSERT INTO tasks(project_id,epic_id,milestone_id,type,status,title,description,acceptance_criteria,priority,created_by)VALUES(?,?,?,?,'pending',?,?,?,?,'native-plan')",
                     (
                         project_id,
                         epics[task["epic_key"]],
+                        milestones.get(task.get("milestone_key")),
                         task["type"],
                         task["title"],
                         task["description"],
@@ -364,6 +371,7 @@ class ProjectPlans:
                 "proposal_sha256": proposal_sha256,
                 "context_version": context_version,
                 "epics": epics,
+                **({"milestones": milestones} if "milestones" in plan else {}),
                 "tasks": tasks,
                 "execution_started": False,
             }

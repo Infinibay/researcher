@@ -1882,7 +1882,7 @@
         "docs/architecture/context7-sources.md",
         "docs/architecture/spider-sources.md"
       ],
-      "implemented": "Owned static inventory578candidates/512files with explicit source/direct-consumer-bound dispositions; native catalogv2 and capability rewrites, retired direct warmup.",
+      "implemented": "Owned static inventory278candidates/385files,319archived entries; explicit source/direct-consumer dispositions. Native catalogv2 and capability rewrites. Four project-related instructions/descriptions reviewed; model efficacy and human comprehension remain open.",
       "remaining": [
         "Before/after efficacy and reserved-case comparisons using the same subscription model/effort/tools/context.",
         "Dynamic consumer/native-system exposure limits and actual human comprehension remain explicit; physical legacy removal belongs to the engine block."
@@ -3479,7 +3479,8 @@
         "Bounded append-only DAG/key/type/quote validation and explicit material origins/assumptions; immutable proposal and exact owner expansion after closure",
         "Atomic pending epics/tasks/dependencies and original receipt; obsolete plan/child contexts denied, current accepted prerequisites required",
         "Web start/stop migrated to native controller; local legacy registrations block entry, no thread/team/autonomy startup; original start body and owner decision survive reload/lost response",
-        "94directed including actual kernel/controlled native+Ken planning,100wheel with740matching sources,83frontend/build and9browser states;76Python/19TS documented"
+        "94directed including actual kernel/controlled native+Ken planning,100wheel with740matching sources,83frontend/build and9browser states;76Python/19TS documented",
+        "Optional milestones with same-epic task grouping and proposed dates are owner-visible and created atomically on exact acceptance; old proposal and receipt shapes retained. Exact delivery preserves the accepted grouping."
       ],
       "remaining": [
         "Explicit dispatch and causal prerequisite handoffs now delivered separately in accepted_plan_execution; original plan acceptance still never auto-starts work",
@@ -3943,6 +3944,23 @@
         "Services/internal CLI routes and broader engine/operation cleanup remain.",
         "31 old tests retired; dialogue behavior ported, not counted as failure fixes.",
         "Human/model/scientific/global evaluation, data restore and page acceptance remain open."
+      ]
+    },
+    "native_project_tool_retirement": {
+      "status": "complete",
+      "scope": "Eight legacy project tools retired after preserving native optional milestones and scoped hierarchy readers. No broad scenario is closed.",
+      "evidence": [
+        "docs/architecture/native-project-retirement.md",
+        "docs/modernization/project-retirement-results.json",
+        "docs/modernization/project-retirement-packaging.json",
+        "docs/modernization/project-retirement-imports.json",
+        "backend/tests/runtime/test_plan_milestones.py",
+        "backend/tests/research/test_project_structure.py"
+      ],
+      "limitations": [
+        "82 source and 82 installed cases pass; 6 frontend cases and compilation pass. These are directed contracts, not a new global result.",
+        "One obsolete stub test removed without claiming a failure fix.",
+        "Knowledge tools, legacy libraries/services, real-data restore and full product evaluation remain."
       ]
     }
   }

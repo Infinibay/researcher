@@ -1,0 +1,35 @@
+{
+  "base_commit": "9cbce80",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "sha256": "6bb48a1297ff2c7b3586fbf2d2e5cf69a8fd77b5df36538bc0e81b2e63c5af9f",
+  "observed": {
+    "exit_code": 0,
+    "cases": 82,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 37.757,
+    "all_backend_imports_installed": true,
+    "backend_modules": 256,
+    "matching_python_sql": 697,
+    "installed_distributions": 83,
+    "legacy_installed": false,
+    "real_model_calls": 0,
+    "real_provider_calls": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_native_adapter_retirement.py",
+    "backend/tests/runtime/test_plan_milestones.py",
+    "backend/tests/runtime/test_project_planning.py",
+    "backend/tests/runtime/test_plan_execution.py",
+    "backend/tests/runtime/test_plan_continuation.py",
+    "backend/tests/runtime/test_plan_reauthorization.py",
+    "backend/tests/runtime/test_project_completion.py",
+    "backend/tests/runtime/test_source_operations.py",
+    "backend/tests/runtime/test_source_setup_retirement.py",
+    "backend/tests/git/test_repository_manager.py",
+    "backend/tests/research/test_project_structure.py",
+    "backend/tests/research/test_task_workspace.py",
+    "backend/tests/research/test_acquisition.py"
+  ],
+  "limits": "Removal of eight old project tools; optional milestones in exact reviewed proposals, atomic expansion and downstream delivery; bounded scoped epic/milestone readers through MCP/API. Existing planning/execution/continuation/reauthorization, owner source setup/completion and reference acquisition contracts. Historical services, knowledge tools, legacy dependencies, real data migration and global/human/scientific/page acceptance remain. No live model/provider calls. Existing development seed db/seeds/dev_data.sql remains outside unchanged db/*.sql package data."
+}

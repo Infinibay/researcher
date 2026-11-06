@@ -40,12 +40,77 @@ def _text_page(content, total, offset):
             "next_offset": end if end < total else None}
 
 
+def _structure_query(kind):
+    """Select bounded hierarchy metadata and project-scoped counts from a closed set of tables."""
+    if kind not in {"epics", "milestones"}:
+        raise ResearchInputError("Unsupported project structure kind")
+    relation = "epic_id" if kind == "epics" else "milestone_id"
+    details = (
+        "r.priority,r.created_by,(SELECT count(*) FROM milestones m WHERE m.project_id=r.project_id AND m.epic_id=r.id) AS milestone_count"
+        if kind == "epics" else
+        "r.epic_id,r.due_date,EXISTS(SELECT 1 FROM epics e WHERE e.project_id=r.project_id AND e.id=r.epic_id) AS epic_in_project"
+    )
+    return ("SELECT r.id,r.project_id,substr(r.title,1,300) AS title,length(r.title) AS title_chars,"
+            "r.status,r.order_index,r.created_at,r.completed_at," + details + ","
+            f"(SELECT count(*) FROM tasks t WHERE t.project_id=r.project_id AND t.{relation}=r.id) AS task_count,"
+            f"(SELECT count(*) FROM tasks t WHERE t.project_id=r.project_id AND t.{relation}=r.id AND t.status='done') AS tasks_labeled_done "
+            f"FROM {kind} r")
+
+
+def _structure_metadata(row):
+    """Preserve actual metadata while exposing parent project validity as a boolean observation."""
+    result = dict(row)
+    if "epic_in_project" in result:
+        result["epic_in_project"] = bool(result["epic_in_project"])
+    return result
+
+
 class TaskWorkspace:
     """Expose current project task records under a live, host-selected business scope."""
 
     def __init__(self, store):
         """Reuse the existing grant, connection and effect-receipt owner."""
         self.store = store
+
+    def structure(self, scope, kind, *, after_id=0, limit=20, status=None, epic_id=None):
+        """Page current epics or milestones; grouping and done labels never prove accepted outcomes or dispatch permission."""
+        _page(after_id, limit)
+        query = _structure_query(kind) + " WHERE r.project_id=? AND r.id>?"
+        values = [scope.project_id, after_id]
+        if status is not None:
+            bounded_text(status, "structure status", 128)
+            query += " AND r.status=?"
+            values.append(status)
+        if epic_id is not None:
+            positive_id(epic_id)
+            if kind != "milestones":
+                raise ResearchInputError("An epic filter applies only to milestones")
+            query += " AND r.epic_id=?"
+            values.append(epic_id)
+        with self.store._transaction() as conn:
+            self.store._check_scope(conn, scope, "tasks.read")
+            rows = conn.execute(query + " ORDER BY r.id LIMIT ?", (*values, limit + 1)).fetchall()
+            items = [_structure_metadata(row) for row in rows[:limit]]
+            return {"kind": kind, "items": items, "next_after_id": items[-1]["id"] if len(rows) > limit else None,
+                    "authorizes_work": False, "interpretation": "Current project grouping and recorded status labels, not accepted outcomes or permission to start. Titles are previews; read required title/description fields completely."}
+
+    def structure_record(self, scope, kind, record_id, *, field="description", offset=0, max_chars=12000):
+        """Read complete scoped hierarchy text in windows without pretending live metadata is an immutable instruction."""
+        positive_id(record_id)
+        _window(offset, max_chars)
+        query = _structure_query(kind)
+        if field not in {"title", "description"}:
+            raise ResearchInputError("Unsupported project structure text field")
+        with self.store._transaction() as conn:
+            self.store._check_scope(conn, scope, "tasks.read")
+            row = conn.execute(query + " WHERE r.project_id=? AND r.id=?", (scope.project_id, record_id)).fetchone()
+            if row is None:
+                raise ResearchNotFound("Project structure record not found in this project")
+            content = conn.execute(f"SELECT substr(COALESCE({field},''),?,?) AS content,length(COALESCE({field},'')) AS total FROM {kind} WHERE project_id=? AND id=?",
+                (offset + 1, max_chars, scope.project_id, record_id)).fetchone()
+            return {"kind": kind, "record": _structure_metadata(row), "field": field,
+                    **_text_page(content["content"], content["total"], offset),
+                    "source_kind": "project_structure", "authorizes_work": False, "immutable": False}
 
     @staticmethod
     def _task(conn, scope, task_id):

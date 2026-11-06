@@ -1,0 +1,91 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 82,
+      "row": 19
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/runtime/business_definitions.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import inspect\nfrom dataclasses import dataclass\nfrom typing import Any, Literal, get_type_hints\nfrom urllib.parse import quote\n\nfrom pydantic import BaseModel, ConfigDict, create_model\n\nfrom backend.api.models.agent_messages import MessageIntent, MessageStatement\nfrom backend.api.models.questions import HumanQuestion\nfrom backend.api.models.research import Citation, ReviewCheckBody, WikiRevision\nfrom backend.api.models.task_workspace import CommentType, ContinuityNote, Phase\nfrom backend.research.investigation import InvestigationSummary\nfrom backend.runtime.business_mediation import ALL_BUSINESS_NAMES, RESEARCH_NAMES\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 22
+          },
+          "location": {
+            "column": 1,
+            "row": 7
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 7
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 7,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 139,
+      "row": 159
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/research/test_task_workspace.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.runtime.business_definitions import definitions\n    from backend.runtime.business_mediation import (\n        CODE_REVIEW_NAMES,\n        DEVELOPMENT_NAMES,\n        INVESTIGATION_NAMES,\n        RESEARCH_NAMES,\n        REVIEW_NAMES,\n    )\n",
+          "end_location": {
+            "column": 1,
+            "row": 160
+          },
+          "location": {
+            "column": 1,
+            "row": 158
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 158
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 158,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "SIM117",
+    "end_location": {
+      "column": 59,
+      "row": 208
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/research/test_task_workspace.py",
+    "fix": null,
+    "location": {
+      "column": 9,
+      "row": 207
+    },
+    "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements",
+    "name": "multiple-with-statements",
+    "noqa_row": 207,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/multiple-with-statements"
+  }
+]

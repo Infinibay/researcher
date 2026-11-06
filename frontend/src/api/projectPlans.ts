@@ -4,13 +4,15 @@ import {ownerActionStore,type OwnerActionStorage} from './ownerActions.ts'
 import type {RuntimeRun} from './runtime.ts'
 
 /** Local graph references are proposal data, never server identities or agent permissions. */
-export interface ProposedTask {key:string;epic_key:string;type:'research'|'investigation'|'review'|'code'|'bug_fix'|'test'|'design'|'integrate'|'documentation'|'experimentation'|'optimization';title:string;description:string;acceptance_criteria:string;priority:number;depends_on:string[]}
+export interface ProposedTask {key:string;epic_key:string;milestone_key?:string|null;type:'research'|'investigation'|'review'|'code'|'bug_fix'|'test'|'design'|'integrate'|'documentation'|'experimentation'|'optimization';title:string;description:string;acceptance_criteria:string;priority:number;depends_on:string[]}
 /** A justified append-only graph separates observed basis from assumptions the owner can correct. */
-export interface ProjectPlanDraft {title:string;rationale:string;assumptions:string[];basis:{source:string;quote:string}[];epics:{key:string;title:string;description:string}[];tasks:ProposedTask[]}
+export interface ProjectPlanDraft {title:string;rationale:string;assumptions:string[];basis:{source:string;quote:string}[];epics:{key:string;title:string;description:string}[];milestones?:ProposedMilestone[];tasks:ProposedTask[]}
+/** Optional delivery grouping and proposed calendar date; neither schedules nor authorizes execution. */
+export interface ProposedMilestone {key:string;epic_key:string;title:string;description:string;due_date?:string|null}
 /** Original material, proposal and distinct acceptance remain readable after withdrawal. */
 export interface ProjectPlanState {project_id:number;task_id:number;run_id:string;context_version:number;snapshot:{project:{name:string;description:string|null};owner_request:string;instruction_origin:'owner_message'|'host_default';source_origins?:Record<string,string>;sources:Record<string,string>};proposal:{proposal_sha256:string;draft:ProjectPlanDraft}|null;acceptance:PlanAcceptanceReceipt|null;acceptance_current:boolean;eligible:boolean;blocked_reason:string}
 /** Owner expansion returns original created IDs and explicitly does not start child work. */
-export interface PlanAcceptanceReceipt {project_id:number;task_id:number;run_id:string;operation_key:string;proposal_sha256:string;context_version:number;epics:Record<string,number>;tasks:Record<string,number>;execution_started:false}
+export interface PlanAcceptanceReceipt {project_id:number;task_id:number;run_id:string;operation_key:string;proposal_sha256:string;context_version:number;epics:Record<string,number>;milestones?:Record<string,number>;tasks:Record<string,number>;execution_started:false}
 /** Persist one exact observed proposal/version before releasing the first acceptance POST. */
 export type PlanAcceptanceAction=Readonly<{schema:1;kind:'accept-plan';projectId:number;taskId:number;runId:string;body:Readonly<{operation_key:string;proposal_sha256:string;context_version:number}>}>
 

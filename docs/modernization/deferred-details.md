@@ -196,3 +196,13 @@ y la política web robots/frecuencia son tareas principales de sus bloques.
 | DD-053 | Un import `pytest` sin usar, ya presente en el test de comunicación heredado que recibe el diálogo trasladado (F401). | `task-retirement-lint.json` | Ya no aplica: el archivo completo se retiró en el corte de herramientas de comunicación, sin una tarea de pulido separada. Los fallos de migración/inversa y conocimiento siguen en sus bloques principales. |
 
 | DD-054 | Trece avisos Ruff en archivos del recorrido de comunicación: orden de imports, import histórico sin usar, import de fixture compartido con nombre de parámetro y context managers combinables (I001/F401/F811/SIM117). El corte posterior vuelve a observar nueve en sus archivos tocados; ese alcance menor no prueba que los otros desaparecieran. | `agent-messages-lint.json`, `communication-retirement-lint.json` | Después de todas las capacidades principales. No reabrir el recorrido verificado por estilo; retirar servicios/rutas restantes, evaluar comunicación humana y completar migraciones/restore siguen siendo trabajo principal. |
+
+Seguimiento de proyecto: `project-retirement-lint.json` observa tres avisos
+I001/SIM117 en archivos compartidos con DD052/DD054. Se conservan para la pasada
+final; el alcance menor no demuestra que desaparecieran los demás. DD042 incluye
+el singular/plural de `ProposedWork` y DD002 el aviso de bundle grande de este
+build. No volver a probar toda la planificación por estos detalles de presentación.
+
+En el mismo corte, `git diff --check` señala una línea vacía al final de
+`test_repository_manager.py` tras retirar su test obsoleto. Queda junto con el
+estilo; no afecta al contrato verificado ni justifica reconstruir el paquete.

@@ -11,6 +11,22 @@ from backend.task_workspace import TaskWorkspace
 router = APIRouter(prefix="/api/research-tools/task-workspace", tags=["research-tools"])
 
 
+@router.get("/structure/{kind}")
+def project_structure(kind: Literal["epics", "milestones"], ctx: Context,
+                      after_id: int = Query(0, ge=0), limit: int = Query(20, ge=1, le=100),
+                      status: str | None = None, epic_id: int | None = Query(None, gt=0)):
+    """List project-scoped hierarchy metadata with explicit label counts and bounded pagination."""
+    return TaskWorkspace(ctx.store).structure(ctx.scope, kind, after_id=after_id, limit=limit, status=status, epic_id=epic_id)
+
+
+@router.get("/structure/{kind}/{record_id}")
+def project_structure_read(kind: Literal["epics", "milestones"], record_id: int, ctx: Context,
+                           field: Literal["title", "description"] = "description",
+                           offset: int = Query(0, ge=0), max_chars: int = Query(12000, ge=1, le=16000)):
+    """Read exact current title/description windows without elevating historical labels to instructions."""
+    return TaskWorkspace(ctx.store).structure_record(ctx.scope, kind, record_id, field=field, offset=offset, max_chars=max_chars)
+
+
 @router.get("/tasks")
 def task_list(ctx: Context, after_id: int = Query(0, ge=0), limit: int = Query(20, ge=1, le=100),
               status: str | None = None, task_type: str | None = None, assignee: str | None = None,

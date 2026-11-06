@@ -157,7 +157,7 @@ def test_native_catalog_exposes_task_context_and_role_specific_writes():
     """All native roles get task context, while review catalogs cannot write advisory state."""
     from backend.runtime.business_definitions import definitions
     from backend.runtime.business_mediation import CODE_REVIEW_NAMES, DEVELOPMENT_NAMES, INVESTIGATION_NAMES, RESEARCH_NAMES, REVIEW_NAMES
-    reads = {"researcher_task_list", "researcher_task_read", "researcher_task_dependencies", "researcher_task_history", "researcher_continuity_read"}
+    reads = {"researcher_task_list", "researcher_task_read", "researcher_task_dependencies", "researcher_task_history", "researcher_continuity_read", "researcher_project_structure", "researcher_project_structure_read"}
     writes = {"researcher_task_comment", "researcher_continuity_save"}
     for names in (RESEARCH_NAMES, INVESTIGATION_NAMES, DEVELOPMENT_NAMES):
         assert reads | writes <= names
@@ -188,7 +188,7 @@ def test_context_correction_stops_an_already_resolved_workspace_scope(research_s
     assert db_conn.execute("SELECT count(*) FROM developer_session_notes").fetchone()[0] == 0
 
 
-async def test_real_mcp_task_context_comment_and_continuity(research_client, research_store, headers):
+async def test_real_mcp_task_context_comment_and_continuity(research_client, research_store, headers, db_conn):
     """Run the actual MCP/HTTP/SQLite path without a model or fabricated tool results."""
     import anyio
     import httpx
@@ -197,6 +197,10 @@ async def test_real_mcp_task_context_comment_and_continuity(research_client, res
 
     from backend.research.async_http_client import AsyncResearcherHTTPClient
     from backend.research.stdio_server import BusinessGateway, create_server
+
+    db_conn.execute("INSERT INTO epics(id,project_id,title,description) VALUES(77,101,'Current scope','Read every constraint')")
+    db_conn.execute("INSERT INTO milestones(id,project_id,epic_id,title,description) VALUES(78,101,77,'Delivery group','Expected evidence')")
+    db_conn.commit()
 
     async with AsyncResearcherHTTPClient("http://127.0.0.1", headers["Authorization"].split(" ", 1)[1], transport=httpx.ASGITransport(app=research_client.app)) as port:
         server = create_server(BusinessGateway(port))
@@ -214,6 +218,10 @@ async def test_real_mcp_task_context_comment_and_continuity(research_client, res
 
                     tasks = await call("researcher_task_list", {})
                     assert [row["id"] for row in tasks["items"]] == [1001]
+                    structure = await call("researcher_project_structure", {"kind":"milestones", "epic_id":77})
+                    assert structure["items"][0]["id"] == 78
+                    complete = await call("researcher_project_structure_read", {"kind":"epics", "record_id":77})
+                    assert complete["content"] == "Read every constraint"
                     read = await call("researcher_task_read", {"target_task_id": 1001, "field": "title"})
                     assert read["content"] == "Research"
                     assert (await call("researcher_task_dependencies", {"target_task_id": 1001}))["items"] == []

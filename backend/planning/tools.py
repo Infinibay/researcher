@@ -38,10 +38,18 @@ class EpicProposal(Arguments):
     description: str = Field(min_length=1, max_length=8000)
 
 
-class TaskProposal(EpicProposal):
-    """Supported task outcome, acceptance criteria and local prerequisites; no actor/claim/permission can be model selected."""
+class MilestoneProposal(EpicProposal):
+    """An optional delivery grouping within an epic; a proposed calendar date is not scheduling authority."""
 
     epic_key: str = Field(pattern=r"^[A-Za-z][A-Za-z0-9_-]{0,47}$")
+    due_date: str | None = Field(default=None, pattern=r"^\d{4}-\d{2}-\d{2}$")
+
+
+class TaskProposal(EpicProposal):
+    """Propose a task, local prerequisites and optional milestone in its epic; the model cannot select actor, claim or permission."""
+
+    epic_key: str = Field(pattern=r"^[A-Za-z][A-Za-z0-9_-]{0,47}$")
+    milestone_key: str | None = Field(default=None, pattern=r"^[A-Za-z][A-Za-z0-9_-]{0,47}$")
     type: Literal["research", "investigation", "review", "code", "bug_fix", "test", "design", "integrate", "documentation", "experimentation", "optimization"]
     acceptance_criteria: str = Field(min_length=1, max_length=8000)
     priority: int = Field(ge=1, le=5)
@@ -56,6 +64,7 @@ class PlanDraft(Arguments):
     assumptions: list[str] = Field(max_length=16)
     basis: list[PlanBasis] = Field(min_length=1, max_length=16)
     epics: list[EpicProposal] = Field(min_length=1, max_length=12)
+    milestones: list[MilestoneProposal] = Field(default_factory=list, max_length=32)
     tasks: list[TaskProposal] = Field(min_length=1, max_length=32)
 
 
@@ -81,7 +90,7 @@ class PlanningTools:
         }
         descriptions = {
             "researcher_plan_context": "Read original project and request material in complete explicit windows. Metadata attribution and host_default differ from a direct owner message. Unread material is unknown.",
-            "researcher_plan_propose": "Save one justified bounded epic/task DAG with exact source quotes and separate assumptions. Does not create tasks, assign an agent, accept work or start execution. Retain operation_key after uncertain response.",
+            "researcher_plan_propose": "Save one justified bounded epic/task DAG with optional milestones, exact source quotes and separate assumptions. A task's milestone_key must name a milestone in its own epic. Optional due_date is a proposed calendar date, not an owner-agreed deadline or execution schedule. Does not create tasks, assign an agent, accept work or start execution. Retain operation_key after uncertain response.",
         }
         self.catalog = [
             {
@@ -125,7 +134,7 @@ class PlanningTools:
                         self.records.propose,
                         self.lease,
                         args.operation_key,
-                        args.plan.model_dump(),
+                        args.plan.model_dump(exclude_unset=True),
                     )
             if self.closed or not self.active():
                 return _failure(

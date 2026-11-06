@@ -632,3 +632,14 @@ Servicios/lectores/rutas internas de comunicación permanecen para su corte
 principal, incluido un fallo antiguo de detección de ping-pong reproducido.
 Siguiente: proyecto/conocimiento y cinco dependencias legacy, después los demás
 bloques principales. No se declaran cerrados escenarios amplios ni aceptación global.
+
+## Herramientas antiguas de proyecto retiradas (6 de noviembre)
+
+Retirados nueve módulos/ocho herramientas después de incorporar hitos opcionales
+al plan nativo, su revisión y aceptación atómica, y dos lectores de estructura
+con alcance por proyecto. Operaciones de fuentes, hipótesis y referencias usan
+los reemplazos existentes; no se conserva escritura arbitraria de metadata por
+el modelo ni cierre automático por etiquetas. [Mapa](native-project-retirement.md).
+82 pruebas pasan en fuente y82 instaladas; seis pruebas web y build pasan.
+No se borran datos históricos ni se cambian dependencias. Siguiente principal:
+conocimiento, después las cinco bibliotecas y servicios/CLI antiguos restantes.

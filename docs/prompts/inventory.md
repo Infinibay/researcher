@@ -1,10 +1,15 @@
 # Inventario y revisión de prompts
 
 Catálogo nativo versión2; revisión inicial sobre `85f7acd`, actualizada después de
-retirar herramientas de comunicación sobre `ad86106`. El [inventario detallado](inventory.json)
-contiene 307 entradas candidatas de 394 archivos Python. **No son 307 prompts distintos
-ni 307 evaluaciones con modelos.** Se archivan 288 entradas de los módulos eliminados,
+retirar herramientas de proyecto sobre `9cbce80`. El [inventario detallado](inventory.json)
+contiene 278 entradas candidatas de 385 archivos Python. **No son 278 prompts distintos
+ni 278 evaluaciones con modelos.** Se archivan 319 entradas de los módulos eliminados,
 conservando sus decisiones históricas en `retired_entries`.
+El corte de proyecto archiva31 candidatos y revisa cuatro instrucciones/descripciones
+para hitos opcionales y lectores de épicas/hitos: evidencia, suposiciones y fechas
+propuestas diferenciadas; contexto mutable sin autoridad. Se revalidan57 AST
+sin cambios contra los consumidores modificados. El cambio de línea del catálogo
+de planificación conserva su identidad previa en `previous_id`.
 Las cinco descripciones nuevas de comunicación explicitan identidad admitida,
 pregunta exacta, observaciones frente a suposiciones, límites de lectura y
 recepción sin comprensión ni autoridad. Se revalidaron42 candidatos cuyo AST

@@ -1,0 +1,16 @@
+{
+  "scope": "Manual review of changed/new TypeScript definitions and modules in this project capability cut; callback bodies covered by the enclosing responsibility, not a claim of full frontend documentation.",
+  "files": [
+    "frontend/src/api/projectPlans.ts",
+    "frontend/src/components/tasks/ProjectPlanDelivery.tsx",
+    "frontend/src/components/tasks/ProposedWork.tsx",
+    "frontend/tests/project-structure-fixture.tsx",
+    "frontend/tests/project-structure.test.ts"
+  ],
+  "reviewed_contracts": [
+    "Optional same-epic milestone proposal types and historical receipt compatibility.",
+    "Complete hierarchy preview and exact owner acceptance responsibility.",
+    "Rendered production component and historical/new proposal fixtures."
+  ],
+  "missing": []
+}

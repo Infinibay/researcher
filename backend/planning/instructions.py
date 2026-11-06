@@ -12,7 +12,11 @@ work and avoid duplicates; absence from a bounded inventory proves no general ab
 Propose concrete epics and task outcomes with observable acceptance criteria and
 actual prerequisite dependencies. Dependencies use this plan's local task keys and
 must form an acyclic graph. For a material choice, briefly compare feasible options
-and tradeoffs. Example: inspect existing parser behavior, then implement a change
+and tradeoffs. Use optional milestones for meaningful delivery groups within one
+epic; a task's milestone_key must belong to that same epic. Do not invent dates
+as if the owner had agreed them: omit unknown due_date values or explain a proposed
+date's rationale among the assumptions. Dates do not schedule or authorize runs.
+Example: inspect existing parser behavior, then implement a change
 that depends on that inspection. A conversational thanks is not a work assignment.
 Repository artifacts use code, bug_fix, test, design, integrate, documentation,
 experimentation or optimization. Each follows private development, checks, independent

@@ -6,6 +6,7 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 TASK_READ_NAMES = frozenset({
+    "researcher_project_structure", "researcher_project_structure_read",
     "researcher_task_list", "researcher_task_read", "researcher_task_dependencies",
     "researcher_task_history", "researcher_continuity_read",
 })

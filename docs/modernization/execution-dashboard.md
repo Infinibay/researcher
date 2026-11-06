@@ -16,7 +16,37 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: herramientas antiguas de comunicación retiradas
+## Etapa actual: herramientas antiguas de proyecto retiradas
+
+Se retiran ocho herramientas y nueve módulos. Se cubre la carencia encontrada:
+hitos opcionales en la propuesta, revisión visible, creación atómica con las
+tareas y conservación del plan completo en su entrega posterior. Dos lecturas
+nativas permiten consultar épicas/hitos por proyecto, sin confundir etiquetas
+de estado o fechas propuestas con autorización o resultados aceptados.
+[Mapa y decisiones](../architecture/native-project-retirement.md).
+
+**Comprobado:**82 pruebas pasan en fuente y82 en el paquete instalado, sin fallos
+ni omisiones; seis pruebas web y la compilación pasan.697 archivos Python/SQL
+coinciden,256 imports proceden del entorno instalado y hay83 distribuciones sin
+frameworks antiguos.30 definiciones Python nuevas/modificadas documentadas y
+JSDoc revisado.278 candidatos de prompt en385 archivos,319 archivados y ninguna
+revisión estática pendiente. Se retira un test del stub antiguo, sin contarlo
+como fallo reparado. No hay nueva suite global ni aceptación integral de páginas.
+
+**Lista vigente:**
+- Cerrado recientemente: web; contexto/comentarios/continuidad; herramientas de
+  tareas; comunicación nativa y retirada de sus herramientas; herramientas de
+  proyecto, incluidos hitos y lectores nativos.
+- Próxima tarea principal: herramientas de conocimiento; después, las cinco
+  bibliotecas antiguas y los servicios/lectores/rutas internas/CLI restantes.
+- Pendiente principal: operación; migraciones/restore y datos históricos;
+  historial completo y presupuestos; evaluación real, humana, científica y
+  global; aceptación integral de las12 páginas y revisión final. Siguen43
+  escenarios abiertos,12 pilotos y48 conceptos; no hay porcentaje defendible.
+- Al final: detalles secundarios. Tres avisos de estilo, singular/plural de la
+  vista de hitos y tamaño del bundle quedan en el registro de detalles diferidos.
+
+## Etapa anterior: herramientas antiguas de comunicación retiradas
 
 Se retiran seis herramientas (siete módulos) y dos registros de preguntas. Se
 conservan los recorridos nativos de mensajes, preguntas al propietario y entrega

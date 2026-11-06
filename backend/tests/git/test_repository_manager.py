@@ -42,12 +42,3 @@ def test_legacy_initialization_and_clone_cannot_create_a_registration(seeded_pro
     assert db_conn.execute('SELECT COUNT(*) FROM repositories').fetchone()[0] == 0
 
 
-def test_old_model_tool_explains_owner_replacement_without_setup(seeded_project, db_conn):
-    """The retained tool cannot grant itself authority by manufacturing a path or using ambient Forgejo settings."""
-    import json
-
-    from backend.tools.project.create_repository import CreateRepositoryTool
-
-    result=json.loads(CreateRepositoryTool()._run(1,'new-source'))
-    assert 'explicit owner source operations' in result['error']
-    assert db_conn.execute('SELECT COUNT(*) FROM repositories').fetchone()[0] == 0

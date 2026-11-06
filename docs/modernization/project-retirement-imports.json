@@ -1,0 +1,8 @@
+{
+  "scope": "AST imports in backend/scripts Python including tests and relative imports; external and dynamic consumers remain unknown. Historical string mentions are not executable imports.",
+  "python_files": 663,
+  "retired_modules": [
+    "backend.tools.project"
+  ],
+  "hits": []
+}
