@@ -16,7 +16,36 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: herramientas antiguas de proyecto retiradas
+## Etapa actual: herramientas antiguas de conocimiento retiradas
+
+Se retiran13herramientas/15módulos después de cubrir búsqueda conjunta nativa y
+lectura de informes históricos con texto retenido en DB y procedencia explícita.
+Hallazgos, revisión, Wiki e informes conservan sus contratos nativos.
+[Mapa completo y límites](../architecture/native-knowledge-retirement.md).
+
+**Comprobado:**140 pruebas de fuente pasan; dos fallan y una se omite inicialmente.
+La prueba omitida pasa después al configurar el encoder local ya preparado.
+En el paquete instalado pasan141, fallan las mismas dos y no hay omisiones.
+Ambos fallos de migración/inversa se reproducen en el paquete anterior; siguen
+pendientes en su bloque principal.682 archivos Python/SQL coinciden,266 imports
+proceden del entorno y hay83 distribuciones sin frameworks antiguos.20
+definiciones nuevas/modificadas documentadas.234 candidatos de prompt en370
+archivos,364 archivados, sin revisión estática pendiente.21 tests de wrappers
+retirados sin contarlos como fallos reparados. No hay nueva suite global.
+
+**Lista vigente:**
+- Cerrado recientemente: herramientas web, tareas, comunicación, proyecto y
+  conocimiento, con los reemplazos nativos indicados en sus mapas.
+- Próxima tarea principal: cinco bibliotecas antiguas y auxiliares sin consumidores;
+  después servicios/lectores/rutas internas/CLI heredados restantes.
+- Pendiente principal: operación; migraciones/inversas/restore y datos históricos,
+  incluidos informes con bytes sólo en archivos; historial completo y presupuestos;
+  evaluación real, humana, científica y global; aceptación integral de12páginas
+  y revisión final. Siguen43escenarios abiertos,12pilotos y48conceptos.
+- Al final: detalles secundarios registrados; dos avisos de imports y una línea
+  vacía al final de un test quedan enDD055.
+
+## Etapa anterior: herramientas antiguas de proyecto retiradas
 
 Se retiran ocho herramientas y nueve módulos. Se cubre la carencia encontrada:
 hitos opcionales en la propuesta, revisión visible, creación atómica con las

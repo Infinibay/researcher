@@ -1,0 +1,12 @@
+{
+  "files_scanned": 648,
+  "roots": [
+    "backend",
+    "scripts"
+  ],
+  "targets": [
+    "backend.tools.knowledge"
+  ],
+  "remaining_static_imports": [],
+  "limits": "Python AST, including tests and relative imports; dynamic/external consumers and historical string mentions are not inferred absent."
+}

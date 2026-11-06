@@ -206,3 +206,12 @@ build. No volver a probar toda la planificación por estos detalles de presentac
 En el mismo corte, `git diff --check` señala una línea vacía al final de
 `test_repository_manager.py` tras retirar su test obsoleto. Queda junto con el
 estilo; no afecta al contrato verificado ni justifica reconstruir el paquete.
+
+
+## DD055 — estilo tras retirar herramientas de conocimiento
+
+Después de todas las capacidades principales: los dos avisos I001 de
+`knowledge-retirement-lint.json` y la línea vacía al final del test de revisión
+tras retirar un caso de wrapper. No reabrir el recorrido por estos detalles.
+Los dos fallos de migración/inversa reproducidos y la recuperación de informes
+con bytes sólo en archivos son trabajo principal de datos/restore, no DD055.

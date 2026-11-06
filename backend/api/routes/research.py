@@ -19,6 +19,7 @@ from backend.api.models.research import (
     CaptureWikiCollection,
     FindingDetail,
     FindingReceipt,
+    KnowledgeQuery,
     ProposeResult,
     RecordFinding,
     RecordReview,
@@ -496,6 +497,12 @@ def investigation_summary_write(command: WriteInvestigationSummary, ctx: Context
     return ctx.store.write_investigation_summary(ctx.scope, command.operation_key, command.summary)
 
 
+@router.post("/knowledge-query")
+def knowledge_query(selection: KnowledgeQuery, ctx: Context):
+    """Search only the credential-bound project and explicit wiki namespace, preserving per-source failure and cursor information."""
+    return ctx.store.query_knowledge(ctx.scope, **selection.model_dump())
+
+
 @router.get("/reports/{artifact_id}", response_model=ReportWindow)
 def report_read(
     artifact_id: int,
@@ -504,7 +511,7 @@ def report_read(
     max_chars: int = Query(12000, ge=1, le=20000),
     evidence_offset: int = Query(0, ge=0),
 ):
-    """Read report text and citations using independent bounded continuation offsets."""
+    """Read native or unverified historical report text/citations with independent windows and explicit hash provenance."""
     row = ctx.store.read_report(ctx.scope, artifact_id)
     evidence = row["evidence"][evidence_offset : evidence_offset + 20]
     end = evidence_offset + len(evidence)
@@ -518,6 +525,8 @@ def report_read(
                 "status",
                 "report_type",
                 "content_sha256",
+                "record_origin",
+                "hash_origin",
                 "finding_ids",
             )
         },

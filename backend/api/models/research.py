@@ -245,7 +245,7 @@ class FindingDetail(TextWindow):
 
 
 class ReportWindow(TextWindow):
-    """Page report content and evidence independently so omitted citations remain visible."""
+    """Page saved report bytes/citations with native or unverified historical origin; an observed hash never certifies the claim."""
 
     artifact_id: int
     project_id: int
@@ -253,11 +253,25 @@ class ReportWindow(TextWindow):
     status: str
     report_type: str
     content_sha256: str
+    record_origin: Literal["native", "legacy_unverified"]
+    hash_origin: Literal["stored_native_content", "observed_legacy_content"]
     finding_ids: list[int]
     evidence: list[EvidenceResponse]
     total_evidence: int
     evidence_offset: int
     next_evidence_offset: int | None
+
+
+class KnowledgeQuery(BaseModel):
+    """Select read-only source kinds and cursors; project, actor and source permissions come from the host grant."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    query: str = Field(min_length=1, max_length=1000)
+    sources: list[Literal["findings", "wiki", "reference_files", "reports"]] | None = Field(default=None, min_length=1, max_length=4)
+    limit: int = Field(default=20, ge=1, le=100)
+    min_confidence: float | None = Field(default=None, ge=0, le=1)
+    namespace: Literal["project", "global"] = "project"
+    cursors: dict[str, Annotated[int, Field(ge=0)]] | None = None
 
 
 class WriteWiki(Command):

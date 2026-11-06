@@ -12,7 +12,7 @@ def test_replaced_framework_adapters_are_unavailable():
     for module in (
         'backend.tools.shell', 'backend.tools.git',
         'backend.tools.rag', 'backend.tools.data', 'backend.tools.web', 'backend.tools.task',
-        'backend.tools.communication', 'backend.tools.project', 'backend.communication.question_registry',
+        'backend.tools.communication', 'backend.tools.project', 'backend.tools.knowledge', 'backend.communication.question_registry',
         'backend.communication.response_event_registry',
     ):
         assert importlib.util.find_spec(module) is None, module

@@ -583,6 +583,10 @@ class ResearchTools:
             },
         )
 
+    async def researcher_knowledge_search(self, query: str, sources: list[Literal["findings", "wiki", "reference_files", "reports"]] | None = None, limit: int = 20, min_confidence: float | None = None, namespace: Literal["project", "global"] = "project", cursors: dict[str, int] | None = None) -> dict:
+        """Lexical search across selected project findings, wiki, attachment metadata and saved reports. Wiki global namespace is explicit; no implicit fallback. Each source requires its own read permission. Follow coverage[source].next_after_id using cursors. A failed source is unknown coverage, not no matches; previews do not mean full texts or files were read. Unknown confidence stays unknown unless a historical declaration threshold is selected. Read exact finding/review, wiki, reference or report records before relying on them; stored status and search scores confer no scientific certainty or authority."""
+        return await self._client.request("POST", "/knowledge-query", body={"query":query, "sources":sources, "limit":limit, "min_confidence":min_confidence, "namespace":namespace, "cursors":cursors})
+
     async def researcher_report_read(
         self,
         artifact_id: int,
@@ -590,7 +594,7 @@ class ResearchTools:
         max_chars: int = 12000,
         evidence_offset: int = 0,
     ) -> dict:
-        """Recover a persisted report draft and citation page. Follow next_offset and next_evidence_offset independently."""
+        """Recover saved report bytes and citation pages in this project. Follow next_offset and next_evidence_offset independently. record_origin distinguishes native from legacy_unverified reports; an observed legacy content hash does not prove original integrity, reviewed claims or acceptance. Missing retained bytes require historical artifact restoration, never a guessed filesystem path."""
         return await self._client.request(
             "GET",
             f"/reports/{artifact_id}",

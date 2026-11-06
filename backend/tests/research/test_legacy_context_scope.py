@@ -6,7 +6,6 @@ from contextvars import ContextVar
 import pytest
 
 from backend.tools.base import context
-from backend.tools.knowledge.read_findings import ReadFindingsTool
 
 
 @pytest.fixture
@@ -46,14 +45,6 @@ def test_omitted_fields_preserve_only_the_same_agents_context(isolated_context):
     assert context.get_context_for_agent("new-agent").project_id is None
 
 
-def test_bound_tool_cannot_fall_back_to_another_agents_live_scope(isolated_context):
-    """Retiring a stamped tool's agent cannot retarget that tool to the current thread's user."""
-    context.set_context(project_id=101, task_id=1001, agent_id="author")
-    tool = ReadFindingsTool()
-    context.bind_tools_to_agent([tool], "author")
-    context.clear_agent_context("author")
-    context.set_context(project_id=202, task_id=2002, agent_id="other")
-    assert tool.project_id is None and tool.task_id is None and tool.agent_id is None
 
 
 def test_switching_to_registered_agent_restores_its_own_snapshot(isolated_context):

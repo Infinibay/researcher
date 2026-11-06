@@ -16,6 +16,23 @@ SOURCES = {"findings", "wiki", "reference_files", "reports"}
 READ_FAILURES = (ValueError, LookupError, RuntimeError, OSError, sqlite3.Error)
 
 
+def select_sources(sources):
+    """Validate a complete requested source set before authorization or any database reads."""
+    selected = (
+        ["findings", "wiki", "reference_files", "reports"]
+        if sources is None
+        else sources
+    )
+    if (
+        not isinstance(selected, list)
+        or not selected
+        or len(selected) != len(set(selected))
+        or not set(selected) <= SOURCES
+    ):
+        raise ResearchInputError("Choose distinct supported knowledge sources")
+    return selected
+
+
 class KnowledgeSearchStore:
     """Own a read-only source snapshot while disclosing unavailable coverage separately from absence."""
 
@@ -31,8 +48,14 @@ class KnowledgeSearchStore:
             conn.execute("BEGIN")
             yield conn
 
-    def query(
-        self,
+    def query(self, project, query, **selection):
+        """Keep the owner reader's original database binding while sharing the authenticated snapshot implementation."""
+        with self._transaction() as conn:
+            return self.query_snapshot(conn, project, query, **selection)
+
+    @staticmethod
+    def query_snapshot(
+        conn,
         project,
         query,
         *,
@@ -45,18 +68,7 @@ class KnowledgeSearchStore:
         """Search only explicit scope and preserve each requested source's complete/failed coverage."""
         positive_id(project)
         bounded_text(query, "knowledge lexical query", 1000)
-        selected = (
-            ["findings", "wiki", "reference_files", "reports"]
-            if sources is None
-            else sources
-        )
-        if (
-            not isinstance(selected, list)
-            or not selected
-            or len(selected) != len(set(selected))
-            or not set(selected) <= SOURCES
-        ):
-            raise ResearchInputError("Choose distinct supported knowledge sources")
+        selected = select_sources(sources)
         if (
             type(limit) is not int
             or not 1 <= limit <= 100
@@ -77,56 +89,55 @@ class KnowledgeSearchStore:
             raise ResearchInputError("Knowledge query contains no searchable words")
         results = []
         coverage = {}
-        with self._transaction() as conn:
-            for source in selected:
-                after = positions.get(source, 0)
-                try:
-                    if source == "findings":
-                        page = list_findings(
-                            conn,
-                            project,
-                            query=query,
-                            min_confidence=min_confidence,
-                            after_id=after,
-                            limit=limit,
-                        )
-                        rows = [
-                            {
-                                **item,
-                                "source_type": "findings",
-                                "title": item["topic"],
-                                "snippet": item["content_excerpt"],
-                                "snippet_scope": "bounded current claim preview, not complete claim or captured evidence",
-                            }
-                            for item in page["items"]
-                        ]
-                        total = page["total_matching"]
-                        following = page["next_after_id"]
-                    else:
-                        rows, total, following = self._source_page(
-                            conn,
-                            source,
-                            project,
-                            namespace,
-                            expression,
-                            after,
-                            limit,
-                        )
-                    results.extend(rows)
-                    coverage[source] = {
-                        "status": "searched",
-                        "returned": len(rows),
-                        "total_matching": total,
-                        "next_after_id": following,
-                    }
-                except READ_FAILURES as exc:
-                    coverage[source] = {
-                        "status": "failed",
-                        "error": str(exc)[:600],
-                        "returned": 0,
-                        "total_matching": None,
-                        "next_after_id": None,
-                    }
+        for source in selected:
+            after = positions.get(source, 0)
+            try:
+                if source == "findings":
+                    page = list_findings(
+                        conn,
+                        project,
+                        query=query,
+                        min_confidence=min_confidence,
+                        after_id=after,
+                        limit=limit,
+                    )
+                    rows = [
+                        {
+                            **item,
+                            "source_type": "findings",
+                            "title": item["topic"],
+                            "snippet": item["content_excerpt"],
+                            "snippet_scope": "bounded current claim preview, not complete claim or captured evidence",
+                        }
+                        for item in page["items"]
+                    ]
+                    total = page["total_matching"]
+                    following = page["next_after_id"]
+                else:
+                    rows, total, following = KnowledgeSearchStore._source_page(
+                        conn,
+                        source,
+                        project,
+                        namespace,
+                        expression,
+                        after,
+                        limit,
+                    )
+                results.extend(rows)
+                coverage[source] = {
+                    "status": "searched",
+                    "returned": len(rows),
+                    "total_matching": total,
+                    "next_after_id": following,
+                }
+            except READ_FAILURES as exc:
+                coverage[source] = {
+                    "status": "failed",
+                    "error": str(exc)[:600],
+                    "returned": 0,
+                    "total_matching": None,
+                    "next_after_id": None,
+                }
         partial = any(item["status"] == "failed" for item in coverage.values())
         result = {
             "project_id": project,

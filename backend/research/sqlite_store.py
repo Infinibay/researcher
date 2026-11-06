@@ -735,16 +735,37 @@ class SQLiteResearchStore:
 
         return write_summary(self, scope, key, draft)
 
+    def query_knowledge(self, scope, query, **selection):
+        """Search requested source kinds only after checking each live read permission in the same SQL snapshot."""
+        from backend.knowledge.search import KnowledgeSearchStore, select_sources
+
+        permissions = {"findings": "findings.read", "wiki": "wiki.read", "reference_files": "sources.read", "reports": "reports.read"}
+        selected = select_sources(selection.get("sources"))
+        with self._transaction() as conn:
+            for source in selected:
+                self._check_scope(conn, scope, permissions[source])
+            return KnowledgeSearchStore.query_snapshot(conn, scope.project_id, query, **selection)
+
     def read_report(self, scope, artifact_id):
+        """Read retained report bytes in this project, explicitly distinguishing native records from unverified history; never open paths."""
+        positive_id(artifact_id)
         with self._transaction() as conn:
             self._check_scope(conn, scope, "reports.read")
             row = conn.execute(
-                "SELECT a.*,r.title,r.report_type,r.status,r.content_sha256 FROM artifacts a JOIN research_reports r ON r.artifact_id=a.id WHERE a.project_id=? AND a.id=?",
+                "SELECT a.*,r.artifact_id AS native_record,r.title,r.report_type,r.status,r.content_sha256 FROM artifacts a LEFT JOIN research_reports r ON r.artifact_id=a.id WHERE a.project_id=? AND a.id=? AND a.type='report'",
                 (scope.project_id, artifact_id),
             ).fetchone()
             if row is None:
                 raise ResearchNotFound("Report not found in this project")
             result = dict(row)
+            if not isinstance(result["content"], str):
+                raise ResearchNotFound("Report bytes are not retained in this database; restore the registered historical artifact before reading")
+            native = result.pop("native_record") is not None
+            result["record_origin"] = "native" if native else "legacy_unverified"
+            result["hash_origin"] = "stored_native_content" if native else "observed_legacy_content"
+            if not native:
+                result.update(title=result["description"] or f"Historical report {artifact_id}",
+                              report_type="legacy", status="legacy_unverified", content_sha256=_hash(result["content"]))
             result["finding_ids"] = [
                 r[0]
                 for r in conn.execute(

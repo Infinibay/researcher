@@ -1,0 +1,42 @@
+{
+  "base_commit": "a5b57af",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "sha256": "b7faeaff3e93202f3cd2aeaedf84d536301981df81b3f3abce79b55f84f2b876",
+  "observed": {
+    "exit_code": 1,
+    "cases": 143,
+    "failed": 2,
+    "failed_cases": [
+      "test_review_schema_can_rollback_without_losing_original_work",
+      "test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_report"
+    ],
+    "skipped": 0,
+    "seconds": 60.759,
+    "all_backend_imports_installed": true,
+    "backend_modules": 266,
+    "matching_python_sql": 682,
+    "installed_distributions": 83,
+    "legacy_installed": false,
+    "real_provider_calls": 0,
+    "real_generative_model_calls": 0,
+    "local_encoder_test_passed": true
+  },
+  "tests": [
+    "backend/tests/runtime/test_native_adapter_retirement.py",
+    "backend/tests/research/test_knowledge_access.py",
+    "backend/tests/research/test_finding_registry.py",
+    "backend/tests/research/test_finding_semantic.py",
+    "backend/tests/research/test_finding_consumers.py",
+    "backend/tests/research/test_legacy_context_scope.py",
+    "backend/tests/research/test_wiki_identity.py",
+    "backend/tests/research/test_wiki_collection.py",
+    "backend/tests/research/test_wiki_imports.py",
+    "backend/tests/research/test_persistence.py",
+    "backend/tests/research/test_http.py",
+    "backend/tests/runtime/test_finding_review.py",
+    "backend/tests/runtime/test_result_acceptance.py",
+    "backend/tests/runtime/test_investigation.py"
+  ],
+  "limits": "Removal of13knowledge tools/15modules; scoped native cross-source search and explicit legacy report reading. Existing finding/review/result/wiki/semantic/report contracts. Two migration/inverse failures reproduced against the preceding installed a5b57af baseline; selected suite is not fully green. Configured existing pinned local encoder resources exercise the real semantic worker, with no downloads or paid generative/provider calls. Legacy dependencies/services, file-only historical report restoration and complete migration/operation/global/human/scientific/page acceptance remain. Existing development seed db/seeds/dev_data.sql remains outside unchanged db/*.sql package data.",
+  "counter_note": "The worker used real_model_calls for generative calls; the report names that zero counter explicitly to distinguish the one real local semantic encoder test."
+}

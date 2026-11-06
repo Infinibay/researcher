@@ -643,3 +643,15 @@ el modelo ni cierre automático por etiquetas. [Mapa](native-project-retirement.
 82 pruebas pasan en fuente y82 instaladas; seis pruebas web y build pasan.
 No se borran datos históricos ni se cambian dependencias. Siguiente principal:
 conocimiento, después las cinco bibliotecas y servicios/CLI antiguos restantes.
+
+## Herramientas antiguas de conocimiento retiradas (6 de noviembre)
+
+Retirados15módulos/13herramientas después de mapear hallazgos, revisión, informes,
+Wiki y búsquedas. Se añade búsqueda conjunta nativa con permisos por fuente y
+lectura de informes históricos con contenido retenido y procedencia explícita.
+[Mapa y límites](native-knowledge-retirement.md). Los informes con bytes sólo en
+filesystem requieren el bloque principal de restauración/importación.
+141 pruebas instaladas pasan, con dos fallos de migración/inversa reproducidos
+en el paquete anterior; no se presentan como reparados. El encoder local real
+se prueba con sus recursos preparados. Siguiente principal: cinco dependencias
+legacy y sus auxiliares; después servicios/rutas internas/CLI y demás bloques.

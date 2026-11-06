@@ -1549,7 +1549,8 @@
       "remaining": [
         "Historical and real-data migration plus complete restore validation",
         "Managed host/service bootstrap, all legacy writers and deployment handoff/enrollment",
-        "Complete health/readiness and configured deployment startup"
+        "Complete health/readiness and configured deployment startup",
+        "Explicit restoration/import of registered legacy report artifacts with filesystem-only bytes; native readers expose absent retained DB content rather than opening guessed paths."
       ],
       "implemented": [
         "Explicit new source/authority storage CLI, existing-only API/CLI/launcher startup and cancellation/failure cleanup; owned product fixture uses production initializer. No complete managed-host enrollment or restore claim."
@@ -1882,7 +1883,7 @@
         "docs/architecture/context7-sources.md",
         "docs/architecture/spider-sources.md"
       ],
-      "implemented": "Owned static inventory278candidates/385files,319archived entries; explicit source/direct-consumer dispositions. Native catalogv2 and capability rewrites. Four project-related instructions/descriptions reviewed; model efficacy and human comprehension remain open.",
+      "implemented": "Owned static inventory234candidates/370files,364archived entries; source/direct-consumer review decisions, native catalogv2 and capability rewrites. New cross-source search and legacy report description reviewed; model efficacy and human comprehension remain open.",
       "remaining": [
         "Before/after efficacy and reserved-case comparisons using the same subscription model/effort/tools/context.",
         "Dynamic consumer/native-system exposure limits and actual human comprehension remain explicit; physical legacy removal belongs to the engine block."
@@ -3961,6 +3962,23 @@
         "82 source and 82 installed cases pass; 6 frontend cases and compilation pass. These are directed contracts, not a new global result.",
         "One obsolete stub test removed without claiming a failure fix.",
         "Knowledge tools, legacy libraries/services, real-data restore and full product evaluation remain."
+      ]
+    },
+    "native_knowledge_tool_retirement": {
+      "status": "complete",
+      "scope": "13knowledge tools/15modules removed after native capability mapping, scoped cross-source search and explicit legacy report database reads. No broad scenario closes.",
+      "evidence": [
+        "docs/architecture/native-knowledge-retirement.md",
+        "docs/modernization/knowledge-retirement-results.json",
+        "docs/modernization/knowledge-retirement-packaging.json",
+        "docs/modernization/knowledge-retirement-imports.json",
+        "backend/tests/research/test_knowledge_access.py"
+      ],
+      "limitations": [
+        "Two migration/inverse failures reproduce against the prior installed package; no global green claim.",
+        "21obsolete test functions removed; native registry/review/wiki/report/semantic contracts remain, without counting removed tests as repaired failures.",
+        "Historical file-only report bytes still need explicit restoration/import; no guessed host path fallback or conversion into accepted native work.",
+        "Legacy libraries/helpers/services, real data migration/operation and integral acceptance remain."
       ]
     }
   }

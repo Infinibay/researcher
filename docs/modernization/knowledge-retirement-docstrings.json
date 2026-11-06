@@ -1,0 +1,26 @@
+{
+  "changed_or_new_definitions": [
+    "backend/api/models/research.py::ReportWindow",
+    "backend/api/models/research.py::KnowledgeQuery",
+    "backend/api/routes/research.py::knowledge_query",
+    "backend/api/routes/research.py::report_read",
+    "backend/knowledge/search.py::select_sources",
+    "backend/knowledge/search.py::KnowledgeSearchStore",
+    "backend/knowledge/search.py::KnowledgeSearchStore.query",
+    "backend/knowledge/search.py::KnowledgeSearchStore.query_snapshot",
+    "backend/research/sqlite_store.py::SQLiteResearchStore",
+    "backend/research/sqlite_store.py::SQLiteResearchStore.query_knowledge",
+    "backend/research/sqlite_store.py::SQLiteResearchStore.read_report",
+    "backend/runtime/business_definitions.py::ResearchTools",
+    "backend/runtime/business_definitions.py::ResearchTools.researcher_knowledge_search",
+    "backend/runtime/business_definitions.py::ResearchTools.researcher_report_read",
+    "backend/tests/research/test_knowledge_access.py::knowledge_records",
+    "backend/tests/research/test_knowledge_access.py::test_knowledge_query_preserves_source_coverage_and_explicit_global_scope",
+    "backend/tests/research/test_knowledge_access.py::test_knowledge_query_checks_every_requested_permission_and_live_context",
+    "backend/tests/research/test_knowledge_access.py::test_historical_report_is_readable_without_native_status_or_automatic_file_access",
+    "backend/tests/research/test_knowledge_access.py::test_real_mcp_search_discovers_and_reads_historical_report",
+    "backend/tests/runtime/test_native_adapter_retirement.py::test_replaced_framework_adapters_are_unavailable"
+  ],
+  "missing": [],
+  "scope": "Qualified AST comparison against a5b57af, changed/new definitions and module docstrings only. English documentation for Ken."
+}

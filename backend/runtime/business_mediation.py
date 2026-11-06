@@ -46,6 +46,7 @@ RESEARCH_NAMES = frozenset(
         "researcher_report_write",
         "researcher_result_propose",
         "researcher_report_read",
+        "researcher_knowledge_search",
         "researcher_ask_user",
     }
 ) | TASK_READ_NAMES | TASK_WRITE_NAMES | MESSAGE_NAMES
@@ -62,6 +63,7 @@ REVIEW_NAMES = frozenset(
         "researcher_finding_summary",
         "researcher_finding_query",
         "researcher_report_read",
+        "researcher_knowledge_search",
         "researcher_wiki_list",
         "researcher_wiki_read",
         "researcher_ask_user",

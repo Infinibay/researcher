@@ -1,0 +1,121 @@
+{
+  "base_commit": "a5b57af",
+  "source": {
+    "cases": 143,
+    "passed": 140,
+    "failed": {
+      "test_review_schema_can_rollback_without_losing_original_work": "RuntimeError: Development rollback refused: execution history or live authority requires forward repair or explicit backup restore",
+      "test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_report": "assert 56 == 51"
+    },
+    "skipped": [
+      "test_real_local_finding_query_reaches_late_body_text_and_does_not_create_a_source_or_confidence"
+    ],
+    "seconds": 57.671
+  },
+  "source_semantic_followup": {
+    "cases": 1,
+    "passed": 1,
+    "failed": {},
+    "skipped": [],
+    "seconds": 4.549
+  },
+  "installed": {
+    "cases": 143,
+    "passed": 141,
+    "failed": {
+      "test_review_schema_can_rollback_without_losing_original_work": "RuntimeError: Development rollback refused: execution history or live authority requires forward repair or explicit backup restore",
+      "test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_report": "assert 56 == 51"
+    },
+    "skipped": [],
+    "seconds": 60.759
+  },
+  "baseline": {
+    "commit": "a5b57af",
+    "matching_python_sql": 697,
+    "sha256": "6bb48a1297ff2c7b3586fbf2d2e5cf69a8fd77b5df36538bc0e81b2e63c5af9f",
+    "observed": {
+      "cases": 2,
+      "passed": 0,
+      "failed": {
+        "test_review_schema_can_rollback_without_losing_original_work": "RuntimeError: Development rollback refused: execution history or live authority requires forward repair or explicit backup restore",
+        "test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_report": "assert 56 == 51"
+      },
+      "skipped": [],
+      "seconds": 1.27
+    },
+    "same_failure_messages": true,
+    "verification": "Compared every Python/SQL member with the installed prior wheel using -I outside the checkout before candidate installation."
+  },
+  "retired": {
+    "module_count": 15,
+    "tool_count": 13,
+    "retired_test_functions": {
+      "backend/tests/tools/test_knowledge_tools.py": [
+        "test_record_finding",
+        "test_invalid_finding_type",
+        "test_requires_task_context",
+        "test_validate_finding",
+        "test_reject_finding",
+        "test_write_and_read_wiki",
+        "test_update_wiki_page",
+        "test_wiki_index",
+        "test_wiki_not_found"
+      ],
+      "backend/tests/research/test_finding_consumers.py": [
+        "test_reader_keeps_unknown_confidence_and_labels_legacy_assertions",
+        "test_missing_project_cannot_widen_a_retained_reader",
+        "test_summary_task_filter_never_replaces_project_scope",
+        "test_reader_pages_metadata_then_full_text_and_rejects_foreign_id",
+        "test_unified_search_keeps_native_unknowns_and_reports_coverage",
+        "test_semantic_unprepared_fails_without_old_blob_or_download_fallback",
+        "test_partial_source_failure_is_not_an_empty_success",
+        "test_retained_semantic_search_refuses_a_sampled_501st_candidate",
+        "test_real_retained_semantic_worker_reads_late_text_and_ignores_old_vectors",
+        "test_retained_semantic_results_reject_changed_corpus_before_disclosure"
+      ],
+      "backend/tests/research/test_legacy_context_scope.py": [
+        "test_bound_tool_cannot_fall_back_to_another_agents_live_scope"
+      ],
+      "backend/tests/runtime/test_finding_review.py": [
+        "test_retained_reader_gets_actual_feedback_without_review_write_authority"
+      ]
+    },
+    "total_retired_test_functions": 21,
+    "preserved_native_contracts": [
+      "backend/tests/research/test_finding_registry.py",
+      "backend/tests/research/test_finding_semantic.py",
+      "backend/tests/research/test_knowledge_access.py",
+      "backend/tests/runtime/test_finding_review.py",
+      "backend/tests/research/test_wiki_identity.py",
+      "backend/tests/research/test_wiki_collection.py",
+      "backend/tests/research/test_persistence.py"
+    ],
+    "not_failure_fixes": true
+  },
+  "prompt_inventory": {
+    "changed_or_new_reviewed": [
+      "backend/runtime/business_definitions.py::ResearchTools.researcher_knowledge_search.wire_description",
+      "backend/runtime/business_definitions.py::ResearchTools.researcher_report_read.wire_description"
+    ],
+    "unchanged_asts_revalidated": 48,
+    "newly_archived": 45,
+    "candidates": 234,
+    "files": 370,
+    "archived": 364,
+    "pending_static_reviews": 0,
+    "audit_tests_passed": 2
+  },
+  "documented_python_definitions": 20,
+  "style_findings_in_changed_python_files": 2,
+  "paid_generative_model_calls": 0,
+  "real_provider_calls": 0,
+  "local_encoder_tests_passed": 2,
+  "frontend_changed": false,
+  "limitations": [
+    "Selected source/installed suites retain two known migration/inverse failures; not a fully green global verification.",
+    "The source suite initially skipped one unconfigured semantic case; it then passed with existing pinned local assets. The installed suite uses those assets and skips none.",
+    "No data/schema/dependency changes or historical failure reduction inferred from removing obsolete tests.",
+    "Historical reports with only filesystem bytes require explicit registered-artifact restoration in the main data migration block.",
+    "Legacy libraries/helpers/services, complete history/budgets/operation and human/scientific/model/global/page acceptance remain."
+  ]
+}
