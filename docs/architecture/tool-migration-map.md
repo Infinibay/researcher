@@ -537,3 +537,16 @@ JSON/texto, MCP/HTTP/SQLite y cita probados; configuración opcional y cuota pro
 87 pruebas relacionadas y36instaladas pasan; proveedor simulado, sin petición de
 pago ni evaluación de disponibilidad/eficacia externas. [Contrato](context7-sources.md).
 Spider y el resto de herramientas/índices/dependencias siguen pendientes.
+
+## Spider migrado — 2026-11-06
+
+researcher_capture_spider conserva scraping de una página con elección explícita
+smart/browser/http y markdown/texto. El campo content se captura como fuente;
+store_as_finding/topic se reemplazan por lectura y hallazgo con cita verificable.
+Clave y límite de créditos del host, transporte compartido con Context7, cierre
+físico registrado; costes/renderizado/URL remotos son afirmaciones del proveedor.
+Un módulo, tres tests específicos y el extra/SDK retirados; no se cuentan como
+fallos históricos reparados. Lock sin cambios de versiones restantes.
+122pruebas relacionadas y71instaladas pasan, con proveedor controlado.
+[Contrato y límites](spider-sources.md). Siguen las otras herramientas, índices,
+dependencias legacy y aceptación global; los detallesDD048 esperan al final.

@@ -16,7 +16,29 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: Context7 migrado a fuentes nativas
+## Etapa actual: Spider migrado y SDK opcional retirado
+
+Captura avanzada de una página por MCP/API/fuente SQLite, con modos explícitos
+smart/browser/http y markdown/texto. Clave y créditos del host; contenido para
+citas/hallazgos, sin dar autoridad a instrucciones de la página. Transporte
+acotado compartido con Context7. [Contrato](../architecture/spider-sources.md).
+
+**Comprobado:**122pruebas relacionadas en fuente y71en el paquete instalado,
+798fuentes coincidentes,234imports sólo del entorno y85distribuciones sin legacy
+ni SDK Spider.0fallos/omisiones;0llamadas a modelos o proveedores reales.
+Se retiran un módulo, sus tres tests específicos y el extra spider; el lock
+elimina tres paquetes, sin cambios de versiones restantes.38definiciones
+documentadas;546candidatos/486archivos,35entradas archivadas y0pendientes de
+revisión estática. DD048 conserva sólo estilo.
+
+**Siguiente principal:** cerrar el conjunto de herramientas heredadas restantes
+según sus reemplazos nativos y resolver capacidades únicas de los índices/edición
+estructural antes de retirar sus dependencias. Después operación, migraciones/
+restore, historial/presupuestos, CLI y evaluaciones reales/humanas/científicas/
+globales. Se mantienen12pilotos48conceptos0páginas aceptadas integralmente.
+Todos los detalles secundarios al final.
+
+## Etapa anterior: Context7 migrado a fuentes nativas
 
 Búsqueda de bibliotecas y documentación JSON/texto pasan por el MCP de negocio,
 API y fuentes SQLite. Clave opcional sólo en el host; cuota externa explícita,

@@ -1,0 +1,25 @@
+{
+  "base_commit": "16c4acf",
+  "passed": 122,
+  "failures": [],
+  "skipped": 0,
+  "seconds": 19.229,
+  "scope": "Spider/Context7 optional acquisition, actual HTTP parsing and MCP-memory\u2192async client/ASGI/API\u2192SQLite\u2192exact citation. Existing web/PDF, native MCP stdio/catalog and one controlled owned research run. Provider DNS/socket bytes and generation/Ken are fixtures. No real external provider/model/user effects; not global acceptance.",
+  "red": "Initial browser acquisition case failed because SpiderReader did not exist.",
+  "corrections": [
+    "First integration48pass/1fail: test compared literal newline content with dict repr; corrected to compare structuredContent.content directly. No production alteration for that fixture failure.",
+    "Explicit provider error accompanying successful status is refused; a separate final case verifies it."
+  ],
+  "lock_check": "uv lock --check --offline passed;185resolved packages; no versions changed or packages added.",
+  "removed_optional_dependencies": {
+    "ijson": "3.6.0",
+    "spider-browser": "0.4.0",
+    "spider-client": "0.1.93"
+  },
+  "limits": [
+    "Provider availability/rendering/credit enforcement are not verified live.",
+    "Requested target DNS is vetted locally; provider DNS/redirects/subresources are unobserved.",
+    "A saved receipt avoids refetch; interruptions/concurrent calls before commit can consume remote credits again.",
+    "Per-request credit limit is not an aggregate engine budget or promise of remote cancellation/refund."
+  ]
+}

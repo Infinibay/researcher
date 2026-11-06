@@ -47,7 +47,6 @@ legacy = [
     "tree-sitter-c>=0.24.1,<0.25",
     "tree-sitter-rust>=0.24.2,<0.25",
 ]
-spider = ["spider-client>=0.1.0"]
 
 [dependency-groups]
 dev = [

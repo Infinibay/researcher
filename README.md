@@ -57,6 +57,12 @@ Optional library documentation uses the native Context7 source tools. Set
 name is also accepted. Its provider quota is separate from the OpenAI subscription.
 No extra package is needed. See [configuration, tools and evidence limits](docs/architecture/context7-sources.md).
 
+Optional advanced page capture uses `researcher_capture_spider` with the server's
+`SPIDER_API_KEY` (or historical `INFINIBAY_SPIDER_API_KEY`). `SPIDER_MAX_CREDITS`
+sets its per-request provider credit ceiling, default 100. This uses Spider's
+separate quota. The old `spider` extra and its SDK are removed; no SDK is required.
+See [Spider setup and capture limits](docs/architecture/spider-sources.md).
+
 The commands above run native smoke checks. The full historical test corpus still
 has migration failures and expects the optional legacy readers; it is not a claim
 that every test has already been ported. See the

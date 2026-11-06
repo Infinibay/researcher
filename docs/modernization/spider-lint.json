@@ -1,0 +1,54 @@
+{
+  "base_commit": "16c4acf",
+  "findings": [
+    {
+      "path": "backend/api/research_dependencies.py",
+      "code": "I001",
+      "line": 3,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/research/context7.py",
+      "code": "RUF012",
+      "line": 44,
+      "message": "Mutable default value for class attribute"
+    },
+    {
+      "path": "backend/research/provider_http.py",
+      "code": "RUF012",
+      "line": 31,
+      "message": "Mutable default value for class attribute"
+    },
+    {
+      "path": "backend/research/spider.py",
+      "code": "RUF012",
+      "line": 47,
+      "message": "Mutable default value for class attribute"
+    },
+    {
+      "path": "backend/tests/research/test_spider.py",
+      "code": "SIM117",
+      "line": 258,
+      "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements"
+    },
+    {
+      "path": "backend/tests/tools/test_scrape_tools.py",
+      "code": "I001",
+      "line": 3,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/tools/web/__init__.py",
+      "code": "I001",
+      "line": 3,
+      "message": "Import block is un-sorted or un-formatted"
+    },
+    {
+      "path": "backend/tools/web/__init__.py",
+      "code": "RUF022",
+      "line": 10,
+      "message": "`__all__` is not sorted"
+    }
+  ],
+  "deferred": "DD048"
+}

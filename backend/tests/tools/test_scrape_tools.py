@@ -1,12 +1,10 @@
-"""Tests for web scraping tools (ScrapeWebsiteInfinibayTool, SpiderScrapeTool)."""
+"""Historical ScrapeWebsite adapter tests; Spider has moved to native source acquisition."""
 
 import json
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
-import pytest
 
 from backend.tools.web.scrape_website import ScrapeWebsiteInfinibayTool
-from backend.tools.web.spider_scrape import SpiderScrapeTool
 
 
 class TestScrapeWebsiteTool:
@@ -67,41 +65,3 @@ class TestScrapeWebsiteTool:
 
         assert "error" in result
         assert "Failed to scrape" in result["error"]
-
-
-class TestSpiderScrapeTool:
-    @patch("backend.tools.web.spider_scrape.settings")
-    def test_spider_requires_api_key(self, mock_settings, agent_context):
-        mock_settings.SPIDER_API_KEY = ""
-
-        tool = SpiderScrapeTool()
-        result = json.loads(tool._run(url="https://example.com"))
-
-        assert "error" in result
-        assert "SPIDER_API_KEY" in result["error"]
-
-    @patch("backend.tools.web.spider_scrape.web_rate_limiter")
-    @patch("backend.tools.web.spider_scrape.settings")
-    def test_spider_scrape_delegates_to_crewai(self, mock_settings, mock_limiter, agent_context):
-        mock_settings.SPIDER_API_KEY = "test-key"
-
-        mock_tool_instance = MagicMock()
-        mock_tool_instance.run.return_value = "Spider scraped content"
-
-        with patch("backend.tools.web.spider_scrape.SpiderTool", return_value=mock_tool_instance):
-            tool = SpiderScrapeTool()
-            result = json.loads(tool._run(url="https://js-heavy-site.com"))
-
-        assert result["content"] == "Spider scraped content"
-        assert result["url"] == "https://js-heavy-site.com"
-
-    @patch("backend.tools.web.spider_scrape.web_rate_limiter")
-    @patch("backend.tools.web.spider_scrape.settings")
-    def test_spider_handles_import_error(self, mock_settings, mock_limiter, agent_context):
-        mock_settings.SPIDER_API_KEY = "test-key"
-
-        with patch.dict("sys.modules", {"crewai_tools": None}):
-            tool = SpiderScrapeTool()
-            result = json.loads(tool._run(url="https://example.com"))
-
-            assert "error" in result

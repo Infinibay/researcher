@@ -1,0 +1,34 @@
+{
+  "base_commit": "16c4acf",
+  "removed_module": {
+    "path": "backend/tools/web/spider_scrape.py",
+    "sha256": "adb1384c15106bfc500f2c96487cb1de807fd582d58b87d735f345579b4054a4"
+  },
+  "retired_tests": [
+    {
+      "path": "backend/tests/tools/test_scrape_tools.py",
+      "name": "TestSpiderScrapeTool.test_spider_requires_api_key",
+      "line": 74,
+      "sha256": "f543eca7b4623023d317fefa97a005acfb5bf28112fac5d311ee1ed405d6df79"
+    },
+    {
+      "path": "backend/tests/tools/test_scrape_tools.py",
+      "name": "TestSpiderScrapeTool.test_spider_scrape_delegates_to_crewai",
+      "line": 85,
+      "sha256": "3ec955984f35c30618ca703993e0497e9938aafe939c1cb2d228caae80a092e6"
+    },
+    {
+      "path": "backend/tests/tools/test_scrape_tools.py",
+      "name": "TestSpiderScrapeTool.test_spider_handles_import_error",
+      "line": 100,
+      "sha256": "61973b177d91ccbf3cfb908273d48447bbabdc6b8df4f7d804ee258ab1e81f1e"
+    }
+  ],
+  "replacement": [
+    "backend/research/spider.py",
+    "researcher_capture_spider",
+    "backend/tests/research/test_spider.py"
+  ],
+  "compatibility": "Single-page advanced scraping retained with explicit rendering/output modes. store_as_finding/topic become capture\u2192read\u2192researcher_finding_record with an exact source quote. Removed SDK-specific cases are retired, not counted as repaired historical failures.",
+  "limits": "Static consumers were the old web package and retired test class. Arbitrary external imports remain unknown; historical source/finding rows remain unchanged."
+}

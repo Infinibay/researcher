@@ -6810,3 +6810,45 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
   history/budgets/CLI, realprompt-human-science,43scenarios/all12pages/finalreview
   remain full-scope work.12pilots48concepts0accepted unchanged. Macro-first and
   updated chat list at main-task transitions remain in force.
+
+### 2026-11-06 — Spider native page acquisition and optional SDK retirement
+
+- Previous goal turn was progress:16c4acfContext7. Revalidated tracked-clean
+  managed branch/full objective and preserved original checkout/protected paths.
+  No newagents/push/merge/deploy. Applied Ken reuse skill; original-index recall
+  empty/untracked and new provider file unindexed. Read actual managed API/store/
+  catalogs, old Spider wrapper and package/test consumers before mutation.
+- Confirmed official Spider single-page API, modes and per-page/run credit fields.
+  Native researcher_capture_spider→HTTP→service→provider→immutable source;
+  explicit quote/finding replaces optional auto-ingest. Host-only key+credit cap,
+  default100credits, requested10s/host12s,1MBresponse/200kBtext. Fixed provider
+  origin, public DNS, no redirects/automatic retry/background/session/custom
+  scripts or hidden LLM extraction. Remote DNS/rendering/costs remain attributed
+  assertions; local closure never promises remote cancellation or reimbursement.
+- Reused Context7 I/O in OwnedProviderTransport, retaining its credential, bounds,
+  authority and physical closure behavior. Context7 existing tests unchanged.
+  Removed one Spider legacy module, three SDK-delegation tests and optional extra;
+  preserved hashes/identities, other old scraper tests and all persisted data.
+  uv lock --check --offline passes:185packages, only ijson/spider-browser/
+  spider-client removed, no added or updated retained versions.
+- RED missing new reader. First combined48PASS/1FAIL was fixture comparing newline
+  content with dict repr; corrected to structuredContent.content. Later added
+  explicit error-with-successful-status refusal. Final122PASS0FAIL0SKIP19.23s;
+  35Spider/21Context7 plus web/PDF/catalog/MCP/owned research. No global rerun.
+- Final wheel built once from clean copy after source/README finalized; installed
+  proof71PASS0FAIL0SKIP7.163s/798matchingPythonSQLmembers/234env-onlyimports/
+  85native distributions, no SpiderSDK/legacy. Real MCP-memory+asyncHTTP/ASGI/API/
+  SQLite/citation and actual kernel/broker/SQLite research with controlled DNS/
+  socket/generation/Ken;0realprovider/model/userdata effects. Environment now
+  contains spider wheel, replacing context7 wheel.
+- 38changed/new definitions and affected modules documented.8Ruff style findings
+  recordedDD048, not repaired in this macro pass. Prompt546/486,4morearchived
+  (35total),1newwiretextreviewed,31unchangedliterals+20unchangedsourcesrevalidated
+  against the sole changed web export consumer. Inventorycheck+2auditor testsPASS
+  0.12s. No efficacy/complete dynamic-consumer claim.
+- Terminal handles48050exit1,76893/65310/9469/98369/3121exit0. No retained model or
+  server. Next principal is the remaining leaf-tool collection and obsolete code
+  indices with explicit write-capability compatibility, before final dependency
+  removal. The legacy extra remains. Operation/migrations/restore/history/budgets/
+  CLI/realprompt-human-science/43scenarios/all12pages/finalreview remain.
+  Macro-first/task-transition list persists;12pilots48concepts0accepted unchanged.

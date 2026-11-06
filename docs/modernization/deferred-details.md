@@ -160,3 +160,13 @@ anidados de `test_mcp_context7_search_docs_saved_citation_and_receipt_reuse`
 señalados por SIM117. Es una cuestión de estilo del ensayo; no cambia el recorrido
 MCP/HTTP/SQLite ni sus garantías de alcance y recibo. La integración Spider y la
 retirada de herramientas/dependencias restantes siguen como trabajo principal.
+
+## DD048 — estilo del transporte opcional y sus ensayos
+
+Después de todas las capacidades principales: resolver los ocho avisos del
+[informe Spider](spider-lint.json): orden de imports/exports, anotación de los
+diccionarios de constantes de clase como ClassVar y context managers anidados
+del ensayo MCP. No se modifican esos diccionarios durante la ejecución.
+No reabrir la integración por estos avisos. Las herramientas/índices restantes,
+presupuestos agregados y validación de proveedores reales siguen como trabajo
+principal, no como detalles diferidos.

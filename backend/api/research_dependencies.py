@@ -14,6 +14,7 @@ from backend.research.models import ResearchForbidden, ResearchNotFound, Researc
 from backend.research.parser_process import PDFParser
 from backend.research.service import ResearchService
 from backend.research.sqlite_store import SQLiteResearchStore
+from backend.research.spider import SpiderReader
 from backend.research.web_fetcher import PublicWebFetcher
 
 bearer = HTTPBearer(auto_error=False)
@@ -66,6 +67,9 @@ def get_research_context(
         scope,
         ResearchService(
             store,
+            spider=SpiderReader.from_environment(
+                owner=request.app.state.live_grants, grant_id=scope.grant_id,
+            ),
             context7=Context7Reader.from_environment(
                 owner=request.app.state.live_grants, grant_id=scope.grant_id,
             ),

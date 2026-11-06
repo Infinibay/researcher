@@ -51,6 +51,14 @@ class CaptureWeb(Command):
     url: str = Field(min_length=1, max_length=4096)
 
 
+class CaptureSpider(Command):
+    """Select one optional provider scrape; credentials, budget and actor stay host-owned."""
+
+    url: str = Field(min_length=1, max_length=4096)
+    mode: Literal["smart", "browser", "http"] = "smart"
+    format: Literal["markdown", "text"] = "markdown"
+
+
 class CapturePaper(Command):
     """Capture exactly one supplied URL/DOI/arXiv locator in the credential-bound project."""
 

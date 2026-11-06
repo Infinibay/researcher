@@ -17,12 +17,28 @@ class ResearchService:
         reference_reader: ReferenceReader,
         web_fetcher: WebFetcher | None = None,
         context7=None,
+        spider=None,
     ):
         """Bind persistence and bounded readers without acquiring data at construction."""
         self.repository = repository
         self.reference_reader = reference_reader
         self.web_fetcher = web_fetcher
         self.context7 = context7
+        self.spider = spider
+
+    def capture_spider(self, scope, key, url, *, mode="smart", format="markdown"):
+        """Capture an explicitly selected advanced scraper with receipt reuse and authority revalidation at commit."""
+        from backend.research.spider import validate_spider
+
+        validate_spider(url, mode=mode, format=format)
+        intent = {"provider": "spider", "url": url, "mode": mode, "format": format}
+        existing = self.repository.lookup_operation(scope, key, "source.capture", intent)
+        if existing is not None:
+            return existing
+        if self.spider is None:
+            raise SourceUnavailable("Spider is not configured")
+        snapshot = self.spider.fetch(url, mode=mode, format=format)
+        return self.repository.capture_source(scope, key, snapshot, intent=intent)
 
     def capture_context7(self, scope, key, *, operation, query, library_name=None,
                          library_id=None, format="json"):

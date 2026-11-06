@@ -13,6 +13,7 @@ from backend.api.models.research import (
     CaptureContext7Search,
     CapturePaper,
     CaptureReference,
+    CaptureSpider,
     CaptureWeb,
     CaptureWiki,
     CaptureWikiCollection,
@@ -182,6 +183,14 @@ def capture_paper(command: CapturePaper, ctx: Context):
         url=command.url,
         doi=command.doi,
         arxiv_id=command.arxiv_id,
+    )
+
+
+@router.post("/sources/spider", response_model=SourceReceipt)
+def capture_spider(command: CaptureSpider, ctx: Context):
+    """Acquire one advanced scrape under the authenticated scope, with an immutable source receipt."""
+    return ctx.service.capture_spider(
+        ctx.scope, command.operation_key, command.url, mode=command.mode, format=command.format,
     )
 
 
