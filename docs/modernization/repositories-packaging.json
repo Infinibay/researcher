@@ -1,0 +1,47 @@
+{
+  "base_commit": "10ee78a",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "11fd995a25097121b4a016d2d9725a61bd0d339ccc9273dd448ed95f8fa886ed",
+  "observed": {
+    "passed": 22,
+    "failures": 0,
+    "skipped": 0,
+    "installed_distributions": 85,
+    "sdk": "1.30.0",
+    "excluded_frameworks": [
+      "chromadb",
+      "crewai",
+      "crewai-tools",
+      "fastmcp",
+      "fastmcp-slim",
+      "litellm",
+      "ollama",
+      "tree-sitter",
+      "tree-sitter-c",
+      "tree-sitter-javascript",
+      "tree-sitter-python",
+      "tree-sitter-rust",
+      "tree-sitter-typescript"
+    ],
+    "project_noneditable": true,
+    "backend_modules": 189,
+    "all_backend_imports_from_native_env": true,
+    "matched_application_members": 808,
+    "console_help": 0,
+    "console_missing_token": 2,
+    "console_real_stdio": true,
+    "console_created_database": false,
+    "real_model_turns": 0,
+    "controlled_native_turns": 0,
+    "actual_host_publications": 0,
+    "seconds": 7.642
+  },
+  "tests": [
+    "backend/tests/runtime/test_repository_reading.py",
+    "backend/tests/runtime/test_native_git_retirement.py",
+    "backend/tests/runtime/test_project_workspace.py"
+  ],
+  "excluded_preexisting_inverse_cases": [],
+  "bootstrap": "Existing clean native-only env; final noneditable wheel reinstalled offline without dependency changes. Python-I outside checkout; no inherited source or old site-packages. Explicit prepared local semantic assets.",
+  "limits": "Actual temporary Git branch/tree/blob observations and ownerHTTP/SQLite; branch movement keeps old full snapshot readable. Failed Git read is not an empty list. Existing retired legacy Git effects and project workspace guards remain covered. No native worker, model, Ken/ranking or remote service invoked. Not global/full-source-lifecycle/host-install/restore/visual/human proof."
+}

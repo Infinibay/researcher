@@ -430,3 +430,14 @@ usa el esquema actual y conserva estadísticas globales. [Contrato](project-work
 y [evidencia](../modernization/projects-results.json). Crear local/clonar/adoptar/
 reparar y la ruta Repositorios son el siguiente bloque; la vieja alta todavía
 mezcla creación remota, cambios de origin y force push y debe sustituirse.
+
+## Explorador de fuentes — 2026-11-06
+
+Repositorios deja de pedir alta mediante un rol retirado y permite registro explícito
+de carpeta existente, consulta de revisión completa y origen de PR. Reusa el paquete
+de registro de Proyectos. El lector local comprueba raíz exacta para no descubrir
+el Git padre, distingue fallo de lista vacía y conserva path/objeto. Lectura no
+inicia trabajo ni deriva aceptación de approved. [Contrato](repository-explorer.md),
+[resultados](../modernization/repositories-results.json). El alta genérica/API
+antigua sigue activa y pendiente de sustitución por crear/adoptar/clonar/reparar
+con dueño propio. No inventar un intento nativo para poder usar su ejecutor Git.

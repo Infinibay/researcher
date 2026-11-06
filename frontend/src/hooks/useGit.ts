@@ -10,6 +10,7 @@ import type {
   PRComment,
 } from '../types/api'
 
+/** Read only the selected project repository register; choosing a source never initializes Git. */
 export function useRepos(projectId: number | null) {
   return useQuery({
     queryKey: ['repos', projectId],
@@ -19,17 +20,19 @@ export function useRepos(projectId: number | null) {
   })
 }
 
+/** Read branch observations for one URL-encoded source; its head must be pinned before immutable file reads. */
 export function useRepoBranches(repoName: string | null, projectId: number | null) {
   return useQuery({
     queryKey: ['repo-branches', repoName, projectId],
     queryFn: () =>
       fetchApi<BranchDetail[]>(
-        buildUrl(`/api/git/repos/${repoName}/branches`, { project_id: projectId! }),
+        buildUrl(`/api/git/repos/${encodeURIComponent(repoName!)}/branches`, { project_id: projectId! }),
       ),
     enabled: repoName != null && projectId != null,
   })
 }
 
+/** Read a source tree at the caller-selected revision; query identity includes project, source and revision. */
 export function useRepoTree(
   repoName: string | null,
   projectId: number | null,
@@ -39,7 +42,7 @@ export function useRepoTree(
     queryKey: ['repo-tree', repoName, projectId, ref],
     queryFn: () =>
       fetchApi<RepoTreeEntry[]>(
-        buildUrl(`/api/git/repos/${repoName}/tree`, {
+        buildUrl(`/api/git/repos/${encodeURIComponent(repoName!)}/tree`, {
           project_id: projectId!,
           ref: ref!,
         }),
@@ -48,6 +51,7 @@ export function useRepoTree(
   })
 }
 
+/** Read one source path under the exact project/source/revision cache key without borrowing another file response. */
 export function useFileContent(
   repoName: string | null,
   projectId: number | null,
@@ -58,7 +62,7 @@ export function useFileContent(
     queryKey: ['file-content', repoName, projectId, path, ref],
     queryFn: () =>
       fetchApi<FileContent>(
-        buildUrl(`/api/git/repos/${repoName}/contents`, {
+        buildUrl(`/api/git/repos/${encodeURIComponent(repoName!)}/contents`, {
           project_id: projectId!,
           path: path!,
           ref: ref!,
@@ -68,6 +72,7 @@ export function useFileContent(
   })
 }
 
+/** Read historical PR records scoped to the selected project, without granting current acceptance. */
 export function usePRs(projectId: number | null) {
   return useQuery({
     queryKey: ['prs', projectId],
@@ -97,6 +102,7 @@ export function usePROwnerEntry(prId: number) {
   })
 }
 
+/** Read the original remote PR discussion; failed access remains an error, not an empty thread. */
 export function usePRComments(prId: number | null) {
   return useQuery({
     queryKey: ['pr-comments', prId],
@@ -105,6 +111,7 @@ export function usePRComments(prId: number | null) {
   })
 }
 
+/** Retain the old generic init consumer until explicit create/adopt/clone/repair replaces its backend; the selected explorer never calls it. */
 export function useCreateRepo() {
   const qc = useQueryClient()
   return useMutation({
@@ -125,6 +132,7 @@ export function useCreateRepo() {
   })
 }
 
+/** Post one explicit owner annotation and refresh that original thread; transport failure does not prove the annotation was absent. */
 export function useCreatePRComment() {
   const qc = useQueryClient()
   return useMutation({

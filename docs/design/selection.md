@@ -242,3 +242,13 @@ lectura sin convertir metadata en actividad. La implementación mantiene lista y
 documento en escritorio; en móvil abre el expediente con regreso/foco a su fila.
 Se comprobaron estados reales y errores/recuperación; no es aceptación completa.
 [Capturas, comparación y límites](audits/2026-11-06-projects/report.md).
+
+## Repositorios: explorador con registro — 2026-11-06
+
+Se eligió la primera de tres imágenes independientes por autorización del usuario;
+[comparación](concepts/repositories/selection.md), [prompts/hashes](concepts/repositories/manifest.json).
+Mantiene fuente, árbol y documento; revisiones en una lectura separada. El piloto
+usa objetos Git reales completos, registro existente y origen de PR. El móvil
+recompone la navegación y revela el archivo tras cargarlo. Alta/clonado/remoto/
+reparación y aceptación integral siguen pendientes.
+[QA final acotado](audits/2026-11-06-repositories/report.md).

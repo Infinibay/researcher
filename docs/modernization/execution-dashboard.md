@@ -5,11 +5,50 @@ Actualizado: 2026-11-06. Objetivo activo: implementar **todo** el [plan](../supe
 ## Estado comprobado
 
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor retirados; quedan consumidores, herramientas y dependencias antiguos.
-- Interfaz: siete pilotos, 21/36 conceptos de escritorio y 7/12 móviles; cinco rutas pendientes y 0/12 páginas completamente aceptadas.
+- Interfaz: ocho pilotos, 24/36 conceptos de escritorio y 8/12 móviles; cuatro rutas pendientes y 0/12 páginas completamente aceptadas.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: Proyectos y trabajo observado
+## Etapa actual: explorador de Repositorios; preparación de fuentes pendiente
+
+**Resultado utilizable:** explorador seleccionado entre tres conceptos desktop y
+uno móvil. Registro y lectura separados; árbol/archivo fijados al mismo commit
+completo, actualización explícita y blob ajeno rechazado. Código literal y Markdown
+con texto original; navegación móvil/foco y enlace exacto al origen de un PR.
+Registro de carpeta existente recupera la misma selección tras respuesta perdida.
+No inicia modelos ni declara aceptación/publicación desde el estado histórico.
+
+El lector antiguo devolvía SHA abreviado, ocultaba error como lista vacía y podía
+leer el Git padre desde una carpeta sin repositorio. Ahora exige raíz exacta,
+política Git sin credenciales/helpers/textconv, deadline15s y errores explícitos;
+rutas NUL/Unicode y SHA-1/SHA-256 conservan la identidad. **No representa propiedad
+de ejecución nativa ni una migración completa de todo el lector.**
+
+**Verificación:**22PASS6.832s fuente y22PASS7.642s wheel no editable,189imports
+instalados/808miembros/85distribuciones/sin frameworks antiguos.0turnos nativos,
+0modelos/efectos remotos.112tests frontend1.790s/build4.96s;15capturas navegador,
+0errores JS/axe en regiones revisadas/overflow. Capturas finales13–15 verifican
+código móvil visible y Markdown/texto original.14definiciones Python/40TS
+documentadas;0avisos nuevos/3heredados/4resueltos.
+[Resultados](repositories-results.json), [paquete](repositories-packaging.json),
+[contrato](../architecture/repository-explorer.md),
+[QA](../design/audits/2026-11-06-repositories/report.md).
+
+**Siguiente principal:** crear local/adoptar Git/clonar/crear remoto/reparar con
+propiedad e intención recuperable propias; reemplazar `RepositoryManager.init_repo`
+y su endpoint que todavía mezclan alta remota/origin/forcepush. El ejecutor nativo
+actual exige tarea/fuente de desarrollo reales; no fabricar una tarea para setup.
+El brief `repository-setup-brief.md` conserva la decisión y alternativas. Lectores
+grandes/síncronos, submódulos y anotaciones remotas con identidad retenida también
+necesitan integración. DD032 conserva sólo pulido del explorador.
+
+El plan completo sigue activo: cuatro rutas restantes/aceptación de las doce,
+settings/modelos, prompts/libros/semántica/ciencia/comprensión humana, terminal,
+historia/presupuesto,43escenarios/suite global, instalación/restore/inversas43–54,
+identidad de creación tras borrado DD030 y revisión final. No hay porcentaje global
+nuevo defendible ni sustitución de esos requisitos por un piloto.
+
+## Etapa anterior: Proyectos y trabajo observado
 
 **Resultado:** expediente elegido entre tres conceptos desktop/uno móvil, alcance
 editable con hash de la observación, selección aislada y fuentes existentes bajo
@@ -33,17 +72,8 @@ generación/cierre sintéticos;0errores JS/axe en regiones revisadas/overflow.
 [contrato](../architecture/project-workspace.md),
 [QA](../design/audits/2026-11-06-projects/report.md).
 
-**Siguiente principal:** Repositorios: separar crear local, adoptar, clonar y
-reparar; eliminar alta remota/cambio de origin/force push implícitos del camino
-antiguo, con operaciones recuperables y diseño profesional. Brief
-`repositories-page-brief.md`. La creación tras hard delete/restore requiere una
-política de identidad retenida (DD030) antes de la aceptación integral. DD031 es
-sólo etiqueta del control para grafos sin proceso; anotada para pulido.
-
-El alcance completo sigue abierto: cinco rutas restantes y aceptación de las doce,
-prompts/libros/modelos/settings/evaluaciones humanas/científicas, historia y
-presupuestos, adopción, paridad terminal,43escenarios/suite global, instalación/
-restore/inversas43–54 y revisión final. No reabrir recibos/kernel por detalles.
+El siguiente bloque indicado en ese corte era Repositorios. Arriba figura el
+explorador actual y el setup aún pendiente; los límites de Proyectos permanecen.
 
 ## Etapa anterior: informe y cierre explícito del proyecto
 

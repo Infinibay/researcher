@@ -1,6 +1,6 @@
 # QA visual de los pilotos de la modernización
 
-Resultado actual: **parcial; siete pilotos, 21/36 conceptos de escritorio, 7/12 móviles y 0/12 rutas aceptadas completamente**. Cinco rutas siguen pendientes de conceptos/implementación. Las secciones siguientes conservan evidencia histórica con su alcance original.
+Resultado actual: **parcial; ocho pilotos, 24/36 conceptos de escritorio, 8/12 móviles y 0/12 rutas aceptadas completamente**. Cuatro rutas siguen pendientes de conceptos/implementación. Las secciones siguientes conservan evidencia histórica con su alcance original.
 
 El bloqueo inicial de CUA queda como antecedente histórico. El plan autorizado
 ya exige Playwright y axe; Chromium local con sandbox funciona. No se necesita
@@ -87,3 +87,15 @@ cero errores JS/infracciones axe en las regiones revisadas/overflow horizontal.
 Se inspeccionaron concepto, escritorio y móvil. La fuente no comprobada sigue
 siendo desconocida; el borrado exige confirmación y protege historia. Pendientes
 aceptación humana/tecnologías de asistencia/zoom/otras rutas y shell integral.
+
+## Repositorios — 2026-11-06
+
+final result: passed — explorador y registro de carpeta existente; no aceptación
+integral de Repositorios ni del producto. [Comparación conjunta](docs/design/audits/2026-11-06-repositories/comparison-desktop.png)
+y [quince capturas/límites](docs/design/audits/2026-11-06-repositories/report.md).
+Se revisaron tipografía, espaciado, colores, calidad y contenido frente al concepto
+seleccionado. P2 móvil corregido: abrir archivo ahora revela texto tras cargarlo,
+con foco y contexto de fuente/revisión. Evidencia final13–15; sin P0/P1/P2 visuales
+observados en ese alcance. P3 DD032: densidad de rutas, líneas/sintaxis y pista de
+scroll. Crear/adoptar Git/clonar/remoto/reparar siguen pendientes funcionales, y
+comprensión humana/zoom/lector de pantalla/otros motores/aceptación global también.

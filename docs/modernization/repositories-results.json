@@ -1,0 +1,104 @@
+{
+  "base_commit": "10ee78a",
+  "status": "selected_repository_explorer_connected_setup_lifecycle_still_pending",
+  "ruling": "Deliver explorer/actual reading/existing-directory registration first, then explicit repository setup within unchanged full scope. Native Git executor needs a real admitted development task/source; do not fabricate an inference task or duplicate launch authority to initialize a source. This checkpoint does not claim create/clone/remote/repair migration complete.",
+  "red": {
+    "tree": "ERR_MODULE_NOT_FOUND before extracted hierarchy/identity module",
+    "file_reader": "3FAIL before actual reader component",
+    "branches": "Abbreviated head differs from full SHA; failed Git observation returned[]",
+    "parent_discovery": "1FAIL0.33s: ordinary child borrowed parent Git references instead of rejecting",
+    "formats": "2FAIL replaying prior quoted-path/SHA1-only reader behavior, corrected reader restored before final suite",
+    "mobile_target": "Actual Chromium assertion failed: selected code remained below primary viewport; reveal now waits for response before focus/scroll"
+  },
+  "source": {
+    "passed": 22,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 6.832
+  },
+  "installed": {
+    "passed": 22,
+    "failures": 0,
+    "skipped": 0,
+    "installed_distributions": 85,
+    "sdk": "1.30.0",
+    "excluded_frameworks": [
+      "chromadb",
+      "crewai",
+      "crewai-tools",
+      "fastmcp",
+      "fastmcp-slim",
+      "litellm",
+      "ollama",
+      "tree-sitter",
+      "tree-sitter-c",
+      "tree-sitter-javascript",
+      "tree-sitter-python",
+      "tree-sitter-rust",
+      "tree-sitter-typescript"
+    ],
+    "project_noneditable": true,
+    "backend_modules": 189,
+    "all_backend_imports_from_native_env": true,
+    "matched_application_members": 808,
+    "console_help": 0,
+    "console_missing_token": 2,
+    "console_real_stdio": true,
+    "console_created_database": false,
+    "real_model_turns": 0,
+    "controlled_native_turns": 0,
+    "actual_host_publications": 0,
+    "seconds": 7.642
+  },
+  "installed_receipt": "docs/modernization/repositories-packaging.json",
+  "frontend": {
+    "passed": 112,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 1.78981417,
+    "typescript_build": true,
+    "build_seconds": 4.96
+  },
+  "browser": {
+    "captures": 15,
+    "page_errors": 0,
+    "scoped_axe_violations": 0,
+    "source_posts": 2,
+    "markdown_raw_verified": true,
+    "full_page_acceptance": false,
+    "actual_owner_api_sqlite_react_temporary_git": true,
+    "historical_review_metadata": "synthetic",
+    "native_or_model_turns": 0,
+    "remote_effects": 0,
+    "evidence": "docs/design/audits/2026-11-06-repositories/evidence.json"
+  },
+  "documentation": {
+    "python_changed_or_new_definitions": 14,
+    "typescript_named_definitions_and_modules": 40,
+    "missing": 0,
+    "new_lint": 0,
+    "inherited_lint": 3,
+    "resolved_lint": 4
+  },
+  "design": {
+    "desktop_concepts_added": 3,
+    "mobile_added": 1,
+    "selected": "source-explorer",
+    "desktop_total": 24,
+    "mobile_total": 8,
+    "pilots": 8,
+    "fully_accepted": 0
+  },
+  "timing": {
+    "first_failure_artifact_utc": "2026-11-06T07:19:40.297879+00:00",
+    "recorded_utc": "2026-11-06T07:51:02.932676+00:00",
+    "artifact_window_seconds": 1883,
+    "limits": "Artifact span, not active engineering hours or a delivery estimate."
+  },
+  "limits": [
+    "Generic RepositoryManager init/API still reachable: explicit create/adopt Git/clone/remote/repair and original partial-effect reconciliation remain principal work.",
+    "Existing owner reader remains synchronous with15s calls and no complete large-output budget; this is not native actor/host isolation or unlimited-source proof.",
+    "Historical PR comment uncertain receipt is explicit, not remote idempotence proof; no actual external comment was sent.",
+    "Source paths/read metadata special cases/submodules, full source lifecycle, global43scenarios, settings/models/prompts/books/semantic/science/human/advancedterminal, four remaining routes and all12page acceptance, global suite/install/restore/inverses/final fresh review remain open."
+  ]
+}

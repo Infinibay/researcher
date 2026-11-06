@@ -1,0 +1,95 @@
+{
+  "date": "2026-11-06",
+  "base_commit": "10ee78a",
+  "generator": "image_gen.imagegen (built-in)",
+  "model": null,
+  "model_note": "Exact model not exposed; not inferred.",
+  "image_count": 4,
+  "selected_desktop": "source-explorer",
+  "selection": "selection.md",
+  "assets": [
+    {
+      "id": "source-explorer",
+      "surface": "desktop",
+      "image": "source-explorer.png",
+      "sha256": "58cf3dbb838b1782172c112c6b6c515824022194f95e6a7114b01254a42614b3",
+      "pixel_dimensions": [
+        1487,
+        1058
+      ],
+      "layout_target": [
+        1440,
+        1024
+      ],
+      "prompt": "source-explorer.prompt.txt",
+      "prompt_sha256": "8a189b6414b8eb139a785c1222fb61a3bccb8bf339e5910438a166caa842f915",
+      "input_images": [
+        "../../audits/2026-11-06-repositories/before-desktop.png",
+        "../../audits/2026-11-06-projects/01-desktop-selected-dossier.png"
+      ],
+      "inspected": true
+    },
+    {
+      "id": "source-catalog",
+      "surface": "desktop",
+      "image": "source-catalog.png",
+      "sha256": "66e36fb5aece2e2ea3681fa2e6601bb83716a1f7313a75de878925f44a125b37",
+      "pixel_dimensions": [
+        1487,
+        1058
+      ],
+      "layout_target": [
+        1440,
+        1024
+      ],
+      "prompt": "source-catalog.prompt.txt",
+      "prompt_sha256": "ca84145a70e9420a37dd93aa027308f3cb96a169fb33f77d1ba26d9e9a78fb85",
+      "input_images": [
+        "../../audits/2026-11-06-repositories/before-desktop.png",
+        "../../audits/2026-11-06-projects/01-desktop-selected-dossier.png"
+      ],
+      "inspected": true
+    },
+    {
+      "id": "review-desk",
+      "surface": "desktop",
+      "image": "review-desk.png",
+      "sha256": "a29ae11394a6d5b58ae30ff4fad9308f07d31d85ac146e7eb8aef44deddecef2",
+      "pixel_dimensions": [
+        1487,
+        1058
+      ],
+      "layout_target": [
+        1440,
+        1024
+      ],
+      "prompt": "review-desk.prompt.txt",
+      "prompt_sha256": "58989e78382810f1c206da64dc7f12131869780c80bd4fc1123d47066ef43013",
+      "input_images": [
+        "../../audits/2026-11-06-repositories/before-desktop.png",
+        "../../audits/2026-11-06-projects/01-desktop-selected-dossier.png"
+      ],
+      "inspected": true
+    },
+    {
+      "id": "source-explorer-mobile",
+      "surface": "mobile",
+      "image": "source-explorer-mobile.png",
+      "sha256": "77ccd2be38e7c8a76954e3298f90ea1ffe2595c047b63eb4022f584908801666",
+      "pixel_dimensions": [
+        852,
+        1846
+      ],
+      "layout_target": [
+        390,
+        844
+      ],
+      "prompt": "source-explorer-mobile.prompt.txt",
+      "prompt_sha256": "abe1f56973500897fedcf6acf7b26334a28ad6e8f671082e7081cdfc67094f83",
+      "input_images": [
+        "source-explorer.png"
+      ],
+      "inspected": true
+    }
+  ]
+}

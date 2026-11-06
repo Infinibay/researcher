@@ -9,6 +9,7 @@ import logging
 import re
 import sqlite3
 import subprocess
+from pathlib import Path
 
 from fastapi import APIRouter, HTTPException, Query
 
@@ -350,20 +351,44 @@ async def create_pr_comment(pr_id: int, body: PRCommentCreate):
 # ── Local Git Helpers ─────────────────────────────────────────────────────────
 
 
+def _git_read(local_path: str, *arguments: str, text: bool = True):
+    """Run bounded owner-selected Git observations without ambient credentials, helpers, pager or model command authority; this is not a native execution grant."""
+    from backend.runtime.development_workspace import _POLICY, git_environment
+
+    try:
+        return subprocess.run(
+            ["git", "--no-pager", *_POLICY, *arguments], cwd=local_path,
+            env=git_environment(Path('/run/researcher-readonly-git-home')),
+            capture_output=True, text=text, timeout=15,
+        )
+    except (OSError, subprocess.TimeoutExpired, UnicodeError) as error:
+        raise HTTPException(status_code=409, detail="No se pudo observar Git en la fuente seleccionada.") from error
+
+
+def _require_local_git_root(local_path: str):
+    """Reject Git's upward repository discovery: a registered ordinary child folder cannot borrow its parent's tree, references or file data."""
+    result = _git_read(local_path, 'rev-parse', '--show-toplevel')
+    try:
+        matches = result.returncode == 0 and Path(result.stdout.strip()).resolve(strict=True) == Path(local_path).resolve(strict=True)
+    except OSError:
+        matches = False
+    if not matches:
+        raise HTTPException(status_code=409, detail="La carpeta seleccionada no es la raíz de un repositorio Git disponible. No se consulta un repositorio padre.")
+
+
+def _require_read_ref(ref: str):
+    """Keep revision input in one data argument; an option-like or malformed reference cannot become a Git output or execution flag."""
+    if not isinstance(ref, str) or not ref or len(ref) > 1024 or ref.startswith('-') or any(ord(c) < 32 for c in ref):
+        raise HTTPException(status_code=422, detail="Selecciona una referencia Git explícita válida.")
+
+
 def _local_branches(local_path: str) -> list[BranchDetail]:
-    """List branches from local git repo with commit metadata."""
-    result = subprocess.run(
-        [
-            "git", "branch", "--format",
-            "%(refname:short)|||%(objectname:short)|||%(subject)|||%(creatordate:iso-strict)|||%(authorname)",
-        ],
-        cwd=local_path,
-        capture_output=True,
-        text=True,
-    )
+    """Return complete immutable branch-head identities; a failed observation must never masquerade as a successfully empty repository."""
+    _require_local_git_root(local_path)
+    result = _git_read(local_path, 'branch', '--no-color', '--format', '%(refname:short)|||%(objectname)|||%(subject)|||%(creatordate:iso-strict)|||%(authorname)')
     if result.returncode != 0:
         logger.warning("git branch failed in %s: %s", local_path, result.stderr)
-        return []
+        raise HTTPException(status_code=409, detail="No se pudieron observar las referencias Git de esta fuente.")
 
     branches: list[BranchDetail] = []
     for line in result.stdout.strip().splitlines():
@@ -381,14 +406,11 @@ def _local_branches(local_path: str) -> list[BranchDetail]:
 
 
 def _local_tree(local_path: str, ref: str) -> list[RepoTreeEntry]:
-    """Get file tree from local git repo at the given ref."""
+    """Read the selected repository's exact tree with complete UTF-8 path boundaries; failed root/ref observation is never an empty tree."""
+    _require_read_ref(ref)
+    _require_local_git_root(local_path)
     # Validate ref exists
-    check = subprocess.run(
-        ["git", "rev-parse", "--verify", ref],
-        cwd=local_path,
-        capture_output=True,
-        text=True,
-    )
+    check = _git_read(local_path, 'rev-parse', '--verify', '--end-of-options', ref)
     if check.returncode != 0:
         raise HTTPException(
             status_code=404,
@@ -396,12 +418,7 @@ def _local_tree(local_path: str, ref: str) -> list[RepoTreeEntry]:
         )
 
     # Get tree entries (blobs and trees) recursively
-    result = subprocess.run(
-        ["git", "ls-tree", "-rt", "--long", ref],
-        cwd=local_path,
-        capture_output=True,
-        text=True,
-    )
+    result = _git_read(local_path, 'ls-tree', '-rtz', '--long', ref)
     if result.returncode != 0:
         raise HTTPException(
             status_code=500,
@@ -409,7 +426,7 @@ def _local_tree(local_path: str, ref: str) -> list[RepoTreeEntry]:
         )
 
     entries: list[RepoTreeEntry] = []
-    for line in result.stdout.strip().splitlines():
+    for line in result.stdout.split('\0'):
         if not line:
             continue
         # Format: "<mode> <type> <sha>\t<path>"  (--long adds size before tab for blobs)
@@ -432,12 +449,10 @@ def _local_tree(local_path: str, ref: str) -> list[RepoTreeEntry]:
 
 
 def _local_file_content(local_path: str, path: str, ref: str) -> FileContent:
-    """Get file contents from local git repo at the given ref."""
-    result = subprocess.run(
-        ["git", "show", f"{ref}:{path}"],
-        cwd=local_path,
-        capture_output=True,
-    )
+    """Read a literal blob only from the selected Git root/ref, preserving its SHA-1 or SHA-256 identity without textconv or external diff."""
+    _require_read_ref(ref)
+    _require_local_git_root(local_path)
+    result = _git_read(local_path, 'show', '--no-ext-diff', '--no-textconv', f'{ref}:{path}', text=False)
     if result.returncode != 0:
         raise HTTPException(
             status_code=404,
@@ -452,7 +467,11 @@ def _local_file_content(local_path: str, path: str, ref: str) -> FileContent:
 
     # Compute blob SHA the same way git does: "blob <size>\0<content>"
     blob_header = f"blob {len(raw_bytes)}\0".encode()
-    sha = hashlib.sha1(blob_header + raw_bytes).hexdigest()  # noqa: S324
+    object_format = _git_read(local_path, 'rev-parse', '--show-object-format')
+    algorithm = object_format.stdout.strip()
+    if object_format.returncode != 0 or algorithm not in ('sha1', 'sha256'):
+        raise HTTPException(status_code=409, detail="No se confirmó el formato de objetos Git de la fuente.")
+    sha = hashlib.new(algorithm, blob_header + raw_bytes, usedforsecurity=False).hexdigest()
 
     return FileContent(
         path=path,

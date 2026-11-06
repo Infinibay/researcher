@@ -833,7 +833,11 @@
         "docs/modernization/semantic-product-evidence.json",
         "backend/tests/research/test_semantic_retrieval.py",
         "backend/tests/research/test_semantic_worker.py",
-        "backend/tests/research/test_retrieval_assets.py"
+        "backend/tests/research/test_retrieval_assets.py",
+        "docs/architecture/repository-explorer.md",
+        "docs/modernization/repositories-results.json",
+        "backend/tests/runtime/test_repository_reading.py",
+        "docs/design/audits/2026-11-06-repositories/evidence.json"
       ]
     },
     "E10": {
@@ -941,7 +945,11 @@
         "backend/tests/runtime/test_existing_source.py",
         "docs/modernization/broker-projection-evidence.json",
         "backend/tests/runtime/test_broker_projection.py",
-        "backend/tests/runtime/test_broker_rpc.py"
+        "backend/tests/runtime/test_broker_rpc.py",
+        "docs/architecture/repository-explorer.md",
+        "docs/modernization/repositories-results.json",
+        "backend/tests/runtime/test_repository_reading.py",
+        "docs/design/audits/2026-11-06-repositories/evidence.json"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
@@ -1144,7 +1152,11 @@
         "docs/modernization/product-runtime-evidence.json",
         "docs/modernization/product-stop-evidence.json",
         "backend/tests/runtime/test_runtime_service.py",
-        "backend/tests/runtime/test_inference_journal.py"
+        "backend/tests/runtime/test_inference_journal.py",
+        "docs/architecture/repository-explorer.md",
+        "docs/modernization/repositories-results.json",
+        "backend/tests/runtime/test_repository_reading.py",
+        "docs/design/audits/2026-11-06-repositories/evidence.json"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
@@ -1370,7 +1382,11 @@
         "docs/modernization/projects-packaging.json",
         "backend/tests/runtime/test_project_workspace.py",
         "backend/tests/runtime/test_owned_project_stop.py",
-        "docs/design/audits/2026-11-06-projects/evidence.json"
+        "docs/design/audits/2026-11-06-projects/evidence.json",
+        "docs/architecture/repository-explorer.md",
+        "docs/modernization/repositories-results.json",
+        "backend/tests/runtime/test_repository_reading.py",
+        "docs/design/audits/2026-11-06-repositories/evidence.json"
       ]
     }
   },
@@ -1854,11 +1870,19 @@
         "docs/design/concepts/projects/manifest.json",
         "docs/design/audits/2026-11-06-projects/report.md",
         "frontend/src/components/pages/ProjectsPage.tsx",
-        "docs/modernization/projects-results.json"
+        "docs/modernization/projects-results.json",
+        "docs/design/concepts/repositories/manifest.json",
+        "docs/design/audits/2026-11-06-repositories/report.md",
+        "docs/architecture/repository-explorer.md",
+        "docs/modernization/repositories-results.json",
+        "docs/modernization/repositories-packaging.json",
+        "backend/tests/runtime/test_repository_reading.py",
+        "frontend/tests/repository-explorer.test.ts",
+        "frontend/tests/repository-file-design.test.ts"
       ],
       "remaining": [
-        "Five routes still need concepts, selection and implementation: home, epics, agents, repositories and flow. Fifteen desktop concepts and five mobile adaptations remain.",
-        "All twelve routes/shared components still require complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
+        "Four routes still need concepts/selection/implementation: home, epics, agents and flow; twelve desktop concepts and four mobile adaptations remain.",
+        "Repository explorer is a pilot: explicit full create/adopt Git/clone/remote/repair remains principal work. All twelve routes/shared components require complete interaction/accessibility/human-comprehension acceptance; none is fully accepted."
       ]
     },
     "12_mobile_adaptations": {
@@ -1882,11 +1906,19 @@
         "docs/design/concepts/projects/manifest.json",
         "docs/design/audits/2026-11-06-projects/report.md",
         "frontend/src/components/pages/ProjectsPage.tsx",
-        "docs/modernization/projects-results.json"
+        "docs/modernization/projects-results.json",
+        "docs/design/concepts/repositories/manifest.json",
+        "docs/design/audits/2026-11-06-repositories/report.md",
+        "docs/architecture/repository-explorer.md",
+        "docs/modernization/repositories-results.json",
+        "docs/modernization/repositories-packaging.json",
+        "backend/tests/runtime/test_repository_reading.py",
+        "frontend/tests/repository-explorer.test.ts",
+        "frontend/tests/repository-file-design.test.ts"
       ],
       "remaining": [
-        "Five routes still need concepts, selection and implementation: home, epics, agents, repositories and flow. Fifteen desktop concepts and five mobile adaptations remain.",
-        "All twelve routes/shared components still require complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
+        "Four routes still need concepts/selection/implementation: home, epics, agents and flow; twelve desktop concepts and four mobile adaptations remain.",
+        "Repository explorer is a pilot: explicit full create/adopt Git/clone/remote/repair remains principal work. All twelve routes/shared components require complete interaction/accessibility/human-comprehension acceptance; none is fully accepted."
       ]
     },
     "design_selection": {
@@ -1918,7 +1950,15 @@
         "docs/design/concepts/projects/manifest.json",
         "docs/design/audits/2026-11-06-projects/report.md",
         "frontend/src/components/pages/ProjectsPage.tsx",
-        "docs/modernization/projects-results.json"
+        "docs/modernization/projects-results.json",
+        "docs/design/concepts/repositories/manifest.json",
+        "docs/design/audits/2026-11-06-repositories/report.md",
+        "docs/architecture/repository-explorer.md",
+        "docs/modernization/repositories-results.json",
+        "docs/modernization/repositories-packaging.json",
+        "backend/tests/runtime/test_repository_reading.py",
+        "frontend/tests/repository-explorer.test.ts",
+        "frontend/tests/repository-file-design.test.ts"
       ],
       "remaining": [
         "Six routes still need concepts, selection and implementation: home, projects, epics, agents, repositories and flow. Eighteen desktop concepts and six mobile adaptations remain.",
@@ -1957,11 +1997,19 @@
         "docs/design/concepts/projects/manifest.json",
         "docs/design/audits/2026-11-06-projects/report.md",
         "frontend/src/components/pages/ProjectsPage.tsx",
-        "docs/modernization/projects-results.json"
+        "docs/modernization/projects-results.json",
+        "docs/design/concepts/repositories/manifest.json",
+        "docs/design/audits/2026-11-06-repositories/report.md",
+        "docs/architecture/repository-explorer.md",
+        "docs/modernization/repositories-results.json",
+        "docs/modernization/repositories-packaging.json",
+        "backend/tests/runtime/test_repository_reading.py",
+        "frontend/tests/repository-explorer.test.ts",
+        "frontend/tests/repository-file-design.test.ts"
       ],
       "remaining": [
-        "Five routes still need concepts, selection and implementation: home, epics, agents, repositories and flow. Fifteen desktop concepts and five mobile adaptations remain.",
-        "All twelve routes/shared components still require complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
+        "Four routes still need concepts/selection/implementation: home, epics, agents and flow; twelve desktop concepts and four mobile adaptations remain.",
+        "Repository explorer is a pilot: explicit full create/adopt Git/clone/remote/repair remains principal work. All twelve routes/shared components require complete interaction/accessibility/human-comprehension acceptance; none is fully accepted."
       ]
     },
     "accessibility_e2e": {
@@ -1996,7 +2044,15 @@
         "docs/design/concepts/projects/manifest.json",
         "docs/design/audits/2026-11-06-projects/report.md",
         "frontend/src/components/pages/ProjectsPage.tsx",
-        "docs/modernization/projects-results.json"
+        "docs/modernization/projects-results.json",
+        "docs/design/concepts/repositories/manifest.json",
+        "docs/design/audits/2026-11-06-repositories/report.md",
+        "docs/architecture/repository-explorer.md",
+        "docs/modernization/repositories-results.json",
+        "docs/modernization/repositories-packaging.json",
+        "backend/tests/runtime/test_repository_reading.py",
+        "frontend/tests/repository-explorer.test.ts",
+        "frontend/tests/repository-file-design.test.ts"
       ],
       "notes": [
         "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json."
@@ -3431,6 +3487,27 @@
       "remaining": [
         "Full create/adopt/clone/repair Git/source lifecycle, retained creation identity after deletion/restore, settings/model/terminal/full-page/human integration",
         "Full original plan,43broad scenarios/global/restore/final independent review remain open"
+      ]
+    },
+    "repository_explorer": {
+      "status": "selected_explorer_and_existing_directory_registration_verified_full_setup_pending",
+      "evidence": [
+        "docs/design/concepts/repositories/manifest.json",
+        "docs/design/audits/2026-11-06-repositories/report.md",
+        "docs/architecture/repository-explorer.md",
+        "docs/modernization/repositories-results.json",
+        "docs/modernization/repositories-packaging.json",
+        "backend/tests/runtime/test_repository_reading.py",
+        "frontend/tests/repository-explorer.test.ts",
+        "frontend/tests/repository-file-design.test.ts"
+      ],
+      "implemented": [
+        "Three desktop concepts+mobile selected/implemented; complete immutable tree/blob read, explicit branch refresh, source scope/focus, historical review owner entry and original registration retry.",
+        "Actual full-SHA/error/parent-root failures reproduced and fixed;22installed contracts/112frontend/15browser captures. No native/model/remote-effect turn."
+      ],
+      "remaining": [
+        "Replace old init/create API with distinct original owner create/adopt/clone/remote/repair and partial-effect reconciliation; do not fabricate a native inference task.",
+        "Source reader budgets/concurrency/special metadata/submodules, remote annotation identity, full page/human/whole-plan/global/restore/final review remain."
       ]
     }
   }

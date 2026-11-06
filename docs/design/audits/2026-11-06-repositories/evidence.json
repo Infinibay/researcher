@@ -1,0 +1,168 @@
+{
+  "status": "passed",
+  "scope": "Actual owner API/SQLite/React/temporary local Git; historical review metadata synthetic, readonly empty/error/blob GET mocks explicit;0models/0remote writes.",
+  "states": [
+    {
+      "file": "01-desktop-source-registration-reply-lost.png",
+      "sha256": "75251937821b5f70d7d7efcb1bc074a494a5c89e4f8687e3f63cc3e441d0de11",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "02-desktop-selected-source-and-immutable-code.png",
+      "sha256": "b2049e62b6f382429d018cf597a963253ae396bcf5eed11cb91ebab73c84670b",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "03-desktop-branch-advanced-open-read-retains-original.png",
+      "sha256": "b2049e62b6f382429d018cf597a963253ae396bcf5eed11cb91ebab73c84670b",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "04-desktop-explicit-revision-update.png",
+      "sha256": "8ff27e0d5e6d0ebdffe8a47ea1e70a97450d34ad0587d82f76a65bff9fc77164",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "05-mobile-code-pane.png",
+      "sha256": "bb6eb5fe83817316f7d34fea121c94390301a225841f3a0aa3a8fd0144686bca",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "06-mobile-tree-focus-restored.png",
+      "sha256": "fd88bd97ea93d40b0dd5a856bee8dd44f3e49f0da19bc9a37abd6f22eac9d2dc",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "07-mobile-source-register.png",
+      "sha256": "5c43e4113d2bc14f77a16a6edfaef761bd85060ef714b88cb224d1a73c26659b",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "08-mobile-historical-review-and-owner-entry.png",
+      "sha256": "d87d8e58ac05819ec4c8f0e83380011d92eece311046c35027aaf22040d81801",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "09-mobile-source-without-git-error.png",
+      "sha256": "5af686e9441776e7737c426ce4d055ec796b745acd253d387f21ee4e6ca21164",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "10-mobile-mismatched-blob-rejected.png",
+      "sha256": "9820ab5711df402e968447b3fd364b8c00056beaf2ad6aaf80a4fa30883910b9",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "11-mobile-empty-register-read-mock.png",
+      "sha256": "787e476dcb345722e548e28f75a373d5387d610fd84dd3b712135340f9907c56",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "12-desktop-final-reader-after-root-guard.png",
+      "sha256": "ae0bde60870987e9485b4ac713534b364459169fb2f649e5f6d5664215d60991",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "13-mobile-file-target-visible-after-focus-fix.png",
+      "sha256": "9d7207a6b9e0c6a1c7ba9103faececdbc91c20a4f0caf385f57b03a4b760e371",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "14-mobile-markdown-reading.png",
+      "sha256": "cdc8dcb5039d6868704d54a4cd04c16b33821f734ce9d189cbe4ca0360319e60",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "15-desktop-final-selected-explorer.png",
+      "sha256": "6102fedf4ed81d20a32104107fbe91ae05557e4eac8a1304689efedd2a0c1830",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    }
+  ],
+  "source_requests": [
+    {
+      "name": "explorer-source",
+      "path": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/projects-browser-fixture/test_prepare0/workspaces/explorer-source"
+    },
+    {
+      "name": "explorer-source",
+      "path": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/projects-browser-fixture/test_prepare0/workspaces/explorer-source"
+    }
+  ],
+  "page_errors": [],
+  "initial_head": "76575c3cb8efb06865f3b3aaa9f534fc858510b4",
+  "previous_failure": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('region', { name: 'Explorador de la fuente' }).getByRole('button', { name: 'Carpeta src', exact: true })\u001b[22m\n",
+  "continuation": "Retained same fixture and successful exact registration recovery; branch reader returned abbreviated hashes. Original QA server424972/handle17805 terminal143 before starting updated reader. No native work restarted. Later root guard fixes parent discovery; server427653/handle8604 confirmed terminal143 before final reader restart; same source/HEAD retained.",
+  "advanced_head": "155eb0efff06c6aa78ed0a5701a222e5900b2931",
+  "branch_selector_failure": "TimeoutError: locator.selectOption: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('region', { name: 'Explorador de la fuente' }).getByLabel('Rama', { exact: true })\u001b[22m\n",
+  "exact_owner_link": "/tasks?project=101&task=1001",
+  "parent_discovery_failure": "TimeoutError: locator.waitFor: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('region', { name: 'Explorador de la fuente' }).getByText('No se pudo consultar Git.') to be visible\u001b[22m\n",
+  "mobile_focus_failure": "AssertionError [ERR_ASSERTION]: Opening a mobile file must reveal its actual text, not only the source header",
+  "mobile_target_box": {
+    "x": 48,
+    "y": 550.375,
+    "width": 294,
+    "height": 154.46875
+  },
+  "markdown_raw_verified": true,
+  "desktop_comparison_sha256": "a9064ad9510d61bb55e7ee0a308707f7fd2f1db927d28c941aa122885c832945"
+}

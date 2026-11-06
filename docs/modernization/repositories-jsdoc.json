@@ -1,0 +1,6 @@
+{
+  "base_commit": "10ee78a",
+  "scope": "All named functions/interfaces/classes/type aliases and modules in the eight new/shared UI files; no claim about every anonymous callback.",
+  "definitions_checked": 40,
+  "missing": []
+}

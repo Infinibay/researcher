@@ -17,9 +17,9 @@ archivos generados e inspeccionados, no pantallas aceptadas.
 | `/findings` | 3 | 1 | Registro con evidencia | Piloto en código | Parcial: filtros/citas/semántica/móvil; aceptación pendiente |
 | `/reports` | 3 | 1 | Lectura con trazabilidad | Piloto en código | Parcial: recorrido y capturas; aceptación humana pendiente |
 | `/files` | 3 | 1 | Archivo con inspector | Piloto en código | Parcial: recorrido/teclado; aceptación humana pendiente |
-| `/repositories` | 0 | 0 | Pendiente | Pendiente | Pendiente |
+| `/repositories` | 3 | 1 | Explorador con registro de fuentes | Piloto de exploración; alta completa pendiente | Parcial: snapshot/errores/origen/foco/móvil; aceptación pendiente |
 | `/flow` | 0 | 0 | Pendiente | Pendiente | Pendiente |
-| **Total** | **21 / 36** | **7 / 12** | **7 / 12** | **7 pilotos** | **0 / 12** |
+| **Total** | **24 / 36** | **8 / 12** | **8 / 12** | **8 pilotos** | **0 / 12** |
 
 Los prompts, archivos, hashes, tamaños y procedencia del piloto están en
 [concepts/tasks/manifest.json](concepts/tasks/manifest.json). Las tres alternativas
@@ -60,3 +60,9 @@ Actualización 2026-11-06: Proyectos usa el [expediente seleccionado](concepts/p
 fuentes, edición concurrente, recuperación de creación/planificación/Stop y borrado.
 Siete pilotos, cinco rutas aún sin conceptos/implementación y cero páginas con
 aceptación completa. Los totales anteriores son registros históricos.
+
+Actualización 2026-11-06, Repositorios: [cuatro conceptos y selección](concepts/repositories/manifest.json),
+[quince capturas/comparación y límites](audits/2026-11-06-repositories/report.md).
+Exploración, registro existente y revisión histórica implementados; crear/clonar/
+remoto/reparar aún pendientes como capacidad principal. Ocho pilotos, cuatro rutas
+sin conceptos/código y cero páginas con aceptación completa.

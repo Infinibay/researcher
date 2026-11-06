@@ -1,0 +1,44 @@
+{
+  "base_commit": "10ee78a",
+  "python_files": 2,
+  "new": [],
+  "inherited": [
+    [
+      "backend/api/routes/git.py",
+      "PLW1510",
+      "`subprocess.run` without explicit `check` argument"
+    ],
+    [
+      "backend/api/routes/git.py",
+      "S110",
+      "`try`-`except`-`pass` detected, consider logging the exception"
+    ],
+    [
+      "backend/api/routes/git.py",
+      "BLE001",
+      "Do not catch blind exception: `Exception`"
+    ]
+  ],
+  "resolved": [
+    [
+      "backend/api/routes/git.py",
+      "PLW1510",
+      "`subprocess.run` without explicit `check` argument"
+    ],
+    [
+      "backend/api/routes/git.py",
+      "PLW1510",
+      "`subprocess.run` without explicit `check` argument"
+    ],
+    [
+      "backend/api/routes/git.py",
+      "PLW1510",
+      "`subprocess.run` without explicit `check` argument"
+    ],
+    [
+      "backend/api/routes/git.py",
+      "RUF100",
+      "Unused `noqa` directive (non-enabled: `S324`)"
+    ]
+  ]
+}
