@@ -6668,3 +6668,32 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
 - Browser RED observed missing redesigned heading; implemented first9state trial passed. Preserved mobile page heading and added real prerequisite navigation/history exercise. Final10captures1440/390px,0Axe/JS/overflow,2explicit identicalPausePOST(503then202) acrossreload,0writesforreads.123frontendPASS1.920s/build4.01s;12namedTS/JS declarations documented. No backend/applicationwheel/global suite or real model/process repetition; this is controlled UI evidence.
 - Generated3independent desktop+mobile references, chose inspector under delegated authority. Real implementation deliberately avoids invented image reject-plan controls/chronology. Verified all12manifests,36desktop12mobile48uniquehashes/prompts/selectedidentities. Those three artifact deliverables nowverified;12pilots0fullyaccepted, no whole-plan completion. DD044 onlysecondarydensity; full interaction/human/runtime acceptance remains principal.
 - Next principal: remaining native engine consumers and global control/state coherence, followed by other retained principal capabilities/operation/migrationrestore/historybudget/CLI, realprompt/human/scientific evaluation,43scenarios/global/full-page/finalfreshreview. All secondary polish after all principal work. Images and frontend/browser tests terminal; close/poll owned Vite before local commit.
+
+## 2026-11-06 — controles generales con actividad y solicitudes nativas
+
+- Revalidated e81916e and the managed worktree after compaction. The preceding
+  output was truncated, but its browser process had ended and owned Vite663838
+  remained live; reused that server. Captured the initial missing-Stop failure
+  durably before implementation. No repeated native effects or model turns.
+- Replaced Header's metadata-driven active/completed controls with the existing
+  projectWorkspace snapshot and exact persisted Stop transport. A lost response
+  survives reload without expanding its scope to new work. Unknown is not idle;
+  the receipt is not closure. Legacy closure remains in the original dossier.
+  The native planning hook no longer reselects another project on a late reply.
+- Seven final controlled HTTP browser states pass at1440/390px;0headerAxe/JS/overflow,
+  four explicit POST(two identicalStop,oneStart,oneRejectedStop),0automatic writes.
+  Added exact rejection identity to prevent discarding a newer shared dossier
+  packet. First six states passed, final seven include that regression. Final
+  123frontendPASS1.808s/build3.96s. Four modules/18named functions JSDoc audited;
+  the audit found an inherited Header click handler and its JSDoc was added.
+  No backend/global/new
+  application-wheel or real-runtime claim. Captures visually inspected.
+- Macro-first and task-transition checklist retained in plan/dashboard/workflow.
+  DD045 is only visual density/hover;12pilots,36desktop12mobile,0fullyaccepted
+  unchanged. Next principal remains actual engine/legacy consumer retirement and
+  functional blockers, then migrationrestore/historybudget/CLI/operation, real
+  prompt/human/scientific evaluation,43scenarios/global/all12acceptance/finalreview.
+  All secondary details follow all principal tasks. No newagents/push/merge/deploy.
+- Final browser85180/build4841/unit79723 are terminal0. Verified owned Vite663838
+  command and cwd before SIGINT; subsequent process inspection confirms absence.
+  Restored only the generated tsbuildinfo. Protected untracked roots preserved.

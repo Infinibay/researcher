@@ -134,3 +134,12 @@ cabecera móvil compartida. Mantener el título accesible y la distinción entre
 relación causal e historia. La navegación, evidencia y pausa original ya funcionan.
 Recuperación física global, presupuestos completos, retiradas legacy y evaluación
 humana siguen como capacidades principales; no se difieren como pulido.
+
+## DD045 — presentación compacta de los controles generales
+
+Después de todas las capacidades principales: reducir la altura móvil de la
+cabecera y armonizar hover/espaciado de sus botones con el shell seleccionado,
+conservando errores y diferencia entre solicitud registrada y cierre físico.
+La consulta nativa, detención original y navegación ante respuesta tardía están
+comprobadas. La retirada del resto del engine, los estados físicos y la validación
+global siguen como trabajo principal; no se difieren aquí.

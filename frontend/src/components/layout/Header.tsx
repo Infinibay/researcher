@@ -3,18 +3,16 @@ import { closeOwnerSession } from '../../api/session'
 import { useWikiDrafts } from '../../stores/wikiDrafts'
 import { useState, useRef, useEffect } from 'react'
 import { useProjectStore } from '../../stores/project'
-import { useProjects, useProject, useStartProject, useStopProject } from '../../hooks/useProjects'
+import { useProjects, useProject } from '../../hooks/useProjects'
 import { useActivityFeedStore } from '../../stores/activityFeed'
-import { StatusDot } from '../common/StatusDot'
 import {ModelSettingsDialog} from './ModelSettingsDialog'
+import {ProjectExecutionControls} from './ProjectExecutionControls'
 
 /** Identify the visible project in both button text and its accessible name. */
 export function Header() {
   const { activeProjectId, setActiveProject } = useProjectStore()
   const { data } = useProjects()
   const { data: activeProject } = useProject(activeProjectId)
-  const startProject = useStartProject()
-  const stopProject = useStopProject()
   const [sessionError, setSessionError] = useState('')
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [modelSettings,setModelSettings]=useState<{projectId:number|null;projectName:string|null}|null>(null)
@@ -24,6 +22,7 @@ export function Header() {
   const unreadCount = useActivityFeedStore((s) => s.unreadCount)
 
   useEffect(() => {
+    /** Close this project's selector when a click moves outside its owned region. */
     const handler = (e: MouseEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) setDropdownOpen(false)
     }
@@ -40,14 +39,6 @@ export function Header() {
   }
 
   const projects = data?.projects ?? []
-  const isRunning = activeProject?.status === 'executing'
-  const projectStatus = activeProject
-    ? isRunning
-      ? 'active'
-      : activeProject.status === 'failed'
-        ? 'error'
-        : 'inactive'
-    : 'inactive'
 
   return (
     <header className="workspace-header flex h-16 shrink-0 items-center justify-between border-b border-surface-700 bg-surface-900 px-6">
@@ -61,7 +52,6 @@ export function Header() {
           >
             {activeProject ? (
               <>
-                <StatusDot status={projectStatus} animated={isRunning} />
                 {activeProject.name}
               </>
             ) : (
@@ -95,32 +85,10 @@ export function Header() {
         </div>
       </div>
 
-      <div className="flex items-center gap-3">
+      {activeProjectId !== null && <ProjectExecutionControls key={activeProjectId} projectId={activeProjectId}/>}
+      <div className="workspace-owner-actions flex items-center gap-3">
         {sessionError && <span role="alert" className="text-xs text-red-300">{sessionError}</span>}
         <button onClick={closeSession} className="rounded-md px-3 py-1.5 text-xs text-slate-300 hover:bg-surface-800 focus-visible:ring-2 focus-visible:ring-sky-400">Cerrar sesión</button>
-        {activeProject && (
-          <>
-            <span className="text-xs text-slate-500">{activeProject.status}</span>
-            {isRunning ? (
-              <button
-                onClick={() => stopProject.mutate(activeProject.id)}
-                disabled={stopProject.isPending}
-                className="rounded-md bg-red-800 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-900 disabled:opacity-50"
-              >
-                  Detener proyecto
-              </button>
-            ) : (
-              <button
-                onClick={() => startProject.mutate(activeProject.id,{onError:error=>setSessionError(`No se confirmó la planificación. Conservamos la solicitud original. ${error.message}`),onSuccess:()=>setSessionError('')})}
-                disabled={startProject.isPending || activeProject.status === 'completed'}
-                className="rounded-md bg-emerald-800 px-3 py-1.5 text-xs font-medium text-white hover:bg-emerald-900 disabled:opacity-50"
-              >
-                  {startProject.hasSavedStart(activeProject.id)?'Reenviar el mismo inicio':'Planificar proyecto'}
-              </button>
-            )}
-          </>
-        )}
-
         <button onClick={()=>setModelSettings({projectId:activeProjectId,projectName:activeProject?.name??null})}>Modelos</button>
         {modelSettings&&<ModelSettingsDialog {...modelSettings} onClose={()=>setModelSettings(null)}/>}
         <button

@@ -1,0 +1,88 @@
+{
+  "scope": "Controlled HTTP fixtures, no actual runtime or user effects.",
+  "states": [
+    {
+      "name": "01-completed-metadata-active-native",
+      "width": 1440,
+      "axe": 0
+    },
+    {
+      "name": "02-stop-reply-lost",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "03-original-stop-new-work-preserved",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "04-executing-metadata-idle-native",
+      "width": 1440,
+      "axe": 0
+    },
+    {
+      "name": "05-unknown-is-not-idle",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "06-legacy-requires-original-owner",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "07-old-rejection-cannot-discard-new-packet",
+      "width": 390,
+      "axe": 0
+    }
+  ],
+  "writes": [
+    {
+      "path": "/api/projects/1/stop",
+      "method": "POST",
+      "body": {
+        "operation_key": "6b7351dd-896a-4591-9c3f-de81951fcca3",
+        "task_id": 31,
+        "scope_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "path": "/api/projects/1/stop",
+      "method": "POST",
+      "body": {
+        "operation_key": "6b7351dd-896a-4591-9c3f-de81951fcca3",
+        "task_id": 31,
+        "scope_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "path": "/api/projects/2/start",
+      "method": "POST",
+      "body": {
+        "operation_key": "1e4fe55c-a9dc-4b8e-8445-086fa510fcad",
+        "prompt": null,
+        "repository_id": null
+      }
+    },
+    {
+      "path": "/api/projects/1/stop",
+      "method": "POST",
+      "body": {
+        "operation_key": "a77d7a63-8820-42ca-a2b3-d673da5ee97f",
+        "task_id": 31,
+        "scope_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    }
+  ],
+  "errors": [],
+  "checks": [
+    "metadata-completed-does-not-hide-stop",
+    "metadata-executing-does-not-invent-activity",
+    "same-stop-after-reload-does-not-retarget-new-work",
+    "late-planning-does-not-change-selected-project",
+    "query-error-is-not-idle",
+    "legacy-teardown-remains-in-original-dossier",
+    "old-rejection-cannot-discard-a-newer-dossier-packet"
+  ]
+}

@@ -495,7 +495,11 @@
         "docs/modernization/projects-packaging.json",
         "backend/tests/runtime/test_project_workspace.py",
         "backend/tests/runtime/test_owned_project_stop.py",
-        "docs/design/audits/2026-11-06-projects/evidence.json"
+        "docs/design/audits/2026-11-06-projects/evidence.json",
+        "frontend/src/components/layout/ProjectExecutionControls.tsx",
+        "frontend/tests/project-controls.browser.mjs",
+        "docs/design/audits/2026-11-06-project-controls/report.md",
+        "docs/design/audits/2026-11-06-project-controls/evidence.json"
       ],
       "remaining": [
         "Durable product startup/shutdown and all tool lifecycle integration; old flows are not covered by owned command evidence",
@@ -736,7 +740,11 @@
         "docs/modernization/projects-packaging.json",
         "backend/tests/runtime/test_project_workspace.py",
         "backend/tests/runtime/test_owned_project_stop.py",
-        "docs/design/audits/2026-11-06-projects/evidence.json"
+        "docs/design/audits/2026-11-06-projects/evidence.json",
+        "frontend/src/components/layout/ProjectExecutionControls.tsx",
+        "frontend/tests/project-controls.browser.mjs",
+        "docs/design/audits/2026-11-06-project-controls/report.md",
+        "docs/design/audits/2026-11-06-project-controls/evidence.json"
       ]
     },
     "E07": {
@@ -1443,7 +1451,11 @@
         "docs/architecture/repository-explorer.md",
         "docs/modernization/repositories-results.json",
         "backend/tests/runtime/test_repository_reading.py",
-        "docs/design/audits/2026-11-06-repositories/evidence.json"
+        "docs/design/audits/2026-11-06-repositories/evidence.json",
+        "frontend/src/components/layout/ProjectExecutionControls.tsx",
+        "frontend/tests/project-controls.browser.mjs",
+        "docs/design/audits/2026-11-06-project-controls/report.md",
+        "docs/design/audits/2026-11-06-project-controls/evidence.json"
       ]
     }
   },

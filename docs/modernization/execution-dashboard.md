@@ -16,7 +16,27 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: doce páginas piloto; continúa el engine y la retirada antigua
+## Etapa actual: controles generales conectados al runtime nativo
+
+La cabecera consulta actividad real registrada y deja de decidir por etiquetas
+`completed`/`executing`. La detención conserva su solicitud exacta después de
+una respuesta perdida y una recarga; recuperar el recibo no amplía el alcance al
+trabajo nuevo. La planificación tardía no cambia el proyecto elegido después.
+El cierre del controlador anterior se conserva en su expediente.
+
+**Comprobado:** siete estados de navegador a 1440/390 px, sin incidencias Axe/JS ni
+desbordamiento; 123 pruebas frontend pasan y build en 3,96 s. Cuatro módulos y 18 funciones
+con JSDoc. [Resultado y límites](../design/audits/2026-11-06-project-controls/report.md).
+No es una prueba nueva de cierre físico, wheel o suite global. Siguen doce pilotos,
+48 conceptos comprobados y 0 páginas con aceptación integral.
+
+**Siguiente principal:** continuar retirando los consumidores antiguos del engine
+y resolver sus bloqueos funcionales; después migraciones/restore, operación,
+historial/presupuestos, CLI, evaluaciones reales/humanas y validación global.
+DD045 conserva sólo el ajuste visual secundario de la cabecera. La lista del chat
+se actualiza en cada cambio de tarea, manteniendo todos los pendientes originales.
+
+## Etapa anterior: doce páginas piloto; continúa el engine y la retirada antigua
 
 Ejecución consulta planes/grafos/entregas reales, muestra dependencias y evidencia
 recibida, separa historia del avance vigente y conserva enlaces originales.

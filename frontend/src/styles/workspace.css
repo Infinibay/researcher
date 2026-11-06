@@ -8,6 +8,16 @@
 .workspace-skip { position: fixed; top: -5rem; left: 1rem; background: #fffefa; color: #24533e; padding: .75rem 1rem; border: 2px solid #24533e; z-index: 100; }
 .workspace-skip:focus { top: .5rem; }
 .workspace-header :where(button, a):focus-visible, .workspace-mobile-nav :where(button, a):focus-visible { outline: 2px solid #5da97c; outline-offset: 3px; }
+.app-shell .workspace-header { height: auto; min-height: 4rem; gap: .75rem; padding-block: .5rem; flex-wrap: wrap; }
+.project-execution-controls { flex: 1 1 28rem; min-width: 0; font-size: .75rem; }
+.project-execution-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; }
+.project-execution-controls :where(button, a) { border: 1px solid #68766e; border-radius: .25rem; padding: .4rem .55rem; }
+.project-execution-controls button:disabled { opacity: .55; cursor: not-allowed; }
+.project-execution-controls .project-execution-stop { color: #fff; background: #912d35; border-color: #912d35; }
+.project-execution-controls p { margin-top: .4rem; }
+.project-execution-controls [role='alert'] { color: #fca5a5; }
+.project-execution-observation { flex-basis: 100%; }
+.workspace-owner-actions { flex-wrap: wrap; }
 .app-shell:has(.task-workbench) .workspace-sidebar > aside { width: 12rem; background: #20282b; border-color: #3c4647; }
 .app-shell:has(.task-workbench) .workspace-sidebar a[aria-current='page'] { color: #e8f1e6; background: #354d42; }
 .app-shell:has(.task-workbench) .workspace-sidebar a { font-size: .8125rem; gap: .625rem; }
@@ -17,6 +27,7 @@
 .app-shell:has(.task-workbench) .workspace-header :where(.bg-surface-800, .bg-surface-900) { background: #fffefa; }
 .app-shell:has(.task-workbench) .workspace-header .border-surface-700 { border-color: #d6ddd5; }
 .app-shell:has(.task-workbench) .workspace-header .text-red-300 { color: #9f2937; }
+.app-shell:has(.task-workbench) .project-execution-controls [role='alert'] { color: #9f2937; }
 .app-shell:has(.task-workbench) .workspace-header button:hover { background: #e9f0e7; color: #242d2a; }
 @media (max-width: 900px) {
   .workspace-sidebar { display: none; }

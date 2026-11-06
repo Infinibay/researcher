@@ -70,12 +70,17 @@ export function useDeleteProject() {
   })
 }
 
-/** Start one native project plan with persisted original intent and open its owner-review task, without legacy flow threads. */
+/** Start an original native plan and open its review only while its project remains selected. */
 export function useStartProject() {
-  const qc = useQueryClient(),navigate=useNavigate(),setActiveProject=useProjectStore(state=>state.setActiveProject)
+  const qc = useQueryClient(),navigate=useNavigate()
   const mutation=useMutation({
     mutationFn:(id:number)=>startProjectPlanning(sessionStorage,id),
-    onSuccess:(receipt,id)=>{qc.invalidateQueries({queryKey:['projects']});qc.invalidateQueries({queryKey:['project',id]});setActiveProject(id);navigate(`/tasks?project=${id}&task=${receipt.planning_task_id}`)},
+    onSuccess:(receipt,id)=>{
+      qc.invalidateQueries({queryKey:['projects']})
+      qc.invalidateQueries({queryKey:['project',id]})
+      qc.invalidateQueries({queryKey:['project-workspace',id]})
+      if(useProjectStore.getState().activeProjectId===id)navigate(`/tasks?project=${id}&task=${receipt.planning_task_id}`)
+    },
   })
   /** Expose an existing original start so reload does not disguise its retry as a fresh planning request. */
   function hasSavedStart(id:number){try{return typeof sessionStorage!=="undefined"&&sessionStorage.getItem(`researcher:project-plan-start:v1:${id}`)!==null}catch{return false}}

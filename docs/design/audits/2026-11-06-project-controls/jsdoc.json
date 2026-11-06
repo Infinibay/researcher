@@ -1,0 +1,134 @@
+[
+  {
+    "path": "frontend/src/components/layout/ProjectExecutionControls.tsx",
+    "name": "@module",
+    "line": 1,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/layout/ProjectExecutionControls.tsx",
+    "name": "ProjectExecutionControls",
+    "line": 10,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/layout/ProjectExecutionControls.tsx",
+    "name": "restorePending",
+    "line": 21,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/layout/ProjectExecutionControls.tsx",
+    "name": "refresh",
+    "line": 35,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/layout/ProjectExecutionControls.tsx",
+    "name": "requestStop",
+    "line": 64,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/layout/ProjectExecutionControls.tsx",
+    "name": "discardRejectedStop",
+    "line": 81,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/layout/ProjectExecutionControls.tsx",
+    "name": "requestPlan",
+    "line": 93,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/layout/Header.tsx",
+    "name": "@module",
+    "line": 1,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/layout/Header.tsx",
+    "name": "Header",
+    "line": 12,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/layout/Header.tsx",
+    "name": "handler",
+    "line": 26,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/components/layout/Header.tsx",
+    "name": "closeSession",
+    "line": 34,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/hooks/useProjects.ts",
+    "name": "@module",
+    "line": 1,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/hooks/useProjects.ts",
+    "name": "useProjects",
+    "line": 10,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/hooks/useProjects.ts",
+    "name": "useProject",
+    "line": 18,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/hooks/useProjects.ts",
+    "name": "useCreateProject",
+    "line": 27,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/hooks/useProjects.ts",
+    "name": "useUpdateProject",
+    "line": 42,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/hooks/useProjects.ts",
+    "name": "useDeleteProject",
+    "line": 58,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/hooks/useProjects.ts",
+    "name": "useStartProject",
+    "line": 74,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/hooks/useProjects.ts",
+    "name": "hasSavedStart",
+    "line": 86,
+    "documented": true
+  },
+  {
+    "path": "frontend/src/hooks/useProjects.ts",
+    "name": "useStopProject",
+    "line": 92,
+    "documented": true
+  },
+  {
+    "path": "frontend/tests/project-controls.browser.mjs",
+    "name": "@module",
+    "line": 1,
+    "documented": true
+  },
+  {
+    "path": "frontend/tests/project-controls.browser.mjs",
+    "name": "capture",
+    "line": 39,
+    "documented": true
+  }
+]
