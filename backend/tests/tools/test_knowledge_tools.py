@@ -1,6 +1,8 @@
 """Tests for knowledge tools."""
 
 import json
+import sqlite3
+from contextlib import closing
 
 from backend.tools.base.context import set_context
 from backend.tools.knowledge import (
@@ -10,7 +12,14 @@ from backend.tools.knowledge import (
     ValidateFindingTool,
     WriteWikiTool,
 )
-from backend.tools.task import CreateTaskTool
+
+
+def _seed_research_task(database):
+    """Create historical fixture data directly without depending on a retired task tool."""
+    with closing(sqlite3.connect(database)) as conn, conn:
+        return conn.execute(
+            "INSERT INTO tasks(project_id,type,title,description,status,created_by) VALUES(1,'research','Research','Test','backlog','agent-1')"
+        ).lastrowid
 
 
 class TestRecordFindingTool:
@@ -18,16 +27,7 @@ class TestRecordFindingTool:
 
     def test_record_finding(self, test_db, agent_context):
         """A legacy finding retains caller confidence but begins provisional; native review remains separate."""
-        # Create a task first (findings need a task_id)
-        create_task = CreateTaskTool()
-        r = json.loads(
-            create_task._run(
-                title="Research task",
-                description="Test",
-                type="research",
-            )
-        )
-        set_context(task_id=r["task_id"])
+        set_context(task_id=_seed_research_task(test_db))
 
         tool = RecordFindingTool()
         result = json.loads(
@@ -71,15 +71,7 @@ class TestValidateRejectFinding:
 
     def _create_finding(self, test_db, agent_context):
         """Bind a real fixture task and persist the provisional candidate used by review adapters."""
-        create_task = CreateTaskTool()
-        r = json.loads(
-            create_task._run(
-                title="Research",
-                description="Test",
-                type="research",
-            )
-        )
-        set_context(task_id=r["task_id"])
+        set_context(task_id=_seed_research_task(test_db))
 
         tool = RecordFindingTool()
         result = json.loads(

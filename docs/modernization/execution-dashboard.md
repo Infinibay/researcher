@@ -16,7 +16,36 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: contexto de tareas y continuidad nativos
+## Etapa actual: herramientas antiguas de tareas retiradas
+
+Se retiran 15 módulos/14 herramientas después de mapear sus capacidades al host
+nativo y al espacio de tareas. No se alteran datos históricos. Se mantienen
+planificación, claim único, correcciones, revisión, aceptación, lecturas,
+comentarios y última nota. [Mapa y decisiones](../architecture/native-task-retirement.md).
+
+**Comprobado:** 120 pruebas pasan en fuente y 120 instaladas; ambas baterías
+conservan dos fallos de migración/inversa reproducidos sobre el commit anterior.
+El lote de compatibilidad pasa 14 y conserva tres fallos previos de conocimiento.
+Dos tests del auditor de prompts pasan. 709 archivos Python/SQL coinciden,
+268 imports proceden del entorno y hay 83 distribuciones sin frameworks antiguos.
+Nueve definiciones nuevas/modificadas documentadas; 328 candidatos de prompt en
+400 archivos, 260 archivados y ninguna revisión estática pendiente.
+
+**Lista vigente:**
+- Cerrado recientemente: web; contexto/comentarios/continuidad; retirada de tareas.
+- En curso: comunicación entre agentes, con identidad, entrega y efectos explícitos.
+- Después: proyecto, conocimiento y las cinco bibliotecas legacy restantes.
+- Pendiente principal: operación; migraciones/restore y datos históricos;
+  historial completo/presupuestos; CLI; evaluación real, humana, científica y
+  global; aceptación integral de las 12 páginas. Siguen 43 escenarios abiertos,
+  12 pilotos y 48 conceptos. No hay porcentaje global defendible.
+- Al final: detalles secundarios, incluido un import sin usar DD053.
+
+Se retiran 26 tests del contrato viejo y se traslada uno de diálogo; no se
+cuentan como fallos reparados. Los fallos de datos/restore y conocimiento siguen
+en sus bloques principales, no en la lista de pulido.
+
+## Etapa anterior: contexto de tareas y continuidad nativos
 
 El catálogo nativo incorpora consulta de tareas/dependencias/historial, comentarios
 con autor real y notas de continuidad que separan observaciones de suposiciones.

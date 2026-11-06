@@ -3894,9 +3894,24 @@
         "Shared MCP/native role schemas;73 source and73 installed tests pass,4 semantic model variants skipped in each."
       ],
       "remaining": [
-        "Complete task lifecycle capability mapping and wrapper retirement alongside communication/project/knowledge.",
+        "Task wrappers are now removed; communication/project/knowledge and the wider lifecycle/global evaluation remain principal work.",
         "All-version note history, historical migration/restore and operational acceptance remain principal work.",
         "Model/human/scientific/global evaluation and12fullpage acceptance;43scenarios remain open."
+      ]
+    },
+    "native_task_tool_retirement": {
+      "status": "complete",
+      "evidence": [
+        "docs/architecture/native-task-retirement.md",
+        "docs/modernization/task-retirement-results.json",
+        "docs/modernization/task-retirement-packaging.json",
+        "backend/tests/runtime/test_native_adapter_retirement.py"
+      ],
+      "scope": "Removal of15legacy task modules with14capabilities mapped to native host/business contracts; no task data deletion. This scoped deliverable does not close the engine/global migration or any of43broad scenarios.",
+      "limitations": [
+        "2native migration/inverse failures and3legacy knowledge failures reproduced against baseline; not classified as fixes.",
+        "26obsolete tests retired,1dialogue test relocated; no reduction of global failures is inferred.",
+        "Other tool families/dependencies and whole-product acceptance remain."
       ]
     }
   }

@@ -65,8 +65,8 @@ su modelo local fijado. Dos pruebas adicionales del auditor de prompts pasan.
 [Resultados](../modernization/task-workspace-results.json) y
 [paquete instalado](../modernization/task-workspace-packaging.json).
 
-No se han retirado todavía los wrappers de tareas ni se da por terminada la
-migración de comunicación, proyecto o conocimiento. Falta completar su mapa de
-equivalencia, preservar las capacidades útiles y retirar sus dependencias.
+Los wrappers de tareas se retiraron tras completar su
+[mapa de capacidades](native-task-retirement.md). Sigue pendiente la migración
+de comunicación, proyecto y conocimiento, con sus capacidades y dependencias.
 La evaluación con modelos, comprensión humana, ciencia, operación y aceptación
 integral de las páginas sigue abierta. No se usaron llamadas pagadas ni datos reales.

@@ -596,3 +596,17 @@ su fixture de modelo no configurado. [Contrato](native-task-workspace.md).
 Los wrappers de tareas permanecen hasta completar su mapa de capacidades de
 planificación/transiciones/aceptación. Comunicación, proyecto, conocimiento y
 las cinco dependencias legacy todavía son trabajo principal.
+
+## Herramientas de tareas retiradas — 2026-11-06
+
+Se retiran 15 módulos/14 herramientas; sus capacidades quedan en planificación,
+admisión, revisión/aceptación del host y el contexto nativo de tareas. Los datos
+históricos permanecen. Se retiran la deduplicación semántica imperativa de títulos
+y el cierre automático de padres por etiquetas terminales.
+[Mapa completo](native-task-retirement.md).
+120 tests pasan en fuente y paquete; ambos mantienen dos fallos de migración
+reproducidos en el estado anterior. Los fixtures de conocimiento ya no dependen
+de crear tareas con el wrapper; su lote de compatibilidad conserva tres fallos
+previos. El diálogo del test de integración antiguo se traslada y pasa.
+Siguiente principal: comunicación; después proyecto/conocimiento y las cinco
+bibliotecas legacy. El cierre global y los datos/restore siguen pendientes.

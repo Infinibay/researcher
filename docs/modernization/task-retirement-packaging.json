@@ -1,0 +1,32 @@
+{
+  "base_commit": "f70fc00",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "sha256": "f008028f42b78189aa33ff2ddb9ced423a2d49afca6360aa33091661e963dd1b",
+  "observed": {
+    "exit_code": 1,
+    "cases": 122,
+    "failed": 2,
+    "skipped": 0,
+    "seconds": 59.308,
+    "all_backend_imports_installed": true,
+    "backend_modules": 268,
+    "matching_python_sql": 709,
+    "installed_distributions": 83,
+    "legacy_installed": false,
+    "real_model_calls": 0,
+    "real_provider_calls": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_native_adapter_retirement.py",
+    "backend/tests/research/test_task_workspace.py",
+    "backend/tests/runtime/test_coordination.py",
+    "backend/tests/runtime/test_project_planning.py",
+    "backend/tests/runtime/test_plan_execution.py",
+    "backend/tests/runtime/test_plan_reauthorization.py",
+    "backend/tests/runtime/test_result_acceptance.py",
+    "backend/tests/runtime/test_code_acceptance.py",
+    "backend/tests/runtime/test_project_completion.py",
+    "backend/tests/runtime/test_investigation.py"
+  ],
+  "limits": "Native task-tool removal and existing task workspace, planning/execution/correction/claim/review/acceptance/project completion behavior. Two source migration/inverse tests fail identically on baseline f70fc00 and remain explicit; the selected suite is not fully green. No paid model/provider, user data, global-suite or whole-page acceptance claim. Legacy compatibility tests run separately in the existing explicit legacy environment. Existing development seed db/seeds/dev_data.sql remains outside unchanged db/*.sql package data."
+}

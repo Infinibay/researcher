@@ -1,0 +1,91 @@
+{
+  "base_commit": "f70fc00",
+  "source": {
+    "cases": 122,
+    "passed": 120,
+    "failed": {
+      "test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history[frozen_author]": "RuntimeError: Development rollback refused: execution history or live authority requires forward repair or explicit backup restore",
+      "test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_report": "assert 55 == 51"
+    },
+    "skipped": 0,
+    "seconds": 58.553
+  },
+  "installed": {
+    "cases": 122,
+    "passed": 120,
+    "failed": {
+      "test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history[frozen_author]": "RuntimeError: Development rollback refused: execution history or live authority requires forward repair or explicit backup restore",
+      "test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_report": "assert 55 == 51"
+    },
+    "skipped": 0,
+    "seconds": 59.308
+  },
+  "legacy_compatibility": {
+    "cases": 17,
+    "passed": 14,
+    "failed": {
+      "test_record_finding": "AssertionError: assert 'Finding reco... successfully' == 'provisional'\n  \n  - provisional\n  + Finding recorded successfully",
+      "test_validate_finding": "KeyError: 'status'",
+      "test_reject_finding": "KeyError: 'status'"
+    },
+    "skipped": 0,
+    "seconds": 5.285
+  },
+  "legacy_compatibility_baseline": {
+    "cases": 16,
+    "passed": 13,
+    "failed": {
+      "test_record_finding": "AssertionError: assert 'Finding reco... successfully' == 'provisional'\n  \n  - provisional\n  + Finding recorded successfully",
+      "test_validate_finding": "KeyError: 'status'",
+      "test_reject_finding": "KeyError: 'status'"
+    },
+    "skipped": 0,
+    "seconds": 4.554
+  },
+  "migration_baseline": {
+    "schema51": "assert 55 == 51",
+    "inverse": {
+      "test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history[frozen_author]": "RuntimeError: Development rollback refused: execution history or live authority requires forward repair or explicit backup restore"
+    }
+  },
+  "baseline_preparation_note": "Initial archive-only inverse probe lacked the untracked compiled _domain_spawn extension and produced a setup error. The subsequent inverse probe supplied the existing extension after checking all C/H sources match baseline; it reproduced the same rollback refusal. Both logs retained.",
+  "retired_modules": [
+    "backend/tools/task/__init__.py",
+    "backend/tools/task/add_comment.py",
+    "backend/tools/task/approve_task.py",
+    "backend/tools/task/check_dependencies.py",
+    "backend/tools/task/create_task.py",
+    "backend/tools/task/get_task.py",
+    "backend/tools/task/load_session_note.py",
+    "backend/tools/task/read_comments.py",
+    "backend/tools/task/read_task_history.py",
+    "backend/tools/task/read_tasks.py",
+    "backend/tools/task/reject_task.py",
+    "backend/tools/task/save_session_note.py",
+    "backend/tools/task/set_dependencies.py",
+    "backend/tools/task/take_task.py",
+    "backend/tools/task/update_status.py"
+  ],
+  "retired_test_functions": 26,
+  "relocated_test_functions": 1,
+  "remaining_static_task_imports": [],
+  "import_scan_scope": "All owned backend/ and scripts/ Python AST, including tests and relative imports. Dynamic/external imports unknown.",
+  "docstrings": 9,
+  "lint_deferred": "One preexisting unused pytest import in the modified legacy communication test file; DD053.",
+  "prompt_inventory": {
+    "candidates": 328,
+    "files": 400,
+    "archived": 260,
+    "new_archived": 56,
+    "pending_static_reviews": 0,
+    "auditor_tests_passed": 2
+  },
+  "real_model_calls": 0,
+  "real_provider_calls": 0,
+  "scope": "Task family removed after explicit mapping to native business reads/writes and host planning/claim/review/owner-acceptance. Real SQLite/MCP/API with synthetic provider/model/process witnesses as test fixtures; no claim of live model quality or original user-data migration. Native source/installed suites each retain2baseline failures; compatibility suite retains3baseline failures.",
+  "remaining": [
+    "Communication/project/knowledge families and5legacy distributions",
+    "Migration inverses/restore and historical data: includes55vs51 and rollback refusal here,54vs55 from prior batch",
+    "Operation, complete history/budgets, CLI, model/human/science/global evaluation and12page acceptance"
+  ]
+}

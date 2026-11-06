@@ -7,11 +7,11 @@ from pathlib import Path
 import backend
 
 
-def test_replaced_command_git_document_and_sql_adapters_are_unavailable():
+def test_replaced_framework_adapters_are_unavailable():
     """Check installed import locations without loading retired frameworks or web packages."""
     for module in (
         'backend.tools.shell', 'backend.tools.git',
-        'backend.tools.rag', 'backend.tools.data', 'backend.tools.web',
+        'backend.tools.rag', 'backend.tools.data', 'backend.tools.web', 'backend.tools.task',
     ):
         assert importlib.util.find_spec(module) is None, module
     web = Path(backend.__file__).parent / 'tools' / 'web'

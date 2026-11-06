@@ -192,3 +192,5 @@ y la política web robots/frecuencia son tareas principales de sus bloques.
 | DD-051 | Cuatro avisos Ruff de estilo/tipado en composición HTTP, adaptador Spider y sus tests (I001, RUF012, SIM117). | `web-retirement-lint.json` | Pulido después de todas las capacidades principales; no repetir la retirada web por ellos. Los avisos de exports web de DD048 desaparecen al retirar ese paquete. |
 
 | DD-052 | Tres avisos Ruff de orden de imports/context managers en el registro de rutas y las pruebas de contexto de tareas (I001, SIM117). | `task-workspace-lint.json` | Después de todas las capacidades principales. No reabrir las lecturas/notas por estilo; el historial completo, la migración de datos y la retirada de wrappers siguen como tareas principales. |
+
+| DD-053 | Un import `pytest` sin usar, ya presente en el test de comunicación heredado que recibe el diálogo trasladado (F401). | `task-retirement-lint.json` | Sólo después de todas las capacidades principales, si el archivo sigue vigente. Los dos fallos de migración/inversa y tres de conocimiento conservados en este lote son pendientes de sus bloques principales, no pulido. |

@@ -1,9 +1,9 @@
 # Inventario y revisión de prompts
 
 Catálogo nativo versión2; revisión inicial sobre `85f7acd`, actualizada después de
-añadir contexto nativo de tareas sobre `16e7949`. El [inventario detallado](inventory.json)
-contiene 384 entradas candidatas de 415 archivos Python. **No son 384 prompts distintos
-ni 384 evaluaciones con modelos.** Se archivan 204 entradas de los módulos eliminados,
+retirar wrappers de tareas sobre `f70fc00`. El [inventario detallado](inventory.json)
+contiene 328 entradas candidatas de 400 archivos Python. **No son 328 prompts distintos
+ni 328 evaluaciones con modelos.** Se archivan 260 entradas de los módulos eliminados,
 conservando sus decisiones históricas en `retired_entries`.
 Incluye plantillas, constructores, descripciones de herramientas, campos de schema,
 valores de entrada y falsos positivos explícitamente excluidos.
@@ -13,6 +13,8 @@ Las siete descripciones de tareas/continuidad se revisaron contra sus schemas,
 permisos y recorrido MCP/API/SQLite: distinguen contexto de autoridad,
 observaciones de suposiciones y recibo original de nota actual. Se revalidaron
 35 candidatos con AST idéntico afectados por los cambios de consumidores.
+La retirada posterior del paquete de tareas archiva 56 candidatos, conservando
+sus decisiones históricas; no cambia los prompts nativos.
 Tampoco se reescriben arbitrariamente textos del usuario, fuentes o errores recibidos.
 Context7 añade dos descripciones revisadas contra el handler, sus permisos y el
 recorrido MCP/HTTP/SQLite; se archivan seis entradas antiguas. Las 29 descripciones
@@ -55,7 +57,7 @@ sea correcta o de que se conozcan todos los consumidores dinámicos.
 | Perfiles nativos y recetas del host |8| Seis reescritos y dos conservados; reglas específicas separadas de las comunes |
 | Descripciones de herramientas nativas |43| Conservadas tras leer su texto y comprobar el productor; límites, identidad original, paginación y resultados desconocidos explícitos |
 | Plantillas de roles anteriores |144| Conservadas como históricas, fuera de la composición nativa; no adaptar el protocolo de un loop retirado |
-| Schemas/descripciones del catálogo anterior |160| Conservados para lectores históricos opt-in; no exponer sus permisos por rol, SQL, push o certeza aparente al runtime nativo |
+| Schemas/descripciones del catálogo anterior |104| Conservados para lectores históricos opt-in; no exponer sus permisos por rol, SQL, push o certeza aparente al runtime nativo |
 | Coordinación antigua restante |6| Retirada de consumidores pendiente; no son instrucciones del runtime nuevo. Engine y constructores eliminados quedan archivados |
 | Proyección de entrada/fuentes/feedback |3| Conservada como datos atribuidos; no convertir texto recibido en política confiable |
 | CLI/OpenAPI, instrumentación y readiness |15| Excluidos como instrucciones de agente: metadatos humanos/de entrada, scanner o fixture fijo de protocolo |

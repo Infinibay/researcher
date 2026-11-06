@@ -41,6 +41,23 @@ class TestSendMessageTool:
 
 
 class TestReadMessagesTool:
+    """Preserve historical mailbox behavior until the communication family is migrated."""
+
+    def test_threaded_exchange_leaves_no_unread_messages(self, test_db, agent_context):
+        """Preserve the old lifecycle test's dialogue independently of removed task/epic construction."""
+        from backend.communication.service import CommunicationService
+
+        send, read = SendMessageTool(), ReadMessagesTool()
+        sent = json.loads(send._run(message="Starting task X", to_agent="lead-1"))
+        set_context(agent_id="lead-1")
+        received = json.loads(read._run(unread_only=True))
+        assert any(row["id"] == sent["message_id"] for row in received["messages"])
+        reply = json.loads(send._run(message="Proceed with the documented scope", to_agent="agent-1", thread_id=sent["thread_id"]))
+        set_context(agent_id="agent-1")
+        received = json.loads(read._run(unread_only=True, thread_id=sent["thread_id"]))
+        assert any(row["id"] == reply["message_id"] for row in received["messages"])
+        assert CommunicationService().get_unread_count(project_id=1, agent_id="agent-1") == 0
+
     def test_read_direct_messages(self, test_db, agent_context):
         # Send a message from lead to agent
         set_context(agent_id="lead-1")

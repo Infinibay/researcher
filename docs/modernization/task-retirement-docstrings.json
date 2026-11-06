@@ -1,0 +1,15 @@
+{
+  "changed_or_new_definitions": [
+    "backend/tests/runtime/test_investigation.py::test_direct_claim_and_completion_cannot_bypass_owner_investigation",
+    "backend/tests/runtime/test_native_adapter_retirement.py::test_replaced_framework_adapters_are_unavailable",
+    "backend/tests/tools/test_communication_tools.py::TestReadMessagesTool",
+    "backend/tests/tools/test_communication_tools.py::TestReadMessagesTool.test_threaded_exchange_leaves_no_unread_messages",
+    "backend/tests/tools/test_knowledge_tools.py::_seed_research_task",
+    "backend/tests/tools/test_knowledge_tools.py::TestRecordFindingTool",
+    "backend/tests/tools/test_knowledge_tools.py::TestRecordFindingTool.test_record_finding",
+    "backend/tests/tools/test_knowledge_tools.py::TestValidateRejectFinding",
+    "backend/tests/tools/test_knowledge_tools.py::TestValidateRejectFinding._create_finding"
+  ],
+  "missing": [],
+  "scope": "Qualified AST comparison againstf70fc00, changed/new definitions and module docstrings only. English documentation for Ken."
+}

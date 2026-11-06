@@ -222,33 +222,24 @@ def test_legacy_investigation_entry_and_event_handoff_do_not_claim_or_start_work
         )
 
 
-def test_legacy_take_task_and_direct_completion_cannot_bypass_owner_investigation(
+def test_direct_claim_and_completion_cannot_bypass_owner_investigation(
     coordination,
 ):
-    """Current legacy tools and raw legacy completion/claim statements cannot turn an unadmitted investigation into running or accepted work."""
+    """Raw historical claim/completion statements cannot turn an unadmitted investigation into running or accepted work."""
     import sqlite3
-
-    from backend.tools.base.context import set_context
-    from backend.tools.task.take_task import TakeTaskTool
 
     c = coordination
     c.conn.execute(
         "UPDATE tasks SET type='investigation',status='pending',assigned_to=NULL WHERE id=1001"
     )
     c.conn.commit()
-    set_context(project_id=101, agent_id="legacy-test", task_id=1001)
-    try:
-        result = json.loads(TakeTaskTool()._run(task_id=1001))
-        assert result["delivery"] == "native_owner_handoff"
-        assert c.conn.execute(
-            "SELECT status,assigned_to FROM tasks WHERE id=1001"
-        ).fetchone()[:] == ("pending", None)
-        for status in ("in_progress", "done"):
-            with pytest.raises(sqlite3.IntegrityError, match="native|owner|accept"):
-                c.conn.execute("UPDATE tasks SET status=? WHERE id=1001", (status,))
-            c.conn.rollback()
-    finally:
-        set_context(project_id=None, agent_id=None, task_id=None)
+    for status in ("in_progress", "done"):
+        with pytest.raises(sqlite3.IntegrityError, match="native|owner|accept"):
+            c.conn.execute("UPDATE tasks SET status=? WHERE id=1001", (status,))
+        c.conn.rollback()
+    assert c.conn.execute(
+        "SELECT status,assigned_to FROM tasks WHERE id=1001"
+    ).fetchone()[:] == ("pending", None)
 
 
 @pytest.mark.parametrize("handler_name", ["ReviewHandler", "ReworkHandler"])
