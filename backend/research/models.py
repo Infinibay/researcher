@@ -19,6 +19,9 @@ RESEARCH_PERMISSIONS = frozenset(
         "tasks.read",
         "tasks.comment",
         "continuity.write",
+        "messages.read",
+        "messages.send",
+        "messages.ack",
     }
 )
 REVIEW_PERMISSIONS = frozenset(
@@ -30,6 +33,9 @@ REVIEW_PERMISSIONS = frozenset(
         "questions.ask",
         "findings.review",
         "tasks.read",
+        "messages.read",
+        "messages.send",
+        "messages.ack",
     }
 )
 DEVELOPMENT_PERMISSIONS = RESEARCH_PERMISSIONS - {"results.propose"}

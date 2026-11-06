@@ -1,0 +1,43 @@
+{
+  "base_commit": "ac4b9cd",
+  "scope": "Native advisory peer messaging and owner conversation projection. Legacy communication wrapper retirement remains in progress.",
+  "source": {
+    "cases": 66,
+    "passed": 66,
+    "failed": {},
+    "skipped": 0,
+    "seconds": 25.973
+  },
+  "installed": {
+    "cases": 66,
+    "passed": 66,
+    "failed": {},
+    "skipped": 0,
+    "seconds": 26.852
+  },
+  "frontend": {
+    "render_tests": 5,
+    "passed": 5,
+    "build": "passed",
+    "limits": "SSR semantic rendering and TypeScript/Vite build only; not whole-page visual or human acceptance."
+  },
+  "prompt_inventory": {
+    "new_descriptions_reviewed": 5,
+    "unchanged_candidate_asts_revalidated": 42,
+    "candidates": 333,
+    "files": 403,
+    "archived": 260,
+    "pending_static_reviews": 0,
+    "audit_tests_passed": 2
+  },
+  "documented_definitions": 62,
+  "deferred_style_findings": 13,
+  "real_model_calls": 0,
+  "real_provider_calls": 0,
+  "limits": [
+    "Source suite observed before a description-only clarification: read returns the antecedent ID, not its body; installed suite uses the final description.",
+    "Schema55 to56 synthetic upgrade/failure/retry preserves old chat; this does not prove historical user-data recovery or inverses.",
+    "Peer threads remain advisory team_sync threads and cannot be admitted as owner instructions by the current native guard.",
+    "No global-suite, legacy-family retirement, model efficacy, human comprehension, scientific acceptance or whole-page completion claim."
+  ]
+}

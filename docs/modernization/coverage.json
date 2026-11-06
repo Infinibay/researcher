@@ -3913,6 +3913,21 @@
         "26obsolete tests retired,1dialogue test relocated; no reduction of global failures is inferred.",
         "Other tool families/dependencies and whole-product acceptance remain."
       ]
+    },
+    "native_agent_messaging": {
+      "status": "complete",
+      "scope": "Five admitted native peer messaging tools and canonical owner conversation projection. Advisory content and receipt do not dispatch, approve, certify understanding or replace typed work delivery. No broad scenario closes here.",
+      "evidence": [
+        "docs/architecture/native-agent-messaging-design.md",
+        "docs/modernization/agent-messages-results.json",
+        "docs/modernization/agent-messages-packaging.json",
+        "backend/tests/runtime/test_agent_messages.py"
+      ],
+      "limitations": [
+        "Legacy communication wrappers still require mapping and removal.",
+        "Synthetic migration and automated rendering do not establish real-data restore, human comprehension or complete page acceptance.",
+        "Global and model/scientific evaluation remain open."
+      ]
     }
   }
 }

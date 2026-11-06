@@ -1,0 +1,425 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 62,
+      "row": 196
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/api/main.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.api.routes.agent_messages import router as agent_messages_router\n    from backend.api.routes.agents import router as agents_router\n    from backend.api.routes.artifacts import router as artifacts_router\n    from backend.api.routes.chat import router as chat_router\n    from backend.api.routes.epics import router as epics_router\n    from backend.api.routes.events import router as events_router\n    from backend.api.routes.files import router as files_router\n    from backend.api.routes.findings import router as findings_router\n    from backend.api.routes.flow_state import router as flow_state_router\n    from backend.api.routes.git import router as git_router\n    from backend.api.routes.health import router as health_router\n    from backend.api.routes.internal import router as internal_router\n    from backend.api.routes.internal_findings import router as internal_findings_router\n    from backend.api.routes.internal_tasks import router as internal_tasks_router\n    from backend.api.routes.milestones import router as milestones_router\n    from backend.api.routes.model_settings import router as model_settings_router\n    from backend.api.routes.projects import router as projects_router\n    from backend.api.routes.research import install_research_errors\n    from backend.api.routes.research import router as research_router\n    from backend.api.routes.runs import install_run_errors\n    from backend.api.routes.runs import router as runs_router\n    from backend.api.routes.session import router as session_router\n    from backend.api.routes.source_operations import router as source_operations_router\n    from backend.api.routes.task_workspace import router as task_workspace_router\n    from backend.api.routes.tasks import router as tasks_router\n    from backend.api.routes.user_requests import router as user_requests_router\n    from backend.api.routes.wiki import router as wiki_router\n",
+          "end_location": {
+            "column": 1,
+            "row": 197
+          },
+          "location": {
+            "column": 1,
+            "row": 170
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 170
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 170,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 108,
+      "row": 9
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/api/models/chat.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from __future__ import annotations\n\nfrom typing import Literal\n\nfrom pydantic import BaseModel, ConfigDict, Field, model_validator\n\nfrom backend.api.models.code_carryover import (\n    PriorBranchSelection,\n    PriorCodeSelection,\n    PriorFilesSelection,\n)\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 12
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 53,
+      "row": 25
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/api/routes/chat.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from __future__ import annotations\n\nimport asyncio\nimport logging\nimport sqlite3\nfrom dataclasses import asdict\n\nfrom fastapi import APIRouter, HTTPException, Query, Request\n\nfrom backend.api.models.chat import (\n    ChatMessageCreate,\n    ChatMessageResponse,\n    ChatThreadResponse,\n    NativeInstruction,\n    ThreadArchiveResponse,\n    UnreadCountsResponse,\n)\nfrom backend.communication.agent_messages import AgentMessages\nfrom backend.communication.service import CommunicationService\nfrom backend.communication.thread_manager import ThreadManager\nfrom backend.flows.event_listeners import FlowEvent, event_bus\nfrom backend.runtime.views import MESSAGE_SELECT\nfrom backend.tools.base.db import execute_with_retry\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 27
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 62,
+      "row": 14
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/communication/agent_messages.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import hashlib\nimport json\nfrom uuid import uuid4\n\nfrom backend.research.models import (\n    OperationConflict,\n    ResearchForbidden,\n    ResearchInputError,\n    ResearchNotFound,\n    bounded_text,\n    positive_id,\n)\nfrom backend.research.sqlite_store import _json\nfrom backend.task_workspace import _page, _text_page, _window\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 16
+          },
+          "location": {
+            "column": 1,
+            "row": 8
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 8
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 8,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 65,
+      "row": 12
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/communication/listeners.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from __future__ import annotations\n\nimport json\nimport logging\nimport sqlite3\nfrom typing import Any\n\nfrom backend.communication.ownership import LEGACY_THREAD_CLAUSE\nfrom backend.flows.event_listeners import BaseEventListener, FlowEvent\nfrom backend.tools.base.db import execute_with_retry\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 14
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 12,
+      "row": 5
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/communication/listeners.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 6
+          },
+          "location": {
+            "column": 1,
+            "row": 5
+          }
+        }
+      ],
+      "message": "Remove unused import: `json`"
+    },
+    "location": {
+      "column": 8,
+      "row": 5
+    },
+    "message": "`json` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 5,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 94,
+      "row": 74
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/communication/listeners.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "            from backend.communication.response_event_registry import (\n                response_event_registry,\n            )\n",
+          "end_location": {
+            "column": 1,
+            "row": 75
+          },
+          "location": {
+            "column": 1,
+            "row": 74
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 13,
+      "row": 74
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 74,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 82,
+      "row": 19
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/runtime/business_definitions.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import inspect\nfrom dataclasses import dataclass\nfrom typing import Any, Literal, get_type_hints\nfrom urllib.parse import quote\n\nfrom pydantic import BaseModel, ConfigDict, create_model\n\nfrom backend.api.models.agent_messages import MessageIntent, MessageStatement\nfrom backend.api.models.questions import HumanQuestion\nfrom backend.api.models.research import Citation, ReviewCheckBody, WikiRevision\nfrom backend.api.models.task_workspace import CommentType, ContinuityNote, Phase\nfrom backend.research.investigation import InvestigationSummary\nfrom backend.runtime.business_mediation import ALL_BUSINESS_NAMES, RESEARCH_NAMES\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 22
+          },
+          "location": {
+            "column": 1,
+            "row": 7
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 7
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 7,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 86,
+      "row": 6
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_agent_messages.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from dataclasses import replace\n\nimport pytest\n\nfrom backend.tests.runtime.test_workspace_delivery import owner_client, workspace_app  # noqa: F401\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 9
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 56,
+      "row": 119
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_agent_messages.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    import sqlite3\n\n    from backend.tools.base.db import ensure_migrations\n",
+          "end_location": {
+            "column": 1,
+            "row": 120
+          },
+          "location": {
+            "column": 1,
+            "row": 118
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 118
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 118,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 104,
+      "row": 146
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_agent_messages.py",
+    "fix": null,
+    "location": {
+      "column": 91,
+      "row": 146
+    },
+    "message": "Redefinition of unused `workspace_app` from line 6: `workspace_app` redefined here",
+    "name": "redefined-while-unused",
+    "noqa_row": 146,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 54,
+      "row": 174
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_agent_messages.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.api.models.chat import ChatMessageResponse\n    from backend.runtime.contracts import RunConflict\n    from backend.runtime.run_inputs import MESSAGE_SELECT\n",
+          "end_location": {
+            "column": 1,
+            "row": 175
+          },
+          "location": {
+            "column": 1,
+            "row": 172
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 172
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 172,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "SIM117",
+    "end_location": {
+      "column": 59,
+      "row": 285
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_agent_messages.py",
+    "fix": null,
+    "location": {
+      "column": 9,
+      "row": 284
+    },
+    "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements",
+    "name": "multiple-with-statements",
+    "noqa_row": 284,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/multiple-with-statements"
+  }
+]

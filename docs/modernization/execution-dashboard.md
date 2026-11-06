@@ -16,7 +16,40 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: herramientas antiguas de tareas retiradas
+## Etapa actual: comunicación nativa implementada; retirada antigua pendiente
+
+Cinco herramientas permiten descubrir destinatarios admitidos, listar y leer
+mensajes, enviar y reconocer recepción. El host determina emisor, intento y
+contexto. Preguntas y respuestas conservan identidad exacta; observaciones y
+suposiciones se muestran separadas. Un mensaje o acuse no autoriza trabajo ni
+demuestra comprensión. El archivo de conversaciones muestra estos registros y
+el lector antiguo no los convierte en eventos de activación.
+[Contrato y límites](../architecture/native-agent-messaging-design.md).
+
+**Comprobado:** 66 pruebas pasan en fuente y 66 en el paquete instalado; cinco
+tests de conversación web, compilación web y dos tests del auditor de prompts
+pasan. La migración55→56 conserva mensajes históricos sintéticos y revierte un
+fallo antes del recibo. 714 archivos Python/SQL coinciden, 244 imports proceden
+del entorno y hay83 distribuciones sin frameworks antiguos. 62 definiciones
+nuevas/modificadas tienen docstrings; cinco descripciones nuevas revisadas,
+333 candidatos en403 archivos,260 archivados y ninguna revisión estática pendiente.
+
+**Lista vigente:**
+- Cerrado recientemente: web; contexto/comentarios/continuidad; retirada de tareas;
+  recorrido nativo de mensajes/recibos y su proyección en conversación.
+- En curso: terminar el mapa y retirar los wrappers antiguos de comunicación.
+- Después: proyecto, conocimiento y las cinco bibliotecas legacy restantes.
+- Pendiente principal: operación; migraciones/restore y datos históricos;
+  historial completo/presupuestos; CLI; evaluación real, humana, científica y
+  global; aceptación integral de las12 páginas. Siguen43 escenarios abiertos,
+  12 pilotos y48 conceptos. No hay porcentaje global defendible.
+- Al final: detalles secundarios, incluidos13 avisos Ruff enDD054.
+
+Este lote no cierra la familia antigua, no prueba datos reales ni comprensión
+humana y no reduce por inferencia los fallos de la suite global histórica.
+Los fallos de migración/inversa y conocimiento siguen como trabajo principal.
+
+## Etapa anterior: herramientas antiguas de tareas retiradas
 
 Se retiran 15 módulos/14 herramientas después de mapear sus capacidades al host
 nativo y al espacio de tareas. No se alteran datos históricos. Se mantienen

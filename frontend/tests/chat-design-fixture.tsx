@@ -4,6 +4,18 @@ import { MemoryRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ChatPage } from '../src/components/pages/ChatPage'
 import { useProjectStore } from '../src/stores/project'
+import { ConversationTimeline } from '../src/components/chat/ConversationTimeline'
+
+/** Render canonical advisory receipt states without a model, network or assumed user understanding. */
+export function renderPeerConversation(acknowledged = false) {
+  return renderToStaticMarkup(<ConversationTimeline messages={[{
+    id: 31, project_id: 101, from_agent: 'revisor', to_agent: 'investigador', message: 'La etiqueta dice kg.', conversation_type: 'agent_to_agent',
+    peer_message: {message_id:31,parent_message_id:29,sender_run_id:'review-run',sender_attempt_id:'review-attempt',sender_task_id:24,sender_context_version:1,
+      recipient_run_id:'author-run',recipient_task_id:25,recipient_context_version:2,recipient_context_current:false,recipient_status:'running',intent:'answer',
+      body_sha256:'a'.repeat(64),delivery:acknowledged ? 'receipt_acknowledged' : 'recorded',acknowledged_by_attempt:acknowledged ? 'author-attempt' : null,acknowledged_at:acknowledged ? 1000 : null,
+      observations:['La fuente incluye la unidad.'],assumptions:['Puede referirse a masa.'],evidence_refs:[{source_id:7,sha256:'b'.repeat(64)}],authorizes_work:false,understood:'not_verified',applied:'not_verified'},
+  }]} />)
+}
 
 export function renderConversation({ failure = false, empty = false, foreignTask = false, historyFailure = false } = {}) {
   const client = new QueryClient({ defaultOptions: { queries: { retry: false, retryOnMount: false, staleTime: Infinity, gcTime: Infinity } } })

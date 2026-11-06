@@ -4,11 +4,30 @@ import { createServer, type ViteDevServer } from 'vite'
 
 let server: ViteDevServer
 let renderConversation: (options?: {failure?: boolean;empty?:boolean;foreignTask?:boolean;historyFailure?:boolean}) => string
+let renderPeerConversation: (acknowledged?: boolean) => string
 before(async () => {
   server = await createServer({configFile:false,server:{middlewareMode:true,hmr:false,ws:false,watch:null},esbuild:{jsx:'automatic'},optimizeDeps:{noDiscovery:true},resolve:{alias:[{find:/^react-router-dom$/,replacement:new URL('../node_modules/react-router-dom/dist/index.mjs',import.meta.url).pathname},{find:/^react-router$/,replacement:new URL('../node_modules/react-router/dist/development/index.mjs',import.meta.url).pathname},{find:/^react-router\/dom$/,replacement:new URL('../node_modules/react-router/dist/development/dom-export.mjs',import.meta.url).pathname}]},ssr:{noExternal:[/react-router/]}})
-  ;({renderConversation} = await server.ssrLoadModule('/tests/chat-design-fixture.tsx'))
+  ;({renderConversation, renderPeerConversation} = await server.ssrLoadModule('/tests/chat-design-fixture.tsx'))
 })
 after(async () => {await server?.close()})
+
+test('peer messages distinguish source observations, assumptions and receipt from understanding', () => {
+  const html = renderPeerConversation()
+  assert.match(html, /Mensaje entre agentes registrado/)
+  assert.match(html, /No consta recepción/)
+  assert.match(html, /Dirigido a investigador · tarea #25 · contexto 2/)
+  assert.match(html, /En respuesta al mensaje #29/)
+  assert.match(html, /Observaciones del emisor/)
+  assert.match(html, /Suposiciones del emisor/)
+  assert.match(html, /Puede referirse a masa/)
+  assert.match(html, /Fuentes citadas: #7/)
+  assert.match(html, /contexto del destinatario cambió/)
+  const receipt = renderPeerConversation(true)
+  assert.match(receipt, /Recepción reconocida/)
+  assert.match(receipt, /Comprensión y aplicación sin verificar/)
+  assert.match(receipt, /Este mensaje no autoriza trabajo/)
+  assert.doesNotMatch(receipt, /No consta recepción|Propuesta para revisar/)
+})
 
 test('conversation shows every pending task and keeps the current exchange visible', () => {
   const html = renderConversation()

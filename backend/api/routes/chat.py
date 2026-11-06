@@ -18,6 +18,7 @@ from backend.api.models.chat import (
     UnreadCountsResponse,
 )
 from backend.communication.service import CommunicationService
+from backend.communication.agent_messages import AgentMessages
 from backend.communication.thread_manager import ThreadManager
 from backend.flows.event_listeners import FlowEvent, event_bus
 from backend.runtime.views import MESSAGE_SELECT
@@ -36,6 +37,7 @@ async def list_messages(
     """List chat messages, optionally after a given ID for polling."""
 
     def _query(conn: sqlite3.Connection) -> list[dict]:
+        """Read the bounded owner page and attach canonical peer receipt and premise fields."""
         where = "cm.project_id = ?"
         params: list = [project_id]
 
@@ -49,7 +51,7 @@ async def list_messages(
             MESSAGE_SELECT + f" WHERE {where} ORDER BY cm.id {direction} LIMIT ?",
             params,
         ).fetchall()
-        return [dict(r) for r in (rows if after_id is not None else reversed(rows))]
+        return AgentMessages.owner_messages(conn, rows if after_id is not None else reversed(rows))
 
     messages = await asyncio.to_thread(execute_with_retry, _query)
     return [ChatMessageResponse(**m) for m in messages]
@@ -125,12 +127,13 @@ async def get_thread_messages(project_id: int, thread_id: str):
     """Get all messages in a thread."""
 
     def _query(conn: sqlite3.Connection) -> list[dict]:
+        """Keep peer provenance on owner thread reads using the same projection as the timeline."""
         rows = conn.execute(
             MESSAGE_SELECT
             + " WHERE cm.thread_id=? AND cm.project_id=? ORDER BY cm.id ASC",
             (thread_id, project_id),
         ).fetchall()
-        return [dict(r) for r in rows]
+        return AgentMessages.owner_messages(conn, rows)
 
     messages = await asyncio.to_thread(execute_with_retry, _query)
     return [ChatMessageResponse(**m) for m in messages]
@@ -138,17 +141,21 @@ async def get_thread_messages(project_id: int, thread_id: str):
 
 @router.get("/{project_id}/unread", response_model=UnreadCountsResponse)
 async def get_unread_counts(project_id: int):
-    """Return per-agent unread message counts."""
+    """Count native messages by canonical receipt; retain historical read markers only for legacy rows."""
 
     def _query(conn: sqlite3.Connection) -> dict[str, int]:
+        """Keep native acknowledgements independent of old read markers and unscoped roster roles."""
         rows = conn.execute(
             """SELECT
-                   COALESCE(cm.to_agent, cm.to_role) as target,
+                   COALESCE(recipient.actor_id, cm.to_agent, cm.to_role) as target,
                    COUNT(*) as cnt
                FROM chat_messages cm
+               LEFT JOIN runtime_agent_messages peer ON peer.message_id=cm.id AND peer.project_id=cm.project_id
+               LEFT JOIN runtime_runs recipient ON recipient.id=peer.recipient_run_id
                WHERE cm.project_id = ?
                  AND (cm.to_agent IS NOT NULL OR cm.to_role IS NOT NULL)
-                 AND NOT EXISTS (
+                 AND ((peer.message_id IS NOT NULL AND peer.acknowledged_at IS NULL)
+                   OR (peer.message_id IS NULL AND NOT EXISTS (
                      SELECT 1 FROM message_reads mr
                      WHERE mr.message_id = cm.id
                        AND (
@@ -160,16 +167,15 @@ async def get_unread_counts(project_id: int):
                             AND mr.agent_id IN (
                                SELECT r.agent_id FROM roster r
                                WHERE r.role = cm.to_role
-                                 AND r.project_id = cm.project_id
                             ))
                        )
-                 )
+                 )))
                GROUP BY target""",
             (project_id,),
         ).fetchall()
         return {r["target"]: r["cnt"] for r in rows if r["target"]}
 
-    counts = execute_with_retry(_query)
+    counts = await asyncio.to_thread(execute_with_retry, _query)
     return UnreadCountsResponse(counts=counts)
 
 

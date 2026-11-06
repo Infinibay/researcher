@@ -241,6 +241,9 @@ class SQLiteResearchStore:
                 "reports.read",
                 "wiki.read",
                 "tasks.read",
+                "messages.read",
+                "messages.send",
+                "messages.ack",
             }:
                 verify_current(conn, review)
 
@@ -258,6 +261,8 @@ class SQLiteResearchStore:
             "result.propose": "results.propose",
             "task.comment": "tasks.comment",
             "task.note": "continuity.write",
+            "message.send": "messages.send",
+            "message.ack": "messages.ack",
         }[kind]
 
     @staticmethod

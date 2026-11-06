@@ -10,6 +10,10 @@ TASK_READ_NAMES = frozenset({
     "researcher_task_history", "researcher_continuity_read",
 })
 TASK_WRITE_NAMES = frozenset({"researcher_task_comment", "researcher_continuity_save"})
+MESSAGE_NAMES = frozenset({
+    "researcher_peer_recipients", "researcher_peer_messages", "researcher_peer_message_read",
+    "researcher_peer_message_send", "researcher_peer_message_acknowledge",
+})
 
 RESEARCH_NAMES = frozenset(
     {
@@ -42,7 +46,7 @@ RESEARCH_NAMES = frozenset(
         "researcher_report_read",
         "researcher_ask_user",
     }
-) | TASK_READ_NAMES | TASK_WRITE_NAMES
+) | TASK_READ_NAMES | TASK_WRITE_NAMES | MESSAGE_NAMES
 REVIEW_NAMES = frozenset(
     {
         "researcher_reference_list",
@@ -63,7 +67,7 @@ REVIEW_NAMES = frozenset(
         "researcher_review_decide",
         "researcher_review_read",
     }
-) | TASK_READ_NAMES
+) | TASK_READ_NAMES | MESSAGE_NAMES
 INVESTIGATION_NAMES = (RESEARCH_NAMES - {"researcher_report_write"}) | {"researcher_investigation_summary"}
 BUSINESS_NAMES = RESEARCH_NAMES
 DEVELOPMENT_NAMES = RESEARCH_NAMES - {"researcher_result_propose", "researcher_capture_command"}

@@ -191,6 +191,7 @@ def create_app(*, access: LocalAccess | None = None, runtime_service=None) -> Fa
     from backend.api.routes.session import router as session_router
     from backend.api.routes.tasks import router as tasks_router
     from backend.api.routes.task_workspace import router as task_workspace_router
+    from backend.api.routes.agent_messages import router as agent_messages_router
     from backend.api.routes.user_requests import router as user_requests_router
     from backend.api.routes.wiki import router as wiki_router
 
@@ -201,6 +202,7 @@ def create_app(*, access: LocalAccess | None = None, runtime_service=None) -> Fa
     install_research_errors(app)
     app.include_router(research_router)
     app.include_router(task_workspace_router)
+    app.include_router(agent_messages_router)
     app.include_router(health_router)
     app.include_router(projects_router)
     app.include_router(epics_router)

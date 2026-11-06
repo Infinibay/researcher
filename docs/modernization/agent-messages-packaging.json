@@ -1,0 +1,30 @@
+{
+  "base_commit": "ac4b9cd",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "sha256": "d29769678cb45f217b81dee4e96e190b636676a887240c3717fd8b72a915cc2f",
+  "observed": {
+    "exit_code": 0,
+    "cases": 66,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 26.852,
+    "all_backend_imports_installed": true,
+    "backend_modules": 244,
+    "matching_python_sql": 714,
+    "installed_distributions": 83,
+    "legacy_installed": false,
+    "real_model_calls": 0,
+    "real_provider_calls": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_agent_messages.py",
+    "backend/tests/runtime/test_run_conversation.py",
+    "backend/tests/runtime/test_workspace_delivery.py",
+    "backend/tests/runtime/test_owner_notes.py",
+    "backend/tests/research/test_task_workspace.py",
+    "backend/tests/runtime/test_business_mediation.py",
+    "backend/tests/runtime/test_native_mcp_entry.py",
+    "backend/tests/research/test_http.py"
+  ],
+  "limits": "Scoped native advisory messaging, owner projection, current grant/receipt boundaries, schema55 to56 migration, related owner conversation and MCP/API tests. No legacy communication retirement, global-suite, real-model, human-comprehension, historical restore or whole-page acceptance claim. Existing development seed db/seeds/dev_data.sql remains outside unchanged db/*.sql package data."
+}

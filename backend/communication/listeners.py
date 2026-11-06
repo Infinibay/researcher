@@ -9,6 +9,7 @@ from typing import Any
 
 from backend.flows.event_listeners import BaseEventListener, FlowEvent
 from backend.tools.base.db import execute_with_retry
+from backend.communication.ownership import LEGACY_THREAD_CLAUSE
 
 logger = logging.getLogger(__name__)
 
@@ -40,14 +41,17 @@ class AgentMessageListener(BaseEventListener):
         self._last_message_id = execute_with_retry(_query)
 
     def check(self) -> None:
+        """Advance across native records without emitting dispatch events or replaying them later."""
         def _query(conn: sqlite3.Connection) -> list[dict]:
+            """Read the cursor window with native ownership marked independently of message text."""
             rows = conn.execute(
-                """SELECT id, from_agent, to_agent, to_role, thread_id, message
-                   FROM chat_messages
-                   WHERE project_id = ?
-                     AND id > ?
-                     AND conversation_type = 'agent_to_agent'
-                   ORDER BY id ASC""",
+                f"""SELECT cm.id,cm.from_agent,cm.to_agent,cm.to_role,cm.thread_id,cm.message,
+                     {LEGACY_THREAD_CLAUSE} AS legacy_owned
+                   FROM chat_messages cm
+                   WHERE cm.project_id = ?
+                     AND cm.id > ?
+                     AND cm.conversation_type = 'agent_to_agent'
+                   ORDER BY cm.id ASC""",
                 (self.project_id, self._last_message_id),
             ).fetchall()
             return [dict(r) for r in rows]
@@ -56,6 +60,8 @@ class AgentMessageListener(BaseEventListener):
 
         for msg in messages:
             self._last_message_id = msg["id"]
+            if not msg["legacy_owned"]:
+                continue
 
             if msg.get("to_agent"):
                 target_type, target_id = "agent", msg["to_agent"]

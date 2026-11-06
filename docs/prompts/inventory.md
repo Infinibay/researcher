@@ -1,10 +1,16 @@
 # Inventario y revisión de prompts
 
 Catálogo nativo versión2; revisión inicial sobre `85f7acd`, actualizada después de
-retirar wrappers de tareas sobre `f70fc00`. El [inventario detallado](inventory.json)
-contiene 328 entradas candidatas de 400 archivos Python. **No son 328 prompts distintos
-ni 328 evaluaciones con modelos.** Se archivan 260 entradas de los módulos eliminados,
+añadir comunicación nativa sobre `ac4b9cd`. El [inventario detallado](inventory.json)
+contiene 333 entradas candidatas de 403 archivos Python. **No son 333 prompts distintos
+ni 333 evaluaciones con modelos.** Se archivan 260 entradas de los módulos eliminados,
 conservando sus decisiones históricas en `retired_entries`.
+Las cinco descripciones nuevas de comunicación explicitan identidad admitida,
+pregunta exacta, observaciones frente a suposiciones, límites de lectura y
+recepción sin comprensión ni autoridad. Se revalidaron42 candidatos cuyo AST
+no cambió contra el registro de rutas, permisos y consumidores modificados.
+Los protocolos antiguos siguen pendientes de retirada; no se declaran aceptados
+por la existencia de un reemplazo.
 Incluye plantillas, constructores, descripciones de herramientas, campos de schema,
 valores de entrada y falsos positivos explícitamente excluidos.
 Los baselines/casos de evaluación y los prompts de conceptos visuales se conservan

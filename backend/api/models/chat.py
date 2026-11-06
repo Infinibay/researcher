@@ -20,6 +20,40 @@ class ChatMessageCreate(BaseModel):
     thread_id: str | None = Field(None, pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
 
 
+class PeerMessageSource(BaseModel):
+    """Identify the captured source bytes without endorsing the sender's interpretation."""
+
+    source_id: int
+    sha256: str
+
+
+class PeerMessageReceipt(BaseModel):
+    """Expose exact sender/recipient context and receipt without asserting understanding or approval."""
+
+    message_id: int
+    parent_message_id: int | None
+    sender_run_id: str
+    sender_attempt_id: str
+    sender_task_id: int
+    sender_context_version: int
+    recipient_run_id: str
+    recipient_task_id: int
+    recipient_context_version: int
+    recipient_context_current: bool
+    recipient_status: str
+    intent: Literal["note", "question", "answer"]
+    body_sha256: str
+    delivery: Literal["recorded", "receipt_acknowledged"]
+    acknowledged_by_attempt: str | None
+    acknowledged_at: float | None
+    observations: list[str]
+    assumptions: list[str]
+    evidence_refs: list[PeerMessageSource]
+    authorizes_work: Literal[False] = False
+    understood: Literal["not_verified"] = "not_verified"
+    applied: Literal["not_verified"] = "not_verified"
+
+
 class ChatMessageResponse(BaseModel):
     """Persisted attributed conversation and its delivery receipt, independent of task activation."""
 
@@ -37,12 +71,14 @@ class ChatMessageResponse(BaseModel):
     runtime_status: str | None = None
     context_version: int | None = None
     task_id: int | None = None
+    peer_message: PeerMessageReceipt | None = None
     delivery: Literal[
         "recorded", "instruction_admitted", "proposal", "question", "answer"
     ] = "recorded"
 
     @model_validator(mode="after")
     def delivery_receipt(self):
+        """Derive native owner delivery from canonical run links, never from advisory peer metadata."""
         if self.runtime_run_id is not None and self.delivery == "recorded":
             self.delivery = (
                 "instruction_admitted"

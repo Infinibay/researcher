@@ -77,6 +77,33 @@ export interface TaskDependency {
   dependency_type: 'blocks' | 'depends_on'
 }
 
+/** Canonical peer provenance: a receipt never certifies understanding or work authorization. */
+export interface PeerMessageReceipt {
+  message_id: number
+  parent_message_id: number | null
+  sender_run_id: string
+  sender_attempt_id: string
+  sender_task_id: number
+  sender_context_version: number
+  recipient_run_id: string
+  recipient_task_id: number
+  recipient_context_version: number
+  recipient_context_current: boolean
+  recipient_status: string
+  intent: 'note' | 'question' | 'answer'
+  body_sha256: string
+  delivery: 'recorded' | 'receipt_acknowledged'
+  acknowledged_by_attempt: string | null
+  acknowledged_at: number | null
+  observations: string[]
+  assumptions: string[]
+  evidence_refs: {source_id:number;sha256:string}[]
+  authorizes_work: false
+  understood: 'not_verified'
+  applied: 'not_verified'
+}
+
+/** Owner conversation row, optionally linked to native work or a distinct advisory peer receipt. */
 export interface ChatMessage {
   id: number
   project_id: number
@@ -92,6 +119,7 @@ export interface ChatMessage {
   context_version?: number | null
   task_id?: number | null
   delivery?: 'recorded' | 'instruction_admitted' | 'proposal' | 'question' | 'answer'
+  peer_message?: PeerMessageReceipt | null
 }
 
 export interface ChatThread {

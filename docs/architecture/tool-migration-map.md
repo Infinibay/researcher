@@ -610,3 +610,14 @@ de crear tareas con el wrapper; su lote de compatibilidad conserva tres fallos
 previos. El diálogo del test de integración antiguo se traslada y pasa.
 Siguiente principal: comunicación; después proyecto/conocimiento y las cinco
 bibliotecas legacy. El cierre global y los datos/restore siguen pendientes.
+
+## Comunicación nativa: mensajes y recibos (6 de noviembre)
+
+Cinco herramientas compartidas por MCP/host resuelven destinatarios admitidos,
+inbox/sent, lectura, envío y acuse explícito; identidad/contexto se resuelven
+en el servidor. Se muestran observaciones y suposiciones en Conversación.
+El guard del lector antiguo evita activar trabajo a partir de estos mensajes.
+[Contrato y pruebas](native-agent-messaging-design.md). Los wrappers de
+comunicación todavía existen: mapear y retirar esa familia es la tarea actual.
+Preguntas a humanos y entrega de progreso/resultados ya tienen sus recorridos
+nativos, pero su mera existencia no declara cerrada la retirada.
