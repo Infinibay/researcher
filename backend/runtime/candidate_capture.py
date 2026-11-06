@@ -49,7 +49,7 @@ def closed_writer_proof(owner, lease):
 async def capture_owned_candidate(
     lease, *, runs, session, owner, registry, asset, settled
 ):
-    """Reserve before effects, seal writers, run exact owned Git and commit only under the unchanged original lease."""
+    """Reserve before effects, seal writers and capture under the original lease and a bounded host-selected run deadline, without retrying an expired capture."""
     candidates = CodeCandidates(runs)
     try:
         planned, created = await settled(candidates.plan, lease)
@@ -83,7 +83,8 @@ async def capture_owned_candidate(
             asset=asset,
         )
         captured = await code_candidate.capture_candidate(
-            source, author, planned["allocation"], executor=executor
+            source, author, planned["allocation"], executor=executor,
+            timeout=min(300, max(60, session.native.limits.wall_seconds)),
         )
         return await settled(candidates.complete, lease, captured, proof)
     except BaseException as error:

@@ -1,0 +1,60 @@
+{
+  "base_commit": "84675e9",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "5183eda44127409cc292e63bc0f7fbb3300569f44eb2a99de2c8aa24e7d4677b",
+  "observed": {
+    "passed": 115,
+    "failures": 0,
+    "skipped": 0,
+    "installed_distributions": 85,
+    "sdk": "1.30.0",
+    "excluded_frameworks": [
+      "chromadb",
+      "crewai",
+      "crewai-tools",
+      "fastmcp",
+      "fastmcp-slim",
+      "litellm",
+      "ollama",
+      "tree-sitter",
+      "tree-sitter-c",
+      "tree-sitter-javascript",
+      "tree-sitter-python",
+      "tree-sitter-rust",
+      "tree-sitter-typescript"
+    ],
+    "project_noneditable": true,
+    "backend_modules": 250,
+    "all_backend_imports_from_native_env": true,
+    "matched_application_members": 802,
+    "console_help": 0,
+    "console_missing_token": 2,
+    "console_real_stdio": true,
+    "console_created_database": false,
+    "real_model_turns": 0,
+    "controlled_native_turns": 5,
+    "actual_host_publications": 0,
+    "seconds": 386.404
+  },
+  "tests": [
+    "backend/tests/runtime/test_predecessor_code_material.py",
+    "backend/tests/runtime/test_plan_execution.py",
+    "backend/tests/runtime/test_plan_continuation.py",
+    "backend/tests/runtime/test_plan_reauthorization.py",
+    "backend/tests/runtime/test_run_input.py",
+    "backend/tests/runtime/test_code_review_state.py",
+    "backend/tests/runtime/test_code_review_records.py",
+    "backend/tests/runtime/test_code_acceptance.py",
+    "backend/tests/runtime/test_code_candidate.py",
+    "backend/tests/runtime/test_code_candidate_state.py",
+    "backend/tests/runtime/test_owned_code_dependencies.py"
+  ],
+  "excluded_preexisting_inverse_cases": [
+    "backend/tests/runtime/test_code_review_state.py::test_unused_review_inverse_preserves_closed_author_and_candidate",
+    "backend/tests/runtime/test_code_review_records.py::test_unused_native_review_inverse_preserves_existing_packet",
+    "backend/tests/runtime/test_code_acceptance.py::test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history[frozen_author]",
+    "backend/tests/runtime/test_code_candidate_state.py::test_normal_startup_installs_candidate_storage_and_unused_inverse_is_repeatable"
+  ],
+  "bootstrap": "Existing clean native-only env; final noneditable wheel reinstalled offline without dependency changes. Python-I outside checkout; no inherited source or old site-packages. Explicit prepared local semantic assets.",
+  "limits": "Actual owner-adopted code-to-code graph: planner, two authors, two distinct independent reviews, host checks, explicit owner acceptances, actual readonly predecessor packet/input/diff windows and private application. Actual kernel/broker/Git/SQLite; canonical source137 preserved, two accepted200 candidates and zero publications. Native-only installed contract consumers and console stdio. Controlled generation/Ken,0real models; not real ranking/model quality, remote server integration, global suite, host provisioning or restore."
+}

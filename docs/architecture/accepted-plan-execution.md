@@ -46,8 +46,11 @@ La entrega `work.request` distingue causa, destinatario y prerrequisitos. Las en
 supuestos; [procedencia y terminal](terminal-owner-client.md). Para investigación incluye aceptación y snapshot inmutable: informes, fuentes, citas y
 limitaciones. Aceptación documental no equivale a confianza científica. Para código
 conserva aceptación e identidad de candidato/head/tree/diff y avisa que aceptar
-no publica sus archivos en la fuente. Ampliar la lectura/uso de candidatos entre
-tareas de código sigue pendiente; los SHA por sí solos no transfieren archivos.
+no publica sus archivos en la fuente. Las entregas nuevas versión3 agregan
+descriptores pequeños de los materiales exactos. El lector host acotado permite
+abrir paquete, entrada original y diff binario, tanto al sucesor como al revisor
+de su autor exacto; [contrato de material de predecesoras](predecessor-code-material.md).
+Las entregas versión2 ya preparadas mantienen bytes y hash originales.
 
 El paquete se integra en el input congelado. El límite completo de entrada sigue
 vigente: exceso de tamaño bloquea la inferencia sin omitir evidencia silenciosamente.

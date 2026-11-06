@@ -44,6 +44,32 @@ def authorize(s, plan):
     return executions, receipt
 
 
+def test_new_delivery_version_supports_bounded_material_descriptors(service_setup):
+    """New typed deliveries can describe accepted code artifacts without mutating an older immutable packet."""
+    s, plan, graph = accepted_plan(service_setup)
+    executions, receipt = authorize(s, plan)
+    executions.prepare(receipt['execution_id'], graph['tasks']['learn'])
+    packet = executions.state(101, plan.run_id)['execution']['deliveries'][0]['handoff']
+    assert packet['schema_version'] == 3
+
+
+def test_prepared_version_two_delivery_retains_its_original_bytes_and_hash(service_setup, monkeypatch):
+    """A queued original delivery created under the previous schema cannot be silently rewritten or rejected merely by upgrading artifact readers."""
+    import backend.planning.execution as module
+
+    s, plan, graph = accepted_plan(service_setup)
+    executions, receipt = authorize(s, plan)
+    monkeypatch.setattr(module, 'HANDOFF_SCHEMA_VERSION', 2)
+    original = executions.prepare(receipt['execution_id'], graph['tasks']['learn'])
+    before = [tuple(row) for row in s.c.conn.execute('SELECT packet_json,packet_sha256 FROM runtime_plan_handoffs')]
+    monkeypatch.setattr(module, 'HANDOFF_SCHEMA_VERSION', 3)
+    assert executions.prepare(receipt['execution_id'], graph['tasks']['learn']) == original
+    assert [tuple(row) for row in s.c.conn.execute('SELECT packet_json,packet_sha256 FROM runtime_plan_handoffs')] == before
+    run = s.c.store.admit(original[0], binding=original[1])
+    with s.c.store._transaction() as conn:
+        assert executions.input(conn, s.c.store._row(conn, 101, run.run_id))['schema_version'] == 2
+
+
 def accept_documentary_result(s, run, *, accept_now=True):
     """Write and explicitly accept a real report/evidence under the admitted author lease; peer closure witnesses are synthetic."""
     from backend.research.models import (

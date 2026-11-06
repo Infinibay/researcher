@@ -384,3 +384,21 @@ comparten el contrato y la UI distingue selección histórica de bytes capturado
 [Contrato y límites](prior-branch-input.md). La selección de material para
 sucesoras del grafo, metadata de ramas no registradas, otros consumidores antiguos
 y cierre integral/revisión final siguen dentro del alcance pendiente.
+
+
+## Material causal de código aceptado — 2026-11-06
+
+El host agrega `researcher_prerequisite_code` sólo cuando existe una dependencia
+real de código aceptado. Autor sucesor y revisor del autor exacto leen paquete,
+entrada original y diff en ventanas con hash/cobertura, sin permisos de escribir,
+aceptar o publicar. `ProjectTools`, lease y validadores existentes son el dueño;
+no se crea otro MCP/controller ni se infiere contexto compartido por una etiqueta.
+Entregas3 agregan descriptores; las2 ya preparadas conservan su hash. La selección
+de resultados excluye revisiones aceptadas que no son el producto del autor.
+
+Prueba instalada:115casos pasan con cuatro inversas antiguas excluidas y listadas;
+plan→dos autores/comprobaciones/revisiones/aceptaciones,5turnos controlados y
+fuente137conservada.0modelos reales/publicaciones. No demuestra calidad semántica,
+restore, suite global ni cierre integral de proyecto; ese cierre/informe es el
+siguiente bloque. [Contrato](predecessor-code-material.md),
+[resultados](../modernization/predecessor-material-results.json).

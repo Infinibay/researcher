@@ -437,6 +437,7 @@ class OwnedCodexRuntime:
         with WitnessedAuthorityJournal(**self.authority) as journal:
             exported = None
             code_tools = review_records = review_executor = None
+            material_tools = None
             peer = analysis = None
             broker = None
             path = self.cgroup_parent / ("researcher-owned-" + uuid4().hex)
@@ -674,6 +675,20 @@ class OwnedCodexRuntime:
                                         settled=_settled,
                                     )
                                     business = ProjectTools(business, code_tools)
+                                from backend.planning.materials import PredecessorMaterials
+                                from backend.runtime.predecessor_tools import PredecessorTools
+
+                                material_records = PredecessorMaterials(registry.runs)
+                                if await _settled(material_records.available, lease):
+                                    material_tools = PredecessorTools(material_records, lease, active=admitted, settled=_settled)
+                                    business = ProjectTools(business, material_tools)
+
+                                async def seal_host_tools():
+                                    """Withdraw and drain both role and causal readonly work before the original turn leaves its capability scope."""
+                                    for tools in (code_tools, material_tools):
+                                        if tools is not None:
+                                            await tools.aclose()
+
                                 async with broker_inference(
                                     native,
                                     ken,
@@ -684,8 +699,8 @@ class OwnedCodexRuntime:
                                     prepare_ken=prepare_ken
                                     if development or code_review
                                     else None,
-                                    seal_tools=code_tools.aclose
-                                    if code_tools is not None
+                                    seal_tools=seal_host_tools
+                                    if code_tools is not None or material_tools is not None
                                     else None,
                                 ) as session:
 
@@ -794,6 +809,8 @@ class OwnedCodexRuntime:
                             withdraw()
                             watcher.cancel()
                             await asyncio.gather(watcher, return_exceptions=True)
+                            if material_tools is not None:
+                                await material_tools.aclose()
                             if code_review:
                                 # Retire physical work before waiting on host
                                 # source/SQL work or retaining interruption data.

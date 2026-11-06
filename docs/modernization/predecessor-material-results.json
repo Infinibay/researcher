@@ -1,0 +1,81 @@
+{
+  "base_commit": "84675e9",
+  "status": "exact_accepted_predecessor_material_and_owned_successor_author_review_acceptance_verified",
+  "red": {
+    "missing_material_modules": "6FAIL2.77s before implementation",
+    "new_handoff_schema": "2FAIL0.96s before schema3/immutable2 compatibility",
+    "accepted_review_output_selection": "1FAIL0.77s; a later accepted code_review must not replace productive author output"
+  },
+  "source": {
+    "cases": 118,
+    "passed": 114,
+    "failed": 4,
+    "skipped": 0,
+    "seconds": 57.3,
+    "failures": [
+      {
+        "case": "backend.tests.runtime.test_code_review_state::test_unused_review_inverse_preserves_closed_author_and_candidate",
+        "message": "RuntimeError: Development rollback refused: execution history or live authority requires forward repair or explicit backup restore"
+      },
+      {
+        "case": "backend.tests.runtime.test_code_review_records::test_unused_native_review_inverse_preserves_existing_packet",
+        "message": "RuntimeError: Development rollback refused: execution history or live authority requires forward repair or explicit backup restore"
+      },
+      {
+        "case": "backend.tests.runtime.test_code_acceptance::test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history[frozen_author]",
+        "message": "RuntimeError: Development rollback refused: execution history or live authority requires forward repair or explicit backup restore"
+      },
+      {
+        "case": "backend.tests.runtime.test_code_candidate_state::test_normal_startup_installs_candidate_storage_and_unused_inverse_is_repeatable",
+        "message": "assert 54 == 42"
+      }
+    ],
+    "classification": "Existing inverse/rollback obligations DD003, unchanged tests and migration module; guards preserved, not a global green claim."
+  },
+  "isolated_installed": {
+    "passed": 115,
+    "failed": 0,
+    "skipped": 0,
+    "explicitly_deselected_preexisting_inverse_cases": 4,
+    "seconds": 386.404,
+    "receipt": "docs/modernization/predecessor-material-packaging.json"
+  },
+  "physical": {
+    "seconds": 331.122,
+    "controlled_native_turns": 5,
+    "real_model_turns": 0,
+    "actual_host_publications": 0,
+    "scope": "Actual kernel/broker/Git/SQLite planner, owner-adopted code-to-code graph, both authors/checks, distinct native reviews and explicit owner acceptances. Actual raw predecessor packet/input/diff windows fully reconstructed and hash verified by controlled successor and its reviewer; private applied200, canonical137 preserved, two code acceptances, no publications. Generation/Ken controlled; not model understanding or ranking proof."
+  },
+  "rework": [
+    {
+      "trial": "First physical source",
+      "seconds": 111.75,
+      "outcome": "First author/review accepted, successor not admitted. Diagnosed selection of newer accepted code_review instead of productive author; regression reproduced and fixed with execution-kind filter."
+    },
+    {
+      "trial": "Second physical source",
+      "seconds": 125.37,
+      "outcome": "Successor admitted but pre-inference ValueError without detailed stack. Cause unknown; not reproduced by later instrumented actual author or final installed proof. exclusiveMinimum was a hypothesis only; schema was not changed."
+    },
+    {
+      "trial": "Diagnostic source",
+      "seconds": 203.13,
+      "outcome": "Actual successor read artifacts and edited privately, then original total60s candidate Git capture expired. Stack retained. Host now uses original selected wall budget, floor60/cap300, under existing outer controller timeout; no retries/guard removal."
+    },
+    {
+      "trial": "Installed verifier before selection correction",
+      "seconds": 29.49,
+      "outcome": "59PASS then an unchanged inverse failure; absolute-path deselection did not match installed pytest node IDs. Corrected exact function-name expression; no physical turn had run."
+    }
+  ],
+  "quality": {
+    "changed_or_new_definitions_documented": 55,
+    "missing_docs": 0,
+    "new_lint": 3,
+    "inherited_lint": 0,
+    "deferred": "DD-028"
+  },
+  "frontend": "No frontend source change; no new browser or full-page acceptance claimed. Existing visual obligations retained.",
+  "limits": "New schema3 descriptors, old prepared2 bytes preserved; bounded current original-lease readonly code material, same source/accepted dependency only. No recursive code prompts/new table/controller/grant/API layer. Large documentary handoffs, broader legacy/manual candidate adoption, full project closure/report, settings, prompts/model/science/human/visual/global/install/restore/final review remain in the full objective. Earlier ValueError is untriaged, not asserted fixed; no quality claim from controlled generation."
+}

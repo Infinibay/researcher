@@ -9,7 +9,39 @@ Actualizado: 2026-11-06. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: material exacto de ramas y publicación nativa del resultado nuevo
+## Etapa actual: material de código aceptado para sucesoras
+
+**Resultado:** entregas nuevas esquema3 describen paquete, entrada original y diff
+binario de la predecesora aceptada. Autor sucesor y revisor de su autor exacto
+leen ventanas base64 con hash/tamaño/cobertura, bajo lease original, dependencia,
+contexto y repositorio reales. La aprobación anterior no se hereda; aceptar no
+publica. Entregas2 ya preparadas conservan sus bytes. Corregida selección de una
+revisión aceptada más reciente que ocultaba el resultado productivo. Sin otra
+tabla, loop o capa de permisos. Captura del candidato usa el plazo seleccionado
+del run, mínimo60/máximo300s y cierre original; no reintenta un timeout.
+
+**Verificación:** fuente118casos:114PASS4FAIL57.30s; las cuatro inversas heredadas
+siguen en DD003. Paquete no editable/sin frameworks antiguos:115PASS0FAIL0SKIP,
+cuatro inversas excluidas explícitamente,386.404s. Cadena real331.122s: plan,
+autor A/comprobación/revisión/aceptación, autor B que lee/aplica material exacto,
+comprobación/revisión/aceptación. Fuente137 intacta, dos candidatos200 aceptados,
+0publicaciones. Cinco turnos controlados;0modelos reales/Ken controlado.250imports
+backend sólo del entorno instalado,802miembros coincidentes.55definiciones
+documentadas; tres avisos de imports diferidos DD028. Sin cambio frontend ni
+aceptación visual nueva. Un ValueError anterior no se reprodujo y sigue sin causa
+exacta; no se declara corregido. Fallo de captura60s y retrabajo conservados en
+[los resultados](predecessor-material-results.json),
+[paquete](predecessor-material-packaging.json),
+[contrato](../architecture/predecessor-code-material.md).
+
+**Siguiente principal:** cierre explícito e informe integral del proyecto. Leer
+el brief `project-completion-brief.md` del directorio de seguimiento antes de
+ampliar infraestructura. No volver al pulido de lectores/catálogos/recibos.
+Metadata no registrada/adopción manual restante, consumidores antiguos, settings,
+todas las páginas/prompts/evaluaciones,43escenarios, suite global, instalación/
+restore/inversas y revisión final siguen dentro del objetivo completo.
+
+## Etapa anterior: material exacto de ramas y publicación nativa del resultado nuevo
 
 **Resultado:** Tareas/Conversación aceptan rama registrada + commit completo como
 datos para un autor nuevo. La preparación Git propia captura diff binario completo,

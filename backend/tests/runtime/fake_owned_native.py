@@ -27,6 +27,11 @@ review_mode = False
 development_mode = False
 prior_code_patch = None
 prior_selected_branch = False
+causal_task = None
+causal_ready = False
+causal_section = 0
+causal_bytes = {}
+causal_resume = None
 prior_selected_files = None
 code_prior_files = False
 review_subject = None
@@ -59,6 +64,8 @@ def call(name, arguments):
 
 def next_tool(response=None):
     """Advance controlled author or reviewer generation while using the real admitted tool bridge."""
+    if causal_task is not None and not causal_ready:
+        return next_causal_material(response)
     if planning_mode:
         return next_planning_tool(response)
     if code_review_mode:
@@ -207,6 +214,41 @@ def next_tool(response=None):
         )
 
 
+def next_causal_material(response=None):
+    """Consume real bounded accepted artifacts before continuing the controlled author/reviewer; this is not a real model understanding claim."""
+    import hashlib
+
+    global causal_ready, causal_section, prior_code_patch
+    sections = ('packet', 'author_input', 'diff')
+    if response is not None:
+        assert response['success'], response
+        page = json.loads(response['contentItems'][0]['text'])
+        section = sections[causal_section]
+        saved = causal_bytes.setdefault(section, bytearray())
+        assert page['source']['task_id'] == causal_task and page['authority'] == 'data_only'
+        assert page['offset'] == len(saved)
+        saved.extend(base64.b64decode(page['data_base64'], validate=True))
+        if page['next_offset'] is None:
+            assert len(saved) == page['total_bytes'] and hashlib.sha256(saved).hexdigest() == page['sha256']
+            causal_section += 1
+    if causal_section == len(sections):
+        original = json.loads(causal_bytes['author_input'])
+        assert original['scope']['task_id'] == causal_task
+        assert b'+200' in causal_bytes['diff']
+        causal_ready = True
+        if causal_resume is not None:
+            return next_code_review_tool(causal_resume)
+        prior_code_patch = base64.b64encode(causal_bytes['diff']).decode('ascii')
+        return next_tool()
+    section = sections[causal_section]
+    offset = len(causal_bytes.get(section, b''))
+    identity = f'material-{section}-{offset}'
+    send({'id': identity, 'method': 'item/tool/call', 'params': {
+        'threadId': native_thread_id, 'turnId': native_turn_id, 'callId': identity,
+        'tool': 'researcher_prerequisite_code', 'arguments': {'task_id': causal_task, 'section': section, 'offset': offset, 'max_bytes': 4096},
+    }})
+
+
 def next_development_tool(response=None):
     """Exercise private edits, durable job reads and fresh Ken reads without proposing research acceptance."""
     global steps, job
@@ -283,6 +325,7 @@ def development_edit_code():
         + "patch=base64.b64decode(" + repr(prior_code_patch) + ",validate=True)\n"
         + "subprocess.run(['/usr/bin/git','apply','--check','--binary','-'],input=patch,check=True)\n"
         + "subprocess.run(['/usr/bin/git','apply','--binary','-'],input=patch,check=True)\n"
+        + ("print('causal predecessor applied')\n" if causal_task is not None else "")
         + ("p=Path('fact.txt');assert p.read_text()=='999';p.write_text('200');print('selected old branch adapted')\n" if prior_selected_branch else "")
         + "print('prior patch applied');print(Path('fact.txt').read_text())"
     )
@@ -367,7 +410,7 @@ def next_review_tool(response=None):
 
 def next_code_review_tool(response=None):
     """Generate controlled independent review calls; every source/proposal/Git/closure operation remains production code."""
-    global steps, code_packet, code_file, job, code_prior_files
+    global steps, code_packet, code_file, job, code_prior_files, causal_task, causal_resume
     if response is not None:
         if not response["success"]:
             raise RuntimeError("Controlled code review tool failed: " + str(response))
@@ -400,6 +443,11 @@ def next_code_review_tool(response=None):
                 assert actual_input["work_delivery"]["plan_context"]["accepted_plan"][
                     "assumptions"
                 ]
+                code_sources = [item for item in actual_input['work_delivery']['prerequisites'] if item['kind']=='accepted_code_candidate']
+                if code_sources and not causal_ready:
+                    causal_task = code_sources[0]['task_id']
+                    causal_resume = response
+                    return next_causal_material()
             elif actual_input.get("prior_code") and "files" in actual_input["prior_code"]["snapshot"]:
                 assert "Import selected older" in actual_input["request"]
                 earlier = actual_input["prior_code"]["snapshot"]
@@ -953,6 +1001,9 @@ for line in sys.stdin:
     elif method == "turn/start":
         if development_mode:
             initial = json.loads(params["input"][0]["text"])
+            code_sources = [item for item in (initial.get('work_delivery') or {}).get('prerequisites', []) if item['kind']=='accepted_code_candidate']
+            if code_sources:
+                causal_task = code_sources[0]['task_id']
             prior = initial.get("prior_code")
             if prior is not None:
                 assert prior["authority"] == "data_only"

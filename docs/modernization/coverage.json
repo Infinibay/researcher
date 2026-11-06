@@ -3110,7 +3110,14 @@
         "docs/architecture/accepted-plan-execution.md",
         "docs/modernization/plan-execution-results.json",
         "docs/modernization/plan-execution-packaging.json",
-        "docs/design/audits/2026-11-05-plan-execution/report.md"
+        "docs/design/audits/2026-11-05-plan-execution/report.md",
+        "backend/planning/materials.py",
+        "backend/runtime/predecessor_tools.py",
+        "backend/tests/runtime/test_predecessor_code_material.py",
+        "backend/tests/runtime/test_owned_code_dependencies.py",
+        "docs/architecture/predecessor-code-material.md",
+        "docs/modernization/predecessor-material-results.json",
+        "docs/modernization/predecessor-material-packaging.json"
       ],
       "implemented": [
         "Separate exact owner manifest execution decision; one persistent original task delivery and immutable causal handoff per node, atomic native admission/link and original receipt",
@@ -3118,14 +3125,15 @@
         "Current accepted prerequisite result identity, complete immutable research snapshots/sources/limitations enter exact frozen native input; no hidden truncation",
         "Changed premise pauses/fences/revokes/versions all nodes in the authorized graph; obsolete closed consumer acceptance rejected; no automatic impact on other projects",
         "Durable pause/project Stop before peer withdrawal; recover only unattempted queued original runs; failed/cancelled/uncertain attempts never replayed by coordinator",
-        "Strict owner HTTP and Tasks controls; exact execute/pause/resume packets persist across loss/reload"
+        "Strict owner HTTP and Tasks controls; exact execute/pause/resume packets persist across loss/reload",
+        "Schema3 small exact accepted-code descriptors and original-lease readonly packet/input/binary-diff windows, same-source/context/acceptance checks; schema2 bytes retained. Installed115PASS excluding4oldinverses, actual5turn planner/twoauthors/checks/independentreviews/owneracceptances, canonical137preserved."
       ],
       "remaining": [
         "Closed-delivery successors and exact corrected-graph owner revisions connected; manual drafts/unaccepted-run adoption, candidate transfer and full lifecycle remain. Terminal core shares owner; advanced parity pending.",
         "Graph-wide conservative invalidation; branch-selective scope and independent-node priority scheduling remain deferred",
-        "Code prerequisites currently transfer acceptance/head/tree/diff identities and explicit not-published limitation; complete candidate reading/adoption across code tasks remains integration work",
+        "Code prerequisite reading is now implemented; actual installed five-turn physical proof is recorded in predecessor-material-results. Broader retained/manual candidate adoption and whole-project closure remain.",
         "Legacy autonomy/remaining flows/tools still require actual migration; orchestrator/CLI/TUI core cut over separately; known local registration check is not global physical legacy writer exclusion",
-        "Large complete predecessor snapshots can exceed native input budget and block before inference; no silent truncation; windowed handoff evidence reads remain future capability",
+        "Large complete documentary predecessor snapshots can exceed native input budget and block before inference; no silent truncation; windowed documentary handoff evidence reads remain future capability; code artifact reads are bounded separately",
         "No real model/prompt quality/human comprehension evaluation, full-page acceptance, current global-suite green, full host install or migration-inverse completion"
       ]
     },
@@ -3322,6 +3330,24 @@
         "Point-in-time equal observations are not atomic Git snapshot or proof of producer closure. Existing native admission/controller restrictions remain; global atomic physical exclusion still required.",
         "Actual DevelopmentFlow/CodeReviewFlow and remaining legacy/auxiliary-inference retirement, automatic plan successor material selection and retained-code publication chain remain principal.",
         "Queued prior-origin visibilityDD020, web/terminal endpoint parity, remote recovery, full prompt/book/model/scientific/human evaluations, remaining visual concepts/routes/all-page acceptance, global known failures, clean installation/restore/inverses43–53 and final fresh review remain in full active plan."
+      ]
+    },
+    "accepted_predecessor_code_material": {
+      "status": "owned_code_successor_and_review_verified_whole_project_closure_pending",
+      "evidence": [
+        "docs/architecture/predecessor-code-material.md",
+        "docs/modernization/predecessor-material-results.json",
+        "docs/modernization/predecessor-material-packaging.json",
+        "backend/tests/runtime/test_predecessor_code_material.py",
+        "backend/tests/runtime/test_owned_code_dependencies.py"
+      ],
+      "implemented": [
+        "Bounded exact packet/input/binary-diff data for actual accepted dependencies; productive output selector excludes newer reviews; schema2 compatibility; no new authority/loop/persistence layer",
+        "Actual clean installed five-turn graph with both author/check/review/acceptance chains, unchanged original source and no publications;115selectedcasespass,4inheritedinversefailuresexplicitlyretained"
+      ],
+      "remaining": [
+        "Whole-project closure/final report, documentary large handoff windows, broader retained/manual adoption, current global suite/inverses/restore and all original visual/model/science/human/final-review obligations",
+        "Earlier startup ValueError has no exact cause and was not reproduced; preserve diagnostic limitation, do not assert it fixed."
       ]
     }
   }
