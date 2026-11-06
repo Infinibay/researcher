@@ -180,7 +180,7 @@ async def test_context_change_after_real_clone_retains_copy_without_admitting_it
     state = DevelopmentWorkspaces(s.c.store, root)
     complete = state.complete
 
-    def correct_before_complete(lease, prepared):
+    def correct_before_complete(lease, prepared, prior_branch=None):
         """Model the owner correcting requirements after the physical clone has already finished."""
         s.c.store.correct_context(
             project_id=101,
@@ -191,7 +191,7 @@ async def test_context_change_after_real_clone_retains_copy_without_admitting_it
             source_kind="user_message",
             source_reference="owner-correction:new-context",
         )
-        return complete(lease, prepared)
+        return complete(lease, prepared, prior_branch)
 
     monkeypatch.setattr(state, "complete", correct_before_complete)
     async with AsyncPeerBroker(broker) as owner:

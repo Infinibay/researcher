@@ -1083,8 +1083,13 @@
       "evidence": []
     },
     "D09": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/source-operations.md",
+        "docs/modernization/source-setup-results.json",
+        "docs/modernization/source-setup-packaging.json",
+        "backend/tests/runtime/test_source_service.py"
+      ]
     },
     "D10": {
       "status": "in_progress",
@@ -3490,7 +3495,7 @@
       ]
     },
     "repository_explorer": {
-      "status": "selected_explorer_and_existing_directory_registration_verified_full_setup_pending",
+      "status": "selected_explorer_and_owned_local_source_setup_verified_remote_creation_partial_repair_pending",
       "evidence": [
         "docs/design/concepts/repositories/manifest.json",
         "docs/design/audits/2026-11-06-repositories/report.md",
@@ -3499,14 +3504,22 @@
         "docs/modernization/repositories-packaging.json",
         "backend/tests/runtime/test_repository_reading.py",
         "frontend/tests/repository-explorer.test.ts",
-        "frontend/tests/repository-file-design.test.ts"
+        "frontend/tests/repository-file-design.test.ts",
+        "docs/architecture/source-operations.md",
+        "docs/modernization/source-setup-results.json",
+        "docs/modernization/source-setup-packaging.json",
+        "docs/design/audits/2026-11-06-source-setup/report.md",
+        "backend/tests/runtime/test_owned_source_setup.py",
+        "backend/tests/runtime/test_source_service.py",
+        "backend/tests/runtime/test_source_shutdown.py"
       ],
       "implemented": [
         "Three desktop concepts+mobile selected/implemented; complete immutable tree/blob read, explicit branch refresh, source scope/focus, historical review owner entry and original registration retry.",
-        "Actual full-SHA/error/parent-root failures reproduced and fixed;22installed contracts/112frontend/15browser captures. No native/model/remote-effect turn."
+        "Actual full-SHA/error/parent-root failures reproduced and fixed;22installed contracts/112frontend/15browser captures. No native/model/remote-effect turn.",
+        "Explicit original administrative create/adopt/HTTPS clone, no fake task IDs; source/project/lifespan Stop, retained partial folders, history deletion/completion guards and readonly recovery of Git-finished/registration-lost. Retired old init/clone/credential/origin/automatic remote/force-push entry points."
       ],
       "remaining": [
-        "Replace old init/create API with distinct original owner create/adopt/clone/remote/repair and partial-effect reconciliation; do not fabricate a native inference task.",
+        "Separate explicit remote creation and original remote response-loss reconciliation; partial local-write repair/no-grant crash cases and cross-browser history/restore integration remain.",
         "Source reader budgets/concurrency/special metadata/submodules, remote annotation identity, full page/human/whole-plan/global/restore/final review remain."
       ]
     }

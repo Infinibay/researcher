@@ -35,12 +35,11 @@ o error antes de desplazar y enfocar el panel; no deja sólo la cabecera visible
 La identidad de fuente/revisión queda en el panel. Regresar restaura foco en la
 fila elegida. Código desplaza sólo su propia región y conserva navegación teclado.
 
-El alta completa sigue pendiente: crear local, clonar, crear remoto y reparar con
-propiedad/recuperación reales. `RepositoryManager.init_repo` y su API antigua aún
-pueden crear remoto/cambiar origin/forcepush; deben reemplazarse. El ejecutor nativo
-actual necesita un intento de desarrollo y una fuente ya admitida: fabricar una
-tarea para el setup sería autoridad falsa. Resolver esa frontera es el siguiente
-bloque principal. También quedan presupuestos de lecturas grandes, concurrencia
+La integración posterior incorpora [operaciones administrativas de fuentes](source-operations.md)
+para crear local, adoptar Git y clonar HTTPS, sin inventar una tarea de inferencia.
+La vía antigua de alta/configuración ya rechaza antes de efectos. Crear remoto
+y reparar etapas incompletas siguen pendientes, al igual que la recuperación
+ampliada. También quedan presupuestos de lecturas grandes, concurrencia
 del lector síncrono, metadatos especiales/submódulos y aceptación integral. No se
 presentan como resueltos por este piloto.
 

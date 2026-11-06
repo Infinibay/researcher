@@ -4,6 +4,7 @@ import json
 import re
 from pathlib import Path
 
+from backend.git.source_operations import SourceOperations
 from backend.knowledge.reviews import digest
 from backend.runtime.contracts import RunConflict, RunNotFound, command_key, text
 
@@ -47,9 +48,11 @@ class ProjectWorkspace:
         runs = [dict(row) for row in conn.execute("SELECT r.id AS run_id,r.task_id,r.context_version,r.fence,r.current_attempt_id AS attempt_id,r.status FROM runtime_runs r LEFT JOIN runtime_attempts a ON a.id=r.current_attempt_id WHERE r.project_id=? AND (r.status IN ('queued','running','cancelling','reconciling','waiting_input') OR (r.status='needs_review' AND (coalesce(a.status,'missing')!='finished' OR EXISTS(SELECT 1 FROM runtime_peers p WHERE p.attempt_id=a.id AND p.state!='closed')))) ORDER BY r.id", (project,))]
         graphs = [dict(row) for row in conn.execute("SELECT e.id AS execution_id,e.plan_run_id,r.task_id,e.manifest_sha256,e.authorization_revision FROM runtime_plan_effective_executions e JOIN runtime_runs r ON r.id=e.plan_run_id WHERE e.project_id=? AND e.status='active' ORDER BY e.id", (project,))]
         legacy = self.legacy_active(project) is not False
-        if len(runs) + len(graphs) > 256:
+        metadata = conn.execute('SELECT metadata_json FROM projects WHERE id=?',(project,)).fetchone()[0]
+        sources = [{k: row[k] for k in ('operation_key','operation_id','fence','status')} for row in SourceOperations.summaries(metadata) if row['status'] not in ('completed','rejected','stopped')]
+        if len(runs) + len(graphs) + len(sources) > 256:
             raise RunConflict('El proyecto supera el límite de observación; no se omitieron intentos de Stop.')
-        return {'project_id': project, 'runs': runs, 'graphs': graphs, 'legacy_registered': legacy}
+        return {'project_id': project, 'runs': runs, 'graphs': graphs, 'legacy_registered': legacy, **({'source_operations':sources} if sources else {})}
 
     def state(self, project):
         """Read directory-policy observations, metadata and exact historical links without probing Git/remotes or selecting an arbitrary newest plan."""
@@ -81,12 +84,13 @@ class ProjectWorkspace:
             if len(reports) > 256:
                 raise RunConflict('El historial de cierres supera esta vista; no se omitieron decisiones.')
             task_ids = sorted({r['task_id'] for r in scope['runs']} | {g['task_id'] for g in scope['graphs']})
-            history = any(conn.execute(f'SELECT 1 FROM {table} WHERE project_id=? LIMIT 1', (project,)).fetchone() for table in ('runtime_runs','agent_runs','flow_snapshots','agent_events'))
+            source_operations = SourceOperations.summaries(conn.execute('SELECT metadata_json FROM projects WHERE id=?', (project,)).fetchone()[0])
+            history = bool(source_operations) or any(conn.execute(f'SELECT 1 FROM {table} WHERE project_id=? LIMIT 1', (project,)).fetchone() for table in ('runtime_runs','agent_runs','flow_snapshots','agent_events'))
             return {'project':owner, 'project_id':project, 'metadata_sha256':digest({k:owner[k] for k in ('name','description','original_description')}), 'history_present':history, 'runtime_available':self.workspaces is not None,
-                    'workspace_root':str(self.workspaces.root) if self.workspaces else None, 'sources':sources,
+                    'workspace_root':str(self.workspaces.root) if self.workspaces else None, 'sources':sources, 'source_operations':source_operations,
                     'activity':scope['runs'], 'graphs':scope['graphs'], 'legacy_registered':scope['legacy_registered'],
                     'plans':plans, 'reports':reports, 'report_validity':'not_rechecked',
-                    'stop':{'task_id':task_ids[0], 'scope_sha256':digest(scope)} if task_ids and not scope['legacy_registered'] else None}
+                    'stop':{'task_id':task_ids[0] if task_ids else None, 'scope_sha256':digest(scope)} if (task_ids or scope.get('source_operations')) and not scope['legacy_registered'] else None}
 
     def register_source(self, project, *, name, path):
         """Register only an existing directory under the real managed root; same resource intent returns the original ID without Git/init/clone/origin/network effects."""
@@ -99,6 +103,7 @@ class ProjectWorkspace:
             raise RunConflict('Selecciona una ruta absoluta existente, no el directorio supuesto de otro agente.')
         with self.runs._transaction(write=True) as conn:
             self._project(conn, project)
+            SourceOperations.assert_unreserved(conn, path)
             existing = conn.execute('SELECT * FROM repositories WHERE project_id=? AND (name=? OR local_path=?)', (project,name,path)).fetchone()
             if existing is not None:
                 if existing['name'] != name or existing['local_path'] != path or existing['status'] != 'active':
@@ -115,20 +120,38 @@ class ProjectWorkspace:
         intent = {'kind':'project.stop','project_id':project,'task_id':task_id,'scope_sha256':scope_sha256}
         with self.runs._transaction(write=True) as conn:
             self._project(conn, project)
-            old = self.runs._receipt(conn,project,task_id,operation_key,intent)
+            metadata = SourceOperations._load(conn,project)
+            administrative = metadata.get('owner_project_stops_v1',{}).get(operation_key)
+            if administrative is not None:
+                if administrative['intent'] != intent:
+                    raise RunConflict('La solicitud Stop original identifica otro alcance.')
+                return administrative['receipt'], False
+            old = self.runs._receipt(conn,project,task_id,operation_key,intent) if task_id is not None else None
             if old is not None:
                 return old, False
             scope = self._stop_scope(conn,project)
             tasks = sorted({r['task_id'] for r in scope['runs']} | {g['task_id'] for g in scope['graphs']})
-            if scope['legacy_registered'] or not tasks or task_id != tasks[0] or digest(scope) != scope_sha256:
+            if scope['legacy_registered'] or not (tasks or scope.get('source_operations')) or task_id != (tasks[0] if tasks else None) or digest(scope) != scope_sha256:
                 raise RunConflict('La actividad cambió o hay un dueño anterior registrado; consulta los intentos originales antes de detener.')
             for graph in scope['graphs']:
                 conn.execute("UPDATE runtime_plan_executions SET status='paused',updated_at=? WHERE project_id=? AND id=?", (self.runs.clock(),project,graph['execution_id']))
             for run in scope['runs']:
                 self.runs._cancel(conn,project,run['run_id'])
+            for source in scope.get('source_operations',[]):
+                SourceOperations.withdraw(conn,project,source['operation_key'],operation_id=source['operation_id'],fence=source['fence'])
             conn.execute("UPDATE projects SET status='paused' WHERE id=?", (project,))
             receipt = {'kind':'project.stop','project_id':project,'task_id':task_id,'operation_key':operation_key,'scope_sha256':scope_sha256,
                        'run_ids':[r['run_id'] for r in scope['runs']], 'execution_ids':[g['execution_id'] for g in scope['graphs']], 'closure':'unconfirmed','status':'requested'}
-            self.runs._save_receipt(conn,project,task_id,operation_key,intent,receipt)
-            self.runs._event(conn,project,task_id,'project.stop_requested',receipt)
+            if scope.get('source_operations'):
+                receipt['source_operations'] = scope['source_operations']
+            if task_id is not None:
+                self.runs._save_receipt(conn,project,task_id,operation_key,intent,receipt)
+                self.runs._event(conn,project,task_id,'project.stop_requested',receipt)
+            else:
+                metadata = SourceOperations._load(conn,project)
+                stops = metadata.setdefault('owner_project_stops_v1',{})
+                if len(stops) >= 64:
+                    raise RunConflict('Se alcanzó el límite de solicitudes Stop conservadas; no se borró historia.')
+                stops[operation_key] = {'intent':intent,'receipt':receipt}
+                SourceOperations._save(conn,project,metadata)
             return receipt, True

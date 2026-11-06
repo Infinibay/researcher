@@ -15,6 +15,8 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from uuid import uuid4
 
+from backend.git.source_capsule import SourceGitCapsule, SourceGitLaunch
+
 from backend.runtime.authority_journal import (
     AuthorityBusy,
     AuthorityConflict,
@@ -134,9 +136,11 @@ class PeerBroker:
     Complete actor-origin and endpoint authentication remain deployment work.
     """
 
-    def __init__(self, journal, domain, *, limits=None, remote_transport=None):
+    def __init__(self, journal, domain, *, limits=None, remote_transport=None, source_network=None, source_transport=None):
         """Bind original physical ownership and optional operator remote configuration before any peer or credential is admitted."""
         self.remote_transport = remote_transport
+        self.source_network = source_network
+        self.source_transport = source_transport
         if limits is None:
             limits = BrokerLimits()
         if not isinstance(limits, BrokerLimits):
@@ -183,6 +187,9 @@ class PeerBroker:
     ):
         """Retain one immutable source concession and record each operation's actual execution view."""
         snapshot = self.journal.load()
+        source_kind = admission.get('source_kind', 'runtime')
+        if source_kind not in ('runtime', 'repository_setup'):
+            raise AuthorityConflict('Unknown source ownership domain')
         remote_key = None
         if runtime_manifest and runtime_manifest.get("remote_effect_operation_id"):
             remote_key = (
@@ -208,6 +215,8 @@ class PeerBroker:
         if reservation is not None and grant is None:
             raise AuthorityUncertain("Attempt reference lost its original domain grant")
         if grant is not None:
+            if grant.get('source_kind', 'runtime') != source_kind or (source_kind == 'repository_setup' and (grant.get('source_request_sha256') != admission['source_request_sha256'] or grant.get('source_scope_sha256') != admission['source_scope_sha256'])):
+                raise AuthorityConflict('Original source-operation scope differs')
             if active != self.grant_id:
                 raise AuthorityUncertain("Active concession reference differs")
             if grant["owner"] != self._owner or grant["state"] != "active":
@@ -246,6 +255,7 @@ class PeerBroker:
                     admission.get("source_binding", admission["binding"])
                 ),
                 "limits": asdict(self._limits),
+                **({key: admission[key] for key in ('source_kind', 'source_operation_key', 'source_operation_id', 'source_request_sha256', 'source_scope_sha256')} if source_kind == 'repository_setup' else {}),
                 **{
                     key: admission[key]
                     for key in (
@@ -761,13 +771,18 @@ class PeerBroker:
                     if isinstance(git_launch, PublicationObservationLaunch)
                     else "owned-git-publication-v1"
                     if isinstance(git_launch, PublicationGitLaunch)
+                    else "owned-source-setup-git-v1"
+                    if isinstance(git_launch, SourceGitLaunch)
                     else "owned-git-preparation-v1",
-                    "execution_kind": "remote_publication"
+                    "execution_kind": "repository_setup"
+                    if isinstance(git_launch, SourceGitLaunch)
+                    else "remote_publication"
                     if isinstance(git_launch, RemoteGitLaunch)
                     else "code_publication"
                     if isinstance(git_launch, PublicationGitLaunch)
                     else "development",
                     "launch": asdict(git_launch),
+                    **({'source_setup_code_sha256': {name: hashlib.sha256(Path(__file__).parents[1].joinpath('git', name).read_bytes()).hexdigest() for name in ('source_operations.py', 'source_registry.py', 'source_capsule.py')}, 'source_network': asdict(self.source_network) if git_launch.networked and self.source_network is not None else None} if isinstance(git_launch, SourceGitLaunch) else {}),
                     **(
                         {
                             "remote_effect_operation_id": admission.get(
@@ -857,11 +872,18 @@ class PeerBroker:
                 raise AuthorityConflict(
                     "Broker profile requires its original admitted peer kind"
                 )
+            if isinstance(git_launch, SourceGitLaunch) or admission.get('source_kind') == 'repository_setup':
+                from backend.git.source_registry import SourcePeerRegistry
+                from backend.knowledge.reviews import digest
+
+                if not isinstance(registry, SourcePeerRegistry) or not isinstance(git_launch, SourceGitLaunch) or admission['execution_kind'] != 'repository_setup' or admission.get('source_kind') != 'repository_setup' or admission['task_id'] is not None or digest(asdict(git_launch.request)) != admission['source_request_sha256'] or git_launch.operation_id != admission['source_operation_id'] or git_launch.stage != admission['source_stage'] or git_launch.observation_only != admission['source_observation_only'] or git_launch.transport_identity != admission['source_remote_identity'] or (asdict(git_launch.allocation) if git_launch.allocation else None) != admission['source_allocation']:
+                    raise AuthorityConflict('Administrative Git requires its exact original operation, stage and views')
             if git_launch is not None and admission["execution_kind"] not in (
                 "development",
                 "code_review",
                 "code_publication",
                 "remote_publication",
+                "repository_setup",
             ):
                 raise AuthorityConflict(
                     "Writable preparation requires an admitted development execution"
@@ -938,6 +960,9 @@ class PeerBroker:
                 )
                 if git_launch is not None:
                     capsule = (
+                        SourceGitCapsule
+                        if isinstance(git_launch, SourceGitLaunch)
+                        else
                         RemoteGitCapsule
                         if isinstance(git_launch, RemoteGitLaunch)
                         else PublicationGitCapsule
@@ -961,6 +986,7 @@ class PeerBroker:
                         if isinstance(git_launch, RemoteGitLaunch)
                         else {}
                     ),
+                    **({'source_network': self.source_network, 'source_transport': self.source_transport} if isinstance(git_launch, SourceGitLaunch) else {}),
                     **({"network": network} if network is not None else {}),
                     **({"channel": channel} if channel is not None else {}),
                     **({"host_tools": True} if host_tools else {}),
@@ -1209,7 +1235,12 @@ class PeerBroker:
 
     @staticmethod
     def _project_snapshot(snapshot, grant_id, source, operation_id):
+        """Project witnessed closure into its original native or administrative registry; source labels never transfer authority between the two domains."""
         grant = snapshot.records["broker:grant:" + grant_id]
+        if grant.get('source_kind') == 'repository_setup':
+            from backend.git.source_registry import SourcePeerRegistry
+
+            return SourcePeerRegistry.project(snapshot, grant_id, operation_id, source=source)
         operations = [
             operation
             for key, operation in snapshot.records.items()

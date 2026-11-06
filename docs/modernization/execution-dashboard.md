@@ -9,7 +9,44 @@ Actualizado: 2026-11-06. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: explorador de Repositorios; preparación de fuentes pendiente
+## Etapa actual: preparación explícita de fuentes y ciclo de vida
+
+**Resultado utilizable:** crear Git local, adoptar Git existente y clonar HTTPS
+con intención/dueño/intento/fence administrativos propios; ninguna tarea de
+inferencia inventada. Reutiliza broker global/kernel y ejecutor Git existentes.
+Controles web/HTTP, Stop individual/proyecto/lifespan y recuperación readonly de
+Git terminado antes de perder el registro. Se conservan carpetas parciales,
+configuración y origin; se protegen borrado, registro alternativo y cierre del
+proyecto. La vieja vía de alta/remoto/origin/force push ahora rechaza antes de
+cualquier efecto. Auth de clone usa el origen y TLS configurados explícitamente.
+
+**Verificación:**124PASS instalados95.923s,261imports desde el entorno limpio,
+819miembros coincidentes/85distribuciones/sin frameworks antiguos. Un caso de
+compatibilidad del extra antiguo se verificó aparte en fuente; no se instala
+CrewAI para él.0modelos/binarios nativos de inferencia;1adaptador de inferencia
+sintético en el caso de error de shutdown.115frontend1.747s/build4.98s;
+10capturas desktop/móvil,0errores JS/axe en regiones revisadas/overflow.
+150definiciones Python y54definiciones/módulos TS documentados, sin faltantes.
+25avisos estáticos de archivos tocados, incluidos heredados; pulido DD033.
+[Resultados](source-setup-results.json), [paquete](source-setup-packaging.json),
+[contrato](../architecture/source-operations.md),
+[QA](../design/audits/2026-11-06-source-setup/report.md).
+
+**Siguiente principal:** comprobar prioridad física de Stop bajo SQLite contendido
+sin perder la barrera de admisión/cierre ya corregida; luego crear remoto de forma separada con namespace/visibilidad
+explícitos e identidad recuperable; luego reparar etapas init/commit/clone/checkout
+incompletas y casos sin concesión original. Observar Git ya terminado no resuelve
+esos casos. Historia desde otro navegador, restore/inversas43–54 y aceptación de
+la página siguen abiertos. El brief `source-remote-creation-brief.md` conserva el
+siguiente corte. No repetir explorador, conceptos ni pruebas físicas por pulido.
+
+Se mantiene todo el plan: cuatro rutas sin conceptos/código,0/12páginas aceptadas,
+settings/modelos/prompts/libros/semántica/ciencia/comprensión humana/terminal,
+historia/presupuesto,43escenarios/suite global/host install/restore/DD030 y revisión
+final. Ningún porcentaje global nuevo ni declaración de objetivo completado.
+
+## Etapa anterior: explorador de Repositorios
+
 
 **Resultado utilizable:** explorador seleccionado entre tres conceptos desktop y
 uno móvil. Registro y lectura separados; árbol/archivo fijados al mismo commit
@@ -34,7 +71,7 @@ documentadas;0avisos nuevos/3heredados/4resueltos.
 [contrato](../architecture/repository-explorer.md),
 [QA](../design/audits/2026-11-06-repositories/report.md).
 
-**Siguiente principal:** crear local/adoptar Git/clonar/crear remoto/reparar con
+**Siguiente al cerrar ese checkpoint:** crear local/adoptar Git/clonar/crear remoto/reparar con
 propiedad e intención recuperable propias; reemplazar `RepositoryManager.init_repo`
 y su endpoint que todavía mezclan alta remota/origin/forcepush. El ejecutor nativo
 actual exige tarea/fuente de desarrollo reales; no fabricar una tarea para setup.

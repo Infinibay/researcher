@@ -105,6 +105,16 @@ class RuntimeService:
         self._dispatch_lock = asyncio.Lock()
         self._dispatch_wake = asyncio.Event()
         self._dispatcher = None
+        self._sources = None
+
+    @property
+    def sources(self):
+        """Lazily compose administrative source workers from actual owned runtime configuration; construction launches no Git or model work."""
+        if self._sources is None:
+            from backend.git.source_service import SourceService
+
+            self._sources = SourceService(self)
+        return self._sources
 
     def _acquire(self):
         # The canonical DB path, rather than a configurable control path, owns
@@ -157,6 +167,7 @@ class RuntimeService:
     async def __aexit__(self, exc_type, exc, tb):
         """Drain dispatcher admissions before withdrawing workers and releasing the journal owner lock."""
         self._closing = True
+        source_closing = asyncio.create_task(self._sources.close(), name='researcher-source-shutdown') if self._sources is not None else None
         try:
             self._dispatch_wake.set()
             if self._dispatcher is not None:
@@ -177,9 +188,19 @@ class RuntimeService:
             if recovery_tasks:
                 await asyncio.gather(*recovery_tasks, return_exceptions=True)
         finally:
-            if self._lock_fd is not None:
-                os.close(self._lock_fd)
-                self._lock_fd = None
+            try:
+                if source_closing is not None:
+                    try:
+                        await asyncio.shield(source_closing)
+                    except asyncio.CancelledError:
+                        try:
+                            await source_closing
+                        finally:
+                            raise
+            finally:
+                if self._lock_fd is not None:
+                    os.close(self._lock_fd)
+                    self._lock_fd = None
 
     async def submit(
         self, spec, *, repository_id=None, conversation_thread=None, review=None, prior_code=None
@@ -312,6 +333,16 @@ class RuntimeService:
         from backend.planning.execution import PlanExecutions
 
         await asyncio.to_thread(PlanExecutions(self.store).pause_project, project_id)
+
+        from backend.git.source_operations import SourceOperations
+
+        def source_history():
+            """Observe administrative history even after this process restarted without reactivating or replaying its worker."""
+            with self.store._transaction() as conn:
+                return SourceOperations.has_history(conn.execute('SELECT metadata_json FROM projects WHERE id=?',(project_id,)).fetchone()[0])
+
+        if await asyncio.to_thread(source_history):
+            await self.sources.stop_project(project_id)
 
         def pending():
             """Read durable original active run IDs without admitting or replaying work."""

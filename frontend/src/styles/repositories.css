@@ -44,6 +44,16 @@
 .repo-form {display:grid;gap:1rem;max-width:42rem;margin-block:1rem}
 .repo-form label {display:grid;gap:.4rem;font-size:.875rem}
 .repo-form input,.repo-form textarea {padding:.7rem;border:1px solid var(--work-line);border-radius:.2rem;background:var(--work-paper);color:var(--work-ink);width:100%;min-width:0}
+.repo-form .repo-auth {display:flex;align-items:center;gap:.75rem}
+.repo-form .repo-auth input {width:1.1rem;height:1.1rem;flex:none}
+.repo-setup-state {max-width:46rem;border-block:1px solid var(--work-line);padding-block:1.5rem;margin-block:1.5rem;overflow-wrap:anywhere}
+.repo-setup-state h3 {font-size:1.25rem;font-weight:650}
+.repo-setup-state dl {display:grid;grid-template-columns:minmax(6rem,auto) minmax(0,1fr);gap:.5rem 1rem;margin-block:1rem}
+.repo-setup-state dt {color:var(--work-muted)}
+.repo-setup-actions {display:flex;flex-wrap:wrap;gap:.75rem;margin-block:1rem}
+.repo-setup-history {max-width:46rem;margin-block:1.5rem}
+.repo-setup-history li {border-bottom:1px solid var(--work-line);padding-block:.75rem;overflow-wrap:anywhere}
+.repo-setup-state summary,.repo-setup-history summary {min-height:2.75rem;padding-block:.65rem;cursor:pointer}
 .repo-review-register {margin-block:1rem}
 .repo-review-register button {display:grid;gap:.4rem;width:100%;border:0!important;border-bottom:1px solid var(--work-line)!important}
 .repo-review-register button[aria-pressed=true] {background:var(--work-wash)}

@@ -41,8 +41,16 @@ class WorkspaceRegistry:
         if len(rows) != 1:
             raise RunConflict("Select a repository for this request")
         selected = rows[0]
+        root, info = self._directory(conn, project_id, selected['local_path'])
+        return WorkspaceBinding(
+            selected["id"], selected["name"], selected["local_path"], str(root),
+            info.st_dev, info.st_ino, repository_id,
+        )
+
+    def _directory(self, conn, project_id, local_path):
+        """Validate an existing source directory before registration as well as admission, sharing the same host-root/database/foreign-project overlap policy."""
         try:
-            root = Path(selected["local_path"]).resolve(strict=True)
+            root = Path(local_path).resolve(strict=True)
             info = root.stat()
         except (OSError, TypeError, ValueError) as exc:
             raise RunConflict("Repository directory is unavailable") from exc
@@ -61,15 +69,7 @@ class WorkspaceRegistry:
             path = Path(other[0]).resolve()
             if root.is_relative_to(path) or path.is_relative_to(root):
                 raise RunConflict("Workspace is shared with another project")
-        return WorkspaceBinding(
-            selected["id"],
-            selected["name"],
-            selected["local_path"],
-            str(root),
-            info.st_dev,
-            info.st_ino,
-            repository_id,
-        )
+        return root, info
 
     def select(self, project_id, repository_id=None):
         return Path(self.bind(project_id, repository_id).workspace)

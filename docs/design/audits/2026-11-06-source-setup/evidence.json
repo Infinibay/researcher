@@ -1,0 +1,144 @@
+{
+  "status": "passed",
+  "scope": "Actual owner HTTP/SQLite/React/temporary Git/kernel source operations; controlled native configuration is never invoked,0model/Ken/remote turns. One source is held between real init and commit for actual Stop.",
+  "states": [
+    {
+      "file": "01-desktop-explicit-local-creation.png",
+      "sha256": "697b5087eb0a813b262fe7268ba977d5054e9a273fb2514b6100f16158fce23b",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "02-desktop-reply-unknown-original-retained.png",
+      "sha256": "ef7ffac35a449baf41b9e72f7dc9f911da9785b2f5d850fbe4a23c133df0d90b",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "03-desktop-reload-recovers-without-another-post.png",
+      "sha256": "b38554776e5afe3b4af638f3847807a00ce196ada56f383b8423d57e7808ca9a",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "04-mobile-explicit-readonly-adoption.png",
+      "sha256": "7e2d61df8c587c1b3e35bd50d0a2d0ea45d6da9ffd90acdc9636575b61844b33",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "05-mobile-clone-choices-and-credential-boundary.png",
+      "sha256": "d6f6eb5a9ffa4961fed7fedda59c6b864891112011427cf05aeaa66ce94069db",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "06-mobile-stopped-partial-source-retained.png",
+      "sha256": "70859d2559df4a6135a2e880b854810b73284cba74b0286ef9cb92476fe54012",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "07-desktop-stopped-operation-and-history.png",
+      "sha256": "616b316c708d7060fbe7cecffa3c818e3ad806916c501d1303bdb7fb46203255",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "08-mobile-final-stopped-source-explanation.png",
+      "sha256": "9a777b23fac74fffbf8aadc3cca91bd4d952b14a9ee40ddfdee022a1ab832517",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "09-mobile-definite-rejection-can-be-corrected.png",
+      "sha256": "e603f815cd18f4045b069f446a80b139a56b6bb6d89b782bb9775be0b5f95162",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "10-mobile-correction-restores-editable-choices.png",
+      "sha256": "936f688065cf2824fec5d047691bbd850ba3b688af953704bf6443235714643a",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    }
+  ],
+  "page_errors": [],
+  "original_posts": [
+    {
+      "operation_key": "fb5cbd2f-d241-480f-a56b-2e17e278878b",
+      "mode": "create",
+      "name": "ensayo",
+      "path": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/source-browser-state/test_prepare0/workspaces/ensayo",
+      "branch": "main",
+      "remote_url": null,
+      "remote_owner": null,
+      "private": null,
+      "use_configured_auth": false
+    },
+    {
+      "operation_key": "feea580d-343d-468f-9fb4-964738a2b852",
+      "mode": "adopt",
+      "name": "ensayo",
+      "path": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/source-browser-state/test_prepare0/workspaces/ensayo",
+      "branch": null,
+      "remote_url": null,
+      "remote_owner": null,
+      "private": null,
+      "use_configured_auth": false
+    },
+    {
+      "operation_key": "6175fe09-9ea0-4df0-add0-4f859470fdf5",
+      "mode": "create",
+      "name": "interrumpida",
+      "path": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/source-browser-state/test_prepare0/workspaces/interrumpida",
+      "branch": "main",
+      "remote_url": null,
+      "remote_owner": null,
+      "private": null,
+      "use_configured_auth": false
+    }
+  ],
+  "original_head": "745a4016c866b8df0e7709a0fa4f1faed5c5c841",
+  "continuation": "Original source remained completed after locator timeout. Exact saved create packet restored from prior captured request; no repeated create. Accessible combobox locator verified independently.",
+  "final_readonly_refresh": {
+    "source_posts": 0,
+    "page_errors": []
+  },
+  "definite_rejection": {
+    "reason": "Existing useful source cannot be initialized again",
+    "correction": "Only after explicit409/422 plus a newer exact operation404; unknown reply never discarded",
+    "source_head_unchanged": true,
+    "page_errors": []
+  }
+}

@@ -427,9 +427,10 @@ cancelación transaccional y dueño nativo originales sobre IDs capturados, sin
 nuevo loop ni reorientar reenvíos a trabajo posterior. Registrar carpeta existente
 no llama `RepositoryManager.init_repo` ni Git/remotos. El borrado sin historia
 usa el esquema actual y conserva estadísticas globales. [Contrato](project-workspace.md)
-y [evidencia](../modernization/projects-results.json). Crear local/clonar/adoptar/
-reparar y la ruta Repositorios son el siguiente bloque; la vieja alta todavía
-mezcla creación remota, cambios de origin y force push y debe sustituirse.
+y [evidencia](../modernization/projects-results.json). La integración posterior
+de [preparación explícita](source-operations.md) conecta crear/adoptar/clonar y
+retira la vieja alta de efectos implícitos. Remoto separado y reparación ampliada
+siguen pendientes.
 
 ## Explorador de fuentes — 2026-11-06
 
@@ -438,6 +439,4 @@ de carpeta existente, consulta de revisión completa y origen de PR. Reusa el pa
 de registro de Proyectos. El lector local comprueba raíz exacta para no descubrir
 el Git padre, distingue fallo de lista vacía y conserva path/objeto. Lectura no
 inicia trabajo ni deriva aceptación de approved. [Contrato](repository-explorer.md),
-[resultados](../modernization/repositories-results.json). El alta genérica/API
-antigua sigue activa y pendiente de sustitución por crear/adoptar/clonar/reparar
-con dueño propio. No inventar un intento nativo para poder usar su ejecutor Git.
+[resultados](../modernization/repositories-results.json). La sustitución posterior añade operaciones administrativas reales para crear/adoptar/clonar, Stop de fuente/proyecto/lifespan y recuperación readonly de Git terminado antes del registro. El alta antigua ahora rechaza antes de efectos; crear remoto y reparar etapas incompletas siguen pendientes. No se inventa un intento nativo. [Contrato actual](source-operations.md), [resultados](../modernization/source-setup-results.json).

@@ -1,0 +1,63 @@
+{
+  "base_commit": "b6783f0",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "edd389c9cac6153253bc077391ff2ceb672bf10b00c883c47b11b797e2e1f36b",
+  "observed": {
+    "passed": 124,
+    "failures": 0,
+    "skipped": 0,
+    "installed_distributions": 85,
+    "sdk": "1.30.0",
+    "excluded_frameworks": [
+      "chromadb",
+      "crewai",
+      "crewai-tools",
+      "fastmcp",
+      "fastmcp-slim",
+      "litellm",
+      "ollama",
+      "tree-sitter",
+      "tree-sitter-c",
+      "tree-sitter-javascript",
+      "tree-sitter-python",
+      "tree-sitter-rust",
+      "tree-sitter-typescript"
+    ],
+    "project_noneditable": true,
+    "backend_modules": 261,
+    "all_backend_imports_from_native_env": true,
+    "matched_application_members": 819,
+    "console_help": 0,
+    "console_missing_token": 2,
+    "console_real_stdio": true,
+    "console_created_database": false,
+    "real_model_turns": 0,
+    "controlled_native_turns": 0,
+    "synthetic_inference_adapter_turns": 1,
+    "actual_host_publications": "Local publication regression fixtures only; no user remote",
+    "seconds": 95.923
+  },
+  "tests": [
+    "backend/tests/runtime/test_source_shutdown.py",
+    "backend/tests/git/test_repository_manager.py",
+    "backend/tests/runtime/test_source_operations.py",
+    "backend/tests/runtime/test_owned_source_setup.py",
+    "backend/tests/runtime/test_source_service.py",
+    "backend/tests/runtime/test_source_setup_retirement.py",
+    "backend/tests/runtime/test_repository_reading.py",
+    "backend/tests/runtime/test_native_git_retirement.py",
+    "backend/tests/runtime/test_project_workspace.py",
+    "backend/tests/runtime/test_project_completion.py",
+    "backend/tests/runtime/test_broker_git.py",
+    "backend/tests/runtime/test_peer_broker.py",
+    "backend/tests/runtime/test_peer_broker_boundaries.py",
+    "backend/tests/runtime/test_admission_binding.py",
+    "backend/tests/runtime/test_publication_git.py",
+    "backend/tests/runtime/test_code_review_git.py"
+  ],
+  "excluded_legacy_extra_cases": [
+    "backend/tests/git/test_repository_manager.py::test_old_model_tool_explains_owner_replacement_without_setup"
+  ],
+  "bootstrap": "Existing clean native-only env; final noneditable wheel reinstalled offline without dependency changes. Python-I outside checkout; no inherited source or old site-packages. Explicit prepared local semantic assets.",
+  "limits": "Actual owner HTTP/SQLite/create/adopt/local TLS clone, original kernel domain closure, source Stop/project Stop/shutdown and readonly recovery after Git completed but registration failed. Shared native Git/peer/admission/publication/review regressions included. Controlled TLS remote is synthetic; no real user remote/model/Ken turn. Legacy model-tool compatibility case is verified in the original source extra environment; default native profile correctly refuses that optional import. No full partial-write repair, separate remote creation, global suite, fresh host install/restore or whole-page acceptance claim."
+}

@@ -146,3 +146,32 @@ def test_registered_legacy_work_blocks_new_completion_but_not_historical_receipt
     observed[0] = True
     assert records.accept(101, plan.run_id, **command(original)) == receipt
     assert not records.state(101, plan.run_id)['acceptance_current']
+
+
+@pytest.mark.parametrize('phase', ['planned', 'running', 'needs_reconciliation'])
+def test_source_setup_invalidates_current_completion_without_erasing_owner_history(service_setup, phase):
+    """An administrative source intent is real outstanding project work even without a native task; a historical owner decision cannot close it by replay."""
+    from backend.git.source_operations import SourceRequest
+    from backend.planning.completion import ProjectCompletion
+    from backend.tests.runtime.test_source_operations import operations
+
+    s, plan, _graph = completed_outputs(service_setup)
+    reports = ProjectCompletion(s.c.store, legacy_active=lambda _: False)
+    before = reports.state(101, plan.run_id)
+    receipt = reports.accept(101, plan.run_id, **command(before))
+    sources = operations(s)
+    sources.prepare(101, 'source-after-report', SourceRequest(mode='create', name='pending-source', path=str(s.root/'pending-source'), branch='main'))
+    if phase != 'planned':
+        lease = sources.claim(101, 'source-after-report', 'original-owner')
+        sources.allocate(lease)
+        if phase == 'needs_reconciliation':
+            sources.uncertain(lease)
+    after = reports.state(101, plan.run_id)
+    assert not after['acceptance_current'] and after['report_sha256'] != before['report_sha256']
+    assert any(b['code'] == 'source_setup_unclosed' for b in after['blockers'])
+    assert after['snapshot']['source_operations'][0]['status'] == phase
+    assert 'pending-source' in after['report_markdown']
+    assert 'observación registrada' in after['report_markdown']
+    with pytest.raises(RunConflict):
+        reports.accept(101, plan.run_id, **command(after, 'cannot-close-source'))
+    assert reports.accept(101, plan.run_id, **command(before)) == receipt

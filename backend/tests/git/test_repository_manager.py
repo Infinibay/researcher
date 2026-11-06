@@ -1,159 +1,53 @@
-"""Tests for RepositoryManager in backend/git/repository_manager.py."""
-
-from unittest.mock import MagicMock, patch, call
+"""Historical source registration remains readable and archivable; current setup effects belong to original owner source operations."""
 
 import pytest
 
 from backend.git.repository_manager import RepositoryManager
+from backend.runtime.contracts import RunConflict
 
 
-@pytest.fixture()
+@pytest.fixture
 def manager():
+    """Construct the historical record reader without Git, remote configuration or process side effects."""
     return RepositoryManager()
 
 
-class TestInitRepo:
-    @patch("backend.git.repository_manager.subprocess.run")
-    def test_init_repo_runs_git_init(self, mock_run, seeded_project, manager, db_conn, tmp_path):
-        mock_run.return_value = MagicMock(returncode=0)
-        local_path = str(tmp_path / "my-repo")
-
-        repo = manager.init_repo(
-            project_id=1,
-            name="my-repo",
-            local_path=local_path,
-            default_branch="main",
-        )
-
-        # First call should be git init
-        assert mock_run.call_args_list[0] == call(
-            ["git", "init", "-b", "main", local_path],
-            check=True,
-            capture_output=True,
-            text=True,
-        )
-
-        # Should also have configure_git (2 calls) + git add + git commit
-        cmds = [c.args[0] if c.args else c.kwargs.get("args", []) for c in mock_run.call_args_list]
-        assert any("config" in str(c) and "user.name" in str(c) for c in cmds)
-        assert any("add" in str(c) for c in cmds)
-        assert any("commit" in str(c) for c in cmds)
-
-        # Verify DB row
-        row = db_conn.execute(
-            "SELECT * FROM repositories WHERE project_id = 1 AND name = 'my-repo'"
-        ).fetchone()
-        assert row is not None
-        assert row["local_path"] == local_path
-        assert row["default_branch"] == "main"
-        assert row["status"] == "active"
-
-    @patch("backend.git.repository_manager.subprocess.run")
-    def test_init_repo_with_remote_delegates_to_clone(self, mock_run, seeded_project, manager):
-        # When remote_url is provided, clone path is taken
-        mock_run.return_value = MagicMock(returncode=0, stdout="main\n")
-
-        repo = manager.init_repo(
-            project_id=1,
-            name="cloned-repo",
-            local_path="/tmp/cloned-repo",
-            remote_url="https://github.com/example/repo.git",
-        )
-
-        # Should have called git clone first, then git rev-parse
-        calls = mock_run.call_args_list
-        assert any("clone" in str(c) for c in calls)
-        assert repo["remote_url"] == "https://github.com/example/repo.git"
+def test_historical_sources_remain_project_scoped_and_active_only(seeded_project, manager, db_conn):
+    """Restored metadata can be browsed without recreating its repositories, remotes or old initialization effects."""
+    db_conn.execute("INSERT INTO projects(id,name)VALUES(2,'Other project')")
+    db_conn.executemany("INSERT INTO repositories(project_id,name,local_path,status)VALUES(?,?,?,?)", [(1,'active','/history/active','active'),(1,'archived','/history/archived','archived'),(2,'foreign','/history/foreign','active')])
+    db_conn.commit()
+    assert [row['name'] for row in manager.list_repos(1)] == ['active']
+    assert manager.get_repo(1,'archived')['local_path'] == '/history/archived'
+    assert manager.get_repo(1,'foreign') is None
 
 
-class TestCloneRepo:
-    @patch("backend.git.repository_manager.subprocess.run")
-    def test_clone_repo_inserts_db_record(self, mock_run, seeded_project, manager, db_conn):
-        mock_run.return_value = MagicMock(returncode=0, stdout="develop\n")
-
-        repo = manager.clone_repo(
-            project_id=1,
-            name="cloned",
-            remote_url="https://github.com/example/repo.git",
-            local_path="/tmp/cloned",
-        )
-
-        row = db_conn.execute(
-            "SELECT * FROM repositories WHERE project_id = 1 AND name = 'cloned'"
-        ).fetchone()
-        assert row is not None
-        assert row["remote_url"] == "https://github.com/example/repo.git"
-        assert row["default_branch"] == "develop"
+def test_archive_changes_registration_only_and_preserves_files(seeded_project, manager, db_conn, tmp_path):
+    """Archiving historical metadata never cleans the source folder or deletes retained work."""
+    source=tmp_path/'retained';source.mkdir();(source/'fact.txt').write_text('137')
+    db_conn.execute("INSERT INTO repositories(project_id,name,local_path)VALUES(1,'retained',?)",(str(source),));db_conn.commit()
+    assert manager.archive_repo(1,'retained')
+    assert manager.get_repo(1,'retained')['status'] == 'archived'
+    assert (source/'fact.txt').read_text() == '137'
+    assert manager.list_repos(1) == []
+    assert manager.archive_repo(1,'missing') is False
 
 
-class TestListRepos:
-    @patch("backend.git.repository_manager.subprocess.run")
-    def test_list_repos_returns_active_only(self, mock_run, seeded_project, manager, db_conn):
-        mock_run.return_value = MagicMock(returncode=0)
-
-        # Create two repos
-        manager.init_repo(project_id=1, name="active-repo", local_path="/tmp/active")
-        manager.init_repo(project_id=1, name="archived-repo", local_path="/tmp/archived")
-
-        # Archive one
-        manager.archive_repo(project_id=1, name="archived-repo")
-
-        repos = manager.list_repos(project_id=1)
-        names = [r["name"] for r in repos]
-        assert "active-repo" in names
-        assert "archived-repo" not in names
+def test_legacy_initialization_and_clone_cannot_create_a_registration(seeded_project, manager, db_conn, tmp_path):
+    """Old callers must adopt explicit administrative ownership instead of receiving an automatic remote or an unowned Git process."""
+    for remote in (None,'https://example.invalid/original.git'):
+        with pytest.raises(RunConflict,match='Source operations'):
+            manager.init_repo(1,'new',str(tmp_path/'new'),remote_url=remote)
+    assert not (tmp_path/'new').exists()
+    assert db_conn.execute('SELECT COUNT(*) FROM repositories').fetchone()[0] == 0
 
 
-class TestGetRepo:
-    def test_get_repo_returns_none_for_missing(self, seeded_project, manager):
-        result = manager.get_repo(project_id=1, name="nonexistent")
-        assert result is None
+def test_old_model_tool_explains_owner_replacement_without_setup(seeded_project, db_conn):
+    """The retained tool cannot grant itself authority by manufacturing a path or using ambient Forgejo settings."""
+    import json
 
+    from backend.tools.project.create_repository import CreateRepositoryTool
 
-class TestArchiveRepo:
-    @patch("backend.git.repository_manager.subprocess.run")
-    def test_archive_repo_sets_status(self, mock_run, seeded_project, manager, db_conn):
-        mock_run.return_value = MagicMock(returncode=0)
-        manager.init_repo(project_id=1, name="to-archive", local_path="/tmp/to-archive")
-
-        result = manager.archive_repo(project_id=1, name="to-archive")
-        assert result is True
-
-        row = db_conn.execute(
-            "SELECT status FROM repositories WHERE project_id = 1 AND name = 'to-archive'"
-        ).fetchone()
-        assert row["status"] == "archived"
-
-    def test_archive_repo_returns_false_for_missing(self, seeded_project, manager):
-        result = manager.archive_repo(project_id=1, name="ghost")
-        assert result is False
-
-
-class TestConfigureGit:
-    @patch("backend.git.repository_manager.subprocess.run")
-    def test_configure_git_calls_subprocess(self, mock_run, manager):
-        mock_run.return_value = MagicMock(returncode=0)
-
-        manager.configure_git(
-            local_path="/tmp/repo",
-            user_name="Test User",
-            user_email="test@example.com",
-        )
-
-        assert mock_run.call_count == 2
-        calls = mock_run.call_args_list
-
-        assert calls[0] == call(
-            ["git", "config", "user.name", "Test User"],
-            cwd="/tmp/repo",
-            check=True,
-            capture_output=True,
-            text=True,
-        )
-        assert calls[1] == call(
-            ["git", "config", "user.email", "test@example.com"],
-            cwd="/tmp/repo",
-            check=True,
-            capture_output=True,
-            text=True,
-        )
+    result=json.loads(CreateRepositoryTool()._run(1,'new-source'))
+    assert 'explicit owner source operations' in result['error']
+    assert db_conn.execute('SELECT COUNT(*) FROM repositories').fetchone()[0] == 0

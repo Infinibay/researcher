@@ -1,0 +1,1058 @@
+{
+  "base_commit": "b6783f0",
+  "changed_or_new_definitions_documented": 150,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/main.py",
+      "symbol": "create_app",
+      "line": 107,
+      "docstring": "Construct routes without inference, database writes or maintenance jobs.",
+      "file_sha256": "e55f42665e5491eb2ad24db3913fcbaf346b4f2732d6e57e7fd734dac6e83762"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "create_repo",
+      "line": 56,
+      "docstring": "Reject retired implicit setup through the compatibility guard; explicit owner source operations replace initialization, cloning and automatic remote creation.",
+      "file_sha256": "95f9eb59c47b3ff00603389c3161f6d35eb3093bbbbc423e3f938246c0f7461a"
+    },
+    {
+      "path": "backend/api/routes/projects.py",
+      "symbol": "StopObservedProject",
+      "line": 51,
+      "docstring": "One exact observed project Stop intent; caller identities/grants and arbitrary target lists are forbidden.",
+      "file_sha256": "75918571c6c784c3606d5236fc345fa2d536d2a23ef056dd04846ae78f3c2cfc"
+    },
+    {
+      "path": "backend/api/routes/projects.py",
+      "symbol": "delete_project",
+      "line": 200,
+      "docstring": "Delete an explicitly selected unused project; execution history and registered workers must be preserved and reconciled instead.",
+      "file_sha256": "75918571c6c784c3606d5236fc345fa2d536d2a23ef056dd04846ae78f3c2cfc"
+    },
+    {
+      "path": "backend/api/routes/projects.py",
+      "symbol": "delete_project._delete",
+      "line": 209,
+      "docstring": "Hold the admission write lock while checking history and removing only an unused project's metadata; source files are never deleted here.",
+      "file_sha256": "75918571c6c784c3606d5236fc345fa2d536d2a23ef056dd04846ae78f3c2cfc"
+    },
+    {
+      "path": "backend/api/routes/projects.py",
+      "symbol": "stop_project",
+      "line": 331,
+      "docstring": "Withdraw this project's native work and request legacy teardown where present; paused describes owner intent, not unproved physical closure.",
+      "file_sha256": "75918571c6c784c3606d5236fc345fa2d536d2a23ef056dd04846ae78f3c2cfc"
+    },
+    {
+      "path": "backend/api/routes/source_operations.py",
+      "symbol": "PrepareSource",
+      "line": 16,
+      "docstring": "Original owner selection with no shell commands, caller credentials, namespace identities or fabricated task IDs.",
+      "file_sha256": "cde40d68a2572407bf6f9af1f2ca7123e2123f950630b5a2b75b760cf5741140"
+    },
+    {
+      "path": "backend/api/routes/source_operations.py",
+      "symbol": "StopSource",
+      "line": 31,
+      "docstring": "Exact observed administrative target; a stale browser cannot stop a later reconciliation fence.",
+      "file_sha256": "cde40d68a2572407bf6f9af1f2ca7123e2123f950630b5a2b75b760cf5741140"
+    },
+    {
+      "path": "backend/api/routes/source_operations.py",
+      "symbol": "prepare_source",
+      "line": 40,
+      "docstring": "Save and schedule exactly one explicit source operation; native turns, implicit remote creation and force pushes are outside this request.",
+      "file_sha256": "cde40d68a2572407bf6f9af1f2ca7123e2123f950630b5a2b75b760cf5741140"
+    },
+    {
+      "path": "backend/api/routes/source_operations.py",
+      "symbol": "source_operation",
+      "line": 53,
+      "docstring": "Observe this exact saved intent and current local handle without fetching remotes, probing Git or choosing a newest operation.",
+      "file_sha256": "cde40d68a2572407bf6f9af1f2ca7123e2123f950630b5a2b75b760cf5741140"
+    },
+    {
+      "path": "backend/api/routes/source_operations.py",
+      "symbol": "stop_source",
+      "line": 60,
+      "docstring": "Withdraw the observed source attempt and drain its actual local owner before acknowledging any verified local closure.",
+      "file_sha256": "cde40d68a2572407bf6f9af1f2ca7123e2123f950630b5a2b75b760cf5741140"
+    },
+    {
+      "path": "backend/api/routes/source_operations.py",
+      "symbol": "observe_source",
+      "line": 67,
+      "docstring": "Request readonly reconciliation of the original retained directory and closure; an uncertain effect is never blindly reissued.",
+      "file_sha256": "cde40d68a2572407bf6f9af1f2ca7123e2123f950630b5a2b75b760cf5741140"
+    },
+    {
+      "path": "backend/git/repository_manager.py",
+      "symbol": "RepositoryManager",
+      "line": 17,
+      "docstring": "Read and archive historical registrations; all source mutations require explicit administrative ownership.",
+      "file_sha256": "7b9e3bbd7ee294993d99b15fcba4c607a6699a769bddee46085d36ffe004ab49"
+    },
+    {
+      "path": "backend/git/repository_manager.py",
+      "symbol": "RepositoryManager.init_repo",
+      "line": 20,
+      "docstring": "Reject retired setup before filesystem, Git, remote, credential or registration effects; use an original explicit administrative source operation.",
+      "file_sha256": "7b9e3bbd7ee294993d99b15fcba4c607a6699a769bddee46085d36ffe004ab49"
+    },
+    {
+      "path": "backend/git/repository_manager.py",
+      "symbol": "RepositoryManager.clone_repo",
+      "line": 32,
+      "docstring": "Reject retired setup before filesystem, Git, remote, credential or registration effects; use an original explicit administrative source operation.",
+      "file_sha256": "7b9e3bbd7ee294993d99b15fcba4c607a6699a769bddee46085d36ffe004ab49"
+    },
+    {
+      "path": "backend/git/repository_manager.py",
+      "symbol": "RepositoryManager.configure_git",
+      "line": 84,
+      "docstring": "Reject retired setup before filesystem, Git, remote, credential or registration effects; use an original explicit administrative source operation.",
+      "file_sha256": "7b9e3bbd7ee294993d99b15fcba4c607a6699a769bddee46085d36ffe004ab49"
+    },
+    {
+      "path": "backend/git/repository_manager.py",
+      "symbol": "RepositoryManager._configure_forgejo_auth",
+      "line": 89,
+      "docstring": "Reject retired setup before filesystem, Git, remote, credential or registration effects; use an original explicit administrative source operation.",
+      "file_sha256": "7b9e3bbd7ee294993d99b15fcba4c607a6699a769bddee46085d36ffe004ab49"
+    },
+    {
+      "path": "backend/git/source_capsule.py",
+      "symbol": "validate_source_transport",
+      "line": 19,
+      "docstring": "Bind explicit authenticated cloning to one configured HTTPS origin without sending its credential to a public or redirected destination.",
+      "file_sha256": "58e07fd6c513766963eb5d577c2ea70c9b9227d964bdde7a08ef4cf3802b3dc2"
+    },
+    {
+      "path": "backend/git/source_capsule.py",
+      "symbol": "SourceGitLaunch",
+      "line": 32,
+      "docstring": "One exact original source request and fixed Git stage; neither callers nor a model can supply push/config/reset/cleanup arguments.",
+      "file_sha256": "58e07fd6c513766963eb5d577c2ea70c9b9227d964bdde7a08ef4cf3802b3dc2"
+    },
+    {
+      "path": "backend/git/source_capsule.py",
+      "symbol": "SourceGitLaunch.__post_init__",
+      "line": 41,
+      "docstring": "Match the complete argv/cwd/allocation profile before any shared broker reservation or command gate.",
+      "file_sha256": "58e07fd6c513766963eb5d577c2ea70c9b9227d964bdde7a08ef4cf3802b3dc2"
+    },
+    {
+      "path": "backend/git/source_capsule.py",
+      "symbol": "SourceGitLaunch.command",
+      "line": 53,
+      "docstring": "Describe only required original create/clone/read stages; checkout-index without force preserves unexpectedly existing files.",
+      "file_sha256": "58e07fd6c513766963eb5d577c2ea70c9b9227d964bdde7a08ef4cf3802b3dc2"
+    },
+    {
+      "path": "backend/git/source_capsule.py",
+      "symbol": "SourceGitLaunch.networked",
+      "line": 74,
+      "docstring": "Networking belongs only to the explicitly requested fixed HTTPS clone; observations and checkout keep sockets disabled.",
+      "file_sha256": "58e07fd6c513766963eb5d577c2ea70c9b9227d964bdde7a08ef4cf3802b3dc2"
+    },
+    {
+      "path": "backend/git/source_capsule.py",
+      "symbol": "SourceGitCapsule",
+      "line": 79,
+      "docstring": "Mount only the original readonly administrative view and private allocation; optional clone networking belongs to fixed trusted Git, not model code.",
+      "file_sha256": "58e07fd6c513766963eb5d577c2ea70c9b9227d964bdde7a08ef4cf3802b3dc2"
+    },
+    {
+      "path": "backend/git/source_capsule.py",
+      "symbol": "SourceGitCapsule.__init__",
+      "line": 82,
+      "docstring": "Use only host-inspected DNS/TLS assets, with no ambient OAuth/PAT, arbitrary helper or user-supplied trust bypass.",
+      "file_sha256": "58e07fd6c513766963eb5d577c2ea70c9b9227d964bdde7a08ef4cf3802b3dc2"
+    },
+    {
+      "path": "backend/git/source_capsule.py",
+      "symbol": "SourceGitCapsule._program",
+      "line": 91,
+      "docstring": "Keep the configured PAT out of argv/manifests/config by reading a sealed private credential only inside the exact clone namespace.",
+      "file_sha256": "58e07fd6c513766963eb5d577c2ea70c9b9227d964bdde7a08ef4cf3802b3dc2"
+    },
+    {
+      "path": "backend/git/source_capsule.py",
+      "symbol": "SourceGitCapsule._network",
+      "line": 98,
+      "docstring": "Share network only with the exact trusted clone program; this is program confinement, not a kernel destination ACL.",
+      "file_sha256": "58e07fd6c513766963eb5d577c2ea70c9b9227d964bdde7a08ef4cf3802b3dc2"
+    },
+    {
+      "path": "backend/git/source_capsule.py",
+      "symbol": "SourceGitCapsule._filter",
+      "line": 102,
+      "docstring": "Retain protected-peer and namespace protections while permitting outbound sockets solely for the clone stage.",
+      "file_sha256": "58e07fd6c513766963eb5d577c2ea70c9b9227d964bdde7a08ef4cf3802b3dc2"
+    },
+    {
+      "path": "backend/git/source_capsule.py",
+      "symbol": "SourceGitCapsule._mounts",
+      "line": 106,
+      "docstring": "Pin the host-selected public CA/resolver only for HTTPS; source/control/credential directories are never broadly exposed.",
+      "file_sha256": "58e07fd6c513766963eb5d577c2ea70c9b9227d964bdde7a08ef4cf3802b3dc2"
+    },
+    {
+      "path": "backend/git/source_capsule.py",
+      "symbol": "SourceGitCapsule.__enter__",
+      "line": 118,
+      "docstring": "Retain sealed trust/credential descriptors through the original gated spawn, then close them with the owning capsule.",
+      "file_sha256": "58e07fd6c513766963eb5d577c2ea70c9b9227d964bdde7a08ef4cf3802b3dc2"
+    },
+    {
+      "path": "backend/git/source_executor.py",
+      "symbol": "SourceGitExecutor",
+      "line": 23,
+      "docstring": "Expose semantic fixed stages while reusing original owned Git transport, complete capture and physical closure.",
+      "file_sha256": "bd23e6c32188858318af295f20157b3a7b49694240c236d05eaa70c9582f44e9"
+    },
+    {
+      "path": "backend/git/source_executor.py",
+      "symbol": "SourceGitExecutor.__init__",
+      "line": 26,
+      "docstring": "Bind actual operation/owner/views once; this object has no generic command or native run API.",
+      "file_sha256": "bd23e6c32188858318af295f20157b3a7b49694240c236d05eaa70c9582f44e9"
+    },
+    {
+      "path": "backend/git/source_executor.py",
+      "symbol": "SourceGitExecutor.stage",
+      "line": 33,
+      "docstring": "Launch at most one peer for this original stage; replay returns its receipt rather than silently reissuing an effect.",
+      "file_sha256": "bd23e6c32188858318af295f20157b3a7b49694240c236d05eaa70c9582f44e9"
+    },
+    {
+      "path": "backend/git/source_executor.py",
+      "symbol": "SourceGitExecutor.observe",
+      "line": 42,
+      "docstring": "Capture an actual Git root/complete HEAD/tree/branch/status/origin without converting local credentials or a label into authority.",
+      "file_sha256": "bd23e6c32188858318af295f20157b3a7b49694240c236d05eaa70c9582f44e9"
+    },
+    {
+      "path": "backend/git/source_executor.py",
+      "symbol": "source_executor",
+      "line": 65,
+      "docstring": "Retain one real administrative kernel domain through every fixed command and verified retirement, using the shared global concession.",
+      "file_sha256": "bd23e6c32188858318af295f20157b3a7b49694240c236d05eaa70c9582f44e9"
+    },
+    {
+      "path": "backend/git/source_executor.py",
+      "symbol": "execute_source",
+      "line": 77,
+      "docstring": "Execute an original local-create/adopt/clone intent, registering only after original domain closure; exact completed retry starts nothing.",
+      "file_sha256": "bd23e6c32188858318af295f20157b3a7b49694240c236d05eaa70c9582f44e9"
+    },
+    {
+      "path": "backend/git/source_executor.py",
+      "symbol": "reconcile_source",
+      "line": 99,
+      "docstring": "Recover original closure then observe only retained Git state in a fresh readonly domain; never repeat init/commit/clone or claim remote server termination.",
+      "file_sha256": "bd23e6c32188858318af295f20157b3a7b49694240c236d05eaa70c9582f44e9"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "_valid_branch",
+      "line": 23,
+      "docstring": "Keep branch names unambiguous within fixed setup commands without accepting Git options, traversal or reserved HEAD.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceRequest",
+      "line": 29,
+      "docstring": "An explicit administrative effect scope; adoption cannot secretly initialize Git and clone cannot provision or reconfigure a remote.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceRequest.__post_init__",
+      "line": 41,
+      "docstring": "Reject ambiguous effects, unsafe names/refs and credential-bearing URLs before persisting or allocating anything.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceView",
+      "line": 67,
+      "docstring": "A captured administrative directory view, deliberately without a fabricated native repository or task identity.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceView.capture",
+      "line": 75,
+      "docstring": "Capture an ordinary non-redirected directory; subsequent controls must match these original kernel identities.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceView.verify",
+      "line": 85,
+      "docstring": "Reuse the existing source identity check without inventing a native registration for this administrative view.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceLease",
+      "line": 91,
+      "docstring": "One original administrative owner/fence; no native RunSpec, AttemptLease, model permission or synthetic task is conferred.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceObservation",
+      "line": 103,
+      "docstring": "Complete point-in-time Git observations from fixed owned commands; not a permanent-health, semantic-acceptance or publication assertion.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceObservation.__post_init__",
+      "line": 112,
+      "docstring": "Require full same-format objects and avoid persisting credential-bearing origin URLs into project metadata or owner responses.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations",
+      "line": 123,
+      "docstring": "Persist bounded original setup intents and directory ownership through the existing SQLite/project-metadata transaction.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.__init__",
+      "line": 126,
+      "docstring": "Use the actual host source policy and private control root; merely constructing or reading this store creates no files or workers.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations._origin",
+      "line": 130,
+      "docstring": "Reuse the existing database path/device/inode identity rather than deriving authority from a copied database's labels.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations._metadata",
+      "line": 137,
+      "docstring": "Preserve all unrelated project metadata and refuse malformed state instead of treating lost operation history as empty.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.has_history",
+      "line": 148,
+      "docstring": "Retain administrative operations across project deletion decisions, including completed or uncertain setup history.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.summaries",
+      "line": 153,
+      "docstring": "Expose complete recorded source intentions and point-in-time observations without peer internals or an implied fresh Git check.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.assert_unreserved",
+      "line": 170,
+      "docstring": "Reject ordinary registration or another setup overlapping an unresolved original destination under the same admission lock.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations._load",
+      "line": 182,
+      "docstring": "Read exactly this project and its durable operation collection; a foreign or removed project is never recreated.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations._save",
+      "line": 189,
+      "docstring": "Write the complete existing metadata object under the caller's original write lock, retaining owner creation and other domains.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations._row",
+      "line": 196,
+      "docstring": "Return a source operation from its exact project/key without a newest-operation fallback.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.read",
+      "line": 202,
+      "docstring": "Read original intent and current saved phase; this does not observe Git, contact remotes or authorize retry.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.list",
+      "line": 206,
+      "docstring": "Read the complete bounded setup history of one project; no partial list is represented as proof of no work.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations._target",
+      "line": 210,
+      "docstring": "Validate source scope/reservations under the admission write lock without creating a folder, initializing Git or replacing a registration.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.prepare",
+      "line": 233,
+      "docstring": "Persist one exact owner intent before any effect; replay returns it, while a reused key with different scope rejects.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations._owned",
+      "line": 251,
+      "docstring": "Require the original administrative owner/fence and database identity before any directory or peer control.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.claim",
+      "line": 259,
+      "docstring": "Give one actual administrative process owner its own attempt/fence, without a native task or model invocation.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.begin_observation",
+      "line": 273,
+      "docstring": "Fence an already-closed original attempt and retain its history before a new strictly readonly reconciliation; never restart its writes.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.allocate",
+      "line": 292,
+      "docstring": "Capture one original directory allocation before Git; a partial unrecorded folder is retained and never erased or guessed to be ours.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.attach_domain",
+      "line": 318,
+      "docstring": "Retain the original physical domain before a setup command can be launched; another domain cannot replace an uncertain attempt.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.register",
+      "line": 326,
+      "docstring": "Register the actually observed directory only after original global domain closure, preserving any already-matching registration without rewriting metadata.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.uncertain",
+      "line": 351,
+      "docstring": "Retain an interrupted/failed operation and its original directories/peers; absence of a reply does not authorize another Git write.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.note_failure",
+      "line": 358,
+      "docstring": "Expose a bounded redacted current issue while retaining the original operation, physical receipts and any partial files for explicit observation.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.request_stop",
+      "line": 366,
+      "docstring": "Withdraw admission for exactly the observed administrative fence; a stale Stop cannot target a new reconciliation attempt.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.withdraw",
+      "line": 372,
+      "docstring": "Withdraw one original source inside either the individual Stop or atomic whole-project Stop admission transaction.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.settle_stop",
+      "line": 382,
+      "docstring": "Record stopped only after original local closure, retaining partially written folders and uncertainty instead of asserting a remote effect was undone.",
+      "file_sha256": "ac88b51408a67955855e825cd85bd418885453fe62cc15208840091c077d6975"
+    },
+    {
+      "path": "backend/git/source_registry.py",
+      "symbol": "source_scope",
+      "line": 12,
+      "docstring": "Bind the complete original request, operator configuration and captured directory views across all command stages.",
+      "file_sha256": "1b498545a9c0ec5cd4035ccfa9d23c2babec744b7b978d663ff5c703e427612a"
+    },
+    {
+      "path": "backend/git/source_registry.py",
+      "symbol": "SourcePeerRegistry",
+      "line": 17,
+      "docstring": "Adapt the existing host broker protocol to a real administrative operation; no repository/task/run identity is fabricated.",
+      "file_sha256": "1b498545a9c0ec5cd4035ccfa9d23c2babec744b7b978d663ff5c703e427612a"
+    },
+    {
+      "path": "backend/git/source_registry.py",
+      "symbol": "SourcePeerRegistry.__init__",
+      "line": 20,
+      "docstring": "Freeze one original source lease and fixed command stage; recovered instances may project closure but never prepare another stage.",
+      "file_sha256": "1b498545a9c0ec5cd4035ccfa9d23c2babec744b7b978d663ff5c703e427612a"
+    },
+    {
+      "path": "backend/git/source_registry.py",
+      "symbol": "SourcePeerRegistry.prepare",
+      "line": 24,
+      "docstring": "Retain one peer per original stage so response loss cannot mint another write under a different peer identity.",
+      "file_sha256": "1b498545a9c0ec5cd4035ccfa9d23c2babec744b7b978d663ff5c703e427612a"
+    },
+    {
+      "path": "backend/git/source_registry.py",
+      "symbol": "SourcePeerRegistry.inspect",
+      "line": 36,
+      "docstring": "Read only an exact peer of this operation; labels from a native task cannot authorize it.",
+      "file_sha256": "1b498545a9c0ec5cd4035ccfa9d23c2babec744b7b978d663ff5c703e427612a"
+    },
+    {
+      "path": "backend/git/source_registry.py",
+      "symbol": "SourcePeerRegistry.admission",
+      "line": 43,
+      "docstring": "Recheck actual owner/root/allocation and original stage before the shared broker can reserve its global concession.",
+      "file_sha256": "1b498545a9c0ec5cd4035ccfa9d23c2babec744b7b978d663ff5c703e427612a"
+    },
+    {
+      "path": "backend/git/source_registry.py",
+      "symbol": "SourcePeerRegistry.bind",
+      "line": 55,
+      "docstring": "Persist the actual namespace identity before the broker releases G; there is no user-supplied PID or closure flag.",
+      "file_sha256": "1b498545a9c0ec5cd4035ccfa9d23c2babec744b7b978d663ff5c703e427612a"
+    },
+    {
+      "path": "backend/git/source_registry.py",
+      "symbol": "SourcePeerRegistry.project",
+      "line": 64,
+      "docstring": "Project only the broker's witnessed closure for this administrative origin; a native closure or caller boolean cannot complete source setup.",
+      "file_sha256": "1b498545a9c0ec5cd4035ccfa9d23c2babec744b7b978d663ff5c703e427612a"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService",
+      "line": 12,
+      "docstring": "Own actual administrative worker handles without inventing native turns or replaying interrupted writes after restart.",
+      "file_sha256": "d2d0cd1a25fb8c995b39c18c461226e4f5eac75db000e45abb66bf668f9e4740"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.__init__",
+      "line": 15,
+      "docstring": "Reuse the serving runtime's original host configuration, store, owner lock and kernel broker boundaries.",
+      "file_sha256": "d2d0cd1a25fb8c995b39c18c461226e4f5eac75db000e45abb66bf668f9e4740"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService._configuration",
+      "line": 27,
+      "docstring": "Pass only actual host-owned launcher settings; no model, user argv or caller credential supplies execution authority.",
+      "file_sha256": "d2d0cd1a25fb8c995b39c18c461226e4f5eac75db000e45abb66bf668f9e4740"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.view",
+      "line": 32,
+      "docstring": "Expose saved phase and actual local worker observation; a stopped local worker never proves remote rollback or fresh Git health.",
+      "file_sha256": "d2d0cd1a25fb8c995b39c18c461226e4f5eac75db000e45abb66bf668f9e4740"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.submit",
+      "line": 43,
+      "docstring": "Persist exact owner intent before scheduling one bounded worker; an original replay returns history and never restarts a stopped or uncertain effect.",
+      "file_sha256": "d2d0cd1a25fb8c995b39c18c461226e4f5eac75db000e45abb66bf668f9e4740"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.reconcile",
+      "line": 61,
+      "docstring": "Start only explicit readonly reconciliation of the retained operation; no implicit clone, initialization, commit or credentialed write is replayed.",
+      "file_sha256": "d2d0cd1a25fb8c995b39c18c461226e4f5eac75db000e45abb66bf668f9e4740"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService._run",
+      "line": 77,
+      "docstring": "Keep executor teardown in its owning task and retain failures as saved uncertainty; raw transport errors and secrets never enter the owner response.",
+      "file_sha256": "d2d0cd1a25fb8c995b39c18c461226e4f5eac75db000e45abb66bf668f9e4740"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.wait",
+      "line": 97,
+      "docstring": "Wait for the exact current local handle, without replaying work if its process or application has gone away.",
+      "file_sha256": "d2d0cd1a25fb8c995b39c18c461226e4f5eac75db000e45abb66bf668f9e4740"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.stop",
+      "line": 107,
+      "docstring": "Withdraw exact observed admission before cancelling its original local worker; preserve unconfirmed closure if that handle is absent.",
+      "file_sha256": "d2d0cd1a25fb8c995b39c18c461226e4f5eac75db000e45abb66bf668f9e4740"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.stop_project",
+      "line": 123,
+      "docstring": "Withdraw all currently recorded administrative work for the legacy bodyless project Stop, preserving uncertain original effects when no live handle exists.",
+      "file_sha256": "d2d0cd1a25fb8c995b39c18c461226e4f5eac75db000e45abb66bf668f9e4740"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.close",
+      "line": 131,
+      "docstring": "Withdraw all owned source jobs before the runtime releases its exclusive store owner lock; cancellation is issued once and closure is drained.",
+      "file_sha256": "d2d0cd1a25fb8c995b39c18c461226e4f5eac75db000e45abb66bf668f9e4740"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.close.withdraw",
+      "line": 136,
+      "docstring": "Drain the original physical handle even if persistence is unavailable during shutdown; no other job is skipped after an error.",
+      "file_sha256": "d2d0cd1a25fb8c995b39c18c461226e4f5eac75db000e45abb66bf668f9e4740"
+    },
+    {
+      "path": "backend/planning/completion.py",
+      "symbol": "ProjectCompletion",
+      "line": 16,
+      "docstring": "Compose attributed current evidence and atomically save a separate owner decision in the existing receipt transaction, without inference or Git.",
+      "file_sha256": "dd22f2d0c7c951bfcf66eb3c9fe79faeaae8acbf350d84e390648fac4d984bf2"
+    },
+    {
+      "path": "backend/planning/completion.py",
+      "symbol": "ProjectCompletion._state",
+      "line": 27,
+      "docstring": "Recompute all project scope and current original evidence; a previous report cannot silently stand in for changed requirements or work.",
+      "file_sha256": "dd22f2d0c7c951bfcf66eb3c9fe79faeaae8acbf350d84e390648fac4d984bf2"
+    },
+    {
+      "path": "backend/planning/completion.py",
+      "symbol": "ProjectCompletion._markdown",
+      "line": 132,
+      "docstring": "Render exact attributed material and concrete interpretation limits; never summarize away source constraints or invent semantic fulfillment.",
+      "file_sha256": "dd22f2d0c7c951bfcf66eb3c9fe79faeaae8acbf350d84e390648fac4d984bf2"
+    },
+    {
+      "path": "backend/planning/project_workspace.py",
+      "symbol": "ProjectWorkspace",
+      "line": 12,
+      "docstring": "Project real saved state without treating metadata as activity/closure or inventing a plan choice; no model, Git, remote setup or second coordinator.",
+      "file_sha256": "b8e128bb3a8b7d9a003c2b0d537432657d2aea1b42df7a3ab8e35246be4d99f3"
+    },
+    {
+      "path": "backend/planning/project_workspace.py",
+      "symbol": "ProjectWorkspace._stop_scope",
+      "line": 46,
+      "docstring": "Freeze only original active/uncertain runs and active graph authorizations; closed reviewable proposals remain intact.",
+      "file_sha256": "b8e128bb3a8b7d9a003c2b0d537432657d2aea1b42df7a3ab8e35246be4d99f3"
+    },
+    {
+      "path": "backend/planning/project_workspace.py",
+      "symbol": "ProjectWorkspace.state",
+      "line": 57,
+      "docstring": "Read directory-policy observations, metadata and exact historical links without probing Git/remotes or selecting an arbitrary newest plan.",
+      "file_sha256": "b8e128bb3a8b7d9a003c2b0d537432657d2aea1b42df7a3ab8e35246be4d99f3"
+    },
+    {
+      "path": "backend/planning/project_workspace.py",
+      "symbol": "ProjectWorkspace.register_source",
+      "line": 95,
+      "docstring": "Register only an existing directory under the real managed root; same resource intent returns the original ID without Git/init/clone/origin/network effects.",
+      "file_sha256": "b8e128bb3a8b7d9a003c2b0d537432657d2aea1b42df7a3ab8e35246be4d99f3"
+    },
+    {
+      "path": "backend/planning/project_workspace.py",
+      "symbol": "ProjectWorkspace.request_stop",
+      "line": 117,
+      "docstring": "Atomically pause exactly observed graphs and withdraw exactly observed run authority before acknowledging intent; replay never retargets new work or claims closure.",
+      "file_sha256": "b8e128bb3a8b7d9a003c2b0d537432657d2aea1b42df7a3ab8e35246be4d99f3"
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker",
+      "line": 129,
+      "docstring": "One externally supplied, non-reused domain for one original attempt.\n\n``run_peer`` owns reserve\u2192spawn\u2192global publication\u2192concrete local bind\u2192G.\nCallers receive a transport only after G and can only recover a receipt on\nretry. ``revoke`` withdraws G before waiting for SQL/constructors. Global\nrecovery needs only the journal/domain, never the original project DB.\nComplete actor-origin and endpoint authentication remain deployment work.",
+      "file_sha256": "82a438aad9d586e9ee41c6ae4fad2a3442b87361d447965c0a6b0d8f215a5b07"
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker.__init__",
+      "line": 139,
+      "docstring": "Bind original physical ownership and optional operator remote configuration before any peer or credential is admitted.",
+      "file_sha256": "82a438aad9d586e9ee41c6ae4fad2a3442b87361d447965c0a6b0d8f215a5b07"
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker._reserve",
+      "line": 176,
+      "docstring": "Retain one immutable source concession and record each operation's actual execution view.",
+      "file_sha256": "82a438aad9d586e9ee41c6ae4fad2a3442b87361d447965c0a6b0d8f215a5b07"
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker._run",
+      "line": 474,
+      "docstring": "Witness launch intent and manifests before releasing the original gate.",
+      "file_sha256": "82a438aad9d586e9ee41c6ae4fad2a3442b87361d447965c0a6b0d8f215a5b07"
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker._project_snapshot",
+      "line": 1237,
+      "docstring": "Project witnessed closure into its original native or administrative registry; source labels never transfer authority between the two domains.",
+      "file_sha256": "82a438aad9d586e9ee41c6ae4fad2a3442b87361d447965c0a6b0d8f215a5b07"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService",
+      "line": 63,
+      "docstring": "Own native attempts and grant-bound tool closure before durable terminal states.",
+      "file_sha256": "2fa769355d57f2a2025dcd1c68ccc98e3db7c608a0d4f049e273ce70bb4a447a"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService.__init__",
+      "line": 66,
+      "docstring": "Compose one journal owner, native worker limits and deterministic authorized-plan dispatch; construction starts no work.",
+      "file_sha256": "2fa769355d57f2a2025dcd1c68ccc98e3db7c608a0d4f049e273ce70bb4a447a"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService.sources",
+      "line": 111,
+      "docstring": "Lazily compose administrative source workers from actual owned runtime configuration; construction launches no Git or model work.",
+      "file_sha256": "2fa769355d57f2a2025dcd1c68ccc98e3db7c608a0d4f049e273ce70bb4a447a"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService.__aexit__",
+      "line": 167,
+      "docstring": "Drain dispatcher admissions before withdrawing workers and releasing the journal owner lock.",
+      "file_sha256": "2fa769355d57f2a2025dcd1c68ccc98e3db7c608a0d4f049e273ce70bb4a447a"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService.stop_project",
+      "line": 330,
+      "docstring": "Withdraw every active native run in this project; returned states preserve unconfirmed physical closure rather than claiming all work stopped.",
+      "file_sha256": "2fa769355d57f2a2025dcd1c68ccc98e3db7c608a0d4f049e273ce70bb4a447a"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService.stop_project.source_history",
+      "line": 339,
+      "docstring": "Observe administrative history even after this process restarted without reactivating or replaying its worker.",
+      "file_sha256": "2fa769355d57f2a2025dcd1c68ccc98e3db7c608a0d4f049e273ce70bb4a447a"
+    },
+    {
+      "path": "backend/runtime/workspaces.py",
+      "symbol": "WorkspaceRegistry",
+      "line": 19,
+      "docstring": "Resolve actual registered source identities under one host root; names and paths are data, never execution authority.",
+      "file_sha256": "41d2381ccc3b5025cb265eb7a4c353f3a125d357aee38974898ce5394256c98e"
+    },
+    {
+      "path": "backend/runtime/workspaces.py",
+      "symbol": "WorkspaceRegistry._bind",
+      "line": 31,
+      "docstring": "Apply the same source identity/root/overlap policy inside an original owner registration transaction, without Git or filesystem mutation.",
+      "file_sha256": "41d2381ccc3b5025cb265eb7a4c353f3a125d357aee38974898ce5394256c98e"
+    },
+    {
+      "path": "backend/runtime/workspaces.py",
+      "symbol": "WorkspaceRegistry._directory",
+      "line": 50,
+      "docstring": "Validate an existing source directory before registration as well as admission, sharing the same host-root/database/foreign-project overlap policy.",
+      "file_sha256": "41d2381ccc3b5025cb265eb7a4c353f3a125d357aee38974898ce5394256c98e"
+    },
+    {
+      "path": "backend/tests/git/test_repository_manager.py",
+      "symbol": "manager",
+      "line": 10,
+      "docstring": "Construct the historical record reader without Git, remote configuration or process side effects.",
+      "file_sha256": "530d8a7ae6cc5d8bbe86425c6cf3f7d709957de0b5147bd3dae78dcd012cd4a1"
+    },
+    {
+      "path": "backend/tests/git/test_repository_manager.py",
+      "symbol": "test_historical_sources_remain_project_scoped_and_active_only",
+      "line": 15,
+      "docstring": "Restored metadata can be browsed without recreating its repositories, remotes or old initialization effects.",
+      "file_sha256": "530d8a7ae6cc5d8bbe86425c6cf3f7d709957de0b5147bd3dae78dcd012cd4a1"
+    },
+    {
+      "path": "backend/tests/git/test_repository_manager.py",
+      "symbol": "test_archive_changes_registration_only_and_preserves_files",
+      "line": 25,
+      "docstring": "Archiving historical metadata never cleans the source folder or deletes retained work.",
+      "file_sha256": "530d8a7ae6cc5d8bbe86425c6cf3f7d709957de0b5147bd3dae78dcd012cd4a1"
+    },
+    {
+      "path": "backend/tests/git/test_repository_manager.py",
+      "symbol": "test_legacy_initialization_and_clone_cannot_create_a_registration",
+      "line": 36,
+      "docstring": "Old callers must adopt explicit administrative ownership instead of receiving an automatic remote or an unowned Git process.",
+      "file_sha256": "530d8a7ae6cc5d8bbe86425c6cf3f7d709957de0b5147bd3dae78dcd012cd4a1"
+    },
+    {
+      "path": "backend/tests/git/test_repository_manager.py",
+      "symbol": "test_old_model_tool_explains_owner_replacement_without_setup",
+      "line": 45,
+      "docstring": "The retained tool cannot grant itself authority by manufacturing a path or using ambient Forgejo settings.",
+      "file_sha256": "530d8a7ae6cc5d8bbe86425c6cf3f7d709957de0b5147bd3dae78dcd012cd4a1"
+    },
+    {
+      "path": "backend/tests/runtime/test_broker_git.py",
+      "symbol": "test_context_change_after_real_clone_retains_copy_without_admitting_it",
+      "line": 154,
+      "docstring": "Late preparation cannot cross a corrected context; its useful files and closure evidence survive.",
+      "file_sha256": "890297e781b8c0f3be470ff6a559ea48df79d4cad785155e7d5f6acae10a661d"
+    },
+    {
+      "path": "backend/tests/runtime/test_broker_git.py",
+      "symbol": "test_context_change_after_real_clone_retains_copy_without_admitting_it.correct_before_complete",
+      "line": 183,
+      "docstring": "Model the owner correcting requirements after the physical clone has already finished.",
+      "file_sha256": "890297e781b8c0f3be470ff6a559ea48df79d4cad785155e7d5f6acae10a661d"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_source_setup.py",
+      "symbol": "git",
+      "line": 13,
+      "docstring": "Inspect only the test-owned source from the host to independently verify the setup result and preservation.",
+      "file_sha256": "e6c113e7da5715967d97a22d9e5936d422a5686e194c6a1358e5c051fc41148d"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_source_setup.py",
+      "symbol": "test_real_local_create_and_adopt_use_administrative_ownership_without_native_tasks",
+      "line": 19,
+      "docstring": "A real initial revision is usable through source admission, exact replay launches nothing, and adoption preserves dirty files/config/origin.",
+      "file_sha256": "e6c113e7da5715967d97a22d9e5936d422a5686e194c6a1358e5c051fc41148d"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_source_setup.py",
+      "symbol": "test_git_finished_before_registration_failure_recovers_by_readonly_observation",
+      "line": 59,
+      "docstring": "Losing the DB registration after a real initial commit must not reinitialize, recommit or replace the retained source on repair.",
+      "file_sha256": "e6c113e7da5715967d97a22d9e5936d422a5686e194c6a1358e5c051fc41148d"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_source_setup.py",
+      "symbol": "test_git_finished_before_registration_failure_recovers_by_readonly_observation.fail_registration",
+      "line": 69,
+      "docstring": "Inject the exact crash gap after Git/domain closure but before any resource registration transaction.",
+      "file_sha256": "e6c113e7da5715967d97a22d9e5936d422a5686e194c6a1358e5c051fc41148d"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_source_setup.py",
+      "symbol": "test_actual_https_clone_keeps_configured_credential_outside_source_and_durable_intent",
+      "line": 92,
+      "docstring": "An explicitly authenticated fixed clone uses real local TLS/Git reads, never a remote creation/push, and retains one original source after completed retry.",
+      "file_sha256": "e6c113e7da5715967d97a22d9e5936d422a5686e194c6a1358e5c051fc41148d"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_completion.py",
+      "symbol": "test_source_setup_invalidates_current_completion_without_erasing_owner_history",
+      "line": 152,
+      "docstring": "An administrative source intent is real outstanding project work even without a native task; a historical owner decision cannot close it by replay.",
+      "file_sha256": "41017c0ff0ffc4d9fdd99257917da540c65653343e088526a42fb0c4f8f220f1"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_operations.py",
+      "symbol": "operations",
+      "line": 11,
+      "docstring": "Use this real isolated project store and actual host root; no process, model or remote is created by the storage fixture.",
+      "file_sha256": "8dc8a3e3be5c45662c00af6b7bd66a4f3088777f6a31f05a228d68ad9a6ed9a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_operations.py",
+      "symbol": "test_original_setup_intent_survives_replay_without_a_fake_task",
+      "line": 19,
+      "docstring": "Same original scope yields one operation; changing it cannot reuse that identity or start a second intent.",
+      "file_sha256": "8dc8a3e3be5c45662c00af6b7bd66a4f3088777f6a31f05a228d68ad9a6ed9a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_operations.py",
+      "symbol": "test_source_reservations_preserve_existing_and_foreign_directories",
+      "line": 34,
+      "docstring": "Creating is not adopting; reservations cannot overlap another project's existing source or another uncompleted setup intent.",
+      "file_sha256": "8dc8a3e3be5c45662c00af6b7bd66a4f3088777f6a31f05a228d68ad9a6ed9a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_operations.py",
+      "symbol": "test_claim_and_allocation_have_a_real_administrative_identity",
+      "line": 47,
+      "docstring": "One live setup owner captures a new private directory and a distinct readonly view without a synthetic native repository binding.",
+      "file_sha256": "8dc8a3e3be5c45662c00af6b7bd66a4f3088777f6a31f05a228d68ad9a6ed9a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_operations.py",
+      "symbol": "test_adoption_only_captures_existing_directory_and_preserves_other_metadata",
+      "line": 66,
+      "docstring": "Adoption does not initialize/configure a source or discard the owner's immutable creation metadata.",
+      "file_sha256": "8dc8a3e3be5c45662c00af6b7bd66a4f3088777f6a31f05a228d68ad9a6ed9a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_operations.py",
+      "symbol": "test_clone_and_remote_creation_do_not_inherit_implicit_effects",
+      "line": 80,
+      "docstring": "Remote intent is explicit and credential-free; a clone cannot request a visibility change or use an embedded PAT.",
+      "file_sha256": "8dc8a3e3be5c45662c00af6b7bd66a4f3088777f6a31f05a228d68ad9a6ed9a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_operations.py",
+      "symbol": "test_prepared_source_history_blocks_project_deletion_and_plain_registration_bypass",
+      "line": 94,
+      "docstring": "An administrative intent retains its recovery identity and partially allocated directory even without native run history.",
+      "file_sha256": "8dc8a3e3be5c45662c00af6b7bd66a4f3088777f6a31f05a228d68ad9a6ed9a8"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_service.py",
+      "symbol": "test_owner_can_create_observe_and_replay_one_source_operation",
+      "line": 12,
+      "docstring": "The actual owner route creates one source asynchronously, while exact replay retains its registration and never creates a native task.",
+      "file_sha256": "6077ff4bb6a925df465f4fffd7e6507d4d5f93396b5401c0e586fa4456f4a17f"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_service.py",
+      "symbol": "test_source_stop_and_shutdown_close_original_worker_and_retain_partial_git",
+      "line": 42,
+      "docstring": "Stopping after init withdraws the original administrative attempt, proves its local domain closure and preserves the unfinished source on exit.",
+      "file_sha256": "6077ff4bb6a925df465f4fffd7e6507d4d5f93396b5401c0e586fa4456f4a17f"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_service.py",
+      "symbol": "test_source_stop_and_shutdown_close_original_worker_and_retain_partial_git.hold_commit",
+      "line": 58,
+      "docstring": "Pause the actual worker between fixed Git stages, after real init/peer closure and before any commit effect.",
+      "file_sha256": "6077ff4bb6a925df465f4fffd7e6507d4d5f93396b5401c0e586fa4456f4a17f"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_service.py",
+      "symbol": "test_owner_observes_original_source_after_failed_registration_without_reinitialization",
+      "line": 108,
+      "docstring": "The UI receives a redacted saved uncertainty and can explicitly recover the actual existing initial revision through the owner observation endpoint.",
+      "file_sha256": "6077ff4bb6a925df465f4fffd7e6507d4d5f93396b5401c0e586fa4456f4a17f"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_service.py",
+      "symbol": "test_owner_observes_original_source_after_failed_registration_without_reinitialization.fail_registration",
+      "line": 121,
+      "docstring": "Lose the actual registration reply after Git completed; this private detail must not enter the owner response.",
+      "file_sha256": "6077ff4bb6a925df465f4fffd7e6507d4d5f93396b5401c0e586fa4456f4a17f"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_service.py",
+      "symbol": "test_owner_authenticated_clone_uses_selected_remote_tls_trust",
+      "line": 147,
+      "docstring": "The real owner clone uses its configured credential origin and CA, independently of the model runtime's public-network trust configuration.",
+      "file_sha256": "6077ff4bb6a925df465f4fffd7e6507d4d5f93396b5401c0e586fa4456f4a17f"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_setup_retirement.py",
+      "symbol": "test_legacy_source_setup_refuses_before_any_effect",
+      "line": 9,
+      "docstring": "A useful existing directory and its recorded source survive every retired setup route without a subprocess, remote call or metadata rewrite.",
+      "file_sha256": "ca060ea702fab31c5e8210a8498838230f6af7cef4f86157a92c7d674ae3aa2e"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_setup_retirement.py",
+      "symbol": "test_legacy_source_setup_refuses_before_any_effect.forbidden",
+      "line": 19,
+      "docstring": "Abort the first unowned process before the legacy implementation can modify even the isolated fixture.",
+      "file_sha256": "ca060ea702fab31c5e8210a8498838230f6af7cef4f86157a92c7d674ae3aa2e"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_shutdown.py",
+      "symbol": "test_source_shutdown_error_cannot_skip_native_worker_withdrawal",
+      "line": 13,
+      "docstring": "A source cleanup failure propagates only after the actual coordinator has withdrawn and drained its already-registered native adapter worker.",
+      "file_sha256": "f762204f938c0ef3e6b8772b9ab795cf485f3dba6eb36c24d0ae3d4aa0188d02"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_shutdown.py",
+      "symbol": "test_source_shutdown_error_cannot_skip_native_worker_withdrawal.UnavailableSourceReceipts",
+      "line": 17,
+      "docstring": "Model only the source family reporting failed SQL persistence after it drained its own physical handles.",
+      "file_sha256": "f762204f938c0ef3e6b8772b9ab795cf485f3dba6eb36c24d0ae3d4aa0188d02"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_shutdown.py",
+      "symbol": "test_source_shutdown_error_cannot_skip_native_worker_withdrawal.UnavailableSourceReceipts.close",
+      "line": 20,
+      "docstring": "Report an original source-receipt failure; this must not prevent independent native worker teardown.",
+      "file_sha256": "f762204f938c0ef3e6b8772b9ab795cf485f3dba6eb36c24d0ae3d4aa0188d02"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_shutdown.py",
+      "symbol": "test_shutdown_drains_source_admission_before_releasing_store_owner",
+      "line": 36,
+      "docstring": "An in-flight preparation cannot enqueue an administrative worker after source shutdown took its final handle snapshot and released store ownership.",
+      "file_sha256": "f762204f938c0ef3e6b8772b9ab795cf485f3dba6eb36c24d0ae3d4aa0188d02"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_shutdown.py",
+      "symbol": "test_shutdown_drains_source_admission_before_releasing_store_owner.held_prepare",
+      "line": 48,
+      "docstring": "Hold the actual admission handoff before its real transaction, without starting Git or fabricating closure evidence.",
+      "file_sha256": "f762204f938c0ef3e6b8772b9ab795cf485f3dba6eb36c24d0ae3d4aa0188d02"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_shutdown.py",
+      "symbol": "test_shutdown_drains_source_admission_before_releasing_store_owner.held_worker",
+      "line": 55,
+      "docstring": "Represent a registered finite worker handle only; no process, lease, file or model is created in this admission-order test.",
+      "file_sha256": "f762204f938c0ef3e6b8772b9ab795cf485f3dba6eb36c24d0ae3d4aa0188d02"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_shutdown.py",
+      "symbol": "test_shutdown_drains_source_admission_before_releasing_store_owner.observed_close",
+      "line": 59,
+      "docstring": "Observe the real source shutdown boundary; finishing before admission drains demonstrates the ownership defect.",
+      "file_sha256": "f762204f938c0ef3e6b8772b9ab795cf485f3dba6eb36c24d0ae3d4aa0188d02"
+    },
+    {
+      "path": "backend/tools/project/create_repository.py",
+      "symbol": "CreateRepositoryInput",
+      "line": 10,
+      "docstring": "Historical argument compatibility only; these fields cannot authorize source or remote effects.",
+      "file_sha256": "f3975f7a24e4bd146a9a1e8e2dde189552579a34f05c5bbda779cb97307d7cf6"
+    },
+    {
+      "path": "backend/tools/project/create_repository.py",
+      "symbol": "CreateRepositoryTool",
+      "line": 29,
+      "docstring": "Retained compatibility entry point that explains the explicit owner setup replacement without executing it.",
+      "file_sha256": "f3975f7a24e4bd146a9a1e8e2dde189552579a34f05c5bbda779cb97307d7cf6"
+    },
+    {
+      "path": "backend/tools/project/create_repository.py",
+      "symbol": "CreateRepositoryTool._run",
+      "line": 36,
+      "docstring": "Reject model-origin repository setup; an owner must choose its exact directory, mode and original intent through source controls.",
+      "file_sha256": "f3975f7a24e4bd146a9a1e8e2dde189552579a34f05c5bbda779cb97307d7cf6"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

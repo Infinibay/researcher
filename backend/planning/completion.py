@@ -2,6 +2,7 @@
 
 import json
 
+from backend.git.source_operations import SourceOperations
 from backend.knowledge.reviews import canonical, digest
 from backend.knowledge.results import result_state
 from backend.planning.execution import PlanExecutions
@@ -33,6 +34,9 @@ class ProjectCompletion:
         if conn.execute('SELECT COUNT(*) FROM tasks WHERE project_id=?', (project,)).fetchone()[0] > 256:
             raise RunConflict('El informe excede 256 tareas; no se omitió trabajo ni se cerró el proyecto.')
         blockers = []
+        source_operations = SourceOperations.summaries(conn.execute('SELECT metadata_json FROM projects WHERE id=?', (project,)).fetchone()[0])
+        if any(operation['requires_reconciliation'] for operation in source_operations):
+            blockers.append({'code': 'source_setup_unclosed', 'message': 'Hay preparación de fuentes pendiente o incierta. Conserva y reconcilia su operación original antes de cerrar el proyecto.'})
         legacy = self.legacy_active(project) is not False
         if legacy:
             blockers.append({'code': 'legacy_work_registered', 'message': 'Hay ejecución anterior registrada o sin observar; detén y reconcilia su dueño antes del cierre.'})
@@ -109,6 +113,8 @@ class ProjectCompletion:
                     'deliveries': deliveries, 'tasks': tasks, **scope, 'active_work': active, 'open_peers': open_peers,
                     'unrevoked_grants': grants, 'registered_legacy_work': legacy, 'unpublished_attempts': sorted(unpublished), 'blockers': blockers,
                     'interpretation': 'Recorded acceptance is evidence of an owner decision, not proof of shared understanding, semantic scope coverage, scientific confidence or current remote branch state.'}
+        if source_operations:
+            snapshot['source_operations'] = source_operations
         if len(canonical(snapshot).encode()) > MAX_REPORT_BYTES:
             raise RunConflict('El informe completo supera 4 MiB; no se omitió evidencia ni se cerró el proyecto.')
         markdown = self._markdown(snapshot)
@@ -147,6 +153,13 @@ class ProjectCompletion:
                           'Por ejemplo: aceptar una copia con valor 200 no cambia por sí solo el origen que contiene 137.', '']
             else:
                 lines += ['Plan aceptado como propuesta de trabajo; no demuestra por sí solo cobertura de los objetivos.', '']
+        if snapshot.get('source_operations'):
+            lines += ['## Preparación de fuentes', '', 'Cada observación registrada describe ese momento; no comprueba el estado actual de Git ni del remoto.', '']
+            for operation in snapshot['source_operations']:
+                lines += [f'- {operation["name"]}: {operation["mode"]}, estado registrado {operation["status"]}. Operación `{operation["operation_key"]}`.']
+                if operation['observation']:
+                    lines += ['  Observación guardada: '+canonical(operation['observation'])]
+            lines += ['']
         lines += ['## Límites y decisión pendiente', '', 'Las fuentes y decisiones completas se incluyen en el snapshot, con sus hashes y versiones. Una publicación registrada describe lo observado entonces; no prueba el estado remoto actual.',
                   'El propietario debe comparar este alcance con su intención, revisar los límites y reconocer cada candidato sin publicación antes de aceptar el cierre.', '']
         lines += ['- '+b['message'] for b in snapshot['blockers']]

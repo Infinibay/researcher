@@ -54,7 +54,7 @@ async def list_repos(project_id: int = Query(...)):
 
 @router.post("/repos", response_model=RepoResponse, status_code=201)
 async def create_repo(project_id: int = Query(...), body: RepoCreate = ...):
-    """Initialize or clone a repository."""
+    """Reject retired implicit setup through the compatibility guard; explicit owner source operations replace initialization, cloning and automatic remote creation."""
     repo = repository_manager.init_repo(
         project_id=project_id,
         name=body.name,

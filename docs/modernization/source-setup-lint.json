@@ -1,0 +1,16 @@
+{
+  "scope": "All new/changed Python files under configured Ruff rules; counts include inherited findings, not a claim of causality. Secondary style/import findings deferred DD033.",
+  "codes": {
+    "I001": 14,
+    "PLW1510": 1,
+    "S110": 1,
+    "BLE001": 2,
+    "F401": 3,
+    "SIM117": 1,
+    "TRY004": 1,
+    "UP035": 1,
+    "UP006": 1
+  },
+  "critical_syntax_undefined_findings": [],
+  "total": 25
+}

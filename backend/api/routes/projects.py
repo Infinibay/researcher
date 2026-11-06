@@ -6,6 +6,8 @@ import asyncio
 import sqlite3
 from dataclasses import asdict
 
+from backend.git.source_operations import SourceOperations
+
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field
@@ -50,7 +52,7 @@ class StopObservedProject(BaseModel):
     """One exact observed project Stop intent; caller identities/grants and arbitrary target lists are forbidden."""
 
     model_config = ConfigDict(extra="forbid", strict=True)
-    task_id: int = Field(ge=1)
+    task_id: int | None = Field(ge=1)
     operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
     scope_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
 
@@ -211,7 +213,8 @@ async def delete_project(project_id: int):
 
         if not conn.in_transaction:
             conn.execute('BEGIN IMMEDIATE')
-        if any(conn.execute(f'SELECT 1 FROM {table} WHERE project_id=? LIMIT 1', (project_id,)).fetchone() for table in ('runtime_runs','agent_runs','flow_snapshots','agent_events')):
+        metadata = conn.execute('SELECT metadata_json FROM projects WHERE id=?', (project_id,)).fetchone()
+        if (metadata is not None and SourceOperations.has_history(metadata[0])) or any(conn.execute(f'SELECT 1 FROM {table} WHERE project_id=? LIMIT 1', (project_id,)).fetchone() for table in ('runtime_runs','agent_runs','flow_snapshots','agent_events')):
             raise RunConflict('El proyecto conserva historia de ejecución. No se elimina desde este control; conserva sus informes, intentos y fuentes.')
         # Delete in dependency order — explicit deletes for all referencing
         # tables so the delete succeeds even if the DB lacks ON DELETE CASCADE
@@ -336,6 +339,8 @@ async def stop_project(project_id: int, request: Request, body: StopObservedProj
         if created and runtime is not None:
             for run_id in receipt['run_ids']:
                 await runtime.stop(project_id,run_id)
+            for source in receipt.get('source_operations',[]):
+                await runtime.sources.stop(project_id,source['operation_key'],operation_id=source['operation_id'],fence=source['fence'])
         return JSONResponse(receipt, headers={"Cache-Control":"no-store"})
     runtime = request.app.state.runtime_service
     runs = await runtime.stop_project(project_id) if runtime is not None else []

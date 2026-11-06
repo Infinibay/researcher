@@ -1,0 +1,161 @@
+{
+  "base_commit": "b6783f0",
+  "status": "owned_local_create_adopt_https_clone_and_retained_observation_connected_remote_create_partial_repair_pending",
+  "implemented": [
+    "Original bounded administrative request/owner/attempt/fence without fake native task or source ID; reuse existing global/kernel broker.",
+    "Owner HTTP/web local create, readonly adoption and HTTPS clone, exact original request after reload, definite rejection correction.",
+    "Source/project/lifespan Stop, no alternate registration of partial folders, deletion/completion retention, historical report preservation.",
+    "Readonly reconciliation after Git completed but registration failed; redacted background issue and original commit retained.",
+    "Retired old init/clone/identity/PAT setup and automatic Forgejo/origin/force-push paths."
+  ],
+  "red": [
+    "Missing source modules and authenticated clone field, missing readonly reconciliation.",
+    "Workspace incorrectly reported no history for partial source; completed project report remained current after a new source intention.",
+    "Missing owner route; project Stop omitted source-only work; bodyless Stop omitted source workers.",
+    "Source receipt failure skipped native shutdown; controlled regression reproduced then drained both families.",
+    "Old setup attempted unowned Git before refusal; no effect allowed by regression fixture.",
+    "Owner authenticated clone used model-network trust instead of selected remote TLS; actual local TLS regression reproduced and fixed.",
+    "Source close finished while preparation still held the admission handoff, permitting a later worker after owner release; reproduced1FAIL1.42s and fixed by admission-drain barrier/cancelled-before-start handling."
+  ],
+  "source_checkpoints": [
+    {
+      "passed": 36,
+      "seconds": 14.89,
+      "scope": "Storage/project/completion/readers/legacy-extra compatibility before final source-service/TLS integration; not final installed revision."
+    },
+    {
+      "passed": 2,
+      "seconds": 4.0,
+      "scope": "Cross-family shutdown error and corrected prior-branch fixture signature."
+    },
+    {
+      "passed": 6,
+      "seconds": 14.63,
+      "scope": "Final source lifecycle and admission-close ordering after the original handoff-race reproduction; actual Git/service scenarios plus explicit synthetic control boundaries."
+    }
+  ],
+  "installed": {
+    "passed": 124,
+    "failures": 0,
+    "skipped": 0,
+    "installed_distributions": 85,
+    "sdk": "1.30.0",
+    "excluded_frameworks": [
+      "chromadb",
+      "crewai",
+      "crewai-tools",
+      "fastmcp",
+      "fastmcp-slim",
+      "litellm",
+      "ollama",
+      "tree-sitter",
+      "tree-sitter-c",
+      "tree-sitter-javascript",
+      "tree-sitter-python",
+      "tree-sitter-rust",
+      "tree-sitter-typescript"
+    ],
+    "project_noneditable": true,
+    "backend_modules": 261,
+    "all_backend_imports_from_native_env": true,
+    "matched_application_members": 819,
+    "console_help": 0,
+    "console_missing_token": 2,
+    "console_real_stdio": true,
+    "console_created_database": false,
+    "real_model_turns": 0,
+    "controlled_native_turns": 0,
+    "synthetic_inference_adapter_turns": 1,
+    "actual_host_publications": "Local publication regression fixtures only; no user remote",
+    "seconds": 95.923
+  },
+  "excluded_legacy_extra_cases": [
+    "backend/tests/git/test_repository_manager.py::test_old_model_tool_explains_owner_replacement_without_setup"
+  ],
+  "frontend": {
+    "passed": 115,
+    "failed": 0,
+    "seconds": 1.746858858,
+    "typescript_build_seconds": 4.98,
+    "build_warning": "Existing chunk size warning; DD002."
+  },
+  "browser": {
+    "captures": 10,
+    "page_errors": 0,
+    "scoped_axe_violations": 0,
+    "horizontal_overflow": 0,
+    "closure_fixture": {
+      "counts": {
+        "runtime_runs": 0,
+        "runtime_inference_dispatches": 0,
+        "tool_grants": 0
+      },
+      "operations": [
+        {
+          "name": "interrumpida",
+          "mode": "create",
+          "status": "stopped",
+          "domain_removed": true
+        },
+        {
+          "name": "ensayo",
+          "mode": "create",
+          "status": "completed",
+          "domain_removed": true
+        },
+        {
+          "name": "ensayo",
+          "mode": "adopt",
+          "status": "completed",
+          "domain_removed": true
+        }
+      ],
+      "grants": 3,
+      "all_retired": true,
+      "global_active": null
+    },
+    "limits": "Initial seven states precede final copy/action adjustments; final readonly state and definite-rejection correction checked separately. No whole-page/global/human/cross-browser acceptance."
+  },
+  "documentation": {
+    "python_definitions": 150,
+    "missing_python": [],
+    "typescript_definitions_modules": 54,
+    "missing_typescript": []
+  },
+  "static": {
+    "scope": "All new/changed Python files under configured Ruff rules; counts include inherited findings, not a claim of causality. Secondary style/import findings deferred DD033.",
+    "codes": {
+      "I001": 14,
+      "PLW1510": 1,
+      "S110": 1,
+      "BLE001": 2,
+      "F401": 3,
+      "SIM117": 1,
+      "TRY004": 1,
+      "UP035": 1,
+      "UP006": 1
+    },
+    "critical_syntax_undefined_findings": [],
+    "total": 25
+  },
+  "remaining_principal": [
+    "Verify/complete original-handle physical Stop priority under SQLite/admission contention; current SQL-before-cancel ordering is code-derived, not runtime-tested. Preserve stale-fence checks and admission-drain barrier.",
+    "Separate remote repository creation with explicit namespace/visibility/original issued-write reconciliation.",
+    "Repair incomplete init/commit/clone/checkout and no-original-grant/crash cases; stopped partial reservations remain retained.",
+    "Cross-browser saved-history selection, restore/inverses43–54, metadata/configuration migration.",
+    "Reader budgets/concurrency/submodules and remote annotation identity; full page and whole original modernization acceptance."
+  ],
+  "full_goal": "Active unchanged;43scenarios and all12page acceptance remain unproven. No global percentage claimed.",
+  "models": {
+    "real_subscription_turns": 0,
+    "controlled_native_binary_turns": 0,
+    "synthetic_inference_adapter_turns": 1,
+    "user_remote_writes": 0
+  },
+  "failures_and_harness_limits": [
+    "Initial installed selection included an optional legacy-tool import; default native profile correctly refuses missing CrewAI. That compatibility case passed in original source extra environment and is explicitly deselected in native verification.",
+    "Broader Git test exposed its stale two-argument completion interceptor; forwarded the actual optional prior_branch argument without weakening the StaleAttempt/source preservation assertions.",
+    "One source-clone fixture used nonexistent state nesting after the actual clone passed; corrected to its documented direct counters before final123PASS.",
+    "An initial pip-wheel command failed before building because the source venv has no pip; used existing offline uv builder. One frontend cwd typo was corrected before final tests."
+  ]
+}
