@@ -16,11 +16,38 @@ class ResearchService:
         *,
         reference_reader: ReferenceReader,
         web_fetcher: WebFetcher | None = None,
+        context7=None,
     ):
         """Bind persistence and bounded readers without acquiring data at construction."""
         self.repository = repository
         self.reference_reader = reference_reader
         self.web_fetcher = web_fetcher
+        self.context7 = context7
+
+    def capture_context7(self, scope, key, *, operation, query, library_name=None,
+                         library_id=None, format="json"):
+        """Capture one explicit provider lookup with scoped receipt reuse and commit-time authority checks.
+
+        A saved receipt avoids another external request. Concurrent or interrupted
+        requests before commit may still consume provider quota; no retry is automatic.
+        """
+        from backend.research.context7 import validate_context7
+
+        validate_context7(query=query, library_name=library_name, library_id=library_id, format=format)
+        if operation == "search" and library_name is not None and library_id is None:
+            request = {"library_name": library_name, "query": query}
+        elif operation == "docs" and library_id is not None and library_name is None:
+            request = {"library_id": library_id, "query": query, "format": format}
+        else:
+            raise SourceUnavailable("Unsupported Context7 operation")
+        intent = {"provider": "context7", "operation": operation, **request}
+        existing = self.repository.lookup_operation(scope, key, "source.capture", intent)
+        if existing is not None:
+            return existing
+        if self.context7 is None:
+            raise SourceUnavailable("Context7 is not configured")
+        snapshot = getattr(self.context7, operation)(**request)
+        return self.repository.capture_source(scope, key, snapshot, intent=intent)
 
     def capture_reference(
         self, scope: ResearchScope, key: str, reference_id: int

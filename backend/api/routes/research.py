@@ -9,6 +9,8 @@ from fastapi.responses import JSONResponse
 from backend.api.models.questions import AskUser
 from backend.api.models.research import (
     CaptureCommand,
+    CaptureContext7Docs,
+    CaptureContext7Search,
     CapturePaper,
     CaptureReference,
     CaptureWeb,
@@ -200,6 +202,24 @@ def sources(
         },
         "next_after_id": result[-1]["id"] if len(result) == limit else None,
     }
+
+
+@router.post("/sources/context7/search", response_model=SourceReceipt)
+def context7_search(command: CaptureContext7Search, ctx: Context):
+    """Save a host-authenticated provider search as attributed evidence with an original retry key."""
+    return ctx.service.capture_context7(
+        ctx.scope, command.operation_key, operation="search",
+        library_name=command.library_name, query=command.query,
+    )
+
+
+@router.post("/sources/context7/docs", response_model=SourceReceipt)
+def context7_docs(command: CaptureContext7Docs, ctx: Context):
+    """Save the chosen documentation response, preserving version warnings and exact quotable text."""
+    return ctx.service.capture_context7(
+        ctx.scope, command.operation_key, operation="docs",
+        library_id=command.library_id, query=command.query, format=command.format,
+    )
 
 
 @router.get("/sources/{source_id}", response_model=SourceWindow)

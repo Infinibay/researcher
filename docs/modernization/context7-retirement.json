@@ -1,0 +1,36 @@
+{
+  "base_commit": "13e26a5",
+  "removed_modules": [
+    {
+      "path": "backend/tools/context7/__init__.py",
+      "sha256": "aa8d91e342df010d4c432013d6a38dd72e503a660e2a8fb4fff66f6905c91701",
+      "classes": []
+    },
+    {
+      "path": "backend/tools/context7/get_docs.py",
+      "sha256": "7ba3602dc4912124ece4e673b990458784932d47332fe7b8a12cf256a42e3e54",
+      "classes": [
+        "Context7DocsInput",
+        "Context7DocsTool"
+      ]
+    },
+    {
+      "path": "backend/tools/context7/search_library.py",
+      "sha256": "0c53798c14c9869d2f6bb23cc58ca30189a57bd370881361be603d40ef17680a",
+      "classes": [
+        "Context7SearchInput",
+        "Context7SearchTool"
+      ]
+    }
+  ],
+  "replacement": [
+    "backend/research/context7.py",
+    "researcher_context7_search",
+    "researcher_context7_docs"
+  ],
+  "preserved": [
+    "Historical prompt tool-name mapping in backend/prompts/tool_refs.py is inert under native policies.",
+    "Existing source and finding records remain unchanged."
+  ],
+  "limits": "Source import/name scan found only the removed package and historical prompt mapping. Dynamic external imports remain unknown; this is an intentional public Python import cutover, with native MCP replacements."
+}

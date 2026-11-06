@@ -16,7 +16,26 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: constructores, catálogo por rol y memoria CrewAI retirados
+## Etapa actual: Context7 migrado a fuentes nativas
+
+Búsqueda de bibliotecas y documentación JSON/texto pasan por el MCP de negocio,
+API y fuentes SQLite. Clave opcional sólo en el host; cuota externa explícita,
+versiones y reglas del proveedor tratadas como evidencia atribuida. Se retiran
+los tres módulos CrewAI anteriores. [Contrato](../architecture/context7-sources.md).
+
+**Comprobado:** 87 pruebas relacionadas en fuente y36en el paquete instalado,
+796fuentes coincidentes,231imports sólo del entorno y85distribuciones sin legacy.
+MCP/HTTP/SQLite/cita real con DNS/socket de proveedor controlados; un turno nativo
+de investigación controlado.0llamadas a modelos o Context7 reales.42definiciones
+documentadas. Inventario549candidatos/485archivos,31entradas archivadas,0pendientes
+de revisión estática; evaluación de eficacia sigue abierta. DD047 sólo estilo.
+
+**Siguiente principal:** Spider, demás herramientas e índices antiguos y retirada
+final de dependencias. Luego operación, migraciones/restore, historial/presupuestos,
+CLI y evaluación real/humana/científica/global. Se mantienen12pilotos,48conceptos
+y0páginas completamente aceptadas. Todos los detalles secundarios al final.
+
+## Etapa anterior: constructores, catálogo por rol y memoria CrewAI retirados
 
 Se eliminan trece módulos antiguos y se conservan las identidades, memoria y
 ejecuciones históricas en SQLite. Los consumidores de contexto usan las lecturas

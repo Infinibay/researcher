@@ -6769,3 +6769,44 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
   Full migrations/restore/historybudget/CLI/operation/realprompt-human-science/
   43scenarios/all12pages/finalreview remain. Macro-first/task-transition list
   policy persists;12pilots48concepts0accepted unchanged, no new polish detour.
+
+### 2026-11-06 — Context7 native source capability and old leaf retirement
+
+- Previous conversational turn: no implementation progress; status/persistent
+  transition policy only. Revalidated tracked-clean managed13e26a5 and full goal.
+  Original checkout/protected roots unchanged. No agents/push/merge/deploy.
+- Ken found the original Context7 modules; recall empty and native service
+  blast-radius unindexed. Read actual managed consumers/DTO/API/store/native
+  catalogs and host lifecycle. These observations are lower bounds, not absence
+  of arbitrary external Python consumers. Historical prompt names retained.
+- Official Context7 API verified: old list assumptions no longer match current
+  search/results and docs/codeSnippets/infoSnippets envelopes. Preserve JSON/text
+  and provider version/rules as untrusted evidence rather than instructions.
+  Two native tools, host-only optional credential, fixed provider DNS/TLS origin,
+  12s/200kB bounds, no redirects/fallback/retry, exact original receipt and source
+  quotations. Store checks scope before I/O and again on commit. Live ownership
+  remains until physical connection close; remote provider quota not reversible.
+- RED missing adapter; first integration run15PASS/3FAIL. Production fix keeps
+  ResearchForbidden before OSError because PermissionError inherits OSError.
+  Fixture fixes use required loopback-IP origin and keyword-accepting revocation
+  wrapper. Final related source87PASS0FAIL0SKIP18.09s;21Context7cases plus existing
+  web/PDF/catalog/MCP/controlled research.
+- Removed3CrewAIContext7modules with hashes retained; no old tests removed. Native
+  wheel rebuilt from clean source copy after README finalized. Installed proof
+  36PASS0FAIL0SKIP5.364s/796matchingPythonSQLmembers/231env-onlyimports/85native
+  distributions. One controlled actual kernel/broker/SQLite research; MCP memory
+  protocol→actual async client/ASGI/API/SQLite/citation; provider DNS/socket and
+  generation/Ken fixtures.0realmodels/Context7/user effects. Current environment
+  holds context7 wheel, replacing catalog-removal wheel.
+- 42new/changed definitions documented; oneSIM117test-style issue deferredDD047.
+  Prompt549candidates/485files;6morearchived(31total),2newwiretextsreviewed and
+  29unchanged literals/direct-consumers revalidated by AST/hashes. Inventorycheck
+  and2auditor testsPASS0.11s; initial audit-test path typo corrected without a
+  production change. No efficacy or complete dynamic-callgraph claim.
+- Terminal handles:77254exit1,61402/66477/10179/9768/42806exit0;4823exit4 wrong
+  test path, then correct auditor selection exit0. No retained server/model actor.
+- Next principal: Spider then remaining individual tools, obsolete code indices
+  and dependencies. The legacy extra remains. Migration/restore, operation,
+  history/budgets/CLI, realprompt-human-science,43scenarios/all12pages/finalreview
+  remain full-scope work.12pilots48concepts0accepted unchanged. Macro-first and
+  updated chat list at main-task transitions remain in force.

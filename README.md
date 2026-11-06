@@ -47,9 +47,15 @@ uv sync --locked --extra legacy
 
 This extra does not enable an inference backend. Old provider calls are retired;
 actual model selection belongs to the configured native runtime. The former
-`anthropic` and `gemini` extras are no longer advertised. A request for an old
-catalogue without `[legacy]` explains the missing optional reader before loading
-frameworks. Native database/API/CLI operations need none of those packages.
+`anthropic` and `gemini` extras are no longer advertised. The old role catalogue
+and constructors have been removed; remaining individual legacy readers still
+require their optional dependencies. Native database/API/CLI operations need none
+of those packages.
+
+Optional library documentation uses the native Context7 source tools. Set
+`CONTEXT7_API_KEY` on the server; the historical `INFINIBAY_CONTEXT7_API_KEY`
+name is also accepted. Its provider quota is separate from the OpenAI subscription.
+No extra package is needed. See [configuration, tools and evidence limits](docs/architecture/context7-sources.md).
 
 The commands above run native smoke checks. The full historical test corpus still
 has migration failures and expects the optional legacy readers; it is not a claim

@@ -11,6 +11,8 @@ RESEARCH_NAMES = frozenset(
         "researcher_capture_reference",
         "researcher_capture_command",
         "researcher_capture_web",
+        "researcher_context7_search",
+        "researcher_context7_docs",
         "researcher_capture_paper",
         "researcher_capture_wiki",
         "researcher_capture_wiki_collection",

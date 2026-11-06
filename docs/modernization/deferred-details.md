@@ -152,3 +152,11 @@ por I001 en `test_legacy_engine_removal.py` y quitar la línea vacía final de
 anteriores; no reabrir los ensayos de ejecución por estilo.
 La prueba de migración54 que instala55 al preparar53 sigue como fallo principal
 del bloque migraciones/restore, no como detalle diferido.
+
+## DD047 — estilo del ensayo Context7
+
+Después de todas las capacidades principales: simplificar los context managers
+anidados de `test_mcp_context7_search_docs_saved_citation_and_receipt_reuse`
+señalados por SIM117. Es una cuestión de estilo del ensayo; no cambia el recorrido
+MCP/HTTP/SQLite ni sus garantías de alcance y recibo. La integración Spider y la
+retirada de herramientas/dependencias restantes siguen como trabajo principal.

@@ -1,0 +1,12 @@
+{
+  "base_commit": "13e26a5",
+  "findings": [
+    {
+      "path": "backend/tests/research/test_context7.py",
+      "code": "SIM117",
+      "line": 292,
+      "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements"
+    }
+  ],
+  "deferred": "DD047"
+}

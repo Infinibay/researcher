@@ -62,7 +62,7 @@ genérico ni chat libre para cubrir operaciones que falten.
 | `create_epic`, `create_milestone`, `update_project`, `read_epics`, `read_milestones` | Operaciones de planificación del producto por MCP | Lectura/escritura por grant; claves de operación, dependencias y eventos atómicos | Pendiente. No usar SQL genérico como sustituto |
 | `create_repository` | Bootstrap/adopción/reparación explícitos del host | Reconciliar remoto/local/DB antes de retry; credencial host, no force push por alta parcial | Pendiente. Probar remoto creado+DB fallida y repo preexistente |
 | `query_database` | Retirar del catálogo del modelo; reemplazar usos por consultas de negocio/analytics tipadas | El SQL de sólo lectura también puede revelar secretos y otros proyectos; no exponer `env_vars` | Pendiente migrar consumidores y probar alcance. El nuevo MCP no contiene SQL |
-| `context7_search_library`, `context7_get_docs` | Herramientas documentales opcionales o adaptador de fuentes | Servicio/credencial propios y procedencia; no activarlo por defecto como inferencia ChatGPT | Pendiente de integración y pruebas de red/fallo; conservar documentación actualizada cuando se habilite |
+| `context7_search_library`, `context7_get_docs` | `researcher_context7_search`, `researcher_context7_docs` → fuentes canónicas | Clave opcional del host, cuota propia, scope del grant, hash/procedencia/versiones; no inferencia ChatGPT | Implementado por MCP/API/SQLite, con transporte acotado y fallos/recibos/revocación probados. Tres módulos CrewAI retirados. Proveedor controlado en pruebas; disponibilidad/eficacia externas no evaluadas. [Contrato](context7-sources.md) |
 
 ## Wire contract demostrado
 

@@ -527,3 +527,13 @@ Las herramientas individuales antiguas, sus dependencias y los adaptadores
 Context7/Spider siguen pendientes. El snapshot de71schemas es histórico y no
 requiere importar clases; no representa el catálogo MCP actual ni demuestra
 equivalencia de capacidades externas.
+
+## Context7 migrado — 2026-11-06
+
+`researcher_context7_search` y `researcher_context7_docs` sustituyen las dos
+herramientas CrewAI y sus tres módulos. Guardan respuestas del proveedor como
+fuentes canónicas, con recibo, hash, alcance, versión atribuida y parada del host.
+JSON/texto, MCP/HTTP/SQLite y cita probados; configuración opcional y cuota propia.
+87 pruebas relacionadas y36instaladas pasan; proveedor simulado, sin petición de
+pago ni evaluación de disponibilidad/eficacia externas. [Contrato](context7-sources.md).
+Spider y el resto de herramientas/índices/dependencias siguen pendientes.

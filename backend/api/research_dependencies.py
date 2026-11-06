@@ -9,6 +9,7 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
 from backend.api import config
 from backend.research.acquisition import BoundedReferenceReader
+from backend.research.context7 import Context7Reader
 from backend.research.models import ResearchForbidden, ResearchNotFound, ResearchScope
 from backend.research.parser_process import PDFParser
 from backend.research.service import ResearchService
@@ -65,6 +66,9 @@ def get_research_context(
         scope,
         ResearchService(
             store,
+            context7=Context7Reader.from_environment(
+                owner=request.app.state.live_grants, grant_id=scope.grant_id,
+            ),
             reference_reader=BoundedReferenceReader(
                 Path(config.UPLOAD_DIR),
                 pdf_parser=parser,

@@ -1,0 +1,18 @@
+{
+  "base_commit": "13e26a5",
+  "passed": 87,
+  "failures": [],
+  "skipped": 0,
+  "seconds": 18.088,
+  "scope": "Context7 transport/schema/optional credential, real MCP-memory protocol and async HTTP/ASGI\u2192API\u2192SQLite\u2192exact citation; existing web/PDF capture, removed role catalog, actual MCP stdio and one controlled native research turn. DNS/socket responses and generation/Ken are fixtures, no real model or paid provider calls. Not the global suite.",
+  "red": "Initial new-source test failed because Context7Reader did not exist.",
+  "corrections": [
+    "Preserve ResearchForbidden before generic OSError translation because PermissionError inherits OSError.",
+    "HTTP test uses the existing client contract requiring a loopback IP rather than localhost; revocation fixture accepts keyword arguments."
+  ],
+  "limits": [
+    "No live Context7 availability or external ranking evaluation.",
+    "A committed receipt avoids another provider lookup; interruption/concurrency before commit can consume provider quota again.",
+    "No inference-quality or scientific/whole-product acceptance claim."
+  ]
+}

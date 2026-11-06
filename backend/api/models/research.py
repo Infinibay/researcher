@@ -65,6 +65,21 @@ class CapturePaper(Command):
         return self
 
 
+class CaptureContext7Search(Command):
+    """Capture an explicit library search; credentials and project stay host-owned."""
+
+    library_name: str = Field(min_length=1, max_length=500)
+    query: str = Field(min_length=1, max_length=500)
+
+
+class CaptureContext7Docs(Command):
+    """Capture one chosen library/version's provider response without implicit library selection."""
+
+    library_id: str = Field(min_length=1, max_length=500)
+    query: str = Field(min_length=1, max_length=500)
+    format: Literal["json", "txt"] = "json"
+
+
 class Citation(BaseModel):
     """Refer to one exact saved-source excerpt, not a generated quotation."""
 

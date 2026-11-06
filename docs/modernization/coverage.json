@@ -1673,12 +1673,22 @@
         "backend/tests/research/test_finding_registry.py",
         "backend/tests/research/test_finding_semantic.py",
         "docs/design/audits/2026-11-01-findings/report.md",
-        "frontend/tests/findings-design.test.ts"
+        "frontend/tests/findings-design.test.ts",
+        "docs/architecture/context7-sources.md",
+        "docs/modernization/context7-retirement.json",
+        "docs/modernization/context7-results.json",
+        "docs/modernization/context7-packaging.json",
+        "backend/tests/research/test_context7.py"
       ],
       "remaining": [
         "Migrate/expose retained capabilities and their actual consumers (inventory of71 tools exists).",
         "Exact-candidate development/review/CI and remote effect reconciliation."
-      ]
+      ],
+      "context7_cutover": {
+        "implemented": "Optional host-owned library search and JSON/text documentation captured as attributed immutable sources; real MCP/HTTP/API/SQLite/citation with controlled provider bytes. Three CrewAI modules retired.",
+        "verified": "87 source /36 installed tests, no failures/skips; no live Context7 or model requests.",
+        "remaining": "Spider, remaining leaf tools/index/dependency retirement and global acceptance; live optional-provider availability and documentation efficacy unproven."
+      }
     },
     "inference_inventory": {
       "status": "in_progress",
@@ -1848,7 +1858,8 @@
         "backend/tests/runtime/test_prompt_catalog.py",
         "backend/tests/runtime/test_prompt_inventory.py",
         "evals/prompts/baseline.json",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/architecture/context7-sources.md"
       ],
       "implemented": "Owned static inventory578candidates/512files with explicit source/direct-consumer-bound dispositions; native catalogv2 and capability rewrites, retired direct warmup.",
       "remaining": [
@@ -2252,15 +2263,25 @@
       ]
     },
     "legacy_removal": {
-      "status": "pending",
+      "status": "in_progress",
       "evidence": [
         "docs/architecture/finding-readers.md",
         "docs/modernization/finding-consumers-results.json",
         "docs/modernization/finding-consumers-packaging.json",
         "backend/tests/research/test_finding_consumers.py",
         "backend/tests/research/test_legacy_context_scope.py",
-        "backend/tests/knowledge/test_finding_memory_retirement.py"
-      ]
+        "backend/tests/knowledge/test_finding_memory_retirement.py",
+        "docs/architecture/context7-sources.md",
+        "docs/modernization/context7-retirement.json",
+        "docs/modernization/context7-results.json",
+        "docs/modernization/context7-packaging.json",
+        "backend/tests/research/test_context7.py"
+      ],
+      "context7_cutover": {
+        "implemented": "Optional host-owned library search and JSON/text documentation captured as attributed immutable sources; real MCP/HTTP/API/SQLite/citation with controlled provider bytes. Three CrewAI modules retired.",
+        "verified": "87 source /36 installed tests, no failures/skips; no live Context7 or model requests.",
+        "remaining": "Spider, remaining leaf tools/index/dependency retirement and global acceptance; live optional-provider availability and documentation efficacy unproven."
+      }
     },
     "final_independent_review": {
       "status": "pending",
@@ -3037,7 +3058,8 @@
         "backend/tests/research/test_finding_semantic.py",
         "backend/tests/runtime/test_host_business.py",
         "docs/design/audits/2026-11-01-findings/report.md",
-        "frontend/tests/findings-design.test.ts"
+        "frontend/tests/findings-design.test.ts",
+        "docs/modernization/context7-docstrings.json"
       ],
       "remaining": [
         "Audit modules/classes/methods and relevant functions added earlier in this branch; add meaningful searchable docstrings/JSDoc where missing or stale.",

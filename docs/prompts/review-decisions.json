@@ -2673,7 +2673,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::INSTRUCTIONS": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -2689,7 +2689,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_review_subject.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -2705,7 +2705,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_review_read.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -2721,7 +2721,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_review_decide.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -2737,7 +2737,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_ask_user.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -2753,7 +2753,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_reference_list.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -2769,7 +2769,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_reference.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -2785,7 +2785,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_web.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -2801,7 +2801,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_paper.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -2817,7 +2817,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_source_list.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -2833,7 +2833,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_source_read.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -2849,7 +2849,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_source_structure.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -2865,7 +2865,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_source_search.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -2881,7 +2881,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_source_query.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -2897,7 +2897,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_command.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -2913,7 +2913,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_finding_record.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -2929,7 +2929,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_finding_list.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -2945,7 +2945,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_finding_summary.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -2961,7 +2961,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_finding_query.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -2977,7 +2977,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_finding_read.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -2993,7 +2993,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_report_write.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -3009,7 +3009,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_investigation_summary.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -3025,7 +3025,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_result_propose.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -3041,7 +3041,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_report_read.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -3057,7 +3057,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_wiki_list.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -3073,7 +3073,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_wiki_read.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -3089,7 +3089,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_wiki_write.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -3105,7 +3105,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_wiki.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -3121,7 +3121,7 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_wiki_collection.wire_description": {
-      "dependencies_sha256": "edf3473b65f90c086b9a9c035cc77cc8c75b158d1cb38f83feb116773652b294",
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
       "decision": "retained_native_tool_contract",
       "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
       "evidence": [
@@ -4460,108 +4460,6 @@
       "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
       "evidence": [
         "backend/tools/communication/send_message.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/context7/get_docs.py::Context7DocsTool.description": {
-      "dependencies_sha256": "dcdae31034f190d0df9f033d71f0c46ce1d25b2c1c59b6f7cd10fdeea773c802",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/context7/get_docs.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/context7/get_docs.py::Context7DocsInput.description@19": {
-      "dependencies_sha256": "dcdae31034f190d0df9f033d71f0c46ce1d25b2c1c59b6f7cd10fdeea773c802",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/context7/get_docs.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/context7/get_docs.py::Context7DocsInput.description@27": {
-      "dependencies_sha256": "dcdae31034f190d0df9f033d71f0c46ce1d25b2c1c59b6f7cd10fdeea773c802",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/context7/get_docs.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/context7/get_docs.py::Context7DocsInput.description@35": {
-      "dependencies_sha256": "dcdae31034f190d0df9f033d71f0c46ce1d25b2c1c59b6f7cd10fdeea773c802",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/context7/get_docs.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/context7/search_library.py::Context7SearchTool.description": {
-      "dependencies_sha256": "feb7605702d5c99c32174f706ea6e39481df7170d008fe24a55c5d137c975601",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/context7/search_library.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/context7/search_library.py::Context7SearchInput.description@19": {
-      "dependencies_sha256": "feb7605702d5c99c32174f706ea6e39481df7170d008fe24a55c5d137c975601",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/context7/search_library.py",
         "backend/tools/__init__.py",
         "backend/tools/_legacy_access.py",
         "backend/runtime/business_definitions.py",
@@ -9093,6 +8991,32 @@
         "evals/prompts/cases.json"
       ],
       "conflicts": []
+    },
+    "backend/runtime/business_definitions.py::ResearchTools.researcher_context7_search.wire_description": {
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
+      "decision": "reviewed_native_tool_contract",
+      "rationale": "Reviewed against the native handler, DTO, optional host credential and source store. Explicit query/library choice, external-provider quota, immutable source read/pagination, version uncertainty, untrusted provider instructions and original operation-key reuse are described. No automatic retry, provider fallback, permission escalation or scientific-quality claim. MCP/HTTP/SQLite tests exercise actual descriptions and mappings; no efficacy claim.",
+      "evidence": [
+        "backend/research/context7.py",
+        "backend/research/service.py",
+        "backend/api/routes/research.py",
+        "backend/tests/research/test_context7.py",
+        "docs/architecture/context7-sources.md"
+      ],
+      "conflicts": []
+    },
+    "backend/runtime/business_definitions.py::ResearchTools.researcher_context7_docs.wire_description": {
+      "dependencies_sha256": "2777cb4c2a2781ad694ae1313458d5c6ab911a943b480c9616ff38219ccfd011",
+      "decision": "reviewed_native_tool_contract",
+      "rationale": "Reviewed against the native handler, DTO, optional host credential and source store. Explicit query/library choice, external-provider quota, immutable source read/pagination, version uncertainty, untrusted provider instructions and original operation-key reuse are described. No automatic retry, provider fallback, permission escalation or scientific-quality claim. MCP/HTTP/SQLite tests exercise actual descriptions and mappings; no efficacy claim.",
+      "evidence": [
+        "backend/research/context7.py",
+        "backend/research/service.py",
+        "backend/api/routes/research.py",
+        "backend/tests/research/test_context7.py",
+        "docs/architecture/context7-sources.md"
+      ],
+      "conflicts": []
     }
   },
   "retired_entries": {
@@ -9514,6 +9438,120 @@
       ],
       "conflicts": [],
       "retirement": "Role constructor or framework knowledge adapter removed; see docs/modernization/catalog-removal-inventory.json. Historical review preserved."
+    },
+    "backend/tools/context7/get_docs.py::Context7DocsInput.description@19": {
+      "dependencies_sha256": "dcdae31034f190d0df9f033d71f0c46ce1d25b2c1c59b6f7cd10fdeea773c802",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/context7/get_docs.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Replaced old CrewAI Context7 leaf tools with native host-owned source acquisition after base13e26a5; original prompt decision retained for history.",
+      "retirement_evidence": "docs/modernization/context7-retirement.json"
+    },
+    "backend/tools/context7/get_docs.py::Context7DocsInput.description@27": {
+      "dependencies_sha256": "dcdae31034f190d0df9f033d71f0c46ce1d25b2c1c59b6f7cd10fdeea773c802",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/context7/get_docs.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Replaced old CrewAI Context7 leaf tools with native host-owned source acquisition after base13e26a5; original prompt decision retained for history.",
+      "retirement_evidence": "docs/modernization/context7-retirement.json"
+    },
+    "backend/tools/context7/get_docs.py::Context7DocsInput.description@35": {
+      "dependencies_sha256": "dcdae31034f190d0df9f033d71f0c46ce1d25b2c1c59b6f7cd10fdeea773c802",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/context7/get_docs.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Replaced old CrewAI Context7 leaf tools with native host-owned source acquisition after base13e26a5; original prompt decision retained for history.",
+      "retirement_evidence": "docs/modernization/context7-retirement.json"
+    },
+    "backend/tools/context7/get_docs.py::Context7DocsTool.description": {
+      "dependencies_sha256": "dcdae31034f190d0df9f033d71f0c46ce1d25b2c1c59b6f7cd10fdeea773c802",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/context7/get_docs.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Replaced old CrewAI Context7 leaf tools with native host-owned source acquisition after base13e26a5; original prompt decision retained for history.",
+      "retirement_evidence": "docs/modernization/context7-retirement.json"
+    },
+    "backend/tools/context7/search_library.py::Context7SearchInput.description@19": {
+      "dependencies_sha256": "feb7605702d5c99c32174f706ea6e39481df7170d008fe24a55c5d137c975601",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/context7/search_library.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Replaced old CrewAI Context7 leaf tools with native host-owned source acquisition after base13e26a5; original prompt decision retained for history.",
+      "retirement_evidence": "docs/modernization/context7-retirement.json"
+    },
+    "backend/tools/context7/search_library.py::Context7SearchTool.description": {
+      "dependencies_sha256": "feb7605702d5c99c32174f706ea6e39481df7170d008fe24a55c5d137c975601",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/context7/search_library.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Replaced old CrewAI Context7 leaf tools with native host-owned source acquisition after base13e26a5; original prompt decision retained for history.",
+      "retirement_evidence": "docs/modernization/context7-retirement.json"
     }
   }
 }
