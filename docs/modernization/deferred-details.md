@@ -190,3 +190,5 @@ y la política web robots/frecuencia son tareas principales de sus bloques.
 | DD-050 | Un aviso Ruff I001 por orden de imports en el nuevo test de política web; no impide la captura ni su verificación. | `backend/tests/research/test_web_policy.py`, evidencia `web-policy-lint.json` | Pulido después de todas las tareas principales. Spider y retirada web siguen como tareas principales, no detalles. |
 
 | DD-051 | Cuatro avisos Ruff de estilo/tipado en composición HTTP, adaptador Spider y sus tests (I001, RUF012, SIM117). | `web-retirement-lint.json` | Pulido después de todas las capacidades principales; no repetir la retirada web por ellos. Los avisos de exports web de DD048 desaparecen al retirar ese paquete. |
+
+| DD-052 | Tres avisos Ruff de orden de imports/context managers en el registro de rutas y las pruebas de contexto de tareas (I001, SIM117). | `task-workspace-lint.json` | Después de todas las capacidades principales. No reabrir las lecturas/notas por estilo; el historial completo, la migración de datos y la retirada de wrappers siguen como tareas principales. |

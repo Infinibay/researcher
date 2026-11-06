@@ -303,8 +303,9 @@ async def test_host_business_uses_real_api_scope_and_persists_one_report(
         from backend.api import research_dependencies
         from backend.tests.research.test_pdf_web import pdf_response
         from backend.tests.research.test_web_fetcher import fetcher
+        from backend.tests.research.test_web_policy import response as robots_response
 
-        responses = [pdf_response(source.read_bytes())]
+        responses = [robots_response(status=404), pdf_response(source.read_bytes())]
 
         def configured(**options):
             """Use real URL policy and owned parser, replacing only DNS/socket I/O."""

@@ -1,0 +1,48 @@
+{
+  "base_commit": "16e7949",
+  "passed": 73,
+  "failed": 0,
+  "skipped": [
+    {
+      "test": "test_native_finding_registry_facade_preserves_filters_cursors_and_exact_evidence[True]",
+      "reason": "Explicit pinned local semantic model fixture not prepared"
+    },
+    {
+      "test": "test_host_business_uses_real_api_scope_and_persists_one_report[application/pdf-semantic]",
+      "reason": "Explicit pinned local semantic model fixture not prepared"
+    },
+    {
+      "test": "test_host_business_uses_real_api_scope_and_persists_one_report[application/json-semantic]",
+      "reason": "Explicit pinned local semantic model fixture not prepared"
+    },
+    {
+      "test": "test_native_wiki_facade_keeps_revision_scope_and_exact_report_citations[True]",
+      "reason": "Explicit pinned local semantic model fixture not prepared"
+    }
+  ],
+  "seconds": 28.152,
+  "new_task_workspace_tests": 10,
+  "prompt_auditor": {
+    "passed": 2,
+    "seconds": 0.11,
+    "check": "384 candidates,415 files,0 pending static reviews;7 new wire descriptions and35 unchanged AST revalidations"
+  },
+  "red_evidence": [
+    "The task tools were absent from role catalogs.",
+    "Real MCP returned unknown tool for researcher_task_list before registration."
+  ],
+  "test_adjustments": [
+    "Revoked HTTP tokens use the existing401 response;403 applies after already-resolved scope revocation.",
+    "History fixture includes the task_created event produced by the existing DB trigger.",
+    "Three exercised host PDF capture variants needed a robots404 fixture before PDF bytes; the production policy remains enabled."
+  ],
+  "scope": "Actual MCP/HTTP/API/SQLite, scoped historical task/dependency reads, append-order windows, comments, original receipts, latest-note revision conflicts, old notes, context correction, roles, grant closure and one owned native turn. Native model/Ken and public network replies are controlled. Four semantic variants lack the explicit model fixture; no quality/effectiveness claim.",
+  "real_model_calls": 0,
+  "real_provider_calls": 0,
+  "remaining": [
+    "Task wrappers and communication/project/knowledge capability migration;5legacy libraries",
+    "Complete historical note versions/history, data migration/restore and operation",
+    "Model/human/scientific/global evaluation and all12page acceptance",
+    "Known migration54/55 failure outside this selected batch"
+  ]
+}

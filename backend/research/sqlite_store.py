@@ -240,6 +240,7 @@ class SQLiteResearchStore:
                 "findings.read",
                 "reports.read",
                 "wiki.read",
+                "tasks.read",
             }:
                 verify_current(conn, review)
 
@@ -255,6 +256,8 @@ class SQLiteResearchStore:
             "wiki.write": "wiki.write",
             "review.record": "findings.review",
             "result.propose": "results.propose",
+            "task.comment": "tasks.comment",
+            "task.note": "continuity.write",
         }[kind]
 
     @staticmethod

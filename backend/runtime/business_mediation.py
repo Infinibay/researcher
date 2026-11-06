@@ -5,6 +5,12 @@ import json
 from contextlib import asynccontextmanager
 from pathlib import Path
 
+TASK_READ_NAMES = frozenset({
+    "researcher_task_list", "researcher_task_read", "researcher_task_dependencies",
+    "researcher_task_history", "researcher_continuity_read",
+})
+TASK_WRITE_NAMES = frozenset({"researcher_task_comment", "researcher_continuity_save"})
+
 RESEARCH_NAMES = frozenset(
     {
         "researcher_reference_list",
@@ -36,7 +42,7 @@ RESEARCH_NAMES = frozenset(
         "researcher_report_read",
         "researcher_ask_user",
     }
-)
+) | TASK_READ_NAMES | TASK_WRITE_NAMES
 REVIEW_NAMES = frozenset(
     {
         "researcher_reference_list",
@@ -57,7 +63,7 @@ REVIEW_NAMES = frozenset(
         "researcher_review_decide",
         "researcher_review_read",
     }
-)
+) | TASK_READ_NAMES
 INVESTIGATION_NAMES = (RESEARCH_NAMES - {"researcher_report_write"}) | {"researcher_investigation_summary"}
 BUSINESS_NAMES = RESEARCH_NAMES
 DEVELOPMENT_NAMES = RESEARCH_NAMES - {"researcher_result_propose", "researcher_capture_command"}

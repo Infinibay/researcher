@@ -16,7 +16,34 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: herramientas web antiguas retiradas
+## Etapa actual: contexto de tareas y continuidad nativos
+
+El catálogo nativo incorpora consulta de tareas/dependencias/historial, comentarios
+con autor real y notas de continuidad que separan observaciones de suposiciones.
+Las notas requieren la revisión observada antes de sustituirse; sus textos no
+aprueban ni activan trabajo. [Contrato](../architecture/native-task-workspace.md).
+
+**Comprobado:** 73 pruebas relacionadas pasan en fuente y 73 en el paquete
+instalado; cuatro variantes semánticas se omiten en cada batería por no configurar
+su modelo local. Dos tests del auditor de prompts pasan. 726 archivos Python/SQL
+coinciden, 252 imports proceden del entorno y hay 83 distribuciones sin frameworks
+antiguos. 54 definiciones nuevas/modificadas documentadas; siete descripciones
+revisadas, 384 candidatos en 415 archivos y ninguna revisión estática pendiente.
+
+**Lista vigente:**
+- Cerrado: sustitución web y este avance de contexto/comentarios/última nota.
+- En curso: completar el mapeo y retirar herramientas antiguas de tareas,
+  comunicación, proyecto y conocimiento; cinco bibliotecas legacy siguen pendientes.
+- Pendiente principal: operación; migraciones/restore, incluidos datos históricos
+  y fallo54/55; historial completo/presupuestos; CLI; evaluación real, humana,
+  científica y global; aceptación integral de las 12 páginas. Siguen 43 escenarios
+  abiertos, 12 pilotos y 48 conceptos, sin porcentaje global defendible.
+- Al final: todos los detalles secundarios, incluidos tres avisos de estilo DD052.
+
+Los wrappers de tareas aún no se retiran. La continuidad conserva la última nota,
+no todas sus versiones. No se modificaron datos reales ni se hicieron llamadas pagadas.
+
+## Etapa anterior: herramientas web antiguas retiradas
 
 Captura directa y Spider comparten política inicial de robots/frecuencia. HTML
 conserva enlaces y tablas mediante el parser local acotado; búsqueda, artículos,

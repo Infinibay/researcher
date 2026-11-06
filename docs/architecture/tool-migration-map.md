@@ -584,3 +584,15 @@ HTML conserva enlaces/tablas localmente; trafilatura sigue como dependencia
 218 pruebas de fuente y 218 instaladas pasan. [Contrato y mapeo](native-web-retirement.md).
 Los datos de web_cache/hallazgos permanecen; su migración histórica aún es principal.
 Siguen tareas/comunicación/proyecto/conocimiento y cinco dependencias legacy.
+
+## Contexto de tareas y notas nativos — 2026-11-06
+
+Se cubren lecturas de tareas/dependencias/historial, comentarios idempotentes y
+última nota del actor con comparación de revisión. El MCP y el host comparten
+schemas; cada llamada conserva grant, contexto y recibo de negocio. Las notas
+separan observaciones de suposiciones; el texto nunca aprueba ni activa trabajo.
+73 pruebas pasan en fuente y paquete, cuatro variantes semánticas se omiten por
+su fixture de modelo no configurado. [Contrato](native-task-workspace.md).
+Los wrappers de tareas permanecen hasta completar su mapa de capacidades de
+planificación/transiciones/aceptación. Comunicación, proyecto, conocimiento y
+las cinco dependencias legacy todavía son trabajo principal.

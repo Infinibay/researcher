@@ -16,6 +16,9 @@ RESEARCH_PERMISSIONS = frozenset(
         "questions.ask",
         "wiki.read",
         "wiki.write",
+        "tasks.read",
+        "tasks.comment",
+        "continuity.write",
     }
 )
 REVIEW_PERMISSIONS = frozenset(
@@ -26,6 +29,7 @@ REVIEW_PERMISSIONS = frozenset(
         "wiki.read",
         "questions.ask",
         "findings.review",
+        "tasks.read",
     }
 )
 DEVELOPMENT_PERMISSIONS = RESEARCH_PERMISSIONS - {"results.propose"}

@@ -3878,6 +3878,26 @@
         "Remote Spider assertions and per-instance quota retain documented limits; deployment/operation review remains",
         "All principal plan blocks,43scenarios and12page acceptance, then deferred details"
       ]
+    },
+    "native_task_workspace": {
+      "status": "in_progress",
+      "evidence": [
+        "docs/architecture/native-task-workspace.md",
+        "docs/modernization/task-workspace-results.json",
+        "docs/modernization/task-workspace-packaging.json",
+        "backend/tests/research/test_task_workspace.py"
+      ],
+      "implemented": [
+        "Scoped task/dependency/history reads with stable cursors and recoverable text windows, including completed historical tasks.",
+        "Current-task comments with host actor, atomic receipt and no approval/activation authority.",
+        "Latest actor/task continuity with observed-revision compare, original receipts and explicit observations/assumptions; old notes remain advisory.",
+        "Shared MCP/native role schemas;73 source and73 installed tests pass,4 semantic model variants skipped in each."
+      ],
+      "remaining": [
+        "Complete task lifecycle capability mapping and wrapper retirement alongside communication/project/knowledge.",
+        "All-version note history, historical migration/restore and operational acceptance remain principal work.",
+        "Model/human/scientific/global evaluation and12fullpage acceptance;43scenarios remain open."
+      ]
     }
   }
 }

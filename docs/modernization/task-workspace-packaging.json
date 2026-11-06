@@ -1,0 +1,30 @@
+{
+  "base_commit": "16e7949",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "sha256": "07104eb63262ebd9b5a218fa5d7c5c301e289fe89085de37a7700e4f5c7a8cd9",
+  "observed": {
+    "exit_code": 0,
+    "cases": 77,
+    "failed": 0,
+    "skipped": 4,
+    "seconds": 29.431,
+    "all_backend_imports_installed": true,
+    "backend_modules": 252,
+    "matching_python_sql": 726,
+    "installed_distributions": 83,
+    "legacy_installed": false,
+    "real_model_calls": 0,
+    "real_provider_calls": 0
+  },
+  "tests": [
+    "backend/tests/research/test_task_workspace.py",
+    "backend/tests/research/test_persistence.py",
+    "backend/tests/research/test_http.py",
+    "backend/tests/research/test_stdio_server.py",
+    "backend/tests/runtime/test_business_mediation.py",
+    "backend/tests/runtime/test_host_business.py",
+    "backend/tests/runtime/test_live_grants.py",
+    "backend/tests/runtime/test_prompt_catalog.py"
+  ],
+  "limits": "Scoped task reads, comments and continuity via real MCP/HTTP/API/SQLite; business roles, grant/context/retry boundary and one owned native turn with controlled model/Ken responses. Four existing semantic variants omitted because the explicit pinned local model fixture was not configured. No paid model/provider, user data, global-suite or whole-page acceptance claim. Existing development seed db/seeds/dev_data.sql remains outside unchanged db/*.sql package data."
+}
