@@ -76,16 +76,6 @@ def test_native_plan_freezes_legacy_business_material_and_actual_task_inventory(
 
 
 
-@pytest.mark.parametrize("handler", ["MessageHandler", "HealthCheckHandler", "ProgressEvalHandler"])
-def test_project_handlers_are_policy_hints_before_first_native_admission(coordination, handler):
-    """Messages, stagnation and all-done labels never activate a project model or accept the project."""
-    from backend.autonomy import handlers
-
-    c = coordination
-    before = tuple(c.conn.execute("SELECT * FROM projects WHERE id=101").fetchone())
-    result = getattr(handlers, handler)().execute({"id":1,"project_id":101,"agent_id":"old-lead","event_type":"all_tasks_done","payload_json":"{}"})
-    assert result["native_admission_run_id"] is None and result["event_authorizes_work"] is False
-    assert tuple(c.conn.execute("SELECT * FROM projects WHERE id=101").fetchone()) == before
 
 
 @pytest.mark.parametrize("material,reason", [('not JSON','invalid_json'), (json.dumps({'requirements':'x'*150000}),'excluded_size_limit'), (json.dumps({'requirements':'x'*70000,'plan':'Keep this smaller plan'}),'field_limit'), (json.dumps({'requirements':'\ud800','plan':'Keep this smaller plan'}),'invalid_utf8')])

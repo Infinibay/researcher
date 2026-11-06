@@ -50,25 +50,6 @@ def test_legacy_done_labels_cannot_replace_native_owner_acceptance(coordination,
 
 
 
-def test_idle_scavenger_never_deletes_preserved_old_work_before_first_native_admission(service_setup, monkeypatch):
-    """An old heartbeat must not garbage-collect the exact partial files the owner still needs to import."""
-    from backend.autonomy.scavenger import Scavenger
-    from backend.git.worktree_manager import WorktreeManager
-
-    s = service_setup
-    s.c.conn.execute("UPDATE projects SET status='executing' WHERE id=101")
-    s.c.conn.commit()
-    old = s.workspace / "old-result.txt"
-    old.write_text("Unimported work.")
-
-    def destructive_cleanup(_manager, _project_id):
-        """Represent the old external Git cleanup port with a real observable effect on synthetic data."""
-        old.unlink()
-        return 1
-
-    monkeypatch.setattr(WorktreeManager,"cleanup_stale_worktrees",destructive_cleanup)
-    Scavenger("old-agent",101,"unknown-role").scavenge()
-    assert old.read_text() == "Unimported work."
 
 
 @pytest.mark.parametrize("task_type,_kind", TASK_KINDS)

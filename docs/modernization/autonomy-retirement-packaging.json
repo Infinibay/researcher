@@ -1,0 +1,46 @@
+{
+  "base_commit": "c5a7775",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "sha256": "dfb48c83d646afe582bb9cdd304e82364e0dddef480502352be3ce8c0c32edb5",
+  "observed": {
+    "exit_code": 1,
+    "cases": 172,
+    "failed": 3,
+    "failed_cases": [
+      "test_task_cutover_migration_is_atomic_repeatable_and_preserves_history",
+      "test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_report",
+      "test_scientific_owner_guard_upgrade_is_atomic_and_keeps_historical_reports"
+    ],
+    "skipped_cases": [],
+    "skipped": 0,
+    "seconds": 62.446,
+    "all_backend_imports_installed": true,
+    "backend_modules": 244,
+    "matching_python_sql": 578,
+    "installed_distributions": 83,
+    "legacy_installed": false,
+    "legacy_extra_or_requirement": false,
+    "real_model_calls": 0,
+    "real_provider_calls": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_registered_legacy_workers.py",
+    "backend/tests/runtime/test_project_owner_cutover.py",
+    "backend/tests/runtime/test_project_producer_retirement.py",
+    "backend/tests/runtime/test_code_flow_cutover.py",
+    "backend/tests/runtime/test_investigation.py",
+    "backend/tests/runtime/test_scientific_research.py",
+    "backend/tests/runtime/test_run_conversation.py",
+    "backend/tests/runtime/test_runtime_service.py",
+    "backend/tests/runtime/test_prompt_catalog.py",
+    "backend/tests/runtime/test_legacy_engine_removal.py",
+    "backend/tests/runtime/test_owner_history.py",
+    "backend/tests/runtime/test_owned_project_stop.py",
+    "backend/tests/runtime/test_run_input.py",
+    "backend/tests/api/test_startup.py",
+    "backend/tests/api/test_bootstrap_startup.py",
+    "backend/tests/api/test_local_access.py",
+    "backend/tests/api/test_project_records.py"
+  ],
+  "limits": "54old modules removed (autonomy, cancellation scope, role templates, provider readers). One API registry retains observed Stop; thread-only shutdown fixed.49obsolete testfunctions retired,2renamedretained. Three unchanged migration failures match prior c5a7775 installed receipt and639wheelPythonSQL verified against committed source; only development seed SQL excluded by existing package-data; baseline not rerun. No data/schema changes, real model/provider/global/human/scientific/12page or real-data restoration acceptance."
+}

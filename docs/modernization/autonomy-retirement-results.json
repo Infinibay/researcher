@@ -1,0 +1,132 @@
+{
+  "base_commit": "c5a7775",
+  "status": "scoped_autonomy_and_historical_prompt_provider_retirement_complete_with_preexisting_migration_fixture_failures",
+  "removed_production_modules": 54,
+  "removed_production_lines": 8980,
+  "retired_test_functions": 49,
+  "renamed_retained_test_functions": 2,
+  "new_or_preserved_capabilities": [
+    "Native admission blocked by actual registered controllers through timeout; original tasks/events/messages untouched",
+    "Shutdown includes thread-only entries and reports unresolved closure honestly",
+    "One existing API control registry, no new scheduler or legacy work activation",
+    "Project policy hints retain explicit scope without fabricated native history",
+    "Current owner history readers and native input/catalog retained; retired templates never enter native policy"
+  ],
+  "suites": {
+    "source": {
+      "cases": 172,
+      "passed": 169,
+      "failures": [
+        {
+          "name": "test_task_cutover_migration_is_atomic_repeatable_and_preserves_history",
+          "message": "assert 56 == 53"
+        },
+        {
+          "name": "test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_report",
+          "message": "assert 56 == 51"
+        },
+        {
+          "name": "test_scientific_owner_guard_upgrade_is_atomic_and_keeps_historical_reports",
+          "message": "assert 56 == 52"
+        }
+      ],
+      "errors": [],
+      "skipped": [],
+      "seconds": 62.671
+    },
+    "baseline": {
+      "cases": 221,
+      "passed": 218,
+      "failures": [
+        {
+          "name": "test_task_cutover_migration_is_atomic_repeatable_and_preserves_history",
+          "message": "assert 56 == 53"
+        },
+        {
+          "name": "test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_report",
+          "message": "assert 56 == 51"
+        },
+        {
+          "name": "test_scientific_owner_guard_upgrade_is_atomic_and_keeps_historical_reports",
+          "message": "assert 56 == 52"
+        }
+      ],
+      "errors": [],
+      "skipped": [],
+      "seconds": 78.618
+    },
+    "package": {
+      "cases": 172,
+      "passed": 169,
+      "failures": [
+        {
+          "name": "test_task_cutover_migration_is_atomic_repeatable_and_preserves_history",
+          "message": "assert 56 == 53"
+        },
+        {
+          "name": "test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_report",
+          "message": "assert 56 == 51"
+        },
+        {
+          "name": "test_scientific_owner_guard_upgrade_is_atomic_and_keeps_historical_reports",
+          "message": "assert 56 == 52"
+        }
+      ],
+      "errors": [],
+      "skipped": [],
+      "seconds": 62.446
+    },
+    "prompts": {
+      "cases": 2,
+      "passed": 2,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "seconds": 0.112
+    }
+  },
+  "baseline": {
+    "method": "Reused prior flow-retirement-package.xml receipt instead of rerunning unchanged baseline; all639PythonSQL wheel members verified against committed c5a7775 via git archive. Only dev_data.sql is source-only under existing package-data policy.",
+    "same_dependency_environment": true,
+    "identical_failure_identifiers_and_messages": true,
+    "rerun": false
+  },
+  "packaging_evidence": "docs/modernization/autonomy-retirement-packaging.json",
+  "documented_changed_or_new_definitions": 22,
+  "prompt_inventory": {
+    "candidates": 83,
+    "files": 279,
+    "archived": 515,
+    "newly_archived": 144,
+    "unchanged_ast_revalidated": 2,
+    "renamed_identities": [
+      [
+        "backend/api/main.py::create_app.description@111",
+        "backend/api/main.py::create_app.description@110"
+      ]
+    ],
+    "requires_review": 0,
+    "semantic_prompt_changes": 0
+  },
+  "ruff_findings_deferred": {
+    "count": 15,
+    "reference": "DD060",
+    "diff_check": "One trailing blank in legacy_handoff.py intentionally deferred; no clean diff-check claim."
+  },
+  "data_or_schema_modified": false,
+  "real_model_calls": 0,
+  "real_provider_calls": 0,
+  "remaining_primary": [
+    "Operation/images and historical integration fixtures",
+    "Migration fixtures/inverse/actual-data restoration",
+    "Complete history and budgets",
+    "Real-model/human/scientific/global evaluation, integral12page acceptance and final fresh review"
+  ],
+  "limits": [
+    "49obsolete test functions retired, not reported as repaired failures; two retained tests renamed.",
+    "Three migration fixtures still expect53/51/52 but receive56.",
+    "Registered-worker guarantees do not include unknown external historical processes or in-place hot-reload migration of their objects.",
+    "No new full global suite or real-data/model/human/scientific/page acceptance.",
+    "43broadscenarios open;12pilots48concepts0fullyaccepted unchanged."
+  ]
+}

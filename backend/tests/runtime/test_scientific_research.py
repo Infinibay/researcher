@@ -235,43 +235,6 @@ def test_command_capture_key_cannot_select_another_original_job(coordination):
     assert c.conn.execute("SELECT count(*)FROM research_sources").fetchone()[0] == 1
 
 
-@pytest.mark.parametrize(
-    "handler,event_type",
-    [
-        ("TaskFlowHandler", "task_available"),
-        ("TaskFlowHandler", "task_resume"),
-        ("ReviewHandler", "review_ready"),
-        ("ReworkHandler", "task_rejected"),
-    ],
-)
-def test_queued_scientific_events_do_not_start_old_claim_review_or_rework(
-    coordination, handler, event_type
-):
-    """Old hints cannot select a scientific worker, use a review label as authority or complete best-effort work."""
-    from backend.autonomy import handlers
-
-    c = coordination
-    c.conn.execute(
-        "UPDATE tasks SET status='pending',assigned_to=NULL,reviewer=NULL WHERE id=1001"
-    )
-    c.conn.commit()
-    result = getattr(handlers, handler)().execute(
-        {
-            "id": 701,
-            "project_id": 101,
-            "agent_id": "old-scientist",
-            "event_type": event_type,
-            "payload_json": json.dumps({"task_id": 1001}),
-        }
-    )
-    assert (
-        result["delivery"] == "native_owner_handoff"
-        and not result["inference_started_by_handoff"]
-    )
-    assert c.conn.execute(
-        "SELECT status,assigned_to,reviewer,retry_count FROM tasks WHERE id=1001"
-    ).fetchone()[:] == ("pending", None, None, 0)
-    assert c.conn.execute("SELECT count(*)FROM runtime_runs").fetchone()[0] == 0
 
 
 def test_pre_admission_scientific_claim_and_completion_are_owner_guarded(coordination):

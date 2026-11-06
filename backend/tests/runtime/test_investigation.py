@@ -171,48 +171,6 @@ def test_generic_report_cannot_bypass_exploratory_summary_contract(coordination)
         )
 
 
-def test_legacy_investigation_entry_and_event_handoff_do_not_claim_or_start_work(
-    coordination,
-):
-    """The retained old event handler exposes owner admission without changing historical reports or task/result state."""
-    from backend.autonomy.handlers.task_handlers import TaskFlowHandler
-
-    c = coordination
-    c.conn.execute(
-        "UPDATE tasks SET type='investigation',status='pending',assigned_to=NULL WHERE id=1001"
-    )
-    c.conn.execute(
-        "INSERT INTO artifacts(project_id,task_id,type,file_path,description,content)VALUES(101,1001,'report','old.md','Prior report','Historical observations remain.')"
-    )
-    c.conn.commit()
-    returned = TaskFlowHandler().execute(
-        {
-            "id": 55,
-            "project_id": 101,
-            "agent_id": "legacy-label",
-            "event_type": "task_available",
-            "payload_json": json.dumps({"task_id": 1001}),
-        }
-    )
-    assert returned["delivery"] == "native_owner_handoff"
-    assert c.conn.execute(
-        "SELECT status,assigned_to FROM tasks WHERE id=1001"
-    ).fetchone()[:] == ("pending", None)
-    assert c.conn.execute("SELECT count(*)FROM runtime_runs").fetchone()[0] == 0
-    assert (
-        c.conn.execute("SELECT content FROM artifacts WHERE task_id=1001").fetchone()[0]
-        == "Historical observations remain."
-    )
-    with pytest.raises(ValueError, match="project|scope|found"):
-        TaskFlowHandler().execute(
-            {
-                "id": 56,
-                "project_id": 202,
-                "agent_id": "other",
-                "event_type": "task_resume",
-                "payload_json": json.dumps({"task_id": 1001}),
-            }
-        )
 
 
 def test_direct_claim_and_completion_cannot_bypass_owner_investigation(
@@ -235,47 +193,8 @@ def test_direct_claim_and_completion_cannot_bypass_owner_investigation(
     ).fetchone()[:] == ("pending", None)
 
 
-@pytest.mark.parametrize("handler_name", ["ReviewHandler", "ReworkHandler"])
-def test_legacy_review_and_rework_are_hints_not_authorization(
-    coordination, handler_name
-):
-    """Queued review/rejection messages cannot claim an investigator or create an automatic native review."""
-    from backend.autonomy import handlers
-
-    c = coordination
-    c.conn.execute(
-        "UPDATE tasks SET type='investigation',status='review_ready',assigned_to=NULL,reviewer=NULL WHERE id=1001"
-    )
-    c.conn.commit()
-    result = getattr(handlers, handler_name)().execute(
-        {
-            "id": 57,
-            "project_id": 101,
-            "agent_id": "old-reviewer",
-            "event_type": "review_ready"
-            if handler_name == "ReviewHandler"
-            else "task_rejected",
-            "payload_json": json.dumps({"task_id": 1001}),
-        }
-    )
-    assert result["delivery"] == "native_owner_handoff"
-    assert c.conn.execute(
-        "SELECT status,assigned_to,reviewer,retry_count FROM tasks WHERE id=1001"
-    ).fetchone()[:] == ("review_ready", None, None, 0)
-    assert c.conn.execute("SELECT count(*)FROM runtime_runs").fetchone()[0] == 0
 
 
-def test_legacy_scavenger_excludes_owner_only_and_native_owned_tasks(coordination):
-    """A documentary handoff must not be rediscovered as missing legacy work indefinitely."""
-    from backend.autonomy.scavenger import Scavenger
-
-    investigation_state(coordination)
-    coordination.conn.execute("UPDATE tasks SET type='code' WHERE id=1002")
-    coordination.conn.commit()
-    scavenger = Scavenger("legacy-researcher", 101, "researcher")
-    before = [tuple(row) for row in coordination.conn.execute("SELECT * FROM tasks ORDER BY id")]
-    assert scavenger.scavenge() == 0
-    assert [tuple(row) for row in coordination.conn.execute("SELECT * FROM tasks ORDER BY id")] == before
 
 
 

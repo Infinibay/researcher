@@ -749,15 +749,12 @@ async def test_authenticated_api_owns_admission_stop_correction_and_ascending_hi
 async def test_native_chat_uses_the_selected_thread_and_never_legacy_autonomy(
     service_setup, monkeypatch
 ):
+    """A paired native instruction keeps its thread, deduplicates delivery and never writes an old activation event."""
     import httpx
 
     from backend.api.local_access import LocalAccess
     from backend.api.main import create_app
 
-    def legacy_dispatch(**kwargs):
-        raise AssertionError("Native conversation must not activate legacy autonomy")
-
-    monkeypatch.setattr("backend.autonomy.events.create_message_event", legacy_dispatch)
     s = service_setup
     native = ControlledInference(s)
     service = coordinator(s, native)
@@ -801,6 +798,7 @@ async def test_native_chat_uses_the_selected_thread_and_never_legacy_autonomy(
         workspace = (await owner.get("/api/projects/101/tasks/1001/workspace")).json()
         assert workspace["runs"][0]["conversation_thread_id"] == "owner-conversation"
         assert len(native.prompts) == 1
+        assert s.c.conn.execute("SELECT count(*) FROM agent_events").fetchone()[0] == 0
 
 
 async def test_instruction_receipt_survives_a_later_context_correction(service_setup):

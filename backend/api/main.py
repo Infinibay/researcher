@@ -78,23 +78,22 @@ async def lifespan(app: FastAPI):
 
 
 async def _stop_active_flows():
-    """Reconcile legacy flows only after this server reached serving state."""
+    """Stop every registered legacy worker after serving and report unresolved liveness without turning a timeout into a closure claim."""
     logger.info("Shutdown signal received — stopping active flows")
     from backend.api.flow_manager import flow_manager
 
-    active_ids = (
-        set(flow_manager._flows)
-        | set(flow_manager._autonomy)
-        | set(flow_manager._listeners)
-    )
+    active_ids = flow_manager.registered_project_ids()
     for pid in active_ids:
         try:
             logger.info(
                 "Stopping project %d: snapshotting state, stopping agents & listeners…",
                 pid,
             )
-            await asyncio.to_thread(flow_manager.stop_project_flow, pid)
-            logger.info("Project %d stopped successfully", pid)
+            report = await asyncio.to_thread(flow_manager.stop_project_flow, pid)
+            if isinstance(report, dict) and report.get("registered_workers_closed") is True:
+                logger.info("Project %d registered workers stopped", pid)
+            else:
+                logger.warning("Project %d registered workers still stopping; closure unconfirmed", pid)
         except Exception:
             logger.warning(
                 "Error stopping project %d during shutdown", pid, exc_info=True

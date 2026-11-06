@@ -1,0 +1,28 @@
+{
+  "changed_or_new_definitions": [
+    "backend/api/flow_manager.py::FlowManager",
+    "backend/api/flow_manager.py::FlowManager.stop_project_flow",
+    "backend/api/flow_manager.py::FlowManager.is_project_running",
+    "backend/api/flow_manager.py::FlowManager.registered_project_ids",
+    "backend/api/main.py::_stop_active_flows",
+    "backend/runtime/legacy_handoff.py::legacy_project_handoff",
+    "backend/tests/api/test_startup.py::test_serving_opens_explicitly_initialized_database_without_probing_a_model",
+    "backend/tests/api/test_startup.py::test_serving_opens_explicitly_initialized_database_without_probing_a_model.UnexpectedInference",
+    "backend/tests/api/test_startup.py::test_serving_opens_explicitly_initialized_database_without_probing_a_model.forbidden_probe",
+    "backend/tests/runtime/test_project_owner_cutover.py::test_shutdown_cannot_reset_native_or_historical_project_tasks",
+    "backend/tests/runtime/test_project_owner_cutover.py::test_legacy_project_start_returns_policy_without_opening_workers",
+    "backend/tests/runtime/test_project_owner_cutover.py::test_legacy_project_start_returns_policy_without_opening_workers.forbidden",
+    "backend/tests/runtime/test_registered_legacy_workers.py::test_shutdown_includes_a_thread_registered_without_a_flow_object",
+    "backend/tests/runtime/test_registered_legacy_workers.py::test_registered_autonomy_controller_blocks_native_work_until_observed_exit",
+    "backend/tests/runtime/test_registered_legacy_workers.py::test_registered_autonomy_controller_blocks_native_work_until_observed_exit.RetainedController",
+    "backend/tests/runtime/test_registered_legacy_workers.py::test_registered_autonomy_controller_blocks_native_work_until_observed_exit.RetainedController.is_running",
+    "backend/tests/runtime/test_registered_legacy_workers.py::test_registered_autonomy_controller_blocks_native_work_until_observed_exit.RetainedController.stop_signal",
+    "backend/tests/runtime/test_registered_legacy_workers.py::test_registered_autonomy_controller_blocks_native_work_until_observed_exit.RetainedController.stop_join",
+    "backend/tests/runtime/test_registered_legacy_workers.py::test_retired_autonomy_package_is_unavailable",
+    "backend/tests/runtime/test_registered_legacy_workers.py::test_retired_role_templates_and_provider_readers_are_unavailable",
+    "backend/tests/runtime/test_run_conversation.py::test_native_conversation_is_excluded_from_legacy_dispatch",
+    "backend/tests/runtime/test_runtime_service.py::test_native_chat_uses_the_selected_thread_and_never_legacy_autonomy"
+  ],
+  "missing": [],
+  "scope": "Qualified AST comparison against c5a7775, changed/new definitions and module docstrings only. English documentation for Ken."
+}

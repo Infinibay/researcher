@@ -253,3 +253,12 @@ las capacidades principales. También las líneas vacías finales de
 Los tres fallos de fixtures de migración y el fixture compartido API que parchea
 `cleanup_service.schedule_periodic_cleanup` eliminado son trabajo principal de
 migraciones/integración, no detalles de estilo ni aceptación lograda.
+
+## DD060 — estilo tras retirar autonomía y plantillas antiguas
+
+Los 15 avisos de `autonomy-retirement-lint.json` (imports I001/F401, variables
+de fixture RUF059 y el uso controlado de exec S102) quedan para después de todas
+las capacidades principales. También la línea vacía final de
+`backend/runtime/legacy_handoff.py`. No reconstruir el paquete ni repetir los
+recorridos por este pulido. Los fallos de fixtures de migración, el fixture API
+histórico y la configuración/operación integral siguen como trabajo principal.

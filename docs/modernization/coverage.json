@@ -4045,6 +4045,22 @@
         "68testfunctions retired and five previous old-flow failures retired, not repaired.",
         "Remaining autonomy/readers, operation, migration/inverse/restore, history/budgets and full product acceptance remain."
       ]
+    },
+    "native_autonomy_prompt_provider_retirement": {
+      "status": "complete",
+      "scope": "54obsolete modules removed: autonomy, unused cancellation scope,39role/technology templates,2provider readers. Existing API registry preserves actual Stop and shutdown includes thread-only entries. Native policy and data unchanged. No broad scenario closes.",
+      "evidence": [
+        "docs/architecture/native-autonomy-retirement.md",
+        "docs/modernization/autonomy-retirement-results.json",
+        "docs/modernization/autonomy-retirement-packaging.json",
+        "docs/modernization/autonomy-retirement-imports.json",
+        "backend/tests/runtime/test_registered_legacy_workers.py"
+      ],
+      "limitations": [
+        "169source/169installedPASS; three unchanged migration fixtures fail. Previous installed baseline receipt reused with committed-byte verification, not rerun.",
+        "49old testfunctions retired and two retained/renamed; no repaired-failure count from deleted tests.",
+        "Operation, integration fixtures, migration/inverse/restore, history/budgets and full product acceptance remain."
+      ]
     }
   }
 }

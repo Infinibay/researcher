@@ -40,18 +40,18 @@ assert not any(t.name.startswith('infinibay-') for t in threading.enumerate()), 
 
 
 def test_serving_opens_explicitly_initialized_database_without_probing_a_model(tmp_path, monkeypatch):
+    """Serving explicitly initialized storage leaves retired provider ports unused; constructing the app never initializes persistence."""
     from backend.api.main import create_app
-    from backend.config import llm, model_capabilities
 
     class UnexpectedInference(BaseException):
-        pass
+        """Expose accidental generation even through broad exception handlers."""
 
     def forbidden_probe(*args, **kwargs):
+        """Reject any old provider call before network or billing effects."""
         raise UnexpectedInference("Serving must not call a model")
 
-    monkeypatch.setattr(model_capabilities, "get_model_capabilities", lambda: SimpleNamespace(probed=False))
-    monkeypatch.setattr(model_capabilities, "probe_model", forbidden_probe)
-    monkeypatch.setattr(llm, "get_litellm_params", lambda: {"model": "openai/not-a-real-model"})
+    monkeypatch.setitem(sys.modules, "crewai", SimpleNamespace(LLM=forbidden_probe))
+    monkeypatch.setitem(sys.modules, "litellm", SimpleNamespace(completion=forbidden_probe, acompletion=forbidden_probe))
     database = tmp_path / "fresh.db"
     monkeypatch.setenv("INFINIBAY_DB", str(database))
 

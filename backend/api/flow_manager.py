@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 class FlowManager:
-    """Tracks running flows and listener managers across projects."""
+    """Own retained main/autonomy/listener controllers in one registry until their actual exit; this bridge never creates or resumes old execution."""
 
     def __init__(self) -> None:
         """Track actual main/autonomy/listener workers and their own cooperative stop signals, without starting execution."""
@@ -33,9 +33,7 @@ class FlowManager:
             flow = self._flows.get(project_id)
             thread = self._threads.get(project_id)
             signal = self._stop_signals.get(project_id)
-            from backend.autonomy.agent_loop import get_loop_manager
-
-            loop_mgr = self._autonomy.get(project_id) or get_loop_manager(project_id)
+            loop_mgr = self._autonomy.get(project_id)
             listeners = self._listeners.get(project_id)
         if signal is not None:
             signal.set()
@@ -104,14 +102,10 @@ class FlowManager:
 
     def is_project_running(self, project_id: int) -> bool:
         """Detect every registered legacy owner; a finished flow thread does not prove its autonomy or listeners closed."""
-        from backend.autonomy.agent_loop import get_loop_manager
-
         thread = self._threads.get(project_id)
-        external = get_loop_manager(project_id)
         return (
             project_id in self._flows
             or (thread is not None and thread.is_alive())
-            or (external is not None and self._registered_running(external))
             or (
                 project_id in self._autonomy
                 and self._registered_running(self._autonomy[project_id])
@@ -121,6 +115,11 @@ class FlowManager:
                 and self._registered_running(self._listeners[project_id])
             )
         )
+
+    def registered_project_ids(self) -> set[int]:
+        """Snapshot every retained controller registry, including thread-only entries that still require shutdown observation."""
+        with self._lock:
+            return set(self._flows) | set(self._threads) | set(self._autonomy) | set(self._listeners)
 
 
 # Global instance

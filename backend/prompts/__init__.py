@@ -1,1 +1,1 @@
-"""Centralized prompt definitions organized by agent role."""
+"""Versioned native agent instructions; retired role templates are archived in Git and the prompt review ledger."""

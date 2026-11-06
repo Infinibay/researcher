@@ -9,7 +9,6 @@ from backend.runtime.contracts import RunConflict, RunNotFound, StaleAttempt
 
 def test_native_conversation_is_excluded_from_legacy_dispatch(coordination):
     """Native instructions remain canonical and cannot enter historical recipient reads or the old activation queue."""
-    from backend.autonomy.events import create_message_event
     from backend.communication.owner_history import OwnerHistory
 
     c = coordination
@@ -24,18 +23,6 @@ def test_native_conversation_is_excluded_from_legacy_dispatch(coordination):
         "INSERT INTO chat_messages(project_id,thread_id,from_agent,to_agent,conversation_type,message) VALUES(101,'legacy-thread','user','researcher','user_to_agent','Legacy positive control')"
     ).lastrowid
     c.conn.commit()
-    assert (
-        create_message_event(
-            project_id=101,
-            from_agent="user",
-            to_agent="researcher",
-            to_role=None,
-            message="Native followup",
-            thread_id="native-thread",
-            conversation_type="user_to_agent",
-        )
-        == []
-    )
     assert c.conn.execute("SELECT COUNT(*) FROM agent_events").fetchone()[0] == 0
     inbox = OwnerHistory(c.store).legacy_inbox(101, "researcher")
     assert [message["id"] for message in inbox] == [legacy_id]

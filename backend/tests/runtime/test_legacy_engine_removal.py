@@ -1,4 +1,4 @@
-"""The native product has no importable old inference loop, while retained controller cancellation remains scoped and observable."""
+"""The native product has no importable old inference loop; project policy guards remain independent of the retired engine."""
 
 import importlib.util
 import threading
@@ -21,27 +21,6 @@ def test_old_inference_modules_are_not_importable():
             assert found is None, f"Retired execution module is still available: {name}"
 
 
-def test_registered_controller_stop_remains_scoped_after_engine_removal():
-    """A stopped original controller cannot continue effects or lend its signal to another project; leaving the scope restores its predecessor."""
-    from backend.runtime.legacy_scope import (
-        LegacyControllerStopped,
-        check_legacy_stop,
-        legacy_stop_scope,
-    )
-
-    original, other = threading.Event(), threading.Event()
-    with legacy_stop_scope(101, original):
-        check_legacy_stop(101)
-        with pytest.raises(ValueError, match="mismatch"):
-            check_legacy_stop(202)
-        original.set()
-        with pytest.raises(LegacyControllerStopped):
-            check_legacy_stop(101)
-        with legacy_stop_scope(202, other):
-            check_legacy_stop(202)
-        with pytest.raises(LegacyControllerStopped):
-            check_legacy_stop(101)
-    check_legacy_stop(101)
 
 
 def test_legacy_project_guards_remain_before_and_after_native_admission(coordination):

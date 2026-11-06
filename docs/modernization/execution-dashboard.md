@@ -11,12 +11,42 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 
 ## Estado comprobado
 
-- Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. Quedan controladores de autonomía y lectores restantes.
+- Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
 - Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 0/12 páginas están completamente aceptadas.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: flows y helpers antiguos retirados
+## Etapa actual: autonomía y plantillas/proveedores históricos retirados
+
+Se retiran 54 módulos: autonomía, su scope antiguo de cancelación, 39 plantillas
+de roles/tecnologías y dos configuradores de proveedor. Se conserva el registro
+existente de control de parada, sin scheduler nuevo. El cierre ahora incluye
+hilos sin objeto de flow y distingue una petición de Stop del cierre observado.
+Mensajes, tareas e instrucciones nativas se conservan.
+[Contrato y mapa](../architecture/native-autonomy-retirement.md).
+
+**Comprobado:** 169 pruebas pasan en fuente y 169 en el paquete instalado; quedan
+los mismos tres fallos de fixtures de migración. Se reutilizó el recibo instalado
+anterior después de comprobar sus bytes contra el commit, sin repetir ese baseline.
+Coinciden 578 archivos Python/SQL; 244 imports backend proceden del entorno
+instalado, con 83 distribuciones compatibles. Hay 22 definiciones nuevas/modificadas
+documentadas. Se retiran 49 funciones de test obsoletas y se conservan otras dos
+renombradas. Prompts: 83 candidatos en 279 archivos, 515 archivados, sin revisión
+estática pendiente. Las instrucciones nativas no cambian; no hay nueva suite global.
+
+**Lista vigente:**
+- Cerrado recientemente: herramientas/bibliotecas, API interna/CLI, comunicación,
+  flows/helpers, autonomía y plantillas/lectores de proveedor antiguos.
+- Siguiente tarea principal: operación, arranque, imágenes y fixtures de integración
+  que todavía presuponen servicios retirados.
+- Pendiente principal: migraciones/inversas/restauración real; historial completo y
+  presupuestos; evaluación real, humana, científica y global; aceptación integral
+  de las 12 páginas y revisión final. Siguen 43 escenarios abiertos, 12 pilotos y
+  48 conceptos; ninguna página está completamente aceptada todavía.
+- Al final: todos los detalles secundarios; 15 avisos de estilo y una línea vacía
+  final quedan en DD060. Los tres fallos de migración no son detalles de estilo.
+
+## Etapa anterior: flows y helpers antiguos retirados
 
 Se retiran 21 módulos y se conservan fuera de los flows las tres operaciones de
 metadatos que consume la API. Los snapshots indican su origen histórico y que no
