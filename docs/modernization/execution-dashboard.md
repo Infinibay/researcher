@@ -16,7 +16,35 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: bibliotecas antiguas retiradas; siguen servicios y CLI
+## Etapa actual: API interna y CLI de pods retirados; siguen servicios antiguos
+
+Se retiran tres módulos de API interna (13 operaciones), el CLI de pods y sus
+instalaciones antiguas de CLI/MCP/Claude Code en la imagen histórica. Se conservan
+el terminal del propietario y los contratos nativos de tareas, mensajes,
+continuidad, hallazgos, revisión y publicación. No se modifica ningún dato ni
+se elimina ningún caso de test. [Mapa de capacidades](../architecture/native-internal-retirement.md).
+
+**Comprobado:** 140 pruebas pasan desde fuente y 140 desde el paquete instalado;
+ambos conservan dos fallos de migración/inversa, reproducidos con mensajes
+idénticos en el paquete anterior. No hay omisiones. Los 674 archivos Python/SQL
+coinciden y los 279 imports backend proceden del entorno instalado; sus 83
+distribuciones son compatibles. Se documentan tres definiciones modificadas o
+nuevas. Prompts: 233 candidatos en 361 archivos, 365 archivados y ninguna revisión
+estática pendiente. No se construyó la imagen ni se ejecutó una suite global.
+
+**Lista vigente:**
+- Cerrado recientemente: herramientas y bibliotecas antiguas; API interna y
+  CLI de pods, manteniendo sus capacidades mediante los contratos nativos.
+- Siguiente: servicios de comunicación, listeners y lectores/helpers de flows
+  restantes, incluidos los siete fallos de flows y el detector de conversación.
+- Pendiente principal: operación e imágenes; migraciones/inversas/restauración
+  y datos históricos; historial completo y presupuestos; evaluación real, humana,
+  científica y global; aceptación integral de 12 páginas y revisión final.
+  Siguen 43 escenarios abiertos, 12 pilotos y 48 conceptos.
+- Al final: detalles secundarios. El aviso de imports de este corte queda en
+  DD057; no se aplazan como estilo los fallos de migración o flows.
+
+## Etapa anterior: bibliotecas antiguas retiradas
 
 Se retiran CrewAI, crewai-tools, LiteLLM, Ollama y Chroma, el extra `legacy`,
 cinco auxiliares sin uso, la exportación diferida de la clase base y dos fixtures

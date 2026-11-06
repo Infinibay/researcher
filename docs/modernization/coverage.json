@@ -3996,6 +3996,22 @@
         "Restoration of old Chroma-only data/file-only reports and remaining legacy services/CLI are principal work.",
         "No new global, model, human, scientific or integral page acceptance."
       ]
+    },
+    "native_internal_api_retirement": {
+      "status": "complete",
+      "scope": "13 internal API operations, three modules and the legacy pod CLI retired; old container engine/MCP/CLI installations removed. Native owner terminal and scoped business capabilities retained. No broad scenario closes.",
+      "evidence": [
+        "docs/architecture/native-internal-retirement.md",
+        "docs/modernization/internal-retirement-results.json",
+        "docs/modernization/internal-retirement-packaging.json",
+        "docs/modernization/internal-retirement-imports.json",
+        "backend/tests/api/test_retired_internal_api.py"
+      ],
+      "limitations": [
+        "140 source and140 installed pass; two identical migration/inverse failures reproduce on previous installed wheel. No global green claim.",
+        "Container image not built; operation remains principal work. No data/test-case deletion.",
+        "Remaining services/listeners/helpers and full product acceptance remain."
+      ]
     }
   }
 }

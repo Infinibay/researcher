@@ -179,9 +179,6 @@ def create_app(*, access: LocalAccess | None = None, runtime_service=None) -> Fa
     from backend.api.routes.source_operations import router as source_operations_router
     from backend.api.routes.model_settings import router as model_settings_router
     from backend.api.routes.health import router as health_router
-    from backend.api.routes.internal import router as internal_router
-    from backend.api.routes.internal_findings import router as internal_findings_router
-    from backend.api.routes.internal_tasks import router as internal_tasks_router
     from backend.api.routes.milestones import router as milestones_router
     from backend.api.routes.projects import router as projects_router
     from backend.api.routes.research import install_research_errors
@@ -217,9 +214,6 @@ def create_app(*, access: LocalAccess | None = None, runtime_service=None) -> Fa
     app.include_router(user_requests_router)
     app.include_router(events_router)
     app.include_router(flow_state_router)
-    app.include_router(internal_router)
-    app.include_router(internal_findings_router)
-    app.include_router(internal_tasks_router)
     app.include_router(findings_router)
     app.include_router(artifacts_router)
 

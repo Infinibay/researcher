@@ -40,24 +40,9 @@ RUN pip install --no-cache-dir \
 COPY scripts/infinibay_file_helper.py /usr/local/bin/infinibay-file-helper
 RUN chmod +x /usr/local/bin/infinibay-file-helper
 
-# ── INFINIBAY CLI helper (for Claude Code engine) ──────────────────────────
-COPY scripts/infinibay_cli.py /usr/local/bin/infinibay
-RUN chmod +x /usr/local/bin/infinibay
-
-# ── INFINIBAY MCP server (for Claude Code engine) ──────────────────────────
-RUN pip install --no-cache-dir fastmcp
-COPY scripts/infinibay_mcp_server.py /usr/local/bin/infinibay-mcp
-RUN chmod +x /usr/local/bin/infinibay-mcp
-
-# ── Claude Code CLI (used when AGENT_ENGINE=claude_code) ─────────────
-# Install globally as root, then symlink to /usr/local/bin so it's in PATH
-# for non-root users (podman --userns=keep-id maps root→host user).
-RUN npm install -g @anthropic-ai/claude-code \
-    && ln -sf "$(npm root -g)/@anthropic-ai/claude-code/cli.js" /usr/local/bin/claude \
-    && chmod -R a+rX "$(npm root -g)/@anthropic-ai" \
-    && claude --version
-# .claude dir must be writable by the mapped user (keep-id → non-root)
-RUN mkdir -p /root/.claude && chmod 777 /root/.claude
+# This historical image supports command/file fixtures only. The native host
+# configures Codex, Ken and scoped business MCP; installing an agent CLI here
+# would not provide its execution ownership or authorization contract.
 
 WORKDIR /workspace
 

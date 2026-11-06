@@ -17,6 +17,8 @@ def test_replaced_framework_adapters_are_unavailable():
         'backend.tools._legacy_access', 'backend.tools.base.base_tool',
         'backend.tools.base.dedup', 'backend.tools.base.embeddings',
         'backend.tools.base.permissions',
+        'backend.api.routes.internal', 'backend.api.routes.internal_findings',
+        'backend.api.routes.internal_tasks',
     ):
         assert importlib.util.find_spec(module) is None, module
     web = Path(backend.__file__).parent / 'tools' / 'web'

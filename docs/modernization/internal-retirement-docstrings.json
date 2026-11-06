@@ -1,0 +1,9 @@
+{
+  "changed_or_new_definitions": [
+    "backend/api/main.py::create_app",
+    "backend/tests/api/test_retired_internal_api.py::test_owner_has_no_parallel_internal_command_surface",
+    "backend/tests/runtime/test_native_adapter_retirement.py::test_replaced_framework_adapters_are_unavailable"
+  ],
+  "missing": [],
+  "scope": "Qualified AST comparison against 852c34a, changed/new definitions and module docstrings only. English documentation for Ken."
+}

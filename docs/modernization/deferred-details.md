@@ -225,3 +225,11 @@ Después de todas las capacidades principales: tres imports sin uso en
 también queda para la pasada final. Los siete fallos de flows reproducidos y
 la ejecución pendiente de los tres casos de pod son trabajo principal de
 servicios/operación, no detalles de estilo.
+
+## DD057 — orden de imports tras retirar la API interna
+
+El aviso I001 de `backend/api/main.py` queda para después de todas las capacidades
+principales; véase `internal-retirement-lint.json`. La diferencia 404/405 de rutas
+inexistentes con el fallback GET de la SPA no afecta la retirada: ambas rechazan
+la operación. No abrir un rediseño del router para uniformarla en este corte.
+Los fallos de migración y la aceptación de imágenes siguen siendo trabajo principal.

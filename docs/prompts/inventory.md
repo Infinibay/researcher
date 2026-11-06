@@ -1,10 +1,13 @@
 # Inventario y revisión de prompts
 
 Catálogo nativo versión2; revisión inicial sobre `85f7acd`, actualizada después de
-retirar bibliotecas y auxiliares antiguos sobre `e78d752`. El [inventario detallado](inventory.json)
-contiene 234 entradas candidatas de 365 archivos Python. **No son 234 prompts distintos
-ni 234 evaluaciones con modelos.** Se archivan 364 entradas de los módulos eliminados,
+retirar API interna y CLI antiguos sobre `852c34a`. El [inventario detallado](inventory.json)
+contiene 233 entradas candidatas de 361 archivos Python. **No son 233 prompts distintos
+ni 233 evaluaciones con modelos.** Se archivan 365 entradas de los módulos eliminados,
 conservando sus decisiones históricas en `retired_entries`.
+El corte de API interna archiva la descripción del parser del CLI y revalida
+las dos descripciones de metadatos sin cambios cuyos consumidores incluyen la
+factoría HTTP. No cambia instrucciones de agentes ni incorpora prompts nuevos.
 La retirada de bibliotecas/auxiliares elimina cinco módulos de la fuente inventariada
 sin cambiar candidatos, descripciones ni decisiones semánticas de prompts.
 El corte de conocimiento archiva45 candidatos y revisa dos descripciones:

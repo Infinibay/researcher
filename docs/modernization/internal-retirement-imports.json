@@ -1,0 +1,106 @@
+{
+  "base_commit": "852c34a",
+  "files_scanned": 639,
+  "targets": [
+    "backend.api.routes.internal",
+    "backend.api.routes.internal_findings",
+    "backend.api.routes.internal_tasks",
+    "scripts.infinibay_cli"
+  ],
+  "remaining_static_imports": [],
+  "removed_files": [
+    {
+      "path": "backend/api/routes/internal.py",
+      "sha256": "eeb30c0cc4aaa14c60429dca5edb8ac8c67a1ede5e9bde8b5f715093419f6dff",
+      "lines": 329,
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/ask-team-lead",
+          "handler": "ask_team_lead"
+        },
+        {
+          "method": "POST",
+          "path": "/ask-project-lead",
+          "handler": "ask_project_lead"
+        },
+        {
+          "method": "POST",
+          "path": "/chat/send",
+          "handler": "chat_send"
+        },
+        {
+          "method": "POST",
+          "path": "/query",
+          "handler": "query_database"
+        },
+        {
+          "method": "POST",
+          "path": "/git/create-pr",
+          "handler": "create_pr"
+        },
+        {
+          "method": "POST",
+          "path": "/session-note",
+          "handler": "save_session_note"
+        },
+        {
+          "method": "GET",
+          "path": "/session-note",
+          "handler": "load_session_note"
+        }
+      ]
+    },
+    {
+      "path": "backend/api/routes/internal_findings.py",
+      "sha256": "87cd0bade488c97d0ce4fbcb8d8b0d1cd9407404c6a546a6d750d7fdca5cc0b4",
+      "lines": 218,
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/findings",
+          "handler": "record_finding"
+        },
+        {
+          "method": "GET",
+          "path": "/findings",
+          "handler": "read_findings"
+        },
+        {
+          "method": "POST",
+          "path": "/findings/{finding_id}/validate",
+          "handler": "validate_finding"
+        },
+        {
+          "method": "POST",
+          "path": "/findings/{finding_id}/reject",
+          "handler": "reject_finding"
+        }
+      ]
+    },
+    {
+      "path": "backend/api/routes/internal_tasks.py",
+      "sha256": "437e8d50c3151ab75395c4b6d514558ee3b527925a6421ac1064b288365cc9ed",
+      "lines": 128,
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/tasks/{task_id}/approve",
+          "handler": "approve_task"
+        },
+        {
+          "method": "POST",
+          "path": "/tasks/{task_id}/reject",
+          "handler": "reject_task"
+        }
+      ]
+    },
+    {
+      "path": "scripts/infinibay_cli.py",
+      "sha256": "8aa5d743e60c1a89a89b37c6b915bafe238586724c0a15eec7435cc3ede31c8f",
+      "lines": 235,
+      "routes": []
+    }
+  ],
+  "limits": "Absolute/relative AST imports including tests; dynamic/external consumers unknown. Containerfile copy/install removed separately. No tests retired."
+}

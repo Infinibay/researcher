@@ -2,7 +2,7 @@
   "schema_version": 1,
   "scope": "Owned backend/ and scripts/ Python, excluding tests. Syntax-selected prompt builders/literals/tool descriptions; external native system prompts and arbitrary owner/source text are outside this static inventory.",
   "coverage": "Candidates are not unique rendered prompts. Dynamic rendering size and non-direct consumers remain unknown. Reviews are explicit declarations bound to source and direct module consumers, not proof of efficacy or complete runtime reachability. requires_review entries are unfinished.",
-  "files_scanned": 365,
+  "files_scanned": 361,
   "source_tree": {
     "backend/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "backend/api/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -11,7 +11,7 @@
     "backend/api/exceptions.py": "874b055b3a8aa8c11b96c45adc7f02bfdce80a07ddf2c35e854c96b655f4b585",
     "backend/api/flow_manager.py": "c223ecf8a48a09c855ada31f2307bd47b9bd9c229b693c1c95655caa4c47b7fa",
     "backend/api/local_access.py": "114456de477b4248fdc5a8aa2554c3962e0df9fe8675e782ea27e2703048f155",
-    "backend/api/main.py": "fac833639e10098bf1e94428ca391626f57f69e264b681f95ef20adbc83dcc6c",
+    "backend/api/main.py": "fcc4060b69396051ca5cb655c413867bf21f08c2022634428077fc5758b8e3af",
     "backend/api/models/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "backend/api/models/agent.py": "23eb182f59601828bcf0a0c54660e9ee96e4b959b10f5560ec54cb77c03ea6ff",
     "backend/api/models/agent_messages.py": "64cf0fc0b8e8cf432d6fe0900088c7d4a8acd3f5c4fed100b6ed451824a860b1",
@@ -45,9 +45,6 @@
     "backend/api/routes/flow_state.py": "6e5046eb5e2f9105b94e151481c34e95862cc83f1bc817151f69e6155a058c3f",
     "backend/api/routes/git.py": "e7a15d28277c9ff5ffe04fdde5b5e96b044c6559935b8b41f226a91260916077",
     "backend/api/routes/health.py": "081ec388461fdc93cf50142ad6e6efbef5b743396015d35cda96f07cf4b00232",
-    "backend/api/routes/internal.py": "eeb30c0cc4aaa14c60429dca5edb8ac8c67a1ede5e9bde8b5f715093419f6dff",
-    "backend/api/routes/internal_findings.py": "87cd0bade488c97d0ce4fbcb8d8b0d1cd9407404c6a546a6d750d7fdca5cc0b4",
-    "backend/api/routes/internal_tasks.py": "437e8d50c3151ab75395c4b6d514558ee3b527925a6421ac1064b288365cc9ed",
     "backend/api/routes/milestones.py": "70c239900f8ec0351d94917cdb1715a312cfef4897e6fdd4b5921bcfbf68de98",
     "backend/api/routes/model_settings.py": "7d6efbe85c4a674fd49044d0ed443bf34d5e113aa594fa97bf8194e96a5ad482",
     "backend/api/routes/projects.py": "082bcd4ab97c6ec419cf35fd8b1a7d75585f84ccc29618b54ba1cf94a58c6497",
@@ -365,7 +362,6 @@
     "backend/tools/base/context.py": "e3d49048bb34ce40c9ca8a72d89e71af73be70178678efdb67c02bbf26a03862",
     "backend/tools/base/db.py": "f64cee75110c13430ea4d14c647b191f3514b0d07cfb1daa18c19626220f4830",
     "scripts/audit_prompt_inventory.py": "652d39284cc8aa51739366aea2723aec419e3cd9e3bd38da7b17012837fa47b7",
-    "scripts/infinibay_cli.py": "8aa5d743e60c1a89a89b37c6b915bafe238586724c0a15eec7435cc3ede31c8f",
     "scripts/infinibay_file_helper.py": "9139494d18efa19b56e7e7a1575787a836f2597e5016321aca9e7f3cab119530",
     "scripts/infinibay_mcp_server.py": "63c00560a315a28e57a27f6f2ca723feabcba90f7c375b978b351481b22e3dbb",
     "scripts/researcher_mcp_server.py": "18b24a3c795cb38226eea4fd338d5d423ba9ab5ee2d5b91a737a6a612c099f92"
@@ -419,7 +415,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "excluded_human_or_input_metadata",
       "objective": "FastAPI application factory for the INFINIBAY API.",
-      "source_sha256": "fac833639e10098bf1e94428ca391626f57f69e264b681f95ef20adbc83dcc6c",
+      "source_sha256": "fcc4060b69396051ca5cb655c413867bf21f08c2022634428077fc5758b8e3af",
       "source_bytes": 54,
       "rendered_utf8_bytes": 52,
       "variables_kind": "referenced_identifiers",
@@ -435,15 +431,16 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "4bbdff7bb56e77b5f4170ecb7c2e98e1d75d2295c9d812426c64a7afd9b12a2f",
+      "dependencies_sha256": "f471a34ae2b3eb3d954bda074d255a4c51392d0c51a7b01486a030a39ff1de63",
       "direct_module_consumers": {},
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose. Revalidated for direct-web policy: this candidate AST is unchanged; create_app adds only shared robots/rate host state, without changing project metadata or agent instructions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "review_rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose. Revalidated for direct-web policy: this candidate AST is unchanged; create_app adds only shared robots/rate host state, without changing project metadata or agent instructions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated during internal API retirement: API description and project description projection unchanged; main.py only unregisters three obsolete route groups. Owner metadata remains input, not an agent instruction.",
       "review_evidence": [
         "backend/api/main.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/architecture/native-internal-retirement.md"
       ],
       "review_conflicts": []
     },
@@ -683,17 +680,18 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "23920f060617a09de14df58c07bcfc306f923be9a0031090618f0fc352c024ae",
+      "dependencies_sha256": "c1a96aa412e2827a656867acbabe69d7a1cf7f52b0e1ea509e549afe7679f89f",
       "direct_module_consumers": {
-        "backend/api/main.py": "fac833639e10098bf1e94428ca391626f57f69e264b681f95ef20adbc83dcc6c"
+        "backend/api/main.py": "fcc4060b69396051ca5cb655c413867bf21f08c2022634428077fc5758b8e3af"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose. Revalidated for direct-web policy: this candidate AST is unchanged; create_app adds only shared robots/rate host state, without changing project metadata or agent instructions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "review_rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose. Revalidated for direct-web policy: this candidate AST is unchanged; create_app adds only shared robots/rate host state, without changing project metadata or agent instructions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated during internal API retirement: API description and project description projection unchanged; main.py only unregisters three obsolete route groups. Owner metadata remains input, not an agent instruction.",
       "review_evidence": [
         "backend/api/routes/projects.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/architecture/native-internal-retirement.md"
       ],
       "review_conflicts": []
     },
@@ -11868,44 +11866,6 @@
       "review_rationale": "Scanner source/regex is instrumentation, not a model instruction. A detected family never automatically establishes review; explicit dependency-bound decisions and stale checks are required.",
       "review_evidence": [
         "scripts/audit_prompt_inventory.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": []
-    },
-    {
-      "id": "scripts/infinibay_cli.py::build_parser.description@159",
-      "path": "scripts/infinibay_cli.py",
-      "symbol": "build_parser.description@159",
-      "line": 159,
-      "end_line": 159,
-      "owner": "scripts.infinibay_cli",
-      "family": "other_owned_prompt_candidate",
-      "disposition": "excluded_human_or_input_metadata",
-      "objective": "infinibay — CLI helper for INFINIBAY agents running inside sandbox pods.\n\nStandalone script (stdlib only). Communicates with the INFINIBAY backend\nvia its REST API to perform operations that require host-side DB access.\n\nEnvironment variables (injected by PodManager):\n    INFINIBAY_API_URL    — Backend base URL (e.g. http://host.containers.internal:8000)\n    INFINIBAY_PROJECT_ID — Current project ID\n    INFINIBAY_AGENT_ID   — This agent's ID\n    INFINIBAY_TASK_ID    — Current task ID (optional)",
-      "source_sha256": "8aa5d743e60c1a89a89b37c6b915bafe238586724c0a15eec7435cc3ede31c8f",
-      "source_bytes": 53,
-      "rendered_utf8_bytes": 51,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "2275d5aa19db4ac855cd78645f04ada7eb85e4bd20918a199f54c6d873fb4e02",
-      "direct_module_consumers": {},
-      "suggested_disposition": "requires_review",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose.",
-      "review_evidence": [
-        "scripts/infinibay_cli.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json"
       ],

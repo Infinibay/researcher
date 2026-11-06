@@ -16,13 +16,14 @@
       "conflicts": []
     },
     "backend/api/main.py::create_app.description@111": {
-      "dependencies_sha256": "4bbdff7bb56e77b5f4170ecb7c2e98e1d75d2295c9d812426c64a7afd9b12a2f",
+      "dependencies_sha256": "f471a34ae2b3eb3d954bda074d255a4c51392d0c51a7b01486a030a39ff1de63",
       "decision": "excluded_human_or_input_metadata",
-      "rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose. Revalidated for direct-web policy: this candidate AST is unchanged; create_app adds only shared robots/rate host state, without changing project metadata or agent instructions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose. Revalidated for direct-web policy: this candidate AST is unchanged; create_app adds only shared robots/rate host state, without changing project metadata or agent instructions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated during internal API retirement: API description and project description projection unchanged; main.py only unregisters three obsolete route groups. Owner metadata remains input, not an agent instruction.",
       "evidence": [
         "backend/api/main.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/architecture/native-internal-retirement.md"
       ],
       "conflicts": []
     },
@@ -82,13 +83,14 @@
       "conflicts": []
     },
     "backend/api/routes/projects.py::_project_to_response.description@79": {
-      "dependencies_sha256": "23920f060617a09de14df58c07bcfc306f923be9a0031090618f0fc352c024ae",
+      "dependencies_sha256": "c1a96aa412e2827a656867acbabe69d7a1cf7f52b0e1ea509e549afe7679f89f",
       "decision": "excluded_human_or_input_metadata",
-      "rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose. Revalidated for direct-web policy: this candidate AST is unchanged; create_app adds only shared robots/rate host state, without changing project metadata or agent instructions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose. Revalidated for direct-web policy: this candidate AST is unchanged; create_app adds only shared robots/rate host state, without changing project metadata or agent instructions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated during internal API retirement: API description and project description projection unchanged; main.py only unregisters three obsolete route groups. Owner metadata remains input, not an agent instruction.",
       "evidence": [
         "backend/api/routes/projects.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/architecture/native-internal-retirement.md"
       ],
       "conflicts": []
     },
@@ -3298,17 +3300,6 @@
       "rationale": "Scanner source/regex is instrumentation, not a model instruction. A detected family never automatically establishes review; explicit dependency-bound decisions and stale checks are required.",
       "evidence": [
         "scripts/audit_prompt_inventory.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": []
-    },
-    "scripts/infinibay_cli.py::build_parser.description@159": {
-      "dependencies_sha256": "2275d5aa19db4ac855cd78645f04ada7eb85e4bd20918a199f54c6d873fb4e02",
-      "decision": "excluded_human_or_input_metadata",
-      "rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose.",
-      "evidence": [
-        "scripts/infinibay_cli.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json"
       ],
@@ -10104,6 +10095,18 @@
         "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
       ],
       "retirement": "Legacy knowledge tool module removed after mapping native findings/review/wiki/report/search contracts and adding scoped cross-source search plus explicit legacy report reading. Historical artifacts with no database text still require the main migration/restore work."
+    },
+    "scripts/infinibay_cli.py::build_parser.description@159": {
+      "dependencies_sha256": "2275d5aa19db4ac855cd78645f04ada7eb85e4bd20918a199f54c6d873fb4e02",
+      "decision": "excluded_human_or_input_metadata",
+      "rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose.",
+      "evidence": [
+        "scripts/infinibay_cli.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [],
+      "retirement": "Old container CLI removed with all thirteen internal API commands; native scoped MCP and paired owner terminal preserve capabilities. No instruction transferred."
     }
   }
 }

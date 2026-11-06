@@ -1,0 +1,42 @@
+{
+  "base_commit": "852c34a",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "sha256": "b5ab305c625e91c63cf80249720edb0b9a5e1da97101a82a8de0dd14ca545db7",
+  "observed": {
+    "exit_code": 1,
+    "cases": 142,
+    "failed": 2,
+    "failed_cases": [
+      "test_review_schema_can_rollback_without_losing_original_work",
+      "test_publication_request_is_immutable_and_startup_preserves_original_records[frozen_author]"
+    ],
+    "skipped_cases": [],
+    "skipped": 0,
+    "seconds": 55.592,
+    "all_backend_imports_installed": true,
+    "backend_modules": 279,
+    "matching_python_sql": 674,
+    "installed_distributions": 83,
+    "legacy_installed": false,
+    "legacy_extra_or_requirement": false,
+    "real_model_calls": 0,
+    "real_provider_calls": 0
+  },
+  "tests": [
+    "backend/tests/api/test_retired_internal_api.py",
+    "backend/tests/api/test_local_access.py",
+    "backend/tests/runtime/test_native_adapter_retirement.py",
+    "backend/tests/research/test_task_workspace.py",
+    "backend/tests/research/test_knowledge_access.py",
+    "backend/tests/research/test_http.py",
+    "backend/tests/research/test_stdio_server.py",
+    "backend/tests/runtime/test_agent_messages.py",
+    "backend/tests/cli/test_owner_client.py",
+    "backend/tests/cli/test_terminal_controller.py",
+    "backend/tests/cli/test_bootstrap.py",
+    "backend/tests/runtime/test_finding_review.py",
+    "backend/tests/runtime/test_code_publications.py",
+    "backend/tests/runtime/test_forgejo_publication.py"
+  ],
+  "limits": "Thirteen internal commands and old pod CLI retired, preserving native scoped MCP/owner interfaces and historical data. Installed suite includes all selected source tests; two migration/inverse failures reproduced in preceding installed852c34a package with byte checks. No container image build, live model/provider, full global, human/scientific/12page or real-data restoration claim. Existing development seed remains outside unchanged db/*.sql package data."
+}

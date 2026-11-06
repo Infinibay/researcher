@@ -1,0 +1,103 @@
+{
+  "base_commit": "852c34a",
+  "status": "scoped_internal_api_and_pod_cli_retirement_complete_with_preexisting_migration_failures",
+  "removed_api_modules": 3,
+  "removed_api_operations": 13,
+  "removed_pod_cli_scripts": 1,
+  "retired_test_cases": 0,
+  "suites": {
+    "source": {
+      "cases": 142,
+      "passed": 140,
+      "failures": [
+        {
+          "name": "test_review_schema_can_rollback_without_losing_original_work",
+          "message": "RuntimeError: Development rollback refused: execution history or live authority requires forward repair or explicit backup restore"
+        },
+        {
+          "name": "test_publication_request_is_immutable_and_startup_preserves_original_records[frozen_author]",
+          "message": "assert 56 == 54"
+        }
+      ],
+      "errors": [],
+      "skipped": [],
+      "seconds": 54.975
+    },
+    "baseline": {
+      "cases": 2,
+      "passed": 0,
+      "failures": [
+        {
+          "name": "test_review_schema_can_rollback_without_losing_original_work",
+          "message": "RuntimeError: Development rollback refused: execution history or live authority requires forward repair or explicit backup restore"
+        },
+        {
+          "name": "test_publication_request_is_immutable_and_startup_preserves_original_records[frozen_author]",
+          "message": "assert 56 == 54"
+        }
+      ],
+      "errors": [],
+      "skipped": [],
+      "seconds": 1.72
+    },
+    "package": {
+      "cases": 142,
+      "passed": 140,
+      "failures": [
+        {
+          "name": "test_review_schema_can_rollback_without_losing_original_work",
+          "message": "RuntimeError: Development rollback refused: execution history or live authority requires forward repair or explicit backup restore"
+        },
+        {
+          "name": "test_publication_request_is_immutable_and_startup_preserves_original_records[frozen_author]",
+          "message": "assert 56 == 54"
+        }
+      ],
+      "errors": [],
+      "skipped": [],
+      "seconds": 55.592
+    },
+    "prompts": {
+      "cases": 2,
+      "passed": 2,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "seconds": 0.111
+    }
+  },
+  "baseline": {
+    "method": "Previously installed noneditable852c34a wheel verified against all676PythonSQL members before running the two observed failure nodes outside checkout with Python -I",
+    "same_dependency_environment": true,
+    "identical_failure_ids_and_messages": true
+  },
+  "packaging_evidence": "docs/modernization/internal-retirement-packaging.json",
+  "prompt_inventory": {
+    "candidates": 233,
+    "files": 361,
+    "archived": 365,
+    "newly_archived": 1,
+    "unchanged_metadata_reviews_revalidated": 2,
+    "requires_review": 0
+  },
+  "documented_changed_or_new_definitions": 3,
+  "ruff_findings_deferred": {
+    "count": 1,
+    "reference": "DD057"
+  },
+  "verification_corrections": [
+    "New route-removal test initially expected404 for all methods; actual SPA GET catch-all returns405 for absent POST paths. Both are absence, not executed commands.",
+    "Database before/after assertion moved inside application lifespan after initialization; startup migrations legitimately change the pre-start dump. Final test compares only the retired-route requests."
+  ],
+  "data_or_schema_modified": false,
+  "real_model_calls": 0,
+  "real_provider_calls": 0,
+  "container_image_built": false,
+  "limits": [
+    "No new global suite, human/model/scientific or integral page acceptance.",
+    "Historical container recipe removes obsolete installations; image reproducibility/runtime acceptance remains principal operation work.",
+    "Communication services/listeners/flow helpers and seven previously observed flow failures plus LoopGuard failure remain principal work.",
+    "Two migration failures remain: inverse refuses retained execution history and publication fixture expects54 while startup installs56. No guard weakened.",
+    "43 broad scenarios remain open; 12 pilots48concepts0fullyaccepted pages."
+  ]
+}
