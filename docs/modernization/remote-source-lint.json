@@ -1,0 +1,228 @@
+{
+  "scope": [
+    "backend/git/source_remote.py",
+    "backend/git/source_service.py",
+    "backend/git/source_operations.py",
+    "backend/api/routes/source_operations.py",
+    "backend/tests/runtime/test_remote_source.py",
+    "backend/tests/runtime/test_source_operations.py",
+    "backend/tests/runtime/test_owned_remote_transport.py"
+  ],
+  "warnings": 7,
+  "critical": [],
+  "findings": [
+    {
+      "cell": null,
+      "code": "TRY004",
+      "end_location": {
+        "column": 59,
+        "row": 149
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/git/source_operations.py",
+      "fix": null,
+      "location": {
+        "column": 43,
+        "row": 149
+      },
+      "message": "Prefer `TypeError` exception for invalid type",
+      "name": "type-check-without-type-error",
+      "noqa_row": 149,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/type-check-without-type-error"
+    },
+    {
+      "cell": null,
+      "code": "I001",
+      "end_location": {
+        "column": 69,
+        "row": 274
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/git/source_operations.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "        from backend.runtime.peer_process import boot_id, start_ticks\n",
+            "end_location": {
+              "column": 1,
+              "row": 275
+            },
+            "location": {
+              "column": 1,
+              "row": 274
+            }
+          }
+        ],
+        "message": "Organize imports"
+      },
+      "location": {
+        "column": 9,
+        "row": 274
+      },
+      "message": "Import block is un-sorted or un-formatted",
+      "name": "unsorted-imports",
+      "noqa_row": 274,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+    },
+    {
+      "cell": null,
+      "code": "I001",
+      "end_location": {
+        "column": 69,
+        "row": 287
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/git/source_operations.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "        from backend.runtime.peer_process import boot_id, start_ticks\n",
+            "end_location": {
+              "column": 1,
+              "row": 288
+            },
+            "location": {
+              "column": 1,
+              "row": 287
+            }
+          }
+        ],
+        "message": "Organize imports"
+      },
+      "location": {
+        "column": 9,
+        "row": 287
+      },
+      "message": "Import block is un-sorted or un-formatted",
+      "name": "unsorted-imports",
+      "noqa_row": 287,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+    },
+    {
+      "cell": null,
+      "code": "F401",
+      "end_location": {
+        "column": 87,
+        "row": 9
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/git/source_service.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "from backend.git.source_operations import SourceLease, SourceOperations",
+            "end_location": {
+              "column": 87,
+              "row": 9
+            },
+            "location": {
+              "column": 1,
+              "row": 9
+            }
+          }
+        ],
+        "message": "Remove unused import: `backend.git.source_operations.SourceRequest`"
+      },
+      "location": {
+        "column": 74,
+        "row": 9
+      },
+      "message": "`backend.git.source_operations.SourceRequest` imported but unused",
+      "name": "unused-import",
+      "noqa_row": 9,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unused-import"
+    },
+    {
+      "cell": null,
+      "code": "BLE001",
+      "end_location": {
+        "column": 25,
+        "row": 142
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/git/source_service.py",
+      "fix": null,
+      "location": {
+        "column": 16,
+        "row": 142
+      },
+      "message": "Do not catch blind exception: `Exception`",
+      "name": "blind-except",
+      "noqa_row": 142,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/blind-except"
+    },
+    {
+      "cell": null,
+      "code": "PLC0414",
+      "end_location": {
+        "column": 82,
+        "row": 9
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_remote_source.py",
+      "fix": {
+        "applicability": "unsafe",
+        "edits": [
+          {
+            "content": "owned_config",
+            "end_location": {
+              "column": 82,
+              "row": 9
+            },
+            "location": {
+              "column": 54,
+              "row": 9
+            }
+          }
+        ],
+        "message": "Remove import alias"
+      },
+      "location": {
+        "column": 54,
+        "row": 9
+      },
+      "message": "Import alias does not rename original package",
+      "name": "useless-import-alias",
+      "noqa_row": 9,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/useless-import-alias"
+    },
+    {
+      "cell": null,
+      "code": "PLC0414",
+      "end_location": {
+        "column": 87,
+        "row": 10
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_remote_source.py",
+      "fix": {
+        "applicability": "unsafe",
+        "edits": [
+          {
+            "content": "tls_remote",
+            "end_location": {
+              "column": 87,
+              "row": 10
+            },
+            "location": {
+              "column": 63,
+              "row": 10
+            }
+          }
+        ],
+        "message": "Remove import alias"
+      },
+      "location": {
+        "column": 63,
+        "row": 10
+      },
+      "message": "Import alias does not rename original package",
+      "name": "useless-import-alias",
+      "noqa_row": 10,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/useless-import-alias"
+    }
+  ]
+}

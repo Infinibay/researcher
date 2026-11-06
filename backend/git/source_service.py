@@ -6,7 +6,8 @@ from contextlib import contextmanager
 from dataclasses import dataclass
 
 from backend.git.source_executor import execute_source, reconcile_source
-from backend.git.source_operations import SourceLease, SourceOperations
+from backend.git.source_operations import SourceLease, SourceOperations, SourceRequest
+from backend.git.source_remote import SourceHTTPControl, execute_remote_source
 from backend.runtime.broker_stdio import AsyncPeerBroker
 from backend.runtime.contracts import RunConflict
 from backend.runtime.owned_runtime import _settled
@@ -14,11 +15,11 @@ from backend.runtime.owned_runtime import _settled
 
 @dataclass(frozen=True)
 class SourceControl:
-    """Immutable original administrative lease and actual broker, captured by the trusted executor before its first Git gate."""
+    """Immutable original administrative lease and actual Git broker or HTTP client, captured before its first effect."""
 
     lease: SourceLease
     operation_id: str
-    owner: AsyncPeerBroker
+    owner: AsyncPeerBroker | SourceHTTPControl
 
     def matches(self, operation_id, fence):
         """A browser observation can withdraw only this original owner; a later observation fence never inherits an older Stop."""
@@ -75,9 +76,11 @@ class SourceService:
         value = SourceOperations.summaries(json.dumps({'owner_repository_operations_v1':{key:row}}))[0]
         worker = self._workers.get((project,key))
         closure = row.get('closure') or {}
-        value.update(project_id=project, request=row['request'], issue=row.get('issue'), worker_active=bool(worker and not worker.done()), receipt=row.get('receipt'),
-                     local_closure='confirmed' if closure.get('domain_removed') or (row['status']=='stopped' and row['owner'] is None) else 'unconfirmed',
+        value.update(project_id=project, request={'remote_server':None,**row['request']}, issue=row.get('issue'), worker_active=bool(worker and not worker.done()), receipt=row.get('receipt'),
+                     local_closure='confirmed' if closure.get('domain_removed') or (row.get('http_client') or {}).get('state')=='closed' or (row['status']=='stopped' and row['owner'] is None) else 'unconfirmed',
                      message='Estado guardado. Una observación Git corresponde a su momento; no comprueba el estado actual. Una carpeta parcial se conserva para revisión.')
+        if row['request']['mode'] == 'create_remote':
+            value['message'] = 'Crear un remoto vacío es una operación separada. El cierre del cliente local no detiene necesariamente al servidor. Observar sólo consulta la creación original; no vuelve a enviarla. No se creó una carpeta local ni se publicó código.'
         return value
 
     async def submit(self, project, key, request):
@@ -86,9 +89,9 @@ class SourceService:
             self.parent._accepting()
             if self._closing or self.parent._source_project_stops.get(project) or self.parent._legacy_controller_active(project):
                 raise RunConflict('El dueño del proyecto no admite nuevas preparaciones; conserva y revisa el trabajo existente.')
-            if request.mode == 'create_remote':
-                raise RunConflict('La creación remota explícita aún no está disponible. No se inicializó ni publicó una fuente como sustitución.')
             transport = self.parent.runtime.remote_transport
+            if request.mode == 'create_remote' and (transport is None or transport.api_base != request.remote_server):
+                raise RunConflict('Elige el servidor remoto configurado del host; no se enviaron credenciales ni se creó un remoto en otro servidor.')
             identity = transport.identity if transport is not None and (request.use_configured_auth or request.mode=='create_remote') else None
             row = await _settled(self.records.prepare, project, key, request, remote_identity=identity)
             if row['status'] == 'planned' and (project,key) not in self._workers:
@@ -121,7 +124,10 @@ class SourceService:
                 """Capture this task's real administrative broker without accepting a caller-supplied grant, PID, namespace or fence."""
                 self._capture_owner(project, key, executor)
 
-            if observe:
+            row = await _settled(self.records.read, project, key)
+            if row['request']['mode'] == 'create_remote':
+                await execute_remote_source(self.records, project, key, self.parent.runtime.remote_transport, observe=observe, on_owner=on_owner)
+            elif observe:
                 await reconcile_source(self.records, project, key, on_owner=on_owner, **self._configuration())
             else:
                 runtime = self.parent.runtime

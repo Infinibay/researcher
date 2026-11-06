@@ -439,7 +439,7 @@ de carpeta existente, consulta de revisión completa y origen de PR. Reusa el pa
 de registro de Proyectos. El lector local comprueba raíz exacta para no descubrir
 el Git padre, distingue fallo de lista vacía y conserva path/objeto. Lectura no
 inicia trabajo ni deriva aceptación de approved. [Contrato](repository-explorer.md),
-[resultados](../modernization/repositories-results.json). La sustitución posterior añade operaciones administrativas reales para crear/adoptar/clonar, Stop de fuente/proyecto/lifespan y recuperación readonly de Git terminado antes del registro. El alta antigua ahora rechaza antes de efectos; crear remoto y reparar etapas incompletas siguen pendientes. No se inventa un intento nativo. [Contrato actual](source-operations.md), [resultados](../modernization/source-setup-results.json).
+[resultados](../modernization/repositories-results.json). La sustitución posterior añade operaciones administrativas reales para crear/adoptar/clonar, Stop de fuente/proyecto/lifespan y recuperación readonly de Git terminado antes del registro. El alta antigua ahora rechaza antes de efectos; crear remoto ya tiene una operación separada; reparar etapas incompletas sigue pendiente. No se inventa un intento nativo. [Contrato actual](source-operations.md), [resultados](../modernization/source-setup-results.json).
 
 
 ## Retirada física antes de SQLite — después de c9f8cee
@@ -451,3 +451,14 @@ retira los handles originales y persiste el alcance congelado. Aplicación y Sto
 general drenan admisión bajo una barrera; los paquetes antiguos no retiran dueños
 nuevos. No cambia el catálogo de modelos ni crea tareas ficticias. [Contrato](source-control.md),
 [resultados](../modernization/source-control-results.json).
+
+
+## Creación remota explícita — después de2687ebc
+
+Fuentes añade una elección separada de servidor/cuenta u organización/visibilidad.
+El dueño HTTP administrativo conserva su propio lease y transporte real; no
+fabrica una tarea nativa ni reutiliza la creación antigua con fallback. La API
+owner y web guardan el servidor elegido; emisión única y marcador original
+permiten recuperación readonly tras perder la respuesta. Stop cierra el cliente
+antes de SQL y mantiene incertidumbre si el servidor aún puede crear.
+[Contrato](remote-source-creation.md), [resultados](../modernization/remote-source-results.json).

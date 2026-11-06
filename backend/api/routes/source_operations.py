@@ -26,6 +26,7 @@ class PrepareSource(BaseModel):
     remote_owner: str | None = Field(default=None, max_length=81)
     private: bool | None = None
     use_configured_auth: bool = False
+    remote_server: str | None = Field(default=None, max_length=2048)
 
 
 class StopSource(BaseModel):
@@ -34,6 +35,15 @@ class StopSource(BaseModel):
     model_config = ConfigDict(extra='forbid', strict=True)
     operation_id: str = Field(pattern=r'^[a-f0-9]{32}$')
     fence: int = Field(ge=0)
+
+
+@router.get('')
+async def source_options(project_id: int, request: Request):
+    """Expose only the configured server and account label for deliberate owner selection, without credentials, host secret paths or network effects."""
+    runtime = service(request)
+    await asyncio.to_thread(runtime.sources.records.list, project_id)
+    transport = runtime.runtime.remote_transport
+    return JSONResponse({'remote_server': transport.api_base if transport else None, 'remote_username': transport.username if transport else None}, headers={'Cache-Control':'no-store'})
 
 
 @router.post('', status_code=202)

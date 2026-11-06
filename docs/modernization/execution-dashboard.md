@@ -9,7 +9,36 @@ Actualizado: 2026-11-06. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: Stop físico antes de esperar SQLite
+## Etapa actual: crear y reconocer un remoto vacío
+
+El propietario elige explícitamente servidor configurado, cuenta/organización,
+nombre y visibilidad. Se confirma la identidad numérica del namespace; no hay
+fallback de organización a usuario. La creación registra un único POST antes de
+salir y conserva un marcador original. Una respuesta perdida se recupera con
+consultas readonly; existencia,404o marcador ajeno no autorizan otro POST. No se
+crea una carpeta, origin, publicación, tarea nativa ni registro local sustituto.
+Stop de fuente/proyecto cierra el cliente real sin afirmar rollback remoto.
+
+**Verificación:**11casos principales15.13s;65regresiones en fuente57.40s antes del
+último test/copia de error. La wheel final no editable comprueba todo el código
+actual:175PASS0FAIL0SKIP136.915s,270imports/822miembros coincidentes,
+85distribuciones/sin frameworks antiguos;1turno nativo/Ken controlados,
+0modelos reales y0remotos del usuario. Frontend116PASS/build4.90s.
+Cinco capturas reales1440/390px,0incidencias Axe en la región revisada,
+1POST administrativo/1observación/1POST remoto.49definiciones Python y57módulos/
+definiciones TS documentados;7avisos estáticos diferidosDD035. Sin nuevas rondas
+de conceptos: siguen24/36desktop,8/12mobile,8pilotos y0/12páginas aceptadas.
+[Contrato](../architecture/remote-source-creation.md), [resultados](remote-source-results.json),
+[paquete](remote-source-packaging.json), [web](../design/audits/2026-11-06-remote-source/report.md).
+
+**Siguiente principal:** reparar etapas locales incompletas y recuperar el caso
+sin concesión Git original, conservando contenido y autoridad real; después,
+historia entre navegadores. La evaluación de presupuesto total de tiempo/red,
+Forgejo completo, restore/inversas, mezclas/admisiones nativas tardías,
+43escenarios,12páginas y todo el objetivo original siguen abiertos. La política
+macro-first se conserva: no reabrir ahora estilo, imports ni densidad del formulario.
+
+## Etapa anterior: Stop físico antes de esperar SQLite
 
 El lease y broker reales se capturan antes del primer G. Stop rechaza fences
 obsoletos, retira el dueño original y después espera intención/recibos. Proyectos

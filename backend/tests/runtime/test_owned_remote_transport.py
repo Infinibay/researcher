@@ -212,6 +212,8 @@ def tls_remote(tmp_path, socket_enabled):
                     pass
                 return
             base = "/api/v1/repos/owner/repo"
+            if hasattr(state, 'source_handler') and state.source_handler(self, path, body):
+                return
             if path == base:
                 self.reply(
                     200,

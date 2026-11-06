@@ -1,0 +1,67 @@
+{
+  "scope": "Actual React/owner HTTP/SQLite and verified synthetic TLS Forgejo. Server drops first POST reply; only explicit readonly recovery can settle original effect. No local Git/model/Ken turns.",
+  "status": "passed",
+  "states": [
+    {
+      "file": "01-desktop-explicit-empty-remote.png",
+      "sha256": "06ddf255fbe4c3e95d2caa0a8332fe26a300c94619a07cb25a8b7be236017267",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "02-mobile-server-namespace-visibility.png",
+      "sha256": "b4afe5e655c85d4a57d8af8424c902f11f8de46f73dd0ec6b5a6005620a5291a",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "03-mobile-lost-server-reply.png",
+      "sha256": "ddc404827f3d343edef70350744c0a94a362d6666ca0edab8f66185b214a79dd",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "04-mobile-original-result.png",
+      "sha256": "06c43e0d3801d416f58d87e530869769d9a7c3450233bff410282a4f2b3bb0a8",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "05-desktop-original-result.png",
+      "sha256": "64353cc6a4e7a7f2addcfa6339df4bc94d40faf876e209326e5506a552a0b795",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    }
+  ],
+  "page_errors": [],
+  "source_posts": [
+    {
+      "operation_key": "7fe056b9-41db-48da-bf7c-e07deee2a636",
+      "mode": "create_remote",
+      "name": "proyecto-remoto",
+      "path": null,
+      "branch": null,
+      "remote_url": null,
+      "remote_owner": "research",
+      "private": true,
+      "remote_server": "https://127.0.0.1:33111/api/v1",
+      "use_configured_auth": false
+    }
+  ],
+  "observer_posts": 1
+}

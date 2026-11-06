@@ -37,6 +37,7 @@ class SourceRequest:
     remote_owner: str | None = None
     private: bool | None = None
     use_configured_auth: bool = False
+    remote_server: str | None = None
 
     def __post_init__(self):
         """Reject ambiguous effects, unsafe names/refs and credential-bearing URLs before persisting or allocating anything."""
@@ -45,7 +46,14 @@ class SourceRequest:
         if self.mode=='create_remote':
             if self.path is not None or self.branch is not None or self.remote_url is not None or type(self.private)is not bool or not isinstance(self.remote_owner,str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{0,80}',self.remote_owner):
                 raise ValueError('Remote creation requires explicit owner and visibility, without a local or clone effect')
+            from backend.runtime.remote_publication import RemoteRepository
+
+            if not isinstance(self.remote_server, str):
+                raise ValueError('Remote creation requires an explicitly selected HTTPS server')
+            RemoteRepository(self.remote_server, 1, self.remote_owner+'/'+self.name, self.remote_server.removesuffix('/api/v1')+'/'+self.remote_owner+'/'+self.name+'.git')
             return
+        if self.remote_server is not None:
+            raise ValueError('Remote server selection belongs only to explicit remote creation')
         if not isinstance(self.path,str) or not 1<=len(self.path.encode())<=4096 or not Path(self.path).is_absolute() or '\0' in self.path or self.private is not None or self.remote_owner is not None:
             raise ValueError('Source setup requires an explicit absolute path without remote-provisioning fields')
         if self.mode=='create' and self.branch is None:
@@ -159,7 +167,7 @@ class SourceOperations:
                      'path': row['request'].get('path'), 'status': row['status'],
                      'fence': row['fence'],
                      'requires_reconciliation': row['status'] not in ('completed', 'rejected', 'stopped') or (row['status'] == 'stopped' and row.get('view') is not None),
-                     'repository_id': row['repository_id'], 'observation': row.get('observation'),
+                     'repository_id': row['repository_id'], 'observation': row.get('observation'), 'remote': (row.get('receipt') or {}).get('remote'),
                      'observed_at': (row.get('receipt') or {}).get('observed_at'),
                      'observation_kind': 'recorded_not_rechecked'}
                     for key, row in sorted(entries.items())]
@@ -241,7 +249,7 @@ class SourceOperations:
             metadata=self._load(conn,project);entries=metadata.setdefault(_METADATA_KEY,{})
             if key in entries:
                 old=entries[key]
-                if old['request']!=intent['request'] or old['remote_identity']!=remote_identity:raise RunConflict('La solicitud original identifica otra alta; no se preparó un efecto distinto.')
+                if {'remote_server':None,**old['request']}!=intent['request'] or old['remote_identity']!=remote_identity:raise RunConflict('La solicitud original identifica otra alta; no se preparó un efecto distinto.')
                 return old
             if len(entries)>=64:raise RunConflict('Se alcanzó el límite de altas conservadas; no se borró historia para continuar.')
             target=self._target(conn,project,request)
@@ -258,17 +266,21 @@ class SourceOperations:
 
     def claim(self,project,key,owner):
         """Give one actual administrative process owner its own attempt/fence, without a native task or model invocation."""
+        with self.runs._transaction(write=True) as conn:
+            return self._claim(conn, project, key, owner)
+
+    def _claim(self,conn,project,key,owner):
+        """Share original source admission inside an existing transaction so HTTP ownership can be persisted atomically before its first client."""
         from backend.runtime.peer_process import boot_id,start_ticks
 
         command_key(owner)
-        with self.runs._transaction(write=True) as conn:
-            metadata,row=self._row(conn,project,key)
-            if row['status']=='running' and row['owner']['owner_id']==owner:return SourceLease(project,key,row['attempt_id'],owner,row['fence'],row['database_identity'])
-            if row['status']!='planned' or row['database_identity']!=self._origin():raise RunConflict('Esta alta tiene otro dueño o necesita reconciliación; no se inicia otra ejecución.')
-            SourceView(**row['target']['root']).verify()
-            row.update(status='running',attempt_id=uuid4().hex,fence=row['fence']+1,owner={'owner_id':owner,'pid':os.getpid(),'start_ticks':start_ticks(os.getpid()),'boot_id':boot_id()})
-            self._save(conn,project,metadata)
-            return SourceLease(project,key,row['attempt_id'],owner,row['fence'],row['database_identity'])
+        metadata,row=self._row(conn,project,key)
+        if row['status']=='running' and row['owner']['owner_id']==owner:return SourceLease(project,key,row['attempt_id'],owner,row['fence'],row['database_identity'])
+        if row['status']!='planned' or row['database_identity']!=self._origin():raise RunConflict('Esta alta tiene otro dueño o necesita reconciliación; no se inicia otra ejecución.')
+        SourceView(**row['target']['root']).verify()
+        row.update(status='running',attempt_id=uuid4().hex,fence=row['fence']+1,owner={'owner_id':owner,'pid':os.getpid(),'start_ticks':start_ticks(os.getpid()),'boot_id':boot_id()})
+        self._save(conn,project,metadata)
+        return SourceLease(project,key,row['attempt_id'],owner,row['fence'],row['database_identity'])
 
     def begin_observation(self,project,key,owner):
         """Fence an already-closed original attempt and retain its history before a new strictly readonly reconciliation; never restart its writes."""
@@ -359,8 +371,9 @@ class SourceOperations:
         """Expose a bounded redacted current issue while retaining the original operation, physical receipts and any partial files for explicit observation."""
         with self.runs._transaction(write=True) as conn:
             metadata, row = self._row(conn, project, key)
-            if row['status'] != 'completed':
-                row.update(status='needs_reconciliation', issue={'code':'source_result_unconfirmed','message':'No se confirmó la preparación. Conservamos la solicitud y la carpeta; observa el resultado original antes de decidir cómo continuar.'})
+            if row['status'] not in ('completed', 'rejected', 'stopped') and not row.get('issue'):
+                message = 'No se confirmó la creación remota. Conservamos la solicitud; observa su resultado sin volver a enviarla.' if row['request']['mode']=='create_remote' else 'No se confirmó la preparación. Conservamos la solicitud y la carpeta; observa el resultado original antes de decidir cómo continuar.'
+                row.update(status='needs_reconciliation', issue={'code':'source_result_unconfirmed','message':message})
                 self._save(conn, project, metadata)
 
     def request_stop(self, project, key, *, operation_id, fence):
@@ -382,6 +395,8 @@ class SourceOperations:
             raise RunConflict('El intento observado cambió. Consulta la operación antes de detenerla.')
         if row['status'] not in ('completed', 'rejected', 'stopped'):
             row.update(status='cancelling', stop_requested=True)
+            if row['request']['mode'] == 'create_remote':
+                row['remote_withdrawn'] = True
             cls._save(conn, project, metadata)
         return row
 
@@ -392,6 +407,13 @@ class SourceOperations:
             if not row.get('stop_requested') or row['status'] == 'completed':
                 return row
             closure = row.get('closure') or {}
+            if row['request']['mode'] == 'create_remote':
+                http = row.get('http_client') or {}
+                closed = http.get('attempt_id') == row['attempt_id'] and http.get('state') == 'closed'
+                issued = (row.get('remote_effect') or {}).get('issued')
+                row['status'] = 'stopped' if (row['owner'] is None or closed) and not issued else 'needs_reconciliation'
+                self._save(conn, project, metadata)
+                return row
             unused = row['owner'] is None and row['view'] is None and not row['peers'] and not row.get('domain')
             closed = closure.get('attempt_id') == row['attempt_id'] and closure.get('domain_removed') is True and all(p['state'] == 'closed' for p in row['peers'].values())
             row['status'] = 'stopped' if unused or closed else 'needs_reconciliation'

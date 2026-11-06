@@ -1,0 +1,351 @@
+{
+  "base_commit": "2687ebc",
+  "changed_or_new_definitions_documented": 49,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/routes/source_operations.py",
+      "symbol": "PrepareSource",
+      "line": 16,
+      "docstring": "Original owner selection with no shell commands, caller credentials, namespace identities or fabricated task IDs.",
+      "file_sha256": "58c0f85cbcb4493141460a02511bf675c2e7c5bc00d66bd7cd6721bc5ba60d81"
+    },
+    {
+      "path": "backend/api/routes/source_operations.py",
+      "symbol": "source_options",
+      "line": 41,
+      "docstring": "Expose only the configured server and account label for deliberate owner selection, without credentials, host secret paths or network effects.",
+      "file_sha256": "58c0f85cbcb4493141460a02511bf675c2e7c5bc00d66bd7cd6721bc5ba60d81"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceRequest",
+      "line": 29,
+      "docstring": "An explicit administrative effect scope; adoption cannot secretly initialize Git and clone cannot provision or reconfigure a remote.",
+      "file_sha256": "bd431047f3f94d81391c91cc97f34ad504bfe0d2c19901aa697eb1c8f593ed4e"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceRequest.__post_init__",
+      "line": 42,
+      "docstring": "Reject ambiguous effects, unsafe names/refs and credential-bearing URLs before persisting or allocating anything.",
+      "file_sha256": "bd431047f3f94d81391c91cc97f34ad504bfe0d2c19901aa697eb1c8f593ed4e"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations",
+      "line": 131,
+      "docstring": "Persist bounded original setup intents and directory ownership through the existing SQLite/project-metadata transaction.",
+      "file_sha256": "bd431047f3f94d81391c91cc97f34ad504bfe0d2c19901aa697eb1c8f593ed4e"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.summaries",
+      "line": 161,
+      "docstring": "Expose complete recorded source intentions and point-in-time observations without peer internals or an implied fresh Git check.",
+      "file_sha256": "bd431047f3f94d81391c91cc97f34ad504bfe0d2c19901aa697eb1c8f593ed4e"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.prepare",
+      "line": 241,
+      "docstring": "Persist one exact owner intent before any effect; replay returns it, while a reused key with different scope rejects.",
+      "file_sha256": "bd431047f3f94d81391c91cc97f34ad504bfe0d2c19901aa697eb1c8f593ed4e"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.claim",
+      "line": 267,
+      "docstring": "Give one actual administrative process owner its own attempt/fence, without a native task or model invocation.",
+      "file_sha256": "bd431047f3f94d81391c91cc97f34ad504bfe0d2c19901aa697eb1c8f593ed4e"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations._claim",
+      "line": 272,
+      "docstring": "Share original source admission inside an existing transaction so HTTP ownership can be persisted atomically before its first client.",
+      "file_sha256": "bd431047f3f94d81391c91cc97f34ad504bfe0d2c19901aa697eb1c8f593ed4e"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.note_failure",
+      "line": 370,
+      "docstring": "Expose a bounded redacted current issue while retaining the original operation, physical receipts and any partial files for explicit observation.",
+      "file_sha256": "bd431047f3f94d81391c91cc97f34ad504bfe0d2c19901aa697eb1c8f593ed4e"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.withdraw",
+      "line": 391,
+      "docstring": "Withdraw one original source inside either the individual Stop or atomic whole-project Stop admission transaction.",
+      "file_sha256": "bd431047f3f94d81391c91cc97f34ad504bfe0d2c19901aa697eb1c8f593ed4e"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.settle_stop",
+      "line": 403,
+      "docstring": "Record stopped only after original local closure, retaining partially written folders and uncertainty instead of asserting a remote effect was undone.",
+      "file_sha256": "bd431047f3f94d81391c91cc97f34ad504bfe0d2c19901aa697eb1c8f593ed4e"
+    },
+    {
+      "path": "backend/git/source_remote.py",
+      "symbol": "RemoteSourceRecords",
+      "line": 25,
+      "docstring": "Reuse bounded source metadata transactions while keeping HTTP clients and issued remote effects separate from Git process grants.",
+      "file_sha256": "ed6d9fe1bf3f20b1f4b73b73420d84585355d4208307f2f4fd8b3acae609b2d5"
+    },
+    {
+      "path": "backend/git/source_remote.py",
+      "symbol": "RemoteSourceRecords.__init__",
+      "line": 28,
+      "docstring": "Bind the actual source store without creating clients, namespaces or local directories.",
+      "file_sha256": "ed6d9fe1bf3f20b1f4b73b73420d84585355d4208307f2f4fd8b3acae609b2d5"
+    },
+    {
+      "path": "backend/git/source_remote.py",
+      "symbol": "RemoteSourceRecords._host",
+      "line": 33,
+      "docstring": "Identify this actual host process in its original visible kernel/PID namespace.",
+      "file_sha256": "ed6d9fe1bf3f20b1f4b73b73420d84585355d4208307f2f4fd8b3acae609b2d5"
+    },
+    {
+      "path": "backend/git/source_remote.py",
+      "symbol": "RemoteSourceRecords._original",
+      "line": 37,
+      "docstring": "Require the original HTTP attempt and database even after its owner admission has been withdrawn.",
+      "file_sha256": "ed6d9fe1bf3f20b1f4b73b73420d84585355d4208307f2f4fd8b3acae609b2d5"
+    },
+    {
+      "path": "backend/git/source_remote.py",
+      "symbol": "RemoteSourceRecords._closed",
+      "line": 44,
+      "docstring": "Prove exact local closure or same-host original process death; neither proves that a remote request stopped.",
+      "file_sha256": "ed6d9fe1bf3f20b1f4b73b73420d84585355d4208307f2f4fd8b3acae609b2d5"
+    },
+    {
+      "path": "backend/git/source_remote.py",
+      "symbol": "RemoteSourceRecords.begin",
+      "line": 61,
+      "docstring": "Allocate one real HTTP attempt; a fresh observer requires original local closure and never inherits permission to POST.",
+      "file_sha256": "ed6d9fe1bf3f20b1f4b73b73420d84585355d4208307f2f4fd8b3acae609b2d5"
+    },
+    {
+      "path": "backend/git/source_remote.py",
+      "symbol": "RemoteSourceRecords.current",
+      "line": 84,
+      "docstring": "Check original admission before each HTTP request without granting writes to a readonly observation.",
+      "file_sha256": "ed6d9fe1bf3f20b1f4b73b73420d84585355d4208307f2f4fd8b3acae609b2d5"
+    },
+    {
+      "path": "backend/git/source_remote.py",
+      "symbol": "RemoteSourceRecords.freeze",
+      "line": 89,
+      "docstring": "Freeze authenticated numeric namespace, explicit visibility and observed name absence before the sole possible creation.",
+      "file_sha256": "ed6d9fe1bf3f20b1f4b73b73420d84585355d4208307f2f4fd8b3acae609b2d5"
+    },
+    {
+      "path": "backend/git/source_remote.py",
+      "symbol": "RemoteSourceRecords.issue",
+      "line": 103,
+      "docstring": "Durably issue exactly the original POST before sending bytes; an ambiguous response cannot reset this one-way boundary.",
+      "file_sha256": "ed6d9fe1bf3f20b1f4b73b73420d84585355d4208307f2f4fd8b3acae609b2d5"
+    },
+    {
+      "path": "backend/git/source_remote.py",
+      "symbol": "RemoteSourceRecords.close",
+      "line": 113,
+      "docstring": "Record actual controller closure only for its own original local client, even after Stop withdrew admission.",
+      "file_sha256": "ed6d9fe1bf3f20b1f4b73b73420d84585355d4208307f2f4fd8b3acae609b2d5"
+    },
+    {
+      "path": "backend/git/source_remote.py",
+      "symbol": "RemoteSourceRecords.finish",
+      "line": 123,
+      "docstring": "Record positive original remote evidence after local closure, preserving uncertainty for missing or foreign results and avoiding a fabricated local registration.",
+      "file_sha256": "ed6d9fe1bf3f20b1f4b73b73420d84585355d4208307f2f4fd8b3acae609b2d5"
+    },
+    {
+      "path": "backend/git/source_remote.py",
+      "symbol": "SourceRemoteClient",
+      "line": 139,
+      "docstring": "Fixed Forgejo namespace and empty-repository operations over the existing bounded, origin-bound transport.",
+      "file_sha256": "ed6d9fe1bf3f20b1f4b73b73420d84585355d4208307f2f4fd8b3acae609b2d5"
+    },
+    {
+      "path": "backend/git/source_remote.py",
+      "symbol": "SourceRemoteClient.namespace",
+      "line": 142,
+      "docstring": "Resolve selected user or organization by server evidence, never by an org-to-user fallback after an error.",
+      "file_sha256": "ed6d9fe1bf3f20b1f4b73b73420d84585355d4208307f2f4fd8b3acae609b2d5"
+    },
+    {
+      "path": "backend/git/source_remote.py",
+      "symbol": "SourceRemoteClient.repository",
+      "line": 154,
+      "docstring": "Read exactly the selected canonical name; only HTTP 404 means absence and no read error grants a POST.",
+      "file_sha256": "ed6d9fe1bf3f20b1f4b73b73420d84585355d4208307f2f4fd8b3acae609b2d5"
+    },
+    {
+      "path": "backend/git/source_remote.py",
+      "symbol": "SourceRemoteClient.matched",
+      "line": 159,
+      "docstring": "Accept only complete positive server evidence of the issued original marker, namespace, visibility and canonical clone origin.",
+      "file_sha256": "ed6d9fe1bf3f20b1f4b73b73420d84585355d4208307f2f4fd8b3acae609b2d5"
+    },
+    {
+      "path": "backend/git/source_remote.py",
+      "symbol": "SourceHTTPControl",
+      "line": 173,
+      "docstring": "Own the real original HTTP client and immediate local withdrawal, independently of SQLite completion or a nonexistent Git domain.",
+      "file_sha256": "ed6d9fe1bf3f20b1f4b73b73420d84585355d4208307f2f4fd8b3acae609b2d5"
+    },
+    {
+      "path": "backend/git/source_remote.py",
+      "symbol": "SourceHTTPControl.__init__",
+      "line": 176,
+      "docstring": "Capture immutable original lease identity before any network request; attach only this controller's real transport.",
+      "file_sha256": "ed6d9fe1bf3f20b1f4b73b73420d84585355d4208307f2f4fd8b3acae609b2d5"
+    },
+    {
+      "path": "backend/git/source_remote.py",
+      "symbol": "SourceHTTPControl.withdraw",
+      "line": 184,
+      "docstring": "Synchronously deny later requests and start closing actual local sockets before Stop waits on metadata.",
+      "file_sha256": "ed6d9fe1bf3f20b1f4b73b73420d84585355d4208307f2f4fd8b3acae609b2d5"
+    },
+    {
+      "path": "backend/git/source_remote.py",
+      "symbol": "SourceHTTPControl.close",
+      "line": 191,
+      "docstring": "Drain the original local transport once; server-side work is deliberately outside this closure claim.",
+      "file_sha256": "ed6d9fe1bf3f20b1f4b73b73420d84585355d4208307f2f4fd8b3acae609b2d5"
+    },
+    {
+      "path": "backend/git/source_remote.py",
+      "symbol": "execute_remote_source",
+      "line": 198,
+      "docstring": "Create at most once or observe only, under original source lease and actual HTTP lifetime, retaining issued-write uncertainty after every interruption.",
+      "file_sha256": "ed6d9fe1bf3f20b1f4b73b73420d84585355d4208307f2f4fd8b3acae609b2d5"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceControl",
+      "line": 17,
+      "docstring": "Immutable original administrative lease and actual Git broker or HTTP client, captured before its first effect.",
+      "file_sha256": "2114c6f9fa9bae668623a4119aebf676ad6260b4017e2f58c2b3b139c50e4881"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService",
+      "line": 33,
+      "docstring": "Own actual administrative worker handles without inventing native turns or replaying interrupted writes after restart.",
+      "file_sha256": "2114c6f9fa9bae668623a4119aebf676ad6260b4017e2f58c2b3b139c50e4881"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.view",
+      "line": 73,
+      "docstring": "Expose saved phase and actual local worker observation; a stopped local worker never proves remote rollback or fresh Git health.",
+      "file_sha256": "2114c6f9fa9bae668623a4119aebf676ad6260b4017e2f58c2b3b139c50e4881"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.submit",
+      "line": 86,
+      "docstring": "Persist exact owner intent before scheduling one bounded worker; an original replay returns history and never restarts a stopped or uncertain effect.",
+      "file_sha256": "2114c6f9fa9bae668623a4119aebf676ad6260b4017e2f58c2b3b139c50e4881"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService._run",
+      "line": 120,
+      "docstring": "Keep executor teardown in its owning task and retain failures as saved uncertainty; raw transport errors and secrets never enter the owner response.",
+      "file_sha256": "2114c6f9fa9bae668623a4119aebf676ad6260b4017e2f58c2b3b139c50e4881"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_remote_transport.py",
+      "symbol": "tls_remote",
+      "line": 23,
+      "docstring": "Serve real smart HTTP Git over verified local TLS plus a small controlled Forgejo REST contract; all effect actors are fixture-owned.",
+      "file_sha256": "60213ec4dd65f77dff2361ee732faf5ff2640c59e0e82842f3b0b74cf5da9605"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_remote_transport.py",
+      "symbol": "tls_remote.Handler",
+      "line": 112,
+      "docstring": "Bounded fixture protocol handler; authentication values are never logged or saved as artifacts.",
+      "file_sha256": "60213ec4dd65f77dff2361ee732faf5ff2640c59e0e82842f3b0b74cf5da9605"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_remote_transport.py",
+      "symbol": "tls_remote.Handler.handle_request",
+      "line": 139,
+      "docstring": "Authenticate by protocol, then execute only this temporary repository or its explicit REST model.",
+      "file_sha256": "60213ec4dd65f77dff2361ee732faf5ff2640c59e0e82842f3b0b74cf5da9605"
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_source.py",
+      "symbol": "remote_source",
+      "line": 14,
+      "docstring": "Extend the real private-CA server with fixed user/org namespaces and controlled lost/pending creation replies.",
+      "file_sha256": "ae7fa73e3610e326bb64667a9384b4cdaea35e53ac4be239ff89858185c830a3"
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_source.py",
+      "symbol": "remote_source.handle",
+      "line": 24,
+      "docstring": "Implement only the documented Forgejo user/org and empty-repository endpoints; expose actual wire effects to assertions.",
+      "file_sha256": "ae7fa73e3610e326bb64667a9384b4cdaea35e53ac4be239ff89858185c830a3"
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_source.py",
+      "symbol": "configured_app",
+      "line": 58,
+      "docstring": "Use the real owner service and host transport, with isolated fixture credentials instead of any user remote or model.",
+      "file_sha256": "ae7fa73e3610e326bb64667a9384b4cdaea35e53ac4be239ff89858185c830a3"
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_source.py",
+      "symbol": "test_remote_creation_preserves_namespace_visibility_and_single_original_write",
+      "line": 77,
+      "docstring": "Real REST writes use the selected owner and visibility; replay and lost-response observation cannot create twice or initialize local Git.",
+      "file_sha256": "ae7fa73e3610e326bb64667a9384b4cdaea35e53ac4be239ff89858185c830a3"
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_source.py",
+      "symbol": "test_remote_preflight_errors_never_become_absence_or_namespace_fallback",
+      "line": 119,
+      "docstring": "A foreign repository, failed read or mismatching authenticated identity cannot authorize creation in either namespace.",
+      "file_sha256": "ae7fa73e3610e326bb64667a9384b4cdaea35e53ac4be239ff89858185c830a3"
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_source.py",
+      "symbol": "test_remote_stop_closes_local_transport_but_preserves_unknown_server_outcome",
+      "line": 141,
+      "docstring": "Actual Stop while POST is pending cannot claim rollback; readonly observation can later recover exactly that single original effect.",
+      "file_sha256": "ae7fa73e3610e326bb64667a9384b4cdaea35e53ac4be239ff89858185c830a3"
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_source.py",
+      "symbol": "test_cancellation_during_http_owner_handoff_closes_the_original_record_without_requests",
+      "line": 200,
+      "docstring": "Cancellation after atomic SQL admission but before the lease returns cannot strand an open client identity or release any HTTP request.",
+      "file_sha256": "ae7fa73e3610e326bb64667a9384b4cdaea35e53ac4be239ff89858185c830a3"
+    },
+    {
+      "path": "backend/tests/runtime/test_remote_source.py",
+      "symbol": "test_cancellation_during_http_owner_handoff_closes_the_original_record_without_requests.held_handoff",
+      "line": 213,
+      "docstring": "Hold the real committed lease only at its thread-to-event-loop handoff, without replacing its actual admission or receipt.",
+      "file_sha256": "ae7fa73e3610e326bb64667a9384b4cdaea35e53ac4be239ff89858185c830a3"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_operations.py",
+      "symbol": "test_clone_and_remote_creation_do_not_inherit_implicit_effects",
+      "line": 80,
+      "docstring": "Remote intent is explicit and credential-free; a clone cannot request a visibility change or use an embedded PAT.",
+      "file_sha256": "b0bbe3bd93d4e451beaff5da1e9adc286016e6e38af88cf2158783c50356643c"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

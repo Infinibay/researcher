@@ -66,3 +66,10 @@ Actualización 2026-11-06, Repositorios: [cuatro conceptos y selección](concept
 Exploración, registro existente y revisión histórica implementados; crear/clonar/
 remoto/reparar aún pendientes como capacidad principal. Ocho pilotos, cuatro rutas
 sin conceptos/código y cero páginas con aceptación completa.
+
+
+La preparación de Repositorios incorpora ahora remoto vacío separado, identidad
+HTTP original y recuperación readonly de su respuesta perdida; cinco capturas
+adicionales en [el recorrido](audits/2026-11-06-remote-source/report.md). Conserva
+la selección visual y las cuentas24/36,8/12,8pilotos,0aceptadas. Reparación local,
+historia entre navegadores y evaluación integral siguen pendientes.

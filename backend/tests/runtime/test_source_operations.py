@@ -85,8 +85,8 @@ def test_clone_and_remote_creation_do_not_inherit_implicit_effects(service_setup
     with pytest.raises(ValueError):SourceRequest(mode='adopt',name='copy',path='/tmp/copy',branch='main')
     with pytest.raises(ValueError):SourceRequest(mode='create',name='copy',path='/tmp/copy',branch='main',remote_url='https://example.test/repo.git')
     s=service_setup;records=operations(s)
-    with pytest.raises(RunConflict):records.prepare(202,'remote-original',SourceRequest(mode='create_remote',name='remote',remote_owner='owner',private=True))
-    remote=records.prepare(202,'remote-original',SourceRequest(mode='create_remote',name='remote',remote_owner='owner',private=True),remote_identity='a'*64)
+    with pytest.raises(RunConflict):records.prepare(202,'remote-original',SourceRequest(mode='create_remote',name='remote',remote_owner='owner',private=True,remote_server='https://forgejo.example/api/v1'))
+    remote=records.prepare(202,'remote-original',SourceRequest(mode='create_remote',name='remote',remote_owner='owner',private=True,remote_server='https://forgejo.example/api/v1'),remote_identity='a'*64)
     assert remote['request']['private'] is True and remote['request']['path'] is None
     assert not (s.root/'remote').exists()
 

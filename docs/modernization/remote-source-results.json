@@ -1,0 +1,49 @@
+{
+  "base_commit": "2687ebc",
+  "principal_tests": {
+    "passed": 11,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 15.131,
+    "cases": [
+      "test_remote_creation_preserves_namespace_visibility_and_single_original_write[fixture-user-True-False]",
+      "test_remote_creation_preserves_namespace_visibility_and_single_original_write[research-False-False]",
+      "test_remote_creation_preserves_namespace_visibility_and_single_original_write[research-True-True]",
+      "test_remote_preflight_errors_never_become_absence_or_namespace_fallback[existing]",
+      "test_remote_preflight_errors_never_become_absence_or_namespace_fallback[forbidden]",
+      "test_remote_preflight_errors_never_become_absence_or_namespace_fallback[server_error]",
+      "test_remote_preflight_errors_never_become_absence_or_namespace_fallback[wrong_user]",
+      "test_remote_stop_closes_local_transport_but_preserves_unknown_server_outcome[individual]",
+      "test_remote_stop_closes_local_transport_but_preserves_unknown_server_outcome[project_bodyless]",
+      "test_remote_stop_closes_local_transport_but_preserves_unknown_server_outcome[project_observed]",
+      "test_cancellation_during_http_owner_handoff_closes_the_original_record_without_requests"
+    ]
+  },
+  "shared_source_tests": {
+    "passed": 65,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 57.396,
+    "note": "Before final error-copy and atomic-handoff test additions; final installed receipt covers all current source bytes."
+  },
+  "frontend": {
+    "passed": 116,
+    "failed": 0,
+    "build": "passed; Vite4.90s; inherited large-chunk notice"
+  },
+  "browser": {
+    "evidence": "docs/design/audits/2026-11-06-remote-source/evidence.json",
+    "captures": 5,
+    "scoped_axe_violations": 0,
+    "page_errors": 0,
+    "admin_posts": 1,
+    "readonly_observations": 1,
+    "remote_posts": 1,
+    "git_writes": 0,
+    "native_runs": 0
+  },
+  "real_model_turns": 0,
+  "user_remote_writes": 0,
+  "limits": "Controlled verified TLS Forgejo contract, not a full user Forgejo instance or global suite. Source/core/page acceptance, partial local repair, cross-browser history and restore remain open.",
+  "installed_package": "docs/modernization/remote-source-packaging.json"
+}

@@ -5,6 +5,22 @@ import {test} from 'node:test'
 /** Exercise persistence boundaries with the same API as real browser storage. */
 function storage(){const values=new Map<string,string>();return {getItem:(key:string)=>values.get(key)??null,setItem:(key:string,value:string)=>{values.set(key,value)},removeItem:(key:string)=>{values.delete(key)}}}
 
+test('remote creation retains explicit server namespace and visibility without inventing local Git scope',async()=>{
+ const {prepareSource,sourcePackets,sendSource}=await import('../src/api/sourceOperations.ts')
+ const input={mode:'create_remote' as const,name:'empty',remote_server:'https://forgejo.example/api/v1',remote_owner:'research',private:false}
+ const packet=prepareSource(202,input),saved=storage(),previous=globalThis.fetch
+ assert.equal(packet.body.path,null);assert.equal(packet.body.branch,null);assert.equal(packet.body.remote_url,null)
+ sourcePackets.save(saved,packet)
+ assert.deepEqual(sourcePackets.load(saved,202),packet)
+ const {operation_key,...request}=packet.body
+ try{globalThis.fetch=async(_url,options)=>{const sent=JSON.parse(String(options?.body));assert.equal(sent.remote_server,input.remote_server);assert.equal(sent.remote_owner,'research');assert.equal(sent.private,false);return Response.json({project_id:202,operation_key,operation_id:'a'.repeat(32),fence:1,request,status:'completed',repository_id:null,observation:null})}
+  assert.equal((await sendSource(packet)).repository_id,null)
+  globalThis.fetch=async()=>Response.json({project_id:202,operation_key,operation_id:'a'.repeat(32),fence:1,request:{...request,remote_server:'https://other.example/api/v1'}})
+  await assert.rejects(sendSource(packet),/original/)
+ }finally{globalThis.fetch=previous}
+ for(const change of [{private:undefined},{remote_server:undefined},{path:'/managed/empty'},{branch:'main'},{use_configured_auth:true}])assert.throws(()=>prepareSource(202,{...input,...change}))
+})
+
 test('an uncertain source reply preserves exactly the original create request after reload',async()=>{
  const {prepareSource,sourcePackets,sendSource}=await import('../src/api/sourceOperations.ts')
  const packet=prepareSource(202,{mode:'create',name:'fresh',path:'/managed/fresh',branch:'main'}),saved=storage(),previous=globalThis.fetch,sent:unknown[]=[]
