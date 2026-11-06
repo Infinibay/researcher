@@ -7,9 +7,11 @@ permission, proof of physical closure or authority inferred from a message.
 from contextlib import contextmanager
 from contextvars import ContextVar
 
-from backend.engine.base import AgentKilledError
-
 _scope = ContextVar("legacy_controller_stop_scope", default=None)
+
+
+class LegacyControllerStopped(RuntimeError):
+    """Interrupt the retained controller's cooperative call tree without claiming its worker or external effects have physically closed."""
 
 
 @contextmanager
@@ -32,6 +34,6 @@ def check_legacy_stop(project_id):
     if bound[0] != project_id:
         raise ValueError("Legacy controller/project scope mismatch")
     if bound[1].is_set():
-        raise AgentKilledError(
+        raise LegacyControllerStopped(
             "Legacy controller requested stop; the returned request does not authorize more work"
         )

@@ -16,7 +16,29 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: controles generales conectados al runtime nativo
+## Etapa actual: motor de inferencia antiguo retirado
+
+Se eliminan doce módulos de `backend.engine` y sus pruebas específicas; los
+consumidores reales de la señal de parada pasan a `runtime.legacy_scope`.
+Se conservan datos históricos y control de trabajadores registrados. Los imports
+de ejecución antigua ya no tienen implementación disponible en el wheel.
+[Contrato, reemplazos y límites](../architecture/legacy-engine-removal.md).
+
+**Comprobado:** 137 pruebas relacionadas pasan y una prueba de migración sin
+modificar falla por su fixture53/55; queda en migraciones. El paquete instalado
+pasa 32 pruebas, incluyendo investigación/planificación controladas, con 814 fuentes
+coincidentes y sin el paquete retirado. Ocho definiciones documentadas.
+Prompts: 560 candidatos / 500 archivos, 18 entradas archivadas, 0 revisiones pendientes.
+No se repitió la suite global ni cambió la aceptación de las doce páginas.
+Las cifras históricas de fallos no describen el inventario actual tras retirar
+157 funciones de prueba obsoletas; esa retirada no se cuenta como reparación.
+
+**Siguiente principal:** consumidores del catálogo/herramientas legacy y sus
+dependencias; después los bloques restantes de operación, migraciones/restore,
+historial/presupuestos, CLI, evaluación real/humana y aceptación global.
+Los detalles DD046 se conservan para después de todas las tareas principales.
+
+## Etapa anterior: controles generales conectados al runtime nativo
 
 La cabecera consulta actividad real registrada y deja de decidir por etiquetas
 `completed`/`executing`. La detención conserva su solicitud exacta después de

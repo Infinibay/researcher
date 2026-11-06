@@ -194,294 +194,6 @@
       ],
       "conflicts": []
     },
-    "backend/engine/engine_logging.py::log_prompt": {
-      "dependencies_sha256": "d238f7b2df2f3cf11d431f1bd16027e466ef7d112c9551cdf0d04dde829b7e4a",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/engine/engine_logging.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    "backend/engine/loop_context.py::build_iteration_prompt": {
-      "dependencies_sha256": "131c42f6049359d449b51e2723b91b1ee30c587dea8c41b7dd1a4a7ad223caa4",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/engine/loop_context.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    "backend/engine/loop_context.py::build_tools_prompt_section": {
-      "dependencies_sha256": "131c42f6049359d449b51e2723b91b1ee30c587dea8c41b7dd1a4a7ad223caa4",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/engine/loop_context.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    "backend/engine/loop_engine.py::_summarize_step.summarizer_prompt@169": {
-      "dependencies_sha256": "7c636d64b0f604e2b22aab6cd6f8669c70662b69db0c82bf3ddb296e3a331ace",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/engine/loop_engine.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    "backend/engine/loop_engine.py::LoopEngine.execute.system_prompt@387": {
-      "dependencies_sha256": "7c636d64b0f604e2b22aab6cd6f8669c70662b69db0c82bf3ddb296e3a331ace",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/engine/loop_engine.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    "backend/engine/loop_engine.py::LoopEngine._apply_guardrail.feedback_prompt@1106": {
-      "dependencies_sha256": "7c636d64b0f604e2b22aab6cd6f8669c70662b69db0c82bf3ddb296e3a331ace",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/engine/loop_engine.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    "backend/engine/loop_engine.py::LoopEngine.execute.system_prompt@557": {
-      "dependencies_sha256": "7c636d64b0f604e2b22aab6cd6f8669c70662b69db0c82bf3ddb296e3a331ace",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/engine/loop_engine.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    "backend/engine/loop_models.py::StepOperation.description": {
-      "dependencies_sha256": "eb064d0d8c9d89abb37316e35cde56bed7bebea77ba88963073ca6c2f3a66e35",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/engine/loop_models.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    "backend/engine/loop_tools.py::description@63": {
-      "dependencies_sha256": "8d12bd04f58b24b768e20fa56cc9f09ecea8f8c904907579550e4921ea913fa3",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/engine/loop_tools.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    "backend/engine/loop_tools.py::description@117": {
-      "dependencies_sha256": "8d12bd04f58b24b768e20fa56cc9f09ecea8f8c904907579550e4921ea913fa3",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/engine/loop_tools.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    "backend/engine/loop_tools.py::description@139": {
-      "dependencies_sha256": "8d12bd04f58b24b768e20fa56cc9f09ecea8f8c904907579550e4921ea913fa3",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/engine/loop_tools.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    "backend/engine/loop_tools.py::description@74": {
-      "dependencies_sha256": "8d12bd04f58b24b768e20fa56cc9f09ecea8f8c904907579550e4921ea913fa3",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/engine/loop_tools.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    "backend/engine/loop_tools.py::description@82": {
-      "dependencies_sha256": "8d12bd04f58b24b768e20fa56cc9f09ecea8f8c904907579550e4921ea913fa3",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/engine/loop_tools.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    "backend/engine/loop_tools.py::description@88": {
-      "dependencies_sha256": "8d12bd04f58b24b768e20fa56cc9f09ecea8f8c904907579550e4921ea913fa3",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/engine/loop_tools.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    "backend/engine/loop_tools.py::description@104": {
-      "dependencies_sha256": "8d12bd04f58b24b768e20fa56cc9f09ecea8f8c904907579550e4921ea913fa3",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/engine/loop_tools.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    "backend/engine/loop_tools.py::description@126": {
-      "dependencies_sha256": "8d12bd04f58b24b768e20fa56cc9f09ecea8f8c904907579550e4921ea913fa3",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/engine/loop_tools.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    "backend/engine/loop_tools.py::description@148": {
-      "dependencies_sha256": "8d12bd04f58b24b768e20fa56cc9f09ecea8f8c904907579550e4921ea913fa3",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/engine/loop_tools.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    "backend/engine/tool_call_parser.py::parse_step_complete_args.description@263": {
-      "dependencies_sha256": "8231de952874b35240979735e87ee98885a72163e68cb10c3f9bb1d9f132936b",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/engine/tool_call_parser.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
     "backend/flows/helpers/messaging.py::build_enriched_message.description@146": {
       "dependencies_sha256": "13b7eb5828aebe24c213de0ce2619304e6d9661596565ec657b39ee02d9fbae6",
       "decision": "pending_legacy_removal",
@@ -3632,28 +3344,30 @@
       "conflicts": []
     },
     "backend/runtime/run_inputs.py::conversation_history": {
-      "dependencies_sha256": "a6aba20e6c8f88129649851e7bb09365d2658c72c84f711d24c770742cce78cf",
+      "dependencies_sha256": "fdd0a5e5f761247666e1d1fbbe88139cf7a4cb3ffa6b8d9511e07ca5705cef7b",
       "decision": "retained_input_renderer",
-      "rationale": "Preserve exact attributed request/task/corrections/history/prerequisites as data. Reject excess material rather than silently summarize or claim shared understanding. User content is not rewritten as developer policy.",
+      "rationale": "Preserve exact attributed request/task/corrections/history/prerequisites as data. Reject excess material rather than silently summarize or claim shared understanding. User content is not rewritten as developer policy. Rechecked after agent_runs was added to OwnerRuntimeView: the read-only roster projection changes the direct-consumer module hash but does not change conversation_history, freeze_input, their call sites or attributed input policy.",
       "evidence": [
         "backend/runtime/run_inputs.py",
         "backend/runtime/sqlite_runs.py",
         "backend/tests/runtime/test_run_input.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "backend/runtime/views.py"
       ],
       "conflicts": []
     },
     "backend/runtime/run_inputs.py::freeze_input": {
-      "dependencies_sha256": "a6aba20e6c8f88129649851e7bb09365d2658c72c84f711d24c770742cce78cf",
+      "dependencies_sha256": "fdd0a5e5f761247666e1d1fbbe88139cf7a4cb3ffa6b8d9511e07ca5705cef7b",
       "decision": "retained_input_renderer",
-      "rationale": "Preserve exact attributed request/task/corrections/history/prerequisites as data. Reject excess material rather than silently summarize or claim shared understanding. User content is not rewritten as developer policy.",
+      "rationale": "Preserve exact attributed request/task/corrections/history/prerequisites as data. Reject excess material rather than silently summarize or claim shared understanding. User content is not rewritten as developer policy. Rechecked after agent_runs was added to OwnerRuntimeView: the read-only roster projection changes the direct-consumer module hash but does not change conversation_history, freeze_input, their call sites or attributed input policy.",
       "evidence": [
         "backend/runtime/run_inputs.py",
         "backend/runtime/sqlite_runs.py",
         "backend/tests/runtime/test_run_input.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "backend/runtime/views.py"
       ],
       "conflicts": []
     },
@@ -9465,6 +9179,314 @@
         "evals/prompts/cases.json"
       ],
       "conflicts": []
+    }
+  },
+  "retired_entries": {
+    "backend/engine/engine_logging.py::log_prompt": {
+      "dependencies_sha256": "d238f7b2df2f3cf11d431f1bd16027e466ef7d112c9551cdf0d04dde829b7e4a",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/engine/engine_logging.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Source module removed after native execution caller migration; see docs/modernization/engine-removal-inventory.json. Historical review preserved, no current model policy."
+    },
+    "backend/engine/loop_context.py::build_iteration_prompt": {
+      "dependencies_sha256": "131c42f6049359d449b51e2723b91b1ee30c587dea8c41b7dd1a4a7ad223caa4",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/engine/loop_context.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Source module removed after native execution caller migration; see docs/modernization/engine-removal-inventory.json. Historical review preserved, no current model policy."
+    },
+    "backend/engine/loop_context.py::build_tools_prompt_section": {
+      "dependencies_sha256": "131c42f6049359d449b51e2723b91b1ee30c587dea8c41b7dd1a4a7ad223caa4",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/engine/loop_context.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Source module removed after native execution caller migration; see docs/modernization/engine-removal-inventory.json. Historical review preserved, no current model policy."
+    },
+    "backend/engine/loop_engine.py::_summarize_step.summarizer_prompt@169": {
+      "dependencies_sha256": "7c636d64b0f604e2b22aab6cd6f8669c70662b69db0c82bf3ddb296e3a331ace",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/engine/loop_engine.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Source module removed after native execution caller migration; see docs/modernization/engine-removal-inventory.json. Historical review preserved, no current model policy."
+    },
+    "backend/engine/loop_engine.py::LoopEngine.execute.system_prompt@387": {
+      "dependencies_sha256": "7c636d64b0f604e2b22aab6cd6f8669c70662b69db0c82bf3ddb296e3a331ace",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/engine/loop_engine.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Source module removed after native execution caller migration; see docs/modernization/engine-removal-inventory.json. Historical review preserved, no current model policy."
+    },
+    "backend/engine/loop_engine.py::LoopEngine._apply_guardrail.feedback_prompt@1106": {
+      "dependencies_sha256": "7c636d64b0f604e2b22aab6cd6f8669c70662b69db0c82bf3ddb296e3a331ace",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/engine/loop_engine.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Source module removed after native execution caller migration; see docs/modernization/engine-removal-inventory.json. Historical review preserved, no current model policy."
+    },
+    "backend/engine/loop_engine.py::LoopEngine.execute.system_prompt@557": {
+      "dependencies_sha256": "7c636d64b0f604e2b22aab6cd6f8669c70662b69db0c82bf3ddb296e3a331ace",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/engine/loop_engine.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Source module removed after native execution caller migration; see docs/modernization/engine-removal-inventory.json. Historical review preserved, no current model policy."
+    },
+    "backend/engine/loop_models.py::StepOperation.description": {
+      "dependencies_sha256": "eb064d0d8c9d89abb37316e35cde56bed7bebea77ba88963073ca6c2f3a66e35",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/engine/loop_models.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Source module removed after native execution caller migration; see docs/modernization/engine-removal-inventory.json. Historical review preserved, no current model policy."
+    },
+    "backend/engine/loop_tools.py::description@63": {
+      "dependencies_sha256": "8d12bd04f58b24b768e20fa56cc9f09ecea8f8c904907579550e4921ea913fa3",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/engine/loop_tools.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Source module removed after native execution caller migration; see docs/modernization/engine-removal-inventory.json. Historical review preserved, no current model policy."
+    },
+    "backend/engine/loop_tools.py::description@117": {
+      "dependencies_sha256": "8d12bd04f58b24b768e20fa56cc9f09ecea8f8c904907579550e4921ea913fa3",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/engine/loop_tools.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Source module removed after native execution caller migration; see docs/modernization/engine-removal-inventory.json. Historical review preserved, no current model policy."
+    },
+    "backend/engine/loop_tools.py::description@139": {
+      "dependencies_sha256": "8d12bd04f58b24b768e20fa56cc9f09ecea8f8c904907579550e4921ea913fa3",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/engine/loop_tools.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Source module removed after native execution caller migration; see docs/modernization/engine-removal-inventory.json. Historical review preserved, no current model policy."
+    },
+    "backend/engine/loop_tools.py::description@74": {
+      "dependencies_sha256": "8d12bd04f58b24b768e20fa56cc9f09ecea8f8c904907579550e4921ea913fa3",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/engine/loop_tools.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Source module removed after native execution caller migration; see docs/modernization/engine-removal-inventory.json. Historical review preserved, no current model policy."
+    },
+    "backend/engine/loop_tools.py::description@82": {
+      "dependencies_sha256": "8d12bd04f58b24b768e20fa56cc9f09ecea8f8c904907579550e4921ea913fa3",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/engine/loop_tools.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Source module removed after native execution caller migration; see docs/modernization/engine-removal-inventory.json. Historical review preserved, no current model policy."
+    },
+    "backend/engine/loop_tools.py::description@88": {
+      "dependencies_sha256": "8d12bd04f58b24b768e20fa56cc9f09ecea8f8c904907579550e4921ea913fa3",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/engine/loop_tools.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Source module removed after native execution caller migration; see docs/modernization/engine-removal-inventory.json. Historical review preserved, no current model policy."
+    },
+    "backend/engine/loop_tools.py::description@104": {
+      "dependencies_sha256": "8d12bd04f58b24b768e20fa56cc9f09ecea8f8c904907579550e4921ea913fa3",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/engine/loop_tools.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Source module removed after native execution caller migration; see docs/modernization/engine-removal-inventory.json. Historical review preserved, no current model policy."
+    },
+    "backend/engine/loop_tools.py::description@126": {
+      "dependencies_sha256": "8d12bd04f58b24b768e20fa56cc9f09ecea8f8c904907579550e4921ea913fa3",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/engine/loop_tools.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Source module removed after native execution caller migration; see docs/modernization/engine-removal-inventory.json. Historical review preserved, no current model policy."
+    },
+    "backend/engine/loop_tools.py::description@148": {
+      "dependencies_sha256": "8d12bd04f58b24b768e20fa56cc9f09ecea8f8c904907579550e4921ea913fa3",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/engine/loop_tools.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Source module removed after native execution caller migration; see docs/modernization/engine-removal-inventory.json. Historical review preserved, no current model policy."
+    },
+    "backend/engine/tool_call_parser.py::parse_step_complete_args.description@263": {
+      "dependencies_sha256": "8231de952874b35240979735e87ee98885a72163e68cb10c3f9bb1d9f132936b",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/engine/tool_call_parser.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Source module removed after native execution caller migration; see docs/modernization/engine-removal-inventory.json. Historical review preserved, no current model policy."
     }
   }
 }

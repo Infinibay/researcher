@@ -1,0 +1,16 @@
+{
+  "base_commit": "62bb67b",
+  "tests": 138,
+  "passed": 137,
+  "failures": [
+    {
+      "name": "backend.tests.runtime.test_code_flow_cutover::test_task_cutover_migration_is_atomic_repeatable_and_preserves_history",
+      "message": "assert 55 == 53"
+    }
+  ],
+  "skipped": 0,
+  "seconds": 36.383,
+  "scope": "Focused source runtime/session/controller/cutover tests in the native dependency environment; no real model calls. Not the full suite.",
+  "remaining_failure": "Unchanged schema54 fixture excludes only migration54 and therefore still installs pre-existing model settings migration55; it asserts53. Preserve the test failure for principal migration/restore work, do not weaken migration guards.",
+  "failing_fixture_unchanged_from_base": true
+}

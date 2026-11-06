@@ -318,7 +318,11 @@
         "backend/tests/runtime/test_run_recovery.py",
         "backend/tests/runtime/test_runtime_service.py",
         "evals/runtime/run_crash_recovery.py",
-        "frontend/tests/runtime.test.ts"
+        "frontend/tests/runtime.test.ts",
+        "docs/architecture/legacy-engine-removal.md",
+        "docs/modernization/engine-removal-results.json",
+        "docs/modernization/engine-removal-packaging.json",
+        "backend/tests/runtime/test_legacy_engine_removal.py"
       ]
     },
     "E02": {
@@ -367,7 +371,11 @@
         "docs/modernization/native-proxy-evidence.json",
         "docs/modernization/native-proxy-results.json",
         "backend/tests/runtime/test_native_proxy.py",
-        "backend/tests/runtime/test_native_proxy_lifecycle.py"
+        "backend/tests/runtime/test_native_proxy_lifecycle.py",
+        "docs/architecture/legacy-engine-removal.md",
+        "docs/modernization/engine-removal-results.json",
+        "docs/modernization/engine-removal-packaging.json",
+        "backend/tests/runtime/test_legacy_engine_removal.py"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -499,7 +507,11 @@
         "frontend/src/components/layout/ProjectExecutionControls.tsx",
         "frontend/tests/project-controls.browser.mjs",
         "docs/design/audits/2026-11-06-project-controls/report.md",
-        "docs/design/audits/2026-11-06-project-controls/evidence.json"
+        "docs/design/audits/2026-11-06-project-controls/evidence.json",
+        "docs/architecture/legacy-engine-removal.md",
+        "docs/modernization/engine-removal-results.json",
+        "docs/modernization/engine-removal-packaging.json",
+        "backend/tests/runtime/test_legacy_engine_removal.py"
       ],
       "remaining": [
         "Durable product startup/shutdown and all tool lifecycle integration; old flows are not covered by owned command evidence",
@@ -772,7 +784,11 @@
         "docs/modernization/semantic-product-evidence.json",
         "backend/tests/research/test_semantic_retrieval.py",
         "backend/tests/research/test_semantic_worker.py",
-        "backend/tests/research/test_retrieval_assets.py"
+        "backend/tests/research/test_retrieval_assets.py",
+        "docs/architecture/legacy-engine-removal.md",
+        "docs/modernization/engine-removal-results.json",
+        "docs/modernization/engine-removal-packaging.json",
+        "backend/tests/runtime/test_legacy_engine_removal.py"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -812,7 +828,11 @@
         "docs/modernization/semantic-product-evidence.json",
         "backend/tests/research/test_semantic_retrieval.py",
         "backend/tests/research/test_semantic_worker.py",
-        "backend/tests/research/test_retrieval_assets.py"
+        "backend/tests/research/test_retrieval_assets.py",
+        "docs/architecture/legacy-engine-removal.md",
+        "docs/modernization/engine-removal-results.json",
+        "docs/modernization/engine-removal-packaging.json",
+        "backend/tests/runtime/test_legacy_engine_removal.py"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -1437,7 +1457,12 @@
     },
     "U07": {
       "status": "pending",
-      "evidence": []
+      "evidence": [
+        "docs/architecture/legacy-engine-removal.md",
+        "docs/modernization/engine-removal-results.json",
+        "docs/modernization/engine-removal-packaging.json",
+        "backend/tests/runtime/test_legacy_engine_removal.py"
+      ]
     },
     "U08": {
       "status": "pending",

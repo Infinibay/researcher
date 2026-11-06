@@ -1,0 +1,313 @@
+{
+  "base_commit": "62bb67b61bdbf4fbe9dea4bada669fda616d5d8c",
+  "reason": "Native owner service has replaced all execution callers; remove the unreachable old model loop, pseudo-tools and algorithm-specific tests. This is retirement, not a claim that their historical failures were fixed. Historical database records stay unchanged.",
+  "removed_files": [
+    {
+      "path": "backend/engine/__init__.py",
+      "sha256": "36b2fdd9275156ce2e10c92ccf89c3d2f201d4c9d9882ccdf5f70fbe558d6afa",
+      "lines": 28,
+      "test_functions": []
+    },
+    {
+      "path": "backend/engine/base.py",
+      "sha256": "d16371797b26647e9c4dda164ca2f893dc546422a59f01e647666b99329f258e",
+      "lines": 57,
+      "test_functions": []
+    },
+    {
+      "path": "backend/engine/engine_logging.py",
+      "sha256": "4048cfa4f6f7dd384a67a118698158f45927bf88b4d64d1ca3e6305db5d324c9",
+      "lines": 211,
+      "test_functions": []
+    },
+    {
+      "path": "backend/engine/file_change_tracker.py",
+      "sha256": "a5cbd24f210e134713d8ce71ddfd646c08b1eca2299a0ca75c4d187bb3ab0d34",
+      "lines": 110,
+      "test_functions": []
+    },
+    {
+      "path": "backend/engine/llm_client.py",
+      "sha256": "8d79725a00d9dce6746a346c48b2a6dffb1bafca8c4fda1c08f94bb2f74c59f7",
+      "lines": 75,
+      "test_functions": []
+    },
+    {
+      "path": "backend/engine/loop_context.py",
+      "sha256": "6b0b35ed23dcb944a909396c30adb0f43a66c97a855031e037af04e859e595ce",
+      "lines": 417,
+      "test_functions": []
+    },
+    {
+      "path": "backend/engine/loop_engine.py",
+      "sha256": "7f6801d87dcbac10e310ff964756b97abb30bd3ff90ca546699c3740f47d14f1",
+      "lines": 1182,
+      "test_functions": []
+    },
+    {
+      "path": "backend/engine/loop_models.py",
+      "sha256": "5f35af538443e5b693992528e21adf38ac708c5189f3bfbc910e0e746ea7cc1f",
+      "lines": 202,
+      "test_functions": []
+    },
+    {
+      "path": "backend/engine/loop_tools.py",
+      "sha256": "0b53a1bcd5a3147ac3431b6f365e4063886cad82ba401b5026e883a061763ca6",
+      "lines": 307,
+      "test_functions": []
+    },
+    {
+      "path": "backend/engine/summarizer.py",
+      "sha256": "2f7fe86f94290aa99116de7961564e06bb9db19272d7283fff343e6445ab05d3",
+      "lines": 180,
+      "test_functions": []
+    },
+    {
+      "path": "backend/engine/tool_call_parser.py",
+      "sha256": "15b0a9d51e54c535a6be82ab8da7833433f19c69f90a3139b79ab36010e56162",
+      "lines": 273,
+      "test_functions": []
+    },
+    {
+      "path": "backend/engine/tool_executor.py",
+      "sha256": "09609157a737967b67e23a8d61128fc9a2a147fe91b1016f09cc340e3a2f16c9",
+      "lines": 356,
+      "test_functions": []
+    },
+    {
+      "path": "backend/tests/engine/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "lines": 0,
+      "test_functions": []
+    },
+    {
+      "path": "backend/tests/engine/test_file_change_tracker.py",
+      "sha256": "c3a3d978d58f056a3800b08552331a0648bfcef43ad0fa1c5381111e8a96fd5e",
+      "lines": 137,
+      "test_functions": [
+        "test_tracks_original_and_current",
+        "test_new_file_original_is_empty",
+        "test_multiple_edits_preserve_original",
+        "test_returns_diff",
+        "test_inactive_returns_none",
+        "test_generates_unified_diff",
+        "test_returns_none_for_untracked",
+        "test_returns_none_when_no_change",
+        "test_increments",
+        "test_created_when_original_empty",
+        "test_modified_when_original_nonempty",
+        "test_records_and_retrieves",
+        "test_empty_for_untracked",
+        "test_blank_reason_ignored",
+        "test_stops_recording",
+        "test_clears_all_state"
+      ]
+    },
+    {
+      "path": "backend/tests/engine/test_llm_client.py",
+      "sha256": "fb0f59a376f025804e017b5e381b2784cf0bd0a6491c97090603da060d21a0fd",
+      "lines": 65,
+      "test_functions": [
+        "test_connection_error_is_transient",
+        "test_timeout_is_transient",
+        "test_rate_limit_is_transient",
+        "test_503_is_transient",
+        "test_429_is_transient",
+        "test_unknown_error_not_transient",
+        "test_permanent_overrides_transient",
+        "test_not_found_is_permanent",
+        "test_tool_choice_not_supported_is_permanent",
+        "test_detects_invalid_json",
+        "test_detects_parse_error",
+        "test_detects_unterminated_string",
+        "test_normal_error_not_malformed",
+        "test_old_call_requires_native_admission"
+      ]
+    },
+    {
+      "path": "backend/tests/engine/test_loop_engine.py",
+      "sha256": "eb8fbcf016fc4e08312f2e692854a65e3645ecf5ff7e8a9f048acb46874b5bb4",
+      "lines": 1437,
+      "test_functions": [
+        "test_defaults",
+        "test_all_statuses",
+        "test_add",
+        "test_remove_no_description",
+        "test_empty_plan",
+        "test_active_step",
+        "test_advance",
+        "test_advance_last_step",
+        "test_render",
+        "test_add_operation",
+        "test_modify_operation",
+        "test_remove_operation",
+        "test_remove_cannot_remove_done",
+        "test_mixed_operations",
+        "test_add_replaces_existing_index",
+        "test_empty_ops_no_change",
+        "test_sorted_after_operations",
+        "test_has_pending_with_pending",
+        "test_has_pending_with_active",
+        "test_no_pending_all_done",
+        "test_no_pending_empty",
+        "test_mark_active_done",
+        "test_activate_next",
+        "test_mark_then_activate",
+        "test_defaults",
+        "test_with_operations",
+        "test_defaults",
+        "test_tool_to_openai_schema",
+        "test_build_tool_schemas_includes_step_complete",
+        "test_build_tool_schemas_empty_tools",
+        "test_build_tool_dispatch",
+        "test_execute_tool_call_unknown",
+        "test_execute_tool_call_bad_json",
+        "test_execute_tool_call_success",
+        "test_execute_tool_call_rejects_extra_kwargs",
+        "test_execute_tool_call_exception",
+        "test_build_system_prompt",
+        "test_build_iteration_prompt_no_plan",
+        "test_build_iteration_prompt_with_plan_and_history",
+        "test_build_iteration_prompt_no_expected_output",
+        "test_all_done_shows_completion_prompt",
+        "test_basic_args",
+        "test_done_with_final_answer",
+        "test_with_next_steps",
+        "test_dict_input",
+        "test_bad_json",
+        "test_empty_string",
+        "test_malformed_next_steps_ignored",
+        "test_simple_done_in_one_step",
+        "test_multi_step_execution",
+        "test_tool_calling",
+        "test_tool_and_step_complete_in_same_response",
+        "test_blocked_status",
+        "test_iteration_limit",
+        "test_history_window",
+        "test_all_done_allows_one_more_iteration",
+        "test_next_steps_extend_plan",
+        "test_text_response_becomes_fallback",
+        "test_planning_uses_required_tool_choice",
+        "test_fallback_when_required_still_returns_text",
+        "test_same_tool_loop_gets_nudged",
+        "test_same_tool_force_break_after_nudge_fails",
+        "test_different_tools_no_repetition_trigger",
+        "test_loop_engine_registered"
+      ]
+    },
+    {
+      "path": "backend/tests/engine/test_loop_tools_new.py",
+      "sha256": "7fa9650daa6c03d2b48bc9868d723dce3a623bfeadccf5c779912850b76a8406",
+      "lines": 139,
+      "test_functions": [
+        "test_includes_pseudo_tools",
+        "test_add_note_schema_structure",
+        "test_think_schema_structure",
+        "test_includes_real_tools",
+        "test_resolves_tool_alias",
+        "test_all_aliases_defined",
+        "test_applies_parameter_alias",
+        "test_strips_metadata_params",
+        "test_metadata_params_set",
+        "test_detects_missing_required_params",
+        "test_unknown_tool_returns_error"
+      ]
+    },
+    {
+      "path": "backend/tests/engine/test_new_models.py",
+      "sha256": "f2c5f990f207fc4433f00fe22840a430d727f4d6a5a87afa76bbfe7dd72031e4",
+      "lines": 242,
+      "test_functions": [
+        "test_creation_defaults",
+        "test_tick_decrements_ttl",
+        "test_tick_clamps_to_zero",
+        "test_expired_when_ttl_zero",
+        "test_not_expired_when_ttl_positive",
+        "test_pinned_never_expires",
+        "test_pinned_tick_is_noop",
+        "test_basic_cache",
+        "test_max_size_rejection",
+        "test_lru_eviction",
+        "test_pinned_files_not_evicted",
+        "test_refresh_marks_pinned",
+        "test_refresh_new_file",
+        "test_refresh_oversized_removes",
+        "test_ages_and_removes_expired",
+        "test_pinned_files_survive",
+        "test_new_fields",
+        "test_defaults",
+        "test_explore_status",
+        "test_default_status",
+        "test_done_with_final_answer",
+        "test_preserves_done_steps",
+        "test_add_replaces_pending",
+        "test_remove_skips_pending",
+        "test_modify",
+        "test_steps_sorted_after_operations"
+      ]
+    },
+    {
+      "path": "backend/tests/engine/test_summarizer.py",
+      "sha256": "d06670d680c1c74e5da9d814da3720c6ed52a71771189da73c24a7aa0ef0954f",
+      "lines": 118,
+      "test_functions": [
+        "test_empty_history_returns_empty",
+        "test_no_plan_returns_empty",
+        "test_extracts_modified_files",
+        "test_identifies_technical_decisions",
+        "test_detects_error_at_index_zero",
+        "test_resolved_errors",
+        "test_extracts_pending_work",
+        "test_respects_budget"
+      ]
+    },
+    {
+      "path": "backend/tests/engine/test_tool_executor.py",
+      "sha256": "f94e7c8347110881ba8973bdd95361891a425b955046c6fd1aae05f41fc6f37f",
+      "lines": 194,
+      "test_functions": [
+        "test_groups_reads_together",
+        "test_writes_get_own_batch",
+        "test_consecutive_reads_before_write",
+        "test_empty_calls",
+        "test_multiple_writes_sequential",
+        "test_executes_and_returns_in_order",
+        "test_single_call",
+        "test_caches_read_file",
+        "test_caches_create_file_pinned",
+        "test_caches_edit_file_pinned",
+        "test_does_not_cache_error_result",
+        "test_reads_file_before_mutation",
+        "test_returns_none_for_non_file_tools",
+        "test_returns_none_for_new_file",
+        "test_returns_none_when_inactive",
+        "test_file_change_tools_contains_expected",
+        "test_write_tools_superset_of_file_change_tools",
+        "test_write_tools_contains_git_and_command"
+      ]
+    }
+  ],
+  "replacement_suites": [
+    "backend/tests/runtime/test_legacy_engine_removal.py",
+    "backend/tests/runtime/test_codex_session.py",
+    "backend/tests/runtime/test_runtime_service.py",
+    "backend/tests/runtime/test_project_producer_retirement.py",
+    "backend/tests/runtime/test_project_owner_cutover.py",
+    "backend/tests/runtime/test_code_flow_cutover.py",
+    "backend/tests/runtime/test_owned_planning.py",
+    "backend/tests/runtime/test_owned_factory.py"
+  ],
+  "limits": "No full native scenario acceptance follows from removal. Legacy tool schemas/dependencies and actual registered controllers still remain.",
+  "replaced_boundary_tests": [
+    "test_actual_old_engine_refuses_native_project_before_model_configuration",
+    "test_old_engine_rechecks_after_a_model_reply_before_using_its_output",
+    "test_legacy_stop_signal_during_model_reply_blocks_following_effects"
+  ],
+  "production_import_scan": {
+    "scope": "All backend/ and scripts/ .py files excluding tests; AST import/import-from and literal backend.engine text checked",
+    "remaining_consumers": [],
+    "files_scanned": 500,
+    "resolved_import_references": [],
+    "limits": "Direct and relative imports plus literal references. Generated import names are not a complete dynamic call-graph proof; actual owner/startup paths are separately tested."
+  }
+}

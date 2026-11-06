@@ -7,23 +7,20 @@ from types import SimpleNamespace
 import pytest
 
 
-@pytest.mark.parametrize('entry', ['config','params','probe','client'])
+@pytest.mark.parametrize('entry', ['config','params','probe'])
 def test_legacy_provider_ports_reject_before_model_construction_or_generation(monkeypatch, entry):
     """An available old API key or installed provider must never become a billing fallback for native subscription work."""
-    import crewai
-
     from backend.config import llm, model_capabilities
-    from backend.engine.llm_client import call_llm
     from backend.runtime.lifecycle import NativeOwnerRequired
 
     def forbidden(*_args, **_kwargs):
         """Make every old provider invocation observable without making a network request."""
         pytest.fail('Retired provider was invoked')
 
-    monkeypatch.setattr(crewai,'LLM',forbidden)
+    monkeypatch.setitem(sys.modules,'crewai',SimpleNamespace(LLM=forbidden))
     monkeypatch.setitem(sys.modules,'litellm',SimpleNamespace(completion=forbidden,acompletion=forbidden))
     llm._reset_llm_cache()
-    call = {'config':llm.get_llm,'params':llm.get_litellm_params,'probe':lambda:model_capabilities.probe_model({'model':'old-provider'}),'client':lambda:call_llm({'model':'old-provider'},[{'role':'user','content':'Never send this'}])}[entry]
+    call = {'config':llm.get_llm,'params':llm.get_litellm_params,'probe':lambda:model_capabilities.probe_model({'model':'old-provider'})}[entry]
     with pytest.raises(NativeOwnerRequired):
         call()
 

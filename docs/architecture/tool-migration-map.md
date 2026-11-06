@@ -503,3 +503,13 @@ no forma parte del catálogo MCP del modelo. Configura futuros intentos, sin dar
 herramientas/credenciales/permisos. El runtime conserva una elección por intento y
 comprueba `model/list` en su conexión real antes de thread/turn.
 [Contrato](model-configuration.md), [resultados](../modernization/model-settings-results.json).
+
+## Motor antiguo eliminado — 2026-11-06
+
+Los doce módulos de `backend.engine` ya no forman parte del código ni del wheel.
+Los consumidores de su excepción de Stop pasan a `runtime.legacy_scope`; se
+conservan controladores registrados e historia. El reemplazo de inferencia,
+herramientas y aceptación es el runtime nativo existente. Se retiran las pruebas
+de ese algoritmo sin contarlas como fallos reparados. El catálogo de herramientas
+legacy y sus dependencias permanecen como siguiente trabajo principal.
+[Contrato y verificación](legacy-engine-removal.md).

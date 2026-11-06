@@ -143,3 +143,12 @@ conservando errores y diferencia entre solicitud registrada y cierre físico.
 La consulta nativa, detención original y navegación ante respuesta tardía están
 comprobadas. La retirada del resto del engine, los estados físicos y la validación
 global siguen como trabajo principal; no se difieren aquí.
+
+## DD046 — estilo después de retirar el engine
+
+Después de todas las capacidades principales: ordenar el import local señalado
+por I001 en `test_legacy_engine_removal.py` y quitar la línea vacía final de
+`backend/tests/flows/conftest.py`. Los restantes once avisos de esos archivos son
+anteriores; no reabrir los ensayos de ejecución por estilo.
+La prueba de migración54 que instala55 al preparar53 sigue como fallo principal
+del bloque migraciones/restore, no como detalle diferido.

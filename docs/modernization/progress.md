@@ -6697,3 +6697,39 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
 - Final browser85180/build4841/unit79723 are terminal0. Verified owned Vite663838
   command and cwd before SIGINT; subsequent process inspection confirms absence.
   Restored only the generated tsbuildinfo. Protected untracked roots preserved.
+
+## 2026-11-06 — retirada del paquete de inferencia antiguo
+
+- Previous goal turn was progress: 62bb67b native global controls. Revalidated
+  managed branch and clean tracked source. Ken lookup/recall/blast radius gave
+  historical importers; current production imports found only two exception
+  consumers. No native execution caller still used the old loop.
+- Removed twelve backend.engine modules and eight algorithm-specific test files
+  (157 test functions), with exact source hashes/names preserved in the retirement
+  inventory. Migrated cooperative Stop to LegacyControllerStopped and kept actual
+  registered-worker control/history. Three obsolete boundary tests are replaced
+  by unavailable imports, scoped Stop and guards before/after native admission;
+  removed the singleton fixture. No database or historical state was deleted.
+- Initial regression:2FAIL/1PASS. Related final source suite:137PASS/1FAIL in
+  36.39s. The unchanged schema54 test fixture omits54 but installs existing55,
+  then asserts53. This is retained as principal migration/restore work; no global
+  green claim, and retiring obsolete test functions does not repair old failures.
+- Built from a fresh temporary source copy to avoid old build-directory remnants.
+  Replaced the scratch environment's f527215 wheel with current engine-removal
+  wheel. Installed proof:32PASS/0FAIL/0SKIP12.453s,814matching Python/SQL members,
+  241environment-only imports,85native-only distributions, no engine/test-engine
+  archive members. Controlled research and planning with actual kernel/broker/
+  SQLite;0realmodel/userdata effects. No frontend, global or real-model repeat.
+- Prompt inventory now560candidates/500sources. Archived18old-engine entries;
+  revalidated two stale input reviews caused by the previously added read-only
+  Agentes consumer. No policy/input change or model-quality claim. Inventory
+  check and2auditor testsPASS. Eight changed/new Python definitions documented.
+  One new I001 and final blank line are DD046;11inherited lint findings remain.
+- All actual processes terminal: source17712exit1,build36271exit0, installed66137
+  exit0, inventory13561exit0. No active server or model actor retained. No new
+  agents/push/merge/deploy; protected untracked roots stay untouched.
+- Next principal: remaining legacy tool/catalog consumers and dependencies;
+  then the full operation/migrationrestore/historybudget/CLI, prompt/runtime/
+  human/scientific evaluations,43scenarios/all12pages/finalfreshreview. Twelve
+  pilots/48concepts/0fullyaccepted unchanged. All secondary details follow all
+  principal tasks; updated chat checklist at every principal transition persists.

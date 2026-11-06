@@ -1,0 +1,14 @@
+{
+  "base_commit": "62bb67b",
+  "current_findings": 12,
+  "new": [
+    {
+      "path": "backend/tests/runtime/test_legacy_engine_removal.py",
+      "code": "I001",
+      "line": 49,
+      "message": "Import block is un-sorted or un-formatted"
+    }
+  ],
+  "prior_remaining": 11,
+  "deferred": "DD046; syntax/behavior checks passed in their documented scopes. git diff --check also reports a final blank line in backend/tests/flows/conftest.py."
+}

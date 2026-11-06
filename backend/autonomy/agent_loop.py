@@ -362,9 +362,9 @@ class AgentLoop:
             )
         except Exception as exc:
             # During shutdown, agent kills are expected — don't log as error
-            from backend.engine.base import AgentKilledError
+            from backend.runtime.legacy_scope import LegacyControllerStopped
 
-            if isinstance(exc, AgentKilledError) and self._stop_event.is_set():
+            if isinstance(exc, LegacyControllerStopped) and self._stop_event.is_set():
                 logger.info(
                     "AgentLoop: event %d (%s) interrupted by shutdown for %s",
                     event["id"], event_type, self.agent_id,

@@ -1,0 +1,63 @@
+{
+  "base_commit": "62bb67b",
+  "changed_or_new_definitions_documented": 8,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/autonomy/agent_loop.py",
+      "symbol": "AgentLoop",
+      "line": 48,
+      "docstring": "Single event-driven loop per agent.",
+      "file_sha256": "5447dc8ff1b162367e9df4ac7f53bf9e151452632dede5702eab03dc9e334485"
+    },
+    {
+      "path": "backend/autonomy/agent_loop.py",
+      "symbol": "AgentLoop._execute_event",
+      "line": 295,
+      "docstring": "Validate stored scope first; acknowledge native owner hints separately from doing task work or starting a legacy handler.",
+      "file_sha256": "5447dc8ff1b162367e9df4ac7f53bf9e151452632dede5702eab03dc9e334485"
+    },
+    {
+      "path": "backend/runtime/legacy_scope.py",
+      "symbol": "LegacyControllerStopped",
+      "line": 13,
+      "docstring": "Interrupt the retained controller's cooperative call tree without claiming its worker or external effects have physically closed.",
+      "file_sha256": "b9dd13630b610a563f5ca68d430464cc16a2861209de01ad1eb0c9257e88313d"
+    },
+    {
+      "path": "backend/runtime/legacy_scope.py",
+      "symbol": "check_legacy_stop",
+      "line": 29,
+      "docstring": "Stop future legacy effects after a request; a mismatched project scope cannot be silently borrowed.",
+      "file_sha256": "b9dd13630b610a563f5ca68d430464cc16a2861209de01ad1eb0c9257e88313d"
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_inference_retirement.py",
+      "symbol": "test_legacy_provider_ports_reject_before_model_construction_or_generation",
+      "line": 11,
+      "docstring": "An available old API key or installed provider must never become a billing fallback for native subscription work.",
+      "file_sha256": "146c7ead8edce7ee0184ea0b2c948d8bddb8fee2c5596354bd3de88806a82696"
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_engine_removal.py",
+      "symbol": "test_old_inference_modules_are_not_importable",
+      "line": 9,
+      "docstring": "Removed factories, pseudo-tool dispatch and auxiliary provider loops cannot become a competing execution path.",
+      "file_sha256": "b1f923246d1421b5b04d81dcdae3b0e7d78fe25e2a4dee78dad786ab428b7c81"
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_engine_removal.py",
+      "symbol": "test_registered_controller_stop_remains_scoped_after_engine_removal",
+      "line": 24,
+      "docstring": "A stopped original controller cannot continue effects or lend its signal to another project; leaving the scope restores its predecessor.",
+      "file_sha256": "b1f923246d1421b5b04d81dcdae3b0e7d78fe25e2a4dee78dad786ab428b7c81"
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_engine_removal.py",
+      "symbol": "test_legacy_project_guards_remain_before_and_after_native_admission",
+      "line": 47,
+      "docstring": "Removing the model loop does not authorize its retained reporting helpers or manufacture native work for old project data.",
+      "file_sha256": "b1f923246d1421b5b04d81dcdae3b0e7d78fe25e2a4dee78dad786ab428b7c81"
+    }
+  ]
+}

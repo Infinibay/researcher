@@ -31,24 +31,6 @@ def test_native_project_fences_other_task_legacy_claim_without_minting_work(
     assert c.store.get(101, run.run_id).status == "queued"
 
 
-def test_actual_old_engine_refuses_native_project_before_model_configuration(
-    coordination, monkeypatch
-):
-    """The old model entry cannot spend another turn merely because it was called outside the migrated flow handlers."""
-    from backend.engine.loop_engine import LoopEngine
-
-    admitted_project(coordination)
-
-    def forbidden():
-        """Fail if provider setup is reached before owner exclusion."""
-        pytest.fail("Legacy model configuration reached")
-
-    monkeypatch.setattr("backend.config.llm.get_litellm_params", forbidden)
-    with pytest.raises(ValueError, match="[Nn]ative|owner"):
-        LoopEngine().execute(
-            SimpleNamespace(project_id=101, agent_id="legacy-worker"),
-            ("Resume old work", "A report"),
-        )
 
 
 @pytest.mark.parametrize(
@@ -145,46 +127,6 @@ def test_actual_legacy_starts_do_not_open_workers_in_native_project(
     assert result["delivery"] == "native_owner_handoff"
 
 
-def test_old_engine_rechecks_after_a_model_reply_before_using_its_output(
-    coordination, monkeypatch
-):
-    """Native ownership appearing during a legacy model call stops interpretation/tools and the next loop instead of treating old context as fresh authority."""
-    from dataclasses import replace
-
-    from backend.engine.loop_engine import LoopEngine
-
-    c = coordination
-    monkeypatch.setattr(
-        "backend.config.llm.get_litellm_params", lambda: {"model": "controlled-legacy"}
-    )
-    monkeypatch.setattr(
-        "backend.config.model_capabilities.get_model_capabilities",
-        lambda: SimpleNamespace(supports_function_calling=True),
-    )
-
-    def reply(*args, **kwargs):
-        """Commit real native intent while the one controlled legacy call is in flight."""
-        c.store.admit(
-            replace(
-                c.spec,
-                project_id=202,
-                task_id=2002,
-                operation_key="native-during-old-reply",
-            )
-        )
-        return object()  # Cannot be consumed; owner exclusion must happen first.
-
-    monkeypatch.setattr("backend.engine.loop_engine.call_llm", reply)
-    agent = SimpleNamespace(
-        project_id=202,
-        agent_id="legacy-other",
-        backstory="Legacy fixture",
-        tools=[],
-        name="Fixture",
-        role="developer",
-    )
-    with pytest.raises(ValueError, match="[Nn]ative|owner"):
-        LoopEngine().execute(agent, ("Old request", "Old output"), verbose=False)
 
 
 def test_agent_stop_timeout_retains_the_live_thread_until_actual_exit(
@@ -359,34 +301,6 @@ def test_loop_manager_does_not_erase_a_worker_that_ignored_stop_timeout(
     assert agent_loop.get_loop_manager(101) is None
 
 
-def test_legacy_stop_signal_during_model_reply_blocks_following_effects(
-    coordination, monkeypatch
-):
-    """A cooperative stop is checked after the current request returns, without treating its completion as permission to continue."""
-    import threading
-
-    from backend.engine.base import AgentKilledError
-    from backend.engine.loop_engine import LoopEngine
-    from backend.runtime.legacy_scope import legacy_stop_scope
-
-    signal = threading.Event()
-    monkeypatch.setattr(
-        "backend.config.llm.get_litellm_params", lambda: {"model": "controlled-legacy"}
-    )
-    monkeypatch.setattr(
-        "backend.config.model_capabilities.get_model_capabilities",
-        lambda: SimpleNamespace(supports_function_calling=True),
-    )
-
-    def forbidden(*args, **kwargs):
-        """A requested Stop must prevent even the first legacy provider call."""
-        pytest.fail("Stopped legacy producer cannot call a model")
-
-    monkeypatch.setattr("backend.engine.loop_engine.call_llm", forbidden)
-    agent = SimpleNamespace(project_id=202, agent_id="legacy-other")
-    signal.set()
-    with legacy_stop_scope(202, signal), pytest.raises((AgentKilledError, ValueError)):
-        LoopEngine().execute(agent, ("Old request", "Old output"), verbose=False)
 
 
 def test_legacy_dispatch_uses_stored_message_and_clears_an_inherited_task_scope(
