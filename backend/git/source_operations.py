@@ -166,7 +166,8 @@ class SourceOperations:
                      'mode': row['request']['mode'], 'name': row['request']['name'],
                      'path': row['request'].get('path'), 'status': row['status'],
                      'fence': row['fence'],
-                     'requires_reconciliation': row['status'] not in ('completed', 'rejected', 'stopped') or (row['status'] == 'stopped' and row.get('view') is not None),
+                     'reservation_released':bool(row.get('reservation_release')),
+                     'requires_reconciliation': not row.get('reservation_release') and (row['status'] not in ('completed', 'rejected', 'stopped') or (row['status'] == 'stopped' and row.get('view') is not None)),
                      'repository_id': row['repository_id'], 'observation': row.get('observation'), 'remote': (row.get('receipt') or {}).get('remote'),
                      'observed_at': (row.get('receipt') or {}).get('observed_at'),
                      'observation_kind': 'recorded_not_rechecked'}
@@ -260,7 +261,7 @@ class SourceOperations:
         """Require the original administrative owner/fence and database identity before any directory or peer control."""
         if not isinstance(lease,SourceLease):raise TypeError('Original source-operation lease required')
         metadata,row=self._row(conn,lease.project_id,lease.operation_key)
-        if row['status']!='running' or (row['attempt_id'],row['owner']['owner_id'],row['fence'],row['database_identity'])!=(lease.attempt_id,lease.owner_id,lease.fence,lease.database_identity) or self._origin()!=lease.database_identity:raise RunConflict('El dueño o la fase original del alta cambió; no se repitió su efecto.')
+        if row.get('reservation_release') or row['status']!='running' or (row['attempt_id'],row['owner']['owner_id'],row['fence'],row['database_identity'])!=(lease.attempt_id,lease.owner_id,lease.fence,lease.database_identity) or self._origin()!=lease.database_identity:raise RunConflict('El dueño o la fase original del alta cambió; no se repitió su efecto.')
         SourceView(**row['target']['root']).verify()
         return metadata,row
 
@@ -275,6 +276,7 @@ class SourceOperations:
 
         command_key(owner)
         metadata,row=self._row(conn,project,key)
+        if row.get('reservation_release'):raise RunConflict('La preparación está cerrada. Su carpeta requiere una nueva adopción explícita.')
         if row['status']=='running' and row['owner']['owner_id']==owner:return SourceLease(project,key,row['attempt_id'],owner,row['fence'],row['database_identity'])
         if row['status']!='planned' or row['database_identity']!=self._origin():raise RunConflict('Esta alta tiene otro dueño o necesita reconciliación; no se inicia otra ejecución.')
         SourceView(**row['target']['root']).verify()
@@ -289,6 +291,7 @@ class SourceOperations:
         command_key(owner)
         with self.runs._transaction(write=True) as conn:
             metadata,row=self._row(conn,project,key)
+            if row.get('reservation_release'):raise RunConflict('La preparación está cerrada; su autorización anterior no permite observar ni escribir otro intento.')
             closure=row.get('closure') or {}
             if row['status'] not in ('running','needs_reconciliation','stopped') or closure.get('attempt_id')!=row['attempt_id'] or not (closure.get('domain_removed') or closure.get('no_domain_opened')) or any(p['state']!='closed' for p in row['peers'].values()):raise RunConflict('El cierre original aún no está confirmado o el alta ya terminó; no se abre otro intento.')
             if row['database_identity']!=self._origin():raise RunConflict('El origen del alta cambió tras una copia o restauración.')
@@ -325,21 +328,61 @@ class SourceOperations:
             return SourceLease(project,key,row['attempt_id'],owner,row['fence'],row['database_identity'])
 
     def prepare_repair(self,project,key,*,repair_key,operation_id,fence):
-        """Persist one explicit continuation of the observed local setup before scheduling; exact replay returns history and cannot reissue an unknown repair."""
+        """Persist explicit continuation before scheduling; replay may resume an unclaimed authorization at its original fence, never an admitted or unknown writer."""
         command_key(repair_key)
         intent={'repair_key':repair_key,'operation_id':operation_id,'fence':fence}
         with self.runs._transaction(write=True) as conn:
             metadata,row=self._row(conn,project,key)
+            if row.get('reservation_release'):raise RunConflict('La preparación ya está cerrada; adopta su carpeta mediante otra solicitud explícita.')
             commands=row.setdefault('repair_commands',{})
             if repair_key in commands:
                 if commands[repair_key]!=intent:raise RunConflict('La clave de reparación identifica otra autorización original.')
-                return False
+                return (row['database_identity']==self._origin()
+                        and row['request']['mode']!='create_remote'
+                        and row['status'] in ('stopped','needs_reconciliation')
+                        and (row['operation_id'],row['fence'])==(operation_id,fence)
+                        and (row.get('repair') or {}).get('repair_key')!=repair_key)
             if row['request']['mode']=='create_remote' or row['status'] not in ('stopped','needs_reconciliation') or (row['operation_id'],row['fence'])!=(operation_id,fence):
                 raise RunConflict('Observa el intento local detenido antes de autorizar una reparación.')
             if len(commands)>=8:raise RunConflict('Se alcanzó el límite de reparaciones conservadas.')
             commands[repair_key]=intent
             self._save(conn,project,metadata)
             return True
+
+    def closed_local(self,row):
+        """Classify persisted original local closure with matching origin/attempt/domain or drained pre-domain ownership; grant/path absence alone is insufficient."""
+        closure=row.get('closure') or {}
+        if row['request']['mode']=='create_remote' or row['database_identity']!=self._origin() or closure.get('attempt_id')!=row['attempt_id'] or any(peer['state']!='closed' for peer in row['peers'].values()):
+            raise RunConflict('El cierre original local no está confirmado; no se liberó la reserva.')
+        if row.get('domain'):
+            if not closure.get('domain_removed') or closure.get('grant_id')!=row['domain']['grant_id']:
+                raise RunConflict('Falta el cierre del dominio original; no se dedujo por su ruta.')
+            return 'unused_domain' if closure.get('unused') else 'physical_domain'
+        if not closure.get('no_domain_opened') or closure.get('database_identity')!=row['database_identity'] or row['peers']:
+            raise RunConflict('Falta el recibo original previo al dominio.')
+        if row['owner'] is None:
+            if not closure.get('never_claimed') or row['attempt_id'] is not None:raise RunConflict('La historia no demuestra que nunca se admitió un dueño.')
+            return 'never_claimed'
+        if closure.get('owner_id')!=row['owner']['owner_id']:raise RunConflict('El recibo previo al dominio identifica otro dueño.')
+        return 'no_domain_opened'
+
+    def release_reservation(self,project,key,*,release_key,operation_id,fence):
+        """End one exactly observed closed local preparation without changing files, deleting history, registering Git or reviving old writer authority; exact replay returns its receipt."""
+        command_key(release_key)
+        intent={'release_key':release_key,'operation_id':operation_id,'fence':fence}
+        with self.runs._transaction(write=True) as conn:
+            metadata,row=self._row(conn,project,key)
+            previous=row.get('reservation_release')
+            if previous:
+                if previous['request']!=intent:raise RunConflict('La reserva ya se cerró con otra autorización original.')
+                return previous
+            if (row['operation_id'],row['fence'])!=(operation_id,fence) or row['status'] not in ('stopped','needs_reconciliation') or row['repository_id'] is not None:
+                raise RunConflict('Detén y consulta la preparación original antes de cerrar su reserva.')
+            kind=self.closed_local(row)
+            receipt={'project_id':project,'operation_key':key,'operation_id':operation_id,'release_key':release_key,'fence':fence,'request':intent,'preserved_path':row['request']['path'],'closure_kind':kind,'released_at':self.runs.clock()}
+            row.update(status='stopped',reservation_release=receipt,issue=None)
+            self._save(conn,project,metadata)
+            return receipt
 
     def close_unstarted(self,lease):
         """Record that the actual original owner never entered an execution domain; this is a drained control-flow receipt, not physical closure inferred from a missing path."""
@@ -433,13 +476,13 @@ class SourceOperations:
         with self.runs._transaction(write=True) as conn:
             metadata,row=self._row(conn,lease.project_id,lease.operation_key)
             if (row['attempt_id'],row['fence'])!=(lease.attempt_id,lease.fence):raise RunConflict('El intento original cambió.')
-            if row['status']!='completed':row['status']='needs_reconciliation';self._save(conn,lease.project_id,metadata)
+            if row['status']!='completed' and not row.get('reservation_release'):row['status']='needs_reconciliation';self._save(conn,lease.project_id,metadata)
 
     def note_failure(self, project, key):
         """Expose a bounded redacted current issue while retaining the original operation, physical receipts and any partial files for explicit observation."""
         with self.runs._transaction(write=True) as conn:
             metadata, row = self._row(conn, project, key)
-            if row['status'] not in ('completed', 'rejected', 'stopped') and not row.get('issue'):
+            if row['status'] not in ('completed', 'rejected', 'stopped') and not row.get('reservation_release') and not row.get('issue'):
                 message = 'No se confirmó la creación remota. Conservamos la solicitud; observa su resultado sin volver a enviarla.' if row['request']['mode']=='create_remote' else 'No se confirmó la preparación. Conservamos la solicitud y la carpeta; observa el resultado original antes de decidir cómo continuar.'
                 row.update(status='needs_reconciliation', issue={'code':'source_result_unconfirmed','message':message})
                 self._save(conn, project, metadata)

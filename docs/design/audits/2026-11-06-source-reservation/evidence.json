@@ -1,0 +1,79 @@
+{
+  "status": "passed",
+  "scope": "Actual owner HTTP/SQLite/Git/kernel, release after owner-created independent history, lost release response, explicit new adoption and saved unclaimed repair. No models/user remotes.",
+  "states": [
+    {
+      "file": "01-desktop-explicit-close-with-retained-owner-work.png",
+      "sha256": "11bb9fad29fc184572f480016ec51b08bc75c91721b2fbb77caf551aab781cea",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "02-mobile-release-recovered-after-lost-response.png",
+      "sha256": "95a2c6c22fab90ab61bcf471cf2331219ef9c7ac82786f8bcd1f012c85af6148",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "03-desktop-new-adoption-keeps-original-history.png",
+      "sha256": "0c366b7ac99c5d79067d34426fad8649027cc42055e6dd18c25b9d3ebeb44a8a",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "04-mobile-original-saved-repair-completes.png",
+      "sha256": "8d639f87e40c4a90ac01726e0e653f74fb0d87ae18aa16c2ab53b3db85c0fd27",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    }
+  ],
+  "page_errors": [],
+  "posts": [
+    {
+      "label": "release-and-adopt",
+      "url": "http://127.0.0.1:59687/api/projects/202/source-operations/retenida/release",
+      "body": {
+        "release_key": "3573a297-627e-47be-8013-86d942d33cd6",
+        "operation_id": "74c33a4722404e76bbddbfeee0a02b0c",
+        "fence": 1
+      }
+    },
+    {
+      "label": "resume-original-history",
+      "url": "http://127.0.0.1:59687/api/projects/202/source-operations",
+      "body": {
+        "operation_key": "a614d00c-133e-42a0-81f1-773b5acbdf3a",
+        "mode": "adopt",
+        "name": "adoptada",
+        "path": "/tmp/pytest-of-andres/pytest-423/test_serve0/workspaces/retenida",
+        "branch": null,
+        "remote_url": null,
+        "remote_owner": null,
+        "private": null,
+        "remote_server": null,
+        "use_configured_auth": false
+      }
+    },
+    {
+      "label": "saved-unclaimed-repair",
+      "url": "http://127.0.0.1:59687/api/projects/202/source-operations/reparable/repair",
+      "body": {
+        "repair_key": "saved-before-scheduling",
+        "operation_id": "ff001148f675477db3b970963f843fa3",
+        "fence": 1
+      }
+    }
+  ]
+}

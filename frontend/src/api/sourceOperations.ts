@@ -10,9 +10,15 @@ export interface CreatedRemote {id:number;full_name:string;clone_url:string;api_
 /** Preparation is an original owner business operation, with no fabricated native task identity. */
 export interface SourcePacket {schema:1;projectId:number;body:SourceIntent&{operation_key:string}}
 /** Whole-project observations contain all bounded administrative history, including retained partial effects. */
-export interface SourceSummary {operation_key:string;operation_id:string;mode:string;name:string;path:string|null;fence:number;status:string;requires_reconciliation:boolean;repository_id:number|null;remote?:CreatedRemote|null;observation:{head_sha:string;tree_sha:string;branch:string;origin:string|null;working_tree_clean:boolean}|null;observed_at:number|null;observation_kind:'recorded_not_rechecked'}
+export interface SourceSummary {operation_key:string;operation_id:string;mode:string;name:string;path:string|null;fence:number;status:string;requires_reconciliation:boolean;reservation_released?:boolean;repository_id:number|null;remote?:CreatedRemote|null;observation:{head_sha:string;tree_sha:string;branch:string;origin:string|null;working_tree_clean:boolean}|null;observed_at:number|null;observation_kind:'recorded_not_rechecked'}
 /** A worker handle and local domain receipt cannot prove remote rollback or the current state of Git. */
-export interface SourceOperation extends SourceSummary {project_id:number;request:SourceIntent;issue:{code:string;message:string}|null;worker_active:boolean;local_closure:'confirmed'|'unconfirmed';message:string;repair?:SourceRepairIntent|null;repair_authorizations?:SourceRepairIntent[];receipt:{observation?:NonNullable<SourceSummary['observation']>;repository_id?:number;remote?:CreatedRemote;completed_after_withdrawal?:boolean;observed_at:number;repair_key?:string}|null}
+export interface SourceOperation extends SourceSummary {project_id:number;request:SourceIntent;issue:{code:string;message:string}|null;worker_active:boolean;local_closure:'confirmed'|'unconfirmed';message:string;repair?:SourceRepairIntent|null;repair_authorizations?:SourceRepairIntent[];reservation_release?:SourceReleaseReceipt|null;receipt:{observation?:NonNullable<SourceSummary['observation']>;repository_id?:number;remote?:CreatedRemote;completed_after_withdrawal?:boolean;observed_at:number;repair_key?:string}|null}
+/** Ending a local preparation is a separate owner decision; it does not register Git, accept code or delete its retained path. */
+export interface SourceReleaseIntent {release_key:string;operation_id:string;fence:number}
+/** Preserve exact original source and end-reservation authorization before HTTP or after reply loss. */
+export interface SourceReleasePacket {schema:1;source:SourcePacket;body:SourceReleaseIntent}
+/** Original end-of-reservation receipt reports the actual closure class and retained path, never a fabricated successful setup. */
+export interface SourceReleaseReceipt extends SourceReleaseIntent {project_id:number;operation_key:string;request:SourceReleaseIntent;preserved_path:string;closure_kind:'physical_domain'|'unused_domain'|'never_claimed'|'no_domain_opened';released_at:number}
 /** A separate owner gesture can continue only the exactly observed original local attempt, with its own replay identity. */
 export interface SourceRepairIntent {repair_key:string;operation_id:string;fence:number}
 /** Keep the original source and continuation together so a reload cannot retarget another source or newer fence. */
@@ -124,3 +130,26 @@ export const sourceRepairs={
 
 /** Replay the same explicit repair authorization; a late response must contain that original authorization, independently of a newer observation fence. */
 export async function sendSourceRepair(packet:SourceRepairPacket){const valid=validateRepair(packet),source=valid.source,value=checked(await fetchApi<SourceOperation>(`/api/projects/${source.projectId}/source-operations/${encodeURIComponent(source.body.operation_key)}/repair`,{method:'POST',body:JSON.stringify(valid.body)}),source);if(!value.repair_authorizations?.some(item=>item.repair_key===valid.body.repair_key&&item.operation_id===valid.body.operation_id&&item.fence===valid.body.fence))throw new Error('La respuesta no contiene la autorización original de reparación.');return value}
+
+/** Validate a closed local reservation request without accepting caller closure claims, filesystem actions or a remote rollback. */
+function validateRelease(packet:SourceReleasePacket):SourceReleasePacket{
+ const source=validate(packet.source),body=packet.body
+ if(packet.schema!==1||source.body.mode==='create_remote'||Object.keys(packet).sort().join(',')!=='body,schema,source'||!body||Object.keys(body).sort().join(',')!=='fence,operation_id,release_key'||!/^[A-Za-z0-9_.:-]{1,128}$/.test(body.release_key)||!/^[a-f0-9]{32}$/.test(body.operation_id)||!Number.isSafeInteger(body.fence)||body.fence<0)throw new Error('No se pudo recuperar la autorización original de cierre.')
+ return Object.freeze({schema:1,source,body:Object.freeze({...body})})
+}
+
+/** Freeze a separate end-reservation gesture after matching an inactive original local operation; the server supplies all closure proof. */
+export function prepareSourceRelease(source:SourcePacket,observed:SourceOperation){checked(observed,source);if(observed.worker_active||observed.reservation_released||!['stopped','needs_reconciliation'].includes(observed.status))throw new Error('La preparación original debe estar detenida y no cerrada antes de liberar su reserva.');return validateRelease({schema:1,source,body:{release_key:crypto.randomUUID(),operation_id:observed.operation_id,fence:observed.fence}})}
+
+/** Store original reservation-ending intent independently of pending source, repair and history-view packets. */
+export const sourceReleases={
+ /** Recover this exact original local scope without issuing another end-reservation request. */
+ load(storage:Pick<Storage,'getItem'>,source:SourcePacket):SourceReleasePacket|null{const raw=storage.getItem(`researcher:source-release:v1:${source.projectId}:${source.body.operation_key}`);if(raw===null)return null;try{if(raw.length>30000)throw new Error('size');const packet=validateRelease(JSON.parse(raw));if(JSON.stringify(packet.source)!==JSON.stringify(validate(source)))throw new Error('scope');return packet}catch{throw new Error('No se pudo recuperar la autorización original de cierre. Consulta la operación antes de continuar.')}},
+ /** Save before POST and refuse to replace an unknown earlier authorization. */
+ save(storage:StoragePort,packet:SourceReleasePacket){const valid=validateRelease(packet),old=this.load(storage,valid.source);if(old&&JSON.stringify(old)!==JSON.stringify(valid))throw new Error('Hay un cierre original pendiente; consulta su resultado antes de autorizar otro.');storage.setItem(`researcher:source-release:v1:${valid.source.projectId}:${valid.source.body.operation_key}`,JSON.stringify(valid))},
+ /** Clear only the exact reviewed receipt, leaving every other pending operation untouched. */
+ clear(storage:StoragePort,packet:SourceReleasePacket){if(JSON.stringify(this.load(storage,packet.source))!==JSON.stringify(packet))throw new Error('La autorización original de cierre cambió; no se borró.');storage.removeItem(`researcher:source-release:v1:${packet.source.projectId}:${packet.source.body.operation_key}`)}
+}
+
+/** End one observed reservation and require its exact original receipt; a successful setup or another operation cannot substitute for that decision. */
+export async function sendSourceRelease(packet:SourceReleasePacket){const valid=validateRelease(packet),source=valid.source,value=checked(await fetchApi<SourceOperation>(`/api/projects/${source.projectId}/source-operations/${encodeURIComponent(source.body.operation_key)}/release`,{method:'POST',body:JSON.stringify(valid.body)}),source),receipt=value.reservation_release;if(!value.reservation_released||value.operation_id!==valid.body.operation_id||value.fence!==valid.body.fence||!receipt||receipt.project_id!==source.projectId||receipt.operation_key!==source.body.operation_key||receipt.operation_id!==valid.body.operation_id||receipt.release_key!==valid.body.release_key||receipt.fence!==valid.body.fence||receipt.request?.release_key!==valid.body.release_key||receipt.request?.operation_id!==valid.body.operation_id||receipt.request?.fence!==valid.body.fence)throw new Error('La respuesta no contiene el cierre de la reserva original.');return value}

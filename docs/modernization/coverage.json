@@ -90,7 +90,12 @@
         "docs/modernization/source-history-packaging.json",
         "backend/tests/runtime/test_source_history.py",
         "frontend/tests/source-history.test.ts",
-        "docs/design/audits/2026-11-06-source-history/report.md"
+        "docs/design/audits/2026-11-06-source-history/report.md",
+        "docs/architecture/source-reservation.md",
+        "docs/modernization/source-reservation-results.json",
+        "backend/tests/runtime/test_source_reservation.py",
+        "frontend/tests/source-reservation.test.ts",
+        "docs/design/audits/2026-11-06-source-reservation/report.md"
       ]
     },
     "C04": {
@@ -1130,7 +1135,12 @@
         "docs/modernization/source-history-packaging.json",
         "backend/tests/runtime/test_source_history.py",
         "frontend/tests/source-history.test.ts",
-        "docs/design/audits/2026-11-06-source-history/report.md"
+        "docs/design/audits/2026-11-06-source-history/report.md",
+        "docs/architecture/source-reservation.md",
+        "docs/modernization/source-reservation-results.json",
+        "backend/tests/runtime/test_source_reservation.py",
+        "frontend/tests/source-reservation.test.ts",
+        "docs/design/audits/2026-11-06-source-reservation/report.md"
       ]
     },
     "D10": {

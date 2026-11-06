@@ -5,7 +5,7 @@ import json
 from contextlib import contextmanager
 from dataclasses import dataclass
 
-from backend.git.source_executor import execute_source, reconcile_source, repair_source
+from backend.git.source_executor import confirm_source_closure, execute_source, reconcile_source, repair_source
 from backend.git.source_operations import SourceLease, SourceOperations, SourceRequest
 from backend.git.source_remote import SourceHTTPControl, execute_remote_source
 from backend.runtime.broker_stdio import AsyncPeerBroker
@@ -83,6 +83,9 @@ class SourceService:
             value['message'] = 'Crear un remoto vacío es una operación separada. El cierre del cliente local no detiene necesariamente al servidor. Observar sólo consulta la creación original; no vuelve a enviarla. No se creó una carpeta local ni se publicó código.'
         value['repair'] = row.get('repair')
         value['repair_authorizations'] = list(row.get('repair_commands', {}).values())
+        value['reservation_release'] = row.get('reservation_release')
+        if row.get('reservation_release'):
+            value['message'] = 'Preparación cerrada. Conservamos su carpeta e historia; una nueva adopción requiere otra solicitud explícita. Esta operación ya no reserva la carpeta ni permite repararla.'
         return value
 
     async def submit(self, project, key, request):
@@ -110,6 +113,8 @@ class SourceService:
             if self._closing or self.parent._source_project_stops.get(project) or self.parent._legacy_controller_active(project):
                 raise RunConflict('El proyecto no admite reconciliación mientras otro dueño conserve actividad.')
             row = await _settled(self.records.read, project, key)
+            if row.get('reservation_release'):
+                raise RunConflict('La preparación está cerrada. Puedes consultar su historia; para usar la carpeta, adóptala mediante otra solicitud.')
             if (operation_id is not None or fence is not None) and (row['operation_id'],row['fence'])!=(operation_id,fence):
                 raise RunConflict('La operación o el intento original observado cambió. Consulta su historia antes de observarlo.')
             live = self._workers.get((project,key))
@@ -119,6 +124,25 @@ class SourceService:
                 if sum(not task.done() for task in self._workers.values()) >= 2:
                     raise RunConflict('Espera al cierre de otra preparación antes de reconciliar.')
                 self._workers[(project,key)] = asyncio.create_task(self._run(project,key,observe=True), name='researcher-source-observe-'+row['operation_id'])
+            return await _settled(self.view, project, key)
+
+    async def release(self, project, key, *, release_key, operation_id, fence):
+        """End an observed closed local reservation after original closure proof; replay reads only its receipt and cannot withdraw a later adoption owner."""
+        async with self._lock:
+            self.parent._accepting()
+            row = await _settled(self.records.read, project, key)
+            if row.get('reservation_release'):
+                await _settled(self.records.release_reservation, project, key, release_key=release_key, operation_id=operation_id, fence=fence)
+                return await _settled(self.view, project, key)
+            if self._closing or self.parent._source_project_stops.get(project) or self.parent._legacy_controller_active(project) or (row['operation_id'],row['fence'])!=(operation_id,fence):
+                raise RunConflict('El dueño o intento original cambió; consulta su cierre antes de liberar la reserva.')
+            worker = self._workers.get((project,key))
+            if worker is not None and not worker.done():
+                raise RunConflict('El trabajador original sigue activo. Deténlo y comprueba su cierre antes de liberar la reserva.')
+            if row['request']['mode']=='create_remote' or row['status'] not in ('stopped','needs_reconciliation'):
+                raise RunConflict('Sólo se puede cerrar la reserva de una preparación local detenida o pendiente de revisión.')
+            await confirm_source_closure(self.records, project, key, authority=self.parent.runtime.authority)
+            await _settled(self.records.release_reservation, project, key, release_key=release_key, operation_id=operation_id, fence=fence)
             return await _settled(self.view, project, key)
 
     async def repair(self, project, key, *, repair_key, operation_id, fence):

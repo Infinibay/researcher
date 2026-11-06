@@ -43,6 +43,12 @@ class RepairSource(StopSource):
     repair_key: str = Field(pattern=r'^[A-Za-z0-9_.:-]{1,128}$')
 
 
+class ReleaseSource(StopSource):
+    """Explicit end of an observed closed local reservation; original closure comes from trusted stores, never from the caller."""
+
+    release_key: str = Field(pattern=r'^[A-Za-z0-9_.:-]{1,128}$')
+
+
 @router.get('')
 async def source_options(project_id: int, request: Request):
     """Expose only the configured server and account label for deliberate owner selection, without credentials, host secret paths or network effects."""
@@ -91,3 +97,10 @@ async def repair_source(project_id: int, operation_key: str, body: RepairSource,
     """Authorize fixed missing local stages after original closure, preserving existing files and separately recording the repair identity before scheduling."""
     value = await service(request).sources.repair(project_id, operation_key, **body.model_dump())
     return JSONResponse(value, status_code=202, headers={'Cache-Control':'no-store'})
+
+
+@router.post('/{operation_key}/release')
+async def release_source(project_id: int, operation_key: str, body: ReleaseSource, request: Request):
+    """Close one original local reservation after verified closure, retaining files/history and requiring a separate request for subsequent adoption."""
+    value = await service(request).sources.release(project_id, operation_key, **body.model_dump())
+    return JSONResponse(value, headers={'Cache-Control':'no-store'})

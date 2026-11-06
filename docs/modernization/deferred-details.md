@@ -90,3 +90,6 @@ retomarlo. No convertir su registro en otra investigación o implementación.
 
 
 | DD-037 |5avisos estáticos en los archivos backend de historia, incluidos heredados, sin sintaxis/nombres indefinidos.4defsPython y75módulos/nombresTS documentados. La caché general es30s: reseleccionar puede reutilizar datos; «Consultar operación» fuerza lectura y los controles de otro fence se rechazan. Mostrar fecha de consulta y forzar nueva lectura al reseleccionar; afinar densidad de listas/rutas y foco. | `source-history-lint.json`, `SourceSetup.tsx`, `sourceOperations.ts`; capturas de historia | Pasada de pulido posterior; no otro ciclo Git/kernel por texto/caché. Reservas/adopción, reparación guardada sin programación, DD030/restore y aceptación global siguen siendo capacidades principales. |
+
+
+| DD-038 | Afinar densidad de rutas, encuadre/foco y actualización de la lista lateral tras adoptar; heredado del piloto. No reabrir ahora imports/estilo ni otra ronda de capturas por esos detalles. | `SourceSetup.tsx`, capturas `2026-11-06-source-reservation`, DD036/DD037 | Resolver después de **todas las capacidades principales**, según reiteración del usuario del6nov. Configuración/modelos, prompts/comunicación, cuatro rutas y los demás bloques gruesos tienen prioridad. |

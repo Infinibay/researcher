@@ -4,6 +4,8 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- Reserva local cerrada explícitamente sin borrar ni dar Git por completado; nueva adopción independiente y reparación guardada antes de programación recuperables.35pruebas en fuente,122frontend/build y4capturas web; no nueva verificación de wheel/global. [Contrato](../architecture/source-reservation.md), [resultados](source-reservation-results.json).
+
 - Historia original entre navegadores: abrir una preparación sin recrear su POST, conservar otra solicitud local pendiente y rechazar respuestas/controles de otra identidad o intento.121frontend,16pruebas instaladas enfocadas y tres contextos de navegador. [Contrato](../architecture/source-history.md), [resultados](source-history-results.json). Reserva/adopción y restore siguen abiertos.
 
 - Reparación explícita de preparaciones Git interrumpidas: conserva archivos, índice/config/HEAD existentes; puede completar primera revisión o archivos faltantes. Incluye cancelación antes de dueño/dominio y testigo de dominio retirado sin concesión. Observar ya no da por listo un checkout parcial.186pruebas instaladas,117frontend y5capturas. [Contrato](../architecture/source-repair.md), [resultados](source-repair-results.json). Historia entre navegadores y aceptación integral siguen abiertas.

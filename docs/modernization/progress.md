@@ -6600,3 +6600,13 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
   models/prompts/books/science/human/terminal/history,43scenarios/global/install/
   inverses43–54/remaining4routes/all12pageacceptance/finalfreshreview remain full
   original goal. No newpush/merge/deploy/routine agents; keep macro-first policy.
+
+## 2026-11-06 — cerrar reserva y adoptar sin perder trabajo
+
+- Previous status-only goal turn classified no progress; revalidated actual worktree, logs and failing handoff before proceeding. Macro-first reiterated by owner: defer secondary details until **all** principal capabilities are done. Saved in plan/dashboard/DD038.
+- Explicit release receipt after original physical/unused/pre-domain/never-claimed closure, no file cleanup or fabricated successful setup. Old writer/observe/repair authority rejected after release; exact replay does not withdraw a later adoption owner. Source history continues blocking silent project deletion.
+- Fixed reproduced actual cancelled SQL-to-HTTP repair handoff: same original authorization resumes only before admission at its original fence and DB origin. UI retains the original key rather than replacing an acknowledged but unclaimed intent. Admitted/completed attempts are not replayed.
+-35focused source/project regressionsPASS46.60s;12reservation/repairPASS32.15s after observed RED.122frontendPASS/build5.17s. Current-source native dependency environment; no fresh installed-wheel/global claim.
+-4actual desktop/mobile captures,1release reply lost/recovered by GET,1new adoption,1same-key saved repair; actual Git HEAD/config/inode/content preserved,4real grants retired,0native/model/userremote turns. Browser harness exact-label locator failed before adoption twice; retained original server/effects, inspected form readonly, resumed using combobox locator. No repeated closure or bootstrap. Final browser80051terminal0, server11176terminal2 afterSIGINT, shared1485terminal0.
+-23new/changedPython definitions and85TSmodules/names documented,0missing. Visual density/list freshness deferredDD038. C03/D09 remainin_progress;24/36desktop,8/12mobile,8pilots,0accepted unchanged. No push/merge/deploy/routine agents.
+- Next principal: usable model configuration with explicit scope and immutable attempt selection; then rest of original plan. Full43scenarios/global/installation/restore/DD030/inverses43–54/sourceformatsbudgets/prompts/books/human/science/terminal/remaining4routes/all12acceptance/finalfreshreview remain required.

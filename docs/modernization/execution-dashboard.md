@@ -9,7 +9,32 @@ Actualizado: 2026-11-06. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: historia original entre navegadores
+## Etapa actual: reserva cerrada y adopción independiente
+
+El propietario puede cerrar una preparación local detenida después de comprobar
+su cierre original, conservar carpeta/historia y preparar una nueva adopción.
+La operación antigua ya no reserva la ruta ni permite reparar/observar con su
+antigua autoridad. Una reparación guardada antes de cancelar su entrega al
+scheduler puede retomar la misma autorización si nunca fue admitida.
+
+**Verificación:**35pruebas backend en fuente pasan46.60s;122frontend/build5.17s.
+Cuatro capturas1440/390px,0erroresJS/Axe/desbordamiento en la región revisada;
+1cierre con respuesta perdida,1adopción nueva,1reparación con clave conservada.
+HEAD/config/inode/contenido preservados,4grants reales retirados,0turnos nativos.
+23defsPython y85módulos/nombresTS documentados,0faltantes. No se repitió el ensayo
+de wheel ni la suite global. [Contrato](../architecture/source-reservation.md),
+[resultados](source-reservation-results.json),
+[web](../design/audits/2026-11-06-source-reservation/report.md).
+
+**Siguiente principal:** configuración de modelos utilizable desde producto,
+con alcance global/proyecto/agente explícito y elección conservada por intento.
+Después, las demás capacidades principales de prompts/comunicación/ciencia,
+cuatro rutas, migración/restore/operación y retirada antigua. Todos los detalles
+secundarios se resuelven al final de todas las tareas gruesas; ver DD038.
+43escenarios/validación global/instalación/inversas43–54/aceptación12páginas/
+revisión final siguen abiertos.24/36conceptosdesktop,8/12mobile,8pilotos,0aceptadas.
+
+## Etapa anterior: historia original entre navegadores
 
 Repositorios abre una operación guardada desde otra sesión sin recrear el POST.
 El localizador de historia conserva proyecto/clave/identidad/elecciones/fence

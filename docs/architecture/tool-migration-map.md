@@ -486,3 +486,12 @@ owner comprueba ahora el ID/fence recibido antes de programar; las llamadas
 bodyless anteriores siguen compatibles. No se concede autoridad de ejecución
 desde un localizador ni se expone creación automática desde la historia.
 [Contrato](source-history.md), [resultados](../modernization/source-history-results.json).
+
+## Cierre explícito de reservas locales
+
+El control del propietario `POST source-operations/{key}/release` no es una
+herramienta de inferencia. Exige intento/fence/clave originales y cierre real;
+conserva archivos e historia y retira la reserva. Una adopción posterior tiene
+su propia solicitud. Las autorizaciones viejas no pueden actuar sobre ella.
+[Contrato](source-reservation.md),
+[resultados](../modernization/source-reservation-results.json).

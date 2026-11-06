@@ -143,6 +143,21 @@ async def reconcile_source(records,project,key,*,authority,cgroup_parent,broker_
         raise
 
 
+async def confirm_source_closure(records,project,key,*,authority):
+    """Reconcile exact original sealed Git or never-reserved closure before ending its reservation; never signal a different owner or infer closure from path absence."""
+    row=await _settled(records.read,project,key)
+    if row.get('domain'):
+        with WitnessedAuthorityJournal(**authority) as journal:
+            grant_id=row['domain']['grant_id'];snapshot=await _settled(journal.load);grant=snapshot.records.get('broker:grant:'+grant_id)
+            if grant is None:await _settled(SourcePeerRegistry.project_unused,records,snapshot,grant_id)
+            else:
+                if grant['state']!='retired':await _settled(PeerBroker.recover,journal,grant_id)
+                await _settled(PeerBroker.project_recovered,journal,grant_id)
+        row=await _settled(records.read,project,key)
+    await _settled(records.closed_local,row)
+    return row
+
+
 async def repair_source(records,project,key,*,repair_key,authority,cgroup_parent,source_network=None,source_transport=None,broker_limits=None,on_owner=None):
     """Continue a separately authorized original local setup only after exact witnessed closure, retaining files/history and issuing no clone/reset/force operation."""
     row=await _settled(records.read,project,key)

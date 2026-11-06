@@ -1,0 +1,169 @@
+{
+  "base_commit": "b51e749",
+  "changed_or_new_definitions_documented": 23,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/routes/source_operations.py",
+      "symbol": "ReleaseSource",
+      "line": 46,
+      "docstring": "Explicit end of an observed closed local reservation; original closure comes from trusted stores, never from the caller.",
+      "file_sha256": "1f9d1881c96368bc08cf9cf5bccf1f6a11e05d97447f451d72ca58e627565255"
+    },
+    {
+      "path": "backend/api/routes/source_operations.py",
+      "symbol": "release_source",
+      "line": 103,
+      "docstring": "Close one original local reservation after verified closure, retaining files/history and requiring a separate request for subsequent adoption.",
+      "file_sha256": "1f9d1881c96368bc08cf9cf5bccf1f6a11e05d97447f451d72ca58e627565255"
+    },
+    {
+      "path": "backend/git/source_executor.py",
+      "symbol": "confirm_source_closure",
+      "line": 146,
+      "docstring": "Reconcile exact original sealed Git or never-reserved closure before ending its reservation; never signal a different owner or infer closure from path absence.",
+      "file_sha256": "1185af58c10936f2ab21fd8e144cd3f8b6c784d3092d7b58f122600ba15f23a4"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations",
+      "line": 131,
+      "docstring": "Persist bounded original setup intents and directory ownership through the existing SQLite/project-metadata transaction.",
+      "file_sha256": "22c870a051c722cbac9cdd27ae14e2a9a4857f57737cd389f31141c393f11d54"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.summaries",
+      "line": 161,
+      "docstring": "Expose complete recorded source intentions and point-in-time observations without peer internals or an implied fresh Git check.",
+      "file_sha256": "22c870a051c722cbac9cdd27ae14e2a9a4857f57737cd389f31141c393f11d54"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations._owned",
+      "line": 260,
+      "docstring": "Require the original administrative owner/fence and database identity before any directory or peer control.",
+      "file_sha256": "22c870a051c722cbac9cdd27ae14e2a9a4857f57737cd389f31141c393f11d54"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations._claim",
+      "line": 273,
+      "docstring": "Share original source admission inside an existing transaction so HTTP ownership can be persisted atomically before its first client.",
+      "file_sha256": "22c870a051c722cbac9cdd27ae14e2a9a4857f57737cd389f31141c393f11d54"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.begin_observation",
+      "line": 287,
+      "docstring": "Fence an already-closed original attempt and retain its history before a new strictly readonly reconciliation; never restart its writes.",
+      "file_sha256": "22c870a051c722cbac9cdd27ae14e2a9a4857f57737cd389f31141c393f11d54"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.prepare_repair",
+      "line": 330,
+      "docstring": "Persist explicit continuation before scheduling; replay may resume an unclaimed authorization at its original fence, never an admitted or unknown writer.",
+      "file_sha256": "22c870a051c722cbac9cdd27ae14e2a9a4857f57737cd389f31141c393f11d54"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.closed_local",
+      "line": 352,
+      "docstring": "Classify persisted original local closure with matching origin/attempt/domain or drained pre-domain ownership; grant/path absence alone is insufficient.",
+      "file_sha256": "22c870a051c722cbac9cdd27ae14e2a9a4857f57737cd389f31141c393f11d54"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.release_reservation",
+      "line": 369,
+      "docstring": "End one exactly observed closed local preparation without changing files, deleting history, registering Git or reviving old writer authority; exact replay returns its receipt.",
+      "file_sha256": "22c870a051c722cbac9cdd27ae14e2a9a4857f57737cd389f31141c393f11d54"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.uncertain",
+      "line": 474,
+      "docstring": "Retain an interrupted/failed operation and its original directories/peers; absence of a reply does not authorize another Git write.",
+      "file_sha256": "22c870a051c722cbac9cdd27ae14e2a9a4857f57737cd389f31141c393f11d54"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.note_failure",
+      "line": 481,
+      "docstring": "Expose a bounded redacted current issue while retaining the original operation, physical receipts and any partial files for explicit observation.",
+      "file_sha256": "22c870a051c722cbac9cdd27ae14e2a9a4857f57737cd389f31141c393f11d54"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService",
+      "line": 33,
+      "docstring": "Own actual administrative worker handles without inventing native turns or replaying interrupted writes after restart.",
+      "file_sha256": "a3f5ad357b31380d23132d35709f1a9115ebba71097bdf2d3dca38e907ab656e"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.view",
+      "line": 73,
+      "docstring": "Expose saved phase and actual local worker observation; a stopped local worker never proves remote rollback or fresh Git health.",
+      "file_sha256": "a3f5ad357b31380d23132d35709f1a9115ebba71097bdf2d3dca38e907ab656e"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.reconcile",
+      "line": 109,
+      "docstring": "Validate a selected historical identity/fence before scheduling readonly recovery; no implicit setup write or different current attempt is substituted.",
+      "file_sha256": "a3f5ad357b31380d23132d35709f1a9115ebba71097bdf2d3dca38e907ab656e"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.release",
+      "line": 129,
+      "docstring": "End an observed closed local reservation after original closure proof; replay reads only its receipt and cannot withdraw a later adoption owner.",
+      "file_sha256": "a3f5ad357b31380d23132d35709f1a9115ebba71097bdf2d3dca38e907ab656e"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_reservation.py",
+      "symbol": "test_release_preserves_owner_history_and_allows_new_adoption_without_retargeting_old_commands",
+      "line": 11,
+      "docstring": "A live source cannot be released; after actual Stop, one original release allows adoption while old replay/repair/observe cannot withdraw the new owner or change files.",
+      "file_sha256": "bbf9e270f6be5da641c94d690deb23e9dec6e8cb86ce72814c9153b9cf82a791"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_reservation.py",
+      "symbol": "test_release_preserves_owner_history_and_allows_new_adoption_without_retargeting_old_commands.hold",
+      "line": 20,
+      "docstring": "Hold only real original owners between fixed stages, without replacing Git results or physical retirement receipts.",
+      "file_sha256": "bbf9e270f6be5da641c94d690deb23e9dec6e8cb86ce72814c9153b9cf82a791"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_reservation.py",
+      "symbol": "test_release_never_accepts_missing_closure_or_caller_supplied_proof",
+      "line": 65,
+      "docstring": "A real admitted but unclosed administrative owner is not released from directory absence or a body containing a fake closure claim.",
+      "file_sha256": "bbf9e270f6be5da641c94d690deb23e9dec6e8cb86ce72814c9153b9cf82a791"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_reservation.py",
+      "symbol": "test_never_claimed_source_can_be_closed_without_a_synthetic_original_domain",
+      "line": 82,
+      "docstring": "Stop and release of a planned intent retain its never-claimed proof, create no folder and make old repair authority unusable.",
+      "file_sha256": "bbf9e270f6be5da641c94d690deb23e9dec6e8cb86ce72814c9153b9cf82a791"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_reservation.py",
+      "symbol": "test_saved_repair_cancelled_before_scheduling_resumes_the_same_authorization_once",
+      "line": 98,
+      "docstring": "A cancelled real SQL-to-HTTP handoff can replay an unclaimed repair at the same original fence; an admitted or completed writer is never reissued.",
+      "file_sha256": "bbf9e270f6be5da641c94d690deb23e9dec6e8cb86ce72814c9153b9cf82a791"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_reservation.py",
+      "symbol": "test_saved_repair_cancelled_before_scheduling_resumes_the_same_authorization_once.held_commit",
+      "line": 107,
+      "docstring": "Stop the actual original owner between successful init and any initial commit.",
+      "file_sha256": "bbf9e270f6be5da641c94d690deb23e9dec6e8cb86ce72814c9153b9cf82a791"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

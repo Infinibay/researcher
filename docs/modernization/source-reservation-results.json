@@ -1,0 +1,45 @@
+{
+  "base_commit": "b51e749",
+  "backend": {
+    "passed": 35,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 46.6,
+    "scope": "source reservation/operations/history/repair and project workspace/completion; current source in native dependency environment"
+  },
+  "handoff": {
+    "before": "1 failed,3 deselected: saved authorization remained stopped",
+    "after": "12 passed in 32.15s: reservation and repair cases"
+  },
+  "frontend": {
+    "passed": 122,
+    "failed": 0,
+    "build": "passed, Vite 5.17s; inherited large chunk notice"
+  },
+  "browser": {
+    "captures": 4,
+    "effect_posts": {
+      "release": 1,
+      "adoption": 1,
+      "repair": 1
+    },
+    "page_errors": 0,
+    "scoped_axe_violations": 0,
+    "horizontal_overflow": false,
+    "original_head_config_inode_content_preserved": true,
+    "actual_retired_grants": 4,
+    "native_runs": 0,
+    "evidence": "docs/design/audits/2026-11-06-source-reservation/evidence.json",
+    "server": "11176 terminal 2 after SIGINT",
+    "verifier": "80051 terminal 0; prior stopped verifiers did not repeat release"
+  },
+  "documentation": {
+    "changed_python_definitions": 23,
+    "ts_modules_and_named_definitions": 85,
+    "missing": 0
+  },
+  "real_model_turns": 0,
+  "user_remote_effects": 0,
+  "packaging": "Not rerun for this delivery; prior installed b51e749 wheel is not evidence of current changes. Current-source regressions are recorded separately.",
+  "remaining": "All original global scenarios/restore/DD030, formats and budgets, model settings/prompts/communication/scientific evaluation, remaining four routes, all twelve page acceptance and final independent review remain open."
+}
