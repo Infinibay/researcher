@@ -1,0 +1,121 @@
+{
+  "base_commit": "8ee8281",
+  "status": "project_dossier_and_observed_native_controls_connected",
+  "red": {
+    "module": "1FAIL0.43s before project workspace module",
+    "creation": "1FAIL1.05s: repeated original creation returned203and204",
+    "metadata": "stale observed hash initially not checked",
+    "planning_source": "requested12 serialized asnull before original source support",
+    "unused_deletion": "1FAIL1.40s missing agent_roster; follow-up revealed task-scoped session notes; explicit deletion now204 and global statistics preserved",
+    "unknown_read": "actual Chromium assertion1!=0: failed observation rendered known empty source"
+  },
+  "source_before_final_delete_repair": {
+    "passed": 83,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 31.982,
+    "limits": "Final original-target HTTP Stop and deletion assertions are included in final installed84, not attributed to this earlier run."
+  },
+  "source_final_deletion_and_legacy_consumer": {
+    "passed": 6,
+    "failed": 0,
+    "seconds": 2.85,
+    "limits": "Source environment,1inherited pytest_socket warning."
+  },
+  "isolated_installed": {
+    "passed": 84,
+    "failures": 0,
+    "skipped": 0,
+    "installed_distributions": 85,
+    "sdk": "1.30.0",
+    "excluded_frameworks": [
+      "chromadb",
+      "crewai",
+      "crewai-tools",
+      "fastmcp",
+      "fastmcp-slim",
+      "litellm",
+      "ollama",
+      "tree-sitter",
+      "tree-sitter-c",
+      "tree-sitter-javascript",
+      "tree-sitter-python",
+      "tree-sitter-rust",
+      "tree-sitter-typescript"
+    ],
+    "project_noneditable": true,
+    "backend_modules": 235,
+    "all_backend_imports_from_native_env": true,
+    "matched_application_members": 807,
+    "console_help": 0,
+    "console_missing_token": 2,
+    "console_real_stdio": true,
+    "console_created_database": false,
+    "real_model_turns": 0,
+    "controlled_native_turns": 1,
+    "actual_host_publications": 0,
+    "seconds": 35.165
+  },
+  "isolated_installed_receipt": "docs/modernization/projects-packaging.json",
+  "physical": {
+    "seconds": 1.608,
+    "controlled_native_turns": 1,
+    "real_model_turns": 0,
+    "actual_host_publications": 0,
+    "scope": "Actual original kernel/broker/SQLite project Stop; original held worker withdrawn and peers closed, global grant retired, replay readonly; no reports. Controlled generation/Ken."
+  },
+  "frontend": {
+    "passed": 106,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 1.865762816,
+    "typescript_build": true,
+    "build_seconds": 4.85
+  },
+  "browser": {
+    "captures": 15,
+    "unique_image_hashes": 14,
+    "passed": true,
+    "page_errors": 0,
+    "scoped_axe_violations": 0,
+    "create_posts": 2,
+    "source_posts": 2,
+    "planning_posts": 4,
+    "stop_posts": 2,
+    "controlled_browser_turns": 2,
+    "real_model_turns": 0,
+    "physical_closure": "synthetic; installed proof is separate",
+    "evidence": "docs/design/audits/2026-11-06-projects/evidence.json",
+    "full_page_acceptance": false
+  },
+  "quality": {
+    "python_definitions_documented": 44,
+    "typescript_definitions_and_modules_documented": 64,
+    "missing_docs": 0,
+    "new_lint": 0,
+    "inherited_lint": 2
+  },
+  "design": {
+    "desktop_concepts": 3,
+    "mobile_concepts": 1,
+    "selected": "project-dossier",
+    "manifest": "docs/design/concepts/projects/manifest.json",
+    "total_desktop_concepts": 21,
+    "total_mobile_concepts": 7,
+    "pilots": 7,
+    "fully_accepted_pages": 0
+  },
+  "rework": "Browser verifier focus/refresh/locator/status assumptions corrected against actual state; retained fixture and original work, no native restart solely due observation timeout. SSR router import replaced by scoped guarded URL reader. Current native-only wheel rebuilt after actual legacy deletion SQL repair;84 installed contracts repeated on final bytes. Minor details recorded, no generic reviewer/push/merge/deploy.",
+  "limits": [
+    "Existing directory registration does not initialize Git, clone or provision remote repositories.",
+    "Hard deletion removes original creation identity: tombstone/lifecycle guarantee still required before full integration acceptance.",
+    "Stop receipt is intent, not physical closure; graph-only caption deferredDD031.",
+    "All43broad scenarios remain open (pending or in_progress). Global100inherited failures, inverses43–54, advanced terminal, settings/models, prompt/books/model/science/human evaluation, five remaining routes/full page acceptance, host install/restore and final whole-branch review remain."
+  ],
+  "timing": {
+    "first_failure_artifact_utc": "2026-11-06T06:03:05.566937+00:00",
+    "recorded_utc": "2026-11-06T07:03:40.431004+00:00",
+    "elapsed_artifact_window_seconds": 3635,
+    "limits": "Artifact time span includes context compaction and pauses; not active engineering hours or a delivery estimate."
+  }
+}

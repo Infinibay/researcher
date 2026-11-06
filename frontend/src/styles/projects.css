@@ -1,0 +1,56 @@
+/* Project dossier follows the selected paper/ink work system; no image contains production UI. */
+.project-workbench > .project-layout { margin: 0; display: grid; grid-template-columns: minmax(15rem,19rem) minmax(0,1fr); min-height: calc(100dvh - 4rem); }
+.project-register { border-right: 1px solid var(--work-line); padding: 1.5rem 1.25rem; }
+.project-register > header { display: flex; justify-content: space-between; align-items: center; gap: .75rem; margin-bottom: 1rem; }
+.project-register h2 { font-size: 1.25rem; font-weight: 650; }
+.project-register ul { margin-block: 1.25rem; }
+.project-select { width: 100%; display: flex; flex-direction: column; gap: .3rem; padding: 1rem; border-bottom: 1px solid var(--work-line); text-align: left; border-left: 3px solid transparent; }
+.project-select[aria-pressed='true'] { border-left-color: var(--work-accent); background: var(--work-wash); border-radius: .2rem; }
+.project-select strong { font-size: 1rem; font-weight: 650; overflow-wrap: anywhere; }
+.project-select span { font-size: .875rem; color: var(--work-muted); line-height: 1.5; overflow-wrap: anywhere; }
+.project-select small { color: var(--work-accent); font-size: .75rem; }
+.project-reading { padding: 2rem; }
+.project-dossier, .project-empty { max-width: 68rem; margin-inline: auto; }
+.project-dossier > h2, .project-empty h2 { font-size: 2rem; line-height: 1.25; font-weight: 650; margin-block: .4rem 1rem; overflow-wrap: anywhere; }
+.project-dossier p { margin-block: .65rem; }
+.project-purpose { font-size: 1.125rem; line-height: 1.65; max-width: 68ch; white-space: pre-wrap; overflow-wrap: anywhere; }
+.project-eyebrow { color: var(--work-muted); font-size: .6875rem; letter-spacing: .1em; }
+.project-muted { color: var(--work-muted); font-size: .875rem; }
+.project-copy { max-width: 68ch; }
+.project-path { font-size: .8125rem; overflow-wrap: anywhere; }
+.project-section { margin-top: 2rem; border-top: 1px solid var(--work-line); padding-top: 1.5rem; }
+.project-section h3 { font-size: 1.125rem; font-weight: 650; margin-bottom: .75rem; }
+.project-records > li { display: grid; gap: .25rem; padding-block: .75rem; border-bottom: 1px solid var(--work-line); }
+.project-records p { margin: 0; }
+.project-dossier a, .project-link { color: var(--work-accent); text-decoration: underline; text-underline-offset: .2rem; }
+.project-link { text-align: left; }
+.project-link, .project-dossier a { display: inline-flex; align-items: center; min-height: 2.75rem; }
+.project-dossier button:not(.project-link), .project-delete-dialog button { padding: .5rem .85rem; border: 1px solid var(--work-line); border-radius: .25rem; text-align: left; }
+.project-primary { background: var(--work-accent-fill); color: white; font-weight: 600; }
+.project-primary:hover:not(:disabled) { background: var(--work-accent-strong); }
+.project-dossier button:disabled { opacity: .5; }
+.project-control { padding-block: .5rem; }
+.project-actions { display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; }
+.project-form { margin-block: 1rem; display: grid; gap: 1rem; max-width: 44rem; }
+.project-form label, .project-source-choice { display: grid; gap: .35rem; font-size: .875rem; }
+.project-form input, .project-form textarea, .project-source-choice select { width: 100%; padding: .55rem .75rem; border: 1px solid var(--work-line); border-radius: .25rem; background: var(--work-paper); color: var(--work-ink); }
+.project-form input:disabled, .project-form textarea:disabled { background: var(--work-wash); }
+.project-source-choice { max-width: 24rem; margin-block: 1rem; }
+.project-notice { border-left: 3px solid var(--work-accent); padding: .75rem 1rem; background: var(--work-wash); }
+.project-workbench [role='alert'] { color: var(--work-error); margin-block: .75rem; overflow-wrap: anywhere; }
+.project-back { display: none; }
+.project-delete-dialog { width: min(32rem,calc(100vw - 2rem)); color: var(--work-ink); background: var(--work-paper); border: 1px solid var(--work-line); border-radius: .25rem; padding: 1.5rem; }
+.project-delete-dialog h2 { font-size: 1.25rem; font-weight: 650; }
+.project-delete-dialog p { margin-block: 1rem; }
+.project-delete-dialog::backdrop { background: rgb(15 23 42 / .5); }
+@media (max-width: 700px) {
+ .project-workbench > .project-layout { display: block; }
+ .project-register, .project-reading { padding: 1.5rem 1rem; border: 0; }
+ .project-workbench[data-has-selection='true'] .project-register { display: none; }
+ .project-workbench[data-has-selection='false'] .project-reading { display: none; }
+ .project-back { display: inline-flex; margin-bottom: 1rem; }
+ .project-dossier > h2 { font-size: 1.8rem; }
+ .project-section { margin-top: 1.5rem; padding-top: 1.25rem; }
+ .project-actions { align-items: stretch; }
+ .project-actions > button, .project-primary { min-height: 2.75rem; }
+}

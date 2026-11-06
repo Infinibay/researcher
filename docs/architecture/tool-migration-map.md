@@ -417,3 +417,16 @@ de vigencia actual. La API de edición ya usa el schema real de proyectos, que
 no tiene updated_at. [Contrato](project-completion.md),
 [resultados](../modernization/project-completion-results.json). Historial ampliado,
 adopciones, paridad terminal y aceptación global siguen pendientes.
+
+## Proyectos y observaciones originales — 2026-11-06
+
+La ruta Proyectos usa `ProjectWorkspace` para metadata/fuentes/actividad y enlaces
+exactos de planes/informes; la etiqueta executing no controla la inferencia de
+actividad. Start conserva el paquete original y la fuente. Stop reutiliza la
+cancelación transaccional y dueño nativo originales sobre IDs capturados, sin
+nuevo loop ni reorientar reenvíos a trabajo posterior. Registrar carpeta existente
+no llama `RepositoryManager.init_repo` ni Git/remotos. El borrado sin historia
+usa el esquema actual y conserva estadísticas globales. [Contrato](project-workspace.md)
+y [evidencia](../modernization/projects-results.json). Crear local/clonar/adoptar/
+reparar y la ruta Repositorios son el siguiente bloque; la vieja alta todavía
+mezcla creación remota, cambios de origin y force push y debe sustituirse.

@@ -7,6 +7,7 @@ import sqlite3
 from dataclasses import asdict
 
 from fastapi import APIRouter, HTTPException, Request
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field
 
 from backend.api.exceptions import ProjectNotFound, ProjectRunning
@@ -26,6 +27,46 @@ from backend.flows.helpers import (
 from backend.tools.base.db import execute_with_retry
 
 router = APIRouter(prefix="/api/projects", tags=["projects"])
+
+
+def _workspace(request):
+    """Compose owner project observations from the actual runtime root and existing store, without constructing or activating a runtime."""
+    from backend.api.routes.runs import read_store
+    from backend.planning.project_workspace import ProjectWorkspace
+
+    runtime = request.app.state.runtime_service
+    return ProjectWorkspace(read_store(request), workspaces=runtime.workspaces if runtime else None, legacy_active=flow_manager.is_project_running)
+
+
+class RegisterProjectSource(BaseModel):
+    """Explicit existing source selection; Git, remote creation, clone and overwrite options are outside this capability."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    name: str = Field(pattern=r"^[A-Za-z0-9][A-Za-z0-9_.-]{0,80}$")
+    path: str = Field(min_length=1, max_length=4096)
+
+
+class StopObservedProject(BaseModel):
+    """One exact observed project Stop intent; caller identities/grants and arbitrary target lists are forbidden."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    task_id: int = Field(ge=1)
+    operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
+    scope_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
+@router.get("/{project_id}/workspace")
+async def project_workspace(project_id: int, request: Request):
+    """Observe actual native activity, source policy and original plan/report links; saved status never proves live work or current semantic completion."""
+    data = await asyncio.to_thread(_workspace(request).state, project_id)
+    return JSONResponse(data, headers={"Cache-Control":"no-store"})
+
+
+@router.post("/{project_id}/sources")
+async def register_project_source(project_id: int, body: RegisterProjectSource, request: Request):
+    """Register an existing managed directory without initializing Git, configuring credentials or contacting/remapping a remote."""
+    data = await asyncio.to_thread(_workspace(request).register_source, project_id, **body.model_dump())
+    return JSONResponse(data, headers={"Cache-Control":"no-store"})
 
 
 def _project_to_response(project: dict) -> ProjectResponse:
@@ -64,13 +105,23 @@ async def list_projects():
 
 
 @router.post("", response_model=ProjectResponse, status_code=201)
-async def create_project_endpoint(body: ProjectCreate):
-    """Create a new project."""
-    project_id = create_project(name=body.name, description=body.description)
+async def create_project_endpoint(body: ProjectCreate, request: Request):
+    """Create metadata once for the original exact owner request; no repository or native work is started."""
+    creation = None
+    if body.operation_key is not None:
+        creation = await asyncio.to_thread(_workspace(request).create, **body.model_dump())
+        project_id = creation['project_id']
+    else:
+        project_id = create_project(name=body.name, description=body.description)
     state = load_project_state(project_id)
     if not state:
         raise HTTPException(status_code=500, detail="Failed to create project")
-    return _project_to_response(state)
+    result = _project_to_response(state)
+    if creation is not None:
+        from backend.api.models.project import ProjectCreationReceipt
+
+        result.creation = ProjectCreationReceipt(**creation)
+    return result
 
 
 @router.get("/{project_id}", response_model=ProjectResponse)
@@ -124,6 +175,16 @@ async def update_project(project_id: int, body: ProjectUpdate):
         sql = f"UPDATE projects SET {', '.join(updates)} WHERE id = ?"
 
         def _update(conn: sqlite3.Connection) -> None:
+            """Compare the owner's displayed scope under the write lock before applying metadata; a stale editor cannot replace intervening changes."""
+            if body.expected_scope_sha256 is not None:
+                from backend.knowledge.reviews import digest
+                from backend.runtime.contracts import RunConflict
+
+                if not conn.in_transaction:
+                    conn.execute('BEGIN IMMEDIATE')
+                current = conn.execute('SELECT name,description,original_description FROM projects WHERE id=?', (project_id,)).fetchone()
+                if current is None or digest(dict(current)) != body.expected_scope_sha256:
+                    raise RunConflict('El alcance cambió desde que abriste el editor. Consulta la versión actual antes de reemplazarlo.')
             conn.execute(sql, params)
             conn.commit()
 
@@ -135,7 +196,7 @@ async def update_project(project_id: int, body: ProjectUpdate):
 
 @router.delete("/{project_id}", status_code=204)
 async def delete_project(project_id: int):
-    """Delete a project and all related resources."""
+    """Delete an explicitly selected unused project; execution history and registered workers must be preserved and reconciled instead."""
     state = load_project_state(project_id)
     if not state:
         raise ProjectNotFound(project_id)
@@ -144,6 +205,14 @@ async def delete_project(project_id: int):
         raise ProjectRunning(project_id)
 
     def _delete(conn: sqlite3.Connection) -> None:
+        """Hold the admission write lock while checking history and removing only an unused project's metadata; source files are never deleted here."""
+        # Admission and history checks share the same write lock as deletion.
+        from backend.runtime.contracts import RunConflict
+
+        if not conn.in_transaction:
+            conn.execute('BEGIN IMMEDIATE')
+        if any(conn.execute(f'SELECT 1 FROM {table} WHERE project_id=? LIMIT 1', (project_id,)).fetchone() for table in ('runtime_runs','agent_runs','flow_snapshots','agent_events')):
+            raise RunConflict('El proyecto conserva historia de ejecución. No se elimina desde este control; conserva sus informes, intentos y fuentes.')
         # Delete in dependency order — explicit deletes for all referencing
         # tables so the delete succeeds even if the DB lacks ON DELETE CASCADE
         # (e.g. tables created before CASCADE was added to the schema).
@@ -168,13 +237,8 @@ async def delete_project(project_id: int):
             p,
         )
 
-        # agent_performance is global (keyed by agent_id, no project FK).
-        # Delete entries whose agent_id matches agents in this project.
-        conn.execute(
-            "DELETE FROM agent_performance WHERE agent_id IN "
-            "(SELECT agent_id FROM agent_roster WHERE project_id = ?)",
-            p,
-        )
+        # Global agent performance has no project ownership. Preserve it;
+        # the former agent_roster table is not part of the current schema.
 
         # All tables directly referencing projects
         conn.execute("DELETE FROM agent_events WHERE project_id = ?", p)
@@ -196,7 +260,10 @@ async def delete_project(project_id: int):
         conn.execute("DELETE FROM code_quality WHERE project_id = ?", p)
         conn.execute("DELETE FROM artifact_changes WHERE project_id = ?", p)
         conn.execute("DELETE FROM artifacts WHERE project_id = ?", p)
-        conn.execute("DELETE FROM developer_session_notes WHERE project_id = ?", p)
+        conn.execute(
+            "DELETE FROM developer_session_notes WHERE task_id IN "
+            "(SELECT id FROM tasks WHERE project_id = ?)", p,
+        )
         conn.execute("DELETE FROM code_reviews WHERE project_id = ?", p)
         conn.execute("DELETE FROM agent_runs WHERE project_id = ?", p)
         conn.execute("DELETE FROM chat_messages WHERE project_id = ?", p)
@@ -258,11 +325,18 @@ async def start_project(
 
 
 @router.post("/{project_id}/stop")
-async def stop_project(project_id: int, request: Request):
+async def stop_project(project_id: int, request: Request, body: StopObservedProject | None = None):
     """Withdraw this project's native work and request legacy teardown where present; paused describes owner intent, not unproved physical closure."""
     state = await asyncio.to_thread(load_project_state, project_id)
     if not state:
         raise ProjectNotFound(project_id)
+    if body is not None:
+        receipt, created = await asyncio.to_thread(_workspace(request).request_stop, project_id, **body.model_dump())
+        runtime = request.app.state.runtime_service
+        if created and runtime is not None:
+            for run_id in receipt['run_ids']:
+                await runtime.stop(project_id,run_id)
+        return JSONResponse(receipt, headers={"Cache-Control":"no-store"})
     runtime = request.app.state.runtime_service
     runs = await runtime.stop_project(project_id) if runtime is not None else []
     legacy = None

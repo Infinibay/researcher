@@ -1,0 +1,205 @@
+{
+  "status": "passed",
+  "scope": "Actual paired owner API/SQLite/React with synthetic accepted report/held generation/peer closure. Separate installed test proves actual kernel/broker Stop;0realmodels.",
+  "states": [
+    {
+      "file": "01-desktop-selected-dossier.png",
+      "sha256": "cdda1ba555fa7a3f125b7aa8188149a676399c67554d0062e8720f1673a59be7",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "02-mobile-existing-source-registered.png",
+      "sha256": "0357e6cab03e78b1a2ecfdd91b542093290f35b58a6c16c081c1ad8eecb7e95e",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "03-mobile-creation-response-lost.png",
+      "sha256": "b69ac9e3b1b45955167e787e637b137300704e06a8c6242f491aa86581dd014c",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "04-mobile-new-project-source-needed.png",
+      "sha256": "c19563056b6cd314dc92a7353c37618ed3a91617d6770c4f6e4e11cab1d67683",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "05-mobile-stale-editor-rejected.png",
+      "sha256": "43d93a3c0dd00851555fd1819587dd6c62e0efd36c2127b9383e2abb2523b0c6",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "06-mobile-active-planning-with-recorded-label.png",
+      "sha256": "05ee566a90d42b5b7f957fcdfb54a9fe79904b449a97a22ec6da2cbc871a0184",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "07-mobile-active-planning-with-recorded-label.png",
+      "sha256": "05ee566a90d42b5b7f957fcdfb54a9fe79904b449a97a22ec6da2cbc871a0184",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "08-mobile-stop-response-lost.png",
+      "sha256": "02ff6c3cf568b0c991e4683dc8db5352652e9f35e1d9257837c255086e631dc9",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "09-desktop-stop-recovery-preserves-newer-work.png",
+      "sha256": "8bde2cc038ab6d97f5da22e0d82eca3d7279e8d9d738a0105751ec121f85c4e4",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "10-desktop-delete-unused-confirmation.png",
+      "sha256": "bb4249bdfa29424f663836c7567cdcd3514796fbfd9d15e46cfe4b21cdfc5595",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "11-desktop-unused-project-deleted.png",
+      "sha256": "dc6eb6e919622d8808cd44a6a06cbfa4bdd298c485990059b41fe1ad6a037054",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "12-mobile-source-unavailable-without-retarget.png",
+      "sha256": "4b7e662085cf3463e865455ddc7437371a99e6e50a4a13a6a68182770ee8d182",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "13-mobile-empty-list-synthetic-response.png",
+      "sha256": "d54dd11be1c143d8bcafdf5ac5112ba64bd6e4f5d54b854eaa75dba75f492c3d",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "14-mobile-list-error-synthetic-response.png",
+      "sha256": "ccc21a85b52e1399da3ec28c8c48bed059f716c86bbd5a2430319401b9c3c309",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "15-mobile-workspace-read-error.png",
+      "sha256": "eb3eda1e83732f44d8829c38ea05460654935dd76661765546b3e164256cb265",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    }
+  ],
+  "create_requests": [
+    {
+      "operation_key": "e3d5b485-ed11-4be7-b3d9-49b3bbcf90c5",
+      "name": "Gamma",
+      "description": "Contrastar el comportamiento antes de cambiar el buscador."
+    },
+    {
+      "operation_key": "e3d5b485-ed11-4be7-b3d9-49b3bbcf90c5",
+      "name": "Gamma",
+      "description": "Contrastar el comportamiento antes de cambiar el buscador."
+    }
+  ],
+  "source_requests": [
+    {
+      "name": "gamma",
+      "path": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/projects-browser-fixture/test_prepare0/workspaces/gamma"
+    },
+    {
+      "name": "gamma",
+      "path": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/projects-browser-fixture/test_prepare0/workspaces/gamma"
+    }
+  ],
+  "start_requests": [
+    {
+      "operation_key": "0607f618-ef78-4dfd-b13a-db6163731dd3",
+      "prompt": null,
+      "repository_id": 13
+    },
+    {
+      "operation_key": "0607f618-ef78-4dfd-b13a-db6163731dd3",
+      "prompt": null,
+      "repository_id": 13
+    },
+    {
+      "operation_key": "0607f618-ef78-4dfd-b13a-db6163731dd3",
+      "prompt": null,
+      "repository_id": 13
+    },
+    {
+      "operation_key": "0607f618-ef78-4dfd-b13a-db6163731dd3",
+      "prompt": null,
+      "repository_id": 13
+    }
+  ],
+  "stop_requests": [
+    {
+      "operation_key": "32ae9262-9af4-4eea-ad3e-c07d6c467866",
+      "task_id": 2005,
+      "scope_sha256": "9a819ef85934b912c0571695a59601a49404805cab54423b01e7adbc147e44be"
+    },
+    {
+      "operation_key": "32ae9262-9af4-4eea-ad3e-c07d6c467866",
+      "task_id": 2005,
+      "scope_sha256": "9a819ef85934b912c0571695a59601a49404805cab54423b01e7adbc147e44be"
+    }
+  ],
+  "page_errors": [],
+  "created_id": 203,
+  "continuation": "Same retained fixture; captured original start packet restored once into a new QA context after verifier ambiguity and incorrect assumption that native planning leaves statusnew. Real statusplanning observed; another reply is deliberately lost before same-context reload/recovery. No native restart.",
+  "original_run": "bf84485d-c0cf-4d74-9838-a39f154de670",
+  "newer_run": "c5bacf85-b082-468e-8fab-838ff08f7ab8",
+  "deleted_unused_project": 204,
+  "previous_edge_failure": "TimeoutError: locator.waitFor: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('dialog') to be hidden\u001b[22m\n\u001b[2m    34 × locator resolved to visible <dialog open=\"\" class=\"project-delete-dialog\" aria-labelledby=\"project-delete-title\">…</dialog>\u001b[22m\n",
+  "edge_continuation": "Retained same SQLite/source fixture after terminal deletion failure. Old server confirmed terminated143, then started updated source for deletion repair; no native work restarted."
+}

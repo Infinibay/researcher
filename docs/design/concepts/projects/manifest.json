@@ -1,0 +1,92 @@
+{
+  "date": "2026-11-06",
+  "base_commit": "8ee8281",
+  "generator": "image_gen.imagegen (built-in)",
+  "model": null,
+  "model_note": "Built-in exact model not exposed; no identifier inferred.",
+  "image_count": 4,
+  "selected_desktop": "project-dossier",
+  "selection": "selection.md",
+  "assets": [
+    {
+      "id": "editorial-register",
+      "surface": "desktop",
+      "image": "editorial-register.png",
+      "sha256": "66627640afe52cfa8595c1127667d3281d9a7a59d37d064f0f927af4b28265f5",
+      "pixel_dimensions": [
+        1487,
+        1058
+      ],
+      "layout_target": [
+        1440,
+        1024
+      ],
+      "prompt": "editorial-register.prompt.txt",
+      "prompt_sha256": "b730ba467935a55aedacae1e35a0dbab6df67b366090c3bc702001db57daf47f",
+      "input_images": [
+        "../../audits/2026-11-06-project-completion/01-desktop-ready-without-owner-statement.png"
+      ],
+      "inspected": true
+    },
+    {
+      "id": "working-collection",
+      "surface": "desktop",
+      "image": "working-collection.png",
+      "sha256": "70c713926d80d7fc0017143e049916ce3d3bd81f4718920cc5b2b7d311ced204",
+      "pixel_dimensions": [
+        1487,
+        1058
+      ],
+      "layout_target": [
+        1440,
+        1024
+      ],
+      "prompt": "working-collection.prompt.txt",
+      "prompt_sha256": "5062553e62003f1dbdb3de4277ba1847976c96c6cb5978e8fa78f5553ea3970f",
+      "input_images": [
+        "../../audits/2026-11-06-project-completion/01-desktop-ready-without-owner-statement.png"
+      ],
+      "inspected": true
+    },
+    {
+      "id": "project-dossier",
+      "surface": "desktop",
+      "image": "project-dossier.png",
+      "sha256": "dda023d4dc1f78012e1d7596359d4b3f91339367d2bab67bba0ae7af81cd2e3b",
+      "pixel_dimensions": [
+        1487,
+        1058
+      ],
+      "layout_target": [
+        1440,
+        1024
+      ],
+      "prompt": "project-dossier.prompt.txt",
+      "prompt_sha256": "e5b284e42855d51c3539dbb223764a0a54e666f58d76072ee9cdc689f43c878d",
+      "input_images": [
+        "../../audits/2026-11-06-project-completion/01-desktop-ready-without-owner-statement.png"
+      ],
+      "inspected": true
+    },
+    {
+      "id": "project-dossier-mobile",
+      "surface": "mobile",
+      "image": "project-dossier-mobile.png",
+      "sha256": "3a8298b220f7e6fb54698210e4347d2e1543f99fbef45ce751b74772ca82d782",
+      "pixel_dimensions": [
+        852,
+        1846
+      ],
+      "layout_target": [
+        390,
+        844
+      ],
+      "prompt": "project-dossier-mobile.prompt.txt",
+      "prompt_sha256": "c839e8f79a427c6338434e9d4c4101d336328e54d0e20046e9fb9350a65e1bf5",
+      "input_images": [
+        "project-dossier.png"
+      ],
+      "inspected": true
+    }
+  ]
+}

@@ -35,3 +35,11 @@ test('plan acceptance receipt from another original version remains unresolved',
  const action=preparePlanAcceptance(101,42,'planner:a','a'.repeat(64),3),previous=globalThis.fetch
  try{globalThis.fetch=async()=>Response.json({project_id:101,task_id:42,run_id:'planner:a',operation_key:action.body.operation_key,proposal_sha256:'b'.repeat(64),context_version:3,tasks:{change:12},epics:{work:10},execution_started:false});await assert.rejects(sendPlanAcceptance(action),/recibo/)}finally{globalThis.fetch=previous}
 })
+
+test('planning source selection is explicit and a lost reply cannot switch the original repository',async()=>{
+ const {startProjectPlanning}=await import('../src/api/projectPlans.ts')
+ const saved=storage(),previous=globalThis.fetch,sent:unknown[]=[]
+ try{globalThis.fetch=async(url,options)=>{const body=JSON.parse(String(options?.body));sent.push(body);if(sent.length===1)throw new TypeError('lost');return Response.json({request:body,planning_task_id:42,run:{project_id:101,task_id:42,run_id:'planner:a',actor_id:'native-project-planner',execution_kind:'research'}})}
+  await assert.rejects(startProjectPlanning(saved,101,12),/lost/);await startProjectPlanning(saved,101,99);assert.deepEqual(sent[0],sent[1]);assert.equal((sent[0] as {repository_id:number}).repository_id,12)
+ }finally{globalThis.fetch=previous}
+})

@@ -8,7 +8,7 @@ archivos generados e inspeccionados, no pantallas aceptadas.
 | Ruta | Escritorio / 3 | Móvil / 1 | Selección | Implementación | Aceptación visual |
 | --- | ---: | ---: | --- | --- | --- |
 | `/` | 0 | 0 | Pendiente | Pendiente | Pendiente |
-| `/projects` | 0 | 0 | Pendiente | Pendiente | Pendiente |
+| `/projects` | 3 | 1 | Expediente del proyecto | Piloto en código | Parcial: selección/fuentes/recuperación/borrado/móvil; aceptación pendiente |
 | `/epics` | 0 | 0 | Pendiente | Pendiente | Pendiente |
 | `/tasks` | 3 | 1 | Lista editorial con inspector | Piloto en código | Parcial: capturas reales; aceptación pendiente |
 | `/agents` | 0 | 0 | Pendiente | Pendiente | Pendiente |
@@ -19,7 +19,7 @@ archivos generados e inspeccionados, no pantallas aceptadas.
 | `/files` | 3 | 1 | Archivo con inspector | Piloto en código | Parcial: recorrido/teclado; aceptación humana pendiente |
 | `/repositories` | 0 | 0 | Pendiente | Pendiente | Pendiente |
 | `/flow` | 0 | 0 | Pendiente | Pendiente | Pendiente |
-| **Total** | **18 / 36** | **6 / 12** | **6 / 12** | **6 pilotos** | **0 / 12** |
+| **Total** | **21 / 36** | **7 / 12** | **7 / 12** | **7 pilotos** | **0 / 12** |
 
 Los prompts, archivos, hashes, tamaños y procedencia del piloto están en
 [concepts/tasks/manifest.json](concepts/tasks/manifest.json). Las tres alternativas
@@ -54,3 +54,9 @@ Actualización 2026-11-02: el piloto de Hallazgos incorpora revisión independie
 historial, fuentes con hash revisado y recuperación de recibos. [Nueve estados y tres
 anchos finales](audits/2026-11-02-finding-review/report.md). La aceptación integral
 sigue pendiente; continúan seis pilotos y cero páginas plenamente aceptadas.
+
+Actualización 2026-11-06: Proyectos usa el [expediente seleccionado](concepts/projects/manifest.json).
+[Quince capturas y límites](audits/2026-11-06-projects/report.md) verifican lectura,
+fuentes, edición concurrente, recuperación de creación/planificación/Stop y borrado.
+Siete pilotos, cinco rutas aún sin conceptos/implementación y cero páginas con
+aceptación completa. Los totales anteriores son registros históricos.

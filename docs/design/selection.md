@@ -232,3 +232,13 @@ con citas/fechas/autorías guardadas; no inventar modificación ni un campo de e
 que no exista. Usar Fuentes citadas, porque pueden apoyar o contradecir la afirmación.
 La confianza declarada heredada no equivale a certeza científica; la revisión independiente
 requiere admisión real del reviewer. Móvil separa lista/lector. Piloto implementado y verificado en18 estados funcionales; aceptación completa pendiente.
+
+## Proyectos: expediente — 2026-11-06
+
+Tres alternativas independientes y una adaptación móvil generadas e inspeccionadas.
+El usuario delegó elegir: [comparación y elección](concepts/projects/selection.md),
+[procedencia](concepts/projects/manifest.json). El expediente conserva contexto y
+lectura sin convertir metadata en actividad. La implementación mantiene lista y
+documento en escritorio; en móvil abre el expediente con regreso/foco a su fila.
+Se comprobaron estados reales y errores/recuperación; no es aceptación completa.
+[Capturas, comparación y límites](audits/2026-11-06-projects/report.md).

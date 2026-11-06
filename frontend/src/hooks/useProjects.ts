@@ -6,6 +6,7 @@ import { useProjectStore } from '../stores/project'
 import {useNavigate} from 'react-router-dom'
 import {startProjectPlanning} from '../api/projectPlans'
 
+/** Read the owner project register without starting any project work. */
 export function useProjects() {
   return useQuery({
     queryKey: ['projects'],
@@ -13,6 +14,7 @@ export function useProjects() {
   })
 }
 
+/** Read exactly the selected project, keeping an absent selection idle. */
 export function useProject(projectId: number | null) {
   return useQuery({
     queryKey: ['project', projectId],
@@ -21,6 +23,7 @@ export function useProject(projectId: number | null) {
   })
 }
 
+/** Retain the compatible unkeyed creation hook; the dossier uses durable exact creation packets. */
 export function useCreateProject() {
   const qc = useQueryClient()
   return useMutation({
@@ -35,10 +38,11 @@ export function useCreateProject() {
   })
 }
 
+/** Update only the owner-selected metadata, optionally guarding the exact scope shown by its editor. */
 export function useUpdateProject() {
   const qc = useQueryClient()
   return useMutation({
-    mutationFn: ({ id, ...data }: { id: number; name?: string; description?: string; status?: string }) =>
+    mutationFn: ({ id, ...data }: { id: number; name?: string; description?: string; status?: string; expected_scope_sha256?: string }) =>
       fetchApi<Project>(`/api/projects/${id}`, {
         method: 'PUT',
         body: JSON.stringify(data),
@@ -50,6 +54,7 @@ export function useUpdateProject() {
   })
 }
 
+/** Delete an explicitly selected unused project and clear its selection after the server confirms its history guard. */
 export function useDeleteProject() {
   const qc = useQueryClient()
   const store = useProjectStore()
@@ -78,6 +83,7 @@ export function useStartProject() {
 
 }
 
+/** Request the compatible legacy project control; native dossier Stop uses its frozen observed-target packet. */
 export function useStopProject() {
   const qc = useQueryClient()
   return useMutation({

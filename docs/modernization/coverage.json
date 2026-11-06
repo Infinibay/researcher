@@ -463,7 +463,13 @@
         "docs/modernization/code-reviews.md",
         "docs/modernization/code-review-state-results.json",
         "docs/modernization/code-review-state-packaging.json",
-        "backend/tests/runtime/test_code_review_state.py"
+        "backend/tests/runtime/test_code_review_state.py",
+        "docs/architecture/project-workspace.md",
+        "docs/modernization/projects-results.json",
+        "docs/modernization/projects-packaging.json",
+        "backend/tests/runtime/test_project_workspace.py",
+        "backend/tests/runtime/test_owned_project_stop.py",
+        "docs/design/audits/2026-11-06-projects/evidence.json"
       ],
       "remaining": [
         "Durable product startup/shutdown and all tool lifecycle integration; old flows are not covered by owned command evidence",
@@ -698,7 +704,13 @@
         "docs/architecture/remote-publication.md",
         "docs/modernization/remote-publication-results.json",
         "docs/architecture/remote-runtime.md",
-        "docs/modernization/remote-runtime-results.json"
+        "docs/modernization/remote-runtime-results.json",
+        "docs/architecture/project-workspace.md",
+        "docs/modernization/projects-results.json",
+        "docs/modernization/projects-packaging.json",
+        "backend/tests/runtime/test_project_workspace.py",
+        "backend/tests/runtime/test_owned_project_stop.py",
+        "docs/design/audits/2026-11-06-projects/evidence.json"
       ]
     },
     "E07": {
@@ -1352,7 +1364,14 @@
     },
     "U08": {
       "status": "pending",
-      "evidence": []
+      "evidence": [
+        "docs/architecture/project-workspace.md",
+        "docs/modernization/projects-results.json",
+        "docs/modernization/projects-packaging.json",
+        "backend/tests/runtime/test_project_workspace.py",
+        "backend/tests/runtime/test_owned_project_stop.py",
+        "docs/design/audits/2026-11-06-projects/evidence.json"
+      ]
     }
   },
   "deliverables": {
@@ -1831,11 +1850,15 @@
         "docs/design/concepts/wiki/manifest.json",
         "docs/design/audits/2026-11-01-wiki/report.md",
         "docs/design/concepts/findings/manifest.json",
-        "docs/design/audits/2026-11-01-findings/report.md"
+        "docs/design/audits/2026-11-01-findings/report.md",
+        "docs/design/concepts/projects/manifest.json",
+        "docs/design/audits/2026-11-06-projects/report.md",
+        "frontend/src/components/pages/ProjectsPage.tsx",
+        "docs/modernization/projects-results.json"
       ],
       "remaining": [
-        "Six routes still need concepts, selection and implementation: home, projects, epics, agents, repositories and flow. Eighteen desktop concepts and six mobile adaptations remain.",
-        "All twelve routes and shared components still require complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
+        "Five routes still need concepts, selection and implementation: home, epics, agents, repositories and flow. Fifteen desktop concepts and five mobile adaptations remain.",
+        "All twelve routes/shared components still require complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
       ]
     },
     "12_mobile_adaptations": {
@@ -1855,11 +1878,15 @@
         "docs/design/concepts/wiki/manifest.json",
         "docs/design/audits/2026-11-01-wiki/report.md",
         "docs/design/concepts/findings/manifest.json",
-        "docs/design/audits/2026-11-01-findings/report.md"
+        "docs/design/audits/2026-11-01-findings/report.md",
+        "docs/design/concepts/projects/manifest.json",
+        "docs/design/audits/2026-11-06-projects/report.md",
+        "frontend/src/components/pages/ProjectsPage.tsx",
+        "docs/modernization/projects-results.json"
       ],
       "remaining": [
-        "Six routes still need concepts, selection and implementation: home, projects, epics, agents, repositories and flow. Eighteen desktop concepts and six mobile adaptations remain.",
-        "All twelve routes and shared components still require complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
+        "Five routes still need concepts, selection and implementation: home, epics, agents, repositories and flow. Fifteen desktop concepts and five mobile adaptations remain.",
+        "All twelve routes/shared components still require complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
       ]
     },
     "design_selection": {
@@ -1887,7 +1914,11 @@
         "docs/design/concepts/wiki/manifest.json",
         "docs/design/audits/2026-11-01-wiki/report.md",
         "docs/design/concepts/findings/manifest.json",
-        "docs/design/audits/2026-11-01-findings/report.md"
+        "docs/design/audits/2026-11-01-findings/report.md",
+        "docs/design/concepts/projects/manifest.json",
+        "docs/design/audits/2026-11-06-projects/report.md",
+        "frontend/src/components/pages/ProjectsPage.tsx",
+        "docs/modernization/projects-results.json"
       ],
       "remaining": [
         "Six routes still need concepts, selection and implementation: home, projects, epics, agents, repositories and flow. Eighteen desktop concepts and six mobile adaptations remain.",
@@ -1922,11 +1953,15 @@
         "docs/design/concepts/wiki/manifest.json",
         "docs/design/audits/2026-11-01-wiki/report.md",
         "docs/design/concepts/findings/manifest.json",
-        "docs/design/audits/2026-11-01-findings/report.md"
+        "docs/design/audits/2026-11-01-findings/report.md",
+        "docs/design/concepts/projects/manifest.json",
+        "docs/design/audits/2026-11-06-projects/report.md",
+        "frontend/src/components/pages/ProjectsPage.tsx",
+        "docs/modernization/projects-results.json"
       ],
       "remaining": [
-        "Six routes still need concepts, selection and implementation: home, projects, epics, agents, repositories and flow. Eighteen desktop concepts and six mobile adaptations remain.",
-        "All twelve routes and shared components still require complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
+        "Five routes still need concepts, selection and implementation: home, epics, agents, repositories and flow. Fifteen desktop concepts and five mobile adaptations remain.",
+        "All twelve routes/shared components still require complete interaction/accessibility/human-comprehension acceptance; no route is fully accepted."
       ]
     },
     "accessibility_e2e": {
@@ -1957,7 +1992,11 @@
         "backend/tests/research/test_finding_semantic.py",
         "backend/tests/runtime/test_host_business.py",
         "docs/design/audits/2026-11-01-findings/report.md",
-        "frontend/tests/findings-design.test.ts"
+        "frontend/tests/findings-design.test.ts",
+        "docs/design/concepts/projects/manifest.json",
+        "docs/design/audits/2026-11-06-projects/report.md",
+        "frontend/src/components/pages/ProjectsPage.tsx",
+        "docs/modernization/projects-results.json"
       ],
       "notes": [
         "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json."
@@ -3369,8 +3408,29 @@
         "Native-only123selectedpass excluding4oldinverses; actual5turn graph then exact host project closure/replay, canonical137 retained; source34plus7legacy, frontend102/build, browser7states with exact lost-reply recovery and changed-scope historical validity"
       ],
       "remaining": [
-        "Projects route discoverability/full redesign and all12page final acceptance; broader closed effect/budget history expansion/historical/manual adoption/advanced terminal parity",
+        "Projects original plan/report discoverability implemented as pilot, full12page acceptance remains; broader closed effect/budget history expansion/historical/manual adoption/advanced terminal parity still required.",
         "Representative semantic/human/science/model/prompt evaluations, current global suite/43scenarios, installation/restore/inverses and final fresh review remain required"
+      ]
+    },
+    "project_workspace": {
+      "status": "project_dossier_and_observed_native_controls_verified_full_lifecycle_pending",
+      "evidence": [
+        "docs/architecture/project-workspace.md",
+        "docs/modernization/projects-results.json",
+        "docs/modernization/projects-packaging.json",
+        "backend/tests/runtime/test_project_workspace.py",
+        "backend/tests/runtime/test_owned_project_stop.py",
+        "docs/design/audits/2026-11-06-projects/evidence.json",
+        "frontend/src/api/projectWorkspace.ts",
+        "frontend/tests/project-workspace-actions.test.ts"
+      ],
+      "implemented": [
+        "Actual scope/activity/source/plan/report projection; exact create/start/source/Stop recovery, optimistic edits and protected history deletion",
+        "Three desktop concepts plus mobile generated/selected/implemented;84 installed contracts,106 frontend and15 browser captures, no full visual acceptance"
+      ],
+      "remaining": [
+        "Full create/adopt/clone/repair Git/source lifecycle, retained creation identity after deletion/restore, settings/model/terminal/full-page/human integration",
+        "Full original plan,43broad scenarios/global/restore/final independent review remain open"
       ]
     }
   }

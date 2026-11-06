@@ -5,11 +5,47 @@ Actualizado: 2026-11-06. Objetivo activo: implementar **todo** el [plan](../supe
 ## Estado comprobado
 
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor retirados; quedan consumidores, herramientas y dependencias antiguos.
-- Interfaz: seis pilotos, 18/36 conceptos de escritorio y 6/12 móviles; seis rutas pendientes y 0/12 páginas completamente aceptadas.
+- Interfaz: siete pilotos, 21/36 conceptos de escritorio y 7/12 móviles; cinco rutas pendientes y 0/12 páginas completamente aceptadas.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: informe y cierre explícito del proyecto
+## Etapa actual: Proyectos y trabajo observado
+
+**Resultado:** expediente elegido entre tres conceptos desktop/uno móvil, alcance
+editable con hash de la observación, selección aislada y fuentes existentes bajo
+la raíz real. Actividad nativa se lee del store, no de la etiqueta del proyecto.
+Planes e informes enlazan su solicitud original. Creación, registro, planificación
+y Stop conservan la intención al perder respuesta/recargar. Stop congela sólo los
+intentos/grafos observados; su recibo no prueba cierre. El borrado protege historia
+bajo el write lock y confirma sólo proyectos sin ejecución; conserva archivos y
+estadísticas globales. Consulta fallida significa desconocido, no carpeta ausente.
+Sin nuevo loop/modelo/tabla de órdenes ni Git o remoto implícito.
+
+**Verificación:** wheel final no editable/nativo:84PASS0FAIL0SKIP35.165s,
+235imports instalados/807miembros coincidentes/85distribuciones/sin frameworks
+antiguos; consola MCP stdio real. Stop kernel/broker real1.608s,1turno controlado,
+0modelos/publicaciones. Fuente83pasan antes del arreglo final de borrado y6pasan
+borrado/consumidor después; no se confunden esas revisiones. Frontend106pasan y
+build4.85s. Navegador15capturas/14imágenes únicas, ownerAPI/SQLite/React reales con
+generación/cierre sintéticos;0errores JS/axe en regiones revisadas/overflow.
+44definiciones Python/64TS documentadas,0avisos nuevos/2heredados.
+[Resultados](projects-results.json), [paquete](projects-packaging.json),
+[contrato](../architecture/project-workspace.md),
+[QA](../design/audits/2026-11-06-projects/report.md).
+
+**Siguiente principal:** Repositorios: separar crear local, adoptar, clonar y
+reparar; eliminar alta remota/cambio de origin/force push implícitos del camino
+antiguo, con operaciones recuperables y diseño profesional. Brief
+`repositories-page-brief.md`. La creación tras hard delete/restore requiere una
+política de identidad retenida (DD030) antes de la aceptación integral. DD031 es
+sólo etiqueta del control para grafos sin proceso; anotada para pulido.
+
+El alcance completo sigue abierto: cinco rutas restantes y aceptación de las doce,
+prompts/libros/modelos/settings/evaluaciones humanas/científicas, historia y
+presupuestos, adopción, paridad terminal,43escenarios/suite global, instalación/
+restore/inversas43–54 y revisión final. No reabrir recibos/kernel por detalles.
+
+## Etapa anterior: informe y cierre explícito del proyecto
 
 **Resultado:** informe determinista atribuido sobre alcance original/actual, plan,
 entregas y todas las tareas del proyecto. Exige aceptaciones actuales, cierre y
@@ -36,14 +72,8 @@ dos imports diferidos DD029. [Resultados](project-completion-results.json),
 [contrato](../architecture/project-completion.md),
 [navegador](../design/audits/2026-11-06-project-completion/report.md).
 
-**Siguiente principal:** rediseño y conexión de Proyectos al alcance y cierre
-reales: tres conceptos desktop/uno móvil, selección razonada e implementación,
-CRUD/planificación/Stop y navegación a informes/versiones reales. Leer el brief
-`projects-page-brief.md` del seguimiento. Evitar pulir recibos/imports/este panel.
-Quedan expansión histórica de efectos/presupuestos/adopciones, paridad terminal,
-consumidores restantes, settings/modelos, todas las páginas/prompts/evaluaciones,
-43escenarios/global/instalación/restore/inversas y revisión final. Ningún requisito
-del plan se retira por esta entrega.
+La siguiente entrega indicada en ese corte era Proyectos; su resultado y siguiente
+paso actuales están arriba. Los límites del informe anterior siguen vigentes.
 
 ## Etapa anterior: material de código aceptado para sucesoras
 

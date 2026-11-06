@@ -1,6 +1,6 @@
-# QA visual de los pilotos Tareas, Conversación, Informes y Archivos
+# QA visual de los pilotos de la modernización
 
-Resultado actual: **parcial; 0/12 rutas aceptadas completamente**.
+Resultado actual: **parcial; siete pilotos, 21/36 conceptos de escritorio, 7/12 móviles y 0/12 rutas aceptadas completamente**. Cinco rutas siguen pendientes de conceptos/implementación. Las secciones siguientes conservan evidencia histórica con su alcance original.
 
 El bloqueo inicial de CUA queda como antecedente histórico. El plan autorizado
 ya exige Playwright y axe; Chromium local con sandbox funciona. No se necesita
@@ -77,3 +77,13 @@ escala de título móvil respecto al concepto; conservar para coherencia global.
 La aceptación global sigue **parcial,0/12**: comprensión humana, lector de pantalla,
 zoom real y estados restantes no se dan por verificados. Archivos es el cuarto
 piloto; no cierra formatos adicionales, consumidores antiguos ni el motor completo.
+
+## Proyectos — 2026-11-06
+
+[Expediente seleccionado](docs/design/concepts/projects/selection.md) implementado
+con alcance/fuentes/actividad/decisiones originales y recuperación de solicitudes.
+[Quince capturas, catorce imágenes únicas y límites](docs/design/audits/2026-11-06-projects/report.md),
+cero errores JS/infracciones axe en las regiones revisadas/overflow horizontal.
+Se inspeccionaron concepto, escritorio y móvil. La fuente no comprobada sigue
+siendo desconocida; el borrado exige confirmación y protege historia. Pendientes
+aceptación humana/tecnologías de asistencia/zoom/otras rutas y shell integral.

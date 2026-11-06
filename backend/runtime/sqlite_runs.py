@@ -2168,30 +2168,35 @@ class SQLiteRunStore:
         )
 
     def cancel(self, project_id, run_id):
+        """Withdraw one original run through the existing transaction; labels never prove its physical closure."""
         with self._transaction(write=True) as conn:
-            row = self._row(conn, project_id, run_id)
-            if row["cancel_requested"]:
-                return self._view(row)
-            status = cancel_outcome(row["status"])
-            if row["status"] in ("failed", "cancelled", "superseded"):
-                return self._view(row)
-            self._withdraw(conn, row, status, cancel_requested=1)
-            conn.execute(
-                "UPDATE user_requests SET status='expired' WHERE status='pending' AND id IN (SELECT request_id FROM runtime_question_links WHERE project_id=? AND run_id=?)",
-                (project_id, run_id),
-            )
-            self._event(
-                conn,
-                project_id,
-                row["task_id"],
-                "run.cancel_requested",
-                {
-                    "run_id": run_id,
-                    "attempt_id": row["current_attempt_id"],
-                    "status": status,
-                },
-            )
-            return self._view(self._row(conn, project_id, run_id))
+            return self._cancel(conn, project_id, run_id)
+
+    def _cancel(self, conn, project_id, run_id):
+        """Reuse exact original cancellation/fence/grant/question/event semantics in an atomic observed-project Stop decision."""
+        row = self._row(conn, project_id, run_id)
+        if row["cancel_requested"]:
+            return self._view(row)
+        status = cancel_outcome(row["status"])
+        if row["status"] in ("failed", "cancelled", "superseded"):
+            return self._view(row)
+        self._withdraw(conn, row, status, cancel_requested=1)
+        conn.execute(
+            "UPDATE user_requests SET status='expired' WHERE status='pending' AND id IN (SELECT request_id FROM runtime_question_links WHERE project_id=? AND run_id=?)",
+            (project_id, run_id),
+        )
+        self._event(
+            conn,
+            project_id,
+            row["task_id"],
+            "run.cancel_requested",
+            {
+                "run_id": run_id,
+                "attempt_id": row["current_attempt_id"],
+                "status": status,
+            },
+        )
+        return self._view(self._row(conn, project_id, run_id))
 
     def expire(self, project_id, run_id) -> bool:
         with self._transaction(write=True) as conn:

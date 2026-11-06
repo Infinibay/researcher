@@ -1,0 +1,52 @@
+{
+  "base_commit": "8ee8281",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "e304d175c1b669ab852bb4477739b3c9d2bd57bd386ae6ba38c2fd3d8ff5f8d5",
+  "observed": {
+    "passed": 84,
+    "failures": 0,
+    "skipped": 0,
+    "installed_distributions": 85,
+    "sdk": "1.30.0",
+    "excluded_frameworks": [
+      "chromadb",
+      "crewai",
+      "crewai-tools",
+      "fastmcp",
+      "fastmcp-slim",
+      "litellm",
+      "ollama",
+      "tree-sitter",
+      "tree-sitter-c",
+      "tree-sitter-javascript",
+      "tree-sitter-python",
+      "tree-sitter-rust",
+      "tree-sitter-typescript"
+    ],
+    "project_noneditable": true,
+    "backend_modules": 235,
+    "all_backend_imports_from_native_env": true,
+    "matched_application_members": 807,
+    "console_help": 0,
+    "console_missing_token": 2,
+    "console_real_stdio": true,
+    "console_created_database": false,
+    "real_model_turns": 0,
+    "controlled_native_turns": 1,
+    "actual_host_publications": 0,
+    "seconds": 35.165
+  },
+  "tests": [
+    "backend/tests/runtime/test_project_workspace.py",
+    "backend/tests/runtime/test_admission_binding.py",
+    "backend/tests/runtime/test_coordination.py",
+    "backend/tests/runtime/test_human_questions.py",
+    "backend/tests/runtime/test_plan_execution.py",
+    "backend/tests/runtime/test_project_completion.py",
+    "backend/tests/runtime/test_native_git_retirement.py",
+    "backend/tests/runtime/test_owned_project_stop.py"
+  ],
+  "excluded_preexisting_inverse_cases": [],
+  "bootstrap": "Existing clean native-only env; final noneditable wheel reinstalled offline without dependency changes. Python-I outside checkout; no inherited source or old site-packages. Explicit prepared local semantic assets.",
+  "limits": "Actual original owned native worker held in a controlled turn; observed project Stop atomically withdraws SQL grants/fence, existing runtime closes original kernel/broker peers, replay reads only original receipt. Actual SQLite/kernel/broker and closed global grant;1controlled native turn,0realmodels,0reports/publications. Source registration/create/metadata/history guards and shared admission/cancellation/graph/closure contracts. Native-only installed contract consumers and console stdio. Controlled generation/Ken,0real models; not real ranking/model quality, remote server integration, global suite, host provisioning or restore."
+}

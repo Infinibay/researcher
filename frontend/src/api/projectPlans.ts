@@ -28,16 +28,16 @@ export async function projectPlanState(project:number,task:number,run:string){co
 export async function sendPlanAcceptance(action:PlanAcceptanceAction){const receipt=await fetchApi<PlanAcceptanceReceipt>(`/api/projects/${action.projectId}/runs/${encodeURIComponent(action.runId)}/project-plan/accept`,{method:'POST',body:JSON.stringify(action.body)});if(!matchesPlanReceipt(receipt,action))throw new Error('El recibo no corresponde a esta aceptación de plan. Conservamos la solicitud original.');return receipt}
 
 /** A project start exists before its planning task ID is known. */
-interface PlanningStart {schema:1;projectId:number;body:{operation_key:string;prompt:null;repository_id:null}}
+interface PlanningStart {schema:1;projectId:number;body:{operation_key:string;prompt:null;repository_id:number|null}}
 /** Actual native start receipt includes the saved original request and selected planning task. */
 export interface PlanningStartReceipt {request:PlanningStart['body'];planning_task_id:number;run:RuntimeRun&{actor_id:string}}
 /** Save before starting; a reload or edited project description cannot turn a lost reply into another native turn. */
-export async function startProjectPlanning(storage:OwnerActionStorage,projectId:number){
+export async function startProjectPlanning(storage:OwnerActionStorage,projectId:number,repositoryId:number|null=null){
  const key=`researcher:project-plan-start:v1:${projectId}`
  let action:PlanningStart
  const raw=storage.getItem(key)
- if(raw!==null){try{action=JSON.parse(raw);if(action.schema!==1||action.projectId!==projectId||!action.body||!/^[A-Za-z0-9_.:-]{1,128}$/.test(action.body.operation_key)||action.body.prompt!==null||action.body.repository_id!==null||Object.keys(action.body).sort().join(',')!=='operation_key,prompt,repository_id')throw new Error('scope')}catch{throw new Error('No se pudo recuperar el inicio original. Consulta el historial del proyecto antes de preparar otro.')}}
- else{action={schema:1,projectId,body:{operation_key:crypto.randomUUID(),prompt:null,repository_id:null}};storage.setItem(key,JSON.stringify(action))}
+ if(raw!==null){try{action=JSON.parse(raw);if(action.schema!==1||action.projectId!==projectId||!action.body||!/^[A-Za-z0-9_.:-]{1,128}$/.test(action.body.operation_key)||action.body.prompt!==null||(action.body.repository_id!==null&&(!Number.isSafeInteger(action.body.repository_id)||action.body.repository_id<1))||Object.keys(action.body).sort().join(',')!=='operation_key,prompt,repository_id')throw new Error('scope')}catch{throw new Error('No se pudo recuperar el inicio original. Consulta el historial del proyecto antes de preparar otro.')}}
+ else{action={schema:1,projectId,body:{operation_key:crypto.randomUUID(),prompt:null,repository_id:repositoryId}};storage.setItem(key,JSON.stringify(action))}
  const receipt=await fetchApi<PlanningStartReceipt>(`/api/projects/${projectId}/start`,{method:'POST',body:JSON.stringify(action.body)})
  if(receipt.run.project_id!==projectId||receipt.run.task_id!==receipt.planning_task_id||!Number.isSafeInteger(receipt.planning_task_id)||receipt.planning_task_id<=0||receipt.run.actor_id!=='native-project-planner'||receipt.run.execution_kind!=='research'||!receipt.request||receipt.request.operation_key!==action.body.operation_key||receipt.request.prompt!==action.body.prompt||receipt.request.repository_id!==action.body.repository_id)throw new Error('El recibo no corresponde al inicio original. Conservamos la solicitud.')
  if(storage.getItem(key)===JSON.stringify(action))storage.removeItem(key)
