@@ -4,6 +4,8 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Flows y helpers antiguos retirados:** 21 módulos; tres operaciones de metadatos separadas; snapshots históricos sin reanudación nativa. 218 pruebas de fuente y 218 instaladas pasan, con tres fallos de fixtures de migración reproducidos en el paquete anterior. Se retiran 68 tests obsoletos sin contarlos como reparaciones. Siguen autonomía/lectores, operación, datos/restore, historial/presupuestos y aceptación integral. [Contrato](../architecture/native-flow-retirement.md), [resultados](flow-retirement-results.json).
+
 - **Doce páginas piloto; 36 conceptos desktop, 12 móviles y doce selecciones comprobadas.** Ejecución incorpora grafo nativo, dependencias, evidencia e intervención con controles originales. Diez capturas controladas, 123 pruebas frontend/build y doce declaraciones JSDoc. Cero páginas con aceptación integral; sigue el engine y la retirada de consumidores antiguos. [Recorrido](../design/audits/2026-11-06-flow/report.md), [auditoría de conceptos](../design/concept-artifact-audit.json).
 
 - Agentes conectado a registros nativos, identidad/intento/modelo/consumo y Stop original.19backend,123frontend/build y8capturas acotadas;6defsPython/10TS-JS documentadas. **Estado acumulado:11pilotos,33/36desktop,11/12mobile,0aceptaciónintegral**. Sigue Ejecución. [Recibo y límites](../design/audits/2026-11-06-agents/report.md).

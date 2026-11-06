@@ -1,0 +1,124 @@
+{
+  "base_commit": "e579a27",
+  "status": "scoped_flow_retirement_complete_with_preexisting_migration_fixture_failures",
+  "removed_production_modules": 21,
+  "removed_production_lines": 2698,
+  "retired_test_functions": 68,
+  "preserved": [
+    "Three owner project metadata helpers extracted without granting native work/completion authority",
+    "Original description and project-local task/epic counts",
+    "Historical snapshot inspection explicitly nonresumable, without replaying old approvals",
+    "Shared EventBus/WebSocket and observed Stop of registered controllers",
+    "Native structured planning/execution, independent review, investigation and exact owner acceptance"
+  ],
+  "suites": {
+    "source": {
+      "cases": 221,
+      "passed": 218,
+      "failures": [
+        {
+          "name": "test_task_cutover_migration_is_atomic_repeatable_and_preserves_history",
+          "message": "assert 56 == 53"
+        },
+        {
+          "name": "test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_report",
+          "message": "assert 56 == 51"
+        },
+        {
+          "name": "test_scientific_owner_guard_upgrade_is_atomic_and_keeps_historical_reports",
+          "message": "assert 56 == 52"
+        }
+      ],
+      "errors": [],
+      "skipped": [],
+      "seconds": 78.385
+    },
+    "baseline": {
+      "cases": 3,
+      "passed": 0,
+      "failures": [
+        {
+          "name": "test_task_cutover_migration_is_atomic_repeatable_and_preserves_history",
+          "message": "assert 56 == 53"
+        },
+        {
+          "name": "test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_report",
+          "message": "assert 56 == 51"
+        },
+        {
+          "name": "test_scientific_owner_guard_upgrade_is_atomic_and_keeps_historical_reports",
+          "message": "assert 56 == 52"
+        }
+      ],
+      "errors": [],
+      "skipped": [],
+      "seconds": 1.385
+    },
+    "package": {
+      "cases": 221,
+      "passed": 218,
+      "failures": [
+        {
+          "name": "test_task_cutover_migration_is_atomic_repeatable_and_preserves_history",
+          "message": "assert 56 == 53"
+        },
+        {
+          "name": "test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_report",
+          "message": "assert 56 == 51"
+        },
+        {
+          "name": "test_scientific_owner_guard_upgrade_is_atomic_and_keeps_historical_reports",
+          "message": "assert 56 == 52"
+        }
+      ],
+      "errors": [],
+      "skipped": [],
+      "seconds": 78.618
+    },
+    "prompts": {
+      "cases": 2,
+      "passed": 2,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "seconds": 0.111
+    }
+  },
+  "baseline": {
+    "method": "Prior noneditable e579a27 wheel: all664PythonSQL members byte-checked with Python -I outside checkout before reproducing three observed failures",
+    "same_dependency_environment": true,
+    "identical_failure_identifiers_and_messages": true
+  },
+  "packaging_evidence": "docs/modernization/flow-retirement-packaging.json",
+  "documented_changed_or_new_definitions": 17,
+  "prompt_inventory": {
+    "candidates": 227,
+    "files": 333,
+    "archived": 371,
+    "newly_archived": 6,
+    "unchanged_ast_revalidated": 13,
+    "requires_review": 0,
+    "semantic_prompt_changes": 0
+  },
+  "ruff_findings_deferred": {
+    "count": 17,
+    "reference": "DD059",
+    "diff_check": "Three newly trailing blank lines intentionally deferred. No clean diff-check claim."
+  },
+  "data_or_schema_modified": false,
+  "real_model_calls": 0,
+  "real_provider_calls": 0,
+  "remaining_primary": [
+    "Autonomy controllers and historical readers",
+    "Operation/images; shared historical API fixture patches removed cleanup entry",
+    "Migration fixtures/inverse/real-data restoration",
+    "Complete history and budgets",
+    "Real-model/human/scientific/global evaluation, integral12page acceptance and final fresh review"
+  ],
+  "limits": [
+    "68retired test functions and five previous old-flow failures are not reported as repaired failures.",
+    "Three migration fixtures expect53,51,52 but see56; failures reproduce at baseline and remain principal migration work.",
+    "No full global suite or real-data/model/human/scientific/page acceptance in this cut.",
+    "43broadscenarios open;12pilots48concepts0fullyaccepted unchanged."
+  ]
+}

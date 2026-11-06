@@ -4029,6 +4029,22 @@
         "54old test functions retired, not repaired. Actual external processes beyond registered controllers are not proved absent.",
         "Remaining flows/helpers/autonomy, operation/data/history/budgets and full product acceptance remain."
       ]
+    },
+    "native_flow_helper_retirement": {
+      "status": "complete",
+      "scope": "21obsolete flow/helper/state modules retired; three metadata helpers retained independently, explicit historical nonresumable snapshots, EventBus and observed Stop retained. No broad scenario closes.",
+      "evidence": [
+        "docs/architecture/native-flow-retirement.md",
+        "docs/modernization/flow-retirement-results.json",
+        "docs/modernization/flow-retirement-packaging.json",
+        "docs/modernization/flow-retirement-imports.json",
+        "backend/tests/api/test_project_records.py"
+      ],
+      "limitations": [
+        "218source/218installedPASS with three identical migration fixture failures reproduced on prior installed package. No global green claim.",
+        "68testfunctions retired and five previous old-flow failures retired, not repaired.",
+        "Remaining autonomy/readers, operation, migration/inverse/restore, history/budgets and full product acceptance remain."
+      ]
     }
   }
 }

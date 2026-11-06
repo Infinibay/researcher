@@ -17,7 +17,6 @@ from backend.api.models.task import (
     TaskResponse,
     TaskUpdate,
 )
-from backend.flows.helpers import log_flow_event
 from backend.state.dependency_validator import DependencyValidator
 from backend.state.machine import TaskStateMachine
 from backend.tools.base.db import execute_with_retry

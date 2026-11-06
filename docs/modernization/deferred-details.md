@@ -242,3 +242,14 @@ a todas las capacidades principales. `git diff --check` también señala una lí
 vacía al final de `test_project_owner_cutover.py` tras retirar un caso obsoleto.
 No repetir las pruebas de comunicación por ese espacio en blanco. Los cinco
 fallos reproducidos de helpers/routers de flows siguen como trabajo principal.
+
+## DD059 — estilo tras retirar flows y helpers
+
+Los 17 avisos de `flow-retirement-lint.json` (I001, F401, S110, BLE001, RUF059
+y S102), incluidos imports de tests ahora sin uso, quedan para después de todas
+las capacidades principales. También las líneas vacías finales de
+`test_main_project_flow.py`, `test_project_producer_retirement.py` y
+`test_result_acceptance.py`. No repetir esta verificación por esos espacios.
+Los tres fallos de fixtures de migración y el fixture compartido API que parchea
+`cleanup_service.schedule_periodic_cleanup` eliminado son trabajo principal de
+migraciones/integración, no detalles de estilo ni aceptación lograda.

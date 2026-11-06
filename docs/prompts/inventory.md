@@ -1,10 +1,14 @@
 # Inventario y revisión de prompts
 
 Catálogo nativo versión2; revisión inicial sobre `85f7acd`, actualizada después de
-retirar servicios de comunicación y listeners antiguos sobre `ae0e788`. El [inventario detallado](inventory.json)
-contiene 233 entradas candidatas de 353 archivos Python. **No son 233 prompts distintos
-ni 233 evaluaciones con modelos.** Se archivan 365 entradas de los módulos eliminados,
+retirar flows y helpers antiguos sobre `e579a27`. El [inventario detallado](inventory.json)
+contiene 227 entradas candidatas de 333 archivos Python. **No son 227 prompts distintos
+ni 227 evaluaciones con modelos.** Se archivan 371 entradas de los módulos eliminados,
 conservando sus decisiones históricas en `retired_entries`.
+El corte de flows archiva seis candidatos de mensajes y estados históricos;
+revalida trece candidatos con AST idéntico frente a sus consumidores modificados.
+No cambia instrucciones nativas. Las tres funciones de metadatos de proyecto
+retenidas ya no dependen de flujos ejecutables.
 El corte de servicios elimina nueve módulos y añade el lector de historial del
 propietario; no modifica candidatos ni decisiones de prompts. Los protocolos
 antiguos retirados no se trasladan a instrucciones del runtime nativo.

@@ -1,57 +1,12 @@
-"""Verify the 'failed' status works end-to-end via update_task_status."""
+"""Retain the historical failed-status database migration checks after legacy state-mutator removal."""
 
 import sqlite3
 
 import pytest
 
-from backend.flows.helpers import update_task_status, update_task_status_safe, get_task_by_id
 from backend.tools.base.db import _migrate_7_add_failed_status, get_connection
 
 
-class TestFailedStatus:
-    """Verify failed transitions work through db_helpers."""
-
-    def test_in_progress_to_failed(self, db_conn, executing_project):
-        """Task 4 starts as in_progress — transition to failed should succeed."""
-        update_task_status(4, "failed")
-        task = get_task_by_id(4)
-        assert task["status"] == "failed"
-        assert task["completed_at"] is not None
-
-    def test_failed_to_pending_retry(self, db_conn, executing_project):
-        """Failed tasks can be retried by moving back to pending."""
-        update_task_status(4, "failed")
-        update_task_status(4, "pending")
-        task = get_task_by_id(4)
-        assert task["status"] == "pending"
-
-    def test_backlog_to_done_rejected(self, db_conn, executing_project):
-        """Skipping states is now properly rejected."""
-        with pytest.raises(ValueError, match="Invalid transition"):
-            update_task_status(3, "done")  # task 3 is backlog
-
-    def test_backlog_to_failed_rejected(self, db_conn, executing_project):
-        """Backlog tasks cannot directly fail (no work has started)."""
-        with pytest.raises(ValueError, match="Invalid transition"):
-            update_task_status(3, "failed")  # task 3 is backlog
-
-    def test_pending_to_failed(self, db_conn, executing_project):
-        """Pending tasks can fail (e.g., dependency resolution failure)."""
-        update_task_status(2, "failed")  # task 2 is pending
-        task = get_task_by_id(2)
-        assert task["status"] == "failed"
-
-    def test_update_task_status_safe_swallows_errors(self, db_conn, executing_project):
-        """update_task_status_safe should not raise on invalid transitions."""
-        update_task_status_safe(3, "done")  # backlog → done is invalid
-        task = get_task_by_id(3)
-        assert task["status"] == "backlog"  # unchanged
-
-    def test_noop_same_status(self, db_conn, executing_project):
-        """Setting a task to its current status is a no-op."""
-        update_task_status(2, "pending")  # task 2 already pending
-        task = get_task_by_id(2)
-        assert task["status"] == "pending"
 
 
 # SQL for a DB created *before* migration 7 (no 'failed' in CHECK).

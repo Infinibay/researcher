@@ -1,0 +1,23 @@
+{
+  "changed_or_new_definitions": [
+    "backend/api/routes/flow_state.py::FlowStateResponse",
+    "backend/api/routes/flow_state.py::get_flow_state",
+    "backend/flows/snapshot_service.py::save_snapshot",
+    "backend/project_records.py::load_project_state",
+    "backend/project_records.py::load_project_state._query",
+    "backend/project_records.py::create_project",
+    "backend/project_records.py::create_project._insert",
+    "backend/project_records.py::update_project_status",
+    "backend/project_records.py::update_project_status._update",
+    "backend/tests/api/test_project_records.py::client",
+    "backend/tests/api/test_project_records.py::test_owner_project_records_keep_original_description_counts_and_completion_policy",
+    "backend/tests/api/test_project_records.py::test_snapshot_read_exposes_historical_origin_without_replaying_old_approval",
+    "backend/tests/flows/test_main_project_flow.py::TestMainProjectFlowHelpers",
+    "backend/tests/runtime/test_investigation.py::test_legacy_investigation_entry_and_event_handoff_do_not_claim_or_start_work",
+    "backend/tests/runtime/test_native_adapter_retirement.py::test_replaced_framework_adapters_are_unavailable",
+    "backend/tests/runtime/test_project_completion.py::test_generic_legacy_status_update_cannot_declare_project_completed",
+    "backend/tests/runtime/test_project_owner_cutover.py::test_native_project_generic_events_are_owner_hints_not_inference"
+  ],
+  "missing": [],
+  "scope": "Qualified AST comparison against e579a27, changed/new definitions and module docstrings only. English documentation for Ken."
+}

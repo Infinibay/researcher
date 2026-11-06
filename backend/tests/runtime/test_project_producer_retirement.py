@@ -6,31 +6,6 @@ import json
 import pytest
 
 
-@pytest.mark.parametrize("module_name,class_name", [("main_project_flow","MainProjectFlow"),("brainstorming_flow","BrainstormingFlow"),("ticket_creation_flow","TicketCreationFlow")])
-def test_old_project_kickoff_is_a_scoped_readonly_policy_entry(coordination, monkeypatch, module_name, class_name):
-    """Every direct old project flow must hand off without agents, inference, resets, task creation or inferred completion."""
-    c = coordination
-    module = importlib.import_module("backend.flows." + module_name)
-
-    def forbidden(*_args, **_kwargs):
-        """Expose any accidental execution of the old model or agent factory port."""
-        pytest.fail("Legacy project work must not start")
-
-    monkeypatch.setattr(module,"get_engine",forbidden,raising=False)
-    monkeypatch.setattr(module,"get_agent_by_role",forbidden,raising=False)
-    tasks = [tuple(row) for row in c.conn.execute("SELECT * FROM tasks ORDER BY id")]
-    project = tuple(c.conn.execute("SELECT * FROM projects WHERE id=101").fetchone())
-    flow = getattr(module,class_name)()
-    hint = flow.kickoff({"project_id":101,"plan":"caller-supplied approval is not authority"})
-    assert hint["delivery"] == "native_owner_handoff" and hint["scope"] == "project"
-    assert hint["native_admission_run_id"] is None
-    assert hint["event_authorizes_work"] is False
-    assert hint["legacy_execution_closure"] == "not_assessed"
-    assert [tuple(row) for row in c.conn.execute("SELECT * FROM tasks ORDER BY id")] == tasks
-    assert tuple(c.conn.execute("SELECT * FROM projects WHERE id=101").fetchone()) == project
-    assert c.conn.execute("SELECT count(*) FROM runtime_runs").fetchone()[0] == 0
-    with pytest.raises(ValueError):
-        flow.kickoff({"project_id":999999})
 
 
 def test_legacy_project_entry_is_policy_not_fabricated_native_history(coordination):
@@ -182,14 +157,3 @@ def test_controlled_planner_fixture_cites_the_actual_supplied_history(historic):
     assert any(item['source'].endswith(':requirements') for item in body['plan']['basis']) is historic
 
 
-def test_legacy_crew_helpers_cannot_construct_or_retry_models(coordination):
-    """Retired auxiliary Crew entry points reject before touching an agent or invoking the supplied kickoff."""
-    from types import SimpleNamespace
-
-    from backend.flows.helpers.reporting import build_crew, kickoff_with_retry
-    from backend.runtime.lifecycle import NativeOwnerRequired
-
-    with pytest.raises(NativeOwnerRequired):
-        build_crew(SimpleNamespace(project_id=101), ('old request','old output'))
-    with pytest.raises(NativeOwnerRequired):
-        kickoff_with_retry(SimpleNamespace())

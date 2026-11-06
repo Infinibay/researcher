@@ -93,7 +93,7 @@ def test_later_scope_changes_invalidate_current_report_but_preserve_original_rec
 
 def test_generic_legacy_status_update_cannot_declare_project_completed(service_setup):
     """A status string is not an owner decision over a report, including before native admission."""
-    from backend.flows.helpers.db_helpers import update_project_status
+    from backend.project_records import update_project_status
     from backend.runtime.lifecycle import NativeOwnerRequired
 
     with pytest.raises(NativeOwnerRequired):

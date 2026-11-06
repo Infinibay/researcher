@@ -196,30 +196,6 @@ def test_command_capture_exposes_failed_exit_and_output_limit_instead_of_inventi
     assert '"exit_code": 2' in recorded["content"]
 
 
-@pytest.mark.parametrize("entry", ["ResearchFlow", "ResearchReviewFlow"])
-def test_real_legacy_scientific_entry_returns_owner_hint_without_claim_or_automatic_acceptance(
-    coordination, entry
-):
-    """Even a queued scientific review/revision must not restart old inference or complete work after a retry limit."""
-    import importlib
-
-    c = coordination
-    c.conn.execute("UPDATE tasks SET status='pending',assigned_to=NULL WHERE id=1001")
-    c.conn.commit()
-    module = importlib.import_module(
-        "backend.flows.research_flow"
-        if entry == "ResearchFlow"
-        else "backend.flows.research_review_flow"
-    )
-    result = getattr(module, entry)().kickoff(
-        inputs={"project_id": 101, "task_id": 1001}
-    )
-    assert result["delivery"] == "native_owner_handoff"
-    assert result["event_authorizes_work"] is False
-    assert c.conn.execute(
-        "SELECT status,assigned_to FROM tasks WHERE id=1001"
-    ).fetchone()[:] == ("pending", None)
-    assert c.conn.execute("SELECT count(*)FROM runtime_runs").fetchone()[0] == 0
 
 
 def test_command_capture_rejects_foreign_attempt_and_unbound_grant(coordination):

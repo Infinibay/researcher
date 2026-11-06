@@ -1,0 +1,517 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 53,
+      "row": 30
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/api/routes/projects.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from __future__ import annotations\n\nimport asyncio\nimport sqlite3\nfrom contextlib import nullcontext\nfrom dataclasses import asdict\n\nfrom fastapi import APIRouter, HTTPException, Request\nfrom fastapi.responses import JSONResponse\nfrom pydantic import BaseModel, ConfigDict, Field\n\nfrom backend.api.exceptions import ProjectNotFound, ProjectRunning\nfrom backend.api.flow_manager import flow_manager\nfrom backend.api.models.project import (\n    ProjectCreate,\n    ProjectList,\n    ProjectProgressResponse,\n    ProjectResponse,\n    ProjectUpdate,\n)\nfrom backend.git.source_operations import SourceOperations\nfrom backend.project_records import (\n    create_project,\n    load_project_state,\n    update_project_status,\n)\nfrom backend.tools.base.db import execute_with_retry\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 32
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "S110",
+    "end_location": {
+      "column": 17,
+      "row": 145
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/api/routes/tasks.py",
+    "fix": null,
+    "location": {
+      "column": 9,
+      "row": 144
+    },
+    "message": "`try`-`except`-`pass` detected, consider logging the exception",
+    "name": "try-except-pass",
+    "noqa_row": 144,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/try-except-pass"
+  },
+  {
+    "cell": null,
+    "code": "BLE001",
+    "end_location": {
+      "column": 25,
+      "row": 144
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/api/routes/tasks.py",
+    "fix": null,
+    "location": {
+      "column": 16,
+      "row": 144
+    },
+    "message": "Do not catch blind exception: `Exception`",
+    "name": "blind-except",
+    "noqa_row": 144,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/blind-except"
+  },
+  {
+    "cell": null,
+    "code": "S110",
+    "end_location": {
+      "column": 21,
+      "row": 282
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/api/routes/tasks.py",
+    "fix": null,
+    "location": {
+      "column": 13,
+      "row": 281
+    },
+    "message": "`try`-`except`-`pass` detected, consider logging the exception",
+    "name": "try-except-pass",
+    "noqa_row": 281,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/try-except-pass"
+  },
+  {
+    "cell": null,
+    "code": "BLE001",
+    "end_location": {
+      "column": 29,
+      "row": 281
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/api/routes/tasks.py",
+    "fix": null,
+    "location": {
+      "column": 20,
+      "row": 281
+    },
+    "message": "Do not catch blind exception: `Exception`",
+    "name": "blind-except",
+    "noqa_row": 281,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/blind-except"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 79,
+      "row": 7
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/flows/test_failed_status.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import sqlite3\n\nimport pytest\n\nfrom backend.tools.base.db import _migrate_7_add_failed_status, get_connection\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 12
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 17,
+      "row": 3
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_code_flow_cutover.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 4
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Remove unused import: `importlib`"
+    },
+    "location": {
+      "column": 8,
+      "row": 3
+    },
+    "message": "`importlib` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 106,
+      "row": 6
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_project_completion.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import pytest\n\nfrom backend.runtime.contracts import RunConflict\nfrom backend.tests.runtime.test_plan_execution import (\n    accept_documentary_result,\n    accepted_plan,\n    authorize,\n)\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 9
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 14,
+      "row": 6
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_project_producer_retirement.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import importlib\nimport json\n\nimport pytest\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 11
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 17,
+      "row": 3
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_project_producer_retirement.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 4
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Remove unused import: `importlib`"
+    },
+    "location": {
+      "column": 8,
+      "row": 3
+    },
+    "message": "`importlib` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "RUF059",
+    "end_location": {
+      "column": 11,
+      "row": 55
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_project_producer_retirement.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "_run",
+          "end_location": {
+            "column": 11,
+            "row": 55
+          },
+          "location": {
+            "column": 8,
+            "row": 55
+          }
+        }
+      ],
+      "message": "Prefix it with an underscore or any other dummy variable pattern"
+    },
+    "location": {
+      "column": 8,
+      "row": 55
+    },
+    "message": "Unpacked variable `run` is never used",
+    "name": "unused-unpacked-variable",
+    "noqa_row": 55,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-unpacked-variable"
+  },
+  {
+    "cell": null,
+    "code": "RUF059",
+    "end_location": {
+      "column": 25,
+      "row": 55
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_project_producer_retirement.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "_peers",
+          "end_location": {
+            "column": 25,
+            "row": 55
+          },
+          "location": {
+            "column": 20,
+            "row": 55
+          }
+        }
+      ],
+      "message": "Prefix it with an underscore or any other dummy variable pattern"
+    },
+    "location": {
+      "column": 20,
+      "row": 55
+    },
+    "message": "Unpacked variable `peers` is never used",
+    "name": "unused-unpacked-variable",
+    "noqa_row": 55,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-unpacked-variable"
+  },
+  {
+    "cell": null,
+    "code": "RUF059",
+    "end_location": {
+      "column": 11,
+      "row": 100
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_project_producer_retirement.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "_run",
+          "end_location": {
+            "column": 11,
+            "row": 100
+          },
+          "location": {
+            "column": 8,
+            "row": 100
+          }
+        }
+      ],
+      "message": "Prefix it with an underscore or any other dummy variable pattern"
+    },
+    "location": {
+      "column": 8,
+      "row": 100
+    },
+    "message": "Unpacked variable `run` is never used",
+    "name": "unused-unpacked-variable",
+    "noqa_row": 100,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-unpacked-variable"
+  },
+  {
+    "cell": null,
+    "code": "RUF059",
+    "end_location": {
+      "column": 25,
+      "row": 100
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_project_producer_retirement.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "_peers",
+          "end_location": {
+            "column": 25,
+            "row": 100
+          },
+          "location": {
+            "column": 20,
+            "row": 100
+          }
+        }
+      ],
+      "message": "Prefix it with an underscore or any other dummy variable pattern"
+    },
+    "location": {
+      "column": 20,
+      "row": 100
+    },
+    "message": "Unpacked variable `peers` is never used",
+    "name": "unused-unpacked-variable",
+    "noqa_row": 100,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-unpacked-variable"
+  },
+  {
+    "cell": null,
+    "code": "RUF059",
+    "end_location": {
+      "column": 11,
+      "row": 119
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_project_producer_retirement.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "_run",
+          "end_location": {
+            "column": 11,
+            "row": 119
+          },
+          "location": {
+            "column": 8,
+            "row": 119
+          }
+        }
+      ],
+      "message": "Prefix it with an underscore or any other dummy variable pattern"
+    },
+    "location": {
+      "column": 8,
+      "row": 119
+    },
+    "message": "Unpacked variable `run` is never used",
+    "name": "unused-unpacked-variable",
+    "noqa_row": 119,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-unpacked-variable"
+  },
+  {
+    "cell": null,
+    "code": "RUF059",
+    "end_location": {
+      "column": 25,
+      "row": 119
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_project_producer_retirement.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "_peers",
+          "end_location": {
+            "column": 25,
+            "row": 119
+          },
+          "location": {
+            "column": 20,
+            "row": 119
+          }
+        }
+      ],
+      "message": "Prefix it with an underscore or any other dummy variable pattern"
+    },
+    "location": {
+      "column": 20,
+      "row": 119
+    },
+    "message": "Unpacked variable `peers` is never used",
+    "name": "unused-unpacked-variable",
+    "noqa_row": 119,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-unpacked-variable"
+  },
+  {
+    "cell": null,
+    "code": "S102",
+    "end_location": {
+      "column": 9,
+      "row": 152
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_project_producer_retirement.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 152
+    },
+    "message": "Use of `exec` detected",
+    "name": "exec-builtin",
+    "noqa_row": 152,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/exec-builtin"
+  }
+]

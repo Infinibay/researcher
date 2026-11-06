@@ -1,13 +1,12 @@
-"""Tests for MainProjectFlow."""
+"""Retained project record queries and operational labels, independent of retired flow classes."""
 
 from __future__ import annotations
 
-from backend.flows.helpers import load_project_state, update_project_status
-from backend.flows.state_models import ProjectState, ProjectStatus
+from backend.project_records import load_project_state, update_project_status
 
 
 class TestMainProjectFlowHelpers:
-    """Test the helper functions used by MainProjectFlow."""
+    """Preserve project metadata and counts while their former executable-flow consumers are removed."""
 
     def test_load_project_state_existing(self, db_conn, sample_project):
         state = load_project_state(sample_project)
@@ -37,38 +36,5 @@ class TestMainProjectFlowHelpers:
         assert row["status"] == "planning"
 
 
-class TestProjectState:
-    """Test ProjectState model."""
-
-    def test_default_state(self):
-        state = ProjectState()
-        assert state.project_id == 0
-        assert state.status == ProjectStatus.NEW
-        assert state.requirements == ""
-        assert state.user_approved is False
-        assert state.current_task_id is None
-
-    def test_state_with_values(self):
-        state = ProjectState(
-            project_id=1,
-            project_name="My Project",
-            status=ProjectStatus.EXECUTING,
-            requirements="Build a web app",
-        )
-        assert state.project_id == 1
-        assert state.project_name == "My Project"
-        assert state.status == ProjectStatus.EXECUTING
 
 
-class TestMainProjectCompatibility:
-    """Old project entry preserves history and exposes owner policy instead of planning or completion."""
-
-    def test_existing_project_returns_owner_entry(self, db_conn, executing_project):
-        """A legacy executing label does not start the new planner or alter tasks."""
-        from backend.flows.main_project_flow import MainProjectFlow
-
-        before = [tuple(row) for row in db_conn.execute("SELECT * FROM tasks ORDER BY id")]
-        hint = MainProjectFlow().kickoff({"project_id": executing_project})
-        assert hint["native_admission_run_id"] is None
-        assert hint["event_authorizes_work"] is False
-        assert [tuple(row) for row in db_conn.execute("SELECT * FROM tasks ORDER BY id")] == before

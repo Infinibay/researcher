@@ -1,4 +1,4 @@
-"""Save and load flow snapshots for resume-on-restart."""
+"""Retain historical flow observations for owner inspection; these records never resume the native runtime or transfer old approvals."""
 
 from __future__ import annotations
 
@@ -49,7 +49,7 @@ def save_snapshot(
     subflow_name: str | None = None,
     subflow_step: str | None = None,
 ) -> None:
-    """Persist current flow position so it can be resumed after restart."""
+    """Preserve a retained controller's last observed state for inspection; this is historical material, not a native resume checkpoint."""
     try:
         state_dict = state.model_dump() if isinstance(state, BaseModel) else state
         state_str = json.dumps(state_dict, default=str)
@@ -75,38 +75,6 @@ def save_snapshot(
         )
 
 
-def update_subflow_step(
-    project_id: int,
-    subflow_name: str,
-    subflow_step: str,
-) -> None:
-    """Update only the subflow tracking columns on an existing snapshot row.
-
-    Unlike save_snapshot, this does NOT overwrite the main-flow state_json,
-    flow_name, or current_step — it only touches subflow_name, subflow_step,
-    and updated_at.
-    """
-    try:
-        def _update(conn: sqlite3.Connection) -> None:
-            conn.execute(
-                """UPDATE flow_snapshots
-                   SET subflow_name = ?, subflow_step = ?, updated_at = CURRENT_TIMESTAMP
-                   WHERE project_id = ?""",
-                (subflow_name, subflow_step, project_id),
-            )
-            conn.commit()
-
-        execute_with_retry(_update)
-        logger.debug(
-            "Updated subflow step for project %d (%s → %s)",
-            project_id, subflow_name, subflow_step,
-        )
-
-        _emit_step_changed(None, None, project_id, subflow_name, subflow_step)
-    except Exception:
-        logger.warning(
-            "Failed to update subflow step for project %d", project_id, exc_info=True
-        )
 
 
 def load_snapshot(project_id: int) -> dict[str, Any] | None:

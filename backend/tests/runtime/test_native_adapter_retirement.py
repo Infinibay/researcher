@@ -24,6 +24,13 @@ def test_replaced_framework_adapters_are_unavailable():
         'backend.communication.notifications', 'backend.communication.protocol',
         'backend.communication.brainstorm_coordinator',
         'backend.flows.event_listeners', 'backend.flows.listener_base',
+        'backend.flows.helpers', 'backend.flows.flow_helpers',
+        'backend.flows.guardrails', 'backend.flows.react_trace',
+        'backend.flows.state_models', 'backend.flows.main_project_flow',
+        'backend.flows.brainstorming_flow', 'backend.flows.ticket_creation_flow',
+        'backend.flows.development_flow', 'backend.flows.code_review_flow',
+        'backend.flows.research_flow', 'backend.flows.research_review_flow',
+        'backend.flows.investigation_flow',
     ):
         assert importlib.util.find_spec(module) is None, module
     web = Path(backend.__file__).parent / 'tools' / 'web'

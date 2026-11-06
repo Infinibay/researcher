@@ -1,8 +1,9 @@
-"""Read-only endpoint exposing the current flow snapshot for a project."""
+"""Owner inspection of retained historical flow snapshots, with explicit limits on their authority and native resumability."""
 
 from __future__ import annotations
 
 import json
+from typing import Literal
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
@@ -22,6 +23,10 @@ _SUMMARY_KEYS = (
 
 
 class FlowStateResponse(BaseModel):
+    """Label old state as historical evidence; completion/approval labels cannot resume or authorize native work."""
+
+    origin: Literal["legacy_snapshot"] = "legacy_snapshot"
+    native_resume_supported: Literal[False] = False
     flow_name: str | None = None
     current_step: str | None = None
     subflow_name: str | None = None
@@ -32,6 +37,7 @@ class FlowStateResponse(BaseModel):
 
 @router.get("/{project_id}", response_model=FlowStateResponse)
 async def get_flow_state(project_id: int) -> FlowStateResponse:
+    """Project-scope the old snapshot and expose only its summary without deserializing executable flow state or replaying approval."""
     snapshot = load_snapshot(project_id)
     if snapshot is None:
         raise HTTPException(status_code=404, detail="No flow snapshot found")

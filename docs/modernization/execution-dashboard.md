@@ -11,12 +11,41 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 
 ## Estado comprobado
 
-- Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. Quedan servicios, lectores, rutas internas y CLI heredados.
+- Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. Quedan controladores de autonomía y lectores restantes.
 - Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 0/12 páginas están completamente aceptadas.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: servicios antiguos de comunicación y listeners retirados
+## Etapa actual: flows y helpers antiguos retirados
+
+Se retiran 21 módulos y se conservan fuera de los flows las tres operaciones de
+metadatos que consume la API. Los snapshots indican su origen histórico y que no
+permiten reanudar el runtime nativo; no trasladan aprobaciones antiguas.
+El bus compartido y la parada observada se mantienen.
+[Contrato y mapa](../architecture/native-flow-retirement.md).
+
+**Comprobado:** 218 pruebas pasan desde fuente y 218 desde el paquete instalado;
+los tres fallos de fixtures de migración se reproducen con mensajes idénticos en
+el paquete anterior. No hay omisiones. Coinciden 639 archivos Python/SQL; los 261
+imports backend proceden del entorno instalado, con 83 distribuciones compatibles.
+Las 17 definiciones nuevas/modificadas tienen docstrings. Se retiran 68 funciones
+de test obsoletas; los cinco fallos antiguos de flows retirados no se cuentan como
+reparados. Prompts: 227 candidatos en 333 archivos, 371 archivados y ninguna
+revisión estática pendiente. No hay nueva suite global.
+
+**Lista vigente:**
+- Cerrado recientemente: herramientas/bibliotecas antiguas, API interna/CLI,
+  servicios de comunicación/listeners y flows/helpers sustituidos o sin consumo.
+- Siguiente: controladores de autonomía y lectores históricos restantes,
+  preservando la parada de trabajadores registrados y sus datos.
+- Pendiente principal: operación e imágenes; fixtures API históricos;
+  migraciones/inversas/restauración y datos históricos; historial completo y
+  presupuestos; evaluación real, humana, científica y global; aceptación integral
+  de 12 páginas y revisión final. Siguen 43 escenarios abiertos, 12 pilotos y 48 conceptos.
+- Al final: todos los detalles secundarios. Los 17 avisos de estilo y tres líneas
+  vacías finales quedan en DD059; los fallos de migración y fixtures API son trabajo principal.
+
+## Etapa anterior: servicios antiguos de comunicación y listeners retirados
 
 Se retiran nueve módulos y se conservan los mensajes nativos, las notas del
 propietario, el historial y el control de parada sobre trabajadores registrados.

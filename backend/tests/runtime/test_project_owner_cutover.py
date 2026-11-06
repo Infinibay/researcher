@@ -89,15 +89,6 @@ def test_native_project_generic_events_are_owner_hints_not_inference(
 
     c, _run = admitted_project(coordination)
 
-    def forbidden(*args, **kwargs):
-        """Detect a competing inference or message side effect."""
-        pytest.fail("Legacy generic dispatch reached")
-
-    monkeypatch.setattr(
-        "backend.flows.helpers.message_dispatcher.dispatch_message", forbidden
-    )
-    monkeypatch.setattr("backend.flows.helpers.stagnation.get_stuck_tasks", forbidden)
-    monkeypatch.setattr("backend.flows.helpers.send_agent_message", forbidden)
     result = getattr(handlers, handler)().execute(
         {
             "id": 801,

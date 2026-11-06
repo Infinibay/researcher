@@ -28,7 +28,7 @@
       "conflicts": []
     },
     "backend/api/models/epic.py::EpicCreate.description": {
-      "dependencies_sha256": "defefc6994ad9e1952b8909f37a82af66147097c4f3f9121ae2b435797912827",
+      "dependencies_sha256": "ec42ab0bd76c9adc334a9a0f6c56f04d6e9322ed308bbec0977dc977da480917",
       "decision": "excluded_human_or_input_metadata",
       "rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose.",
       "evidence": [
@@ -36,7 +36,8 @@
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json"
       ],
-      "conflicts": []
+      "conflicts": [],
+      "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after extracting project metadata helpers and removing unused task event import and historical flow consumers; native authority and historical-template exclusion unchanged. See docs/architecture/native-flow-retirement.md."
     },
     "backend/api/models/git.py::BranchCreate.description@42": {
       "dependencies_sha256": "428718c0d7c1757e3f9fc73644ad99d18cc97f119453a2c6167c68f7d5aa5422",
@@ -61,7 +62,7 @@
       "conflicts": []
     },
     "backend/api/models/project.py::ProjectCreate.description": {
-      "dependencies_sha256": "c101ed1b87a97fe698dbb4078643eba604b9e61d88e4d5a21fd8289be7357d67",
+      "dependencies_sha256": "ed299f08ec4a77852ef538714e001ae0a304a391e71d3085265abcccdf1178e6",
       "decision": "excluded_human_or_input_metadata",
       "rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose.",
       "evidence": [
@@ -69,10 +70,11 @@
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json"
       ],
-      "conflicts": []
+      "conflicts": [],
+      "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after extracting project metadata helpers and removing unused task event import and historical flow consumers; native authority and historical-template exclusion unchanged. See docs/architecture/native-flow-retirement.md."
     },
     "backend/api/models/task.py::TaskCreate.description": {
-      "dependencies_sha256": "25cec09cb9552c1a170175608938c179989fd5380c02ccd35b589edd1460ac8a",
+      "dependencies_sha256": "b1a3c9579b635ded6c8085329f43d4ca2f3ec8152c653ae0acbce2b760bc795f",
       "decision": "excluded_human_or_input_metadata",
       "rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose.",
       "evidence": [
@@ -80,10 +82,11 @@
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json"
       ],
-      "conflicts": []
+      "conflicts": [],
+      "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after extracting project metadata helpers and removing unused task event import and historical flow consumers; native authority and historical-template exclusion unchanged. See docs/architecture/native-flow-retirement.md."
     },
     "backend/api/routes/projects.py::_project_to_response.description@79": {
-      "dependencies_sha256": "c1a96aa412e2827a656867acbabe69d7a1cf7f52b0e1ea509e549afe7679f89f",
+      "dependencies_sha256": "164ac837640d6a06a0665af69ebdd8c11862f41e6db0436fc7e7c880cc6a578c",
       "decision": "excluded_human_or_input_metadata",
       "rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose. Revalidated for direct-web policy: this candidate AST is unchanged; create_app adds only shared robots/rate host state, without changing project metadata or agent instructions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated during internal API retirement: API description and project description projection unchanged; main.py only unregisters three obsolete route groups. Owner metadata remains input, not an agent instruction.",
       "evidence": [
@@ -92,7 +95,8 @@
         "evals/prompts/cases.json",
         "docs/architecture/native-internal-retirement.md"
       ],
-      "conflicts": []
+      "conflicts": [],
+      "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after extracting project metadata helpers and removing unused task event import and historical flow consumers; native authority and historical-template exclusion unchanged. See docs/architecture/native-flow-retirement.md."
     },
     "backend/cli/bootstrap.py::main.description@12": {
       "dependencies_sha256": "2f107945cc6b67749da7d2cea588dce5cf62466f5b2a9a8f6a96681308830e71",
@@ -116,104 +120,8 @@
       ],
       "conflicts": []
     },
-    "backend/flows/helpers/messaging.py::build_enriched_message.description@146": {
-      "dependencies_sha256": "03dbf9ad90e6a6ea08bdc275fb8405a46aaaf27491e5080bd1ccae17790484a3",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
-      "evidence": [
-        "backend/flows/helpers/messaging.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    "backend/flows/state_models.py::ProjectState.feedback": {
-      "dependencies_sha256": "add8c390bbf94df6c4ca6b5240042f5a3ba5561843386b18d5defaee47c1c783",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/flows/state_models.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    "backend/flows/state_models.py::DevelopmentState.task_description": {
-      "dependencies_sha256": "add8c390bbf94df6c4ca6b5240042f5a3ba5561843386b18d5defaee47c1c783",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/flows/state_models.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    "backend/flows/state_models.py::ResearchReviewState.last_reviewer_feedback": {
-      "dependencies_sha256": "add8c390bbf94df6c4ca6b5240042f5a3ba5561843386b18d5defaee47c1c783",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/flows/state_models.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    "backend/flows/state_models.py::BrainstormState.project_description": {
-      "dependencies_sha256": "add8c390bbf94df6c4ca6b5240042f5a3ba5561843386b18d5defaee47c1c783",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/flows/state_models.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
-    "backend/flows/state_models.py::BrainstormState.user_feedback": {
-      "dependencies_sha256": "add8c390bbf94df6c4ca6b5240042f5a3ba5561843386b18d5defaee47c1c783",
-      "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
-      "evidence": [
-        "backend/flows/state_models.py",
-        "backend/engine/llm_client.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/run_inputs.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
-      ]
-    },
     "backend/knowledge/reviews.py::read_feedback": {
-      "dependencies_sha256": "fbdb60c48d931e5a446e218d48081afca9a2c1887d50c1bd4c2815f254d40d0c",
+      "dependencies_sha256": "b66b34d5d8b18599bb15a22c72ef7e77a107fa044b9f0d7c36bf45630c3d53af",
       "decision": "retained_input_renderer",
       "rationale": "Reviewed as source/report description or attributed review-feedback data, not trusted model policy. Original content/currentness/provenance must remain explicit; no scientific certainty or new authority is created. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for project tool retirement: candidate AST unchanged; reviewed optional planning milestones and two bounded structure readers plus removal of the obsolete hypothesis wrapper consumer. Existing finding handlers and legacy decisions remain unchanged; hierarchy metadata confers no authority. Revalidated for knowledge tool retirement: candidate AST unchanged; reviewed the new scoped cross-source reader, explicit legacy report origin/schema and removal of obsolete wrapper consumers. Existing review/write authority, evidence and original input contracts remain unchanged.",
       "evidence": [
@@ -223,7 +131,8 @@
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json"
       ],
-      "conflicts": []
+      "conflicts": [],
+      "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after extracting project metadata helpers and removing unused task event import and historical flow consumers; native authority and historical-template exclusion unchanged. See docs/architecture/native-flow-retirement.md."
     },
     "backend/planning/instructions.py::PLANNING_INSTRUCTIONS": {
       "dependencies_sha256": "2dc1513d7a52e201070180b0fa771e5cefab30e9c8c0f7e91430f7a6dc0a46eb",
@@ -1918,7 +1827,7 @@
       ]
     },
     "backend/prompts/team.py::ROLE_DESCRIPTIONS": {
-      "dependencies_sha256": "ad212c6eb4c0b19a45a021326d6f484df3f8308b6a6bc518452eb894a841d0e0",
+      "dependencies_sha256": "f0c86df22bff0f7fd34e4103d778559de9a4929377829f8a37662c8551056d76",
       "decision": "retained_historical_template",
       "rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "evidence": [
@@ -1932,10 +1841,11 @@
       ],
       "conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
-      ]
+      ],
+      "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after extracting project metadata helpers and removing unused task event import and historical flow consumers; native authority and historical-template exclusion unchanged. See docs/architecture/native-flow-retirement.md."
     },
     "backend/prompts/team.py::TOOLS_INTRO": {
-      "dependencies_sha256": "ad212c6eb4c0b19a45a021326d6f484df3f8308b6a6bc518452eb894a841d0e0",
+      "dependencies_sha256": "f0c86df22bff0f7fd34e4103d778559de9a4929377829f8a37662c8551056d76",
       "decision": "retained_historical_template",
       "rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "evidence": [
@@ -1949,10 +1859,11 @@
       ],
       "conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
-      ]
+      ],
+      "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after extracting project metadata helpers and removing unused task event import and historical flow consumers; native authority and historical-template exclusion unchanged. See docs/architecture/native-flow-retirement.md."
     },
     "backend/prompts/team.py::build_memory_section": {
-      "dependencies_sha256": "ad212c6eb4c0b19a45a021326d6f484df3f8308b6a6bc518452eb894a841d0e0",
+      "dependencies_sha256": "f0c86df22bff0f7fd34e4103d778559de9a4929377829f8a37662c8551056d76",
       "decision": "retained_historical_template",
       "rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "evidence": [
@@ -1966,10 +1877,11 @@
       ],
       "conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
-      ]
+      ],
+      "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after extracting project metadata helpers and removing unused task event import and historical flow consumers; native authority and historical-template exclusion unchanged. See docs/architecture/native-flow-retirement.md."
     },
     "backend/prompts/team.py::build_system_awareness": {
-      "dependencies_sha256": "ad212c6eb4c0b19a45a021326d6f484df3f8308b6a6bc518452eb894a841d0e0",
+      "dependencies_sha256": "f0c86df22bff0f7fd34e4103d778559de9a4929377829f8a37662c8551056d76",
       "decision": "retained_historical_template",
       "rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "evidence": [
@@ -1983,10 +1895,11 @@
       ],
       "conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
-      ]
+      ],
+      "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after extracting project metadata helpers and removing unused task event import and historical flow consumers; native authority and historical-template exclusion unchanged. See docs/architecture/native-flow-retirement.md."
     },
     "backend/prompts/team.py::build_team_section": {
-      "dependencies_sha256": "ad212c6eb4c0b19a45a021326d6f484df3f8308b6a6bc518452eb894a841d0e0",
+      "dependencies_sha256": "f0c86df22bff0f7fd34e4103d778559de9a4929377829f8a37662c8551056d76",
       "decision": "retained_historical_template",
       "rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "evidence": [
@@ -2000,10 +1913,11 @@
       ],
       "conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
-      ]
+      ],
+      "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after extracting project metadata helpers and removing unused task event import and historical flow consumers; native authority and historical-template exclusion unchanged. See docs/architecture/native-flow-retirement.md."
     },
     "backend/prompts/team.py::build_clarification_protocol": {
-      "dependencies_sha256": "ad212c6eb4c0b19a45a021326d6f484df3f8308b6a6bc518452eb894a841d0e0",
+      "dependencies_sha256": "f0c86df22bff0f7fd34e4103d778559de9a4929377829f8a37662c8551056d76",
       "decision": "retained_historical_template",
       "rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "evidence": [
@@ -2017,10 +1931,11 @@
       ],
       "conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
-      ]
+      ],
+      "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after extracting project metadata helpers and removing unused task event import and historical flow consumers; native authority and historical-template exclusion unchanged. See docs/architecture/native-flow-retirement.md."
     },
     "backend/prompts/team.py::build_conversation_context": {
-      "dependencies_sha256": "ad212c6eb4c0b19a45a021326d6f484df3f8308b6a6bc518452eb894a841d0e0",
+      "dependencies_sha256": "f0c86df22bff0f7fd34e4103d778559de9a4929377829f8a37662c8551056d76",
       "decision": "retained_historical_template",
       "rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "evidence": [
@@ -2034,10 +1949,11 @@
       ],
       "conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
-      ]
+      ],
+      "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after extracting project metadata helpers and removing unused task event import and historical flow consumers; native authority and historical-template exclusion unchanged. See docs/architecture/native-flow-retirement.md."
     },
     "backend/prompts/team.py::build_state_context": {
-      "dependencies_sha256": "ad212c6eb4c0b19a45a021326d6f484df3f8308b6a6bc518452eb894a841d0e0",
+      "dependencies_sha256": "f0c86df22bff0f7fd34e4103d778559de9a4929377829f8a37662c8551056d76",
       "decision": "retained_historical_template",
       "rationale": "Keep this original template only for historical/opt-in compatibility readers until legacy removal. Do not inject it into native instructions or rewrite a retired loop protocol. Current native selection imports only backend.prompts.native and the reviewed capability policies. Rechecked after explicit retirement of the old role constructors/registry: source and remaining consumer bytes are unchanged; removed consumers are recorded in catalog-removal-inventory.json. This remains historical policy, not a native capability or authority.",
       "evidence": [
@@ -2051,7 +1967,8 @@
       ],
       "conflicts": [
         "Historical role hierarchy, claude_code/old tool names, step protocols, required ceremony or arbitrary confidence/similarity bands may occur here; none is endorsed or transferred to native policy."
-      ]
+      ],
+      "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after extracting project metadata helpers and removing unused task event import and historical flow consumers; native authority and historical-template exclusion unchanged. See docs/architecture/native-flow-retirement.md."
     },
     "backend/prompts/team_lead/plan_tasks.py::create_plan": {
       "dependencies_sha256": "d59d63ea9e7ea401fb15590d3bbfccd7f5beaa5f382413c87c541c0c01eaa68d",
@@ -10107,6 +10024,108 @@
       ],
       "conflicts": [],
       "retirement": "Old container CLI removed with all thirteen internal API commands; native scoped MCP and paired owner terminal preserve capabilities. No instruction transferred."
+    },
+    "backend/flows/helpers/messaging.py::build_enriched_message.description@146": {
+      "dependencies_sha256": "03dbf9ad90e6a6ea08bdc275fb8405a46aaaf27491e5080bd1ccae17790484a3",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
+      "evidence": [
+        "backend/flows/helpers/messaging.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Historical flow wrappers/helpers/state models removed after native planning, execution, review and owner acceptance were connected. See docs/architecture/native-flow-retirement.md. Historical review preserved, not current model policy."
+    },
+    "backend/flows/state_models.py::ProjectState.feedback": {
+      "dependencies_sha256": "add8c390bbf94df6c4ca6b5240042f5a3ba5561843386b18d5defaee47c1c783",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/flows/state_models.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Historical flow wrappers/helpers/state models removed after native planning, execution, review and owner acceptance were connected. See docs/architecture/native-flow-retirement.md. Historical review preserved, not current model policy."
+    },
+    "backend/flows/state_models.py::DevelopmentState.task_description": {
+      "dependencies_sha256": "add8c390bbf94df6c4ca6b5240042f5a3ba5561843386b18d5defaee47c1c783",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/flows/state_models.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Historical flow wrappers/helpers/state models removed after native planning, execution, review and owner acceptance were connected. See docs/architecture/native-flow-retirement.md. Historical review preserved, not current model policy."
+    },
+    "backend/flows/state_models.py::ResearchReviewState.last_reviewer_feedback": {
+      "dependencies_sha256": "add8c390bbf94df6c4ca6b5240042f5a3ba5561843386b18d5defaee47c1c783",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/flows/state_models.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Historical flow wrappers/helpers/state models removed after native planning, execution, review and owner acceptance were connected. See docs/architecture/native-flow-retirement.md. Historical review preserved, not current model policy."
+    },
+    "backend/flows/state_models.py::BrainstormState.project_description": {
+      "dependencies_sha256": "add8c390bbf94df6c4ca6b5240042f5a3ba5561843386b18d5defaee47c1c783",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/flows/state_models.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Historical flow wrappers/helpers/state models removed after native planning, execution, review and owner acceptance were connected. See docs/architecture/native-flow-retirement.md. Historical review preserved, not current model policy."
+    },
+    "backend/flows/state_models.py::BrainstormState.user_feedback": {
+      "dependencies_sha256": "add8c390bbf94df6c4ca6b5240042f5a3ba5561843386b18d5defaee47c1c783",
+      "decision": "pending_legacy_removal",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "evidence": [
+        "backend/flows/state_models.py",
+        "backend/engine/llm_client.py",
+        "backend/runtime/owned_runtime.py",
+        "backend/runtime/run_inputs.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "Old step_complete/think/free-form completion and truncated-summary assumptions do not apply to native tasks. Empty data defaults are not new instructions."
+      ],
+      "retirement": "Historical flow wrappers/helpers/state models removed after native planning, execution, review and owner acceptance were connected. See docs/architecture/native-flow-retirement.md. Historical review preserved, not current model policy."
     }
   }
 }

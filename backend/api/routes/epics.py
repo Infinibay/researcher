@@ -8,7 +8,7 @@ from fastapi import APIRouter, Query
 
 from backend.api.exceptions import EpicNotFound, ProjectNotFound
 from backend.api.models.epic import EpicCreate, EpicResponse, EpicUpdate
-from backend.flows.helpers import load_project_state
+from backend.project_records import load_project_state
 from backend.tools.base.db import execute_with_retry
 
 router = APIRouter(prefix="/api/epics", tags=["epics"])

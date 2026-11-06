@@ -1,0 +1,49 @@
+{
+  "base_commit": "e579a27",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "sha256": "42f266f78ea9df00438726e677733dec75f7418d5038a876fea9f566a1391e7d",
+  "observed": {
+    "exit_code": 1,
+    "cases": 221,
+    "failed": 3,
+    "failed_cases": [
+      "test_task_cutover_migration_is_atomic_repeatable_and_preserves_history",
+      "test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_report",
+      "test_scientific_owner_guard_upgrade_is_atomic_and_keeps_historical_reports"
+    ],
+    "skipped_cases": [],
+    "skipped": 0,
+    "seconds": 78.618,
+    "all_backend_imports_installed": true,
+    "backend_modules": 261,
+    "matching_python_sql": 639,
+    "installed_distributions": 83,
+    "legacy_installed": false,
+    "legacy_extra_or_requirement": false,
+    "real_model_calls": 0,
+    "real_provider_calls": 0
+  },
+  "tests": [
+    "backend/tests/api/test_project_records.py",
+    "backend/tests/api/test_bootstrap_startup.py",
+    "backend/tests/api/test_local_access.py",
+    "backend/tests/api/test_websocket_lifecycle.py",
+    "backend/tests/runtime/test_native_adapter_retirement.py",
+    "backend/tests/flows",
+    "backend/tests/runtime/test_project_workspace.py",
+    "backend/tests/runtime/test_project_planning.py",
+    "backend/tests/runtime/test_plan_milestones.py",
+    "backend/tests/runtime/test_project_completion.py",
+    "backend/tests/runtime/test_project_producer_retirement.py",
+    "backend/tests/runtime/test_project_owner_cutover.py",
+    "backend/tests/runtime/test_code_flow_cutover.py",
+    "backend/tests/runtime/test_result_acceptance.py",
+    "backend/tests/runtime/test_investigation.py",
+    "backend/tests/runtime/test_scientific_research.py",
+    "backend/tests/runtime/test_owned_project_stop.py",
+    "backend/tests/runtime/test_plan_execution.py",
+    "backend/tests/runtime/test_plan_continuation.py",
+    "backend/tests/runtime/test_plan_reauthorization.py"
+  ],
+  "limits": "21 obsolete flow/helper/state modules removed; three project metadata helpers retained independently, EventBus and historical snapshot inspection kept. All selected source tests run installed. Three schema-fixture failures reproduce in prior installed e579a27, all 664 Python/SQL members byte-checked.68obsolete testfunctions removed, not counted as repaired failures. No data/schema deletion, real model/provider, global/human/scientific/12page or real-data restoration acceptance."
+}

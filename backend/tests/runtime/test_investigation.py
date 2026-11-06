@@ -174,9 +174,8 @@ def test_generic_report_cannot_bypass_exploratory_summary_contract(coordination)
 def test_legacy_investigation_entry_and_event_handoff_do_not_claim_or_start_work(
     coordination,
 ):
-    """The actual old flow/event entry now exposes owner admission, retaining historical reports and leaving task/result state unchanged."""
+    """The retained old event handler exposes owner admission without changing historical reports or task/result state."""
     from backend.autonomy.handlers.task_handlers import TaskFlowHandler
-    from backend.flows.investigation_flow import InvestigationFlow
 
     c = coordination
     c.conn.execute(
@@ -186,12 +185,6 @@ def test_legacy_investigation_entry_and_event_handoff_do_not_claim_or_start_work
         "INSERT INTO artifacts(project_id,task_id,type,file_path,description,content)VALUES(101,1001,'report','old.md','Prior report','Historical observations remain.')"
     )
     c.conn.commit()
-    result = InvestigationFlow().kickoff(
-        inputs={"project_id": 101, "task_id": 1001, "researcher_id": "legacy-label"}
-    )
-    assert result["delivery"] == "native_owner_handoff"
-    assert result["inference_started_by_handoff"] is False
-    assert result["native_runs"] == []
     returned = TaskFlowHandler().execute(
         {
             "id": 55,
@@ -286,22 +279,6 @@ def test_legacy_scavenger_excludes_owner_only_and_native_owned_tasks(coordinatio
 
 
 
-def test_legacy_project_stops_dispatching_owner_only_work_without_evaluating_completion(
-    coordination, monkeypatch
-):
-    """Only-native pending work returns a distinct handoff route; it must not re-enter legacy progress inference or call the project complete."""
-    from backend.flows.main_project_flow import MainProjectFlow
-
-    c = coordination
-    c.conn.execute(
-        "UPDATE tasks SET type='investigation',status='pending',assigned_to=NULL WHERE project_id=101"
-    )
-    c.conn.commit()
-    flow = MainProjectFlow()
-    flow.state.project_id = 101
-    assert flow.kickoff({"project_id":101})["event_authorizes_work"] is False
-    assert flow.state.running_task_ids == []
-    assert c.conn.execute("SELECT count(*)FROM runtime_runs").fetchone()[0] == 0
 
 
 def test_investigation_summary_keeps_original_intent_and_rejects_foreign_evidence(

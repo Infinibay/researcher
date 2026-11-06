@@ -34,32 +34,6 @@ def test_every_old_development_category_has_a_native_profile_and_no_preadmission
     assert s.c.conn.execute("SELECT assigned_to FROM tasks WHERE id=1001").fetchone()[0] is None
 
 
-@pytest.mark.parametrize("module_name,class_name", [("development_flow","DevelopmentFlow"),("code_review_flow","CodeReviewFlow")])
-def test_public_old_kickoff_preserves_scope_and_returns_owner_hint_without_work(service_setup, monkeypatch, module_name, class_name):
-    """A compatibility entry must preserve old state/files and hand off before old agent creation, CI, inference or auto-merge."""
-    s = service_setup
-    s.c.conn.execute("UPDATE tasks SET type='code',status='review_ready',branch_name='old-branch',assigned_to='old-author',reviewer='old-reviewer' WHERE id=1001")
-    s.c.conn.commit()
-    before = dict(s.c.conn.execute("SELECT * FROM tasks WHERE id=1001").fetchone())
-    original = s.workspace / "old-code.txt"
-    original.write_text("Preserve this partial result.")
-    module = importlib.import_module("backend.flows."+module_name)
-
-    def forbidden(*_args, **_kwargs):
-        """Refuse the old billable provider/agent port if the obsolete loop is entered."""
-        raise AssertionError("Old inference or agent construction must not run")
-
-    monkeypatch.setattr(module,"get_engine",forbidden,raising=False)
-    monkeypatch.setattr(module,"get_available_agent_by_role",forbidden,raising=False)
-    flow = getattr(module,class_name)()
-    result = flow.kickoff(inputs={"project_id":101,"task_id":1001,"branch_name":"caller-guess","developer_id":"caller-guess"})
-    assert result["delivery"] == "native_owner_handoff" and result["task_id"] == 1001
-    assert result["event_authorizes_work"] is False and result["inference_started_by_handoff"] is False
-    assert dict(s.c.conn.execute("SELECT * FROM tasks WHERE id=1001").fetchone()) == before
-    assert original.read_text() == "Preserve this partial result."
-    assert s.c.conn.execute("SELECT COUNT(*) FROM runtime_runs").fetchone()[0] == 0
-    with pytest.raises(ValueError):
-        flow.kickoff(inputs={"project_id":202,"task_id":1001})
 
 
 @pytest.mark.parametrize("task_type", ["code","bug_fix","review","plan","documentation"])
@@ -74,20 +48,6 @@ def test_legacy_done_labels_cannot_replace_native_owner_acceptance(coordination,
     assert c.conn.execute("SELECT status FROM tasks WHERE id=1001").fetchone()[0] == "review_ready"
 
 
-def test_main_task_dispatch_hands_off_existing_work_without_reset_or_project_completion(service_setup):
-    """Old in-progress assignments and a completed task list are historical data, not restart or project-completion authority."""
-    from backend.flows.main_project_flow import MainProjectFlow
-
-    s = service_setup
-    s.c.conn.execute("UPDATE tasks SET type='code',assigned_to='old-author',branch_name='old-branch' WHERE id=1001")
-    s.c.conn.commit()
-    flow = MainProjectFlow()
-    flow.state.project_id = 101
-    before = dict(s.c.conn.execute("SELECT * FROM tasks WHERE id=1001").fetchone())
-    assert flow.kickoff({"project_id":101})["event_authorizes_work"] is False
-    assert dict(s.c.conn.execute("SELECT * FROM tasks WHERE id=1001").fetchone()) == before
-    assert s.c.conn.execute("SELECT COUNT(*) FROM agent_events").fetchone()[0] == 0
-    assert s.c.conn.execute("SELECT COUNT(*) FROM runtime_runs").fetchone()[0] == 0
 
 
 def test_idle_scavenger_never_deletes_preserved_old_work_before_first_native_admission(service_setup, monkeypatch):
