@@ -1,19 +1,36 @@
 services:
   forgejo:
-    image: codeberg.org/forgejo/forgejo:9
-    container_name: forgejo
+    image: codeberg.org/forgejo/forgejo:15.0.11@sha256:4eee4e46d5d800f4a1b17f4a218e26a1c644a68307ba6e94511d4926d21143e5
     ports:
-      - "3000:3000"
+      - "127.0.0.1:${FORGEJO_PORT:-3000}:3000"
     volumes:
-      - ./.data/forgejo:/data
+      - type: bind
+        source: ${FORGEJO_DATA_DIR:?Select the existing Forgejo data directory or an explicitly prepared new one}
+        target: /data
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ${FORGEJO_TLS_DIR:?Select the directory containing server.crt and server.key}
+        target: /tls
+        read_only: true
+        bind:
+          create_host_path: false
     restart: unless-stopped
     environment:
-      FORGEJO__RUN_AS_ROOT: "true"
+      USER_UID: "1000"
+      USER_GID: "1000"
+      DISABLE_SSH: "true"
       FORGEJO__security__INSTALL_LOCK: "true"
+      FORGEJO__security__REVERSE_PROXY_TRUSTED_PROXIES: "127.0.0.1/32,::1/128"
       FORGEJO__database__DB_TYPE: sqlite3
       FORGEJO__database__PATH: /data/gitea/gitea.db
       FORGEJO__server__HTTP_PORT: "3000"
-      FORGEJO__server__DOMAIN: localhost
-      FORGEJO__server__ROOT_URL: "http://localhost:3000/"
+      FORGEJO__server__PROTOCOL: https
+      FORGEJO__server__DOMAIN: "127.0.0.1"
+      FORGEJO__server__ROOT_URL: "https://127.0.0.1:${FORGEJO_PORT:-3000}/"
+      FORGEJO__server__CERT_FILE: /tls/server.crt
+      FORGEJO__server__KEY_FILE: /tls/server.key
+      FORGEJO__server__DISABLE_SSH: "true"
       FORGEJO__service__DISABLE_REGISTRATION: "true"
+      FORGEJO__service__ENABLE_REVERSE_PROXY_AUTHENTICATION: "false"
       FORGEJO__log__LEVEL: Warn

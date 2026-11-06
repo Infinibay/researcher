@@ -204,6 +204,11 @@ Native agent execution also requires the external host resources described in
 the owned-runtime guide; building a service image does not provision those resources.
 The historical per-agent pod settings do not configure native isolation.
 
+Forgejo15.0.11 is pinned separately, with loopback HTTPS and explicitly selected
+data/TLS directories. See [Forgejo setup, upgrade and restore](docs/architecture/forgejo-upgrade.md)
+for account bootstrap, native CA/token configuration and the verified synthetic
+9.0.3→15.0.11 rehearsal. Updating the manifest does not migrate a running instance.
+
 Attachment storage defaults to `<INFINIBAY_DATA>/uploads`, with `.data` below the
 working directory as the default data root. Set `INFINIBAY_UPLOAD_BASE_DIR` to keep
 using an existing attachment directory after moving or reinstalling the service.

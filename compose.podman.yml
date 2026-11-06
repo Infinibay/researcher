@@ -1,0 +1,6 @@
+# Rootless Podman on the supported UID/GID 1000 local host.
+# The supervisor is namespace root; Forgejo itself runs as configured git UID 1000.
+services:
+  forgejo:
+    userns_mode: keep-id
+    user: "0:0"

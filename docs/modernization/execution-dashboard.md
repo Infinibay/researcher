@@ -16,7 +16,32 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: operación, arranque e imágenes — en curso
+## Etapa actual: operación — Forgejo ensayado; sigue el host nativo
+
+Forgejo queda fijado en15.0.11 por digest, con HTTPS, puerto local y directorios
+explícitos de datos/TLS. El override rootless conserva el mapeo UID1000 ensayado.
+El recorrido real9.0.3→15.0.11 conserva cuenta, token, repositorio, ramas y PR;
+verifica clone/push sobre TLS y creación/reconciliación con el cliente nativo.
+`doctor` completa28 comprobaciones y sale0, con un aviso de configuración antigua
+anotado en DD062. El backup se restaura en otra carpeta con9.0.3; conserva el
+estado original. La copia actualizada mantiene su segunda PR y commit nuevo.
+[Guía](../architecture/forgejo-upgrade.md), [resultados](forgejo-upgrade-results.json).
+
+**Lista vigente:**
+- Implementado recientemente: imagen web/API con persistencia; actualización de
+  configuración Forgejo y ensayo completo de upgrade/backup/restore con datos
+  sintéticos. Ninguna instancia ni datos del usuario fueron migrados.
+- En curso: operación del host nativo, sus recursos y admisión; queda retirar el
+  sandbox histórico sin consumidores y verificar el despliegue completo.
+- Pendiente principal: dependencias frontend; migraciones/inversas/restauración
+  real de Researcher; historial/presupuestos; evaluación real, humana, científica
+  y global; aceptación integral de12páginas y revisión final. Los43escenarios
+  siguen abiertos;48conceptos y12pilotos no equivalen a aceptación integral.
+- Al final: todos los detalles secundarios, incluido DD062. No se repite el
+  ensayo por orden de imports o por el aviso heredado de configuración.
+
+## Etapa anterior: web/API empaquetadas y persistencia comprobada
+
 
 La imagen de web/API ya se construyó y probó con Podman aislado: instala el wheel
 y su extensión nativa, incluye la web compilada y ejecuta como UID1000. Los

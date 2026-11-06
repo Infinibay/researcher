@@ -4,6 +4,8 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Forgejo15.0.11, TLS y restauración ensayados:** manifiesto fijado, puerto local, directorios explícitos y mapeo rootless. Upgrade real9.0.3→15.0.11 con cuenta/token/repositorio/ramas/PR conservados; clone/push TLS y cliente nativo de PR comprobados. Backup restaurado en otra carpeta, copia actualizada conservada. Doctor28checks/exit0 con aviso heredado DD062. No migra la instancia del usuario ni completa el host nativo. [Guía](../architecture/forgejo-upgrade.md), [resultados](forgejo-upgrade-results.json).
+
 - **Imagen instalada de web/API y persistencia comprobadas:** wheel Python3.13 con extensión nativa, web compilada y UID1000; 314 archivos productivos Python/SQL coinciden. 91 pruebas API/configuración y tres de salud pasan. El recorrido real de contenedor conserva proyecto y adjunto tras reiniciar, exige nuevo emparejamiento y observa ambos cierres. Siguen Forgejo, aprovisionamiento/admisión nativa, actualizaciones frontend y aceptación integral. [Contrato](../architecture/container-operation.md), [resultados](operation-image-results.json).
 
 - **Autonomía y plantillas/proveedores históricos retirados:** 54 módulos; parada conservada en el registro de API, con cierre de hilos sin objeto de flow y reporte de timeout real. 169 pruebas de fuente y 169 instaladas pasan; tres fallos de migración coinciden con el recibo anterior. Catálogo nativo intacto, 22 definiciones documentadas; siguen operación, datos/restore, historial/presupuestos y aceptación integral. [Contrato](../architecture/native-autonomy-retirement.md), [resultados](autonomy-retirement-results.json).

@@ -1538,7 +1538,12 @@
         "docs/modernization/operation-image-results.json",
         "evals/operation/container_smoke.py",
         "backend/tests/config/test_api_paths.py",
-        "backend/tests/api/test_storage_health.py"
+        "backend/tests/api/test_storage_health.py",
+        "docs/architecture/forgejo-upgrade.md",
+        "docs/modernization/forgejo-upgrade-results.json",
+        "docker-compose.yml",
+        "compose.podman.yml",
+        "evals/operation/forgejo_upgrade.py"
       ]
     },
     "database_config": {
@@ -2020,7 +2025,13 @@
     },
     "backup_restore": {
       "status": "pending",
-      "evidence": []
+      "evidence": [
+        "docs/architecture/forgejo-upgrade.md",
+        "docs/modernization/forgejo-upgrade-results.json",
+        "docker-compose.yml",
+        "compose.podman.yml",
+        "evals/operation/forgejo_upgrade.py"
+      ]
     },
     "design_audit": {
       "status": "pending",
@@ -4082,19 +4093,41 @@
       "implemented": [
         "Pinned-base multistage web/API image installs native wheel and runs as uid1000; source API fixture restored.",
         "Explicit upload/static paths; storage health checks chosen attachment root without setup.",
-        "Actual isolated Podman bootstrap refusal, owner pairing, compiled web, project/upload/download and repeat startup with retained bytes and invalidated sessions."
+        "Actual isolated Podman bootstrap refusal, owner pairing, compiled web, project/upload/download and repeat startup with retained bytes and invalidated sessions.",
+        "Pinned Forgejo LTS configuration and synthetic9→15 upgrade, verified TLS/native PR transport and cold restore rehearsed separately."
       ],
       "evidence": [
         "docs/architecture/container-operation.md",
         "docs/modernization/operation-image-results.json",
         "evals/operation/container_smoke.py",
         "backend/tests/config/test_api_paths.py",
-        "backend/tests/api/test_storage_health.py"
+        "backend/tests/api/test_storage_health.py",
+        "docs/architecture/forgejo-upgrade.md",
+        "docs/modernization/forgejo-upgrade-results.json",
+        "docker-compose.yml",
+        "compose.podman.yml",
+        "evals/operation/forgejo_upgrade.py"
       ],
       "remaining": [
-        "Forgejo upgrade, backup/restore rehearsal and remote Git operations.",
         "Containerized native admission, managed host resources/account/Ken enrollment and deployment/restore validation.",
         "Frontend dependency upgrades, global suite, all-page and final independent acceptance."
+      ]
+    },
+    "forgejo_upgrade": {
+      "status": "configuration_and_synthetic_upgrade_restore_verified",
+      "scope": "Forgejo9.0.3 to pinned15.0.11, local SQLite volume, verified TLS Git/API and original-account/refs/PR restoration in a different directory.",
+      "evidence": [
+        "docs/architecture/forgejo-upgrade.md",
+        "docs/modernization/forgejo-upgrade-results.json",
+        "docker-compose.yml",
+        "compose.podman.yml",
+        "evals/operation/forgejo_upgrade.py"
+      ],
+      "limitations": [
+        "No operator deployment or actual user-data migration; real-data restore remains separate plan work.",
+        "Native HTTP publication client exercised, not full contained controller/model execution.",
+        "Docker Compose rendering and actual rootless Podman execution; no Docker daemon or other UID/kernel validation.",
+        "Doctor28checks exit0 with deprecated configuration message recorded in DD062."
       ]
     }
   }

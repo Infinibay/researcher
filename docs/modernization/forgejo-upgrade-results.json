@@ -1,0 +1,124 @@
+{
+  "scope": "Synthetic Forgejo service upgrade and native HTTP transport; not full native execution or real-data restore",
+  "stages": [
+    "Forgejo 9 authenticated clone/push/PR and graceful cold stop passed",
+    "Complete stopped data volume archived",
+    "Forgejo 15 migration, verified TLS clone/push/native PR reconciliation and doctor passed",
+    "Old backup restored elsewhere; original identity/history retained and later writes explicitly absent"
+  ],
+  "model_calls": 0,
+  "baseline_image": "codeberg.org/forgejo/forgejo:9.0.3@sha256:0f07dbf37c585fd0f90b5bb27d66540fd0cf197f5ee79b493be9ee18787797f9",
+  "target_image": "codeberg.org/forgejo/forgejo:15.0.11@sha256:4eee4e46d5d800f4a1b17f4a218e26a1c644a68307ba6e94511d4926d21143e5",
+  "compose_loopback": true,
+  "compose_existing_bind_directories_required": true,
+  "baseline_version": "9.0.3+gitea-1.22.0",
+  "creation_requires_write_user_scope": true,
+  "repository_id": 1,
+  "original_main": "be95ebfaec09a5b848add64d18aa8826abd9a412",
+  "original_branch": "15c67033ac532d1169e596e30301bebf3d55f0e6",
+  "original_pull": 1,
+  "cold_backup_sha256": "9a1fe357f5ba1f08c3ccfd97fd4cd6927a4b46a94059320bac402731d45305fd",
+  "upgraded_version": "15.0.11+gitea-1.22.0",
+  "restricted_token_scope_preserved_after_upgrade": true,
+  "native_pull": {
+    "state": "created",
+    "number": 2,
+    "candidate_current": true,
+    "observed_head_sha": "64857cd70ea33c0bac1148bc11c91221f404a077",
+    "observed_base_sha": "be95ebfaec09a5b848add64d18aa8826abd9a412",
+    "marker": "<!-- researcher-publication:230c82ae6402ede0ba5c092c63ff02cc60f44a4e03a736b8200c51a3e2f61e13 -->",
+    "repository_id": 1
+  },
+  "doctor_exit_code": 0,
+  "tls_and_proxy_settings_observed": true,
+  "restored_version": "9.0.3+gitea-1.22.0",
+  "restored_in_different_directory": true,
+  "restored_archive_bytes_verified": true,
+  "restored_original_account_token_refs_and_pull": true,
+  "upgraded_copy_retained": true,
+  "later_writes_not_in_old_backup": true,
+  "status": "passed",
+  "base_commit": "fb0042e5830d1672750294330e2e5d1f56e536d1",
+  "evidence_sha256": {
+    "docker-compose.yml": "ce318f3921c5934993b220f311c312fdcb2d7ae3b9a9bb516f6673db64528ed6",
+    "compose.podman.yml": "4430f96324de1ef0a4e00e0c138235b6e73111a5ca7a82ee428d468b0d8ff914",
+    "evals/operation/forgejo_upgrade.py": "e4cc9e36772695199eefbe3f57325f04fb3ff8af519a35f87917b1219962b59d",
+    "backend/runtime/forgejo_publication.py": "3e570ba8a669443da65102529f0d81a455190a3b434e94124babd2f4178a090b",
+    "backend/runtime/remote_publication.py": "4827e5095b4eb3f627abde15cb63a72719afa3ccd34ea2979aab7138b1c5b30c"
+  },
+  "retained_copy_check": {
+    "retained_upgraded_native_ref": "64857cd70ea33c0bac1148bc11c91221f404a077",
+    "pull_counts": {
+      "data": 2,
+      "restored-elsewhere": 1
+    },
+    "integrity": "ok in both separate databases"
+  },
+  "compose_overlay_check": {
+    "status": "passed",
+    "base_service_unchanged": true,
+    "user": "0:0",
+    "userns_mode": "keep-id",
+    "relation": "Exactly the same user and user namespace arguments exercised in the completed rehearsal; remaining rendered service unchanged."
+  },
+  "missing_data_directory_config_refused": true,
+  "doctor_checks": [
+    "Garbage collect LFS",
+    "Check paths and basic configuration",
+    "Check if there are orphaned archives in storage",
+    "Check if there are orphaned attachments in storage",
+    "Check if there are orphaned avatars in storage",
+    "Check if there are orphaned lfs files in storage",
+    "Check if there are orphaned package blobs in storage",
+    "Check if there are orphaned storage files",
+    "Check Database Version",
+    "Check consistency of database",
+    "Check if user with wrong type exist",
+    "Check if OpenSSH authorized_keys file is up-to-date",
+    "Deleted all content related to orphaned repos",
+    "Check if SCRIPT_TYPE is available",
+    "Check if hook files are up-to-date and executable",
+    "Recalculate Stars number for all user",
+    "Check old archives",
+    "Check that all git repositories have receive.advertisePushOptions set to true",
+    "Check for incorrectly dumped repo_units (See #16961)",
+    "Check for incorrect can_create_org_repo for org owner teams",
+    "Check for push mirrors without a git remote configured",
+    "Synchronize repo HEADs",
+    "Check git-daemon-export-ok files",
+    "Check commit-graphs",
+    "Check if users has an valid email address",
+    "Check if users have a valid username",
+    "Disable the actions unit for all mirrors",
+    "Extract Nuget Nuspec Files to content store"
+  ],
+  "doctor_deprecation_messages": [
+    "2026/11/06 23:18:45 ...g/config_provider.go:341:deprecatedSetting() [E] Deprecated config option `[service]` `EMAIL_DOMAIN_WHITELIST` present. Use `[service]` `EMAIL_DOMAIN_ALLOWLIST` instead. This fallback will be/has been removed in 1.21"
+  ],
+  "documented_definitions": 11,
+  "lint_deferred": {
+    "detail_id": "DD062",
+    "count": 1,
+    "codes": [
+      "I001"
+    ]
+  },
+  "earlier_attempts": [
+    {
+      "path": "forgejo-upgrade-rehearsal/result.json",
+      "observation": "User-repository creation returned403 with read:user; repository count0. Corrected fixture permission to write:user and kept a negative scope check."
+    },
+    {
+      "path": "forgejo-upgrade-rehearsal-v2/result.json",
+      "observation": "Immediate initial PR creation returned404 after pushes. Later readonly probes showed exact branches and empty PR list; same-scoped diagnostic token then created PR201. Asynchronous readiness is an inference, not a recovered original error body. Final fixture waits for observed nonempty repository and exact branch SHAs before its sole POST."
+    }
+  ],
+  "limits": [
+    "Synthetic local SQLite Forgejo9.0.3 to15.0.11 only; user deployment/data were not accessed.",
+    "Native Forgejo HTTP client executed over verified TLS; full contained native Git publication/controller and model execution were not part of this fixture.",
+    "Docker Compose rendered configuration; actual containers ran through Podman. Docker daemon and other UID/kernel mappings not tested.",
+    "Final Podman overlay projects exactly the runtime flags used in the successful rehearsal; base rendered service unchanged. That equivalence was checked without rerunning the unchanged migration.",
+    "Doctor returned0 and all28 checks OK, but logged deprecated EMAIL_DOMAIN_WHITELIST configuration. Deferred, not a warning-free report.",
+    "No global source test suite, new UI acceptance or prompt efficacy claim."
+  ]
+}

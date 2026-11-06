@@ -7145,3 +7145,46 @@ Evidence: `docs/modernization/operation-image-results.json`,
 `docs/architecture/container-operation.md`, portable
 `evals/operation/container_smoke.py`; task-local operation-image-smoke/result.json,
 service.log, operation-image-build.log, operation-image-package.json and two XMLs.
+
+## 2026-11-06 — Forgejo LTS/TLS upgrade and cold restoration, based on fb0042e
+
+Progress changes actual Compose configuration and proves the scoped service
+migration. Principal operation continues with host resources/native admission;
+ALLmacro beforeALLfine and updated transition lists still apply.
+
+- Compose15.0.11 pinned by actual digest, explicit existing data/TLS bind roots,
+  loopback port, verified HTTPS, constrained proxy trust/auth. New rootless override
+  keeps UID mapping used in the actual fixture. No default admin or token.
+- Discovered native RemoteRepository requiresHTTPS while old Compose exposedHTTP;
+  the rehearsal now verifies actual TLS Git and ForgejoPublicationClient, preserving
+  certificate/hostname checks and original PR receipt/reconciliation.
+- Actual9.0.3 baseline account/private repo/main+branch/PR; cold queue flush+exit0,
+  complete tar backup;15.0.11 migrates same volume, preserves original identity and
+  token scopes, accepts TLS clone/push and native PR creation/read-only recovery.
+- Restore old backup elsewhere under9.0.3; tar comparison, old refs/account/token/PR
+  preserved; later PR intentionallyabsent. Separate read-only checks show upgraded
+  native ref retained, PRcounts2vs1 and both SQLite integrity checksOK.
+- Doctor28checks/exit0; one deprecatedEMAIL_DOMAIN_WHITELIST log, not warningfree.
+  DD062 also recordsoneI001; do not rerun this scenario for fine cleanup.
+- Two failed fixture preparations retained:403creating/user/reposwithread:user
+  (needswrite:user, retainednegativecase); immediatePR404afterpush. Diagnostic
+  same-scope token/readspreserveddata thenPOST201. Asyncreadinessisplausible, not
+  proved from the lost404body; finalfixture waits on nonemptyrepo+exactrefs before
+  its single POST. No blind write retry and no model/account outside fixtures.
+- Finalv3rehearsalpasses; overlay later shown exactly equivalent to exercised
+  keep-id/user0:0 flags with unchanged rendered service. No full migration rerun
+  solely for that configuration projection.11definitions documented; backend/scripts
+  prompt inputs unchanged, so previous83/279/0pending inventory evidence reused.
+- Task-local docker-compose5.7.0 package downloaded/hashverified/unpacked; no system
+  install. RootlessPodman uses priorwrapper/prefix/storage. All fixturecontainers
+  removed; logs/data/backup remain. SourcePythonproductionunchanged, no globalsuite.
+- Public guide covers explicit newadmin/TLS/PATsetup, existingdataidentity,
+  coldbackup/restore, scopepermissions and externalremote_publicationJSON.
+  Actualoperatorinstance/data not accessed, no push/merge/deploy.
+
+Receipts: `docs/modernization/forgejo-upgrade-results.json`; task-local
+`forgejo-upgrade-rehearsal-v3/{result.json,doctor.log,retained-copy-check.json,
+compose-overlay-check.json,pre-upgrade.tar}`. The complete backup contains fixture
+secrets and remains private scratch; it is not committed. Next principal work:
+retire unused historical sandbox/image, finish native host setup/admission;
+then frontend dependency upgrades and all previously open full-plan requirements.

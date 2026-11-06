@@ -276,3 +276,13 @@ La actualización de dependencias frontend, Forgejo, el aprovisionamiento/admisi
 nativa y los fallos de migración/restore son trabajo principal, no pulido diferido.
 El fixture API histórico de DD059/DD060 ya se recuperó; 91 casos API/configuración
 y tres de salud pasan en el alcance de este corte.
+
+## DD062 — detalles tras el ensayo Forgejo
+
+Un aviso I001 de orden de imports en `evals/operation/forgejo_upgrade.py` queda
+para después de todas las capacidades principales. Doctor completó28checks y
+salió0, pero registró la opción antigua EMAIL_DOMAIN_WHITELIST; no se afirma una
+salida libre de avisos. Revisar su migración a EMAIL_DOMAIN_ALLOWLIST conservando
+valores efectivos en la pasada de configuración fina. No repetir backup/upgrade/
+restore por esos detalles. La caducidad/renovación de TLS se documenta como acción
+operativa explícita; no hay generación ni rotación automática al arrancar.
