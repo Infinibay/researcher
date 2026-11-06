@@ -53,7 +53,7 @@ class ParserLimits:
 
 
 class DocumentParser:
-    """Own bounded PDF/DOCX/CSV/JSON/XML workers until actual exit under host cancellation."""
+    """Own bounded PDF/HTML/DOCX/CSV/JSON/XML workers until actual exit under host cancellation."""
 
     def __init__(self, *, format="pdf", owner=None, grant_id=None, limits=None):
         """Bind host authority and limits; direct library callers still receive OS limits."""
@@ -61,7 +61,7 @@ class DocumentParser:
             raise ValueError(
                 "Parser owner and grant identity must be supplied together"
             )
-        if format not in ("pdf", "csv", "json", "xml", "docx"):
+        if format not in ("pdf", "html", "csv", "json", "xml", "docx"):
             raise ValueError("Unsupported host document parser format")
         self.format = format
         self.owner, self.grant_id = owner, grant_id

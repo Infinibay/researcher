@@ -574,3 +574,13 @@ HTTP, manteniendo plazo, Stop, DNS/TLS y citas.161pruebas de fuente y161del paqu
 pasan. [Contrato y límites](direct-web-policy.md). Spider todavía requiere su
 preflight y límites explícitos de ejecución remota; los wrappers web no se
 retiran en este checkpoint. Las demás familias y dependencias siguen pendientes.
+
+## Herramientas web retiradas — 2026-11-06
+
+Diez módulos se sustituyen por búsqueda nativa, captura pública con política de
+robots/cuota, parser HTML/PDF propio del host y Spider opcional con preflight.
+HTML conserva enlaces/tablas localmente; trafilatura sigue como dependencia
+útil. Se retiran ddgs/primp, sin cambiar versiones restantes del lock.
+218 pruebas de fuente y 218 instaladas pasan. [Contrato y mapeo](native-web-retirement.md).
+Los datos de web_cache/hallazgos permanecen; su migración histórica aún es principal.
+Siguen tareas/comunicación/proyecto/conocimiento y cinco dependencias legacy.

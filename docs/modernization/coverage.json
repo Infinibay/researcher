@@ -3854,22 +3854,29 @@
       "remaining": "Actual account/model matrix and whole-product acceptance remain unproven; secondary selector/theme work deferred until all principal capabilities."
     },
     "direct_web_policy": {
-      "status": "direct_capture_verified_spider_and_web_retirement_pending",
+      "status": "direct_and_spider_initial_policy_verified_legacy_web_retired_full_acceptance_pending",
       "evidence": [
         "docs/architecture/direct-web-policy.md",
         "docs/modernization/web-policy-results.json",
         "docs/modernization/web-policy-packaging.json",
         "backend/tests/research/test_web_policy.py",
-        "backend/tests/research/test_http.py"
+        "backend/tests/research/test_http.py",
+        "docs/architecture/native-web-retirement.md",
+        "docs/modernization/web-retirement-results.json",
+        "docs/modernization/web-retirement-packaging.json",
+        "backend/tests/research/test_spider_web_policy.py",
+        "backend/tests/research/test_html_web.py"
       ],
       "implemented": [
         "Robots decisions before each direct source redirect; bounded shared per-application HTTP budget/cache, original timeout and Stop, provenance, HTTP/PDF/SQLite/citation.",
-        "161 source and 161 installed tests pass; controlled public DNS/socket/provider data."
+        "161 source and 161 installed tests pass; controlled public DNS/socket/provider data.",
+        "Shared initial-target robots policy and billable POST budget for Spider; explicit remote respect_robots and matching user agent, remote compliance remains unverified.",
+        "Owned readable HTML Markdown preserves link targets/tables;10legacy web modules removed,ddgs/primp removed,218source and218installed cases pass."
       ],
       "remaining": [
-        "Spider initial-target policy and explicit remote-execution limits, legacy web retirement",
-        "Multiprocess/host operation as required in the deployment block; no distributed quota claimed",
-        "All original principal blocks,43scenarios and12page acceptance; fine details at the end"
+        "Historical web_cache-only and Chroma-only source retention/export in migration/restore; rows unchanged",
+        "Remote Spider assertions and per-instance quota retain documented limits; deployment/operation review remains",
+        "All principal plan blocks,43scenarios and12page acceptance, then deferred details"
       ]
     }
   }

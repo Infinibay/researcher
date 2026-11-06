@@ -1,0 +1,21 @@
+{
+  "base_commit": "8dd6e8d",
+  "passed": 218,
+  "failed": 0,
+  "skipped": 0,
+  "seconds": 43.825,
+  "additional_after_prompt_description_change": "2 prompt inventory tests plus one repeated MCP Spider capture/read/citation test pass in1.47s. One test-only docstring was added after execution; runtime code and test behavior unchanged.",
+  "scope": "Direct and initial-Spider robots/quota; local readable HTML and PDF/structured parser ownership; native search policy/configuration and one controlled runtime search-event persistence; no actual paid model/provider calls.",
+  "red_evidence": [
+    "Spider denial test initially reached POST and failed with provider-response error instead of a robots decision.",
+    "HTML test initially lost link targets and merged table cells; format html was unsupported by DocumentParser.",
+    "Retirement test initially located backend.tools.web."
+  ],
+  "intentional_compatibility_change": "HTML is a canonical Markdown snapshot. Existing transport assertion now expects escaped underscores; stored original snapshots are unchanged.",
+  "remaining": [
+    "Whole plan acceptance and43scenarios/12pages",
+    "Historical web_cache/Chroma-only data migration and restore; rows unchanged",
+    "Remote Spider enforcement/redirects/subresources remain provider assertions",
+    "Known migration54/55 outside this selected batch"
+  ]
+}

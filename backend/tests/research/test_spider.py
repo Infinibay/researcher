@@ -7,7 +7,8 @@ import pytest
 
 from backend.tests.research.test_context7 import response
 from backend.tests.research.test_http import credentials, research_client
-from backend.tests.research.test_web_fetcher import MemoryConnection
+from backend.tests.research.test_web_fetcher import MemoryConnection, TransportOnlyPolicy
+from backend.tests.research.test_web_policy import response as robots_response
 
 __all__ = ["research_client"]
 
@@ -21,7 +22,7 @@ PAGE = {
 
 
 def provider(responses, *, addresses=("93.184.216.34",), **options):
-    """Replace only DNS/socket bytes, retaining actual HTTP parsing and provider policy."""
+    """Focus provider fixtures on its protocol; API fixtures supply real shared web policy."""
     from backend.research.spider import SpiderReader
 
     calls, resolutions = [], []
@@ -42,6 +43,7 @@ def provider(responses, *, addresses=("93.184.216.34",), **options):
             api_key="synthetic-spider-key",
             resolver=resolve,
             connection_factory=connection,
+            web_policy=options.pop("web_policy", TransportOnlyPolicy()),
             **options,
         ),
         calls,
@@ -54,7 +56,7 @@ def spider_transport(monkeypatch):
     """Compose the adapter with the production host owner and grant, without a real provider call."""
     from backend.api import research_dependencies
 
-    responses, calls = [], []
+    responses, calls = [robots_response(status=404)], []
 
     def configured(**options):
         """Keep all production options while replacing only DNS and socket responses."""
@@ -282,6 +284,8 @@ async def test_mcp_spider_capture_read_cite_and_reuse_without_refetch(
                         not read.isError
                         and PAGE["content"] == read.structuredContent["content"]
                     )
+                    assert read.structuredContent["provenance"]["access_policy"][0]["robots_status"] == 404
+                    assert read.structuredContent["provenance"]["remote_policy_verified"] is False
                     finding = await client.call_tool(
                         "researcher_finding_record",
                         {
@@ -317,7 +321,7 @@ async def test_mcp_spider_capture_read_cite_and_reuse_without_refetch(
                     )
                     assert forged.isError
                 group.cancel_scope.cancel()
-    assert sum(map(len, calls)) == 1
+    assert sum(map(len, calls)) == 2
     assert (
         research_store.read_source(research_scope, source_id)["content"]
         == PAGE["content"]

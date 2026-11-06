@@ -5,6 +5,11 @@ CrewAI ni SDK de Spider. La capacidad de capturar una página dinámica se conse
 como integración opcional; captura web ordinaria y Ken mantienen sus funciones.
 El transporte acotado es compartido con Context7 en `provider_http.py`.
 
+Actualización posterior: la [retirada web](native-web-retirement.md) añade robots
+locales antes del POST, cuota compartida con captura directa, `respect_robots=true`
+y el identificador explícito Researcher. La procedencia distingue la comprobación
+inicial de la ejecución remota no observada. El plazo y Stop incluyen ese preflight.
+
 ## Uso y configuración
 
 Configurar en el entorno del **servidor**, antes de arrancarlo:
@@ -89,12 +94,13 @@ la conexión. Una parada local no demuestra cancelación o reembolso remoto.
 Interrupciones o carreras anteriores al commit pueden consumir cuota adicional;
 los límites por petición no sustituyen los presupuestos agregados del engine.
 
-## Retirada y comprobaciones
+## Retirada inicial y comprobaciones
 
 Se retiran el módulo anterior y sus tres pruebas específicas de delegación al
 SDK; sus identidades/hashes se conservan en el [inventario](../modernization/spider-retirement.json).
-No se cuentan como reparación de fallos históricos. Se conservan las pruebas
-del otro scraper antiguo y todos los registros de fuentes/hallazgos.
+No se cuentan como reparación de fallos históricos. En aquel corte se conservaron
+las pruebas del otro scraper; el corte posterior retira sus wrappers y tests.
+Todos los registros de fuentes/hallazgos se conservan.
 Se elimina el extra `spider`: el lock retira `spider-client`, `spider-browser` e
 `ijson`, sin actualizar las versiones de los paquetes restantes. El extra
 `legacy` continúa porque otras herramientas e índices aún lo necesitan.

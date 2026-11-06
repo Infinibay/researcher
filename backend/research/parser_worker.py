@@ -26,6 +26,10 @@ def main():
             from backend.research.pdf_text import extract_pdf
 
             content, provenance = extract_pdf(data)
+        elif options["format"] == "html":
+            from backend.research.html_text import extract_html
+
+            content, provenance = extract_html(data)
         else:
             from backend.research.structured_text import extract_structured
 

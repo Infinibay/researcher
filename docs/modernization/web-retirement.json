@@ -1,0 +1,96 @@
+{
+  "base_commit": "8dd6e8d",
+  "retired_modules": [
+    {
+      "path": "backend/tools/web/__init__.py",
+      "sha256": "e6d7a9ef49a2317b69531da95a452c7f0ea7264d06f2721c4b4512e4a7d5f598"
+    },
+    {
+      "path": "backend/tools/web/_backends.py",
+      "sha256": "386698cfe4084bbc6e11ac593fa8528435add023ad6e7b76e038ffaca18ed445"
+    },
+    {
+      "path": "backend/tools/web/deep_research.py",
+      "sha256": "5b80f002b46330c4da282edcd8e38a91b503b33413fe5c78d7292b2a585d9e91"
+    },
+    {
+      "path": "backend/tools/web/fetch.py",
+      "sha256": "b97d051b0da9f30f18457c31f2d02e7dcdbae60da8cf0d2f152d97062eda65bc"
+    },
+    {
+      "path": "backend/tools/web/knowledge_ingest.py",
+      "sha256": "6132000713f63d234278bcbe48e2755057dd4fd2d59038c1ca0258b16a7b6aec"
+    },
+    {
+      "path": "backend/tools/web/rate_limiter.py",
+      "sha256": "bf98aa3af41faf2f2b46b45ca389d304eb9408267b117c46abf69849b861f87d"
+    },
+    {
+      "path": "backend/tools/web/read_paper.py",
+      "sha256": "8a8953d626c303a74db900e85a7f15ee4bc535116aaa07a8e7e41007b5762dec"
+    },
+    {
+      "path": "backend/tools/web/robots_checker.py",
+      "sha256": "a014d324f0f74e4305eb72b0bd3ec4f117b21453544f1960bcbc78a94e71565c"
+    },
+    {
+      "path": "backend/tools/web/scrape_website.py",
+      "sha256": "93f7ff0a9ab82284b15dfb1522c82d78ebb1e366bc0309c28ae4b041540b205d"
+    },
+    {
+      "path": "backend/tools/web/search.py",
+      "sha256": "505ed19c342b983d84d3b16b991c1271d8642a43bcd69cc5625ac58c69d8c3ab"
+    }
+  ],
+  "retired_test_files": [
+    "backend/tests/tools/test_knowledge_ingest.py",
+    "backend/tests/tools/test_scrape_tools.py",
+    "backend/tests/tools/test_web_search_backends.py"
+  ],
+  "retired_test_functions": 20,
+  "retired_parameterized_cases": "The deep-research handoff test had2cases; removed wrapper tests are not counted as fixes.",
+  "scope": "Static absolute/relative import scan of backend/scripts; only wrapper tests consume the retired package. Dynamic/external users unknown. No user DB/files, web_cache rows or saved findings are changed.",
+  "replacements": {
+    "search": "Native Codex search with explicit mode and uncaptured observation provenance; no Serper/DDG fallback.",
+    "fetch_scrape": "Native scoped direct HTML/text/PDF snapshots, owned local Markdown extraction, robots/rate/Stop and exact citations. Optional advanced Spider rendering remains explicit.",
+    "paper": "Native URL/DOI/arXiv resolver and owned parser with snapshot/citation provenance.",
+    "deep_research": "Actual native admitted research composes discovery, source capture, findings and draft reports.",
+    "knowledge_ingest": "Explicit captured source then cited finding; no automatic scraped-content-as-observation or silent50k truncation.",
+    "rate_robots": "Native shared WebAccessPolicy covers direct capture plus Spider initial target and billable POST."
+  },
+  "remaining": [
+    "Legacy web_cache-only data migration/retention must be handled with other historical data; rows remain unchanged.",
+    "Remote provider redirects/subresources and robots enforcement remain attributed assertions, not local verification.",
+    "Other legacy families, five legacy dependencies and whole original plan remain unfinished."
+  ],
+  "lock": {
+    "before_packages": 179,
+    "after_packages": 177,
+    "removed": [
+      "ddgs",
+      "primp"
+    ],
+    "added": [],
+    "remaining_versions_unchanged": true,
+    "trafilatura": "Retained: readable local HTML extraction now runs in the owned parser."
+  },
+  "generated_bytecode_removed": [
+    "backend/tools/web/__pycache__/__init__.cpython-312.pyc",
+    "backend/tools/web/__pycache__/search.cpython-312.pyc",
+    "backend/tools/web/__pycache__/fetch.cpython-312.pyc",
+    "backend/tools/web/__pycache__/rate_limiter.cpython-312.pyc",
+    "backend/tools/web/__pycache__/robots_checker.cpython-312.pyc",
+    "backend/tools/web/__pycache__/read_paper.cpython-312.pyc",
+    "backend/tools/web/__pycache__/scrape_website.cpython-312.pyc",
+    "backend/tools/web/__pycache__/spider_scrape.cpython-312.pyc",
+    "backend/tools/web/__pycache__/code_docs_search.cpython-312.pyc",
+    "backend/tools/web/__pycache__/knowledge_ingest.cpython-312.pyc",
+    "backend/tools/web/__pycache__/_backends.cpython-312.pyc",
+    "backend/tools/web/__pycache__/deep_research.cpython-312.pyc"
+  ],
+  "after_static_imports": {
+    "files_scanned": 689,
+    "remaining": [],
+    "limits": "AST imports only, correct containing-package resolution for module and __init__.py. Dynamic/external users remain unknown."
+  }
+}

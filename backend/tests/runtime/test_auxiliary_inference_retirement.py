@@ -1,6 +1,5 @@
 """Old configuration, probes, summaries and deep-research tools cannot spend a provider turn or infer native capability outside an admitted runtime."""
 
-import json
 import sys
 from types import SimpleNamespace
 
@@ -62,28 +61,6 @@ def test_old_conversation_reader_does_not_generate_an_unattributed_summary(monke
     assert _summarize_messages_llm([{'from_agent':'user','message':'This is an example, not approval.'}],'legacy-summary-test',101) is None
 
 
-@pytest.mark.parametrize('asynchronous',[False,True])
-async def test_old_deep_research_entry_hands_off_before_search_fetch_or_synthesis(coordination, monkeypatch, asynchronous):
-    """The owner hint is not a research result; actual discovery/evidence belongs to native admitted research."""
-    from backend.tools.base.context import set_context
-    from backend.tools.web.deep_research import DeepWebResearchTool
-
-    def forbidden(*_args, **_kwargs):
-        """Refuse legacy web discovery before the original runtime has admitted authority."""
-        pytest.fail('Old research attempted network work')
-
-    monkeypatch.setattr(DeepWebResearchTool,'_search',forbidden,raising=False)
-    set_context(project_id=101,agent_id='old-researcher',task_id=1001)
-    try:
-        tool = DeepWebResearchTool()
-        result = await tool._arun('Read exact sources') if asynchronous else tool._run('Read exact sources')
-        hint = json.loads(result)
-        assert hint['delivery'] == 'native_owner_handoff'
-        assert hint['event_authorizes_work'] is False and hint['inference_started_by_handoff'] is False
-        assert coordination.conn.execute('SELECT count(*) FROM research_sources').fetchone()[0] == 0
-        assert coordination.conn.execute('SELECT count(*) FROM runtime_runs').fetchone()[0] == 0
-    finally:
-        set_context(project_id=None,agent_id=None,task_id=None)
 
 
 def test_historical_conversation_reader_keeps_literal_scoped_text_and_discloses_limits(coordination):

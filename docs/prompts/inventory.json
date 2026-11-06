@@ -2,7 +2,7 @@
   "schema_version": 1,
   "scope": "Owned backend/ and scripts/ Python, excluding tests. Syntax-selected prompt builders/literals/tool descriptions; external native system prompts and arbitrary owner/source text are outside this static inventory.",
   "coverage": "Candidates are not unique rendered prompts. Dynamic rendering size and non-direct consumers remain unknown. Reviews are explicit declarations bound to source and direct module consumers, not proof of efficacy or complete runtime reachability. requires_review entries are unfinished.",
-  "files_scanned": 421,
+  "files_scanned": 412,
   "source_tree": {
     "backend/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "backend/api/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -30,7 +30,7 @@
     "backend/api/models/wiki.py": "68dcc9c8e4062bdf2834edcdd5475403b6c92992448a8fd23fe9b88680c029f3",
     "backend/api/owner_endpoint.py": "dad24b99645ff4b35049a9bea37764719429600a510fabe9775add8875ace52c",
     "backend/api/request_limits.py": "00008d5f7984e56c5a4501a907ee7561cce63f32addafe4a7c9c110596755735",
-    "backend/api/research_dependencies.py": "f3fc64aee99d82804d3532a05cabb3a835146e3151cb17d79706331a9ea255a0",
+    "backend/api/research_dependencies.py": "577a233acceaf7aff0643025a5604fcaab6b3b3560b8595228c23436faf89095",
     "backend/api/routes/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "backend/api/routes/agents.py": "5ba0ef1ef5798f294b4cc449c2612f9686184dbf03e02d0712a8fd66d20f771e",
     "backend/api/routes/artifacts.py": "39f1c7a9ef32ce6c54285d8dffc46c6b7e82cf2ef26b783be0ddcdda1034a765",
@@ -213,12 +213,13 @@
     "backend/research/async_http_client.py": "36423e84c48c5593218a35ff6413eda1ff5e12e078a2285c2b0b06355aaa9d0b",
     "backend/research/command_sources.py": "d4fa00e82d8a95816e8eda90eb12e8c968a3618bd3783da61bf0a9b27abbd91a",
     "backend/research/context7.py": "79ceb4c6dd2fcf918061fc2bb0ac4d4e47d10a40ef675507af552ccbef98bb4d",
+    "backend/research/html_text.py": "d7cdda259876adcb64719578ca63e3f9d2ea3afdddf4f06c12c0c4633c6f0f0d",
     "backend/research/http_client.py": "a4bf7cfa1616e2c6f730bddee975d716182f78da6ac04ae2b8ae98d0861f2dcf",
     "backend/research/investigation.py": "0d7203a503ad3c28538d472be1f340f06144b97859c03f48207621ea8471ca7f",
     "backend/research/models.py": "b90a7f555962ea5e61eab3b6faec6372208fb8b8712b64f8f9546d13fe93f9ff",
     "backend/research/papers.py": "6f3cb7134bfda309c591537e6173e0d33a46154fe59a862a084d333d84cb90ca",
-    "backend/research/parser_process.py": "725160815acad4eb3135e9ad13bc640266a8bbdd463994eb95ba889c70232116",
-    "backend/research/parser_worker.py": "e7d380375f6674427038d9a8dc8b7b70fc46520cec7a1465ae3f86fcf22b946b",
+    "backend/research/parser_process.py": "ee93a37b9a5fb8c2f3f443ce2fbc26c3073a090fd506bdeacfb66e34c7f0ca9a",
+    "backend/research/parser_worker.py": "7bf967e9080909821082b6770fbe525a9f759d4af5c561ba49ed5a9754e3c522",
     "backend/research/pdf_text.py": "1810f7b7e73610e7fa72aef31255a883bc2a875c65e0dde2b86e007b58443a0a",
     "backend/research/ports.py": "2c5d517ac5ba20afdd8ef06d5af4549d870bb26d268142731a120493561f08e7",
     "backend/research/provenance.py": "c7711139bc8c86c5b3f8fe734cbac31c1736c63037f890375bef9309171fb897",
@@ -228,11 +229,11 @@
     "backend/research/semantic.py": "c835f4f57a68a1eac041f34c94e686a6c6c8cb0f5b513226a3cb188a5a875e0a",
     "backend/research/semantic_worker.py": "84fb3bde2e2cf33200637a539a807f5a38e907a64511aca29d205d98f288e412",
     "backend/research/service.py": "af0f2e7431b80361b4d3654a6ed1237800a16b6eb39fdcede938dfda75ac8a60",
-    "backend/research/spider.py": "d0fdddc143bdf75539bf903c798e901ee84762ee45db615d9739a05ecdea9483",
+    "backend/research/spider.py": "784d62d223a5c39c6083c156571c73d38feb5539dc4f597434965ceb1d5e2cdb",
     "backend/research/sqlite_store.py": "f91f7b8997ff42df3797ba963813dda01f03666ff86d3dda6fd8132e29a4d9dc",
     "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
     "backend/research/structured_text.py": "3721074c14461cabc26be374a1e64954747fe1e5656a524d6d293c29ec922599",
-    "backend/research/web_fetcher.py": "f09108c93e9928d90866de6821c89e9d6f7e677ccb3967f7ab2242afe6c49f4e",
+    "backend/research/web_fetcher.py": "f674a31ed31c392500be1b2d6d24f9d4362205d6e2d455281fac725fb108a4c5",
     "backend/research/web_policy.py": "9b22dce8fb3cb895d579f42c469c0f6163a9c1a72bd27944e62ee754f729115f",
     "backend/research/worker_limits.py": "7c633a5ba1db3b45948330ad4e85c0993f05b760587cc249261ce3810b83cb0d",
     "backend/research/worker_transport.py": "f8ec45d7cb2cf12d2dec30049b34c9025ebbf86fafd9a43f9a2bac526c673083",
@@ -246,7 +247,7 @@
     "backend/runtime/broker_mcp.py": "5d1e26befdf02c6a08afadd39fde0b8fb0a64fa8230e311de8d7a78c1870d8ea",
     "backend/runtime/broker_profile.py": "3e80d7793818df4fce8175387f10c50e22e08e4744c08ffe3a479c49eac74e77",
     "backend/runtime/broker_stdio.py": "91b2aa7308c469799cf1f90b89d4a61449e12eebda2755e8199c671d0cb24cc6",
-    "backend/runtime/business_definitions.py": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+    "backend/runtime/business_definitions.py": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
     "backend/runtime/business_mediation.py": "c249130b2f7764db6be2cf7c88bdd15a5c7aeb6dbd7fcf19ff04ab3d7334627c",
     "backend/runtime/candidate_capture.py": "69a49f1d87ea03fd52c82ae266338515fe5807df403043821154f674a7a03f12",
     "backend/runtime/candidate_state.py": "599100a7bd58157766687b772b343d92d8ada3bcbd88e7a413fdac3b0b0a0ec5",
@@ -410,16 +411,6 @@
     "backend/tools/task/set_dependencies.py": "e9f992925b1e4dbc75794469c83d6bc71e861ad005d21cca755a4cdc14c6bf53",
     "backend/tools/task/take_task.py": "11382385d4c151a26b2ef46e1fb66124a514150079d443f49d5f2381c8fdd6da",
     "backend/tools/task/update_status.py": "e0de18b96c65450dec29fd022d178d3009a2c0471ed670af37e2f373ecaa245c",
-    "backend/tools/web/__init__.py": "e6d7a9ef49a2317b69531da95a452c7f0ea7264d06f2721c4b4512e4a7d5f598",
-    "backend/tools/web/_backends.py": "386698cfe4084bbc6e11ac593fa8528435add023ad6e7b76e038ffaca18ed445",
-    "backend/tools/web/deep_research.py": "5b80f002b46330c4da282edcd8e38a91b503b33413fe5c78d7292b2a585d9e91",
-    "backend/tools/web/fetch.py": "b97d051b0da9f30f18457c31f2d02e7dcdbae60da8cf0d2f152d97062eda65bc",
-    "backend/tools/web/knowledge_ingest.py": "6132000713f63d234278bcbe48e2755057dd4fd2d59038c1ca0258b16a7b6aec",
-    "backend/tools/web/rate_limiter.py": "bf98aa3af41faf2f2b46b45ca389d304eb9408267b117c46abf69849b861f87d",
-    "backend/tools/web/read_paper.py": "8a8953d626c303a74db900e85a7f15ee4bc535116aaa07a8e7e41007b5762dec",
-    "backend/tools/web/robots_checker.py": "a014d324f0f74e4305eb72b0bd3ec4f117b21453544f1960bcbc78a94e71565c",
-    "backend/tools/web/scrape_website.py": "93f7ff0a9ab82284b15dfb1522c82d78ebb1e366bc0309c28ae4b041540b205d",
-    "backend/tools/web/search.py": "505ed19c342b983d84d3b16b991c1271d8642a43bcd69cc5625ac58c69d8c3ab",
     "scripts/audit_prompt_inventory.py": "652d39284cc8aa51739366aea2723aec419e3cd9e3bd38da7b17012837fa47b7",
     "scripts/infinibay_cli.py": "8aa5d743e60c1a89a89b37c6b915bafe238586724c0a15eec7435cc3ede31c8f",
     "scripts/infinibay_file_helper.py": "9139494d18efa19b56e7e7a1575787a836f2597e5016321aca9e7f3cab119530",
@@ -8826,7 +8817,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 594,
       "rendered_utf8_bytes": 592,
       "variables_kind": "referenced_identifiers",
@@ -8847,14 +8838,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -8877,7 +8868,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 313,
       "rendered_utf8_bytes": 307,
       "variables_kind": "function_parameters",
@@ -8897,14 +8888,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -8927,7 +8918,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 514,
       "rendered_utf8_bytes": 508,
       "variables_kind": "function_parameters",
@@ -8952,14 +8943,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -8982,7 +8973,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 399,
       "rendered_utf8_bytes": 393,
       "variables_kind": "function_parameters",
@@ -9006,14 +8997,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -9036,7 +9027,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 475,
       "rendered_utf8_bytes": 469,
       "variables_kind": "function_parameters",
@@ -9056,14 +9047,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -9086,7 +9077,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 75,
       "rendered_utf8_bytes": 69,
       "variables_kind": "function_parameters",
@@ -9104,14 +9095,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -9134,7 +9125,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 665,
       "rendered_utf8_bytes": 659,
       "variables_kind": "function_parameters",
@@ -9154,14 +9145,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -9184,9 +9175,9 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
-      "source_bytes": 321,
-      "rendered_utf8_bytes": 315,
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
+      "source_bytes": 423,
+      "rendered_utf8_bytes": 417,
       "variables_kind": "function_parameters",
       "variables": [
         "self",
@@ -9204,21 +9195,21 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Reviewed against PublicWebFetcher, html_text and owned DocumentParser: HTML is canonical Markdown retaining links/tables; snapshots define exact quotes, robots/rate/deadline are host enforced, PDF bounds and no scientific certification retained. No new authority or hidden provider.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "backend/runtime/analysis_tools.py",
-        "backend/runtime/owned_runtime.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "backend/research/web_fetcher.py",
+        "backend/research/spider.py",
+        "backend/tests/research/test_spider.py",
+        "backend/tests/research/test_html_web.py",
+        "docs/architecture/native-web-retirement.md"
       ],
       "review_conflicts": [
         "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
@@ -9234,9 +9225,9 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "reviewed_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
-      "source_bytes": 650,
-      "rendered_utf8_bytes": 644,
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
+      "source_bytes": 726,
+      "rendered_utf8_bytes": 720,
       "variables_kind": "function_parameters",
       "variables": [
         "self",
@@ -9256,20 +9247,21 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Reviewed against the typed handler, provider request policy and saved-source flow. Explicit one-page rendering choice and separate host-capped quota; no automatic nested inference, provider fallback or finding creation. The description requires saved-source reading before citations and distinguishes local Stop from remote cancellation/refund. Source instructions/rendering/costs are attributed, not trusted authority. Tests exercise MCP/HTTP/API/SQLite and exact citations; no live provider availability or efficacy claim.",
+      "review_rationale": "Reviewed against SpiderReader/API composition and actual MCP capture/read/citation test: local initial robots plus shared quota before billable POST; remote same-UA respect_robots is requested, not verified; provider quota and Stop/cancellation limits stay explicit. Model cannot supply credentials or choose policy bypass.",
       "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "backend/research/web_fetcher.py",
         "backend/research/spider.py",
-        "backend/research/provider_http.py",
-        "backend/research/service.py",
         "backend/tests/research/test_spider.py",
-        "docs/architecture/spider-sources.md"
+        "backend/tests/research/test_html_web.py",
+        "docs/architecture/native-web-retirement.md"
       ],
       "review_conflicts": []
     },
@@ -9283,7 +9275,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "reviewed_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 459,
       "rendered_utf8_bytes": 453,
       "variables_kind": "function_parameters",
@@ -9304,14 +9296,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Reviewed against the native handler, DTO, optional host credential and source store. Explicit query/library choice, external-provider quota, immutable source read/pagination, version uncertainty, untrusted provider instructions and original operation-key reuse are described. No automatic retry, provider fallback, permission escalation or scientific-quality claim. MCP/HTTP/SQLite tests exercise actual descriptions and mappings; no efficacy claim.",
+      "review_rationale": "Reviewed against the native handler, DTO, optional host credential and source store. Explicit query/library choice, external-provider quota, immutable source read/pagination, version uncertainty, untrusted provider instructions and original operation-key reuse are described. No automatic retry, provider fallback, permission escalation or scientific-quality claim. MCP/HTTP/SQLite tests exercise actual descriptions and mappings; no efficacy claim. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/research/context7.py",
         "backend/research/service.py",
@@ -9331,7 +9323,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "reviewed_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 531,
       "rendered_utf8_bytes": 525,
       "variables_kind": "function_parameters",
@@ -9353,14 +9345,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Reviewed against the native handler, DTO, optional host credential and source store. Explicit query/library choice, external-provider quota, immutable source read/pagination, version uncertainty, untrusted provider instructions and original operation-key reuse are described. No automatic retry, provider fallback, permission escalation or scientific-quality claim. MCP/HTTP/SQLite tests exercise actual descriptions and mappings; no efficacy claim.",
+      "review_rationale": "Reviewed against the native handler, DTO, optional host credential and source store. Explicit query/library choice, external-provider quota, immutable source read/pagination, version uncertainty, untrusted provider instructions and original operation-key reuse are described. No automatic retry, provider fallback, permission escalation or scientific-quality claim. MCP/HTTP/SQLite tests exercise actual descriptions and mappings; no efficacy claim. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/research/context7.py",
         "backend/research/service.py",
@@ -9380,7 +9372,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 499,
       "rendered_utf8_bytes": 493,
       "variables_kind": "function_parameters",
@@ -9402,14 +9394,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -9432,7 +9424,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 251,
       "rendered_utf8_bytes": 245,
       "variables_kind": "function_parameters",
@@ -9452,14 +9444,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -9482,7 +9474,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 438,
       "rendered_utf8_bytes": 432,
       "variables_kind": "function_parameters",
@@ -9503,14 +9495,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -9533,7 +9525,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 430,
       "rendered_utf8_bytes": 424,
       "variables_kind": "function_parameters",
@@ -9554,14 +9546,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -9584,7 +9576,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 208,
       "rendered_utf8_bytes": 202,
       "variables_kind": "function_parameters",
@@ -9605,14 +9597,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -9635,7 +9627,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 576,
       "rendered_utf8_bytes": 570,
       "variables_kind": "function_parameters",
@@ -9657,14 +9649,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -9687,7 +9679,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 393,
       "rendered_utf8_bytes": 387,
       "variables_kind": "function_parameters",
@@ -9707,14 +9699,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -9737,7 +9729,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 277,
       "rendered_utf8_bytes": 271,
       "variables_kind": "function_parameters",
@@ -9760,14 +9752,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -9790,7 +9782,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 496,
       "rendered_utf8_bytes": 490,
       "variables_kind": "function_parameters",
@@ -9815,14 +9807,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -9845,7 +9837,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 360,
       "rendered_utf8_bytes": 354,
       "variables_kind": "function_parameters",
@@ -9868,14 +9860,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -9898,7 +9890,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 830,
       "rendered_utf8_bytes": 824,
       "variables_kind": "function_parameters",
@@ -9926,14 +9918,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -9956,7 +9948,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 412,
       "rendered_utf8_bytes": 406,
       "variables_kind": "function_parameters",
@@ -9978,14 +9970,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -10008,7 +10000,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 207,
       "rendered_utf8_bytes": 201,
       "variables_kind": "function_parameters",
@@ -10031,14 +10023,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -10061,7 +10053,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 400,
       "rendered_utf8_bytes": 394,
       "variables_kind": "function_parameters",
@@ -10081,14 +10073,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -10111,7 +10103,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 381,
       "rendered_utf8_bytes": 375,
       "variables_kind": "function_parameters",
@@ -10133,14 +10125,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -10163,7 +10155,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 116,
       "rendered_utf8_bytes": 110,
       "variables_kind": "function_parameters",
@@ -10185,14 +10177,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -10215,7 +10207,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 318,
       "rendered_utf8_bytes": 312,
       "variables_kind": "function_parameters",
@@ -10237,14 +10229,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -10267,7 +10259,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 300,
       "rendered_utf8_bytes": 294,
       "variables_kind": "function_parameters",
@@ -10289,14 +10281,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -10319,7 +10311,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 421,
       "rendered_utf8_bytes": 415,
       "variables_kind": "function_parameters",
@@ -10344,14 +10336,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -10374,7 +10366,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 351,
       "rendered_utf8_bytes": 345,
       "variables_kind": "function_parameters",
@@ -10396,14 +10388,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -10426,7 +10418,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
-      "source_sha256": "2af75264f54a3c0268e13a25c38801a85ad5dd9ca85145bb98a4f44fcf2c96ab",
+      "source_sha256": "47e0dede62335ae1599699bdb4892c96dce6ac1b8a97c4735246c4ac75534a72",
       "source_bytes": 433,
       "rendered_utf8_bytes": 427,
       "variables_kind": "function_parameters",
@@ -10446,14 +10438,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "direct_module_consumers": {
         "backend/research/stdio_server.py": "dd501be64a376b041a32796d84abbee7c1c27ce4e9d7392b13308bcb39aec0bb",
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "review_evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -18427,788 +18419,6 @@
       "review_rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
       "review_evidence": [
         "backend/tools/task/update_status.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    {
-      "id": "backend/tools/web/deep_research.py::DeepWebResearchTool.description",
-      "path": "backend/tools/web/deep_research.py",
-      "symbol": "DeepWebResearchTool.description",
-      "line": 23,
-      "end_line": 23,
-      "owner": "backend.tools.web.deep_research",
-      "family": "retained_tool_or_historical_schema",
-      "disposition": "retained_historical_schema",
-      "objective": "Retired outside-runtime deep-research entry; actual native research owns discovery, captured sources, cited findings and report synthesis.",
-      "source_sha256": "5b80f002b46330c4da282edcd8e38a91b503b33413fe5c78d7292b2a585d9e91",
-      "source_bytes": 156,
-      "rendered_utf8_bytes": 154,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "da11cf985c6d3d432bb4b9b7ab10de8f34fe5892cda81e3ce9951df4fecbd5ba",
-      "direct_module_consumers": {
-        "backend/tools/web/__init__.py": "e6d7a9ef49a2317b69531da95a452c7f0ea7264d06f2721c4b4512e4a7d5f598"
-      },
-      "suggested_disposition": "requires_review",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "review_evidence": [
-        "backend/tools/web/deep_research.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    {
-      "id": "backend/tools/web/deep_research.py::DeepWebResearchInput.description@14",
-      "path": "backend/tools/web/deep_research.py",
-      "symbol": "DeepWebResearchInput.description@14",
-      "line": 14,
-      "end_line": 14,
-      "owner": "backend.tools.web.deep_research",
-      "family": "retained_tool_or_historical_schema",
-      "disposition": "retained_historical_schema",
-      "objective": "Retired outside-runtime deep-research entry; actual native research owns discovery, captured sources, cited findings and report synthesis.",
-      "source_sha256": "5b80f002b46330c4da282edcd8e38a91b503b33413fe5c78d7292b2a585d9e91",
-      "source_bytes": 30,
-      "rendered_utf8_bytes": 28,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "da11cf985c6d3d432bb4b9b7ab10de8f34fe5892cda81e3ce9951df4fecbd5ba",
-      "direct_module_consumers": {
-        "backend/tools/web/__init__.py": "e6d7a9ef49a2317b69531da95a452c7f0ea7264d06f2721c4b4512e4a7d5f598"
-      },
-      "suggested_disposition": "requires_review",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "review_evidence": [
-        "backend/tools/web/deep_research.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    {
-      "id": "backend/tools/web/fetch.py::WebFetchTool.description",
-      "path": "backend/tools/web/fetch.py",
-      "symbol": "WebFetchTool.description",
-      "line": 29,
-      "end_line": 32,
-      "owner": "backend.tools.web.fetch",
-      "family": "retained_tool_or_historical_schema",
-      "disposition": "retained_historical_schema",
-      "objective": "Web fetch tool for extracting readable content from URLs.",
-      "source_sha256": "b97d051b0da9f30f18457c31f2d02e7dcdbae60da8cf0d2f152d97062eda65bc",
-      "source_bytes": 121,
-      "rendered_utf8_bytes": 108,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "7b47782abb51dc73abd0046892e46d2880ee3191e389acf1df40b2ffa0e52274",
-      "direct_module_consumers": {
-        "backend/tools/web/__init__.py": "e6d7a9ef49a2317b69531da95a452c7f0ea7264d06f2721c4b4512e4a7d5f598"
-      },
-      "suggested_disposition": "requires_review",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "review_evidence": [
-        "backend/tools/web/fetch.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    {
-      "id": "backend/tools/web/fetch.py::WebFetchInput.description@17",
-      "path": "backend/tools/web/fetch.py",
-      "symbol": "WebFetchInput.description@17",
-      "line": 17,
-      "end_line": 17,
-      "owner": "backend.tools.web.fetch",
-      "family": "retained_tool_or_historical_schema",
-      "disposition": "retained_historical_schema",
-      "objective": "Web fetch tool for extracting readable content from URLs.",
-      "source_sha256": "b97d051b0da9f30f18457c31f2d02e7dcdbae60da8cf0d2f152d97062eda65bc",
-      "source_bytes": 27,
-      "rendered_utf8_bytes": 25,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "7b47782abb51dc73abd0046892e46d2880ee3191e389acf1df40b2ffa0e52274",
-      "direct_module_consumers": {
-        "backend/tools/web/__init__.py": "e6d7a9ef49a2317b69531da95a452c7f0ea7264d06f2721c4b4512e4a7d5f598"
-      },
-      "suggested_disposition": "requires_review",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "review_evidence": [
-        "backend/tools/web/fetch.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    {
-      "id": "backend/tools/web/fetch.py::WebFetchInput.description@19",
-      "path": "backend/tools/web/fetch.py",
-      "symbol": "WebFetchInput.description@19",
-      "line": 19,
-      "end_line": 19,
-      "owner": "backend.tools.web.fetch",
-      "family": "retained_tool_or_historical_schema",
-      "disposition": "retained_historical_schema",
-      "objective": "Web fetch tool for extracting readable content from URLs.",
-      "source_sha256": "b97d051b0da9f30f18457c31f2d02e7dcdbae60da8cf0d2f152d97062eda65bc",
-      "source_bytes": 37,
-      "rendered_utf8_bytes": 35,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "7b47782abb51dc73abd0046892e46d2880ee3191e389acf1df40b2ffa0e52274",
-      "direct_module_consumers": {
-        "backend/tools/web/__init__.py": "e6d7a9ef49a2317b69531da95a452c7f0ea7264d06f2721c4b4512e4a7d5f598"
-      },
-      "suggested_disposition": "requires_review",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "review_evidence": [
-        "backend/tools/web/fetch.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    {
-      "id": "backend/tools/web/fetch.py::WebFetchInput.description@23",
-      "path": "backend/tools/web/fetch.py",
-      "symbol": "WebFetchInput.description@23",
-      "line": 23,
-      "end_line": 23,
-      "owner": "backend.tools.web.fetch",
-      "family": "retained_tool_or_historical_schema",
-      "disposition": "retained_historical_schema",
-      "objective": "Web fetch tool for extracting readable content from URLs.",
-      "source_sha256": "b97d051b0da9f30f18457c31f2d02e7dcdbae60da8cf0d2f152d97062eda65bc",
-      "source_bytes": 55,
-      "rendered_utf8_bytes": 53,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "7b47782abb51dc73abd0046892e46d2880ee3191e389acf1df40b2ffa0e52274",
-      "direct_module_consumers": {
-        "backend/tools/web/__init__.py": "e6d7a9ef49a2317b69531da95a452c7f0ea7264d06f2721c4b4512e4a7d5f598"
-      },
-      "suggested_disposition": "requires_review",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "review_evidence": [
-        "backend/tools/web/fetch.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    {
-      "id": "backend/tools/web/read_paper.py::ReadPaperTool.description",
-      "path": "backend/tools/web/read_paper.py",
-      "symbol": "ReadPaperTool.description",
-      "line": 25,
-      "end_line": 28,
-      "owner": "backend.tools.web.read_paper",
-      "family": "retained_tool_or_historical_schema",
-      "disposition": "retained_historical_schema",
-      "objective": "Tool for reading academic papers from arXiv, DOI, or PDF URLs.",
-      "source_sha256": "8a8953d626c303a74db900e85a7f15ee4bc535116aaa07a8e7e41007b5762dec",
-      "source_bytes": 105,
-      "rendered_utf8_bytes": 92,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "8125249b88bc1a02a6d8c0107fb9d91e1f45730dca8e4318c2438d3a7c467e6d",
-      "direct_module_consumers": {
-        "backend/tools/web/__init__.py": "e6d7a9ef49a2317b69531da95a452c7f0ea7264d06f2721c4b4512e4a7d5f598"
-      },
-      "suggested_disposition": "requires_review",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "review_evidence": [
-        "backend/tools/web/read_paper.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    {
-      "id": "backend/tools/web/read_paper.py::ReadPaperInput.description@18",
-      "path": "backend/tools/web/read_paper.py",
-      "symbol": "ReadPaperInput.description@18",
-      "line": 18,
-      "end_line": 18,
-      "owner": "backend.tools.web.read_paper",
-      "family": "retained_tool_or_historical_schema",
-      "disposition": "retained_historical_schema",
-      "objective": "Tool for reading academic papers from arXiv, DOI, or PDF URLs.",
-      "source_sha256": "8a8953d626c303a74db900e85a7f15ee4bc535116aaa07a8e7e41007b5762dec",
-      "source_bytes": 39,
-      "rendered_utf8_bytes": 37,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "8125249b88bc1a02a6d8c0107fb9d91e1f45730dca8e4318c2438d3a7c467e6d",
-      "direct_module_consumers": {
-        "backend/tools/web/__init__.py": "e6d7a9ef49a2317b69531da95a452c7f0ea7264d06f2721c4b4512e4a7d5f598"
-      },
-      "suggested_disposition": "requires_review",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "review_evidence": [
-        "backend/tools/web/read_paper.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    {
-      "id": "backend/tools/web/read_paper.py::ReadPaperInput.description@19",
-      "path": "backend/tools/web/read_paper.py",
-      "symbol": "ReadPaperInput.description@19",
-      "line": 19,
-      "end_line": 19,
-      "owner": "backend.tools.web.read_paper",
-      "family": "retained_tool_or_historical_schema",
-      "disposition": "retained_historical_schema",
-      "objective": "Tool for reading academic papers from arXiv, DOI, or PDF URLs.",
-      "source_sha256": "8a8953d626c303a74db900e85a7f15ee4bc535116aaa07a8e7e41007b5762dec",
-      "source_bytes": 41,
-      "rendered_utf8_bytes": 39,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "8125249b88bc1a02a6d8c0107fb9d91e1f45730dca8e4318c2438d3a7c467e6d",
-      "direct_module_consumers": {
-        "backend/tools/web/__init__.py": "e6d7a9ef49a2317b69531da95a452c7f0ea7264d06f2721c4b4512e4a7d5f598"
-      },
-      "suggested_disposition": "requires_review",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "review_evidence": [
-        "backend/tools/web/read_paper.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    {
-      "id": "backend/tools/web/read_paper.py::ReadPaperInput.description@20",
-      "path": "backend/tools/web/read_paper.py",
-      "symbol": "ReadPaperInput.description@20",
-      "line": 20,
-      "end_line": 20,
-      "owner": "backend.tools.web.read_paper",
-      "family": "retained_tool_or_historical_schema",
-      "disposition": "retained_historical_schema",
-      "objective": "Tool for reading academic papers from arXiv, DOI, or PDF URLs.",
-      "source_sha256": "8a8953d626c303a74db900e85a7f15ee4bc535116aaa07a8e7e41007b5762dec",
-      "source_bytes": 36,
-      "rendered_utf8_bytes": 34,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "8125249b88bc1a02a6d8c0107fb9d91e1f45730dca8e4318c2438d3a7c467e6d",
-      "direct_module_consumers": {
-        "backend/tools/web/__init__.py": "e6d7a9ef49a2317b69531da95a452c7f0ea7264d06f2721c4b4512e4a7d5f598"
-      },
-      "suggested_disposition": "requires_review",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "review_evidence": [
-        "backend/tools/web/read_paper.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    {
-      "id": "backend/tools/web/scrape_website.py::ScrapeWebsiteInfinibayTool.description",
-      "path": "backend/tools/web/scrape_website.py",
-      "symbol": "ScrapeWebsiteInfinibayTool.description",
-      "line": 27,
-      "end_line": 30,
-      "owner": "backend.tools.web.scrape_website",
-      "family": "retained_tool_or_historical_schema",
-      "disposition": "retained_historical_schema",
-      "objective": "Web scraping tool using CrewAI's ScrapeWebsiteTool.",
-      "source_sha256": "93f7ff0a9ab82284b15dfb1522c82d78ebb1e366bc0309c28ae4b041540b205d",
-      "source_bytes": 154,
-      "rendered_utf8_bytes": 141,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "c7ac685beac8ce96f67e696d0c7813bfc202bb53630c416ce106ca52c3764504",
-      "direct_module_consumers": {
-        "backend/tools/web/__init__.py": "e6d7a9ef49a2317b69531da95a452c7f0ea7264d06f2721c4b4512e4a7d5f598"
-      },
-      "suggested_disposition": "requires_review",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "review_evidence": [
-        "backend/tools/web/scrape_website.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    {
-      "id": "backend/tools/web/scrape_website.py::ScrapeWebsiteInput.description@14",
-      "path": "backend/tools/web/scrape_website.py",
-      "symbol": "ScrapeWebsiteInput.description@14",
-      "line": 14,
-      "end_line": 14,
-      "owner": "backend.tools.web.scrape_website",
-      "family": "retained_tool_or_historical_schema",
-      "disposition": "retained_historical_schema",
-      "objective": "Web scraping tool using CrewAI's ScrapeWebsiteTool.",
-      "source_sha256": "93f7ff0a9ab82284b15dfb1522c82d78ebb1e366bc0309c28ae4b041540b205d",
-      "source_bytes": 28,
-      "rendered_utf8_bytes": 26,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "c7ac685beac8ce96f67e696d0c7813bfc202bb53630c416ce106ca52c3764504",
-      "direct_module_consumers": {
-        "backend/tools/web/__init__.py": "e6d7a9ef49a2317b69531da95a452c7f0ea7264d06f2721c4b4512e4a7d5f598"
-      },
-      "suggested_disposition": "requires_review",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "review_evidence": [
-        "backend/tools/web/scrape_website.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    {
-      "id": "backend/tools/web/scrape_website.py::ScrapeWebsiteInput.description@17",
-      "path": "backend/tools/web/scrape_website.py",
-      "symbol": "ScrapeWebsiteInput.description@17",
-      "line": 17,
-      "end_line": 17,
-      "owner": "backend.tools.web.scrape_website",
-      "family": "retained_tool_or_historical_schema",
-      "disposition": "retained_historical_schema",
-      "objective": "Web scraping tool using CrewAI's ScrapeWebsiteTool.",
-      "source_sha256": "93f7ff0a9ab82284b15dfb1522c82d78ebb1e366bc0309c28ae4b041540b205d",
-      "source_bytes": 68,
-      "rendered_utf8_bytes": 66,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "c7ac685beac8ce96f67e696d0c7813bfc202bb53630c416ce106ca52c3764504",
-      "direct_module_consumers": {
-        "backend/tools/web/__init__.py": "e6d7a9ef49a2317b69531da95a452c7f0ea7264d06f2721c4b4512e4a7d5f598"
-      },
-      "suggested_disposition": "requires_review",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "review_evidence": [
-        "backend/tools/web/scrape_website.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    {
-      "id": "backend/tools/web/scrape_website.py::ScrapeWebsiteInput.description@21",
-      "path": "backend/tools/web/scrape_website.py",
-      "symbol": "ScrapeWebsiteInput.description@21",
-      "line": 21,
-      "end_line": 21,
-      "owner": "backend.tools.web.scrape_website",
-      "family": "retained_tool_or_historical_schema",
-      "disposition": "retained_historical_schema",
-      "objective": "Web scraping tool using CrewAI's ScrapeWebsiteTool.",
-      "source_sha256": "93f7ff0a9ab82284b15dfb1522c82d78ebb1e366bc0309c28ae4b041540b205d",
-      "source_bytes": 63,
-      "rendered_utf8_bytes": 61,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "c7ac685beac8ce96f67e696d0c7813bfc202bb53630c416ce106ca52c3764504",
-      "direct_module_consumers": {
-        "backend/tools/web/__init__.py": "e6d7a9ef49a2317b69531da95a452c7f0ea7264d06f2721c4b4512e4a7d5f598"
-      },
-      "suggested_disposition": "requires_review",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "review_evidence": [
-        "backend/tools/web/scrape_website.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    {
-      "id": "backend/tools/web/search.py::WebSearchTool.description",
-      "path": "backend/tools/web/search.py",
-      "symbol": "WebSearchTool.description",
-      "line": 26,
-      "end_line": 29,
-      "owner": "backend.tools.web.search",
-      "family": "retained_tool_or_historical_schema",
-      "disposition": "retained_historical_schema",
-      "objective": "Web search tool using SerperDev (with DuckDuckGo fallback).",
-      "source_sha256": "505ed19c342b983d84d3b16b991c1271d8642a43bcd69cc5625ac58c69d8c3ab",
-      "source_bytes": 127,
-      "rendered_utf8_bytes": 114,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "6aa3ef5f0570b25a3724fe12cdf57d897f60cfc22faa1e0b7399d5ab71c395fa",
-      "direct_module_consumers": {
-        "backend/tools/web/__init__.py": "e6d7a9ef49a2317b69531da95a452c7f0ea7264d06f2721c4b4512e4a7d5f598"
-      },
-      "suggested_disposition": "requires_review",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "review_evidence": [
-        "backend/tools/web/search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    {
-      "id": "backend/tools/web/search.py::WebSearchInput.description@18",
-      "path": "backend/tools/web/search.py",
-      "symbol": "WebSearchInput.description@18",
-      "line": 18,
-      "end_line": 18,
-      "owner": "backend.tools.web.search",
-      "family": "retained_tool_or_historical_schema",
-      "disposition": "retained_historical_schema",
-      "objective": "Web search tool using SerperDev (with DuckDuckGo fallback).",
-      "source_sha256": "505ed19c342b983d84d3b16b991c1271d8642a43bcd69cc5625ac58c69d8c3ab",
-      "source_bytes": 14,
-      "rendered_utf8_bytes": 12,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "6aa3ef5f0570b25a3724fe12cdf57d897f60cfc22faa1e0b7399d5ab71c395fa",
-      "direct_module_consumers": {
-        "backend/tools/web/__init__.py": "e6d7a9ef49a2317b69531da95a452c7f0ea7264d06f2721c4b4512e4a7d5f598"
-      },
-      "suggested_disposition": "requires_review",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "review_evidence": [
-        "backend/tools/web/search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "review_conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    {
-      "id": "backend/tools/web/search.py::WebSearchInput.description@20",
-      "path": "backend/tools/web/search.py",
-      "symbol": "WebSearchInput.description@20",
-      "line": 20,
-      "end_line": 20,
-      "owner": "backend.tools.web.search",
-      "family": "retained_tool_or_historical_schema",
-      "disposition": "retained_historical_schema",
-      "objective": "Web search tool using SerperDev (with DuckDuckGo fallback).",
-      "source_sha256": "505ed19c342b983d84d3b16b991c1271d8642a43bcd69cc5625ac58c69d8c3ab",
-      "source_bytes": 29,
-      "rendered_utf8_bytes": 27,
-      "variables_kind": "referenced_identifiers",
-      "variables": [],
-      "direct_import_consumers": [],
-      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
-      "evaluation_cases": [
-        "CTX01",
-        "CTX02",
-        "CTX03",
-        "CTX04",
-        "AUTH01",
-        "COMM01"
-      ],
-      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "6aa3ef5f0570b25a3724fe12cdf57d897f60cfc22faa1e0b7399d5ab71c395fa",
-      "direct_module_consumers": {
-        "backend/tools/web/__init__.py": "e6d7a9ef49a2317b69531da95a452c7f0ea7264d06f2721c4b4512e4a7d5f598"
-      },
-      "suggested_disposition": "requires_review",
-      "review_status": "reviewed",
-      "review_rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "review_evidence": [
-        "backend/tools/web/search.py",
         "backend/tools/__init__.py",
         "backend/tools/_legacy_access.py",
         "backend/runtime/business_definitions.py",

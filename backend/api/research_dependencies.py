@@ -68,6 +68,7 @@ def get_research_context(
         ResearchService(
             store,
             spider=SpiderReader.from_environment(
+                web_policy=request.app.state.web_access_policy,
                 owner=request.app.state.live_grants, grant_id=scope.grant_id,
             ),
             context7=Context7Reader.from_environment(

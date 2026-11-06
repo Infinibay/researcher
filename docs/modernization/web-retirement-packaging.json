@@ -1,0 +1,46 @@
+{
+  "base_commit": "8dd6e8d",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "sha256": "7f8369561199d1b7da7d16b833701dfccb0685c03701e5e35812cc6de0facd5b",
+  "observed": {
+    "exit_code": 0,
+    "cases": 218,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 45.099,
+    "all_backend_imports_installed": true,
+    "backend_modules": 240,
+    "matching_python_sql": 722,
+    "installed_distributions": 83,
+    "legacy_installed": false,
+    "real_model_calls": 0,
+    "real_provider_calls": 0
+  },
+  "tests": [
+    "backend/tests/research/test_spider_web_policy.py",
+    "backend/tests/research/test_html_web.py",
+    "backend/tests/research/test_spider.py",
+    "backend/tests/research/test_web_policy.py",
+    "backend/tests/research/test_web_fetcher.py",
+    "backend/tests/research/test_pdf_web.py",
+    "backend/tests/research/test_https_transport.py",
+    "backend/tests/research/test_http.py",
+    "backend/tests/research/test_paper_capture.py",
+    "backend/tests/research/test_context7.py",
+    "backend/tests/research/test_parser_process.py",
+    "backend/tests/research/test_structured_capture.py",
+    "backend/tests/runtime/test_native_search.py",
+    "backend/tests/runtime/test_native_adapter_retirement.py",
+    "backend/tests/runtime/test_auxiliary_inference_retirement.py",
+    "backend/tests/runtime/test_runtime_service.py::test_search_events_survive_restart_without_creating_sources"
+  ],
+  "limits": "Native direct HTML/PDF, Spider initial-target policy, MCP/API/SQLite/citation, retired imports, bounded parser workers and native search policy/runtime. Public DNS/socket/provider and model/Ken responses controlled; actual private-CA TLS, worker closure and native config/account-free search mode exercised. No paid model/provider, global suite, distributed rate quota or remote Spider enforcement claim. Existing development seed db/seeds/dev_data.sql remains outside unchanged db/*.sql package data.",
+  "tested_wheel_sha256": "f42476804783ae10b0a2739b06222373297bbf45d127d87e1d309f4d53870425",
+  "final_repack": {
+    "changed_files": [
+      "backend/tests/research/test_web_fetcher.py"
+    ],
+    "change": "Only one test function docstring; removing that new docstring reproduces the tested AST exactly. All other Python/SQL files are byte-identical. No tests replayed.",
+    "final_source_and_installed_hashes_match": 722
+  }
+}

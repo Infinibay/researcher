@@ -16,7 +16,31 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: política de captura web, directa implementada
+## Etapa actual: herramientas web antiguas retiradas
+
+Captura directa y Spider comparten política inicial de robots/frecuencia. HTML
+conserva enlaces y tablas mediante el parser local acotado; búsqueda, artículos,
+fuentes y citas usan sus recorridos nativos. Se retiran diez módulos antiguos,
+`ddgs` y `primp`; `trafilatura` se conserva con consumidor nativo. Los datos
+históricos no se alteran. [Contrato y límites](../architecture/native-web-retirement.md).
+
+**Comprobado:** 218 pruebas principales en fuente y 218 instaladas, sin fallos ni
+omisiones; dos tests del auditor de prompts y una repetición MCP pasan después de
+actualizar descripciones. 722 archivos Python/SQL, 240 imports instalados y 83
+distribuciones sin frameworks antiguos. El paquete final sólo añade un docstring
+de test, verificado por diff y hashes, sin repetir toda la batería.
+37 definiciones nuevas/modificadas documentadas; 377 candidatos de prompt en
+412 archivos, 204 archivados, cero revisiones estáticas pendientes.
+
+**Siguiente principal:** tareas/comunicación/proyecto/conocimiento y cinco
+bibliotecas legacy restantes. Después operación, migraciones/restore —incluidos
+web_cache/Chroma sin originales y el fallo54/55—, historial/presupuestos, CLI y
+evaluación real/humana/científica/global. Spider remoto conserva límites explícitos
+de observación; no se afirma haber controlado sus redirecciones o subrecursos.
+Siguen 12 pilotos, 48 conceptos, 0 páginas aceptadas integralmente y 43 escenarios
+abiertos. Detalles secundarios al final, con cuatro avisos de estilo DD051.
+
+## Etapa anterior: política de captura web, directa implementada
 
 La captura directa de HTML/texto/PDF comprueba robots antes de cada destino y
 comparte cuota entre solicitudes. Conserva DNS/TLS, plazo, Stop y procedencia;

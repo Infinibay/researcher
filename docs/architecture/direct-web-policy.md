@@ -34,7 +34,7 @@ hash de reglas retenidas y uso de caché. Para respuestas 4xx no se conserva su
 cuerpo: el hash corresponde al contenido vacío, junto al estado que justificó
 la ausencia de reglas. Un rechazo no crea una fuente parcial ni un hallazgo.
 
-## Evidencia y límites
+## Evidencia inicial y límites
 
 - 161 pruebas pasan en fuente y 161 en el paquete instalado: URL/DNS/TLS, reglas,
   redirecciones, caché compartida/expirada, cuota, Stop, PDF y HTTP → SQLite → cita.
@@ -46,11 +46,12 @@ la ausencia de reglas. Un rechazo no crea una fuente parcial ni un hallazgo.
 - La cuota pertenece a la instancia de política. No se comparte entre procesos,
   instalaciones ni reinicios. Peticiones concurrentes sin caché pueden volver a
   consultar las reglas, consumiendo igualmente la cuota compartida.
-- **Spider sigue pendiente:** comprobar localmente su URL inicial y distinguir
-  esa decisión de redirecciones y subrecursos ejecutados por el proveedor remoto.
-  Las regresiones de Spider/Context7 que pasan no demuestran esa nueva política.
-- Siguen pendientes la retirada de wrappers web y los otros bloques del plan.
-  El fallo anterior de migración 54/55 permanece fuera de esta batería.
+- **Actualización posterior:** Spider ya comprueba su URL inicial y comparte
+  cuota; los wrappers web están retirados. HTML conserva enlaces y tablas en
+  Markdown mediante el worker. Véase el [corte posterior](native-web-retirement.md)
+  y sus pruebas; las cifras de este apartado corresponden al corte inicial.
+- Siguen pendientes los otros bloques del plan. El fallo anterior de migración
+  54/55 permanece fuera de esta batería.
 
 Resultados: [fuente](../modernization/web-policy-results.json),
 [paquete](../modernization/web-policy-packaging.json),

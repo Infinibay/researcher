@@ -2673,9 +2673,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::INSTRUCTIONS": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2689,9 +2689,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_review_subject.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2705,9 +2705,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_review_read.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2721,9 +2721,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_review_decide.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2737,9 +2737,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_ask_user.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2753,9 +2753,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_reference_list.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2769,9 +2769,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_reference.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2785,25 +2785,25 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_web.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Reviewed against PublicWebFetcher, html_text and owned DocumentParser: HTML is canonical Markdown retaining links/tables; snapshots define exact quotes, robots/rate/deadline are host enforced, PDF bounds and no scientific certification retained. No new authority or hidden provider.",
       "evidence": [
         "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "backend/runtime/analysis_tools.py",
-        "backend/runtime/owned_runtime.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "backend/research/web_fetcher.py",
+        "backend/research/spider.py",
+        "backend/tests/research/test_spider.py",
+        "backend/tests/research/test_html_web.py",
+        "docs/architecture/native-web-retirement.md"
       ],
       "conflicts": [
         "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_paper.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2817,9 +2817,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_source_list.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2833,9 +2833,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_source_read.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2849,9 +2849,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_source_structure.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2865,9 +2865,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_source_search.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2881,9 +2881,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_source_query.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2897,9 +2897,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_command.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2913,9 +2913,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_finding_record.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2929,9 +2929,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_finding_list.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2945,9 +2945,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_finding_summary.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2961,9 +2961,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_finding_query.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2977,9 +2977,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_finding_read.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2993,9 +2993,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_report_write.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -3009,9 +3009,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_investigation_summary.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -3025,9 +3025,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_result_propose.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -3041,9 +3041,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_report_read.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -3057,9 +3057,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_wiki_list.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -3073,9 +3073,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_wiki_read.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -3089,9 +3089,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_wiki_write.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -3105,9 +3105,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_wiki.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -3121,9 +3121,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_wiki_collection.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -6021,295 +6021,6 @@
         "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
       ]
     },
-    "backend/tools/web/deep_research.py::DeepWebResearchTool.description": {
-      "dependencies_sha256": "da11cf985c6d3d432bb4b9b7ab10de8f34fe5892cda81e3ce9951df4fecbd5ba",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "evidence": [
-        "backend/tools/web/deep_research.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/web/deep_research.py::DeepWebResearchInput.description@14": {
-      "dependencies_sha256": "da11cf985c6d3d432bb4b9b7ab10de8f34fe5892cda81e3ce9951df4fecbd5ba",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "evidence": [
-        "backend/tools/web/deep_research.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/web/fetch.py::WebFetchTool.description": {
-      "dependencies_sha256": "7b47782abb51dc73abd0046892e46d2880ee3191e389acf1df40b2ffa0e52274",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "evidence": [
-        "backend/tools/web/fetch.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/web/fetch.py::WebFetchInput.description@17": {
-      "dependencies_sha256": "7b47782abb51dc73abd0046892e46d2880ee3191e389acf1df40b2ffa0e52274",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "evidence": [
-        "backend/tools/web/fetch.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/web/fetch.py::WebFetchInput.description@19": {
-      "dependencies_sha256": "7b47782abb51dc73abd0046892e46d2880ee3191e389acf1df40b2ffa0e52274",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "evidence": [
-        "backend/tools/web/fetch.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/web/fetch.py::WebFetchInput.description@23": {
-      "dependencies_sha256": "7b47782abb51dc73abd0046892e46d2880ee3191e389acf1df40b2ffa0e52274",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "evidence": [
-        "backend/tools/web/fetch.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/web/read_paper.py::ReadPaperTool.description": {
-      "dependencies_sha256": "8125249b88bc1a02a6d8c0107fb9d91e1f45730dca8e4318c2438d3a7c467e6d",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "evidence": [
-        "backend/tools/web/read_paper.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/web/read_paper.py::ReadPaperInput.description@18": {
-      "dependencies_sha256": "8125249b88bc1a02a6d8c0107fb9d91e1f45730dca8e4318c2438d3a7c467e6d",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "evidence": [
-        "backend/tools/web/read_paper.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/web/read_paper.py::ReadPaperInput.description@19": {
-      "dependencies_sha256": "8125249b88bc1a02a6d8c0107fb9d91e1f45730dca8e4318c2438d3a7c467e6d",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "evidence": [
-        "backend/tools/web/read_paper.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/web/read_paper.py::ReadPaperInput.description@20": {
-      "dependencies_sha256": "8125249b88bc1a02a6d8c0107fb9d91e1f45730dca8e4318c2438d3a7c467e6d",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "evidence": [
-        "backend/tools/web/read_paper.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/web/scrape_website.py::ScrapeWebsiteInfinibayTool.description": {
-      "dependencies_sha256": "c7ac685beac8ce96f67e696d0c7813bfc202bb53630c416ce106ca52c3764504",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "evidence": [
-        "backend/tools/web/scrape_website.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/web/scrape_website.py::ScrapeWebsiteInput.description@14": {
-      "dependencies_sha256": "c7ac685beac8ce96f67e696d0c7813bfc202bb53630c416ce106ca52c3764504",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "evidence": [
-        "backend/tools/web/scrape_website.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/web/scrape_website.py::ScrapeWebsiteInput.description@17": {
-      "dependencies_sha256": "c7ac685beac8ce96f67e696d0c7813bfc202bb53630c416ce106ca52c3764504",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "evidence": [
-        "backend/tools/web/scrape_website.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/web/scrape_website.py::ScrapeWebsiteInput.description@21": {
-      "dependencies_sha256": "c7ac685beac8ce96f67e696d0c7813bfc202bb53630c416ce106ca52c3764504",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "evidence": [
-        "backend/tools/web/scrape_website.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/web/search.py::WebSearchTool.description": {
-      "dependencies_sha256": "6aa3ef5f0570b25a3724fe12cdf57d897f60cfc22faa1e0b7399d5ab71c395fa",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "evidence": [
-        "backend/tools/web/search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/web/search.py::WebSearchInput.description@18": {
-      "dependencies_sha256": "6aa3ef5f0570b25a3724fe12cdf57d897f60cfc22faa1e0b7399d5ab71c395fa",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "evidence": [
-        "backend/tools/web/search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/web/search.py::WebSearchInput.description@20": {
-      "dependencies_sha256": "6aa3ef5f0570b25a3724fe12cdf57d897f60cfc22faa1e0b7399d5ab71c395fa",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
-      "evidence": [
-        "backend/tools/web/search.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
     "scripts/audit_prompt_inventory.py::PROMPT_NAME": {
       "dependencies_sha256": "67d88e945331a7ae0b85d8ba93039652cf68914c0cf4c181df25bd8f529bba31",
       "decision": "excluded_instrumentation",
@@ -6344,9 +6055,9 @@
       "conflicts": []
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_context7_search.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "reviewed_native_tool_contract",
-      "rationale": "Reviewed against the native handler, DTO, optional host credential and source store. Explicit query/library choice, external-provider quota, immutable source read/pagination, version uncertainty, untrusted provider instructions and original operation-key reuse are described. No automatic retry, provider fallback, permission escalation or scientific-quality claim. MCP/HTTP/SQLite tests exercise actual descriptions and mappings; no efficacy claim.",
+      "rationale": "Reviewed against the native handler, DTO, optional host credential and source store. Explicit query/library choice, external-provider quota, immutable source read/pagination, version uncertainty, untrusted provider instructions and original operation-key reuse are described. No automatic retry, provider fallback, permission escalation or scientific-quality claim. MCP/HTTP/SQLite tests exercise actual descriptions and mappings; no efficacy claim. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/research/context7.py",
         "backend/research/service.py",
@@ -6357,9 +6068,9 @@
       "conflicts": []
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_context7_docs.wire_description": {
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a",
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b",
       "decision": "reviewed_native_tool_contract",
-      "rationale": "Reviewed against the native handler, DTO, optional host credential and source store. Explicit query/library choice, external-provider quota, immutable source read/pagination, version uncertainty, untrusted provider instructions and original operation-key reuse are described. No automatic retry, provider fallback, permission escalation or scientific-quality claim. MCP/HTTP/SQLite tests exercise actual descriptions and mappings; no efficacy claim.",
+      "rationale": "Reviewed against the native handler, DTO, optional host credential and source store. Explicit query/library choice, external-provider quota, immutable source read/pagination, version uncertainty, untrusted provider instructions and original operation-key reuse are described. No automatic retry, provider fallback, permission escalation or scientific-quality claim. MCP/HTTP/SQLite tests exercise actual descriptions and mappings; no efficacy claim. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions.",
       "evidence": [
         "backend/research/context7.py",
         "backend/research/service.py",
@@ -6371,16 +6082,17 @@
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_spider.wire_description": {
       "decision": "reviewed_native_tool_contract",
-      "rationale": "Reviewed against the typed handler, provider request policy and saved-source flow. Explicit one-page rendering choice and separate host-capped quota; no automatic nested inference, provider fallback or finding creation. The description requires saved-source reading before citations and distinguishes local Stop from remote cancellation/refund. Source instructions/rendering/costs are attributed, not trusted authority. Tests exercise MCP/HTTP/API/SQLite and exact citations; no live provider availability or efficacy claim.",
+      "rationale": "Reviewed against SpiderReader/API composition and actual MCP capture/read/citation test: local initial robots plus shared quota before billable POST; remote same-UA respect_robots is requested, not verified; provider quota and Stop/cancellation limits stay explicit. Model cannot supply credentials or choose policy bypass.",
       "evidence": [
+        "backend/runtime/business_definitions.py",
+        "backend/research/web_fetcher.py",
         "backend/research/spider.py",
-        "backend/research/provider_http.py",
-        "backend/research/service.py",
         "backend/tests/research/test_spider.py",
-        "docs/architecture/spider-sources.md"
+        "backend/tests/research/test_html_web.py",
+        "docs/architecture/native-web-retirement.md"
       ],
       "conflicts": [],
-      "dependencies_sha256": "3c2b1757b2c5f20318fcca2b91635281191a9e3306375bada90e9787fe278c8a"
+      "dependencies_sha256": "98840c3ba90c9ce9f3ea9cd3d455d52a11078f8937d60d31bd884e70ac0e572b"
     }
   },
   "retired_entries": {
@@ -9728,6 +9440,312 @@
         "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
       ],
       "retirement": "Legacy shell/Git/RAG/generic SQL or code-doc adapter removed after native capability mapping and consumer review. See docs/modernization/native-adapters-retirement.json. Historical review retained; no current model policy."
+    },
+    "backend/tools/web/deep_research.py::DeepWebResearchTool.description": {
+      "dependencies_sha256": "da11cf985c6d3d432bb4b9b7ab10de8f34fe5892cda81e3ce9951df4fecbd5ba",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
+      "evidence": [
+        "backend/tools/web/deep_research.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy web package retired after native search/direct owned HTML-PDF/Spider/paper/citation mapping and static consumer review; see docs/modernization/web-retirement.json. Historical metadata is not active native policy."
+    },
+    "backend/tools/web/deep_research.py::DeepWebResearchInput.description@14": {
+      "dependencies_sha256": "da11cf985c6d3d432bb4b9b7ab10de8f34fe5892cda81e3ce9951df4fecbd5ba",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
+      "evidence": [
+        "backend/tools/web/deep_research.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy web package retired after native search/direct owned HTML-PDF/Spider/paper/citation mapping and static consumer review; see docs/modernization/web-retirement.json. Historical metadata is not active native policy."
+    },
+    "backend/tools/web/fetch.py::WebFetchTool.description": {
+      "dependencies_sha256": "7b47782abb51dc73abd0046892e46d2880ee3191e389acf1df40b2ffa0e52274",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
+      "evidence": [
+        "backend/tools/web/fetch.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy web package retired after native search/direct owned HTML-PDF/Spider/paper/citation mapping and static consumer review; see docs/modernization/web-retirement.json. Historical metadata is not active native policy."
+    },
+    "backend/tools/web/fetch.py::WebFetchInput.description@17": {
+      "dependencies_sha256": "7b47782abb51dc73abd0046892e46d2880ee3191e389acf1df40b2ffa0e52274",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
+      "evidence": [
+        "backend/tools/web/fetch.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy web package retired after native search/direct owned HTML-PDF/Spider/paper/citation mapping and static consumer review; see docs/modernization/web-retirement.json. Historical metadata is not active native policy."
+    },
+    "backend/tools/web/fetch.py::WebFetchInput.description@19": {
+      "dependencies_sha256": "7b47782abb51dc73abd0046892e46d2880ee3191e389acf1df40b2ffa0e52274",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
+      "evidence": [
+        "backend/tools/web/fetch.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy web package retired after native search/direct owned HTML-PDF/Spider/paper/citation mapping and static consumer review; see docs/modernization/web-retirement.json. Historical metadata is not active native policy."
+    },
+    "backend/tools/web/fetch.py::WebFetchInput.description@23": {
+      "dependencies_sha256": "7b47782abb51dc73abd0046892e46d2880ee3191e389acf1df40b2ffa0e52274",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
+      "evidence": [
+        "backend/tools/web/fetch.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy web package retired after native search/direct owned HTML-PDF/Spider/paper/citation mapping and static consumer review; see docs/modernization/web-retirement.json. Historical metadata is not active native policy."
+    },
+    "backend/tools/web/read_paper.py::ReadPaperTool.description": {
+      "dependencies_sha256": "8125249b88bc1a02a6d8c0107fb9d91e1f45730dca8e4318c2438d3a7c467e6d",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
+      "evidence": [
+        "backend/tools/web/read_paper.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy web package retired after native search/direct owned HTML-PDF/Spider/paper/citation mapping and static consumer review; see docs/modernization/web-retirement.json. Historical metadata is not active native policy."
+    },
+    "backend/tools/web/read_paper.py::ReadPaperInput.description@18": {
+      "dependencies_sha256": "8125249b88bc1a02a6d8c0107fb9d91e1f45730dca8e4318c2438d3a7c467e6d",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
+      "evidence": [
+        "backend/tools/web/read_paper.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy web package retired after native search/direct owned HTML-PDF/Spider/paper/citation mapping and static consumer review; see docs/modernization/web-retirement.json. Historical metadata is not active native policy."
+    },
+    "backend/tools/web/read_paper.py::ReadPaperInput.description@19": {
+      "dependencies_sha256": "8125249b88bc1a02a6d8c0107fb9d91e1f45730dca8e4318c2438d3a7c467e6d",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
+      "evidence": [
+        "backend/tools/web/read_paper.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy web package retired after native search/direct owned HTML-PDF/Spider/paper/citation mapping and static consumer review; see docs/modernization/web-retirement.json. Historical metadata is not active native policy."
+    },
+    "backend/tools/web/read_paper.py::ReadPaperInput.description@20": {
+      "dependencies_sha256": "8125249b88bc1a02a6d8c0107fb9d91e1f45730dca8e4318c2438d3a7c467e6d",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
+      "evidence": [
+        "backend/tools/web/read_paper.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy web package retired after native search/direct owned HTML-PDF/Spider/paper/citation mapping and static consumer review; see docs/modernization/web-retirement.json. Historical metadata is not active native policy."
+    },
+    "backend/tools/web/scrape_website.py::ScrapeWebsiteInfinibayTool.description": {
+      "dependencies_sha256": "c7ac685beac8ce96f67e696d0c7813bfc202bb53630c416ce106ca52c3764504",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
+      "evidence": [
+        "backend/tools/web/scrape_website.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy web package retired after native search/direct owned HTML-PDF/Spider/paper/citation mapping and static consumer review; see docs/modernization/web-retirement.json. Historical metadata is not active native policy."
+    },
+    "backend/tools/web/scrape_website.py::ScrapeWebsiteInput.description@14": {
+      "dependencies_sha256": "c7ac685beac8ce96f67e696d0c7813bfc202bb53630c416ce106ca52c3764504",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
+      "evidence": [
+        "backend/tools/web/scrape_website.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy web package retired after native search/direct owned HTML-PDF/Spider/paper/citation mapping and static consumer review; see docs/modernization/web-retirement.json. Historical metadata is not active native policy."
+    },
+    "backend/tools/web/scrape_website.py::ScrapeWebsiteInput.description@17": {
+      "dependencies_sha256": "c7ac685beac8ce96f67e696d0c7813bfc202bb53630c416ce106ca52c3764504",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
+      "evidence": [
+        "backend/tools/web/scrape_website.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy web package retired after native search/direct owned HTML-PDF/Spider/paper/citation mapping and static consumer review; see docs/modernization/web-retirement.json. Historical metadata is not active native policy."
+    },
+    "backend/tools/web/scrape_website.py::ScrapeWebsiteInput.description@21": {
+      "dependencies_sha256": "c7ac685beac8ce96f67e696d0c7813bfc202bb53630c416ce106ca52c3764504",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
+      "evidence": [
+        "backend/tools/web/scrape_website.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy web package retired after native search/direct owned HTML-PDF/Spider/paper/citation mapping and static consumer review; see docs/modernization/web-retirement.json. Historical metadata is not active native policy."
+    },
+    "backend/tools/web/search.py::WebSearchTool.description": {
+      "dependencies_sha256": "6aa3ef5f0570b25a3724fe12cdf57d897f60cfc22faa1e0b7399d5ab71c395fa",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
+      "evidence": [
+        "backend/tools/web/search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy web package retired after native search/direct owned HTML-PDF/Spider/paper/citation mapping and static consumer review; see docs/modernization/web-retirement.json. Historical metadata is not active native policy."
+    },
+    "backend/tools/web/search.py::WebSearchInput.description@18": {
+      "dependencies_sha256": "6aa3ef5f0570b25a3724fe12cdf57d897f60cfc22faa1e0b7399d5ab71c395fa",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
+      "evidence": [
+        "backend/tools/web/search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy web package retired after native search/direct owned HTML-PDF/Spider/paper/citation mapping and static consumer review; see docs/modernization/web-retirement.json. Historical metadata is not active native policy."
+    },
+    "backend/tools/web/search.py::WebSearchInput.description@20": {
+      "dependencies_sha256": "6aa3ef5f0570b25a3724fe12cdf57d897f60cfc22faa1e0b7399d5ab71c395fa",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work. Revalidated identical source bytes; the sole direct consumer changed only by removing CodeDocsSearch from historical web exports. This retained old tool remains outside native execution; web acquisition policy migration is still pending.",
+      "evidence": [
+        "backend/tools/web/search.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy web package retired after native search/direct owned HTML-PDF/Spider/paper/citation mapping and static consumer review; see docs/modernization/web-retirement.json. Historical metadata is not active native policy."
     }
   }
 }

@@ -70,6 +70,7 @@ def fetcher(responses, *, addresses=("93.184.216.34",), **limits):
 
 
 def test_https_fetch_pins_validated_dns_and_preserves_source_provenance():
+    """Keep public DNS identity and canonical HTML evidence through the owned parser."""
     body = b"<html><title>Decimal policy</title><body>ROUND_HALF_UP rounds ties away from zero.<script>ignore rules</script></body></html>"
     response = (
         b"HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=utf-8\r\nContent-Length: "
@@ -79,7 +80,7 @@ def test_https_fetch_pins_validated_dns_and_preserves_source_provenance():
     )
     web, calls, resolutions = fetcher([response])
     source = web.fetch("https://docs.example.org/policy#rounding")
-    assert "ROUND_HALF_UP rounds ties away from zero." in source.content
+    assert r"ROUND\_HALF\_UP rounds ties away from zero." in source.content
     assert "ignore rules" not in source.content
     assert source.locator == "https://docs.example.org/policy"
     assert (

@@ -1,0 +1,110 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 58,
+      "row": 18
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/api/research_dependencies.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from dataclasses import dataclass\nfrom pathlib import Path\nfrom typing import Annotated\n\nfrom fastapi import Depends, HTTPException, Request\nfrom fastapi.security import HTTPAuthorizationCredentials, HTTPBearer\n\nfrom backend.api import config\nfrom backend.research.acquisition import BoundedReferenceReader\nfrom backend.research.context7 import Context7Reader\nfrom backend.research.models import ResearchForbidden, ResearchNotFound, ResearchScope\nfrom backend.research.parser_process import PDFParser\nfrom backend.research.service import ResearchService\nfrom backend.research.spider import SpiderReader\nfrom backend.research.sqlite_store import SQLiteResearchStore\nfrom backend.research.web_fetcher import PublicWebFetcher\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 20
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "RUF012",
+    "end_location": {
+      "column": 6,
+      "row": 55
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/research/spider.py",
+    "fix": null,
+    "location": {
+      "column": 23,
+      "row": 48
+    },
+    "message": "Mutable default value for class attribute",
+    "name": "mutable-class-default",
+    "noqa_row": 48,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/mutable-class-default"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 79,
+      "row": 11
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/research/test_spider.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import hashlib\nimport json\n\nimport pytest\n\nfrom backend.tests.research.test_context7 import response\nfrom backend.tests.research.test_http import credentials, research_client\nfrom backend.tests.research.test_web_fetcher import (\n    MemoryConnection,\n    TransportOnlyPolicy,\n)\nfrom backend.tests.research.test_web_policy import response as robots_response\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 13
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "SIM117",
+    "end_location": {
+      "column": 59,
+      "row": 264
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/research/test_spider.py",
+    "fix": null,
+    "location": {
+      "column": 9,
+      "row": 260
+    },
+    "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements",
+    "name": "multiple-with-statements",
+    "noqa_row": 260,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/multiple-with-statements"
+  }
+]

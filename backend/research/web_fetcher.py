@@ -93,36 +93,29 @@ class PinnedHTTPSConnection(HTTPSConnection):
             raise
 
 
-class _HTMLText(HTMLParser):
+class _HTMLTitle(HTMLParser):
+    """Read the page title without using the title parser as a content extractor."""
+
     def __init__(self):
+        """Start a title-only view of the bounded, already decoded HTML."""
         super().__init__(convert_charrefs=True)
-        self.parts = []
         self.title = []
         self.in_title = False
-        self.ignored = []
 
     def handle_starttag(self, tag, attrs):
-        if tag in ("script", "style", "noscript"):
-            self.ignored.append(tag)
+        """Begin retaining text only inside a title element."""
         if tag == "title":
             self.in_title = True
-        if tag in ("p", "div", "li", "pre", "br", "h1", "h2", "h3", "table", "tr"):
-            self.parts.append("\n")
 
     def handle_endtag(self, tag):
-        if self.ignored and self.ignored[-1] == tag:
-            self.ignored.pop()
+        """Stop title collection at its closing element."""
         if tag == "title":
             self.in_title = False
-        if tag in ("p", "div", "li", "pre", "h1", "h2", "h3", "tr"):
-            self.parts.append("\n")
 
     def handle_data(self, data):
-        if self.ignored:
-            return
+        """Retain literal decoded title text only."""
         if self.in_title:
             self.title.append(data)
-        self.parts.append(data)
 
 
 class PublicWebFetcher:
@@ -235,14 +228,27 @@ class PublicWebFetcher:
         with operation as cancelled:
             return self._fetch(url, cancelled)
 
+    def check_access(self, url, *, deadline, cancelled):
+        """Check a source target inside an existing owned operation without fetching its page."""
+        normalized = self._url(url)[2]
+        return self.policy.authorize(
+            normalized,
+            lambda value: self._robots(value, deadline, cancelled),
+            deadline,
+            cancelled,
+        )
+
     @contextmanager
     def _response(self, url, deadline, cancelled):
         """Own one rate-limited HTTP exchange after validating and pinning every address."""
         host, target, normalized, literal = self._url(url)
-        addresses = (
-            [str(literal)] if literal is not None
-            else self.resolve(host, self._remaining(deadline, cancelled))
-        )
+        try:
+            addresses = (
+                [str(literal)] if literal is not None
+                else self.resolve(host, self._remaining(deadline, cancelled))
+            )
+        except PublicNetworkError:
+            raise SourceUnavailable("Public source DNS resolution failed") from None
         if not addresses or len(addresses) > 64:
             raise SourceUnavailable("Public source has no bounded DNS address set")
         vetted = [_public_address(address) for address in addresses]
@@ -323,10 +329,7 @@ class PublicWebFetcher:
         policy_evidence = []
         for hop in range(self.max_redirects + 1):
             host, target, normalized, _ = self._url(current)
-            decision = self.policy.authorize(
-                normalized, lambda value: self._robots(value, deadline, cancelled),
-                deadline, cancelled,
-            )
+            decision = self.check_access(normalized, deadline=deadline, cancelled=cancelled)
             policy_evidence.append({"url": normalized, **decision})
             with self._response(normalized, deadline, cancelled) as (conn, response, address, _):
                 if response.status in (301, 302, 303, 307, 308):
@@ -370,16 +373,20 @@ class PublicWebFetcher:
                     ) from exc
                 extraction = {"extraction": "decoded-text-v1"}
                 if mime in ("text/html", "application/xhtml+xml"):
-                    parser = _HTMLText()
-                    parser.feed(text)
-                    parser.close()
-                    text = "\n".join(
-                        line.strip()
-                        for line in "".join(parser.parts).splitlines()
-                        if line.strip()
+                    from backend.research.parser_process import DocumentParser
+
+                    heading = _HTMLTitle()
+                    heading.feed(text)
+                    heading.close()
+                    title = " ".join("".join(heading.title).split()) or title
+                    parser = (
+                        self.pdf_parser.for_format("html") if self.pdf_parser else
+                        DocumentParser(format="html", owner=self.owner, grant_id=self.grant_id)
                     )
-                    title = " ".join("".join(parser.title).split()) or title
-                    extraction = {"extraction": "html-text-v1"}
+                    text, extraction = parser.read(
+                        text.encode("utf-8"),
+                        max_wall_seconds=self._remaining(deadline, cancelled),
+                    )
             if len(text.encode("utf-8")) > 200000:
                 raise SourceTooLarge(
                     "Extracted source exceeds the text limit; use a bounded document parser"
