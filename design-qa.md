@@ -1,6 +1,6 @@
 # QA visual de los pilotos de la modernización
 
-Resultado actual: **parcial; nueve pilotos, 27/36 conceptos de escritorio, 9/12 móviles y 0/12 rutas aceptadas completamente**. Tres rutas siguen pendientes de conceptos/implementación. Las secciones siguientes conservan evidencia histórica con su alcance original.
+Resultado actual: **parcial; diez pilotos, 30/36 conceptos de escritorio, 10/12 móviles y 0/12 rutas aceptadas completamente**. Dos rutas siguen pendientes de conceptos/implementación. Las secciones siguientes conservan evidencia histórica con su alcance original.
 
 El bloqueo inicial de CUA queda como antecedente histórico. El plan autorizado
 ya exige Playwright y axe; Chromium local con sandbox funciona. No se necesita
@@ -103,3 +103,7 @@ comprensión humana/zoom/lector de pantalla/otros motores/aceptación global tam
 ## Resumen — 6 de noviembre
 
 [Comparación y pruebas del piloto](docs/design/audits/2026-11-06-home/report.md). Cinco capturas,123testsfrontend/build; recorrido con fixtures. DD041 recoge densidad y cabecera compartida. La aceptación integral continúa pendiente.
+
+## Planificación — 6 de noviembre
+
+[Comparación y pruebas](docs/design/audits/2026-11-06-planning/report.md). Nueve capturas finales, formularios y propuestas con fixtures;123testsfrontend/build. DD042 conserva pulido. CRUD/backend real y aceptación integral abiertos.

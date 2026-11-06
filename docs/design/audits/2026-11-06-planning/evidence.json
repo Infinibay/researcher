@@ -1,0 +1,92 @@
+{
+  "scope": "Controlled API fixtures; UI reads/owner CRUD only; native acceptance remains in original Tasks route.",
+  "states": [
+    {
+      "name": "01-desktop-group",
+      "width": 1440,
+      "axe": 0
+    },
+    {
+      "name": "02-mobile-group",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "02b-mobile-dependencies",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "03-mobile-proposal",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "03b-mobile-original-decision",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "03c-create-error-draft",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "04-partial-error",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "05-other-project",
+      "width": 390,
+      "axe": 0
+    }
+  ],
+  "writes": [
+    {
+      "method": "POST",
+      "path": "/api/epics",
+      "body": {
+        "project_id": 1,
+        "title": "Preparar evaluación",
+        "description": "",
+        "priority": 2
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/epics",
+      "body": {
+        "project_id": 1,
+        "title": "Preparar evaluación",
+        "description": "",
+        "priority": 2
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/milestones",
+      "body": {
+        "epic_id": 11,
+        "title": "Primera medición"
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/epics/11",
+      "body": null
+    }
+  ],
+  "errors": [],
+  "checks": [
+    "dependency-read",
+    "original-plan-link",
+    "proposal-is-not-execution",
+    "create-error-preserves-draft",
+    "create-group-and-milestone",
+    "delete-explicit-dialog",
+    "partial-error-not-empty",
+    "project-scope-reset"
+  ],
+  "status": "passed"
+}

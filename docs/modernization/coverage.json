@@ -1723,7 +1723,8 @@
         "Migrate all legacy callers and capability families",
         "Recover uncertain work with typed human controls",
         "Versioned Git/review/CI acceptance and full frontend integration",
-        "Investigate60s owned-check timeout reproduced from prior wheel; trace includes journal history parsing. Do not infer a cause or hide this as UI polish."
+        "Investigate60s owned-check timeout reproduced from prior wheel; trace includes journal history parsing. Do not infer a cause or hide this as UI polish.",
+        "Planning preserved existing epic/milestone CRUD. These endpoints still import legacy helpers and POST without operation keys. Validate real history preservation and lost-response recovery during native cutover; fixture UI tests do not prove these guarantees."
       ]
     },
     "communication_guide": {
@@ -1935,7 +1936,10 @@
         "frontend/tests/findings-design.test.ts",
         "docs/design/concepts/home/manifest.json",
         "docs/design/audits/2026-11-06-home/report.md",
-        "frontend/tests/home.browser.mjs"
+        "frontend/tests/home.browser.mjs",
+        "docs/design/concepts/planning/manifest.json",
+        "docs/design/audits/2026-11-06-planning/report.md",
+        "frontend/tests/planning.browser.mjs"
       ],
       "notes": [
         "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json."
@@ -1973,11 +1977,14 @@
         "frontend/tests/repository-file-design.test.ts",
         "docs/design/concepts/home/manifest.json",
         "docs/design/audits/2026-11-06-home/report.md",
-        "frontend/tests/home.browser.mjs"
+        "frontend/tests/home.browser.mjs",
+        "docs/design/concepts/planning/manifest.json",
+        "docs/design/audits/2026-11-06-planning/report.md",
+        "frontend/tests/planning.browser.mjs"
       ],
       "remaining": [
-        "Three routes need concepts/selection/implementation: epics, agents, flow. Nine desktop and three mobile concepts remain.",
-        "All twelve routes/shared components require integral interaction/accessibility/human acceptance; zero fully accepted. Home is a fixture-tested functional pilot; DD041 records deferred visual work."
+        "Two routes need concepts/selection/implementation: agents and flow. Six desktop and two mobile concepts remain.",
+        "All twelve routes/shared components need integral interaction/accessibility/human acceptance; zero fully accepted. Planning is a fixture-tested pilot; original CRUD recovery/history guarantees remain engine/operation work. DD042 is secondary visual polish only."
       ]
     },
     "12_mobile_adaptations": {
@@ -2056,11 +2063,14 @@
         "frontend/tests/repository-file-design.test.ts",
         "docs/design/concepts/home/manifest.json",
         "docs/design/audits/2026-11-06-home/report.md",
-        "frontend/tests/home.browser.mjs"
+        "frontend/tests/home.browser.mjs",
+        "docs/design/concepts/planning/manifest.json",
+        "docs/design/audits/2026-11-06-planning/report.md",
+        "frontend/tests/planning.browser.mjs"
       ],
       "remaining": [
-        "Three routes need concepts/selection/implementation: epics, agents, flow. Nine desktop and three mobile concepts remain.",
-        "All twelve routes/shared components require integral interaction/accessibility/human acceptance; zero fully accepted. Home is a fixture-tested functional pilot; DD041 records deferred visual work."
+        "Two routes need concepts/selection/implementation: agents and flow. Six desktop and two mobile concepts remain.",
+        "All twelve routes/shared components need integral interaction/accessibility/human acceptance; zero fully accepted. Planning is a fixture-tested pilot; original CRUD recovery/history guarantees remain engine/operation work. DD042 is secondary visual polish only."
       ]
     },
     "all_screens_implemented": {

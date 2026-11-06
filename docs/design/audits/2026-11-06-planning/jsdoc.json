@@ -1,0 +1,8 @@
+{
+  "named_functions": 14,
+  "missing": [],
+  "files": [
+    "src/components/pages/EpicsPage.tsx",
+    "tests/planning.browser.mjs"
+  ]
+}

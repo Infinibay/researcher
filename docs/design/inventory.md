@@ -9,7 +9,7 @@ archivos generados e inspeccionados, no pantallas aceptadas.
 | --- | ---: | ---: | --- | --- | --- |
 | `/` | 3 | 1 | Cuaderno de situación | Piloto en código | Parcial: preguntas, navegación, error, móvil; aceptación pendiente |
 | `/projects` | 3 | 1 | Expediente del proyecto | Piloto en código | Parcial: selección/fuentes/recuperación/borrado/móvil; aceptación pendiente |
-| `/epics` | 0 | 0 | Pendiente | Pendiente | Pendiente |
+| `/epics` | 3 | 1 | Árbol con detalle | Piloto en código | Parcial: propuestas, hitos, dependencias, formularios, móvil; aceptación pendiente |
 | `/tasks` | 3 | 1 | Lista editorial con inspector | Piloto en código | Parcial: capturas reales; aceptación pendiente |
 | `/agents` | 0 | 0 | Pendiente | Pendiente | Pendiente |
 | `/chat` | 3 | 1 | Conversación con evidencia | Piloto en código | Parcial: capturas reales; aceptación pendiente |
@@ -19,7 +19,7 @@ archivos generados e inspeccionados, no pantallas aceptadas.
 | `/files` | 3 | 1 | Archivo con inspector | Piloto en código | Parcial: recorrido/teclado; aceptación humana pendiente |
 | `/repositories` | 3 | 1 | Explorador con registro de fuentes | Piloto de exploración; alta completa pendiente | Parcial: snapshot/errores/origen/foco/móvil; aceptación pendiente |
 | `/flow` | 0 | 0 | Pendiente | Pendiente | Pendiente |
-| **Total** | **27 / 36** | **9 / 12** | **9 / 12** | **9 pilotos** | **0 / 12** |
+| **Total** | **30 / 36** | **10 / 12** | **10 / 12** | **10 pilotos** | **0 / 12** |
 
 Los prompts, archivos, hashes, tamaños y procedencia del piloto están en
 [concepts/tasks/manifest.json](concepts/tasks/manifest.json). Las tres alternativas
@@ -87,3 +87,5 @@ Tres contextos owner y cinco capturas finales, con respuestas tardías entre
 operaciones/proyectos. Conserva24/36desktop,8/12mobile,8pilotos,0aceptadas.
 
 Actualización 2026-11-06, Resumen: [selección](concepts/home/brief.md), [manifest](concepts/home/manifest.json), [verificación](audits/2026-11-06-home/report.md).27/36desktop,9/12móviles,9pilotos,0aceptaciónintegral. Pendientes: Planificación, Agentes y Ejecución.
+
+Actualización6noviembre, Planificación: [selección](concepts/planning/brief.md), [manifest](concepts/planning/manifest.json), [recorrido y límites](audits/2026-11-06-planning/report.md).30/36desktop,10/12mobile,10pilotos,0aceptadas. Agentes y Ejecución siguen pendientes de conceptos/implementación.

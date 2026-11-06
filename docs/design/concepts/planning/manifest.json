@@ -1,0 +1,48 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-11-06",
+  "route": "/epics",
+  "desktop_count": 3,
+  "mobile_count": 1,
+  "selection": "tree-detail",
+  "selected_by": "assistant, explicitly delegated by owner",
+  "references": [
+    "docs/design/audits/2026-11-06-planning/before.png",
+    "docs/design/audits/2026-11-06-home/01-desktop.png"
+  ],
+  "images": [
+    {
+      "file": "hierarchical-table.png",
+      "sha256": "3a13e446f4a53a4c4eefb617e4b7294a6eae54aba4da890158eab828ee247ce0",
+      "width": 1487,
+      "height": 1058,
+      "prompt": "hierarchical-table.prompt.txt",
+      "selected": false
+    },
+    {
+      "file": "milestone-roadmap.png",
+      "sha256": "e5bae46131a35ad6f43f5e5c8bcdedeec461dc84e60b0ac82409051cea00906b",
+      "width": 1487,
+      "height": 1058,
+      "prompt": "milestone-roadmap.prompt.txt",
+      "selected": false
+    },
+    {
+      "file": "tree-detail-mobile.png",
+      "sha256": "1152a97e22b18e2df8570c2d517ea921556b5eb8a2fe0334e555bbf31e69be53",
+      "width": 853,
+      "height": 1844,
+      "prompt": "tree-detail-mobile.prompt.txt",
+      "selected": true
+    },
+    {
+      "file": "tree-detail.png",
+      "sha256": "8c266517f84949d41da71c5a4b8035cb6f17152301e1a616c1ccfb591bd638f1",
+      "width": 1487,
+      "height": 1058,
+      "prompt": "tree-detail.prompt.txt",
+      "selected": true
+    }
+  ],
+  "limits": "Concepts are image references, not product screenshots. Status checkboxes were intentionally replaced with read-only state text."
+}

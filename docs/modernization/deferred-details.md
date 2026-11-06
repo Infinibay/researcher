@@ -108,3 +108,11 @@ La cabecera compartida ocupa varias filas y aún muestra etiquetas legacy en ing
 retirar su interpretación de actividad basada en metadatos pertenece al bloque
 principal de engine/estados; el ajuste visual de altura sí pertenece al pulido.
 No se certifica aceptación integral de Resumen por el pase de fixtures/Axe.
+
+## DD042 — densidad y vocabulario secundario de Planificación
+
+Tras todas las capacidades principales: compactar espacios entre hitos/tareas,
+armonizar contador singular/plural y etiquetas de relaciones, integrar ajuste de
+cabecera/margen móvil conDD041. No retirar contexto ni hacer que estados parezcan
+casillas de aceptación. La recuperación de CRUD sin operation_key y preservación
+de historia pertenecen a engine/operación principal; no están diferidas como pulido.

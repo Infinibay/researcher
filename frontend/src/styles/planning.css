@@ -1,0 +1,50 @@
+/* Selected tree-and-detail concept: stable index, legible evidence and one reading pane on mobile. */
+.planning-workbench h1 {font-family:Georgia,'Times New Roman',serif;font-size:2.25rem;font-weight:600;line-height:1.25}
+.planning-workbench h2 {font-family:Georgia,'Times New Roman',serif;font-size:1.8rem;font-weight:600;line-height:1.3;margin-bottom:.75rem}
+.planning-workbench h3 {font-family:Georgia,'Times New Roman',serif;font-size:1.4rem;font-weight:600;margin-bottom:.75rem}
+.planning-workbench h4 {font-weight:650;font-size:1.0625rem}
+.planning-workbench p {margin-block:.5rem;overflow-wrap:anywhere}
+.planning-workbench a,.planning-link {color:var(--work-accent);text-decoration:underline;text-underline-offset:.2rem;display:inline-flex;align-items:center;min-height:2.75rem}
+.planning-workbench button {padding:.5rem .75rem;border-radius:.25rem;text-align:left}
+.planning-workbench button:disabled {opacity:.6;cursor:not-allowed}
+.planning-workbench .planning-primary {color:white;background:var(--work-accent);padding:.5rem 1rem;text-decoration:none;min-height:2.75rem;display:inline-flex;align-items:center;font-weight:600;margin-block:.5rem}
+.planning-heading {display:flex;justify-content:space-between;gap:1.5rem;align-items:center;padding-block:1.5rem}
+.planning-heading p,.planning-muted {color:var(--work-muted);font-size:.875rem}
+.planning-workbench > .planning-layout {margin:0;display:grid;grid-template-columns:18rem minmax(0,1fr);border-top:1px solid var(--work-line);min-height:calc(100dvh - 13rem)}
+.planning-index {padding:1rem 1.25rem;border-right:1px solid var(--work-line)}
+.planning-index h2 {font-size:1.3rem}
+.planning-index section {padding-top:1.25rem}
+.planning-index section + section {border-top:1px solid var(--work-line);margin-top:1.25rem}
+.planning-index p,.planning-index a,.planning-index span {font-size:.875rem;color:var(--work-muted)}
+.planning-index li button {width:100%;display:grid;gap:.35rem;padding:1rem .75rem;border-left:3px solid transparent;border-bottom:1px solid var(--work-line);overflow-wrap:anywhere}
+.planning-index li button[aria-pressed='true'] {background:var(--work-wash);border-left-color:var(--work-accent)}
+.planning-index li button:hover {background:var(--work-wash)}
+.planning-reading {padding:1.5rem 2rem;overflow-wrap:anywhere}
+.planning-detail,.planning-form {max-width:65rem;margin-inline:auto}
+.planning-back {margin-bottom:1rem}
+.planning-description {max-width:65ch;font-size:1.0625rem;white-space:pre-wrap}
+.planning-detail > section,.planning-detail > footer {border-top:1px solid var(--work-line);padding-top:1.5rem;margin-top:1.5rem}
+.planning-section-heading,.planning-task-heading {display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.planning-records > li {border-bottom:1px solid var(--work-line);padding-block:.85rem}
+.planning-records a {font-weight:600}
+.planning-explanation {max-width:65ch;padding-top:1rem}
+.planning-dependencies {border-left:2px solid var(--work-line);padding-left:1rem;margin:.5rem .75rem}
+.planning-form {display:grid;gap:1rem}
+.planning-form label {display:grid;gap:.35rem;font-size:.875rem;font-weight:600}
+.planning-form :where(input,textarea,select) {border:1px solid var(--work-line);background:var(--work-paper);color:var(--work-ink);border-radius:.25rem;padding:.6rem .75rem;width:100%}
+.planning-form select {max-width:18rem}
+.planning-actions {display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
+.planning-workbench .planning-danger,.planning-workbench [role='alert'] {color:var(--work-error)}
+.planning-empty {max-width:42rem;padding-block:2rem}
+.planning-empty p {max-width:60ch}
+.planning-eyebrow {font-size:.75rem;color:var(--work-muted);letter-spacing:.08em}
+.planning-detail blockquote {border-left:2px solid var(--work-line);padding-left:1rem;margin-block:1rem}
+.planning-bullets {list-style:disc;padding-left:1.3rem}
+.planning-proposed-group {margin-top:1.25rem}
+.planning-delete {background:#fffefa;color:#242d2a;border:1px solid #d6ddd5;padding:1.5rem;border-radius:.35rem;max-width:min(34rem,calc(100vw - 2rem));margin:auto}
+.planning-delete::backdrop {background:rgb(0 0 0 / .45)}
+.planning-delete h2 {font-size:1.4rem;font-weight:650;margin-bottom:1rem}
+.planning-delete p {margin-block:1rem}
+.planning-delete button {border:1px solid #59655f;border-radius:.25rem;padding:.5rem 1rem;min-height:2.75rem}
+.planning-delete button:focus-visible {outline:2px solid #24533e;outline-offset:3px}
+@media(max-width:800px){.planning-workbench > .planning-layout {grid-template-columns:minmax(0,1fr)}.planning-index {border-right:0}.planning-reading {padding:1.25rem}.planning-workbench[data-selected='true'] .planning-index {display:none}.planning-workbench[data-selected='false'] .planning-reading {display:none}.planning-heading {flex-wrap:wrap}.planning-heading h1 {font-size:1.9rem}.planning-workbench h2 {font-size:1.6rem}}
