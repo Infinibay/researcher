@@ -1,0 +1,845 @@
+{
+  "scope": [
+    "backend/git/source_operations.py",
+    "backend/git/source_registry.py",
+    "backend/git/source_capsule.py",
+    "backend/git/source_executor.py",
+    "backend/git/source_service.py",
+    "backend/git/source_repair_program.py",
+    "backend/runtime/peer_broker.py",
+    "backend/api/routes/source_operations.py",
+    "backend/tests/runtime/test_source_repair.py",
+    "backend/tests/git/test_source_repair_program.py"
+  ],
+  "warnings": 25,
+  "critical": [],
+  "findings": [
+    {
+      "cell": null,
+      "code": "I001",
+      "end_location": {
+        "column": 54,
+        "row": 17
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/git/source_capsule.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "import hashlib\nimport json\nimport os\nimport sys\nfrom dataclasses import dataclass\nfrom pathlib import Path\nfrom urllib.parse import urlsplit\n\nfrom backend.git.source_operations import SourceRequest\nfrom backend.runtime import _domain_spawn\nfrom backend.runtime.broker_profile import _syscall_filter\nfrom backend.runtime.development_workspace import _POLICY\nfrom backend.runtime.git_capsule import PEER_ALLOCATION, GitCapsule, GitLaunch\nfrom backend.runtime.native_network import NativeNetwork\nfrom backend.runtime.workspaces import PEER_WORKSPACE\n\n\n",
+            "end_location": {
+              "column": 1,
+              "row": 20
+            },
+            "location": {
+              "column": 1,
+              "row": 3
+            }
+          }
+        ],
+        "message": "Organize imports"
+      },
+      "location": {
+        "column": 1,
+        "row": 3
+      },
+      "message": "Import block is un-sorted or un-formatted",
+      "name": "unsorted-imports",
+      "noqa_row": 3,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+    },
+    {
+      "cell": null,
+      "code": "I001",
+      "end_location": {
+        "column": 70,
+        "row": 103
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/git/source_capsule.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "            from dataclasses import asdict\n\n            from backend.runtime.development_workspace import _POLICY\n",
+            "end_location": {
+              "column": 1,
+              "row": 104
+            },
+            "location": {
+              "column": 1,
+              "row": 102
+            }
+          }
+        ],
+        "message": "Organize imports"
+      },
+      "location": {
+        "column": 13,
+        "row": 102
+      },
+      "message": "Import block is un-sorted or un-formatted",
+      "name": "unsorted-imports",
+      "noqa_row": 102,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+    },
+    {
+      "cell": null,
+      "code": "I001",
+      "end_location": {
+        "column": 54,
+        "row": 22
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/git/source_executor.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "import asyncio\nimport hashlib\nfrom contextlib import asynccontextmanager\nfrom dataclasses import asdict\nfrom pathlib import Path\nfrom uuid import uuid4\n\nfrom backend.git.source_capsule import SourceGitLaunch, validate_source_transport\nfrom backend.git.source_operations import SourceObservation, SourceRequest\nfrom backend.git.source_registry import SourcePeerRegistry\nfrom backend.runtime.authority_journal import WitnessedAuthorityJournal\nfrom backend.runtime.broker_git import OwnedGitExecutor\nfrom backend.runtime.broker_stdio import AsyncPeerBroker\nfrom backend.runtime.contracts import RunConflict\nfrom backend.runtime.development_workspace import git_environment\nfrom backend.runtime.execution_domain import ExecutionDomain\nfrom backend.runtime.git_capsule import PEER_ALLOCATION, GitAsset, PrivateAllocation\nfrom backend.runtime.owned_runtime import _settled\nfrom backend.runtime.peer_broker import PeerBroker\nfrom backend.runtime.workspaces import PEER_WORKSPACE\n\n\n",
+            "end_location": {
+              "column": 1,
+              "row": 25
+            },
+            "location": {
+              "column": 1,
+              "row": 3
+            }
+          }
+        ],
+        "message": "Organize imports"
+      },
+      "location": {
+        "column": 1,
+        "row": 3
+      },
+      "message": "Import block is un-sorted or un-formatted",
+      "name": "unsorted-imports",
+      "noqa_row": 3,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+    },
+    {
+      "cell": null,
+      "code": "F401",
+      "end_location": {
+        "column": 31,
+        "row": 5
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/git/source_executor.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "",
+            "end_location": {
+              "column": 1,
+              "row": 6
+            },
+            "location": {
+              "column": 1,
+              "row": 5
+            }
+          }
+        ],
+        "message": "Remove unused import: `dataclasses.asdict`"
+      },
+      "location": {
+        "column": 25,
+        "row": 5
+      },
+      "message": "`dataclasses.asdict` imported but unused",
+      "name": "unused-import",
+      "noqa_row": 5,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unused-import"
+    },
+    {
+      "cell": null,
+      "code": "SIM117",
+      "end_location": {
+        "column": 54,
+        "row": 86
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/git/source_executor.py",
+      "fix": null,
+      "location": {
+        "column": 9,
+        "row": 85
+      },
+      "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements",
+      "name": "multiple-with-statements",
+      "noqa_row": 85,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/multiple-with-statements"
+    },
+    {
+      "cell": null,
+      "code": "TRY004",
+      "end_location": {
+        "column": 59,
+        "row": 149
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/git/source_operations.py",
+      "fix": null,
+      "location": {
+        "column": 43,
+        "row": 149
+      },
+      "message": "Prefer `TypeError` exception for invalid type",
+      "name": "type-check-without-type-error",
+      "noqa_row": 149,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/type-check-without-type-error"
+    },
+    {
+      "cell": null,
+      "code": "I001",
+      "end_location": {
+        "column": 69,
+        "row": 274
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/git/source_operations.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "        from backend.runtime.peer_process import boot_id, start_ticks\n",
+            "end_location": {
+              "column": 1,
+              "row": 275
+            },
+            "location": {
+              "column": 1,
+              "row": 274
+            }
+          }
+        ],
+        "message": "Organize imports"
+      },
+      "location": {
+        "column": 9,
+        "row": 274
+      },
+      "message": "Import block is un-sorted or un-formatted",
+      "name": "unsorted-imports",
+      "noqa_row": 274,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+    },
+    {
+      "cell": null,
+      "code": "I001",
+      "end_location": {
+        "column": 69,
+        "row": 287
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/git/source_operations.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "        from backend.runtime.peer_process import boot_id, start_ticks\n",
+            "end_location": {
+              "column": 1,
+              "row": 288
+            },
+            "location": {
+              "column": 1,
+              "row": 287
+            }
+          }
+        ],
+        "message": "Organize imports"
+      },
+      "location": {
+        "column": 9,
+        "row": 287
+      },
+      "message": "Import block is un-sorted or un-formatted",
+      "name": "unsorted-imports",
+      "noqa_row": 287,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+    },
+    {
+      "cell": null,
+      "code": "I001",
+      "end_location": {
+        "column": 69,
+        "row": 346
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/git/source_operations.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "        from backend.runtime.peer_process import boot_id, start_ticks\n",
+            "end_location": {
+              "column": 1,
+              "row": 347
+            },
+            "location": {
+              "column": 1,
+              "row": 346
+            }
+          }
+        ],
+        "message": "Organize imports"
+      },
+      "location": {
+        "column": 9,
+        "row": 346
+      },
+      "message": "Import block is un-sorted or un-formatted",
+      "name": "unsorted-imports",
+      "noqa_row": 346,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+    },
+    {
+      "cell": null,
+      "code": "I001",
+      "end_location": {
+        "column": 59,
+        "row": 9
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/git/source_registry.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "from dataclasses import asdict\nfrom uuid import uuid4\n\nfrom backend.git.source_operations import SourceLease, SourceOperations, SourceView\nfrom backend.knowledge.reviews import digest\nfrom backend.runtime.contracts import RunConflict, RunNotFound\nfrom backend.runtime.peer_process import NamespaceIdentity\n\n\n",
+            "end_location": {
+              "column": 1,
+              "row": 12
+            },
+            "location": {
+              "column": 1,
+              "row": 3
+            }
+          }
+        ],
+        "message": "Organize imports"
+      },
+      "location": {
+        "column": 1,
+        "row": 3
+      },
+      "message": "Import block is un-sorted or un-formatted",
+      "name": "unsorted-imports",
+      "noqa_row": 3,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+    },
+    {
+      "cell": null,
+      "code": "F401",
+      "end_location": {
+        "column": 54,
+        "row": 6
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/git/source_registry.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "from backend.git.source_operations import SourceOperations,SourceView",
+            "end_location": {
+              "column": 82,
+              "row": 6
+            },
+            "location": {
+              "column": 1,
+              "row": 6
+            }
+          }
+        ],
+        "message": "Remove unused import: `backend.git.source_operations.SourceLease`"
+      },
+      "location": {
+        "column": 43,
+        "row": 6
+      },
+      "message": "`backend.git.source_operations.SourceLease` imported but unused",
+      "name": "unused-import",
+      "noqa_row": 6,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unused-import"
+    },
+    {
+      "cell": null,
+      "code": "I001",
+      "end_location": {
+        "column": 11,
+        "row": 14
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/git/source_repair_program.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "import base64\nimport json\nimport os\nimport re\nimport subprocess\nimport sys\nfrom pathlib import Path, PurePosixPath\n\n\n",
+            "end_location": {
+              "column": 1,
+              "row": 17
+            },
+            "location": {
+              "column": 1,
+              "row": 8
+            }
+          }
+        ],
+        "message": "Organize imports"
+      },
+      "location": {
+        "column": 1,
+        "row": 8
+      },
+      "message": "Import block is un-sorted or un-formatted",
+      "name": "unsorted-imports",
+      "noqa_row": 8,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+    },
+    {
+      "cell": null,
+      "code": "PLW1510",
+      "end_location": {
+        "column": 30,
+        "row": 33
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/git/source_repair_program.py",
+      "fix": {
+        "applicability": "displayonly",
+        "edits": [
+          {
+            "content": "check=False, ",
+            "end_location": {
+              "column": 58,
+              "row": 33
+            },
+            "location": {
+              "column": 58,
+              "row": 33
+            }
+          }
+        ],
+        "message": "Add explicit `check=False`"
+      },
+      "location": {
+        "column": 16,
+        "row": 33
+      },
+      "message": "`subprocess.run` without explicit `check` argument",
+      "name": "subprocess-run-without-check",
+      "noqa_row": 33,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/subprocess-run-without-check"
+    },
+    {
+      "cell": null,
+      "code": "F401",
+      "end_location": {
+        "column": 87,
+        "row": 9
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/git/source_service.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "from backend.git.source_operations import SourceLease, SourceOperations",
+            "end_location": {
+              "column": 87,
+              "row": 9
+            },
+            "location": {
+              "column": 1,
+              "row": 9
+            }
+          }
+        ],
+        "message": "Remove unused import: `backend.git.source_operations.SourceRequest`"
+      },
+      "location": {
+        "column": 74,
+        "row": 9
+      },
+      "message": "`backend.git.source_operations.SourceRequest` imported but unused",
+      "name": "unused-import",
+      "noqa_row": 9,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unused-import"
+    },
+    {
+      "cell": null,
+      "code": "BLE001",
+      "end_location": {
+        "column": 25,
+        "row": 168
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/git/source_service.py",
+      "fix": null,
+      "location": {
+        "column": 16,
+        "row": 168
+      },
+      "message": "Do not catch blind exception: `Exception`",
+      "name": "blind-except",
+      "noqa_row": 168,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/blind-except"
+    },
+    {
+      "cell": null,
+      "code": "I001",
+      "end_location": {
+        "column": 2,
+        "row": 58
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/runtime/peer_broker.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "import hashlib\nimport json\nimport os\nimport select\nimport threading\nimport time\nfrom dataclasses import asdict, dataclass\nfrom pathlib import Path\nfrom uuid import uuid4\n\nfrom backend.git.source_capsule import SourceGitCapsule, SourceGitLaunch\nfrom backend.runtime.authority_journal import (\n    AuthorityBusy,\n    AuthorityConflict,\n    AuthorityUncertain,\n)\nfrom backend.runtime.broker_profile import (\n    AnalysisCapsule,\n    CodexAsset,\n    KenCapsule,\n    NativeCapsule,\n    NativeCommandCapsule,\n    NativeProxyCapsule,\n)\nfrom backend.runtime.check_capsule import CheckCapsule, CheckLaunch\nfrom backend.runtime.check_registry import CheckExecutionView\nfrom backend.runtime.contracts import command_key, text\nfrom backend.runtime.egress_channel import EgressChannel\nfrom backend.runtime.egress_proxy import EgressPolicy, TunnelProxy\nfrom backend.runtime.execution_domain import DomainIdentity, ExecutionDomain\nfrom backend.runtime.git_capsule import GitCapsule, GitLaunch\nfrom backend.runtime.ken_worker import KenInstallation\nfrom backend.runtime.native_network import NativeNetwork\nfrom backend.runtime.native_state import NativeState\nfrom backend.runtime.peer_process import (\n    NamespaceIdentity,\n    _pidfd,\n    close_namespace,\n    start_ticks,\n)\nfrom backend.runtime.publication_capsule import (\n    PublicationGitCapsule,\n    PublicationGitLaunch,\n    PublicationObservationLaunch,\n)\nfrom backend.runtime.remote_capsule import (\n    RemoteGitCapsule,\n    RemoteGitLaunch,\n    RemoteObservationLaunch,\n)\n\n\n",
+            "end_location": {
+              "column": 1,
+              "row": 61
+            },
+            "location": {
+              "column": 1,
+              "row": 8
+            }
+          }
+        ],
+        "message": "Organize imports"
+      },
+      "location": {
+        "column": 1,
+        "row": 8
+      },
+      "message": "Import block is un-sorted or un-formatted",
+      "name": "unsorted-imports",
+      "noqa_row": 8,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+    },
+    {
+      "cell": null,
+      "code": "I001",
+      "end_location": {
+        "column": 62,
+        "row": 11
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/git/test_source_repair_program.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "import json\nimport subprocess\nimport sys\nfrom pathlib import Path\n\nimport pytest\n\nfrom backend.runtime.development_workspace import _POLICY\nfrom backend.tests.runtime.test_owned_source_setup import git\n\n\n",
+            "end_location": {
+              "column": 1,
+              "row": 14
+            },
+            "location": {
+              "column": 1,
+              "row": 3
+            }
+          }
+        ],
+        "message": "Organize imports"
+      },
+      "location": {
+        "column": 1,
+        "row": 3
+      },
+      "message": "Import block is un-sorted or un-formatted",
+      "name": "unsorted-imports",
+      "noqa_row": 3,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+    },
+    {
+      "cell": null,
+      "code": "F401",
+      "end_location": {
+        "column": 25,
+        "row": 4
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/git/test_source_repair_program.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "",
+            "end_location": {
+              "column": 1,
+              "row": 5
+            },
+            "location": {
+              "column": 1,
+              "row": 4
+            }
+          }
+        ],
+        "message": "Remove unused import: `pathlib.Path`"
+      },
+      "location": {
+        "column": 21,
+        "row": 4
+      },
+      "message": "`pathlib.Path` imported but unused",
+      "name": "unused-import",
+      "noqa_row": 4,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unused-import"
+    },
+    {
+      "cell": null,
+      "code": "I001",
+      "end_location": {
+        "column": 35,
+        "row": 19
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/git/test_source_repair_program.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "    from dataclasses import asdict\n\n    from backend.git import source_repair_program\n    from backend.git.source_operations import SourceRequest\n",
+            "end_location": {
+              "column": 1,
+              "row": 20
+            },
+            "location": {
+              "column": 1,
+              "row": 17
+            }
+          }
+        ],
+        "message": "Organize imports"
+      },
+      "location": {
+        "column": 5,
+        "row": 17
+      },
+      "message": "Import block is un-sorted or un-formatted",
+      "name": "unsorted-imports",
+      "noqa_row": 17,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+    },
+    {
+      "cell": null,
+      "code": "PLW1510",
+      "end_location": {
+        "column": 26,
+        "row": 29
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/git/test_source_repair_program.py",
+      "fix": {
+        "applicability": "displayonly",
+        "edits": [
+          {
+            "content": "check=False, ",
+            "end_location": {
+              "column": 155,
+              "row": 29
+            },
+            "location": {
+              "column": 155,
+              "row": 29
+            }
+          }
+        ],
+        "message": "Add explicit `check=False`"
+      },
+      "location": {
+        "column": 12,
+        "row": 29
+      },
+      "message": "`subprocess.run` without explicit `check` argument",
+      "name": "subprocess-run-without-check",
+      "noqa_row": 29,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/subprocess-run-without-check"
+    },
+    {
+      "cell": null,
+      "code": "PLW1510",
+      "end_location": {
+        "column": 26,
+        "row": 33
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/git/test_source_repair_program.py",
+      "fix": {
+        "applicability": "displayonly",
+        "edits": [
+          {
+            "content": "check=False, ",
+            "end_location": {
+              "column": 91,
+              "row": 33
+            },
+            "location": {
+              "column": 91,
+              "row": 33
+            }
+          }
+        ],
+        "message": "Add explicit `check=False`"
+      },
+      "location": {
+        "column": 12,
+        "row": 33
+      },
+      "message": "`subprocess.run` without explicit `check` argument",
+      "name": "subprocess-run-without-check",
+      "noqa_row": 33,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/subprocess-run-without-check"
+    },
+    {
+      "cell": null,
+      "code": "PLC0414",
+      "end_location": {
+        "column": 82,
+        "row": 8
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_source_repair.py",
+      "fix": {
+        "applicability": "unsafe",
+        "edits": [
+          {
+            "content": "owned_config",
+            "end_location": {
+              "column": 82,
+              "row": 8
+            },
+            "location": {
+              "column": 54,
+              "row": 8
+            }
+          }
+        ],
+        "message": "Remove import alias"
+      },
+      "location": {
+        "column": 54,
+        "row": 8
+      },
+      "message": "Import alias does not rename original package",
+      "name": "useless-import-alias",
+      "noqa_row": 8,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/useless-import-alias"
+    },
+    {
+      "cell": null,
+      "code": "PLC0414",
+      "end_location": {
+        "column": 87,
+        "row": 9
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_source_repair.py",
+      "fix": {
+        "applicability": "unsafe",
+        "edits": [
+          {
+            "content": "tls_remote",
+            "end_location": {
+              "column": 87,
+              "row": 9
+            },
+            "location": {
+              "column": 63,
+              "row": 9
+            }
+          }
+        ],
+        "message": "Remove import alias"
+      },
+      "location": {
+        "column": 63,
+        "row": 9
+      },
+      "message": "Import alias does not rename original package",
+      "name": "useless-import-alias",
+      "noqa_row": 9,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/useless-import-alias"
+    },
+    {
+      "cell": null,
+      "code": "I001",
+      "end_location": {
+        "column": 75,
+        "row": 84
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_source_repair.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "    from dataclasses import replace\n\n    from backend.git.source_executor import SourceGitExecutor\n    from backend.runtime.native_network import NativeNetwork\n    from backend.runtime.remote_transport import RemoteTransportConfig\n    from backend.tests.runtime.test_owned_source_setup import git\n    from backend.tests.runtime.test_workspace_delivery import owner_client\n",
+            "end_location": {
+              "column": 1,
+              "row": 85
+            },
+            "location": {
+              "column": 1,
+              "row": 79
+            }
+          }
+        ],
+        "message": "Organize imports"
+      },
+      "location": {
+        "column": 5,
+        "row": 79
+      },
+      "message": "Import block is un-sorted or un-formatted",
+      "name": "unsorted-imports",
+      "noqa_row": 79,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+    },
+    {
+      "cell": null,
+      "code": "I001",
+      "end_location": {
+        "column": 75,
+        "row": 120
+      },
+      "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_source_repair.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "    import threading\n\n    from backend.tests.runtime.test_workspace_delivery import owner_client\n",
+            "end_location": {
+              "column": 1,
+              "row": 121
+            },
+            "location": {
+              "column": 1,
+              "row": 119
+            }
+          }
+        ],
+        "message": "Organize imports"
+      },
+      "location": {
+        "column": 5,
+        "row": 119
+      },
+      "message": "Import block is un-sorted or un-formatted",
+      "name": "unsorted-imports",
+      "noqa_row": 119,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+    }
+  ]
+}

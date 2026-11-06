@@ -115,3 +115,13 @@ recibos históricos nunca vuelven a cerrar un alcance cambiado.
 Pruebas y límites: [resultados](../modernization/source-setup-results.json),
 [paquete](../modernization/source-setup-packaging.json),
 [interfaz](../design/audits/2026-11-06-source-setup/report.md).
+
+
+## Extensiones posteriores del ciclo de vida
+
+La [creación remota separada](remote-source-creation.md) incorpora servidor,
+namespace/visibilidad y observación original sin repetir POST. La
+[reparación local explícita](source-repair.md) continúa etapas interrumpidas,
+conserva archivos y distingue evidencia previa al dominio/sin concesión/cierre
+físico. Estas extensiones reemplazan las limitaciones anteriores de esos casos;
+no declaran aceptación de toda la página ni de restore/historia entre navegadores.

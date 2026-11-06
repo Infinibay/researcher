@@ -78,7 +78,13 @@
         "docs/modernization/remote-source-results.json",
         "docs/modernization/remote-source-packaging.json",
         "backend/tests/runtime/test_remote_source.py",
-        "docs/design/audits/2026-11-06-remote-source/report.md"
+        "docs/design/audits/2026-11-06-remote-source/report.md",
+        "docs/architecture/source-repair.md",
+        "docs/modernization/source-repair-results.json",
+        "docs/modernization/source-repair-packaging.json",
+        "backend/tests/runtime/test_source_repair.py",
+        "backend/tests/git/test_source_repair_program.py",
+        "docs/design/audits/2026-11-06-source-repair/report.md"
       ]
     },
     "C04": {
@@ -1106,7 +1112,13 @@
         "docs/modernization/remote-source-results.json",
         "docs/modernization/remote-source-packaging.json",
         "backend/tests/runtime/test_remote_source.py",
-        "docs/design/audits/2026-11-06-remote-source/report.md"
+        "docs/design/audits/2026-11-06-remote-source/report.md",
+        "docs/architecture/source-repair.md",
+        "docs/modernization/source-repair-results.json",
+        "docs/modernization/source-repair-packaging.json",
+        "backend/tests/runtime/test_source_repair.py",
+        "backend/tests/git/test_source_repair_program.py",
+        "docs/design/audits/2026-11-06-source-repair/report.md"
       ]
     },
     "D10": {
@@ -3513,7 +3525,7 @@
       ]
     },
     "repository_explorer": {
-      "status": "selected_explorer_local_and_remote_source_lifecycle_verified_partial_repair_pending",
+      "status": "selected_explorer_local_remote_setup_and_explicit_repair_verified_history_extended_acceptance_pending",
       "evidence": [
         "docs/design/concepts/repositories/manifest.json",
         "docs/design/audits/2026-11-06-repositories/report.md",
@@ -3538,17 +3550,24 @@
         "docs/modernization/remote-source-results.json",
         "docs/modernization/remote-source-packaging.json",
         "backend/tests/runtime/test_remote_source.py",
-        "docs/design/audits/2026-11-06-remote-source/report.md"
+        "docs/design/audits/2026-11-06-remote-source/report.md",
+        "docs/architecture/source-repair.md",
+        "docs/modernization/source-repair-results.json",
+        "docs/modernization/source-repair-packaging.json",
+        "backend/tests/runtime/test_source_repair.py",
+        "backend/tests/git/test_source_repair_program.py",
+        "docs/design/audits/2026-11-06-source-repair/report.md"
       ],
       "implemented": [
         "Three desktop concepts+mobile selected/implemented; complete immutable tree/blob read, explicit branch refresh, source scope/focus, historical review owner entry and original registration retry.",
         "Actual full-SHA/error/parent-root failures reproduced and fixed;22installed contracts/112frontend/15browser captures. No native/model/remote-effect turn.",
         "Explicit original administrative create/adopt/HTTPS clone, no fake task IDs; source/project/lifespan Stop, retained partial folders, history deletion/completion guards and readonly recovery of Git-finished/registration-lost. Retired old init/clone/credential/origin/automatic remote/force-push entry points.",
         "Source control uses actual pre-G captured owner and immutable original project scope; real held TLS clone closes locally before source SQLite writes, without stopping a later owner on receipt replay.",
-        "Explicit empty remote creation on the selected configured server/user or organization/visibility; atomic administrative HTTP ownership, single issued POST, positive original marker recovery, real client closure before SQLite waits and honest remote uncertainty after source/project Stop.175installed contracts/116frontend/5additional browser captures; no real model/user remote effects."
+        "Explicit empty remote creation on the selected configured server/user or organization/visibility; atomic administrative HTTP ownership, single issued POST, positive original marker recovery, real client closure before SQLite waits and honest remote uncertainty after source/project Stop.175installed contracts/116frontend/5additional browser captures; no real model/user remote effects.",
+        "Explicit local repair under separately saved original authorization and actual private allocation/broker/driver hash. Original never-claimed/pre-domain/never-reserved domain closure distinguished without fake grants. Preserved local files/index/config/head, initial missing ref compare-and-set, clone partial fetch/checkout and explicit/default branch. Dirty incomplete clone cannot be registered by readonly observation as owner deletions.186installed contracts/117frontend/5additional captures; no user model/remote write."
       ],
       "remaining": [
-        "Partial local-write repair/no-grant crash cases and cross-browser history/restore integration remain. Remote operation total-time budget and full Forgejo/version/configuration/host-change evaluation remain before whole-page acceptance.",
+        "Cross-browser original history selection/recovery; reservation resolution/adoption/abandonment; accepted but unscheduled repair handoff; SHA256 metadata reconstruction and extended special metadata/submodules/time budgets; old missing closure histories/restore remain before full page acceptance.",
         "Source reader budgets/concurrency/special metadata/submodules, remote annotation identity, full page/human/whole-plan/global/restore/final review remain."
       ]
     }

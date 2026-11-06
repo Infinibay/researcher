@@ -6504,3 +6504,56 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
   history/budget,43scenarios/global/install/restore/inverses43–54/DD030/remaining
  4routes/all12acceptance/final fresh review remain full original goal. Do not
   redefine success as this checkpoint; no new push/merge/deploy/routine agents.
+
+## 2026-11-06 — explicit original local source repair
+
+- Previous goal turna548554 was progress. Revalidated managed HEAD/clean tracked
+  state and full scope; kept macro-first policy and protected original checkout.
+- Owner API/web persists a separate repair_key+observed operation/fence before
+  scheduling; original active/completed replay returns acknowledgement without
+  reissuing. Fixed hashed driver under actual SourceGitLaunch/broker/allocation,
+  no arbitrary shell/task/clone-over-target/reset/force checkout. Preserves user
+  files and existing index/config/head; missing initial ref is compare-and-set.
+  Missing clone branch can fetch original HTTPS under selected trust/credential,
+  explicit/default branch, then hydrate missing indexed files only. Existing
+  HEAD is not replaced; without captured HEAD, remote version is freshly observed.
+- Actual closure distinguishes never-admitted owner, cancelled claim/allocate
+  handoff, and physical original domain retired before any grant reservation.
+  _source_lease drains/retains lease after cancellation; pre-domain receipt is not
+  called domain_removed. Original unused DomainClosure is sealed as its own
+  source:unused-domain witness, not a fabricated grant or path-absence assertion.
+- Important RED reproduced: readonly observation registered incomplete clone
+  checkout as owner deletions. Fixed dirty-copy registration guard using clean
+  observation or latest writable attempt's complete closed stage receipts.
+  Explicit repair then preserves owner-modified file and recovers missing content.
+-11principalPASS24.658s covers initial/unused/never-claimed/domain handoffs, clone
+  before download/checkout/default branch, actual active/completed replay, readonly
+  incomplete-copy guard and fixed-driver staged/origin/redirect refusal.
+ 40source/sharedPASS68.00s preceded last corrections; final installed current
+  wheel186PASS0FAIL0SKIP161.986s,273backend imports onlynative env/825matching
+  members/85distributions/no old frameworks/FastMCP.1controlled actual native/Ken
+  fixture turn,0real models/user remotes. ConsoleMCP realstdio/help/refusal noDB.
+-117frontendPASS/build4.79s;5actual1440/390captures,0scopedAxe/overflow/JS errors;
+  source1POST+repair1POST, lost repair reply then reload no extraauthorization.
+  Independent owner file/config preserved,1empty initial commit,2actual closed
+  grants/0native turns. Captures desktop/mobile visually inspected.
+- Browser preflight initially blocked its own test socket before effects; enabled
+  socket fixture. Later Stop carried an old observed fence and correctly rejected.
+  Reopened exact original request in a paired browser, continued same held source,
+  no recreated destination/new prep intent. First installed sweep saw that valid
+  live browser cgroup and failed; after browser drains, serial package passes.
+  Another final rebuild follows the demonstrated readonly-clone correction.
+  Browser9037terminal0, server85046terminal2 afteractualSIGINT; backend26719 and
+  final installed3144terminal0. No retained QA server or unresolved live handle.
+-47new/changed Python defs and63TSmodules/names documented,0missing;25noncritical
+  static/style findings incl inherited deferredDD036. Sidebar refresh, path/focus
+  and remote-version copy polish recorded, not another implementation pass.
+- Architecture/status/dashboard/tool map/coverage/Ken and next history brief saved.
+  C03/D09 remainin_progress;24/36desktop8/12mobile8pilots0/12accepted unchanged.
+  No broad scenario/global/whole-page completion, no newpush/merge/deploy/agents.
+- Next principal: reopen exact source history from another browser without losing
+  an existing uncertain local packet. Reservation/adoption resolution and stored
+  but unscheduled repair handoff, extendedSHA256metadata/submodule/budgets,
+  oldclosure/restore/DD030, settings/models/prompts/books/science/human/terminal/
+  history/budget,43scenarios/global/hostinstall/inverses43–54/remaining4routes/
+  all12acceptance/finalfreshreview remain the original complete goal.

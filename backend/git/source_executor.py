@@ -1,7 +1,9 @@
 """Administrative Git setup through the existing kernel/global broker, with original scoped receipts and no inference task or provider fallback."""
 
 from contextlib import asynccontextmanager
+import asyncio
 from dataclasses import asdict
+import hashlib
 from pathlib import Path
 from uuid import uuid4
 
@@ -20,6 +22,17 @@ from backend.runtime.peer_broker import PeerBroker
 from backend.runtime.workspaces import PEER_WORKSPACE
 
 
+async def _source_lease(records,method,*args,**kwargs):
+    """Retain the actual committed lease when cancellation interrupts its thread handoff, closing only a scope that never entered an executor."""
+    handoff=asyncio.create_task(asyncio.to_thread(method,*args,**kwargs))
+    try:return await asyncio.shield(handoff)
+    except asyncio.CancelledError:
+        lease=await handoff
+        await _settled(records.close_unstarted,lease)
+        await _settled(records.uncertain,lease)
+        raise
+
+
 class SourceGitExecutor:
     """Expose semantic fixed stages while reusing original owned Git transport, complete capture and physical closure."""
 
@@ -28,13 +41,14 @@ class SourceGitExecutor:
         self.records,self.lease,self.owner,self.view,self.asset=records,lease,owner,view,asset
         row=records.read(lease.project_id,lease.operation_key)
         self.request,self.operation_id=SourceRequest(**row['request']),row['operation_id']
+        self.repair_key=(row.get('repair')or{}).get('repair_key')
         self.transport_identity=row['remote_identity'];self.observation_only=row.get('observation_only',False)
 
     async def stage(self,stage):
         """Launch at most one peer for this original stage; replay returns its receipt rather than silently reissuing an effect."""
         registry=SourcePeerRegistry(self.records,self.lease,stage)
         allocation=PrivateAllocation(**self.view['allocation'])if self.view['allocation']else None
-        launch=SourceGitLaunch(self.asset,SourceGitLaunch.command(self.request,self.operation_id,stage),str(PEER_WORKSPACE if self.request.mode=='adopt' or self.observation_only else PEER_ALLOCATION),tuple(sorted(git_environment(Path('/home/actor')).items())),allocation,request=self.request,operation_id=self.operation_id,stage=stage,transport_identity=self.transport_identity,observation_only=self.observation_only)
+        launch=SourceGitLaunch(self.asset,SourceGitLaunch.command(self.request,self.operation_id,stage),str(PEER_WORKSPACE if self.request.mode=='adopt' or self.observation_only else PEER_ALLOCATION),tuple(sorted(git_environment(Path('/home/actor')).items())),allocation,request=self.request,operation_id=self.operation_id,stage=stage,transport_identity=self.transport_identity,observation_only=self.observation_only,repair_key=self.repair_key,repair_program_sha256=hashlib.sha256(Path(__file__).with_name('source_repair_program.py').read_bytes()).hexdigest() if stage=='repair' else None)
         transport=OwnedGitExecutor(owner=self.owner,registry=registry,lease=self.lease,source=self.view['source']['workspace'],allocation=allocation.path if allocation else None,asset=self.asset)
         transport._operation_prefix='source-'+stage
         return await transport._invoke(launch,timeout=60 if launch.networked else 15)
@@ -64,17 +78,24 @@ class SourceGitExecutor:
 @asynccontextmanager
 async def source_executor(records,lease,*,authority,cgroup_parent,source_network=None,source_transport=None,broker_limits=None,on_owner=None):
     """Own one administrative domain and call trusted synchronous on_owner inside its scope before the first Git gate; retirement remains with the original broker."""
-    view=await _settled(records.allocate,lease)
-    path=Path(cgroup_parent)/('researcher-source-setup-'+uuid4().hex);path.mkdir(mode=0o700)
-    with WitnessedAuthorityJournal(**authority)as journal:
-        with ExecutionDomain.open(path)as domain:
-            broker=PeerBroker(journal,domain,limits=broker_limits,source_network=source_network,source_transport=source_transport)
-            await _settled(records.attach_domain,lease,grant_id=broker.grant_id,path=path,identity=domain.identity)
-            async with AsyncPeerBroker(broker)as owner:
-                executor = SourceGitExecutor(records,lease,owner,view,GitAsset.inspect(Path('/usr/bin/git')))
-                if on_owner is not None:
-                    on_owner(executor)
-                yield executor
+    broker=None
+    try:
+        view=await _settled(records.allocate,lease)
+        path=Path(cgroup_parent)/('researcher-source-setup-'+uuid4().hex);path.mkdir(mode=0o700)
+        with WitnessedAuthorityJournal(**authority)as journal:
+            with ExecutionDomain.open(path)as domain:
+                broker=PeerBroker(journal,domain,limits=broker_limits,source_network=source_network,source_transport=source_transport)
+                try:
+                    await _settled(records.attach_domain,lease,grant_id=broker.grant_id,path=path,identity=domain.identity)
+                    async with AsyncPeerBroker(broker)as owner:
+                        executor=SourceGitExecutor(records,lease,owner,view,GitAsset.inspect(Path('/usr/bin/git')))
+                        if on_owner is not None:on_owner(executor)
+                        yield executor
+                finally:
+                    if broker._physical_closed is None:await _settled(broker.revoke)
+                    await _settled(SourcePeerRegistry.record_unused,records,lease,broker)
+    finally:
+        if broker is None:await _settled(records.close_unstarted,lease)
 
 
 async def execute_source(records,project,key,*,authority,cgroup_parent,source_network=None,source_transport=None,broker_limits=None,on_owner=None):
@@ -85,7 +106,7 @@ async def execute_source(records,project,key,*,authority,cgroup_parent,source_ne
     if request.mode=='create_remote':raise RunConflict('La creación remota necesita su transporte de operación propio; no inicializa ni publica una fuente local.')
     if request.mode=='clone'and source_network is None:raise RunConflict('Configura los parámetros TLS/DNS del host antes de clonar.')
     validate_source_transport(request,source_transport,row['remote_identity'])
-    lease=await _settled(records.claim,project,key,'source-owner-'+uuid4().hex)
+    lease=await _source_lease(records,records.claim,project,key,'source-owner-'+uuid4().hex)
     try:
         async with source_executor(records,lease,authority=authority,cgroup_parent=cgroup_parent,source_network=source_network,source_transport=source_transport,broker_limits=broker_limits,on_owner=on_owner)as executor:
             stages=('init','commit')if request.mode=='create'else('clone','read_index','checkout')if request.mode=='clone'else()
@@ -107,12 +128,41 @@ async def reconcile_source(records,project,key,*,authority,cgroup_parent,broker_
     with WitnessedAuthorityJournal(**authority)as journal:
         grant_id=row['domain']['grant_id']
         grant=(await _settled(journal.load)).records.get('broker:grant:'+grant_id)
-        if grant is None:raise RunConflict('No se encontró el recibo global original. No se dedujo cierre ni se repitió un efecto.')
-        if grant['state']!='retired':await _settled(PeerBroker.recover,journal,grant_id)
-        await _settled(PeerBroker.project_recovered,journal,grant_id)
-    lease=await _settled(records.begin_observation,project,key,'source-observer-'+uuid4().hex)
+        if grant is None:
+            await _settled(SourcePeerRegistry.project_unused,records,await _settled(journal.load),grant_id)
+        else:
+            if grant['state']!='retired':await _settled(PeerBroker.recover,journal,grant_id)
+            await _settled(PeerBroker.project_recovered,journal,grant_id)
+    lease=await _source_lease(records,records.begin_observation,project,key,'source-observer-'+uuid4().hex)
     try:
         async with source_executor(records,lease,authority=authority,cgroup_parent=cgroup_parent,broker_limits=broker_limits,on_owner=on_owner)as executor:
+            observation=await executor.observe()
+        return await _settled(records.register,lease,observation)
+    except BaseException:
+        await _settled(records.uncertain,lease)
+        raise
+
+
+async def repair_source(records,project,key,*,repair_key,authority,cgroup_parent,source_network=None,source_transport=None,broker_limits=None,on_owner=None):
+    """Continue a separately authorized original local setup only after exact witnessed closure, retaining files/history and issuing no clone/reset/force operation."""
+    row=await _settled(records.read,project,key)
+    if row['status']=='completed':return row['receipt']
+    if not row.get('domain') and not (row.get('closure')or{}).get('no_domain_opened'):raise RunConflict('Falta la identidad del dominio original; no se dedujo cierre por ausencia de carpeta.')
+    if row.get('domain'):
+        with WitnessedAuthorityJournal(**authority) as journal:
+            grant_id=row['domain']['grant_id'];snapshot=await _settled(journal.load);grant=snapshot.records.get('broker:grant:'+grant_id)
+            if grant is None:await _settled(SourcePeerRegistry.project_unused,records,snapshot,grant_id)
+            else:
+                if grant['state']!='retired':await _settled(PeerBroker.recover,journal,grant_id)
+                await _settled(PeerBroker.project_recovered,journal,grant_id)
+    request=SourceRequest(**row['request'])
+    validate_source_transport(request,source_transport,row['remote_identity'])
+    lease=await _source_lease(records,records.begin_observation,project,key,'source-repair-'+uuid4().hex,repair_key=repair_key)
+    try:
+        async with source_executor(records,lease,authority=authority,cgroup_parent=cgroup_parent,source_network=source_network,source_transport=source_transport,broker_limits=broker_limits,on_owner=on_owner) as executor:
+            if request.mode!='adopt':
+                result=await executor.stage('repair')
+                if result.exit_code!=0:raise RunConflict('La reparación se detuvo para conservar el trabajo. Inspecciona archivos, índice, rama y configuración antes de autorizar otra continuación.')
             observation=await executor.observe()
         return await _settled(records.register,lease,observation)
     except BaseException:

@@ -1,0 +1,75 @@
+{
+  "scope": "Actual React, owner API, SQLite, source Git and kernel ownership. Original held after init; independent owner file survives explicit repair. Lost repair POST response and reload never authorize another repair. No model/user-remote turn.",
+  "status": "passed",
+  "states": [
+    {
+      "file": "01-desktop-explicit-repair-scope.png",
+      "sha256": "f9637ab3a9654c85a0d9ebdc2fed11b81f984c03bffe6ea275e68d4837dca880",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "02-mobile-owner-file-explanation.png",
+      "sha256": "7f8f1d0d90f46ea6ea1f72bc7d802fb7e5f762feb4c449c289e0cc6f3f6827ce",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "03-mobile-authorization-reply-lost.png",
+      "sha256": "48cebbd08c61a3cad5811709369c2ead529cd2f72a8a57f70846129cea4241c1",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "04-mobile-original-repair-recovered.png",
+      "sha256": "e81747456b507de3bc5edea087d74360dd9c850c646360efe3e000180e03bcbd",
+      "layout": {
+        "width": 390,
+        "scroll": 390
+      },
+      "axe_violations": []
+    },
+    {
+      "file": "05-desktop-repair-result-and-local-changes.png",
+      "sha256": "32716a7c092eb24cf7587a295de48df008e0776b118c0f8f901165a344ac9922",
+      "layout": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "axe_violations": []
+    }
+  ],
+  "page_errors": [],
+  "source_posts": [
+    {
+      "operation_key": "e3a58e6d-7858-4194-a39a-5893f038c2a2",
+      "mode": "create",
+      "name": "continuacion",
+      "path": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/source-repair-browser-state/test_serve0/workspaces/continuacion",
+      "branch": "main",
+      "remote_url": null,
+      "remote_owner": null,
+      "private": null,
+      "remote_server": null,
+      "use_configured_auth": false
+    }
+  ],
+  "repair_posts": [
+    {
+      "repair_key": "faadcd2e-4c33-4cc5-af86-5fc8ee46678a",
+      "operation_id": "64a94315c67c410db0c0945ae1333e12",
+      "fence": 1
+    }
+  ],
+  "head_sha": "469743a783530a7efd0b78454912a30e5f18f452",
+  "owner_file_sha256": "e0b3078f48b7c084302ad84abf0eef9b5ca1206c7f971a6ff3437fc6f8ec9df9"
+}

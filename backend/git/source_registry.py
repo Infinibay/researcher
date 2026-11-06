@@ -11,7 +11,7 @@ from backend.runtime.peer_process import NamespaceIdentity
 
 def source_scope(row):
     """Bind the complete original request, operator configuration and captured directory views across all command stages."""
-    return digest({**{key:row[key] for key in ('request','remote_identity','target','view')},'observation_only':row.get('observation_only',False)})
+    return digest({**{key:row[key] for key in ('request','remote_identity','target','view')},'observation_only':row.get('observation_only',False),**({'repair':row['repair']} if row.get('repair') else {})})
 
 
 class SourcePeerRegistry:
@@ -50,7 +50,7 @@ class SourcePeerRegistry:
             binding=SourceView(**view['source']);binding.verify()
             if view['allocation']:
                 a=view['allocation'];SourceView(a['path'],a['device'],a['inode']).verify()
-            return {'database_identity':self.lease.database_identity,'database_path':self.records.runs.database,'attempt_id':self.lease.attempt_id,'fence':self.lease.fence,'kind':'command','project_id':self.lease.project_id,'task_id':None,'context_version':1,'execution_kind':'repository_setup','source_kind':'repository_setup','source_operation_key':self.lease.operation_key,'source_operation_id':row['operation_id'],'source_request':row['request'],'source_request_sha256':digest(row['request']),'source_scope_sha256':source_scope(row),'source_remote_identity':row['remote_identity'],'source_stage':self.stage,'source_observation_only':row.get('observation_only',False),'source_allocation':view['allocation'],'binding':binding,'source_binding':binding}
+            return {'database_identity':self.lease.database_identity,'database_path':self.records.runs.database,'attempt_id':self.lease.attempt_id,'fence':self.lease.fence,'kind':'command','project_id':self.lease.project_id,'task_id':None,'context_version':1,'execution_kind':'repository_setup','source_kind':'repository_setup','source_operation_key':self.lease.operation_key,'source_operation_id':row['operation_id'],'source_request':row['request'],'source_request_sha256':digest(row['request']),'source_scope_sha256':source_scope(row),'source_remote_identity':row['remote_identity'],'source_stage':self.stage,'source_repair_key':(row.get('repair')or{}).get('repair_key'),'source_observation_only':row.get('observation_only',False),'source_allocation':view['allocation'],'binding':binding,'source_binding':binding}
 
     def bind(self,peer_id,identity):
         """Persist the actual namespace identity before the broker releases G; there is no user-supplied PID or closure flag."""
@@ -88,3 +88,49 @@ class SourcePeerRegistry:
             if grant['state']=='retired' and grant.get('domain_removed')is True:row['closure']={'grant_id':grant_id,'attempt_id':grant['attempt_id'],'domain_removed':True}
             records._save(conn,grant['project_id'],metadata)
         return tuple(projected)
+
+    @classmethod
+    def record_unused(cls, records, lease, broker):
+        """Witness an actual removed original domain that never reserved a grant, after its real broker withdrew and constructors drained; no task or grant is invented."""
+        from backend.runtime.execution_domain import DomainClosure
+        from backend.runtime.peer_broker import PeerBroker
+
+        if not isinstance(broker,PeerBroker) or not broker._withdrawn.is_set():
+            raise RunConflict('El broker original aún no está retirado.')
+        with broker._gate_lock:
+            closure=broker._physical_closed
+            if not isinstance(closure,DomainClosure) or not closure.removed or closure.identity!=broker.domain.identity:
+                raise RunConflict('Falta el cierre físico original del dominio sin comandos.')
+            row=records.read(lease.project_id,lease.operation_key)
+            domain=row.get('domain')
+            if not domain or domain['grant_id']!=broker.grant_id or domain['identity']!=asdict(closure.identity) or (row['attempt_id'],row['fence'],row['database_identity'])!=(lease.attempt_id,lease.fence,lease.database_identity):
+                raise RunConflict('El dominio vacío no pertenece a esta preparación original.')
+            snapshot=broker.journal.load()
+            if snapshot.records.get('broker:grant:'+broker.grant_id) is not None:
+                return
+            if any(value.get('grant_id')==broker.grant_id for key,value in snapshot.records.items() if key.startswith('broker:op:')):
+                raise RunConflict('El dominio conserva comandos globales sin su concesión original.')
+            key='source:unused-domain:'+broker.grant_id
+            proof={'grant_id':broker.grant_id,'attempt_id':lease.attempt_id,'fence':lease.fence,'database_identity':lease.database_identity,'source_database':records.runs.database,'project_id':lease.project_id,'operation_key':lease.operation_key,'operation_id':row['operation_id'],'scope_sha256':source_scope(row),'domain_identity':asdict(closure.identity),'domain_removed':True,'never_reserved':True}
+            if snapshot.records.get(key) not in (None,proof):
+                raise RunConflict('El recibo de dominio vacío identifica otro alcance.')
+            if key not in snapshot.records:
+                broker.journal.commit(snapshot,transition_id='source-unused:'+broker.grant_id,puts={key:proof})
+            cls.project_unused(records,broker.journal.load(),broker.grant_id)
+
+    @staticmethod
+    def project_unused(records,snapshot,grant_id):
+        """Project only the sealed original never-reserved/removed-domain witness; missing paths, a caller boolean or grant absence alone cannot prove closure."""
+        proof=snapshot.records.get('source:unused-domain:'+grant_id)
+        if not proof or proof.get('domain_removed')is not True or proof.get('never_reserved')is not True or snapshot.records.get('broker:grant:'+grant_id) is not None:
+            raise RunConflict('Falta el testigo original de cierre sin concesión.')
+        with records.runs._transaction(write=True) as conn:
+            metadata,row=records._row(conn,proof['project_id'],proof['operation_key'])
+            if records._origin()!=proof['database_identity'] or (row['attempt_id'],row['fence'],row['database_identity'],row['operation_id'])!=(proof['attempt_id'],proof['fence'],proof['database_identity'],proof['operation_id']) or source_scope(row)!=proof['scope_sha256'] or row['domain']['identity']!=proof['domain_identity']:
+                raise RunConflict('El testigo sin concesión no corresponde al origen conservado.')
+            for peer in row['peers'].values():
+                if peer['namespace'] is not None or peer['state']=='bound':
+                    raise RunConflict('Un namespace enlazado no puede declararse nunca admitido.')
+                peer.update(state='closed',exit_code=None,closure_reason='witnessed_never_reserved')
+            row['closure']={'grant_id':grant_id,'attempt_id':proof['attempt_id'],'domain_removed':True,'unused':True}
+            records._save(conn,proof['project_id'],metadata)

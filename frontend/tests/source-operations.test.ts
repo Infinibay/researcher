@@ -5,6 +5,23 @@ import {test} from 'node:test'
 /** Exercise persistence boundaries with the same API as real browser storage. */
 function storage(){const values=new Map<string,string>();return {getItem:(key:string)=>values.get(key)??null,setItem:(key:string,value:string)=>{values.set(key,value)},removeItem:(key:string)=>{values.delete(key)}}}
 
+test('repair authorization survives reply loss and cannot borrow a different observed source fence',async()=>{
+ const {prepareSource,prepareSourceRepair,sourceRepairs,sendSourceRepair}=await import('../src/api/sourceOperations.ts')
+ const source=prepareSource(202,{mode:'create',name:'retained',path:'/managed/retained',branch:'main'}),{operation_key,...request}=source.body
+ const observed={project_id:202,operation_key,operation_id:'b'.repeat(32),fence:1,request,status:'stopped',worker_active:false,local_closure:'confirmed'} as any
+ const packet=prepareSourceRepair(source,observed),saved=storage(),previous=globalThis.fetch,sent:unknown[]=[]
+ sourceRepairs.save(saved,packet);assert.deepEqual(sourceRepairs.load(saved,source),packet)
+ assert.throws(()=>prepareSourceRepair(source,{...observed,operation_key:'other'}),/original/)
+ try{globalThis.fetch=async(_url,options)=>{sent.push(JSON.parse(String(options?.body)));if(sent.length===1)throw new TypeError('lost repair reply');return Response.json({...observed,fence:2,repair_authorizations:[packet.body]})}
+  await assert.rejects(sendSourceRepair(packet),/lost repair reply/)
+  assert.equal((await sendSourceRepair(sourceRepairs.load(saved,source)!)).fence,2)
+  assert.deepEqual(sent[0],sent[1]);assert.equal((sent[0] as any).fence,1)
+  globalThis.fetch=async()=>Response.json({...observed,fence:2,repair_authorizations:[{...packet.body,fence:0}]})
+  await assert.rejects(sendSourceRepair(packet),/original/)
+  assert.throws(()=>sourceRepairs.save(saved,prepareSourceRepair(source,{...observed,fence:2})),/pendiente/)
+ }finally{globalThis.fetch=previous}
+})
+
 test('remote creation retains explicit server namespace and visibility without inventing local Git scope',async()=>{
  const {prepareSource,sourcePackets,sendSource}=await import('../src/api/sourceOperations.ts')
  const input={mode:'create_remote' as const,name:'empty',remote_server:'https://forgejo.example/api/v1',remote_owner:'research',private:false}

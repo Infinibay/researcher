@@ -462,3 +462,15 @@ owner y web guardan el servidor elegido; emisión única y marcador original
 permiten recuperación readonly tras perder la respuesta. Stop cierra el cliente
 antes de SQL y mantiene incertidumbre si el servidor aún puede crear.
 [Contrato](remote-source-creation.md), [resultados](../modernization/remote-source-results.json).
+
+
+## Continuación Git explícita — después de a548554
+
+La reparación se autoriza por operation/fence observado y clave propia. Reutiliza
+asignación y broker reales, con programa fijo de hash comprobado; no habilita shell,
+reset, clone sobre destino ni force checkout. Una revisión inicial ausente se
+publica por compare-and-set; una copia parcial preserva archivos e hidrata faltantes.
+Un checkout incompleto no se registra como borrados del usuario por observarlo.
+Cierre distingue nunca admitido, previo al dominio y dominio real retirado sin
+concesión, conservando evidencia y sin tareas ficticias.
+[Contrato](source-repair.md), [resultados](../modernization/source-repair-results.json).

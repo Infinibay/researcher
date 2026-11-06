@@ -37,6 +37,12 @@ class StopSource(BaseModel):
     fence: int = Field(ge=0)
 
 
+class RepairSource(StopSource):
+    """Separate explicit continuation of one observed closed local attempt; no arbitrary commands or invented namespace grants are accepted."""
+
+    repair_key: str = Field(pattern=r'^[A-Za-z0-9_.:-]{1,128}$')
+
+
 @router.get('')
 async def source_options(project_id: int, request: Request):
     """Expose only the configured server and account label for deliberate owner selection, without credentials, host secret paths or network effects."""
@@ -77,4 +83,11 @@ async def stop_source(project_id: int, operation_key: str, body: StopSource, req
 async def observe_source(project_id: int, operation_key: str, request: Request):
     """Request readonly reconciliation of the original retained directory and closure; an uncertain effect is never blindly reissued."""
     value = await service(request).sources.reconcile(project_id, operation_key)
+    return JSONResponse(value, status_code=202, headers={'Cache-Control':'no-store'})
+
+
+@router.post('/{operation_key}/repair', status_code=202)
+async def repair_source(project_id: int, operation_key: str, body: RepairSource, request: Request):
+    """Authorize fixed missing local stages after original closure, preserving existing files and separately recording the repair identity before scheduling."""
+    value = await service(request).sources.repair(project_id, operation_key, **body.model_dump())
     return JSONResponse(value, status_code=202, headers={'Cache-Control':'no-store'})

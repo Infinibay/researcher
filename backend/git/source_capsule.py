@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass
 import json
+import hashlib
 import os
 from pathlib import Path
 import sys
@@ -37,13 +38,17 @@ class SourceGitLaunch(GitLaunch):
     stage: str
     transport_identity: str | None = None
     observation_only: bool = False
+    repair_key: str | None = None
+    repair_program_sha256: str | None = None
 
     def __post_init__(self):
         """Match the complete argv/cwd/allocation profile before any shared broker reservation or command gate."""
         super().__post_init__()
         if not isinstance(self.request,SourceRequest) or self.request.mode=='create_remote' or len(self.operation_id)!=32 or any(c not in '0123456789abcdef' for c in self.operation_id):raise ValueError('Original administrative Git intent required')
         if self.arguments!=self.command(self.request,self.operation_id,self.stage):raise ValueError('Git arguments differ from the fixed source stage')
-        if type(self.observation_only)is not bool or (self.observation_only and self.stage in ('init','commit','clone','read_index','checkout')):raise ValueError('Source observation cannot initialize, clone or write')
+        if self.stage=='repair' and (self.repair_key is None or not isinstance(self.repair_program_sha256,str) or len(self.repair_program_sha256)!=64 or self.observation_only):raise ValueError('Repair needs original explicit continuation and pinned trusted driver')
+        if self.stage!='repair' and self.repair_program_sha256 is not None:raise ValueError('Only the repair stage can execute its fixed driver')
+        if type(self.observation_only)is not bool or (self.observation_only and self.stage in ('init','commit','clone','read_index','checkout','repair')):raise ValueError('Source observation cannot initialize, clone or write')
         if self.cwd!=str(PEER_WORKSPACE if self.request.mode=='adopt' or self.observation_only else PEER_ALLOCATION):raise ValueError('Source stage cwd differs from its exact view')
         if (self.allocation is None)!=(self.request.mode=='adopt' or self.observation_only):raise ValueError('Source stage writable allocation differs')
         if self.request.use_configured_auth and (not isinstance(self.transport_identity,str) or len(self.transport_identity)!=64):raise ValueError('Explicit configured clone origin required')
@@ -67,13 +72,15 @@ class SourceGitLaunch(GitLaunch):
             commands.update(init=('init','--template=','-b',request.branch,'.'),commit=('-c','user.name=Researcher owner','-c','user.email=owner@localhost','-c','commit.gpgsign=false','commit','--allow-empty','-m',f'Initialize source ({operation_id})'))
         if request.mode=='clone':
             commands.update(clone=('-c','protocol.https.allow=always','-c','http.followRedirects=false','-c','http.sslCAInfo=/run/researcher-network/ca.pem','-c','transfer.fsckObjects=true','clone','--no-hardlinks','--no-recurse-submodules','--no-checkout',*(('--branch',request.branch)if request.branch else()),'--',request.remote_url,'.'),read_index=('read-tree','HEAD'),checkout=('checkout-index','-a'))
+        if request.mode in ('create','clone'):
+            commands['repair']=('researcher-source-repair',)
         if stage not in commands:raise ValueError('Unsupported source Git stage')
         return (*_POLICY,*commands[stage])
 
     @property
     def networked(self):
         """Networking belongs only to the explicitly requested fixed HTTPS clone; observations and checkout keep sockets disabled."""
-        return self.stage=='clone'
+        return self.stage=='clone' or (self.stage=='repair' and self.request.mode=='clone')
 
 
 class SourceGitCapsule(GitCapsule):
@@ -91,6 +98,15 @@ class SourceGitCapsule(GitCapsule):
     def _program(self):
         """Keep the configured PAT out of argv/manifests/config by reading a sealed private credential only inside the exact clone namespace."""
         program=super()._program()
+        if self.launch.stage=='repair':
+            from dataclasses import asdict
+            from backend.runtime.development_workspace import _POLICY
+
+            data=Path(__file__).with_name('source_repair_program.py').read_bytes()
+            if len(data)>65536 or hashlib.sha256(data).hexdigest()!=self.launch.repair_program_sha256:
+                raise ValueError('Pinned source repair driver changed before launch')
+            code='import os,sys;os.environ.clear();os.environ.update('+repr(dict(self.launch.environment))+');os.chdir('+repr(self.launch.cwd)+');sys.argv='+repr(['source-repair',self.launch.asset.path,json.dumps(_POLICY),json.dumps(asdict(self.launch.request)),self.launch.operation_id])+";exec(compile("+repr(data)+",'<owned-source-repair>','exec'),{'__name__':'__main__'})"
+            return [str(Path(sys.executable).resolve(strict=True)),'-I','-S','-c',code]
         if not(self.launch.networked and self.launch.request.use_configured_auth):return program
         code='import os,json,base64;env='+repr(dict(self.launch.environment))+";cred=json.load(open('/run/researcher-network/credential'));env.update(GIT_CONFIG_COUNT='1',GIT_CONFIG_KEY_0="+repr('http.'+self.launch.request.remote_url+'.extraHeader')+",GIT_CONFIG_VALUE_0='Authorization: Basic '+base64.b64encode((cred['username']+':'+cred['token']).encode()).decode());os.chdir("+repr(self.launch.cwd)+');os.execve('+repr(self.launch.asset.path)+','+repr([self.launch.asset.path,*self.launch.arguments])+',env)'
         return [str(Path(sys.executable).resolve(strict=True)),'-I','-S','-c',code]

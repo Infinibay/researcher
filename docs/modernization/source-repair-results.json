@@ -1,0 +1,52 @@
+{
+  "base_commit": "a548554",
+  "principal": {
+    "passed": 11,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 24.658,
+    "cases": [
+      "test_explicit_repair_finishes_initial_git_and_preserves_user_files[before_first_git]",
+      "test_explicit_repair_finishes_initial_git_and_preserves_user_files[after_init]",
+      "test_clone_repair_keeps_changed_existing_file_and_restores_only_missing_checkout[before_clone]",
+      "test_clone_repair_keeps_changed_existing_file_and_restores_only_missing_checkout[before_checkout]",
+      "test_clone_repair_keeps_changed_existing_file_and_restores_only_missing_checkout[before_clone_default]",
+      "test_early_cancelled_source_handoff_can_explicitly_continue_without_claiming_a_missing_domain[claim]",
+      "test_early_cancelled_source_handoff_can_explicitly_continue_without_claiming_a_missing_domain[allocate]",
+      "test_explicit_repair_can_start_a_source_stopped_before_owner_admission",
+      "test_fixed_initial_repair_refuses_to_overwrite_existing_owner_state[staged_content]",
+      "test_fixed_initial_repair_refuses_to_overwrite_existing_owner_state[changed_origin]",
+      "test_fixed_initial_repair_refuses_to_overwrite_existing_owner_state[redirected_metadata]"
+    ]
+  },
+  "shared_source": {
+    "passed": 40,
+    "seconds": 68.0,
+    "limits": "Before never-claimed and readonly incomplete-checkout corrections; final installed receipt verifies current source bytes."
+  },
+  "frontend": {
+    "passed": 117,
+    "failed": 0,
+    "build": "Vite4.79s; inherited large-chunk notice"
+  },
+  "browser": {
+    "evidence": "docs/design/audits/2026-11-06-source-repair/evidence.json",
+    "captures": 5,
+    "scoped_axe_violations": 0,
+    "page_errors": 0,
+    "original_source_posts": 1,
+    "repair_posts": 1,
+    "actual_closed_grants": 2,
+    "native_runs": 0,
+    "limits": "Original source after init; clone/early cancel variants covered by owner API/kernel tests."
+  },
+  "documented_python_definitions": 47,
+  "documented_ts_modules_or_named_definitions": 63,
+  "static_findings": 25,
+  "critical_static_findings": 0,
+  "installed_package": "docs/modernization/source-repair-packaging.json",
+  "verification_interference": "First installed attempt saw the live browser fixture domain in a global-parent sweep. Continued original browser operation, drained its original owners and reran serially without relaxing assertions. A later readonly incomplete-clone RED exposed false registration; guard added and final installed wheel rebuilt.",
+  "user_remote_writes": 0,
+  "real_model_turns": 0,
+  "remaining": "Cross-browser history, reservation/adoption/abandonment, accepted but not scheduled repair handoff, source-format/submodules/time budgets, old missing closure proofs/restore,43scenarios/global/host install/12page acceptance/final review remain."
+}

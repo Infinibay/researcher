@@ -12,7 +12,11 @@ export interface SourcePacket {schema:1;projectId:number;body:SourceIntent&{oper
 /** Whole-project observations contain all bounded administrative history, including retained partial effects. */
 export interface SourceSummary {operation_key:string;operation_id:string;mode:string;name:string;path:string|null;fence:number;status:string;requires_reconciliation:boolean;repository_id:number|null;remote?:CreatedRemote|null;observation:{head_sha:string;tree_sha:string;branch:string;origin:string|null;working_tree_clean:boolean}|null;observed_at:number|null;observation_kind:'recorded_not_rechecked'}
 /** A worker handle and local domain receipt cannot prove remote rollback or the current state of Git. */
-export interface SourceOperation extends SourceSummary {project_id:number;request:SourceIntent;issue:{code:string;message:string}|null;worker_active:boolean;local_closure:'confirmed'|'unconfirmed';message:string;receipt:{observation?:NonNullable<SourceSummary['observation']>;repository_id?:number;remote?:CreatedRemote;completed_after_withdrawal?:boolean;observed_at:number}|null}
+export interface SourceOperation extends SourceSummary {project_id:number;request:SourceIntent;issue:{code:string;message:string}|null;worker_active:boolean;local_closure:'confirmed'|'unconfirmed';message:string;repair?:SourceRepairIntent|null;repair_authorizations?:SourceRepairIntent[];receipt:{observation?:NonNullable<SourceSummary['observation']>;repository_id?:number;remote?:CreatedRemote;completed_after_withdrawal?:boolean;observed_at:number;repair_key?:string}|null}
+/** A separate owner gesture can continue only the exactly observed original local attempt, with its own replay identity. */
+export interface SourceRepairIntent {repair_key:string;operation_id:string;fence:number}
+/** Keep the original source and continuation together so a reload cannot retarget another source or newer fence. */
+export interface SourceRepairPacket {schema:1;source:SourcePacket;body:SourceRepairIntent}
 /** Use the same persistence boundary as browser storage without requiring a browser in transport tests. */
 type StoragePort=Pick<Storage,'getItem'|'setItem'|'removeItem'>
 
@@ -59,3 +63,30 @@ export async function readSource(packet:SourcePacket){validate(packet);return ch
 export async function stopSource(packet:SourcePacket,observed:SourceOperation){checked(observed,packet);const value=checked(await fetchApi<SourceOperation>(`/api/projects/${packet.projectId}/source-operations/${encodeURIComponent(packet.body.operation_key)}/stop`,{method:'POST',body:JSON.stringify({operation_id:observed.operation_id,fence:observed.fence})}),packet);if(value.operation_id!==observed.operation_id||value.fence!==observed.fence)throw new Error('El recibo no corresponde al intento detenido. Consulta su estado.');return value}
 /** Explicit reconciliation observes retained state only; it never repeats an initialization, commit or clone. */
 export async function observeSource(packet:SourcePacket){validate(packet);return checked(await fetchApi<SourceOperation>(`/api/projects/${packet.projectId}/source-operations/${encodeURIComponent(packet.body.operation_key)}/observe`,{method:'POST'}),packet)}
+
+/** Validate a retained explicit local continuation without choosing a new fence or granting arbitrary commands. */
+function validateRepair(packet:SourceRepairPacket):SourceRepairPacket{
+ const source=validate(packet.source),body=packet.body
+ if(packet.schema!==1||source.body.mode==='create_remote'||Object.keys(packet).sort().join(',')!=='body,schema,source'||!body||Object.keys(body).sort().join(',')!=='fence,operation_id,repair_key'||!/^[A-Za-z0-9_.:-]{1,128}$/.test(body.repair_key)||!/^[a-f0-9]{32}$/.test(body.operation_id)||!Number.isSafeInteger(body.fence)||body.fence<0)throw new Error('No se pudo recuperar la autorización original de reparación.')
+ return Object.freeze({schema:1,source,body:Object.freeze({...body})})
+}
+
+/** Freeze a separately authorized continuation after checking that the observation belongs to this exact local setup. */
+export function prepareSourceRepair(source:SourcePacket,observed:SourceOperation):SourceRepairPacket{
+ checked(observed,source)
+ if(!['stopped','needs_reconciliation'].includes(observed.status)||observed.worker_active)throw new Error('Consulta el cierre del intento original antes de reparar.')
+ return validateRepair({schema:1,source,body:{repair_key:crypto.randomUUID(),operation_id:observed.operation_id,fence:observed.fence}})
+}
+
+/** Store original repair intent before HTTP and refuse to discard an unknown continuation after reply loss. */
+export const sourceRepairs={
+ /** Recover only a packet belonging to this exact original source. */
+ load(storage:Pick<Storage,'getItem'>,source:SourcePacket):SourceRepairPacket|null{const raw=storage.getItem(`researcher:source-repair:v1:${source.projectId}:${source.body.operation_key}`);if(raw===null)return null;try{if(raw.length>30000)throw new Error('size');const packet=validateRepair(JSON.parse(raw));if(JSON.stringify(packet.source)!==JSON.stringify(validate(source)))throw new Error('scope');return packet}catch{throw new Error('No se pudo recuperar la autorización original de reparación. Consulta la historia antes de continuar.')}},
+ /** Save once before POST; replacing another pending authorization requires an explicit reviewed resolution. */
+ save(storage:StoragePort,packet:SourceRepairPacket){const valid=validateRepair(packet),old=this.load(storage,valid.source);if(old&&JSON.stringify(old)!==JSON.stringify(valid))throw new Error('Hay una reparación original pendiente. Consulta su resultado antes de autorizar otra.');storage.setItem(`researcher:source-repair:v1:${valid.source.projectId}:${valid.source.body.operation_key}`,JSON.stringify(valid))},
+ /** Resolve only the exact continuation the owner has reviewed. */
+ clear(storage:StoragePort,packet:SourceRepairPacket){if(JSON.stringify(this.load(storage,packet.source))!==JSON.stringify(packet))throw new Error('La reparación original cambió; no se borró.');storage.removeItem(`researcher:source-repair:v1:${packet.source.projectId}:${packet.source.body.operation_key}`)}
+}
+
+/** Replay the same explicit repair authorization; a late response must contain that original authorization, independently of a newer observation fence. */
+export async function sendSourceRepair(packet:SourceRepairPacket){const valid=validateRepair(packet),source=valid.source,value=checked(await fetchApi<SourceOperation>(`/api/projects/${source.projectId}/source-operations/${encodeURIComponent(source.body.operation_key)}/repair`,{method:'POST',body:JSON.stringify(valid.body)}),source);if(!value.repair_authorizations?.some(item=>item.repair_key===valid.body.repair_key&&item.operation_id===valid.body.operation_id&&item.fence===valid.body.fence))throw new Error('La respuesta no contiene la autorización original de reparación.');return value}

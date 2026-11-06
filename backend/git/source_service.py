@@ -5,7 +5,7 @@ import json
 from contextlib import contextmanager
 from dataclasses import dataclass
 
-from backend.git.source_executor import execute_source, reconcile_source
+from backend.git.source_executor import execute_source, reconcile_source, repair_source
 from backend.git.source_operations import SourceLease, SourceOperations, SourceRequest
 from backend.git.source_remote import SourceHTTPControl, execute_remote_source
 from backend.runtime.broker_stdio import AsyncPeerBroker
@@ -77,10 +77,12 @@ class SourceService:
         worker = self._workers.get((project,key))
         closure = row.get('closure') or {}
         value.update(project_id=project, request={'remote_server':None,**row['request']}, issue=row.get('issue'), worker_active=bool(worker and not worker.done()), receipt=row.get('receipt'),
-                     local_closure='confirmed' if closure.get('domain_removed') or (row.get('http_client') or {}).get('state')=='closed' or (row['status']=='stopped' and row['owner'] is None) else 'unconfirmed',
+                     local_closure='confirmed' if closure.get('domain_removed') or closure.get('no_domain_opened') or (row.get('http_client') or {}).get('state')=='closed' or (row['status']=='stopped' and row['owner'] is None) else 'unconfirmed',
                      message='Estado guardado. Una observación Git corresponde a su momento; no comprueba el estado actual. Una carpeta parcial se conserva para revisión.')
         if row['request']['mode'] == 'create_remote':
             value['message'] = 'Crear un remoto vacío es una operación separada. El cierre del cliente local no detiene necesariamente al servidor. Observar sólo consulta la creación original; no vuelve a enviarla. No se creó una carpeta local ni se publicó código.'
+        value['repair'] = row.get('repair')
+        value['repair_authorizations'] = list(row.get('repair_commands', {}).values())
         return value
 
     async def submit(self, project, key, request):
@@ -117,7 +119,27 @@ class SourceService:
                 self._workers[(project,key)] = asyncio.create_task(self._run(project,key,observe=True), name='researcher-source-observe-'+row['operation_id'])
             return await _settled(self.view, project, key)
 
-    async def _run(self, project, key, *, observe=False):
+    async def repair(self, project, key, *, repair_key, operation_id, fence):
+        """Persist one explicit repair of the observed closed local owner, then schedule its original fixed continuation once; replay cannot restart an unknown repair."""
+        async with self._lock:
+            self.parent._accepting()
+            if self._closing or self.parent._source_project_stops.get(project) or self.parent._legacy_controller_active(project):
+                raise RunConflict('El proyecto no admite reparaciones mientras otro dueño conserve actividad.')
+            live = self._workers.get((project,key))
+            if live and not live.done():
+                row = await _settled(self.records.read, project, key)
+                if repair_key not in row.get('repair_commands', {}):
+                    raise RunConflict('El trabajador anterior sigue activo; consulta su cierre antes de reparar.')
+                await _settled(self.records.prepare_repair, project, key, repair_key=repair_key, operation_id=operation_id, fence=fence)
+                return await _settled(self.view, project, key)
+            if sum(not task.done() for task in self._workers.values()) >= 2:
+                raise RunConflict('Espera al cierre de otra preparación antes de reparar.')
+            fresh = await _settled(self.records.prepare_repair, project, key, repair_key=repair_key, operation_id=operation_id, fence=fence)
+            if fresh:
+                self._workers[(project,key)] = asyncio.create_task(self._run(project,key,repair_key=repair_key), name='researcher-source-repair-'+repair_key)
+            return await _settled(self.view,project,key)
+
+    async def _run(self, project, key, *, observe=False, repair_key=None):
         """Keep executor teardown in its owning task and retain failures as saved uncertainty; raw transport errors and secrets never enter the owner response."""
         try:
             def on_owner(executor):
@@ -125,7 +147,11 @@ class SourceService:
                 self._capture_owner(project, key, executor)
 
             row = await _settled(self.records.read, project, key)
-            if row['request']['mode'] == 'create_remote':
+            if repair_key is not None:
+                transport = self.parent.runtime.remote_transport
+                network = transport.network if row['request']['use_configured_auth'] and transport else self.parent.runtime.network
+                await repair_source(self.records, project, key, repair_key=repair_key, source_network=network, source_transport=transport, on_owner=on_owner, **self._configuration())
+            elif row['request']['mode'] == 'create_remote':
                 await execute_remote_source(self.records, project, key, self.parent.runtime.remote_transport, observe=observe, on_owner=on_owner)
             elif observe:
                 await reconcile_source(self.records, project, key, on_owner=on_owner, **self._configuration())

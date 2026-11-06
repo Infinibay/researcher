@@ -73,3 +73,9 @@ HTTP original y recuperación readonly de su respuesta perdida; cinco capturas
 adicionales en [el recorrido](audits/2026-11-06-remote-source/report.md). Conserva
 la selección visual y las cuentas24/36,8/12,8pilotos,0aceptadas. Reparación local,
 historia entre navegadores y evaluación integral siguen pendientes.
+
+
+La preparación añade [continuación explícita de Git interrumpido](audits/2026-11-06-source-repair/report.md)
+con5capturas adicionales de escritorio/móvil. Conserva la dirección seleccionada
+y las cuentas24/36desktop,8/12mobile,8pilotos,0aceptadas. Historial entre navegadores,
+resolución de reservas/adopción, formatos/límites y aceptación integral siguen abiertos.

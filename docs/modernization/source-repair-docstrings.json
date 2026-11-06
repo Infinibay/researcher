@@ -1,0 +1,337 @@
+{
+  "base_commit": "a548554",
+  "changed_or_new_definitions_documented": 47,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/routes/source_operations.py",
+      "symbol": "RepairSource",
+      "line": 40,
+      "docstring": "Separate explicit continuation of one observed closed local attempt; no arbitrary commands or invented namespace grants are accepted.",
+      "file_sha256": "c5cfe2bef81c10584aa240ebe06d4c80320dd17466719d7bd1327b03a82348d9"
+    },
+    {
+      "path": "backend/api/routes/source_operations.py",
+      "symbol": "repair_source",
+      "line": 90,
+      "docstring": "Authorize fixed missing local stages after original closure, preserving existing files and separately recording the repair identity before scheduling.",
+      "file_sha256": "c5cfe2bef81c10584aa240ebe06d4c80320dd17466719d7bd1327b03a82348d9"
+    },
+    {
+      "path": "backend/git/source_capsule.py",
+      "symbol": "SourceGitLaunch",
+      "line": 33,
+      "docstring": "One exact original source request and fixed Git stage; neither callers nor a model can supply push/config/reset/cleanup arguments.",
+      "file_sha256": "f531a5e755d9fe548ec43648e32600680cf0669dd255c1b7e2eeb6581757132f"
+    },
+    {
+      "path": "backend/git/source_capsule.py",
+      "symbol": "SourceGitLaunch.__post_init__",
+      "line": 44,
+      "docstring": "Match the complete argv/cwd/allocation profile before any shared broker reservation or command gate.",
+      "file_sha256": "f531a5e755d9fe548ec43648e32600680cf0669dd255c1b7e2eeb6581757132f"
+    },
+    {
+      "path": "backend/git/source_capsule.py",
+      "symbol": "SourceGitLaunch.command",
+      "line": 58,
+      "docstring": "Describe only required original create/clone/read stages; checkout-index without force preserves unexpectedly existing files.",
+      "file_sha256": "f531a5e755d9fe548ec43648e32600680cf0669dd255c1b7e2eeb6581757132f"
+    },
+    {
+      "path": "backend/git/source_capsule.py",
+      "symbol": "SourceGitLaunch.networked",
+      "line": 81,
+      "docstring": "Networking belongs only to the explicitly requested fixed HTTPS clone; observations and checkout keep sockets disabled.",
+      "file_sha256": "f531a5e755d9fe548ec43648e32600680cf0669dd255c1b7e2eeb6581757132f"
+    },
+    {
+      "path": "backend/git/source_capsule.py",
+      "symbol": "SourceGitCapsule",
+      "line": 86,
+      "docstring": "Mount only the original readonly administrative view and private allocation; optional clone networking belongs to fixed trusted Git, not model code.",
+      "file_sha256": "f531a5e755d9fe548ec43648e32600680cf0669dd255c1b7e2eeb6581757132f"
+    },
+    {
+      "path": "backend/git/source_capsule.py",
+      "symbol": "SourceGitCapsule._program",
+      "line": 98,
+      "docstring": "Keep the configured PAT out of argv/manifests/config by reading a sealed private credential only inside the exact clone namespace.",
+      "file_sha256": "f531a5e755d9fe548ec43648e32600680cf0669dd255c1b7e2eeb6581757132f"
+    },
+    {
+      "path": "backend/git/source_executor.py",
+      "symbol": "_source_lease",
+      "line": 25,
+      "docstring": "Retain the actual committed lease when cancellation interrupts its thread handoff, closing only a scope that never entered an executor.",
+      "file_sha256": "3da73a432dc722a60e547c7a7edafe742bc7ad6376480a53a7bea8ea9ce39350"
+    },
+    {
+      "path": "backend/git/source_executor.py",
+      "symbol": "SourceGitExecutor",
+      "line": 36,
+      "docstring": "Expose semantic fixed stages while reusing original owned Git transport, complete capture and physical closure.",
+      "file_sha256": "3da73a432dc722a60e547c7a7edafe742bc7ad6376480a53a7bea8ea9ce39350"
+    },
+    {
+      "path": "backend/git/source_executor.py",
+      "symbol": "SourceGitExecutor.__init__",
+      "line": 39,
+      "docstring": "Bind actual operation/owner/views once; this object has no generic command or native run API.",
+      "file_sha256": "3da73a432dc722a60e547c7a7edafe742bc7ad6376480a53a7bea8ea9ce39350"
+    },
+    {
+      "path": "backend/git/source_executor.py",
+      "symbol": "SourceGitExecutor.stage",
+      "line": 47,
+      "docstring": "Launch at most one peer for this original stage; replay returns its receipt rather than silently reissuing an effect.",
+      "file_sha256": "3da73a432dc722a60e547c7a7edafe742bc7ad6376480a53a7bea8ea9ce39350"
+    },
+    {
+      "path": "backend/git/source_executor.py",
+      "symbol": "source_executor",
+      "line": 79,
+      "docstring": "Own one administrative domain and call trusted synchronous on_owner inside its scope before the first Git gate; retirement remains with the original broker.",
+      "file_sha256": "3da73a432dc722a60e547c7a7edafe742bc7ad6376480a53a7bea8ea9ce39350"
+    },
+    {
+      "path": "backend/git/source_executor.py",
+      "symbol": "execute_source",
+      "line": 101,
+      "docstring": "Execute an original local-create/adopt/clone intent, registering only after original domain closure; exact completed retry starts nothing.",
+      "file_sha256": "3da73a432dc722a60e547c7a7edafe742bc7ad6376480a53a7bea8ea9ce39350"
+    },
+    {
+      "path": "backend/git/source_executor.py",
+      "symbol": "reconcile_source",
+      "line": 123,
+      "docstring": "Recover original closure then observe only retained Git state in a fresh readonly domain; never repeat init/commit/clone or claim remote server termination.",
+      "file_sha256": "3da73a432dc722a60e547c7a7edafe742bc7ad6376480a53a7bea8ea9ce39350"
+    },
+    {
+      "path": "backend/git/source_executor.py",
+      "symbol": "repair_source",
+      "line": 146,
+      "docstring": "Continue a separately authorized original local setup only after exact witnessed closure, retaining files/history and issuing no clone/reset/force operation.",
+      "file_sha256": "3da73a432dc722a60e547c7a7edafe742bc7ad6376480a53a7bea8ea9ce39350"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations",
+      "line": 131,
+      "docstring": "Persist bounded original setup intents and directory ownership through the existing SQLite/project-metadata transaction.",
+      "file_sha256": "82f196aecfc63a70329064d5cd2c654df4dd92b2567bd2132db9e89794a583c9"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.begin_observation",
+      "line": 285,
+      "docstring": "Fence an already-closed original attempt and retain its history before a new strictly readonly reconciliation; never restart its writes.",
+      "file_sha256": "82f196aecfc63a70329064d5cd2c654df4dd92b2567bd2132db9e89794a583c9"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.prepare_repair",
+      "line": 327,
+      "docstring": "Persist one explicit continuation of the observed local setup before scheduling; exact replay returns history and cannot reissue an unknown repair.",
+      "file_sha256": "82f196aecfc63a70329064d5cd2c654df4dd92b2567bd2132db9e89794a583c9"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.close_unstarted",
+      "line": 344,
+      "docstring": "Record that the actual original owner never entered an execution domain; this is a drained control-flow receipt, not physical closure inferred from a missing path.",
+      "file_sha256": "82f196aecfc63a70329064d5cd2c654df4dd92b2567bd2132db9e89794a583c9"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.register",
+      "line": 392,
+      "docstring": "Register the actually observed directory only after original global domain closure, preserving any already-matching registration without rewriting metadata.",
+      "file_sha256": "82f196aecfc63a70329064d5cd2c654df4dd92b2567bd2132db9e89794a583c9"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations._clone_preparation_complete",
+      "line": 421,
+      "docstring": "Distinguish a dirty but completed clone from an interrupted checkout using the latest actual writable attempt's closed stage receipts.",
+      "file_sha256": "82f196aecfc63a70329064d5cd2c654df4dd92b2567bd2132db9e89794a583c9"
+    },
+    {
+      "path": "backend/git/source_operations.py",
+      "symbol": "SourceOperations.settle_stop",
+      "line": 471,
+      "docstring": "Record stopped only after original local closure, retaining partially written folders and uncertainty instead of asserting a remote effect was undone.",
+      "file_sha256": "82f196aecfc63a70329064d5cd2c654df4dd92b2567bd2132db9e89794a583c9"
+    },
+    {
+      "path": "backend/git/source_registry.py",
+      "symbol": "source_scope",
+      "line": 12,
+      "docstring": "Bind the complete original request, operator configuration and captured directory views across all command stages.",
+      "file_sha256": "8484f3def877d52c22183a1848dec26529b329e76bdbd4836f04f173fc81628f"
+    },
+    {
+      "path": "backend/git/source_registry.py",
+      "symbol": "SourcePeerRegistry",
+      "line": 17,
+      "docstring": "Adapt the existing host broker protocol to a real administrative operation; no repository/task/run identity is fabricated.",
+      "file_sha256": "8484f3def877d52c22183a1848dec26529b329e76bdbd4836f04f173fc81628f"
+    },
+    {
+      "path": "backend/git/source_registry.py",
+      "symbol": "SourcePeerRegistry.admission",
+      "line": 43,
+      "docstring": "Recheck actual owner/root/allocation and original stage before the shared broker can reserve its global concession.",
+      "file_sha256": "8484f3def877d52c22183a1848dec26529b329e76bdbd4836f04f173fc81628f"
+    },
+    {
+      "path": "backend/git/source_registry.py",
+      "symbol": "SourcePeerRegistry.record_unused",
+      "line": 93,
+      "docstring": "Witness an actual removed original domain that never reserved a grant, after its real broker withdrew and constructors drained; no task or grant is invented.",
+      "file_sha256": "8484f3def877d52c22183a1848dec26529b329e76bdbd4836f04f173fc81628f"
+    },
+    {
+      "path": "backend/git/source_registry.py",
+      "symbol": "SourcePeerRegistry.project_unused",
+      "line": 122,
+      "docstring": "Project only the sealed original never-reserved/removed-domain witness; missing paths, a caller boolean or grant absence alone cannot prove closure.",
+      "file_sha256": "8484f3def877d52c22183a1848dec26529b329e76bdbd4836f04f173fc81628f"
+    },
+    {
+      "path": "backend/git/source_repair_program.py",
+      "symbol": "RepairConflict",
+      "line": 17,
+      "docstring": "A retained source cannot be continued without changing existing work or guessing its Git metadata.",
+      "file_sha256": "0f1814caa6176b2f4dd9d18ea6ab67c5cea6baf8cc3656e6a3326f72779b9da0"
+    },
+    {
+      "path": "backend/git/source_repair_program.py",
+      "symbol": "repair",
+      "line": 21,
+      "docstring": "Finish only missing source preparation under the original private allocation; never reset, force checkout, delete files or publish remotely.",
+      "file_sha256": "0f1814caa6176b2f4dd9d18ea6ab67c5cea6baf8cc3656e6a3326f72779b9da0"
+    },
+    {
+      "path": "backend/git/source_repair_program.py",
+      "symbol": "repair.git",
+      "line": 31,
+      "docstring": "Run only driver-selected Git arguments with fixed owner policy, finite deadlines and complete bounded output inside the owned domain.",
+      "file_sha256": "0f1814caa6176b2f4dd9d18ea6ab67c5cea6baf8cc3656e6a3326f72779b9da0"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService",
+      "line": 33,
+      "docstring": "Own actual administrative worker handles without inventing native turns or replaying interrupted writes after restart.",
+      "file_sha256": "4d338a9e3a48ac635b277cce2d507bcb54bd082d49c34e4507ec1d6589584309"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.view",
+      "line": 73,
+      "docstring": "Expose saved phase and actual local worker observation; a stopped local worker never proves remote rollback or fresh Git health.",
+      "file_sha256": "4d338a9e3a48ac635b277cce2d507bcb54bd082d49c34e4507ec1d6589584309"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService.repair",
+      "line": 122,
+      "docstring": "Persist one explicit repair of the observed closed local owner, then schedule its original fixed continuation once; replay cannot restart an unknown repair.",
+      "file_sha256": "4d338a9e3a48ac635b277cce2d507bcb54bd082d49c34e4507ec1d6589584309"
+    },
+    {
+      "path": "backend/git/source_service.py",
+      "symbol": "SourceService._run",
+      "line": 142,
+      "docstring": "Keep executor teardown in its owning task and retain failures as saved uncertainty; raw transport errors and secrets never enter the owner response.",
+      "file_sha256": "4d338a9e3a48ac635b277cce2d507bcb54bd082d49c34e4507ec1d6589584309"
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker",
+      "line": 129,
+      "docstring": "One externally supplied, non-reused domain for one original attempt.\n\n``run_peer`` owns reserve\u2192spawn\u2192global publication\u2192concrete local bind\u2192G.\nCallers receive a transport only after G and can only recover a receipt on\nretry. ``revoke`` withdraws G before waiting for SQL/constructors. Global\nrecovery needs only the journal/domain, never the original project DB.\nComplete actor-origin and endpoint authentication remain deployment work.",
+      "file_sha256": "1a1e605a7cd70313c624014a182cbc1d2d0f64f0aa79777befbb7f21033ffd3c"
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker._run",
+      "line": 474,
+      "docstring": "Witness launch intent and manifests before releasing the original gate.",
+      "file_sha256": "1a1e605a7cd70313c624014a182cbc1d2d0f64f0aa79777befbb7f21033ffd3c"
+    },
+    {
+      "path": "backend/tests/git/test_source_repair_program.py",
+      "symbol": "test_fixed_initial_repair_refuses_to_overwrite_existing_owner_state",
+      "line": 15,
+      "docstring": "The actual driver must fail before publishing an initial ref when staged work, another origin or a metadata redirect requires owner review.",
+      "file_sha256": "2174eb162e3ffcf05a9ed80222e81cf635ee5fef3191c2498e658bd918f4d272"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_repair.py",
+      "symbol": "app_for_sources",
+      "line": 12,
+      "docstring": "Construct the real configured owner app for isolated source operations, without model or tool inference.",
+      "file_sha256": "5c2406ec9f043e8510575c9e7e542fa86e8ea3cca98e7fef63897d7bee39d1d2"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_repair.py",
+      "symbol": "test_explicit_repair_finishes_initial_git_and_preserves_user_files",
+      "line": 25,
+      "docstring": "Repair completes an unborn source after real Stop, including an unused original domain, without overwriting an added file or fabricating task authority.",
+      "file_sha256": "5c2406ec9f043e8510575c9e7e542fa86e8ea3cca98e7fef63897d7bee39d1d2"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_repair.py",
+      "symbol": "test_explicit_repair_finishes_initial_git_and_preserves_user_files.interrupt",
+      "line": 33,
+      "docstring": "Hold the real original owner before its first command or initial commit; repair uses a separately authorized fixed stage.",
+      "file_sha256": "5c2406ec9f043e8510575c9e7e542fa86e8ea3cca98e7fef63897d7bee39d1d2"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_repair.py",
+      "symbol": "test_clone_repair_keeps_changed_existing_file_and_restores_only_missing_checkout",
+      "line": 77,
+      "docstring": "A closed original clone can hydrate missing indexed files while preserving modified existing content, index, origin and original full commit.",
+      "file_sha256": "5c2406ec9f043e8510575c9e7e542fa86e8ea3cca98e7fef63897d7bee39d1d2"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_repair.py",
+      "symbol": "test_clone_repair_keeps_changed_existing_file_and_restores_only_missing_checkout.before_checkout",
+      "line": 91,
+      "docstring": "Pause the actual clone after fetch/index preparation but before any checkout writes.",
+      "file_sha256": "5c2406ec9f043e8510575c9e7e542fa86e8ea3cca98e7fef63897d7bee39d1d2"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_repair.py",
+      "symbol": "test_early_cancelled_source_handoff_can_explicitly_continue_without_claiming_a_missing_domain",
+      "line": 117,
+      "docstring": "A real SQL owner/allocation result lost to cancellation is drained and recorded as never entering a domain, then a separate repair can safely allocate or reuse it.",
+      "file_sha256": "5c2406ec9f043e8510575c9e7e542fa86e8ea3cca98e7fef63897d7bee39d1d2"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_repair.py",
+      "symbol": "test_early_cancelled_source_handoff_can_explicitly_continue_without_claiming_a_missing_domain.hold",
+      "line": 123,
+      "docstring": "Hold the actual committed original handoff, preserving its identity instead of replacing its SQL or filesystem work.",
+      "file_sha256": "5c2406ec9f043e8510575c9e7e542fa86e8ea3cca98e7fef63897d7bee39d1d2"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_repair.py",
+      "symbol": "test_explicit_repair_can_start_a_source_stopped_before_owner_admission",
+      "line": 149,
+      "docstring": "A planned source cancelled before any lease may explicitly continue without inventing an original owner, attempt or physical domain.",
+      "file_sha256": "5c2406ec9f043e8510575c9e7e542fa86e8ea3cca98e7fef63897d7bee39d1d2"
+    },
+    {
+      "path": "backend/tests/runtime/test_source_repair.py",
+      "symbol": "test_explicit_repair_can_start_a_source_stopped_before_owner_admission.before_worker",
+      "line": 154,
+      "docstring": "Hold only scheduling before the real worker starts; Stop cancels the real task before any administrative owner admission.",
+      "file_sha256": "5c2406ec9f043e8510575c9e7e542fa86e8ea3cca98e7fef63897d7bee39d1d2"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

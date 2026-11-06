@@ -4,11 +4,13 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- Reparación explícita de preparaciones Git interrumpidas: conserva archivos, índice/config/HEAD existentes; puede completar primera revisión o archivos faltantes. Incluye cancelación antes de dueño/dominio y testigo de dominio retirado sin concesión. Observar ya no da por listo un checkout parcial.186pruebas instaladas,117frontend y5capturas. [Contrato](../architecture/source-repair.md), [resultados](source-repair-results.json). Historia entre navegadores y aceptación integral siguen abiertas.
+
 - Creación explícita de remoto vacío: servidor, cuenta/organización y visibilidad elegidos; un único POST y recuperación readonly de respuesta perdida. Stop conserva incertidumbre remota.175pruebas instaladas,116frontend,5capturas;49definiciones Python documentadas. [Contrato](../architecture/remote-source-creation.md), [resultados](remote-source-results.json).
 
 - Stop de fuentes retira el dueño físico antes de esperar SQLite, también desde proyecto observado/general y cierre. El reintento de un recibo antiguo no retira un dueño nuevo.164pruebas instaladas y45definiciones Python documentadas; evaluación global aún pendiente. [Contrato](../architecture/source-control.md), [resultados](source-control-results.json).
 
-- Preparación de fuentes con operación administrativa propia: crear Git local, adoptar y clonar HTTPS; controles de fuente/proyecto/cierre y observación de sólo lectura después de perder el registro. La vía antigua de alta/remoto/origin/force push se rechaza. Crear remoto ya tiene una operación separada; reparar etapas incompletas sigue abierto. [Contrato](../architecture/source-operations.md), [resultados](source-setup-results.json).
+- Preparación de fuentes con operación administrativa propia: crear Git local, adoptar y clonar HTTPS; controles de fuente/proyecto/cierre y observación de sólo lectura después de perder el registro. La vía antigua de alta/remoto/origin/force push se rechaza. Crear remoto y continuar etapas incompletas tienen operaciones separadas; la aceptación integral sigue abierta. [Contrato](../architecture/source-operations.md), [resultados](source-setup-results.json).
 
 - Runtime durable por proyecto/tarea/intento/contexto, controles humanos, recuperación, preguntas y propuestas separadas de aceptación. Codex CLI por suscripción y Ken publicado ensayados; consumidores/loops antiguos y ampliación productiva pendientes.
 - Investigación nativa con adjuntos, HTTPS/DOI/arXiv/PDF, CSV/DOCX/JSON/XML, estructura/offsets/citas y recuperación semántica local fijada; hallazgos provisionales e informes draft. Búsqueda web nativa trazable y revisión documental independiente ensayadas. No equivale a validación científica representativa. [Revisión documental](../architecture/finding-reviews.md).

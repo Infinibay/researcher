@@ -9,7 +9,42 @@ Actualizado: 2026-11-06. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: crear y reconocer un remoto vacío
+## Etapa actual: continuar Git interrumpido conservando trabajo
+
+El owner puede autorizar una reparación ligada al intento observado, con clave
+propia conservada antes del POST. La continuación reutiliza la asignación privada
+original y el broker real; completa etapas faltantes sin reset, force checkout ni
+clone sobre el destino. Conserva archivos modificados, índice/config/HEAD existentes
+y distingue cambios locales de la revisión registrada. La observación readonly
+ya no registra un checkout incompleto como borrados atribuidos al usuario.
+
+Cierre temprano distingue dueño no admitido, entrega claim/allocate cancelada y
+dominio real retirado sin concesión: no fabrica un dominio o tarea para probarlos.
+Reenvíos de la autorización activa/completada no reejecutan el driver. Clones sin
+commit vuelven a observar el remoto elegido bajo una nueva autorización; no se
+promete conservar una versión anterior que nunca quedó capturada.
+
+**Verificación:**11casos principales24.658s;40regresiones68.00s previas a las últimas
+correcciones. Wheel final186PASS0FAIL0SKIP161.986s,273imports instalados/
+825miembros coincidentes/85distribuciones;1turno nativo/Ken controlados,
+0modelos reales/remotos del usuario.117frontend/build4.79s,5capturas1440/390px,
+0incidencias Axe en la región revisada,1preparación/1reparación tras perder su
+respuesta y recargar;2grants reales retirados.47definiciones Python/63módulos o
+nombres TS documentados.25avisos de estilo/estática sin sintaxis/nombres indefinidos,
+diferidosDD036. [Contrato](../architecture/source-repair.md),
+[resultados](source-repair-results.json), [paquete](source-repair-packaging.json),
+[web](../design/audits/2026-11-06-source-repair/report.md).
+
+**Siguiente principal:** abrir y recuperar la historia original desde otro navegador.
+Después, resolución de reservas/adopción y entrega de reparación guardada sin
+programación; formatos especiales/SHA256 en metadata reconstruida/submódulos/
+presupuestos, historias viejas/restore/DD030, configuración/modelos/prompts/libros,
+evaluación humana/científica,43escenarios/global/hostinstall/inversas43–54,
+cuatro rutas y aceptación de12páginas/revisión final siguen siendo el plan completo.
+No se actualiza un porcentaje global. Continúan24/36desktop,8/12mobile,8pilotos,
+0/12páginas aceptadas. No reabrir ahora pulido/lista lateral/imports.
+
+## Etapa anterior: crear y reconocer un remoto vacío
 
 El propietario elige explícitamente servidor configurado, cuenta/organización,
 nombre y visibilidad. Se confirma la identidad numérica del namespace; no hay

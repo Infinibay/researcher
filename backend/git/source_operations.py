@@ -282,24 +282,78 @@ class SourceOperations:
         self._save(conn,project,metadata)
         return SourceLease(project,key,row['attempt_id'],owner,row['fence'],row['database_identity'])
 
-    def begin_observation(self,project,key,owner):
+    def begin_observation(self,project,key,owner,*,repair_key=None):
         """Fence an already-closed original attempt and retain its history before a new strictly readonly reconciliation; never restart its writes."""
         from backend.runtime.peer_process import boot_id,start_ticks
 
         command_key(owner)
         with self.runs._transaction(write=True) as conn:
             metadata,row=self._row(conn,project,key)
-            if row['status'] not in ('running','needs_reconciliation') or not (row.get('closure') or {}).get('domain_removed') or any(p['state']!='closed' for p in row['peers'].values()):raise RunConflict('El cierre original aún no está confirmado o el alta ya terminó; no se abre otro intento.')
+            closure=row.get('closure') or {}
+            if row['status'] not in ('running','needs_reconciliation','stopped') or closure.get('attempt_id')!=row['attempt_id'] or not (closure.get('domain_removed') or closure.get('no_domain_opened')) or any(p['state']!='closed' for p in row['peers'].values()):raise RunConflict('El cierre original aún no está confirmado o el alta ya terminó; no se abre otro intento.')
             if row['database_identity']!=self._origin():raise RunConflict('El origen del alta cambió tras una copia o restauración.')
             SourceView(**row['target']['root']).verify()
-            view=row['view'];captured=view['allocation'] or {'path':view['source']['workspace'],'device':view['source']['device'],'inode':view['source']['inode']}
-            source=SourceView(captured['path'],captured['device'],captured['inode']);source.verify()
+            view=row['view'];source=None
+            if view:
+                captured=view['allocation'] or {'path':view['source']['workspace'],'device':view['source']['device'],'inode':view['source']['inode']}
+                source=SourceView(captured['path'],captured['device'],captured['inode']);source.verify()
+            elif not repair_key:
+                raise RunConflict('No se asignó una carpeta. Autoriza una continuación explícita para iniciar las etapas pendientes.')
+            repair = row.get('repair_commands', {}).get(repair_key) if repair_key else None
+            if repair_key and (repair is None or (repair['operation_id'],repair['fence'])!=(row['operation_id'],row['fence'])):
+                raise RunConflict('La autorización de reparación no corresponde al intento original observado.')
+            write_view = None
+            if repair and source is not None and row['request']['mode']!='adopt':
+                for previous in [row, *reversed(row.get('history', []))]:
+                    candidate=previous.get('view')
+                    if candidate and candidate.get('allocation'):
+                        a=candidate['allocation']
+                        if (a['path'],a['device'],a['inode'])!=(source.workspace,source.device,source.inode):
+                            raise RunConflict('La asignación original de reparación cambió.')
+                        SourceView(**candidate['source']).verify()
+                        write_view=candidate
+                        break
+                if write_view is None:raise RunConflict('Falta la asignación privada original; no se escribió sobre otra carpeta.')
             history=row.setdefault('history',[])
             if len(history)>=8:raise RunConflict('Se alcanzó el límite de observaciones conservadas; no se borró historia para reintentar.')
-            history.append({key:row.get(key) for key in ('attempt_id','fence','owner','view','peers','domain','closure','observation_only','issue')})
-            row.update(status='running',attempt_id=uuid4().hex,fence=row['fence']+1,owner={'owner_id':owner,'pid':os.getpid(),'start_ticks':start_ticks(os.getpid()),'boot_id':boot_id()},view={'source':asdict(source),'allocation':None},peers={},domain=None,closure=None,observation_only=True,issue=None,stop_requested=False)
+            history.append({key:row.get(key) for key in ('attempt_id','fence','owner','view','peers','domain','closure','observation_only','issue','repair')})
+            row.update(status='running',attempt_id=uuid4().hex,fence=row['fence']+1,owner={'owner_id':owner,'pid':os.getpid(),'start_ticks':start_ticks(os.getpid()),'boot_id':boot_id()},view={'source':asdict(source),'allocation':None} if source else None,peers={},domain=None,closure=None,observation_only=True,issue=None,stop_requested=False)
+            row['request']={'remote_server':None, **row['request']}
+            if repair:
+                row.update(repair=repair, observation_only=False, view=write_view or row['view'])
             self._save(conn,project,metadata)
             return SourceLease(project,key,row['attempt_id'],owner,row['fence'],row['database_identity'])
+
+    def prepare_repair(self,project,key,*,repair_key,operation_id,fence):
+        """Persist one explicit continuation of the observed local setup before scheduling; exact replay returns history and cannot reissue an unknown repair."""
+        command_key(repair_key)
+        intent={'repair_key':repair_key,'operation_id':operation_id,'fence':fence}
+        with self.runs._transaction(write=True) as conn:
+            metadata,row=self._row(conn,project,key)
+            commands=row.setdefault('repair_commands',{})
+            if repair_key in commands:
+                if commands[repair_key]!=intent:raise RunConflict('La clave de reparación identifica otra autorización original.')
+                return False
+            if row['request']['mode']=='create_remote' or row['status'] not in ('stopped','needs_reconciliation') or (row['operation_id'],row['fence'])!=(operation_id,fence):
+                raise RunConflict('Observa el intento local detenido antes de autorizar una reparación.')
+            if len(commands)>=8:raise RunConflict('Se alcanzó el límite de reparaciones conservadas.')
+            commands[repair_key]=intent
+            self._save(conn,project,metadata)
+            return True
+
+    def close_unstarted(self,lease):
+        """Record that the actual original owner never entered an execution domain; this is a drained control-flow receipt, not physical closure inferred from a missing path."""
+        from backend.runtime.peer_process import boot_id,start_ticks
+
+        with self.runs._transaction(write=True) as conn:
+            metadata,row=self._row(conn,lease.project_id,lease.operation_key)
+            owner=row.get('owner') or {}
+            if (row['attempt_id'],row['fence'],owner.get('owner_id'),row['database_identity'])!=(lease.attempt_id,lease.fence,lease.owner_id,self._origin()) or (owner.get('pid'),owner.get('start_ticks'),owner.get('boot_id'))!=(os.getpid(),start_ticks(os.getpid()),boot_id()):
+                raise RunConflict('El recibo previo al dominio requiere su dueño original real.')
+            if row.get('domain') is not None or row['peers']:
+                raise RunConflict('El alta ya entró en ejecución; necesita cierre físico original.')
+            row['closure']={'attempt_id':lease.attempt_id,'database_identity':lease.database_identity,'owner_id':lease.owner_id,'no_domain_opened':True}
+            self._save(conn,lease.project_id,metadata)
 
     def allocate(self,lease):
         """Capture one original directory allocation before Git; a partial unrecorded folder is retained and never erased or guessed to be ours."""
@@ -342,12 +396,14 @@ class SourceOperations:
             metadata,row=self._owned(conn,lease);closure=row.get('closure')
             if not closure or closure.get('domain_removed')is not True or closure.get('attempt_id')!=lease.attempt_id or any(p['state']!='closed' for p in row['peers'].values()):raise RunConflict('El cierre original del alta no está confirmado; no se registró una fuente activa.')
             request=SourceRequest(**row['request']);view=row['view']
+            if request.mode=='clone' and row.get('observation_only') and not observation.working_tree_clean and not self._clone_preparation_complete(row):
+                raise RunConflict('La copia puede tener un checkout incompleto. Observar no interpreta archivos faltantes como cambios del usuario; autoriza una reparación que conserve su contenido.')
             if view is None or request.path is None:raise RunConflict('La operación no tiene una fuente local observada.')
             actual=SourceView.capture(request.path)
             captured=view['allocation'] or {'path':view['source']['workspace'],'device':view['source']['device'],'inode':view['source']['inode']}
             if asdict(actual)!={'workspace':captured['path'],'device':captured['device'],'inode':captured['inode']}:raise RunConflict('La carpeta observada fue reemplazada; no se registró otra.')
             self.workspaces._directory(conn,lease.project_id,request.path)
-            if request.mode=='create' and (observation.branch!=request.branch or observation.origin is not None or not observation.working_tree_clean):raise RunConflict('La fuente nueva cambió antes del registro; conserva su contenido para revisión.')
+            if request.mode=='create' and (observation.branch!=request.branch or observation.origin is not None or (not observation.working_tree_clean and not row.get('repair'))):raise RunConflict('La fuente nueva cambió antes del registro; conserva su contenido para revisión.')
             if request.mode=='clone' and (observation.origin!=request.remote_url or (request.branch is not None and observation.branch!=request.branch)):raise RunConflict('La copia no corresponde al origen/rama originales; no se eligió otra fuente.')
             existing=conn.execute('SELECT * FROM repositories WHERE project_id=? AND (name=? OR local_path=?)',(lease.project_id,request.name,request.path)).fetchone()
             if existing is not None:
@@ -357,8 +413,20 @@ class SourceOperations:
                 repository=conn.execute("INSERT INTO repositories(project_id,name,local_path,default_branch,remote_url,status)VALUES(?,?,?,?,?,'active')",(lease.project_id,request.name,request.path,observation.branch,observation.origin)).lastrowid
             self.workspaces._bind(conn,lease.project_id,repository)
             receipt={'project_id':lease.project_id,'operation_key':lease.operation_key,'operation_id':row['operation_id'],'status':'completed','repository_id':repository,'request':row['request'],'observation':asdict(observation),'observed_at':self.runs.clock(),'domain_removed':True}
+            if row.get('repair'):receipt['repair_key']=row['repair']['repair_key']
             row.update(status='completed',repository_id=repository,observation=asdict(observation),receipt=receipt);self._save(conn,lease.project_id,metadata)
             return receipt
+
+    @staticmethod
+    def _clone_preparation_complete(row):
+        """Distinguish a dirty but completed clone from an interrupted checkout using the latest actual writable attempt's closed stage receipts."""
+        for attempt in [row,*reversed(row.get('history',[]))]:
+            if attempt.get('observation_only'):continue
+            closure=attempt.get('closure') or {}
+            if closure.get('attempt_id')!=attempt['attempt_id'] or not closure.get('domain_removed'):return False
+            stages={peer['stage'] for peer in attempt.get('peers',{}).values() if peer['state']=='closed' and peer.get('exit_code')==0}
+            return 'repair' in stages if attempt.get('repair') else all(stage in stages for stage in ('clone','read_index','checkout'))
+        return False
 
     def uncertain(self,lease):
         """Retain an interrupted/failed operation and its original directories/peers; absence of a reply does not authorize another Git write."""
@@ -415,7 +483,10 @@ class SourceOperations:
                 self._save(conn, project, metadata)
                 return row
             unused = row['owner'] is None and row['view'] is None and not row['peers'] and not row.get('domain')
-            closed = closure.get('attempt_id') == row['attempt_id'] and closure.get('domain_removed') is True and all(p['state'] == 'closed' for p in row['peers'].values())
+            if unused and row['request']['mode']!='create_remote':
+                closure={'attempt_id':row['attempt_id'],'database_identity':row['database_identity'],'no_domain_opened':True,'never_claimed':True}
+                row['closure']=closure
+            closed = closure.get('attempt_id') == row['attempt_id'] and (closure.get('domain_removed') is True or closure.get('no_domain_opened') is True) and all(p['state'] == 'closed' for p in row['peers'].values())
             row['status'] = 'stopped' if unused or closed else 'needs_reconciliation'
             self._save(conn, project, metadata)
             return row
