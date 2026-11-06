@@ -63,8 +63,9 @@ por renderizado y compilación; eso no es aceptación visual/humana integral.
 [Resultados](../modernization/agent-messages-results.json) y
 [paquete instalado](../modernization/agent-messages-packaging.json).
 
-**Siguiente dentro de comunicación:** terminar el mapa y retirar los wrappers
-antiguos de envío/lectura, preguntas a leads y preguntas/respuestas humanas cuyos
-recorridos nativos ya existen. Este avance no declara esa familia retirada.
+**Actualización posterior:** se retiraron las seis herramientas antiguas y los
+registros de preguntas, después de añadir las dos lecturas nativas de avisos.
+[Mapa, verificación y límites](native-communication-retirement.md).
+Los servicios/lectores históricos y rutas internas todavía necesitan su corte.
 Siguen abiertos los escenarios amplios, calidad con modelos, comprensión humana,
 historial completo y restore real. Los detalles de estilo esperan al final.

@@ -1,0 +1,22 @@
+{
+  "changed_or_new_definitions": [
+    "backend/api/routes/agent_messages.py::notices",
+    "backend/api/routes/agent_messages.py::notice_read",
+    "backend/communication/agent_messages.py::AgentMessages",
+    "backend/communication/agent_messages.py::AgentMessages._notice_metadata",
+    "backend/communication/agent_messages.py::AgentMessages.notices",
+    "backend/communication/agent_messages.py::AgentMessages.notice",
+    "backend/communication/listeners.py::AgentMessageListener",
+    "backend/communication/listeners.py::AgentMessageListener.check",
+    "backend/runtime/business_definitions.py::ResearchTools",
+    "backend/runtime/business_definitions.py::ResearchTools.researcher_notices",
+    "backend/runtime/business_definitions.py::ResearchTools.researcher_notice_read",
+    "backend/tests/runtime/test_agent_messages.py::test_peer_message_is_durable_once_without_dispatch_or_approval",
+    "backend/tests/runtime/test_agent_messages.py::test_peer_conversation_crosses_real_mcp_http_and_native_grants",
+    "backend/tests/runtime/test_agent_notices.py::seed_notices",
+    "backend/tests/runtime/test_agent_notices.py::test_notices_keep_project_global_and_expiry_boundaries_without_authority",
+    "backend/tests/runtime/test_native_adapter_retirement.py::test_replaced_framework_adapters_are_unavailable"
+  ],
+  "missing": [],
+  "scope": "Qualified AST comparison against ad86106, changed/new definitions and module docstrings only. English documentation for Ken."
+}

@@ -70,10 +70,6 @@ class AgentMessageListener(BaseEventListener):
             else:
                 target_type, target_id = "broadcast", None
 
-            # Check if this message is a reply to a pending ask_team_lead / ask_project_lead
-            from backend.communication.response_event_registry import response_event_registry
-            is_question = response_event_registry.is_registered(msg.get("thread_id", ""))
-
             self.bus.emit(
                 FlowEvent(
                     event_type="agent_message_received",
@@ -87,7 +83,8 @@ class AgentMessageListener(BaseEventListener):
                         "message_id": msg["id"],
                         "thread_id": msg.get("thread_id"),
                         "content": msg.get("message", ""),
-                        "is_question": is_question,
+                        # Blocking legacy question waiters have been retired.
+                        "is_question": False,
                     },
                 )
             )

@@ -115,9 +115,9 @@
       "conflicts": []
     },
     "backend/flows/helpers/messaging.py::build_enriched_message.description@146": {
-      "dependencies_sha256": "13b7eb5828aebe24c213de0ce2619304e6d9661596565ec657b39ee02d9fbae6",
+      "dependencies_sha256": "03dbf9ad90e6a6ea08bdc275fb8405a46aaaf27491e5080bd1ccae17790484a3",
       "decision": "pending_legacy_removal",
-      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools.",
+      "rationale": "Reviewed as retained old execution/summary/message formatting, not current native policy. Legacy completion/provider entry points refuse inference. Native runtime owns its loop and durable input; remove remaining old consumers in the engine block rather than adapting pseudotools. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/flows/helpers/messaging.py",
         "backend/engine/llm_client.py",
@@ -2673,9 +2673,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::INSTRUCTIONS": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2689,9 +2689,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_review_subject.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2705,9 +2705,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_review_read.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2721,9 +2721,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_review_decide.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2737,9 +2737,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_ask_user.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2753,9 +2753,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_reference_list.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2769,9 +2769,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_reference.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2785,9 +2785,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_web.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Reviewed against PublicWebFetcher, html_text and owned DocumentParser: HTML is canonical Markdown retaining links/tables; snapshots define exact quotes, robots/rate/deadline are host enforced, PDF bounds and no scientific certification retained. No new authority or hidden provider. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Reviewed against PublicWebFetcher, html_text and owned DocumentParser: HTML is canonical Markdown retaining links/tables; snapshots define exact quotes, robots/rate/deadline are host enforced, PDF bounds and no scientific certification retained. No new authority or hidden provider. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/research/web_fetcher.py",
@@ -2801,9 +2801,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_paper.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2817,9 +2817,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_source_list.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2833,9 +2833,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_source_read.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2849,9 +2849,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_source_structure.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2865,9 +2865,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_source_search.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2881,9 +2881,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_source_query.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2897,9 +2897,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_command.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2913,9 +2913,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_finding_record.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2929,9 +2929,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_finding_list.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2945,9 +2945,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_finding_summary.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2961,9 +2961,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_finding_query.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2977,9 +2977,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_finding_read.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -2993,9 +2993,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_report_write.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -3009,9 +3009,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_investigation_summary.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -3025,9 +3025,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_result_propose.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -3041,9 +3041,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_report_read.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -3057,9 +3057,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_wiki_list.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -3073,9 +3073,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_wiki_read.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -3089,9 +3089,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_wiki_write.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -3105,9 +3105,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_wiki.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -3121,9 +3121,9 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_wiki_collection.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -3300,482 +3300,6 @@
         "evals/prompts/cases.json"
       ],
       "conflicts": []
-    },
-    "backend/tools/communication/ask_project_lead.py::AskProjectLeadTool.description": {
-      "dependencies_sha256": "566cd7b41daa2ac67efa0c64982a7291fac1649e7c6a9b35370412429256e6bc",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/ask_project_lead.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/ask_project_lead.py::AskProjectLeadInput.description@17": {
-      "dependencies_sha256": "566cd7b41daa2ac67efa0c64982a7291fac1649e7c6a9b35370412429256e6bc",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/ask_project_lead.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/ask_project_lead.py::AskProjectLeadInput.description@20": {
-      "dependencies_sha256": "566cd7b41daa2ac67efa0c64982a7291fac1649e7c6a9b35370412429256e6bc",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/ask_project_lead.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/ask_project_lead.py::AskProjectLeadInput.description@23": {
-      "dependencies_sha256": "566cd7b41daa2ac67efa0c64982a7291fac1649e7c6a9b35370412429256e6bc",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/ask_project_lead.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/ask_project_lead.py::AskProjectLeadInput.description@27": {
-      "dependencies_sha256": "566cd7b41daa2ac67efa0c64982a7291fac1649e7c6a9b35370412429256e6bc",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/ask_project_lead.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/ask_team_lead.py::AskTeamLeadTool.description": {
-      "dependencies_sha256": "bc62e06bb0fcc9d8e1888d61f3f9d6b674728c87ae73b8e0da128ae15eb5cd5e",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/ask_team_lead.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/ask_team_lead.py::AskTeamLeadInput.description@17": {
-      "dependencies_sha256": "bc62e06bb0fcc9d8e1888d61f3f9d6b674728c87ae73b8e0da128ae15eb5cd5e",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/ask_team_lead.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/ask_team_lead.py::AskTeamLeadInput.description@20": {
-      "dependencies_sha256": "bc62e06bb0fcc9d8e1888d61f3f9d6b674728c87ae73b8e0da128ae15eb5cd5e",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/ask_team_lead.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/ask_team_lead.py::AskTeamLeadInput.description@23": {
-      "dependencies_sha256": "bc62e06bb0fcc9d8e1888d61f3f9d6b674728c87ae73b8e0da128ae15eb5cd5e",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/ask_team_lead.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/ask_team_lead.py::AskTeamLeadInput.description@27": {
-      "dependencies_sha256": "bc62e06bb0fcc9d8e1888d61f3f9d6b674728c87ae73b8e0da128ae15eb5cd5e",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/ask_team_lead.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/ask_user.py::AskUserTool.description": {
-      "dependencies_sha256": "9611419d698031caa995a4368ad51d9d12b7812895ec1c402951613bc72e95b2",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/ask_user.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/ask_user.py::AskUserInput.description@20": {
-      "dependencies_sha256": "9611419d698031caa995a4368ad51d9d12b7812895ec1c402951613bc72e95b2",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/ask_user.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/ask_user.py::AskUserInput.description@22": {
-      "dependencies_sha256": "9611419d698031caa995a4368ad51d9d12b7812895ec1c402951613bc72e95b2",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/ask_user.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/ask_user.py::AskUserInput.description@26": {
-      "dependencies_sha256": "9611419d698031caa995a4368ad51d9d12b7812895ec1c402951613bc72e95b2",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/ask_user.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/read_messages.py::ReadMessagesTool.description": {
-      "dependencies_sha256": "9f415f94564d712ae0f2a8d275b9e114ad5f6a7b345656d1e1d22e32765a112d",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/read_messages.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/read_messages.py::ReadMessagesInput.description@14": {
-      "dependencies_sha256": "9f415f94564d712ae0f2a8d275b9e114ad5f6a7b345656d1e1d22e32765a112d",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/read_messages.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/read_messages.py::ReadMessagesInput.description@17": {
-      "dependencies_sha256": "9f415f94564d712ae0f2a8d275b9e114ad5f6a7b345656d1e1d22e32765a112d",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/read_messages.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/read_messages.py::ReadMessagesInput.description@20": {
-      "dependencies_sha256": "9f415f94564d712ae0f2a8d275b9e114ad5f6a7b345656d1e1d22e32765a112d",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/read_messages.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/read_messages.py::ReadMessagesInput.description@22": {
-      "dependencies_sha256": "9f415f94564d712ae0f2a8d275b9e114ad5f6a7b345656d1e1d22e32765a112d",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/read_messages.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/reply_to_user.py::ReplyToUserTool.description": {
-      "dependencies_sha256": "8a80768d674dd12e034a5e79eac7040d1df38753a37cd95f402b03c4fe65588a",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/reply_to_user.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/reply_to_user.py::ReplyToUserInput.description@23": {
-      "dependencies_sha256": "8a80768d674dd12e034a5e79eac7040d1df38753a37cd95f402b03c4fe65588a",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/reply_to_user.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/reply_to_user.py::ReplyToUserInput.description@27": {
-      "dependencies_sha256": "8a80768d674dd12e034a5e79eac7040d1df38753a37cd95f402b03c4fe65588a",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/reply_to_user.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/send_message.py::SendMessageTool.description": {
-      "dependencies_sha256": "4a41943c7770c91523315e0e327bb81b62acc92b813947cd7dcf6cc8270d1654",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/send_message.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/send_message.py::SendMessageInput.description@17": {
-      "dependencies_sha256": "4a41943c7770c91523315e0e327bb81b62acc92b813947cd7dcf6cc8270d1654",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/send_message.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/send_message.py::SendMessageInput.description@19": {
-      "dependencies_sha256": "4a41943c7770c91523315e0e327bb81b62acc92b813947cd7dcf6cc8270d1654",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/send_message.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/send_message.py::SendMessageInput.description@22": {
-      "dependencies_sha256": "4a41943c7770c91523315e0e327bb81b62acc92b813947cd7dcf6cc8270d1654",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/send_message.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/send_message.py::SendMessageInput.description@25": {
-      "dependencies_sha256": "4a41943c7770c91523315e0e327bb81b62acc92b813947cd7dcf6cc8270d1654",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/send_message.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
-    },
-    "backend/tools/communication/send_message.py::SendMessageInput.description@28": {
-      "dependencies_sha256": "4a41943c7770c91523315e0e327bb81b62acc92b813947cd7dcf6cc8270d1654",
-      "decision": "retained_historical_schema",
-      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
-      "evidence": [
-        "backend/tools/communication/send_message.py",
-        "backend/tools/__init__.py",
-        "backend/tools/_legacy_access.py",
-        "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [
-        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
-      ]
     },
     "backend/tools/knowledge/read_finding_reviews.py::ReadFindingReviewsTool.description": {
       "dependencies_sha256": "914a59fdb71d786a974d1b2f05fc797ee918617295b42ea1f28bd694e75b4235",
@@ -5103,9 +4627,9 @@
       "conflicts": []
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_context7_search.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "reviewed_native_tool_contract",
-      "rationale": "Reviewed against the native handler, DTO, optional host credential and source store. Explicit query/library choice, external-provider quota, immutable source read/pagination, version uncertainty, untrusted provider instructions and original operation-key reuse are described. No automatic retry, provider fallback, permission escalation or scientific-quality claim. MCP/HTTP/SQLite tests exercise actual descriptions and mappings; no efficacy claim. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Reviewed against the native handler, DTO, optional host credential and source store. Explicit query/library choice, external-provider quota, immutable source read/pagination, version uncertainty, untrusted provider instructions and original operation-key reuse are described. No automatic retry, provider fallback, permission escalation or scientific-quality claim. MCP/HTTP/SQLite tests exercise actual descriptions and mappings; no efficacy claim. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/research/context7.py",
         "backend/research/service.py",
@@ -5116,9 +4640,9 @@
       "conflicts": []
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_context7_docs.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "reviewed_native_tool_contract",
-      "rationale": "Reviewed against the native handler, DTO, optional host credential and source store. Explicit query/library choice, external-provider quota, immutable source read/pagination, version uncertainty, untrusted provider instructions and original operation-key reuse are described. No automatic retry, provider fallback, permission escalation or scientific-quality claim. MCP/HTTP/SQLite tests exercise actual descriptions and mappings; no efficacy claim. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Reviewed against the native handler, DTO, optional host credential and source store. Explicit query/library choice, external-provider quota, immutable source read/pagination, version uncertainty, untrusted provider instructions and original operation-key reuse are described. No automatic retry, provider fallback, permission escalation or scientific-quality claim. MCP/HTTP/SQLite tests exercise actual descriptions and mappings; no efficacy claim. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/research/context7.py",
         "backend/research/service.py",
@@ -5130,7 +4654,7 @@
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_spider.wire_description": {
       "decision": "reviewed_native_tool_contract",
-      "rationale": "Reviewed against SpiderReader/API composition and actual MCP capture/read/citation test: local initial robots plus shared quota before billable POST; remote same-UA respect_robots is requested, not verified; provider quota and Stop/cancellation limits stay explicit. Model cannot supply credentials or choose policy bypass. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Reviewed against SpiderReader/API composition and actual MCP capture/read/citation test: local initial robots plus shared quota before billable POST; remote same-UA respect_robots is requested, not verified; provider quota and Stop/cancellation limits stay explicit. Model cannot supply credentials or choose policy bypass. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/research/web_fetcher.py",
@@ -5140,12 +4664,12 @@
         "docs/architecture/native-web-retirement.md"
       ],
       "conflicts": [],
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863"
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9"
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_task_list.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "reviewed_native_tool_contract",
-      "rationale": "Reviewed the actual wire docstring against its typed handler, scoped API, atomic store receipts and MCP/HTTP/SQLite tests. Reads retain project attribution, stable cursors and recoverable text windows. Metadata, historical approval labels and actor notes remain advisory, never verified truth, current owner intent or activation. Comments fix task/actor from the grant, cannot claim approval, and refer interactive questions to the question tool. Continuity separates observations from assumptions, requires the observed revision, and preserves the original retry receipt. Review roles receive reads only. Static semantic review does not establish model efficacy or user comprehension. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Reviewed the actual wire docstring against its typed handler, scoped API, atomic store receipts and MCP/HTTP/SQLite tests. Reads retain project attribution, stable cursors and recoverable text windows. Metadata, historical approval labels and actor notes remain advisory, never verified truth, current owner intent or activation. Comments fix task/actor from the grant, cannot claim approval, and refer interactive questions to the question tool. Continuity separates observations from assumptions, requires the observed revision, and preserves the original retry receipt. Review roles receive reads only. Static semantic review does not establish model efficacy or user comprehension. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -5156,9 +4680,9 @@
       "conflicts": []
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_task_read.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "reviewed_native_tool_contract",
-      "rationale": "Reviewed the actual wire docstring against its typed handler, scoped API, atomic store receipts and MCP/HTTP/SQLite tests. Reads retain project attribution, stable cursors and recoverable text windows. Metadata, historical approval labels and actor notes remain advisory, never verified truth, current owner intent or activation. Comments fix task/actor from the grant, cannot claim approval, and refer interactive questions to the question tool. Continuity separates observations from assumptions, requires the observed revision, and preserves the original retry receipt. Review roles receive reads only. Static semantic review does not establish model efficacy or user comprehension. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Reviewed the actual wire docstring against its typed handler, scoped API, atomic store receipts and MCP/HTTP/SQLite tests. Reads retain project attribution, stable cursors and recoverable text windows. Metadata, historical approval labels and actor notes remain advisory, never verified truth, current owner intent or activation. Comments fix task/actor from the grant, cannot claim approval, and refer interactive questions to the question tool. Continuity separates observations from assumptions, requires the observed revision, and preserves the original retry receipt. Review roles receive reads only. Static semantic review does not establish model efficacy or user comprehension. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -5169,9 +4693,9 @@
       "conflicts": []
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_task_dependencies.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "reviewed_native_tool_contract",
-      "rationale": "Reviewed the actual wire docstring against its typed handler, scoped API, atomic store receipts and MCP/HTTP/SQLite tests. Reads retain project attribution, stable cursors and recoverable text windows. Metadata, historical approval labels and actor notes remain advisory, never verified truth, current owner intent or activation. Comments fix task/actor from the grant, cannot claim approval, and refer interactive questions to the question tool. Continuity separates observations from assumptions, requires the observed revision, and preserves the original retry receipt. Review roles receive reads only. Static semantic review does not establish model efficacy or user comprehension. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Reviewed the actual wire docstring against its typed handler, scoped API, atomic store receipts and MCP/HTTP/SQLite tests. Reads retain project attribution, stable cursors and recoverable text windows. Metadata, historical approval labels and actor notes remain advisory, never verified truth, current owner intent or activation. Comments fix task/actor from the grant, cannot claim approval, and refer interactive questions to the question tool. Continuity separates observations from assumptions, requires the observed revision, and preserves the original retry receipt. Review roles receive reads only. Static semantic review does not establish model efficacy or user comprehension. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -5182,9 +4706,9 @@
       "conflicts": []
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_task_history.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "reviewed_native_tool_contract",
-      "rationale": "Reviewed the actual wire docstring against its typed handler, scoped API, atomic store receipts and MCP/HTTP/SQLite tests. Reads retain project attribution, stable cursors and recoverable text windows. Metadata, historical approval labels and actor notes remain advisory, never verified truth, current owner intent or activation. Comments fix task/actor from the grant, cannot claim approval, and refer interactive questions to the question tool. Continuity separates observations from assumptions, requires the observed revision, and preserves the original retry receipt. Review roles receive reads only. Static semantic review does not establish model efficacy or user comprehension. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Reviewed the actual wire docstring against its typed handler, scoped API, atomic store receipts and MCP/HTTP/SQLite tests. Reads retain project attribution, stable cursors and recoverable text windows. Metadata, historical approval labels and actor notes remain advisory, never verified truth, current owner intent or activation. Comments fix task/actor from the grant, cannot claim approval, and refer interactive questions to the question tool. Continuity separates observations from assumptions, requires the observed revision, and preserves the original retry receipt. Review roles receive reads only. Static semantic review does not establish model efficacy or user comprehension. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -5195,9 +4719,9 @@
       "conflicts": []
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_task_comment.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "reviewed_native_tool_contract",
-      "rationale": "Reviewed the actual wire docstring against its typed handler, scoped API, atomic store receipts and MCP/HTTP/SQLite tests. Reads retain project attribution, stable cursors and recoverable text windows. Metadata, historical approval labels and actor notes remain advisory, never verified truth, current owner intent or activation. Comments fix task/actor from the grant, cannot claim approval, and refer interactive questions to the question tool. Continuity separates observations from assumptions, requires the observed revision, and preserves the original retry receipt. Review roles receive reads only. Static semantic review does not establish model efficacy or user comprehension. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Reviewed the actual wire docstring against its typed handler, scoped API, atomic store receipts and MCP/HTTP/SQLite tests. Reads retain project attribution, stable cursors and recoverable text windows. Metadata, historical approval labels and actor notes remain advisory, never verified truth, current owner intent or activation. Comments fix task/actor from the grant, cannot claim approval, and refer interactive questions to the question tool. Continuity separates observations from assumptions, requires the observed revision, and preserves the original retry receipt. Review roles receive reads only. Static semantic review does not establish model efficacy or user comprehension. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -5208,9 +4732,9 @@
       "conflicts": []
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_continuity_read.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "reviewed_native_tool_contract",
-      "rationale": "Reviewed the actual wire docstring against its typed handler, scoped API, atomic store receipts and MCP/HTTP/SQLite tests. Reads retain project attribution, stable cursors and recoverable text windows. Metadata, historical approval labels and actor notes remain advisory, never verified truth, current owner intent or activation. Comments fix task/actor from the grant, cannot claim approval, and refer interactive questions to the question tool. Continuity separates observations from assumptions, requires the observed revision, and preserves the original retry receipt. Review roles receive reads only. Static semantic review does not establish model efficacy or user comprehension. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Reviewed the actual wire docstring against its typed handler, scoped API, atomic store receipts and MCP/HTTP/SQLite tests. Reads retain project attribution, stable cursors and recoverable text windows. Metadata, historical approval labels and actor notes remain advisory, never verified truth, current owner intent or activation. Comments fix task/actor from the grant, cannot claim approval, and refer interactive questions to the question tool. Continuity separates observations from assumptions, requires the observed revision, and preserves the original retry receipt. Review roles receive reads only. Static semantic review does not establish model efficacy or user comprehension. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -5221,9 +4745,9 @@
       "conflicts": []
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_continuity_save.wire_description": {
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863",
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9",
       "decision": "reviewed_native_tool_contract",
-      "rationale": "Reviewed the actual wire docstring against its typed handler, scoped API, atomic store receipts and MCP/HTTP/SQLite tests. Reads retain project attribution, stable cursors and recoverable text windows. Metadata, historical approval labels and actor notes remain advisory, never verified truth, current owner intent or activation. Comments fix task/actor from the grant, cannot claim approval, and refer interactive questions to the question tool. Continuity separates observations from assumptions, requires the observed revision, and preserves the original retry receipt. Review roles receive reads only. Static semantic review does not establish model efficacy or user comprehension. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement.",
+      "rationale": "Reviewed the actual wire docstring against its typed handler, scoped API, atomic store receipts and MCP/HTTP/SQLite tests. Reads retain project attribution, stable cursors and recoverable text windows. Metadata, historical approval labels and actor notes remain advisory, never verified truth, current owner intent or activation. Comments fix task/actor from the grant, cannot claim approval, and refer interactive questions to the question tool. Continuity separates observations from assumptions, requires the observed revision, and preserves the original retry receipt. Review roles receive reads only. Static semantic review does not establish model efficacy or user comprehension. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/runtime/business_definitions.py",
         "backend/runtime/business_mediation.py",
@@ -5235,58 +4759,80 @@
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_peer_recipients.wire_description": {
       "decision": "reviewed_native",
-      "rationale": "Reviewed explicit admitted-run addressing, live sender provenance, exact question identity, observed sources versus assumptions, bounded reads, durable idempotent sends, and receipt distinct from understanding/application/work authority. Human questions retain their own typed channel. No role guessing, cached answer authority, polling loop or automatic dispatch. Static review is not an evaluation of model efficacy or human comprehension.",
+      "rationale": "Reviewed explicit admitted-run addressing, live sender provenance, exact question identity, observed sources versus assumptions, bounded reads, durable idempotent sends, and receipt distinct from understanding/application/work authority. Human questions retain their own typed channel. No role guessing, cached answer authority, polling loop or automatic dispatch. Static review is not an evaluation of model efficacy or human comprehension. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/communication/agent_messages.py",
         "backend/tests/runtime/test_agent_messages.py",
         "docs/architecture/native-agent-messaging-design.md"
       ],
       "conflicts": [],
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863"
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9"
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_peer_messages.wire_description": {
       "decision": "reviewed_native",
-      "rationale": "Reviewed explicit admitted-run addressing, live sender provenance, exact question identity, observed sources versus assumptions, bounded reads, durable idempotent sends, and receipt distinct from understanding/application/work authority. Human questions retain their own typed channel. No role guessing, cached answer authority, polling loop or automatic dispatch. Static review is not an evaluation of model efficacy or human comprehension.",
+      "rationale": "Reviewed explicit admitted-run addressing, live sender provenance, exact question identity, observed sources versus assumptions, bounded reads, durable idempotent sends, and receipt distinct from understanding/application/work authority. Human questions retain their own typed channel. No role guessing, cached answer authority, polling loop or automatic dispatch. Static review is not an evaluation of model efficacy or human comprehension. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/communication/agent_messages.py",
         "backend/tests/runtime/test_agent_messages.py",
         "docs/architecture/native-agent-messaging-design.md"
       ],
       "conflicts": [],
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863"
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9"
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_peer_message_read.wire_description": {
       "decision": "reviewed_native",
-      "rationale": "Reviewed explicit admitted-run addressing, live sender provenance, exact question identity, observed sources versus assumptions, bounded reads, durable idempotent sends, and receipt distinct from understanding/application/work authority. Human questions retain their own typed channel. No role guessing, cached answer authority, polling loop or automatic dispatch. Static review is not an evaluation of model efficacy or human comprehension.",
+      "rationale": "Reviewed explicit admitted-run addressing, live sender provenance, exact question identity, observed sources versus assumptions, bounded reads, durable idempotent sends, and receipt distinct from understanding/application/work authority. Human questions retain their own typed channel. No role guessing, cached answer authority, polling loop or automatic dispatch. Static review is not an evaluation of model efficacy or human comprehension. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/communication/agent_messages.py",
         "backend/tests/runtime/test_agent_messages.py",
         "docs/architecture/native-agent-messaging-design.md"
       ],
       "conflicts": [],
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863"
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9"
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_peer_message_send.wire_description": {
       "decision": "reviewed_native",
-      "rationale": "Reviewed explicit admitted-run addressing, live sender provenance, exact question identity, observed sources versus assumptions, bounded reads, durable idempotent sends, and receipt distinct from understanding/application/work authority. Human questions retain their own typed channel. No role guessing, cached answer authority, polling loop or automatic dispatch. Static review is not an evaluation of model efficacy or human comprehension.",
+      "rationale": "Reviewed explicit admitted-run addressing, live sender provenance, exact question identity, observed sources versus assumptions, bounded reads, durable idempotent sends, and receipt distinct from understanding/application/work authority. Human questions retain their own typed channel. No role guessing, cached answer authority, polling loop or automatic dispatch. Static review is not an evaluation of model efficacy or human comprehension. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/communication/agent_messages.py",
         "backend/tests/runtime/test_agent_messages.py",
         "docs/architecture/native-agent-messaging-design.md"
       ],
       "conflicts": [],
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863"
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9"
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_peer_message_acknowledge.wire_description": {
       "decision": "reviewed_native",
-      "rationale": "Reviewed explicit admitted-run addressing, live sender provenance, exact question identity, observed sources versus assumptions, bounded reads, durable idempotent sends, and receipt distinct from understanding/application/work authority. Human questions retain their own typed channel. No role guessing, cached answer authority, polling loop or automatic dispatch. Static review is not an evaluation of model efficacy or human comprehension.",
+      "rationale": "Reviewed explicit admitted-run addressing, live sender provenance, exact question identity, observed sources versus assumptions, bounded reads, durable idempotent sends, and receipt distinct from understanding/application/work authority. Human questions retain their own typed channel. No role guessing, cached answer authority, polling loop or automatic dispatch. Static review is not an evaluation of model efficacy or human comprehension. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority.",
       "evidence": [
         "backend/communication/agent_messages.py",
         "backend/tests/runtime/test_agent_messages.py",
         "docs/architecture/native-agent-messaging-design.md"
       ],
       "conflicts": [],
-      "dependencies_sha256": "51126252c3252a86056f9f33111ea2e546b24be2e7f3f275c95b9d1a58d72863"
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9"
+    },
+    "backend/runtime/business_definitions.py::ResearchTools.researcher_notices.wire_description": {
+      "decision": "reviewed_native",
+      "rationale": "Reviewed scoped project/global notice reads, explicit expiry and recorded attribution, bounded previews/full text windows, mutable context and no inferred owner authority. Usefulness preserved from legacy ReadMessages without read acknowledgements or hidden broadcast dispatch. Static review does not prove model behavior or human understanding.",
+      "evidence": [
+        "backend/communication/agent_messages.py",
+        "backend/tests/runtime/test_agent_notices.py",
+        "docs/architecture/native-communication-retirement.md"
+      ],
+      "conflicts": [],
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9"
+    },
+    "backend/runtime/business_definitions.py::ResearchTools.researcher_notice_read.wire_description": {
+      "decision": "reviewed_native",
+      "rationale": "Reviewed scoped project/global notice reads, explicit expiry and recorded attribution, bounded previews/full text windows, mutable context and no inferred owner authority. Usefulness preserved from legacy ReadMessages without read acknowledgements or hidden broadcast dispatch. Static review does not prove model behavior or human understanding.",
+      "evidence": [
+        "backend/communication/agent_messages.py",
+        "backend/tests/runtime/test_agent_notices.py",
+        "docs/architecture/native-communication-retirement.md"
+      ],
+      "conflicts": [],
+      "dependencies_sha256": "a89b76c48581cb186d79fe4e934164741d1b0c37034754941ad9854c16bde3a9"
     }
   },
   "retired_entries": {
@@ -9948,6 +9494,510 @@
         "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
       ],
       "retirement": "Task wrappers removed after mapping to host planning/claim/acceptance and scoped native task workspace. Historical metadata only; semantic-title rejection and automatic parent completion are deliberately retired. See docs/architecture/native-task-retirement.md."
+    },
+    "backend/tools/communication/read_messages.py::ReadMessagesInput.description@17": {
+      "dependencies_sha256": "9f415f94564d712ae0f2a8d275b9e114ad5f6a7b345656d1e1d22e32765a112d",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/read_messages.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/ask_team_lead.py::AskTeamLeadInput.description@27": {
+      "dependencies_sha256": "bc62e06bb0fcc9d8e1888d61f3f9d6b674728c87ae73b8e0da128ae15eb5cd5e",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/ask_team_lead.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/ask_project_lead.py::AskProjectLeadTool.description": {
+      "dependencies_sha256": "566cd7b41daa2ac67efa0c64982a7291fac1649e7c6a9b35370412429256e6bc",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/ask_project_lead.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/ask_user.py::AskUserInput.description@26": {
+      "dependencies_sha256": "9611419d698031caa995a4368ad51d9d12b7812895ec1c402951613bc72e95b2",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/ask_user.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/ask_team_lead.py::AskTeamLeadTool.description": {
+      "dependencies_sha256": "bc62e06bb0fcc9d8e1888d61f3f9d6b674728c87ae73b8e0da128ae15eb5cd5e",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/ask_team_lead.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/ask_project_lead.py::AskProjectLeadInput.description@20": {
+      "dependencies_sha256": "566cd7b41daa2ac67efa0c64982a7291fac1649e7c6a9b35370412429256e6bc",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/ask_project_lead.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/read_messages.py::ReadMessagesInput.description@14": {
+      "dependencies_sha256": "9f415f94564d712ae0f2a8d275b9e114ad5f6a7b345656d1e1d22e32765a112d",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/read_messages.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/send_message.py::SendMessageInput.description@17": {
+      "dependencies_sha256": "4a41943c7770c91523315e0e327bb81b62acc92b813947cd7dcf6cc8270d1654",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/send_message.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/ask_user.py::AskUserTool.description": {
+      "dependencies_sha256": "9611419d698031caa995a4368ad51d9d12b7812895ec1c402951613bc72e95b2",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/ask_user.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/send_message.py::SendMessageInput.description@25": {
+      "dependencies_sha256": "4a41943c7770c91523315e0e327bb81b62acc92b813947cd7dcf6cc8270d1654",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/send_message.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/reply_to_user.py::ReplyToUserTool.description": {
+      "dependencies_sha256": "8a80768d674dd12e034a5e79eac7040d1df38753a37cd95f402b03c4fe65588a",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/reply_to_user.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/ask_team_lead.py::AskTeamLeadInput.description@17": {
+      "dependencies_sha256": "bc62e06bb0fcc9d8e1888d61f3f9d6b674728c87ae73b8e0da128ae15eb5cd5e",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/ask_team_lead.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/ask_project_lead.py::AskProjectLeadInput.description@23": {
+      "dependencies_sha256": "566cd7b41daa2ac67efa0c64982a7291fac1649e7c6a9b35370412429256e6bc",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/ask_project_lead.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/read_messages.py::ReadMessagesInput.description@20": {
+      "dependencies_sha256": "9f415f94564d712ae0f2a8d275b9e114ad5f6a7b345656d1e1d22e32765a112d",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/read_messages.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/send_message.py::SendMessageTool.description": {
+      "dependencies_sha256": "4a41943c7770c91523315e0e327bb81b62acc92b813947cd7dcf6cc8270d1654",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/send_message.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/reply_to_user.py::ReplyToUserInput.description@23": {
+      "dependencies_sha256": "8a80768d674dd12e034a5e79eac7040d1df38753a37cd95f402b03c4fe65588a",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/reply_to_user.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/read_messages.py::ReadMessagesInput.description@22": {
+      "dependencies_sha256": "9f415f94564d712ae0f2a8d275b9e114ad5f6a7b345656d1e1d22e32765a112d",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/read_messages.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/ask_user.py::AskUserInput.description@22": {
+      "dependencies_sha256": "9611419d698031caa995a4368ad51d9d12b7812895ec1c402951613bc72e95b2",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/ask_user.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/send_message.py::SendMessageInput.description@28": {
+      "dependencies_sha256": "4a41943c7770c91523315e0e327bb81b62acc92b813947cd7dcf6cc8270d1654",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/send_message.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/ask_project_lead.py::AskProjectLeadInput.description@27": {
+      "dependencies_sha256": "566cd7b41daa2ac67efa0c64982a7291fac1649e7c6a9b35370412429256e6bc",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/ask_project_lead.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/send_message.py::SendMessageInput.description@19": {
+      "dependencies_sha256": "4a41943c7770c91523315e0e327bb81b62acc92b813947cd7dcf6cc8270d1654",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/send_message.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/reply_to_user.py::ReplyToUserInput.description@27": {
+      "dependencies_sha256": "8a80768d674dd12e034a5e79eac7040d1df38753a37cd95f402b03c4fe65588a",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/reply_to_user.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/ask_team_lead.py::AskTeamLeadInput.description@20": {
+      "dependencies_sha256": "bc62e06bb0fcc9d8e1888d61f3f9d6b674728c87ae73b8e0da128ae15eb5cd5e",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/ask_team_lead.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/ask_project_lead.py::AskProjectLeadInput.description@17": {
+      "dependencies_sha256": "566cd7b41daa2ac67efa0c64982a7291fac1649e7c6a9b35370412429256e6bc",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/ask_project_lead.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/read_messages.py::ReadMessagesTool.description": {
+      "dependencies_sha256": "9f415f94564d712ae0f2a8d275b9e114ad5f6a7b345656d1e1d22e32765a112d",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/read_messages.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/ask_team_lead.py::AskTeamLeadInput.description@23": {
+      "dependencies_sha256": "bc62e06bb0fcc9d8e1888d61f3f9d6b674728c87ae73b8e0da128ae15eb5cd5e",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/ask_team_lead.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/send_message.py::SendMessageInput.description@22": {
+      "dependencies_sha256": "4a41943c7770c91523315e0e327bb81b62acc92b813947cd7dcf6cc8270d1654",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/send_message.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
+    },
+    "backend/tools/communication/ask_user.py::AskUserInput.description@20": {
+      "dependencies_sha256": "9611419d698031caa995a4368ad51d9d12b7812895ec1c402951613bc72e95b2",
+      "decision": "retained_historical_schema",
+      "rationale": "Reviewed field labels/tool descriptions as opt-in old catalogue metadata. Native tool signatures/descriptions come from ResearchTools and host-only typed catalogues, never this role catalogue. Retain historical readers; replacement/removal of implementations remains separate work.",
+      "evidence": [
+        "backend/tools/communication/ask_user.py",
+        "backend/tools/__init__.py",
+        "backend/tools/_legacy_access.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [
+        "A role name cannot authorize human contact, approval, SQL, merge, push, scope override or a paid service. Old validation/confidence labels do not certify science. These texts must not be transferred to native instructions."
+      ],
+      "retirement": "Legacy communication wrapper or question-cache source removed after native message, notice and human-question replacements. See docs/architecture/native-communication-retirement.md. Historical declaration only; no active model policy."
     }
   }
 }

@@ -16,7 +16,39 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: comunicación nativa implementada; retirada antigua pendiente
+## Etapa actual: herramientas antiguas de comunicación retiradas
+
+Se retiran seis herramientas (siete módulos) y dos registros de preguntas. Se
+conservan los recorridos nativos de mensajes, preguntas al propietario y entrega
+de resultados. Dos lecturas nativas recuperan avisos del proyecto/globales con
+procedencia, vigencia y ventanas de texto; los avisos no conceden autoridad.
+[Mapa y límites](../architecture/native-communication-retirement.md).
+
+**Comprobado:** 71 pruebas pasan en fuente y 71 instaladas. Ambas baterías
+conservan un fallo del detector antiguo de ping-pong, reproducido en el paquete
+previo `ad86106`; ese fallo sigue como trabajo principal de servicios heredados.
+Dos tests del auditor de prompts pasan. 704 archivos Python/SQL coinciden,
+236 imports proceden del entorno y hay83 distribuciones sin frameworks antiguos.
+16 definiciones nuevas/modificadas tienen docstrings;307 candidatos de prompt en
+394 archivos,288 archivados y ninguna revisión estática pendiente. Se retiran31
+tests antiguos sin contarlos como fallos reparados; el diálogo se conserva en
+el contrato nativo con recibos explícitos.
+
+**Lista vigente:**
+- Cerrado recientemente: web; contexto/comentarios/continuidad; retirada de tareas;
+  comunicación nativa y retirada de sus herramientas/registros antiguos.
+- En curso: proyecto, conocimiento y las cinco bibliotecas legacy restantes.
+- Pendiente principal: servicios/lectores/rutas internas y CLI heredados;
+  operación; migraciones/restore y datos históricos; historial completo y
+  presupuestos; evaluación real, humana, científica y global; aceptación integral
+  de las12 páginas. Siguen43 escenarios abiertos,12 pilotos y48 conceptos.
+- Al final: detalles secundarios; avisos de estilo ya registrados enDD054.
+
+El retiro de wrappers no declara retirado todo el subsistema de comunicación.
+El detector de bucles, servicios y rutas internas aún tienen consumidores. No
+se infiere un porcentaje global ni una reducción de los fallos históricos.
+
+## Etapa anterior: comunicación nativa implementada
 
 Cinco herramientas permiten descubrir destinatarios admitidos, listar y leer
 mensajes, enviar y reconocer recepción. El host determina emisor, intento y

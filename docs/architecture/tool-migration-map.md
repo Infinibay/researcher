@@ -621,3 +621,14 @@ El guard del lector antiguo evita activar trabajo a partir de estos mensajes.
 comunicación todavía existen: mapear y retirar esa familia es la tarea actual.
 Preguntas a humanos y entrega de progreso/resultados ya tienen sus recorridos
 nativos, pero su mera existencia no declara cerrada la retirada.
+
+## Herramientas antiguas de comunicación retiradas (6 de noviembre)
+
+Retirados siete módulos/seis herramientas y dos registros de preguntas; lectura
+de avisos preservada con dos herramientas nativas acotadas. Ningún aviso, rol,
+respuesta parecida o recepción implica autoridad. Sin borrado de datos.
+[Mapa completo y límites](native-communication-retirement.md).
+Servicios/lectores/rutas internas de comunicación permanecen para su corte
+principal, incluido un fallo antiguo de detección de ping-pong reproducido.
+Siguiente: proyecto/conocimiento y cinco dependencias legacy, después los demás
+bloques principales. No se declaran cerrados escenarios amplios ni aceptación global.

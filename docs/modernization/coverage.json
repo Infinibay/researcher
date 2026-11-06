@@ -3928,6 +3928,22 @@
         "Synthetic migration and automated rendering do not establish real-data restore, human comprehension or complete page acceptance.",
         "Global and model/scientific evaluation remain open."
       ]
+    },
+    "native_communication_tool_retirement": {
+      "status": "complete",
+      "scope": "Six legacy communication tools, their package and two question registries removed after native peer, notice and human-question replacements. Data unchanged; no broad scenario closes here.",
+      "evidence": [
+        "docs/architecture/native-communication-retirement.md",
+        "docs/modernization/communication-retirement-results.json",
+        "docs/modernization/communication-retirement-packaging.json",
+        "docs/modernization/communication-retirement-imports.json"
+      ],
+      "limitations": [
+        "Retained legacy LoopGuard test fails identically against the prior installed baseline.",
+        "Services/internal CLI routes and broader engine/operation cleanup remain.",
+        "31 old tests retired; dialogue behavior ported, not counted as failure fixes.",
+        "Human/model/scientific/global evaluation, data restore and page acceptance remain open."
+      ]
     }
   }
 }

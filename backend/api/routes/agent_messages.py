@@ -1,4 +1,4 @@
-"""Native peer inbox and explicit receipts under the existing live business grant boundary."""
+"""Native peer inbox, advisory notices and explicit receipts under the existing live business grant boundary."""
 
 from typing import Literal
 
@@ -22,6 +22,19 @@ def messages(ctx: Context, direction: Literal["inbox", "sent"] = "inbox", after_
              limit: int = Query(20, ge=1, le=100), unread_only: bool = False):
     """Page this admitted run's durable conversation without acknowledging previews."""
     return AgentMessages(ctx.store).list(ctx.scope, direction=direction, after_id=after_id, limit=limit, unread_only=unread_only)
+
+
+@router.get("/notices")
+def notices(ctx: Context, after_id: int = Query(0, ge=0), limit: int = Query(20, ge=1, le=100), active_only: bool = True):
+    """List project and explicitly global notices under the current native sender's read permission."""
+    return AgentMessages(ctx.store).notices(ctx.scope, after_id=after_id, limit=limit, active_only=active_only)
+
+
+@router.get("/notices/{notice_id}")
+def notice_read(notice_id: int, ctx: Context, field: Literal["title", "content"] = "content",
+                offset: int = Query(0, ge=0), max_chars: int = Query(12000, ge=1, le=16000)):
+    """Recover notice text without making historical labels, expiry or prose grant execution authority."""
+    return AgentMessages(ctx.store).notice(ctx.scope, notice_id, field=field, offset=offset, max_chars=max_chars)
 
 
 @router.get("/{message_id}")

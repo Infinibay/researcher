@@ -23,7 +23,7 @@ def peers(c):
 
 
 def test_peer_message_is_durable_once_without_dispatch_or_approval(coordination):
-    """Retry one advisory message and keep sender, recipient and question identity without changing work state."""
+    """Retry and complete an explicitly acknowledged roundtrip without changing work state or equating reads with receipt."""
     messages, sender, recipient = peers(coordination)
     packet = {"recipient_run_id": recipient[0].run_id, "intent": "question",
               "message": "Does the source define this unit?", "observations": ["The label says kg."],
@@ -35,6 +35,15 @@ def test_peer_message_is_durable_once_without_dispatch_or_approval(coordination)
     assert coordination.store.get(101, recipient[0].run_id).status == "running"
     inbox = messages.list(recipient[2])
     assert [row["message_id"] for row in inbox["items"]] == [saved["message_id"]]
+    messages.acknowledge(recipient[2], "question-received", saved["message_id"], saved["body_sha256"])
+    answer = messages.send(recipient[2], "answer-one", recipient_run_id=sender[0].run_id,
+        intent="answer", message="The label is kg; its interpretation still needs checking.", in_reply_to=saved["message_id"])
+    assert answer["thread_id"] == saved["thread_id"]
+    assert messages.read(sender[2], answer["message_id"])["parent_message_id"] == saved["message_id"]
+    messages.acknowledge(sender[2], "answer-received", answer["message_id"], answer["body_sha256"])
+    assert messages.list(sender[2], unread_only=True)["items"] == []
+    assert messages.list(recipient[2], unread_only=True)["items"] == []
+    assert coordination.store.get(101, recipient[0].run_id).status == "running"
 
 
 def packet(recipient, **changes):
@@ -262,7 +271,7 @@ def test_unbound_or_revoked_sender_cannot_create_peer_delivery(coordination):
 
 
 async def test_peer_conversation_crosses_real_mcp_http_and_native_grants(coordination):
-    """Exercise all five shared tools against actual API/storage with two live-grant identities and no model."""
+    """Exercise shared peer/notice tools against actual API/storage with two live-grant identities and no model."""
     import time
 
     import anyio
@@ -276,6 +285,9 @@ async def test_peer_conversation_crosses_real_mcp_http_and_native_grants(coordin
 
     coordination.now[0] = time.time()
     messages, sender, recipient = peers(coordination)
+    from backend.tests.runtime.test_agent_notices import seed_notices
+
+    seed_notices(coordination)
     app = create_app()
     for actor in (sender, recipient):
         app.state.live_grants.activate(actor[2].grant_id)
@@ -295,6 +307,11 @@ async def test_peer_conversation_crosses_real_mcp_http_and_native_grants(coordin
 
                     targets = await call("researcher_peer_recipients")
                     assert targets["items"][0]["run_id"] == recipient[0].run_id
+                    notices = await call("researcher_notices")
+                    assert [item["id"] for item in notices["items"]] == [91,92,96]
+                    notice = await call("researcher_notice_read", notice_id=91, offset=1800)
+                    assert notice["content"] == ". Do not infer permission to publish."
+                    assert notice["authorizes_work"] is False
                     saved = await call("researcher_peer_message_send", operation_key="wire-note", **packet(recipient))
                     read = await call("researcher_peer_message_read", message_id=saved["message_id"])
                     assert read["content"] == "Observed a bounded reader."

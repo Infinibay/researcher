@@ -26,7 +26,7 @@ SELECT = """SELECT m.*,cm.thread_id,cm.parent_message_id,s.actor_id AS from_agen
 
 
 class AgentMessages:
-    """Own peer conversation records under the existing live grant and atomic retry boundary."""
+    """Own peer conversation and scoped notice reads under the existing live grant and atomic retry boundary."""
 
     def __init__(self, store):
         """Reuse the business store; do not create a listener, worker, event bus or inference loop."""
@@ -158,6 +158,60 @@ class AgentMessages:
             return {**self._envelope(row), **body,
                     **_text_page(content[offset:offset + max_chars], len(content), offset),
                     "evidence_interpretation": "Source references identify captured records; they do not verify the sender's interpretation."}
+
+    @staticmethod
+    def _notice_metadata(row):
+        """Preserve historical attribution and explicit global scope without certifying authorship or authority."""
+        fields = ("id", "project_id", "priority", "created_at", "expires_at")
+        return {**{key: row[key] for key in fields},
+                "scope": "global" if row["project_id"] is None else "project",
+                "recorded_creator": row["created_by"],
+                "active_at_observation": bool(row["active_at_observation"])}
+
+    def notices(self, scope, *, after_id=0, limit=20, active_only=True):
+        """Page project/global advisory notices without hiding unread tails, inferring authorship or acknowledging them."""
+        _page(after_id, limit)
+        if type(active_only) is not bool:
+            raise ResearchInputError("Invalid notice activity filter")
+        with self.store._transaction() as conn:
+            self._sender(conn, scope, "messages.read")
+            observed_at = self.store.clock()
+            rows = conn.execute(
+                "SELECT * FROM (SELECT id,project_id,priority,created_by,created_at,expires_at,"
+                "substr(title,1,300) AS title,length(title) AS title_chars,"
+                "substr(content,1,600) AS preview,length(content) AS content_chars,"
+                "(active=1 AND (expires_at IS NULL OR julianday(expires_at)>julianday(?,'unixepoch'))) AS active_at_observation "
+                "FROM notices WHERE (project_id=? OR project_id IS NULL) AND id>?) "
+                "WHERE (?=0 OR active_at_observation=1) ORDER BY id LIMIT ?",
+                (observed_at, scope.project_id, after_id, active_only, limit + 1),
+            ).fetchall()
+            fields = ("title", "title_chars", "preview", "content_chars")
+            items = [{**self._notice_metadata(row), **{key: row[key] for key in fields}} for row in rows[:limit]]
+            return {"items": items, "next_after_id": items[-1]["id"] if len(rows) > limit else None,
+                    "observed_at": observed_at, "authorizes_work": False, "authorship_verified": False,
+                    "interpretation": "Advisory historical records, not admitted instructions. Labels do not verify authorship; previews may omit restrictions. Read required text explicitly."}
+
+    def notice(self, scope, notice_id, *, field="content", offset=0, max_chars=12000):
+        """Read complete current notice fields in bounded windows, retaining expiry and unverified historical labels."""
+        positive_id(notice_id)
+        _window(offset, max_chars)
+        if field not in {"title", "content"}:
+            raise ResearchInputError("Unsupported notice text field")
+        with self.store._transaction() as conn:
+            self._sender(conn, scope, "messages.read")
+            observed_at = self.store.clock()
+            row = conn.execute(
+                "SELECT id,project_id,priority,created_by,created_at,expires_at,"
+                "(active=1 AND (expires_at IS NULL OR julianday(expires_at)>julianday(?,'unixepoch'))) AS active_at_observation,"
+                f"substr({field},?,?) AS content,length({field}) AS total FROM notices "
+                "WHERE id=? AND (project_id=? OR project_id IS NULL)",
+                (observed_at, offset + 1, max_chars, notice_id, scope.project_id),
+            ).fetchone()
+            if row is None:
+                raise ResearchNotFound("Notice not found in this project or global scope")
+            return {"notice": self._notice_metadata(row), "field": field,
+                    **_text_page(row["content"], row["total"], offset), "observed_at": observed_at,
+                    "authorizes_work": False, "authorship_verified": False, "immutable": False}
 
     def send(self, scope, key, *, recipient_run_id, intent, message, observations=(), assumptions=(), source_ids=(), in_reply_to=None):
         """Persist one scoped advisory envelope, visible chat row, event and original operation receipt atomically."""

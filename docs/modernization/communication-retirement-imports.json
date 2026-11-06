@@ -1,0 +1,14 @@
+{
+  "files_scanned": 670,
+  "roots": [
+    "backend",
+    "scripts"
+  ],
+  "targets": [
+    "backend.tools.communication",
+    "backend.communication.question_registry",
+    "backend.communication.response_event_registry"
+  ],
+  "remaining_static_imports": [],
+  "limits": "Includes tests and resolved relative from-import syntax. Dynamic imports, external clients and historical prose references are not inferred absent."
+}

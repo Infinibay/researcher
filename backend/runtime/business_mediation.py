@@ -11,6 +11,7 @@ TASK_READ_NAMES = frozenset({
 })
 TASK_WRITE_NAMES = frozenset({"researcher_task_comment", "researcher_continuity_save"})
 MESSAGE_NAMES = frozenset({
+    "researcher_notices", "researcher_notice_read",
     "researcher_peer_recipients", "researcher_peer_messages", "researcher_peer_message_read",
     "researcher_peer_message_send", "researcher_peer_message_acknowledge",
 })

@@ -1,0 +1,59 @@
+{
+  "base_commit": "ad86106",
+  "source": {
+    "cases": 72,
+    "passed": 71,
+    "failed": {
+      "test_alternating_pattern_detected": "AssertionError: assert 'allow' == 'escalate'\n  \n  - escalate\n  + allow"
+    },
+    "skipped": 0,
+    "seconds": 14.284
+  },
+  "installed": {
+    "cases": 72,
+    "passed": 71,
+    "failed": {
+      "test_alternating_pattern_detected": "AssertionError: assert 'allow' == 'escalate'\n  \n  - escalate\n  + allow"
+    },
+    "skipped": 0,
+    "seconds": 15.594
+  },
+  "baseline": {
+    "commit": "ad86106",
+    "matching_python_sql": 714,
+    "sha256": "d29769678cb45f217b81dee4e96e190b636676a887240c3717fd8b72a915cc2f",
+    "installed_root": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/lib/python3.12/site-packages",
+    "test": "backend/tests/communication/test_loop_guard.py::TestPingPong::test_alternating_pattern_detected",
+    "exit_code": 1,
+    "error": "AssertionError: assert 'allow' == 'escalate'",
+    "metadata_note": "The failed hash probe used checkout researcher.egg-info. Explicit site-packages comparison verifies the actual -I baseline environment; no baseline test was restarted."
+  },
+  "retired": {
+    "tool_modules": 7,
+    "tools": 6,
+    "registry_modules": 2,
+    "test_functions": 31,
+    "roundtrip_behavior_ported_to_existing_native_test": true
+  },
+  "new_capability": "Native bounded project/global notice reads preserve the additional context exposed by old ReadMessages. Recorded authorship is unverified; no notice grants work authority.",
+  "prompt_inventory": {
+    "new_descriptions_reviewed": 2,
+    "newly_archived": 28,
+    "unchanged_asts_revalidated": 45,
+    "candidates": 307,
+    "files": 394,
+    "archived": 288,
+    "pending_static_reviews": 0,
+    "audit_tests_passed": 2
+  },
+  "documented_definitions": 16,
+  "style_findings_in_changed_files": 9,
+  "real_model_calls": 0,
+  "real_provider_calls": 0,
+  "limits": [
+    "One retained LoopGuard test fails in source, installed candidate and prior installed baseline; this is not a fully green legacy suite.",
+    "Legacy services, internal CLI endpoints and broader engine removal remain principal work.",
+    "Static import absence is bounded to backend/scripts Python syntax; external/dynamic consumers are not inferred absent.",
+    "No schema/data rows deleted, no dependency or frontend change, no global test reduction, real-data restore, human comprehension or whole-page acceptance claim."
+  ]
+}
