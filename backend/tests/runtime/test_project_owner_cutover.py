@@ -5,6 +5,46 @@ from types import SimpleNamespace
 import pytest
 
 
+def test_registered_listener_remains_owned_until_its_actual_worker_exits(coordination):
+    """Removing listener factories must preserve bounded Stop and liveness for an already registered controller."""
+    import threading
+
+    from backend.api.flow_manager import FlowManager
+
+    release = threading.Event()
+    requested = threading.Event()
+    worker = threading.Thread(target=release.wait, daemon=True)
+
+    class RegisteredController:
+        """Represent a retained controller whose current operation ignores its stop request until released."""
+
+        @property
+        def is_running(self):
+            """Report actual worker liveness independently of the requested stop flag."""
+            return worker.is_alive()
+
+        def stop_all(self):
+            """Request cooperative stop but refuse to claim termination while the worker remains live."""
+            requested.set()
+            worker.join(timeout=0)
+            if worker.is_alive():
+                raise TimeoutError("Existing check still running")
+
+    manager = FlowManager()
+    retained = RegisteredController()
+    manager._listeners[101] = retained
+    worker.start()
+    try:
+        stopped = manager.stop_project_flow(101)
+        assert requested.is_set() and stopped["registered_workers_closed"] is False
+        assert manager._listeners[101] is retained and manager.is_project_running(101)
+    finally:
+        release.set()
+        worker.join(timeout=1)
+    assert manager.stop_project_flow(101)["registered_workers_closed"] is True
+    assert 101 not in manager._listeners
+
+
 def admitted_project(coordination):
     """Persist actual native intent, leaving the separate legacy-looking code task without a native run."""
     c = coordination
@@ -108,7 +148,6 @@ def test_actual_legacy_starts_do_not_open_workers_in_native_project(
         """Catch new legacy worker/listener construction."""
         pytest.fail("Legacy worker start reached")
 
-    monkeypatch.setattr("backend.api.flow_manager.ListenerManager", forbidden)
     monkeypatch.setattr("backend.autonomy.agent_loop.threading.Thread", forbidden)
     target = (
         FlowManager()
@@ -485,22 +524,3 @@ async def test_project_stop_api_discloses_unclosed_legacy_controller(
         manager.stop_project_flow(202)
 
 
-def test_wired_legacy_callbacks_remain_registered_until_explicit_unsubscribe(
-    coordination,
-):
-    """An empty listener-thread list is insufficient while its project scheduling callbacks are still wired."""
-    from backend.api.flow_manager import FlowManager
-    from backend.flows.event_bus import EventBus
-    from backend.flows.event_listeners import ListenerManager
-
-    c = coordination
-    listeners = ListenerManager(101, bus=EventBus())
-    # Simulate subscriptions installed by a prior version, not a new activation.
-    listeners._wired = True
-    listeners.bus.subscribe("task_created", listeners._create_task_available_events)
-    c.store.admit(c.spec)
-    manager = FlowManager()
-    manager._listeners[101] = listeners
-    assert manager.is_project_running(101)
-    assert manager.stop_project_flow(101)["registered_workers_closed"] is True
-    assert not manager.is_project_running(101)

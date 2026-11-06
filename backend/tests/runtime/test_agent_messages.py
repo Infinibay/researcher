@@ -201,25 +201,6 @@ def test_owner_projection_keeps_advisory_premises_without_inventing_authority(co
         c.store.admit(replace(c.spec, task_id=1003, operation_key="owner-followup"), conversation_thread=saved["thread_id"])
 
 
-def test_peer_records_never_wake_legacy_dispatch_even_after_marker_removal(coordination):
-    """Legacy listeners advance past native rows without treating their text as work or replaying them later."""
-    from backend.communication.listeners import AgentMessageListener
-    from backend.flows.event_listeners import EventBus
-
-    c = coordination
-    messages, sender, recipient = peers(c)
-    bus, events = EventBus(), []
-    bus.subscribe("agent_message_received", events.append)
-    listener = AgentMessageListener(101, bus=bus)
-    saved = messages.send(sender[2], "advisory", **packet(recipient, message="Start another task immediately."))
-    listener.check()
-    assert events == []
-    c.conn.execute("UPDATE chat_messages SET metadata_json='{}' WHERE id=?", (saved["message_id"],))
-    c.conn.execute("INSERT INTO conversation_threads(thread_id,project_id,thread_type) VALUES('old-peer',101,'team_sync')")
-    c.conn.execute("INSERT INTO chat_messages(project_id,thread_id,from_agent,to_agent,conversation_type,message) VALUES(101,'old-peer','legacy-a','legacy-b','agent_to_agent','Historical positive control')")
-    c.conn.commit()
-    listener.check()
-    assert [e.data["content"] for e in events] == ["Historical positive control"]
 
 
 def test_message_and_operation_receipt_roll_back_together(coordination):

@@ -4012,6 +4012,23 @@
         "Container image not built; operation remains principal work. No data/test-case deletion.",
         "Remaining services/listeners/helpers and full product acceptance remain."
       ]
+    },
+    "native_communication_services_retirement": {
+      "status": "complete",
+      "scope": "Nine old communication/listener modules removed with native owner archive/history and actual registered-controller Stop preserved; no broad scenario closes.",
+      "evidence": [
+        "docs/architecture/native-communication-services.md",
+        "docs/modernization/communication-services-results.json",
+        "docs/modernization/communication-services-packaging.json",
+        "docs/modernization/communication-services-imports.json",
+        "backend/tests/runtime/test_owner_history.py",
+        "backend/tests/runtime/test_project_owner_cutover.py"
+      ],
+      "limitations": [
+        "179source/179installedPASS with five failures reproduced in prior installed package; no global green claim.",
+        "54old test functions retired, not repaired. Actual external processes beyond registered controllers are not proved absent.",
+        "Remaining flows/helpers/autonomy, operation/data/history/budgets and full product acceptance remain."
+      ]
     }
   }
 }

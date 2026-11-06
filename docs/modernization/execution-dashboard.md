@@ -16,7 +16,36 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: API interna y CLI de pods retirados; siguen servicios antiguos
+## Etapa actual: servicios antiguos de comunicación y listeners retirados
+
+Se retiran nueve módulos y se conservan los mensajes nativos, las notas del
+propietario, el historial y el control de parada sobre trabajadores registrados.
+El archivado ahora comprueba el proyecto y confirma su evento en la misma
+transacción; el lector histórico no reinterpreta mensajes nativos aunque se
+eliminen sus metadatos. [Contrato y mapa](../architecture/native-communication-services.md).
+
+**Comprobado:** 179 pruebas pasan desde fuente y 179 en el paquete instalado;
+los mismos cinco fallos de helpers/routers antiguos se reproducen en el paquete
+anterior. No hay omisiones. Coinciden 664 archivos Python/SQL; los 265 imports
+backend proceden del entorno instalado, con 83 distribuciones compatibles.
+Las 20 definiciones nuevas/modificadas tienen docstrings. Se retiran 54 funciones
+de test obsoletas sin contarlas como fallos reparados. Prompts: 233 candidatos en
+353 archivos, 365 archivados, sin revisión estática pendiente ni cambios de
+instrucciones en este corte. No hay una nueva suite global.
+
+**Lista vigente:**
+- Cerrado recientemente: herramientas y bibliotecas antiguas, API interna/CLI de
+  pods y servicios de comunicación/listeners sustituidos por contratos nativos.
+- Siguiente: helpers y entradas restantes de flows, controladores de autonomía
+  y lectores históricos; incluye los cinco fallos de flows todavía reproducibles.
+- Pendiente principal: operación e imágenes; migraciones/inversas/restauración
+  y datos históricos; historial completo y presupuestos; evaluación real, humana,
+  científica y global; aceptación integral de 12 páginas y revisión final.
+  Siguen 43 escenarios abiertos, 12 pilotos y 48 conceptos.
+- Al final: detalles secundarios. Los avisos de estilo y espacio al final de un
+  test quedan en DD058; no se repiten recorridos por ese pulido.
+
+## Etapa anterior: API interna y CLI de pods retirados
 
 Se retiran tres módulos de API interna (13 operaciones), el CLI de pods y sus
 instalaciones antiguas de CLI/MCP/Claude Code en la imagen histórica. Se conservan

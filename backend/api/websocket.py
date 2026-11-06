@@ -7,7 +7,7 @@ import logging
 
 from fastapi import WebSocket
 
-from backend.flows.event_listeners import EventBus, FlowEvent, event_bus
+from backend.flows.event_bus import EventBus, FlowEvent, event_bus
 
 logger = logging.getLogger(__name__)
 

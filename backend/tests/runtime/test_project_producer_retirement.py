@@ -99,20 +99,6 @@ def test_native_plan_freezes_legacy_business_material_and_actual_task_inventory(
     assert s.c.conn.execute("SELECT count(*) FROM runtime_project_plan_acceptances").fetchone()[0] == 0
 
 
-def test_direct_listener_start_returns_owner_entry_before_thread_creation(coordination, monkeypatch):
-    """Calling a concrete old listener directly cannot bypass the retired manager's start policy."""
-    from backend.flows.event_listeners import NewTaskCreatedListener
-
-    listener = NewTaskCreatedListener(101)
-
-    def forbidden(*_args, **_kwargs):
-        """Reject accidental old poller construction without leaking a test worker."""
-        pytest.fail("Legacy listener thread must not start")
-
-    monkeypatch.setattr("backend.flows.listener_base.threading.Thread", forbidden)
-    hint = listener.start()
-    assert hint["native_admission_run_id"] is None
-    assert not listener.is_running
 
 
 @pytest.mark.parametrize("handler", ["MessageHandler", "HealthCheckHandler", "ProgressEvalHandler"])

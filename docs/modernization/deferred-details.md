@@ -233,3 +233,12 @@ principales; véase `internal-retirement-lint.json`. La diferencia 404/405 de ru
 inexistentes con el fallback GET de la SPA no afecta la retirada: ambas rechazan
 la operación. No abrir un rediseño del router para uniformarla en este corte.
 Los fallos de migración y la aceptación de imágenes siguen siendo trabajo principal.
+
+## DD058 — estilo en consumidores de comunicación
+
+Los 16 avisos de `communication-services-lint.json` en consumidores tocados
+(S110/BLE001/UP017/I001/F811/SIM117/RUF059/S102) quedan para la pasada posterior
+a todas las capacidades principales. `git diff --check` también señala una línea
+vacía al final de `test_project_owner_cutover.py` tras retirar un caso obsoleto.
+No repetir las pruebas de comunicación por ese espacio en blanco. Los cinco
+fallos reproducidos de helpers/routers de flows siguen como trabajo principal.

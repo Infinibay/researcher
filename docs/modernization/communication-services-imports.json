@@ -1,0 +1,120 @@
+{
+  "base_commit": "ae0e788",
+  "files_scanned": 629,
+  "targets": [
+    "backend.communication.brainstorm_coordinator",
+    "backend.communication.listeners",
+    "backend.communication.loop_guard",
+    "backend.communication.notifications",
+    "backend.communication.protocol",
+    "backend.communication.service",
+    "backend.communication.thread_manager",
+    "backend.flows.event_listeners",
+    "backend.flows.listener_base"
+  ],
+  "remaining_static_imports": [],
+  "removed_modules": [
+    {
+      "path": "backend/communication/brainstorm_coordinator.py",
+      "sha256": "aef9c6cb80e6daa15fccaf79a4c6f1cbca481c71143247a1ad2916cff8d16444",
+      "lines": 141
+    },
+    {
+      "path": "backend/communication/listeners.py",
+      "sha256": "7cd069a23cbfdd385bca8f8d61408ccd1d256105513cfa5430dd48d3713fa4a6",
+      "lines": 267
+    },
+    {
+      "path": "backend/communication/loop_guard.py",
+      "sha256": "53ff954d5f0190d3abf3389eedb3003820dd38facac6ba2d255ca00cf831b0f2",
+      "lines": 608
+    },
+    {
+      "path": "backend/communication/notifications.py",
+      "sha256": "226d644c4f3240d036e8cf32b0debf12a002cdcc5cdb8bad77e5e30544c95407",
+      "lines": 177
+    },
+    {
+      "path": "backend/communication/protocol.py",
+      "sha256": "df030fd66702fc9350585678c890aa221fcbb505957a1b5406fa97f70cae5103",
+      "lines": 226
+    },
+    {
+      "path": "backend/communication/service.py",
+      "sha256": "a08a6662cbd4b7bc64927abfac328d9dda399435de99caeadfd1146b8eb20fd9",
+      "lines": 255
+    },
+    {
+      "path": "backend/communication/thread_manager.py",
+      "sha256": "6028b417a5a820c9a5479047561768da595338a49cafd0c71f9c50631942ae58",
+      "lines": 142
+    },
+    {
+      "path": "backend/flows/event_listeners.py",
+      "sha256": "079487437a7694240b4ce0fe134aa1da8b97700041e0600108b435303ec546ca",
+      "lines": 769
+    },
+    {
+      "path": "backend/flows/listener_base.py",
+      "sha256": "d3006fa1424adec6ff22c7aeb9c0f329c5eb2e7071aa7abc87c31656779718b2",
+      "lines": 74
+    }
+  ],
+  "retired_test_functions": [
+    "backend/tests/communication/test_communication_service.py::TestGetMessages::test_get_messages_by_project",
+    "backend/tests/communication/test_communication_service.py::TestGetMessages::test_get_messages_by_thread",
+    "backend/tests/communication/test_communication_service.py::TestGetMessages::test_get_messages_unread_only",
+    "backend/tests/communication/test_communication_service.py::TestGetThread::test_get_thread_returns_existing",
+    "backend/tests/communication/test_communication_service.py::TestGetThread::test_get_thread_returns_none_for_missing",
+    "backend/tests/communication/test_communication_service.py::TestGetUnreadCount::test_get_unread_count",
+    "backend/tests/communication/test_communication_service.py::TestMarkRead::test_mark_read_idempotent",
+    "backend/tests/communication/test_communication_service.py::TestSend::test_send_creates_message_and_thread",
+    "backend/tests/communication/test_communication_service.py::TestSend::test_send_emits_event",
+    "backend/tests/communication/test_communication_service.py::TestSend::test_send_reuses_existing_thread",
+    "backend/tests/communication/test_loop_guard.py::TestCircuitBreaker::test_closed_circuit_passes",
+    "backend/tests/communication/test_loop_guard.py::TestCircuitBreaker::test_failures_open_circuit",
+    "backend/tests/communication/test_loop_guard.py::TestCircuitBreaker::test_half_open_allows_one",
+    "backend/tests/communication/test_loop_guard.py::TestCircuitBreaker::test_open_circuit_blocks",
+    "backend/tests/communication/test_loop_guard.py::TestCircuitBreaker::test_reset_circuit_breaker",
+    "backend/tests/communication/test_loop_guard.py::TestContextSummary::test_no_summary_for_short_threads",
+    "backend/tests/communication/test_loop_guard.py::TestContextSummary::test_summary_for_long_threads",
+    "backend/tests/communication/test_loop_guard.py::TestDedup::test_different_message_passes",
+    "backend/tests/communication/test_loop_guard.py::TestDedup::test_exact_duplicate_blocked",
+    "backend/tests/communication/test_loop_guard.py::TestDedup::test_first_message_passes",
+    "backend/tests/communication/test_loop_guard.py::TestDedup::test_near_duplicate_blocked",
+    "backend/tests/communication/test_loop_guard.py::TestDisabledGuard::test_disabled_guard_allows_everything",
+    "backend/tests/communication/test_loop_guard.py::TestFingerprint::test_different_text_different_fingerprint",
+    "backend/tests/communication/test_loop_guard.py::TestFingerprint::test_normalized_variants_match",
+    "backend/tests/communication/test_loop_guard.py::TestFingerprint::test_same_text_same_fingerprint",
+    "backend/tests/communication/test_loop_guard.py::TestIncidentRecording::test_incident_recorded_on_block",
+    "backend/tests/communication/test_loop_guard.py::TestNormalizeText::test_basic_normalization",
+    "backend/tests/communication/test_loop_guard.py::TestNormalizeText::test_collapse_whitespace",
+    "backend/tests/communication/test_loop_guard.py::TestNormalizeText::test_strip_punctuation",
+    "backend/tests/communication/test_loop_guard.py::TestPingPong::test_alternating_pattern_detected",
+    "backend/tests/communication/test_loop_guard.py::TestPingPong::test_non_alternating_passes",
+    "backend/tests/communication/test_loop_guard.py::TestRateLimit::test_exceeding_per_thread_limit_throttled",
+    "backend/tests/communication/test_loop_guard.py::TestRateLimit::test_within_limit_passes",
+    "backend/tests/communication/test_loop_guard.py::TestSystemBypass::test_system_messages_bypass_all_checks",
+    "backend/tests/communication/test_loop_guard.py::TestTrigramSimilarity::test_completely_different",
+    "backend/tests/communication/test_loop_guard.py::TestTrigramSimilarity::test_empty_sets",
+    "backend/tests/communication/test_loop_guard.py::TestTrigramSimilarity::test_identical_texts",
+    "backend/tests/communication/test_loop_guard.py::TestTrigramSimilarity::test_similar_texts_high_jaccard",
+    "backend/tests/flows/test_event_listeners.py::TestAllTasksDoneListener::test_all_done",
+    "backend/tests/flows/test_event_listeners.py::TestAllTasksDoneListener::test_not_all_done",
+    "backend/tests/flows/test_event_listeners.py::TestListenerManager::test_add_custom_listener",
+    "backend/tests/flows/test_event_listeners.py::TestListenerManager::test_start_and_stop_all",
+    "backend/tests/flows/test_event_listeners.py::TestNewTaskCreatedListener::test_detects_new_task",
+    "backend/tests/flows/test_event_listeners.py::TestStagnationDetectedListener::test_no_stagnation_for_non_executing",
+    "backend/tests/flows/test_event_listeners.py::TestStagnationDetectedListener::test_stagnation_detected",
+    "backend/tests/flows/test_event_listeners.py::TestTaskStatusChangedListener::test_detects_status_change",
+    "backend/tests/flows/test_event_listeners.py::TestTaskStatusChangedListener::test_emits_sub_events",
+    "backend/tests/flows/test_event_listeners.py::TestUserMessageListener::test_detects_user_message",
+    "backend/tests/flows/test_listener_lifecycle.py::test_stop_timeout_keeps_the_live_listener_owned_and_prevents_restart",
+    "backend/tests/flows/test_listener_lifecycle.py::test_stop_wakes_an_idle_listener_without_waiting_for_its_poll_interval",
+    "backend/tests/runtime/test_agent_messages.py::test_peer_records_never_wake_legacy_dispatch_even_after_marker_removal",
+    "backend/tests/runtime/test_project_owner_cutover.py::test_wired_legacy_callbacks_remain_registered_until_explicit_unsubscribe",
+    "backend/tests/runtime/test_project_producer_retirement.py::test_direct_listener_start_returns_owner_entry_before_thread_creation",
+    "backend/tests/runtime/test_run_conversation.py::test_legacy_cursor_consumes_native_messages_without_reinterpreting_them_later"
+  ],
+  "limits": "AST absolute/relative imports including tests; dynamic/external consumers unknown. Lazy exports removed separately. Test retirements are not failure fixes; retained EventBus tests stay, and native owner history/registered-controller tests replace relevant behavior."
+}

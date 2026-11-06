@@ -23,7 +23,7 @@ def _emit_step_changed(
 ) -> None:
     """Emit a flow_step_changed event on the global event bus."""
     try:
-        from backend.flows.event_listeners import FlowEvent, event_bus
+        from backend.flows.event_bus import FlowEvent, event_bus
 
         event_bus.emit(FlowEvent(
             event_type="flow_step_changed",

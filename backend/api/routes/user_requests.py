@@ -11,7 +11,7 @@ from backend.api.models.user_request import (
     UserRequestRespond,
     UserRequestResponse,
 )
-from backend.flows.event_listeners import FlowEvent, event_bus
+from backend.flows.event_bus import FlowEvent, event_bus
 from backend.tools.base.db import execute_with_retry
 
 router = APIRouter(prefix="/api/user-requests", tags=["user-requests"])

@@ -1,0 +1,26 @@
+{
+  "changed_or_new_definitions": [
+    "backend/api/flow_manager.py::FlowManager",
+    "backend/api/flow_manager.py::FlowManager.__init__",
+    "backend/api/routes/chat.py::archive_thread",
+    "backend/api/routes/chat.py::get_agent_messages",
+    "backend/communication/owner_history.py::OwnerHistory",
+    "backend/communication/owner_history.py::OwnerHistory.__init__",
+    "backend/communication/owner_history.py::OwnerHistory.archive",
+    "backend/communication/owner_history.py::OwnerHistory.legacy_inbox",
+    "backend/flows/helpers/reporting.py::log_flow_event",
+    "backend/flows/snapshot_service.py::_emit_step_changed",
+    "backend/tests/runtime/test_native_adapter_retirement.py::test_replaced_framework_adapters_are_unavailable",
+    "backend/tests/runtime/test_owner_history.py::test_archive_requires_the_actual_project_and_preserves_native_receipts",
+    "backend/tests/runtime/test_owner_history.py::test_archive_and_durable_event_commit_or_rollback_together",
+    "backend/tests/runtime/test_owner_history.py::test_owner_historical_inbox_keeps_read_markers_without_reclassifying_native_messages",
+    "backend/tests/runtime/test_project_owner_cutover.py::test_registered_listener_remains_owned_until_its_actual_worker_exits",
+    "backend/tests/runtime/test_project_owner_cutover.py::test_registered_listener_remains_owned_until_its_actual_worker_exits.RegisteredController",
+    "backend/tests/runtime/test_project_owner_cutover.py::test_registered_listener_remains_owned_until_its_actual_worker_exits.RegisteredController.is_running",
+    "backend/tests/runtime/test_project_owner_cutover.py::test_registered_listener_remains_owned_until_its_actual_worker_exits.RegisteredController.stop_all",
+    "backend/tests/runtime/test_project_owner_cutover.py::test_actual_legacy_starts_do_not_open_workers_in_native_project",
+    "backend/tests/runtime/test_run_conversation.py::test_native_conversation_is_excluded_from_legacy_dispatch"
+  ],
+  "missing": [],
+  "scope": "Qualified AST comparison against ae0e788, changed/new definitions and module docstrings only. English documentation for Ken."
+}

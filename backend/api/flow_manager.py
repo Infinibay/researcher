@@ -6,8 +6,6 @@ import logging
 import threading
 from typing import Any
 
-from backend.flows.event_listeners import ListenerManager
-
 logger = logging.getLogger(__name__)
 
 
@@ -19,7 +17,7 @@ class FlowManager:
         self._flows: dict[int, Any] = {}
         self._threads: dict[int, threading.Thread] = {}
         self._stop_signals: dict[int, threading.Event] = {}
-        self._listeners: dict[int, ListenerManager] = {}
+        self._listeners: dict[int, Any] = {}
         self._autonomy: dict[int, Any] = {}
         self._lock = threading.Lock()
 

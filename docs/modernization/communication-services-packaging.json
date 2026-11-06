@@ -1,0 +1,42 @@
+{
+  "base_commit": "ae0e788",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "sha256": "451999e839153e12f142d31893b26cd6763ff4ccb7db87a09007784d88122285",
+  "observed": {
+    "exit_code": 1,
+    "cases": 184,
+    "failed": 5,
+    "failed_cases": [
+      "test_backlog_to_done_rejected",
+      "test_backlog_to_failed_rejected",
+      "test_update_task_status_safe_swallows_errors",
+      "test_routes_to_no_structure_when_no_tasks",
+      "test_routes_to_not_complete_when_tasks_exist"
+    ],
+    "skipped_cases": [],
+    "skipped": 0,
+    "seconds": 39.235,
+    "all_backend_imports_installed": true,
+    "backend_modules": 265,
+    "matching_python_sql": 664,
+    "installed_distributions": 83,
+    "legacy_installed": false,
+    "legacy_extra_or_requirement": false,
+    "real_model_calls": 0,
+    "real_provider_calls": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_owner_history.py",
+    "backend/tests/runtime/test_native_adapter_retirement.py",
+    "backend/tests/runtime/test_agent_messages.py",
+    "backend/tests/runtime/test_run_conversation.py",
+    "backend/tests/runtime/test_owner_notes.py",
+    "backend/tests/runtime/test_workspace_delivery.py",
+    "backend/tests/runtime/test_project_owner_cutover.py",
+    "backend/tests/runtime/test_project_producer_retirement.py",
+    "backend/tests/flows",
+    "backend/tests/api/test_websocket_lifecycle.py",
+    "backend/tests/api/test_local_access.py"
+  ],
+  "limits": "Nine obsolete communication/listener modules removed after preserving scoped owner archive/history and registered-controller Stop. All selected source tests also run installed. Five old flow failures reproduce in prior installedae0e788674byte-checked package.54obsolete testfunctions removed, not counted as fixed failures. No data/schema deletion, real model/provider, global/human/scientific/12page or real-data restoration acceptance."
+}

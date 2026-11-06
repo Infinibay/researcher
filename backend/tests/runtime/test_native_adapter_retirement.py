@@ -19,6 +19,11 @@ def test_replaced_framework_adapters_are_unavailable():
         'backend.tools.base.permissions',
         'backend.api.routes.internal', 'backend.api.routes.internal_findings',
         'backend.api.routes.internal_tasks',
+        'backend.communication.service', 'backend.communication.thread_manager',
+        'backend.communication.loop_guard', 'backend.communication.listeners',
+        'backend.communication.notifications', 'backend.communication.protocol',
+        'backend.communication.brainstorm_coordinator',
+        'backend.flows.event_listeners', 'backend.flows.listener_base',
     ):
         assert importlib.util.find_spec(module) is None, module
     web = Path(backend.__file__).parent / 'tools' / 'web'

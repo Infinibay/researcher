@@ -1,0 +1,504 @@
+[
+  {
+    "cell": null,
+    "code": "S110",
+    "end_location": {
+      "column": 13,
+      "row": 103
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/api/routes/user_requests.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 102
+    },
+    "message": "`try`-`except`-`pass` detected, consider logging the exception",
+    "name": "try-except-pass",
+    "noqa_row": 102,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/try-except-pass"
+  },
+  {
+    "cell": null,
+    "code": "BLE001",
+    "end_location": {
+      "column": 21,
+      "row": 102
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/api/routes/user_requests.py",
+    "fix": null,
+    "location": {
+      "column": 12,
+      "row": 102
+    },
+    "message": "Do not catch blind exception: `Exception`",
+    "name": "blind-except",
+    "noqa_row": 102,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/blind-except"
+  },
+  {
+    "cell": null,
+    "code": "UP017",
+    "end_location": {
+      "column": 50,
+      "row": 179
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/flows/helpers/reporting.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from datetime import datetime, timezone, UTC",
+          "end_location": {
+            "column": 40,
+            "row": 8
+          },
+          "location": {
+            "column": 1,
+            "row": 8
+          }
+        },
+        {
+          "content": "UTC",
+          "end_location": {
+            "column": 50,
+            "row": 179
+          },
+          "location": {
+            "column": 38,
+            "row": 179
+          }
+        }
+      ],
+      "message": "Convert to `datetime.UTC` alias"
+    },
+    "location": {
+      "column": 38,
+      "row": 179
+    },
+    "message": "Use `datetime.UTC` alias",
+    "name": "datetime-timezone-utc",
+    "noqa_row": 179,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/datetime-timezone-utc"
+  },
+  {
+    "cell": null,
+    "code": "UP017",
+    "end_location": {
+      "column": 36,
+      "row": 180
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/flows/helpers/reporting.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from datetime import datetime, timezone, UTC",
+          "end_location": {
+            "column": 40,
+            "row": 8
+          },
+          "location": {
+            "column": 1,
+            "row": 8
+          }
+        },
+        {
+          "content": "UTC",
+          "end_location": {
+            "column": 36,
+            "row": 180
+          },
+          "location": {
+            "column": 24,
+            "row": 180
+          }
+        }
+      ],
+      "message": "Convert to `datetime.UTC` alias"
+    },
+    "location": {
+      "column": 24,
+      "row": 180
+    },
+    "message": "Use `datetime.UTC` alias",
+    "name": "datetime-timezone-utc",
+    "noqa_row": 180,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/datetime-timezone-utc"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 86,
+      "row": 6
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_agent_messages.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from dataclasses import replace\n\nimport pytest\n\nfrom backend.tests.runtime.test_workspace_delivery import owner_client, workspace_app  # noqa: F401\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 9
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 56,
+      "row": 128
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_agent_messages.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    import sqlite3\n\n    from backend.tools.base.db import ensure_migrations\n",
+          "end_location": {
+            "column": 1,
+            "row": 129
+          },
+          "location": {
+            "column": 1,
+            "row": 127
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 127
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 127,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 104,
+      "row": 155
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_agent_messages.py",
+    "fix": null,
+    "location": {
+      "column": 91,
+      "row": 155
+    },
+    "message": "Redefinition of unused `workspace_app` from line 6: `workspace_app` redefined here",
+    "name": "redefined-while-unused",
+    "noqa_row": 155,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 54,
+      "row": 183
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_agent_messages.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.api.models.chat import ChatMessageResponse\n    from backend.runtime.contracts import RunConflict\n    from backend.runtime.run_inputs import MESSAGE_SELECT\n",
+          "end_location": {
+            "column": 1,
+            "row": 184
+          },
+          "location": {
+            "column": 1,
+            "row": 181
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 181
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 181,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "SIM117",
+    "end_location": {
+      "column": 59,
+      "row": 278
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_agent_messages.py",
+    "fix": null,
+    "location": {
+      "column": 9,
+      "row": 277
+    },
+    "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements",
+    "name": "multiple-with-statements",
+    "noqa_row": 277,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/multiple-with-statements"
+  },
+  {
+    "cell": null,
+    "code": "RUF059",
+    "end_location": {
+      "column": 11,
+      "row": 80
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_project_producer_retirement.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "_run",
+          "end_location": {
+            "column": 11,
+            "row": 80
+          },
+          "location": {
+            "column": 8,
+            "row": 80
+          }
+        }
+      ],
+      "message": "Prefix it with an underscore or any other dummy variable pattern"
+    },
+    "location": {
+      "column": 8,
+      "row": 80
+    },
+    "message": "Unpacked variable `run` is never used",
+    "name": "unused-unpacked-variable",
+    "noqa_row": 80,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-unpacked-variable"
+  },
+  {
+    "cell": null,
+    "code": "RUF059",
+    "end_location": {
+      "column": 25,
+      "row": 80
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_project_producer_retirement.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "_peers",
+          "end_location": {
+            "column": 25,
+            "row": 80
+          },
+          "location": {
+            "column": 20,
+            "row": 80
+          }
+        }
+      ],
+      "message": "Prefix it with an underscore or any other dummy variable pattern"
+    },
+    "location": {
+      "column": 20,
+      "row": 80
+    },
+    "message": "Unpacked variable `peers` is never used",
+    "name": "unused-unpacked-variable",
+    "noqa_row": 80,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-unpacked-variable"
+  },
+  {
+    "cell": null,
+    "code": "RUF059",
+    "end_location": {
+      "column": 11,
+      "row": 125
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_project_producer_retirement.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "_run",
+          "end_location": {
+            "column": 11,
+            "row": 125
+          },
+          "location": {
+            "column": 8,
+            "row": 125
+          }
+        }
+      ],
+      "message": "Prefix it with an underscore or any other dummy variable pattern"
+    },
+    "location": {
+      "column": 8,
+      "row": 125
+    },
+    "message": "Unpacked variable `run` is never used",
+    "name": "unused-unpacked-variable",
+    "noqa_row": 125,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-unpacked-variable"
+  },
+  {
+    "cell": null,
+    "code": "RUF059",
+    "end_location": {
+      "column": 25,
+      "row": 125
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_project_producer_retirement.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "_peers",
+          "end_location": {
+            "column": 25,
+            "row": 125
+          },
+          "location": {
+            "column": 20,
+            "row": 125
+          }
+        }
+      ],
+      "message": "Prefix it with an underscore or any other dummy variable pattern"
+    },
+    "location": {
+      "column": 20,
+      "row": 125
+    },
+    "message": "Unpacked variable `peers` is never used",
+    "name": "unused-unpacked-variable",
+    "noqa_row": 125,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-unpacked-variable"
+  },
+  {
+    "cell": null,
+    "code": "RUF059",
+    "end_location": {
+      "column": 11,
+      "row": 144
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_project_producer_retirement.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "_run",
+          "end_location": {
+            "column": 11,
+            "row": 144
+          },
+          "location": {
+            "column": 8,
+            "row": 144
+          }
+        }
+      ],
+      "message": "Prefix it with an underscore or any other dummy variable pattern"
+    },
+    "location": {
+      "column": 8,
+      "row": 144
+    },
+    "message": "Unpacked variable `run` is never used",
+    "name": "unused-unpacked-variable",
+    "noqa_row": 144,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-unpacked-variable"
+  },
+  {
+    "cell": null,
+    "code": "RUF059",
+    "end_location": {
+      "column": 25,
+      "row": 144
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_project_producer_retirement.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "_peers",
+          "end_location": {
+            "column": 25,
+            "row": 144
+          },
+          "location": {
+            "column": 20,
+            "row": 144
+          }
+        }
+      ],
+      "message": "Prefix it with an underscore or any other dummy variable pattern"
+    },
+    "location": {
+      "column": 20,
+      "row": 144
+    },
+    "message": "Unpacked variable `peers` is never used",
+    "name": "unused-unpacked-variable",
+    "noqa_row": 144,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-unpacked-variable"
+  },
+  {
+    "cell": null,
+    "code": "S102",
+    "end_location": {
+      "column": 9,
+      "row": 177
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_project_producer_retirement.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 177
+    },
+    "message": "Use of `exec` detected",
+    "name": "exec-builtin",
+    "noqa_row": 177,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/exec-builtin"
+  }
+]

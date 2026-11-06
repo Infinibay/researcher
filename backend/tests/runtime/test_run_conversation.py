@@ -8,15 +8,11 @@ from backend.runtime.contracts import RunConflict, RunNotFound, StaleAttempt
 
 
 def test_native_conversation_is_excluded_from_legacy_dispatch(coordination):
+    """Native instructions remain canonical and cannot enter historical recipient reads or the old activation queue."""
     from backend.autonomy.events import create_message_event
-    from backend.communication.service import CommunicationService
-    from backend.flows.event_listeners import EventBus, UserMessageListener
+    from backend.communication.owner_history import OwnerHistory
 
     c = coordination
-    bus = EventBus()
-    events = []
-    bus.subscribe("user_message_received", events.append)
-    listener = UserMessageListener(101, bus=bus)
     c.store.admit(c.spec, conversation_thread="native-thread")
     c.conn.execute(
         "INSERT INTO chat_messages(project_id,thread_id,from_agent,to_agent,conversation_type,message) VALUES(101,'native-thread','user','researcher','user_to_agent','Native followup')"
@@ -41,11 +37,8 @@ def test_native_conversation_is_excluded_from_legacy_dispatch(coordination):
         == []
     )
     assert c.conn.execute("SELECT COUNT(*) FROM agent_events").fetchone()[0] == 0
-    listener.check()
-    assert [event.entity_id for event in events] == [legacy_id]
-    inbox = CommunicationService().get_messages(101, agent_id="researcher")
+    inbox = OwnerHistory(c.store).legacy_inbox(101, "researcher")
     assert [message["id"] for message in inbox] == [legacy_id]
-    assert CommunicationService().get_unread_count(101, "researcher") == 1
 
 
 def test_chat_instruction_and_run_share_one_durable_receipt(coordination):
@@ -63,30 +56,6 @@ def test_chat_instruction_and_run_share_one_durable_receipt(coordination):
         c.store.admit(c.spec, conversation_thread="another-thread")
 
 
-def test_legacy_cursor_consumes_native_messages_without_reinterpreting_them_later(
-    coordination,
-):
-    from backend.flows.event_listeners import EventBus, UserMessageListener
-
-    c = coordination
-    bus = EventBus()
-    events = []
-    bus.subscribe("user_message_received", events.append)
-    listener = UserMessageListener(101, bus=bus)
-    c.store.admit(c.spec, conversation_thread="native-thread")
-    c.conn.execute(
-        "INSERT INTO chat_messages(project_id,thread_id,from_agent,to_agent,conversation_type,message) VALUES(101,'native-thread','user','researcher','user_to_agent','Previously native message')"
-    )
-    c.conn.commit()
-    listener.check()
-    assert not events
-    # Deleting the marker must not reactivate a message already observed as native.
-    c.conn.execute(
-        "DELETE FROM chat_messages WHERE id IN (SELECT user_message_id FROM runtime_chat_links)"
-    )
-    c.conn.commit()
-    listener.check()
-    assert not events
 
 
 def test_proposal_is_published_once_in_the_same_human_thread(coordination):

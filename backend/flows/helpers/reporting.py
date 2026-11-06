@@ -115,7 +115,7 @@ def log_flow_event(
 
     # Also emit to event_bus so WebSocket clients receive the event
     try:
-        from backend.flows.event_listeners import FlowEvent, event_bus
+        from backend.flows.event_bus import FlowEvent, event_bus
 
         event_bus.emit(FlowEvent(
             event_type=event_type,

@@ -17,10 +17,9 @@ from backend.api.models.chat import (
     ThreadArchiveResponse,
     UnreadCountsResponse,
 )
-from backend.communication.service import CommunicationService
 from backend.communication.agent_messages import AgentMessages
-from backend.communication.thread_manager import ThreadManager
-from backend.flows.event_listeners import FlowEvent, event_bus
+from backend.communication.owner_history import OwnerHistory
+from backend.flows.event_bus import FlowEvent, event_bus
 from backend.runtime.views import MESSAGE_SELECT
 from backend.tools.base.db import execute_with_retry
 
@@ -184,19 +183,20 @@ async def get_unread_counts(project_id: int):
     response_model=ThreadArchiveResponse,
     status_code=200,
 )
-async def archive_thread(project_id: int, thread_id: str):
-    """Archive a conversation thread."""
-    tm = ThreadManager()
-    tm.archive_thread(thread_id)
+async def archive_thread(project_id: int, thread_id: str, request: Request):
+    """Archive only this project's actual conversation; retain history and running work without manufacturing a message receipt."""
+    from backend.api.routes.runs import read_store
 
-    event_bus.emit(
-        FlowEvent(
-            event_type="thread_archived",
-            project_id=project_id,
-            entity_type="thread",
-            data={"thread_id": thread_id},
+    changed = await asyncio.to_thread(OwnerHistory(read_store(request)).archive, project_id, thread_id)
+    if changed:
+        event_bus.emit(
+            FlowEvent(
+                event_type="thread_archived",
+                project_id=project_id,
+                entity_type="thread",
+                data={"thread_id": thread_id},
+            )
         )
-    )
     return ThreadArchiveResponse(thread_id=thread_id, status="archived")
 
 
@@ -204,12 +204,15 @@ async def archive_thread(project_id: int, thread_id: str):
 async def get_agent_messages(
     project_id: int,
     agent_id: str,
+    request: Request,
     unread_only: bool = Query(default=False),
     limit: int = Query(default=50, ge=1, le=200),
 ):
-    """Return messages directed at a specific agent (by agent id or role)."""
-    comms = CommunicationService()
-    messages = comms.get_messages(
+    """Read the retained historical inbox; native peer messages remain in their canonical owner timeline and scoped participant interface."""
+    from backend.api.routes.runs import read_store
+
+    messages = await asyncio.to_thread(
+        OwnerHistory(read_store(request)).legacy_inbox,
         project_id=project_id,
         agent_id=agent_id,
         unread_only=unread_only,

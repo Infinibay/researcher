@@ -1,0 +1,144 @@
+{
+  "base_commit": "ae0e788",
+  "status": "scoped_communication_services_and_listeners_retirement_complete_with_preexisting_flow_failures",
+  "removed_production_modules": 9,
+  "retired_test_functions": 54,
+  "new_or_preserved_capabilities": [
+    "Project-scoped atomic idempotent conversation archive preserving actual work and native receipts",
+    "Historical inbox reads remain separate from canonical native thread identity even after metadata removal",
+    "Actual registered listener worker remains owned after Stop timeout and is removed only after observed closure",
+    "Shared EventBus/WebSocket remain independent of retired polling factories"
+  ],
+  "suites": {
+    "source": {
+      "cases": 184,
+      "passed": 179,
+      "failures": [
+        {
+          "name": "test_backlog_to_done_rejected",
+          "message": "Failed: DID NOT RAISE ValueError"
+        },
+        {
+          "name": "test_backlog_to_failed_rejected",
+          "message": "Failed: DID NOT RAISE ValueError"
+        },
+        {
+          "name": "test_update_task_status_safe_swallows_errors",
+          "message": "AssertionError: assert 'done' == 'backlog'\n  \n  - backlog\n  + done"
+        },
+        {
+          "name": "test_routes_to_no_structure_when_no_tasks",
+          "message": "AttributeError: 'MainProjectFlow' object has no attribute 'completion_router'"
+        },
+        {
+          "name": "test_routes_to_not_complete_when_tasks_exist",
+          "message": "AttributeError: 'MainProjectFlow' object has no attribute 'completion_router'"
+        }
+      ],
+      "errors": [],
+      "skipped": [],
+      "seconds": 37.555
+    },
+    "baseline": {
+      "cases": 5,
+      "passed": 0,
+      "failures": [
+        {
+          "name": "test_backlog_to_done_rejected",
+          "message": "Failed: DID NOT RAISE ValueError"
+        },
+        {
+          "name": "test_backlog_to_failed_rejected",
+          "message": "Failed: DID NOT RAISE ValueError"
+        },
+        {
+          "name": "test_update_task_status_safe_swallows_errors",
+          "message": "AssertionError: assert 'done' == 'backlog'\n  \n  - backlog\n  + done"
+        },
+        {
+          "name": "test_routes_to_no_structure_when_no_tasks",
+          "message": "AttributeError: 'MainProjectFlow' object has no attribute 'completion_router'"
+        },
+        {
+          "name": "test_routes_to_not_complete_when_tasks_exist",
+          "message": "AttributeError: 'MainProjectFlow' object has no attribute 'completion_router'"
+        }
+      ],
+      "errors": [],
+      "skipped": [],
+      "seconds": 0.707
+    },
+    "package": {
+      "cases": 184,
+      "passed": 179,
+      "failures": [
+        {
+          "name": "test_backlog_to_done_rejected",
+          "message": "Failed: DID NOT RAISE ValueError"
+        },
+        {
+          "name": "test_backlog_to_failed_rejected",
+          "message": "Failed: DID NOT RAISE ValueError"
+        },
+        {
+          "name": "test_update_task_status_safe_swallows_errors",
+          "message": "AssertionError: assert 'done' == 'backlog'\n  \n  - backlog\n  + done"
+        },
+        {
+          "name": "test_routes_to_no_structure_when_no_tasks",
+          "message": "AttributeError: 'MainProjectFlow' object has no attribute 'completion_router'"
+        },
+        {
+          "name": "test_routes_to_not_complete_when_tasks_exist",
+          "message": "AttributeError: 'MainProjectFlow' object has no attribute 'completion_router'"
+        }
+      ],
+      "errors": [],
+      "skipped": [],
+      "seconds": 39.235
+    },
+    "prompts": {
+      "cases": 2,
+      "passed": 2,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "seconds": 0.11
+    }
+  },
+  "baseline": {
+    "method": "Prior noneditable ae0e788 installed wheel, all674PythonSQL members verified before five selected old-flow failures outside checkout with Python -I",
+    "same_dependency_environment": true,
+    "identical_failure_ids_and_messages": true
+  },
+  "packaging_evidence": "docs/modernization/communication-services-packaging.json",
+  "prompt_inventory": {
+    "candidates": 233,
+    "files": 353,
+    "archived": 365,
+    "requires_review": 0,
+    "semantic_prompt_changes": 0
+  },
+  "documented_changed_or_new_definitions": 20,
+  "ruff_findings_deferred": {
+    "count": 16,
+    "reference": "DD058",
+    "diff_check": "One added blank line at EOF in test_project_owner_cutover.py; intentionally deferred, not a clean diff-check claim."
+  },
+  "real_model_calls": 0,
+  "real_provider_calls": 0,
+  "data_or_schema_modified": false,
+  "remaining_primary": [
+    "Remaining flows/helpers and autonomy controllers/readers, including five old-flow failures",
+    "Operation/images and real-data migration/inverse/restore",
+    "Complete history and budgets",
+    "Model/human/scientific/global evaluation, integral12pageacceptance and final fresh review"
+  ],
+  "limits": [
+    "54 retired test functions are not failure fixes. Three earlier failing cases belonging to removed listeners/LoopGuard are not claimed repaired.",
+    "Five flow failures remain: three old task-status expectations and two completion_router calls.",
+    "No new global suite, actual model/human/scientific/page acceptance or broad-scenario closure.",
+    "Stop proof covers registered controllers, not all external historical processes.",
+    "43 scenarios open,12pilots48concepts0fullyaccepted unchanged."
+  ]
+}
