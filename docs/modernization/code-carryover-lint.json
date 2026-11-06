@@ -1,0 +1,9 @@
+{
+  "base_commit": "27714ba",
+  "current_warnings": 3,
+  "baseline_warnings": 12,
+  "inherited": 3,
+  "introduced": [],
+  "resolved": 9,
+  "scope": "Changed Python files and new carryover module/model/tests; compare path/code/message counts using identical project Ruff config."
+}

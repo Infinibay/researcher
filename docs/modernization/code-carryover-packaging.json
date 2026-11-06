@@ -1,0 +1,29 @@
+{
+  "base_commit": "27714ba",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "366672429b06f86a0a5deee90f286e1933b5b7b03ab0b4871c18e7d3007d6f9e",
+  "observed": {
+    "tests_passed": 46,
+    "failures": [],
+    "skipped": 0,
+    "backend_modules_loaded": 356,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "controlled_native_turns_in_owned_fixture": 3,
+    "actual_kernel_owned_fixture": true,
+    "network": "Disabled except Unix sockets",
+    "semantic_assets": "Explicit prepared pinned public offline assets outside wheel",
+    "generation_and_ken": "Controlled original author, fresh author applying selected diff, independent reviewer; real kernel/Git and no real model inference"
+  },
+  "backend_tree": {
+    "matching_source_files": 776,
+    "sha256": "88dc091866fe629af36116a76bd401fc55ab0c9cc662dd25300b093c8b12ad7d"
+  },
+  "bootstrap": "Python3.12 -I -S with explicit installed dependency path and original host venv prefix restored; backend import paths remain restricted to extracted wheel.",
+  "excluded_known_failure": "Legacy invalid-transition text assertion recorded in the prior global baseline also excluded. Development inverse40/41/42 tests refuse later schemas43\u201353: test_unused_review_inverse_preserves_closed_author_and_candidate, test_unused_native_review_inverse_preserves_existing_packet, test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history[frozen_author]. Prior terminal-owner source receipt observes these guards with schemas43\u201349; current53selected run excludes them. Inverses43\u201353 remain required; guard not weakened (DD003).",
+  "limits": "Extracted backend wheel plus installed dependencies and explicit prepared offline assets; not a clean full host installation or an inference-quality trial.",
+  "final_selected_scope": "35 native-session protocol + 10 carryover storage/HTTP + 1 full three-turn owned carryover integration. No selected case was skipped or deselected.",
+  "initial_broad_evidence": "code-carryover-archive-comparison.json: 461 pass, one controlled reviewer fixture failure, four known historical deselections. All521application archive members identical to the final wheel; only2test sources changed.",
+  "final_seconds": 258.36,
+  "known_failure_scope": "The four historic exclusions belong to the initial broad selection; none of those tests are selected in the final46-case run. Inverses43\u201353 remain required."
+}

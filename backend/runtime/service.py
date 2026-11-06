@@ -182,9 +182,9 @@ class RuntimeService:
                 self._lock_fd = None
 
     async def submit(
-        self, spec, *, repository_id=None, conversation_thread=None, review=None
+        self, spec, *, repository_id=None, conversation_thread=None, review=None, prior_code=None
     ):
-        """Admit one owner request with an optional observed independent review target."""
+        """Admit one original owner request, optionally retaining observed prior code as data or a separate finding-review target."""
         self._accepting()
         if spec.runtime != "codex":
             raise RunConflict(
@@ -196,6 +196,7 @@ class RuntimeService:
             conversation_thread=conversation_thread,
             repository_id=repository_id,
             review=review,
+            prior_code=prior_code,
         )
         if previous is not None:
             return previous  # Receipt lookup never retries a queued start.
@@ -219,6 +220,7 @@ class RuntimeService:
             conversation_thread=conversation_thread,
             binding=binding,
             review=review,
+            prior_code=prior_code,
         )
         return await self._schedule(run) if admitted else run
 

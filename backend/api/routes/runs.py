@@ -8,6 +8,7 @@ from fastapi import APIRouter, FastAPI, HTTPException, Path, Query, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
+from backend.api.models.code_carryover import PriorCodeSelection
 from backend.api.models.questions import AnswerQuestions
 from backend.runtime.contracts import RunConflict, RunNotFound, RunSpec
 from backend.runtime.peer_process import PeerUncertain
@@ -95,11 +96,14 @@ async def answer_questions(
 
 
 class StartRun(BaseModel):
+    """Original owner request with optional observed prior code as attributed data."""
+
     model_config = ConfigDict(extra="forbid", strict=True)
     operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
     context_version: int = Field(ge=1)
     request: str = Field(min_length=1, max_length=50000)
     repository_id: int | None = Field(None, ge=1)
+    prior_code: PriorCodeSelection | None = None
 
 
 class StartFindingReview(BaseModel):
@@ -699,6 +703,7 @@ async def recover_remote_publication(
 
 @router.post("/{project_id}/tasks/{task_id}/runs", status_code=202)
 async def start_run(project_id: int, task_id: int, body: StartRun, request: Request):
+    """Start fresh native work with an exact optional earlier candidate selection; never transfer its approval."""
     try:
         spec = RunSpec(
             project_id,
@@ -711,7 +716,15 @@ async def start_run(project_id: int, task_id: int, body: StartRun, request: Requ
         )
     except ValueError as exc:
         raise HTTPException(422, str(exc)) from exc
-    return asdict(await service(request).submit(spec, repository_id=body.repository_id))
+    return asdict(await service(request).submit(spec, repository_id=body.repository_id, prior_code=body.prior_code.target() if body.prior_code else None))
+
+
+@router.get("/{project_id}/tasks/{task_id}/prior-code/{attempt_id}")
+async def preview_prior_code(project_id: int, task_id: int, attempt_id: str, request: Request):
+    """Inspect retained original native input and exact diff without resuming, editing or accepting it."""
+    from backend.runtime.code_carryover import CodeCarryovers
+
+    return await asyncio.to_thread(CodeCarryovers(read_store(request)).preview, project_id, task_id, attempt_id)
 
 
 @router.get("/{project_id}/runs/{run_id}")

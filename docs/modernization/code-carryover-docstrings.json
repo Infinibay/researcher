@@ -1,0 +1,288 @@
+{
+  "base_commit": "27714ba",
+  "changed_or_new_definitions_documented": 40,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/models/chat.py",
+      "symbol": "NativeInstruction",
+      "line": 55,
+      "docstring": "Fresh owner instruction with an exact optional prior-code input selection, never inherited approval.",
+      "file_sha256": "985fdbe241b49bfd6383a69337ccee634ef58b4e4eb62d090ba2ac38ca366d94"
+    },
+    {
+      "path": "backend/api/models/code_carryover.py",
+      "symbol": "PriorCodeSelection",
+      "line": 6,
+      "docstring": "Observed original attempt and packet fingerprint shared by Tasks and Conversation admissions.",
+      "file_sha256": "0b8e474212aa6366494f3de624e547a77b2067b91f7a8fec5f646b9cee76cf50"
+    },
+    {
+      "path": "backend/api/models/code_carryover.py",
+      "symbol": "PriorCodeSelection.target",
+      "line": 13,
+      "docstring": "Translate the validated selection to the runtime's neutral typed contract.",
+      "file_sha256": "0b8e474212aa6366494f3de624e547a77b2067b91f7a8fec5f646b9cee76cf50"
+    },
+    {
+      "path": "backend/api/routes/chat.py",
+      "symbol": "send_instruction",
+      "line": 59,
+      "docstring": "Preserve the original explanatory instruction and optional observed prior code in one native admission receipt.",
+      "file_sha256": "b70d0817885ee4085bc974a996cf6cbe5e405590ff7f95f07a5c3453f42126e1"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "StartRun",
+      "line": 98,
+      "docstring": "Original owner request with optional observed prior code as attributed data.",
+      "file_sha256": "15e01ae58831aaf24f762646569e80a85afb6c8d40b2071eee9b18b4e134f15f"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "start_run",
+      "line": 705,
+      "docstring": "Start fresh native work with an exact optional earlier candidate selection; never transfer its approval.",
+      "file_sha256": "15e01ae58831aaf24f762646569e80a85afb6c8d40b2071eee9b18b4e134f15f"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "preview_prior_code",
+      "line": 723,
+      "docstring": "Inspect retained original native input and exact diff without resuming, editing or accepting it.",
+      "file_sha256": "15e01ae58831aaf24f762646569e80a85afb6c8d40b2071eee9b18b4e134f15f"
+    },
+    {
+      "path": "backend/runtime/code_carryover.py",
+      "symbol": "_encoded",
+      "line": 13,
+      "docstring": "Render exact complete input deterministically so owner observations and retries identify the same material.",
+      "file_sha256": "920d90ff0b7317318b6af00d63c32449d3e447b342ce85a3704385b68ade2d65"
+    },
+    {
+      "path": "backend/runtime/code_carryover.py",
+      "symbol": "PriorCodeTarget",
+      "line": 25,
+      "docstring": "Owner-observed original candidate and complete input fingerprint, never a moving path or branch.",
+      "file_sha256": "920d90ff0b7317318b6af00d63c32449d3e447b342ce85a3704385b68ade2d65"
+    },
+    {
+      "path": "backend/runtime/code_carryover.py",
+      "symbol": "PriorCodeTarget.__post_init__",
+      "line": 31,
+      "docstring": "Reject ambiguous identities before admission or receipt lookup.",
+      "file_sha256": "920d90ff0b7317318b6af00d63c32449d3e447b342ce85a3704385b68ade2d65"
+    },
+    {
+      "path": "backend/runtime/code_carryover.py",
+      "symbol": "CodeCarryovers",
+      "line": 40,
+      "docstring": "Read retained original bytes and freeze owner-selected data using the existing admission receipt transaction.",
+      "file_sha256": "920d90ff0b7317318b6af00d63c32449d3e447b342ce85a3704385b68ade2d65"
+    },
+    {
+      "path": "backend/runtime/code_carryover.py",
+      "symbol": "CodeCarryovers.__init__",
+      "line": 43,
+      "docstring": "Reuse the run store; construction starts no process or additional controller.",
+      "file_sha256": "920d90ff0b7317318b6af00d63c32449d3e447b342ce85a3704385b68ade2d65"
+    },
+    {
+      "path": "backend/runtime/code_carryover.py",
+      "symbol": "CodeCarryovers._packet",
+      "line": 47,
+      "docstring": "Require an actual closed native author and its saved complete input; do not reconstruct unknown history.",
+      "file_sha256": "920d90ff0b7317318b6af00d63c32449d3e447b342ce85a3704385b68ade2d65"
+    },
+    {
+      "path": "backend/runtime/code_carryover.py",
+      "symbol": "CodeCarryovers.preview",
+      "line": 132,
+      "docstring": "Expose the exact retained candidate data without resuming it, editing files or accepting work.",
+      "file_sha256": "920d90ff0b7317318b6af00d63c32449d3e447b342ce85a3704385b68ade2d65"
+    },
+    {
+      "path": "backend/runtime/code_carryover.py",
+      "symbol": "CodeCarryovers.capture",
+      "line": 138,
+      "docstring": "Bind the exact owner observation and same registered source to a fresh development admission.",
+      "file_sha256": "920d90ff0b7317318b6af00d63c32449d3e447b342ce85a3704385b68ade2d65"
+    },
+    {
+      "path": "backend/runtime/code_carryover.py",
+      "symbol": "CodeCarryovers.input",
+      "line": 172,
+      "docstring": "Read the original atomic admission receipt, independent of later source state and candidate files.",
+      "file_sha256": "920d90ff0b7317318b6af00d63c32449d3e447b342ce85a3704385b68ade2d65"
+    },
+    {
+      "path": "backend/runtime/codex_session.py",
+      "symbol": "CodexSession",
+      "line": 98,
+      "docstring": "Own one native thread/connection; serialize turns and correlate control.\n\nThe product service must persist context/attempt identity and aggregate\nbudgets across process restarts. Interrupted sessions retire their connection;\nfurther work must reopen the durable native thread. This class does not decide\nwhether a correction was applied, an artifact accepted, or a task done.",
+      "file_sha256": "a2d7b08e594fe26757dc4d1d40eb19f874fa014378b122863df92dd5aa17ec51"
+    },
+    {
+      "path": "backend/runtime/codex_session.py",
+      "symbol": "CodexSession.run",
+      "line": 224,
+      "docstring": "Run one bounded turn; a completed scoped host response counts as progress while model chatter and pending decisions do not.",
+      "file_sha256": "a2d7b08e594fe26757dc4d1d40eb19f874fa014378b122863df92dd5aa17ec51"
+    },
+    {
+      "path": "backend/runtime/run_inputs.py",
+      "symbol": "freeze_input",
+      "line": 95,
+      "docstring": "Freeze complete original task/history and typed prerequisite delivery; reject oversize material without hidden omission.",
+      "file_sha256": "5c5849dd3ccf80d684129a33b7d512039369011df7839a968489334e9afe6b10"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService",
+      "line": 63,
+      "docstring": "Own native attempts and grant-bound tool closure before durable terminal states.",
+      "file_sha256": "29c0fbc06c804f66b47d8f1f7503c24b719878ff1497543d06d7b8111a4facb2"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService.submit",
+      "line": 184,
+      "docstring": "Admit one original owner request, optionally retaining observed prior code as data or a separate finding-review target.",
+      "file_sha256": "29c0fbc06c804f66b47d8f1f7503c24b719878ff1497543d06d7b8111a4facb2"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore",
+      "line": 67,
+      "docstring": "Own durable admission, fenced attempts and version-bound review requests in SQLite.",
+      "file_sha256": "98946b8f3fa9b61fda3786674a237d64722b406ff79a6013afe5edc8a53d15a4"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore._admission_intent",
+      "line": 953,
+      "docstring": "Keep historical ordinary intents stable and bind exact review or earlier-code input selections.",
+      "file_sha256": "98946b8f3fa9b61fda3786674a237d64722b406ff79a6013afe5edc8a53d15a4"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore._admission_receipt",
+      "line": 976,
+      "docstring": "Recover original admission receipts without rechecking or replaying effects.",
+      "file_sha256": "98946b8f3fa9b61fda3786674a237d64722b406ff79a6013afe5edc8a53d15a4"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore.admission_receipt",
+      "line": 1009,
+      "docstring": "Read an exact ordinary or review request receipt without scheduling work.",
+      "file_sha256": "98946b8f3fa9b61fda3786674a237d64722b406ff79a6013afe5edc8a53d15a4"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore.admit",
+      "line": 1059,
+      "docstring": "Return the durable receipt for one scoped admission, freezing a review target when supplied.",
+      "file_sha256": "98946b8f3fa9b61fda3786674a237d64722b406ff79a6013afe5edc8a53d15a4"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore.admit_once",
+      "line": 1071,
+      "docstring": "Admit a typed author or bound independent finding review without reinterpreting historical receipts.",
+      "file_sha256": "98946b8f3fa9b61fda3786674a237d64722b406ff79a6013afe5edc8a53d15a4"
+    },
+    {
+      "path": "backend/tests/runtime/fake_owned_native.py",
+      "symbol": "next_development_tool",
+      "line": 207,
+      "docstring": "Exercise private edits, durable job reads and fresh Ken reads without proposing research acceptance.",
+      "file_sha256": "710250c8ebf977f26cd4ae4938a024cdfd9f90d963be70d236530893020ce473"
+    },
+    {
+      "path": "backend/tests/runtime/fake_owned_native.py",
+      "symbol": "development_edit_code",
+      "line": 266,
+      "docstring": "Consume actual delivered prior bytes when selected; the controlled fresh author applies them with Git in its private copy.",
+      "file_sha256": "710250c8ebf977f26cd4ae4938a024cdfd9f90d963be70d236530893020ce473"
+    },
+    {
+      "path": "backend/tests/runtime/fake_owned_native.py",
+      "symbol": "next_code_review_tool",
+      "line": 356,
+      "docstring": "Generate controlled independent review calls; every source/proposal/Git/closure operation remains production code.",
+      "file_sha256": "710250c8ebf977f26cd4ae4938a024cdfd9f90d963be70d236530893020ce473"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_carryover.py",
+      "symbol": "reuse_request",
+      "line": 19,
+      "docstring": "Select exact observed data after explicit original withdrawal; storage witnesses are synthetic.",
+      "file_sha256": "43b2ddf83f33c27ab8d150f52812b642bd3154d3423955286e152981a400b6e3"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_carryover.py",
+      "symbol": "test_owner_reuses_exact_prior_bytes_with_new_run_and_original_receipt",
+      "line": 32,
+      "docstring": "Dropping prior-code admission binding would lose exact bytes on reload or silently change a retried intent.",
+      "file_sha256": "43b2ddf83f33c27ab8d150f52812b642bd3154d3423955286e152981a400b6e3"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_carryover.py",
+      "symbol": "test_prior_code_keeps_obsolete_original_context_separate_from_new_requirements",
+      "line": 81,
+      "docstring": "Reconstructing the original request from current task state would erase what the old author actually saw.",
+      "file_sha256": "43b2ddf83f33c27ab8d150f52812b642bd3154d3423955286e152981a400b6e3"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_carryover.py",
+      "symbol": "test_foreign_stale_or_unclosed_prior_code_cannot_admit_a_run",
+      "line": 132,
+      "docstring": "Neither a selected label nor an old preview can authorize foreign input or bypass original native closure.",
+      "file_sha256": "43b2ddf83f33c27ab8d150f52812b642bd3154d3423955286e152981a400b6e3"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_carryover.py",
+      "symbol": "test_missing_original_input_is_not_reconstructed_from_current_state",
+      "line": 159,
+      "docstring": "Historic unrecorded input remains unknown; it is not a verified native carryover packet.",
+      "file_sha256": "43b2ddf83f33c27ab8d150f52812b642bd3154d3423955286e152981a400b6e3"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_carryover.py",
+      "symbol": "test_owner_http_and_chat_preserve_the_same_prior_input_intent",
+      "line": 169,
+      "docstring": "Ignoring the selected target at either public entry would silently start unrelated work after reload or response loss.",
+      "file_sha256": "43b2ddf83f33c27ab8d150f52812b642bd3154d3423955286e152981a400b6e3"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_carryover.py",
+      "symbol": "test_complete_prior_input_over_budget_is_refused_without_truncating_history",
+      "line": 251,
+      "docstring": "A legally large frozen conversation must not be shortened silently to make prior material fit.",
+      "file_sha256": "43b2ddf83f33c27ab8d150f52812b642bd3154d3423955286e152981a400b6e3"
+    },
+    {
+      "path": "backend/tests/runtime/test_codex_session.py",
+      "symbol": "test_completed_host_response_is_progress_after_a_slow_tool_or_decision",
+      "line": 87,
+      "docstring": "Ignoring completed host requests would abort useful tool work despite its bounded successful response.",
+      "file_sha256": "fab868594067061472375468b6fd1be71714ec7aea127e1fe4aa70bf0078d613"
+    },
+    {
+      "path": "backend/tests/runtime/test_codex_session.py",
+      "symbol": "test_completed_host_response_is_progress_after_a_slow_tool_or_decision.decide",
+      "line": 89,
+      "docstring": "Finish a real awaited host decision after the model-idle allowance, within the absolute wall limit.",
+      "file_sha256": "fab868594067061472375468b6fd1be71714ec7aea127e1fe4aa70bf0078d613"
+    },
+    {
+      "path": "backend/tests/runtime/test_public_development.py",
+      "symbol": "test_owner_http_develops_checks_reviews_and_accepts_exact_candidate",
+      "line": 17,
+      "docstring": "Fresh authoring and explicit prior-code reuse keep original receipts, independent checks/review and an unchanged source.",
+      "file_sha256": "347cabdba83b23aacf5f0a0927f3a22876c3244ddab277110ec89bdcac2d330e"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

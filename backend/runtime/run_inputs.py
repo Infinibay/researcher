@@ -114,6 +114,11 @@ def freeze_input(conn, row, context):
         "conversation": conversation_history(conn, row),
         "work_delivery": json.loads(delivery["packet_json"]) if delivery else None,
     }
+    from backend.runtime.code_carryover import CodeCarryovers
+
+    prior_code = CodeCarryovers.input(conn, row)
+    if prior_code is not None:
+        payload["prior_code"] = prior_code
     encoded = json.dumps(
         payload,
         sort_keys=True,

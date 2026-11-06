@@ -229,6 +229,7 @@ class CodexSession:
         on_request: Callable[[dict], Awaitable[dict]] | None = None,
         on_started: Callable[[str, str], Awaitable[None]] | None = None,
     ) -> NativeTurnResult:
+        """Run one bounded turn; a completed scoped host response counts as progress while model chatter and pending decisions do not."""
         if self._active:
             raise RuntimeError("A native turn is already active")
         if self.thread_id is None:
@@ -292,6 +293,7 @@ class CodexSession:
                         completed, decision = await self._callback(on_request(message))
                         if completed:
                             await self.rpc.respond(message["id"], decision)
+                            last_progress = time.monotonic()
                         continue
                     method = message["method"]
                     item = params.get("item", {})

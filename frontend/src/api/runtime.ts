@@ -228,26 +228,46 @@ export function sendAnswer(intent: AnswerIntent) {
   )
 }
 
+/** Exact prior candidate observation; selected bytes remain data under fresh authority. */
+export interface PriorCodeSelection {attempt_id:string;snapshot_sha256:string}
+/** Complete retained original input and patch, without inherited approval. */
+export interface PriorCodePacket {
+  snapshot_sha256:string
+  snapshot:{origin:{run_id:string;attempt_id:string;context_version:number;repository_id:number};candidate:{base_sha:string;head_sha:string;diff_sha256:string};original_input:Record<string,unknown> & {request:string};diff_base64:string;diff_bytes:number}
+  authority:'data_only';acceptance:'not_granted';publication:'not_granted'
+}
+/** Inspect one task's exact earlier native material; this GET cannot resume or accept it. */
+export function priorCodeInput(projectId:number,taskId:number,attemptId:string) {
+  return fetchApi<PriorCodePacket>(`/api/projects/${projectId}/tasks/${taskId}/prior-code/${encodeURIComponent(attemptId)}`)
+}
+/** Decode exact UTF-8 patch bytes for display, retaining binary data only in the original download. */
+export function priorPatchText(encoded:string):string|null {
+  try {return new TextDecoder('utf-8',{fatal:true}).decode(Uint8Array.from(atob(encoded),character=>character.charCodeAt(0)))} catch {return null}
+}
+
 export interface InstructionDraft {
   task_id: number
   context_version: number
   thread_id: string
   message: string
   repository_id?: number
+  prior_code?: Readonly<PriorCodeSelection>
 }
 export interface InstructionIntent {
   readonly projectId: number
   readonly body: Readonly<InstructionDraft & { operation_key: string }>
 }
 
+/** Freeze the complete original request and prior-code observation so uncertain sends cannot silently change intent. */
 export function prepareInstruction(projectId: number, draft: InstructionDraft): InstructionIntent {
   if (![projectId, draft.task_id, draft.context_version].every(x => Number.isSafeInteger(x) && x > 0)
     || !/^[A-Za-z0-9_.:-]{1,128}$/.test(draft.thread_id)
     || !draft.message.trim() || draft.message.length > 50000
-    || (draft.repository_id != null && (!Number.isSafeInteger(draft.repository_id) || draft.repository_id <= 0))) {
+    || (draft.repository_id != null && (!Number.isSafeInteger(draft.repository_id) || draft.repository_id <= 0))
+    || (draft.prior_code != null && (!draft.prior_code.attempt_id.trim() || draft.prior_code.attempt_id.length>128 || !/^[0-9a-f]{64}$/.test(draft.prior_code.snapshot_sha256)))) {
     throw new Error('Revisa la tarea, el contexto y el contenido de la solicitud.')
   }
-  return Object.freeze({ projectId, body: Object.freeze({ ...draft, operation_key: crypto.randomUUID() }) })
+  return Object.freeze({ projectId, body: Object.freeze({ ...draft, ...(draft.prior_code?{prior_code:Object.freeze({...draft.prior_code})}:{}), operation_key: crypto.randomUUID() }) })
 }
 
 export function sendInstruction(intent: InstructionIntent) {

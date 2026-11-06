@@ -247,3 +247,17 @@ si su cierre no se pudo observar. No equivale a exclusión global/atómica entre
 procesos ni prueba el cierre de productores desconocidos. Desarrollo/revisión,
 adopción explícita de candidatos previos, otros tipos y retirada de dependencias
 siguen pendientes. [Contrato, evidencia y límites](native-project-owner-cutover.md).
+
+
+## Candidatos nativos previos como material nuevo — 2026-11-05
+
+El propietario selecciona un intento y huella; el recibo de admisión conserva diff
+binario/entrada/origen completos para el autor nuevo. Los cambios no prestan
+permisos, prueba ni aceptación. La cadena con kernel y Git aplica el diff en otra
+copia, ejecuta checks nuevos y exige revisión/aceptación nuevas. No se añade loop.
+El reloj de inactividad reconoce ahora respuestas de host completadas; no texto de
+razonamiento ni decisiones pendientes. Se mantienen los demás límites.
+
+Sigue pendiente importar worktrees antiguos sin candidato nativo, conectar ese
+material al dispatcher y retirar DevelopmentFlow/CodeReviewFlow/tipos restantes.
+No falsear su procedencia para habilitarlos. [Contrato](native-code-carryover.md).

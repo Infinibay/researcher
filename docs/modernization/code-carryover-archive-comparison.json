@@ -1,0 +1,23 @@
+{
+  "base_commit": "27714ba",
+  "initial_wheel_sha256": "c88f29cac260fd100807d75f86cbe06dd096dbec0449022d75132dc6ccf34b36",
+  "final_wheel_sha256": "366672429b06f86a0a5deee90f286e1933b5b7b03ab0b4871c18e7d3007d6f9e",
+  "application_members_identical": true,
+  "matching_application_member_count": 521,
+  "changed_test_members": [
+    "backend/tests/runtime/fake_owned_native.py",
+    "backend/tests/runtime/test_public_development.py"
+  ],
+  "initial_broad_run": {
+    "passed": 461,
+    "failed": [
+      "backend.tests.runtime.test_public_development::test_owner_http_develops_checks_reviews_and_accepts_exact_candidate[carryover]"
+    ],
+    "skipped": 0,
+    "known_cases_deselected": 4,
+    "seconds": 368.11,
+    "failure": "The controlled reviewer expected 137 to 200 in the current request instead of inspecting that text in the selected prior original input. Fixture corrected; application archive members unchanged.",
+    "module_import_origin_assertion": "Not executed after the failing pytest exit; final selected verifier checks loaded module origins."
+  },
+  "reuse_scope": "Successful broad application evidence is reusable for identical application archive bytes only. The corrected physical case and all protocol/adoption tests require their own passing final receipt; no claim the initial suite passed or that the global project suite is green."
+}

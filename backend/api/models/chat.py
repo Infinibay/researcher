@@ -6,6 +6,8 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
+from backend.api.models.code_carryover import PriorCodeSelection
+
 
 class ChatMessageCreate(BaseModel):
     """Explanatory note only; native instructions and corrections have their own typed endpoints."""
@@ -51,6 +53,8 @@ class ChatMessageResponse(BaseModel):
 
 
 class NativeInstruction(BaseModel):
+    """Fresh owner instruction with an exact optional prior-code input selection, never inherited approval."""
+
     model_config = ConfigDict(extra="forbid", strict=True)
     task_id: int = Field(gt=0)
     context_version: int = Field(gt=0)
@@ -58,6 +62,7 @@ class NativeInstruction(BaseModel):
     thread_id: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
     message: str = Field(min_length=1, max_length=50000)
     repository_id: int | None = Field(None, gt=0)
+    prior_code: PriorCodeSelection | None = None
 
 
 class ChatThreadResponse(BaseModel):

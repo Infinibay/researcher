@@ -12,11 +12,13 @@ from backend.tests.runtime.test_owned_factory import (
 )
 
 
-@pytest.mark.timeout(150)
+@pytest.mark.timeout(420)
+@pytest.mark.parametrize("reuse_prior", [False, True], ids=["fresh", "carryover"])
 async def test_owner_http_develops_checks_reviews_and_accepts_exact_candidate(
     development_config,
+    reuse_prior,
 ):
-    """Public requests share the original owned coordinator; duplicate admission never edits, checks or reviews twice."""
+    """Fresh authoring and explicit prior-code reuse keep original receipts, independent checks/review and an unchanged source."""
     from backend.api.local_access import LocalAccess
     from backend.api.main import create_app
     from backend.tests.runtime.test_development_workspace import fixture_git
@@ -59,6 +61,7 @@ async def test_owner_http_develops_checks_reviews_and_accepts_exact_candidate(
             "code",
             "bug_fix",
             "plan",
+            "investigation",
         ]
         version = workspace["context"]["context_version"]
         body = {
@@ -77,6 +80,52 @@ async def test_owner_http_develops_checks_reviews_and_accepts_exact_candidate(
         assert replay.status_code == 202 and replay.json()["run_id"] == run["run_id"]
         assert replay.json()["execution_kind"] == "development"
         assert replay.json()["status"] == "needs_review"
+        if reuse_prior:
+            from backend.runtime.candidate_state import CodeCandidates
+
+            original = run
+            old_candidate = CodeCandidates(runtime.store).inspect(
+                101, original["run_id"]
+            )
+            preview = await owner.get(
+                f"/api/projects/101/tasks/1001/prior-code/{old_candidate['attempt_id']}"
+            )
+            assert preview.status_code == 200, preview.text
+            packet = preview.json()
+            stopped = await owner.post(
+                f"/api/projects/101/runs/{original['run_id']}/stop"
+            )
+            assert (
+                stopped.status_code == 202 and stopped.json()["status"] == "cancelled"
+            )
+            body = {
+                **body,
+                "operation_key": "public-author-carryover",
+                "request": "Reuse the exact earlier patch in a fresh copy and explain its original context; preserve 200 and run new checks.",
+                "prior_code": {
+                    "attempt_id": old_candidate["attempt_id"],
+                    "snapshot_sha256": packet["snapshot_sha256"],
+                },
+            }
+            response = await owner.post(path, json=body)
+            assert response.status_code == 202, response.text
+            run = response.json()
+            assert run["run_id"] != original["run_id"]
+            await runtime.wait(run["run_id"])
+            saved = json.loads(
+                runtime.store.input_record(101, run["run_id"])["input_text"]
+            )
+            assert (
+                saved["prior_code"]["snapshot"]["origin"]["attempt_id"]
+                == old_candidate["attempt_id"]
+            )
+            assert saved["prior_code"]["authority"] == "data_only"
+            with runtime.store._transaction() as conn:
+                jobs = conn.execute(
+                    "SELECT stdout FROM runtime_jobs WHERE run_id=?", (run["run_id"],)
+                ).fetchall()
+                assert any(b"prior patch applied" in bytes(job[0]) for job in jobs)
+            assert runtime.store.get(101, original["run_id"]).status == "cancelled"
         state_path = f"/api/projects/101/runs/{run['run_id']}/code-result"
         state = (await owner.get(state_path)).json()
         assert state["candidate_current"] and not state["eligible"]
@@ -151,16 +200,12 @@ async def test_owner_http_develops_checks_reviews_and_accepts_exact_candidate(
         )
         assert (c.s.workspace / "fact.txt").read_text() == "137"
         with runtime.store._transaction() as conn:
-            assert (
-                conn.execute("SELECT COUNT(*) FROM runtime_code_candidates").fetchone()[
-                    0
-                ]
-                == 1
-            )
-            assert (
-                conn.execute("SELECT COUNT(*) FROM runtime_code_checks").fetchone()[0]
-                == 1
-            )
+            assert conn.execute(
+                "SELECT COUNT(*) FROM runtime_code_candidates"
+            ).fetchone()[0] == (2 if reuse_prior else 1)
+            assert conn.execute("SELECT COUNT(*) FROM runtime_code_checks").fetchone()[
+                0
+            ] == (2 if reuse_prior else 1)
             assert (
                 conn.execute(
                     "SELECT COUNT(*) FROM runtime_code_review_requests"

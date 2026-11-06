@@ -57,6 +57,7 @@ async def list_messages(
 
 @router.post("/{project_id}/instructions", status_code=202)
 async def send_instruction(project_id: int, body: NativeInstruction, request: Request):
+    """Preserve the original explanatory instruction and optional observed prior code in one native admission receipt."""
     from backend.api.routes.runs import owner_view, service
     from backend.runtime.contracts import RunSpec
 
@@ -73,7 +74,8 @@ async def send_instruction(project_id: int, body: NativeInstruction, request: Re
     except ValueError as exc:
         raise HTTPException(422, str(exc)) from exc
     run = await service(request).submit(
-        spec, repository_id=body.repository_id, conversation_thread=body.thread_id
+        spec, repository_id=body.repository_id, conversation_thread=body.thread_id,
+        prior_code=body.prior_code.target() if body.prior_code else None
     )
     message = await asyncio.to_thread(
         owner_view(request).instruction_message, project_id, run.run_id

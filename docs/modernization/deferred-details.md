@@ -45,3 +45,6 @@ retomarlo. No convertir su registro en otra investigación o implementación.
 
 
 | DD-019 | Cuatro avisos Ruff nuevos de estilo en consumidores antiguos: tres I001 en imports locales del motor y un TRY004 por rechazo de tipo de evento. Hay50avisos heredados,16resueltos por la sustitución de bloques; conservar comparación `project-owner-lint.json`. | `loop_engine.py`, `agent_loop.py` | Retirada de estos consumidores o pulido posterior; no otra pasada del controlador. La exclusión global atómica y la adopción de trabajo previo siguen siendo capacidades principales, no detalles de estilo. |
+
+
+| DD-020 | Mostrar el origen seleccionado y su descarga desde el recibo de admisión también antes del primer intento, tras recargar una solicitud en cola. Hoy el servidor conserva la selección exacta y retry_start la reutiliza; la entrada literal completa se muestra una vez reservado el intento. | `CodeCarryovers.input`, `QueuedStart`, `RunInputRecord`, selector de cambios previos | Integración/aceptación de Tareas y comunicación: hacer visible ese contexto al decidir reintentar. No reabrir ahora el protocolo de admisión ni tratarlo como adopción de worktrees antiguos, que sigue siendo capacidad principal. |

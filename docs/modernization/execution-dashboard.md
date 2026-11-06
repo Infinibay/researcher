@@ -9,7 +9,37 @@ Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: activadores antiguos del proyecto acotados
+## Etapa actual: reutilizar cambios nativos como entrada nueva
+
+**Resultado:** Tareas/Conversación permiten seleccionar un candidato nativo anterior
+por intento y huella. Conservan diff completo, entrada original y procedencia como
+datos para un autor nuevo, separados de la solicitud/correcciones actuales. No se
+trasladan carpeta, permisos, pruebas, revisión ni aceptación. El recibo existente
+conserva la selección frente a pérdida de respuesta y reintento. No hay otra tabla,
+migración o loop. Un fallo real de inactividad tras herramientas terminadas también
+queda corregido, con reproducción corta y controles de límites conservados.
+
+**Verificación:**63casos dirigidos y45de protocolo/adopción pasan (se solapan).
+El primer paquete pasó461y falló1fixture de revisor;4casos históricos excluidos.
+Sólo cambiaron2tests y coinciden los521miembros de aplicación entre ambos wheels.
+El final pasa46casos en258,36s,356imports sólo del wheel y776fuentes coincidentes.
+Recorrido real de kernel/broker/Git/SQLite,3turnos controlados: candidato previo→
+retirada→autor nuevo aplica diff recibido→pruebas nuevas→revisión independiente→
+aceptación.2candidatos/2checks/1revisión/1aceptación, origen137intacto; sin publicación.
+94frontend y compilación pasan;40definiciones documentadas,0avisos Ruff nuevos.
+Sin nuevo ensayo de modelo real, comprensión humana, aceptación visual o suite
+global verde. [Resultados](code-carryover-results.json),
+[paquete](code-carryover-packaging.json), [contrato](../architecture/native-code-carryover.md).
+
+**Siguiente bloque principal:** importar explícitamente archivos de worktrees
+antiguos enlazados/sucios o copias sin candidato capturado, usando el recorrido de
+entrada y autoría existente. Conectar selección al despacho de sucesoras de planes
+y retirar los resultados/consumidores de desarrollo/revisión antiguos. La exclusión
+global y todo el resto del plan permanecen pendientes. No pulir ahora el selector
+ni reconstruir otro registro de ejecución. En ensayos largos, estabilizar primero
+los contratos de fixtures y ejecutar la cadena física desde el wheel final.
+
+## Etapa anterior: activadores antiguos del proyecto acotados
 
 **Resultado:** la admisión nativa real excluye los productores antiguos registrados
 del proyecto completo, también para tareas sin run propio. Mensajes, recuperación
@@ -27,7 +57,7 @@ inferencia real, suite global verde, evaluación humana o aceptación visual.
 [Resultados](project-owner-results.json), [paquete](project-owner-packaging.json),
 [contrato y límites](../architecture/native-project-owner-cutover.md).
 
-**Siguiente bloque principal:** migrar el resultado de desarrollo/revisión y
+**Siguiente bloque previsto entonces (histórico):** migrar el resultado de desarrollo/revisión y
 trabajo parcial/candidatos previos al recorrido nativo existente. La exclusión
 atómica/global entre procesos, productores desconocidos, tipos restantes e
 inferencia auxiliar sigue pendiente. No ampliar ahora el registro de hilos ni

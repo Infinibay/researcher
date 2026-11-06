@@ -1,0 +1,112 @@
+{
+  "base_commit": "27714ba",
+  "status": "retained_native_candidate_input_and_fresh_execution_connected_legacy_files_and_plan_dispatch_pending",
+  "schema_version": 53,
+  "new_schema_or_controller": false,
+  "implemented": [
+    "Owner preview and exact attempt/fingerprint selection preserve complete original native input, native origin and binary diff bytes as data for a fresh development run.",
+    "Existing admission command receipt atomically stores selected packet with new run; old ordinary hashes unchanged. Same key returns original run without reopening source; another target conflicts. No source workspace, native context, checks, acceptance or publication authority transferred.",
+    "Fresh frozen input separates owner request/current corrections from prior context/base. Same project/task/registered directory and original native closure required; missing historical input is unknown, not reconstructed. Complete oversize material is refused without truncation.",
+    "HTTP/Conversation/Tasks selection and original retry intent connected; inspection/full prior input/diff download, Stop for needs_review and retained-input explanation available.",
+    "A completed scoped host response now refreshes the native inactivity clock, fixing a reproduced successful-tool-but-failed-turn case. Pending callbacks, thinking chatter, unknown/foreign messages and absolute wall/budget controls retain their boundaries."
+  ],
+  "verification": {
+    "source": {
+      "overlapping_regressions": [
+        {
+          "passed": 63,
+          "seconds": 29.05,
+          "scope": "Carryover, initial input, service and project cutover"
+        },
+        {
+          "passed": 45,
+          "seconds": 9.51,
+          "scope": "Native session protocol plus carryover, including idle-clock fix"
+        }
+      ],
+      "red_evidence": "Missing feature8FAIL; missing HTTP preview404; mutable frontend prior selection; missing inspection/decoder; completed host response idle reproduction1FAIL0.63s before fix."
+    },
+    "packaged_initial": {
+      "passed": 461,
+      "failed": 1,
+      "known_deselected": 4,
+      "seconds": 368.11,
+      "failure": "Controlled reviewer expected the old request in current input; it must inspect the old request in the selected original input. Corrected only test fixtures; no application member changed."
+    },
+    "packaged_final": {
+      "tests_passed": 46,
+      "failures": [],
+      "skipped": 0,
+      "backend_modules_loaded": 356,
+      "backend_imports_only_from_wheel": true,
+      "model_turns": 0,
+      "controlled_native_turns_in_owned_fixture": 3,
+      "actual_kernel_owned_fixture": true,
+      "network": "Disabled except Unix sockets",
+      "semantic_assets": "Explicit prepared pinned public offline assets outside wheel",
+      "generation_and_ken": "Controlled original author, fresh author applying selected diff, independent reviewer; real kernel/Git and no real model inference",
+      "seconds": 258.36,
+      "matching_python_sql_sources": 776,
+      "matching_application_members_vs_initial": 521,
+      "application_member_differences": []
+    },
+    "physical_chain": {
+      "passed": true,
+      "seconds": 248.116,
+      "controlled_native_turns": 3,
+      "real_model_turns": 0,
+      "real_kernel_broker_sqlite_git": true,
+      "stages": [
+        "Original private author produces candidate and check",
+        "Owner withdrawal preserves original candidate",
+        "Fresh author applies actual delivered prior patch in another private copy",
+        "New candidate and check",
+        "Distinct actor/native reviewer checks exact source and prior/current context",
+        "Explicit owner acceptance of the fresh candidate"
+      ],
+      "asserted_results": {
+        "original_fact_txt": "137",
+        "fresh_candidate_fact_txt": "200",
+        "candidate_count": 2,
+        "check_count": 2,
+        "review_count": 1,
+        "acceptance_count": 1,
+        "publication_performed": false
+      },
+      "limits": "Controlled generation and Ken, text fixture patch. No real-model quality/comprehension trial, no automatic graph carryover and no publication in this chain."
+    },
+    "frontend": {
+      "passed": 94,
+      "failed": 0,
+      "skipped": 0,
+      "typescript_build": true,
+      "vite_build": true,
+      "build_seconds": 5.04,
+      "new_browser_or_full_page_acceptance": false
+    },
+    "english_docstrings": {
+      "changed_or_new_python_definitions": 40,
+      "missing": [],
+      "frontend": "English JSDoc for new module/component/selection/decoder and modified input renderer."
+    },
+    "lint": {
+      "inherited": 3,
+      "introduced": 0,
+      "resolved": 9,
+      "new_modules_clean": true
+    }
+  },
+  "process_rework": {
+    "source_physical_trials": "Stale supported-type expectation, Stop200vsactual202 fixture, actual idle-clock defect, then stale reviewer request assertion (last failed237.91s). No successful source full-chain claim; final physical proof is the extracted final wheel.",
+    "avoidable_duplication": "The initial broad wheel repeated the stale reviewer fixture before the full physical source trial had stabilized. Preserved its461successful cases and compared every application archive member; final run repeated protocol/adoption and the corrected physical chain only.",
+    "next_execution_rule": "Validate changed fixture contracts using source/protocol tests first; run a long physical chain from the final extracted wheel once after those contracts settle. Do not launch another physical run just to observe the same bytes.",
+    "elapsed_since_main_brief_seconds": 1669
+  },
+  "remaining_principal_work": [
+    "Explicit import of old linked/dirty worktrees and interrupted uncaptured private copies, without inventing native authorship or original input.",
+    "Carryover selection for automatic plan successors; actual DevelopmentFlow/CodeReviewFlow and remaining legacy/auxiliary-inference retirement and global atomic physical exclusion.",
+    "Retained-code publication chain, wider terminal/web endpoint parity, remote recovery, full prompt/book/model/scientific/human evaluations, remaining concepts/routes/all-page acceptance, global known failures, clean installation/restore/inverses43–53 and final independent review."
+  ],
+  "completion_limits": "This retained-native-input capability is connected and verified; the full modernization goal is active. No global-green, real-inference-quality, clean-install or full visual/human acceptance claim.",
+  "remaining_presentation": "DD020: show selected prior origin/download from queued admission receipt after reload, before an attempt input exists. The exact server selection and retry are preserved; full Tasks/communication acceptance remains required."
+}

@@ -950,8 +950,8 @@ class SQLiteRunStore:
         return self._view(self._row(conn, row["project_id"], row["id"]))
 
     @staticmethod
-    def _admission_intent(spec, conversation_thread, repository_id=None, review=None):
-        """Keep historical ordinary intents stable and bind explicit review targets."""
+    def _admission_intent(spec, conversation_thread, repository_id=None, review=None, prior_code=None):
+        """Keep historical ordinary intents stable and bind exact review or earlier-code input selections."""
         intent = {"kind": "admit", **asdict(spec)}
         if conversation_thread is not None:
             command_key(conversation_thread)
@@ -965,21 +965,27 @@ class SQLiteRunStore:
             if not isinstance(review, ReviewTarget):
                 raise ValueError("A typed owner-observed review target is required")
             intent["review"] = asdict(review)
+        if prior_code is not None:
+            from backend.runtime.code_carryover import PriorCodeTarget
+
+            if review is not None or not isinstance(prior_code, PriorCodeTarget):
+                raise ValueError("Prior code requires a typed author input selection")
+            intent["prior_code"] = asdict(prior_code)
         return intent
 
     def _admission_receipt(
-        self, conn, spec, conversation_thread, repository_id, review=None
+        self, conn, spec, conversation_thread, repository_id, review=None, prior_code=None
     ):
         """Recover original admission receipts without rechecking or replaying effects."""
         intent = self._admission_intent(
-            spec, conversation_thread, repository_id, review
+            spec, conversation_thread, repository_id, review, prior_code
         )
         try:
             return self._receipt(
                 conn, spec.project_id, spec.task_id, spec.operation_key, intent
             )
         except RunConflict:
-            if repository_id is None or review is not None:
+            if repository_id is None or review is not None or prior_code is not None:
                 raise
             # Historical receipts did not record selection. They may be read,
             # never used to infer a workspace or restart a queued request.
@@ -1001,12 +1007,12 @@ class SQLiteRunStore:
             return old
 
     def admission_receipt(
-        self, spec, *, conversation_thread=None, repository_id=None, review=None
+        self, spec, *, conversation_thread=None, repository_id=None, review=None, prior_code=None
     ):
         """Read an exact ordinary or review request receipt without scheduling work."""
         with self._transaction() as conn:
             receipt = self._admission_receipt(
-                conn, spec, conversation_thread, repository_id, review
+                conn, spec, conversation_thread, repository_id, review, prior_code
             )
             return (
                 self._view(self._row(conn, spec.project_id, receipt["run_id"]))
@@ -1051,7 +1057,7 @@ class SQLiteRunStore:
         return subject
 
     def admit(
-        self, spec: RunSpec, *, conversation_thread=None, binding=None, review=None
+        self, spec: RunSpec, *, conversation_thread=None, binding=None, review=None, prior_code=None
     ) -> RunView:
         """Return the durable receipt for one scoped admission, freezing a review target when supplied."""
         return self.admit_once(
@@ -1059,25 +1065,29 @@ class SQLiteRunStore:
             conversation_thread=conversation_thread,
             binding=binding,
             review=review,
+            prior_code=prior_code,
         )[0]
 
     def admit_once(
-        self, spec: RunSpec, *, conversation_thread=None, binding=None, review=None
+        self, spec: RunSpec, *, conversation_thread=None, binding=None, review=None, prior_code=None
     ):
         """Admit a typed author or bound independent finding review without reinterpreting historical receipts."""
         repository_id = binding.requested_repository_id if binding else None
         intent = self._admission_intent(
-            spec, conversation_thread, repository_id, review
+            spec, conversation_thread, repository_id, review, prior_code
         )
         with self._transaction(write=True) as conn:
             receipt = self._admission_receipt(
-                conn, spec, conversation_thread, repository_id, review
+                conn, spec, conversation_thread, repository_id, review, prior_code
             )
             if receipt is not None:
                 return self._view(
                     self._row(conn, spec.project_id, receipt["run_id"])
                 ), False
             self._task(conn, spec.project_id, spec.task_id)
+            from backend.runtime.code_carryover import CodeCarryovers
+
+            prior_packet = CodeCarryovers(self).capture(conn, spec, binding, prior_code) if prior_code is not None else None
             if self._context(conn, spec.task_id) != spec.context_version:
                 raise RunConflict("Run context is already obsolete")
             subject = (
@@ -1168,7 +1178,7 @@ class SQLiteRunStore:
                 spec.task_id,
                 spec.operation_key,
                 intent,
-                {"run_id": run_id},
+                {"run_id": run_id, **({"prior_code": prior_packet} if prior_packet is not None else {})},
             )
             from backend.planning.execution import PlanExecutions
 

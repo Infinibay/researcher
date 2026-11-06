@@ -1,6 +1,35 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 
+test('prior code selection is copied into the original instruction and cannot drift after a lost response', async () => {
+  const { prepareInstruction, sendInstruction } = await import('../src/api/runtime.ts')
+  const selection = {attempt_id:'previous-attempt',snapshot_sha256:'a'.repeat(64)}
+  const intent = prepareInstruction(101,{task_id:1001,context_version:3,thread_id:'reuse',message:'Adapt the earlier change.',repository_id:11,prior_code:selection})
+  selection.snapshot_sha256='b'.repeat(64)
+  const sent:unknown[]=[]
+  const original=globalThis.fetch
+  try {
+    globalThis.fetch=async (_url,options)=>{sent.push(JSON.parse(String(options?.body)));if(sent.length===1)throw new TypeError('Lost response');return Response.json({})}
+    await assert.rejects(sendInstruction(intent));await sendInstruction(intent)
+    assert.deepEqual(sent[0],sent[1])
+    assert.deepEqual((sent[1] as {prior_code:unknown}).prior_code,{attempt_id:'previous-attempt',snapshot_sha256:'a'.repeat(64)})
+    assert.equal(Object.isFrozen(intent.body.prior_code),true)
+    assert.throws(()=>prepareInstruction(101,{task_id:1001,context_version:3,thread_id:'reuse',message:'Adapt',prior_code:{attempt_id:'previous-attempt',snapshot_sha256:'guessed'}}))
+  } finally {globalThis.fetch=original}
+})
+
+test('prior code inspection keeps exact task scope and decodes a binary patch without inventing text', async () => {
+  const {priorCodeInput,priorPatchText}=await import('../src/api/runtime.ts')
+  const original=globalThis.fetch;const requests:string[]=[]
+  try {
+    globalThis.fetch=async url=>{requests.push(String(url));return Response.json({})}
+    await priorCodeInput(101,1001,'attempt:a')
+    assert.deepEqual(requests,['/api/projects/101/tasks/1001/prior-code/attempt%3Aa'])
+    assert.equal(priorPatchText('ZGlmZiBmaXh0dXJlCg=='),'diff fixture\n')
+    assert.equal(priorPatchText('/w=='),null)
+  } finally {globalThis.fetch=original}
+})
+
 test('owner command readers preserve run scope and byte offsets using GET only', async () => {
   const { commandList, commandOutput } = await import('../src/api/runtime.ts')
   const sent: { url: string; method: string; body: unknown; credentials: RequestCredentials | undefined }[] = []

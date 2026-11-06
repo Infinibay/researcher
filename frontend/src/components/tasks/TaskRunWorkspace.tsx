@@ -3,9 +3,10 @@ import { useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { prepareAnswer, prepareInstruction, prepareRecovery, prepareStartRetry, presentRun, recoveryInspection, sourceWindow } from '../../api/runtime'
-import type { AnswerIntent, InstructionIntent, RecoveryIntent, RuntimeQuestion, RuntimeRun, StartRetryIntent } from '../../api/runtime'
+import type { AnswerIntent, InstructionIntent, RecoveryIntent, RuntimeQuestion, RuntimeRun, StartRetryIntent, PriorCodeSelection } from '../../api/runtime'
 import { useAnswer, useCorrection, useInstruction, useRecovery, useStartRetry, useStopRun, useTaskWorkspace } from '../../hooks/useRuntime'
 import { MarkdownRenderer } from '../common/MarkdownRenderer'
+import { PriorCodeInput } from './PriorCodeInput'
 import { TaskInputHistory } from './TaskInputHistory'
 import { RunInputRecord } from './RunInputRecord'
 import { RunCommands } from './RunCommands'
@@ -129,6 +130,7 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
   const correct = useCorrection(projectId, taskId)
   const [message, setMessage] = useState('')
   const [repositoryId, setRepositoryId] = useState<number | undefined>()
+  const [priorCode, setPriorCode] = useState<Readonly<PriorCodeSelection> | null>(null)
   const [statement, setStatement] = useState('')
   const [kind, setKind] = useState<'user_message' | 'user_example'>('user_message')
   const [sourceId, setSourceId] = useState<number | null>(null)
@@ -158,12 +160,14 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
       task_id: taskId, context_version: data.context.context_version,
       thread_id: newConversation ? thread.current : conversationThreadId ?? current?.conversation_thread_id ?? thread.current,
       message: message.trim(), ...(repositoryId != null ? { repository_id: repositoryId } : {}),
+      ...(priorCode ? { prior_code: priorCode } : {}),
     })
     send.mutate(intent.current, { onSuccess: result => {
       intent.current = null
       thread.current = crypto.randomUUID()
       setNewConversation(false)
       setMessage('')
+      setPriorCode(null)
       setNotice('Solicitud registrada. Consulta su estado para ver cuándo comienza.')
       onConversation?.(result.message.thread_id)
     } })
@@ -193,7 +197,7 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
     {current?.issue && <section className="space-y-1" aria-label="Lo que ocurrió"><p className="text-[var(--work-caution)]">{current.issue.message}</p>{current.issue.inference_started === null && <p className="text-[var(--work-muted)]">No quedó confirmado si la inferencia comenzó. No la repetiremos automáticamente.</p>}</section>}
     {current?.status === 'queued' && available && <QueuedStart key={`${projectId}:${current.run_id}`} projectId={projectId} taskId={taskId} run={current} />}
     {!available && <p className="rounded-md border border-amber-700/50 p-3 text-[var(--work-caution)]">{closed ? 'Esta tarea está cerrada. Su historial y sus fuentes siguen disponibles.' : !data.runtime.configured ? 'Configura el motor local para iniciar trabajo. El historial y las fuentes siguen disponibles.' : 'Este tipo de tarea aún no permite iniciar trabajo. Su historial se conserva.'}</p>}
-    {current && ['queued', 'running', 'cancelling', 'reconciling', 'waiting_input'].includes(current.status) && <div className="space-y-2">
+    {current && ['queued', 'running', 'cancelling', 'reconciling', 'waiting_input', 'needs_review'].includes(current.status) && <div className="space-y-2">
       <button className={buttonClass} disabled={stop.isPending || current.status === 'cancelling'} onClick={() => stop.mutate(current.run_id)}>Detener ejecución</button>
       {stop.error && <p role="alert" className="text-[var(--work-error)]">No se confirmó la detención. Consulta el estado antes de continuar. {stop.error.message}</p>}
     </div>}
@@ -207,6 +211,7 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
       <h4 className="font-medium text-[var(--work-ink)]">{current.status === 'needs_review' ? 'Propuesta' : 'Resultado conservado'}</h4>
       <MarkdownRenderer content={current.result.summary} />
     </section>}
+    {['code','bug_fix'].includes(data.context.task.type)&&<PriorCodeInput key={`prior:${projectId}:${taskId}`} projectId={projectId} taskId={taskId} runs={data.runs} selected={priorCode} locked={intent.current!=null||send.isPending} onSelect={setPriorCode}/>}
     <form className="space-y-2" onSubmit={event => { event.preventDefault(); submit() }}>
       <label className="block text-[var(--work-ink)]" htmlFor={`request-${taskId}`}>Solicitud para esta tarea</label>
       <textarea id={`request-${taskId}`} className={inputClass} rows={3} value={message} maxLength={50000} readOnly={intent.current != null} onChange={event => setMessage(event.target.value)} placeholder="Explica qué quieres comprobar y qué resultado necesitas. Puedes incluir un ejemplo." />

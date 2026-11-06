@@ -84,6 +84,19 @@ async def test_normal_turn_preserves_native_identity_text_and_unknown_consumptio
     assert turn["params"]["threadId"] == result.thread_id
 
 
+async def test_completed_host_response_is_progress_after_a_slow_tool_or_decision(tmp_path):
+    """Ignoring completed host requests would abort useful tool work despite its bounded successful response."""
+    async def decide(_request):
+        """Finish a real awaited host decision after the model-idle allowance, within the absolute wall limit."""
+        await asyncio.sleep(0.18)
+        return {"decision": "decline"}
+
+    async with session(tmp_path, wall_seconds=1, no_progress_seconds=0.1) as runtime:
+        result = await runtime.run("approval", on_request=decide)
+    assert result.status == "completed"
+    assert any(r.get("id") == "approval-1" and "result" in r for r in requests(tmp_path))
+
+
 async def test_native_failed_turn_is_not_product_success(tmp_path):
     async with session(tmp_path) as runtime:
         assert (await runtime.run("failed")).status == "failed"

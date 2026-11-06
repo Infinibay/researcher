@@ -3195,6 +3195,28 @@
         "Explicit adoption of old/unaccepted work and private candidate files, retained review/acceptance/publication.",
         "All broader visual, prompt, model, human comprehension, installation/restore/inverse/global-suite and final review requirements."
       ]
+    },
+    "native_code_carryover": {
+      "status": "retained_native_candidate_input_and_fresh_execution_connected_legacy_files_and_plan_dispatch_pending",
+      "evidence": [
+        "backend/runtime/code_carryover.py",
+        "backend/runtime/sqlite_runs.py",
+        "backend/runtime/run_inputs.py",
+        "backend/runtime/codex_session.py",
+        "backend/tests/runtime/test_code_carryover.py",
+        "backend/tests/runtime/test_codex_session.py",
+        "backend/tests/runtime/test_public_development.py",
+        "frontend/src/components/tasks/PriorCodeInput.tsx",
+        "docs/architecture/native-code-carryover.md",
+        "docs/modernization/code-carryover-results.json",
+        "docs/modernization/code-carryover-packaging.json",
+        "docs/modernization/code-carryover-archive-comparison.json"
+      ],
+      "remaining": [
+        "Explicit import of old linked/dirty worktrees and interrupted uncaptured private copies, without inventing native authorship or original input.",
+        "Carryover selection for automatic plan successors; actual DevelopmentFlow/CodeReviewFlow and remaining legacy/auxiliary-inference retirement and global atomic physical exclusion.",
+        "Retained-code publication chain, wider terminal/web endpoint parity, remote recovery, full prompt/book/model/scientific/human evaluations, remaining concepts/routes/all-page acceptance, global known failures, clean installation/restore/inverses43\u201353 and final independent review."
+      ]
     }
   }
 }

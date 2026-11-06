@@ -25,6 +25,7 @@ planning_mode = False
 plan_material = None
 review_mode = False
 development_mode = False
+prior_code_patch = None
 review_subject = None
 code_review_mode = False
 code_packet = code_file = None
@@ -224,7 +225,7 @@ def next_development_tool(response=None):
             "researcher_python",
             {
                 "operation_key": "edit-private",
-                "code": "from pathlib import Path;p=Path('fact.txt');p.write_text(str(int(p.read_text())+63));print(p.read_text())",
+                "code": development_edit_code(),
                 "timeout_seconds": 5.0,
             },
         )
@@ -260,6 +261,19 @@ def next_development_tool(response=None):
                 },
             }
         )
+
+
+def development_edit_code():
+    """Consume actual delivered prior bytes when selected; the controlled fresh author applies them with Git in its private copy."""
+    if prior_code_patch is None:
+        return "from pathlib import Path;p=Path('fact.txt');p.write_text(str(int(p.read_text())+63));print(p.read_text())"
+    return (
+        "import base64,subprocess\nfrom pathlib import Path\n"
+        + "patch=base64.b64decode(" + repr(prior_code_patch) + ",validate=True)\n"
+        + "subprocess.run(['/usr/bin/git','apply','--check','--binary','-'],input=patch,check=True)\n"
+        + "subprocess.run(['/usr/bin/git','apply','--binary','-'],input=patch,check=True)\n"
+        + "print('prior patch applied');print(Path('fact.txt').read_text())"
+    )
 
 
 def next_review_tool(response=None):
@@ -374,6 +388,11 @@ def next_code_review_tool(response=None):
                 assert actual_input["work_delivery"]["plan_context"]["accepted_plan"][
                     "assumptions"
                 ]
+            elif actual_input.get("prior_code"):
+                assert "Reuse the exact earlier patch" in actual_input["request"]
+                earlier = actual_input["prior_code"]["snapshot"]
+                assert "137 to 200" in earlier["original_input"]["request"]
+                assert earlier["origin"]["attempt_id"] != actual_input["scope"]["attempt_id"]
             else:
                 assert "137 to 200" in actual_input["request"]
         elif steps == 4:
@@ -902,6 +921,13 @@ for line in sys.stdin:
             "cwd": params["cwd"],
         }
     elif method == "turn/start":
+        if development_mode:
+            initial = json.loads(params["input"][0]["text"])
+            prior = initial.get("prior_code")
+            if prior is not None:
+                assert prior["authority"] == "data_only"
+                assert prior["snapshot"]["origin"]["attempt_id"] != initial["scope"]["attempt_id"]
+                prior_code_patch = prior["snapshot"]["diff_base64"]
         result = {"turn": {"id": native_turn_id}}
     if "id" in message:
         send({"id": message["id"], "result": result})
