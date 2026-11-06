@@ -261,3 +261,17 @@ razonamiento ni decisiones pendientes. Se mantienen los demás límites.
 Sigue pendiente importar worktrees antiguos sin candidato nativo, conectar ese
 material al dispatcher y retirar DevelopmentFlow/CodeReviewFlow/tipos restantes.
 No falsear su procedencia para habilitarlos. [Contrato](native-code-carryover.md).
+
+
+## Archivos de trabajo anterior como datos elegidos — 2026-11-05
+
+Origen y rutas se seleccionan desde registros propios del proyecto: worktree
+antiguo o copia privada sin candidato. Se conservan bytes/modo/enlace/ausencia y
+contexto desconocido, sin adoptar metadata Git ni fabricar un autor nativo. El
+recibo y la entrada existentes llevan ese material a autor/check/revisor/
+aceptación nuevos. `.worktrees` no indexada permanece fuera del clone; namespace
+comprometido/indexado y código pendiente no se ocultan. No hay otro loop.
+
+Esto permite avanzar al corte real de DevelopmentFlow/CodeReviewFlow. Su retirada,
+otros tipos/auxiliares, dispatcher y exclusión global siguen pendientes; no volver
+al pulido del importador. [Contrato y límites](selected-old-file-import.md).

@@ -8,7 +8,7 @@ from fastapi import APIRouter, FastAPI, HTTPException, Path, Query, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
-from backend.api.models.code_carryover import PriorCodeSelection
+from backend.api.models.code_carryover import PreviewFileImport, PriorCodeSelection, PriorFilesSelection
 from backend.api.models.questions import AnswerQuestions
 from backend.runtime.contracts import RunConflict, RunNotFound, RunSpec
 from backend.runtime.peer_process import PeerUncertain
@@ -103,7 +103,7 @@ class StartRun(BaseModel):
     context_version: int = Field(ge=1)
     request: str = Field(min_length=1, max_length=50000)
     repository_id: int | None = Field(None, ge=1)
-    prior_code: PriorCodeSelection | None = None
+    prior_code: PriorCodeSelection | PriorFilesSelection | None = None
 
 
 class StartFindingReview(BaseModel):
@@ -725,6 +725,24 @@ async def preview_prior_code(project_id: int, task_id: int, attempt_id: str, req
     from backend.runtime.code_carryover import CodeCarryovers
 
     return await asyncio.to_thread(CodeCarryovers(read_store(request)).preview, project_id, task_id, attempt_id)
+
+
+@router.get("/{project_id}/tasks/{task_id}/prior-files/sources")
+async def prior_file_sources(project_id: Annotated[int, Path(gt=0)], task_id: Annotated[int, Path(gt=0)], request: Request):
+    """List recorded old file origins for explicit owner choice, without inferring task ownership from a legacy agent label."""
+    from backend.runtime.file_imports import FileImports
+
+    return await asyncio.to_thread(FileImports(read_store(request)).sources, project_id, task_id)
+
+
+@router.post("/{project_id}/tasks/{task_id}/prior-files/preview")
+async def preview_prior_files(project_id: Annotated[int, Path(gt=0)], task_id: Annotated[int, Path(gt=0)], body: PreviewFileImport, request: Request):
+    """Observe only selected bytes from an actual registered origin; this preview starts no process or inference."""
+    from backend.runtime.file_imports import FileImports
+
+    runtime = service(request)
+    binding = await asyncio.to_thread(runtime.workspaces.bind, project_id, body.repository_id)
+    return await asyncio.to_thread(FileImports(runtime.store).preview, project_id, task_id, binding, body.source_kind, body.source_id, tuple(body.paths))
 
 
 @router.get("/{project_id}/runs/{run_id}")

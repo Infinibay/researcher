@@ -2,10 +2,10 @@
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { priorCodeInput, priorPatchText } from '../../api/runtime'
-import type { PriorCodeSelection, RuntimeRun } from '../../api/runtime'
+import type { PriorMaterialSelection, RuntimeRun } from '../../api/runtime'
 
 /** Keep prior input visible and correctable without treating old requirements or checks as current authority. */
-export function PriorCodeInput({projectId,taskId,runs,selected,locked,onSelect}:{projectId:number;taskId:number;runs:RuntimeRun[];selected:Readonly<PriorCodeSelection>|null;locked:boolean;onSelect:(target:Readonly<PriorCodeSelection>|null)=>void}) {
+export function PriorCodeInput({projectId,taskId,runs,selected,locked,onSelect}:{projectId:number;taskId:number;runs:RuntimeRun[];selected:Readonly<PriorMaterialSelection>|null;locked:boolean;onSelect:(target:Readonly<PriorMaterialSelection>|null)=>void}) {
   const [attemptId,setAttemptId]=useState('')
   const previous=runs.filter(run=>run.execution_kind==='development'&&run.attempt_id)
   const preview=useQuery({queryKey:['prior-code',projectId,taskId,attemptId],queryFn:()=>priorCodeInput(projectId,taskId,attemptId),enabled:!!attemptId,retry:false})
@@ -32,7 +32,7 @@ export function PriorCodeInput({projectId,taskId,runs,selected,locked,onSelect}:
         <details><summary>Contexto completo que recibió el autor anterior</summary><pre className="max-h-80 overflow-auto whitespace-pre-wrap text-xs">{JSON.stringify(packet.snapshot.original_input,null,2)}</pre></details>
       </details>
       <button type="button" disabled={locked} className="rounded-md border border-[var(--work-line)] px-3 py-2 disabled:opacity-50" onClick={()=>onSelect(Object.freeze({attempt_id:attemptId,snapshot_sha256:packet.snapshot_sha256}))}>Usar estos cambios en la próxima solicitud</button>
-      {selected&&<p role="status">Cambios seleccionados. Se entregarán como material al autor nuevo; el inicio necesita la solicitud de abajo.</p>}
+      {selected&&'attempt_id'in selected&&<p role="status">Cambios seleccionados. Se entregarán como material al autor nuevo; el inicio necesita la solicitud de abajo.</p>}
     </>}
   </section>
 }

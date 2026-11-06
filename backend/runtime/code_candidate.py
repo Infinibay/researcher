@@ -62,7 +62,8 @@ async def capture_candidate(
     Only the host's credential-free Git policy and owned process executor are
     used. Author config, index flags, refs and commits cannot select the candidate
     tree or parent. Root .ken metadata is excluded; a base tracking that reserved
-    path and gitlink candidates require explicit policy and are refused. Complete
+    path and gitlink candidates require explicit policy and are refused. Reserved
+    legacy .worktrees storage cannot be published as authored code. Complete
     binary diff output is bounded at one MiB; overflow fails without truncating
     evidence. The caller must fence/close writers before capture and bind the
     returned identities to its durable attempt/context before delivery.
@@ -169,6 +170,13 @@ async def capture_candidate(
 
     tree = await stage()
     entries = await git(working, "ls-tree", "-r", "-z", tree)
+    if any(
+        entry.partition(b"\t")[2] == b".worktrees"
+        or entry.partition(b"\t")[2].startswith(b".worktrees/")
+        for entry in entries.split(b"\0")
+        if entry
+    ):
+        raise RunConflict("Candidate cannot publish reserved legacy .worktrees storage")
     if any(entry.startswith(b"160000 ") for entry in entries.split(b"\0")):
         raise RunConflict("Candidate gitlinks require explicit multi-repository policy")
     if await stage() != tree:

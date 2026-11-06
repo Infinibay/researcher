@@ -1,6 +1,32 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 
+test('selected old file paths stay bound to the original instruction after edits and an uncertain response',async()=>{
+ const {prepareInstruction,sendInstruction}=await import('../src/api/runtime.ts')
+ const paths=['fact.txt'];const target={source_kind:'legacy_worktree' as const,source_id:'7',paths,snapshot_sha256:'a'.repeat(64)}
+ const intent=prepareInstruction(101,{task_id:1001,context_version:3,thread_id:'file-import',message:'Adapt these earlier bytes.',repository_id:11,prior_code:target})
+ paths[0]='other.txt';target.source_id='8'
+ const original=globalThis.fetch;const sent:any[]=[]
+ try{globalThis.fetch=async(_url,options)=>{sent.push(JSON.parse(String(options?.body)));if(sent.length===1)throw new TypeError('Lost receipt');return Response.json({})}
+  await assert.rejects(sendInstruction(intent));await sendInstruction(intent)
+  assert.deepEqual(sent[0],sent[1]);assert.deepEqual(sent[1].prior_code,{source_kind:'legacy_worktree',source_id:'7',paths:['fact.txt'],snapshot_sha256:'a'.repeat(64)})
+  assert.equal(Object.isFrozen(intent.body.prior_code?.paths),true)
+ }finally{globalThis.fetch=original}
+})
+
+test('old file inspection sends only scoped registered identifiers and explicit paths',async()=>{
+ const {fileImportSources,previewFileImport}=await import('../src/api/runtime.ts')
+ const original=globalThis.fetch;const sent:any[]=[]
+ try{globalThis.fetch=async(url,options)=>{sent.push({url:String(url),method:options?.method??'GET',body:options?.body?JSON.parse(String(options.body)):null});return Response.json({})}
+  await fileImportSources(101,1001)
+  await previewFileImport(101,1001,{source_kind:'private_copy',source_id:'attempt:a',paths:['fact.txt','removed.txt'],repository_id:11})
+  assert.equal(sent[0].url,'/api/projects/101/tasks/1001/prior-files/sources')
+  assert.deepEqual(sent[1],{url:'/api/projects/101/tasks/1001/prior-files/preview',method:'POST',body:{source_kind:'private_copy',source_id:'attempt:a',paths:['fact.txt','removed.txt'],repository_id:11}})
+  assert.throws(()=>previewFileImport(101,1001,{source_kind:'legacy_worktree',source_id:'7',paths:['.git/config'],repository_id:11}))
+  assert.equal(sent.length,2)
+ }finally{globalThis.fetch=original}
+})
+
 test('prior code selection is copied into the original instruction and cannot drift after a lost response', async () => {
   const { prepareInstruction, sendInstruction } = await import('../src/api/runtime.ts')
   const selection = {attempt_id:'previous-attempt',snapshot_sha256:'a'.repeat(64)}

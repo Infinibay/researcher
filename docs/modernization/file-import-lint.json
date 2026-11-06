@@ -1,0 +1,9 @@
+{
+  "base_commit": "b67e4ff",
+  "current_warnings": 4,
+  "baseline_warnings": 23,
+  "inherited": 4,
+  "introduced": [],
+  "resolved": 19,
+  "scope": "Changed Python files plus new file-import module/tests; identical project Ruff configuration. Test-only exec compiles only trusted fixture definitions and is explicitly justified inline."
+}

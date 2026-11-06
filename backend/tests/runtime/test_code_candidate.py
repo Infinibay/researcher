@@ -77,6 +77,26 @@ async def test_candidate_captures_shell_edits_binary_rename_and_deletion(
     ).decode().strip() == captured.head_sha
 
 
+async def test_candidate_cannot_publish_files_in_reserved_legacy_worktree_storage(
+    candidate_copy,
+):
+    """An authored candidate must not turn preserved legacy storage into tracked product code or hide it in a later base."""
+    from backend.runtime.code_candidate import capture_candidate
+    from backend.runtime.contracts import RunConflict
+
+    _source, binding, prepared, root = candidate_copy
+    metadata = Path(prepared.workspace) / ".worktrees"
+    metadata.mkdir()
+    (metadata / "old-data").write_text("Preserved metadata is not authored code.")
+    with pytest.raises(RunConflict, match="worktrees"):
+        await capture_candidate(
+            binding, prepared, root / "candidate", executor=RealGitExecutor()
+        )
+    assert (
+        metadata / "old-data"
+    ).read_text() == "Preserved metadata is not authored code."
+
+
 async def test_candidate_ignores_author_git_config_index_and_model_commit(
     candidate_copy,
 ):

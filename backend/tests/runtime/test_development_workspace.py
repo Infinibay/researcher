@@ -143,6 +143,64 @@ async def test_dirty_source_is_retained_and_not_silently_adopted(
     assert not destination.exists()
 
 
+async def test_untracked_legacy_worktrees_survive_and_are_not_copied_into_the_native_base(
+    source_repository, tmp_path
+):
+    """Treating old per-agent directories as dirty code would make real file import impossible without editing the original ignore rules."""
+    from backend.runtime.development_workspace import prepare_workspace
+
+    source, binding = source_repository
+    old = source / ".worktrees" / "old-developer"
+    await fixture_git(source, "worktree", "add", "--detach", str(old), "HEAD")
+    (old / "value.py").write_text("VALUE = 200\n")
+    prepared = await prepare_workspace(
+        binding, tmp_path / "new-attempt", executor=RealGitExecutor()
+    )
+    assert "137" in (Path(prepared.workspace) / "value.py").read_text()
+    assert not (Path(prepared.workspace) / ".worktrees").exists()
+    assert (old / "value.py").read_text() == "VALUE = 200\n"
+    assert (old / ".git").is_file()
+    assert await fixture_git(source, "status", "--porcelain", "--", "value.py") == b""
+
+
+@pytest.mark.parametrize(
+    "case", ["tracked_reserved", "staged_reserved", "untracked_lookalike"]
+)
+async def test_legacy_storage_exclusion_does_not_hide_tracked_or_lookalike_code(
+    source_repository, tmp_path, case
+):
+    """Only the untracked reserved namespace may survive outside the clone; actual code changes still block admission."""
+    from backend.runtime.contracts import RunConflict
+    from backend.runtime.development_workspace import prepare_workspace
+
+    source, binding = source_repository
+    folder = source / (
+        ".worktrees"
+        if case in ("tracked_reserved", "staged_reserved")
+        else ".worktrees-other"
+    )
+    folder.mkdir()
+    (folder / "pending.py").write_text("VALUE = 200\n")
+    if case in ("tracked_reserved", "staged_reserved"):
+        await fixture_git(source, "add", ".worktrees/pending.py")
+    if case == "tracked_reserved":
+        await fixture_git(
+            source,
+            "-c",
+            "user.name=Fixture",
+            "-c",
+            "user.email=fixture@localhost",
+            "commit",
+            "-qm",
+            "tracked reserved source",
+        )
+    with pytest.raises(RunConflict):
+        await prepare_workspace(
+            binding, tmp_path / "new-attempt", executor=RealGitExecutor()
+        )
+    assert (folder / "pending.py").read_text() == "VALUE = 200\n"
+
+
 async def test_existing_attempt_directory_is_never_reset_or_removed(
     source_repository, tmp_path
 ):

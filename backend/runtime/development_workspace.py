@@ -119,6 +119,8 @@ async def prepare_workspace(
 
     Dirty/hidden-index sources, linked/shared metadata and submodules need explicit
     policy before admission; they are refused without editing or deleting anything.
+    Untracked root .worktrees is preserved legacy storage, never cloned code;
+    a base tracking that reserved namespace is refused rather than hidden.
     The returned copy is only a preparation dependency. Runtime lease binding,
     writable capsule admission, durable recovery and candidate publication belong
     to the native controller and must be wired before enabling development tasks.
@@ -222,17 +224,32 @@ async def prepare_workspace(
         )
     base = await sha(source, "HEAD^{commit}")
     tree = await sha(source, "HEAD^{tree}")
+    if await git(source, "ls-tree", "-z", base, "--", ".worktrees"):
+        raise RunConflict(
+            "The base tracks reserved legacy .worktrees storage; preserve it separately before native development"
+        )
     if await git(
         source,
         "status",
         "--porcelain=v1",
         "--untracked-files=all",
         "--ignore-submodules=none",
+        "--",
+        ".",
+        ":(top,exclude).worktrees",
     ):
         raise RunConflict(
             "Source has uncommitted work; preserve it before starting a separate development attempt"
         )
     flags = await git(source, "ls-files", "-v", "-z")
+    if any(
+        entry[2:] == b".worktrees" or entry[2:].startswith(b".worktrees/")
+        for entry in flags.split(b"\0")
+        if entry
+    ):
+        raise RunConflict(
+            "Source index tracks reserved legacy .worktrees storage; staged work must remain explicit"
+        )
     if any(not entry.startswith(b"H ") for entry in flags.split(b"\0") if entry):
         raise RunConflict(
             "Source index hides working changes; an explicit normal-index policy is required"

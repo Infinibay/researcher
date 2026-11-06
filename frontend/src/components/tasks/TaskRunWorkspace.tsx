@@ -3,9 +3,10 @@ import { useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { prepareAnswer, prepareInstruction, prepareRecovery, prepareStartRetry, presentRun, recoveryInspection, sourceWindow } from '../../api/runtime'
-import type { AnswerIntent, InstructionIntent, RecoveryIntent, RuntimeQuestion, RuntimeRun, StartRetryIntent, PriorCodeSelection } from '../../api/runtime'
+import type { AnswerIntent, InstructionIntent, RecoveryIntent, RuntimeQuestion, RuntimeRun, StartRetryIntent, PriorMaterialSelection } from '../../api/runtime'
 import { useAnswer, useCorrection, useInstruction, useRecovery, useStartRetry, useStopRun, useTaskWorkspace } from '../../hooks/useRuntime'
 import { MarkdownRenderer } from '../common/MarkdownRenderer'
+import { FileImportInput } from './FileImportInput'
 import { PriorCodeInput } from './PriorCodeInput'
 import { TaskInputHistory } from './TaskInputHistory'
 import { RunInputRecord } from './RunInputRecord'
@@ -130,7 +131,7 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
   const correct = useCorrection(projectId, taskId)
   const [message, setMessage] = useState('')
   const [repositoryId, setRepositoryId] = useState<number | undefined>()
-  const [priorCode, setPriorCode] = useState<Readonly<PriorCodeSelection> | null>(null)
+  const [priorCode, setPriorCode] = useState<Readonly<PriorMaterialSelection> | null>(null)
   const [statement, setStatement] = useState('')
   const [kind, setKind] = useState<'user_message' | 'user_example'>('user_message')
   const [sourceId, setSourceId] = useState<number | null>(null)
@@ -212,6 +213,7 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
       <MarkdownRenderer content={current.result.summary} />
     </section>}
     {['code','bug_fix'].includes(data.context.task.type)&&<PriorCodeInput key={`prior:${projectId}:${taskId}`} projectId={projectId} taskId={taskId} runs={data.runs} selected={priorCode} locked={intent.current!=null||send.isPending} onSelect={setPriorCode}/>}
+    {['code','bug_fix'].includes(data.context.task.type)&&<FileImportInput key={`files:${projectId}:${taskId}`} projectId={projectId} taskId={taskId} selected={priorCode} locked={intent.current!=null||send.isPending} configured={data.runtime.configured} onSelect={setPriorCode}/>}
     <form className="space-y-2" onSubmit={event => { event.preventDefault(); submit() }}>
       <label className="block text-[var(--work-ink)]" htmlFor={`request-${taskId}`}>Solicitud para esta tarea</label>
       <textarea id={`request-${taskId}`} className={inputClass} rows={3} value={message} maxLength={50000} readOnly={intent.current != null} onChange={event => setMessage(event.target.value)} placeholder="Explica qué quieres comprobar y qué resultado necesitas. Puedes incluir un ejemplo." />

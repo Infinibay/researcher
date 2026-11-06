@@ -1,4 +1,4 @@
-"""Reuse a closed native candidate as attributed input to fresh development, without transferring authority or approval."""
+"""Reuse exact earlier native code or selected historic files as attributed input to fresh development, without transferring authority or approval."""
 
 import base64
 import hashlib
@@ -38,7 +38,7 @@ class PriorCodeTarget:
 
 
 class CodeCarryovers:
-    """Read retained original bytes and freeze owner-selected data using the existing admission receipt transaction."""
+    """Read retained native material or selected older files and freeze owner-chosen data using the existing admission receipt transaction."""
 
     def __init__(self, runs):
         """Reuse the run store; construction starts no process or additional controller."""
@@ -136,8 +136,13 @@ class CodeCarryovers:
             return self._packet(conn, project_id, task_id, attempt_id)
 
     def capture(self, conn, spec, binding, target):
-        """Bind the exact owner observation and same registered source to a fresh development admission."""
-        if not isinstance(target, PriorCodeTarget) or binding is None:
+        """Bind an exact earlier-code or selected-file observation and the same registered source to fresh development."""
+        from backend.runtime.file_imports import FileImports, PriorFilesTarget
+
+        if (
+            not isinstance(target, (PriorCodeTarget, PriorFilesTarget))
+            or binding is None
+        ):
             raise RunConflict(
                 "Prior code requires a typed owner observation and registered repository"
             )
@@ -147,7 +152,19 @@ class CodeCarryovers:
         ).fetchone()
         if task is None or task["type"] not in ("code", "bug_fix"):
             raise RunConflict("Prior code is input only for a fresh development task")
-        packet = self._packet(conn, spec.project_id, spec.task_id, target.attempt_id)
+        packet = (
+            FileImports(self.runs).packet(
+                conn,
+                spec.project_id,
+                spec.task_id,
+                binding,
+                target.source_kind,
+                target.source_id,
+                target.paths,
+            )
+            if isinstance(target, PriorFilesTarget)
+            else self._packet(conn, spec.project_id, spec.task_id, target.attempt_id)
+        )
         if packet["snapshot_sha256"] != target.snapshot_sha256:
             raise RunConflict(
                 "Prior-code snapshot changed; inspect the original material again"

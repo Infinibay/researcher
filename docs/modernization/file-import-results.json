@@ -1,0 +1,147 @@
+{
+  "base_commit": "b67e4ff",
+  "status": "selected_legacy_and_uncaptured_private_files_connected_to_fresh_native_development_flow_retirement_pending",
+  "schema_version": 53,
+  "new_persistence_or_execution_loop": false,
+  "implemented": [
+    "Owner-selected individual paths from a recorded project/repository legacy worktree or original task private allocation become data in the existing admission receipt and frozen input.",
+    "Preserve regular/binary bytes and executable mode, literal symlink target bytes without following, and observed absence. Explicit unknown original input, ancestry and historical task relation; no fabricated native author, privileges or approval.",
+    "Bounded directory-FD reads with nofollow, two equal selected-path observations, exact source/fingerprint admission, foreign/metadata/traversal/special/unstable/oversized rejection. Same receipt restores exact data after origin changes or disappears.",
+    "HTTP/chat/Tasks origin/path inspection and explicit selection. Nested path arrays frozen on retry; late previews tied to actual source/path query. Current request and source knowledge/unknowns remain separate.",
+    "Untracked reserved root .worktrees stays in the original source and outside new clones without changing ignore rules. Committed/staged namespace, ordinary dirty files and lookalikes refused. Candidates cannot publish legacy storage as product code."
+  ],
+  "verification": {
+    "red_evidence": [
+      "15missing-feature failures",
+      "Owner preview404",
+      "Frontend missing source readers and immutable file target",
+      "Real Git untracked legacy allocation blocked and tracked namespace wrongly copied:2FAIL",
+      "Candidate could publish legacy storage:1FAIL",
+      "Controlled author repeated200 rather than delivered217:1FAIL0.45s",
+      "Staged legacy namespace wrongly hidden:1FAIL0.42s"
+    ],
+    "overlapping_source_groups": [
+      {
+        "passed": 36,
+        "seconds": 13.04,
+        "scope": "Imported/native material, HTTP and input snapshots"
+      },
+      {
+        "passed": 55,
+        "seconds": 12.96,
+        "scope": "Real Git preparation/capture and imported/native input before final guard expansion"
+      },
+      {
+        "passed": 47,
+        "seconds": 8.61,
+        "scope": "Selected-file import, fixture contracts and real Git preparation/capture"
+      }
+    ],
+    "initial_extracted_wheel": {
+      "tests_passed": 509,
+      "failures": [],
+      "skipped": 0,
+      "backend_modules_loaded": 447,
+      "backend_imports_only_from_wheel": true,
+      "model_turns": 0,
+      "controlled_native_turns_in_owned_fixture": 2,
+      "actual_kernel_owned_fixture": true,
+      "network": "Disabled except Unix sockets",
+      "semantic_assets": "Explicit prepared pinned public offline assets outside wheel",
+      "generation_and_ken": "Controlled fresh author applying selected legacy bytes and independent reviewer; real kernel/Git and no real model inference",
+      "seconds": 225.73,
+      "known_deselected": 4,
+      "receipt": "file-import-initial-packaging.json"
+    },
+    "physical_chain": {
+      "passed": true,
+      "seconds": 85.331,
+      "artifact": "initial extracted wheel",
+      "controlled_native_turns": 2,
+      "real_model_turns": 0,
+      "real_kernel_broker_git_sqlite": true,
+      "stages": [
+        "Real linked Git worktree with uncommitted200 and no ignore-rule modification",
+        "Owner chooses fact.txt with unknown original input/historical task relation",
+        "Fresh private author writes the actual delivered bytes",
+        "New exact candidate/check",
+        "Distinct native reviewer inspects original unknown/current contexts and exact new candidate",
+        "Explicit owner acceptance"
+      ],
+      "asserted_results": {
+        "original_source_fact_txt": "137",
+        "legacy_worktree_fact_txt": "200",
+        "new_candidate_fact_txt": "200",
+        "candidate_count": 1,
+        "check_count": 1,
+        "review_count": 1,
+        "acceptance_count": 1,
+        "publication_performed": false
+      },
+      "limits": "Controlled generation and Ken. Regular text file in physical chain; binary/mode/symlink/absence data and delivered-byte fixture contracts covered by targeted tests."
+    },
+    "final_extracted_wheel": {
+      "tests_passed": 93,
+      "failures": [],
+      "skipped": 0,
+      "backend_modules_loaded": 297,
+      "backend_imports_only_from_wheel": true,
+      "model_turns": 0,
+      "controlled_native_turns_in_owned_fixture": 0,
+      "actual_kernel_owned_fixture": false,
+      "network": "Disabled except Unix sockets",
+      "semantic_assets": "Explicit prepared pinned public offline assets outside wheel",
+      "generation_and_ken": "No owned kernel pipeline in final guard regression; initial broad artifact supplies separately scoped two-turn physical evidence",
+      "seconds": 17.96,
+      "matching_source_files": 778,
+      "scope": "93real-Git/data/HTTP/protocol regressions, including staged namespace rejection. No second full kernel pipeline."
+    },
+    "artifact_delta": {
+      "base_commit": "b67e4ff",
+      "initial_wheel_sha256": "5a8b4e0da90140261bf858faea2977399fc13c6eed9a056d8a0226d10f31249c",
+      "final_wheel_sha256": "30c2e40726826038fd61bf2cea5d205dd6b6c1e4b0e8af34524e62595c830ef0",
+      "application_members": 522,
+      "unchanged_application_members": 521,
+      "changed_application_members": [
+        "backend/runtime/development_workspace.py"
+      ],
+      "changed_test_members": [
+        "backend/tests/runtime/test_development_workspace.py"
+      ],
+      "application_delta": "Only an additional rejection predicate over the already-observed ls-files flags: staged tracked .worktrees entries are refused before cloning. No Git command, kernel capability, native protocol or positive-path operation changed.",
+      "verification_scope": "Initial broad509 cases including actual two-turn kernel/Git author/reviewer/acceptance passed. Final93 cases cover real Git preparation/capture, imported/native data, HTTP, protocol bounds and the new staged-storage rejection. Final positive untracked-worktree preparation and negative tracked/staged/lookalike cases use real Git. No second full kernel pipeline after the rejection-only guard; the physical receipt remains explicitly bound to the initial artifact."
+    },
+    "frontend": {
+      "passed": 96,
+      "failed": 0,
+      "skipped": 0,
+      "typescript_and_vite_build": true,
+      "build_seconds": 4.94,
+      "new_browser_or_full_page_acceptance": false
+    },
+    "english_python_docstrings": {
+      "changed_or_new_definitions": 42,
+      "missing": []
+    },
+    "lint": {
+      "inherited": 4,
+      "new": 0,
+      "resolved": 19,
+      "new_module_tests_and_model_clean": true
+    }
+  },
+  "process": {
+    "elapsed_since_main_brief_seconds": 2042,
+    "physical_trials": 1,
+    "fixture_contracts_checked_cheaply_before_physical_run": true,
+    "final_guard_regression": "Only an extra rejection using ls-files flags already read. Existing positive-path Git commands, native protocol and kernel capabilities unchanged. Real Git positive/negative cases rerun in final wheel instead of repeating the long physical chain.",
+    "no_uncertain_restart": true
+  },
+  "limits_and_remaining": [
+    "Explicit selected paths, not automatic full-tree history/rename/ignored-file or deletion-intent discovery. All original files remain available for another selection.",
+    "Point-in-time equal observations are not atomic Git snapshot or proof of producer closure. Existing native admission/controller restrictions remain; global atomic physical exclusion still required.",
+    "Actual DevelopmentFlow/CodeReviewFlow and remaining legacy/auxiliary-inference retirement, automatic plan successor material selection and retained-code publication chain remain principal.",
+    "Queued prior-origin visibilityDD020, web/terminal endpoint parity, remote recovery, full prompt/book/model/scientific/human evaluations, remaining visual concepts/routes/all-page acceptance, global known failures, clean installation/restore/inverses43–53 and final fresh review remain in full active plan."
+  ],
+  "completion_scope": "Selected-file import and fresh native development/review/acceptance connected. Full modernization remains active. No global-green, real-model understanding, all-file-type semantic quality, clean installation or full page acceptance claim."
+}

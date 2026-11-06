@@ -9,7 +9,36 @@ Actualizado: 2026-11-05. Objetivo activo: implementar **todo** el [plan](../supe
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: reutilizar cambios nativos como entrada nueva
+## Etapa actual: importar rutas de trabajo anterior
+
+**Resultado:** Tareas/Conversación permiten usar archivos elegidos de worktrees
+antiguos o copias privadas sin candidato. Conservan bytes, modo ejecutable, enlace
+literal sin seguir y ausencia observada, sin atribuir contexto o autoría desconocidos.
+Se inspeccionan origen y rutas antes de elegir la huella. La admisión y reintento
+usan el recibo existente; no hay otra tabla o loop. La carpeta antigua no indexada
+`.worktrees` se conserva fuera de la copia nueva, sin editar reglas de ignorado.
+Los cambios de código, índices ambiguos y namespaces comprometidos se rechazan.
+
+**Verificación:** primer wheel, 509 pruebas pasan en 225,73 s; cuatro casos históricos
+excluidos. Incluye 2 turnos controlados con kernel/broker/Git/SQLite reales en
+85,33 s: origen antiguo200→autor nuevo→check→revisor independiente→aceptación,
+fuente137 y worktree200 conservados, sin publicación. 447 imports sólo del paquete.
+Después se agregó únicamente el rechazo de metadata ya preparada en el índice,
+usando flags que ya se leían: sin nuevas llamadas Git o capacidades. El wheel final
+pasa 93 casos de Git real/datos/HTTP/protocolo en17,96s,297imports sólo del paquete
+y778fuentes coincidentes. No se repitió la cadena física para ese guard negativo.
+96frontend/compilación pasan;42definiciones documentadas,0avisos Ruff nuevos.
+No se afirman suite global verde, modelos/comprensión ni aceptación visual nueva.
+[Resultados](file-import-results.json), [paquete](file-import-packaging.json),
+[contrato](../architecture/selected-old-file-import.md).
+
+**Siguiente bloque principal:** retirar los resultados y consumidores de
+DevelopmentFlow/CodeReviewFlow mediante la autoría/revisión nativas existentes y
+los caminos de conservación ya conectados. Después, selección para sucesoras del
+plan y tipos/auxiliares restantes. La exclusión global y el resto íntegro del plan
+siguen activos. No añadir otra pasada de snapshot, selector, journal o broker.
+
+## Etapa anterior: reutilizar cambios nativos como entrada nueva
 
 **Resultado:** Tareas/Conversación permiten seleccionar un candidato nativo anterior
 por intento y huella. Conservan diff completo, entrada original y procedencia como
@@ -31,7 +60,7 @@ Sin nuevo ensayo de modelo real, comprensión humana, aceptación visual o suite
 global verde. [Resultados](code-carryover-results.json),
 [paquete](code-carryover-packaging.json), [contrato](../architecture/native-code-carryover.md).
 
-**Siguiente bloque principal:** importar explícitamente archivos de worktrees
+**Siguiente bloque previsto entonces (histórico):** importar explícitamente archivos de worktrees
 antiguos enlazados/sucios o copias sin candidato capturado, usando el recorrido de
 entrada y autoría existente. Conectar selección al despacho de sucesoras de planes
 y retirar los resultados/consumidores de desarrollo/revisión antiguos. La exclusión

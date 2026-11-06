@@ -1,0 +1,302 @@
+{
+  "base_commit": "b67e4ff",
+  "changed_or_new_definitions_documented": 42,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/models/chat.py",
+      "symbol": "NativeInstruction",
+      "line": 55,
+      "docstring": "Fresh owner instruction with an exact optional prior-code input selection, never inherited approval.",
+      "file_sha256": "4f6b9fca762f2266da4f9eca0a575f9fad651b8fa68b2e2bb2192c5b58f98199"
+    },
+    {
+      "path": "backend/api/models/code_carryover.py",
+      "symbol": "FileImportSource",
+      "line": 22,
+      "docstring": "Host-recorded source and explicit relative paths, without replacement bytes or asserted native context.",
+      "file_sha256": "38f834fae8d1208a82549bc8de5e6e2c657112f24d3f520e7b6a5d7cc421cd0a"
+    },
+    {
+      "path": "backend/api/models/code_carryover.py",
+      "symbol": "FileImportSource.canonical_selection",
+      "line": 31,
+      "docstring": "Reject ambiguous paths and source identities at the HTTP boundary before filesystem access.",
+      "file_sha256": "38f834fae8d1208a82549bc8de5e6e2c657112f24d3f520e7b6a5d7cc421cd0a"
+    },
+    {
+      "path": "backend/api/models/code_carryover.py",
+      "symbol": "PreviewFileImport",
+      "line": 39,
+      "docstring": "Owner preview of selected bytes against a specifically registered canonical source.",
+      "file_sha256": "38f834fae8d1208a82549bc8de5e6e2c657112f24d3f520e7b6a5d7cc421cd0a"
+    },
+    {
+      "path": "backend/api/models/code_carryover.py",
+      "symbol": "PriorFilesSelection",
+      "line": 45,
+      "docstring": "Exact observed selected-file data for the next native admission.",
+      "file_sha256": "38f834fae8d1208a82549bc8de5e6e2c657112f24d3f520e7b6a5d7cc421cd0a"
+    },
+    {
+      "path": "backend/api/models/code_carryover.py",
+      "symbol": "PriorFilesSelection.target",
+      "line": 50,
+      "docstring": "Keep the original file selection immutable when moving from HTTP to admission policy.",
+      "file_sha256": "38f834fae8d1208a82549bc8de5e6e2c657112f24d3f520e7b6a5d7cc421cd0a"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "StartRun",
+      "line": 98,
+      "docstring": "Original owner request with optional observed prior code as attributed data.",
+      "file_sha256": "83f6166fe4426dd98550a0810fa16625d8e8962f0aa17ac8bded07d03059f643"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "prior_file_sources",
+      "line": 731,
+      "docstring": "List recorded old file origins for explicit owner choice, without inferring task ownership from a legacy agent label.",
+      "file_sha256": "83f6166fe4426dd98550a0810fa16625d8e8962f0aa17ac8bded07d03059f643"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "preview_prior_files",
+      "line": 739,
+      "docstring": "Observe only selected bytes from an actual registered origin; this preview starts no process or inference.",
+      "file_sha256": "83f6166fe4426dd98550a0810fa16625d8e8962f0aa17ac8bded07d03059f643"
+    },
+    {
+      "path": "backend/runtime/code_candidate.py",
+      "symbol": "capture_candidate",
+      "line": 57,
+      "docstring": "Freeze tracked/nonignored private edits in fresh metadata with one exact admitted parent.\n\nOnly the host's credential-free Git policy and owned process executor are\nused. Author config, index flags, refs and commits cannot select the candidate\ntree or parent. Root .ken metadata is excluded; a base tracking that reserved\npath and gitlink candidates require explicit policy and are refused. Reserved\nlegacy .worktrees storage cannot be published as authored code. Complete\nbinary diff output is bounded at one MiB; overflow fails without truncating\nevidence. The caller must fence/close writers before capture and bind the\nreturned identities to its durable attempt/context before delivery.",
+      "file_sha256": "71cc53ae7a425adf219a0ee11a27e7b49ad365ab20fb166613a7906b898466a4"
+    },
+    {
+      "path": "backend/runtime/code_carryover.py",
+      "symbol": "CodeCarryovers",
+      "line": 40,
+      "docstring": "Read retained native material or selected older files and freeze owner-chosen data using the existing admission receipt transaction.",
+      "file_sha256": "0cce930af19d5514703167a85b24c8547114e0f8235b9a78f414a76a23bc3f76"
+    },
+    {
+      "path": "backend/runtime/code_carryover.py",
+      "symbol": "CodeCarryovers.capture",
+      "line": 138,
+      "docstring": "Bind an exact earlier-code or selected-file observation and the same registered source to fresh development.",
+      "file_sha256": "0cce930af19d5514703167a85b24c8547114e0f8235b9a78f414a76a23bc3f76"
+    },
+    {
+      "path": "backend/runtime/development_workspace.py",
+      "symbol": "prepare_workspace",
+      "line": 115,
+      "docstring": "Clone an exact committed source into a fresh private attempt directory without sharing metadata.\n\nDirty/hidden-index sources, linked/shared metadata and submodules need explicit\npolicy before admission; they are refused without editing or deleting anything.\nUntracked root .worktrees is preserved legacy storage, never cloned code;\na base tracking that reserved namespace is refused rather than hidden.\nThe returned copy is only a preparation dependency. Runtime lease binding,\nwritable capsule admission, durable recovery and candidate publication belong\nto the native controller and must be wired before enabling development tasks.",
+      "file_sha256": "7f03ece21ea1fa70f6325f7803328dfaa102cfc1057f244d17298208321bdab3"
+    },
+    {
+      "path": "backend/runtime/file_imports.py",
+      "symbol": "selected_paths",
+      "line": 17,
+      "docstring": "Validate a bounded explicit selection; metadata, traversal and recursive discovery never expand its scope.",
+      "file_sha256": "48833706df5fc541cd80b6b78aae781cf2285e06301e0366924db90232695218"
+    },
+    {
+      "path": "backend/runtime/file_imports.py",
+      "symbol": "PriorFilesTarget",
+      "line": 48,
+      "docstring": "Exact owner-observed old source and selected paths; original input may remain explicitly unknown.",
+      "file_sha256": "48833706df5fc541cd80b6b78aae781cf2285e06301e0366924db90232695218"
+    },
+    {
+      "path": "backend/runtime/file_imports.py",
+      "symbol": "PriorFilesTarget.__post_init__",
+      "line": 56,
+      "docstring": "Validate neutral selection identity before receipt lookup or any filesystem operation.",
+      "file_sha256": "48833706df5fc541cd80b6b78aae781cf2285e06301e0366924db90232695218"
+    },
+    {
+      "path": "backend/runtime/file_imports.py",
+      "symbol": "_observation",
+      "line": 79,
+      "docstring": "Retain actual file identity, mode and change indicators without inferring a Git commit or author.",
+      "file_sha256": "48833706df5fc541cd80b6b78aae781cf2285e06301e0366924db90232695218"
+    },
+    {
+      "path": "backend/runtime/file_imports.py",
+      "symbol": "_directory",
+      "line": 92,
+      "docstring": "Pin every directory component from the filesystem root without following symlinks or reopening selected names.",
+      "file_sha256": "48833706df5fc541cd80b6b78aae781cf2285e06301e0366924db90232695218"
+    },
+    {
+      "path": "backend/runtime/file_imports.py",
+      "symbol": "_entry",
+      "line": 107,
+      "docstring": "Read one selected regular file, literal symlink target or observed absence with bounded nonblocking descriptors.",
+      "file_sha256": "48833706df5fc541cd80b6b78aae781cf2285e06301e0366924db90232695218"
+    },
+    {
+      "path": "backend/runtime/file_imports.py",
+      "symbol": "FileImports",
+      "line": 182,
+      "docstring": "Resolve stored source identity and observe selected bytes without modifying files, starting processes or assigning historic task ownership.",
+      "file_sha256": "48833706df5fc541cd80b6b78aae781cf2285e06301e0366924db90232695218"
+    },
+    {
+      "path": "backend/runtime/file_imports.py",
+      "symbol": "FileImports.__init__",
+      "line": 185,
+      "docstring": "Reuse existing run persistence; file data will be retained by its ordinary admission receipt.",
+      "file_sha256": "48833706df5fc541cd80b6b78aae781cf2285e06301e0366924db90232695218"
+    },
+    {
+      "path": "backend/runtime/file_imports.py",
+      "symbol": "FileImports.sources",
+      "line": 189,
+      "docstring": "List stored candidates for owner selection; a legacy agent label does not demonstrate task ownership or file availability.",
+      "file_sha256": "48833706df5fc541cd80b6b78aae781cf2285e06301e0366924db90232695218"
+    },
+    {
+      "path": "backend/runtime/file_imports.py",
+      "symbol": "FileImports._source",
+      "line": 223,
+      "docstring": "Resolve only host-recorded paths in their true project/repository scope; never use an arbitrary caller path.",
+      "file_sha256": "48833706df5fc541cd80b6b78aae781cf2285e06301e0366924db90232695218"
+    },
+    {
+      "path": "backend/runtime/file_imports.py",
+      "symbol": "FileImports.packet",
+      "line": 311,
+      "docstring": "Freeze two equal selected-path observations; do not claim an atomic Git tree, ignored-file discovery or physical writer closure.",
+      "file_sha256": "48833706df5fc541cd80b6b78aae781cf2285e06301e0366924db90232695218"
+    },
+    {
+      "path": "backend/runtime/file_imports.py",
+      "symbol": "FileImports.preview",
+      "line": 368,
+      "docstring": "Inspect selected data without claiming work, admitting a run or executing Git/config from an old worktree.",
+      "file_sha256": "48833706df5fc541cd80b6b78aae781cf2285e06301e0366924db90232695218"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore",
+      "line": 67,
+      "docstring": "Own durable admission, fenced attempts and version-bound review requests in SQLite.",
+      "file_sha256": "c4f4d33261bda90d7bb6dac5d9ab52d71e51f222d8bcf60dbf9fe5386c8b5137"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore._admission_intent",
+      "line": 953,
+      "docstring": "Keep historical ordinary intents stable and bind exact review or earlier-code input selections.",
+      "file_sha256": "c4f4d33261bda90d7bb6dac5d9ab52d71e51f222d8bcf60dbf9fe5386c8b5137"
+    },
+    {
+      "path": "backend/tests/runtime/fake_owned_native.py",
+      "symbol": "development_edit_code",
+      "line": 268,
+      "docstring": "Consume actual delivered prior bytes when selected; the controlled fresh author applies them with Git in its private copy.",
+      "file_sha256": "57ac1553616cb8a31f979afe49122219bd782a20234b5fb2bda94f029966ba70"
+    },
+    {
+      "path": "backend/tests/runtime/fake_owned_native.py",
+      "symbol": "next_code_review_tool",
+      "line": 366,
+      "docstring": "Generate controlled independent review calls; every source/proposal/Git/closure operation remains production code.",
+      "file_sha256": "57ac1553616cb8a31f979afe49122219bd782a20234b5fb2bda94f029966ba70"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_candidate.py",
+      "symbol": "test_candidate_cannot_publish_files_in_reserved_legacy_worktree_storage",
+      "line": 80,
+      "docstring": "An authored candidate must not turn preserved legacy storage into tracked product code or hide it in a later base.",
+      "file_sha256": "9b5ef57feeeb1d480a80e69744ac487db3182126428254f6a2d733bd011d8ffa"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "test_untracked_legacy_worktrees_survive_and_are_not_copied_into_the_native_base",
+      "line": 146,
+      "docstring": "Treating old per-agent directories as dirty code would make real file import impossible without editing the original ignore rules.",
+      "file_sha256": "0617694dbce20a4d626a1320ae45864c17f802ee4abafe714d6870f55ae2a917"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_workspace.py",
+      "symbol": "test_legacy_storage_exclusion_does_not_hide_tracked_or_lookalike_code",
+      "line": 169,
+      "docstring": "Only the untracked reserved namespace may survive outside the clone; actual code changes still block admission.",
+      "file_sha256": "0617694dbce20a4d626a1320ae45864c17f802ee4abafe714d6870f55ae2a917"
+    },
+    {
+      "path": "backend/tests/runtime/test_file_imports.py",
+      "symbol": "legacy_files",
+      "line": 14,
+      "docstring": "Record a real directory with a legacy Git pointer; no native execution or historic task ownership is fabricated.",
+      "file_sha256": "4005d70b4acb345b0dd6b3b1c00e056d62ef2d2379e822d98bf75e89842b4b29"
+    },
+    {
+      "path": "backend/tests/runtime/test_file_imports.py",
+      "symbol": "test_selected_legacy_paths_preserve_bytes_mode_link_and_absence_without_guessing_context",
+      "line": 37,
+      "docstring": "Following Git pointers or inventing a historic task mapping would import credentials or attribute unrelated work.",
+      "file_sha256": "4005d70b4acb345b0dd6b3b1c00e056d62ef2d2379e822d98bf75e89842b4b29"
+    },
+    {
+      "path": "backend/tests/runtime/test_file_imports.py",
+      "symbol": "test_admission_keeps_exact_import_after_source_loss_and_rejects_changed_selection",
+      "line": 73,
+      "docstring": "Re-reading old live files on retry would lose the selected material or silently change a committed request.",
+      "file_sha256": "4005d70b4acb345b0dd6b3b1c00e056d62ef2d2379e822d98bf75e89842b4b29"
+    },
+    {
+      "path": "backend/tests/runtime/test_file_imports.py",
+      "symbol": "test_metadata_and_noncanonical_paths_are_not_exported",
+      "line": 118,
+      "docstring": "An explicit file selector must not expand into metadata, credentials or paths outside its registered directory.",
+      "file_sha256": "4005d70b4acb345b0dd6b3b1c00e056d62ef2d2379e822d98bf75e89842b4b29"
+    },
+    {
+      "path": "backend/tests/runtime/test_file_imports.py",
+      "symbol": "test_unavailable_unsafe_or_foreign_sources_never_become_new_author_input",
+      "line": 140,
+      "docstring": "The export must refuse unsafe reads and foreign origin before storing any request or mutating original data.",
+      "file_sha256": "4005d70b4acb345b0dd6b3b1c00e056d62ef2d2379e822d98bf75e89842b4b29"
+    },
+    {
+      "path": "backend/tests/runtime/test_file_imports.py",
+      "symbol": "test_uncaptured_private_copy_remains_data_with_unknown_original_input",
+      "line": 178,
+      "docstring": "Missing native context must not destroy recoverable private bytes or be replaced by current requirements.",
+      "file_sha256": "4005d70b4acb345b0dd6b3b1c00e056d62ef2d2379e822d98bf75e89842b4b29"
+    },
+    {
+      "path": "backend/tests/runtime/test_file_imports.py",
+      "symbol": "test_owner_can_preview_and_admit_selected_legacy_data_through_http_and_chat",
+      "line": 211,
+      "docstring": "A label or client-supplied origin cannot replace the scoped source packet at either owner entry.",
+      "file_sha256": "4005d70b4acb345b0dd6b3b1c00e056d62ef2d2379e822d98bf75e89842b4b29"
+    },
+    {
+      "path": "backend/tests/runtime/test_file_imports.py",
+      "symbol": "test_controlled_author_fixture_applies_the_delivered_bytes_instead_of_repeating_a_hardcoded_edit",
+      "line": 304,
+      "docstring": "Validate the changed fixture contract cheaply before launching its long kernel/Git integration.",
+      "file_sha256": "4005d70b4acb345b0dd6b3b1c00e056d62ef2d2379e822d98bf75e89842b4b29"
+    },
+    {
+      "path": "backend/tests/runtime/test_file_imports.py",
+      "symbol": "test_controlled_author_fixture_applies_the_delivered_bytes_instead_of_repeating_a_hardcoded_edit.record_call",
+      "line": 360,
+      "docstring": "Observe the controlled reviewer advancing beyond unknown original input without opening any real tool.",
+      "file_sha256": "4005d70b4acb345b0dd6b3b1c00e056d62ef2d2379e822d98bf75e89842b4b29"
+    },
+    {
+      "path": "backend/tests/runtime/test_public_development.py",
+      "symbol": "test_owner_http_develops_checks_reviews_and_accepts_exact_candidate",
+      "line": 21,
+      "docstring": "Fresh authoring and explicit prior-code reuse keep original receipts, independent checks/review and an unchanged source.",
+      "file_sha256": "7b9e2daeea4d7ad8063b0abf8a380671da9123bf22dba39a52aac1a9b68b3904"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

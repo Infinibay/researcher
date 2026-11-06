@@ -1,0 +1,15 @@
+{
+  "base_commit": "b67e4ff",
+  "initial_wheel_sha256": "5a8b4e0da90140261bf858faea2977399fc13c6eed9a056d8a0226d10f31249c",
+  "final_wheel_sha256": "30c2e40726826038fd61bf2cea5d205dd6b6c1e4b0e8af34524e62595c830ef0",
+  "application_members": 522,
+  "unchanged_application_members": 521,
+  "changed_application_members": [
+    "backend/runtime/development_workspace.py"
+  ],
+  "changed_test_members": [
+    "backend/tests/runtime/test_development_workspace.py"
+  ],
+  "application_delta": "Only an additional rejection predicate over the already-observed ls-files flags: staged tracked .worktrees entries are refused before cloning. No Git command, kernel capability, native protocol or positive-path operation changed.",
+  "verification_scope": "Initial broad509 cases including actual two-turn kernel/Git author/reviewer/acceptance passed. Final93 cases cover real Git preparation/capture, imported/native data, HTTP, protocol bounds and the new staged-storage rejection. Final positive untracked-worktree preparation and negative tracked/staged/lookalike cases use real Git. No second full kernel pipeline after the rejection-only guard; the physical receipt remains explicitly bound to the initial artifact."
+}

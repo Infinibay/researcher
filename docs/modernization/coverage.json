@@ -3217,6 +3217,32 @@
         "Carryover selection for automatic plan successors; actual DevelopmentFlow/CodeReviewFlow and remaining legacy/auxiliary-inference retirement and global atomic physical exclusion.",
         "Retained-code publication chain, wider terminal/web endpoint parity, remote recovery, full prompt/book/model/scientific/human evaluations, remaining concepts/routes/all-page acceptance, global known failures, clean installation/restore/inverses43\u201353 and final independent review."
       ]
+    },
+    "selected_old_file_import": {
+      "status": "selected_legacy_and_uncaptured_private_files_connected_to_fresh_native_development_flow_retirement_pending",
+      "evidence": [
+        "backend/runtime/file_imports.py",
+        "backend/runtime/code_carryover.py",
+        "backend/runtime/development_workspace.py",
+        "backend/runtime/code_candidate.py",
+        "backend/api/models/code_carryover.py",
+        "backend/tests/runtime/test_file_imports.py",
+        "backend/tests/runtime/test_development_workspace.py",
+        "backend/tests/runtime/test_code_candidate.py",
+        "backend/tests/runtime/test_public_development.py",
+        "frontend/src/components/tasks/FileImportInput.tsx",
+        "docs/architecture/selected-old-file-import.md",
+        "docs/modernization/file-import-results.json",
+        "docs/modernization/file-import-packaging.json",
+        "docs/modernization/file-import-initial-packaging.json",
+        "docs/modernization/file-import-archive-comparison.json"
+      ],
+      "remaining": [
+        "Explicit selected paths, not automatic full-tree history/rename/ignored-file or deletion-intent discovery. All original files remain available for another selection.",
+        "Point-in-time equal observations are not atomic Git snapshot or proof of producer closure. Existing native admission/controller restrictions remain; global atomic physical exclusion still required.",
+        "Actual DevelopmentFlow/CodeReviewFlow and remaining legacy/auxiliary-inference retirement, automatic plan successor material selection and retained-code publication chain remain principal.",
+        "Queued prior-origin visibilityDD020, web/terminal endpoint parity, remote recovery, full prompt/book/model/scientific/human evaluations, remaining visual concepts/routes/all-page acceptance, global known failures, clean installation/restore/inverses43\u201353 and final fresh review remain in full active plan."
+      ]
     }
   }
 }

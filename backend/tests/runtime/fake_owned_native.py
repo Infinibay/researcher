@@ -26,6 +26,8 @@ plan_material = None
 review_mode = False
 development_mode = False
 prior_code_patch = None
+prior_selected_files = None
+code_prior_files = False
 review_subject = None
 code_review_mode = False
 code_packet = code_file = None
@@ -265,6 +267,14 @@ def next_development_tool(response=None):
 
 def development_edit_code():
     """Consume actual delivered prior bytes when selected; the controlled fresh author applies them with Git in its private copy."""
+    if prior_selected_files is not None:
+        assert all(entry["kind"] == "file" for entry in prior_selected_files)
+        return (
+            "import base64,json,os\nfrom pathlib import Path\n"
+            + "entries=json.loads(" + repr(json.dumps(prior_selected_files)) + ")\n"
+            + "for entry in entries:\n p=Path(entry['path']);p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(base64.b64decode(entry['content_base64'],validate=True));p.chmod(0o755 if entry['git_mode']=='100755' else 0o644)\n"
+            + "print('selected old files applied');print(Path('fact.txt').read_text())"
+        )
     if prior_code_patch is None:
         return "from pathlib import Path;p=Path('fact.txt');p.write_text(str(int(p.read_text())+63));print(p.read_text())"
     return (
@@ -355,7 +365,7 @@ def next_review_tool(response=None):
 
 def next_code_review_tool(response=None):
     """Generate controlled independent review calls; every source/proposal/Git/closure operation remains production code."""
-    global steps, code_packet, code_file, job
+    global steps, code_packet, code_file, job, code_prior_files
     if response is not None:
         if not response["success"]:
             raise RuntimeError("Controlled code review tool failed: " + str(response))
@@ -388,6 +398,13 @@ def next_code_review_tool(response=None):
                 assert actual_input["work_delivery"]["plan_context"]["accepted_plan"][
                     "assumptions"
                 ]
+            elif actual_input.get("prior_code") and "files" in actual_input["prior_code"]["snapshot"]:
+                assert "Import selected older" in actual_input["request"]
+                earlier = actual_input["prior_code"]["snapshot"]
+                assert earlier["original_input"] is None
+                assert earlier["original_input_status"] == "unknown"
+                assert earlier["origin"]["task_relation"] == "selected_by_owner_not_historically_verified"
+                code_prior_files = True
             elif actual_input.get("prior_code"):
                 assert "Reuse the exact earlier patch" in actual_input["request"]
                 earlier = actual_input["prior_code"]["snapshot"]
@@ -438,7 +455,7 @@ def next_code_review_tool(response=None):
                 "operation_key": "review-" + code_packet["review_run_id"] + "-proposal",
                 "subject_sha256": code_packet["subject_sha256"],
                 "verdict": "supported",
-                "rationale": "The recorded owner request changes137 to200; the actual candidate source contains200.",
+                "rationale": "The current owner requested selected earlier files; the exact new candidate contains200. The old source is data, not proof of current requirements or previous approval." if code_prior_files else "The recorded owner request changes137 to200; the actual candidate source contains200.",
                 "checks": [
                     {
                         "criterion": "requested value",
@@ -926,8 +943,12 @@ for line in sys.stdin:
             prior = initial.get("prior_code")
             if prior is not None:
                 assert prior["authority"] == "data_only"
-                assert prior["snapshot"]["origin"]["attempt_id"] != initial["scope"]["attempt_id"]
-                prior_code_patch = prior["snapshot"]["diff_base64"]
+                if "files" in prior["snapshot"]:
+                    assert prior["snapshot"]["origin"]["kind"] in ("selected_legacy_worktree_files", "selected_private_copy_files")
+                    prior_selected_files = prior["snapshot"]["files"]
+                else:
+                    assert prior["snapshot"]["origin"]["attempt_id"] != initial["scope"]["attempt_id"]
+                    prior_code_patch = prior["snapshot"]["diff_base64"]
         result = {"turn": {"id": native_turn_id}}
     if "id" in message:
         send({"id": message["id"], "result": result})

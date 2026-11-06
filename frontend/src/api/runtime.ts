@@ -230,6 +230,24 @@ export function sendAnswer(intent: AnswerIntent) {
 
 /** Exact prior candidate observation; selected bytes remain data under fresh authority. */
 export interface PriorCodeSelection {attempt_id:string;snapshot_sha256:string}
+/** Owner-chosen paths in a recorded origin, without an asserted native author or Git base. */
+export interface PriorFilesSelection {source_kind:'legacy_worktree'|'private_copy';source_id:string;paths:readonly string[];snapshot_sha256:string}
+export type PriorMaterialSelection = PriorCodeSelection | PriorFilesSelection
+export interface FileImportSource {source_kind:'legacy_worktree'|'private_copy';source_id:string;repository_id:number;label:string;recorded_status:string;task_relation:string}
+export interface ImportedFile {path:string;kind:'file'|'symlink'|'missing';content_base64?:string;target_base64?:string;git_mode?:string;bytes?:number;sha256?:string}
+export interface FileImportPacket {snapshot_sha256:string;snapshot:{origin:{kind:string;recorded_agent_label?:string;recorded_context_version?:number};source:{repository_id:number};original_input:Record<string,unknown>|null;original_input_status:'unknown'|'recorded';selection_scope:'selected_paths_only';files:ImportedFile[]};authority:'data_only';acceptance:'not_granted'}
+/** List recorded origins without inferring a task relationship from an agent label. */
+export function fileImportSources(projectId:number,taskId:number) {return fetchApi<FileImportSource[]>(`/api/projects/${projectId}/tasks/${taskId}/prior-files/sources`)}
+/** Validate explicit bounded paths before preview or freezing the original owner request. */
+function checkFileSelection(selection:Omit<PriorFilesSelection,'snapshot_sha256'>) {
+  if(!['legacy_worktree','private_copy'].includes(selection.source_kind)||!/^[A-Za-z0-9_.:-]{1,128}$/.test(selection.source_id)||selection.source_kind==='legacy_worktree'&&!/^[1-9][0-9]*$/.test(selection.source_id)||!Array.isArray(selection.paths)||selection.paths.length<1||selection.paths.length>128||new Set(selection.paths).size!==selection.paths.length||selection.paths.some(path=>typeof path!=='string'||!path||new TextEncoder().encode(path).length>4096||path.includes('\0')||path.split('/').length>32||path.split('/').some(part=>['','.','..','.git','.ken','.worktrees'].includes(part)))) throw new Error('Elige un origen registrado y rutas relativas individuales; deja fuera los metadatos de Git y ejecución.')
+}
+/** Observe selected old bytes; a preview cannot admit, resume, review or accept work. */
+export function previewFileImport(projectId:number,taskId:number,body:Omit<PriorFilesSelection,'snapshot_sha256'>&{repository_id:number}) {
+  checkFileSelection(body)
+  if(![projectId,taskId,body.repository_id].every(value=>Number.isSafeInteger(value)&&value>0))throw new Error('Consulta el proyecto, la tarea y el repositorio antes de importar archivos.')
+  return fetchApi<FileImportPacket>(`/api/projects/${projectId}/tasks/${taskId}/prior-files/preview`,{method:'POST',body:JSON.stringify(body)})
+}
 /** Complete retained original input and patch, without inherited approval. */
 export interface PriorCodePacket {
   snapshot_sha256:string
@@ -251,7 +269,7 @@ export interface InstructionDraft {
   thread_id: string
   message: string
   repository_id?: number
-  prior_code?: Readonly<PriorCodeSelection>
+  prior_code?: Readonly<PriorMaterialSelection>
 }
 export interface InstructionIntent {
   readonly projectId: number
@@ -264,10 +282,12 @@ export function prepareInstruction(projectId: number, draft: InstructionDraft): 
     || !/^[A-Za-z0-9_.:-]{1,128}$/.test(draft.thread_id)
     || !draft.message.trim() || draft.message.length > 50000
     || (draft.repository_id != null && (!Number.isSafeInteger(draft.repository_id) || draft.repository_id <= 0))
-    || (draft.prior_code != null && (!draft.prior_code.attempt_id.trim() || draft.prior_code.attempt_id.length>128 || !/^[0-9a-f]{64}$/.test(draft.prior_code.snapshot_sha256)))) {
+    || (draft.prior_code != null && (!/^[0-9a-f]{64}$/.test(draft.prior_code.snapshot_sha256)||('attempt_id' in draft.prior_code&&(!draft.prior_code.attempt_id.trim()||draft.prior_code.attempt_id.length>128))))) {
     throw new Error('Revisa la tarea, el contexto y el contenido de la solicitud.')
   }
-  return Object.freeze({ projectId, body: Object.freeze({ ...draft, ...(draft.prior_code?{prior_code:Object.freeze({...draft.prior_code})}:{}), operation_key: crypto.randomUUID() }) })
+  if(draft.prior_code&&'paths' in draft.prior_code)checkFileSelection(draft.prior_code)
+  const selected=draft.prior_code?Object.freeze({...draft.prior_code,...('paths' in draft.prior_code?{paths:Object.freeze([...draft.prior_code.paths])}:{})}):undefined
+  return Object.freeze({ projectId, body: Object.freeze({ ...draft, ...(selected?{prior_code:selected}:{}), operation_key: crypto.randomUUID() }) })
 }
 
 export function sendInstruction(intent: InstructionIntent) {

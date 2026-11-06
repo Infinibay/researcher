@@ -1,0 +1,31 @@
+{
+  "base_commit": "b67e4ff",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "30c2e40726826038fd61bf2cea5d205dd6b6c1e4b0e8af34524e62595c830ef0",
+  "observed": {
+    "tests_passed": 93,
+    "failures": [],
+    "skipped": 0,
+    "backend_modules_loaded": 297,
+    "backend_imports_only_from_wheel": true,
+    "model_turns": 0,
+    "controlled_native_turns_in_owned_fixture": 0,
+    "actual_kernel_owned_fixture": false,
+    "network": "Disabled except Unix sockets",
+    "semantic_assets": "Explicit prepared pinned public offline assets outside wheel",
+    "generation_and_ken": "No owned kernel pipeline in final guard regression; initial broad artifact supplies separately scoped two-turn physical evidence"
+  },
+  "backend_tree": {
+    "matching_source_files": 778,
+    "sha256": "8e37f66d4b907960901430002beeb398dffb757e4285a6513e22ca361335183e"
+  },
+  "bootstrap": "Python3.12 -I -S with explicit installed dependency path and original host venv prefix restored; backend import paths remain restricted to extracted wheel.",
+  "excluded_known_failure": "Legacy invalid-transition text assertion recorded in the prior global baseline also excluded. Development inverse40/41/42 tests refuse later schemas43\u201353: test_unused_review_inverse_preserves_closed_author_and_candidate, test_unused_native_review_inverse_preserves_existing_packet, test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history[frozen_author]. Prior terminal-owner source receipt observes these guards with schemas43\u201349; current53selected run excludes them. Inverses43\u201353 remain required; guard not weakened (DD003).",
+  "limits": "Extracted backend wheel plus installed dependencies and explicit prepared offline assets; not a clean full host installation or an inference-quality trial.",
+  "selected_scope": "Final93 cases: file import storage/HTTP/fixture contracts, real Git preparation/capture, retained native input and Codex session controls. No owned kernel pipeline selected in this final regression.",
+  "initial_broad_receipt": "file-import-initial-packaging.json",
+  "archive_comparison": "file-import-archive-comparison.json",
+  "scope_limits": "Initial509-pass artifact includes actual two-turn physical chain. Final artifact differs only by an extra rejection of staged reserved metadata, with real Git positive/negative and protocol/admission regressions; it was not rerun through the full kernel chain. No global-green or full-host installation claim.",
+  "known_deselected_in_initial_broad": 4,
+  "known_deselected_in_final": 0
+}

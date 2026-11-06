@@ -13,7 +13,11 @@ from backend.tests.runtime.test_owned_factory import (
 
 
 @pytest.mark.timeout(420)
-@pytest.mark.parametrize("reuse_prior", [False, True], ids=["fresh", "carryover"])
+@pytest.mark.parametrize(
+    "reuse_prior",
+    [False, True, "legacy_files"],
+    ids=["fresh", "carryover", "legacy-files"],
+)
 async def test_owner_http_develops_checks_reviews_and_accepts_exact_candidate(
     development_config,
     reuse_prior,
@@ -37,6 +41,18 @@ async def test_owner_http_develops_checks_reviews_and_accepts_exact_candidate(
         "-qm",
         "base",
     )
+    legacy_root = None
+    if reuse_prior == "legacy_files":
+        legacy_root = c.s.workspace / ".worktrees" / "old-developer"
+        await fixture_git(
+            c.s.workspace, "worktree", "add", "--detach", str(legacy_root), "HEAD"
+        )
+        (legacy_root / "fact.txt").write_text("200")
+        c.s.c.conn.execute(
+            "INSERT INTO agent_worktrees(id,project_id,repo_id,agent_id,worktree_path) VALUES(7,101,11,'old-developer',?)",
+            (str(legacy_root),),
+        )
+        c.s.c.conn.commit()
     recipe = {
         "argv": [
             "/usr/bin/python3",
@@ -71,6 +87,26 @@ async def test_owner_http_develops_checks_reviews_and_accepts_exact_candidate(
             "repository_id": 11,
         }
         path = "/api/projects/101/tasks/1001/runs"
+        if reuse_prior == "legacy_files":
+            preview = await owner.post(
+                "/api/projects/101/tasks/1001/prior-files/preview",
+                json={
+                    "source_kind": "legacy_worktree",
+                    "source_id": "7",
+                    "paths": ["fact.txt"],
+                    "repository_id": 11,
+                },
+            )
+            assert preview.status_code == 200, preview.text
+            body["request"] = (
+                "Import selected older fact.txt bytes into the new copy; original input is unknown. Check 200 under the current requirements and preserve both original directories."
+            )
+            body["prior_code"] = {
+                "source_kind": "legacy_worktree",
+                "source_id": "7",
+                "paths": ["fact.txt"],
+                "snapshot_sha256": preview.json()["snapshot_sha256"],
+            }
         response = await owner.post(path, json=body)
         assert response.status_code == 202, response.text
         run = response.json()
@@ -80,7 +116,7 @@ async def test_owner_http_develops_checks_reviews_and_accepts_exact_candidate(
         assert replay.status_code == 202 and replay.json()["run_id"] == run["run_id"]
         assert replay.json()["execution_kind"] == "development"
         assert replay.json()["status"] == "needs_review"
-        if reuse_prior:
+        if reuse_prior is True:
             from backend.runtime.candidate_state import CodeCandidates
 
             original = run
@@ -134,6 +170,22 @@ async def test_owner_http_develops_checks_reviews_and_accepts_exact_candidate(
         assert check["spec"]["argv"] == recipe["argv"]
         assert check["result"]["status"] == "passed"
         record = runtime.store.input_record(101, run["run_id"])
+        if reuse_prior == "legacy_files":
+            saved = json.loads(record["input_text"])
+            assert saved["prior_code"]["snapshot"]["original_input"] is None
+            assert (
+                saved["prior_code"]["snapshot"]["origin"]["task_relation"]
+                == "selected_by_owner_not_historically_verified"
+            )
+            assert (legacy_root / "fact.txt").read_text() == "200"
+            with runtime.store._transaction() as conn:
+                assert any(
+                    b"selected old files applied" in bytes(row[0])
+                    for row in conn.execute(
+                        "SELECT stdout FROM runtime_jobs WHERE run_id=?",
+                        (run["run_id"],),
+                    )
+                )
         assert "exact value checked" in record["developer_instructions"]
         assert (c.s.workspace / "fact.txt").read_text() == "137"
         review_body = {
@@ -202,10 +254,10 @@ async def test_owner_http_develops_checks_reviews_and_accepts_exact_candidate(
         with runtime.store._transaction() as conn:
             assert conn.execute(
                 "SELECT COUNT(*) FROM runtime_code_candidates"
-            ).fetchone()[0] == (2 if reuse_prior else 1)
+            ).fetchone()[0] == (2 if reuse_prior is True else 1)
             assert conn.execute("SELECT COUNT(*) FROM runtime_code_checks").fetchone()[
                 0
-            ] == (2 if reuse_prior else 1)
+            ] == (2 if reuse_prior is True else 1)
             assert (
                 conn.execute(
                     "SELECT COUNT(*) FROM runtime_code_review_requests"
