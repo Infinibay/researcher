@@ -127,3 +127,47 @@ def test_deleted_empty_project_does_not_leave_policy_for_a_recreated_project(coo
     with c.store._transaction(write=True) as conn:conn.execute('DELETE FROM projects WHERE id=303')
     with c.store._transaction(write=True) as conn:conn.execute("INSERT INTO projects(id,name) VALUES(303,'New project')")
     assert settings.view(303,'reviewer',host_model='host')['effective']['model']=='host'
+
+
+@pytest.mark.parametrize("scope", [{}, {"project_id": 101}, {"project_id": 101, "actor_id": "reviewer"}])
+def test_process_loss_after_setting_write_preserves_original_pair_and_revision(coordination, scope):
+    """Kill a separate writer after its real SQL mutation but before commit; preserve the whole original pair and permit one revision-checked retry."""
+    import hashlib
+    from pathlib import Path
+    import subprocess
+    import sys
+    from backend.runtime import model_settings
+
+    settings = model_settings.ModelSettings(coordination.store)
+    original = settings.update(**scope, expected_revision=0, model="original", reasoning_effort="low")
+    child = r'''
+"""Exit inside the real model-setting transaction without Python cleanup or a committed response."""
+import hashlib, json, os, sys
+from pathlib import Path
+from backend.runtime import model_settings
+from backend.runtime.sqlite_runs import SQLiteRunStore
+settings = model_settings.ModelSettings(SQLiteRunStore(sys.argv[1]))
+read = settings._setting
+def checkpoint(conn, key):
+    """Stop only after observing the changed row inside the uncommitted writer connection."""
+    current = read(conn, key)
+    if current['revision'] == 2:
+        print(json.dumps({'uncommitted': current, 'source_sha256': hashlib.sha256(Path(model_settings.__file__).read_bytes()).hexdigest()}), flush=True)
+        os._exit(73)
+    return current
+settings._setting = checkpoint
+settings.update(**json.loads(sys.argv[2]), expected_revision=1, model='changed', reasoning_effort='high')
+raise RuntimeError('The expected pre-commit checkpoint was not reached')
+'''
+    result = subprocess.run(
+        [sys.executable, "-I", "-c", child, str(coordination.database), json.dumps(scope)],
+        capture_output=True, text=True, timeout=10, check=False,
+    )
+    assert result.returncode == 73, result.stderr
+    observed = json.loads(result.stdout)
+    assert observed["source_sha256"] == hashlib.sha256(Path(model_settings.__file__).read_bytes()).hexdigest()
+    assert observed["uncommitted"]["revision"] == 2
+    assert observed["uncommitted"]["profile"] == {"model": "changed", "reasoning_effort": "high"}
+    assert settings.view(**scope, host_model="host")["setting"] == original
+    retried = settings.update(**scope, expected_revision=1, model="changed", reasoning_effort="high")
+    assert retried["revision"] == 2 and retried["profile"] == observed["uncommitted"]["profile"]

@@ -1,0 +1,211 @@
+{
+  "base_commit": "6a142a8",
+  "started_at_utc": "2026-11-07T14:38:11Z",
+  "validated_at_utc": "2026-11-07T14:44:49Z",
+  "elapsed_to_validation_seconds": 398,
+  "tests": 36,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "test_seconds": 12.086,
+  "test_cases": [
+    {
+      "file": "backend.tests.runtime.test_model_settings",
+      "name": "test_model_scope_precedence_revision_reset_and_project_isolation",
+      "seconds": 0.367
+    },
+    {
+      "file": "backend.tests.runtime.test_model_settings",
+      "name": "test_attempt_model_selection_is_frozen_before_inference_even_after_policy_changes",
+      "seconds": 0.366
+    },
+    {
+      "file": "backend.tests.runtime.test_model_settings",
+      "name": "test_native_catalog_checks_requested_model_and_effort_without_sending_a_turn",
+      "seconds": 0.025
+    },
+    {
+      "file": "backend.tests.runtime.test_model_settings",
+      "name": "test_codex_session_sends_selected_reasoning_effort_instead_of_fixed_low",
+      "seconds": 0.058
+    },
+    {
+      "file": "backend.tests.runtime.test_model_settings",
+      "name": "test_owner_configuration_changes_future_choices_without_retargeting_actual_native_attempt",
+      "seconds": 2.591
+    },
+    {
+      "file": "backend.tests.runtime.test_model_settings",
+      "name": "test_unavailable_model_has_no_thread_turn_or_fallback_and_keeps_original_choice",
+      "seconds": 1.282
+    },
+    {
+      "file": "backend.tests.runtime.test_model_settings",
+      "name": "test_deleted_empty_project_does_not_leave_policy_for_a_recreated_project",
+      "seconds": 0.315
+    },
+    {
+      "file": "backend.tests.runtime.test_model_settings",
+      "name": "test_process_loss_after_setting_write_preserves_original_pair_and_revision[scope0]",
+      "seconds": 0.343
+    },
+    {
+      "file": "backend.tests.runtime.test_model_settings",
+      "name": "test_process_loss_after_setting_write_preserves_original_pair_and_revision[scope1]",
+      "seconds": 0.339
+    },
+    {
+      "file": "backend.tests.runtime.test_model_settings",
+      "name": "test_process_loss_after_setting_write_preserves_original_pair_and_revision[scope2]",
+      "seconds": 0.346
+    },
+    {
+      "file": "backend.tests.config.test_application_settings",
+      "name": "test_retired_options_are_not_accepted_as_application_settings[LLM_MODEL]",
+      "seconds": 0.026
+    },
+    {
+      "file": "backend.tests.config.test_application_settings",
+      "name": "test_retired_options_are_not_accepted_as_application_settings[EMBEDDING_PROVIDER]",
+      "seconds": 0.025
+    },
+    {
+      "file": "backend.tests.config.test_application_settings",
+      "name": "test_retired_options_are_not_accepted_as_application_settings[LOOP_MAX_ITERATIONS]",
+      "seconds": 0.026
+    },
+    {
+      "file": "backend.tests.config.test_application_settings",
+      "name": "test_retired_options_are_not_accepted_as_application_settings[AUTONOMY_ENABLED]",
+      "seconds": 0.025
+    },
+    {
+      "file": "backend.tests.config.test_application_settings",
+      "name": "test_retained_services_use_explicit_environment_without_loading_old_json",
+      "seconds": 0.025
+    },
+    {
+      "file": "backend.tests.runtime.test_subscription_session",
+      "name": "test_refresh_precedes_native_receipt_without_replay_or_public_secret[thread]",
+      "seconds": 0.054
+    },
+    {
+      "file": "backend.tests.runtime.test_subscription_session",
+      "name": "test_refresh_precedes_native_receipt_without_replay_or_public_secret[turn]",
+      "seconds": 0.053
+    },
+    {
+      "file": "backend.tests.runtime.test_subscription_session",
+      "name": "test_refresh_failure_retires_connection_without_using_another_account[wrong-account]",
+      "seconds": 0.054
+    },
+    {
+      "file": "backend.tests.runtime.test_subscription_session",
+      "name": "test_refresh_failure_retires_connection_without_using_another_account[unchanged]",
+      "seconds": 0.052
+    },
+    {
+      "file": "backend.tests.runtime.test_subscription_session",
+      "name": "test_refresh_failure_retires_connection_without_using_another_account[switch-account]",
+      "seconds": 0.053
+    },
+    {
+      "file": "backend.tests.runtime.test_subscription_session",
+      "name": "test_withdrawal_during_credential_read_cannot_send_late_access_token",
+      "seconds": 0.053
+    },
+    {
+      "file": "backend.tests.runtime.test_subscription_session",
+      "name": "test_refresh_budget_stops_repeated_challenges_without_host_turn_replay",
+      "seconds": 2.051
+    },
+    {
+      "file": "backend.tests.runtime.test_subscription_session",
+      "name": "test_initial_provider_exception_does_not_expose_credentials",
+      "seconds": 0.053
+    },
+    {
+      "file": "backend.tests.runtime.test_subscription_session",
+      "name": "test_session_cancel_withdraws_a_pending_auth_refresh_before_turn_receipt",
+      "seconds": 2.052
+    },
+    {
+      "file": "backend.tests.runtime.test_legacy_engine_removal",
+      "name": "test_old_inference_modules_are_not_importable",
+      "seconds": 0.026
+    },
+    {
+      "file": "backend.tests.runtime.test_legacy_engine_removal",
+      "name": "test_legacy_project_guards_remain_before_and_after_native_admission",
+      "seconds": 0.308
+    },
+    {
+      "file": "backend.tests.runtime.test_legacy_catalog_removal",
+      "name": "test_role_factories_and_framework_memory_are_not_available",
+      "seconds": 0.025
+    },
+    {
+      "file": "backend.tests.runtime.test_legacy_catalog_removal",
+      "name": "test_historical_roster_reader_preserves_original_memory_and_runs",
+      "seconds": 0.282
+    },
+    {
+      "file": "backend.tests.runtime.test_legacy_catalog_removal",
+      "name": "test_native_finding_catalog_can_inspect_actual_review_feedback[RESEARCH_NAMES]",
+      "seconds": 0.043
+    },
+    {
+      "file": "backend.tests.runtime.test_legacy_catalog_removal",
+      "name": "test_native_finding_catalog_can_inspect_actual_review_feedback[REVIEW_NAMES]",
+      "seconds": 0.038
+    },
+    {
+      "file": "backend.tests.runtime.test_legacy_catalog_removal",
+      "name": "test_native_finding_catalog_can_inspect_actual_review_feedback[INVESTIGATION_NAMES]",
+      "seconds": 0.042
+    },
+    {
+      "file": "backend.tests.runtime.test_legacy_catalog_removal",
+      "name": "test_native_finding_catalog_can_inspect_actual_review_feedback[DEVELOPMENT_NAMES]",
+      "seconds": 0.043
+    },
+    {
+      "file": "backend.tests.runtime.test_registered_legacy_workers",
+      "name": "test_shutdown_includes_a_thread_registered_without_a_flow_object",
+      "seconds": 0.027
+    },
+    {
+      "file": "backend.tests.runtime.test_registered_legacy_workers",
+      "name": "test_registered_autonomy_controller_blocks_native_work_until_observed_exit",
+      "seconds": 0.298
+    },
+    {
+      "file": "backend.tests.runtime.test_registered_legacy_workers",
+      "name": "test_retired_autonomy_package_is_unavailable",
+      "seconds": 0.024
+    },
+    {
+      "file": "backend.tests.runtime.test_registered_legacy_workers",
+      "name": "test_retired_role_templates_and_provider_readers_are_unavailable",
+      "seconds": 0.024
+    }
+  ],
+  "real_process_loss_cases": 3,
+  "model_turns": 0,
+  "product_logic_changed": false,
+  "global_suite_repeated": false,
+  "completed_scenario": "U06",
+  "other_broad_scenarios_remaining": 42,
+  "fully_accepted_pages": 0,
+  "inputs": {
+    "backend/runtime/model_settings.py": "876a6af6da86055532ac3bb663fd1af7c62aec8ea407fbded04b1fd0e6fdd4eb",
+    "backend/tests/runtime/test_model_settings.py": "8b1b8da9f936f56ad59ab452bdf51693fa9ae5b23e03ac640f96a3eb871d12a6",
+    "backend/tests/config/test_application_settings.py": "ca19c6c2af85465139b70a7105fdd98e599c9a0cabcb26dde6911d5e5770a93f",
+    "backend/tests/runtime/test_subscription_session.py": "78718319a5603fc350cb63b393550aacbe014a115c9af8162b78bc214eea428c",
+    "backend/tests/runtime/test_legacy_engine_removal.py": "cdf3a6508c7ed394cbde4885c0db7a97d54d13340c671f56aa29b754c839ff72",
+    "backend/tests/runtime/test_legacy_catalog_removal.py": "5fbd069cc9d8aceae03724390848f374f12f7b7af3447249c085871abbf9abe6",
+    "backend/tests/runtime/test_registered_legacy_workers.py": "8f2e51466db27a2946cdfc5a55ee33e4bba0dfd1f265994b9559efbb5b50a6fd",
+    "frontend/src/components/layout/ModelSettingsDialog.tsx": "1de44dacfa284a102e87970f5530224119671bb5562c4fd5b7329383243f9aa5",
+    "pyproject.toml": "4a1fe0157ca6beb4de495515acd7c7494ace743b6735fd8f2612586cb842c050"
+  }
+}

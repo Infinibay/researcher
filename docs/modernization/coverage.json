@@ -1598,7 +1598,7 @@
       ]
     },
     "U06": {
-      "status": "pending",
+      "status": "complete",
       "evidence": [
         "docs/architecture/subscription-auth.md",
         "docs/modernization/subscription-evidence.json",
@@ -1619,7 +1619,20 @@
         "docs/modernization/native-proxy-evidence.json",
         "docs/modernization/native-proxy-results.json",
         "backend/tests/runtime/test_native_proxy.py",
-        "backend/tests/runtime/test_native_proxy_lifecycle.py"
+        "backend/tests/runtime/test_native_proxy_lifecycle.py",
+        "docs/architecture/model-configuration.md",
+        "docs/architecture/retained-configuration.md",
+        "backend/tests/runtime/test_model_settings.py",
+        "backend/tests/config/test_application_settings.py",
+        "docs/design/audits/2026-11-06-model-settings/report.md",
+        "docs/modernization/coverage-reconciliation-results.json",
+        "docs/modernization/coverage-reconciliation.md"
+      ],
+      "completion_scope": "Current native configuration contract: complete model/effort pairs, revision-checked writes, process-loss rollback, immutable per-attempt selection, account continuity and explicit next-attempt UI.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Controlled native protocol tests do not establish eligibility of every model for the actual account.",
+        "Whole-product human comprehension/accessibility acceptance and other scenarios remain separate."
       ]
     },
     "U07": {
@@ -3579,10 +3592,15 @@
         "docs/design/audits/2026-11-07-knowledge-live/report.md",
         "docs/modernization/web-knowledge-results.json",
         "frontend/tests/knowledge.e2e.mjs",
-        "evals/operation/web_workspace.py"
+        "evals/operation/web_workspace.py",
+        "docs/architecture/native-knowledge-retirement.md",
+        "docs/architecture/native-flow-retirement.md",
+        "docs/architecture/native-autonomy-retirement.md",
+        "docs/architecture/native-legacy-dependencies.md",
+        "docs/modernization/coverage-reconciliation.md",
+        "docs/modernization/coverage-reconciliation-results.json"
       ],
       "remaining": [
-        "Migrate legacy registries/roles/flows and remove old RAG/CrewAI providers once their consumers are replaced.",
         "Representative complex-document retrieval and human comprehension evaluation; normalized body scope is not full document review."
       ]
     },
@@ -3601,10 +3619,16 @@
         "docs/design/audits/2026-11-07-knowledge-live/report.md",
         "docs/modernization/web-knowledge-results.json",
         "frontend/tests/knowledge.e2e.mjs",
-        "evals/operation/web_workspace.py"
+        "evals/operation/web_workspace.py",
+        "docs/architecture/native-knowledge-retirement.md",
+        "docs/architecture/native-flow-retirement.md",
+        "docs/architecture/native-autonomy-retirement.md",
+        "docs/architecture/native-legacy-dependencies.md",
+        "docs/modernization/coverage-reconciliation.md",
+        "docs/modernization/coverage-reconciliation-results.json"
       ],
       "remaining": [
-        "Migrate complete legacy roles/flows and semantic provider; preserve dependent-context/finding invalidation and retained history policy.",
+        "Complete acceptance of dependent-context/finding invalidation and retained-history policy across supported lifecycles. Legacy roles/flows/provider retirement is already implemented.",
         "Representative retrieval/scientific and human-comprehension evaluation; complete Wiki acceptance."
       ]
     },
@@ -3625,11 +3649,16 @@
         "docs/modernization/finding-consumers-packaging.json",
         "backend/tests/research/test_finding_consumers.py",
         "backend/tests/research/test_legacy_context_scope.py",
-        "backend/tests/knowledge/test_finding_memory_retirement.py"
+        "backend/tests/knowledge/test_finding_memory_retirement.py",
+        "docs/architecture/native-knowledge-retirement.md",
+        "docs/architecture/native-flow-retirement.md",
+        "docs/architecture/native-autonomy-retirement.md",
+        "docs/architecture/native-legacy-dependencies.md",
+        "docs/modernization/coverage-reconciliation.md",
+        "docs/modernization/coverage-reconciliation-results.json"
       ],
       "remaining": [
-        "Independently admitted reviewer, version-bound decisions and dependent knowledge invalidation; labels and stored methods are not independent scientific review.",
-        "Migrate all legacy knowledge read/search/summary/review roles/flows/adapters and retire old embedding providers with parity evidence.",
+        "Complete dependent-knowledge invalidation and retained lifecycle acceptance. Independently admitted version-bound review already exists; it does not establish scientific validity.",
         "Representative retrieval and human-comprehension evaluation; full route acceptance, retention and recovery."
       ]
     },
@@ -3659,15 +3688,21 @@
         "docs/modernization/review-results.json",
         "docs/modernization/review-packaging.json",
         "docs/modernization/native-review-live.json",
-        "backend/tests/runtime/test_finding_review.py"
+        "backend/tests/runtime/test_finding_review.py",
+        "docs/architecture/native-knowledge-retirement.md",
+        "docs/architecture/native-flow-retirement.md",
+        "docs/architecture/native-autonomy-retirement.md",
+        "docs/architecture/native-legacy-dependencies.md",
+        "docs/modernization/coverage-reconciliation.md",
+        "docs/modernization/coverage-reconciliation-results.json"
       ],
       "implemented": [
         "Owner-admitted independent attempt/thread/permission profile with immutable subject and version-bound citations",
         "Actual one-turn subscription reviewer identifies controlled731-vs137 contradiction; stored attributed checks/limits, no automatic task acceptance"
       ],
       "remaining": [
-        "Complete legacy reviewer/validation/rejection flow cutover and explicit product acceptance",
-        "Representative scientific-quality and human interaction evaluation; broad scenarios remain open"
+        "Integral research review/acceptance lifecycle remains to be accepted. Legacy reviewer/validation/rejection flow cutover is implemented; exact native decisions and owner acceptance are distinct.",
+        "Representative scientific-quality and human interaction evaluation; broader scenarios remain open."
       ]
     },
     "finding_consumers": {
@@ -3678,7 +3713,13 @@
         "docs/modernization/finding-consumers-packaging.json",
         "backend/tests/research/test_finding_consumers.py",
         "backend/tests/research/test_legacy_context_scope.py",
-        "backend/tests/knowledge/test_finding_memory_retirement.py"
+        "backend/tests/knowledge/test_finding_memory_retirement.py",
+        "docs/architecture/native-knowledge-retirement.md",
+        "docs/architecture/native-flow-retirement.md",
+        "docs/architecture/native-autonomy-retirement.md",
+        "docs/architecture/native-legacy-dependencies.md",
+        "docs/modernization/coverage-reconciliation.md",
+        "docs/modernization/coverage-reconciliation-results.json"
       ],
       "implemented": [
         "Canonical retained finding metadata/body/summary/semantic and feedback reads",
@@ -3687,9 +3728,8 @@
         "Mutable finding vector-source selection retired; direct obsolete calls fail before indexing"
       ],
       "remaining": [
-        "Legacy finding writers and internal HTTP/MCP producer cutover",
-        "Complete reviewer flow/task acceptance and dependent-knowledge lifecycle",
-        "Other memory/index/provider retirement and whole scenario acceptance"
+        "Complete reviewer/task-acceptance and dependent-knowledge lifecycle evaluation. Legacy finding writers and internal API/tool consumers are retired.",
+        "Whole-scenario acceptance, retained-data migration and representative retrieval evaluation; memory/index/provider retirement is not a pending code migration."
       ]
     },
     "native_code_review": {
@@ -3900,7 +3940,13 @@
         "docs/architecture/native-project-planning.md",
         "docs/modernization/native-planning-results.json",
         "docs/modernization/native-planning-packaging.json",
-        "docs/design/audits/2026-11-05-native-planning/report.md"
+        "docs/design/audits/2026-11-05-native-planning/report.md",
+        "docs/architecture/native-knowledge-retirement.md",
+        "docs/architecture/native-flow-retirement.md",
+        "docs/architecture/native-autonomy-retirement.md",
+        "docs/architecture/native-legacy-dependencies.md",
+        "docs/modernization/coverage-reconciliation.md",
+        "docs/modernization/coverage-reconciliation-results.json"
       ],
       "implemented": [
         "Owned native readonly plan type on existing runtime, required Ken and scoped host proposal tools; no generic result-propose capability or task execution permission",
@@ -3912,11 +3958,11 @@
       ],
       "remaining": [
         "Explicit dispatch and causal prerequisite handoffs now delivered separately in accepted_plan_execution; original plan acceptance still never auto-starts work",
-        "Autonomy/remaining flows/tool consumers and global physical legacy exclusion remain; orchestrator/CLI/TUI entry cut over, advanced parity pending",
+        "Packaged autonomy/flows/tool consumers are retired. Existing external legacy-process enrollment/closure and advanced terminal parity remain separate acceptance obligations",
         "Project Stop/unissued restart, graph-wide invalidation, closed-delivery successors and explicit corrected task/project graph adoption connected; manual drafts/unaccepted-run adoption and full lifecycle remain.",
         "Multi-repo/empty-project planning bootstrap, all task types, native planning history deletion/archive/restore and inverse47",
         "Typed code/source evidence in plan basis, semantic support/representative prompting and human-comprehension evaluations; no claims from lexical quote membership",
-        "Remaining6web routes/12page final acceptance and whole-suite/inherited failures/final fresh review still in full goal"
+        "All12routes have implemented pilots;12page final acceptance and whole-suite/inherited failures/final fresh review still in full goal"
       ]
     },
     "accepted_plan_execution": {
@@ -3938,7 +3984,13 @@
         "backend/tests/runtime/test_owned_code_dependencies.py",
         "docs/architecture/predecessor-code-material.md",
         "docs/modernization/predecessor-material-results.json",
-        "docs/modernization/predecessor-material-packaging.json"
+        "docs/modernization/predecessor-material-packaging.json",
+        "docs/architecture/native-knowledge-retirement.md",
+        "docs/architecture/native-flow-retirement.md",
+        "docs/architecture/native-autonomy-retirement.md",
+        "docs/architecture/native-legacy-dependencies.md",
+        "docs/modernization/coverage-reconciliation.md",
+        "docs/modernization/coverage-reconciliation-results.json"
       ],
       "implemented": [
         "Separate exact owner manifest execution decision; one persistent original task delivery and immutable causal handoff per node, atomic native admission/link and original receipt",
@@ -3953,7 +4005,7 @@
         "Closed-delivery successors and exact corrected-graph owner revisions connected; manual drafts/unaccepted-run adoption, candidate transfer and full lifecycle remain. Terminal core shares owner; advanced parity pending.",
         "Graph-wide conservative invalidation; branch-selective scope and independent-node priority scheduling remain deferred",
         "Code prerequisite reading is now implemented; actual installed five-turn physical proof is recorded in predecessor-material-results. Broader retained/manual candidate adoption and whole-project closure remain.",
-        "Legacy autonomy/remaining flows/tools still require actual migration; orchestrator/CLI/TUI core cut over separately; known local registration check is not global physical legacy writer exclusion",
+        "Packaged legacy autonomy/flows/tools are retired. Existing external legacy-process enrollment/closure still needs installation-specific evidence; local registry absence alone does not prove it",
         "Large complete documentary predecessor snapshots can exceed native input budget and block before inference; no silent truncation; windowed documentary handoff evidence reads remain future capability; code artifact reads are bounded separately",
         "No real model/prompt quality/human comprehension evaluation, full-page acceptance, current global-suite green, full host install or migration-inverse completion"
       ]
@@ -3975,7 +4027,13 @@
         "docs/architecture/terminal-owner-client.md",
         "docs/modernization/terminal-owner-results.json",
         "docs/modernization/terminal-owner-packaging.json",
-        "docs/design/audits/2026-11-05-terminal-owner/report.md"
+        "docs/design/audits/2026-11-05-terminal-owner/report.md",
+        "docs/architecture/native-knowledge-retirement.md",
+        "docs/architecture/native-flow-retirement.md",
+        "docs/architecture/native-autonomy-retirement.md",
+        "docs/architecture/native-legacy-dependencies.md",
+        "docs/modernization/coverage-reconciliation.md",
+        "docs/modernization/coverage-reconciliation-results.json"
       ],
       "implemented": [
         "ProjectOrchestrator and actual classic/TUI entry points use the same owner HTTP service; removed local team/model/worktree/auto-DONE/review-token/auto-merge pipeline",
@@ -3987,7 +4045,7 @@
         "Handoff v2 carries original plan material/origins/accepted proposal/assumptions; coordinated code review no longer labels host-composed instruction as literal owner statement"
       ],
       "remaining": [
-        "Remaining flows/autonomy/claims/listeners/tool registries still need actual migration and global physical legacy-writer exclusion",
+        "Packaged flows/autonomy/claims/listeners/tool registries are retired; installation-specific external legacy-process enrollment/closure remains",
         "Corrected-graph adoption, revision-bound controls and closed-delivery successors connected; manual drafts/unaccepted-run adoption, complete candidate transfer and lifecycle remain.",
         "Terminal advanced parity for scientific review/questions/publication/remote/recovery and explicit multi-repository selection remains; existing web controls retained",
         "Persisted endpoint binding for web pending actions and generic-note reply-loss UX/live projection still need integration; current bound identity contract is implemented by terminal",
@@ -4007,7 +4065,13 @@
         "docs/architecture/plan-delivery-continuations.md",
         "docs/modernization/plan-continuation-results.json",
         "docs/modernization/plan-continuation-packaging.json",
-        "docs/design/audits/2026-11-05-plan-continuation/report.md"
+        "docs/design/audits/2026-11-05-plan-continuation/report.md",
+        "docs/architecture/native-knowledge-retirement.md",
+        "docs/architecture/native-flow-retirement.md",
+        "docs/architecture/native-autonomy-retirement.md",
+        "docs/architecture/native-legacy-dependencies.md",
+        "docs/modernization/coverage-reconciliation.md",
+        "docs/modernization/coverage-reconciliation-results.json"
       ],
       "implemented": [
         "One distinct paired-owner decision over exact closed predecessor observations creates one nonforking successor; immutable original delivery/run/effects/inference history retained.",
@@ -4019,8 +4083,8 @@
       "remaining": [
         "Corrected-graph adoption and replacement of unused obsolete successor permission connected; manual drafts/unaccepted-run and private candidate adoption still required.",
         "Late changed predecessor evidence blocks an already authorized successor; explicit replacement of that unused obsolete authorization is still required.",
-        "Remaining legacy flows/autonomy/claims/listeners/tools and global physical legacy exclusion remain.",
-        "Remaining6web routes,0/12pages fully accepted, all43broad scenarios and full install/restore/inverses43–50/final fresh branch review remain."
+        "Packaged legacy flows/autonomy/claims/listeners/tools are retired; external producer closure during existing-installation migration remains separate.",
+        "All12routes have implemented pilots,0/12pages fully accepted,42broad scenarios remain and full install/restore/inverses43–50/final fresh branch review remain."
       ]
     },
     "corrected_graph_reauthorization": {
@@ -4036,7 +4100,13 @@
         "docs/architecture/corrected-graph-reauthorization.md",
         "docs/modernization/plan-reauthorization-results.json",
         "docs/modernization/plan-reauthorization-packaging.json",
-        "docs/design/audits/2026-11-05-plan-reauthorization/report.md"
+        "docs/design/audits/2026-11-05-plan-reauthorization/report.md",
+        "docs/architecture/native-knowledge-retirement.md",
+        "docs/architecture/native-flow-retirement.md",
+        "docs/architecture/native-autonomy-retirement.md",
+        "docs/architecture/native-legacy-dependencies.md",
+        "docs/modernization/coverage-reconciliation.md",
+        "docs/modernization/coverage-reconciliation-results.json"
       ],
       "implemented": [
         "Immutable revision history preserves original execution/acceptance/manifest. Current exact owner graph adopts task/project premises, attributed corrections and closed historical effects/consumption; cycle/current-context/scope checks.",
@@ -4046,9 +4116,9 @@
         "133source/135wheel/92frontend/1owned controlled-generation physical chain and6browser states;74Python docs; migration failure rollback50→51 and original identity/FK verified."
       ],
       "remaining": [
-        "Actual legacy flows/autonomy/claims/listeners/tool migration and global physical legacy writer exclusion.",
+        "Packaged legacy flows/autonomy/claims/listeners/tools are retired; installation-specific external producer enrollment/closure remains separate.",
         "Manual drafts/unaccepted-run and private candidate file adoption, remaining domain task types, integral retained code review/acceptance/publication scenarios.",
-        "Full prompts/books/evals/science/human understanding,6remaining web routes/0of12pages fully accepted,43broad scenarios, current global failures/clean install/restore/inverses43–51/final fresh review."
+        "Full prompts/books/evals/science/human understanding,all12routes implemented as pilots/0of12pages fully accepted,42broad scenarios remain, current global failures/clean install/restore/inverses43–51/final fresh review."
       ]
     },
     "native_exploratory_investigation": {

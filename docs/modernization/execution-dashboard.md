@@ -26,9 +26,36 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
 - Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 0/12 páginas están completamente aceptadas.
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
-- Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
+- U06 (configuración por intento y guardado interrumpido) queda comprobado; siguen42de43escenarios amplios abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: navegación transversal comprobada, ajustes conservados
+## Estado actual: cobertura reconciliada y U06 comprobado
+
+Bloque **2026-11-07 14:38:11–14:44:49 UTC**, **6 min 38 s** hasta validar.
+36pruebas dirigidas pasan, incluidas3caídas de un proceso después de escribir
+configuración y antes del commit. Se conserva pareja/revisión original y el
+reintento avanza una revisión. Snapshot por intento, conflicto entre editores,
+continuidad de cuenta y explicación de configuración futura tienen evidencia.
+U06 pasa de pendiente a completo en ese contrato; quedan42escenarios abiertos.
+
+Se corrigen diez listas de pendientes que aún exigían retirar módulos ya
+eliminados o implementar seis rutas que ya tienen piloto.75módulos retirados
+siguen ausentes;581archivos se examinan por imports;328archivos productivos
+coinciden con la instalación. El exportador Chroma aislado y sus obligaciones
+de datos/seguridad permanecen. [Revisión y cambios exactos](coverage-reconciliation.md).
+
+**Lista vigente:**
+- Terminado: recorridos reales Proyectos/Tareas, Archivos/Documentos y navegación
+  por teclado; contrato U06 y reconciliación de pendientes obsoletos.
+- Siguiente principal: comprobar las brechas funcionales que aún figuran en
+  planificación/continuidad y cerrar la siguiente capacidad faltante. No iniciado.
+- Pendiente: los42escenarios restantes, recuperación/recursos y datos históricos,
+  evaluaciones representativas/humanas, aceptación integral de12páginas,
+  dependencias publicadas y distribución.
+- Al final: detalles secundarios, incluida accesibilidad/reflow; validación
+  global y revisión independiente. Se conservan los fallos de navegación estrecha
+  registrados; no hay nueva suite global verde ni porcentaje total sustentado.
+
+## Etapa anterior: navegación transversal comprobada, ajustes conservados
 
 Bloque **2026-11-07 14:30:24–14:36:09 UTC**, **5 min 45 s** hasta inspeccionar
 resultados y las doce capturas estrechas.24transiciones por teclado y3controles

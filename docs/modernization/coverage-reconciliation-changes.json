@@ -1,0 +1,143 @@
+[
+  {
+    "deliverable": "structured_sources",
+    "previous_remaining": [
+      "Migrate legacy registries/roles/flows and remove old RAG/CrewAI providers once their consumers are replaced.",
+      "Representative complex-document retrieval and human comprehension evaluation; normalized body scope is not full document review."
+    ],
+    "current_remaining": [
+      "Representative complex-document retrieval and human comprehension evaluation; normalized body scope is not full document review."
+    ]
+  },
+  {
+    "deliverable": "wiki_knowledge",
+    "previous_remaining": [
+      "Migrate complete legacy roles/flows and semantic provider; preserve dependent-context/finding invalidation and retained history policy.",
+      "Representative retrieval/scientific and human-comprehension evaluation; complete Wiki acceptance."
+    ],
+    "current_remaining": [
+      "Complete acceptance of dependent-context/finding invalidation and retained-history policy across supported lifecycles. Legacy roles/flows/provider retirement is already implemented.",
+      "Representative retrieval/scientific and human-comprehension evaluation; complete Wiki acceptance."
+    ]
+  },
+  {
+    "deliverable": "finding_registry",
+    "previous_remaining": [
+      "Independently admitted reviewer, version-bound decisions and dependent knowledge invalidation; labels and stored methods are not independent scientific review.",
+      "Migrate all legacy knowledge read/search/summary/review roles/flows/adapters and retire old embedding providers with parity evidence.",
+      "Representative retrieval and human-comprehension evaluation; full route acceptance, retention and recovery."
+    ],
+    "current_remaining": [
+      "Complete dependent-knowledge invalidation and retained lifecycle acceptance. Independently admitted version-bound review already exists; it does not establish scientific validity.",
+      "Representative retrieval and human-comprehension evaluation; full route acceptance, retention and recovery."
+    ]
+  },
+  {
+    "deliverable": "finding_reviews",
+    "previous_remaining": [
+      "Complete legacy reviewer/validation/rejection flow cutover and explicit product acceptance",
+      "Representative scientific-quality and human interaction evaluation; broad scenarios remain open"
+    ],
+    "current_remaining": [
+      "Integral research review/acceptance lifecycle remains to be accepted. Legacy reviewer/validation/rejection flow cutover is implemented; exact native decisions and owner acceptance are distinct.",
+      "Representative scientific-quality and human interaction evaluation; broader scenarios remain open."
+    ]
+  },
+  {
+    "deliverable": "finding_consumers",
+    "previous_remaining": [
+      "Legacy finding writers and internal HTTP/MCP producer cutover",
+      "Complete reviewer flow/task acceptance and dependent-knowledge lifecycle",
+      "Other memory/index/provider retirement and whole scenario acceptance"
+    ],
+    "current_remaining": [
+      "Complete reviewer/task-acceptance and dependent-knowledge lifecycle evaluation. Legacy finding writers and internal API/tool consumers are retired.",
+      "Whole-scenario acceptance, retained-data migration and representative retrieval evaluation; memory/index/provider retirement is not a pending code migration."
+    ]
+  },
+  {
+    "deliverable": "native_project_planning",
+    "previous_remaining": [
+      "Explicit dispatch and causal prerequisite handoffs now delivered separately in accepted_plan_execution; original plan acceptance still never auto-starts work",
+      "Autonomy/remaining flows/tool consumers and global physical legacy exclusion remain; orchestrator/CLI/TUI entry cut over, advanced parity pending",
+      "Project Stop/unissued restart, graph-wide invalidation, closed-delivery successors and explicit corrected task/project graph adoption connected; manual drafts/unaccepted-run adoption and full lifecycle remain.",
+      "Multi-repo/empty-project planning bootstrap, all task types, native planning history deletion/archive/restore and inverse47",
+      "Typed code/source evidence in plan basis, semantic support/representative prompting and human-comprehension evaluations; no claims from lexical quote membership",
+      "Remaining6web routes/12page final acceptance and whole-suite/inherited failures/final fresh review still in full goal"
+    ],
+    "current_remaining": [
+      "Explicit dispatch and causal prerequisite handoffs now delivered separately in accepted_plan_execution; original plan acceptance still never auto-starts work",
+      "Packaged autonomy/flows/tool consumers are retired. Existing external legacy-process enrollment/closure and advanced terminal parity remain separate acceptance obligations",
+      "Project Stop/unissued restart, graph-wide invalidation, closed-delivery successors and explicit corrected task/project graph adoption connected; manual drafts/unaccepted-run adoption and full lifecycle remain.",
+      "Multi-repo/empty-project planning bootstrap, all task types, native planning history deletion/archive/restore and inverse47",
+      "Typed code/source evidence in plan basis, semantic support/representative prompting and human-comprehension evaluations; no claims from lexical quote membership",
+      "All12routes have implemented pilots;12page final acceptance and whole-suite/inherited failures/final fresh review still in full goal"
+    ]
+  },
+  {
+    "deliverable": "accepted_plan_execution",
+    "previous_remaining": [
+      "Closed-delivery successors and exact corrected-graph owner revisions connected; manual drafts/unaccepted-run adoption, candidate transfer and full lifecycle remain. Terminal core shares owner; advanced parity pending.",
+      "Graph-wide conservative invalidation; branch-selective scope and independent-node priority scheduling remain deferred",
+      "Code prerequisite reading is now implemented; actual installed five-turn physical proof is recorded in predecessor-material-results. Broader retained/manual candidate adoption and whole-project closure remain.",
+      "Legacy autonomy/remaining flows/tools still require actual migration; orchestrator/CLI/TUI core cut over separately; known local registration check is not global physical legacy writer exclusion",
+      "Large complete documentary predecessor snapshots can exceed native input budget and block before inference; no silent truncation; windowed documentary handoff evidence reads remain future capability; code artifact reads are bounded separately",
+      "No real model/prompt quality/human comprehension evaluation, full-page acceptance, current global-suite green, full host install or migration-inverse completion"
+    ],
+    "current_remaining": [
+      "Closed-delivery successors and exact corrected-graph owner revisions connected; manual drafts/unaccepted-run adoption, candidate transfer and full lifecycle remain. Terminal core shares owner; advanced parity pending.",
+      "Graph-wide conservative invalidation; branch-selective scope and independent-node priority scheduling remain deferred",
+      "Code prerequisite reading is now implemented; actual installed five-turn physical proof is recorded in predecessor-material-results. Broader retained/manual candidate adoption and whole-project closure remain.",
+      "Packaged legacy autonomy/flows/tools are retired. Existing external legacy-process enrollment/closure still needs installation-specific evidence; local registry absence alone does not prove it",
+      "Large complete documentary predecessor snapshots can exceed native input budget and block before inference; no silent truncation; windowed documentary handoff evidence reads remain future capability; code artifact reads are bounded separately",
+      "No real model/prompt quality/human comprehension evaluation, full-page acceptance, current global-suite green, full host install or migration-inverse completion"
+    ]
+  },
+  {
+    "deliverable": "terminal_owner_client",
+    "previous_remaining": [
+      "Remaining flows/autonomy/claims/listeners/tool registries still need actual migration and global physical legacy-writer exclusion",
+      "Corrected-graph adoption, revision-bound controls and closed-delivery successors connected; manual drafts/unaccepted-run adoption, complete candidate transfer and lifecycle remain.",
+      "Terminal advanced parity for scientific review/questions/publication/remote/recovery and explicit multi-repository selection remains; existing web controls retained",
+      "Persisted endpoint binding for web pending actions and generic-note reply-loss UX/live projection still need integration; current bound identity contract is implemented by terminal",
+      "Historical prepared handoff v1 cannot silently gain new material; original snapshots/receipts preserved, explicit reconciliation required",
+      "No model/prompt-quality/human comprehension/scientific evaluation, whole-page acceptance, full host install/restore or migration inverse completion; no full goal completion"
+    ],
+    "current_remaining": [
+      "Packaged flows/autonomy/claims/listeners/tool registries are retired; installation-specific external legacy-process enrollment/closure remains",
+      "Corrected-graph adoption, revision-bound controls and closed-delivery successors connected; manual drafts/unaccepted-run adoption, complete candidate transfer and lifecycle remain.",
+      "Terminal advanced parity for scientific review/questions/publication/remote/recovery and explicit multi-repository selection remains; existing web controls retained",
+      "Persisted endpoint binding for web pending actions and generic-note reply-loss UX/live projection still need integration; current bound identity contract is implemented by terminal",
+      "Historical prepared handoff v1 cannot silently gain new material; original snapshots/receipts preserved, explicit reconciliation required",
+      "No model/prompt-quality/human comprehension/scientific evaluation, whole-page acceptance, full host install/restore or migration inverse completion; no full goal completion"
+    ]
+  },
+  {
+    "deliverable": "plan_delivery_continuations",
+    "previous_remaining": [
+      "Corrected-graph adoption and replacement of unused obsolete successor permission connected; manual drafts/unaccepted-run and private candidate adoption still required.",
+      "Late changed predecessor evidence blocks an already authorized successor; explicit replacement of that unused obsolete authorization is still required.",
+      "Remaining legacy flows/autonomy/claims/listeners/tools and global physical legacy exclusion remain.",
+      "Remaining6web routes,0/12pages fully accepted, all43broad scenarios and full install/restore/inverses43–50/final fresh branch review remain."
+    ],
+    "current_remaining": [
+      "Corrected-graph adoption and replacement of unused obsolete successor permission connected; manual drafts/unaccepted-run and private candidate adoption still required.",
+      "Late changed predecessor evidence blocks an already authorized successor; explicit replacement of that unused obsolete authorization is still required.",
+      "Packaged legacy flows/autonomy/claims/listeners/tools are retired; external producer closure during existing-installation migration remains separate.",
+      "All12routes have implemented pilots,0/12pages fully accepted,42broad scenarios remain and full install/restore/inverses43–50/final fresh branch review remain."
+    ]
+  },
+  {
+    "deliverable": "corrected_graph_reauthorization",
+    "previous_remaining": [
+      "Actual legacy flows/autonomy/claims/listeners/tool migration and global physical legacy writer exclusion.",
+      "Manual drafts/unaccepted-run and private candidate file adoption, remaining domain task types, integral retained code review/acceptance/publication scenarios.",
+      "Full prompts/books/evals/science/human understanding,6remaining web routes/0of12pages fully accepted,43broad scenarios, current global failures/clean install/restore/inverses43–51/final fresh review."
+    ],
+    "current_remaining": [
+      "Packaged legacy flows/autonomy/claims/listeners/tools are retired; installation-specific external producer enrollment/closure remains separate.",
+      "Manual drafts/unaccepted-run and private candidate file adoption, remaining domain task types, integral retained code review/acceptance/publication scenarios.",
+      "Full prompts/books/evals/science/human understanding,all12routes implemented as pilots/0of12pages fully accepted,42broad scenarios remain, current global failures/clean install/restore/inverses43–51/final fresh review."
+    ]
+  }
+]
