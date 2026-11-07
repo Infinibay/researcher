@@ -7287,3 +7287,69 @@ frontend dependencies, data migrations/restore, history/budgets, broad evaluatio
 and 12-page acceptance/final review. All43 broad scenarios remain open. User
 policy is persistent: show done/current/pending at each principal-task transition,
 finish all macro capabilities before all fine details.
+
+## 2026-11-06 — native container admission and restart, based on 3592156
+
+Previous goal turn made implementation progress (host setup and transport fix).
+This cut adds published ken-rank0.18.0 in an isolated image venv, a reproducible
+hash lock for its Python3.13 dependencies, and Debian bubblewrap0.8.0-2+deb12u1
+with verified descriptor-mount support. API and Ken import environments remain
+separate; both pip checks pass. No model/account data enters the build context.
+The existing image was observed missing bwrap before changing it.
+
+Built image3bb64ae00bfd026034370dedc85e52e9af91749fc18a5aafff4f510b1bab820f,
+digest sha256:07533e33bc85e7b2ec6b1413b28af8741e608c0a526e9cc9da8eb9a78394b845:
+Python3.13.17,UID1000,77 API distributions and73 Ken distributions. All308
+product Python/SQL files match the managed source; native kernel probe executes
+the installed extension. Frontend source is unchanged and the image builds its
+web stage; this is not full12-page acceptance or a new global suite.
+
+Added native_container.py, reusing host_smoke's one-admission exercise and
+synthetic seed with container-visible paths. Unique delegated subtree, explicit
+mounts, installed bootstrap, no-inference kernel and namespace probes, owner
+pairing, real admission, restart, stale-session rejection and original-container
+closure/removal are observed. Data/logs remain private scratch on failures.
+
+v1:0 admissions. Kernel cgroup probe passed, but masked /proc prevented nested
+proc mounting. Specific Podman unmask=/proc/* passed a separate account-free
+namespace probe. v2:1 completed/settled research turn with draft/provisional
+artifacts and all peers closed, first service exit143; restart refused the
+different observer PID namespace. Actual authority file identities and boot ID
+still match. The unchanged authority guard is correct: transient controller
+namespaces cannot supply stable ownership across restart. No header rewrite,
+adoption, gate relaxation or replay of that attempt was used.
+
+Supported configuration keeps the trusted controller in host PID and cgroup
+namespaces, as direct host execution does; agent peers still create private
+namespaces. The outer image packages the controller, not a security boundary
+between that controller and host processes. Only its dedicated delegated
+cgroup subtree is writable. Explicit data/witness, two executables, model cache
+and read-only account file are mounted; host home/root are not mounted.
+
+v3:one new bounded subscription admission completes through HTTP. Ken find/read,
+one Python calculation exits0 with stdout200, provisional finding and draft
+report retained, run needs_review and dispatch settled/completed. All five peers
+close. Two orderly service exits143, previous owner session invalidated, exact
+state/integrity retained across restart and unique empty cgroup removed.
+Observed token high-water280402 is not a billing measurement. Two real admissions
+total in this cut, both completed research; only v3 proves restart. Final package
+inspection found no remaining fixture containers. No user deployment/data moved.
+
+Guide and explicit asset example document the exercised rootless Linux/UID1000
+configuration, stable observer, mounts, setup/run split and account-file bind
+renewal limitation. Cgroup delegation and external assets remain prerequisites.
+No claim for Docker/otherUID/kernel policies, host reboot/re-enrollment,
+prior-actor adoption, account renewal cycle or real-data restore.12 definitions
+and both evaluation modules documented. DD065 retains one new lint warning and
+one earlier warning. Owned backend/scripts and direct consumers are unchanged,
+so prompt83/272/0pending evidence is reused without another semantic review.
+
+Public receipt: docs/modernization/native-container-results.json. Raw evidence:
+native-container-build.log, native-container-baseline.json,
+native-container-proc-probe.json, native-container-observer-diagnosis.json,
+native-container-smoke-v1/v2/v3/result.json and native-container-package.json.
+Next principal task: frontend dependency upgrades and compatibility. Remaining
+historical config/runners, migration/inverse/restore and reboot recovery,
+history/budgets, real/human/scientific/global evaluation,12-page acceptance and
+whole-plan review remain open.43 scenarios still36in_progress/7pending. All
+macro capabilities before fine details; updated checklist at task transitions.

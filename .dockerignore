@@ -3,6 +3,7 @@
 !Containerfile
 !pyproject.toml
 !requirements.txt
+!requirements-ken.txt
 !README.md
 !backend/
 !backend/**

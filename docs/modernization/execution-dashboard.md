@@ -16,7 +16,36 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: host nativo preparado y recorrido real comprobado
+## Etapa actual: contenedor nativo comprobado; siguen dependencias frontend
+
+La imagen incluye Ken publicado en un entorno separado, con dependencias fijadas
+por hashes, y bubblewrap con las capacidades requeridas. El recorrido real desde
+el paquete instalado completa investigación con Ken y cálculo, guarda hallazgo
+e informe y conserva ambos tras reiniciar. Cinco peers cerrados, dos cierres143,
+cgroup retirado y ninguna sesión antigua aceptada. Coinciden 308 archivos
+productivos Python/SQL. [Guía de instalación](../architecture/native-container-operation.md),
+[evidencia](native-container-results.json).
+
+La autoridad conserva el observador de PID del host para el backend de control;
+los agentes mantienen namespaces privados. El ensayo anterior completó la
+investigación pero rechazó correctamente el reinicio con otro observador. Se
+conserva esa evidencia; no se relajó la validación ni se repitió ese intento.
+El alcance probado es Linux/UID1000 con Podman rootless; reboot, re-enrollment,
+restauración real y otros entornos no quedan aceptados por este recorrido.
+
+**Lista vigente al cambiar de tarea:**
+- Cerrado recientemente: host nativo; ahora imagen con Ken y recorrido nativo
+  completo con reinicio y configuración documentada.
+- Siguiente: actualizar las dependencias del frontend y resolver compatibilidades
+  del conjunto. La aceptación integral de sus páginas sigue siendo otra tarea.
+- Pendiente principal: configuración/runners históricos restantes;
+  migraciones/inversas/restauración real y recuperación tras reboot;
+  historial/presupuestos; evaluaciones real, humana, científica y global;
+  aceptación de 12 páginas y revisión final. Siguen 43 escenarios abiertos.
+- Al final: detalles secundarios. DD065 conserva un aviso nuevo de lint y uno
+  anterior; no se repiten builds ni turnos reales sólo por ese pulido.
+
+## Etapa anterior: host nativo preparado y recorrido real comprobado
 
 Se añaden `init-host`, `check-host --probe` y `researcher-start --installation`.
 Usan recursos explícitos ya instalados, crean almacenamiento nuevo y conservan

@@ -1,0 +1,2 @@
+# Isolated published MCP tool; never install its dependencies into the API venv.
+ken-rank==0.18.0

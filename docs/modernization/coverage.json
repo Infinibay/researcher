@@ -4166,6 +4166,24 @@
         "Installed suite retains one source-only shell check failure; that check passes in checkout.",
         "Earlier uncertain admission is preserved; no global/human/scientific acceptance claimed."
       ]
+    },
+    "native_container_operation": {
+      "status": "complete",
+      "scope": "Installed rootless Podman native control service on the exercised Linux/UID1000 host; explicit resources, one research admission and restart. Same-boot host PID observer retained; agent peers stay in private namespaces.",
+      "evidence": [
+        "docs/architecture/native-container-operation.md",
+        "docs/modernization/native-container-results.json",
+        "Containerfile",
+        "evals/operation/native_container.py"
+      ],
+      "limitations": [
+        "This exercises Podman6.1.4/crun1.30.1 and the current Linux host, not Docker/otherUID/otherkernel security policies.",
+        "External Codex binaries, public model assets, subscription and cgroup delegation remain explicit prerequisites; no automatic downloads during serving.",
+        "Host reboot/authority re-enrollment, prior-actor adoption and real-data restore remain unproved.",
+        "Account renewal/file replacement and a full upgrade of existing Researcher data are not covered.",
+        "No new global/human/scientific evaluation or acceptance of the12pages.",
+        "DD065 retains one new PLW1510 and the earlier F401 warning; fine cleanup last."
+      ]
     }
   }
 }

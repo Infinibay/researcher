@@ -14,18 +14,23 @@ WORKDIR /build
 RUN python -m venv /opt/venv
 COPY requirements.txt ./
 RUN /opt/venv/bin/pip install --no-cache-dir --require-hashes -r requirements.txt
+COPY requirements-ken.txt ./
+RUN python -m venv /opt/ken \
+    && /opt/ken/bin/pip install --no-cache-dir --require-hashes -r requirements-ken.txt
 COPY pyproject.toml README.md ./
 COPY backend/ ./backend/
 RUN /opt/venv/bin/pip wheel --no-cache-dir --no-deps --wheel-dir /wheels . \
     && /opt/venv/bin/pip install --no-cache-dir --no-deps /wheels/researcher-*.whl
 
 FROM docker.io/library/python:3.13.17-slim-bookworm@sha256:4cea12ab7d78a3312c85f8cab19b6971d4fe9704da25443986c0bc20a6678850
-RUN apt-get update && apt-get install -y --no-install-recommends git libgomp1 \
+RUN apt-get update && apt-get install -y --no-install-recommends git libgomp1 bubblewrap=0.8.0-2+deb12u1 \
+    && bwrap --help | grep -q -- --ro-bind-fd \
     && rm -rf /var/lib/apt/lists/* \
     && groupadd -g 1000 researcher \
     && useradd -u 1000 -g researcher -m researcher \
     && install -d -o researcher -g researcher -m 0700 /data /run/researcher
 COPY --from=python-build /opt/venv /opt/venv
+COPY --from=python-build /opt/ken /opt/ken
 COPY --from=web /web/dist /app/frontend/dist
 ENV PATH="/opt/venv/bin:$PATH" \
     PYTHONDONTWRITEBYTECODE=1 \

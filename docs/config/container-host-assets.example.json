@@ -1,0 +1,22 @@
+{
+  "model": "gpt-6.1-sol",
+  "web_search": "disabled",
+  "codex_binary": "/opt/researcher-native/codex",
+  "code_mode_host": "/opt/researcher-native/codex-code-mode-host",
+  "ken_command": "/opt/ken/bin/ken",
+  "model_cache": "/opt/researcher-models",
+  "token_file": "/run/researcher/subscription/auth.json",
+  "cgroup_parent": "/sys/fs/cgroup/YOUR_DELEGATED_PARENT/researcher",
+  "static_dir": "/app/frontend/dist",
+  "broker_limits": {"memory_bytes": 2147483648, "pids": 128},
+  "limits": {
+    "wall_seconds": 180,
+    "no_progress_seconds": 90,
+    "max_turns": 1,
+    "max_tool_calls": 25,
+    "max_observed_tokens": 350000
+  },
+  "project_turn_limit": 20,
+  "project_token_limit": 4000000,
+  "development_checks": []
+}

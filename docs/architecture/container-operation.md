@@ -1,7 +1,9 @@
 # Installed service image
 
 The root `Containerfile` builds the owner web application with `npm ci` and
-installs the Python project as a wheel, including `_domain_spawn`. The final
+installs the Python project as a wheel, including `_domain_spawn`. It also
+installs published Ken in a separate `/opt/ken` environment from its hash-locked
+requirements and includes bubblewrap with the required descriptor-mount support. The final
 image contains compiled assets and installed packages, not a checkout on
 `PYTHONPATH`. Python and Node base images use explicit digests; application
 dependencies come from `requirements.txt` with hashes and `package-lock.json`.
@@ -85,8 +87,11 @@ host directories or remove native admission checks to make the container start.
 Without that configuration the service explicitly runs in inspection mode.
 The [native host preparation guide](native-host-installation.md) now provides
 explicit initialization and diagnostics for an installed host with existing
-resources. Containerized native admission, portable resource provisioning and
-real-data restore remain open deployment work. The separate [Forgejo upgrade rehearsal](forgejo-upgrade.md)
+resources. The [native container guide](native-container-operation.md) now covers
+complete admission and restart on the exercised rootless Linux configuration,
+including the stable host observer and scoped mounts. Resource delegation,
+host reboot/re-enrollment and real-data restore remain explicit or open work.
+The separate [Forgejo upgrade rehearsal](forgejo-upgrade.md)
 now covers the pinned service configuration, TLS and synthetic backup/restore. A passing HTTP smoke test does not
 close those requirements or the twelve-page visual/functional acceptance.
 

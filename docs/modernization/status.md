@@ -4,6 +4,15 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Contenedor nativo con Ken y reinicio comprobados:** imagen instalada con
+  entornos separados y 308 archivos productivos Python/SQL coincidentes. El
+  recorrido por HTTP usa la suscripción y Ken, calcula, guarda hallazgo/informe y
+  conserva el estado tras reiniciar, cerrando todos sus peers. El controlador
+  mantiene el observador de PID del host; los agentes conservan aislamiento
+  privado. Alcance Linux/UID1000/Podman rootless; no acepta reboot, re-enrollment
+  ni restauración real. [Guía](../architecture/native-container-operation.md),
+  [resultados e intentos anteriores](native-container-results.json).
+
 - **Preparación y arranque del host nativo comprobados:** inicialización nueva,
   diagnóstico de recursos y launcher instalado; modelo configurable. Un recorrido
   real por HTTP con la suscripción usa Ken, calcula, guarda hallazgo/informe y

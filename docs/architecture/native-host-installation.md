@@ -83,8 +83,9 @@ al repositorio. [Resultados y límites](../modernization/host-installation-resul
 
 Esta ruta prepara un host con recursos ya disponibles. Siguen pendientes el
 aprovisionamiento automático/delegación portable, la incorporación o recuperación
-de actores anteriores, la admisión nativa desde la imagen de contenedor y la
-restauración de datos reales. La ruta no migra una instalación existente ni
+de actores anteriores y la restauración de datos reales. La
+[ruta de contenedor nativo](native-container-operation.md) tiene ahora su propio
+ensayo de admisión y reinicio, con alcance Linux explícito. La ruta no migra una instalación existente ni
 reemplaza sus identidades de autoridad. La renovación de cuenta debe respetar
 el contrato de autenticación; no se ha probado aquí como un ciclo completo.
 

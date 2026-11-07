@@ -74,8 +74,9 @@ def pair(client, root):
     client.headers['X-Researcher-CSRF'] = response.json()['csrf_token']
 
 
-def seed(root):
-    """Populate only an empty prepared database with isolated synthetic research input."""
+def seed(root, *, stored_root=None):
+    """Populate an empty synthetic installation, optionally storing its container-visible paths."""
+    visible = root if stored_root is None else Path(stored_root)
     database = root / 'source.db'
     with closing(sqlite3.connect(database)) as db, db:
         if any(db.execute(f'SELECT COUNT(*) FROM {table}').fetchone()[0] for table in ('projects', 'runtime_runs')):
@@ -89,8 +90,41 @@ def seed(root):
         attachment.write_text('Synthetic batches contain 137 units and 63 units. Their total is 200 units.\n')
         db.execute("INSERT INTO projects(id,name) VALUES(101,'Synthetic prepared-host smoke')")
         db.execute("INSERT INTO tasks(id,project_id,type,title,status) VALUES(1001,101,'research','Explain the synthetic total with evidence','in_progress')")
-        db.execute("INSERT INTO repositories(id,project_id,name,local_path) VALUES(11,101,'host-smoke',?)", (str(workspace),))
-        db.execute("INSERT INTO reference_files(id,project_id,file_name,file_path,file_size,file_type) VALUES(7,101,'units.txt',?,?,'text/plain')", (str(attachment), attachment.stat().st_size))
+        db.execute("INSERT INTO repositories(id,project_id,name,local_path) VALUES(11,101,'host-smoke',?)", (str(visible / "sources" / "host-smoke"),))
+        db.execute("INSERT INTO reference_files(id,project_id,file_name,file_path,file_size,file_type) VALUES(7,101,'units.txt',?,?,'text/plain')", (str(visible / "uploads" / "101/uploads/units.txt"), attachment.stat().st_size))
+
+
+def admit_live(client, root, result):
+    """Send one bounded synthetic admission; retain its identity before observing the outcome."""
+    from backend.runtime.sqlite_runs import SQLiteRunStore
+
+    version = SQLiteRunStore(root / 'source.db').context_snapshot(101, 1001)['context_version']
+    key = 'host-installation-' + uuid4().hex
+    request = (f'Ensayo sintético autorizado. Usa ken_find con consulta en inglés para localizar total_units y ken_read para leer units.py. '
+               f'Lista adjuntos y captura la referencia7 con operation_key {key}-capture; lee la fuente capturada. '
+               f'Usa researcher_python una vez con operation_key {key}-calc para calcular 137+63; consulta el job hasta confirmar salida200 y exit_code0. '
+               f'Registra UN finding provisional, con clave {key}-finding y cita exacta de la fuente. Guarda UN informe draft con clave {key}-report enlazado al finding y léelo. '
+               'Explica el resultado brevemente en español, con un ejemplo simple, separando inspección de código y cálculo ejecutado. '
+               'No edites archivos, no instales paquetes, no publiques ni aceptes resultados. Un único turno; termina indicando informe y límites de la prueba.')
+    result['operation_key'] = key
+    result['admissions_sent'] = 1
+    response = client.post('/api/projects/101/tasks/1001/runs', json={'operation_key': key, 'context_version': version, 'repository_id': 11, 'request': request})
+    response.raise_for_status()
+    run_id = response.json()['run_id']
+    result['run_id'] = run_id
+    deadline = time.monotonic() + 240
+    while time.monotonic() < deadline:
+        response = client.get(f'/api/projects/101/runs/{run_id}')
+        response.raise_for_status()
+        view = response.json()
+        if view['status'] in {'needs_review', 'failed', 'cancelled', 'reconciling'}:
+            break
+        time.sleep(.3)
+    result['before_restart'] = snapshot(root / 'source.db')
+    assert view['status'] == 'needs_review', view['status']
+    assert len(result['before_restart']['reports']) == 1
+    assert len(result['before_restart']['findings']) == 1
+    assert len(result['before_restart']['dispatches']) == 1
 
 
 def main():
@@ -115,35 +149,7 @@ def main():
             assert client.get('/').status_code == 200
             pair(client, root)
             if args.live:
-                from backend.runtime.sqlite_runs import SQLiteRunStore
-
-                version = SQLiteRunStore(root / 'source.db').context_snapshot(101, 1001)['context_version']
-                key = 'host-installation-' + uuid4().hex
-                request = (f'Ensayo sintético autorizado. Usa ken_find con consulta en inglés para localizar total_units y ken_read para leer units.py. '
-                           f'Lista adjuntos y captura la referencia7 con operation_key {key}-capture; lee la fuente capturada. '
-                           f'Usa researcher_python una vez con operation_key {key}-calc para calcular 137+63; consulta el job hasta confirmar salida200 y exit_code0. '
-                           f'Registra UN finding provisional, con clave {key}-finding y cita exacta de la fuente. Guarda UN informe draft con clave {key}-report enlazado al finding y léelo. '
-                           'Explica el resultado brevemente en español, con un ejemplo simple, separando inspección de código y cálculo ejecutado. '
-                           'No edites archivos, no instales paquetes, no publiques ni aceptes resultados. Un único turno; termina indicando informe y límites de la prueba.')
-                result['operation_key'] = key
-                result['admissions_sent'] = 1
-                response = client.post('/api/projects/101/tasks/1001/runs', json={'operation_key': key, 'context_version': version, 'repository_id': 11, 'request': request})
-                response.raise_for_status()
-                run_id = response.json()['run_id']
-                result['run_id'] = run_id
-                deadline = time.monotonic() + 240
-                while time.monotonic() < deadline:
-                    response = client.get(f'/api/projects/101/runs/{run_id}')
-                    response.raise_for_status()
-                    view = response.json()
-                    if view['status'] in {'needs_review', 'failed', 'cancelled', 'reconciling'}:
-                        break
-                    time.sleep(.3)
-                result['before_restart'] = snapshot(root / 'source.db')
-                assert view['status'] == 'needs_review', view['status']
-                assert len(result['before_restart']['reports']) == 1
-                assert len(result['before_restart']['findings']) == 1
-                assert len(result['before_restart']['dispatches']) == 1
+                admit_live(client, root, result)
             else:
                 result['before_restart'] = snapshot(root / 'source.db')
         result['service_exits'].append(stop(process, log))

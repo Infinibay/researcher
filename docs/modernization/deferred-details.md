@@ -308,3 +308,13 @@ El fallo de descriptores al cerrar comandos y la entrega de EOF eran bloqueos
 funcionales; se corrigieron y comprobaron con ambos loops. La admisión desde
 contenedor, recursos portables y restauración real siguen como trabajo principal.
 
+## DD065 — detalles tras el recorrido del contenedor nativo
+
+El runner conserva un aviso PLW1510 por el retorno inspeccionado explícitamente
+de subprocess.run; host_smoke conserva el F401 ya anotado en DD064. Resolver al
+final de todas las capacidades principales. No repetir el build, los recorridos
+ni las admisiones por esos avisos. El problema de /proc y la identidad del
+observador eran requisitos funcionales; están resueltos en la configuración
+comprobada. Reboot/re-enrollment, restauración real y otros entornos continúan
+como límites principales, no como detalles de estilo.
+
