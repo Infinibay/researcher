@@ -101,9 +101,9 @@ def restore_installation(backup, destination, **limits):
     (root / evidence).mkdir(parents=True, mode=0o700)
 
     def target_name(name):
-        """Archive original launch/access authority as evidence instead of activating copied credentials."""
+        """Archive original launch/access authority and enrollment receipts so copied control files cannot activate or block a fresh host."""
         path = Path(name)
-        if name in ('runtime.json','installation.json','service/service-resources.json','service/service-owner.lock') or path.parts[0] in ('authority','auth'):
+        if name in ('runtime.json','installation.json','enrollment.json','runtime.enrolled.json','installation.enrolled.json','service/service-resources.json','service/service-owner.lock') or path.parts[0] in ('authority','auth'):
             return evidence / 'original' / path
         return path
 

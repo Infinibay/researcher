@@ -992,11 +992,16 @@
         "docs/modernization/auxiliary-continuation-review.md",
         "docs/modernization/auxiliary-continuation-results.json",
         "docs/modernization/auxiliary-continuation-packaging.json",
-        "docs/design/audits/2026-11-07-local-continuation/report.md"
+        "docs/design/audits/2026-11-07-local-continuation/report.md",
+        "docs/operations/local-calculation-recovery.md",
+        "docs/modernization/auxiliary-restoration-review.md",
+        "docs/modernization/auxiliary-restoration-results.json",
+        "docs/modernization/auxiliary-restoration-packaging.json",
+        "docs/design/audits/2026-11-07-local-restoration/report.md"
       ],
       "remaining": [
-        "Durable local admission and exact-result recovery now include explicit diagnosis and one owner-authorized successor after verified closure. Connect original installation/restore closure evidence for legacy identity, changed kernel/observer and interrupted creation before child identity was bound; these remain functional recovery requirements, not polish.",
-        "Full scenario acceptance must distinguish local worker CPU from unobserved whole-service/provider/Ken/administrative consumption and exercise remaining recovery."
+        "Local work now has durable admission/result recovery, verified physical continuation and a verified backup/restore/enrollment path for missing/foreign/unbound identity. Copied/unbound pending permissions cannot start work; an explicit fresh owner decision is required on the restored copy without asserting source-host closure.",
+        "Complete broad E08 acceptance by checking all observable consumption boundaries and explanations against remaining whole-service/provider/Ken/administrative limits. No global multi-installation billing or original-source closure claim."
       ]
     },
     "E09": {
@@ -5100,8 +5105,8 @@
         "docs/design/audits/2026-11-07-auxiliary-budget/report.md"
       ],
       "remaining": [
-        "Explicit diagnosis and one successor permission are verified separately below; installation-level reconciliation for missing/foreign/unbound process identity remains open.",
-        "DD108/DD109/DD110 and whole-page/human acceptance remain open."
+        "Explicit continuation and verified restoration reconciliation are implemented as separate scoped deliveries; broad E08 consumption-boundary acceptance remains open.",
+        "DD108/DD109/DD110/DD111 and whole-page/human acceptance remain open."
       ]
     },
     "explicit_local_auxiliary_continuation": {
@@ -5115,9 +5120,25 @@
         "docs/design/audits/2026-11-07-local-continuation/report.md"
       ],
       "remaining": [
-        "Connect existing installation/restore closure authority for legacy records, foreign kernel/observer and unbound creation gaps; no bypass is implemented.",
+        "Verified restoration reconciliation is implemented in local_permission_origin_and_restoration; direct in-place bypass of unproven closure is deliberately unavailable.",
         "Whole-service/provider/Ken/administrative accounting and broad E08 acceptance remain separate.",
-        "DD110 and human/full-page acceptance remain open."
+        "DD110/DD111 and human/full-page acceptance remain open."
+      ]
+    },
+    "local_permission_origin_and_restoration": {
+      "status": "verified",
+      "scope": "Migration63 database-bound permission, immutable historical receipts with current authority view, transactionally archived copied calculations, verified enrollment, original consumption/results retained, fresh explicit owner decision, repeated restore with old enrollment files archived and browser endpoint barrier preserved.",
+      "evidence": [
+        "docs/architecture/auxiliary-work-budget.md",
+        "docs/operations/local-calculation-recovery.md",
+        "docs/modernization/auxiliary-restoration-review.md",
+        "docs/modernization/auxiliary-restoration-results.json",
+        "docs/modernization/auxiliary-restoration-packaging.json",
+        "docs/design/audits/2026-11-07-local-restoration/report.md"
+      ],
+      "remaining": [
+        "No in-place bypass or global original-host closure claim; recovery requires the supported separate-copy workflow.",
+        "Broad E08 and multi-surface/human acceptance remain open; DD111 joins the final polish queue."
       ]
     }
   }

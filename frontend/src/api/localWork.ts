@@ -8,8 +8,8 @@ export interface LocalCalculation {sequence:number;project_id:number;operation_i
 export interface LocalPage {project_id:number;items:LocalCalculation[];next_before:number|null}
 /** Freeze the project and exact original operation before sending an explicit continuation decision. */
 export interface LocalAction {schema:1;projectId:number;body:Readonly<{operation_key:string;source_operation_id:string;reason:string}>}
-/** Permission names one future calculation and explicitly confirms that this write started no work. */
-export type LocalReceipt = LocalAction['body'] & {project_id:number;successor_operation_id:string;generation:number;work_started:false}
+/** Original decision names a future calculation; its current authority scope is separate from its historical non-execution receipt. */
+export type LocalReceipt = LocalAction['body'] & {project_id:number;successor_operation_id:string;generation:number;work_started:false;authorization_scope:'current_installation'|'historical_installation'}
 /** Keep unresolved local-work decisions separate from policy changes and from every other project. */
 const key=(projectId:number)=>`researcher:local-continuation:v1:${projectId}`
 /** Validate stored decisions without silently repairing scope, identities or payload fields. */
@@ -29,7 +29,7 @@ export function saveLocalAction(storage:OwnerActionStorage,action:LocalAction){c
 /** Remove only a resolved original packet; leave any newer decision untouched. */
 export function clearLocalAction(storage:OwnerActionStorage,action:LocalAction){if(JSON.stringify(loadLocalAction(storage,action.projectId))===JSON.stringify(action))storage.removeItem(key(action.projectId))}
 /** Match project, command, source and explicit non-execution before clearing uncertain local state. */
-function verify(receipt:LocalReceipt,action:LocalAction){if(receipt.project_id!==action.projectId||receipt.work_started!==false||typeof receipt.successor_operation_id!=='string'||!/^[0-9a-f]{64}$/.test(receipt.successor_operation_id)||!Number.isSafeInteger(receipt.generation)||receipt.generation<1||Object.entries(action.body).some(([k,v])=>receipt[k as keyof LocalReceipt]!==v))throw new Error('El recibo no corresponde a esta autorización. Conservamos la solicitud original.');return receipt}
+function verify(receipt:LocalReceipt,action:LocalAction){if(receipt.project_id!==action.projectId||receipt.work_started!==false||!['current_installation','historical_installation'].includes(receipt.authorization_scope)||typeof receipt.successor_operation_id!=='string'||!/^[0-9a-f]{64}$/.test(receipt.successor_operation_id)||!Number.isSafeInteger(receipt.generation)||receipt.generation<1||Object.entries(action.body).some(([k,v])=>receipt[k as keyof LocalReceipt]!==v))throw new Error('El recibo no corresponde a esta autorización. Conservamos la solicitud original.');return receipt}
 /** Submit or explicitly resend the same permission; server identity prevents a second successor. */
 export async function sendLocalContinuation(action:LocalAction){return verify(await fetchApi<LocalReceipt>(`/api/projects/${action.projectId}/local-work/continuations`,{method:'POST',body:JSON.stringify(action.body)}),action)}
 /** Recover a lost response using a read only, without repeating the mutation or the calculation. */

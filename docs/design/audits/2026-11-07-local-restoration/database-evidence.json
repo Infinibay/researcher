@@ -1,0 +1,36 @@
+{
+  "original": {
+    "schema": 63,
+    "local_work": [
+      {
+        "project_id": 101,
+        "operation_id": "97b64dd23e273aca84986c4a405df8c10667e9160ecb5cf853d403eb3a9e4cc9",
+        "status": "unknown",
+        "cpu_ceiling_ms": 3000,
+        "observed_cpu_ms": null
+      }
+    ],
+    "permissions": 1,
+    "archives": 0,
+    "runs": 0,
+    "dispatches": 0,
+    "integrity": "ok"
+  },
+  "restored": {
+    "schema": 63,
+    "local_work": [
+      {
+        "project_id": 101,
+        "operation_id": "97b64dd23e273aca84986c4a405df8c10667e9160ecb5cf853d403eb3a9e4cc9",
+        "status": "unknown",
+        "cpu_ceiling_ms": 3000,
+        "observed_cpu_ms": null
+      }
+    ],
+    "permissions": 2,
+    "archives": 1,
+    "runs": 0,
+    "dispatches": 0,
+    "integrity": "ok"
+  }
+}

@@ -114,6 +114,7 @@ def test_upgrade_preserves_old_policy_and_unused_inverse_preserves_it(_isolated_
     from backend.db.project_budget_migration import restore_project_budget_schema
     from backend.db.auxiliary_budget_migration import restore_auxiliary_budget_schema
     from backend.db.auxiliary_continuation_migration import restore_auxiliary_continuation_schema
+    from backend.db.auxiliary_origin_migration import restore_auxiliary_origin_schema
     from backend.tools.base.db import ensure_migrations
     from backend.runtime.sqlite_runs import SQLiteRunStore
     from types import SimpleNamespace
@@ -124,11 +125,13 @@ def test_upgrade_preserves_old_policy_and_unused_inverse_preserves_it(_isolated_
     ensure_migrations(c.database);ensure_migrations(c.database)
     assert RuntimeHistory(c.database).budget(101)['policy']=={'turn_limit':2,'token_limit':200,'revision':0}
     assert c.conn.execute('SELECT count(*) FROM runtime_project_budget_changes').fetchone()[0]==0
+    restore_auxiliary_origin_schema(c.conn)
     restore_auxiliary_continuation_schema(c.conn)
     restore_auxiliary_budget_schema(c.conn)
     restore_project_budget_schema(c.conn)
     assert tuple(c.conn.execute('SELECT * FROM runtime_project_budgets').fetchone())==(101,2,200)
     ensure_migrations(c.database);change(c)
+    restore_auxiliary_origin_schema(c.conn)
     restore_auxiliary_continuation_schema(c.conn)
     restore_auxiliary_budget_schema(c.conn)
     with pytest.raises(RuntimeError,match='history'):restore_project_budget_schema(c.conn)

@@ -1,0 +1,55 @@
+{
+  "base_commit": "3a07b11",
+  "started_at_utc": "2026-11-07 17:27:42",
+  "validated_and_server_closed_at_utc": "2026-11-07 17:48:42",
+  "measured_seconds": 1260,
+  "time_scope": "Implementation/validation/server closure; subsequent documentation/checkpoint excluded",
+  "distinct_source_cases": 136,
+  "latest_source_observation_passed": 136,
+  "source_receipts": [
+    "auxiliary-restoration-core.xml",
+    "auxiliary-restoration-integration.xml",
+    "auxiliary-restoration-recovery.xml"
+  ],
+  "installed": {
+    "cases": 182,
+    "passed": 182,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 262,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 96.097,
+    "exit_code": 0
+  },
+  "ui_cases_passed": 13,
+  "typescript_contracts_passed": 2,
+  "frontend_build": "passed",
+  "browser": {
+    "states": 4,
+    "writes": 1,
+    "checks": 9,
+    "scope": "installed API after real synthetic backup/restore/enrollment; endpoint barrier preserved; one fresh permission and lost-response receipt recovery"
+  },
+  "documented_python_nodes": 50,
+  "prompt_inventory": {
+    "files": 301,
+    "candidates": 85,
+    "reviewed": 85,
+    "pending": 0
+  },
+  "model_turns": 0,
+  "remaining_scenarios": 41,
+  "accepted_scenarios": [
+    "U06",
+    "E07"
+  ],
+  "full_pages_accepted": 0,
+  "limitations": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "Local-work permissions are bound to the actual database. Verified restoration archives copied calculations without proving source-host closure and requires a new owner decision; old pending permissions are inactive. No in-place closure bypass, whole-service CPU or billing guarantee",
+    "No model calls, external accounts or GitHub workflow execution",
+    "Foreign-kernel test is controlled metadata; no additional actual VM reboot in this block",
+    "No global suite rerun or human/full-page acceptance"
+  ]
+}

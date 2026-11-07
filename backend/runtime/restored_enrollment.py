@@ -35,7 +35,7 @@ def _exclusive_owner(database):
 
 
 def _retain_as_history(db, database, snapshot_id):
-    """Preserve completed jobs and mark copied active jobs unknown; withdraw grants and pause graphs without claiming physical or remote closure."""
+    """Archive local calculations, preserve completed jobs, withdraw copied grants and pause graphs without claiming original physical or remote closure."""
     now = time.time()
     store = SQLiteRunStore(database)
     changes = {'runs': [], 'jobs': [], 'paused_plans': [], 'expired_questions': []}
@@ -61,6 +61,9 @@ def _retain_as_history(db, database, snapshot_id):
     db.execute("UPDATE user_requests SET status='expired' WHERE status='pending'")
     db.execute('UPDATE tool_grants SET revoked_at=? WHERE revoked_at IS NULL',(now,))
     db.execute("UPDATE runtime_inference_dispatches SET status='unknown' WHERE status='reserved'")
+    from backend.runtime.auxiliary_origin import archive_local_work
+
+    changes['local_calculations'] = archive_local_work(db,database,snapshot_id)
     db.execute("INSERT INTO events_log(event_type,event_source,event_data_json) VALUES('installation.restored_enrollment','operator',?)",(json.dumps({'snapshot_id':snapshot_id,'historical_work':changes,'old_work_replayed':False,'original_host_closure_proven':False}),))
     return changes
 

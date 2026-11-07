@@ -93,9 +93,10 @@ resultado original.
 
 `POST .../local-work/continuations` nombra una operación original exacta y una
 clave de decisión. Se vuelve a comprobar el cierre dentro de la transacción.
-Una operación admite una sola sucesora; reenviar la misma clave recupera el
-recibo, mientras cambiar su contenido se rechaza. `GET .../continuations/{key}`
-recupera una respuesta perdida sin otra escritura.
+Una operación admite una sola autorización por identidad de base actual;
+reenviar la misma clave recupera el recibo, mientras cambiar su contenido se
+rechaza. `GET .../continuations/{key}` recupera una respuesta perdida sin otra
+escritura. Una sucesora ya ejecutada conserva su propia identidad y resultado.
 
 La autorización no inicia trabajo ni almacena otra copia del documento. La
 próxima solicitud con el mismo contenido, productor y política consume esa
@@ -127,14 +128,48 @@ nueva decisión sobre la sucesora exacta, conservando toda la cadena anterior.
 La inversa de62 sólo elimina tablas vacías. Tener una ejecución o autorización
 registrada exige reparación hacia delante o restauración verificada.
 
+## Instalación restaurada y permisos históricos
+
+La migración63 vincula cada autorización nueva a la identidad física de su base:
+ruta canónica, dispositivo e inode, reutilizando `PeerRegistry`. Copiar SQLite no
+transfiere el permiso. Las autorizaciones62 sin origen conocido se conservan,
+pero sus sucesoras no ejecutadas requieren una nueva decisión; la migración no
+inventa dónde se autorizaron. Los recibos JSON originales no se modifican.
+
+La vista de un recibo añade `authorization_scope`: `current_installation` o
+`historical_installation`. Recuperar un recibo histórico no habilita trabajo y
+la web lo explica antes de ofrecer una nueva decisión. Esta clasificación se
+calcula al consultar; no reescribe la decisión pasada.
+
+La inscripción de una restauración verificada archiva los cálculos copiados
+dentro de la misma transacción que retira grants y pausa planes históricos.
+Cada registro conserva snapshot, identidad de la base nueva y fecha. No cambia
+el estado del cálculo original ni convierte consumo desconocido en cero. Si
+falla la inscripción, la transacción revierte y la instalación queda inactiva.
+
+Sobre esa copia ya inscrita, el propietario puede autorizar un cálculo local
+nuevo sin fingir que el host de origen terminó. Se revalidan permisos y cupo al
+ejecutarlo. Una autorización copiada sin consumir permanece histórica; una
+nueva decisión obtiene otra identidad de sucesora. Los resultados ya guardados
+siguen recuperables. Restaurar otra vez requiere autoridad nueva otra vez y
+conserva la cadena de archivos. Los archivos de inscripción anteriores quedan
+en la evidencia original, junto a configuración y credenciales archivadas.
+
+La inversa de63 se admite sólo sin autorizaciones ni registros de archivo.
+No elimina información de origen ni evidencia de restauración para permitir un
+downgrade. [Procedimiento de recuperación](../operations/local-calculation-recovery.md).
+
 ## Alcance pendiente
 
 Los registros anteriores sin identidad y los cambios de kernel/namespace no
 permiten deducir cierre por ausencia del PID. Morir entre marcar creación y
 guardar la identidad del hijo tampoco demuestra que no exista un trabajador.
-Se explican estos casos y se rechaza la continuación desde esta pantalla.
-Conectar una reconciliación basada en la autoridad de instalación/restore
-existente permanece pendiente funcional, no pulido. E08 continúa abierto.
+Se explican estos casos y se rechaza una supuesta continuación física en la
+instalación original. La ruta implementada es backup verificado, restauración
+separada, inscripción nueva y decisión explícita sobre el historial copiado.
+No hay una anulación manual de la comprobación de cierre. Restore no prueba la
+muerte global del original ni incorpora escrituras posteriores al snapshot.
+La aceptación amplia de E08 sigue pendiente de contrastar el resto de consumos.
 
 La CPU medida corresponde al worker, no a toda la CPU del servicio, verificación
 de activos, transporte de red, preparación de Ken o administración. Los límites

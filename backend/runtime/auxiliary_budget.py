@@ -93,8 +93,9 @@ class AuxiliaryBudget:
         root_id=hashlib.sha256(json.dumps([kind,fingerprint,digest,cpu_ceiling_ms]).encode()).hexdigest()
         with self.runs._transaction(write=True) as conn:
             attempt=self._authority(conn)
-            successor=conn.execute('SELECT successor_operation_id FROM runtime_auxiliary_continuations WHERE project_id=? AND root_operation_id=? ORDER BY generation DESC LIMIT 1',(self.project_id,root_id)).fetchone()
-            operation_id=successor['successor_operation_id'] if successor else root_id
+            from backend.runtime.auxiliary_origin import current_operation
+
+            operation_id=current_operation(conn,self.runs,self.project_id,root_id)
             prior=conn.execute('SELECT * FROM runtime_auxiliary_work WHERE project_id=? AND operation_id=?',(self.project_id,operation_id)).fetchone()
             if prior:
                 if prior['output'] is None:

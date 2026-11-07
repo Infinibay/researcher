@@ -1,0 +1,257 @@
+{
+  "scope": "local origin/recovery/budget, modified restore/enrollment modules, inverse and new restoration tests",
+  "documented_nodes": 50,
+  "missing": [],
+  "nodes": [
+    {
+      "path": "backend/runtime/auxiliary_origin.py",
+      "name": "<module>",
+      "line": 1
+    },
+    {
+      "path": "backend/runtime/auxiliary_origin.py",
+      "name": "database_origin",
+      "line": 9
+    },
+    {
+      "path": "backend/runtime/auxiliary_origin.py",
+      "name": "current_operation",
+      "line": 14
+    },
+    {
+      "path": "backend/runtime/auxiliary_origin.py",
+      "name": "archive_local_work",
+      "line": 23
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "<module>",
+      "line": 1
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "AuxiliaryRecovery",
+      "line": 12
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "__init__",
+      "line": 15
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "_project",
+      "line": 20
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "_diagnosis",
+      "line": 25
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "_columns",
+      "line": 57
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "list",
+      "line": 61
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "_key",
+      "line": 72
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "receipt",
+      "line": 76
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "_receipt_view",
+      "line": 85
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "authorize",
+      "line": 89
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "result",
+      "line": 27
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "<module>",
+      "line": 1
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "AuxiliaryBudgetExceeded",
+      "line": 22
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "AuxiliaryWorkUncertain",
+      "line": 26
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "auxiliary_usage",
+      "line": 30
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "auxiliary_summary",
+      "line": 43
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "AuxiliaryBudget",
+      "line": 54
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "__init__",
+      "line": 57
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "bound",
+      "line": 66
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "_authority",
+      "line": 72
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "summary",
+      "line": 80
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "execute",
+      "line": 86
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "_measurement",
+      "line": 141
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "_finish",
+      "line": 150
+    },
+    {
+      "path": "backend/runtime/restored_enrollment.py",
+      "name": "<module>",
+      "line": 1
+    },
+    {
+      "path": "backend/runtime/restored_enrollment.py",
+      "name": "_exclusive_owner",
+      "line": 24
+    },
+    {
+      "path": "backend/runtime/restored_enrollment.py",
+      "name": "_retain_as_history",
+      "line": 37
+    },
+    {
+      "path": "backend/runtime/restored_enrollment.py",
+      "name": "enroll_restored_host",
+      "line": 71
+    },
+    {
+      "path": "backend/runtime/installation_restore.py",
+      "name": "<module>",
+      "line": 1
+    },
+    {
+      "path": "backend/runtime/installation_restore.py",
+      "name": "relocated",
+      "line": 16
+    },
+    {
+      "path": "backend/runtime/installation_restore.py",
+      "name": "_git_metadata",
+      "line": 24
+    },
+    {
+      "path": "backend/runtime/installation_restore.py",
+      "name": "_relocate_registrations",
+      "line": 66
+    },
+    {
+      "path": "backend/runtime/installation_restore.py",
+      "name": "restore_installation",
+      "line": 82
+    },
+    {
+      "path": "backend/runtime/installation_restore.py",
+      "name": "target_name",
+      "line": 103
+    },
+    {
+      "path": "backend/db/auxiliary_origin_migration.py",
+      "name": "<module>",
+      "line": 1
+    },
+    {
+      "path": "backend/db/auxiliary_origin_migration.py",
+      "name": "restore_auxiliary_origin_schema",
+      "line": 7
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_restoration.py",
+      "name": "<module>",
+      "line": 1
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_restoration.py",
+      "name": "copy_installation",
+      "line": 17
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_restoration.py",
+      "name": "test_copied_pending_permission_cannot_start_work_and_needs_fresh_owner_decision",
+      "line": 28
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_restoration.py",
+      "name": "test_restored_history_is_eligible_without_false_original_closure",
+      "line": 60
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_restoration.py",
+      "name": "test_failed_enrollment_rolls_back_local_archival_and_never_enables_host",
+      "line": 85
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_restoration.py",
+      "name": "test_restoring_again_requires_another_current_decision_and_keeps_saved_results",
+      "line": 105
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_restoration.py",
+      "name": "test_migration_preserves_legacy_receipt_without_inventing_permission_origin",
+      "line": 130
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_restoration.py",
+      "name": "test_origin_inverse_requires_unused_permission_and_archival",
+      "line": 154
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_restoration.py",
+      "name": "interrupted",
+      "line": 93
+    }
+  ]
+}

@@ -5,14 +5,16 @@ import {loadLocalAction,prepareLocalContinuation,readLocalContinuation,saveLocal
 
 test('receipt recovery validates original project and source and never sends a second write',async()=>{
  const action=prepareLocalContinuation(101,'a'.repeat(64),'Repeat this calculation'),original=globalThis.fetch,sent:any[]=[]
- const valid={project_id:101,...action.body,successor_operation_id:'b'.repeat(64),generation:1,work_started:false}
+ const valid={project_id:101,...action.body,successor_operation_id:'b'.repeat(64),generation:1,work_started:false,authorization_scope:'current_installation'}
  try{
   globalThis.fetch=async(url,options)=>{sent.push({url:String(url),body:options?.body?JSON.parse(String(options.body)):null});return Response.json(valid)}
   assert.deepEqual(await sendLocalContinuation(action),valid);assert.deepEqual(await readLocalContinuation(action),valid)
   assert.deepEqual(sent[0].body,action.body);assert.equal(sent[1].body,null)
-  for(const invalid of [{project_id:202},{source_operation_id:'c'.repeat(64)},{work_started:true},{generation:0},{reason:'Changed'},{successor_operation_id:'bad'}]){
+  for(const invalid of [{project_id:202},{source_operation_id:'c'.repeat(64)},{work_started:true},{generation:0},{reason:'Changed'},{successor_operation_id:'bad'},{authorization_scope:'unknown'}]){
    globalThis.fetch=async()=>Response.json({...valid,...invalid});await assert.rejects(readLocalContinuation(action),/original/)
   }
+  globalThis.fetch=async()=>Response.json({...valid,authorization_scope:'historical_installation'})
+  assert.equal((await readLocalContinuation(action)).authorization_scope,'historical_installation')
  }finally{globalThis.fetch=original}
 })
 

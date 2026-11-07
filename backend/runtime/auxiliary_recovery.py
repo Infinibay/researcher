@@ -5,6 +5,7 @@ import json
 import re
 
 from backend.runtime.auxiliary_execution import process_state
+from backend.runtime.auxiliary_origin import database_origin
 from backend.runtime.contracts import RunConflict, RunNotFound, identity, text
 
 
@@ -21,15 +22,22 @@ class AuxiliaryRecovery:
         identity(project_id)
         if conn.execute('SELECT 1 FROM projects WHERE id=?',(project_id,)).fetchone() is None:raise RunNotFound('Project not found')
 
-    @staticmethod
-    def _diagnosis(conn, row):
-        """Separate reusable evidence, active ownership and verified closure without exposing private process data."""
+    def _diagnosis(self, conn, row):
+        """Separate reusable results, active ownership, verified closure and restored history without exposing private process data."""
         def result(code, message, allowed=False):
             """Return a user-facing explanation with a machine-readable continuation decision."""
             return {'code':code,'message':message,'can_continue':allowed}
         if row['has_output']:return result('complete','El resultado guardado puede recuperarse sin otro cálculo.')
-        if conn.execute('SELECT 1 FROM runtime_auxiliary_continuations WHERE project_id=? AND source_operation_id=?',(row['project_id'],row['operation_id'])).fetchone():
+        current=database_origin(self.runs)
+        if conn.execute('SELECT 1 FROM runtime_auxiliary_continuations WHERE project_id=? AND source_operation_id=? AND origin_database=?',(row['project_id'],row['operation_id'],current)).fetchone():
             return result('authorized','Ya autorizaste una sucesora. La próxima solicitud idéntica puede usarla; consulta su registro si ya se ejecutó.')
+        if conn.execute('''SELECT 1 FROM runtime_auxiliary_continuations c JOIN runtime_auxiliary_work w
+            ON w.project_id=c.project_id AND w.operation_id=c.successor_operation_id
+            WHERE c.project_id=? AND c.source_operation_id=?''',(row['project_id'],row['operation_id'])).fetchone():
+            return result('successor_recorded','Este cálculo ya tiene una sucesora registrada. Consulta el cálculo más reciente para recuperar su resultado o revisar su interrupción.')
+        archive=conn.execute('SELECT snapshot_id FROM runtime_auxiliary_archives WHERE project_id=? AND operation_id=? AND database_identity=?',(row['project_id'],row['operation_id'],current)).fetchone()
+        if archive:
+            return result('restored_history','Este cálculo pertenece al historial de la copia restaurada. No se comprobó el cierre del host original. Puedes autorizar un cálculo nuevo en esta instalación; el consumo histórico se conserva.',True)
         record=conn.execute('SELECT * FROM runtime_auxiliary_executions WHERE project_id=? AND operation_id=?',(row['project_id'],row['operation_id'])).fetchone()
         if record is None:return result('identity_unavailable','Este registro antiguo no tiene identidad de proceso. Hace falta reconciliar el cierre de la instalación; no se puede autorizar desde aquí.')
         if record['phase']=='closed' and row['status']=='unknown':return result('ready','El trabajador terminó sin resultado recuperable. Puedes autorizar un nuevo cálculo conservando el consumo anterior.',True)
@@ -66,16 +74,20 @@ class AuxiliaryRecovery:
         if not isinstance(value,str) or not re.fullmatch(r'[A-Za-z0-9_.:-]{1,128}',value):raise ValueError('Invalid operation key')
 
     def receipt(self, project_id, operation_key):
-        """Recover the exact original permission after response loss, without resending or updating it."""
+        """Recover the unchanged original decision and its current installation scope, without resending or updating it."""
         self._key(operation_key)
         with self.runs._transaction() as conn:
             self._project(conn,project_id)
-            row=conn.execute('SELECT receipt_json FROM runtime_auxiliary_continuations WHERE project_id=? AND operation_key=?',(project_id,operation_key)).fetchone()
+            row=conn.execute('SELECT receipt_json,origin_database FROM runtime_auxiliary_continuations WHERE project_id=? AND operation_key=?',(project_id,operation_key)).fetchone()
             if row is None:raise RunNotFound('No se encontró el recibo original de esta autorización.')
-            return json.loads(row['receipt_json'])
+            return self._receipt_view(row)
+
+    def _receipt_view(self, row):
+        """Keep the original receipt unchanged in storage while exposing whether it authorizes this current installation."""
+        return {**json.loads(row['receipt_json']),'authorization_scope':'current_installation' if row['origin_database']==database_origin(self.runs) else 'historical_installation'}
 
     def authorize(self, project_id, *, operation_key, source_operation_id, reason=''):
-        """Authorize one exact successor only after fresh closure checks; capacity and current grants are checked later at execution."""
+        """Authorize one exact successor after verified closure or enrolled restored history; execution still requires current capacity and grants."""
         self._key(operation_key)
         if not isinstance(source_operation_id,str) or not re.fullmatch('[0-9a-f]{64}',source_operation_id):raise ValueError('Invalid original calculation')
         if not isinstance(reason,str) or len(reason.encode())>2000:raise ValueError('Invalid continuation reason')
@@ -86,18 +98,19 @@ class AuxiliaryRecovery:
             prior=conn.execute('SELECT * FROM runtime_auxiliary_continuations WHERE project_id=? AND operation_key=?',(project_id,operation_key)).fetchone()
             if prior:
                 if prior['request_json']!=encoded:raise RunConflict('Esta identidad corresponde a otra decisión original.')
-                return json.loads(prior['receipt_json'])
+                return self._receipt_view(prior)
             row=conn.execute(f'SELECT {self._columns()} FROM runtime_auxiliary_work WHERE project_id=? AND operation_id=?',(project_id,source_operation_id)).fetchone()
             if row is None:raise RunNotFound('No se encontró el cálculo original en este proyecto.')
             diagnosis=self._diagnosis(conn,row)
             if not diagnosis['can_continue']:raise RunConflict(diagnosis['message'])
             parent=conn.execute('SELECT root_operation_id,generation FROM runtime_auxiliary_continuations WHERE project_id=? AND successor_operation_id=?',(project_id,source_operation_id)).fetchone()
             root=parent['root_operation_id'] if parent else source_operation_id
-            generation=parent['generation']+1 if parent else 1
+            generation=conn.execute('SELECT COALESCE(MAX(generation),0)+1 FROM runtime_auxiliary_continuations WHERE project_id=? AND root_operation_id=?',(project_id,root)).fetchone()[0]
             successor=hashlib.sha256(f'{root}:continuation:{generation}'.encode()).hexdigest()
             receipt={**request,'project_id':project_id,'root_operation_id':root,'successor_operation_id':successor,
                      'generation':generation,'work_started':False,'prior_cpu_ceiling_ms':row['cpu_ceiling_ms'],
                      'diagnosis_at_decision':diagnosis,'created_at':self.runs.clock()}
-            conn.execute('INSERT INTO runtime_auxiliary_continuations VALUES(?,?,?,?,?,?,?,?,?)',
-                         (project_id,operation_key,source_operation_id,successor,root,generation,encoded,json.dumps(receipt),receipt['created_at']))
-            return receipt
+            current=database_origin(self.runs)
+            conn.execute('INSERT INTO runtime_auxiliary_continuations VALUES(?,?,?,?,?,?,?,?,?,?)',
+                         (project_id,operation_key,source_operation_id,successor,root,generation,encoded,json.dumps(receipt),receipt['created_at'],current))
+            return {**receipt,'authorization_scope':'current_installation'}

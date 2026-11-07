@@ -1,0 +1,118 @@
+{
+  "states": [
+    {
+      "name": "00-owner-installation-barrier",
+      "width": 1440,
+      "height": 2200,
+      "scope": "full-page"
+    },
+    {
+      "name": "01-historical-receipt-desktop",
+      "width": 1440,
+      "height": 2200,
+      "axe_violations": 0
+    },
+    {
+      "name": "02-fresh-decision-mobile",
+      "width": 390,
+      "height": 2200,
+      "axe_violations": 0
+    },
+    {
+      "name": "03-current-permission-recovered",
+      "width": 1440,
+      "height": 2200,
+      "axe_violations": 0
+    }
+  ],
+  "writes": [
+    {
+      "request": {
+        "operation_key": "0d2dce92-c022-4e84-83a2-b032a828e35c",
+        "source_operation_id": "97b64dd23e273aca84986c4a405df8c10667e9160ecb5cf853d403eb3a9e4cc9",
+        "reason": "Calcular de nuevo sobre esta copia restaurada."
+      },
+      "receipt": {
+        "operation_key": "0d2dce92-c022-4e84-83a2-b032a828e35c",
+        "source_operation_id": "97b64dd23e273aca84986c4a405df8c10667e9160ecb5cf853d403eb3a9e4cc9",
+        "reason": "Calcular de nuevo sobre esta copia restaurada.",
+        "project_id": 101,
+        "root_operation_id": "97b64dd23e273aca84986c4a405df8c10667e9160ecb5cf853d403eb3a9e4cc9",
+        "successor_operation_id": "2fe8fca8807b8e7b83a2dcf834cb43acbfe96ad1fe031e6cee814f32c4336a08",
+        "generation": 2,
+        "work_started": false,
+        "prior_cpu_ceiling_ms": 3000,
+        "diagnosis_at_decision": {
+          "code": "restored_history",
+          "message": "Este cálculo pertenece al historial de la copia restaurada. No se comprobó el cierre del host original. Puedes autorizar un cálculo nuevo en esta instalación; el consumo histórico se conserva.",
+          "can_continue": true
+        },
+        "created_at": 1794073646.6574752,
+        "authorization_scope": "current_installation"
+      }
+    }
+  ],
+  "checks": [
+    "verified-restore-before-serving",
+    "owner-installation-barrier-preserved",
+    "original-pending-packet-archived-before-entry",
+    "old-receipt-remains-historical",
+    "original-host-closure-not-claimed",
+    "new-explicit-decision",
+    "lost-reply-recovered-without-second-post",
+    "unknown-consumption-preserved",
+    "no-calculation-started"
+  ],
+  "errors": [],
+  "original_receipt": {
+    "operation_key": "original-permission",
+    "source_operation_id": "97b64dd23e273aca84986c4a405df8c10667e9160ecb5cf853d403eb3a9e4cc9",
+    "reason": "Autorización guardada antes de restaurar.",
+    "project_id": 101,
+    "root_operation_id": "97b64dd23e273aca84986c4a405df8c10667e9160ecb5cf853d403eb3a9e4cc9",
+    "successor_operation_id": "1a6c52b0bb730d4dbd9343ccff0afdcf40f01831cb44c73504e43541f1f2ab5c",
+    "generation": 1,
+    "work_started": false,
+    "prior_cpu_ceiling_ms": 3000,
+    "diagnosis_at_decision": {
+      "code": "ready",
+      "message": "El trabajador terminó sin resultado recuperable. Puedes autorizar un nuevo cálculo conservando el consumo anterior.",
+      "can_continue": true
+    },
+    "created_at": 1794073368.4211705,
+    "authorization_scope": "historical_installation"
+  },
+  "budget": {
+    "project_id": 101,
+    "policy": null,
+    "used_turns": 0,
+    "observed_tokens": null,
+    "unmeasured_dispatches": 0,
+    "unsettled_dispatches": 0,
+    "accounted_tokens": 0,
+    "held_tokens": 0,
+    "auxiliary": {
+      "policy": {
+        "operation_limit": 200,
+        "cpu_ms_limit": 600000
+      },
+      "policy_origin": "recorded",
+      "used_operations": 1,
+      "observed_cpu_ms": null,
+      "unknown_operations": 1,
+      "pending_operations": 0,
+      "input_bytes": 25,
+      "accounted_cpu_ms": 3000,
+      "held_cpu_ms": 3000,
+      "remaining_operations": 199,
+      "remaining_cpu_ms": 597000,
+      "attempt_policy": {
+        "operation_limit": 50,
+        "cpu_ms_limit": 120000
+      }
+    },
+    "remaining_turns": null,
+    "remaining_tokens": null,
+    "overrun_tokens": null
+  }
+}

@@ -76,7 +76,10 @@ desconocido y resultados recuperables para las entradas humanas y nativas.
 El propietario ve y revisa los totales con recibo/versionado. La migración62
 añade diagnóstico de identidad/cierre y autorización de una única sucesora,
 sin iniciarla al guardar ni borrar consumo anterior. Se revalida autoridad y
-capacidad al presentar la próxima solicitud idéntica. Registros sin identidad,
-cambio de kernel/namespace y creación interrumpida sin identidad del hijo
-requieren reconciliación de instalación pendiente. [Presupuesto](../modernization/auxiliary-budget-review.md)
+capacidad al presentar la próxima solicitud idéntica. La migración63 añade permisos ligados a la base y archivo transaccional al
+inscribir una restauración: identidades ausentes/ajenas o creación incompleta
+pueden dar paso a un cálculo nuevo en la copia mediante decisión actual, sin
+certificar cierre del original ni adoptar permisos copiados. [Presupuesto](../modernization/auxiliary-budget-review.md)
 y [continuación comprobada](../modernization/auxiliary-continuation-review.md).
+
+[Autoridad local y restauración verificadas](../modernization/auxiliary-restoration-review.md).

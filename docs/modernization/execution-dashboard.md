@@ -28,7 +28,37 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U06 (configuración por intento y guardado interrumpido) y E07 (loop acotado y rechazo sin rework automático) quedan comprobados; siguen41de43escenarios amplios abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: continuación local con cierre comprobado validada
+## Estado actual: autoridad local y restauración comprobadas
+
+Bloque **2026-11-07 17:27:42–17:48:42 UTC**, **21 min hasta validar y cerrar el
+servidor**. Documentación/checkpoint posteriores fuera del tramo. Se corrigieron
+permisos copiados que podían ejecutarse sin nueva decisión y una segunda
+restauración bloqueada por la inscripción anterior copiada al lugar activo.
+Restore conserva historia, no demuestra cierre global del original.
+
+136casos distintos de fuente;182instalados,13DOM,2contratos y build pasan.
+643archivos coinciden,342de producto;50nodos Python documentados y85prompts
+revisados. Web real:4estados,1autorización,9comprobaciones, barrera de cambio
+de instalación preservada y3000ms desconocidos conservados sin ejecutar.
+[Resultados y límites](auxiliary-restoration-review.md).
+
+- Terminado: continuación con identidad/cierre comprobados, presupuesto durable,
+  resultados recuperables y control web; ahora también recuperación sobre una
+  copia inscrita con permisos nuevos, consumo histórico y recibos conservados.
+- En curso al cerrar: documentación y checkpoint local.
+- Siguiente principal: contrastar aceptación amplia deE08 con el conjunto de
+  consumos observables y límites declarados, usando la evidencia existente para
+  identificar el siguiente bloque grueso. **No iniciado**; registrar hora real.
+- Pendiente después: consumos/escenarios amplios restantes, datos históricos,
+  evaluaciones, aceptación de12páginas, dependencias y distribución.
+- Al final: detalles registrados, validación global y revisión independiente.
+
+No se habilitó bypass en el original ni cuota global entre varias copias. E08 y
+41de43escenarios siguen abiertos;0/12páginas aceptadas por completo. Cero turnos
+de modelo. La última suite global con fallos sigue siendo la referencia; sin
+porcentaje global defendible. El ajuste de frase genérica queda enDD111.
+
+## Etapa anterior: continuación local con cierre comprobado validada
 
 Bloque registrado: **2026-11-07 17:08:08–17:24:28 UTC**, **16 min 20 s hasta
 validar y cerrar el servidor**. Lectura exploratoria anterior sin inicio medido;
