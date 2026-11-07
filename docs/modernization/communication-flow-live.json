@@ -1,0 +1,621 @@
+{
+  "base_commit": "9f40023",
+  "scenarios": [
+    {
+      "scenario": "question_answer",
+      "original_status": "failed",
+      "verified_existing_observation": true,
+      "seconds": 49.129,
+      "runs": [
+        {
+          "run_id": "60b51086-b310-455c-b404-3d3d6085b875",
+          "project_id": 101,
+          "task_id": 1001,
+          "actor_id": "researcher",
+          "context_version": 1,
+          "status": "waiting_input",
+          "fence": 3,
+          "attempt_id": "78167668-a1d1-4a08-8e96-eea96e31a2fa",
+          "thread_id": "01a1b4fc-d52d-7571-b795-251766d329e1",
+          "turn_id": "01a1b4fc-d59f-7f60-916a-3c22a82955ee",
+          "prompt": "Caso sintético. Usa ken_find con una consulta en inglés y ken_read para leer evidence.py antes de responder. Responde en español; no edites, crees informes, aceptes ni publiques.\nUsuario: Tengo 7,5 de duración de una prueba y quiero expresarlo en segundos. La unidad original no está documentada. Ayudame a resolver la conversión y explicarla.",
+          "runtime": "codex",
+          "result": null,
+          "cancel_requested": false,
+          "operation_key": "initial",
+          "conversation_thread_id": "a0f09338-4cc7-4d07-87ee-7f2daf2053de",
+          "model": "gpt-6.1-sol",
+          "repository_id": 11,
+          "repository_name": "synthetic-invoice",
+          "issue": null,
+          "review": null,
+          "execution_kind": "research",
+          "model_selection": {
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "low",
+            "source": "host",
+            "revision": 0,
+            "project_id": 101,
+            "actor_id": "researcher",
+            "run_id": "60b51086-b310-455c-b404-3d3d6085b875",
+            "attempt_id": "78167668-a1d1-4a08-8e96-eea96e31a2fa",
+            "fence": 1,
+            "selected_at": 1794037821.938502
+          }
+        },
+        {
+          "run_id": "043ab0f8-efaf-4710-b58f-b459e3ccb639",
+          "project_id": 101,
+          "task_id": 1001,
+          "actor_id": "researcher",
+          "context_version": 2,
+          "status": "needs_review",
+          "fence": 1,
+          "attempt_id": "f5c39f01-8ca8-4246-ba7b-52d3b3fb2c32",
+          "thread_id": "01a1b4fd-3065-70d1-89c5-e536e614dfc9",
+          "turn_id": "01a1b4fd-30d3-7c73-8cc2-a5330568523e",
+          "prompt": "Caso sintético. Usa ken_find con una consulta en inglés y ken_read para leer evidence.py antes de responder. Responde en español; no edites, crees informes, aceptes ni publiques.\nUsuario: Usá mi respuesta registrada para completar la conversión que pedí. Explicá con un ejemplo sencillo qué dato faltaba y cómo lo usaste.",
+          "runtime": "codex",
+          "result": {
+            "native_status": "completed",
+            "summary": "**7,5 minutos × 60 segundos/minuto = 450 segundos**, sin redondeo adicional.\n\nFaltaba la unidad original: «7,5» solo no alcanzaba, porque 7,5 segundos y 7,5 minutos representan duraciones distintas. Tu respuesta registrada confirmó que eran minutos, así que usé el factor 60. Por ejemplo, 2 minutos son 120 segundos; del mismo modo, 7,5 minutos son 450 segundos.\n\nLeí `evidence.py`: la función aplica ese factor cuando la unidad confirmada es minutos."
+          },
+          "cancel_requested": false,
+          "operation_key": "continue",
+          "conversation_thread_id": null,
+          "model": "gpt-6.1-sol",
+          "repository_id": 11,
+          "repository_name": "synthetic-invoice",
+          "issue": null,
+          "review": null,
+          "execution_kind": "research",
+          "model_selection": {
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "low",
+            "source": "host",
+            "revision": 0,
+            "project_id": 101,
+            "actor_id": "researcher",
+            "run_id": "043ab0f8-efaf-4710-b58f-b459e3ccb639",
+            "attempt_id": "f5c39f01-8ca8-4246-ba7b-52d3b3fb2c32",
+            "fence": 1,
+            "selected_at": 1794037847.3672507
+          }
+        }
+      ],
+      "question_records": [
+        {
+          "request_id": 1,
+          "question_set_json": "[{\"example\":\"\",\"id\":\"original_unit\",\"options\":[],\"question\":\"¿Puedes recuperar la unidad original del registro, del equipo o del protocolo de la prueba? Si no, indica que sigue siendo desconocida.\",\"why_needed\":\"La unidad determina el factor de conversión; el valor 7,5 por sí solo no permite elegirlo.\"}]",
+          "context_version": 1,
+          "status": "responded",
+          "response": "{\"original_unit\":\"La duración original es 7,5 minutos. El destino solicitado es segundos, sin redondeo adicional.\"}"
+        }
+      ],
+      "answers": [
+        null,
+        {
+          "native_status": "completed",
+          "summary": "**7,5 minutos × 60 segundos/minuto = 450 segundos**, sin redondeo adicional.\n\nFaltaba la unidad original: «7,5» solo no alcanzaba, porque 7,5 segundos y 7,5 minutos representan duraciones distintas. Tu respuesta registrada confirmó que eran minutos, así que usé el factor 60. Por ejemplo, 2 minutos son 120 segundos; del mismo modo, 7,5 minutos son 450 segundos.\n\nLeí `evidence.py`: la función aplica ese factor cuando la unidad confirmada es minutos."
+        }
+      ],
+      "inputs": [
+        {
+          "input_sha256": "fcb9a64cbbf0291e5688b6c053431121c8f1bc7ef0a8e617a77e796d01d229fc",
+          "input": {
+            "context_version": 1,
+            "conversation": {
+              "cutoff_message_id": null,
+              "messages": [],
+              "other_task_messages_excluded": 0,
+              "thread_id": null
+            },
+            "corrections": [],
+            "execution": {
+              "acceptance": "not_granted",
+              "kind": "investigation",
+              "methodology": "scope_gather_organize_summarize",
+              "publication": "not_granted",
+              "workspace_access": "readonly"
+            },
+            "repository": {
+              "id": 11,
+              "name": "synthetic-invoice"
+            },
+            "request": "Caso sintético. Usa ken_find con una consulta en inglés y ken_read para leer evidence.py antes de responder. Responde en español; no edites, crees informes, aceptes ni publiques.\nUsuario: Tengo 7,5 de duración de una prueba y quiero expresarlo en segundos. La unidad original no está documentada. Ayudame a resolver la conversión y explicarla.",
+            "request_history": {
+              "cutoff_run_id": "60b51086-b310-455c-b404-3d3d6085b875",
+              "mode": "same_task_admissions",
+              "requests": []
+            },
+            "schema_version": 1,
+            "scope": {
+              "attempt_id": "78167668-a1d1-4a08-8e96-eea96e31a2fa",
+              "project_id": 101,
+              "run_id": "60b51086-b310-455c-b404-3d3d6085b875",
+              "task_id": 1001
+            },
+            "task": {
+              "acceptance_criteria": null,
+              "assigned_to": null,
+              "branch_name": null,
+              "context_json": null,
+              "description": null,
+              "epic_id": null,
+              "estimated_complexity": "medium",
+              "milestone_id": null,
+              "parent_task_id": null,
+              "priority": 2,
+              "reviewer": null,
+              "status": "in_progress",
+              "title": "Communication continuity",
+              "type": "investigation"
+            },
+            "task_changes": [],
+            "user_answers": [],
+            "work_delivery": null
+          },
+          "policy_sha256": "d0da2ecbcd184ea0995a8e0794ad218571a0e3e2f30675ac53a3137e3f87179c",
+          "model_control": {
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "low",
+            "source": "host",
+            "revision": 0,
+            "project_id": 101,
+            "actor_id": "researcher",
+            "fence": 1
+          },
+          "observed_tokens": 49690,
+          "dispatch_status": "unknown"
+        },
+        {
+          "input_sha256": "d6cc9c768f5d54426c342f6d319ec1e4597341cbc8ca31f935cb13207f298063",
+          "input": {
+            "context_version": 2,
+            "conversation": {
+              "cutoff_message_id": null,
+              "messages": [],
+              "other_task_messages_excluded": 0,
+              "thread_id": null
+            },
+            "corrections": [
+              {
+                "source_kind": "user_message",
+                "source_reference": "question:1",
+                "statement": "¿Puedes recuperar la unidad original del registro, del equipo o del protocolo de la prueba? Si no, indica que sigue siendo desconocida.\nRespuesta del usuario: La duración original es 7,5 minutos. El destino solicitado es segundos, sin redondeo adicional.",
+                "version": 2
+              }
+            ],
+            "execution": {
+              "acceptance": "not_granted",
+              "kind": "investigation",
+              "methodology": "scope_gather_organize_summarize",
+              "publication": "not_granted",
+              "workspace_access": "readonly"
+            },
+            "repository": {
+              "id": 11,
+              "name": "synthetic-invoice"
+            },
+            "request": "Caso sintético. Usa ken_find con una consulta en inglés y ken_read para leer evidence.py antes de responder. Responde en español; no edites, crees informes, aceptes ni publiques.\nUsuario: Usá mi respuesta registrada para completar la conversión que pedí. Explicá con un ejemplo sencillo qué dato faltaba y cómo lo usaste.",
+            "request_history": {
+              "cutoff_run_id": "043ab0f8-efaf-4710-b58f-b459e3ccb639",
+              "mode": "same_task_admissions",
+              "requests": [
+                {
+                  "actor_id": "researcher",
+                  "content": "Caso sintético. Usa ken_find con una consulta en inglés y ken_read para leer evidence.py antes de responder. Responde en español; no edites, crees informes, aceptes ni publiques.\nUsuario: Tengo 7,5 de duración de una prueba y quiero expresarlo en segundos. La unidad original no está documentada. Ayudame a resolver la conversión y explicarla.",
+                  "content_sha256": "08cfe5802d1b6f5eb4bd6b0bfb3a01a0d41d49d503d1629bf8fffbd0d5492431",
+                  "current_authorization": false,
+                  "execution_kind": "research",
+                  "kind": "recorded_admission",
+                  "run_id": "60b51086-b310-455c-b404-3d3d6085b875",
+                  "run_status_at_snapshot": "superseded",
+                  "same_context_version": false,
+                  "source_context_version": 1
+                }
+              ]
+            },
+            "schema_version": 1,
+            "scope": {
+              "attempt_id": "f5c39f01-8ca8-4246-ba7b-52d3b3fb2c32",
+              "project_id": 101,
+              "run_id": "043ab0f8-efaf-4710-b58f-b459e3ccb639",
+              "task_id": 1001
+            },
+            "task": {
+              "acceptance_criteria": null,
+              "assigned_to": null,
+              "branch_name": null,
+              "context_json": null,
+              "description": null,
+              "epic_id": null,
+              "estimated_complexity": "medium",
+              "milestone_id": null,
+              "parent_task_id": null,
+              "priority": 2,
+              "reviewer": null,
+              "status": "in_progress",
+              "title": "Communication continuity",
+              "type": "investigation"
+            },
+            "task_changes": [],
+            "user_answers": [
+              {
+                "answer_context_version": 2,
+                "answers": {
+                  "original_unit": "La duración original es 7,5 minutos. El destino solicitado es segundos, sin redondeo adicional."
+                },
+                "asked_under_context": 1,
+                "questions": [
+                  {
+                    "example": "",
+                    "id": "original_unit",
+                    "options": [],
+                    "question": "¿Puedes recuperar la unidad original del registro, del equipo o del protocolo de la prueba? Si no, indica que sigue siendo desconocida.",
+                    "why_needed": "La unidad determina el factor de conversión; el valor 7,5 por sí solo no permite elegirlo."
+                  }
+                ],
+                "request_id": 1
+              }
+            ],
+            "work_delivery": null
+          },
+          "policy_sha256": "d0da2ecbcd184ea0995a8e0794ad218571a0e3e2f30675ac53a3137e3f87179c",
+          "model_control": {
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "low",
+            "source": "host",
+            "revision": 0,
+            "project_id": 101,
+            "actor_id": "researcher",
+            "fence": 1
+          },
+          "observed_tokens": 76147,
+          "dispatch_status": "settled"
+        }
+      ],
+      "peers": [
+        {
+          "kind": "business",
+          "state": "closed"
+        },
+        {
+          "kind": "native",
+          "state": "closed"
+        },
+        {
+          "kind": "ken",
+          "state": "closed"
+        },
+        {
+          "kind": "ken",
+          "state": "closed"
+        },
+        {
+          "kind": "business",
+          "state": "closed"
+        },
+        {
+          "kind": "native",
+          "state": "closed"
+        },
+        {
+          "kind": "ken",
+          "state": "closed"
+        },
+        {
+          "kind": "ken",
+          "state": "closed"
+        }
+      ],
+      "service_exit": -15,
+      "owned_backend_terminal": true,
+      "unrevoked_grants": 0,
+      "raw_result_path": ".researcher/evaluations/communication-flow-20261107-v2/question_answer/result.json",
+      "raw_result_sha256": "46351b6728482861a831a5a48a5774dd06de770f6be53e11feb2397e9dca93ad"
+    },
+    {
+      "scenario": "active_correction",
+      "original_status": "observed",
+      "verified_existing_observation": true,
+      "seconds": 40.447,
+      "runs": [
+        {
+          "run_id": "d1c096a7-1e54-4151-89a2-2198db279153",
+          "project_id": 101,
+          "task_id": 1001,
+          "actor_id": "researcher",
+          "context_version": 1,
+          "status": "superseded",
+          "fence": 3,
+          "attempt_id": "35c997d5-668e-4d41-afb6-741e0db4f598",
+          "thread_id": "01a1b4ff-7111-7200-992b-d0415dafc371",
+          "turn_id": "01a1b4ff-7178-7310-a45b-12d858e34e43",
+          "prompt": "Caso sintético. Usa ken_find con una consulta en inglés y ken_read para leer evidence.py antes de responder. Responde en español; no edites, crees informes, aceptes ni publiques.\nUsuario: Calculá el recargo y el total para base500 y tasa0.07 después de leer evidence.py.",
+          "runtime": "codex",
+          "result": null,
+          "cancel_requested": false,
+          "operation_key": "initial",
+          "conversation_thread_id": null,
+          "model": "gpt-6.1-sol",
+          "repository_id": 11,
+          "repository_name": "synthetic-invoice",
+          "issue": null,
+          "review": null,
+          "execution_kind": "research",
+          "model_selection": {
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "low",
+            "source": "host",
+            "revision": 0,
+            "project_id": 101,
+            "actor_id": "researcher",
+            "run_id": "d1c096a7-1e54-4151-89a2-2198db279153",
+            "attempt_id": "35c997d5-668e-4d41-afb6-741e0db4f598",
+            "fence": 1,
+            "selected_at": 1794037992.9417155
+          }
+        },
+        {
+          "run_id": "6587ff6b-f78d-4b42-8b25-6baa3179ed29",
+          "project_id": 101,
+          "task_id": 1001,
+          "actor_id": "researcher",
+          "context_version": 2,
+          "status": "needs_review",
+          "fence": 1,
+          "attempt_id": "99321195-2599-4dbd-b2a3-a5138402e21f",
+          "thread_id": "01a1b4ff-b316-75f3-ad08-f54ce63ce0b7",
+          "turn_id": "01a1b4ff-b382-7cc3-baab-3b045f694c26",
+          "prompt": "Caso sintético. Usa ken_find con una consulta en inglés y ken_read para leer evidence.py antes de responder. Responde en español; no edites, crees informes, aceptes ni publiques.\nUsuario: Aplicá la corrección vigente. Leé evidence.py con Ken y explicá el recargo, el total y qué cambió respecto del pedido original.",
+          "runtime": "codex",
+          "result": {
+            "native_status": "completed",
+            "summary": "Leí `evidence.py` con Ken: el recargo se calcula como `base × tasa`; el total suma la base y ese recargo.\n\nCon la corrección vigente:\n\n- **Recargo:** 80 × 0,15 = **12**.\n- **Total:** 80 + 12 = **92**.\n\nEl pedido original usaba base 500 y tasa 0,07: daba un recargo de 35 y un total de 535. La corrección cambió la base a 80 y la tasa al 15%; la fórmula sigue igual."
+          },
+          "cancel_requested": false,
+          "operation_key": "continue",
+          "conversation_thread_id": null,
+          "model": "gpt-6.1-sol",
+          "repository_id": 11,
+          "repository_name": "synthetic-invoice",
+          "issue": null,
+          "review": null,
+          "execution_kind": "research",
+          "model_selection": {
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "low",
+            "source": "host",
+            "revision": 0,
+            "project_id": 101,
+            "actor_id": "researcher",
+            "run_id": "6587ff6b-f78d-4b42-8b25-6baa3179ed29",
+            "attempt_id": "99321195-2599-4dbd-b2a3-a5138402e21f",
+            "fence": 1,
+            "selected_at": 1794038011.8136199
+          }
+        }
+      ],
+      "question_records": [],
+      "answers": [
+        null,
+        {
+          "native_status": "completed",
+          "summary": "Leí `evidence.py` con Ken: el recargo se calcula como `base × tasa`; el total suma la base y ese recargo.\n\nCon la corrección vigente:\n\n- **Recargo:** 80 × 0,15 = **12**.\n- **Total:** 80 + 12 = **92**.\n\nEl pedido original usaba base 500 y tasa 0,07: daba un recargo de 35 y un total de 535. La corrección cambió la base a 80 y la tasa al 15%; la fórmula sigue igual."
+        }
+      ],
+      "inputs": [
+        {
+          "input_sha256": "0aaa1462a8e839eae5460872ada1c80d0feca7ad773212c462997e117b231ab8",
+          "input": {
+            "context_version": 1,
+            "conversation": {
+              "cutoff_message_id": null,
+              "messages": [],
+              "other_task_messages_excluded": 0,
+              "thread_id": null
+            },
+            "corrections": [],
+            "execution": {
+              "acceptance": "not_granted",
+              "kind": "investigation",
+              "methodology": "scope_gather_organize_summarize",
+              "publication": "not_granted",
+              "workspace_access": "readonly"
+            },
+            "repository": {
+              "id": 11,
+              "name": "synthetic-invoice"
+            },
+            "request": "Caso sintético. Usa ken_find con una consulta en inglés y ken_read para leer evidence.py antes de responder. Responde en español; no edites, crees informes, aceptes ni publiques.\nUsuario: Calculá el recargo y el total para base500 y tasa0.07 después de leer evidence.py.",
+            "request_history": {
+              "cutoff_run_id": "d1c096a7-1e54-4151-89a2-2198db279153",
+              "mode": "same_task_admissions",
+              "requests": []
+            },
+            "schema_version": 1,
+            "scope": {
+              "attempt_id": "35c997d5-668e-4d41-afb6-741e0db4f598",
+              "project_id": 101,
+              "run_id": "d1c096a7-1e54-4151-89a2-2198db279153",
+              "task_id": 1001
+            },
+            "task": {
+              "acceptance_criteria": null,
+              "assigned_to": null,
+              "branch_name": null,
+              "context_json": null,
+              "description": null,
+              "epic_id": null,
+              "estimated_complexity": "medium",
+              "milestone_id": null,
+              "parent_task_id": null,
+              "priority": 2,
+              "reviewer": null,
+              "status": "in_progress",
+              "title": "Communication continuity",
+              "type": "investigation"
+            },
+            "task_changes": [],
+            "user_answers": [],
+            "work_delivery": null
+          },
+          "policy_sha256": "d0da2ecbcd184ea0995a8e0794ad218571a0e3e2f30675ac53a3137e3f87179c",
+          "model_control": {
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "low",
+            "source": "host",
+            "revision": 0,
+            "project_id": 101,
+            "actor_id": "researcher",
+            "fence": 1
+          },
+          "observed_tokens": 24693,
+          "dispatch_status": "unknown"
+        },
+        {
+          "input_sha256": "8440bd1ff66edd0cf29cce3988ecaa55e1e48b7b9a29e66135abd2f577896467",
+          "input": {
+            "context_version": 2,
+            "conversation": {
+              "cutoff_message_id": null,
+              "messages": [],
+              "other_task_messages_excluded": 0,
+              "thread_id": null
+            },
+            "corrections": [
+              {
+                "source_kind": "user_message",
+                "source_reference": "owner-correction:correct",
+                "statement": "Corrección: usar base80 y tasa0.15. Explicar recargo y total por separado; no publicar.",
+                "version": 2
+              }
+            ],
+            "execution": {
+              "acceptance": "not_granted",
+              "kind": "investigation",
+              "methodology": "scope_gather_organize_summarize",
+              "publication": "not_granted",
+              "workspace_access": "readonly"
+            },
+            "repository": {
+              "id": 11,
+              "name": "synthetic-invoice"
+            },
+            "request": "Caso sintético. Usa ken_find con una consulta en inglés y ken_read para leer evidence.py antes de responder. Responde en español; no edites, crees informes, aceptes ni publiques.\nUsuario: Aplicá la corrección vigente. Leé evidence.py con Ken y explicá el recargo, el total y qué cambió respecto del pedido original.",
+            "request_history": {
+              "cutoff_run_id": "6587ff6b-f78d-4b42-8b25-6baa3179ed29",
+              "mode": "same_task_admissions",
+              "requests": [
+                {
+                  "actor_id": "researcher",
+                  "content": "Caso sintético. Usa ken_find con una consulta en inglés y ken_read para leer evidence.py antes de responder. Responde en español; no edites, crees informes, aceptes ni publiques.\nUsuario: Calculá el recargo y el total para base500 y tasa0.07 después de leer evidence.py.",
+                  "content_sha256": "20c400705b89853657d6dac8f80274d7d35590f6ba97c04043e47281f3504215",
+                  "current_authorization": false,
+                  "execution_kind": "research",
+                  "kind": "recorded_admission",
+                  "run_id": "d1c096a7-1e54-4151-89a2-2198db279153",
+                  "run_status_at_snapshot": "superseded",
+                  "same_context_version": false,
+                  "source_context_version": 1
+                }
+              ]
+            },
+            "schema_version": 1,
+            "scope": {
+              "attempt_id": "99321195-2599-4dbd-b2a3-a5138402e21f",
+              "project_id": 101,
+              "run_id": "6587ff6b-f78d-4b42-8b25-6baa3179ed29",
+              "task_id": 1001
+            },
+            "task": {
+              "acceptance_criteria": null,
+              "assigned_to": null,
+              "branch_name": null,
+              "context_json": null,
+              "description": null,
+              "epic_id": null,
+              "estimated_complexity": "medium",
+              "milestone_id": null,
+              "parent_task_id": null,
+              "priority": 2,
+              "reviewer": null,
+              "status": "in_progress",
+              "title": "Communication continuity",
+              "type": "investigation"
+            },
+            "task_changes": [],
+            "user_answers": [],
+            "work_delivery": null
+          },
+          "policy_sha256": "d0da2ecbcd184ea0995a8e0794ad218571a0e3e2f30675ac53a3137e3f87179c",
+          "model_control": {
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "low",
+            "source": "host",
+            "revision": 0,
+            "project_id": 101,
+            "actor_id": "researcher",
+            "fence": 1
+          },
+          "observed_tokens": 50443,
+          "dispatch_status": "settled"
+        }
+      ],
+      "peers": [
+        {
+          "kind": "business",
+          "state": "closed"
+        },
+        {
+          "kind": "native",
+          "state": "closed"
+        },
+        {
+          "kind": "ken",
+          "state": "closed"
+        },
+        {
+          "kind": "ken",
+          "state": "closed"
+        },
+        {
+          "kind": "business",
+          "state": "closed"
+        },
+        {
+          "kind": "native",
+          "state": "closed"
+        },
+        {
+          "kind": "ken",
+          "state": "closed"
+        },
+        {
+          "kind": "ken",
+          "state": "closed"
+        }
+      ],
+      "service_exit": -15,
+      "owned_backend_terminal": true,
+      "unrevoked_grants": 0,
+      "raw_result_path": ".researcher/evaluations/communication-correction-20261107/active_correction/result.json",
+      "raw_result_sha256": "10203b33533c69f9fdabf2cf8550a07e5a5a974d0ef700cb4688cf72c3b5d7d8"
+    }
+  ],
+  "model_turns": 4,
+  "total_observed_tokens": 200973,
+  "usage_statuses": {
+    "unknown": 2,
+    "settled": 2
+  },
+  "scenario_seconds_sum": 89.576,
+  "human_comprehension": null,
+  "limits": [
+    "Two synthetic functional scenarios with scripted owner answers; no population or causal prompting claim",
+    "Question callback was interrupted after durable persistence; failed tool reply is not absence of a question",
+    "Question source verifier corrected and existing receipts rechecked without model replay",
+    "Active correction holds a completed Ken read before model delivery; tool completion does not prove delivery"
+  ]
+}

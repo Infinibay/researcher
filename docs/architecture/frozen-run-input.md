@@ -32,6 +32,22 @@ Design revisada, sin crear otro loop de planificación o inferencia.
 
 ## Qué historial entra
 
+Desde el7noviembre, una admisión directa sin hilo recibe también
+`request_history`: pedidos anteriores de la misma tarea/proyecto, hasta el ID
+de admisión actual en orden de SQLite. El reloj no determina ese corte. Cada
+entrada conserva texto completo/hash, run, actor, tipo de ejecución, contexto y
+estado observado; `current_authorization=false`. Es evidencia de admisión,
+no prueba de autoría humana, entrega al modelo o permiso vigente. Las correcciones
+actuales tienen precedencia sobre premisas anteriores incompatibles.
+
+Esto corrige el recorrido directo `POST .../tasks/{task}/runs`. Las pantallas
+Tareas y Conversación ya envían una instrucción con hilo: siguen usando sólo la
+conversación elegida. Seleccionar una conversación nueva **no** reintroduce los
+pedidos de otras conversaciones mediante este campo. Se conserva el límite de200
+registros y1MiB combinado, con rechazo antes de reservar un turno si no cabe.
+El campo es aditivo: no modifica snapshots históricos ni necesita una migración.
+[Evidencia y límites](../modernization/communication-flow-review.md).
+
 El límite temporal es el mensaje de admisión de la solicitud actual, por ID estable.
 Se incluyen mensajes anteriores de esa conversación/tarea y registros sin atribución
 suficiente; no notas posteriores que el usuario aún no hubiera enviado al admitir.

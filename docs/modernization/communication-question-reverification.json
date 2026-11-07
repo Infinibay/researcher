@@ -1,0 +1,10 @@
+{
+  "status": "verified_existing_observation",
+  "original_result_status": "failed",
+  "original_result_sha256": "46351b6728482861a831a5a48a5774dd06de770f6be53e11feb2397e9dca93ad",
+  "verifier_sha256": "19944a3c6ab295c4fc450f420fb76f108b73b142d0a068bfccabef1ce61139c2",
+  "original_path": ".researcher/evaluations/communication-flow-20261107-v2/question_answer/result.json",
+  "model_turns_repeated": 0,
+  "negative_control_old_fixture": "rejected",
+  "scope": "Corrected source verifier plus downstream input/provenance/closure checks; original failed receipt preserved"
+}

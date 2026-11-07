@@ -144,7 +144,11 @@
         "backend/runtime/subscription_provider.py",
         "backend/tests/runtime/test_subscription_provider.py",
         "docs/modernization/subscription-provider-evidence.json",
-        "docs/modernization/subscription-provider-results.json"
+        "docs/modernization/subscription-provider-results.json",
+        "docs/modernization/communication-flow-review.md",
+        "docs/modernization/communication-flow-results.json",
+        "docs/modernization/communication-flow-live.json",
+        "docs/modernization/communication-packaging.json"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -176,7 +180,11 @@
         "evals/runtime/run_input_continuity.py",
         "frontend/tests/task-design.test.ts",
         "docs/modernization/context-alignment-review.md",
-        "docs/modernization/context-alignment-results.json"
+        "docs/modernization/context-alignment-results.json",
+        "docs/modernization/communication-flow-review.md",
+        "docs/modernization/communication-flow-results.json",
+        "docs/modernization/communication-flow-live.json",
+        "docs/modernization/communication-packaging.json"
       ]
     },
     "C06": {
@@ -2034,12 +2042,17 @@
         "docs/modernization/context-alignment-results.json",
         "docs/modernization/context-alignment-validation.json",
         "docs/modernization/context-alignment-review.md",
-        "docs/modernization/context-alignment-human-review.md"
+        "docs/modernization/context-alignment-human-review.md",
+        "docs/modernization/communication-flow-review.md",
+        "docs/modernization/communication-flow-results.json",
+        "docs/modernization/communication-flow-live.json",
+        "docs/modernization/communication-packaging.json"
       ],
-      "implemented": "Owned static inventory234candidates/370files,364archived entries; source/direct-consumer review decisions, native catalogv2 and capability rewrites. New cross-source search and legacy report description reviewed; model efficacy and human comprehension remain open.",
+      "implemented": "Current owned static inventory83candidates/287files; catalogv3 with required material questions and direct-admission request history.23 source/direct-consumer reviews current,60 stale and requiring explicit revalidation; archived decisions retained. Four new functional turns do not establish general model efficacy or human comprehension.",
       "remaining": [
-        "Before/after efficacy and reserved-case comparisons for the remaining profiles; the investigation comparison is exploratory and not quality acceptance.",
-        "Actual human comprehension, structured material questions and faithful context continuity remain open."
+        "Revalidate60 stale source/direct-consumer review decisions without inheriting historical approval.",
+        "Before/after efficacy and reserved comparisons for remaining profiles; historical investigation comparison is exploratory.",
+        "Actual human comprehension and broader communication/context journeys."
       ],
       "context_comparison_observed": "7 paired cases:2 development/5 reserved;16 Codex subscription turns with actual published Ken, matching substantive inputs/model/catalog and exact delivered policies. Initial no-dispatch context-version failure and development receipt-identity amendment retained.19 directed tests pass; human measures unknown."
     },
@@ -2076,12 +2089,16 @@
         "docs/modernization/context-alignment-results.json",
         "docs/modernization/context-alignment-validation.json",
         "docs/modernization/context-alignment-review.md",
-        "docs/modernization/context-alignment-human-review.md"
+        "docs/modernization/context-alignment-human-review.md",
+        "docs/modernization/communication-flow-review.md",
+        "docs/modernization/communication-flow-results.json",
+        "docs/modernization/communication-flow-live.json",
+        "docs/modernization/communication-packaging.json"
       ],
       "remaining": [
         "Human comprehension/effort observation and independent/representative evaluation; seven implementer-authored pairs do not establish a general or causal improvement.",
         "Comparisons for remaining prompt profiles and source/provenance scenarios across summaries, delegation and user correction.",
-        "Both delegation arms asked only in prose despite an available structured-question tool. The corrected second admission lacked the original request; verify intended context continuity and attribution."
+        "Historical prose-only questions and missing original direct-admission request addressed in two fresh functional scenarios with4 real turns and scripted owner input. Representative behavior, other profiles and human understanding remain unaccepted."
       ],
       "context_comparison_observed": "7 paired cases:2 development/5 reserved;16 Codex subscription turns with actual published Ken, matching substantive inputs/model/catalog and exact delivered policies. Initial no-dispatch context-version failure and development receipt-identity amendment retained.19 directed tests pass; human measures unknown."
     },
@@ -2772,7 +2789,11 @@
         "docs/modernization/browser-evidence.json",
         "docs/modernization/browser-results.json",
         "evals/ui/run_owner_capture.py",
-        "evals/ui/capture_owner.mjs"
+        "evals/ui/capture_owner.mjs",
+        "docs/modernization/communication-flow-review.md",
+        "docs/modernization/communication-flow-results.json",
+        "docs/modernization/communication-flow-live.json",
+        "docs/modernization/communication-packaging.json"
       ],
       "remaining": [
         "Migrate legacy producers/typed replies without widened authority.",
@@ -2914,7 +2935,11 @@
         "backend/tests/runtime/test_run_input.py",
         "backend/tests/runtime/test_run_input_migration.py",
         "evals/runtime/run_input_continuity.py",
-        "frontend/tests/task-design.test.ts"
+        "frontend/tests/task-design.test.ts",
+        "docs/modernization/communication-flow-review.md",
+        "docs/modernization/communication-flow-results.json",
+        "docs/modernization/communication-flow-live.json",
+        "docs/modernization/communication-packaging.json"
       ],
       "remaining": [
         "Long-history checkpoints/compaction without losing constraints.",
@@ -4551,6 +4576,29 @@
         "139 missing license declarations and compatibility review",
         "Publish/observe automation only at authorized integration",
         "Broader security scenarios and final independent review"
+      ]
+    },
+    "communication_continuity": {
+      "status": "in_progress",
+      "scope": "Direct task admission history and required durable material questions; selected conversation scope/reset preserved.",
+      "evidence": [
+        "docs/modernization/communication-flow-review.md",
+        "docs/modernization/communication-flow-results.json",
+        "docs/modernization/communication-flow-live.json",
+        "docs/modernization/communication-packaging.json",
+        "backend/tests/runtime/test_task_request_history.py",
+        "backend/prompts/native.py",
+        "evals/communication_flow/run.py"
+      ],
+      "verified": [
+        "46 source and46 installed tests;5 verifier controls",
+        "Two synthetic real Codex/Ken scenarios,4 turns, scripted owner input",
+        "Exact original request plus corrected context and historical provenance; all peers/grants closed"
+      ],
+      "remaining": [
+        "Human comprehension/effort and other profiles/communication journeys",
+        "Revalidate60 stale static prompt review decisions",
+        "Representative scientific evaluation and full page acceptance"
       ]
     }
   }

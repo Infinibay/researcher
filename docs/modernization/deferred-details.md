@@ -597,3 +597,11 @@ y comportamiento central comprobados. Retomar después de todas las capacidades
 principales. Ken/ONNX, Chroma, licencias y activación de la automatización **no**
 se relegan aquí: siguen como trabajo principal en la
 [revisión de seguridad](dependency-security-review.md).
+
+## DD084 · Estilo tras continuidad y preguntas respondibles
+
+Diez avisos Ruff en los archivos inspeccionados:8 de imports,1 de reexportación
+y1 variable sin uso. El comportamiento central y el paquete se comprobaron.
+Retomar después de todas las capacidades principales. Las60 revisiones estáticas
+de prompts desactualizadas y la evaluación humana siguen en el trabajo principal,
+no se reclasifican como pulido. [Evidencia](communication-flow-review.md).

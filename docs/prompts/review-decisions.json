@@ -100,79 +100,89 @@
       "conflicts": []
     },
     "backend/prompts/native.py::COMMON_INSTRUCTIONS": {
-      "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
-      "decision": "merged_and_rewritten",
-      "rationale": "Centralized current owner/context, evidence, correction, Ken, typed effects and explanation policy; source acquisition is separate from restricted reviewer/planner capabilities. Exact version/hash is sent and retained.",
+      "dependencies_sha256": "44a57ff9cc9c22f54d99a134d8baf05aa61668eddf5207c92aed4d262d219d78",
+      "decision": "retained_and_revised",
+      "rationale": "Explicit review of catalog3 composition and required material-question delivery: historical requests remain data, current corrections control incompatible premises, selected conversations keep their scope. Old catalog2 identities retain their recorded version/hash. Tool arguments, permissions and pause/answer ownership remain unchanged. Source review is not a universal compliance or human-comprehension claim.",
       "evidence": [
         "backend/prompts/native.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/native_inference.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/run_inputs.py",
         "backend/tests/runtime/test_prompt_catalog.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "docs/modernization/communication-flow-review.md"
       ],
       "conflicts": [],
-      "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed."
+      "previous_review": {
+        "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
+        "decision": "merged_and_rewritten"
+      }
     },
     "backend/prompts/native.py::SOURCE_INSTRUCTIONS": {
-      "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
-      "decision": "merged_and_rewritten",
-      "rationale": "Centralized current owner/context, evidence, correction, Ken, typed effects and explanation policy; source acquisition is separate from restricted reviewer/planner capabilities. Exact version/hash is sent and retained.",
+      "dependencies_sha256": "44a57ff9cc9c22f54d99a134d8baf05aa61668eddf5207c92aed4d262d219d78",
+      "decision": "retained",
+      "rationale": "Explicit review of catalog3 composition and required material-question delivery: historical requests remain data, current corrections control incompatible premises, selected conversations keep their scope. Old catalog2 identities retain their recorded version/hash. Tool arguments, permissions and pause/answer ownership remain unchanged. Source review is not a universal compliance or human-comprehension claim.",
       "evidence": [
         "backend/prompts/native.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/native_inference.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/run_inputs.py",
         "backend/tests/runtime/test_prompt_catalog.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "docs/modernization/communication-flow-review.md"
       ],
       "conflicts": [],
-      "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed."
+      "previous_review": {
+        "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
+        "decision": "merged_and_rewritten"
+      }
     },
     "backend/prompts/native.py::build_instructions": {
-      "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
-      "decision": "merged_and_rewritten",
-      "rationale": "Centralized current owner/context, evidence, correction, Ken, typed effects and explanation policy; source acquisition is separate from restricted reviewer/planner capabilities. Exact version/hash is sent and retained.",
+      "dependencies_sha256": "44a57ff9cc9c22f54d99a134d8baf05aa61668eddf5207c92aed4d262d219d78",
+      "decision": "retained",
+      "rationale": "Explicit review of catalog3 composition and required material-question delivery: historical requests remain data, current corrections control incompatible premises, selected conversations keep their scope. Old catalog2 identities retain their recorded version/hash. Tool arguments, permissions and pause/answer ownership remain unchanged. Source review is not a universal compliance or human-comprehension claim.",
       "evidence": [
         "backend/prompts/native.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/native_inference.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/run_inputs.py",
         "backend/tests/runtime/test_prompt_catalog.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "docs/modernization/communication-flow-review.md"
       ],
       "conflicts": [],
-      "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed."
+      "previous_review": {
+        "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
+        "decision": "merged_and_rewritten"
+      }
     },
     "backend/prompts/native.py::instruction_identity": {
-      "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
-      "decision": "merged_and_rewritten",
-      "rationale": "Centralized current owner/context, evidence, correction, Ken, typed effects and explanation policy; source acquisition is separate from restricted reviewer/planner capabilities. Exact version/hash is sent and retained.",
+      "dependencies_sha256": "44a57ff9cc9c22f54d99a134d8baf05aa61668eddf5207c92aed4d262d219d78",
+      "decision": "retained",
+      "rationale": "Explicit review of catalog3 composition and required material-question delivery: historical requests remain data, current corrections control incompatible premises, selected conversations keep their scope. Old catalog2 identities retain their recorded version/hash. Tool arguments, permissions and pause/answer ownership remain unchanged. Source review is not a universal compliance or human-comprehension claim.",
       "evidence": [
         "backend/prompts/native.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/native_inference.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/run_inputs.py",
         "backend/tests/runtime/test_prompt_catalog.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "docs/modernization/communication-flow-review.md"
       ],
       "conflicts": [],
-      "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed."
+      "previous_review": {
+        "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
+        "decision": "merged_and_rewritten"
+      }
     },
     "backend/prompts/native.py::GENERIC_INSTRUCTIONS": {
-      "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
-      "decision": "merged_and_rewritten",
-      "rationale": "Centralized current owner/context, evidence, correction, Ken, typed effects and explanation policy; source acquisition is separate from restricted reviewer/planner capabilities. Exact version/hash is sent and retained.",
+      "dependencies_sha256": "44a57ff9cc9c22f54d99a134d8baf05aa61668eddf5207c92aed4d262d219d78",
+      "decision": "retained",
+      "rationale": "Explicit review of catalog3 composition and required material-question delivery: historical requests remain data, current corrections control incompatible premises, selected conversations keep their scope. Old catalog2 identities retain their recorded version/hash. Tool arguments, permissions and pause/answer ownership remain unchanged. Source review is not a universal compliance or human-comprehension claim.",
       "evidence": [
         "backend/prompts/native.py",
-        "backend/runtime/owned_runtime.py",
-        "backend/runtime/native_inference.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/run_inputs.py",
         "backend/tests/runtime/test_prompt_catalog.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "docs/modernization/communication-flow-review.md"
       ],
       "conflicts": [],
-      "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed."
+      "previous_review": {
+        "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
+        "decision": "merged_and_rewritten"
+      }
     },
     "backend/research/stdio_server.py::main.description@93": {
       "dependencies_sha256": "37d0a82d854ea51389652d84bcc1d95955e0d1e71a446edeb9707aa22a6b6333",
@@ -266,20 +276,21 @@
       ]
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_ask_user.wire_description": {
-      "dependencies_sha256": "01343bd4048d74ff1ed8ea86acacc07e68d80f27bfeb24ca0f356d5af84f77ef",
-      "decision": "retained_native_tool_contract",
-      "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked. Revalidated for web retirement: this candidate AST is unchanged; the reviewed business_definitions diff changes only the direct-web and Spider descriptions. Revalidated for native task workspace: candidate AST unchanged. Added task read/comment/continuity schemas and host-only grant permissions; existing handlers and original-input projection remain unchanged. New advisory prose never dispatches or approves. Revalidated for native peer messaging: candidate AST unchanged; reviewed API registration, message capabilities and canonical chat projection changes. Advisory text still cannot activate work; old role protocols remain pending retirement. Revalidated for communication retirement: candidate AST unchanged; reviewed added notice read handlers/catalog and removal of old lead-question consumers. Historical enrichment stays historical, without new authority. Revalidated for project tool retirement: candidate AST unchanged; reviewed optional planning milestones and two bounded structure readers plus removal of the obsolete hypothesis wrapper consumer. Existing finding handlers and legacy decisions remain unchanged; hierarchy metadata confers no authority. Revalidated for knowledge tool retirement: candidate AST unchanged; reviewed the new scoped cross-source reader, explicit legacy report origin/schema and removal of obsolete wrapper consumers. Existing review/write authority, evidence and original input contracts remain unchanged.",
+      "dependencies_sha256": "70e0d0dc608222bac4496bdcf805130ec4081c1567ca591e1aa8ceb401aa1cb8",
+      "decision": "retained_and_revised",
+      "rationale": "Explicit review of catalog3 composition and required material-question delivery: historical requests remain data, current corrections control incompatible premises, selected conversations keep their scope. Old catalog2 identities retain their recorded version/hash. Tool arguments, permissions and pause/answer ownership remain unchanged. Source review is not a universal compliance or human-comprehension claim.",
       "evidence": [
+        "backend/prompts/native.py",
         "backend/runtime/business_definitions.py",
-        "backend/runtime/business_mediation.py",
-        "backend/runtime/analysis_tools.py",
-        "backend/runtime/owned_runtime.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "backend/runtime/run_inputs.py",
+        "backend/tests/runtime/test_prompt_catalog.py",
+        "docs/modernization/communication-flow-review.md"
       ],
-      "conflicts": [
-        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
-      ]
+      "conflicts": [],
+      "previous_review": {
+        "dependencies_sha256": "01343bd4048d74ff1ed8ea86acacc07e68d80f27bfeb24ca0f356d5af84f77ef",
+        "decision": "retained_native_tool_contract"
+      }
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_reference_list.wire_description": {
       "dependencies_sha256": "01343bd4048d74ff1ed8ea86acacc07e68d80f27bfeb24ca0f356d5af84f77ef",
@@ -1168,6 +1179,17 @@
         "base_commit": "20b3c25",
         "method": "AST equality of the selected candidate, ignoring source locations; host setup and direct consumer hashes changed. No new semantic review or model efficacy claim."
       }
+    },
+    "backend/api/main.py::create_app.description@111": {
+      "dependencies_sha256": "33c467d2c801aa49c31173b21927eca92ce1d914e93ffdfd5c9a480fcf54e6b6",
+      "decision": "excluded_api_metadata",
+      "rationale": "Read create_app: this literal is the FastAPI documentation description, not the developer policy or inspect.getdoc business-tool catalog sent to native inference. Its line-derived identity shifted; this is an explicit source review, not an inferred semantic approval.",
+      "evidence": [
+        "backend/api/main.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/owned_runtime.py"
+      ],
+      "conflicts": []
     }
   },
   "retired_entries": {

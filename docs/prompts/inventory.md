@@ -1,5 +1,18 @@
 # Inventario y revisión de prompts
 
+Corte actual del7noviembre: catálogo nativo **versión3**, con preguntas materiales
+registradas y procedencia de pedidos anteriores en admisiones sin hilo. Se revisaron
+explícitamente cinco entradas del módulo nativo, la descripción de `researcher_ask_user`
+y la descripción de documentación FastAPI (excluida como metadato de API).
+El inventario regenerado contiene83 candidatos/287 archivos:23 revisiones vigentes
+y60 revisiones obsoletas por cambios de fuentes/consumidores. **Esas60 requieren
+revalidación; no se hereda el estado verde del inventario guardado anteriormente.**
+Se conservan las decisiones históricas. Las cuatro generaciones nuevas verifican
+recorridos funcionales; no aceptan todos los perfiles ni comprensión humana.
+[Resultados y límites](../modernization/communication-flow-review.md).
+
+## Cortes anteriores
+
 Catálogo nativo versión2; revisión inicial sobre `85f7acd`, actualizado tras
 retirar configuración sin consumidores sobre `38c08eb`. El [inventario detallado](inventory.json)
 contiene 83 entradas candidatas de 271 archivos Python. **No son 83 prompts distintos

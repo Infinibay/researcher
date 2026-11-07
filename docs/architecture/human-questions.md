@@ -6,6 +6,21 @@ temporales. La revisión visual y de comprensión humana sigue pendiente.
 
 ## Una pregunta retira la autoridad antes de esperar
 
+El catálogo nativo3 exige llamar a `researcher_ask_user` cuando falta información
+que cambia materialmente el resultado o la próxima acción. Una pregunta escrita
+sólo en el mensaje final no crea una solicitud respondible. Se agrupan las dudas
+después del trabajo independiente útil; un ejemplo condicional no confirma una
+premisa ausente. Si el contexto ya responde la duda, no se vuelve a preguntar.
+La herramienta no disponible o un recibo incierto se explican como tales, sin
+inventar una espera. El host no intenta deducir una pregunta mediante signos de
+interrogación ni agrega otra llamada LLM de clasificación.
+
+El catálogo2 conserva su identidad histórica al leer snapshots antiguos; no se
+le atribuyen retrospectivamente las instrucciones de la versión3. Las pruebas de
+política no garantizan obediencia para cualquier generación. La observación real,
+las limitaciones y el recorrido con respuesta guionada quedan en la
+[revisión de comunicación](../modernization/communication-flow-review.md).
+
 `researcher_ask_user` recibe una clave de operación y de una a tres preguntas.
 Cada pregunta conserva id, texto, motivo, ejemplo opcional y cero o de dos a cuatro
 opciones. La respuesta libre siempre es posible. Proyecto, tarea y actor proceden

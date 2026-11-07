@@ -28,7 +28,44 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: correcciones y auditoría registradas; seguridad integral pendiente
+## Etapa actual: preguntas y continuidad comprobadas; calidad integral pendiente
+
+El catálogo3 exige registrar preguntas materiales mediante la herramienta. Las
+admisiones directas sin hilo reciben pedidos anteriores de la misma tarea con
+texto/hash y procedencia histórica sin autorización vigente. Tareas y Conversación
+ya usaban hilo: conservan el alcance elegido y el reinicio explícito sin historial.
+
+Pasan46 pruebas de fuente,46 del wheel y5 del verificador;605 archivos coinciden,
+324 productivos.33 definiciones documentadas. En4 turnos reales con Ken: pregunta
+persistida/pausa confirmada, respuesta guardada sin autoejecución, continuación450
+segundos; corrección activa invalida el primer intento y el siguiente compara12/92
+vigentes con35/535 originales. Dos servicios y todos sus peers cerrados.
+[Informe y límites](communication-flow-review.md),
+[recibos](communication-flow-live.json), [paquete](communication-packaging.json).
+
+**Lista vigente al cambiar de tarea:**
+- Terminado: continuidad de admisiones sin hilo y preguntas respondibles,
+  **19 min 50 s** (07:41:07–08:00:57 UTC), hasta el corte de validación/registro.
+  Los dos escenarios reales suman89,576s; no equivalen a la duración del bloque.
+- Terminado previamente: correcciones/auditoría de dependencias, **26min14s**.
+- Siguiente principal: recuperación ante interrupción/reinicio con una ejecución
+  activa. Todavía no comenzó; publicar la lista y registrar inicio al comenzar.
+- Pendiente de comunicación/prompts: observación humana, otros perfiles/recorridos,
+  evaluación científica/representativa y60 revisiones estáticas desactualizadas.
+  El inventario actual contiene83 candidatos,23 revisiones vigentes; no está verde.
+- Pendiente: Ken/ONNX, Chroma/licencias, datos históricos reales del propietario,
+  demás recuperación y aceptación integral de12 páginas.
+- Después de todas las capacidades principales: detalles acumulados, validación
+  final y revisión independiente. DD084 conserva10 avisos de estilo.
+
+Se conservan el rechazo inicial de preparación sin inferencia y el fallo del
+verificador que buscaba símbolos del ensayo anterior. Se revalidaron sus recibos
+sin repetir respuestas; la corrección activa era el escenario aún pendiente.
+No hubo frontend nuevo, otra suite global ni revisión humana. Siguen43 escenarios
+amplios abiertos y0/12 páginas completamente aceptadas; sin porcentaje global
+sustentado. La política de lista/tiempo en cada transición sigue tras compactar.
+
+## Etapa anterior: correcciones y auditoría registradas; seguridad integral pendiente
 
 Se actualizaron KaTeX, minimatch, selector-parser y filelock, con reproducciones
 válidas del renderizado bajo contaminación previa y de truncamiento del archivo

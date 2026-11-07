@@ -16,7 +16,7 @@ def test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity
     from backend.prompts.native import build_instructions,instruction_identity,COMMON_INSTRUCTIONS
     value=build_instructions(kind,task)
     assert value.count(COMMON_INSTRUCTIONS)==1
-    assert instruction_identity(value)=={'catalog_version':2,'profile':profile,'sha256':hashlib.sha256(value.encode()).hexdigest()}
+    assert instruction_identity(value)=={'catalog_version':3,'profile':profile,'sha256':hashlib.sha256(value.encode()).hexdigest()}
     assert 'Evidence and shared context' in value and 'Correctable explanation' in value
     assert 'Ken' in value and 'operation_key' in value
     assert 'profession' in value and 'chain of thought' in value
@@ -28,6 +28,18 @@ def test_catalog_does_not_relabel_old_instructions_or_admit_host_publication_as_
     assert instruction_identity('old research instructions') is None
     with pytest.raises(ValueError):build_instructions('remote_publication','code')
     with pytest.raises(ValueError):build_instructions('research','unknown')
+
+
+def test_recorded_catalog_two_identity_survives_new_policy_without_relabeling():
+    """A stored older header retains its original version and exact hash after the current catalog advances."""
+    from backend.prompts.native import instruction_identity
+
+    recorded = 'RESEARCHER_POLICY 2 investigation\n\nEarlier recorded policy.'
+    assert instruction_identity(recorded) == {
+        'catalog_version': 2, 'profile': 'investigation',
+        'sha256': hashlib.sha256(recorded.encode()).hexdigest(),
+    }
+    assert instruction_identity(recorded.replace('POLICY 2', 'POLICY 999')) is None
 
 
 def test_warmup_compatibility_entry_refuses_before_http_or_prompt_rendering(monkeypatch):
@@ -50,5 +62,5 @@ async def test_actual_owned_turn_records_the_exact_versioned_policy_sent_to_nati
         thread=json.loads(next(c.s.control.glob('native-state/*/home/fixture-thread.json')).read_text())
         assert thread['developer_instructions']==record['developer_instructions']
         policy=instruction_identity(record['developer_instructions'])
-        assert policy['profile']=='scientific_research' and policy['catalog_version']==2
+        assert policy['profile']=='scientific_research' and policy['catalog_version']==3
         assert policy['sha256']==record['instructions_sha256']

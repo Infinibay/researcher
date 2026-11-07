@@ -92,11 +92,49 @@ def conversation_history(conn, row):
     }
 
 
+def task_request_history(conn, row, conversation):
+    """Retain prior same-task admissions without renewing authority or undoing a conversation reset.
+
+    Admission order defines the cutoff, independently of wall time. A stored
+    request proves admission, not human authorship or delivery to a model.
+    """
+    if conversation["thread_id"] is not None:
+        return {"mode": "selected_conversation", "requests": []}
+    history = conn.execute(
+        """SELECT id,actor_id,context_version,prompt,status,execution_kind
+        FROM runtime_runs WHERE project_id=? AND task_id=?
+        AND rowid<(SELECT rowid FROM runtime_runs WHERE id=?)
+        ORDER BY rowid LIMIT ?""",
+        (row["project_id"], row["task_id"], row["id"], MAX_HISTORY_MESSAGES + 1),
+    ).fetchall()
+    if len(history) > MAX_HISTORY_MESSAGES:
+        raise InputTooLarge("Task request history exceeds the input message limit")
+    if sum(len(item["prompt"].encode()) for item in history) > MAX_INPUT_BYTES:
+        raise InputTooLarge("Task request history exceeds the input byte limit")
+    return {
+        "mode": "same_task_admissions",
+        "cutoff_run_id": row["id"],
+        "requests": [{
+            "kind": "recorded_admission",
+            "run_id": item["id"],
+            "actor_id": item["actor_id"],
+            "execution_kind": item["execution_kind"],
+            "source_context_version": item["context_version"],
+            "same_context_version": item["context_version"] == row["context_version"],
+            "run_status_at_snapshot": item["status"],
+            "current_authorization": False,
+            "content": item["prompt"],
+            "content_sha256": hashlib.sha256(item["prompt"].encode()).hexdigest(),
+        } for item in history],
+    }
+
+
 def freeze_input(conn, row, context):
     """Freeze complete original task/history and typed prerequisite delivery; reject oversize material without hidden omission."""
     # Input validation belongs to the owning store before this renderer; reading
     # its immutable packet here preserves the exact original causal material.
     delivery = conn.execute("SELECT h.packet_json FROM runtime_plan_handoffs h JOIN runtime_plan_deliveries d ON d.id=h.delivery_id WHERE d.run_id=?", (row["id"],)).fetchone()
+    conversation = conversation_history(conn, row)
     payload = {
         "schema_version": 1,
         **context,
@@ -111,7 +149,8 @@ def freeze_input(conn, row, context):
             "id": row["bound_repository_id"],
             "name": row["bound_repository_name"],
         },
-        "conversation": conversation_history(conn, row),
+        "conversation": conversation,
+        "request_history": task_request_history(conn, row, conversation),
         "work_delivery": json.loads(delivery["packet_json"]) if delivery else None,
     }
     from backend.runtime.code_carryover import CodeCarryovers

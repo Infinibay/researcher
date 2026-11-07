@@ -1,0 +1,54 @@
+{
+  "base_commit": "9f40023",
+  "started_at": "2026-11-07T07:41:07Z",
+  "source": {
+    "cases": 46,
+    "passed": 46,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 15.61
+  },
+  "installed": {
+    "cases": 46,
+    "passed": 46,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 16.256
+  },
+  "verifier": {
+    "cases": 5,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 0.082
+  },
+  "red_reproduction": {
+    "cases": 6,
+    "failed": 6,
+    "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/communication-history-red.log"
+  },
+  "real_model_turns": 4,
+  "frontend_changed": false,
+  "new_browser_evaluation": false,
+  "global_suite_repeated": false,
+  "human_review": "pending",
+  "initial_preparation_failure": {
+    "model_turns": 0,
+    "service_started": false,
+    "reason": "Shared host assets allowed one turn; explicit private two-turn scenario resources subsequently prepared without editing original assets."
+  },
+  "docstrings": 33,
+  "lint": {
+    "findings": 10,
+    "exit_code": 1
+  },
+  "prompt_inventory": {
+    "candidates": 83,
+    "source_files": 287,
+    "reviewed": 23,
+    "stale": 60,
+    "check_exit_code": 1
+  },
+  "record_cutoff_at": "2026-11-07T08:00:57Z",
+  "elapsed_seconds_to_record_cutoff": 1190
+}

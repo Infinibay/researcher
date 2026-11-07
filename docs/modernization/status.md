@@ -4,6 +4,19 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Preguntas y continuidad comprobadas:** catálogo3 y pedidos históricos sin
+  autoridad vigente para admisiones sin hilo; conversación nueva conserva su
+  reinicio explícito.46 pruebas de fuente/46 instaladas y5 del verificador pasan,
+  con605 archivos coincidentes y33 definiciones documentadas. Cuatro turnos reales
+  con Ken comprueban pregunta/pausa/respuesta/continuación450segundos y corrección
+  activa12/92 frente a35/535 originales. Servicios/peers cerrados. El fallo inicial
+  del verificador se conserva y se reanalizó sin repetir respuestas.
+  Quedan comprensión humana, otros perfiles y60 revisiones estáticas de prompts;
+  sólo23 están vigentes. No hubo nueva suite global ni aceptación de páginas.
+  Corte19min50s; siguiente principal: recuperación con ejecución activa.
+  [Informe](communication-flow-review.md), [recibos](communication-flow-live.json),
+  [validación](communication-flow-results.json).
+
 - **Dependencias corregidas y mantenimiento preparado:** cuatro actualizaciones;
   producto Python y npm sin avisos conocidos en el corte. Pasan36 pruebas de
   fuente,5 del auditor y33 instaladas;604 archivos coinciden,324 productivos.

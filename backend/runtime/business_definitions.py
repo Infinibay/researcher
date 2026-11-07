@@ -299,7 +299,7 @@ class ResearchTools:
     async def researcher_ask_user(
         self, operation_key: str, questions: list[HumanQuestion]
     ) -> dict:
-        """Ask 1–3 material information questions with distinct ids, clear question text, why_needed, optional example and 0 or 2–4 options. Free-text answers remain allowed. Never request secrets or use this as permission to publish. The host withdraws tool authority and closes this turn before waiting. Reuse operation_key after a lost receipt; do not continue or start another question. An answer records context for a future explicit run, not acceptance or authorization."""
+        """Record required owner input whenever missing information materially changes the requested result or next action. A prose-only question does not create an answerable request: call this tool after useful independent work, unless current context already answers it. Ask 1–3 grouped questions with distinct ids, clear question text, why_needed, optional example and 0 or 2–4 options. Free-text answers remain allowed; a conditional example never confirms an unknown premise. Never request secrets or use this as permission to publish. The host withdraws tool authority and closes this turn before waiting. Reuse operation_key after a lost receipt; do not continue or start another question. An answer records context for a future explicit run, not acceptance or authorization."""
         return await self._client.request(
             "POST",
             "/questions",

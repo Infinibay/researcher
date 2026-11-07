@@ -1,0 +1,41 @@
+{
+  "files": [
+    {
+      "path": "backend/runtime/run_inputs.py",
+      "definitions": 4,
+      "missing": []
+    },
+    {
+      "path": "backend/prompts/native.py",
+      "definitions": 4,
+      "missing": []
+    },
+    {
+      "path": "backend/tests/runtime/test_task_request_history.py",
+      "definitions": 7,
+      "missing": []
+    },
+    {
+      "path": "backend/tests/runtime/test_prompt_catalog.py",
+      "definitions": 6,
+      "missing": []
+    },
+    {
+      "path": "evals/communication_flow/run.py",
+      "definitions": 6,
+      "missing": []
+    },
+    {
+      "path": "evals/communication_flow/test_observations.py",
+      "definitions": 4,
+      "missing": []
+    },
+    {
+      "path": "backend/runtime/business_definitions.py",
+      "scope": "module and modified researcher_ask_user method",
+      "definitions": 2,
+      "missing": []
+    }
+  ],
+  "definitions": 33
+}

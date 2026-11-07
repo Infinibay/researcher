@@ -7930,3 +7930,66 @@ context-alignment findings, state acceptance before editing and retain human
 review as unknown. Publish the updated done/current/pending list and measured
 start/end times at every main transition, including after compaction. Do not
 invent a percentage from test counts, commits or narrow completed subdeliverables.
+
+
+## 2026-11-07 07:41:07UTC — communication contract brief
+
+Observed gap: separate task admissions omit previous requests; same-thread
+conversation already has bounded history and an explicit fresh-start option.
+Material questions have a durable pause/answer mechanism, but both evaluated
+policies used prose only despite the offered tool. Change only the missing
+contracts: scoped historical task requests for direct admissions without a conversation; preserve
+explicit conversation history/reset semantics; make the material-question tool
+requirement unambiguous in the common/versioned native policy and tool description.
+
+Verify complete bytes, causal admission cutoff, project/task isolation, stale
+history labeling and pre-inference rejection of excessive history. Freeze actual
+policy/catalog and preserve old version identities. Exercise real question,
+physical pause, answer and explicit resumed admission using subscription/Ken.
+Do not convert remembered/queued work into current authority or call an old
+reserved evaluation a new held-out test. No new host LLM loop or heuristic parsing
+of question marks to infer a user's intent. Existing broad scope remains open.
+
+
+## 2026-11-07 — communication continuity delivered, broader evaluation open
+
+Completed bounded block07:41:07–08:00:57UTC,19min50s to validation/record cutoff.
+The prior brief was refined from actual frontend evidence: both Tareas and
+Conversation already use selected threads; the observed gap was the direct
+no-thread task-admission API. History is now complete/bounded/scoped to that task
+and causal admission cutoff, with historical provenance and no current authority.
+Explicit new conversations do not recover old requests behind the owner's choice.
+
+Catalog3 requires a durable material-question tool call, independent useful work
+first and no redundant/secret/approval questions. Catalog2 identities remain
+historical. No host LLM loop, question-mark heuristic or additional model stage.
+Six reproduced failures become46 source/46 installed passes;5 verifier controls.
+605 matching source files,324 productive;33 relevant definitions documented.
+
+Four real subscription/Ken turns: actual question, all peers closed before answer,
+answer changes context without auto-admission; explicit continuation explains450
+seconds with supplied minutes. Held Ken read permits active correction; old run
+superseded, next response explains12/92 and compares prior35/535 from exact history.
+Two services terminal, no live grants;200973 observed tokens,2 settled/2 unknown
+partial-usage receipts. Both scenarios sum89.576s, not total engineering duration.
+
+Initial resource preparation allowed one turn and failed before service/inference.
+A private two-turn scenario resource file preserved original assets. Question
+scenario later failed its final source verifier, which still expected old fixture
+symbols; actual source and downstream input/closure were rechecked against the
+original receipts with an old-fixture negative control, without model replay.
+The remaining active-correction scenario used a new installation and its already
+registered case/policy. Original failures and hashes retained.
+
+Fresh prompt inventory:83candidates/287files; six current policy/tool entries and
+one FastAPI metadata entry explicitly reviewed,23 reviews current/60 stale. The
+check intentionally fails for these unresolved reviews. No automatic approval of
+changed consumers or human efficacy; original static green receipt was historical.
+DD084 keeps10 style findings after macro tasks. No frontend changes, new browser
+acceptance or global-suite rerun. Human review remains unanswered.
+
+Next main capability: interruption/restart recovery with an active execution,
+reusing prior recovery evidence and checking exact missing scenarios before edits.
+Human/other-profile/scientific evaluation, prompt revalidation, historical owner
+data, Ken/Chroma/licenses,12-page acceptance and final independent whole-plan
+review remain in scope. Publish the updated list and measured start at transition.
