@@ -650,3 +650,22 @@ todas las capacidades principales. El fallo histórico del fixture de inversión
 del esquema sigue registrado en la suite global. Los límites agregados de recursos,
 Ken/ONNX, licencias y datos históricos pendientes pertenecen a trabajo funcional,
 no a esta lista de estilo. No repetir ensayos reales sólo por ordenar imports.
+
+
+## DD090 — Estilo del auditor de licencias
+
+Cuatro avisos Ruff: dos I001, un FURB167 y un UP017. Posponer hasta terminar
+las capacidades principales. [Ubicaciones](license-lint.json). La advertencia
+Starlette/httpx del verificador ASGI es preexistente; no actualizar dependencias
+ni repetir recorridos reales por ella.
+
+## DD091 — Dos textos de licencia ausentes de los paquetes npm
+
+Vite genera93 entradas, pero `rehype-katex7.0.1` y `remark-math6.0.0` traen sólo
+la declaración MIT, sin archivo de licencia. Incorporar los textos oficiales
+correspondientes y verificar su entrega antes de distribuir. Es un pendiente
+concreto de avisos, no una declaración de que los paquetes carecen de licencia.
+La metadata npm señala el repositorio `remarkjs/remark-math` y los commits
+`88a9497e1ede93b958237c85edbf5651faeca7af` y
+`d5d0660b150810a535bbb07eac6cc96a4510aa24`, respectivamente. Revalidar esos vínculos
+y el texto al resolverlo. No crear ahora otro sistema general de licencias.

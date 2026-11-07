@@ -28,7 +28,44 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: lector Chroma aislado y migración comprobada
+## Etapa actual: inventario de licencias comprobado
+
+Bloque **10:16:47–10:30:25 UTC**, **13 min 38 s**, hasta el corte de validación.
+Se resuelven las139 ausencias anteriores:164 versiones Python y415 entradas npm
+con declaraciones o revisiones de artefactos exactos;0 ausencias/errores/revisiones
+pendientes del inventario. Pasan12 pruebas. Build web, wheel/sdist y metadata
+instalada verificados;608 archivos Python/SQL del backend sin cambios.16
+funciones y2 módulos documentados; hook de Vite con JSDoc. Cero modelos.
+
+El build genera93 entradas de avisos,91 con texto y2 pendientes en DD091. Las
+rutas de avisos responden mediante ASGI TestClient; no se afirma navegación real.
+Licencia y copyright originales intactos. No es una aceptación de compatibilidad
+integral ni de toda la distribución. [Informe](license-review.md),
+[resultados](license-results.json), [inventario](license-inventory.json).
+
+**Lista actualizada al cambiar de tarea:**
+- Implementado y comprobado en recorridos concretos: backend Codex/Ken,
+  configuración de modelos, flujos principales, comunicación, persistencia y
+  varias recuperaciones. Su aceptación integral sigue pendiente.
+- Interfaz:12 pilotos y48 conceptos;0/12 páginas completamente aceptadas.
+- Terminado en este bloque: inventario y empaquetado de avisos, **13 min 38 s**,
+  con el alcance y las dos omisiones de texto indicados arriba.
+- Terminado previamente: aislamiento del lector Chroma, **19 min 53 s**;
+  presupuesto visible y trabajo parcial, **18 min 56 s**.
+- Siguiente principal: conseguir una entrega de planificación dentro del
+  presupuesto anterior. No comenzó; registrar inicio al comenzar.
+- Pendiente principal: seguridad Ken/ONNX y límites agregados; evaluación humana
+  y otros perfiles de comunicación; datos históricos del propietario y demás
+  recuperación; aceptación integral de las12 páginas.
+- Después de todas las tareas gruesas: detalles acumulados, incluidos DD090
+  (4 avisos Ruff) y DD091 (2 textos de licencia), validación global final,
+  revisión independiente y preparación de la distribución concreta.
+
+Siguen43 escenarios amplios abiertos, sin nueva suite global verde ni porcentaje
+sustentado. La lista y los tiempos medidos se publican en cada cambio de tarea
+principal y se conservan aquí después de compactar. No hubo push ni despliegue.
+
+## Etapa anterior: lector Chroma aislado y migración comprobada
 
 Bloque **09:51:10–10:11:03 UTC**, **19 min 53 s**, hasta el corte de validación.
 El exportador separado requiere bubblewrap y abre Chroma sólo sobre una copia,

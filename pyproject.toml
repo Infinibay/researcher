@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=74.1,<85"]
+requires = ["setuptools>=77.0.3,<85"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -7,6 +7,8 @@ name = "researcher"
 version = "0.1.0"
 description = "A local research and development workspace with recoverable agent execution."
 readme = "README.md"
+license = "AGPL-3.0-or-later"
+license-files = ["LICENSE.md", "THIRD_PARTY_NOTICES.md"]
 # Retain the existing Python range until the native/kernel version matrix is verified.
 requires-python = ">=3.12,<3.14"
 dependencies = [

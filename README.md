@@ -1,6 +1,12 @@
-# Infinibay
+# Researcher (historically Infinibay)
 
 A local workspace for research, investigation and software development with recoverable agent execution.
+
+The Python distribution and commands use `researcher`; some historical names and
+configuration aliases still use Infinibay. The existing
+[AGPL-3.0-or-later license and copyright notice](LICENSE.md) remain unchanged.
+See [dependency notices and distribution scope](THIRD_PARTY_NOTICES.md) for
+generated frontend notices, license evidence and the remaining release checks.
 
 Agents work through a configured native runtime with scoped tools, retained evidence and separate review and owner acceptance. Planning, execution, correction and publication have distinct recorded decisions.
 

@@ -1,0 +1,117 @@
+{
+  "base_commit": "3cbffff",
+  "documented_python_definitions": 16,
+  "documented_python_modules": 2,
+  "elapsed_seconds": 818,
+  "frontend": {
+    "build_exit": 0,
+    "build_seconds": 5.665353149990551,
+    "entries_with_license_text": 91,
+    "http": {
+      "database_created": false,
+      "method": "In-process ASGI TestClient, no lifespan/model/storage startup",
+      "responses": [
+        {
+          "bytes": 103411,
+          "path": "/assets/THIRD_PARTY_LICENSES.md",
+          "sha256": "20887d5585cebe08a7c922194ce623a380579e138a51e79fa87d03d1570ce163",
+          "status": 200
+        },
+        {
+          "bytes": 35332,
+          "path": "/assets/PROJECT_LICENSE.txt",
+          "sha256": "c50f239b57bc97261453eb0f8a0298a04cf58573a466259590a54b997e86924a",
+          "status": 200
+        }
+      ]
+    },
+    "missing_license_text": [
+      "rehype-katex@7.0.1",
+      "remark-math@6.0.0"
+    ],
+    "notice_entries": 93
+  },
+  "frontend_license_hook_has_jsdoc": true,
+  "full_test_suite_repeated": false,
+  "github_workflow_executed": false,
+  "input_sha256": {
+    "LICENSE.md": "c50f239b57bc97261453eb0f8a0298a04cf58573a466259590a54b997e86924a",
+    "THIRD_PARTY_NOTICES.md": "021bee76c266f1d7935bd0d46bebf1b869c871c20d885ac7790f10195ae2e8bc",
+    "evals/security/test_dependency_audit.py": "c1104d61d8bf89e3e98b3ea095078593183552e857de5ebcac6dcbd5bcf55c5b",
+    "frontend/package-lock.json": "e8a8f164e56c388b9cd48a76778bbd241f2999d34477d3f95c984419cba592d8",
+    "frontend/vite.config.ts": "ff5cd17f3bdb8c20093b16f62f37a4427b45ee8024d101767be9cd66fbbfd89f",
+    "pyproject.toml": "4a1fe0157ca6beb4de495515acd7c7494ace743b6735fd8f2612586cb842c050",
+    "scripts/audit_dependencies.py": "03dc24ccbe6a980dc6c4840773af771bfd0ac1905be17fa3e866b2c93d172d50"
+  },
+  "inventory": {
+    "command_exit": 0,
+    "missing": 0,
+    "needs_review": 0,
+    "npm_entries": 415,
+    "npm_statuses": {
+      "declared": 278,
+      "declared_artifact": 137
+    },
+    "python_statuses": {
+      "declared": 162,
+      "reviewed_artifact": 2
+    },
+    "python_versions": 164,
+    "unavailable": 0
+  },
+  "model_turns": 0,
+  "packaging": {
+    "backend_python_sql_unchanged_from_previous_wheel": 608,
+    "installed": {
+      "files": [
+        {
+          "name": "LICENSE.md",
+          "sha256": "c50f239b57bc97261453eb0f8a0298a04cf58573a466259590a54b997e86924a"
+        },
+        {
+          "name": "THIRD_PARTY_NOTICES.md",
+          "sha256": "021bee76c266f1d7935bd0d46bebf1b869c871c20d885ac7790f10195ae2e8bc"
+        }
+      ],
+      "license": "AGPL-3.0-or-later"
+    },
+    "production_runtime_environment_reinstalled": false,
+    "wheel": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/license-dist/researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+    "wheel_and_sdist_notice_bytes_match_source": true,
+    "wheel_sha256": "20f68fb651d861f0c0330a8b3899a82a300f3ca0a1be26e07fffffa56c449e99"
+  },
+  "retained_failures": [
+    {
+      "failed": 4,
+      "passed": 5,
+      "receipt": "license-audit-before.log",
+      "scope": "Initial new archive behavior"
+    },
+    {
+      "receipt": "license-inventory-verified/licenses.json",
+      "scope": "First live inventory; nonstandard archive roots for @types",
+      "unavailable": 9
+    },
+    {
+      "failed": 1,
+      "passed": 11,
+      "receipt": "license-types-before.log",
+      "scope": "Reproduction for nonstandard archive root"
+    },
+    {
+      "error": "StopIteration",
+      "resolution": "Isolated Python -I resolves the separately installed wheel; verification passes",
+      "scope": "Initial installed verifier accidentally resolved source egg-info from cwd"
+    }
+  ],
+  "ruff_findings": 4,
+  "scope": "License evidence and package notices; not legal compatibility or whole-plan acceptance",
+  "start_utc": "2026-11-07 10:16:47",
+  "tests": {
+    "failed": 0,
+    "passed": 12,
+    "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/license-audit-tests-final.xml",
+    "skipped": 0
+  },
+  "validation_cut_utc": "2026-11-07 10:30:25"
+}

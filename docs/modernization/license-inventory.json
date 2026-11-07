@@ -1,0 +1,4439 @@
+{
+  "frontend": [
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@adobe/css-tools",
+      "status": "declared",
+      "version": "4.5.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/@axe-core/playwright",
+      "status": "declared",
+      "version": "4.14.0"
+    },
+    {
+      "artifact_sha256": "a4d921fdec8835fb831905c5941e5c0472dbcc5e1b6dba46045e7e7213a90ca0",
+      "declaration": "MIT",
+      "path": "node_modules/@babel/code-frame",
+      "source": "https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.29.0.tgz",
+      "status": "declared_artifact",
+      "version": "7.29.0"
+    },
+    {
+      "artifact_sha256": "a68c11e632e68c16869c8d6c80cb63111fda9f04e8ad8991794b9680b004ded5",
+      "declaration": "MIT",
+      "path": "node_modules/@babel/helper-validator-identifier",
+      "source": "https://registry.npmjs.org/@babel/helper-validator-identifier/-/helper-validator-identifier-7.28.5.tgz",
+      "status": "declared_artifact",
+      "version": "7.28.5"
+    },
+    {
+      "artifact_sha256": "b6e24cd97ad524c9081afd19382ac50d0bd589ce7a56ac22c59faf728faa7db0",
+      "declaration": "MIT",
+      "path": "node_modules/@babel/runtime",
+      "source": "https://registry.npmjs.org/@babel/runtime/-/runtime-7.28.6.tgz",
+      "status": "declared_artifact",
+      "version": "7.28.6"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@cacheable/memory",
+      "status": "declared",
+      "version": "2.2.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@cacheable/utils",
+      "status": "declared",
+      "version": "2.5.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@corvu/utils",
+      "status": "declared",
+      "version": "0.4.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@eslint-community/eslint-utils",
+      "status": "declared",
+      "version": "4.10.1"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@eslint-community/eslint-utils/node_modules/eslint-visitor-keys",
+      "status": "declared",
+      "version": "3.4.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@eslint-community/regexpp",
+      "status": "declared",
+      "version": "4.12.2"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@eslint/config-array",
+      "status": "declared",
+      "version": "0.23.5"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@eslint/config-helpers",
+      "status": "declared",
+      "version": "0.7.0"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@eslint/core",
+      "status": "declared",
+      "version": "1.2.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@eslint/js",
+      "status": "declared",
+      "version": "10.0.1"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@eslint/object-schema",
+      "status": "declared",
+      "version": "3.0.5"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@eslint/plugin-kit",
+      "status": "declared",
+      "version": "0.7.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@exodus/bytes",
+      "status": "declared",
+      "version": "1.16.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@floating-ui/core",
+      "status": "declared",
+      "version": "1.8.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@floating-ui/dom",
+      "status": "declared",
+      "version": "1.8.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@floating-ui/utils",
+      "status": "declared",
+      "version": "0.2.12"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@humanfs/core",
+      "status": "declared",
+      "version": "0.19.2"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@humanfs/node",
+      "status": "declared",
+      "version": "0.16.8"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@humanfs/types",
+      "status": "declared",
+      "version": "0.15.0"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@humanwhocodes/module-importer",
+      "status": "declared",
+      "version": "1.0.1"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@humanwhocodes/retry",
+      "status": "declared",
+      "version": "0.4.3"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@internationalized/number",
+      "status": "declared",
+      "version": "3.6.9"
+    },
+    {
+      "declaration": "BlueOak-1.0.0",
+      "path": "node_modules/@isaacs/nonrecursive-glob-match",
+      "status": "declared",
+      "version": "1.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@jridgewell/gen-mapping",
+      "status": "declared",
+      "version": "0.3.13"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@jridgewell/remapping",
+      "status": "declared",
+      "version": "2.3.5"
+    },
+    {
+      "artifact_sha256": "db52f9f62558baab13353dd39e3200750fc33e6a129a575b46226f493776e230",
+      "declaration": "MIT",
+      "path": "node_modules/@jridgewell/resolve-uri",
+      "source": "https://registry.npmjs.org/@jridgewell/resolve-uri/-/resolve-uri-3.1.2.tgz",
+      "status": "declared_artifact",
+      "version": "3.1.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@jridgewell/sourcemap-codec",
+      "status": "declared",
+      "version": "1.6.0"
+    },
+    {
+      "artifact_sha256": "c64c71a119630d5abe8246889edf334b2ca9ddad094e20d623332956b1453ccf",
+      "declaration": "MIT",
+      "path": "node_modules/@jridgewell/trace-mapping",
+      "source": "https://registry.npmjs.org/@jridgewell/trace-mapping/-/trace-mapping-0.3.31.tgz",
+      "status": "declared_artifact",
+      "version": "0.3.31"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@keyv/bigmap",
+      "status": "declared",
+      "version": "1.3.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@keyv/serialize",
+      "status": "declared",
+      "version": "1.1.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@kobalte/core",
+      "status": "declared",
+      "version": "0.13.14"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@kobalte/utils",
+      "status": "declared",
+      "version": "0.9.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@oxc-project/types",
+      "status": "declared",
+      "version": "0.156.0"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@playwright/test",
+      "status": "declared",
+      "version": "1.64.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-android-arm-eabi",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-android-arm64",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-darwin-arm64",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-darwin-x64",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-freebsd-x64",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-linux-arm-gnueabihf",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-linux-arm64-gnu",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-linux-arm64-musl",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-linux-ppc64-gnu",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-linux-s390x-gnu",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-linux-x64-gnu",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-linux-x64-musl",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-openharmony-arm64",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-win32-arm64-msvc",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-win32-x64-msvc",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/pluginutils",
+      "status": "declared",
+      "version": "1.0.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/event-listener",
+      "status": "declared",
+      "version": "2.4.6"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/keyed",
+      "status": "declared",
+      "version": "1.5.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/map",
+      "status": "declared",
+      "version": "0.4.13"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/media",
+      "status": "declared",
+      "version": "2.3.6"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/props",
+      "status": "declared",
+      "version": "3.2.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/refs",
+      "status": "declared",
+      "version": "1.1.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/resize-observer",
+      "status": "declared",
+      "version": "2.2.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/rootless",
+      "status": "declared",
+      "version": "1.5.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/static-store",
+      "status": "declared",
+      "version": "0.1.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/storage",
+      "status": "declared",
+      "version": "1.3.11"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/transition-group",
+      "status": "declared",
+      "version": "1.1.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/trigger",
+      "status": "declared",
+      "version": "1.2.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/utils",
+      "status": "declared",
+      "version": "6.4.1"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@swc/helpers",
+      "status": "declared",
+      "version": "0.5.24"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/node",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-android-arm64",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-darwin-arm64",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-darwin-x64",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-freebsd-x64",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-linux-arm-gnueabihf",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-linux-arm64-gnu",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-linux-arm64-musl",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-linux-x64-gnu",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-linux-x64-musl",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-wasm32-wasi",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@emnapi/core",
+      "status": "declared",
+      "version": "1.11.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@emnapi/runtime",
+      "status": "declared",
+      "version": "1.11.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@emnapi/wasi-threads",
+      "status": "declared",
+      "version": "1.2.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@napi-rs/wasm-runtime",
+      "status": "declared",
+      "version": "1.2.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@tybys/wasm-util",
+      "status": "declared",
+      "version": "0.10.3"
+    },
+    {
+      "declaration": "0BSD",
+      "path": "node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/tslib",
+      "status": "declared",
+      "version": "2.8.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-win32-arm64-msvc",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-win32-x64-msvc",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/typography",
+      "status": "declared",
+      "version": "0.5.20"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/vite",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tanstack/match-sorter-utils",
+      "status": "declared",
+      "version": "9.2.6"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tanstack/query-core",
+      "status": "declared",
+      "version": "5.107.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tanstack/query-devtools",
+      "status": "declared",
+      "version": "5.107.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tanstack/react-query",
+      "status": "declared",
+      "version": "5.107.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tanstack/react-query-devtools",
+      "status": "declared",
+      "version": "5.107.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tanstack/solid-virtual",
+      "status": "declared",
+      "version": "3.13.53"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tanstack/virtual-core",
+      "status": "declared",
+      "version": "3.19.11"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@testing-library/dom",
+      "status": "declared",
+      "version": "10.4.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@testing-library/jest-dom",
+      "status": "declared",
+      "version": "7.0.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@testing-library/jest-dom/node_modules/dom-accessibility-api",
+      "status": "declared",
+      "version": "0.6.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@testing-library/react",
+      "status": "declared",
+      "version": "16.3.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@testing-library/user-event",
+      "status": "declared",
+      "version": "14.6.8"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@types/aria-query",
+      "status": "declared",
+      "version": "5.0.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@types/chai",
+      "status": "declared",
+      "version": "5.2.3"
+    },
+    {
+      "artifact_sha256": "83fbb384612c56bf82794f0e73c36892a988a90a1fab869ec4c535fc5812cdb7",
+      "declaration": "MIT",
+      "path": "node_modules/@types/debug",
+      "source": "https://registry.npmjs.org/@types/debug/-/debug-4.1.12.tgz",
+      "status": "declared_artifact",
+      "version": "4.1.12"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@types/deep-eql",
+      "status": "declared",
+      "version": "4.0.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@types/esrecurse",
+      "status": "declared",
+      "version": "4.3.1"
+    },
+    {
+      "artifact_sha256": "390453eb7132da6a92238589a4f49b5d4f5dc0cee76b7c44a915d824a440d54a",
+      "declaration": "MIT",
+      "path": "node_modules/@types/estree",
+      "source": "https://registry.npmjs.org/@types/estree/-/estree-1.0.8.tgz",
+      "status": "declared_artifact",
+      "version": "1.0.8"
+    },
+    {
+      "artifact_sha256": "51e4a90e34bab73ec7c2ab32d2a0f166e3a1675559d5e7200575317b7db8883f",
+      "declaration": "MIT",
+      "path": "node_modules/@types/estree-jsx",
+      "source": "https://registry.npmjs.org/@types/estree-jsx/-/estree-jsx-1.0.5.tgz",
+      "status": "declared_artifact",
+      "version": "1.0.5"
+    },
+    {
+      "artifact_sha256": "50c602401a9304c6ae50fb1febcec9d67e07c4a0efb7d89c51119532ec6f9d8b",
+      "declaration": "MIT",
+      "path": "node_modules/@types/hast",
+      "source": "https://registry.npmjs.org/@types/hast/-/hast-3.0.4.tgz",
+      "status": "declared_artifact",
+      "version": "3.0.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@types/json-schema",
+      "status": "declared",
+      "version": "7.0.15"
+    },
+    {
+      "artifact_sha256": "f9f54494b75d6c89ed93baf96d0d73d659e52a4318d67cbc6b99671772c4be96",
+      "declaration": "MIT",
+      "path": "node_modules/@types/katex",
+      "source": "https://registry.npmjs.org/@types/katex/-/katex-0.16.8.tgz",
+      "status": "declared_artifact",
+      "version": "0.16.8"
+    },
+    {
+      "artifact_sha256": "ca9d3f571a96c57b9412fa9ccc009a356990e5334ce2c56587218a2fa2d57ef3",
+      "declaration": "MIT",
+      "path": "node_modules/@types/mdast",
+      "source": "https://registry.npmjs.org/@types/mdast/-/mdast-4.0.4.tgz",
+      "status": "declared_artifact",
+      "version": "4.0.4"
+    },
+    {
+      "artifact_sha256": "a07f7b4d84e44bd8c55e44ee084f3529d5b3bbb2f212ef1749aced718bcb6c09",
+      "declaration": "MIT",
+      "path": "node_modules/@types/ms",
+      "source": "https://registry.npmjs.org/@types/ms/-/ms-2.1.0.tgz",
+      "status": "declared_artifact",
+      "version": "2.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@types/node",
+      "status": "declared",
+      "version": "24.19.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@types/react",
+      "status": "declared",
+      "version": "19.3.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@types/react-dom",
+      "status": "declared",
+      "version": "19.3.0"
+    },
+    {
+      "artifact_sha256": "b50fd32f739207d1e8c96ef0b0c9dd003ef9cb0403c5b4eb71796b87332a2843",
+      "declaration": "MIT",
+      "path": "node_modules/@types/unist",
+      "source": "https://registry.npmjs.org/@types/unist/-/unist-3.0.3.tgz",
+      "status": "declared_artifact",
+      "version": "3.0.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@typescript-eslint/eslint-plugin",
+      "status": "declared",
+      "version": "8.72.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@typescript-eslint/eslint-plugin/node_modules/ignore",
+      "status": "declared",
+      "version": "7.0.14"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@typescript-eslint/parser",
+      "status": "declared",
+      "version": "8.72.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@typescript-eslint/project-service",
+      "status": "declared",
+      "version": "8.72.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@typescript-eslint/scope-manager",
+      "status": "declared",
+      "version": "8.72.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@typescript-eslint/tsconfig-utils",
+      "status": "declared",
+      "version": "8.72.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@typescript-eslint/type-utils",
+      "status": "declared",
+      "version": "8.72.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@typescript-eslint/types",
+      "status": "declared",
+      "version": "8.72.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@typescript-eslint/typescript-estree",
+      "status": "declared",
+      "version": "8.72.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@typescript-eslint/utils",
+      "status": "declared",
+      "version": "8.72.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@typescript-eslint/visitor-keys",
+      "status": "declared",
+      "version": "8.72.1"
+    },
+    {
+      "artifact_sha256": "62da173719a4a57b41f5e4807462d55f142d2224c27f586174b57de0d7243146",
+      "declaration": "ISC",
+      "path": "node_modules/@ungap/structured-clone",
+      "source": "https://registry.npmjs.org/@ungap/structured-clone/-/structured-clone-1.3.0.tgz",
+      "status": "declared_artifact",
+      "version": "1.3.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@vitejs/plugin-react",
+      "status": "declared",
+      "version": "6.2.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@vitest/mocker",
+      "status": "declared",
+      "version": "5.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@vitest/spy",
+      "status": "declared",
+      "version": "5.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/acorn",
+      "status": "declared",
+      "version": "8.19.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/acorn-jsx",
+      "status": "declared",
+      "version": "5.3.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/ajv",
+      "status": "declared",
+      "version": "6.15.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/ansi-regex",
+      "status": "declared",
+      "version": "5.0.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/ansi-styles",
+      "status": "declared",
+      "version": "5.2.0"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/aria-query",
+      "status": "declared",
+      "version": "5.3.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/assertion-error",
+      "status": "declared",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/axe-core",
+      "status": "declared",
+      "version": "4.14.0"
+    },
+    {
+      "artifact_sha256": "11719f7e1f7a31432177dd0cd987e7c967a826426d281c39c0025b474056c88b",
+      "declaration": "MIT",
+      "path": "node_modules/bail",
+      "source": "https://registry.npmjs.org/bail/-/bail-2.0.2.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/balanced-match",
+      "status": "declared",
+      "version": "4.0.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/bcp-47",
+      "status": "declared",
+      "version": "2.1.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/bcp-47-match",
+      "status": "declared",
+      "version": "2.0.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/brace-expansion",
+      "status": "declared",
+      "version": "5.0.12"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/cacheable",
+      "status": "declared",
+      "version": "2.5.0"
+    },
+    {
+      "artifact_sha256": "bdda8b4b3c7c3049bb118a9a01e3638033473b90c09f58eee1e9f2dda27984ca",
+      "declaration": "MIT",
+      "path": "node_modules/ccount",
+      "source": "https://registry.npmjs.org/ccount/-/ccount-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/chai",
+      "status": "declared",
+      "version": "6.3.0"
+    },
+    {
+      "artifact_sha256": "0805c120e1147a250a87ed8752265b3bce7a76c44e9728dec1d11380e21fbc3d",
+      "declaration": "MIT",
+      "path": "node_modules/character-entities",
+      "source": "https://registry.npmjs.org/character-entities/-/character-entities-2.0.2.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.2"
+    },
+    {
+      "artifact_sha256": "a1cdca963945f3fbb4ac4932d4b8e54ceb66aba5a9bfc7254fb87a1f17cd04e6",
+      "declaration": "MIT",
+      "path": "node_modules/character-entities-html4",
+      "source": "https://registry.npmjs.org/character-entities-html4/-/character-entities-html4-2.1.0.tgz",
+      "status": "declared_artifact",
+      "version": "2.1.0"
+    },
+    {
+      "artifact_sha256": "f36404294f0713ab8e3a08f133195d3085d0367816fc6c74136babcf90fdc988",
+      "declaration": "MIT",
+      "path": "node_modules/character-entities-legacy",
+      "source": "https://registry.npmjs.org/character-entities-legacy/-/character-entities-legacy-3.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "3.0.0"
+    },
+    {
+      "artifact_sha256": "1c7cf768d20811f2e6e72b441986814c0264c668a19c73dd38ca10d66f3ecf02",
+      "declaration": "MIT",
+      "path": "node_modules/character-reference-invalid",
+      "source": "https://registry.npmjs.org/character-reference-invalid/-/character-reference-invalid-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "6320104b491ca645120e8f99589ce663ff1fb337ba80066719a011bd95320303",
+      "declaration": "MIT",
+      "path": "node_modules/clsx",
+      "source": "https://registry.npmjs.org/clsx/-/clsx-2.1.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.1.1"
+    },
+    {
+      "artifact_sha256": "88123eefbb07a6048efa112653c80f4a0ac2e993bd1388c00273e14de29ec886",
+      "declaration": "MIT",
+      "path": "node_modules/comma-separated-tokens",
+      "source": "https://registry.npmjs.org/comma-separated-tokens/-/comma-separated-tokens-2.0.3.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/commander",
+      "status": "declared",
+      "version": "15.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/cookie",
+      "status": "declared",
+      "version": "1.1.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/copy-anything",
+      "status": "declared",
+      "version": "4.1.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/cross-spawn",
+      "status": "declared",
+      "version": "7.0.6"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/css.escape",
+      "status": "declared",
+      "version": "1.5.1"
+    },
+    {
+      "artifact_sha256": "31a59523b764560845e79191632d9967d6f83514cc4c97394b0810287c101743",
+      "declaration": "MIT",
+      "path": "node_modules/cssesc",
+      "source": "https://registry.npmjs.org/cssesc/-/cssesc-3.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "3.0.0"
+    },
+    {
+      "artifact_sha256": "f3501f8ee1c73f7568fecb22c11231162c0467e59262461da5579519307427a3",
+      "declaration": "MIT",
+      "path": "node_modules/csstype",
+      "source": "https://registry.npmjs.org/csstype/-/csstype-3.2.3.tgz",
+      "status": "declared_artifact",
+      "version": "3.2.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/data-urls",
+      "status": "declared",
+      "version": "8.0.0"
+    },
+    {
+      "artifact_sha256": "89c1ac9c946ee8905a875837114528e97eeae35e03be3190584b2216af43e4a7",
+      "declaration": "MIT",
+      "path": "node_modules/debug",
+      "source": "https://registry.npmjs.org/debug/-/debug-4.4.3.tgz",
+      "status": "declared_artifact",
+      "version": "4.4.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/decimal.js",
+      "status": "declared",
+      "version": "10.6.0"
+    },
+    {
+      "artifact_sha256": "b4399b50188513b31e4642b25437c9c309776aa34b6acb3eb18a0ee792e16f38",
+      "declaration": "MIT",
+      "path": "node_modules/decode-named-character-reference",
+      "source": "https://registry.npmjs.org/decode-named-character-reference/-/decode-named-character-reference-1.3.0.tgz",
+      "status": "declared_artifact",
+      "version": "1.3.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/deep-is",
+      "status": "declared",
+      "version": "0.1.4"
+    },
+    {
+      "artifact_sha256": "941d90d6629878167d10d2a05d8c6df8f8fa13acc826616abb49db63ac6a5c35",
+      "declaration": "MIT",
+      "path": "node_modules/dequal",
+      "source": "https://registry.npmjs.org/dequal/-/dequal-2.0.3.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.3"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/detect-libc",
+      "status": "declared",
+      "version": "2.1.2"
+    },
+    {
+      "artifact_sha256": "aed0b5ba97cc3aba851946766b1e4804e92a0d3b2051e047eed4e8bf508ecd5f",
+      "declaration": "MIT",
+      "path": "node_modules/devlop",
+      "source": "https://registry.npmjs.org/devlop/-/devlop-1.1.0.tgz",
+      "status": "declared_artifact",
+      "version": "1.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/dom-accessibility-api",
+      "status": "declared",
+      "version": "0.5.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/enhanced-resolve",
+      "status": "declared",
+      "version": "5.26.1"
+    },
+    {
+      "artifact_sha256": "a4de957ab0852f6c91eae59a6000ced5a25a04f0b6e1c3062fbad732a6b5479d",
+      "declaration": "BSD-2-Clause",
+      "path": "node_modules/entities",
+      "source": "https://registry.npmjs.org/entities/-/entities-6.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "6.0.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/es-module-lexer",
+      "status": "declared",
+      "version": "2.3.2"
+    },
+    {
+      "artifact_sha256": "c8b662afe8aa2b852ecc27d766e584a502f8351fbbd890611f2509bf083d28e6",
+      "declaration": "MIT",
+      "path": "node_modules/escape-string-regexp",
+      "source": "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-5.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "5.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/eslint",
+      "status": "declared",
+      "version": "10.14.0"
+    },
+    {
+      "declaration": "BSD-2-Clause",
+      "path": "node_modules/eslint-scope",
+      "status": "declared",
+      "version": "9.1.2"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/eslint-visitor-keys",
+      "status": "declared",
+      "version": "5.0.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/eslint/node_modules/escape-string-regexp",
+      "status": "declared",
+      "version": "4.0.0"
+    },
+    {
+      "declaration": "BSD-2-Clause",
+      "path": "node_modules/espree",
+      "status": "declared",
+      "version": "11.2.0"
+    },
+    {
+      "declaration": "BSD-3-Clause",
+      "path": "node_modules/esquery",
+      "status": "declared",
+      "version": "1.7.0"
+    },
+    {
+      "declaration": "BSD-2-Clause",
+      "path": "node_modules/esrecurse",
+      "status": "declared",
+      "version": "4.3.0"
+    },
+    {
+      "declaration": "BSD-2-Clause",
+      "path": "node_modules/estraverse",
+      "status": "declared",
+      "version": "5.3.0"
+    },
+    {
+      "artifact_sha256": "fa9ffe7f957ff44a54894dd01e96851824e2f008181921585d69947a60eb702b",
+      "declaration": "MIT",
+      "path": "node_modules/estree-util-is-identifier-name",
+      "source": "https://registry.npmjs.org/estree-util-is-identifier-name/-/estree-util-is-identifier-name-3.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "3.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/estree-walker",
+      "status": "declared",
+      "version": "3.0.3"
+    },
+    {
+      "declaration": "BSD-2-Clause",
+      "path": "node_modules/esutils",
+      "status": "declared",
+      "version": "2.0.3"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/expect-type",
+      "status": "declared",
+      "version": "1.4.0"
+    },
+    {
+      "artifact_sha256": "1d91d0b0faa50cba223fa937c7b5a4a662968b1d78b3e59dca5c917dd5cf72b2",
+      "declaration": "MIT",
+      "path": "node_modules/extend",
+      "source": "https://registry.npmjs.org/extend/-/extend-3.0.2.tgz",
+      "status": "declared_artifact",
+      "version": "3.0.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/fast-deep-equal",
+      "status": "declared",
+      "version": "3.1.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/fast-json-stable-stringify",
+      "status": "declared",
+      "version": "2.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/fast-levenshtein",
+      "status": "declared",
+      "version": "2.0.6"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/file-entry-cache",
+      "status": "declared",
+      "version": "11.1.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/find-up",
+      "status": "declared",
+      "version": "5.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/flat-cache",
+      "status": "declared",
+      "version": "6.1.23"
+    },
+    {
+      "declaration": "ISC",
+      "path": "node_modules/flatted",
+      "status": "declared",
+      "version": "3.4.4"
+    },
+    {
+      "artifact_sha256": "c77e7a5d5ff31dd7acea7c44d4a0455e0528cdacbd24a8cb6c82b66d239b587e",
+      "declaration": "MIT",
+      "path": "node_modules/fsevents",
+      "source": "https://registry.npmjs.org/fsevents/-/fsevents-2.3.3.tgz",
+      "status": "declared_artifact",
+      "version": "2.3.3"
+    },
+    {
+      "artifact_sha256": "345bb942f3be1fe234cab09ddc1df2c443cb2e84aaf5743c1862cf2b4e8d5066",
+      "declaration": "ISC",
+      "path": "node_modules/glob-parent",
+      "source": "https://registry.npmjs.org/glob-parent/-/glob-parent-6.0.2.tgz",
+      "status": "declared_artifact",
+      "version": "6.0.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/goober",
+      "status": "declared",
+      "version": "2.1.19"
+    },
+    {
+      "declaration": "ISC",
+      "path": "node_modules/graceful-fs",
+      "status": "declared",
+      "version": "4.2.11"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/hashery",
+      "status": "declared",
+      "version": "1.5.1"
+    },
+    {
+      "artifact_sha256": "2fafecd79507fdecc3c472c3c775a678e2aabb35c74aeb3e67bc3635679ca93d",
+      "declaration": "ISC",
+      "path": "node_modules/hast-util-from-dom",
+      "source": "https://registry.npmjs.org/hast-util-from-dom/-/hast-util-from-dom-5.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "5.0.1"
+    },
+    {
+      "artifact_sha256": "7ef231301c252288e85b63e3d9f9d533cf47686ac1d0c9e0dba8c45e5677a4eb",
+      "declaration": "MIT",
+      "path": "node_modules/hast-util-from-html",
+      "source": "https://registry.npmjs.org/hast-util-from-html/-/hast-util-from-html-2.0.3.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.3"
+    },
+    {
+      "artifact_sha256": "97ff1cb0db9442878afc8c49c7356ff460c9a2f86a43875f910b90b66b0706d2",
+      "declaration": "MIT",
+      "path": "node_modules/hast-util-from-html-isomorphic",
+      "source": "https://registry.npmjs.org/hast-util-from-html-isomorphic/-/hast-util-from-html-isomorphic-2.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.0"
+    },
+    {
+      "artifact_sha256": "085c56c1024d3b9cfd93d23cae61a20fca479e1d2a5a4cb8f6cc678c27bc306a",
+      "declaration": "MIT",
+      "path": "node_modules/hast-util-from-parse5",
+      "source": "https://registry.npmjs.org/hast-util-from-parse5/-/hast-util-from-parse5-8.0.3.tgz",
+      "status": "declared_artifact",
+      "version": "8.0.3"
+    },
+    {
+      "artifact_sha256": "7cae5b84402bfed675a0c2c25cf8b3c7d09487e87fa715ae467771f8d150ddee",
+      "declaration": "MIT",
+      "path": "node_modules/hast-util-is-element",
+      "source": "https://registry.npmjs.org/hast-util-is-element/-/hast-util-is-element-3.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "3.0.0"
+    },
+    {
+      "artifact_sha256": "df79b69d2c5a494758576fe4016f1082aecb7ae1cde7cb908ad539ba4d8d8884",
+      "declaration": "MIT",
+      "path": "node_modules/hast-util-parse-selector",
+      "source": "https://registry.npmjs.org/hast-util-parse-selector/-/hast-util-parse-selector-4.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "4.0.0"
+    },
+    {
+      "artifact_sha256": "83468f1886b62230982ce2eb51a81173291e598e4ab532c81a95ea4db5d05fdc",
+      "declaration": "MIT",
+      "path": "node_modules/hast-util-to-jsx-runtime",
+      "source": "https://registry.npmjs.org/hast-util-to-jsx-runtime/-/hast-util-to-jsx-runtime-2.3.6.tgz",
+      "status": "declared_artifact",
+      "version": "2.3.6"
+    },
+    {
+      "artifact_sha256": "0cbe35c3d652969dc8ecddff1afa20e64e5eac9a2e3e462acadc1ad8a97594b3",
+      "declaration": "MIT",
+      "path": "node_modules/hast-util-to-text",
+      "source": "https://registry.npmjs.org/hast-util-to-text/-/hast-util-to-text-4.0.2.tgz",
+      "status": "declared_artifact",
+      "version": "4.0.2"
+    },
+    {
+      "artifact_sha256": "673f97f5bba3cac0184726f519a5750273e4434b839a769f4fbf09e4b4da2ceb",
+      "declaration": "MIT",
+      "path": "node_modules/hast-util-whitespace",
+      "source": "https://registry.npmjs.org/hast-util-whitespace/-/hast-util-whitespace-3.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "3.0.0"
+    },
+    {
+      "artifact_sha256": "1712fdcc26cd393a8f54f07232fbadb6b084af651beb11d0ec8af67eec00e3f3",
+      "declaration": "MIT",
+      "path": "node_modules/hastscript",
+      "source": "https://registry.npmjs.org/hastscript/-/hastscript-9.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "9.0.1"
+    },
+    {
+      "artifact_sha256": "fbc9443263e976583bd5640e550b77f84d8d7e19fc8408dfe53776a5bae7ed39",
+      "declaration": "BSD-3-Clause",
+      "path": "node_modules/highlight.js",
+      "source": "https://registry.npmjs.org/highlight.js/-/highlight.js-11.11.1.tgz",
+      "status": "declared_artifact",
+      "version": "11.11.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/hookified",
+      "status": "declared",
+      "version": "1.15.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/html-encoding-sniffer",
+      "status": "declared",
+      "version": "7.0.0"
+    },
+    {
+      "artifact_sha256": "9a63a922924f6d31add785bccd0a53706c047e0c0b56dcbcdc836254ded18ed9",
+      "declaration": "MIT",
+      "path": "node_modules/html-url-attributes",
+      "source": "https://registry.npmjs.org/html-url-attributes/-/html-url-attributes-3.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "3.0.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/ignore",
+      "status": "declared",
+      "version": "5.3.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/imurmurhash",
+      "status": "declared",
+      "version": "0.1.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/indent-string",
+      "status": "declared",
+      "version": "4.0.0"
+    },
+    {
+      "artifact_sha256": "edc328b12a2fc88d990bd877e4cebed9823b8427d79a6a73d9c65591d3ccb6bc",
+      "declaration": "MIT",
+      "path": "node_modules/inline-style-parser",
+      "source": "https://registry.npmjs.org/inline-style-parser/-/inline-style-parser-0.2.7.tgz",
+      "status": "declared_artifact",
+      "version": "0.2.7"
+    },
+    {
+      "artifact_sha256": "85dddfd165e6ac37b3229c3b1c181b92d1fdde68fd5a46acf8b14696c9729f81",
+      "declaration": "MIT",
+      "path": "node_modules/is-alphabetical",
+      "source": "https://registry.npmjs.org/is-alphabetical/-/is-alphabetical-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "b6f98de1bfab7ed76025357018b57593bacd2d177985cd04bbd2a5059d3ea92b",
+      "declaration": "MIT",
+      "path": "node_modules/is-alphanumerical",
+      "source": "https://registry.npmjs.org/is-alphanumerical/-/is-alphanumerical-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "62b6375ccb0869ca7c26ccb1e5049de4c4f272157894360b50cf8466fc4c1beb",
+      "declaration": "MIT",
+      "path": "node_modules/is-decimal",
+      "source": "https://registry.npmjs.org/is-decimal/-/is-decimal-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "8c5d4286146ad62fc1096981700ce1c22a167708926fca01f9ca74f9bb50bc19",
+      "declaration": "MIT",
+      "path": "node_modules/is-extglob",
+      "source": "https://registry.npmjs.org/is-extglob/-/is-extglob-2.1.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.1.1"
+    },
+    {
+      "artifact_sha256": "3fe453fb193bb58f6f0505dfb1151230935380b5b55e1f9864261c2aafc1bec6",
+      "declaration": "MIT",
+      "path": "node_modules/is-glob",
+      "source": "https://registry.npmjs.org/is-glob/-/is-glob-4.0.3.tgz",
+      "status": "declared_artifact",
+      "version": "4.0.3"
+    },
+    {
+      "artifact_sha256": "6234c672b1134b6ebc8b162eb119a4b1beebc6cd9217bdc66b2b9822570f8d81",
+      "declaration": "MIT",
+      "path": "node_modules/is-hexadecimal",
+      "source": "https://registry.npmjs.org/is-hexadecimal/-/is-hexadecimal-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "c71d874f7ab7cd560329b080ce790f9768dea503337fe2e2719a18e28be621f7",
+      "declaration": "MIT",
+      "path": "node_modules/is-plain-obj",
+      "source": "https://registry.npmjs.org/is-plain-obj/-/is-plain-obj-4.1.0.tgz",
+      "status": "declared_artifact",
+      "version": "4.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/is-potential-custom-element-name",
+      "status": "declared",
+      "version": "1.0.1"
+    },
+    {
+      "declaration": "ISC",
+      "path": "node_modules/isexe",
+      "status": "declared",
+      "version": "2.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/jiti",
+      "status": "declared",
+      "version": "2.7.0"
+    },
+    {
+      "artifact_sha256": "d884c7a2d8adb5568c1272d92b4f9c62707f4226cf9e7b22e7b957c7361e3c53",
+      "declaration": "MIT",
+      "path": "node_modules/js-tokens",
+      "source": "https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "4.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/jsdom",
+      "status": "declared",
+      "version": "31.0.0"
+    },
+    {
+      "declaration": "BSD-2-Clause",
+      "path": "node_modules/jsdom/node_modules/entities",
+      "status": "declared",
+      "version": "9.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/jsdom/node_modules/parse5",
+      "status": "declared",
+      "version": "8.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/json-schema-traverse",
+      "status": "declared",
+      "version": "0.4.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/json-stable-stringify-without-jsonify",
+      "status": "declared",
+      "version": "1.0.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/katex",
+      "status": "declared",
+      "version": "0.19.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/keyv",
+      "status": "declared",
+      "version": "5.6.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/levn",
+      "status": "declared",
+      "version": "0.4.1"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss-android-arm64",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss-darwin-arm64",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss-darwin-x64",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss-freebsd-x64",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss-linux-arm-gnueabihf",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss-linux-arm64-gnu",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss-linux-arm64-musl",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss-linux-x64-gnu",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss-linux-x64-musl",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss-win32-arm64-msvc",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss-win32-x64-msvc",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/locate-path",
+      "status": "declared",
+      "version": "6.0.0"
+    },
+    {
+      "artifact_sha256": "384446c12b28a0f29cd68b22871cff7c1001fdca5c173930e4eeb4811de210f6",
+      "declaration": "MIT",
+      "path": "node_modules/longest-streak",
+      "source": "https://registry.npmjs.org/longest-streak/-/longest-streak-3.1.0.tgz",
+      "status": "declared_artifact",
+      "version": "3.1.0"
+    },
+    {
+      "artifact_sha256": "00d85c3f0f77f3d1214e465b8a4c41e0513add492aab373ea1a8bee5e8dbd7ad",
+      "declaration": "MIT",
+      "path": "node_modules/lowlight",
+      "source": "https://registry.npmjs.org/lowlight/-/lowlight-3.3.0.tgz",
+      "status": "declared_artifact",
+      "version": "3.3.0"
+    },
+    {
+      "declaration": "BlueOak-1.0.0",
+      "path": "node_modules/lru-cache",
+      "status": "declared",
+      "version": "11.5.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/lz-string",
+      "status": "declared",
+      "version": "1.5.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/magic-string",
+      "status": "declared",
+      "version": "1.4.5"
+    },
+    {
+      "artifact_sha256": "14e8b7c711b0be872cba307c2561ed991b089aa2e4dc4a8de74692a6d51bce58",
+      "declaration": "MIT",
+      "path": "node_modules/markdown-table",
+      "source": "https://registry.npmjs.org/markdown-table/-/markdown-table-3.0.4.tgz",
+      "status": "declared_artifact",
+      "version": "3.0.4"
+    },
+    {
+      "artifact_sha256": "6b7f6538b52715bdc63214511fdbd7c99040caf56efc6f01353e9705de1b109c",
+      "declaration": "MIT",
+      "path": "node_modules/mdast-util-find-and-replace",
+      "source": "https://registry.npmjs.org/mdast-util-find-and-replace/-/mdast-util-find-and-replace-3.0.2.tgz",
+      "status": "declared_artifact",
+      "version": "3.0.2"
+    },
+    {
+      "artifact_sha256": "659d23cf18c294fc0a421c29cd83ee7cb18567eb7df20d4d4e07d1d3dc1dff90",
+      "declaration": "MIT",
+      "path": "node_modules/mdast-util-from-markdown",
+      "source": "https://registry.npmjs.org/mdast-util-from-markdown/-/mdast-util-from-markdown-2.0.2.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.2"
+    },
+    {
+      "artifact_sha256": "96204c6cdf253e43ee1431b88c7e46015a26d2b6d1d688a0153ce96eaecbe642",
+      "declaration": "MIT",
+      "path": "node_modules/mdast-util-gfm",
+      "source": "https://registry.npmjs.org/mdast-util-gfm/-/mdast-util-gfm-3.1.0.tgz",
+      "status": "declared_artifact",
+      "version": "3.1.0"
+    },
+    {
+      "artifact_sha256": "5860bd6db7eb6f6336c5ddd4c713900fb973a05cee8dd531cbcb8548a122c77c",
+      "declaration": "MIT",
+      "path": "node_modules/mdast-util-gfm-autolink-literal",
+      "source": "https://registry.npmjs.org/mdast-util-gfm-autolink-literal/-/mdast-util-gfm-autolink-literal-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "d4d26b4257e56dffa0499654e3e812bee7490c71422ddfc0972e1b30930f117b",
+      "declaration": "MIT",
+      "path": "node_modules/mdast-util-gfm-footnote",
+      "source": "https://registry.npmjs.org/mdast-util-gfm-footnote/-/mdast-util-gfm-footnote-2.1.0.tgz",
+      "status": "declared_artifact",
+      "version": "2.1.0"
+    },
+    {
+      "artifact_sha256": "690ed3ca53497269a5b41a0f95bfdd3a2a675ecd3aea3f1887665c412477e719",
+      "declaration": "MIT",
+      "path": "node_modules/mdast-util-gfm-strikethrough",
+      "source": "https://registry.npmjs.org/mdast-util-gfm-strikethrough/-/mdast-util-gfm-strikethrough-2.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.0"
+    },
+    {
+      "artifact_sha256": "c1d7b61db521f2279c32f1051dc42c98e99ac33538ae9f859b2f3daafb34366e",
+      "declaration": "MIT",
+      "path": "node_modules/mdast-util-gfm-table",
+      "source": "https://registry.npmjs.org/mdast-util-gfm-table/-/mdast-util-gfm-table-2.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.0"
+    },
+    {
+      "artifact_sha256": "3ca34f4601317823f202df4692310c5d37ca628b76cdda2bd59d32de2c0a5d01",
+      "declaration": "MIT",
+      "path": "node_modules/mdast-util-gfm-task-list-item",
+      "source": "https://registry.npmjs.org/mdast-util-gfm-task-list-item/-/mdast-util-gfm-task-list-item-2.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.0"
+    },
+    {
+      "artifact_sha256": "4de30d5fa2382687ff805a2abeb55465c48bed3c859aa6fac8292fb377e8cd90",
+      "declaration": "MIT",
+      "path": "node_modules/mdast-util-math",
+      "source": "https://registry.npmjs.org/mdast-util-math/-/mdast-util-math-3.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "3.0.0"
+    },
+    {
+      "artifact_sha256": "e63aaa9cf6caedaf03662caa66ac1d93943b9c6ff8b7484dcb0d1f03e8382d7b",
+      "declaration": "MIT",
+      "path": "node_modules/mdast-util-mdx-expression",
+      "source": "https://registry.npmjs.org/mdast-util-mdx-expression/-/mdast-util-mdx-expression-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "0de1dcf89da947830305200fd7ab36069e248f9522398ed791b5a0c5e3aa8230",
+      "declaration": "MIT",
+      "path": "node_modules/mdast-util-mdx-jsx",
+      "source": "https://registry.npmjs.org/mdast-util-mdx-jsx/-/mdast-util-mdx-jsx-3.2.0.tgz",
+      "status": "declared_artifact",
+      "version": "3.2.0"
+    },
+    {
+      "artifact_sha256": "f62f301b48a383c8b6ff03e2a7091cfa96925af18de733cd59c1dad124dc7606",
+      "declaration": "MIT",
+      "path": "node_modules/mdast-util-mdxjs-esm",
+      "source": "https://registry.npmjs.org/mdast-util-mdxjs-esm/-/mdast-util-mdxjs-esm-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "001c22ccbb8f66b889e468ba33c86df25aaf9e2cea1ee1d827fb172431f09835",
+      "declaration": "MIT",
+      "path": "node_modules/mdast-util-phrasing",
+      "source": "https://registry.npmjs.org/mdast-util-phrasing/-/mdast-util-phrasing-4.1.0.tgz",
+      "status": "declared_artifact",
+      "version": "4.1.0"
+    },
+    {
+      "artifact_sha256": "41f70e2f73a4ad9c67a401faa3143d16d6a1bda2c6bf9ae48073a2d4f5ebb1f4",
+      "declaration": "MIT",
+      "path": "node_modules/mdast-util-to-hast",
+      "source": "https://registry.npmjs.org/mdast-util-to-hast/-/mdast-util-to-hast-13.2.1.tgz",
+      "status": "declared_artifact",
+      "version": "13.2.1"
+    },
+    {
+      "artifact_sha256": "a6a431a90230e4d57ccb7440e5f2e62c84022b241f10ff64b7fa6f32d9e6ac95",
+      "declaration": "MIT",
+      "path": "node_modules/mdast-util-to-markdown",
+      "source": "https://registry.npmjs.org/mdast-util-to-markdown/-/mdast-util-to-markdown-2.1.2.tgz",
+      "status": "declared_artifact",
+      "version": "2.1.2"
+    },
+    {
+      "artifact_sha256": "bbfe70a5652305df7e8e484f674975c69bddbbad048ced52dc71835e64bba37a",
+      "declaration": "MIT",
+      "path": "node_modules/mdast-util-to-string",
+      "source": "https://registry.npmjs.org/mdast-util-to-string/-/mdast-util-to-string-4.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "4.0.0"
+    },
+    {
+      "artifact_sha256": "ddbea34c618d8b869600f2fdde7398526c40f6caf511fc6393877796459a7e66",
+      "declaration": "MIT",
+      "path": "node_modules/micromark",
+      "source": "https://registry.npmjs.org/micromark/-/micromark-4.0.2.tgz",
+      "status": "declared_artifact",
+      "version": "4.0.2"
+    },
+    {
+      "artifact_sha256": "05ae118b84ee424a213548e0121044b5a46cd899f00031dd96f9440ff4b2bd40",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-core-commonmark",
+      "source": "https://registry.npmjs.org/micromark-core-commonmark/-/micromark-core-commonmark-2.0.3.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.3"
+    },
+    {
+      "artifact_sha256": "35f3336120e336f7bf4737a93ca90b5549a353efc9496a31feec97215b756cf1",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-extension-gfm",
+      "source": "https://registry.npmjs.org/micromark-extension-gfm/-/micromark-extension-gfm-3.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "3.0.0"
+    },
+    {
+      "artifact_sha256": "c26bf2024d0741030b554cd784413776291ab4904c1ab45a55fb98e66e5cc3bf",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-extension-gfm-autolink-literal",
+      "source": "https://registry.npmjs.org/micromark-extension-gfm-autolink-literal/-/micromark-extension-gfm-autolink-literal-2.1.0.tgz",
+      "status": "declared_artifact",
+      "version": "2.1.0"
+    },
+    {
+      "artifact_sha256": "a1b9858641efe4ddabf48062397663f9de3fdea1fb43b4c34faa9987eb6f2f8a",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-extension-gfm-footnote",
+      "source": "https://registry.npmjs.org/micromark-extension-gfm-footnote/-/micromark-extension-gfm-footnote-2.1.0.tgz",
+      "status": "declared_artifact",
+      "version": "2.1.0"
+    },
+    {
+      "artifact_sha256": "e3d9e7b8ee5d45c4c49835d2172492a5bb34f304dc5efbb68294f69a16d1c762",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-extension-gfm-strikethrough",
+      "source": "https://registry.npmjs.org/micromark-extension-gfm-strikethrough/-/micromark-extension-gfm-strikethrough-2.1.0.tgz",
+      "status": "declared_artifact",
+      "version": "2.1.0"
+    },
+    {
+      "artifact_sha256": "61cb7bebe080cf884bd03c195803fc0f380e896a49daa7691f5ba02aaac0ea86",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-extension-gfm-table",
+      "source": "https://registry.npmjs.org/micromark-extension-gfm-table/-/micromark-extension-gfm-table-2.1.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.1.1"
+    },
+    {
+      "artifact_sha256": "576e1be7c054b25c378e084482bc7fdd05c1a213b544866220b27fed82784128",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-extension-gfm-tagfilter",
+      "source": "https://registry.npmjs.org/micromark-extension-gfm-tagfilter/-/micromark-extension-gfm-tagfilter-2.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.0"
+    },
+    {
+      "artifact_sha256": "2af93a84aca7141d88f8967be748a2f84d5ac6dc7cdb14a62edcbbd8a27b11af",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-extension-gfm-task-list-item",
+      "source": "https://registry.npmjs.org/micromark-extension-gfm-task-list-item/-/micromark-extension-gfm-task-list-item-2.1.0.tgz",
+      "status": "declared_artifact",
+      "version": "2.1.0"
+    },
+    {
+      "artifact_sha256": "a634d9a310781fa7385d28a66de744458a9da8330eef32952381e1ac004d05f1",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-extension-math",
+      "source": "https://registry.npmjs.org/micromark-extension-math/-/micromark-extension-math-3.1.0.tgz",
+      "status": "declared_artifact",
+      "version": "3.1.0"
+    },
+    {
+      "artifact_sha256": "b4acd1721e4756a61f2482c3424344b8b01bdbf79180cf6e411ed491887bd8db",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-factory-destination",
+      "source": "https://registry.npmjs.org/micromark-factory-destination/-/micromark-factory-destination-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "c65fb436893844fb5be29814dc2528a596236423c4c7e5b1130cd49b5bae8c1d",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-factory-label",
+      "source": "https://registry.npmjs.org/micromark-factory-label/-/micromark-factory-label-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "605220e300cf7601c9e8841b3310981400ac02706b499cf43222f43a14c61a24",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-factory-space",
+      "source": "https://registry.npmjs.org/micromark-factory-space/-/micromark-factory-space-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "2e247f3d7ddef39cde036ee828a66ec410059b3963ce3e376160e48011f257b0",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-factory-title",
+      "source": "https://registry.npmjs.org/micromark-factory-title/-/micromark-factory-title-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "57dc50841f76fac5cf46e093b8325397079e10406febebb6c58a58e1528a4fec",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-factory-whitespace",
+      "source": "https://registry.npmjs.org/micromark-factory-whitespace/-/micromark-factory-whitespace-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "bacefea968d21cedf290ec319ec92e2bc20e4f7b02f62cb4ad1e7b07c5a45185",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-util-character",
+      "source": "https://registry.npmjs.org/micromark-util-character/-/micromark-util-character-2.1.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.1.1"
+    },
+    {
+      "artifact_sha256": "a7b753059876eda10e9e14c024d1cf6eb3a2eb2021c79ef59fb483d72cda754a",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-util-chunked",
+      "source": "https://registry.npmjs.org/micromark-util-chunked/-/micromark-util-chunked-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "ae1040e3100c019e183e474cb7f174eb436d856013169a0c8783a52519bacced",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-util-classify-character",
+      "source": "https://registry.npmjs.org/micromark-util-classify-character/-/micromark-util-classify-character-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "717cb91921ff540a2c776317f31ad005c3c45ec0ae1c188f1b99de621521b4b5",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-util-combine-extensions",
+      "source": "https://registry.npmjs.org/micromark-util-combine-extensions/-/micromark-util-combine-extensions-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "cd26a08f068727f3cc892e8f2549b85065362bd920506649386c791fe349db98",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-util-decode-numeric-character-reference",
+      "source": "https://registry.npmjs.org/micromark-util-decode-numeric-character-reference/-/micromark-util-decode-numeric-character-reference-2.0.2.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.2"
+    },
+    {
+      "artifact_sha256": "09ab2cda2d2f4fec4e3b829042866fa3d619d4c48c895233495a4ac49f325059",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-util-decode-string",
+      "source": "https://registry.npmjs.org/micromark-util-decode-string/-/micromark-util-decode-string-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "c553824f256f5f99f8f8b172d25caa7b2270ece5a00774cd1dbbc8bf9cd9090a",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-util-encode",
+      "source": "https://registry.npmjs.org/micromark-util-encode/-/micromark-util-encode-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "9d56df2779bb23785d208136430484ccedca4378bd36976c4793ace4c1cae077",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-util-html-tag-name",
+      "source": "https://registry.npmjs.org/micromark-util-html-tag-name/-/micromark-util-html-tag-name-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "6687cbaaa6a420bad0e5ca2ea0dfaea409ba8dc9e13ca03059291da8b68ceb2d",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-util-normalize-identifier",
+      "source": "https://registry.npmjs.org/micromark-util-normalize-identifier/-/micromark-util-normalize-identifier-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "f7c8f03bdbdb16113879dadabc7091aa4277a1c106f202e05af164a917964555",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-util-resolve-all",
+      "source": "https://registry.npmjs.org/micromark-util-resolve-all/-/micromark-util-resolve-all-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "8fcf4cf2900f807194fc89fb3e4dd5e5b28143cb44e55955a9f31d764264547e",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-util-sanitize-uri",
+      "source": "https://registry.npmjs.org/micromark-util-sanitize-uri/-/micromark-util-sanitize-uri-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "10aca3d9ae4d1776f029fa6dbf5d9706291cbafc55ff39ba88141e65b7c59a8b",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-util-subtokenize",
+      "source": "https://registry.npmjs.org/micromark-util-subtokenize/-/micromark-util-subtokenize-2.1.0.tgz",
+      "status": "declared_artifact",
+      "version": "2.1.0"
+    },
+    {
+      "artifact_sha256": "d8d698fae34d4e5bcdc5caf552449dea8aa46709dc76caea815c931cbd61e222",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-util-symbol",
+      "source": "https://registry.npmjs.org/micromark-util-symbol/-/micromark-util-symbol-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "artifact_sha256": "4b7223263259987280cb0f970887702e7725af15644849cc584d300a43a6291d",
+      "declaration": "MIT",
+      "path": "node_modules/micromark-util-types",
+      "source": "https://registry.npmjs.org/micromark-util-types/-/micromark-util-types-2.0.2.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/min-indent",
+      "status": "declared",
+      "version": "1.0.1"
+    },
+    {
+      "declaration": "BlueOak-1.0.0",
+      "path": "node_modules/minimatch",
+      "status": "declared",
+      "version": "11.0.5"
+    },
+    {
+      "artifact_sha256": "f6616e15e530ed552f9daa2d3ce71963947c6bc7c98c9b64fd3e673fd02622c6",
+      "declaration": "MIT",
+      "path": "node_modules/ms",
+      "source": "https://registry.npmjs.org/ms/-/ms-2.1.3.tgz",
+      "status": "declared_artifact",
+      "version": "2.1.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/nanoid",
+      "status": "declared",
+      "version": "3.3.20"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/natural-compare",
+      "status": "declared",
+      "version": "1.4.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/obug",
+      "status": "declared",
+      "version": "3.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/optionator",
+      "status": "declared",
+      "version": "0.9.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/p-limit",
+      "status": "declared",
+      "version": "3.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/p-locate",
+      "status": "declared",
+      "version": "5.0.0"
+    },
+    {
+      "artifact_sha256": "2edcf2a9a2095627bad46b524ae17dff2c97ab4dd13fccc34e2dc407b2a87304",
+      "declaration": "MIT",
+      "path": "node_modules/parse-entities",
+      "source": "https://registry.npmjs.org/parse-entities/-/parse-entities-4.0.2.tgz",
+      "status": "declared_artifact",
+      "version": "4.0.2"
+    },
+    {
+      "artifact_sha256": "367d955567082f39480be382e2d649ff65ab7ab8377e240841bade2df4dd123a",
+      "declaration": "MIT",
+      "path": "node_modules/parse-entities/node_modules/@types/unist",
+      "source": "https://registry.npmjs.org/@types/unist/-/unist-2.0.11.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.11"
+    },
+    {
+      "artifact_sha256": "9316ca7af41da9e85071b62b9605aa0a6aaeb0463f833c29e7a331e7898f0420",
+      "declaration": "MIT",
+      "path": "node_modules/parse5",
+      "source": "https://registry.npmjs.org/parse5/-/parse5-7.3.0.tgz",
+      "status": "declared_artifact",
+      "version": "7.3.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/parse5-parser-stream",
+      "status": "declared",
+      "version": "8.1.0"
+    },
+    {
+      "declaration": "BSD-2-Clause",
+      "path": "node_modules/parse5-parser-stream/node_modules/entities",
+      "status": "declared",
+      "version": "9.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/parse5-parser-stream/node_modules/parse5",
+      "status": "declared",
+      "version": "8.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/path-exists",
+      "status": "declared",
+      "version": "4.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/path-key",
+      "status": "declared",
+      "version": "3.1.1"
+    },
+    {
+      "artifact_sha256": "d3aedb2807967b7eb37fd11b03b7e3701e725af79c650d0812ff7213f8f882d9",
+      "declaration": "ISC",
+      "path": "node_modules/picocolors",
+      "source": "https://registry.npmjs.org/picocolors/-/picocolors-1.1.1.tgz",
+      "status": "declared_artifact",
+      "version": "1.1.1"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/playwright",
+      "status": "declared",
+      "version": "1.64.1"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/playwright-core",
+      "status": "declared",
+      "version": "1.64.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/postcss",
+      "status": "declared",
+      "version": "8.5.32"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/postcss-selector-parser",
+      "status": "declared",
+      "version": "6.1.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/prelude-ls",
+      "status": "declared",
+      "version": "1.2.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/pretty-format",
+      "status": "declared",
+      "version": "27.5.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/pretty-format/node_modules/react-is",
+      "status": "declared",
+      "version": "17.0.2"
+    },
+    {
+      "artifact_sha256": "40e9f2d1702c88dda9ba51da8f4c65b885469da9e6e832db71aa53c2f80322b8",
+      "declaration": "MIT",
+      "path": "node_modules/property-information",
+      "source": "https://registry.npmjs.org/property-information/-/property-information-7.1.0.tgz",
+      "status": "declared_artifact",
+      "version": "7.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/punycode",
+      "status": "declared",
+      "version": "2.3.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/qified",
+      "status": "declared",
+      "version": "0.10.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/qified/node_modules/hookified",
+      "status": "declared",
+      "version": "2.2.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/react",
+      "status": "declared",
+      "version": "19.3.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/react-dom",
+      "status": "declared",
+      "version": "19.3.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/react-markdown",
+      "status": "declared",
+      "version": "10.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/react-router",
+      "status": "declared",
+      "version": "7.18.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/react-router-dom",
+      "status": "declared",
+      "version": "7.18.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/redent",
+      "status": "declared",
+      "version": "3.0.0"
+    },
+    {
+      "artifact_sha256": "e60d5c6b2c84ce1eb2c56893f675a94c0cd39e25bd7760eca7cb4ceb0d44d1bb",
+      "declaration": "MIT",
+      "path": "node_modules/rehype-highlight",
+      "source": "https://registry.npmjs.org/rehype-highlight/-/rehype-highlight-7.0.2.tgz",
+      "status": "declared_artifact",
+      "version": "7.0.2"
+    },
+    {
+      "artifact_sha256": "b76022624276e22d83bc214e998c7a744504ac1b837f9233d0e0c0ef2c0c5e7d",
+      "declaration": "MIT",
+      "path": "node_modules/rehype-katex",
+      "source": "https://registry.npmjs.org/rehype-katex/-/rehype-katex-7.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "7.0.1"
+    },
+    {
+      "artifact_sha256": "a5c7441a02eb0c5f5b0a15b23f04c2a00b9faf698dc3dfb4e5c1a1d0991d4259",
+      "declaration": "MIT",
+      "path": "node_modules/remark-gfm",
+      "source": "https://registry.npmjs.org/remark-gfm/-/remark-gfm-4.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "4.0.1"
+    },
+    {
+      "artifact_sha256": "33d1b07c723a1167e0e4360437d98dedc1ef95cc9f0da1122147f26efb345417",
+      "declaration": "MIT",
+      "path": "node_modules/remark-math",
+      "source": "https://registry.npmjs.org/remark-math/-/remark-math-6.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "6.0.0"
+    },
+    {
+      "artifact_sha256": "381d16667f0d394ac045dad61cea875d680a49eae0cbe88a87b0259dc4b2dd33",
+      "declaration": "MIT",
+      "path": "node_modules/remark-parse",
+      "source": "https://registry.npmjs.org/remark-parse/-/remark-parse-11.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "11.0.0"
+    },
+    {
+      "artifact_sha256": "7bb4ca02a6fe89bbfa5e56485bb5086e2cfa13bbbf7455cd29faac20a6eeaa82",
+      "declaration": "MIT",
+      "path": "node_modules/remark-rehype",
+      "source": "https://registry.npmjs.org/remark-rehype/-/remark-rehype-11.1.2.tgz",
+      "status": "declared_artifact",
+      "version": "11.1.2"
+    },
+    {
+      "artifact_sha256": "b2190b6baf1b5e6e1b36f23c24c1658f2dab1a4315370435530cd8f78c390175",
+      "declaration": "MIT",
+      "path": "node_modules/remark-stringify",
+      "source": "https://registry.npmjs.org/remark-stringify/-/remark-stringify-11.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "11.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/remove-accents",
+      "status": "declared",
+      "version": "0.5.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/rolldown",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "ISC",
+      "path": "node_modules/saxes",
+      "status": "declared",
+      "version": "6.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/scheduler",
+      "status": "declared",
+      "version": "0.28.0"
+    },
+    {
+      "declaration": "ISC",
+      "path": "node_modules/semver",
+      "status": "declared",
+      "version": "7.8.6"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/seroval",
+      "status": "declared",
+      "version": "1.6.12"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/seroval-plugins",
+      "status": "declared",
+      "version": "1.6.12"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/set-cookie-parser",
+      "status": "declared",
+      "version": "2.7.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/shebang-command",
+      "status": "declared",
+      "version": "2.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/shebang-regex",
+      "status": "declared",
+      "version": "3.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/solid-js",
+      "status": "declared",
+      "version": "1.9.18"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/solid-presence",
+      "status": "declared",
+      "version": "0.2.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/solid-prevent-scroll",
+      "status": "declared",
+      "version": "0.1.11"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/solid-transition-group",
+      "status": "declared",
+      "version": "0.2.3"
+    },
+    {
+      "declaration": "BSD-3-Clause",
+      "path": "node_modules/source-map-js",
+      "status": "declared",
+      "version": "1.2.2"
+    },
+    {
+      "artifact_sha256": "b386cce96593975cebbb054a8e287eb15c2e004cd6ef416f7a26b5c265930b67",
+      "declaration": "MIT",
+      "path": "node_modules/space-separated-tokens",
+      "source": "https://registry.npmjs.org/space-separated-tokens/-/space-separated-tokens-2.0.2.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/std-env",
+      "status": "declared",
+      "version": "4.3.0"
+    },
+    {
+      "artifact_sha256": "89052f611f0656a0e7d7c312f7b2e75e949678ce4eff37a6fc416fa2be4f4024",
+      "declaration": "MIT",
+      "path": "node_modules/stringify-entities",
+      "source": "https://registry.npmjs.org/stringify-entities/-/stringify-entities-4.0.4.tgz",
+      "status": "declared_artifact",
+      "version": "4.0.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/strip-indent",
+      "status": "declared",
+      "version": "3.0.0"
+    },
+    {
+      "artifact_sha256": "87f2f0c9c052c7840d789c2389f1d212f3c5ba77c58b7d08ce4485f59d34f024",
+      "declaration": "MIT",
+      "path": "node_modules/style-to-js",
+      "source": "https://registry.npmjs.org/style-to-js/-/style-to-js-1.1.21.tgz",
+      "status": "declared_artifact",
+      "version": "1.1.21"
+    },
+    {
+      "artifact_sha256": "edfb15e0912047f3f78e683015d310dc35903f1623aada6a8e629ed9077bf45d",
+      "declaration": "MIT",
+      "path": "node_modules/style-to-object",
+      "source": "https://registry.npmjs.org/style-to-object/-/style-to-object-1.0.14.tgz",
+      "status": "declared_artifact",
+      "version": "1.0.14"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/superjson",
+      "status": "declared",
+      "version": "2.2.6"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/tailwindcss",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/tapable",
+      "status": "declared",
+      "version": "2.3.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/tinybench",
+      "status": "declared",
+      "version": "6.2.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/tinyexec",
+      "status": "declared",
+      "version": "1.3.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/tinyglobby",
+      "status": "declared",
+      "version": "0.2.17"
+    },
+    {
+      "artifact_sha256": "241ddcd9f31e2a1fca405326017dbb8333ce174198e887f0f96387c29f0d365e",
+      "declaration": "MIT",
+      "path": "node_modules/tinyglobby/node_modules/fdir",
+      "source": "https://registry.npmjs.org/fdir/-/fdir-6.5.0.tgz",
+      "status": "declared_artifact",
+      "version": "6.5.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/tinyglobby/node_modules/picomatch",
+      "status": "declared",
+      "version": "4.0.7"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/tldts",
+      "status": "declared",
+      "version": "7.4.19"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/tldts-core",
+      "status": "declared",
+      "version": "7.4.20"
+    },
+    {
+      "declaration": "BSD-3-Clause",
+      "path": "node_modules/tough-cookie",
+      "status": "declared",
+      "version": "6.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/tr46",
+      "status": "declared",
+      "version": "7.0.0"
+    },
+    {
+      "artifact_sha256": "5880f0ef03e792c4705dc0789f2999671d4796d1d10a0110df059f25c565d63d",
+      "declaration": "MIT",
+      "path": "node_modules/trim-lines",
+      "source": "https://registry.npmjs.org/trim-lines/-/trim-lines-3.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "3.0.1"
+    },
+    {
+      "artifact_sha256": "0a357f8de5e3a6f69fa3672daf31a19a87fc153b21085790c78fa4097263ab58",
+      "declaration": "MIT",
+      "path": "node_modules/trough",
+      "source": "https://registry.npmjs.org/trough/-/trough-2.2.0.tgz",
+      "status": "declared_artifact",
+      "version": "2.2.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/ts-api-utils",
+      "status": "declared",
+      "version": "2.5.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/type-check",
+      "status": "declared",
+      "version": "0.4.0"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/typescript",
+      "status": "declared",
+      "version": "6.0.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/typescript-eslint",
+      "status": "declared",
+      "version": "8.72.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/undici",
+      "status": "declared",
+      "version": "8.12.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/undici-types",
+      "status": "declared",
+      "version": "7.24.6"
+    },
+    {
+      "artifact_sha256": "bc6d6d9e336d7d775f3c369f0a29462523ae75254d4a6e4888b95eba44c4aa78",
+      "declaration": "MIT",
+      "path": "node_modules/unified",
+      "source": "https://registry.npmjs.org/unified/-/unified-11.0.5.tgz",
+      "status": "declared_artifact",
+      "version": "11.0.5"
+    },
+    {
+      "artifact_sha256": "09ca2ef0344212863bb39ec000effdc518d4a5b3e60c645b7607172da0641da9",
+      "declaration": "MIT",
+      "path": "node_modules/unist-util-find-after",
+      "source": "https://registry.npmjs.org/unist-util-find-after/-/unist-util-find-after-5.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "5.0.0"
+    },
+    {
+      "artifact_sha256": "6d406238b6e281d38d30c30f77287ce8d70f6d9c4503612f979333865aaafff5",
+      "declaration": "MIT",
+      "path": "node_modules/unist-util-is",
+      "source": "https://registry.npmjs.org/unist-util-is/-/unist-util-is-6.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "6.0.1"
+    },
+    {
+      "artifact_sha256": "248cefc2080c0a78817b20e88da7324e7dee7175c5df8ac0e6d193d2d381c200",
+      "declaration": "MIT",
+      "path": "node_modules/unist-util-position",
+      "source": "https://registry.npmjs.org/unist-util-position/-/unist-util-position-5.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "5.0.0"
+    },
+    {
+      "artifact_sha256": "75c0ac5d1c2fc1cb83a90753016c67cd94d4eb6f19ed0e8b195c25392feafe56",
+      "declaration": "MIT",
+      "path": "node_modules/unist-util-remove-position",
+      "source": "https://registry.npmjs.org/unist-util-remove-position/-/unist-util-remove-position-5.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "5.0.0"
+    },
+    {
+      "artifact_sha256": "8692d2396f091680fe342c344acc4594534a9a811b0a9cbcfae7d71c694168b4",
+      "declaration": "MIT",
+      "path": "node_modules/unist-util-stringify-position",
+      "source": "https://registry.npmjs.org/unist-util-stringify-position/-/unist-util-stringify-position-4.0.0.tgz",
+      "status": "declared_artifact",
+      "version": "4.0.0"
+    },
+    {
+      "artifact_sha256": "8d5724e443d279deda20fe03ce18de53a944f8154e94297de0f49c5fb51f72ef",
+      "declaration": "MIT",
+      "path": "node_modules/unist-util-visit",
+      "source": "https://registry.npmjs.org/unist-util-visit/-/unist-util-visit-5.1.0.tgz",
+      "status": "declared_artifact",
+      "version": "5.1.0"
+    },
+    {
+      "artifact_sha256": "5250902af03c4b335c68cd60ed5eb4f1d9fbd6338e129d7df476690b8a245da5",
+      "declaration": "MIT",
+      "path": "node_modules/unist-util-visit-parents",
+      "source": "https://registry.npmjs.org/unist-util-visit-parents/-/unist-util-visit-parents-6.0.2.tgz",
+      "status": "declared_artifact",
+      "version": "6.0.2"
+    },
+    {
+      "declaration": "BSD-2-Clause",
+      "path": "node_modules/uri-js",
+      "status": "declared",
+      "version": "4.4.1"
+    },
+    {
+      "artifact_sha256": "79a1de983c1b393180c47456d6b73caab278a00ea6e37d5c6675f2dcdec2a3e5",
+      "declaration": "MIT",
+      "path": "node_modules/util-deprecate",
+      "source": "https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz",
+      "status": "declared_artifact",
+      "version": "1.0.2"
+    },
+    {
+      "artifact_sha256": "a0dbad2fd8dcc9ae9f652dee6ba49a1db5db2843a8ec2ceb9190ccdba0e0df0c",
+      "declaration": "MIT",
+      "path": "node_modules/vfile",
+      "source": "https://registry.npmjs.org/vfile/-/vfile-6.0.3.tgz",
+      "status": "declared_artifact",
+      "version": "6.0.3"
+    },
+    {
+      "artifact_sha256": "8b8cf426e26395482ca8c4485dc3f98e29628711c69b5f3dc2673ed00940ce58",
+      "declaration": "MIT",
+      "path": "node_modules/vfile-location",
+      "source": "https://registry.npmjs.org/vfile-location/-/vfile-location-5.0.3.tgz",
+      "status": "declared_artifact",
+      "version": "5.0.3"
+    },
+    {
+      "artifact_sha256": "9d6d94ee59296ef0516217a79e902ba417fe3d8816ab1d0527ddf353b455c2cb",
+      "declaration": "MIT",
+      "path": "node_modules/vfile-message",
+      "source": "https://registry.npmjs.org/vfile-message/-/vfile-message-4.0.3.tgz",
+      "status": "declared_artifact",
+      "version": "4.0.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/vite",
+      "status": "declared",
+      "version": "8.3.6"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/vite/node_modules/picomatch",
+      "status": "declared",
+      "version": "4.0.7"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/vitest",
+      "status": "declared",
+      "version": "5.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/vitest/node_modules/picomatch",
+      "status": "declared",
+      "version": "4.0.7"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/w3c-xmlserializer",
+      "status": "declared",
+      "version": "6.0.0"
+    },
+    {
+      "artifact_sha256": "df250d9dc73331f79700486335f046bdebb09158d172754220cc546fb5149a84",
+      "declaration": "MIT",
+      "path": "node_modules/web-namespaces",
+      "source": "https://registry.npmjs.org/web-namespaces/-/web-namespaces-2.0.1.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": "BSD-2-Clause",
+      "path": "node_modules/webidl-conversions",
+      "status": "declared",
+      "version": "8.0.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/whatwg-mimetype",
+      "status": "declared",
+      "version": "5.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/whatwg-url",
+      "status": "declared",
+      "version": "17.3.0"
+    },
+    {
+      "declaration": "ISC",
+      "path": "node_modules/which",
+      "status": "declared",
+      "version": "2.0.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/why-is-node-running",
+      "status": "declared",
+      "version": "3.2.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/word-wrap",
+      "status": "declared",
+      "version": "1.2.5"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/xml-name-validator",
+      "status": "declared",
+      "version": "5.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/xmlchars",
+      "status": "declared",
+      "version": "2.2.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/yocto-queue",
+      "status": "declared",
+      "version": "0.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/zustand",
+      "status": "declared",
+      "version": "5.1.0"
+    },
+    {
+      "artifact_sha256": "2c162e000f5fb5a816987d6f8ad7aad295203f777a5992d514ae4660778a51a4",
+      "declaration": "MIT",
+      "path": "node_modules/zwitch",
+      "source": "https://registry.npmjs.org/zwitch/-/zwitch-2.0.4.tgz",
+      "status": "declared_artifact",
+      "version": "2.0.4"
+    }
+  ],
+  "input_sha256": {
+    "docs/modernization/license-artifact-reviews.json": "6c53942c1d8a16303680823d46826f8c8b153b68c73e15e7c63e36c9f937f8f5",
+    "frontend/package-lock.json": "e8a8f164e56c388b9cd48a76778bbd241f2999d34477d3f95c984419cba592d8",
+    "requirements-ken.txt": "4516cc7c71ed86c7b670e13ac3a50128cba399f4ad9b0978e8a15c822311fef4",
+    "scripts/export_legacy_chroma.py.lock": "c58002cb830c32611ff7fc0926cd0b03ea3d2aa019bd3f970e6d96080f1815e6",
+    "scripts/infinibay_mcp_server.py.lock": "9cce5b656df473193382ddb25d9954b63551c3ae257c178472726cddb48d2521",
+    "scripts/researcher_mcp_server.py.lock": "9cce5b656df473193382ddb25d9954b63551c3ae257c178472726cddb48d2521",
+    "uv.lock": "c8900b3fbda10dcf7c7c4ea98625b1a7020c08c8706bac2f03863313ca117ab4"
+  },
+  "interpretation": "Declarations and explicitly reviewed artifacts; no automatic compatibility approval.",
+  "missing": 0,
+  "needs_review": 0,
+  "python": [
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Python Software Foundation License"
+      ],
+      "declaration": "PSF-2.0",
+      "expression": null,
+      "name": "aiohappyeyeballs",
+      "source": "https://pypi.org/pypi/aiohappyeyeballs/2.7.1/json",
+      "status": "declared",
+      "version": "2.7.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0 AND MIT",
+      "name": "aiohttp",
+      "source": "https://pypi.org/pypi/aiohttp/3.14.5/json",
+      "status": "declared",
+      "version": "3.14.5"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "aiohttp-retry",
+      "source": "https://pypi.org/pypi/aiohttp-retry/2.9.1/json",
+      "status": "declared",
+      "version": "2.9.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": "Apache 2.0",
+      "expression": null,
+      "name": "aiosignal",
+      "source": "https://pypi.org/pypi/aiosignal/1.4.0/json",
+      "status": "declared",
+      "version": "1.4.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "annotated-doc",
+      "source": "https://pypi.org/pypi/annotated-doc/0.0.5/json",
+      "status": "declared",
+      "version": "0.0.5"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "annotated-types",
+      "source": "https://pypi.org/pypi/annotated-types/0.8.0/json",
+      "status": "declared",
+      "version": "0.8.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "anyio",
+      "source": "https://pypi.org/pypi/anyio/4.15.1/json",
+      "status": "declared",
+      "version": "4.15.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "anyio",
+      "source": "https://pypi.org/pypi/anyio/4.16.0/json",
+      "status": "declared",
+      "version": "4.16.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "attrs",
+      "source": "https://pypi.org/pypi/attrs/26.1.0/json",
+      "status": "declared",
+      "version": "26.1.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": "BSD-3-Clause",
+      "expression": null,
+      "name": "babel",
+      "source": "https://pypi.org/pypi/babel/2.18.0/json",
+      "status": "declared",
+      "version": "2.18.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": "Apache-2.0",
+      "expression": null,
+      "name": "bcrypt",
+      "source": "https://pypi.org/pypi/bcrypt/5.0.0/json",
+      "status": "declared",
+      "version": "5.0.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "build",
+      "source": "https://pypi.org/pypi/build/1.6.1/json",
+      "status": "declared",
+      "version": "1.6.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)"
+      ],
+      "declaration": "MPL-2.0",
+      "expression": null,
+      "name": "certifi",
+      "source": "https://pypi.org/pypi/certifi/2026.10.23/json",
+      "status": "declared",
+      "version": "2026.10.23"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT-0",
+      "name": "cffi",
+      "source": "https://pypi.org/pypi/cffi/2.1.1/json",
+      "status": "declared",
+      "version": "2.1.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "charset-normalizer",
+      "source": "https://pypi.org/pypi/charset-normalizer/3.5.2/json",
+      "status": "declared",
+      "version": "3.5.2"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": null,
+      "expression": null,
+      "name": "chromadb",
+      "source": "https://pypi.org/pypi/chromadb/1.5.9/json",
+      "status": "declared",
+      "version": "1.5.9"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "click",
+      "source": "https://pypi.org/pypi/click/8.5.0/json",
+      "status": "declared",
+      "version": "8.5.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "click",
+      "source": "https://pypi.org/pypi/click/8.5.1/json",
+      "status": "declared",
+      "version": "8.5.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": "BSD-3-Clause",
+      "expression": null,
+      "name": "cloudpickle",
+      "source": "https://pypi.org/pypi/cloudpickle/3.1.2/json",
+      "status": "declared",
+      "version": "3.1.2"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": "",
+      "expression": null,
+      "name": "colorama",
+      "source": "https://pypi.org/pypi/colorama/0.4.6/json",
+      "status": "declared",
+      "version": "0.4.6"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "courlan",
+      "source": "https://pypi.org/pypi/courlan/1.4.0/json",
+      "status": "declared",
+      "version": "1.4.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0 OR BSD-3-Clause",
+      "name": "cryptography",
+      "source": "https://pypi.org/pypi/cryptography/50.0.2/json",
+      "status": "declared",
+      "version": "50.0.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "ctranslate2",
+      "source": "https://pypi.org/pypi/ctranslate2/4.8.2/json",
+      "status": "declared",
+      "version": "4.8.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "dateparser",
+      "source": "https://pypi.org/pypi/dateparser/1.4.3/json",
+      "status": "declared",
+      "version": "1.4.3"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Python Software Foundation License"
+      ],
+      "declaration": "PSFL",
+      "expression": null,
+      "name": "defusedxml",
+      "source": "https://pypi.org/pypi/defusedxml/0.7.1/json",
+      "status": "declared",
+      "version": "0.7.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "durationpy",
+      "source": "https://pypi.org/pypi/durationpy/0.11/json",
+      "status": "declared",
+      "version": "0.11"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "fastapi",
+      "source": "https://pypi.org/pypi/fastapi/0.162.0/json",
+      "status": "declared",
+      "version": "0.162.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "fastembed",
+      "source": "https://pypi.org/pypi/fastembed/0.9.1/json",
+      "status": "declared",
+      "version": "0.9.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "filelock",
+      "source": "https://pypi.org/pypi/filelock/4.2.9/json",
+      "status": "declared",
+      "version": "4.2.9"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": "Apache 2.0",
+      "expression": null,
+      "name": "flatbuffers",
+      "source": "https://pypi.org/pypi/flatbuffers/25.12.19/json",
+      "status": "declared",
+      "version": "25.12.19"
+    },
+    {
+      "classifiers": [],
+      "declaration": "Apache-2.0",
+      "expression": null,
+      "name": "frozenlist",
+      "source": "https://pypi.org/pypi/frozenlist/1.8.0/json",
+      "status": "declared",
+      "version": "1.8.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "fsspec",
+      "source": "https://pypi.org/pypi/fsspec/2026.9.0/json",
+      "status": "declared",
+      "version": "2026.9.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "googleapis-common-protos",
+      "source": "https://pypi.org/pypi/googleapis-common-protos/1.76.0/json",
+      "status": "declared",
+      "version": "1.76.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "grpcio",
+      "source": "https://pypi.org/pypi/grpcio/1.85.1/json",
+      "status": "declared",
+      "version": "1.85.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "h11",
+      "source": "https://pypi.org/pypi/h11/0.16.0/json",
+      "status": "declared",
+      "version": "0.16.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "hf-xet",
+      "source": "https://pypi.org/pypi/hf-xet/1.8.0/json",
+      "status": "declared",
+      "version": "1.8.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "htmldate",
+      "source": "https://pypi.org/pypi/htmldate/1.11.0/json",
+      "status": "declared",
+      "version": "1.11.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "httpcore",
+      "source": "https://pypi.org/pypi/httpcore/1.0.9/json",
+      "status": "declared",
+      "version": "1.0.9"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "httpcore2",
+      "source": "https://pypi.org/pypi/httpcore2/2.16.0/json",
+      "status": "declared",
+      "version": "2.16.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "httptools",
+      "source": "https://pypi.org/pypi/httptools/0.9.0/json",
+      "status": "declared",
+      "version": "0.9.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": "BSD-3-Clause",
+      "expression": null,
+      "name": "httpx",
+      "source": "https://pypi.org/pypi/httpx/0.28.1/json",
+      "status": "declared",
+      "version": "0.28.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "httpx-sse",
+      "source": "https://pypi.org/pypi/httpx-sse/0.4.3/json",
+      "status": "declared",
+      "version": "0.4.3"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "httpx2",
+      "source": "https://pypi.org/pypi/httpx2/2.16.0/json",
+      "status": "declared",
+      "version": "2.16.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "httpx2-jsfetch",
+      "source": "https://pypi.org/pypi/httpx2-jsfetch/1.0/json",
+      "status": "declared",
+      "version": "1.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": "Apache",
+      "expression": null,
+      "name": "huggingface-hub",
+      "source": "https://pypi.org/pypi/huggingface-hub/0.36.2/json",
+      "status": "declared",
+      "version": "0.36.2"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": "Apache-2.0",
+      "expression": null,
+      "name": "huggingface-hub",
+      "source": "https://pypi.org/pypi/huggingface-hub/1.33.0/json",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": "Apache-2.0",
+      "expression": null,
+      "name": "huggingface-hub",
+      "source": "https://pypi.org/pypi/huggingface-hub/2.3.0/json",
+      "status": "declared",
+      "version": "2.3.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "idna",
+      "source": "https://pypi.org/pypi/idna/3.20/json",
+      "status": "declared",
+      "version": "3.20"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "importlib-resources",
+      "source": "https://pypi.org/pypi/importlib-resources/7.1.0/json",
+      "status": "declared",
+      "version": "7.1.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "iniconfig",
+      "source": "https://pypi.org/pypi/iniconfig/2.3.1/json",
+      "status": "declared",
+      "version": "2.3.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": null,
+      "expression": null,
+      "name": "jinja2",
+      "source": "https://pypi.org/pypi/jinja2/3.1.6/json",
+      "status": "declared",
+      "version": "3.1.6"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "joblib",
+      "source": "https://pypi.org/pypi/joblib/1.6.0/json",
+      "status": "declared",
+      "version": "1.6.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "jsonschema",
+      "source": "https://pypi.org/pypi/jsonschema/4.26.0/json",
+      "status": "declared",
+      "version": "4.26.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "jsonschema-specifications",
+      "source": "https://pypi.org/pypi/jsonschema-specifications/2025.9.1/json",
+      "status": "declared",
+      "version": "2025.9.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": "The BSD 2-Clause License",
+      "expression": null,
+      "name": "justext",
+      "source": "https://pypi.org/pypi/justext/3.0.2/json",
+      "status": "declared",
+      "version": "3.0.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "ken-rank",
+      "source": "https://pypi.org/pypi/ken-rank/0.18.0/json",
+      "status": "declared",
+      "version": "0.18.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "kubernetes",
+      "source": "https://pypi.org/pypi/kubernetes/37.0.1/json",
+      "status": "declared",
+      "version": "37.0.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "linkify-it-py",
+      "source": "https://pypi.org/pypi/linkify-it-py/2.2.0/json",
+      "status": "declared",
+      "version": "2.2.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": null,
+      "expression": null,
+      "name": "loguru",
+      "source": "https://pypi.org/pypi/loguru/0.7.3/json",
+      "status": "declared",
+      "version": "0.7.3"
+    },
+    {
+      "classifiers": [],
+      "declaration": "BSD-3-Clause",
+      "expression": null,
+      "name": "lxml",
+      "source": "https://pypi.org/pypi/lxml/6.1.3/json",
+      "status": "declared",
+      "version": "6.1.3"
+    },
+    {
+      "classifiers": [],
+      "declaration": "BSD-3-Clause",
+      "expression": null,
+      "name": "lxml-html-clean",
+      "source": "https://pypi.org/pypi/lxml-html-clean/0.4.6/json",
+      "status": "declared",
+      "version": "0.4.6"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": null,
+      "expression": null,
+      "name": "markdown-it-py",
+      "source": "https://pypi.org/pypi/markdown-it-py/4.2.0/json",
+      "status": "declared",
+      "version": "4.2.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "markupsafe",
+      "source": "https://pypi.org/pypi/markupsafe/3.0.4/json",
+      "status": "declared",
+      "version": "3.0.4"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "mcp",
+      "source": "https://pypi.org/pypi/mcp/1.30.0/json",
+      "status": "declared",
+      "version": "1.30.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "mcp",
+      "source": "https://pypi.org/pypi/mcp/2.3.0/json",
+      "status": "declared",
+      "version": "2.3.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "mcp-types",
+      "source": "https://pypi.org/pypi/mcp-types/2.3.0/json",
+      "status": "declared",
+      "version": "2.3.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": null,
+      "expression": null,
+      "name": "mdit-py-plugins",
+      "source": "https://pypi.org/pypi/mdit-py-plugins/0.6.1/json",
+      "status": "declared",
+      "version": "0.6.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "",
+      "expression": null,
+      "name": "mdurl",
+      "source": "https://pypi.org/pypi/mdurl/0.1.2/json",
+      "status": "declared",
+      "version": "0.1.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "ml-dtypes",
+      "source": "https://pypi.org/pypi/ml-dtypes/0.6.0/json",
+      "status": "declared",
+      "version": "0.6.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT License\n        \n        Copyright (c) 2011-2026 Hajime Senuma\n        \n        Permission is hereby granted, free of charge, to any person obtaining a copy\n        of this software and associated documentation files (the \"Software\"), to deal\n        in the Software without restriction, including without limitation the rights\n        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n        copies of the Software, and to permit persons to whom the Software is\n        furnished to do so, subject to the following conditions:\n        \n        The above copyright notice and this permission notice shall be included in all\n        copies or substantial portions of the Software.\n        \n        THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n        SOFTWARE.",
+      "expression": null,
+      "name": "mmh3",
+      "source": "https://pypi.org/pypi/mmh3/5.3.1/json",
+      "status": "declared",
+      "version": "5.3.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT License\n        \n        Copyright (c) 2024 Thomas van Dongen\n        \n        Permission is hereby granted, free of charge, to any person obtaining a copy\n        of this software and associated documentation files (the \"Software\"), to deal\n        in the Software without restriction, including without limitation the rights\n        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n        copies of the Software, and to permit persons to whom the Software is\n        furnished to do so, subject to the following conditions:\n        \n        The above copyright notice and this permission notice shall be included in all\n        copies or substantial portions of the Software.\n        \n        THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n        SOFTWARE.\n        ",
+      "expression": null,
+      "name": "model2vec",
+      "source": "https://pypi.org/pypi/model2vec/0.9.0/json",
+      "status": "declared",
+      "version": "0.9.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "multidict",
+      "source": "https://pypi.org/pypi/multidict/7.2.1/json",
+      "status": "declared",
+      "version": "7.2.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0",
+      "name": "numpy",
+      "source": "https://pypi.org/pypi/numpy/2.5.4/json",
+      "status": "declared",
+      "version": "2.5.4"
+    },
+    {
+      "classifiers": [],
+      "declaration": "BSD-3-Clause",
+      "expression": null,
+      "name": "oauthlib",
+      "source": "https://pypi.org/pypi/oauthlib/4.0.1/json",
+      "status": "declared",
+      "version": "4.0.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "onnx",
+      "source": "https://pypi.org/pypi/onnx/1.20.1/json",
+      "status": "declared",
+      "version": "1.20.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT License",
+      "expression": null,
+      "name": "onnxruntime",
+      "source": "https://pypi.org/pypi/onnxruntime/1.31.1/json",
+      "status": "declared",
+      "version": "1.31.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "opentelemetry-api",
+      "source": "https://pypi.org/pypi/opentelemetry-api/1.45.2/json",
+      "status": "declared",
+      "version": "1.45.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "opentelemetry-exporter-otlp-common",
+      "source": "https://pypi.org/pypi/opentelemetry-exporter-otlp-common/0.66b2/json",
+      "status": "declared",
+      "version": "0.66b2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "opentelemetry-exporter-otlp-proto-common",
+      "source": "https://pypi.org/pypi/opentelemetry-exporter-otlp-proto-common/1.45.2/json",
+      "status": "declared",
+      "version": "1.45.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "opentelemetry-exporter-otlp-proto-grpc",
+      "source": "https://pypi.org/pypi/opentelemetry-exporter-otlp-proto-grpc/1.45.2/json",
+      "status": "declared",
+      "version": "1.45.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "opentelemetry-proto",
+      "source": "https://pypi.org/pypi/opentelemetry-proto/1.45.2/json",
+      "status": "declared",
+      "version": "1.45.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "opentelemetry-sdk",
+      "source": "https://pypi.org/pypi/opentelemetry-sdk/1.45.2/json",
+      "status": "declared",
+      "version": "1.45.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "opentelemetry-semantic-conventions",
+      "source": "https://pypi.org/pypi/opentelemetry-semantic-conventions/0.66b2/json",
+      "status": "declared",
+      "version": "0.66b2"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License",
+        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)"
+      ],
+      "declaration": null,
+      "expression": "MPL-2.0 AND (Apache-2.0 OR MIT)",
+      "name": "orjson",
+      "source": "https://pypi.org/pypi/orjson/3.13.0/json",
+      "status": "declared",
+      "version": "3.13.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": "Apache License, Version 2.0",
+      "expression": null,
+      "name": "overrides",
+      "source": "https://pypi.org/pypi/overrides/7.7.0/json",
+      "status": "declared",
+      "version": "7.7.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0 OR BSD-2-Clause",
+      "name": "packaging",
+      "source": "https://pypi.org/pypi/packaging/26.3/json",
+      "status": "declared",
+      "version": "26.3"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)"
+      ],
+      "declaration": null,
+      "expression": null,
+      "name": "pathspec",
+      "source": "https://pypi.org/pypi/pathspec/1.1.1/json",
+      "status": "declared",
+      "version": "1.1.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT-CMU",
+      "name": "pillow",
+      "source": "https://pypi.org/pypi/pillow/13.0.0/json",
+      "status": "declared",
+      "version": "13.0.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "platformdirs",
+      "source": "https://pypi.org/pypi/platformdirs/4.14.2/json",
+      "status": "declared",
+      "version": "4.14.2"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "pluggy",
+      "source": "https://pypi.org/pypi/pluggy/1.7.0/json",
+      "status": "declared",
+      "version": "1.7.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": "Apache-2.0",
+      "expression": null,
+      "name": "propcache",
+      "source": "https://pypi.org/pypi/propcache/0.5.4/json",
+      "status": "declared",
+      "version": "0.5.4"
+    },
+    {
+      "classifiers": [],
+      "declaration": "3-Clause BSD License",
+      "expression": null,
+      "name": "protobuf",
+      "source": "https://pypi.org/pypi/protobuf/7.36.2/json",
+      "status": "declared",
+      "version": "7.36.2"
+    },
+    {
+      "artifact": {
+        "license_files": [
+          {
+            "path": "py_rust_stemmers-0.1.8/LICENSE",
+            "sha256": "f79ad92c0936186de30f349d55f5e4162845793661e5f8b4d07e8734a92fed6a",
+            "text": "MIT License\n\nCopyright (c) 2024 qdrant\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+          }
+        ],
+        "sha256": "6b0f6f48bc54d607aed802de872fcd5a71bae969a6760976dc78ce55e8eaf3da",
+        "url": "https://files.pythonhosted.org/packages/6b/c1/9763f9fb1cd73f9c317a83feeed6e0d4af320c6bbddab47b4a94f3a47d0c/py_rust_stemmers-0.1.8.tar.gz"
+      },
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "py-rust-stemmers",
+      "review": {
+        "artifact_sha256": "6b0f6f48bc54d607aed802de872fcd5a71bae969a6760976dc78ce55e8eaf3da",
+        "artifact_url": "https://files.pythonhosted.org/packages/6b/c1/9763f9fb1cd73f9c317a83feeed6e0d4af320c6bbddab47b4a94f3a47d0c/py_rust_stemmers-0.1.8.tar.gz",
+        "expression": "MIT",
+        "member": "py_rust_stemmers-0.1.8/LICENSE",
+        "member_sha256": "f79ad92c0936186de30f349d55f5e4162845793661e5f8b4d07e8734a92fed6a",
+        "name": "py-rust-stemmers",
+        "reviewer": "Codex, 2026-11-07",
+        "scope": "Observed license of this exact source distribution; not a review of every bundled component or platform wheel.",
+        "version": "0.1.8"
+      },
+      "source": "https://pypi.org/pypi/py-rust-stemmers/0.1.8/json",
+      "status": "reviewed_artifact",
+      "version": "0.1.8"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-2-Clause",
+      "name": "pybase64",
+      "source": "https://pypi.org/pypi/pybase64/1.5.1/json",
+      "status": "declared",
+      "version": "1.5.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "pycparser",
+      "source": "https://pypi.org/pypi/pycparser/3.12/json",
+      "status": "declared",
+      "version": "3.12"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "pydantic",
+      "source": "https://pypi.org/pypi/pydantic/2.12.5/json",
+      "status": "declared",
+      "version": "2.12.5"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "pydantic",
+      "source": "https://pypi.org/pypi/pydantic/2.14.2/json",
+      "status": "declared",
+      "version": "2.14.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "pydantic",
+      "source": "https://pypi.org/pypi/pydantic/2.14.3/json",
+      "status": "declared",
+      "version": "2.14.3"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "pydantic-core",
+      "source": "https://pypi.org/pypi/pydantic-core/2.41.5/json",
+      "status": "declared",
+      "version": "2.41.5"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "pydantic-core",
+      "source": "https://pypi.org/pypi/pydantic-core/2.50.2/json",
+      "status": "declared",
+      "version": "2.50.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "pydantic-core",
+      "source": "https://pypi.org/pypi/pydantic-core/2.50.4/json",
+      "status": "declared",
+      "version": "2.50.4"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "pydantic-settings",
+      "source": "https://pypi.org/pypi/pydantic-settings/2.16.2/json",
+      "status": "declared",
+      "version": "2.16.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-2-Clause",
+      "name": "pygments",
+      "source": "https://pypi.org/pypi/pygments/2.21.0/json",
+      "status": "declared",
+      "version": "2.21.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "pyjwt",
+      "source": "https://pypi.org/pypi/pyjwt/2.15.1/json",
+      "status": "declared",
+      "version": "2.15.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "pypdf",
+      "source": "https://pypi.org/pypi/pypdf/6.21.4/json",
+      "status": "declared",
+      "version": "6.21.4"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": "Apache License Version 2.0",
+      "expression": null,
+      "name": "pypika",
+      "source": "https://pypi.org/pypi/pypika/0.51.1/json",
+      "status": "declared",
+      "version": "0.51.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "pyproject-hooks",
+      "source": "https://pypi.org/pypi/pyproject-hooks/1.3.3/json",
+      "status": "declared",
+      "version": "1.3.3"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "pytest",
+      "source": "https://pypi.org/pypi/pytest/9.2.0/json",
+      "status": "declared",
+      "version": "9.2.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "pytest-asyncio",
+      "source": "https://pypi.org/pypi/pytest-asyncio/1.4.1/json",
+      "status": "declared",
+      "version": "1.4.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "pytest-socket",
+      "source": "https://pypi.org/pypi/pytest-socket/0.8.1/json",
+      "status": "declared",
+      "version": "0.8.1"
+    },
+    {
+      "classifiers": [
+        "License :: DFSG approved",
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "pytest-timeout",
+      "source": "https://pypi.org/pypi/pytest-timeout/2.4.0/json",
+      "status": "declared",
+      "version": "2.4.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License",
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": "Dual License",
+      "expression": null,
+      "name": "python-dateutil",
+      "source": "https://pypi.org/pypi/python-dateutil/2.9.0.post0/json",
+      "status": "declared",
+      "version": "2.9.0.post0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License",
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": "Dual License",
+      "expression": null,
+      "name": "python-dateutil",
+      "source": "https://pypi.org/pypi/python-dateutil/3.0.0/json",
+      "status": "declared",
+      "version": "3.0.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": "BSD-3-Clause",
+      "expression": null,
+      "name": "python-dotenv",
+      "source": "https://pypi.org/pypi/python-dotenv/1.2.4/json",
+      "status": "declared",
+      "version": "1.2.4"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "python-multipart",
+      "source": "https://pypi.org/pypi/python-multipart/0.0.33/json",
+      "status": "declared",
+      "version": "0.0.33"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "pytz",
+      "source": "https://pypi.org/pypi/pytz/2026.6/json",
+      "status": "declared",
+      "version": "2026.6"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Python Software Foundation License"
+      ],
+      "declaration": "PSF",
+      "expression": null,
+      "name": "pywin32",
+      "source": "https://pypi.org/pypi/pywin32/312/json",
+      "status": "declared",
+      "version": "312"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "pyyaml",
+      "source": "https://pypi.org/pypi/pyyaml/6.0.3/json",
+      "status": "declared",
+      "version": "6.0.3"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "referencing",
+      "source": "https://pypi.org/pypi/referencing/0.37.0/json",
+      "status": "declared",
+      "version": "0.37.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0 AND CNRI-Python",
+      "name": "regex",
+      "source": "https://pypi.org/pypi/regex/2026.1.15/json",
+      "status": "declared",
+      "version": "2026.1.15"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0 AND CNRI-Python",
+      "name": "regex",
+      "source": "https://pypi.org/pypi/regex/2026.11.7/json",
+      "status": "declared",
+      "version": "2026.11.7"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": "Apache-2.0",
+      "expression": null,
+      "name": "requests",
+      "source": "https://pypi.org/pypi/requests/2.34.2/json",
+      "status": "declared",
+      "version": "2.34.2"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": "ISC",
+      "expression": null,
+      "name": "requests-oauthlib",
+      "source": "https://pypi.org/pypi/requests-oauthlib/2.0.0/json",
+      "status": "declared",
+      "version": "2.0.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "rich",
+      "source": "https://pypi.org/pypi/rich/14.3.4/json",
+      "status": "declared",
+      "version": "14.3.4"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "rich",
+      "source": "https://pypi.org/pypi/rich/15.0.0/json",
+      "status": "declared",
+      "version": "15.0.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "rpds-py",
+      "source": "https://pypi.org/pypi/rpds-py/2026.9.1/json",
+      "status": "declared",
+      "version": "2026.9.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "ruff",
+      "source": "https://pypi.org/pypi/ruff/0.17.3/json",
+      "status": "declared",
+      "version": "0.17.3"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": null,
+      "expression": null,
+      "name": "safetensors",
+      "source": "https://pypi.org/pypi/safetensors/0.8.0/json",
+      "status": "declared",
+      "version": "0.8.0"
+    },
+    {
+      "artifact": {
+        "license_files": [
+          {
+            "path": "sentencepiece-0.2.1/sentencepiece/LICENSE",
+            "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+            "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n"
+          }
+        ],
+        "sha256": "8138cec27c2f2282f4a34d9a016e3374cd40e5c6e9cb335063db66a0a3b71fad",
+        "url": "https://files.pythonhosted.org/packages/15/15/2e7a025fc62d764b151ae6d0f2a92f8081755ebe8d4a64099accc6f77ba6/sentencepiece-0.2.1.tar.gz"
+      },
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "sentencepiece",
+      "review": {
+        "artifact_sha256": "8138cec27c2f2282f4a34d9a016e3374cd40e5c6e9cb335063db66a0a3b71fad",
+        "artifact_url": "https://files.pythonhosted.org/packages/15/15/2e7a025fc62d764b151ae6d0f2a92f8081755ebe8d4a64099accc6f77ba6/sentencepiece-0.2.1.tar.gz",
+        "expression": "Apache-2.0",
+        "member": "sentencepiece-0.2.1/sentencepiece/LICENSE",
+        "member_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "name": "sentencepiece",
+        "reviewer": "Codex, 2026-11-07",
+        "scope": "Observed license of this exact source distribution; not a review of every bundled component or platform wheel.",
+        "version": "0.2.1"
+      },
+      "source": "https://pypi.org/pypi/sentencepiece/0.2.1/json",
+      "status": "reviewed_artifact",
+      "version": "0.2.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: ISC License (ISCL)"
+      ],
+      "declaration": "ISC License",
+      "expression": null,
+      "name": "shellingham",
+      "source": "https://pypi.org/pypi/shellingham/1.5.4/json",
+      "status": "declared",
+      "version": "1.5.4"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "six",
+      "source": "https://pypi.org/pypi/six/1.17.0/json",
+      "status": "declared",
+      "version": "1.17.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": "BSD-3-Clause",
+      "expression": null,
+      "name": "snowballstemmer",
+      "source": "https://pypi.org/pypi/snowballstemmer/3.0.1/json",
+      "status": "declared",
+      "version": "3.0.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "sse-starlette",
+      "source": "https://pypi.org/pypi/sse-starlette/3.6.0/json",
+      "status": "declared",
+      "version": "3.6.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "starlette",
+      "source": "https://pypi.org/pypi/starlette/1.10.0/json",
+      "status": "declared",
+      "version": "1.10.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "tenacity",
+      "source": "https://pypi.org/pypi/tenacity/9.2.1/json",
+      "status": "declared",
+      "version": "9.2.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "textual",
+      "source": "https://pypi.org/pypi/textual/8.2.8/json",
+      "status": "declared",
+      "version": "8.2.8"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-or-later",
+      "name": "tld",
+      "source": "https://pypi.org/pypi/tld/0.13.2/json",
+      "status": "declared",
+      "version": "0.13.2"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": null,
+      "expression": null,
+      "name": "tokenizers",
+      "source": "https://pypi.org/pypi/tokenizers/0.22.2/json",
+      "status": "declared",
+      "version": "0.22.2"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": null,
+      "expression": null,
+      "name": "tokenizers",
+      "source": "https://pypi.org/pypi/tokenizers/0.23.3/json",
+      "status": "declared",
+      "version": "0.23.3"
+    },
+    {
+      "classifiers": [],
+      "declaration": "MPL-2.0 AND MIT",
+      "expression": null,
+      "name": "tqdm",
+      "source": "https://pypi.org/pypi/tqdm/4.70.1/json",
+      "status": "declared",
+      "version": "4.70.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "trafilatura",
+      "source": "https://pypi.org/pypi/trafilatura/2.3.1/json",
+      "status": "declared",
+      "version": "2.3.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": null,
+      "expression": null,
+      "name": "tree-sitter",
+      "source": "https://pypi.org/pypi/tree-sitter/0.25.2/json",
+      "status": "declared",
+      "version": "0.25.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "tree-sitter-go",
+      "source": "https://pypi.org/pypi/tree-sitter-go/0.25.0/json",
+      "status": "declared",
+      "version": "0.25.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "tree-sitter-java",
+      "source": "https://pypi.org/pypi/tree-sitter-java/0.23.5/json",
+      "status": "declared",
+      "version": "0.23.5"
+    },
+    {
+      "classifiers": [],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "tree-sitter-javascript",
+      "source": "https://pypi.org/pypi/tree-sitter-javascript/0.25.0/json",
+      "status": "declared",
+      "version": "0.25.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "tree-sitter-language-pack",
+      "source": "https://pypi.org/pypi/tree-sitter-language-pack/1.25.0/json",
+      "status": "declared",
+      "version": "1.25.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "tree-sitter-python",
+      "source": "https://pypi.org/pypi/tree-sitter-python/0.25.0/json",
+      "status": "declared",
+      "version": "0.25.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "tree-sitter-rust",
+      "source": "https://pypi.org/pypi/tree-sitter-rust/0.24.2/json",
+      "status": "declared",
+      "version": "0.24.2"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "tree-sitter-typescript",
+      "source": "https://pypi.org/pypi/tree-sitter-typescript/0.23.2/json",
+      "status": "declared",
+      "version": "0.23.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "truststore",
+      "source": "https://pypi.org/pypi/truststore/0.10.5/json",
+      "status": "declared",
+      "version": "0.10.5"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "typer",
+      "source": "https://pypi.org/pypi/typer/0.27.3/json",
+      "status": "declared",
+      "version": "0.27.3"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "PSF-2.0",
+      "name": "typing-extensions",
+      "source": "https://pypi.org/pypi/typing-extensions/4.16.0/json",
+      "status": "declared",
+      "version": "4.16.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "typing-inspection",
+      "source": "https://pypi.org/pypi/typing-inspection/0.4.4/json",
+      "status": "declared",
+      "version": "0.4.4"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "typing-inspection",
+      "source": "https://pypi.org/pypi/typing-inspection/0.4.5/json",
+      "status": "declared",
+      "version": "0.4.5"
+    },
+    {
+      "classifiers": [],
+      "declaration": "Apache-2.0",
+      "expression": null,
+      "name": "tzdata",
+      "source": "https://pypi.org/pypi/tzdata/2026.6/json",
+      "status": "declared",
+      "version": "2026.6"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "tzlocal",
+      "source": "https://pypi.org/pypi/tzlocal/5.4.5/json",
+      "status": "declared",
+      "version": "5.4.5"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "urllib3",
+      "source": "https://pypi.org/pypi/urllib3/2.8.0/json",
+      "status": "declared",
+      "version": "2.8.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "uvicorn",
+      "source": "https://pypi.org/pypi/uvicorn/0.54.0/json",
+      "status": "declared",
+      "version": "0.54.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License",
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT License",
+      "expression": null,
+      "name": "uvloop",
+      "source": "https://pypi.org/pypi/uvloop/0.23.0/json",
+      "status": "declared",
+      "version": "0.23.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "watchfiles",
+      "source": "https://pypi.org/pypi/watchfiles/1.3.0/json",
+      "status": "declared",
+      "version": "1.3.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": "Apache-2.0",
+      "expression": null,
+      "name": "websocket-client",
+      "source": "https://pypi.org/pypi/websocket-client/1.9.2/json",
+      "status": "declared",
+      "version": "1.9.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "websockets",
+      "source": "https://pypi.org/pypi/websockets/16.1.1/json",
+      "status": "declared",
+      "version": "16.1.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "websockets",
+      "source": "https://pypi.org/pypi/websockets/17.4/json",
+      "status": "declared",
+      "version": "17.4"
+    },
+    {
+      "classifiers": [],
+      "declaration": "Apache-2.0",
+      "expression": null,
+      "name": "yarl",
+      "source": "https://pypi.org/pypi/yarl/1.25.1/json",
+      "status": "declared",
+      "version": "1.25.1"
+    }
+  ],
+  "unavailable": 0
+}

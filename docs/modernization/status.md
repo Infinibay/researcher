@@ -4,6 +4,17 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Inventario de licencias y avisos comprobados:**164 versiones Python y415
+  entradas npm;139 ausencias anteriores resueltas con declaraciones o revisiones
+  de artefactos verificados.12 pruebas pasan; build, wheel/sdist e instalación
+  aislada comprobados. Licencia original intacta;608 archivos backend sin cambios.
+  Avisos web para93 entradas,91 con texto y2 pendientes en DD091; compatibilidad
+  de la distribución final aún abierta. Bloque13min38s. Siguiente principal:
+  entrega de planificación dentro del presupuesto anterior.
+  [Informe](license-review.md), [resultados](license-results.json),
+  [inventario](license-inventory.json).
+
+
 - **Lector Chroma aislado y migración comprobada:** namespaces propios, entorno
   limpio, sin original/credenciales/entrada estándar/red del host, plazo externo
   y rechazo de enlaces de salida.6 pruebas de barrera pasan; conjunto del

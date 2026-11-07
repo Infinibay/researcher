@@ -8293,3 +8293,21 @@ Kenfixneedscoherentdistribution, notforceddependencyoverride. Othersecurity/reso
 limits/recovery, planningdeliverycap, humanA/B/otherprofiles/realscience, ownerDBlocation,
 12pageacceptance remain43broad0of12. Allfine detailsafterallmacro. Publishlist/timeat
 nexttransition andrecordstart; persistaftercompaction. Localcommitonly,no push/merge/deploy.
+
+
+## License inventory and distribution notices — 2026-11-07
+
+Base3cbffff; measured10:16:47–10:30:25UTC,818seconds to validation cut.
+164Python versions/415npm entries have declared or exact-artifact-reviewed
+licenses; all139previous metadata gaps resolved.12audit tests pass; actual web
+build and isolated wheel metadata/files verified.608backendPython/SQLfiles match
+the prior wheel, no production runtime reinstall. Original license/copyright
+unchanged.16Pythondefinitions/2modules and the Vite hook documented. No modelturns.
+93webnoticeentries include91texts;2missingtexts deferredDD091;4RuffDD090.
+Retain first4redtests,9unavailable @types archive roots and its failing fixture,
+then12green; initial metadata verifier accidentally chose source egg-info and
+passed under Python-I. Artifacts:license-review.md,license-results.json,
+license-inventory.json,license-artifact-reviews.json. Final distribution/source
+availability and compatibility remain open. No global suite, push or deployment.
+Next macro: planning delivery under its previous budget; not started. Preserve
+updated task list and measured times at transitions, all macro work before detail.

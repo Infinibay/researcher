@@ -1,0 +1,24 @@
+[
+  {
+    "artifact_sha256": "6b0f6f48bc54d607aed802de872fcd5a71bae969a6760976dc78ce55e8eaf3da",
+    "artifact_url": "https://files.pythonhosted.org/packages/6b/c1/9763f9fb1cd73f9c317a83feeed6e0d4af320c6bbddab47b4a94f3a47d0c/py_rust_stemmers-0.1.8.tar.gz",
+    "expression": "MIT",
+    "member": "py_rust_stemmers-0.1.8/LICENSE",
+    "member_sha256": "f79ad92c0936186de30f349d55f5e4162845793661e5f8b4d07e8734a92fed6a",
+    "name": "py-rust-stemmers",
+    "reviewer": "Codex, 2026-11-07",
+    "scope": "Observed license of this exact source distribution; not a review of every bundled component or platform wheel.",
+    "version": "0.1.8"
+  },
+  {
+    "artifact_sha256": "8138cec27c2f2282f4a34d9a016e3374cd40e5c6e9cb335063db66a0a3b71fad",
+    "artifact_url": "https://files.pythonhosted.org/packages/15/15/2e7a025fc62d764b151ae6d0f2a92f8081755ebe8d4a64099accc6f77ba6/sentencepiece-0.2.1.tar.gz",
+    "expression": "Apache-2.0",
+    "member": "sentencepiece-0.2.1/sentencepiece/LICENSE",
+    "member_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "name": "sentencepiece",
+    "reviewer": "Codex, 2026-11-07",
+    "scope": "Observed license of this exact source distribution; not a review of every bundled component or platform wheel.",
+    "version": "0.2.1"
+  }
+]

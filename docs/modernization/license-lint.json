@@ -1,0 +1,164 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 48,
+      "row": 13
+    },
+    "filename": "evals/security/test_dependency_audit.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import base64\nimport hashlib\nimport io\nimport json\nimport sys\nimport tarfile\n\nimport pytest\n\nfrom scripts import audit_dependencies as audit\nfrom scripts.audit_dependencies import run_auditor\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 16
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 34,
+      "row": 21
+    },
+    "filename": "scripts/audit_dependencies.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import argparse\nimport base64\nimport hashlib\nimport io\nimport json\nimport re\nimport subprocess\nimport tarfile\nimport tomllib\nfrom concurrent.futures import ThreadPoolExecutor\nfrom datetime import datetime, timezone\nfrom pathlib import Path\nfrom urllib.parse import urlsplit\nfrom urllib.request import urlopen\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 23
+          },
+          "location": {
+            "column": 1,
+            "row": 8
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 8
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 8,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "FURB167",
+    "end_location": {
+      "column": 103,
+      "row": 135
+    },
+    "filename": "scripts/audit_dependencies.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import re",
+          "end_location": {
+            "column": 10,
+            "row": 16
+          },
+          "location": {
+            "column": 1,
+            "row": 16
+          }
+        },
+        {
+          "content": "re.MULTILINE",
+          "end_location": {
+            "column": 103,
+            "row": 135
+          },
+          "location": {
+            "column": 99,
+            "row": 135
+          }
+        }
+      ],
+      "message": "Replace with `re.MULTILINE`"
+    },
+    "location": {
+      "column": 99,
+      "row": 135
+    },
+    "message": "Use of regular expression alias `re.M`",
+    "name": "regex-flag-alias",
+    "noqa_row": 135,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/regex-flag-alias"
+  },
+  {
+    "cell": null,
+    "code": "UP017",
+    "end_location": {
+      "column": 56,
+      "row": 222
+    },
+    "filename": "scripts/audit_dependencies.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from datetime import datetime, timezone, UTC",
+          "end_location": {
+            "column": 40,
+            "row": 11
+          },
+          "location": {
+            "column": 1,
+            "row": 11
+          }
+        },
+        {
+          "content": "UTC",
+          "end_location": {
+            "column": 56,
+            "row": 222
+          },
+          "location": {
+            "column": 44,
+            "row": 222
+          }
+        }
+      ],
+      "message": "Convert to `datetime.UTC` alias"
+    },
+    "location": {
+      "column": 44,
+      "row": 222
+    },
+    "message": "Use `datetime.UTC` alias",
+    "name": "datetime-timezone-utc",
+    "noqa_row": 222,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/datetime-timezone-utc"
+  }
+]
