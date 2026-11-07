@@ -108,3 +108,7 @@ autoridad nueva, pausa planes copiados y conserva trabajo anterior como historia
 El navegador conserva/archiva decisiones anteriores antes de entrar en la nueva
 instalación. El comando no adopta procesos ni efectos remotos del host original.
 La recuperación operativa completa tras reboot sigue abierta.
+El [ensayo de restauración con modelo/Ken](../../evals/operation/README.md)
+comprueba copia en otra ruta, inscripción nueva, una solicitud explícita y otro
+arranque del servicio. El modelo usado en esa evidencia es configurable mediante
+los recursos del host; no se añade una credencial de API alternativa.

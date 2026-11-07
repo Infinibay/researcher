@@ -461,3 +461,13 @@ texto/espaciado del aviso pueden esperar; ya existe descarga y conservación exa
 El reboot real, la aceptación de un turno de modelo en el host restaurado, datos
 históricos y el soporte necesario para sus tamaños/layouts son trabajo principal.
 No se presentan como pequeños detalles resueltos por este tramo.
+
+## DD074 — pulido del ensayo restaurado y extensión del informe
+
+Tres avisos de lint en `restored-host-evaluation-lint.json`: orden de imports y
+un import sin uso ya presente en `host_smoke.py`. No requieren reconstruir el
+runtime ni repetir el turno de modelo. El informe real separa correctamente
+inspección/ejecución, cita evidencia y usa el ejemplo137fichas+63fichas; aun así,
+su lenguaje metodológico resulta largo para una suma. Ajustar esa proporcionalidad
+en la pasada de comunicación/prompts, con evaluación apropiada, sin convertir
+este hallazgo en otra ejecución de la misma prueba ya aprobada.

@@ -4,9 +4,9 @@ El comando de administración puede copiar los datos de una instalación nativa
 preparada y restaurarlos en otra carpeta. La restauración conserva los datos y
 el historial y termina en `pending_enrollment`. El comando separado
 `enroll-restored-host` habilita la nueva instalación con recursos y autoridad
-nuevos. Se han comprobado su arranque y reinicio de servicio; siguen pendientes
-el reboot real, datos históricos del propietario y una ejecución completa de
-modelo en el host restaurado. No es todavía una aceptación integral de
+nuevos. Se han comprobado su arranque, un turno completo de modelo/Ken y el
+reinicio del servicio; siguen pendientes el reboot real y datos históricos del
+propietario. No es todavía una aceptación integral de
 recuperación tras un desastre.
 
 ```bash
@@ -122,7 +122,15 @@ archivos/directorios; el ensayo no simula pérdida física de energía.
 La reinscripción tiene pruebas de fuente y del paquete instalado, dos arranques
 del servicio con emparejamiento nuevo, rechazo HTTP de un endpoint anterior,
 pausa de planes con handoff conservado y prueba física de un proceso no-op.
-Los turnos nativos de modelo no se ejecutaron en este tramo. El aviso del navegador
+Ese tramo no ejecutó turnos de modelo. El ensayo posterior de
+[`restored_host.py`](../../evals/operation/restored_host.py) sí ejecutó una solicitud
+nueva con la suscripción: Ken devolvió código restaurado, Python produjo200,
+se conservaron un finding provisional con dos citas y un informe draft, y otro
+arranque mantuvo los mismos resultados. El run anterior sigue pendiente en el
+original y como historial en la copia. Cinco peers quedaron cerrados; el
+verificador de sólo lectura no generó otro turno.
+[Resultado y límites](../modernization/restored-host-evaluation-results.json).
+El aviso del navegador
 se revisó en escritorio/móvil y ante falta de almacenamiento; esto no acepta las
 12 páginas completas. [Resultados](../modernization/restored-enrollment-results.json),
 [paquete](../modernization/restored-enrollment-packaging.json),

@@ -1,0 +1,96 @@
+{
+  "base_commit": "7a0eb31",
+  "documented_definitions": 15,
+  "contracts": [
+    {
+      "path": "evals/operation/host_smoke.py",
+      "symbol": "pair",
+      "line": 67,
+      "docstring": "Pair with this synthetic service without recording the secret or session."
+    },
+    {
+      "path": "evals/operation/host_smoke.py",
+      "symbol": "admit_live",
+      "line": 98,
+      "docstring": "Send one bounded admission, optionally persisting its original identity before any HTTP attempt."
+    },
+    {
+      "path": "evals/operation/restored_host.py",
+      "symbol": "_host",
+      "line": 23,
+      "docstring": "Reuse operational start/pair/admit/stop helpers without overriding installed backend imports."
+    },
+    {
+      "path": "evals/operation/restored_host.py",
+      "symbol": "checkpoint",
+      "line": 31,
+      "docstring": "Durably replace a private evaluation receipt without copying credentials or prompt bodies."
+    },
+    {
+      "path": "evals/operation/restored_host.py",
+      "symbol": "verify_ken",
+      "line": 44,
+      "docstring": "Correlate this synthetic source-read call with its returned code, not a model's self-report.\n\nThis bounded fixture check does not evaluate arbitrary JavaScript or establish\ngeneral attribution for adversarial traces containing fabricated output strings."
+    },
+    {
+      "path": "evals/operation/restored_host.py",
+      "symbol": "verify",
+      "line": 67,
+      "docstring": "Inspect original terminal data and its exact native trace; this path never starts a service or model."
+    },
+    {
+      "path": "evals/operation/restored_host.py",
+      "symbol": "run",
+      "line": 118,
+      "docstring": "Create new synthetic original/copy/restored roots and issue exactly one new subscription request."
+    },
+    {
+      "path": "evals/operation/restored_host.py",
+      "symbol": "main",
+      "line": 194,
+      "docstring": "Choose explicit new execution or read-only inspection of the original retained outcome."
+    },
+    {
+      "path": "backend/tests/runtime/test_restored_host_evaluation.py",
+      "symbol": "test_restored_trial_requires_live_before_creating_data",
+      "line": 8,
+      "docstring": "No implicit model authorization or filesystem preparation occurs without the explicit flag."
+    },
+    {
+      "path": "backend/tests/runtime/test_restored_host_evaluation.py",
+      "symbol": "test_host_admission_checkpoints_original_key_before_any_http_attempt",
+      "line": 18,
+      "docstring": "A lost reply cannot erase the identity needed to inspect the original admission without replay."
+    },
+    {
+      "path": "backend/tests/runtime/test_restored_host_evaluation.py",
+      "symbol": "test_host_admission_checkpoints_original_key_before_any_http_attempt.UncertainClient",
+      "line": 26,
+      "docstring": "Fail the single original HTTP request after observing its durable intent."
+    },
+    {
+      "path": "backend/tests/runtime/test_restored_host_evaluation.py",
+      "symbol": "test_host_admission_checkpoints_original_key_before_any_http_attempt.UncertainClient.post",
+      "line": 28,
+      "docstring": "Assert persistence precedes sending and emulate an unobserved remote outcome."
+    },
+    {
+      "path": "backend/tests/runtime/test_restored_host_evaluation.py",
+      "symbol": "test_host_admission_checkpoints_original_key_before_any_http_attempt.checkpoint",
+      "line": 36,
+      "docstring": "Capture an exact inspection receipt without recording the model request text."
+    },
+    {
+      "path": "backend/tests/runtime/test_restored_host_evaluation.py",
+      "symbol": "test_ken_verifier_rejects_calls_without_correlated_returned_code",
+      "line": 46,
+      "docstring": "A mention, attempted call or another tool's result cannot prove Ken read the restored source."
+    },
+    {
+      "path": "backend/tests/runtime/test_restored_host_evaluation.py",
+      "symbol": "test_ken_verifier_accepts_correlated_synthetic_source",
+      "line": 59,
+      "docstring": "The controlled trace proves returned fixture code without claiming general JavaScript analysis."
+    }
+  ]
+}

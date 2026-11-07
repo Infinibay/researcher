@@ -1,0 +1,107 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 59,
+      "row": 21
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_restored_host_evaluation.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.runtime.sqlite_runs import SQLiteRunStore\n    from evals.operation.host_smoke import admit_live\n",
+          "end_location": {
+            "column": 1,
+            "row": 22
+          },
+          "location": {
+            "column": 1,
+            "row": 20
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 20
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 20,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 10,
+      "row": 9
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/evals/operation/host_smoke.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 10
+          },
+          "location": {
+            "column": 1,
+            "row": 9
+          }
+        }
+      ],
+      "message": "Remove unused import: `os`"
+    },
+    "location": {
+      "column": 8,
+      "row": 9
+    },
+    "message": "`os` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 9,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 61,
+      "row": 128
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/evals/operation/restored_host.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.api.owner_endpoint import endpoint_identity\n    from backend.runtime.contracts import RunSpec\n    from backend.runtime.host_installation import (\n        _read_json,\n        initialize_host,\n        inspect_host,\n    )\n    from backend.runtime.installation_backup import backup_installation, verify_backup\n    from backend.runtime.installation_restore import restore_installation\n    from backend.runtime.restored_enrollment import enroll_restored_host\n    from backend.runtime.sqlite_runs import SQLiteRunStore\n",
+          "end_location": {
+            "column": 1,
+            "row": 129
+          },
+          "location": {
+            "column": 1,
+            "row": 122
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 122
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 122,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  }
+]

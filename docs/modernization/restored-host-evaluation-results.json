@@ -1,0 +1,245 @@
+{
+  "base_commit": "7a0eb31",
+  "status": "passed",
+  "timing": {
+    "start_utc": "2026-11-07 03:34:13",
+    "verified_utc": "2026-11-07 03:40:47",
+    "elapsed_seconds": 394
+  },
+  "source_tests": {
+    "passed": 12,
+    "failed": 0,
+    "skipped": 0
+  },
+  "documented_new_or_changed_definitions": 15,
+  "package": {
+    "wheel_sha256": "b87642b6de7afa7a412bf647735cc5bf26255f60e50b974448e208a0104202bc",
+    "unchanged_product_files_matching_source_wheel_and_installation": 312,
+    "all_live_backend_imports_installed": true,
+    "rebuilt": false,
+    "reason": "Only evaluation harness/tests/docs changed; native product bytes stayed identical."
+  },
+  "live": {
+    "status": "passed",
+    "model": "gpt-6.1-sol",
+    "admissions_sent": 1,
+    "run_id": "e7294efd-fba1-4202-86d3-1fcba7f831f1",
+    "original_run_id": "cfc22d44-e702-44d0-9de5-b3f786a87382",
+    "snapshot_id": "b7d9ce98be164b1c94e8ffc3acbe5e9a",
+    "fresh_authority": true,
+    "kernel_probe": {
+      "child_exit_code": 0,
+      "domain_removed": true
+    },
+    "before_restart": {
+      "runs": [
+        [
+          "cfc22d44-e702-44d0-9de5-b3f786a87382",
+          "superseded"
+        ],
+        [
+          "e7294efd-fba1-4202-86d3-1fcba7f831f1",
+          "needs_review"
+        ]
+      ],
+      "dispatches": [
+        [
+          "gpt-6.1-sol",
+          "settled",
+          "completed"
+        ]
+      ],
+      "reports": [
+        [
+          1,
+          "draft"
+        ]
+      ],
+      "findings": [
+        [
+          1,
+          "provisional"
+        ]
+      ],
+      "peers": [
+        [
+          "business",
+          "closed"
+        ],
+        [
+          "native",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ],
+        [
+          "command",
+          "closed"
+        ]
+      ],
+      "integrity": "ok"
+    },
+    "after_restart": {
+      "runs": [
+        [
+          "cfc22d44-e702-44d0-9de5-b3f786a87382",
+          "superseded"
+        ],
+        [
+          "e7294efd-fba1-4202-86d3-1fcba7f831f1",
+          "needs_review"
+        ]
+      ],
+      "dispatches": [
+        [
+          "gpt-6.1-sol",
+          "settled",
+          "completed"
+        ]
+      ],
+      "reports": [
+        [
+          1,
+          "draft"
+        ]
+      ],
+      "findings": [
+        [
+          1,
+          "provisional"
+        ]
+      ],
+      "peers": [
+        [
+          "business",
+          "closed"
+        ],
+        [
+          "native",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ],
+        [
+          "command",
+          "closed"
+        ]
+      ],
+      "integrity": "ok"
+    },
+    "service_exits": [
+      143,
+      143
+    ],
+    "original_host_run_replayed": false
+  },
+  "verification": {
+    "status": "passed",
+    "generations_started_by_verification": 0,
+    "runs": [
+      {
+        "id": "cfc22d44-e702-44d0-9de5-b3f786a87382",
+        "status": "superseded",
+        "current_attempt_id": null
+      },
+      {
+        "id": "e7294efd-fba1-4202-86d3-1fcba7f831f1",
+        "status": "needs_review",
+        "current_attempt_id": "64cf0738-cd11-4850-940c-4785e701fdd3"
+      }
+    ],
+    "dispatches": [
+      {
+        "model": "gpt-6.1-sol",
+        "status": "settled",
+        "native_status": "completed",
+        "observed_tokens": 280439
+      }
+    ],
+    "peers": [
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "ken",
+        "state": "closed"
+      },
+      {
+        "kind": "ken",
+        "state": "closed"
+      },
+      {
+        "kind": "command",
+        "state": "closed"
+      }
+    ],
+    "jobs": [
+      {
+        "operation_key": "host-installation-c3d9dc48d66b4365850f706df641a6ba-calc",
+        "status": "exited",
+        "exit_code": 0,
+        "stdout": "200\n",
+        "stderr": "",
+        "output_limited": 0
+      }
+    ],
+    "reports": [
+      {
+        "artifact_id": 1,
+        "status": "draft",
+        "content_sha256": "43a067862f5ba4612ba6e5e2b5353543970cebe8894f5d156ba98bfead95e293"
+      }
+    ],
+    "citations_verified": 2,
+    "ken_reads": [
+      "ken_read"
+    ],
+    "native_trace_sha256": "570060f6e03045bf2107ff1a2b97b1835c436fe5e81f2c9699ac97447bfd3a94",
+    "original_unchanged": true,
+    "source_files_unchanged": true
+  },
+  "communication_review": {
+    "simple_example": "137 fichas +63 fichas =200 fichas",
+    "distinguishes_source_inspection_from_executed_calculation": true,
+    "quotes_sources_and_preserves_draft_status": true,
+    "scope_limits_explicit": true,
+    "human_comprehension_test": false,
+    "deferred": "DD074: report methodology is disproportionately long for a deterministic addition"
+  },
+  "failures_retained": [
+    "Six RED tests before implementation; final12PASS",
+    "A separate read-only observer initially passed a relative path to Path.as_uri; corrected to absolute without restarting or altering the live run"
+  ],
+  "limits": [
+    "Synthetic user data, no historical user-data migration",
+    "Different filesystem root and fresh authority on the same kernel; not an actual reboot or power loss",
+    "One successful subscription/model turn does not prove future availability, refresh or all model choices",
+    "Trace verification is specific to this controlled fixture, not arbitrary adversarial JavaScript",
+    "Observed token highwater is not a billing estimate",
+    "No human/scientific/global evaluation or full-page acceptance claim"
+  ],
+  "remaining": [
+    "Real reboot authority recovery",
+    "Historical-data location/import and external legacy layouts",
+    "Later inverse/recovery paths",
+    "History/budgets and current integral evaluations/security",
+    "Twelve-page acceptance, deferred details and final whole-plan review"
+  ]
+}

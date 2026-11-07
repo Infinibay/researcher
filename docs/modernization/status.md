@@ -4,6 +4,14 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Recorrido real sobre instalación restaurada comprobado:** una solicitud
+  nueva con la suscripción usa Ken, calcula200, guarda un finding con dos citas y
+  un informe draft; otro arranque conserva los resultados. La solicitud copiada
+  no se repite y los cinco peers quedan cerrados. Pasan12 pruebas del harness y
+  15 definiciones tienen docstrings. Los312 archivos productivos coinciden con el
+  paquete instalado. Siguen reboot real, datos históricos y aceptación integral.
+  [Uso](../../evals/operation/README.md), [evidencia](restored-host-evaluation-results.json).
+
 - **Reinscripción de copias y protección del navegador implementadas:** autoridad
   nueva, planes pausados y trabajo copiado conservado como historial; activación
   final y recuperación de un proceso interrumpido desde otra restauración nueva.

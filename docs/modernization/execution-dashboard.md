@@ -19,7 +19,39 @@ o porcentaje. No reconstruir tiempos históricos a partir de recuerdos del chat.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: reinscripción implementada; sigue recorrido nativo restaurado
+## Etapa actual: recorrido nativo restaurado comprobado; sigue recuperación tras reboot
+
+El ensayo nuevo copia datos sintéticos a otra ruta y conserva una petición antigua
+sin ejecutarla. Tras reinscripción, envía una única petición nueva mediante la
+suscripción. Ken devuelve el código, Python calcula200 y se guardan un finding
+provisional con dos citas y un informe draft. Un segundo arranque conserva todo.
+Cinco peers y los dos servicios originales quedaron cerrados. La inspección
+posterior de sólo lectura pasa con cero turnos nuevos.
+
+Pasan12 pruebas del harness y sus15 definiciones nuevas/modificadas están
+documentadas. Los312 archivos productivos coinciden con el wheel y su instalación;
+el ensayo importó backend instalado. No se reconstruyó el paquete sin cambios
+productivos ni se repitió el turno. Tiempo hasta verificar: **6min34s**
+(03:34:13–03:40:47 UTC). [Uso](../../evals/operation/README.md),
+[resultados](restored-host-evaluation-results.json).
+
+**Lista vigente al cambiar de tarea:**
+- Implementado: copia/restauración, reinscripción y ahora recorrido completo de
+  modelo/Ken con conservación tras reinicio del servicio.
+- Siguiente principal: recuperación/reinscripción tras cambio real de kernel;
+  un reinicio del servicio no cubre el rechazo de la autoridad tras reboot.
+- Pendiente de ubicación: datos históricos del propietario. Siguen layouts
+  externos, informes sólo en archivos, documentos sólo en Chroma e inversas.
+- Después: historial/presupuestos; evaluación real, humana, científica y global;
+  seguridad, aceptación integral de12 páginas y revisión final.
+- Al final: detalles secundarios. DD074 conserva tres avisos de lint y el ajuste
+  de extensión del informe a la sencillez de una comprobación aritmética.
+
+No se reinició el equipo del propietario, migraron sus datos ni hicieron push,
+merge o despliegue. Los43 escenarios amplios y las12 aceptaciones integrales
+siguen abiertos; este ensayo no demuestra comprensión humana o calidad científica.
+
+## Etapa anterior: reinscripción implementada; sigue recorrido nativo restaurado
 
 `enroll-restored-host` habilita una copia con recursos, autoridad y acceso nuevos.
 Los planes copiados quedan pausados y el trabajo pendiente se conserva como

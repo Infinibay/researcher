@@ -72,6 +72,7 @@ def pair(client, root):
     response = client.post('/api/session', json={'code': keys[0].read_text().strip()}, headers={'X-Researcher-Client': 'web'})
     response.raise_for_status()
     client.headers['X-Researcher-CSRF'] = response.json()['csrf_token']
+    client.headers['X-Researcher-Endpoint'] = response.json()['endpoint_id']
 
 
 def seed(root, *, stored_root=None):
@@ -94,8 +95,8 @@ def seed(root, *, stored_root=None):
         db.execute("INSERT INTO reference_files(id,project_id,file_name,file_path,file_size,file_type) VALUES(7,101,'units.txt',?,?,'text/plain')", (str(visible / "uploads" / "101/uploads/units.txt"), attachment.stat().st_size))
 
 
-def admit_live(client, root, result):
-    """Send one bounded synthetic admission; retain its identity before observing the outcome."""
+def admit_live(client, root, result, *, checkpoint=None):
+    """Send one bounded admission, optionally persisting its original identity before any HTTP attempt."""
     from backend.runtime.sqlite_runs import SQLiteRunStore
 
     version = SQLiteRunStore(root / 'source.db').context_snapshot(101, 1001)['context_version']
@@ -108,10 +109,14 @@ def admit_live(client, root, result):
                'No edites archivos, no instales paquetes, no publiques ni aceptes resultados. Un único turno; termina indicando informe y límites de la prueba.')
     result['operation_key'] = key
     result['admissions_sent'] = 1
+    if checkpoint is not None:
+        checkpoint(result)
     response = client.post('/api/projects/101/tasks/1001/runs', json={'operation_key': key, 'context_version': version, 'repository_id': 11, 'request': request})
     response.raise_for_status()
     run_id = response.json()['run_id']
     result['run_id'] = run_id
+    if checkpoint is not None:
+        checkpoint(result)
     deadline = time.monotonic() + 240
     while time.monotonic() < deadline:
         response = client.get(f'/api/projects/101/runs/{run_id}')
