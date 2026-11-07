@@ -19,7 +19,36 @@ o porcentaje. No reconstruir tiempos históricos a partir de recuerdos del chat.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: configuración retirada; runners todavía en migración
+## Etapa actual: seis escenarios nativos migrados; siguen los demás runners
+
+Investigación/corrección, Conversación, preguntas/respuestas, Stop, continuidad
+y cálculo usan instalaciones sintéticas nuevas con autoridad propia y recursos
+explícitos. Se reutiliza el launcher instalado; el modelo sigue configurable y
+los límites del operador se conservan o reducen. Nueve admisiones por suscripción,
+sin repetir un turno incierto. [Comandos](../../evals/runtime/README.md),
+[resultados y límites](native-evaluation-runners-results.json).
+
+Cinco runners reales terminan correctamente. El de cálculo terminó su trabajo,
+pero su harness confundía el catálogo de negocio de 45 herramientas con las 54
+de la composición nativa. Se corrigió el check; los artefactos originales y el
+recibo HTTP tras reinicio se verificaron sin nueva generación. Se conserva el
+fallo original. Pasan 38 casos dirigidos; 307 archivos productivos coinciden con
+el paquete instalado y 26 definiciones tienen docstrings. El consumo de Stop y
+del turno que pregunta permanece desconocido. No hay nueva suite global.
+
+**Lista vigente:**
+- Cerrado en este grupo: seis escenarios portados y comprobaciones documentadas;
+  corrección, preguntas, recibos repetidos, continuidad, cálculo y cierres reales.
+- En curso: runners de comandos, pérdida del padre, herramientas de análisis,
+  aislamiento de Ken y captura/inspección del propietario; experimentos de
+  candidatos conservados como históricos, sin atribuirles aceptación actual.
+- Después: migraciones/inversas/restauración real y reboot; historial/presupuestos;
+  evaluaciones real, humana, científica y global; seguridad de dependencias,
+  aceptación completa de 12 páginas y revisión final.
+- Al final: detalles secundarios, incluidos los cinco avisos de estilo DD068.
+  Los 43 escenarios amplios siguen abiertos y ninguna página tiene aceptación integral.
+
+## Etapa anterior: configuración retirada; runners todavía en migración
 
 Se retiran 75 opciones sin consumidores, la derivación de embeddings por proveedor
 y el escritor global de settings.json. Quedan diez ajustes usados por DB,

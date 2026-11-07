@@ -363,3 +363,18 @@ principal aún abierto, no pulido. Lo mismo vale para restauración y evaluacion
 integrales. Retirar diez funciones de tests del escritor global no repara fallos
 de esas capacidades ni demuestra una suite global verde.
 
+## DD068 — estilo después de migrar seis evaluaciones nativas
+
+Cinco avisos: dos de orden de imports y tres variables locales sin uso en los
+runners migrados. Se conservan en `native-evaluation-runners-lint.json` para
+después de todas las capacidades principales. El aviso del chequeo de versión
+de Codex sobre `/nonexistent` sigue siendo el ya registrado para el host.
+No repetir turnos por esos detalles ni reconstruir el paquete productivo sin
+cambios en sus fuentes.
+
+La confusión entre las 45 herramientas de negocio y las 54 del catálogo nativo
+se corrigió como parte del escenario, no se difiere. El fallo original permanece
+visible, con verificación de sus artefactos y recuperación HTTP del mismo recibo
+sin nueva generación. Siguen siendo trabajo principal los demás runners, la
+evaluación humana/científica/global y la aceptación integral de las páginas.
+

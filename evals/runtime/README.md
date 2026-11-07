@@ -38,14 +38,50 @@ está en [host nativo](../../docs/architecture/native-host-installation.md) y
 sintética nueva; el turno por suscripción es explícito y acotado con `--live`.
 Estos recorridos no sustituyen la evaluación completa de los escenarios de abajo.
 
-## Escenarios que aún deben migrarse o revalidarse
+## Escenarios nativos y pendientes
+
+### Instalaciones nuevas para investigación e interacción
+
+Estos seis runners usan `native_trial.py` y el launcher instalado. Aceptan
+`--assets` con el mismo formato de recursos que `researcher-bootstrap init-host`,
+incluidos modelo, cuenta por suscripción, Ken publicado, caché y cgroup delegado.
+No aceptan una configuración de runtime anterior ni un workspace del operador.
+
+```sh
+python evals/runtime/run_product.py --live --assets /ruta/host-assets.json
+python evals/runtime/run_conversation.py --live --assets /ruta/host-assets.json
+python evals/runtime/run_questions.py --live --assets /ruta/host-assets.json
+python evals/runtime/run_product_stop.py --live --assets /ruta/host-assets.json
+python evals/runtime/run_input_continuity.py --live --assets /ruta/host-assets.json
+python evals/runtime/run_analysis_inference.py --live --assets /ruta/host-assets.json
+```
+
+Ejecutarlos en serie, cada uno sobre una instalación sintética nueva. El archivo
+de recursos debe permitir dos turnos para `run_product.py`, `run_questions.py`
+y `run_input_continuity.py`; los otros tres admiten uno. El runner reduce los límites a su escenario y nunca
+aumenta un límite de tiempo, herramientas o tokens del archivo del operador.
+No cambia el modelo ni copia tokens. Un límite de turnos de proyecto insuficiente
+se rechaza antes de preparar la instalación.
+
+Cada directorio privado de `.researcher/evaluations/` conserva instalación,
+testigo separado, código y adjuntos sintéticos, preparación, resultado y cierre
+del servidor original. Un fallo conserva su evidencia; no se reinicia un turno
+incierto. Las comprobaciones numéricas y de entrega no prueban comprensión humana.
+El estado de los ensayos está en
+[resultados de la migración](../../docs/modernization/native-evaluation-runners-results.json).
+
+El escenario de análisis comprueba además el cálculo observado, el catálogo MCP
+actual, todos sus peers cerrados y la lectura de código devuelta por Ken en la
+traza del turno original. `run_analysis_inference.py --verify-root /ruta/ensayo`
+permite inspeccionar los artefactos de ese mismo ensayo sin arrancar otro turno;
+conserva el resultado original, incluso si el harness había fallado. También
+reconoce el formato histórico para inspeccionar recibos anteriores.
+
+### Escenarios restantes
 
 | Runner conservado | Alcance que falta comprobar con el runtime vigente |
 | --- | --- |
 | `run_research.py`, `serve_infinidev_research.py` | Comparación directa de candidatos, entorno y política de herramientas; no aceptación del producto nativo |
-| `run_product.py` | Dos turnos de investigación y corrección; su configuración construida corresponde al prototipo y ahora falla temprano |
-| `run_product_stop.py`, `run_conversation.py`, `run_questions.py` | Stop, instrucciones y preguntas con recursos/autoridad de una instalación nueva |
-| `run_analysis_inference.py`, `run_input_continuity.py` | Cálculo y continuidad atribuida entre turnos; no copiar una autoridad anterior para construir otra instalación |
 | `run_commands.py`, `run_parent_loss.py`, `run_analysis_tools.py` | Sustituir la ejecución directa del prototipo por el broker/dominio nativo y volver a observar efectos y cierre |
 | `../security/run_ken_isolation.py` | Revalidar Ken publicado y aislamiento en la composición vigente |
 | `run_owner_command_inspection.py`, `../ui/run_owner_capture.py` | Lectura de recibos y navegación sobre fixture sintético actual, portable y reproducible; hoy dependen de un ensayo anterior específico |

@@ -13,29 +13,22 @@ sys.path.insert(0, str(REPO))
 
 
 async def main(args):
+    """Run the bounded scenario against a fresh native installation and retain its evidence."""
     from backend.db.connection import connect
-    from evals.runtime.run_research import backend, environment
+    from evals.runtime.native_trial import backend, prepare
 
     root = REPO / ".researcher/evaluations" / ("product-stop-" + uuid4().hex[:8])
-    root.mkdir(parents=True)
-    settings = json.loads(Path(args.config).read_text())
-    settings["control_root"] = str(root / "native-control")
-    settings["limits"].update(wall_seconds=30, no_progress_seconds=15)
-    workspace = Path(args.workspace).resolve(strict=True)
+    trial = prepare(root, args.assets, live=args.live, turns=1, wall_seconds=30, no_progress_seconds=15)
+    workspace = trial.workspace
     evidence = {"status": "starting", "admission_requests": 0}
     print("Product Stop:", root, flush=True)
     try:
-        async with backend(root, environment(), runtime_settings=settings) as (
+        async with backend(trial, evidence) as (
             _store,
             owner,
             _api,
             database,
         ):
-            with closing(connect(str(database))) as conn, conn:
-                conn.execute(
-                    "INSERT INTO repositories(project_id,name,local_path) VALUES(101,'alpha',?)",
-                    (str(workspace),),
-                )
             admitted = await owner.post(
                 "/api/projects/101/tasks/1001/runs",
                 json={
@@ -115,8 +108,6 @@ async def main(args):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--live", action="store_true", required=True)
-    parser.add_argument("--config", required=True)
-    parser.add_argument("--workspace", required=True)
-    asyncio.run(main(parser.parse_args()))
+    from evals.runtime.native_trial import arguments
+
+    asyncio.run(main(arguments(argparse.ArgumentParser(description=__doc__))))

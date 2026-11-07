@@ -20,32 +20,14 @@ sys.path.insert(0, str(REPO))
 
 
 async def main(args):
+    """Run one bounded native scenario from fresh resources and preserve original evidence."""
     from backend.db.connection import connect
-    from evals.runtime.run_research import backend, environment, prepare_workspace
+    from evals.runtime.native_trial import backend, prepare
 
     root = REPO / ".researcher/evaluations" / ("analysis-inference-" + uuid4().hex[:8])
-    root.mkdir(parents=True)
-    settings = json.loads(Path(args.config).read_text())
-    settings.update(
-        codex_binary=args.codex_binary,
-        control_root=str(root / "native-control"),
-        project_turn_limit=1,
-        project_token_limit=400000,
-    )
-    settings["limits"].update(
-        max_turns=1,
-        max_tool_calls=20,
-        max_observed_tokens=350000,
-        wall_seconds=180,
-        no_progress_seconds=90,
-    )
-    workspaces = root / "workspaces"
-    workspaces.mkdir()
-    print("Analysis inference trial:", root, flush=True)
-    workspace = await asyncio.to_thread(
-        prepare_workspace, workspaces, settings["ken_command"]
-    )
-    settings["workspace_root"] = str(workspaces)
+    trial = prepare(root, args.assets, live=args.live, turns=1)
+    workspace = trial.workspace
+    print("Native scenario:", root, flush=True)
     original = {
         p.name: hashlib.sha256(p.read_bytes()).hexdigest()
         for p in workspace.glob("*.py")
@@ -57,17 +39,12 @@ async def main(args):
         "image_calls": 0,
     }
     try:
-        async with backend(root, environment(), runtime_settings=settings) as (
+        async with backend(trial, evidence) as (
             _store,
             owner,
             _api,
             database,
         ):
-            with closing(connect(str(database))) as conn, conn:
-                conn.execute(
-                    "INSERT INTO repositories(id,project_id,name,local_path) VALUES(11,101,'alpha',?)",
-                    (str(workspace),),
-                )
             body = {
                 "operation_key": "analysis-integration",
                 "thread_id": "analysis",
@@ -103,7 +80,7 @@ async def main(args):
             record.raise_for_status()
             record = record.json()
             names = [tool["name"] for tool in record["business_catalog"]]
-            assert len(names) == 15 and "researcher_python" in names
+            verify_native_catalog(names)
             evidence["catalog_names"] = names
             assert (
                 hashlib.sha256(record["input_text"].encode()).hexdigest()
@@ -137,7 +114,7 @@ async def main(args):
                         "SELECT kind,state FROM runtime_peers ORDER BY rowid"
                     )
                 ]
-                assert len(evidence["peers"]) == 3 and all(
+                assert {"business", "native", "ken", "command"} <= {row["kind"] for row in evidence["peers"]} and all(
                     row["state"] == "closed" for row in evidence["peers"]
                 )
                 evidence["dispatches"] = [
@@ -186,6 +163,41 @@ async def main(args):
         )
         print("Evidence:", root / "evidence.json", flush=True)
 
+    return root
+
+
+def verify_native_catalog(names):
+    """Check the synthetic research input's complete host composition, including Ken and analysis."""
+    from backend.runtime.analysis_tools import _TOOLS
+    from backend.runtime.business_mediation import RESEARCH_NAMES
+    from backend.runtime.ken_mediation import KEN_NAMES
+
+    expected = RESEARCH_NAMES | KEN_NAMES | set(_TOOLS)
+    assert set(names) == expected and len(names) == len(expected), 'Incomplete or unexpected native research catalog'
+
+
+def verify_ken_reads(rows):
+    """Require a Ken source-read call and matching returned fixture code, not readiness or a model claim.
+
+    This correlates the synthetic scenario's native trace. It is not a general
+    verifier of arbitrary JavaScript or adversarial tool-result attribution.
+    """
+    calls = []
+    for row in rows:
+        if row.get("type") == "custom_tool_call" and row.get("name") == "exec":
+            names = re.findall(r"tools\.((?:mcp__researcher_ken__)?ken_(?:read|recall))\s*\(", row.get("input", ""))
+            output_type = "custom_tool_call_output"
+        elif row.get("type") == "function_call":
+            names = [row["name"]] if row.get("name") in {"ken_read", "ken_recall", "mcp__researcher_ken__ken_read", "mcp__researcher_ken__ken_recall"} else []
+            output_type = "function_call_output"
+        else:
+            continue
+        outputs = [x for x in rows if x.get("type") == output_type and x.get("call_id") == row.get("call_id")]
+        if names and len(outputs) == 1 and "return subtotal + tax_rate" in str(outputs[0].get("output", "")):
+            calls.extend(names)
+    assert calls, "Ken read needs its own returned source; a call or readiness alone is insufficient"
+    return calls
+
 
 def verify_existing(root):
     """Read terminal evidence after a harness failure; never restart generation."""
@@ -204,7 +216,8 @@ def verify_existing(root):
             else "not_executed_in_original_harness"
         ),
     }
-    database = root / "research.db"
+    native = (root / "installation/installation.json").is_file()
+    database = root / ("installation/source.db" if native else "research.db")
     with closing(sqlite3.connect(database.as_uri() + "?mode=ro", uri=True)) as conn:
         conn.row_factory = sqlite3.Row
         run = conn.execute(
@@ -229,7 +242,11 @@ def verify_existing(root):
                 "SELECT kind,state FROM runtime_peers ORDER BY rowid"
             )
         ]
-        assert len(peers) == 3 and all(row["state"] == "closed" for row in peers)
+        assert all(row["state"] == "closed" for row in peers)
+        if native:
+            assert {"business", "native", "ken", "command"} <= {row["kind"] for row in peers}
+        else:
+            assert len(peers) == 3
         result["peers"] = peers
         jobs = [
             dict(row)
@@ -265,19 +282,23 @@ def verify_existing(root):
             "SELECT business_catalog_json FROM runtime_input_snapshots"
         ).fetchone()
         names = [tool["name"] for tool in json.loads(snapshot[0])]
-        assert len(names) == 15 and "researcher_python" in names
+        if native:
+            verify_native_catalog(names)
+        else:
+            assert len(names) == 15 and "researcher_python" in names
         result["catalog_names"] = names
         thread_id = conn.execute("SELECT thread_id FROM runtime_attempts").fetchone()[0]
-    workspace = root / "workspaces/workspace"
+    workspace = root / ("installation/sources/invoice" if native else "workspaces/workspace")
     result["source_sha256"] = {}
     for name in ("invoice.py", "test_invoice.py"):
         data = (workspace / name).read_bytes()
         assert data == (REPO / "evals/runtime/fixture" / name).read_bytes()
         result["source_sha256"][name] = hashlib.sha256(data).hexdigest()
-    settings = json.loads((root / "runtime-settings.json").read_text())
-    matches = list(
-        (Path(settings["managed_home"]) / "sessions").rglob("*" + thread_id + "*.jsonl")
-    )
+    if native:
+        matches = list((root / "installation/control/native-state").rglob("*" + thread_id + "*.jsonl"))
+    else:
+        settings = json.loads((root / "runtime-settings.json").read_text())
+        matches = list((Path(settings["managed_home"]) / "sessions").rglob("*" + thread_id + "*.jsonl"))
     assert len(matches) == 1, (
         "Need the exact native thread trace, not another conversation"
     )
@@ -285,48 +306,7 @@ def verify_existing(root):
         json.loads(line).get("payload", {})
         for line in matches[0].read_text().splitlines()
     ]
-    ken_calls = []
-    for payload in rows:
-        name = payload.get("name", "")
-        if payload.get("type") == "function_call" and name.startswith(
-            "mcp__researcher_ken__"
-        ):
-            ken_calls.append(name)
-        elif payload.get("type") == "custom_tool_call" and name == "exec":
-            names = re.findall(
-                r"tools\.(mcp__researcher_ken__(?:ken_read|ken_recall))\(",
-                payload.get("input", ""),
-            )
-            if not names:
-                continue
-            outputs = [
-                row
-                for row in rows
-                if row.get("type") == "custom_tool_call_output"
-                and row.get("call_id") == payload.get("call_id")
-            ]
-            assert len(outputs) == 1
-            # This bounded scenario uses awaited Promise.allSettled and prints
-            # its actual results. Invocation text alone would not prove success.
-            returned = []
-            for item in outputs[0]["output"]:
-                try:
-                    value = json.loads(item.get("text", ""))
-                except json.JSONDecodeError:
-                    continue
-                if (
-                    isinstance(value, dict)
-                    and value.get("status") == "fulfilled"
-                    and isinstance(value.get("value"), dict)
-                ):
-                    returned.extend(value["value"].get("content", []))
-            assert any(
-                "return subtotal + tax_rate" in item.get("text", "")
-                for item in returned
-            )
-            ken_calls.extend(names)
-    assert ken_calls, "Ken readiness is not proof of a real tool invocation"
-    result["ken_call_names"] = ken_calls
+    result["ken_call_names"] = verify_ken_reads(rows)
     result["native_thread_trace_sha256"] = hashlib.sha256(
         matches[0].read_bytes()
     ).hexdigest()
@@ -339,17 +319,14 @@ def verify_existing(root):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--live", action="store_true")
-    parser.add_argument("--config")
-    parser.add_argument("--codex-binary")
+    parser.add_argument("--assets", type=Path)
     parser.add_argument("--verify-root", type=Path)
     args = parser.parse_args()
-    if args.verify_root:
+    if args.verify_root and not args.live:
         verify_existing(args.verify_root)
-    elif args.live and args.config and args.codex_binary:
-        asyncio.run(main(args))
+    elif args.live and args.assets and not args.verify_root:
+        verify_existing(asyncio.run(main(args)))
     else:
-        parser.error(
-            "Generation requires --live, --config and --codex-binary; otherwise use --verify-root"
-        )
+        parser.error("Use --live --assets for a fresh scenario, or --verify-root for read-only inspection")

@@ -8,8 +8,6 @@ import argparse
 import asyncio
 import hashlib
 import json
-import os
-import shutil
 import sys
 from contextlib import closing
 from pathlib import Path
@@ -20,34 +18,13 @@ sys.path.insert(0, str(REPO))
 
 
 async def main(args):
+    """Run the bounded scenario against a fresh native installation and retain its evidence."""
     from backend.db.connection import connect
-    from evals.runtime.run_research import backend, environment
+    from evals.runtime.native_trial import backend, prepare
 
     root = REPO / ".researcher/evaluations" / ("product-runtime-" + uuid4().hex[:8])
-    root.mkdir(parents=True)
-    workspace = Path(args.workspace).resolve(strict=True)
-    settings = {
-        "codex_binary": args.codex_binary,
-        "managed_home": os.environ.get("CODEX_HOME", str(Path.home() / ".codex")),
-        "control_root": str(root / "native-control"),
-        "ken_command": str(Path(args.ken_command).resolve()),
-        "model_cache": args.model_cache,
-        "business_script": str(REPO / "scripts/researcher_mcp_server.py"),
-        "uv_binary": shutil.which("uv"),
-        "uv_cache": os.environ.get("UV_CACHE_DIR", str(Path.home() / ".cache/uv")),
-        "workspace_root": str(workspace.parent),
-        "model": "gpt-6.1-sol",
-        "limits": {
-            "wall_seconds": 180,
-            "no_progress_seconds": 90,
-            "max_turns": 1,
-            "max_tool_calls": 16,
-            "max_observed_tokens": 350000,
-            "max_answer_bytes": 20000,
-        },
-        "project_turn_limit": 3,
-        "project_token_limit": 1050000,
-    }
+    trial = prepare(root, args.assets, live=args.live, turns=2)
+    workspace = trial.workspace
     evidence = {
         "status": "starting",
         "admission_requests": 0,
@@ -57,19 +34,15 @@ async def main(args):
     print("Product trial:", root, flush=True)
     before = hashlib.sha256((workspace / "invoice.py").read_bytes()).hexdigest()
     try:
-        async with backend(root, environment(), runtime_settings=settings) as (
+        async with backend(trial, evidence) as (
             _store,
             owner,
             _api,
             database,
         ):
-            with closing(connect(str(database))) as conn, conn:
-                conn.execute(
-                    "INSERT INTO repositories(id,project_id,name,local_path) VALUES(11,101,'alpha',?)",
-                    (str(workspace),),
-                )
 
             async def execute(key, version, prompt):
+                """Admit one identified research turn and observe its original result without replay."""
                 response = await owner.post(
                     "/api/projects/101/tasks/1001/runs",
                     json={
@@ -101,7 +74,7 @@ async def main(args):
                 "Con researcher_reference_list y las herramientas researcher, captura policy.md, registra un hallazgo provisional "
                 "respaldado por una cita literal de esa fuente y guarda un informe draft con ese hallazgo y un ejemplo sencillo "
                 "de impuesto para una base de 100 y tasa 0.21. Explica impuesto y total por separado. "
-                "Distingue la evidencia de la fuente del código, que sólo devuelve un marcador. "
+                "Distingue la evidencia de la fuente y del código; no supongas que el código implementa esa política. "
                 "Usa claves de operación initial-source, initial-finding e initial-report. No ejecutes tests ni publiques. "
                 "Termina con una explicación breve, el ID del informe y sus límites; el turno no acepta la tarea.",
             )
@@ -199,13 +172,6 @@ async def main(args):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--live", action="store_true")
-    parser.add_argument("--workspace", required=True)
-    parser.add_argument("--codex-binary", default=shutil.which("codex"))
-    parser.add_argument("--ken-command", required=True)
-    parser.add_argument("--model-cache", required=True)
-    args = parser.parse_args()
-    if not args.live:
-        parser.error("Only --live authorizes this explicit bounded subscription trial")
-    asyncio.run(main(args))
+    from evals.runtime.native_trial import arguments
+
+    asyncio.run(main(arguments(argparse.ArgumentParser(description=__doc__))))

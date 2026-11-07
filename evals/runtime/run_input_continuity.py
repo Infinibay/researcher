@@ -18,32 +18,14 @@ sys.path.insert(0, str(REPO))
 
 
 async def main(args):
+    """Run one bounded native scenario from fresh resources and preserve original evidence."""
     from backend.db.connection import connect
-    from evals.runtime.run_research import backend, environment, prepare_workspace
+    from evals.runtime.native_trial import backend, prepare
 
     root = REPO / ".researcher/evaluations" / ("input-continuity-" + uuid4().hex[:8])
-    root.mkdir(parents=True)
-    settings = json.loads(Path(args.config).read_text())
-    settings.update(
-        codex_binary=args.codex_binary,
-        control_root=str(root / "native-control"),
-        project_turn_limit=2,
-        project_token_limit=700000,
-    )
-    settings["limits"].update(
-        max_turns=1,
-        max_tool_calls=20,
-        max_observed_tokens=350000,
-        wall_seconds=180,
-        no_progress_seconds=90,
-    )
-    workspaces = root / "workspaces"
-    workspaces.mkdir()
-    print("Input continuity trial:", root, flush=True)
-    workspace = await asyncio.to_thread(
-        prepare_workspace, workspaces, settings["ken_command"]
-    )
-    settings["workspace_root"] = str(workspaces)
+    trial = prepare(root, args.assets, live=args.live, turns=2)
+    workspace = trial.workspace
+    print("Native scenario:", root, flush=True)
     original = {
         p.name: hashlib.sha256(p.read_bytes()).hexdigest()
         for p in workspace.glob("*.py")
@@ -58,19 +40,15 @@ async def main(args):
         "numerical_checks": "literal outputs, not human comprehension",
     }
     try:
-        async with backend(root, environment(), runtime_settings=settings) as (
+        async with backend(trial, evidence) as (
             _store,
             owner,
             _api,
             database,
         ):
-            with closing(connect(str(database))) as conn, conn:
-                conn.execute(
-                    "INSERT INTO repositories(id,project_id,name,local_path) VALUES(11,101,'alpha',?)",
-                    (str(workspace),),
-                )
 
             async def run(key, version, prompt):
+                """Record one instruction and verify its immutable input before comparing continuity."""
                 body = {
                     "operation_key": key,
                     "thread_id": "continuity",
@@ -210,8 +188,6 @@ async def main(args):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--live", action="store_true", required=True)
-    parser.add_argument("--config", required=True)
-    parser.add_argument("--codex-binary", required=True)
-    asyncio.run(main(parser.parse_args()))
+    from evals.runtime.native_trial import arguments
+
+    asyncio.run(main(arguments(argparse.ArgumentParser(description=__doc__))))

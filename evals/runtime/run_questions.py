@@ -18,37 +18,25 @@ sys.path.insert(0, str(REPO))
 
 
 async def main(args):
+    """Run the bounded scenario against a fresh native installation and retain its evidence."""
     from backend.db.connection import connect
-    from evals.runtime.run_research import backend, environment
+    from evals.runtime.native_trial import backend, prepare
 
     root = REPO / ".researcher/evaluations" / ("questions-" + uuid4().hex[:8])
-    root.mkdir(parents=True)
-    settings = json.loads(Path(args.config).read_text())
-    settings.update(
-        control_root=str(root / "native-control"),
-        project_turn_limit=2,
-        project_token_limit=700000,
-    )
-    settings["limits"].update(
-        max_turns=1, max_observed_tokens=350000, max_tool_calls=20
-    )
-    workspace = Path(args.workspace).resolve(strict=True)
+    trial = prepare(root, args.assets, live=args.live, turns=2)
+    workspace = trial.workspace
     evidence = {"status": "starting", "admitted_requests": 0, "runs": []}
     print("Question trial:", root, flush=True)
     try:
-        async with backend(root, environment(), runtime_settings=settings) as (
+        async with backend(trial, evidence) as (
             _store,
             owner,
             _api,
             database,
         ):
-            with closing(connect(str(database))) as conn, conn:
-                conn.execute(
-                    "INSERT INTO repositories(project_id,name,local_path) VALUES(101,'alpha',?)",
-                    (str(workspace),),
-                )
 
             async def run(key, version, message, expected):
+                """Admit one chat instruction and observe its question or draft before continuing."""
                 response = await owner.post(
                     "/api/chat/101/instructions",
                     json={
@@ -197,8 +185,6 @@ async def main(args):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--live", action="store_true", required=True)
-    parser.add_argument("--config", required=True)
-    parser.add_argument("--workspace", required=True)
-    asyncio.run(main(parser.parse_args()))
+    from evals.runtime.native_trial import arguments
+
+    asyncio.run(main(arguments(argparse.ArgumentParser(description=__doc__))))

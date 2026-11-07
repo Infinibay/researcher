@@ -1,0 +1,177 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 60,
+      "row": 78
+    },
+    "filename": "backend/tests/runtime/test_native_evaluation.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    import httpx\n\n    from evals.operation import host_smoke\n    from evals.runtime.native_trial import backend, prepare\n",
+          "end_location": {
+            "column": 1,
+            "row": 79
+          },
+          "location": {
+            "column": 1,
+            "row": 76
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 76
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 76,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 66,
+      "row": 95
+    },
+    "filename": "evals/runtime/native_trial.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.research.sqlite_store import SQLiteResearchStore\n    from evals.operation import host_smoke\n",
+          "end_location": {
+            "column": 1,
+            "row": 96
+          },
+          "location": {
+            "column": 1,
+            "row": 94
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 94
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 94,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F841",
+    "end_location": {
+      "column": 14,
+      "row": 26
+    },
+    "filename": "evals/runtime/run_conversation.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 27
+          },
+          "location": {
+            "column": 1,
+            "row": 26
+          }
+        }
+      ],
+      "message": "Remove assignment to unused variable `workspace`"
+    },
+    "location": {
+      "column": 5,
+      "row": 26
+    },
+    "message": "Local variable `workspace` is assigned to but never used",
+    "name": "unused-variable",
+    "noqa_row": 26,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-variable"
+  },
+  {
+    "cell": null,
+    "code": "F841",
+    "end_location": {
+      "column": 14,
+      "row": 22
+    },
+    "filename": "evals/runtime/run_product_stop.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 23
+          },
+          "location": {
+            "column": 1,
+            "row": 22
+          }
+        }
+      ],
+      "message": "Remove assignment to unused variable `workspace`"
+    },
+    "location": {
+      "column": 5,
+      "row": 22
+    },
+    "message": "Local variable `workspace` is assigned to but never used",
+    "name": "unused-variable",
+    "noqa_row": 22,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-variable"
+  },
+  {
+    "cell": null,
+    "code": "F841",
+    "end_location": {
+      "column": 14,
+      "row": 27
+    },
+    "filename": "evals/runtime/run_questions.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 28
+          },
+          "location": {
+            "column": 1,
+            "row": 27
+          }
+        }
+      ],
+      "message": "Remove assignment to unused variable `workspace`"
+    },
+    "location": {
+      "column": 5,
+      "row": 27
+    },
+    "message": "Local variable `workspace` is assigned to but never used",
+    "name": "unused-variable",
+    "noqa_row": 27,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-variable"
+  }
+]

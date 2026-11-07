@@ -7456,3 +7456,63 @@ Next within current macro: port/revalidate remaining native evaluation scenarios
 then migrations/inverses/real restore/reboot, history/budgets, broad evaluation,
 security/12page acceptance and finalreview.43scenarios remain36in_progress7pending.
 All macro capabilities before all fine details; checklist at task transitions.
+
+## 2026-11-06 — six native evaluation scenarios, based on 62e1331
+
+Previous goal turn made progress: configuration retirement and two harness repairs
+committed. Current macro remains evaluation-runner migration. Fresh native_trial
+uses explicit host resources, initialize_host and the installed launcher; no copied
+authority/control, no external operator workspace and no hidden model selection.
+Scenario1/2turn limits respect operator time/tool/token ceilings. Private partial
+preparation and original service closure survive failures. Product sources are
+unchanged;307productPython/SQL files match the installed package from62e1331.
+No wheel/image rebuild. New evaluation code and tests run from the checkout.
+
+Six scenarios ported: product research+correction, conversation receipt recovery,
+questions+stored answer, generation Stop, attributed input continuity and actual
+Python calculation. Five live harnesses exit0. Analysis original harness exits1:
+its new check mistakenly compared45business tools with the actual54composed tools
+(45business+5Ken+4analysis). Read producers, added explicit composition regression,
+corrected to the full contract. Original needs_review run already held correct
+28.77/165.77 output, draft and closed native/business/Ken/command peers. Read-only
+verification passes; then restart of the SAME installation recovers the original
+HTTP instruction receipt/input, with one unchanged run/dispatch and zero new
+model work. Original failure retained; no replacement generation. Native/legacy
+trace spelling is recognized, with source content correlated to the original
+Ken-read output; readiness or an agent's claim alone is insufficient.
+
+Nine unique admitted runs across six private installations. Seven result-producing
+turns have correlated Ken source reads. Stop and the question-producing turn
+have unknown usage, not zero; interruption closes peers and preserves the human
+control. All sources unchanged, grants revoked, task not done, foreign keys valid,
+all registered peers closed and original service exits observed143. Source and
+report examples are fictional, not financial advice or user-data migrations.
+Conversation duplicate posts reuse the original run; correction preserves the
+superseded message. Continuity's second request omits137 but recovers it from the
+attributed snapshot and explains both examples; original input hash is preserved.
+The product evaluation prompt's false marker-only claim was removed after reading
+the actual intentionally defective invoice fixture.
+
+Tests:6missingfixture failures ->6PASS, combined fixture/host/existing-eval31PASS.
+Trace verifier4missinghelper failures ->4PASS; catalog3missinghelper failures ->
+final7PASS, including missingKen/analysis and mismatched-output negatives.
+38distinct directed cases pass, no global suite.26definitions and all new/changed
+modules documented. Owned prompt inventory83/271/0pending unchanged; evaluation
+prompt adjustment reviewed separately.5lint findings deferredDD068. First direct
+ruff invocation absentPATH; cached isolated uvx tool ran successfully. Receipt
+aggregation initially included unrelated slow_tool.py from fixture directory;
+corrected to the two files actually seeded, no source mutation or rerun.
+
+Live handles55464/48863/63725/72769/21435/45362 terminal; same-installation HTTP
+recovery93093 terminal. Test handles66578/62716 and prompt44653 terminal. Public
+receipts retain analysis failure and recovery separately. Private raw traces,
+account paths and credentials are not staged. No push/merge/deploy.43broad
+scenarios remain36in_progress/7pending,12pilots/48concepts/0fullyacceptedpages.
+
+Next: finish remaining command/parent-loss/analysis-tool, Ken isolation and owner
+inspection/UI runners; candidates remain historical experiments without current
+product acceptance. Then data migrations/inverses/restore/reboot, history/budgets,
+real/human/scientific/global evaluation, security and12page acceptance, all fine
+details and finalwholeplanreview. Checklist at every principal transition; all
+macro capabilities before all fine details. Task measured from01:25:46UTC;
+no global percentage or ETA inferred. Overall goal remains active.

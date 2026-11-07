@@ -1,0 +1,491 @@
+{
+  "base_commit": "62e1331",
+  "date": "2026-11-06",
+  "migration_status": "in_progress",
+  "scope": "Six native synthetic interaction scenarios; installed product launcher, fresh authority/resources and actual subscription. Other runners and full-plan acceptance remain open.",
+  "tests": {
+    "fixture_and_existing_consumers": 31,
+    "analysis_evidence": 7,
+    "distinct_cases": 38,
+    "failed": 0,
+    "skipped": 0,
+    "red": {
+      "missing_native_fixture": 6,
+      "missing_trace_verifier": 4,
+      "missing_composed_catalog_check": 3
+    }
+  },
+  "installed_product": {
+    "production_files_match": 307,
+    "backend_imported_from_site_packages": true,
+    "scope": "Product Python excluding tests and declared db/*.sql; evaluator code runs from checkout, no wheel rebuilt."
+  },
+  "scenarios": {
+    "product": {
+      "status": "passed",
+      "original_harness_status": "passed",
+      "receipt_sha256": "627925386d2dca9bef4df0d8e595b455c1653eee3848ee71d067c0f602a84720",
+      "service_exit": 143,
+      "runs": [
+        "superseded",
+        "needs_review"
+      ],
+      "dispatches": [
+        {
+          "model": "gpt-6.1-sol",
+          "status": "settled",
+          "native_status": "completed",
+          "observed_tokens": 187806
+        },
+        {
+          "model": "gpt-6.1-sol",
+          "status": "settled",
+          "native_status": "completed",
+          "observed_tokens": 164787
+        }
+      ],
+      "reports": [
+        "draft",
+        "draft"
+      ],
+      "peers": [
+        [
+          "business",
+          "closed"
+        ],
+        [
+          "native",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ],
+        [
+          "business",
+          "closed"
+        ],
+        [
+          "native",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ]
+      ],
+      "all_grants_revoked": true,
+      "task_not_done": true,
+      "foreign_keys_valid": true,
+      "input_catalog_sizes": [
+        54,
+        54
+      ],
+      "jobs": [],
+      "source_files_unchanged": true,
+      "ken_source_reads": [
+        {
+          "trace_sha256": "4cd9464bddf470bb2543204e3d723376f0e675ac47924a8afc20009ea54605e3",
+          "source_read_verified": true,
+          "calls": [
+            "ken_read"
+          ]
+        },
+        {
+          "trace_sha256": "b4e15e8454bcbcedd58d222166e1589de25ca44f0f8c7eaba0ee8b763c944e3c",
+          "source_read_verified": true,
+          "calls": [
+            "ken_read"
+          ]
+        }
+      ]
+    },
+    "stop": {
+      "status": "passed",
+      "original_harness_status": "passed",
+      "receipt_sha256": "e993b917bfb377755991d9fc63aafdb01f5631e95ebc28ef6524a61ae6dba9a9",
+      "service_exit": 143,
+      "runs": [
+        "cancelled"
+      ],
+      "dispatches": [
+        {
+          "model": "gpt-6.1-sol",
+          "status": "unknown",
+          "native_status": null,
+          "observed_tokens": null
+        }
+      ],
+      "reports": [],
+      "peers": [
+        [
+          "business",
+          "closed"
+        ],
+        [
+          "native",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ]
+      ],
+      "all_grants_revoked": true,
+      "task_not_done": true,
+      "foreign_keys_valid": true,
+      "input_catalog_sizes": [
+        54
+      ],
+      "jobs": [],
+      "source_files_unchanged": true,
+      "ken_source_reads": [
+        {
+          "trace_sha256": "bd6f25102b56d6d63dca293f175762040a227b8d9a064cf5fe7670402934a5b2",
+          "source_read_verified": false,
+          "calls": []
+        }
+      ]
+    },
+    "questions": {
+      "status": "passed",
+      "original_harness_status": "passed",
+      "receipt_sha256": "478ff9d2be624661f7b4e1cccfd2f670535ba4d8916b29db59a4f7bce14196c1",
+      "service_exit": 143,
+      "runs": [
+        "superseded",
+        "needs_review"
+      ],
+      "dispatches": [
+        {
+          "model": "gpt-6.1-sol",
+          "status": "unknown",
+          "native_status": null,
+          "observed_tokens": null
+        },
+        {
+          "model": "gpt-6.1-sol",
+          "status": "settled",
+          "native_status": "completed",
+          "observed_tokens": 166833
+        }
+      ],
+      "reports": [
+        "draft"
+      ],
+      "peers": [
+        [
+          "business",
+          "closed"
+        ],
+        [
+          "native",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ],
+        [
+          "business",
+          "closed"
+        ],
+        [
+          "native",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ]
+      ],
+      "all_grants_revoked": true,
+      "task_not_done": true,
+      "foreign_keys_valid": true,
+      "input_catalog_sizes": [
+        54,
+        54
+      ],
+      "jobs": [],
+      "source_files_unchanged": true,
+      "ken_source_reads": [
+        {
+          "trace_sha256": "04ec5fefa12dd9b1bd869c7baa5bf61c8bb3b141a40d65d0d68c1416b469fd63",
+          "source_read_verified": false,
+          "calls": []
+        },
+        {
+          "trace_sha256": "d28c114eb39046791baeb21c73c74d1ae12c4edb6d5b73e4f15be1922810c3d1",
+          "source_read_verified": true,
+          "calls": [
+            "ken_read"
+          ]
+        }
+      ]
+    },
+    "conversation": {
+      "status": "passed",
+      "original_harness_status": "passed",
+      "receipt_sha256": "df36e445713a05f6625e502d4a82efa8d6baed1f0b5020dc997159917339c5c4",
+      "service_exit": 143,
+      "runs": [
+        "superseded"
+      ],
+      "dispatches": [
+        {
+          "model": "gpt-6.1-sol",
+          "status": "settled",
+          "native_status": "completed",
+          "observed_tokens": 163286
+        }
+      ],
+      "reports": [
+        "draft"
+      ],
+      "peers": [
+        [
+          "business",
+          "closed"
+        ],
+        [
+          "native",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ]
+      ],
+      "all_grants_revoked": true,
+      "task_not_done": true,
+      "foreign_keys_valid": true,
+      "input_catalog_sizes": [
+        54
+      ],
+      "jobs": [],
+      "source_files_unchanged": true,
+      "ken_source_reads": [
+        {
+          "trace_sha256": "64b7bc9c9ccc3c9265ed73d307c25ac961fc96e93272bef69047738dfbe2ff64",
+          "source_read_verified": true,
+          "calls": [
+            "ken_read"
+          ]
+        }
+      ]
+    },
+    "analysis": {
+      "status": "verified_original_after_harness_correction",
+      "original_harness_status": "failed",
+      "receipt_sha256": "8ff9e294c66bb36d3748affbd7115d599c6587090f1be945c58099fc7d272669",
+      "service_exit": 143,
+      "original_harness_failure": "Compared45business tools with54composed native tools; corrected to research+Ken+analysis.",
+      "artifact_verification": "passed",
+      "http_receipt_recovery": "passed",
+      "recovery_new_dispatches": 0,
+      "second_service_exit": 143,
+      "runs": [
+        "needs_review"
+      ],
+      "dispatches": [
+        {
+          "model": "gpt-6.1-sol",
+          "status": "settled",
+          "native_status": "completed",
+          "observed_tokens": 275295
+        }
+      ],
+      "reports": [
+        "draft"
+      ],
+      "peers": [
+        [
+          "business",
+          "closed"
+        ],
+        [
+          "native",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ],
+        [
+          "command",
+          "closed"
+        ]
+      ],
+      "all_grants_revoked": true,
+      "task_not_done": true,
+      "foreign_keys_valid": true,
+      "input_catalog_sizes": [
+        54
+      ],
+      "jobs": [
+        {
+          "operation_key": "calculate-policy",
+          "status": "exited",
+          "exit_code": 0
+        }
+      ],
+      "source_files_unchanged": true,
+      "ken_source_reads": [
+        {
+          "trace_sha256": "a2974db387a1c11caeca12434f19dc0c293a1305fc23b4284b174d8364cff494",
+          "source_read_verified": true,
+          "calls": [
+            "ken_read"
+          ]
+        }
+      ]
+    },
+    "continuity": {
+      "status": "passed",
+      "original_harness_status": "passed",
+      "receipt_sha256": "90232dc8e6aaa42e8e5525278e2b298808120fd38e868647d564a433930fccbf",
+      "service_exit": 143,
+      "runs": [
+        "superseded",
+        "needs_review"
+      ],
+      "dispatches": [
+        {
+          "model": "gpt-6.1-sol",
+          "status": "settled",
+          "native_status": "completed",
+          "observed_tokens": 158377
+        },
+        {
+          "model": "gpt-6.1-sol",
+          "status": "settled",
+          "native_status": "completed",
+          "observed_tokens": 136590
+        }
+      ],
+      "reports": [
+        "draft",
+        "draft"
+      ],
+      "peers": [
+        [
+          "business",
+          "closed"
+        ],
+        [
+          "native",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ],
+        [
+          "business",
+          "closed"
+        ],
+        [
+          "native",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ]
+      ],
+      "all_grants_revoked": true,
+      "task_not_done": true,
+      "foreign_keys_valid": true,
+      "input_catalog_sizes": [
+        54,
+        54
+      ],
+      "jobs": [],
+      "source_files_unchanged": true,
+      "ken_source_reads": [
+        {
+          "trace_sha256": "a8ca6d89730a813beea19b08bc08e7b1d1e810897f62656d6a22bab709a153bc",
+          "source_read_verified": true,
+          "calls": [
+            "ken_read"
+          ]
+        },
+        {
+          "trace_sha256": "f25a5a9e1327b840f0b33555d5f3293cb5e1146e584265bdeb185895f9b4f5b6",
+          "source_read_verified": true,
+          "calls": [
+            "ken_read"
+          ]
+        }
+      ]
+    }
+  },
+  "unique_admitted_runs": 9,
+  "unknown_usage_dispatches": 2,
+  "prompts": {
+    "owned_inventory_entries": 83,
+    "owned_files": 271,
+    "pending_static_reviews": 0,
+    "production_prompt_changes": false,
+    "evaluation_prompt_correction": "Removed false claim that invoice.py only returns a marker; now require inspection without assuming policy implementation."
+  },
+  "source_sha256": {
+    "evals/runtime/native_trial.py": "e5928fbcbf1c0c898657034ae8676f99e4f382eea23477ef3644d6962e99d94d",
+    "evals/runtime/run_product.py": "1f89afb72c2a01d1f12b17cd52ff9d833ec26d591b1ff0c34fe23e4c8e1f1ba8",
+    "evals/runtime/run_product_stop.py": "462132f68f70f8c599326ea56515e5fad6fe94291325a8d5147a60dda3233cb6",
+    "evals/runtime/run_questions.py": "e567fb63a695dc4bbb6690e70b81ed4c0e2c0cb83632fd7c8f976766f2848c5f",
+    "evals/runtime/run_conversation.py": "f6918f66e1bd522494fcc503b7cc210d587a0088f7aa76127b7d813105272956",
+    "evals/runtime/run_input_continuity.py": "8bd000a10b865e03460e9e01863af5c84d465b939cf69674876e947bf8a9b545",
+    "evals/runtime/run_analysis_inference.py": "5a5a797ce2f556464e2b193a2ac7daffba2ae0ec9a7a67839de4347aa784badc",
+    "backend/tests/runtime/test_native_evaluation.py": "37016a9b958d1142d4a0e95808cc7c1d65016f3c57507d92986bae64dd55da3c",
+    "backend/tests/runtime/test_native_analysis_evidence.py": "7923bb69fe552b30501d65d99bee0e4849c3a2e4008febc470e7fcfc97460e4b"
+  },
+  "documented_definitions": 26,
+  "lint": {
+    "findings": 5,
+    "deferred": "DD068"
+  },
+  "limitations": [
+    "Five live harnesses exit0; analysis original harness exited1 on catalog mismatch. Its corrected checker and original artifacts pass; the same original HTTP receipt was recovered after restart with zero added dispatches. No replacement model turn.",
+    "Stop and waiting-input dispatch consumption is unknown, never counted as zero or subscription billing. Seven result-producing turns have a correlated Ken source-read receipt; the two control-interrupted turns do not.",
+    "Deterministic fixture tests substitute only resource validation; real scenarios validate installed host assets and exercise native processes.",
+    "No UI/human-comprehension/scientific benchmark, dependency-security/global-suite acceptance, native-image rebuild or user-data migration.",
+    "Remaining direct command/parent-loss/analysis-tools, Ken isolation and historical owner UI runners remain pending; candidate experiments stay explicitly historical."
+  ]
+}

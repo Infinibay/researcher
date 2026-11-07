@@ -4,6 +4,17 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Seis escenarios de evaluación usan instalaciones nativas nuevas:**
+  investigación/corrección, Conversación, preguntas, Stop, continuidad y cálculo;
+  nueve admisiones por suscripción. Cinco harnesses terminan correctamente. En
+  cálculo se conserva el fallo de catálogo del harness y se verifican los
+  artefactos y el recibo HTTP originales después de corregirlo, sin otro turno.
+  Pasan 38 pruebas dirigidas; 307 archivos productivos coinciden con el paquete
+  instalado y 26 definiciones están documentadas. Consumo desconocido en Stop y
+  pregunta; todos sus peers y servidores cerrados. Los demás runners y las
+  evaluaciones integrales siguen pendientes.
+  [Uso](../../evals/runtime/README.md), [evidencia](native-evaluation-runners-results.json).
+
 - **Configuración antigua retirada; runners en migración:** se retiran 75
   opciones y el escritor global sin consumidores, conservando diez ajustes
   activos y los datos históricos. Pasan 195 casos de fuente; dos casos requieren
