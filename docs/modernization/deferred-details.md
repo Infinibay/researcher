@@ -737,6 +737,16 @@ exportaciones/backups y trabajo del padre siguen como pendientes principales.
 examinado. Resolver después de las capacidades principales. No confundirlos con
 la cuota de temporales de Chroma o los recursos del supervisor, aún principales.
 
+## DD103 — Estilo y diagnóstico del lector de configuración
+
+14 avisos Ruff en los archivos revisados:2 I001,1 F401,10 PLW1510 y1 TRY004,
+incluidos avisos ya presentes. [Diagnóstico](dependency-reader-lint.json).
+También separar en el auditor la selección del formato y la etiqueta del archivo:
+`run_auditor` interpreta npm sólo con la etiqueta exacta `frontend`; el comando
+normal la usa bien, pero el reintento de evaluación usó un sufijo y activó el
+parser de pip. Revisar esta facilidad de diagnóstico después de las tareas gruesas.
+Los avisos de ONNX/Chroma y su compatibilidad no son detalles diferidos.
+
 ## DD102 — Estilo de recuperación y fixtures de volumen
 
 19 avisos de Ruff:9 I001,2 F401,6 F811,1 SIM117 y1 BLE001. Los F811 señalan

@@ -126,7 +126,10 @@ def isolated_reader(reader, output, *, bubblewrap, tenant, database, max_bytes, 
             or len(receipt['collections']) > max_files):
         raise ValueError('Invalid isolated reader receipt')
     os.replace(stage / 'records.jsonl', output / 'records.jsonl')
-    return receipt['collections'], receipt['count'], log_truncated
+    disabled=receipt.get('embedding_descriptors_disabled')
+    if type(disabled) is not int or disabled<0:
+        raise ValueError('Invalid data-only reader configuration receipt')
+    return receipt['collections'], receipt['count'], log_truncated, disabled
 
 
 def digest(path, *, deadline=None):
@@ -206,6 +209,62 @@ def snapshot(source, output, *, max_bytes, max_files, deadline):
     return files
 
 
+def disable_reader_embedding_descriptors(reader, *, deadline, max_files):
+    """Disable model constructors only in disposable collection config/schema JSON, preserving raw evidence and document metadata.
+
+This runs before importing Chroma. Its official reader still handles migrations
+and pending metadata-log records; configuration from old models cannot authorize
+construction of Python embedding functions during this data-only operation.
+"""
+    def unique_object(pairs):
+        """Refuse ambiguous duplicate JSON keys instead of silently normalizing a configuration."""
+        result={}
+        for key,value in pairs:
+            if key in result:raise ValueError('Duplicate key in persisted Chroma configuration')
+            result[key]=value
+        return result
+
+    def disable(value, replacement, depth=0):
+        """Walk bounded configuration trees; unrelated metadata tables are never visited."""
+        if time.monotonic()>deadline:raise TimeoutError('Chroma configuration review deadline exceeded')
+        if depth>64:raise ValueError('Chroma configuration nesting exceeds64levels')
+        changed=0
+        if isinstance(value,dict):
+            for key,child in value.items():
+                if key in ('embedding_function','sparse_embedding_function'):
+                    if child is not None and child!=replacement:
+                        value[key]=dict(replacement);changed+=1
+                else:changed+=disable(child,replacement,depth+1)
+        elif isinstance(value,list):
+            for child in value:changed+=disable(child,replacement,depth+1)
+        return changed
+
+    changed=0
+    with closing(sqlite3.connect((reader/'chroma.sqlite3').as_uri()+'?mode=rw',uri=True)) as db,db:
+        db.execute('PRAGMA trusted_schema=OFF')
+        db.set_progress_handler(lambda:int(time.monotonic()>deadline),1000)
+        table=db.execute("SELECT type FROM sqlite_master WHERE name='collections'").fetchone()
+        if table!=('table',):raise ValueError('Expected original Chroma collections table')
+        if db.execute("SELECT 1 FROM sqlite_master WHERE type='trigger' AND tbl_name='collections'").fetchone():
+            raise ValueError('Unexpected trigger on Chroma collection configuration')
+        columns={row[1] for row in db.execute('PRAGMA table_info(collections)')}
+        if 'id' not in columns:raise ValueError('Unrecognized Chroma collection identity')
+        if db.execute('SELECT COUNT(*) FROM collections').fetchone()[0]>max_files:
+            raise ValueError('Chroma collection limit exceeded')
+        for column,disabled in (('config_json_str',{'type':'legacy'}),('schema_str',{'type':'unknown'})):
+            if column not in columns:continue
+            for identity,raw in db.execute(f'SELECT id,{column} FROM collections WHERE {column} IS NOT NULL ORDER BY id'):
+                if not isinstance(raw,str) or len(raw.encode())>1024**2:
+                    raise ValueError('Persisted Chroma configuration exceeds1MiB')
+                value=json.loads(raw,object_pairs_hook=unique_object)
+                if not isinstance(value,dict):raise ValueError('Persisted Chroma configuration must be an object')
+                count=disable(value,disabled)
+                if count:
+                    db.execute(f'UPDATE collections SET {column}=? WHERE id=?',(json.dumps(value,allow_nan=False),identity))
+                    changed+=count
+    return changed
+
+
 def read_collections(reader, output, *, tenant, database, max_bytes, max_files, deadline):
     """Read documents and metadata only inside the disposable worker; never access configuration properties or generate embeddings."""
     import chromadb
@@ -254,7 +313,7 @@ def export(source, output, *, tenant='default_tenant', database='default_databas
     output.mkdir(mode=0o700)
     deadline=time.monotonic()+timeout
     files=snapshot(source,output,max_bytes=max_bytes,max_files=max_files,deadline=deadline)
-    collections,total,log_truncated=isolated_reader(output/'source',output,bubblewrap=bubblewrap,tenant=tenant,database=database,
+    collections,total,log_truncated,disabled=isolated_reader(output/'source',output,bubblewrap=bubblewrap,tenant=tenant,database=database,
                                       max_bytes=max_bytes,max_files=max_files,deadline=deadline,scratch_bytes=scratch_bytes)
     records=output/'records.jsonl'
     manifest={'format':1,'kind':'researcher-chroma-export','status':'complete','reader_version':'1.5.9',
@@ -264,6 +323,8 @@ def export(source, output, *, tenant='default_tenant', database='default_databas
                                   'scratch_capacity_bytes':scratch_bytes,'scratch_filesystem':'tmpfs',
                                   'per_file_byte_limit':max_bytes,'reader_log_bytes':LOG_BYTES,
                                   'log_truncated':log_truncated,
+                                  'embedding_descriptors_disabled':disabled,
+                                  'configuration_policy':'disable embedding descriptors in disposable reader copy before importing Chroma',
                                   'aggregate_disk_quota':False,'arbitrary_reader_host_directory_writes':False},
               'records':{'path':'records.jsonl','count':total,**digest(records,deadline=deadline)},'source_files':files,
               'embedding_calls':0,'original_application_rows_modified':False,'sqlite_checkpoint_may_change_files':True}
@@ -307,10 +368,11 @@ def main():
         resource.setrlimit(resource.RLIMIT_CPU,(args.timeout,args.timeout))
         resource.setrlimit(resource.RLIMIT_NOFILE,(256,256))
         shutil.copytree('/input',args.source)
+        disabled=disable_reader_embedding_descriptors(Path(args.source),deadline=time.monotonic()+args.timeout,max_files=args.max_files)
         collections,total=read_collections(Path(args.source),Path(args.output),tenant=args.tenant,
             database=args.database,max_bytes=args.max_bytes,max_files=args.max_files,
             deadline=time.monotonic()+args.timeout)
-        encoded=json.dumps({'collections':collections,'count':total},ensure_ascii=True,allow_nan=False)
+        encoded=json.dumps({'collections':collections,'count':total,'embedding_descriptors_disabled':disabled},ensure_ascii=True,allow_nan=False)
         if len(encoded.encode())>min(args.max_bytes,16*1024**2):raise ValueError('Reader receipt too large')
         with (Path(args.output)/'receipt.json').open('w') as stream:
             stream.write(encoded);stream.flush();os.fsync(stream.fileno())

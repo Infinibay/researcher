@@ -1,0 +1,84 @@
+{
+  "changed_definitions": 13,
+  "missing": [],
+  "definitions": [
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "definition": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "definition": "isolated_reader",
+      "line": 34,
+      "documented": true
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "definition": "disable_reader_embedding_descriptors",
+      "line": 212,
+      "documented": true
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "definition": "export",
+      "line": 302,
+      "documented": true
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "definition": "main",
+      "line": 343,
+      "documented": true
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "definition": "unique_object",
+      "line": 219,
+      "documented": true
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "definition": "disable",
+      "line": 227,
+      "documented": true
+    },
+    {
+      "path": "evals/security/test_chroma_export.py",
+      "definition": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "evals/security/test_chroma_export.py",
+      "definition": "reader_fixture",
+      "line": 21,
+      "documented": true
+    },
+    {
+      "path": "evals/security/test_chroma_export.py",
+      "definition": "test_reader_neutralizes_model_descriptors_without_touching_document_metadata",
+      "line": 210,
+      "documented": true
+    },
+    {
+      "path": "evals/security/test_chroma_export.py",
+      "definition": "test_real_export_disables_persisted_model_configuration",
+      "line": 232,
+      "documented": true
+    },
+    {
+      "path": "evals/security/test_chroma_export.py",
+      "definition": "test_reader_rejects_ambiguous_or_executable_configuration_rewrites",
+      "line": 260,
+      "documented": true
+    },
+    {
+      "path": "evals/security/test_chroma_export.py",
+      "definition": "test_pinned_configuration_loader_cannot_construct_models_after_neutralization",
+      "line": 276,
+      "documented": true
+    }
+  ]
+}

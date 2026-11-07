@@ -1,0 +1,486 @@
+{
+  "deferred_item": "DD103",
+  "count": 14,
+  "codes": {
+    "I001": 2,
+    "F401": 1,
+    "PLW1510": 10,
+    "TRY004": 1
+  },
+  "diagnostics": [
+    {
+      "cell": null,
+      "code": "I001",
+      "end_location": {
+        "column": 14,
+        "row": 15
+      },
+      "filename": "evals/security/test_chroma_export.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "import hashlib\nimport importlib.util\nimport json\nimport os\nimport socket\nimport sqlite3\nimport subprocess\nimport sys\nimport time\nimport venv\nfrom pathlib import Path\n\nimport pytest\n\n",
+            "end_location": {
+              "column": 1,
+              "row": 17
+            },
+            "location": {
+              "column": 1,
+              "row": 3
+            }
+          }
+        ],
+        "message": "Organize imports"
+      },
+      "location": {
+        "column": 1,
+        "row": 3
+      },
+      "message": "Import block is un-sorted or un-formatted",
+      "name": "unsorted-imports",
+      "noqa_row": 3,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+    },
+    {
+      "cell": null,
+      "code": "F401",
+      "end_location": {
+        "column": 11,
+        "row": 11
+      },
+      "filename": "evals/security/test_chroma_export.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "",
+            "end_location": {
+              "column": 1,
+              "row": 12
+            },
+            "location": {
+              "column": 1,
+              "row": 11
+            }
+          }
+        ],
+        "message": "Remove unused import: `sys`"
+      },
+      "location": {
+        "column": 8,
+        "row": 11
+      },
+      "message": "`sys` imported but unused",
+      "name": "unused-import",
+      "noqa_row": 11,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unused-import"
+    },
+    {
+      "cell": null,
+      "code": "PLW1510",
+      "end_location": {
+        "column": 28,
+        "row": 95
+      },
+      "filename": "evals/security/test_chroma_export.py",
+      "fix": {
+        "applicability": "displayonly",
+        "edits": [
+          {
+            "content": "check=False, ",
+            "end_location": {
+              "column": 29,
+              "row": 96
+            },
+            "location": {
+              "column": 29,
+              "row": 96
+            }
+          }
+        ],
+        "message": "Add explicit `check=False`"
+      },
+      "location": {
+        "column": 14,
+        "row": 95
+      },
+      "message": "`subprocess.run` without explicit `check` argument",
+      "name": "subprocess-run-without-check",
+      "noqa_row": 95,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/subprocess-run-without-check"
+    },
+    {
+      "cell": null,
+      "code": "PLW1510",
+      "end_location": {
+        "column": 26,
+        "row": 113
+      },
+      "filename": "evals/security/test_chroma_export.py",
+      "fix": {
+        "applicability": "displayonly",
+        "edits": [
+          {
+            "content": "check=False, ",
+            "end_location": {
+              "column": 27,
+              "row": 114
+            },
+            "location": {
+              "column": 27,
+              "row": 114
+            }
+          }
+        ],
+        "message": "Add explicit `check=False`"
+      },
+      "location": {
+        "column": 12,
+        "row": 113
+      },
+      "message": "`subprocess.run` without explicit `check` argument",
+      "name": "subprocess-run-without-check",
+      "noqa_row": 113,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/subprocess-run-without-check"
+    },
+    {
+      "cell": null,
+      "code": "PLW1510",
+      "end_location": {
+        "column": 26,
+        "row": 126
+      },
+      "filename": "evals/security/test_chroma_export.py",
+      "fix": {
+        "applicability": "displayonly",
+        "edits": [
+          {
+            "content": "check=False, ",
+            "end_location": {
+              "column": 27,
+              "row": 127
+            },
+            "location": {
+              "column": 27,
+              "row": 127
+            }
+          }
+        ],
+        "message": "Add explicit `check=False`"
+      },
+      "location": {
+        "column": 12,
+        "row": 126
+      },
+      "message": "`subprocess.run` without explicit `check` argument",
+      "name": "subprocess-run-without-check",
+      "noqa_row": 126,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/subprocess-run-without-check"
+    },
+    {
+      "cell": null,
+      "code": "PLW1510",
+      "end_location": {
+        "column": 26,
+        "row": 141
+      },
+      "filename": "evals/security/test_chroma_export.py",
+      "fix": {
+        "applicability": "displayonly",
+        "edits": [
+          {
+            "content": "check=False, ",
+            "end_location": {
+              "column": 60,
+              "row": 142
+            },
+            "location": {
+              "column": 60,
+              "row": 142
+            }
+          }
+        ],
+        "message": "Add explicit `check=False`"
+      },
+      "location": {
+        "column": 12,
+        "row": 141
+      },
+      "message": "`subprocess.run` without explicit `check` argument",
+      "name": "subprocess-run-without-check",
+      "noqa_row": 141,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/subprocess-run-without-check"
+    },
+    {
+      "cell": null,
+      "code": "PLW1510",
+      "end_location": {
+        "column": 26,
+        "row": 158
+      },
+      "filename": "evals/security/test_chroma_export.py",
+      "fix": {
+        "applicability": "displayonly",
+        "edits": [
+          {
+            "content": "check=False, ",
+            "end_location": {
+              "column": 27,
+              "row": 159
+            },
+            "location": {
+              "column": 27,
+              "row": 159
+            }
+          }
+        ],
+        "message": "Add explicit `check=False`"
+      },
+      "location": {
+        "column": 12,
+        "row": 158
+      },
+      "message": "`subprocess.run` without explicit `check` argument",
+      "name": "subprocess-run-without-check",
+      "noqa_row": 158,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/subprocess-run-without-check"
+    },
+    {
+      "cell": null,
+      "code": "PLW1510",
+      "end_location": {
+        "column": 26,
+        "row": 170
+      },
+      "filename": "evals/security/test_chroma_export.py",
+      "fix": {
+        "applicability": "displayonly",
+        "edits": [
+          {
+            "content": "check=False, ",
+            "end_location": {
+              "column": 27,
+              "row": 171
+            },
+            "location": {
+              "column": 27,
+              "row": 171
+            }
+          }
+        ],
+        "message": "Add explicit `check=False`"
+      },
+      "location": {
+        "column": 12,
+        "row": 170
+      },
+      "message": "`subprocess.run` without explicit `check` argument",
+      "name": "subprocess-run-without-check",
+      "noqa_row": 170,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/subprocess-run-without-check"
+    },
+    {
+      "cell": null,
+      "code": "PLW1510",
+      "end_location": {
+        "column": 26,
+        "row": 193
+      },
+      "filename": "evals/security/test_chroma_export.py",
+      "fix": {
+        "applicability": "displayonly",
+        "edits": [
+          {
+            "content": "check=False, ",
+            "end_location": {
+              "column": 78,
+              "row": 193
+            },
+            "location": {
+              "column": 78,
+              "row": 193
+            }
+          }
+        ],
+        "message": "Add explicit `check=False`"
+      },
+      "location": {
+        "column": 12,
+        "row": 193
+      },
+      "message": "`subprocess.run` without explicit `check` argument",
+      "name": "subprocess-run-without-check",
+      "noqa_row": 193,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/subprocess-run-without-check"
+    },
+    {
+      "cell": null,
+      "code": "PLW1510",
+      "end_location": {
+        "column": 26,
+        "row": 196
+      },
+      "filename": "evals/security/test_chroma_export.py",
+      "fix": {
+        "applicability": "displayonly",
+        "edits": [
+          {
+            "content": "check=False, ",
+            "end_location": {
+              "column": 104,
+              "row": 196
+            },
+            "location": {
+              "column": 104,
+              "row": 196
+            }
+          }
+        ],
+        "message": "Add explicit `check=False`"
+      },
+      "location": {
+        "column": 12,
+        "row": 196
+      },
+      "message": "`subprocess.run` without explicit `check` argument",
+      "name": "subprocess-run-without-check",
+      "noqa_row": 196,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/subprocess-run-without-check"
+    },
+    {
+      "cell": null,
+      "code": "PLW1510",
+      "end_location": {
+        "column": 26,
+        "row": 247
+      },
+      "filename": "evals/security/test_chroma_export.py",
+      "fix": {
+        "applicability": "displayonly",
+        "edits": [
+          {
+            "content": "check=False, ",
+            "end_location": {
+              "column": 104,
+              "row": 247
+            },
+            "location": {
+              "column": 104,
+              "row": 247
+            }
+          }
+        ],
+        "message": "Add explicit `check=False`"
+      },
+      "location": {
+        "column": 12,
+        "row": 247
+      },
+      "message": "`subprocess.run` without explicit `check` argument",
+      "name": "subprocess-run-without-check",
+      "noqa_row": 247,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/subprocess-run-without-check"
+    },
+    {
+      "cell": null,
+      "code": "PLW1510",
+      "end_location": {
+        "column": 26,
+        "row": 303
+      },
+      "filename": "evals/security/test_chroma_export.py",
+      "fix": {
+        "applicability": "displayonly",
+        "edits": [
+          {
+            "content": "check=False, ",
+            "end_location": {
+              "column": 94,
+              "row": 303
+            },
+            "location": {
+              "column": 94,
+              "row": 303
+            }
+          }
+        ],
+        "message": "Add explicit `check=False`"
+      },
+      "location": {
+        "column": 12,
+        "row": 303
+      },
+      "message": "`subprocess.run` without explicit `check` argument",
+      "name": "subprocess-run-without-check",
+      "noqa_row": 303,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/subprocess-run-without-check"
+    },
+    {
+      "cell": null,
+      "code": "I001",
+      "end_location": {
+        "column": 17,
+        "row": 28
+      },
+      "filename": "scripts/export_legacy_chroma.py",
+      "fix": {
+        "applicability": "safe",
+        "edits": [
+          {
+            "content": "import argparse\nimport hashlib\nimport importlib.metadata\nimport json\nimport math\nimport os\nimport selectors\nimport shutil\nimport signal\nimport sqlite3\nimport stat\nimport subprocess\nimport sys\nimport time\nfrom contextlib import ExitStack, closing\nfrom pathlib import Path\n\n",
+            "end_location": {
+              "column": 1,
+              "row": 30
+            },
+            "location": {
+              "column": 1,
+              "row": 13
+            }
+          }
+        ],
+        "message": "Organize imports"
+      },
+      "location": {
+        "column": 1,
+        "row": 13
+      },
+      "message": "Import block is un-sorted or un-formatted",
+      "name": "unsorted-imports",
+      "noqa_row": 13,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+    },
+    {
+      "cell": null,
+      "code": "TRY004",
+      "end_location": {
+        "column": 115,
+        "row": 260
+      },
+      "filename": "scripts/export_legacy_chroma.py",
+      "fix": null,
+      "location": {
+        "column": 47,
+        "row": 260
+      },
+      "message": "Prefer `TypeError` exception for invalid type",
+      "name": "type-check-without-type-error",
+      "noqa_row": 260,
+      "severity": "error",
+      "url": "https://docs.astral.sh/ruff/rules/type-check-without-type-error"
+    }
+  ]
+}

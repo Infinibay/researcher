@@ -4648,7 +4648,11 @@
         "docs/modernization/license-results.json",
         "docs/modernization/license-inventory.json",
         "docs/modernization/license-artifact-reviews.json",
-        "THIRD_PARTY_NOTICES.md"
+        "THIRD_PARTY_NOTICES.md",
+        "docs/modernization/dependency-reader-review.md",
+        "docs/modernization/dependency-reader-results.json",
+        "docs/modernization/dependency-reader-audit.json",
+        "docs/modernization/dependency-reader-registry.json"
       ],
       "remaining": [
         "Ken0.18.0 exact ONNX pin, corrected-release compatibility and reachability",
@@ -4656,7 +4660,8 @@
         "Actual release compatibility/source availability and complete notices, including two frontend packages missing license text",
         "Publish/observe automation only at authorized integration",
         "Broader security scenarios and final independent review"
-      ]
+      ],
+      "reader_mitigation": "Disable persisted embedding descriptors only in the disposable reader copy before Chroma imports; raw configuration and text/metadata retained.14directed tests and installed end-to-end105record import/HTTP pass, no model/embedding calls. Known package advisories remain visible; no incompatible ONNX override or version change. Frontend audit tool-path/parser-label errors retained alongside verified raw npm exit0/report."
     },
     "communication_continuity": {
       "status": "in_progress",
@@ -4786,13 +4791,16 @@
     },
     "isolated_legacy_chroma_reader": {
       "status": "in_progress",
-      "scope": "Reader boundary and synthetic export/import implemented and checked. Known package advisories, aggregate resource limits, concurrent-source threat and owner historical data remain open.",
+      "scope": "Reader boundary and synthetic export/import implemented and checked. Known package advisories, aggregate resource limits, concurrent-source threat and owner historical data remain open. Persisted model descriptors are now disabled in scratch config/schema while preserving raw evidence; official reader retained to avoid dropping pending metadata queue entries. Positive-control constructor and hostile-config export tested; known advisories and broader security remain open.",
       "evidence": [
         "scripts/export_legacy_chroma.py",
         "evals/security/test_chroma_export.py",
         "docs/modernization/chroma-isolation-review.md",
         "docs/modernization/chroma-isolation-results.json",
-        "docs/modernization/chroma-isolation-import.json"
+        "docs/modernization/chroma-isolation-import.json",
+        "docs/modernization/dependency-reader-review.md",
+        "docs/modernization/dependency-reader-results.json",
+        "docs/modernization/dependency-reader-import.json"
       ]
     },
     "dependency_license_inventory": {

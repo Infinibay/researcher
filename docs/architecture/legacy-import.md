@@ -95,6 +95,16 @@ consideran seguros todos los formatos por haber añadido una barrera de proceso.
 [Aislamiento inicial](../modernization/chroma-isolation-review.md),
 [capacidad y salida acotadas](../modernization/chroma-capacity-review.md).
 
+Antes de importar Chroma, el worker desactiva los descriptores de funciones de
+embeddings en `config_json_str` y `schema_str` de su copia desechable. Conserva
+los demás parámetros del índice y no modifica las tablas de documentos/metadatos.
+La copia cruda conserva íntegra la configuración original para inspección. El
+manifiesto indica `embedding_descriptors_disabled`. Se rechazan JSON ambiguos,
+configuraciones mayores de1MiB, profundidad excesiva y triggers en colecciones.
+La lectura oficial sigue disponible para procesar migraciones y la cola interna;
+no se sustituye por una extracción parcial de tablas materializadas.
+[Alcance y pruebas](../modernization/dependency-reader-review.md).
+
 Exporta colecciones, IDs,
 texto y metadatos mediante `get`, paginados, sin generar embeddings. La API
 [Get de Chroma](https://docs.trychroma.com/docs/querying-collections/query-and-get)

@@ -28,7 +28,44 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: recuperación acotada comprobada; siguen dependencias
+## Etapa actual: lector Chroma acotado; continúa compatibilidad Ken/ONNX
+
+Bloque **13:37:40–13:50:53 UTC**, **13 min 13 s** hasta validar. El lector
+desactiva descriptores de embeddings sólo en su copia desechable y conserva la
+configuración original.14pruebas pasan; la importación instalada conserva105registros
+y responde por HTTP, sin modelos. La auditoría mantiene los avisos de ONNX/Chroma;
+no se cambiaron versiones publicadas ni se declara seguridad integral.
+[Informe](dependency-reader-review.md), [auditoría](dependency-reader-audit.json).
+
+**Lista actualizada al cambiar de tramo:**
+- Implementado y comprobado: backend Codex/Ken, modelos, flujos principales,
+  comunicación, persistencia y varias recuperaciones.
+- Terminado ahora: neutralización de configuración de modelos del lector y
+  validación de importación, **13 min 13 s** hasta validar.
+- En curso principal: dependencias y seguridad.
+- Siguiente: compatibilidad de Ken con ONNX corregido y propuesta de distribución
+  coherente. **Todavía no iniciada.**
+- Pendiente: licencias, recursos/recuperación restantes, datos históricos,
+  evaluación humana/otros perfiles y aceptación de12páginas.
+- Al final: detalles (incluido DD103), validación global y revisión independiente.
+
+Siguen43escenarios amplios abiertos y0/12páginas plenamente aceptadas. Las listas
+y tiempos persisten tras compactar; no hay un porcentaje global sustentado.
+
+## Etapa anterior: dependencias y configuración persistida de Chroma
+
+Inicio **2026-11-07 13:37:40 UTC**. El turno anterior fue progreso (`b56bccc`).
+En curso: contraste de registros publicados y revisión del lector histórico.
+PyPI mantiene Ken0.18.0 con ONNX1.20.1 exacto y Chroma1.5.9 sin versión corregida
+indicada para sus avisos. La lectura directa de tablas requiere considerar la
+cola aún no materializada; se está verificando el recorrido oficial de lectura
+y las rutas que construyen funciones de embeddings antes de elegir el cambio.
+
+Lista vigente: terminado recuperación acotada (**7 min 46 s** hasta validar);
+en curso dependencias; después recuperación restante, comunicación humana/otros
+perfiles, datos históricos y12páginas. Detalles secundarios al final.
+
+## Etapa anterior: recuperación acotada comprobada; siguen dependencias
 
 Bloque **13:26:25–13:34:11 UTC**, **7 min 46 s** hasta validar. Se corrigió la
 reinscripción de restore con `storage`.59pruebas de fuente y59instaladas pasan.

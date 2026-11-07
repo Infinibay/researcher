@@ -80,6 +80,7 @@ class PersistentClient:
     with socket.socket() as listener:
         listener.bind(('127.0.0.1', 0));listener.listen()
         with sqlite3.connect(source / 'chroma.sqlite3') as db:
+            db.execute('create table collections(id text primary key)')
             db.execute('create table probe(mode text,secret text,original text,port integer)')
             db.execute('insert into probe values(?,?,?,?)', ('probe',str(secret),str(source),listener.getsockname()[1]))
         yield environment/'bin/python', source, secret
@@ -204,3 +205,100 @@ def test_real_chroma_export_retains_all_pages_and_metadata(tmp_path):
     assert next(r for r in rows if r['id']=='p1-c37')['metadata']['project_id']==202
     after={p.relative_to(source).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in source.rglob('*') if p.is_file()}
     assert after==before
+
+
+def test_reader_neutralizes_model_descriptors_without_touching_document_metadata(tmp_path):
+    """A data-only reader copy loses executable model descriptors while retaining index settings and user metadata."""
+    spec=importlib.util.spec_from_file_location('exporter_config_under_test',SCRIPT)
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    source=tmp_path/'reader';source.mkdir()
+    dangerous={'type':'known','name':'sentence_transformer','config':{'model_name':'untrusted/model','trust_remote_code':True}}
+    config={'hnsw':{'space':'cosine'},'embedding_function':dangerous}
+    schema={'keys':{'#embedding':{'float_list':{'vector_index':{'config':{'space':'cosine','embedding_function':dangerous}}}}}}
+    with sqlite3.connect(source/'chroma.sqlite3') as db:
+        db.execute('create table collections(id text primary key,config_json_str text,schema_str text)')
+        db.execute('insert into collections values(?,?,?)',('fixture',json.dumps(config),json.dumps(schema)))
+        db.execute('create table embedding_metadata(id int,key text,string_value text)')
+        db.execute('insert into embedding_metadata values(1,?,?)',('embedding_function','user-authored evidence'))
+    assert module.disable_reader_embedding_descriptors(source,deadline=time.monotonic()+5,max_files=10)==2
+    with sqlite3.connect(source/'chroma.sqlite3') as db:
+        values=db.execute('select config_json_str,schema_str from collections').fetchone()
+        assert json.loads(values[0])=={'hnsw':{'space':'cosine'},'embedding_function':{'type':'legacy'}}
+        actual=json.loads(values[1])['keys']['#embedding']['float_list']['vector_index']['config']
+        assert actual=={'space':'cosine','embedding_function':{'type':'unknown'}}
+        assert db.execute('select string_value from embedding_metadata').fetchone()==('user-authored evidence',)
+
+
+def test_real_export_disables_persisted_model_configuration(tmp_path):
+    """Export real Chroma documents despite hostile model descriptors, retaining the exact original configurations as evidence."""
+    from evals.operation.legacy_import import CHROMA_FIXTURE
+
+    python=Path(os.environ['RESEARCHER_LEGACY_PYTHON'])
+    source=tmp_path/'original';output=tmp_path/'export'
+    subprocess.run([str(python),'-I','-c',CHROMA_FIXTURE,str(source)],check=True,capture_output=True,timeout=20)
+    dangerous={'type':'known','name':'sentence_transformer','config':{'model_name':'untrusted/model','trust_remote_code':True}}
+    with sqlite3.connect(source/'chroma.sqlite3') as db:
+        for identity,raw in db.execute('select id,schema_str from collections').fetchall():
+            schema=json.loads(raw)
+            schema['keys']['#embedding']['float_list']['vector_index']['config']['embedding_function']=dangerous
+            db.execute('update collections set config_json_str=?,schema_str=? where id=?',
+                       (json.dumps({'embedding_function':dangerous}),json.dumps(schema),identity))
+    before={p.relative_to(source).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in source.rglob('*') if p.is_file()}
+    result=subprocess.run([str(python),'-I',str(SCRIPT),'--source',str(source),'--output',str(output)],capture_output=True,text=True,timeout=30)
+    assert result.returncode==0,result.stderr
+    manifest=json.loads((output/'manifest.json').read_text())
+    assert manifest['reader_isolation']['embedding_descriptors_disabled']==4
+    assert manifest['records']['count']==105
+    rows=[json.loads(line) for line in (output/'records.jsonl').read_text().splitlines()]
+    assert next(row for row in rows if row['id']=='p1-c37')['document']=='Fragmento histórico 37: 137 + 63 = 200.'
+    assert before=={p.relative_to(source).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in source.rglob('*') if p.is_file()}
+    with sqlite3.connect(output/'source/chroma.sqlite3') as db:
+        assert all(json.loads(row[0])['embedding_function']==dangerous for row in db.execute('select config_json_str from collections'))
+
+
+@pytest.mark.parametrize('damage',['duplicate','oversized','trigger'])
+def test_reader_rejects_ambiguous_or_executable_configuration_rewrites(tmp_path,damage):
+    """Unsafe configuration cannot be normalized into an apparently valid data export."""
+    spec=importlib.util.spec_from_file_location('exporter_invalid_config',SCRIPT)
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    source=tmp_path/'reader';source.mkdir()
+    raw='{"embedding_function":{},"embedding_function":null}' if damage=='duplicate' else json.dumps({'large':'x'*(1024**2)}) if damage=='oversized' else '{}'
+    with sqlite3.connect(source/'chroma.sqlite3') as db:
+        db.execute('create table collections(id text primary key,config_json_str text)')
+        db.execute('insert into collections values(?,?)',('fixture',raw))
+        if damage=='trigger':db.execute('create trigger unexpected after update on collections begin delete from collections; end;')
+    with pytest.raises(ValueError):
+        module.disable_reader_embedding_descriptors(source,deadline=time.monotonic()+5,max_files=10)
+    with sqlite3.connect(source/'chroma.sqlite3') as db:
+        assert db.execute('select config_json_str from collections').fetchone()==(raw,)
+
+
+def test_pinned_configuration_loader_cannot_construct_models_after_neutralization(tmp_path):
+    """A positive-control constructor runs for the original descriptor but never for the neutralized pinned-library configuration."""
+    python=Path(os.environ['RESEARCHER_LEGACY_PYTHON'])
+    program='''import importlib.util,json,pathlib,sqlite3,sys,time
+from chromadb.api.collection_configuration import load_collection_configuration_from_json
+from chromadb.utils.embedding_functions import known_embedding_functions
+calls=[]
+class Probe:
+ @staticmethod
+ def build_from_config(config):
+  calls.append(config);raise RuntimeError("synthetic constructor reached")
+known_embedding_functions["sentence_transformer"]=Probe
+dangerous={"embedding_function":{"type":"known","name":"sentence_transformer","config":{"trust_remote_code":True}}}
+try:load_collection_configuration_from_json(dangerous)
+except ValueError:pass
+assert len(calls)==1
+calls.clear()
+root=pathlib.Path(sys.argv[2]);root.mkdir()
+with sqlite3.connect(root/"chroma.sqlite3") as db:
+ db.execute("create table collections(id text primary key,config_json_str text)")
+ db.execute("insert into collections values(?,?)",("fixture",json.dumps(dangerous)))
+spec=importlib.util.spec_from_file_location("exporter",sys.argv[1]);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+assert module.disable_reader_embedding_descriptors(root,deadline=time.monotonic()+5,max_files=10)==1
+with sqlite3.connect(root/"chroma.sqlite3") as db:clean=json.loads(db.execute("select config_json_str from collections").fetchone()[0])
+assert load_collection_configuration_from_json(clean)["embedding_function"] is None
+assert calls==[]
+'''
+    result=subprocess.run([str(python),'-I','-c',program,str(SCRIPT),str(tmp_path/'reader')],capture_output=True,text=True,timeout=15)
+    assert result.returncode==0,result.stderr

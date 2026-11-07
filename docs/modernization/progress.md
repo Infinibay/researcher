@@ -8494,3 +8494,31 @@ dependency updates/security, includingKen/ONNX andChroma. Remaining recovery
 cases/resources, human/other-profile evaluation, owner historical data and12page
 acceptance stay open;43broad scenarios not closed. Fine details come after all
 macro capabilities. Dashboard keeps the updated list and measured elapsed time.
+
+## 2026-11-07: data-only Chroma configuration and current dependency audit
+
+Previous goal turn was progress,b56bccc. Block13:37:40–13:50:53UTC,793seconds
+to validation. PyPI still publishesKen0.18.0 with exactONNX1.20.1,ONNX1.23.2
+andChroma1.5.9. No dependency version or sibling repository changed. Source
+review distinguishes JSON retrieval from model constructors and notes pending
+metadata queue materialization; keep the official reader rather than omit queued
+data through an incomplete table reader. New pre-import worker step disables
+embedding descriptors solely in its scratch config/schema; raw snapshot and
+document metadata remain intact. Ambiguous/oversized JSON and collection triggers
+are refused.2red cases,10first passing and14final tests; positive-control model
+constructor becomes unreachable from the neutralized pinned configuration.
+
+Installed import keeps105records/104texts/1metadata-only, source provenance and
+HTTP reads; service exits143,0model/embedding calls.618unchanged backend files
+match prior installed wheel;13changed definitions documented;83prompt reviews
+current.14Ruff findings deferredDD103. Fresh audit retainsONNX19entries/12IDs
+andChroma5entries/4IDs; other locks have no known findings in this query. Original
+frontend PATH error and subsequent wrapper label/parser error are preserved;
+actual npm exit0 and retained JSON verified directly, no success invented from
+failed wrapper. Licenses not reaudited. Evidence dependency-reader-* reports.
+
+Dependency/security remains the principal current task. Next: isolatedKen/ONNX
+compatibility and a coherent reviewable distribution proposal; no publication
+or sibling changes. Broader resources/recovery, owner data, human/other-profile
+evaluation and12page acceptance remain.43broad scenarios open. Details only
+after macro capabilities; dashboard continues list/time at task transitions.

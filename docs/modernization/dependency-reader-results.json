@@ -1,0 +1,56 @@
+{
+  "base_commit": "b56bccc",
+  "previous_goal_turn": "progress: bounded storage recovery committed asb56bccc",
+  "started_at_utc": "2026-11-07T13:37:40Z",
+  "validation_cutoff_utc": "2026-11-07T13:50:53Z",
+  "elapsed_to_validation_seconds": 793,
+  "runs": [
+    {
+      "name": "red",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/dependency-reader-red.xml",
+      "sha256": "7bdb8c061f0497c088387b2b7a2b6b2de7fca0553d0aa3290ca8efbf972f797b",
+      "tests": 2,
+      "outcomes": {
+        "failure": 2
+      },
+      "seconds": 1.661,
+      "failures": [
+        "evals.security.test_chroma_export::test_reader_neutralizes_model_descriptors_without_touching_document_metadata",
+        "evals.security.test_chroma_export::test_real_export_disables_persisted_model_configuration"
+      ]
+    },
+    {
+      "name": "source",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/dependency-reader-source.xml",
+      "sha256": "ee4fe7356bab9b6405faf669d3ce4ea01bfe43947f13322f6d6a94aac7519961",
+      "tests": 10,
+      "outcomes": {
+        "passed": 10
+      },
+      "seconds": 4.958,
+      "failures": []
+    },
+    {
+      "name": "final",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/dependency-reader-final.xml",
+      "sha256": "e01475d09e5b104650ac1b4185e0817cbbd32ac71ff0110e70398da9496d5177",
+      "tests": 14,
+      "outcomes": {
+        "passed": 14
+      },
+      "seconds": 5.529,
+      "failures": []
+    }
+  ],
+  "exporter_sha256": "cf37f39483e673253ec2309608e06acb26f19d87a6dc1451c1882dbb304adcba",
+  "dependency_versions_changed": false,
+  "backend_unchanged": true,
+  "packaged_backend_python_sql_members_rechecked": 618,
+  "backend_wheel_evidence": "docs/modernization/storage-recovery-packaging.json",
+  "end_to_end": "dependency-reader-import.json",
+  "audit": "dependency-reader-audit.json",
+  "model_calls": 0,
+  "embedding_calls": 0,
+  "global_suite_rerun": false,
+  "status": "scoped_reader_configuration_mitigation_verified; Ken/ONNX and full security remain open"
+}
