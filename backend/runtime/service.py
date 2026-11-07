@@ -1049,6 +1049,12 @@ class RuntimeService:
             )
 
     async def correct(self, **command):
+        """Record a versioned owner correction and interrupt only still-authorized work.
+
+        Retired workers retain closure ownership, but their original context must
+        not reject a later correction while they finish closing. SQLite validates
+        the current version; the finalizer derives its outcome from that state.
+        """
         validate_correction(**command)
         receipt = await asyncio.to_thread(self.store.correction_receipt, **command)
         if receipt is not None:
@@ -1056,7 +1062,7 @@ class RuntimeService:
         affected = [
             slot
             for slot in self._workers.values()
-            if (slot.spec.project_id, slot.spec.task_id)
+            if slot.active and (slot.spec.project_id, slot.spec.task_id)
             == (command["project_id"], command["task_id"])
         ]
         for slot in affected:

@@ -3,7 +3,7 @@
   "status": "in_progress",
   "scenarios": {
     "C01": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "docs/architecture/native-runtime-boundary.md",
         "docs/modernization/product-runtime-evidence.json",
@@ -42,11 +42,24 @@
         "docs/modernization/native-git-packaging.json",
         "docs/architecture/prior-branch-input.md",
         "docs/modernization/prior-branch-results.json",
-        "docs/modernization/prior-branch-packaging.json"
+        "docs/modernization/prior-branch-packaging.json",
+        "docs/modernization/communication-acceptance-review.md",
+        "docs/modernization/communication-acceptance-results.json",
+        "docs/modernization/communication-acceptance-packaging.json",
+        "docs/modernization/communication-acceptance-artifact-comparison.json",
+        "backend/tests/runtime/test_communication_acceptance.py",
+        "backend/tests/runtime/test_engine_restart_context.py"
+      ],
+      "remaining": [],
+      "completion_scope": "Atomic original instruction and advisory-message delivery survive abrupt process loss after commit; reopened queues and exact receipts require no duplicate dispatch.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Controlled generation; no claim of simultaneous real-model peer dialogue, representative explanation quality or human understanding.",
+        "Current handoff behavior C10, broader evaluations, full-page acceptance and global regression remain separate."
       ]
     },
     "C02": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "docs/architecture/human-workspace.md",
         "docs/modernization/conversation-evidence.json",
@@ -61,11 +74,25 @@
         "docs/architecture/legacy-catalog-removal.md",
         "docs/modernization/catalog-removal-results.json",
         "docs/modernization/catalog-removal-packaging.json",
-        "backend/tests/runtime/test_legacy_catalog_removal.py"
+        "backend/tests/runtime/test_legacy_catalog_removal.py",
+        "docs/modernization/communication-acceptance-review.md",
+        "docs/modernization/communication-acceptance-results.json",
+        "docs/modernization/communication-acceptance-packaging.json",
+        "docs/modernization/communication-acceptance-artifact-comparison.json",
+        "backend/tests/runtime/test_communication_acceptance.py",
+        "backend/tests/runtime/test_coordination.py",
+        "backend/tests/runtime/test_agent_notices.py"
+      ],
+      "remaining": [],
+      "completion_scope": "Exact admitted recipient identity and single claimed owner; role labels and shared notices never fan out implicit assignments.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Controlled generation; no claim of simultaneous real-model peer dialogue, representative explanation quality or human understanding.",
+        "Current handoff behavior C10, broader evaluations, full-page acceptance and global regression remain separate."
       ]
     },
     "C03": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "docs/architecture/question-inbox.md",
         "docs/modernization/chat-evidence.json",
@@ -99,11 +126,25 @@
         "docs/modernization/source-reservation-results.json",
         "backend/tests/runtime/test_source_reservation.py",
         "frontend/tests/source-reservation.test.ts",
-        "docs/design/audits/2026-11-06-source-reservation/report.md"
+        "docs/design/audits/2026-11-06-source-reservation/report.md",
+        "docs/modernization/communication-acceptance-review.md",
+        "docs/modernization/communication-acceptance-results.json",
+        "docs/modernization/communication-acceptance-packaging.json",
+        "docs/modernization/communication-acceptance-artifact-comparison.json",
+        "backend/tests/runtime/test_communication_acceptance.py",
+        "backend/tests/runtime/test_agent_messages.py",
+        "backend/tests/runtime/test_human_questions.py"
+      ],
+      "remaining": [],
+      "completion_scope": "Durable question identities and exact in_reply_to survive reverse replies, receipt ordering and inbox reopen; no ephemeral thread waiter or question timeout discards recorded replies.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Controlled generation; no claim of simultaneous real-model peer dialogue, representative explanation quality or human understanding.",
+        "Current handoff behavior C10, broader evaluations, full-page acceptance and global regression remain separate."
       ]
     },
     "C04": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "backend/runtime/codex_session.py",
         "backend/tests/runtime/test_codex_session.py",
@@ -160,19 +201,27 @@
         "docs/modernization/work-material-packaging.json",
         "docs/modernization/work-material-native-observations.json",
         "backend/tests/runtime/test_work_material.py",
-        "backend/tests/runtime/test_owned_selective_material.py"
+        "backend/tests/runtime/test_owned_selective_material.py",
+        "docs/modernization/communication-acceptance-review.md",
+        "docs/modernization/communication-acceptance-results.json",
+        "docs/modernization/communication-acceptance-packaging.json",
+        "docs/modernization/communication-acceptance-artifact-comparison.json",
+        "backend/tests/runtime/test_communication_acceptance.py"
       ],
-      "remaining": [
-        "Durable product ownership, API integration and full scenario acceptance",
-        "Selective retrieval and large historical context references implemented; representative real-model selection quality and whole-scenario/human acceptance remain unproven. Current task/conversation history retains explicit admission limits."
-      ],
+      "remaining": [],
       "implemented": [
         "Schema4 research prerequisite descriptors and exact bounded reads avoid inlining accepted reports into successor input. More than1MiB and decisive final text reconstructed; schema2/3 bytes preserved. Controlled native research/investigation/scientific predecessors read via actual broker tools; no real-model comprehension claim.",
         "Schema5 native projection retains current task inputs and references historical sections above32768bytes. Selective JSON indexes/reads preserve original hashes and explicit unread coverage. Controlled native author/developer use11/12 actual tool requests;665bytes original context each and3072bytes selected evidence from399538bytes reports.87distinct source and62installed cases pass; no model/comprehension claim."
+      ],
+      "completion_scope": "Complete message/input restrictions are recoverable via references/windows or rejected explicitly before inference; previews never replace full content.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Controlled generation; no claim of simultaneous real-model peer dialogue, representative explanation quality or human understanding.",
+        "Current handoff behavior C10, broader evaluations, full-page acceptance and global regression remain separate."
       ]
     },
     "C05": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "backend/runtime/contracts.py",
         "backend/runtime/sqlite_runs.py",
@@ -201,11 +250,25 @@
         "docs/modernization/communication-flow-review.md",
         "docs/modernization/communication-flow-results.json",
         "docs/modernization/communication-flow-live.json",
-        "docs/modernization/communication-packaging.json"
+        "docs/modernization/communication-packaging.json",
+        "docs/modernization/communication-acceptance-review.md",
+        "docs/modernization/communication-acceptance-results.json",
+        "docs/modernization/communication-acceptance-packaging.json",
+        "docs/modernization/communication-acceptance-artifact-comparison.json",
+        "backend/tests/runtime/test_communication_acceptance.py",
+        "backend/tests/runtime/test_runtime_service.py",
+        "backend/tests/runtime/test_engine_restart_context.py"
+      ],
+      "remaining": [],
+      "completion_scope": "Read/receipt/application remain distinct; corrections withdraw dependent attempt authority and persist for the next explicit input while unrelated context remains usable.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Controlled generation; no claim of simultaneous real-model peer dialogue, representative explanation quality or human understanding.",
+        "Current handoff behavior C10, broader evaluations, full-page acceptance and global regression remain separate."
       ]
     },
     "C06": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "docs/architecture/task-input-versioning.md",
         "docs/modernization/task-inputs-evidence.json",
@@ -230,15 +293,25 @@
         "docs/modernization/run-input-packaging.json",
         "backend/tests/runtime/test_run_input.py",
         "backend/tests/runtime/test_run_input_migration.py",
-        "evals/runtime/run_input_continuity.py"
+        "evals/runtime/run_input_continuity.py",
+        "docs/modernization/communication-acceptance-review.md",
+        "docs/modernization/communication-acceptance-results.json",
+        "docs/modernization/communication-acceptance-packaging.json",
+        "docs/modernization/communication-acceptance-artifact-comparison.json",
+        "backend/tests/runtime/test_communication_acceptance.py",
+        "docs/architecture/native-communication-retirement.md",
+        "backend/tests/runtime/test_human_questions.py"
       ],
-      "remaining": [
-        "Migrate legacy question similarity reuse and all callers.",
-        "Version related context dependencies and verify human/browser acceptance."
+      "remaining": [],
+      "completion_scope": "Question answers retain exact origin/context and history; identical new questions do not inherit old answers or permissions by similarity.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Controlled generation; no claim of simultaneous real-model peer dialogue, representative explanation quality or human understanding.",
+        "Current handoff behavior C10, broader evaluations, full-page acceptance and global regression remain separate."
       ]
     },
     "C07": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "docs/architecture/native-runtime-boundary.md",
         "docs/modernization/product-runtime-evidence.json",
@@ -288,15 +361,44 @@
         "docs/modernization/subscription-provider-evidence.json",
         "docs/modernization/subscription-provider-results.json",
         "docs/modernization/context-alignment-review.md",
-        "docs/modernization/context-alignment-results.json"
+        "docs/modernization/context-alignment-results.json",
+        "docs/modernization/communication-acceptance-review.md",
+        "docs/modernization/communication-acceptance-results.json",
+        "docs/modernization/communication-acceptance-packaging.json",
+        "docs/modernization/communication-acceptance-artifact-comparison.json",
+        "backend/tests/runtime/test_communication_acceptance.py",
+        "backend/runtime/service.py",
+        "backend/tests/runtime/test_owned_project_stop.py"
+      ],
+      "remaining": [],
+      "completion_scope": "Owner controls stay recordable at exhausted inference budget during slow tool closure; consecutive current-version corrections do not wait for retired workers.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Controlled generation; no claim of simultaneous real-model peer dialogue, representative explanation quality or human understanding.",
+        "Current handoff behavior C10, broader evaluations, full-page acceptance and global regression remain separate."
       ]
     },
     "C08": {
-      "status": "pending",
-      "evidence": []
+      "status": "complete",
+      "evidence": [
+        "docs/modernization/communication-acceptance-review.md",
+        "docs/modernization/communication-acceptance-results.json",
+        "docs/modernization/communication-acceptance-packaging.json",
+        "docs/modernization/communication-acceptance-artifact-comparison.json",
+        "backend/tests/runtime/test_communication_acceptance.py",
+        "backend/communication/agent_messages.py",
+        "backend/tests/runtime/test_project_planning.py"
+      ],
+      "remaining": [],
+      "completion_scope": "Advisory messages cannot dispatch runs, acknowledgement cannot reset original per-run send bounds, and short/repeated typed controls remain available at saturation.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Controlled generation; no claim of simultaneous real-model peer dialogue, representative explanation quality or human understanding.",
+        "Current handoff behavior C10, broader evaluations, full-page acceptance and global regression remain separate."
+      ]
     },
     "C09": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "docs/architecture/human-workspace.md",
         "docs/modernization/conversation-evidence.json",
@@ -307,7 +409,21 @@
         "docs/modernization/human-question-evidence.json",
         "docs/modernization/human-question-results.json",
         "backend/tests/runtime/test_human_questions.py",
-        "backend/tests/runtime/test_runtime_service.py"
+        "backend/tests/runtime/test_runtime_service.py",
+        "docs/modernization/communication-acceptance-review.md",
+        "docs/modernization/communication-acceptance-results.json",
+        "docs/modernization/communication-acceptance-packaging.json",
+        "docs/modernization/communication-acceptance-artifact-comparison.json",
+        "backend/tests/runtime/test_communication_acceptance.py",
+        "backend/tests/runtime/test_owner_notes.py",
+        "frontend/tests/chat-design.test.ts"
+      ],
+      "remaining": [],
+      "completion_scope": "Consecutive notes retain distinct receipts, consecutive corrections reach the next explicit input, and conditional answer/Stop transitions never overwrite a committed answer or invent agreement.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Controlled generation; no claim of simultaneous real-model peer dialogue, representative explanation quality or human understanding.",
+        "Current handoff behavior C10, broader evaluations, full-page acceptance and global regression remain separate."
       ]
     },
     "C10": {
@@ -343,7 +459,21 @@
         "docs/modernization/work-material-packaging.json",
         "docs/modernization/work-material-native-observations.json",
         "backend/tests/runtime/test_work_material.py",
-        "backend/tests/runtime/test_owned_selective_material.py"
+        "backend/tests/runtime/test_owned_selective_material.py",
+        "docs/modernization/communication-acceptance-review.md",
+        "docs/modernization/communication-acceptance-results.json",
+        "docs/modernization/communication-acceptance-packaging.json",
+        "docs/modernization/communication-acceptance-artifact-comparison.json",
+        "backend/tests/runtime/test_communication_acceptance.py",
+        "backend/tests/runtime/test_plan_execution.py",
+        "backend/tests/runtime/test_project_planning.py"
+      ],
+      "remaining": [
+        "Verify current-agent behavior: a simple handoff begins without ceremonial confirmation, while a material contradiction stops only dependent work and explains the reason.",
+        "Representative explanation quality and human understanding remain in their broader evaluation deliverables; storage/protocol evidence is not a substitute."
+      ],
+      "implemented": [
+        "Current installed host tests preserve original handoff goal, acceptance, source identities, explicit assumptions and version; changed predecessor premises fence the consumer and invented source quotations cannot validate a plan."
       ]
     },
     "E01": {

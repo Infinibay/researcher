@@ -122,6 +122,7 @@ def test_foreign_recipients_sources_and_nonparticipants_are_rejected(coordinatio
     assert messages.read(recipient[2], sourced["message_id"])["evidence_refs"] == [{"source_id":91,"sha256":"a" * 64}]
 
 
+@pytest.mark.parametrize("schema_target", [56])
 def test_migration56_is_atomic_repeatable_and_preserves_historical_messages(coordination):
     """Failure before the migration receipt leaves schema55 and old chat untouched; retry adds only new structures."""
     import sqlite3
@@ -139,13 +140,13 @@ def test_migration56_is_atomic_repeatable_and_preserves_historical_messages(coor
     """)
     before = c.conn.execute("SELECT * FROM chat_messages").fetchall()
     with pytest.raises(sqlite3.IntegrityError, match="injected upgrade"):
-        ensure_migrations(c.database)
+        ensure_migrations(c.database, target_version=56)
     assert c.conn.execute("SELECT MAX(version) FROM schema_migrations").fetchone()[0] == 55
     assert not c.conn.execute("SELECT name FROM sqlite_master WHERE name='runtime_agent_messages'").fetchall()
     c.conn.execute("DROP TRIGGER reject_peer_upgrade")
     c.conn.commit()
-    ensure_migrations(c.database)
-    ensure_migrations(c.database)
+    ensure_migrations(c.database, target_version=56)
+    ensure_migrations(c.database, target_version=56)
     assert c.conn.execute("SELECT MAX(version) FROM schema_migrations").fetchone()[0] == 56
     assert c.conn.execute("SELECT * FROM chat_messages").fetchall() == before
     assert c.conn.execute("SELECT count(*) FROM runtime_agent_messages").fetchone()[0] == 0

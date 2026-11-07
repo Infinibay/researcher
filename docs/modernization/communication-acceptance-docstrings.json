@@ -1,0 +1,99 @@
+{
+  "base_commit": "7382aa1",
+  "documented_nodes": 13,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService",
+      "line": 64,
+      "docstring": "Own native attempts and grant-bound tool closure before durable terminal states.",
+      "file_sha256": "7e4ebce324582908912c1819751cc3121788ea9ecd6254d522947d8fc22ca996"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "correct",
+      "line": 1051,
+      "docstring": "Record a versioned owner correction and interrupt only still-authorized work.\n\nRetired workers retain closure ownership, but their original context must\nnot reject a later correction while they finish closing. SQLite validates\nthe current version; the finalizer derives its outcome from that state.",
+      "file_sha256": "7e4ebce324582908912c1819751cc3121788ea9ecd6254d522947d8fc22ca996"
+    },
+    {
+      "path": "backend/tests/runtime/test_communication_acceptance.py",
+      "symbol": "test_process_loss_after_committed_message_retains_one_original_delivery",
+      "line": 19,
+      "docstring": "Abrupt exit after the actual commit cannot lose the pending instruction/inbox or require another effect on receipt recovery.",
+      "file_sha256": "054a111b7fef80d9eb91169923d7cd0bb6f29dc8a60fd6f900c53fd51228a2aa"
+    },
+    {
+      "path": "backend/tests/runtime/test_communication_acceptance.py",
+      "symbol": "test_two_questions_in_one_thread_accept_reversed_answers_before_receipt_ack",
+      "line": 65,
+      "docstring": "Replies correlate to immutable question IDs, even before the sender waits/acknowledges and after reopening the inbox.",
+      "file_sha256": "054a111b7fef80d9eb91169923d7cd0bb6f29dc8a60fd6f900c53fd51228a2aa"
+    },
+    {
+      "path": "backend/tests/runtime/test_communication_acceptance.py",
+      "symbol": "test_final_peer_constraint_is_recoverable_and_read_does_not_apply_correction",
+      "line": 87,
+      "docstring": "A preview omits the final restriction explicitly; full windows preserve it, while correction revokes the old recipient despite its prior read.",
+      "file_sha256": "054a111b7fef80d9eb91169923d7cd0bb6f29dc8a60fd6f900c53fd51228a2aa"
+    },
+    {
+      "path": "backend/tests/runtime/test_communication_acceptance.py",
+      "symbol": "test_ping_pong_hits_original_run_cap_but_repeated_corrections_and_stop_remain_available",
+      "line": 119,
+      "docstring": "Acknowledging each reply cannot reset the per-run causal bound, and saturation never blocks short typed owner controls.",
+      "file_sha256": "054a111b7fef80d9eb91169923d7cd0bb6f29dc8a60fd6f900c53fd51228a2aa"
+    },
+    {
+      "path": "backend/tests/runtime/test_communication_acceptance.py",
+      "symbol": "test_correction_survives_slow_tool_and_exhausted_project_budget",
+      "line": 144,
+      "docstring": "Consecutive owner corrections remain recordable at full budget during slow closure; only a later explicit turn receives their current version.",
+      "file_sha256": "054a111b7fef80d9eb91169923d7cd0bb6f29dc8a60fd6f900c53fd51228a2aa"
+    },
+    {
+      "path": "backend/tests/runtime/test_communication_acceptance.py",
+      "symbol": "test_question_answer_and_stop_race_preserves_the_first_durable_decision",
+      "line": 188,
+      "docstring": "Conditional answer/Stop ordering never overwrites a committed answer or treats a cancelled question as agreement.",
+      "file_sha256": "054a111b7fef80d9eb91169923d7cd0bb6f29dc8a60fd6f900c53fd51228a2aa"
+    },
+    {
+      "path": "backend/tests/runtime/test_communication_acceptance.py",
+      "symbol": "test_same_question_after_changed_context_does_not_reuse_an_old_answer",
+      "line": 213,
+      "docstring": "An identical question in a new context remains unanswered; old operation recovery preserves provenance without overwriting the new premise.",
+      "file_sha256": "054a111b7fef80d9eb91169923d7cd0bb6f29dc8a60fd6f900c53fd51228a2aa"
+    },
+    {
+      "path": "backend/tests/runtime/test_communication_acceptance.py",
+      "symbol": "test_immediate_owner_messages_are_distinct_and_retries_do_not_throttle_them",
+      "line": 238,
+      "docstring": "Two consecutive owner messages get separate durable receipts; retry neither duplicates nor suppresses the second message.",
+      "file_sha256": "054a111b7fef80d9eb91169923d7cd0bb6f29dc8a60fd6f900c53fd51228a2aa"
+    },
+    {
+      "path": "backend/tests/runtime/test_communication_acceptance.py",
+      "symbol": "test_duplicate_actor_labels_require_an_exact_recipient_without_fanout",
+      "line": 259,
+      "docstring": "Two admitted researchers with the same label do not turn a directed message into a role broadcast or another assignment.",
+      "file_sha256": "054a111b7fef80d9eb91169923d7cd0bb6f29dc8a60fd6f900c53fd51228a2aa"
+    },
+    {
+      "path": "backend/tests/runtime/test_agent_messages.py",
+      "symbol": "test_migration56_is_atomic_repeatable_and_preserves_historical_messages",
+      "line": 126,
+      "docstring": "Failure before the migration receipt leaves schema55 and old chat untouched; retry adds only new structures.",
+      "file_sha256": "114d6bda77ce26731e510908fcbaf9047a17be07b9d541ac55004d83649b352e"
+    },
+    {
+      "path": "backend/tests/runtime/test_human_questions.py",
+      "symbol": "setup_question",
+      "line": 9,
+      "docstring": "Create one bound native question; use a new operation key for a genuinely new request in a later context.",
+      "file_sha256": "e784ae06899a24361ce3dfc8ece8ed16e1119fcb5b0791b6b71d21b43a27f04d"
+    }
+  ],
+  "scope": "Changed product method, containing class and new/changed test definitions; modules and abrupt-exit child script also documented in English."
+}

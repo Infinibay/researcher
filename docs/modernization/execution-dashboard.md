@@ -26,9 +26,39 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
 - Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 0/12 páginas están completamente aceptadas.
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
-- U06 y E01–E12 quedan comprobados con el alcance de sus matrices; siguen 30 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
+- U06, E01–E12 y C01–C09 quedan comprobados con el alcance de sus matrices; siguen 21 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: E09/E10/E12 comprobados; siguiente comunicación
+## Estado actual: C01–C09 comprobados; C10 y evaluación siguen abiertos
+
+Bloque **2026-11-07 19:24:02–19:38:49 UTC**, **14 min 47 s hasta verificar**.
+Documentación/checkpoint posteriores excluidos. Se corrigió una brecha funcional:
+una segunda corrección válida era rechazada mientras cerraba el worker de la
+versión anterior. Ahora conserva su cierre sin bloquear el contexto vigente.
+
+**149 casos instalados y 27 controles frontend pasan**, sin fallos ni omisiones.
+12 casos nuevos; 654 archivos Python/SQL coinciden con la instalación, 347 de
+producto. 13 nodos documentados y 85 prompts revisados; cero turnos reales de
+modelo. [Matriz, fallo reproducido y límites](communication-acceptance-review.md).
+
+- Terminado: **U06, E01–E12 y C01–C09**. Entrega durable, destinatario exacto,
+  preguntas correlacionadas, restricciones completas, controles y correcciones
+  consecutivas comprobados con el alcance de sus matrices.
+- Estado al cerrar: evidencia y documentación guardadas; siguiente bloque pendiente.
+- Siguiente principal: **C10 y comportamiento actual de comunicación**: tarea simple
+  sin ritual y contradicción material que detiene la acción dependiente con una
+  explicación útil. Las pruebas del host están; falta la observación conjunta del agente.
+  **No iniciado**; registrar hora real y conservar resultados fallidos sin regenerarlos.
+- Pendiente después: demás escenarios/datos históricos, evaluaciones representativas
+  y comprensión humana, aceptación completa de 12 páginas, dependencias y distribución.
+- Al final: detalles registrados —incluido DD115—, validación global y revisión
+  independiente de todo el plan.
+
+Quedan **21 de 43 escenarios** sin aceptación completa y **0/12 páginas** plenamente
+aceptadas; hay 12 pilotos y 48 conceptos. Estos conteos no miden implementación
+porcentual. La suite global histórica conserva fallos; no se anuncia otra verde.
+Lista y duración se publican al cambiar de tarea y se conservan tras compactar.
+
+## Etapa anterior: E09/E10/E12 comprobados; siguiente comunicación
 
 Bloque **2026-11-07 19:05:11–19:20:31 UTC**, **15 min 20 s hasta verificar**.
 Documentación/checkpoint posteriores excluidos. No fue necesario cambiar el

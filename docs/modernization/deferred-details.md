@@ -874,3 +874,16 @@ tarea sintética que pedía lectura completa, no una medición representativa ni
 prueba de un fallo presupuestario. No repetir ahora el modelo por este detalle;
 las evaluaciones generales de comunicación/contexto siguen siendo trabajo principal.
 Evidencia: evidence-publication-native.json y evidence-publication-review.md.
+
+## DD115 — refresco visible entre correcciones del propietario
+
+Revisar en la pasada de interacción el intervalo entre confirmar una corrección
+y recibir el contexto actualizado. `useCorrection.onSettled` invalida las consultas
+sin esperar a su resultado y `TaskRunWorkspace` libera el formulario al confirmar.
+Hipótesis de UX pendiente de reproducción: un envío muy rápido podría conservar
+fugazmente la versión anterior y recibir un conflicto correcto del servidor.
+No equivale al defecto funcional ya corregido de rechazar la versión vigente
+mientras cierra un worker antiguo. Preservar el cuerpo/clave tras respuesta perdida
+y mostrar el refresco antes de facilitar la siguiente edición. No rehacer ahora
+el panel ni afirmar que se observó ese caso en navegador; aceptación integral
+de la página y comprensión humana siguen pendientes.

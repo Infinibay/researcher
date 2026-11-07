@@ -1,0 +1,18 @@
+{
+  "base_commit": "7382aa1",
+  "previous_wheel_sha256": "c302a0e8b0d0b599bc04e5c11a05bf611319dc0193641c2ab8fc50d8a92bf338",
+  "current_wheel_sha256": "0b95246b6fed8893d5ddd3734a9ec713326fd170923ca644a17c9a7d7322c600",
+  "changed_python_sql": [
+    "backend/runtime/service.py",
+    "backend/tests/runtime/test_agent_messages.py",
+    "backend/tests/runtime/test_human_questions.py"
+  ],
+  "added_python_sql": [
+    "backend/tests/runtime/test_communication_acceptance.py"
+  ],
+  "removed_python_sql": [],
+  "changed_product_python_sql": [
+    "backend/runtime/service.py"
+  ],
+  "scope": "Product change is the active-worker filter and its English method docstring. Broader selected installed checks are rerun; no claim that old whole-service receipts prove the changed method."
+}

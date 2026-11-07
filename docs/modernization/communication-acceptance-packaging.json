@@ -1,0 +1,44 @@
+{
+  "base_commit": "7382aa1",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "0b95246b6fed8893d5ddd3734a9ec713326fd170923ca644a17c9a7d7322c600",
+  "source_files_matching_wheel_and_installation": 654,
+  "product_files_matching": 347,
+  "observed": {
+    "cases": 149,
+    "passed": 149,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 250,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 94.076,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_communication_acceptance.py",
+    "backend/tests/runtime/test_agent_messages.py",
+    "backend/tests/runtime/test_human_questions.py",
+    "backend/tests/runtime/test_question_inbox.py",
+    "backend/tests/runtime/test_owner_notes.py",
+    "backend/tests/runtime/test_run_conversation.py",
+    "backend/tests/runtime/test_workspace_delivery.py",
+    "backend/tests/runtime/test_coordination.py",
+    "backend/tests/runtime/test_runtime_service.py",
+    "backend/tests/runtime/test_run_input.py",
+    "backend/tests/runtime/test_agent_notices.py",
+    "backend/tests/runtime/test_engine_restart_context.py",
+    "backend/tests/runtime/test_plan_execution.py",
+    "backend/tests/runtime/test_project_planning.py",
+    "backend/tests/runtime/test_work_material.py",
+    "backend/tests/runtime/test_predecessor_research_material.py",
+    "backend/tests/runtime/test_owned_selective_material.py",
+    "backend/tests/runtime/test_owned_project_stop.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "C01-C10 host communication: exact recipients/replies, durable process-loss receipts, bounded peer exchanges, full context windows, owner questions/corrections, continued delivery and original-worker closure. Generation is controlled; no model-comprehension claim.",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}

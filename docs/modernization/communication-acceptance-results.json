@@ -1,0 +1,95 @@
+{
+  "base_commit": "7382aa1",
+  "started_at": "2026-11-07T19:24:02Z",
+  "validated_at": "2026-11-07T19:38:49Z",
+  "elapsed_seconds_until_validation": 887,
+  "duration_scope": "C01-C10 audit, reproduced consecutive-correction defect, implementation and installed/frontend verification; later documentation/checkpoint excluded.",
+  "product_changed": [
+    "backend/runtime/service.py"
+  ],
+  "fix": "Withdrawn workers retain physical closure ownership but no longer gate a later owner correction by their obsolete context version.",
+  "source_runs": [
+    {
+      "label": "initial_new_cases",
+      "passed": 7,
+      "failed": 1,
+      "seconds": 5.4,
+      "failure": "New fixture expected a nested usage DTO; corrected to actual flat fields."
+    },
+    {
+      "label": "wide_before_final_changes",
+      "passed": 107,
+      "failed": 2,
+      "seconds": 50.45,
+      "failure": "New repeated-question fixture reused an old operation key; historical migration fixture removed56 from current65 and created an invalid gap."
+    },
+    {
+      "label": "consecutive_correction_red",
+      "passed": 0,
+      "failed": 1,
+      "failure": "Reproduced product RunConflict for current context2 while context1 worker was already withdrawn but still closing."
+    },
+    {
+      "label": "fixed_service_and_new_cases",
+      "passed": 42,
+      "failed": 0,
+      "seconds": 24.76
+    }
+  ],
+  "installed": {
+    "cases": 149,
+    "passed": 149,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 250,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 94.076,
+    "exit_code": 0
+  },
+  "distinct_installed_cases": 149,
+  "new_scenario_cases": 12,
+  "frontend": {
+    "contract_and_server_render_cases": 27,
+    "passed": 27,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 1.002158197,
+    "source_changed": false,
+    "whole_page_acceptance": false
+  },
+  "docstrings": {
+    "documented_nodes": 13,
+    "missing": []
+  },
+  "prompts": {
+    "files": 304,
+    "reviewed": 85,
+    "pending_static_review": 0,
+    "prompt_changes": 0,
+    "inventory_change": "Only service.py source-tree hash."
+  },
+  "real_model_turns": 0,
+  "scenarios_completed": [
+    "C01",
+    "C02",
+    "C03",
+    "C04",
+    "C05",
+    "C06",
+    "C07",
+    "C08",
+    "C09"
+  ],
+  "scenario_still_open": "C10: current-agent simple handoff and material-contradiction behavior plus separately scoped representative/human evaluation.",
+  "whole_plan": "in_progress",
+  "global_suite": "Historical failures remain; no new global-suite claim.",
+  "limits": [
+    "Controlled inference. Actual process-loss, SQLite, HTTP/MCP and kernel/broker tests as identified in the matrix.",
+    "No concurrent real-model peer-conversation or human-comprehension claim.",
+    "No historical user-data migration, external publication or whole-page acceptance.",
+    "Source and installed selections overlap and are not added as distinct cases."
+  ],
+  "verification_notes": [
+    "Installed JUnit classname is empty; the metadata verifier identifies new cases by their unique original test function names from the source AST, including parameter variants. Initial classname-based count was rejected; test execution results did not change."
+  ]
+}
