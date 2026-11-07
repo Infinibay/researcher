@@ -109,6 +109,7 @@ class RuntimeService:
         self._dispatch_wake = asyncio.Event()
         self._dispatcher = None
         self._sources = None
+        self._retention = None
         self._source_project_stops = {}
 
     @contextmanager
@@ -168,6 +169,14 @@ class RuntimeService:
             self._sources = SourceService(self)
         return self._sources
 
+    @property
+    def retention(self):
+        """Compose explicit owner retention over actual authority and configured roots, without starting cleanup on read or startup."""
+        if self._retention is None:
+            from backend.runtime.retention_service import RetentionService
+            self._retention=RetentionService(self)
+        return self._retention
+
     def _acquire(self):
         # The canonical DB path, rather than a configurable control path, owns
         # the lock identity. O_CLOEXEC prevents a native child retaining it.
@@ -217,9 +226,10 @@ class RuntimeService:
         return self
 
     async def __aexit__(self, exc_type, exc, tb):
-        """Drain dispatcher admissions before withdrawing workers and releasing the journal owner lock."""
+        """Drain admissions, native/source closure and original retention threads before releasing the journal owner lock."""
         self._closing = True
         source_closing = asyncio.create_task(self._sources.close(), name='researcher-source-shutdown') if self._sources is not None else None
+        retention_closing = asyncio.create_task(self._retention.close(), name='researcher-retention-shutdown') if self._retention is not None else None
         try:
             self._dispatch_wake.set()
             if self._dispatcher is not None:
@@ -250,9 +260,16 @@ class RuntimeService:
                         finally:
                             raise
             finally:
-                if self._lock_fd is not None:
-                    os.close(self._lock_fd)
-                    self._lock_fd = None
+                try:
+                    if retention_closing is not None:
+                        try:await asyncio.shield(retention_closing)
+                        except asyncio.CancelledError:
+                            try:await retention_closing
+                            finally:raise
+                finally:
+                    if self._lock_fd is not None:
+                        os.close(self._lock_fd)
+                        self._lock_fd = None
 
     async def submit(
         self, spec, *, repository_id=None, conversation_thread=None, review=None, prior_code=None

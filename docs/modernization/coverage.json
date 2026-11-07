@@ -1724,7 +1724,7 @@
       ]
     },
     "D08": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "backend/tests/git/test_worktree_manager.py",
         "backend/tests/git/test_local_worktree.py",
@@ -1732,13 +1732,30 @@
         "docs/modernization/git-identity-review.md",
         "docs/modernization/git-identity-final-packaging.json",
         "docs/modernization/git-identity-docstrings.json",
-        "docs/superpowers/plans/2026-11-07-workspace-retention.md"
+        "docs/superpowers/plans/2026-11-07-workspace-retention.md",
+        "backend/runtime/workspace_retention.py",
+        "backend/runtime/retention_authority.py",
+        "backend/runtime/retention_files.py",
+        "backend/tests/runtime/test_workspace_retention.py",
+        "backend/tests/runtime/test_owned_retention.py",
+        "frontend/tests/ui/workspace-retention.test.tsx",
+        "docs/modernization/workspace-retention-review.md",
+        "docs/modernization/workspace-retention-results.json",
+        "docs/modernization/workspace-retention-packaging.json",
+        "docs/modernization/workspace-retention-docstrings.json",
+        "docs/design/audits/2026-11-07-workspace-retention/report.md"
       ],
       "implemented": [
-        "Per-attempt private copies are preserved; obsolete reset/forced-removal/rmtree worktree entry points now refuse before execution or DB writes. Eleven real dirty/untracked-worktree preservation cases pass."
+        "Per-attempt private copies are preserved; obsolete reset/forced-removal/rmtree worktree entry points now refuse before execution or DB writes. Eleven real dirty/untracked-worktree preservation cases pass.",
+        "Schema68 records immutable origin and original operation intents; owner API/UI retain uncertain requests and explicit reconciliation.291 installed cases and5 DOM pass;85 Python contracts documented. Quarantine blocks dependent new use; actual closure, crash recovery, changed data, symlink replacement, partial deletion, shutdown drain and relocated backup preservation are verified."
       ],
-      "remaining": [
-        "Implement explicit owner quarantine, retention policy, verified recovery archive, original-operation deletion/reconciliation and UI; retaining everything is not completed retention."
+      "remaining": [],
+      "verified_at": "2026-11-07",
+      "completion_scope": "Explicit owner quarantine of witnessed closed native copies, complete verified recovery archive, selected retention deadline, original-revision removal/reconciliation and new-data restoration. Unsafe legacy cleanup remains retired; ambiguous historic work is preserved.",
+      "limitations": [
+        "Controlled inference and synthetic managed data; real filesystem, Git and kernel authority for the owned integration.",
+        "Browser pane uses controlled HTTP responses; full-page, human comprehension, historical migration and global suite acceptance remain separate.",
+        "No automatic disposal of archives/ambiguous partials or transferred deletion authority after installation restore."
       ]
     },
     "D09": {
@@ -2849,7 +2866,9 @@
         "docs/modernization/recovery-policy-packaging.json",
         "backend/db/wiki_migration.py",
         "backend/tests/research/test_wiki_migration.py",
-        "docs/modernization/recovery-policy-before-wiki-fix-packaging.json"
+        "docs/modernization/recovery-policy-before-wiki-fix-packaging.json",
+        "docs/modernization/workspace-retention-review.md",
+        "docs/modernization/workspace-retention-packaging.json"
       ],
       "remaining": [
         "Historical real-data location, inventory and migration acceptance; validate actual layouts and Chroma-version compatibility",
@@ -2928,7 +2947,9 @@
         "docs/modernization/active-reboot-disk-inspection.json",
         "docs/modernization/active-reboot-packaging.json",
         "backend/tests/runtime/test_restored_jobs.py",
-        "evals/operation/reboot_guest.py"
+        "evals/operation/reboot_guest.py",
+        "docs/modernization/workspace-retention-review.md",
+        "docs/modernization/workspace-retention-packaging.json"
       ],
       "implemented": [
         "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance.",
@@ -4107,7 +4128,9 @@
         "docs/modernization/context7-docstrings.json",
         "docs/modernization/spider-docstrings.json",
         "docs/modernization/code-operations-docstrings.json",
-        "docs/modernization/native-adapters-docstrings.json"
+        "docs/modernization/native-adapters-docstrings.json",
+        "docs/modernization/workspace-retention-review.md",
+        "docs/modernization/workspace-retention-packaging.json"
       ],
       "remaining": [
         "Audit modules/classes/methods and relevant functions added earlier in this branch; add meaningful searchable docstrings/JSDoc where missing or stale.",
@@ -4868,7 +4891,9 @@
         "docs/modernization/source-history-packaging.json",
         "backend/tests/runtime/test_source_history.py",
         "frontend/tests/source-history.test.ts",
-        "docs/design/audits/2026-11-06-source-history/report.md"
+        "docs/design/audits/2026-11-06-source-history/report.md",
+        "docs/modernization/workspace-retention-review.md",
+        "docs/modernization/workspace-retention-packaging.json"
       ],
       "implemented": [
         "Three desktop concepts+mobile selected/implemented; complete immutable tree/blob read, explicit branch refresh, source scope/focus, historical review owner entry and original registration retry.",

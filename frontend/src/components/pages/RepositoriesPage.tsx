@@ -9,6 +9,7 @@ import {ApiError} from '../../api/client'
 import {RepositoryFile} from '../repositories/RepositoryFile'
 import {RepositoryReview} from '../repositories/RepositoryReview'
 import {SourceSetup} from '../repositories/SourceSetup'
+import {RetainedWork} from '../repositories/RetainedWork'
 import {sourcePackets,sourceHistory} from '../../api/sourceOperations'
 import type {Repository} from '../../types/api'
 import '../../styles/tasks.css'
@@ -23,24 +24,25 @@ export function RepositoriesPage(){
 /** Keep source selection by actual resource ID; missing, foreign or failed observations are never treated as a ready source. */
 function RepositoryRegister({projectId}:{projectId:number}){
  const repos=useRepos(projectId),workspace=useQuery({queryKey:['project-workspace',projectId],queryFn:()=>projectWorkspace(projectId),retry:false}),client=useQueryClient()
+ const [retained,setRetained]=useState(false)
  const [selected,setSelected]=useState<number|null>(null),[opened,setOpened]=useState(false),[registering,setRegistering]=useState(false),[settingUp,setSettingUp]=useState(false),[historyRequested,setHistoryRequested]=useState(0),[packetError,setPacketError]=useState('')
  useEffect(()=>{try{if(projectPackets.load(sessionStorage,'source',projectId))setRegistering(true)}catch(e){setPacketError(e instanceof Error?e.message:'No se pudo recuperar el registro.')}},[projectId])
  useEffect(()=>{try{if(sourcePackets.load(sessionStorage,projectId)||sourceHistory.load(sessionStorage,projectId))setSettingUp(true)}catch(e){setPacketError(e instanceof Error?e.message:'No se pudo recuperar la preparación.')}},[projectId])
  const sources=repos.data?.filter(r=>r.project_id===projectId)??[],source=sources.find(r=>r.id===selected)
  /** Open this exact source and move focus into its reading pane after React commits it. */
- function choose(id:number){setSelected(id);setOpened(true);setRegistering(false);setSettingUp(false);requestAnimationFrame(()=>document.getElementById('repo-source-title')?.focus())}
+ function choose(id:number){setRetained(false);setSelected(id);setOpened(true);setRegistering(false);setSettingUp(false);requestAnimationFrame(()=>document.getElementById('repo-source-title')?.focus())}
  /** Return to the actual selected source row on a narrow viewport, without starting another read operation. */
  function back(){setOpened(false);requestAnimationFrame(()=>document.getElementById(`repo-select-${selected}`)?.focus())}
  /** Resolve one source registration receipt before refreshing both source observations and the original project register. */
  function registered(id:number){choose(id);client.invalidateQueries({queryKey:['repos',projectId]});client.invalidateQueries({queryKey:['project-workspace',projectId]})}
- return <div className="repo-layout" data-open={opened||registering||settingUp}>
-  <section className="repo-register" aria-label="Fuentes del proyecto"><header><h2>Fuentes</h2><button className="repo-primary" onClick={()=>{setSettingUp(true);setRegistering(false)}}>Preparar fuente Git</button><button onClick={()=>{setRegistering(true);setSettingUp(false)}}>Registrar carpeta existente</button>{Boolean(workspace.data?.source_operations.length)&&<button onClick={()=>{setSettingUp(true);setRegistering(false);setHistoryRequested(value=>value+1)}}>Historia de preparación</button>}</header><p>Registra y explora fuentes de este proyecto. Elegir una no inicia agentes.</p>
+ return <div className="repo-layout" data-open={opened||registering||settingUp||retained}>
+  <section className="repo-register" aria-label="Fuentes del proyecto"><header><h2>Fuentes</h2><button className="repo-primary" onClick={()=>{setSettingUp(true);setRegistering(false)}}>Preparar fuente Git</button><button onClick={()=>{setRegistering(true);setSettingUp(false)}}>Registrar carpeta existente</button>{Boolean(workspace.data?.source_operations.length)&&<button onClick={()=>{setSettingUp(true);setRegistering(false);setHistoryRequested(value=>value+1)}}>Historia de preparación</button>}</header><button onClick={()=>setRetained(true)}>Copias de trabajo</button><p>Registra y explora fuentes de este proyecto. Elegir una no inicia agentes.</p>
    {repos.isPending&&<p role="status">Consultando fuentes registradas…</p>}{repos.error&&<p role="alert">No se pudo consultar el registro. {repos.error.message}</p>}{repos.data&&sources.length===0&&<p>No hay fuentes registradas en este proyecto.</p>}
    <ul>{sources.map(r=><li key={r.id}><button id={`repo-select-${r.id}`} className="repo-select" aria-pressed={selected===r.id} onClick={()=>choose(r.id)}><strong>{r.name}</strong><span className="repo-path">{r.local_path}</span><small>{workspace.data?.sources.find(s=>s.repository_id===r.id)?.availability==='available'?'Carpeta observada disponible':workspace.data?.sources.find(s=>s.repository_id===r.id)?.availability==='unavailable'?'Carpeta no disponible':'Carpeta sin comprobar'}</small></button></li>)}</ul>
    <button className="repo-link" disabled={repos.isFetching} onClick={()=>{repos.refetch();workspace.refetch()}}>Actualizar fuentes</button><p className="repo-muted">Registrar conserva una carpeta tal como está. Preparar Git permite crear, adoptar o clonar con una solicitud explícita. Una carpeta parcial conserva su operación original; no se sobrescribe para completar el registro.</p>
   </section>
   <div className="repo-reading">{packetError&&<p role="alert">{packetError}</p>}{workspace.error&&<p role="alert">No pudimos observar las carpetas. No deducimos su disponibilidad del registro.</p>}
-   {settingUp?<SourceSetup historyRequest={historyRequested} projectId={projectId} root={workspace.data?.workspace_root??null} history={workspace.data?.source_operations??[]} onRegistered={registered} onClose={()=>{setSettingUp(false);setOpened(false)}}/>:registering?<SourceRegistration projectId={projectId} root={workspace.data?.workspace_root??null} available={workspace.data?.runtime_available===true} onRegistered={registered} onClose={()=>{setRegistering(false);setOpened(false)}}/>:source?<RepositoryInspector key={source.id} projectId={projectId} repository={source} onBack={back}/>:<section className="repo-empty"><h2>Una fuente, una revisión concreta</h2><p>Elige una fuente para consultar archivos o decisiones anteriores. La carpeta registrada, el objeto Git leído y la aceptación de sus cambios se comprueban por separado.</p></section>}
+   {retained?<RetainedWork projectId={projectId} onClose={()=>setRetained(false)}/>:settingUp?<SourceSetup historyRequest={historyRequested} projectId={projectId} root={workspace.data?.workspace_root??null} history={workspace.data?.source_operations??[]} onRegistered={registered} onClose={()=>{setSettingUp(false);setOpened(false)}}/>:registering?<SourceRegistration projectId={projectId} root={workspace.data?.workspace_root??null} available={workspace.data?.runtime_available===true} onRegistered={registered} onClose={()=>{setRegistering(false);setOpened(false)}}/>:source?<RepositoryInspector key={source.id} projectId={projectId} repository={source} onBack={back}/>:<section className="repo-empty"><h2>Una fuente, una revisión concreta</h2><p>Elige una fuente para consultar archivos o decisiones anteriores. La carpeta registrada, el objeto Git leído y la aceptación de sus cambios se comprueban por separado.</p></section>}
   </div>
  </div>
 }

@@ -221,7 +221,7 @@ class FileImports:
             return legacy + private
 
     def _source(self, conn, project_id, task_id, binding, kind, identifier):
-        """Resolve only host-recorded paths in their true project/repository scope; never use an arbitrary caller path."""
+        """Resolve host-recorded paths in their true project/repository scope, excluding quarantined private copies and arbitrary caller paths."""
         self.runs._existing_task(conn, project_id, task_id)
         self.runs._check_registration(conn, project_id, binding)
         _source_identity(binding)
@@ -258,6 +258,8 @@ class FileImports:
                 "original_native_author": "unknown",
             }
         elif kind == "private_copy":
+            from backend.runtime.retention_authority import require_available
+            require_available(conn,project_id,identifier)
             row = conn.execute(
                 "SELECT * FROM runtime_development_workspaces WHERE attempt_id=? AND project_id=? AND task_id=?",
                 (identifier, project_id, task_id),

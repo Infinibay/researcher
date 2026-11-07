@@ -1,0 +1,603 @@
+{
+  "base_commit": "437ef3f",
+  "changed_or_new_definitions_documented": 85,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/main.py",
+      "symbol": "create_app",
+      "line": 112,
+      "docstring": "Construct routes without inference, database writes or maintenance jobs.",
+      "file_sha256": "6117224ced2d181aaddd4a1756c0a4d5c0d759c720bd78f1eee2c31bc1d75bf5"
+    },
+    {
+      "path": "backend/api/routes/retention.py",
+      "symbol": "QuarantineWork",
+      "line": 14,
+      "docstring": "Explicit retention period and acknowledgement that the original copy becomes unavailable for execution/publication.",
+      "file_sha256": "ad156020a3bd8da3c88abb5cb890232c9c6456ac0d276d7372b6011612487194"
+    },
+    {
+      "path": "backend/api/routes/retention.py",
+      "symbol": "RecoverWork",
+      "line": 22,
+      "docstring": "One observed archive revision for removal or new-data recovery; callers cannot select an arbitrary filesystem target.",
+      "file_sha256": "ad156020a3bd8da3c88abb5cb890232c9c6456ac0d276d7372b6011612487194"
+    },
+    {
+      "path": "backend/api/routes/retention.py",
+      "symbol": "retained_work",
+      "line": 30,
+      "docstring": "List documentary copy/archive states without starting Git, cleanup or inference.",
+      "file_sha256": "ad156020a3bd8da3c88abb5cb890232c9c6456ac0d276d7372b6011612487194"
+    },
+    {
+      "path": "backend/api/routes/retention.py",
+      "symbol": "retention_operations",
+      "line": 36,
+      "docstring": "Read paged original receipts and pending failures; absence of a response is never treated as absence of an operation.",
+      "file_sha256": "ad156020a3bd8da3c88abb5cb890232c9c6456ac0d276d7372b6011612487194"
+    },
+    {
+      "path": "backend/api/routes/retention.py",
+      "symbol": "retention_operation",
+      "line": 42,
+      "docstring": "Recover the original owner decision by stable key without repeating its effect.",
+      "file_sha256": "ad156020a3bd8da3c88abb5cb890232c9c6456ac0d276d7372b6011612487194"
+    },
+    {
+      "path": "backend/api/routes/retention.py",
+      "symbol": "reconcile_retention",
+      "line": 48,
+      "docstring": "Resume only an explicitly selected pending operation, with its original paths, archive and scope.",
+      "file_sha256": "ad156020a3bd8da3c88abb5cb890232c9c6456ac0d276d7372b6011612487194"
+    },
+    {
+      "path": "backend/api/routes/retention.py",
+      "symbol": "quarantine_work",
+      "line": 54,
+      "docstring": "Fence new use of one closed private copy and retain its original archive decision before background copying.",
+      "file_sha256": "ad156020a3bd8da3c88abb5cb890232c9c6456ac0d276d7372b6011612487194"
+    },
+    {
+      "path": "backend/api/routes/retention.py",
+      "symbol": "recover_work",
+      "line": 61,
+      "docstring": "Apply retention before original-copy removal or recover archived bytes to a fresh destination without reviving old authority.",
+      "file_sha256": "ad156020a3bd8da3c88abb5cb890232c9c6456ac0d276d7372b6011612487194"
+    },
+    {
+      "path": "backend/db/workspace_retention_migration.py",
+      "symbol": "restore_workspace_retention_schema",
+      "line": 4,
+      "docstring": "Restore schema67 only before any retention intent exists; later or used installations require forward repair or backup.",
+      "file_sha256": "bddba25a4a3cc02a338ea9e1392db7b6c0a92f10b4050f6d3257696435478100"
+    },
+    {
+      "path": "backend/runtime/code_carryover.py",
+      "symbol": "CodeCarryovers",
+      "line": 41,
+      "docstring": "Read retained native material or selected older files and freeze owner-chosen data using the existing admission receipt transaction.",
+      "file_sha256": "ec1aede704a7fd20781eb6866e7af78dea741d68a6a7700ff2a125d5d6a0811d"
+    },
+    {
+      "path": "backend/runtime/code_carryover.py",
+      "symbol": "CodeCarryovers._packet",
+      "line": 48,
+      "docstring": "Require an available, unquarantined closed native author and saved complete input; do not reconstruct unknown history.",
+      "file_sha256": "ec1aede704a7fd20781eb6866e7af78dea741d68a6a7700ff2a125d5d6a0811d"
+    },
+    {
+      "path": "backend/runtime/code_reviews.py",
+      "symbol": "CodeReviews",
+      "line": 56,
+      "docstring": "Own immutable review admission and provenance using the existing transaction, receipt and event boundary.",
+      "file_sha256": "4bfc57ed5ff147c84d46d625ca4346716ea50507b333f550fd45e05fe80ca58a"
+    },
+    {
+      "path": "backend/runtime/code_reviews.py",
+      "symbol": "CodeReviews._subject",
+      "line": 63,
+      "docstring": "Reject quarantined copies before snapshotting complete evidence; accepted authors permit only explicit readonly owner reconstruction.",
+      "file_sha256": "4bfc57ed5ff147c84d46d625ca4346716ea50507b333f550fd45e05fe80ca58a"
+    },
+    {
+      "path": "backend/runtime/file_imports.py",
+      "symbol": "FileImports",
+      "line": 182,
+      "docstring": "Resolve stored source identity and observe selected bytes without modifying files, starting processes or assigning historic task ownership.",
+      "file_sha256": "3ee82a34edb9029d77d293d695e4a2ea8d3abaa301da956fb5c6ca800ce68972"
+    },
+    {
+      "path": "backend/runtime/file_imports.py",
+      "symbol": "FileImports._source",
+      "line": 223,
+      "docstring": "Resolve host-recorded paths in their true project/repository scope, excluding quarantined private copies and arbitrary caller paths.",
+      "file_sha256": "3ee82a34edb9029d77d293d695e4a2ea8d3abaa301da956fb5c6ca800ce68972"
+    },
+    {
+      "path": "backend/runtime/retention_authority.py",
+      "symbol": "require_available",
+      "line": 8,
+      "docstring": "Reject new use of quarantined bytes within the caller's existing admission/read transaction; historical metadata remains readable.",
+      "file_sha256": "fbb80abaa7edbe89ddb41a9bdf840a4f73aeb0fbb18fcfa30037b8fabf727429"
+    },
+    {
+      "path": "backend/runtime/retention_authority.py",
+      "symbol": "observed_closure",
+      "line": 16,
+      "docstring": "Require witnessed retired grants and closed operations for this database/attempt/fence, including historical attempts; absence is not proof.",
+      "file_sha256": "fbb80abaa7edbe89ddb41a9bdf840a4f73aeb0fbb18fcfa30037b8fabf727429"
+    },
+    {
+      "path": "backend/runtime/retention_files.py",
+      "symbol": "encoded",
+      "line": 21,
+      "docstring": "Bind persisted manifests and owner intent to deterministic complete JSON.",
+      "file_sha256": "86d10599d7d662c2a773391084454eb2725baa5c8dda1638c6328cd5c9e5bff6"
+    },
+    {
+      "path": "backend/runtime/retention_files.py",
+      "symbol": "fingerprint",
+      "line": 26,
+      "docstring": "Identify complete snapshot metadata/content without equating it with execution authority.",
+      "file_sha256": "86d10599d7d662c2a773391084454eb2725baa5c8dda1638c6328cd5c9e5bff6"
+    },
+    {
+      "path": "backend/runtime/retention_files.py",
+      "symbol": "directory",
+      "line": 31,
+      "docstring": "Capture an owner-controlled root without redirection; configured ancestors may be readable, but allocation/archive roots stay private.",
+      "file_sha256": "86d10599d7d662c2a773391084454eb2725baa5c8dda1638c6328cd5c9e5bff6"
+    },
+    {
+      "path": "backend/runtime/retention_files.py",
+      "symbol": "matches_directory",
+      "line": 42,
+      "docstring": "Compare the original directory object even after its explicitly requested move to private disposal storage.",
+      "file_sha256": "86d10599d7d662c2a773391084454eb2725baa5c8dda1638c6328cd5c9e5bff6"
+    },
+    {
+      "path": "backend/runtime/retention_files.py",
+      "symbol": "new_directory",
+      "line": 49,
+      "docstring": "Create a private new directory and persist its name; never reuse an existing entry implicitly.",
+      "file_sha256": "86d10599d7d662c2a773391084454eb2725baa5c8dda1638c6328cd5c9e5bff6"
+    },
+    {
+      "path": "backend/runtime/retention_files.py",
+      "symbol": "sealed_inventory",
+      "line": 55,
+      "docstring": "Retain every ordinary, ignored and untracked byte plus link payload, and reject concurrent changes instead of inventing a stable snapshot.",
+      "file_sha256": "86d10599d7d662c2a773391084454eb2725baa5c8dda1638c6328cd5c9e5bff6"
+    },
+    {
+      "path": "backend/runtime/retention_files.py",
+      "symbol": "git_changes",
+      "line": 69,
+      "docstring": "Observe tracked/untracked/ignored status with a fixed credential-free Git command; a failed observation is explicitly unknown.",
+      "file_sha256": "86d10599d7d662c2a773391084454eb2725baa5c8dda1638c6328cd5c9e5bff6"
+    },
+    {
+      "path": "backend/runtime/retention_files.py",
+      "symbol": "verify_copy",
+      "line": 88,
+      "docstring": "Verify an archived/restored data tree by content, type, mode and link payload; original inodes never transfer to a copy.",
+      "file_sha256": "86d10599d7d662c2a773391084454eb2725baa5c8dda1638c6328cd5c9e5bff6"
+    },
+    {
+      "path": "backend/runtime/retention_files.py",
+      "symbol": "copy_snapshot",
+      "line": 100,
+      "docstring": "Resume only matching completed entries; partial writes stay outside the data tree and never overwrite an existing destination.",
+      "file_sha256": "86d10599d7d662c2a773391084454eb2725baa5c8dda1638c6328cd5c9e5bff6"
+    },
+    {
+      "path": "backend/runtime/retention_files.py",
+      "symbol": "remove_original",
+      "line": 126,
+      "docstring": "Remove only remaining entries of the already archived original revision, retaining new/changed entries and every failed deletion.",
+      "file_sha256": "86d10599d7d662c2a773391084454eb2725baa5c8dda1638c6328cd5c9e5bff6"
+    },
+    {
+      "path": "backend/runtime/retention_files.py",
+      "symbol": "parent_handle",
+      "line": 155,
+      "docstring": "Pin original parent directory objects so a replaced symlink cannot redirect deletion outside the archived tree.",
+      "file_sha256": "86d10599d7d662c2a773391084454eb2725baa5c8dda1638c6328cd5c9e5bff6"
+    },
+    {
+      "path": "backend/runtime/retention_files.py",
+      "symbol": "move_new",
+      "line": 171,
+      "docstring": "Move an original allocation atomically without replacing even an empty competing destination on the supported Linux host.",
+      "file_sha256": "86d10599d7d662c2a773391084454eb2725baa5c8dda1638c6328cd5c9e5bff6"
+    },
+    {
+      "path": "backend/runtime/retention_service.py",
+      "symbol": "RetentionService",
+      "line": 10,
+      "docstring": "Serialize admission per installation and retain each filesystem worker until its original operation settles.",
+      "file_sha256": "f1cf3feb9b7e1780acad3d1fc36659bab89cfb0dab94a54603c6f9bcf0cfe7a5"
+    },
+    {
+      "path": "backend/runtime/retention_service.py",
+      "symbol": "RetentionService.__init__",
+      "line": 13,
+      "docstring": "Compose only from actual runtime roots and authority, never from request-supplied paths or closure booleans.",
+      "file_sha256": "f1cf3feb9b7e1780acad3d1fc36659bab89cfb0dab94a54603c6f9bcf0cfe7a5"
+    },
+    {
+      "path": "backend/runtime/retention_service.py",
+      "symbol": "RetentionService._settled",
+      "line": 20,
+      "docstring": "Drain a host thread after client cancellation; durable admission cannot be abandoned mid-transaction.",
+      "file_sha256": "f1cf3feb9b7e1780acad3d1fc36659bab89cfb0dab94a54603c6f9bcf0cfe7a5"
+    },
+    {
+      "path": "backend/runtime/retention_service.py",
+      "symbol": "RetentionService._active",
+      "line": 28,
+      "docstring": "Identify only this process's still-running original filesystem worker.",
+      "file_sha256": "f1cf3feb9b7e1780acad3d1fc36659bab89cfb0dab94a54603c6f9bcf0cfe7a5"
+    },
+    {
+      "path": "backend/runtime/retention_service.py",
+      "symbol": "RetentionService._schedule",
+      "line": 33,
+      "docstring": "Start one pending original decision after commit; an uncertain receipt never selects another operation.",
+      "file_sha256": "f1cf3feb9b7e1780acad3d1fc36659bab89cfb0dab94a54603c6f9bcf0cfe7a5"
+    },
+    {
+      "path": "backend/runtime/retention_service.py",
+      "symbol": "RetentionService.submit",
+      "line": 38,
+      "docstring": "Admit an explicit quarantine/removal/restore and return its original identity before bounded background work.",
+      "file_sha256": "f1cf3feb9b7e1780acad3d1fc36659bab89cfb0dab94a54603c6f9bcf0cfe7a5"
+    },
+    {
+      "path": "backend/runtime/retention_service.py",
+      "symbol": "RetentionService.reconcile",
+      "line": 51,
+      "docstring": "Explicitly resume only a recorded pending effect; original completed receipts are returned without more I/O.",
+      "file_sha256": "f1cf3feb9b7e1780acad3d1fc36659bab89cfb0dab94a54603c6f9bcf0cfe7a5"
+    },
+    {
+      "path": "backend/runtime/retention_service.py",
+      "symbol": "RetentionService.wait",
+      "line": 60,
+      "docstring": "Observe the actual worker handle for tests/shutdown without creating or replaying an operation.",
+      "file_sha256": "f1cf3feb9b7e1780acad3d1fc36659bab89cfb0dab94a54603c6f9bcf0cfe7a5"
+    },
+    {
+      "path": "backend/runtime/retention_service.py",
+      "symbol": "RetentionService.close",
+      "line": 65,
+      "docstring": "Block new decisions, drain admission and wait for every original thread before releasing the runtime owner lock.",
+      "file_sha256": "f1cf3feb9b7e1780acad3d1fc36659bab89cfb0dab94a54603c6f9bcf0cfe7a5"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService",
+      "line": 64,
+      "docstring": "Own native attempts and grant-bound tool closure before durable terminal states.",
+      "file_sha256": "89dd0ee3eeba4df8140a4b46ace6c79b878dfb64f8a090830ba3cf6a59ac24c6"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService.__init__",
+      "line": 67,
+      "docstring": "Compose one journal owner, native worker limits and deterministic authorized-plan dispatch; construction starts no work.",
+      "file_sha256": "89dd0ee3eeba4df8140a4b46ace6c79b878dfb64f8a090830ba3cf6a59ac24c6"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService.retention",
+      "line": 173,
+      "docstring": "Compose explicit owner retention over actual authority and configured roots, without starting cleanup on read or startup.",
+      "file_sha256": "89dd0ee3eeba4df8140a4b46ace6c79b878dfb64f8a090830ba3cf6a59ac24c6"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService.__aexit__",
+      "line": 228,
+      "docstring": "Drain admissions, native/source closure and original retention threads before releasing the journal owner lock.",
+      "file_sha256": "89dd0ee3eeba4df8140a4b46ace6c79b878dfb64f8a090830ba3cf6a59ac24c6"
+    },
+    {
+      "path": "backend/runtime/workspace_retention.py",
+      "symbol": "WorkspaceRetention",
+      "line": 21,
+      "docstring": "Journal original owner decisions and run bounded filesystem effects through an explicitly supplied trusted closure observer.",
+      "file_sha256": "2324a541928e587834256c99489f67e07dd6fbca8d7d9c97fce9e400a8ecede0"
+    },
+    {
+      "path": "backend/runtime/workspace_retention.py",
+      "symbol": "WorkspaceRetention.__init__",
+      "line": 24,
+      "docstring": "Capture configured private roots and the host closure port; HTTP cannot provide paths or witnesses.",
+      "file_sha256": "2324a541928e587834256c99489f67e07dd6fbca8d7d9c97fce9e400a8ecede0"
+    },
+    {
+      "path": "backend/runtime/workspace_retention.py",
+      "symbol": "WorkspaceRetention._roots",
+      "line": 28,
+      "docstring": "Reject a replaced control/source root before any local effect or archive lookup.",
+      "file_sha256": "2324a541928e587834256c99489f67e07dd6fbca8d7d9c97fce9e400a8ecede0"
+    },
+    {
+      "path": "backend/runtime/workspace_retention.py",
+      "symbol": "WorkspaceRetention._view",
+      "line": 33,
+      "docstring": "Expose bounded owner history and immutable receipts, excluding manifest internals and closure witnesses.",
+      "file_sha256": "2324a541928e587834256c99489f67e07dd6fbca8d7d9c97fce9e400a8ecede0"
+    },
+    {
+      "path": "backend/runtime/workspace_retention.py",
+      "symbol": "WorkspaceRetention._operation",
+      "line": 38,
+      "docstring": "Resolve only one original project-scoped operation; names and later choices cannot substitute for it.",
+      "file_sha256": "2324a541928e587834256c99489f67e07dd6fbca8d7d9c97fce9e400a8ecede0"
+    },
+    {
+      "path": "backend/runtime/workspace_retention.py",
+      "symbol": "WorkspaceRetention._record",
+      "line": 45,
+      "docstring": "Require the exact original retained attempt inside its project.",
+      "file_sha256": "2324a541928e587834256c99489f67e07dd6fbca8d7d9c97fce9e400a8ecede0"
+    },
+    {
+      "path": "backend/runtime/workspace_retention.py",
+      "symbol": "WorkspaceRetention._prior",
+      "line": 51,
+      "docstring": "Return an existing original decision only when every owner-selected input is identical.",
+      "file_sha256": "2324a541928e587834256c99489f67e07dd6fbca8d7d9c97fce9e400a8ecede0"
+    },
+    {
+      "path": "backend/runtime/workspace_retention.py",
+      "symbol": "WorkspaceRetention._insert",
+      "line": 58,
+      "docstring": "Persist the original effect intent before starting any copy, move, deletion or restoration.",
+      "file_sha256": "2324a541928e587834256c99489f67e07dd6fbca8d7d9c97fce9e400a8ecede0"
+    },
+    {
+      "path": "backend/runtime/workspace_retention.py",
+      "symbol": "WorkspaceRetention._idle",
+      "line": 65,
+      "docstring": "Refuse active task consumers and require actual original closure under the same lock that excludes new dependent admissions.",
+      "file_sha256": "2324a541928e587834256c99489f67e07dd6fbca8d7d9c97fce9e400a8ecede0"
+    },
+    {
+      "path": "backend/runtime/workspace_retention.py",
+      "symbol": "WorkspaceRetention.quarantine",
+      "line": 71,
+      "docstring": "Atomically fence new use of one closed allocation, keeping its original path and requiring an explicit retention period.",
+      "file_sha256": "2324a541928e587834256c99489f67e07dd6fbca8d7d9c97fce9e400a8ecede0"
+    },
+    {
+      "path": "backend/runtime/workspace_retention.py",
+      "symbol": "WorkspaceRetention.request",
+      "line": 102,
+      "docstring": "Admit removal only after retention, or a new-data restore; preserve the exact selected archive across later decisions.",
+      "file_sha256": "2324a541928e587834256c99489f67e07dd6fbca8d7d9c97fce9e400a8ecede0"
+    },
+    {
+      "path": "backend/runtime/workspace_retention.py",
+      "symbol": "WorkspaceRetention.operation",
+      "line": 122,
+      "docstring": "Read one original receipt without running a pending effect.",
+      "file_sha256": "2324a541928e587834256c99489f67e07dd6fbca8d7d9c97fce9e400a8ecede0"
+    },
+    {
+      "path": "backend/runtime/workspace_retention.py",
+      "symbol": "WorkspaceRetention.operations",
+      "line": 126,
+      "docstring": "Page owner history without truncating it into an implication that no other operations exist.",
+      "file_sha256": "2324a541928e587834256c99489f67e07dd6fbca8d7d9c97fce9e400a8ecede0"
+    },
+    {
+      "path": "backend/runtime/workspace_retention.py",
+      "symbol": "WorkspaceRetention.list",
+      "line": 131,
+      "docstring": "Show original native copies, documentary availability and retained archive metadata; listing never executes Git or cleanup.",
+      "file_sha256": "2324a541928e587834256c99489f67e07dd6fbca8d7d9c97fce9e400a8ecede0"
+    },
+    {
+      "path": "backend/runtime/workspace_retention.py",
+      "symbol": "WorkspaceRetention._bucket",
+      "line": 146,
+      "docstring": "Create or verify host-owned operation directories; UUIDs come from durable rows, never paths supplied by a caller.",
+      "file_sha256": "2324a541928e587834256c99489f67e07dd6fbca8d7d9c97fce9e400a8ecede0"
+    },
+    {
+      "path": "backend/runtime/workspace_retention.py",
+      "symbol": "WorkspaceRetention._work",
+      "line": 159,
+      "docstring": "Freeze filesystem scope before dependent effects, refusing a superseded or completed operation.",
+      "file_sha256": "2324a541928e587834256c99489f67e07dd6fbca8d7d9c97fce9e400a8ecede0"
+    },
+    {
+      "path": "backend/runtime/workspace_retention.py",
+      "symbol": "WorkspaceRetention._archive",
+      "line": 166,
+      "docstring": "Seal the first complete observation, resume exact file copies and confirm retained recovery bytes before enabling removal.",
+      "file_sha256": "2324a541928e587834256c99489f67e07dd6fbca8d7d9c97fce9e400a8ecede0"
+    },
+    {
+      "path": "backend/runtime/workspace_retention.py",
+      "symbol": "WorkspaceRetention._remove",
+      "line": 185,
+      "docstring": "Verify the original recovery archive, move the original directory into private disposal and reconcile only that revision.",
+      "file_sha256": "2324a541928e587834256c99489f67e07dd6fbca8d7d9c97fce9e400a8ecede0"
+    },
+    {
+      "path": "backend/runtime/workspace_retention.py",
+      "symbol": "WorkspaceRetention._restore",
+      "line": 218,
+      "docstring": "Recover one selected archive to a new scoped source directory, preserving receipt identity across response loss.",
+      "file_sha256": "2324a541928e587834256c99489f67e07dd6fbca8d7d9c97fce9e400a8ecede0"
+    },
+    {
+      "path": "backend/runtime/workspace_retention.py",
+      "symbol": "WorkspaceRetention.execute",
+      "line": 231,
+      "docstring": "Run or explicitly reconcile the original pending effect; failures retain intent and bytes and never become completed receipts.",
+      "file_sha256": "2324a541928e587834256c99489f67e07dd6fbca8d7d9c97fce9e400a8ecede0"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_retention.py",
+      "symbol": "test_owner_quarantines_only_after_real_closure_and_restores_data_without_execution",
+      "line": 13,
+      "docstring": "Actual private code is archived after original domain retirement; owner scope, stable receipts and quarantine admission fences stay enforced.",
+      "file_sha256": "827808b18f63578f0fb5b07e8242007b4066f2407d17c35bfca8df1bc57553e3"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_retention.py",
+      "symbol": "test_journal_rejects_live_domain_even_when_database_labels_claim_terminal",
+      "line": 61,
+      "docstring": "Actual still-owned kernel authority defeats fabricated terminal SQL labels; the fixture restores those labels before normal teardown.",
+      "file_sha256": "827808b18f63578f0fb5b07e8242007b4066f2407d17c35bfca8df1bc57553e3"
+    },
+    {
+      "path": "backend/tests/runtime/test_workspace_retention.py",
+      "symbol": "retained",
+      "line": 15,
+      "docstring": "Seed a real dirty private Git copy and a closed storage-only author, with an explicit synthetic closure port.",
+      "file_sha256": "7724a2af4683e67cd9d5f39704c508643452b1168fbb28e16590f4fb0171859b"
+    },
+    {
+      "path": "backend/tests/runtime/test_workspace_retention.py",
+      "symbol": "retained.closed",
+      "line": 30,
+      "docstring": "Witness only the storage boundary; production supplies the journal-backed closure observer.",
+      "file_sha256": "7724a2af4683e67cd9d5f39704c508643452b1168fbb28e16590f4fb0171859b"
+    },
+    {
+      "path": "backend/tests/runtime/test_workspace_retention.py",
+      "symbol": "test_explicit_retention_preserves_all_work_and_restores_new_data",
+      "line": 38,
+      "docstring": "Archive tracked/untracked/ignored files, wait the chosen period, remove the original and restore bytes without reviving its identity.",
+      "file_sha256": "7724a2af4683e67cd9d5f39704c508643452b1168fbb28e16590f4fb0171859b"
+    },
+    {
+      "path": "backend/tests/runtime/test_workspace_retention.py",
+      "symbol": "test_changed_files_do_not_inherit_an_older_removal_decision",
+      "line": 64,
+      "docstring": "A new owner edit after archive survives the old delete intent and remains visibly unresolved.",
+      "file_sha256": "7724a2af4683e67cd9d5f39704c508643452b1168fbb28e16590f4fb0171859b"
+    },
+    {
+      "path": "backend/tests/runtime/test_workspace_retention.py",
+      "symbol": "test_unproved_closure_and_foreign_scope_never_quarantine",
+      "line": 76,
+      "docstring": "No status label or caller-supplied project can substitute for the original closure observer.",
+      "file_sha256": "7724a2af4683e67cd9d5f39704c508643452b1168fbb28e16590f4fb0171859b"
+    },
+    {
+      "path": "backend/tests/runtime/test_workspace_retention.py",
+      "symbol": "test_unproved_closure_and_foreign_scope_never_quarantine.live",
+      "line": 79,
+      "docstring": "Represent a physical domain whose retirement has not been established.",
+      "file_sha256": "7724a2af4683e67cd9d5f39704c508643452b1168fbb28e16590f4fb0171859b"
+    },
+    {
+      "path": "backend/tests/runtime/test_workspace_retention.py",
+      "symbol": "test_crash_after_filesystem_effect_recovers_original_receipt",
+      "line": 90,
+      "docstring": "A child exits after the original filesystem effect; reopening completes the same decision without deleting replacement data or duplicating recovery.",
+      "file_sha256": "7724a2af4683e67cd9d5f39704c508643452b1168fbb28e16590f4fb0171859b"
+    },
+    {
+      "path": "backend/tests/runtime/test_workspace_retention.py",
+      "symbol": "test_crash_after_filesystem_effect_recovers_original_receipt.crash",
+      "line": 100,
+      "docstring": "Terminate the actual writer after its file effect and before the result/event transaction.",
+      "file_sha256": "7724a2af4683e67cd9d5f39704c508643452b1168fbb28e16590f4fb0171859b"
+    },
+    {
+      "path": "backend/tests/runtime/test_workspace_retention.py",
+      "symbol": "test_crash_after_filesystem_effect_recovers_original_receipt.crash.die",
+      "line": 103,
+      "docstring": "Keep the real filesystem effect and then simulate abrupt process loss.",
+      "file_sha256": "7724a2af4683e67cd9d5f39704c508643452b1168fbb28e16590f4fb0171859b"
+    },
+    {
+      "path": "backend/tests/runtime/test_workspace_retention.py",
+      "symbol": "test_partial_copy_and_corrupt_archive_never_authorize_deletion",
+      "line": 123,
+      "docstring": "Disk/copy failure retains original work; corrupted recovery bytes prevent a later removal rather than reporting success.",
+      "file_sha256": "7724a2af4683e67cd9d5f39704c508643452b1168fbb28e16590f4fb0171859b"
+    },
+    {
+      "path": "backend/tests/runtime/test_workspace_retention.py",
+      "symbol": "test_partial_copy_and_corrupt_archive_never_authorize_deletion.full_disk",
+      "line": 129,
+      "docstring": "Leave a partial temporary file just as a failed bounded disk write can do.",
+      "file_sha256": "7724a2af4683e67cd9d5f39704c508643452b1168fbb28e16590f4fb0171859b"
+    },
+    {
+      "path": "backend/tests/runtime/test_workspace_retention.py",
+      "symbol": "test_partial_removal_failure_stays_pending_and_reconciles_without_force",
+      "line": 146,
+      "docstring": "An unlink failure never marks the operation complete, and the original archived revision can be reconciled after the error clears.",
+      "file_sha256": "7724a2af4683e67cd9d5f39704c508643452b1168fbb28e16590f4fb0171859b"
+    },
+    {
+      "path": "backend/tests/runtime/test_workspace_retention.py",
+      "symbol": "test_partial_removal_failure_stays_pending_and_reconciles_without_force.interrupted",
+      "line": 155,
+      "docstring": "Allow one real entry removal and then fail without a recursive cleanup fallback.",
+      "file_sha256": "7724a2af4683e67cd9d5f39704c508643452b1168fbb28e16590f4fb0171859b"
+    },
+    {
+      "path": "backend/tests/runtime/test_workspace_retention.py",
+      "symbol": "test_symlinks_are_archived_as_links_and_never_followed_during_removal",
+      "line": 168,
+      "docstring": "An external link preserves its payload and external bytes even when the original native allocation is removed.",
+      "file_sha256": "7724a2af4683e67cd9d5f39704c508643452b1168fbb28e16590f4fb0171859b"
+    },
+    {
+      "path": "backend/tests/runtime/test_workspace_retention.py",
+      "symbol": "test_parent_replacement_cannot_redirect_partial_deletion",
+      "line": 181,
+      "docstring": "An ancestor swapped for an external symlink during deletion stays unresolved and cannot delete outside the private allocation.",
+      "file_sha256": "7724a2af4683e67cd9d5f39704c508643452b1168fbb28e16590f4fb0171859b"
+    },
+    {
+      "path": "backend/tests/runtime/test_workspace_retention.py",
+      "symbol": "test_parent_replacement_cannot_redirect_partial_deletion.redirected",
+      "line": 193,
+      "docstring": "Replace one parent after inventory but before the actual descriptor-pinned deletion.",
+      "file_sha256": "7724a2af4683e67cd9d5f39704c508643452b1168fbb28e16590f4fb0171859b"
+    },
+    {
+      "path": "backend/tests/runtime/test_workspace_retention.py",
+      "symbol": "test_retention_shutdown_drains_original_copy_and_rejects_new_decisions",
+      "line": 203,
+      "docstring": "The host controller owns its actual thread through shutdown; cancellation of a waiting HTTP task cannot abandon a filesystem write.",
+      "file_sha256": "7724a2af4683e67cd9d5f39704c508643452b1168fbb28e16590f4fb0171859b"
+    },
+    {
+      "path": "backend/tests/runtime/test_workspace_retention.py",
+      "symbol": "test_retention_shutdown_drains_original_copy_and_rejects_new_decisions.waiting",
+      "line": 214,
+      "docstring": "Hold a real copy until shutdown has started, then complete that exact original operation.",
+      "file_sha256": "7724a2af4683e67cd9d5f39704c508643452b1168fbb28e16590f4fb0171859b"
+    },
+    {
+      "path": "backend/tests/runtime/test_workspace_retention.py",
+      "symbol": "test_retention_inverse_refuses_used_history_and_preserves_unused_prefix",
+      "line": 229,
+      "docstring": "Rollback cannot discard quarantine/history; an unused schema68 can return to67 without touching project data.",
+      "file_sha256": "7724a2af4683e67cd9d5f39704c508643452b1168fbb28e16590f4fb0171859b"
+    },
+    {
+      "path": "backend/tests/runtime/test_workspace_retention.py",
+      "symbol": "test_installation_backup_recovers_archive_data_without_replaying_copied_deletion",
+      "line": 244,
+      "docstring": "A relocated full backup retains archive bytes while an old pending delete cannot touch the still-existing original host.",
+      "file_sha256": "7724a2af4683e67cd9d5f39704c508643452b1168fbb28e16590f4fb0171859b"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

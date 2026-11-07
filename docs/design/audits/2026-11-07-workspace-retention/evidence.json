@@ -1,0 +1,37 @@
+{
+  "viewport_desktop": [
+    1440,
+    1100
+  ],
+  "viewport_mobile": [
+    390,
+    844
+  ],
+  "screenshots": [
+    "desktop.png",
+    "recovered.png",
+    "mobile.png"
+  ],
+  "owner_posts": [
+    {
+      "path": "/api/projects/101/retained-work/native-27b3d9c7-4a13/quarantine",
+      "body": {
+        "operation_key": "0571adcc-851d-4445-8007-21fa77cea19f",
+        "retention_days": 1,
+        "acknowledge_unavailability": true
+      }
+    },
+    {
+      "path": "/api/projects/101/retained-work/native-27b3d9c7-4a13/restore",
+      "body": {
+        "operation_key": "f16e2741-1af7-4b50-a8e8-7005e63f2dbb",
+        "archive_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    }
+  ],
+  "model_calls": 0,
+  "page_errors": [],
+  "horizontal_overflow": false,
+  "scoped_axe_violations": 0,
+  "limits": "Actual React pane and owner transport with controlled HTTP responses. Actual backend/kernel lifecycle is verified separately by test_owned_retention.py. This does not accept the complete Repositories page."
+}

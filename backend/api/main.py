@@ -183,6 +183,7 @@ def create_app(*, access: LocalAccess | None = None, runtime_service=None) -> Fa
     from backend.api.routes.flow_state import router as flow_state_router
     from backend.api.routes.git import router as git_router
     from backend.api.routes.source_operations import router as source_operations_router
+    from backend.api.routes.retention import router as retention_router
     from backend.api.routes.model_settings import router as model_settings_router
     from backend.api.routes.health import router as health_router
     from backend.api.routes.milestones import router as milestones_router
@@ -216,6 +217,7 @@ def create_app(*, access: LocalAccess | None = None, runtime_service=None) -> Fa
     app.include_router(files_router)
     app.include_router(git_router)
     app.include_router(source_operations_router)
+    app.include_router(retention_router)
     app.include_router(agents_router)
     app.include_router(user_requests_router)
     app.include_router(events_router)

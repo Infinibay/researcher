@@ -1,8 +1,11 @@
 # D08 — conservación, cuarentena y retención de copias
 
-Preparación documental durante la validación final de D06/D07/D09. La
-implementación de este bloque todavía no comenzó; registrar su inicio real
-al iniciarla y publicar la transición con la lista actualizada.
+Preparación documental durante la validación final de D06/D07/D09.
+Inicio real del bloque: **2026-11-07 21:25:39 UTC**, desde `437ef3f`.
+Comprobado el **2026-11-07 22:04:07 UTC**, en **38 min 28 s** hasta validar.
+291 casos instalados, 5 DOM y compilación pasan; auditoría visual del panel y
+85 definiciones documentadas. [Resultados y límites](../../modernization/workspace-retention-review.md).
+La documentación/checkpoint posterior no se incluye en esa duración.
 
 ## Contrato
 
@@ -43,28 +46,28 @@ la presentación secundaria se anotará para el final.
 
 ## Implementación principal
 
-- [ ] Registrar el alcance original por proyecto, intento, asignación e identidad
+- [x] Registrar el alcance original por proyecto, intento, asignación e identidad
   física; política/versionado de retención e intenciones idempotentes. Leer no
   inicia limpieza. Los registros históricos ambiguos se conservan y se explican.
-- [ ] Conectar cuarentena lógica que conserve las rutas originales. Bloquear
+- [x] Conectar cuarentena lógica que conserve las rutas originales. Bloquear
   nuevas admisiones dependientes bajo la misma exclusión que decide cuarentena;
   comprobar cierre real y referencias activas antes de autorizar efectos. No
   retirar a ciegas otro dueño ni deducir cierre de una fila ausente.
-- [ ] Inventariar cambios tracked, untracked e ignorados, incluyendo enlaces y
+- [x] Inventariar cambios tracked, untracked e ignorados, incluyendo enlaces y
   contenido no publicable. Crear y verificar archivo privado de recuperación
   mediante presupuesto y comprobaciones de identidad. Disco lleno o cambios
   concurrentes conservan original y operación incompleta.
-- [ ] Aplicar retención antes del borrado explícito. Revalidar alcance y archivo;
+- [x] Aplicar retención antes del borrado explícito. Revalidar alcance y archivo;
   registrar intención antes del efecto, borrar sólo entradas originales verificadas
   sin seguir enlaces y no declarar éxito hasta confirmar la ausencia duradera.
   Un cambio de identidad exige otra decisión; no hereda el permiso anterior.
-- [ ] Recuperar operaciones interrumpidas sin repetir decisiones sobre archivos
+- [x] Recuperar operaciones interrumpidas sin repetir decisiones sobre archivos
   nuevos. Restaurar contenido como una copia nueva, con comprobación de huellas;
   no recrear concesiones, inodos ni aceptaciones antiguas como si siguieran vigentes.
-- [ ] Exponer inventario, motivo de bloqueo, plazo, espacio y acciones en la web,
+- [x] Exponer inventario, motivo de bloqueo, plazo, espacio y acciones en la web,
   con ejemplos breves: «esta copia contiene cambios sin publicar; el archivo permite
   recuperarlos, pero restaurar los archivos no vuelve a aceptar ni publicar código».
-- [ ] Integrar historial, backup/restore y migración inversa que rechace historia
+- [x] Integrar historial, backup/restore y migración inversa que rechace historia
   utilizada. Docstrings y documentación de límites para búsqueda con Ken.
 
 ## Validación que define la entrega
@@ -81,7 +84,10 @@ de almacenamiento con testigos sintéticos no bastan para ese límite. Validar
 la UI mediante decisiones y recibos originales, y el paquete instalado fuera
 del checkout. Mantener por separado cualquier fallo y los límites de cobertura.
 
-Preguntas de diseño todavía a resolver durante el contraste: política inicial
-de retención, conservación de candidatos aceptados, alcance de worktrees antiguos
-y copias restauradas sin testigos locales. No presentarlas como decisiones ya
-implementadas ni convertirlas en permisos implícitos para eliminar datos.
+Decisiones comprobadas: retención explícita de 1 a 3650 días, propuesta web de 7;
+archivo conservado después del borrado; candidatos/aceptaciones históricos no
+transfieren disponibilidad de la copia en cuarentena. Los worktrees antiguos sin
+testigos locales siguen preservados. Restaurar datos crea una carpeta nueva;
+una instalación restaurada no hereda permiso de borrar en el host anterior.
+La gestión de restos ambiguos y datos históricos permanece en D13 y su entrega;
+los ajustes secundarios de interfaz se anotaron en DD118.

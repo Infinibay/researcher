@@ -26,9 +26,40 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
 - Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 0/12 páginas están completamente aceptadas.
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
-- U06, E01–E12, C01–C09, D01–D07 y D09 quedan comprobados con el alcance de sus matrices; siguen 13 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
+- U06, E01–E12, C01–C09 y D01–D09 quedan comprobados con el alcance de sus matrices; siguen 12 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: D06/D07/D09 comprobados; siguiente retención D08
+## Estado actual: D08 comprobado; siguiente acceso y aislamiento D10–D12
+
+Bloque **2026-11-07 21:25:39–22:04:07 UTC**, desde `437ef3f`:
+**38 min 28 s hasta verificar**, sin documentación/checkpoint posteriores.
+
+**291 casos instalados y 5 DOM pasan**, junto con la compilación. 673 fuentes
+coinciden, 360 de producto; 85 definiciones Python documentadas. La revisión de
+escritorio/móvil del panel no encontró desbordamiento horizontal, errores de
+página ni incidencias Axe en su alcance. Inferencia/HTTP del navegador controlados;
+el cierre real de kernel y la API del dueño se verifican por separado.
+[Matriz, resultados y límites](workspace-retention-review.md).
+
+- Terminado: **U06, E01–E12, C01–C09 y D01–D09**: **31 de 43 escenarios**.
+  Se añade cuarentena, archivo verificable, plazo elegido, borrado de la revisión
+  original y recuperación como datos nuevos, con historial y controles web.
+- En curso al cerrar: guardar documentación y checkpoint local de D08.
+- Siguiente principal: **D10–D12, acceso y aislamiento entre agentes, proyectos
+  y host**. Contrastar las fronteras actuales con los escenarios y reutilizar
+  evidencia vigente; no reconstruir componentes que ya cumplen el contrato.
+  La implementación de ese bloque **no empezó**; registrar su inicio real.
+- Después: **D13**, conocimiento e interacción **U01–U05/U07/U08**, datos históricos,
+  evaluaciones, aceptación de las **12 páginas**, dependencias y distribución.
+- Al final: detalles aplazados —incluidos DD116/C10, DD117 y DD118—, validación
+  global y revisión independiente del plan completo. C10 sigue siendo una brecha
+  funcional pendiente, aunque el usuario haya priorizado otros bloques mayores.
+
+**12 escenarios abiertos; 0/12 páginas plenamente aceptadas**, con 12 pilotos y
+48 conceptos. No son porcentajes globales. La última suite global conserva fallos
+históricos; el ensayo dirigido no la reemplaza. Primero las capacidades grandes;
+lista y tiempos al cambiar de tarea, publicados aquí y en el chat tras compactar.
+
+## Etapa anterior: D06/D07/D09 comprobados; siguiente retención D08
 
 Bloque **2026-11-07 20:43:33–21:22:33 UTC**, desde `564b388`:
 **39 min hasta verificar**, sin documentación/checkpoint posteriores.

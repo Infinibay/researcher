@@ -2,7 +2,7 @@
   "schema_version": 1,
   "scope": "Owned backend/ and scripts/ Python, excluding tests. Syntax-selected prompt builders/literals/tool descriptions; external native system prompts and arbitrary owner/source text are outside this static inventory.",
   "coverage": "Candidates are not unique rendered prompts. Dynamic rendering size and non-direct consumers remain unknown. Reviews are explicit declarations bound to source and direct module consumers, not proof of efficacy or complete runtime reachability. requires_review entries are unfinished.",
-  "files_scanned": 308,
+  "files_scanned": 314,
   "source_tree": {
     "backend/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "backend/api/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -11,7 +11,7 @@
     "backend/api/exceptions.py": "874b055b3a8aa8c11b96c45adc7f02bfdce80a07ddf2c35e854c96b655f4b585",
     "backend/api/flow_manager.py": "fd260c2a58cd8e282b2e77b479d68b949ec08d5ec502661abd369a3ecb59ca61",
     "backend/api/local_access.py": "114456de477b4248fdc5a8aa2554c3962e0df9fe8675e782ea27e2703048f155",
-    "backend/api/main.py": "94d5725f783fa3ccf0c0ec6dd4e125e6ca8e2593befacf9f8c8f0f74462031c8",
+    "backend/api/main.py": "6117224ced2d181aaddd4a1756c0a4d5c0d759c720bd78f1eee2c31bc1d75bf5",
     "backend/api/models/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "backend/api/models/agent.py": "23eb182f59601828bcf0a0c54660e9ee96e4b959b10f5560ec54cb77c03ea6ff",
     "backend/api/models/agent_messages.py": "64cf0fc0b8e8cf432d6fe0900088c7d4a8acd3f5c4fed100b6ed451824a860b1",
@@ -49,6 +49,7 @@
     "backend/api/routes/model_settings.py": "7d6efbe85c4a674fd49044d0ed443bf34d5e113aa594fa97bf8194e96a5ad482",
     "backend/api/routes/projects.py": "40bcd939312f048aa22eea9f47967115638effe831ec75786e29a4e1749689e3",
     "backend/api/routes/research.py": "b15128a5c7605bbe1d8cafdb134cdadb19a62deb743b026c659b712e2576260c",
+    "backend/api/routes/retention.py": "ad156020a3bd8da3c88abb5cb890232c9c6456ac0d276d7372b6011612487194",
     "backend/api/routes/runs.py": "7566b43be4cec45005b1bf53813d343e1d85fb1d1ddefbdf926edb017719cd02",
     "backend/api/routes/session.py": "d332dda1bb5924b70a5accbfa3582b8d41906a51b8acedcdbd1267141cc34639",
     "backend/api/routes/source_operations.py": "1f9d1881c96368bc08cf9cf5bccf1f6a11e05d97447f451d72ca58e627565255",
@@ -81,7 +82,7 @@
     "backend/db/connection.py": "1439101f51745e81ff34780a4f6ee477c7b4ac7fbda0cb27dcf76bc177c08888",
     "backend/db/development_migration.py": "2e06b8a83bf8cc5ccf78bfde2067d7f2b037a58a55657acf5a675404c81d3d17",
     "backend/db/git_identity_migration.py": "d9621739cad1cc40f6a9a31d3486d4dc74579813eeda929ce85e4201b0589d4a",
-    "backend/db/migration_catalog.py": "3ba1158753efd5f9c5ee49b8c611b9c26d696d2d7184e0f37f1dc4569bcc30ac",
+    "backend/db/migration_catalog.py": "4c4fd69751728c12bdebf02f53964910dd9cd11a1c72fdaea13fe69e447f3560",
     "backend/db/migrations.py": "ef94b5f0e5b9d5203b95566b34f761bcfc089713be22fcaa53cd684ac44eba6d",
     "backend/db/peer_archive_migration.py": "5af48bd11836e66a8223ec549d23b35b3826fce71a87aa0579e5caba3b02a1ef",
     "backend/db/peer_kind_migration.py": "ca61857fb06c869f0582185ff1d5e0038824f7df6c5ccf570ae6b94cacc125e9",
@@ -96,6 +97,7 @@
     "backend/db/result_migration.py": "54ec40b3f10c7d2c216b5e0a5c7910d31b6a1556ab482d1d9607145ddaaa08ff",
     "backend/db/review_migration.py": "889465076a3ec5dbab0658bb60a23de1fdb39a77fc901d32168131de743d5271",
     "backend/db/wiki_migration.py": "df756594ffb6f7eeae36fcab1abe0d0ea44e0d0a8b7afd9a0a482d4fff2a14bd",
+    "backend/db/workspace_retention_migration.py": "bddba25a4a3cc02a338ea9e1392db7b6c0a92f10b4050f6d3257696435478100",
     "backend/flows/__init__.py": "d76158f7728cc894c97e6ef482aed72875991b64fb257ba9b628dac06340943d",
     "backend/flows/event_bus.py": "e335d689869622d10af507213a00cff804308a1f670202ace4bc881a9d2b3b69",
     "backend/flows/snapshot_service.py": "9d36345504499c49ea6e586fe43290d56c7e6f31be8ce3955d607ca05a707e17",
@@ -202,7 +204,7 @@
     "backend/runtime/code_acceptances.py": "8f964c6f49453e5f62efd67eb844070101f0018e656bf04225203fb3c969dd39",
     "backend/runtime/code_audit_instructions.py": "2bde9dc48a8e3fba0b47f5ba1b5b29689e235ba5ed14bcb743a871c83d0848cb",
     "backend/runtime/code_candidate.py": "71cc53ae7a425adf219a0ee11a27e7b49ad365ab20fb166613a7906b898466a4",
-    "backend/runtime/code_carryover.py": "2453eb59984f25b1763352af8a206f2e109335fec4c92ae5dbd5e03d2b206f91",
+    "backend/runtime/code_carryover.py": "ec1aede704a7fd20781eb6866e7af78dea741d68a6a7700ff2a125d5d6a0811d",
     "backend/runtime/code_mode_payload.py": "3bd1d09e2488cfd790764c4d6201457efaa1af1f74e38b6f2f2b4c7d4d3d6fbf",
     "backend/runtime/code_mode_probe.py": "15514d1f7587d40391da1c33c92323aa7ecf5d609ecb7be851f1a824bc06ae3e",
     "backend/runtime/code_publications.py": "c12ab69601293c3600681cda9e767328f7849f87759a7d682dd0819b5527f345",
@@ -213,7 +215,7 @@
     "backend/runtime/code_review_models.py": "85365edc96ad3b61f5b7e4a297babf5502a02c9b12247909890928587482551b",
     "backend/runtime/code_review_records.py": "3b168018dda8444211ec24536b4d237a6c54303342bfb7c4426bc03565bef512",
     "backend/runtime/code_review_tools.py": "0e4440f99f93831510b2f4cf2cb04bd4638955e9a03215077ea83226131fa75b",
-    "backend/runtime/code_reviews.py": "f6c8fc199135d54d74f283bae4f7b983b3238c07a73df84b5d366cefb01295e4",
+    "backend/runtime/code_reviews.py": "4bfc57ed5ff147c84d46d625ca4346716ea50507b333f550fd45e05fe80ca58a",
     "backend/runtime/codex_rpc.py": "8ec057ae7e55e056c475d5f59651064c112bbfec5aed65ffa6ede1583c4e2767",
     "backend/runtime/codex_session.py": "988f384a499585c67223efb3a4d8c1a73e019d9732b36490a2b588978fabc38c",
     "backend/runtime/command_jobs.py": "ce8fb588398e6ab25df6b69dd96ea875e3b89cf3a1b8424d1c71a681b31f3fba",
@@ -227,7 +229,7 @@
     "backend/runtime/egress_proxy.py": "91c99f86054c927d307886313913ebf8ac6b2f2ee42248782ae28dfc701a72b3",
     "backend/runtime/event_history.py": "044d091a94be4af9b1cf1b15d99ade125c6afed78f1bb4b45fcd0687599c1566",
     "backend/runtime/execution_domain.py": "639eb760a9b0ab27f7c1d604e2b32ccc30b7791f756bf8f2f5e4d2c996c43418",
-    "backend/runtime/file_imports.py": "48833706df5fc541cd80b6b78aae781cf2285e06301e0366924db90232695218",
+    "backend/runtime/file_imports.py": "3ee82a34edb9029d77d293d695e4a2ea8d3abaa301da956fb5c6ca800ce68972",
     "backend/runtime/forgejo_publication.py": "3e570ba8a669443da65102529f0d81a455190a3b434e94124babd2f4178a090b",
     "backend/runtime/git_capsule.py": "88a251cce03b057a3b37ce70fce2d4de72d0659d750ba9ffebff6990d643e50d",
     "backend/runtime/history.py": "ad2561d732c850be3e7dac1a4a6cf8da39a8b37a1f90f92307aa1d75750b7d31",
@@ -281,10 +283,13 @@
     "backend/runtime/remote_runtime.py": "082048fd26b62d26798178696a4f6f417caf0bbcc02c91f8b38640c7b60df693",
     "backend/runtime/remote_transport.py": "2dad36df05f2c0e25eca33c11b161d6e1d3ed274f8ef17226858cd623b2dac88",
     "backend/runtime/restored_enrollment.py": "40c3e1ab77835609dcbc3067a59978fe03b815c8d94ae02ce3fe7e8b6c5e8ba6",
+    "backend/runtime/retention_authority.py": "fbb80abaa7edbe89ddb41a9bdf840a4f73aeb0fbb18fcfa30037b8fabf727429",
+    "backend/runtime/retention_files.py": "86d10599d7d662c2a773391084454eb2725baa5c8dda1638c6328cd5c9e5bff6",
+    "backend/runtime/retention_service.py": "f1cf3feb9b7e1780acad3d1fc36659bab89cfb0dab94a54603c6f9bcf0cfe7a5",
     "backend/runtime/review_instructions.py": "592050b6b0dd44ef9026bfcbff78d1989a69473a54de1159bcc09c70f196be24",
     "backend/runtime/run_inputs.py": "b98cc46f22b46970c9a12837119b90fb939fdb062d5fac7ae01e672c0321a7a7",
     "backend/runtime/scientific_instructions.py": "c63f5637f02b47088399e285fe98df4b7eed99cadff035c21fd7938c384497c9",
-    "backend/runtime/service.py": "7e4ebce324582908912c1819751cc3121788ea9ecd6254d522947d8fc22ca996",
+    "backend/runtime/service.py": "89dd0ee3eeba4df8140a4b46ace6c79b878dfb64f8a090830ba3cf6a59ac24c6",
     "backend/runtime/service_process.py": "0036d73e3a61bd1e2bec72a386a29a3c9bdad120da4f3f501d0df3b1fabcf6a7",
     "backend/runtime/snapshot_files.py": "07be9cc59b2d9b92973715320527bec1860b911cebf9a6c8a03d504570d518f3",
     "backend/runtime/sqlite_questions.py": "9315a4d6aa01bf82780e4996cddebca689892492a414da5c291d9bfe442b89c1",
@@ -295,6 +300,7 @@
     "backend/runtime/task_profiles.py": "5b968d82c810d92ae7b2231d5f9024db019f99ffa3f9d95fa57cf6b8e276ae32",
     "backend/runtime/views.py": "740317583068e859a0f1df8e5ded26ceb00f3e0c5e93a268b614c9bd28043871",
     "backend/runtime/work_budget.py": "e4531e6fb6c8fdf611db5ebab30a7588839dfc1e300a190f5424dbd9c497c927",
+    "backend/runtime/workspace_retention.py": "2324a541928e587834256c99489f67e07dd6fbca8d7d9c97fce9e400a8ecede0",
     "backend/runtime/workspaces.py": "41d2381ccc3b5025cb265eb7a4c353f3a125d357aee38974898ce5394256c98e",
     "backend/scripts/warmup_prefix_cache.py": "3c5a2c53aa3105266194eac9f6fe183578d0a5b03b4b29b2f672d93a5d15eac5",
     "backend/state/__init__.py": "6084aeeb2a453d8553fe9248724a5aac72476f1d212c0de3a350c7bc71bb6b80",
@@ -362,7 +368,7 @@
       "family": "other_owned_prompt_candidate",
       "disposition": "excluded_api_metadata",
       "objective": "FastAPI application factory for the INFINIBAY API.",
-      "source_sha256": "94d5725f783fa3ccf0c0ec6dd4e125e6ca8e2593befacf9f8c8f0f74462031c8",
+      "source_sha256": "6117224ced2d181aaddd4a1756c0a4d5c0d759c720bd78f1eee2c31bc1d75bf5",
       "source_bytes": 54,
       "rendered_utf8_bytes": 52,
       "variables_kind": "referenced_identifiers",
@@ -378,7 +384,7 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "c46c5eb07bba19796b1749c2a95081f9d862246da0c996fadcdb08f132937fac",
+      "dependencies_sha256": "6a8f6dbdbcd892fd562b65d26a4725a569ebf8d9384f5ec28ff1baabeedcd06e",
       "direct_module_consumers": {},
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
@@ -388,7 +394,8 @@
         "backend/runtime/business_definitions.py",
         "backend/runtime/owned_runtime.py",
         "docs/modernization/storage-volume-review.md",
-        "docs/modernization/data-boundaries-review.md"
+        "docs/modernization/data-boundaries-review.md",
+        "docs/modernization/workspace-retention-review.md"
       ],
       "review_conflicts": []
     },
@@ -635,9 +642,9 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "dd7127f8ac305103bbb106e31e71206151fda639e6501100d07ce517f06f2f55",
+      "dependencies_sha256": "c2dd56824189a26e5218fdae464a9e6ee8c15e1e9e9d05b9e5d9bbda45035c14",
       "direct_module_consumers": {
-        "backend/api/main.py": "94d5725f783fa3ccf0c0ec6dd4e125e6ca8e2593befacf9f8c8f0f74462031c8"
+        "backend/api/main.py": "6117224ced2d181aaddd4a1756c0a4d5c0d759c720bd78f1eee2c31bc1d75bf5"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
@@ -650,7 +657,8 @@
         "docs/architecture/native-internal-retirement.md",
         "docs/modernization/storage-volume-review.md",
         "docs/modernization/data-boundaries-review.md",
-        "docs/modernization/reference-operations-review.md"
+        "docs/modernization/reference-operations-review.md",
+        "docs/modernization/workspace-retention-review.md"
       ],
       "review_conflicts": []
     },
@@ -778,7 +786,7 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "69890c7811054b79579dd146b7087cfa34b76f3fdb77a7d164dcfd0c3050b976",
+      "dependencies_sha256": "95dbf7a8ac1ce0272f542fc9212ba46d369e2234befc826ef459b689a37abeee",
       "direct_module_consumers": {
         "backend/api/routes/projects.py": "40bcd939312f048aa22eea9f47967115638effe831ec75786e29a4e1749689e3",
         "backend/communication/owner_notes.py": "27d60b5640960cd647bf3fd4ce8c9fb136e7b614a62326c3cf599336ad35ab51",
@@ -794,7 +802,7 @@
         "backend/runtime/code_acceptances.py": "8f964c6f49453e5f62efd67eb844070101f0018e656bf04225203fb3c969dd39",
         "backend/runtime/code_publications.py": "c12ab69601293c3600681cda9e767328f7849f87759a7d682dd0819b5527f345",
         "backend/runtime/code_review_records.py": "3b168018dda8444211ec24536b4d237a6c54303342bfb7c4426bc03565bef512",
-        "backend/runtime/code_reviews.py": "f6c8fc199135d54d74f283bae4f7b983b3238c07a73df84b5d366cefb01295e4",
+        "backend/runtime/code_reviews.py": "4bfc57ed5ff147c84d46d625ca4346716ea50507b333f550fd45e05fe80ca58a",
         "backend/runtime/peer_broker.py": "06c2e5af244120fa6e4ac9e71f4e1037c3beb1415fdc4a89a1fb5fa182c8b869",
         "backend/runtime/publication_recovery.py": "af13150ac5d40d64346a1006f5c05b7a17e6b790901d2ac82ab73aafd0df5547",
         "backend/runtime/remote_recovery.py": "f466005789688b6211111f77bb55879a160219edb3cbf9786c4cc36c3f018b02",
@@ -833,7 +841,8 @@
         "backend/tests/runtime/test_project_check_policy.py",
         "docs/modernization/project-check-policy-review.md",
         "docs/modernization/data-boundaries-review.md",
-        "docs/modernization/reference-operations-review.md"
+        "docs/modernization/reference-operations-review.md",
+        "docs/modernization/workspace-retention-review.md"
       ],
       "review_conflicts": []
     },

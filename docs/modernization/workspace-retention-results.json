@@ -1,0 +1,45 @@
+{
+  "base_commit": "437ef3f",
+  "status": "verified",
+  "started_at": "2026-11-07T21:25:39Z",
+  "verified_at": "2026-11-07T22:04:07Z",
+  "elapsed_until_verification_seconds": 2308,
+  "source_storage_before_last_two_cases": {
+    "passed": 11,
+    "seconds": 6.88,
+    "limits": "Two later cases (parent replacement and shutdown drain) are included in the installed selection, not this earlier result."
+  },
+  "source_native_before_final_authority_guard": {
+    "passed": 2,
+    "seconds": 16.41,
+    "limits": "Final selection rechecks the broader task consumer guard and added owner CSRF/idempotency assertions."
+  },
+  "frontend": {
+    "dom_passed": 5,
+    "build": "passed; inherited chunk-size notice",
+    "browser_evidence": "docs/design/audits/2026-11-07-workspace-retention/evidence.json"
+  },
+  "python_definitions_documented": 85,
+  "prompt_candidates_reviewed": 85,
+  "prompt_source_files": 314,
+  "real_model_turns": 0,
+  "completed_scenarios": [
+    "D08"
+  ],
+  "limits": [
+    "Overlapping selections are not added together.",
+    "Scoped browser pane uses controlled HTTP responses, separately from real backend/kernel integration.",
+    "Not a global green suite, historical-data migration, complete page acceptance or human comprehension evaluation.",
+    "Legacy unmanaged copies, ambiguous partials and changed-identity deletion intents remain preserved; wider historical-data retention remains distinct."
+  ],
+  "final_installed": {
+    "cases": 291,
+    "passed": 291,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 301,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 222.793,
+    "exit_code": 0
+  }
+}

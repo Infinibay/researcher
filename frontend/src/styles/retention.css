@@ -1,0 +1,16 @@
+/* Retention extends the selected source workbench without presenting history as current authority. */
+.retention-panel {max-width:65rem;margin-inline:auto}
+.retention-panel>header {display:flex;align-items:start;justify-content:space-between;gap:1rem;margin-bottom:1.5rem}
+.retention-panel h2 {font-size:1.5rem;font-weight:650}
+.retention-panel h3 {font-weight:650;margin-block:1rem .5rem}
+.retention-copies,.retention-history {list-style:none;padding:0}
+.retention-copies>li,.retention-history>li {padding:1.25rem 0;border-bottom:1px solid var(--work-line)}
+.retention-choice {display:grid;gap:.75rem;margin-block:1rem;max-width:46rem}
+.retention-choice label {display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap;line-height:1.6}
+.retention-choice input[type=number] {width:6rem;border:1px solid var(--work-line);padding:.5rem;background:var(--work-paper);color:inherit}
+.retention-choice button {justify-self:start}
+.retention-actions {display:flex;gap:.75rem;flex-wrap:wrap}
+.retention-uncertain {margin-block:1.5rem;padding:1rem;background:var(--work-wash);border-left:3px solid var(--work-accent)}
+.retention-uncertain button {margin:.5rem .5rem 0 0}
+.retention-panel code {overflow-wrap:anywhere}
+@media(max-width:700px){.retention-panel>header{flex-direction:column}.retention-choice label{align-items:center}.retention-actions{flex-direction:column}}

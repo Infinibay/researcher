@@ -77,7 +77,7 @@
       "source_base_commit": "6b2f938"
     },
     "backend/knowledge/reviews.py::read_feedback": {
-      "dependencies_sha256": "69890c7811054b79579dd146b7087cfa34b76f3fdb77a7d164dcfd0c3050b976",
+      "dependencies_sha256": "95dbf7a8ac1ce0272f542fc9212ba46d369e2234befc826ef459b689a37abeee",
       "decision": "retained_input_renderer",
       "rationale": "Read read_feedback and its two exact callers in Findings.reviews and SQLiteResearchStore.read_review: project/finding identity and bounded attributed old subjects survive. The authenticated caller checks findings.read in the same transaction; stored feedback never authorizes a new review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
       "evidence": [
@@ -101,10 +101,11 @@
         "backend/tests/runtime/test_project_check_policy.py",
         "docs/modernization/project-check-policy-review.md",
         "docs/modernization/data-boundaries-review.md",
-        "docs/modernization/reference-operations-review.md"
+        "docs/modernization/reference-operations-review.md",
+        "docs/modernization/workspace-retention-review.md"
       ],
       "conflicts": [],
-      "revalidation": "Attachment journal review: candidate AST/value unchanged. The sole changed direct consumer is projects.py, whose delete guard now preserves reference_file_operations. No feedback interpretation, instruction rendering or agent authority changes. Metadata remains owner/API data; static review does not measure efficacy or comprehension.",
+      "revalidation": "Candidate AST is unchanged from437ef3f. Read changed consumers: main.py registers owner-only retention routes, and CodeReviews._subject refuses quarantined copies before constructing any review subject. No prompt, input attribution, stored feedback or inferred authority is changed. Static source/consumer review, not model efficacy.",
       "previous_review": {
         "dependencies_sha256": "b66b34d5d8b18599bb15a22c72ef7e77a107fa044b9f0d7c36bf45630c3d53af",
         "decision": "retained_input_renderer",
@@ -120,7 +121,7 @@
         "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after extracting project metadata helpers and removing unused task event import and historical flow consumers; native authority and historical-template exclusion unchanged. See docs/architecture/native-flow-retirement.md."
       },
       "reviewed_at": "2026-11-07",
-      "source_base_commit": "adf04f6"
+      "source_base_commit": "437ef3f"
     },
     "backend/planning/instructions.py::PLANNING_INSTRUCTIONS": {
       "dependencies_sha256": "953e1c5d32a73417e6d671006b51b3bf0273f3986d1ccdfcd8ca55dbe9ec9473",
@@ -3452,7 +3453,7 @@
       "revalidation": "Selective-material review: inspected changed candidate: schema5 large historical sections become explicit retrievable references; selective reads do not claim whole-body comprehension. Catalog8 preserves original identities2–7. Current task input/history is unchanged and older deliveries keep their original shape."
     },
     "backend/api/main.py::create_app.description@116": {
-      "dependencies_sha256": "c46c5eb07bba19796b1749c2a95081f9d862246da0c996fadcdb08f132937fac",
+      "dependencies_sha256": "6a8f6dbdbcd892fd562b65d26a4725a569ebf8d9384f5ec28ff1baabeedcd06e",
       "decision": "excluded_api_metadata",
       "rationale": "Read create_app: this literal is the FastAPI documentation description, not the developer policy or inspect.getdoc business-tool catalog sent to native inference. Its line-derived identity shifted; this is an explicit source review, not an inferred semantic approval.",
       "evidence": [
@@ -3460,15 +3461,16 @@
         "backend/runtime/business_definitions.py",
         "backend/runtime/owned_runtime.py",
         "docs/modernization/storage-volume-review.md",
-        "docs/modernization/data-boundaries-review.md"
+        "docs/modernization/data-boundaries-review.md",
+        "docs/modernization/workspace-retention-review.md"
       ],
       "conflicts": [],
-      "revalidation": "Data persistence review: candidate AST/value is unchanged. Reviewed changed API consumers: blocking callbacks now run in bounded ASGI workers, startup validates schema/data, and task events use their existing transaction triggers. No native prompt, source attribution, review-feedback interpretation or execution authority changed; metadata remains owner/API data. read_feedback callers remain unchanged; projects uses only the separate canonical digest helper. Static review, not efficacy or human comprehension.",
+      "revalidation": "Candidate AST is unchanged from437ef3f. Read changed consumers: main.py registers owner-only retention routes, and CodeReviews._subject refuses quarantined copies before constructing any review subject. No prompt, input attribution, stored feedback or inferred authority is changed. Static source/consumer review, not model efficacy.",
       "reviewed_at": "2026-11-07",
-      "source_base_commit": "6b2f938"
+      "source_base_commit": "437ef3f"
     },
     "backend/api/routes/projects.py::_project_to_response.description@80": {
-      "dependencies_sha256": "dd7127f8ac305103bbb106e31e71206151fda639e6501100d07ce517f06f2f55",
+      "dependencies_sha256": "c2dd56824189a26e5218fdae464a9e6ee8c15e1e9e9d05b9e5d9bbda45035c14",
       "decision": "excluded_human_or_input_metadata",
       "rationale": "Read the description response projection and FastAPI consumer: owner project text remains input metadata, not native developer instructions. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
       "evidence": [
@@ -3479,10 +3481,11 @@
         "docs/architecture/native-internal-retirement.md",
         "docs/modernization/storage-volume-review.md",
         "docs/modernization/data-boundaries-review.md",
-        "docs/modernization/reference-operations-review.md"
+        "docs/modernization/reference-operations-review.md",
+        "docs/modernization/workspace-retention-review.md"
       ],
       "conflicts": [],
-      "revalidation": "Attachment journal review: candidate AST/value unchanged. The sole changed direct consumer is projects.py, whose delete guard now preserves reference_file_operations. No feedback interpretation, instruction rendering or agent authority changes. Metadata remains owner/API data; static review does not measure efficacy or comprehension.",
+      "revalidation": "Candidate AST is unchanged from437ef3f. Read changed consumers: main.py registers owner-only retention routes, and CodeReviews._subject refuses quarantined copies before constructing any review subject. No prompt, input attribution, stored feedback or inferred authority is changed. Static source/consumer review, not model efficacy.",
       "previous_review": {
         "dependencies_sha256": "59a074a1c2498af5b73b93be625e26f59115a6bfe6c4397f8ec01d10aca1a1ba",
         "decision": "excluded_human_or_input_metadata",
@@ -3497,7 +3500,7 @@
         "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after obsolete autonomy/role/provider retirement and complete registered-worker shutdown enumeration; no native instruction change. See docs/architecture/native-autonomy-retirement.md."
       },
       "reviewed_at": "2026-11-07",
-      "source_base_commit": "adf04f6"
+      "source_base_commit": "437ef3f"
     },
     "backend/api/models/git.py::BranchCreate.description@44": {
       "dependencies_sha256": "e30447e47a2e06617af53bbd7abd44d6f1681d4b09c748a6265a8d27c0256d5a",

@@ -913,3 +913,19 @@ La recuperación paginada, los controles explícitos y la conservación de bytes
 están conectados; esto no sustituye la aceptación completa de la página.
 La eliminación de restos inciertos y la decisión sobre archivos cuya identidad
 cambió siguen siendo política de retención D08/D13, no un ajuste cosmético.
+
+## DD118 — presentación de conservación y recuperación
+
+Después de las capacidades principales, ajustar singular/plural en los conteos
+de Git y compactar el formulario de nuevo archivo y el historial de conservación,
+especialmente en móvil. Revisar la transición desde «Copias de trabajo» hacia los
+botones de registro/configuración de fuentes; «Volver a fuentes» funciona, pero
+los otros accesos conservan por ahora la selección del panel. Evidencia visual:
+`docs/design/audits/2026-11-07-workspace-retention/`. No ampliar ahora el diseño de
+Repositorios ni confundir la auditoría del panel con aceptación de la página.
+
+El descarte de archivos de recuperación, parciales ambiguos y una decisión de
+borrado bloqueada por cambios de identidad necesita política explícita posterior,
+no un retoque visual. D08 conserva esos bytes e intención; D13/datos históricos
+mantienen el alcance general de recuperación y restos. No usar una etiqueta de
+«limpieza» para eliminarlos sin evidencia y una decisión aplicable.

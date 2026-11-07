@@ -61,7 +61,9 @@ class CodeReviews:
         self.runs = runs
 
     def _subject(self, conn, project_id, attempt_id, *, allow_accepted=False):
-        """Snapshot complete evidence; accepted authors are allowed only for explicit readonly owner reconstruction."""
+        """Reject quarantined copies before snapshotting complete evidence; accepted authors permit only explicit readonly owner reconstruction."""
+        from backend.runtime.retention_authority import require_available
+        require_available(conn,project_id,attempt_id)
         candidate = CodeCandidates._row(conn, project_id, attempt_id)
         subject = CandidateSubject.from_row(candidate)
         author = conn.execute(

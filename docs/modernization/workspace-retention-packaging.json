@@ -1,0 +1,38 @@
+{
+  "base_commit": "437ef3f",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "c93016422c85bb62224404036b97792ddbcf3ea9a88271c686fc38c30f1da1c9",
+  "source_files_matching_wheel_and_installation": 673,
+  "product_files_matching": 360,
+  "observed": {
+    "cases": 291,
+    "passed": 291,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 301,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 222.793,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/api",
+    "backend/tests/runtime/test_workspace_retention.py",
+    "backend/tests/runtime/test_owned_retention.py",
+    "backend/tests/runtime/test_migration_chain.py",
+    "backend/tests/runtime/test_development_state.py",
+    "backend/tests/runtime/test_code_review_records.py",
+    "backend/tests/runtime/test_code_acceptance.py",
+    "backend/tests/runtime/test_code_carryover.py",
+    "backend/tests/runtime/test_file_imports.py",
+    "backend/tests/runtime/test_owned_publication.py",
+    "backend/tests/runtime/test_source_control.py",
+    "backend/tests/runtime/test_installation_backup.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "D08: closed native allocation quarantine, exact recoverable archive, explicit retention/removal, new-data recovery, admission fences and shutdown draining. Original/consumer kernel grants are observed; inference is controlled. Historic unmanaged worktrees remain preserved behind retired effect guards. No real model turns or external accounts.",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}

@@ -46,7 +46,9 @@ class CodeCarryovers:
         self.runs = runs
 
     def _packet(self, conn, project_id, task_id, attempt_id):
-        """Require an actual closed native author and its saved complete input; do not reconstruct unknown history."""
+        """Require an available, unquarantined closed native author and saved complete input; do not reconstruct unknown history."""
+        from backend.runtime.retention_authority import require_available
+        require_available(conn,project_id,attempt_id)
         candidate = CodeCandidates._row(conn, project_id, attempt_id)
         if candidate["task_id"] != task_id or candidate["state"] != "ready":
             raise RunConflict("Prior candidate is not ready in this task")
