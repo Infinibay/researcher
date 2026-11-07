@@ -21,6 +21,7 @@ from backend.runtime.contracts import (
     CommandSpec,
     EventPage,
     JobReservation,
+    ProjectBudgetExhausted,
     RunConflict,
     RunEvent,
     RunNotFound,
@@ -652,11 +653,22 @@ class SQLiteRunStore:
                 "Project budget policy changed; explicit reconciliation required"
             )
         used = project_work_usage(conn, lease.project_id)
-        if (
-            used["used_turns"] >= project_turn_limit
-            or used["accounted_tokens"] + limits.max_observed_tokens > project_token_limit
-        ):
-            raise RunConflict("Project work budget exhausted; no native turn was sent")
+        blocked_by = []
+        if used["used_turns"] >= project_turn_limit:
+            blocked_by.append("turns")
+        if used["accounted_tokens"] + limits.max_observed_tokens > project_token_limit:
+            blocked_by.append("tokens")
+        if blocked_by:
+            raise ProjectBudgetExhausted({
+                "project_id": lease.project_id,
+                "turn_limit": project_turn_limit,
+                "token_limit": project_token_limit,
+                **used,
+                "requested_turns": 1,
+                "requested_tokens": limits.max_observed_tokens,
+                "blocked_by": blocked_by,
+                "basis": "Recorded lifetime project admission, not provider billing or remaining subscription quota.",
+            })
         conn.execute(
             """INSERT INTO runtime_inference_dispatches(attempt_id,project_id,workspace,catalog_hash,
             runtime_version,limits_json,model,token_ceiling,status,created_at) VALUES(?,?,?,?,?,?,?,?,'reserved',?)""",

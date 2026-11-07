@@ -882,11 +882,16 @@
         "docs/modernization/host-tool-budget-packaging.json",
         "docs/modernization/host-tool-budget-native-observations.json",
         "backend/tests/runtime/test_host_tool_budget.py",
-        "backend/tests/runtime/test_owned_tool_budget.py"
+        "backend/tests/runtime/test_owned_tool_budget.py",
+        "backend/tests/runtime/test_aggregate_execution_budget.py",
+        "docs/modernization/aggregate-budget-review.md",
+        "docs/modernization/aggregate-budget-results.json",
+        "docs/modernization/aggregate-budget-packaging.json",
+        "docs/modernization/aggregate-budget-native-observations.json"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance",
-        "Audit remaining aggregate operation/attempt/project consumption and no-progress scenarios against existing implementation and evidence; pre-dispatch host tool budget under missing/duplicate/reordered lifecycle events is now verified. Native-only effects remain observation-triggered, not preventively bounded by these events."
+        "Session cumulative high water, concurrent project admission, retained unknown usage after restart, typed pre-dispatch budget refusal, and actual owned reasoning-only no-progress closure are verified. Full scenario acceptance still needs the remaining integration and review-chain audit."
       ]
     },
     "E08": {
@@ -943,11 +948,17 @@
         "docs/modernization/host-tool-budget-packaging.json",
         "docs/modernization/host-tool-budget-native-observations.json",
         "backend/tests/runtime/test_host_tool_budget.py",
-        "backend/tests/runtime/test_owned_tool_budget.py"
+        "backend/tests/runtime/test_owned_tool_budget.py",
+        "backend/tests/runtime/test_aggregate_execution_budget.py",
+        "docs/modernization/aggregate-budget-review.md",
+        "docs/modernization/aggregate-budget-results.json",
+        "docs/modernization/aggregate-budget-packaging.json",
+        "docs/modernization/aggregate-budget-native-observations.json"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance",
-        "Audit remaining aggregate operation/attempt/project consumption and no-progress scenarios against existing implementation and evidence; pre-dispatch host tool budget under missing/duplicate/reordered lifecycle events is now verified. Native-only effects remain observation-triggered, not preventively bounded by these events."
+        "Session cumulative high water, concurrent project admission, retained unknown usage after restart, typed pre-dispatch budget refusal, and actual owned reasoning-only no-progress closure are verified. Full scenario acceptance still needs the remaining integration and review-chain audit.",
+        "Implement an explicit owner operation for frozen project-budget policy revision with expected version and durable receipt; preserve consumption and never automatically resume or replay attempts. Current host configuration change only rejects a mismatch. See aggregate-budget-review.md."
       ]
     },
     "E09": {

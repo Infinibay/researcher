@@ -132,6 +132,10 @@ while True:
                 for total in ([25473, 25473] if scenario == 'budget-large-context' else [1000, 2000]):
                     event('thread/tokenUsage/updated',turnId=active,tokenUsage={'total':{'totalTokens':total}})
             send({'id':'budget-1','method':'item/tool/call','params':{'threadId':thread_id,'turnId':active,'callId':'2','tool':'source','arguments':{}}})
+        elif scenario.startswith('usage-sequence:'):
+            for total in json.loads(scenario.split(':',1)[1]):
+                event('thread/tokenUsage/updated',turnId=active,tokenUsage={'total':{'totalTokens':total}})
+            send({'id':'budget-1','method':'item/tool/call','params':{'threadId':thread_id,'turnId':active,'callId':'usage-tool','tool':'source','arguments':{}}})
         elif scenario=='tokens':
             event('thread/tokenUsage/updated',turnId=active,tokenUsage={'total':{'totalTokens':101}})
             complete()

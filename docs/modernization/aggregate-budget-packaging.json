@@ -1,0 +1,32 @@
+{
+  "base_commit": "7c5a63b",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "890f5b141a473e6cf8ed1831731ac1dcdbcb6eae67c30f3746492917b71739b0",
+  "source_files_matching_wheel_and_installation": 625,
+  "product_files_matching": 329,
+  "observed": {
+    "cases": 65,
+    "passed": 65,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 224,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 22.45,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_aggregate_execution_budget.py",
+    "backend/tests/runtime/test_inference_journal.py",
+    "backend/tests/runtime/test_history_budget.py",
+    "backend/tests/runtime/test_run_input.py",
+    "backend/tests/runtime/test_delivery_budget.py",
+    "backend/tests/runtime/test_host_tool_budget.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "High-water observations and conservative reservations govern admission, not actual billing; absent usage remains unknown. Changing frozen project policy requires separate explicit reconciliation not implemented in this block",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}

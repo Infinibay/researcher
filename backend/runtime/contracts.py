@@ -9,6 +9,15 @@ class RunConflict(RuntimeError):
     """The command conflicts with an existing identity or current state."""
 
 
+class ProjectBudgetExhausted(RunConflict):
+    """A durable project allowance cannot reserve this attempt; no native turn was sent."""
+
+    def __init__(self, budget):
+        """Retain the transaction's admission snapshot, including unknown usage, independently of later history or policy reads."""
+        super().__init__("Project work budget exhausted; no native turn was sent")
+        self.budget = dict(budget)
+
+
 class RunNotFound(LookupError):
     """The object is absent from the caller's project scope."""
 

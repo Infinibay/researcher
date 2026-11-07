@@ -28,7 +28,36 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U06 (configuración por intento y guardado interrumpido) queda comprobado; siguen42de43escenarios amplios abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: límite de herramientas comprobado
+## Estado actual: presupuesto coherente y falta de progreso comprobados
+
+Bloque **2026-11-07 15:46:39–15:56:22 UTC**, **9 min 43 s hasta validar**.
+Pasan113casos distintos de fuente y65instalados;625archivos coinciden,329de producto.
+La sesión conserva el máximo acumulado; el rechazo del proyecto muestra la reserva
+necesaria y sus límites sin enviar un turno. Dos solicitudes compiten por el
+último cupo y sólo una lo obtiene; reiniciar conserva consumo desconocido.
+Un hijo real emite50notas sin avance y termina por falta de progreso, sin resultado
+ni otro turno, con peers/permisos cerrados. Seis definiciones modificadas y cuatro
+módulos documentados;85candidatos de prompts revisados.
+[Resultados, límite pendiente y corrección de fixture](aggregate-budget-review.md).
+
+**Lista vigente:**
+- Terminado: recorridos principales, U06, evidencia selectiva, cupo de herramientas,
+  consumo acumulado coherente y explicación del rechazo antes del despacho.
+- En curso al cerrar: documentación y checkpoint local del bloque.
+- Siguiente principal: revisión explícita del presupuesto del proyecto por el
+  propietario, con versión/recibo, sin borrar consumo ni reanudar trabajo por su
+  cuenta. **Todavía no iniciado**; registrar hora real al comenzar.
+- Pendiente:42escenarios amplios, recuperación/recursos, datos históricos,
+  evaluación humana/modelos, aceptación integral de12páginas, dependencias
+  publicadas y distribución.
+- Al final: detalles secundarios, validación global y revisión independiente.
+
+La política actual queda fijada por la primera reserva; cambiar configuración
+sólo rechaza una discrepancia. El control explícito pendiente es funcional,
+no pulido. Cero modelos consumidos, sin nueva suite global verde ni porcentaje
+sustentado. Lista y tiempos se publican en cada transición y persisten tras compactar.
+
+## Etapa anterior: límite de herramientas comprobado
 
 Bloque **2026-11-07 15:27:51–15:44:08 UTC**, **16 min 17 s hasta validar**.
 Pasan **101 casos distintos de fuente** y **84 instalados**. Se reserva el cupo

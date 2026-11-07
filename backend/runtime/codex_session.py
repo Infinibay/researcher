@@ -214,10 +214,10 @@ class CodexSession:
         }
 
     def _observe_tokens(self, total):
-        """Retain the largest positive usage increment; duplicate updates cannot erase measured context cost."""
+        """Retain cumulative usage high water and its largest positive increment; stale updates cannot refund allowance or inflate later step cost."""
         increment = max(0, total - (self.observed_tokens or 0))
         self._largest_token_increment = max(self._largest_token_increment or 0, increment) or None
-        self.observed_tokens = total
+        self.observed_tokens = max(self.observed_tokens or 0, total)
 
     def _exceeded(self, kind, message):
         """Capture bounded host observations at detection, before process teardown changes elapsed time."""

@@ -29,6 +29,27 @@ no demuestra consumo físico exacto, cuota restante ni coste de la suscripción.
 La vista no modifica la política ni restablece límites. Un fallo HTTP conserva
 la última lectura correcta y ofrece reintento; no se presenta como historial vacío.
 
+La sesión nativa conserva también el máximo acumulado: avisos de40,70,10,60
+dejan70tokens observados y un incremento máximo de40, sin devolver capacidad ni
+interpretar el aviso atrasado como un nuevo gasto. El mismo principio se mantiene
+entre turnos de una sesión. Una transacción de reserva serializa los contendientes
+por el último cupo del proyecto; sólo uno obtiene permiso para enviar el turno.
+
+Un rechazo por presupuesto produce `ProjectBudgetExhausted`, compatible con
+`RunConflict`, y conserva el snapshot de la decisión: límites, solicitudes
+reservadas, tokens contabilizados, consumo desconocido, reserva solicitada y
+límites que bloquearon la admisión. El usuario recibe `project_budget_exhausted`
+con `inference_started=false` y una explicación concreta, en vez de un fallo
+genérico de cierre. Por ejemplo: una solicitud necesita reservar100tokens y el
+presupuesto del proyecto permite99; no se envía un turno. Cambios posteriores
+en la historia no reescriben el motivo original.
+
+La política sigue fijada por la primera reserva. Una configuración distinta no
+la reemplaza; falta una operación del propietario para revisarla explícitamente,
+con control de concurrencia y sin borrar consumo ni reanudar trabajo por sí sola.
+Este es trabajo funcional pendiente, no pulido. Ver
+[ensayos de presupuesto y falta de progreso](../modernization/aggregate-budget-review.md).
+
 Verificación: [resultados](../modernization/history-budget-results.json),
 [paquete instalado](../modernization/history-budget-packaging.json) y
 [ensayo visual](../design/audits/2026-11-07-history-budget/report.md).

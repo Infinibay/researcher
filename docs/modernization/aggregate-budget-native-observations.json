@@ -1,0 +1,110 @@
+{
+  "generation": "controlled_native",
+  "ken": "controlled_mcp",
+  "actual_kernel_broker_sqlite": true,
+  "model_calls": 0,
+  "cases": [
+    {
+      "case": "project_rejected_before_dispatch",
+      "source_receipt_database": "/tmp/pytest-of-andres/pytest-827/test_owned_project_budget_exha0/test_infinibay.db",
+      "run": {
+        "status": "failed",
+        "issue": {
+          "code": "project_budget_exhausted",
+          "inference_started": false,
+          "message": "No se inició un turno nuevo: el proyecto tiene 0 de 20 turnos reservados y 0 de 999 tokens contabilizados; esta solicitud necesita reservar 1000 tokens. Revisa el presupuesto del proyecto y sus intentos anteriores antes de continuar. Las mediciones ausentes conservan su reserva; esto no indica la cuota restante de la suscripción.",
+          "next_action": "inspect_project_budget",
+          "project_budget": {
+            "accounted_tokens": 0,
+            "basis": "Recorded lifetime project admission, not provider billing or remaining subscription quota.",
+            "blocked_by": [
+              "tokens"
+            ],
+            "held_tokens": 0,
+            "observed_tokens": null,
+            "project_id": 101,
+            "requested_tokens": 1000,
+            "requested_turns": 1,
+            "token_limit": 999,
+            "turn_limit": 20,
+            "unmeasured_dispatches": 0,
+            "unsettled_dispatches": 0,
+            "used_turns": 0
+          }
+        }
+      },
+      "counts": {
+        "runtime_inference_dispatches": 0,
+        "runtime_input_snapshots": 0,
+        "runtime_result_proposals": 0,
+        "runtime_result_acceptances": 0,
+        "research_reports": 0
+      },
+      "dispatches": [],
+      "nonclosed_peers": 0,
+      "active_grants": 0,
+      "chatter": null
+    },
+    {
+      "case": "reasoning_without_progress",
+      "source_receipt_database": "/tmp/pytest-of-andres/pytest-828/test_owned_activity_without_pr0/test_infinibay.db",
+      "run": {
+        "status": "failed",
+        "issue": {
+          "code": "execution_limit",
+          "execution_budget": {
+            "delivery_advice": {
+              "basis": "Quarter floor or three observed increments with 25% growth; heuristic, not reserved quota.",
+              "largest_token_increment": null,
+              "token_margin": 250
+            },
+            "limits": {
+              "max_answer_bytes": 200000,
+              "max_observed_tokens": 1000,
+              "max_tool_calls": 25,
+              "max_turns": 1,
+              "no_progress_seconds": 0.15,
+              "wall_seconds": 5
+            },
+            "observed": {
+              "elapsed_seconds": 0.1516794380149804,
+              "host_tool_requests_admitted": 0,
+              "tokens": null,
+              "tool_starts": 0
+            },
+            "phase": "work",
+            "remaining": {
+              "observed_tokens": null,
+              "tool_starts": 25,
+              "wall_seconds": 4.84832056198502
+            },
+            "tool_count_basis": "Unique tool identities from host requests or native start/completion observations. Host requests are bounded before dispatch; native-only effects may already have occurred."
+          },
+          "inference_started": true,
+          "limit_kind": "progress",
+          "message": "La ejecución se detuvo al alcanzar el límite de tiempo sin progreso observable. Conservamos el trabajo y los recibos guardados: un borrador puede existir aunque falte la entrega o la explicación final. Revisa la tarea y sus artefactos antes de decidir cómo continuar; este intento no se repetirá por su cuenta.",
+          "next_action": "inspect_saved_work"
+        }
+      },
+      "counts": {
+        "runtime_inference_dispatches": 1,
+        "runtime_input_snapshots": 1,
+        "runtime_result_proposals": 0,
+        "runtime_result_acceptances": 0,
+        "research_reports": 0
+      },
+      "dispatches": [
+        {
+          "status": "unknown",
+          "observed_tokens": null,
+          "token_ceiling": 1000
+        }
+      ],
+      "nonclosed_peers": 0,
+      "active_grants": 0,
+      "chatter": {
+        "deltas": 50
+      }
+    }
+  ]
+}

@@ -25,6 +25,7 @@ from backend.research.models import (
 )
 from backend.runtime.codex_session import ExecutionLimitExceeded, ExecutionLimits
 from backend.runtime.contracts import (
+    ProjectBudgetExhausted,
     RunConflict,
     RunNotFound,
     RunSpec,
@@ -807,7 +808,7 @@ class RuntimeService:
             finally:
                 self._workers.pop(run_id, None)
 
-    async def _note_issue(self, run, code, *, attempt_id=None, inference_started=False, limit=None, resources=None):
+    async def _note_issue(self, run, code, *, attempt_id=None, inference_started=False, limit=None, resources=None, project_budget=None):
         """Persist a safe, actionable owner explanation for this original run."""
         messages = {
             "legacy_owner_active": (
@@ -837,6 +838,10 @@ class RuntimeService:
             "execution_limit": (
                 "La ejecución se detuvo al alcanzar un límite. Conservamos el trabajo y los recibos guardados: un borrador puede existir aunque falte la entrega o la explicación final. Revisa la tarea y sus artefactos antes de decidir cómo continuar; este intento no se repetirá por su cuenta.",
                 "inspect_saved_work",
+            ),
+            "project_budget_exhausted": (
+                "El presupuesto acumulado del proyecto no permite iniciar esta solicitud. Revisa el presupuesto y sus intentos anteriores antes de continuar; no se repetirá por su cuenta.",
+                "inspect_project_budget",
             ),
             "resource_exhaustion": (
                 "El sistema registró agotamiento de recursos durante este intento. Conservamos el trabajo y los recibos guardados; revisa los resultados y el límite configurado antes de decidir cómo continuar. No se repetirá automáticamente.",
@@ -869,6 +874,16 @@ class RuntimeService:
         }
         message, action = messages[code]
         details = {}
+        if project_budget is not None:
+            message = (
+                "No se inició un turno nuevo: el proyecto tiene "
+                f"{project_budget['used_turns']} de {project_budget['turn_limit']} turnos reservados y "
+                f"{project_budget['accounted_tokens']} de {project_budget['token_limit']} tokens contabilizados; "
+                f"esta solicitud necesita reservar {project_budget['requested_tokens']} tokens. "
+                "Revisa el presupuesto del proyecto y sus intentos anteriores antes de continuar. "
+                "Las mediciones ausentes conservan su reserva; esto no indica la cuota restante de la suscripción."
+            )
+            details['project_budget'] = project_budget
         if code == "resource_exhaustion" and resources is not None:
             observation = (
                 "procesos terminados por falta de memoria"
@@ -1085,6 +1100,7 @@ class RuntimeService:
         lease = heartbeat = token = result = peers = None
         error_type = None
         execution_limit = None
+        project_budget = None
         resource_observation = None
         dispatch_reserved = native_started = False
         code_review = review_confirmed = False
@@ -1277,6 +1293,8 @@ class RuntimeService:
             error_type = type(exc).__name__
             if isinstance(exc, ExecutionLimitExceeded):
                 execution_limit = exc
+            if isinstance(exc, ProjectBudgetExhausted):
+                project_budget = exc.budget
             logger.warning("Research run stopped (%s)", error_type)
         finally:
             # Both peers have exited their owning worker scope before any final
@@ -1447,7 +1465,9 @@ class RuntimeService:
                         )
                     elif result is None and error_type is not None:
                         code = (
-                            "execution_limit"
+                            "project_budget_exhausted"
+                            if project_budget is not None
+                            else "execution_limit"
                             if execution_limit is not None
                             else "native_search_unavailable"
                             if error_type == "NativeSearchUnavailable"
@@ -1471,6 +1491,7 @@ class RuntimeService:
                             if dispatch_reserved
                             else False,
                             limit=execution_limit,
+                            project_budget=project_budget,
                         )
                 except Exception as exc:  # noqa: BLE001 -- keep the original failure if its observation cannot commit
                     logger.error(

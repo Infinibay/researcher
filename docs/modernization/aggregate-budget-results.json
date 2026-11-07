@@ -1,0 +1,129 @@
+{
+  "base_commit": "7c5a63b",
+  "previous_goal_turn": "progress: committed pre-dispatch host tool allowance",
+  "started_at_utc": "2026-11-07T15:46:39Z",
+  "validation_cutoff_utc": "2026-11-07T15:56:22Z",
+  "elapsed_to_validation_seconds": 583,
+  "source_distinct_latest_cases_passing": 113,
+  "red": {
+    "cases": 6,
+    "failed": 5,
+    "passed": 1
+  },
+  "source_runs": [
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/aggregate-budget-source.xml",
+      "cases": 75,
+      "passed": 75,
+      "seconds": 17.245
+    },
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/aggregate-budget-native.xml",
+      "cases": 43,
+      "passed": 43,
+      "seconds": 18.764
+    },
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/aggregate-budget-final-source.xml",
+      "cases": 8,
+      "passed": 7,
+      "seconds": 5.424
+    },
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/aggregate-budget-chatter.xml",
+      "cases": 1,
+      "passed": 1,
+      "seconds": 3.215
+    }
+  ],
+  "test_fixture_correction": "New chatter-only branch initially omitted import time and disconnected the controlled child. Added the import and reran the failed case; product no-progress behavior was unchanged. Full installed selected suite includes the corrected fixture.",
+  "docstrings": {
+    "modules": 4,
+    "changed_definitions": [
+      {
+        "path": "backend/runtime/codex_session.py",
+        "symbol": "CodexSession._observe_tokens",
+        "documented": true
+      },
+      {
+        "path": "backend/runtime/contracts.py",
+        "symbol": "ProjectBudgetExhausted",
+        "documented": true
+      },
+      {
+        "path": "backend/runtime/contracts.py",
+        "symbol": "ProjectBudgetExhausted.__init__",
+        "documented": true
+      },
+      {
+        "path": "backend/runtime/sqlite_runs.py",
+        "symbol": "SQLiteRunStore._reserve_inference",
+        "documented": true
+      },
+      {
+        "path": "backend/runtime/service.py",
+        "symbol": "RuntimeService._note_issue",
+        "documented": true
+      },
+      {
+        "path": "backend/runtime/service.py",
+        "symbol": "RuntimeService._execute",
+        "documented": true
+      }
+    ]
+  },
+  "installed": "aggregate-budget-packaging.json",
+  "native_observations": "aggregate-budget-native-observations.json",
+  "prompt_inventory": {
+    "files": 292,
+    "candidates": 85,
+    "requires_review": 0,
+    "unchanged_candidates_revalidated_after_consumer_diff": 3
+  },
+  "evidence": [
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/aggregate-budget-red.xml",
+      "sha256": "f1724c8e8bcc1e872a50d1f18e6611549e3714364131bf558f9c65822d558193"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/aggregate-budget-source.xml",
+      "sha256": "ce9c97c7d8428530f8355d8ab98138347b622c0e7cd7496f5827f45d4260db69"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/aggregate-budget-native.xml",
+      "sha256": "451e96610c0772722e278378538c92a391958907e1d8960df0ea95b06fd2e9c5"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/aggregate-budget-final-source.xml",
+      "sha256": "465aa2130b5008efb4fd6047450a3210c391681453fb5772101050d49bd4324e"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/aggregate-budget-chatter.xml",
+      "sha256": "7312f9cd9927e44352b45d5d4c33a969390445634fb95f3e188de400bd90ee2c"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/aggregate-budget-package.xml",
+      "sha256": "dd5d9d038a886d9a5fc136468ecc7cd4dcf8a6478acf2a3aedbe3d337515dd82"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/aggregate-budget-prompt-review.json",
+      "sha256": "d66e6aa5ae766dbfd76eeb11c2ea7ab86d8ee8c045bda9d66fdaed24fbf35ca0"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/aggregate-budget-docstrings.json",
+      "sha256": "44931081f1f820b697778515b01a3c2f8a1eeee42e6040ff79504f8ec24a209c"
+    }
+  ],
+  "model_calls": 0,
+  "global_suite_rerun": false,
+  "broad_scenarios_open": 42,
+  "fully_accepted_pages": 0,
+  "next_functional_work": "Explicit owner revision of frozen lifetime project budget policy with expected version and durable receipt, without refunding consumption or starting work automatically.",
+  "limits": [
+    "Cumulative observations and reservations are admission accounting, not provider billing or remaining quota.",
+    "Native generation and Ken controlled; actual kernel, broker, SQLite and process closure exercised.",
+    "No new global suite or complete E07/E08 acceptance claimed.",
+    "Project policy revision is not implemented in this block."
+  ],
+  "status": "aggregate_budget_consistency_refusal_and_no_progress_verified; complete modernization remains active"
+}

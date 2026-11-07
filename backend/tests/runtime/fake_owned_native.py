@@ -4,6 +4,7 @@ import base64
 import json
 import subprocess
 import sys
+import time
 import tomllib
 from pathlib import Path
 
@@ -1161,6 +1162,11 @@ for line in sys.stdin:
             raise AssertionError("The configured group memory limit did not stop allocation")
         elif Path("/run/researcher-source/.ken/hold-turn").exists():
             Path("/home/actor/.codex/turn-entered").write_text("entered")
+        elif Path("/run/researcher-source/.ken/chatter-only").exists():
+            for index in range(50):
+                send({'method':'item/reasoning/textDelta','params':{'threadId':native_thread_id,'turnId':native_turn_id,'delta':'Still considering the task.'}})
+                Path('/home/actor/.codex/fixture-chatter.json').write_text(json.dumps({'deltas':index+1}))
+                time.sleep(.02)
         else:
             next_tool()
     elif method == "turn/interrupt":

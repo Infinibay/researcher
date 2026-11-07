@@ -74,7 +74,7 @@
       "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after extracting project metadata helpers and removing unused task event import and historical flow consumers; native authority and historical-template exclusion unchanged. See docs/architecture/native-flow-retirement.md."
     },
     "backend/knowledge/reviews.py::read_feedback": {
-      "dependencies_sha256": "bfb0bbdb2e309a4cad3adbb107286508c9c7378494314b4dac47f9f322a3dc56",
+      "dependencies_sha256": "2c9a59afbbbefdfb35740aa0966392f9f4c9b3c3fc97778758a8c7f37a617fe3",
       "decision": "retained_input_renderer",
       "rationale": "Read read_feedback and its two exact callers in Findings.reviews and SQLiteResearchStore.read_review: project/finding identity and bounded attributed old subjects survive. The authenticated caller checks findings.read in the same transaction; stored feedback never authorizes a new review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
       "evidence": [
@@ -87,10 +87,12 @@
         "docs/modernization/atomic-planning-review.md",
         "backend/tests/runtime/test_atomic_planning_delivery.py",
         "docs/modernization/domain-resources-review.md",
-        "backend/tests/runtime/test_domain_resources.py"
+        "backend/tests/runtime/test_domain_resources.py",
+        "docs/modernization/aggregate-budget-review.md",
+        "backend/tests/runtime/test_aggregate_execution_budget.py"
       ],
       "conflicts": [],
-      "revalidation": "Selective-material review: candidate AST unchanged; changed consumers preserve prior authority/profile/feedback behavior while adding exact original context projections and selective reads.",
+      "revalidation": "Aggregate-budget review: candidate source unchanged. Only changed direct consumer is SQLiteRunStore; its pre-dispatch reservation now raises a typed RunConflict with the transaction budget snapshot. Input freezing, attributed history and review-feedback calls are unchanged, and an unaffordable attempt leaves neither a dispatch nor an input snapshot. No new prompt authority or model-efficacy claim.",
       "previous_review": {
         "dependencies_sha256": "b66b34d5d8b18599bb15a22c72ef7e77a107fa044b9f0d7c36bf45630c3d53af",
         "decision": "retained_input_renderer",
@@ -2355,7 +2357,7 @@
       "revalidation": "Selective-material review: candidate AST unchanged; changed consumers preserve prior authority/profile/feedback behavior while adding exact original context projections and selective reads."
     },
     "backend/runtime/run_inputs.py::conversation_history": {
-      "dependencies_sha256": "a038798d899f4ad98081c2cd4e15abaae147ff3b15799fe24c1a02868e926a8c",
+      "dependencies_sha256": "1465ddd475a47f4d8494020ae6d41abb885bdac4c3f8be0d91bc12fe6f31efce",
       "decision": "retained_input_renderer",
       "rationale": "Read conversation_history, task_request_history and freeze_input, plus the real SQLiteRunStore snapshot caller. Direct same-task admission history has causal row-order cutoff and no renewed authority; selected conversations preserve their reset. Original text/hash and strict size rejection remain, without hidden summarization or invented comprehension. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
       "evidence": [
@@ -2365,7 +2367,9 @@
         "backend/tests/runtime/test_run_input.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json",
-        "backend/runtime/views.py"
+        "backend/runtime/views.py",
+        "docs/modernization/aggregate-budget-review.md",
+        "backend/tests/runtime/test_aggregate_execution_budget.py"
       ],
       "conflicts": [],
       "previous_review": {
@@ -2384,10 +2388,10 @@
       },
       "reviewed_at": "2026-11-07",
       "source_base_commit": "035b46c",
-      "revalidation": "Selective-material review: candidate AST unchanged; changed consumers preserve prior authority/profile/feedback behavior while adding exact original context projections and selective reads."
+      "revalidation": "Aggregate-budget review: candidate source unchanged. Only changed direct consumer is SQLiteRunStore; its pre-dispatch reservation now raises a typed RunConflict with the transaction budget snapshot. Input freezing, attributed history and review-feedback calls are unchanged, and an unaffordable attempt leaves neither a dispatch nor an input snapshot. No new prompt authority or model-efficacy claim."
     },
     "backend/runtime/run_inputs.py::freeze_input": {
-      "dependencies_sha256": "a038798d899f4ad98081c2cd4e15abaae147ff3b15799fe24c1a02868e926a8c",
+      "dependencies_sha256": "1465ddd475a47f4d8494020ae6d41abb885bdac4c3f8be0d91bc12fe6f31efce",
       "decision": "retained_input_renderer",
       "rationale": "Read conversation_history, task_request_history and freeze_input, plus the real SQLiteRunStore snapshot caller. Direct same-task admission history has causal row-order cutoff and no renewed authority; selected conversations preserve their reset. Original text/hash and strict size rejection remain, without hidden summarization or invented comprehension. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance. Selective-material review: inspected changed candidate: schema5 large historical sections become explicit retrievable references; selective reads do not claim whole-body comprehension. Catalog8 preserves original identities2–7. Current task input/history is unchanged and older deliveries keep their original shape.",
       "evidence": [
@@ -2397,7 +2401,9 @@
         "backend/tests/runtime/test_run_input.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json",
-        "backend/runtime/views.py"
+        "backend/runtime/views.py",
+        "docs/modernization/aggregate-budget-review.md",
+        "backend/tests/runtime/test_aggregate_execution_budget.py"
       ],
       "conflicts": [],
       "previous_review": {
@@ -2416,7 +2422,7 @@
       },
       "reviewed_at": "2026-11-07",
       "source_base_commit": "035b46c",
-      "revalidation": "Selective-material review: inspected changed candidate: schema5 large historical sections become explicit retrievable references; selective reads do not claim whole-body comprehension. Catalog8 preserves original identities2–7. Current task input/history is unchanged and older deliveries keep their original shape."
+      "revalidation": "Aggregate-budget review: candidate source unchanged. Only changed direct consumer is SQLiteRunStore; its pre-dispatch reservation now raises a typed RunConflict with the transaction budget snapshot. Input freezing, attributed history and review-feedback calls are unchanged, and an unaffordable attempt leaves neither a dispatch nor an input snapshot. No new prompt authority or model-efficacy claim."
     },
     "backend/runtime/scientific_instructions.py::SCIENTIFIC_RESEARCH_INSTRUCTIONS": {
       "dependencies_sha256": "4c754c3273c23d23b4ecc1b2e69828aa948ab1b3b2c1ee62501a0f86aa513a22",
