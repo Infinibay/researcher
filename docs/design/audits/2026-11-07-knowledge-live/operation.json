@@ -1,0 +1,180 @@
+{
+  "status": "passed",
+  "journey": "knowledge",
+  "backend": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/lib/python3.12/site-packages/backend/__init__.py",
+  "model_turns": 0,
+  "mocked_api_responses": false,
+  "web_index_sha256": "427ed6d6444148d5f0f84ad2a317109fc07d6baee011b36c6bc791b31149d65d",
+  "browser_exit": 0,
+  "storage": {
+    "projects": [
+      {
+        "id": 1,
+        "name": "Archivo Atlas",
+        "description": "Ensayo de archivos y notas con alcance explícito."
+      },
+      {
+        "id": 2,
+        "name": "Archivo Beta",
+        "description": "Ensayo de archivos y notas con alcance explícito."
+      }
+    ],
+    "groups": [],
+    "milestones": [],
+    "tasks": [],
+    "dependencies": [],
+    "corrections": [],
+    "files": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "file_name": "muestra.csv",
+        "file_path": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/web-knowledge-v1/host/uploads/1/uploads/50fa2e7cdf2349d3bb715a9ce6abc6b2"
+      },
+      {
+        "id": 2,
+        "project_id": 2,
+        "file_name": "muestra.csv",
+        "file_path": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/web-knowledge-v1/host/uploads/2/uploads/60ad52a4812a4c2d8ce625267162f825"
+      }
+    ],
+    "wiki": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "path": "overview",
+        "title": "Resumen de evidencia",
+        "content": "Atlas: 137 unidades. Ejemplo del usuario: un título igual no demuestra que dos fuentes sean la misma versión."
+      },
+      {
+        "id": 2,
+        "project_id": null,
+        "path": "overview",
+        "title": "Resumen de evidencia",
+        "content": "Biblioteca global: las notas de cada proyecto permanecen separadas de esta explicación compartida."
+      },
+      {
+        "id": 3,
+        "project_id": 2,
+        "path": "overview",
+        "title": "Resumen de evidencia",
+        "content": "Beta: 63 unidades. Este documento tiene la misma ruta overview y no reemplaza el documento de Atlas."
+      }
+    ],
+    "wiki_revisions": [
+      {
+        "page_id": 1,
+        "project_id": 1,
+        "revision": 1,
+        "content": "Atlas: 137 unidades observadas en el archivo. La nota conserva contexto; la extracción no valida el resultado."
+      },
+      {
+        "page_id": 1,
+        "project_id": 1,
+        "revision": 2,
+        "content": "Atlas: 137 unidades. Ejemplo del usuario: un título igual no demuestra que dos fuentes sean la misma versión."
+      },
+      {
+        "page_id": 2,
+        "project_id": null,
+        "revision": 1,
+        "content": "Biblioteca global: las notas de cada proyecto permanecen separadas de esta explicación compartida."
+      },
+      {
+        "page_id": 3,
+        "project_id": 2,
+        "revision": 1,
+        "content": "Beta: 63 unidades. Este documento tiene la misma ruta overview y no reemplaza el documento de Atlas."
+      }
+    ],
+    "runs": 0,
+    "dispatches": 0,
+    "integrity": "ok"
+  },
+  "service_exit": 143,
+  "storage_after_close": {
+    "projects": [
+      {
+        "id": 1,
+        "name": "Archivo Atlas",
+        "description": "Ensayo de archivos y notas con alcance explícito."
+      },
+      {
+        "id": 2,
+        "name": "Archivo Beta",
+        "description": "Ensayo de archivos y notas con alcance explícito."
+      }
+    ],
+    "groups": [],
+    "milestones": [],
+    "tasks": [],
+    "dependencies": [],
+    "corrections": [],
+    "files": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "file_name": "muestra.csv",
+        "file_path": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/web-knowledge-v1/host/uploads/1/uploads/50fa2e7cdf2349d3bb715a9ce6abc6b2"
+      },
+      {
+        "id": 2,
+        "project_id": 2,
+        "file_name": "muestra.csv",
+        "file_path": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/web-knowledge-v1/host/uploads/2/uploads/60ad52a4812a4c2d8ce625267162f825"
+      }
+    ],
+    "wiki": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "path": "overview",
+        "title": "Resumen de evidencia",
+        "content": "Atlas: 137 unidades. Ejemplo del usuario: un título igual no demuestra que dos fuentes sean la misma versión."
+      },
+      {
+        "id": 2,
+        "project_id": null,
+        "path": "overview",
+        "title": "Resumen de evidencia",
+        "content": "Biblioteca global: las notas de cada proyecto permanecen separadas de esta explicación compartida."
+      },
+      {
+        "id": 3,
+        "project_id": 2,
+        "path": "overview",
+        "title": "Resumen de evidencia",
+        "content": "Beta: 63 unidades. Este documento tiene la misma ruta overview y no reemplaza el documento de Atlas."
+      }
+    ],
+    "wiki_revisions": [
+      {
+        "page_id": 1,
+        "project_id": 1,
+        "revision": 1,
+        "content": "Atlas: 137 unidades observadas en el archivo. La nota conserva contexto; la extracción no valida el resultado."
+      },
+      {
+        "page_id": 1,
+        "project_id": 1,
+        "revision": 2,
+        "content": "Atlas: 137 unidades. Ejemplo del usuario: un título igual no demuestra que dos fuentes sean la misma versión."
+      },
+      {
+        "page_id": 2,
+        "project_id": null,
+        "revision": 1,
+        "content": "Biblioteca global: las notas de cada proyecto permanecen separadas de esta explicación compartida."
+      },
+      {
+        "page_id": 3,
+        "project_id": 2,
+        "revision": 1,
+        "content": "Beta: 63 unidades. Este documento tiene la misma ruta overview y no reemplaza el documento de Atlas."
+      }
+    ],
+    "runs": 0,
+    "dispatches": 0,
+    "integrity": "ok"
+  }
+}

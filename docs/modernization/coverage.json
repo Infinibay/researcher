@@ -2423,7 +2423,11 @@
         "docs/design/audits/2026-11-06-planning/report.md",
         "frontend/tests/planning.browser.mjs",
         "docs/modernization/web-workspace-results.json",
-        "docs/design/audits/2026-11-07-workspace-live/report.md"
+        "docs/design/audits/2026-11-07-workspace-live/report.md",
+        "docs/design/audits/2026-11-07-knowledge-live/report.md",
+        "docs/modernization/web-knowledge-results.json",
+        "frontend/tests/knowledge.e2e.mjs",
+        "evals/operation/web_workspace.py"
       ],
       "notes": [
         "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json."
@@ -2668,7 +2672,11 @@
         "frontend/tests/repository-explorer.test.ts",
         "frontend/tests/repository-file-design.test.ts",
         "docs/modernization/web-workspace-results.json",
-        "docs/design/audits/2026-11-07-workspace-live/report.md"
+        "docs/design/audits/2026-11-07-workspace-live/report.md",
+        "docs/design/audits/2026-11-07-knowledge-live/report.md",
+        "docs/modernization/web-knowledge-results.json",
+        "frontend/tests/knowledge.e2e.mjs",
+        "evals/operation/web_workspace.py"
       ],
       "notes": [
         "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json."
@@ -3557,7 +3565,11 @@
         "docs/modernization/native-adapters-retirement.json",
         "docs/modernization/native-adapters-results.json",
         "docs/modernization/native-adapters-packaging.json",
-        "backend/tests/runtime/test_native_adapter_retirement.py"
+        "backend/tests/runtime/test_native_adapter_retirement.py",
+        "docs/design/audits/2026-11-07-knowledge-live/report.md",
+        "docs/modernization/web-knowledge-results.json",
+        "frontend/tests/knowledge.e2e.mjs",
+        "evals/operation/web_workspace.py"
       ],
       "remaining": [
         "Migrate legacy registries/roles/flows and remove old RAG/CrewAI providers once their consumers are replaced.",
@@ -3575,7 +3587,11 @@
         "backend/tests/research/test_wiki_migration.py",
         "backend/tests/research/test_wiki_collection.py",
         "backend/tests/research/test_wiki_imports.py",
-        "docs/design/audits/2026-11-01-wiki/report.md"
+        "docs/design/audits/2026-11-01-wiki/report.md",
+        "docs/design/audits/2026-11-07-knowledge-live/report.md",
+        "docs/modernization/web-knowledge-results.json",
+        "frontend/tests/knowledge.e2e.mjs",
+        "evals/operation/web_workspace.py"
       ],
       "remaining": [
         "Migrate complete legacy roles/flows and semantic provider; preserve dependent-context/finding invalidation and retained history policy.",

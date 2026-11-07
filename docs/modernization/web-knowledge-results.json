@@ -1,0 +1,39 @@
+{
+  "base_commit": "f881653",
+  "started_at_utc": "2026-11-07T14:20:47Z",
+  "validated_at_utc": "2026-11-07T14:27:51Z",
+  "elapsed_to_validation_seconds": 424,
+  "browser_exit": 0,
+  "real_api_sqlite_and_files": true,
+  "mocked_api_responses": false,
+  "one_real_upload_response_delayed": true,
+  "screenshots_inspected": 6,
+  "regional_axe_violations": 0,
+  "horizontal_document_overflow": 0,
+  "page_errors": 0,
+  "mutations_excluding_pairing": 8,
+  "model_turns": 0,
+  "new_python_definitions_documented": 1,
+  "new_javascript_helpers_documented": 7,
+  "backend_unchanged_since": "b56bccc",
+  "product_frontend_logic_unchanged": true,
+  "reused_built_web_index_matches_previous_journey": true,
+  "global_suite_repeated": false,
+  "broad_scenarios_closed": 0,
+  "fully_accepted_pages": 0,
+  "input_sha256": {
+    "frontend/package.json": "582eb6f35d6830839875237d8c4c33c1ed4386a6b410494f6a0ade5ecc9ae7e7",
+    "frontend/tests/knowledge.e2e.mjs": "e921c204876d076078b03568d25e983653cdca1e9795a3fa27bd36e6f1e97934",
+    "evals/operation/web_workspace.py": "4033eb418ba3fef3f910290df8b026d4699472532320ee477ab1ab174135ab03",
+    "frontend/dist/index.html": "427ed6d6444148d5f0f84ad2a317109fc07d6baee011b36c6bc791b31149d65d"
+  },
+  "screenshot_sha256": {
+    "01-late-upload-keeps-current-project.png": "7895122d645ea2b342eb6784a233c79e8455bc1bf603a4b8ab31d78dbebce049",
+    "02-beta-csv-preview.png": "b6d9748f5e082092e17ee520c010386de48dd32d6a673670883bdc534d52e1ff",
+    "03-alpha-same-name-preview.png": "d303fb305ae96b58e42bb5eac2bb22e792a103120b3a94a73c536063ac0f9fcc",
+    "04-document-revision-after-reload.png": "b9fbda179ffc591990eb56904bcd695564a152ffc0d8342d516d1525947fda8b",
+    "05-beta-same-path-document.png": "224f61f467c26cc3980eb21fa9e13925e0ed91aebb5c2478f10ee059e02ad927",
+    "06-explicit-global-library.png": "569f451c55d3cbba6714f1471cdca1323141c8aa4fd810df6a1b9bc69ff93f39"
+  },
+  "report": "docs/design/audits/2026-11-07-knowledge-live/report.md"
+}

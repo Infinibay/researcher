@@ -28,7 +28,37 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: recorrido web real comprobado; siguen Archivos y Documentos
+## Estado actual: recorrido de Archivos y Documentos comprobado
+
+Bloque **2026-11-07 14:20:47–14:27:51 UTC**, **7 min 4 s** hasta validar
+resultados y seis capturas. La subida real de Atlas recibe su respuesta con Beta
+abierto y conserva el ámbito. Dos archivos homónimos mantienen bytes distintos;
+previas CSV explicitan la suposición de encabezados y las descargas coinciden
+con el original. Tres documentos `overview` quedan separados entre dos proyectos
+y biblioteca global; la edición persiste al recargar y en SQLite. Ocho escrituras,
+cero inferencias, integridad `ok`, cierre real del servicio y grupo eliminado.
+[Recorrido y límites](../design/audits/2026-11-07-knowledge-live/report.md).
+
+**Lista vigente para la siguiente transición:**
+- Implementado con evidencia de recorridos concretos: backend Codex/Ken,
+  configuración de modelos, flujos principales, comunicación, persistencia y
+  varias recuperaciones; esto no acredita aceptación global.
+- Terminado ahora: recorrido real de Archivos/Documentos, **7 min 4 s** hasta
+  validar. Antes: Proyectos/Planificación/Tareas y corrección, **7 min 30 s**.
+- Siguiente principal: recorridos integrados restantes y aceptación web.
+  **No iniciado en este bloque; registrar la hora real al comenzar.**
+- Pendiente: evaluación humana de comunicación y otros perfiles, aceptación de
+  las12páginas, recursos/recuperación restantes, datos históricos y adopción de
+  una versión publicada compatible de Ken.
+- Al final: detalles secundarios (DD105 añadido), validación global, revisión
+  independiente y distribución. Los fallos funcionales principales siguen fuera
+  de la lista de pulido.
+
+Siguen43escenarios amplios abiertos y0/12páginas completamente aceptadas. No hay
+porcentaje global sustentado. Esta misma lista se actualizará en el chat y aquí
+al cambiar de tarea, indicando duración medida y qué comienza a continuación.
+
+## Etapa anterior: recorrido web real comprobado; siguen Archivos y Documentos
 
 Bloque **14:09:13–14:16:43 UTC**, **7 min 30 s** hasta validar. Se incorpora una
 prueba E2E reproducible sobre host instalado, API y SQLite reales: dos proyectos,

@@ -25,6 +25,20 @@ El harness configura esos valores y cierra su proceso original al terminar.
 El resultado no acredita comprensión humana, generación ni accesibilidad completa.
 [Capturas y resultados](../../docs/design/audits/2026-11-07-workspace-live/report.md).
 
+Con los mismos prerrequisitos, `--journey knowledge` comprueba archivos y documentos:
+
+```sh
+<python-del-producto> evals/operation/web_workspace.py --journey knowledge \
+  --assets <recursos-host.json> --output <otra-carpeta-nueva> \
+  --node <node24>/bin/node
+```
+
+Retiene una respuesta auténtica de subida después del commit para entregarla
+tras cambiar de proyecto. Comprueba previas CSV, descargas exactas, archivos
+homónimos y documentos con igual ruta en dos proyectos y biblioteca global.
+`npm run test:e2e:knowledge` ejecuta sólo el navegador con las mismas variables.
+[Capturas y límites](../../docs/design/audits/2026-11-07-knowledge-live/report.md).
+
 `restored_host.py` prepara una instalación sintética nueva, guarda una solicitud
 pendiente, crea/verifica una copia y la restaura en otra ruta. Reinscribe esa copia
 con autoridad y acceso nuevos; envía una sola solicitud nueva mediante HTTP,

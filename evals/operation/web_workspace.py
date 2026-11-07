@@ -31,6 +31,9 @@ def observe(database):
             "tasks": [dict(row) for row in db.execute("SELECT id,project_id,epic_id,title,status FROM tasks ORDER BY id")],
             "dependencies": [dict(row) for row in db.execute("SELECT task_id,depends_on_task_id FROM task_dependencies")],
             "corrections": [dict(row) for row in db.execute("SELECT project_id,task_id,version,statement,source_kind FROM runtime_context_revisions ORDER BY version")],
+            "files": [dict(row) for row in db.execute("SELECT id,project_id,file_name,file_path FROM reference_files ORDER BY id")],
+            "wiki": [dict(row) for row in db.execute("SELECT id,project_id,path,title,content FROM wiki_pages ORDER BY id")],
+            "wiki_revisions": [dict(row) for row in db.execute("SELECT page_id,project_id,revision,content FROM wiki_revisions ORDER BY page_id,revision")],
             "runs": db.execute("SELECT COUNT(*) FROM runtime_runs").fetchone()[0],
             "dispatches": db.execute("SELECT COUNT(*) FROM runtime_inference_dispatches").fetchone()[0],
             "integrity": db.execute("PRAGMA integrity_check").fetchone()[0],
@@ -46,6 +49,7 @@ def main():
     parser.add_argument("--assets", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--node", type=Path, required=True)
+    parser.add_argument("--journey", choices=("workspace", "knowledge"), default="workspace")
     args = parser.parse_args()
     if not Path(backend.__file__).resolve().is_relative_to(Path(sys.prefix).resolve()):
         raise RuntimeError("Use the separately installed product Python, without PYTHONPATH")
@@ -66,7 +70,7 @@ def main():
     with socket.socket() as binding:
         binding.bind(("127.0.0.1", 0))
         port = binding.getsockname()[1]
-    result = {"status": "running", "backend": str(Path(backend.__file__).resolve()),
+    result = {"status": "running", "journey": args.journey, "backend": str(Path(backend.__file__).resolve()),
               "model_turns": 0, "mocked_api_responses": False,
               "web_index_sha256": hashlib.sha256((ROOT / "frontend/dist/index.html").read_bytes()).hexdigest()}
     process = log = None
@@ -78,7 +82,7 @@ def main():
         env = {**os.environ, "RESEARCHER_E2E_ORIGIN": f"http://127.0.0.1:{port}",
                "RESEARCHER_E2E_OWNER_FILE": str(keys[0]), "RESEARCHER_E2E_OUTPUT": str(output / "browser")}
         with (output / "browser.log").open("x") as browser_log:
-            browser = subprocess.run([str(args.node.resolve(strict=True)), "tests/workspace.e2e.mjs"],
+            browser = subprocess.run([str(args.node.resolve(strict=True)), f"tests/{args.journey}.e2e.mjs"],
                                      cwd=ROOT / "frontend", env=env,
                                      stdout=browser_log, stderr=subprocess.STDOUT, check=False)
         result["browser_exit"] = browser.returncode
@@ -87,14 +91,17 @@ def main():
         assert result["storage"]["integrity"] == "ok"
         assert browser.returncode == 0, "Inspect the original browser log and screenshots"
         assert len(result["storage"]["projects"]) == 2
-        assert len(result["storage"]["tasks"]) == 2
-        assert len(result["storage"]["groups"]) == len(result["storage"]["milestones"]) == 1
-        assert len(result["storage"]["dependencies"]) == 1
         browser_evidence = json.loads((output / "browser/evidence.json").read_text())
         ids = browser_evidence["identities"]
-        assert all(task["project_id"] == ids["alpha"] for task in result["storage"]["tasks"])
-        correction, = result["storage"]["corrections"]
-        assert (correction["project_id"], correction["task_id"], correction["version"], correction["source_kind"]) == (ids["alpha"], ids["compare"], 2, "user_example")
+        if args.journey == "workspace":
+            assert len(result["storage"]["tasks"]) == 2
+            assert len(result["storage"]["groups"]) == len(result["storage"]["milestones"]) == 1
+            assert len(result["storage"]["dependencies"]) == 1
+            assert all(task["project_id"] == ids["alpha"] for task in result["storage"]["tasks"])
+            correction, = result["storage"]["corrections"]
+            assert (correction["project_id"], correction["task_id"], correction["version"], correction["source_kind"]) == (ids["alpha"], ids["compare"], 2, "user_example")
+        else:
+            verify_knowledge(result["storage"], browser_evidence)
         result["status"] = "passed"
     except BaseException as error:
         result.update(status="failed", error_type=type(error).__name__)
@@ -105,6 +112,24 @@ def main():
         result["storage_after_close"] = observe(host / "source.db")
         (output / "result.json").write_text(json.dumps(result, indent=2) + "\n")
         print(json.dumps({"status": result["status"], "receipt": str(output / "result.json")}), flush=True)
+
+
+def verify_knowledge(storage, browser):
+    """Match stored attachment bytes and wiki versions to the identities observed through the browser."""
+    ids = browser["identities"]
+    assert not storage["tasks"]
+    assert len(storage["files"]) == 2
+    for row in storage["files"]:
+        expected = browser["attachments"][str(row["project_id"])]
+        assert row["file_name"] == "muestra.csv" and row["id"] == expected["id"]
+        assert hashlib.sha256(Path(row["file_path"]).read_bytes()).hexdigest() == expected["sha256"]
+    assert len(storage["wiki"]) == 3
+    assert {(row["project_id"], row["path"]) for row in storage["wiki"]} == {
+        (ids["alpha"], "overview"), (ids["beta"], "overview"), (None, "overview")}
+    for row in storage["wiki"]:
+        expected = browser["documents"][str(row["project_id"]) if row["project_id"] is not None else "global"]
+        assert row["id"] == expected["id"] and row["content"] == expected["content"]
+    assert len(storage["wiki_revisions"]) == 4
 
 
 if __name__ == "__main__":

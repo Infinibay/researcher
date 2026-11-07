@@ -783,3 +783,13 @@ explicar mejor el aviso de enlace ajeno sin abrir datos bajo el proyecto incorre
 La altura de cabecera móvil ya se sigue enDD041. Observado en las capturas05/06 del
 [recorrido real](../design/audits/2026-11-07-workspace-live/report.md); no bloquea
 crear/organizar/corregir/recargar ni supone pérdida de contexto almacenado.
+
+## DD105 — alcance visual del recibo de guardado de Documentos
+
+La captura06 del [recorrido de conocimiento](../design/audits/2026-11-07-knowledge-live/report.md)
+muestra el recibo del guardado anterior mientras se consulta otra página con igual
+título y revisión. Los contenidos y ámbitos permanecen separados en la interfaz
+y SQLite, pero el aviso puede interpretarse como confirmación de la página actual.
+Después de todas las capacidades principales, vincular visualmente el recibo a
+su documento/ámbito o retirarlo al navegar. No perder la confirmación de una
+operación tardía. La altura de cabecera móvil sigue en DD041.

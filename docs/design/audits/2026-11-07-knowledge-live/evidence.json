@@ -1,0 +1,131 @@
+{
+  "status": "passed",
+  "scope": "Real HTTP/SQLite/files; only one actual upload response is held after server commit",
+  "states": [
+    {
+      "name": "01-late-upload-keeps-current-project",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "02-beta-csv-preview",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "03-alpha-same-name-preview",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "04-document-revision-after-reload",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "05-beta-same-path-document",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "06-explicit-global-library",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "writes": [
+    {
+      "method": "POST",
+      "path": "/api/projects",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/projects",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/files",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/files",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/wiki",
+      "status": 201
+    },
+    {
+      "method": "PUT",
+      "path": "/api/wiki/overview",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/wiki",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/wiki",
+      "status": 201
+    }
+  ],
+  "errors": [],
+  "checks": [
+    "late actual upload receipt does not change selected project",
+    "same-name files retain distinct bytes",
+    "real isolated CSV previews expose header assumption",
+    "downloads match original bytes",
+    "edited wiki survives reload",
+    "same-path project documents remain independent",
+    "global namespace explicitly selected"
+  ],
+  "attachments": {
+    "1": {
+      "id": 1,
+      "sha256": "ce76b92657ee8cd04be0d33bbaefadc893cc29d671fe56fa9a42628cf90df6cd",
+      "extraction_sha256": "1dcf2f253624830e29ed3f69ad900462f5e458f616c4edc248c271af60601318",
+      "format": "csv",
+      "persisted_source": false
+    },
+    "2": {
+      "id": 2,
+      "sha256": "af0109750777eb2b55961ec04bd082ff83faecbb7249e335e0d5b30355b57d30",
+      "extraction_sha256": "222ee89b7d6c10893ddb5f8720944a5f5f8709b4108e98e0391c999c2c19e818",
+      "format": "csv",
+      "persisted_source": false
+    }
+  },
+  "documents": {
+    "1": {
+      "id": 1,
+      "content": "Atlas: 137 unidades. Ejemplo del usuario: un título igual no demuestra que dos fuentes sean la misma versión.",
+      "revision": 2
+    },
+    "2": {
+      "id": 3,
+      "content": "Beta: 63 unidades. Este documento tiene la misma ruta overview y no reemplaza el documento de Atlas.",
+      "revision": 1
+    },
+    "global": {
+      "id": 2,
+      "content": "Biblioteca global: las notas de cada proyecto permanecen separadas de esta explicación compartida.",
+      "revision": 1
+    }
+  },
+  "identities": {
+    "alpha": 1,
+    "beta": 2
+  }
+}
