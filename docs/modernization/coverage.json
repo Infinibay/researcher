@@ -1259,7 +1259,11 @@
         "backend/runtime/subscription_provider.py",
         "backend/tests/runtime/test_subscription_provider.py",
         "docs/modernization/subscription-provider-evidence.json",
-        "docs/modernization/subscription-provider-results.json"
+        "docs/modernization/subscription-provider-results.json",
+        "docs/modernization/dependency-security-review.md",
+        "docs/modernization/dependency-security-results.json",
+        "docs/modernization/dependency-audit-results.json",
+        "docs/modernization/security-packaging.json"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable",
@@ -1342,7 +1346,11 @@
         "docs/modernization/native-proxy-evidence.json",
         "docs/modernization/native-proxy-results.json",
         "backend/tests/runtime/test_native_proxy.py",
-        "backend/tests/runtime/test_native_proxy_lifecycle.py"
+        "backend/tests/runtime/test_native_proxy_lifecycle.py",
+        "docs/modernization/dependency-security-review.md",
+        "docs/modernization/dependency-security-results.json",
+        "docs/modernization/dependency-audit-results.json",
+        "docs/modernization/security-packaging.json"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable",
@@ -2637,7 +2645,11 @@
         "backend/tests/runtime/test_run_recovery.py",
         "backend/tests/runtime/test_runtime_service.py",
         "evals/runtime/run_crash_recovery.py",
-        "frontend/tests/runtime.test.ts"
+        "frontend/tests/runtime.test.ts",
+        "docs/modernization/dependency-security-review.md",
+        "docs/modernization/dependency-security-results.json",
+        "docs/modernization/dependency-audit-results.json",
+        "docs/modernization/security-packaging.json"
       ],
       "remaining": [
         "Rendered browser and keyboard verification",
@@ -4454,21 +4466,26 @@
         "No new global backend suite, native image rebuild or model evaluation.",
         "No full acceptance of any of the 12 pages.",
         "No cross-browser or minimum-version product acceptance.",
-        "16 dependency audit entries remain; no forced incompatible overrides.",
-        "12 existing lint errors and the forced-colors Axe discrepancy remain open.",
+        "Initial16 audit entries resolved in the November7 dependency review; historical report retained.",
+        "9 current lint errors and the forced-colors Axe discrepancy remain open.",
         "Bundle-size warning and deprecated SSR esbuild fixture settings deferred."
       ]
     },
     "frontend_dependency_security_acceptance": {
-      "status": "pending",
-      "scope": "Resolve or explicitly assess the three remaining advisory families with a compatible Markdown/CSS/lint graph before product acceptance.",
+      "status": "complete",
+      "scope": "Three advisory families present in the November6 npm lock resolved with tested overrides; no broader security or UI acceptance.",
       "evidence": [
-        "docs/modernization/frontend-dependencies-audit.json",
-        "docs/architecture/frontend-dependencies.md"
+        "docs/modernization/dependency-security-review.md",
+        "docs/modernization/dependency-security-results.json",
+        "docs/modernization/dependency-audit-results.json",
+        "docs/modernization/security-packaging.json",
+        "frontend/package-lock.json",
+        "frontend/tests/ui/markdown-interaction.test.tsx"
       ],
       "limitations": [
-        "Current ordinary Markdown tests do not prove absence of prototype pollution.",
-        "Do not use audit --force or suppress findings to manufacture a green receipt."
+        "KaTeX regression assumes prior prototype pollution; no product pollution primitive demonstrated.",
+        "Rehype/micromark declare the older KaTeX range; compatibility observed only in the recorded renderer tests/build.",
+        "9 ESLint errors remain; no complete page or cross-browser acceptance."
       ]
     },
     "retained_application_configuration": {
@@ -4513,6 +4530,27 @@
         "No current global suite, human/scientific benchmark, full-page acceptance or refreshed historical candidate comparison. Owner UI fixture exercises read-only states without configured inference.",
         "Kernel scenarios use source backend and separate authorities; zero model turns. Physical closure preserves unknown command results; no additional concurrency authorization.",
         "Ken12controls and ownerHTTP/browser17states pass with real processes and fresh sources; bounded evidence, not blanket isolation or UI acceptance."
+      ]
+    },
+    "dependency_security_review": {
+      "status": "in_progress",
+      "scope": "Audit all committed Python/npm/tool locks, fix demonstrated consumers and prepare periodic maintenance.",
+      "evidence": [
+        "docs/modernization/dependency-security-review.md",
+        "docs/modernization/dependency-security-results.json",
+        "docs/modernization/dependency-audit-results.json",
+        "docs/modernization/security-packaging.json",
+        "docs/modernization/dependency-license-inventory.json",
+        "scripts/audit_dependencies.py",
+        ".github/workflows/dependency-audit.yml",
+        ".github/dependabot.yml"
+      ],
+      "remaining": [
+        "Ken0.18.0 exact ONNX pin, corrected-release compatibility and reachability",
+        "Chroma exporter persistent-configuration loading and isolation",
+        "139 missing license declarations and compatibility review",
+        "Publish/observe automation only at authorized integration",
+        "Broader security scenarios and final independent review"
       ]
     }
   }

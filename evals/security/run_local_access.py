@@ -11,7 +11,16 @@ REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO))
 
 
+def record_page(message, result):
+    """Retain legitimate catch-up frames while rejecting cross-project or unexpected socket data."""
+    assert message['type'] == 'events.page', message
+    assert message['project_id'] == 101, message
+    assert all(event['project_id'] == 101 for event in message['events'])
+    result.setdefault('event_pages', []).append(message)
+
+
 async def main():
+    """Verify owner/tool/anonymous boundaries and actual logout closure with durable event replay enabled."""
     import httpx
     from websockets.asyncio.client import connect as websocket
     from websockets.exceptions import ConnectionClosed, InvalidStatus
@@ -23,7 +32,7 @@ async def main():
     result = {"model_turns_submitted": 0}
     print("Local access integration:", root, flush=True)
     try:
-        async with backend(root, environment()) as (store, owner, api, _database):
+        async with backend(root, environment(), evidence=result) as (store, owner, api, _database):
             async with httpx.AsyncClient(
                 base_url=api, trust_env=False, timeout=5
             ) as anonymous:
@@ -103,13 +112,17 @@ async def main():
                 proxy=None,
             ) as ws:
                 await ws.send("ping")
-                assert json.loads(await asyncio.wait_for(ws.recv(), 2)) == {
-                    "type": "pong"
-                }
+                async with asyncio.timeout(5):
+                    while True:
+                        message = json.loads(await ws.recv())
+                        if message == {'type': 'pong'}:
+                            break
+                        record_page(message, result)
                 assert (await owner.delete("/api/session")).status_code == 204
                 try:
-                    await asyncio.wait_for(ws.recv(), 2)
-                    raise AssertionError("Logged out socket remained usable")
+                    async with asyncio.timeout(5):
+                        while True:
+                            record_page(json.loads(await ws.recv()), result)
                 except ConnectionClosed as exc:
                     assert exc.rcvd.code == 1008
             assert (await owner.get("/api/projects")).status_code == 401

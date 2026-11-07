@@ -5,6 +5,12 @@ El frontend compila con el conjunto actualizado y conserva sus contratos de
 interacción comprobados. Esto no acepta las doce páginas ni declara terminada
 la modernización. [Resultados](../modernization/frontend-dependencies-results.json).
 
+Actualización del7noviembre: KaTeX0.19.1, minimatch11.0.5 y selector-parser6.1.5
+resuelven los tres avisos del corte inicial.136 contratos/10 DOM, build y árbol
+pasan; auditoría npm sin avisos y9 errores de lint pendientes. Se probaron overrides
+limitados y se conserva el alcance de cada comprobación en la
+[revisión posterior](../modernization/dependency-security-review.md).
+
 ## Conjunto elegido
 
 | Componente | Versión comprobada | Decisión |
@@ -16,7 +22,7 @@ la modernización. [Resultados](../modernization/frontend-dependencies-results.j
 | Vite / plugin React | 8.3.6 / 6.2.1 | Compilación Oxc/Rolldown, proxy local conservado |
 | TypeScript | 6.0.3 | Se conserva `strict`; tipos Vite para imports CSS |
 | Tailwind / plugin Vite / typography | 4.3.5 / 4.3.5 / 0.5.20 | Configuración CSS, colores propios y tipografía documental |
-| React Markdown / KaTeX | 10.1.0 / 0.16.47 | Misma versión de KaTeX para CSS y renderizado de rehype |
+| React Markdown / KaTeX | 10.1.0 / 0.19.1 | Misma versión de KaTeX para CSS y renderizado de rehype |
 | Vitest / jsdom | 5.1.0 / 31.0.0 | Nuevas pruebas DOM con Testing Library |
 | ESLint / typescript-eslint | 10.14.0 / 8.72.1 | Configuración recomendada sin silenciar las incidencias existentes |
 | Playwright / axe | 1.64.1 / 4.14.0 | Se conserva el conjunto de navegador ya utilizado |
@@ -40,10 +46,11 @@ del producto en esas versiones**, incluidos popovers nativos.
 Se retiró Recharts porque no tiene imports en `src` ni `tests`; los diagramas
 existentes no lo consumen. El resto del stack Markdown conserva sus plugins
 GFM, matemáticas y resaltado. Rehype KaTeX y micromark math requieren KaTeX
-`^0.16.0`: subir sólo el CSS a 0.19 mezclaría versiones. No se forzaron rangos
-incompatibles mediante overrides.
+`^0.16.0`: subir sólo el CSS a0.19 mezclaría versiones. La revisión posterior
+fija la misma0.19.1 para ambos mediante un override explícito, comprobando su
+compatibilidad con el renderizador real. La migración inicial no utilizaba overrides.
 
-## Verificación y límites
+## Verificación y límites de la migración inicial del6noviembre
 
 - `npm ci --no-audit --no-fund`: 373 paquetes instalados; `npm ls` termina 0.
 - `npm test`: 126 contratos existentes y 3 pruebas DOM pasan, antes y después
@@ -74,7 +81,12 @@ Los runners admiten `BROWSER_AUDIT_OUT` para conservar los ensayos anteriores.
 `home.browser.mjs`, `flow.browser.mjs` y `access.browser.mjs` se ejecutan contra
 `npm run preview -- --host 127.0.0.1 --port 5179 --strictPort`.
 
-## Pendientes conservados
+## Pendientes observados en el corte inicial (histórico)
+
+Los tres avisos de dependencias descritos abajo se corrigieron el7noviembre;
+no son el estado del lock actual. Se retiene el diagnóstico original y su
+limitación sobre contaminación de prototipos. La seguridad integral del proyecto
+y la aceptación de páginas siguen abiertas.
 
 `npm run lint` termina 1 con los mismos 12 hallazgos del baseline: cinco usos de
 `any`, dos bloques vacíos, dos regex de controles, dos variables/imports sin uso

@@ -1,0 +1,190 @@
+{
+  "base_commit": "77d79c0",
+  "status": "partial_security_review",
+  "started_at": "2026-11-07T07:12:56Z",
+  "real_model_turns": 0,
+  "dependency_changes": {
+    "katex": [
+      "0.16.47",
+      "0.19.1"
+    ],
+    "minimatch": [
+      "10.2.6",
+      "11.0.5"
+    ],
+    "postcss-selector-parser": [
+      "6.0.10",
+      "6.1.5"
+    ],
+    "filelock": [
+      "3.32.7",
+      "4.2.9"
+    ]
+  },
+  "python_before": {
+    "packages": 75,
+    "affected": [
+      "filelock==3.32.7"
+    ],
+    "advisory_entries": 13,
+    "distinct_ids": 13
+  },
+  "python_runtime_after": {
+    "packages": 75,
+    "affected": [],
+    "advisory_entries": 0,
+    "distinct_ids": 0
+  },
+  "python_directed": {
+    "cases": 36,
+    "passed": 36,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 14.179
+  },
+  "auditor_tests": {
+    "cases": 5,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 0.082
+  },
+  "frontend": {
+    "contract_cases_passed": 136,
+    "dom_cases_passed": 10,
+    "build_exit_code": 0,
+    "tree_exit_code": 0,
+    "audit_exit_code": 0,
+    "lint_exit_code": 1,
+    "lint_errors": 9
+  },
+  "http_websocket": {
+    "model_turns_submitted": 0,
+    "anonymous_and_tool_owner_separation": "passed",
+    "event_pages": [
+      {
+        "type": "events.page",
+        "project_id": 101,
+        "after_id": "0",
+        "next_after_id": "1",
+        "has_more": false,
+        "events": [
+          {
+            "event_id": "1",
+            "type": "task_created",
+            "project_id": 101,
+            "source": "user",
+            "entity_type": "task",
+            "entity_id": 1001,
+            "data": {
+              "title": "Policy report",
+              "type": "research",
+              "status": "in_progress",
+              "assigned_to": null
+            },
+            "data_unavailable": false,
+            "timestamp": "2026-11-07 07:26:11"
+          }
+        ],
+        "reset_required": false,
+        "resume_after_id": null,
+        "reset_reason": null
+      }
+    ],
+    "owner_http_csrf_websocket_logout": "passed",
+    "owned_backend_terminal": true,
+    "service_exit": -15,
+    "status": "passed"
+  },
+  "python_lint": {
+    "exit_code": 1,
+    "findings": 3
+  },
+  "raw_evidence": [
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/security-lock-red.log",
+      "sha256": "56ae6164600c85f0f7ad8dfdbc7c7f320c96c67f3d36611bede9c4edbd807c03"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/security-math-red.log",
+      "sha256": "85b487430e42bd7f8e67efac7a6ed01c79e13d88880f80705b831263e1fb76de"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/security-math-reproduction.log",
+      "sha256": "fc7e98d7f7e448bad9eb94a0e8bb6732e86bc2b6697c77db52a1214028b10450"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/security-frontend-test.log",
+      "sha256": "ac104030f6c1e466c21e527a670a6e58a9b707758526da3ec81312e999d0af36"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/security-frontend-build.log",
+      "sha256": "0e611e0d2d7a0dda55d5cabed311b20c4c96158d70e7cd9daf90e2076e9b91bb"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/security-frontend-tree.log",
+      "sha256": "dc25b6abcc1500eec89a6421811f73da195ce59005ecb14f17184d316b501a0f"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/security-targeted.xml",
+      "sha256": "2bede2defdee567e38d76943a130d00d1a58c7ffcd31db35ec37003d1c440cd9"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/security-auditor-final-tests.xml",
+      "sha256": "bab7452c36101d421cf9cba211186a56fa2db7bdb5a5f08691fc649b9424db6b"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/security-local-access.log",
+      "sha256": "ebf1ebc00e59b3fca982b63eee55ebbb5842ef3a2cdc48bd9330a4492e9485f0"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/security-local-access-current.log",
+      "sha256": "09d87ba243cab4d6dd0e6a4c602d86b7adf526b6da3d40b2a1db5a576d643194"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/security-final-build.log",
+      "sha256": "588094cc1c2c14341d920d73064c5d67a0343ae23bcaead2374a15abdc1a50d5"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/security-install.log",
+      "sha256": "a5f748d22eb07b19443d58821aed577d793ddf93583a7b12bfa3456446410ddb"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/security-package.xml",
+      "sha256": "80f15e5705cae3f55d941d70242c17112085f3693c0cbfcc030438e36467a10e"
+    }
+  ],
+  "retained_nonpassing_attempts": [
+    {
+      "artifact": "security-math-red.log",
+      "interpretation": "Invalid first reproduction: nonwritable prototype caused a render error; not evidence of safety."
+    },
+    {
+      "artifact": "security-math-reproduction.log",
+      "interpretation": "Corrected mutable-prototype fixture exposed the external image before upgrade."
+    },
+    {
+      "artifact": "security-lock-red.log",
+      "interpretation": "Old lock wrapper truncated existing file contents."
+    },
+    {
+      "artifact": "security-local-access.log",
+      "interpretation": "Old harness expected pong before durable catch-up page; auth checks were not the cause."
+    }
+  ],
+  "remaining": [
+    "Coherent patched Ken/ONNX release and compatibility/reachability evaluation",
+    "Chroma persistent configuration review and exporter isolation",
+    "License declarations and compatibility review",
+    "Activate and observe GitHub automation after authorized integration",
+    "Broader D10-D12 threat scenarios and final independent review"
+  ],
+  "limits": [
+    "No global-suite rerun",
+    "No full security acceptance",
+    "No claim of prototype-pollution primitive in the product",
+    "No model inference, user-data migration or remote workflow execution"
+  ],
+  "record_cutoff_at": "2026-11-07T07:39:10Z",
+  "elapsed_seconds_to_record_cutoff": 1574
+}

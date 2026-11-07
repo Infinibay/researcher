@@ -28,7 +28,44 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: comparación de contexto ejecutada; revisión humana pendiente
+## Etapa actual: correcciones y auditoría registradas; seguridad integral pendiente
+
+Se actualizaron KaTeX, minimatch, selector-parser y filelock, con reproducciones
+válidas del renderizado bajo contaminación previa y de truncamiento del archivo
+de bloqueo. Pasan36 pruebas Python de fuente,5 del auditor y33 del wheel;
+604 archivos coinciden,324 productivos. Pasan136 contratos frontend/10 DOM,
+build y árbol. HTTP/WS real confirma aislamiento, CSRF y cierre al salir; servicio
+cerrado, cero inferencias.16 definiciones documentadas.
+[Informe y límites](dependency-security-review.md),
+[resultados](dependency-security-results.json).
+
+**Lista vigente al cerrar este bloque acotado:**
+- Terminado: correcciones de cuatro dependencias, auditoría de todos los locks,
+  inventario de licencias y configuración de mantenimiento verificada localmente.
+  **26 min 14 s**,07:12:56–07:39:10 UTC, hasta el corte de validación y registro.
+- Terminado en el bloque previo: siete comparaciones de contexto, **36min43s**;
+  revisión humana todavía pendiente.
+- Siguiente principal: comunicación; conectar preguntas materiales con su registro
+  respondible y preservar el pedido original al corregir/reanudar. Todavía no
+  comenzó: registrar su inicio al comenzar y publicar esta lista actualizada.
+- Pendiente principal de seguridad: Ken/ONNX, exportador Chroma,139 declaraciones
+  de licencia ausentes/revisión de compatibilidad y escenarios amplios. La
+  automatización está preparada; no se publicó ni ejecutó en GitHub.
+- Pendiente: datos históricos reales del propietario; recuperación ante fallos
+  y actores activos; demás perfiles/evaluación humana y científica; aceptación
+  integral de12 páginas.
+- Después de todas las capacidades principales: detalles acumulados, validación
+  global final y revisión independiente del conjunto. DD083 conserva3 avisos
+  Ruff y9 errores ESLint; no hubo otra suite global ni aceptación de páginas.
+
+La auditoría completa termina con hallazgos: ONNX tiene19 entradas/12 IDs distintos
+bajo el pin de Ken0.18.0; Chroma tiene5 entradas/4 IDs distintos sin parche publicado
+observado. El producto principal y npm no presentan avisos conocidos en este corte.
+No se fuerza una combinación incompatible ni se ocultan los hallazgos. Siguen43
+escenarios amplios abiertos y0/12 páginas completamente aceptadas; no hay porcentaje
+global defendible. Sólo se cierra la entrega estrecha de los tres avisos frontend.
+
+## Etapa anterior: comparación de contexto ejecutada; revisión humana pendiente
 
 Se observaron **7 pares**,2 de desarrollo y5 reservados, con16 turnos reales por
 suscripción y Ken. Modelo/esfuerzo, catálogo e inputs sustantivos coinciden;

@@ -1,0 +1,26 @@
+{
+  "files": [
+    {
+      "path": "scripts/audit_dependencies.py",
+      "definitions": 7,
+      "missing": []
+    },
+    {
+      "path": "evals/security/test_dependency_audit.py",
+      "definitions": 3,
+      "missing": []
+    },
+    {
+      "path": "evals/security/run_local_access.py",
+      "definitions": 3,
+      "missing": []
+    },
+    {
+      "path": "backend/tests/config/test_dependency_security.py",
+      "definitions": 3,
+      "missing": []
+    }
+  ],
+  "total_definitions": 16,
+  "frontend": "Existing module JSDoc retained; regression is a named Vitest test callback."
+}

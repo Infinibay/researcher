@@ -33,4 +33,18 @@ describe('document reading after dependency migration', () => {
       expect(link.getAttribute('href') ?? '').not.toMatch(/^\s*(?:javascript|data|vbscript):/i)
     }
   })
+
+  it('does not inherit trusted math rendering from an already polluted prototype', () => {
+    const prototype = Object.prototype as Record<string, unknown>
+    const previous = Object.getOwnPropertyDescriptor(prototype, 'trust')
+    Object.defineProperty(prototype, 'trust', { value: true, writable: true, configurable: true })
+    try {
+      const { container } = render(<MarkdownRenderer content={'$x + 1$\n\n$\\includegraphics{https://untrusted.invalid/tracker.png}$'} />)
+      expect(container.querySelector('img')).toBeNull()
+      expect(container.querySelector('math')).not.toBeNull()
+    } finally {
+      if (previous) Object.defineProperty(prototype, 'trust', previous)
+      else delete prototype.trust
+    }
+  })
 })

@@ -4,6 +4,19 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Dependencias corregidas y mantenimiento preparado:** cuatro actualizaciones;
+  producto Python y npm sin avisos conocidos en el corte. Pasan36 pruebas de
+  fuente,5 del auditor y33 instaladas;604 archivos coinciden,324 productivos.
+  Pasan136 contratos/10 DOM, build y árbol; HTTP/WS real confirma separación de
+  accesos y cierre al salir, sin inferencias.16 definiciones documentadas.
+  La auditoría completa sigue fallando por Ken/ONNX y Chroma;139 declaraciones
+  de licencia ausentes requieren revisión. Workflow/Dependabot preparados y
+  comprobados localmente, todavía no activos en GitHub. DD083 conserva3 avisos
+  Ruff y9 errores ESLint. Corte de26min14s; siguiente principal: preguntas
+  respondibles y continuidad del pedido tras una corrección.
+  [Informe](dependency-security-review.md), [resultados](dependency-security-results.json),
+  [paquete](security-packaging.json).
+
 - **Comparación de contexto ejecutada, calidad aún sin aceptar:** siete pares,
   dos de desarrollo/cinco reservados,16 turnos por suscripción con Ken real.
   Coinciden contexto/modelo/catálogo y políticas entregadas. La corrección activa

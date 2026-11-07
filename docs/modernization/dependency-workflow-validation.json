@@ -1,0 +1,9 @@
+{
+  "yaml_parse": "passed",
+  "triggers_and_read_only_permissions": "passed",
+  "actions_pinned_to_verified_release_commits": "passed",
+  "uv_lock_check": "passed",
+  "requirements_export_reproducible": "passed",
+  "github_execution": "not_run",
+  "actionlint": "not_available"
+}

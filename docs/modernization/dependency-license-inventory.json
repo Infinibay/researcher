@@ -1,0 +1,4117 @@
+{
+  "frontend": [
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@adobe/css-tools",
+      "status": "declared",
+      "version": "4.5.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/@axe-core/playwright",
+      "status": "declared",
+      "version": "4.14.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/@babel/code-frame",
+      "status": "missing",
+      "version": "7.29.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/@babel/helper-validator-identifier",
+      "status": "missing",
+      "version": "7.28.5"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/@babel/runtime",
+      "status": "missing",
+      "version": "7.28.6"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@cacheable/memory",
+      "status": "declared",
+      "version": "2.2.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@cacheable/utils",
+      "status": "declared",
+      "version": "2.5.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@corvu/utils",
+      "status": "declared",
+      "version": "0.4.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@eslint-community/eslint-utils",
+      "status": "declared",
+      "version": "4.10.1"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@eslint-community/eslint-utils/node_modules/eslint-visitor-keys",
+      "status": "declared",
+      "version": "3.4.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@eslint-community/regexpp",
+      "status": "declared",
+      "version": "4.12.2"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@eslint/config-array",
+      "status": "declared",
+      "version": "0.23.5"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@eslint/config-helpers",
+      "status": "declared",
+      "version": "0.7.0"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@eslint/core",
+      "status": "declared",
+      "version": "1.2.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@eslint/js",
+      "status": "declared",
+      "version": "10.0.1"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@eslint/object-schema",
+      "status": "declared",
+      "version": "3.0.5"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@eslint/plugin-kit",
+      "status": "declared",
+      "version": "0.7.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@exodus/bytes",
+      "status": "declared",
+      "version": "1.16.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@floating-ui/core",
+      "status": "declared",
+      "version": "1.8.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@floating-ui/dom",
+      "status": "declared",
+      "version": "1.8.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@floating-ui/utils",
+      "status": "declared",
+      "version": "0.2.12"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@humanfs/core",
+      "status": "declared",
+      "version": "0.19.2"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@humanfs/node",
+      "status": "declared",
+      "version": "0.16.8"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@humanfs/types",
+      "status": "declared",
+      "version": "0.15.0"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@humanwhocodes/module-importer",
+      "status": "declared",
+      "version": "1.0.1"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@humanwhocodes/retry",
+      "status": "declared",
+      "version": "0.4.3"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@internationalized/number",
+      "status": "declared",
+      "version": "3.6.9"
+    },
+    {
+      "declaration": "BlueOak-1.0.0",
+      "path": "node_modules/@isaacs/nonrecursive-glob-match",
+      "status": "declared",
+      "version": "1.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@jridgewell/gen-mapping",
+      "status": "declared",
+      "version": "0.3.13"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@jridgewell/remapping",
+      "status": "declared",
+      "version": "2.3.5"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/@jridgewell/resolve-uri",
+      "status": "missing",
+      "version": "3.1.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@jridgewell/sourcemap-codec",
+      "status": "declared",
+      "version": "1.6.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/@jridgewell/trace-mapping",
+      "status": "missing",
+      "version": "0.3.31"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@keyv/bigmap",
+      "status": "declared",
+      "version": "1.3.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@keyv/serialize",
+      "status": "declared",
+      "version": "1.1.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@kobalte/core",
+      "status": "declared",
+      "version": "0.13.14"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@kobalte/utils",
+      "status": "declared",
+      "version": "0.9.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@oxc-project/types",
+      "status": "declared",
+      "version": "0.156.0"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@playwright/test",
+      "status": "declared",
+      "version": "1.64.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-android-arm-eabi",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-android-arm64",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-darwin-arm64",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-darwin-x64",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-freebsd-x64",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-linux-arm-gnueabihf",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-linux-arm64-gnu",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-linux-arm64-musl",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-linux-ppc64-gnu",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-linux-s390x-gnu",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-linux-x64-gnu",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-linux-x64-musl",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-openharmony-arm64",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-win32-arm64-msvc",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/binding-win32-x64-msvc",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@rolldown/pluginutils",
+      "status": "declared",
+      "version": "1.0.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/event-listener",
+      "status": "declared",
+      "version": "2.4.6"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/keyed",
+      "status": "declared",
+      "version": "1.5.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/map",
+      "status": "declared",
+      "version": "0.4.13"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/media",
+      "status": "declared",
+      "version": "2.3.6"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/props",
+      "status": "declared",
+      "version": "3.2.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/refs",
+      "status": "declared",
+      "version": "1.1.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/resize-observer",
+      "status": "declared",
+      "version": "2.2.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/rootless",
+      "status": "declared",
+      "version": "1.5.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/static-store",
+      "status": "declared",
+      "version": "0.1.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/storage",
+      "status": "declared",
+      "version": "1.3.11"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/transition-group",
+      "status": "declared",
+      "version": "1.1.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/trigger",
+      "status": "declared",
+      "version": "1.2.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@solid-primitives/utils",
+      "status": "declared",
+      "version": "6.4.1"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/@swc/helpers",
+      "status": "declared",
+      "version": "0.5.24"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/node",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-android-arm64",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-darwin-arm64",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-darwin-x64",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-freebsd-x64",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-linux-arm-gnueabihf",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-linux-arm64-gnu",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-linux-arm64-musl",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-linux-x64-gnu",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-linux-x64-musl",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-wasm32-wasi",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@emnapi/core",
+      "status": "declared",
+      "version": "1.11.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@emnapi/runtime",
+      "status": "declared",
+      "version": "1.11.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@emnapi/wasi-threads",
+      "status": "declared",
+      "version": "1.2.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@napi-rs/wasm-runtime",
+      "status": "declared",
+      "version": "1.2.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@tybys/wasm-util",
+      "status": "declared",
+      "version": "0.10.3"
+    },
+    {
+      "declaration": "0BSD",
+      "path": "node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/tslib",
+      "status": "declared",
+      "version": "2.8.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-win32-arm64-msvc",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/oxide-win32-x64-msvc",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/typography",
+      "status": "declared",
+      "version": "0.5.20"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tailwindcss/vite",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tanstack/match-sorter-utils",
+      "status": "declared",
+      "version": "9.2.6"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tanstack/query-core",
+      "status": "declared",
+      "version": "5.107.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tanstack/query-devtools",
+      "status": "declared",
+      "version": "5.107.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tanstack/react-query",
+      "status": "declared",
+      "version": "5.107.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tanstack/react-query-devtools",
+      "status": "declared",
+      "version": "5.107.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tanstack/solid-virtual",
+      "status": "declared",
+      "version": "3.13.53"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@tanstack/virtual-core",
+      "status": "declared",
+      "version": "3.19.11"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@testing-library/dom",
+      "status": "declared",
+      "version": "10.4.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@testing-library/jest-dom",
+      "status": "declared",
+      "version": "7.0.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@testing-library/jest-dom/node_modules/dom-accessibility-api",
+      "status": "declared",
+      "version": "0.6.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@testing-library/react",
+      "status": "declared",
+      "version": "16.3.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@testing-library/user-event",
+      "status": "declared",
+      "version": "14.6.8"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@types/aria-query",
+      "status": "declared",
+      "version": "5.0.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@types/chai",
+      "status": "declared",
+      "version": "5.2.3"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/@types/debug",
+      "status": "missing",
+      "version": "4.1.12"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@types/deep-eql",
+      "status": "declared",
+      "version": "4.0.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@types/esrecurse",
+      "status": "declared",
+      "version": "4.3.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/@types/estree",
+      "status": "missing",
+      "version": "1.0.8"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/@types/estree-jsx",
+      "status": "missing",
+      "version": "1.0.5"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/@types/hast",
+      "status": "missing",
+      "version": "3.0.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@types/json-schema",
+      "status": "declared",
+      "version": "7.0.15"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/@types/katex",
+      "status": "missing",
+      "version": "0.16.8"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/@types/mdast",
+      "status": "missing",
+      "version": "4.0.4"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/@types/ms",
+      "status": "missing",
+      "version": "2.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@types/node",
+      "status": "declared",
+      "version": "24.19.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@types/react",
+      "status": "declared",
+      "version": "19.3.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@types/react-dom",
+      "status": "declared",
+      "version": "19.3.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/@types/unist",
+      "status": "missing",
+      "version": "3.0.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@typescript-eslint/eslint-plugin",
+      "status": "declared",
+      "version": "8.72.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@typescript-eslint/eslint-plugin/node_modules/ignore",
+      "status": "declared",
+      "version": "7.0.14"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@typescript-eslint/parser",
+      "status": "declared",
+      "version": "8.72.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@typescript-eslint/project-service",
+      "status": "declared",
+      "version": "8.72.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@typescript-eslint/scope-manager",
+      "status": "declared",
+      "version": "8.72.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@typescript-eslint/tsconfig-utils",
+      "status": "declared",
+      "version": "8.72.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@typescript-eslint/type-utils",
+      "status": "declared",
+      "version": "8.72.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@typescript-eslint/types",
+      "status": "declared",
+      "version": "8.72.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@typescript-eslint/typescript-estree",
+      "status": "declared",
+      "version": "8.72.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@typescript-eslint/utils",
+      "status": "declared",
+      "version": "8.72.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@typescript-eslint/visitor-keys",
+      "status": "declared",
+      "version": "8.72.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/@ungap/structured-clone",
+      "status": "missing",
+      "version": "1.3.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@vitejs/plugin-react",
+      "status": "declared",
+      "version": "6.2.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@vitest/mocker",
+      "status": "declared",
+      "version": "5.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/@vitest/spy",
+      "status": "declared",
+      "version": "5.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/acorn",
+      "status": "declared",
+      "version": "8.19.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/acorn-jsx",
+      "status": "declared",
+      "version": "5.3.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/ajv",
+      "status": "declared",
+      "version": "6.15.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/ansi-regex",
+      "status": "declared",
+      "version": "5.0.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/ansi-styles",
+      "status": "declared",
+      "version": "5.2.0"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/aria-query",
+      "status": "declared",
+      "version": "5.3.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/assertion-error",
+      "status": "declared",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/axe-core",
+      "status": "declared",
+      "version": "4.14.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/bail",
+      "status": "missing",
+      "version": "2.0.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/balanced-match",
+      "status": "declared",
+      "version": "4.0.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/bcp-47",
+      "status": "declared",
+      "version": "2.1.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/bcp-47-match",
+      "status": "declared",
+      "version": "2.0.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/brace-expansion",
+      "status": "declared",
+      "version": "5.0.12"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/cacheable",
+      "status": "declared",
+      "version": "2.5.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/ccount",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/chai",
+      "status": "declared",
+      "version": "6.3.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/character-entities",
+      "status": "missing",
+      "version": "2.0.2"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/character-entities-html4",
+      "status": "missing",
+      "version": "2.1.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/character-entities-legacy",
+      "status": "missing",
+      "version": "3.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/character-reference-invalid",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/clsx",
+      "status": "missing",
+      "version": "2.1.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/comma-separated-tokens",
+      "status": "missing",
+      "version": "2.0.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/commander",
+      "status": "declared",
+      "version": "15.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/cookie",
+      "status": "declared",
+      "version": "1.1.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/copy-anything",
+      "status": "declared",
+      "version": "4.1.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/cross-spawn",
+      "status": "declared",
+      "version": "7.0.6"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/css.escape",
+      "status": "declared",
+      "version": "1.5.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/cssesc",
+      "status": "missing",
+      "version": "3.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/csstype",
+      "status": "missing",
+      "version": "3.2.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/data-urls",
+      "status": "declared",
+      "version": "8.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/debug",
+      "status": "missing",
+      "version": "4.4.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/decimal.js",
+      "status": "declared",
+      "version": "10.6.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/decode-named-character-reference",
+      "status": "missing",
+      "version": "1.3.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/deep-is",
+      "status": "declared",
+      "version": "0.1.4"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/dequal",
+      "status": "missing",
+      "version": "2.0.3"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/detect-libc",
+      "status": "declared",
+      "version": "2.1.2"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/devlop",
+      "status": "missing",
+      "version": "1.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/dom-accessibility-api",
+      "status": "declared",
+      "version": "0.5.16"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/enhanced-resolve",
+      "status": "declared",
+      "version": "5.26.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/entities",
+      "status": "missing",
+      "version": "6.0.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/es-module-lexer",
+      "status": "declared",
+      "version": "2.3.2"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/escape-string-regexp",
+      "status": "missing",
+      "version": "5.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/eslint",
+      "status": "declared",
+      "version": "10.14.0"
+    },
+    {
+      "declaration": "BSD-2-Clause",
+      "path": "node_modules/eslint-scope",
+      "status": "declared",
+      "version": "9.1.2"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/eslint-visitor-keys",
+      "status": "declared",
+      "version": "5.0.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/eslint/node_modules/escape-string-regexp",
+      "status": "declared",
+      "version": "4.0.0"
+    },
+    {
+      "declaration": "BSD-2-Clause",
+      "path": "node_modules/espree",
+      "status": "declared",
+      "version": "11.2.0"
+    },
+    {
+      "declaration": "BSD-3-Clause",
+      "path": "node_modules/esquery",
+      "status": "declared",
+      "version": "1.7.0"
+    },
+    {
+      "declaration": "BSD-2-Clause",
+      "path": "node_modules/esrecurse",
+      "status": "declared",
+      "version": "4.3.0"
+    },
+    {
+      "declaration": "BSD-2-Clause",
+      "path": "node_modules/estraverse",
+      "status": "declared",
+      "version": "5.3.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/estree-util-is-identifier-name",
+      "status": "missing",
+      "version": "3.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/estree-walker",
+      "status": "declared",
+      "version": "3.0.3"
+    },
+    {
+      "declaration": "BSD-2-Clause",
+      "path": "node_modules/esutils",
+      "status": "declared",
+      "version": "2.0.3"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/expect-type",
+      "status": "declared",
+      "version": "1.4.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/extend",
+      "status": "missing",
+      "version": "3.0.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/fast-deep-equal",
+      "status": "declared",
+      "version": "3.1.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/fast-json-stable-stringify",
+      "status": "declared",
+      "version": "2.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/fast-levenshtein",
+      "status": "declared",
+      "version": "2.0.6"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/file-entry-cache",
+      "status": "declared",
+      "version": "11.1.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/find-up",
+      "status": "declared",
+      "version": "5.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/flat-cache",
+      "status": "declared",
+      "version": "6.1.23"
+    },
+    {
+      "declaration": "ISC",
+      "path": "node_modules/flatted",
+      "status": "declared",
+      "version": "3.4.4"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/fsevents",
+      "status": "missing",
+      "version": "2.3.3"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/glob-parent",
+      "status": "missing",
+      "version": "6.0.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/goober",
+      "status": "declared",
+      "version": "2.1.19"
+    },
+    {
+      "declaration": "ISC",
+      "path": "node_modules/graceful-fs",
+      "status": "declared",
+      "version": "4.2.11"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/hashery",
+      "status": "declared",
+      "version": "1.5.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/hast-util-from-dom",
+      "status": "missing",
+      "version": "5.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/hast-util-from-html",
+      "status": "missing",
+      "version": "2.0.3"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/hast-util-from-html-isomorphic",
+      "status": "missing",
+      "version": "2.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/hast-util-from-parse5",
+      "status": "missing",
+      "version": "8.0.3"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/hast-util-is-element",
+      "status": "missing",
+      "version": "3.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/hast-util-parse-selector",
+      "status": "missing",
+      "version": "4.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/hast-util-to-jsx-runtime",
+      "status": "missing",
+      "version": "2.3.6"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/hast-util-to-text",
+      "status": "missing",
+      "version": "4.0.2"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/hast-util-whitespace",
+      "status": "missing",
+      "version": "3.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/hastscript",
+      "status": "missing",
+      "version": "9.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/highlight.js",
+      "status": "missing",
+      "version": "11.11.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/hookified",
+      "status": "declared",
+      "version": "1.15.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/html-encoding-sniffer",
+      "status": "declared",
+      "version": "7.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/html-url-attributes",
+      "status": "missing",
+      "version": "3.0.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/ignore",
+      "status": "declared",
+      "version": "5.3.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/imurmurhash",
+      "status": "declared",
+      "version": "0.1.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/indent-string",
+      "status": "declared",
+      "version": "4.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/inline-style-parser",
+      "status": "missing",
+      "version": "0.2.7"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/is-alphabetical",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/is-alphanumerical",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/is-decimal",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/is-extglob",
+      "status": "missing",
+      "version": "2.1.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/is-glob",
+      "status": "missing",
+      "version": "4.0.3"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/is-hexadecimal",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/is-plain-obj",
+      "status": "missing",
+      "version": "4.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/is-potential-custom-element-name",
+      "status": "declared",
+      "version": "1.0.1"
+    },
+    {
+      "declaration": "ISC",
+      "path": "node_modules/isexe",
+      "status": "declared",
+      "version": "2.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/jiti",
+      "status": "declared",
+      "version": "2.7.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/js-tokens",
+      "status": "missing",
+      "version": "4.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/jsdom",
+      "status": "declared",
+      "version": "31.0.0"
+    },
+    {
+      "declaration": "BSD-2-Clause",
+      "path": "node_modules/jsdom/node_modules/entities",
+      "status": "declared",
+      "version": "9.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/jsdom/node_modules/parse5",
+      "status": "declared",
+      "version": "8.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/json-schema-traverse",
+      "status": "declared",
+      "version": "0.4.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/json-stable-stringify-without-jsonify",
+      "status": "declared",
+      "version": "1.0.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/katex",
+      "status": "declared",
+      "version": "0.19.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/keyv",
+      "status": "declared",
+      "version": "5.6.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/levn",
+      "status": "declared",
+      "version": "0.4.1"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss-android-arm64",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss-darwin-arm64",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss-darwin-x64",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss-freebsd-x64",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss-linux-arm-gnueabihf",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss-linux-arm64-gnu",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss-linux-arm64-musl",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss-linux-x64-gnu",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss-linux-x64-musl",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss-win32-arm64-msvc",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MPL-2.0",
+      "path": "node_modules/lightningcss-win32-x64-msvc",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/locate-path",
+      "status": "declared",
+      "version": "6.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/longest-streak",
+      "status": "missing",
+      "version": "3.1.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/lowlight",
+      "status": "missing",
+      "version": "3.3.0"
+    },
+    {
+      "declaration": "BlueOak-1.0.0",
+      "path": "node_modules/lru-cache",
+      "status": "declared",
+      "version": "11.5.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/lz-string",
+      "status": "declared",
+      "version": "1.5.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/magic-string",
+      "status": "declared",
+      "version": "1.4.5"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/markdown-table",
+      "status": "missing",
+      "version": "3.0.4"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/mdast-util-find-and-replace",
+      "status": "missing",
+      "version": "3.0.2"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/mdast-util-from-markdown",
+      "status": "missing",
+      "version": "2.0.2"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/mdast-util-gfm",
+      "status": "missing",
+      "version": "3.1.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/mdast-util-gfm-autolink-literal",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/mdast-util-gfm-footnote",
+      "status": "missing",
+      "version": "2.1.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/mdast-util-gfm-strikethrough",
+      "status": "missing",
+      "version": "2.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/mdast-util-gfm-table",
+      "status": "missing",
+      "version": "2.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/mdast-util-gfm-task-list-item",
+      "status": "missing",
+      "version": "2.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/mdast-util-math",
+      "status": "missing",
+      "version": "3.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/mdast-util-mdx-expression",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/mdast-util-mdx-jsx",
+      "status": "missing",
+      "version": "3.2.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/mdast-util-mdxjs-esm",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/mdast-util-phrasing",
+      "status": "missing",
+      "version": "4.1.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/mdast-util-to-hast",
+      "status": "missing",
+      "version": "13.2.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/mdast-util-to-markdown",
+      "status": "missing",
+      "version": "2.1.2"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/mdast-util-to-string",
+      "status": "missing",
+      "version": "4.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark",
+      "status": "missing",
+      "version": "4.0.2"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-core-commonmark",
+      "status": "missing",
+      "version": "2.0.3"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-extension-gfm",
+      "status": "missing",
+      "version": "3.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-extension-gfm-autolink-literal",
+      "status": "missing",
+      "version": "2.1.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-extension-gfm-footnote",
+      "status": "missing",
+      "version": "2.1.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-extension-gfm-strikethrough",
+      "status": "missing",
+      "version": "2.1.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-extension-gfm-table",
+      "status": "missing",
+      "version": "2.1.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-extension-gfm-tagfilter",
+      "status": "missing",
+      "version": "2.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-extension-gfm-task-list-item",
+      "status": "missing",
+      "version": "2.1.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-extension-math",
+      "status": "missing",
+      "version": "3.1.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-factory-destination",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-factory-label",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-factory-space",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-factory-title",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-factory-whitespace",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-util-character",
+      "status": "missing",
+      "version": "2.1.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-util-chunked",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-util-classify-character",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-util-combine-extensions",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-util-decode-numeric-character-reference",
+      "status": "missing",
+      "version": "2.0.2"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-util-decode-string",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-util-encode",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-util-html-tag-name",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-util-normalize-identifier",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-util-resolve-all",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-util-sanitize-uri",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-util-subtokenize",
+      "status": "missing",
+      "version": "2.1.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-util-symbol",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/micromark-util-types",
+      "status": "missing",
+      "version": "2.0.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/min-indent",
+      "status": "declared",
+      "version": "1.0.1"
+    },
+    {
+      "declaration": "BlueOak-1.0.0",
+      "path": "node_modules/minimatch",
+      "status": "declared",
+      "version": "11.0.5"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/ms",
+      "status": "missing",
+      "version": "2.1.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/nanoid",
+      "status": "declared",
+      "version": "3.3.20"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/natural-compare",
+      "status": "declared",
+      "version": "1.4.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/obug",
+      "status": "declared",
+      "version": "3.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/optionator",
+      "status": "declared",
+      "version": "0.9.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/p-limit",
+      "status": "declared",
+      "version": "3.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/p-locate",
+      "status": "declared",
+      "version": "5.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/parse-entities",
+      "status": "missing",
+      "version": "4.0.2"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/parse-entities/node_modules/@types/unist",
+      "status": "missing",
+      "version": "2.0.11"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/parse5",
+      "status": "missing",
+      "version": "7.3.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/parse5-parser-stream",
+      "status": "declared",
+      "version": "8.1.0"
+    },
+    {
+      "declaration": "BSD-2-Clause",
+      "path": "node_modules/parse5-parser-stream/node_modules/entities",
+      "status": "declared",
+      "version": "9.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/parse5-parser-stream/node_modules/parse5",
+      "status": "declared",
+      "version": "8.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/path-exists",
+      "status": "declared",
+      "version": "4.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/path-key",
+      "status": "declared",
+      "version": "3.1.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/picocolors",
+      "status": "missing",
+      "version": "1.1.1"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/playwright",
+      "status": "declared",
+      "version": "1.64.1"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/playwright-core",
+      "status": "declared",
+      "version": "1.64.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/postcss",
+      "status": "declared",
+      "version": "8.5.32"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/postcss-selector-parser",
+      "status": "declared",
+      "version": "6.1.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/prelude-ls",
+      "status": "declared",
+      "version": "1.2.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/pretty-format",
+      "status": "declared",
+      "version": "27.5.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/pretty-format/node_modules/react-is",
+      "status": "declared",
+      "version": "17.0.2"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/property-information",
+      "status": "missing",
+      "version": "7.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/punycode",
+      "status": "declared",
+      "version": "2.3.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/qified",
+      "status": "declared",
+      "version": "0.10.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/qified/node_modules/hookified",
+      "status": "declared",
+      "version": "2.2.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/react",
+      "status": "declared",
+      "version": "19.3.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/react-dom",
+      "status": "declared",
+      "version": "19.3.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/react-markdown",
+      "status": "declared",
+      "version": "10.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/react-router",
+      "status": "declared",
+      "version": "7.18.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/react-router-dom",
+      "status": "declared",
+      "version": "7.18.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/redent",
+      "status": "declared",
+      "version": "3.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/rehype-highlight",
+      "status": "missing",
+      "version": "7.0.2"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/rehype-katex",
+      "status": "missing",
+      "version": "7.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/remark-gfm",
+      "status": "missing",
+      "version": "4.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/remark-math",
+      "status": "missing",
+      "version": "6.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/remark-parse",
+      "status": "missing",
+      "version": "11.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/remark-rehype",
+      "status": "missing",
+      "version": "11.1.2"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/remark-stringify",
+      "status": "missing",
+      "version": "11.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/remove-accents",
+      "status": "declared",
+      "version": "0.5.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/rolldown",
+      "status": "declared",
+      "version": "1.2.16"
+    },
+    {
+      "declaration": "ISC",
+      "path": "node_modules/saxes",
+      "status": "declared",
+      "version": "6.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/scheduler",
+      "status": "declared",
+      "version": "0.28.0"
+    },
+    {
+      "declaration": "ISC",
+      "path": "node_modules/semver",
+      "status": "declared",
+      "version": "7.8.6"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/seroval",
+      "status": "declared",
+      "version": "1.6.12"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/seroval-plugins",
+      "status": "declared",
+      "version": "1.6.12"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/set-cookie-parser",
+      "status": "declared",
+      "version": "2.7.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/shebang-command",
+      "status": "declared",
+      "version": "2.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/shebang-regex",
+      "status": "declared",
+      "version": "3.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/solid-js",
+      "status": "declared",
+      "version": "1.9.18"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/solid-presence",
+      "status": "declared",
+      "version": "0.2.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/solid-prevent-scroll",
+      "status": "declared",
+      "version": "0.1.11"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/solid-transition-group",
+      "status": "declared",
+      "version": "0.2.3"
+    },
+    {
+      "declaration": "BSD-3-Clause",
+      "path": "node_modules/source-map-js",
+      "status": "declared",
+      "version": "1.2.2"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/space-separated-tokens",
+      "status": "missing",
+      "version": "2.0.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/std-env",
+      "status": "declared",
+      "version": "4.3.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/stringify-entities",
+      "status": "missing",
+      "version": "4.0.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/strip-indent",
+      "status": "declared",
+      "version": "3.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/style-to-js",
+      "status": "missing",
+      "version": "1.1.21"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/style-to-object",
+      "status": "missing",
+      "version": "1.0.14"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/superjson",
+      "status": "declared",
+      "version": "2.2.6"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/tailwindcss",
+      "status": "declared",
+      "version": "4.3.5"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/tapable",
+      "status": "declared",
+      "version": "2.3.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/tinybench",
+      "status": "declared",
+      "version": "6.2.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/tinyexec",
+      "status": "declared",
+      "version": "1.3.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/tinyglobby",
+      "status": "declared",
+      "version": "0.2.17"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/tinyglobby/node_modules/fdir",
+      "status": "missing",
+      "version": "6.5.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/tinyglobby/node_modules/picomatch",
+      "status": "declared",
+      "version": "4.0.7"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/tldts",
+      "status": "declared",
+      "version": "7.4.19"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/tldts-core",
+      "status": "declared",
+      "version": "7.4.20"
+    },
+    {
+      "declaration": "BSD-3-Clause",
+      "path": "node_modules/tough-cookie",
+      "status": "declared",
+      "version": "6.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/tr46",
+      "status": "declared",
+      "version": "7.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/trim-lines",
+      "status": "missing",
+      "version": "3.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/trough",
+      "status": "missing",
+      "version": "2.2.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/ts-api-utils",
+      "status": "declared",
+      "version": "2.5.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/type-check",
+      "status": "declared",
+      "version": "0.4.0"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/typescript",
+      "status": "declared",
+      "version": "6.0.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/typescript-eslint",
+      "status": "declared",
+      "version": "8.72.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/undici",
+      "status": "declared",
+      "version": "8.12.4"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/undici-types",
+      "status": "declared",
+      "version": "7.24.6"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/unified",
+      "status": "missing",
+      "version": "11.0.5"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/unist-util-find-after",
+      "status": "missing",
+      "version": "5.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/unist-util-is",
+      "status": "missing",
+      "version": "6.0.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/unist-util-position",
+      "status": "missing",
+      "version": "5.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/unist-util-remove-position",
+      "status": "missing",
+      "version": "5.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/unist-util-stringify-position",
+      "status": "missing",
+      "version": "4.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/unist-util-visit",
+      "status": "missing",
+      "version": "5.1.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/unist-util-visit-parents",
+      "status": "missing",
+      "version": "6.0.2"
+    },
+    {
+      "declaration": "BSD-2-Clause",
+      "path": "node_modules/uri-js",
+      "status": "declared",
+      "version": "4.4.1"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/util-deprecate",
+      "status": "missing",
+      "version": "1.0.2"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/vfile",
+      "status": "missing",
+      "version": "6.0.3"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/vfile-location",
+      "status": "missing",
+      "version": "5.0.3"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/vfile-message",
+      "status": "missing",
+      "version": "4.0.3"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/vite",
+      "status": "declared",
+      "version": "8.3.6"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/vite/node_modules/picomatch",
+      "status": "declared",
+      "version": "4.0.7"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/vitest",
+      "status": "declared",
+      "version": "5.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/vitest/node_modules/picomatch",
+      "status": "declared",
+      "version": "4.0.7"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/w3c-xmlserializer",
+      "status": "declared",
+      "version": "6.0.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/web-namespaces",
+      "status": "missing",
+      "version": "2.0.1"
+    },
+    {
+      "declaration": "BSD-2-Clause",
+      "path": "node_modules/webidl-conversions",
+      "status": "declared",
+      "version": "8.0.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/whatwg-mimetype",
+      "status": "declared",
+      "version": "5.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/whatwg-url",
+      "status": "declared",
+      "version": "17.3.0"
+    },
+    {
+      "declaration": "ISC",
+      "path": "node_modules/which",
+      "status": "declared",
+      "version": "2.0.2"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/why-is-node-running",
+      "status": "declared",
+      "version": "3.2.1"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/word-wrap",
+      "status": "declared",
+      "version": "1.2.5"
+    },
+    {
+      "declaration": "Apache-2.0",
+      "path": "node_modules/xml-name-validator",
+      "status": "declared",
+      "version": "5.0.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/xmlchars",
+      "status": "declared",
+      "version": "2.2.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/yocto-queue",
+      "status": "declared",
+      "version": "0.1.0"
+    },
+    {
+      "declaration": "MIT",
+      "path": "node_modules/zustand",
+      "status": "declared",
+      "version": "5.1.0"
+    },
+    {
+      "declaration": null,
+      "path": "node_modules/zwitch",
+      "status": "missing",
+      "version": "2.0.4"
+    }
+  ],
+  "interpretation": "Registry/lock declarations only; compatibility review is pending.",
+  "missing": 139,
+  "python": [
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Python Software Foundation License"
+      ],
+      "declaration": "PSF-2.0",
+      "expression": null,
+      "name": "aiohappyeyeballs",
+      "source": "https://pypi.org/pypi/aiohappyeyeballs/2.7.1/json",
+      "status": "declared",
+      "version": "2.7.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0 AND MIT",
+      "name": "aiohttp",
+      "source": "https://pypi.org/pypi/aiohttp/3.14.5/json",
+      "status": "declared",
+      "version": "3.14.5"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "aiohttp-retry",
+      "source": "https://pypi.org/pypi/aiohttp-retry/2.9.1/json",
+      "status": "declared",
+      "version": "2.9.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": "Apache 2.0",
+      "expression": null,
+      "name": "aiosignal",
+      "source": "https://pypi.org/pypi/aiosignal/1.4.0/json",
+      "status": "declared",
+      "version": "1.4.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "annotated-doc",
+      "source": "https://pypi.org/pypi/annotated-doc/0.0.5/json",
+      "status": "declared",
+      "version": "0.0.5"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "annotated-types",
+      "source": "https://pypi.org/pypi/annotated-types/0.8.0/json",
+      "status": "declared",
+      "version": "0.8.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "anyio",
+      "source": "https://pypi.org/pypi/anyio/4.15.1/json",
+      "status": "declared",
+      "version": "4.15.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "anyio",
+      "source": "https://pypi.org/pypi/anyio/4.16.0/json",
+      "status": "declared",
+      "version": "4.16.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "attrs",
+      "source": "https://pypi.org/pypi/attrs/26.1.0/json",
+      "status": "declared",
+      "version": "26.1.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": "BSD-3-Clause",
+      "expression": null,
+      "name": "babel",
+      "source": "https://pypi.org/pypi/babel/2.18.0/json",
+      "status": "declared",
+      "version": "2.18.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": "Apache-2.0",
+      "expression": null,
+      "name": "bcrypt",
+      "source": "https://pypi.org/pypi/bcrypt/5.0.0/json",
+      "status": "declared",
+      "version": "5.0.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "build",
+      "source": "https://pypi.org/pypi/build/1.6.1/json",
+      "status": "declared",
+      "version": "1.6.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)"
+      ],
+      "declaration": "MPL-2.0",
+      "expression": null,
+      "name": "certifi",
+      "source": "https://pypi.org/pypi/certifi/2026.10.23/json",
+      "status": "declared",
+      "version": "2026.10.23"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT-0",
+      "name": "cffi",
+      "source": "https://pypi.org/pypi/cffi/2.1.1/json",
+      "status": "declared",
+      "version": "2.1.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "charset-normalizer",
+      "source": "https://pypi.org/pypi/charset-normalizer/3.5.2/json",
+      "status": "declared",
+      "version": "3.5.2"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": null,
+      "expression": null,
+      "name": "chromadb",
+      "source": "https://pypi.org/pypi/chromadb/1.5.9/json",
+      "status": "declared",
+      "version": "1.5.9"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "click",
+      "source": "https://pypi.org/pypi/click/8.5.0/json",
+      "status": "declared",
+      "version": "8.5.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "click",
+      "source": "https://pypi.org/pypi/click/8.5.1/json",
+      "status": "declared",
+      "version": "8.5.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": "BSD-3-Clause",
+      "expression": null,
+      "name": "cloudpickle",
+      "source": "https://pypi.org/pypi/cloudpickle/3.1.2/json",
+      "status": "declared",
+      "version": "3.1.2"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": "",
+      "expression": null,
+      "name": "colorama",
+      "source": "https://pypi.org/pypi/colorama/0.4.6/json",
+      "status": "declared",
+      "version": "0.4.6"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "courlan",
+      "source": "https://pypi.org/pypi/courlan/1.4.0/json",
+      "status": "declared",
+      "version": "1.4.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0 OR BSD-3-Clause",
+      "name": "cryptography",
+      "source": "https://pypi.org/pypi/cryptography/50.0.2/json",
+      "status": "declared",
+      "version": "50.0.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "ctranslate2",
+      "source": "https://pypi.org/pypi/ctranslate2/4.8.2/json",
+      "status": "declared",
+      "version": "4.8.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "dateparser",
+      "source": "https://pypi.org/pypi/dateparser/1.4.3/json",
+      "status": "declared",
+      "version": "1.4.3"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Python Software Foundation License"
+      ],
+      "declaration": "PSFL",
+      "expression": null,
+      "name": "defusedxml",
+      "source": "https://pypi.org/pypi/defusedxml/0.7.1/json",
+      "status": "declared",
+      "version": "0.7.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "durationpy",
+      "source": "https://pypi.org/pypi/durationpy/0.11/json",
+      "status": "declared",
+      "version": "0.11"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "fastapi",
+      "source": "https://pypi.org/pypi/fastapi/0.162.0/json",
+      "status": "declared",
+      "version": "0.162.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "fastembed",
+      "source": "https://pypi.org/pypi/fastembed/0.9.1/json",
+      "status": "declared",
+      "version": "0.9.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "filelock",
+      "source": "https://pypi.org/pypi/filelock/4.2.9/json",
+      "status": "declared",
+      "version": "4.2.9"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": "Apache 2.0",
+      "expression": null,
+      "name": "flatbuffers",
+      "source": "https://pypi.org/pypi/flatbuffers/25.12.19/json",
+      "status": "declared",
+      "version": "25.12.19"
+    },
+    {
+      "classifiers": [],
+      "declaration": "Apache-2.0",
+      "expression": null,
+      "name": "frozenlist",
+      "source": "https://pypi.org/pypi/frozenlist/1.8.0/json",
+      "status": "declared",
+      "version": "1.8.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "fsspec",
+      "source": "https://pypi.org/pypi/fsspec/2026.9.0/json",
+      "status": "declared",
+      "version": "2026.9.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "googleapis-common-protos",
+      "source": "https://pypi.org/pypi/googleapis-common-protos/1.76.0/json",
+      "status": "declared",
+      "version": "1.76.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "grpcio",
+      "source": "https://pypi.org/pypi/grpcio/1.85.1/json",
+      "status": "declared",
+      "version": "1.85.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "h11",
+      "source": "https://pypi.org/pypi/h11/0.16.0/json",
+      "status": "declared",
+      "version": "0.16.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "hf-xet",
+      "source": "https://pypi.org/pypi/hf-xet/1.8.0/json",
+      "status": "declared",
+      "version": "1.8.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "htmldate",
+      "source": "https://pypi.org/pypi/htmldate/1.11.0/json",
+      "status": "declared",
+      "version": "1.11.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "httpcore",
+      "source": "https://pypi.org/pypi/httpcore/1.0.9/json",
+      "status": "declared",
+      "version": "1.0.9"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "httpcore2",
+      "source": "https://pypi.org/pypi/httpcore2/2.16.0/json",
+      "status": "declared",
+      "version": "2.16.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "httptools",
+      "source": "https://pypi.org/pypi/httptools/0.9.0/json",
+      "status": "declared",
+      "version": "0.9.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": "BSD-3-Clause",
+      "expression": null,
+      "name": "httpx",
+      "source": "https://pypi.org/pypi/httpx/0.28.1/json",
+      "status": "declared",
+      "version": "0.28.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "httpx-sse",
+      "source": "https://pypi.org/pypi/httpx-sse/0.4.3/json",
+      "status": "declared",
+      "version": "0.4.3"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "httpx2",
+      "source": "https://pypi.org/pypi/httpx2/2.16.0/json",
+      "status": "declared",
+      "version": "2.16.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "httpx2-jsfetch",
+      "source": "https://pypi.org/pypi/httpx2-jsfetch/1.0/json",
+      "status": "declared",
+      "version": "1.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": "Apache",
+      "expression": null,
+      "name": "huggingface-hub",
+      "source": "https://pypi.org/pypi/huggingface-hub/0.36.2/json",
+      "status": "declared",
+      "version": "0.36.2"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": "Apache-2.0",
+      "expression": null,
+      "name": "huggingface-hub",
+      "source": "https://pypi.org/pypi/huggingface-hub/1.33.0/json",
+      "status": "declared",
+      "version": "1.33.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": "Apache-2.0",
+      "expression": null,
+      "name": "huggingface-hub",
+      "source": "https://pypi.org/pypi/huggingface-hub/2.3.0/json",
+      "status": "declared",
+      "version": "2.3.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "idna",
+      "source": "https://pypi.org/pypi/idna/3.20/json",
+      "status": "declared",
+      "version": "3.20"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "importlib-resources",
+      "source": "https://pypi.org/pypi/importlib-resources/7.1.0/json",
+      "status": "declared",
+      "version": "7.1.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "iniconfig",
+      "source": "https://pypi.org/pypi/iniconfig/2.3.1/json",
+      "status": "declared",
+      "version": "2.3.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": null,
+      "expression": null,
+      "name": "jinja2",
+      "source": "https://pypi.org/pypi/jinja2/3.1.6/json",
+      "status": "declared",
+      "version": "3.1.6"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "joblib",
+      "source": "https://pypi.org/pypi/joblib/1.6.0/json",
+      "status": "declared",
+      "version": "1.6.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "jsonschema",
+      "source": "https://pypi.org/pypi/jsonschema/4.26.0/json",
+      "status": "declared",
+      "version": "4.26.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "jsonschema-specifications",
+      "source": "https://pypi.org/pypi/jsonschema-specifications/2025.9.1/json",
+      "status": "declared",
+      "version": "2025.9.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": "The BSD 2-Clause License",
+      "expression": null,
+      "name": "justext",
+      "source": "https://pypi.org/pypi/justext/3.0.2/json",
+      "status": "declared",
+      "version": "3.0.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "ken-rank",
+      "source": "https://pypi.org/pypi/ken-rank/0.18.0/json",
+      "status": "declared",
+      "version": "0.18.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "kubernetes",
+      "source": "https://pypi.org/pypi/kubernetes/37.0.1/json",
+      "status": "declared",
+      "version": "37.0.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "linkify-it-py",
+      "source": "https://pypi.org/pypi/linkify-it-py/2.2.0/json",
+      "status": "declared",
+      "version": "2.2.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": null,
+      "expression": null,
+      "name": "loguru",
+      "source": "https://pypi.org/pypi/loguru/0.7.3/json",
+      "status": "declared",
+      "version": "0.7.3"
+    },
+    {
+      "classifiers": [],
+      "declaration": "BSD-3-Clause",
+      "expression": null,
+      "name": "lxml",
+      "source": "https://pypi.org/pypi/lxml/6.1.3/json",
+      "status": "declared",
+      "version": "6.1.3"
+    },
+    {
+      "classifiers": [],
+      "declaration": "BSD-3-Clause",
+      "expression": null,
+      "name": "lxml-html-clean",
+      "source": "https://pypi.org/pypi/lxml-html-clean/0.4.6/json",
+      "status": "declared",
+      "version": "0.4.6"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": null,
+      "expression": null,
+      "name": "markdown-it-py",
+      "source": "https://pypi.org/pypi/markdown-it-py/4.2.0/json",
+      "status": "declared",
+      "version": "4.2.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "markupsafe",
+      "source": "https://pypi.org/pypi/markupsafe/3.0.4/json",
+      "status": "declared",
+      "version": "3.0.4"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "mcp",
+      "source": "https://pypi.org/pypi/mcp/1.30.0/json",
+      "status": "declared",
+      "version": "1.30.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "mcp",
+      "source": "https://pypi.org/pypi/mcp/2.3.0/json",
+      "status": "declared",
+      "version": "2.3.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "mcp-types",
+      "source": "https://pypi.org/pypi/mcp-types/2.3.0/json",
+      "status": "declared",
+      "version": "2.3.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": null,
+      "expression": null,
+      "name": "mdit-py-plugins",
+      "source": "https://pypi.org/pypi/mdit-py-plugins/0.6.1/json",
+      "status": "declared",
+      "version": "0.6.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "",
+      "expression": null,
+      "name": "mdurl",
+      "source": "https://pypi.org/pypi/mdurl/0.1.2/json",
+      "status": "declared",
+      "version": "0.1.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "ml-dtypes",
+      "source": "https://pypi.org/pypi/ml-dtypes/0.6.0/json",
+      "status": "declared",
+      "version": "0.6.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT License",
+      "expression": null,
+      "name": "mmh3",
+      "source": "https://pypi.org/pypi/mmh3/5.3.1/json",
+      "status": "declared",
+      "version": "5.3.1",
+      "declaration_sha256": "96b45fac371a3bc7da601c1befbe01e3a9cd6cbb339c02a6568ebcaf061facd4",
+      "declaration_length": 1234,
+      "declaration_abbreviated": true
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT License",
+      "expression": null,
+      "name": "model2vec",
+      "source": "https://pypi.org/pypi/model2vec/0.9.0/json",
+      "status": "declared",
+      "version": "0.9.0",
+      "declaration_sha256": "24537051d5d70f466ee137e779d75288aa080dc2ccebf80ce409e0013e7b7d74",
+      "declaration_length": 1242,
+      "declaration_abbreviated": true
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "multidict",
+      "source": "https://pypi.org/pypi/multidict/7.2.1/json",
+      "status": "declared",
+      "version": "7.2.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0",
+      "name": "numpy",
+      "source": "https://pypi.org/pypi/numpy/2.5.4/json",
+      "status": "declared",
+      "version": "2.5.4"
+    },
+    {
+      "classifiers": [],
+      "declaration": "BSD-3-Clause",
+      "expression": null,
+      "name": "oauthlib",
+      "source": "https://pypi.org/pypi/oauthlib/4.0.1/json",
+      "status": "declared",
+      "version": "4.0.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "onnx",
+      "source": "https://pypi.org/pypi/onnx/1.20.1/json",
+      "status": "declared",
+      "version": "1.20.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT License",
+      "expression": null,
+      "name": "onnxruntime",
+      "source": "https://pypi.org/pypi/onnxruntime/1.31.1/json",
+      "status": "declared",
+      "version": "1.31.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "opentelemetry-api",
+      "source": "https://pypi.org/pypi/opentelemetry-api/1.45.2/json",
+      "status": "declared",
+      "version": "1.45.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "opentelemetry-exporter-otlp-common",
+      "source": "https://pypi.org/pypi/opentelemetry-exporter-otlp-common/0.66b2/json",
+      "status": "declared",
+      "version": "0.66b2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "opentelemetry-exporter-otlp-proto-common",
+      "source": "https://pypi.org/pypi/opentelemetry-exporter-otlp-proto-common/1.45.2/json",
+      "status": "declared",
+      "version": "1.45.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "opentelemetry-exporter-otlp-proto-grpc",
+      "source": "https://pypi.org/pypi/opentelemetry-exporter-otlp-proto-grpc/1.45.2/json",
+      "status": "declared",
+      "version": "1.45.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "opentelemetry-proto",
+      "source": "https://pypi.org/pypi/opentelemetry-proto/1.45.2/json",
+      "status": "declared",
+      "version": "1.45.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "opentelemetry-sdk",
+      "source": "https://pypi.org/pypi/opentelemetry-sdk/1.45.2/json",
+      "status": "declared",
+      "version": "1.45.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "opentelemetry-semantic-conventions",
+      "source": "https://pypi.org/pypi/opentelemetry-semantic-conventions/0.66b2/json",
+      "status": "declared",
+      "version": "0.66b2"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License",
+        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)"
+      ],
+      "declaration": null,
+      "expression": "MPL-2.0 AND (Apache-2.0 OR MIT)",
+      "name": "orjson",
+      "source": "https://pypi.org/pypi/orjson/3.13.0/json",
+      "status": "declared",
+      "version": "3.13.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": "Apache License, Version 2.0",
+      "expression": null,
+      "name": "overrides",
+      "source": "https://pypi.org/pypi/overrides/7.7.0/json",
+      "status": "declared",
+      "version": "7.7.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0 OR BSD-2-Clause",
+      "name": "packaging",
+      "source": "https://pypi.org/pypi/packaging/26.3/json",
+      "status": "declared",
+      "version": "26.3"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)"
+      ],
+      "declaration": null,
+      "expression": null,
+      "name": "pathspec",
+      "source": "https://pypi.org/pypi/pathspec/1.1.1/json",
+      "status": "declared",
+      "version": "1.1.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT-CMU",
+      "name": "pillow",
+      "source": "https://pypi.org/pypi/pillow/13.0.0/json",
+      "status": "declared",
+      "version": "13.0.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "platformdirs",
+      "source": "https://pypi.org/pypi/platformdirs/4.14.2/json",
+      "status": "declared",
+      "version": "4.14.2"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "pluggy",
+      "source": "https://pypi.org/pypi/pluggy/1.7.0/json",
+      "status": "declared",
+      "version": "1.7.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": "Apache-2.0",
+      "expression": null,
+      "name": "propcache",
+      "source": "https://pypi.org/pypi/propcache/0.5.4/json",
+      "status": "declared",
+      "version": "0.5.4"
+    },
+    {
+      "classifiers": [],
+      "declaration": "3-Clause BSD License",
+      "expression": null,
+      "name": "protobuf",
+      "source": "https://pypi.org/pypi/protobuf/7.36.2/json",
+      "status": "declared",
+      "version": "7.36.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": null,
+      "name": "py-rust-stemmers",
+      "source": "https://pypi.org/pypi/py-rust-stemmers/0.1.8/json",
+      "status": "missing",
+      "version": "0.1.8"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-2-Clause",
+      "name": "pybase64",
+      "source": "https://pypi.org/pypi/pybase64/1.5.1/json",
+      "status": "declared",
+      "version": "1.5.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "pycparser",
+      "source": "https://pypi.org/pypi/pycparser/3.12/json",
+      "status": "declared",
+      "version": "3.12"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "pydantic",
+      "source": "https://pypi.org/pypi/pydantic/2.12.5/json",
+      "status": "declared",
+      "version": "2.12.5"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "pydantic",
+      "source": "https://pypi.org/pypi/pydantic/2.14.2/json",
+      "status": "declared",
+      "version": "2.14.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "pydantic",
+      "source": "https://pypi.org/pypi/pydantic/2.14.3/json",
+      "status": "declared",
+      "version": "2.14.3"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "pydantic-core",
+      "source": "https://pypi.org/pypi/pydantic-core/2.41.5/json",
+      "status": "declared",
+      "version": "2.41.5"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "pydantic-core",
+      "source": "https://pypi.org/pypi/pydantic-core/2.50.2/json",
+      "status": "declared",
+      "version": "2.50.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "pydantic-core",
+      "source": "https://pypi.org/pypi/pydantic-core/2.50.4/json",
+      "status": "declared",
+      "version": "2.50.4"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "pydantic-settings",
+      "source": "https://pypi.org/pypi/pydantic-settings/2.16.2/json",
+      "status": "declared",
+      "version": "2.16.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-2-Clause",
+      "name": "pygments",
+      "source": "https://pypi.org/pypi/pygments/2.21.0/json",
+      "status": "declared",
+      "version": "2.21.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "pyjwt",
+      "source": "https://pypi.org/pypi/pyjwt/2.15.1/json",
+      "status": "declared",
+      "version": "2.15.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "pypdf",
+      "source": "https://pypi.org/pypi/pypdf/6.21.4/json",
+      "status": "declared",
+      "version": "6.21.4"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": "Apache License Version 2.0",
+      "expression": null,
+      "name": "pypika",
+      "source": "https://pypi.org/pypi/pypika/0.51.1/json",
+      "status": "declared",
+      "version": "0.51.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "pyproject-hooks",
+      "source": "https://pypi.org/pypi/pyproject-hooks/1.3.3/json",
+      "status": "declared",
+      "version": "1.3.3"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "pytest",
+      "source": "https://pypi.org/pypi/pytest/9.2.0/json",
+      "status": "declared",
+      "version": "9.2.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "pytest-asyncio",
+      "source": "https://pypi.org/pypi/pytest-asyncio/1.4.1/json",
+      "status": "declared",
+      "version": "1.4.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "pytest-socket",
+      "source": "https://pypi.org/pypi/pytest-socket/0.8.1/json",
+      "status": "declared",
+      "version": "0.8.1"
+    },
+    {
+      "classifiers": [
+        "License :: DFSG approved",
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "pytest-timeout",
+      "source": "https://pypi.org/pypi/pytest-timeout/2.4.0/json",
+      "status": "declared",
+      "version": "2.4.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License",
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": "Dual License",
+      "expression": null,
+      "name": "python-dateutil",
+      "source": "https://pypi.org/pypi/python-dateutil/2.9.0.post0/json",
+      "status": "declared",
+      "version": "2.9.0.post0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License",
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": "Dual License",
+      "expression": null,
+      "name": "python-dateutil",
+      "source": "https://pypi.org/pypi/python-dateutil/3.0.0/json",
+      "status": "declared",
+      "version": "3.0.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": "BSD-3-Clause",
+      "expression": null,
+      "name": "python-dotenv",
+      "source": "https://pypi.org/pypi/python-dotenv/1.2.4/json",
+      "status": "declared",
+      "version": "1.2.4"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "python-multipart",
+      "source": "https://pypi.org/pypi/python-multipart/0.0.33/json",
+      "status": "declared",
+      "version": "0.0.33"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "pytz",
+      "source": "https://pypi.org/pypi/pytz/2026.6/json",
+      "status": "declared",
+      "version": "2026.6"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Python Software Foundation License"
+      ],
+      "declaration": "PSF",
+      "expression": null,
+      "name": "pywin32",
+      "source": "https://pypi.org/pypi/pywin32/312/json",
+      "status": "declared",
+      "version": "312"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "pyyaml",
+      "source": "https://pypi.org/pypi/pyyaml/6.0.3/json",
+      "status": "declared",
+      "version": "6.0.3"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "referencing",
+      "source": "https://pypi.org/pypi/referencing/0.37.0/json",
+      "status": "declared",
+      "version": "0.37.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0 AND CNRI-Python",
+      "name": "regex",
+      "source": "https://pypi.org/pypi/regex/2026.1.15/json",
+      "status": "declared",
+      "version": "2026.1.15"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0 AND CNRI-Python",
+      "name": "regex",
+      "source": "https://pypi.org/pypi/regex/2026.11.7/json",
+      "status": "declared",
+      "version": "2026.11.7"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": "Apache-2.0",
+      "expression": null,
+      "name": "requests",
+      "source": "https://pypi.org/pypi/requests/2.34.2/json",
+      "status": "declared",
+      "version": "2.34.2"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": "ISC",
+      "expression": null,
+      "name": "requests-oauthlib",
+      "source": "https://pypi.org/pypi/requests-oauthlib/2.0.0/json",
+      "status": "declared",
+      "version": "2.0.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "rich",
+      "source": "https://pypi.org/pypi/rich/14.3.4/json",
+      "status": "declared",
+      "version": "14.3.4"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "rich",
+      "source": "https://pypi.org/pypi/rich/15.0.0/json",
+      "status": "declared",
+      "version": "15.0.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "rpds-py",
+      "source": "https://pypi.org/pypi/rpds-py/2026.9.1/json",
+      "status": "declared",
+      "version": "2026.9.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "ruff",
+      "source": "https://pypi.org/pypi/ruff/0.17.3/json",
+      "status": "declared",
+      "version": "0.17.3"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": null,
+      "expression": null,
+      "name": "safetensors",
+      "source": "https://pypi.org/pypi/safetensors/0.8.0/json",
+      "status": "declared",
+      "version": "0.8.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": null,
+      "name": "sentencepiece",
+      "source": "https://pypi.org/pypi/sentencepiece/0.2.1/json",
+      "status": "missing",
+      "version": "0.2.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: ISC License (ISCL)"
+      ],
+      "declaration": "ISC License",
+      "expression": null,
+      "name": "shellingham",
+      "source": "https://pypi.org/pypi/shellingham/1.5.4/json",
+      "status": "declared",
+      "version": "1.5.4"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "six",
+      "source": "https://pypi.org/pypi/six/1.17.0/json",
+      "status": "declared",
+      "version": "1.17.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "declaration": "BSD-3-Clause",
+      "expression": null,
+      "name": "snowballstemmer",
+      "source": "https://pypi.org/pypi/snowballstemmer/3.0.1/json",
+      "status": "declared",
+      "version": "3.0.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "sse-starlette",
+      "source": "https://pypi.org/pypi/sse-starlette/3.6.0/json",
+      "status": "declared",
+      "version": "3.6.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "starlette",
+      "source": "https://pypi.org/pypi/starlette/1.10.0/json",
+      "status": "declared",
+      "version": "1.10.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "tenacity",
+      "source": "https://pypi.org/pypi/tenacity/9.2.1/json",
+      "status": "declared",
+      "version": "9.2.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "textual",
+      "source": "https://pypi.org/pypi/textual/8.2.8/json",
+      "status": "declared",
+      "version": "8.2.8"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MPL-1.1 OR GPL-2.0-only OR LGPL-2.1-or-later",
+      "name": "tld",
+      "source": "https://pypi.org/pypi/tld/0.13.2/json",
+      "status": "declared",
+      "version": "0.13.2"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": null,
+      "expression": null,
+      "name": "tokenizers",
+      "source": "https://pypi.org/pypi/tokenizers/0.22.2/json",
+      "status": "declared",
+      "version": "0.22.2"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "declaration": null,
+      "expression": null,
+      "name": "tokenizers",
+      "source": "https://pypi.org/pypi/tokenizers/0.23.3/json",
+      "status": "declared",
+      "version": "0.23.3"
+    },
+    {
+      "classifiers": [],
+      "declaration": "MPL-2.0 AND MIT",
+      "expression": null,
+      "name": "tqdm",
+      "source": "https://pypi.org/pypi/tqdm/4.70.1/json",
+      "status": "declared",
+      "version": "4.70.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "Apache-2.0",
+      "name": "trafilatura",
+      "source": "https://pypi.org/pypi/trafilatura/2.3.1/json",
+      "status": "declared",
+      "version": "2.3.1"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": null,
+      "expression": null,
+      "name": "tree-sitter",
+      "source": "https://pypi.org/pypi/tree-sitter/0.25.2/json",
+      "status": "declared",
+      "version": "0.25.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "tree-sitter-go",
+      "source": "https://pypi.org/pypi/tree-sitter-go/0.25.0/json",
+      "status": "declared",
+      "version": "0.25.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "tree-sitter-java",
+      "source": "https://pypi.org/pypi/tree-sitter-java/0.23.5/json",
+      "status": "declared",
+      "version": "0.23.5"
+    },
+    {
+      "classifiers": [],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "tree-sitter-javascript",
+      "source": "https://pypi.org/pypi/tree-sitter-javascript/0.25.0/json",
+      "status": "declared",
+      "version": "0.25.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "tree-sitter-language-pack",
+      "source": "https://pypi.org/pypi/tree-sitter-language-pack/1.25.0/json",
+      "status": "declared",
+      "version": "1.25.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "tree-sitter-python",
+      "source": "https://pypi.org/pypi/tree-sitter-python/0.25.0/json",
+      "status": "declared",
+      "version": "0.25.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "tree-sitter-rust",
+      "source": "https://pypi.org/pypi/tree-sitter-rust/0.24.2/json",
+      "status": "declared",
+      "version": "0.24.2"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "tree-sitter-typescript",
+      "source": "https://pypi.org/pypi/tree-sitter-typescript/0.23.2/json",
+      "status": "declared",
+      "version": "0.23.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "truststore",
+      "source": "https://pypi.org/pypi/truststore/0.10.5/json",
+      "status": "declared",
+      "version": "0.10.5"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "typer",
+      "source": "https://pypi.org/pypi/typer/0.27.3/json",
+      "status": "declared",
+      "version": "0.27.3"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "PSF-2.0",
+      "name": "typing-extensions",
+      "source": "https://pypi.org/pypi/typing-extensions/4.16.0/json",
+      "status": "declared",
+      "version": "4.16.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "typing-inspection",
+      "source": "https://pypi.org/pypi/typing-inspection/0.4.4/json",
+      "status": "declared",
+      "version": "0.4.4"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "typing-inspection",
+      "source": "https://pypi.org/pypi/typing-inspection/0.4.5/json",
+      "status": "declared",
+      "version": "0.4.5"
+    },
+    {
+      "classifiers": [],
+      "declaration": "Apache-2.0",
+      "expression": null,
+      "name": "tzdata",
+      "source": "https://pypi.org/pypi/tzdata/2026.6/json",
+      "status": "declared",
+      "version": "2026.6"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "tzlocal",
+      "source": "https://pypi.org/pypi/tzlocal/5.4.5/json",
+      "status": "declared",
+      "version": "5.4.5"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "MIT",
+      "name": "urllib3",
+      "source": "https://pypi.org/pypi/urllib3/2.8.0/json",
+      "status": "declared",
+      "version": "2.8.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "uvicorn",
+      "source": "https://pypi.org/pypi/uvicorn/0.54.0/json",
+      "status": "declared",
+      "version": "0.54.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License",
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT License",
+      "expression": null,
+      "name": "uvloop",
+      "source": "https://pypi.org/pypi/uvloop/0.23.0/json",
+      "status": "declared",
+      "version": "0.23.0"
+    },
+    {
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "declaration": "MIT",
+      "expression": null,
+      "name": "watchfiles",
+      "source": "https://pypi.org/pypi/watchfiles/1.3.0/json",
+      "status": "declared",
+      "version": "1.3.0"
+    },
+    {
+      "classifiers": [],
+      "declaration": "Apache-2.0",
+      "expression": null,
+      "name": "websocket-client",
+      "source": "https://pypi.org/pypi/websocket-client/1.9.2/json",
+      "status": "declared",
+      "version": "1.9.2"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "websockets",
+      "source": "https://pypi.org/pypi/websockets/16.1.1/json",
+      "status": "declared",
+      "version": "16.1.1"
+    },
+    {
+      "classifiers": [],
+      "declaration": null,
+      "expression": "BSD-3-Clause",
+      "name": "websockets",
+      "source": "https://pypi.org/pypi/websockets/17.4/json",
+      "status": "declared",
+      "version": "17.4"
+    },
+    {
+      "classifiers": [],
+      "declaration": "Apache-2.0",
+      "expression": null,
+      "name": "yarl",
+      "source": "https://pypi.org/pypi/yarl/1.25.1/json",
+      "status": "declared",
+      "version": "1.25.1"
+    }
+  ],
+  "unavailable": 0
+}

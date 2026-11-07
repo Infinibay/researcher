@@ -7891,3 +7891,42 @@ task transition, including after compaction. No push/merge/deploy.
 - Functional questions remain: both delegated-unit requests asked only in prose despite available structured-question tooling; the second admission receives corrected context but not the original request. Human understanding/effort have not been observed. Remaining profile/communication/real/scientific/security/migration/UI scope stays active.
 - Evidence: `context-alignment-review.md`, `context-alignment-results.json`, `context-alignment-validation.json`, original registration/amendment and anonymous reading material. No whole-suite rerun/green claim, push, merge or deployment.
 - Measured block06:34:27–07:11:10 UTC: **36 min 43 s**, including setup, diagnostics, model work and recording. Next main block: security/dependency review; start not yet recorded. Keep updated done/current/pending/time at every transition and details after all macro tasks.
+
+
+## 2026-11-07 — dependency fixes and periodic security audit
+
+Task scope: correct demonstrated dependency consumers, audit every committed lock,
+check actual owner HTTP/WS access and prepare periodic maintenance/license inventory.
+The block ran07:12:56–07:39:10UTC (26min14s to the validation/record cutoff).
+No model calls, user-data migration, sibling-Ken changes, push or remote workflow.
+
+- KaTeX0.19.1, minimatch11.0.5, selector-parser6.1.5 and filelock4.2.9; explicit
+  compatible-consumer checks and installed metadata floor. Both actual regression
+  reproductions retained; the invalid first math fixture is explicitly excluded.
+- Main85-package lock and npm audit clean of known advisories at this observation.
+  Ken72-package lock reports19 entries/12 IDs; Chroma87-package lock reports5/4.
+  Both30-package MCP launcher locks clean. No skipped packages in lock audit;
+  global exit1 retains findings instead of ignoring them.
+-36 source cases,5 auditor cases,33 installed cases pass;604 matching sources,
+  324 productive.136 contracts/10 DOM and frontend build/tree pass. Real HTTP/WS
+  probe passes and original service is terminal.16 Python definitions documented.
+- Weekly/PR/manual read-only workflow, verified release-commit pins and family
+  update groups prepared; local YAML/lock/export verification only, no actionlint
+  or remote execution.164 Python versions/415 npm entries inventoried;139 absent
+  license declarations remain explicit, no compatibility approval.
+- DD083 keeps3 Ruff and9 ESLint findings until macro capabilities are done.
+  Ken exact ONNX pin, Chroma configuration/isolation and license review are main
+  work, not deferred polish. Full security, global suite and12-page acceptance
+  remain open. Only the narrow three-family frontend advisory deliverable closes.
+
+Evidence: dependency-security-review.md, dependency-security-results.json,
+dependency-audit-results.json, dependency-license-inventory.json,
+dependency-security-docstrings.json, dependency-workflow-validation.json,
+security-packaging.json; raw receipts under the established private SDD directory.
+
+Next main block: material questions must reach the durable answerable question
+mechanism; a corrected admission must preserve the original task request. Reuse
+context-alignment findings, state acceptance before editing and retain human
+review as unknown. Publish the updated done/current/pending list and measured
+start/end times at every main transition, including after compaction. Do not
+invent a percentage from test counts, commits or narrow completed subdeliverables.

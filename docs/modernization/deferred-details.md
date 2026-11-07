@@ -588,3 +588,12 @@ la suite global por este pulido.
 
 Las preguntas sólo en prosa y la continuidad del pedido entre admisiones son
 pendientes funcionales en [la evaluación](context-alignment-review.md), no DD082.
+
+## DD083 · Estilo tras revisar dependencias y seguridad
+
+Ruff conserva3 avisos (orden de imports y alias de regex/UTC) en el
+auditor; ESLint conserva9 errores en el frontend. Pruebas dirigidas, build, árbol
+y comportamiento central comprobados. Retomar después de todas las capacidades
+principales. Ken/ONNX, Chroma, licencias y activación de la automatización **no**
+se relegan aquí: siguen como trabajo principal en la
+[revisión de seguridad](dependency-security-review.md).

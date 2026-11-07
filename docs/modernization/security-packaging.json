@@ -1,0 +1,29 @@
+{
+  "base_commit": "77d79c0",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "d0e3884533c0e7080ed4139c706b53efd6a4b63042d50911ce7785fa890f5920",
+  "source_files_matching_wheel_and_installation": 604,
+  "product_files_matching": 324,
+  "observed": {
+    "cases": 33,
+    "passed": 33,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 202,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 14.554,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/config/test_dependency_security.py",
+    "backend/tests/api/test_local_access.py",
+    "backend/tests/api/test_websocket_lifecycle.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "Actual Hugging Face lock wrapper and owner HTTP/WS tests; no full security acceptance",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}

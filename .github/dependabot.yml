@@ -1,0 +1,42 @@
+version: 2
+updates:
+  - package-ecosystem: uv
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      api:
+        patterns: ['fastapi', 'starlette', 'uvicorn', 'pydantic*', 'httpx']
+      model-cache:
+        patterns: ['huggingface-hub', 'filelock', 'tokenizers', 'onnxruntime', 'numpy']
+      python-development:
+        patterns: ['pytest*', 'ruff', 'coverage']
+  - package-ecosystem: npm
+    directory: /frontend
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      react:
+        patterns: ['react', 'react-dom', '@types/react*', 'react-router*']
+      markdown:
+        patterns: ['*remark*', '*rehype*', '*micromark*', 'katex', 'react-markdown']
+      styling:
+        patterns: ['tailwindcss', '@tailwindcss/*', 'postcss*']
+      frontend-development:
+        dependency-type: development
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+    allow:
+      - dependency-name: ken-rank
+    open-pull-requests-limit: 1
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      ci-actions:
+        patterns: ['*']
