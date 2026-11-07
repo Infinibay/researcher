@@ -1,0 +1,344 @@
+{
+  "base_commit": "eb38914",
+  "changed_or_new_definitions_documented": 48,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/main.py",
+      "symbol": "lifespan",
+      "line": 25,
+      "docstring": "Initialize before serving and reconcile active work on shutdown.",
+      "file_sha256": "3b7cfbcdf5e07156edcc3eb567ba66fb7e879a7031fd3594546997811f857d0d"
+    },
+    {
+      "path": "backend/api/main.py",
+      "symbol": "create_app",
+      "line": 107,
+      "docstring": "Construct routes without inference, database writes or maintenance jobs.",
+      "file_sha256": "3b7cfbcdf5e07156edcc3eb567ba66fb7e879a7031fd3594546997811f857d0d"
+    },
+    {
+      "path": "backend/api/main.py",
+      "symbol": "create_app.websocket_endpoint",
+      "line": 223,
+      "docstring": "Resume owner observations from the last applied durable ID without replaying any work.",
+      "file_sha256": "3b7cfbcdf5e07156edcc3eb567ba66fb7e879a7031fd3594546997811f857d0d"
+    },
+    {
+      "path": "backend/api/routes/events.py",
+      "symbol": "EventResponse",
+      "line": 14,
+      "docstring": "One committed observation with its durable identity and explicit missing payload state.",
+      "file_sha256": "7e5eaadc94696f2fb7900779bf9fee21d28979847af69781be6ddfdc36ed8023"
+    },
+    {
+      "path": "backend/api/routes/events.py",
+      "symbol": "EventPageResponse",
+      "line": 28,
+      "docstring": "Bounded ascending page or an explicit snapshot refresh requirement after retention loss.",
+      "file_sha256": "7e5eaadc94696f2fb7900779bf9fee21d28979847af69781be6ddfdc36ed8023"
+    },
+    {
+      "path": "backend/api/routes/events.py",
+      "symbol": "list_events",
+      "line": 43,
+      "docstring": "Recover committed events in stable order; expired cursors cannot silently skip history.",
+      "file_sha256": "7e5eaadc94696f2fb7900779bf9fee21d28979847af69781be6ddfdc36ed8023"
+    },
+    {
+      "path": "backend/api/websocket.py",
+      "symbol": "_Client",
+      "line": 15,
+      "docstring": "Own one socket's send lock and single page-producing task, without an event queue.",
+      "file_sha256": "77563b8f2e410f6f45c4251103b73d08266a89428b5c82fa63bfec2aa2a50435"
+    },
+    {
+      "path": "backend/api/websocket.py",
+      "symbol": "ConnectionManager",
+      "line": 23,
+      "docstring": "Deliver retained events per socket; a slow reader cannot hold up another connection.",
+      "file_sha256": "77563b8f2e410f6f45c4251103b73d08266a89428b5c82fa63bfec2aa2a50435"
+    },
+    {
+      "path": "backend/api/websocket.py",
+      "symbol": "ConnectionManager.__init__",
+      "line": 26,
+      "docstring": "Set bounded delivery parameters without subscribing to a volatile global event loop.",
+      "file_sha256": "77563b8f2e410f6f45c4251103b73d08266a89428b5c82fa63bfec2aa2a50435"
+    },
+    {
+      "path": "backend/api/websocket.py",
+      "symbol": "ConnectionManager.connect",
+      "line": 35,
+      "docstring": "Accept after validating a retained page, then follow committed rows from the supplied cursor.",
+      "file_sha256": "77563b8f2e410f6f45c4251103b73d08266a89428b5c82fa63bfec2aa2a50435"
+    },
+    {
+      "path": "backend/api/websocket.py",
+      "symbol": "ConnectionManager._send",
+      "line": 44,
+      "docstring": "Serialize ping and history frames with a deadline covering both lock and socket waits.",
+      "file_sha256": "77563b8f2e410f6f45c4251103b73d08266a89428b5c82fa63bfec2aa2a50435"
+    },
+    {
+      "path": "backend/api/websocket.py",
+      "symbol": "ConnectionManager._close_socket",
+      "line": 50,
+      "docstring": "Bound transport closure so a stalled client cannot keep its sender alive indefinitely.",
+      "file_sha256": "77563b8f2e410f6f45c4251103b73d08266a89428b5c82fa63bfec2aa2a50435"
+    },
+    {
+      "path": "backend/api/websocket.py",
+      "symbol": "ConnectionManager._stream",
+      "line": 58,
+      "docstring": "Hold one page at a time, send catch-up immediately and poll only after reaching its tail.",
+      "file_sha256": "77563b8f2e410f6f45c4251103b73d08266a89428b5c82fa63bfec2aa2a50435"
+    },
+    {
+      "path": "backend/api/websocket.py",
+      "symbol": "ConnectionManager.disconnect",
+      "line": 81,
+      "docstring": "Retire and await only this project's original sender, including cancelled transport waits.",
+      "file_sha256": "77563b8f2e410f6f45c4251103b73d08266a89428b5c82fa63bfec2aa2a50435"
+    },
+    {
+      "path": "backend/api/websocket.py",
+      "symbol": "ConnectionManager.send_personal_message",
+      "line": 91,
+      "docstring": "Send a bounded keepalive through the same per-socket writer as event pages.",
+      "file_sha256": "77563b8f2e410f6f45c4251103b73d08266a89428b5c82fa63bfec2aa2a50435"
+    },
+    {
+      "path": "backend/api/websocket.py",
+      "symbol": "ConnectionManager.close",
+      "line": 101,
+      "docstring": "Close and drain all senders owned by this application instance during shutdown.",
+      "file_sha256": "77563b8f2e410f6f45c4251103b73d08266a89428b5c82fa63bfec2aa2a50435"
+    },
+    {
+      "path": "backend/api/websocket.py",
+      "symbol": "ConnectionManager.active_connections",
+      "line": 108,
+      "docstring": "Count registered senders rather than infer runtime or provider activity.",
+      "file_sha256": "77563b8f2e410f6f45c4251103b73d08266a89428b5c82fa63bfec2aa2a50435"
+    },
+    {
+      "path": "backend/runtime/event_history.py",
+      "symbol": "EventHistory",
+      "line": 10,
+      "docstring": "Read one project in ID order and expose known retention gaps instead of hiding them.",
+      "file_sha256": "044d091a94be4af9b1cf1b15d99ade125c6afed78f1bb4b45fcd0687599c1566"
+    },
+    {
+      "path": "backend/runtime/event_history.py",
+      "symbol": "EventHistory.__init__",
+      "line": 13,
+      "docstring": "Bind an existing migrated database without creating storage or execution authority.",
+      "file_sha256": "044d091a94be4af9b1cf1b15d99ade125c6afed78f1bb4b45fcd0687599c1566"
+    },
+    {
+      "path": "backend/runtime/event_history.py",
+      "symbol": "EventHistory.page",
+      "line": 17,
+      "docstring": "Return a bounded ascending snapshot or an explicit cursor reset requirement.\n\nDecimal string IDs preserve SQLite integer precision in browsers. Deletion\ntracking starts with migration59; earlier removals cannot be reconstructed.",
+      "file_sha256": "044d091a94be4af9b1cf1b15d99ade125c6afed78f1bb4b45fcd0687599c1566"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore",
+      "line": 67,
+      "docstring": "Own durable admission, fenced attempts and version-bound review requests in SQLite.",
+      "file_sha256": "7cf51e431cfa54babc702ae189c82559486f68bf670e3991085280b81a911e4c"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore.events",
+      "line": 2356,
+      "docstring": "Keep the older runtime read contract while refusing silently incomplete retained history.",
+      "file_sha256": "7cf51e431cfa54babc702ae189c82559486f68bf670e3991085280b81a911e4c"
+    },
+    {
+      "path": "backend/tests/api/test_event_stream.py",
+      "symbol": "append_events",
+      "line": 6,
+      "docstring": "Write real committed rows while owner transports connect, disconnect and recover.",
+      "file_sha256": "8600aec9b6dfd2028b28684a33a23dc44b5fda25d54341b5c1dc900e07acbc24"
+    },
+    {
+      "path": "backend/tests/api/test_event_stream.py",
+      "symbol": "test_owner_http_and_websocket_recover_concurrent_history_once",
+      "line": 15,
+      "docstring": "After reading only one page, reconnect recovers old and concurrent rows without any execution.",
+      "file_sha256": "8600aec9b6dfd2028b28684a33a23dc44b5fda25d54341b5c1dc900e07acbc24"
+    },
+    {
+      "path": "backend/tests/api/test_event_stream.py",
+      "symbol": "test_owner_socket_explains_expired_cursor_and_continues_after_retention_floor",
+      "line": 45,
+      "docstring": "Known event deletion produces a visible reset requirement followed by remaining durable rows.",
+      "file_sha256": "8600aec9b6dfd2028b28684a33a23dc44b5fda25d54341b5c1dc900e07acbc24"
+    },
+    {
+      "path": "backend/tests/api/test_event_stream.py",
+      "symbol": "test_event_payload_damage_is_explicit_and_large_ids_survive_http",
+      "line": 59,
+      "docstring": "An unavailable historical payload stays marked unknown and cannot round its durable identity.",
+      "file_sha256": "8600aec9b6dfd2028b28684a33a23dc44b5fda25d54341b5c1dc900e07acbc24"
+    },
+    {
+      "path": "backend/tests/api/test_local_access.py",
+      "symbol": "receive_pong",
+      "line": 142,
+      "docstring": "Allow the new initial durable page while still requiring the exact authenticated pong.",
+      "file_sha256": "d47c877a7066f61b752d4cd02e203cb0841995649d718b61b18f7c3d65375f4e"
+    },
+    {
+      "path": "backend/tests/api/test_local_access.py",
+      "symbol": "test_same_origin_custom_port_websocket_uses_the_existing_owner_session",
+      "line": 152,
+      "docstring": "The owner cookie authorizes same-origin sockets while durable startup pages precede keepalives.",
+      "file_sha256": "d47c877a7066f61b752d4cd02e203cb0841995649d718b61b18f7c3d65375f4e"
+    },
+    {
+      "path": "backend/tests/api/test_local_access.py",
+      "symbol": "test_websocket_accepts_owner_with_trusted_origin_and_closes_after_logout",
+      "line": 255,
+      "docstring": "Authenticated pages and pings remain subject to immediate owner-session revocation.",
+      "file_sha256": "d47c877a7066f61b752d4cd02e203cb0841995649d718b61b18f7c3d65375f4e"
+    },
+    {
+      "path": "backend/tests/api/test_local_access.py",
+      "symbol": "test_idle_websocket_expires_without_a_client_ping",
+      "line": 498,
+      "docstring": "An idle durable stream cannot extend the owner session by omitting client messages.",
+      "file_sha256": "d47c877a7066f61b752d4cd02e203cb0841995649d718b61b18f7c3d65375f4e"
+    },
+    {
+      "path": "backend/tests/api/test_websocket_lifecycle.py",
+      "symbol": "test_reconnected_client_receives_events_after_previous_event_loop_closed",
+      "line": 10,
+      "docstring": "A manager reused after orderly disconnect creates fresh loop-owned delivery tasks.",
+      "file_sha256": "6ad961af1269d2d91084c5b67420ffa191f557d509de4e183b72cb43bf67a03e"
+    },
+    {
+      "path": "backend/tests/api/test_websocket_lifecycle.py",
+      "symbol": "test_reconnected_client_receives_events_after_previous_event_loop_closed.cycle",
+      "line": 17,
+      "docstring": "Read the original committed marker and drain this loop before starting another.",
+      "file_sha256": "6ad961af1269d2d91084c5b67420ffa191f557d509de4e183b72cb43bf67a03e"
+    },
+    {
+      "path": "backend/tests/runtime/test_durable_events.py",
+      "symbol": "event_log",
+      "line": 9,
+      "docstring": "Bind the production reader to the fixture's migrated SQLite database.",
+      "file_sha256": "f7210d6461c015b2836b8bac69fa82649ddd8dacf025861f46779f8255706626"
+    },
+    {
+      "path": "backend/tests/runtime/test_durable_events.py",
+      "symbol": "append_events",
+      "line": 16,
+      "docstring": "Commit tied-timestamp observations and return the real globally unique sequence IDs.",
+      "file_sha256": "f7210d6461c015b2836b8bac69fa82649ddd8dacf025861f46779f8255706626"
+    },
+    {
+      "path": "backend/tests/runtime/test_durable_events.py",
+      "symbol": "test_pages_recover_more_than_one_page_with_concurrent_arrivals_and_equal_times",
+      "line": 25,
+      "docstring": "Ascending durable IDs cover every retained row once despite another project's gaps and new writes.",
+      "file_sha256": "f7210d6461c015b2836b8bac69fa82649ddd8dacf025861f46779f8255706626"
+    },
+    {
+      "path": "backend/tests/runtime/test_durable_events.py",
+      "symbol": "test_deleted_events_require_explicit_snapshot_and_watermark_rolls_back",
+      "line": 52,
+      "docstring": "A retained-history hole cannot be disguised as an empty successful catch-up page.",
+      "file_sha256": "f7210d6461c015b2836b8bac69fa82649ddd8dacf025861f46779f8255706626"
+    },
+    {
+      "path": "backend/tests/runtime/test_durable_events.py",
+      "symbol": "RecordingSocket",
+      "line": 69,
+      "docstring": "Observe socket frames and optionally emulate a client that never drains a send.",
+      "file_sha256": "f7210d6461c015b2836b8bac69fa82649ddd8dacf025861f46779f8255706626"
+    },
+    {
+      "path": "backend/tests/runtime/test_durable_events.py",
+      "symbol": "RecordingSocket.__init__",
+      "line": 72,
+      "docstring": "Initialize independently observable send progress and close status.",
+      "file_sha256": "f7210d6461c015b2836b8bac69fa82649ddd8dacf025861f46779f8255706626"
+    },
+    {
+      "path": "backend/tests/runtime/test_durable_events.py",
+      "symbol": "RecordingSocket.accept",
+      "line": 80,
+      "docstring": "Accept the test transport without creating a real network listener.",
+      "file_sha256": "f7210d6461c015b2836b8bac69fa82649ddd8dacf025861f46779f8255706626"
+    },
+    {
+      "path": "backend/tests/runtime/test_durable_events.py",
+      "symbol": "RecordingSocket.send_json",
+      "line": 83,
+      "docstring": "Record a frame or remain backpressured until the manager's timeout cancels it.",
+      "file_sha256": "f7210d6461c015b2836b8bac69fa82649ddd8dacf025861f46779f8255706626"
+    },
+    {
+      "path": "backend/tests/runtime/test_durable_events.py",
+      "symbol": "RecordingSocket.close",
+      "line": 90,
+      "docstring": "Record the close code and release observers waiting for slow-client retirement.",
+      "file_sha256": "f7210d6461c015b2836b8bac69fa82649ddd8dacf025861f46779f8255706626"
+    },
+    {
+      "path": "backend/tests/runtime/test_durable_events.py",
+      "symbol": "test_slow_client_cannot_delay_healthy_delivery_or_leave_sender_tasks",
+      "line": 96,
+      "docstring": "Each client holds one bounded page and closes independently when it cannot drain writes.",
+      "file_sha256": "f7210d6461c015b2836b8bac69fa82649ddd8dacf025861f46779f8255706626"
+    },
+    {
+      "path": "backend/tests/runtime/test_durable_events.py",
+      "symbol": "test_reconnected_stream_resumes_durable_cursor_without_volatile_bus",
+      "line": 123,
+      "docstring": "Reconnect replays committed rows written while disconnected and excludes already applied IDs.",
+      "file_sha256": "f7210d6461c015b2836b8bac69fa82649ddd8dacf025861f46779f8255706626"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_forward_targets_form_one_complete_history_and_preserve_seeded_data",
+      "line": 24,
+      "docstring": "Reach every supported post-legacy version, then repeat startup without losing IDs or relations.",
+      "file_sha256": "4018128746c7f7445661f3880823229202efee46c1782b002ece214484a8db4a"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes",
+      "line": 49,
+      "docstring": "Abruptly kill only a new migration child before its history insert, then recover that same DB.",
+      "file_sha256": "4018128746c7f7445661f3880823229202efee46c1782b002ece214484a8db4a"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_invalid_forward_target_never_creates_storage",
+      "line": 83,
+      "docstring": "Unknown targets and booleans cannot create a partial installation as a side effect.",
+      "file_sha256": "4018128746c7f7445661f3880823229202efee46c1782b002ece214484a8db4a"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_forward_rejects_unsupported_history_without_rewriting_rows",
+      "line": 94,
+      "docstring": "A forward migration cannot hide a future version, fill a fabricated gap or act as downgrade.",
+      "file_sha256": "4018128746c7f7445661f3880823229202efee46c1782b002ece214484a8db4a"
+    },
+    {
+      "path": "evals/runtime/run_event_recovery.py",
+      "symbol": "main",
+      "line": 15,
+      "docstring": "Own a temporary database, listener and server; verify browser replay and always close the child.",
+      "file_sha256": "e7cab4c8bed3c13a49c99f89981d6faca7b99d9c4a474c43cfe6f0b73331e633"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

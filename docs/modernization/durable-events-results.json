@@ -1,0 +1,71 @@
+{
+  "base_commit": "eb38914",
+  "started_at": "2026-11-07T05:24:44+00:00",
+  "checkpoint_recorded_at": "2026-11-07T05:54:50+00:00",
+  "elapsed_seconds_to_record": 1806,
+  "source": {
+    "cases": 116,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 40.608
+  },
+  "installed_receipt": "docs/modernization/durable-events-packaging.json",
+  "frontend": {
+    "contracts_passed": 136,
+    "dom_passed": 9,
+    "strict_build": "passed",
+    "browser_states": 3,
+    "browser_evidence": "docs/design/audits/2026-11-07-durable-events/evidence.json",
+    "browser_operation": "docs/design/audits/2026-11-07-durable-events/operation.json"
+  },
+  "docstrings_receipt": "docs/modernization/durable-events-docstrings.json",
+  "changes": [
+    "HTTP and WebSocket share committed SQLite event pages and exact decimal string cursors.",
+    "One bounded page and sender per connection; slow clients do not block peers.",
+    "Reconnect starts at the last applied ID; whole-page validation and project generations prevent duplicate or foreign delivery.",
+    "Schema59 records deletion continuity boundaries transactionally; expired or ahead cursors request an explicit reset with a persistent UI warning.",
+    "Activity retains100 visible rows while cursor/count cover all received events; invalidations use declared project-key layouts."
+  ],
+  "real_browser": {
+    "initial_events": 237,
+    "during_disconnection": 251,
+    "recovered_exactly_once_before_retention": 488,
+    "additional_retention_events": 5,
+    "retention_deleted_events": 1,
+    "project_switch_clears_original_observations": true,
+    "javascript_errors": 0,
+    "horizontal_overflow": false,
+    "accessibility_accepted": false,
+    "contrast_nodes_per_state": [
+      12,
+      10,
+      4
+    ],
+    "scrollable_region_without_focus_nodes_per_state": [
+      1,
+      1,
+      0
+    ]
+  },
+  "retained_failures": [
+    "Initial RED tests confirmed the missing durable history module and manager contract.",
+    "Two initial API tests used the testserver origin; absolute ws://localhost test URLs fixed the fixture without relaxing owner guards.",
+    "The first real browser trial exposed the Activity drawer covering the mobile project selector. Final trial closes the drawer, switches project and reopens it through normal controls; product correction remains DD079."
+  ],
+  "real_model_turns": 0,
+  "admitted_runtime_runs": 0,
+  "inference_dispatches": 0,
+  "all_owned_processes_closed": true,
+  "deferred": "DD079: Activity drawer integration/overlap, accessibility acceptance, labels/localization, three lint notices and existing bundle warning.",
+  "limits": [
+    "Synthetic data over real loopback HTTP/WebSocket; no owner historical data was migrated.",
+    "Disconnect injected by closing only the owned browser socket; not a reboot or power-loss experiment.",
+    "Deletion continuity is known only from schema59 onward; no automatic purge or universal down migration.",
+    "Declared cache-key layouts are covered, not every legacy cache or complete product integration.",
+    "Accessibility and all12 full-page acceptances remain open; initial screenshots include entrance animation.",
+    "All43 broad scenarios remain open. No new global-suite, human or scientific acceptance claim."
+  ],
+  "next_main_task": "Current global integration evaluation and failure classification; not started at this checkpoint.",
+  "push_merge_deploy": false
+}

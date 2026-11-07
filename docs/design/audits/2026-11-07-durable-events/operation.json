@@ -1,0 +1,11 @@
+{
+  "scope": "Installed Python application and compiled frontend over real loopback HTTP/WebSocket; synthetic data only",
+  "server_returncode": -15,
+  "counts": {
+    "runtime_runs": 0,
+    "runtime_inference_dispatches": 0
+  },
+  "model_turns": 0,
+  "owner_processes_closed": true,
+  "browser_receipt": "docs/design/audits/2026-11-07-durable-events/evidence.json"
+}

@@ -1,0 +1,32 @@
+{
+  "base_commit": "eb38914",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "c87b9b7283cb696a3df0daf2184a291fea263756d3437dd184a05bf8b7692703",
+  "source_files_matching_wheel_and_installation": 602,
+  "product_files_matching": 324,
+  "observed": {
+    "cases": 116,
+    "passed": 116,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 215,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 41.787,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_durable_events.py",
+    "backend/tests/api/test_event_stream.py",
+    "backend/tests/api/test_websocket_lifecycle.py",
+    "backend/tests/api/test_local_access.py",
+    "backend/tests/runtime/test_coordination.py",
+    "backend/tests/runtime/test_migration_chain.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "Durable replay, slow client, authenticated sockets and migration59; not full project acceptance",
+    "SQLite and owner HTTP are real; no model calls or remote repositories"
+  ]
+}

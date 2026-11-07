@@ -2354,32 +2354,13 @@ class SQLiteRunStore:
             return version
 
     def events(self, project_id, *, after_id=0, limit=100) -> EventPage:
-        identity(project_id)
-        if (
-            type(after_id) is not int
-            or after_id < 0
-            or type(limit) is not int
-            or not 1 <= limit <= 200
-        ):
-            raise ValueError("Invalid event cursor or page size")
-        with self._transaction() as conn:
-            rows = conn.execute(
-                "SELECT * FROM events_log WHERE project_id=? AND id>? ORDER BY id ASC LIMIT ?",
-                (project_id, after_id, limit + 1),
-            ).fetchall()
-            page = tuple(
-                RunEvent(
-                    row["id"],
-                    row["project_id"],
-                    row["entity_type"],
-                    row["entity_id"],
-                    row["event_type"],
-                    row["event_source"],
-                    json.loads(row["event_data_json"]),
-                    row["created_at"],
-                )
-                for row in rows[:limit]
-            )
-            return EventPage(
-                page, page[-1].event_id if page else after_id, len(rows) > limit
-            )
+        """Keep the older runtime read contract while refusing silently incomplete retained history."""
+        from backend.runtime.event_history import EventHistory
+
+        result = EventHistory(self.database).page(project_id, after_id=after_id, limit=limit)
+        if result["reset_required"]:
+            raise RunConflict("Event cursor expired or changed; refresh snapshots through /api/events")
+        page = tuple(RunEvent(int(row["event_id"]), row["project_id"], row["entity_type"],
+                              row["entity_id"], row["type"], row["source"], row["data"], row["timestamp"])
+                     for row in result["events"])
+        return EventPage(page, int(result["next_after_id"]), result["has_more"])

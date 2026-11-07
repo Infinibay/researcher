@@ -524,3 +524,19 @@ No repetir los ensayos por estos detalles.
 
 Eventos/reconexión/retención, recuperación más amplia, datos reales y aceptación
 integral siguen siendo tareas principales. No se convierten en pulido diferido.
+
+## DD079 — interfaz de Actividad y pulido del bloque de eventos
+
+La recuperación de eventos está comprobada. El panel de Actividad aún conserva
+estilos anteriores: integrarlo al rediseño durante la aceptación de interfaz.
+En móvil, el panel abierto tapa el desplegable de proyectos; cerrar el panel
+permite cambiar y comprobar aislamiento. Corregir la superposición en esa etapa.
+Axe detectó contraste en tres capturas y región desplazable sin foco en dos;
+revisar también después de estabilizar animaciones. Son pendientes de aceptación
+de interfaz, no una aprobación de accesibilidad ni una renuncia al requisito.
+
+`durable-events-lint.json` conserva3 avisos: imports, captura amplia deliberada
+y `check` implícito de subprocess cuyo código se comprueba. Mantener el aviso
+de tamaño del bundle y Starlette/httpx para la pasada final. No repetir los
+ensayos de488 eventos por ese estilo. Revisar también etiquetas técnicas,
+localización y contadores de actividad en la aceptación del panel.

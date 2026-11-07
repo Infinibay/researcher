@@ -7810,3 +7810,41 @@ start when begun. Actual owner-data location, broader recovery, real/human/scien
 global eval, security,12pageacceptance, final details and independent review remain.
 Publish done/current/pending plus measured time at every task transition; user
 policy persists through compaction. All macro capabilities before fine details.
+
+
+## 2026-11-07 — durable events and reconnection checkpoint
+
+Base eb38914. Started05:24:44UTC; checkpoint recorded05:54:50UTC:
+30 min 06 s including verification and documentation. HTTP and WS now read
+committed SQLite pages rather than relying on the volatile legacy EventBus.
+Exact ID cursors, per-client bounded senders/deadlines, replay deduplication,
+project generations and schema59 transactional retention watermarks are wired
+through the Activity UI. Cursor reset explicitly preserves the incomplete-history
+warning and refreshes project snapshots; it never replays model work.
+
+116source/116installedPASS, no failures/skips;136frontend contracts/9DOMPASS and
+strict buildPASS.602source/wheel/installed PythonSQLfiles match,324product;
+48documented Python definitions plus relevant frontend JSDoc. Final wheel
+c87b9b7283cb696a3df0daf2184a291fea263756d3437dd184a05bf8b7692703.
+Real installed server and compiled browser recover237+251=488events over pages,
+with equal timestamps, exact reconnect cursor and no duplicates/missing IDs before
+retention; five later events with one deletion produce an explicit warning.
+Project switch clears original observations. Three states1440/390px, no JS errors
+or horizontal overflow. Zero admitted runs/dispatches/model turns, all owned
+processes closed, original handles terminal. No owner data migration or global
+acceptance inferred.
+
+Retained failures: initial RED missing contracts; two origin-mismatched test URLs
+fixed without weakening auth; actual mobile drawer overlay remains DD079. Final
+browser follows normal close-panel/switch/reopen controls. Axe contrast12/10/4nodes
+and focusable-scroll-region1/1/0 remain unaccepted; animations need settled review
+in page acceptance. Three lint notices, bundle warning and old drawer styling
+are deferred. Schema59 cannot reconstruct deletions that predate its trigger.
+
+Next main block: current global integration evaluation/failure classification,
+not started at this checkpoint. Actual owner-data location remains unanswered;
+broader recovery, real/human/scientific evaluations, dependency security,12full-page
+acceptances, final details and independent whole-plan review remain. All43 broad
+scenarios stay open. Publish done/current/pending plus measured time at each task
+transition; all macro capabilities before fine details, including after compaction.
+No push/merge/deploy.

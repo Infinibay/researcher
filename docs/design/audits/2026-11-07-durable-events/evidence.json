@@ -1,0 +1,6557 @@
+{
+  "scope": "Actual installed HTTP/WebSocket server and compiled frontend, synthetic SQLite rows, no runtime/model/account.",
+  "states": [
+    {
+      "name": "01-retained-history",
+      "width": 1440,
+      "axe": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 12
+        },
+        {
+          "id": "scrollable-region-focusable",
+          "impact": "serious",
+          "nodes": 1
+        }
+      ],
+      "horizontal_overflow": false
+    },
+    {
+      "name": "02-reconnected-history",
+      "width": 390,
+      "axe": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 10
+        },
+        {
+          "id": "scrollable-region-focusable",
+          "impact": "serious",
+          "nodes": 1
+        }
+      ],
+      "horizontal_overflow": false
+    },
+    {
+      "name": "03-retention-warning",
+      "width": 390,
+      "axe": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 4
+        }
+      ],
+      "horizontal_overflow": false
+    }
+  ],
+  "frames": [
+    {
+      "type": "events.page",
+      "project_id": 1,
+      "after_id": "0",
+      "next_after_id": "100",
+      "has_more": true,
+      "events": [
+        {
+          "event_id": "1",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-0"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "2",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-1"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "3",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-2"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "4",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-3"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "5",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-4"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "6",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-5"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "7",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-6"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "8",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-7"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "9",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-8"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "10",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-9"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "11",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-10"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "12",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-11"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "13",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-12"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "14",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-13"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "15",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-14"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "16",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-15"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "17",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-16"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "18",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-17"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "19",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-18"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "20",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-19"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "21",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-20"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "22",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-21"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "23",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-22"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "24",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-23"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "25",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-24"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "26",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-25"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "27",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-26"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "28",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-27"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "29",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-28"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "30",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-29"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "31",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-30"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "32",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-31"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "33",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-32"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "34",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-33"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "35",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-34"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "36",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-35"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "37",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-36"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "38",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-37"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "39",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-38"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "40",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-39"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "41",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-40"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "42",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-41"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "43",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-42"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "44",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-43"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "45",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-44"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "46",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-45"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "47",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-46"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "48",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-47"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "49",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-48"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "50",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-49"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "51",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-50"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "52",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-51"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "53",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-52"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "54",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-53"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "55",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-54"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "56",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-55"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "57",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-56"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "58",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-57"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "59",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-58"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "60",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-59"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "61",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-60"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "62",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-61"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "63",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-62"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "64",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-63"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "65",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-64"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "66",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-65"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "67",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-66"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "68",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-67"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "69",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-68"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "70",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-69"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "71",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-70"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "72",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-71"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "73",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-72"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "74",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-73"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "75",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-74"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "76",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-75"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "77",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-76"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "78",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-77"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "79",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-78"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "80",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-79"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "81",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-80"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "82",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-81"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "83",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-82"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "84",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-83"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "85",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-84"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "86",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-85"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "87",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-86"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "88",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-87"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "89",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-88"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "90",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-89"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "91",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-90"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "92",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-91"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "93",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-92"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "94",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-93"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "95",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-94"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "96",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-95"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "97",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-96"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "98",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-97"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "99",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-98"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "100",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-99"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        }
+      ],
+      "reset_required": false,
+      "resume_after_id": null,
+      "reset_reason": null
+    },
+    {
+      "type": "events.page",
+      "project_id": 1,
+      "after_id": "100",
+      "next_after_id": "200",
+      "has_more": true,
+      "events": [
+        {
+          "event_id": "101",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-100"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "102",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-101"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "103",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-102"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "104",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-103"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "105",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-104"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "106",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-105"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "107",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-106"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "108",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-107"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "109",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-108"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "110",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-109"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "111",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-110"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "112",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-111"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "113",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-112"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "114",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-113"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "115",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-114"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "116",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-115"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "117",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-116"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "118",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-117"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "119",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-118"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "120",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-119"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "121",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-120"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "122",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-121"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "123",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-122"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "124",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-123"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "125",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-124"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "126",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-125"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "127",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-126"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "128",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-127"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "129",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-128"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "130",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-129"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "131",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-130"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "132",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-131"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "133",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-132"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "134",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-133"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "135",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-134"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "136",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-135"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "137",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-136"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "138",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-137"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "139",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-138"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "140",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-139"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "141",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-140"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "142",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-141"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "143",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-142"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "144",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-143"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "145",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-144"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "146",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-145"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "147",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-146"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "148",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-147"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "149",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-148"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "150",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-149"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "151",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-150"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "152",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-151"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "153",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-152"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "154",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-153"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "155",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-154"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "156",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-155"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "157",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-156"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "158",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-157"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "159",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-158"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "160",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-159"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "161",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-160"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "162",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-161"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "163",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-162"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "164",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-163"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "165",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-164"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "166",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-165"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "167",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-166"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "168",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-167"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "169",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-168"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "170",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-169"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "171",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-170"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "172",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-171"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "173",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-172"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "174",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-173"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "175",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-174"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "176",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-175"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "177",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-176"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "178",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-177"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "179",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-178"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "180",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-179"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "181",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-180"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "182",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-181"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "183",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-182"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "184",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-183"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "185",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-184"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "186",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-185"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "187",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-186"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "188",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-187"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "189",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-188"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "190",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-189"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "191",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-190"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "192",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-191"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "193",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-192"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "194",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-193"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "195",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-194"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "196",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-195"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "197",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-196"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "198",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-197"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "199",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-198"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "200",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-199"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        }
+      ],
+      "reset_required": false,
+      "resume_after_id": null,
+      "reset_reason": null
+    },
+    {
+      "type": "events.page",
+      "project_id": 1,
+      "after_id": "200",
+      "next_after_id": "237",
+      "has_more": false,
+      "events": [
+        {
+          "event_id": "201",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-200"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "202",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-201"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "203",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-202"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "204",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-203"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "205",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-204"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "206",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-205"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "207",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-206"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "208",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-207"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "209",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-208"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "210",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-209"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "211",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-210"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "212",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-211"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "213",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-212"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "214",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-213"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "215",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-214"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "216",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-215"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "217",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-216"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "218",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-217"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "219",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-218"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "220",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-219"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "221",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-220"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "222",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-221"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "223",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-222"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "224",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-223"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "225",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-224"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "226",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-225"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "227",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-226"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "228",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-227"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "229",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-228"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "230",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-229"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "231",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-230"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "232",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-231"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "233",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-232"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "234",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-233"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "235",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-234"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "236",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-235"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "237",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "initial-236"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        }
+      ],
+      "reset_required": false,
+      "resume_after_id": null,
+      "reset_reason": null
+    },
+    {
+      "type": "events.page",
+      "project_id": 1,
+      "after_id": "237",
+      "next_after_id": "337",
+      "has_more": true,
+      "events": [
+        {
+          "event_id": "238",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-0"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "239",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-1"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "240",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-2"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "241",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-3"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "242",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-4"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "243",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-5"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "244",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-6"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "245",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-7"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "246",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-8"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "247",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-9"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "248",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-10"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "249",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-11"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "250",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-12"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "251",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-13"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "252",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-14"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "253",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-15"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "254",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-16"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "255",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-17"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "256",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-18"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "257",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-19"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "258",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-20"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "259",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-21"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "260",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-22"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "261",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-23"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "262",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-24"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "263",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-25"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "264",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-26"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "265",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-27"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "266",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-28"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "267",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-29"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "268",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-30"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "269",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-31"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "270",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-32"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "271",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-33"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "272",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-34"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "273",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-35"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "274",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-36"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "275",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-37"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "276",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-38"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "277",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-39"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "278",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-40"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "279",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-41"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "280",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-42"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "281",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-43"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "282",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-44"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "283",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-45"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "284",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-46"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "285",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-47"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "286",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-48"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "287",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-49"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "288",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-50"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "289",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-51"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "290",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-52"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "291",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-53"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "292",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-54"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "293",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-55"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "294",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-56"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "295",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-57"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "296",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-58"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "297",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-59"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "298",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-60"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "299",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-61"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "300",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-62"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "301",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-63"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "302",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-64"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "303",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-65"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "304",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-66"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "305",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-67"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "306",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-68"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "307",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-69"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "308",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-70"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "309",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-71"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "310",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-72"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "311",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-73"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "312",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-74"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "313",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-75"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "314",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-76"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "315",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-77"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "316",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-78"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "317",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-79"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "318",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-80"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "319",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-81"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "320",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-82"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "321",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-83"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "322",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-84"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "323",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-85"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "324",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-86"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "325",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-87"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "326",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-88"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "327",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-89"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "328",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-90"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "329",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-91"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "330",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-92"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "331",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-93"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "332",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-94"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "333",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-95"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "334",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-96"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "335",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-97"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "336",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-98"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "337",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-99"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        }
+      ],
+      "reset_required": false,
+      "resume_after_id": null,
+      "reset_reason": null
+    },
+    {
+      "type": "events.page",
+      "project_id": 1,
+      "after_id": "337",
+      "next_after_id": "437",
+      "has_more": true,
+      "events": [
+        {
+          "event_id": "338",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-100"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "339",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-101"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "340",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-102"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "341",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-103"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "342",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-104"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "343",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-105"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "344",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-106"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "345",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-107"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "346",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-108"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "347",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-109"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "348",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-110"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "349",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-111"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "350",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-112"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "351",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-113"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "352",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-114"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "353",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-115"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "354",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-116"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "355",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-117"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "356",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-118"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "357",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-119"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "358",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-120"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "359",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-121"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "360",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-122"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "361",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-123"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "362",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-124"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "363",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-125"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "364",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-126"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "365",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-127"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "366",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-128"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "367",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-129"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "368",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-130"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "369",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-131"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "370",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-132"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "371",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-133"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "372",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-134"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "373",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-135"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "374",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-136"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "375",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-137"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "376",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-138"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "377",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-139"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "378",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-140"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "379",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-141"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "380",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-142"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "381",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-143"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "382",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-144"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "383",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-145"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "384",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-146"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "385",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-147"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "386",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-148"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "387",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-149"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "388",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-150"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "389",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-151"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "390",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-152"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "391",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-153"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "392",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-154"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "393",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-155"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "394",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-156"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "395",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-157"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "396",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-158"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "397",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-159"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "398",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-160"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "399",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-161"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "400",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-162"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "401",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-163"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "402",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-164"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "403",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-165"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "404",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-166"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "405",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-167"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "406",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-168"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "407",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-169"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "408",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-170"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "409",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-171"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "410",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-172"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "411",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-173"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "412",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-174"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "413",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-175"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "414",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-176"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "415",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-177"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "416",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-178"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "417",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-179"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "418",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-180"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "419",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-181"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "420",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-182"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "421",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-183"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "422",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-184"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "423",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-185"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "424",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-186"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "425",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-187"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "426",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-188"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "427",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-189"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "428",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-190"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "429",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-191"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "430",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-192"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "431",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-193"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "432",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-194"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "433",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-195"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "434",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-196"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "435",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-197"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "436",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-198"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "437",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-199"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        }
+      ],
+      "reset_required": false,
+      "resume_after_id": null,
+      "reset_reason": null
+    },
+    {
+      "type": "events.page",
+      "project_id": 1,
+      "after_id": "437",
+      "next_after_id": "488",
+      "has_more": false,
+      "events": [
+        {
+          "event_id": "438",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-200"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "439",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-201"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "440",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-202"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "441",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-203"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "442",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-204"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "443",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-205"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "444",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-206"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "445",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-207"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "446",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-208"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "447",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-209"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "448",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-210"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "449",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-211"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "450",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-212"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "451",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-213"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "452",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-214"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "453",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-215"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "454",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-216"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "455",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-217"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "456",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-218"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "457",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-219"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "458",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-220"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "459",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-221"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "460",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-222"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "461",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-223"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "462",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-224"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "463",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-225"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "464",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-226"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "465",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-227"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "466",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-228"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "467",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-229"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "468",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-230"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "469",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-231"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "470",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-232"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "471",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-233"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "472",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-234"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "473",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-235"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "474",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-236"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "475",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-237"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "476",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-238"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "477",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-239"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "478",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-240"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "479",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-241"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "480",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-242"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "481",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-243"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "482",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-244"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "483",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-245"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "484",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-246"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "485",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-247"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "486",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-248"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "487",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-249"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "488",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "offline-250"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        }
+      ],
+      "reset_required": false,
+      "resume_after_id": null,
+      "reset_reason": null
+    },
+    {
+      "type": "events.page",
+      "project_id": 1,
+      "after_id": "488",
+      "next_after_id": "488",
+      "has_more": false,
+      "events": [],
+      "reset_required": true,
+      "resume_after_id": "490",
+      "reset_reason": "retention"
+    },
+    {
+      "type": "events.page",
+      "project_id": 1,
+      "after_id": "490",
+      "next_after_id": "493",
+      "has_more": false,
+      "events": [
+        {
+          "event_id": "491",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "retained-2"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "492",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "retained-3"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        },
+        {
+          "event_id": "493",
+          "type": "evaluation.observed",
+          "project_id": 1,
+          "source": "evaluation",
+          "entity_type": null,
+          "entity_id": null,
+          "data": {
+            "message": "retained-4"
+          },
+          "data_unavailable": false,
+          "timestamp": "2026-11-07 00:00:00"
+        }
+      ],
+      "reset_required": false,
+      "resume_after_id": null,
+      "reset_reason": null
+    },
+    {
+      "type": "events.page",
+      "project_id": 2,
+      "after_id": "0",
+      "next_after_id": "0",
+      "has_more": false,
+      "events": [],
+      "reset_required": false,
+      "resume_after_id": null,
+      "reset_reason": null
+    }
+  ],
+  "connections": [
+    "ws://127.0.0.1:33353/ws?project_id=1&after_id=0",
+    "ws://127.0.0.1:33353/ws?project_id=1&after_id=237",
+    "ws://127.0.0.1:33353/ws?project_id=1&after_id=488",
+    "ws://127.0.0.1:33353/ws?project_id=2&after_id=0"
+  ],
+  "errors": [],
+  "checks": [
+    "488-events-over-multiple-pages",
+    "equal-timestamps",
+    "actual-disconnect-and-resume",
+    "no-duplicates-before-retention",
+    "explicit-retention-snapshot-required",
+    "project-switch-clears-original-observations"
+  ]
+}

@@ -4,6 +4,17 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Eventos y reconexión comprobados:** historial SQLite compartido por HTTP/WS,
+  cursores exactos, páginas acotadas, aislamiento de clientes lentos y aviso de
+  pérdida de continuidad.116 pruebas de fuente y116 instaladas;136 contratos,
+  9 DOM y build pasan.602 archivos coinciden,48 definiciones documentadas.
+  El navegador real recupera488 eventos tras desconexión sin pérdidas/duplicados
+  antes de retención, explica el borrado y aísla proyectos. La interfaz sigue sin
+  aceptación: superposición móvil y accesibilidad anotadas en DD079. Sigue la
+  evaluación global actual;43 escenarios y12 páginas aún abiertos.
+  [Contrato](../architecture/durable-events.md), [resultados](durable-events-results.json),
+  [paquete](durable-events-packaging.json).
+
 - **Historial y presupuesto conectados:** Tareas pagina más allá de30 ejecuciones;
   Tareas/Agentes muestran intentos anteriores con sus propios recibos. La vista de
   presupuesto comparte la cuenta de admisión y distingue reservas/observaciones

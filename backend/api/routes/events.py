@@ -1,77 +1,53 @@
-"""Events log endpoint — provides historical events for the activity feed."""
+"""Owner-readable durable event history using the same ascending cursor as live delivery."""
 
-from __future__ import annotations
+import asyncio
 
-import json
-import sqlite3
-
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, Request
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-from backend.tools.base.db import execute_with_retry
+from backend.runtime.event_history import EventHistory
 
 router = APIRouter(prefix="/api/events", tags=["events"])
 
 
 class EventResponse(BaseModel):
-    id: int
+    """One committed observation with its durable identity and explicit missing payload state."""
+
+    event_id: str
     type: str
     project_id: int
+    source: str
     entity_type: str | None = None
     entity_id: int | None = None
     data: dict | None = None
+    data_unavailable: bool
     timestamp: str | None = None
 
 
-@router.get("/{project_id}", response_model=list[EventResponse])
+class EventPageResponse(BaseModel):
+    """Bounded ascending page or an explicit snapshot refresh requirement after retention loss."""
+
+    type: str
+    project_id: int
+    after_id: str
+    next_after_id: str
+    has_more: bool
+    events: list[EventResponse]
+    reset_required: bool
+    resume_after_id: str | None
+    reset_reason: str | None
+
+
+@router.get("/{project_id}", response_model=EventPageResponse)
 async def list_events(
     project_id: int,
-    limit: int = Query(default=50, ge=1, le=200),
-    after_id: int | None = Query(default=None),
+    request: Request,
+    limit: int = Query(default=100, ge=1, le=200),
+    after_id: int = Query(default=0, ge=0, le=9223372036854775807),
 ):
-    """Return recent events for a project, newest first.
+    """Recover committed events in stable order; expired cursors cannot silently skip history."""
+    from backend.api.routes.runs import read_store
 
-    Use ``after_id`` for forward-pagination (events created after the given id).
-    """
-
-    def _query(conn: sqlite3.Connection) -> list[dict]:
-        where = ["el.project_id = ?"]
-        params: list = [project_id]
-
-        if after_id is not None:
-            where += ["el.id > ?"]
-            params.append(after_id)
-
-        params.append(limit)
-        rows = conn.execute(
-            f"""SELECT el.id, el.project_id, el.event_type, el.entity_type,
-                       el.entity_id, el.event_data_json, el.created_at
-                FROM events_log el
-                WHERE {' AND '.join(where)}
-                ORDER BY el.created_at DESC
-                LIMIT ?""",
-            params,
-        ).fetchall()
-        return [dict(r) for r in rows]
-
-    rows = execute_with_retry(_query)
-
-    events: list[EventResponse] = []
-    for r in rows:
-        data = {}
-        if r.get("event_data_json"):
-            try:
-                data = json.loads(r["event_data_json"])
-            except (json.JSONDecodeError, TypeError):
-                pass
-        events.append(EventResponse(
-            id=r["id"],
-            type=r["event_type"],
-            project_id=r["project_id"],
-            entity_type=r.get("entity_type"),
-            entity_id=r.get("entity_id"),
-            data=data,
-            timestamp=r.get("created_at"),
-        ))
-
-    return events
+    page = await asyncio.to_thread(EventHistory(read_store(request).database).page, project_id, after_id=after_id, limit=limit)
+    return JSONResponse(page, headers={"Cache-Control": "no-store"})

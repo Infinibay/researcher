@@ -1461,7 +1461,16 @@
         "docs/modernization/history-budget-results.json",
         "docs/modernization/history-budget-packaging.json",
         "backend/tests/runtime/test_history_budget.py",
-        "frontend/tests/ui/history-budget.test.tsx"
+        "frontend/tests/ui/history-budget.test.tsx",
+        "docs/architecture/durable-events.md",
+        "docs/modernization/durable-events-results.json",
+        "docs/modernization/durable-events-packaging.json",
+        "backend/tests/runtime/test_durable_events.py",
+        "backend/tests/api/test_event_stream.py",
+        "frontend/tests/events.test.ts",
+        "frontend/tests/websocket.test.ts",
+        "frontend/tests/ui/activity-feed.test.tsx",
+        "docs/design/audits/2026-11-07-durable-events/report.md"
       ],
       "remaining": [
         "Full product runtime/client integration and browser acceptance; HTTP owner guard does not complete the entire scenario"

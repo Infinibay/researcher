@@ -15,7 +15,7 @@ reparar el original. No basta comprobar que el número de proyectos sigue igual.
 
 | Estado observado | Camino admitido | Evidencia que se conserva |
 | --- | --- | --- |
-| Un paso18–58 se interrumpió antes de su marcador | Abrir de nuevo con la versión compatible; el paso transaccional vuelve a partir del esquema anterior | Misma base, relaciones y datos previos;41 fronteras de interrupción comprobadas |
+| Un paso18–59 se interrumpió antes de su marcador | Abrir de nuevo con la versión compatible; el paso transaccional vuelve a partir del esquema anterior | Misma base, relaciones y datos previos;42 fronteras de interrupción comprobadas |
 | Base más nueva que el programa o historial moderno incompleto | Rechazo del arranque/migración; instalar código compatible o inspeccionar/restaurar evidencia | No se falsifican marcadores ni se acepta escritura sobre un esquema supuesto |
 | Versiones18–32 y43–56 ya aplicadas | Reparación hacia adelante o restauración explícita de una copia compatible | No hay inversa general publicada; no borrar tablas/columnas para simular una vuelta atrás |
 | Versión33, identidad wiki | Inversa sólo si33 es la última versión, su huella demuestra ausencia de escrituras posteriores y no hay colisiones | IDs, relaciones, secuencias y contenido anteriores |
@@ -29,6 +29,10 @@ comando de downgrade universal. Se aplican únicamente sobre su versión y bajo
 sus precondiciones; las versiones posteriores deben tratarse explícitamente.
 No se declara compatible un binario antiguo por conseguir que una operación SQL
 termine. La aplicación actual requiere su esquema actual.
+
+La versión59 conserva el punto de retención de eventos. No tiene una inversa
+general publicada: eliminarlo permitiría ocultar pérdida de continuidad. Usar
+reparación hacia adelante o una restauración compatible y explícita.
 
 Las implementaciones están en `wiki_migration.py`, `review_migration.py`,
 `result_migration.py`, `development_migration.py`, `peer_archive_migration.py` y

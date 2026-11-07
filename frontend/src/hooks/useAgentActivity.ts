@@ -1,7 +1,11 @@
-import { useActivityFeedStore } from '../stores/activityFeed'
+/** Expose recent activity and its connection evidence to the owner drawer. @module */
+import {useActivityFeedStore} from '../stores/activityFeed'
 
-export function useAgentActivity() {
-  const events = useActivityFeedStore((s) => s.events)
-  const clearFeed = useActivityFeedStore((s) => s.clearFeed)
-  return { events, clearFeed }
+/** Keep an empty list distinct from a disconnected or incomplete history. */
+export function useAgentActivity(){
+ const events=useActivityFeedStore(state=>state.events)
+ const clearFeed=useActivityFeedStore(state=>state.clearFeed)
+ const connection=useActivityFeedStore(state=>state.connection)
+ const gap=useActivityFeedStore(state=>state.gap)
+ return {events,clearFeed,connection,gap}
 }

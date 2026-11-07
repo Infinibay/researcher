@@ -1,13 +1,14 @@
 # Cadena de migraciones y recuperación de una interrupción
 
 El arranque conserva los manejadores anteriores a la versión18 y aplica las
-versiones18–58 en un único [catálogo](../../backend/db/migration_catalog.py).
-El esquema SQL inicial sigue siendo la base histórica17. La versión actual es58:
-57 conserva procedencia de procesos archivados y58 la de fragmentos importados.
+versiones18–59 en un único [catálogo](../../backend/db/migration_catalog.py).
+El esquema SQL inicial sigue siendo la base histórica17. La versión actual es59:
+57 conserva procedencia de procesos archivados,58 la de fragmentos importados
+y59 el punto de continuidad perdido por borrados de eventos.
 
 `ensure_migrations(database, existing_only=True)` sigue exigiendo una base
 inicializada y avanza hasta la versión actual. El argumento opcional
-`target_version` permite detener un avance en una versión concreta entre17 y58
+`target_version` permite detener un avance en una versión concreta entre17 y59
 para ensayos históricos o una actualización por etapas. No se expone como modo
 de funcionamiento de la web: el runtime actual necesita el esquema actual.
 
@@ -23,8 +24,8 @@ por haber empezado el trabajo. Una base en56 no puede volver a49 indicando un
 destino menor: hacen falta una inversa validada que preserve los datos o una
 restauración explícita. El historial utilizado no se elimina para permitirla.
 
-Se comprobó cada frontera18–58 terminando abruptamente un proceso hijo justo
-antes de insertar el marcador de versión. En los41 casos se conservaron esquema,
+Se comprobó cada frontera18–59 terminando abruptamente un proceso hijo justo
+antes de insertar el marcador de versión. En los42 casos se conservaron esquema,
 historial, proyectos y tareas anteriores, y se pudo continuar sobre la misma
 base. También pasan comprobaciones de integridad y claves foráneas. Este ensayo
 abarca un punto de interrupción por versión; no demuestra tolerancia a corte de
@@ -45,9 +46,11 @@ o modificados y los22 módulos afectados tienen docstrings.
 [Resultados y fallos anteriores](../modernization/migration-chain-results.json),
 [verificación instalada](../modernization/migration-chain-packaging.json).
 
-La comprobación actual18–58 forma parte de139 pruebas dirigidas de fuente y139
+La comprobación anterior18–58 forma parte de139 pruebas dirigidas de fuente y139
 instaladas, con593 archivos Python/SQL coincidentes; no es una suite global.
-[Recibo actual](../modernization/legacy-import-packaging.json).
+[Recibo anterior](../modernization/legacy-import-packaging.json).
+La cadena18–59 pasa dentro de116 pruebas de fuente y116 instaladas.
+[Recibo actual de eventos](../modernization/durable-events-packaging.json).
 La [restauración administrada](installation-backup.md), la recuperación tras
 reboot controlado y la [importación histórica](legacy-import.md) tienen evidencia
 separada. La [política de recuperación](migration-recovery-policy.md) distingue

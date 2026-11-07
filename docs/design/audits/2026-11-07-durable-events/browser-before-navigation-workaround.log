@@ -1,0 +1,63 @@
+
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.click: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for getByRole('button', { name: 'Otro proyecto', exact: true })[22m
+[2m    - locator resolved to <button class="flex w-full items-center gap-2 px-3 py-2 text-left text-sm hover:bg-surface-700 text-slate-300">Otro proyecto</button>[22m
+[2m  - attempting click action[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <p role="status" class="px-3 py-2 text-xs text-slate-300">Historial al día</p> from <div class="workspace-body relative flex flex-1 overflow-hidden">…</div> subtree intercepts pointer events[22m
+[2m    - retrying click action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <p role="status" class="px-3 py-2 text-xs text-slate-300">Historial al día</p> from <div class="workspace-body relative flex flex-1 overflow-hidden">…</div> subtree intercepts pointer events[22m
+[2m    - retrying click action[22m
+[2m      - waiting 100ms[22m
+[2m    19 × waiting for element to be visible, enabled and stable[22m
+[2m       - element is visible, enabled and stable[22m
+[2m       - scrolling into view if needed[22m
+[2m       - done scrolling[22m
+[2m       - <p role="status" class="px-3 py-2 text-xs text-slate-300">Historial al día</p> from <div class="workspace-body relative flex flex-1 overflow-hidden">…</div> subtree intercepts pointer events[22m
+[2m     - retrying click action[22m
+[2m       - waiting 500ms[22m
+
+    at /home/andres/.codex/worktrees/b09e/researcher/frontend/tests/events.browser.mjs:57:67 {
+  log: [
+    "  - waiting for getByRole('button', { name: 'Otro proyecto', exact: true })",
+    '    - locator resolved to <button class="flex w-full items-center gap-2 px-3 py-2 text-left text-sm hover:bg-surface-700 text-slate-300">Otro proyecto</button>',
+    '  - attempting click action',
+    '    2 × waiting for element to be visible, enabled and stable',
+    '      - element is visible, enabled and stable',
+    '      - scrolling into view if needed',
+    '      - done scrolling',
+    '      - <p role="status" class="px-3 py-2 text-xs text-slate-300">Historial al día</p> from <div class="workspace-body relative flex flex-1 overflow-hidden">…</div> subtree intercepts pointer events',
+    '    - retrying click action',
+    '    - waiting 20ms',
+    '    2 × waiting for element to be visible, enabled and stable',
+    '      - element is visible, enabled and stable',
+    '      - scrolling into view if needed',
+    '      - done scrolling',
+    '      - <p role="status" class="px-3 py-2 text-xs text-slate-300">Historial al día</p> from <div class="workspace-body relative flex flex-1 overflow-hidden">…</div> subtree intercepts pointer events',
+    '    - retrying click action',
+    '      - waiting 100ms',
+    '    19 × waiting for element to be visible, enabled and stable',
+    '       - element is visible, enabled and stable',
+    '       - scrolling into view if needed',
+    '       - done scrolling',
+    '       - <p role="status" class="px-3 py-2 text-xs text-slate-300">Historial al día</p> from <div class="workspace-body relative flex flex-1 overflow-hidden">…</div> subtree intercepts pointer events',
+    '     - retrying click action',
+    '       - waiting 500ms'
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v24.22.2

@@ -25,7 +25,43 @@ lista en el documento además de publicarla en el chat, para retomarla tras comp
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: historial y presupuesto conectados; siguen eventos y reconexión
+## Etapa actual: eventos y reconexión comprobados; sigue evaluación global
+
+HTTP y WebSocket recuperan el mismo historial confirmado, con cursor exacto por
+ID. Cada cliente tiene su emisor y plazo; una conexión lenta no bloquea a otras.
+Al reconectar se recuperan páginas pendientes. La pérdida de continuidad por
+retención se explica y exige actualizar la vista, sin fingir un historial completo.
+
+Pasan116 pruebas de fuente y116 instaladas,136 contratos frontend y9 DOM;
+build estricto correcto.602 archivos Python/SQL coinciden,324 productivos;
+48 definiciones nuevas/modificadas tienen docstrings. El navegador real recupera
+488 eventos sin pérdidas ni duplicados antes del borrado, comprueba el aviso de
+retención y el aislamiento entre proyectos. Tres estados escritorio/móvil.
+[Contrato](../architecture/durable-events.md), [resultados](durable-events-results.json),
+[paquete](durable-events-packaging.json), [navegador](../design/audits/2026-11-07-durable-events/report.md).
+
+**Lista vigente al cambiar de tarea:**
+- Terminado: historial durable, reconexión, aislamiento de clientes lentos y aviso
+  de pérdida de continuidad. **30 min 06 s** (05:24:44–05:54:50 UTC),
+  desde el inicio hasta cerrar este registro, incluyendo verificación/documentación.
+- Siguiente principal: evaluación global actual y clasificación de fallos por
+  capacidad pendiente. Todavía no comenzó; registrar el inicio al comenzar.
+- Pendiente de ubicación: datos históricos reales del propietario.
+- Después: recuperación ante fallos más amplios/actores activos; evaluaciones
+  real, humana y científica; seguridad; aceptación integral de12 páginas.
+- Después de todas las tareas gruesas: detalles secundarios y revisión
+  independiente final de todo el plan. DD079 registra la superposición móvil,
+  integración del panel, accesibilidad pendiente y tres avisos de lint.
+
+La interfaz no está aceptada: Axe detectó contraste y una región sin foco; el
+panel abierto tapa el selector móvil. El ensayo final cambia de proyecto cerrando
+primero el panel, sin clic forzado. Estos hallazgos siguen abiertos para aceptación.
+Siguen43 escenarios amplios y0/12 páginas completamente aceptadas. La última suite
+global es anterior a estos cambios; no hay porcentaje global defendible.
+Cero ejecuciones/modelos en este ensayo; todos los procesos propios cerrados.
+La lista y el tiempo en cada transición permanecen tras compactar.
+
+## Etapa anterior: historial y presupuesto conectados
 
 Tareas pagina ejecuciones más allá de las30 del resumen. Tareas y Agentes permiten
 inspeccionar intentos anteriores con su propio modelo, resultado y observaciones.

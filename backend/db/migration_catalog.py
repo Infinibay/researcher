@@ -74,6 +74,7 @@ MIGRATIONS = (
     Migration(56, resource='agent_messages_schema.sql'),
     Migration(57, resource='peer_archive_schema.sql'),
     Migration(58, resource='reference_provenance_schema.sql'),
+    Migration(59, resource='event_retention_schema.sql'),
 )
 LATEST_VERSION = MIGRATIONS[-1].version
 

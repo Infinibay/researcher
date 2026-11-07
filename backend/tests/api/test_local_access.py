@@ -139,7 +139,18 @@ def test_same_origin_on_custom_port_serves_assets_but_still_requires_owner_and_c
         )
 
 
+def receive_pong(websocket):
+    """Allow the new initial durable page while still requiring the exact authenticated pong."""
+    for _ in range(4):
+        message = websocket.receive_json()
+        if message == {"type": "pong"}:
+            return
+        assert message["type"] == "events.page" and message["project_id"] == 1
+    pytest.fail("No pong received after bounded initial event pages")
+
+
 def test_same_origin_custom_port_websocket_uses_the_existing_owner_session(owner_app):
+    """The owner cookie authorizes same-origin sockets while durable startup pages precede keepalives."""
     app, _, _ = owner_app
     with TestClient(app, base_url="http://localhost:53123") as client:
         client.headers["Origin"] = "http://localhost:53123"
@@ -149,7 +160,7 @@ def test_same_origin_custom_port_websocket_uses_the_existing_owner_session(owner
             headers={"Origin": "http://localhost:53123"},
         ) as ws:
             ws.send_text("ping")
-            assert ws.receive_json() == {"type": "pong"}
+            receive_pong(ws)
 
 
 def test_pairing_sets_private_cookie_and_csrf_allows_owner_work(
@@ -242,6 +253,7 @@ def test_cookie_and_correct_csrf_do_not_authorize_untrusted_origins(owner_app, o
 
 
 def test_websocket_accepts_owner_with_trusted_origin_and_closes_after_logout(owner_app):
+    """Authenticated pages and pings remain subject to immediate owner-session revocation."""
     app, _, _ = owner_app
     with TestClient(app, base_url="http://localhost") as client:
         csrf = pair(client).json()["csrf_token"]
@@ -250,7 +262,7 @@ def test_websocket_accepts_owner_with_trusted_origin_and_closes_after_logout(own
             headers={"Origin": "http://localhost:8000"},
         ) as ws:
             ws.send_text("ping")
-            assert ws.receive_json() == {"type": "pong"}
+            receive_pong(ws)
             client.delete("/api/session", headers={"X-Researcher-CSRF": csrf})
             with pytest.raises(WebSocketDisconnect) as closed:
                 ws.receive_json()
@@ -484,6 +496,7 @@ def test_serving_refuses_unsafe_owner_credential_directories(
 
 
 def test_idle_websocket_expires_without_a_client_ping(owner_app):
+    """An idle durable stream cannot extend the owner session by omitting client messages."""
     app, _, now = owner_app
     with TestClient(app, base_url="http://localhost") as client:
         pair(client)
@@ -491,6 +504,7 @@ def test_idle_websocket_expires_without_a_client_ping(owner_app):
             "ws://localhost/ws?project_id=1",
             headers={"Origin": "http://localhost:8000"},
         ) as ws:
+            assert ws.receive_json()["type"] == "events.page"
             now[0] += 11
             with pytest.raises(WebSocketDisconnect) as expired:
                 ws.receive_json()

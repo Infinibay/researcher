@@ -1,3 +1,4 @@
+/** Recent committed activity with visible transport status and retained-history limits. @module */
 import { memo } from 'react'
 import { useAgentActivity } from '../../hooks/useAgentActivity'
 import { StatusDot } from '../common/StatusDot'
@@ -49,6 +50,7 @@ const EVENT_META: Record<string, { icon: string; accent: string }> = {
   _default: { icon: '🤖', accent: 'slate' },
 }
 
+/** Select the existing visual accent without interpreting an event as successful work. */
 function getMeta(type: string) {
   return EVENT_META[type] ?? EVENT_META._default
 }
@@ -136,6 +138,7 @@ function accentClasses(accent: string) {
 
 // --- ActivityFeedItem ---
 
+/** Render one immutable observation with its actual retained timestamp when available. */
 const ActivityFeedItem = memo(function ActivityFeedItem({ event }: { event: AgentActivityEvent }) {
   const meta = getMeta(event.type)
   const ac = accentClasses(meta.accent)
@@ -149,7 +152,7 @@ const ActivityFeedItem = memo(function ActivityFeedItem({ event }: { event: Agen
           {meta.icon}
         </span>
         <span className={`text-xs font-semibold ${ac.text}`}>{agent}</span>
-        <span className="text-[10px] text-slate-600">{formatRelative(event.timestamp)}</span>
+        <span className="text-[10px] text-slate-600">{event.timestamp ? formatRelative(event.timestamp) : 'Fecha no registrada'}</span>
       </div>
       <p className="text-xs text-slate-300 line-clamp-2 mt-0.5 ml-7">{label}</p>
     </div>
@@ -158,31 +161,36 @@ const ActivityFeedItem = memo(function ActivityFeedItem({ event }: { event: Agen
 
 // --- ActivityFeed main ---
 
+/** Show transport/gap evidence independently from the bounded recent-event window. */
 export function ActivityFeed() {
-  const { events, clearFeed } = useAgentActivity()
+  const { events, clearFeed, connection, gap } = useAgentActivity()
+  const stateLabels = {connecting:'Conectando…',catching_up:'Recuperando historial…',live:'Historial al día',reconnecting:'Reconectando; se conserva el último registro',reset_required:'Falta un tramo del historial',unavailable:'No se pudo comprobar la actividad'}
 
   return (
     <div className="flex h-full flex-col bg-surface-800">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-surface-700 p-3">
         <div className="flex items-center gap-2">
-          <StatusDot status={events.length > 0 ? 'active' : 'inactive'} animated />
-          <h3 className="text-sm font-semibold text-slate-200">Activity</h3>
+          <StatusDot status={connection === 'live' ? 'active' : 'inactive'} animated />
+          <h3 className="text-sm font-semibold text-slate-200">Actividad</h3>
         </div>
         {events.length > 0 && (
           <button
             onClick={clearFeed}
             className="text-xs text-slate-500 hover:text-slate-300"
           >
-            Clear
+            Limpiar vista
           </button>
         )}
       </div>
 
+      <p role="status" className="px-3 py-2 text-xs text-slate-300">{stateLabels[connection]}</p>
+      {gap && <p role="alert" className="px-3 py-2 text-xs text-amber-200">Una parte del historial ya no está disponible o cambió la base. Se solicita una nueva consulta del estado actual; los eventos perdidos no se reconstruyen.</p>}
+      <p className="px-3 pb-2 text-xs text-slate-400">Últimos 100 eventos conservados. Reconectar sólo recupera observaciones; no vuelve a ejecutar solicitudes.</p>
       {/* Scrollable body */}
       <div className="flex-1 overflow-y-auto p-2 space-y-1.5">
         {events.length === 0 ? (
-          <p className="py-8 text-center text-xs text-slate-600">Waiting for activity...</p>
+          <p className="py-8 text-center text-xs text-slate-600">{connection === 'live' ? 'No hay eventos para mostrar en esta vista.' : 'Esperando una lectura del historial…'}</p>
         ) : (
           events.map((event) => <ActivityFeedItem key={event.id} event={event} />)
         )}

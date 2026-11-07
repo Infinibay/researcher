@@ -1,0 +1,91 @@
+[
+  {
+    "cell": null,
+    "code": "BLE001",
+    "end_location": {
+      "column": 29,
+      "row": 97
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/api/websocket.py",
+    "fix": null,
+    "location": {
+      "column": 20,
+      "row": 97
+    },
+    "message": "Do not catch blind exception: `Exception`",
+    "name": "blind-except",
+    "noqa_row": 97,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/blind-except"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 22,
+      "row": 12
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/evals/runtime/run_event_recovery.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import json\nimport os\nimport socket\nimport sqlite3\nimport subprocess\nimport sys\nimport tempfile\nimport time\nimport urllib.request\nfrom pathlib import Path\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 15
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "PLW1510",
+    "end_location": {
+      "column": 37,
+      "row": 46
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/evals/runtime/run_event_recovery.py",
+    "fix": {
+      "applicability": "displayonly",
+      "edits": [
+        {
+          "content": "check=False, ",
+          "end_location": {
+            "column": 77,
+            "row": 46
+          },
+          "location": {
+            "column": 77,
+            "row": 46
+          }
+        }
+      ],
+      "message": "Add explicit `check=False`"
+    },
+    "location": {
+      "column": 23,
+      "row": 46
+    },
+    "message": "`subprocess.run` without explicit `check` argument",
+    "name": "subprocess-run-without-check",
+    "noqa_row": 46,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/subprocess-run-without-check"
+  }
+]

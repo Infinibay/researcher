@@ -271,6 +271,7 @@ export interface UserRequest {
 }
 
 export interface WSEvent {
+  event_id?: string
   type: string
   project_id: number
   entity_type?: string

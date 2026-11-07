@@ -8,7 +8,7 @@ import time
 from contextlib import ExitStack, asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, Query, Request, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
@@ -16,7 +16,7 @@ from fastapi.staticfiles import StaticFiles
 from backend.api import config as api_config
 from backend.api.exceptions import register_exception_handlers
 from backend.api.local_access import LocalAccess, OwnerAccessMiddleware
-from backend.api.websocket import manager
+from backend.api.websocket import ConnectionManager
 
 logger = logging.getLogger(__name__)
 
@@ -62,6 +62,7 @@ async def lifespan(app: FastAPI):
             serving = True
             yield
         finally:
+            await app.state.event_stream.close()
             try:
                 if entered:
                     await runtime.__aexit__(None, None, None)
@@ -121,6 +122,7 @@ def create_app(*, access: LocalAccess | None = None, runtime_service=None) -> Fa
         runtime_service.live_grants if runtime_service is not None else LiveGrants()
     )
     app.state.runtime_service = runtime_service
+    app.state.event_stream = ConnectionManager()
     from backend.config.settings import settings
     from backend.research.semantic import SemanticRetriever
     from backend.research.web_policy import WebAccessPolicy
@@ -218,8 +220,12 @@ def create_app(*, access: LocalAccess | None = None, runtime_service=None) -> Fa
 
     # WebSocket endpoint
     @app.websocket("/ws")
-    async def websocket_endpoint(websocket: WebSocket, project_id: int):
-        await manager.connect(websocket, project_id)
+    async def websocket_endpoint(websocket: WebSocket, project_id: int = Query(ge=1), after_id: int = Query(default=0, ge=0, le=9223372036854775807)):
+        """Resume owner observations from the last applied durable ID without replaying any work."""
+        from backend.api.routes.runs import read_store
+
+        manager = websocket.app.state.event_stream
+        await manager.connect(websocket, project_id, database=read_store(websocket).database, after_id=after_id)
         try:
             while True:
                 # Keep connection alive; listen for client messages
@@ -230,7 +236,7 @@ def create_app(*, access: LocalAccess | None = None, runtime_service=None) -> Fa
         except WebSocketDisconnect:
             pass
         finally:
-            manager.disconnect(websocket, project_id)
+            await manager.disconnect(websocket, project_id)
 
     # Serve static frontend files if they exist
     static_dir = Path(api_config.STATIC_DIR)
