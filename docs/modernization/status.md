@@ -4,6 +4,15 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Evaluación de comunicación ejecutada, fallos pendientes:**8 turnos reales,
+ 4pares comparables y2con ambas explicaciones finales. La política actual guardó
+ trabajo pero no entregó en planificación/auditoría por límites; un ejemplo
+ científico convirtió una media en un cambio individual no demostrado. Cálculos,
+ citas e informes se conservan. Todos los servicios/peers cerrados;27 pruebas
+ dirigidas pasan. Bloque29min48s. Siguiente principal: presupuesto visible, margen
+ para entrega y fidelidad explicativa; no se declaran corregidos esos fallos.
+ [Informe](profile-communication-review.md), [resultados](profile-communication-results.json).
+
 - **Revisión estática de prompts cerrada en este corte:**83 candidatos/287 archivos
   con83 decisiones vigentes, tras revalidar69 y conservar14. Catálogo3 y texto
   productivo sin cambios; corregida la versión que mostraba el evaluador.45 casos

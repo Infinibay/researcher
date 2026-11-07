@@ -8154,3 +8154,58 @@ owner historical data, remaining recovery and12-page full acceptance.43broad
 scenarios still open;0/12pages accepted. All macro tasks before all fine details;
 publish updated list and measured start at next transition. Do not infer a global
 percentage or completion from static inventory or directed tests.
+
+
+## 2026-11-07 09:26:45UTC — other-profile communication checkpoint
+
+Previous goal turn PROGRESS939669a. This block08:56:57–09:26:45UTC29min48s
+is PROGRESS: reusable registered multi-profile evaluation and evidence that changes
+next work.8actual subscription/Ken turns,4matched-control pairs, only2fully
+explained pairs. No product prompt change; installed active-reboot wheel unchanged.
+
+Original private root .researcher/evaluations/profile-communication-20261107:
+plan_dependencies baseline observed52.336s104499tokens; candidate failed57.588s
+131499tokens vs120000cap after storing a typed plan, no final native answer.
+Ken read without end_line initially returned only line1; later full read worked.
+Related-call queries returned symbol/language-not-parseable errors. Do not label
+that a diagnosed Ken package defect; current environment capability is limited.
+
+Second registration profile-communication-20261107-continuation freezes only the
+3not-started cases at350000tokens, preserving operator lower ceilings, all case/
+source/policy/rubric bytes and order. No planning replay. Scientific devices both
+completed with50/60/10 and correct repeated-unit/report-dependence/causal limits.
+Comparator then failed because request_history.cutoff_run_id aliases own runUUID.
+Exact raw difference confirmed. Preserve failure/hashes in input-cutoff-amendment;
+normalize only own current alias, not histories/foreign cutoffs. Recompute from
+raw input rather than trusting stored digest. Same original responses reanalyzed
+before reserved; no inference repeat. Tests protect alias and semantic mutations.
+
+Reserved selective_outcomes both complete80to79.2/-0.8, but candidate report says
+“diez lotes ganan 10 unidades cada uno”: unobserved individual changes inferred
+from group means. Treat as functional unsupported example, not minor style.
+Reserved skipped_checks candidate saved a draft,21native tool starts/20cap, no
+result delivery or final answer. It examined unrelated invoice tests and first
+called nonexistent accepts before correcting reproduction. Baseline ran once
+only after candidate terminal,12instrumented calls, actual cited helper report
+and final explanation; original candidate never replayed. No more model work live.
+
+8native turns sum608.478s,2065880observedtokens;6settled2unknown, not billing.
+2plan proposals,6draft reports,5report deliveries,0acceptance/publication. All8
+service handles terminal and recorded peers closed,0unrevoked local grants.
+Readonly extraction verifies hashes/exact citations/integrity/FKs/unchanged source.
+Collector is .superpowers/sdd/2026-10-31-actualizacion-proyecto/collect-profile-communication.py;
+public results/responses/human-review/review in docs/modernization/profile-communication-*.
+Initial source-only observation command accidentally used systemPython without
+httpx; rerun only reader withnativePY, no models. Reportwriter had missing Path
+import after saving JSON; fixed only Markdown. All retained model data unchanged.
+27directed tests PASS0skip0fail;34definitions documented,3I001deferredDD087.
+
+Next main block NOT STARTED: budget visibility and deliberate delivery margin,
+honest saved-partial-work explanation, bounded discovery and faithful examples.
+Need inspect actual product before choosing mechanism; do not just raise limits,
+claim policy-caused population effect fromonecase or rerun held-outs until green.
+Common policies/catalog3 unchanged; inventory83current stillvalid. Human A/B request
+pending, other profiles/real scientific material remain. Security Ken/Chroma/licenses,
+owner historical data, other recovery,12pageacceptance and all deferred details
+remain.43broadscenarios0/12pages unchanged. Publish done/current/pending and elapsed
+at next main transition; all macro tasks before all fine details. Local commit only.

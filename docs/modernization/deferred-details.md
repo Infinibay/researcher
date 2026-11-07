@@ -623,3 +623,12 @@ central; retomar ese pulido después de todas las capacidades principales.
 [Ubicaciones](active-reboot-lint.json). Los3 fallos de preparación histórica de
 reboot ya están documentados en DD081 y en la suite global previa; no constituyen
 una suite actual verde ni se solucionan ahora por cambios cosméticos.
+
+
+## DD087 · Imports del evaluador de perfiles
+
+Tres avisos Ruff I001: dos en `evals/context_alignment/run.py` y uno en
+`evals/context_alignment/worker.py`. Reordenar imports después de todas las capacidades principales;
+no repetir los8turnos por estilo. Los fallos de entrega por presupuesto y el
+salto desde promedios a individuos **no** son pulido: siguen como siguiente
+trabajo funcional. [Resultados y ubicaciones](profile-communication-results.json).

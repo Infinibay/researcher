@@ -1,0 +1,501 @@
+{
+  "schema_version": 1,
+  "base_commit": "939669a",
+  "original_registration_sha256": "dd1b99797310a5f23902513ea092108896a190611dbb5c652120dc59255466bd",
+  "continuation_registration": {
+    "format": 1,
+    "maximum_model_turns": 6,
+    "cases": [
+      {
+        "id": "repeated_devices",
+        "split": "development",
+        "registration_sha256": "cc58883a864afcffc8ad1fac7008dd9779d0a619542a7fdb0993360a8f96aca3"
+      },
+      {
+        "id": "selective_outcomes",
+        "split": "reserved",
+        "registration_sha256": "8965d137e75df72c79d5f4a9b568fe48c8135bc7df651cac43c9965337a936e5"
+      },
+      {
+        "id": "skipped_checks",
+        "split": "reserved",
+        "registration_sha256": "df7b79e9e183ab3cd20020d331a9c7b046829fff8168aa694026c42c39656c27"
+      }
+    ],
+    "prior_registration": {
+      "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/profile-communication-20261107",
+      "sha256": "dd1b99797310a5f23902513ea092108896a190611dbb5c652120dc59255466bd",
+      "reason": "The first planning candidate saved a proposal but exceeded120000observedtokens before its final explanation (131499observed). It is retained without replay. Only the three not-yet-started cases move to350000ceilings, within the existing operator ceiling; same prompts/cases/data/order/rubrics. This is a development-stage budget amendment, not a new successful planning sample."
+    },
+    "scope": "Four purposive synthetic cases; no population effect, statistical efficacy or human-comprehension inference."
+  },
+  "input_comparison_amendment": {
+    "registration_sha256": "68adf225bf4318a441374e0ba6b86705eae61f034ad864caf74c3215086a4df0",
+    "original_comparison_error": "Paired control differs: comparable_input_sha256",
+    "raw_comparison_preserved": {
+      "baseline": "0c80d30d11c057b52754bce8b0a574e3021b674a3a84f7bb678a05503ae1031d",
+      "candidate": "e2eb27e178ef448a5f30acc4c27ff649bdec30b3d4899353455b38431adba061"
+    },
+    "only_extra_difference": "request_history.cutoff_run_id duplicates its own scope.run_id in each arm; both request histories are empty. Different independent execution IDs are expected.",
+    "rule": "Ignore cutoff_run_id only when mode is same_task_admissions and it exactly equals its own current scope.run_id; preserve all prior records and mismatched cutoffs. Recompute from raw original input, not stored digest.",
+    "timing": "Development-stage analysis correction before reserved cases; no source, prompt, response, limit or actual input changed; no inference replay."
+  },
+  "cases": [
+    {
+      "id": "plan_dependencies",
+      "profile": "planning",
+      "split": "development",
+      "arms": {
+        "baseline": {
+          "status": "observed",
+          "run_statuses": [
+            "needs_review"
+          ],
+          "seconds": 52.336,
+          "observed_tokens": 104499,
+          "usage_status": "settled",
+          "budget": {
+            "status": "settled",
+            "observed_tokens": 104499,
+            "token_ceiling": 120000,
+            "native_status": "completed"
+          },
+          "model_control": {
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "low",
+            "source": "host",
+            "revision": 0,
+            "project_id": 101,
+            "actor_id": "researcher",
+            "fence": 1
+          },
+          "policy_sha256": "e99a776599b9bee245b20d641142cb1d88890e2fd096a5c50119ca901f57a4d7",
+          "real_ken_complete_source": true,
+          "peers_closed": true,
+          "unrevoked_grants": 0,
+          "service_exit": -15,
+          "retained_plan_proposals": 1,
+          "draft_reports": 0,
+          "report_deliveries": 0,
+          "captured_sources": 0,
+          "exact_citations": 0,
+          "integrity_and_foreign_keys": true,
+          "report_and_source_hashes_verified": true,
+          "owner_acceptance_or_publication": false,
+          "original_workspace_unchanged": true,
+          "original_result_sha256": "f1a788d16a606a6c838161160e02edfbb2d7c0e4abf81a40e264a7483baa3057",
+          "instrumented_tool_records": 7,
+          "native_tool_starts": 5
+        },
+        "candidate": {
+          "status": "failed",
+          "run_statuses": [
+            "failed"
+          ],
+          "seconds": 57.588,
+          "observed_tokens": 131499,
+          "usage_status": "unknown",
+          "budget": {
+            "status": "unknown",
+            "observed_tokens": 131499,
+            "token_ceiling": 120000,
+            "native_status": null
+          },
+          "model_control": {
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "low",
+            "source": "host",
+            "revision": 0,
+            "project_id": 101,
+            "actor_id": "researcher",
+            "fence": 1
+          },
+          "policy_sha256": "28d48d4195e027f1790a00a60ee46a7c4ce3328843ccf8830bfe3016b7fce928",
+          "real_ken_complete_source": true,
+          "peers_closed": true,
+          "unrevoked_grants": 0,
+          "service_exit": -15,
+          "retained_plan_proposals": 1,
+          "draft_reports": 0,
+          "report_deliveries": 0,
+          "captured_sources": 0,
+          "exact_citations": 0,
+          "integrity_and_foreign_keys": true,
+          "report_and_source_hashes_verified": true,
+          "owner_acceptance_or_publication": false,
+          "original_workspace_unchanged": true,
+          "original_result_sha256": "3b4f5ea05b58ddd9430abf05d238a5ea0d09a7f766d55c48813625480a876dc8",
+          "instrumented_tool_records": 11,
+          "native_tool_starts": 9
+        }
+      },
+      "controls_matched": true,
+      "both_explanations_delivered": false,
+      "human_comprehension": null,
+      "human_effort_seconds": null
+    },
+    {
+      "id": "repeated_devices",
+      "profile": "scientific_research",
+      "split": "development",
+      "arms": {
+        "baseline": {
+          "status": "observed",
+          "run_statuses": [
+            "needs_review"
+          ],
+          "seconds": 87.473,
+          "observed_tokens": 319217,
+          "usage_status": "settled",
+          "budget": {
+            "status": "settled",
+            "observed_tokens": 319217,
+            "token_ceiling": 350000,
+            "native_status": "completed"
+          },
+          "model_control": {
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "low",
+            "source": "host",
+            "revision": 0,
+            "project_id": 101,
+            "actor_id": "researcher",
+            "fence": 1
+          },
+          "policy_sha256": "518a8df19199967178c9b017d60bf67f08be39e236aa8e90750e74a42672c325",
+          "real_ken_complete_source": true,
+          "peers_closed": true,
+          "unrevoked_grants": 0,
+          "service_exit": -15,
+          "retained_plan_proposals": 0,
+          "draft_reports": 1,
+          "report_deliveries": 1,
+          "captured_sources": 2,
+          "exact_citations": 5,
+          "integrity_and_foreign_keys": true,
+          "report_and_source_hashes_verified": true,
+          "owner_acceptance_or_publication": false,
+          "original_workspace_unchanged": true,
+          "original_result_sha256": "d159647ad511707e906956498569f8fcee434fbac190077ccf6b93fdaf42cca7",
+          "instrumented_tool_records": 15,
+          "native_tool_starts": 15
+        },
+        "candidate": {
+          "status": "observed",
+          "run_statuses": [
+            "needs_review"
+          ],
+          "seconds": 91.221,
+          "observed_tokens": 310094,
+          "usage_status": "settled",
+          "budget": {
+            "status": "settled",
+            "observed_tokens": 310094,
+            "token_ceiling": 350000,
+            "native_status": "completed"
+          },
+          "model_control": {
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "low",
+            "source": "host",
+            "revision": 0,
+            "project_id": 101,
+            "actor_id": "researcher",
+            "fence": 1
+          },
+          "policy_sha256": "ec30bb174eebaa4c47756a52db88152549f15dda610cca801fcd398077f06b27",
+          "real_ken_complete_source": true,
+          "peers_closed": true,
+          "unrevoked_grants": 0,
+          "service_exit": -15,
+          "retained_plan_proposals": 0,
+          "draft_reports": 1,
+          "report_deliveries": 1,
+          "captured_sources": 2,
+          "exact_citations": 5,
+          "integrity_and_foreign_keys": true,
+          "report_and_source_hashes_verified": true,
+          "owner_acceptance_or_publication": false,
+          "original_workspace_unchanged": true,
+          "original_result_sha256": "c9846dad153f39799000d04b02e30e4fc79f2855bb0694619d0e2cdda9a52865",
+          "instrumented_tool_records": 15,
+          "native_tool_starts": 15
+        }
+      },
+      "controls_matched": true,
+      "both_explanations_delivered": true,
+      "human_comprehension": null,
+      "human_effort_seconds": null
+    },
+    {
+      "id": "selective_outcomes",
+      "profile": "scientific_research",
+      "split": "reserved",
+      "arms": {
+        "baseline": {
+          "status": "observed",
+          "run_statuses": [
+            "needs_review"
+          ],
+          "seconds": 81.453,
+          "observed_tokens": 317965,
+          "usage_status": "settled",
+          "budget": {
+            "status": "settled",
+            "observed_tokens": 317965,
+            "token_ceiling": 350000,
+            "native_status": "completed"
+          },
+          "model_control": {
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "low",
+            "source": "host",
+            "revision": 0,
+            "project_id": 101,
+            "actor_id": "researcher",
+            "fence": 1
+          },
+          "policy_sha256": "518a8df19199967178c9b017d60bf67f08be39e236aa8e90750e74a42672c325",
+          "real_ken_complete_source": true,
+          "peers_closed": true,
+          "unrevoked_grants": 0,
+          "service_exit": -15,
+          "retained_plan_proposals": 0,
+          "draft_reports": 1,
+          "report_deliveries": 1,
+          "captured_sources": 2,
+          "exact_citations": 5,
+          "integrity_and_foreign_keys": true,
+          "report_and_source_hashes_verified": true,
+          "owner_acceptance_or_publication": false,
+          "original_workspace_unchanged": true,
+          "original_result_sha256": "5671e4896d656eafd913be675470f9b47a8721ef0ef3704e1cbf907f1faf8d61",
+          "instrumented_tool_records": 14,
+          "native_tool_starts": 14
+        },
+        "candidate": {
+          "status": "observed",
+          "run_statuses": [
+            "needs_review"
+          ],
+          "seconds": 87.187,
+          "observed_tokens": 321847,
+          "usage_status": "settled",
+          "budget": {
+            "status": "settled",
+            "observed_tokens": 321847,
+            "token_ceiling": 350000,
+            "native_status": "completed"
+          },
+          "model_control": {
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "low",
+            "source": "host",
+            "revision": 0,
+            "project_id": 101,
+            "actor_id": "researcher",
+            "fence": 1
+          },
+          "policy_sha256": "ec30bb174eebaa4c47756a52db88152549f15dda610cca801fcd398077f06b27",
+          "real_ken_complete_source": true,
+          "peers_closed": true,
+          "unrevoked_grants": 0,
+          "service_exit": -15,
+          "retained_plan_proposals": 0,
+          "draft_reports": 1,
+          "report_deliveries": 1,
+          "captured_sources": 2,
+          "exact_citations": 7,
+          "integrity_and_foreign_keys": true,
+          "report_and_source_hashes_verified": true,
+          "owner_acceptance_or_publication": false,
+          "original_workspace_unchanged": true,
+          "original_result_sha256": "e515cb43aa11e26f11150181146e45f62ab16f11a820eeaf84130ce4d829a05d",
+          "instrumented_tool_records": 16,
+          "native_tool_starts": 16
+        }
+      },
+      "controls_matched": true,
+      "both_explanations_delivered": true,
+      "human_comprehension": null,
+      "human_effort_seconds": null
+    },
+    {
+      "id": "skipped_checks",
+      "profile": "code_audit",
+      "split": "reserved",
+      "arms": {
+        "baseline": {
+          "status": "observed",
+          "run_statuses": [
+            "needs_review"
+          ],
+          "seconds": 75.492,
+          "observed_tokens": 325875,
+          "usage_status": "settled",
+          "budget": {
+            "status": "settled",
+            "observed_tokens": 325875,
+            "token_ceiling": 350000,
+            "native_status": "completed"
+          },
+          "model_control": {
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "low",
+            "source": "host",
+            "revision": 0,
+            "project_id": 101,
+            "actor_id": "researcher",
+            "fence": 1
+          },
+          "policy_sha256": "3adb688bd7c0d8212a5a19071c7ae065d255234ea7dd44f1e65a7fb2752d9fb3",
+          "real_ken_complete_source": true,
+          "peers_closed": true,
+          "unrevoked_grants": 0,
+          "service_exit": -15,
+          "retained_plan_proposals": 0,
+          "draft_reports": 1,
+          "report_deliveries": 1,
+          "captured_sources": 1,
+          "exact_citations": 3,
+          "integrity_and_foreign_keys": true,
+          "report_and_source_hashes_verified": true,
+          "owner_acceptance_or_publication": false,
+          "original_workspace_unchanged": true,
+          "original_result_sha256": "470c17b95aa78a3198dca1439ee0ded263c9de59b80f0f480f6514e50d7abedc",
+          "instrumented_tool_records": 12,
+          "native_tool_starts": 12
+        },
+        "candidate": {
+          "status": "failed",
+          "run_statuses": [
+            "failed"
+          ],
+          "seconds": 75.728,
+          "observed_tokens": 234884,
+          "usage_status": "unknown",
+          "budget": {
+            "status": "unknown",
+            "observed_tokens": 234884,
+            "token_ceiling": 350000,
+            "native_status": null
+          },
+          "model_control": {
+            "model": "gpt-6.1-sol",
+            "reasoning_effort": "low",
+            "source": "host",
+            "revision": 0,
+            "project_id": 101,
+            "actor_id": "researcher",
+            "fence": 1
+          },
+          "policy_sha256": "98db419d43e488cdba3a4534a655ddab7b26c3774e71d03acf30903928ffe1de",
+          "real_ken_complete_source": true,
+          "peers_closed": true,
+          "unrevoked_grants": 0,
+          "service_exit": -15,
+          "retained_plan_proposals": 0,
+          "draft_reports": 1,
+          "report_deliveries": 0,
+          "captured_sources": 2,
+          "exact_citations": 3,
+          "integrity_and_foreign_keys": true,
+          "report_and_source_hashes_verified": true,
+          "owner_acceptance_or_publication": false,
+          "original_workspace_unchanged": true,
+          "original_result_sha256": "12d2cc69ddb81b191b971812e58e83fa6c663b7e48455cc8190687197180c7b2",
+          "instrumented_tool_records": 20,
+          "native_tool_starts": 21
+        }
+      },
+      "controls_matched": true,
+      "both_explanations_delivered": false,
+      "human_comprehension": null,
+      "human_effort_seconds": null
+    }
+  ],
+  "actual_model_turns": 8,
+  "fully_delivered_pairs": 2,
+  "observed_tokens_total": 2065880,
+  "arm_seconds_total": 608.478,
+  "limits": [
+    "Purposive synthetic cases; not a representative scientific/user sample.",
+    "One response per arm/case; no statistical or causal superiority claim.",
+    "Planning candidate exceeded its initial token ceiling; saved proposal is not a delivered final explanation.",
+    "Development-stage budget and identity-comparison amendments retained; not a pristine confirmatory study.",
+    "Human comprehension and effort unknown; implementer text appraisal is not blind.",
+    "Observed tokens are not billed cost or known subscription quota; nested tool records are not model-call counts."
+  ],
+  "validation": {
+    "directed_tests": 27,
+    "failures": 0,
+    "skips": 0,
+    "seconds": 0.416,
+    "documented_definitions": 34,
+    "deferred_lint": [
+      {
+        "path": "evals/context_alignment/run.py",
+        "code": "I001",
+        "line": 18
+      },
+      {
+        "path": "evals/context_alignment/run.py",
+        "code": "I001",
+        "line": 29
+      },
+      {
+        "path": "evals/context_alignment/worker.py",
+        "code": "I001",
+        "line": 66
+      }
+    ],
+    "product_policy_changed": false,
+    "new_wheel_or_global_suite": false
+  },
+  "implementer_appraisal": {
+    "blind": false,
+    "human_measures": null,
+    "findings": [
+      {
+        "case": "plan_dependencies",
+        "arm": "candidate",
+        "outcome": "delivery_failed",
+        "evidence": "131499 observed tokens versus120000 ceiling; stored typed plan exists but final native result is null. Token guard corroborates the limit mechanism; run.issue retains only generic runtime_failed."
+      },
+      {
+        "case": "repeated_devices",
+        "arm": "both",
+        "outcome": "supported_in_this_case",
+        "evidence": "Actual calculation50/60/10; four devices/two per arm distinguished from20reads, duplicated reports not independent, unreported methods not declared absent. Reports and exact source citations retained."
+      },
+      {
+        "case": "selective_outcomes",
+        "arm": "both",
+        "outcome": "arithmetic_and_causal_limits_supported",
+        "evidence": "Weighted overall80to79.2, change-0.8; duplicated summary and missing concurrent control distinguished. No invented individual data or uncertainty is needed for that aggregate."
+      },
+      {
+        "case": "selective_outcomes",
+        "arm": "candidate",
+        "outcome": "unsupported_individual_example",
+        "quote": "diez lotes ganan 10 unidades cada uno",
+        "evidence": "The report supplies subgroup means only and explicitly says individual values are not retained. Correct aggregate arithmetic does not establish a gain of10for each batch. The final summary is less explicit; this finding is anchored to the saved report."
+      },
+      {
+        "case": "skipped_checks",
+        "arm": "candidate",
+        "outcome": "delivery_failed",
+        "evidence": "21native tool starts with20allowed;20instrumented calls completed, draft report persisted, no result proposal or final explanation. Unrelated invoice tests consumed additional scope; not evidence that their failures invalidate the helper reproduction."
+      },
+      {
+        "case": "skipped_checks",
+        "arm": "baseline",
+        "outcome": "supported_in_this_case",
+        "evidence": "Reproduces true for zero/skipped tests, distinguishes process completion from relevant verified behavior, and conditionally states caller risk. Selected report retained."
+      }
+    ]
+  },
+  "block_started_utc": "2026-11-07 08:56:57 UTC",
+  "block_validation_cutoff_utc": "2026-11-07 09:26:45 UTC",
+  "block_seconds_to_cutoff": 1788
+}

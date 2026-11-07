@@ -50,8 +50,13 @@ def digest(value):
 
 
 def comparable_input(value):
-    """Remove only the two independently allocated execution identities; preserve every substantive input field."""
+    """Normalize current execution aliases only, preserving history and any contradictory cutoff identity."""
     result = json.loads(json.dumps(value))
+    history = result.get('request_history', {})
+    if (history.get('mode') == 'same_task_admissions'
+            and history.get('cutoff_run_id') == result['scope'].get('run_id')
+            and 'cutoff_run_id' in history):
+        history.pop('cutoff_run_id')
     for key in ('run_id', 'attempt_id'):
         result['scope'].pop(key, None)
     return result

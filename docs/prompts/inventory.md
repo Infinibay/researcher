@@ -87,3 +87,11 @@ conservan sus propios resultados y límites. Este bloque no repite generaciones.
 Siguen pendientes la evaluación humana, otros perfiles/recorridos y la evaluación
 científica representativa. Las pruebas de contratos y hashes no sustituyen esas
 medidas ni cierran los escenarios generales del plan.
+
+
+La evaluación posterior de [otros perfiles](../modernization/profile-communication-review.md)
+conserva8turnos reales y dos fallos de entrega de la política actual, además de
+un ejemplo que atribuye una media a cada individuo. Se comprobaron cálculos y
+controles, pero no eficacia general ni comprensión humana. Estos resultados
+mantienen abierta la mejora funcional de comunicación; no cambian las83 decisiones
+estáticas ni la política congelada3 de este corte.

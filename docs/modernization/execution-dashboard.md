@@ -28,7 +28,42 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: revisión estática cerrada; evaluación de comunicación siguiente
+## Etapa actual: evaluación ejecutada; entrega dentro de límites siguiente
+
+Bloque **08:56:57–09:26:45 UTC**, **29 min 48 s**, hasta el corte de validación.
+Ocho turnos reales por suscripción y Ken; cuatro pares con controles coincidentes,
+dos con ambas explicaciones entregadas. Los dos casos científicos conservan
+cálculos/citas y límites causales. La política actual falló al cerrar planificación
+(131499tokens, límite120000) y auditoría (21llamadas, límite20), aunque guardó
+trabajo. Además, un ejemplo del informe actual infirió valores individuales a
+partir de una media. Son problemas funcionales pendientes, no éxitos ni pulido.
+
+Los brazos sumaron10min8s y2065880tokens observados, no facturación. Ocho servicios
+y todos sus peers cerrados;6despachos settled/2unknown. Se conservan las enmiendas
+de presupuesto para casos aún no iniciados y del comparador de identidad; ninguna
+respuesta se repitió.27 pruebas dirigidas pasan,34 definiciones documentadas.
+[Informe](profile-communication-review.md), [resultados](profile-communication-results.json).
+
+**Lista actualizada al cambiar de tarea:**
+- Terminado: evaluación de cuatro casos en planificación, ciencia y auditoría,
+  **29 min 48 s**. La calidad integral de la comunicación sigue sin aceptación.
+- Terminado previamente: revisión estática de prompts, **8 min 55 s**;
+  VM activa, **15 min 57 s**; recuperación de servicio, **21 min 39 s**.
+- Siguiente principal: hacer visibles los presupuestos y reservar margen para
+  entregar/explicar; comunicar trabajo parcial guardado y conservar la fidelidad
+  de ejemplos. No comenzó; registrar inicio al comenzar. No ajustar el ensayo
+  reservado retrospectivamente ni repetir fallos hasta obtener una respuesta buena.
+- Pendiente: otros perfiles/material científico real y revisión humana;
+  seguridad Ken/Chroma/licencias, datos históricos, demás recuperación y
+  aceptación integral de12 páginas.
+- Después de todas las capacidades principales: detalles acumulados, validación
+  final y revisión independiente. DD087 conserva3 avisos de imports.
+
+Sin cambios productivos, nuevo wheel o suite global;43 escenarios amplios abiertos
+ y0/12 páginas aceptadas. No hay porcentaje global sustentado. Lista y tiempo por
+transición persistentes después de compactar.
+
+## Etapa anterior: revisión estática de prompts
 
 Bloque **08:45:38–08:54:33 UTC**, **8 min 55 s**, hasta el corte de validación.
 El inventario actual tiene83 candidatos/287 archivos y83 decisiones vigentes:

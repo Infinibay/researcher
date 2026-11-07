@@ -24,14 +24,14 @@ def save(path, value):
     path.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n')
 
 
-def start_policy(root, output, port, ordinal, *, policy, expected_hash, gate):
+def start_policy(root, output, port, ordinal, *, policy, expected_hash, gate, task_type='investigation'):
     """Start one installed evaluation worker and keep its original process handle until actual closure."""
     import httpx
     from evals.operation.host_smoke import stop
 
     log=(output/'service.log').open('w')
     command=[sys.executable,'-I',str(Path(__file__).with_name('worker.py')),'--installation',str(root),
-             '--policy',str(policy),'--sha256',expected_hash,'--port',str(port)]
+             '--policy',str(policy),'--sha256',expected_hash,'--port',str(port),'--task-type',task_type]
     if gate:command.append('--gate')
     env={k:v for k,v in os.environ.items() if not k.startswith('INFINIBAY_') and not any(p in k for p in ('API_KEY','TOKEN','SECRET')) and k not in ('PYTHONPATH','CODEX_HOME')}
     process=subprocess.Popen(command,cwd=root/'service',env=env,stdout=log,stderr=subprocess.STDOUT)
@@ -90,19 +90,27 @@ async def run_arm(root, protocol, case, arm, assets_path):
     if folder.exists():raise FileExistsError('Arm already exists; inspect its original receipt instead of replaying')
     turns=2 if case.get('live_correction') else 1
     assets=json.loads(assets_path.read_text())
-    assets['limits']={**assets.get('limits',{}),**protocol['limits']}
+    ceilings={key:min(assets.get('limits',{}).get(key,cap),cap) for key,cap in protocol['limits'].items()}
+    assets['limits']={**assets.get('limits',{}),**ceilings}
     assets['project_turn_limit']=turns
-    assets['project_token_limit']=min(assets.get('project_token_limit',350000),120000*turns)
+    assets['project_token_limit']=min(assets.get('project_token_limit',350000),ceilings['max_observed_tokens']*turns)
     private_assets=root/(case['id']+'-'+arm+'-assets.json')
     fd=os.open(private_assets,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
     with os.fdopen(fd,'w') as out:json.dump(assets,out)
+    task_type=protocol.get('task_type','investigation')
     trial=prepare(folder,private_assets,live=True,turns=turns,
-                  task_type='investigation',task_title='Context alignment',task_context=case.get('context',{}))
+                  task_type=task_type,task_title=protocol.get('task_title','Context alignment'),task_context=case.get('context',{}))
     (trial.workspace/'evidence.py').write_bytes((root/'evidence.py').read_bytes())
+    if protocol.get('reference_file'):
+        data=(root/protocol['reference_file']).read_bytes()
+        with closing(sqlite3.connect(trial.database)) as db, db:
+            reference=db.execute('SELECT id,file_path FROM reference_files WHERE project_id=101').fetchone()
+            Path(reference[1]).write_bytes(data)
+            db.execute('UPDATE reference_files SET file_size=? WHERE id=?',(len(data),reference[0]))
     evidence={'case_id':case['id'],'arm':arm,'status':'running','runs':[],'model_turn_budget':turns,'admissions_sent':0}
     save(folder/'result.json',evidence)
     started=time.monotonic()
-    starter=partial(start_policy,policy=root/(arm+'.txt'),expected_hash=protocol['files'][arm+'.txt'],gate=bool(case.get('live_correction')))
+    starter=partial(start_policy,policy=root/(arm+'.txt'),expected_hash=protocol['files'][arm+'.txt'],gate=bool(case.get('live_correction')),task_type=task_type)
     try:
         async with backend(trial,evidence,starter=starter) as (_store,owner,_api,_database):
             async def correct(statement,key):
@@ -142,7 +150,7 @@ async def run_arm(root, protocol, case, arm, assets_path):
                 raise RuntimeError('No complete explanation or material question; preserve this arm as failed')
             if evidence['unrevoked_grants'] or any(row['state']!='closed' for row in evidence['peers']):
                 raise RuntimeError('Original model/tool peers not closed')
-            verify_ken(evidence['tools'])
+            verify_ken(evidence['tools'],required_source=(root/'evidence.py').read_text() if protocol.get('require_complete_source') else None)
             evidence['status']='observed'
     except BaseException as error:
         evidence.update(status='failed',error_type=type(error).__name__,error=str(error))
@@ -154,14 +162,16 @@ async def run_arm(root, protocol, case, arm, assets_path):
     return evidence
 
 
-def verify_ken(records):
+def verify_ken(records, *, required_source=None):
     """Require successful real Ken calls and returned fixture code, not merely attempted tool names."""
     successful=[row for row in records if row['response'].get('success') is True]
     if not {'ken_find','ken_read'} <= {row['tool'] for row in successful}:
         raise RuntimeError('Required successful actual Ken calls absent')
     reads='\n'.join(item.get('text','') for row in successful if row['tool']=='ken_read'
+                    and (required_source is None or row.get('arguments',{}).get('path')=='evidence.py')
                     for item in row['response'].get('contentItems',[]))
-    if not all(symbol in reads for symbol in ('timeout_seconds','tax_amount','CorrectionReceipt')):
+    required=tuple(line for line in required_source.splitlines() if line.strip()) if required_source is not None else ('timeout_seconds','tax_amount','CorrectionReceipt')
+    if not all(symbol in reads for symbol in required):
         raise RuntimeError('Ken did not return the registered source needed for these cases')
 
 
@@ -171,6 +181,8 @@ def compare_pair(first,second):
     for a,b in zip(first['attempts'],second['attempts']):
         for key in ('comparable_input_sha256','catalog_hash','model_control'):
             left,right=a[key],b[key]
+            if key=='comparable_input_sha256' and 'input' in a and 'input' in b:
+                left,right=digest(comparable_input(a['input'])),digest(comparable_input(b['input']))
             if key=='model_control' and isinstance(left,dict) and isinstance(right,dict):
                 left,right=comparable_model(left),comparable_model(right)
             if left!=right:raise ValueError('Paired control differs: '+key)

@@ -9,6 +9,20 @@ import time
 from pathlib import Path
 
 
+def bind_policy(policy, registered_task_type):
+    """Bind a frozen evaluation policy to one research capability; reject cross-profile dispatch."""
+    if registered_task_type not in ('investigation', 'research', 'plan', 'review'):
+        raise ValueError('Unsupported evaluation task type')
+
+    def instructions(kind, task_type, *, checks=()):
+        """Return exact registered bytes only for the original selected profile."""
+        if (kind, task_type) != ('research', registered_task_type):
+            raise ValueError('Evaluation policy cannot override another capability')
+        return policy.decode()
+
+    return instructions
+
+
 def main():
     """Patch only this isolated evaluation process; preserve the installed host's authority and runtime controls."""
     parser=argparse.ArgumentParser()
@@ -17,6 +31,7 @@ def main():
     parser.add_argument('--sha256',required=True)
     parser.add_argument('--port',type=int,required=True)
     parser.add_argument('--gate',action='store_true')
+    parser.add_argument('--task-type', choices=('investigation', 'research', 'plan', 'review'), default='investigation')
     args=parser.parse_args()
     policy=args.policy.read_bytes()
     if hashlib.sha256(policy).hexdigest()!=args.sha256:
@@ -28,12 +43,6 @@ def main():
     original=ProjectTools.call
     output=args.installation.parent
     gated=False
-
-    def instructions(kind, task_type, *, checks=()):
-        """Replace the policy for this single registered profile, refusing unrelated capabilities."""
-        if (kind,task_type)!=('research','investigation'):
-            raise ValueError('Evaluation policy cannot override another capability')
-        return policy.decode()
 
     async def record_call(self, params):
         """Record actual mediated results; optionally hold the first completed Ken read for a real owner correction."""
@@ -52,7 +61,7 @@ def main():
                     await asyncio.sleep(.05)
         return response
 
-    owned_runtime.build_instructions=instructions
+    owned_runtime.build_instructions=bind_policy(policy, args.task_type)
     ProjectTools.call=record_call
     import uvicorn
     from backend.api.main import create_app
