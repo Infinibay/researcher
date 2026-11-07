@@ -28,7 +28,36 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U06 (configuración por intento y guardado interrumpido) y E07 (loop acotado y rechazo sin rework automático) quedan comprobados; siguen41de43escenarios amplios abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: autoridad local y restauración comprobadas
+## Estado actual: admisión previa a preparación comprobada
+
+Bloque **2026-11-07 17:53:04–18:07:01 UTC**, **13min57s hasta validar**.
+Documentación/checkpoint posteriores fuera del tramo. El proyecto sin cupo ya
+no prepara Ken ni abre la sesión. Fallos de preparación conservan capacidad y
+el envío posterior reemplaza esa reserva sin contar dos solicitudes.
+
+163casos instalados pasan,0fallos/omisiones;10DOM y build pasan.646archivos
+coinciden,344de producto;33nodos Python documentados;85prompts revisados.
+La selección fuente previa tuvo161pases y2expectativas del ensayo corregidas:
+registros administrativos sin procesos y versión futura del esquema.
+[Resultados y límites](preparation-budget-review.md).
+
+- Terminado: recuperación local/restauración y admisión de presupuesto antes
+  de preparar Ken/runtime; historial y web distinguen reserva de consumo.
+- En curso al cerrar: documentación y checkpoint local.
+- Siguiente principal: finalizar el contraste amplio deE08 de llamadas y consumo
+  observable de dominios nativos/Ken/administración frente a lo mostrado al dueño.
+  **No iniciado como siguiente bloque**; registrar hora real. Reusar lo comprobado.
+- Pendiente después: escenarios amplios restantes, datos históricos, evaluaciones,
+  aceptación integral de12páginas, dependencias y distribución.
+- Al final: detalles registrados, validación global y revisión independiente.
+
+E08 y41de43escenarios amplios siguen abiertos;0/12páginas aceptadas por completo.
+Cero turnos de modelo. La última suite global con fallos sigue siendo referencia.
+No hay porcentaje global ni plazo restante sustentados. Lista y medición se
+publican al cambiar de tarea y persisten tras compactar. La aproximación16min del
+chat se corrigió usando el reloj; no se usa como evidencia temporal.
+
+## Etapa anterior: autoridad local y restauración comprobadas
 
 Bloque **2026-11-07 17:27:42–17:48:42 UTC**, **21 min hasta validar y cerrar el
 servidor**. Documentación/checkpoint posteriores fuera del tramo. Se corrigieron

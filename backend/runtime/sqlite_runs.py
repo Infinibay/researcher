@@ -401,6 +401,81 @@ class SQLiteRunStore:
                 self._view(self._row(conn, project_id, row["id"])) for row in rows
             )
 
+    def reserve_preparation(
+        self, lease, *, limits, project_turn_limit=20, project_token_limit=4000000
+    ):
+        """Admit once before Ken/native startup; false forbids replaying this preparation.
+
+        An incomplete preparation retains its capacity across process failure.
+        Exact dispatch inputs are recorded later, against this same reservation.
+        """
+        if limits.max_turns != 1:
+            raise ValueError("Each preparation reserves exactly one native turn")
+        identity(project_turn_limit)
+        identity(project_token_limit)
+        with self._transaction(write=True) as conn:
+            row = self._authority(conn, lease)
+            if row["execution_kind"] in ("code_publication", "remote_publication"):
+                raise RunConflict("host-only publication cannot prepare model inference")
+            previous = conn.execute(
+                "SELECT limits_json FROM runtime_preparation_reservations WHERE attempt_id=?",
+                (lease.attempt_id,),
+            ).fetchone()
+            if previous is not None:
+                if previous["limits_json"] != _json(asdict(limits)):
+                    raise RunConflict("Attempt already reserved other preparation limits")
+                return False
+            if conn.execute("SELECT 1 FROM runtime_inference_dispatches WHERE attempt_id=?", (lease.attempt_id,)).fetchone():
+                return False
+            self._admit_project_work(conn, lease, limits, project_turn_limit, project_token_limit)
+            conn.execute(
+                "INSERT INTO runtime_preparation_reservations VALUES(?,?,?,?,?)",
+                (lease.attempt_id, lease.project_id, _json(asdict(limits)), limits.max_observed_tokens, self.clock()),
+            )
+            self._event(conn, lease.project_id, lease.task_id, "run.preparation_reserved", {
+                "run_id": lease.run_id, "attempt_id": lease.attempt_id,
+                "token_ceiling": limits.max_observed_tokens, "native_start_observed": False,
+            })
+            return True
+
+    def _admit_project_work(self, conn, lease, limits, project_turn_limit, project_token_limit):
+        """Check shared project capacity inside the caller's immediate write transaction."""
+        conn.execute(
+            "INSERT OR IGNORE INTO runtime_project_budgets(project_id,turn_limit,token_limit) VALUES(?,?,?)",
+            (lease.project_id, project_turn_limit, project_token_limit),
+        )
+        policy = conn.execute(
+            "SELECT * FROM runtime_project_budgets WHERE project_id=?",
+            (lease.project_id,),
+        ).fetchone()
+        if policy["revision"] == 0 and (policy["turn_limit"], policy["token_limit"]) != (
+            project_turn_limit,
+            project_token_limit,
+        ):
+            raise RunConflict(
+                "Project budget policy changed; explicit reconciliation required"
+            )
+        # An explicit owner revision governs future admission. Existing dispatch
+        # limits and cumulative usage remain untouched by policy changes.
+        project_turn_limit, project_token_limit = policy["turn_limit"], policy["token_limit"]
+        used = project_work_usage(conn, lease.project_id)
+        blocked_by = []
+        if used["used_turns"] >= project_turn_limit:
+            blocked_by.append("turns")
+        if used["accounted_tokens"] + limits.max_observed_tokens > project_token_limit:
+            blocked_by.append("tokens")
+        if blocked_by:
+            raise ProjectBudgetExhausted({
+                "project_id": lease.project_id,
+                "turn_limit": project_turn_limit,
+                "token_limit": project_token_limit,
+                **used,
+                "requested_turns": 1,
+                "requested_tokens": limits.max_observed_tokens,
+                "blocked_by": blocked_by,
+                "basis": "Recorded lifetime project admission, not provider billing or remaining subscription quota.",
+            })
+
     def reserve_inference(
         self,
         lease,
@@ -637,41 +712,17 @@ class SQLiteRunStore:
             ):
                 raise RunConflict("Attempt already reserved another inference intent")
             return False
-        conn.execute(
-            "INSERT OR IGNORE INTO runtime_project_budgets(project_id,turn_limit,token_limit) VALUES(?,?,?)",
-            (lease.project_id, project_turn_limit, project_token_limit),
-        )
-        policy = conn.execute(
-            "SELECT * FROM runtime_project_budgets WHERE project_id=?",
-            (lease.project_id,),
+        preparation = conn.execute(
+            "SELECT limits_json FROM runtime_preparation_reservations WHERE attempt_id=?",
+            (lease.attempt_id,),
         ).fetchone()
-        if policy["revision"] == 0 and (policy["turn_limit"], policy["token_limit"]) != (
-            project_turn_limit,
-            project_token_limit,
-        ):
-            raise RunConflict(
-                "Project budget policy changed; explicit reconciliation required"
-            )
-        # An explicit owner revision governs future admission. Existing dispatch
-        # limits and cumulative usage remain untouched by policy changes.
-        project_turn_limit, project_token_limit = policy["turn_limit"], policy["token_limit"]
-        used = project_work_usage(conn, lease.project_id)
-        blocked_by = []
-        if used["used_turns"] >= project_turn_limit:
-            blocked_by.append("turns")
-        if used["accounted_tokens"] + limits.max_observed_tokens > project_token_limit:
-            blocked_by.append("tokens")
-        if blocked_by:
-            raise ProjectBudgetExhausted({
-                "project_id": lease.project_id,
-                "turn_limit": project_turn_limit,
-                "token_limit": project_token_limit,
-                **used,
-                "requested_turns": 1,
-                "requested_tokens": limits.max_observed_tokens,
-                "blocked_by": blocked_by,
-                "basis": "Recorded lifetime project admission, not provider billing or remaining subscription quota.",
-            })
+        if preparation is None:
+            # Direct storage callers retain the original atomic dispatch gate.
+            self._admit_project_work(conn, lease, limits, project_turn_limit, project_token_limit)
+        elif preparation["limits_json"] != _json(asdict(limits)):
+            raise RunConflict("Dispatch limits differ from its preparation reservation")
+        # An existing preparation already owns this capacity, even after an owner
+        # lowers the policy. The dispatch replaces its hold in project_work_usage.
         conn.execute(
             """INSERT INTO runtime_inference_dispatches(attempt_id,project_id,workspace,catalog_hash,
             runtime_version,limits_json,model,token_ceiling,status,created_at) VALUES(?,?,?,?,?,?,?,?,'reserved',?)""",

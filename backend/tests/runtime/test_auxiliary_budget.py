@@ -123,16 +123,17 @@ def test_unused_auxiliary_inverse_preserves_old_schema_and_refuses_work(coordina
     """Only unused latest schema can reverse; source data and recorded work remain authoritative."""
     from backend.db.auxiliary_budget_migration import restore_auxiliary_budget_schema
     from backend.db.auxiliary_continuation_migration import restore_auxiliary_continuation_schema
+    from backend.db.preparation_budget_migration import restore_preparation_budget_schema
     from backend.db.auxiliary_origin_migration import restore_auxiliary_origin_schema
     from backend.tools.base.db import ensure_migrations
 
     c=coordination
-    restore_auxiliary_origin_schema(c.conn)
+    restore_preparation_budget_schema(c.conn);restore_auxiliary_origin_schema(c.conn)
     restore_auxiliary_continuation_schema(c.conn)
     restore_auxiliary_budget_schema(c.conn)
     assert c.conn.execute('SELECT max(version) FROM schema_migrations').fetchone()[0]==60
     ensure_migrations(c.database)
     calculation(AuxiliaryBudget(c.database,101))
     with pytest.raises(RuntimeError,match='newer schema'):restore_auxiliary_budget_schema(c.conn)
-    restore_auxiliary_origin_schema(c.conn)
+    restore_preparation_budget_schema(c.conn);restore_auxiliary_origin_schema(c.conn)
     with pytest.raises(RuntimeError,match='recorded'):restore_auxiliary_continuation_schema(c.conn)

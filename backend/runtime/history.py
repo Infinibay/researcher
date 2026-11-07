@@ -50,9 +50,10 @@ class RuntimeHistory:
             rows = conn.execute(
                 """SELECT a.fence AS seq,a.id AS attempt_id,a.status,a.started_at,a.ended_at,
                 a.thread_id,a.turn_id,a.native_result_json,d.model,d.status AS dispatch_status,
-                d.observed_tokens,d.token_ceiling,m.selection_json AS model_selection
+                d.observed_tokens,d.token_ceiling,p.token_ceiling AS preparation_token_ceiling,m.selection_json AS model_selection
                 FROM runtime_attempts a
                 LEFT JOIN runtime_inference_dispatches d ON d.attempt_id=a.id AND d.project_id=?
+                LEFT JOIN runtime_preparation_reservations p ON p.attempt_id=a.id
                 LEFT JOIN runtime_attempt_models m ON m.attempt_id=a.id
                 WHERE a.run_id=? AND (? IS NULL OR a.fence<?) ORDER BY a.fence DESC LIMIT ?""",
                 (project_id, run_id, before_seq, before_seq, limit + 1),

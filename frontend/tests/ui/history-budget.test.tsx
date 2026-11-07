@@ -76,3 +76,15 @@ it('explains reserved capacity without turning missing usage into zero or retain
  expect(await screen.findByText(/Todavía no se registró un límite/)).toBeVisible()
  expect(screen.queryByText('900')).toBeNull()
 })
+
+
+it('distinguishes retained preparation from model dispatch and observed tokens',async()=>{
+ api.workBudget.mockResolvedValue({project_id:1,policy:{turn_limit:1,token_limit:100,revision:0},used_turns:1,preparation_only:1,observed_tokens:null,unmeasured_dispatches:0,unsettled_dispatches:0,accounted_tokens:100,held_tokens:100,remaining_turns:0,remaining_tokens:0,overrun_tokens:0})
+ api.runAttempts.mockResolvedValue({project_id:1,run_id:'r',total:1,items:[{seq:'1',attempt_id:'a',is_current:true,status:'reconciling',model:null,model_selection:null,preparation_token_ceiling:100,observed_tokens:null,dispatch_status:null,result:null}],next_before_seq:null})
+ const user=userEvent.setup()
+ render(<><WorkBudget projectId={1}/><RunAttempts projectId={1} runId="r"/></>,{wrapper:wrapper()})
+ expect(await screen.findByText(/1 preparaciones sin reserva de envío/)).toHaveTextContent('no es una medición')
+ await user.click(screen.getByText('Intentos guardados'))
+ expect(await screen.findByText(/Preparación reservada: 100/)).toHaveTextContent('No hay envío registrado')
+ expect(screen.getByText('Tokens observados: No disponible')).toBeVisible()
+})

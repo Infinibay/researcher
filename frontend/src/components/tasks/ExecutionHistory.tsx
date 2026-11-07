@@ -30,6 +30,7 @@ function AttemptPages({projectId,runId}:{projectId:number;runId:string}){
   <ol className="space-y-3">{items.map(item=><li key={item.attempt_id} className="border-t border-[var(--work-line)] pt-2">
    <p><strong>Intento {item.seq}</strong> · {item.is_current?'actual':'anterior'} · {item.status==='finished'?'finalizado':item.status==='reconciling'?'requiere comprobación':'en ejecución registrada'}</p>
    <dl><div><dt>Modelo para el envío</dt><dd>{item.model??'Sin envío registrado'}</dd></div><div><dt>Esfuerzo seleccionado</dt><dd>{item.model_selection?.reasoning_effort??'No disponible'}</dd></div></dl>
+   {item.preparation_token_ceiling!=null&&item.dispatch_status===null&&<p>Preparación reservada: {measuredTokens(item.preparation_token_ceiling)} tokens de capacidad. No hay envío registrado; la reserva se conserva y no equivale a consumo medido.</p>}
    <p>Tokens observados: {measuredTokens(item.observed_tokens)}</p>
    <p className="text-[var(--work-muted)]">{item.dispatch_status==='settled'?'Máximo acumulado conservado al cerrar el recibo; puede ser una medición incompleta.':'La medición puede estar incompleta; la reserva se consulta en el presupuesto del proyecto.'}</p>
    {item.result?.summary&&<p className="whitespace-pre-wrap break-words">{item.result.summary}</p>}

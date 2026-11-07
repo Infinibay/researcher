@@ -3,15 +3,17 @@
 Estado comprobado el **2026-11-07**, sobre el producto de `294943d`. Las rutas
 antiguas enumeradas en versiones anteriores ya no son rutas activas.
 La integración posterior de [presupuesto local](auxiliary-work-budget.md) añade
-reserva/consumo por proyecto e intento y su control web. **E08 sigue abierto por
-la recuperación explícita de cálculos locales sin resultado recuperable**.
+reserva/consumo por proyecto e intento y su control web; versiones62/63 incorporan
+continuación y recuperación tras restauración. La versión64 admite preparación
+antes de abrir Ken/runtime. **E08 sigue abierto por el contraste amplio de todos
+los límites/consumos observables**, no por esas recuperaciones ya implementadas.
 La inspección AST citada al final conserva su fecha/base original.
 
 ## Generación del producto actual
 
 | Responsabilidad | Entrada y control actual | Evidencia y límite |
 | --- | --- | --- |
-| Investigación, desarrollo, revisión documental/de código y planificación | `RuntimeService` selecciona el catálogo, vincula el intento y llama a `SQLiteRunStore.reserve_input` antes de `session.run`. Todas esas variantes pasan por la misma reserva. | El registro conserva intento, política, modelo y uso observado. Una reserva original no permite reenviar el turno tras una respuesta incierta. |
+| Investigación, desarrollo, revisión documental/de código y planificación | `RuntimeService` reserva preparación antes de abrir Ken/runtime; después congela catálogo/entrada exactos con `SQLiteRunStore.reserve_input` antes de `session.run`. Todas esas variantes pasan por la misma admisión. | El registro conserva intento, política, modelo y uso observado. Una reserva original no permite reenviar el turno tras una respuesta incierta. |
 | Turno nativo | `CodexSession.run` contiene el único literal ejecutable `turn/start` encontrado en el AST del backend de producto. Exige cuenta ChatGPT y proveedor OpenAI; limita tiempo, falta de progreso, herramientas, salida y tokens observados. | Las notas no reinician el plazo de progreso. Terminar un turno no acepta una tarea. No se observan todas las llamadas internas de Codex. |
 | Presupuesto de proyecto | Reserva transaccional compartida, máximo acumulado observado y retención conservadora si falta consumo. El propietario revisa límites desde la web con versión y recibo originales. | Reiniciar o recibir una observación menor no devuelve capacidad reservada. Consumo desconocido no significa cero, facturación ni cuota disponible. |
 | Revisión y continuación | La revisión requiere solicitud explícita y actor independiente. Rechazo/confirmación incierta no crean otra revisión ni rework. Continuar una entrega cerrada requiere nueva decisión del propietario. | La historia conserva objeciones al mismo candidato; el desbordamiento bloquea aceptación sin ocultar la cola. |
@@ -83,3 +85,8 @@ certificar cierre del original ni adoptar permisos copiados. [Presupuesto](../mo
 y [continuación comprobada](../modernization/auxiliary-continuation-review.md).
 
 [Autoridad local y restauración verificadas](../modernization/auxiliary-restoration-review.md).
+
+La migración64 cuenta preparaciones sin dispatch como capacidad retenida. Al
+congelar el envío, el dispatch sustituye esa reserva sin contar dos solicitudes.
+No convierte preparación en tokens consumidos. La interfaz distingue ambas fases
+por proyecto e intento. [Verificación](../modernization/preparation-budget-review.md).

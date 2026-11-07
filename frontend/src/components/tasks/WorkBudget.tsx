@@ -25,6 +25,7 @@ export function WorkBudget({projectId}:{projectId:number}){
    </>}
    <dl><dt>Tokens observados en los recibos disponibles</dt><dd>{measuredTokens(budget.observed_tokens)}</dd></dl>
    <p>{budget.unmeasured_dispatches} solicitudes sin medición y {budget.unsettled_dispatches} sin recibo final. Las observaciones pueden ser parciales, incluso en un recibo cerrado.</p>
+   {(budget.preparation_only??0)>0&&<p role="status">{budget.preparation_only} preparaciones sin reserva de envío al modelo. Mantienen capacidad, incluso si fallaron antes de enviar. Esa reserva no es una medición de tokens consumidos.</p>}
    <details><summary className="min-h-11 cursor-pointer">Cómo interpretar la reserva</summary><p>Por ejemplo: con una reserva de 100 tokens y 40 observados durante el trabajo, se mantienen contabilizados 100. Si el consumo queda desconocido, la reserva se conserva. Este registro acumula la historia del proyecto; no se reinicia al cambiar de página.</p></details>
    {budget.auxiliary&&<div className="space-y-2 border-t border-[var(--work-line)] pt-3" aria-label="Procesamiento local">
     <h3 className="font-semibold">Documentos y búsqueda local</h3>

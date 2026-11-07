@@ -1,0 +1,49 @@
+{
+  "base_commit": "fe3da17",
+  "started_at": "2026-11-07T17:53:04Z",
+  "validated_at": "2026-11-07T18:07:01Z",
+  "elapsed_seconds_until_validation": 837,
+  "duration_scope": "Audit, implementation and validation; later documentation/checkpoint excluded. This is not a remaining-time estimate.",
+  "red_cases": 5,
+  "source_core": {
+    "passed": 11,
+    "deselected": 2
+  },
+  "source_integration_before_assertion_corrections": {
+    "cases": 163,
+    "passed": 161,
+    "failed": 2
+  },
+  "corrected_test_expectations": [
+    "Claim creates administrative peer rows before admission; assert no Ken record and no child PID, not zero peer rows.",
+    "Migration64 is now supported; unknown target fixture moves to65."
+  ],
+  "installed_final": {
+    "cases": 163,
+    "passed": 163,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 250,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 76.992,
+    "exit_code": 0
+  },
+  "frontend": {
+    "dom_passed": 10,
+    "build": "passed",
+    "browser_audit": "not repeated for these explanatory lines",
+    "full_pages_accepted": 0
+  },
+  "docstrings": 33,
+  "prompt_inventory": {
+    "files": 302,
+    "candidates": 85,
+    "reviewed": 85,
+    "pending": 0
+  },
+  "real_model_turns": 0,
+  "scope": "Durable one-time preparation admission before runtime.open; retained capacity after startup failure; dispatch/input transaction replaces the hold without double counting; history/UI distinguish unknown consumption.",
+  "whole_plan": "in_progress",
+  "E08": "in_progress",
+  "global_suite": "Not rerun; previous global failures remain reported."
+}

@@ -1,0 +1,37 @@
+{
+  "base_commit": "fe3da17",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "6d96f9224a9277e59b54b20e4134fa709bbdcf706d1b1121535160601518abaa",
+  "source_files_matching_wheel_and_installation": 646,
+  "product_files_matching": 344,
+  "observed": {
+    "cases": 163,
+    "passed": 163,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 250,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 76.992,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_preparation_budget.py",
+    "backend/tests/runtime/test_aggregate_execution_budget.py",
+    "backend/tests/runtime/test_runtime_service.py",
+    "backend/tests/runtime/test_inference_journal.py",
+    "backend/tests/runtime/test_run_input.py",
+    "backend/tests/runtime/test_history_budget.py",
+    "backend/tests/runtime/test_project_budget_policy.py",
+    "backend/tests/runtime/test_auxiliary_budget.py",
+    "backend/tests/runtime/test_auxiliary_continuation.py",
+    "backend/tests/runtime/test_auxiliary_restoration.py",
+    "backend/tests/runtime/test_migration_chain.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "Preparation holds limit admitted attempts before Ken/native startup. A failed preparation retains capacity; its later dispatch counts once. Token capacity is not measured preparation CPU, billing or subscription quota. Selected controlled generation/native tests, not live model evaluation.",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}

@@ -1,0 +1,239 @@
+{
+  "base_commit": "fe3da17",
+  "changed_or_new_definitions_documented": 33,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/db/preparation_budget_migration.py",
+      "symbol": "restore_preparation_budget_schema",
+      "line": 4,
+      "docstring": "Remove latest migration64 only before its first reservation; preserve historical dispatches.",
+      "file_sha256": "9da8f8f8e9be179faafb07374ea4a08dcd96e84ea9f30470e4c709c18f6356ec"
+    },
+    {
+      "path": "backend/runtime/history.py",
+      "symbol": "RuntimeHistory",
+      "line": 21,
+      "docstring": "Read original scoped receipts while current execution controls retain separate authority.",
+      "file_sha256": "ad2561d732c850be3e7dac1a4a6cf8da39a8b37a1f90f92307aa1d75750b7d31"
+    },
+    {
+      "path": "backend/runtime/history.py",
+      "symbol": "RuntimeHistory.attempts",
+      "line": 43,
+      "docstring": "Read each original attempt's model, outcome and usage without substituting current receipts.",
+      "file_sha256": "ad2561d732c850be3e7dac1a4a6cf8da39a8b37a1f90f92307aa1d75750b7d31"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService",
+      "line": 64,
+      "docstring": "Own native attempts and grant-bound tool closure before durable terminal states.",
+      "file_sha256": "b3993011a2ba1145038a3cd5e34725e8eb67f08b24b33dcf3fd837c17cb4bc26"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._note_issue",
+      "line": 811,
+      "docstring": "Persist a safe, actionable owner explanation for this original run.",
+      "file_sha256": "b3993011a2ba1145038a3cd5e34725e8eb67f08b24b33dcf3fd837c17cb4bc26"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._execute",
+      "line": 1096,
+      "docstring": "Own one admitted native turn, then prove peer/tool closure before finalizing it.",
+      "file_sha256": "b3993011a2ba1145038a3cd5e34725e8eb67f08b24b33dcf3fd837c17cb4bc26"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore",
+      "line": 68,
+      "docstring": "Own durable admission, fenced attempts and version-bound review requests in SQLite.",
+      "file_sha256": "c72db776ce2279de87a64cb2cae66af4dce6fcaa75305258dc0e9d4bbd322940"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore.reserve_preparation",
+      "line": 404,
+      "docstring": "Admit once before Ken/native startup; false forbids replaying this preparation.\n\nAn incomplete preparation retains its capacity across process failure.\nExact dispatch inputs are recorded later, against this same reservation.",
+      "file_sha256": "c72db776ce2279de87a64cb2cae66af4dce6fcaa75305258dc0e9d4bbd322940"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore._admit_project_work",
+      "line": 441,
+      "docstring": "Check shared project capacity inside the caller's immediate write transaction.",
+      "file_sha256": "c72db776ce2279de87a64cb2cae66af4dce6fcaa75305258dc0e9d4bbd322940"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore._reserve_inference",
+      "line": 658,
+      "docstring": "Reserve inference under current authority, requiring validated code review preflight.",
+      "file_sha256": "c72db776ce2279de87a64cb2cae66af4dce6fcaa75305258dc0e9d4bbd322940"
+    },
+    {
+      "path": "backend/runtime/work_budget.py",
+      "symbol": "project_work_usage",
+      "line": 4,
+      "docstring": "Aggregate recorded high waters and conservative holds in the caller's transaction.\n\nA settled measured dispatch counts its retained observation. Other dispatches\nhold at least their ceiling, including observed overruns. An absent measurement\nremains None; counted capacity is not a claim about actual tokens or quota.\nPreparations without a dispatch retain their ceiling; a matching dispatch\nreplaces that hold rather than counting a second request.",
+      "file_sha256": "e4531e6fb6c8fdf611db5ebab30a7588839dfc1e300a190f5424dbd9c497c927"
+    },
+    {
+      "path": "backend/tests/runtime/test_aggregate_execution_budget.py",
+      "symbol": "test_owned_project_budget_exhaustion_refuses_preparation_without_a_native_turn",
+      "line": 117,
+      "docstring": "An unaffordable attempt cannot start a Ken/native process, send a turn, run tools or retain live grants; generation and Ken are controlled.",
+      "file_sha256": "23213fa076d2fdb0e382c7f05864e31474d56eb2b1ff2631a3bbee0cf55a872f"
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_budget.py",
+      "symbol": "test_unused_auxiliary_inverse_preserves_old_schema_and_refuses_work",
+      "line": 122,
+      "docstring": "Only unused latest schema can reverse; source data and recorded work remain authoritative.",
+      "file_sha256": "adae8732c5c4dfe3f50ecf0b8350cc6a5363cd2a9a5f89bf457ab7be9ac3c14e"
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "symbol": "test_unused_inverse_and_used_history_guard",
+      "line": 141,
+      "docstring": "Empty latest metadata can reverse, but recorded execution cannot be erased through a downgrade.",
+      "file_sha256": "c4966eb58decb2107e6e463c3ef2ef69273113c077d01a7e71ae7366fe3ceffb"
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_restoration.py",
+      "symbol": "test_origin_inverse_requires_unused_permission_and_archival",
+      "line": 154,
+      "docstring": "The unused latest schema reverses without deleting work; recorded permissions prevent loss of their physical origin.",
+      "file_sha256": "02736501b6d5a03c948158aab6b2fb55b17490e4ccf0241e29c8d79ecdef7f3a"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_forward_targets_form_one_complete_history_and_preserve_seeded_data",
+      "line": 24,
+      "docstring": "Reach every supported post-legacy version, then repeat startup without losing IDs or relations.",
+      "file_sha256": "0102da2b1428fc73ae4819ede51ff6624a13b404b59bde354f55d517e349d1f3"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes",
+      "line": 49,
+      "docstring": "Abruptly kill only a new migration child before its history insert, then recover that same DB.",
+      "file_sha256": "0102da2b1428fc73ae4819ede51ff6624a13b404b59bde354f55d517e349d1f3"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_invalid_forward_target_never_creates_storage",
+      "line": 83,
+      "docstring": "Unknown targets and booleans cannot create a partial installation as a side effect.",
+      "file_sha256": "0102da2b1428fc73ae4819ede51ff6624a13b404b59bde354f55d517e349d1f3"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_forward_rejects_unsupported_history_without_rewriting_rows",
+      "line": 94,
+      "docstring": "A forward migration cannot hide a future version, fill a fabricated gap or act as downgrade.",
+      "file_sha256": "0102da2b1428fc73ae4819ede51ff6624a13b404b59bde354f55d517e349d1f3"
+    },
+    {
+      "path": "backend/tests/runtime/test_preparation_budget.py",
+      "symbol": "PreparationProbe",
+      "line": 19,
+      "docstring": "Observe attempted startup before the existing controlled native factory does any work.",
+      "file_sha256": "bb314c9dc4117ab911063414c2423cd068b6eb46d716ed9125f146f4f42abd7b"
+    },
+    {
+      "path": "backend/tests/runtime/test_preparation_budget.py",
+      "symbol": "PreparationProbe.__init__",
+      "line": 22,
+      "docstring": "Select startup failure without changing the host admission implementation.",
+      "file_sha256": "bb314c9dc4117ab911063414c2423cd068b6eb46d716ed9125f146f4f42abd7b"
+    },
+    {
+      "path": "backend/tests/runtime/test_preparation_budget.py",
+      "symbol": "PreparationProbe.open",
+      "line": 29,
+      "docstring": "Count preparation and optionally fail before a native session is available.",
+      "file_sha256": "bb314c9dc4117ab911063414c2423cd068b6eb46d716ed9125f146f4f42abd7b"
+    },
+    {
+      "path": "backend/tests/runtime/test_preparation_budget.py",
+      "symbol": "test_exhausted_project_never_enters_runtime_preparation",
+      "line": 38,
+      "docstring": "An unaffordable request is refused before Ken/native startup, not merely before turn/start.",
+      "file_sha256": "bb314c9dc4117ab911063414c2423cd068b6eb46d716ed9125f146f4f42abd7b"
+    },
+    {
+      "path": "backend/tests/runtime/test_preparation_budget.py",
+      "symbol": "test_failed_preparation_retains_capacity_and_blocks_another_task_after_restart",
+      "line": 51,
+      "docstring": "Startup failure cannot obtain unlimited free retries through a fresh coordinator or task.",
+      "file_sha256": "bb314c9dc4117ab911063414c2423cd068b6eb46d716ed9125f146f4f42abd7b"
+    },
+    {
+      "path": "backend/tests/runtime/test_preparation_budget.py",
+      "symbol": "test_preparation_and_dispatch_count_as_one_request",
+      "line": 72,
+      "docstring": "The final frozen input consumes its existing hold, including when it used the last slot.",
+      "file_sha256": "bb314c9dc4117ab911063414c2423cd068b6eb46d716ed9125f146f4f42abd7b"
+    },
+    {
+      "path": "backend/tests/runtime/test_preparation_budget.py",
+      "symbol": "test_two_connections_cannot_prepare_against_the_same_last_slot",
+      "line": 87,
+      "docstring": "Independent connections serialize admission before either is allowed to create a native peer.",
+      "file_sha256": "bb314c9dc4117ab911063414c2423cd068b6eb46d716ed9125f146f4f42abd7b"
+    },
+    {
+      "path": "backend/tests/runtime/test_preparation_budget.py",
+      "symbol": "test_two_connections_cannot_prepare_against_the_same_last_slot.reserve",
+      "line": 96,
+      "docstring": "Race independent storage owners at the durable preparation boundary.",
+      "file_sha256": "bb314c9dc4117ab911063414c2423cd068b6eb46d716ed9125f146f4f42abd7b"
+    },
+    {
+      "path": "backend/tests/runtime/test_preparation_budget.py",
+      "symbol": "test_reserved_preparation_is_not_replayed_or_counted_twice",
+      "line": 112,
+      "docstring": "A duplicate claim is not permission to restart preparation; converting it preserves its original limits.",
+      "file_sha256": "bb314c9dc4117ab911063414c2423cd068b6eb46d716ed9125f146f4f42abd7b"
+    },
+    {
+      "path": "backend/tests/runtime/test_preparation_budget.py",
+      "symbol": "test_owner_reduction_does_not_revoke_existing_preparation_and_settlement_counts_once",
+      "line": 126,
+      "docstring": "Lower policy affects future admission; existing input keeps its ceiling and later measured settlement replaces the hold.",
+      "file_sha256": "bb314c9dc4117ab911063414c2423cd068b6eb46d716ed9125f146f4f42abd7b"
+    },
+    {
+      "path": "backend/tests/runtime/test_preparation_budget.py",
+      "symbol": "test_failed_input_freeze_retains_preparation_without_fabricating_dispatch",
+      "line": 146,
+      "docstring": "A failure inside the combined input transaction rolls back dispatch while preserving the earlier admission.",
+      "file_sha256": "bb314c9dc4117ab911063414c2423cd068b6eb46d716ed9125f146f4f42abd7b"
+    },
+    {
+      "path": "backend/tests/runtime/test_preparation_budget.py",
+      "symbol": "test_failed_input_freeze_retains_preparation_without_fabricating_dispatch.fail",
+      "line": 156,
+      "docstring": "Interrupt freezing after the dispatch insert but before its transaction can commit.",
+      "file_sha256": "bb314c9dc4117ab911063414c2423cd068b6eb46d716ed9125f146f4f42abd7b"
+    },
+    {
+      "path": "backend/tests/runtime/test_preparation_budget.py",
+      "symbol": "test_migration_preserves_old_dispatches_and_refuses_inverse_after_preparation",
+      "line": 169,
+      "docstring": "Upgrade and unused inverse retain historical dispatch bytes without inventing preparation receipts.",
+      "file_sha256": "bb314c9dc4117ab911063414c2423cd068b6eb46d716ed9125f146f4f42abd7b"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_budget_policy.py",
+      "symbol": "test_upgrade_preserves_old_policy_and_unused_inverse_preserves_it",
+      "line": 112,
+      "docstring": "Migration60 adds revision0 without inventing owner decisions; an unused inverse restores59 and refuses used owner history.",
+      "file_sha256": "abc02113a86486d4d8a2799a9b2ea2465c55d45ae1f2e63f095adea9c4f5c490"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

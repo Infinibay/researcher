@@ -997,11 +997,15 @@
         "docs/modernization/auxiliary-restoration-review.md",
         "docs/modernization/auxiliary-restoration-results.json",
         "docs/modernization/auxiliary-restoration-packaging.json",
-        "docs/design/audits/2026-11-07-local-restoration/report.md"
+        "docs/design/audits/2026-11-07-local-restoration/report.md",
+        "docs/modernization/preparation-budget-review.md",
+        "docs/modernization/preparation-budget-results.json",
+        "docs/modernization/preparation-budget-packaging.json",
+        "backend/tests/runtime/test_preparation_budget.py"
       ],
       "remaining": [
-        "Local work now has durable admission/result recovery, verified physical continuation and a verified backup/restore/enrollment path for missing/foreign/unbound identity. Copied/unbound pending permissions cannot start work; an explicit fresh owner decision is required on the restored copy without asserting source-host closure.",
-        "Complete broad E08 acceptance by checking all observable consumption boundaries and explanations against remaining whole-service/provider/Ken/administrative limits. No global multi-installation billing or original-source closure claim."
+        "Preparation now requires durable project admission before runtime.open. Failed preparation retains capacity; exact input/dispatch replaces the original hold without counting twice. Local continuation and restored permissions are also verified.",
+        "Complete broad E08 coverage audit for observable native/Ken/administrative consumption and owner explanations. Available domain telemetry is not yet consolidated here as accumulated whole-service CPU. Provider-internal billing/quota and global multi-installation accounting remain explicitly unknown."
       ]
     },
     "E09": {
@@ -5139,6 +5143,20 @@
       "remaining": [
         "No in-place bypass or global original-host closure claim; recovery requires the supported separate-copy workflow.",
         "Broad E08 and multi-surface/human acceptance remain open; DD111 joins the final polish queue."
+      ]
+    },
+    "preparation_budget_admission": {
+      "status": "verified",
+      "scope": "Durable one-time preparation admission before runtime.open; retained capacity after startup failure; dispatch/input transaction replaces the hold without double counting; history/UI distinguish unknown consumption.",
+      "evidence": [
+        "docs/modernization/preparation-budget-review.md",
+        "docs/modernization/preparation-budget-results.json",
+        "docs/modernization/preparation-budget-packaging.json",
+        "backend/tests/runtime/test_preparation_budget.py"
+      ],
+      "remaining": [
+        "Broad E08 consumption coverage remains open; this does not claim cumulative whole-service CPU or provider billing.",
+        "No whole-page browser acceptance or global suite claim."
       ]
     }
   }

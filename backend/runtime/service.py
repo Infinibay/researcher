@@ -877,7 +877,7 @@ class RuntimeService:
         if project_budget is not None:
             message = (
                 "No se inició un turno nuevo: el proyecto tiene "
-                f"{project_budget['used_turns']} de {project_budget['turn_limit']} turnos reservados y "
+                f"{project_budget['used_turns']} de {project_budget['turn_limit']} solicitudes reservadas y "
                 f"{project_budget['accounted_tokens']} de {project_budget['token_limit']} tokens contabilizados; "
                 f"esta solicitud necesita reservar {project_budget['requested_tokens']} tokens. "
                 "Revisa el presupuesto del proyecto y sus intentos anteriores antes de continuar. "
@@ -1102,6 +1102,7 @@ class RuntimeService:
         execution_limit = None
         project_budget = None
         resource_observation = None
+        runtime_opened = False
         dispatch_reserved = native_started = False
         code_review = review_confirmed = False
         development = development_complete = False
@@ -1144,6 +1145,12 @@ class RuntimeService:
                 lease.run_id,
                 require_current=True,
             )
+            if not await asyncio.to_thread(
+                self.store.reserve_preparation, lease, limits=self.limits,
+                project_turn_limit=self.project_turn_limit,
+                project_token_limit=self.project_token_limit,
+            ):
+                raise RunConflict("Preparation was already reserved; reconcile without replay")
             token = await asyncio.to_thread(
                 self.research.issue_grant,
                 project_id=lease.project_id,
@@ -1171,6 +1178,7 @@ class RuntimeService:
             # Startup has its own deadline; it cannot consume an unbounded lease
             # while waiting for MCP assets/configuration before a native turn.
             async with asyncio.timeout(self.limits.wall_seconds + 120):
+                runtime_opened = True
                 async with (
                     self.runtime.open(
                         workspace=slot.workspace,
@@ -1346,7 +1354,7 @@ class RuntimeService:
                                 "status": result.status,
                             },
                         )
-                    runtime_closed = getattr(slot.session, "peers_closed", False)
+                    runtime_closed = not runtime_opened or getattr(slot.session, "peers_closed", False)
                     consume_closure = getattr(self.runtime, "consume_closure", None)
                     consume_resources = getattr(self.runtime, "consume_resources", None)
                     if consume_resources is not None:

@@ -114,8 +114,8 @@ def test_concurrent_project_requests_cannot_both_reserve_the_last_turn(coordinat
 
 
 @pytest.mark.timeout(180)
-async def test_owned_project_budget_exhaustion_closes_prepared_peers_without_a_native_turn(owned_config):
-    """Actual kernel/broker/native startup may prepare, but an unaffordable attempt cannot send a turn, run tools or retain live grants; generation and Ken are controlled."""
+async def test_owned_project_budget_exhaustion_refuses_preparation_without_a_native_turn(owned_config):
+    """An unaffordable attempt cannot start a Ken/native process, send a turn, run tools or retain live grants; generation and Ken are controlled."""
     from backend.tests.runtime.test_source_repair import app_for_sources
 
     c=owned_config;c.settings['project_token_limit']=999
@@ -130,10 +130,11 @@ async def test_owned_project_budget_exhaustion_closes_prepared_peers_without_a_n
         assert view.issue['project_budget']['requested_tokens']==1000
         assert view.issue['project_budget']['token_limit']==999
         assert view.result is None
-        for table in ('runtime_inference_dispatches','runtime_input_snapshots','runtime_result_proposals','runtime_result_acceptances','research_reports'):
+        for table in ('runtime_preparation_reservations','runtime_inference_dispatches','runtime_input_snapshots','runtime_result_proposals','runtime_result_acceptances','research_reports'):
             assert c.s.c.conn.execute('SELECT count(*) FROM '+table).fetchone()[0]==0
         assert c.s.c.conn.execute("SELECT count(*) FROM runtime_peers WHERE state!='closed'").fetchone()[0]==0
         assert c.s.c.conn.execute('SELECT count(*) FROM tool_grants WHERE revoked_at IS NULL').fetchone()[0]==0
+        assert c.s.c.conn.execute("SELECT count(*) FROM runtime_peers WHERE kind='ken' OR init_pid IS NOT NULL").fetchone()[0]==0
         assert not list(c.s.control.glob('native-state/*/home/fixture-tool-count.json'))
         assert not list(c.s.control.glob('native-state/*/home/fixture-turn.json'))
 
