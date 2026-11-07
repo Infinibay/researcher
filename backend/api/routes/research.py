@@ -54,6 +54,7 @@ from backend.research.provenance import (
     structure_page,
 )
 from backend.research.retrieval_assets import RetrievalBusy, RetrievalUnavailable
+from backend.runtime.auxiliary_budget import AuxiliaryBudget
 
 router = APIRouter(prefix="/api/research-tools", tags=["research-tools"])
 
@@ -318,7 +319,7 @@ def source_query(
 ):
     """Rank every source chunk with local embeddings, revalidating authority before disclosure."""
     source = ctx.store.read_source(ctx.scope, source_id)
-    with request.app.state.live_grants.operation(ctx.scope.grant_id) as cancelled:
+    with request.app.state.live_grants.operation(ctx.scope.grant_id) as cancelled, AuxiliaryBudget(ctx.store.database,ctx.scope.project_id,research=ctx.store,scope=ctx.scope).bound():
         result = request.app.state.retrieval.query(
             source, query, limit=limit, after_rank=after_rank, cancelled=cancelled
         )
@@ -403,7 +404,7 @@ def finding_query(
         "finding_ids": selected_ids(finding_ids),
     }
     corpus = ctx.store.finding_corpus(ctx.scope, **selection)
-    with request.app.state.live_grants.operation(ctx.scope.grant_id) as cancelled:
+    with request.app.state.live_grants.operation(ctx.scope.grant_id) as cancelled, AuxiliaryBudget(ctx.store.database,ctx.scope.project_id,research=ctx.store,scope=ctx.scope).bound():
         result = query_corpus(
             corpus,
             request.app.state.retrieval,

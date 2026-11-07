@@ -1,0 +1,34 @@
+{
+  "base_commit": "0b0fb4e",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "5a170596a37df8f95be3aca861a8cc391be6d16e395bdc0294e7ff7468c55221",
+  "source_files_matching_wheel_and_installation": 634,
+  "product_files_matching": 335,
+  "observed": {
+    "cases": 119,
+    "passed": 119,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 237,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 56.098,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_auxiliary_budget.py",
+    "backend/tests/research/test_auxiliary_http.py",
+    "backend/tests/runtime/test_project_budget_policy.py",
+    "backend/tests/research/test_parser_process.py",
+    "backend/tests/research/test_semantic_retrieval.py",
+    "backend/tests/research/test_finding_semantic.py",
+    "backend/tests/runtime/test_history_budget.py",
+    "backend/tests/runtime/test_migration_chain.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "Local worker CPU is recorded separately from generative tokens. Unknown original work is held without automatic recalculation; explicit diagnosis/recovery of interrupted local work remains pending. No whole-service CPU or billing guarantee",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}

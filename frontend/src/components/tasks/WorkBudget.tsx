@@ -25,6 +25,13 @@ export function WorkBudget({projectId}:{projectId:number}){
    <dl><dt>Tokens observados en los recibos disponibles</dt><dd>{measuredTokens(budget.observed_tokens)}</dd></dl>
    <p>{budget.unmeasured_dispatches} solicitudes sin medición y {budget.unsettled_dispatches} sin recibo final. Las observaciones pueden ser parciales, incluso en un recibo cerrado.</p>
    <details><summary className="min-h-11 cursor-pointer">Cómo interpretar la reserva</summary><p>Por ejemplo: con una reserva de 100 tokens y 40 observados durante el trabajo, se mantienen contabilizados 100. Si el consumo queda desconocido, la reserva se conserva. Este registro acumula la historia del proyecto; no se reinicia al cambiar de página.</p></details>
+   {budget.auxiliary&&<div className="space-y-2 border-t border-[var(--work-line)] pt-3" aria-label="Procesamiento local">
+    <h3 className="font-semibold">Documentos y búsqueda local</h3>
+    <p>Usuario y agentes comparten este cupo del proyecto. No son tokens ni cargos de la suscripción.</p>
+    <dl className="grid gap-3 sm:grid-cols-2"><div><dt>Cálculos reservados</dt><dd>{budget.auxiliary.used_operations} de {budget.auxiliary.policy.operation_limit}</dd></div><div><dt>CPU contabilizada (ms)</dt><dd>{measuredTokens(budget.auxiliary.accounted_cpu_ms)} de {measuredTokens(budget.auxiliary.policy.cpu_ms_limit)}</dd></div><div><dt>CPU observada (ms)</dt><dd>{measuredTokens(budget.auxiliary.observed_cpu_ms)}</dd></div><div><dt>Capacidad local restante (ms)</dt><dd>{measuredTokens(budget.auxiliary.remaining_cpu_ms)}</dd></div></dl>
+    <p>{budget.auxiliary.unknown_operations} cálculos sin medición; conservan {measuredTokens(budget.auxiliary.held_cpu_ms)} ms reservados, ya incluidos en el total. {budget.auxiliary.pending_operations} sin recibo final.</p>
+    <p>Por ejemplo: si se reservan 3.000 ms para extraer un documento y se pierde la medición, esos 3.000 ms siguen contabilizados. Un resultado completo guardado puede recuperarse sin recalcular. Ampliar el cupo no repite cálculos inciertos.</p>
+   </div>}
    <BudgetPolicyEditor key={projectId} budget={budget} fresh={!query.error}/>
   </>}
  </section>

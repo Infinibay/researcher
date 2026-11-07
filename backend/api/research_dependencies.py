@@ -61,7 +61,10 @@ def get_research_context(
             422,
             "Project, task and actor are bound to tool credentials; do not supply them in a query",
         )
-    parser = PDFParser(owner=request.app.state.live_grants, grant_id=scope.grant_id)
+    from backend.runtime.auxiliary_budget import AuxiliaryBudget
+
+    parser = PDFParser(owner=request.app.state.live_grants, grant_id=scope.grant_id,
+                       accounting=AuxiliaryBudget(store.database,scope.project_id,research=store,scope=scope))
     return ResearchContext(
         store,
         scope,

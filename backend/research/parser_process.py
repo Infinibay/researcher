@@ -55,7 +55,7 @@ class ParserLimits:
 class DocumentParser:
     """Own bounded PDF/HTML/DOCX/CSV/JSON/XML workers until actual exit under host cancellation."""
 
-    def __init__(self, *, format="pdf", owner=None, grant_id=None, limits=None):
+    def __init__(self, *, format="pdf", owner=None, grant_id=None, limits=None, accounting=None):
         """Bind host authority and limits; direct library callers still receive OS limits."""
         if (owner is None) != (grant_id is None):
             raise ValueError(
@@ -66,11 +66,12 @@ class DocumentParser:
         self.format = format
         self.owner, self.grant_id = owner, grant_id
         self.limits = limits or ParserLimits()
+        self.accounting = accounting
 
     def for_format(self, kind):
         """Reuse host authority and limits for another fixed, supported format."""
         return DocumentParser(
-            format=kind, owner=self.owner, grant_id=self.grant_id, limits=self.limits
+            format=kind, owner=self.owner, grant_id=self.grant_id, limits=self.limits, accounting=self.accounting
         )
 
     def read(
@@ -101,7 +102,7 @@ class DocumentParser:
         operation = (
             self.owner.operation(self.grant_id) if self.owner else nullcontext(Event())
         )
-        with operation as cancelled:
+        with operation as cancelled, self.accounting.bound() if self.accounting else nullcontext():
             if cancelled.is_set():
                 raise ResearchForbidden("Document operation authority was withdrawn")
             return self._run(data, cancelled, wall_seconds)
@@ -145,6 +146,8 @@ class DocumentParser:
             ):
                 result["provenance"]["execution"]["worker_closed"] = True
                 result["provenance"]["execution"]["wall_limit_seconds"] = wall_seconds
+                if 'local_accounting' in result:
+                    result['provenance']['execution']['local_accounting']=result['local_accounting']
                 return result["content"], result["provenance"]
             if result["code"] == "too_large":
                 raise SourceTooLarge(result["message"])
@@ -160,6 +163,6 @@ class DocumentParser:
 class PDFParser(DocumentParser):
     """Preserve the PDF-only host API while sharing bounded document process ownership."""
 
-    def __init__(self, *, owner=None, grant_id=None, limits=None):
+    def __init__(self, *, owner=None, grant_id=None, limits=None, accounting=None):
         """Fix PDF extraction, preserving existing authority and remaining-wall semantics."""
-        super().__init__(format="pdf", owner=owner, grant_id=grant_id, limits=limits)
+        super().__init__(format="pdf", owner=owner, grant_id=grant_id, limits=limits, accounting=accounting)

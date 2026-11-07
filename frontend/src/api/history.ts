@@ -18,6 +18,7 @@ export interface ProjectWorkBudget {
  project_id:number;policy:{turn_limit:number;token_limit:number;revision:number}|null
  used_turns:number;observed_tokens:number|null;unmeasured_dispatches:number;unsettled_dispatches:number
  accounted_tokens:number;held_tokens:number;remaining_turns:number|null;remaining_tokens:number|null;overrun_tokens:number|null
+ auxiliary?:{policy:{operation_limit:number;cpu_ms_limit:number};used_operations:number;observed_cpu_ms:number|null;unknown_operations:number;pending_operations:number;accounted_cpu_ms:number;held_cpu_ms:number;remaining_operations:number;remaining_cpu_ms:number;input_bytes:number}
 }
 /** Read older task runs independently of the current execution controls. */
 export function taskRunHistory(projectId:number,taskId:number,beforeSeq:string|null=null){

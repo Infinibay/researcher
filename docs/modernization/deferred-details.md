@@ -825,3 +825,13 @@ controles. Compactar la explicación secundaria y mejorar el encuadre de captura
 por posición de scroll en la pasada final. El escritorio sí se inspeccionó completo;
 Axe del panel y desbordamiento exterior pasan. No declarar aceptación responsive
 global ni repetir ahora el backend por este detalle de densidad/evidencia visual.
+
+## DD109 — texto y refresco del presupuesto local
+
+Corregir pluralización de «1 cálculos»/«1 solicitudes» y revisar la densidad de
+las explicaciones de CPU en la pasada final. Al guardar, el aviso de éxito puede
+aparecer antes de que termine la nueva consulta de uso/política; hacer visible
+ese refresco evitará interpretar fugazmente el contador anterior como la nueva
+política. El recorrido real comprobó el valor final exacto sin repetir escrituras.
+No bloquea el control durable y no implica rehacer ahora el panel; DD108 conserva
+su limitación de encuadre móvil. Véase la auditoría de presupuesto auxiliar.

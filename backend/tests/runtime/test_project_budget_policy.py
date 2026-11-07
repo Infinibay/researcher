@@ -112,6 +112,7 @@ ProjectBudgetPolicies(store).update(101,operation_key='crash',expected_revision=
 def test_upgrade_preserves_old_policy_and_unused_inverse_preserves_it(_isolated_db,db_conn):
     """Migration60 adds revision0 without inventing owner decisions; an unused inverse restores59 and refuses used owner history."""
     from backend.db.project_budget_migration import restore_project_budget_schema
+    from backend.db.auxiliary_budget_migration import restore_auxiliary_budget_schema
     from backend.tools.base.db import ensure_migrations
     from backend.runtime.sqlite_runs import SQLiteRunStore
     from types import SimpleNamespace
@@ -122,9 +123,11 @@ def test_upgrade_preserves_old_policy_and_unused_inverse_preserves_it(_isolated_
     ensure_migrations(c.database);ensure_migrations(c.database)
     assert RuntimeHistory(c.database).budget(101)['policy']=={'turn_limit':2,'token_limit':200,'revision':0}
     assert c.conn.execute('SELECT count(*) FROM runtime_project_budget_changes').fetchone()[0]==0
+    restore_auxiliary_budget_schema(c.conn)
     restore_project_budget_schema(c.conn)
     assert tuple(c.conn.execute('SELECT * FROM runtime_project_budgets').fetchone())==(101,2,200)
     ensure_migrations(c.database);change(c)
+    restore_auxiliary_budget_schema(c.conn)
     with pytest.raises(RuntimeError,match='history'):restore_project_budget_schema(c.conn)
 
 
@@ -132,7 +135,7 @@ async def test_budget_api_requires_owner_and_csrf_and_can_recover_without_runtim
     """Authenticated owner changes and read-only receipts work while runtime is absent; tool bearer/no-session/CSRF failures cannot mutate policy."""
     import httpx
 
-    path='/api/projects/101/work-budget';body=dict(operation_key='web-budget',expected_revision=0,turn_limit=4,token_limit=400,reason='Continue research')
+    path='/api/projects/101/work-budget';body=dict(operation_key='web-budget',expected_revision=0,turn_limit=4,token_limit=400,reason='Continue research',auxiliary_operation_limit=30,auxiliary_cpu_ms_limit=90000)
     async with workspace_app.router.lifespan_context(workspace_app):
         async with httpx.AsyncClient(transport=httpx.ASGITransport(app=workspace_app),base_url='http://localhost') as outsider:
             assert (await outsider.post(path,json=body)).status_code in (401,403)
@@ -148,6 +151,7 @@ async def test_budget_api_requires_owner_and_csrf_and_can_recover_without_runtim
             read=await owner.get(path+'/changes/web-budget')
             assert read.json()==receipt and read.headers['cache-control']=='no-store'
             assert (await owner.get(path)).json()['policy']['revision']==1
+            assert (await owner.get(path)).json()['auxiliary']['policy']=={'operation_limit':30,'cpu_ms_limit':90000}
             assert (await owner.post(path,json={**body,'operation_key':'stale'})).status_code==409
             assert (await owner.post(path,json={**body,'operation_key':'bad','turn_limit':True})).status_code==422
             assert (await owner.get('/api/projects/202/work-budget/changes/web-budget')).status_code==404

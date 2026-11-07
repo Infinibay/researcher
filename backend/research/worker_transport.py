@@ -5,6 +5,9 @@ The operation owner stays registered until this child is physically reaped.
 """
 
 import json
+import hashlib
+from importlib import metadata
+from pathlib import Path
 import os
 import selectors
 import signal
@@ -19,8 +22,22 @@ from backend.runtime.peer_process import _pidfd, _signal
 _CAPACITY = BoundedSemaphore(1)
 
 
+def _receipt_fingerprint(worker, options, limits):
+    """Bind reusable raw output to actual producer bytes, installed dependencies and stable execution policy."""
+    from dataclasses import asdict
+
+    sources={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(Path(worker).parent.glob('*.py'))}
+    versions={}
+    for name in ('pypdf','defusedxml','trafilatura','onnxruntime','numpy','tokenizers'):
+        try:versions[name]=metadata.version(name)
+        except metadata.PackageNotFoundError:versions[name]=None
+    value={'worker':Path(worker).name,'sources':sources,'versions':versions,'python':sys.version,
+           'format':options.get('format'),'limits':asdict(limits)}
+    return hashlib.sha256(json.dumps(value,sort_keys=True).encode()).hexdigest()
+
+
 def exchange(data, *, worker, options, limits, cancelled, label="PDF", pass_fds=()):
-    """Admit at most one document or semantic child per host process, through physical closure."""
+    """Hold one process slot through physical closure and reserve bound project capacity before starting its child."""
     if cancelled.is_set():
         raise ResearchForbidden(f'{label} operation authority was withdrawn before worker admission')
     if not _CAPACITY.acquire(blocking=False):
@@ -29,8 +46,25 @@ def exchange(data, *, worker, options, limits, cancelled, label="PDF", pass_fds=
             'No se inició otro proceso; vuelve a intentarlo cuando termine el actual.'
         )
     try:
-        return _exchange(data, worker=worker, options=options, limits=limits,
-                         cancelled=cancelled, label=label, pass_fds=pass_fds)
+        from backend.runtime.auxiliary_budget import CURRENT_AUXILIARY_BUDGET
+
+        def run_worker():
+            """Start the original bounded IPC only after any project reservation commits."""
+            if cancelled.is_set():raise ResearchForbidden(f'{label} authority was withdrawn before worker start')
+            return _exchange(data, worker=worker, options=options, limits=limits,
+                             cancelled=cancelled, label=label, pass_fds=pass_fds)
+        budget=CURRENT_AUXILIARY_BUDGET.get()
+        if budget is None:return run_worker()
+        receipt={}
+        raw=budget.execute(data,kind=label.lower(),fingerprint=_receipt_fingerprint(worker,options,limits),
+                           cpu_ceiling_ms=(limits.cpu_seconds+1)*1000,execute=run_worker,on_receipt=receipt.update)
+        try:
+            result=json.loads(raw)
+            if isinstance(result,dict):
+                result['local_accounting']=receipt
+                return json.dumps(result,ensure_ascii=False,allow_nan=False).encode()
+        except (ValueError,TypeError):pass
+        return raw
     finally:
         _CAPACITY.release()
 

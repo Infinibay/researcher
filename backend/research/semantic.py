@@ -1,7 +1,8 @@
 """Project-source semantic recovery with pinned offline weights and exact text windows.
 
-No vector DB/global cache is reused: every successful response considered every
-bounded source chunk. Application capacity is held through physical worker exit.
+Every successful calculation considers every bounded source chunk. Authenticated
+calls may recover its exact saved result under the same project/input/producer
+identity; no unversioned vector cache is reused. Capacity holds through worker exit.
 """
 
 import hashlib
@@ -215,6 +216,7 @@ class SemanticRetriever:
                 "sha256": source["sha256"],
                 "query": query,
                 "search_kind": "semantic_cosine",
+                "local_accounting": result.get('local_accounting'),
                 "model": MODEL
                 | {
                     "fingerprint": FINGERPRINT,
@@ -226,7 +228,7 @@ class SemanticRetriever:
                     "max_chars": 1200,
                     "max_model_tokens": 128,
                     "truncation": False,
-                    "cache": "none; rebuild each query",
+                    "cache": "exact project/input/producer receipt when authenticated; no unversioned vectors",
                 },
                 "usage": {
                     "query_tokens": result["query_tokens"],

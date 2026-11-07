@@ -1015,6 +1015,8 @@ class ProjectBudgetChange(BaseModel):
     expected_revision: int = Field(ge=0, le=9007199254740991)
     turn_limit: int = Field(ge=1, le=9007199254740991)
     token_limit: int = Field(ge=1, le=9007199254740991)
+    auxiliary_operation_limit: int | None = Field(default=None, ge=1, le=9007199254740991)
+    auxiliary_cpu_ms_limit: int | None = Field(default=None, ge=1, le=9007199254740991)
     reason: str = Field(default='', max_length=2000)
 
 
@@ -1024,7 +1026,7 @@ async def change_project_work_budget(project_id: int, body: ProjectBudgetChange,
     from backend.runtime.project_budget import ProjectBudgetPolicies
 
     try:
-        receipt = await asyncio.to_thread(ProjectBudgetPolicies(read_store(request)).update, project_id, **body.model_dump())
+        receipt = await asyncio.to_thread(ProjectBudgetPolicies(read_store(request)).update, project_id, **body.model_dump(exclude_none=True))
     except ValueError as exc:
         raise HTTPException(422, str(exc)) from exc
     return JSONResponse(receipt, headers={"Cache-Control": "no-store"})

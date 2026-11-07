@@ -1,0 +1,69 @@
+{
+  "base_commit": "0b0fb4e",
+  "schema_version": 61,
+  "started_at": "2026-11-07T16:34:39Z",
+  "validated_at": "2026-11-07T17:00:19Z",
+  "seconds_to_validation": 1540,
+  "distinct_source_cases": 105,
+  "overlapping_source_groups": [
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/auxiliary-budget-integration.xml",
+      "cases": 31,
+      "seconds": 13.493
+    },
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/auxiliary-budget-final.xml",
+      "cases": 77,
+      "seconds": 33.37
+    },
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/auxiliary-budget-closure.xml",
+      "cases": 2,
+      "seconds": 1.773
+    },
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/auxiliary-budget-receipt-origin.xml",
+      "cases": 13,
+      "seconds": 9.692
+    }
+  ],
+  "installed": {
+    "cases": 119,
+    "passed": 119,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 237,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 56.098,
+    "exit_code": 0
+  },
+  "source_wheel_installation_matches": 634,
+  "product_files_matching": 335,
+  "frontend": {
+    "dom_passed": 9,
+    "contract_passed": 3,
+    "build": "passed; existing chunk-size warning",
+    "browser_states": 3,
+    "budget_writes": 2,
+    "checks": 6,
+    "read_only_recheck_after_refetch": true,
+    "mobile_visual_acceptance": "partial capture; DD108"
+  },
+  "model_turns": 0,
+  "local_encoder": "actual prepared offline encoder exercised in source and installed HTTP tests",
+  "docstrings_checked": 66,
+  "prompt_candidates_reviewed": 85,
+  "unreviewed_prompt_candidates": 0,
+  "errors_preserved": [
+    "Initial missing-module RED",
+    "Nonexistent test selector executed no tests",
+    "New HTTP test expected message instead of actual detail; 429 and pre-worker refusal already worked",
+    "First final browser screenshot preceded refetch and substring0 matched3000; fixed exact assertion and read-only recheck on same server/state, no repeated writes"
+  ],
+  "remaining": [
+    "Explicit diagnosis and continuation of original local work without a saved result; no automatic replay or refunded holds",
+    "Whole-service resource, storage/recovery and data-migration acceptance remain separate",
+    "DD108mobile capture, DD109wording/refetch indication; address after macro capabilities",
+    "Global suite and final independent review remain pending"
+  ]
+}

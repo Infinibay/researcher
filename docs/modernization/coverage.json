@@ -979,11 +979,20 @@
         "docs/modernization/engine-acceptance-inventory.json",
         "backend/tests/runtime/test_code_review_session.py",
         "backend/tests/runtime/test_code_acceptance.py",
-        "backend/tests/runtime/test_plan_execution.py"
+        "backend/tests/runtime/test_plan_execution.py",
+        "docs/architecture/auxiliary-work-budget.md",
+        "docs/modernization/auxiliary-budget-review.md",
+        "docs/modernization/auxiliary-budget-results.json",
+        "docs/modernization/auxiliary-budget-packaging.json",
+        "docs/modernization/auxiliary-budget-docstrings.json",
+        "backend/runtime/auxiliary_budget.py",
+        "backend/tests/runtime/test_auxiliary_budget.py",
+        "backend/tests/research/test_auxiliary_http.py",
+        "docs/design/audits/2026-11-07-auxiliary-budget/report.md"
       ],
       "remaining": [
-        "Generative turn accounting and owner policy revision are verified; local semantic/extraction auxiliary work still needs durable per-operation/attempt/project reservation and measured/unknown accounting, shared between owner and agent entry points.",
-        "Verify competing requests for the last local auxiliary slot/allowance, lost response and restart without refunded usage or automatic replay, cancellation through physical closure, and owner-visible policy/consumption. Do not equate local batches/vectors/CPU with generative tokens."
+        "Durable local worker admission/accounting and exact completed-result recovery are implemented across owner/native entrypoints. Add explicit diagnosis/continuation for an original calculation without saved output, preserving its unknown hold and preventing unverified replay.",
+        "Full scenario acceptance must recheck that recovery and distinguish worker CPU from unobserved whole-service/provider/Ken/administrative consumption."
       ]
     },
     "E09": {
@@ -2005,10 +2014,15 @@
         "docs/modernization/engine-acceptance-review.md",
         "docs/modernization/engine-acceptance-results.json",
         "docs/modernization/engine-acceptance-packaging.json",
-        "docs/modernization/engine-acceptance-inventory.json"
+        "docs/modernization/engine-acceptance-inventory.json",
+        "docs/architecture/auxiliary-work-budget.md",
+        "docs/modernization/auxiliary-budget-review.md",
+        "docs/modernization/auxiliary-budget-results.json",
+        "docs/modernization/auxiliary-budget-packaging.json",
+        "docs/modernization/auxiliary-budget-docstrings.json"
       ],
       "remaining": [
-        "Complete E08 durable local auxiliary admission/accounting; current source inventory distinguishes this gap from retired inference providers.",
+        "Explicit recovery of local calculations with no saved result remains in E08; worker budget/accounting and reusable original receipts are integrated.",
         "Provider-internal and unknown dynamic/transitive behavior is not exhaustively observed; recheck inventory when integrations or dependencies change."
       ]
     },
@@ -5065,6 +5079,25 @@
       ],
       "remaining": [
         "Panel density/mobile capture in DD108 after main capabilities; not whole-page acceptance."
+      ]
+    },
+    "durable_local_auxiliary_budget": {
+      "status": "verified",
+      "scope": "Migration61, pre-worker project/attempt operation/CPU admission, conservative unknown holds, exact result recovery with original measurement attribution, five owner/native entrypoints, owner policy revision and web display/recovery.",
+      "evidence": [
+        "docs/architecture/auxiliary-work-budget.md",
+        "docs/modernization/auxiliary-budget-review.md",
+        "docs/modernization/auxiliary-budget-results.json",
+        "docs/modernization/auxiliary-budget-packaging.json",
+        "docs/modernization/auxiliary-budget-docstrings.json",
+        "backend/runtime/auxiliary_budget.py",
+        "backend/tests/runtime/test_auxiliary_budget.py",
+        "backend/tests/research/test_auxiliary_http.py",
+        "docs/design/audits/2026-11-07-auxiliary-budget/report.md"
+      ],
+      "remaining": [
+        "Explicit diagnosis/continuation of local calculations without saved output stays a separate primary E08 recovery task.",
+        "DD108/DD109 and whole-page/human acceptance remain open."
       ]
     }
   }

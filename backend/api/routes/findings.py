@@ -109,6 +109,7 @@ def finding_query(
     """Search a complete bounded current set with the existing offline worker, never a lexical fallback."""
     from backend.knowledge.findings import corpus_unchanged, query_corpus, selected_ids
     from backend.research.retrieval_assets import RetrievalUnavailable
+    from backend.runtime.auxiliary_budget import AuxiliaryBudget
 
     repository = store(request)
     filters = {
@@ -119,15 +120,16 @@ def finding_query(
         "finding_ids": selected_ids(finding_ids),
     }
     corpus = repository.corpus(project_id, **filters)
-    result = query_corpus(
-        corpus,
-        request.app.state.retrieval,
-        query,
-        limit=limit,
-        after_rank=after_rank,
-        expected_corpus_sha256=expected_corpus_sha256,
-        expected_record_set_sha256=expected_record_set_sha256,
-    )
+    with AuxiliaryBudget(repository.database,project_id).bound():
+        result = query_corpus(
+            corpus,
+            request.app.state.retrieval,
+            query,
+            limit=limit,
+            after_rank=after_rank,
+            expected_corpus_sha256=expected_corpus_sha256,
+            expected_record_set_sha256=expected_record_set_sha256,
+        )
     if not corpus_unchanged(corpus, repository.corpus(project_id, **filters)):
         raise RetrievalUnavailable(
             "Finding corpus changed during semantic retrieval; retry the current selection"

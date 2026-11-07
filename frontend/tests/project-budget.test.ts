@@ -3,6 +3,15 @@ import assert from 'node:assert/strict'
 import {test} from 'node:test'
 import {loadBudgetAction,prepareBudgetChange,readBudgetReceipt,saveBudgetAction,sendBudgetChange} from '../src/api/projectBudget.ts'
 
+test('local allowance extends the frozen packet while old packets remain valid',()=>{
+ const old=prepareBudgetChange(101,0,2,200,'')
+ const extended=prepareBudgetChange(101,0,2,200,'',{operations:20,cpuMs:60000})
+ assert.equal(extended.body.auxiliary_operation_limit,20)
+ assert.equal(extended.body.auxiliary_cpu_ms_limit,60000)
+ assert.equal(old.body.auxiliary_operation_limit,undefined)
+ assert.throws(()=>prepareBudgetChange(101,0,2,200,'',{operations:0,cpuMs:60000}),/original/)
+})
+
 test('budget action recovery validates original project, version, limits and non-dispatch receipt',async()=>{
  const action=prepareBudgetChange(101,2,20,5000,'More research'),original=globalThis.fetch,sent:any[]=[]
  const valid={project_id:101,...action.body,revision:3,inference_started:false}

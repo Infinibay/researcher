@@ -31,7 +31,7 @@ class ProjectBudgetPolicies:
             if row is None:raise RunNotFound('No hay un recibo guardado para esta decisión de presupuesto.')
             return json.loads(row[0])
 
-    def update(self, project_id, *, operation_key, expected_revision, turn_limit, token_limit, reason=''):
+    def update(self, project_id, *, operation_key, expected_revision, turn_limit, token_limit, reason='', auxiliary_operation_limit=None, auxiliary_cpu_ms_limit=None):
         """Compare and atomically record new total limits and their original receipt; replay returns that receipt without applying newer authority or clearing consumption."""
         command_key(operation_key)
         for name,value,minimum in [('revision',expected_revision,0),('turn limit',turn_limit,1),('token limit',token_limit,1)]:
@@ -40,6 +40,10 @@ class ProjectBudgetPolicies:
         if not isinstance(reason,str) or len(reason.encode())>2000:
             raise ValueError('La explicación debe tener como máximo2000bytes.')
         request=dict(expected_revision=expected_revision,turn_limit=turn_limit,token_limit=token_limit,reason=reason)
+        if auxiliary_operation_limit is not None or auxiliary_cpu_ms_limit is not None:
+            if any(type(v) is not int or not 1<=v<=MAX_SAFE_INTEGER for v in (auxiliary_operation_limit,auxiliary_cpu_ms_limit)):
+                raise ValueError('Los dos límites locales deben ser enteros positivos.')
+            request.update(auxiliary_operation_limit=auxiliary_operation_limit,auxiliary_cpu_ms_limit=auxiliary_cpu_ms_limit)
         encoded=json.dumps(request,sort_keys=True,ensure_ascii=False,separators=(',',':'))
         with self.runs._transaction(write=True) as conn:
             self._project(conn,project_id)
@@ -55,6 +59,11 @@ class ProjectBudgetPolicies:
             receipt=dict(project_id=project_id,operation_key=operation_key,**request,revision=revision+1,
                          previous_policy=dict(row) if row else None,usage_at_decision=project_work_usage(conn,project_id),
                          recorded_at=self.runs.clock(),inference_started=False)
+            if auxiliary_operation_limit is not None:
+                from backend.runtime.auxiliary_budget import auxiliary_summary
+                receipt['previous_auxiliary']=auxiliary_summary(conn,project_id)
+                conn.execute('INSERT INTO runtime_auxiliary_policies VALUES(?,?,?) ON CONFLICT(project_id) DO UPDATE SET operation_limit=excluded.operation_limit,cpu_ms_limit=excluded.cpu_ms_limit',
+                             (project_id,auxiliary_operation_limit,auxiliary_cpu_ms_limit))
             conn.execute('INSERT INTO runtime_project_budgets(project_id,turn_limit,token_limit,revision) VALUES(?,?,?,?) ON CONFLICT(project_id) DO UPDATE SET turn_limit=excluded.turn_limit,token_limit=excluded.token_limit,revision=excluded.revision',
                          (project_id,turn_limit,token_limit,revision+1))
             conn.execute('INSERT INTO runtime_project_budget_changes VALUES(?,?,?,?)',(project_id,operation_key,encoded,json.dumps(receipt,ensure_ascii=False,separators=(',',':'))))

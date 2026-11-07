@@ -1,0 +1,20 @@
+{
+  "local_policy": {
+    "project_id": 101,
+    "operation_limit": 5,
+    "cpu_ms_limit": 2000
+  },
+  "owner_policy_revision": 2,
+  "owner_policy_receipts": 2,
+  "runs": 1,
+  "dispatches": 1,
+  "local_operations": [
+    {
+      "kind": "json",
+      "status": "settled",
+      "cpu_ceiling_ms": 3000,
+      "observed_cpu_ms": null
+    }
+  ],
+  "integrity": "ok"
+}

@@ -2,8 +2,10 @@
 
 Estado comprobado el **2026-11-07**, sobre el producto de `294943d`. Las rutas
 antiguas enumeradas en versiones anteriores ya no son rutas activas.
-**E08 sigue abierto por la contabilidad acumulada de auxiliares locales**;
-el presupuesto durable de turnos ya está conectado.
+La integración posterior de [presupuesto local](auxiliary-work-budget.md) añade
+reserva/consumo por proyecto e intento y su control web. **E08 sigue abierto por
+la recuperación explícita de cálculos locales sin resultado recuperable**.
+La inspección AST citada al final conserva su fecha/base original.
 
 ## Generación del producto actual
 
@@ -24,8 +26,8 @@ el presupuesto durable de turnos ya está conectado.
 
 | Servicio | Qué hace y cómo se acota | Límite o pendiente |
 | --- | --- | --- |
-| Encoder local | `research/semantic.py` y `semantic_worker.py`: pesos/tokenizer fijados, trabajo offline, respuesta con lotes/vectores y límites observados. Plazos, tamaños, CPU/memoria y una plaza de procesamiento compartida. | No reserva ni acumula duraderamente ese consumo por proyecto. Repetir consultas en distintos intentos no agota un cupo acumulado propio. Pendiente concreto de E08. |
-| PDF y extracción | `research/worker_transport.py`: IPC, salida y plazos acotados; cancelación y cierre físico del hijo antes de liberar la plaza compartida con semántica. | Límites por operación/servicio no sustituyen un registro y cupo por proyecto. Bytes, vectores y CPU no son tokens generativos. |
+| Encoder local | `research/semantic.py` y `semantic_worker.py`: pesos/tokenizer fijados, trabajo offline y lotes/vectores observados. El transporte reserva operación/CPU por proyecto e intento antes del worker. | Resultado original recuperable con identidad y origen de medición explícitos. Cálculos sin resultado conservan la reserva; falta su diagnóstico/continuación explícitos. |
+| PDF y extracción | `research/worker_transport.py`: IPC, salida y plazos acotados; cancelación/cierre físico antes de liberar la plaza compartida. Parsers y semántica usan el mismo presupuesto durable. | Bytes, vectores y CPU no son tokens generativos. La CPU medida es la del worker; no equivale a toda la CPU del servicio. |
 | Ken obligatorio | Herramientas Ken mediante MCP con ámbito de workspace. `ken-rank` publicado fue ensayado; versión y activos del host son explícitos. | Preparación, calidad y compatibilidad publicada tienen requisitos propios. Un candidato local de compatibilidad no equivale a una publicación adoptada. |
 | Web pública | `research/web_fetcher.py`: HTTPS público con límites/procedencia, sin cookies, proxy o Authorization heredados. Búsqueda nativa con política explícita. | Capturar una fuente no prueba comprensión. Búsquedas internas del runtime sólo se contabilizan según su telemetría. |
 | Git, comprobaciones y publicación | Operaciones con dueño, permisos y recibos propios; terminar inferencia no autoriza publicación. | Efectos/recursos distintos de generación. Recuperación física y límites agregados conservan requisitos propios. |
@@ -69,7 +71,8 @@ de la cuota interna de Codex. Las pruebas controladas no evalúan comprensión,
 calidad generativa o facturación.
 [Comportamiento y aceptación de E07/E08](../modernization/engine-acceptance-review.md).
 
-E08 necesita reservar trabajo auxiliar local **antes de ejecutarlo**, conservar
-consumo medido/desconocido y recibos ante respuesta perdida/reinicio, y mostrarlo
-al propietario. Debe cubrir consultas del agente y del usuario con una política
-por proyecto. Mostrar contadores sin controlar admisión no completa el contrato.
+La migración61 y el transporte común cubren reserva previa, consumo conocido/
+desconocido y resultados recuperables para las entradas humanas y nativas.
+El propietario ve y revisa los totales con recibo/versionado. Sigue pendiente
+diagnosticar y continuar explícitamente un cálculo cuyo resultado no se guardó,
+sin repetirlo automáticamente ni borrar su consumo. [Evidencia actual](../modernization/auxiliary-budget-review.md).

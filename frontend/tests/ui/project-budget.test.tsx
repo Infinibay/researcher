@@ -64,3 +64,23 @@ it('does not send a budget decision when browser persistence fails',async()=>{
  const denied=vi.spyOn(Storage.prototype,'setItem').mockImplementation(()=>{throw new Error('Storage refused')})
  try{await user.click(screen.getByRole('button',{name:'Guardar límites'}));expect(await screen.findByRole('alert')).toHaveTextContent('Storage refused');expect(api.sendBudgetChange).not.toHaveBeenCalled()}finally{denied.mockRestore()}
 })
+
+it('shows unknown local CPU separately and preserves local totals in the original recoverable decision',async()=>{
+ api.workBudget.mockResolvedValue({...budget,auxiliary:{policy:{operation_limit:20,cpu_ms_limit:60000},used_operations:1,observed_cpu_ms:null,unknown_operations:1,pending_operations:1,accounted_cpu_ms:3000,held_cpu_ms:3000,remaining_operations:19,remaining_cpu_ms:57000,input_bytes:20}})
+ api.sendBudgetChange.mockRejectedValue(new Error('Respuesta perdida'))
+ const user=userEvent.setup();const view=render(<WorkBudget projectId={1}/>,{wrapper:wrapper()})
+ expect(await screen.findByText('Documentos y búsqueda local')).toBeVisible()
+ expect(screen.getByText(/Usuario y agentes comparten/)).toBeVisible()
+ expect(screen.getByText(/1 cálculos sin medición/)).toBeVisible()
+ await user.click(screen.getByRole('button',{name:'Revisar límites'}))
+ await user.clear(screen.getByLabelText('Límite total de cálculos locales'));await user.type(screen.getByLabelText('Límite total de cálculos locales'),'30')
+ await user.click(screen.getByRole('button',{name:'Guardar límites'}))
+ await screen.findByText(/Respuesta perdida/)
+ const original=api.sendBudgetChange.mock.calls[0][0]
+ expect(original.body.auxiliary_operation_limit).toBe(30);expect(original.body.auxiliary_cpu_ms_limit).toBe(60000)
+ view.unmount();api.readBudgetReceipt.mockImplementation(async action=>receipt(action))
+ render(<WorkBudget projectId={1}/>,{wrapper:wrapper()})
+ await user.click(await screen.findByRole('button',{name:'Consultar recibo original'}))
+ expect(await screen.findByText(/Límites guardados/)).toBeVisible()
+ expect(api.readBudgetReceipt.mock.calls[0][0]).toEqual(original);expect(api.sendBudgetChange).toHaveBeenCalledTimes(1)
+})

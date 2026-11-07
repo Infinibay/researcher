@@ -28,7 +28,37 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U06 (configuración por intento y guardado interrumpido) y E07 (loop acotado y rechazo sin rework automático) quedan comprobados; siguen41de43escenarios amplios abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: E07 comprobado; pendiente concreto de E08 identificado
+## Estado actual: presupuesto de auxiliares locales comprobado
+
+Bloque **2026-11-07 16:34:39–17:00:19 UTC**, **25 min 40 s hasta validar**.
+105casos distintos de fuente a lo largo del bloque y119instalados pasan;
+9DOM,3contratos y build pasan. Reserva común antes del parser/encoder, cupo
+por proyecto/intento, consumo desconocido conservado y resultado exacto
+recuperable con origen de medición explícito. Usuario y agentes comparten el
+control. El editor conserva decisiones antiguas y respuestas perdidas.
+634archivos coinciden,335de producto;66nodos documentados y85prompts revisados.
+[Resultados y límites](auxiliary-budget-review.md).
+
+**Lista vigente:**
+- Terminado: recorridos principales, U06/E07, evidencia selectiva y presupuesto
+  generativo/local revisable desde la web, con reserva durable compartida y
+  recuperación de resultados locales completos.
+- En curso al cerrar: documentación y checkpoint local.
+- Siguiente principal: diagnóstico y continuación explícitos de cálculos locales
+  que quedaron sin resultado, manteniendo sus reservas y comprobando al dueño
+  anterior. **No iniciado**; registrar hora real al comenzar.
+- Pendiente: datos históricos, evaluaciones humanas/modelos, aceptación de12páginas,
+  dependencias publicadas y distribución.
+- Al final: detalles registrados, validación global y revisión independiente.
+
+Web real: tres estados, dos escrituras;3000ms desconocidos se conservan al bajar
+el límite a2000ms y queda cero. La captura previa al refetch se corrigió con una
+consulta al mismo servidor, sin otra escritura; la captura móvil sigue parcial
+(DD108). Texto/refresco queda enDD109. E08y41de43escenarios permanecen abiertos.
+El encoder offline sí se ejecutó; cero turnos de modelo. No hay nueva suite global
+verde ni porcentaje global sustentado. Lista y tiempos persisten tras compactar.
+
+## Etapa anterior: E07 comprobado; pendiente concreto de E08 identificado
 
 Bloque **2026-11-07 16:18:09–16:30:03 UTC**, **11 min 54 s hasta validar**.
 Pasan91casos instalados; los3casos de revisión desde fuente están incluidos en

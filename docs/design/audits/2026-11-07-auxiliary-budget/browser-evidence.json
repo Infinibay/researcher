@@ -1,0 +1,190 @@
+{
+  "states": [
+    {
+      "name": "01-local-policy-desktop",
+      "width": 1440,
+      "height": 1600,
+      "axe_violations": 0
+    },
+    {
+      "name": "02-local-response-lost",
+      "width": 390,
+      "height": 1600,
+      "axe_violations": 0
+    },
+    {
+      "name": "03-local-below-held",
+      "width": 1440,
+      "height": 1600,
+      "axe_violations": 0
+    }
+  ],
+  "writes": [
+    {
+      "request": {
+        "operation_key": "1cf76d1d-4566-466a-82a7-83f761e54852",
+        "expected_revision": 0,
+        "turn_limit": 2,
+        "token_limit": 200,
+        "reason": "",
+        "auxiliary_operation_limit": 5,
+        "auxiliary_cpu_ms_limit": 6000
+      },
+      "receipt": {
+        "project_id": 101,
+        "operation_key": "1cf76d1d-4566-466a-82a7-83f761e54852",
+        "expected_revision": 0,
+        "turn_limit": 2,
+        "token_limit": 200,
+        "reason": "",
+        "auxiliary_operation_limit": 5,
+        "auxiliary_cpu_ms_limit": 6000,
+        "revision": 1,
+        "previous_policy": {
+          "turn_limit": 2,
+          "token_limit": 200,
+          "revision": 0
+        },
+        "usage_at_decision": {
+          "used_turns": 1,
+          "observed_tokens": null,
+          "unmeasured_dispatches": 1,
+          "unsettled_dispatches": 1,
+          "accounted_tokens": 100,
+          "held_tokens": 100
+        },
+        "recorded_at": 1794070697.47521,
+        "inference_started": false,
+        "previous_auxiliary": {
+          "policy": {
+            "operation_limit": 200,
+            "cpu_ms_limit": 600000
+          },
+          "policy_origin": "recorded",
+          "used_operations": 1,
+          "observed_cpu_ms": null,
+          "unknown_operations": 1,
+          "pending_operations": 0,
+          "input_bytes": 13,
+          "accounted_cpu_ms": 3000,
+          "held_cpu_ms": 3000,
+          "remaining_operations": 199,
+          "remaining_cpu_ms": 597000,
+          "attempt_policy": {
+            "operation_limit": 50,
+            "cpu_ms_limit": 120000
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "operation_key": "60ba9140-42f2-4ad5-a8b8-faeb101e3028",
+        "expected_revision": 1,
+        "turn_limit": 2,
+        "token_limit": 200,
+        "reason": "",
+        "auxiliary_operation_limit": 5,
+        "auxiliary_cpu_ms_limit": 2000
+      },
+      "receipt": {
+        "project_id": 101,
+        "operation_key": "60ba9140-42f2-4ad5-a8b8-faeb101e3028",
+        "expected_revision": 1,
+        "turn_limit": 2,
+        "token_limit": 200,
+        "reason": "",
+        "auxiliary_operation_limit": 5,
+        "auxiliary_cpu_ms_limit": 2000,
+        "revision": 2,
+        "previous_policy": {
+          "turn_limit": 2,
+          "token_limit": 200,
+          "revision": 1
+        },
+        "usage_at_decision": {
+          "used_turns": 1,
+          "observed_tokens": null,
+          "unmeasured_dispatches": 1,
+          "unsettled_dispatches": 1,
+          "accounted_tokens": 100,
+          "held_tokens": 100
+        },
+        "recorded_at": 1794070698.3723228,
+        "inference_started": false,
+        "previous_auxiliary": {
+          "policy": {
+            "operation_limit": 5,
+            "cpu_ms_limit": 6000
+          },
+          "policy_origin": "recorded",
+          "used_operations": 1,
+          "observed_cpu_ms": null,
+          "unknown_operations": 1,
+          "pending_operations": 0,
+          "input_bytes": 13,
+          "accounted_cpu_ms": 3000,
+          "held_cpu_ms": 3000,
+          "remaining_operations": 4,
+          "remaining_cpu_ms": 3000,
+          "attempt_policy": {
+            "operation_limit": 50,
+            "cpu_ms_limit": 120000
+          }
+        }
+      }
+    }
+  ],
+  "checks": [
+    "unknown-local-cpu-visible",
+    "owner-session-real-api",
+    "original-local-policy-survives-response-loss-and-reload",
+    "receipt-read-does-not-resend",
+    "lower-total-retains-held-cpu",
+    "generative-and-local-units-separated"
+  ],
+  "errors": [],
+  "budget": {
+    "project_id": 101,
+    "policy": {
+      "turn_limit": 2,
+      "token_limit": 200,
+      "revision": 2
+    },
+    "used_turns": 1,
+    "observed_tokens": null,
+    "unmeasured_dispatches": 1,
+    "unsettled_dispatches": 1,
+    "accounted_tokens": 100,
+    "held_tokens": 100,
+    "auxiliary": {
+      "policy": {
+        "operation_limit": 5,
+        "cpu_ms_limit": 2000
+      },
+      "policy_origin": "recorded",
+      "used_operations": 1,
+      "observed_cpu_ms": null,
+      "unknown_operations": 1,
+      "pending_operations": 0,
+      "input_bytes": 13,
+      "accounted_cpu_ms": 3000,
+      "held_cpu_ms": 3000,
+      "remaining_operations": 4,
+      "remaining_cpu_ms": 0,
+      "attempt_policy": {
+        "operation_limit": 50,
+        "cpu_ms_limit": 120000
+      }
+    },
+    "remaining_turns": 1,
+    "remaining_tokens": 100,
+    "overrun_tokens": 0
+  },
+  "read_only_recheck": {
+    "writes": 0,
+    "exact_remaining_cpu_text": "0",
+    "exact_accounted_cpu_text": "3.000 de 2.000",
+    "reason": "Initial screenshot preceded query refetch; substring assertion matched3000. Corrected harness requires exact dd text; same server/state verified without replaying budget writes."
+  }
+}

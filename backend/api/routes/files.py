@@ -164,8 +164,12 @@ def preview_file(file_id: int, request: Request, project_id: int = Query(..., gt
     """Extract a bounded owner preview with hash/provenance; do not mint a source receipt."""
     with _connection(request) as conn:
         row = _get(conn, file_id, project_id)
+        database = conn.execute('PRAGMA database_list').fetchone()['file']
+    from backend.runtime.auxiliary_budget import AuxiliaryBudget
+
     parser = PDFParser(
-        owner=request.app.state.live_grants, grant_id="owner-preview:" + uuid4().hex
+        owner=request.app.state.live_grants, grant_id="owner-preview:" + uuid4().hex,
+        accounting=AuxiliaryBudget(database,project_id),
     )
     draft = BoundedReferenceReader(Path(api_config.UPLOAD_DIR), pdf_parser=parser).read(
         _reference(row)

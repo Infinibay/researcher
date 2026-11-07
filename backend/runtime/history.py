@@ -78,7 +78,9 @@ class RuntimeHistory:
                 raise RunNotFound("Project not found")
             policy = conn.execute("SELECT turn_limit,token_limit,revision FROM runtime_project_budgets WHERE project_id=?", (project_id,)).fetchone()
             usage = project_work_usage(conn, project_id)
-        return {"project_id": project_id, "policy": dict(policy) if policy else None, **usage,
+            from backend.runtime.auxiliary_budget import auxiliary_summary
+            auxiliary = auxiliary_summary(conn,project_id)
+        return {"project_id": project_id, "policy": dict(policy) if policy else None, **usage, "auxiliary":auxiliary,
                 "remaining_turns": max(0, policy["turn_limit"] - usage["used_turns"]) if policy else None,
                 "remaining_tokens": max(0, policy["token_limit"] - usage["accounted_tokens"]) if policy else None,
                 "overrun_tokens": max(0, usage["accounted_tokens"] - policy["token_limit"]) if policy else None}
