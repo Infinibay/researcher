@@ -1,0 +1,387 @@
+[
+  {
+    "cell": null,
+    "code": "F841",
+    "end_location": {
+      "column": 14,
+      "row": 424
+    },
+    "filename": "backend/runtime/owned_runtime.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 17,
+            "row": 424
+          },
+          "location": {
+            "column": 9,
+            "row": 424
+          }
+        }
+      ],
+      "message": "Remove assignment to unused variable `audit`"
+    },
+    "location": {
+      "column": 9,
+      "row": 424
+    },
+    "message": "Local variable `audit` is assigned to but never used",
+    "name": "unused-variable",
+    "noqa_row": 424,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-variable"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 95,
+      "row": 684
+    },
+    "filename": "backend/runtime/owned_runtime.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "                                from backend.planning.materials import (\n                                    PredecessorMaterials,\n                                )\n                                from backend.runtime.predecessor_tools import (\n                                    PredecessorTools,\n                                )\n",
+          "end_location": {
+            "column": 1,
+            "row": 685
+          },
+          "location": {
+            "column": 1,
+            "row": 683
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 33,
+      "row": 683
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 683,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "PLC0414",
+    "end_location": {
+      "column": 82,
+      "row": 9
+    },
+    "filename": "backend/tests/runtime/test_delivery_budget.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "owned_config",
+          "end_location": {
+            "column": 82,
+            "row": 9
+          },
+          "location": {
+            "column": 54,
+            "row": 9
+          }
+        }
+      ],
+      "message": "Remove import alias"
+    },
+    "location": {
+      "column": 54,
+      "row": 9
+    },
+    "message": "Import alias does not rename original package",
+    "name": "useless-import-alias",
+    "noqa_row": 9,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/useless-import-alias"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 82,
+      "row": 5
+    },
+    "filename": "backend/tests/runtime/test_prompt_catalog.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import hashlib\n\nimport pytest\n\nfrom backend.tests.runtime.test_owned_factory import owned_config as owned_config\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 8
+          },
+          "location": {
+            "column": 1,
+            "row": 2
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 2
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 2,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "PLC0414",
+    "end_location": {
+      "column": 82,
+      "row": 5
+    },
+    "filename": "backend/tests/runtime/test_prompt_catalog.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "owned_config",
+          "end_location": {
+            "column": 82,
+            "row": 5
+          },
+          "location": {
+            "column": 54,
+            "row": 5
+          }
+        }
+      ],
+      "message": "Remove import alias"
+    },
+    "location": {
+      "column": 54,
+      "row": 5
+    },
+    "message": "Import alias does not rename original package",
+    "name": "useless-import-alias",
+    "noqa_row": 5,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/useless-import-alias"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 99,
+      "row": 16
+    },
+    "filename": "backend/tests/runtime/test_prompt_catalog.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.prompts.native import (\n        COMMON_INSTRUCTIONS,\n        build_instructions,\n        instruction_identity,\n    )\n",
+          "end_location": {
+            "column": 1,
+            "row": 17
+          },
+          "location": {
+            "column": 1,
+            "row": 16
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 16
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 16,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 79,
+      "row": 27
+    },
+    "filename": "backend/tests/runtime/test_prompt_catalog.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.prompts.native import build_instructions, instruction_identity\n",
+          "end_location": {
+            "column": 1,
+            "row": 28
+          },
+          "location": {
+            "column": 1,
+            "row": 27
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 27
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 27,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 62,
+      "row": 48
+    },
+    "filename": "backend/tests/runtime/test_prompt_catalog.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.runtime.lifecycle import NativeOwnerRequired\n    from backend.scripts.warmup_prefix_cache import _warmup_one\n",
+          "end_location": {
+            "column": 1,
+            "row": 49
+          },
+          "location": {
+            "column": 1,
+            "row": 47
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 47
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 47,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 73,
+      "row": 56
+    },
+    "filename": "backend/tests/runtime/test_prompt_catalog.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    import json\n\n    from backend.prompts.native import instruction_identity\n    from backend.tests.runtime.test_source_repair import app_for_sources\n",
+          "end_location": {
+            "column": 1,
+            "row": 57
+          },
+          "location": {
+            "column": 1,
+            "row": 54
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 54
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 54,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "RUF059",
+    "end_location": {
+      "column": 23,
+      "row": 57
+    },
+    "filename": "backend/tests/runtime/test_prompt_catalog.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "_app",
+          "end_location": {
+            "column": 23,
+            "row": 57
+          },
+          "location": {
+            "column": 20,
+            "row": 57
+          }
+        }
+      ],
+      "message": "Prefix it with an underscore or any other dummy variable pattern"
+    },
+    "location": {
+      "column": 20,
+      "row": 57
+    },
+    "message": "Unpacked variable `app` is never used",
+    "name": "unused-unpacked-variable",
+    "noqa_row": 57,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-unpacked-variable"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 44,
+      "row": 67
+    },
+    "filename": "evals/context_alignment/worker.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    import uvicorn\n\n    from backend.api.main import create_app\n",
+          "end_location": {
+            "column": 1,
+            "row": 68
+          },
+          "location": {
+            "column": 1,
+            "row": 66
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 66
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 66,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  }
+]

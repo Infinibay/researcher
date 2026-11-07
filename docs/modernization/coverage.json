@@ -4743,6 +4743,17 @@
         "One purposive synthetic sample per arm/case, not population or causal efficacy",
         "No new product policy, global suite, wheel or page acceptance"
       ]
+    },
+    "observed_delivery_budget": {
+      "status": "in_progress",
+      "scope": "Budget visibility, preserved partial work and faithful-example policy implemented; two of three development regressions delivered, planning still exhausted its prior token ceiling. Not general communication acceptance.",
+      "evidence": [
+        "docs/modernization/delivery-budget-review.md",
+        "docs/modernization/delivery-budget-results.json",
+        "docs/modernization/delivery-budget-live.json",
+        "docs/modernization/delivery-budget-packaging.json",
+        "backend/tests/runtime/test_delivery_budget.py"
+      ]
     }
   }
 }

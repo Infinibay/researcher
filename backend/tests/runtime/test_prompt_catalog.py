@@ -16,7 +16,7 @@ def test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity
     from backend.prompts.native import build_instructions,instruction_identity,COMMON_INSTRUCTIONS
     value=build_instructions(kind,task)
     assert value.count(COMMON_INSTRUCTIONS)==1
-    assert instruction_identity(value)=={'catalog_version':3,'profile':profile,'sha256':hashlib.sha256(value.encode()).hexdigest()}
+    assert instruction_identity(value)=={'catalog_version':4,'profile':profile,'sha256':hashlib.sha256(value.encode()).hexdigest()}
     assert 'Evidence and shared context' in value and 'Correctable explanation' in value
     assert 'Ken' in value and 'operation_key' in value
     assert 'profession' in value and 'chain of thought' in value
@@ -62,5 +62,7 @@ async def test_actual_owned_turn_records_the_exact_versioned_policy_sent_to_nati
         thread=json.loads(next(c.s.control.glob('native-state/*/home/fixture-thread.json')).read_text())
         assert thread['developer_instructions']==record['developer_instructions']
         policy=instruction_identity(record['developer_instructions'])
-        assert policy['profile']=='scientific_research' and policy['catalog_version']==3
+        assert policy['profile']=='scientific_research' and policy['catalog_version']==4
         assert policy['sha256']==record['instructions_sha256']
+        limits=json.loads(record['developer_instructions'].split('RESEARCHER_INITIAL_BUDGET\n',1)[1])
+        assert {key:limits[key] for key in c.settings['limits']}==c.settings['limits']

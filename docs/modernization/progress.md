@@ -8209,3 +8209,40 @@ pending, other profiles/real scientific material remain. Security Ken/Chroma/lic
 owner historical data, other recovery,12pageacceptance and all deferred details
 remain.43broadscenarios0/12pages unchanged. Publish done/current/pending and elapsed
 at next main transition; all macro tasks before all fine details. Local commit only.
+
+
+## 2026-11-07 — Budget visibility and delivery checkpoint
+
+Base ab36dc5; block09:29:55–09:48:51UTC,18min56s to validation cutoff.
+Catalog4 adds initial effective limits, dynamic host-reply observations, advisory
+last-quarter delivery, bounded discovery and evidence-level faithful examples.
+Catalog2/3 frozen identities remain supported. CodexSession keeps actual hard fuses;
+ExecutionLimitExceeded carries cause/observations. Service issue reports partial
+saved work without asserting delivery, acceptance or automatic retry. Actual draft
+write followed by interruption retains draft and zero delivered/accepted results.
+132 distinct source tests and80 installed PASS0skip;608 source/wheel/install files
+match,324productive.33 changed definitions/10modules documented. Prompt inventory
+83current after16delta reviews and67unchanged; older full reviews preserved.
+11Ruff notices deferredDD088; no global rerun,43broadscenariosopen0/12pagesaccepted.
+
+Installed wheel delivery-budget-dist/researcher-0.1.0-cp312-cp312-linux_x86_64.whl,
+SHA256ddd0e54279470a0d46adbd2988d198a7be8d477364b136832c9254d0ec3251af.
+Three new development regressions, not held-out comparisons, no original replay:
+planning failed135796observedtokens>120000 afteronepersistedplan; audit completed
+346386/350000 withreport/delivery/final; weightedmeans completed305543/350000 with
+report/delivery/final, explicitly distinguishes groupmean fromindividualchange.
+Original policy/data/limits registered before allthree.247.948s787725observedtokens,
+notbilling. All3services/recordedpeersclosed0unrevokedgrants;2settled1unknown.
+Readonlycollector verifies exactpolicies/limits/citations/hashes/integrity/FKs,
+unchangedfixturefiles andzeroacceptance/publication. Existing old responses retained.
+Privatecollector .superpowers/sdd/2026-10-31-actualizacion-proyecto/collect-delivery-budget.py
+uses priorcollector function, no generation; public delivery-budget-{review,live,
+responses,results,packaging,docstrings,lint} underdocs/modernization.
+
+Next principal NOT STARTED: remaining security Ken/Chroma/licenses. Register start
+and publish updated list before starting. Functional planning delivery within prior
+cap remains open; do not tune/replay until green or equatevisibilitywithcompletion.
+Human A/B stillpending, otherprofiles/realscience, ownerhistoricalDB (locationnot
+supplied), remainingrecovery and12pageacceptance remain. Allfine detailsAFTER all
+macrocapabilities. Lists/timesattransition persistentaftercompaction. Localcommitonly;
+no push/merge/deploy. Alllivehandles fromthisblock terminal, no processesleft.

@@ -9,10 +9,11 @@ from __future__ import annotations
 
 import asyncio
 import inspect
+import json
 import math
 import time
 from collections.abc import Awaitable, Callable
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Self
 
@@ -26,6 +27,12 @@ class SubscriptionRequired(RuntimeError):
 class ExecutionLimitExceeded(RuntimeError):
     """Execution stopped at an explicit resource/progress boundary."""
 
+    def __init__(self, message, *, kind="unknown", budget=None):
+        """Preserve the observed boundary independently of private diagnostic text."""
+        super().__init__(message)
+        self.kind = kind
+        self.budget = budget
+
 
 class NativeInputRequired(RuntimeError):
     """A request needs an explicit host decision before execution can continue."""
@@ -37,6 +44,8 @@ class NativeInputRequired(RuntimeError):
 
 @dataclass(frozen=True)
 class ExecutionLimits:
+    """Host-owned hard ceilings; advisory delivery margins never enlarge them."""
+
     wall_seconds: float
     no_progress_seconds: float
     max_turns: int
@@ -45,6 +54,7 @@ class ExecutionLimits:
     max_answer_bytes: int = 200000
 
     def __post_init__(self) -> None:
+        """Reject missing, nonfinite and nonpositive execution allowances."""
         for value in (self.wall_seconds, self.no_progress_seconds):
             if type(value) not in (int, float) or not math.isfinite(value):
                 raise ValueError("Execution deadlines must be finite numbers")
@@ -146,6 +156,43 @@ class CodexSession:
         self._cancel_requested = asyncio.Event()
         self._cancellation: asyncio.Task[None] | None = None
         self._tool_items: set[tuple[str, str]] = set()
+        self._started_at: float | None = None
+
+    def budget_status(self):
+        """Report observed session consumption and turn time, never billing or guaranteed remaining quota.
+
+        Native token/item events may lag actual work. The last quarter is an
+        advisory delivery margin, not a reservation or another execution limit.
+        """
+        elapsed = (
+            time.monotonic() - self._started_at
+            if self._active and self._started_at is not None
+            else getattr(self, "last_duration_seconds", 0.0)
+        )
+        remaining = {
+            "wall_seconds": max(0.0, self.limits.wall_seconds - elapsed),
+            "tool_starts": max(0, self.limits.max_tool_calls - len(self._tool_items)),
+            "observed_tokens": None if self.observed_tokens is None else max(
+                0, self.limits.max_observed_tokens - self.observed_tokens
+            ),
+        }
+        deliver = (
+            remaining["wall_seconds"] <= self.limits.wall_seconds * 0.25
+            or remaining["tool_starts"] <= self.limits.max_tool_calls * 0.25
+            or (remaining["observed_tokens"] is not None
+                and remaining["observed_tokens"] <= self.limits.max_observed_tokens * 0.25)
+        )
+        return {
+            "limits": asdict(self.limits),
+            "observed": {"elapsed_seconds": elapsed, "tool_starts": len(self._tool_items),
+                         "tokens": self.observed_tokens},
+            "remaining": remaining,
+            "phase": "deliver" if deliver else "work",
+        }
+
+    def _exceeded(self, kind, message):
+        """Capture bounded host observations at detection, before process teardown changes elapsed time."""
+        return ExecutionLimitExceeded(message, kind=kind, budget=self.budget_status())
 
     async def __aenter__(self) -> Self:
         if self.resume_thread_id and self.dynamic_tools is not None:
@@ -240,7 +287,7 @@ class CodexSession:
         if self.thread_id is None:
             raise RuntimeError("Open the native session first")
         if self.turns_sent >= self.limits.max_turns:
-            raise ExecutionLimitExceeded(
+            raise self._exceeded("turns",
                 "Session turn budget exhausted; no new turn was sent"
             )
         self._active = True
@@ -248,6 +295,7 @@ class CodexSession:
         self._cancel_requested.clear()
         self._cancellation = None
         started = last_progress = time.monotonic()
+        self._started_at = started
         answers: dict[str, str] = {}
         self.turns_sent += 1  # A lost receipt is still a potentially dispatched turn.
         try:
@@ -269,7 +317,7 @@ class CodexSession:
                         time.monotonic() - last_progress
                     )
                     if remaining_progress <= 0:
-                        raise ExecutionLimitExceeded(
+                        raise self._exceeded("progress",
                             "No observable progress before the deadline"
                         )
                     try:
@@ -277,7 +325,7 @@ class CodexSession:
                             timeout=remaining_progress
                         )
                     except TimeoutError as exc:
-                        raise ExecutionLimitExceeded(
+                        raise self._exceeded("progress",
                             "No observable progress before the deadline"
                         ) from exc
                     params = message.get("params", {})
@@ -297,6 +345,15 @@ class CodexSession:
                             raise NativeInputRequired(message)
                         completed, decision = await self._callback(on_request(message))
                         if completed:
+                            if message["method"] == "item/tool/call":
+                                # Keep source/tool data unchanged. This separate
+                                # host item reports observations, not permissions.
+                                decision = {**decision, "contentItems": [
+                                    *decision["contentItems"],
+                                    {"type": "inputText", "text": json.dumps({
+                                        "researcher_execution_budget": self.budget_status()
+                                    }, separators=(",", ":"))},
+                                ]}
                             await self.rpc.respond(message["id"], decision)
                             last_progress = time.monotonic()
                         continue
@@ -306,7 +363,7 @@ class CodexSession:
                     if method == "item/started" and item.get("type") in _TOOL_TYPES:
                         self._tool_items.add(item_key)
                         if len(self._tool_items) > self.limits.max_tool_calls:
-                            raise ExecutionLimitExceeded("Session tool budget exceeded")
+                            raise self._exceeded("tools", "Session tool budget exceeded")
                     if method == "item/completed" and item.get("type") in _TOOL_TYPES:
                         last_progress = time.monotonic()
                     if method == "thread/tokenUsage/updated":
@@ -314,7 +371,7 @@ class CodexSession:
                             "totalTokens"
                         ]
                         if self.observed_tokens > self.limits.max_observed_tokens:
-                            raise ExecutionLimitExceeded(
+                            raise self._exceeded("tokens",
                                 "Observed token budget exceeded"
                             )
                     if (
@@ -332,7 +389,7 @@ class CodexSession:
                             total + len(incoming.encode("utf-8"))
                             > self.limits.max_answer_bytes
                         ):
-                            raise ExecutionLimitExceeded(
+                            raise self._exceeded("output",
                                 "Native answer output budget exceeded"
                             )
                         answers[item["id"]] = incoming
@@ -361,8 +418,9 @@ class CodexSession:
                             turn.get("error"),
                         )
         except TimeoutError as exc:
+            stopped = self._exceeded("wall", "Native turn wall deadline exceeded")
             await self._abort()
-            raise ExecutionLimitExceeded("Native turn wall deadline exceeded") from exc
+            raise stopped from exc
         except BaseException:
             await self._abort()
             raise

@@ -13,6 +13,7 @@ def test_policy_override_is_bound_to_its_original_capability(task_type):
 
     policy = bind_policy(b'Exact original policy.\n', task_type)
     assert policy('research', task_type) == 'Exact original policy.\n'
+    assert policy('research', task_type, limits=object()) == 'Exact original policy.\n'
     for kind, task in [('development', task_type), ('remote_publication', task_type), ('research', 'unknown')]:
         with pytest.raises(ValueError, match='another capability'):
             policy(kind, task)

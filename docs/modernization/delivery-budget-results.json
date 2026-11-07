@@ -1,0 +1,57 @@
+{
+  "base_commit": "ab36dc5",
+  "source_checks": [
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/delivery-budget-source.xml",
+      "cases": 129,
+      "passed": 129,
+      "seconds": 48.57
+    },
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/delivery-budget-draft.xml",
+      "cases": 1,
+      "passed": 1,
+      "seconds": 2.637
+    },
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/delivery-budget-inventory.xml",
+      "cases": 2,
+      "passed": 2,
+      "seconds": 0.115
+    }
+  ],
+  "distinct_source_tests_passed": 132,
+  "source_failures": 0,
+  "source_skipped": 0,
+  "installed_checks": {
+    "cases": 80,
+    "passed": 80,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 226,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 31.998,
+    "exit_code": 0
+  },
+  "docstrings": {
+    "changed_definitions": 33,
+    "changed_modules": 10,
+    "missing": 0
+  },
+  "prompt_review": {
+    "candidates": 83,
+    "files": 287,
+    "current": 83,
+    "delta_revalidated": 16,
+    "unchanged": 67,
+    "audit_check_passed": true
+  },
+  "lint_deferred": {
+    "count": 11,
+    "item": "DD088"
+  },
+  "global_suite_rerun": false,
+  "broad_scenarios_closed": 0,
+  "pages_fully_accepted": 0,
+  "human_comprehension": null
+}

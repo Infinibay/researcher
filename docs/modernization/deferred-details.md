@@ -632,3 +632,12 @@ Tres avisos Ruff I001: dos en `evals/context_alignment/run.py` y uno en
 no repetir los8turnos por estilo. Los fallos de entrega por presupuesto y el
 salto desde promedios a individuos **no** son pulido: siguen como siguiente
 trabajo funcional. [Resultados y ubicaciones](profile-communication-results.json).
+
+## DD088 — Estilo del bloque de presupuesto y entrega
+
+Quedan once avisos Ruff en los archivos revisados: siete I001, dos PLC0414,
+un F841 y un RUF059. Incluyen imports/reexports de fixtures y variables sin uso;
+no se corrigen antes de terminar las capacidades principales. Ubicaciones en
+[delivery-budget-lint.json](delivery-budget-lint.json). No volver a ejecutar los
+tres turnos reales por estilo. El fallo de entrega de planificación bajo su
+límite anterior es funcional y sigue pendiente, separado de estos detalles.

@@ -41,7 +41,7 @@ while True:
     with Path('protocol.jsonl').open('a') as out:
         out.write(json.dumps(request)+'\n')
     if 'method' not in request:
-        if request.get('id')=='approval-1': complete()
+        if request.get('id') in ('approval-1', 'budget-1'): complete()
         continue
     method=request['method']; params=request.get('params',{}); result={}
     if method=='initialize': result={'userAgent':'fake'}
@@ -75,6 +75,15 @@ while True:
                 event('item/started',turnId=active,item=item)  # duplicate delivery
                 event('item/completed',turnId=active,item=item)
             complete()
+        elif scenario in ('budget-host', 'budget-host-unknown'):
+            for n in range(3):
+                item={'id':str(n),'type':'dynamicToolCall'}
+                event('item/started',turnId=active,item=item)
+                event('item/started',turnId=active,item=item)
+                event('item/completed',turnId=active,item=item)
+            if scenario == 'budget-host':
+                event('thread/tokenUsage/updated',turnId=active,tokenUsage={'total':{'totalTokens':80}})
+            send({'id':'budget-1','method':'item/tool/call','params':{'threadId':thread_id,'turnId':active,'tool':'source'}})
         elif scenario=='tokens':
             event('thread/tokenUsage/updated',turnId=active,tokenUsage={'total':{'totalTokens':101}})
             complete()

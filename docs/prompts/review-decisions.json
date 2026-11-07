@@ -105,51 +105,71 @@
       "source_base_commit": "035b46c"
     },
     "backend/planning/instructions.py::PLANNING_INSTRUCTIONS": {
-      "dependencies_sha256": "2582df9907dec394ef903c60453b70abfb190315ebc072f1143f8a8d39afaae8",
+      "dependencies_sha256": "f84378225c92d5472badec64d22f0dbe997e133c9b00c41b0fd090b2dd1f37f5",
       "decision": "reviewed_native",
-      "rationale": "Read the full planning policy against PlanningTools, PlanDraft and actual owned-runtime selection. Exact original sources, host_default, assumptions and optional milestones remain explicit; proposal is distinct from graph acceptance or execution. Do not treat profession or a date as owner agreement. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
       "evidence": [
         "backend/planning/instructions.py",
         "docs/prompts/review-2026-11-07.md",
         "docs/architecture/native-project-retirement.md",
         "backend/tests/runtime/test_plan_milestones.py",
-        "backend/tests/research/test_project_structure.py"
+        "backend/tests/research/test_project_structure.py",
+        "backend/tests/runtime/test_delivery_budget.py",
+        "docs/modernization/delivery-budget-review.md"
       ],
       "conflicts": [],
       "previous_review": {
-        "dependencies_sha256": "2dc1513d7a52e201070180b0fa771e5cefab30e9c8c0f7e91430f7a6dc0a46eb",
+        "dependencies_sha256": "2582df9907dec394ef903c60453b70abfb190315ebc072f1143f8a8d39afaae8",
         "decision": "reviewed_native",
-        "rationale": "Reviewed native planning policy against optional milestone schema, exact owner review and atomic expansion. Unknown dates stay unknown; proposed dates need an explicit rationale among assumptions and confer no schedule or authority. Epics, tasks, quotes and original instruction provenance retain their prior contract.",
+        "rationale": "Read the full planning policy against PlanningTools, PlanDraft and actual owned-runtime selection. Exact original sources, host_default, assumptions and optional milestones remain explicit; proposal is distinct from graph acceptance or execution. Do not treat profession or a date as owner agreement. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
         "evidence": [
           "backend/planning/instructions.py",
+          "docs/prompts/review-2026-11-07.md",
           "docs/architecture/native-project-retirement.md",
           "backend/tests/runtime/test_plan_milestones.py",
           "backend/tests/research/test_project_structure.py"
         ],
-        "conflicts": []
+        "conflicts": [],
+        "previous_review": {
+          "dependencies_sha256": "2dc1513d7a52e201070180b0fa771e5cefab30e9c8c0f7e91430f7a6dc0a46eb",
+          "decision": "reviewed_native",
+          "rationale": "Reviewed native planning policy against optional milestone schema, exact owner review and atomic expansion. Unknown dates stay unknown; proposed dates need an explicit rationale among assumptions and confer no schedule or authority. Epics, tasks, quotes and original instruction provenance retain their prior contract.",
+          "evidence": [
+            "backend/planning/instructions.py",
+            "docs/architecture/native-project-retirement.md",
+            "backend/tests/runtime/test_plan_milestones.py",
+            "backend/tests/research/test_project_structure.py"
+          ],
+          "conflicts": []
+        },
+        "reviewed_at": "2026-11-07",
+        "source_base_commit": "035b46c"
       },
       "reviewed_at": "2026-11-07",
-      "source_base_commit": "035b46c"
+      "source_base_commit": "ab36dc5"
     },
     "backend/prompts/native.py::COMMON_INSTRUCTIONS": {
-      "dependencies_sha256": "c7e1c2f7aacb77fb27219184f8435b4c3931ac1442c47d806b19efd1053516d7",
+      "dependencies_sha256": "8f2ad99873098c626426e104f2c0bcd9a7b89404ac0a64acfee12f229c23c7d7",
       "decision": "retained_and_revised",
-      "rationale": "Read the complete common/source policy, profile selector, version identity and actual CodexSession consumer. Catalog3 composes common rules once, preserves catalog2 frozen identity, uses typed material questions and current corrections, and treats direct admission history as historical data. Source capture instructions are selected only for source-capable profiles. No policy bytes changed in this review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
       "evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
         "backend/runtime/business_definitions.py",
         "backend/runtime/run_inputs.py",
         "backend/tests/runtime/test_prompt_catalog.py",
-        "docs/modernization/communication-flow-review.md"
+        "docs/modernization/communication-flow-review.md",
+        "backend/tests/runtime/test_delivery_budget.py",
+        "docs/modernization/delivery-budget-review.md"
       ],
       "conflicts": [],
       "previous_review": {
-        "dependencies_sha256": "44a57ff9cc9c22f54d99a134d8baf05aa61668eddf5207c92aed4d262d219d78",
+        "dependencies_sha256": "c7e1c2f7aacb77fb27219184f8435b4c3931ac1442c47d806b19efd1053516d7",
         "decision": "retained_and_revised",
-        "rationale": "Explicit review of catalog3 composition and required material-question delivery: historical requests remain data, current corrections control incompatible premises, selected conversations keep their scope. Old catalog2 identities retain their recorded version/hash. Tool arguments, permissions and pause/answer ownership remain unchanged. Source review is not a universal compliance or human-comprehension claim.",
+        "rationale": "Read the complete common/source policy, profile selector, version identity and actual CodexSession consumer. Catalog3 composes common rules once, preserves catalog2 frozen identity, uses typed material questions and current corrections, and treats direct admission history as historical data. Source capture instructions are selected only for source-capable profiles. No policy bytes changed in this review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
         "evidence": [
           "backend/prompts/native.py",
+          "docs/prompts/review-2026-11-07.md",
           "backend/runtime/business_definitions.py",
           "backend/runtime/run_inputs.py",
           "backend/tests/runtime/test_prompt_catalog.py",
@@ -157,32 +177,50 @@
         ],
         "conflicts": [],
         "previous_review": {
-          "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
-          "decision": "merged_and_rewritten"
-        }
+          "dependencies_sha256": "44a57ff9cc9c22f54d99a134d8baf05aa61668eddf5207c92aed4d262d219d78",
+          "decision": "retained_and_revised",
+          "rationale": "Explicit review of catalog3 composition and required material-question delivery: historical requests remain data, current corrections control incompatible premises, selected conversations keep their scope. Old catalog2 identities retain their recorded version/hash. Tool arguments, permissions and pause/answer ownership remain unchanged. Source review is not a universal compliance or human-comprehension claim.",
+          "evidence": [
+            "backend/prompts/native.py",
+            "backend/runtime/business_definitions.py",
+            "backend/runtime/run_inputs.py",
+            "backend/tests/runtime/test_prompt_catalog.py",
+            "docs/modernization/communication-flow-review.md"
+          ],
+          "conflicts": [],
+          "previous_review": {
+            "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
+            "decision": "merged_and_rewritten"
+          }
+        },
+        "reviewed_at": "2026-11-07",
+        "source_base_commit": "035b46c"
       },
       "reviewed_at": "2026-11-07",
-      "source_base_commit": "035b46c"
+      "source_base_commit": "ab36dc5"
     },
     "backend/prompts/native.py::SOURCE_INSTRUCTIONS": {
-      "dependencies_sha256": "c7e1c2f7aacb77fb27219184f8435b4c3931ac1442c47d806b19efd1053516d7",
+      "dependencies_sha256": "8f2ad99873098c626426e104f2c0bcd9a7b89404ac0a64acfee12f229c23c7d7",
       "decision": "retained",
-      "rationale": "Read the complete common/source policy, profile selector, version identity and actual CodexSession consumer. Catalog3 composes common rules once, preserves catalog2 frozen identity, uses typed material questions and current corrections, and treats direct admission history as historical data. Source capture instructions are selected only for source-capable profiles. No policy bytes changed in this review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
       "evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
         "backend/runtime/business_definitions.py",
         "backend/runtime/run_inputs.py",
         "backend/tests/runtime/test_prompt_catalog.py",
-        "docs/modernization/communication-flow-review.md"
+        "docs/modernization/communication-flow-review.md",
+        "backend/tests/runtime/test_delivery_budget.py",
+        "docs/modernization/delivery-budget-review.md"
       ],
       "conflicts": [],
       "previous_review": {
-        "dependencies_sha256": "44a57ff9cc9c22f54d99a134d8baf05aa61668eddf5207c92aed4d262d219d78",
+        "dependencies_sha256": "c7e1c2f7aacb77fb27219184f8435b4c3931ac1442c47d806b19efd1053516d7",
         "decision": "retained",
-        "rationale": "Explicit review of catalog3 composition and required material-question delivery: historical requests remain data, current corrections control incompatible premises, selected conversations keep their scope. Old catalog2 identities retain their recorded version/hash. Tool arguments, permissions and pause/answer ownership remain unchanged. Source review is not a universal compliance or human-comprehension claim.",
+        "rationale": "Read the complete common/source policy, profile selector, version identity and actual CodexSession consumer. Catalog3 composes common rules once, preserves catalog2 frozen identity, uses typed material questions and current corrections, and treats direct admission history as historical data. Source capture instructions are selected only for source-capable profiles. No policy bytes changed in this review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
         "evidence": [
           "backend/prompts/native.py",
+          "docs/prompts/review-2026-11-07.md",
           "backend/runtime/business_definitions.py",
           "backend/runtime/run_inputs.py",
           "backend/tests/runtime/test_prompt_catalog.py",
@@ -190,32 +228,50 @@
         ],
         "conflicts": [],
         "previous_review": {
-          "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
-          "decision": "merged_and_rewritten"
-        }
+          "dependencies_sha256": "44a57ff9cc9c22f54d99a134d8baf05aa61668eddf5207c92aed4d262d219d78",
+          "decision": "retained",
+          "rationale": "Explicit review of catalog3 composition and required material-question delivery: historical requests remain data, current corrections control incompatible premises, selected conversations keep their scope. Old catalog2 identities retain their recorded version/hash. Tool arguments, permissions and pause/answer ownership remain unchanged. Source review is not a universal compliance or human-comprehension claim.",
+          "evidence": [
+            "backend/prompts/native.py",
+            "backend/runtime/business_definitions.py",
+            "backend/runtime/run_inputs.py",
+            "backend/tests/runtime/test_prompt_catalog.py",
+            "docs/modernization/communication-flow-review.md"
+          ],
+          "conflicts": [],
+          "previous_review": {
+            "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
+            "decision": "merged_and_rewritten"
+          }
+        },
+        "reviewed_at": "2026-11-07",
+        "source_base_commit": "035b46c"
       },
       "reviewed_at": "2026-11-07",
-      "source_base_commit": "035b46c"
+      "source_base_commit": "ab36dc5"
     },
     "backend/prompts/native.py::build_instructions": {
-      "dependencies_sha256": "c7e1c2f7aacb77fb27219184f8435b4c3931ac1442c47d806b19efd1053516d7",
+      "dependencies_sha256": "8f2ad99873098c626426e104f2c0bcd9a7b89404ac0a64acfee12f229c23c7d7",
       "decision": "retained",
-      "rationale": "Read the complete common/source policy, profile selector, version identity and actual CodexSession consumer. Catalog3 composes common rules once, preserves catalog2 frozen identity, uses typed material questions and current corrections, and treats direct admission history as historical data. Source capture instructions are selected only for source-capable profiles. No policy bytes changed in this review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
       "evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
         "backend/runtime/business_definitions.py",
         "backend/runtime/run_inputs.py",
         "backend/tests/runtime/test_prompt_catalog.py",
-        "docs/modernization/communication-flow-review.md"
+        "docs/modernization/communication-flow-review.md",
+        "backend/tests/runtime/test_delivery_budget.py",
+        "docs/modernization/delivery-budget-review.md"
       ],
       "conflicts": [],
       "previous_review": {
-        "dependencies_sha256": "44a57ff9cc9c22f54d99a134d8baf05aa61668eddf5207c92aed4d262d219d78",
+        "dependencies_sha256": "c7e1c2f7aacb77fb27219184f8435b4c3931ac1442c47d806b19efd1053516d7",
         "decision": "retained",
-        "rationale": "Explicit review of catalog3 composition and required material-question delivery: historical requests remain data, current corrections control incompatible premises, selected conversations keep their scope. Old catalog2 identities retain their recorded version/hash. Tool arguments, permissions and pause/answer ownership remain unchanged. Source review is not a universal compliance or human-comprehension claim.",
+        "rationale": "Read the complete common/source policy, profile selector, version identity and actual CodexSession consumer. Catalog3 composes common rules once, preserves catalog2 frozen identity, uses typed material questions and current corrections, and treats direct admission history as historical data. Source capture instructions are selected only for source-capable profiles. No policy bytes changed in this review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
         "evidence": [
           "backend/prompts/native.py",
+          "docs/prompts/review-2026-11-07.md",
           "backend/runtime/business_definitions.py",
           "backend/runtime/run_inputs.py",
           "backend/tests/runtime/test_prompt_catalog.py",
@@ -223,32 +279,50 @@
         ],
         "conflicts": [],
         "previous_review": {
-          "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
-          "decision": "merged_and_rewritten"
-        }
+          "dependencies_sha256": "44a57ff9cc9c22f54d99a134d8baf05aa61668eddf5207c92aed4d262d219d78",
+          "decision": "retained",
+          "rationale": "Explicit review of catalog3 composition and required material-question delivery: historical requests remain data, current corrections control incompatible premises, selected conversations keep their scope. Old catalog2 identities retain their recorded version/hash. Tool arguments, permissions and pause/answer ownership remain unchanged. Source review is not a universal compliance or human-comprehension claim.",
+          "evidence": [
+            "backend/prompts/native.py",
+            "backend/runtime/business_definitions.py",
+            "backend/runtime/run_inputs.py",
+            "backend/tests/runtime/test_prompt_catalog.py",
+            "docs/modernization/communication-flow-review.md"
+          ],
+          "conflicts": [],
+          "previous_review": {
+            "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
+            "decision": "merged_and_rewritten"
+          }
+        },
+        "reviewed_at": "2026-11-07",
+        "source_base_commit": "035b46c"
       },
       "reviewed_at": "2026-11-07",
-      "source_base_commit": "035b46c"
+      "source_base_commit": "ab36dc5"
     },
     "backend/prompts/native.py::instruction_identity": {
-      "dependencies_sha256": "c7e1c2f7aacb77fb27219184f8435b4c3931ac1442c47d806b19efd1053516d7",
+      "dependencies_sha256": "8f2ad99873098c626426e104f2c0bcd9a7b89404ac0a64acfee12f229c23c7d7",
       "decision": "retained",
-      "rationale": "Read the complete common/source policy, profile selector, version identity and actual CodexSession consumer. Catalog3 composes common rules once, preserves catalog2 frozen identity, uses typed material questions and current corrections, and treats direct admission history as historical data. Source capture instructions are selected only for source-capable profiles. No policy bytes changed in this review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
       "evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
         "backend/runtime/business_definitions.py",
         "backend/runtime/run_inputs.py",
         "backend/tests/runtime/test_prompt_catalog.py",
-        "docs/modernization/communication-flow-review.md"
+        "docs/modernization/communication-flow-review.md",
+        "backend/tests/runtime/test_delivery_budget.py",
+        "docs/modernization/delivery-budget-review.md"
       ],
       "conflicts": [],
       "previous_review": {
-        "dependencies_sha256": "44a57ff9cc9c22f54d99a134d8baf05aa61668eddf5207c92aed4d262d219d78",
+        "dependencies_sha256": "c7e1c2f7aacb77fb27219184f8435b4c3931ac1442c47d806b19efd1053516d7",
         "decision": "retained",
-        "rationale": "Explicit review of catalog3 composition and required material-question delivery: historical requests remain data, current corrections control incompatible premises, selected conversations keep their scope. Old catalog2 identities retain their recorded version/hash. Tool arguments, permissions and pause/answer ownership remain unchanged. Source review is not a universal compliance or human-comprehension claim.",
+        "rationale": "Read the complete common/source policy, profile selector, version identity and actual CodexSession consumer. Catalog3 composes common rules once, preserves catalog2 frozen identity, uses typed material questions and current corrections, and treats direct admission history as historical data. Source capture instructions are selected only for source-capable profiles. No policy bytes changed in this review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
         "evidence": [
           "backend/prompts/native.py",
+          "docs/prompts/review-2026-11-07.md",
           "backend/runtime/business_definitions.py",
           "backend/runtime/run_inputs.py",
           "backend/tests/runtime/test_prompt_catalog.py",
@@ -256,32 +330,50 @@
         ],
         "conflicts": [],
         "previous_review": {
-          "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
-          "decision": "merged_and_rewritten"
-        }
+          "dependencies_sha256": "44a57ff9cc9c22f54d99a134d8baf05aa61668eddf5207c92aed4d262d219d78",
+          "decision": "retained",
+          "rationale": "Explicit review of catalog3 composition and required material-question delivery: historical requests remain data, current corrections control incompatible premises, selected conversations keep their scope. Old catalog2 identities retain their recorded version/hash. Tool arguments, permissions and pause/answer ownership remain unchanged. Source review is not a universal compliance or human-comprehension claim.",
+          "evidence": [
+            "backend/prompts/native.py",
+            "backend/runtime/business_definitions.py",
+            "backend/runtime/run_inputs.py",
+            "backend/tests/runtime/test_prompt_catalog.py",
+            "docs/modernization/communication-flow-review.md"
+          ],
+          "conflicts": [],
+          "previous_review": {
+            "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
+            "decision": "merged_and_rewritten"
+          }
+        },
+        "reviewed_at": "2026-11-07",
+        "source_base_commit": "035b46c"
       },
       "reviewed_at": "2026-11-07",
-      "source_base_commit": "035b46c"
+      "source_base_commit": "ab36dc5"
     },
     "backend/prompts/native.py::GENERIC_INSTRUCTIONS": {
-      "dependencies_sha256": "c7e1c2f7aacb77fb27219184f8435b4c3931ac1442c47d806b19efd1053516d7",
+      "dependencies_sha256": "8f2ad99873098c626426e104f2c0bcd9a7b89404ac0a64acfee12f229c23c7d7",
       "decision": "retained",
-      "rationale": "Read the complete common/source policy, profile selector, version identity and actual CodexSession consumer. Catalog3 composes common rules once, preserves catalog2 frozen identity, uses typed material questions and current corrections, and treats direct admission history as historical data. Source capture instructions are selected only for source-capable profiles. No policy bytes changed in this review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
       "evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
         "backend/runtime/business_definitions.py",
         "backend/runtime/run_inputs.py",
         "backend/tests/runtime/test_prompt_catalog.py",
-        "docs/modernization/communication-flow-review.md"
+        "docs/modernization/communication-flow-review.md",
+        "backend/tests/runtime/test_delivery_budget.py",
+        "docs/modernization/delivery-budget-review.md"
       ],
       "conflicts": [],
       "previous_review": {
-        "dependencies_sha256": "44a57ff9cc9c22f54d99a134d8baf05aa61668eddf5207c92aed4d262d219d78",
+        "dependencies_sha256": "c7e1c2f7aacb77fb27219184f8435b4c3931ac1442c47d806b19efd1053516d7",
         "decision": "retained",
-        "rationale": "Explicit review of catalog3 composition and required material-question delivery: historical requests remain data, current corrections control incompatible premises, selected conversations keep their scope. Old catalog2 identities retain their recorded version/hash. Tool arguments, permissions and pause/answer ownership remain unchanged. Source review is not a universal compliance or human-comprehension claim.",
+        "rationale": "Read the complete common/source policy, profile selector, version identity and actual CodexSession consumer. Catalog3 composes common rules once, preserves catalog2 frozen identity, uses typed material questions and current corrections, and treats direct admission history as historical data. Source capture instructions are selected only for source-capable profiles. No policy bytes changed in this review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
         "evidence": [
           "backend/prompts/native.py",
+          "docs/prompts/review-2026-11-07.md",
           "backend/runtime/business_definitions.py",
           "backend/runtime/run_inputs.py",
           "backend/tests/runtime/test_prompt_catalog.py",
@@ -289,12 +381,27 @@
         ],
         "conflicts": [],
         "previous_review": {
-          "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
-          "decision": "merged_and_rewritten"
-        }
+          "dependencies_sha256": "44a57ff9cc9c22f54d99a134d8baf05aa61668eddf5207c92aed4d262d219d78",
+          "decision": "retained",
+          "rationale": "Explicit review of catalog3 composition and required material-question delivery: historical requests remain data, current corrections control incompatible premises, selected conversations keep their scope. Old catalog2 identities retain their recorded version/hash. Tool arguments, permissions and pause/answer ownership remain unchanged. Source review is not a universal compliance or human-comprehension claim.",
+          "evidence": [
+            "backend/prompts/native.py",
+            "backend/runtime/business_definitions.py",
+            "backend/runtime/run_inputs.py",
+            "backend/tests/runtime/test_prompt_catalog.py",
+            "docs/modernization/communication-flow-review.md"
+          ],
+          "conflicts": [],
+          "previous_review": {
+            "dependencies_sha256": "533d64a3de48320b520e04c8c6f714697329798b1a29c6f83a5b3cb1fb7c833b",
+            "decision": "merged_and_rewritten"
+          }
+        },
+        "reviewed_at": "2026-11-07",
+        "source_base_commit": "035b46c"
       },
       "reviewed_at": "2026-11-07",
-      "source_base_commit": "035b46c"
+      "source_base_commit": "ab36dc5"
     },
     "backend/research/stdio_server.py::main.description@93": {
       "dependencies_sha256": "37d0a82d854ea51389652d84bcc1d95955e0d1e71a446edeb9707aa22a6b6333",
@@ -308,27 +415,30 @@
       "conflicts": []
     },
     "backend/runtime/analysis_tools.py::_TOOLS": {
-      "dependencies_sha256": "532c1e383146e9515cbd7d9c8f898e7cba0f4b22ab840426ef13b71db487facf",
+      "dependencies_sha256": "1344eddfe966540cf9226cd7957ef0dbb2c76efb837a027eadb7accf1d1b54bf",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read _TOOLS, description rendering after _writable_view, command receipts and owned-runtime selection. Private writable wording requires the actual development lease; readonly research remains distinct. Submission, exact output, terminal exit and physical closure are separately represented; credentials/network are not promised. This review does not rerun every command failure mode. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
       "evidence": [
         "backend/runtime/analysis_tools.py",
         "docs/prompts/review-2026-11-07.md",
         "backend/runtime/business_mediation.py",
         "backend/runtime/owned_runtime.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "backend/tests/runtime/test_delivery_budget.py",
+        "docs/modernization/delivery-budget-review.md"
       ],
       "conflicts": [
         "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
       ],
       "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed.",
       "previous_review": {
-        "dependencies_sha256": "a47310b9b0d7e77911a5055d9dcef6854ec8d8d8154b4c9d3ef5dcb843eb791b",
+        "dependencies_sha256": "532c1e383146e9515cbd7d9c8f898e7cba0f4b22ab840426ef13b71db487facf",
         "decision": "retained_native_tool_contract",
-        "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+        "rationale": "Read _TOOLS, description rendering after _writable_view, command receipts and owned-runtime selection. Private writable wording requires the actual development lease; readonly research remains distinct. Submission, exact output, terminal exit and physical closure are separately represented; credentials/network are not promised. This review does not rerun every command failure mode. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
         "evidence": [
           "backend/runtime/analysis_tools.py",
+          "docs/prompts/review-2026-11-07.md",
           "backend/runtime/business_mediation.py",
           "backend/runtime/owned_runtime.py",
           "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
@@ -337,10 +447,28 @@
         "conflicts": [
           "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
         ],
-        "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed."
+        "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed.",
+        "previous_review": {
+          "dependencies_sha256": "a47310b9b0d7e77911a5055d9dcef6854ec8d8d8154b4c9d3ef5dcb843eb791b",
+          "decision": "retained_native_tool_contract",
+          "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+          "evidence": [
+            "backend/runtime/analysis_tools.py",
+            "backend/runtime/business_mediation.py",
+            "backend/runtime/owned_runtime.py",
+            "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+            "evals/prompts/cases.json"
+          ],
+          "conflicts": [
+            "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+          ],
+          "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed."
+        },
+        "reviewed_at": "2026-11-07",
+        "source_base_commit": "035b46c"
       },
       "reviewed_at": "2026-11-07",
-      "source_base_commit": "035b46c"
+      "source_base_commit": "ab36dc5"
     },
     "backend/runtime/business_definitions.py::INSTRUCTIONS": {
       "dependencies_sha256": "70e0d0dc608222bac4496bdcf805130ec4081c1567ca591e1aa8ceb401aa1cb8",
@@ -1334,33 +1462,51 @@
       "source_base_commit": "035b46c"
     },
     "backend/runtime/code_audit_instructions.py::CODE_AUDIT_INSTRUCTIONS": {
-      "dependencies_sha256": "aeb315624e8e65f647637f222f696c8b02d46235db57ab6465954a2e39203c9a",
+      "dependencies_sha256": "0ea9582a8901d671c12aefe1856d7226a9d7cd9b1a61ac7df9643e472f03854b",
       "decision": "rewritten",
-      "rationale": "Read full readonly audit policy and research/review selection. It produces cited reports through source-capable tools; it cannot act as an exact-candidate reviewer or approve changes merely because task.type is review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
       "evidence": [
         "backend/runtime/code_audit_instructions.py",
         "docs/prompts/review-2026-11-07.md",
         "backend/prompts/native.py",
         "backend/runtime/business_mediation.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "backend/tests/runtime/test_delivery_budget.py",
+        "docs/modernization/delivery-budget-review.md"
       ],
       "conflicts": [],
       "previous_review": {
-        "dependencies_sha256": "88797db5861df1a9f44c8f42df84d7f7598497ab6fd2a68a5751b3fd26baa407",
+        "dependencies_sha256": "aeb315624e8e65f647637f222f696c8b02d46235db57ab6465954a2e39203c9a",
         "decision": "rewritten",
-        "rationale": "Reviewed capability-specific procedure against its bound typed tools and host ownership. Shared policy is composed by native catalog; historical role hierarchy, imaginary scientific certainty and automatic acceptance are excluded. Host checks are disclosed as configuration, not passing results.",
+        "rationale": "Read full readonly audit policy and research/review selection. It produces cited reports through source-capable tools; it cannot act as an exact-candidate reviewer or approve changes merely because task.type is review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
         "evidence": [
           "backend/runtime/code_audit_instructions.py",
+          "docs/prompts/review-2026-11-07.md",
           "backend/prompts/native.py",
           "backend/runtime/business_mediation.py",
           "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
           "evals/prompts/cases.json"
         ],
-        "conflicts": []
+        "conflicts": [],
+        "previous_review": {
+          "dependencies_sha256": "88797db5861df1a9f44c8f42df84d7f7598497ab6fd2a68a5751b3fd26baa407",
+          "decision": "rewritten",
+          "rationale": "Reviewed capability-specific procedure against its bound typed tools and host ownership. Shared policy is composed by native catalog; historical role hierarchy, imaginary scientific certainty and automatic acceptance are excluded. Host checks are disclosed as configuration, not passing results.",
+          "evidence": [
+            "backend/runtime/code_audit_instructions.py",
+            "backend/prompts/native.py",
+            "backend/runtime/business_mediation.py",
+            "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+            "evals/prompts/cases.json"
+          ],
+          "conflicts": []
+        },
+        "reviewed_at": "2026-11-07",
+        "source_base_commit": "035b46c"
       },
       "reviewed_at": "2026-11-07",
-      "source_base_commit": "035b46c"
+      "source_base_commit": "ab36dc5"
     },
     "backend/runtime/code_mode_payload.py::description@102": {
       "dependencies_sha256": "85eecfee03c57fd02de8c40076c25a3008ef6120ab4bffa623ec79b86f078fc1",
@@ -1374,38 +1520,56 @@
       "conflicts": []
     },
     "backend/runtime/code_review_instructions.py::CODE_REVIEW_INSTRUCTIONS": {
-      "dependencies_sha256": "ffb3f13c2a351e8eabb6d47406f0be635a402843f59d8070427dde951c6319e1",
+      "dependencies_sha256": "3e0c7e09f4994ecb93fba31dc3b0133e76bf52bb066f0c00670c4971764ff75d",
       "decision": "rewritten",
-      "rationale": "Read full candidate policy against CodeReviewTools and CODE_REVIEW_NAMES. Exact frozen author input, subject/diff windows, source references and supported/concern/not_checked outcomes remain explicit; distinct attempts are operational separation, not independent scientific truth. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
       "evidence": [
         "backend/runtime/code_review_instructions.py",
         "docs/prompts/review-2026-11-07.md",
         "backend/prompts/native.py",
         "backend/runtime/business_mediation.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "backend/tests/runtime/test_delivery_budget.py",
+        "docs/modernization/delivery-budget-review.md"
       ],
       "conflicts": [],
       "previous_review": {
-        "dependencies_sha256": "78550b2be8f9ea2814355b3a361fc92cabf19b85b2ad41d8e407607140b79738",
+        "dependencies_sha256": "ffb3f13c2a351e8eabb6d47406f0be635a402843f59d8070427dde951c6319e1",
         "decision": "rewritten",
-        "rationale": "Reviewed capability-specific procedure against its bound typed tools and host ownership. Shared policy is composed by native catalog; historical role hierarchy, imaginary scientific certainty and automatic acceptance are excluded. Host checks are disclosed as configuration, not passing results.",
+        "rationale": "Read full candidate policy against CodeReviewTools and CODE_REVIEW_NAMES. Exact frozen author input, subject/diff windows, source references and supported/concern/not_checked outcomes remain explicit; distinct attempts are operational separation, not independent scientific truth. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
         "evidence": [
           "backend/runtime/code_review_instructions.py",
+          "docs/prompts/review-2026-11-07.md",
           "backend/prompts/native.py",
           "backend/runtime/business_mediation.py",
           "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
           "evals/prompts/cases.json"
         ],
-        "conflicts": []
+        "conflicts": [],
+        "previous_review": {
+          "dependencies_sha256": "78550b2be8f9ea2814355b3a361fc92cabf19b85b2ad41d8e407607140b79738",
+          "decision": "rewritten",
+          "rationale": "Reviewed capability-specific procedure against its bound typed tools and host ownership. Shared policy is composed by native catalog; historical role hierarchy, imaginary scientific certainty and automatic acceptance are excluded. Host checks are disclosed as configuration, not passing results.",
+          "evidence": [
+            "backend/runtime/code_review_instructions.py",
+            "backend/prompts/native.py",
+            "backend/runtime/business_mediation.py",
+            "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+            "evals/prompts/cases.json"
+          ],
+          "conflicts": []
+        },
+        "reviewed_at": "2026-11-07",
+        "source_base_commit": "035b46c"
       },
       "reviewed_at": "2026-11-07",
-      "source_base_commit": "035b46c"
+      "source_base_commit": "ab36dc5"
     },
     "backend/runtime/code_review_tools.py::_TOOLS": {
-      "dependencies_sha256": "70cdb75646fb9ebd76c307432e56fa3a916634efabb6fbca00905e9a7e9f11c5",
+      "dependencies_sha256": "2e2b6cb4b7810c3eec57c110968e9078b79da31d473de05a10822533b01b8b34",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read all three descriptions, typed material/file/proposal models and host catalog construction. Original candidate hashes and bounded exact quotations are used; the model proposes but cannot confirm, accept or publish. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
       "evidence": [
         "backend/runtime/code_review_tools.py",
         "docs/prompts/review-2026-11-07.md",
@@ -1413,17 +1577,20 @@
         "backend/runtime/analysis_tools.py",
         "backend/runtime/owned_runtime.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "backend/tests/runtime/test_delivery_budget.py",
+        "docs/modernization/delivery-budget-review.md"
       ],
       "conflicts": [
         "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
       ],
       "previous_review": {
-        "dependencies_sha256": "3dc5a931130ffb7bcb544f4588c4158d4592fc786a917b866ad69d65d6fce6b9",
+        "dependencies_sha256": "70cdb75646fb9ebd76c307432e56fa3a916634efabb6fbca00905e9a7e9f11c5",
         "decision": "retained_native_tool_contract",
-        "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+        "rationale": "Read all three descriptions, typed material/file/proposal models and host catalog construction. Original candidate hashes and bounded exact quotations are used; the model proposes but cannot confirm, accept or publish. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
         "evidence": [
           "backend/runtime/code_review_tools.py",
+          "docs/prompts/review-2026-11-07.md",
           "backend/runtime/business_mediation.py",
           "backend/runtime/analysis_tools.py",
           "backend/runtime/owned_runtime.py",
@@ -1432,10 +1599,28 @@
         ],
         "conflicts": [
           "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
-        ]
+        ],
+        "previous_review": {
+          "dependencies_sha256": "3dc5a931130ffb7bcb544f4588c4158d4592fc786a917b866ad69d65d6fce6b9",
+          "decision": "retained_native_tool_contract",
+          "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+          "evidence": [
+            "backend/runtime/code_review_tools.py",
+            "backend/runtime/business_mediation.py",
+            "backend/runtime/analysis_tools.py",
+            "backend/runtime/owned_runtime.py",
+            "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+            "evals/prompts/cases.json"
+          ],
+          "conflicts": [
+            "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+          ]
+        },
+        "reviewed_at": "2026-11-07",
+        "source_base_commit": "035b46c"
       },
       "reviewed_at": "2026-11-07",
-      "source_base_commit": "035b46c"
+      "source_base_commit": "ab36dc5"
     },
     "backend/runtime/development_instructions.py::DEVELOPMENT_INSTRUCTIONS": {
       "dependencies_sha256": "4e51ab52ca5748f3efc29fbb3a7e22adc5b72e9bd8539b4a904e2b99b6a779ad",
@@ -1454,38 +1639,56 @@
       ]
     },
     "backend/runtime/investigation_instructions.py::INVESTIGATION_INSTRUCTIONS": {
-      "dependencies_sha256": "5c73f53d919e22fc8fd38ff4cbd3cc2ff618cc730de04abaa3e72226b26a6e8d",
+      "dependencies_sha256": "fa178687d554f1447a429db504057522861ad14c35784866eac0336456044722",
       "decision": "rewritten",
-      "rationale": "Read full exploratory policy and INVESTIGATION_NAMES selection: structured investigation_summary replaces report_write, retains result_propose and source tools. Empty areas mean unresolved; exploratory scope does not require invented hypotheses or grades. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
       "evidence": [
         "backend/runtime/investigation_instructions.py",
         "docs/prompts/review-2026-11-07.md",
         "backend/prompts/native.py",
         "backend/runtime/business_mediation.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "backend/tests/runtime/test_delivery_budget.py",
+        "docs/modernization/delivery-budget-review.md"
       ],
       "conflicts": [],
       "previous_review": {
-        "dependencies_sha256": "84b004a0dec9f6a8be6e289ff11c15499197099bf0e612d6f8f112028c175d40",
+        "dependencies_sha256": "5c73f53d919e22fc8fd38ff4cbd3cc2ff618cc730de04abaa3e72226b26a6e8d",
         "decision": "rewritten",
-        "rationale": "Reviewed capability-specific procedure against its bound typed tools and host ownership. Shared policy is composed by native catalog; historical role hierarchy, imaginary scientific certainty and automatic acceptance are excluded. Host checks are disclosed as configuration, not passing results.",
+        "rationale": "Read full exploratory policy and INVESTIGATION_NAMES selection: structured investigation_summary replaces report_write, retains result_propose and source tools. Empty areas mean unresolved; exploratory scope does not require invented hypotheses or grades. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
         "evidence": [
           "backend/runtime/investigation_instructions.py",
+          "docs/prompts/review-2026-11-07.md",
           "backend/prompts/native.py",
           "backend/runtime/business_mediation.py",
           "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
           "evals/prompts/cases.json"
         ],
-        "conflicts": []
+        "conflicts": [],
+        "previous_review": {
+          "dependencies_sha256": "84b004a0dec9f6a8be6e289ff11c15499197099bf0e612d6f8f112028c175d40",
+          "decision": "rewritten",
+          "rationale": "Reviewed capability-specific procedure against its bound typed tools and host ownership. Shared policy is composed by native catalog; historical role hierarchy, imaginary scientific certainty and automatic acceptance are excluded. Host checks are disclosed as configuration, not passing results.",
+          "evidence": [
+            "backend/runtime/investigation_instructions.py",
+            "backend/prompts/native.py",
+            "backend/runtime/business_mediation.py",
+            "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+            "evals/prompts/cases.json"
+          ],
+          "conflicts": []
+        },
+        "reviewed_at": "2026-11-07",
+        "source_base_commit": "035b46c"
       },
       "reviewed_at": "2026-11-07",
-      "source_base_commit": "035b46c"
+      "source_base_commit": "ab36dc5"
     },
     "backend/runtime/predecessor_tools.py::description@33": {
-      "dependencies_sha256": "f8fc850de4958a1d0143982219311c7ffb667bb8822715ca28319a22cad0a5f3",
+      "dependencies_sha256": "a9b29b42e2ac09736ddacc6f9fd985034efcda945d3beac7ca492cf3e0d6bc3a",
       "decision": "retained_native_tool_contract",
-      "rationale": "Read the prerequisite description and actual conditional availability in owned_runtime. It exposes only admitted predecessor packet/original input/binary diff with bounded windows; earlier acceptance and old inputs are not current instructions or source edits. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
       "evidence": [
         "backend/runtime/predecessor_tools.py",
         "docs/prompts/review-2026-11-07.md",
@@ -1493,17 +1696,20 @@
         "backend/runtime/analysis_tools.py",
         "backend/runtime/owned_runtime.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "backend/tests/runtime/test_delivery_budget.py",
+        "docs/modernization/delivery-budget-review.md"
       ],
       "conflicts": [
         "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
       ],
       "previous_review": {
-        "dependencies_sha256": "3dd23c6f44fc7093387ec15f6f69f58b4d64b538a18fc0bff17928e6a5656e00",
+        "dependencies_sha256": "f8fc850de4958a1d0143982219311c7ffb667bb8822715ca28319a22cad0a5f3",
         "decision": "retained_native_tool_contract",
-        "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+        "rationale": "Read the prerequisite description and actual conditional availability in owned_runtime. It exposes only admitted predecessor packet/original input/binary diff with bounded windows; earlier acceptance and old inputs are not current instructions or source edits. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
         "evidence": [
           "backend/runtime/predecessor_tools.py",
+          "docs/prompts/review-2026-11-07.md",
           "backend/runtime/business_mediation.py",
           "backend/runtime/analysis_tools.py",
           "backend/runtime/owned_runtime.py",
@@ -1512,39 +1718,75 @@
         ],
         "conflicts": [
           "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
-        ]
+        ],
+        "previous_review": {
+          "dependencies_sha256": "3dd23c6f44fc7093387ec15f6f69f58b4d64b538a18fc0bff17928e6a5656e00",
+          "decision": "retained_native_tool_contract",
+          "rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+          "evidence": [
+            "backend/runtime/predecessor_tools.py",
+            "backend/runtime/business_mediation.py",
+            "backend/runtime/analysis_tools.py",
+            "backend/runtime/owned_runtime.py",
+            "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+            "evals/prompts/cases.json"
+          ],
+          "conflicts": [
+            "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+          ]
+        },
+        "reviewed_at": "2026-11-07",
+        "source_base_commit": "035b46c"
       },
       "reviewed_at": "2026-11-07",
-      "source_base_commit": "035b46c"
+      "source_base_commit": "ab36dc5"
     },
     "backend/runtime/review_instructions.py::REVIEW_INSTRUCTIONS": {
-      "dependencies_sha256": "07d61e07053ef8e41e6bea9d8e486add581205426f144872aaaa1272652b7777",
+      "dependencies_sha256": "f7acea8be016f5b7f105f9a8da5377a7d05c005ea62aaf0d98b32efcb7bb6a8c",
       "decision": "rewritten",
-      "rationale": "Read full finding-review policy against REVIEW_NAMES: frozen subject, exact existing source quotations, attributed prior feedback and one decision. The profile cannot capture replacement sources or grant task acceptance; discovery is not captured evidence. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
       "evidence": [
         "backend/runtime/review_instructions.py",
         "docs/prompts/review-2026-11-07.md",
         "backend/prompts/native.py",
         "backend/runtime/business_mediation.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "backend/tests/runtime/test_delivery_budget.py",
+        "docs/modernization/delivery-budget-review.md"
       ],
       "conflicts": [],
       "previous_review": {
-        "dependencies_sha256": "999231086a00f99d7c0764c37fbdec06587cdf8be653e8e21bc84b6cfffc2974",
+        "dependencies_sha256": "07d61e07053ef8e41e6bea9d8e486add581205426f144872aaaa1272652b7777",
         "decision": "rewritten",
-        "rationale": "Reviewed capability-specific procedure against its bound typed tools and host ownership. Shared policy is composed by native catalog; historical role hierarchy, imaginary scientific certainty and automatic acceptance are excluded. Host checks are disclosed as configuration, not passing results.",
+        "rationale": "Read full finding-review policy against REVIEW_NAMES: frozen subject, exact existing source quotations, attributed prior feedback and one decision. The profile cannot capture replacement sources or grant task acceptance; discovery is not captured evidence. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
         "evidence": [
           "backend/runtime/review_instructions.py",
+          "docs/prompts/review-2026-11-07.md",
           "backend/prompts/native.py",
           "backend/runtime/business_mediation.py",
           "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
           "evals/prompts/cases.json"
         ],
-        "conflicts": []
+        "conflicts": [],
+        "previous_review": {
+          "dependencies_sha256": "999231086a00f99d7c0764c37fbdec06587cdf8be653e8e21bc84b6cfffc2974",
+          "decision": "rewritten",
+          "rationale": "Reviewed capability-specific procedure against its bound typed tools and host ownership. Shared policy is composed by native catalog; historical role hierarchy, imaginary scientific certainty and automatic acceptance are excluded. Host checks are disclosed as configuration, not passing results.",
+          "evidence": [
+            "backend/runtime/review_instructions.py",
+            "backend/prompts/native.py",
+            "backend/runtime/business_mediation.py",
+            "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+            "evals/prompts/cases.json"
+          ],
+          "conflicts": []
+        },
+        "reviewed_at": "2026-11-07",
+        "source_base_commit": "035b46c"
       },
       "reviewed_at": "2026-11-07",
-      "source_base_commit": "035b46c"
+      "source_base_commit": "ab36dc5"
     },
     "backend/runtime/run_inputs.py::conversation_history": {
       "dependencies_sha256": "aaeb6b41862ab181af0c707c77c2f2697bc6a1493dc7c698de1113d186b3d3d8",
@@ -1609,33 +1851,51 @@
       "source_base_commit": "035b46c"
     },
     "backend/runtime/scientific_instructions.py::SCIENTIFIC_RESEARCH_INSTRUCTIONS": {
-      "dependencies_sha256": "7baa1597320194b7190912a70b20956601516cc67d4a52bff8493a754b613ff5",
+      "dependencies_sha256": "f9138b126c21be0568354464da518be3c0a441d635b7fbcba3a08b4ce881e190",
       "decision": "retained",
-      "rationale": "Read the complete scientific policy against RESEARCH_NAMES and scientific capture contracts. Distinguishes question/unit, source dependence, confounding, exact quotation versus logical support, reporting versus bias versus certainty, and deterministic calculation versus empirical replication. Optional frameworks require fit, no invented grades or automatic review loop. Human and real-model effectiveness remain unevaluated by this static review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
       "evidence": [
         "backend/runtime/scientific_instructions.py",
         "docs/prompts/review-2026-11-07.md",
         "backend/prompts/native.py",
         "backend/runtime/business_mediation.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "backend/tests/runtime/test_delivery_budget.py",
+        "docs/modernization/delivery-budget-review.md"
       ],
       "conflicts": [],
       "previous_review": {
-        "dependencies_sha256": "b9ec62c0bb689d4a9920eb90eea08213c6744e53e963e7e74df3b940e01d5a93",
+        "dependencies_sha256": "7baa1597320194b7190912a70b20956601516cc67d4a52bff8493a754b613ff5",
         "decision": "retained",
-        "rationale": "Reviewed capability-specific procedure against its bound typed tools and host ownership. Shared policy is composed by native catalog; historical role hierarchy, imaginary scientific certainty and automatic acceptance are excluded. Host checks are disclosed as configuration, not passing results.",
+        "rationale": "Read the complete scientific policy against RESEARCH_NAMES and scientific capture contracts. Distinguishes question/unit, source dependence, confounding, exact quotation versus logical support, reporting versus bias versus certainty, and deterministic calculation versus empirical replication. Optional frameworks require fit, no invented grades or automatic review loop. Human and real-model effectiveness remain unevaluated by this static review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
         "evidence": [
           "backend/runtime/scientific_instructions.py",
+          "docs/prompts/review-2026-11-07.md",
           "backend/prompts/native.py",
           "backend/runtime/business_mediation.py",
           "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
           "evals/prompts/cases.json"
         ],
-        "conflicts": []
+        "conflicts": [],
+        "previous_review": {
+          "dependencies_sha256": "b9ec62c0bb689d4a9920eb90eea08213c6744e53e963e7e74df3b940e01d5a93",
+          "decision": "retained",
+          "rationale": "Reviewed capability-specific procedure against its bound typed tools and host ownership. Shared policy is composed by native catalog; historical role hierarchy, imaginary scientific certainty and automatic acceptance are excluded. Host checks are disclosed as configuration, not passing results.",
+          "evidence": [
+            "backend/runtime/scientific_instructions.py",
+            "backend/prompts/native.py",
+            "backend/runtime/business_mediation.py",
+            "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+            "evals/prompts/cases.json"
+          ],
+          "conflicts": []
+        },
+        "reviewed_at": "2026-11-07",
+        "source_base_commit": "035b46c"
       },
       "reviewed_at": "2026-11-07",
-      "source_base_commit": "035b46c"
+      "source_base_commit": "ab36dc5"
     },
     "scripts/audit_prompt_inventory.py::PROMPT_NAME": {
       "dependencies_sha256": "67d88e945331a7ae0b85d8ba93039652cf68914c0cf4c181df25bd8f529bba31",
@@ -2136,33 +2396,51 @@
       "source_base_commit": "035b46c"
     },
     "backend/planning/tools.py::PlanningTools.__init__.descriptions@91": {
-      "dependencies_sha256": "3b55e7afd43dab8d38097b94769f9bfd2a859a4cf945136491efefd5cef55c4a",
+      "dependencies_sha256": "79bddd697159a654d0e0dcd6e2592656bc47e6f0c121a6fb13bd4d1f4fb661aa",
       "decision": "reviewed_native",
-      "rationale": "Read both catalog descriptions, PlanDraft/PlanProposal and the host dispatch path: bounded material and a local task DAG proposal, without creation, assignment, acceptance or scheduling permission. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
       "evidence": [
         "backend/planning/tools.py",
         "docs/prompts/review-2026-11-07.md",
         "docs/architecture/native-project-retirement.md",
         "backend/tests/runtime/test_plan_milestones.py",
-        "backend/tests/research/test_project_structure.py"
+        "backend/tests/research/test_project_structure.py",
+        "backend/tests/runtime/test_delivery_budget.py",
+        "docs/modernization/delivery-budget-review.md"
       ],
       "conflicts": [],
       "previous_id": "backend/planning/tools.py::PlanningTools.__init__.descriptions@82",
       "previous_review": {
-        "dependencies_sha256": "c785cf38c305959fb7d933157d9ec4b18d3acb499c6b62ca0f30c0fe7221f88e",
+        "dependencies_sha256": "3b55e7afd43dab8d38097b94769f9bfd2a859a4cf945136491efefd5cef55c4a",
         "decision": "reviewed_native",
-        "rationale": "Reviewed actual planning wire descriptions and schema. A milestone reference stays within its epic, optional dates are proposals, proposal creates no work, exact operation key preserves retries. model_dump(exclude_unset=True) preserves historical payloads. No actor or permission can be model selected.",
+        "rationale": "Read both catalog descriptions, PlanDraft/PlanProposal and the host dispatch path: bounded material and a local task DAG proposal, without creation, assignment, acceptance or scheduling permission. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
         "evidence": [
           "backend/planning/tools.py",
+          "docs/prompts/review-2026-11-07.md",
           "docs/architecture/native-project-retirement.md",
           "backend/tests/runtime/test_plan_milestones.py",
           "backend/tests/research/test_project_structure.py"
         ],
         "conflicts": [],
-        "previous_id": "backend/planning/tools.py::PlanningTools.__init__.descriptions@82"
+        "previous_id": "backend/planning/tools.py::PlanningTools.__init__.descriptions@82",
+        "previous_review": {
+          "dependencies_sha256": "c785cf38c305959fb7d933157d9ec4b18d3acb499c6b62ca0f30c0fe7221f88e",
+          "decision": "reviewed_native",
+          "rationale": "Reviewed actual planning wire descriptions and schema. A milestone reference stays within its epic, optional dates are proposals, proposal creates no work, exact operation key preserves retries. model_dump(exclude_unset=True) preserves historical payloads. No actor or permission can be model selected.",
+          "evidence": [
+            "backend/planning/tools.py",
+            "docs/architecture/native-project-retirement.md",
+            "backend/tests/runtime/test_plan_milestones.py",
+            "backend/tests/research/test_project_structure.py"
+          ],
+          "conflicts": [],
+          "previous_id": "backend/planning/tools.py::PlanningTools.__init__.descriptions@82"
+        },
+        "reviewed_at": "2026-11-07",
+        "source_base_commit": "035b46c"
       },
       "reviewed_at": "2026-11-07",
-      "source_base_commit": "035b46c"
+      "source_base_commit": "ab36dc5"
     },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_project_structure.wire_description": {
       "dependencies_sha256": "70e0d0dc608222bac4496bdcf805130ec4081c1567ca591e1aa8ceb401aa1cb8",
@@ -2325,16 +2603,18 @@
       }
     },
     "backend/runtime/development_policy.py::development_instructions": {
-      "dependencies_sha256": "60ad21edf8aee9b134a66c5b403a0f17e1c12b86e58efe06064b46b16e6f3189",
+      "dependencies_sha256": "304181ebcda6fd5111bfc16797dcc043bbe1438a9ecd2f5d903d7aadd8b66f51",
       "decision": "retained",
-      "rationale": "Read parse_development_checks and development_instructions with the common catalog and runtime consumer. Only explicit validated check recipes are disclosed; empty checks remain a stated limitation and configured commands are not passing results. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
       "evidence": [
         "backend/runtime/development_policy.py",
         "docs/prompts/review-2026-11-07.md",
         "backend/prompts/native.py",
         "backend/runtime/business_mediation.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "backend/tests/runtime/test_delivery_budget.py",
+        "docs/modernization/delivery-budget-review.md"
       ],
       "conflicts": [],
       "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed.",
@@ -2343,11 +2623,12 @@
         "method": "AST equality of the selected candidate, ignoring source locations; host setup and direct consumer hashes changed. No new semantic review or model efficacy claim."
       },
       "previous_review": {
-        "dependencies_sha256": "b80708b81fc6dea4173bcc82885b75669c6ea44cd85e814d6b4afc85faf1eafb",
+        "dependencies_sha256": "60ad21edf8aee9b134a66c5b403a0f17e1c12b86e58efe06064b46b16e6f3189",
         "decision": "retained",
-        "rationale": "Reviewed capability-specific procedure against its bound typed tools and host ownership. Shared policy is composed by native catalog; historical role hierarchy, imaginary scientific certainty and automatic acceptance are excluded. Host checks are disclosed as configuration, not passing results.",
+        "rationale": "Read parse_development_checks and development_instructions with the common catalog and runtime consumer. Only explicit validated check recipes are disclosed; empty checks remain a stated limitation and configured commands are not passing results. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
         "evidence": [
           "backend/runtime/development_policy.py",
+          "docs/prompts/review-2026-11-07.md",
           "backend/prompts/native.py",
           "backend/runtime/business_mediation.py",
           "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
@@ -2358,10 +2639,30 @@
         "revalidation": {
           "base_commit": "20b3c25",
           "method": "AST equality of the selected candidate, ignoring source locations; host setup and direct consumer hashes changed. No new semantic review or model efficacy claim."
-        }
+        },
+        "previous_review": {
+          "dependencies_sha256": "b80708b81fc6dea4173bcc82885b75669c6ea44cd85e814d6b4afc85faf1eafb",
+          "decision": "retained",
+          "rationale": "Reviewed capability-specific procedure against its bound typed tools and host ownership. Shared policy is composed by native catalog; historical role hierarchy, imaginary scientific certainty and automatic acceptance are excluded. Host checks are disclosed as configuration, not passing results.",
+          "evidence": [
+            "backend/runtime/development_policy.py",
+            "backend/prompts/native.py",
+            "backend/runtime/business_mediation.py",
+            "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+            "evals/prompts/cases.json"
+          ],
+          "conflicts": [],
+          "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed.",
+          "revalidation": {
+            "base_commit": "20b3c25",
+            "method": "AST equality of the selected candidate, ignoring source locations; host setup and direct consumer hashes changed. No new semantic review or model efficacy claim."
+          }
+        },
+        "reviewed_at": "2026-11-07",
+        "source_base_commit": "035b46c"
       },
       "reviewed_at": "2026-11-07",
-      "source_base_commit": "035b46c"
+      "source_base_commit": "ab36dc5"
     },
     "backend/api/main.py::create_app.description@111": {
       "dependencies_sha256": "33c467d2c801aa49c31173b21927eca92ce1d914e93ffdfd5c9a480fcf54e6b6",
@@ -11513,5 +11814,12 @@
       "retirement_reason": "Historical line identity; the same OpenAPI label is currently reviewed at create_app.description@111. Source module is retained."
     }
   },
-  "review_cut": "2026-11-07 on 035b46c: 69 source/consumer revalidations, 14 unchanged source-bound reviews retained, one old line identity archived; product policy unchanged."
+  "review_cut": {
+    "date": "2026-11-07",
+    "base_commit": "ab36dc5",
+    "reviewed": 83,
+    "delta_revalidated": 16,
+    "unchanged": 67,
+    "scope": "Changed common catalog and native budget integration; previous full semantic reviews retained; not communication acceptance."
+  }
 }

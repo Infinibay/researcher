@@ -1,0 +1,203 @@
+{
+  "base_commit": "ab36dc5",
+  "catalog_version": 4,
+  "scope": "Development regressions after observed failures; not paired or held-out efficacy evidence.",
+  "actual_model_turns": 3,
+  "observed_deliveries": 2,
+  "observed_tokens_total": 787725,
+  "arm_seconds_total": 247.948,
+  "cases": [
+    {
+      "status": "failed",
+      "run_statuses": [
+        "failed"
+      ],
+      "seconds": 61.18,
+      "observed_tokens": 135796,
+      "usage_status": "unknown",
+      "budget": {
+        "status": "unknown",
+        "observed_tokens": 135796,
+        "token_ceiling": 120000,
+        "native_status": null
+      },
+      "model_control": {
+        "model": "gpt-6.1-sol",
+        "reasoning_effort": "low",
+        "source": "host",
+        "revision": 0,
+        "project_id": 101,
+        "actor_id": "researcher",
+        "fence": 1
+      },
+      "policy_sha256": "68988dad14de8cc81264d6cd91f2fe5d9a70e57772196435f7ab5d8c1f3b0480",
+      "real_ken_complete_source": true,
+      "peers_closed": true,
+      "unrevoked_grants": 0,
+      "service_exit": -15,
+      "retained_plan_proposals": 1,
+      "draft_reports": 0,
+      "report_deliveries": 0,
+      "captured_sources": 0,
+      "exact_citations": 0,
+      "integrity_and_foreign_keys": true,
+      "report_and_source_hashes_verified": true,
+      "owner_acceptance_or_publication": false,
+      "original_workspace_unchanged": true,
+      "original_result_sha256": "68947399244ad3127a7b7077d1468e23213c3f92ccbfd0fce7c3d042132c03c8",
+      "instrumented_tool_records": 9,
+      "case_id": "plan_dependencies",
+      "role": "development_regression",
+      "issue": {
+        "code": "execution_limit",
+        "execution_budget": {
+          "limits": {
+            "max_answer_bytes": 20000,
+            "max_observed_tokens": 120000,
+            "max_tool_calls": 20,
+            "max_turns": 1,
+            "no_progress_seconds": 90,
+            "wall_seconds": 180
+          },
+          "observed": {
+            "elapsed_seconds": 49.84970613499172,
+            "tokens": 135796,
+            "tool_starts": 7
+          },
+          "phase": "deliver",
+          "remaining": {
+            "observed_tokens": 0,
+            "tool_starts": 13,
+            "wall_seconds": 130.15029386500828
+          }
+        },
+        "inference_started": true,
+        "limit_kind": "tokens",
+        "message": "La ejecución se detuvo al alcanzar el límite de tokens observados. Conservamos el trabajo y los recibos guardados: un borrador puede existir aunque falte la entrega o la explicación final. Revisa la tarea y sus artefactos antes de decidir cómo continuar; este intento no se repetirá por su cuenta.",
+        "next_action": "inspect_saved_work"
+      },
+      "frozen_initial_limits": {
+        "max_answer_bytes": 20000,
+        "max_observed_tokens": 120000,
+        "max_tool_calls": 20,
+        "max_turns": 1,
+        "no_progress_seconds": 90,
+        "wall_seconds": 180
+      },
+      "original_registration_sha256": "883283814b2f3ace764783759346f53212e69c303b1009ab365f6b5948badc6c"
+    },
+    {
+      "status": "observed",
+      "run_statuses": [
+        "needs_review"
+      ],
+      "seconds": 89.093,
+      "observed_tokens": 346386,
+      "usage_status": "settled",
+      "budget": {
+        "status": "settled",
+        "observed_tokens": 346386,
+        "token_ceiling": 350000,
+        "native_status": "completed"
+      },
+      "model_control": {
+        "model": "gpt-6.1-sol",
+        "reasoning_effort": "low",
+        "source": "host",
+        "revision": 0,
+        "project_id": 101,
+        "actor_id": "researcher",
+        "fence": 1
+      },
+      "policy_sha256": "9a44fbe41a1d55395dce5af4fce4f1684d8ca7ca25c5af7a1a27186102f94ba6",
+      "real_ken_complete_source": true,
+      "peers_closed": true,
+      "unrevoked_grants": 0,
+      "service_exit": -15,
+      "retained_plan_proposals": 0,
+      "draft_reports": 1,
+      "report_deliveries": 1,
+      "captured_sources": 1,
+      "exact_citations": 3,
+      "integrity_and_foreign_keys": true,
+      "report_and_source_hashes_verified": true,
+      "owner_acceptance_or_publication": false,
+      "original_workspace_unchanged": true,
+      "original_result_sha256": "4cdc41caad7af6e2e994c70098c8bcb2defa0188e94a5d7ec6e4b60943cf67e2",
+      "instrumented_tool_records": 15,
+      "case_id": "skipped_checks",
+      "role": "development_regression",
+      "issue": null,
+      "frozen_initial_limits": {
+        "max_answer_bytes": 20000,
+        "max_observed_tokens": 350000,
+        "max_tool_calls": 20,
+        "max_turns": 1,
+        "no_progress_seconds": 90,
+        "wall_seconds": 180
+      },
+      "original_registration_sha256": "6561cef35e3fdda331755bdbe3964d6f0f25aca82c3e49e8606abe649d255ad4"
+    },
+    {
+      "status": "observed",
+      "run_statuses": [
+        "needs_review"
+      ],
+      "seconds": 97.675,
+      "observed_tokens": 305543,
+      "usage_status": "settled",
+      "budget": {
+        "status": "settled",
+        "observed_tokens": 305543,
+        "token_ceiling": 350000,
+        "native_status": "completed"
+      },
+      "model_control": {
+        "model": "gpt-6.1-sol",
+        "reasoning_effort": "low",
+        "source": "host",
+        "revision": 0,
+        "project_id": 101,
+        "actor_id": "researcher",
+        "fence": 1
+      },
+      "policy_sha256": "6f581529ee10e3d49cab0970577ec042121de50ac52f714ef51070ec8fed1e30",
+      "real_ken_complete_source": true,
+      "peers_closed": true,
+      "unrevoked_grants": 0,
+      "service_exit": -15,
+      "retained_plan_proposals": 0,
+      "draft_reports": 1,
+      "report_deliveries": 1,
+      "captured_sources": 2,
+      "exact_citations": 8,
+      "integrity_and_foreign_keys": true,
+      "report_and_source_hashes_verified": true,
+      "owner_acceptance_or_publication": false,
+      "original_workspace_unchanged": true,
+      "original_result_sha256": "24ac2918e97a465181799e7fe792f09e28de19f64105cdd17e06646d8e7be974",
+      "instrumented_tool_records": 14,
+      "case_id": "selective_outcomes",
+      "role": "development_regression",
+      "issue": null,
+      "frozen_initial_limits": {
+        "max_answer_bytes": 20000,
+        "max_observed_tokens": 350000,
+        "max_tool_calls": 20,
+        "max_turns": 1,
+        "no_progress_seconds": 90,
+        "wall_seconds": 180
+      },
+      "original_registration_sha256": "60fa83e4ee2f1afdbddade5ca4fd2c3017eec3b4c6bda0329d57eadf0dfc1b3e"
+    }
+  ],
+  "human_comprehension": null,
+  "human_effort_seconds": null,
+  "limits": [
+    "Previously observed cases, three new original attempts; not held-out, paired, causal or population evidence.",
+    "Planning still stops at its prior token ceiling after saving a proposal; delivery is not solved for that case.",
+    "Two other original attempts deliver reports; one sample does not prove reliable compliance.",
+    "Observed tokens are not billed cost or known subscription quota.",
+    "Original baseline and failed-attempt evidence remains unchanged."
+  ]
+}

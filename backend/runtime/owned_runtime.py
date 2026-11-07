@@ -609,7 +609,7 @@ class OwnedCodexRuntime:
                                 reasoning_effort=selected_model['reasoning_effort'],
                                 before_thread=verify_model,
                                 limits=limits,
-                                developer_instructions=build_instructions(run.execution_kind, context['task']['type'], checks=self.development_checks),
+                                developer_instructions=build_instructions(run.execution_kind, context['task']['type'], checks=self.development_checks, limits=limits),
                                 sandbox="workspace-write"
                                 if development
                                 else "read-only",

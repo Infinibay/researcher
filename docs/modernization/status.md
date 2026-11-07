@@ -4,6 +4,19 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Presupuesto visible y trabajo parcial comprobados:** catálogo4 con límites
+  efectivos congelados y consumo observado en las respuestas del host; límites
+  duros intactos y aviso específico de interrupción.132 pruebas de fuente y80
+  instaladas pasan,608 archivos coinciden y33 definiciones están documentadas.
+  Tres regresiones reales: auditoría y medias de grupos entregan; planificación
+  vuelve a agotar su presupuesto tras guardar una propuesta. El caso científico
+  ya evita atribuir cambios individuales a partir de medias. Todos los servicios
+  y peers cerraron; no hubo reintentos. Bloque18min56s. Quedan entrega de ese plan
+  y calidad general/humana; siguiente principal: Ken/Chroma/licencias.
+  [Informe](delivery-budget-review.md), [resultados](delivery-budget-results.json),
+  [recibos](delivery-budget-live.json).
+
+
 - **Evaluación de comunicación ejecutada, fallos pendientes:**8 turnos reales,
  4pares comparables y2con ambas explicaciones finales. La política actual guardó
  trabajo pero no entregó en planificación/auditoría por límites; un ejemplo

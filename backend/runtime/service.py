@@ -23,7 +23,7 @@ from backend.research.models import (
     RESEARCH_PERMISSIONS,
     REVIEW_PERMISSIONS,
 )
-from backend.runtime.codex_session import ExecutionLimits
+from backend.runtime.codex_session import ExecutionLimitExceeded, ExecutionLimits
 from backend.runtime.contracts import (
     RunConflict,
     RunNotFound,
@@ -800,7 +800,7 @@ class RuntimeService:
             finally:
                 self._workers.pop(run_id, None)
 
-    async def _note_issue(self, run, code, *, attempt_id=None, inference_started=False):
+    async def _note_issue(self, run, code, *, attempt_id=None, inference_started=False, limit=None):
         """Persist a safe, actionable owner explanation for this original run."""
         messages = {
             "legacy_owner_active": (
@@ -824,7 +824,11 @@ class RuntimeService:
                 "retry_start",
             ),
             "runtime_failed": (
-                "La ejecución no dejó una propuesta verificable. Conservamos los datos y recibos guardados; no se repetirá por su cuenta.",
+                "No se pudo confirmar el cierre de la ejecución. Conservamos el trabajo y los recibos guardados; revisa qué quedó completo y qué falta. No se repetirá por su cuenta.",
+                "inspect_saved_work",
+            ),
+            "execution_limit": (
+                "La ejecución se detuvo al alcanzar un límite. Conservamos el trabajo y los recibos guardados: un borrador puede existir aunque falte la entrega o la explicación final. Revisa la tarea y sus artefactos antes de decidir cómo continuar; este intento no se repetirá por su cuenta.",
                 "inspect_saved_work",
             ),
             "code_review_unconfirmed": (
@@ -853,6 +857,14 @@ class RuntimeService:
             ),
         }
         message, action = messages[code]
+        details = {}
+        if limit is not None:
+            labels = {"tools": "herramientas", "tokens": "tokens observados",
+                      "wall": "tiempo total", "progress": "tiempo sin progreso observable",
+                      "output": "tamaño de respuesta", "turns": "turnos"}
+            label = labels.get(limit.kind, "recursos")
+            message = message.replace("un límite.", f"el límite de {label}.")
+            details = {"limit_kind": limit.kind, "execution_budget": limit.budget}
         return await asyncio.to_thread(
             self.store.record_issue,
             run.project_id,
@@ -862,6 +874,7 @@ class RuntimeService:
                 "message": message,
                 "next_action": action,
                 "inference_started": inference_started,
+                **details,
             },
             attempt_id=attempt_id,
         )
@@ -1043,6 +1056,7 @@ class RuntimeService:
         """Own one admitted native turn, then prove peer/tool closure before finalizing it."""
         lease = heartbeat = token = result = peers = None
         error_type = None
+        execution_limit = None
         dispatch_reserved = native_started = False
         code_review = review_confirmed = False
         development = development_complete = False
@@ -1230,6 +1244,8 @@ class RuntimeService:
             error_type = "WorkerInterrupted"
         except Exception as exc:  # noqa: BLE001 — native/AnyIO boundary; redact exception details
             error_type = type(exc).__name__
+            if isinstance(exc, ExecutionLimitExceeded):
+                execution_limit = exc
             logger.warning("Research run stopped (%s)", error_type)
         finally:
             # Both peers have exited their owning worker scope before any final
@@ -1379,7 +1395,9 @@ class RuntimeService:
                         )
                     elif result is None and error_type is not None:
                         code = (
-                            "native_search_unavailable"
+                            "execution_limit"
+                            if execution_limit is not None
+                            else "native_search_unavailable"
                             if error_type == "NativeSearchUnavailable"
                             else "native_model_unavailable"
                             if error_type == "ModelUnavailable"
@@ -1400,6 +1418,7 @@ class RuntimeService:
                             else None
                             if dispatch_reserved
                             else False,
+                            limit=execution_limit,
                         )
                 except Exception as exc:  # noqa: BLE001 -- keep the original failure if its observation cannot commit
                     logger.error(

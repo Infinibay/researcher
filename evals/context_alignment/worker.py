@@ -14,8 +14,8 @@ def bind_policy(policy, registered_task_type):
     if registered_task_type not in ('investigation', 'research', 'plan', 'review'):
         raise ValueError('Unsupported evaluation task type')
 
-    def instructions(kind, task_type, *, checks=()):
-        """Return exact registered bytes only for the original selected profile."""
+    def instructions(kind, task_type, *, checks=(), limits=None):
+        """Return exact registered bytes, without adding live policy/budgets, only for the selected profile."""
         if (kind, task_type) != ('research', registered_task_type):
             raise ValueError('Evaluation policy cannot override another capability')
         return policy.decode()

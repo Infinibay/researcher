@@ -1,0 +1,246 @@
+{
+  "scope": "Changed/new lexical definitions and changed modules; not a whole-repository documentation claim",
+  "modules": [
+    {
+      "path": "backend/runtime/codex_session.py",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "documented": true
+    },
+    {
+      "path": "backend/prompts/native.py",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_delivery_budget.py",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_prompt_catalog.py",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/fake_codex_server.py",
+      "documented": true
+    },
+    {
+      "path": "evals/context_alignment/worker.py",
+      "documented": true
+    },
+    {
+      "path": "evals/profile_communication/test_protocol.py",
+      "documented": true
+    },
+    {
+      "path": "evals/profile_communication/delivery_budget.py",
+      "documented": true
+    }
+  ],
+  "definitions": [
+    {
+      "path": "backend/runtime/codex_session.py",
+      "symbol": "ExecutionLimitExceeded",
+      "line": 27,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/codex_session.py",
+      "symbol": "ExecutionLimitExceeded.__init__",
+      "line": 30,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/codex_session.py",
+      "symbol": "ExecutionLimits",
+      "line": 46,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/codex_session.py",
+      "symbol": "ExecutionLimits.__post_init__",
+      "line": 56,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/codex_session.py",
+      "symbol": "CodexSession",
+      "line": 108,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/codex_session.py",
+      "symbol": "CodexSession.__init__",
+      "line": 117,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/codex_session.py",
+      "symbol": "CodexSession.budget_status",
+      "line": 161,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/codex_session.py",
+      "symbol": "CodexSession._exceeded",
+      "line": 193,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/codex_session.py",
+      "symbol": "CodexSession.run",
+      "line": 276,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService",
+      "line": 63,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._note_issue",
+      "line": 803,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._execute",
+      "line": 1055,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedCodexRuntime",
+      "line": 235,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedCodexRuntime.open",
+      "line": 369,
+      "documented": true
+    },
+    {
+      "path": "backend/prompts/native.py",
+      "symbol": "build_instructions",
+      "line": 139,
+      "documented": true
+    },
+    {
+      "path": "backend/prompts/native.py",
+      "symbol": "instruction_identity",
+      "line": 155,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_delivery_budget.py",
+      "symbol": "test_host_reply_reports_observed_margin_without_changing_tool_data",
+      "line": 14,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_delivery_budget.py",
+      "symbol": "test_host_reply_reports_observed_margin_without_changing_tool_data.respond",
+      "line": 20,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_delivery_budget.py",
+      "symbol": "test_hard_stop_carries_the_actual_budget_without_an_extra_turn",
+      "line": 46,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_delivery_budget.py",
+      "symbol": "test_initial_policy_records_effective_limits_without_relabelling_old_catalogs",
+      "line": 61,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_delivery_budget.py",
+      "symbol": "test_owner_receives_budget_reason_and_preserved_uncertainty_without_replay",
+      "line": 76,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_delivery_budget.py",
+      "symbol": "test_owner_receives_budget_reason_and_preserved_uncertainty_without_replay.Limited",
+      "line": 78,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_delivery_budget.py",
+      "symbol": "test_owner_receives_budget_reason_and_preserved_uncertainty_without_replay.Limited.run",
+      "line": 81,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_delivery_budget.py",
+      "symbol": "test_budget_interruption_preserves_real_draft_without_inventing_delivery",
+      "line": 107,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_delivery_budget.py",
+      "symbol": "test_budget_interruption_preserves_real_draft_without_inventing_delivery.stop_after_write",
+      "line": 114,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_prompt_catalog.py",
+      "symbol": "test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity",
+      "line": 14,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_prompt_catalog.py",
+      "symbol": "test_actual_owned_turn_records_the_exact_versioned_policy_sent_to_native",
+      "line": 52,
+      "documented": true
+    },
+    {
+      "path": "evals/context_alignment/worker.py",
+      "symbol": "bind_policy",
+      "line": 12,
+      "documented": true
+    },
+    {
+      "path": "evals/context_alignment/worker.py",
+      "symbol": "bind_policy.instructions",
+      "line": 17,
+      "documented": true
+    },
+    {
+      "path": "evals/profile_communication/test_protocol.py",
+      "symbol": "test_policy_override_is_bound_to_its_original_capability",
+      "line": 10,
+      "documented": true
+    },
+    {
+      "path": "evals/profile_communication/delivery_budget.py",
+      "symbol": "register",
+      "line": 15,
+      "documented": true
+    },
+    {
+      "path": "evals/profile_communication/delivery_budget.py",
+      "symbol": "run",
+      "line": 48,
+      "documented": true
+    },
+    {
+      "path": "evals/profile_communication/delivery_budget.py",
+      "symbol": "main",
+      "line": 66,
+      "documented": true
+    }
+  ],
+  "missing": []
+}

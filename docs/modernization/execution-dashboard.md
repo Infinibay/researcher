@@ -28,7 +28,47 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: evaluación ejecutada; entrega dentro de límites siguiente
+## Etapa actual: presupuesto visible y trabajo parcial comprobados
+
+Bloque **09:29:55–09:48:51 UTC**, **18 min 56 s**, hasta el corte de validación.
+El catálogo4 conserva los presupuestos efectivos en las instrucciones y la
+respuesta del host muestra consumo observado y margen. Los límites duros no
+cambian. El aviso distingue la causa de interrupción y el trabajo parcial; no
+confunde borrador, entrega y aceptación. Los ejemplos deben conservar el nivel
+de la evidencia. Las identidades históricas de catálogos2/3 siguen disponibles.
+
+Pasan132 pruebas distintas de fuente y80 instaladas, sin fallos ni omisiones;
+608 archivos coinciden,324 productivos.33 definiciones y10 módulos documentados.
+El inventario tiene83 decisiones estáticas vigentes tras revisar16 cambios.
+Tres turnos nuevos de desarrollo: planificación vuelve a agotar120000tokens
+tras guardar una propuesta; auditoría y medias de grupos entregan sus informes.
+El ejemplo científico ya distingue medias de cambios individuales en este caso.
+Todos los servicios y peers registrados cerraron. Ningún intento se repitió.
+[Informe](delivery-budget-review.md), [pruebas](delivery-budget-results.json),
+[recibos reales](delivery-budget-live.json), [paquete](delivery-budget-packaging.json).
+
+**Lista actualizada al cambiar de tarea:**
+- Terminado en este bloque: presupuesto visible, aviso de interrupción y
+  conservación comprobada de trabajo parcial, **18 min 56 s**. Dos de tres
+  comprobaciones de desarrollo entregan resultado completo; no se acepta la
+  calidad integral de comunicación ni se declara resuelta planificación.
+- Terminado previamente: evaluación de otros perfiles, **29 min 48 s**;
+  revisión estática de prompts, **8 min 55 s**; VM activa, **15 min 57 s**.
+- Siguiente principal: pendientes de seguridad de Ken/Chroma y licencias.
+  Aún no empezó; registrar inicio al comenzar.
+- Pendiente funcional: entrega de planificación dentro del presupuesto anterior;
+  evaluación humana, otros perfiles/material científico real, datos históricos,
+  demás recuperación y aceptación integral de12 páginas.
+- Después de todas las capacidades principales: detalles acumulados, validación
+  final y revisión independiente. DD088 conserva11 avisos de estilo.
+
+Siguen43 escenarios amplios abiertos y0/12 páginas completamente aceptadas.
+No hay nueva suite global verde ni porcentaje global sustentado. Política
+persistente: lista y tiempo medido en cada transición; todas las tareas gruesas
+antes de todos los detalles. La guía del último cuarto no garantiza entrega.
+
+## Etapa anterior: evaluación por perfiles
+
 
 Bloque **08:56:57–09:26:45 UTC**, **29 min 48 s**, hasta el corte de validación.
 Ocho turnos reales por suscripción y Ken; cuatro pares con controles coincidentes,
@@ -49,9 +89,9 @@ respuesta se repitió.27 pruebas dirigidas pasan,34 definiciones documentadas.
   **29 min 48 s**. La calidad integral de la comunicación sigue sin aceptación.
 - Terminado previamente: revisión estática de prompts, **8 min 55 s**;
   VM activa, **15 min 57 s**; recuperación de servicio, **21 min 39 s**.
-- Siguiente principal: hacer visibles los presupuestos y reservar margen para
+- Siguiente de ese corte, realizado parcialmente en el bloque actual: hacer visibles los presupuestos y reservar margen para
   entregar/explicar; comunicar trabajo parcial guardado y conservar la fidelidad
-  de ejemplos. No comenzó; registrar inicio al comenzar. No ajustar el ensayo
+  de ejemplos. No ajustar el ensayo
   reservado retrospectivamente ni repetir fallos hasta obtener una respuesta buena.
 - Pendiente: otros perfiles/material científico real y revisión humana;
   seguridad Ken/Chroma/licencias, datos históricos, demás recuperación y

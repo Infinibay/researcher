@@ -1,10 +1,13 @@
 # Inventario y revisión de prompts
 
-Corte del 7 de noviembre de 2026 sobre `035b46c`: catálogo nativo **versión 3**,
-**83 candidatos en 287 archivos**, con **83 decisiones estáticas vigentes**.
-Se revalidaron 69 decisiones tras leer instrucciones y consumidores; las otras
-14 conservan sus hashes. No se cambiaron instrucciones del producto en este corte.
-[Revisión, evidencia y límites](review-2026-11-07.md).
+Corte posterior del 7 de noviembre de 2026 sobre `ab36dc5`: catálogo nativo
+**versión 4**, **83 candidatos en 287 archivos**, con **83 decisiones estáticas
+vigentes**. Se revisó el cambio en16 decisiones y se conservaron67 sin cambios;
+las revisiones anteriores permanecen completas en cada registro. El cambio añade
+presupuesto observado, margen de entrega, búsqueda acotada y ejemplos fieles a
+la evidencia. La revisión estática no demuestra que un modelo cumpla esas reglas.
+[Cambio y comprobaciones](../modernization/delivery-budget-review.md).
+La [revisión anterior de catálogo3](review-2026-11-07.md) conserva su propio corte.
 
 Esto no significa 83 prompts distintos, 83 pruebas con modelos ni aceptación de
 la comunicación. El inventario selecciona candidatos por sintaxis en Python de
@@ -42,8 +45,9 @@ ya tenía14/69. No se usa ninguno de esos conteos como estado actual.
 `backend/prompts/native.py` selecciona investigación científica, exploración,
 planificación, desarrollo, revisión de hallazgos, revisión de candidato o auditoría
 de código. La política común aparece una vez. La cabecera
-`RESEARCHER_POLICY 3 <perfil>` y el hash del texto completo identifican lo enviado;
-las instantáneas de versión2 conservan su versión/hash original. El perfil
+`RESEARCHER_POLICY 4 <perfil>` y el hash del texto completo identifican lo enviado,
+incluidos los límites efectivos cuando los aporta el host; las instantáneas de
+versiones2/3 conservan su versión/hash original. El perfil
 `reference_research` se mantiene en el catálogo como entrada de compatibilidad,
 fuera de los siete destinos del selector actual.
 
@@ -63,8 +67,8 @@ respondible; no se equipara una pregunta en prosa con una solicitud pendiente.
 
 La estructura existente aplica el criterio de *A Philosophy of Software Design*:
 composición centralizada y límites de capacidad que no obligan a cada consumidor a
-reconstruir las reglas. Este corte la conserva; no añade otro loop ni reescribe
-prompts para aparentar avance. La lectura científica mantiene separadas procedencia,
+reconstruir las reglas. Este corte conserva esa composición sin añadir otro loop.
+La lectura científica mantiene separadas procedencia,
 apoyo lógico, dependencia entre fuentes, sesgos, incertidumbre y recomendación.
 
 ## Verificación y trabajo pendiente
