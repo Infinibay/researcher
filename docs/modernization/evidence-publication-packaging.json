@@ -1,0 +1,39 @@
+{
+  "base_commit": "dc429b7",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "c302a0e8b0d0b599bc04e5c11a05bf611319dc0193641c2ab8fc50d8a92bf338",
+  "source_files_matching_wheel_and_installation": 653,
+  "product_files_matching": 347,
+  "observed": {
+    "cases": 129,
+    "passed": 129,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 259,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 125.633,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_code_review_files.py",
+    "backend/tests/runtime/test_work_material.py",
+    "backend/tests/runtime/test_predecessor_research_material.py",
+    "backend/tests/runtime/test_owned_selective_material.py",
+    "backend/tests/runtime/test_code_review_state.py",
+    "backend/tests/runtime/test_code_review_git.py",
+    "backend/tests/runtime/test_code_candidate.py",
+    "backend/tests/runtime/test_publication_git.py",
+    "backend/tests/runtime/test_code_publications.py",
+    "backend/tests/runtime/test_owned_code_dependencies.py",
+    "backend/tests/runtime/test_remote_publication.py",
+    "backend/tests/runtime/test_forgejo_publication.py",
+    "backend/tests/runtime/test_ken_mediation.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "E09/E10/E12 source windows, retained context, exact candidate and review identity, independent reviewer, full diff across tasks/shell and rejection before publication. Generation and provider HTTP controlled in this regression suite; one separate subscription trial is recorded independently.",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}

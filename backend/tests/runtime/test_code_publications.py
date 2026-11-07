@@ -212,3 +212,22 @@ async def test_owner_http_publication_admits_once_and_does_not_accept_client_aut
             ).fetchone()[0]
             == 1
         )
+
+
+@pytest.mark.parametrize('code_result', ['needs_revision'], indirect=True)
+def test_normally_completed_but_rejected_review_cannot_admit_publication(code_result):
+    """Native completion with an explicit negative review cannot be converted into an effect request using an invented owner acceptance key."""
+    from backend.runtime.code_acceptances import CodeAcceptances
+    from backend.runtime.code_publications import CodePublicationIntent, CodePublications
+    from backend.runtime.contracts import RunConflict
+
+    s, reviewer, candidate = code_result
+    state = CodeAcceptances(s.c.store).state(101,candidate['run_id'])
+    assert not state['eligible'] and state['acceptance'] is None
+    assert state['review']['proposal']['verdict'] == 'needs_revision'
+    assert s.c.conn.execute("SELECT json_extract(native_result_json,'$.native_status') FROM runtime_attempts WHERE id=?",(reviewer.attempt_id,)).fetchone()[0] == 'completed'
+    intent = CodePublicationIntent('publish-despite-rejection','invented-acceptance',candidate['attempt_id'],candidate['context_version'],state['subject_sha256'],state['review_sha256'],'refs/heads/blocked',None)
+    with pytest.raises(RunConflict):
+        CodePublications(s.c.store).admit_once(101,candidate['run_id'],intent)
+    assert s.c.conn.execute('SELECT count(*) FROM runtime_code_publication_requests').fetchone()[0] == 0
+    assert s.c.conn.execute('SELECT count(*) FROM runtime_code_acceptances').fetchone()[0] == 0

@@ -116,3 +116,26 @@ def test_supported_code_review_cannot_hide_a_not_checked_criterion(code_files):
             (reference,),
             ("Source inspection only.",),
         )
+
+
+def test_tail_counterevidence_remains_readable_and_external_edit_invalidates_old_quote(code_files):
+    """Exact windows recover a final contradiction; unchanged quoted words cannot conceal a different full-file version."""
+    from backend.research.models import InvalidEvidence
+    from backend.runtime.code_review_models import CodeReviewReference
+
+    root, reader = code_files
+    prefix = 'Preliminary summary: all checks passed.\n' + 'Routine observation.\n' * 3500
+    conclusion = 'Final correction: one check failed; do not report full success.\n'
+    (root/'evidence.txt').write_text(prefix+conclusion)
+    first = reader.read('evidence.txt', max_chars=100)
+    assert first['next_offset'] == 100 and not first['complete_file']
+    tail = reader.read('evidence.txt', offset=len(prefix))
+    assert tail['text'] == conclusion and tail['sha256'] == first['sha256']
+    assert tail['next_offset'] is None and not tail['complete_file']
+    reference = CodeReviewReference('file','evidence.txt',tail['sha256'],3502,conclusion.strip())
+    assert reader.verify(reference)['quote'] == conclusion.strip()
+    (root/'evidence.txt').write_text((prefix+conclusion).replace('Preliminary summary','Revised old summary',1))
+    fresh = reader.read('evidence.txt', offset=len(prefix))
+    assert fresh['sha256'] != first['sha256'] and fresh['text'] == conclusion
+    with pytest.raises(InvalidEvidence, match='another source version'):
+        reader.verify(reference)

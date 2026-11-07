@@ -1,0 +1,36 @@
+{
+  "base_commit": "dc429b7",
+  "changed_or_new_definitions_documented": 4,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/tests/runtime/test_code_review_files.py",
+      "symbol": "test_tail_counterevidence_remains_readable_and_external_edit_invalidates_old_quote",
+      "line": 121,
+      "docstring": "Exact windows recover a final contradiction; unchanged quoted words cannot conceal a different full-file version.",
+      "file_sha256": "d343c487c525d29ab49959b793d6c06a81ec33e7f3755484dff074faa686f7c5"
+    },
+    {
+      "path": "backend/tests/runtime/test_publication_git.py",
+      "symbol": "test_new_candidate_commit_cannot_reuse_the_previously_observed_publication_view",
+      "line": 402,
+      "docstring": "Reviewing commit A cannot publish clean committed B, even in the same unchanged directory identity.",
+      "file_sha256": "f2fe23799e5707631426acdd6302d2dc084efa06ae5c766955aeea2f70e86ce6"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_publications.py",
+      "symbol": "test_normally_completed_but_rejected_review_cannot_admit_publication",
+      "line": 218,
+      "docstring": "Native completion with an explicit negative review cannot be converted into an effect request using an invented owner acceptance key.",
+      "file_sha256": "38d8bba38895497586c552b50457b8bdf0356ad509d22cc1dd566180ac148b89"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_code_dependencies.py",
+      "symbol": "test_owned_successor_reads_exact_accepted_code_and_input_without_assuming_publication",
+      "line": 14,
+      "docstring": "Real kernel/broker/Git/SQLite preserve two tasks plus a shell edit in the final diff, with distinct checks/reviews and explicit unpublished closure; generation and Ken remain controlled.",
+      "file_sha256": "c505a6b647801c92f951f874957023bac210372f614d59bcf28ba0a5e0937b8e"
+    }
+  ],
+  "scope": "Changed Python tests and their modules; controlled embedded native edit helper also has an English docstring. Product code unchanged."
+}

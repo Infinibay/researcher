@@ -1103,7 +1103,7 @@
       ]
     },
     "E09": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "docs/architecture/capability-matrix.md",
         "docs/architecture/inference-inventory.md",
@@ -1155,11 +1155,28 @@
         "docs/architecture/repository-explorer.md",
         "docs/modernization/repositories-results.json",
         "backend/tests/runtime/test_repository_reading.py",
-        "docs/design/audits/2026-11-06-repositories/evidence.json"
+        "docs/design/audits/2026-11-06-repositories/evidence.json",
+        "docs/modernization/evidence-publication-review.md",
+        "docs/modernization/evidence-publication-results.json",
+        "docs/modernization/evidence-publication-packaging.json",
+        "docs/modernization/evidence-publication-artifact-comparison.json",
+        "docs/modernization/evidence-publication-native.json",
+        "backend/tests/runtime/test_code_review_files.py",
+        "backend/tests/runtime/test_work_material.py",
+        "backend/tests/runtime/test_predecessor_research_material.py",
+        "backend/tests/runtime/test_owned_selective_material.py"
+      ],
+      "remaining": [],
+      "completion_scope": "Recoverable complete sources with explicit coverage, retained constraints/references, full-file hash/revision revalidation and obsolete-quote rejection; one real reviewer retrieved tail counterevidence and detected an injected external edit.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Controlled generation/provider HTTP in regression tests; real Git/SQLite/kernel where specified.",
+        "One separate synthetic subscription trial is not representative model quality or human comprehension.",
+        "No whole-page acceptance, historical user-data migration or new global-suite claim."
       ]
     },
     "E10": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "docs/modernization/code-checks.md",
         "backend/tests/runtime/test_check_results.py",
@@ -1178,11 +1195,30 @@
         "docs/architecture/code-publication.md",
         "docs/modernization/publication-policy-results.json",
         "docs/modernization/publication-recovery-results.json",
-        "docs/architecture/code-publication.md",
         "docs/architecture/remote-publication.md",
         "docs/modernization/remote-publication-results.json",
         "docs/architecture/remote-runtime.md",
-        "docs/modernization/remote-runtime-results.json"
+        "docs/modernization/remote-runtime-results.json",
+        "docs/modernization/evidence-publication-review.md",
+        "docs/modernization/evidence-publication-results.json",
+        "docs/modernization/evidence-publication-packaging.json",
+        "docs/modernization/evidence-publication-artifact-comparison.json",
+        "backend/tests/runtime/test_code_review_git.py",
+        "backend/tests/runtime/test_code_candidate.py",
+        "backend/tests/runtime/test_publication_git.py",
+        "backend/tests/runtime/test_code_publications.py",
+        "backend/tests/runtime/test_remote_publication.py",
+        "backend/tests/runtime/test_forgejo_publication.py",
+        "docs/modernization/project-check-policy-packaging.json",
+        "docs/modernization/project-check-policy-final-packaging.json"
+      ],
+      "remaining": [],
+      "completion_scope": "Exact repository/base/head/context-bound checks, independent reviewer identity, current acceptance and publication; a clean new candidate commit cannot reuse the prior observed publication view.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Controlled generation/provider HTTP in regression tests; real Git/SQLite/kernel where specified.",
+        "One separate synthetic subscription trial is not representative model quality or human comprehension.",
+        "No whole-page acceptance, historical user-data migration or new global-suite claim."
       ]
     },
     "E11": {
@@ -1244,7 +1280,7 @@
       ]
     },
     "E12": {
-      "status": "pending",
+      "status": "complete",
       "evidence": [
         "docs/modernization/code-reviews.md",
         "docs/modernization/code-review-state-results.json",
@@ -1253,11 +1289,26 @@
         "docs/architecture/code-publication.md",
         "docs/modernization/publication-policy-results.json",
         "docs/modernization/publication-recovery-results.json",
-        "docs/architecture/code-publication.md",
         "docs/architecture/remote-publication.md",
         "docs/modernization/remote-publication-results.json",
         "docs/architecture/remote-runtime.md",
-        "docs/modernization/remote-runtime-results.json"
+        "docs/modernization/remote-runtime-results.json",
+        "docs/modernization/evidence-publication-review.md",
+        "docs/modernization/evidence-publication-results.json",
+        "docs/modernization/evidence-publication-packaging.json",
+        "docs/modernization/evidence-publication-artifact-comparison.json",
+        "backend/tests/runtime/test_owned_code_dependencies.py",
+        "backend/tests/runtime/test_code_publications.py",
+        "backend/tests/runtime/test_code_review_session.py",
+        "docs/modernization/project-check-policy-final-packaging.json"
+      ],
+      "remaining": [],
+      "completion_scope": "Actual full Git candidate includes two causal tasks plus a shell edit; confirmed rejected review prevents publication even when native execution reports completed.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Controlled generation/provider HTTP in regression tests; real Git/SQLite/kernel where specified.",
+        "One separate synthetic subscription trial is not representative model quality or human comprehension.",
+        "No whole-page acceptance, historical user-data migration or new global-suite claim."
       ]
     },
     "D01": {

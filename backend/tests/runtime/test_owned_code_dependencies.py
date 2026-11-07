@@ -12,7 +12,7 @@ from backend.tests.runtime.test_owned_factory import owned_config as owned_confi
 
 @pytest.mark.timeout(480)
 async def test_owned_successor_reads_exact_accepted_code_and_input_without_assuming_publication(owned_config, monkeypatch):
-    """Real kernel/broker/Git/SQLite prove causal authors/checks/reviews and exact owner project closure with explicit unpublished acknowledgement, without semantic-success or real-model claims."""
+    """Real kernel/broker/Git/SQLite preserve two tasks plus a shell edit in the final diff, with distinct checks/reviews and explicit unpublished closure; generation and Ken remain controlled."""
     from backend.api.main import create_app
     from backend.api.runtime_dependencies import configured_runtime
     from backend.planning.execution import PlanExecutions
@@ -47,6 +47,20 @@ async def test_owned_successor_reads_exact_accepted_code_and_input_without_assum
     fixture = fixture.replace('Read relevant code and record cited evidence.', 'Change fact.txt from137to200 and state actual checks.')
     fixture = fixture.replace('A supported explanation and explicit limits.', 'fact.txt contains200 with recorded checks and explicit limits.')
     fixture = fixture.replace('Apply the change supported by inspection.', 'Read the accepted predecessor code and original input; maintain200 in the private copy without assuming publication.')
+    wrapper = r'''
+_original_development_edit_code = development_edit_code
+
+def development_edit_code():
+    """Extend actual owned edits with distinguishable predecessor, successor and shell changes."""
+    code = _original_development_edit_code()
+    if causal_task is None:
+        return code + "\nPath('task-one.txt').write_text('First task retained\\n')\n"
+    return code + "\nPath('task-two.txt').write_text('Second task retained\\n')\n" + "subprocess.run(['/bin/sh','-c', \"printf 'Shell edit retained\\n' > shell-added.txt\"],check=True)\n"
+
+'''
+    marker = '\nfor line in sys.stdin:'
+    assert fixture.count(marker) == 1
+    fixture = fixture.replace(marker, wrapper + marker)
     script.write_text(fixture)
     c.settings['limits'].update(wall_seconds=180, max_tool_calls=60)
     c.settings['development_checks'] = [{'argv': ['/usr/bin/python3', '-c', "from pathlib import Path;assert Path('fact.txt').read_text()=='200';print('causal exact value checked')"], 'framework': 'command', 'timeout_seconds': 5, 'environment_id': 'system'}]
@@ -112,6 +126,18 @@ async def test_owned_successor_reads_exact_accepted_code_and_input_without_assum
         assert 'diff_base64' not in source['material']
         with runtime.store._transaction() as conn:
             assert any(b'causal predecessor applied' in bytes(row[0]) for row in conn.execute('SELECT stdout FROM runtime_jobs WHERE run_id=?', (second.run_id,)))
+        from backend.runtime.candidate_state import CodeCandidates
+        first_candidate = CodeCandidates(runtime.store).inspect(101, first.run_id)
+        second_candidate = CodeCandidates(runtime.store).inspect(101, second.run_id)
+        for path, text in [('task-one.txt', 'First task retained'), ('task-two.txt', 'Second task retained'), ('shell-added.txt', 'Shell edit retained')]:
+            assert (Path(second_candidate['workspace']) / path).read_text().strip() == text
+            assert path.encode() in second_candidate['diff'] and text.encode() in second_candidate['diff']
+        assert b'task-one.txt' in first_candidate['diff']
+        assert b'task-two.txt' not in first_candidate['diff'] and b'shell-added.txt' not in first_candidate['diff']
+        assert second_candidate['base_sha'] == first_candidate['base_sha']
+        assert first_candidate['head_sha'] != second_candidate['head_sha']
+        packet = CodeReviews(runtime.store).subject(101, second.attempt_id)
+        assert packet['snapshot']['candidate']['head_sha'] == second_candidate['head_sha']
         await review_and_accept(second, 'successor')
         assert (c.s.workspace / 'fact.txt').read_text() == '137'
         with runtime.store._transaction() as conn:

@@ -397,3 +397,21 @@ async def test_incomplete_candidate_identity_is_rejected_before_git(
 
     with pytest.raises(ValueError):
         replace(publication_git.view, **{field: value})
+
+
+async def test_new_candidate_commit_cannot_reuse_the_previously_observed_publication_view(publication_git):
+    """Reviewing commit A cannot publish clean committed B, even in the same unchanged directory identity."""
+    from backend.runtime.contracts import RunConflict
+    from backend.runtime.publication_git import PublicationRefIntent, publish_candidate_ref
+
+    s = publication_git
+    (s.candidate/'value.txt').write_text('999\n')
+    await fixture_git(s.candidate,'commit','-qam','Different committed B')
+    new_head = (await fixture_git(s.candidate,'rev-parse','HEAD')).decode().strip()
+    assert new_head != s.head and (await fixture_git(s.candidate,'status','--porcelain')) == b''
+    intent = PublicationRefIntent('stale-A-approval','refs/heads/should-not-publish-B',None)
+    with pytest.raises(RunConflict):
+        await publish_candidate_ref(s.view,intent,executor=s.executor)
+    assert s.executor.transactions == 0
+    assert (await fixture_git(s.source,'for-each-ref','--format=%(objectname)',intent.target_ref,intent.receipt_ref)) == b''
+    assert (await fixture_git(s.source,'rev-parse','HEAD')).decode().strip() == s.base

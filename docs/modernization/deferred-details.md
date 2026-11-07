@@ -862,3 +862,15 @@ proyecto y realizar la revisión visual integral de Tareas. No reabrir ahora
 almacenamiento, CI o publicación por esos ajustes. Las pruebas DOM y HTTP no
 constituyen aceptación completa de la página ni evaluación de comprensión humana.
 Ubicación: CheckPolicyEditor.tsx, CodeDelivery.tsx, CodeAcceptances.accept.
+
+## DD114 — eficiencia de lectura en revisión larga
+
+El ensayo real E09 recuperó toda la evidencia y detectó el cambio externo, pero
+repitió la primera ventana y varias consultas al paquete de revisión. Usó 23
+solicitudes y el proveedor informó 331.768 tokens, dentro del techo de 350.000.
+En la pasada de eficiencia, evaluar selección de ventanas, reuso de referencias
+y densidad del paquete sin perder contraevidencia ni revalidación. Es una única
+tarea sintética que pedía lectura completa, no una medición representativa ni
+prueba de un fallo presupuestario. No repetir ahora el modelo por este detalle;
+las evaluaciones generales de comunicación/contexto siguen siendo trabajo principal.
+Evidencia: evidence-publication-native.json y evidence-publication-review.md.

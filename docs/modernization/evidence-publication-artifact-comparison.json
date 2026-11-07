@@ -1,0 +1,21 @@
+{
+  "previous_base_commit": "dc429b7",
+  "previous_wheel_sha256": "d0b4b3cce6eb66192f5e0236b29737968346d751633d0976b724a46003043ee9",
+  "current_wheel_sha256": "c302a0e8b0d0b599bc04e5c11a05bf611319dc0193641c2ab8fc50d8a92bf338",
+  "changed_backend_entries": [
+    "backend/runtime/_domain_spawn.cpython-312-x86_64-linux-gnu.so",
+    "backend/tests/runtime/test_code_publications.py",
+    "backend/tests/runtime/test_code_review_files.py",
+    "backend/tests/runtime/test_owned_code_dependencies.py",
+    "backend/tests/runtime/test_publication_git.py"
+  ],
+  "all_product_python_sql_identical": true,
+  "normalized_binaries": [
+    {
+      "path": "backend/runtime/_domain_spawn.cpython-312-x86_64-linux-gnu.so",
+      "normalized_sha256": "cda31a9cdaa75cab62c2b820e162c06010c637316b8fe9941e75579c60e9bba8"
+    }
+  ],
+  "normalization": "objcopy --strip-debug --remove-section=.note.gnu.build-id only for differing native binaries",
+  "scope": "Reuse actual dc429b7 installed check-result, acceptance and independent-review evidence because product sources and native executable bytes are unchanged. Four changed tests are verified anew. One subscription probe used the preceding installed package with the same product implementation."
+}

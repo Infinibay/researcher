@@ -1,0 +1,65 @@
+{
+  "base_commit": "dc429b7",
+  "started_at": "2026-11-07T19:05:11Z",
+  "validated_at": "2026-11-07T19:20:31Z",
+  "elapsed_seconds_until_validation": 920,
+  "duration_scope": "Audit, new or expanded tests, one live subscription trial and installed validation; later documentation/checkpoint excluded.",
+  "product_changed": false,
+  "new_cases": 3,
+  "expanded_cases": 1,
+  "source_selection": {
+    "passed": 4,
+    "failed": 0,
+    "seconds": 75.32,
+    "overlap_with_installed": 4
+  },
+  "installed": {
+    "cases": 129,
+    "passed": 129,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 259,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 125.633,
+    "exit_code": 0
+  },
+  "distinct_installed_cases": 129,
+  "artifact_comparison": "docs/modernization/evidence-publication-artifact-comparison.json",
+  "reused_evidence": [
+    "docs/modernization/project-check-policy-packaging.json",
+    "docs/modernization/project-check-policy-final-packaging.json"
+  ],
+  "changed_python_definitions_documented": 4,
+  "prompts": {
+    "files": 304,
+    "reviewed": 85,
+    "pending_static_review": 0,
+    "changed": 0
+  },
+  "native": {
+    "receipt": "docs/modernization/evidence-publication-native.json",
+    "real_turns": 1,
+    "tool_requests": 23,
+    "observed_tokens": 331768,
+    "seconds": 115.83,
+    "acceptances": 0,
+    "publications": 0,
+    "open_peers": 0
+  },
+  "intermediate_failures": [
+    "First live harness inherited socket blocking and failed before any real model turn. Closure verified; isolated pytest configuration corrected for a new synthetic fixture."
+  ],
+  "scenarios_completed": [
+    "E09",
+    "E10",
+    "E12"
+  ],
+  "whole_plan": "in_progress",
+  "global_suite": "Historical failures remain; no new global-suite claim.",
+  "limits": [
+    "Synthetic data and injected file race; controlled generation in regression tests; one separate real subscription reviewer.",
+    "No representative model-quality or human-comprehension claim.",
+    "No whole-page acceptance or external account publication.",
+    "Provider-observed token count is not a billing-price claim."
+  ]
+}
